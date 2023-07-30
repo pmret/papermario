@@ -225,7 +225,7 @@ void N(Quizmo_NPC_OnRender)(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
 
     if (npc->blur.quizmo->flags & 1) {
-        clamp_angle(-camera->currentYaw);
+        clamp_angle(-camera->curYaw);
     }
 }
 
@@ -467,7 +467,7 @@ API_CALLABLE(N(Quizmo_AddViewRelativeOffset)) {
     Bytecode ourVarX = *args++;
     Bytecode outVarZ = *args++;
 
-    s32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
+    s32 cameraYaw = gCameras[gCurrentCameraID].curYaw;
     s32 outX = evt_get_variable(script, QUIZ_ARRAY_ORIGIN_X) - (z * cos_deg(cameraYaw));
     s32 outZ = evt_get_variable(script, QUIZ_ARRAY_ORIGIN_Z) - (z * sin_deg(cameraYaw));
 

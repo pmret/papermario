@@ -38,7 +38,7 @@ void appendGfx_ispy_icon(void) {
 
     if (gPlayerStatus.animFlags & PA_FLAG_ISPY_VISIBLE) {
         guScaleF(matrix1, ISpyPtr->scale, ISpyPtr->scale, ISpyPtr->scale);
-        guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(matrix2, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(matrix1, matrix2, matrix1);
         guTranslateF(matrix2, ISpyPtr->pos.x, ISpyPtr->pos.y, ISpyPtr->pos.z);
         guMtxCatF(matrix1, matrix2, matrix2);
@@ -90,9 +90,9 @@ void appendGfx_ispy_icon(void) {
 void ispy_notification_setup(void) {
     mem_clear(ISpyPtr, sizeof(*ISpyPtr));
 
-    ISpyPtr->pos.x = gPlayerStatus.position.x;
-    ISpyPtr->pos.y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
-    ISpyPtr->pos.z = gPlayerStatus.position.z;
+    ISpyPtr->pos.x = gPlayerStatus.pos.x;
+    ISpyPtr->pos.y = gPlayerStatus.pos.y + gPlayerStatus.colliderHeight + 8.0f;
+    ISpyPtr->pos.z = gPlayerStatus.pos.z;
 
     ISpyPtr->alpha = 255;
 
@@ -106,9 +106,9 @@ void ispy_notification_update(void) {
     s32 cond;
 
     ISpyPtr->pos.y +=
-        (playerStatus->position.y + playerStatus->colliderHeight + 10.0f - ISpyPtr->pos.y) / 1.5f;
-    ISpyPtr->pos.x = playerStatus->position.x;
-    ISpyPtr->pos.z = playerStatus->position.z;
+        (playerStatus->pos.y + playerStatus->colliderHeight + 10.0f - ISpyPtr->pos.y) / 1.5f;
+    ISpyPtr->pos.x = playerStatus->pos.x;
+    ISpyPtr->pos.z = playerStatus->pos.z;
 
     switch (ISpyPtr->state) {
         case I_SPY_DELAY:

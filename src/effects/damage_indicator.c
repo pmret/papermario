@@ -205,7 +205,7 @@ void damage_indicator_render_impl(EffectInstance* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
     guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
-    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 

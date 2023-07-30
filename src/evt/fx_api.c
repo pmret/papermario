@@ -225,9 +225,9 @@ ApiStatus ShowSweat(Evt* script, s32 isInitialCall) {
 
     switch (emoterType) {
         case EMOTER_PLAYER:
-            x = gPlayerStatus.position.x;
-            y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
-            z = gPlayerStatus.position.z;
+            x = gPlayerStatus.pos.x;
+            y = gPlayerStatus.pos.y + (gPlayerStatus.colliderHeight * 2) / 3;
+            z = gPlayerStatus.pos.z;
             r = gPlayerStatus.colliderHeight / 3;
             break;
         case EMOTER_NPC:
@@ -270,9 +270,9 @@ ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall) {
 
     switch (emoterType) {
         case EMOTER_PLAYER:
-            x = gPlayerStatus.position.x;
-            y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * 2) / 3;
-            z = gPlayerStatus.position.z;
+            x = gPlayerStatus.pos.x;
+            y = gPlayerStatus.pos.y + (gPlayerStatus.colliderHeight * 2) / 3;
+            z = gPlayerStatus.pos.z;
             r = gPlayerStatus.colliderHeight / 3;
             break;
         case EMOTER_NPC:

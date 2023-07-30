@@ -64,9 +64,9 @@ ApiStatus N(KnockdownCreate)(Evt* script) {
     data->rasterIndex = rasterIndex;
     data->width = gPlayerStatus.colliderHeight;
     data->height = gPlayerStatus.colliderDiameter;
-    data->pos.x = gPlayerStatus.position.x;
-    data->pos.y = gPlayerStatus.position.y;
-    data->pos.z = gPlayerStatus.position.z;
+    data->pos.x = gPlayerStatus.pos.x;
+    data->pos.y = gPlayerStatus.pos.y;
+    data->pos.z = gPlayerStatus.pos.z;
     data->rot.x = 0.0f;
     data->rot.y = 0.0f;
     data->rot.z = 0.0f;

@@ -137,10 +137,10 @@ void bulb_glow_render(EffectInstance* effect) {
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = bulb_glow_appendGfx;
     if (data->unk_00 == 5) {
-        renderTask.distance = 0;
+        renderTask.dist = 0;
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
     } else {
-        renderTask.distance = -100;
+        renderTask.dist = -100;
         renderTaskPtr->renderMode = RENDER_MODE_2D;
     }
 

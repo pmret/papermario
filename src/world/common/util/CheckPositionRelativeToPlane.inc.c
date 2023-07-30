@@ -47,7 +47,7 @@ API_CALLABLE(N(CheckPositionRelativeToPlane)) {
     dzdx = (Bz - Az) / (Bx - Ax);
 
     // this is equivalent to testing the determinant: ((Bx - Ax)*(Pz - Az) - (Bz - Az)*(Px - Ax)) < 0
-    if (playerStatus->position.z < ((dzdx * playerStatus->position.x) + (Az - (dzdx * Ax)))) {
+    if (playerStatus->pos.z < ((dzdx * playerStatus->pos.x) + (Az - (dzdx * Ax)))) {
         script->varTable[0] = PLANE_SIDE_NEGATIVE;
     } else {
         script->varTable[0] = PLANE_SIDE_POSITIVE;

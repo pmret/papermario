@@ -120,7 +120,7 @@ void N(update)(void) {
                 }
             }
 
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 switch (actionCommandStatus->targetWeakness) {
                     case 0: {
                         s32 fillOffset = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 235 * 4;

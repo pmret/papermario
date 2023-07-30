@@ -339,7 +339,7 @@ void sfx_update_env_sound_params(void) {
     for (i = 0; i < MAX_SOUND_INSTANCES; i++, sound++) {
         if (sound->flags & SOUND_INSTANCE_FLAG_ACTIVE) {
             if (sound->flags & SOUND_INSTANCE_FLAG_POSITION_CHANGED) {
-                sfx_get_spatialized_sound_params(sound->position.x, sound->position.y, sound->position.z, &volume, &pan, sound->sourceFlags);
+                sfx_get_spatialized_sound_params(sound->pos.x, sound->pos.y, sound->pos.z, &volume, &pan, sound->sourceFlags);
                 sound->volume = volume;
                 sound->pan = pan;
             }
@@ -418,9 +418,9 @@ void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y
     }
 
     sound->sourceFlags = flags;
-    sound->position.x = x;
-    sound->position.y = y;
-    sound->position.z = z;
+    sound->pos.x = x;
+    sound->pos.y = y;
+    sound->pos.z = z;
     sound->soundID = soundID;
     sound->flags |= SOUND_INSTANCE_FLAG_ACTIVE | SOUND_INSTANCE_FLAG_POSITION_CHANGED;
 
@@ -435,9 +435,9 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     }
 
     sound->sourceFlags = sourceFlags;
-    sound->position.x = x;
-    sound->position.y = y;
-    sound->position.z = z;
+    sound->pos.x = x;
+    sound->pos.y = y;
+    sound->pos.z = z;
     sound->soundID = soundID;
     sound->flags |= SOUND_INSTANCE_FLAG_ACTIVE | SOUND_INSTANCE_FLAG_POSITION_CHANGED;
     return TRUE;
@@ -478,10 +478,10 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
             case SOUND_TYPE_ALTERNATING:
                 // 0xBxxxxxxx
                 alternatingSet = &AlternatingSounds[soundIndex];
-                if (alternatingSet->currentIndex >= alternatingSet->soundCount) {
-                    alternatingSet->currentIndex = 0;
+                if (alternatingSet->curIndex >= alternatingSet->soundCount) {
+                    alternatingSet->curIndex = 0;
                 }
-                soundID = alternatingSet->sounds[alternatingSet->currentIndex++];
+                soundID = alternatingSet->sounds[alternatingSet->curIndex++];
                 break;
         }
     }
@@ -520,7 +520,7 @@ void sfx_play_sound(s32 soundID) {
 void sfx_play_sound_at_player(s32 soundID, s32 flags) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    sfx_play_sound_at_position(soundID, flags, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+    sfx_play_sound_at_position(soundID, flags, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
 }
 
 void sfx_play_sound_at_npc(s32 soundID, s32 flags, s32 npcID) {

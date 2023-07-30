@@ -198,7 +198,7 @@ void func_E00863B4(EffectInstance* effect) {
 
         unk_28 = part->unk_28;
 
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_28, part->unk_04, part->unk_08, part->unk_0C);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, unk_28, part->unk_04, part->unk_08, part->unk_0C);
         guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

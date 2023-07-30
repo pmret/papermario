@@ -21,7 +21,7 @@ API_CALLABLE(N(IsPlayerOrKoopaNearby)) {
     s32 outVal = FALSE;
     f32 xDiff, zDiff;
 
-    if (playerStatus->currentSpeed >= 4.0f) {
+    if (playerStatus->curSpeed >= 4.0f) {
         script->varTable[2]++;
         if (script->varTable[2] > 2) {
             script->varTable[2] = 2;
@@ -31,8 +31,8 @@ API_CALLABLE(N(IsPlayerOrKoopaNearby)) {
     }
 
     do {
-        xDiff = fuzzyNpc->pos.x - playerStatus->position.x;
-        zDiff = fuzzyNpc->pos.z - playerStatus->position.z;
+        xDiff = fuzzyNpc->pos.x - playerStatus->pos.x;
+        zDiff = fuzzyNpc->pos.z - playerStatus->pos.z;
         if ((SQ(xDiff) + SQ(zDiff) < SQ(80.0f)) && (script->varTable[2] >= 2)) {
             do {
                 outVal = TRUE;
@@ -53,7 +53,7 @@ API_CALLABLE(N(IsPlayerOrKoopaNearby)) {
 API_CALLABLE(N(IsPlayerWalking)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->currentSpeed >= 4.0f) {
+    if (playerStatus->curSpeed >= 4.0f) {
         script->varTable[2]++;
         if (script->varTable[2] > 2) {
             script->varTable[2] = 2;
@@ -66,7 +66,7 @@ API_CALLABLE(N(IsPlayerWalking)) {
     if (script->varTable[2] >= 2) {
         script->varTable[0] = FALSE;
     }
-    if (playerStatus->currentSpeed == 0.0f) {
+    if (playerStatus->curSpeed == 0.0f) {
         script->varTable[0] = FALSE;
     }
 
@@ -93,8 +93,8 @@ API_CALLABLE(N(ChooseSafeJumpLocation)) {
         xDiff = x - -150.0f;
         zDiff = z - 250.0f;
         if (SQ(xDiff) + SQ(zDiff) < SQ(150.0f)) {
-            xDiff = x - playerStatus->position.x;
-            zDiff = z - playerStatus->position.z;
+            xDiff = x - playerStatus->pos.x;
+            zDiff = z - playerStatus->pos.z;
             if (SQ(xDiff) + SQ(zDiff) > SQ(80.0f)) {
                 xDiff = x - koopaNpc->pos.x;
                 zDiff = z - koopaNpc->pos.z;
@@ -140,8 +140,8 @@ API_CALLABLE(N(ChooseLocationNotNearPlayer)) {
         xDiff = x - -150.0f;
         zDiff = z - 250.0f;
         if (SQ(xDiff) + SQ(zDiff) < SQ(150.0f)) {
-            xDiff = x - playerStatus->position.x;
-            zDiff = z - playerStatus->position.z;
+            xDiff = x - playerStatus->pos.x;
+            zDiff = z - playerStatus->pos.z;
             if (SQ(xDiff) + SQ(zDiff) > SQ(80.0f)) {
                 break;
             }

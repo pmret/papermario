@@ -279,7 +279,7 @@ void snowman_doll_render(EffectInstance* effect) {
 
     renderTask.appendGfx = snowman_doll_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = -10;
+    renderTask.dist = -10;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);

@@ -100,7 +100,7 @@ void big_snowflakes_render(EffectInstance* effect) {
 
     renderTask.appendGfx = big_snowflakes_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -120,7 +120,7 @@ void big_snowflakes_appendGfx(void* effect) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, data->unk_24);
 
     guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
 
     data++;

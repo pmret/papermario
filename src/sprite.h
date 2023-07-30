@@ -40,11 +40,11 @@ typedef struct SpriteComponent {
     /* 0x08 */ s16* readPos;
     /* 0x0C */ f32 waitTime;
     /* 0x10 */ s32 loopCounter;
-    /* 0x14 */ s32 currentRaster;
-    /* 0x18 */ s32 currentPalette;
+    /* 0x14 */ s32 curRaster;
+    /* 0x18 */ s32 curPalette;
     /* 0x1C */ Vec3f posOffset;
     /* 0x28 */ Vec3f compPos;
-    /* 0x34 */ Vec3i rotation;
+    /* 0x34 */ Vec3i rot;
     /* 0x40 */ Vec3f scale;
     /* 0x4C */ s32 imgfxIdx;
 } SpriteComponent; // size = 0x50
@@ -83,7 +83,7 @@ typedef struct SpriteInstance {
     /* 0x00 */ s32 spriteIndex;
     /* 0x04 */ SpriteComponent** componentList;
     /* 0x08 */ SpriteAnimData* spriteData;
-    /* 0x0C */ s32 currentAnimID;
+    /* 0x0C */ s32 curAnimID;
     /* 0x10 */ s32 notifyValue;
 } SpriteInstance; // size = 0x14
 

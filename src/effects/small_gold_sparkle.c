@@ -102,7 +102,7 @@ void small_gold_sparkle_render(EffectInstance* effect) {
 
     renderTask.appendGfx = small_gold_sparkle_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -117,7 +117,7 @@ void small_gold_sparkle_appendGfx(void* effect) {
     Mtx* spD8;
     s32 i;
 
-    guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp98, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
     spD8 = &gDisplayContext->matrixStack[gMatrixListPos++];
     gDPPipeSync(gMainGfxPos++);

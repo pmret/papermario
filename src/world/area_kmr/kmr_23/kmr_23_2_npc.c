@@ -100,13 +100,13 @@ API_CALLABLE(N(CreateEndChapterData)) {
     npc->pos.x = data->pos.x;
     npc->pos.y = data->pos.y;
     npc->pos.z = data->pos.z + 10.0f;
-    npc->rotation.y = data->yaw;
+    npc->rot.y = data->yaw;
     backFacing = FALSE;
     if (!evt_get_variable(script, MF_Unk_0B)) {
         if ((data->yaw > 90.0f) && (data->yaw < 270.0f)) {
             backFacing = TRUE;
         }
-        npc->currentAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
+        npc->curAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
     }
 
     if (data->spiritCardEffect != NULL) {

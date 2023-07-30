@@ -128,7 +128,7 @@ void flashing_box_shockwave_render(EffectInstance* effect) {
 
     renderTask.appendGfx = flashing_box_shockwave_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
     retTask = queue_render_task(&renderTask);
@@ -142,7 +142,7 @@ void flashing_box_shockwave_appendGfx(void* effect) {
     Matrix4f sp58;
     Matrix4f sp98;
 
-    guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp98, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));

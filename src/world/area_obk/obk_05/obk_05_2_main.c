@@ -48,7 +48,7 @@ EvtScript N(EVS_TexPan_Fog) = {
 #include "world/common/todo/SetCamera0MoveFlag1.inc.c"
 
 API_CALLABLE(N(RetroJar_AwaitPlayerEntry)) {
-    if (gCollisionStatus.currentFloor == COLLIDER_o420) {
+    if (gCollisionStatus.curFloor == COLLIDER_o420) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

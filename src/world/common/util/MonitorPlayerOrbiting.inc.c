@@ -33,8 +33,8 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
             // wait for player to come within range
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->startRadius) {
-                orbit->firstPlayerX = playerStatus->position.x;
-                orbit->firstPlayerZ = playerStatus->position.z;
+                orbit->firstPlayerX = playerStatus->pos.x;
+                orbit->firstPlayerZ = playerStatus->pos.z;
                 orbit->state++;
             }
             break;
@@ -44,7 +44,7 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->startRadius) {
                 prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->firstPlayerX, orbit->firstPlayerZ);
-                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->position.x, playerStatus->position.z);
+                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 orbit->direction = signF(deltaAngle);
                 orbit->state++;
@@ -57,11 +57,11 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->startRadius) {
                 prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->lastPlayerX, orbit->lastPlayerZ);
-                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->position.x, playerStatus->position.z);
+                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 if (orbit->direction == signF(deltaAngle)) {
                     prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->firstPlayerX, orbit->firstPlayerZ);
-                    curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->position.x, playerStatus->position.z);
+                    curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                     deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                     if (fabsf(deltaAngle) > 90.0f) {
                         if (orbit->eventListener != NULL) {
@@ -80,7 +80,7 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
             dist = get_xz_dist_to_player(orbit->pos.x, orbit->pos.z);
             if (dist < orbit->orbitRadius) {
                 prevAngle = atan2(orbit->pos.x, orbit->pos.z, orbit->lastPlayerX, orbit->lastPlayerZ);
-                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->position.x, playerStatus->position.z);
+                curAngle = atan2(orbit->pos.x, orbit->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 deltaAngle = get_clamped_angle_diff(prevAngle, curAngle);
                 if (orbit->direction != signF(deltaAngle)) {
                     if (orbit->eventListener != NULL) {
@@ -116,8 +116,8 @@ API_CALLABLE(N(MonitorPlayerOrbiting)) {
             break;
     }
 
-    orbit->lastPlayerX = playerStatus->position.x;
-    orbit->lastPlayerZ = playerStatus->position.z;
+    orbit->lastPlayerX = playerStatus->pos.x;
+    orbit->lastPlayerZ = playerStatus->pos.z;
 
     return ApiStatus_BLOCK;
 }

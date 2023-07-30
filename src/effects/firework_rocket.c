@@ -112,9 +112,9 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
     data->pos.y = centerY;
     data->pos.z = centerZ;
     data->radius = 0;
-    data->velocity.x = velX;
-    data->velocity.y = velY;
-    data->velocity.z = velZ;
+    data->vel.x = velX;
+    data->vel.y = velY;
+    data->vel.z = velZ;
     data->maxRadius = radius;
     data->r = 255;
     data->g = 255;
@@ -128,9 +128,9 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
         data->rocketX[i] = data->pos.x;
         data->rocketY[i] = data->pos.y - 1000.0f;
         data->rocketZ[i] = data->pos.z;
-        data->rocketVelocityX[i] = 0;
-        data->rocketVelocityY[i] = 0;
-        data->rocketVelocityZ[i] = 0;
+        data->rocketVelX[i] = 0;
+        data->rocketVelY[i] = 0;
+        data->rocketVelZ[i] = 0;
     }
 
     return effect;
@@ -169,31 +169,31 @@ void firework_rocket_update(EffectInstance* effect) {
 
     if (data->isExploded == TRUE) {
         factor = 0.95f;
-        data->pos.x += data->velocity.x;
-        data->pos.y += data->velocity.y;
-        data->pos.z += data->velocity.z;
-        data->velocity.x *= factor;
-        data->velocity.y *= factor;
-        data->velocity.z *= factor;
+        data->pos.x += data->vel.x;
+        data->pos.y += data->vel.y;
+        data->pos.z += data->vel.z;
+        data->vel.x *= factor;
+        data->vel.y *= factor;
+        data->vel.z *= factor;
         data->radius += (data->maxRadius - data->radius) * 0.11;
-        data->velocity.y -= 0.15;
+        data->vel.y -= 0.15;
         return;
     }
 
     i = lifeTime & 3;
-    data->rocketX[i] = data->pos.x - data->velocity.x * (32 - lifeTime);
-    data->rocketY[i] = data->pos.y - data->velocity.y * (32 - lifeTime)
+    data->rocketX[i] = data->pos.x - data->vel.x * (32 - lifeTime);
+    data->rocketY[i] = data->pos.y - data->vel.y * (32 - lifeTime)
         - (80.0f - sin_deg((s32)(lifeTime * 90) >> 5) * 80.0f);
-    data->rocketZ[i] = data->pos.z - data->velocity.z * (32 - lifeTime);
-    data->rocketVelocityX[i] = (rand_int(10) - 5) * 0.1f;
-    data->rocketVelocityY[i] = (rand_int(10) - 5) * 0.1f;
-    data->rocketVelocityZ[i] = (rand_int(10) - 5) * 0.1f;
+    data->rocketZ[i] = data->pos.z - data->vel.z * (32 - lifeTime);
+    data->rocketVelX[i] = (rand_int(10) - 5) * 0.1f;
+    data->rocketVelY[i] = (rand_int(10) - 5) * 0.1f;
+    data->rocketVelZ[i] = (rand_int(10) - 5) * 0.1f;
 
     for (i = 0; i < 4; i++) {
-        data->rocketX[i] += data->rocketVelocityX[i];
-        data->rocketY[i] += data->rocketVelocityY[i];
-        data->rocketZ[i] += data->rocketVelocityZ[i];
-        data->rocketVelocityY[i] -= 0.15;
+        data->rocketX[i] += data->rocketVelX[i];
+        data->rocketY[i] += data->rocketVelY[i];
+        data->rocketZ[i] += data->rocketVelZ[i];
+        data->rocketVelY[i] -= 0.15;
         if (lifeTime >= 27) {
             data->rocketY[i] = NPC_DISPOSE_POS_Y;
         }
@@ -211,7 +211,7 @@ void firework_rocket_render(EffectInstance* effect) {
 
     renderTask.appendGfx = firework_rocket_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 700;
+    renderTask.dist = 700;
     renderTask.renderMode =  RENDER_MODE_SURFACE_OPA;
 
     retTask = queue_render_task(&renderTask);
@@ -238,7 +238,7 @@ void firework_rocket_appendGfx(void* effect) {
     Vec3b* sparkDir;
     s32 i;
 
-    negYaw = -camera->currentYaw;
+    negYaw = -camera->curYaw;
     sinTheta = sin_deg(negYaw);
     cosTheta = cos_deg(negYaw);
     isExploded = data->isExploded;

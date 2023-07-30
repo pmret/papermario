@@ -75,8 +75,8 @@ EffectInstance* peach_star_beam_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s3
     data->envG = 255;
     data->envB = 255;
     data->envA = 255;
-    data->rotationSpeed = 5.0f;
-    data->rotationAngle = 0;
+    data->rotSpeed = 5.0f;
+    data->rotAngle = 0;
     data->circleCenter.x = x;
     data->circleCenter.y = y + 50.0f;
     data->circleCenter.z = z;
@@ -121,8 +121,8 @@ void peach_star_beam_update(EffectInstance* effect) {
         return;
     }
 
-    data->rotationAngle += data->rotationSpeed;
-    rotationAngle = data->rotationAngle;
+    data->rotAngle += data->rotSpeed;
+    rotationAngle = data->rotAngle;
     radius = data->circleRadius;
     centerX = data->circleCenter.x;
     centerY = data->circleCenter.y;
@@ -155,7 +155,7 @@ void peach_star_beam_render(EffectInstance* effect) {
 
     renderTask.appendGfx = peach_star_beam_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

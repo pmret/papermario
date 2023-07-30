@@ -250,7 +250,7 @@ void landing_dust_render(EffectInstance* effect) {
 
     renderTask.appendGfx = landing_dust_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);
@@ -287,7 +287,7 @@ void landing_dust_appendGfx(void* effect) {
     spDC = temp_t0 & 0x40;
 
     guTranslateF(mtx1, part->x, part->y, part->z);
-    guRotateF(mtx2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtx2, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtx2, mtx1, mtx3);
     guMtxF2L(mtx3, &gDisplayContext->matrixStack[gMatrixListPos]);
 

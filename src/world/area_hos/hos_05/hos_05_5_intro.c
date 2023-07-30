@@ -1818,7 +1818,7 @@ s32 N(D_8024ACBC_A34EFC) = 0x00010019;
 API_CALLABLE(N(ForceStarRodAlwaysFaceCamera)) {
     Npc* npc = resolve_npc(script, NPC_StarRod);
 
-    npc->yaw = npc->renderYaw = 180.0f - gCameras[gCurrentCameraID].currentYaw;
+    npc->yaw = npc->renderYaw = 180.0f - gCameras[gCurrentCameraID].curYaw;
     return ApiStatus_BLOCK;
 }
 

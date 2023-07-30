@@ -88,7 +88,7 @@ void snowflake_render(EffectInstance* effect) {
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
     f32 effectPos = data->pos.x;
-    f32 playerPos = playerStatus->position.x;
+    f32 playerPos = playerStatus->pos.x;
 
     if (effectPos - playerPos > 200) {
         data->pos.x = effectPos - 400;
@@ -99,7 +99,7 @@ void snowflake_render(EffectInstance* effect) {
     }
 
     effectPos = data->pos.z;
-    playerPos = playerStatus->position.z;
+    playerPos = playerStatus->pos.z;
     if (effectPos - playerPos > 200) {
         data->pos.z = effectPos - 400;
     } else {
@@ -110,7 +110,7 @@ void snowflake_render(EffectInstance* effect) {
 
     renderTaskPtr->appendGfx = &snowflake_appendGfx;
     renderTaskPtr->appendGfxArg = effect;
-    renderTaskPtr->distance = 0;
+    renderTaskPtr->dist = 0;
     renderTaskPtr->renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(renderTaskPtr);
@@ -127,7 +127,7 @@ void snowflake_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09000900_331800);
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(spD8, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(spD8, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(spD8, sp18, sp118);
     guMtxF2L(sp118, &gDisplayContext->matrixStack[gMatrixListPos]);
 

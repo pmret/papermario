@@ -5,7 +5,7 @@ void N(StoneChompAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_wander_init(script, aiSettings, territory);
-    npc->jumpVelocity = rand_int(5) + 8.0;
+    npc->jumpVel = rand_int(5) + 8.0;
     npc->jumpScale = 1.5f;
 }
 
@@ -13,7 +13,7 @@ void N(StoneChompAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);
-    npc->jumpVelocity = rand_int(5) + 5.0;
+    npc->jumpVel = rand_int(5) + 5.0;
     npc->jumpScale = 1.5f;
 }
 

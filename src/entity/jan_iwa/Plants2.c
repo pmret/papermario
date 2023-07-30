@@ -57,10 +57,10 @@ void entity_TrumpetPlant_idle(Entity* entity) {
 void entity_TrumpetPlant_create_effect(Entity* entity) {
     f32 xOffset, zOffset, angle;
 
-    angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
+    angle = DEG_TO_RAD(clamp_angle(entity->rot.y));
     xOffset = -26.0 * cos_rad(angle);
     zOffset = 6.0 * sin_rad(angle);
-    fx_stars_burst(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
+    fx_stars_burst(0, entity->pos.x + xOffset, entity->pos.y + 62.0f, entity->pos.z + zOffset, clamp_angle(entity->rot.y - 90.0), 54.0f, 2);
 }
 
 void entity_TrumpetPlant_spawn_coin(Entity* entity) {
@@ -70,17 +70,17 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
     if (data->numCoins < 3) {
         f32 xOffset, zOffset, angle;
 
-        angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
+        angle = DEG_TO_RAD(clamp_angle(entity->rot.y));
         xOffset = -26.0 * cos_rad(angle);
         zOffset = 6.0 * sin_rad(angle);
 
         if (rand_int(32) > 16) {
-            f32 facingAngle = entity->rotation.y - 110.0f + (data->numCoins % 3) * 30;
+            f32 facingAngle = entity->rot.y - 110.0f + (data->numCoins % 3) * 30;
             data->numCoins++;
             make_item_entity(ITEM_COIN,
-                             entity->position.x + xOffset,
-                             entity->position.y + 62.0f,
-                             entity->position.z + zOffset,
+                             entity->pos.x + xOffset,
+                             entity->pos.y + 62.0f,
+                             entity->pos.z + zOffset,
                              ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0,
                              facingAngle, 0);
         }
@@ -88,7 +88,7 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
 }
 
 void entity_Munchlesia_init(Entity* entity) {
-    make_item_entity_nodelay(ITEM_COIN, entity->position.x, entity->position.y + 30.0f, entity->position.z,
+    make_item_entity_nodelay(ITEM_COIN, entity->pos.x, entity->pos.y + 30.0f, entity->pos.z,
         ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS_NEVER_VANISH, 0);
 }
 
@@ -113,21 +113,21 @@ void func_802BC0B8_E2E9E8(Entity* entity) {
 
 void func_802BC0F0_E2EA20(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
-    data->unk_18 = fabs(dist2D(entity->position.x, entity->position.z, gPlayerStatus.position.x, gPlayerStatus.position.z) * 0.25);
-    data->unk_14 = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, entity->position.x, entity->position.z);
+    data->unk_18 = fabs(dist2D(entity->pos.x, entity->pos.z, gPlayerStatus.pos.x, gPlayerStatus.pos.z) * 0.25);
+    data->unk_14 = atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entity->pos.x, entity->pos.z);
 }
 
 void func_802BC17C_E2EAAC(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
 
-    gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.position.x;
-    gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.position.y;
-    gCameras[CAM_DEFAULT].targetPos.z = gPlayerStatus.position.z;
-    add_vec2D_polar(&gPlayerStatus.position.x, &gPlayerStatus.position.z, data->unk_18, data->unk_14);
+    gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.pos.x;
+    gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.pos.y;
+    gCameras[CAM_DEFAULT].targetPos.z = gPlayerStatus.pos.z;
+    add_vec2D_polar(&gPlayerStatus.pos.x, &gPlayerStatus.pos.z, data->unk_18, data->unk_14);
 }
 
 s32 entity_Munchlesia_create_child(Entity* entity, EntityBlueprint* EntityBlueprint) {
-    return create_entity(EntityBlueprint, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y);
+    return create_entity(EntityBlueprint, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, (s32)entity->rot.y);
 }
 
 void func_802BC220_E2EB50(Entity* entity) {
@@ -178,13 +178,13 @@ void func_802BC3A0_E2ECD0(void) {
 
 void entity_MunchlesiaChewing_init(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
-    data->unk_0C = gPlayerStatus.position.y;
+    data->unk_0C = gPlayerStatus.pos.y;
     data->unk_10 = 0;
 }
 
 void func_802BC3E4_E2ED14(Entity* entity) {
     MunchlesiaData* data = entity->dataBuf.munchlesia;
-    gPlayerStatus.position.y = data->unk_0C + (sin_rad(DEG_TO_RAD(data->unk_10)) * 3.0f);
+    gPlayerStatus.pos.y = data->unk_0C + (sin_rad(DEG_TO_RAD(data->unk_10)) * 3.0f);
 
     data->unk_10 += 24.0f;
     if (data->unk_10 > 360.0f) {

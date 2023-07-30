@@ -528,7 +528,7 @@ API_CALLABLE(N(func_80241CCC_A3B1AC)) {
     temp_f24 = script->functionTemp[0] * 10;
 
     for (i = 0; i < ARRAY_COUNT(effects); i++) {
-        guRotateF(sp28, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp28, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guRotateF(sp68, i * 120, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp68, sp28, sp28);
         tx = temp_f30 * sin_deg(temp_f24);

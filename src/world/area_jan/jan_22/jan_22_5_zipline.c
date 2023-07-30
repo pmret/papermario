@@ -40,13 +40,13 @@ API_CALLABLE(N(Zipline_UpdatePlayerPos)) {
 
     if (mode == 0) {
         Npc* partner = get_npc_safe(NPC_PARTNER);
-        gPlayerStatus.position.x = (script->varTable[2] + script->varTable[5]);
-        gPlayerStatus.position.y = (script->varTable[3] + script->varTable[6]);
-        gPlayerStatus.position.z = (script->varTable[4] + script->varTable[7]);
+        gPlayerStatus.pos.x = (script->varTable[2] + script->varTable[5]);
+        gPlayerStatus.pos.y = (script->varTable[3] + script->varTable[6]);
+        gPlayerStatus.pos.z = (script->varTable[4] + script->varTable[7]);
         gPlayerStatus.targetYaw = atan2(array[0], array[2], array[3], array[5]);
-        partner->pos.x = gPlayerStatus.position.x;
-        partner->pos.y = gPlayerStatus.position.y - 10.0f;
-        partner->pos.z = gPlayerStatus.position.z - 5.0f;
+        partner->pos.x = gPlayerStatus.pos.x;
+        partner->pos.y = gPlayerStatus.pos.y - 10.0f;
+        partner->pos.z = gPlayerStatus.pos.z - 5.0f;
     }
     return ApiStatus_DONE2;
 }
@@ -61,8 +61,8 @@ API_CALLABLE(N(Zipline_CheckInputForJumpOff)) {
     s32 bx2 = posB + 17;
 
     script->varTable[8] = -1;
-    if (((gPlayerStatus.position.x < ax1) || (ax2 < gPlayerStatus.position.x))
-     && ((gPlayerStatus.position.x < bx1) || (bx2 < gPlayerStatus.position.x))) {
+    if (((gPlayerStatus.pos.x < ax1) || (ax2 < gPlayerStatus.pos.x))
+     && ((gPlayerStatus.pos.x < bx1) || (bx2 < gPlayerStatus.pos.x))) {
         script->varTable[8] = gGameStatusPtr->pressedButtons[0] & BUTTON_A;
     }
     return ApiStatus_DONE2;

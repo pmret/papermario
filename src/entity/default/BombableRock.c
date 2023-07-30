@@ -21,8 +21,8 @@ void entity_BombableRock_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
     data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_BombableRock_setupGfx;
     entity->alpha = 255;
-    entity->position.y = data->inititalY;
-    guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
+    entity->pos.y = data->inititalY;
+    guTranslateF(mtxTrans, entity->pos.x, entity->pos.y, entity->pos.z);
 
     for (i = 0; i < 5; i++) {
         guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
@@ -57,9 +57,9 @@ void entity_BombableRock_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
 
         rotationSpeed = rand_int(5);
         if (i % 2 != 0) {
-            data->fragmentRotationSpeed[i] = rotationSpeed + 10;
+            data->fragmentRotSpeed[i] = rotationSpeed + 10;
         } else {
-            data->fragmentRotationSpeed[i] = -10 - rotationSpeed;
+            data->fragmentRotSpeed[i] = -10 - rotationSpeed;
         }
 
         data->fragmentFallSpeed[i] = 10.0f;
@@ -70,7 +70,7 @@ void entity_BombableRock_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
 }
 
 void entity_BombableRock_init(Entity* entity) {
-    entity->dataBuf.bombableRock->inititalY = entity->position.y;
+    entity->dataBuf.bombableRock->inititalY = entity->pos.y;
     entity_BombableRock_init_fragments(entity, Entity_BombableRock_FragmentsRender, Entity_BombableRock_FragmentMatrices);
 }
 
@@ -91,26 +91,26 @@ void entity_BombableRock_update_fragments(Entity* entity) {
         switch (data->fragmentRebounds[i]) {
             case 0:
                 reboundSpeed = 2.0f;
-                rotSpeed = data->fragmentRotationSpeed[i];
+                rotSpeed = data->fragmentRotSpeed[i];
                 lateralSpeed = data->fragmentLateralSpeed[i] / 10.0f;
                 if (rotSpeed >= 0.0f) {
-                    data->fragmentRotationSpeed[i] = rotSpeed - 0.4;
+                    data->fragmentRotSpeed[i] = rotSpeed - 0.4;
                 } else {
-                    data->fragmentRotationSpeed[i] = rotSpeed + 0.5;
+                    data->fragmentRotSpeed[i] = rotSpeed + 0.5;
                 }
                 break;
             case 1:
                 lateralSpeed = 1.0f;
                 reboundSpeed = 0.0f;
-                rotSpeed = data->fragmentRotationSpeed[i] * 0.25f;
+                rotSpeed = data->fragmentRotSpeed[i] * 0.25f;
                 break;
             case 2:
-                data->fragmentRotationSpeed[i] += 1.0f;
-                if (data->fragmentRotationSpeed[i] > 20.0f) {
-                    data->fragmentRotationSpeed[i] = 20.0f;
+                data->fragmentRotSpeed[i] += 1.0f;
+                if (data->fragmentRotSpeed[i] > 20.0f) {
+                    data->fragmentRotSpeed[i] = 20.0f;
                 }
 
-                data->fragmentPosY[i] -= data->fragmentRotationSpeed[i] / 70.0f;
+                data->fragmentPosY[i] -= data->fragmentRotSpeed[i] / 70.0f;
 
                 data->fragmentMoveAngle[i] -= 5;
                 if (data->fragmentMoveAngle[i] <= 5) {
@@ -168,7 +168,7 @@ void entity_BombableRock_update_fragments(Entity* entity) {
                 data->fragmentFallSpeed[i] = reboundSpeed;
                 if (data->fragmentRebounds[i] == 2) {
                     data->fragmentMoveAngle[i] = 254;
-                    data->fragmentRotationSpeed[i] = 0.0f;
+                    data->fragmentRotSpeed[i] = 0.0f;
                 }
             }
 
@@ -197,9 +197,9 @@ void entity_BombableRock_setupGfx(s32 entityIndex) {
     Gfx* fragmentDlist;
     Gfx** gfx = data->fragmentsGfx;
 
-    x_inv = -entity->position.x;
-    y_inv = -entity->position.y;
-    z_inv = -entity->position.z;
+    x_inv = -entity->pos.x;
+    y_inv = -entity->pos.y;
+    z_inv = -entity->pos.z;
 
     for (i = 0; i < 5; i++) {
         if (data->fragmentRebounds[i] < 2) {
@@ -232,7 +232,7 @@ void entity_BombableRock_idle(Entity* entity) {
     if (entity->collisionFlags & ENTITY_COLLISION_PARTNER) {
         entity_start_script(entity);
         exec_entity_commandlist(entity);
-        fx_big_smoke_puff(entity->position.x, entity->position.y + 25.0f, entity->position.z);
+        fx_big_smoke_puff(entity->pos.x, entity->pos.y + 25.0f, entity->pos.z);
     }
 }
 

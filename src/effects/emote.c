@@ -63,14 +63,14 @@ void func_E0020000(EmoteFXData* part, s32 arg1) {
     f32 sin;
     f32 cos;
 
-    sin = sin_deg(gCameras[gCurrentCameraID].currentYaw);
-    cos = cos_deg(gCameras[gCurrentCameraID].currentYaw);
+    sin = sin_deg(gCameras[gCurrentCameraID].curYaw);
+    cos = cos_deg(gCameras[gCurrentCameraID].curYaw);
     guRotateF(sp18, -(unk_1C - 20.0f + arg1 * 20), sin, 0.0f, -cos);
 
     if (npc == PTR_LIST_END) {
-        part->unk_04 = gPlayerStatus.position.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
-        part->unk_08 = gPlayerStatus.position.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
-        part->unk_0C = gPlayerStatus.position.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+        part->unk_04 = gPlayerStatus.pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = gPlayerStatus.pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = gPlayerStatus.pos.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
     } else if (npc != NULL) {
         part->unk_04 = npc->pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
         part->unk_08 = npc->pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
@@ -194,7 +194,7 @@ void emote_render(EffectInstance* effect) {
 
     renderTask.appendGfx = emote_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -222,7 +222,7 @@ void emote_appendGfx(void* effect) {
 
     if (type != 1) {
         guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
 
         matrix = &gDisplayContext->matrixStack[gMatrixListPos];
@@ -241,7 +241,7 @@ void emote_appendGfx(void* effect) {
         if (part->unk_38 == 0) {
             for (i = 0; i < 3; i++, part++) {
                 guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-                guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+                guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
                 guMtxCatF(sp58, sp18, sp18);
                 guRotateF(sp58, part->unk_24, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(sp58, sp18, sp18);

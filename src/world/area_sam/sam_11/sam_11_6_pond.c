@@ -29,7 +29,7 @@ API_CALLABLE(N(SpawnIceShards)) {
         a5 = 4.0f;
         effect->data.iceShard->animFrame = 0.0f;
         effect->data.iceShard->animRate = (rand_int(10) * 0.2) + 0.1;
-        effect->data.iceShard->rotation = i * 35;
+        effect->data.iceShard->rot = i * 35;
         effect->data.iceShard->angularVel = rand_int(10) - 5;
         effect->data.iceShard->vel.x = t1;
         effect->data.iceShard->vel.y = a5;
@@ -41,7 +41,7 @@ API_CALLABLE(N(SpawnIceShards)) {
 
 API_CALLABLE(N(func_80241FB0_D3C580)) {
     script->varTable[10] = 0;
-    if (gCollisionStatus.currentFloor == COLLIDER_suimen) {
+    if (gCollisionStatus.curFloor == COLLIDER_suimen) {
         script->varTable[10] = 1;
     }
     if (gCollisionStatus.lastTouchedFloor == COLLIDER_suimen) {
@@ -52,15 +52,15 @@ API_CALLABLE(N(func_80241FB0_D3C580)) {
 
 API_CALLABLE(N(SetDraggingPlayerPosY)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 x = playerStatus->position.x;
-    f32 y = playerStatus->position.y + 10.0f;
-    f32 z = playerStatus->position.z;
+    f32 x = playerStatus->pos.x;
+    f32 y = playerStatus->pos.y + 10.0f;
+    f32 z = playerStatus->pos.z;
     f32 hitDepth = 40.0f;
 
     npc_raycast_down_sides(0, &x, &y, &z, &hitDepth);
-    playerStatus->position.x = x;
-    playerStatus->position.y = y;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.y = y;
+    playerStatus->pos.z = z;
     return ApiStatus_DONE2;
 }
 

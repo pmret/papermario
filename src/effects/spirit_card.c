@@ -121,7 +121,7 @@ void spirit_card_render(EffectInstance* effect) {
 
     renderTask.appendGfx = spirit_card_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
     retTask = queue_render_task(&renderTask);
@@ -134,7 +134,7 @@ void func_E0112330(s32 arg0, SpiritCardFXData* data) {
     Matrix4f sp60;
 
     if (arg0 == 0) {
-        temp = gCameras[gCurrentCameraID].currentYaw;
+        temp = gCameras[gCurrentCameraID].curYaw;
     } else {
         temp = 0.0f;
     }

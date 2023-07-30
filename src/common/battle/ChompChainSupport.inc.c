@@ -39,25 +39,25 @@ API_CALLABLE(N(ChompChainInit)) {
     chainParts = heap_malloc(NUM_CHAIN_LINKS * sizeof(*chainParts));
     actor->state.functionTempPtr[0] = chainParts;
 
-    x = actor->currentPos.x + 12.0;
-    y = actor->currentPos.y + 5.0;
-    z = actor->currentPos.z;
+    x = actor->curPos.x + 12.0;
+    y = actor->curPos.y + 5.0;
+    z = actor->curPos.z;
 
     for (i = 0; i < NUM_CHAIN_LINKS; i++, chainParts++) {
         chainParts->outerLinkLen = 7.0f;
         chainParts->linkLengthZ = 7.0f;
         chainParts->innerLinkLen = 7.0f;
-        chainParts->currentPos.x = x;
-        chainParts->currentPos.y = y;
-        chainParts->currentPos.z = z;
+        chainParts->curPos.x = x;
+        chainParts->curPos.y = y;
+        chainParts->curPos.z = z;
         chainParts->settleAmt = 0;
         chainParts->settleRate = 0.6f;
         chainParts->gravAccel = 3.0f;
         chainParts->velY = 0;
         actorPart = get_actor_part(actor, baseChainPart + i);
-        actorPart->absolutePosition.x = chainParts->currentPos.x;
-        actorPart->absolutePosition.y = chainParts->currentPos.y;
-        actorPart->absolutePosition.z = chainParts->currentPos.z;
+        actorPart->absolutePos.x = chainParts->curPos.x;
+        actorPart->absolutePos.y = chainParts->curPos.y;
+        actorPart->absolutePos.z = chainParts->curPos.z;
     }
     return ApiStatus_DONE2;
 }
@@ -67,8 +67,8 @@ void N(ChompChainAddPolarPos)(ChompChain* script, f32 magnitude, f32 angleDeg) {
     f32 dirX = sin_rad(angle);
     f32 dirY = cos_rad(angle);
 
-    script->currentPos.x += -magnitude * dirX;
-    script->currentPos.y += magnitude * dirY;
+    script->curPos.x += -magnitude * dirX;
+    script->curPos.y += magnitude * dirY;
 }
 
 void N(ChompChainGetPolarX)(f32* x, f32 magnitude, f32 angleDeg) {
@@ -106,11 +106,11 @@ API_CALLABLE(N(ChompChainUpdate)) {
     // initialize prev positions to the rear of the actor's body
     chain = actor->state.functionTempPtr[0];
     if (actor->debuff == STATUS_KEY_SHRINK) {
-        prevX = actor->currentPos.x + 6.0;
-        prevY = actor->currentPos.y + 2.5;
+        prevX = actor->curPos.x + 6.0;
+        prevY = actor->curPos.y + 2.5;
     } else {
-        prevX = actor->currentPos.x + 12.0;
-        prevY = actor->currentPos.y + 5.0;
+        prevX = actor->curPos.x + 12.0;
+        prevY = actor->curPos.y + 5.0;
     }
 
     // update each link in the chain
@@ -130,27 +130,27 @@ API_CALLABLE(N(ChompChainUpdate)) {
         if (chain->velY < 2.0f * -chain->gravAccel) {
             chain->velY = 2.0f * -chain->gravAccel;
             if (actor->state.varTable[CHOMP_CHAIN_AVAR_SOUNDS] && i == 0) {
-                sfx_play_sound_at_position(SOUND_2063, SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                sfx_play_sound_at_position(SOUND_2063, SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
             }
         }
 
         // add velocity and clamp position to roughly the radius of the chain (assuming ground at y = 0)
-        chain->currentPos.y += chain->velY;
+        chain->curPos.y += chain->velY;
         if (actor->debuff == STATUS_KEY_SHRINK) {
-            if (chain->currentPos.y < 2.5) {
-                chain->currentPos.y = 2.5f;
+            if (chain->curPos.y < 2.5) {
+                chain->curPos.y = 2.5f;
                 chain->velY = 0.0f;
             }
         } else {
-            if (chain->currentPos.y < 5.0) {
-                chain->currentPos.y = 5.0f;
+            if (chain->curPos.y < 5.0) {
+                chain->curPos.y = 5.0f;
                 chain->velY = 0.0f;
             }
         }
 
         // get distance from previous part of the chain
-        dist = dist2D(prevX, prevY, chain->currentPos.x, chain->currentPos.y);
-        angle = atan2(prevX, prevY, chain->currentPos.x, chain->currentPos.y);
+        dist = dist2D(prevX, prevY, chain->curPos.x, chain->curPos.y);
+        angle = atan2(prevX, prevY, chain->curPos.x, chain->curPos.y);
 
         if (dist >= chain->linkLengthZ) {
             N(ChompChainGetPolarX)(&sp18, dist - chain->linkLengthZ, angle);
@@ -181,13 +181,13 @@ API_CALLABLE(N(ChompChainUpdate)) {
         }
         
         #if CHOMP_CHAIN_UPDATE_Z == TRUE
-        chain->currentPos.z = posZ;
+        chain->curPos.z = posZ;
         #endif
 
         part = get_actor_part(actor, baseChainPart + i);
-        part->absolutePosition.x = chain->currentPos.x;
-        part->absolutePosition.y = chain->currentPos.y;
-        part->absolutePosition.z = chain->currentPos.z;
+        part->absolutePos.x = chain->curPos.x;
+        part->absolutePos.y = chain->curPos.y;
+        part->absolutePos.z = chain->curPos.z;
 
         if (actor->debuff == STATUS_KEY_SHRINK) {
             part->scale.x = 0.5f;
@@ -198,8 +198,8 @@ API_CALLABLE(N(ChompChainUpdate)) {
             part->scale.y = 1.0f;
             part->scale.z = 1.0f;
         }
-        prevX = chain->currentPos.x;
-        prevY = chain->currentPos.y;
+        prevX = chain->curPos.x;
+        prevY = chain->curPos.y;
     }
 
     return ApiStatus_DONE2;

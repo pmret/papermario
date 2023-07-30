@@ -14,14 +14,14 @@ API_CALLABLE(N(AddPlatformPushVelocity)) {
     s32 floor = evt_get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (gCollisionStatus.currentFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
-        playerStatus->pushVelocity.x = velocity;
+    if (gCollisionStatus.curFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
+        playerStatus->pushVel.x = velocity;
     }
 
-    if (gPlayerData.currentPartner != PARTNER_NONE) {
+    if (gPlayerData.curPartner != PARTNER_NONE) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
-        if (partner->currentFloor == floor) {
+        if (partner->curFloor == floor) {
             partner->pos.x += velocity;
         }
     }

@@ -163,9 +163,9 @@ void effect_46_update(EffectInstance* effect) {
         }
     }
 
-    part->pos.x = part->player->position.x;
-    part->pos.y = part->player->position.y;
-    part->pos.z = part->player->position.z;
+    part->pos.x = part->player->pos.x;
+    part->pos.y = part->player->pos.y;
+    part->pos.z = part->player->pos.z;
 
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {
@@ -192,7 +192,7 @@ void effect_46_render(EffectInstance* effect) {
 
     renderTask.appendGfx = effect_46_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -216,7 +216,7 @@ void effect_46_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09000420_38EDB0);
 
     guTranslateF(mtxTransform, part->pos.x, part->pos.y, part->pos.z);
-    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 

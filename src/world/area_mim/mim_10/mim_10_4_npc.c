@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 API_CALLABLE(N(AwaitPlayerApproachForest)) {
-    if (gPlayerStatus.position.x < 100.0f) {
+    if (gPlayerStatus.pos.x < 100.0f) {
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;

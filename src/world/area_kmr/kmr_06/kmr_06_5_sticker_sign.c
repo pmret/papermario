@@ -65,7 +65,7 @@ void N(worker_render_sticker)(void) {
     renderTaskPtr->renderMode = RENDER_MODE_ALPHATEST;
     renderTaskPtr->appendGfxArg = 0;
     renderTaskPtr->appendGfx = &N(appendGfx_sticker);
-    renderTaskPtr->distance = 0;
+    renderTaskPtr->dist = 0;
     queue_render_task(renderTaskPtr);
 }
 

@@ -13,9 +13,9 @@ API_CALLABLE(N(SetSpringPosition)) {
     s32 z = evt_get_variable(script, *args++);
     Entity* entity = get_entity_by_index(entityIndex);
 
-    entity->position.x = x;
-    entity->position.y = y;
-    entity->position.z = z;
+    entity->pos.x = x;
+    entity->pos.y = y;
+    entity->pos.z = z;
     return ApiStatus_DONE2;
 }
 

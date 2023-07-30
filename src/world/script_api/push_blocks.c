@@ -32,8 +32,8 @@ f32 PushBlockMovePositions[] = {
 API_CALLABLE(MovePlayerTowardBlock) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->position.x += (script->varTable[0] - playerStatus->position.x) / 2;
-    playerStatus->position.z += (script->varTable[2] - playerStatus->position.z) / 2;
+    playerStatus->pos.x += (script->varTable[0] - playerStatus->pos.x) / 2;
+    playerStatus->pos.z += (script->varTable[2] - playerStatus->pos.z) / 2;
 
     return ApiStatus_DONE2;
 }
@@ -45,37 +45,37 @@ API_CALLABLE(UpdatePushBlockMotion) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        script->varTable[0] = playerStatus->position.x;
-        script->varTable[1] = playerStatus->position.y;
-        script->varTable[2] = playerStatus->position.z;
-        script->varTable[3] = entity->position.x;
-        script->varTable[4] = entity->position.y;
-        script->varTable[5] = entity->position.z;
-        script->varTable[9] = entity->rotation.x;
-        script->varTable[12] = entity->rotation.z;
+        script->varTable[0] = playerStatus->pos.x;
+        script->varTable[1] = playerStatus->pos.y;
+        script->varTable[2] = playerStatus->pos.z;
+        script->varTable[3] = entity->pos.x;
+        script->varTable[4] = entity->pos.y;
+        script->varTable[5] = entity->pos.z;
+        script->varTable[9] = entity->rot.x;
+        script->varTable[12] = entity->rot.z;
     }
 
     moveRatio = PushBlockMovePositions[script->functionTemp[0]];
-    playerStatus->position.x = script->varTable[0] + (script->varTable[6] * moveRatio * BLOCK_GRID_SIZE);
-    playerStatus->position.y = script->varTable[1] + (script->varTable[7] * moveRatio * BLOCK_GRID_SIZE);
-    playerStatus->position.z = script->varTable[2] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
-    entity->position.x = script->varTable[3] + (script->varTable[6] * moveRatio * BLOCK_GRID_SIZE);
-    entity->position.y = script->varTable[4] + (script->varTable[7] * moveRatio * BLOCK_GRID_SIZE);
-    entity->position.z = script->varTable[5] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
+    playerStatus->pos.x = script->varTable[0] + (script->varTable[6] * moveRatio * BLOCK_GRID_SIZE);
+    playerStatus->pos.y = script->varTable[1] + (script->varTable[7] * moveRatio * BLOCK_GRID_SIZE);
+    playerStatus->pos.z = script->varTable[2] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
+    entity->pos.x = script->varTable[3] + (script->varTable[6] * moveRatio * BLOCK_GRID_SIZE);
+    entity->pos.y = script->varTable[4] + (script->varTable[7] * moveRatio * BLOCK_GRID_SIZE);
+    entity->pos.z = script->varTable[5] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
 
     if (script->functionTemp[0] < 12) {
-        entity->rotation.z = script->varTable[12] + (script->varTable[6] * moveRatio * -90.0f);
-        entity->rotation.x = script->varTable[9] + (script->varTable[8] * moveRatio * 90.0f);
-        entity->position.y = entity->position.y + (sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
-        entity->position.x = entity->position.x - (script->varTable[6] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
-        entity->position.z = entity->position.z - (script->varTable[8] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
+        entity->rot.z = script->varTable[12] + (script->varTable[6] * moveRatio * -90.0f);
+        entity->rot.x = script->varTable[9] + (script->varTable[8] * moveRatio * 90.0f);
+        entity->pos.y = entity->pos.y + (sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
+        entity->pos.x = entity->pos.x - (script->varTable[6] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
+        entity->pos.z = entity->pos.z - (script->varTable[8] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
     } else {
-        entity->rotation.z = entity->rotation.x = 0.0f;
+        entity->rot.z = entity->rot.x = 0.0f;
     }
 
-    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
 
     script->functionTemp[0]++;
     if (script->functionTemp[0] == ARRAY_COUNT(PushBlockMovePositions)) {
@@ -93,11 +93,11 @@ API_CALLABLE(FinishPushBlockMotion) {
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        script->varTable[0] = block->position.y;
+        script->varTable[0] = block->pos.y;
 
-        hitX = block->position.x;
-        hitZ = block->position.z;
-        hitY = block->position.y + 5.0f;
+        hitX = block->pos.x;
+        hitZ = block->pos.z;
+        hitY = block->pos.y + 5.0f;
 
         hitDepth = 35.0f;
         hitResult = npc_raycast_down_sides(0, &hitX, &hitY, &hitZ, &hitDepth);
@@ -110,21 +110,21 @@ API_CALLABLE(FinishPushBlockMotion) {
 
     if (grid->dropCallback != NULL) {
         if (grid->dropCallback(block, script)) {
-            i = (block->position.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
-            j = (block->position.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
+            i = (block->pos.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
+            j = (block->pos.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
             grid->cells[i + (j * grid->numCellsX)] = 0;
             return ApiStatus_DONE1;
         } else {
             return ApiStatus_BLOCK;
         }
     } else {
-        block->position.y = script->varTable[0] - (PushBlockMovePositions[script->functionTemp[0]] * BLOCK_GRID_SIZE);
+        block->pos.y = script->varTable[0] - (PushBlockMovePositions[script->functionTemp[0]] * BLOCK_GRID_SIZE);
         script->functionTemp[0]++;
         if (script->functionTemp[0] != ARRAY_COUNT(PushBlockMovePositions)) {
             return ApiStatus_BLOCK;
         }
-        i = (block->position.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
-        j = (block->position.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
+        i = (block->pos.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
+        j = (block->pos.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
         grid->cells[i + (j * grid->numCellsX)] = PUSH_GRID_EMPTY;
     }
     return ApiStatus_DONE1;
@@ -145,9 +145,9 @@ API_CALLABLE(FetchPushedBlockProperties) {
     gridCenterY = grid->centerPos.y;
     gridCenterZ = grid->centerPos.z;
 
-    xThing = gPlayerStatus.position.x;
-    yThing = gPlayerStatus.position.y;
-    zThing = gPlayerStatus.position.z;
+    xThing = gPlayerStatus.pos.x;
+    yThing = gPlayerStatus.pos.y;
+    zThing = gPlayerStatus.pos.z;
 
     xThing -= gridCenterX;
     yThing -= gridCenterY;
@@ -179,9 +179,9 @@ API_CALLABLE(FetchPushedBlockProperties) {
     script->varTable[1] = yThing;
     script->varTable[2] = zThing;
 
-    script->varTable[3] = entityX = entity->position.x;
-    script->varTable[4] = entityY = entity->position.y;
-    script->varTable[5] = entityZ = entity->position.z;
+    script->varTable[3] = entityX = entity->pos.x;
+    script->varTable[4] = entityY = entity->pos.y;
+    script->varTable[5] = entityZ = entity->pos.z;
 
     xThing = entityX - grid->centerPos.x;
     zThing = entityZ - grid->centerPos.z;
@@ -227,8 +227,8 @@ API_CALLABLE(ClearPushedBlockFromGrid) {
     s32 ip, jp; // prev grid pos (i,j)
     s32 in, jn; // next grid pos (i,j)
 
-    ip = ((s32)block->position.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
-    jp = ((s32)block->position.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
+    ip = ((s32)block->pos.x - grid->centerPos.x) / BLOCK_GRID_SIZE;
+    jp = ((s32)block->pos.z - grid->centerPos.z) / BLOCK_GRID_SIZE;
     in = ip + script->varTable[6];
     jn = jp + script->varTable[8];
 

@@ -156,9 +156,9 @@ API_CALLABLE(N(SpawnSpinEffect)) {
     s32 posZ = evt_get_variable(script, *args++);
     s32 duration = evt_get_variable(script, *args++);
 
-    N(DummyPlayerStatus).position.x = posX;
-    N(DummyPlayerStatus).position.y = posY - 10.0f;
-    N(DummyPlayerStatus).position.z = posZ;
+    N(DummyPlayerStatus).pos.x = posX;
+    N(DummyPlayerStatus).pos.y = posY - 10.0f;
+    N(DummyPlayerStatus).pos.z = posZ;
 
     fx_effect_46(6, &N(DummyPlayerStatus), 1.0f, duration);
     return ApiStatus_DONE2;

@@ -70,7 +70,7 @@ API_CALLABLE(N(HideBehindTree)) {
     f64 dist;
 
     // get a point 46 units away from the tree on the side opposite the player
-    yaw = clamp_angle(atan2(-210.0f, -183.0f, gPlayerStatus.position.x, gPlayerStatus.position.z) + 180.0f);
+    yaw = clamp_angle(atan2(-210.0f, -183.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z) + 180.0f);
     posX = -210.0f;
     posZ = -183.0f;
     add_vec2D_polar(&posX, &posZ, 46.0f, yaw);
@@ -100,18 +100,18 @@ API_CALLABLE(N(HideBehindTree)) {
                 add_vec2D_polar(&posX, &posZ, 46.0f, yaw);
             }
         }
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_RUN];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_RUN];
         npc->yaw = atan2(npc->pos.x, npc->pos.z, posX, posZ);
         npc_move_heading(npc, 2.0f, npc->yaw);
     } else if (dist > 0.2) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, posX, posZ);
         npc->pos.x = posX;
         npc->pos.z = posZ;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
     } else {
         npc->pos.x = posX;
         npc->pos.z = posZ;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     }
     return ApiStatus_BLOCK;
 }

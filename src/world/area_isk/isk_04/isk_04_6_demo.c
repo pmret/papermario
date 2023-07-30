@@ -122,14 +122,14 @@ API_CALLABLE(N(SetupDemoScene)) {
             N(DemoInitState)++;
             return ApiStatus_BLOCK;
         case 3:
-            wPartnerNpc->pos.x = playerStatus->position.x - 30.0f;
-            wPartnerNpc->pos.z = playerStatus->position.z + 30.0f;
+            wPartnerNpc->pos.x = playerStatus->pos.x - 30.0f;
+            wPartnerNpc->pos.z = playerStatus->pos.z + 30.0f;
             partner_clear_player_tracking(wPartnerNpc);
-            partner_set_goal_pos(playerStatus->position.x, playerStatus->position.z);
+            partner_set_goal_pos(playerStatus->pos.x, playerStatus->pos.z);
             func_800EF3D4(0);
             set_npc_yaw(wPartnerNpc, 90.0f);
             playerStatus->targetYaw = 90.0f;
-            playerStatus->currentYaw = 90.0f;
+            playerStatus->curYaw = 90.0f;
             playerStatus->spriteFacingAngle = 0.0f;
             return ApiStatus_DONE2;
     }

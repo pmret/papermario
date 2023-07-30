@@ -124,7 +124,7 @@ void breaking_junk_render(EffectInstance* effect) {
 
     renderTask.appendGfx = breaking_junk_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -142,7 +142,7 @@ void breaking_junk_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E01187C0[0]);
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, data++) {
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale * 0.5, data->pos.x, data->pos.y, data->pos.z);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, data->scale * 0.5, data->pos.x, data->pos.y, data->pos.z);
         guRotateF(sp60, data->rot, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp60, sp20, sp20);
         guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

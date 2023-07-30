@@ -291,7 +291,7 @@ void N(GetCardOrientation)(s32 index, f32* outX, f32* outY, f32* outZ, f32* outA
     Matrix4f mtxTemp;
     Matrix4f mtxParent;
 
-    guPositionF(mtxParent, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE_F,
+    guPositionF(mtxParent, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, SPRITE_WORLD_SCALE_F,
                 evt_get_variable(N(CreatorScript), RITUAL_VAR_POS_X),
                 evt_get_variable(N(CreatorScript), RITUAL_VAR_POS_Y),
                 evt_get_variable(N(CreatorScript), RITUAL_VAR_POS_Z));
@@ -361,7 +361,7 @@ void N(card_worker_update)(void) {
             N(RitualCards)[1].pos.x += -10.0f;
             N(RitualCards)[2].pos.y += -10.0f;
             if (N(RitualStateTime) == 18) {
-                gPlayerStatus.position.y = NPC_DISPOSE_POS_Y;
+                gPlayerStatus.pos.y = NPC_DISPOSE_POS_Y;
             }
             if (N(RitualStateTime) == 20) {
                 evt_set_variable(N(CreatorScript), RITUAL_VAR_STATE, RITUAL_STATE_2);
@@ -567,7 +567,7 @@ void N(card_worker_render)(void) {
     Matrix4f mtx;
     u32 temp_s1;
 
-    guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE_F,
+    guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, SPRITE_WORLD_SCALE_F,
                 evt_get_variable(N(CreatorScript), RITUAL_VAR_POS_X),
                 evt_get_variable(N(CreatorScript), RITUAL_VAR_POS_Y),
                 evt_get_variable(N(CreatorScript), RITUAL_VAR_POS_Z));

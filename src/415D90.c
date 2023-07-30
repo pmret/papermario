@@ -646,7 +646,7 @@ s32 btl_main_menu_update(void) {
             }
             break;
         case BTL_MENU_STATE_ACCEPT_INPUT:
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 if (BattleMenu_OptionEnabled[BattleMenu_CurPos + BattleMenu_HomePos] == TRUE) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     BattleMenuState = BTL_MENU_STATE_OPENED_SUBMENU;
@@ -658,12 +658,12 @@ s32 btl_main_menu_update(void) {
             } else {
                 BattleMenu_PrevPos = BattleMenu_CurPos;
                 if (D_802AD004 == 0) {
-                    if ((battleStatus->currentButtonsHeld & (BUTTON_STICK_LEFT | BUTTON_STICK_UP)) &&
+                    if ((battleStatus->curButtonsHeld & (BUTTON_STICK_LEFT | BUTTON_STICK_UP)) &&
                         BattleMenu_MinIdx < BattleMenu_CurPos)
                     {
                         BattleMenu_CurPos--;
                     }
-                    if ((battleStatus->currentButtonsHeld & (BUTTON_STICK_RIGHT | BUTTON_STICK_DOWN)) &&
+                    if ((battleStatus->curButtonsHeld & (BUTTON_STICK_RIGHT | BUTTON_STICK_DOWN)) &&
                         BattleMenu_CurPos < BattleMenu_MaxIdx)
                     {
                         BattleMenu_CurPos++;
@@ -1213,18 +1213,18 @@ s32 btl_submenu_moves_update(void) {
             break;
         case BTL_SUBMENU_MOVES_STATE_UNK_1:
             D_802AD10A = battle_menu_moveCursorPos;
-            if (battleStatus->currentButtonsHeld & (BUTTON_STICK_UP | BUTTON_Z)) {
+            if (battleStatus->curButtonsHeld & (BUTTON_STICK_UP | BUTTON_Z)) {
                 if (battle_menu_moveCursorPos > 0) {
                     battle_menu_moveCursorPos--;
-                } else if (battleStatus->currentButtonsPressed & (BUTTON_STICK_UP | BUTTON_Z)) {
+                } else if (battleStatus->curButtonsPressed & (BUTTON_STICK_UP | BUTTON_Z)) {
                     battle_menu_moveCursorPos--;
                 }
             }
 
-            if (battleStatus->currentButtonsHeld & (BUTTON_STICK_DOWN | BUTTON_R)) {
+            if (battleStatus->curButtonsHeld & (BUTTON_STICK_DOWN | BUTTON_R)) {
                 if (battle_menu_moveCursorPos < BattleMenu_Moves_OptionCount - 1) {
                     battle_menu_moveCursorPos++;
-                } else if (battleStatus->currentButtonsPressed & (BUTTON_STICK_DOWN | BUTTON_R)) {
+                } else if (battleStatus->curButtonsPressed & (BUTTON_STICK_DOWN | BUTTON_R)) {
                     battle_menu_moveCursorPos++;
                 }
             }
@@ -1260,7 +1260,7 @@ s32 btl_submenu_moves_update(void) {
             }
 
             D_802AD10D = battle_menu_moveScrollLine + 6;
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos]] == 1) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_ONE;
@@ -1276,7 +1276,7 @@ s32 btl_submenu_moves_update(void) {
                 break;
             }
 
-            if (battleStatus->currentButtonsPressed & BUTTON_B) {
+            if (battleStatus->curButtonsPressed & BUTTON_B) {
                 sfx_play_sound(SOUND_MENU_BACK);
                 func_802A27E4();
                 battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_TWO;
@@ -1851,18 +1851,18 @@ s32 func_802A4A54(void) {
         case 1:
             if (D_802AD607 == 0) {
                 D_802AD606 = D_802AD605;
-                if (battleStatus->currentButtonsHeld & BUTTON_STICK_UP) {
+                if (battleStatus->curButtonsHeld & BUTTON_STICK_UP) {
                     if (D_802AD605 > 0) {
                         D_802AD605--;
-                    } else if (battleStatus->currentButtonsPressed & BUTTON_STICK_UP) {
+                    } else if (battleStatus->curButtonsPressed & BUTTON_STICK_UP) {
                         D_802AD605--;
                     }
                 }
 
-                if (battleStatus->currentButtonsHeld & BUTTON_STICK_DOWN) {
+                if (battleStatus->curButtonsHeld & BUTTON_STICK_DOWN) {
                     if (D_802AD605 < D_802AD66C - 1) {
                         D_802AD605++;
-                    } else if (battleStatus->currentButtonsPressed & BUTTON_STICK_DOWN) {
+                    } else if (battleStatus->curButtonsPressed & BUTTON_STICK_DOWN) {
                         D_802AD605++;
                     }
                 }
@@ -1890,7 +1890,7 @@ s32 func_802A4A54(void) {
                     D_802AD609 = D_802AD66C;
                 }
 
-                if (battleStatus->currentButtonsPressed & BUTTON_A) {
+                if (battleStatus->curButtonsPressed & BUTTON_A) {
                     if (D_802AD690[D_802AD605] == 1) {
                         sfx_play_sound(SOUND_MENU_NEXT);
                         BattleSubmenuStratsState = -1;
@@ -1902,7 +1902,7 @@ s32 func_802A4A54(void) {
                     break;
                 }
 
-                if (battleStatus->currentButtonsPressed & BUTTON_B) {
+                if (battleStatus->curButtonsPressed & BUTTON_B) {
                     sfx_play_sound(SOUND_MENU_BACK);
                     func_802A472C();
                     BattleSubmenuStratsState = -2;
@@ -2233,7 +2233,7 @@ void btl_state_update_player_menu(void) {
         case BTL_SUBSTATE_PLAYER_MENU_INIT:
             battleStatus->moveCategory = BTL_MENU_TYPE_INVALID;
             battleStatus->selectedMoveID = 0;
-            battleStatus->currentAttackElement = 0;
+            battleStatus->curAttackElement = 0;
             if (!can_btl_state_update_switch_to_player()) {
                 btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
                 return;
@@ -2244,8 +2244,8 @@ void btl_state_update_player_menu(void) {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CREATE_MAIN_MENU;
             } else {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_PERFORM_SWAP;
-                partnerActor->state.currentPos.x = partnerActor->homePos.x;
-                partnerActor->state.currentPos.z = partnerActor->homePos.z;
+                partnerActor->state.curPos.x = partnerActor->homePos.x;
+                partnerActor->state.curPos.z = partnerActor->homePos.z;
                 partnerActor->state.goalPos.x = playerActor->homePos.x;
                 partnerActor->state.goalPos.z = playerActor->homePos.z;
                 partnerActor->state.moveTime = 4;
@@ -2254,27 +2254,27 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_PERFORM_SWAP:
             if (partnerActor->state.moveTime != 0) {
-                partnerActor->currentPos.x += (partnerActor->state.goalPos.x - partnerActor->currentPos.x) / partnerActor->state.moveTime;
-                partnerActor->currentPos.z += (partnerActor->state.goalPos.z - partnerActor->currentPos.z) / partnerActor->state.moveTime;
-                playerActor->currentPos.x += (partnerActor->state.currentPos.x - playerActor->currentPos.x) / partnerActor->state.moveTime;
-                playerActor->currentPos.z += (partnerActor->state.currentPos.z - playerActor->currentPos.z) / partnerActor->state.moveTime;
+                partnerActor->curPos.x += (partnerActor->state.goalPos.x - partnerActor->curPos.x) / partnerActor->state.moveTime;
+                partnerActor->curPos.z += (partnerActor->state.goalPos.z - partnerActor->curPos.z) / partnerActor->state.moveTime;
+                playerActor->curPos.x += (partnerActor->state.curPos.x - playerActor->curPos.x) / partnerActor->state.moveTime;
+                playerActor->curPos.z += (partnerActor->state.curPos.z - playerActor->curPos.z) / partnerActor->state.moveTime;
             }
-            partnerActor->currentPos.z -= sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
+            partnerActor->curPos.z -= sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
             partnerActor->yaw = clamp_angle(-partnerActor->state.angle);
-            playerActor->currentPos.z += sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
+            playerActor->curPos.z += sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
             playerActor->yaw = clamp_angle(-partnerActor->state.angle);
             partnerActor->state.angle += 90.0f;
             if (partnerActor->state.moveTime != 0) {
                 partnerActor->state.moveTime--;
             } else {
-                partnerActor->currentPos.x = partnerActor->state.goalPos.x;
-                partnerActor->currentPos.z = partnerActor->state.goalPos.z;
-                playerActor->currentPos.x = partnerActor->state.currentPos.x;
-                playerActor->currentPos.z = partnerActor->state.currentPos.z;
-                partnerActor->homePos.x = partnerActor->currentPos.x;
-                partnerActor->homePos.z = partnerActor->currentPos.z;
-                playerActor->homePos.x = playerActor->currentPos.x;
-                playerActor->homePos.z = playerActor->currentPos.z;
+                partnerActor->curPos.x = partnerActor->state.goalPos.x;
+                partnerActor->curPos.z = partnerActor->state.goalPos.z;
+                playerActor->curPos.x = partnerActor->state.curPos.x;
+                playerActor->curPos.z = partnerActor->state.curPos.z;
+                partnerActor->homePos.x = partnerActor->curPos.x;
+                partnerActor->homePos.z = partnerActor->curPos.z;
+                playerActor->homePos.x = playerActor->curPos.x;
+                playerActor->homePos.z = playerActor->curPos.z;
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CREATE_MAIN_MENU;
                 battleStatus->flags1 &= ~BS_FLAGS1_PLAYER_IN_BACK;
             }
@@ -2467,14 +2467,14 @@ void btl_state_update_player_menu(void) {
                 D_802ACC60--;
             } else if (submenuResult != 0) {
                 set_animation(ACTOR_PLAYER, 0, ANIM_Mario1_Walk);
-                battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->currentSubmenu = battle_menu_submenuIDs[submenuResult - 1];
+                battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->curSubmenu = battle_menu_submenuIDs[submenuResult - 1];
                 for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
                     battleStatus->submenuMoves[i] = 0;
                     battleStatus->submenuIcons[0] = 0; ///< @bug ?
                     battleStatus->submenuStatus[i] = 0;
                 }
 
-                switch (battleStatus->currentSubmenu) {
+                switch (battleStatus->curSubmenu) {
                     case BTL_MENU_TYPE_ITEMS:
                         battleStatus->submenuMoves[0] = D_802AB4F0[8];
                         battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
@@ -2487,7 +2487,7 @@ void btl_state_update_player_menu(void) {
 
                             battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                             battleStatus->moveArgument = playerData->invItems[i];
-                            battleStatus->currentTargetListFlags = itemData->targetFlags;
+                            battleStatus->curTargetListFlags = itemData->targetFlags;
                             player_create_target_list(playerActor);
                         }
                         entryIdx = 1;
@@ -2495,7 +2495,7 @@ void btl_state_update_player_menu(void) {
                             if (playerData->equippedBadges[i] != 0) {
                                 s32 moveID = gItemTable[playerData->equippedBadges[i]].moveID;
                                 moveData = &gMoveTable[moveID];
-                                if (moveData->category == D_802AB4F0[battleStatus->currentSubmenu]) {
+                                if (moveData->category == D_802AB4F0[battleStatus->curSubmenu]) {
                                     battleStatus->submenuMoves[entryIdx] = moveID;
                                     battleStatus->submenuIcons[entryIdx] = playerData->equippedBadges[i];
                                     battleStatus->submenuStatus[entryIdx] = 1;
@@ -2542,7 +2542,7 @@ void btl_state_update_player_menu(void) {
                             battleStatus->submenuIcons[entryIdx] = 0;
                             battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                             battleStatus->moveArgument = MOVE_REFRESH + i;
-                            battleStatus->currentTargetListFlags = moveData->flags;
+                            battleStatus->curTargetListFlags = moveData->flags;
                             player_create_target_list(playerActor);
                             battleStatus->submenuStatus[entryIdx] = 1;
                             if (playerActor->targetListLength == 0) {
@@ -2564,7 +2564,7 @@ void btl_state_update_player_menu(void) {
                                 battleStatus->submenuIcons[entryIdx] = 0;
                                 battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                                 battleStatus->moveArgument = MOVE_REFRESH + i;
-                                battleStatus->currentTargetListFlags = moveData->flags;
+                                battleStatus->curTargetListFlags = moveData->flags;
                                 player_create_target_list(playerActor);
                                 battleStatus->submenuStatus[entryIdx] = starBeamLevel;
                                 if (playerActor->targetListLength == 0) {
@@ -2587,7 +2587,7 @@ void btl_state_update_player_menu(void) {
                                     battleStatus->submenuIcons[entryIdx] = 0;
                                     battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                                     battleStatus->moveArgument = MOVE_REFRESH + i;
-                                    battleStatus->currentTargetListFlags = moveData->flags;
+                                    battleStatus->curTargetListFlags = moveData->flags;
                                     player_create_target_list(playerActor);
                                     battleStatus->submenuStatus[entryIdx] = 1;
                                     if (playerActor->targetListLength == 0) {
@@ -2608,7 +2608,7 @@ void btl_state_update_player_menu(void) {
                     } while (0); // TODO required to match
                 }
 
-                currentSubmenu = battleStatus->currentSubmenu;
+                currentSubmenu = battleStatus->curSubmenu;
                 if (currentSubmenu == BTL_MENU_TYPE_STAR_POWERS) {
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_1;
                     btl_state_update_player_menu();
@@ -2648,13 +2648,13 @@ void btl_state_update_player_menu(void) {
                         }
                         initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP];
                     }
-                    if (battleStatus->currentSubmenu == BTL_MENU_TYPE_SMASH) {
+                    if (battleStatus->curSubmenu == BTL_MENU_TYPE_SMASH) {
                         if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] < 0) {
                             battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] = 0;
                         }
                         initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH];
                     }
-                    if (battleStatus->currentSubmenu == BTL_MENU_TYPE_ITEMS) {
+                    if (battleStatus->curSubmenu == BTL_MENU_TYPE_ITEMS) {
                         if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] < 0) {
                             battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] = 0;
                         }
@@ -2732,16 +2732,16 @@ void btl_state_update_player_menu(void) {
             } else {
                 battleStatus->unk_49 = BattleMenu_Moves_OptionIndices[submenuResult - 1];
                 battleStatus->selectedMoveID = battleStatus->submenuMoves[battleStatus->unk_49];
-                if (battleStatus->currentSubmenu == BTL_MENU_TYPE_JUMP) {
+                if (battleStatus->curSubmenu == BTL_MENU_TYPE_JUMP) {
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] = battle_menu_moveOptionActive;
                 }
-                if (battleStatus->currentSubmenu == BTL_MENU_TYPE_SMASH) {
+                if (battleStatus->curSubmenu == BTL_MENU_TYPE_SMASH) {
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] = battle_menu_moveOptionActive;
                 }
-                currentSubmenu2 = battleStatus->currentSubmenu;
-                if (battleStatus->currentSubmenu == BTL_MENU_TYPE_ITEMS) {
+                currentSubmenu2 = battleStatus->curSubmenu;
+                if (battleStatus->curSubmenu == BTL_MENU_TYPE_ITEMS) {
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] = battle_menu_moveOptionActive;
-                    if (battleStatus->currentSubmenu == currentSubmenu2) {
+                    if (battleStatus->curSubmenu == currentSubmenu2) {
                         gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_UNKNOWN_1;
                         btl_state_update_player_menu();
                         btl_state_update_player_menu();
@@ -2755,7 +2755,7 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_MOVE_CHOOSE_TARGET:
             submenuResult = btl_submenu_moves_update();
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && submenuResult == 0) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && submenuResult == 0) {
                 func_802A2AB8();
                 func_802A1098();
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_4;
@@ -2767,8 +2767,8 @@ void btl_state_update_player_menu(void) {
             battleStatus->cancelTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_MOVE_TARGET_CANCEL;
             battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_MOVE_TARGET_CHOSEN;
             battleStatus->selectedMoveID = battleStatus->submenuMoves[battleStatus->unk_49];
-            battleStatus->currentTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_49]].flags;
-            currentSubmenu = battleStatus->currentSubmenu;
+            battleStatus->curTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_49]].flags;
+            currentSubmenu = battleStatus->curSubmenu;
             switch (currentSubmenu) {
                 case BTL_MENU_TYPE_JUMP:
                     battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
@@ -2813,7 +2813,7 @@ void btl_state_update_player_menu(void) {
             if (gBattleStatus.flags2 & BS_FLAGS2_4) {
                 btl_show_variable_battle_message(BTL_MSG_CANT_SWITCH, 60, 0);
             } else {
-                btl_show_variable_battle_message(BTL_MSG_CANT_MOVE, 60, playerData->currentPartner);
+                btl_show_variable_battle_message(BTL_MSG_CANT_MOVE, 60, playerData->curPartner);
             }
             D_802AD607 = 1;
             gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_AWAIT_CANT_SWAP;
@@ -2833,25 +2833,25 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_11:
             submenuResult = btl_main_menu_update();
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && submenuResult == 0) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && submenuResult == 0) {
                 func_802A1078();
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_12;
             } else if (submenuResult != 0) {
                 battleStatus->cancelTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_13;
                 battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_14;
-                switch (battleStatus->currentSubmenu) {
+                switch (battleStatus->curSubmenu) {
                     case BTL_MENU_TYPE_JUMP:
                         battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
                         battleStatus->moveArgument = playerData->bootsLevel;
                         battleStatus->selectedMoveID = playerData->bootsLevel + MOVE_JUMP1;
-                        battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
+                        battleStatus->curTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
                         btl_set_state(BATTLE_STATE_SELECT_TARGET);
                         break;
                     case BTL_MENU_TYPE_SMASH:
                         battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
                         battleStatus->moveArgument = playerData->hammerLevel;
                         battleStatus->selectedMoveID = playerData->hammerLevel + MOVE_HAMMER1;
-                        battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
+                        battleStatus->curTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
                         btl_set_state(BATTLE_STATE_SELECT_TARGET);
                         break;
                     default:
@@ -2894,7 +2894,7 @@ void btl_state_update_player_menu(void) {
                 }
                 battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                 battleStatus->moveArgument = playerData->invItems[i];
-                battleStatus->currentTargetListFlags = itemData->targetFlags;
+                battleStatus->curTargetListFlags = itemData->targetFlags;
                 player_create_target_list(playerActor);
                 popup->ptrIcon[entryIdx] = hudScriptPair->enabled;
                 popup->userIndex[entryIdx] = playerData->invItems[i];
@@ -2943,8 +2943,8 @@ void btl_state_update_player_menu(void) {
                     battleStatus->unk_1AA = popup->userIndex[popup->result - 1];
                     battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                     battleStatus->moveArgument = battleStatus->unk_1AA;
-                    battleStatus->currentTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
-                    battleStatus->currentAttackElement = 0;
+                    battleStatus->curTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
+                    battleStatus->curAttackElement = 0;
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] = popup->result - 1;
                     hide_popup_menu();
                     func_802A27D0();
@@ -2954,7 +2954,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_UNKNOWN_3:
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
                 func_800F16CC();
                 func_802A2C58();
                 func_802A1098();
@@ -2998,7 +2998,7 @@ void btl_state_update_player_menu(void) {
                 }
                 battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                 battleStatus->moveArgument = playerData->invItems[i];
-                battleStatus->currentTargetListFlags = itemData->targetFlags;
+                battleStatus->curTargetListFlags = itemData->targetFlags;
                 player_create_target_list(playerActor);
                 popup->ptrIcon[entryIdx] = hudScriptPair->enabled;
 
@@ -3041,8 +3041,8 @@ void btl_state_update_player_menu(void) {
                     battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                     battleStatus->moveArgument = battleStatus->unk_1AA;
                     battleStatus->selectedMoveID = MOVE_ITEMS;
-                    battleStatus->currentTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
-                    battleStatus->currentAttackElement = 0;
+                    battleStatus->curTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
+                    battleStatus->curAttackElement = 0;
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] = popup->result - 1;
                     hide_popup_menu();
                     func_802A1030();
@@ -3051,7 +3051,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_ITEMS_3:
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
                 func_800F16CC();
                 func_802A1098();
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_ITEMS_4;
@@ -3143,7 +3143,7 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_3:
             submenuResult = btl_submenu_moves_update();
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && submenuResult == 0) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && submenuResult == 0) {
                 func_802A2AB8();
                 func_802A1098();
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_4;
@@ -3152,7 +3152,7 @@ void btl_state_update_player_menu(void) {
                 battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_6;
                 battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                 battleStatus->selectedMoveID = battleStatus->submenuMoves[battleStatus->unk_49];
-                battleStatus->currentTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_49]].flags;
+                battleStatus->curTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_49]].flags;
                 battleStatus->moveArgument = battleStatus->unk_49;
                 if (playerData->starBeamLevel == 2 && battleStatus->moveArgument == 8) {
                     battleStatus->moveArgument++;
@@ -3198,7 +3198,7 @@ void btl_state_update_player_menu(void) {
 
                     battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                     battleStatus->moveArgument = playerData->invItems[i];
-                    battleStatus->currentTargetListFlags = itemData->targetFlags;
+                    battleStatus->curTargetListFlags = itemData->targetFlags;
                     player_create_target_list(playerActor);
                     popup->ptrIcon[entryIdx] = hudScriptPair->enabled;
                     popup->userIndex[entryIdx] = playerData->invItems[i];
@@ -3249,8 +3249,8 @@ void btl_state_update_player_menu(void) {
                     battleStatus->unk_1AA = popup->userIndex[popup->result - 1];
                     battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                     battleStatus->moveArgument = battleStatus->unk_1AA;
-                    battleStatus->currentTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
-                    battleStatus->currentAttackElement = 0;
+                    battleStatus->curTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
+                    battleStatus->curAttackElement = 0;
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_DIP] = popup->result - 1;
                     hide_popup_menu();
                     D_802ACC60 = 5;
@@ -3282,7 +3282,7 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_BERSERKER_1:
             if (playerData->bootsLevel >= 0) {
-                battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP5].flags;
+                battleStatus->curTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP5].flags;
                 player_create_target_list(playerActor);
                 jumpTargetCount = playerActor->targetListLength;
             } else {
@@ -3290,7 +3290,7 @@ void btl_state_update_player_menu(void) {
             }
 
             if (playerData->hammerLevel >= 0) {
-                battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER5].flags;
+                battleStatus->curTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER5].flags;
                 player_create_target_list(playerActor);
                 hammerTargetCount = playerActor->targetListLength;
             } else {
@@ -3312,13 +3312,13 @@ void btl_state_update_player_menu(void) {
                 if (rand_int(100) < jumpChance) {
                     battleStatus->selectedMoveID = MOVE_UNUSED_JUMP5;
                     battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
-                    battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP5].flags;
+                    battleStatus->curTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP5].flags;
                     battleStatus->moveArgument = playerData->bootsLevel;
                     player_create_target_list(playerActor);
                 } else {
                     battleStatus->selectedMoveID = MOVE_UNUSED_HAMMER5;
                     battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
-                    battleStatus->currentTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER5].flags;
+                    battleStatus->curTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER5].flags;
                     battleStatus->moveArgument = playerData->hammerLevel;
                     player_create_target_list(playerActor);
                 }
@@ -3331,11 +3331,11 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->changePartnerAllowed >= 0) {
                 D_802AD678[0] = BTL_MENU_TYPE_CHANGE_PARTNER;
                 D_802AD658[0] = BattleMenu_LeftJustMessages[BTL_MENU_TYPE_CHANGE_PARTNER];
-                D_802AD640[0] = battle_menu_PartnerHudScripts[playerData->currentPartner];
+                D_802AD640[0] = battle_menu_PartnerHudScripts[playerData->curPartner];
                 D_802AD690[0] = 1;
                 D_802AD6C0[0] = MSG_Menus_Action_ChangePartner;
                 if (battleStatus->changePartnerAllowed <= 0) {
-                    D_802AD640[0] = battle_menu_DisabledPartnerHudScripts[playerData->currentPartner];
+                    D_802AD640[0] = battle_menu_DisabledPartnerHudScripts[playerData->curPartner];
                     D_802AD690[0] = 0;
                     D_802AD6A8[0] = 0;
                 }
@@ -3383,9 +3383,9 @@ void btl_state_update_player_menu(void) {
                 btl_state_update_player_menu();
                 btl_state_update_player_menu();
             } else {
-                battleStatus->currentSubmenu = D_802AD678[submenuResult - 1];
+                battleStatus->curSubmenu = D_802AD678[submenuResult - 1];
                 battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_STRATEGY] = submenuResult - 1;
-                if (battleStatus->currentSubmenu == 5) {
+                if (battleStatus->curSubmenu == 5) {
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_1;
                     btl_state_update_player_menu();
                     btl_state_update_player_menu();
@@ -3398,14 +3398,14 @@ void btl_state_update_player_menu(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_3:
             submenuResult = func_802A4A54();
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && submenuResult == 0) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && submenuResult == 0) {
                 func_802A48FC();
                 func_802A1098();
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_4;
             } else if (btl_main_menu_update() != 0) {
                 battleStatus->cancelTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_5;
                 battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_6;
-                switch (battleStatus->currentSubmenu) {
+                switch (battleStatus->curSubmenu) {
                     case 3:
                         gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_6;
                         btl_state_update_player_menu();
@@ -3469,7 +3469,7 @@ void btl_state_update_player_menu(void) {
                     popup->nameMsg[entryIdx] = prop->nameMsg;
                     popup->descMsg[entryIdx] = prop->battleDescMsg;
                     popup->value[entryIdx] = playerData->partners[partnerId].level;
-                    if (playerData->currentPartner == partnerId) {
+                    if (playerData->curPartner == partnerId) {
                         popup->enabled[entryIdx] = 0;
                         popup->ptrIcon[entryIdx] = battle_menu_DisabledPartnerHudScripts[partnerId];
                     }
@@ -3481,7 +3481,7 @@ void btl_state_update_player_menu(void) {
             }
             popup->popupType = POPUP_MENU_SWITCH_PARTNER;
             popup->numEntries = entryIdx;
-            popup->initialPos = MenuIndexFromPartnerID[playerData->currentPartner] - 1;
+            popup->initialPos = MenuIndexFromPartnerID[playerData->curPartner] - 1;
             popup->dipMode = 0;
             popup->titleNumber = 0;
             create_battle_popup_menu(popup);
@@ -3503,7 +3503,7 @@ void btl_state_update_player_menu(void) {
                     battleStatus->unk_1AC = popup->userIndex[popup->result - 1];
                     battleStatus->moveCategory = BTL_MENU_TYPE_CHANGE_PARTNER;
                     battleStatus->selectedMoveID = MOVE_UNUSED_37;
-                    battleStatus->currentTargetListFlags = TARGET_FLAG_2;
+                    battleStatus->curTargetListFlags = TARGET_FLAG_2;
                     battleStatus->moveArgument = battleStatus->unk_1AC;
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_PARTNER] = popup->result - 1;
                     hide_popup_menu();
@@ -3514,7 +3514,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_3:
-            if ((battleStatus->currentButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
+            if ((battleStatus->curButtonsPressed & BUTTON_B) && popup->result == POPUP_RESULT_CHOOSING) {
                 func_800F16CC();
                 func_802A4A10();
                 func_802A1098();
@@ -3629,7 +3629,7 @@ void btl_state_update_partner_menu(void) {
     if (gBattleSubState == BTL_SUBSTATE_PARTNER_MENU_NONE) {
         battleStatus->moveCategory = BTL_MENU_TYPE_INVALID;
         battleStatus->selectedMoveID = MOVE_NONE;
-        battleStatus->currentAttackElement = 0;
+        battleStatus->curAttackElement = 0;
         if (!func_802A58D0()) {
             btl_set_state(BATTLE_STATE_9);
         } else {
@@ -3641,8 +3641,8 @@ void btl_state_update_partner_menu(void) {
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_INIT_MENU;
             } else {
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_12D;
-                partnerActor->state.currentPos.x = partnerActor->homePos.x;
-                partnerActor->state.currentPos.z = partnerActor->homePos.z;
+                partnerActor->state.curPos.x = partnerActor->homePos.x;
+                partnerActor->state.curPos.z = partnerActor->homePos.z;
                 partnerActor->state.goalPos.x = playerActor->homePos.x;
                 partnerActor->state.goalPos.z = playerActor->homePos.z;
                 partnerActor->state.moveTime = 4;
@@ -3652,28 +3652,28 @@ void btl_state_update_partner_menu(void) {
     }
     if (gBattleSubState == BTL_SUBSTATE_PARTNER_MENU_12D) {
         if (partnerActor->state.moveTime != 0) {
-            partnerActor->currentPos.x += (partnerActor->state.goalPos.x - partnerActor->currentPos.x) / partnerActor->state.moveTime;
-            partnerActor->currentPos.z += (partnerActor->state.goalPos.z - partnerActor->currentPos.z) / partnerActor->state.moveTime;
-            playerActor->currentPos.x += (partnerActor->state.currentPos.x - playerActor->currentPos.x) / partnerActor->state.moveTime;
-            playerActor->currentPos.z += (partnerActor->state.currentPos.z - playerActor->currentPos.z) / partnerActor->state.moveTime;
+            partnerActor->curPos.x += (partnerActor->state.goalPos.x - partnerActor->curPos.x) / partnerActor->state.moveTime;
+            partnerActor->curPos.z += (partnerActor->state.goalPos.z - partnerActor->curPos.z) / partnerActor->state.moveTime;
+            playerActor->curPos.x += (partnerActor->state.curPos.x - playerActor->curPos.x) / partnerActor->state.moveTime;
+            playerActor->curPos.z += (partnerActor->state.curPos.z - playerActor->curPos.z) / partnerActor->state.moveTime;
         }
-        partnerActor->currentPos.z += sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
+        partnerActor->curPos.z += sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
         partnerActor->yaw = clamp_angle(-partnerActor->state.angle);
-        playerActor->currentPos.z -= sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
+        playerActor->curPos.z -= sin_rad(DEG_TO_RAD(partnerActor->state.angle)) * 16.0f;
         playerActor->yaw = clamp_angle(-partnerActor->state.angle);
         partnerActor->state.angle += 90.0f;
         if (partnerActor->state.moveTime != 0) {
             partnerActor->state.moveTime--;
         } else {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_INIT_MENU;
-            partnerActor->currentPos.x = partnerActor->state.goalPos.x;
-            partnerActor->currentPos.z = partnerActor->state.goalPos.z;
-            playerActor->currentPos.x = partnerActor->state.currentPos.x;
-            playerActor->currentPos.z = partnerActor->state.currentPos.z;
-            partnerActor->homePos.x = partnerActor->currentPos.x;
-            partnerActor->homePos.z = partnerActor->currentPos.z;
-            playerActor->homePos.x = playerActor->currentPos.x;
-            playerActor->homePos.z = playerActor->currentPos.z;
+            partnerActor->curPos.x = partnerActor->state.goalPos.x;
+            partnerActor->curPos.z = partnerActor->state.goalPos.z;
+            playerActor->curPos.x = partnerActor->state.curPos.x;
+            playerActor->curPos.z = partnerActor->state.curPos.z;
+            partnerActor->homePos.x = partnerActor->curPos.x;
+            partnerActor->homePos.z = partnerActor->curPos.z;
+            playerActor->homePos.x = playerActor->curPos.x;
+            playerActor->homePos.z = playerActor->curPos.z;
             gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_IN_BACK;
         }
     }
@@ -3710,17 +3710,17 @@ void btl_state_update_partner_menu(void) {
             entryIdx++;
 
             // abilities menu category
-            BattleMenu_HudScripts[entryIdx] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][0];
+            BattleMenu_HudScripts[entryIdx] = battle_menu_PartnerMoveHudScripts[playerData->curPartner][0];
             battle_menu_submenuIDs[entryIdx] = BTL_MENU_TYPE_ABILITY;
             BattleMenu_OptionEnabled[entryIdx] = TRUE;
             BattleMenu_TitleMessages[entryIdx] = BattleMenu_CenteredMessages[BTL_MENU_TYPE_ABILITY];
             if (battleStatus->menuStatus[3] <= 0) {
-                BattleMenu_HudScripts[entryIdx] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][1];
+                BattleMenu_HudScripts[entryIdx] = battle_menu_PartnerMoveHudScripts[playerData->curPartner][1];
                 BattleMenu_OptionEnabled[entryIdx] = FALSE;
                 battle_menu_isMessageDisabled[entryIdx] = BTL_MSG_CANT_SELECT_NOW;
             }
             if (!(battleStatus->enabledMenusFlags & BTL_MENU_ENABLED_ABILITIES)) {
-                BattleMenu_HudScripts[entryIdx] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][1];
+                BattleMenu_HudScripts[entryIdx] = battle_menu_PartnerMoveHudScripts[playerData->curPartner][1];
                 BattleMenu_OptionEnabled[entryIdx] = FALSE;
                 battle_menu_isMessageDisabled[entryIdx] = BTL_MSG_CANT_SELECT_NOW;
             }
@@ -3762,7 +3762,7 @@ void btl_state_update_partner_menu(void) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_1;
             return;
         case BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_1:
-            set_animation(ACTOR_PARTNER, 0, BattleMenu_PartnerThinkAnims[playerData->currentPartner]);
+            set_animation(ACTOR_PARTNER, 0, BattleMenu_PartnerThinkAnims[playerData->curPartner]);
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_2;
         case BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_2:
             entryIdx = btl_main_menu_update();
@@ -3785,7 +3785,7 @@ void btl_state_update_partner_menu(void) {
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
             } else if (entryIdx != 0) {
-                set_animation(ACTOR_PARTNER, 0, BattleMenu_PartnerIdleAnims[playerData->currentPartner]);
+                set_animation(ACTOR_PARTNER, 0, BattleMenu_PartnerIdleAnims[playerData->curPartner]);
                 battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->unk_4A = battle_menu_submenuIDs[entryIdx - 1];
                 if (battleStatus->unk_4A == 7) {
                     gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_1;
@@ -3817,7 +3817,7 @@ void btl_state_update_partner_menu(void) {
             break;
     case BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_3:
         entryIdx = btl_main_menu_update();
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && entryIdx == 0) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && entryIdx == 0) {
             func_802A1078();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_4;
             return;
@@ -3826,7 +3826,7 @@ void btl_state_update_partner_menu(void) {
             battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
             battleStatus->selectedMoveID = MOVE_FOCUS;
             battleStatus->moveArgument = 0;
-            battleStatus->currentTargetListFlags = gMoveTable[MOVE_FOCUS].flags;
+            battleStatus->curTargetListFlags = gMoveTable[MOVE_FOCUS].flags;
             btl_set_state(BATTLE_STATE_SELECT_TARGET);
             return;
         }
@@ -3878,9 +3878,9 @@ void btl_state_update_partner_menu(void) {
                 battleStatus->submenuStatus[i] = 0;
                 BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW;
             }
-            battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][2 * i + 2];
+            battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->curPartner][2 * i + 2];
             if (battleStatus->submenuStatus[i] == 0) {
-                battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->currentPartner][2 * i + 3];
+                battle_menu_moveOptionIconScripts[i] = battle_menu_PartnerMoveHudScripts[playerData->curPartner][2 * i + 3];
             }
             BattleMenu_Moves_OptionIndices[i] = battleStatus->submenuMoves[i];
             BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
@@ -3933,14 +3933,14 @@ void btl_state_update_partner_menu(void) {
         break;
     case BTL_SUBSTATE_PARTNER_MENU_ABILITIES_3:
         entryIdx = btl_submenu_moves_update();
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && entryIdx == 0) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && entryIdx == 0) {
             func_802A2AB8();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_ABILITIES_4;
         } else if (btl_main_menu_update() != 0) {
             battleStatus->moveCategory = BTL_MENU_TYPE_ABILITY;
             battleStatus->selectedMoveID = BattleMenu_Moves_OptionIndices[battleStatus->unk_4B];
-            battleStatus->currentTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
+            battleStatus->curTargetListFlags = gMoveTable[battleStatus->selectedMoveID].flags;
             battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_ABILITY] = battle_menu_moveOptionActive;
             battleStatus->cancelTargetMenuSubstate = BTL_SUBSTATE_PARTNER_MENU_ABILITIES_5;
             battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PARTNER_MENU_ABILITIES_6;
@@ -4016,8 +4016,8 @@ void btl_state_update_partner_menu(void) {
                 battleStatus->unk_1AA = popupMenu->userIndex[popupMenu->result - 1];
                 battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
                 battleStatus->moveArgument = battleStatus->unk_1AA;
-                battleStatus->currentTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
-                battleStatus->currentAttackElement = 0;
+                battleStatus->curTargetListFlags = gItemTable[battleStatus->moveArgument].targetFlags | TARGET_FLAG_8000;
+                battleStatus->curAttackElement = 0;
                 battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_PARTNER_ITEM] = popupMenu->result - 1;
                 hide_popup_menu();
                 func_802A1030();
@@ -4026,7 +4026,7 @@ void btl_state_update_partner_menu(void) {
         }
         break;
     case BTL_SUBSTATE_PARTNER_MENU_ITEMS_3:
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && popupMenu->result == POPUP_RESULT_CHOOSING) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && popupMenu->result == POPUP_RESULT_CHOOSING) {
             func_800F16CC();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_ITEMS_4;
@@ -4060,7 +4060,7 @@ void btl_state_update_partner_menu(void) {
                 popupMenu->nameMsg[popupIndex] = popupProps->nameMsg;
                 popupMenu->descMsg[popupIndex] = popupProps->battleDescMsg;
                 popupMenu->value[popupIndex] = playerData->partners[partnerId].level;
-                if (playerData->currentPartner == partnerId) {
+                if (playerData->curPartner == partnerId) {
                     popupMenu->enabled[popupIndex] = 0;
                     popupMenu->ptrIcon[popupIndex] = battle_menu_DisabledPartnerHudScripts[partnerId];
                 }
@@ -4072,7 +4072,7 @@ void btl_state_update_partner_menu(void) {
         }
         popupMenu->popupType = POPUP_MENU_SWITCH_PARTNER;
         popupMenu->numEntries = popupIndex;
-        popupMenu->initialPos = MenuIndexFromPartnerID[playerData->currentPartner] - 1;
+        popupMenu->initialPos = MenuIndexFromPartnerID[playerData->curPartner] - 1;
         popupMenu->dipMode = 0;
         popupMenu->titleNumber = 0;
         create_battle_popup_menu(popupMenu);
@@ -4096,7 +4096,7 @@ void btl_state_update_partner_menu(void) {
                 battleStatus->unk_1AC = popupMenu->userIndex[popupMenu->result - 1];
                 battleStatus->moveCategory = BTL_MENU_TYPE_CHANGE_PARTNER;
                 battleStatus->selectedMoveID = MOVE_UNUSED_37;
-                battleStatus->currentTargetListFlags = TARGET_FLAG_2;
+                battleStatus->curTargetListFlags = TARGET_FLAG_2;
                 battleStatus->moveArgument = battleStatus->unk_1AC;
                 battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_PARTNER] = popupMenu->result - 1;
                 hide_popup_menu();
@@ -4106,7 +4106,7 @@ void btl_state_update_partner_menu(void) {
         }
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_3:
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && (popupMenu->result == POPUP_RESULT_CHOOSING)) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && (popupMenu->result == POPUP_RESULT_CHOOSING)) {
             func_800F16CC();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_4;
@@ -4187,7 +4187,7 @@ void btl_state_update_partner_menu(void) {
         break;
     case BTL_SUBSTATE_PARTNER_MENU_FOCUS_3:
         entryIdx = btl_submenu_moves_update();
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && (entryIdx == 0)) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && (entryIdx == 0)) {
             func_802A2AB8();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_FOCUS_4;
@@ -4196,7 +4196,7 @@ void btl_state_update_partner_menu(void) {
             battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PARTNER_MENU_FOCUS_6;
             battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
             battleStatus->selectedMoveID = battleStatus->submenuMoves[battleStatus->unk_4B];
-            battleStatus->currentTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_4B]].flags;
+            battleStatus->curTargetListFlags = gMoveTable[battleStatus->submenuMoves[battleStatus->unk_4B]].flags;
             battleStatus->moveArgument = battleStatus->unk_4B;
             battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STAR_POWER] = battle_menu_moveOptionActive;
             btl_set_state(BATTLE_STATE_SELECT_TARGET);
@@ -4223,11 +4223,11 @@ void btl_state_update_partner_menu(void) {
         if (battleStatus->changePartnerAllowed >= 0) {
             D_802AD678[popupIndex] = BTL_MENU_TYPE_CHANGE_PARTNER;
             D_802AD658[popupIndex] = BattleMenu_LeftJustMessages[BTL_MENU_TYPE_CHANGE_PARTNER];
-            D_802AD640[popupIndex] = battle_menu_PartnerHudScripts[playerData->currentPartner];
+            D_802AD640[popupIndex] = battle_menu_PartnerHudScripts[playerData->curPartner];
             D_802AD690[popupIndex] = 1;
             D_802AD6C0[popupIndex] = MSG_Menus_Action_ChangePartner;
             if (battleStatus->changePartnerAllowed <= 0) {
-                D_802AD640[popupIndex] = battle_menu_DisabledPartnerHudScripts[playerData->currentPartner];
+                D_802AD640[popupIndex] = battle_menu_DisabledPartnerHudScripts[playerData->curPartner];
                 D_802AD690[popupIndex] = 0;
                 D_802AD6A8[popupIndex] = 0;
             }
@@ -4276,7 +4276,7 @@ void btl_state_update_partner_menu(void) {
         break;
     case BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_3:
         entryIdx = func_802A4A54();
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && entryIdx == 0) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && entryIdx == 0) {
             func_802A48FC();
             func_802A1098();
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_STRATEGIES_4;
@@ -4334,7 +4334,7 @@ void btl_state_update_partner_menu(void) {
                 popupMenu->nameMsg[popupIndex] = popupProps->nameMsg;
                 popupMenu->descMsg[popupIndex] = popupProps->battleDescMsg;
                 popupMenu->value[popupIndex] = playerData->partners[partnerId].level;
-                if (playerData->currentPartner == partnerId) {
+                if (playerData->curPartner == partnerId) {
                     popupMenu->enabled[popupIndex] = 0;
                     popupMenu->ptrIcon[popupIndex] = battle_menu_DisabledPartnerHudScripts[partnerId];
                 }
@@ -4346,7 +4346,7 @@ void btl_state_update_partner_menu(void) {
         }
         popupMenu->popupType = POPUP_MENU_SWITCH_PARTNER;
         popupMenu->numEntries = popupIndex;
-        popupMenu->initialPos = MenuIndexFromPartnerID[playerData->currentPartner] - 1;
+        popupMenu->initialPos = MenuIndexFromPartnerID[playerData->curPartner] - 1;
         popupMenu->dipMode = 0;
         popupMenu->titleNumber = 0;
         create_battle_popup_menu(popupMenu);
@@ -4368,7 +4368,7 @@ void btl_state_update_partner_menu(void) {
                 battleStatus->unk_1AC = popupMenu->userIndex[popupMenu->result - 1];
                 battleStatus->moveCategory = BTL_MENU_TYPE_CHANGE_PARTNER;
                 battleStatus->selectedMoveID = MOVE_UNUSED_37;
-                battleStatus->currentTargetListFlags = TARGET_FLAG_2;
+                battleStatus->curTargetListFlags = TARGET_FLAG_2;
                 battleStatus->moveArgument = battleStatus->unk_1AC;
                 battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_PARTNER] = popupMenu->result - 1;
                 hide_popup_menu();
@@ -4379,7 +4379,7 @@ void btl_state_update_partner_menu(void) {
         }
         break;
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_3:
-        if ((battleStatus->currentButtonsPressed & BUTTON_B) && popupMenu->result == POPUP_RESULT_CHOOSING) {
+        if ((battleStatus->curButtonsPressed & BUTTON_B) && popupMenu->result == POPUP_RESULT_CHOOSING) {
             func_800F16CC();
             func_802A4A10();
             func_802A1098();
@@ -4502,8 +4502,8 @@ void btl_state_update_peach_menu(void) {
                 gBattleSubState = BTL_SUBSTATE_PEACH_CREATE_MAIN_MENU;
                 break;
             }
-            player->state.currentPos.x = player->homePos.x;
-            player->state.currentPos.z = player->homePos.z;
+            player->state.curPos.x = player->homePos.x;
+            player->state.curPos.z = player->homePos.z;
             gBattleSubState = BTL_SUBSTATE_PEACH_MENU_PERFORM_SWAP;
             player->state.goalPos.x = partner->homePos.x;
             player->state.goalPos.z = partner->homePos.z;
@@ -4512,15 +4512,15 @@ void btl_state_update_peach_menu(void) {
             break;
         case BTL_SUBSTATE_PEACH_MENU_PERFORM_SWAP:
             if (player->state.moveTime != 0) {
-                player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
-                player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
-                partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
-                partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
+                player->curPos.x += (player->state.goalPos.x - player->curPos.x) / player->state.moveTime;
+                player->curPos.z += (player->state.goalPos.z - player->curPos.z) / player->state.moveTime;
+                partner->curPos.x += (player->state.curPos.x - partner->curPos.x) / player->state.moveTime;
+                partner->curPos.z += (player->state.curPos.z - partner->curPos.z) / player->state.moveTime;
             }
 
-            player->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+            player->curPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             player->yaw = clamp_angle(-player->state.angle);
-            partner->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+            partner->curPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             partner->yaw = clamp_angle(-player->state.angle);
             player->state.angle += 90.0f;
 
@@ -4529,14 +4529,14 @@ void btl_state_update_peach_menu(void) {
                 break;
             }
 
-            player->currentPos.x = player->state.goalPos.x;
-            player->currentPos.z = player->state.goalPos.z;
-            partner->currentPos.x = player->state.currentPos.x;
-            partner->currentPos.z = player->state.currentPos.z;
-            player->homePos.x = player->currentPos.x;
-            player->homePos.z = player->currentPos.z;
-            partner->homePos.x = partner->currentPos.x;
-            partner->homePos.z = partner->currentPos.z;
+            player->curPos.x = player->state.goalPos.x;
+            player->curPos.z = player->state.goalPos.z;
+            partner->curPos.x = player->state.curPos.x;
+            partner->curPos.z = player->state.curPos.z;
+            player->homePos.x = player->curPos.x;
+            player->homePos.z = player->curPos.z;
+            partner->homePos.x = partner->curPos.x;
+            partner->homePos.z = partner->curPos.z;
             gBattleStatus.flags1 &= ~BS_FLAGS1_PLAYER_IN_BACK;
         case BTL_SUBSTATE_PEACH_CREATE_MAIN_MENU:
             gBattleStatus.flags1 |= BS_FLAGS1_MENU_OPEN;
@@ -4586,7 +4586,7 @@ void btl_state_update_peach_menu(void) {
             }
             if (selectedOption != 0) {
                 set_animation(ACTOR_PLAYER, 0, ANIM_Peach1_Walk);
-                battleStatus->currentSubmenu = battle_menu_submenuIDs[selectedOption - 1];
+                battleStatus->curSubmenu = battle_menu_submenuIDs[selectedOption - 1];
                 func_802A1030();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
@@ -4597,7 +4597,7 @@ void btl_state_update_peach_menu(void) {
             if (btl_main_menu_update() != 0) {
                 battleStatus->cancelTargetMenuSubstate = BTL_SUBSTATE_PEACH_MENU_TARGET_CANCEL;
                 battleStatus->acceptTargetMenuSubstate = BTL_SUBSTATE_PEACH_MENU_TARGET_CHOSEN;
-                battleStatus->currentTargetListFlags = gMoveTable[MOVE_PEACH_FOCUS].flags;
+                battleStatus->curTargetListFlags = gMoveTable[MOVE_PEACH_FOCUS].flags;
                 battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                 battleStatus->selectedMoveID = MOVE_PEACH_FOCUS;
                 battleStatus->moveArgument = STAR_POWER_INDEX(MOVE_PEACH_FOCUS);
@@ -4709,8 +4709,8 @@ void btl_state_update_twink_menu(void) {
             btl_cam_use_preset(BTL_CAM_DEFAULT);
             btl_cam_move(10);
             if (!(gBattleStatus.flags1 & BS_FLAGS1_PLAYER_IN_BACK)) {
-                player->state.currentPos.x = player->homePos.x;
-                player->state.currentPos.z = player->homePos.z;
+                player->state.curPos.x = player->homePos.x;
+                player->state.curPos.z = player->homePos.z;
                 player->state.goalPos.x = partner->homePos.x;
                 player->state.goalPos.z = partner->homePos.z;
                 gBattleSubState = BTL_SUBSTATE_TWINK_MENU_PERFORM_SWAP;
@@ -4722,28 +4722,28 @@ void btl_state_update_twink_menu(void) {
             break;
         case BTL_SUBSTATE_TWINK_MENU_PERFORM_SWAP:
             if (player->state.moveTime != 0) {
-                player->currentPos.x += (player->state.goalPos.x - player->currentPos.x) / player->state.moveTime;
-                player->currentPos.z += (player->state.goalPos.z - player->currentPos.z) / player->state.moveTime;
-                partner->currentPos.x += (player->state.currentPos.x - partner->currentPos.x) / player->state.moveTime;
-                partner->currentPos.z += (player->state.currentPos.z - partner->currentPos.z) / player->state.moveTime;
+                player->curPos.x += (player->state.goalPos.x - player->curPos.x) / player->state.moveTime;
+                player->curPos.z += (player->state.goalPos.z - player->curPos.z) / player->state.moveTime;
+                partner->curPos.x += (player->state.curPos.x - partner->curPos.x) / player->state.moveTime;
+                partner->curPos.z += (player->state.curPos.z - partner->curPos.z) / player->state.moveTime;
             }
-            player->currentPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+            player->curPos.z += sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             player->yaw = clamp_angle(-player->state.angle);
-            partner->currentPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
+            partner->curPos.z -= sin_rad(DEG_TO_RAD(player->state.angle)) * 16.0f;
             partner->yaw = clamp_angle(-player->state.angle);
             player->state.angle += 90.0f;
             if (player->state.moveTime != 0) {
                 player->state.moveTime--;
                 break;
             }
-            player->currentPos.x = player->state.goalPos.x;
-            player->currentPos.z = player->state.goalPos.z;
-            partner->currentPos.x = player->state.currentPos.x;
-            partner->currentPos.z = player->state.currentPos.z;
-            player->homePos.x = player->currentPos.x;
-            player->homePos.z = player->currentPos.z;
-            partner->homePos.x = partner->currentPos.x;
-            partner->homePos.z = partner->currentPos.z;
+            player->curPos.x = player->state.goalPos.x;
+            player->curPos.z = player->state.goalPos.z;
+            partner->curPos.x = player->state.curPos.x;
+            partner->curPos.z = player->state.curPos.z;
+            player->homePos.x = player->curPos.x;
+            player->homePos.z = player->curPos.z;
+            partner->homePos.x = partner->curPos.x;
+            partner->homePos.z = partner->curPos.z;
             gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_IN_BACK;
         case BTL_SUBSTATE_TWINK_MENU_CREATE_MAIN_MENU:
             gBattleStatus.flags1 |= BS_FLAGS1_MENU_OPEN;
@@ -4793,7 +4793,7 @@ void btl_state_update_twink_menu(void) {
             }
             if (selection != 0) {
                 set_animation(ACTOR_PARTNER, 0, ANIM_Twink_Angry);
-                battleStatus->currentSubmenu = battle_menu_submenuIDs[selection - 1];
+                battleStatus->curSubmenu = battle_menu_submenuIDs[selection - 1];
                 func_802A1030();
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
@@ -4807,7 +4807,7 @@ void btl_state_update_twink_menu(void) {
                 battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                 battleStatus->selectedMoveID = MOVE_TWINK_DASH;
                 battleStatus->moveArgument = 0;
-                battleStatus->currentTargetListFlags = gMoveTable[MOVE_TWINK_DASH].flags;
+                battleStatus->curTargetListFlags = gMoveTable[MOVE_TWINK_DASH].flags;
                 btl_set_state(BATTLE_STATE_SELECT_TARGET);
             }
             break;
@@ -4896,7 +4896,7 @@ void btl_state_update_select_target(void) {
             }
             player_create_target_list(actor);
             targetListLength = actor->targetListLength;
-            if (battleStatus->currentTargetListFlags & TARGET_FLAG_ENEMY) {
+            if (battleStatus->curTargetListFlags & TARGET_FLAG_ENEMY) {
                 targetIndexList = actor->targetIndexList;
                 for (i = 0; i < targetListLength; i++) {
                     target = &actor->targetData[targetIndexList[i]];
@@ -4907,7 +4907,7 @@ void btl_state_update_select_target(void) {
                 }
             }
 
-            if (battleStatus->currentTargetListFlags & TARGET_FLAG_80000000) {
+            if (battleStatus->curTargetListFlags & TARGET_FLAG_80000000) {
                 if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
                     gBattleSubState = battleStatus->acceptTargetMenuSubstate;
                     if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
@@ -4965,13 +4965,13 @@ void btl_state_update_select_target(void) {
                 }
             }
 
-            if (battleStatus->currentButtonsPressed & BUTTON_B) {
+            if (battleStatus->curButtonsPressed & BUTTON_B) {
                 sfx_play_sound(SOUND_MENU_BACK);
                 gBattleSubState = BTL_SUBSTATE_SELECT_TARGET_CANCEL;
                 break;
             }
 
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 sfx_play_sound(SOUND_MENU_NEXT);
                 D_802ACC60 = 8;
                 D_802ACC6C = 4;
@@ -4980,18 +4980,18 @@ void btl_state_update_select_target(void) {
             }
 
             gBattleStatus.flags1 |= BS_FLAGS1_MENU_OPEN;
-            if (battleStatus->currentButtonsDown & (BUTTON_Z | BUTTON_R)) {
+            if (battleStatus->curButtonsDown & (BUTTON_Z | BUTTON_R)) {
                 gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
                 break;
             }
 
-            if (battleStatus->currentTargetListFlags & TARGET_FLAG_ENEMY) {
+            if (battleStatus->curTargetListFlags & TARGET_FLAG_ENEMY) {
                 s32 oldSelectedTargetIndex = selectedTargetIndex;
 
-                if (battleStatus->currentButtonsHeld & BUTTON_STICK_LEFT) {
+                if (battleStatus->curButtonsHeld & BUTTON_STICK_LEFT) {
                     selectedTargetIndex--;
                 }
-                if (battleStatus->currentButtonsHeld & BUTTON_STICK_RIGHT) {
+                if (battleStatus->curButtonsHeld & BUTTON_STICK_RIGHT) {
                     selectedTargetIndex++;
                 }
                 if (selectedTargetIndex < 0) {
@@ -5115,7 +5115,7 @@ void btl_state_draw_select_target(void) {
     tmpPtr = &D_802ACC68;
 
     if (targetListLength != 0) {
-        if (battleStatus->currentTargetListFlags & TARGET_FLAG_ENEMY) {
+        if (battleStatus->curTargetListFlags & TARGET_FLAG_ENEMY) {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
             anotherActor = get_actor(target->actorID);
             id = D_802ACC70[0];
@@ -5169,14 +5169,14 @@ void btl_state_draw_select_target(void) {
             }
         }
 
-        currentPartner = playerData->currentPartner;
+        currentPartner = playerData->curPartner;
         screenX = 52;
         screenY = 64;
         if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
             currentPartner = PARTNER_TWINK;
         }
 
-        if ((battleStatus->currentTargetListFlags & TARGET_FLAG_ENEMY) || targetListLength == 1) {
+        if ((battleStatus->curTargetListFlags & TARGET_FLAG_ENEMY) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
                 msgWidth = get_msg_width(MSG_Menus_Battle_TargetMario, 0) + 10;
@@ -5208,7 +5208,7 @@ void btl_state_draw_select_target(void) {
 
         screenX += 4;
         screenY += 2;
-        if ((battleStatus->currentTargetListFlags & TARGET_FLAG_ENEMY) || targetListLength == 1) {
+        if ((battleStatus->curTargetListFlags & TARGET_FLAG_ENEMY) || targetListLength == 1) {
             actorID = target->actorID;
             if (actorID == ACTOR_PLAYER) {
                 draw_msg(MSG_Menus_Battle_TargetMario, screenX + D_802ACC68, screenY, 255, MSG_PAL_36, 0);

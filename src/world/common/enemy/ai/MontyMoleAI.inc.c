@@ -42,10 +42,10 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
     retVal = basic_ai_check_player_dist(territory, enemy, radius * 1.1, arg3, 0) != 0;
     // check npc facing angle for sight of player
     angle = 270.0f;
-    if (clamp_angle(get_clamped_angle_diff(cam->currentYaw, npc->yaw)) < 180.0) {
+    if (clamp_angle(get_clamped_angle_diff(cam->curYaw, npc->yaw)) < 180.0) {
         angle = 90.0f;
     }
-    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > 60.0) {
+    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z))) > 60.0) {
         retVal = FALSE;
     }
     // check for overlap with player
@@ -53,7 +53,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
         retVal = FALSE;
     }
     // check player elevation difference
-    if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
+    if (fabsf(npc->pos.y - gPlayerStatusPtr->pos.y) >= 40.0f) {
         retVal = FALSE;
     }
     // check for bow hiding
@@ -130,8 +130,8 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
 
     npc->flags &= ~NPC_FLAG_INVISIBLE;
     ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-    npc->currentAnim = ANIM_MontyMole_Anim10; // emerge from ground
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+    npc->curAnim = ANIM_MontyMole_Anim10; // emerge from ground
     npc->duration = 10;
     script->AI_TEMP_STATE = AI_STATE_MOLE_SURFACE;
 }
@@ -145,7 +145,7 @@ static void N(MontyMoleAI_Surface)(Evt* script, MobileAISettings* aiSettings, En
         enemy->flags &= ~MONTY_MOLE_UNK_NPC_FLAGS;
     }
     if (npc->duration <= 0) {
-        npc->currentAnim = ANIM_MontyMole_Anim18; // get and throw rock
+        npc->curAnim = ANIM_MontyMole_Anim18; // get and throw rock
         npc->duration = 10;
         script->AI_TEMP_STATE = AI_STATE_MOLE_DRAW_ROCK;
     }
@@ -160,11 +160,11 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, MobileAISettings* aiSettings, E
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->alertOffsetDist)) {
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteOut);
-            npc->currentAnim = ANIM_MontyMole_Anim01; // cancel attack
+            npc->curAnim = ANIM_MontyMole_Anim01; // cancel attack
             npc->duration = 30;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_PRE_BURROW;
         } else {
-            npc->currentAnim = ANIM_MontyMole_Anim1B; // throw rock
+            npc->curAnim = ANIM_MontyMole_Anim1B; // throw rock
             npc->duration = 15;
             script->AI_TEMP_STATE =  AI_STATE_MOLE_THROW_ROCK;
         }
@@ -185,13 +185,13 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, MobileAISettings* aiSettings, 
         rockEnemy->varTable[0] = 1;
     }
     if (moleNpc->duration < 8) {
-        if (dist2D(moleNpc->pos.x, moleNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > 100.0) {
-            moleNpc->currentAnim = ANIM_MontyMole_Anim15; // clap
+        if (dist2D(moleNpc->pos.x, moleNpc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z) > 100.0) {
+            moleNpc->curAnim = ANIM_MontyMole_Anim15; // clap
         }
     }
     if (moleNpc->duration <= 0) {
-        if (moleNpc->currentAnim != ANIM_MontyMole_Anim15) {
-            moleNpc->currentAnim = ANIM_MontyMole_Anim01;
+        if (moleNpc->curAnim != ANIM_MontyMole_Anim15) {
+            moleNpc->curAnim = ANIM_MontyMole_Anim01;
         }
         moleNpc->duration = 15;
         script->AI_TEMP_STATE = AI_STATE_MOLE_PRE_BURROW;
@@ -206,7 +206,7 @@ static void N(MontyMoleAI_PreBurrow)(Evt* script, MobileAISettings* aiSettings, 
     if (npc->duration <= 0) {
         ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
         npc->duration = 11;
-        npc->currentAnim = ANIM_MontyMole_Anim11; // retreat into ground
+        npc->curAnim = ANIM_MontyMole_Anim11; // retreat into ground
         script->AI_TEMP_STATE = AI_STATE_MOLE_BURROW;
     }
 }

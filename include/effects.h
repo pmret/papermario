@@ -70,12 +70,12 @@ typedef struct FlowerFXData {
     /* 0x18 */ Vec3f scale;
     /* 0x24 */ Vec3f rot;
     /* 0x30 */ Mtx transformMtx;
-    /* 0x70 */ f32 velocityScaleA;
-    /* 0x74 */ f32 velocityScaleB;
+    /* 0x70 */ f32 velScaleA;
+    /* 0x74 */ f32 velScaleB;
     /* 0x78 */ f32 visibilityAmt;   // when this is zero, the flower can vanish. may have once controlled alpha.
     /* 0x7C */ f32 unk_7C;
     /* 0x80 */ f32 integrator[4];
-    /* 0x90 */ VecXZf velocity;
+    /* 0x90 */ VecXZf vel;
 } FlowerFXData; // size = 0x98
 
 typedef struct CloudPuffFXData {
@@ -833,7 +833,7 @@ typedef struct LightRaysFXData {
     /* 0x50 */ f32 unk_50;
     /* 0x54 */ f32 unk_54;
     /* 0x58 */ f32 unk_58;
-    /* 0x5C */ Vec3f rotation;
+    /* 0x5C */ Vec3f rot;
     /* 0x68 */ f32 unk_68;
     /* 0x6C */ f32 unk_6C;
     /* 0x70 */ Vec3f initialRot;
@@ -1746,7 +1746,7 @@ typedef struct ThrowSpinyFXData {
     /* 0x48 */ f32 gravity;
     /* 0x4C */ f32 unk_4C;
     /* 0x50 */ f32 yaw;
-    /* 0x54 */ f32 rotationSpeed;
+    /* 0x54 */ f32 rotSpeed;
     /* 0x58 */ f32 xScale;
     /* 0x5C */ f32 yScale;
     /* 0x60 */ u32 state;
@@ -2065,7 +2065,7 @@ typedef struct StaticStatusFXData {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 frame; // not visible when negative
-    /* 0x24 */ f32 rotation;
+    /* 0x24 */ f32 rot;
     /* 0x28 */ s32 timeLeft;
     /* 0x2C */ s32 lifetime;
     /* 0x30 */ s32 alpha;
@@ -2125,7 +2125,7 @@ typedef struct Effect75FXData {
 typedef struct FireworkRocketFXData {
     /* 0x00 */ s32 variation;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f velocity;
+    /* 0x10 */ Vec3f vel;
     /* 0x1C */ s32 timeLeft;
     /* 0x20 */ s32 lifeTime;
     /* 0x24 */ s32 r;
@@ -2142,9 +2142,9 @@ typedef struct FireworkRocketFXData {
     /* 0x50 */ f32 rocketX[4];
     /* 0x60 */ f32 rocketY[4];
     /* 0x70 */ f32 rocketZ[4];
-    /* 0x80 */ f32 rocketVelocityX[4];
-    /* 0x90 */ f32 rocketVelocityY[4];
-    /* 0xA0 */ f32 rocketVelocityZ[4];
+    /* 0x80 */ f32 rocketVelX[4];
+    /* 0x90 */ f32 rocketVelY[4];
+    /* 0xA0 */ f32 rocketVelZ[4];
 } FireworkRocketFXData; // size = 0xB0
 
 typedef struct PeachStarBeamSpirit {
@@ -2168,8 +2168,8 @@ typedef struct PeachStarBeamFXData {
     /* 0x34 */ s32 envA;
     /* 0x38 */ f32 beamScale;
     /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ f32 rotationSpeed;
-    /* 0x44 */ f32 rotationAngle;
+    /* 0x40 */ f32 rotSpeed;
+    /* 0x44 */ f32 rotAngle;
     /* 0x48 */ f32 circleRadius;
     /* 0x4C */ Vec3f circleCenter;
     /* 0x58 */ f32 twinkYOffset;
@@ -2207,7 +2207,7 @@ typedef struct IceShardFXData {
     /* 0x18 */ Color4i primCol;
     /* 0x28 */ Color4i envCol;
     /* 0x38 */ f32 scale;
-    /* 0x3C */ f32 rotation;
+    /* 0x3C */ f32 rot;
     /* 0x40 */ f32 angularVel;
     /* 0x44 */ f32 animFrame;
     /* 0x48 */ f32 animRate;
@@ -2332,7 +2332,7 @@ typedef struct PartnerBuffFXData {
 
 typedef struct QuizmoAssistantFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f position;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ s32 vanishTimer;
     /* 0x14 */ s32 lifetime;
     /* 0x18 */ s32 fadeInAmt; // 0 = all-black, FF = fully-visible

@@ -19,14 +19,14 @@ API_CALLABLE(N(UnusedChasePlayer)) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         npc->moveSpeed = 3.7f;
-        npc->yaw = atan2(posX, posZ, playerStatus->position.x, playerStatus->position.z);
+        npc->yaw = atan2(posX, posZ, playerStatus->pos.x, playerStatus->pos.z);
         script->functionTemp[1] = 0;
         npc->duration = 15;
     }
 
     if (script->functionTemp[1] == 0) {
         if (npc->duration == 0) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             npc->duration = 15;
         }
         npc->duration--;

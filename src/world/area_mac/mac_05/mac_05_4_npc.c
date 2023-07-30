@@ -211,9 +211,9 @@ API_CALLABLE(N(func_80242C78_854DE8)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            gPlayerStatus.position.x = x;
-            gPlayerStatus.position.y = y;
-            gPlayerStatus.position.z = z;
+            gPlayerStatus.pos.x = x;
+            gPlayerStatus.pos.y = y;
+            gPlayerStatus.pos.z = z;
             npc0->colliderPos.x = npc0->pos.x;
             npc0->colliderPos.y = npc0->pos.y;
             npc0->colliderPos.z = npc0->pos.z;
@@ -267,7 +267,7 @@ API_CALLABLE(N(func_80242E84_854FF4)) {
 
     switch (script->functionTemp[2]) {
         case 0:
-            npc->currentAnim = ANIM_Kolorado_Idle;
+            npc->curAnim = ANIM_Kolorado_Idle;
             npc->yaw -= 1.0f;
             npc->pos.x += 3.0f;
             script->functionTemp[1]--;
@@ -1219,9 +1219,9 @@ API_CALLABLE(N(func_80243254_8553C4)) {
         return ApiStatus_DONE2;
     }
 
-    theta = clamp_angle(atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
-    x = playerStatus->position.x + (sin_deg(theta) * 40.0f);
-    z = playerStatus->position.z - (cos_deg(theta) * 40.0f);
+    theta = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    x = playerStatus->pos.x + (sin_deg(theta) * 40.0f);
+    z = playerStatus->pos.z - (cos_deg(theta) * 40.0f);
     evt_set_variable(script, outVar0, x);
     evt_set_variable(script, outVar1, z);
     return ApiStatus_DONE2;

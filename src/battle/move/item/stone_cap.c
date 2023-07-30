@@ -26,9 +26,9 @@ API_CALLABLE(N(func_802A123C_7217DC)) {
 
         case 1:
             for (i = 0; i < 10; i++) {
-                f32 x = player->currentPos.x + ((rand_int(20) - 10) * player->scalingFactor);
-                f32 y = player->currentPos.y + ((rand_int(20) + 10) * player->scalingFactor);
-                f32 z = player->currentPos.z + 5.0f;
+                f32 x = player->curPos.x + ((rand_int(20) - 10) * player->scalingFactor);
+                f32 y = player->curPos.y + ((rand_int(20) + 10) * player->scalingFactor);
+                f32 z = player->curPos.z + 5.0f;
                 fx_floating_cloud_puff(0, x, y, z, 1.0f, 25);
             }
 

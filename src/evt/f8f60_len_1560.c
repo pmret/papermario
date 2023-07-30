@@ -65,7 +65,7 @@ ApiStatus GetAngleToNPC(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *args++;
 
     Npc* npc = resolve_npc(script, npcID);
-    evt_set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
+    evt_set_variable(script, outVar, atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
 
     return ApiStatus_DONE2;
 }
@@ -78,7 +78,7 @@ ApiStatus GetAngleToPlayer(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *args++;
 
     Npc* npc = resolve_npc(script, npcID);
-    evt_set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
+    evt_set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z));
 
     return ApiStatus_DONE2;
 }
@@ -100,7 +100,7 @@ ApiStatus AwaitPlayerApproach(Evt* script, s32 isInitialCall) {
     }
 
     distance = dist2D(
-                   playerStatus->position.x, playerStatus->position.z,
+                   playerStatus->pos.x, playerStatus->pos.z,
                    *targetX, *targetZ
                );
 
@@ -130,7 +130,7 @@ ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
     }
 
     distance = dist2D(
-                   playerStatus->position.x, playerStatus->position.z,
+                   playerStatus->pos.x, playerStatus->pos.z,
                    *targetX, *targetZ
                );
 
@@ -159,7 +159,7 @@ ApiStatus AwaitPlayerLeave(Evt* script, s32 isInitialCall) {
     }
 
     distance = dist2D(
-                   playerStatus->position.x, playerStatus->position.z,
+                   playerStatus->pos.x, playerStatus->pos.z,
                    *targetX, *targetZ
                );
 

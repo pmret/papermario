@@ -41,7 +41,7 @@ void handle_floor_behavior(void) {
         colliderType = D_80109480;
     }
 
-    D_80109480 = get_collider_flags((u16)gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+    D_80109480 = get_collider_flags((u16)gCollisionStatus.curFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
 
     if (playerStatus->actionState != ACTION_STATE_JUMP) {
         colliderType = D_80109480;
@@ -90,9 +90,9 @@ void surface_standard_behavior(void) {
         (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) &&
         D_8010CFF4 >= 10)
     {
-        x = playerStatus->position.x;
-        y = playerStatus->position.y + 0.0f;
-        z = playerStatus->position.z;
+        x = playerStatus->pos.x;
+        y = playerStatus->pos.y + 0.0f;
+        z = playerStatus->pos.z;
         if (!cond) {
             fx_landing_dust(0, x, y, z, D_80109484);
         } else {
@@ -102,33 +102,33 @@ void surface_standard_behavior(void) {
     } else if (
         (playerStatus->actionState == ACTION_STATE_SPIN_POUND || playerStatus->actionState == ACTION_STATE_TORNADO_POUND) && (playerStatus->flags & PS_FLAG_SPECIAL_LAND))
     {
-        x = playerStatus->position.x;
-        y = playerStatus->position.y + 0.0f;
-        z = playerStatus->position.z;
+        x = playerStatus->pos.x;
+        y = playerStatus->pos.y + 0.0f;
+        z = playerStatus->pos.z;
         if (!cond) {
             fx_landing_dust(0, x, y, z, D_80109484);
         } else {
             fx_misc_particles(3, x, y, z, playerStatus->colliderDiameter, 10.0f, 1.0f, 5, 40);
         }
-    } else if (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->currentSpeed != 0.0f) {
+    } else if (playerStatus->actionState == ACTION_STATE_SPIN && playerStatus->curSpeed != 0.0f) {
         if (D_80109488++ >= 4) {
             D_80109488 = 2;
             if (cond) {
                 sin_cos_rad(DEG_TO_RAD(clamp_angle(playerStatus->targetYaw)), &sinTheta, &cosTheta);
                 fx_misc_particles(
                     3,
-                    playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta),
-                    playerStatus->position.y + 1.5f,
-                    playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta),
+                    playerStatus->pos.x + (playerStatus->colliderDiameter * sinTheta),
+                    playerStatus->pos.y + 1.5f,
+                    playerStatus->pos.z + (playerStatus->colliderDiameter * cosTheta),
                     13.0f, 10.0f, 1.0f, 5, 30
                 );
             } else {
-                sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sinTheta, &cosTheta);
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sinTheta, &cosTheta);
                 fx_walking_dust(
                     0,
-                    playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * 0.2f),
-                    playerStatus->position.y + 1.5f,
-                    playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * 0.2f),
+                    playerStatus->pos.x + (playerStatus->colliderDiameter * sinTheta * 0.2f),
+                    playerStatus->pos.y + 1.5f,
+                    playerStatus->pos.z + (playerStatus->colliderDiameter * cosTheta * 0.2f),
                     sinTheta, cosTheta
                 );
             }
@@ -144,21 +144,21 @@ void surface_standard_behavior(void) {
         if (D_80109488++ >= 4) {
             D_80109488 = 0;
             if (!cond) {
-                sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sinTheta, &cosTheta);
+                sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sinTheta, &cosTheta);
                 fx_walking_dust(
                     0,
-                    playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * 0.2f),
-                    playerStatus->position.y + 1.5f,
-                    playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * 0.2f),
+                    playerStatus->pos.x + (playerStatus->colliderDiameter * sinTheta * 0.2f),
+                    playerStatus->pos.y + 1.5f,
+                    playerStatus->pos.z + (playerStatus->colliderDiameter * cosTheta * 0.2f),
                     sinTheta, cosTheta
                 );
             } else {
                 sin_cos_rad(DEG_TO_RAD(clamp_angle(playerStatus->targetYaw)), &sinTheta, &cosTheta);
                 fx_misc_particles(
                     3,
-                    playerStatus->position.x + (playerStatus->currentSpeed * sinTheta),
-                    playerStatus->position.y + 1.5f,
-                    playerStatus->position.z + (playerStatus->currentSpeed * cosTheta),
+                    playerStatus->pos.x + (playerStatus->curSpeed * sinTheta),
+                    playerStatus->pos.y + 1.5f,
+                    playerStatus->pos.z + (playerStatus->curSpeed * cosTheta),
                     13.0f, 10.0f, 1.0f, 5, 30
                 );
             }
@@ -172,10 +172,10 @@ void surface_flowers_behavior(void) {
     f32 t1;
 
     if (playerStatus->actionState == ACTION_STATE_JUMP && playerStatus->timeInAir == 1 && D_80109492 == 5) {
-        z = playerStatus->position.z; // TODO weird use of temps required to match
-        x = playerStatus->position.y + 14.0f;
+        z = playerStatus->pos.z; // TODO weird use of temps required to match
+        x = playerStatus->pos.y + 14.0f;
         y = D_8010948C;
-        fx_flower_splash(playerStatus->position.x, x, z, y);
+        fx_flower_splash(playerStatus->pos.x, x, z, y);
         D_8010948C = clamp_angle(D_8010948C + 35.0f);
         D_80109492 = 0;
         return;
@@ -197,15 +197,15 @@ void surface_flowers_behavior(void) {
     if (D_80109490++ > 0) {
         f32 colliderDiameter;
         D_80109490 = 0;
-        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sin, &cos);
 
         colliderDiameter = playerStatus->colliderDiameter;
 
-        x = playerStatus->position.x + (colliderDiameter * sin * -0.4f);
-        z = playerStatus->position.z + (colliderDiameter * cos * -0.4f);
-        y = playerStatus->position.y + 15.5f;
+        x = playerStatus->pos.x + (colliderDiameter * sin * -0.4f);
+        z = playerStatus->pos.z + (colliderDiameter * cos * -0.4f);
+        y = playerStatus->pos.y + 15.5f;
 
-        fx_flower_trail(0, x, y, z, -playerStatus->currentYaw + rand_int(10) - 5.0f, D_80109494);
+        fx_flower_trail(0, x, y, z, -playerStatus->curYaw + rand_int(10) - 5.0f, D_80109494);
         D_80109494 = !D_80109494;
     }
 }
@@ -225,9 +225,9 @@ void surface_cloud_behavior(void) {
         D_8010CFF4 >= 10)
     {
         fx_cloud_puff(
-            playerStatus->position.x,
-            (playerStatus->position.y + 14.0f) - 5.0f,
-            playerStatus->position.z, D_80109498
+            playerStatus->pos.x,
+            (playerStatus->pos.y + 14.0f) - 5.0f,
+            playerStatus->pos.z, D_80109498
         );
         D_80109498 = clamp_angle(D_80109498 + 35.0f);
 
@@ -236,12 +236,12 @@ void surface_cloud_behavior(void) {
             zTemp = rand_int(10) - 5;
             yTemp = -2.0f - ((SQ(xTemp) + SQ(zTemp)) / 5.0f);
             D_8010949C = 0;
-            sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw + (i * 90))), &sinTheta, &cosTheta);
+            sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw + (i * 90))), &sinTheta, &cosTheta);
             fx_cloud_trail(
                 0,
-                playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * -0.3f) + xTemp,
-                playerStatus->position.y + 15.5f + yTemp,
-                playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * -0.3f) + zTemp
+                playerStatus->pos.x + (playerStatus->colliderDiameter * sinTheta * -0.3f) + xTemp,
+                playerStatus->pos.y + 15.5f + yTemp,
+                playerStatus->pos.z + (playerStatus->colliderDiameter * cosTheta * -0.3f) + zTemp
             );
         }
     } else {
@@ -255,12 +255,12 @@ void surface_cloud_behavior(void) {
         zTemp2 = rand_int(10) - 5;
         yTemp2 = -2.0f - ((SQ(xTemp2) + SQ(zTemp2)) / 5.0f);
         D_8010949C = 0;
-        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sinTheta, &cosTheta);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sinTheta, &cosTheta);
         fx_cloud_trail(
             1,
-            playerStatus->position.x + (playerStatus->colliderDiameter * sinTheta * -0.3f) + xTemp2,
-            playerStatus->position.y + 15.5f + yTemp2,
-            playerStatus->position.z + (playerStatus->colliderDiameter * cosTheta * -0.3f) + zTemp2
+            playerStatus->pos.x + (playerStatus->colliderDiameter * sinTheta * -0.3f) + xTemp2,
+            playerStatus->pos.y + 15.5f + yTemp2,
+            playerStatus->pos.z + (playerStatus->colliderDiameter * cosTheta * -0.3f) + zTemp2
         );
     }
 }
@@ -281,12 +281,12 @@ void surface_snow_behavior(void) {
 
     if (D_801094A4++ >= 4) {
         D_801094A4 = 0;
-        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sin, &cos);
         fx_footprint(
-            playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
-            playerStatus->position.y + 1.5f,
-            playerStatus->position.z + (playerStatus->colliderDiameter * cos * 0.2f),
-            -playerStatus->currentYaw,
+            playerStatus->pos.x + (playerStatus->colliderDiameter * sin * 0.2f),
+            playerStatus->pos.y + 1.5f,
+            playerStatus->pos.z + (playerStatus->colliderDiameter * cos * 0.2f),
+            -playerStatus->curYaw,
             D_801094A8
         );
         D_801094A8 = !D_801094A8;
@@ -309,12 +309,12 @@ void surface_hedges_behavior(void) {
 
     if (D_801094AC++ >= 4) {
         D_801094AC = 0;
-        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sin, &cos);
         fx_falling_leaves(
             0,
-            playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
+            playerStatus->pos.x + (playerStatus->colliderDiameter * sin * 0.2f),
             40.0f,
-            playerStatus->position.z + (playerStatus->colliderDiameter * cos * 0.2f)
+            playerStatus->pos.z + (playerStatus->colliderDiameter * cos * 0.2f)
         );
     }
 }
@@ -335,12 +335,12 @@ void surface_water_behavior(void) {
 
     if (D_801094AE++ >= 4) {
         D_801094AE = 0;
-        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->currentYaw)), &sin, &cos);
+        sin_cos_rad(DEG_TO_RAD(clamp_angle(-playerStatus->curYaw)), &sin, &cos);
         fx_rising_bubble(
             0,
-            playerStatus->position.x + (playerStatus->colliderDiameter * sin * 0.2f),
-            playerStatus->position.y + 0.0f,
-            playerStatus->position.z + (playerStatus->colliderDiameter * cos * 0.2f),
+            playerStatus->pos.x + (playerStatus->colliderDiameter * sin * 0.2f),
+            playerStatus->pos.y + 0.0f,
+            playerStatus->pos.z + (playerStatus->colliderDiameter * cos * 0.2f),
             0.0f
         );
     }

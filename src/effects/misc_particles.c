@@ -187,8 +187,8 @@ void misc_particles_update(EffectInstance* effect) {
     posX = particle->pos.x;
     posY = particle->pos.y;
     posZ = particle->pos.z;
-    temp_cos = cos_deg(gCameras[gCurrentCameraID].currentYaw);
-    temp_sin = sin_deg(gCameras[gCurrentCameraID].currentYaw);
+    temp_cos = cos_deg(gCameras[gCurrentCameraID].curYaw);
+    temp_sin = sin_deg(gCameras[gCurrentCameraID].curYaw);
     innerColorR = particle->innerColor.r;
     innerColorG = particle->innerColor.g;
     innerColorB = particle->innerColor.b;
@@ -288,7 +288,7 @@ void misc_particles_render(EffectInstance* effect) {
 
     renderTask.appendGfx = misc_particles_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 7;
+    renderTask.dist = 7;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -314,7 +314,7 @@ void misc_particles_appendGfx(void* effect) {
     particle++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, particle++) {
         if (particle->animTime >= 0) {
-            guPositionF(mtxTransform, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, particle->scale * alphaScale, particle->pos.x, particle->pos.y, particle->pos.z);
+            guPositionF(mtxTransform, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, particle->scale * alphaScale, particle->pos.x, particle->pos.y, particle->pos.z);
             guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

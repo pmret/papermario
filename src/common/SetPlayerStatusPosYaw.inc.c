@@ -7,9 +7,9 @@ API_CALLABLE(N(SetPlayerStatusPosYaw)) {
     f32 z = evt_get_float_variable(script, *args++);
     f32 yaw = evt_get_float_variable(script, *args++);
 
-    gPlayerStatus.position.x = x;
-    gPlayerStatus.position.y = y;
-    gPlayerStatus.position.z = z;
+    gPlayerStatus.pos.x = x;
+    gPlayerStatus.pos.y = y;
+    gPlayerStatus.pos.z = z;
     gPlayerStatus.targetYaw = yaw;
     return ApiStatus_DONE2;
 }

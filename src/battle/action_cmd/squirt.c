@@ -131,7 +131,7 @@ void N(update)(void) {
             cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
             temp = actionCommandStatus->barFillLevel / cutoff;
             if (actionCommandStatus->unk_5C == 0) {
-                if (!(battleStatus->currentButtonsDown & BUTTON_A)) {
+                if (!(battleStatus->curButtonsDown & BUTTON_A)) {
                     actionCommandStatus->barFillLevel -= D_802A9760_42A480[temp / 20];
                     if (actionCommandStatus->barFillLevel < 0) {
                         actionCommandStatus->barFillLevel = 0;

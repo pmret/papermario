@@ -223,7 +223,7 @@ void windy_leaves_render(EffectInstance* effect) {
 
     renderTask.appendGfx = windy_leaves_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -245,7 +245,7 @@ void windy_leaves_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09001180_33E790);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, part->alpha);
     guTranslateF(sp18, part->unk_04.x, part->unk_04.y, part->unk_04.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
 
     part++;

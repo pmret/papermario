@@ -27,20 +27,20 @@ void N(worker_render_player_reflection)(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z,
                           &screenX, &screenY, &screenZ);
 
         renderTaskPtr->renderMode = playerStatus->renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->appendGfx = &N(appendGfx_test_player_reflection);
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }
 
 void N(appendGfx_test_player_reflection)(void* data) {
     PlayerStatus* playerStatus = data;
-    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].curYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -55,7 +55,7 @@ void N(appendGfx_test_player_reflection)(void* data) {
     guMtxCatF(main, rotation, main);
     guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
-    guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
+    guTranslateF(translation, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z);
     guMtxCatF(main, translation, main);
     spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation, 1.0f);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, NULL, main);

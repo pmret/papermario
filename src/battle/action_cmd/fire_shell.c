@@ -118,16 +118,16 @@ void N(update)(void) {
                     actionCommandStatus->barFillLevel = 0;
                 }
                 if (!actionCommandStatus->isBarFilled) {
-                    if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+                    if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
                         actionCommandStatus->unk_5C = 1;
                     }
 
-                    if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && (actionCommandStatus->unk_5C != 0)) {
+                    if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && (actionCommandStatus->unk_5C != 0)) {
                         actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 950) / 100;
                         actionCommandStatus->unk_5C = 0;
                     }
 
-                    if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
+                    if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
                         actionCommandStatus->barFillLevel -= (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 950) / 100;
                     }
                 }

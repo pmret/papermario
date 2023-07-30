@@ -10,7 +10,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
     battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
     battleStatus->selectedMoveID = MOVE_POWER_BOUNCE;
     battleStatus->moveArgument = gCurrentEncounter.hitTier;
-    battleStatus->currentTargetListFlags = gMoveTable[MOVE_POWER_BOUNCE].flags;
+    battleStatus->curTargetListFlags = gMoveTable[MOVE_POWER_BOUNCE].flags;
 
     player_create_target_list(player);
     player->selectedTargetIndex = 1;

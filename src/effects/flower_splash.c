@@ -25,13 +25,13 @@ void flower_splash_update_part_transform(FlowerFXData* effect) {
 }
 
 void flower_splash_update_part(FlowerFXData* effect) {
-    effect->velocityScaleA *= 0.85;
-    effect->pos.x += effect->velocityScaleA * effect->velocity.x;
+    effect->velScaleA *= 0.85;
+    effect->pos.x += effect->velScaleA * effect->vel.x;
     effect->integrator[2] += effect->integrator[3];
     effect->integrator[1] += effect->integrator[2];
     effect->integrator[0] += effect->integrator[1];
     effect->pos.y += effect->integrator[0];
-    effect->pos.z += effect->velocityScaleA * effect->velocity.z;
+    effect->pos.z += effect->velScaleA * effect->vel.z;
 
     if (effect->integrator[0] < 0.0f) {
         effect->integrator[2] = 0.004f;
@@ -69,7 +69,7 @@ void flower_splash_main(f32 posX, f32 posY, f32 posZ, f32 angle) {
     for (i = 0; i < numParts; i++, part++) {
         part->alive = TRUE;
         part->rot.y = angle + (i * 72);
-        part->velocityScaleB = 0.29999998f;
+        part->velScaleB = 0.29999998f;
         part->visibilityAmt = 0.0f;
         part->unk_7C = 0.0f;
 
@@ -92,10 +92,10 @@ void flower_splash_main(f32 posX, f32 posY, f32 posZ, f32 angle) {
         part->integrator[2] = 0.0f;
         part->integrator[3] = 0.0f;
 
-        part->velocityScaleA = -3.9f;
+        part->velScaleA = -3.9f;
         partAngle = clamp_angle(part->rot.y);
-        part->velocity.x = sin_deg(partAngle);
-        part->velocity.z = cos_deg(partAngle);
+        part->vel.x = sin_deg(partAngle);
+        part->vel.z = cos_deg(partAngle);
     }
 }
 
@@ -131,7 +131,7 @@ void flower_splash_render(EffectInstance* effect) {
 
     renderTask.appendGfx = flower_splash_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);

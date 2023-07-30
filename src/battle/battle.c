@@ -188,7 +188,7 @@ void setup_demo_player(void) {
         playerData->partners[i].level = 2;
     }
 
-    playerData->currentPartner = PARTNER_GOOMBARIO;
+    playerData->curPartner = PARTNER_GOOMBARIO;
 
     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
         playerData->badges[i] = 0;
@@ -257,25 +257,25 @@ void load_demo_battle(u32 index) {
         case 1:
             setup_demo_player();
             mode = 0;
-            playerData->currentPartner = PARTNER_BOW;
+            playerData->curPartner = PARTNER_BOW;
             battleID = BTL_DIG_FORMATION_01;
             break;
         case 2:
             setup_demo_player();
             mode = 0;
-            playerData->currentPartner = PARTNER_PARAKARRY;
+            playerData->curPartner = PARTNER_PARAKARRY;
             gGameStatusPtr->demoFlags |= 2;
             battleID = BTL_DIG_FORMATION_02;
             break;
         case 3:
             setup_demo_player();
             mode = 0;
-            playerData->currentPartner = PARTNER_WATT;
+            playerData->curPartner = PARTNER_WATT;
             battleID = BTL_DIG_FORMATION_03;
             break;
         case 4:
             setup_demo_player();
-            playerData->currentPartner = PARTNER_KOOPER;
+            playerData->curPartner = PARTNER_KOOPER;
             gGameStatusPtr->demoFlags |= 4;
             mode = 0;
             battleID = BTL_DIG_FORMATION_04;

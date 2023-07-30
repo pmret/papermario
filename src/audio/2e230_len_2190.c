@@ -212,7 +212,7 @@ void au_update_clients_2(void) {
 
     if (sfxManager->fadeInfo.fadeTime != 0) {
         au_fade_update(&sfxManager->fadeInfo);
-        au_fade_set_volume(sfxManager->busId, sfxManager->fadeInfo.currentVolume.u16, sfxManager->busVolume);
+        au_fade_set_volume(sfxManager->busId, sfxManager->fadeInfo.curVolume.u16, sfxManager->busVolume);
     }
 
     sfxManager->nextUpdateCounter -= sfxManager->nextUpdateStep;
@@ -398,12 +398,12 @@ f32 au_compute_pitch_ratio(s32 pitch) {
 }
 
 void au_fade_init(Fade* fade, s32 time, s32 startValue, s32 endValue) {
-    fade->currentVolume.s32 = startValue * 0x10000;
+    fade->curVolume.s32 = startValue * 0x10000;
     fade->targetVolume = endValue;
 
     if (time != 0) {
         fade->fadeTime = (time * 1000) / AU_5750;
-        fade->fadeStep = (endValue * 0x10000 - fade->currentVolume.s32) / fade->fadeTime;
+        fade->fadeStep = (endValue * 0x10000 - fade->curVolume.s32) / fade->fadeTime;
     } else {
         fade->fadeTime = 1;
         fade->fadeStep = 0;
@@ -422,9 +422,9 @@ void au_fade_update(Fade* fade) {
     fade->fadeTime--;
 
     if ((fade->fadeTime << 0x10) != 0) {
-        fade->currentVolume.s32 += fade->fadeStep;
+        fade->curVolume.s32 += fade->fadeStep;
     } else {
-        fade->currentVolume.s32 = fade->targetVolume << 0x10;
+        fade->curVolume.s32 = fade->targetVolume << 0x10;
         if (fade->onCompleteCallback != NULL) {
             fade->onCompleteCallback();
             fade->fadeStep = 0;
@@ -441,7 +441,7 @@ void func_80053AC8(Fade* fade) {
     if (fade->fadeTime == 0) {
         fade->fadeTime = 1;
         fade->fadeStep = 0;
-        fade->targetVolume = fade->currentVolume.u16;
+        fade->targetVolume = fade->curVolume.u16;
     }
 }
 

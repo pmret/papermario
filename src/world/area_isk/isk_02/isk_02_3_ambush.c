@@ -9,7 +9,7 @@ API_CALLABLE(N(AwaitPlayerMummyAmbush)) {
     f32 x = evt_get_variable(script, *args++);
     f32 y = evt_get_variable(script, *args++);
 
-    if (dist2D(x, y, gPlayerStatus.position.x, gPlayerStatus.position.z) > 250.0f) {
+    if (dist2D(x, y, gPlayerStatus.pos.x, gPlayerStatus.pos.z) > 250.0f) {
         script->varTable[0] = FALSE;
     } else {
         script->varTable[0] = TRUE;

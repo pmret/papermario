@@ -157,7 +157,7 @@ void explosion_render(EffectInstance* effect) {
 
     renderTask.appendGfx = explosion_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -176,7 +176,7 @@ void explosion_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

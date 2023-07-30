@@ -1,14 +1,14 @@
 #include "dgb_05.h"
 
 API_CALLABLE(N(AwaitFallInHole)) {
-    if (gPlayerStatus.position.y >= -210.0f) {
+    if (gPlayerStatus.pos.y >= -210.0f) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(AwaitFallDownHole)) {
-    if (gPlayerStatus.position.y > -270.0f) {
+    if (gPlayerStatus.pos.y > -270.0f) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE2;

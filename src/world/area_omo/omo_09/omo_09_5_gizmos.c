@@ -90,7 +90,7 @@ MovingBlock N(MovingBlockPlatforms)[] = {
 };
 
 API_CALLABLE(N(AwaitPlayerNearPlatforms)) {
-    if (gPlayerStatus.position.x < 850.0f) {
+    if (gPlayerStatus.pos.x < 850.0f) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE2;

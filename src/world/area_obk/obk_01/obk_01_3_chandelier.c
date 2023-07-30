@@ -261,9 +261,9 @@ API_CALLABLE(N(UpdateChandelier)) {
     }
 
     if (chandelier->flags & CHANDELIER_FLAG_TETHER_PLAYER) {
-        playerStatus->position.x = (-sin_deg(chandelier->swingAngle) * (chandelier->dropDistance - 300.0f)) + 445.0f;
-        playerStatus->position.y = ((cos_deg(chandelier->swingAngle) * (chandelier->dropDistance - 300.0f)) - 135.0f) + 300.0f;
-        playerStatus->position.z = 279.0f;
+        playerStatus->pos.x = (-sin_deg(chandelier->swingAngle) * (chandelier->dropDistance - 300.0f)) + 445.0f;
+        playerStatus->pos.y = ((cos_deg(chandelier->swingAngle) * (chandelier->dropDistance - 300.0f)) - 135.0f) + 300.0f;
+        playerStatus->pos.z = 279.0f;
     }
     return ApiStatus_BLOCK;
 }

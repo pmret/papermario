@@ -77,7 +77,7 @@ ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
     animModel->scale.x = 1.0f;
     animModel->scale.y = 1.0f;
     animModel->scale.z = 1.0f;
-    animModel->currentAnimData = NULL;
+    animModel->curAnimData = NULL;
     guMtxIdent(&animModel->mtx);
 
     return ApiStatus_DONE2;
@@ -101,7 +101,7 @@ ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
     animModel->scale.x = 1.0f;
     animModel->scale.y = 1.0f;
     animModel->scale.z = 1.0f;
-    animModel->currentAnimData = NULL;
+    animModel->curAnimData = NULL;
     guMtxIdent(&animModel->mtx);
 
     return ApiStatus_DONE2;
@@ -113,7 +113,7 @@ ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
     s16* var2 = (s16*) evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
-    model->currentAnimData = var2;
+    model->curAnimData = var2;
     play_model_animation(model->animModelID, var2);
 
     return ApiStatus_DONE2;
@@ -126,7 +126,7 @@ ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
-    model->currentAnimData = var2;
+    model->curAnimData = var2;
     play_model_animation_starting_from(model->animModelID, var2, var3);
 
     return ApiStatus_DONE2;
@@ -138,11 +138,11 @@ ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall) {
     s16* var2 = (s16*) evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
-    if (model->currentAnimData == var2) {
+    if (model->curAnimData == var2) {
         return ApiStatus_DONE2;
     }
 
-    model->currentAnimData = var2;
+    model->curAnimData = var2;
     play_model_animation(model->animModelID, var2);
     return ApiStatus_DONE2;
 }
@@ -312,9 +312,9 @@ ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall) {
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[listIndex];
     AnimatorNode* node = get_animator_node_with_id(get_animator_by_index(model->animModelID), treeIndex);
 
-    evt_set_variable(script, outX, node->rotation.x);
-    evt_set_variable(script, outY, node->rotation.y);
-    evt_set_variable(script, outZ, node->rotation.z);
+    evt_set_variable(script, outX, node->rot.x);
+    evt_set_variable(script, outY, node->rot.y);
+    evt_set_variable(script, outZ, node->rot.z);
 
     return ApiStatus_DONE2;
 }
@@ -348,9 +348,9 @@ ApiStatus GetAnimatedRotationByTreeIndex(Evt* script, s32 isInitialCall) {
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[listIndex];
     AnimatorNode* node = get_animator_node_for_tree_index(get_animator_by_index(model->animModelID), treeIndex);
 
-    evt_set_variable(script, outX, node->rotation.x);
-    evt_set_variable(script, outY, node->rotation.y);
-    evt_set_variable(script, outZ, node->rotation.z);
+    evt_set_variable(script, outX, node->rot.x);
+    evt_set_variable(script, outY, node->rot.y);
+    evt_set_variable(script, outZ, node->rot.z);
 
     return ApiStatus_DONE2;
 }

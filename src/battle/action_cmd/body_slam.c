@@ -120,7 +120,7 @@ void N(update)(void) {
         case 11:
             btl_set_popup_duration(99);
 
-            if (battleStatus->currentButtonsDown & BUTTON_A) {
+            if (battleStatus->curButtonsDown & BUTTON_A) {
                 actionCommandStatus->barFillLevel += 154;
                 actionCommandStatus->thresholdLevel += 154;
             } else {

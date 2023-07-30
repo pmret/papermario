@@ -49,7 +49,7 @@ void entity_base_block_setupGfx(s32 entityIndex) {
 }
 
 void entity_base_block_play_vanish_effect(Entity* entity) {
-    fx_cold_breath(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+    fx_cold_breath(0, entity->pos.x, entity->pos.y, entity->pos.z, 1.0f, 0x3C);
 }
 
 f32 entity_block_hit_init_scale(Entity* entity) {
@@ -58,12 +58,12 @@ f32 entity_block_hit_init_scale(Entity* entity) {
         entity->scale.y = 0.23f;
         entity->scale.x = 1.04f;
         entity->scale.z = 1.04f;
-        entity->position.y += 18.0f;
+        entity->pos.y += 18.0f;
     } else {
         entity->scale.y = 0.46f;
         entity->scale.x = 2.08f;
         entity->scale.z = 2.08f;
-        entity->position.y += 18.0f;
+        entity->pos.y += 18.0f;
     }
 }
 
@@ -73,12 +73,12 @@ void entity_block_hit_animate_scale(Entity* entity) {
         entity->scale.x -= 0.09;
         entity->scale.z -= 0.09;
         entity->scale.y += 0.045;
-        entity->position.y -= 3.0f;
+        entity->pos.y -= 3.0f;
     } else {
         entity->scale.x -= 0.18;
         entity->scale.z -= 0.18;
         entity->scale.y += 0.09;
-        entity->position.y -= 3.0f;
+        entity->pos.y -= 3.0f;
     }
     entity_base_block_idle(entity);
 }
@@ -99,10 +99,10 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             return;
         }
 
-        if (entity->position.y < data->initialY - 25.0f) {
-            deltaY = (entity->position.y - data->initialY + 50.0f) * 0.125f;
+        if (entity->pos.y < data->initialY - 25.0f) {
+            deltaY = (entity->pos.y - data->initialY + 50.0f) * 0.125f;
         } else {
-            deltaY = (data->initialY - entity->position.y) * 0.125f;
+            deltaY = (data->initialY - entity->pos.y) * 0.125f;
         }
 
         if (deltaY > 1.2) {
@@ -112,10 +112,10 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             deltaY = 0.3f;
         }
 
-        entity->position.y += deltaY;
+        entity->pos.y += deltaY;
 
-        if (data->initialY < entity->position.y) {
-            entity->position.y = data->initialY;
+        if (data->initialY < entity->pos.y) {
+            entity->pos.y = data->initialY;
             data->sinkingTimer = -1;
             entity->flags &= ~ENTITY_FLAG_200000;
         }
@@ -124,10 +124,10 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             if (!(playerStatus->flags & PS_FLAG_JUMPING)) {
                 Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
                 if (shadow != NULL) {
-                    f32 temp2 = entity->position.y - shadow->position.y;
+                    f32 temp2 = entity->pos.y - shadow->pos.y;
 
-                    if (entity->position.y - temp2 <= playerStatus->colliderHeight + 1) {
-                        entity->position.y = playerStatus->colliderHeight + 1;
+                    if (entity->pos.y - temp2 <= playerStatus->colliderHeight + 1) {
+                        entity->pos.y = playerStatus->colliderHeight + 1;
                         data->sinkingTimer = 1;
                     }
                 }
@@ -139,8 +139,8 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
         } else {
             Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
             if (shadow != NULL) {
-                if (entity->position.y <= shadow->position.y) {
-                    entity->position.y = shadow->position.y;
+                if (entity->pos.y <= shadow->pos.y) {
+                    entity->pos.y = shadow->pos.y;
                     data->sinkingTimer = 1;
                 }
             }
@@ -151,10 +151,10 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             return;
         }
 
-        if (entity->position.y < data->initialY - 25.0f) {
-            deltaY = (entity->position.y - data->initialY + 50.0f) * 0.125f;
+        if (entity->pos.y < data->initialY - 25.0f) {
+            deltaY = (entity->pos.y - data->initialY + 50.0f) * 0.125f;
         } else {
-            deltaY = (data->initialY - entity->position.y) * 0.125f;
+            deltaY = (data->initialY - entity->pos.y) * 0.125f;
         }
 
         if (deltaY > 1.2) {
@@ -164,10 +164,10 @@ void entity_base_block_update_slow_sinking(Entity* entity) {
             deltaY = 0.3f;
         }
 
-        entity->position.y -= deltaY;
+        entity->pos.y -= deltaY;
 
-        if (entity->position.y < data->initialY - 50.0f) {
-            entity->position.y = data->initialY - 50.0f;
+        if (entity->pos.y < data->initialY - 50.0f) {
+            entity->pos.y = data->initialY - 50.0f;
             data->sinkingTimer = 1;
         }
     }
@@ -183,7 +183,7 @@ s32 entity_base_block_idle(Entity* entity) {
             entity_base_block_update_slow_sinking(entity);
             if (data->item != -1) {
                 ItemEntity* itemEntity = get_item_entity(data->item);
-                itemEntity->position.y = entity->position.y + 4.0f;
+                itemEntity->pos.y = entity->pos.y + 4.0f;
             }
         }
     }
@@ -195,7 +195,7 @@ void entity_base_block_init(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
     data->item = -1;
-    data->initialY = entity->position.y;
+    data->initialY = entity->pos.y;
     data->sinkingTimer = -1;
     entity->flags &= ~ENTITY_FLAG_200000;
 }
@@ -211,8 +211,8 @@ void entity_inactive_block_hit_anim(Entity* entity) {
     f64 currentY;
 
     entity_MulticoinBlock_update_timer(entity);
-    currentY = entity->position.y;
-    entity->position.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)) * 2);
+    currentY = entity->pos.y;
+    entity->pos.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)) * 2);
     data->recoilInterpPhase += 60.0f;
     if (data->recoilInterpPhase > 450.0f) {
         data->recoilInterpPhase = clamp_angle(data->recoilInterpPhase);
@@ -225,12 +225,12 @@ void entity_inactive_block_recoil_anim(Entity* entity) {
     f64 currentY;
 
     entity_MulticoinBlock_update_timer(entity);
-    currentY = entity->position.y;
-    entity->position.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)));
+    currentY = entity->pos.y;
+    entity->pos.y = currentY + ((f64)sin_rad(DEG_TO_RAD(data->recoilInterpPhase)));
     data->recoilInterpPhase += 60.0f;
     if (data->recoilInterpPhase >= 360.0f) {
         data->recoilInterpPhase = 0.0f;
-        entity->position.y = data->initialY;
+        entity->pos.y = data->initialY;
         exec_entity_commandlist(entity);
     }
 }
@@ -258,7 +258,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
             itemSpawnMode = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
             flagIndex = 0;
         }
-        make_item_entity_nodelay(ITEM_COIN, entity->position.x, entity->position.y + 28.0, entity->position.z,
+        make_item_entity_nodelay(ITEM_COIN, entity->pos.x, entity->pos.y + 28.0, entity->pos.z,
             itemSpawnMode, flagIndex);
         data->coinsLeft -= 1;
     }
@@ -266,8 +266,8 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
     if ((data->coinsLeft == 0) || (data->timeLeft == 0)) {
         data->empty = TRUE;
         set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock,
-            (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z,
-            (s32)entity->rotation.y, MAKE_ENTITY_END)), Entity_CreatedInertBlock_Script);
+            (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z,
+            (s32)entity->rot.y, MAKE_ENTITY_END)), Entity_CreatedInertBlock_Script);
         entity->flags |= (ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_PENDING_INSTANCE_DELETE);
     }
 }
@@ -296,7 +296,7 @@ void entity_MulticoinBlock_idle(Entity* entity) {
     entity_MulticoinBlock_update_timer(entity);
     entity_base_block_idle(entity);
     if (data->empty) {
-        create_entity(&Entity_InertYellowBlock, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END);
+        create_entity(&Entity_InertYellowBlock, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, (s32)entity->rot.y, MAKE_ENTITY_END);
         entity->flags |= (ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_PENDING_INSTANCE_DELETE);
     }
 }
@@ -306,7 +306,7 @@ void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
 
     if (data->gameFlagIndex != 0xFFFF) {
         if (get_global_flag(data->gameFlagIndex) != 0) {
-            create_entity(&Entity_InertYellowBlock, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, (s32)entity->rotation.y, MAKE_ENTITY_END);
+            create_entity(&Entity_InertYellowBlock, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, (s32)entity->rot.y, MAKE_ENTITY_END);
             entity->flags |= (ENTITY_FLAG_DISABLE_COLLISION | ENTITY_FLAG_PENDING_INSTANCE_DELETE);
         }
     }
@@ -388,7 +388,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return TRUE;
             }
             set_entity_commandlist(entity, Entity_BreakingBlock_Script);
-            sfx_play_sound_at_position(SOUND_14F, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_14F, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
             break;
         case ENTITY_TYPE_HAMMER2_BLOCK:
         case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
@@ -403,7 +403,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return TRUE;
             }
             set_entity_commandlist(entity, Entity_BreakingBlock_Script);
-            sfx_play_sound_at_position(SOUND_150, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_150, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
             break;
         case ENTITY_TYPE_HAMMER3_BLOCK:
         case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
@@ -411,7 +411,7 @@ s32 entity_block_handle_collision(Entity* entity) {
                 return TRUE;
             }
             set_entity_commandlist(entity, Entity_BreakingBlock_Script);
-            sfx_play_sound_at_position(SOUND_151, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_151, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
             break;
         case ENTITY_TYPE_MULTI_TRIGGER_BLOCK:
         case ENTITY_TYPE_HEALING_BLOCK:
@@ -441,7 +441,7 @@ void entity_init_HammerBlock_small(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
     data->item = -1;
-    data->initialY = entity->position.y;
+    data->initialY = entity->pos.y;
     data->sinkingTimer = -1;
     entity->flags &= ~ENTITY_FLAG_200000;
     entity->scale.x = 0.5f;

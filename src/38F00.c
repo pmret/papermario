@@ -105,7 +105,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
             npc->duration = evt_get_variable(script, LVar1);
             script->functionTemp[1] = evt_get_variable(script, LVar2);
             script->functionTemp[2] = evt_get_variable(script, LVar3) / 2;
-            npc->currentAnim = script->varTable[10];
+            npc->curAnim = script->varTable[10];
             script->functionTemp[0] = 1;
             break;
         case 1:
@@ -115,10 +115,10 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
                 }
 
                 if (npc->duration == 0) {
-                    if (sqrtf(SQ((playerStatus->position.x - npc->pos.x)) +
-                            SQ((playerStatus->position.y - npc->pos.y)) +
-                            SQ((playerStatus->position.z - npc->pos.z))) <= npc->planarFlyDist) {
-                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                    if (sqrtf(SQ((playerStatus->pos.x - npc->pos.x)) +
+                            SQ((playerStatus->pos.y - npc->pos.y)) +
+                            SQ((playerStatus->pos.z - npc->pos.z))) <= npc->planarFlyDist) {
+                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
 
                         if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {
@@ -127,8 +127,8 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
                         }
                     }
                 } else {
-                    if (dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) <= npc->planarFlyDist) {
-                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                    if (dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) <= npc->planarFlyDist) {
+                        targetDir = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                         npcYaw = script->functionTemp[1] == -1 ? npc->yaw : script->functionTemp[1];
 
                         if (fabsf(get_clamped_angle_diff(npcYaw, targetDir)) < script->functionTemp[2]) {

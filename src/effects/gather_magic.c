@@ -144,7 +144,7 @@ void gather_magic_render(EffectInstance* effect) {
 
     renderTask.appendGfx = gather_magic_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
     retTask = queue_render_task(&renderTask);
@@ -165,7 +165,7 @@ void gather_magic_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
-    guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp98, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp98, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

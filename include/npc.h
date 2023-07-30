@@ -117,7 +117,7 @@ typedef void (*FireBarCallback)(struct FireBarData*, s32);
 
 typedef struct FireBarAISettings {
     /* 0x00 */ Vec3i centerPos;
-    /* 0x0C */ s32 rotationRate;
+    /* 0x0C */ s32 rotRate;
     /* 0x10 */ s32 firstNpc;
     /* 0x14 */ s32 npcCount;
     /* 0x18 */ FireBarCallback callback;
@@ -126,7 +126,7 @@ typedef struct FireBarAISettings {
 typedef struct FireBarData {
     /* 0x00 */ s32 flags;
     /* 0x04 */ Vec3f centerPos;
-    /* 0x10 */ f32 rotationRate;
+    /* 0x10 */ f32 rotRate;
     /* 0x14 */ s32 firstNpc;
     /* 0x18 */ s32 npcCount;
     /* 0x1C */ FireBarCallback callback;
@@ -391,16 +391,16 @@ typedef struct EncounterStatus {
     /* 0x014 */ s32 songID;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
-    /* 0x01D */ s8 currentAreaIndex;
-    /* 0x01E */ u8 currentMapIndex;
-    /* 0x01F */ u8 currentEntryIndex;
+    /* 0x01D */ s8 curAreaIndex;
+    /* 0x01E */ u8 curMapIndex;
+    /* 0x01F */ u8 curEntryIndex;
     /* 0x020 */ s8 mapID;
     /* 0x021 */ s8 resetMapEncounterFlags;
     /* 0x021 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;
     /* 0x028 */ Encounter* encounterList[24];
-    /* 0x088 */ Encounter* currentEncounter;
-    /* 0x08C */ Enemy* currentEnemy;
+    /* 0x088 */ Encounter* curEncounter;
+    /* 0x08C */ Enemy* curEnemy;
     /* 0x090 */ s32 fadeOutAmount;
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 fadeOutAccel;

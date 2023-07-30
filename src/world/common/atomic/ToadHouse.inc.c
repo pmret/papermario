@@ -43,7 +43,7 @@ API_CALLABLE(N(ToadHouse_AwaitScriptComplete)) {
 }
 
 API_CALLABLE(N(ToadHouse_PartnerSuspendAbilityScript)) {
-    if (gPlayerData.currentPartner == PARTNER_NONE) {
+    if (gPlayerData.curPartner == PARTNER_NONE) {
         return ApiStatus_DONE2;
     }
     partner_suspend_ability_script();
@@ -87,7 +87,7 @@ API_CALLABLE(N(ToadHouse_PutPartnerAway)) {
     Bytecode* args = script->ptrReadPos;
     Bytecode saveToVar = *args++;
 
-    evt_set_variable(script, saveToVar, gPlayerData.currentPartner);
+    evt_set_variable(script, saveToVar, gPlayerData.curPartner);
     switch_to_partner(PARTNER_NONE);
     return ApiStatus_DONE2;
 }
