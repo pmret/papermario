@@ -221,12 +221,8 @@ class Converter:
 
             # header (struct BackgroundHeader)
             for i, palette in enumerate(palettes):
-                out_bytes += (baseaddr + palettes_len + headers_len).to_bytes(
-                    4, byteorder="big"
-                )  # raster offset
-                out_bytes += (baseaddr + headers_len + 0x200 * i).to_bytes(
-                    4, byteorder="big"
-                )  # palette offset
+                out_bytes += (baseaddr + palettes_len + headers_len).to_bytes(4, byteorder="big")  # raster offset
+                out_bytes += (baseaddr + headers_len + 0x200 * i).to_bytes(4, byteorder="big")  # palette offset
                 out_bytes += (12).to_bytes(2, byteorder="big")  # startX
                 out_bytes += (20).to_bytes(2, byteorder="big")  # startY
                 out_bytes += (out_width).to_bytes(2, byteorder="big")  # width
@@ -263,8 +259,6 @@ if __name__ == "__main__":
     flip_x = "--flip-x" in argv
     flip_y = "--flip-y" in argv
 
-    (out_bytes, out_width, out_height) = Converter(
-        mode, infile, flip_x, flip_y
-    ).convert()
+    (out_bytes, out_width, out_height) = Converter(mode, infile, flip_x, flip_y).convert()
     with open(argv[3], "wb") as f:
         f.write(out_bytes)

@@ -12,9 +12,7 @@ for root, dirs, files in os.walk("assets/us/mapfs/geom"):
         if file.endswith("_shape.bin"):
             total += 1
             shape_file = os.path.join(root, file)
-            built_data_file = Path("ver/us/build") / shape_file.replace(
-                "_shape.bin", "_shape_data.bin"
-            )
+            built_data_file = Path("ver/us/build") / shape_file.replace("_shape.bin", "_shape_data.bin")
 
             if filecmp.cmp(shape_file, built_data_file, shallow=False):
                 matching += 1

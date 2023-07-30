@@ -5,32 +5,35 @@ import re
 import sys
 from pathlib import Path
 
+
 def strip_c_comments(text):
     def replacer(match):
         s = match.group(0)
-        if s.startswith('/'):
+        if s.startswith("/"):
             return " "
         else:
             return s
+
     pattern = re.compile(
         r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-        re.DOTALL | re.MULTILINE
+        re.DOTALL | re.MULTILINE,
     )
     return re.sub(pattern, replacer, text)
 
-c_func_pattern = re.compile(
-    r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+{",
-    re.MULTILINE
-)
+
+c_func_pattern = re.compile(r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+{", re.MULTILINE)
+
+
 def funcs_in_c(text):
     return (match.group(2) for match in c_func_pattern.finditer(text))
 
-asm_func_pattern = re.compile(
-    r"INCLUDE_ASM\([^,]+, [^,]+, ([^,)]+)",
-    re.MULTILINE
-)
+
+asm_func_pattern = re.compile(r"INCLUDE_ASM\([^,]+, [^,]+, ([^,)]+)", re.MULTILINE)
+
+
 def include_asms_in_c(text):
     return (match.group(1) for match in asm_func_pattern.finditer(text))
+
 
 def stuff(version):
     DIR = os.path.dirname(__file__)
@@ -75,6 +78,7 @@ def stuff(version):
                 for folder in list(os.walk(NONMATCHINGS_DIR)):
                     if not os.listdir(folder[0]):
                         os.removedirs(folder[0])
+
 
 stuff("jp")
 stuff("us")

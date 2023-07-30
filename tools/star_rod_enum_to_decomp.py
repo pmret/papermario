@@ -12,11 +12,11 @@ def create_enum(file_content, prefix, ordering):
     max_size = 0
 
     if ordering:
-        for (key, value) in re.findall(r'(\S+)\s+=\s+(\S+)', file_content):
+        for key, value in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
             if len(key) > max_size:
                 max_size = len(key)
     else:
-        for (key, value) in re.findall(r'(\S+)\s+=\s+(\S+)', file_content):
+        for key, value in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
             if len(value) > max_size:
                 max_size = len(value)
 
@@ -25,15 +25,25 @@ def create_enum(file_content, prefix, ordering):
     else:
         prefix = ""
 
-    for (key, value) in re.findall(r'(\S+)\s+=\s+(\S+)', file_content):
+    for key, value in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
         if ordering:
-            key = '_'.join(re.sub(r'([A-Z]{1,2})', r' \1', key).split()).replace("N_P_C", "NPC").replace("__", "_").replace("-", "")
-            key = prefix.upper() + '_{:<{width}}'.format(key, width=max_size + 2).upper()
-            ret += "    " + key + " = 0x" + '{:>{fill}{width}}'.format(value, fill=0, width=8) + ",\n"
+            key = (
+                "_".join(re.sub(r"([A-Z]{1,2})", r" \1", key).split())
+                .replace("N_P_C", "NPC")
+                .replace("__", "_")
+                .replace("-", "")
+            )
+            key = prefix.upper() + "_{:<{width}}".format(key, width=max_size + 2).upper()
+            ret += "    " + key + " = 0x" + "{:>{fill}{width}}".format(value, fill=0, width=8) + ",\n"
         else:
-            value = '_'.join(re.sub(r'([A-Z]{1,2})', r' \1', value).split()).replace("N_P_C", "NPC").replace("__", "_").replace("-", "")
-            value = prefix.upper() + '_{:<{width}}'.format(value, width=max_size + 2).upper()
-            ret += "    " + value + " = 0x" + '{:>{fill}{width}}'.format(key, fill=0, width=8) + ",\n"
+            value = (
+                "_".join(re.sub(r"([A-Z]{1,2})", r" \1", value).split())
+                .replace("N_P_C", "NPC")
+                .replace("__", "_")
+                .replace("-", "")
+            )
+            value = prefix.upper() + "_{:<{width}}".format(value, width=max_size + 2).upper()
+            ret += "    " + value + " = 0x" + "{:>{fill}{width}}".format(key, fill=0, width=8) + ",\n"
 
     ret += "};\n"
 
@@ -51,9 +61,9 @@ def single_translation(file_path):
         print("File not found at the given path.")
         return "t", "y"
 
-    enum_namespace = re.search(r'(\w*)\s+%\s+namespace', file_content).group(1)
-    enum_name = re.search(r'(\w*)\s+%\s+library name', file_content).group(1)
-    reversed_order = re.search(r'(\w*)\s+%\s+reversed', file_content).group(1)
+    enum_namespace = re.search(r"(\w*)\s+%\s+namespace", file_content).group(1)
+    enum_name = re.search(r"(\w*)\s+%\s+library name", file_content).group(1)
+    reversed_order = re.search(r"(\w*)\s+%\s+reversed", file_content).group(1)
     ret += "enum " + enum_name + " {\n"
 
     if reversed_order == "true":
@@ -76,9 +86,9 @@ def recursive_translation(database_path):
         except:
             continue
 
-        enum_namespace = re.search(r'(\w*)\s+%\s+namespace', file_content).group(1)
-        enum_name = re.search(r'(\w*)\s+%\s+library name', file_content).group(1)
-        reversed_order = re.search(r'(\w*)\s+%\s+reversed', file_content).group(1)
+        enum_namespace = re.search(r"(\w*)\s+%\s+namespace", file_content).group(1)
+        enum_name = re.search(r"(\w*)\s+%\s+library name", file_content).group(1)
+        reversed_order = re.search(r"(\w*)\s+%\s+reversed", file_content).group(1)
         ret += "enum " + enum_name + " {\n"
 
         if reversed_order == "true":
@@ -106,9 +116,17 @@ def main(args):
     file.close()
 
 
-parser = argparse.ArgumentParser(description='Convert a StarRod enum into an enum that is in a decomp compatible format')
+parser = argparse.ArgumentParser(
+    description="Convert a StarRod enum into an enum that is in a decomp compatible format"
+)
 parser.add_argument("query", help="StarRod enum file or folder")
-parser.add_argument("-r", "--recursive", help="recursively convert all files to enums", type=bool, required=False)
+parser.add_argument(
+    "-r",
+    "--recursive",
+    help="recursively convert all files to enums",
+    type=bool,
+    required=False,
+)
 
 args = parser.parse_args()
 

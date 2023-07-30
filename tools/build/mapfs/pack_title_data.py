@@ -3,7 +3,7 @@
 from sys import argv
 
 if __name__ == "__main__":
-    argv.pop(0) # python3
+    argv.pop(0)  # python3
 
     if len(argv) > 4:
         out, img1, img2, img3, img2_pal = argv

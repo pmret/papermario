@@ -13,9 +13,7 @@ sys.path.append("tools")
 from old.update_evts import parse_symbol_addrs
 from tools.disasm_script import ScriptDisassembler, get_constants
 
-parser = argparse.ArgumentParser(
-    description="Diff EVT macros."
-)
+parser = argparse.ArgumentParser(description="Diff EVT macros.")
 
 parser.add_argument(
     "start",
@@ -26,21 +24,13 @@ parser.add_argument(
     "-w",
     "--watch",
     action="store_true",
-    help="Watch for file changes and update the diff automatically."
+    help="Watch for file changes and update the diff automatically.",
 )
 
-parser.add_argument(
-    "-m",
-    "--make",
-    action="store_true",
-    help="Run ninja automatically."
-)
+parser.add_argument("-m", "--make", action="store_true", help="Run ninja automatically.")
 
-parser.add_argument(
-    "-o",
-    action="store_true",
-    help="Ignored for compatibility with diff.py."
-)
+parser.add_argument("-o", action="store_true", help="Ignored for compatibility with diff.py.")
+
 
 class EvtDisplay(Display):
     def __init__(self, start):
@@ -106,10 +96,12 @@ class EvtDisplay(Display):
         refresh_key = (current, target)
         return (output, refresh_key)
 
-class FakeConfig():
+
+class FakeConfig:
     def __init__(self, args):
         self.make = args.make
         self.source_extensions = ["c", "h"]
+
 
 def run_ninja():
     return subprocess.run(
@@ -117,6 +109,7 @@ def run_ninja():
         stderr=subprocess.PIPE,
         stdout=subprocess.PIPE,
     )
+
 
 def main():
     args = parser.parse_args()
@@ -153,8 +146,7 @@ def main():
                     ret = run_ninja()
                     if ret.returncode != 0:
                         display.update(
-                            ret.stderr.decode("utf-8-sig", "replace")
-                            or ret.stdout.decode("utf-8-sig", "replace"),
+                            ret.stderr.decode("utf-8-sig", "replace") or ret.stdout.decode("utf-8-sig", "replace"),
                             error=True,
                         )
                         continue
@@ -163,6 +155,7 @@ def main():
             display.terminate()
     else:
         display.run_sync()
+
 
 if __name__ == "__main__":
     main()

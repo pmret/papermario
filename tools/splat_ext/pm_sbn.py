@@ -56,9 +56,7 @@ class SBN:
         entry_addr = header.tableOffset
         seen_entry_offsets = set()
         for i in range(header.numEntries):
-            entry = SBNFileEntry(
-                *struct.unpack_from(SBNFileEntry.fstring, data, entry_addr)
-            )
+            entry = SBNFileEntry(*struct.unpack_from(SBNFileEntry.fstring, data, entry_addr))
             entry_addr += SBNFileEntry.length
 
             # Check for duplicate entry offsets
@@ -152,9 +150,7 @@ class SBN:
             else:
                 raise ValueError("Unsupported file extension")
 
-            entry = SBNFileEntry(
-                offset=current_file_offset, fmt=format, size=file.fakesize
-            )
+            entry = SBNFileEntry(offset=current_file_offset, fmt=format, size=file.fakesize)
 
             struct.pack_into(
                 SBNFileEntry.fstring,
@@ -222,9 +218,7 @@ class SBN:
 
         with open(path / "sbn.yaml", "w") as f:
             # Filename->ID map
-            f.write(
-                "# Mapping of filenames to entry IDs. Use 'id: auto' to automatically assign a unique ID.\n"
-            )
+            f.write("# Mapping of filenames to entry IDs. Use 'id: auto' to automatically assign a unique ID.\n")
             f.write(
                 """
 # 'fakesize is an interesting case. In the final ROM, the size of a file is stored in the file header and the entry table.
@@ -267,9 +261,7 @@ class SBN:
             f.write("\n")
 
             # INIT mseqs
-            f.write(
-                "# AuGlobals::mseqFileList. Not sure why there's non-MSEQ files here!\n"
-            )
+            f.write("# AuGlobals::mseqFileList. Not sure why there's non-MSEQ files here!\n")
             f.write("mseqs:\n")
             for id, entry in enumerate(self.init.mseq_entries):
                 f.write(f"  - id: 0x{id:02x}\n")
@@ -357,9 +349,7 @@ class SBN:
                     assert type(bk_file) == str
                     bk_file_ids.append(self.lookup_file_id(bk_file))
 
-            init_song_entry = InitSongEntry(
-                file_id, bk_file_ids[0], bk_file_ids[1], bk_file_ids[2]
-            )
+            init_song_entry = InitSongEntry(file_id, bk_file_ids[0], bk_file_ids[1], bk_file_ids[2])
 
             # Replace self.init.song_entries[id]
             if id < len(self.init.song_entries):
@@ -562,9 +552,7 @@ class INIT:
         song_addr = header.tblOffset
         song_number = 0
         while True:
-            song = InitSongEntry(
-                *struct.unpack_from(InitSongEntry.fstring, data, song_addr)
-            )
+            song = InitSongEntry(*struct.unpack_from(InitSongEntry.fstring, data, song_addr))
 
             if song.bgmFileIndex == 0xFFFF:
                 break
@@ -590,9 +578,7 @@ class INIT:
         entries_len = header.entriesSize // 4 - 1
 
         for i in range(entries_len):
-            entry = BufferEntry(
-                *struct.unpack_from(BufferEntry.fstring, data, entries_addr)
-            )
+            entry = BufferEntry(*struct.unpack_from(BufferEntry.fstring, data, entries_addr))
             entries_addr += BufferEntry.length
 
             self.bk_entries.append(entry)
@@ -708,9 +694,7 @@ if splat_loaded:
             out = options.opts.asset_path / self.dir / (self.name + ".sbn")
 
             sbn = SBN()
-            config_files = sbn.read(
-                dir
-            )  # TODO: LayeredFS/AssetsFS read, supporting merges
+            config_files = sbn.read(dir)  # TODO: LayeredFS/AssetsFS read, supporting merges
             inputs = config_files + [dir / f.file_name() for f in sbn.files]
             return [
                 LinkerEntry(

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     mode = sys.argv[2]
 
     syms_to_max = {
-        "entity_data_vram_end" : [
+        "entity_data_vram_end": [
             "entity_default_VRAM_END",
             "entity_jan_iwa_VRAM_END",
             "entity_sbk_omo_VRAM_END",
@@ -44,7 +44,7 @@ if __name__ == "__main__":
             "world_action_use_spinning_flower_VRAM_END",
             "world_action_use_tweester_VRAM_END",
             "world_action_sneaky_parasol_VRAM_END",
-        ]
+        ],
     }
 
     addrs: Dict[str, List[int]] = {}
@@ -80,7 +80,9 @@ if __name__ == "__main__":
 
     out_addrs = {sym: max(addrs[sym]) for sym in addrs}
 
-    out_addrs["entity_data_vram_end"] = out_addrs["entity_data_vram_end"] + out_addrs["world_action_vram_end"] - HARDCODED_ADDR
+    out_addrs["entity_data_vram_end"] = (
+        out_addrs["entity_data_vram_end"] + out_addrs["world_action_vram_end"] - HARDCODED_ADDR
+    )
 
     out = ""
     for sym in out_addrs:

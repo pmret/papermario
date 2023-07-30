@@ -8,10 +8,12 @@ from pathlib import Path
 import struct
 from typing import List, Literal
 
+
 class LightMode(Enum):
     UNIFORM = 0
     LINEAR = 4
     QUADRATIC = 8
+
 
 @dataclass
 class Light:
@@ -83,9 +85,14 @@ def groups_from_json(data) -> List[SpriteShadingGroup]:
         )
     return groups
 
-def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "little"]="big",
-          matching: bool = True):
 
+def build(
+    input: Path,
+    bin_out: Path,
+    header_out: Path,
+    endian: Literal["big", "little"] = "big",
+    matching: bool = True,
+):
     END = ">" if endian == "big" else "<"
 
     with open(input, "r") as f:
@@ -145,11 +152,11 @@ def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "
 
     offsets_table.extend(profile_lists)
     if matching:
-        offsets_table += b'\0' * (0x1D0 - len(offsets_table)) # Pad to 0x1D0
+        offsets_table += b"\0" * (0x1D0 - len(offsets_table))  # Pad to 0x1D0
 
     final_data = offsets_table + data_table
     if matching:
-        final_data += b'\0' * (0xE70 - len(final_data)) # Pad to 0xE70
+        final_data += b"\0" * (0xE70 - len(final_data))  # Pad to 0xE70
 
     with open(bin_out, "wb") as f:
         f.write(final_data)

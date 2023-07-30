@@ -6,6 +6,7 @@ import re
 import msgpack
 import os
 
+
 class Message:
     def __init__(self, d: dict, header_file_index: int):
         self.section = d.get("section")
@@ -13,6 +14,7 @@ class Message:
         self.name = d.get("name")
         self.bytes = d["bytes"]
         self.header_file_index = header_file_index
+
 
 if __name__ == "__main__":
     if len(argv) < 3:
@@ -22,7 +24,7 @@ if __name__ == "__main__":
     _, outfile, header_file, *infiles = argv
 
     messages = []
-    #header_files = []
+    # header_files = []
 
     for i, infile in enumerate(infiles):
         # if infile == "--headers":
@@ -34,12 +36,12 @@ if __name__ == "__main__":
 
     with open(outfile, "wb") as f:
         # sectioned+indexed, followed by just sectioned, followed by just indexed, followed by named (unsectioned & unindexed)
-        #messages.sort(key=lambda msg: bool(msg.section)<<2 + bool(msg.index))
+        # messages.sort(key=lambda msg: bool(msg.section)<<2 + bool(msg.index))
 
         names = set()
 
         sections = []
-        #messages_by_file = {}
+        # messages_by_file = {}
 
         for message in messages:
             if message.section is None:
@@ -64,10 +66,10 @@ if __name__ == "__main__":
             #     else:
             #         names.add(message.name)
 
-                # if message.header_file_index in messages_by_file:
-                #     messages_by_file[message.header_file_index].add(message)
-                # else:
-                #     messages_by_file[message.header_file_index] = set([message])
+            # if message.header_file_index in messages_by_file:
+            #     messages_by_file[message.header_file_index].add(message)
+            # else:
+            #     messages_by_file[message.header_file_index] = set([message])
 
             if message.index in section:
                 print(f"warning: multiple messages allocated to id {section_idx:02X}:{message.index:03X}")
@@ -77,7 +79,7 @@ if __name__ == "__main__":
 
             section[message.index] = message
 
-        f.seek((len(sections) + 1) * 4) # skip past table of contents
+        f.seek((len(sections) + 1) * 4)  # skip past table of contents
 
         section_offsets = []
         for section in sections:
@@ -97,21 +99,15 @@ if __name__ == "__main__":
 
             # padding
             while f.tell() % 0x10 != 0:
-                f.write(b'\0\0\0\0')
+                f.write(b"\0\0\0\0")
 
         f.seek(0)
         for offset in section_offsets:
             f.write(offset.to_bytes(4, byteorder="big"))
-        f.write(b'\0\0\0\0')
+        f.write(b"\0\0\0\0")
 
     with open(header_file, "w") as f:
-        f.write(
-            f"#ifndef _MESSAGE_IDS_H_\n"
-            f"#define _MESSAGE_IDS_H_\n"
-            "\n"
-            '#include "messages.h"\n'
-            "\n"
-        )
+        f.write(f"#ifndef _MESSAGE_IDS_H_\n" f"#define _MESSAGE_IDS_H_\n" "\n" '#include "messages.h"\n' "\n")
 
         for message in messages:
             if message.name:
