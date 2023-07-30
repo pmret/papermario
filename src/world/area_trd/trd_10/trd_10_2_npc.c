@@ -3,7 +3,7 @@
 extern EvtScript N(EVS_BossDefeated);
 
 API_CALLABLE(N(IsPartnerBombette)) {
-    if (gPlayerData.currentPartner == PARTNER_BOMBETTE) {
+    if (gPlayerData.curPartner == PARTNER_BOMBETTE) {
         script->varTable[0] = TRUE;
     } else {
         script->varTable[0] = FALSE;

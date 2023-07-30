@@ -112,7 +112,7 @@ void big_smoke_puff_render(EffectInstance* effect) {
 
     renderTask.appendGfx = big_smoke_puff_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -128,7 +128,7 @@ void big_smoke_puff_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, data->x, data->y, data->z);
+    guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, data->x, data->y, data->z);
     guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++,

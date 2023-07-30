@@ -7,7 +7,7 @@ API_CALLABLE(N(GetRunToPos)) {
     f32 npcAngle;
     f32 angle;
 
-    angle = atan2(183.0f, -75.0f, playerStatus->position.x, playerStatus->position.z);
+    angle = atan2(183.0f, -75.0f, playerStatus->pos.x, playerStatus->pos.z);
     npcAngle = atan2(183.0f, -75.0f, npc->pos.x, npc->pos.z);
     angle = get_clamped_angle_diff(npcAngle, angle);
     rand = rand_int(10) + 30;

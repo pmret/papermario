@@ -13,7 +13,7 @@ void N(MeleeHitbox_30)(Evt* script) {
     if (npc->turnAroundYawAdjustment == 0) {
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_PRE;
         npc->duration = enemy->AI_VAR_MELEE_PRE_TIME;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_PRE;
     }
 }
@@ -26,7 +26,7 @@ void N(MeleeHitbox_31)(Evt* script) {
     if (npc->duration <= 0) {
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_ACTIVE;
         npc->duration = enemy->AI_VAR_MELEE_HIT_TIME;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
         script->AI_TEMP_STATE = AI_STATE_MELEE_HITBOX_ACTIVE;
     }
 }
@@ -39,7 +39,7 @@ void N(MeleeHitbox_32)(Evt* script) {
     npc->duration--;
     if (npc->duration <= 0) {
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_POST;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = enemy->AI_VAR_MELEE_MISS_TIME;
         if (enemy->AI_VAR_MELEE_MISS_TIME >= 8) {
             fx_emote(EMOTE_FRUSTRATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, enemy->AI_VAR_MELEE_MISS_TIME - 1, &emoteTemp);
@@ -67,22 +67,22 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
     f32 angle;
     s32 ret = TRUE;
 
-    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > hitboxEnemy->AI_VAR_HITNPC_2) {
+    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z) > hitboxEnemy->AI_VAR_HITNPC_2) {
         ret = FALSE;
     }
 
-    if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
+    if (clamp_angle(get_clamped_angle_diff(camera->curYaw, npc->yaw)) < 180.0) {
         angle = 90.0f;
     } else {
         angle = 270.0f;
     }
 
-    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                     gPlayerStatusPtr->position.z))) > hitboxEnemy->AI_VAR_HITNPC_3) {
+    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+                                     gPlayerStatusPtr->pos.z))) > hitboxEnemy->AI_VAR_HITNPC_3) {
         ret = FALSE;
     }
 
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y)) {
+    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->pos.y)) {
         ret = FALSE;
     }
 
@@ -147,7 +147,7 @@ API_CALLABLE(N(MeleeHitbox_Main)) {
                 hitboxNpc->pos.z = posZ;
                 hitboxEnemy->unk_10.z = hitboxNpc->pos.z;
 
-                hitboxNpc->yaw = atan2(hitboxNpc->pos.x, hitboxNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                hitboxNpc->yaw = atan2(hitboxNpc->pos.x, hitboxNpc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                 hitboxEnemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
                 hitboxNpc->duration = 0;
                 script->functionTemp[0] = 1;

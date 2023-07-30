@@ -3,7 +3,7 @@
 extern EvtScript N(EVS_OnTouch_StairSwitch);
 
 API_CALLABLE(N(WaitForPlayerTouchingGround)) {
-    if (gCollisionStatus.currentFloor == COLLIDER_o2022) {
+    if (gCollisionStatus.curFloor == COLLIDER_o2022) {
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;

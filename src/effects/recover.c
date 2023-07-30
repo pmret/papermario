@@ -177,7 +177,7 @@ void func_E0080448(EffectInstance* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
     guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 

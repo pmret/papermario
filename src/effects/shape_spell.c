@@ -126,7 +126,7 @@ void shape_spell_render(EffectInstance* effect) {
 
     renderTask.appendGfx = shape_spell_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -183,7 +183,7 @@ void shape_spell_appendGfx(void* effect) {
     if (isChild == 0) {
         angle = timeLeft * 35;
         factor = 9.0f;
-        var_f30 = -gCameras[gCurrentCameraID].currentYaw;
+        var_f30 = -gCameras[gCurrentCameraID].curYaw;
     } else {
         angle = timeLeft * 25;
         factor = 6.0f;
@@ -260,7 +260,7 @@ void shape_spell_appendGfx(void* effect) {
     if (!isChild) {
         var_f30 = 0.0f;
     } else {
-        var_f30 = -gCameras[gCurrentCameraID].currentYaw;
+        var_f30 = -gCameras[gCurrentCameraID].curYaw;
     }
 
     guPositionF(sp20, 0.0f, var_f30, 0.0f, 1.0f, data->pos.x, data->pos.y, data->pos.z);

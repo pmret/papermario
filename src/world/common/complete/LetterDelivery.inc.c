@@ -37,7 +37,7 @@ API_CALLABLE(N(LetterDelivery_CalcLetterPos)) {
     s32 varZ = *args++;
     f32 z = evt_get_variable(script, varZ);
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
-    f32 currentCamYaw = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
+    f32 currentCamYaw = clamp_angle(gCameras[gCurrentCameraID].curYaw + 180.0f);
 
     add_vec2D_polar(&x, &z, 15.0f, partner->yaw);
     add_vec2D_polar(&x, &z, 10.0f, currentCamYaw);
@@ -52,15 +52,15 @@ API_CALLABLE(N(LetterDelivery_CalcLetterPos)) {
 API_CALLABLE(N(LetterDelivery_SaveNpcAnim)) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
-    N(LetterDelivery_SavedNpcAnim) = npc->currentAnim;
-    npc->currentAnim = script->varTable[4];
+    N(LetterDelivery_SavedNpcAnim) = npc->curAnim;
+    npc->curAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(LetterDelivery_RestoreNpcAnim)) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
-    npc->currentAnim = N(LetterDelivery_SavedNpcAnim);
+    npc->curAnim = N(LetterDelivery_SavedNpcAnim);
     return ApiStatus_DONE2;
 }
 

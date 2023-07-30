@@ -117,7 +117,7 @@ void func_E005E334(EffectInstance* effect) {
         gSPDisplayList(gMainGfxPos++, dlist2);
 
         guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp98);
         guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 

@@ -9,6 +9,7 @@ asm_dir = root_dir + "ver/current/asm/"
 asm_world_dir = asm_dir + "nonmatchings/world/"
 asm_data_dir = asm_dir + "data/"
 
+
 def handle_symbol(area, symbol):
     for root, dirs, files in os.walk(asm_world_dir + area[0] + "/" + area[1]):
         for f_name in files:
@@ -54,6 +55,7 @@ def handle_file(f_path):
 
     for symbol in reversed(symbols):
         migrated = handle_symbol(area, symbol)
+
 
 # Walk through asm files and rename stuff
 print("Walking through asm files")

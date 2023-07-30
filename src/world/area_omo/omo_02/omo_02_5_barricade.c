@@ -19,9 +19,9 @@ typedef struct BarricadePart {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f origin;
     /* 0x1C */ Vec3f rot;
-    /* 0x28 */ Vec3f angularVelocity;
-    /* 0x34 */ f32 verticalVelocity;
-    /* 0x38 */ f32 planarVelocity;
+    /* 0x28 */ Vec3f angularVel;
+    /* 0x34 */ f32 verticalVel;
+    /* 0x38 */ f32 planarVel;
     /* 0x3C */ f32 velocityAngle;
     /* 0x40 */ s32 modelID;
     /* 0x44 */ s32 colliderID;
@@ -101,11 +101,11 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
             part->origin.x = part->pos.x;
             part->origin.y = part->pos.y;
             part->origin.z = part->pos.z;
-            part->angularVelocity.x = rand_int(20) - 10;
-            part->angularVelocity.y = rand_int(20) - 10;
-            part->angularVelocity.z = rand_int(20) - 10;
-            part->verticalVelocity = (rand_int(40) + 100.0f) / 10.0f;
-            part->planarVelocity = (rand_int(30) + 60.0f) / 10.0f;
+            part->angularVel.x = rand_int(20) - 10;
+            part->angularVel.y = rand_int(20) - 10;
+            part->angularVel.z = rand_int(20) - 10;
+            part->verticalVel = (rand_int(40) + 100.0f) / 10.0f;
+            part->planarVel = (rand_int(30) + 60.0f) / 10.0f;
             part->velocityAngle = ((rand_int(100) % 2) * 180.0f) + 90.0f;
             N(DetermineSphericalSize)(model->modelNode->displayData->displayList, &part->radius);
 
@@ -122,17 +122,17 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
         model = get_model_from_list_index(get_model_list_index_from_tree_index(part->modelID));
         switch (part->state) {
             case BARRICADE_STATE_FLYING:
-                    add_vec2D_polar(&part->pos.x, &part->pos.z, part->planarVelocity, part->velocityAngle);
-                    part->verticalVelocity -= 0.8f;
-                    part->pos.y += part->verticalVelocity;
-                    if (part->verticalVelocity <= 0.0f && part->pos.y < part->radius) {
+                    add_vec2D_polar(&part->pos.x, &part->pos.z, part->planarVel, part->velocityAngle);
+                    part->verticalVel -= 0.8f;
+                    part->pos.y += part->verticalVel;
+                    if (part->verticalVel <= 0.0f && part->pos.y < part->radius) {
                         part->pos.y = part->radius;
-                        part->verticalVelocity *= -0.7f;
-                        if (part->verticalVelocity < 1.0f) {
+                        part->verticalVel *= -0.7f;
+                        if (part->verticalVel < 1.0f) {
                             part->state = BARRICADE_STATE_CLEANUP;
-                            part->angularVelocity.x = 0.0f;
-                            part->angularVelocity.y = 0.0f;
-                            part->angularVelocity.z = 0.0f;
+                            part->angularVel.x = 0.0f;
+                            part->angularVel.y = 0.0f;
+                            part->angularVel.z = 0.0f;
                         }
                         if (i & 1) {
                             exec_ShakeCam1(0, 0, 1);
@@ -156,9 +156,9 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
 
         model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
         guTranslateF(mtxTransform, part->pos.x - part->origin.x, part->pos.y - part->origin.y, part->pos.z - part->origin.z);
-        part->rot.x += part->angularVelocity.x;
-        part->rot.y += part->angularVelocity.y;
-        part->rot.z += part->angularVelocity.z;
+        part->rot.x += part->angularVel.x;
+        part->rot.y += part->angularVel.y;
+        part->rot.z += part->angularVel.z;
         part->rot.x = clamp_angle(part->rot.x);
         part->rot.y = clamp_angle(part->rot.y);
         part->rot.z = clamp_angle(part->rot.z);

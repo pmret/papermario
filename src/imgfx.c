@@ -979,8 +979,8 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
                     gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
 
-                    angle1 = cosine(currentCam->currentYaw) * 120.0f;
-                    angle2 = cosine(currentCam->currentYaw + 90.0f) * 120.0f;
+                    angle1 = cosine(currentCam->curYaw) * 120.0f;
+                    angle2 = cosine(currentCam->curYaw + 90.0f) * 120.0f;
                     dirX1 = -angle1;
                     dirZ2 = -angle2;
                     ImgFXLights.l[0].l.dir[0] = dirX1;

@@ -50,13 +50,9 @@ if __name__ == "__main__":
         for p, palette_name in enumerate(sprite.palette_names):
             for a, name in enumerate(sprite.animation_names):
                 if palette_name == "Default":
-                    f.write(
-                        f"#define ANIM_{sprite_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n"
-                    )
+                    f.write(f"#define ANIM_{sprite_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
                 else:
-                    f.write(
-                        f"#define ANIM_{sprite_name}_{palette_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n"
-                    )
+                    f.write(f"#define ANIM_{sprite_name}_{palette_name}_{name} 0x{s:02X}{p:02X}{a:02X}\n")
             f.write("\n")
 
         f.write("#endif\n")

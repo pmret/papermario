@@ -95,8 +95,8 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
                 part->unk_08 = arg2;
                 part->unk_0C = arg3;
 
-                sinYaw = sin_deg(gCameras[gCurrentCameraID].currentYaw);
-                cosYaw = -cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                sinYaw = sin_deg(gCameras[gCurrentCameraID].curYaw);
+                cosYaw = -cos_deg(gCameras[gCurrentCameraID].curYaw);
 
                 if (numParts != 1) {
                     rotateA = (i * 100) / (numParts - 1) - 50;
@@ -168,7 +168,7 @@ void spiky_white_aura_render(EffectInstance* effect) {
 
     renderTask.appendGfx = spiky_white_aura_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -187,7 +187,7 @@ void spiky_white_aura_appendGfx(void* effect) {
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
         guRotateF(sp58, part->unk_1C, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp58, sp18, sp18);

@@ -170,14 +170,14 @@ API_CALLABLE(LoadMysteryItemScript) {
     s32* itemPtr;
     s32 i;
 
-    battleStatus->currentTargetListFlags = item->targetFlags | TARGET_FLAG_8000;
-    battleStatus->currentAttackElement = 0;
+    battleStatus->curTargetListFlags = item->targetFlags | TARGET_FLAG_8000;
+    battleStatus->curAttackElement = 0;
 
     player_create_target_list(actor);
     target = &actor->targetData[actor->targetIndexList[0]];
 
-    battleStatus->currentTargetID = target->actorID;
-    battleStatus->currentTargetPart = target->partID;
+    battleStatus->curTargetID = target->actorID;
+    battleStatus->curTargetPart = target->partID;
 
     itemPtr = &ItemKeys[0];
     for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {

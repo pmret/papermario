@@ -340,9 +340,9 @@ s32 _update_message(MessagePrintState* printer) {
                     if (printer->stateFlags & MSG_STATE_FLAG_80000) {
                         buttons = BUTTON_A | BUTTON_C_DOWN;
                     }
-                    if ((buttons & gGameStatusPtr->pressedButtons[0]) || (gGameStatusPtr->currentButtons[0] & BUTTON_B)) {
+                    if ((buttons & gGameStatusPtr->pressedButtons[0]) || (gGameStatusPtr->curButtons[0] & BUTTON_B)) {
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
-                        printer->currentPrintDelay = 0;
+                        printer->curPrintDelay = 0;
                         printer->stateFlags |= MSG_STATE_FLAG_4;
                         if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_C_DOWN)) {
                             cond = TRUE;
@@ -362,11 +362,11 @@ s32 _update_message(MessagePrintState* printer) {
                         }
                     } else if ((gGameStatusPtr->pressedButtons[0] & BUTTON_Z) &&
                                !(printer->stateFlags & MSG_STATE_FLAG_40000) &&
-                               (printer->currentLine != 0))
+                               (printer->curLine != 0))
                     {
                         printer->windowState = MSG_WINDOW_STATE_B;
                         printer->unk_4CC = 0;
-                        printer->unkArraySize = printer->currentLine - 1;
+                        printer->unkArraySize = printer->curLine - 1;
                         printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
                         sfx_play_sound_with_params(SOUND_CD, 0, 0, 0);
                     }
@@ -375,7 +375,7 @@ s32 _update_message(MessagePrintState* printer) {
                     if (gGameStatusPtr->pressedButtons[0] & BUTTON_B) {
                         printer->windowState = MSG_WINDOW_STATE_B;
                         printer->unk_4CC = 0;
-                        printer->unkArraySize = printer->currentLine;
+                        printer->unkArraySize = printer->curLine;
                         printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
                         sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
                     } else if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z) {
@@ -405,26 +405,26 @@ s32 _update_message(MessagePrintState* printer) {
                         sfx_play_sound_with_params(SOUND_MENU_NEXT, 0, 0, 0);
                     } else if (printer->cancelOption != 0xFF && (gGameStatusPtr->pressedButtons[0] & BUTTON_B)) {
                         if (printer->cancelOption >= printer->maxOption) {
-                            printer->selectedOption = printer->currentOption;
+                            printer->selectedOption = printer->curOption;
                         } else {
                             printer->selectedOption = printer->cancelOption;
                         }
                         printer->madeChoice = 1;
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
                         printer->scrollingTime = 0;
-                        printer->currentOption = printer->cancelOption;
+                        printer->curOption = printer->cancelOption;
                         printer->stateFlags |= MSG_STATE_FLAG_20000;
                         sfx_play_sound_with_params(SOUND_MENU_BACK, 0, 0, 0);
                     } else if (gGameStatusPtr->heldButtons[0] & BUTTON_STICK_DOWN) {
-                        if (printer->currentOption != printer->maxOption - 1) {
-                            printer->targetOption = printer->currentOption + 1;
+                        if (printer->curOption != printer->maxOption - 1) {
+                            printer->targetOption = printer->curOption + 1;
                             printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
                             printer->scrollingTime = 1;
                             sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
                         }
                     } else if (gGameStatusPtr->heldButtons[0] & BUTTON_STICK_UP) {
-                        if (printer->currentOption != 0) {
-                            printer->targetOption = printer->currentOption - 1;
+                        if (printer->curOption != 0) {
+                            printer->targetOption = printer->curOption - 1;
                             printer->windowState = MSG_WINDOW_STATE_SCROLLING_BACK;
                             printer->scrollingTime = 1;
                             sfx_play_sound_with_params(SOUND_MENU_CHANGE_SELECTION, 0, 0, 0);
@@ -438,8 +438,8 @@ s32 _update_message(MessagePrintState* printer) {
                     printer->scrollingTime++;
                     if (printer->scrollingTime >= 5) {
                         printer->windowState = MSG_WINDOW_STATE_WAITING_FOR_CHOICE;
-                        printer->currentOption = printer->targetOption;
-                        printer->selectedOption = printer->currentOption;
+                        printer->curOption = printer->targetOption;
+                        printer->selectedOption = printer->curOption;
                     }
                     break;
             }
@@ -448,11 +448,11 @@ s32 _update_message(MessagePrintState* printer) {
                     (gGameStatusPtr->pressedButtons[0] & BUTTON_A))
         {
             printer->windowState = MSG_WINDOW_STATE_PRINTING;
-            printer->currentPrintDelay = 0;
+            printer->curPrintDelay = 0;
             printer->stateFlags |= MSG_STATE_FLAG_4;
         }
 
-        if (printer->stateFlags & MSG_STATE_FLAG_4 && !(gGameStatusPtr->currentButtons[0] & BUTTON_A)) {
+        if (printer->stateFlags & MSG_STATE_FLAG_4 && !(gGameStatusPtr->curButtons[0] & BUTTON_A)) {
             printer->stateFlags &= ~MSG_STATE_FLAG_4;
         }
 
@@ -464,7 +464,7 @@ s32 _update_message(MessagePrintState* printer) {
 
         switch (printer->windowState) {
             case MSG_WINDOW_STATE_PRINTING:
-                if ((gGameStatusPtr->pressedButtons[0] & BUTTON_A) | (gGameStatusPtr->currentButtons[0] & BUTTON_B)) {
+                if ((gGameStatusPtr->pressedButtons[0] & BUTTON_A) | (gGameStatusPtr->curButtons[0] & BUTTON_B)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) && !cond) {
                         printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY;
 
@@ -475,19 +475,19 @@ s32 _update_message(MessagePrintState* printer) {
                 charsToPrint = printer->charsPerChunk;
                 if (printer->windowState == MSG_WINDOW_STATE_INIT) {
                     printer->windowState = MSG_WINDOW_STATE_PRINTING;
-                    printer->currentPrintDelay = 0;
+                    printer->curPrintDelay = 0;
                 } else if (printer->stateFlags & MSG_STATE_FLAG_PRINT_QUICKLY) {
                     charsToPrint = 12;
-                    printer->currentPrintDelay = 0;
+                    printer->curPrintDelay = 0;
                 } else if (!(printer->stateFlags & MSG_STATE_FLAG_4)) {
                     if (!(printer->stateFlags & (MSG_STATE_FLAG_20 | MSG_STATE_FLAG_10)) &&
-                        (gGameStatusPtr->currentButtons[0] & BUTTON_A))
+                        (gGameStatusPtr->curButtons[0] & BUTTON_A))
                     {
                         charsToPrint = 6;
-                        printer->currentPrintDelay = 0;
+                        printer->curPrintDelay = 0;
                     }
                 }
-                if ((printer->currentPrintDelay == 0) || --printer->currentPrintDelay == 0) {
+                if ((printer->curPrintDelay == 0) || --printer->curPrintDelay == 0) {
                     msg_copy_to_print_buffer(printer, charsToPrint, 0);
                 }
                 break;
@@ -500,7 +500,7 @@ s32 _update_message(MessagePrintState* printer) {
                 printer->curLinePos += printer->unk_464;
                 if ((printer->stateFlags & MSG_STATE_FLAG_PRINT_QUICKLY) ||
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
-                    (gGameStatusPtr->currentButtons[0] & BUTTON_A)))
+                    (gGameStatusPtr->curButtons[0] & BUTTON_A)))
                 {
                     printer->curLinePos += 6;
                 }
@@ -514,11 +514,11 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->style == MSG_STYLE_LAMPPOST ||
                         printer->srcBuffer[printer->srcBufferPos] == MSG_CHAR_READ_WAIT)
                     {
-                        printer->currentPrintDelay = 0;
+                        printer->curPrintDelay = 0;
                     } else {
-                        printer->currentPrintDelay = 5;
+                        printer->curPrintDelay = 5;
                     }
-                    printer->lineEndPos[printer->currentLine] = printer->curLinePos;
+                    printer->lineEndPos[printer->curLine] = printer->curLinePos;
                 }
                 break;
             case MSG_WINDOW_STATE_B:
@@ -559,7 +559,7 @@ s32 _update_message(MessagePrintState* printer) {
                     if (printer->curLinePos >= printer->lineEndPos[printer->unkArraySize]) {
                         printer->curLinePos = printer->lineEndPos[printer->unkArraySize];
                         printer->windowState = MSG_WINDOW_STATE_C;
-                        if (printer->unkArraySize == printer->currentLine) {
+                        if (printer->unkArraySize == printer->curLine) {
                             printer->windowState = MSG_WINDOW_STATE_WAITING;
                             printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
                             printer->rewindArrowCounter = 0;
@@ -717,7 +717,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 }
                 break;
             case MSG_CHAR_READ_PAUSE:
-                printer->currentPrintDelay = *srcBuf++;
+                printer->curPrintDelay = *srcBuf++;
                 printer->delayFlags |= MSG_DELAY_FLAG_1;
                 printer->stateFlags &= ~MSG_STATE_FLAG_80;
                 break;
@@ -743,8 +743,8 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 break;
             case MSG_CHAR_READ_NEXT:
                 if (printer->lineCount != 0) {
-                    printer->lineEndPos[printer->currentLine] = printer->curLinePos;
-                    printer->currentLine++;
+                    printer->lineEndPos[printer->curLine] = printer->curLinePos;
+                    printer->curLine++;
                     *printBuf++ = MSG_CHAR_PRINT_NEXT;
                     printer->nextLinePos = printer->curLinePos + (gMsgCharsets[printer->font]->newLineY + D_802EB644[printer->style]) * printer->lineCount;
                     printer->windowState = MSG_WINDOW_STATE_SCROLLING;
@@ -922,8 +922,8 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         break;
                     case MSG_READ_FUNC_SCROLL:
-                        printer->lineEndPos[printer->currentLine] = printer->curLinePos;
-                        printer->currentLine++;
+                        printer->lineEndPos[printer->curLine] = printer->curLinePos;
+                        printer->curLine++;
                         *printBuf++ = MSG_CHAR_PRINT_NEXT;
                         arg = *srcBuf++;
                         printer->nextLinePos = printer->curLinePos + (gMsgCharsets[printer->font]->newLineY + D_802EB644[printer->style]) * arg;
@@ -978,7 +978,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = MSG_PRINT_FUNC_INLINE_IMAGE;
                         *printBuf++ = *srcBuf++;
                         arg1--;
-                        printer->currentPrintDelay = printer->printDelayTime;
+                        printer->curPrintDelay = printer->printDelayTime;
                         if (arg1 <= 0) {
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
@@ -992,7 +992,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = *srcBuf++;
                         *printBuf++ = *srcBuf++;
                         *printBuf++ = *srcBuf++;
-                        printer->currentPrintDelay = printer->printDelayTime;
+                        printer->curPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
@@ -1016,7 +1016,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         romEnd = icon_ROM_START + gItemIconPaletteOffsets[offset] + 0x20;
                         dma_copy(icon_ROM_START + gItemIconPaletteOffsets[offset],
                                  romEnd, D_8015C7E0);
-                        printer->currentPrintDelay = printer->printDelayTime;
+                        printer->curPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
@@ -1025,7 +1025,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         }
                         break;
                     case MSG_READ_FUNC_IMAGE:
-                        printer->currentImageIndex = *srcBuf++;
+                        printer->curImageIndex = *srcBuf++;
                         arg = *srcBuf++;
                         argQ = *srcBuf++;
                         printer->varImageScreenPos.x = arg << 8 | argQ;
@@ -1092,7 +1092,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         sfx_play_sound_with_params(SOUND_MENU_START_TUTORIAL, 0, 0, 0);
                         printer->maxOption = *srcBuf++;
                         printer->madeChoice = 0;
-                        printer->currentOption = 0;
+                        printer->curOption = 0;
                         printer->selectedOption = 0;
                         printer->windowState = MSG_WINDOW_STATE_WAITING_FOR_CHOICE;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
@@ -1233,7 +1233,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
 
                         if (!(printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) && arg1 <= 0) {
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
-                            printer->currentPrintDelay = printer->printDelayTime;
+                            printer->curPrintDelay = printer->printDelayTime;
                         }
                         msg_play_speech_sound(printer, argQ);
                         if (printer->stateFlags & MSG_STATE_FLAG_800000) {
@@ -1295,7 +1295,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
 
         if (!(printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) && arg1 <= 0) {
             printer->delayFlags |= MSG_DELAY_FLAG_1;
-            printer->currentPrintDelay = printer->printDelayTime;
+            printer->curPrintDelay = printer->printDelayTime;
         }
         if (!(printer->delayFlags & MSG_DELAY_FLAG_1)) {
             continue;
@@ -1326,7 +1326,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->unk_464 = 6;
     printer->srcBuffer = NULL;
     printer->msgID = 0;
-    printer->currentPrintDelay = 0;
+    printer->curPrintDelay = 0;
     printer->windowOffsetPos.x = 0;
     printer->windowOffsetPos.y = 0;
     printer->windowBasePos.x = 0;
@@ -1335,11 +1335,11 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->rewindArrowCounter = 0;
     printer->rewindArrowPos.x = 0;
     printer->rewindArrowPos.y = 0;
-    printer->currentLine = 0;
+    printer->curLine = 0;
     printer->unkArraySize = 0;
     printer->maxOption = 0;
     printer->madeChoice = 0;
-    printer->currentOption = 0;
+    printer->curOption = 0;
     printer->selectedOption = 0;
     printer->cancelOption = -1;
     printer->windowState = MSG_WINDOW_STATE_DONE;
@@ -1356,7 +1356,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->lineCount = 0;
 
     for (i = 0; i < ARRAY_COUNT(printer->animTimers); i++) {
-        printer->currentAnimFrame[i] = 0;
+        printer->curAnimFrame[i] = 0;
         printer->animTimers[i] = -1;
     }
 
@@ -1377,7 +1377,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->speedSoundIDA = 0;
     printer->speedSoundIDB = 0;
     printer->varBufferReadPos = 0;
-    printer->currentImageIndex = 0;
+    printer->curImageIndex = 0;
     printer->varImageScreenPos.x = 0;
     printer->varImageScreenPos.y = 0;
     printer->varImgHasBorder = 0;
@@ -2450,7 +2450,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
     msg_drawState->visiblePrintedCount = 0;
     msg_drawState->centerPos = 0;
     msg_drawState->fontVariant = 0;
-    msg_drawState->currentPosX = 0;
+    msg_drawState->curPosX = 0;
     msg_drawState->nextPos[0] = 0;
     msg_drawState->nextPos[1] = 0;
     msg_drawState->font = 0;
@@ -2499,7 +2499,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
             case MSG_CHAR_PRINT_FULL_SPACE:
             case MSG_CHAR_PRINT_HALF_SPACE:
                 msg_drawState->nextPos[0] += msg_get_draw_char_width(msg_drawState->printBuffer[msg_drawState->drawBufferPos],
-                                             msg_drawState->font, msg_drawState->fontVariant, msg_drawState->msgScale.x, msg_drawState->currentPosX,
+                                             msg_drawState->font, msg_drawState->fontVariant, msg_drawState->msgScale.x, msg_drawState->curPosX,
                                              msg_drawState->printModeFlags);
                 msg_drawState->drawBufferPos++;
                 break;
@@ -2983,7 +2983,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         msg_drawState->drawBufferPos += 2;
                         break;
                     case MSG_PRINT_FUNC_SPACING:
-                        msg_drawState->currentPosX = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->curPosX = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
                         msg_drawState->drawBufferPos += 2;
                         break;
                     case MSG_PRINT_FUNC_SIZE:
@@ -3087,7 +3087,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             printer->animTimers[animIdx] = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 3];
                         }
                         if (printer->animTimers[animIdx] == 0) {
-                            printer->currentAnimFrame[animIdx]++;
+                            printer->curAnimFrame[animIdx]++;
                         }
 
                         dbPos = msg_drawState->drawBufferPos;
@@ -3095,7 +3095,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                             if ((msg_drawState->printBuffer[dbPos - 1] == MSG_CHAR_PRINT_FUNCTION) &&
                                 (msg_drawState->printBuffer[dbPos] == MSG_PRINT_FUNC_ANIM_DELAY) &&
                                 (msg_drawState->printBuffer[dbPos + 1] == animIdx)) {
-                                if (msg_drawState->printBuffer[dbPos + 2] != printer->currentAnimFrame[animIdx]) {
+                                if (msg_drawState->printBuffer[dbPos + 2] != printer->curAnimFrame[animIdx]) {
                                     dbPos += 4;
                                 } else {
                                     break;
@@ -3106,7 +3106,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                     (msg_drawState->printBuffer[dbPos + 2] == animIdx)) {
 
                                     if (printer->animTimers[animIdx] == 0) {
-                                        printer->currentAnimFrame[animIdx] = msg_drawState->printBuffer[dbPos + 3];
+                                        printer->curAnimFrame[animIdx] = msg_drawState->printBuffer[dbPos + 3];
                                         dbPos = msg_drawState->drawBufferPos;
                                         continue;
                                     } else {
@@ -3364,7 +3364,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         phi_s2_5 = (f32) phi_s2_5 * 0.35;
                     }
                     if ((printer->windowState == MSG_WINDOW_STATE_WAITING_FOR_CHOICE) && (msg_drawState->printModeFlags & MSG_PRINT_FLAG_20)) {
-                        if (msg_drawState->unk_2D == printer->currentOption) {
+                        if (msg_drawState->unk_2D == printer->curOption) {
                             msg_drawState->effectFlags |= MSG_FX_FLAG_DROP_SHADOW | MSG_FX_FLAG_GLOBAL_RAINBOW | MSG_FX_FLAG_GLOBAL_WAVE;
                         } else {
                             msg_drawState->effectFlags &= ~MSG_FX_FLAG_GLOBAL_RAINBOW;
@@ -3598,7 +3598,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                 msg_drawState->nextPos[0] +=
                     msg_get_draw_char_width(msg_drawState->printBuffer[msg_drawState->drawBufferPos],
                                             msg_drawState->font, msg_drawState->fontVariant, msg_drawState->msgScale.x,
-                                            msg_drawState->currentPosX, msg_drawState->printModeFlags);
+                                            msg_drawState->curPosX, msg_drawState->printModeFlags);
                 msg_drawState->drawBufferPos++;
                 break;
         }
@@ -3609,7 +3609,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
         s16 varImgFinalAlpha;
 
         varImgFinalAlpha = printer->varImgFinalAlpha;
-        msgVarImage = &(*gMsgVarImages)[printer->currentImageIndex];
+        msgVarImage = &(*gMsgVarImages)[printer->curImageIndex];
 
         switch (printer->varImgHasBorder) {
             case 0:

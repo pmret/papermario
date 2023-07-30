@@ -50,7 +50,7 @@ void N(BooPatrolAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0] = 4;
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         }
     }
 }

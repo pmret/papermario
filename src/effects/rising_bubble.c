@@ -98,7 +98,7 @@ void rising_bubble_render(EffectInstance* effect) {
 
     renderTask.appendGfx = rising_bubble_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -136,7 +136,7 @@ void rising_bubble_appendGfx(void* effect) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
         gDPSetEnvColor(gMainGfxPos++, 128, 128, 255, data->unk_14);
 
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
     }
 
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

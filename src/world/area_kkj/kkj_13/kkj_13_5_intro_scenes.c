@@ -129,7 +129,7 @@ API_CALLABLE(N(ShatterWindow)) {
         effect = fx_ice_shard(type, posX, posY, -150.0f, ((i & 3) * 0.4) + 1.0, ((i & 3) * 4) + 30);
         effect->data.iceShard->animFrame = 0;
         effect->data.iceShard->animRate = (rand_int(10) * 0.2) + 0.1;
-        effect->data.iceShard->rotation = 35 * i;
+        effect->data.iceShard->rot = 35 * i;
         effect->data.iceShard->angularVel = rand_int(10) - 5;
         effect->data.iceShard->vel.x = x;
         effect->data.iceShard->vel.y = y;

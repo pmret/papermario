@@ -70,9 +70,9 @@ void pulse_stone_notification_setup(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     mem_clear(PulseStonePtr, sizeof(*PulseStonePtr));
-    PulseStonePtr->pos.x = playerStatus->position.x;
-    PulseStonePtr->pos.y = playerStatus->position.y + playerStatus->colliderHeight + 8.0f;
-    PulseStonePtr->pos.z = playerStatus->position.z;
+    PulseStonePtr->pos.x = playerStatus->pos.x;
+    PulseStonePtr->pos.y = playerStatus->pos.y + playerStatus->colliderHeight + 8.0f;
+    PulseStonePtr->pos.z = playerStatus->pos.z;
     playerStatus->animFlags |= PA_FLAG_PULSE_STONE_VISIBLE;
     PulseStoneNotificationCallback = pulse_stone_notification_update;
 }
@@ -86,7 +86,7 @@ void appendGfx_pulse_stone_icon(void) {
 
     if (playerStatus->animFlags & PA_FLAG_PULSE_STONE_VISIBLE) {
         guScaleF(sp18, PulseStonePtr->scale, PulseStonePtr->scale, PulseStonePtr->scale);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp18, sp58, sp18);
         guTranslateF(sp58, PulseStonePtr->pos.x, PulseStonePtr->pos.y, PulseStonePtr->pos.z);
         guMtxCatF(sp18, sp58, sp58);
@@ -153,9 +153,9 @@ void pulse_stone_notification_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     PulseStonePtr->pos.y +=
-        ((playerStatus->position.y + playerStatus->colliderHeight + 10.0f) - PulseStonePtr->pos.y) / 1.5f;
-    PulseStonePtr->pos.x = playerStatus->position.x;
-    PulseStonePtr->pos.z = playerStatus->position.z;
+        ((playerStatus->pos.y + playerStatus->colliderHeight + 10.0f) - PulseStonePtr->pos.y) / 1.5f;
+    PulseStonePtr->pos.x = playerStatus->pos.x;
+    PulseStonePtr->pos.z = playerStatus->pos.z;
 
     if (!should_continue_pulse_stone()) {
         PulseStoneNotificationCallback = NULL;

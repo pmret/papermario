@@ -13,7 +13,7 @@ API_CALLABLE(N(GetFloorCollider)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, gCollisionStatus.currentFloor);
+    evt_set_variable(script, outVar, gCollisionStatus.curFloor);
     return ApiStatus_DONE2;
 }
 
@@ -75,7 +75,7 @@ void N(red_tree_orbit_listener)(PlayerOrbitState* orbit, s32 event) {
             if (orbit->numRotations >= 6) {
                 // wait to be near NPC with at least 6 full rotations complete
                 f32 angle1 = atan2(125.0f, -42.0f, 152.0f, -61.0f);
-                f32 angle2 = atan2(125.0f, -42.0f, playerStatus->position.x, playerStatus->position.z);
+                f32 angle2 = atan2(125.0f, -42.0f, playerStatus->pos.x, playerStatus->pos.z);
                 f32 deltaAngle = get_clamped_angle_diff(angle1, angle2);
                 if (fabsf(deltaAngle) < 30.0f) {
                     start_script(&N(EVS_Scene_TreeOrbitReaction), EVT_PRIORITY_1, 0);

@@ -64,4 +64,3 @@ for segment in config["segments"]:
 
         with open(c_file_path, "w", newline="\n") as f:
             f.write("".join(c_lines))
-

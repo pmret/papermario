@@ -136,7 +136,7 @@ void whirlwind_render(EffectInstance* effect) {
 
     renderTask.appendGfx = whirlwind_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     queuedTask = queue_render_task(&renderTask);

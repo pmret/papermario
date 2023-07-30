@@ -22,10 +22,10 @@ API_CALLABLE(N(PlayerRideBeanstalk)) {
     f32 clamped = clamp_angle(angle - temp);
 
     temp = sin_deg(clamped);
-    gPlayerStatus.position.x = BEANSTALK_BASE_X + (dist * temp);
-    gPlayerStatus.position.y = evt_get_variable(NULL, script->varTable[10]) + evt_get_variable(NULL, script->varTable[3]);
+    gPlayerStatus.pos.x = BEANSTALK_BASE_X + (dist * temp);
+    gPlayerStatus.pos.y = evt_get_variable(NULL, script->varTable[10]) + evt_get_variable(NULL, script->varTable[3]);
     temp = cos_deg(clamped);
-    gPlayerStatus.position.z = BEANSTALK_BASE_Z - (dist * temp);
+    gPlayerStatus.pos.z = BEANSTALK_BASE_Z - (dist * temp);
 
     return ApiStatus_DONE2;
 }

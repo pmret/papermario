@@ -124,7 +124,7 @@ void N(animate_and_draw_record)(void* renderData) {
         case RECORD_STATE_VISIBLE:
             data->alpha = 255;
             data->curAlpha = 255;
-            if (gGameStatusPtr->currentButtons[0] & (BUTTON_A | BUTTON_B)) {
+            if (gGameStatusPtr->curButtons[0] & (BUTTON_A | BUTTON_B)) {
                 data->state = RECORD_START_HIDE;
             }
             if (data->state != RECORD_START_HIDE) {
@@ -153,7 +153,7 @@ void N(work_draw_record)(void) {
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
     task.appendGfx = &N(animate_and_draw_record);
-    task.distance = 0;
+    task.dist = 0;
 
     queue_render_task(&task);
 }

@@ -14,15 +14,15 @@ API_CALLABLE(N(UpdateFollowerPosition)) {
         return ApiStatus_DONE2;
     }
 
-    npc->pos.x = (s32)(((s32)playerStatus->position.x - 700) * 0.85) + 765;
-    if (playerStatus->currentSpeed == 0.0f) {
+    npc->pos.x = (s32)(((s32)playerStatus->pos.x - 700) * 0.85) + 765;
+    if (playerStatus->curSpeed == 0.0f) {
         animID = ANIM_Peach1_Idle;
-    } else if (playerStatus->currentSpeed < 2.0f) {
+    } else if (playerStatus->curSpeed < 2.0f) {
         animID = ANIM_Peach1_Walk;
     } else {
         animID = ANIM_Peach1_Run;
     }
-    npc->currentAnim = animID;
+    npc->curAnim = animID;
     evt_set_variable(script, outVar, playerStatus->targetYaw);
     return ApiStatus_DONE2;
 }

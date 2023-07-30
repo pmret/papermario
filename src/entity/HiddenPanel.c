@@ -22,9 +22,9 @@ void entity_HiddenPanel_setupGfx(s32 entityIndex) {
     Matrix4f rotMtx;
     Matrix4f tempMtx;
 
-    if (entity->position.y != data->initialY) {
+    if (entity->pos.y != data->initialY) {
         guMtxIdentF(rotMtx);
-        guTranslateF(tempMtx, entity->position.x, data->initialY + 1.0f, entity->position.z);
+        guTranslateF(tempMtx, entity->pos.x, data->initialY + 1.0f, entity->pos.z);
         guMtxCatF(tempMtx, rotMtx, tempMtx);
         guMtxF2L(tempMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -64,35 +64,35 @@ void entity_HiddenPanel_idle(Entity* entity) {
     data->standingNpcIndex = -1;
     data->npcFlags = 0;
 
-    if (gCurrentHiddenPanels.tryFlipTrigger && fabs(gCurrentHiddenPanels.flipTriggerPosY - entity->position.y) <= 10.0) {
+    if (gCurrentHiddenPanels.tryFlipTrigger && fabs(gCurrentHiddenPanels.flipTriggerPosY - entity->pos.y) <= 10.0) {
         data->state = 10;
-        distToPlayer = get_xz_dist_to_player(entity->position.x, entity->position.z);
+        distToPlayer = get_xz_dist_to_player(entity->pos.x, entity->pos.z);
         if (distToPlayer <= 100) {
             if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-                data->riseVelocity = 0.5f;
+                data->riseVel = 0.5f;
                 exec_entity_commandlist(entity);
             } else if (entity_HiddenPanel_is_item_on_top(entity)) {
-                data->riseVelocity = 0.5f;
+                data->riseVel = 0.5f;
                 exec_entity_commandlist(entity);
             } else {
                 s32 npcIndex = npc_find_standing_on_entity(entity->listIndex);
                 if (npcIndex >= 0) {
                     Npc* npc = get_npc_by_index(npcIndex);
-                    dist2D(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+                    dist2D(entity->pos.x, entity->pos.z, npc->pos.x, npc->pos.z);
                     data->standingNpcIndex = npcIndex;
                     data->npcFlags = npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8);
                     npc->flags &= ~NPC_FLAG_8;
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    data->riseVelocity = 0.5f;
+                    data->riseVel = 0.5f;
                     exec_entity_commandlist(entity);
                 } else {
                     entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
                     if (distToPlayer > 60) {
-                        data->riseVelocity = 0.5f;
+                        data->riseVel = 0.5f;
                         exec_entity_commandlist(entity);
                     } else {
                         data->state = 0;
-                        data->riseVelocity = 10.0f;
+                        data->riseVel = 10.0f;
                         exec_entity_commandlist(entity);
                     }
                 }
@@ -107,12 +107,12 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
     f32 rotAngle;
     s32 flipAxis;
 
-    yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + 45.0f);
+    yaw = clamp_angle(gCameras[CAM_DEFAULT].curYaw + 45.0f);
     if (yaw < 90.0f || yaw >= 180.0f && yaw < 270.0f) {
-        rotAngle = entity->rotation.z;
+        rotAngle = entity->rot.z;
         flipAxis = 1;
     } else {
-        rotAngle = entity->rotation.x;
+        rotAngle = entity->rot.x;
         flipAxis = 0;
     }
 
@@ -122,24 +122,24 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             data->state = 1;
             data->unk_02 = TRUE;
             data->riseInterpPhase = 90.0f;
-            data->rotationSpeed = 65.0f;
+            data->rotSpeed = 65.0f;
             set_time_freeze_mode(TIME_FREEZE_PARTIAL);
             disable_player_static_collisions();
             gPlayerStatusPtr->animFlags |= PA_FLAG_OPENED_HIDDEN_PANEL;
             if (data->needSpawnItem) {
                 data->needSpawnItem = FALSE;
                 data->spawnedItemIndex = make_item_entity_nodelay(data->itemID,
-                    entity->position.x, entity->position.y + 2.0, entity->position.z,
+                    entity->pos.x, entity->pos.y + 2.0, entity->pos.z,
                     ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, data->pickupVar);
             }
             entity->flags &= ~ENTITY_FLAG_HIDDEN;
             break;
         case 1:
-            entity->position.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
-            if (entity->position.y <= data->initialY) {
-                entity->position.y = data->initialY;
-                entity->rotation.x = 0.0f;
-                entity->rotation.z = 0.0f;
+            entity->pos.y += data->riseVel * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
+            if (entity->pos.y <= data->initialY) {
+                entity->pos.y = data->initialY;
+                entity->rot.x = 0.0f;
+                entity->rot.z = 0.0f;
                 rotAngle = 0.0f;
                 data->timer = 10;
             }
@@ -152,19 +152,19 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             }
 
             if (data->riseInterpPhase > 110.0f) {
-                rotAngle += data->rotationSpeed;
+                rotAngle += data->rotSpeed;
                 if (rotAngle >= 360.0f) {
                     rotAngle -= 360.0f;
                 }
             }
             break;
         case 2:
-            data->rotationSpeed -= 2.0f;
-            if (data->rotationSpeed <= 0.0f) {
-                data->rotationSpeed = 0.0f;
+            data->rotSpeed -= 2.0f;
+            if (data->rotSpeed <= 0.0f) {
+                data->rotSpeed = 0.0f;
             }
 
-            rotAngle += data->rotationSpeed;
+            rotAngle += data->rotSpeed;
             if (rotAngle >= 360.0f) {
                 rotAngle -= 360.0f;
             }
@@ -174,28 +174,28 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             }
             break;
         case 3:
-            data->rotationSpeed -= 5.0f;
-            if (data->rotationSpeed <= 0.0f) {
-                data->rotationSpeed = 0.0f;
+            data->rotSpeed -= 5.0f;
+            if (data->rotSpeed <= 0.0f) {
+                data->rotSpeed = 0.0f;
             }
 
-            rotAngle += data->rotationSpeed;
+            rotAngle += data->rotSpeed;
             if (rotAngle >= 360.0f) {
                 rotAngle = 360.0f;
             }
 
-            entity->position.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
+            entity->pos.y += data->riseVel * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             data->riseInterpPhase += 10.0f;
             if (data->riseInterpPhase > 270.0f) {
                 data->riseInterpPhase = 270.0f;
             }
 
-            if (entity->position.y <= data->initialY) {
+            if (entity->pos.y <= data->initialY) {
                 data->state++;
 
-                entity->position.y = data->initialY;
-                entity->rotation.x = 0.0f;
-                entity->rotation.z = 0.0f;
+                entity->pos.y = data->initialY;
+                entity->rot.x = 0.0f;
+                entity->rot.z = 0.0f;
                 rotAngle = 0.0f;
                 data->timer = 10;
                 exec_ShakeCamX(CAM_DEFAULT, CAM_SHAKE_DECAYING_VERTICAL, 1, 0.2f);
@@ -207,18 +207,18 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             break;
         case 5:
             data->state = 11;
-            entity->position.y += 2.0f;
+            entity->pos.y += 2.0f;
             break;
         case 10:
             entity->flags &= ~ENTITY_FLAG_HIDDEN;
             data->unk_02 = FALSE;
             data->state++;
-            entity->position.y += 6.0f;
+            entity->pos.y += 6.0f;
             break;
         case 11:
-            entity->position.y -= 1.0f;
-            if (entity->position.y <= data->initialY) {
-                entity->position.y = data->initialY;
+            entity->pos.y -= 1.0f;
+            if (entity->pos.y <= data->initialY) {
+                entity->pos.y = data->initialY;
                 data->timer = 1;
                 data->state++;
                 entity->flags |= ENTITY_FLAG_HIDDEN | ENTITY_FLAG_DISABLE_COLLISION;
@@ -247,18 +247,18 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
     }
 
     if (flipAxis == 0) {
-        entity->rotation.x = rotAngle;
+        entity->rot.x = rotAngle;
     } else {
-        entity->rotation.z = rotAngle;
+        entity->rot.z = rotAngle;
     }
 
     if (data->spawnedItemIndex >= 0) {
         ItemEntity* itemEntity = get_item_entity(data->spawnedItemIndex);
         if (itemEntity != NULL) {
             if (itemEntity->flags & ITEM_ENTITY_FLAG_10) {
-                data->spawnedItemPos.x = itemEntity->position.x;
-                data->spawnedItemPos.y = itemEntity->position.y;
-                data->spawnedItemPos.z = itemEntity->position.z;
+                data->spawnedItemPos.x = itemEntity->pos.x;
+                data->spawnedItemPos.y = itemEntity->pos.y;
+                data->spawnedItemPos.z = itemEntity->pos.z;
             } else {
                 data->spawnedItemPos.x = 0x8000;
                 data->spawnedItemPos.y = 0x8000;
@@ -277,8 +277,8 @@ s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
         ItemEntity* itemEntity = get_item_entity(data->spawnedItemIndex);
         if (itemEntity != NULL) {
             if (itemEntity->flags & ITEM_ENTITY_FLAG_10) {
-                if (fabs(entity->position.x - data->spawnedItemPos.x) <= 34.0)  {
-                    if (fabs(entity->position.z - data->spawnedItemPos.z) <= 34.0) {
+                if (fabs(entity->pos.x - data->spawnedItemPos.x) <= 34.0)  {
+                    if (fabs(entity->pos.z - data->spawnedItemPos.z) <= 34.0) {
                         return TRUE;
                     }
                 }
@@ -298,7 +298,7 @@ void entity_HiddenPanel_init(Entity* entity) {
     mem_clear(&gCurrentHiddenPanels, sizeof(gCurrentHiddenPanels));
     entity->renderSetupFunc = entity_HiddenPanel_setupGfx;
     data->pickupVar = 0xFFFF;
-    data->initialY = entity->position.y;
+    data->initialY = entity->pos.y;
     data->modelID = CreateEntityVarArgBuffer[0];
     data->itemID = CreateEntityVarArgBuffer[1];
     data->needSpawnItem = TRUE;
@@ -309,12 +309,12 @@ void entity_HiddenPanel_init(Entity* entity) {
     }
 
     guMtxIdentF(data->entityMatrix);
-    guTranslateF(sp18, entity->position.x, entity->position.y, entity->position.z);
-    guRotateF(sp58, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guTranslateF(sp18, entity->pos.x, entity->pos.y, entity->pos.z);
+    guRotateF(sp58, entity->rot.y, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
-    guRotateF(sp58, entity->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp58, entity->rot.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
-    guRotateF(sp58, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp58, entity->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp18, sp18);
     guScaleF(sp58, entity->scale.x, entity->scale.y, entity->scale.z);
     guMtxCatF(sp58, sp18, data->entityMatrix);

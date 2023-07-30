@@ -18,9 +18,9 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
 
     actor = battleStatus->playerActor;
     if (actor != NULL) {
-        xDiff = actor->currentPos.x - model->center.x;
-        yDiff = actor->currentPos.y + actor->size.y - 1.5f - model->center.y;
-        zDiff = actor->currentPos.z - model->center.z;
+        xDiff = actor->curPos.x - model->center.x;
+        yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
+        zDiff = actor->curPos.z - model->center.z;
         temp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
         if (yDiff > 0.0f && yDiff < actor->size.y && temp < actor->size.x * 0.5f) {
@@ -31,9 +31,9 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
 
     actor = battleStatus->partnerActor;
     if (actor != NULL) {
-        xDiff = actor->currentPos.x - model->center.x;
-        yDiff = actor->currentPos.y + actor->size.y - 1.5f - model->center.y;
-        zDiff = actor->currentPos.z - model->center.z;
+        xDiff = actor->curPos.x - model->center.x;
+        yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
+        zDiff = actor->curPos.z - model->center.z;
         temp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
         if (yDiff > 0.0f && yDiff < actor->size.y && temp < actor->size.x * 0.5f) {
@@ -48,9 +48,9 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
         actor = battleStatus->enemyActors[i];
 
         if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
-            xDiff = actor->currentPos.x - model->center.x;
-            yDiff = actor->currentPos.y + actor->size.y - 1.5f - model->center.y;
-            zDiff = actor->currentPos.z - model->center.z;
+            xDiff = actor->curPos.x - model->center.x;
+            yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
+            zDiff = actor->curPos.z - model->center.z;
             temp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
             if (yDiff > 0.0f && yDiff < actor->size.y && temp < actor->size.x * 0.5f) {
@@ -61,9 +61,9 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
             for (part = actor->partsTable; part != NULL; part = part->nextPart) {
                 if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)) {
                     if (part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
-                        xDiff = part->currentPos.x - model->center.x;
-                        yDiff = part->currentPos.y + part->size.y - 1.5f - model->center.y;
-                        zDiff = part->currentPos.z - model->center.z;
+                        xDiff = part->curPos.x - model->center.x;
+                        yDiff = part->curPos.y + part->size.y - 1.5f - model->center.y;
+                        zDiff = part->curPos.z - model->center.z;
                         temp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
                         if (yDiff > 0.0f && yDiff < part->size.y && temp < part->size.x * 0.5f) {

@@ -328,7 +328,7 @@ void star_spirits_energy_render(EffectInstance* effect) {
 
     renderTask.appendGfx = star_spirits_energy_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -345,7 +345,7 @@ void star_spirits_energy_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f,
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f,
                      data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 

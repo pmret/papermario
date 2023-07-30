@@ -196,7 +196,7 @@ API_CALLABLE(N(SuperBlock_SwitchToPartner)) {
 }
 
 API_CALLABLE(N(SuperBlock_LoadCurrentPartnerName)) {
-    set_message_msg(gPartnerPopupProperties[gPlayerData.currentPartner].nameMsg, 0);
+    set_message_msg(gPartnerPopupProperties[gPlayerData.curPartner].nameMsg, 0);
     return ApiStatus_DONE2;
 }
 
@@ -205,7 +205,7 @@ API_CALLABLE(N(SuperBlock_StartGlowEffect)) {
     s32 entityIdx = evt_get_variable(script, *args++);
     Entity* entity = get_entity_by_index(entityIdx);
     s32 effectPtrOutVar = *args++;
-    EffectInstance* effectInst = fx_energy_orb_wave(0, entity->position.x, entity->position.y + 12.5f, entity->position.z, 0.7f, 0);
+    EffectInstance* effectInst = fx_energy_orb_wave(0, entity->pos.x, entity->pos.y + 12.5f, entity->pos.z, 0.7f, 0);
 
     evt_set_variable(script, effectPtrOutVar, (s32) effectInst);
     return ApiStatus_DONE2;
@@ -221,7 +221,7 @@ API_CALLABLE(N(SuperBlock_EndGlowEffect)) {
 API_CALLABLE(N(SuperBlock_GatherEnergyFX)) {
     Entity* entity = get_entity_by_index(evt_get_variable(script, *script->ptrReadPos));
 
-    fx_radial_shimmer(4, entity->position.x, entity->position.y + 12.5f, entity->position.z, 1.0f, 75);
+    fx_radial_shimmer(4, entity->pos.x, entity->pos.y + 12.5f, entity->pos.z, 1.0f, 75);
     return ApiStatus_DONE2;
 }
 
@@ -256,7 +256,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
     f32 t1;
     s32 i;
 
-    sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
+    sin_cos_deg(gCameras[gCurrentCameraID].curYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
         script->userData = (EnergyOrbSet*)general_heap_malloc(sizeof(EnergyOrbSet));
@@ -265,8 +265,8 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
         userData->superBlock = get_entity_by_index(evt_get_variable(script, *args++));
 
         for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
-            userData->orbEffects[i] = (EffectInstance*)fx_motion_blur_flame(0, userData->superBlock->position.x,
-                userData->superBlock->position.y + 12.5f, userData->superBlock->position.z, 1.0f, -1);
+            userData->orbEffects[i] = (EffectInstance*)fx_motion_blur_flame(0, userData->superBlock->pos.x,
+                userData->superBlock->pos.y + 12.5f, userData->superBlock->pos.z, 1.0f, -1);
             t1 = 0.0f;
             userData->posZ[i] = t1;
             userData->posY[i] = t1;
@@ -287,9 +287,9 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             add_vec2D_polar(&x, &userData->partnerPosY[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
             userData->partnerPosX[i] = cosTheta * x;
             userData->partnerPosZ[i] = sinTheta * x;
-            userData->partnerPosX[i] = partner->pos.x - (userData->superBlock->position.x + userData->partnerPosX[i]);
-            userData->partnerPosY[i] = partner->pos.y - (userData->superBlock->position.y + userData->partnerPosY[i]);
-            userData->partnerPosZ[i] = partner->pos.z - (userData->superBlock->position.z + userData->partnerPosZ[i]);
+            userData->partnerPosX[i] = partner->pos.x - (userData->superBlock->pos.x + userData->partnerPosX[i]);
+            userData->partnerPosY[i] = partner->pos.y - (userData->superBlock->pos.y + userData->partnerPosY[i]);
+            userData->partnerPosZ[i] = partner->pos.z - (userData->superBlock->pos.z + userData->partnerPosZ[i]);
         }
     }
 

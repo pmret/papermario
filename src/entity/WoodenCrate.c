@@ -21,8 +21,8 @@ void entity_WoodenCrate_init_fragments(Entity* entity, Gfx** dlists, Mtx* matric
     data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_WoodenCrate_setupGfx;
     entity->alpha = 255;
-    entity->position.y = data->basePosY;
-    guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
+    entity->pos.y = data->basePosY;
+    guTranslateF(mtxTrans, entity->pos.x, entity->pos.y, entity->pos.z);
 
     for (i = 0; i < 35; i++) {
         guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
@@ -35,9 +35,9 @@ void entity_WoodenCrate_init_fragments(Entity* entity, Gfx** dlists, Mtx* matric
 
         rotationSpeed = rand_int(5);
         if (i % 2 != 0) {
-            data->fragmentRotationSpeed[i] = rotationSpeed + 10;
+            data->fragmentRotSpeed[i] = rotationSpeed + 10;
         } else {
-            data->fragmentRotationSpeed[i] = -10 - rotationSpeed;
+            data->fragmentRotSpeed[i] = -10 - rotationSpeed;
         }
 
         data->fragmentFallSpeed[i] = 10.0f;
@@ -58,7 +58,7 @@ void entity_WoodenCrate_init(Entity* entity) {
 void entity_WoodenCrate_reset_fragments(Entity* entity) {
     WoodenCrateData* data = entity->dataBuf.crate;
 
-    data->basePosY = entity->position.y;
+    data->basePosY = entity->pos.y;
     entity_WoodenCrate_init_fragments(entity, Entity_WoodenCrate_FragmentsRender, Entity_WoodenCrate_FragmentsMatrices);
 }
 
@@ -79,26 +79,26 @@ void entity_WoodenCrate_update_fragments(Entity* entity) {
         switch (data->fragmentRebounds[i]) {
             case 0:
                 reboundSpeed = 2.0f;
-                rotSpeed = data->fragmentRotationSpeed[i];
+                rotSpeed = data->fragmentRotSpeed[i];
                 lateralSpeed = data->fragmentLateralSpeed[i] / 10.0f;
                 if (rotSpeed >= 0.0f) {
-                    data->fragmentRotationSpeed[i] = rotSpeed - 0.4;
+                    data->fragmentRotSpeed[i] = rotSpeed - 0.4;
                 } else {
-                    data->fragmentRotationSpeed[i] = rotSpeed + 0.5;
+                    data->fragmentRotSpeed[i] = rotSpeed + 0.5;
                 }
                 break;
             case 1:
                 lateralSpeed = 1.0f;
                 reboundSpeed = 0.0f;
-                rotSpeed = data->fragmentRotationSpeed[i] * 0.25f;
+                rotSpeed = data->fragmentRotSpeed[i] * 0.25f;
                 break;
             case 2:
-                data->fragmentRotationSpeed[i] += 1.0f;
-                if (data->fragmentRotationSpeed[i] > 20.0f) {
-                    data->fragmentRotationSpeed[i] = 20.0f;
+                data->fragmentRotSpeed[i] += 1.0f;
+                if (data->fragmentRotSpeed[i] > 20.0f) {
+                    data->fragmentRotSpeed[i] = 20.0f;
                 }
 
-                data->fragmentPosY[i] -= data->fragmentRotationSpeed[i] / 70.0f;
+                data->fragmentPosY[i] -= data->fragmentRotSpeed[i] / 70.0f;
 
                 data->fragmentMoveAngle[i] -= 5;
                 if (data->fragmentMoveAngle[i] <= 5) {
@@ -156,7 +156,7 @@ void entity_WoodenCrate_update_fragments(Entity* entity) {
                 data->fragmentFallSpeed[i] = reboundSpeed;
                 if (data->fragmentRebounds[i] == 2) {
                     data->fragmentMoveAngle[i] = 254;
-                    data->fragmentRotationSpeed[i] = 0.0f;
+                    data->fragmentRotSpeed[i] = 0.0f;
                 }
             }
 
@@ -185,9 +185,9 @@ void entity_WoodenCrate_setupGfx(s32 entityIndex) {
     Gfx* fragmentDlist;
     Gfx** gfx = data->fragmentsGfx;
 
-    x_inv = -entity->position.x;
-    y_inv = -entity->position.y;
-    z_inv = -entity->position.z;
+    x_inv = -entity->pos.x;
+    y_inv = -entity->pos.y;
+    z_inv = -entity->pos.z;
 
     for (i = 0; i < 35; i++) {
         if (data->fragmentRebounds[i] < 2) {
@@ -252,7 +252,7 @@ void entity_WoodenCrate_shatter(Entity* entity, f32 arg1) {
         }
 
         if (flag) {
-            make_item_entity(data->itemID, entity->position.x, entity->position.y + 33.0, entity->position.z,
+            make_item_entity(data->itemID, entity->pos.x, entity->pos.y + 33.0, entity->pos.z,
                 ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM, 0, player_get_camera_facing_angle(), data->globalFlagIndex);
         }
     }

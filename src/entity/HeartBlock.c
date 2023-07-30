@@ -81,9 +81,9 @@ void entity_HeartBlockContent_set_initial_pos(Entity* entity) {
     HeartBlockContentData* temp = entity->dataBuf.heartBlockContent;
     Entity* entityTemp = get_entity_by_index(temp->parentEntityIndex);
 
-    entity->position.x = entityTemp->position.x;
-    entity->position.y = entityTemp->position.y + 14.0f;
-    entity->position.z = entityTemp->position.z;
+    entity->pos.x = entityTemp->pos.x;
+    entity->pos.y = entityTemp->pos.y + 14.0f;
+    entity->pos.z = entityTemp->pos.z;
 }
 
 void entity_HeartBlockContent__reset(Entity* entity) {
@@ -107,9 +107,9 @@ void entity_HeartBlockContent__reset(Entity* entity) {
 
     data->unk_0C = 0;
     data->unk_10 = 0;
-    entity->rotation.x = 0.0f;
-    entity->rotation.y = 0.0f;
-    entity->rotation.z = 0.0f;
+    entity->rot.x = 0.0f;
+    entity->rot.y = 0.0f;
+    entity->rot.z = 0.0f;
     entity->scale.y = entity->scale.x;
     entity->scale.z = entity->scale.x;
 
@@ -148,7 +148,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
                 data->sparkleTimer--;
                 if (data->sparkleTimer <= 0) {
                     data->sparkleTimer = 50;
-                    fx_stars_shimmer(data->sparkleEffectType, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
+                    fx_stars_shimmer(data->sparkleEffectType, entity->pos.x, entity->pos.y, entity->pos.z, 22.0f, 8.0f, 4, 20);
                 }
             }
             break;
@@ -157,7 +157,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
     if (entity_can_collide_with_jumping_player(get_entity_by_index(data->parentEntityIndex))) {
         exec_entity_commandlist(entity);
         disable_player_input();
-        gPlayerStatus.currentSpeed = 0;
+        gPlayerStatus.curSpeed = 0;
         gPlayerStatus.animFlags |= PA_FLAG_RAISED_ARMS;
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
@@ -171,7 +171,7 @@ void entity_HeartBlockContent_reset_data(Entity* entity) {
     entity->scale.x = 1.0f;
     entity->scale.y = 1.0f;
     entity->scale.z = 1.0f;
-    entity->rotation.z = 0.0f;
+    entity->rot.z = 0.0f;
 }
 
 void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
@@ -181,31 +181,31 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
 
     switch (data->state) {
         case 0:
-            fx_sparkles(FX_SPARKLES_0, entity->position.x, entity->position.y, entity->position.z, 2.0f);
+            fx_sparkles(FX_SPARKLES_0, entity->pos.x, entity->pos.y, entity->pos.z, 2.0f);
             data->bouncePhase = 0.0f;
             data->state++;
-            data->riseVelocity = 6.0f;
+            data->riseVel = 6.0f;
             break;
         case 1:
-            entity->position.y = entity->position.y + data->riseVelocity;
-            data->riseVelocity -= 1.0f;
-            if (data->riseVelocity <= 2.0f) {
+            entity->pos.y = entity->pos.y + data->riseVel;
+            data->riseVel -= 1.0f;
+            if (data->riseVel <= 2.0f) {
                 data->state++;
                 entity->flags &= ~ENTITY_FLAG_ALWAYS_FACE_CAMERA;
-                data->rotationRate = -10.0f;
+                data->rotRate = -10.0f;
                 entity_set_render_script(entity, &Entity_HeartBlockContent_RenderScriptHit);
                 entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
             }
             break;
         case 2:
-            entity->position.y += sin_rad(DEG_TO_RAD(data->bouncePhase)) * 0.5f;
+            entity->pos.y += sin_rad(DEG_TO_RAD(data->bouncePhase)) * 0.5f;
             data->bouncePhase -= 30.0f;
             if (data->bouncePhase < 0.0f) {
                 data->bouncePhase += 360.0f;
             }
-            entity->rotation.y += data->rotationRate;
-            data->rotationRate += 2.0f;
-            if (data->rotationRate >= 0.0f) {
+            entity->rot.y += data->rotRate;
+            data->rotRate += 2.0f;
+            if (data->rotRate >= 0.0f) {
                 data->sparkleTrailAngle = 0.0f;
                 data->sparkleTrailRadius = 0.0f;
                 data->state++;
@@ -215,7 +215,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                 recover_fp(-1);
                 sfx_play_sound(SOUND_131);
             }
-            data->yawBuffer[data->yawBufferPos] = entity->rotation.y;
+            data->yawBuffer[data->yawBufferPos] = entity->rot.y;
             data->yawBufferPos++;
             if (data->yawBufferPos > ARRAY_COUNT(data->yawBuffer)) {
                 data->yawBufferPos = 0;
@@ -237,9 +237,9 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             data->sparkleTrailPosY -= 0.7;
 
             if ((data->sparkleTrailTimer++ & 1) != 0) {
-                fx_sparkles(FX_SPARKLES_3, playerStatus->position.x + offsetX,
-                        playerStatus->position.y + offsetY,
-                        playerStatus->position.z - offsetZ,
+                fx_sparkles(FX_SPARKLES_3, playerStatus->pos.x + offsetX,
+                        playerStatus->pos.y + offsetY,
+                        playerStatus->pos.z - offsetZ,
                         8.0f
                 );
             }
@@ -249,18 +249,18 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             }
             // fallthrough
         case 4:
-            entity->position.y += sin_rad(DEG_TO_RAD(data->bouncePhase)) * 0.5f;
+            entity->pos.y += sin_rad(DEG_TO_RAD(data->bouncePhase)) * 0.5f;
             data->bouncePhase -= 30.0f;
             if (data->bouncePhase < 0.0f) {
                 data->bouncePhase += 360.0f;
             }
-            data->rotationRate += 1.0;
-            if (data->rotationRate > 30.0f) {
-                data->rotationRate = 30.0f;
+            data->rotRate += 1.0;
+            if (data->rotRate > 30.0f) {
+                data->rotRate = 30.0f;
             }
-            entity->rotation.y += data->rotationRate;
-            if (entity->rotation.y >= 360.0f) {
-                entity->rotation.y -= 360.0f;
+            entity->rot.y += data->rotRate;
+            if (entity->rot.y >= 360.0f) {
+                entity->rot.y -= 360.0f;
             }
             entity->alpha -= 5;
             if (entity->alpha < 7) {
@@ -269,7 +269,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                     data->state++;
                 }
             }
-            data->yawBuffer[data->yawBufferPos] = entity->rotation.y;
+            data->yawBuffer[data->yawBufferPos] = entity->rot.y;
             data->yawBufferPos++;
             if (data->yawBufferPos > ARRAY_COUNT(data->yawBuffer)) {
                 data->yawBufferPos = 0;
@@ -385,7 +385,7 @@ s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* bp) {
     HeartBlockContentData* data;
 
     entity_base_block_init(entity);
-    childEntity = get_entity_by_index(create_entity(bp, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END));
+    childEntity = get_entity_by_index(create_entity(bp, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, 0, MAKE_ENTITY_END));
     data = childEntity->dataBuf.heartBlockContent;
     data->parentEntityIndex = entity->listIndex;
 

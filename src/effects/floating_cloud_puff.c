@@ -103,7 +103,7 @@ void floating_cloud_puff_render(EffectInstance* effect) {
 
     renderTask.appendGfx = floating_cloud_puff_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

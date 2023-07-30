@@ -71,37 +71,37 @@ API_CALLABLE(N(Update)) {
         case TWEESTER_PARTNER_INIT:
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = bow->flags;
-            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
-            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->pos.x, entity->pos.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, bow->pos.x, bow->pos.z);
+            N(TweesterPhysicsPtr)->angularVel = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
             bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
-            bow->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-            bow->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
-            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            bow->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            bow->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVel);
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius -= 1.0f;
             } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
                 N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase += 3.0f;
 
-            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
-                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelPhase = 150.0f;
             }
 
             bow->pos.y += liftoffVelocity;
             bow->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
-            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
+            N(TweesterPhysicsPtr)->angularVel += 0.8;
 
-            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
-                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVel > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVel = 40.0f;
             }
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
                 N(TweesterPhysicsPtr)->state++;
@@ -150,14 +150,14 @@ s32 N(check_for_treadmill_overlaps)(void) {
         return NO_COLLIDER;
     }
 
-    if (playerStatus->pushVelocity.x == 0.0f && playerStatus->pushVelocity.z == 0.0f) {
+    if (playerStatus->pushVel.x == 0.0f && playerStatus->pushVel.z == 0.0f) {
         return NO_COLLIDER;
     }
 
-    yaw = atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z);
-    x = playerStatus->position.x;
-    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-    z = playerStatus->position.z;
+    yaw = atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z);
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
+    z = playerStatus->pos.z;
 
     add_vec2D_polar(&x, &z, playerStatus->colliderDiameter * 0.5f, clamp_angle(yaw + 180.0f));
     return player_test_lateral_overlap(0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
@@ -254,31 +254,31 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->actingPartner = 9;
             playerStatus->flags |= PS_FLAG_HAZARD_INVINCIBILITY;
             partner_force_player_flip_done();
-            bow->moveToPos.x = playerStatus->position.x;
-            bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-            bow->moveToPos.z = playerStatus->position.z;
-            bow->currentAnim = ANIM_WorldBow_Walk;
+            bow->moveToPos.x = playerStatus->pos.x;
+            bow->moveToPos.y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
+            bow->moveToPos.z = playerStatus->pos.z;
+            bow->curAnim = ANIM_WorldBow_Walk;
             bow->yaw = playerStatus->targetYaw;
-            add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].currentYaw);
+            add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].curYaw);
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, playerStatus->colliderDiameter * 0.5f, bow->yaw);
             bow->duration = 5;
-            bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->position.x, playerStatus->position.z);
+            bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             set_action_state(ACTION_STATE_RIDE);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             script->USE_STATE++; // OUTTA_SIGHT_GATHER
             break;
 
         case OUTTA_SIGHT_GATHER:
-            if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-                bow->moveToPos.x = playerStatus->position.x;
-                bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-                bow->moveToPos.z = playerStatus->position.z;
+            if (collisionStatus->curFloor >= 0 && !(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
+                bow->moveToPos.x = playerStatus->pos.x;
+                bow->moveToPos.y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
+                bow->moveToPos.z = playerStatus->pos.z;
                 bow->pos.x += ((bow->moveToPos.x - bow->pos.x) / bow->duration);
                 bow->pos.y += ((bow->moveToPos.y - bow->pos.y) / bow->duration);
                 bow->pos.z += ((bow->moveToPos.z - bow->pos.z) / bow->duration);
-                N(OuttaSightPosX) = playerStatus->position.x - bow->pos.x;
-                N(OuttaSightPosY) = playerStatus->position.y - bow->pos.y;
-                N(OuttaSightPosZ) = playerStatus->position.z - bow->pos.z;
+                N(OuttaSightPosX) = playerStatus->pos.x - bow->pos.x;
+                N(OuttaSightPosY) = playerStatus->pos.y - bow->pos.y;
+                N(OuttaSightPosZ) = playerStatus->pos.z - bow->pos.z;
                 bow->duration--;
                 if (bow->duration == 0) {
                     bow->yaw = playerStatus->targetYaw;
@@ -293,7 +293,7 @@ API_CALLABLE(N(UseAbility)) {
             return ApiStatus_DONE2;
 
         case OUTTA_SIGHT_VANISH:
-            if (collisionStatus->currentFloor >= 0) {
+            if (collisionStatus->curFloor >= 0) {
                 playerStatus->alpha1 -= 8;
                 if (playerStatus->alpha1 <= 128) {
                     playerStatus->alpha1 = 128;
@@ -305,26 +305,26 @@ API_CALLABLE(N(UseAbility)) {
 
                 get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
                 npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
-                bow->pos.x = playerStatus->position.x - N(OuttaSightPosX);
-                bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
-                bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
+                bow->pos.x = playerStatus->pos.x - N(OuttaSightPosX);
+                bow->pos.y = playerStatus->pos.y - N(OuttaSightPosY);
+                bow->pos.z = playerStatus->pos.z - N(OuttaSightPosZ);
                 break;
             }
             N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE2;
 
         case OUTTA_SIGHT_IDLE:
-            if (collisionStatus->currentFloor <= NO_COLLIDER) {
+            if (collisionStatus->curFloor <= NO_COLLIDER) {
                 N(end_outta_sight_cleanup)(bow);
                 return ApiStatus_DONE2;
             }
 
-            bow->pos.x = playerStatus->position.x - N(OuttaSightPosX);
-            bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
-            bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
+            bow->pos.x = playerStatus->pos.x - N(OuttaSightPosX);
+            bow->pos.y = playerStatus->pos.y - N(OuttaSightPosY);
+            bow->pos.z = playerStatus->pos.z - N(OuttaSightPosZ);
 
             stickInputMag = dist2D(0.0f, 0.0f, partnerStatus->stickX, partnerStatus->stickY);
-            if ((collisionStatus->currentFloor <= NO_COLLIDER)
+            if ((collisionStatus->curFloor <= NO_COLLIDER)
                 || stickInputMag > 10.0f
                 || partnerStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)
                 || playerStatus->flags & PS_FLAG_HIT_FIRE

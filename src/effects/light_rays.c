@@ -49,9 +49,9 @@ void func_E006A000(LightRaysFXData* part, s32 beamIdx) {
     part->unk_58 = part->unk_68;
     part->timeLeft = part->unk_7C;
     part->unk_8C = part->unk_6C;
-    part->rotation.x = part->initialRot.x;
-    part->rotation.y = part->initialRot.y;
-    part->rotation.z = part->initialRot.z;
+    part->rot.x = part->initialRot.x;
+    part->rot.y = part->initialRot.y;
+    part->rot.z = part->initialRot.z;
 }
 
 void func_E006A0BC(LightRaysFXData* part, s32 beamIdx) {
@@ -59,9 +59,9 @@ void func_E006A0BC(LightRaysFXData* part, s32 beamIdx) {
 
     part->unk_58 = 0;
     part->timeLeft = beamIdx * 2 + 30;
-    part->rotation.x = D_E006AE10[idx++];
-    part->rotation.y = D_E006AE10[idx++];
-    part->rotation.z = D_E006AE10[idx++];
+    part->rot.x = D_E006AE10[idx++];
+    part->rot.y = D_E006AE10[idx++];
+    part->rot.z = D_E006AE10[idx++];
     part->alpha = 0;
     part->lifetime = 0;
     part->unk_34 = part->unk_38 = 0.0f;
@@ -246,9 +246,9 @@ void light_rays_update(EffectInstance* effect) {
                     func_E006A0BC(part, i);
                 }
                 if (part->unk_90 <= 0 || --part->unk_90 <= 0) {
-                    part->rotation.x += part->unk_80;
-                    part->rotation.y += part->unk_84;
-                    part->rotation.z += part->unk_88;
+                    part->rot.x += part->unk_80;
+                    part->rot.y += part->unk_84;
+                    part->rot.z += part->unk_88;
                 }
             }
     }
@@ -260,7 +260,7 @@ void light_rays_render(EffectInstance* effect) {
 
     renderTask.appendGfx = light_rays_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -306,11 +306,11 @@ void light_rays_appendGfx(void* effect) {
             func_E006A85C(part);
         }
 
-        guRotateF(mtxTemp, part->rotation.x, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxTemp, part->rot.x, 1.0f, 0.0f, 0.0f);
         guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
         if (type >= 2) {
-            unk_64 = part->rotation.z;
+            unk_64 = part->rot.z;
             if (type == 3) {
                 angleZ = unk_64 + 45.0f;
             } else {
@@ -319,7 +319,7 @@ void light_rays_appendGfx(void* effect) {
 
             guRotateF(mtxTemp, angleZ, 0.0f, 0.0f, 1.0f);
             guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-            guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
+            guRotateF(mtxTemp, part->rot.y, 0.0f, 1.0f, 0.0f);
             guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
             guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
             guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
@@ -346,9 +346,9 @@ void light_rays_appendGfx(void* effect) {
 
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 240, part->alpha);
         } else {
-            guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
+            guRotateF(mtxTemp, part->rot.y, 0.0f, 1.0f, 0.0f);
             guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-            guRotateF(mtxTemp, part->rotation.z, 0.0f, 0.0f, 1.0f);
+            guRotateF(mtxTemp, part->rot.z, 0.0f, 0.0f, 1.0f);
             guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
             guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
             guMtxCatF(mtxTemp, mtxTransform, mtxTransform);

@@ -35,10 +35,10 @@ Vec2i N(StaircaseStepsData)[] = {
 };
 
 API_CALLABLE(N(GetCamPointsNearPlayer)) {
-    script->varTable[0] = gPlayerStatus.position.x + (sin_deg(310.0f) * 100.0f);
-    script->varTable[1] = gPlayerStatus.position.z - (cos_deg(310.0f) * 100.0f);
-    script->varTable[2] = gPlayerStatus.position.x + (sin_deg(130.0f) * 100.0f);
-    script->varTable[3] = gPlayerStatus.position.z - (cos_deg(130.0f) * 100.0f);
+    script->varTable[0] = gPlayerStatus.pos.x + (sin_deg(310.0f) * 100.0f);
+    script->varTable[1] = gPlayerStatus.pos.z - (cos_deg(310.0f) * 100.0f);
+    script->varTable[2] = gPlayerStatus.pos.x + (sin_deg(130.0f) * 100.0f);
+    script->varTable[3] = gPlayerStatus.pos.z - (cos_deg(130.0f) * 100.0f);
     return ApiStatus_DONE2;
 }
 

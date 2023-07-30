@@ -364,7 +364,7 @@ typedef union VolumeField {
 
 // envelope related?
 typedef struct Fade {
-    /* 0x0 */ VolumeField currentVolume;
+    /* 0x0 */ VolumeField curVolume;
     /* 0x4 */ s32 fadeStep;
     /* 0x8 */ s16 targetVolume;
     /* 0xA */ s16 fadeTime;
@@ -439,7 +439,7 @@ typedef struct AuFxBus {
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ AuFX* fxL;
     /* 0x08 */ AuFX* fxR;
-    /* 0x0C */ u8 currentEffectType;
+    /* 0x0C */ u8 curEffectType;
     /* 0x0D */ char unk_0D[0x3];
     /* 0x10 */ struct AuPVoice* head;
     /* 0x14 */ struct AuPVoice* tail;
@@ -620,7 +620,7 @@ typedef struct SoundPlayer {
     /* 0x92 */ s16 coarseTune;
     /* 0x94 */ s8 fineTune;
     /* 0x95 */ char unk_05;
-    /* 0x96 */ u16 currentSoundID;
+    /* 0x96 */ u16 curSoundID;
     /* 0x98 */ u8 priority;
     /* 0x99 */ u8 exclusiveID;
     /* 0x9A */ u8 sfxParamsFlags;
@@ -658,7 +658,7 @@ typedef struct SoundManagerCustomCmdList {
 
 typedef struct SoundManager {
     /* 0x000 */ struct AuGlobals* globals;
-    /* 0x004 */ struct AuVoice* currentVoice;
+    /* 0x004 */ struct AuVoice* curVoice;
     /* 0x008 */ u8* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* extraSounds;
@@ -681,7 +681,7 @@ typedef struct SoundManager {
     /* 0x0BC */ u8 priority;
     /* 0x0BD */ u8 sfxPlayerSelector;
     /* 0x0BE */ u8 busId;
-    /* 0x0BF */ u8 currentVoiceIndex;
+    /* 0x0BF */ u8 curVoiceIndex;
     /* 0x0C0 */ u8 state;
     /* 0x0C1 */ char unk_C1[0x1];
     /* 0x0C2 */ SoundSFXEntry soundQueue[16];
@@ -701,13 +701,13 @@ typedef struct SoundInstance {
     /* 0x0C */ u8 volume;
     /* 0x0D */ u8 pan;
     /* 0x0E */ s16 pitchShift;
-    /* 0x10 */ Vec3f position;
+    /* 0x10 */ Vec3f pos;
 } SoundInstance; // size = 0x1C
 
 typedef struct AlternatingSoundSet {
     /* 0x00 */ s32* sounds;
     /* 0x04 */ s16 soundCount;
-    /* 0x06 */ s16 currentIndex;
+    /* 0x06 */ s16 curIndex;
 } AlternatingSoundSet; // size = 0x08
 
 typedef struct AuVoice {

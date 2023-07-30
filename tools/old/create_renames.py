@@ -18,7 +18,7 @@ for line in inlines:
                     break
 
     if area:
-        fname = line[line.rfind("`") + 1:line.rfind("'")]
+        fname = line[line.rfind("`") + 1 : line.rfind("'")]
         renames[fname] = area
 
 pairs = []

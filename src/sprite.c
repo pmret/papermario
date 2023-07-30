@@ -437,7 +437,7 @@ void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComp
     f32 rotX, rotY, rotZ;
     f32 inX, inY, inZ;
 
-    if (component->initialized && component->currentRaster != -1) {
+    if (component->initialized && component->curRaster != -1) {
         rotX = D_802DFEA0[0];
         rotY = D_802DFEA0[1];
         rotZ = D_802DFEA0[2];
@@ -446,10 +446,10 @@ void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComp
         inZ = component->compPos.z + anim->compOffset.z;
 
         spr_transform_point(rotX, rotY, rotZ, inX, inY, inZ * zscale, &dx, &dy, &dz);
-        cacheEntry = cache[component->currentRaster];
-        paletteIdx = component->currentPalette;
+        cacheEntry = cache[component->curRaster];
+        paletteIdx = component->curPalette;
         if (drawOpts & DRAW_SPRITE_USE_PLAYER_RASTERS) {
-            cacheEntry->image = spr_get_player_raster(component->currentRaster & 0xFFF, D_802DF57C);
+            cacheEntry->image = spr_get_player_raster(component->curRaster & 0xFFF, D_802DF57C);
         }
         D_802DF540 = component->imgfxIdx;
         pal = palettes[paletteIdx];
@@ -457,9 +457,9 @@ void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComp
         spr_appendGfx_component(
             cacheEntry,
             dx, dy, dz,
-            rotX + component->rotation.x,
-            rotY + component->rotation.y,
-            rotZ + component->rotation.z,
+            rotX + component->rot.x,
+            rotY + component->rot.y,
+            rotZ + component->rot.z,
             component->scale.x,
             component->scale.y,
             component->scale.z,
@@ -528,9 +528,9 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
                     comp->posOffset.z = 0.0f;
                     comp->posOffset.y = 0.0f;
                     comp->posOffset.x = 0.0f;
-                    comp->rotation.z = 0;
-                    comp->rotation.y = 0;
-                    comp->rotation.x = 0;
+                    comp->rot.z = 0;
+                    comp->rot.y = 0;
+                    comp->rot.x = 0;
                     comp->scale.z = 1.0f;
                     comp->scale.y = 1.0f;
                     comp->scale.x = 1.0f;
@@ -550,20 +550,20 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
                 case 0x1000:
                     cmdValue = *bufPos++ & 0xFFF;
                     if (cmdValue != 0xFFF) {
-                        comp->currentRaster = cmdValue;
+                        comp->curRaster = cmdValue;
                     } else {
-                        comp->currentRaster = -1;
+                        comp->curRaster = -1;
                     }
-                    comp->currentPalette = -1;
+                    comp->curPalette = -1;
                     break;
                 // 6VVV
                 // SetPalette -- FFF to clear
                 case 0x6000:
                     cmdValue = *bufPos++ & 0xFFF;
                     if (cmdValue != 0xFFF) {
-                        comp->currentPalette = cmdValue;
+                        comp->curPalette = cmdValue;
                     } else {
-                        comp->currentPalette = -1;
+                        comp->curPalette = -1;
                     }
                     break;
                 // 8VUU
@@ -653,9 +653,9 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
             comp->posOffset.z = posZ;
         }
         if (changedFlags & 2) {
-            comp->rotation.x = rotX;
-            comp->rotation.y = rotY;
-            comp->rotation.z = rotZ;
+            comp->rot.x = rotX;
+            comp->rot.y = rotY;
+            comp->rot.z = rotZ;
         }
         if (changedFlags & 4) {
             comp->scale.x = scaleX;
@@ -683,12 +683,12 @@ void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compLi
             comp->compPos.z += listComp->compPos.z;
         }
 
-        if (comp->currentRaster != -1) {
-            cache = rasterCacheEntry[comp->currentRaster];
-            if (comp->currentPalette == -1) {
-                comp->currentPalette = cache->palette;
-                if (overridePalette != 0 && comp->currentPalette == 0) {
-                    comp->currentPalette = overridePalette;
+        if (comp->curRaster != -1) {
+            cache = rasterCacheEntry[comp->curRaster];
+            if (comp->curPalette == -1) {
+                comp->curPalette = cache->palette;
+                if (overridePalette != 0 && comp->curPalette == 0) {
+                    comp->curPalette = overridePalette;
                 }
             }
         }
@@ -728,17 +728,17 @@ void spr_init_component_anim_state(SpriteComponent* comp, SpriteAnimComponent* a
     comp->readPos = anim->cmdList;
     comp->waitTime = 0;
     comp->loopCounter = 0;
-    comp->currentRaster = -1;
-    comp->currentPalette = -1;
+    comp->curRaster = -1;
+    comp->curPalette = -1;
     comp->posOffset.x = 0.0f;
     comp->posOffset.y = 0.0f;
     comp->posOffset.z = 0.0f;
     comp->compPos.x = 0.0f;
     comp->compPos.y = 0.0f;
     comp->compPos.z = 0.0f;
-    comp->rotation.x = 0.0f;
-    comp->rotation.y = 0.0f;
-    comp->rotation.z = 0.0f;
+    comp->rot.x = 0.0f;
+    comp->rot.y = 0.0f;
+    comp->rot.z = 0.0f;
     comp->scale.x = 1.0f;
     comp->scale.y = 1.0f;
     comp->scale.z = 1.0f;
@@ -810,7 +810,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
         SpriteInstances[i].spriteIndex = 0;
         SpriteInstances[i].componentList = NULL;
         SpriteInstances[i].spriteData = NULL;
-        SpriteInstances[i].currentAnimID = -1;
+        SpriteInstances[i].curAnimID = -1;
         SpriteInstances[i].notifyValue = 0;
     }
 
@@ -920,7 +920,7 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     }
 
     if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
-        yaw += (s32)-gCameras[gCurrentCamID].currentYaw;
+        yaw += (s32)-gCameras[gCurrentCamID].curYaw;
         if (yaw > 360) {
             yaw -= 360;
         }
@@ -1071,7 +1071,7 @@ s32 spr_load_npc_sprite(s32 animID, u32* extraAnimList) {
         compList++;
     }
     SpriteInstances[listIndex].spriteIndex = spriteIndex;
-    SpriteInstances[listIndex].currentAnimID = -1;
+    SpriteInstances[listIndex].curAnimID = -1;
     return listIndex;
 }
 
@@ -1094,9 +1094,9 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
 
     palID = (animID >> 8) & 0xFF;
     spr_set_anim_timescale(timeScale);
-    if ((spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) || ((SpriteInstances[i].currentAnimID & 0xFF) != animIndex)) {
+    if ((spriteInstanceID & DRAW_SPRITE_OVERRIDE_ALPHA) || ((SpriteInstances[i].curAnimID & 0xFF) != animIndex)) {
         spr_init_anim_state(compList, animList);
-        SpriteInstances[i].currentAnimID = (palID << 8) | animIndex;
+        SpriteInstances[i].curAnimID = (palID << 8) | animIndex;
         SpriteInstances[i].notifyValue = 0;
     }
     if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
@@ -1108,7 +1108,7 @@ s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale) {
 
 s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* paletteList, Matrix4f mtx) {
     s32 i = spriteInstanceID & 0xFF;
-    s32 animID = SpriteInstances[i].currentAnimID;
+    s32 animID = SpriteInstances[i].curAnimID;
     SpriteRasterCacheEntry** rasters;
     PAL_PTR* palettes;
     SpriteAnimComponent** animComponents;
@@ -1135,7 +1135,7 @@ s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* palett
     D_802DFEA0[2] = 0;
 
     if (!(spriteInstanceID & DRAW_SPRITE_OVERRIDE_YAW)) {
-        yaw += gCameras[gCurrentCamID].currentYaw;
+        yaw += gCameras[gCurrentCamID].curYaw;
         if (yaw > 360) {
             yaw -= 360;
         }
@@ -1214,7 +1214,7 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
     SpriteInstances[spriteInstanceID].spriteIndex = 0;
     SpriteInstances[spriteInstanceID].componentList = NULL;
     SpriteInstances[spriteInstanceID].spriteData = NULL;
-    SpriteInstances[spriteInstanceID].currentAnimID = -1;
+    SpriteInstances[spriteInstanceID].curAnimID = -1;
     return 0;
 }
 
@@ -1272,7 +1272,7 @@ s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, 
         return; // bug: does not return a value
     }
 
-    animID = sprite->currentAnimID;
+    animID = sprite->curAnimID;
     if (animID != 255) {
         // following 3 lines equivalent to:
         // animCompList = sprite->spriteData->animListStart[animID];

@@ -207,7 +207,7 @@ void water_block_render(EffectInstance* effect) {
 
     renderTask.appendGfx = water_block_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 20;
+    renderTask.dist = 20;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

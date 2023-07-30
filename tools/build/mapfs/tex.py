@@ -40,15 +40,11 @@ def img_from_json(json_data, tex_name: str, asset_stack: Tuple[Path, ...]) -> Te
     if main_data == None:
         raise Exception(f"Texture {ret.img_name} has no definition for 'main'")
 
-    (main_fmt_name, ret.main_hwrap, ret.main_vwrap) = ret.read_json_img(
-        main_data, "main", ret.img_name
-    )
+    (main_fmt_name, ret.main_hwrap, ret.main_vwrap) = ret.read_json_img(main_data, "main", ret.img_name)
     (ret.main_fmt, ret.main_depth) = get_format_code(main_fmt_name)
 
     # read main image
-    img_path = get_asset_path(
-        Path(f"mapfs/tex/{tex_name}/{ret.img_name}.png"), asset_stack
-    )
+    img_path = get_asset_path(Path(f"mapfs/tex/{tex_name}/{ret.img_name}.png"), asset_stack)
     if not os.path.isfile(img_path):
         raise Exception(f"Could not find main image for texture: {ret.img_name}")
     (
@@ -62,9 +58,7 @@ def img_from_json(json_data, tex_name: str, asset_stack: Tuple[Path, ...]) -> Te
     ret.has_aux = "aux" in json_data
     if ret.has_aux:
         aux_data = json_data.get("aux")
-        (aux_fmt_name, ret.aux_hwrap, ret.aux_vwrap) = ret.read_json_img(
-            aux_data, "aux", ret.img_name
-        )
+        (aux_fmt_name, ret.aux_hwrap, ret.aux_vwrap) = ret.read_json_img(aux_data, "aux", ret.img_name)
 
         if aux_fmt_name == "Shared":
             # aux tiles have blank attributes in SHARED mode
@@ -79,9 +73,7 @@ def img_from_json(json_data, tex_name: str, asset_stack: Tuple[Path, ...]) -> Te
             ret.extra_tiles = TILES_INDEPENDENT_AUX
 
         # read aux image
-        img_path = get_asset_path(
-            Path(f"mapfs/tex/{tex_name}/{ret.img_name}_AUX.png"), asset_stack
-        )
+        img_path = get_asset_path(Path(f"mapfs/tex/{tex_name}/{ret.img_name}_AUX.png"), asset_stack)
         if not os.path.isfile(img_path):
             raise Exception(f"Could not find AUX image for texture: {ret.img_name}")
         (
@@ -127,9 +119,7 @@ def img_from_json(json_data, tex_name: str, asset_stack: Tuple[Path, ...]) -> Te
                         f"Texture {ret.img_name} is missing mipmap level {mipmap_idx} (size = {mmw} x {mmh})"
                     )
 
-                (raster, pal, width, height) = ret.get_img_file(
-                    main_fmt_name, str(img_path)
-                )
+                (raster, pal, width, height) = ret.get_img_file(main_fmt_name, str(img_path))
                 ret.mipmaps.append(raster)
                 if width != mmw or height != mmh:
                     raise Exception(
@@ -160,9 +150,7 @@ def img_from_json(json_data, tex_name: str, asset_stack: Tuple[Path, ...]) -> Te
     return ret
 
 
-def build(
-    out_path: Path, tex_name: str, asset_stack: Tuple[Path, ...], endian: str = "big"
-):
+def build(out_path: Path, tex_name: str, asset_stack: Tuple[Path, ...], endian: str = "big"):
     out_bytes = bytearray()
 
     json_path = get_asset_path(Path(f"mapfs/tex/{tex_name}.json"), asset_stack)
@@ -172,9 +160,7 @@ def build(
         json_data = json.loads(json_str)
 
         if len(json_data) > 128:
-            raise Exception(
-                f"Maximum number of textures (128) exceeded by {tex_name} ({len(json_data)})`"
-            )
+            raise Exception(f"Maximum number of textures (128) exceeded by {tex_name} ({len(json_data)})`")
 
         for img_data in json_data:
             img = img_from_json(img_data, tex_name, asset_stack)
@@ -189,9 +175,7 @@ if __name__ == "__main__":
     parser.add_argument("bin_out", type=Path, help="Output binary file path")
     parser.add_argument("name", help="Name of tex subdirectory")
     parser.add_argument("asset_stack", help="comma-separated asset stack")
-    parser.add_argument(
-        "--endian", choices=["big", "little"], default="big", help="Output endianness"
-    )
+    parser.add_argument("--endian", choices=["big", "little"], default="big", help="Output endianness")
     args = parser.parse_args()
 
     asset_stack = tuple(Path(d) for d in args.asset_stack.split(","))

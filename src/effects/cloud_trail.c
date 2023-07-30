@@ -106,7 +106,7 @@ void cloud_trail_render(EffectInstance* effect) {
 
     renderTask.appendGfx = cloud_trail_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);
@@ -126,7 +126,7 @@ void cloud_trail_appendGfx(void* effect) {
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
-            guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
+            guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f,
                              part->unk_0C, part->unk_10, part->unk_14);
             guScaleF(sp60, part->unk_1C, part->unk_20, part->unk_24);
             guMtxCatF(sp60, sp20, sp20);

@@ -7,9 +7,9 @@
 API_CALLABLE(func_802A1000_737890) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    f32 xPos = playerActor->currentPos.x + 20.0f;
-    f32 yPos = playerActor->currentPos.y + 15.0f;
-    f32 zPos = playerActor->currentPos.z + 5.0f;
+    f32 xPos = playerActor->curPos.x + 20.0f;
+    f32 yPos = playerActor->curPos.y + 15.0f;
+    f32 zPos = playerActor->curPos.z + 5.0f;
 
     fx_stars_spread(0, xPos, yPos, zPos, 6, 20);
 
@@ -19,9 +19,9 @@ API_CALLABLE(func_802A1000_737890) {
 API_CALLABLE(func_802A1074_737904) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    f32 xPos = playerActor->currentPos.x + 20.0f;
-    f32 yPos = playerActor->currentPos.y + 15.0f;
-    f32 zPos = playerActor->currentPos.z + 5.0f;
+    f32 xPos = playerActor->curPos.x + 20.0f;
+    f32 yPos = playerActor->curPos.y + 15.0f;
+    f32 zPos = playerActor->curPos.z + 5.0f;
 
     fx_steam_burst(0, xPos, yPos, zPos, 1.0f, 20);
 

@@ -590,10 +590,10 @@ ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
         LastSafeFloor = -1;
     }
 
-    if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
-        collider = &gCollisionData.colliderList[collisionStatus->currentFloor];
+    if (!(collisionStatus->curFloor & COLLISION_WITH_ENTITY_BIT)) {
+        collider = &gCollisionData.colliderList[collisionStatus->curFloor];
         if (collider->flags & COLLIDER_FLAG_SAFE_FLOOR) {
-            LastSafeFloor = collisionStatus->currentFloor;
+            LastSafeFloor = collisionStatus->curFloor;
             return ApiStatus_BLOCK;
         }
     }

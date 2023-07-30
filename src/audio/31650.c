@@ -88,11 +88,11 @@ void au_driver_init(AuSynDriver* driver, ALConfig* config) {
         fxBus->head = NULL;
         fxBus->tail = NULL;
         fxBus->gain = 0x7FFF;
-        fxBus->currentEffectType = AU_FX_NONE;
+        fxBus->curEffectType = AU_FX_NONE;
         fxBus->fxL = alHeapAlloc(heap, 1, sizeof(*fxBus->fxL));
         fxBus->fxR = alHeapAlloc(heap, 1, sizeof(*fxBus->fxR));
-        func_80058E84(fxBus->fxL, fxBus->currentEffectType, heap);
-        func_80058E84(fxBus->fxR, fxBus->currentEffectType, heap);
+        func_80058E84(fxBus->fxL, fxBus->curEffectType, heap);
+        func_80058E84(fxBus->fxR, fxBus->curEffectType, heap);
     }
 
     gSynDriverPtr->savedMainOut = alHeapAlloc(heap, 2 * AUDIO_SAMPLES, 2);
@@ -174,7 +174,7 @@ Acmd* alAudioFrame(Acmd* cmdList, s32* cmdLen, s16* outBuf, s32 outLen) {
                         } while (next != NULL);
                         fxBus->tail = NULL;
                     }
-                    if (fxBus->currentEffectType != AU_FX_NONE) {
+                    if (fxBus->curEffectType != AU_FX_NONE) {
                         cmdListPos = au_pull_fx(fxBus->fxL, cmdListPos, N_AL_AUX_L_OUT, 0);
                         cmdListPos = au_pull_fx(fxBus->fxR, cmdListPos, N_AL_AUX_R_OUT, 0);
                     }
@@ -279,7 +279,7 @@ u16 au_bus_get_volume(u8 index, u16 arg1) {
 void au_bus_set_effect(u8 index, u8 effectType) {
     AuFxBus* fxBus = &gSynDriverPtr->fxBus[index];
 
-    fxBus->currentEffectType = effectType;
+    fxBus->curEffectType = effectType;
     func_8005904C(fxBus->fxL, effectType);
     func_8005904C(fxBus->fxR, effectType);
 }

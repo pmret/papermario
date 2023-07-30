@@ -75,7 +75,7 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     spinyObject->unk_34 = 180;
     spinyObject->unk_38 = 120;
     spinyObject->yaw = rand_int(360);
-    spinyObject->rotationSpeed = rand_int(10) + 5;
+    spinyObject->rotSpeed = rand_int(10) + 5;
     spinyObject->state = -1;
     spinyObject->xScale = 1.0f;
     spinyObject->yScale = 1.0f;
@@ -120,14 +120,14 @@ void throw_spiny_update(EffectInstance* effectInstance) {
         spinyObject->pos.x += spinyObject->unk_44;
         spinyObject->pos.y += spinyObject->gravity;
         spinyObject->pos.z += spinyObject->unk_4C;
-        spinyObject->yaw += spinyObject->rotationSpeed;
+        spinyObject->yaw += spinyObject->rotSpeed;
     }
 
     if ((lifeDuration - 1) == spinyObject->timeUntilFall) {
         spinyObject->state = 0;
         spinyObject->gravity = -spinyObject->gravity;
         spinyObject->unk_44 = spinyObject->unk_44;
-        spinyObject->rotationSpeed = -4.0f;
+        spinyObject->rotSpeed = -4.0f;
         return;
     }
 
@@ -135,7 +135,7 @@ void throw_spiny_update(EffectInstance* effectInstance) {
 
     if ((gravity < 0.0f) && (spinyObject->pos.y < 100.0 / 7.0)) {
         spinyObject->pos.y = 100.0f / 7.0f;
-        spinyObject->rotationSpeed = -20.0f;
+        spinyObject->rotSpeed = -20.0f;
         spinyObject->gravity = gravity - gravity;
     }
 }
@@ -146,7 +146,7 @@ void throw_spiny_render(EffectInstance* effect) {
 
     renderTask.appendGfx = throw_spiny_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

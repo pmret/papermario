@@ -40,7 +40,7 @@ void interact_speech_setup(void) {
     temp = SpeechBubblePtr;
     temp->state = 0;
     temp->scale = 0.4f;
-    SpeechBubblePtr->yaw = -gCameras[gCurrentCameraID].currentYaw;
+    SpeechBubblePtr->yaw = -gCameras[gCurrentCameraID].curYaw;
     SpeechBubblePtr->brightness = 255;
 }
 
@@ -50,7 +50,7 @@ void appendGfx_speech_bubble(void) {
 
     if (gPlayerStatus.animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
         guScaleF(mtxTemp, SpeechBubblePtr->scale, SpeechBubblePtr->scale, SpeechBubblePtr->scale);
-        guRotateF(mtxTransform, SpeechBubblePtr->yaw - gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxTransform, SpeechBubblePtr->yaw - gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(mtxTemp, mtxTransform, mtxTemp);
         guTranslateF(mtxTransform, SpeechBubblePtr->pos.x, SpeechBubblePtr->pos.y, SpeechBubblePtr->pos.z);
         guMtxCatF(mtxTemp, mtxTransform, mtxTransform);

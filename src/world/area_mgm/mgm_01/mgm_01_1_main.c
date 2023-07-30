@@ -5,14 +5,14 @@ API_CALLABLE(N(GetSpotlightPos)) {
     f32 spotLightPosX, spotLightPosZ;
     f32 lightBeamRotX, lightBeamRotZ;
 
-    spotLightPosX = gPlayerStatusPtr->position.x;
+    spotLightPosX = gPlayerStatusPtr->pos.x;
     if (spotLightPosX < -95.0) {
         spotLightPosX = -95.0;
     }
     if (spotLightPosX > 95.0) {
         spotLightPosX = 95.0;
     }
-    spotLightPosZ = gPlayerStatusPtr->position.z;
+    spotLightPosZ = gPlayerStatusPtr->pos.z;
     if (spotLightPosZ < -80.0) {
         spotLightPosZ = -80.0;
     }
@@ -29,9 +29,9 @@ API_CALLABLE(N(GetSpotlightPos)) {
     evt_set_float_variable(script, LVar3, lightBeamRotZ);
 
     shading = gSpriteShadingProfile;
-    shading->sources[0].pos.x = gPlayerStatusPtr->position.x * 0.8;
+    shading->sources[0].pos.x = gPlayerStatusPtr->pos.x * 0.8;
     shading->sources[0].pos.y = 80.0f;
-    shading->sources[0].pos.z = gPlayerStatusPtr->position.z + 50.0f;
+    shading->sources[0].pos.z = gPlayerStatusPtr->pos.z + 50.0f;
 
     return ApiStatus_DONE2;
 }

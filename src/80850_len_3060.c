@@ -69,7 +69,7 @@ void clear_player_data(void) {
     playerData->maxStarPower = 0;
     playerData->specialBarsFilled = 0;
     playerData->starBeamLevel = 0;
-    playerData->currentPartner = 0;
+    playerData->curPartner = 0;
 
     for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
         playerData->partners[i].enabled = FALSE;

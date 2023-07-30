@@ -135,7 +135,7 @@ void flame_render(EffectInstance* effect) {
     }
 
     renderTaskPtr->appendGfx = flame_appendGfx;
-    renderTaskPtr->distance = -outDist;
+    renderTaskPtr->dist = -outDist;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
@@ -178,7 +178,7 @@ void flame_appendGfx(void* effect) {
     gDPSetEnvColor(gMainGfxPos++, unkStruct->unk_04, unkStruct->unk_05, unkStruct->unk_06, 0);
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
     guScaleF(sp58, data->unk_10 * data->unk_30, data->unk_10 * data->unk_2C, data->unk_10);
     guMtxCatF(sp58, sp98, sp98);

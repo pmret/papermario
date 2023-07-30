@@ -47,7 +47,7 @@ void entity_upgrade_block_check_if_inactive(Entity* entity) {
         Entity* childEntity;
         SuperBlockContentData* childData;
 
-        parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
+        parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, 0, MAKE_ENTITY_END);
         childEntity = get_entity_by_index(parentData->childEntityIndex);
         childData = childEntity->dataBuf.superBlockContent;
         childData->parentEntityIndex = entity->listIndex;
@@ -58,7 +58,7 @@ void entity_upgrade_block_init(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
     entity_base_block_init(entity);
-    entity->rotation.y += 180.0f;
+    entity->rot.y += 180.0f;
     data->gameFlagIndex = 0xFFFF;
     data->childEntityIndex = -1;
 }
@@ -75,9 +75,9 @@ void entity_SuperBlockContent_attach_to_parent(Entity* entity) {
     SuperBlockContentData* data = entity->dataBuf.superBlockContent;
     Entity* parentEntity = get_entity_by_index(data->parentEntityIndex);
 
-    entity->position.x = parentEntity->position.x;
-    entity->position.y = parentEntity->position.y + 14.0f;
-    entity->position.z = parentEntity->position.z;
+    entity->pos.x = parentEntity->pos.x;
+    entity->pos.y = parentEntity->pos.y + 14.0f;
+    entity->pos.z = parentEntity->pos.z;
 }
 
 EntityScript Entity_SuperBlock_Script = {
@@ -190,8 +190,8 @@ void entity_SuperBlockContent_idle(Entity* entity) {
         entity->renderSetupFunc = NULL;
     }
 
-    entity->rotation.y = clamp_angle(entity->rotation.y + 3.0);
-    data->yawBuffer[data->yawBufferPos] = entity->rotation.y;
+    entity->rot.y = clamp_angle(entity->rot.y + 3.0);
+    data->yawBuffer[data->yawBufferPos] = entity->rot.y;
 
     data->yawBufferPos++;
     if (data->yawBufferPos > ARRAY_COUNT(data->yawBuffer)) {
@@ -201,7 +201,7 @@ void entity_SuperBlockContent_idle(Entity* entity) {
     if (!data->isHidden && gOverrideFlags == 0) {
         if (--data->effectTimer <= 0) {
             data->effectTimer = 50;
-            fx_stars_shimmer(3, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
+            fx_stars_shimmer(3, entity->pos.x, entity->pos.y, entity->pos.z, 22.0f, 8.0f, 4, 20);
         }
     }
 }

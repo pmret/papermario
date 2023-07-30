@@ -30,10 +30,10 @@ static s32 get_entity_below_spinning_flower(void) {
     f32 posX, posY, posZ, height;
     f32 hitRx, hitRz, hitDirX, hitDirZ;
 
-    posX = gPlayerStatus.position.x;
-    posZ = gPlayerStatus.position.z;
+    posX = gPlayerStatus.pos.x;
+    posZ = gPlayerStatus.pos.z;
     height = gPlayerStatus.colliderHeight;
-    posY = gPlayerStatus.position.y + (height * 0.5);
+    posY = gPlayerStatus.pos.y + (height * 0.5);
     return player_raycast_below_cam_relative(&gPlayerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }
 
@@ -55,15 +55,15 @@ void action_update_use_spinning_flower(void) {
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         func_800EF300();
         playerStatus->actionSubstate = SUBSTATE_ATTRACT;
-        playerStatus->currentStateTime = 0;
+        playerStatus->curStateTime = 0;
         D_802B6EE4 = 0.0f;
         D_802B6EE8 = 0.0f;
-        D_802B6EF4 = playerStatus->position.y;
+        D_802B6EF4 = playerStatus->pos.y;
         D_802B6EDC = 3.0f;
         disable_player_static_collisions();
         disable_player_input();
         playerStatus->flags |= PS_FLAG_ROTATION_LOCKED;
-        entityID = gCollisionStatus.currentFloor;
+        entityID = gCollisionStatus.curFloor;
 
         TempPointer = &SpinningFlower_EntityIndex;
         if (entityID >= 0){
@@ -88,22 +88,22 @@ void action_update_use_spinning_flower(void) {
                 D_802B6EE4 = 20.0f;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            if (playerStatus->currentStateTime < 10) {
-                playerStatus->currentStateTime++;
+            if (playerStatus->curStateTime < 10) {
+                playerStatus->curStateTime++;
                 D_802B6EF4++;
             }
             D_802B6EE8 += 8.0f;
-            playerStatus->position.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
+            playerStatus->pos.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
             if (SpinningFlower_EntityIndex >= 0) {
                 entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
-                distToCenter = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
-                SpinningFlower_AngleToCenter = atan2(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
+                distToCenter = dist2D(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                SpinningFlower_AngleToCenter = atan2(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 if (distToCenter > 4.0f) {
                     distToCenter--;
                 }
                 sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter), &dx, &dz);
-                playerStatus->position.x = entityByIndex->position.x + (dx * distToCenter);
-                playerStatus->position.z = entityByIndex->position.z - (dz * distToCenter);
+                playerStatus->pos.x = entityByIndex->pos.x + (dx * distToCenter);
+                playerStatus->pos.z = entityByIndex->pos.z - (dz * distToCenter);
                 sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 91.0f), &dx, &dz);
                 D_802B6ED4 =  dx * D_802B6EDC;
                 D_802B6ED8 = -dz * D_802B6EDC;
@@ -115,17 +115,17 @@ void action_update_use_spinning_flower(void) {
                 if (inputMagnitude < 0.1) {
                     inputMagnitude = 0.1f;
                 }
-                playerStatus->position.x += dx * inputMagnitude;
-                playerStatus->position.z -= dz * inputMagnitude;
+                playerStatus->pos.x += dx * inputMagnitude;
+                playerStatus->pos.z -= dz * inputMagnitude;
             }
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             entityID = get_entity_below_spinning_flower();
             if (entityID < 0 || !(entityID & COLLISION_WITH_ENTITY_BIT)) {
-                playerStatus->currentStateTime = 20;
+                playerStatus->curStateTime = 20;
                 D_802B6EE8 = 0.0f;
-                D_802B6EF4 = playerStatus->position.y;
+                D_802B6EF4 = playerStatus->pos.y;
                 playerStatus->actionSubstate++;
                 D_802B6EF0 = 1.6f;
                 playerStatus->flags |= PS_FLAG_SCRIPTED_FALL;
@@ -134,9 +134,9 @@ void action_update_use_spinning_flower(void) {
                 !(playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS))) {
                 suggest_player_anim_always_forward(ANIM_Mario1_Jump);
                 playerStatus->actionSubstate = SUBSTATE_SPIN_UP;
-                playerStatus->currentStateTime = 30;
+                playerStatus->curStateTime = 30;
                 D_802B6EE0 = 0.0f;
-                gCollisionStatus.currentFloor = NO_COLLIDER;
+                gCollisionStatus.curFloor = NO_COLLIDER;
                 exec_entity_commandlist(get_entity_by_index(SpinningFlower_EntityIndex));
             }
             break;
@@ -152,13 +152,13 @@ void action_update_use_spinning_flower(void) {
             D_802B6EF0 -= 0.72;
             D_802B6ED4 =  dx * D_802B6EDC;
             D_802B6ED8 = -dz * D_802B6EDC;
-            playerStatus->position.x += D_802B6ED4;
-            playerStatus->position.z += D_802B6ED8;
+            playerStatus->pos.x += D_802B6ED4;
+            playerStatus->pos.z += D_802B6ED8;
             collision_lava_reset_check_additional_overlaps();
-            playerStatus->position.y = player_check_collision_below(D_802B6EF0, &entityID);
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            playerStatus->pos.y = player_check_collision_below(D_802B6EF0, &entityID);
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             if (entityID >= 0) {
                 playerStatus->flags &= ~PS_FLAG_ROTATION_LOCKED;
                 enable_player_input();
@@ -174,26 +174,26 @@ void action_update_use_spinning_flower(void) {
         case SUBSTATE_SPIN_UP:
             if (SpinningFlower_EntityIndex >= 0) {
                 entityByIndex = get_entity_by_index(SpinningFlower_EntityIndex);
-                distToCenter = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
-                SpinningFlower_AngleToCenter = atan2(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
+                distToCenter = dist2D(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
+                SpinningFlower_AngleToCenter = atan2(entityByIndex->pos.x, entityByIndex->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 if (distToCenter > 4.0f) {
                     distToCenter -= 1.0f;
                 }
                 sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter), &dx, &dz);
-                playerStatus->position.x = entityByIndex->position.x + (dx * distToCenter);
-                playerStatus->position.z = entityByIndex->position.z - (dz * distToCenter);
+                playerStatus->pos.x = entityByIndex->pos.x + (dx * distToCenter);
+                playerStatus->pos.z = entityByIndex->pos.z - (dz * distToCenter);
                 sin_cos_rad(DEG_TO_RAD(SpinningFlower_AngleToCenter - 91.0f), &dx, &dz);
                 D_802B6ED4 =  dx * D_802B6EDC;
                 D_802B6ED8 = -dz * D_802B6EDC;
             }
             D_802B6EE8 += 8.0f;
 
-            playerStatus->position.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            if (playerStatus->currentStateTime != 0) {
-                playerStatus->currentStateTime--;
+            playerStatus->pos.y = D_802B6EF4 + sin_rad(DEG_TO_RAD(clamp_angle(D_802B6EE8))) * 4.0f;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            if (playerStatus->curStateTime != 0) {
+                playerStatus->curStateTime--;
                 D_802B6EE4 += 2.0f;
                 if (D_802B6EE4 >= 45.0f) {
                     D_802B6EE4 = 45.0f;
@@ -202,7 +202,7 @@ void action_update_use_spinning_flower(void) {
                 break;
             }
             playerStatus->actionSubstate++; // SUBSTATE_ASCEND_A
-            playerStatus->currentStateTime = 30;
+            playerStatus->curStateTime = 30;
             phys_adjust_cam_on_landing();
             break;
         case SUBSTATE_ASCEND_A:
@@ -217,47 +217,47 @@ void action_update_use_spinning_flower(void) {
             }
 
             ascentVelocity = sin_rad(DEG_TO_RAD(D_802B6EE0)) * 4.0f;
-            playerStatus->position.y += ascentVelocity;
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-            distToCenter = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->position.x, playerStatus->position.z));
+            playerStatus->pos.y += ascentVelocity;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
+            distToCenter = fabsf(dist2D(D_802BCE34, D_802BCE32, playerStatus->pos.x, playerStatus->pos.z));
             if (distToCenter > 40.0f) {
-                if (D_802BCE30 + 30 < playerStatus->position.y) {
+                if (D_802BCE30 + 30 < playerStatus->pos.y) {
                     playerStatus->actionSubstate++; // SUBSTATE_ASCEND_B
-                    inputAngle = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
+                    inputAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, D_802BCE34, D_802BCE32);
                     sin_cos_rad(DEG_TO_RAD(inputAngle), &dx, &dz);
-                    playerStatus->currentStateTime = 64;
+                    playerStatus->curStateTime = 64;
                     SpinningFlower_AngleToCenter = inputAngle;
                     D_802B6ED4 = (dx * distToCenter) * 0.015625;
                     D_802B6ED8 = (-dz * distToCenter) * 0.015625;
                 }
                 break;
             }
-            if (playerStatus->currentStateTime == 0) {
+            if (playerStatus->curStateTime == 0) {
                 playerStatus->actionSubstate = SUBSTATE_BOOST;
-                playerStatus->currentStateTime = 20;
+                playerStatus->curStateTime = 20;
             } else {
-                playerStatus->currentStateTime--;
+                playerStatus->curStateTime--;
             }
             break;
         case SUBSTATE_ASCEND_B:
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            if (playerStatus->currentStateTime != 0) {
-                playerStatus->currentStateTime--;
+            if (playerStatus->curStateTime != 0) {
+                playerStatus->curStateTime--;
                 if (D_802B6EE0-- < 0.0f) {
                     D_802B6EE0 = 0.0f;
                 }
                 ascentVelocity = 2.0f * sin_rad(DEG_TO_RAD(D_802B6EE0));
-                playerStatus->position.x += D_802B6ED4;
-                playerStatus->position.y += ascentVelocity;
-                playerStatus->position.z += D_802B6ED8;
+                playerStatus->pos.x += D_802B6ED4;
+                playerStatus->pos.y += ascentVelocity;
+                playerStatus->pos.z += D_802B6ED8;
             } else {
                 playerStatus->actionSubstate = SUBSTATE_FINISH;
             }
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             break;
         case SUBSTATE_BOOST:
             D_802B6EE4 += 1.0f;
@@ -270,9 +270,9 @@ void action_update_use_spinning_flower(void) {
                 D_802B6EE0 = 45.0f;
             }
             ascentVelocity = sin_rad(DEG_TO_RAD(D_802B6EE0)) * 3.0f;
-            playerStatus->position.y += ascentVelocity;
-            if (playerStatus->currentStateTime != 0) {
-                playerStatus->currentStateTime--;
+            playerStatus->pos.y += ascentVelocity;
+            if (playerStatus->curStateTime != 0) {
+                playerStatus->curStateTime--;
                 break;
             }
         case SUBSTATE_FINISH:

@@ -628,7 +628,7 @@ void pause_partners_init(MenuPanel* panel) {
 
     gPausePartnersCurrentPartnerIdx = 0;
     for (i = 0; i < gPausePartnersNumPartners; i++) {
-        if (playerData->currentPartner == gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[i]]) {
+        if (playerData->curPartner == gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[i]]) {
             gPausePartnersCurrentPartnerIdx = i;
             break;
         }

@@ -42,7 +42,7 @@ EvtScript N(EVS_TetherParterToPlayer) = {
 };
 
 API_CALLABLE(N(SavePartnerFlags)) {
-    if (gPlayerData.currentPartner == PARTNER_NONE) {
+    if (gPlayerData.curPartner == PARTNER_NONE) {
         script->varTable[14] = FALSE;
         return ApiStatus_DONE2;
     }

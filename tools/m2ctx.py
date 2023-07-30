@@ -20,13 +20,13 @@ CPP_FLAGS = [
     "-D_LANGUAGE_C",
     "-DF3DEX_GBI_2",
     "-D_MIPS_SZLONG=32",
-    "-DSCRIPT(test...)={}"
-    "-D__attribute__(test...)=",
+    "-DSCRIPT(test...)={}" "-D__attribute__(test...)=",
     "-D__asm__(test...)=",
     "-ffreestanding",
     "-DM2CTX",
     "-DVERSION_PAL",
 ]
+
 
 def import_c_file(in_file) -> str:
     in_file = os.path.relpath(in_file, root_dir)
@@ -42,10 +42,9 @@ def import_c_file(in_file) -> str:
         out_text += subprocess.check_output(cpp_command2, cwd=root_dir, encoding="utf-8")
     except subprocess.CalledProcessError:
         print(
-            "Failed to preprocess input file, when running command:\n"
-            + cpp_command,
+            "Failed to preprocess input file, when running command:\n" + cpp_command,
             file=sys.stderr,
-            )
+        )
         sys.exit(1)
 
     if not out_text:
@@ -56,10 +55,9 @@ def import_c_file(in_file) -> str:
         out_text = out_text.replace(line + "\n", "")
     return out_text
 
+
 def main():
-    parser = argparse.ArgumentParser(
-        description="""Create a context file which can be used for mips_to_c"""
-    )
+    parser = argparse.ArgumentParser(description="""Create a context file which can be used for mips_to_c""")
     parser.add_argument(
         "c_file",
         help="""File from which to create context""",

@@ -10,7 +10,7 @@ with open("tools/symz.txt") as f:
     for line in f.readlines():
         if line.strip() and not line.startswith("//"):
             name, addr = line.strip().strip(";").split(" = ")
-            try :
+            try:
                 addr = int(addr, 0)
             except ValueError:
                 continue

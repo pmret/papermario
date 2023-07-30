@@ -8,10 +8,10 @@
 API_CALLABLE(N(MonitorPlayerLastFloor)) {
     s32 level = -1;
 
-    if (gPlayerStatus.lastGoodPosition.y > -600.0) {
+    if (gPlayerStatus.lastGoodPos.y > -600.0) {
         level = 0;
     }
-    if (gPlayerStatus.lastGoodPosition.y < -770.0) {
+    if (gPlayerStatus.lastGoodPos.y < -770.0) {
         level = 1;
     }
     if (level >= 0) {

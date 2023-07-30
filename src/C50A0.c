@@ -664,10 +664,10 @@ void draw_coin_sparkles(ItemEntity* item) {
     x = D_80155D8C;
     y = D_80155D8E;
     z = D_80155D90;
-    angle = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+    angle = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
 
     guTranslateF(sp18, x, y, z);
-    guTranslateF(sp58, item->position.x, item->position.y + 12.0f, item->position.z);
+    guTranslateF(sp58, item->pos.x, item->pos.y + 12.0f, item->pos.z);
     guRotateF(sp98, angle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp18, sp98, sp98);
     guMtxCatF(sp98, sp58, spD8);
@@ -922,9 +922,9 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 
     item->spawnType = itemSpawnMode;
     item->state = ITEM_PHYSICS_STATE_INIT;
-    item->position.x = x;
-    item->position.y = y;
-    item->position.z = z;
+    item->pos.x = x;
+    item->pos.y = y;
+    item->pos.z = z;
 
     itemID &= 0xFFFF;
 
@@ -1119,24 +1119,24 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
-            item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
+            item->shadowIndex = create_shadow_type(0, item->pos.x, item->pos.y, item->pos.z);
             shadow = get_shadow_by_index(item->shadowIndex);
 
             if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
                 shadow->flags |= ENTITY_FLAG_HIDDEN;
             }
 
-            x = item->position.x;
-            y = item->position.y + 12.0f;
-            z = item->position.z;
+            x = item->pos.x;
+            y = item->pos.y + 12.0f;
+            z = item->pos.z;
             hitDepth = 1000.0f;
             npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
-            shadow->position.x = x;
-            shadow->position.y = y;
-            shadow->position.z = z;
-            shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
-            shadow->rotation.y = 0.0f;
-            shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+            shadow->pos.x = x;
+            shadow->pos.y = y;
+            shadow->pos.z = z;
+            shadow->rot.x = gGameStatusPtr->playerGroundTraceAngles.x;
+            shadow->rot.y = 0.0f;
+            shadow->rot.z = gGameStatusPtr->playerGroundTraceAngles.z;
             set_standard_shadow_scale(shadow, hitDepth * 0.5f);
             break;
     }
@@ -1200,9 +1200,9 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     item->spawnType = ITEM_SPAWN_AT_PLAYER;
     item->state = ITEM_PICKUP_STATE_INIT;
     item->boundVar = 0;
-    item->position.x = playerStatus->position.x;
-    item->position.y = playerStatus->position.y;
-    item->position.z = playerStatus->position.z;
+    item->pos.x = playerStatus->pos.x;
+    item->pos.y = playerStatus->pos.y;
+    item->pos.z = playerStatus->pos.z;
 
     item->shadowIndex = -1;
     item->nextUpdate = 1;
@@ -1224,22 +1224,22 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     }
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
 
-    item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
+    item->shadowIndex = create_shadow_type(0, item->pos.x, item->pos.y, item->pos.z);
     shadow = get_shadow_by_index(item->shadowIndex);
     shadow->flags |= ENTITY_FLAG_HIDDEN;
 
-    posX = item->position.x;
-    posY = item->position.y + 12.0f;
-    posZ = item->position.z;
+    posX = item->pos.x;
+    posY = item->pos.y + 12.0f;
+    posZ = item->pos.z;
     depth = 1000.0f;
     npc_raycast_down_sides(COLLISION_CHANNEL_20000, &posX, &posY, &posZ, &depth);
-    shadow->position.x = posX;
-    shadow->position.y = posY;
-    shadow->position.z = posZ;
+    shadow->pos.x = posX;
+    shadow->pos.y = posY;
+    shadow->pos.z = posZ;
 
-    shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
-    shadow->rotation.y = 0.0f;
-    shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+    shadow->rot.x = gGameStatusPtr->playerGroundTraceAngles.x;
+    shadow->rot.y = 0.0f;
+    shadow->rot.z = gGameStatusPtr->playerGroundTraceAngles.z;
     set_standard_shadow_scale(shadow, depth * 0.5f);
 
     item_entity_load(item);
@@ -1350,32 +1350,32 @@ void update_item_entities(void) {
                         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
                         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
                         case ITEM_SPAWN_AT_PLAYER:
-                            xs = item->position.x;
-                            ys = item->position.y;
-                            zs = item->position.z;
+                            xs = item->pos.x;
+                            ys = item->pos.y;
+                            zs = item->pos.z;
 
                             if (xs != item->lastPos.x || ys != item->lastPos.y || zs != item->lastPos.z) {
                                 Shadow* shadow = get_shadow_by_index(item->shadowIndex);
 
-                                x = item->position.x;
-                                y = item->position.y + 12.0f;
-                                z = item->position.z;
+                                x = item->pos.x;
+                                y = item->pos.y + 12.0f;
+                                z = item->pos.z;
                                 hitDepth = 1000.0f;
                                 npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
 
-                                shadow->position.x = x;
-                                shadow->position.y = y;
-                                shadow->position.z = z;
-                                shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
-                                shadow->rotation.y = 0.0f;
-                                shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+                                shadow->pos.x = x;
+                                shadow->pos.y = y;
+                                shadow->pos.z = z;
+                                shadow->rot.x = gGameStatusPtr->playerGroundTraceAngles.x;
+                                shadow->rot.y = 0.0f;
+                                shadow->rot.z = gGameStatusPtr->playerGroundTraceAngles.z;
                                 set_standard_shadow_scale(shadow, hitDepth * 0.5f);
                             }
                             break;
                     }
-                    item->lastPos.x = item->position.x;
-                    item->lastPos.y = item->position.y;
-                    item->lastPos.z = item->position.z;
+                    item->lastPos.x = item->pos.x;
+                    item->lastPos.y = item->pos.y;
+                    item->lastPos.z = item->pos.z;
                 }
             }
             do {} while (0); // required to match
@@ -1414,8 +1414,8 @@ void appendGfx_item_entity(void* data) {
         item->scale = 1.0f;
     }
 
-    rot = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
-    guTranslateF(mtxTranslate, item->position.x, item->position.y + yOffset, item->position.z);
+    rot = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
+    guTranslateF(mtxTranslate, item->pos.x, item->pos.y + yOffset, item->pos.z);
     guRotateF(mtxRotY, rot, 0.0f, 1.0f, 0.0f);
     if (item->flags & ITEM_ENTITY_RESIZABLE) {
         guScaleF(mtxScale, item->scale, item->scale, item->scale);
@@ -1554,7 +1554,7 @@ void draw_item_entities(void) {
 
             rtPtr->appendGfxArg = item;
             rtPtr->appendGfx = appendGfx_item_entity;
-            rtPtr->distance = 0;
+            rtPtr->dist = 0;
 
             retTask = queue_render_task(rtPtr);
             retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
@@ -1624,8 +1624,8 @@ void render_item_entities(void) {
                             item->scale = 1.0f;
                         }
 
-                        rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
-                        guTranslateF(sp58, item->position.x, -item->position.y - offsetY, item->position.z);
+                        rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
+                        guTranslateF(sp58, item->pos.x, -item->pos.y - offsetY, item->pos.z);
                         guRotateF(sp98, rotX, 0.0f, 1.0f, 0.0f);
                         if (item->flags & ITEM_ENTITY_RESIZABLE) {
                             guScaleF(spD8, item->scale, item->scale, item->scale);
@@ -1879,28 +1879,28 @@ b32 test_item_player_collision(ItemEntity* item) {
 
     cond = FALSE;
     colliderHeightHalf = playerStatus->colliderHeight / 2;
-    playerX = playerStatus->position.x;
-    playerY = playerStatus->position.y;
-    playerZ = playerStatus->position.z;
+    playerX = playerStatus->pos.x;
+    playerY = playerStatus->pos.y;
+    playerZ = playerStatus->pos.z;
 
     colliderDiameterQuart = playerStatus->colliderDiameter / 4;
     spriteFacingAngle = playerStatus->spriteFacingAngle;
     if (spriteFacingAngle < 180.0f) {
-        spriteFacingAngle = clamp_angle(camera->currentYaw - 90.0f);
+        spriteFacingAngle = clamp_angle(camera->curYaw - 90.0f);
     } else {
-        spriteFacingAngle = clamp_angle(camera->currentYaw + 90.0f);
+        spriteFacingAngle = clamp_angle(camera->curYaw + 90.0f);
     }
 
     tmpX = playerX;
     playerY2 = playerY;
     tmpZ = playerZ;
-    if (get_clamped_angle_diff(camera->currentYaw, spriteFacingAngle) < 0.0f) {
-        angle = clamp_angle(camera->currentYaw - 90.0f);
+    if (get_clamped_angle_diff(camera->curYaw, spriteFacingAngle) < 0.0f) {
+        angle = clamp_angle(camera->curYaw - 90.0f);
         if (playerStatus->trueAnimation & 0x01000000) {
             angle = clamp_angle(angle + 30.0f);
         }
     } else {
-        angle = clamp_angle(camera->currentYaw + 90.0f);
+        angle = clamp_angle(camera->curYaw + 90.0f);
         if (playerStatus->trueAnimation & 0x01000000) {
             angle = clamp_angle(angle - 30.0f);
         }
@@ -1908,9 +1908,9 @@ b32 test_item_player_collision(ItemEntity* item) {
 
     add_vec2D_polar(&tmpX, &tmpZ, 24.0f, angle);
 
-    itemX = item->position.x;
-    itemY = item->position.y;
-    itemZ = item->position.z;
+    itemX = item->pos.x;
+    itemY = item->pos.y;
+    itemZ = item->pos.z;
 
     do {
         do {
@@ -1997,9 +1997,9 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
             continue;
         }
 
-        dx = item->position.x - x;
-        dz = item->position.y - y;
-        dy = item->position.z - z;
+        dx = item->pos.x - x;
+        dz = item->pos.y - y;
+        dy = item->pos.z - z;
         if (sqrtf(SQ(dx) + SQ(dz) + SQ(dy)) < dist) {
             return i;
         }
@@ -2041,9 +2041,9 @@ b32 is_picking_up_item(void) {
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z) {
     ItemEntity* item = gCurrentItemEntities[itemEntityIndex];
 
-    item->position.x = x;
-    item->position.y = y;
-    item->position.z = z;
+    item->pos.x = x;
+    item->pos.y = y;
+    item->pos.z = z;
 }
 
 void set_current_item_entity_render_group(s32 group) {
@@ -2087,71 +2087,71 @@ void update_item_entity_collectable(ItemEntity* item) {
             ASSERT(physData != NULL);
 
             if (item->flags & ITEM_ENTITY_FLAG_TOSS_HIGHER) {
-                physData->verticalVelocity = 16.0f;
+                physData->verticalVel = 16.0f;
                 physData->gravity = 2.0f;
             } else if (!(item->flags & ITEM_ENTITY_FLAG_TOSS_LOWER)) {
-                physData->verticalVelocity = 12.0f;
+                physData->verticalVel = 12.0f;
                 physData->gravity = 2.0f;
             } else {
-                physData->verticalVelocity = 14.0f;
+                physData->verticalVel = 14.0f;
                 physData->gravity = 2.0f;
             }
 
             physData->collisionRadius = 24.0f;
-            physData->constVelocity = 24.0f;
+            physData->constVel = 24.0f;
             if (item->spawnAngle < 0) {
                 if (IS_ITEM(item->itemID)) {
                     if (rand_int(10000) < 5000) {
-                        physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
+                        physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 105.0f + rand_int(30) - 15.0f);
                     } else {
-                        physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 105.0f + rand_int(30) - 15.0f);
+                        physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 105.0f + rand_int(30) - 15.0f);
                     }
-                    physData->verticalVelocity += 4.0f;
+                    physData->verticalVel += 4.0f;
                 } else {
                     switch (item->itemID) {
                         case ITEM_HEART:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         case ITEM_FLOWER_POINT:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) + 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) + 60.0f);
                             break;
                         case ITEM_COIN:
                             if (rand_int(10000) < 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) - 60.0f);
                             }
                             break;
                         case ITEM_KOOPA_FORTRESS_KEY:
                             if (rand_int(10000) >= 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) - 60.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             }
                             break;
                         case ITEM_STAR_POINT:
                             if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) - 60.0f);
                                 break;
                             }
                             if (rand_int(10000) < 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(60) - 30.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(60) - 30.0f);
                             }
                             break;
                         case ITEM_HEART_POINT:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         case ITEM_STAR_PIECE:
                             if (rand_int(10000) < 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(60) - 30.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(60) - 30.0f);
                             }
                             break;
                         case ITEM_HEART_PIECE:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         default:
                             physData->moveAngle = 0.0f;
@@ -2165,16 +2165,16 @@ void update_item_entity_collectable(ItemEntity* item) {
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
-                    physData->velx = temp * sinAngle;
-                    physData->velz = -temp * cosAngle;
+                    physData->velX = temp * sinAngle;
+                    physData->velZ = -temp * cosAngle;
                 } else {
                     temp = rand_int(2000);
                     temp = (temp / 1000.0f) + 2.0;
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
-                    physData->velx = temp * sinAngle;
-                    physData->velz = -temp * cosAngle;
+                    physData->velX = temp * sinAngle;
+                    physData->velZ = -temp * cosAngle;
                 }
             } else {
                 physData->moveAngle = clamp_angle(item->spawnAngle);
@@ -2186,8 +2186,8 @@ void update_item_entity_collectable(ItemEntity* item) {
                 theta = DEG_TO_RAD(physData->moveAngle);
                 sinAngle = sin_rad(theta);
                 cosAngle = cos_rad(theta);
-                physData->velx = temp * sinAngle;
-                physData->velz = -temp * cosAngle;
+                physData->velX = temp * sinAngle;
+                physData->velZ = -temp * cosAngle;
             }
 
             if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
@@ -2200,28 +2200,28 @@ void update_item_entity_collectable(ItemEntity* item) {
                     physData->timeLeft = 20;
                 }
                 physData->useSimplePhysics = FALSE;
-                physData->verticalVelocity = 15.0f;
+                physData->verticalVel = 15.0f;
                 physData->gravity = 1.6f;
             }
 
             if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
                 physData->timeLeft = 60;
                 physData->useSimplePhysics = FALSE;
-                physData->velx = 0.0f;
-                physData->velz = 0.0f;
+                physData->velX = 0.0f;
+                physData->velZ = 0.0f;
             }
 
             if (item->spawnType == ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS) {
-                physData->verticalVelocity = 0.0f;
-                physData->velx = 0.0f;
-                physData->velz = 0.0f;
+                physData->verticalVel = 0.0f;
+                physData->velX = 0.0f;
+                physData->velZ = 0.0f;
                 physData->useSimplePhysics = TRUE;
             }
 
             if (item->spawnType == ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS) {
-                physData->verticalVelocity = 0.0f;
-                physData->velx = 0.0f;
-                physData->velz = 0.0f;
+                physData->verticalVel = 0.0f;
+                physData->velX = 0.0f;
+                physData->velZ = 0.0f;
                 physData->useSimplePhysics = TRUE;
             }
 
@@ -2259,19 +2259,19 @@ void update_item_entity_collectable(ItemEntity* item) {
             // apply gravity
             if (!(item->flags & ITEM_ENTITY_FLAG_NO_GRAVITY)) {
                 if (!(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)) {
-                    physData->verticalVelocity -= physData->gravity;
-                    if (physData->verticalVelocity < -16.0) {
-                        physData->verticalVelocity = -16.0f;
+                    physData->verticalVel -= physData->gravity;
+                    if (physData->verticalVel < -16.0) {
+                        physData->verticalVel = -16.0f;
                     }
-                    item->position.y += physData->verticalVelocity;
-                    item->position.x += physData->velx;
-                    item->position.z += physData->velz;
+                    item->pos.y += physData->verticalVel;
+                    item->pos.x += physData->velX;
+                    item->pos.z += physData->velZ;
                 }
             }
 
             // handle auto-collection from multi-coin bricks
             if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
-                && physData->verticalVelocity <= 0.0f
+                && physData->verticalVel <= 0.0f
             ) {
                 item->state = ITEM_PHYSICS_STATE_TOUCH;
                 break;
@@ -2281,13 +2281,13 @@ void update_item_entity_collectable(ItemEntity* item) {
             if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
                 && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
-                && physData->verticalVelocity > 0.0f
+                && physData->verticalVel > 0.0f
             ) {
-                temp = physData->constVelocity;
-                outX = item->position.x;
-                outY = item->position.y;
-                outZ = item->position.z;
-                outDepth = temp + physData->verticalVelocity;
+                temp = physData->constVel;
+                outX = item->pos.x;
+                outY = item->pos.y;
+                outZ = item->pos.z;
+                outDepth = temp + physData->verticalVel;
 
                 if (!physData->useSimplePhysics) {
                     hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
@@ -2296,8 +2296,8 @@ void update_item_entity_collectable(ItemEntity* item) {
                 }
 
                 if (hit && outDepth < temp) {
-                    item->position.y = outY - temp;
-                    physData->verticalVelocity = 0.0f;
+                    item->pos.y = outY - temp;
+                    physData->verticalVel = 0.0f;
                 }
             }
 
@@ -2305,53 +2305,53 @@ void update_item_entity_collectable(ItemEntity* item) {
             if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
                 && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
-                && (physData->velx != 0.0f || physData->velz != 0.0f)
+                && (physData->velX != 0.0f || physData->velZ != 0.0f)
             ) {
-                outX = item->position.x;
-                outY = item->position.y;
-                outZ = item->position.z;
+                outX = item->pos.x;
+                outY = item->pos.y;
+                outZ = item->pos.z;
 
                 if (!physData->useSimplePhysics) {
-                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->collisionRadius);
+                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 } else {
-                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->collisionRadius);
+                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 }
 
                 if (hit) {
                     // if a wall is hit, bounce back
-                    item->position.x = outX;
-                    item->position.y = outY;
-                    item->position.z = outZ;
+                    item->pos.x = outX;
+                    item->pos.y = outY;
+                    item->pos.z = outZ;
                     physData->moveAngle = clamp_angle(physData->moveAngle + 180.0f);
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
-                    physData->velx = sinAngle * 2.0;
-                    physData->velz = cosAngle * -2.0;
+                    physData->velX = sinAngle * 2.0;
+                    physData->velZ = cosAngle * -2.0;
                 }
             }
 
             // if the item has downward velocity, try moving it down
             if (!(item->flags & ITEM_ENTITY_FLAG_NO_MOTION)
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
-                && physData->verticalVelocity <= 0.0
+                && physData->verticalVel <= 0.0
             ) {
                 physData->useSimplePhysics = TRUE;
                 if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                    outX = item->position.x;
-                    outY = (item->position.y - physData->verticalVelocity) + 12.0f;
-                    outZ = item->position.z;
-                    outDepth = -physData->verticalVelocity + 12.0f;
+                    outX = item->pos.x;
+                    outY = (item->pos.y - physData->verticalVel) + 12.0f;
+                    outZ = item->pos.z;
+                    outDepth = -physData->verticalVel + 12.0f;
                     if (!physData->useSimplePhysics) {
                         hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                     } else {
                         hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
                     }
                 } else {
-                    outX = item->position.x;
-                    outY = (item->position.y - physData->verticalVelocity) + 12.0f;
-                    outZ = item->position.z;
-                    outDepth = -physData->verticalVelocity + 12.0f;
+                    outX = item->pos.x;
+                    outY = (item->pos.y - physData->verticalVel) + 12.0f;
+                    outZ = item->pos.z;
+                    outDepth = -physData->verticalVel + 12.0f;
                     if (outY < outDepth + 0.0f) {
                         outY = 0.0f;
                         hit = TRUE;
@@ -2362,43 +2362,43 @@ void update_item_entity_collectable(ItemEntity* item) {
 
                 // handle bounce
                 if (hit) {
-                    item->position.y = outY;
-                    physData->verticalVelocity = -physData->verticalVelocity / 1.25;
-                    if (physData->verticalVelocity < 3.0) {
-                        physData->verticalVelocity = 0.0f;
-                        physData->velx = 0.0f;
-                        physData->velz = 0.0f;
+                    item->pos.y = outY;
+                    physData->verticalVel = -physData->verticalVel / 1.25;
+                    if (physData->verticalVel < 3.0) {
+                        physData->verticalVel = 0.0f;
+                        physData->velX = 0.0f;
+                        physData->velZ = 0.0f;
                         item->flags |= ITEM_ENTITY_FLAG_DONE_FALLING;
                     } else {
                         if (IS_BADGE(item->itemID)) {
-                            sfx_play_sound_at_position(SOUND_21B, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                            sfx_play_sound_at_position(SOUND_21B, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                         } else if (IS_ITEM(item->itemID)) {
-                            sfx_play_sound_at_position(SOUND_21A, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                            sfx_play_sound_at_position(SOUND_21A, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                         } else {
                             switch (item->itemID) {
                                 case ITEM_HEART:
-                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_COIN:
-                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_KOOPA_FORTRESS_KEY:
-                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_HEART_PIECE:
-                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_STAR_POINT:
-                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_HEART_POINT:
-                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_STAR_PIECE:
-                                    sfx_play_sound_at_position(SOUND_219, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_219, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                                 case ITEM_FLOWER_POINT:
-                                    sfx_play_sound_at_position(SOUND_218, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    sfx_play_sound_at_position(SOUND_218, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                                     break;
                             }
                         }
@@ -2406,7 +2406,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                 }
             }
 
-            if (item->position.y < -2000.0f) {
+            if (item->pos.y < -2000.0f) {
                 item->state = ITEM_PHYSICS_STATE_DEAD;
             }
             break;
@@ -2421,7 +2421,7 @@ void update_item_entity_collectable(ItemEntity* item) {
             set_global_flag(item->boundVar);
         }
 
-        fx_small_gold_sparkle(0, item->position.x, item->position.y + 16.0f, item->position.z, 1.0f, 0);
+        fx_small_gold_sparkle(0, item->pos.x, item->pos.y + 16.0f, item->pos.z, 1.0f, 0);
 
         if (IS_ITEM(item->itemID)) {
             item->state = ITEM_PHYSICS_STATE_PICKUP;
@@ -2438,34 +2438,34 @@ void update_item_entity_collectable(ItemEntity* item) {
             switch (item->itemID) {
                 case ITEM_HEART:
                     if (playerData->curHP < playerData->curMaxHP) {
-                        fx_recover(0, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
-                        sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                        fx_recover(0, playerStatus->pos.x, playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z, 1);
+                        sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                     }
                     playerData->curHP++;
                     if (playerData->curHP > playerData->curMaxHP) {
                         playerData->curHP = playerData->curMaxHP;
                     }
-                    sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                    fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+                    sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
+                    fx_sparkles(4, playerStatus->pos.x, playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z, 30.0f);
                     break;
                 case ITEM_FLOWER_POINT:
                     if (playerData->curFP < playerData->curMaxFP) {
-                        fx_recover(1, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
-                        sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                        fx_recover(1, playerStatus->pos.x, playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z, 1);
+                        sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                     }
                     playerData->curFP++;
                     if (playerData->curFP > playerData->curMaxFP) {
                         playerData->curFP = playerData->curMaxFP;
                     }
-                    sfx_play_sound_at_position(SOUND_217, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                    fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+                    sfx_play_sound_at_position(SOUND_217, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
+                    fx_sparkles(4, playerStatus->pos.x, playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z, 30.0f);
                     break;
                 case ITEM_COIN:
                     playerData->coins++;
                     if (playerData->coins > 999) {
                         playerData->coins = 999;
                     }
-                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                     playerData->totalCoinsEarned++;
                     if (playerData->totalCoinsEarned > 99999) {
                         playerData->totalCoinsEarned = 99999;
@@ -2473,19 +2473,19 @@ void update_item_entity_collectable(ItemEntity* item) {
                     break;
                 case ITEM_KOOPA_FORTRESS_KEY:
                     playerData->fortressKeyCount = playerData->fortressKeyCount + 1;
-                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                     break;
                 case ITEM_STAR_POINT:
                     playerData->starPoints++;
                     if (playerData->starPoints > 100) {
                         playerData->starPoints = 100;
                     }
-                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                     break;
                 case ITEM_HEART_POINT:
                     playerData->curHP = playerData->curMaxHP;
                     playerData->curFP = playerData->curMaxFP;
-                    sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                     break;
             }
             D_801565A8 = FALSE;
@@ -2606,7 +2606,7 @@ void update_item_entity_pickup(ItemEntity* item) {
                 } else if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) {
                     sfx_play_sound(SOUND_D2);
                 } else if (item->itemID == ITEM_COIN) {
-                    sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
+                    sfx_play_sound_at_position(SOUND_211, 0, item->pos.x, item->pos.y, item->pos.z);
                 } else {
                     sfx_play_sound(SOUND_D1);
                 }
@@ -2706,18 +2706,18 @@ block_47: // TODO required to match
                     || (item->flags & ITEM_ENTITY_FLAG_4000000)
                     || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_NO_ANIMS)
                 ) {
-                    item->position.x = playerStatus->position.x;
-                    item->position.y = playerStatus->position.y + playerStatus->colliderHeight;
-                    item->position.z = playerStatus->position.z;
+                    item->pos.x = playerStatus->pos.x;
+                    item->pos.y = playerStatus->pos.y + playerStatus->colliderHeight;
+                    item->pos.z = playerStatus->pos.z;
                     suggest_player_anim_always_forward(ANIM_MarioW1_Lift);
                 }
 
                 if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
                     fx_got_item_outline(
                         1,
-                        item->position.x,
-                        item->position.y + 8.0f,
-                        item->position.z,
+                        item->pos.x,
+                        item->pos.y + 8.0f,
+                        item->pos.z,
                         1.0f,
                         &ItemPickupGotOutline
                     );
@@ -2896,9 +2896,9 @@ block_47: // TODO required to match
                 get_item_entity(
                     make_item_entity_delayed(
                         D_801568EC,
-                        playerStatus->position.x,
-                        playerStatus->position.y + playerStatus->colliderHeight,
-                        playerStatus->position.z, 3, 0, 0
+                        playerStatus->pos.x,
+                        playerStatus->pos.y + playerStatus->colliderHeight,
+                        playerStatus->pos.z, 3, 0, 0
                     )
                 )->renderGroup = -1;
 

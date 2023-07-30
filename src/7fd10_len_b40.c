@@ -134,7 +134,7 @@ s32 setup_partner_popup(PopupMenu* menu) {
             menu->nameMsg[optionCount] = properties->nameMsg;
             menu->descMsg[optionCount] = properties->worldDescMsg;
             menu->value[optionCount] = playerData->partners[partnerID].level;
-            if (playerData->currentPartner == partnerID) {
+            if (playerData->curPartner == partnerID) {
                 menu->enabled[optionCount] = FALSE;
                 menu->ptrIcon[optionCount] = wDisabledPartnerHudScripts[partnerID];
             }
@@ -203,10 +203,10 @@ void check_input_open_menus(void) {
          partnerStatus->actingPartner == PARTNER_LAKILESTER ||
          partnerStatus->actingPartner == PARTNER_BOW))
     {
-        currentButtons = partnerStatus->currentButtons;
+        currentButtons = partnerStatus->curButtons;
         pressedButtons = partnerStatus->pressedButtons;
     } else {
-        currentButtons = playerStatus->currentButtons;
+        currentButtons = playerStatus->curButtons;
         pressedButtons = playerStatus->pressedButtons;
     }
     partnerActionState = &partnerStatus->partnerActionState;
@@ -245,7 +245,7 @@ block_17:
                             }
                             popup->numEntries = numEntries;
                             popup->popupType = POPUP_MENU_SWITCH_PARTNER;
-                            popup->initialPos = MenuIndexFromPartnerID[playerData->currentPartner] - 1;
+                            popup->initialPos = MenuIndexFromPartnerID[playerData->curPartner] - 1;
                             break;
                         }
                         return;
@@ -382,14 +382,14 @@ void check_input_status_bar(void) {
         }
 
         if (!is_status_bar_visible()) {
-            if (!(playerStatus->currentButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
+            if (!(playerStatus->curButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
                 open_status_bar_long();
 
                 if (!is_picking_up_item()) {
                     sfx_play_sound(SOUND_3);
                 }
             }
-        } else if (!(playerStatus->currentButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
+        } else if (!(playerStatus->curButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
             close_status_bar();
 
             if (!is_picking_up_item()) {

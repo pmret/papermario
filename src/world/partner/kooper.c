@@ -125,39 +125,39 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = kooper->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
-                                                     entity->position.x, entity->position.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, kooper->pos.x, kooper->pos.z);
-            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+                                                     entity->pos.x, entity->pos.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, kooper->pos.x, kooper->pos.z);
+            N(TweesterPhysicsPtr)->angularVel = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
             kooper->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
 
-            kooper->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-            kooper->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            kooper->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            kooper->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
 
-            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVel);
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius--;
             } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
                 N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelPhase)) * 3.0f;
 
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase += 3.0f;
 
-            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
-                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelPhase = 150.0f;
             }
             kooper->pos.y += liftoffVelocity;
 
             kooper->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
-            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
-            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
-                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
+            N(TweesterPhysicsPtr)->angularVel += 0.8;
+            if (N(TweesterPhysicsPtr)->angularVel > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVel = 40.0f;
             }
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
@@ -248,7 +248,7 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
             partnerStatus->actingPartner = PARTNER_KOOPER;
             script->USE_STATE = SHELL_TOSS_STATE_HOLD;
-            kooper->currentAnim = ANIM_WorldKooper_SpinShell;
+            kooper->curAnim = ANIM_WorldKooper_SpinShell;
             N(ShellTossHoldTime) = 30;
         }
     }
@@ -275,7 +275,7 @@ API_CALLABLE(N(UseAbility)) {
             enable_npc_blur(kooper);
             kooper->duration = 4;
             kooper->yaw = atan2(kooper->pos.x, kooper->pos.z,
-                                playerStatus->position.x, playerStatus->position.z);
+                                playerStatus->pos.x, playerStatus->pos.z);
             script->USE_STATE++;
             break;
 
@@ -291,10 +291,10 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
-            kooper->moveToPos.x = N(ShellTossPosX) = playerStatus->position.x;
-            kooper->moveToPos.y = N(ShellTossPosY) = playerStatus->position.y;
-            kooper->moveToPos.z = N(ShellTossPosZ) = playerStatus->position.z;
-            kooper->currentAnim = ANIM_WorldKooper_Run;
+            kooper->moveToPos.x = N(ShellTossPosX) = playerStatus->pos.x;
+            kooper->moveToPos.y = N(ShellTossPosY) = playerStatus->pos.y;
+            kooper->moveToPos.z = N(ShellTossPosZ) = playerStatus->pos.z;
+            kooper->curAnim = ANIM_WorldKooper_Run;
             add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
                             playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
             moveAngle = clamp_angle(playerStatus->targetYaw + (N(PlayerWasFacingLeft) ? 90.0f : -90.0f));
@@ -321,13 +321,13 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             kooper->yaw = playerStatus->targetYaw;
-            kooper->jumpVelocity = 18.0f;
+            kooper->jumpVel = 18.0f;
             kooper->jumpScale = 3.0f;
-            kooper->currentAnim = ANIM_WorldKooper_EnterShell;
+            kooper->curAnim = ANIM_WorldKooper_EnterShell;
             kooper->collisionHeight = 12;
 
-            kooper->moveToPos.y = playerStatus->position.y;
-            kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
+            kooper->moveToPos.y = playerStatus->pos.y;
+            kooper->moveToPos.z = playerStatus->pos.y + playerStatus->colliderHeight / 3;
             playerStatus->flags |= PS_FLAG_JUMPING;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
@@ -353,35 +353,35 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
 
-            kooper->jumpVelocity -= kooper->jumpScale;
-            playerStatus->position.y += kooper->jumpVelocity;
-            if (kooper->jumpVelocity < 0.0f) {
+            kooper->jumpVel -= kooper->jumpScale;
+            playerStatus->pos.y += kooper->jumpVel;
+            if (kooper->jumpVel < 0.0f) {
                 if (!N(ShellTossKickFalling)) {
                     N(ShellTossKickFalling) = TRUE;
                     suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
                 }
             }
 
-            posX = playerStatus->position.x;
-            posY = (playerStatus->position.y + playerStatus->colliderHeight / 2) - kooper->jumpVelocity;
-            posZ = playerStatus->position.z;
+            posX = playerStatus->pos.x;
+            posY = (playerStatus->pos.y + playerStatus->colliderHeight / 2) - kooper->jumpVel;
+            posZ = playerStatus->pos.z;
             testLength = hitLength = playerStatus->colliderHeight / 2;
 
             if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
-                collisionStatus->currentCeiling = NpcHitQueryColliderID;
-                playerStatus->position.y = posY - playerStatus->colliderHeight;
+                collisionStatus->curCeiling = NpcHitQueryColliderID;
+                playerStatus->pos.y = posY - playerStatus->colliderHeight;
                 N(vertical_hit_interactable_entity)(kooper);
             }
 
-            if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
+            if (!(kooper->jumpVel > 0.0f) && (playerStatus->pos.y < kooper->moveToPos.z)) {
                 N(D_802BEC5C) = 0;
                 kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 partnerStatus->actingPartner = PARTNER_KOOPER;
                 partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_TOSS;
-                kooper->rotation.z = 0.0f;
+                kooper->rot.z = 0.0f;
                 kooper->planarFlyDist = 0.0f;
                 kooper->moveSpeed = 8.0f;
-                kooper->currentAnim = ANIM_WorldKooper_SpinShell;
+                kooper->curAnim = ANIM_WorldKooper_SpinShell;
                 ShellTossHitboxState = SHELL_TOSS_HITBOX_ENABLED;
                 fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                         sin_deg(playerStatus->targetYaw), -1.0f, -cos_deg(playerStatus->targetYaw), 3);
@@ -467,7 +467,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (!(npc_try_snap_to_ground(kooper, 6.0f) || playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING))) {
-                kooper->pos.y += (playerStatus->position.y - kooper->pos.y) / 10.0f;
+                kooper->pos.y += (playerStatus->pos.y - kooper->pos.y) / 10.0f;
             }
 
             npc_do_other_npc_collision(kooper);
@@ -568,7 +568,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (npc_try_snap_to_ground(kooper, 6.0f) == 0) {
-                kooper->pos.y += (playerStatus->position.y - kooper->pos.y) / 10.0f;
+                kooper->pos.y += (playerStatus->pos.y - kooper->pos.y) / 10.0f;
             }
 
             posX = kooper->pos.x;
@@ -597,9 +597,9 @@ API_CALLABLE(N(UseAbility)) {
                     moveAngle = clamp_angle(playerStatus->targetYaw - (N(PlayerWasFacingLeft) ? 90.0f : -90.0f));
 
                     add_vec2D_polar(&posX, &posZ, 4.0f, moveAngle);
-                    heldItem->position.x = posX;
-                    heldItem->position.y = posY;
-                    heldItem->position.z = posZ;
+                    heldItem->pos.x = posX;
+                    heldItem->pos.y = posY;
+                    heldItem->pos.z = posZ;
                 }
 
                 if (kooper->planarFlyDist + 15.0f < kooper->moveSpeed) {
@@ -625,9 +625,9 @@ API_CALLABLE(N(UseAbility)) {
         kooper->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_IGNORE_WORLD_COLLISION);
         partnerStatus->actingPartner = PARTNER_NONE;
         partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
-        kooper->jumpVelocity = 0.0f;
+        kooper->jumpVel = 0.0f;
         kooper->collisionHeight = 24;
-        kooper->currentAnim = ANIM_WorldKooper_Walk;
+        kooper->curAnim = ANIM_WorldKooper_Walk;
         sfx_stop_sound(SOUND_284);
         disable_npc_blur(kooper);
 
@@ -745,7 +745,7 @@ void N(pre_battle)(Npc* kooper) {
         ShellTossHitboxState = SHELL_TOSS_HITBOX_DISABLED;
         playerStatus->flags &= ~PS_FLAG_JUMPING;
 
-        kooper->jumpVelocity = 0.0f;
+        kooper->jumpVel = 0.0f;
         kooper->flags &= ~NPC_FLAG_JUMPING;
         kooper->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
 

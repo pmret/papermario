@@ -99,7 +99,7 @@ void lens_flare_render(EffectInstance* effect) {
 
     renderTask.appendGfx = lens_flare_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 20;
+    renderTask.dist = 20;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -120,7 +120,7 @@ void lens_flare_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E0034788[type]);
 
     guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtxTemp, mtxTransform, mtxShared);
 
     alpha = data->smallFlareAlpha;

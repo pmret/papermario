@@ -25,8 +25,8 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
         wattEffectData->angle = 0;
         wattEffectData->unk_0C = TRUE;
         wattEffectData->unk_10 = 0;
-        wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, -1000.0f, actor->currentPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect1 = fx_static_status(0, actor->curPos.x, actor->curPos.y, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->curPos.x, -1000.0f, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->flags = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
@@ -39,9 +39,9 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
         }
         actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
-        x = actor->currentPos.x + actor->headOffset.x;
-        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_KEY_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
-        z = actor->currentPos.z + actor->headOffset.z;
+        x = actor->curPos.x + actor->headOffset.x;
+        y = actor->curPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_KEY_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        z = actor->curPos.z + actor->headOffset.z;
         if (wattEffectData->unk_0C) {
             switch (wattEffectData->unk_10) {
                 case 0:

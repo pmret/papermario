@@ -633,13 +633,13 @@ void btl_state_update_celebration(void) {
             if (CelebrateSubstateTime == 18) {
                 playerData->curHP = playerData->curMaxHP;
                 playerData->curFP = playerData->curMaxFP;
-                x = player->currentPos.x + 0.0f;
-                y = player->currentPos.y + 35.0f;
-                z = player->currentPos.z;
+                x = player->curPos.x + 0.0f;
+                y = player->curPos.y + 35.0f;
+                z = player->curPos.z;
                 fx_recover(0, x, y, z, playerData->curHP);
-                x = player->currentPos.x + 20.0f;
-                y = player->currentPos.y + 25.0f;
-                z = player->currentPos.z;
+                x = player->curPos.x + 20.0f;
+                y = player->curPos.y + 25.0f;
+                z = player->curPos.z;
                 fx_recover(1, x, y, z, playerData->curFP);
                 playerData->specialBarsFilled = playerData->maxStarPower * 256;
             }
@@ -919,7 +919,7 @@ void btl_state_update_celebration(void) {
                 id = LevelUpSelectTextID = hud_element_create(&HES_level_up_select_one_to_upgrade);
                 hud_element_set_render_pos(id, 0, 0);
                 hud_element_set_flags(id, HUD_ELEMENT_FLAG_80);
-                battleStatus->currentSubmenu = 1;
+                battleStatus->curSubmenu = 1;
 
                 CelebrateSubstateTime = 10;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_SHOW_HUD;
@@ -978,8 +978,8 @@ void btl_state_update_celebration(void) {
             }
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE:
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
-                if (!CantLevelUpStat[battleStatus->currentSubmenu]) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
+                if (!CantLevelUpStat[battleStatus->curSubmenu]) {
                     sfx_play_sound(SOUND_MENU_NEXT);
                     sfx_play_sound(SOUND_349 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_UPGRADE;
@@ -990,11 +990,11 @@ void btl_state_update_celebration(void) {
                 break;
             }
 
-            newSubmenu = currentSubmenu = battleStatus->currentSubmenu;
-            if (battleStatus->currentButtonsHeld & BUTTON_STICK_LEFT) {
+            newSubmenu = currentSubmenu = battleStatus->curSubmenu;
+            if (battleStatus->curButtonsHeld & BUTTON_STICK_LEFT) {
                 newSubmenu--;
             }
-            if (battleStatus->currentButtonsHeld & BUTTON_STICK_RIGHT) {
+            if (battleStatus->curButtonsHeld & BUTTON_STICK_RIGHT) {
                 newSubmenu++;
             }
             if (newSubmenu < 0) {
@@ -1005,7 +1005,7 @@ void btl_state_update_celebration(void) {
             }
             if (newSubmenu != currentSubmenu) {
                 sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
-                battleStatus->currentSubmenu = newSubmenu;
+                battleStatus->curSubmenu = newSubmenu;
             }
 
             CelebrateStateTime++;
@@ -1018,7 +1018,7 @@ void btl_state_update_celebration(void) {
             hud_element_free(LevelUpSpotlightID);
             set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
 
-            switch (battleStatus->currentSubmenu) {
+            switch (battleStatus->curSubmenu) {
                 case 0:
                     playerData->hardMaxHP += 5;
                     playerData->curMaxHP += 5;
@@ -1030,7 +1030,7 @@ void btl_state_update_celebration(void) {
                         playerData->curHP = playerData->curMaxHP;
                     }
                     player->maxHP = playerData->curMaxHP;
-                    player->currentHP = playerData->curHP;
+                    player->curHP = playerData->curHP;
                     break;
                 case 1:
                     playerData->hardMaxFP += 5;
@@ -1067,7 +1067,7 @@ void btl_state_update_celebration(void) {
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_FADE_OUT:
             if ((gGameStatusPtr->frameCounter % 2) != 0) {
-                switch (battleStatus->currentSubmenu) {
+                switch (battleStatus->curSubmenu) {
                     case 0:
                         hud_element_set_flags(LevelUpStatEmblemIDs[0], HUD_ELEMENT_FLAG_DISABLED);
                         break;
@@ -1080,7 +1080,7 @@ void btl_state_update_celebration(void) {
                         break;
                 }
             } else {
-                switch (battleStatus->currentSubmenu) {
+                switch (battleStatus->curSubmenu) {
                     case 0:
                         hud_element_clear_flags(LevelUpStatEmblemIDs[0], HUD_ELEMENT_FLAG_DISABLED);
                         break;
@@ -1140,7 +1140,7 @@ void btl_state_update_celebration(void) {
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE;
             break;
         case BTL_SUBSTATE_CELEBRATE_SKIPPABLE_END_DELAY:
-            if (battleStatus->currentButtonsPressed & (BUTTON_A | BUTTON_B)) {
+            if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                 CelebrateStateTime = 99;
             }
             if (CelebrateStateTime >= 99) {
@@ -1151,7 +1151,7 @@ void btl_state_update_celebration(void) {
                 btl_cam_set_params(1, 270, 100, 8, 0, 0x2400, 0, 100);
                 set_animation(0, 0, ANIM_MarioB1_AdjustCap);
                 if (partner != NULL) {
-                    set_animation(ACTOR_PARTNER, 0, D_80284154[playerData->currentPartner]);
+                    set_animation(ACTOR_PARTNER, 0, D_80284154[playerData->curPartner]);
                 }
                 CelebrateSubstateTime = 6;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_WALK_AWAY;
@@ -1170,9 +1170,9 @@ void btl_state_update_celebration(void) {
                     partner->yaw = 0.0f;
                 }
 
-                player->currentPos.x += 4.0f;
+                player->curPos.x += 4.0f;
                 if (partner != NULL) {
-                    partner->currentPos.x += 4.0f;
+                    partner->curPos.x += 4.0f;
                 }
             }
             if (bFadeToBlackAmt == 255) {
@@ -1213,7 +1213,7 @@ void btl_draw_upgrade_windows(s32 phase) {
             d3 = 100;
             break;
         case 1: // choosing
-            switch (battleStatus->currentSubmenu) {
+            switch (battleStatus->curSubmenu) {
                 case MENU_HP:
                     d1 = 0;
                     d2 = 100;
@@ -1284,7 +1284,7 @@ void btl_state_draw_celebration(void) {
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE:
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID:
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY:
-            switch (battleStatus->currentSubmenu) {
+            switch (battleStatus->curSubmenu) {
                 case 0:
                     rotZ = 152;
                     hud_element_set_tint(LevelUpStatEmblemIDs[0], 255, 255, 255);
@@ -1459,7 +1459,7 @@ void draw_content_level_up_textbox(void* data, s32 posX, s32 posY) {
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CHOOSE:
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID:
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_INVALID_DELAY:
-            switch (battleStatus->currentSubmenu) {
+            switch (battleStatus->curSubmenu) {
                 case MENU_HP:
                     if (!CantLevelUpStat[MENU_HP]) {
                         msgID = MSG_Menus_LevelUp_HP;

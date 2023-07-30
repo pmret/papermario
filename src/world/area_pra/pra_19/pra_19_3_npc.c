@@ -98,7 +98,7 @@ void N(worker_draw_example_player)(void) {
 
         get_screen_coords(gCurrentCamID, npc->pos.x, npc->pos.y, -npc->pos.z, &x, &y, &z);
         rtPtr->renderMode = npc->renderMode;
-        rtPtr->distance = -z;
+        rtPtr->dist = -z;
         rtPtr->appendGfxArg = npc;
         rtPtr->appendGfx = N(appendGfx_example_player);
         queue_render_task(rtPtr);
@@ -110,12 +110,12 @@ void N(appendGfx_example_player)(void* data) {
     Matrix4f mtxTransform, mtxTranslate, mtxScale;
 
     npc_get_render_yaw(npc);
-    guRotateF(mtxTransform, npc->renderYaw + gCameras[gCurrentCamID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxTransform, npc->renderYaw + gCameras[gCurrentCamID].curYaw, 0.0f, 1.0f, 0.0f);
     guScaleF(mtxScale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(mtxTransform, mtxScale, mtxTransform);
     guTranslateF(mtxTranslate, npc->pos.x, npc->pos.y, npc->pos.z);
     guMtxCatF(mtxTransform, mtxTranslate, mtxTransform);
-    spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->currentAnim, 1.0f);
+    spr_update_player_sprite(PLAYER_SPRITE_AUX2, npc->curAnim, 1.0f);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, 0, mtxTransform);
 }
 
@@ -140,7 +140,7 @@ API_CALLABLE(N(AwaitImposterHitPlayer)) {
     Npc* npc2 = get_npc_unsafe(NPC_FakeLuigi);
     Npc* npc3 = get_npc_unsafe(NPC_FakeKoopaKoot);
     Npc* npc4 = get_npc_unsafe(NPC_FakeKolorado);
-    f32 playerX = gPlayerStatus.position.x;
+    f32 playerX = gPlayerStatus.pos.x;
 
     if (npc0->pos.x < playerX) {
         return ApiStatus_DONE2;

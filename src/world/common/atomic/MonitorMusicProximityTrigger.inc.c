@@ -28,7 +28,7 @@ API_CALLABLE(N(MonitorMusicProximityTrigger)) {
             cond = TRUE;
         }
     } else {
-        dist = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, trigger->pos.x, trigger->pos.z);
+        dist = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, trigger->pos.x, trigger->pos.z);
 
         switch (script->functionTemp[1]) {
             case MUSIC_PROXIMITY_FAR:

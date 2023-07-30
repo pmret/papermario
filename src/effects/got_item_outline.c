@@ -97,7 +97,7 @@ void got_item_outline_render(EffectInstance* effect) {
 
     renderTask.appendGfx = got_item_outline_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -129,7 +129,7 @@ void got_item_outline_appendGfx(void* effect) {
         }
 
         guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
-        guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         guTranslateF(mtxTemp, 0.0f, 0.0f, -2.0f);
         guMtxCatF(mtxTemp, mtxTransform, mtxTransform);

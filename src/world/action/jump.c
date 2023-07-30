@@ -19,9 +19,9 @@ void initialize_jump(void) {
     playerStatus->peakJumpTime = 0;
     playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_FLYING);
     playerStatus->flags |= PS_FLAG_JUMPING;
-    playerStatus->jumpFromPos.x = playerStatus->position.x;
-    playerStatus->jumpFromPos.z = playerStatus->position.z;
-    playerStatus->jumpFromHeight = playerStatus->position.y;
+    playerStatus->jumpFromPos.x = playerStatus->pos.x;
+    playerStatus->jumpFromPos.z = playerStatus->pos.z;
+    playerStatus->jumpFromHeight = playerStatus->pos.y;
 
     phys_init_integrator_for_current_state();
 
@@ -34,8 +34,8 @@ void initialize_jump(void) {
     }
     suggest_player_anim_allow_backward(anim);
 
-    collisionStatus->lastTouchedFloor = collisionStatus->currentFloor;
-    collisionStatus->currentFloor = NO_COLLIDER;
+    collisionStatus->lastTouchedFloor = collisionStatus->curFloor;
+    collisionStatus->curFloor = NO_COLLIDER;
 }
 
 void action_update_jump(void) {
@@ -80,10 +80,10 @@ void action_update_landing_on_switch(void) {
     AnimID anim;
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
-        Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
+        Entity* entity = get_entity_by_index(collisionStatus->curFloor);
 
-        JumpedOnSwitchX = entity->position.x;
-        JumpedOnSwitchZ = entity->position.z;
+        JumpedOnSwitchX = entity->pos.x;
+        JumpedOnSwitchZ = entity->pos.z;
         initialize_jump();
         playerStatus->flags |= (PS_FLAG_SCRIPTED_FALL | PS_FLAG_ARMS_RAISED);
         disable_player_input();
@@ -161,9 +161,9 @@ void action_update_step_down(void) {
 
     playerStatus->timeInAir++;
     phys_update_interact_collider();
-    posX = playerStatus->position.x;
-    posY = playerStatus->position.y;
-    posZ = playerStatus->position.z;
+    posX = playerStatus->pos.x;
+    posY = playerStatus->pos.y;
+    posZ = playerStatus->pos.z;
     height = playerStatus->colliderHeight;
 
     colliderID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);

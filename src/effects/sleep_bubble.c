@@ -117,7 +117,7 @@ void sleep_bubble_render(EffectInstance* effect) {
 
     renderTask.appendGfx = sleep_bubble_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -153,7 +153,7 @@ void sleep_bubble_appendGfx(void* effect) {
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp18, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guTranslateF(sp58, data->unk_C4, data->unk_C8, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);

@@ -35,9 +35,9 @@ void flower_trail_update_part(FlowerFXData* effect) {
     effect->integrator[2] += effect->integrator[3];
     effect->integrator[1] += effect->integrator[2];
     effect->integrator[0] += effect->integrator[1];
-    effect->rot.z += effect->integrator[0] * effect->velocityScaleA;
-    effect->pos.x -= effect->integrator[0] * effect->velocityScaleB * effect->velocity.x;
-    effect->pos.z -= effect->integrator[0] * effect->velocityScaleB * effect->velocity.z;
+    effect->rot.z += effect->integrator[0] * effect->velScaleA;
+    effect->pos.x -= effect->integrator[0] * effect->velScaleB * effect->vel.x;
+    effect->pos.z -= effect->integrator[0] * effect->velScaleB * effect->vel.z;
 
     if (effect->integrator[0] < 0.0f) {
         effect->visibilityAmt = 0.0f;
@@ -84,11 +84,11 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
         part->primAlpha = 255;
 
         part->visibilityAmt = 1.0f;
-        part->velocityScaleB = 5.4f;
+        part->velScaleB = 5.4f;
         if (direction != 0.0f) {
-            part->velocityScaleA = -10.0f;
+            part->velScaleA = -10.0f;
         } else {
-            part->velocityScaleA = 10.0f;
+            part->velScaleA = 10.0f;
         }
 
         part->integrator[0] = 0.5f;
@@ -110,8 +110,8 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
             partAngle = clamp_angle(angle + angleOffset);
         }
 
-        part->velocity.x = sin_deg(partAngle);
-        part->velocity.z = cos_deg(partAngle);
+        part->vel.x = sin_deg(partAngle);
+        part->vel.z = cos_deg(partAngle);
     }
 }
 
@@ -147,7 +147,7 @@ void flower_trail_render(EffectInstance* effect) {
 
     renderTask.appendGfx = flower_trail_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     queuedTaskPtr = queue_render_task(&renderTask);

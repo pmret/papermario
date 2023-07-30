@@ -13,22 +13,22 @@ script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 
 
 def indent(elem, level=0):
-    i = "\n" + level*"    "
+    i = "\n" + level * "    "
     if len(elem):
         if not elem.text or not elem.text.strip():
             elem.text = i + "    "
         if not elem.tail or not elem.tail.strip():
             elem.tail = i
         for elem in elem:
-            indent(elem, level+1)
+            indent(elem, level + 1)
         if not elem.tail or not elem.tail.strip():
             elem.tail = i
     else:
         if level and (not elem.tail or not elem.tail.strip()):
-            elem.tail = i 
+            elem.tail = i
 
 
-def pretty_print_xml(tree : ET.ElementTree, path : Path):
+def pretty_print_xml(tree: ET.ElementTree, path: Path):
     root = tree.getroot()
     indent(root)
     xml_str = ET.tostring(root, encoding="unicode")
@@ -49,11 +49,11 @@ def parse_palette(data):
 class N64SegPm_icons(N64Segment):
     def split(self, rom_bytes):
         self.out_dir = options.opts.asset_path / "icon"
-        
+
         with open(script_dir / "icon.yaml") as f:
             self.icons = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
-        data = rom_bytes[self.rom_start: self.rom_end]
+        data = rom_bytes[self.rom_start : self.rom_end]
         pos = 0
         self.files = []
 
@@ -65,11 +65,11 @@ class N64SegPm_icons(N64Segment):
 
         IconList = ET.Element("Icons")
 
-        for (_, icon) in enumerate(self.icons):
+        for _, icon in enumerate(self.icons):
             # read yaml entry
             fmt = icon[0]
             name = icon[1]
-            w = int(icon[2]) 
+            w = int(icon[2])
             h = int(icon[3])
 
             if fmt == "solo" or fmt == "pair":

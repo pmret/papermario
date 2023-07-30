@@ -75,9 +75,9 @@ void action_hammer_play_hit_fx(s32 hitID) {
 
     if (hitID < 0) {
         numParticles = 6;
-        x = playerStatus->position.x + sinTheta;
-        y = playerStatus->position.y;
-        z = playerStatus->position.z + cosTheta;
+        x = playerStatus->pos.x + sinTheta;
+        y = playerStatus->pos.y;
+        z = playerStatus->pos.z + cosTheta;
     } else {
         numParticles = 3;
         x = HammerHit->hitPos.x + sinTheta;
@@ -128,7 +128,7 @@ s32 func_802B62A4_E25174(void) {
     // first attempt
     yaw = func_800E5348();
     if (action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
-        angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
+        angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
         if (angle >= 90.0f && angle < 270.0f) {
             yaw += -30.0f;
         } else {
@@ -137,9 +137,9 @@ s32 func_802B62A4_E25174(void) {
     }
 
     sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
-    playerX = playerStatus->position.x;
-    playerY = playerStatus->position.y;
-    playerZ = playerStatus->position.z;
+    playerX = playerStatus->pos.x;
+    playerY = playerStatus->pos.y;
+    playerZ = playerStatus->pos.z;
 
     for (i = 1; i < 16; i++) {
         x = playerX + (outSinTheta * i);
@@ -158,7 +158,7 @@ s32 func_802B62A4_E25174(void) {
     if (i >= 16) {
         yaw = func_800E5348();
         if (!action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
-            angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
+            angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
             if (angle >= 90.0f && angle < 270.0f) {
                 yaw += 15.0f;
             } else {
@@ -238,7 +238,7 @@ void action_update_hammer(void) {
         playerStatus->flags |= PS_FLAG_NO_FLIPPING;
         HammerHit->timer = 0;
         playerStatus->actionSubstate = SUBSTATE_HAMMER_0;
-        playerStatus->currentSpeed = 0.0f;
+        playerStatus->curSpeed = 0.0f;
         playerStatus->animNotifyValue = 0;
         HammerHit->hitID = func_802B62A4_E25174();
 
@@ -305,7 +305,7 @@ void func_802B6820_E256F0(void) {
 
     yaw = func_800E5348();
     if (action_hammer_is_swinging_away(playerStatus->trueAnimation)) {
-        angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
+        angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
         if (angle >= 90.0f && angle < 270.0f) {
             yaw += -30.0f;
         } else {
@@ -314,9 +314,9 @@ void func_802B6820_E256F0(void) {
     }
 
     sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
-    playerX = playerStatus->position.x;
-    playerY = playerStatus->position.y;
-    playerZ = playerStatus->position.z;
+    playerX = playerStatus->pos.x;
+    playerY = playerStatus->pos.y;
+    playerZ = playerStatus->pos.z;
 
     // check collision allong 16 points in a line away from the player
     for (i = 1; i < 16; i++) {
@@ -341,7 +341,7 @@ void func_802B6820_E256F0(void) {
     if (i >= 16) {
         yaw = func_800E5348();
         if (action_hammer_is_swinging_away(playerStatus->trueAnimation) == 0) {
-            angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].currentYaw);
+            angle = clamp_angle(yaw + 90.0f - gCameras[gCurrentCameraID].curYaw);
             if (angle >= 90.0f && angle < 270.0f) {
                 yaw += 15.0f;
             } else {
@@ -392,7 +392,7 @@ void func_802B6820_E256F0(void) {
 
         if (HammerHit->hitID < 0 && gPlayerData.hammerLevel >= 2) {
             gCurrentHiddenPanels.tryFlipTrigger = TRUE;
-            gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
+            gCurrentHiddenPanels.flipTriggerPosY = playerStatus->pos.y;
         }
     }
 

@@ -3,14 +3,14 @@
 import argparse
 import os
 
+
 def auto_int(x):
     return int(x, 0)
 
+
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
-parser = argparse.ArgumentParser(
-    description="Generate rename file for effects"
-)
+parser = argparse.ArgumentParser(description="Generate rename file for effects")
 
 parser.add_argument(
     "id",
@@ -23,6 +23,7 @@ parser.add_argument(
     help="Name (in snake case) to change the effect to",
 )
 
+
 def main(args):
     id = args.id
     to = args.to
@@ -31,7 +32,7 @@ def main(args):
 
     hex_str = f"{id:02x}".upper()
 
-    struct_name = ''.join(word.title() for word in to.split('_'))
+    struct_name = "".join(word.title() for word in to.split("_"))
     to_write.append(f"Effect{id} {struct_name}FXData")
     to_write.append(f"playFX_{hex_str} fx_{to}")
     to_write.append(f"FX_ENTRY_NUMBERED({id}, FX_ENTRY({to},")
@@ -46,6 +47,7 @@ def main(args):
     with open(os.path.join(script_dir, "to_rename.txt"), "a") as f:
         for line in to_write:
             f.write(f"{line}\n")
+
 
 if __name__ == "__main__":
     args = parser.parse_args()

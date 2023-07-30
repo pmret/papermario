@@ -12,7 +12,7 @@ API_CALLABLE(N(PausePlatformsDuringPound)) {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(N(PlatformColliders)); i++) {
-        if (gCollisionStatus.currentFloor != N(PlatformColliders)[i]) {
+        if (gCollisionStatus.curFloor != N(PlatformColliders)[i]) {
             continue;
         }
         if ((player->actionState == ACTION_STATE_SPIN_POUND) || (player->actionState == ACTION_STATE_TORNADO_POUND)) {

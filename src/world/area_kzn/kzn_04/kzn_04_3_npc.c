@@ -71,7 +71,7 @@ EvtScript N(EVS_FireBar_Defeated) = {
 
 FireBarAISettings N(AISettings_FireBar_01) = {
     .centerPos = { -280, 500, -30 },
-    .rotationRate = 8,
+    .rotRate = 8,
     .firstNpc = NPC_FireBar_1A,
     .npcCount = 4,
     .callback = N(FireBarAI_Callback),
@@ -79,7 +79,7 @@ FireBarAISettings N(AISettings_FireBar_01) = {
 
 FireBarAISettings N(AISettings_FireBar_02) = {
     .centerPos = { 0, 500, 40 },
-    .rotationRate = -8,
+    .rotRate = -8,
     .firstNpc = NPC_FireBar_2A,
     .npcCount = 4,
     .callback = N(FireBarAI_Callback),
@@ -87,7 +87,7 @@ FireBarAISettings N(AISettings_FireBar_02) = {
 
 FireBarAISettings N(AISettings_FireBar_03) = {
     .centerPos = { 280, 500, -30 },
-    .rotationRate = 8,
+    .rotRate = 8,
     .firstNpc = NPC_FireBar_3A,
     .npcCount = 4,
     .callback = N(FireBarAI_Callback),

@@ -56,7 +56,7 @@ typedef struct JumpGameData {
     /* 0x000 */ s32 workerID;
     /* 0x004 */ s32 hudElemID;
     /* 0x008 */ s32 unk_08; // unused -- likely hudElemID for an unused/removed hud element
-    /* 0x00C */ s32 currentScore;
+    /* 0x00C */ s32 curScore;
     /* 0x010 */ s32 targetScore;
     /* 0x014 */ s32 scoreWindowPosX;
     /* 0x018 */ s32 scoreWindowPosY; // unused -- posY is hard-coded while drawing the box
@@ -122,31 +122,31 @@ void N(appendGfx_score_display) (void* renderData) {
         hudElemID = data->hudElemID;
         hud_element_set_render_pos(hudElemID, data->scoreWindowPosX + 15, 39);
         hud_element_draw_clipped(hudElemID);
-        if (data->currentScore > data->targetScore) {
-            data->currentScore = data->targetScore;
-        } else if (data->currentScore < data->targetScore) {
-            diff = data->targetScore - data->currentScore;
+        if (data->curScore > data->targetScore) {
+            data->curScore = data->targetScore;
+        } else if (data->curScore < data->targetScore) {
+            diff = data->targetScore - data->curScore;
             if (diff > 100) {
-                data->currentScore += 40;
+                data->curScore += 40;
             } else if (diff > 75) {
-                data->currentScore += 35;
+                data->curScore += 35;
             } else if (diff > 50) {
-                data->currentScore += 30;
+                data->curScore += 30;
             } else if (diff > 30) {
-                data->currentScore += 20;
+                data->curScore += 20;
             } else if (diff > 20) {
-                data->currentScore += 10;
+                data->curScore += 10;
             } else if (diff > 10) {
-                data->currentScore += 5;
+                data->curScore += 5;
             } else if (diff > 5) {
-                data->currentScore += 2;
+                data->curScore += 2;
             } else {
-                data->currentScore++;
+                data->curScore++;
             }
             sfx_play_sound_with_params(SOUND_211, 0, 0x40, 0x32);
 
         }
-        draw_number(data->currentScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+        draw_number(data->curScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
     }
 }
 
@@ -156,7 +156,7 @@ void N(worker_draw_score)(void) {
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
     task.appendGfx = &mgm_01_appendGfx_score_display;
-    task.distance = 0;
+    task.dist = 0;
 
     queue_render_task(&task);
 }
@@ -377,21 +377,21 @@ API_CALLABLE(N(UpdateRecords)) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
     PlayerData* player = &gPlayerData;
 
-    player->jumpGameTotal += data->currentScore;
+    player->jumpGameTotal += data->curScore;
     if (player->jumpGameTotal > 99999) {
         player->jumpGameTotal = 99999;
     }
-    if (player->jumpGameRecord < data->currentScore) {
-        player->jumpGameRecord = data->currentScore;
+    if (player->jumpGameRecord < data->curScore) {
+        player->jumpGameRecord = data->curScore;
     }
-    set_message_value(data->currentScore, 0);
+    set_message_value(data->curScore, 0);
 
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(GiveCoinReward)) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 coinsLeft = data->currentScore;
+    s32 coinsLeft = data->curScore;
     s32 increment;
 
     if (coinsLeft > 100) {
@@ -410,12 +410,12 @@ API_CALLABLE(N(GiveCoinReward)) {
         increment = 1;
     }
 
-    data->currentScore -= increment;
+    data->curScore -= increment;
     add_coins(increment);
-    data->targetScore = data->currentScore;
+    data->targetScore = data->curScore;
     sfx_play_sound(SOUND_211);
 
-    if (data->currentScore > 0) {
+    if (data->curScore > 0) {
         return ApiStatus_BLOCK;
     } else {
         return ApiStatus_DONE2;
@@ -424,8 +424,8 @@ API_CALLABLE(N(GiveCoinReward)) {
 
 API_CALLABLE(N(DoubleScore)) {
     JumpGameData* data = (JumpGameData*)get_enemy(SCOREKEEPER_ENEMY_IDX)->varTable[JUMP_DATA_VAR_IDX];
-    s32 score = 2 * data->currentScore;
-    data->currentScore = score;
+    s32 score = 2 * data->curScore;
+    data->curScore = score;
     data->targetScore = score;
 
     return ApiStatus_DONE2;
@@ -608,7 +608,7 @@ API_CALLABLE(N(InitializePanels)) {
     JumpGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[JUMP_DATA_VAR_IDX];
     s32 i;
 
-    data->currentScore = 0;
+    data->curScore = 0;
     data->targetScore = 0;
 
     for (i = 0; i < ARRAY_COUNT(data->panels); i++) {

@@ -81,7 +81,7 @@ EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
     part->unk_14 = temp_f22 * temp_f26;
     part->unk_18 = temp_f20 * temp_f26;
 
-    currentYaw = gCameras[gCurrentCameraID].currentYaw;
+    currentYaw = gCameras[gCurrentCameraID].curYaw;
     cosYaw = -cos_deg(currentYaw);
     sinYaw = -sin_deg(currentYaw);
 
@@ -168,7 +168,7 @@ void star_update(EffectInstance* effect) {
         }
     }
 
-    if (playerStatus->position.y - data->unk_08 > 300.0f) {
+    if (playerStatus->pos.y - data->unk_08 > 300.0f) {
         data->unk_30 = -1;
     }
 
@@ -190,7 +190,7 @@ void star_render(EffectInstance* effect) {
 
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = star_appendGfx;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     if (effect15->unk_38 != 0) {
         renderModeTemp = RENDER_MODE_2D;
     } else {
@@ -216,7 +216,7 @@ void star_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
     guRotateF(sp60, data->unk_24, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp60, sp20, sp20);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -243,7 +243,7 @@ void star_appendGfx(void* effect) {
     if (data->unk_1C <= 1.0f) {
         s32 baseIdx = (data->unk_3C + 5) % 8;
 
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
         guRotateF(sp60, data->unk_20, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp60, sp20, sp20);
         guMtxF2L(sp20, &data->unk_40[data->unk_3C]);

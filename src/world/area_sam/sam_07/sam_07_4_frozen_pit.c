@@ -21,7 +21,7 @@ typedef struct IceShard {
     /* 0x10 */ Vec3f initialPos;
     /* 0x1C */ Vec3f rot;
     /* 0x28 */ Vec3f rotVel;
-    /* 0x34 */ f32 velocityY;
+    /* 0x34 */ f32 velY;
     /* 0x38 */ f32 moveSpeed;
     /* 0x3C */ f32 moveAngle;
     /* 0x40 */ Matrix4f transformMatrix;
@@ -57,7 +57,7 @@ API_CALLABLE(N(AnimateIceShattering)) {
             it->rotVel.x = rand_int(20) - 10;
             it->rotVel.y = rand_int(20) - 10;
             it->rotVel.z = rand_int(20) - 10;
-            it->velocityY = rand_int(5) + 5.0f;
+            it->velY = rand_int(5) + 5.0f;
             it->moveSpeed = rand_int(3) + 1.0f;
             it->moveAngle = rand_int(360);
 
@@ -74,10 +74,10 @@ API_CALLABLE(N(AnimateIceShattering)) {
         model = get_model_from_list_index(get_model_list_index_from_tree_index(N(IceShardModels)[i]));
         if (it->state == 0) {
             add_vec2D_polar(&it->pos.x, &it->pos.z, it->moveSpeed, it->moveAngle);
-            it->velocityY -= 1.0f;
-            it->pos.y += it->velocityY;
-            if (it->velocityY < 0.0f) {
-                if (it->pos.y < playerStatus->position.y - 150.0f) {
+            it->velY -= 1.0f;
+            it->pos.y += it->velY;
+            if (it->velY < 0.0f) {
+                if (it->pos.y < playerStatus->pos.y - 150.0f) {
                     // this shard is done, stop moving and increment the 'done' counter
                     script->functionTemp[1]++;
                     it->state = 101;
@@ -125,7 +125,7 @@ API_CALLABLE(N(AwaitPlayerNotPoundingFloor)) {
     s32 floor1 = evt_get_variable(script, *args++);
     s32 floor2 = evt_get_variable(script, *args++);
 
-    if (gCollisionStatus.currentFloor == floor1 || gCollisionStatus.currentFloor == floor2) {
+    if (gCollisionStatus.curFloor == floor1 || gCollisionStatus.curFloor == floor2) {
         if (playerStatus->actionState == ACTION_STATE_SPIN_POUND ||
             playerStatus->actionState == ACTION_STATE_TORNADO_POUND)
         {

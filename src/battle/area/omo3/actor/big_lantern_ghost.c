@@ -191,16 +191,16 @@ API_CALLABLE(N(update_effect)) {
         effectData = effect->data.bulbGlow;
     }
 
-    posX = actor->currentPos.x;
-    posY = actor->currentPos.y;
-    posZ = actor->currentPos.z;
+    posX = actor->curPos.x;
+    posY = actor->curPos.y;
+    posZ = actor->curPos.z;
 
-    rotX = actor->rotation.x;
-    rotY = actor->rotation.y + actor->yaw;
-    rotZ = actor->rotation.z;
+    rotX = actor->rot.x;
+    rotY = actor->rot.y + actor->yaw;
+    rotZ = actor->rot.z;
 
     actorPart = get_actor_part(actor, 1);
-    if (actorPart->currentAnimation == ANIM_BigLanternGhost_Anim0C) {
+    if (actorPart->curAnimation == ANIM_BigLanternGhost_Anim0C) {
         spr_get_comp_position(actor->partsTable->spriteInstanceID, 0, &partX, &partY, &partZ);
     } else {
         spr_get_comp_position(actor->partsTable->spriteInstanceID, 1, &partX, &partY, &partZ);

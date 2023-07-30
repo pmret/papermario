@@ -11,7 +11,7 @@ API_CALLABLE(N(ClearTrackVols)) {
 }
 
 API_CALLABLE(N(ManageBigPalmTreeVisibility)) {
-    u16 currentFloor = gCollisionStatus.currentFloor;
+    u16 currentFloor = gCollisionStatus.curFloor;
 
     if (N(PrevPalmTreeVisibility) != 0) {
         if (currentFloor == COLLIDER_o327 || currentFloor == COLLIDER_o330) {

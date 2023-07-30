@@ -36,25 +36,25 @@ void update_camera_mode_unused(Camera* camera) {
     }
 
     if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
-        camera->lookAt_obj_target.y = playerStatus->position.y + 60.0f;
+        camera->lookAt_obj_target.y = playerStatus->pos.y + 60.0f;
     }
-    camera->lookAt_obj_target.x = playerStatus->position.x;
-    camera->lookAt_obj_target.z = playerStatus->position.z + 400.0f;
+    camera->lookAt_obj_target.x = playerStatus->pos.x;
+    camera->lookAt_obj_target.z = playerStatus->pos.z + 400.0f;
 
     if (camera->auxPitch == 0) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
-        camera->trueRotation.x = camera->auxBoomYaw;
-        camera->currentBoomYaw = camera->auxBoomPitch;
-        camera->currentBoomLength = camera->auxBoomLength;
+        camera->trueRot.x = camera->auxBoomYaw;
+        camera->curBoomYaw = camera->auxBoomPitch;
+        camera->curBoomLength = camera->auxBoomLength;
         camera->vfov = (10000 / camera->lookAt_dist) / 4;
-        boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
+        boomYaw = DEG_TO_RAD(camera->curBoomYaw);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaX = 0.0f;
         deltaY = 0.0f;
-        deltaZ = camera->currentBoomLength;
+        deltaZ = camera->curBoomLength;
         deltaX2 = deltaX;
         deltaY2 = deltaY;
         boomYaw = deltaX = -deltaY2;
@@ -62,7 +62,7 @@ void update_camera_mode_unused(Camera* camera) {
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
         deltaZ = sinBoom * boomYaw + deltaZ2 * cosBoom;
-        boomYaw = DEG_TO_RAD(camera->trueRotation.x);
+        boomYaw = DEG_TO_RAD(camera->trueRot.x);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaZ2 = cosBoom * deltaX - deltaZ * sinBoom;
@@ -73,12 +73,12 @@ void update_camera_mode_unused(Camera* camera) {
         camera->lookAt_eye.y = camera->lookAt_obj.y + deltaY2;
         camera->lookAt_eye.z = camera->lookAt_obj.z + deltaZ2;
     }
-    camera->currentYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
     deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
+    camera->curBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
+    camera->curPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
 }
 
 //TODO CODE SPLIT?
@@ -87,26 +87,26 @@ void update_camera_mode_5(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 lookXDelta, lookYDelta, lookZDelta;
 
-    camera->currentBoomYaw = 18.0f;
-    camera->currentBoomLength = 690.0f;
-    camera->currentYOffset = 47.0f;
+    camera->curBoomYaw = 18.0f;
+    camera->curBoomLength = 690.0f;
+    camera->curYOffset = 47.0f;
 
     if (camera->needsInit) {
         camera->unk_550 = 0.0f;
         camera->unk_70 = 0.0f;
-        camera->trueRotation.x = 0.0f;
+        camera->trueRot.x = 0.0f;
         camera->needsInit = FALSE;
         camera->unk_554 = 0;
         camera->lookAt_obj.x = camera->targetPos.x;
-        camera->lookAt_obj.y = camera->targetPos.y + camera->currentYOffset;
+        camera->lookAt_obj.y = camera->targetPos.y + camera->curYOffset;
         camera->lookAt_obj.z = camera->targetPos.z;
         cam_interp_lookat_pos(camera, 0.0f, 0.0f, FALSE);
     } else {
-        f32 maxInterpSpeed = (playerStatus->currentSpeed * 1.5f) + 1.0f;
-        f32 interpRate = (playerStatus->currentSpeed * 0.05f) + 0.05f;
+        f32 maxInterpSpeed = (playerStatus->curSpeed * 1.5f) + 1.0f;
+        f32 interpRate = (playerStatus->curSpeed * 0.05f) + 0.05f;
 
         camera->lookAt_obj_target.x = camera->targetPos.x + camera->unk_550;
-        camera->lookAt_obj_target.y = camera->targetPos.y + camera->currentYOffset;
+        camera->lookAt_obj_target.y = camera->targetPos.y + camera->curYOffset;
         camera->lookAt_obj_target.z = camera->targetPos.z;
         func_8003034C(camera);
         if (!(camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y)) {
@@ -118,12 +118,12 @@ void update_camera_mode_5(Camera* camera) {
         }
     }
 
-    camera->currentYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
+    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
     lookXDelta = camera->lookAt_obj.x - camera->lookAt_eye.x;
     lookYDelta = camera->lookAt_obj.y - camera->lookAt_eye.y;
     lookZDelta = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, lookXDelta, lookZDelta);
-    camera->currentPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
+    camera->curBlendedYawNegated = -atan2(0.0f, 0.0f, lookXDelta, lookZDelta);
+    camera->curPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
 }
 
 void cam_interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 lockPosY) {
@@ -141,22 +141,22 @@ void cam_interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 
 
     camera->lookAt_obj.x = camera->lookAt_eye.x = camera->lookAt_obj.x + xDelta;
 
-    theta = DEG_TO_RAD(camera->currentBoomYaw);
-    cosTheta = cos_rad(DEG_TO_RAD(camera->currentBoomYaw));
+    theta = DEG_TO_RAD(camera->curBoomYaw);
+    cosTheta = cos_rad(DEG_TO_RAD(camera->curBoomYaw));
     camera->lookAt_obj.z += (camera->lookAt_obj_target.z - camera->lookAt_obj.z) * interpAmtXZ;
-    camera->lookAt_eye.z = camera->lookAt_obj.z + (camera->currentBoomLength * cosTheta);
+    camera->lookAt_eye.z = camera->lookAt_obj.z + (camera->curBoomLength * cosTheta);
 
     if (!lockPosY) {
         sinTheta = sin_rad(theta);
         camera->lookAt_obj.y += (camera->lookAt_obj_target.y - camera->lookAt_obj.y) * 0.125f;
-        camera->lookAt_eye.y = camera->lookAt_obj.y + (camera->currentBoomLength * sinTheta);
+        camera->lookAt_eye.y = camera->lookAt_obj.y + (camera->curBoomLength * sinTheta);
     }
 }
 
 void func_8003034C(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (fabsf(get_clamped_angle_diff(playerStatus->currentYaw, 90.0f)) < 45.0f) {
+    if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 90.0f)) < 45.0f) {
         if (camera->unk_556 == 0) {
             if (camera->unk_554 <= 0) {
                 camera->unk_550 = 35.0f;
@@ -167,7 +167,7 @@ void func_8003034C(Camera* camera) {
             camera->unk_554 = 15;
             camera->unk_556 = 0;
         }
-    } else if (fabsf(get_clamped_angle_diff(playerStatus->currentYaw, 270.0f)) < 45.0f) {
+    } else if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 270.0f)) < 45.0f) {
         if (camera->unk_556 == 1) {
             if (camera->unk_554 <= 0) {
                 camera->unk_550 = -35.0f;
@@ -789,7 +789,7 @@ void update_camera_zone_interp(Camera* camera) {
     changingZone = FALSE;
 
     if (camera->isChangingMap) {
-        camera->currentController = NULL;
+        camera->curController = NULL;
         camera->prevController = NULL;
         camera->linearInterp = 0.0f;
         camera->unk_494 = 0.0f;
@@ -854,7 +854,7 @@ void update_camera_zone_interp(Camera* camera) {
 
         cond2 = FALSE;
         cs2 = cs;
-        currentController = camera->currentController;
+        currentController = camera->curController;
         if (cs != NULL
             && currentController != NULL
             && cs->type == currentController->type
@@ -909,13 +909,13 @@ void update_camera_zone_interp(Camera* camera) {
 
         if (camera->panActive || (!cond2 && cs2 != currentController)) {
             if (camera->interpAlpha == 1.0f) {
-                camera->prevController = camera->currentController;
+                camera->prevController = camera->curController;
             } else {
                 camera->prevController = (CameraControlSettings*) CAMERA_SETTINGS_PTR_MINUS_1;
             }
             changingZone = TRUE;
             camera->prevConfiguration = gCurrentCamConfiguration;
-            camera->currentController = cs;
+            camera->curController = cs;
             camera->interpAlpha = 0.0f;
             camera->linearInterp = 0.0f;
             camera->panActive = FALSE;
@@ -953,7 +953,7 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     update_camera_from_controller(camera, &camera->prevConfiguration, &camera->prevController,
-                                  &camera->goalConfiguration, &camera->currentController, posX, posY, posZ, tX, tY, tZ,
+                                  &camera->goalConfiguration, &camera->curController, posX, posY, posZ, tX, tY, tZ,
                                   camera->isChangingMap, &camera->interpAlpha, changingZone);
 
     if (camera->isChangingMap) {
@@ -1098,13 +1098,13 @@ void update_camera_zone_interp(Camera* camera) {
     temp_f4_4 = (dist * cosAngle) - (temp_f8_2 * sinAngle);
     camera->lookAt_obj.x = camera->lookAt_eye.x + (temp_f26 * temp_f4_4);
     camera->lookAt_obj.z = camera->lookAt_eye.z + (temp_f24_2 * temp_f4_4);
-    camera->currentYaw = gCurrentCamConfiguration.boomYaw + D_800A08E0;
-    camera->trueRotation.x = camera->currentYaw;
-    camera->currentBoomLength = gCurrentCamConfiguration.boomLength;
-    camera->currentBlendedYawNegated = -gCurrentCamConfiguration.boomYaw;
-    camera->currentPitch = -gCurrentCamConfiguration.boomPitch - gCurrentCamConfiguration.viewPitch;
+    camera->curYaw = gCurrentCamConfiguration.boomYaw + D_800A08E0;
+    camera->trueRot.x = camera->curYaw;
+    camera->curBoomLength = gCurrentCamConfiguration.boomLength;
+    camera->curBlendedYawNegated = -gCurrentCamConfiguration.boomYaw;
+    camera->curPitch = -gCurrentCamConfiguration.boomPitch - gCurrentCamConfiguration.viewPitch;
     camera->lookAt_obj_target.x = camera->lookAt_obj.x;
     camera->lookAt_obj_target.y = camera->lookAt_obj.y;
     camera->lookAt_obj_target.z = camera->lookAt_obj.z;
-    camera->currentYOffset = 0.0f;
+    camera->curYOffset = 0.0f;
 }

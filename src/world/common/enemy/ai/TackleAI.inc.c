@@ -47,7 +47,7 @@ API_CALLABLE(N(TackleAI_Main)) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
         enemy->hitboxIsActive = FALSE;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->varTable[9] = 0;
@@ -76,10 +76,10 @@ API_CALLABLE(N(TackleAI_Main)) {
     if (enemy->varTable[9] > 0) {
         enemy->varTable[9]--;
         if (enemy->varTable[9] == 0) {
-            if (npc->currentAnim == ANIM_BonyBeetle_Anim2E ||
-                npc->currentAnim == ANIM_BonyBeetle_Anim2F)
+            if (npc->curAnim == ANIM_BonyBeetle_Anim2E ||
+                npc->curAnim == ANIM_BonyBeetle_Anim2F)
             {
-                npc->currentAnim = ANIM_BonyBeetle_Anim0C;
+                npc->curAnim = ANIM_BonyBeetle_Anim0C;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -100,11 +100,11 @@ API_CALLABLE(N(TackleAI_Main)) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
                         enemy->instigatorValue = 0;
-                        npc->currentAnim = ANIM_BonyBeetle_Anim2F;
+                        npc->curAnim = ANIM_BonyBeetle_Anim2F;
                     } else {
                         enemy->varTable[8] = 1;
                         enemy->instigatorValue = 1;
-                        npc->currentAnim = ANIM_BonyBeetle_Anim2E;
+                        npc->curAnim = ANIM_BonyBeetle_Anim2E;
                     }
                     enemy->varTable[9] = 7;
                     return ApiStatus_BLOCK;
@@ -136,7 +136,7 @@ API_CALLABLE(N(TackleAI_Main)) {
             enemy->instigatorValue = 0;
         }
         if (enemy->varTable[8] != 0) {
-            switch (npc->currentAnim) {
+            switch (npc->curAnim) {
                 case ANIM_BonyBeetle_Anim04:
                 case ANIM_BonyBeetle_Anim0C:
                 case ANIM_BonyBeetle_Anim0E:
@@ -144,7 +144,7 @@ API_CALLABLE(N(TackleAI_Main)) {
                 case ANIM_BonyBeetle_Anim12:
                 case ANIM_BonyBeetle_Anim16:
                 case ANIM_BonyBeetle_Anim18:
-                    npc->currentAnim++;
+                    npc->curAnim++;
                     break;
             }
         }

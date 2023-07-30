@@ -38,7 +38,7 @@ API_CALLABLE(N(UpdateStarSpiritRotation)) {
         script->functionTemp[0] = 0;
     }
     npc = script->functionTempPtr[2];
-    npc->rotation.y = update_lerp(EASING_QUADRATIC_OUT, 810.0f, 0.0f, script->functionTemp[0], 45);
+    npc->rot.y = update_lerp(EASING_QUADRATIC_OUT, 810.0f, 0.0f, script->functionTemp[0], 45);
     npc->alpha = update_lerp(EASING_QUADRATIC_OUT, 0.0f, 255.0f, script->functionTemp[0], 45);
 
     script->functionTemp[0]++;

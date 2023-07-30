@@ -123,7 +123,7 @@ void debuff_render(EffectInstance* effect) {
 
     renderTask.appendGfx = debuff_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);
@@ -145,7 +145,7 @@ void debuff_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(mtxRotate, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotate, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtxRotate, mtxTranslate, mtxTransform);
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 

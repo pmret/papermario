@@ -20,7 +20,7 @@ API_CALLABLE(N(GetCurrentFloor)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, gCollisionStatus.currentFloor);
+    evt_set_variable(script, outVar, gCollisionStatus.curFloor);
     return ApiStatus_DONE2;
 }
 
@@ -41,13 +41,13 @@ API_CALLABLE(N(AddPushVelocity)) {
     CollisionStatus* collisionStatus= &gCollisionStatus;
     Npc* partner;
 
-    if ((collisionStatus->currentFloor == floorA) || (collisionStatus->lastTouchedFloor == floorA)
-     || (collisionStatus->currentFloor == floorB) || (collisionStatus->lastTouchedFloor == floorB)) {
-        playerStatus->pushVelocity.x = velX;
+    if ((collisionStatus->curFloor == floorA) || (collisionStatus->lastTouchedFloor == floorA)
+     || (collisionStatus->curFloor == floorB) || (collisionStatus->lastTouchedFloor == floorB)) {
+        playerStatus->pushVel.x = velX;
     }
-    if (gPlayerData.currentPartner != PARTNER_NONE){
+    if (gPlayerData.curPartner != PARTNER_NONE){
         partner = get_npc_unsafe(NPC_PARTNER);
-        if ((partner->currentFloor == floorA) || (partner->currentFloor == floorB)) {
+        if ((partner->curFloor == floorA) || (partner->curFloor == floorB)) {
             partner->pos.x += velX;
         }
     }

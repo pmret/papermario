@@ -16,18 +16,18 @@ API_CALLABLE(N(AddPlatformPushVelocity)) {
     s32 temp_a0 = evt_get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (gCollisionStatus.currentFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
+    if (gCollisionStatus.curFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
         if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP &&
             playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
             temp_a0 == 0)
         {
-            playerStatus->pushVelocity.x = velX;
+            playerStatus->pushVel.x = velX;
         }
     }
-    if (gPlayerData.currentPartner != PARTNER_NONE) {
+    if (gPlayerData.curPartner != PARTNER_NONE) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
-        if (partner->currentFloor == floor) {
+        if (partner->curFloor == floor) {
             partner->pos.x += velX;
         }
     }

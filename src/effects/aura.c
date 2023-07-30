@@ -250,7 +250,7 @@ void aura_render(EffectInstance* effect) {
 
     renderTask.appendGfx = aura_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -278,7 +278,7 @@ void aura_appendGfx(void* argEffect) {
     if (type == 2) {
         guRotateF(tempMtx, data->renderYaw, 0.0f, 1.0f, 0.0f);
     } else {
-        guRotateF(tempMtx, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(tempMtx, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     }
     guMtxCatF(tempMtx, translateMtx, transformMtx);
     guScaleF(tempMtx, data->scale.x, data->scale.y, 1.0f);
@@ -297,7 +297,7 @@ void aura_appendGfx(void* argEffect) {
     if (type == 2) {
         guRotateF(tempMtx, data->renderYaw, 0.0f, 1.0f, 0.0f);
     } else {
-        guRotateF(tempMtx, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(tempMtx, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     }
     guMtxCatF(tempMtx, translateMtx, transformMtx);
     guScaleF(tempMtx, data->scale.x, data->scale.y, 1.0f);

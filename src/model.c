@@ -2666,7 +2666,7 @@ void render_models(void) {
         } else {
             rtPtr->appendGfx = appendGfx_model;
         }
-        rtPtr->distance = -distance;
+        rtPtr->dist = -distance;
         rtPtr->renderMode = model->renderMode;
         queue_render_task(rtPtr);
     }
@@ -2705,7 +2705,7 @@ void render_models(void) {
         if (!(transformGroup->flags & TRANSFORM_GROUP_FLAG_HIDDEN)) {
             rtPtr->appendGfx = render_transform_group;
             rtPtr->appendGfxArg = transformGroup;
-            rtPtr->distance = -distance;
+            rtPtr->dist = -distance;
             rtPtr->renderMode = transformGroup->renderMode;
             queue_render_task(rtPtr);
         }
@@ -4349,7 +4349,7 @@ RenderTask* queue_render_task(RenderTask* task) {
 
     ret->appendGfxArg = task->appendGfxArg;
     ret->appendGfx = task->appendGfx;
-    ret->distance = mdl_renderTaskBasePriorities[task->renderMode] - task->distance;
+    ret->dist = mdl_renderTaskBasePriorities[task->renderMode] - task->dist;
 
     return ret;
 }
@@ -4379,7 +4379,7 @@ void execute_render_tasks(void) {
             s32 t2 = sorted[j];
             task = &taskList[t1];
             task2 = &taskList[t2];
-            if (task->distance > task2->distance) {
+            if (task->dist > task2->dist) {
                 sorted[i] = t2;
                 sorted[j] = t1;
             }
@@ -4390,13 +4390,13 @@ void execute_render_tasks(void) {
     taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
     for (i = 0; i < taskCount - 1; i++) {
         task = &taskList[sorted[i]];
-        if (task->distance >= 3000000) {
+        if (task->dist >= 3000000) {
             for (j = i + 1; j < taskCount; j++) {
                 s32 t1 = sorted[i];
                 s32 t2 = sorted[j];
                 task = &taskList[t1];
                 task2 = &taskList[t2];
-                if (task->distance < task2->distance) {
+                if (task->dist < task2->dist) {
                     sorted[i] = t2;
                     sorted[j] = t1;
                 }
@@ -4408,7 +4408,7 @@ void execute_render_tasks(void) {
     taskList = mdl_renderTaskLists[mdl_renderTaskQueueIdx];
     for (i = 0; i < taskCount - 1; i++) {
         task = &taskList[sorted[i]];
-        if (task->distance > 800000) {
+        if (task->dist > 800000) {
             break;
         }
         for (j = i + 1; j < taskCount; j++) {
@@ -4416,10 +4416,10 @@ void execute_render_tasks(void) {
             s32 t2 = sorted[j];
             task = &taskList[t1];
             task2 = &taskList[t2];
-            if (task2->distance > 800000) {
+            if (task2->dist > 800000) {
                 break;
             }
-            if (task->distance < task2->distance) {
+            if (task->dist < task2->dist) {
                 sorted[i] = t2;
                 sorted[j] = t1;
             }

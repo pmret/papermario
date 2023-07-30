@@ -140,9 +140,7 @@ def extract(input_data: bytes, endian: Literal["big", "little"] = "big") -> str:
         profile_list = []
 
         for _ in range(len(PROFILE_NAMES[g])):
-            profile_list.append(
-                struct.unpack(END + "i", offsets_table[pl_it : pl_it + 4])[0]
-            )
+            profile_list.append(struct.unpack(END + "i", offsets_table[pl_it : pl_it + 4])[0])
             pl_it += 4
 
         for j, pl_offset in enumerate(profile_list):

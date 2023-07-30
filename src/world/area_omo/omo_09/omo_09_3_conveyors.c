@@ -24,7 +24,7 @@ s32 N(ShouldPauseConveyor)(void) {
     }
 
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE &&
-        (playerData->currentPartner == PARTNER_GOOMBARIO || playerData->currentPartner == PARTNER_SUSHIE))
+        (playerData->curPartner == PARTNER_GOOMBARIO || playerData->curPartner == PARTNER_SUSHIE))
     {
         return TRUE;
     }
@@ -59,9 +59,9 @@ API_CALLABLE(N(AddConveyorPush)) {
     one = 1;
     if (partnerStatus->actingPartner == PARTNER_BOW) {
         if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && playerStatus->alpha1 == 128) {
-            x = playerStatus->position.x;
-            y = playerStatus->position.y;
-            z = playerStatus->position.z;
+            x = playerStatus->pos.x;
+            y = playerStatus->pos.y;
+            z = playerStatus->pos.z;
             outLength = 1000.0f;
             hit = player_raycast_below_cam_relative(playerStatus,
                 &x, &y, &z, &outLength,
@@ -70,8 +70,8 @@ API_CALLABLE(N(AddConveyorPush)) {
 
             for (i = 0; i < ARRAY_COUNT(N(ConveyorColliders)); i++) {
                 if (hit == N(ConveyorColliders)[i]) {
-                    playerStatus->pushVelocity.x = N(ConveyorPushVels)[i][0];
-                    playerStatus->pushVelocity.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
+                    playerStatus->pushVel.x = N(ConveyorPushVels)[i][0];
+                    playerStatus->pushVel.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
                 }
             }
             script->varTable[0] = 1;
@@ -83,14 +83,14 @@ API_CALLABLE(N(AddConveyorPush)) {
         partnerStatus->partnerActionState == PARTNER_ACTION_NONE)
     {
         for (i = 0; i < ARRAY_COUNT(N(ConveyorColliders)); i++) {
-            if (gCollisionStatus.currentFloor == N(ConveyorColliders)[i] ||
+            if (gCollisionStatus.curFloor == N(ConveyorColliders)[i] ||
                 gCollisionStatus.lastTouchedFloor == N(ConveyorColliders)[i])
             {
-                playerStatus->pushVelocity.x = N(ConveyorPushVels)[i][0];
-                playerStatus->pushVelocity.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
+                playerStatus->pushVel.x = N(ConveyorPushVels)[i][0];
+                playerStatus->pushVel.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
             }
 
-            if (partner->currentFloor == N(ConveyorColliders)[i] &&
+            if (partner->curFloor == N(ConveyorColliders)[i] &&
                 ((partnerStatus->actingPartner != PARTNER_KOOPER) ||
                  (partnerStatus->partnerActionState == PARTNER_ACTION_NONE)))
             {

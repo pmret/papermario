@@ -11,9 +11,9 @@ void N(set_script_owner_npc_anim)(Evt* script, MobileAISettings* aiSettings, Ene
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
     npc->duration = enemy->varTable[2];
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     script->AI_TEMP_STATE = 13;
 }
 
@@ -24,13 +24,13 @@ ApiStatus N(UnkDistFunc)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
 
     if ((npc->duration <= 0) || (--npc->duration <= 0)) {
         if (npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
             npc->moveSpeed = aiSettings->chaseSpeed;
             if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
                 npc->collisionHeight = enemy->varTable[6] / 2;
             }
-            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                    gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
+            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+                                    gPlayerStatusPtr->pos.z) / npc->moveSpeed) + 0.8;
             if (npc->duration < enemy->varTable[3]) {
                 npc->duration = enemy->varTable[3];
             }
@@ -66,7 +66,7 @@ void N(UnkNpcAIFunc12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     if ((npc->duration <= 0) || (--npc->duration <= 0) || (temp != 0)) {
         enemy->hitboxIsActive = FALSE;
-        npc->currentAnim = enemy->animList[10];
+        npc->curAnim = enemy->animList[10];
         npc->duration = 0;
         script->functionTemp[0] = 15;
     }

@@ -80,16 +80,16 @@ API_CALLABLE(N(MovePlayerAlongRoofSlide)) {
     script->functionTemp[1] += 4;
     xComp = (script->functionTemp[1] / 10) * sin_deg(playerStatus->targetYaw);
     zComp = (script->functionTemp[1] / 10) * -cos_deg(playerStatus->targetYaw);
-    x = playerStatus->position.x + xComp;
-    y = playerStatus->position.y + playerStatus->colliderHeight * 0.5f;
-    z = playerStatus->position.z + zComp;
+    x = playerStatus->pos.x + xComp;
+    y = playerStatus->pos.y + playerStatus->colliderHeight * 0.5f;
+    z = playerStatus->pos.z + zComp;
     hitDepth = 500.0f;
 
     if (npc_raycast_down_sides(0, &x, &y, &z, &hitDepth)) {
         if (hitDepth < 100.0f) {
-            playerStatus->position.x = x;
-            playerStatus->position.y = y;
-            playerStatus->position.z = z;
+            playerStatus->pos.x = x;
+            playerStatus->pos.y = y;
+            playerStatus->pos.z = z;
             return ApiStatus_BLOCK;
         }
     }
@@ -108,10 +108,10 @@ API_CALLABLE(N(IsPlayerInputDisabled)) {
 API_CALLABLE(N(MonitorCurrenFloor)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->lastGoodPosition.y == 385) {
+    if (playerStatus->lastGoodPos.y == 385) {
         evt_set_variable(script, MV_CurrentFloor, 0);
     }
-    if (playerStatus->lastGoodPosition.y == 150) {
+    if (playerStatus->lastGoodPos.y == 150) {
         evt_set_variable(script, MV_CurrentFloor, 1);
     }
     return ApiStatus_BLOCK;

@@ -9,10 +9,10 @@ API_CALLABLE(N(DarkRoomUpdate)) {
         script->functionTemp[1] = FALSE;
     }
 
-    set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1, playerStatus->position.x, playerStatus->position.y + 8.0f, playerStatus->position.z);
+    set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1, playerStatus->pos.x, playerStatus->pos.y + 8.0f, playerStatus->pos.z);
 
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        if (playerData->currentPartner == PARTNER_WATT) {
+        if (playerData->curPartner == PARTNER_WATT) {
             if (!script->functionTemp[1]) {
                 script->functionTemp[1] = TRUE;
                 sfx_play_sound(SOUND_WATT_REPEL_DARKNESS);
@@ -22,7 +22,7 @@ API_CALLABLE(N(DarkRoomUpdate)) {
                 script->functionTemp[0] = 90;
             }
         }
-    } else if (playerData->currentPartner == PARTNER_WATT) {
+    } else if (playerData->curPartner == PARTNER_WATT) {
         if (script->functionTemp[1]) {
             script->functionTemp[1] = FALSE;
             if (script->functionTemp[0] < 255) {

@@ -76,9 +76,7 @@ def from_dir(
 
             palettes.append(palette)
 
-        palette_names.append(
-            Palette.get("name", Palette.attrib["src"].split(".png")[0])
-        )
+        palette_names.append(Palette.get("name", Palette.attrib["src"].split(".png")[0]))
 
     images = []
     image_names: List[str] = []
@@ -192,9 +190,7 @@ if __name__ == "__main__":
             palette_offsets.append(f.tell())
             for rgba in palette:
                 if rgba[3] not in (0, 0xFF):
-                    print(
-                        "error: translucent pixels not allowed in palette {sprite.palette_names[i]}"
-                    )
+                    print("error: translucent pixels not allowed in palette {sprite.palette_names[i]}")
                     exit(1)
 
                 color = pack_color(*rgba)

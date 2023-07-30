@@ -110,7 +110,7 @@ void N(update)(void) {
         case 11:
             btl_set_popup_duration(99);
             if (!actionCommandStatus->berserkerEnabled) {
-                if (battleStatus->currentButtonsPressed & BUTTON_A) {
+                if (battleStatus->curButtonsPressed & BUTTON_A) {
                     actionCommandStatus->barFillLevel += battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                 }
             } else {
