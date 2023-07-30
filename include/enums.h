@@ -6478,4 +6478,10 @@ enum IdleScriptState {
     IDLE_SCRIPT_RESTART = -1,
 };
 
+enum BlurState {
+    BLUR_ENABLE,
+    BLUR_DISABLE,
+    BLUR_RESET = -1,
+};
+
 #endif

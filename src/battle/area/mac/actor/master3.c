@@ -572,13 +572,13 @@ EvtScript N(tripleStrike3) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, 0)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(EnablePlayerBlur, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
         EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(0.3))
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Hurt, ANIM_Mario1_Hurt, ANIM_Mario1_Hurt)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(func_80273444, 50, 0, 0)
-        EVT_CALL(EnablePlayerBlur, IDLE_SCRIPT_ENABLE)
+        EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
