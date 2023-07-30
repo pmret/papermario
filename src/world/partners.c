@@ -1808,7 +1808,7 @@ void partner_flying_update_motion(Npc* partner) {
         wSavedPartnerPosZ = partner->pos.z;
     } else {
         partner_do_player_collision(partner);
-        if (wPartnerFollowState != 0x32) {
+        if (wPartnerFollowState != 50) {
             x = partner->pos.x;
             y = partner->pos.y;
             z = partner->pos.z;
@@ -2177,14 +2177,13 @@ s32 partner_init_put_away(Npc* partner) {
 
 s32 partner_put_away(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 tempMoveToX;
     f32 tempMoveToY;
     f32 tempMoveToZ;
-    f32 tempPosZ;
-    f32 tempMoveToX;
     f32 tempPosX;
+    f32 tempPosZ;
     f32 tempPosY;
     f32 tempDuration;
-    f32 divisor;
 
     switch (wPartnerFollowState){
         case 0:
@@ -2206,9 +2205,8 @@ s32 partner_put_away(Npc* partner) {
             partner->moveToPos.z = tempPosZ;
             partner->planarFlyDist = dist2D(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
             partner->yaw = atan2(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
-            partner->duration = 0xF;
-            divisor = 15.0f;
-            partner->moveSpeed = partner->planarFlyDist / divisor;
+            partner->duration = 15;
+            partner->moveSpeed = partner->planarFlyDist / partner->duration;
             tempMoveToY = tempPosY - tempMoveToY;
             partner->jumpVelocity = (tempMoveToY + partner->jumpScale * partner->duration * partner->duration * 0.5f) / partner->duration;
             partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].jump;
@@ -2230,7 +2228,7 @@ s32 partner_put_away(Npc* partner) {
             partner->scale.y = partner->scale.x;
             partner->scale.z = partner->scale.x;
             partner->duration--;
-            if (partner->duration >> 0x10 != 0) {
+            if (partner->duration < 0) {
                 wPartnerFollowState = 2;
             }
             break;

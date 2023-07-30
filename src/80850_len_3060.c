@@ -1,15 +1,18 @@
 #include "common.h"
 #include "hud_element.h"
 
+BSS s16 D_8010CD10;
+BSS s16 D_8010CD12;
+BSS char D_8010CD14[0xA];
+BSS s32 D_8010CD20;
+BSS char D_8010CD24[0xC];
+
 SHIFT_BSS UiStatus gUIStatus;
 
 extern HudScript* TimesHudScript;
 extern HudScript* SPIncrementHudScripts[];
 extern HudScript* SPStarHudScripts[];
 extern s32 StatusBarSPIncrementOffsets[];
-
-extern s16 D_8010CD10;
-extern s16 D_8010CD12;
 
 extern HudScript* DigitHudScripts[10];
 
