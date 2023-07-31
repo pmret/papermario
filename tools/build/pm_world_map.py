@@ -28,7 +28,7 @@ class WorldMapEntry:
                 self.path.append(i.split(","))
 
 
-def build(in_xml: Path, out_c: Path):
+def generate(in_xml: Path, out_c: Path):
     xml = ET.parse(in_xml)
     ScriptList = xml.getroot()
 
@@ -83,4 +83,4 @@ if __name__ == "__main__":
     parser.add_argument("header_path", help="output header file to generate")
     args = parser.parse_args()
 
-    build(args.in_xml, args.header_path)
+    generate(args.in_xml, args.header_path)

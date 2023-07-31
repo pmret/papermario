@@ -6,7 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 
 
-def build(in_xml: Path, out_c: Path):
+def generate_scripts(in_xml: Path, out_c: Path):
     xml = ET.parse(in_xml)
     ScriptList = xml.getroot()
 
@@ -43,4 +43,4 @@ if __name__ == "__main__":
     parser.add_argument("header_path", help="output header file to generate")
     args = parser.parse_args()
 
-    build(args.in_xml, args.header_path)
+    generate_scripts(args.in_xml, args.header_path)

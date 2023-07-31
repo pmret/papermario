@@ -1,338 +1,338 @@
 <ItemHudScripts>
-    <HScript name="Present" template="STANDARD_ITEM" icon="key/Gift"/>
-    <HScript name="CakeDone" template="STANDARD_ITEM" icon="key/CakeDone"/>
-    <HScript name="CakeBaked" template="STANDARD_ITEM" icon="key/CakeBaked"/>
-    <HScript name="CakePan" template="STANDARD_ITEM" icon="key/CakePan"/>
-    <HScript name="CakeBatter" template="STANDARD_ITEM" icon="key/CakeBatter"/>
-    <HScript name="CakeBowl" template="STANDARD_ITEM" icon="key/CakeBowl"/>
-    <HScript name="CakeMixed" template="STANDARD_ITEM" icon="key/CakeMix"/>
-    <HScript name="CakeIcing" template="STANDARD_ITEM" icon="key/CakeIcing"/>
-    <HScript name="CakeBerries" template="STANDARD_ITEM" icon="key/CakeBerries"/>
-    <HScript name="Hammer1" template="STANDARD_ITEM" icon="Hammer1"/>
-    <HScript name="Hammer2" template="STANDARD_ITEM" icon="Hammer2"/>
-    <HScript name="Hammer3" template="STANDARD_ITEM" icon="Hammer3"/>
-    <HScript name="Boots1" template="STANDARD_ITEM" icon="Boots1"/>
-    <HScript name="Boots2" template="STANDARD_ITEM" icon="Boots2"/>
-    <HScript name="Boots3" template="STANDARD_ITEM" icon="Boots3"/>
-    <HScript name="Items" template="STANDARD_ITEM" icon="Items"/>
-    <HScript name="HeartPiece" template="HEART_PIECE"/>
-    <HScript name="Heart" template="HEART"/>
-    <HScript name="Coin" template="COIN"/>
-    <HScript name="StarPoint" template="STAR_POINT"/>
-    <HScript name="SmallStarPoint" template="SMALL_STAR_POINT"/>
-    <HScript name="HeartPoint" template="HEART_POINT"/>
-    <HScript name="FlowerPoint" template="FLOWER_POINT"/>
-    <HScript name="StarPiece " template="STAR_PIECE"/>
-    <HScript name="GearBoots1" template="STANDARD_ITEM" icon="key/gear_boots_1"/>
-    <HScript name="GearBoots2" template="STANDARD_ITEM" icon="key/gear_boots_2"/>
-    <HScript name="GearBoots3" template="STANDARD_ITEM" icon="key/gear_boots_3"/>
-    <HScript name="GearHammer1" template="STANDARD_ITEM" icon="key/gear_hammer_1"/>
-    <HScript name="GearHammer2" template="STANDARD_ITEM" icon="key/gear_hammer_2"/>
-    <HScript name="GearHammer3" template="STANDARD_ITEM" icon="key/gear_hammer_3"/>
-    <HScript name="LuckyStar" template="STANDARD_ITEM" icon="key/gear_lucky_star"/>
-    <HScript name="Map" template="STANDARD_ITEM" icon="key/map"/>
-    <HScript name="KoopaFortressKey" template="STANDARD_ITEM" icon="key/key_koopa_fortress"/>
-    <HScript name="RuinsKey" template="STANDARD_ITEM" icon="key/key_ruins"/>
-    <HScript name="TubbaCastleKey" template="STANDARD_ITEM" icon="key/key_tubba_castle"/>
-    <HScript name="IcePalaceKey" template="STANDARD_ITEM" icon="key/key_ice_palace"/>
-    <HScript name="BowserCastleKey" template="STANDARD_ITEM" icon="key/key_bowser_castle"/>
-    <HScript name="Dolly" template="STANDARD_ITEM" icon="key/dolly"/>
-    <HScript name="KooperShell" template="STANDARD_ITEM" icon="key/kooper_shell"/>
-    <HScript name="PulseStone" template="STANDARD_ITEM" icon="key/pulse_stone"/>
-    <HScript name="Artifact" template="STANDARD_ITEM" icon="key/artifact"/>
-    <HScript name="AncientVase" template="STANDARD_ITEM" icon="key/vase"/>
-    <HScript name="RuinsStonePyramid" template="STANDARD_ITEM" icon="key/ruins_stone_pyramid"/>
-    <HScript name="RuinsStoneStar" template="STANDARD_ITEM" icon="key/ruins_stone_star"/>
-    <HScript name="RuinsStoneMoon" template="STANDARD_ITEM" icon="key/ruins_stone_moon"/>
-    <HScript name="ForestPass" template="STANDARD_ITEM" icon="key/forest_pass"/>
-    <HScript name="BooRecordOutline" template="STANDARD_ITEM" icon="key/boo_record_mask"/>
-    <HScript name="BooRecord" template="STANDARD_ITEM" icon="key/boo_record"/>
-    <HScript name="BooWeight" template="STANDARD_ITEM" icon="key/boo_weight"/>
-    <HScript name="BooPortrait" template="STANDARD_ITEM" icon="key/boo_portrait"/>
-    <HScript name="MysticKey" template="STANDARD_ITEM" icon="key/mystic_key"/>
-    <HScript name="IronKey" template="STANDARD_ITEM" icon="key/key_storeroom"/>
-    <HScript name="ToyboxTrain" template="STANDARD_ITEM" icon="key/toybox_train"/>
-    <HScript name="FryingPan" template="STANDARD_ITEM" icon="key/frying_pan"/>
-    <HScript name="Dictionary" template="STANDARD_ITEM" icon="key/dictionary"/>
-    <HScript name="MysteryNote" template="STANDARD_ITEM" icon="key/mystery_note"/>
-    <HScript name="SuspiciousNote" template="STANDARD_ITEM" icon="key/suspicious_note"/>
-    <HScript name="MagicalSeed1" template="STANDARD_ITEM" icon="key/seed_1"/>
-    <HScript name="MagicalSeed2" template="STANDARD_ITEM" icon="key/seed_2"/>
-    <HScript name="MagicalSeed3" template="STANDARD_ITEM" icon="key/seed_3"/>
-    <HScript name="MagicalSeed4" template="STANDARD_ITEM" icon="key/seed_4"/>
-    <HScript name="CrystalBerry" template="STANDARD_ITEM" icon="key/crystal_berry"/>
-    <HScript name="WaterStone" template="STANDARD_ITEM" icon="key/water_stone"/>
-    <HScript name="MagicBean" template="STANDARD_ITEM" icon="key/magic_bean"/>
-    <HScript name="FertileSoil" template="STANDARD_ITEM" icon="key/fertile_soil"/>
-    <HScript name="MiracleWater" template="STANDARD_ITEM" icon="key/miracle_water"/>
-    <HScript name="UltraStone" template="STANDARD_ITEM" icon="key/ultra_stone"/>
-    <HScript name="ToadDoll" template="STANDARD_ITEM" icon="key/toad_doll"/>
-    <HScript name="Calculator" template="STANDARD_ITEM" icon="key/calculator"/>
-    <HScript name="Screwdriver" template="STANDARD_ITEM" icon="key/screwdriver"/>
-    <HScript name="CookBook" template="STANDARD_ITEM" icon="key/book_cook"/>
-    <HScript name="JadeRaven" template="STANDARD_ITEM" icon="key/jade_raven"/>
-    <HScript name="SnowmanBucket" template="STANDARD_ITEM" icon="key/snowman_bucket"/>
-    <HScript name="SnowmanScarf" template="STANDARD_ITEM" icon="key/snowman_scarf"/>
-    <HScript name="RedKey" template="STANDARD_ITEM" icon="key/key_red"/>
-    <HScript name="BlueKey" template="STANDARD_ITEM" icon="key/key_blue"/>
-    <HScript name="KootPackage" template="STANDARD_ITEM" icon="key/koot_package"/>
-    <HScript name="KootRedJar" template="STANDARD_ITEM" icon="key/koot_red_jar"/>
-    <HScript name="Melody" template="STANDARD_ITEM" icon="key/book_melody"/>
-    <HScript name="Lyrics" template="STANDARD_ITEM" icon="key/book_lyrics"/>
-    <HScript name="Mailbag" template="STANDARD_ITEM" icon="key/mailbag"/>
-    <HScript name="StarStone" template="STANDARD_ITEM" icon="key/star_stone"/>
-    <HScript name="SneakyParasol" template="STANDARD_ITEM" icon="peach_sneaky_parasol"/>
-    <HScript name="PeachKey" template="STANDARD_ITEM" icon="key/key_peach"/>
-    <HScript name="UNK_1DC210" template="STANDARD_ITEM" icon="key/1DC210"/>
-    <HScript name="UNK_1DC430" template="STANDARD_ITEM" icon="key/1DC430"/>
-    <HScript name="UNK_1DC650" template="STANDARD_ITEM" icon="key/1DC650"/>
-    <HScript name="UNK_1DC870" template="STANDARD_ITEM" icon="key/1DC870"/>
-    <HScript name="DojoCard1" template="STANDARD_ITEM" icon="key/dojo_card_1"/>
-    <HScript name="DojoCard2" template="STANDARD_ITEM" icon="key/dojo_card_2"/>
-    <HScript name="DojoCard3" template="STANDARD_ITEM" icon="key/dojo_card_3"/>
-    <HScript name="DojoCard4" template="STANDARD_ITEM" icon="key/dojo_card_4"/>
-    <HScript name="DojoCard5" template="STANDARD_ITEM" icon="key/dojo_card_5"/>
-    <HScript name="CrystalBall" template="STANDARD_ITEM" icon="key/crystal_ball"/>
-    <HScript name="GoldCard" template="STANDARD_ITEM" icon="key/card_gold"/>
-    <HScript name="SilverCard" template="STANDARD_ITEM" icon="key/card_silver"/>
-    <HScript name="KootBook" template="STANDARD_ITEM" icon="key/koot_book"/>
-    <HScript name="KootTheTape" template="STANDARD_ITEM" icon="key/koot_the_tape"/>
-    <HScript name="KootMerluvleeAutograph" template="STANDARD_ITEM" icon="key/koot_autograph_luigi"/>
-    <HScript name="KootEmptyWallet" template="STANDARD_ITEM" icon="key/koot_empty_wallet"/>
-    <HScript name="KootLuigiAutograph" template="STANDARD_ITEM" icon="key/koot_autograph_merluvlee"/>
-    <HScript name="KootShell" template="STANDARD_ITEM" icon="key/koot_shell"/>
-    <HScript name="KootPhoto" template="STANDARD_ITEM" icon="key/koot_photo"/>
-    <HScript name="KootGlasses" template="STANDARD_ITEM" icon="key/koot_glasses"/>
-    <HScript name="Letter" template="STANDARD_ITEM" icon="key/Letter" pair="true"/>
-    <HScript name="Unused_089" template="STANDARD_ITEM" icon="key/LongLetter" pair="true"/>
-    <HScript name="Unused_08A" template="STANDARD_ITEM" icon="key/TealLetter" pair="true"/>
-    <HScript name="Unused_08B" template="STANDARD_ITEM" icon="key/Postcard" pair="true"/>
-    <HScript name="Unused_08C" template="STANDARD_ITEM" icon="key/EmptyBook" pair="true"/>
-    <HScript name="Unused_08D" template="STANDARD_ITEM" icon="unused_item_08D" pair="true"/>
-    <HScript name="Unused_08E" template="STANDARD_ITEM" icon="unused_item_08E" pair="true"/>
-    <HScript name="Unused_08F" template="STANDARD_ITEM" icon="unused_item_08F" pair="true"/>
-    <HScript name="PleaseComeBack" template="STANDARD_ITEM" icon="battle_PleaseComeBack" pair="true"/>
-    <HScript name="Unused_139" template="STANDARD_ITEM" icon="battle_item_139" pair="true"/>
-    <HScript name="FrightJar" template="STANDARD_ITEM" icon="battle_FrightJar" pair="true"/>
-    <HScript name="Mystery" template="STANDARD_ITEM" icon="battle_Mystery" pair="true"/>
-    <HScript name="RepelGel" template="STANDARD_ITEM" icon="battle_RepelGel" pair="true"/>
-    <HScript name="InsecticideHerb" template="STANDARD_ITEM" icon="battle_InsecticideHerb" pair="true"/>
-    <HScript name="Unused_13E" template="STANDARD_ITEM" icon="battle_item_13E" pair="true"/>
-    <HScript name="Unused_13F" template="STANDARD_ITEM" icon="battle_item_13F" pair="true"/>
-    <HScript name="SpicySoup" template="STANDARD_ITEM" icon="food/SpicySoup" pair="true"/>
-    <HScript name="ApplePie" template="STANDARD_ITEM" icon="food/ApplePie" pair="true"/>
-    <HScript name="HoneyUltra" template="STANDARD_ITEM" icon="food/HoneyUltra" pair="true"/>
-    <HScript name="MapleUltra" template="STANDARD_ITEM" icon="food/MapleUltra" pair="true"/>
-    <HScript name="JellyUltra" template="STANDARD_ITEM" icon="food/JellyUltra" pair="true"/>
-    <HScript name="Koopasta" template="STANDARD_ITEM" icon="food/Koopasta" pair="true"/>
-    <HScript name="FriedShroom" template="STANDARD_ITEM" icon="food/FriedShroom" pair="true"/>
-    <HScript name="ShroomCake" template="STANDARD_ITEM" icon="food/ShroomCake" pair="true"/>
-    <HScript name="ShroomSteak" template="STANDARD_ITEM" icon="food/ShroomSteak" pair="true"/>
-    <HScript name="HotShroom" template="STANDARD_ITEM" icon="food/HotShroom" pair="true"/>
-    <HScript name="SweetShroom" template="STANDARD_ITEM" icon="food/SweetShroom" pair="true"/>
-    <HScript name="HealthyJuice" template="STANDARD_ITEM" icon="food/HealthyJuice" pair="true"/>
-    <HScript name="BlandMeal" template="STANDARD_ITEM" icon="food/BlandMeal" pair="true"/>
-    <HScript name="YummyMeal" template="STANDARD_ITEM" icon="food/YummyMeal" pair="true"/>
-    <HScript name="DeluxeFeast" template="STANDARD_ITEM" icon="food/DeluxeFeast" pair="true"/>
-    <HScript name="SpecialShake" template="STANDARD_ITEM" icon="food/SpecialShake" pair="true"/>
-    <HScript name="BigCookie" template="STANDARD_ITEM" icon="food/BigCookie" pair="true"/>
-    <HScript name="Cake" template="STANDARD_ITEM" icon="food/Cake" pair="true"/>
-    <HScript name="Mistake" template="STANDARD_ITEM" icon="food/Mistake" pair="true"/>
-    <HScript name="KoopaTea" template="STANDARD_ITEM" icon="food/KoopaTea" pair="true"/>
-    <HScript name="HoneySuper" template="STANDARD_ITEM" icon="food/HoneySuper" pair="true"/>
-    <HScript name="MapleSuper" template="STANDARD_ITEM" icon="food/MapleSuper" pair="true"/>
-    <HScript name="JellySuper" template="STANDARD_ITEM" icon="food/JellySuper" pair="true"/>
-    <HScript name="Spaghetti" template="STANDARD_ITEM" icon="food/Spaghetti" pair="true"/>
-    <HScript name="EggMissile" template="STANDARD_ITEM" icon="food/EggMissile" pair="true"/>
-    <HScript name="FriedEgg" template="STANDARD_ITEM" icon="food/FriedEgg" pair="true"/>
-    <HScript name="HoneyShroom" template="STANDARD_ITEM" icon="food/HoneyShroom" pair="true"/>
-    <HScript name="HoneyCandy" template="STANDARD_ITEM" icon="food/HoneyCandy" pair="true"/>
-    <HScript name="ElectroPop" template="STANDARD_ITEM" icon="food/ElectroPop" pair="true"/>
-    <HScript name="FirePop" template="STANDARD_ITEM" icon="food/FirePop" pair="true"/>
-    <HScript name="LimeCandy" template="STANDARD_ITEM" icon="food/LimeCandy" pair="true"/>
-    <HScript name="CocoPop" template="STANDARD_ITEM" icon="food/CocoPop" pair="true"/>
-    <HScript name="LemonCandy" template="STANDARD_ITEM" icon="food/LemonCandy" pair="true"/>
-    <HScript name="JellyPop" template="STANDARD_ITEM" icon="food/JellyPop" pair="true"/>
-    <HScript name="StrangeCake" template="STANDARD_ITEM" icon="food/StrangeCake" pair="true"/>
-    <HScript name="KookyCookie" template="STANDARD_ITEM" icon="food/KookyCookie" pair="true"/>
-    <HScript name="FrozenFries" template="STANDARD_ITEM" icon="food/FrozenFries" pair="true"/>
-    <HScript name="PotatoSalad" template="STANDARD_ITEM" icon="food/PotatoSalad" pair="true"/>
-    <HScript name="NuttyCake" template="STANDARD_ITEM" icon="food/NuttyCake" pair="true"/>
-    <HScript name="MapleShroom" template="STANDARD_ITEM" icon="food/MapleShroom" pair="true"/>
-    <HScript name="BoiledEgg" template="STANDARD_ITEM" icon="food/BoiledEgg" pair="true"/>
-    <HScript name="YoshiCookie" template="STANDARD_ITEM" icon="food/YoshiCookie" pair="true"/>
-    <HScript name="JellyShroom" template="STANDARD_ITEM" icon="food/JellyShroom" pair="true"/>
-    <HScript name="Unused_02C" template="STANDARD_ITEM" icon="unused_item_02C" pair="true"/>
-    <HScript name="Unused_02D" template="STANDARD_ITEM" icon="unused_item_02D" pair="true"/>
-    <HScript name="Unused_02E" template="STANDARD_ITEM" icon="unused_item_02E" pair="true"/>
-    <HScript name="Unused_02F" template="STANDARD_ITEM" icon="unused_item_02F" pair="true"/>
-    <HScript name="Unused_030" template="STANDARD_ITEM" icon="unused_item_030" pair="true"/>
-    <HScript name="SpinSmash" template="STANDARD_ITEM" icon="badge_SpinSmash" pair="true"/>
-    <HScript name="Multibounce" template="STANDARD_ITEM" icon="badge_Multibounce" pair="true"/>
-    <HScript name="PowerPlus" template="STANDARD_ITEM" icon="badge_PowerPlus" pair="true"/>
-    <HScript name="DodgeMaster" template="STANDARD_ITEM" icon="badge_DodgeMaster" pair="true"/>
-    <HScript name="PowerBounce" template="STANDARD_ITEM" icon="badge_PowerBounce" pair="true"/>
-    <HScript name="SpikeShield" template="STANDARD_ITEM" icon="badge_SpikeShield" pair="true"/>
-    <HScript name="FirstAttack" template="STANDARD_ITEM" icon="badge_FirstAttack" pair="true"/>
-    <HScript name="HPPlus" template="STANDARD_ITEM" icon="badge_HPPlus" pair="true"/>
-    <HScript name="QuakeHammer" template="STANDARD_ITEM" icon="badge_QuakeHammer" pair="true"/>
-    <HScript name="DoubleDip" template="STANDARD_ITEM" icon="badge_DoubleDip" pair="true"/>
-    <HScript name="PowerQuake" template="STANDARD_ITEM" icon="badge_PowerQuake" pair="true"/>
-    <HScript name="MegaQuake" template="STANDARD_ITEM" icon="badge_MegaQuake" pair="true"/>
-    <HScript name="SleepStomp" template="STANDARD_ITEM" icon="badge_SleepStomp" pair="true"/>
-    <HScript name="SmashCharge" template="STANDARD_ITEM" icon="badge_SmashCharge" pair="true"/>
-    <HScript name="SSmashChg" template="STANDARD_ITEM" icon="badge_SSmashChg" pair="true"/>
-    <HScript name="AutoSmash" template="STANDARD_ITEM" icon="badge_AutoSmash" pair="true"/>
-    <HScript name="FireShield" template="STANDARD_ITEM" icon="badge_FireShield" pair="true"/>
-    <HScript name="JumpCharge" template="STANDARD_ITEM" icon="badge_JumpCharge" pair="true"/>
-    <HScript name="SJumpChg" template="STANDARD_ITEM" icon="badge_SJumpChg" pair="true"/>
-    <HScript name="AutoJump" template="STANDARD_ITEM" icon="badge_AutoJump" pair="true"/>
-    <HScript name="DDownPound" template="STANDARD_ITEM" icon="badge_DDownPound" pair="true"/>
-    <HScript name="AutoMultibounce" template="STANDARD_ITEM" icon="badge_AutoMultibounce" pair="true"/>
-    <HScript name="DizzyStomp" template="STANDARD_ITEM" icon="badge_DizzyStomp" pair="true"/>
-    <HScript name="HammerThrow" template="STANDARD_ITEM" icon="badge_HammerThrow" pair="true"/>
-    <HScript name="SmashCharge0" template="STANDARD_ITEM" icon="badge_SmashCharge0" pair="true"/>
-    <HScript name="PrettyLucky" template="STANDARD_ITEM" icon="badge_PrettyLucky" pair="true"/>
-    <HScript name="FeelingFine" template="STANDARD_ITEM" icon="badge_FeelingFine" pair="true"/>
-    <HScript name="AttackFXA" template="STANDARD_ITEM" icon="badge_AttackFXA" pair="true"/>
-    <HScript name="AllorNothing" template="STANDARD_ITEM" icon="badge_AllorNothing" pair="true"/>
-    <HScript name="HPDrain" template="STANDARD_ITEM" icon="badge_HPDrain" pair="true"/>
-    <HScript name="JumpCharge0" template="STANDARD_ITEM" icon="badge_JumpCharge0" pair="true"/>
-    <HScript name="SlowGo" template="STANDARD_ITEM" icon="badge_SlowGo" pair="true"/>
-    <HScript name="FPPlus" template="STANDARD_ITEM" icon="badge_FPPlus" pair="true"/>
-    <HScript name="MegaRush" template="STANDARD_ITEM" icon="badge_MegaRush" pair="true"/>
-    <HScript name="IcePower" template="STANDARD_ITEM" icon="badge_IcePower" pair="true"/>
-    <HScript name="DefendPlus" template="STANDARD_ITEM" icon="badge_DefendPlus" pair="true"/>
-    <HScript name="PayOff" template="STANDARD_ITEM" icon="badge_PayOff" pair="true"/>
-    <HScript name="MoneyMoney" template="STANDARD_ITEM" icon="badge_MoneyMoney" pair="true"/>
-    <HScript name="ChillOut" template="STANDARD_ITEM" icon="badge_ChillOut" pair="true"/>
-    <HScript name="HappyHeart" template="STANDARD_ITEM" icon="badge_HappyHeart" pair="true"/>
-    <HScript name="ZapTap" template="STANDARD_ITEM" icon="badge_ZapTap" pair="true"/>
-    <HScript name="Berserker" template="STANDARD_ITEM" icon="badge_Berserker" pair="true"/>
-    <HScript name="RightOn" template="STANDARD_ITEM" icon="badge_RightOn" pair="true"/>
-    <HScript name="RunawayPay" template="STANDARD_ITEM" icon="badge_RunawayPay" pair="true"/>
-    <HScript name="Refund" template="STANDARD_ITEM" icon="badge_Refund" pair="true"/>
-    <HScript name="FlowerSaver" template="STANDARD_ITEM" icon="badge_FlowerSaver" pair="true"/>
-    <HScript name="TripleDip" template="STANDARD_ITEM" icon="badge_TripleDip" pair="true"/>
-    <HScript name="FlowerFanatic" template="STANDARD_ITEM" icon="badge_FlowerFanatic" pair="true"/>
-    <HScript name="PowerJump" template="STANDARD_ITEM" icon="badge_PowerJump" pair="true"/>
-    <HScript name="SuperJump" template="STANDARD_ITEM" icon="badge_SuperJump" pair="true"/>
-    <HScript name="MegaJump" template="STANDARD_ITEM" icon="badge_MegaJump" pair="true"/>
-    <HScript name="PowerSmash1" template="STANDARD_ITEM" icon="badge_PowerSmash" pair="true"/>
-    <HScript name="SuperSmash" template="STANDARD_ITEM" icon="badge_SuperSmash" pair="true"/>
-    <HScript name="MegaSmash" template="STANDARD_ITEM" icon="badge_MegaSmash" pair="true"/>
-    <HScript name="LuckyDay" template="STANDARD_ITEM" icon="badge_LuckyDay" pair="true"/>
-    <HScript name="MegaHPDrain" template="STANDARD_ITEM" icon="badge_MegaHPDrain" pair="true"/>
-    <HScript name="BumpAttack" template="STANDARD_ITEM" icon="badge_BumpAttack" pair="true"/>
-    <HScript name="PUpDDown" template="STANDARD_ITEM" icon="badge_PUpDDown" pair="true"/>
-    <HScript name="PDownDUp" template="STANDARD_ITEM" icon="badge_PDownDUp" pair="true"/>
-    <HScript name="HeartFinder" template="STANDARD_ITEM" icon="badge_HeartFinder" pair="true"/>
-    <HScript name="FlowerFinder" template="STANDARD_ITEM" icon="badge_FlowerFinder" pair="true"/>
-    <HScript name="DizzyAttack" template="STANDARD_ITEM" icon="badge_DizzyAttack" pair="true"/>
-    <HScript name="SpeedySpin" template="STANDARD_ITEM" icon="badge_SpeedySpin" pair="true"/>
-    <HScript name="SpinAttack" template="STANDARD_ITEM" icon="badge_SpinAttack" pair="true"/>
-    <HScript name="ISpy" template="STANDARD_ITEM" icon="badge_ISpy" pair="true"/>
-    <HScript name="PowerRush" template="STANDARD_ITEM" icon="badge_PowerRush" pair="true"/>
-    <HScript name="LastStand" template="STANDARD_ITEM" icon="badge_LastStand" pair="true"/>
-    <HScript name="CloseCall" template="STANDARD_ITEM" icon="badge_CloseCall" pair="true"/>
-    <HScript name="CrazyHeart" template="STANDARD_ITEM" icon="badge_CrazyHeart" pair="true"/>
-    <HScript name="Unused_0D5" template="STANDARD_ITEM" icon="unused_item_0D5" pair="true"/>
-    <HScript name="Unused_0D6" template="STANDARD_ITEM" icon="unused_item_0D6" pair="true"/>
-    <HScript name="Unused_0D7" template="STANDARD_ITEM" icon="unused_item_0D7" pair="true"/>
-    <HScript name="ShrinkSmash" template="STANDARD_ITEM" icon="badge_ShrinkSmash" pair="true"/>
-    <HScript name="ShrinkStomp" template="STANDARD_ITEM" icon="badge_ShrinkStomp" pair="true"/>
-    <HScript name="DDownJump" template="STANDARD_ITEM" icon="badge_DDownJump" pair="true"/>
-    <HScript name="DamageDodge" template="STANDARD_ITEM" icon="badge_DamageDodge" pair="true"/>
-    <HScript name="EarthquakeJump" template="STANDARD_ITEM" icon="badge_EarthquakeJump" pair="true"/>
-    <HScript name="HappyFlower" template="STANDARD_ITEM" icon="badge_HappyFlower" pair="true"/>
-    <HScript name="Unused_0DE" template="STANDARD_ITEM" icon="badge_HappyCoin" pair="true"/>
-    <HScript name="Unused_0DF" template="STANDARD_ITEM" icon="unused_item_0DF" pair="true"/>
-    <HScript name="DeepFocus" template="STANDARD_ITEM" icon="badge_DeepFocus" pair="true"/>
-    <HScript name="SuperFocus" template="STANDARD_ITEM" icon="badge_SuperFocus" pair="true"/>
-    <HScript name="Kaiden" template="STANDARD_ITEM" icon="badge_Kaiden" pair="true"/>
-    <HScript name="QuickChange" template="STANDARD_ITEM" icon="badge_QuickChange" pair="true"/>
-    <HScript name="Unused_0E4" template="STANDARD_ITEM" icon="unused_item_0E4" pair="true"/>
-    <HScript name="Unused_0E5" template="STANDARD_ITEM" icon="unused_item_0E5" pair="true"/>
-    <HScript name="Unused_0E6" template="STANDARD_ITEM" icon="unused_item_0E6" pair="true"/>
-    <HScript name="Unused_0E7" template="STANDARD_ITEM" icon="unused_item_0E7" pair="true"/>
-    <HScript name="Peekaboo" template="STANDARD_ITEM" icon="badge_Peekaboo" pair="true"/>
-    <HScript name="GroupFocus" template="STANDARD_ITEM" icon="badge_GroupFocus" pair="true"/>
-    <HScript name="AttackFXD" template="STANDARD_ITEM" icon="badge_AttackFXD" pair="true"/>
-    <HScript name="AttackFXB" template="STANDARD_ITEM" icon="badge_AttackFXB" pair="true"/>
-    <HScript name="AttackFXE" template="STANDARD_ITEM" icon="badge_AttackFXE" pair="true"/>
-    <HScript name="AttackFXC" template="STANDARD_ITEM" icon="badge_AttackFXC" pair="true"/>
-    <HScript name="AttackFXF" template="STANDARD_ITEM" icon="badge_AttackFXF" pair="true"/>
-    <HScript name="Unused_0EF" template="STANDARD_ITEM" icon="unused_item_0EF" pair="true"/>
-    <HScript name="HealthyHealthy" template="STANDARD_ITEM" icon="badge_HealthyHealthy" pair="true"/>
-    <HScript name="Unused_0F1" template="STANDARD_ITEM" icon="unused_item_0F1" pair="true"/>
-    <HScript name="Unused_0F2" template="STANDARD_ITEM" icon="unused_item_0F2" pair="true"/>
-    <HScript name="Unused_0F3" template="STANDARD_ITEM" icon="unused_item_0F3" pair="true"/>
-    <HScript name="Unused_0F4" template="STANDARD_ITEM" icon="unused_item_0F4" pair="true"/>
-    <HScript name="Unused_0F5" template="STANDARD_ITEM" icon="unused_item_0F5" pair="true"/>
-    <HScript name="Unused_0F6" template="STANDARD_ITEM" icon="unused_item_0F6" pair="true"/>
-    <HScript name="Unused_0F7" template="STANDARD_ITEM" icon="unused_item_0F7" pair="true"/>
-    <HScript name="FireFlower" template="STANDARD_ITEM" icon="battle_FireFlower" pair="true"/>
-    <HScript name="SnowmanDoll" template="STANDARD_ITEM" icon="battle_SnowmanDoll" pair="true"/>
-    <HScript name="ThunderRage" template="STANDARD_ITEM" icon="battle_ThunderRage" pair="true"/>
-    <HScript name="ThunderBolt" template="STANDARD_ITEM" icon="battle_ThunderBolt" pair="true"/>
-    <HScript name="ShootingStar" template="STANDARD_ITEM" icon="battle_ShootingStar" pair="true"/>
-    <HScript name="DustyHammer" template="STANDARD_ITEM" icon="battle_DustyHammer" pair="true"/>
-    <HScript name="Pebble" template="STANDARD_ITEM" icon="battle_Pebble" pair="true"/>
-    <HScript name="Unused_127" template="STANDARD_ITEM" icon="unused_item_127" pair="true"/>
-    <HScript name="StoneCap" template="STANDARD_ITEM" icon="battle_StoneCap" pair="true"/>
-    <HScript name="VoltShroom" template="STANDARD_ITEM" icon="battle_VoltShroom" pair="true"/>
-    <HScript name="PowerStar" template="STANDARD_ITEM" icon="battle_PowerStar" pair="true"/>
-    <HScript name="Parasol" template="STANDARD_ITEM" icon="battle_Parasol" pair="true"/>
-    <HScript name="MagicMirror" template="STANDARD_ITEM" icon="battle_MagicMirror" pair="true"/>
-    <HScript name="Unused_12D" template="STANDARD_ITEM" icon="unused_item_12D" pair="true"/>
-    <HScript name="Unused_12E" template="STANDARD_ITEM" icon="unused_item_12E" pair="true"/>
-    <HScript name="Unused_12F" template="STANDARD_ITEM" icon="unused_item_12F" pair="true"/>
-    <HScript name="Mushroom" template="STANDARD_ITEM" icon="food/Mushroom" pair="true"/>
-    <HScript name="SuperShroom" template="STANDARD_ITEM" icon="food/SuperShroom" pair="true"/>
-    <HScript name="UltraShroom" template="STANDARD_ITEM" icon="food/UltraShroom" pair="true"/>
-    <HScript name="LifeShroom" template="STANDARD_ITEM" icon="food/LifeShroom" pair="true"/>
-    <HScript name="DriedShroom" template="STANDARD_ITEM" icon="food/DriedShroom" pair="true"/>
-    <HScript name="TastyTonic" template="STANDARD_ITEM" icon="food/TastyTonic" pair="true"/>
-    <HScript name="SuperSoda" template="STANDARD_ITEM" icon="food/SuperSoda" pair="true"/>
-    <HScript name="BlueBerry" template="STANDARD_ITEM" icon="food/BlueBerry" pair="true"/>
-    <HScript name="RedBerry" template="STANDARD_ITEM" icon="food/RedBerry" pair="true"/>
-    <HScript name="YellowBerry" template="STANDARD_ITEM" icon="food/YellowBerry" pair="true"/>
-    <HScript name="BubbleBerry" template="STANDARD_ITEM" icon="food/BubbleBerry" pair="true"/>
-    <HScript name="Goomnut" template="STANDARD_ITEM" icon="food/Goomnut" pair="true"/>
-    <HScript name="KoopaLeaf" template="STANDARD_ITEM" icon="food/KoopaLeaf" pair="true"/>
-    <HScript name="DriedPasta" template="STANDARD_ITEM" icon="food/DriedPasta" pair="true"/>
-    <HScript name="Lime" template="STANDARD_ITEM" icon="food/Lime" pair="true"/>
-    <HScript name="Lemon" template="STANDARD_ITEM" icon="food/Lemon" pair="true"/>
-    <HScript name="DriedFruit" template="STANDARD_ITEM" icon="food/DriedFruit" pair="true"/>
-    <HScript name="StrangeLeaf" template="STANDARD_ITEM" icon="food/StrangeLeaf" pair="true"/>
-    <HScript name="CakeMix" template="STANDARD_ITEM" icon="food/CakeMix" pair="true"/>
-    <HScript name="Egg" template="STANDARD_ITEM" icon="food/Egg" pair="true"/>
-    <HScript name="Coconut" template="STANDARD_ITEM" icon="food/Coconut" pair="true"/>
-    <HScript name="Melon" template="STANDARD_ITEM" icon="food/Melon" pair="true"/>
-    <HScript name="StinkyHerb" template="STANDARD_ITEM" icon="food/StinkyHerb" pair="true"/>
-    <HScript name="IcedPotato" template="STANDARD_ITEM" icon="food/IcedPotato" pair="true"/>
-    <HScript name="HoneySyrup" template="STANDARD_ITEM" icon="food/HoneySyrup" pair="true"/>
-    <HScript name="MapleSyrup" template="STANDARD_ITEM" icon="food/MapleSyrup" pair="true"/>
-    <HScript name="JamminJelly" template="STANDARD_ITEM" icon="food/JamminJelly" pair="true"/>
-    <HScript name="WhackasBump" template="STANDARD_ITEM" icon="food/WhackasBump" pair="true"/>
-    <HScript name="Apple" template="STANDARD_ITEM" icon="food/Apple" pair="true"/>
-    <HScript name="BakingSalt" template="STANDARD_ITEM" icon="peach_BakingSalt" pair="true"/>
-    <HScript name="BakingSugar" template="STANDARD_ITEM" icon="peach_BakingSugar" pair="true"/>
-    <HScript name="BakingEgg" template="STANDARD_ITEM" icon="peach_BakingEgg" pair="true"/>
-    <HScript name="BakingCream" template="STANDARD_ITEM" icon="peach_BakingCream" pair="true"/>
-    <HScript name="BakingStrawberry" template="STANDARD_ITEM" icon="peach_BakingStrawberry" pair="true"/>
-    <HScript name="BakingButter" template="STANDARD_ITEM" icon="peach_BakingButter" pair="true"/>
-    <HScript name="BakingCleanser" template="STANDARD_ITEM" icon="peach_BakingCleanser" pair="true"/>
-    <HScript name="BakingWater" template="STANDARD_ITEM" icon="peach_BakingWater" pair="true"/>
-    <HScript name="BakingFlour" template="STANDARD_ITEM" icon="peach_BakingFlour" pair="true"/>
-    <HScript name="BakingMilk" template="STANDARD_ITEM" icon="peach_BakingMilk" pair="true"/>
-    <HScript name="Unused_11F" template="STANDARD_ITEM" icon="unused_item_11F" pair="true"/>
-    <HScript name="SleepySheep" template="STANDARD_ITEM" icon="battle_SleepySheep" pair="true"/>
-    <HScript name="XBandage" template="STANDARD_ITEM" icon="battle_XBandage" pair="true"/>
-    <HScript name="POWBlock" template="STANDARD_ITEM" icon="battle_POWBlock" pair="true"/>
-    <HScript name="HustleDrink" template="STANDARD_ITEM" icon="battle_HustleDrink" pair="true"/>
-    <HScript name="StopWatch" template="STANDARD_ITEM" icon="battle_StopWatch" pair="true"/>
-    <HScript name="DizzyDial" template="STANDARD_ITEM" icon="battle_DizzyDial" pair="true"/>
-    <HScript name="Unused_136" template="STANDARD_ITEM" icon="battle_item_136" pair="true"/>
-    <HScript name="Unused_137" template="STANDARD_ITEM" icon="battle_item_137" pair="true"/>
+    <HScript name="Item_Present" priority="320" template="STANDARD_ITEM" icon="key/Gift"/>
+    <HScript name="Item_CakeDone" priority="321" template="STANDARD_ITEM" icon="key/CakeDone"/>
+    <HScript name="Item_CakeBaked" priority="322" template="STANDARD_ITEM" icon="key/CakeBaked"/>
+    <HScript name="Item_CakePan" priority="323" template="STANDARD_ITEM" icon="key/CakePan"/>
+    <HScript name="Item_CakeBatter" priority="324" template="STANDARD_ITEM" icon="key/CakeBatter"/>
+    <HScript name="Item_CakeBowl" priority="325" template="STANDARD_ITEM" icon="key/CakeBowl"/>
+    <HScript name="Item_CakeMixed" priority="326" template="STANDARD_ITEM" icon="key/CakeMix"/>
+    <HScript name="Item_CakeIcing" priority="327" template="STANDARD_ITEM" icon="key/CakeIcing"/>
+    <HScript name="Item_CakeBerries" priority="328" template="STANDARD_ITEM" icon="key/CakeBerries"/>
+    <HScript name="MoveDiamond" priority="329" extern="true" pair="true"/>
+    <HScript name="Item_Hammer1" priority="330" template="STANDARD_ITEM" icon="Hammer1"/>
+    <HScript name="Item_Hammer2" priority="331" template="STANDARD_ITEM" icon="Hammer2"/>
+    <HScript name="Item_Hammer3" priority="332" template="STANDARD_ITEM" icon="Hammer3"/>
+    <HScript name="Item_Boots1" priority="333" template="STANDARD_ITEM" icon="Boots1"/>
+    <HScript name="Item_Boots2" priority="334" template="STANDARD_ITEM" icon="Boots2"/>
+    <HScript name="Item_Boots3" priority="335" template="STANDARD_ITEM" icon="Boots3"/>
+    <HScript name="Item_Items" priority="336" template="STANDARD_ITEM" icon="Items"/>
+    <HScript name="Item_HeartPiece" priority="51" template="HEART_PIECE"/>
+    <HScript name="Item_Heart" priority="49" template="HEART"/>
+    <HScript name="Item_Coin" priority="50" template="COIN"/>
+    <HScript name="Item_StarPoint" priority="52" template="STAR_POINT"/>
+    <HScript name="Item_HeartPoint" priority="53" template="HEART_POINT"/>
+    <HScript name="Item_FlowerPoint" priority="54" template="FLOWER_POINT"/>
+    <HScript name="Item_StarPiece" priority="55" template="STAR_PIECE"/>
+    <HScript name="Item_GearBoots1" priority="56" template="STANDARD_ITEM" icon="key/gear_boots_1"/>
+    <HScript name="Item_GearBoots2" priority="57" template="STANDARD_ITEM" icon="key/gear_boots_2"/>
+    <HScript name="Item_GearBoots3" priority="58" template="STANDARD_ITEM" icon="key/gear_boots_3"/>
+    <HScript name="Item_GearHammer1" priority="59" template="STANDARD_ITEM" icon="key/gear_hammer_1"/>
+    <HScript name="Item_GearHammer2" priority="60" template="STANDARD_ITEM" icon="key/gear_hammer_2"/>
+    <HScript name="Item_GearHammer3" priority="61" template="STANDARD_ITEM" icon="key/gear_hammer_3"/>
+    <HScript name="Item_LuckyStar" priority="62" template="STANDARD_ITEM" icon="key/gear_lucky_star"/>
+    <HScript name="Item_Map" priority="63" template="STANDARD_ITEM" icon="key/map"/>
+    <HScript name="Item_KoopaFortressKey" priority="64" template="STANDARD_ITEM" icon="key/key_koopa_fortress"/>
+    <HScript name="Item_RuinsKey" priority="65" template="STANDARD_ITEM" icon="key/key_ruins"/>
+    <HScript name="Item_TubbaCastleKey" priority="66" template="STANDARD_ITEM" icon="key/key_tubba_castle"/>
+    <HScript name="Item_IcePalaceKey" priority="67" template="STANDARD_ITEM" icon="key/key_ice_palace"/>
+    <HScript name="Item_BowserCastleKey" priority="68" template="STANDARD_ITEM" icon="key/key_bowser_castle"/>
+    <HScript name="Item_Dolly" priority="69" template="STANDARD_ITEM" icon="key/dolly"/>
+    <HScript name="Item_KooperShell" priority="70" template="STANDARD_ITEM" icon="key/kooper_shell"/>
+    <HScript name="Item_PulseStone" priority="71" template="STANDARD_ITEM" icon="key/pulse_stone"/>
+    <HScript name="Item_Artifact" priority="72" template="STANDARD_ITEM" icon="key/artifact"/>
+    <HScript name="Item_AncientVase" priority="73" template="STANDARD_ITEM" icon="key/vase"/>
+    <HScript name="Item_RuinsStonePyramid" priority="74" template="STANDARD_ITEM" icon="key/ruins_stone_pyramid"/>
+    <HScript name="Item_RuinsStoneStar" priority="75" template="STANDARD_ITEM" icon="key/ruins_stone_star"/>
+    <HScript name="Item_RuinsStoneMoon" priority="76" template="STANDARD_ITEM" icon="key/ruins_stone_moon"/>
+    <HScript name="Item_ForestPass" priority="77" template="STANDARD_ITEM" icon="key/forest_pass"/>
+    <HScript name="Item_BooRecordOutline" priority="78" template="STANDARD_ITEM" icon="key/boo_record_mask"/>
+    <HScript name="Item_BooRecord" priority="79" template="STANDARD_ITEM" icon="key/boo_record"/>
+    <HScript name="Item_BooWeight" priority="80" template="STANDARD_ITEM" icon="key/boo_weight"/>
+    <HScript name="Item_BooPortrait" priority="81" template="STANDARD_ITEM" icon="key/boo_portrait"/>
+    <HScript name="Item_MysticKey" priority="82" template="STANDARD_ITEM" icon="key/mystic_key"/>
+    <HScript name="Item_IronKey" priority="83" template="STANDARD_ITEM" icon="key/key_storeroom"/>
+    <HScript name="Item_ToyboxTrain" priority="84" template="STANDARD_ITEM" icon="key/toybox_train"/>
+    <HScript name="Item_FryingPan" priority="85" template="STANDARD_ITEM" icon="key/frying_pan"/>
+    <HScript name="Item_Dictionary" priority="86" template="STANDARD_ITEM" icon="key/dictionary"/>
+    <HScript name="Item_MysteryNote" priority="87" template="STANDARD_ITEM" icon="key/mystery_note"/>
+    <HScript name="Item_SuspiciousNote" priority="88" template="STANDARD_ITEM" icon="key/suspicious_note"/>
+    <HScript name="Item_MagicalSeed1" priority="89" template="STANDARD_ITEM" icon="key/seed_1"/>
+    <HScript name="Item_MagicalSeed2" priority="90" template="STANDARD_ITEM" icon="key/seed_2"/>
+    <HScript name="Item_MagicalSeed3" priority="91" template="STANDARD_ITEM" icon="key/seed_3"/>
+    <HScript name="Item_MagicalSeed4" priority="92" template="STANDARD_ITEM" icon="key/seed_4"/>
+    <HScript name="Item_CrystalBerry" priority="93" template="STANDARD_ITEM" icon="key/crystal_berry"/>
+    <HScript name="Item_WaterStone" priority="94" template="STANDARD_ITEM" icon="key/water_stone"/>
+    <HScript name="Item_MagicBean" priority="95" template="STANDARD_ITEM" icon="key/magic_bean"/>
+    <HScript name="Item_FertileSoil" priority="96" template="STANDARD_ITEM" icon="key/fertile_soil"/>
+    <HScript name="Item_MiracleWater" priority="97" template="STANDARD_ITEM" icon="key/miracle_water"/>
+    <HScript name="Item_UltraStone" priority="98" template="STANDARD_ITEM" icon="key/ultra_stone"/>
+    <HScript name="Item_ToadDoll" priority="99" template="STANDARD_ITEM" icon="key/toad_doll"/>
+    <HScript name="Item_Calculator" priority="100" template="STANDARD_ITEM" icon="key/calculator"/>
+    <HScript name="Item_Screwdriver" priority="101" template="STANDARD_ITEM" icon="key/screwdriver"/>
+    <HScript name="Item_CookBook" priority="102" template="STANDARD_ITEM" icon="key/book_cook"/>
+    <HScript name="Item_JadeRaven" priority="103" template="STANDARD_ITEM" icon="key/jade_raven"/>
+    <HScript name="Item_SnowmanBucket" priority="104" template="STANDARD_ITEM" icon="key/snowman_bucket"/>
+    <HScript name="Item_SnowmanScarf" priority="105" template="STANDARD_ITEM" icon="key/snowman_scarf"/>
+    <HScript name="Item_RedKey" priority="106" template="STANDARD_ITEM" icon="key/key_red"/>
+    <HScript name="Item_BlueKey" priority="107" template="STANDARD_ITEM" icon="key/key_blue"/>
+    <HScript name="Item_KootPackage" priority="108" template="STANDARD_ITEM" icon="key/koot_package"/>
+    <HScript name="Item_KootRedJar" priority="109" template="STANDARD_ITEM" icon="key/koot_red_jar"/>
+    <HScript name="Item_Melody" priority="110" template="STANDARD_ITEM" icon="key/book_melody"/>
+    <HScript name="Item_Lyrics" priority="111" template="STANDARD_ITEM" icon="key/book_lyrics"/>
+    <HScript name="Item_Mailbag" priority="112" template="STANDARD_ITEM" icon="key/mailbag"/>
+    <HScript name="Item_StarStone" priority="113" template="STANDARD_ITEM" icon="key/star_stone"/>
+    <HScript name="Item_SneakyParasol" priority="114" template="STANDARD_ITEM" icon="peach_sneaky_parasol"/>
+    <HScript name="Item_PeachKey" priority="115" template="STANDARD_ITEM" icon="key/key_peach"/>
+    <HScript name="Item_UNK_1DC210" priority="116" template="STANDARD_ITEM" icon="key/1DC210"/>
+    <HScript name="Item_UNK_1DC430" priority="117" template="STANDARD_ITEM" icon="key/1DC430"/>
+    <HScript name="Item_UNK_1DC650" priority="118" template="STANDARD_ITEM" icon="key/1DC650"/>
+    <HScript name="Item_UNK_1DC870" priority="119" template="STANDARD_ITEM" icon="key/1DC870"/>
+    <HScript name="Item_DojoCard1" priority="120" template="STANDARD_ITEM" icon="key/dojo_card_1"/>
+    <HScript name="Item_DojoCard2" priority="121" template="STANDARD_ITEM" icon="key/dojo_card_2"/>
+    <HScript name="Item_DojoCard3" priority="122" template="STANDARD_ITEM" icon="key/dojo_card_3"/>
+    <HScript name="Item_DojoCard4" priority="123" template="STANDARD_ITEM" icon="key/dojo_card_4"/>
+    <HScript name="Item_DojoCard5" priority="124" template="STANDARD_ITEM" icon="key/dojo_card_5"/>
+    <HScript name="Item_CrystalBall" priority="125" template="STANDARD_ITEM" icon="key/crystal_ball"/>
+    <HScript name="Item_GoldCard" priority="126" template="STANDARD_ITEM" icon="key/card_gold"/>
+    <HScript name="Item_SilverCard" priority="127" template="STANDARD_ITEM" icon="key/card_silver"/>
+    <HScript name="Item_KootBook" priority="128" template="STANDARD_ITEM" icon="key/koot_book"/>
+    <HScript name="Item_KootTheTape" priority="129" template="STANDARD_ITEM" icon="key/koot_the_tape"/>
+    <HScript name="Item_KootLuigiAutograph" priority="130" template="STANDARD_ITEM" icon="key/koot_autograph_luigi"/>
+    <HScript name="Item_KootEmptyWallet" priority="131" template="STANDARD_ITEM" icon="key/koot_empty_wallet"/>
+    <HScript name="Item_KootMerluvleeAutograph" priority="132" template="STANDARD_ITEM" icon="key/koot_autograph_merluvlee"/>
+    <HScript name="Item_KootShell" priority="133" template="STANDARD_ITEM" icon="key/koot_shell"/>
+    <HScript name="Item_KootPhoto" priority="134" template="STANDARD_ITEM" icon="key/koot_photo"/>
+    <HScript name="Item_KootGlasses" priority="135" template="STANDARD_ITEM" icon="key/koot_glasses"/>
+    <HScript name="Item_Letter" priority="136" template="STANDARD_ITEM" icon="key/Letter" pair="true"/>
+    <HScript name="Item_Unused_089" priority="137" template="STANDARD_ITEM" icon="key/LongLetter" pair="true"/>
+    <HScript name="Item_Unused_08A" priority="138" template="STANDARD_ITEM" icon="key/TealLetter" pair="true"/>
+    <HScript name="Item_Unused_08B" priority="139" template="STANDARD_ITEM" icon="key/Postcard" pair="true"/>
+    <HScript name="Item_Unused_08C" priority="140" template="STANDARD_ITEM" icon="key/EmptyBook" pair="true"/>
+    <HScript name="Item_Unused_08D" priority="141" template="STANDARD_ITEM" icon="unused_item_08D" pair="true"/>
+    <HScript name="Item_Unused_08E" priority="142" template="STANDARD_ITEM" icon="unused_item_08E" pair="true"/>
+    <HScript name="Item_Unused_08F" priority="143" template="STANDARD_ITEM" icon="unused_item_08F" pair="true"/>
+    <HScript name="Item_PleaseComeBack" priority="312" template="STANDARD_ITEM" icon="battle_PleaseComeBack" pair="true"/>
+    <HScript name="Item_Unused_139" priority="313" template="STANDARD_ITEM" icon="battle_item_139" pair="true"/>
+    <HScript name="Item_FrightJar" priority="314" template="STANDARD_ITEM" icon="battle_FrightJar" pair="true"/>
+    <HScript name="Item_Mystery" priority="315" template="STANDARD_ITEM" icon="battle_Mystery" pair="true"/>
+    <HScript name="Item_RepelGel" priority="316" template="STANDARD_ITEM" icon="battle_RepelGel" pair="true"/>
+    <HScript name="Item_InsecticideHerb" priority="317" template="STANDARD_ITEM" icon="battle_InsecticideHerb" pair="true"/>
+    <HScript name="Item_Unused_13E" priority="318" template="STANDARD_ITEM" icon="battle_item_13E" pair="true"/>
+    <HScript name="Item_Unused_13F" priority="319" template="STANDARD_ITEM" icon="battle_item_13F" pair="true"/>
+    <HScript name="Item_SpicySoup" priority="1" template="STANDARD_ITEM" icon="food/SpicySoup" pair="true"/>
+    <HScript name="Item_ApplePie" priority="2" template="STANDARD_ITEM" icon="food/ApplePie" pair="true"/>
+    <HScript name="Item_HoneyUltra" priority="3" template="STANDARD_ITEM" icon="food/HoneyUltra" pair="true"/>
+    <HScript name="Item_MapleUltra" priority="4" template="STANDARD_ITEM" icon="food/MapleUltra" pair="true"/>
+    <HScript name="Item_JellyUltra" priority="5" template="STANDARD_ITEM" icon="food/JellyUltra" pair="true"/>
+    <HScript name="Item_Koopasta" priority="6" template="STANDARD_ITEM" icon="food/Koopasta" pair="true"/>
+    <HScript name="Item_FriedShroom" priority="7" template="STANDARD_ITEM" icon="food/FriedShroom" pair="true"/>
+    <HScript name="Item_ShroomCake" priority="8" template="STANDARD_ITEM" icon="food/ShroomCake" pair="true"/>
+    <HScript name="Item_ShroomSteak" priority="9" template="STANDARD_ITEM" icon="food/ShroomSteak" pair="true"/>
+    <HScript name="Item_HotShroom" priority="10" template="STANDARD_ITEM" icon="food/HotShroom" pair="true"/>
+    <HScript name="Item_SweetShroom" priority="11" template="STANDARD_ITEM" icon="food/SweetShroom" pair="true"/>
+    <HScript name="Item_HealthyJuice" priority="12" template="STANDARD_ITEM" icon="food/HealthyJuice" pair="true"/>
+    <HScript name="Item_BlandMeal" priority="13" template="STANDARD_ITEM" icon="food/BlandMeal" pair="true"/>
+    <HScript name="Item_YummyMeal" priority="14" template="STANDARD_ITEM" icon="food/YummyMeal" pair="true"/>
+    <HScript name="Item_DeluxeFeast" priority="15" template="STANDARD_ITEM" icon="food/DeluxeFeast" pair="true"/>
+    <HScript name="Item_SpecialShake" priority="16" template="STANDARD_ITEM" icon="food/SpecialShake" pair="true"/>
+    <HScript name="Item_BigCookie" priority="17" template="STANDARD_ITEM" icon="food/BigCookie" pair="true"/>
+    <HScript name="Item_Cake" priority="18" template="STANDARD_ITEM" icon="food/Cake" pair="true"/>
+    <HScript name="Item_Mistake" priority="19" template="STANDARD_ITEM" icon="food/Mistake" pair="true"/>
+    <HScript name="Item_KoopaTea" priority="20" template="STANDARD_ITEM" icon="food/KoopaTea" pair="true"/>
+    <HScript name="Item_HoneySuper" priority="21" template="STANDARD_ITEM" icon="food/HoneySuper" pair="true"/>
+    <HScript name="Item_MapleSuper" priority="22" template="STANDARD_ITEM" icon="food/MapleSuper" pair="true"/>
+    <HScript name="Item_JellySuper" priority="23" template="STANDARD_ITEM" icon="food/JellySuper" pair="true"/>
+    <HScript name="Item_Spaghetti" priority="24" template="STANDARD_ITEM" icon="food/Spaghetti" pair="true"/>
+    <HScript name="Item_EggMissile" priority="25" template="STANDARD_ITEM" icon="food/EggMissile" pair="true"/>
+    <HScript name="Item_FriedEgg" priority="26" template="STANDARD_ITEM" icon="food/FriedEgg" pair="true"/>
+    <HScript name="Item_HoneyShroom" priority="27" template="STANDARD_ITEM" icon="food/HoneyShroom" pair="true"/>
+    <HScript name="Item_HoneyCandy" priority="28" template="STANDARD_ITEM" icon="food/HoneyCandy" pair="true"/>
+    <HScript name="Item_ElectroPop" priority="29" template="STANDARD_ITEM" icon="food/ElectroPop" pair="true"/>
+    <HScript name="Item_FirePop" priority="30" template="STANDARD_ITEM" icon="food/FirePop" pair="true"/>
+    <HScript name="Item_LimeCandy" priority="31" template="STANDARD_ITEM" icon="food/LimeCandy" pair="true"/>
+    <HScript name="Item_CocoPop" priority="32" template="STANDARD_ITEM" icon="food/CocoPop" pair="true"/>
+    <HScript name="Item_LemonCandy" priority="33" template="STANDARD_ITEM" icon="food/LemonCandy" pair="true"/>
+    <HScript name="Item_JellyPop" priority="34" template="STANDARD_ITEM" icon="food/JellyPop" pair="true"/>
+    <HScript name="Item_StrangeCake" priority="35" template="STANDARD_ITEM" icon="food/StrangeCake" pair="true"/>
+    <HScript name="Item_KookyCookie" priority="36" template="STANDARD_ITEM" icon="food/KookyCookie" pair="true"/>
+    <HScript name="Item_FrozenFries" priority="37" template="STANDARD_ITEM" icon="food/FrozenFries" pair="true"/>
+    <HScript name="Item_PotatoSalad" priority="38" template="STANDARD_ITEM" icon="food/PotatoSalad" pair="true"/>
+    <HScript name="Item_NuttyCake" priority="39" template="STANDARD_ITEM" icon="food/NuttyCake" pair="true"/>
+    <HScript name="Item_MapleShroom" priority="40" template="STANDARD_ITEM" icon="food/MapleShroom" pair="true"/>
+    <HScript name="Item_BoiledEgg" priority="41" template="STANDARD_ITEM" icon="food/BoiledEgg" pair="true"/>
+    <HScript name="Item_YoshiCookie" priority="42" template="STANDARD_ITEM" icon="food/YoshiCookie" pair="true"/>
+    <HScript name="Item_JellyShroom" priority="43" template="STANDARD_ITEM" icon="food/JellyShroom" pair="true"/>
+    <HScript name="Item_Unused_02C" priority="44" template="STANDARD_ITEM" icon="unused_item_02C" pair="true"/>
+    <HScript name="Item_Unused_02D" priority="45" template="STANDARD_ITEM" icon="unused_item_02D" pair="true"/>
+    <HScript name="Item_Unused_02E" priority="46" template="STANDARD_ITEM" icon="unused_item_02E" pair="true"/>
+    <HScript name="Item_Unused_02F" priority="47" template="STANDARD_ITEM" icon="unused_item_02F" pair="true"/>
+    <HScript name="Item_Unused_030" priority="48" template="STANDARD_ITEM" icon="unused_item_030" pair="true"/>
+    <HScript name="Item_SpinSmash" priority="144" template="STANDARD_ITEM" icon="badge_SpinSmash" pair="true"/>
+    <HScript name="Item_Multibounce" priority="145" template="STANDARD_ITEM" icon="badge_Multibounce" pair="true"/>
+    <HScript name="Item_PowerPlus" priority="146" template="STANDARD_ITEM" icon="badge_PowerPlus" pair="true"/>
+    <HScript name="Item_DodgeMaster" priority="147" template="STANDARD_ITEM" icon="badge_DodgeMaster" pair="true"/>
+    <HScript name="Item_PowerBounce" priority="148" template="STANDARD_ITEM" icon="badge_PowerBounce" pair="true"/>
+    <HScript name="Item_SpikeShield" priority="149" template="STANDARD_ITEM" icon="badge_SpikeShield" pair="true"/>
+    <HScript name="Item_FirstAttack" priority="150" template="STANDARD_ITEM" icon="badge_FirstAttack" pair="true"/>
+    <HScript name="Item_HPPlus" priority="151" template="STANDARD_ITEM" icon="badge_HPPlus" pair="true"/>
+    <HScript name="Item_QuakeHammer" priority="152" template="STANDARD_ITEM" icon="badge_QuakeHammer" pair="true"/>
+    <HScript name="Item_DoubleDip" priority="153" template="STANDARD_ITEM" icon="badge_DoubleDip" pair="true"/>
+    <HScript name="Item_PowerQuake" priority="154" template="STANDARD_ITEM" icon="badge_PowerQuake" pair="true"/>
+    <HScript name="Item_MegaQuake" priority="155" template="STANDARD_ITEM" icon="badge_MegaQuake" pair="true"/>
+    <HScript name="Item_SleepStomp" priority="156" template="STANDARD_ITEM" icon="badge_SleepStomp" pair="true"/>
+    <HScript name="Item_SmashCharge" priority="157" template="STANDARD_ITEM" icon="badge_SmashCharge" pair="true"/>
+    <HScript name="Item_SSmashChg" priority="158" template="STANDARD_ITEM" icon="badge_SSmashChg" pair="true"/>
+    <HScript name="Item_AutoSmash" priority="159" template="STANDARD_ITEM" icon="badge_AutoSmash" pair="true"/>
+    <HScript name="Item_FireShield" priority="160" template="STANDARD_ITEM" icon="badge_FireShield" pair="true"/>
+    <HScript name="Item_JumpCharge" priority="161" template="STANDARD_ITEM" icon="badge_JumpCharge" pair="true"/>
+    <HScript name="Item_SJumpChg" priority="162" template="STANDARD_ITEM" icon="badge_SJumpChg" pair="true"/>
+    <HScript name="Item_AutoJump" priority="163" template="STANDARD_ITEM" icon="badge_AutoJump" pair="true"/>
+    <HScript name="Item_DDownPound" priority="164" template="STANDARD_ITEM" icon="badge_DDownPound" pair="true"/>
+    <HScript name="Item_AutoMultibounce" priority="165" template="STANDARD_ITEM" icon="badge_AutoMultibounce" pair="true"/>
+    <HScript name="Item_DizzyStomp" priority="166" template="STANDARD_ITEM" icon="badge_DizzyStomp" pair="true"/>
+    <HScript name="Item_HammerThrow" priority="167" template="STANDARD_ITEM" icon="badge_HammerThrow" pair="true"/>
+    <HScript name="Item_SmashCharge0" priority="168" template="STANDARD_ITEM" icon="badge_SmashCharge0" pair="true"/>
+    <HScript name="Item_PrettyLucky" priority="169" template="STANDARD_ITEM" icon="badge_PrettyLucky" pair="true"/>
+    <HScript name="Item_FeelingFine" priority="170" template="STANDARD_ITEM" icon="badge_FeelingFine" pair="true"/>
+    <HScript name="Item_AttackFXA" priority="171" template="STANDARD_ITEM" icon="badge_AttackFXA" pair="true"/>
+    <HScript name="Item_AllorNothing" priority="172" template="STANDARD_ITEM" icon="badge_AllorNothing" pair="true"/>
+    <HScript name="Item_HPDrain" priority="173" template="STANDARD_ITEM" icon="badge_HPDrain" pair="true"/>
+    <HScript name="Item_JumpCharge0" priority="174" template="STANDARD_ITEM" icon="badge_JumpCharge0" pair="true"/>
+    <HScript name="Item_SlowGo" priority="175" template="STANDARD_ITEM" icon="badge_SlowGo" pair="true"/>
+    <HScript name="Item_FPPlus" priority="176" template="STANDARD_ITEM" icon="badge_FPPlus" pair="true"/>
+    <HScript name="Item_MegaRush" priority="177" template="STANDARD_ITEM" icon="badge_MegaRush" pair="true"/>
+    <HScript name="Item_IcePower" priority="178" template="STANDARD_ITEM" icon="badge_IcePower" pair="true"/>
+    <HScript name="Item_DefendPlus" priority="179" template="STANDARD_ITEM" icon="badge_DefendPlus" pair="true"/>
+    <HScript name="Item_PayOff" priority="180" template="STANDARD_ITEM" icon="badge_PayOff" pair="true"/>
+    <HScript name="Item_MoneyMoney" priority="181" template="STANDARD_ITEM" icon="badge_MoneyMoney" pair="true"/>
+    <HScript name="Item_ChillOut" priority="182" template="STANDARD_ITEM" icon="badge_ChillOut" pair="true"/>
+    <HScript name="Item_HappyHeart" priority="183" template="STANDARD_ITEM" icon="badge_HappyHeart" pair="true"/>
+    <HScript name="Item_ZapTap" priority="184" template="STANDARD_ITEM" icon="badge_ZapTap" pair="true"/>
+    <HScript name="Item_Berserker" priority="185" template="STANDARD_ITEM" icon="badge_Berserker" pair="true"/>
+    <HScript name="Item_RightOn" priority="186" template="STANDARD_ITEM" icon="badge_RightOn" pair="true"/>
+    <HScript name="Item_RunawayPay" priority="187" template="STANDARD_ITEM" icon="badge_RunawayPay" pair="true"/>
+    <HScript name="Item_Refund" priority="188" template="STANDARD_ITEM" icon="badge_Refund" pair="true"/>
+    <HScript name="Item_FlowerSaver" priority="189" template="STANDARD_ITEM" icon="badge_FlowerSaver" pair="true"/>
+    <HScript name="Item_TripleDip" priority="190" template="STANDARD_ITEM" icon="badge_TripleDip" pair="true"/>
+    <HScript name="Item_FlowerFanatic" priority="191" template="STANDARD_ITEM" icon="badge_FlowerFanatic" pair="true"/>
+    <HScript name="Item_PowerJump" priority="192" template="STANDARD_ITEM" icon="badge_PowerJump" pair="true"/>
+    <HScript name="Item_SuperJump" priority="193" template="STANDARD_ITEM" icon="badge_SuperJump" pair="true"/>
+    <HScript name="Item_MegaJump" priority="194" template="STANDARD_ITEM" icon="badge_MegaJump" pair="true"/>
+    <HScript name="Item_PowerSmash1" priority="195" template="STANDARD_ITEM" icon="badge_PowerSmash" pair="true"/>
+    <HScript name="Item_SuperSmash" priority="196" template="STANDARD_ITEM" icon="badge_SuperSmash" pair="true"/>
+    <HScript name="Item_MegaSmash" priority="197" template="STANDARD_ITEM" icon="badge_MegaSmash" pair="true"/>
+    <HScript name="Item_LuckyDay" priority="198" template="STANDARD_ITEM" icon="badge_LuckyDay" pair="true"/>
+    <HScript name="Item_MegaHPDrain" priority="199" template="STANDARD_ITEM" icon="badge_MegaHPDrain" pair="true"/>
+    <HScript name="Item_BumpAttack" priority="200" template="STANDARD_ITEM" icon="badge_BumpAttack" pair="true"/>
+    <HScript name="Item_PUpDDown" priority="201" template="STANDARD_ITEM" icon="badge_PUpDDown" pair="true"/>
+    <HScript name="Item_PDownDUp" priority="202" template="STANDARD_ITEM" icon="badge_PDownDUp" pair="true"/>
+    <HScript name="Item_HeartFinder" priority="203" template="STANDARD_ITEM" icon="badge_HeartFinder" pair="true"/>
+    <HScript name="Item_FlowerFinder" priority="204" template="STANDARD_ITEM" icon="badge_FlowerFinder" pair="true"/>
+    <HScript name="Item_DizzyAttack" priority="205" template="STANDARD_ITEM" icon="badge_DizzyAttack" pair="true"/>
+    <HScript name="Item_SpeedySpin" priority="206" template="STANDARD_ITEM" icon="badge_SpeedySpin" pair="true"/>
+    <HScript name="Item_SpinAttack" priority="207" template="STANDARD_ITEM" icon="badge_SpinAttack" pair="true"/>
+    <HScript name="Item_ISpy" priority="208" template="STANDARD_ITEM" icon="badge_ISpy" pair="true"/>
+    <HScript name="Item_PowerRush" priority="209" template="STANDARD_ITEM" icon="badge_PowerRush" pair="true"/>
+    <HScript name="Item_LastStand" priority="210" template="STANDARD_ITEM" icon="badge_LastStand" pair="true"/>
+    <HScript name="Item_CloseCall" priority="211" template="STANDARD_ITEM" icon="badge_CloseCall" pair="true"/>
+    <HScript name="Item_CrazyHeart" priority="212" template="STANDARD_ITEM" icon="badge_CrazyHeart" pair="true"/>
+    <HScript name="Item_Unused_0D5" priority="213" template="STANDARD_ITEM" icon="unused_item_0D5" pair="true"/>
+    <HScript name="Item_Unused_0D6" priority="214" template="STANDARD_ITEM" icon="unused_item_0D6" pair="true"/>
+    <HScript name="Item_Unused_0D7" priority="215" template="STANDARD_ITEM" icon="unused_item_0D7" pair="true"/>
+    <HScript name="Item_ShrinkSmash" priority="216" template="STANDARD_ITEM" icon="badge_ShrinkSmash" pair="true"/>
+    <HScript name="Item_ShrinkStomp" priority="217" template="STANDARD_ITEM" icon="badge_ShrinkStomp" pair="true"/>
+    <HScript name="Item_DDownJump" priority="218" template="STANDARD_ITEM" icon="badge_DDownJump" pair="true"/>
+    <HScript name="Item_DamageDodge" priority="219" template="STANDARD_ITEM" icon="badge_DamageDodge" pair="true"/>
+    <HScript name="Item_EarthquakeJump" priority="220" template="STANDARD_ITEM" icon="badge_EarthquakeJump" pair="true"/>
+    <HScript name="Item_HappyFlower" priority="221" template="STANDARD_ITEM" icon="badge_HappyFlower" pair="true"/>
+    <HScript name="Item_Unused_0DE" priority="222" template="STANDARD_ITEM" icon="badge_HappyCoin" pair="true"/>
+    <HScript name="Item_Unused_0DF" priority="223" template="STANDARD_ITEM" icon="unused_item_0DF" pair="true"/>
+    <HScript name="Item_DeepFocus" priority="224" template="STANDARD_ITEM" icon="badge_DeepFocus" pair="true"/>
+    <HScript name="Item_SuperFocus" priority="225" template="STANDARD_ITEM" icon="badge_SuperFocus" pair="true"/>
+    <HScript name="Item_Kaiden" priority="226" template="STANDARD_ITEM" icon="badge_Kaiden" pair="true"/>
+    <HScript name="Item_QuickChange" priority="227" template="STANDARD_ITEM" icon="badge_QuickChange" pair="true"/>
+    <HScript name="Item_Unused_0E4" priority="228" template="STANDARD_ITEM" icon="unused_item_0E4" pair="true"/>
+    <HScript name="Item_Unused_0E5" priority="229" template="STANDARD_ITEM" icon="unused_item_0E5" pair="true"/>
+    <HScript name="Item_Unused_0E6" priority="230" template="STANDARD_ITEM" icon="unused_item_0E6" pair="true"/>
+    <HScript name="Item_Unused_0E7" priority="231" template="STANDARD_ITEM" icon="unused_item_0E7" pair="true"/>
+    <HScript name="Item_Peekaboo" priority="232" template="STANDARD_ITEM" icon="badge_Peekaboo" pair="true"/>
+    <HScript name="Item_GroupFocus" priority="233" template="STANDARD_ITEM" icon="badge_GroupFocus" pair="true"/>
+    <HScript name="Item_AttackFXD" priority="234" template="STANDARD_ITEM" icon="badge_AttackFXD" pair="true"/>
+    <HScript name="Item_AttackFXB" priority="235" template="STANDARD_ITEM" icon="badge_AttackFXB" pair="true"/>
+    <HScript name="Item_AttackFXE" priority="236" template="STANDARD_ITEM" icon="badge_AttackFXE" pair="true"/>
+    <HScript name="Item_AttackFXC" priority="237" template="STANDARD_ITEM" icon="badge_AttackFXC" pair="true"/>
+    <HScript name="Item_AttackFXF" priority="238" template="STANDARD_ITEM" icon="badge_AttackFXF" pair="true"/>
+    <HScript name="Item_Unused_0EF" priority="239" template="STANDARD_ITEM" icon="unused_item_0EF" pair="true"/>
+    <HScript name="Item_HealthyHealthy" priority="240" template="STANDARD_ITEM" icon="badge_HealthyHealthy" pair="true"/>
+    <HScript name="Item_Unused_0F1" priority="241" template="STANDARD_ITEM" icon="unused_item_0F1" pair="true"/>
+    <HScript name="Item_Unused_0F2" priority="242" template="STANDARD_ITEM" icon="unused_item_0F2" pair="true"/>
+    <HScript name="Item_Unused_0F3" priority="243" template="STANDARD_ITEM" icon="unused_item_0F3" pair="true"/>
+    <HScript name="Item_Unused_0F4" priority="244" template="STANDARD_ITEM" icon="unused_item_0F4" pair="true"/>
+    <HScript name="Item_Unused_0F5" priority="245" template="STANDARD_ITEM" icon="unused_item_0F5" pair="true"/>
+    <HScript name="Item_Unused_0F6" priority="246" template="STANDARD_ITEM" icon="unused_item_0F6" pair="true"/>
+    <HScript name="Item_Unused_0F7" priority="247" template="STANDARD_ITEM" icon="unused_item_0F7" pair="true"/>
+    <HScript name="Item_FireFlower" priority="288" template="STANDARD_ITEM" icon="battle_FireFlower" pair="true"/>
+    <HScript name="Item_SnowmanDoll" priority="289" template="STANDARD_ITEM" icon="battle_SnowmanDoll" pair="true"/>
+    <HScript name="Item_ThunderRage" priority="290" template="STANDARD_ITEM" icon="battle_ThunderRage" pair="true"/>
+    <HScript name="Item_ThunderBolt" priority="291" template="STANDARD_ITEM" icon="battle_ThunderBolt" pair="true"/>
+    <HScript name="Item_ShootingStar" priority="292" template="STANDARD_ITEM" icon="battle_ShootingStar" pair="true"/>
+    <HScript name="Item_DustyHammer" priority="293" template="STANDARD_ITEM" icon="battle_DustyHammer" pair="true"/>
+    <HScript name="Item_Pebble" priority="294" template="STANDARD_ITEM" icon="battle_Pebble" pair="true"/>
+    <HScript name="Item_Unused_127" priority="295" template="STANDARD_ITEM" icon="unused_item_127" pair="true"/>
+    <HScript name="Item_StoneCap" priority="296" template="STANDARD_ITEM" icon="battle_StoneCap" pair="true"/>
+    <HScript name="Item_VoltShroom" priority="297" template="STANDARD_ITEM" icon="battle_VoltShroom" pair="true"/>
+    <HScript name="Item_PowerStar" priority="298" template="STANDARD_ITEM" icon="battle_PowerStar" pair="true"/>
+    <HScript name="Item_Parasol" priority="299" template="STANDARD_ITEM" icon="battle_Parasol" pair="true"/>
+    <HScript name="Item_MagicMirror" priority="300" template="STANDARD_ITEM" icon="battle_MagicMirror" pair="true"/>
+    <HScript name="Item_Unused_12D" priority="301" template="STANDARD_ITEM" icon="unused_item_12D" pair="true"/>
+    <HScript name="Item_Unused_12E" priority="302" template="STANDARD_ITEM" icon="unused_item_12E" pair="true"/>
+    <HScript name="Item_Unused_12F" priority="303" template="STANDARD_ITEM" icon="unused_item_12F" pair="true"/>
+    <HScript name="Item_Mushroom" priority="248" template="STANDARD_ITEM" icon="food/Mushroom" pair="true"/>
+    <HScript name="Item_SuperShroom" priority="249" template="STANDARD_ITEM" icon="food/SuperShroom" pair="true"/>
+    <HScript name="Item_UltraShroom" priority="250" template="STANDARD_ITEM" icon="food/UltraShroom" pair="true"/>
+    <HScript name="Item_LifeShroom" priority="251" template="STANDARD_ITEM" icon="food/LifeShroom" pair="true"/>
+    <HScript name="Item_DriedShroom" priority="252" template="STANDARD_ITEM" icon="food/DriedShroom" pair="true"/>
+    <HScript name="Item_TastyTonic" priority="253" template="STANDARD_ITEM" icon="food/TastyTonic" pair="true"/>
+    <HScript name="Item_SuperSoda" priority="254" template="STANDARD_ITEM" icon="food/SuperSoda" pair="true"/>
+    <HScript name="Item_BlueBerry" priority="255" template="STANDARD_ITEM" icon="food/BlueBerry" pair="true"/>
+    <HScript name="Item_RedBerry" priority="256" template="STANDARD_ITEM" icon="food/RedBerry" pair="true"/>
+    <HScript name="Item_YellowBerry" priority="257" template="STANDARD_ITEM" icon="food/YellowBerry" pair="true"/>
+    <HScript name="Item_BubbleBerry" priority="258" template="STANDARD_ITEM" icon="food/BubbleBerry" pair="true"/>
+    <HScript name="Item_Goomnut" priority="259" template="STANDARD_ITEM" icon="food/Goomnut" pair="true"/>
+    <HScript name="Item_KoopaLeaf" priority="260" template="STANDARD_ITEM" icon="food/KoopaLeaf" pair="true"/>
+    <HScript name="Item_DriedPasta" priority="261" template="STANDARD_ITEM" icon="food/DriedPasta" pair="true"/>
+    <HScript name="Item_Lime" priority="262" template="STANDARD_ITEM" icon="food/Lime" pair="true"/>
+    <HScript name="Item_Lemon" priority="263" template="STANDARD_ITEM" icon="food/Lemon" pair="true"/>
+    <HScript name="Item_DriedFruit" priority="264" template="STANDARD_ITEM" icon="food/DriedFruit" pair="true"/>
+    <HScript name="Item_StrangeLeaf" priority="265" template="STANDARD_ITEM" icon="food/StrangeLeaf" pair="true"/>
+    <HScript name="Item_CakeMix" priority="266" template="STANDARD_ITEM" icon="food/CakeMix" pair="true"/>
+    <HScript name="Item_Egg" priority="267" template="STANDARD_ITEM" icon="food/Egg" pair="true"/>
+    <HScript name="Item_Coconut" priority="268" template="STANDARD_ITEM" icon="food/Coconut" pair="true"/>
+    <HScript name="Item_Melon" priority="269" template="STANDARD_ITEM" icon="food/Melon" pair="true"/>
+    <HScript name="Item_StinkyHerb" priority="270" template="STANDARD_ITEM" icon="food/StinkyHerb" pair="true"/>
+    <HScript name="Item_IcedPotato" priority="271" template="STANDARD_ITEM" icon="food/IcedPotato" pair="true"/>
+    <HScript name="Item_HoneySyrup" priority="272" template="STANDARD_ITEM" icon="food/HoneySyrup" pair="true"/>
+    <HScript name="Item_MapleSyrup" priority="273" template="STANDARD_ITEM" icon="food/MapleSyrup" pair="true"/>
+    <HScript name="Item_JamminJelly" priority="274" template="STANDARD_ITEM" icon="food/JamminJelly" pair="true"/>
+    <HScript name="Item_WhackasBump" priority="275" template="STANDARD_ITEM" icon="food/WhackasBump" pair="true"/>
+    <HScript name="Item_Apple" priority="276" template="STANDARD_ITEM" icon="food/Apple" pair="true"/>
+    <HScript name="Item_BakingSalt" priority="277" template="STANDARD_ITEM" icon="peach_BakingSalt" pair="true"/>
+    <HScript name="Item_BakingSugar" priority="278" template="STANDARD_ITEM" icon="peach_BakingSugar" pair="true"/>
+    <HScript name="Item_BakingEgg" priority="279" template="STANDARD_ITEM" icon="peach_BakingEgg" pair="true"/>
+    <HScript name="Item_BakingCream" priority="280" template="STANDARD_ITEM" icon="peach_BakingCream" pair="true"/>
+    <HScript name="Item_BakingStrawberry" priority="281" template="STANDARD_ITEM" icon="peach_BakingStrawberry" pair="true"/>
+    <HScript name="Item_BakingButter" priority="282" template="STANDARD_ITEM" icon="peach_BakingButter" pair="true"/>
+    <HScript name="Item_BakingCleanser" priority="283" template="STANDARD_ITEM" icon="peach_BakingCleanser" pair="true"/>
+    <HScript name="Item_BakingWater" priority="284" template="STANDARD_ITEM" icon="peach_BakingWater" pair="true"/>
+    <HScript name="Item_BakingFlour" priority="285" template="STANDARD_ITEM" icon="peach_BakingFlour" pair="true"/>
+    <HScript name="Item_BakingMilk" priority="286" template="STANDARD_ITEM" icon="peach_BakingMilk" pair="true"/>
+    <HScript name="Item_Unused_11F" priority="287" template="STANDARD_ITEM" icon="unused_item_11F" pair="true"/>
+    <HScript name="Item_SleepySheep" priority="304" template="STANDARD_ITEM" icon="battle_SleepySheep" pair="true"/>
+    <HScript name="Item_XBandage" priority="305" template="STANDARD_ITEM" icon="battle_XBandage" pair="true"/>
+    <HScript name="Item_POWBlock" priority="306" template="STANDARD_ITEM" icon="battle_POWBlock" pair="true"/>
+    <HScript name="Item_HustleDrink" priority="307" template="STANDARD_ITEM" icon="battle_HustleDrink" pair="true"/>
+    <HScript name="Item_StopWatch" priority="308" template="STANDARD_ITEM" icon="battle_StopWatch" pair="true"/>
+    <HScript name="Item_DizzyDial" priority="309" template="STANDARD_ITEM" icon="battle_DizzyDial" pair="true"/>
+    <HScript name="Item_Unused_136" priority="310" template="STANDARD_ITEM" icon="battle_item_136" pair="true"/>
+    <HScript name="Item_Unused_137" priority="311" template="STANDARD_ITEM" icon="battle_item_137" pair="true"/>
 </ItemHudScripts>

@@ -2266,7 +2266,7 @@ HudScript HES_MoveGreenOrb = HES_TEMPLATE_CI_ENUM_SIZE(ui_move_partner_2, 32, 32
 
 HudScript HES_MoveRedOrb = HES_TEMPLATE_CI_ENUM_SIZE(ui_move_partner_3, 32, 32);
 
-HudScript HES_MoveDiamondDisabled = HES_TEMPLATE_CI_ENUM_SIZE(ui_move_basic_disabled, 32, 32);
+HudScript HES_MoveDiamond_disabled = HES_TEMPLATE_CI_ENUM_SIZE(ui_move_basic_disabled, 32, 32);
 
 HudScript HES_MoveBlueOrbDisabled = HES_TEMPLATE_CI_ENUM_SIZE(ui_move_partner_1_disabled, 32, 32);
 

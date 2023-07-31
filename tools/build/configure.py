@@ -264,7 +264,17 @@ def write_ninja_rules(
 
     ninja.rule(
         "item_hud_scripts",
-        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py $in $out",
+        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py generate $in $out",
+    )
+
+    ninja.rule(
+        "item_hud_table",
+        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py table $in $out",
+    )
+
+    ninja.rule(
+        "item_hud_map",
+        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py mapping $in $out",
     )
 
     ninja.rule(
@@ -579,6 +589,18 @@ class Configure:
             self.build_path() / "include/item_hud_scripts.h",
             [Path("src/gen/item_hud_scripts.xml")],
             "item_hud_scripts",
+        )
+
+        build(
+            self.build_path() / "include/item_hud_scripts_table.h",
+            [Path("src/gen/item_hud_scripts.xml")],
+            "item_hud_table",
+        )
+
+        build(
+            self.build_path() / "include/item_hud_scripts_mapping.h",
+            [Path("src/gen/item_hud_scripts.xml")],
+            "item_hud_map",
         )
 
         # Build objects
