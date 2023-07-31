@@ -16,7 +16,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 1: Jump
-    .nameMsg = MSG_ItemName_Jump,
+    .nameMsg = MSG_ItemName_Boots,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -29,7 +29,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 2: SpinJump
-    .nameMsg = MSG_ItemName_SpinJump,
+    .nameMsg = MSG_ItemName_SuperBoots,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,
@@ -42,7 +42,7 @@ ItemData gItemTable[] = {
     .potencyB = 0
 },
 {   // item 3: TornadoJump
-    .nameMsg = MSG_ItemName_TornadoJump,
+    .nameMsg = MSG_ItemName_UltraBoots,
     .fullDescMsg = 0,
     .shortDescMsg = 0,
     .sellValue = -1,

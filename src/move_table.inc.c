@@ -261,8 +261,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 1A: Jump1
     .nameMsg = MSG_Menus_Jump,
-    .fullDescMsg = MSG_ItemShortDesc_Jump,
-    .shortDescMsg = MSG_ItemShortDesc_Jump,
+    .fullDescMsg = MSG_ItemShortDesc_Boots,
+    .shortDescMsg = MSG_ItemShortDesc_Boots,
     .flags = TARGET_FLAG_ENEMY | TARGET_FLAG_80 | TARGET_FLAG_800 | TARGET_FLAG_4000 | TARGET_FLAG_10000 | TARGET_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -271,8 +271,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 1B: Jump2
     .nameMsg = MSG_Menus_Jump,
-    .fullDescMsg = MSG_ItemShortDesc_SpinJump,
-    .shortDescMsg = MSG_ItemShortDesc_SpinJump,
+    .fullDescMsg = MSG_ItemShortDesc_SuperBoots,
+    .shortDescMsg = MSG_ItemShortDesc_SuperBoots,
     .flags = TARGET_FLAG_ENEMY | TARGET_FLAG_80 | TARGET_FLAG_800 | TARGET_FLAG_4000 | TARGET_FLAG_10000 | TARGET_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
@@ -281,8 +281,8 @@ MoveData gMoveTable[] = {
 },
 {   // move 1C: Jump3
     .nameMsg = MSG_Menus_Jump,
-    .fullDescMsg = MSG_ItemShortDesc_TornadoJump,
-    .shortDescMsg = MSG_ItemShortDesc_TornadoJump,
+    .fullDescMsg = MSG_ItemShortDesc_UltraBoots,
+    .shortDescMsg = MSG_ItemShortDesc_UltraBoots,
     .flags = TARGET_FLAG_ENEMY | TARGET_FLAG_80 | TARGET_FLAG_800 | TARGET_FLAG_4000 | TARGET_FLAG_10000 | TARGET_FLAG_40000,
     .category = MOVE_TYPE_JUMP,
     .actionTip = MOVE_ACTION_TIP_0,
