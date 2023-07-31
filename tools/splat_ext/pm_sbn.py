@@ -3,9 +3,7 @@ from dataclasses import astuple, dataclass
 import os
 import yaml
 import struct
-from typing import Any, Dict, List
-from collections import OrderedDict
-from functools import total_ordering
+from typing import List
 
 
 # splat imports; will fail if script run directly
@@ -49,8 +47,6 @@ class SBN:
         data = data[: header.size]
 
         self.unknown_data = data[0x7A0:0x7C0]
-
-        print(f"Total size: {header.size}")
 
         # Decode file entries
         entry_addr = header.tableOffset
@@ -190,8 +186,8 @@ class SBN:
             struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *song)
             current_song_offset += InitSongEntry.length
 
-        sentinel = InitSongEntry(0xFFFF, 0x00, 0x00, 0x00)
-        struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *sentinel)
+        sentinel2 = InitSongEntry(0xFFFF, 0x00, 0x00, 0x00)
+        struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *sentinel2)
 
         current_mseq_offset = mseq_offset
         for mseq in self.init.mseq_entries:

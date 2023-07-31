@@ -1218,7 +1218,7 @@ if __name__ == "__main__":
         if version < PIGMENT_REQ_VERSION:
             print(f"error: {PIGMENT} version {PIGMENT_REQ_VERSION} or newer is required, system version is {version}\n")
             exit(1)
-    except FileNotFoundError:
+    except (FileNotFoundError, PermissionError):
         print(f"error: {PIGMENT} is not installed\n")
         print("To build and install it, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh")
         print(f"and then run:\n\tcargo install {PIGMENT}")

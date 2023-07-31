@@ -34,6 +34,520 @@ segments:
     start: 0
   - [0x40, bin]
 
+  - name: engine1
+    type: code
+    start: 0x71D80
+    vram: 0x800D8C70
+    # vram_of_symbol: overlays_start # TODO once this symbol is implemented
+    subsegments:
+    - [auto, hasm, bss2]
+    - [auto, c, npc_collision]
+    - [auto, c, 77480]
+    - [auto, c, 7B440]
+    - [auto, c, 7bb60_len_41b0]
+    - [auto, c, 7E9D0]
+    - [auto, c, 7fd10_len_b40]
+    - [auto, c, 80850_len_3060]
+    - [auto, c, world/actions] # DUMMY ROM
+    - [auto, c, world/partners]
+    - [auto, hasm, bss2_2]
+    - [auto, c, 891b0_len_fb0]
+    - [auto, c, 8a160_len_700]
+    - [auto, c, 8a860_len_3f30]
+    - [auto, c, draw_box]
+    - [auto, .data, npc_collision]
+    - [auto, .data, world/actions]
+    - [auto, .data, world/partners]
+    - start: 0x8DA40
+      type: .data
+      name: global_hud_scripts
+      subsegments:
+      - [auto, ci4,     ui/input/a_button_unpressed, 48, 40]
+      - [auto, palette, ui/input/a_button_unpressed]
+      - [auto, ci4,     ui/input/a_button_pressed, 48, 40]
+      - [auto, palette, ui/input/a_button_pressed]
+      - [auto, ci4,     ui/input/analog_stick, 32, 32]
+      - [auto, palette, ui/input/analog_stick]
+      - [auto, ci4,     ui/input/analog_stick_left, 40, 32]
+      - [auto, palette, ui/input/analog_stick_left]
+      - [auto, ci4,     ui/input/analog_stick2, 32, 32]
+      - [auto, palette, ui/input/analog_stick2]
+      - [auto, ci4,     ui/input/analog_stick_right, 40, 32]
+      - [auto, palette, ui/input/analog_stick_right]
+      - [auto, ci4,     ui/input/analog_stick3, 32, 32]
+      - [auto, palette, ui/input/analog_stick3]
+      - [auto, ci4,     ui/input/analog_stick_down, 32, 32]
+      - [auto, palette, ui/input/analog_stick_down]
+      - [auto, ci4,     ui/input/analog_stick_up, 32, 32]
+      - [auto, palette, ui/input/analog_stick_up]
+      - [auto, ci4,     ui/unk_bar, 72, 16]
+      - [auto, palette, ui/unk_bar]
+      - [auto, ci4,     ui/ok, 24, 16]
+      - [auto, palette, ui/ok]
+      - [auto, ci4,     ui/input/start_button, 48, 40]
+      - [auto, palette, ui/input/start_button]
+      - [auto, ci4,     ui/input/start_button2, 48, 40]
+      - [auto, palette, ui/input/start_button2]
+      - [auto, ci4,     ui/input/start_text, 24, 8]
+      - [auto, palette, ui/input/start_text]
+      - [auto, ci4,     ui/hammer, 32, 32]
+      - [auto, palette, ui/hammer]
+      - [auto, palette, ui/hammer.disabled]
+      - [auto, ci4,     ui/super_hammer, 32, 32]
+      - [auto, palette, ui/super_hammer]
+      - [auto, palette, ui/super_hammer.disabled]
+      - [auto, ci4,     ui/ultra_hammer, 32, 32]
+      - [auto, palette, ui/ultra_hammer]
+      - [auto, palette, ui/ultra_hammer.disabled]
+      - [auto, ci4,     ui/boots, 32, 32]
+      - [auto, palette, ui/boots]
+      - [auto, palette, ui/boots.disabled]
+      - [auto, ci4,     ui/super_boots, 32, 32]
+      - [auto, palette, ui/super_boots]
+      - [auto, palette, ui/super_boots.disabled]
+      - [auto, ci4,     ui/ultra_boots, 32, 32]
+      - [auto, palette, ui/ultra_boots]
+      - [auto, palette, ui/ultra_boots.disabled]
+      - [auto, ci4,     ui/item, 32, 32]
+      - [auto, palette, ui/item]
+      - [auto, palette, ui/item.disabled]
+      - [auto, ci4,     ui/star_spirit, 32, 32]
+      - [auto, palette, ui/star_spirit]
+      - [auto, palette, ui/star_spirit.disabled]
+      - [auto, ci4,     ui/arrow_left, 16, 16]
+      - [auto, palette, ui/arrow_left]
+      - [auto, ci4,     ui/arrow_right, 16, 16]
+      - [auto, palette, ui/arrow_right]
+      - [auto, ci4,     ui/point_right, 16, 16]
+      - [auto, palette, ui/point_right]
+      - [auto, ci4,     ui/pip, 8, 8]
+      - [auto, palette, ui/pip]
+      - [auto, ci4,     ui/pip2, 8, 8]
+      - [auto, palette, ui/pip2]
+      - [auto, ci4,     ui/coin_sparkle_0, 8, 8]
+      - [auto, palette, ui/coin_sparkle_0]
+      - [auto, ci4,     ui/coin_sparkle_1, 8, 8]
+      - [auto, palette, ui/coin_sparkle_1]
+      - [auto, ci4,     ui/coin_sparkle_2, 8, 8]
+      - [auto, palette, ui/coin_sparkle_2]
+      - [auto, ci4,     ui/coin_sparkle_3, 8, 8]
+      - [auto, palette, ui/coin_sparkle_3]
+      - [auto, ci4,     ui/coin_sparkle_4, 8, 8]
+      - [auto, palette, ui/coin_sparkle_4]
+      - [auto, ci4,     ui/coin_sparkle_5, 8, 8]
+      - [auto, palette, ui/coin_sparkle_5]
+      - [auto, ci4,     ui/coin_sparkle_none, 8, 8]
+      - [auto, palette, ui/coin_sparkle_none]
+      - [auto, ia8,     ui/status/star_point_shine, 24, 24]
+      - [auto, ci4,     ui/status/star_piece_0, 16, 16]
+      - [auto, palette, ui/status/star_piece_0]
+      - [auto, ci4,     ui/status/star_piece_1, 16, 16]
+      - [auto, palette, ui/status/star_piece_1]
+      - [auto, ci4,     ui/status/star_piece_2, 16, 16]
+      - [auto, palette, ui/status/star_piece_2]
+      - [auto, ci4,     ui/menu_times, 8, 8]
+      - [auto, palette, ui/menu_times]
+      - [auto, ci4,     ui/fp_cost, 16, 8]
+      - [auto, palette, ui/fp_cost]
+      - [auto, palette, ui/fp_cost.reduced]
+      - [auto, palette, ui/fp_cost.reduced_twice]
+      - [auto, palette, ui/fp_cost.notenough]
+      - [auto, ci4,     ui/pow_cost, 16, 8]
+      - [auto, palette, ui/pow_cost]
+      - [auto, palette, ui/pow_cost.reduced]
+      - [auto, palette, ui/pow_cost.reduced_twice]
+      - [auto, palette, ui/pow_cost.notenough]
+      - [auto, ci4,     de/ui/fp_cost, 16, 8]
+      - [auto, palette, de/ui/fp_cost]
+      - [auto, palette, de/ui/fp_cost.reduced]
+      - [auto, palette, de/ui/fp_cost.reduced_twice]
+      - [auto, palette, de/ui/fp_cost.notenough]
+      - [auto, ci4,     de/ui/pow_cost, 16, 8]
+      - [auto, palette, de/ui/pow_cost]
+      - [auto, palette, de/ui/pow_cost.reduced]
+      - [auto, palette, de/ui/pow_cost.reduced_twice]
+      - [auto, palette, de/ui/pow_cost.notenough]
+      - [auto, ci4,     fr/ui/fp_cost, 16, 8]
+      - [auto, palette, fr/ui/fp_cost]
+      - [auto, palette, fr/ui/fp_cost.reduced]
+      - [auto, palette, fr/ui/fp_cost.reduced_twice]
+      - [auto, palette, fr/ui/fp_cost.notenough]
+      - [auto, ci4,     fr/ui/pow_cost, 16, 8]
+      - [auto, palette, fr/ui/pow_cost]
+      - [auto, palette, fr/ui/pow_cost.reduced]
+      - [auto, palette, fr/ui/pow_cost.reduced_twice]
+      - [auto, palette, fr/ui/pow_cost.notenough]
+      - [auto, ci4,     es/ui/fp_cost, 16, 8]
+      - [auto, palette, es/ui/fp_cost]
+      - [auto, palette, es/ui/fp_cost.reduced]
+      - [auto, palette, es/ui/fp_cost.reduced_twice]
+      - [auto, palette, es/ui/fp_cost.notenough]
+      - [auto, ci4,     es/ui/pow_cost, 16, 8]
+      - [auto, palette, es/ui/pow_cost]
+      - [auto, palette, es/ui/pow_cost.reduced]
+      - [auto, palette, es/ui/pow_cost.reduced_twice]
+      - [auto, palette, es/ui/pow_cost.notenough]
+      - [auto, ci4,     ui/green_arrow_down, 16, 8]
+      - [auto, palette, ui/green_arrow_down]
+      - [auto, ci4,     ui/green_arrow_up, 16, 8]
+      - [auto, palette, ui/green_arrow_up]
+      - [auto, ci4,     ui/kaime, 56, 24]
+      - [auto, palette, ui/kaime]
+      - [auto, ci4,     ui/unused_1, 16, 16]
+      - [auto, palette, ui/unused_1]
+      - [auto, ci4,     ui/unused_2, 16, 16]
+      - [auto, palette, ui/unused_2]
+      - [auto, ci4,     ui/unused_3, 16, 16]
+      - [auto, palette, ui/unused_3]
+      - [auto, ci4,     ui/red_bar1, 112, 8]
+      - [auto, palette, ui/red_bar1]
+      - [auto, ci4,     ui/empty_bar, 112, 8]
+      - [auto, palette, ui/empty_bar]
+      - [auto, ci4,     ui/red_bar2, 104, 8]
+      - [auto, palette, ui/red_bar2]
+      - [auto, ci4,     ui/eldstar, 32, 32]
+      - [auto, palette, ui/eldstar]
+      - [auto, palette, ui/eldstar.disabled]
+      - [auto, ci4,     ui/mamar, 32, 32]
+      - [auto, palette, ui/mamar]
+      - [auto, palette, ui/mamar.disabled]
+      - [auto, ci4,     ui/skolar, 32, 32]
+      - [auto, palette, ui/skolar]
+      - [auto, palette, ui/skolar.disabled]
+      - [auto, ci4,     ui/muskular, 32, 32]
+      - [auto, palette, ui/muskular]
+      - [auto, palette, ui/muskular.disabled]
+      - [auto, ci4,     ui/misstar, 32, 32]
+      - [auto, palette, ui/misstar]
+      - [auto, palette, ui/misstar.disabled]
+      - [auto, ci4,     ui/klevar, 32, 32]
+      - [auto, palette, ui/klevar]
+      - [auto, palette, ui/klevar.disabled]
+      - [auto, ci4,     ui/kalmar, 32, 32]
+      - [auto, palette, ui/kalmar]
+      - [auto, palette, ui/kalmar.disabled]
+      - [auto, ci4,     ui/star_beam, 32, 32]
+      - [auto, palette, ui/star_beam]
+      - [auto, palette, ui/star_beam.disabled]
+      - [auto, ci4,     ui/peach_beam, 32, 32]
+      - [auto, palette, ui/peach_beam]
+      - [auto, palette, ui/peach_beam.disabled]
+      - [auto, ci4,     ui/mario_head, 16, 16]
+      - [auto, palette, ui/mario_head]
+      - [auto, ci4,     ui/partner0, 32, 32]
+      - [auto, palette, ui/partner0]
+      - [auto, palette, ui/partner0.disabled]
+      - [auto, ci4,     ui/goombario, 32, 32]
+      - [auto, palette, ui/goombario]
+      - [auto, palette, ui/goombario.disabled]
+      - [auto, ci4,     ui/kooper, 32, 32]
+      - [auto, palette, ui/kooper]
+      - [auto, palette, ui/kooper.disabled]
+      - [auto, ci4,     ui/bombette, 32, 32]
+      - [auto, palette, ui/bombette]
+      - [auto, palette, ui/bombette.disabled]
+      - [auto, ci4,     ui/parakarry, 32, 32]
+      - [auto, palette, ui/parakarry]
+      - [auto, palette, ui/parakarry.disabled]
+      - [auto, ci4,     ui/bow, 32, 32]
+      - [auto, palette, ui/bow]
+      - [auto, palette, ui/bow.disabled]
+      - [auto, ci4,     ui/watt, 32, 32]
+      - [auto, palette, ui/watt]
+      - [auto, palette, ui/watt.disabled]
+      - [auto, ci4,     ui/sushie, 32, 32]
+      - [auto, palette, ui/sushie]
+      - [auto, palette, ui/sushie.disabled]
+      - [auto, ci4,     ui/lakilester, 32, 32]
+      - [auto, palette, ui/lakilester]
+      - [auto, palette, ui/lakilester.disabled]
+      - [auto, ci4,     ui/partner9, 32, 32]
+      - [auto, palette, ui/partner9]
+      - [auto, palette, ui/partner9.disabled]
+      - [auto, ci4,     ui/partner10, 32, 32]
+      - [auto, palette, ui/partner10]
+      - [auto, palette, ui/partner10.disabled]
+      - [auto, ci4,     ui/partner11, 32, 32]
+      - [auto, palette, ui/partner11]
+      - [auto, palette, ui/partner11.disabled]
+      - [auto, ci4,     ui/status/text_times, 8, 8]
+      - [auto, palette, ui/status/text_times]
+      - [auto, ci4,     ui/status/text_slash, 8, 16]
+      - [auto, palette, ui/status/text_slash]
+      - [auto, ci4,     ui/status/text_0, 16, 16]
+      - [auto, palette, ui/status/text_0]
+      - [auto, ci4,     ui/status/text_1, 16, 16]
+      - [auto, palette, ui/status/text_1]
+      - [auto, ci4,     ui/status/text_2, 16, 16]
+      - [auto, palette, ui/status/text_2]
+      - [auto, ci4,     ui/status/text_3, 16, 16]
+      - [auto, palette, ui/status/text_3]
+      - [auto, ci4,     ui/status/text_4, 16, 16]
+      - [auto, palette, ui/status/text_4]
+      - [auto, ci4,     ui/status/text_5, 16, 16]
+      - [auto, palette, ui/status/text_5]
+      - [auto, ci4,     ui/status/text_6, 16, 16]
+      - [auto, palette, ui/status/text_6]
+      - [auto, ci4,     ui/status/text_7, 16, 16]
+      - [auto, palette, ui/status/text_7]
+      - [auto, ci4,     ui/status/text_8, 16, 16]
+      - [auto, palette, ui/status/text_8]
+      - [auto, ci4,     ui/status/text_9, 16, 16]
+      - [auto, palette, ui/status/text_9]
+      - [auto, ci4,     ui/status/text_hp, 16, 16]
+      - [auto, palette, ui/status/text_hp]
+      - [auto, ci4,     ui/status/text_fp, 16, 16]
+      - [auto, palette, ui/status/text_fp]
+      - [auto, ci4,     de/ui/status/text_hp, 16, 16]
+      - [auto, palette, de/ui/status/text_hp]
+      - [auto, ci4,     de/ui/status/text_fp, 16, 16]
+      - [auto, palette, de/ui/status/text_fp]
+      - [auto, ci4,     fr/ui/status/text_hp, 16, 16]
+      - [auto, palette, fr/ui/status/text_hp]
+      - [auto, ci4,     fr/ui/status/text_fp, 16, 16]
+      - [auto, palette, fr/ui/status/text_fp]
+      - [auto, ci4,     es/ui/status/text_hp, 16, 16]
+      - [auto, palette, es/ui/status/text_hp]
+      - [auto, ci4,     es/ui/status/text_fp, 16, 16]
+      - [auto, palette, es/ui/status/text_fp]
+      - [auto, ci4,     ui/status/pow_unit_1, 8, 8]
+      - [auto, palette, ui/status/pow_unit_1]
+      - [auto, ci4,     ui/status/pow_unit_2, 8, 8]
+      - [auto, palette, ui/status/pow_unit_2]
+      - [auto, ci4,     ui/status/pow_unit_3, 8, 8]
+      - [auto, palette, ui/status/pow_unit_3]
+      - [auto, ci4,     ui/status/pow_unit_4, 8, 8]
+      - [auto, palette, ui/status/pow_unit_4]
+      - [auto, ci4,     ui/status/pow_unit_5, 8, 8]
+      - [auto, palette, ui/status/pow_unit_5]
+      - [auto, ci4,     ui/status/pow_unit_6, 8, 8]
+      - [auto, palette, ui/status/pow_unit_6]
+      - [auto, ci4,     ui/status/pow_unit_7, 8, 8]
+      - [auto, palette, ui/status/pow_unit_7]
+      - [auto, ci4,     ui/status/pow_unit_empty, 8, 8]
+      - [auto, palette, ui/status/pow_unit_empty]
+      - [auto, ci4,     ui/status/pow_star_1, 8, 8]
+      - [auto, palette, ui/status/pow_star_1]
+      - [auto, ci4,     ui/status/pow_star_2, 8, 8]
+      - [auto, palette, ui/status/pow_star_2]
+      - [auto, ci4,     ui/status/pow_star_3, 8, 8]
+      - [auto, palette, ui/status/pow_star_3]
+      - [auto, ci4,     ui/status/pow_star_4, 8, 8]
+      - [auto, palette, ui/status/pow_star_4]
+      - [auto, ci4,     ui/status/pow_star_5, 8, 8]
+      - [auto, palette, ui/status/pow_star_5]
+      - [auto, ci4,     ui/status/pow_star_6, 8, 8]
+      - [auto, palette, ui/status/pow_star_6]
+      - [auto, ci4,     ui/status/pow_star_7, 8, 8]
+      - [auto, palette, ui/status/pow_star_7]
+      - [auto, ci4,     ui/status/pow_star_empty, 8, 8]
+      - [auto, palette, ui/status/pow_star_empty]
+      - [auto, ci4,     ui/status/coin_0, 16, 16]
+      - [auto, palette, ui/status/coin_0]
+      - [auto, ci4,     ui/status/coin_1, 16, 16]
+      - [auto, palette, ui/status/coin_1]
+      - [auto, ci4,     ui/status/coin_2, 16, 16]
+      - [auto, palette, ui/status/coin_2]
+      - [auto, ci4,     ui/status/coin_3, 16, 16]
+      - [auto, palette, ui/status/coin_3]
+      - [auto, ci4,     ui/status/coin_4, 16, 16]
+      - [auto, palette, ui/status/coin_4]
+      - [auto, ci4,     ui/status/coin_5, 16, 16]
+      - [auto, palette, ui/status/coin_5]
+      - [auto, ci4,     ui/status/coin_6, 16, 16]
+      - [auto, palette, ui/status/coin_6]
+      - [auto, ci4,     ui/status/coin_7, 16, 16]
+      - [auto, palette, ui/status/coin_7]
+      - [auto, ci4,     ui/status/coin_8, 16, 16]
+      - [auto, palette, ui/status/coin_8]
+      - [auto, ci4,     ui/status/coin_9, 16, 16]
+      - [auto, palette, ui/status/coin_9]
+      - [auto, ci4,     ui/status/star_point_0, 16, 16]
+      - [auto, palette, ui/status/star_point_0]
+      - [auto, ci4,     ui/status/star_point_1, 16, 16]
+      - [auto, palette, ui/status/star_point_1]
+      - [auto, ci4,     ui/status/star_point_2, 16, 16]
+      - [auto, palette, ui/status/star_point_2]
+      - [auto, ci4,     ui/status/star_point_3, 16, 16]
+      - [auto, palette, ui/status/star_point_3]
+      - [auto, ci4,     ui/status/star_point_4, 16, 16]
+      - [auto, palette, ui/status/star_point_4]
+      - [auto, ci4,     ui/status/star_point_5, 16, 16]
+      - [auto, palette, ui/status/star_point_5]
+      - [auto, ci4,     ui/status/star_point_6, 16, 16]
+      - [auto, palette, ui/status/star_point_6]
+      - [auto, ci4,     ui/status/star_point_7, 16, 16]
+      - [auto, palette, ui/status/star_point_7]
+      - [auto, ci4,     ui/bluepip, 16, 16]
+      - [auto, palette, ui/bluepip]
+      - [auto, ci4,     ui/bluepip2, 16, 16]
+      - [auto, palette, ui/bluepip2]
+      - [auto, ci4,     ui/battle/status/charge_jump, 24, 24]
+      - [auto, palette, ui/battle/status/charge_jump]
+      - [auto, ci4,     ui/battle/status/charge_hammer, 24, 24]
+      - [auto, palette, ui/battle/status/charge_hammer]
+      - [auto, ci4,     ui/battle/status/charge_goombario, 24, 24]
+      - [auto, palette, ui/battle/status/charge_goombario]
+      - [auto, ci4,     ui/battle/status/exclamation, 24, 24]
+      - [auto, palette, ui/battle/status/exclamation]
+      - [auto, ci4,     ui/battle/status/sleep_0, 16, 16]
+      - [auto, palette, ui/battle/status/sleep_0]
+      - [auto, ci4,     ui/battle/status/sleep_1, 16, 16]
+      - [auto, palette, ui/battle/status/sleep_1]
+      - [auto, ci4,     ui/battle/status/sleep_2, 16, 16]
+      - [auto, palette, ui/battle/status/sleep_2]
+      - [auto, ci4,     ui/battle/status/static_0, 16, 16]
+      - [auto, palette, ui/battle/status/static_0]
+      - [auto, ci4,     ui/battle/status/static_1, 16, 16]
+      - [auto, palette, ui/battle/status/static_1]
+      - [auto, ci4,     ui/battle/status/paralyze_0, 16, 16]
+      - [auto, palette, ui/battle/status/paralyze_0]
+      - [auto, ci4,     ui/battle/status/paralyze_1, 16, 16]
+      - [auto, palette, ui/battle/status/paralyze_1]
+      - [auto, ci4,     ui/battle/status/dizzy_0, 16, 16]
+      - [auto, palette, ui/battle/status/dizzy_0]
+      - [auto, ci4,     ui/battle/status/dizzy_1, 16, 16]
+      - [auto, palette, ui/battle/status/dizzy_1]
+      - [auto, ci4,     ui/battle/status/dizzy_2, 16, 16]
+      - [auto, palette, ui/battle/status/dizzy_2]
+      - [auto, ci4,     ui/battle/status/dizzy_3, 16, 16]
+      - [auto, palette, ui/battle/status/dizzy_3]
+      - [auto, ci4,     ui/battle/status/poison_0, 16, 16]
+      - [auto, palette, ui/battle/status/poison_0]
+      - [auto, ci4,     ui/battle/status/poison_1, 16, 16]
+      - [auto, palette, ui/battle/status/poison_1]
+      - [auto, ci4,     ui/battle/status/frozen_0, 16, 16]
+      - [auto, palette, ui/battle/status/frozen_0]
+      - [auto, ci4,     ui/battle/status/frozen_1, 16, 16]
+      - [auto, palette, ui/battle/status/frozen_1]
+      - [auto, ci4,     ui/battle/status/frozen_2, 16, 16]
+      - [auto, palette, ui/battle/status/frozen_2]
+      - [auto, ci4,     ui/battle/status/frozen_3, 16, 16]
+      - [auto, palette, ui/battle/status/frozen_3]
+      - [auto, ci4,     ui/battle/status/stop_0, 16, 16]
+      - [auto, palette, ui/battle/status/stop_0]
+      - [auto, ci4,     ui/battle/status/stop_1, 16, 16]
+      - [auto, palette, ui/battle/status/stop_1]
+      - [auto, ci4,     ui/battle/status/stop_2, 16, 16]
+      - [auto, palette, ui/battle/status/stop_2]
+      - [auto, ci4,     ui/battle/status/stop_3, 16, 16]
+      - [auto, palette, ui/battle/status/stop_3]
+      - [auto, ci4,     ui/battle/status/pdown_0, 16, 16]
+      - [auto, palette, ui/battle/status/pdown_0]
+      - [auto, ci4,     ui/battle/status/pdown_1, 16, 16]
+      - [auto, palette, ui/battle/status/pdown_1]
+      - [auto, ci4,     ui/battle/status/shrink_0, 16, 16]
+      - [auto, palette, ui/battle/status/shrink_0]
+      - [auto, ci4,     ui/battle/status/shrink_1, 16, 16]
+      - [auto, palette, ui/battle/status/shrink_1]
+      - [auto, ci4,     ui/battle/status/shrink_2, 16, 16]
+      - [auto, palette, ui/battle/status/shrink_2]
+      - [auto, ci4,     ui/battle/status/shrink_3, 16, 16]
+      - [auto, palette, ui/battle/status/shrink_3]
+      - [auto, ci4,     ui/battle/status/transparent_0, 16, 16]
+      - [auto, palette, ui/battle/status/transparent_0]
+      - [auto, ci4,     ui/battle/status/transparent_1, 16, 16]
+      - [auto, palette, ui/battle/status/transparent_1]
+      - [auto, ci4,     ui/battle/status/transparent_2, 16, 16]
+      - [auto, palette, ui/battle/status/transparent_2]
+      - [auto, ci4,     ui/battle/status/transparent_3, 16, 16]
+      - [auto, palette, ui/battle/status/transparent_3]
+      - [auto, ci4,     ui/battle/status/transparent_4, 16, 16]
+      - [auto, palette, ui/battle/status/transparent_4]
+      - [auto, ci4,     ui/battle/status/transparent_5, 16, 16]
+      - [auto, palette, ui/battle/status/transparent_5]
+      - [auto, ci4,     ui/battle/status/peril, 40, 16]
+      - [auto, palette, ui/battle/status/peril]
+      - [auto, ci4,     ui/battle/status/danger, 40, 16]
+      - [auto, palette, ui/battle/status/danger]
+      - [auto, ci4,     ui/battle/status/refund, 40, 24]
+      - [auto, palette, ui/battle/status/refund]
+      - [auto, ci4,     ui/battle/status/happy, 40, 16]
+      - [auto, palette, ui/battle/status/happy]
+      - [auto, ci4,     ui/battle/status/hp_drain, 40, 16]
+      - [auto, palette, ui/battle/status/hp_drain]
+      - [auto, ci4,     de/ui/battle/status/peril, 40, 16]
+      - [auto, palette, de/ui/battle/status/peril]
+      - [auto, ci4,     de/ui/battle/status/danger, 40, 16]
+      - [auto, palette, de/ui/battle/status/danger]
+      - [auto, ci4,     de/ui/battle/status/refund, 40, 24]
+      - [auto, palette, de/ui/battle/status/refund]
+      - [auto, ci4,     de/ui/battle/status/happy, 40, 16]
+      - [auto, palette, de/ui/battle/status/happy]
+      - [auto, ci4,     de/ui/battle/status/hp_drain, 40, 16]
+      - [auto, palette, de/ui/battle/status/hp_drain]
+      - [auto, ci4,     fr/ui/battle/status/peril, 40, 16]
+      - [auto, palette, fr/ui/battle/status/peril]
+      - [auto, ci4,     fr/ui/battle/status/danger, 40, 16]
+      - [auto, palette, fr/ui/battle/status/danger]
+      - [auto, ci4,     fr/ui/battle/status/refund, 40, 24]
+      - [auto, palette, fr/ui/battle/status/refund]
+      - [auto, ci4,     fr/ui/battle/status/happy, 40, 16]
+      - [auto, palette, fr/ui/battle/status/happy]
+      - [auto, ci4,     fr/ui/battle/status/hp_drain, 40, 16]
+      - [auto, palette, fr/ui/battle/status/hp_drain]
+      - [auto, ci4,     es/ui/battle/status/peril, 40, 16]
+      - [auto, palette, es/ui/battle/status/peril]
+      - [auto, ci4,     es/ui/battle/status/danger, 40, 16]
+      - [auto, palette, es/ui/battle/status/danger]
+      - [auto, ci4,     es/ui/battle/status/refund, 40, 24]
+      - [auto, palette, es/ui/battle/status/refund]
+      - [auto, ci4,     es/ui/battle/status/happy, 40, 16]
+      - [auto, palette, es/ui/battle/status/happy]
+      - [auto, ci4,     es/ui/battle/status/hp_drain, 40, 16]
+      - [auto, palette, es/ui/battle/status/hp_drain]
+      - [auto, ci4,     ui/move_basic, 32, 32]
+      - [auto, palette, ui/move_basic]
+      - [auto, palette, ui/move_basic.disabled]
+      - [auto, ci4,     ui/move_partner_1, 32, 32]
+      - [auto, palette, ui/move_partner_1]
+      - [auto, palette, ui/move_partner_1.disabled]
+      - [auto, ci4,     ui/move_partner_2, 32, 32]
+      - [auto, palette, ui/move_partner_2]
+      - [auto, palette, ui/move_partner_2.disabled]
+      - [auto, ci4,     ui/move_partner_3, 32, 32]
+      - [auto, palette, ui/move_partner_3]
+      - [auto, palette, ui/move_partner_3.disabled]
+      - [0x9B5A0]
+      - [0x9B5A8, rgba32,  ui/stat_heart, 16, 16]
+      - [0x9B9B0, rgba32,  ui/stat_flower, 16, 16]
+      - [0x9BDB0]
+    - [auto, .data, 891b0_len_fb0]
+    - [auto, .data, 8a160_len_700]
+    - start: 0xA1160
+      type: .data
+      name: 8a160_len_700
+      subsegments:
+      - [0xA1160, ia8, A2960, 32, 16]
+      - [0xA1360] # Vp
+      - [0xA1370, vtx, A2B70]
+      - [0xA13C0, gfx, A2BC0]
+      - [0xA1488, gfx, A2C88]
+      - [0xA14B0]
+    - [auto, .data, 8a860_len_3f30]
+    - start: 0xA1590
+      type: .data
+      name: draw_box
+      subsegments:
+      - [0xA1590]
+      - [0xA1690, ia8, ui/box/corners9, 16, 64]
+      - [auto, ia8, ui/box/corners8, 24, 96]
+      - [auto, ia8, ui/box/corners6, 16, 40]
+      - [auto, ia8, ui/box/corners7, 16, 32]
+      - [auto, ia8, ui/box/corners3, 16, 96]
+      - [auto, ia8, ui/box/corners5, 16, 32]
+      - [auto, ia8, ui/box/corners4, 8, 32]
+      - [auto, i4, ui/box/bg_tile, 16, 16]
+      - [auto, ia8, ui/box/corners1, 16, 64]
+      - [auto, i4, ui/box/corners2, 16, 64]
+      - [auto, i4, ui/box/bg_flat, 16, 1]
+      - [0xA3798]
+      - [0xA3878, vtx, vtx/drawbox1]
+      - [0xA38B8]
+    - [0xA3900]
+
+  - [0xA4520, bin]
+
   - name: evt
     type: code
     dir: evt
@@ -11569,7 +12083,254 @@ segments:
     - [0xE8AFB0, c, gv_01_0_header]
     - [0xE8AFB0, c, gv_01_1_main]
 
+
+# todo: add heaps2
   - [0xE8D120, bin]
+
+  - type: code
+    start: 0xE8D120
+    name: inspect_icon
+    vram: 0x802B7000
+    subsegments:
+    - [auto, c, inspect_icon]
+    - start: 0xE8DB40
+      type: .data
+      name: inspect_icon
+      subsegments:
+      - [0xE8DB40, ci4, inspect_icon, 32, 32]
+      - [0xE8DD40, palette, inspect_icon]
+      - [0xE8DD60, gfx, inspect_icon]
+      - [0xE8DDD8]
+    - [0xE8DEC0]
+  - type: code
+    start: 0xE8DEC0
+    name: speech_bubble
+    vram: 0x802B7000
+    #    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, speech_bubble]
+    - start: 0xE8E5D0
+      type: .data
+      name: speech_bubble
+      subsegments:
+      - [0xE8E5D0, ci4, speech_bubble, 32, 32]
+      - [0xE8E7D0, palette, speech_bubble]
+      - [0xE8E7F0, gfx, speech_bubble]
+      - [0xE8E868]
+    - [0xE8E880]
+  - type: code
+    start: 0xE8E880
+    name: pulse_stone
+    vram: 0x802B7000
+    #    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, pulse_stone]
+    - start: 0xE8EEC0
+      type: .data
+      name: pulse_stone
+      subsegments:
+      - [0xE8EEC0, ci4, pulse_stone_icon, 56, 56]
+      - [0xE8F4E0, palette, pulse_stone_icon]
+      - [0xE8F500, palette, pulse_stone_icon.flash]
+      - [0xE8F520, gfx, pulse_stone_icon]
+      - [0xE8F598]
+    - [0xE8F5C0]
+  - type: code
+    start: 0xE8F5C0
+    name: i_spy
+    vram: 0x802B7000
+    #    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, i_spy]
+    - start: 0xE8FB40
+      type: .data
+      name: i_spy
+      subsegments:
+      - [0xE8FB40, ci4, ispy_icon, 56, 56]
+      - [0xE90160, palette, ispy_icon]
+      - [0xE90180, palette, ispy_icon.2]
+      - [0xE901A0, palette, ispy_icon.3]
+      - [0xE901C0, gfx, ispy_icon]
+      - [0xE90238]
+    - [0xE90270]
+
+  - type: code
+    name: model_clear_render_tasks
+    start: 0xE90270
+    vram: 0x802B7E00
+#    vram_of_symbol: world_misc_vram_end
+    subsegments:
+    - [auto, c, model_clear_render_tasks]
+  - type: code
+    name: world_action_idle
+    dir: world/action
+    start: 0xE90270
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, idle]
+  - type: code
+    name: world_action_walk
+    dir: world/action
+    start: 0xE906F0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, walk]
+  - type: code
+    name: world_action_jump
+    dir: world/action
+    start: 0xE91050
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, jump]
+  - type: code
+    name: world_action_step_up
+    dir: world/action
+    start: 0xE915E0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, step_up]
+  - type: code
+    name: world_action_land
+    dir: world/action
+    start: 0xE91930
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, land]
+  - type: code
+    name: world_action_hammer
+    dir: world/action
+    start: 0xE91EE0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hammer]
+  - type: code
+    name: world_action_spin
+    dir: world/action
+    start: 0xE92D70
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, spin]
+  - type: code
+    name: world_action_tornado_jump
+    dir: world/action
+    start: 0xE93720
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, tornado_jump]
+  - type: code
+    name: world_action_spin_jump
+    dir: world/action
+    start: 0xE93DF0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, spin_jump]
+  - type: code
+    name: world_action_slide
+    dir: world/action
+    start: 0xE94520
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, slide]
+  - type: code
+    name: world_action_hit_fire
+    dir: world/action
+    start: 0xE94CA0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hit_fire]
+  - type: code
+    name: world_action_hit_lava
+    dir: world/action
+    start: 0xE94F50
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hit_lava]
+  - type: code
+    name: world_action_knockback
+    dir: world/action
+    start: 0xE95800
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, knockback]
+  - type: code
+    name: world_action_misc
+    dir: world/action
+    start: 0xE95A40
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, misc]
+  - type: code
+    name: world_action_use_munchlesia
+    dir: world/action
+    start: 0xE961B0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_munchlesia]
+  - type: code
+    name: world_action_use_spinning_flower
+    dir: world/action
+    start: 0xE96480
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_spinning_flower]
+  - type: code
+    name: world_action_use_tweester
+    dir: world/action
+    start: 0xE97350
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_tweester]
+  - type: code
+    name: world_action_sneaky_parasol
+    dir: world/action
+    start: 0xE976C0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, sneaky_parasol]
+  - type: code
+    dir: entity/default
+    start: 0xE98540
+    vram: 0x802BAE00
+#    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Padlock]
+    - [auto, c, BoardedFloor]
+    - [auto, c, BombableRock]
+  - type: code
+    dir: entity/jan_iwa
+    start: 0xE9A740
+    vram: 0x802BAE00
+#    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Plants1]
+    - [auto, c, Plants2]
+    - [auto, c, ArrowSign]
+  - type: code
+    dir: entity/sbk_omo
+    start: 0xE9C760
+    vram: 0x802BAE00
+#    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Tweester]
+    - [auto, c, StarBoxLauncher]
 
   - name: entity_model_Hammer1Block
     dir: entity/model
