@@ -301,7 +301,7 @@ def write_ninja_rules(
 
     ninja.rule("effect_data", command=f"$python {BUILD_TOOLS}/effects.py $in_yaml $out_dir")
 
-    ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $in")
+    ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $asset_stack")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n")
@@ -1060,7 +1060,15 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sbn":
                 sbn_path = entry.object_path.with_suffix("")
-                build(sbn_path, entry.src_paths, "pm_sbn")  # could have non-yaml inputs be implicit
+                build(
+                    sbn_path,
+                    entry.src_paths,
+                    "pm_sbn",
+                    variables={
+                        "asset_stack": ",".join(self.asset_stack),
+                    },
+                    asset_deps=entry.src_paths,
+                )
                 build(entry.object_path, [sbn_path], "bin")
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
