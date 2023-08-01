@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
 import re
+import sys
 import yaml
 import argparse
 from pathlib import Path
 from typing import List, Dict
 from io import TextIOWrapper
-import xml.etree.ElementTree as ET
-from pm_item_hud_scripts import ItemHudScriptEntry, read_hud_scripts_xml
 
 
 class ItemEntry:
@@ -37,9 +36,9 @@ def read_items_yaml(in_yaml: Path) -> List[ItemEntry]:
     items: List[ItemEntry] = []
 
     with open(in_yaml) as f:
-        item_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
+        entry_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
-        for entry in item_list:
+        for entry in entry_list:
             items.append(ItemEntry(entry))
 
     return items
@@ -82,6 +81,75 @@ def generate_item_table(fout: TextIOWrapper, items: List[ItemEntry], hs_map: Dic
     fout.write("\n")
 
 
+class ItemHudScriptEntry:
+    def __init__(self, script):
+        self.name = script.get("name", None)
+        self.template = script.get("template", None)
+        self.icon = script.get("icon", "")
+        priority_str = script.get("priority", "auto")
+        self.pair = script.get("pair", False)
+
+        if self.name == None:
+            raise Exception(f"ItemHudScript is missing 'name'")
+
+        self.extern = self.name.startswith("HES_")
+        if self.extern:
+            self.full_name = self.name
+        else:
+            self.full_name = "HES_Item_" + self.name
+
+        if self.template == None and not self.extern:
+            raise Exception(f"{self.name} is missing 'template'")
+
+        self.icon = re.sub("\\W", "_", self.icon)
+
+        if str(priority_str).lower() == "auto":
+            self.priority = sys.maxsize
+        else:
+            self.priority = int(priority_str)
+
+
+def read_hud_scripts_yaml(in_yaml: Path) -> List[ItemHudScriptEntry]:
+    scripts: List[ItemHudScriptEntry] = []
+
+    with open(in_yaml) as f:
+        entry_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
+
+        for entry in entry_list:
+            scripts.append(ItemHudScriptEntry(entry))
+
+    return scripts
+
+
+def generate_hud_scripts(fout: TextIOWrapper, hud_scripts: List[ItemHudScriptEntry]):
+    for entry in hud_scripts:
+        # do not generate scripts for entries defined externally
+        if entry.extern:
+            continue
+
+        fout.write(f"HudScript {entry.full_name} = HES_TEMPLATE_{entry.template}({entry.icon});\n")
+
+        if entry.pair:
+            fout.write(
+                f"HudScript {entry.full_name}_disabled = HES_TEMPLATE_{entry.template}({entry.icon}_disabled);\n"
+            )
+
+        # there is no item for these scripts, just generate them after the coin script
+        if entry.name == "Coin":
+            fout.write("HudScript HES_Item_CoinSparkleA = HES_COIN_SPARKLE(-8,  0);\n")
+            fout.write("HudScript HES_Item_CoinSparkleB = HES_COIN_SPARKLE( 8,  8);\n")
+            fout.write("HudScript HES_Item_CoinSparkleC = HES_COIN_SPARKLE(-4,  8);\n")
+            fout.write("HudScript HES_Item_CoinSparkleD = HES_COIN_SPARKLE( 6, -6);\n")
+            fout.write("HudScript HES_Item_CoinSparkleE = HES_COIN_SPARKLE( 1, -8);\n")
+            fout.write("HudScript HES_Item_CoinSparkleRandom = HES_TEMPLATE_COIN_SPARKLE();\n")
+        elif entry.name == "StarPoint":
+            fout.write("HudScript HES_Item_SmallStarPoint = HES_TEMPLATE_SMALL_STAR_POINT();\n")
+    fout.write("\n")
+
+    fout.write("s32 pad_after_item_hudscripts[] = { 0, 0 };\n")
+    fout.write("\n")
+
+
 def generate_hud_scripts_table(fout: TextIOWrapper, hud_scripts: List[ItemHudScriptEntry]):
     for entry in hud_scripts:
         if entry.extern:
@@ -103,20 +171,20 @@ def generate_hud_scripts_table(fout: TextIOWrapper, hud_scripts: List[ItemHudScr
     fout.write("\n")
 
 
-def generate_item_entity_scripts(fout: TextIOWrapper, in_xml: Path):
-    xml = ET.parse(in_xml)
-    ScriptList = xml.getroot()
+def generate_item_entity_scripts(fout: TextIOWrapper, ies_yaml: Path):
+    with open(ies_yaml) as f:
+        scripts = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
-    for Script in ScriptList.findall("IScript"):
-        name = Script.attrib.get("name", None)
-        template = Script.attrib.get("template", None)
-        icon = Script.attrib.get("icon", None)
+    for script in scripts:
+        name = script.get("name", None)
+        template = script.get("template", None)
+        icon = script.get("icon", None)
 
         if name is None:
-            raise Exception("IScript is missing attribute: 'name'")
+            raise Exception("Item entity script is missing 'name'")
 
         if template is None:
-            raise Exception("IScript is missing attribute: 'template'")
+            raise Exception(f"{name} is missing 'template'")
 
         if icon is None:
             icon = ""
@@ -168,19 +236,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates item table")
     parser.add_argument("header_path", help="output header file to generate")
     parser.add_argument("items_yaml", type=Path, help="input yaml file path")
-    parser.add_argument("ies_xml", type=Path, help="input xml file path for item entity scripts")
-    parser.add_argument("hes_xml", type=Path, help="input xml file path for item hud element scripts")
+    parser.add_argument("ies_yaml", type=Path, help="input yaml file path for item entity scripts")
+    parser.add_argument("hes_yaml", type=Path, help="input yaml file path for item hud element scripts")
     args = parser.parse_args()
 
     items = read_items_yaml(args.items_yaml)
-
-    hud_scripts = read_hud_scripts_xml(args.hes_xml)
-    hud_scripts.sort(key=lambda x: x.priority)
-
-    # get hudElemID for each hud element
-    hs_map: Dict[str, int] = {}
-    for idx, hs in enumerate(hud_scripts):
-        hs_map[hs.name] = idx + 1
+    hud_scripts = read_hud_scripts_yaml(args.hes_yaml)
 
     # sort items by category
     CATEGORY_ORDER = {
@@ -215,8 +276,18 @@ if __name__ == "__main__":
         fout.write('#include "icon_offsets.h"\n')
         fout.write("\n")
 
+        generate_hud_scripts(fout, hud_scripts)
+
+        # after writing the hud script sources, sort them according to table order
+        hud_scripts.sort(key=lambda x: x.priority)
+
+        # get hudElemID for each hud element
+        hs_map: Dict[str, int] = {}
+        for idx, hs in enumerate(hud_scripts):
+            hs_map[hs.name] = idx + 1
+
         generate_item_table(fout, items, hs_map)
         generate_hud_scripts_table(fout, hud_scripts)
-        generate_item_entity_scripts(fout, args.ies_xml)
+        generate_item_entity_scripts(fout, args.ies_yaml)
         generate_item_entity_scripts_table(fout, items)
         generate_item_icon_tables(fout, items)

@@ -292,13 +292,7 @@ HudScript HES_HandPointLeftHeld = {
     hs_End
 };
 
-#include "gen/item_hud_scripts.h"
-
-//TODO padding
-s32 pad_after_item_hudscripts[] = {
-    0x00000000, 0x00000000
-};
-
+// all item data is generated from src/gen/item_*.yaml
 #include "gen/item_data.h"
 
 //TODO split for partner popup menu data?
