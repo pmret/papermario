@@ -87,53 +87,10 @@ def generate_scripts(in_xml: Path, out_c: Path):
         f.write("\n#endif // ITEM_HUD_SCRIPTS_H\n")
 
 
-def generate_table(in_xml: Path, out_c: Path):
-    xml = ET.parse(in_xml)
-    ScriptList = xml.getroot()
-
-    scripts: List[ItemHudScriptEntry] = []
-
-    for elem in ScriptList.findall("HScript"):
-        scripts.append(ItemHudScriptEntry(elem))
-
-    scripts.sort(key=lambda x: x.priority)
-
-    with open(out_c, "w") as f:
-        f.write("#ifndef ITEM_HUD_SCRIPT_TABLE_H\n")
-        f.write("#define ITEM_HUD_SCRIPT_TABLE_H\n")
-        f.write("/* This file is auto-generated. Do not edit. */\n\n")
-        f.write('#include "hud_element.h"\n\n')
-
-        for entry in scripts:
-            if entry.extern:
-                f.write(f"extern HudScript {entry.full_name};\n")
-                if entry.pair:
-                    f.write(f"extern HudScript {entry.full_name}_disabled;\n")
-                f.write("\n")
-
-        f.write("IconHudScriptPair gItemHudScripts[] = {\n")
-        f.write("    { .enabled = NULL, .disabled = NULL },\n")
-
-        for entry in scripts:
-            if entry.pair:
-                f.write(f"    {{ .enabled = &{entry.full_name}, .disabled = &{entry.full_name}_disabled }},\n")
-            else:
-                f.write(f"    {{ .enabled = &{entry.full_name}, .disabled = &{entry.full_name} }},\n")
-
-        f.write("};\n")
-        f.write("\n#endif // ITEM_HUD_SCRIPT_TABLE_H\n")
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates item HUD scripts")
-    parser.add_argument("mode", help="generate | table")
     parser.add_argument("in_xml", type=Path, help="input xml file path")
     parser.add_argument("header_path", help="output header file to generate")
     args = parser.parse_args()
 
-    if args.mode == "generate":
-        generate_scripts(args.in_xml, args.header_path)
-    elif args.mode == "table":
-        generate_table(args.in_xml, args.header_path)
-    elif args.mode == "mapping":
-        generate_mapping(args.in_xml, args.header_path)
+    generate_scripts(args.in_xml, args.header_path)

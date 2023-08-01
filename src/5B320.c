@@ -292,19 +292,14 @@ HudScript HES_HandPointLeftHeld = {
     hs_End
 };
 
-#include "item_hud_scripts.h"
+#include "gen/item_hud_scripts.h"
 
 //TODO padding
 s32 pad_after_item_hudscripts[] = {
     0x00000000, 0x00000000
 };
 
-#include "item_table.h"
-
-#include "item_hud_scripts_table.h"
-
-#include "item_entity_scripts.h"
-#include "item_entity_script_tables.inc.c"
+#include "gen/item_data.h"
 
 //TODO split for partner popup menu data?
 

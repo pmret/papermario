@@ -5,6 +5,8 @@ import yaml
 import argparse
 from pathlib import Path
 from typing import List, Dict
+from io import TextIOWrapper
+import xml.etree.ElementTree as ET
 from pm_item_hud_scripts import ItemHudScriptEntry, read_hud_scripts_xml
 
 
@@ -31,21 +33,154 @@ class ItemEntry:
         self.icon = re.sub("\\W", "_", self.icon)
 
 
-def generate_table(out_c: Path, items_yaml: Path, ies_xml: Path, hes_yaml: Path):
-    hud_scripts = read_hud_scripts_xml(hes_yaml)
-    hud_scripts.sort(key=lambda x: x.priority)
-
-    hs_map: Dict[str, int] = {}
-    for idx, hs in enumerate(hud_scripts):
-        hs_map[hs.name] = idx + 1
-
+def read_items_yaml(in_yaml: Path) -> List[ItemEntry]:
     items: List[ItemEntry] = []
 
-    with open(items_yaml) as f:
+    with open(in_yaml) as f:
         item_list = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
         for entry in item_list:
             items.append(ItemEntry(entry))
+
+    return items
+
+
+def generate_item_table(fout: TextIOWrapper, items: List[ItemEntry], hs_map: Dict[str, int]):
+    fout.write("ItemData gItemTable[] = {\n")
+
+    def join_flags(flags: List[str]) -> str:
+        if len(flags) > 0:
+            joined = " | ".join(flags)
+        else:
+            joined = "0"
+        return joined
+
+    for idx, item in enumerate(items):
+        hud_elem_id = hs_map.get(item.hudElem, None)
+        if hud_elem_id == None:
+            raise Exception(f"Item {item.name} requires undefined HudScript: {item.hudElem}")
+        if item.hudElem.startswith("HES_"):
+            hud_elem_str = item.hudElem
+        else:
+            hud_elem_str = "HES_Item_" + item.hudElem
+
+        fout.write(f"    {{   // 0x{idx:03X}: {item.name}\n")
+        fout.write(f"        .nameMsg = {item.nameMsg},\n")
+        fout.write(f"        .fullDescMsg = {item.fullDescMsg},\n")
+        fout.write(f"        .shortDescMsg = {item.shortDescMsg},\n")
+        fout.write(f"        .hudElemID = {hud_elem_id}, // {hud_elem_str}\n")
+        fout.write(f"        .sellValue = {item.sellValue},\n")
+        fout.write(f"        .sortValue = {item.sortValue},\n")
+        fout.write(f"        .targetFlags = {join_flags(item.targetFlags)},\n")
+        fout.write(f"        .typeFlags = {join_flags(item.typeFlags)},\n")
+        fout.write(f"        .moveID = {item.moveID},\n")
+        fout.write(f"        .potencyA = {item.potencyA},\n")
+        fout.write(f"        .potencyB = {item.potencyB},\n")
+        fout.write(f"    }},\n")
+
+    fout.write("};\n")
+    fout.write("\n")
+
+
+def generate_hud_scripts_table(fout: TextIOWrapper, hud_scripts: List[ItemHudScriptEntry]):
+    for entry in hud_scripts:
+        if entry.extern:
+            fout.write(f"extern HudScript {entry.full_name};\n")
+            if entry.pair:
+                fout.write(f"extern HudScript {entry.full_name}_disabled;\n")
+            fout.write("\n")
+
+    fout.write("IconHudScriptPair gItemHudScripts[] = {\n")
+    fout.write("    { .enabled = NULL, .disabled = NULL },\n")  # array index 0 is always NULL
+
+    for entry in hud_scripts:
+        if entry.pair:
+            fout.write(f"    {{ .enabled = &{entry.full_name}, .disabled = &{entry.full_name}_disabled }},\n")
+        else:
+            fout.write(f"    {{ .enabled = &{entry.full_name}, .disabled = &{entry.full_name} }},\n")
+
+    fout.write("};\n")
+    fout.write("\n")
+
+
+def generate_item_entity_scripts(fout: TextIOWrapper, in_xml: Path):
+    xml = ET.parse(in_xml)
+    ScriptList = xml.getroot()
+
+    for Script in ScriptList.findall("IScript"):
+        name = Script.attrib.get("name", None)
+        template = Script.attrib.get("template", None)
+        icon = Script.attrib.get("icon", None)
+
+        if name is None:
+            raise Exception("IScript is missing attribute: 'name'")
+
+        if template is None:
+            raise Exception("IScript is missing attribute: 'template'")
+
+        if icon is None:
+            icon = ""
+        else:
+            icon = re.sub("\\W", "_", icon)
+
+        fout.write(f"ItemScript IES_{name} = IES_TEMPLATE_{template}({icon});\n")
+
+    fout.write("\n")
+
+
+def generate_item_entity_scripts_table(fout: TextIOWrapper, items: List[ItemEntry]):
+    fout.write("// indexed by itemID\n")
+    fout.write("s32* gItemEntityScripts[] = {\n")
+    idx = 0
+    for item in items:
+        fout.write(f"    IES_{item.itemEntity},\n")
+        idx += 1
+
+    # must pad with IES_Placeholder to match
+    while idx <= 0x180:
+        fout.write(f"    IES_{items[0].itemEntity},\n")
+        idx += 1
+
+    fout.write("};\n")
+    fout.write("\n")
+
+
+def generate_item_icon_tables(fout: TextIOWrapper, items: List[ItemEntry]):
+    # note: DUMMY items have no icon rasters or palettes
+    fout.write("// indexed by itemID\n")
+    fout.write("s32 gItemIconRasterOffsets[] = {\n")
+    for item in items:
+        if item.category != "DUMMY":
+            fout.write(f"    ICON_{item.icon}_raster,\n")
+    fout.write("};\n")
+    fout.write("\n")
+
+    fout.write("// indexed by itemID\n")
+    fout.write("s32 gItemIconPaletteOffsets[] = {\n")
+    for item in items:
+        if item.category != "DUMMY":
+            fout.write(f"    ICON_{item.icon}_palette,\n")
+    fout.write("};\n")
+    fout.write("\n")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generates item table")
+    parser.add_argument("header_path", help="output header file to generate")
+    parser.add_argument("items_yaml", type=Path, help="input yaml file path")
+    parser.add_argument("ies_xml", type=Path, help="input xml file path for item entity scripts")
+    parser.add_argument("hes_xml", type=Path, help="input xml file path for item hud element scripts")
+    args = parser.parse_args()
+
+    items = read_items_yaml(args.items_yaml)
+
+    hud_scripts = read_hud_scripts_xml(args.hes_xml)
+    hud_scripts.sort(key=lambda x: x.priority)
+
+    # get hudElemID for each hud element
+    hs_map: Dict[str, int] = {}
+    for idx, hs in enumerate(hud_scripts):
+        hs_map[hs.name] = idx + 1
 
     # sort items by category
     CATEGORY_ORDER = {
@@ -71,53 +206,17 @@ def generate_table(out_c: Path, items_yaml: Path, ies_xml: Path, hes_yaml: Path)
             min_cat[cat] = idx
         max_cat[cat] = idx
 
-    # write the item table file
-    with open(out_c, "w") as f:
-        f.write("/* This file is auto-generated. Do not edit. */\n")
-        f.write('#include "common.h"\n\n')
-        f.write('#include "message_ids.h"\n\n')
+    with open(args.header_path, "w") as fout:
+        fout.write("/* This file is auto-generated. Do not edit. */\n")
+        fout.write('#include "common.h"\n')
+        fout.write('#include "message_ids.h"\n')
+        fout.write('#include "hud_element.h"\n')
+        fout.write('#include "item_entity.h"\n')
+        fout.write('#include "icon_offsets.h"\n')
+        fout.write("\n")
 
-        f.write("ItemData gItemTable[] = {\n")
-
-        def join_flags(flags: List[str]) -> str:
-            if len(flags) > 0:
-                joined = " | ".join(flags)
-            else:
-                joined = "0"
-            return joined
-
-        for idx, item in enumerate(items):
-            hud_elem_id = hs_map.get(item.hudElem, None)
-            if hud_elem_id == None:
-                raise Exception(f"Item {item.name} requires undefined HudScript: {item.hudElem}")
-            if item.hudElem.startswith("HES_"):
-                hud_elem_str = item.hudElem
-            else:
-                hud_elem_str = "HES_Item_" + item.hudElem
-
-            f.write(f"{{   // 0x{idx:03X}: {item.name}\n")
-            f.write(f"    .nameMsg = {item.nameMsg},\n")
-            f.write(f"    .fullDescMsg = {item.fullDescMsg},\n")
-            f.write(f"    .shortDescMsg = {item.shortDescMsg},\n")
-            f.write(f"    .hudElemID = {hud_elem_id}, // {hud_elem_str}\n")  # ITEM_HS_INDEX(HES_{item.hudElem}),\n")
-            f.write(f"    .sellValue = {item.sellValue},\n")
-            f.write(f"    .sortValue = {item.sortValue},\n")
-            f.write(f"    .targetFlags = {join_flags(item.targetFlags)},\n")
-            f.write(f"    .typeFlags = {join_flags(item.typeFlags)},\n")
-            f.write(f"    .moveID = {item.moveID},\n")
-            f.write(f"    .potencyA = {item.potencyA},\n")
-            f.write(f"    .potencyB = {item.potencyB},\n")
-            f.write("},\n")
-
-        f.write("};\n")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generates item table")
-    parser.add_argument("header_path", help="output header file to generate")
-    parser.add_argument("items_yaml", type=Path, help="input yaml file path")
-    parser.add_argument("ies_xml", type=Path, help="input xml file path for item entity scripts")
-    parser.add_argument("hes_xml", type=Path, help="input xml file path for item hud element scripts")
-    args = parser.parse_args()
-
-    generate_table(args.header_path, args.items_yaml, args.ies_xml, args.hes_xml)
+        generate_item_table(fout, items, hs_map)
+        generate_hud_scripts_table(fout, hud_scripts)
+        generate_item_entity_scripts(fout, args.ies_xml)
+        generate_item_entity_scripts_table(fout, items)
+        generate_item_icon_tables(fout, items)

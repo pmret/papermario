@@ -258,18 +258,8 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "item_entity_scripts",
-        command=f"$python {BUILD_TOOLS}/pm_item_entity_scripts.py $in $out",
-    )
-
-    ninja.rule(
         "item_hud_scripts",
-        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py generate $in $out",
-    )
-
-    ninja.rule(
-        "item_hud_table",
-        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py table $in $out",
+        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py $in $out",
     )
 
     ninja.rule(
@@ -574,31 +564,19 @@ class Configure:
         )
 
         build(
-            self.build_path() / "include/world_map.h",
+            self.build_path() / "include/gen/world_map.h",
             [Path("src/gen/world_map.xml")],
             "world_map",
         )
 
         build(
-            self.build_path() / "include/item_entity_scripts.h",
-            [Path("src/gen/item_entity_scripts.xml")],
-            "item_entity_scripts",
-        )
-
-        build(
-            self.build_path() / "include/item_hud_scripts.h",
+            self.build_path() / "include/gen/item_hud_scripts.h",
             [Path("src/gen/item_hud_scripts.xml")],
             "item_hud_scripts",
         )
 
         build(
-            self.build_path() / "include/item_hud_scripts_table.h",
-            [Path("src/gen/item_hud_scripts.xml")],
-            "item_hud_table",
-        )
-
-        build(
-            self.build_path() / "include/item_table.h",
+            self.build_path() / "include/gen/item_data.h",
             [
                 Path("src/gen/item_table.yaml"),
                 Path("src/gen/item_entity_scripts.xml"),

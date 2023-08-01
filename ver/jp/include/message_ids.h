@@ -1,6 +1,7 @@
 #ifndef _MESSAGE_IDS_JP_H_
 #define _MESSAGE_IDS_JP_H_
 
+#define MSG_NONE MESSAGE_ID(0x00, 0x000)
 #define MSG_Menus_Party_Goombario MESSAGE_ID(0x20, 0x00E)
 #define MSG_Menus_Party_Kooper MESSAGE_ID(0x20, 0x00F)
 #define MSG_Menus_Party_Bombette MESSAGE_ID(0x20, 0x010)
