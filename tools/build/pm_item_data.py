@@ -120,10 +120,11 @@ def generate_item_enum(fout: TextIOWrapper, items: List[ItemEntry]):
     fout.write("#define ITEM_NUM_KEYS (ITEM_LAST_KEY - ITEM_FIRST_KEY + 1)\n")
     fout.write("#define ITEM_NUM_CONSUMABLES (ITEM_LAST_CONSUMABLE - ITEM_FIRST_CONSUMABLE + 1)\n")
     fout.write("\n")
-    
+
     fout.write("#define IS_ITEM(itemID) (itemID >= ITEM_FIRST_KEY && itemID <= ITEM_LAST_CONSUMABLE)\n")
     fout.write("#define IS_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)\n")
     fout.write("\n")
+
 
 class ItemHudScriptEntry:
     def __init__(self, script):
