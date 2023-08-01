@@ -49,7 +49,7 @@ EvtScript N(EVS_KootFavorCheck_Luigi) = {
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_CH0_0105)
     EVT_WAIT(10)
-    EVT_SET(LVar0, ITEM_KOOT_LUIGIS_AUTOGRAPH)
+    EVT_SET(LVar0, ITEM_KOOT_LUIGI_AUTOGRAPH)
     EVT_SET(LVar1, 1)
     EVT_EXEC_WAIT(N(GiveItemReward))
     EVT_CALL(AddKeyItem, LVar0)

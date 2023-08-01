@@ -6,6 +6,6 @@ API_CALLABLE(N(GetItemName)) {
     s32 inOutVar = *args++;
     s32 itemID = evt_get_variable(script, inOutVar);
 
-    evt_set_variable(script, inOutVar, LOOKUP_ITEM(itemID).nameMsg);
+    evt_set_variable(script, inOutVar, gItemTable[itemID & ~0xF0000].nameMsg);
     return ApiStatus_DONE2;
 }

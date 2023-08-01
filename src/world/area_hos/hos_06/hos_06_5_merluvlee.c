@@ -25,7 +25,7 @@ typedef struct BadgeHint {
 #define BADGE_REQ_MERLOW_SHOP 10002
 
 BadgeHint N(BadgeHintData)[] = {
-    { MSG_MerluvleeHint_JumpCharge,       ITEM_BOOTS_CHARGE,   STORY_CH3_STAR_SPRIT_DEPARTED },
+    { MSG_MerluvleeHint_JumpCharge,       ITEM_JUMP_CHARGE,   STORY_CH3_STAR_SPRIT_DEPARTED },
     { MSG_MerluvleeHint_SuperJumpCharge,  ITEM_S_JUMP_CHG,     STORY_CH6_ARRIVED_AT_FLOWER_FIELDS },
     { MSG_MerluvleeHint_ShrinkStomp,      ITEM_SHRINK_STOMP,   STORY_CH1_DEFEATED_JR_TROOPA },
     { MSG_MerluvleeHint_Multibounce,      ITEM_MULTIBOUNCE,    STORY_CH1_DEFEATED_JR_TROOPA },
@@ -689,7 +689,7 @@ EvtScript N(EVS_KootCheckBall_Merluvlee) = {
         EVT_CHOOSE_KEY_ITEM_FROM(N(CrystalBallItems))
         EVT_IF_NE(LVar0, -1)
             EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0049)
-            EVT_GIVE_KEY_REWARD(ITEM_KOOT_MERLUVLEES_AUTOGRAPH)
+            EVT_GIVE_KEY_REWARD(ITEM_KOOT_MERLUVLEE_AUTOGRAPH)
             EVT_SET(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
         EVT_ELSE
             EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)

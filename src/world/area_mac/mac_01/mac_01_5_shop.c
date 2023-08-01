@@ -153,7 +153,7 @@ ShopItemData N(RowfBadgeInventory)[] = {
     { .itemID = ITEM_DODGE_MASTER,   .price = 100, .descMsg = MSG_ItemShopDesc_DodgeMaster },
     { .itemID = ITEM_SLEEP_STOMP,    .price =  75, .descMsg = MSG_ItemShopDesc_SleepStomp },
     { .itemID = ITEM_DOUBLE_DIP,     .price = 100, .descMsg = MSG_ItemShopDesc_DoubleDip },
-    { .itemID = ITEM_BOOTS_CHARGE,   .price =  50, .descMsg = MSG_ItemShopDesc_JumpCharge },
+    { .itemID = ITEM_JUMP_CHARGE,   .price =  50, .descMsg = MSG_ItemShopDesc_JumpCharge },
     { .itemID = ITEM_SPIN_SMASH,     .price =  75, .descMsg = MSG_ItemShopDesc_SpinSmash },
     { .itemID = ITEM_GROUP_FOCUS,    .price = 100, .descMsg = MSG_ItemShopDesc_GroupFocus },
     { .itemID = ITEM_ALLOR_NOTHING,  .price = 100, .descMsg = MSG_ItemShopDesc_AllorNothing },

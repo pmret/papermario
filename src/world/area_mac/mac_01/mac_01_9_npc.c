@@ -70,14 +70,14 @@ EvtScript N(EVS_LetterReward_Merlon) = {
 };
 
 s32 N(LetterList_MinhT)[] = {
-    ITEM_LETTER_TO_MINHT,
+    ITEM_LETTER_TO_MINH_T,
     ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_MinhT) = {
     EVT_CALL(N(LetterDelivery_Init),
         NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle,
-        ITEM_LETTER_TO_MINHT, ITEM_NONE,
+        ITEM_LETTER_TO_MINH_T, ITEM_NONE,
         MSG_MAC_Plaza_0078, MSG_MAC_Plaza_0079, MSG_MAC_Plaza_007A, MSG_MAC_Plaza_007B,
         EVT_PTR(N(LetterList_MinhT)))
     EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))

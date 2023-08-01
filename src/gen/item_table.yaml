@@ -1,4 +1,4 @@
-- Nothing:
+- None:
     category: NONE
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
@@ -793,7 +793,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter01:
+- UnusedLetter_1:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter
@@ -808,7 +808,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter01:
+- LetterToMerlon:
     category: KEY
     nameMsg: MSG_ItemName_Letter01
     fullDescMsg: MSG_ItemFullDesc_Letter01
@@ -823,7 +823,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter02:
+- LetterToGoompa:
     category: KEY
     nameMsg: MSG_ItemName_Letter02
     fullDescMsg: MSG_ItemFullDesc_Letter02
@@ -838,7 +838,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter03:
+- LetterToMortT:
     category: KEY
     nameMsg: MSG_ItemName_Letter03
     fullDescMsg: MSG_ItemFullDesc_Letter03
@@ -853,7 +853,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter04:
+- LetterToRussT:
     category: KEY
     nameMsg: MSG_ItemName_Letter04
     fullDescMsg: MSG_ItemFullDesc_Letter04
@@ -868,7 +868,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter05:
+- LetterToMayorPenguin:
     category: KEY
     nameMsg: MSG_ItemName_Letter05
     fullDescMsg: MSG_ItemFullDesc_Letter05
@@ -883,7 +883,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter06:
+- LetterToMerlow:
     category: KEY
     nameMsg: MSG_ItemName_Letter06
     fullDescMsg: MSG_ItemFullDesc_Letter06
@@ -898,7 +898,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter07:
+- LetterToFiceT:
     category: KEY
     nameMsg: MSG_ItemName_Letter07
     fullDescMsg: MSG_ItemFullDesc_Letter07
@@ -913,7 +913,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter08:
+- LetterToNomadimouse:
     category: KEY
     nameMsg: MSG_ItemName_Letter08
     fullDescMsg: MSG_ItemFullDesc_Letter08
@@ -928,7 +928,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter09:
+- LetterToMinhT:
     category: KEY
     nameMsg: MSG_ItemName_Letter09
     fullDescMsg: MSG_ItemFullDesc_Letter09
@@ -943,7 +943,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter02:
+- UnusedLetter_2:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter02
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter02
@@ -958,7 +958,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter10:
+- LetterChainGoompapa_1:
     category: KEY
     nameMsg: MSG_ItemName_Letter10
     fullDescMsg: MSG_ItemFullDesc_Letter10
@@ -973,7 +973,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter11:
+- LetterToIgor:
     category: KEY
     nameMsg: MSG_ItemName_Letter11
     fullDescMsg: MSG_ItemFullDesc_Letter11
@@ -988,7 +988,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter03:
+- UnusedLetter_3:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter03
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter03
@@ -1003,7 +1003,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter04:
+- UnusedLetter_4:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter04
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter04
@@ -1018,7 +1018,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter05:
+- UnusedLetter_5:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter05
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter05
@@ -1033,7 +1033,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter12:
+- LetterChainFranky:
     category: KEY
     nameMsg: MSG_ItemName_Letter12
     fullDescMsg: MSG_ItemFullDesc_Letter12
@@ -1048,7 +1048,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter13:
+- LetterChainMussT:
     category: KEY
     nameMsg: MSG_ItemName_Letter13
     fullDescMsg: MSG_ItemFullDesc_Letter13
@@ -1063,7 +1063,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter14:
+- LetterChainKoover_1:
     category: KEY
     nameMsg: MSG_ItemName_Letter14
     fullDescMsg: MSG_ItemFullDesc_Letter14
@@ -1078,7 +1078,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter15:
+- LetterChainFishmael:
     category: KEY
     nameMsg: MSG_ItemName_Letter15
     fullDescMsg: MSG_ItemFullDesc_Letter15
@@ -1093,7 +1093,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter16:
+- LetterChainKoover_2:
     category: KEY
     nameMsg: MSG_ItemName_Letter16
     fullDescMsg: MSG_ItemFullDesc_Letter16
@@ -1108,7 +1108,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter17:
+- LetterChainMrE:
     category: KEY
     nameMsg: MSG_ItemName_Letter17
     fullDescMsg: MSG_ItemFullDesc_Letter17
@@ -1123,7 +1123,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter18:
+- LetterChainMissT:
     category: KEY
     nameMsg: MSG_ItemName_Letter18
     fullDescMsg: MSG_ItemFullDesc_Letter18
@@ -1138,7 +1138,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter19:
+- LetterChainLittleMouser:
     category: KEY
     nameMsg: MSG_ItemName_Letter19
     fullDescMsg: MSG_ItemFullDesc_Letter19
@@ -1153,7 +1153,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter06:
+- UnusedLetter_6:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter06
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter06
@@ -1168,7 +1168,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter20:
+- LetterChainDaneT_1:
     category: KEY
     nameMsg: MSG_ItemName_Letter20
     fullDescMsg: MSG_ItemFullDesc_Letter20
@@ -1183,7 +1183,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter21:
+- LetterChainYoshiKid:
     category: KEY
     nameMsg: MSG_ItemName_Letter21
     fullDescMsg: MSG_ItemFullDesc_Letter21
@@ -1198,7 +1198,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter22:
+- LetterChainDaneT_2:
     category: KEY
     nameMsg: MSG_ItemName_Letter22
     fullDescMsg: MSG_ItemFullDesc_Letter22
@@ -1213,7 +1213,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter23:
+- LetterChainFrostT:
     category: KEY
     nameMsg: MSG_ItemName_Letter23
     fullDescMsg: MSG_ItemFullDesc_Letter23
@@ -1228,7 +1228,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter24:
+- LetterChainGoompapa_2:
     category: KEY
     nameMsg: MSG_ItemName_Letter24
     fullDescMsg: MSG_ItemFullDesc_Letter24
@@ -1258,7 +1258,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Letter25:
+- LetterToKolorado:
     category: KEY
     nameMsg: MSG_ItemName_Letter25
     fullDescMsg: MSG_ItemFullDesc_Letter25
@@ -1273,7 +1273,7 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- UnusedLetter07:
+- UnusedLetter_7:
     category: KEY
     nameMsg: MSG_ItemName_UnusedLetter
     fullDescMsg: MSG_ItemFullDesc_UnusedLetter
@@ -3643,7 +3643,7 @@
     moveID: MOVE_FEELING_FINE
     potencyA: 0
     potencyB: 0
-- AttackFXA:
+- AttackFX_A:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXA
     fullDescMsg: MSG_ItemFullDesc_AttackFXA
@@ -4873,7 +4873,7 @@
     moveID: MOVE_PEEKABOO
     potencyA: 0
     potencyB: 0
-- AttackFXD:
+- AttackFX_D:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXD
     fullDescMsg: MSG_ItemFullDesc_AttackFXD
@@ -4888,7 +4888,7 @@
     moveID: MOVE_ATTACK_FX_D
     potencyA: 0
     potencyB: 0
-- AttackFXB:
+- AttackFX_B:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXB
     fullDescMsg: MSG_ItemFullDesc_AttackFXB
@@ -4903,7 +4903,7 @@
     moveID: MOVE_ATTACK_FX_B
     potencyA: 0
     potencyB: 0
-- AttackFXE:
+- AttackFX_E:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXE
     fullDescMsg: MSG_ItemFullDesc_AttackFXE
@@ -4918,7 +4918,7 @@
     moveID: MOVE_ATTACK_FX_E
     potencyA: 0
     potencyB: 0
-- AttackFXC:
+- AttackFX_C:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXC
     fullDescMsg: MSG_ItemFullDesc_AttackFXC
@@ -4933,7 +4933,7 @@
     moveID: MOVE_ATTACK_FX_C
     potencyA: 0
     potencyB: 0
-- AttackFXF:
+- AttackFX_F:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5053,7 +5053,7 @@
     moveID: MOVE_HEALTHY_HEALTHY
     potencyA: 0
     potencyB: 0
-- AttackFXF2:
+- AttackFX_F2:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5068,7 +5068,7 @@
     moveID: MOVE_ATTACK_FX_F
     potencyA: 0
     potencyB: 0
-- AttackFXF3:
+- AttackFX_F3:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5083,7 +5083,7 @@
     moveID: MOVE_ATTACK_FX_F
     potencyA: 0
     potencyB: 0
-- AttackFXF4:
+- AttackFX_F4:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5098,7 +5098,7 @@
     moveID: MOVE_ATTACK_FX_F
     potencyA: 0
     potencyB: 0
-- AttackFXF5:
+- AttackFX_F5:
     category: BADGE
     nameMsg: MSG_ItemName_AttackFXF
     fullDescMsg: MSG_ItemFullDesc_AttackFXF
@@ -5261,13 +5261,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- CakeBaked:
+- CakeBare:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: CakeBaked
-    itemEntity: CakeBaked
+    hudElement: CakeBare
+    itemEntity: CakeBare
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5331,13 +5331,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- CakeIcing:
+- CakeWithIcing:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: CakeIcing
-    itemEntity: CakeIcing
+    hudElement: CakeWithIcing
+    itemEntity: CakeWithIcing
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5345,13 +5345,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- CakeBerries:
+- CakeWithBerries:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: CakeBerries
-    itemEntity: CakeBerries
+    hudElement: CakeWithBerries
+    itemEntity: CakeWithBerries
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]

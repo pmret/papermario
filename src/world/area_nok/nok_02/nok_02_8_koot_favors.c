@@ -61,7 +61,7 @@ KootFavor N(KootFavorData)[] = {
         .unlockedFlag = GF_NOK02_KootFavor04_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor04_GaveUp,
         .completeFlag = GF_NOK02_KootFavor04_Complete,
-        .requiredItem = ITEM_KOOT_LUIGIS_AUTOGRAPH,
+        .requiredItem = ITEM_KOOT_LUIGI_AUTOGRAPH,
     },
     [KOOT_FAVOR_CH3_1] {
         .requestMsg = MSG_KootFavor_000F,
@@ -88,7 +88,7 @@ KootFavor N(KootFavorData)[] = {
         .unlockedFlag = GF_NOK02_KootFavor07_Unlocked,
         .gaveUpFlag   = GF_NOK02_KootFavor07_GaveUp,
         .completeFlag = GF_NOK02_KootFavor07_Complete,
-        .requiredItem = ITEM_KOOT_MERLUVLEES_AUTOGRAPH,
+        .requiredItem = ITEM_KOOT_MERLUVLEE_AUTOGRAPH,
     },
     [KOOT_FAVOR_CH4_1] {
         .requestMsg = MSG_KootFavor_0018,

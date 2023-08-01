@@ -1,12 +1,12 @@
 - { priority: 320, name: Present, template: STANDARD_ITEM, icon: key/Gift }
 - { priority: 321, name: CakeDone, template: STANDARD_ITEM, icon: key/CakeDone }
-- { priority: 322, name: CakeBaked, template: STANDARD_ITEM, icon: key/CakeBaked }
+- { priority: 322, name: CakeBare, template: STANDARD_ITEM, icon: key/CakeBare }
 - { priority: 323, name: CakePan, template: STANDARD_ITEM, icon: key/CakePan }
 - { priority: 324, name: CakeBatter, template: STANDARD_ITEM, icon: key/CakeBatter }
 - { priority: 325, name: CakeBowl, template: STANDARD_ITEM, icon: key/CakeBowl }
-- { priority: 326, name: CakeMixed, template: STANDARD_ITEM, icon: key/CakeMix }
-- { priority: 327, name: CakeIcing, template: STANDARD_ITEM, icon: key/CakeIcing }
-- { priority: 328, name: CakeBerries, template: STANDARD_ITEM, icon: key/CakeBerries }
+- { priority: 326, name: CakeMixed, template: STANDARD_ITEM, icon: key/CakeMixed }
+- { priority: 327, name: CakeWithIcing, template: STANDARD_ITEM, icon: key/CakeWithIcing }
+- { priority: 328, name: CakeWithBerries, template: STANDARD_ITEM, icon: key/CakeWithBerries }
 - { priority: 329, name: HES_MoveDiamond, pair: true }
 - { priority: 330, name: Hammer1, template: STANDARD_ITEM, icon: Hammer1 }
 - { priority: 331, name: Hammer2, template: STANDARD_ITEM, icon: Hammer2 }

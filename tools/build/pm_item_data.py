@@ -81,6 +81,50 @@ def generate_item_table(fout: TextIOWrapper, items: List[ItemEntry], hs_map: Dic
     fout.write("\n")
 
 
+def generate_item_enum(fout: TextIOWrapper, items: List[ItemEntry]):
+    fout.write("enum ItemIDs {\n")
+
+    item_enum: List[str] = []
+
+    for idx, item in enumerate(items):
+        # FireFlower     -> FIRE_FLOWER
+        # POWBlock       -> POW_BLOCK
+        # MagicalSeed1   -> MAGICAL_SEED1
+        # UnusedLetter_4 -> UNUSED_LETTER_4
+        # etc
+        name = "ITEM_" + re.sub("((?<=[a-z0-9])[A-Z]|(?!^)(?<!_)[A-Z](?=[a-z]))", r"_\1", item.name).upper()
+        item_enum.append(name)
+        fout.write(f"    {name:39} = 0x{idx:03X},\n")
+
+    fout.write("};\n")
+    fout.write("\n")
+
+    # determine itemID ranges for each category
+    min_cat: Dict[str, int] = {}
+    max_cat: Dict[str, int] = {}
+
+    for idx, item in enumerate(items):
+        cat = item.category
+        if cat not in min_cat:
+            min_cat[cat] = idx
+        max_cat[cat] = idx
+
+    fout.write(f"#define ITEM_FIRST_KEY              {item_enum[min_cat['KEY']]}\n")
+    fout.write(f"#define ITEM_LAST_KEY               {item_enum[max_cat['KEY']]}\n")
+    fout.write(f"#define ITEM_FIRST_CONSUMABLE       {item_enum[min_cat['CONSUMABLE']]}\n")
+    fout.write(f"#define ITEM_LAST_CONSUMABLE        {item_enum[max_cat['CONSUMABLE']]}\n")
+    fout.write(f"#define ITEM_FIRST_BADGE            {item_enum[min_cat['BADGE']]}\n")
+    fout.write(f"#define ITEM_LAST_BADGE             {item_enum[max_cat['BADGE']]}\n")
+    fout.write("\n")
+
+    fout.write("#define ITEM_NUM_KEYS (ITEM_LAST_KEY - ITEM_FIRST_KEY + 1)\n")
+    fout.write("#define ITEM_NUM_CONSUMABLES (ITEM_LAST_CONSUMABLE - ITEM_FIRST_CONSUMABLE + 1)\n")
+    fout.write("\n")
+    
+    fout.write("#define IS_ITEM(itemID) (itemID >= ITEM_FIRST_KEY && itemID <= ITEM_LAST_CONSUMABLE)\n")
+    fout.write("#define IS_BADGE(itemID) (itemID >= ITEM_FIRST_BADGE && itemID <= ITEM_LAST_BADGE)\n")
+    fout.write("\n")
+
 class ItemHudScriptEntry:
     def __init__(self, script):
         self.name = script.get("name", None)
@@ -234,7 +278,8 @@ def generate_item_icon_tables(fout: TextIOWrapper, items: List[ItemEntry]):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates item table")
-    parser.add_argument("header_path", help="output header file to generate")
+    parser.add_argument("out_data", help="output header file to generate containing the data")
+    parser.add_argument("out_enum", help="output header file to generate containing the enum")
     parser.add_argument("items_yaml", type=Path, help="input yaml file path")
     parser.add_argument("ies_yaml", type=Path, help="input yaml file path for item entity scripts")
     parser.add_argument("hes_yaml", type=Path, help="input yaml file path for item hud element scripts")
@@ -257,17 +302,7 @@ if __name__ == "__main__":
     }
     items.sort(key=lambda x: CATEGORY_ORDER.get(x.category, 999))
 
-    # determine itemID ranges for each category
-    min_cat: Dict[str, int] = {}
-    max_cat: Dict[str, int] = {}
-
-    for idx, item in enumerate(items):
-        cat = item.category
-        if cat not in min_cat:
-            min_cat[cat] = idx
-        max_cat[cat] = idx
-
-    with open(args.header_path, "w") as fout:
+    with open(args.out_data, "w") as fout:
         fout.write("/* This file is auto-generated. Do not edit. */\n")
         fout.write('#include "common.h"\n')
         fout.write('#include "message_ids.h"\n')
@@ -291,3 +326,6 @@ if __name__ == "__main__":
         generate_item_entity_scripts(fout, args.ies_yaml)
         generate_item_entity_scripts_table(fout, items)
         generate_item_icon_tables(fout, items)
+
+    with open(args.out_enum, "w") as fout:
+        generate_item_enum(fout, items)

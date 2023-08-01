@@ -565,7 +565,10 @@ class Configure:
         )
 
         build(
-            self.build_path() / "include/gen/item_data.h",
+            [
+                self.build_path() / "include/gen/item_data.h",
+                self.build_path() / "include/gen/item_enum.h",
+            ],
             [
                 Path("src/gen/item_table.yaml"),
                 Path("src/gen/item_entity_scripts.yaml"),

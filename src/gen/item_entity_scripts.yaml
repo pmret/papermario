@@ -1,13 +1,13 @@
 - { name: Placeholder, template: BASIC, icon: key/Gift }
 - { name: Present, template: BASIC, icon: key/Gift }
 - { name: CakeDone, template: BASIC, icon: key/CakeDone }
-- { name: CakeBaked, template: BASIC, icon: key/CakeBaked }
+- { name: CakeBare, template: BASIC, icon: key/CakeBare }
 - { name: CakePan, template: BASIC, icon: key/CakePan }
 - { name: CakeBatter, template: BASIC, icon: key/CakeBatter }
 - { name: CakeBowl, template: BASIC, icon: key/CakeBowl }
-- { name: CakeMixed, template: BASIC, icon: key/CakeMix }
-- { name: CakeIcing, template: BASIC, icon: key/CakeIcing }
-- { name: CakeBerries, template: BASIC, icon: key/CakeBerries }
+- { name: CakeMixed, template: BASIC, icon: key/CakeMixed }
+- { name: CakeWithIcing, template: BASIC, icon: key/CakeWithIcing }
+- { name: CakeWithBerries, template: BASIC, icon: key/CakeWithBerries }
 - { name: Hammer1, template: BASIC, icon: Hammer1 }
 - { name: Hammer2, template: BASIC, icon: Hammer2 }
 - { name: Hammer3, template: BASIC, icon: Hammer3 }
