@@ -273,8 +273,8 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "item_hud_map",
-        command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py mapping $in $out",
+        "item_table",
+        command=f"$python {BUILD_TOOLS}/pm_item_table.py $out $in",
     )
 
     ninja.rule(
@@ -598,9 +598,13 @@ class Configure:
         )
 
         build(
-            self.build_path() / "include/item_hud_scripts_mapping.h",
-            [Path("src/gen/item_hud_scripts.xml")],
-            "item_hud_map",
+            self.build_path() / "include/item_table.h",
+            [
+                Path("src/gen/item_table.yaml"),
+                Path("src/gen/item_entity_scripts.xml"),
+                Path("src/gen/item_hud_scripts.xml"),
+            ],
+            "item_table",
         )
 
         # Build objects

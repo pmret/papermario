@@ -3,26 +3,25 @@
 #include "sprite/player.h"
 
 AnimID IdlePeachAnims[] = {
-    ANIM_Peach1_Idle, // none
-    ANIM_Peach1_HoldCream, // cream
-    ANIM_Peach1_HoldStrawberry, // strawberry
-    ANIM_Peach1_HoldButter, // butter
-    ANIM_Peach1_HoldCleanser, // cleanser
-    ANIM_Peach1_HoldWater, // water
-    ANIM_Peach1_HoldMilk, // milk
-    ANIM_Peach1_HoldFlour, // flour
-    ANIM_Peach1_HoldEgg, // egg
-    ANIM_Peach1_HoldCompleteCake, // complete cake
-    ANIM_Peach1_HoldCakeBowl, // cake bowl
-    ANIM_Peach1_HoldCakeMixed, // cake mixed
-    ANIM_Peach1_HoldCakePan, // cake pan
-    ANIM_Peach1_HoldCakeBatter, // cake batter
-    ANIM_Peach1_HoldBareCake, // cake bare
-    ANIM_Peach1_HoldSalt, // salt
-    ANIM_Peach1_HoldSugar, // sugar
-    ANIM_Peach1_HoldIcingCake, // cake with icing
-    ANIM_Peach1_HoldBerryCake, // cake with berries
-    0x00000000,
+    [PEACH_BAKING_NONE]                 ANIM_Peach1_Idle,
+    [PEACH_BAKING_CREAM]                ANIM_Peach1_HoldCream,
+    [PEACH_BAKING_STRAWBERRY]           ANIM_Peach1_HoldStrawberry,
+    [PEACH_BAKING_BUTTER]               ANIM_Peach1_HoldButter,
+    [PEACH_BAKING_CLEANSER]             ANIM_Peach1_HoldCleanser,
+    [PEACH_BAKING_WATER]                ANIM_Peach1_HoldWater,
+    [PEACH_BAKING_MILK]                 ANIM_Peach1_HoldMilk,
+    [PEACH_BAKING_FLOUR]                ANIM_Peach1_HoldFlour,
+    [PEACH_BAKING_EGG]                  ANIM_Peach1_HoldEgg,
+    [PEACH_BAKING_COMPLETE_CAKE]        ANIM_Peach1_HoldCompleteCake,
+    [PEACH_BAKING_CAKE_BOWL]            ANIM_Peach1_HoldCakeBowl,
+    [PEACH_BAKING_CAKE_MIXED]           ANIM_Peach1_HoldCakeMixed,
+    [PEACH_BAKING_CAKE_PAN]             ANIM_Peach1_HoldCakePan,
+    [PEACH_BAKING_CAKE_BATTER]          ANIM_Peach1_HoldCakeBatter,
+    [PEACH_BAKING_CAKE_BARE]            ANIM_Peach1_HoldBareCake,
+    [PEACH_BAKING_SALT]                 ANIM_Peach1_HoldSalt,
+    [PEACH_BAKING_SUGAR]                ANIM_Peach1_HoldSugar,
+    [PEACH_BAKING_CAKE_WITH_ICING]      ANIM_Peach1_HoldIcingCake,
+    [PEACH_BAKING_CAKE_WITH_BERRIES]    ANIM_Peach1_HoldBerryCake,
 };
 
 enum {

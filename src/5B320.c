@@ -299,7 +299,7 @@ s32 pad_after_item_hudscripts[] = {
     0x00000000, 0x00000000
 };
 
-#include "item_table.inc.c"
+#include "item_table.h"
 
 #include "item_hud_scripts_table.h"
 

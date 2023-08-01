@@ -1,6 +1,6 @@
 <ItemEntityScripts>
-    <IScript name="Jump" template="BASIC" icon="key/Gift"/>
-    <IScript name="CompleteCake" template="BASIC" icon="key/Gift"/>
+    <IScript name="Placeholder" template="BASIC" icon="key/Gift"/>
+    <IScript name="Present" template="BASIC" icon="key/Gift"/>
     <IScript name="CakeDone" template="BASIC" icon="key/CakeDone"/>
     <IScript name="CakeBaked" template="BASIC" icon="key/CakeBaked"/>
     <IScript name="CakePan" template="BASIC" icon="key/CakePan"/>
