@@ -258,6 +258,11 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "move_data",
+        command=f"$python {BUILD_TOOLS}/pm_move_data.py $out $in",
+    )
+
+    ninja.rule(
         "item_data",
         command=f"$python {BUILD_TOOLS}/pm_item_data.py $out $in",
     )
@@ -562,6 +567,15 @@ class Configure:
             self.build_path() / "include/gen/world_map.h",
             [Path("src/gen/world_map.xml")],
             "world_map",
+        )
+
+        build(
+            [
+                self.build_path() / "include/gen/move_data.h",
+                self.build_path() / "include/gen/move_enum.h",
+            ],
+            [Path("src/gen/move_table.yaml")],
+            "move_data",
         )
 
         build(

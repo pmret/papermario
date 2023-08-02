@@ -450,7 +450,7 @@ IconHudScriptPair gPartnerIconHudScripts[] = {
     { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
 };
 
-#include "move_table.inc.c"
+#include "gen/move_data.h"
 
 //TODO padding
 s32 pad_after_move_table[] = {

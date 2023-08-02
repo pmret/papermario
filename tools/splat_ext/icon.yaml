@@ -1,5 +1,5 @@
   # valid icon types are:
-  #   single    ci4 image followed by one palette
+  #   solo      ci4 image followed by one palette
   #   pair      ci4 image followed by two palettes; the second will be called .disabled 
   #   rgba16    rgba image; used by one strange entry
 

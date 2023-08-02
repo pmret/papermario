@@ -329,4 +329,7 @@ if __name__ == "__main__":
         generate_item_icon_tables(fout, items)
 
     with open(args.out_enum, "w") as fout:
+        fout.write("/* This file is auto-generated. Do not edit. */\n")
+        fout.write("\n")
+
         generate_item_enum(fout, items)
