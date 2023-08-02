@@ -8,13 +8,13 @@
 - { priority: 327, name: CakeWithIcing, template: STANDARD_ITEM, icon: key/CakeWithIcing }
 - { priority: 328, name: CakeWithBerries, template: STANDARD_ITEM, icon: key/CakeWithBerries }
 - { priority: 329, name: HES_MoveDiamond, pair: true }
-- { priority: 330, name: Hammer1, template: STANDARD_ITEM, icon: Hammer1 }
-- { priority: 331, name: Hammer2, template: STANDARD_ITEM, icon: Hammer2 }
-- { priority: 332, name: Hammer3, template: STANDARD_ITEM, icon: Hammer3 }
-- { priority: 333, name: Boots1, template: STANDARD_ITEM, icon: Boots1 }
-- { priority: 334, name: Boots2, template: STANDARD_ITEM, icon: Boots2 }
-- { priority: 335, name: Boots3, template: STANDARD_ITEM, icon: Boots3 }
-- { priority: 336, name: Items, template: STANDARD_ITEM, icon: Items }
+- { priority: 330, name: MenuHammer1, template: STANDARD_ITEM, icon: menu/hammer_1 }
+- { priority: 331, name: MenuHammer2, template: STANDARD_ITEM, icon: menu/hammer_2 }
+- { priority: 332, name: MenuHammer3, template: STANDARD_ITEM, icon: menu/hammer_3 }
+- { priority: 333, name: MenuBoots1, template: STANDARD_ITEM, icon: menu/boots_1 }
+- { priority: 334, name: MenuBoots2, template: STANDARD_ITEM, icon: menu/boots_2 }
+- { priority: 335, name: MenuBoots3, template: STANDARD_ITEM, icon: menu/boots_3 }
+- { priority: 336, name: MenuItems, template: STANDARD_ITEM, icon: menu/items }
 - { priority: 51, name: HeartPiece, template: HEART_PIECE }
 - { priority: 49, name: Heart, template: HEART }
 - { priority: 50, name: Coin, template: COIN }
@@ -22,13 +22,13 @@
 - { priority: 53, name: HeartPoint, template: HEART_POINT }
 - { priority: 54, name: FlowerPoint, template: FLOWER_POINT }
 - { priority: 55, name: StarPiece, template: STAR_PIECE }
-- { priority: 56, name: GearBoots1, template: STANDARD_ITEM, icon: key/gear_boots_1 }
-- { priority: 57, name: GearBoots2, template: STANDARD_ITEM, icon: key/gear_boots_2 }
-- { priority: 58, name: GearBoots3, template: STANDARD_ITEM, icon: key/gear_boots_3 }
-- { priority: 59, name: GearHammer1, template: STANDARD_ITEM, icon: key/gear_hammer_1 }
-- { priority: 60, name: GearHammer2, template: STANDARD_ITEM, icon: key/gear_hammer_2 }
-- { priority: 61, name: GearHammer3, template: STANDARD_ITEM, icon: key/gear_hammer_3 }
-- { priority: 62, name: LuckyStar, template: STANDARD_ITEM, icon: key/gear_lucky_star }
+- { priority: 56, name: GearBoots1, template: STANDARD_ITEM, icon: gear/boots_1 }
+- { priority: 57, name: GearBoots2, template: STANDARD_ITEM, icon: gear/boots_2 }
+- { priority: 58, name: GearBoots3, template: STANDARD_ITEM, icon: gear/boots_3 }
+- { priority: 59, name: GearHammer1, template: STANDARD_ITEM, icon: gear/hammer_1 }
+- { priority: 60, name: GearHammer2, template: STANDARD_ITEM, icon: gear/hammer_2 }
+- { priority: 61, name: GearHammer3, template: STANDARD_ITEM, icon: gear/hammer_3 }
+- { priority: 62, name: LuckyStar, template: STANDARD_ITEM, icon: gear/lucky_star }
 - { priority: 63, name: Map, template: STANDARD_ITEM, icon: key/map }
 - { priority: 64, name: KoopaFortressKey, template: STANDARD_ITEM, icon: key/key_koopa_fortress }
 - { priority: 65, name: RuinsKey, template: STANDARD_ITEM, icon: key/key_ruins }

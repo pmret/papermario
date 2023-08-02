@@ -20,7 +20,7 @@
     shortDescMsg: MSG_NONE
     hudElement: GearBoots1
     itemEntity: GearBoots1
-    icon: key/gear_boots_1
+    icon: gear/boots_1
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -35,7 +35,7 @@
     shortDescMsg: MSG_NONE
     hudElement: GearBoots2
     itemEntity: GearBoots2
-    icon: key/gear_boots_2
+    icon: gear/boots_2
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_2 ]
@@ -50,7 +50,7 @@
     shortDescMsg: MSG_NONE
     hudElement: GearBoots3
     itemEntity: GearBoots3
-    icon: key/gear_boots_3
+    icon: gear/boots_3
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_ENEMY ]
@@ -65,7 +65,7 @@
     shortDescMsg: MSG_NONE
     hudElement: GearHammer1
     itemEntity: GearHammer1
-    icon: key/gear_hammer_1
+    icon: gear/hammer_1
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -80,7 +80,7 @@
     shortDescMsg: MSG_NONE
     hudElement: GearHammer2
     itemEntity: GearHammer2
-    icon: key/gear_hammer_2
+    icon: gear/hammer_2
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_ENEMY ]
@@ -95,7 +95,7 @@
     shortDescMsg: MSG_NONE
     hudElement: GearHammer3
     itemEntity: GearHammer3
-    icon: key/gear_hammer_3
+    icon: gear/hammer_3
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_2 ]
@@ -110,7 +110,7 @@
     shortDescMsg: MSG_ItemShortDesc_LuckyStar
     hudElement: LuckyStar
     itemEntity: LuckyStar
-    icon: key/gear_lucky_star
+    icon: gear/lucky_star
     sellValue: -1
     sortValue: 0
     targetFlags: [ TARGET_FLAG_2 ]
@@ -5359,13 +5359,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Hammer1Icon:
+- MenuHammer1:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Hammer1
-    itemEntity: Hammer1
+    hudElement: MenuHammer1
+    itemEntity: MenuHammer1
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5373,13 +5373,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Hammer2Icon:
+- MenuHammer2:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Hammer2
-    itemEntity: Hammer2
+    hudElement: MenuHammer2
+    itemEntity: MenuHammer2
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5387,13 +5387,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Hammer3Icon:
+- MenuHammer3:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Hammer3
-    itemEntity: Hammer3
+    hudElement: MenuHammer3
+    itemEntity: MenuHammer3
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5401,13 +5401,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Boots1Icon:
+- MenuBoots1:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Boots1
-    itemEntity: Boots1
+    hudElement: MenuBoots1
+    itemEntity: MenuBoots1
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5415,13 +5415,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Boots2Icon:
+- MenuBoots2:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Boots2
-    itemEntity: Boots2
+    hudElement: MenuBoots2
+    itemEntity: MenuBoots2
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5429,13 +5429,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- Boots3Icon:
+- MenuBoots3:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Boots3
-    itemEntity: Boots3
+    hudElement: MenuBoots3
+    itemEntity: MenuBoots3
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]
@@ -5443,13 +5443,13 @@
     moveID: MOVE_NONE
     potencyA: 0
     potencyB: 0
-- ItemsIcon:
+- MenuItems:
     category: DUMMY
     nameMsg: MSG_NONE
     fullDescMsg: MSG_NONE
     shortDescMsg: MSG_NONE
-    hudElement: Items
-    itemEntity: Items
+    hudElement: MenuItems
+    itemEntity: MenuItems
     sellValue: 0
     sortValue: 0
     targetFlags: [ TARGET_FLAG_PLAYER ]

@@ -82,17 +82,17 @@ EvtScript N(EVS_802A3348) = {
         EVT_CASE_GT(FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(ITEM_NONE)
+                EVT_CASE_EQ(0)
                     EVT_CALL(StartRumble, 7)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.3))
                     EVT_END_THREAD
-                EVT_CASE_EQ(ITEM_BOOTS)
+                EVT_CASE_EQ(1)
                     EVT_CALL(StartRumble, 8)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.6))
                     EVT_END_THREAD
-                EVT_CASE_EQ(ITEM_SUPER_BOOTS)
+                EVT_CASE_EQ(2)
                     EVT_CALL(StartRumble, 9)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.9))
@@ -101,17 +101,17 @@ EvtScript N(EVS_802A3348) = {
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(ITEM_NONE)
+                EVT_CASE_EQ(0)
                     EVT_CALL(StartRumble, 7)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.3))
                     EVT_END_THREAD
-                EVT_CASE_EQ(ITEM_BOOTS)
+                EVT_CASE_EQ(1)
                     EVT_CALL(StartRumble, 8)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.6))
                     EVT_END_THREAD
-                EVT_CASE_EQ(ITEM_SUPER_BOOTS)
+                EVT_CASE_EQ(2)
                     EVT_CALL(StartRumble, 9)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.9))
@@ -130,11 +130,11 @@ EvtScript N(EVS_802A3348) = {
         EVT_CASE_GT(FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(ITEM_NONE)
+                EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
-                EVT_CASE_EQ(ITEM_BOOTS)
+                EVT_CASE_EQ(1)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
-                EVT_CASE_EQ(ITEM_SUPER_BOOTS)
+                EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarF, 48)
@@ -142,11 +142,11 @@ EvtScript N(EVS_802A3348) = {
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(ITEM_NONE)
+                EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
-                EVT_CASE_EQ(ITEM_BOOTS)
+                EVT_CASE_EQ(1)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
-                EVT_CASE_EQ(ITEM_SUPER_BOOTS)
+                EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarE, 32)
@@ -173,11 +173,11 @@ extern EvtScript N(EVS_802A3FD8);
 EvtScript N(EVS_UseMove0) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(ITEM_NONE)
+        EVT_CASE_EQ(0)
             EVT_EXEC_WAIT(N(EVS_802A3948))
-        EVT_CASE_EQ(ITEM_BOOTS)
+        EVT_CASE_EQ(1)
             EVT_EXEC_WAIT(N(EVS_802A3C90))
-        EVT_CASE_EQ(ITEM_SUPER_BOOTS)
+        EVT_CASE_EQ(2)
             EVT_EXEC_WAIT(N(EVS_802A3FD8))
     EVT_END_SWITCH
     EVT_RETURN

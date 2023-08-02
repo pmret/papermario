@@ -1,27 +1,27 @@
 #include "common.h"
 
 s32 N(hammer_icons)[] = {
-    ITEM_HAMMER1_ICON,
-    ITEM_HAMMER2_ICON,
-    ITEM_HAMMER3_ICON
+    ITEM_MENU_HAMMER1,
+    ITEM_MENU_HAMMER2,
+    ITEM_MENU_HAMMER3,
 };
 
 s32 N(hammer_text)[] = {
     BTL_MSG_HAMMER_DISABLED_1,
     BTL_MSG_HAMMER_DISABLED_2,
-    BTL_MSG_HAMMER_DISABLED_3
+    BTL_MSG_HAMMER_DISABLED_3,
 };
 
 s32 N(jump_icons)[] = {
-    ITEM_BOOTS1_ICON,
-    ITEM_BOOTS2_ICON,
-    ITEM_BOOTS3_ICON
+    ITEM_MENU_BOOTS1,
+    ITEM_MENU_BOOTS2,
+    ITEM_MENU_BOOTS3,
 };
 
 s32 N(jump_text)[] = {
     BTL_MSG_JUMP_DISABLED_1,
     BTL_MSG_JUMP_DISABLED_2,
-    BTL_MSG_JUMP_DISABLED_3
+    BTL_MSG_JUMP_DISABLED_3,
 };
 
 API_CALLABLE(N(DisableRandomAbility)) {
@@ -60,7 +60,7 @@ API_CALLABLE(N(DisableRandomAbility)) {
 
         case 2:
             battleStatus->itemLossTurns = turnsLost;
-            evt_set_variable(script, *args++, ITEM_ITEMS_ICON);
+            evt_set_variable(script, *args++, ITEM_MENU_ITEMS);
             evt_set_variable(script, *args++, BTL_MSG_ITEMS_DISABLED);
             break;
     }
