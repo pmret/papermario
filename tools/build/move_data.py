@@ -83,7 +83,7 @@ def generate_move_enum(fout: TextIOWrapper, moves: List[MoveEntry]):
 
     fout.write("#define STAR_POWER_INDEX(x) (x - MOVE_FOCUS)\n")
     fout.write("\n")
-    
+
     fout.write("#endif // MOVE_ENUM_H\n")
 
 
