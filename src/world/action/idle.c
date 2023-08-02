@@ -45,16 +45,16 @@ void action_update_idle(void) {
         return;
     }
 
-    playerStatus->currentStateTime++;
+    playerStatus->curStateTime++;
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
         wasMoving = TRUE;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
-        playerStatus->currentStateTime = 0;
+        playerStatus->curStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->peakJumpTime = 0;
-        playerStatus->currentSpeed = 0.0f;
+        playerStatus->curSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
@@ -83,7 +83,7 @@ void action_update_idle(void) {
             if (magnitude == 0.0f) {
                 playerData->idleFrameCounter++;
             } else {
-                playerStatus->currentStateTime = 0;
+                playerStatus->curStateTime = 0;
                 set_action_state(ACTION_STATE_WALK);
                 if (magnitude != 0.0f) {
                     playerStatus->targetYaw = angle;
@@ -102,10 +102,10 @@ void action_update_idle_peach(void) {
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
-        playerStatus->currentStateTime = 0;
+        playerStatus->curStateTime = 0;
         playerStatus->timeInAir = 0;
         playerStatus->peakJumpTime = 0;
-        playerStatus->currentSpeed = 0.0f;
+        playerStatus->curSpeed = 0.0f;
         playerStatus->flags &= ~PS_FLAG_AIRBORNE;
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
@@ -124,27 +124,27 @@ void action_update_idle_peach(void) {
             case SUBSTATE_IDLE_DEFAULT:
                 if (!(playerStatus->flags & (PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_INPUT_DISABLED))
                     && (playerStatus->peachItemHeld == 0)) {
-                    if (playerStatus->currentStateTime > 1800) {
+                    if (playerStatus->curStateTime > 1800) {
                         // begin first yawm
                         playerStatus->actionSubstate++;
                         suggest_player_anim_allow_backward(ANIM_Peach2_Yawn);
                         return;
                     }
-                    playerStatus->currentStateTime++;
+                    playerStatus->curStateTime++;
                 }
                 break;
             case SUBSTATE_IDLE_STRETCH:
                 // waiting for yawn to finish
                 if (playerStatus->animNotifyValue != 0) {
                     playerStatus->actionSubstate++;
-                    playerStatus->currentStateTime = 0;
+                    playerStatus->curStateTime = 0;
                     suggest_player_anim_allow_backward(ANIM_Peach1_Idle);
                 }
                 break;
             case SUBSTATE_DELAY_SLEEP:
                 // delay before next yawn and sleep
-                playerStatus->currentStateTime++;
-                if (playerStatus->currentStateTime > 200) {
+                playerStatus->curStateTime++;
+                if (playerStatus->curStateTime > 200) {
                     playerStatus->actionSubstate++;
                     suggest_player_anim_allow_backward(ANIM_Peach2_Yawn);
                 }
@@ -165,7 +165,7 @@ void action_update_idle_peach(void) {
     phys_update_interact_collider();
 
     if (magnitude != 0.0f) {
-        playerStatus->currentStateTime = 0;
+        playerStatus->curStateTime = 0;
         playerStatus->targetYaw = angle;
         set_action_state(ACTION_STATE_WALK);
     }

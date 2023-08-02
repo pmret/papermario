@@ -17,9 +17,9 @@ API_CALLABLE(N(NpcOrbitPlayerPos)) {
     npc = get_npc_unsafe(script->functionTemp[1]);
     switch (script->functionTemp[0]) {
         case 0:
-            npc->pos.x = playerStatus->position.x;
-            npc->pos.y = playerStatus->position.y;
-            npc->pos.z = playerStatus->position.z;
+            npc->pos.x = playerStatus->pos.x;
+            npc->pos.y = playerStatus->pos.y;
+            npc->pos.z = playerStatus->pos.z;
             npc->moveToPos.x =  script->functionTemp[3] * 3;
             npc->moveToPos.y = 3.0f;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
@@ -32,9 +32,9 @@ API_CALLABLE(N(NpcOrbitPlayerPos)) {
             }
             break;
         case 1:
-            npc->pos.x = playerStatus->position.x;
-            npc->pos.y = playerStatus->position.y;
-            npc->pos.z = playerStatus->position.z;
+            npc->pos.x = playerStatus->pos.x;
+            npc->pos.y = playerStatus->pos.y;
+            npc->pos.z = playerStatus->pos.z;
             npc->moveToPos.x = script->functionTemp[3] * 3;
             npc->moveToPos.y = 3.0f;
             add_vec2D_polar(
@@ -88,7 +88,7 @@ API_CALLABLE(N(SetHaloAlpha)) {
 }
 
 API_CALLABLE(N(ClearCurrentPartner)) {
-    gPlayerData.currentPartner = PARTNER_NONE;
+    gPlayerData.curPartner = PARTNER_NONE;
     return ApiStatus_DONE2;
 }
 

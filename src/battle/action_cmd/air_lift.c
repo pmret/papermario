@@ -157,7 +157,7 @@ void N(update)(void) {
                 }
             }
 
-            if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED && (battleStatus->currentButtonsPressed & BUTTON_A)) {
+            if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED && (battleStatus->curButtonsPressed & BUTTON_A)) {
                 if (actionCommandStatus->unk_5A != 0) {
                     s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                     s32 b = actionCommandStatus->unk_5A * 820;

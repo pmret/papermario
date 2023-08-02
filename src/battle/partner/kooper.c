@@ -36,26 +36,26 @@ API_CALLABLE(N(SlowDown)) {
     ActorState* partnerActorMovement = &partnerActor->state;
 
     if (isInitialCall) {
-        partnerActor->state.currentPos.x = partnerActor->currentPos.x;
-        partnerActor->state.currentPos.y = partnerActor->currentPos.y;
-        partnerActor->state.currentPos.z = partnerActor->currentPos.z;
+        partnerActor->state.curPos.x = partnerActor->curPos.x;
+        partnerActor->state.curPos.y = partnerActor->curPos.y;
+        partnerActor->state.curPos.z = partnerActor->curPos.z;
     }
 
-    add_xz_vec3f(&partnerActorMovement->currentPos, partnerActor->state.speed, partnerActor->state.angle);
+    add_xz_vec3f(&partnerActorMovement->curPos, partnerActor->state.speed, partnerActor->state.angle);
 
     if (partnerActor->state.speed < 4.0f) {
-        play_movement_dust_effects(0, partnerActor->state.currentPos.x, partnerActor->state.currentPos.y,
-                                   partnerActor->state.currentPos.z, partnerActor->state.angle);
+        play_movement_dust_effects(0, partnerActor->state.curPos.x, partnerActor->state.curPos.y,
+                                   partnerActor->state.curPos.z, partnerActor->state.angle);
     } else {
-        play_movement_dust_effects(1, partnerActor->state.currentPos.x, partnerActor->state.currentPos.y,
-                                   partnerActor->state.currentPos.z, partnerActor->state.angle);
+        play_movement_dust_effects(1, partnerActor->state.curPos.x, partnerActor->state.curPos.y,
+                                   partnerActor->state.curPos.z, partnerActor->state.angle);
     }
 
     partnerActorMovement->speed = partnerActorMovement->speed / 1.5;
 
-    partnerActor->currentPos.x = partnerActorMovement->currentPos.x;
-    partnerActor->currentPos.y = partnerActorMovement->currentPos.y;
-    partnerActor->currentPos.z = partnerActorMovement->currentPos.z;
+    partnerActor->curPos.x = partnerActorMovement->curPos.x;
+    partnerActor->curPos.y = partnerActorMovement->curPos.y;
+    partnerActor->curPos.z = partnerActorMovement->curPos.z;
 
     if (partnerActorMovement->speed < 1.0) {
         return ApiStatus_DONE2;
@@ -80,7 +80,7 @@ API_CALLABLE(N(SetTargetsYaw)) {
 
     if (script->functionTemp[0] == 0) {
         for (i = 0; i < actor->targetListLength; i++) {
-            x = actor->currentPos.x;
+            x = actor->curPos.x;
             target = &actor->targetData[actor->targetIndexList[i]];
             targetX = target->posA.x;
             targetActor = get_actor(target->actorID);

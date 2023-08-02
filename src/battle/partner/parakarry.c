@@ -148,22 +148,22 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             state->goalPos.z = state->goalPos.z;
             state->unk_24 = (targetActorPart->size.y + targetActorPart->size.x) / 2 / 24.0;
             hud_element_set_scale(hudTarget, state->unk_24 * targetActor->scalingFactor);
-            state->currentPos.x = parakarry->currentPos.x + 8.0f;
-            state->currentPos.y = parakarry->currentPos.y + 16.0f;
-            state->currentPos.z = parakarry->currentPos.z;
-            state->angle = atan2(state->currentPos.x, state->currentPos.y, state->goalPos.x, state->goalPos.y);
+            state->curPos.x = parakarry->curPos.x + 8.0f;
+            state->curPos.y = parakarry->curPos.y + 16.0f;
+            state->curPos.z = parakarry->curPos.z;
+            state->angle = atan2(state->curPos.x, state->curPos.y, state->goalPos.x, state->goalPos.y);
             state->bounceDivisor = state->angle;
-            state->distance = 116.0f;
+            state->dist = 116.0f;
             state->unk_18.x = state->angle;
             i = 0;
 
             for (i = 0; i < 30; i++) {
                 state->unk_18.x -= 1.0f;
                 aimAngle = clamp_angle(state->unk_18.x);
-                x = state->currentPos.x;
-                y = state->currentPos.y;
-                z = state->currentPos.z;
-                clampedAngleDiff = state->distance;
+                x = state->curPos.x;
+                y = state->curPos.y;
+                z = state->curPos.z;
+                clampedAngleDiff = state->dist;
                 add_vec2D_polar(&x, &y, clampedAngleDiff, aimAngle);
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 if (screenY > 180) {
@@ -177,10 +177,10 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             for (i = 0; i < 30; i++) {
                 state->unk_18.y += 1.0f;
                 aimAngle = clamp_angle(state->unk_18.y);
-                x = state->currentPos.x;
-                y = state->currentPos.y;
-                z = state->currentPos.z;
-                add_vec2D_polar(&x, &y, state->distance, aimAngle);
+                x = state->curPos.x;
+                y = state->curPos.y;
+                z = state->curPos.z;
+                add_vec2D_polar(&x, &y, state->dist, aimAngle);
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 if (screenY < 30) {
                     break;
@@ -192,9 +192,9 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             hudTargetRotation = 0;
             shellShotTimer = 90;
 #if VERSION_PAL
-            state->velocity = 4.0f;
+            state->vel = 4.0f;
 #else
-            state->velocity = 3.0f;
+            state->vel = 3.0f;
 #endif
             battleStatus->unk_86 = 0;
             action_command_init_status();
@@ -202,7 +202,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             script->functionTemp[0] = 1;
             break;
         case 1:
-            if (gActionCommandStatus.autoSucceed || battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+            if (gActionCommandStatus.autoSucceed || battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
                 shellShotTimer = 0;
             }
 
@@ -225,7 +225,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             break;
         case 2:
             if (!(gActionCommandStatus.autoSucceed)) {
-                if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT)) {
+                if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT)) {
                     script->functionTemp[0] = 3;
                     break;
                 }
@@ -243,16 +243,16 @@ API_CALLABLE(N(ShellShotActionCommand)) {
                 }
             }
 
-            state->angle += state->velocity;
+            state->angle += state->vel;
 
             if (state->angle <= state->unk_18.x) {
                 state->angle = state->unk_18.x;
-                state->velocity = 0.0f - state->velocity;
+                state->vel = 0.0f - state->vel;
             }
 
             if (state->angle >= state->unk_18.y) {
                 state->angle = state->unk_18.y;
-                state->velocity = 0.0f - state->velocity;
+                state->vel = 0.0f - state->vel;
             }
             break;
         case 3:
@@ -260,7 +260,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
             aimAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
 
-            if (state->velocity >= 0.0f) {
+            if (state->vel >= 0.0f) {
                 if (clampedAngleDiff < 0.0f) {
                     battleStatus->unk_86 = 0;
                 } else {
@@ -326,18 +326,18 @@ API_CALLABLE(N(ShellShotActionCommand)) {
     if (script->functionTemp[0] >= 2) {
         if (script->functionTemp[0] < 3) {
             aimAngle = clamp_angle(state->angle);
-            aimX = state->currentPos.x;
-            aimY = state->currentPos.y;
-            aimZ = state->currentPos.z;
-            add_vec2D_polar(&aimX, &aimY, state->distance, aimAngle);
-            z = state->currentPos.z;
-            x = state->currentPos.x;
-            y = state->currentPos.y;
+            aimX = state->curPos.x;
+            aimY = state->curPos.y;
+            aimZ = state->curPos.z;
+            add_vec2D_polar(&aimX, &aimY, state->dist, aimAngle);
+            z = state->curPos.z;
+            x = state->curPos.x;
+            y = state->curPos.y;
 
             for (i = 0; i < ARRAY_COUNT(hudShimmers); i++) {
-                x += (aimX - state->currentPos.x) / 6.0f;
-                y += (aimY - state->currentPos.y) / 6.0f;
-                z += (aimZ - state->currentPos.z) / 6.0f;
+                x += (aimX - state->curPos.x) / 6.0f;
+                y += (aimY - state->curPos.y) / 6.0f;
+                z += (aimZ - state->curPos.z) / 6.0f;
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 hud_element_set_render_pos(hudMarkers[i], screenX, screenY);
                 hudID = hudShimmers[i];
@@ -378,7 +378,7 @@ API_CALLABLE(N(AirLiftChance)) {
     Actor* targetActor = get_actor(partnerActor->targetActorID);
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
     s32 airLiftChance = targetActor->actorBlueprint->airLiftChance;
-    s32 hpPercentLost = 100 - targetActor->currentHP * 100 / targetActor->maxHP;
+    s32 hpPercentLost = 100 - targetActor->curHP * 100 / targetActor->maxHP;
 
     if (targetActor->transparentStatus == STATUS_KEY_TRANSPARENT) {
         airLiftChance = 0;
@@ -428,39 +428,39 @@ API_CALLABLE(N(CarryAway)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            parakarry->state.goalPos.x = targetActor->currentPos.x - parakarry->currentPos.x;
-            parakarry->state.goalPos.y = targetActor->currentPos.y - parakarry->currentPos.y;
-            parakarry->state.goalPos.z = targetActor->currentPos.z - parakarry->currentPos.z;
+            parakarry->state.goalPos.x = targetActor->curPos.x - parakarry->curPos.x;
+            parakarry->state.goalPos.y = targetActor->curPos.y - parakarry->curPos.y;
+            parakarry->state.goalPos.z = targetActor->curPos.z - parakarry->curPos.z;
             parakarry->state.speed = 2.0f;
             parakarry->state.moveTime = 0;
             script->functionTemp[0] = 1;
             break;
         case 1:
-            parakarry->state.currentPos.x += parakarry->state.speed;
+            parakarry->state.curPos.x += parakarry->state.speed;
             *animationRatePtr = 1.0f;
-            y = parakarry->state.currentPos.y;
-            parakarry->state.currentPos.y = y + (sin_rad(2.0f * sin_rad(DEG_TO_RAD(parakarry->state.moveTime)) * PI_S) * 1.4 + 0.5);
+            y = parakarry->state.curPos.y;
+            parakarry->state.curPos.y = y + (sin_rad(2.0f * sin_rad(DEG_TO_RAD(parakarry->state.moveTime)) * PI_S) * 1.4 + 0.5);
             parakarry->state.moveTime += 6;
             parakarry->state.moveTime = clamp_angle(parakarry->state.moveTime);
 
             if (gGameStatusPtr->frameCounter % 10 == 0) {
-                sfx_play_sound_at_position(SOUND_2009, SOUND_SPACE_MODE_0, parakarry->state.currentPos.x, parakarry->state.currentPos.y, parakarry->state.currentPos.z);
+                sfx_play_sound_at_position(SOUND_2009, SOUND_SPACE_MODE_0, parakarry->state.curPos.x, parakarry->state.curPos.y, parakarry->state.curPos.z);
             }
 
-            if (parakarry->state.currentPos.x > 240.0f) {
+            if (parakarry->state.curPos.x > 240.0f) {
                 battleStatus->actionResult = temp_s4;
                 return ApiStatus_DONE2;
             }
             break;
     }
 
-    parakarry->currentPos.x = actorState->currentPos.x;
-    parakarry->currentPos.y = actorState->currentPos.y;
-    parakarry->currentPos.z = actorState->currentPos.z;
+    parakarry->curPos.x = actorState->curPos.x;
+    parakarry->curPos.y = actorState->curPos.y;
+    parakarry->curPos.z = actorState->curPos.z;
 
-    targetActor->currentPos.x = actorState->currentPos.x + actorState->goalPos.x;
-    targetActor->currentPos.y = actorState->currentPos.y + actorState->goalPos.y;
-    targetActor->currentPos.z = actorState->currentPos.z + actorState->goalPos.z;
+    targetActor->curPos.x = actorState->curPos.x + actorState->goalPos.x;
+    targetActor->curPos.y = actorState->curPos.y + actorState->goalPos.y;
+    targetActor->curPos.z = actorState->curPos.z + actorState->goalPos.z;
     return ApiStatus_BLOCK;
 }
 
@@ -474,9 +474,9 @@ API_CALLABLE(N(FlyAround)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            state->currentPos.x = partner->currentPos.x;
-            state->currentPos.y = partner->currentPos.y;
-            state->currentPos.z = partner->currentPos.z;
+            state->curPos.x = partner->curPos.x;
+            state->curPos.y = partner->curPos.y;
+            state->curPos.z = partner->curPos.z;
             state->angle = 60 - rand_int(10);
             state->bounceDivisor = 0.0f;
             state->moveTime = 90;
@@ -484,15 +484,15 @@ API_CALLABLE(N(FlyAround)) {
             script->functionTemp[1] = 0;
             script->functionTemp[2] = 0;
             script->functionTemp[3] = 0;
-            airRaidEffect = fx_effect_65(0, state->currentPos.x, state->currentPos.y, state->currentPos.z, 1.0f, 0);
+            airRaidEffect = fx_effect_65(0, state->curPos.x, state->curPos.y, state->curPos.z, 1.0f, 0);
             script->functionTemp[0] = 1;
             break;
         case 1:
-            add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
-            airRaidEffect->data.unk_65->pos.x = state->currentPos.x;
-            airRaidEffect->data.unk_65->pos.y = state->currentPos.y;
-            airRaidEffect->data.unk_65->pos.z = state->currentPos.z;
-            if (state->currentPos.x < -190.0f) {
+            add_vec2D_polar(&state->curPos.x, &state->curPos.y, state->speed, state->angle);
+            airRaidEffect->data.unk_65->pos.x = state->curPos.x;
+            airRaidEffect->data.unk_65->pos.y = state->curPos.y;
+            airRaidEffect->data.unk_65->pos.z = state->curPos.z;
+            if (state->curPos.x < -190.0f) {
                 if (script->functionTemp[1] != 0) {
                     script->functionTemp[0] = 2;
                     break;
@@ -507,14 +507,14 @@ API_CALLABLE(N(FlyAround)) {
                 }
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
 
-            if (state->currentPos.x > 190.0f) {
+            if (state->curPos.x > 190.0f) {
                 if (script->functionTemp[1] != 0) {
                     script->functionTemp[0] = 2;
                     break;
@@ -529,14 +529,14 @@ API_CALLABLE(N(FlyAround)) {
                 } while (0);
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
 
-            if (state->currentPos.y < -30.0f) {
+            if (state->curPos.y < -30.0f) {
                 if (script->functionTemp[1] != 0) {
                     script->functionTemp[0] = 2;
                     break;
@@ -551,14 +551,14 @@ API_CALLABLE(N(FlyAround)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
 
-            if (state->currentPos.y > 160.0f) {
+            if (state->curPos.y > 160.0f) {
                 if (script->functionTemp[1] != 0) {
                     script->functionTemp[0] = 2;
                     break;
@@ -573,9 +573,9 @@ API_CALLABLE(N(FlyAround)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[3] != 0) {
-                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->currentPos.x, state->currentPos.y, state->currentPos.z);
+                    sfx_play_sound_at_position(SOUND_200B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[3] = 1 - script->functionTemp[3];
             }
@@ -596,17 +596,17 @@ API_CALLABLE(N(FlyAround)) {
             airRaidEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
             // fallthrough
         case 3:
-            add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
+            add_vec2D_polar(&state->curPos.x, &state->curPos.y, state->speed, state->angle);
             if (state->moveTime == 0) {
-                partner->rotation.z = 0.0f;
+                partner->rot.z = 0.0f;
                 return ApiStatus_DONE2;
             }
             state->moveTime--;
             // fallthrough
         default:
-            partner->currentPos.x = state->currentPos.x;
-            partner->currentPos.y = state->currentPos.y;
-            partner->currentPos.z = state->currentPos.z;
+            partner->curPos.x = state->curPos.x;
+            partner->curPos.y = state->curPos.y;
+            partner->curPos.z = state->curPos.z;
             return ApiStatus_BLOCK;
     }
 }

@@ -11,9 +11,9 @@ API_CALLABLE(N(SetChestPosition)) {
     f32 z = evt_get_variable(script, *args++);
     Entity* entity = get_entity_by_index(entityIndex);
 
-    entity->position.x = x;
-    entity->position.y = y;
-    entity->position.z = z;
+    entity->pos.x = x;
+    entity->pos.y = y;
+    entity->pos.z = z;
     return ApiStatus_DONE2;
 }
 
@@ -21,9 +21,9 @@ API_CALLABLE(N(GetChestPosition)) {
     Bytecode* args = script->ptrReadPos;
     Entity* entity = get_entity_by_index(evt_get_variable(script, *args++));
 
-    evt_set_variable(script, *args++, entity->position.x);
-    evt_set_variable(script, *args++, entity->position.y);
-    evt_set_variable(script, *args++, entity->position.z);
+    evt_set_variable(script, *args++, entity->pos.x);
+    evt_set_variable(script, *args++, entity->pos.y);
+    evt_set_variable(script, *args++, entity->pos.z);
     return ApiStatus_DONE2;
 }
 
@@ -59,7 +59,7 @@ API_CALLABLE(N(AnimateChestSize)) {
     entity->scale.y = script->functionTemp[1] / 60.0f;
     entity->scale.z = script->functionTemp[1] / 60.0f;
 
-    entity->rotation.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 / 2.0;
+    entity->rot.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 / 2.0;
 
     script->functionTemp[1]--;
     if (~script->functionTemp[1] == 0) { //TODO remove ~ optimization

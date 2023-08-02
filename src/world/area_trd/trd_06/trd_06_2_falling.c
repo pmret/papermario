@@ -85,9 +85,9 @@ API_CALLABLE(N(InitializeFallingSprite)) {
     falling->playerSpriteID = 1;
     falling->width  = gPlayerStatus.colliderHeight;
     falling->height = gPlayerStatus.colliderDiameter;
-    falling->pos.x = gPlayerStatus.position.x;
-    falling->pos.y = gPlayerStatus.position.y + (falling->height * SPRITE_WORLD_SCALE_D * 0.5);
-    falling->pos.z = gPlayerStatus.position.z;
+    falling->pos.x = gPlayerStatus.pos.x;
+    falling->pos.y = gPlayerStatus.pos.y + (falling->height * SPRITE_WORLD_SCALE_D * 0.5);
+    falling->pos.z = gPlayerStatus.pos.z;
     falling->rot.x = 0.0f;
     falling->rot.y = 0.0f;
     falling->rot.z = 0.0f;

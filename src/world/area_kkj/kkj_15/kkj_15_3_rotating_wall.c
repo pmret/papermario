@@ -10,8 +10,8 @@ API_CALLABLE(N(UpdateRotatingPartyPositions)) {
     mag = dist2D(50.0f, -200.0f, script->varTable[7], script->varTable[8]);
     angle = atan2(50.0f, -200.0f, script->varTable[7], script->varTable[8]);
     angle = clamp_angle(angle - var);
-    gPlayerStatus.position.x = 50.0f + mag * sin_deg(angle);
-    gPlayerStatus.position.z = -200.0f - mag * cos_deg(angle);
+    gPlayerStatus.pos.x = 50.0f + mag * sin_deg(angle);
+    gPlayerStatus.pos.z = -200.0f - mag * cos_deg(angle);
 
     mag = dist2D(50.0f, -200.0f, script->varTable[9], script->varTable[10]);
     angle = atan2(50.0f, -200.0f, script->varTable[9], script->varTable[10]);

@@ -8,10 +8,10 @@ MAP_RODATA_PAD(1,entity);
 API_CALLABLE(N(MonitorPlayerAltitude)) {
     s32 result = -1;
 
-    if (gPlayerStatus.lastGoodPosition.y > 200.0) {
+    if (gPlayerStatus.lastGoodPos.y > 200.0) {
         result = 0;
     }
-    if (gPlayerStatus.lastGoodPosition.y < 40.0) {
+    if (gPlayerStatus.lastGoodPos.y < 40.0) {
         result = 1;
     }
     if (result >= 0) {

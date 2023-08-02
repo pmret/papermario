@@ -22,9 +22,9 @@ void N(ClubbaNappingAI_Init)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     }
 
     if (npc->duration == 1) {
-        npc->currentAnim = enemy->animList[12];
+        npc->curAnim = enemy->animList[12];
     } else if (npc->duration <= 0) {
-        npc->currentAnim = enemy->animList[10];
+        npc->curAnim = enemy->animList[10];
         npc->duration = 0;
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_SLEEP;
     }
@@ -52,15 +52,15 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
             shouldWakeUp = TRUE;
         }
 
-        if (playerData->currentPartner == PARTNER_KOOPER) {
-            if (gPartnerStatus.partnerActionState == playerData->currentPartner) {
+        if (playerData->curPartner == PARTNER_KOOPER) {
+            if (gPartnerStatus.partnerActionState == playerData->curPartner) {
                 shouldWakeUp = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
-        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
+    if (((playerData->curPartner == PARTNER_GOOMBARIO) && (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
+        ((playerData->curPartner == PARTNER_BOMBETTE) && (gPartnerStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
@@ -71,7 +71,7 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
 
     if (shouldWakeUp) {
         ai_enemy_play_sound(npc, SOUND_B000000E, 0);
-        npc->currentAnim = enemy->animList[11];
+        npc->curAnim = enemy->animList[11];
         npc->duration = 10;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
@@ -84,9 +84,9 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     } else if (npc->duration == 57) {
         ai_enemy_play_sound(npc, SOUND_B000000D, 0);
     } else if (npc->duration == 59) {
-        npc->currentAnim = enemy->animList[12];
+        npc->curAnim = enemy->animList[12];
     } else if (npc->duration == 60) {
-        npc->currentAnim = enemy->animList[10];
+        npc->curAnim = enemy->animList[10];
         npc->duration = 0;
     }
 }
@@ -108,7 +108,7 @@ void N(ClubbaNappingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, En
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->yaw = clamp_angle((npc->yaw + rand_int(180)) - 90.0f);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->functionTemp[1] = (rand_int(1000) % 2) + 2; // chose random number 2-3
     script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_LOITER;
 }
@@ -120,7 +120,7 @@ void N(ClubbaNappingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyD
 
     // try to catch sight of player
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         return;
     }
@@ -153,7 +153,7 @@ void N(ClubbaNappingAI_ReturnHomeInit)(Evt* script, MobileAISettings* aiSettings
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
         if (enemy->territory->wander.moveSpeedOverride < 0) {
             npc->moveSpeed = aiSettings->moveSpeed;
         } else {
@@ -169,11 +169,11 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, En
     f32 currentYaw;
 
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x,
                       enemy->territory->wander.centerPos.z) <= npc->moveSpeed) {
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = 15;
         enemy->AI_VAR_NEXT_STATE = AI_STATE_NAPPING_CLUBBA_50;
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_LOITER_INIT;
@@ -219,7 +219,7 @@ API_CALLABLE(N(ClubbaNappingAI_Main)) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_INIT;
         npc->duration = 30;
-        npc->currentAnim = enemy->animList[10];
+        npc->curAnim = enemy->animList[10];
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
         if (!enemy->territory->wander.isFlying) {
@@ -230,7 +230,7 @@ API_CALLABLE(N(ClubbaNappingAI_Main)) {
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->AI_TEMP_STATE_AFTER_SUSPEND = AI_RETURN_HOME_INIT;
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }

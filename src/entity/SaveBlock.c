@@ -82,7 +82,7 @@ void entity_SaveBlock_idle(Entity* entity) {
 void entity_SaveBlock_pause_game(void) {
     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
     disable_player_input();
-    gPlayerStatusPtr->currentSpeed = 0.0f;
+    gPlayerStatusPtr->curSpeed = 0.0f;
 }
 
 void entity_SaveBlock_resume_game(void) {
@@ -91,9 +91,9 @@ void entity_SaveBlock_resume_game(void) {
 }
 
 void entity_SaveBlock_save_data(void) {
-    gGameStatusPtr->savedPos.x = gPlayerStatusPtr->position.x;
-    gGameStatusPtr->savedPos.y = gPlayerStatusPtr->position.y;
-    gGameStatusPtr->savedPos.z = gPlayerStatusPtr->position.z;
+    gGameStatusPtr->savedPos.x = gPlayerStatusPtr->pos.x;
+    gGameStatusPtr->savedPos.y = gPlayerStatusPtr->pos.y;
+    gGameStatusPtr->savedPos.z = gPlayerStatusPtr->pos.z;
     fio_save_game(gGameStatusPtr->saveSlot);
 }
 
@@ -135,7 +135,7 @@ void entity_SaveBlock_wait_for_close_result(Entity* entity) {
 
 void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
     if (SaveBlockTutorialPrinterClosed) {
-        if (SaveBlockTutorialPrinter->currentOption == 1) {
+        if (SaveBlockTutorialPrinter->curOption == 1) {
             set_entity_commandlist(entity, Entity_SaveBlock_ScriptResume);
         } else {
             exec_entity_commandlist(entity);

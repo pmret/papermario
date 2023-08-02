@@ -36,10 +36,10 @@ void entity_SpinningFlower_setupGfx(s32 entityIndex) {
     Gfx* gfx;
 
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A000B70_E9D470));
-    guRotateF(sp58, data->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(sp98, data->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp58, data->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp98, data->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp98, sp98);
-    guRotateF(sp58, data->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, data->rot.y, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp98, sp58, sp58);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &data->unk_30);
@@ -77,8 +77,8 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
             data->unk_18 = 0;
             data->unk_00 = 0;
             data->state = 1;
-            data->rotation.x = 0.0f;
-            data->rotation.z = 0.0f;
+            data->rot.x = 0.0f;
+            data->rot.z = 0.0f;
             break;
         case 1:
             if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
@@ -97,11 +97,11 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
             break;
     }
 
-    data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
+    data->rot.y = clamp_angle(data->rot.y + data->spinSpeed);
 
     if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) &&
         (playerStatus->animFlags & PA_FLAG_SPINNING) &&
-        fabs(dist2D(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)) < 60.0)
+        fabs(dist2D(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z)) < 60.0)
         {
         exec_entity_commandlist(entity);
     }
@@ -115,7 +115,7 @@ void func_802BB228_E2DB58(Entity* entity) {
     if (data->spinSpeed > 40.0f) {
         data->spinSpeed = 40.0f;
     }
-    data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
+    data->rot.y = clamp_angle(data->rot.y + data->spinSpeed);
 }
 
 void entity_SpinningFlower_init(Entity* entity) {
@@ -126,9 +126,9 @@ void entity_SpinningFlower_init(Entity* entity) {
     y = CreateEntityVarArgBuffer[1];
     z = CreateEntityVarArgBuffer[2];
     if (!(x | y | z)) {
-        x = entity->position.x;
-        y = entity->position.y + 100.0f;
-        z = entity->position.z;
+        x = entity->pos.x;
+        y = entity->pos.y + 100.0f;
+        z = entity->pos.z;
     }
 
     data->unk_28 = x;
@@ -139,7 +139,7 @@ void entity_SpinningFlower_init(Entity* entity) {
 }
 
 void func_802BB314_E2DC44(Entity* entity) {
-    sfx_play_sound_at_position(SOUND_8000006A, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+    sfx_play_sound_at_position(SOUND_8000006A, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
 }
 
 void func_802BB34C_E2DC7C(void) {
@@ -155,19 +155,19 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     Matrix4f sp58;
     f32 sinAngle, cosAngle;
 
-    guRotateF(sp58, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, entity->rot.y, 0.0f, 1.0f, 0.0f);
     guScaleF(sp18, entity->scale.x, entity->scale.x, entity->scale.x);
     guMtxCatF(sp18, sp58, sp58);
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A001098_E9C598));
-    sin_cos_rad(DEG_TO_RAD(gCameras[CAM_DEFAULT].currentYaw + 180.0f), &sinAngle, &cosAngle);
+    sin_cos_rad(DEG_TO_RAD(gCameras[CAM_DEFAULT].curYaw + 180.0f), &sinAngle, &cosAngle);
     sp18[3][1] += 10.0f;
     sp18[3][2] -= 10.0f;
     guMtxCatF(sp58, sp18, sp18);
-    guRotateF(sp58, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp58, entity->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp18, sp58, sp18);
     guRotateF(sp58, data->initialRotY, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp18, sp58, sp18);
-    guTranslateF(sp58, entity->position.x + 16.0f * sinAngle, entity->position.y , entity->position.z - 16.0f * cosAngle);
+    guTranslateF(sp58, entity->pos.x + 16.0f * sinAngle, entity->pos.y , entity->pos.z - 16.0f * cosAngle);
     guMtxCatF(sp18, sp58, sp18);
     gDPSetCombineMode(gfxPos++, PM_CC_01, PM_CC_02);
     gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, entity->alpha);
@@ -201,12 +201,12 @@ void entity_PinkFlower_init(Entity* entity) {
     s32 entityIndex;
 
     get_animator_by_index(entity->virtualModelIndex)->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    entityIndex = create_entity(&Entity_PinkFlowerLight, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
+    entityIndex = create_entity(&Entity_PinkFlowerLight, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, 0, MAKE_ENTITY_END);
     data->linkedEntityIndex = entityIndex;
     newEntity = get_entity_by_index(entityIndex);
     data = newEntity->dataBuf.pinkFlower;
     data->linkedEntityIndex = entity->listIndex;
-    data->initialRotY = newEntity->rotation.y;
+    data->initialRotY = newEntity->rot.y;
 }
 
 void entity_PinkFlowerLight_init(Entity* entity) {
@@ -222,15 +222,15 @@ void entity_PinkFlowerLight_idle(Entity* entity) {
             if (data->state != 0) {
                 data->state = 0;
                 data->timer++;
-                entity->rotation.z = -25.0f;
+                entity->rot.z = -25.0f;
                 entity->scale.x = 1.8f;
                 entity->alpha = 255;
             }
             break;
         case 1:
-            entity->rotation.z += 1.0f;
-            if (entity->rotation.z >= 8.0f) {
-                entity->rotation.z = 8.0f;
+            entity->rot.z += 1.0f;
+            if (entity->rot.z >= 8.0f) {
+                entity->rot.z = 8.0f;
             }
 
             entity->alpha -= 6;
@@ -248,22 +248,22 @@ void entity_PinkFlowerLight_idle(Entity* entity) {
             break;
     }
 
-    data->initialRotY = get_entity_by_index(data->linkedEntityIndex)->rotation.y;
-    entity->rotation.y = gCameras[CAM_DEFAULT].currentYaw;
+    data->initialRotY = get_entity_by_index(data->linkedEntityIndex)->rot.y;
+    entity->rot.y = gCameras[CAM_DEFAULT].curYaw;
 }
 
 void func_802BB8D4_E2E204(Entity* entity) {
     CymbalPlantData* data = entity->dataBuf.cymbalPlant;
-    data->dist = fabs(dist2D(entity->position.x - 2.0f, entity->position.z - 2.0f, gPlayerStatus.position.x, gPlayerStatus.position.z) * 0.25);
-    data->angle = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, entity->position.x - 2.0f, entity->position.z - 2.0f);
+    data->dist = fabs(dist2D(entity->pos.x - 2.0f, entity->pos.z - 2.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z) * 0.25);
+    data->angle = atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entity->pos.x - 2.0f, entity->pos.z - 2.0f);
 }
 
 void func_802BB98C_E2E2BC(Entity* entity) {
     CymbalPlantData* data = entity->dataBuf.cymbalPlant;
-    gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.position.x;
-    gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.position.y;
-    gCameras[CAM_DEFAULT].targetPos.z = gPlayerStatus.position.z;
-    add_vec2D_polar(&gPlayerStatus.position.x, &gPlayerStatus.position.z, data->dist, data->angle);
+    gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.pos.x;
+    gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.pos.y;
+    gCameras[CAM_DEFAULT].targetPos.z = gPlayerStatus.pos.z;
+    add_vec2D_polar(&gPlayerStatus.pos.x, &gPlayerStatus.pos.z, data->dist, data->angle);
 }
 
 void entity_CymbalPlant_idle(Entity* entity) {

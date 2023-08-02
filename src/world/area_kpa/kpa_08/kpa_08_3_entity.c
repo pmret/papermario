@@ -9,8 +9,8 @@ API_CALLABLE(N(ElevatePlayer)) {
     s32 yOffset = evt_get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (floor == gCollisionStatus.currentFloor) {
-        playerStatus->position.y = script->varTable[0] + yOffset;
+    if (floor == gCollisionStatus.curFloor) {
+        playerStatus->pos.y = script->varTable[0] + yOffset;
     }
     return ApiStatus_DONE2;
 }

@@ -56,7 +56,7 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
             if (evt_get_float_variable(NULL, MV_GlowIntensity) <= 0.0f) {
                 return ApiStatus_DONE2;
             }
-            deltaX = -75.0f - playerStatus->position.x;
+            deltaX = -75.0f - playerStatus->pos.x;
             if (deltaX < 0.0f) {
                 deltaX = -deltaX;
             }

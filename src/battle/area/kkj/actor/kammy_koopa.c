@@ -190,7 +190,7 @@ API_CALLABLE(N(BlockAppear)) {
     entity->scale.x = (60 - script->functionTemp[1]) / 60.0f;
     entity->scale.y = (60 - script->functionTemp[1]) / 60.0f;
     entity->scale.z = (60 - script->functionTemp[1]) / 60.0f;
-    entity->rotation.y = (1.0f - cos_rad(entity->scale.y * PI)) * 1080.0f * 0.5f;
+    entity->rot.y = (1.0f - cos_rad(entity->scale.y * PI)) * 1080.0f * 0.5f;
     script->functionTemp[1]--;
 
     if (script->functionTemp[1] == -1) {

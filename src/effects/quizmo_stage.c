@@ -98,7 +98,7 @@ void quizmo_stage_render(EffectInstance* effect) {
 
     renderTask.appendGfx = quizmo_stage_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
     retTask = queue_render_task(&renderTask);
@@ -115,7 +115,7 @@ void quizmo_stage_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, data->origin.x, data->origin.y, data->origin.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

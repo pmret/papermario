@@ -82,7 +82,7 @@ EvtScript N(EVS_NpcInit_FlyingMagikoopa) = {
 };
 
 API_CALLABLE(N(SetCurrentPartner)) {
-    gPlayerData.currentPartner = evt_get_variable(script, *script->ptrReadPos);
+    gPlayerData.curPartner = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 

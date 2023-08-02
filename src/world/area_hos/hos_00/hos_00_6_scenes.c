@@ -78,7 +78,7 @@ API_CALLABLE(N(HavePartyFaceTwink)) {
     Npc* npc = get_npc_unsafe(NPC_Twink);
 
     partner->yaw = atan2(partner->pos.x, partner->pos.z, npc->pos.x, npc->pos.z);
-    gPlayerStatus.targetYaw = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, npc->pos.x, npc->pos.z);
+    gPlayerStatus.targetYaw = atan2(gPlayerStatus.pos.x, gPlayerStatus.pos.z, npc->pos.x, npc->pos.z);
     npc->yaw = atan2(N(LastTwinkPosX), N(LastTwinkPosZ), npc->pos.x, npc->pos.z);
     N(LastTwinkPosX) = npc->pos.x;
     N(LastTwinkPosZ) = npc->pos.z;

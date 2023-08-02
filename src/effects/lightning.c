@@ -210,7 +210,7 @@ void lightning_render(EffectInstance* effect) {
 
     renderTask.appendGfx = lightning_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
     retTask = queue_render_task(&renderTask);
@@ -263,7 +263,7 @@ void lightning_appendGfx(void* effect) {
                 break;
             default:
                 guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
-                guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+                guRotateF(sp60, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
                 guMtxCatF(sp60, sp20, sp20);
                 guTranslateF(sp60, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(sp60, sp20, sp20);

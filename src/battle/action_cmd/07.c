@@ -139,7 +139,7 @@ void N(update)(void) {
         case 11:
             btl_set_popup_duration(99);
 
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 s32 fillAmt = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 6;
 
                 if (actionCommandStatus->unk_5D == 0) {

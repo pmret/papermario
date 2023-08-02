@@ -136,7 +136,11 @@ typedef struct PopupMenu {
     /* 0x32C */ s16 result;
     /* 0x32E */ char unk_32E[0x2];
 #if VERSION_PAL
-    /* 0x330 */ char unk_330[0x14];
+    /* 0x330 */ s32 unk_330; // message ID
+    /* 0x334 */ s32 unk_334; // x offset
+    /* 0x338 */ s32 unk_338;
+    /* 0x33C */ s32 unk_33C; // message ID
+    /* 0x340 */ s32 unk_340;
 #endif
 } PopupMenu; // size = 0x330
 
@@ -145,7 +149,7 @@ typedef struct Shop {
     /* 0x002 */ s16 numItems;
     /* 0x004 */ s16 numSpecialPrices;
     /* 0x006 */ char unk_06[0x2];
-    /* 0x008 */ s32 currentItemSlot;
+    /* 0x008 */ s32 curItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
     /* 0x014 */ ShopItemLocation* itemDataPositions;
@@ -168,8 +172,8 @@ typedef struct VtxRect {
 
 typedef struct HudTransform {
     /* 0x00 */ s32 imgfxIdx;
-    /* 0x04 */ Vec3f position;
-    /* 0x10 */ Vec3f rotation;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec2s pivot;
     /* 0x30 */ VtxRect unk_30[3];

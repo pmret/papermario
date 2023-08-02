@@ -16,10 +16,10 @@ API_CALLABLE(N(GetTargetPosXForSpring)) {
 API_CALLABLE(N(MonitorPlayerFloor)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->lastGoodPosition.y == 0) {
+    if (playerStatus->lastGoodPos.y == 0) {
         evt_set_variable(script, MV_PlayerFloor, 0);
     }
-    if (playerStatus->lastGoodPosition.y == -200) {
+    if (playerStatus->lastGoodPos.y == -200) {
         evt_set_variable(script, MV_PlayerFloor, 1);
     }
     return ApiStatus_BLOCK;

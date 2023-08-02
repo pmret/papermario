@@ -373,9 +373,9 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     ret->pos.x = 0.0f;
     ret->pos.y = 0.0f;
     ret->pos.z = 0.0f;
-    ret->rotation.x = nodeBP->rotation.x;
-    ret->rotation.y = nodeBP->rotation.y;
-    ret->rotation.z = nodeBP->rotation.z;
+    ret->rot.x = nodeBP->rot.x;
+    ret->rot.y = nodeBP->rot.y;
+    ret->rot.z = nodeBP->rot.z;
     ret->scale.x = 1.0f;
     ret->scale.y = 1.0f;
     ret->scale.z = 1.0f;
@@ -595,9 +595,9 @@ s32 step_model_animator(ModelAnimator* animator) {
 
             node = get_animator_child_with_id(animator->rootNode, nodeId);
             ASSERT(node != NULL);
-            node->rotation.x = x;
-            node->rotation.y = y;
-            node->rotation.z = z;
+            node->rot.x = x;
+            node->rot.y = y;
+            node->rot.z = z;
             return 1;
         case AS_ADD_ROTATION:
             nodeId = animator->staticNodeIDs[*args++ - 1];
@@ -608,9 +608,9 @@ s32 step_model_animator(ModelAnimator* animator) {
 
             node = get_animator_child_with_id(animator->rootNode, nodeId);
             ASSERT(node != NULL);
-            node->rotation.x += x;
-            node->rotation.y += y;
-            node->rotation.z += z;
+            node->rot.x += x;
+            node->rot.y += y;
+            node->rot.z += z;
             return 1;
         case AS_SET_POS:
             nodeId = animator->staticNodeIDs[*args++ - 1];
@@ -668,7 +668,7 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     Matrix4f sp10;
     s32 i;
 
-    guRotateRPYF(gAnimRotMtx, clamp_angle(node->rotation.x), clamp_angle(node->rotation.y), clamp_angle(node->rotation.z));
+    guRotateRPYF(gAnimRotMtx, clamp_angle(node->rot.x), clamp_angle(node->rot.y), clamp_angle(node->rot.z));
     guScaleF(gAnimScaleMtx, node->scale.x, node->scale.y, node->scale.z);
     guTranslateF(gAnimTranslateMtx, node->basePos.x + node->pos.x, node->basePos.y + node->pos.y, node->basePos.z + node->pos.z);
     guMtxCatF(gAnimScaleMtx, gAnimRotMtx, gAnimRotScaleMtx);
@@ -712,7 +712,7 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
             animator->baseAddr = NULL;
             rtPtr->appendGfxArg = animator;
             rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
-            rtPtr->distance = 0;
+            rtPtr->dist = 0;
             rtPtr->renderMode = animator->renderMode;
             queue_render_task(rtPtr);
         }
@@ -736,7 +736,7 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
             animator->baseAddr = baseAddr;
             rtPtr->appendGfxArg = animator;
             rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
-            rtPtr->distance = 0;
+            rtPtr->dist = 0;
             rtPtr->renderMode = animator->renderMode;
             queue_render_task(rtPtr);
         }
@@ -1060,9 +1060,9 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
         bpPtr->basePos.x = 0.0f;
         bpPtr->basePos.y = 0.0f;
         bpPtr->basePos.z = 0.0f;
-        bpPtr->rotation.x = ((f32) node->rot.x * 180.0) / 32767.0;
-        bpPtr->rotation.y = ((f32) node->rot.y * 180.0) / 32767.0;
-        bpPtr->rotation.z = ((f32) node->rot.z * 180.0) / 32767.0;
+        bpPtr->rot.x = ((f32) node->rot.x * 180.0) / 32767.0;
+        bpPtr->rot.y = ((f32) node->rot.y * 180.0) / 32767.0;
+        bpPtr->rot.z = ((f32) node->rot.z * 180.0) / 32767.0;
 
         newNode = add_anim_node(animator, parentNodeID, bpPtr);
 
@@ -1150,9 +1150,9 @@ void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator
         bpPtr->basePos.x = 0.0f;
         bpPtr->basePos.y = 0.0f;
         bpPtr->basePos.z = 0.0f;
-        bpPtr->rotation.x = ((f32) node->rot.x * 180.0) / 32767.0;
-        bpPtr->rotation.y = ((f32) node->rot.y * 180.0) / 32767.0;
-        bpPtr->rotation.z = ((f32) node->rot.z * 180.0) / 32767.0;
+        bpPtr->rot.x = ((f32) node->rot.x * 180.0) / 32767.0;
+        bpPtr->rot.y = ((f32) node->rot.y * 180.0) / 32767.0;
+        bpPtr->rot.z = ((f32) node->rot.z * 180.0) / 32767.0;
 
         newNode = add_anim_node(animator, parentNodeID, bpPtr);
         newNode->vertexStartOffset = node->vertexStartOffset;
@@ -1249,9 +1249,9 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             if (nodeId != 0xFF) {
                 node = get_animator_child_with_id(animator->rootNode, nodeId);
                 if (node != NULL) {
-                    node->rotation.x = x;
-                    node->rotation.y = y;
-                    node->rotation.z = z;
+                    node->rot.x = x;
+                    node->rot.y = y;
+                    node->rot.z = z;
                     return 1;
                 } else {
                     animator->animReadPos = oldPos;
@@ -1269,9 +1269,9 @@ s32 step_mesh_animator(ModelAnimator* animator) {
             if (nodeId != 0xFF) {
                 node = get_animator_child_with_id(animator->rootNode, nodeId);
                 if (node != NULL) {
-                    node->rotation.x += x;
-                    node->rotation.y += y;
-                    node->rotation.z += z;
+                    node->rot.x += x;
+                    node->rot.y += y;
+                    node->rot.z += z;
                     return 1;
                 } else {
                     animator->animReadPos = oldPos;

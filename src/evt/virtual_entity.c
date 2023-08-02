@@ -412,14 +412,14 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
             virtualEntity->moveSpeed = virtualEntity->moveDist / virtualEntity->moveTime;
         }
 
-        virtualEntity->jumpVelocity = (virtualEntity->jumpGravity * virtualEntity->moveTime / 2) +
+        virtualEntity->jumpVel = (virtualEntity->jumpGravity * virtualEntity->moveTime / 2) +
                                       (yTemp / virtualEntity->moveTime);
         script->functionTemp[0] = 1;
     }
 
     virtualEntity = (*gCurrentVirtualEntityListPtr)[script->functionTemp[1]];
-    virtualEntity->pos.y += virtualEntity->jumpVelocity;
-    virtualEntity->jumpVelocity -= virtualEntity->jumpGravity;
+    virtualEntity->pos.y += virtualEntity->jumpVel;
+    virtualEntity->jumpVel -= virtualEntity->jumpGravity;
 
     virtual_entity_move_polar(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
 
@@ -448,8 +448,8 @@ ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
     }
 
     virtualEntity = (*gCurrentVirtualEntityListPtr)[script->functionTemp[1]];
-    virtualEntity->pos.y += virtualEntity->jumpVelocity;
-    virtualEntity->jumpVelocity -= virtualEntity->jumpGravity;
+    virtualEntity->pos.y += virtualEntity->jumpVel;
+    virtualEntity->jumpVel -= virtualEntity->jumpGravity;
 
     virtual_entity_move_polar(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
 

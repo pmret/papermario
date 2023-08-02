@@ -709,9 +709,9 @@ ApiStatus SetItemPos(Evt* script, s32 isInitialCall) {
     z = evt_get_variable(script, *args++);
 
     ptrItemEntity = (ItemEntity*) get_item_entity(itemEntityIndex);
-    ptrItemEntity->position.x = x;
-    ptrItemEntity->position.y = y;
-    ptrItemEntity->position.z = z;
+    ptrItemEntity->pos.x = x;
+    ptrItemEntity->pos.y = y;
+    ptrItemEntity->pos.z = z;
     return ApiStatus_DONE2;
 }
 

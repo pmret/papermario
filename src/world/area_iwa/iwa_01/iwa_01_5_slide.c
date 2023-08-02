@@ -9,16 +9,16 @@ API_CALLABLE(N(SetPlayerSliding)) {
 SlideParams N(SlideData1) = {
     .heading = 90.0f,
     .maxDescendAccel = 0.5f,
-    .launchVelocity = -0.5f,
-    .maxDescendVelocity = 16.0f,
+    .launchVel = -0.5f,
+    .maxDescendVel = 16.0f,
     .integrator = { 0.0, 0.0, 0.0, 0.0 },
 };
 
 SlideParams N(SlideData2) = {
     .heading = 270.0f,
     .maxDescendAccel = 0.5f,
-    .launchVelocity = -0.18f,
-    .maxDescendVelocity = 18.0f,
+    .launchVel = -0.18f,
+    .maxDescendVel = 18.0f,
     .integrator = { 10.9716, -0.34, 0.003, -0.012 },
 };
 

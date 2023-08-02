@@ -40,7 +40,7 @@ void action_update_spin(void) {
         playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_SPIN;
         playerStatus->animFlags |= PA_FLAG_SPINNING;
         playerStatus->flags |= PS_FLAG_SPINNING;
-        playerStatus->currentStateTime = 0;
+        playerStatus->curStateTime = 0;
         playerStatus->actionSubstate = SUBSTATE_SPIN_0;
         playerSpinState->stopSoundTimer = 0;
         playerSpinState->hasBufferedSpin = FALSE;
@@ -111,7 +111,7 @@ void action_update_spin(void) {
         sfx_play_sound_at_player(playerSpinState->spinSoundID, SOUND_SPACE_MODE_0);
         suggest_player_anim_always_forward(anim);
 
-        if ((clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw) <= 180.0f)) {
+        if ((clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].curYaw) <= 180.0f)) {
             playerStatus->spinRate = playerSpinState->spinRate;
         } else {
             effectType++;
@@ -132,9 +132,9 @@ void action_update_spin(void) {
     if (gSpinHistoryBufferPos > ARRAY_COUNT(gSpinHistoryPosX)) {
         gSpinHistoryBufferPos = 0;
     }
-    gSpinHistoryPosX[gSpinHistoryBufferPos] = playerStatus->position.x;
-    gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->position.y;
-    gSpinHistoryPosZ[gSpinHistoryBufferPos] = playerStatus->position.z;
+    gSpinHistoryPosX[gSpinHistoryBufferPos] = playerStatus->pos.x;
+    gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->pos.y;
+    gSpinHistoryPosZ[gSpinHistoryBufferPos] = playerStatus->pos.z;
     gSpinHistoryPosAngle[gSpinHistoryBufferPos] = playerStatus->spriteFacingAngle;
     gSpinHistoryBufferPos++;
     if (gSpinHistoryBufferPos > ARRAY_COUNT(gSpinHistoryPosX)) {
@@ -166,18 +166,18 @@ void action_update_spin(void) {
             playerSpinState->spinDirectionMagnitude = 0.0f;
         }
 
-        angle = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
+        angle = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].curYaw);
         playerSpinState->spinDirection.x = sin_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
         playerSpinState->spinDirection.y = -cos_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
-        playerStatus->currentStateTime--;
-        if (playerStatus->currentStateTime == 0) {
+        playerStatus->curStateTime--;
+        if (playerStatus->curStateTime == 0) {
             playerSpinState->stopSoundTimer = 4;
             set_action_state(ACTION_STATE_IDLE);
             playerStatus->flags &= ~PS_FLAG_SPINNING;
             playerStatus->animFlags &= ~PA_FLAG_SPINNING;
             sfx_stop_sound(playerSpinState->spinSoundID);
         }
-        playerStatus->currentSpeed = 0.0f;
+        playerStatus->curSpeed = 0.0f;
         return;
     }
 
@@ -192,7 +192,7 @@ void action_update_spin(void) {
         }
     }
 
-    if (!(playerStatus->currentStateTime > playerSpinState->fullSpeedSpinTime)) {
+    if (!(playerStatus->curStateTime > playerSpinState->fullSpeedSpinTime)) {
         speedModifier = (playerSpinState->inputMagnitude) ? playerSpinState->speedScale : 0.0f;
         playerSpinState->spinDirectionMagnitude = playerSpinState->spinDirectionMagnitude + 0.9;
 
@@ -200,11 +200,11 @@ void action_update_spin(void) {
             playerSpinState->spinDirectionMagnitude = 9.0f;
         }
 
-        angle = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
+        angle = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].curYaw);
         playerSpinState->spinDirection.x = sin_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
         playerSpinState->spinDirection.y = -cos_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
     } else {
-        speedModifier = playerSpinState->speedScale - (playerStatus->currentStateTime - playerSpinState->fullSpeedSpinTime - 1) * playerSpinState->frictionScale;
+        speedModifier = playerSpinState->speedScale - (playerStatus->curStateTime - playerSpinState->fullSpeedSpinTime - 1) * playerSpinState->frictionScale;
         if (speedModifier < 0.1) {
             speedModifier = 0.1f;
         }
@@ -219,7 +219,7 @@ void action_update_spin(void) {
         }
     }
 
-    playerStatus->currentStateTime++;
+    playerStatus->curStateTime++;
 
     switch (playerStatus->prevActionState) {
         case ACTION_STATE_IDLE:
@@ -230,17 +230,17 @@ void action_update_spin(void) {
                     playerStatus->targetYaw = angle;
                 }
             }
-            playerStatus->currentSpeed = (magnitude != 0.0f) ? playerStatus->runSpeed * speedModifier : 0.0f;
+            playerStatus->curSpeed = (magnitude != 0.0f) ? playerStatus->runSpeed * speedModifier : 0.0f;
             break;
         case ACTION_STATE_WALK:
         case ACTION_STATE_RUN:
-            playerStatus->currentSpeed = playerStatus->runSpeed * speedModifier;
+            playerStatus->curSpeed = playerStatus->runSpeed * speedModifier;
             break;
     }
     if (playerStatus->actionSubstate == SUBSTATE_SPIN_0) {
         playerSpinState->spinCountdown--;
         if (playerSpinState->spinCountdown > 0) {
-            if (playerStatus->currentStateTime >= 2) {
+            if (playerStatus->curStateTime >= 2) {
                 playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + playerStatus->spinRate);
             }
             return;
@@ -254,21 +254,21 @@ void action_update_spin(void) {
         playerStatus->spriteFacingAngle = angle + playerStatus->spinRate;
 
         if (playerSpinState->hasBufferedSpin) {
-            playerStatus->currentStateTime = 2;
+            playerStatus->curStateTime = 2;
             playerStatus->actionSubstate = SUBSTATE_SPIN_2;
             playerStatus->flags &= ~PS_FLAG_SPINNING;
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
         } else if (angle < playerStatus->spriteFacingAngle) {
             if (playerStatus->spriteFacingAngle >= 180.0f && angle < 180.0f) {
                 playerStatus->spriteFacingAngle = 180.0f;
-                playerStatus->currentStateTime = 2;
+                playerStatus->curStateTime = 2;
                 playerStatus->actionSubstate = SUBSTATE_SPIN_2;
                 playerStatus->flags &= ~PS_FLAG_SPINNING;
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
         } else if (playerStatus->spriteFacingAngle <= 0.0f && angle < 90.0f) {
             playerStatus->spriteFacingAngle = 0.0f;
-            playerStatus->currentStateTime = 2;
+            playerStatus->curStateTime = 2;
             playerStatus->actionSubstate = SUBSTATE_SPIN_2;
             playerStatus->flags &= ~PS_FLAG_SPINNING;
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);

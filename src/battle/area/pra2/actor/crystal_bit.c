@@ -229,13 +229,13 @@ API_CALLABLE(UpdateCrystalBitEffect) {
     effect->data.miscParticles->scaleX = actorPart->scale.x * 24.0f;
     effect->data.miscParticles->scaleY = actorPart->scale.y * 24.0f;
     if (actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) {
-        effect->data.miscParticles->pos.x = actor->currentPos.x;
+        effect->data.miscParticles->pos.x = actor->curPos.x;
         effect->data.miscParticles->pos.y = NPC_DISPOSE_POS_Y;
-        effect->data.miscParticles->pos.z = actor->currentPos.z;
+        effect->data.miscParticles->pos.z = actor->curPos.z;
     } else {
-        effect->data.miscParticles->pos.x = actor->currentPos.x;
-        effect->data.miscParticles->pos.y = actor->currentPos.y;
-        effect->data.miscParticles->pos.z = actor->currentPos.z;
+        effect->data.miscParticles->pos.x = actor->curPos.x;
+        effect->data.miscParticles->pos.y = actor->curPos.y;
+        effect->data.miscParticles->pos.z = actor->curPos.z;
     }
 
     return ApiStatus_BLOCK;

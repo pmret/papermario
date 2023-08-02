@@ -9,7 +9,7 @@ API_CALLABLE(N(AwaitPlayerApproachShop)) {
     f32 var4 = evt_get_variable(script, *args++);
     f32 temp_f0 = (var4 - var2) / (var3 - var1);
 
-    if (playerStatus->position.z < ((temp_f0 * playerStatus->position.x) + (var2 - (temp_f0 * var1)))) {
+    if (playerStatus->pos.z < ((temp_f0 * playerStatus->pos.x) + (var2 - (temp_f0 * var1)))) {
         script->varTable[0] = 0;
         return ApiStatus_DONE2;
     }

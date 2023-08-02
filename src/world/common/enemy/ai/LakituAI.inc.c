@@ -215,14 +215,14 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
     }
 
     if (script->AI_TEMP_STATE == AI_STATE_CHASE_INIT) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         enemy->varTable[4] = N(LakituAI_GetAvailableSpiny)();
         if (enemy->varTable[4] >= 0) {
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 1;
             spinyEnemy->varTable[11] = enemy->npcID;
             npc->duration = 15;
-            npc->currentAnim = ANIM_Lakitu_Anim14;
+            npc->curAnim = ANIM_Lakitu_Anim14;
             script->AI_TEMP_STATE = 30;
         }
     }
@@ -255,7 +255,7 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
             if (npc->duration > 0) {
                 break;
             }
-            npc->currentAnim = ANIM_Lakitu_Anim15;
+            npc->curAnim = ANIM_Lakitu_Anim15;
             spinyEnemy = get_enemy(enemy->varTable[4]);
             spinyEnemy->varTable[10] = 3;
             npc->duration = 10;
@@ -281,8 +281,8 @@ s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
         f32 playerDist;
         f32 lerpDist;
 
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        playerDist = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, npc->pos.x, npc->pos.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+        playerDist = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, npc->pos.x, npc->pos.z);
         if (!is_point_within_region(territoryPtr->shape,
                 territoryPtr->pointX, territoryPtr->pointZ,
                 npc->pos.x, npc->pos.z,

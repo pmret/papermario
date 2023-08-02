@@ -82,8 +82,8 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
 
     gCameras[id].updateMode = CAM_UPDATE_MODE_2;
     gCameras[id].needsInit = FALSE;
-    gCameras[id].auxPitch = -round(gCameras[id].currentPitch);
-    gCameras[id].auxBoomLength = -gCameras[id].currentBlendedYawNegated;
+    gCameras[id].auxPitch = -round(gCameras[id].curPitch);
+    gCameras[id].auxBoomLength = -gCameras[id].curBlendedYawNegated;
 
     dx = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
     dy = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;
@@ -663,9 +663,9 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         hitDepth = 32767.0f;
-        posX = playerStatus->position.x;
-        posY = playerStatus->position.y;
-        posZ = playerStatus->position.z;
+        posX = playerStatus->pos.x;
+        posY = playerStatus->pos.y;
+        posZ = playerStatus->pos.z;
         zoneID = test_ray_zones(posX, posY + 10.0f, posZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &nX, &nY, &nZ);
         if (zoneID >= 0) {
             camera->controlSettings = *gZoneCollisionData.colliderList[zoneID].camSettings;
@@ -699,9 +699,9 @@ ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        f32 x = playerStatus->position.x;
-        f32 y = playerStatus->position.y;
-        f32 z = playerStatus->position.z;
+        f32 x = playerStatus->pos.x;
+        f32 y = playerStatus->pos.y;
+        f32 z = playerStatus->pos.z;
         f32 hitX, hitY, hitZ;
         f32 hitDepth = 32767.0f;
         f32 nx, ny, nz;

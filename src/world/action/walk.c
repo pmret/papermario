@@ -48,7 +48,7 @@ void action_update_walk(void) {
         changedAnim = TRUE;
 
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
-            playerStatus->currentSpeed = playerStatus->walkSpeed;
+            playerStatus->curSpeed = playerStatus->walkSpeed;
         }
 
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
@@ -134,7 +134,7 @@ void action_update_run(void) {
         phi_s3 = 1;
 
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
-            playerStatus->currentSpeed = playerStatus->runSpeed;
+            playerStatus->curSpeed = playerStatus->runSpeed;
         }
         if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
             anim = ANIM_MarioW3_8bit_Run;
@@ -161,7 +161,7 @@ void action_update_run(void) {
         runSpeedModifier = 1.5f;
     }
 
-    playerStatus->currentSpeed = playerStatus->runSpeed * runSpeedModifier;
+    playerStatus->curSpeed = playerStatus->runSpeed * runSpeedModifier;
     player_input_to_move_vector(&moveX, &moveY);
     phys_update_interact_collider();
     if (check_input_jump() == FALSE) {
@@ -225,7 +225,7 @@ static void action_update_walk_peach(void) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->unk_60 = 0;
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
-            playerStatus->currentSpeed = playerStatus->walkSpeed;
+            playerStatus->curSpeed = playerStatus->walkSpeed;
         }
         func_802B6550_E23C30();
     }
@@ -262,7 +262,7 @@ static void action_update_run_peach(void) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         playerStatus->unk_60 = 0;
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
-            playerStatus->currentSpeed = playerStatus->runSpeed;
+            playerStatus->curSpeed = playerStatus->runSpeed;
         }
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
@@ -287,7 +287,7 @@ static void action_update_run_peach(void) {
         return;
     }
 
-    playerStatus->currentSpeed = playerStatus->runSpeed;
+    playerStatus->curSpeed = playerStatus->runSpeed;
     player_input_to_move_vector(&moveX, &moveY);
     phys_update_interact_collider();
     if (moveY == 0.0f) {

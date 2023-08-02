@@ -156,10 +156,10 @@ void N(update)(void) {
                 }
 
                 if (!actionCommandStatus->isBarFilled) {
-                    if (battleStatus->currentButtonsPressed & BUTTON_STICK_LEFT) {
+                    if (battleStatus->curButtonsPressed & BUTTON_STICK_LEFT) {
                         actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 1250) / 100;
                     }
-                    if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
+                    if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
                         actionCommandStatus->barFillLevel -= (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 1250) / 100;
                     }
                 }
@@ -185,13 +185,13 @@ void N(update)(void) {
             }
 
             if (!(D_802A98C0 & BUTTON_STICK_LEFT) &&
-                !(battleStatus->currentButtonsDown & BUTTON_STICK_RIGHT) &&
+                !(battleStatus->curButtonsDown & BUTTON_STICK_RIGHT) &&
                 actionCommandStatus->unk_5C == 1)
             {
                 actionCommandStatus->unk_5C = 2;
             }
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
-            D_802A98C0 = battleStatus->currentButtonsDown;
+            D_802A98C0 = battleStatus->curButtonsDown;
             battleStatus->actionResult = actionCommandStatus->unk_5C;
 
             sfx_adjust_env_sound_params(SOUND_80000041, 0, 0, battleStatus->actionSuccess * 12);

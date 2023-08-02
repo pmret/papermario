@@ -195,7 +195,7 @@ void bombette_breaking_render(EffectInstance* effect) {
 
     renderTask.appendGfx = bombette_breaking_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);
@@ -241,7 +241,7 @@ void bombette_breaking_appendGfx(void* effect) {
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, (data->alpha * mainAlpha) / 255);
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_38,
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, unk_38,
                          data->center.x, data->center.y, data->center.z);
         guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

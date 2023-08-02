@@ -213,7 +213,7 @@ API_CALLABLE(N(func_8024522C_805AAC)) {
 }
 
 API_CALLABLE(N(func_80245440_805CC0)) {
-    if (gPlayerData.currentPartner == script->varTable[10]) {
+    if (gPlayerData.curPartner == script->varTable[10]) {
         script->varTable[1] = 0;
         return ApiStatus_DONE2;
     }

@@ -5,9 +5,9 @@
 API_CALLABLE(N(UnkMoveFunc1)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    f32 posX = playerActor->currentPos.x;
-    f32 posY = playerActor->currentPos.y;
-    f32 posZ = playerActor->currentPos.z;
+    f32 posX = playerActor->curPos.x;
+    f32 posY = playerActor->curPos.y;
+    f32 posZ = playerActor->curPos.z;
     f32 goalX = playerActor->state.goalPos.x;
     f32 goalY = playerActor->state.goalPos.y;
     f32 goalZ = playerActor->state.goalPos.z;

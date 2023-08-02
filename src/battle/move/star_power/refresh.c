@@ -24,7 +24,7 @@ API_CALLABLE(func_802A1518_78BB18) {
             npc->planarFlyDist = 0;
             npc->yaw = 0;
             npc->duration = 0;
-            npc->jumpVelocity = -1.5f;
+            npc->jumpVel = -1.5f;
             npc->jumpScale = 0.02f;
             npc->moveSpeed = 1.0f;
             npc->moveToPos.x = npc->pos.x;
@@ -33,7 +33,7 @@ API_CALLABLE(func_802A1518_78BB18) {
             script->functionTemp[0] = 1;
             break;
         case 1:
-            if (npc->jumpVelocity < 0.0f) {
+            if (npc->jumpVel < 0.0f) {
                 npc->planarFlyDist += 3.0;
                 if (npc->planarFlyDist > 40.0f) {
                     npc->planarFlyDist = 40.0f;
@@ -46,8 +46,8 @@ API_CALLABLE(func_802A1518_78BB18) {
             }
 
             npc->moveSpeed += 0.75;
-            npc->jumpVelocity += npc->jumpScale;
-            npc->pos.y += npc->jumpVelocity;
+            npc->jumpVel += npc->jumpScale;
+            npc->pos.y += npc->jumpVel;
             if (npc->moveSpeed > 33.0f) {
                 npc->moveSpeed = 33.0f;
             }

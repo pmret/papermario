@@ -12,7 +12,7 @@ API_CALLABLE(N(ChangeNpcToPartner)) {
     Npc* npc = get_npc_safe(npcID);
 
     if (isInitialCall) {
-        if (gPlayerData.currentPartner == PARTNER_NONE) {
+        if (gPlayerData.curPartner == PARTNER_NONE) {
             script->functionTemp[0] = 2;
         } else {
             script->functionTemp[0] = 0;
@@ -32,10 +32,10 @@ API_CALLABLE(N(ChangeNpcToPartner)) {
             }
             break;
         case 2:
-            playerData->currentPartner = partnerID;
+            playerData->curPartner = partnerID;
             playerData->partners[partnerID].enabled = TRUE;
             partner_clear_player_tracking(npc);
-            func_800EB2A4(playerData->currentPartner);
+            func_800EB2A4(playerData->curPartner);
             script->functionTemp[0] = 3;
             break;
         case 3:

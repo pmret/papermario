@@ -10,7 +10,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
     battleStatus->moveCategory = BTL_MENU_TYPE_ABILITY;
     battleStatus->moveArgument = 0;
     battleStatus->selectedMoveID = MOVE_SHELL_SHOT;
-    battleStatus->currentTargetListFlags = gMoveTable[MOVE_SHELL_SHOT].flags;
+    battleStatus->curTargetListFlags = gMoveTable[MOVE_SHELL_SHOT].flags;
 
     player_create_target_list(partner);
     partner->selectedTargetIndex = 0;

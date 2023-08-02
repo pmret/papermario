@@ -111,9 +111,9 @@ API_CALLABLE(N(SetupDemoScene)) {
 
                 N(DemoInitState)++;
                 newScript = start_script(rideScriptSrc, EVT_PRIORITY_0, EVT_FLAG_RUN_IMMEDIATELY);
-                newScript->varTable[1] = playerStatus->position.x - 10.0f;
-                newScript->varTable[2] = playerStatus->position.y;
-                newScript->varTable[3] = playerStatus->position.z;
+                newScript->varTable[1] = playerStatus->pos.x - 10.0f;
+                newScript->varTable[2] = playerStatus->pos.y;
+                newScript->varTable[3] = playerStatus->pos.z;
                 newScript->varTable[12] = 1;
                 D_8024A290 = newScript;
             }
@@ -125,7 +125,7 @@ API_CALLABLE(N(SetupDemoScene)) {
         case 3:
             wPartnerNpc->yaw = 270.0f;
             playerStatus->targetYaw = 270.0f;
-            playerStatus->currentYaw = 270.0f;
+            playerStatus->curYaw = 270.0f;
             playerStatus->spriteFacingAngle = 180.0f;
             D_8024A290->functionTemp[1] = 1;
             return ApiStatus_DONE2;

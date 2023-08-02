@@ -23,8 +23,8 @@ void N(add_tongue_deformation)(Vtx* src, Vtx* dest, s32 numVertices, s32 time) {
         // base y-offset goes from 0-5 based on radial distance to player,
         // with 0 at the closest and 5 when distance squared > 1000.
         // this creates the depression of the tongue where the player is standing.
-        dx = vd->ob[0] - player->position.x;
-        dz = vd->ob[2] - player->position.z;
+        dx = vd->ob[0] - player->pos.x;
+        dz = vd->ob[2] - player->pos.z;
         offset = ((dx * dx) + (dz * dz)) / 100;
         if (offset > 10) {
           offset = 10;

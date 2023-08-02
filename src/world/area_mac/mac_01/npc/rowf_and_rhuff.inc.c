@@ -27,10 +27,10 @@ API_CALLABLE(N(RhuffUnravelUpdate)) {
     script->varTable[5] = script->varTable[3] + (s32) ((initialPosX * sinTheta) + (initialPosY * cosTheta));
 
     if (rugRotAngle == 0) {
-        npc->currentAnim = ANIM_Rowf_Idle;
+        npc->curAnim = ANIM_Rowf_Idle;
         enemy->flags &= ~ENEMY_FLAG_CANT_INTERACT;
     } else {
-        npc->currentAnim = ANIM_Rowf_Walk;
+        npc->curAnim = ANIM_Rowf_Walk;
         enemy->flags |= ENEMY_FLAG_CANT_INTERACT;
     }
 
@@ -41,7 +41,7 @@ API_CALLABLE(N(RhuffUnravelUpdate)) {
     }
 
     if (rugRippleAmt != 0) {
-        npc->currentAnim = ANIM_Rowf_Think;
+        npc->curAnim = ANIM_Rowf_Think;
     }
     return ApiStatus_DONE2;
 }

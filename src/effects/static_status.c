@@ -147,7 +147,7 @@ void static_status_update(EffectInstance* effect) {
                 part->unk_18 = 0.0f;
                 part->unk_1C = 0.0f;
                 part->scale = 1.0f;
-                part->rotation = -angle - 45.0f;
+                part->rot = -angle - 45.0f;
             }
 
             if (type == 0) {
@@ -178,7 +178,7 @@ void static_status_render(EffectInstance* effect) {
 
     renderTask.appendGfx = static_status_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
     retTask = queue_render_task(&renderTask);
@@ -212,7 +212,7 @@ void static_status_appendGfx(void* effect) {
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         if (part->frame >= 0) {
-            guPositionF(mtxTransform, 0.0f, 0.0f, part->rotation, part->scale, part->pos.x, part->pos.y, 0.0f);
+            guPositionF(mtxTransform, 0.0f, 0.0f, part->rot, part->scale, part->pos.x, part->pos.y, 0.0f);
             guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

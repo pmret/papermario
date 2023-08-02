@@ -36,12 +36,12 @@ void action_update_hit_lava(void) {
         playerStatus->flags |= PS_FLAG_HIT_FIRE;
         if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
             playerStatus->actionSubstate = SUBSTATE_DELAY_INIT_SINK;
-            playerStatus->currentStateTime = 2;
+            playerStatus->curStateTime = 2;
         } else {
             playerStatus->actionSubstate = SUBSTATE_INIT;
         }
-        InitialPosY = playerStatus->position.y;
-        playerStatus->currentSpeed = 0.0f;
+        InitialPosY = playerStatus->pos.y;
+        playerStatus->curSpeed = 0.0f;
         LaunchVelocity = 0.0f;
 
         gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_IGNORE_PLAYER_Y | CAMERA_MOVE_FLAG_2);
@@ -54,108 +54,108 @@ void action_update_hit_lava(void) {
 
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_DELAY_INIT:
-            if (--playerStatus->currentStateTime == -1) {
+            if (--playerStatus->curStateTime == -1) {
                 playerStatus->actionSubstate = SUBSTATE_INIT;
             }
             break;
         case SUBSTATE_DELAY_INIT_SINK:
-            if (--playerStatus->currentStateTime == -1) {
+            if (--playerStatus->curStateTime == -1) {
                 playerStatus->actionSubstate = SUBSTATE_INIT;
             }
-            playerStatus->position.y -= 4.0f;
+            playerStatus->pos.y -= 4.0f;
             break;
         case SUBSTATE_INIT:
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA) {
-                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, 40);
+                fx_smoke_burst(0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 1.0f, 40);
             }
             suggest_player_anim_always_forward(ANIM_MarioW2_TouchedLava);
             playerStatus->gravityIntegrator[1] = 0.0f;
             playerStatus->timeInAir = 0;
             playerStatus->peakJumpTime = 0;
             playerStatus->actionSubstate = SUBSTATE_LAUNCH;
-            playerStatus->currentStateTime = 1;
+            playerStatus->curStateTime = 1;
             playerStatus->gravityIntegrator[0] = 20.0f;
             playerStatus->gravityIntegrator[2] = 250.0f;
             playerStatus->gravityIntegrator[3] = InitialPosY;
-            playerStatus->jumpFromPos.x = playerStatus->position.x;
-            playerStatus->jumpFromPos.z = playerStatus->position.z;
-            playerStatus->jumpFromHeight = playerStatus->position.y;
+            playerStatus->jumpFromPos.x = playerStatus->pos.x;
+            playerStatus->jumpFromPos.z = playerStatus->pos.z;
+            playerStatus->jumpFromHeight = playerStatus->pos.y;
             playerStatus->flags |= PS_FLAG_JUMPING;
             break;
         case SUBSTATE_DELAY_LAUNCH:
-            if (--playerStatus->currentStateTime <= 0) {
+            if (--playerStatus->curStateTime <= 0) {
                 playerStatus->actionSubstate++;
             }
             break;
         case SUBSTATE_LAUNCH:
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA && (playerStatus->timeInAir % 2) == 0) {
-                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
+                fx_smoke_burst(0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 0.7f, 18);
             }
-            if (playerStatus->position.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
+            if (playerStatus->pos.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
                 sin_cos_rad(DEG_TO_RAD(LaunchInterpPhase), &dx, &dy);
                 LaunchVelocity = sin_rad(DEG_TO_RAD(LaunchInterpPhase)) * 16.0f;
                 if (LaunchVelocity < -1.0f) {
                     LaunchVelocity = -1.0f;
                 }
-                playerStatus->position.y += LaunchVelocity;
+                playerStatus->pos.y += LaunchVelocity;
                 LaunchInterpPhase += 3.0f;
                 if (LaunchInterpPhase > 180.0f) {
                     LaunchInterpPhase = 180.0f;
                     playerStatus->actionSubstate++;
                 }
             } else {
-                playerStatus->position.y = playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2];
+                playerStatus->pos.y = playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2];
                 playerStatus->actionSubstate++;
             }
             break;
         case SUBSTATE_END_LAUNCH:
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA && (playerStatus->timeInAir % 2) == 0) {
-                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
+                fx_smoke_burst(0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 0.7f, 18);
             }
             if (get_lava_reset_pos(&resetPosX, &resetPosY, &resetPosZ) == 0) {
-                resetPosX = playerStatus->position.x;
-                resetPosZ = playerStatus->position.z;
+                resetPosX = playerStatus->pos.x;
+                resetPosZ = playerStatus->pos.z;
             }
-            playerStatus->lastGoodPosition.x = resetPosX;
-            playerStatus->lastGoodPosition.z = resetPosZ;
-            playerStatus->jumpApexHeight = playerStatus->position.y;
+            playerStatus->lastGoodPos.x = resetPosX;
+            playerStatus->lastGoodPos.z = resetPosZ;
+            playerStatus->jumpApexHeight = playerStatus->pos.y;
             LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
             playerStatus->actionSubstate++;
             break;
         case SUBSTATE_RETURN_INIT:
-            ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
-            playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
+            ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z);
+            playerStatus->curSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
             playerStatus->actionSubstate++;
             break;
         case SUBSTATE_RETURN_MOTION:
-            ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
+            ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z);
             returnRadians = DEG_TO_RAD(ReturnAngle);
             // update motion along x axis
-            componentSpeed = playerStatus->currentSpeed * sin_rad(returnRadians);
-            playerStatus->position.x += componentSpeed;
+            componentSpeed = playerStatus->curSpeed * sin_rad(returnRadians);
+            playerStatus->pos.x += componentSpeed;
             completeAxes = 0;
             if (componentSpeed >= 0.0f) {
-                if (playerStatus->lastGoodPosition.x <= playerStatus->position.x) {
-                    playerStatus->position.x = playerStatus->lastGoodPosition.x;
+                if (playerStatus->lastGoodPos.x <= playerStatus->pos.x) {
+                    playerStatus->pos.x = playerStatus->lastGoodPos.x;
                     completeAxes++;
                 }
             } else {
-                if (playerStatus->position.x <= playerStatus->lastGoodPosition.x) {
-                    playerStatus->position.x = playerStatus->lastGoodPosition.x;
+                if (playerStatus->pos.x <= playerStatus->lastGoodPos.x) {
+                    playerStatus->pos.x = playerStatus->lastGoodPos.x;
                     completeAxes++;
                 }
             }
             // update motion along z axis
-            componentSpeed = playerStatus->currentSpeed * cos_rad(returnRadians);
-            playerStatus->position.z -= componentSpeed;
+            componentSpeed = playerStatus->curSpeed * cos_rad(returnRadians);
+            playerStatus->pos.z -= componentSpeed;
             if (componentSpeed >= 0.0f) {
-                if (playerStatus->position.z <= playerStatus->lastGoodPosition.z) {
-                    playerStatus->position.z = playerStatus->lastGoodPosition.z;
+                if (playerStatus->pos.z <= playerStatus->lastGoodPos.z) {
+                    playerStatus->pos.z = playerStatus->lastGoodPos.z;
                     completeAxes++;
                 }
             } else {
-                if (playerStatus->lastGoodPosition.z <= playerStatus->position.z) {
-                    playerStatus->position.z = playerStatus->lastGoodPosition.z;
+                if (playerStatus->lastGoodPos.z <= playerStatus->pos.z) {
+                    playerStatus->pos.z = playerStatus->lastGoodPos.z;
                     completeAxes++;
                 }
             }
@@ -166,9 +166,9 @@ void action_update_hit_lava(void) {
             break;
         case SUBSTATE_HOVER:
             if (playerStatus->hazardType == HAZARD_TYPE_LAVA && (playerStatus->timeInAir % 2) == 0) {
-                fx_smoke_burst(0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 0.7f, 18);
+                fx_smoke_burst(0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 0.7f, 18);
             }
-            playerStatus->position.y = player_check_collision_below(player_fall_distance(), &completeAxes);
+            playerStatus->pos.y = player_check_collision_below(player_fall_distance(), &completeAxes);
             if (completeAxes >= 0) {
                 exec_ShakeCamX(0, 2, 1, 0.8f);
                 start_rumble(256, 50);
@@ -180,20 +180,20 @@ void action_update_hit_lava(void) {
                 playerStatus->flags &= ~PS_FLAG_FLYING;
                 playerStatus->hazardType = HAZARD_TYPE_NONE;
                 playerStatus->gravityIntegrator[0] = 6.0f;
-                playerStatus->position.y += 6.0f;
+                playerStatus->pos.y += 6.0f;
                 playerStatus->actionSubstate++;
             }
             break;
         case SUBSTATE_BOUNCE:
             playerStatus->gravityIntegrator[0] -= 1.0;
-            playerStatus->position.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &completeAxes);
+            playerStatus->pos.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &completeAxes);
             if (completeAxes >= 0) {
-                playerStatus->currentStateTime = 10;
+                playerStatus->curStateTime = 10;
                 playerStatus->actionSubstate++;
             }
             break;
         case SUBSTATE_DELAY_DONE:
-            if (--playerStatus->currentStateTime <= 0) {
+            if (--playerStatus->curStateTime <= 0) {
                 set_action_state(ACTION_STATE_LAND);
                 playerStatus->flags &= ~PS_FLAG_SCRIPTED_FALL;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;

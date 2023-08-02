@@ -126,7 +126,7 @@ void chomp_drop_render(EffectInstance* effect) {
 
     renderTask.appendGfx = chomp_drop_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = -10;
+    renderTask.dist = -10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
     retTask = queue_render_task(&renderTask);

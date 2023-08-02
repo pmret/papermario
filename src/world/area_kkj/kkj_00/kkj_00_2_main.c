@@ -103,16 +103,16 @@ EvtScript N(D_80241460_ABC6F0) = {
 SlideParams N(SlideData1) = {
     .heading = 358.5f,
     .maxDescendAccel = 0.5f,
-    .launchVelocity = 20.0f,
-    .maxDescendVelocity = 0.0f,
+    .launchVel = 20.0f,
+    .maxDescendVel = 0.0f,
     .integrator = { 0.0, 0.0, 0.0, 0.0 },
 };
 
 SlideParams N(SlideData2) = {
     .heading = 1.5f,
     .maxDescendAccel = 0.5f,
-    .launchVelocity = 20.0f,
-    .maxDescendVelocity = 0.0f,
+    .launchVel = 20.0f,
+    .maxDescendVel = 0.0f,
     .integrator = { 0.0, 0.0, 0.0, 0.0 },
 };
 

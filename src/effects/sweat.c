@@ -33,7 +33,7 @@ void sweat_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
-    guRotateF(matrix, -arg5, sin_deg(gCameras[gCurrentCameraID].currentYaw), 0.0f, -cos_deg(gCameras[gCurrentCameraID].currentYaw));
+    guRotateF(matrix, -arg5, sin_deg(gCameras[gCurrentCameraID].curYaw), 0.0f, -cos_deg(gCameras[gCurrentCameraID].curYaw));
     temp_f2 = arg4 + 16.0f;
     data->pos.x = arg1 + (matrix[1][0] * temp_f2);
     data->pos.y = arg2 + (matrix[1][1] * temp_f2);
@@ -74,7 +74,7 @@ void sweat_render(EffectInstance* effect) {
 
     renderTask.appendGfx = sweat_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -90,7 +90,7 @@ void sweat_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guRotateF(sp58, data->unk_10, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp18, sp18);

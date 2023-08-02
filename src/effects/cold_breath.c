@@ -169,7 +169,7 @@ void cold_breath_render(EffectInstance* effect) {
 
     renderTask.appendGfx = cold_breath_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 6;
+    renderTask.dist = 6;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

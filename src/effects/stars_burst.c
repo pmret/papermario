@@ -121,7 +121,7 @@ void stars_burst_render(EffectInstance* effect) {
 
     renderTask.appendGfx = stars_burst_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -155,7 +155,7 @@ void stars_burst_appendGfx(void* effect) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0042780[rIdx % 36], D_E0042780[gIdx % 36], D_E0042780[bIdx % 36], unk_2C);
 
         guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
         guScaleF(sp58, part->unk_24, part->unk_24, 1.0f);
         guMtxCatF(sp58, sp18, sp18);

@@ -6,8 +6,8 @@ extern Gfx Entity_Signpost_Render[];
 
 void entity_Signpost_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 val = fabsf(clamp_angle(180.0f - entity->rotation.y) - clamp_angle(atan2(entity->position.x, entity->position.z,
-                    playerStatus->position.x, playerStatus->position.z)));
+    f32 val = fabsf(clamp_angle(180.0f - entity->rot.y) - clamp_angle(atan2(entity->pos.x, entity->pos.z,
+                    playerStatus->pos.x, playerStatus->pos.z)));
 
     if (!(playerStatus->animFlags & PA_FLAG_USING_WATT) && !(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && (val <= 40.0f || val >= 320.0f)) {
         entity->flags |= ENTITY_FLAG_SHOWS_INSPECT_PROMPT;

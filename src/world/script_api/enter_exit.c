@@ -24,16 +24,16 @@ API_CALLABLE(TeleportPartnerToPlayer) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* partner;
 
-    if (gPlayerData.currentPartner == PARTNER_NONE) {
+    if (gPlayerData.curPartner == PARTNER_NONE) {
         return ApiStatus_DONE2;
     }
 
     partner = get_npc_unsafe(NPC_PARTNER);
-    partner->pos.x = playerStatus->position.x;
-    partner->pos.z = playerStatus->position.z;
+    partner->pos.x = playerStatus->pos.x;
+    partner->pos.z = playerStatus->pos.z;
 
     if (partner_is_flying()) {
-        partner->pos.y = playerStatus->position.y;
+        partner->pos.y = playerStatus->pos.y;
     }
 
     set_npc_yaw(partner, playerStatus->targetYaw);
@@ -44,19 +44,19 @@ API_CALLABLE(TeleportPartnerToPlayer) {
 API_CALLABLE(SetPlayerPositionFromSaveData) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 currentPartner = gPlayerData.currentPartner;
+    s32 currentPartner = gPlayerData.curPartner;
 
-    playerStatus->position.x = gGameStatusPtr->savedPos.x;
-    playerStatus->position.y = gGameStatusPtr->savedPos.y;
-    playerStatus->position.z = gGameStatusPtr->savedPos.z;
+    playerStatus->pos.x = gGameStatusPtr->savedPos.x;
+    playerStatus->pos.y = gGameStatusPtr->savedPos.y;
+    playerStatus->pos.z = gGameStatusPtr->savedPos.z;
 
     if (currentPartner != PARTNER_NONE) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
         f32 angle = clamp_angle((playerStatus->spriteFacingAngle < 180.0f) ? (90.0f) : (-90.0f));
 
-        partner->pos.x = playerStatus->position.x;
-        partner->pos.y = playerStatus->position.y;
-        partner->pos.z = playerStatus->position.z;
+        partner->pos.x = playerStatus->pos.x;
+        partner->pos.y = playerStatus->pos.y;
+        partner->pos.z = playerStatus->pos.z;
         add_vec2D_polar(&partner->pos.x, &partner->pos.z, playerStatus->colliderDiameter + 5, angle);
         enable_partner_ai();
     }
@@ -71,24 +71,24 @@ API_CALLABLE(EnterPlayerPostPipe) {
     ApiStatus ret = ApiStatus_BLOCK;
 
     if (isInitialCall) {
-        playerStatus->position.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
-        playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
+        playerStatus->pos.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+        playerStatus->pos.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
         script->varTable[2] = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
-        playerStatus->position.y = script->varTable[2] - 40;
+        playerStatus->pos.y = script->varTable[2] - 40;
         playerStatus->flags |= PS_FLAG_CAMERA_DOESNT_FOLLOW;
     } else {
         do {
-            playerStatus->position.y += 1.0f;
-            if (!(playerStatus->position.y < script->varTable[2])) {
-                playerStatus->position.y = script->varTable[2];
+            playerStatus->pos.y += 1.0f;
+            if (!(playerStatus->pos.y < script->varTable[2])) {
+                playerStatus->pos.y = script->varTable[2];
                 playerStatus->flags &= ~PS_FLAG_CAMERA_DOESNT_FOLLOW;
                 ret = ApiStatus_DONE2;
             }
         } while (0); // todo required to match
     }
-    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
     return ret;
 }
 

@@ -32,7 +32,7 @@ API_CALLABLE(N(RangedAttackAI_Main)) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
 
         if (!enemy->territory->wander.isFlying) {
@@ -74,7 +74,7 @@ API_CALLABLE(N(RangedAttackAI_Main)) {
             basic_ai_found_player_jump(script, settings, territoryPtr);
             break;
         case AI_STATE_CHASE_INIT:
-            dist = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            dist = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             if (enemy->varTable[0] == 0 || enemy->varTable[0] < dist) {
                 N(UnkNpcAIFunc48)(script, settings->chaseRadius, settings->chaseOffsetDist, territoryPtr);
                 if (script->AI_TEMP_STATE != AI_STATE_CHASE_INIT) {

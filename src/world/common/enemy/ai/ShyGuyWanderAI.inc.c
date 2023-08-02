@@ -6,7 +6,7 @@ void N(ShyGuyWanderAI_14)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->moveSpeed *= 0.6;
-    npc->currentAnim = enemy->animList[12];
+    npc->curAnim = enemy->animList[12];
     npc->duration = 5;
     script->functionTemp[0] = 0xF;
 }
@@ -24,7 +24,7 @@ void N(ShyGuyWanderAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     if (npc->duration == 0) {
         npc->moveSpeed *= 0.6;
 
-        npc->currentAnim = enemy->animList[11];
+        npc->curAnim = enemy->animList[11];
         npc->duration = 10;
         script->functionTemp[0] = 16;
     }
@@ -52,7 +52,7 @@ void N(ShyGuyWanderAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->currentAnim = *enemy->animList;
+        npc->curAnim = *enemy->animList;
         script->functionTemp[0] = 0;
     }
 }
@@ -81,7 +81,7 @@ API_CALLABLE(N(ShyGuyWanderAI_Main)) {
    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

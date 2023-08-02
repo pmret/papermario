@@ -33,7 +33,7 @@ void action_update_spin_jump(void) {
         playerStatus->flags |= (PS_FLAG_JUMPING | PS_FLAG_FLYING);
 
         playerStatus->actionSubstate = SUBSTATE_SPIN;
-        playerStatus->currentSpeed = 0.0f;
+        playerStatus->curSpeed = 0.0f;
         RotationRate = 0.0f;
         playerStatus->gravityIntegrator[0] = 5.2f;
         suggest_player_anim_allow_backward(ANIM_Mario1_Sit);
@@ -53,37 +53,37 @@ void action_update_spin_jump(void) {
             }
             if (playerStatus->gravityIntegrator[0] >= 0.0f) {
                 playerStatus->gravityIntegrator[0] -= 0.54;
-                if (collisionStatus->currentCeiling < 0) {
-                    playerStatus->position.y += playerStatus->gravityIntegrator[0];
-                } else if (collisionStatus->currentCeiling & COLLISION_WITH_ENTITY_BIT) {
-                    entity = get_entity_by_index(collisionStatus->currentCeiling);
+                if (collisionStatus->curCeiling < 0) {
+                    playerStatus->pos.y += playerStatus->gravityIntegrator[0];
+                } else if (collisionStatus->curCeiling & COLLISION_WITH_ENTITY_BIT) {
+                    entity = get_entity_by_index(collisionStatus->curCeiling);
                     if (entity != NULL) {
-                        playerStatus->position.y = entity->position.y - (playerStatus->colliderHeight * 0.5);
+                        playerStatus->pos.y = entity->pos.y - (playerStatus->colliderHeight * 0.5);
                     }
                 }
             }
             if (playerStatus->pitch == 360.0f) {
                 if (playerStatus->gravityIntegrator[0] <= 0.0f) {
-                    playerStatus->currentStateTime = 5;
+                    playerStatus->curStateTime = 5;
                     playerStatus->actionSubstate = SUBSTATE_RISE;
                     playerStatus->gravityIntegrator[0] = 2.0f;
                 }
             }
-            collisionStatus->currentCeiling = -1;
+            collisionStatus->curCeiling = -1;
             break;
         case SUBSTATE_RISE:
             if (playerStatus->gravityIntegrator[0] >= 0.0f) {
                 playerStatus->gravityIntegrator[0] -= 1.4;
-                if (collisionStatus->currentCeiling < 0) {
-                    playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                if (collisionStatus->curCeiling < 0) {
+                    playerStatus->pos.y += playerStatus->gravityIntegrator[0];
                 }
             }
-            if (--playerStatus->currentStateTime <= 0) {
+            if (--playerStatus->curStateTime <= 0) {
                 playerStatus->actionSubstate++;
             }
             break;
         case SUBSTATE_HOVER:
-            playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
+            playerStatus->pos.y = player_check_collision_below(0.0f, &belowColliderID);
             RotationRate = 45.0f;
             playerStatus->pitch += RotationRate;
             if (playerStatus->pitch >= 360.0) {
@@ -98,7 +98,7 @@ void action_update_spin_jump(void) {
             break;
         case SUBSTATE_DESCEND:
             velocity = player_fall_distance();
-            playerStatus->position.y = player_check_collision_below(velocity, &belowColliderID);
+            playerStatus->pos.y = player_check_collision_below(velocity, &belowColliderID);
             if (velocity < -100.0f) {
                 playerStatus->gravityIntegrator[3] = 0.0f;
                 playerStatus->gravityIntegrator[2] = 0.0f;
@@ -106,9 +106,9 @@ void action_update_spin_jump(void) {
                 playerStatus->gravityIntegrator[0] = -100.0f;
             }
             if (belowColliderID >= 0) {
-                if (collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT && (entityType = get_entity_type(collisionStatus->currentFloor),
+                if (collisionStatus->curFloor & COLLISION_WITH_ENTITY_BIT && (entityType = get_entity_type(collisionStatus->curFloor),
                         entityType == ENTITY_TYPE_RED_SWITCH || entityType == ENTITY_TYPE_BLUE_SWITCH)) {
-                    get_entity_by_index(collisionStatus->currentFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
+                    get_entity_by_index(collisionStatus->curFloor)->collisionFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
                     playerStatus->actionSubstate = SUBSTATE_HIT_SWITCH;
                     playerStatus->flags &= ~PS_FLAG_FLYING;
                     break;
@@ -140,7 +140,7 @@ void action_update_spin_jump(void) {
                         start_rumble(128, 25);
                         panels = &gCurrentHiddenPanels;
                         panels->tryFlipTrigger = TRUE;
-                        panels->flipTriggerPosY = playerStatus->position.y;
+                        panels->flipTriggerPosY = playerStatus->pos.y;
                         playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
                     }
                 }
@@ -152,18 +152,18 @@ void action_update_spin_jump(void) {
                 landed = TRUE;
             } else {
                 if (playerStatus->gravityIntegrator[0] > 0.0f) {
-                    playerStatus->position.y += velocity;
+                    playerStatus->pos.y += velocity;
                 } else {
-                    playerStatus->position.y = player_check_collision_below(velocity, &belowColliderID);
+                    playerStatus->pos.y = player_check_collision_below(velocity, &belowColliderID);
                     if (playerStatus->gravityIntegrator[0] < 0.0f && belowColliderID >= 0) {
                         playerStatus->actionSubstate++;
                     }
                 }
-                playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
+                playerStatus->pos.y = player_check_collision_below(0.0f, &belowColliderID);
             }
             break;
         case SUBSTATE_HOLD:
-            playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
+            playerStatus->pos.y = player_check_collision_below(0.0f, &belowColliderID);
             if (belowColliderID >= 0) {
                 playerStatus->gravityIntegrator[0] = 0.0f;
                 playerStatus->gravityIntegrator[1] = 0.0f;
@@ -193,7 +193,7 @@ void action_update_spin_jump(void) {
         belowColliderID = get_collider_below_spin_jump();
         if (belowColliderID >= 0) {
             collisionStatus->lastTouchedFloor = -1;
-            collisionStatus->currentFloor = belowColliderID;
+            collisionStatus->curFloor = belowColliderID;
         }
     }
 }
@@ -202,9 +202,9 @@ static s32 get_collider_below_spin_jump(void) {
     f32 posX, posY, posZ, height;
     f32 hitRx, hitRz, hitDirX, hitDirZ;
 
-    posX = gPlayerStatus.position.x;
-    posZ = gPlayerStatus.position.z;
+    posX = gPlayerStatus.pos.x;
+    posZ = gPlayerStatus.pos.z;
     height = gPlayerStatus.colliderHeight;
-    posY = gPlayerStatus.position.y + (height * 0.5f);
+    posY = gPlayerStatus.pos.y + (height * 0.5f);
     return player_raycast_below_cam_relative(&gPlayerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }

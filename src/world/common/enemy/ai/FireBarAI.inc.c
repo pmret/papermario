@@ -41,7 +41,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
         data->centerPos.x = settings->centerPos.x;
         data->centerPos.y = settings->centerPos.y;
         data->centerPos.z = settings->centerPos.z;
-        data->rotationRate = settings->rotationRate;
+        data->rotRate = settings->rotRate;
         data->firstNpc = settings->firstNpc;
         data->npcCount = settings->npcCount;
         data->callback = settings->callback;
@@ -65,19 +65,19 @@ API_CALLABLE(N(FireBarAI_Main)) {
             npc->pos.x = data->centerPos.x + dX;
             npc->pos.y = data->centerPos.y;
             npc->pos.z = data->centerPos.z + dZ;
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
         }
         if (!(data->flags & 2) && !(playerStatus->flags & PS_FLAG_HAZARD_INVINCIBILITY)) {
-            dY = playerStatus->position.y - npc->pos.y;
+            dY = playerStatus->pos.y - npc->pos.y;
             if (partnerStatus->partnerActionState == PARTNER_ACTION_USE) {
                 if (partnerStatus->actingPartner == PARTNER_LAKILESTER) {
                     dY = partnerNpc->pos.y - npc->pos.y;
                 } else if (partnerStatus->actingPartner == PARTNER_PARAKARRY) {
-                    dY = (playerStatus->position.y - 10.0f) - npc->pos.y;
+                    dY = (playerStatus->pos.y - 10.0f) - npc->pos.y;
                 }
             }
-            dX = playerStatus->position.x - npc->pos.x;
-            dZ = playerStatus->position.z - npc->pos.z;
+            dX = playerStatus->pos.x - npc->pos.x;
+            dZ = playerStatus->pos.z - npc->pos.z;
             if ((fabsf(dY) < (npc->collisionHeight * 0.8f))
                 && (sqrtf(SQ(dX) + SQ(dZ)) <= ((npc->collisionDiameter * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f)))) {
                 hitDetected = 1;
@@ -87,35 +87,35 @@ API_CALLABLE(N(FireBarAI_Main)) {
     if (playerStatus->flags & PS_FLAG_HAZARD_INVINCIBILITY) {
         hitDetected = -1;
     }
-    data->yaw += data->rotationRate;
+    data->yaw += data->rotRate;
     clampedYaw = clamp_angle(data->yaw);
     if (clampedYaw != data->yaw) {
         data->yaw = clampedYaw;
         sfx_play_sound_at_position(N(FireBar_Sounds)[data->soundIndex], SOUND_SPACE_MODE_0, data->centerPos.x, data->centerPos.y, data->centerPos.z);
     }
-    distToPlayer = dist2D(data->centerPos.x, data->centerPos.z, playerStatus->position.x, playerStatus->position.z);
+    distToPlayer = dist2D(data->centerPos.x, data->centerPos.z, playerStatus->pos.x, playerStatus->pos.z);
     distToNpc = dist2D(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z)
         + (npc->collisionDiameter * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f);
     tempPlayerDist = distToPlayer; // needed to match
-    angleToPlayer = atan2(data->centerPos.x, data->centerPos.z, playerStatus->position.x, playerStatus->position.z);
+    angleToPlayer = atan2(data->centerPos.x, data->centerPos.z, playerStatus->pos.x, playerStatus->pos.z);
     angleToNpc = atan2(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z);
     deltaYaw = get_clamped_angle_diff(angleToPlayer, angleToNpc);
     if ((hitDetected > 0) && (playerStatus->actionState != ACTION_STATE_HIT_FIRE)) {
         playerStatus->hazardType = HAZARD_TYPE_FIRE_BAR;
         set_action_state(ACTION_STATE_HIT_FIRE);
-        sfx_play_sound_at_position(SOUND_E8, SOUND_SPACE_MODE_0, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+        sfx_play_sound_at_position(SOUND_E8, SOUND_SPACE_MODE_0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
         gCurrentEncounter.battleTriggerCooldown = 45;
         playerStatus->blinkTimer = 45;
-        playerStatus->lastGoodPosition.x = playerStatus->position.x;
-        playerStatus->lastGoodPosition.y = playerStatus->position.y;
-        playerStatus->lastGoodPosition.z = playerStatus->position.z;
+        playerStatus->lastGoodPos.x = playerStatus->pos.x;
+        playerStatus->lastGoodPos.y = playerStatus->pos.y;
+        playerStatus->lastGoodPos.z = playerStatus->pos.z;
         data->soundIndex = 0;
         if (data->callback != NULL) {
             data->callback(data, FIRE_BAR_HIT);
         }
     } else if ((tempPlayerDist < distToNpc) && !(data->flags & 2)
         && (hitDetected == 0) && (playerStatus->actionState != ACTION_STATE_HIT_FIRE)) {
-        if (data->rotationRate > 0.0f) {
+        if (data->rotRate > 0.0f) {
             if (data->lastDeltaYaw < 0.0f) {
                 if (deltaYaw > 0.0f) {
                     data->soundIndex++;
@@ -144,11 +144,11 @@ void N(FireBarAI_Callback)(FireBarData* data, s32 mode) {
     switch (mode) {
         case FIRE_BAR_SLOW_DOWN:
             if (data->flags & 2) {
-                data->rotationRate *= 0.95f;
+                data->rotRate *= 0.95f;
             }
             break;
         case FIRE_BAR_SPEED_UP:
-            data->rotationRate *= 1.12f;
+            data->rotRate *= 1.12f;
             if (data->soundIndex == 10) {
                 Evt* script = start_script(&N(EVS_FireBar_Defeated), EVT_PRIORITY_1, 0);
                 script->varTable[0] = data->firstNpc;
@@ -157,7 +157,7 @@ void N(FireBarAI_Callback)(FireBarData* data, s32 mode) {
             }
             break;
         case FIRE_BAR_HIT:
-            data->rotationRate = abs(data->settings->rotationRate) * signF(-data->rotationRate);
+            data->rotRate = abs(data->settings->rotRate) * signF(-data->rotRate);
             break;
     }
     return;

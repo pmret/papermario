@@ -17,10 +17,10 @@ API_CALLABLE(N(func_802A123C_718A8C)) {
     if (player->scalingFactor == 1.0) {
         s32 var = script->varTable[10];
         get_entity_by_index(var);
-        collisionStatus->currentCeiling = var | COLLISION_WITH_ENTITY_BIT;
+        collisionStatus->curCeiling = var | COLLISION_WITH_ENTITY_BIT;
         playerStatus->flags |= PS_FLAG_JUMPING;
         update_entities();
-        collisionStatus->currentCeiling = -1;
+        collisionStatus->curCeiling = -1;
         playerStatus->flags &= ~PS_FLAG_JUMPING;
         return ApiStatus_DONE2;
     }
@@ -45,7 +45,7 @@ API_CALLABLE(N(func_802A1318_718B68)) {
     entity->scale.y = player->scalingFactor;
     entity->scale.z = player->scalingFactor;
     if (player->scalingFactor != 1.0) {
-        entity->position.y -= 10.0f;
+        entity->pos.y -= 10.0f;
     }
 
     return ApiStatus_DONE2;

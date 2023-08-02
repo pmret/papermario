@@ -32,7 +32,7 @@ API_CALLABLE(N(KoopaPatrolAI_Main)) {
         npc->duration = 0;
         script->functionTemp[0] = 0;
         enemy->hitboxIsActive = FALSE;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->collisionHeight = enemy->varTable[6];
         enemy->instigatorValue = 0;

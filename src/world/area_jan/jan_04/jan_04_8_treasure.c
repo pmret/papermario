@@ -16,7 +16,7 @@ API_CALLABLE(N(AnimateFlyingChestRotScale)) {
     entity->scale.x = (60 - script->functionTemp[1]) / 60.0f;
     entity->scale.y = (60 - script->functionTemp[1]) / 60.0f;
     entity->scale.z = (60 - script->functionTemp[1]) / 60.0f;
-    entity->rotation.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 * 0.25f;
+    entity->rot.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 * 0.25f;
     script->functionTemp[1]--;
 
     if (script->functionTemp[1] == -1) {
@@ -31,8 +31,8 @@ API_CALLABLE(N(AnimateFallingChestRot)) {
     if (isInitialCall) {
         script->functionTemp[0] = -30;
     }
-    entity->rotation.x = script->functionTemp[0];
-    entity->rotation.z = script->functionTemp[0];
+    entity->rot.x = script->functionTemp[0];
+    entity->rot.z = script->functionTemp[0];
     script->functionTemp[0]++;
 
     if (script->functionTemp[0] == 1) {

@@ -92,12 +92,12 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
         scale = 1000.0f;
         entity_raycast_down(&x, &y, &z, &rotX, &rotZ, &scale);
         set_standard_shadow_scale(shadow, scale);
-        shadow->rotation.y = 0.0f;
-        shadow->position.x = x;
-        shadow->position.y = y;
-        shadow->position.z = z;
-        shadow->rotation.x = rotX;
-        shadow->rotation.z = rotZ;
+        shadow->rot.y = 0.0f;
+        shadow->pos.x = x;
+        shadow->pos.y = y;
+        shadow->pos.z = z;
+        shadow->rot.x = rotX;
+        shadow->rot.z = rotZ;
         shadow->scale.x *= 3.0f;
         shadow->scale.z *= 3.0f;
     }
@@ -182,14 +182,14 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
         guMtxCatF(loopModel->userTransformMtx, sp60, loopModel->userTransformMtx);
         update_collider_transform(N(RotatingPlatformColliders)[i]);
         guMtxXFMF(loopModel->userTransformMtx, 0.0f, 0.0f, 0.0f, &ox, &oy, &oz);
-        if (gCollisionStatus.currentFloor == N(RotatingPlatformColliders)[i] ||
+        if (gCollisionStatus.curFloor == N(RotatingPlatformColliders)[i] ||
             gCollisionStatus.lastTouchedFloor == N(RotatingPlatformColliders)[i])
         {
-            playerStatus->pushVelocity.x = ox - it->lastRelativePos.x;
-            playerStatus->pushVelocity.y = oy - it->lastRelativePos.y;
-            playerStatus->pushVelocity.z = oz - it->lastRelativePos.z;
+            playerStatus->pushVel.x = ox - it->lastRelativePos.x;
+            playerStatus->pushVel.y = oy - it->lastRelativePos.y;
+            playerStatus->pushVel.z = oz - it->lastRelativePos.z;
         }
-        if (partner->currentFloor == N(RotatingPlatformColliders)[i]) {
+        if (partner->curFloor == N(RotatingPlatformColliders)[i]) {
             partner->pos.x += ox - it->lastRelativePos.x;
             partner->pos.y += oy - it->lastRelativePos.y;
             partner->pos.z += oz - it->lastRelativePos.z;
@@ -209,11 +209,11 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
 
     isPounding = FALSE;
     for (i = 0; i < ARRAY_COUNT(N(RotatingPlatformColliders)); i++) {
-        if (gCollisionStatus.currentFloor == N(RotatingPlatformColliders)[i]) {
+        if (gCollisionStatus.curFloor == N(RotatingPlatformColliders)[i]) {
             if (playerStatus->flags & PS_FLAG_NO_STATIC_COLLISION) {
-                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             }
             if (playerStatus->actionState == ACTION_STATE_SPIN_POUND ||
                 playerStatus->actionState == ACTION_STATE_TORNADO_POUND)

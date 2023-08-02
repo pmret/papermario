@@ -28,26 +28,26 @@ void action_update_knockback(void) {
 
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
-        ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x,
-                           playerStatus->lastGoodPosition.z);
-        playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
+        ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x,
+                           playerStatus->lastGoodPos.z);
+        playerStatus->curSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
     }
 
     sin_cos_rad(DEG_TO_RAD(ReturnAngle), &dx, &dy);
 
-    speed = playerStatus->currentSpeed;
+    speed = playerStatus->curSpeed;
 
     if (playerStatus->flags & PS_FLAG_ENTERING_BATTLE) {
         speed *= 0.5f;
     }
 
-    playerStatus->position.x += speed * dx;
-    playerStatus->position.z -= speed * dy;
+    playerStatus->pos.x += speed * dx;
+    playerStatus->pos.z -= speed * dy;
 
     if (playerStatus->actionSubstate == SUBSTATE_FLYING) {
         integrate_gravity();
 
-        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        playerStatus->pos.y += playerStatus->gravityIntegrator[0];
 
         if (playerStatus->gravityIntegrator[0] < 0.0f) {
             playerStatus->actionSubstate = SUBSTATE_FALLING;
@@ -56,7 +56,7 @@ void action_update_knockback(void) {
     } else {
         s32 colliderID;
 
-        playerStatus->position.y = player_check_collision_below(player_fall_distance(), &colliderID);
+        playerStatus->pos.y = player_check_collision_below(player_fall_distance(), &colliderID);
 
         if (colliderID >= 0) {
             colliderID = get_collider_flags(colliderID); //TODO surfaceType

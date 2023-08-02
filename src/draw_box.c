@@ -831,4 +831,3 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
         return FALSE;
     }
 }
-

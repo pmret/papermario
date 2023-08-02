@@ -29,17 +29,17 @@ void entity_Padlock_setupGfx(s32 entityIndex) {
     guMtxL2F(sp98, data->shackleMtx);
     guMtxCatF(sp58, sp98, sp98);
     sp98[3][0] += data->shacklePos;
-    guRotateF(spD8, entity->rotation.x, -1.0f, 0.0f, 0.0f);
+    guRotateF(spD8, entity->rot.x, -1.0f, 0.0f, 0.0f);
     guMtxCatF(spD8, sp98, sp98);
-    guRotateF(spD8, entity->rotation.z, 0.0f, 0.0f, 1.0f);
-    guRotateF(sp18, entity->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(spD8, entity->rot.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp18, entity->rot.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(spD8, sp18, sp18);
-    guRotateF(spD8, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(spD8, entity->rot.y, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp18, spD8, spD8);
     guMtxCatF(sp98, spD8, sp98);
     guScaleF(sp18, entity->scale.x, entity->scale.y, entity->scale.z);
     guMtxCatF(sp98, sp18, sp18);
-    guTranslateF(sp58, entity->position.x, entity->position.y, entity->position.z);
+    guTranslateF(sp58, entity->pos.x, entity->pos.y, entity->pos.z);
     guMtxCatF(sp18, sp58, sp58);
     guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -53,7 +53,7 @@ void entity_Padlock_push_player(Entity* entity) {
     PadlockData* data = entity->dataBuf.padlock;
     f32 deltaX, deltaZ;
 
-    if (playerStatus->colliderHeight < fabs(playerStatus->position.y - entity->position.y)) {
+    if (playerStatus->colliderHeight < fabs(playerStatus->pos.y - entity->pos.y)) {
         entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
     } else {
         entity->flags &= ~ENTITY_FLAG_DISABLE_COLLISION;
@@ -70,11 +70,11 @@ void entity_Padlock_push_player(Entity* entity) {
             data->pushSpeed = 2.5f;
         }
 
-        deltaX = data->pushSpeed * sin_rad(DEG_TO_RAD(180.0f - entity->rotation.y));
-        deltaZ = data->pushSpeed * cos_rad(DEG_TO_RAD(180.0f - entity->rotation.y));
+        deltaX = data->pushSpeed * sin_rad(DEG_TO_RAD(180.0f - entity->rot.y));
+        deltaZ = data->pushSpeed * cos_rad(DEG_TO_RAD(180.0f - entity->rot.y));
 
-        playerStatus->position.x += deltaX;
-        playerStatus->position.z -= deltaZ;
+        playerStatus->pos.x += deltaX;
+        playerStatus->pos.z -= deltaZ;
     } else {
         data->pushSpeed = 0.0f;
     }
@@ -96,39 +96,39 @@ void entity_Padlock_idle(Entity* entity) {
             if (data->shacklePos >= 20.0f) {
                 data->shacklePos = 20.0f;
                 data->state++;
-                entity->rotation.z += 12.0;
+                entity->rot.z += 12.0;
                 data->fallSpeed = -2.0f;
-                data->rotationSpeed = 0.2f;
+                data->rotSpeed = 0.2f;
             }
             break;
         case 2:
-            data->rotationSpeed += 0.2;
-            entity->rotation.x += data->rotationSpeed;
+            data->rotSpeed += 0.2;
+            entity->rot.x += data->rotSpeed;
 
             data->fallSpeed -= 1.0;
-            entity->position.y += data->fallSpeed;
+            entity->pos.y += data->fallSpeed;
 
-            if (entity->position.y <= entity->shadowPosY) {
-                entity->position.y = entity->shadowPosY;
+            if (entity->pos.y <= entity->shadowPosY) {
+                entity->pos.y = entity->shadowPosY;
                 data->fallSpeed = 5.0f;
-                data->rotationSpeed = 3.0f;
+                data->rotSpeed = 3.0f;
                 data->state++;
-                fx_sparkles(FX_SPARKLES_0, entity->position.x, entity->position.y + 25.0f, entity->position.z, 10.0f);
+                fx_sparkles(FX_SPARKLES_0, entity->pos.x, entity->pos.y + 25.0f, entity->pos.z, 10.0f);
                 entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
             }
             break;
         case 3:
-            data->rotationSpeed += 0.2;
-            entity->rotation.x += data->rotationSpeed;
+            data->rotSpeed += 0.2;
+            entity->rot.x += data->rotSpeed;
 
             data->fallSpeed -= 2.0;
-            entity->position.y += data->fallSpeed;
+            entity->pos.y += data->fallSpeed;
 
-            if (entity->position.y <= entity->shadowPosY) {
-                entity->position.y = entity->shadowPosY;
+            if (entity->pos.y <= entity->shadowPosY) {
+                entity->pos.y = entity->shadowPosY;
                 data->timer = 2;
                 data->fallSpeed = 10.0f;
-                data->rotationSpeed = 0.2f;
+                data->rotSpeed = 0.2f;
                 data->state++;
                 sfx_play_sound(SOUND_26A);
             }
@@ -139,26 +139,26 @@ void entity_Padlock_idle(Entity* entity) {
             }
             break;
         case 5:
-            data->rotationSpeed *= 2.0f;
-            if (data->rotationSpeed > 30.0f) {
-                data->rotationSpeed = 30.0f;
+            data->rotSpeed *= 2.0f;
+            if (data->rotSpeed > 30.0f) {
+                data->rotSpeed = 30.0f;
             }
-            entity->rotation.x += data->rotationSpeed;
-            if (entity->rotation.x >= 90.0) {
-                entity->rotation.x = 90.0f;
-                data->rotationSpeed = -20.0f;
+            entity->rot.x += data->rotSpeed;
+            if (entity->rot.x >= 90.0) {
+                entity->rot.x = 90.0f;
+                data->rotSpeed = -20.0f;
                 data->state++;
                 sfx_play_sound(SOUND_26A);
             }
             break;
         case 6:
-            data->rotationSpeed += 10.0f;
-            if (data->rotationSpeed > 30.0f) {
-                data->rotationSpeed = 30.0f;
+            data->rotSpeed += 10.0f;
+            if (data->rotSpeed > 30.0f) {
+                data->rotSpeed = 30.0f;
             }
-            entity->rotation.x += data->rotationSpeed;
-            if (entity->rotation.x >= 90.0) {
-                entity->rotation.x = 90.0f;
+            entity->rot.x += data->rotSpeed;
+            if (entity->rot.x >= 90.0) {
+                entity->rot.x = 90.0f;
                 data->timer = 5;
                 data->state++;
                 sfx_play_sound(SOUND_26A);

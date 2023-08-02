@@ -131,7 +131,7 @@ void shattering_stones_render(EffectInstance* effect) {
 
     renderTask.appendGfx = shattering_stones_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -153,7 +153,7 @@ void shattering_stones_appendGfx(void* effect) {
         guTranslateF(sp20, part->unk_00, part->unk_04, part->unk_08);
         guScaleF(sp60, 1.5f, 1.5f, 1.5f);
         guMtxCatF(sp60, sp20, spA0);
-        guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp60, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp60, spA0, spA0);
         guRotateF(sp60, part->unk_34, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp60, spA0, spA0);
@@ -173,7 +173,7 @@ void shattering_stones_appendGfx(void* effect) {
         guTranslateF(sp20, part->unk_00, part->unk_04, part->unk_08);
         guScaleF(sp60, 1.5f, 1.5f, 1.5f);
         guMtxCatF(sp60, sp20, spA0);
-        guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp60, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp60, spA0, spA0);
         guRotateF(spE0, part->unk_2C, 1.0f, 0.0f, 0.0f);
 

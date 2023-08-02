@@ -58,13 +58,13 @@ void action_update_step_up(void) {
     integrate_gravity();
     sin_cos_rad(DEG_TO_RAD(playerStatus->targetYaw), &sinTheta, &cosTheta);
     colliderID = NO_COLLIDER;
-    playerStatus->position.x += sinTheta * 3.0f;
-    playerStatus->position.z -= cosTheta * 3.0f;
+    playerStatus->pos.x += sinTheta * 3.0f;
+    playerStatus->pos.z -= cosTheta * 3.0f;
 
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
-        playerStatus->position.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &colliderID);
+        playerStatus->pos.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &colliderID);
     } else {
-        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        playerStatus->pos.y += playerStatus->gravityIntegrator[0];
     }
 
     if (colliderID >= 0) {
@@ -94,18 +94,18 @@ void action_update_step_up_peach(void) {
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         suggest_player_anim_allow_backward(ANIM_Peach1_StepUp);
-        playerStatus->currentStateTime = 8;
+        playerStatus->curStateTime = 8;
     }
 
-    if (playerStatus->currentStateTime != 0) {
-        playerStatus->currentStateTime--;
-        if (playerStatus->currentStateTime == 4) {
+    if (playerStatus->curStateTime != 0) {
+        playerStatus->curStateTime--;
+        if (playerStatus->curStateTime == 4) {
             try_player_footstep_sounds(1);
         }
     } else {
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             set_action_state(ACTION_STATE_IDLE);
-        } else if (playerStatus->currentSpeed >= playerStatus->runSpeed) {
+        } else if (playerStatus->curSpeed >= playerStatus->runSpeed) {
             set_action_state(ACTION_STATE_RUN);
         } else {
             set_action_state(ACTION_STATE_WALK);

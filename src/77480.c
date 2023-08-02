@@ -182,7 +182,7 @@ s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32
         yaw = 180.0f;
     }
 
-    return player_raycast_below(yaw - 90.0f + gCameras[gCurrentCameraID].currentYaw, playerStatus->colliderDiameter,
+    return player_raycast_below(yaw - 90.0f + gCameras[gCurrentCameraID].curYaw, playerStatus->colliderDiameter,
                                 outX, outY, outZ, outLength, hitRx, hitRz, hitDirX, hitDirZ);
 }
 
@@ -607,31 +607,31 @@ void update_player(void) {
 
     update_partner_timers();
 
-    if ((playerStatus->timeInAir > 100) || (playerStatus->position.y < -2000.0f)) {
+    if ((playerStatus->timeInAir > 100) || (playerStatus->pos.y < -2000.0f)) {
         if (!(playerStatus->animFlags & PA_FLAG_NO_OOB_RESPAWN)) {
             playerStatus->timeInAir = 0;
-            playerStatus->position.x = playerStatus->lastGoodPosition.x;
-            playerStatus->position.y = playerStatus->lastGoodPosition.y;
-            playerStatus->position.z = playerStatus->lastGoodPosition.z;
+            playerStatus->pos.x = playerStatus->lastGoodPos.x;
+            playerStatus->pos.y = playerStatus->lastGoodPos.y;
+            playerStatus->pos.z = playerStatus->lastGoodPos.z;
 
             if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
                 Npc* partner;
 
                 playerStatus->animFlags |= PA_FLAG_DISMOUNTING_ALLOWED | PA_FLAG_INTERRUPT_USE_PARTNER;
                 partner = get_npc_unsafe(NPC_PARTNER);
-                partner->pos.x = playerStatus->lastGoodPosition.x;
-                partner->pos.y = playerStatus->lastGoodPosition.y + playerStatus->colliderHeight;
-                partner->pos.z = playerStatus->lastGoodPosition.z;
-                partner->moveToPos.y = playerStatus->lastGoodPosition.y;
+                partner->pos.x = playerStatus->lastGoodPos.x;
+                partner->pos.y = playerStatus->lastGoodPos.y + playerStatus->colliderHeight;
+                partner->pos.z = playerStatus->lastGoodPos.z;
+                partner->moveToPos.y = playerStatus->lastGoodPos.y;
             } else {
                 playerStatus->timeInAir = 10;
             }
         }
     }
 
-    collisionStatus->currentWall = NO_COLLIDER;
+    collisionStatus->curWall = NO_COLLIDER;
     collisionStatus->lastWallHammered = NO_COLLIDER;
-    collisionStatus->currentInspect = NO_COLLIDER;
+    collisionStatus->curInspect = NO_COLLIDER;
     collisionStatus->floorBelow = TRUE;
 
     update_player_input();
@@ -664,10 +664,10 @@ void update_player(void) {
     player_update_sprite();
 
     gameStatus = gGameStatusPtr;
-    gameStatus->playerPos.x = playerStatus->position.x;
-    gameStatus->playerPos.y = playerStatus->position.y;
-    gameStatus->playerPos.z = playerStatus->position.z;
-    gameStatus->playerYaw = playerStatus->currentYaw;
+    gameStatus->playerPos.x = playerStatus->pos.x;
+    gameStatus->playerPos.y = playerStatus->pos.y;
+    gameStatus->playerPos.z = playerStatus->pos.z;
+    gameStatus->playerYaw = playerStatus->curYaw;
 
     check_input_open_menus();
     if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
@@ -680,9 +680,9 @@ void update_player(void) {
     check_for_pulse_stone();
     check_for_ispy();
 
-    playerStatus->pushVelocity.x = 0.0f;
-    playerStatus->pushVelocity.y = 0.0f;
-    playerStatus->pushVelocity.z = 0.0f;
+    playerStatus->pushVel.x = 0.0f;
+    playerStatus->pushVel.y = 0.0f;
+    playerStatus->pushVel.z = 0.0f;
     playerStatus->flags &= ~PS_FLAG_SLIDING;
     playerStatus->animFlags &= ~PA_FLAG_FORCE_USE_PARTNER;
 }
@@ -699,7 +699,7 @@ void check_input_use_partner(void) {
         && !(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)
         && actionState <= ACTION_STATE_RUN
     ) {
-        if (playerData->currentPartner == PARTNER_GOOMBARIO) {
+        if (playerData->curPartner == PARTNER_GOOMBARIO) {
             WorldTattleInteractionID = playerStatus->interactingWithID;
         }
         partner_use_ability();
@@ -747,9 +747,9 @@ void phys_update_standard(void) {
     }
 
     if (!(playerStatus->flags & PS_FLAG_CAMERA_DOESNT_FOLLOW)) {
-        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-        gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+        gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
     }
 }
 
@@ -761,9 +761,9 @@ void phys_update_lava_reset(void) {
     if (!(gPlayerStatusPtr->flags & PS_FLAG_CAMERA_DOESNT_FOLLOW)) {
         Camera* camera = &gCameras[CAM_DEFAULT];
 
-        camera->targetPos.x = gPlayerStatusPtr->position.x;
-        camera->targetPos.y = gPlayerStatusPtr->position.y;
-        camera->targetPos.z = gPlayerStatusPtr->position.z;
+        camera->targetPos.x = gPlayerStatusPtr->pos.x;
+        camera->targetPos.y = gPlayerStatusPtr->pos.y;
+        camera->targetPos.z = gPlayerStatusPtr->pos.z;
     }
 }
 
@@ -777,8 +777,8 @@ void player_reset_data(void) {
     mem_clear(playerStatus, sizeof(PlayerStatus));
     playerStatus->flags = PS_FLAG_HAS_REFLECTION;
     reset_player_status();
-    playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y,
-                             playerStatus->position.z);
+    playerStatus->shadowID = create_shadow_type(0, playerStatus->pos.x, playerStatus->pos.y,
+                             playerStatus->pos.z);
     func_800E6B68();
     func_800E0B14();
     clear_conversation_prompt();
@@ -925,7 +925,7 @@ void update_player_blink(void) {
 f32 get_xz_dist_to_player(f32 x, f32 z) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    return dist2D(x, z, playerStatus->position.x, playerStatus->position.z);
+    return dist2D(x, z, playerStatus->pos.x, playerStatus->pos.z);
 }
 
 void enable_player_shadow(void) {
@@ -983,7 +983,7 @@ void func_800E01DC(void) {
 s32 game_scripts_disabled(void) {
     s32 ret = FALSE;
 
-    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons[0] & BUTTON_R)) {
+    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->curButtons[0] & BUTTON_R)) {
         if (gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
@@ -1137,7 +1137,7 @@ s32 func_800E06D8(void) {
     if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount != 0) {
         return FALSE;
     }
-    if (gCollisionStatus.currentWall == NO_COLLIDER) {
+    if (gCollisionStatus.curWall == NO_COLLIDER) {
         return FALSE;
     }
     if (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC
@@ -1149,7 +1149,7 @@ s32 func_800E06D8(void) {
         return TRUE;
     }
 
-    currentWall = gCollisionStatus.currentWall;
+    currentWall = gCollisionStatus.curWall;
     if (!(currentWall & COLLISION_WITH_ENTITY_BIT)) {
         if (!should_collider_allow_interact(currentWall)) {
             return FALSE;
@@ -1185,7 +1185,7 @@ void check_for_interactables(void) {
     }
 
     if (InteractNotificationCallback == NULL) {
-        s32 curInteraction = gCollisionStatus.currentWall;
+        s32 curInteraction = gCollisionStatus.curWall;
 
         if (playerStatus->inputDisabledCount != 0) {
             if (gPlayerStatus.interactingWithID != curInteraction) {
@@ -1199,7 +1199,7 @@ void check_for_interactables(void) {
         }
 
         if (curInteraction == NO_COLLIDER) {
-            s32 floor = gCollisionStatus.currentFloor;
+            s32 floor = gCollisionStatus.curFloor;
 
             if ((floor >= 0) && (floor & COLLISION_WITH_ENTITY_BIT)) {
                 phi_s2 = 1;
@@ -1313,8 +1313,8 @@ void update_partner_timers(void) {
 
 void player_update_sprite(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    f32 camRelativeYaw = get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw);
+    f32 cameraYaw = gCameras[gCurrentCameraID].curYaw;
+    f32 camRelativeYaw = get_clamped_angle_diff(cameraYaw, playerStatus->curYaw);
     s32 trueAnim;
     s32 sprIndex;
     f32 angle;
@@ -1338,7 +1338,7 @@ void player_update_sprite(void) {
         PrevPlayerDirection = direction;
         playerStatus->flipYaw[gCurrentCameraID] = (direction != 0) ? 180.0f : -180.0f;
 
-        if (fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) >= 90.0f) {
+        if (fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->curYaw)) >= 90.0f) {
             playerStatus->flipYaw[gCurrentCameraID] = -playerStatus->flipYaw[gCurrentCameraID];
         }
     }
@@ -1367,7 +1367,7 @@ void player_update_sprite(void) {
 
     PrevPlayerCamRelativeYaw = angle = clamp_angle(camRelativeYaw);
     angle = clamp_angle(playerStatus->flipYaw[gCurrentCameraID] + angle);
-    if (playerStatus->currentSpeed == 0.0f) {
+    if (playerStatus->curSpeed == 0.0f) {
         D_800F7B48 = 0.0f;
     }
 
@@ -1382,12 +1382,12 @@ void player_update_sprite(void) {
             trueAnim = playerStatus->anim;
             if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
                 && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
-                && fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->currentYaw)) < 60.0f
+                && fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->curYaw)) < 60.0f
             ) {
                 trueAnim = get_player_back_anim(trueAnim);
             }
             playerStatus->trueAnimation = trueAnim;
-            playerStatus->currentYaw = playerStatus->targetYaw;
+            playerStatus->curYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
             if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
@@ -1474,8 +1474,8 @@ void render_player_model(void) {
 
     if (playerStatus->flags & PS_FLAG_SPRITE_REDRAW) {
         playerStatus->flags &= ~PS_FLAG_SPRITE_REDRAW;
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y,
-                          playerStatus->position.z, &x, &y, &z);
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, playerStatus->pos.y,
+                          playerStatus->pos.z, &x, &y, &z);
         if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
                 if (playerStatus->alpha1 < 254) {
@@ -1503,7 +1503,7 @@ void render_player_model(void) {
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
             rtPtr->appendGfxArg = playerStatus;
-            rtPtr->distance = -z;
+            rtPtr->dist = -z;
             rtPtr->renderMode = playerStatus->renderMode;
 
 
@@ -1524,7 +1524,7 @@ void render_player_model(void) {
 void appendGfx_player(void* data) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
-    f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
+    f32 temp_f0 = -gCameras[gCurrentCamID].curYaw;
     s32 spriteIdx;
 
     if (playerStatus->actionState == ACTION_STATE_SLIDING) {
@@ -1533,7 +1533,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(spE0, sp20, sp20);
         guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp20, spA0, sp20);
-        guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y - 1.0f, playerStatus->position.z);
+        guTranslateF(sp60, playerStatus->pos.x, playerStatus->pos.y - 1.0f, playerStatus->pos.z);
         guMtxCatF(sp20, sp60, sp20);
         spr_draw_player_sprite(PLAYER_SPRITE_MAIN, 0, 0, 0, sp20);
     } else {
@@ -1550,7 +1550,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(sp20, sp60, sp20);
         guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(sp20, spE0, sp20);
-        guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+        guTranslateF(sp60, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
         guMtxCatF(sp20, sp60, sp20);
 
         if (playerStatus->animFlags & PA_FLAG_SHIVERING) {
@@ -1599,7 +1599,7 @@ void appendGfx_player_spin(void* data) {
     s32 spriteIdx;
 
     for (i = 0; i < 2; i++) {
-        yaw = -gCameras[gCurrentCamID].currentYaw;
+        yaw = -gCameras[gCurrentCamID].curYaw;
 
         if (i == 0) {
             if (playerStatus->spriteFacingAngle > 90.0f && playerStatus->spriteFacingAngle <= 180.0f) {
@@ -1625,20 +1625,20 @@ void appendGfx_player_spin(void* data) {
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
             guMtxCatF(rotation, mtx, mtx);
-            px = playerStatus->position.x;
-            py = playerStatus->position.y;
-            pz = playerStatus->position.z;
+            px = playerStatus->pos.x;
+            py = playerStatus->pos.y;
+            pz = playerStatus->pos.z;
         } else {
             blurAngle = phys_get_spin_history(i, &x, &y, &z);
 
             if (y == 0x80000000) {
-                py = playerStatus->position.y;
+                py = playerStatus->pos.y;
             } else {
                 py = y;
             }
 
-            px = playerStatus->position.x;
-            pz = playerStatus->position.z;
+            px = playerStatus->pos.x;
+            pz = playerStatus->pos.z;
             set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_SET_ALPHA, 0, 0, 0, 64, 0);
             guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
@@ -1686,24 +1686,24 @@ void update_player_shadow(void) {
         yawTemp = 180.0f;
     }
 
-    raycastYaw = (yawTemp - 90.0f) + gCameras[gCurrentCameraID].currentYaw;
-    shadow->position.x = playerX = playerStatus->position.x;
-    shadow->position.z = playerZ = playerStatus->position.z;
+    raycastYaw = (yawTemp - 90.0f) + gCameras[gCurrentCameraID].curYaw;
+    shadow->pos.x = playerX = playerStatus->pos.x;
+    shadow->pos.z = playerZ = playerStatus->pos.z;
     x = playerX;
-    y = playerStatus->position.y + (playerStatus->colliderHeight / 3.5f);
+    y = playerStatus->pos.y + (playerStatus->colliderHeight / 3.5f);
     z = playerZ;
     shadowScale = 1024.0f;
     gCollisionStatus.floorBelow = player_raycast_below(raycastYaw, playerStatus->colliderDiameter, &x, &y, &z,
                                                        &shadowScale, &hitRx, &hitRz, &hitDirX, &hitDirZ);
-    shadow->rotation.x = hitRx;
-    shadow->rotation.z = hitRz;
-    shadow->rotation.y = clamp_angle(-camera->currentYaw);
+    shadow->rot.x = hitRx;
+    shadow->rot.z = hitRz;
+    shadow->rot.y = clamp_angle(-camera->curYaw);
     hitRx += 180.0f;
     hitRz += 180.0f;
 
     if (hitRx != 0.0f || hitRz != 0.0f) {
-        s32 dist = dist2D(x, z, playerStatus->position.x, playerStatus->position.z);
-        f32 tan = atan2(playerStatus->position.x, playerStatus->position.z, x, z);
+        s32 dist = dist2D(x, z, playerStatus->pos.x, playerStatus->pos.z);
+        f32 tan = atan2(playerStatus->pos.x, playerStatus->pos.z, x, z);
         s32 angleTemp = clamp_angle((-90.0f - tan) + get_player_normal_yaw());
 
         if (gGameStatusPtr->playerGroundTraceNormal.y != 0.0f) {
@@ -1712,7 +1712,7 @@ void update_player_shadow(void) {
         }
     }
 
-    shadow->position.y = y;
+    shadow->pos.y = y;
     shadow->alpha = (f64)playerStatus->alpha1 / 2;
 
     if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)) {

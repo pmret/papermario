@@ -123,7 +123,7 @@ void N(update)(void) {
             if (((actionCommandStatus->prepareTime - temp_s0_3) - 2) <= 0) {
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
             }
-            if ((battleStatus->currentButtonsPressed & BUTTON_A) && (actionCommandStatus->autoSucceed == 0)) {
+            if ((battleStatus->curButtonsPressed & BUTTON_A) && (actionCommandStatus->autoSucceed == 0)) {
                 actionCommandStatus->wrongButtonPressed = TRUE;
                 battleStatus->unk_86 = -1;
             }
@@ -153,7 +153,7 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess < 0) {
-                if (((battleStatus->currentButtonsPressed & BUTTON_A)&&
+                if (((battleStatus->curButtonsPressed & BUTTON_A)&&
                     !actionCommandStatus->wrongButtonPressed) ||
                     (actionCommandStatus->autoSucceed != 0)) {
                     battleStatus->actionSuccess = 1;

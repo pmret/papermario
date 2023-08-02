@@ -59,9 +59,9 @@ API_CALLABLE(N(func_80240E80_8659C0)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            gPlayerStatus.position.x = x;
-            gPlayerStatus.position.y = y + D_80243434_867F74;
-            gPlayerStatus.position.z = z;
+            gPlayerStatus.pos.x = x;
+            gPlayerStatus.pos.y = y + D_80243434_867F74;
+            gPlayerStatus.pos.z = z;
             whale->colliderPos.x = whale->pos.x;
             whale->colliderPos.y = whale->pos.y;
             whale->colliderPos.z = whale->pos.z;
@@ -112,7 +112,7 @@ API_CALLABLE(N(func_80241098_865BD8)) {
             break;
 
         case 10:
-            npc->currentAnim = ANIM_Kolorado_Shout;
+            npc->curAnim = ANIM_Kolorado_Shout;
             D_80243434_867F74 = 0.0f;
             D_80243438_867F78 = 5.0f;
             D_8024343C_867F7C = 11;
@@ -128,7 +128,7 @@ API_CALLABLE(N(func_80241098_865BD8)) {
             } else {
                 D_80243438_867F78 -= 2.0f;
             }
-            if (npc->currentAnim == ANIM_Kolorado_Idle) {
+            if (npc->curAnim == ANIM_Kolorado_Idle) {
                 D_80243438_867F78 = 4.0f;
                 D_8024343C_867F7C++;
             }

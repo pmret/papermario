@@ -245,7 +245,7 @@ void something_rotating_render(EffectInstance* effect) {
 
     renderTask.appendGfx = something_rotating_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
     retTask = queue_render_task(&renderTask);
@@ -258,7 +258,7 @@ void func_E01166E8(s32 arg0, SomethingRotatingFXData* part) {
     Matrix4f sp60;
 
     if (arg0 == 0) {
-        temp = gCameras[gCurrentCameraID].currentYaw;
+        temp = gCameras[gCurrentCameraID].curYaw;
     } else {
         temp = 0.0f;
     }

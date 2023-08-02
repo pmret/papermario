@@ -44,7 +44,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->AI_TEMP_STATE = 100;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->flags &= ~NPC_FLAG_GRAVITY;
@@ -61,15 +61,15 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->collisionHeight = enemy->varTable[6];
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         if (npc->flags & NPC_FLAG_JUMPING) {
-            npc->currentAnim = ANIM_Spiny_Anim18;
+            npc->curAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             npc->jumpScale = 1.0f;
             script->AI_TEMP_STATE = 102;
         } else {
             EffectInstance* emoteTemp;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             script->functionTemp[1] = 0;
             script->AI_TEMP_STATE = 200;
         }
@@ -126,21 +126,21 @@ API_CALLABLE(N(SpinyAI_Main)) {
             }
             npc->pos.y = npc2->pos.y + 25.0;
             npc->pos.z = npc2->pos.z + 1.0;
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             npc->flags |= NPC_FLAG_8;
             npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
-            npc->currentAnim = ANIM_Spiny_Anim18;
+            npc->curAnim = ANIM_Spiny_Anim18;
             script->AI_TEMP_STATE = 101;
         case 101:
             if (enemy->varTable[10] != 3) {
                 break;
             }
             enemy->varTable[10] = 4;
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             npc->moveSpeed = 2.5f;
-            npc->jumpVelocity = 8.0f;
+            npc->jumpVel = 8.0f;
             npc->jumpScale = 0.8f;
             npc->flags |= NPC_FLAG_JUMPING;
             script->AI_TEMP_STATE = 102;
@@ -156,12 +156,12 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     npc->moveSpeed = 0.0f;
                 }
             }
-            if (npc->jumpVelocity < 0.0) {
+            if (npc->jumpVel < 0.0) {
                 x2 = npc->pos.x;
                 y2 = npc->pos.y + 13.0;
                 z2 = npc->pos.z;
-                w2 = fabsf(npc->jumpVelocity) + 16.0;
-                if ((npc_raycast_down_sides(npc->collisionChannel, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVelocity) + 13.0))) {
+                w2 = fabsf(npc->jumpVel) + 16.0;
+                if ((npc_raycast_down_sides(npc->collisionChannel, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVel) + 13.0))) {
                     npc->pos.y = y2;
                     enemy->territory->wander.centerPos.x = npc->pos.x;
                     enemy->territory->wander.centerPos.y = npc->pos.y;
@@ -187,22 +187,22 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     }
                     npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     npc->flags &= ~NPC_FLAG_JUMPING;
-                    npc->jumpVelocity = 0.0f;
-                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                    npc->currentAnim = ANIM_Spiny_Anim1A;
+                    npc->jumpVel = 0.0f;
+                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
+                    npc->curAnim = ANIM_Spiny_Anim1A;
                     npc->duration = 3;
                     script->AI_TEMP_STATE = 103;
                     break;
                 }
             }
-            npc->pos.y += npc->jumpVelocity;
-            npc->jumpVelocity -= npc->jumpScale;
+            npc->pos.y += npc->jumpVel;
+            npc->jumpVel -= npc->jumpScale;
             break;
         case 103:
             npc->duration--;
             if (npc->duration <= 0) {
                 npc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
-                npc->currentAnim = ANIM_Spiny_Anim01;
+                npc->curAnim = ANIM_Spiny_Anim01;
                 script->AI_TEMP_STATE = 0;
             }
             break;

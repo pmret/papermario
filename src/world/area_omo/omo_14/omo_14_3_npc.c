@@ -5,9 +5,9 @@
 API_CALLABLE(N(SurroundPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
-    f32 goalPosX = playerStatus->position.x +
+    f32 goalPosX = playerStatus->pos.x +
         ((playerStatus->colliderDiameter + npc->collisionDiameter) * 0.5f * sin_deg((npc->npcID * 360.0f) / 10.0f));
-    f32 goalPosZ = playerStatus->position.z -
+    f32 goalPosZ = playerStatus->pos.z -
         ((playerStatus->colliderDiameter + npc->collisionDiameter) * 0.5f * cos_deg((npc->npcID * 360.0f) / 10.0f));
     f32 dist = dist2D(npc->pos.x, npc->pos.z, goalPosX, goalPosZ);
 
@@ -23,19 +23,19 @@ API_CALLABLE(N(SurroundPlayer)) {
         }
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     } else {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     }
 
-    if (script->varTableF[11] == playerStatus->position.x && script->varTableF[13] == playerStatus->position.z) {
+    if (script->varTableF[11] == playerStatus->pos.x && script->varTableF[13] == playerStatus->pos.z) {
         if (dist < 20.0f) {
             script->varTable[14]++;
         } else {
             script->varTable[14] = 0;
         }
     }
-    script->varTableF[11] = playerStatus->position.x;
-    script->varTableF[12] = playerStatus->position.y;
-    script->varTableF[13] = playerStatus->position.z;
+    script->varTableF[11] = playerStatus->pos.x;
+    script->varTableF[12] = playerStatus->pos.y;
+    script->varTableF[13] = playerStatus->pos.z;
     return ApiStatus_DONE2;
 }
 

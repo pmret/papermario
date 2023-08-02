@@ -49,9 +49,9 @@ void N(SentinelAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     if (npc->duration <= 0) {
         npc->flags &= ~NPC_FLAG_200000;
         npc->duration = aiSettings->chaseUpdateInterval / 2 + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         npc->moveSpeed = aiSettings->chaseSpeed;
-        angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
         if (aiSettings->chaseTurnRate < fabsf(deltaAngle)) {
             angle = npc->yaw;
@@ -72,8 +72,8 @@ void N(SentinelAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
 
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-        if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                   gPlayerStatusPtr->position.z) <= (npc->moveSpeed * 2.5)) {
+        if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+                   gPlayerStatusPtr->pos.z) <= (npc->moveSpeed * 2.5)) {
             npc->duration = 0;
             script->AI_TEMP_STATE = AI_STATE_SENTINEL_DESCEND_INIT;
         } else {
@@ -100,8 +100,8 @@ void N(SentinelAI_DescendInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
     }
 
     enemy->varTable[0] |= SENTINEL_AI_FLAG_CHASING;
-    npc->pos.x = gPlayerStatusPtr->position.x;
-    npc->pos.z = gPlayerStatusPtr->position.z;
+    npc->pos.x = gPlayerStatusPtr->pos.x;
+    npc->pos.z = gPlayerStatusPtr->pos.z;
     if (!(enemy->varTable[0] & SENTINEL_AI_FLAG_PLAYING_SOUND)) {
         enemy->varTable[0] |= SENTINEL_AI_FLAG_PLAYING_SOUND;
     }
@@ -120,28 +120,28 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     sfx_adjust_env_sound_pos(SOUND_80000011, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
-        npc->rotation.y = 0.0f;
+        npc->rot.y = 0.0f;
         npc->flags &= ~NPC_FLAG_200000;
         script->AI_TEMP_STATE = AI_STATE_SENTINEL_LOSE_PLAYER_INIT;
     } else {
-        npc->pos.x = gPlayerStatusPtr->position.x;
-        npc->pos.z = gPlayerStatusPtr->position.z + 2.0f;
-        npc->rotation.y += 25.0f;
-        if (npc->rotation.y > 360.0) {
-            npc->rotation.y -= 360.0;
+        npc->pos.x = gPlayerStatusPtr->pos.x;
+        npc->pos.z = gPlayerStatusPtr->pos.z + 2.0f;
+        npc->rot.y += 25.0f;
+        if (npc->rot.y > 360.0) {
+            npc->rot.y -= 360.0;
         }
-        color = 255.0f - (cosine((s32)npc->rotation.y % 180) * 56.0f);
+        color = 255.0f - (cosine((s32)npc->rot.y % 180) * 56.0f);
         set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_SET_COLOR, color, color, color, 255, 0);
 
-        posX = gPlayerStatusPtr->position.x;
-        posY = gPlayerStatusPtr->position.y;
-        posZ = gPlayerStatusPtr->position.z;
+        posX = gPlayerStatusPtr->pos.x;
+        posY = gPlayerStatusPtr->pos.y;
+        posZ = gPlayerStatusPtr->pos.z;
         hitDepth = 1000.0f;
         npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth);
         if (fabsf(npc->pos.y - posY) > 24.0) {
             npc->pos.y -= SENTINEL_AI_DESCEND_RATE;
         } else {
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             npc->flags &= ~NPC_FLAG_200000;
             if (gPartnerStatus.actingPartner != PARTNER_BOW) {
                 disable_player_input();
@@ -165,7 +165,7 @@ void N(SentinelAI_LosePlayerInit)(Evt* script, MobileAISettings* aiSettings, Ene
         sfx_stop_sound(SOUND_80000011);
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_PLAYING_SOUND;
     }
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
     npc->duration = 20;
     script->AI_TEMP_STATE = AI_STATE_SENTINEL_LOSE_PLAYER;
 }

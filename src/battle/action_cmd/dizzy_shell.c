@@ -120,7 +120,7 @@ void N(update)(void) {
                 }
             }
 
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                 s32 b = actionCommandStatus->targetWeakness * 850;
                 s32 temp_v1_2 = (a * b) / 10000;

@@ -973,25 +973,25 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
         }
 
         dist = hitDepthHoriz + entity->effectiveSize;
-        if (startX > entity->position.x + dist || startX < entity->position.x - dist) {
+        if (startX > entity->pos.x + dist || startX < entity->pos.x - dist) {
             continue;
         }
 
-        if (startZ > entity->position.z + dist || startZ < entity->position.z - dist) {
+        if (startZ > entity->pos.z + dist || startZ < entity->pos.z - dist) {
             continue;
         }
 
         switch (type) {
             case ENTITY_TEST_ANY:
             case ENTITY_TEST_DOWN:
-                dist = entity->position.y;
+                dist = entity->pos.y;
                 dist2 = hitDepthDown + entity->effectiveSize * 2;
                 if (dist + dist2 < startY || startY < dist - dist2) {
                     continue;
                 }
                 break;
             case ENTITY_TEST_LATERAL:
-                dist = entity->position.y;
+                dist = entity->pos.y;
                 dist2 = entity->effectiveSize * 2;
                 if (dist + dist2 < startY || startY < dist - dist2) {
                     continue;
@@ -1010,8 +1010,8 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
         boxVertices[2].z = boxVertices[3].z = boxVertices[6].z = boxVertices[7].z = -aabbZ;
 
         guMtxXFMF(entity->inverseTransformMatrix, dirX, dirY, dirZ, &gCollisionRayDirX, &gCollisionRayDirY, &gCollisionRayDirZ);
-        guMtxXFMF(entity->inverseTransformMatrix, startX - entity->position.x, startY - entity->position.y,
-                  startZ - entity->position.z, &gCollisionRayStartX, &gCollisionRayStartY, &gCollisionRayStartZ);
+        guMtxXFMF(entity->inverseTransformMatrix, startX - entity->pos.x, startY - entity->pos.y,
+                  startZ - entity->pos.z, &gCollisionRayStartX, &gCollisionRayStartY, &gCollisionRayStartZ);
 
         for (j = 0; j < 12; j++) {
             Vec3f* v1 = triangle->v1 = &boxVertices[gEntityColliderFaces[j].x];
@@ -1052,12 +1052,12 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                     break;
             }
 
-            guRotateF(tempMatrix1, entity->rotation.x, 1.0f, 0.0f, 0.0f);
-            guRotateF(tempMatrix2, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+            guRotateF(tempMatrix1, entity->rot.x, 1.0f, 0.0f, 0.0f);
+            guRotateF(tempMatrix2, entity->rot.z, 0.0f, 0.0f, 1.0f);
             guMtxCatF(tempMatrix1, tempMatrix2, tempMatrix1);
-            guRotateF(tempMatrix2, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+            guRotateF(tempMatrix2, entity->rot.y, 0.0f, 1.0f, 0.0f);
             guMtxCatF(tempMatrix1, tempMatrix2, tempMatrix1);
-            guTranslateF(tempMatrix2, entity->position.x, entity->position.y, entity->position.z);
+            guTranslateF(tempMatrix2, entity->pos.x, entity->pos.y, entity->pos.z);
             guMtxCatF(tempMatrix1, tempMatrix2, tempMatrix1);
             guMtxXFMF(tempMatrix1, gCollisionPointX, gCollisionPointY, gCollisionPointZ, hitX, hitY, hitZ);
 

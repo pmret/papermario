@@ -30,10 +30,10 @@ API_CALLABLE(N(UnkAngleFunc001)) {
     }
 
     y = npc->pos.y;
-    if (npc->currentAnim == ANIM_Kolorado_Still ||
-        npc->currentAnim == ANIM_Kolorado_Walk ||
-        npc->currentAnim == ANIM_Kolorado_Talk ||
-        npc->currentAnim == ANIM_Kolorado_HurtStill)
+    if (npc->curAnim == ANIM_Kolorado_Still ||
+        npc->curAnim == ANIM_Kolorado_Walk ||
+        npc->curAnim == ANIM_Kolorado_Talk ||
+        npc->curAnim == ANIM_Kolorado_HurtStill)
     {
         y += 2.0f * sin_deg(N(unkAngle1));
     }
@@ -54,7 +54,7 @@ void N(unkVtxFunc001)(Vtx* firstVertex, Vtx* copiedVertices, s32 numVertices, s3
     s32 offset;
 
     wagPhase = *wagPhasePtr;
-    switch (get_npc_safe(NPC_Whale)->currentAnim) {
+    switch (get_npc_safe(NPC_Whale)->curAnim) {
         case ANIM_Kolorado_Still:
         case ANIM_Kolorado_Yell:
         case ANIM_Kolorado_IdleSad:

@@ -176,7 +176,7 @@ void state_step_end_battle(void) {
                 void* mapShape;
                 u32 sizeTemp;
 
-                partner_init_after_battle(playerData->currentPartner);
+                partner_init_after_battle(playerData->curPartner);
                 load_map_script_lib();
                 mapShape = load_asset_by_name(wMapShapeName, &sizeTemp);
                 decode_yay0(mapShape, &gMapShapeData);

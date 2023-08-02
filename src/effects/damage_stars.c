@@ -115,8 +115,8 @@ void damage_stars_main(
                             part->unk_18 = arg6 + sp30[0][2] * var_f30 + sp30[1][2] * sp70 + sp30[2][2] * var_f28;
                             break;
                         case 3:
-                            rotateX = sin_deg(gCameras[gCurrentCameraID].currentYaw);
-                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                            rotateX = sin_deg(gCameras[gCurrentCameraID].curYaw);
+                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].curYaw);
                             guRotateF(sp30,
                                 (arg7 != 1) ? (i * 100) / (arg7 - 1) - 50 : 0.0f,
                                 rotateX, 0.0f, rotateZ);
@@ -125,8 +125,8 @@ void damage_stars_main(
                             part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
                             break;
                         case 4:
-                            rotateX = sin_deg(gCameras[gCurrentCameraID].currentYaw);
-                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                            rotateX = sin_deg(gCameras[gCurrentCameraID].curYaw);
+                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].curYaw);
                             guRotateF(sp30, (i * 360.0f) / (arg7 - 1), rotateX, 0.0f, rotateZ);
                             part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
                             part->unk_14 = sp30[0][1] * arg4 + sp30[1][1] * arg5 + sp30[2][1] * arg6;
@@ -232,7 +232,7 @@ void damage_stars_render(EffectInstance* effect) {
 
     renderTask.appendGfx = damage_stars_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -260,7 +260,7 @@ void damage_stars_appendGfx(void* effect) {
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0030E90[rIdx % 36], D_E0030E90[gIdx % 36], D_E0030E90[bIdx % 36], part->unk_24);
         guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
         guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

@@ -800,12 +800,12 @@ API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {
         scale = 1000.0f;
         entity_raycast_down(&x, &y, &z, &rotX, &rotZ, &scale);
         set_standard_shadow_scale(shadow, scale);
-        shadow->position.x = x;
-        shadow->position.y = y;
-        shadow->position.z = z;
-        shadow->rotation.x = rotX;
-        shadow->rotation.y = 0.0f;
-        shadow->rotation.z = rotZ;
+        shadow->pos.x = x;
+        shadow->pos.y = y;
+        shadow->pos.z = z;
+        shadow->rot.x = rotX;
+        shadow->rot.y = 0.0f;
+        shadow->rot.z = rotZ;
         shadow->scale.x *= 1.3f;
         shadow->scale.z *= 1.3f;
     }

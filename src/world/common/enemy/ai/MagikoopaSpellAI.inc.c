@@ -10,18 +10,18 @@ s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVol
         f32 angle;
         f32 t1;
 
-        if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
+        if (clamp_angle(get_clamped_angle_diff(camera->curYaw, npc->yaw)) < 180.0) {
             angle = 90.0f;
         } else {
             angle = 270.0f;
         }
 
-        t1 = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        t1 = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         if (fabsf(get_clamped_angle_diff(angle, t1)) > 75.0) {
             return -1;
         }
 
-        t1 = atan2(0.0f, npc->pos.y, fabsf(npc->pos.x - gPlayerStatusPtr->position.x), gPlayerStatusPtr->position.y);
+        t1 = atan2(0.0f, npc->pos.y, fabsf(npc->pos.x - gPlayerStatusPtr->pos.x), gPlayerStatusPtr->pos.y);
         if (fabsf(t1 - 90.0) > 70.0) {
             return -1;
         }
@@ -90,20 +90,20 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
                 enemy->unk_10.z = npc1->pos.z;
                 npc1->moveSpeed = 3.6f;
 
-                t1 = fabsf(npc1->pos.x - gPlayerStatusPtr->position.x);
-                t2 = atan2(0.0f, npc1->pos.y, t1, (gPlayerStatusPtr->position.y + 10.0)) - 90.0;
-                npc1->jumpVelocity = cosine(t2) * npc1->moveSpeed;
-                npc1->yaw = atan2(npc1->pos.x, npc1->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                t1 = fabsf(npc1->pos.x - gPlayerStatusPtr->pos.x);
+                t2 = atan2(0.0f, npc1->pos.y, t1, (gPlayerStatusPtr->pos.y + 10.0)) - 90.0;
+                npc1->jumpVel = cosine(t2) * npc1->moveSpeed;
+                npc1->yaw = atan2(npc1->pos.x, npc1->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                 duration = dist3D(npc1->pos.x, npc1->pos.y, npc1->pos.z,
-                                  gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.y + 10.0,
-                                  gPlayerStatusPtr->position.z) / npc1->moveSpeed;
+                                  gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.y + 10.0,
+                                  gPlayerStatusPtr->pos.z) / npc1->moveSpeed;
                 if (duration <= 0) {
                     duration = 1;
                 }
                 enemy->varTable[3] = (s32)fx_shape_spell(0, npc1->pos.x, npc1->pos.y + 14.0f, npc1->pos.z,
-                                                    gPlayerStatusPtr->position.x,
-                                                    gPlayerStatusPtr->position.y + 10.0f + 14.0f,
-                                                    gPlayerStatusPtr->position.z, duration);
+                                                    gPlayerStatusPtr->pos.x,
+                                                    gPlayerStatusPtr->pos.y + 10.0f + 14.0f,
+                                                    gPlayerStatusPtr->pos.z, duration);
                 npc1->duration = duration;
                 script->functionTemp[0] = 2;
             }
@@ -115,12 +115,12 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
             }
             if (timer == 0) {
                 npc_move_heading(npc1, npc1->moveSpeed, npc1->yaw);
-                npc1->pos.y += npc1->jumpVelocity;
+                npc1->pos.y += npc1->jumpVel;
                 break;
             }
             // fallthrough
         case 3:
-            npc1->jumpVelocity = 0.0f;
+            npc1->jumpVel = 0.0f;
             npc1->moveSpeed = 0.0f;
             npc1->pos.y -= npc1->collisionHeight * 0.5;
             enemy->varTable[0] = 3;

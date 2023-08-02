@@ -21,20 +21,20 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         case 0:
             enemy->varTable[0] = 1;
             enemy->varTable[1] = 0;
-            npc->currentAnim = ANIM_GrooveGuy_Anim0C;
+            npc->curAnim = ANIM_GrooveGuy_Anim0C;
             set_npc_yaw(npc, 270.0f);
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             // fallthrough
         case 1:
             phase = enemy->varTable[1] % 16;
             if (phase < 4) {
-                npc->currentAnim = ANIM_GrooveGuy_Anim0C;
+                npc->curAnim = ANIM_GrooveGuy_Anim0C;
             } else if (phase < 8) {
-                npc->currentAnim = ANIM_GrooveGuy_Anim0B;
+                npc->curAnim = ANIM_GrooveGuy_Anim0B;
             } else if (phase < 12) {
-                npc->currentAnim = ANIM_GrooveGuy_Anim0C;
+                npc->curAnim = ANIM_GrooveGuy_Anim0C;
             } else  if (phase < 16) {
-                npc->currentAnim = ANIM_GrooveGuy_Anim0D;
+                npc->curAnim = ANIM_GrooveGuy_Anim0D;
             }
             enemy->varTable[1]++;
             if (enemy->varTable[1] >= 0x41) {
@@ -44,13 +44,13 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         case 2:
             enemy->varTable[0] = 3;
             enemy->varTable[1] = 0;
-            npc->rotation.y = 0.0f;
-            npc->currentAnim = ANIM_GrooveGuy_Anim0C;
+            npc->rot.y = 0.0f;
+            npc->curAnim = ANIM_GrooveGuy_Anim0C;
             // fallthrough
         case 3:
-            npc->rotation.y += 35.0;
-            if (npc->rotation.y > 360.0) {
-                npc->rotation.y -= 360.0;
+            npc->rot.y += 35.0;
+            if (npc->rot.y > 360.0) {
+                npc->rot.y -= 360.0;
             }
             enemy->varTable[1]++;
             if (enemy->varTable[1] >= 0x2E) {
@@ -59,7 +59,7 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
             break;
     }
     if (enemy->varTable[0] == 4) {
-        npc->rotation.y = 0.0f;
+        npc->rot.y = 0.0f;
         set_npc_yaw(npc, 270.0f);
         script->functionTemp[0] = 0;
     }
@@ -89,7 +89,7 @@ API_CALLABLE(N(GrooveGuyAI_Main)) {
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {

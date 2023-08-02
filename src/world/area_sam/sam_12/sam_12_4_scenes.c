@@ -17,9 +17,9 @@ API_CALLABLE(N(SetItemPositionF)) {
     s32 z = evt_get_float_variable(script, *args++);
     ItemEntity* item = get_item_entity(idx);
 
-    item->position.x = x;
-    item->position.y = y;
-    item->position.z = z;
+    item->pos.x = x;
+    item->pos.y = y;
+    item->pos.z = z;
     return ApiStatus_DONE2;
 }
 
@@ -37,9 +37,9 @@ API_CALLABLE(N(SpawnSleepBubble)) {
 
     fx_sleep_bubble(
         0,
-        gPlayerStatus.position.x + x,
-        gPlayerStatus.position.y + ((gPlayerStatus.colliderHeight * 2) / 3) + y,
-        gPlayerStatus.position.z + z,
+        gPlayerStatus.pos.x + x,
+        gPlayerStatus.pos.y + ((gPlayerStatus.colliderHeight * 2) / 3) + y,
+        gPlayerStatus.pos.z + z,
         (gPlayerStatus.colliderHeight / 3) + t,
         temp_f26,
         &effect

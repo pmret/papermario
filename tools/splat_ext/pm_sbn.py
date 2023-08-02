@@ -3,9 +3,7 @@ from dataclasses import astuple, dataclass
 import os
 import yaml
 import struct
-from typing import Any, Dict, List
-from collections import OrderedDict
-from functools import total_ordering
+from typing import List
 
 
 # splat imports; will fail if script run directly
@@ -49,8 +47,6 @@ class SBN:
         data = data[: header.size]
 
         self.unknown_data = data[0x7A0:0x7C0]
-
-        print(f"Total size: {header.size}")
 
         # Decode file entries
         entry_addr = header.tableOffset
@@ -190,8 +186,8 @@ class SBN:
             struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *song)
             current_song_offset += InitSongEntry.length
 
-        sentinel = InitSongEntry(0xFFFF, 0x00, 0x00, 0x00)
-        struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *sentinel)
+        sentinel2 = InitSongEntry(0xFFFF, 0x00, 0x00, 0x00)
+        struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *sentinel2)
 
         current_mseq_offset = mseq_offset
         for mseq in self.init.mseq_entries:
@@ -277,139 +273,6 @@ class SBN:
                 f.write(f"    bank_index: 0x{entry.bankIndex:02X}\n")
                 f.write(f"    bank_group: 0x{entry.bankGroup:02X}\n")
             f.write("\n")
-
-    def read(self, dir: Path) -> List[Path]:
-        config_file_path = dir / "sbn.yaml"
-        with config_file_path.open("r") as f:
-            config = yaml.safe_load(f)
-
-        with open(dir / "unknown.bin", "rb") as f:
-            self.unknown_data = f.read()
-
-        files = config.get("files", {})
-        songs = config.get("songs", [])
-        mseqs = config.get("mseqs", [])
-        banks = config.get("banks", [])
-
-        sort_by_id_or_auto(files)
-        sort_by_id_or_auto(songs)
-        sort_by_id_or_auto(mseqs)
-        sort_by_id_or_auto(banks)
-
-        # Read files
-        for file_dict in files:
-            id = file_dict.get("id", "auto")
-            if id == "auto":
-                id = len(self.files)
-            assert type(id) == int
-
-            filename = file_dict.get("file")
-            assert type(filename) == str
-
-            fakesize = file_dict.get("fakesize")
-            assert type(fakesize) == int or fakesize is None
-
-            sbn_file = SBNFile()
-            sbn_file.read(dir / filename)
-
-            if fakesize is not None:
-                sbn_file.fakesize = fakesize
-            else:
-                sbn_file.fakesize = sbn_file.size
-
-            # Replace self.files[id]
-            if id < len(self.files):
-                print("Overwriting file ID {:02X}", id)
-                self.files[id] = sbn_file
-            elif id == len(self.files):
-                self.files.append(sbn_file)
-            else:
-                raise Exception(f"Invalid file ID: 0x{id:02X} - cannot have gaps")
-
-        # Read INIT songs
-        for song in songs:
-            id = song.get("id", "auto")
-            if id == "auto":
-                id = len(self.init.song_entries)
-            assert type(id) == int
-
-            # Lookup file ID
-            file = song.get("file")
-            assert type(file) == str
-            file_id = self.lookup_file_id(file)
-
-            # Lookup BK file IDs
-            bk_files = song.get("bk_files", [])
-            assert type(bk_files) == list
-            bk_file_ids = []
-            for bk_file in bk_files:
-                if bk_file is None:
-                    bk_file_ids.append(0)
-                else:
-                    assert type(bk_file) == str
-                    bk_file_ids.append(self.lookup_file_id(bk_file))
-
-            init_song_entry = InitSongEntry(file_id, bk_file_ids[0], bk_file_ids[1], bk_file_ids[2])
-
-            # Replace self.init.song_entries[id]
-            if id < len(self.init.song_entries):
-                print(f"Overwriting song ID {id:02X}")
-                self.init.song_entries[id] = init_song_entry
-            elif id == len(self.init.song_entries):
-                self.init.song_entries.append(init_song_entry)
-            else:
-                raise Exception(f"Invalid song ID: 0x{id:02X} - cannot have gaps")
-
-        # Read INIT mseqs
-        for mseq in mseqs:
-            id = mseq.get("id", "auto")
-            if id == "auto":
-                id = len(self.init.mseq_entries)
-            assert type(id) == int
-
-            # Lookup file ID
-            file = mseq.get("file")
-            assert type(file) == str
-            file_id = self.lookup_file_id(file)
-
-            # Replace self.init.mseq_entries[id]
-            if id < len(self.init.mseq_entries):
-                print(f"Overwriting MSEQ ID {id:02X}")
-                self.init.mseq_entries[id] = file_id
-            elif id == len(self.init.mseq_entries):
-                self.init.mseq_entries.append(file_id)
-            else:
-                raise Exception(f"Invalid MSEQ ID: 0x{id:02X} - cannot have gaps")
-
-        # Read INIT banks
-        for bank in banks:
-            id = bank.get("id", "auto")
-            if id == "auto":
-                id = len(self.init.bk_entries)
-            assert type(id) == int
-
-            file = bank.get("file")
-            assert type(file) == str
-            file_id = self.lookup_file_id(file)
-
-            bank_index = bank.get("bank_index")
-            assert type(bank_index) == int
-
-            bank_group = bank.get("bank_group")
-            assert type(bank_group) == int
-
-            entry = BufferEntry(file_id, bank_index, bank_group)
-
-            # Replace self.init.bk_entries[id]
-            if id < len(self.init.bk_entries):
-                print(f"Overwriting bank ID {id:02X}")
-                self.init.bk_entries[id] = entry
-            elif id == len(self.init.bk_entries):
-                self.init.bk_entries.append(entry)
-            else:
-                raise Exception(f"Invalid bank ID: {id:02X} - cannot have gaps")
-
-        return [config_file_path]
 
     def lookup_file_id(self, filename: str) -> int:
         for id, sbn_file in enumerate(self.files):
@@ -693,13 +556,10 @@ if splat_loaded:
             dir = options.opts.asset_path / self.dir / self.name
             out = options.opts.asset_path / self.dir / (self.name + ".sbn")
 
-            sbn = SBN()
-            config_files = sbn.read(dir)  # TODO: LayeredFS/AssetsFS read, supporting merges
-            inputs = config_files + [dir / f.file_name() for f in sbn.files]
             return [
                 LinkerEntry(
                     self,
-                    inputs,
+                    [dir],
                     out,
                     ".data",
                 ),
@@ -853,12 +713,3 @@ def get_song_symbol_name(song_id: int) -> str:
         0x00000096: "SONG_NEW_PARTNER_JP",
     }
     return song_names.get(song_id, f"null")
-
-
-# Sorts a list of dicts by their "id" key. If "id" is "auto" or missing, it is sorted to the end.
-def sort_by_id_or_auto(list):
-    def get_id(item):
-        id = item.get("id")
-        return 0xFFFF if id == "auto" else id
-
-    list.sort(key=get_id)

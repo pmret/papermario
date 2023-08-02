@@ -547,7 +547,7 @@ API_CALLABLE(N(UpdateGuardBooPos)) {
     if (data->state == PHONOGRAPH_HUD_STATE_DESTROYED) {
         // return to guard position
         speed = 2.0f;
-        npc->currentAnim = ANIM_Boo_Run;
+        npc->curAnim = ANIM_Boo_Run;
         if (dist2D(x, z, guardPosX, booPosZ) < speed) {
             npc->pos.x = guardPosX;
             npc->pos.z = booPosZ;
@@ -590,13 +590,13 @@ API_CALLABLE(N(UpdateGuardBooPos)) {
     }
 
     if (data->meterFillAmount > 7000) {
-        npc->currentAnim = ANIM_Boo_Wave;
+        npc->curAnim = ANIM_Boo_Wave;
     } else if (data->meterFillAmount > 5000) {
-        npc->currentAnim = ANIM_Boo_Run;
+        npc->curAnim = ANIM_Boo_Run;
     } else if (data->meterFillAmount > 3000) {
-        npc->currentAnim = ANIM_Boo_Walk;
+        npc->curAnim = ANIM_Boo_Walk;
     } else {
-        npc->currentAnim = ANIM_Boo_Idle;
+        npc->curAnim = ANIM_Boo_Idle;
     }
 
     return ApiStatus_DONE2;

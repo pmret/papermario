@@ -76,7 +76,7 @@ void balloon_render(EffectInstance* effect) {
 
     renderTask.appendGfx = balloon_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
     retTask = queue_render_task(&renderTask);
@@ -93,7 +93,7 @@ void balloon_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guScaleF(sp58, data->unk_18, data->unk_18, 1.0f);
     guMtxCatF(sp58, sp18, sp18);

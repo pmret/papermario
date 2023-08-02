@@ -9,7 +9,7 @@ extern NpcGroupList N(DefaultNPCs);
 API_CALLABLE(N(PushGoompaTest)) {
     Npc* npc = get_npc_safe(NPC_Goompa);
 
-    if (npc != NULL && npc->currentFloor == COLLIDER_o3) {
+    if (npc != NULL && npc->curFloor == COLLIDER_o3) {
         f32 sinTheta;
         f32 cosTheta;
         f32 xTemp;

@@ -100,7 +100,7 @@ void steam_burst_render(EffectInstance* effect) {
 
     renderTask.appendGfx = steam_burst_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);
@@ -124,7 +124,7 @@ void steam_burst_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
     guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 

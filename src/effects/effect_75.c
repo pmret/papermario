@@ -178,7 +178,7 @@ void effect_75_render(EffectInstance* effect) {
     }
 
     renderTaskPtr->appendGfx = effect_75_appendGfx;
-    renderTaskPtr->distance = -outDist;
+    renderTaskPtr->dist = -outDist;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 

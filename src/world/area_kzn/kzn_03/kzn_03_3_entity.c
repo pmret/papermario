@@ -7,10 +7,10 @@
 API_CALLABLE(N(IsPlayerOnFirstCliff)) {
     s32 result = -1;
 
-    if (gPlayerStatus.lastGoodPosition.y > 800.0) {
+    if (gPlayerStatus.lastGoodPos.y > 800.0) {
         result = 0;
     }
-    if (gPlayerStatus.lastGoodPosition.y < 680.0) {
+    if (gPlayerStatus.lastGoodPos.y < 680.0) {
         result = 1;
     }
     if (result >= 0) {

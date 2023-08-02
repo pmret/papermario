@@ -121,7 +121,7 @@ void music_note_render(EffectInstance* effect) {
 
     renderTask.appendGfx = music_note_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);
@@ -147,7 +147,7 @@ void music_note_appendGfx(void* data) {
         D_E004C67C[rgbOffset], D_E004C67C[rgbOffset + 1], D_E004C67C[rgbOffset + 2], fxData->unk_14
     );
     guTranslateF(sp18, fxData->pos.x, fxData->pos.y, fxData->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guScaleF(sp58, fxData->unk_10, fxData->unk_10, 0.0f);
     guMtxCatF(sp58, sp18, sp18);

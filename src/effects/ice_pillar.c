@@ -103,7 +103,7 @@ void ice_pillar_update(EffectInstance* effect) {
             );
             iceShard->data.iceShard->animFrame = rand_int(10) * 0.1;
             iceShard->data.iceShard->animRate = (rand_int(30) * 0.01) + 0.1;
-            iceShard->data.iceShard->rotation = rand_int(359);
+            iceShard->data.iceShard->rot = rand_int(359);
             iceShard->data.iceShard->angularVel = rand_int(20);
             iceShard->data.iceShard->vel.x = rand_int(10) - 5;
             iceShard->data.iceShard->vel.y = rand_int(10) - 5;
@@ -144,7 +144,7 @@ void ice_pillar_render(EffectInstance* effect) {
 
     renderTask.appendGfx = ice_pillar_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 5;
+    renderTask.dist = 5;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

@@ -83,7 +83,7 @@ void N(worker_reflect_player_wall)(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z,
                           &screenX, &screenY, &screenZ);
 
         anim = N(reflection_unk_resolve_anim)(playerStatus->trueAnimation);
@@ -113,13 +113,13 @@ void N(worker_reflect_player_wall)(void) {
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->appendGfx = (void(*))N(appendGfx_reflect_player_wall);
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }
 
 void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus) {
-    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].curYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -134,7 +134,7 @@ void N(appendGfx_reflect_player_wall)(PlayerStatus* playerStatus) {
     guMtxCatF(main, rotation, main);
     guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
-    guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
+    guTranslateF(translation, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z - 3.0f);
     guMtxCatF(main, translation, main);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX2, 0, 0, NULL, main);
 }
@@ -164,7 +164,7 @@ void N(worker_reflect_player_floor)(void) {
     if (playerStatus->flags & PS_FLAG_HAS_REFLECTION) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
 
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, -playerStatus->pos.y, playerStatus->pos.z,
                           &screenX, &screenY, &screenZ);
 
         spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation, 1.0f);
@@ -187,7 +187,7 @@ void N(worker_reflect_player_floor)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         renderTaskPtr->appendGfx = (void (*)(void*)) (
             !(playerStatus->flags & PS_FLAG_SPINNING)
                 ? N(appendGfx_reflect_player_floor_basic)
@@ -198,7 +198,7 @@ void N(worker_reflect_player_floor)(void) {
 }
 
 void N(appendGfx_reflect_player_floor_basic)(PlayerStatus* playerStatus) {
-    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].curYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -214,7 +214,7 @@ void N(appendGfx_reflect_player_floor_basic)(PlayerStatus* playerStatus) {
     guMtxCatF(main, rotation, main);
     guScaleF(scale, SPRITE_WORLD_SCALE_F, -SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
-    guTranslateF(translation, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z);
+    guTranslateF(translation, playerStatus->pos.x, -playerStatus->pos.y, playerStatus->pos.z);
     guMtxCatF(main, translation, main);
 
     if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
@@ -244,7 +244,7 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
     s32 spriteIdx;
 
     for (i = 0; i < 2; i++) {
-        yaw = -gCameras[gCurrentCamID].currentYaw;
+        yaw = -gCameras[gCurrentCamID].curYaw;
 
         if (i == 0) {
             if ((playerStatus->spriteFacingAngle > 90.0f) && (playerStatus->spriteFacingAngle <= 180.0f)) {
@@ -270,21 +270,21 @@ void N(appendGfx_reflect_player_floor_fancy)(PlayerStatus* playerStatus) {
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
             guMtxCatF(rotation, mtx, mtx);
-            px = playerStatus->position.x;
-            py = playerStatus->position.y;
-            pz = playerStatus->position.z;
+            px = playerStatus->pos.x;
+            py = playerStatus->pos.y;
+            pz = playerStatus->pos.z;
         } else {
             // Spinning blur animation
             blurAngle = phys_get_spin_history(i, &x, &y, &z);
 
             if (y == 0x80000000) {
-                py = playerStatus->position.y;
+                py = playerStatus->pos.y;
             } else {
                 py = y;
             }
 
-            px = playerStatus->position.x;
-            pz = playerStatus->position.z;
+            px = playerStatus->pos.x;
+            pz = playerStatus->pos.z;
             set_player_imgfx_comp(PLAYER_SPRITE_AUX1, -1, IMGFX_SET_ALPHA, 0, 0, 0, 64, 0);
             guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);

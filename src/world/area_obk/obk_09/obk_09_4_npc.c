@@ -42,9 +42,9 @@ API_CALLABLE(N(ImprisonedCardUpdate)) {
     card->rot.y = clamp_angle(card->rot.y + 6.6f);
     effect->data.spiritCard->yaw = card->rot.y;
 
-    shadow->position.x = card->pos.x;
-    shadow->position.y = card->pos.y - 40.0f;
-    shadow->position.z = card->pos.z;
+    shadow->pos.x = card->pos.x;
+    shadow->pos.y = card->pos.y - 40.0f;
+    shadow->pos.z = card->pos.z;
     return ApiStatus_BLOCK;
 }
 

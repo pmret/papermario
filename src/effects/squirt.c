@@ -146,7 +146,7 @@ void squirt_render(EffectInstance* effect) {
 
     renderTask.appendGfx = squirt_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

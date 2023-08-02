@@ -7,13 +7,13 @@ API_CALLABLE(N(AwaitFallInHole)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 entry;
 
-    if (playerStatus->position.y >= 0.0f) {
+    if (playerStatus->pos.y >= 0.0f) {
         return ApiStatus_BLOCK;
     }
 
-    if (playerStatus->position.x < 440.0f) {
+    if (playerStatus->pos.x < 440.0f) {
         entry = dgb_11_ENTRY_3;
-    } else if (playerStatus->position.z < -170.0f) {
+    } else if (playerStatus->pos.z < -170.0f) {
         entry = dgb_11_ENTRY_2;
     } else {
         entry = dgb_11_ENTRY_1;
@@ -24,7 +24,7 @@ API_CALLABLE(N(AwaitFallInHole)) {
 }
 
 API_CALLABLE(N(AwaitFallDownHole)) {
-    if (gPlayerStatus.position.y > -60.0f) {
+    if (gPlayerStatus.pos.y > -60.0f) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE2;

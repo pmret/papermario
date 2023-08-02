@@ -45,7 +45,7 @@ API_CALLABLE(N(Pipe_SetAnimFlag)) {
 }
 
 API_CALLABLE(N(Pipe_GetCurrentFloor)) {
-    script->varTable[0] = gCollisionStatus.currentFloor;
+    script->varTable[0] = gCollisionStatus.curFloor;
     return ApiStatus_DONE2;
 }
 
@@ -53,7 +53,7 @@ API_CALLABLE(N(Pipe_AwaitDownInput)) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 stickX, stickY;
 
-    if (collisionStatus->currentFloor != script->varTable[11]) {
+    if (collisionStatus->curFloor != script->varTable[11]) {
         script->varTable[0] = FALSE;
         return ApiStatus_DONE2;
     }
@@ -88,16 +88,16 @@ API_CALLABLE(N(Pipe_GetEntryPos)) {
 }
 
 API_CALLABLE(N(Pipe_GetCameraYaw)) {
-    script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
+    script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].curYaw + 180.0f);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(Pipe_GetPointAheadOfPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 r = evt_get_float_variable(script, *script->ptrReadPos);
-    f32 x = playerStatus->position.x;
-    f32 y = playerStatus->position.y;
-    f32 z = playerStatus->position.z;
+    f32 x = playerStatus->pos.x;
+    f32 y = playerStatus->pos.y;
+    f32 z = playerStatus->pos.z;
 
     add_vec2D_polar(&x, &z, r, playerStatus->targetYaw);
     evt_set_float_variable(script, LVar0, x);

@@ -12,7 +12,7 @@ API_CALLABLE(N(AwaitPlayerFallDist)) {
     }
 
     fallSpeed = player_fall_distance();
-    playerStatus->position.y = player_check_collision_below(fallSpeed, &colliderID);
+    playerStatus->pos.y = player_check_collision_below(fallSpeed, &colliderID);
     script->functionTemp[0] += fabsf(fallSpeed);
 
     if (script->functionTemp[0] > 50) {
@@ -23,7 +23,7 @@ API_CALLABLE(N(AwaitPlayerFallDist)) {
 }
 
 API_CALLABLE(N(AwaitPlayerJumpDown)) {
-    if (gPlayerStatus.position.y < -10.0f) {
+    if (gPlayerStatus.pos.y < -10.0f) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

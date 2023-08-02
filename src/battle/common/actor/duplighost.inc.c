@@ -566,8 +566,8 @@ Formation N(formation_lakilester) = {
 API_CALLABLE(N(GetPartnerAndLevel)) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args++, gPlayerData.currentPartner);
-    evt_set_variable(script, *args++, gPlayerData.partners[gPlayerData.currentPartner].level);
+    evt_set_variable(script, *args++, gPlayerData.curPartner);
+    evt_set_variable(script, *args++, gPlayerData.partners[gPlayerData.curPartner].level);
     return ApiStatus_DONE2;
 }
 

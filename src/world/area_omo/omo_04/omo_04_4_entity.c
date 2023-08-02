@@ -113,10 +113,10 @@ EvtScript N(EVS_StarBoxLaunch7) = {
 };
 
 API_CALLABLE(N(func_802402F4_DAD6F4)) {
-    f32 playerVx = gPlayerStatus.currentSpeed * 5.0f * sin_deg(gPlayerStatus.targetYaw);
-    f32 playerVz = gPlayerStatus.currentSpeed * 5.0f * -cos_deg(gPlayerStatus.targetYaw);
-    script->varTable[0] = (gPlayerStatus.position.x + playerVx);
-    script->varTable[1] = (gPlayerStatus.position.z + playerVz);
+    f32 playerVx = gPlayerStatus.curSpeed * 5.0f * sin_deg(gPlayerStatus.targetYaw);
+    f32 playerVz = gPlayerStatus.curSpeed * 5.0f * -cos_deg(gPlayerStatus.targetYaw);
+    script->varTable[0] = (gPlayerStatus.pos.x + playerVx);
+    script->varTable[1] = (gPlayerStatus.pos.z + playerVz);
 
     return ApiStatus_DONE2;
 }

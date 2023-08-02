@@ -259,7 +259,7 @@ void func_80032970(Camera* camera, f32 arg1) {
     s32 flags = camera->flags & CAMERA_FLAG_1000;
     s32 a2 = flags != 0;
 
-    if (camera->currentController != NULL && camera->currentController->type == CAM_CONTROL_FIXED_POS_AND_ORIENTATION) {
+    if (camera->curController != NULL && camera->curController->type == CAM_CONTROL_FIXED_POS_AND_ORIENTATION) {
         a2 = TRUE;
     }
 
@@ -368,7 +368,7 @@ void func_80032C64(Camera* camera) {
     f32 deltaPosX, deltaPosZ;
     f32 f24, f22, cosYaw, sinYaw;
 
-    rotationRad = camera->trueRotation.x / 180.0f * PI;
+    rotationRad = camera->trueRot.x / 180.0f * PI;
     leadAmount = camera->leadAmount;
     s2 = 0;
     cos_rad(rotationRad);
@@ -399,8 +399,8 @@ void func_80032C64(Camera* camera) {
                     } else {
                         f24 = cosYaw = camera->targetPos.x - camera->unk_524;
                         f22 = camera->targetPos.z - camera->unk_528;
-                        cosYaw = -cos_deg(camera->currentYaw);
-                        sinYaw = -sin_deg(camera->currentYaw);
+                        cosYaw = -cos_deg(camera->curYaw);
+                        sinYaw = -sin_deg(camera->curYaw);
                         product = f24 * cosYaw + f22 * sinYaw;
                         camera->unk_52C = (product > 0) ? -1 : (product < 0) ? 1 : 0;
                     }
