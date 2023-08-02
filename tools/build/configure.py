@@ -254,22 +254,22 @@ def write_ninja_rules(
 
     ninja.rule(
         "icons",
-        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $list_path $header_path $asset_stack",
+        command=f"$python {BUILD_TOOLS}/icons.py $out $list_path $header_path $asset_stack",
     )
 
     ninja.rule(
         "move_data",
-        command=f"$python {BUILD_TOOLS}/pm_move_data.py $out $in",
+        command=f"$python {BUILD_TOOLS}/move_data.py $out $in",
     )
 
     ninja.rule(
         "item_data",
-        command=f"$python {BUILD_TOOLS}/pm_item_data.py $out $in",
+        command=f"$python {BUILD_TOOLS}/item_data.py $out $in",
     )
 
     ninja.rule(
         "world_map",
-        command=f"$python {BUILD_TOOLS}/pm_world_map.py $in $out",
+        command=f"$python {BUILD_TOOLS}/world_map.py $in $out",
     )
 
     ninja.rule(
@@ -564,29 +564,29 @@ class Configure:
         )
 
         build(
-            self.build_path() / "include/gen/world_map.h",
-            [Path("src/gen/world_map.xml")],
+            self.build_path() / "include/world_map.h",
+            [Path("src/world_map.xml")],
             "world_map",
         )
 
         build(
             [
-                self.build_path() / "include/gen/move_data.h",
-                self.build_path() / "include/gen/move_enum.h",
+                self.build_path() / "include/move_data.inc.c",
+                self.build_path() / "include/move_enum.h",
             ],
-            [Path("src/gen/move_table.yaml")],
+            [Path("src/move_table.yaml")],
             "move_data",
         )
 
         build(
             [
-                self.build_path() / "include/gen/item_data.h",
-                self.build_path() / "include/gen/item_enum.h",
+                self.build_path() / "include/item_data.inc.c",
+                self.build_path() / "include/item_enum.h",
             ],
             [
-                Path("src/gen/item_table.yaml"),
-                Path("src/gen/item_entity_scripts.yaml"),
-                Path("src/gen/item_hud_scripts.yaml"),
+                Path("src/item_table.yaml"),
+                Path("src/item_entity_scripts.yaml"),
+                Path("src/item_hud_scripts.yaml"),
             ],
             "item_data",
         )

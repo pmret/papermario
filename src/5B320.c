@@ -292,8 +292,7 @@ HudScript HES_HandPointLeftHeld = {
     hs_End
 };
 
-// all item data is generated from src/gen/item_*.yaml
-#include "gen/item_data.h"
+#include "item_data.inc.c"
 
 //TODO split for partner popup menu data?
 
@@ -450,7 +449,7 @@ IconHudScriptPair gPartnerIconHudScripts[] = {
     { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
 };
 
-#include "gen/move_data.h"
+#include "move_data.inc.c"
 
 //TODO padding
 s32 pad_after_move_table[] = {

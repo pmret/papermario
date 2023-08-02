@@ -288,6 +288,8 @@ extern HudScript* wPartnerHudScripts[];
         hs_End \
     }
 
+// hud script templates used to generate scripts via src/item_hud_scripts.yaml
+
 #define HES_TEMPLATE_STANDARD_ITEM(icon) \
     { \
         hs_SetVisible \

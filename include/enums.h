@@ -1756,7 +1756,7 @@ enum AuxCameraParams {
     AUX_CAM_ZOOM_PERCENT        = 8
 };
 
-#include "gen/item_enum.h"
+#include "item_enum.h"
 
 // used for chest and give item events
 enum GotItemType {
@@ -3410,7 +3410,7 @@ enum EffectGfxDataFlags {
     FX_GRAPHICS_CAN_FREE                = 0x00000002,
 };
 
-#include "gen/move_enum.h"
+#include "move_enum.h"
 
 enum GameModeIDs {
     GAME_MODE_STARTUP                     = 0x00000000,

@@ -19,7 +19,7 @@ enum {
 #define is_Loop ITEM_SCRIPT_OP_Loop,
 #define is_RandomRestart(max, cutoff) ITEM_SCRIPT_OP_RandomRestart, max, cutoff,
 
-// item entity script templates used to generate scripts via src/gen/item_entity_scripts.xml
+// item entity script templates used to generate scripts via src/item_entity_scripts.yaml
 
 #define IES_TEMPLATE_STANDARD(icon) \
     { \

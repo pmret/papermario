@@ -62,6 +62,10 @@ def generate_move_table(fout: TextIOWrapper, moves: List[MoveEntry]):
 
 
 def generate_move_enum(fout: TextIOWrapper, moves: List[MoveEntry]):
+    fout.write("#ifndef MOVE_ENUM_H\n")
+    fout.write("#define MOVE_ENUM_H\n")
+    fout.write("\n")
+
     fout.write("enum MoveIDs {\n")
 
     item_enum: List[str] = []
@@ -79,6 +83,8 @@ def generate_move_enum(fout: TextIOWrapper, moves: List[MoveEntry]):
 
     fout.write("#define STAR_POWER_INDEX(x) (x - MOVE_FOCUS)\n")
     fout.write("\n")
+    
+    fout.write("#endif // MOVE_ENUM_H\n")
 
 
 if __name__ == "__main__":
