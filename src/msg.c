@@ -59,8 +59,7 @@ void* D_PAL_8014AE50[] = {
 s16 gNextMessageBuffer = 0;
 
 //TODO Vtx
-__attribute__ ((aligned (8)))
-s32 gRewindArrowQuad[] = {
+ALIGNED(8) s32 gRewindArrowQuad[] = {
     0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF,
     0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF,
     0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF,
