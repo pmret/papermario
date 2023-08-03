@@ -162,7 +162,7 @@ void N(update)(void) {
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
-            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_41, 0, 0, 0);
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
@@ -257,7 +257,7 @@ void N(update)(void) {
             adjustedFillLevel = actionCommandStatus->barFillLevel / 100;
 
             battleStatus->actionResult = adjustedFillLevel;
-            sfx_adjust_env_sound_params(SOUND_80000041, 0, 0, adjustedFillLevel * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_41, 0, 0, adjustedFillLevel * 12);
 
             if (actionCommandStatus->frameCounter == 0) {
                 s16 threshold;
@@ -290,7 +290,7 @@ void N(update)(void) {
                     func_80269160();
                 }
 
-                sfx_stop_sound(SOUND_80000041);
+                sfx_stop_sound(SOUND_LOOP_41);
                 btl_set_popup_duration(0);
                 actionCommandStatus->frameCounter = 5;
                 actionCommandStatus->state = 12;

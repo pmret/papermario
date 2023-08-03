@@ -228,8 +228,8 @@ EvtScript N(EVS_ManageGeyserSounds) = {
     EVT_IF_NE(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         EVT_SET(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         EVT_SET(MF_GeyserSoundPlaying, FALSE)
-        EVT_CALL(StopSound, SOUND_8000001C)
-        EVT_CALL(StopSound, SOUND_8000001D)
+        EVT_CALL(StopSound, SOUND_LOOP_1C)
+        EVT_CALL(StopSound, SOUND_LOOP_1D)
         EVT_IF_EQ(MV_PuzzleProgress, 5)
             EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, FALSE)
                 EVT_RETURN
@@ -239,7 +239,7 @@ EvtScript N(EVS_ManageGeyserSounds) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_8000001C)
+        EVT_CALL(PlaySound, SOUND_LOOP_1C)
         EVT_SET(MF_GeyserSoundPlaying, TRUE)
         EVT_SET(LVar0, MV_PuzzleProgress)
         EVT_ADD(LVar0, 1)
@@ -393,7 +393,7 @@ EvtScript N(EVS_ManagePuzzle) = {
             EVT_THREAD
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(0.4))
             EVT_END_THREAD
-            EVT_CALL(PlaySoundAt, SOUND_8000001D, 0, 37, 0, -138)
+            EVT_CALL(PlaySoundAt, SOUND_LOOP_1D, 0, 37, 0, -138)
             EVT_SET(AB_JAN_2, 1)
             EVT_THREAD
                 EVT_LOOP(200)

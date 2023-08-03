@@ -16,7 +16,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_NO_LEAD()
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_80000039)
+    EVT_CALL(PlaySound, SOUND_LOOP_39)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_CALL(EnableTexPanning, MODEL_nagare, TRUE)
     EVT_THREAD

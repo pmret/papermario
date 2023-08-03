@@ -43,9 +43,9 @@ EvtScript N(EVS_BossDefeated) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(1)
-            EVT_CALL(PlaySound, SOUND_80000067)
+            EVT_CALL(PlaySound, SOUND_LOOP_67)
             EVT_CALL(N(StarSpiritEffectFunc1))
-            EVT_CALL(StopSound, SOUND_80000067)
+            EVT_CALL(StopSound, SOUND_LOOP_67)
             EVT_CALL(PlaySoundAt, SOUND_B2, SOUND_SPACE_MODE_0, -135, 85, 0)
         EVT_END_THREAD
         EVT_THREAD

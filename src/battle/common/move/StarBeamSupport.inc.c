@@ -416,9 +416,9 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
 
             script->functionTemp[1] = 40;
             if (script->functionTemp[2] == 0) {
-                sfx_play_sound(SOUND_80000068);
+                sfx_play_sound(SOUND_LOOP_68);
             } else {
-                sfx_play_sound(SOUND_80000069);
+                sfx_play_sound(SOUND_LOOP_69);
             }
             script->functionTemp[0] = PEACH_STAR_BEAM_SPIRITS_APPEAR;
             break;

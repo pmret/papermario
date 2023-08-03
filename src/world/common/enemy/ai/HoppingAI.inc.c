@@ -12,7 +12,7 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     npc->flags |= NPC_FLAG_JUMPING;
     npc->jumpVel = (rand_int(45) / 10.0) + 8.0;
     npc->jumpScale = 1.5f;
-    ai_enemy_play_sound(npc, SOUND_B0000017, 0);
+    ai_enemy_play_sound(npc, SOUND_PAIR_17, 0);
 
     if (is_point_within_region(enemy->territory->wander.wanderShape,
                                enemy->territory->wander.centerPos.x,
@@ -156,7 +156,7 @@ void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     enemy->moveSpeed = aiSettings->chaseSpeed;
     script->AI_TEMP_STATE = 13;
-    ai_enemy_play_sound(enemy, SOUND_B0000017, 0);
+    ai_enemy_play_sound(enemy, SOUND_PAIR_17, 0);
 }
 
 void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {

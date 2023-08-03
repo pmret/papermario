@@ -189,7 +189,7 @@ EvtScript N(EVS_Scene_ReleaseFountain) = {
     EVT_CALL(EnableGroup, MODEL_g31, TRUE)
     EVT_EXEC_WAIT(N(EVS_UnleashFountain))
     EVT_WAIT(20)
-    EVT_CALL(PlaySound, SOUND_80000024)
+    EVT_CALL(PlaySound, SOUND_LOOP_24)
     EVT_WAIT(360)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)

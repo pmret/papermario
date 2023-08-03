@@ -31,7 +31,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_80000017)
+    EVT_CALL(PlaySound, SOUND_LOOP_17)
     EVT_CALL(EnableTexPanning, MODEL_o75, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o7, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o6, TRUE)

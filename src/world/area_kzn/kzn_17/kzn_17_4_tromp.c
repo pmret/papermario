@@ -72,7 +72,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_EXEC_GET_TID(N(EVS_SpinyTromp_ManageCamera), LVarA)
     EVT_EXEC(N(EVS_Kolorado_TrompPanic))
     EVT_EXEC_GET_TID(N(EVS_SpinyTromp_ShakeCam), MV_ScreenShakeTID)
-    EVT_CALL(PlaySound, SOUND_8000001B)
+    EVT_CALL(PlaySound, SOUND_LOOP_1B)
     EVT_SET(LVar3, 0)
     EVT_CALL(MakeLerp, -583, 750, 270, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
@@ -143,7 +143,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
     EVT_END_LOOP
     EVT_SET(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
     EVT_WAIT(50)
-    EVT_CALL(StopSound, SOUND_8000001B)
+    EVT_CALL(StopSound, SOUND_LOOP_1B)
     EVT_CALL(SetGroupVisibility, MODEL_goron, MODEL_GROUP_HIDDEN)
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_KILL_THREAD(LVarA)

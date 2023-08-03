@@ -143,7 +143,7 @@ EvtScript N(EVS_ManageShaking) = {
                 EVT_LOOP(1 + ARRAY_COUNT(N(ArenaExplosions))) //@bug extra iteration reads garbage
                     EVT_BUF_READ4(LVar0, LVar1, LVar2, LVar3)
                     EVT_FBUF_READ2(LVar4, LVar5)
-                    EVT_CALL(PlaySoundAt, SOUND_B000001C, 0, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAt, SOUND_PAIR_1C, 0, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar0, LVar1, LVar2, LVar4, LVar3)
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, LVar5)
                 EVT_END_LOOP
@@ -247,7 +247,7 @@ EvtScript N(EVS_BowserAndKammyBlownAway) = {
         EVT_USE_BUF(EVT_PTR(N(ChainExplosionLocations)))
         EVT_LOOP(ARRAY_COUNT(N(ChainExplosionLocations)))
             EVT_BUF_READ4(LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(PlaySoundAt, SOUND_B000001C, 0, LVar0, LVar1, LVar2)
+            EVT_CALL(PlaySoundAt, SOUND_PAIR_1C, 0, LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(2.0), 30)
             EVT_WAIT(LVar3)
         EVT_END_LOOP
@@ -370,7 +370,7 @@ EvtScript N(EVS_Scene_BowserDefeated) = {
     EVT_WAIT(10)
     EVT_CALL(SpeakToPlayer, NPC_Peach_02, ANIM_Peach2_RaiseArms, ANIM_Peach1_Idle, 0, MSG_CH8_00AC)
     EVT_WAIT(20)
-    EVT_CALL(PlaySound, SOUND_8000006B)
+    EVT_CALL(PlaySound, SOUND_LOOP_6B)
     EVT_SET(MV_DestructState, DESTRUCT_STATE_1)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)

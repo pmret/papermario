@@ -144,7 +144,7 @@ EvtScript N(EVS_PlayClubbaDefeatFX) = {
         EVT_ADD(LVar0, LVar3)
         EVT_ADD(LVar1, LVar4)
         EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 0)
-        EVT_CALL(PlaySoundAt, SOUND_B0000018, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_PAIR_18, 0, LVar0, LVar1, LVar2)
         EVT_WAIT(2)
         EVT_SET(LVar0, LVarA)
         EVT_SET(LVar1, LVarB)
@@ -155,7 +155,7 @@ EvtScript N(EVS_PlayClubbaDefeatFX) = {
         EVT_ADD(LVar0, LVar3)
         EVT_ADD(LVar1, LVar4)
         EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 0)
-        EVT_CALL(PlaySoundAt, SOUND_B0000018, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_PAIR_18, 0, LVar0, LVar1, LVar2)
         EVT_WAIT(8)
     EVT_END_LOOP
     EVT_RETURN

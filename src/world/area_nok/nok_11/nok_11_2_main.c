@@ -99,7 +99,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_TexPan_Flowers))
     EVT_EXEC(N(EVS_TexPan_Water))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_8000005B)
+    EVT_CALL(PlaySound, SOUND_LOOP_5B)
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)

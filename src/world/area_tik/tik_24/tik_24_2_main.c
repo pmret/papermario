@@ -47,7 +47,7 @@ EvtScript N(EVS_Main) = {
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_80000049)
+    EVT_CALL(PlaySound, SOUND_LOOP_49)
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_WAIT(1)

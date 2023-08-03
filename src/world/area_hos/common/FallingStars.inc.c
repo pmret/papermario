@@ -159,7 +159,7 @@ EvtScript N(EVS_Starfall_Directed) = {
                 EVT_SET(LVar0, 1)
         EVT_END_SWITCH
         EVT_IF_LT(LVarE, 2)
-            EVT_CALL(PlaySoundAt, SOUND_B0000015, 0, LVar1, LVar2, LVar3)
+            EVT_CALL(PlaySoundAt, SOUND_PAIR_15, 0, LVar1, LVar2, LVar3)
             EVT_ADD(LVarE, 1)
         EVT_END_IF
         EVT_ADD(LVarD, LVar8)
@@ -197,7 +197,7 @@ EvtScript N(EVS_Starfall_Random) = {
             EVT_CALL(RandInt, 50, LVar0)
             EVT_ADD(LVar0, 20)
             EVT_CALL(N(UnkEffect0FFunc4))
-            EVT_CALL(PlaySoundAt, SOUND_B0000015, 0, LVar1, LVar2, LVar3)
+            EVT_CALL(PlaySoundAt, SOUND_PAIR_15, 0, LVar1, LVar2, LVar3)
             EVT_WAIT(LVar0)
             EVT_GOTO(2)
     EVT_END_THREAD

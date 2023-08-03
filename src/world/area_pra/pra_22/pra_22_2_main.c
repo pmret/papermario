@@ -158,7 +158,7 @@ EvtScript N(EVS_PushRightStatue_Impl) = {
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1064, SOUND_80000010, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1064, SOUND_LOOP_10, SOUND_SPACE_MODE_0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateModel, MODEL_o1005, LVar0, 0, 0)
@@ -172,7 +172,7 @@ EvtScript N(EVS_PushRightStatue_Impl) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_80000010)
+    EVT_CALL(StopSound, SOUND_LOOP_10)
     EVT_RETURN
     EVT_END
 };

@@ -19,7 +19,7 @@ EvtScript N(EVS_OnReadPoster) = {
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(PlaySound, SOUND_80000060)
+    EVT_CALL(PlaySound, SOUND_LOOP_60)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 190, 0, -37)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 190, 0, -37)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))

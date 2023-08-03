@@ -127,7 +127,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
         EVT_CALL(EnablePartnerAI)
     EVT_END_THREAD
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 300, EVT_FLOAT(1.0))
-    EVT_CALL(StopSound, SOUND_8000005D)
+    EVT_CALL(StopSound, SOUND_LOOP_5D)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0D)
         EVT_CALL(SetNpcSpeed, NPC_Tubba, EVT_FLOAT(3.0))

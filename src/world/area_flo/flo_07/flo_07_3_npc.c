@@ -47,7 +47,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_8000006B)
+    EVT_CALL(PlaySound, SOUND_LOOP_6B)
     EVT_EXEC_GET_TID(N(EVS_ShakeGround), MV_GroundShakingScript)
     EVT_CALL(SpeakToPlayer, NPC_Posie, ANIM_Posie_Strain, ANIM_Posie_Strain, 0, MSG_CH6_0069)
     EVT_KILL_THREAD(MV_GroundShakingScript)

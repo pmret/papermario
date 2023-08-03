@@ -64,7 +64,7 @@ EvtScript N(EVS_HitBlock_SlotStart) = {
     EVT_IF_EQ(MF_HitStartBlock, FALSE)
         EVT_THREAD
             EVT_WAIT(15)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_s1, SOUND_80000015, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_s1, SOUND_LOOP_15, SOUND_SPACE_MODE_0)
         EVT_END_THREAD
         EVT_SET(MF_HitStartBlock, TRUE)
         EVT_SET(AF_OMO09_StartBlock_DontBlink, TRUE)
@@ -575,7 +575,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
     EVT_LABEL(2)
         EVT_CALL(IsPlayerWithin, 525, 0, 500, AB_OMO09_IsPlayerNearSlotMachine)
         EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, FALSE)
-            EVT_CALL(StopSound, SOUND_80000015)
+            EVT_CALL(StopSound, SOUND_LOOP_15)
             EVT_WAIT(100)
             EVT_GOTO(99)
         EVT_END_IF
@@ -613,7 +613,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
             EVT_GOTO(2)
         EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(StopSound, SOUND_80000015)
+    EVT_CALL(StopSound, SOUND_LOOP_15)
     EVT_WAIT(20)
     EVT_CALL(N(CheckSlotsResult), MV_SlotWheel1_Angle, MV_SlotWheel2_Angle, MV_SlotWheel3_Angle)
     EVT_IF_NE(LVarA, 0)

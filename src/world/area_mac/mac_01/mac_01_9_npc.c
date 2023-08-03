@@ -176,7 +176,7 @@ EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
 
 EvtScript N(D_8024E6F8_80EF78) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_B0000021, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_PAIR_21, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN

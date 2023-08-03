@@ -16,7 +16,7 @@ API_CALLABLE(N(UpdatePropellerSoundPos_Intro)) {
 }
 
 EvtScript N(EVS_UpdatePropellerSounds_Intro) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_80000066, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_66, 0)
     EVT_LOOP(0)
         EVT_CALL(N(UpdatePropellerSoundPos_Intro))
         EVT_IF_LT(LVar0, 0)
@@ -24,7 +24,7 @@ EvtScript N(EVS_UpdatePropellerSounds_Intro) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_80000066)
+    EVT_CALL(StopSound, SOUND_LOOP_66)
     EVT_RETURN
     EVT_END
 };
@@ -201,7 +201,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_80000056)
+        EVT_CALL(PlaySound, SOUND_LOOP_56)
 #if VERSION_PAL
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 60 * DT, EVT_FLOAT(0.5))
 #else

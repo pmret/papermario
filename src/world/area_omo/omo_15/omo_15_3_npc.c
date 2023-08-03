@@ -67,7 +67,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02, ANIM_GeneralGuy_Anim0A, 0, MSG_CH4_0064)
     EVT_THREAD
         EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySound, SOUND_8000004D)
+        EVT_CALL(PlaySound, SOUND_LOOP_4D)
         EVT_SET(LVar0, NPC_ShyGuy_01)
         EVT_LOOP(9)
             EVT_CALL(SetNpcVar, LVar0, 0, MANAGER_ARMY_CHARGE)
@@ -261,7 +261,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
                 EVT_IF_EQ(LVar0, NPC_ShyGuy_09)
                     EVT_THREAD
                         EVT_WAIT(20)
-                        EVT_CALL(StopSound, SOUND_8000004D)
+                        EVT_CALL(StopSound, SOUND_LOOP_4D)
                     EVT_END_THREAD
                     EVT_CALL(StartBossBattle, SONG_GENERAL_GUY_BATTLE)
                 EVT_END_IF
@@ -275,7 +275,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
 EvtScript N(EVS_BossDefeated_RunAway) = {
     EVT_CALL(GetSelfNpcID, LVar9)
     EVT_IF_EQ(LVar9, NPC_GeneralGuy)
-        EVT_CALL(PlaySound, SOUND_8000004D)
+        EVT_CALL(PlaySound, SOUND_LOOP_4D)
         EVT_USE_BUF(EVT_PTR(N(GeneralGuyFleeScripts)))
         EVT_BUF_READ1(LVar1)
         EVT_USE_BUF(LVar1)

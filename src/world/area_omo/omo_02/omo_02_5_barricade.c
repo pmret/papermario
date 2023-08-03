@@ -340,7 +340,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_WAIT(35)
-        EVT_CALL(PlaySound, SOUND_8000004D)
+        EVT_CALL(PlaySound, SOUND_LOOP_4D)
     EVT_END_THREAD
     EVT_SET(LVar0, 1)
     EVT_SET(LVar5, 1)

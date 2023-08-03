@@ -127,9 +127,9 @@ EvtScript N(EVS_ManageSecretPassage) = {
     EVT_END_THREAD
     EVT_WAIT(30 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_80000003)
+        EVT_CALL(PlaySound, SOUND_LOOP_03)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 330, EVT_FLOAT(0.5))
-        EVT_CALL(StopSound, SOUND_80000003)
+        EVT_CALL(StopSound, SOUND_LOOP_03)
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(12)

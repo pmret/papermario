@@ -79,7 +79,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(InitAnimatedModels)
     EVT_EXEC(N(EVS_SetupChainDrive))
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_80000051, SOUND_SPACE_MODE_0, 800, 100, -200)
+        EVT_CALL(PlaySoundAt, SOUND_LOOP_51, SOUND_SPACE_MODE_0, 800, 100, -200)
         EVT_WAIT(28)
         EVT_LOOP(0)
             EVT_CALL(PlaySoundAt, SOUND_222, SOUND_SPACE_MODE_0, 800, 100, -200)

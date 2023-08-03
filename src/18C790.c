@@ -615,7 +615,7 @@ void btl_state_update_celebration(void) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
                 DMA_COPY_SEGMENT(level_up);
-                sfx_play_sound(SOUND_80000008);
+                sfx_play_sound(SOUND_LOOP_08);
                 CelebrateStateTime = 0;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_BEGIN;
             }

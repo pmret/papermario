@@ -77,7 +77,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
     EVT_END_THREAD
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_80000047)
+    EVT_CALL(PlaySound, SOUND_LOOP_47)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_THREAD
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)

@@ -9,7 +9,7 @@ API_CALLABLE(N(AdjustFightingSoundsPos)) {
     s32 z = evt_get_variable(script, *args++);
 
     // @bug need to use real sound id, not environmental sound id
-    sfx_adjust_env_sound_pos(SOUND_8000006C, SOUND_SPACE_MODE_0, x, y, z);
+    sfx_adjust_env_sound_pos(SOUND_LOOP_6C, SOUND_SPACE_MODE_0, x, y, z);
 
     return ApiStatus_DONE2;
 }
@@ -25,7 +25,7 @@ API_CALLABLE(N(StartFightingRumble)) {
 }
 
 EvtScript N(EVS_TwoKoopesFightingFX) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_8000006C, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_LOOP_6C, 0)
     EVT_LOOP(0)
         EVT_CALL(N(StartFightingRumble), 80, 10)
         EVT_CALL(GetNpcPos, NPC_Kooper_01A, LVar0, LVar1, LVar2)
@@ -377,7 +377,7 @@ EvtScript N(EVS_Scene_HitTrueKooper) = {
         EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
         EVT_WAIT(6 * DT)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_8000006C)
+    EVT_CALL(StopSound, SOUND_LOOP_6C)
     EVT_KILL_THREAD(MV_KoopersFightingScript)
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_GT(LVar0, 50)

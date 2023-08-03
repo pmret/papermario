@@ -46,7 +46,7 @@ EvtScript N(EVS_Luigi_PlayWalkSounds_Intro) = {
     EVT_END_SWITCH
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_B0000019, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_PAIR_19, SOUND_SPACE_MODE_0)
             EVT_WAIT(LVar1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD

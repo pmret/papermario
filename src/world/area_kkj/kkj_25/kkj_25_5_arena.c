@@ -241,7 +241,7 @@ EvtScript N(EVS_AnimateBridgeCollapsing) = {
     EVT_SET(LVar2, 35)
     EVT_SET(LVar5, -15)
     EVT_LOOP(ARRAY_COUNT(N(BridgeModels)))
-        EVT_CALL(PlaySoundAt, SOUND_B000001B, 0, LVar5, 0, 0)
+        EVT_CALL(PlaySoundAt, SOUND_PAIR_1B, 0, LVar5, 0, 0)
         EVT_ADD(LVar5, -30)
         EVT_BUF_READ1(LVar3)
         EVT_THREAD

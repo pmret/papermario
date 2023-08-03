@@ -17,7 +17,7 @@ EvtScript N(D_8024B5AC_82E86C) = {
 
 EvtScript N(D_8024B6A0_82E960) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy, SOUND_B0000021, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy, SOUND_PAIR_21, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN

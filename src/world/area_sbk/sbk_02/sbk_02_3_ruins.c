@@ -79,7 +79,7 @@ EvtScript N(EVS_Pedestal_Sink) = {
     EVT_END_LOOP
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_iwa, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(EnableModel, MODEL_point_iwa, FALSE)
-    EVT_CALL(PlaySound, SOUND_8000005F)
+    EVT_CALL(PlaySound, SOUND_LOOP_5F)
     EVT_RETURN
     EVT_END
 };
@@ -330,7 +330,7 @@ EvtScript N(EVS_Ruins_Arise) = {
             EVT_WAIT(50)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_8000005E)
+    EVT_CALL(PlaySound, SOUND_LOOP_5E)
     EVT_CALL(MakeLerp, -310, 0, 310, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

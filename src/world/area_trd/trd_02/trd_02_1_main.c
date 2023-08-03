@@ -59,7 +59,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(30)
     EVT_CALL(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
-    EVT_CALL(PlaySound, SOUND_80000004)
+    EVT_CALL(PlaySound, SOUND_LOOP_04)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.7))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 320, EVT_FLOAT(1.0))
@@ -107,7 +107,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_CALL(UpdateColliderTransform, COLLIDER_o54)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o55)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o65)
-    EVT_CALL(StopSound, SOUND_80000004)
+    EVT_CALL(StopSound, SOUND_LOOP_04)
     EVT_CALL(PlaySound, SOUND_25)
     EVT_SET(GB_StoryProgress, STORY_CH1_LOWERED_SECOND_STAIRS)
     EVT_CALL(DisablePlayerInput, FALSE)

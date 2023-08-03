@@ -149,7 +149,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
     EVT_END_THREAD
     EVT_CALL(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_VISIBLE)
     EVT_CALL(EnableModel, MODEL_o385, TRUE)
-    EVT_CALL(PlaySound, SOUND_80000053)
+    EVT_CALL(PlaySound, SOUND_LOOP_53)
     EVT_CALL(MakeLerp, 120, 20, 120, EASING_LINEAR)
     EVT_LABEL(30)
     EVT_CALL(UpdateLerp)
@@ -212,7 +212,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_80000052, SOUND_SPACE_MODE_0, 118, 115, -11)
+    EVT_CALL(PlaySoundAt, SOUND_LOOP_52, SOUND_SPACE_MODE_0, 118, 115, -11)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(SetTexPanner, MODEL_o388, 2)
@@ -397,7 +397,7 @@ EvtScript N(EVS_LowerWaterLevel1) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_VISIBLE)
-    EVT_CALL(PlaySound, SOUND_80000053)
+    EVT_CALL(PlaySound, SOUND_LOOP_53)
     EVT_CALL(MakeLerp, 220, 120, 120, EASING_LINEAR)
     EVT_LABEL(30)
     EVT_CALL(UpdateLerp)
@@ -456,7 +456,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_80000052, SOUND_SPACE_MODE_0, 500, 240, -25)
+    EVT_CALL(PlaySoundAt, SOUND_LOOP_52, SOUND_SPACE_MODE_0, 500, 240, -25)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(SetTexPanner, MODEL_o388, 2)

@@ -21,7 +21,7 @@ EvtScript N(EVS_SetupMusic) = {
             EVT_ELSE
                 EVT_CALL(SetMusicTrack, 0, SONG_STAR_HAVEN, 0, 8)
             EVT_END_IF
-            EVT_CALL(PlaySound, SOUND_80000064)
+            EVT_CALL(PlaySound, SOUND_LOOP_64)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

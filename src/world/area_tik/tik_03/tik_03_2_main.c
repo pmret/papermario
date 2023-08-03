@@ -81,8 +81,8 @@ EvtScript N(EVS_Main) = {
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_8000002B)
-    EVT_CALL(PlaySoundAtF, SOUND_8000002C, SOUND_SPACE_MODE_1, -10, -20, 120)
+    EVT_CALL(PlaySound, SOUND_LOOP_2B)
+    EVT_CALL(PlaySoundAtF, SOUND_LOOP_2C, SOUND_SPACE_MODE_1, -10, -20, 120)
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_RETURN

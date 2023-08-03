@@ -126,7 +126,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -163, 0, -12)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
-    EVT_CALL(PlaySound, SOUND_80000005)
+    EVT_CALL(PlaySound, SOUND_LOOP_05)
     EVT_WAIT(20 * DT)
     EVT_THREAD
         EVT_LOOP(5)
@@ -193,7 +193,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_END_IF
     EVT_CALL(UpdateColliderTransform, COLLIDER_o86)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o87)
-    EVT_CALL(StopSound, SOUND_80000005)
+    EVT_CALL(StopSound, SOUND_LOOP_05)
     EVT_CALL(PlaySound, SOUND_28)
     EVT_WAIT(50 * DT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

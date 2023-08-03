@@ -199,7 +199,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                     EVT_ADD(LVar0, 1)
                 EVT_END_LOOP
                 EVT_WAIT(45 * DT)
-                EVT_CALL(StopSound, SOUND_8000004C)
+                EVT_CALL(StopSound, SOUND_LOOP_4C)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005E)
                 EVT_THREAD
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))

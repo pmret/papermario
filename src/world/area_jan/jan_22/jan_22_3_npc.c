@@ -281,7 +281,7 @@ EvtScript N(EVS_Raven_HopAndWalkAway) = {
 };
 
 EvtScript N(EVS_BuildingEffects) = {
-    EVT_CALL(PlaySoundAt, SOUND_8000001E, 0, 270, 130, 0)
+    EVT_CALL(PlaySoundAt, SOUND_LOOP_1E, 0, 270, 130, 0)
     EVT_LOOP(0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(1.0))
         EVT_WAIT(30 * DT)
@@ -407,7 +407,7 @@ EvtScript N(EVS_ManageRavens) = {
                         EVT_GOTO(11)
                     EVT_END_IF
                 EVT_WAIT(40 * DT)
-                EVT_CALL(StopSound, SOUND_8000001E)
+                EVT_CALL(StopSound, SOUND_LOOP_1E)
                 EVT_KILL_THREAD(LVarA)
                 EVT_CALL(SetSelfVar, 0, RAVEN_SCENE_FINISH_WORK)
             EVT_CASE_EQ(RAVEN_SCENE_FINISH_WORK)

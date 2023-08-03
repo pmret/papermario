@@ -122,7 +122,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
     EVT_CALL(SetGroupVisibility, MODEL_move2, MODEL_GROUP_VISIBLE)
     EVT_CALL(SetGroupVisibility, MODEL_move3, MODEL_GROUP_HIDDEN)
-    EVT_CALL(PlaySound, SOUND_80000040)
+    EVT_CALL(PlaySound, SOUND_LOOP_40)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 600, EVT_FLOAT(0.15))
     EVT_END_THREAD
@@ -144,7 +144,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
             EVT_END_IF
             EVT_IF_EQ(LVar2, 30)
                 EVT_CALL(PlaySound, SOUND_39F)
-                EVT_CALL(StopSound, SOUND_80000040)
+                EVT_CALL(StopSound, SOUND_LOOP_40)
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
