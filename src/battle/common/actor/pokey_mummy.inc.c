@@ -521,7 +521,7 @@ EvtScript N(takeTurn_80219D88) = {
             EVT_CASE_EQ(3)
         EVT_END_SWITCH
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_342)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_342)
     EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
     EVT_WAIT(12)

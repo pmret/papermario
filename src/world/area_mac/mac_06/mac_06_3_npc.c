@@ -272,7 +272,7 @@ API_CALLABLE(N(MakeJrTroopaBubbles)) {
 
     if (y < 0.0f) {
         fx_rising_bubble(0, x, y, z, 0.0f);
-        sfx_adjust_env_sound_pos(SOUND_JR_TROOPA_SWIM, SOUND_SPACE_MODE_0, x, y, z);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_JR_TROOPA_SWIM, SOUND_SPACE_MODE_0, x, y, z);
     }
     return ApiStatus_DONE2;
 }

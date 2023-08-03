@@ -350,7 +350,7 @@ EvtScript N(idle) = {
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(StopSound, SOUND_287)
+    EVT_CALL(StopSound, SOUND_LRAW_287)
     EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -1068,7 +1068,7 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
             EVT_CALL(action_command_bomb_start, 0, 87 * DT, 3, 2)
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_287)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_287)
     EVT_CHILD_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_RunLit)
@@ -1099,7 +1099,7 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_END_SWITCH
-    EVT_CALL(StopSound, SOUND_287)
+    EVT_CALL(StopSound, SOUND_LRAW_287)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_SET(LVar0, 6 * DT + 1)
@@ -1346,7 +1346,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_287)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_287)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_11)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 1)
@@ -1354,7 +1354,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_WAIT(5)
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_WAIT(10)
-    EVT_CALL(StopSound, SOUND_287)
+    EVT_CALL(StopSound, SOUND_LRAW_287)
     EVT_LOOP(7)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
         EVT_WAIT(1)

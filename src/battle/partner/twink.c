@@ -225,7 +225,7 @@ EvtScript N(nextTurn) = {
 EvtScript N(executeAction) = {
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_2AA)
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_LRAW_207F, SOUND_2AA)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(InitTargetIterator)
@@ -250,7 +250,7 @@ EvtScript N(executeAction) = {
     EVT_IF_GT(LVarF, 1)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_207E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_207E)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
@@ -275,7 +275,7 @@ EvtScript N(executeAction) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_2AA)
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_LRAW_207F, SOUND_2AA)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))

@@ -688,7 +688,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (data->box[i].stateTimer <= 0) {
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         data->box[i].state = BOX_STATE_PEACH_POPUP;
-                        sfx_play_sound_at_position(SOUND_214, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+                        sfx_play_sound_at_position(SOUND_LRAW_214, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         npc->jumpVel = 10.0f;
                         npc->pos.y = npc->moveToPos.y;
@@ -731,7 +731,7 @@ API_CALLABLE(N(RunMinigame)) {
                     }
                     break;
                 case BOX_STATE_PEACH_HIT:
-                    sfx_play_sound(SOUND_21C);
+                    sfx_play_sound(SOUND_LRAW_21C);
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                     enable_npc_shadow(npc);
                     npc->duration = 0;
@@ -901,7 +901,7 @@ API_CALLABLE(N(GiveCoinReward)) {
 
     data->curScore -= increment;
     add_coins(increment);
-    sfx_play_sound(SOUND_211);
+    sfx_play_sound(SOUND_LRAW_211);
 
     return (data->curScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
@@ -1008,7 +1008,7 @@ API_CALLABLE(N(TakeCoinCost)) {
         script->functionTemp[0] = 0;
     }
     add_coins(-1);
-    sfx_play_sound(SOUND_211);
+    sfx_play_sound(SOUND_LRAW_211);
 
     script->functionTemp[0]++;
     return (script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
@@ -1768,7 +1768,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_END_THREAD
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
     EVT_CALL(SetSelfVar, 3, 1)
-    EVT_CALL(PlaySoundWithVolume, SOUND_2108, 80)
+    EVT_CALL(PlaySoundWithVolume, SOUND_LRAW_2108, 80)
     EVT_EXEC(N(EVS_MakeAllBoxesAppear))
     EVT_EXEC(N(EVS_SetBoxContents))
     EVT_WAIT(25)

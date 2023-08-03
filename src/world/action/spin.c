@@ -95,17 +95,17 @@ void action_update_spin(void) {
             }
         }
 
-        playerSpinState->spinSoundID = SOUND_2111;
+        playerSpinState->spinSoundID = SOUND_LRAW_2111;
         nonDizzyFlags = spinFlags & ~SPIN_TYPE_DIZZY;
 
         if (nonDizzyFlags == SPIN_TYPE_ATTACK) {
-            playerSpinState->spinSoundID = SOUND_2113;
+            playerSpinState->spinSoundID = SOUND_LRAW_2113;
         }
         if (nonDizzyFlags == SPIN_TYPE_SPEEDY) {
-            playerSpinState->spinSoundID = SOUND_2112;
+            playerSpinState->spinSoundID = SOUND_LRAW_2112;
         }
         if (nonDizzyFlags == (SPIN_TYPE_ATTACK | SPIN_TYPE_SPEEDY)) {
-            playerSpinState->spinSoundID = SOUND_2114;
+            playerSpinState->spinSoundID = SOUND_LRAW_2114;
         }
 
         sfx_play_sound_at_player(playerSpinState->spinSoundID, SOUND_SPACE_MODE_0);

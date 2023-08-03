@@ -1045,13 +1045,13 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(N(Quizmo_SetStageLightsDelay), 2)
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_LRAW_21C)
             EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_LRAW_21C)
             EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_LRAW_21C)
             EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_LRAW_21C)
         EVT_END_THREAD
         EVT_CALL(PlaySound, SOUND_8A)
         EVT_CALL(N(Quizmo_SetVannaAnim_Clap))
@@ -1158,7 +1158,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(45)
-        EVT_CALL(StopSound, SOUND_89)
+        EVT_CALL(StopSound, SOUND_LRAW_89)
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SetVannaAnim_Wave))
     EVT_CALL(N(Quizmo_DestroyEffects))

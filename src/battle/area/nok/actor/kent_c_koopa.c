@@ -1171,7 +1171,7 @@ API_CALLABLE(N(UnusedFunc)) {
 }
 
 EvtScript N(EVS_DropDummyCoin) = {
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_212)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_LRAW_212)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar6, LVar7, LVar8)
     EVT_CALL(SetPartPos, ACTOR_SELF, LVar5, LVar6, 35, LVar8)
     EVT_CALL(N(GetCoinTrajectory), LVar6, LVar8, LVar0, LVar1, LVar2, LVar3)
@@ -1188,7 +1188,7 @@ EvtScript N(EVS_DropDummyCoin) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     // give coin to player
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_211)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_LRAW_211)
     EVT_CALL(AddCoin, 1)
     EVT_RETURN
     EVT_END

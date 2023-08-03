@@ -604,7 +604,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
             EVT_IF_NE(LVarA, SLOT_MATCH_NONE)
                 // partial match after two blocks hit
                 EVT_SET(MF_AnimateSlotLights, TRUE)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_388 | SOUND_ID_TRIGGER_CHANGE_VOLUME, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_LRAW_388 | SOUND_ID_TRIGGER_CHANGE_VOLUME, SOUND_SPACE_MODE_0)
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT(1)

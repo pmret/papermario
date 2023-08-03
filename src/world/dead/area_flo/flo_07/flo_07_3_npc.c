@@ -65,8 +65,8 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 100, 54, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO07_Item_CrystalBerry)
         EVT_SET(GF_FLO07_CrystalBerryFellOnLeftSide, TRUE)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(func_802D62E4, SOUND_3BC)
+    EVT_CALL(PlaySound, SOUND_LRAW_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(func_802D62E4, SOUND_LRAW_3BC)
     EVT_SET(AF_FLO_MadeCrystalBerry, TRUE)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006A)

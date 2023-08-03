@@ -619,7 +619,7 @@ void update_status_bar(void) {
             if (uiStatus->drawPosY >= 18) {
                 if (gGameStatusPtr->frameCounter % 4 == 0) {
                     uiStatus->displayHP++;
-                    sfx_play_sound(SOUND_213);
+                    sfx_play_sound(SOUND_LRAW_213);
                 }
             } else if (gGameStatusPtr->frameCounter % 4 == 0) {
                 uiStatus->displayHP++;
@@ -637,7 +637,7 @@ void update_status_bar(void) {
             if (uiStatus->drawPosY >= 18) {
                 if (gGameStatusPtr->frameCounter % 4 == 0) {
                     uiStatus->displayFP++;
-                    sfx_play_sound(SOUND_217);
+                    sfx_play_sound(SOUND_LRAW_217);
                 }
             } else if (gGameStatusPtr->frameCounter % 4 == 0) {
                 uiStatus->displayFP++;
@@ -1121,7 +1121,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     s32 iconIndex;
 
     if ((gPlayerData.coins != uiStatus->displayCoins) && ((gGameStatusPtr->frameCounter % 3) == 0)) {
-        sfx_play_sound(SOUND_211);
+        sfx_play_sound(SOUND_LRAW_211);
     }
 
     iconIndex = uiStatus->iconIndex10;

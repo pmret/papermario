@@ -89,7 +89,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 25)
     EVT_ADD(LVar1, 38)
-    EVT_CALL(PlaySoundAt, SOUND_207A, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_LRAW_207A, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 75)
     EVT_WAIT(75 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0F)

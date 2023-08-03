@@ -563,7 +563,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
         EVT_IF_NE(LVar3, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 10)
             EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)

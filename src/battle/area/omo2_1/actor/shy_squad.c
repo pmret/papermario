@@ -1226,7 +1226,7 @@ EvtScript N(attack) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
     EVT_SUB(LVarE, LVar0)
     EVT_SET(LVarD, LVarE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3AD)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_3AD)
     EVT_LOOP(LVarD)
         EVT_IF_GT(LVarE, 1)
             EVT_SET(LVar0, BS_FLAGS1_40)
@@ -1252,7 +1252,7 @@ EvtScript N(attack) = {
         EVT_END_IF
         EVT_WAIT(10)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_3AD)
+    EVT_CALL(StopSound, SOUND_LRAW_3AD)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(20)

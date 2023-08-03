@@ -551,7 +551,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
                                 EVT_ADD(LVar0, 20)
                             EVT_END_IF
                             EVT_PLAY_EFFECT(EFFECT_RECOVER, 2, LVar0, LVar1, LVar2, 0)
-                            EVT_CALL(PlaySoundAtPlayer, SOUND_214, 0)
+                            EVT_CALL(PlaySoundAtPlayer, SOUND_LRAW_214, 0)
                         EVT_END_THREAD
                         EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
                         EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldBombette_Idle)

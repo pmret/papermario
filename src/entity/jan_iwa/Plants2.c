@@ -191,7 +191,7 @@ void func_802BC3E4_E2ED14(Entity* entity) {
         data->unk_10 -= 360.0f;
     }
     if (data->unk_10 == 96.0f) {
-        sfx_play_sound(SOUND_392);
+        sfx_play_sound(SOUND_LRAW_392);
     }
 }
 
@@ -291,7 +291,7 @@ EntityScript Entity_MunchlesiaChewing_Script = {
 EntityScript Entity_MunchlesiaSpitOut_Script = {
     es_SetCallback(NULL, 4)
     es_Call(func_802BC3A0_E2ECD0)
-    es_PlaySound(SOUND_393)
+    es_PlaySound(SOUND_LRAW_393)
     es_SetCallback(NULL, 4)
     es_Call(entity_Munchlesia_create_child_reset1)
     es_SetFlags(ENTITY_FLAG_HIDDEN)

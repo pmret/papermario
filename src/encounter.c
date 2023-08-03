@@ -42,7 +42,7 @@ EvtScript EVS_MerleeDropCoins = {
         EVT_CALL(FadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_2075)
+    EVT_CALL(PlaySound, SOUND_LRAW_2075)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(PlayMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -278,7 +278,7 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(SOUND_24B);
+        sfx_play_sound(SOUND_LRAW_24B);
         npc->alpha = 0;
     }
 
@@ -316,7 +316,7 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
         WorldMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_800A0BB8 = 0;
         D_800A0BA0 = 12;
-        sfx_play_sound(SOUND_2074);
+        sfx_play_sound(SOUND_LRAW_2074);
     }
 
     merlee->pos.y = D_800A0BA4 + sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f;
@@ -1389,10 +1389,10 @@ void update_encounters_pre_battle(void) {
                     currentEncounter->dizzyAttackDuration = 3;
                 }
 
-                sfx_stop_sound(SOUND_2111);
-                sfx_stop_sound(SOUND_2112);
-                sfx_stop_sound(SOUND_2113);
-                sfx_stop_sound(SOUND_2114);
+                sfx_stop_sound(SOUND_LRAW_2111);
+                sfx_stop_sound(SOUND_LRAW_2112);
+                sfx_stop_sound(SOUND_LRAW_2113);
+                sfx_stop_sound(SOUND_LRAW_2114);
                 set_battle_formation(NULL);
                 set_battle_stage(encounter->stage);
                 load_battle(encounter->battle);

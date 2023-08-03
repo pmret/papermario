@@ -2199,7 +2199,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == STATUS_KEY_DAZE) {
         if (statusTypeKey != target->koStatus) {
             inflict_status(target, STATUS_KEY_DAZE, duration);
-            sfx_play_sound(SOUND_2107);
+            sfx_play_sound(SOUND_LRAW_2107);
         } else {
             target->koDuration += duration;
             if (target->koDuration > 9) {
@@ -2907,7 +2907,7 @@ void btl_update_ko_status(void) {
         player->disableEffect->data.disableX->koDuration = player->koDuration;
 
         if (koDuration == 0) {
-            sfx_play_sound(SOUND_2107);
+            sfx_play_sound(SOUND_LRAW_2107);
         }
     }
 

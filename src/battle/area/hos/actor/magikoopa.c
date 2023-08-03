@@ -797,7 +797,7 @@ EvtScript N(healOne) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_214)
+        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_LRAW_214)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_25C)
     EVT_END_THREAD
@@ -890,7 +890,7 @@ EvtScript N(healAll) = {
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_214)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_LRAW_214)
             EVT_WAIT(30)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_25C)
         EVT_END_THREAD

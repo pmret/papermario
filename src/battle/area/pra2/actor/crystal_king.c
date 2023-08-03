@@ -2012,7 +2012,7 @@ EvtScript N(Heal) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
@@ -2020,14 +2020,14 @@ EvtScript N(Heal) = {
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_214)
+            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_LRAW_214)
             EVT_WAIT(30)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_25C)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVarB, SOUND_214)
+            EVT_CALL(PlaySoundAtActor, LVarB, SOUND_LRAW_214)
             EVT_WAIT(30)
             EVT_CALL(PlaySoundAtActor, LVarB, SOUND_25C)
         EVT_END_THREAD

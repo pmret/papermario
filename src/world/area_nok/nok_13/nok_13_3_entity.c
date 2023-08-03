@@ -21,7 +21,7 @@ EvtScript N(EVS_BreakBlock_Second) = {
 EvtScript N(EVS_BreakBlock_Third) = {
     EVT_IF_EQ(AB_NOK_1, 2)
         EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-        EVT_CALL(PlaySoundAt, SOUND_2108, 0, 40, 60, -285)
+        EVT_CALL(PlaySoundAt, SOUND_LRAW_2108, 0, 40, 60, -285)
         EVT_SET(AB_NOK_1, 3)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 40, 73, -285, 10)
         EVT_CALL(MakeEntity, EVT_PTR(Entity_RedBlock), 40, 60, -285, 90, ITEM_ATTACK_FX_B, MAKE_ENTITY_END)

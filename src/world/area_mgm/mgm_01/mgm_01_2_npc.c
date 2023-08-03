@@ -143,7 +143,7 @@ void N(appendGfx_score_display) (void* renderData) {
             } else {
                 data->curScore++;
             }
-            sfx_play_sound_with_params(SOUND_211, 0, 0x40, 0x32);
+            sfx_play_sound_with_params(SOUND_LRAW_211, 0, 0x40, 0x32);
 
         }
         draw_number(data->curScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
@@ -413,7 +413,7 @@ API_CALLABLE(N(GiveCoinReward)) {
     data->curScore -= increment;
     add_coins(increment);
     data->targetScore = data->curScore;
-    sfx_play_sound(SOUND_211);
+    sfx_play_sound(SOUND_LRAW_211);
 
     if (data->curScore > 0) {
         return ApiStatus_BLOCK;
@@ -573,7 +573,7 @@ API_CALLABLE(N(CreateBlockEntities)) {
             N(BlockPosY)[curBlockIdx] + 13,
             N(BlockPosZ)[curBlockIdx] + 5,
             23.0f);
-        sfx_play_sound(SOUND_213);
+        sfx_play_sound(SOUND_LRAW_213);
         script->functionTemp[0] = 3;
         script->functionTemp[1]++;
     }
@@ -593,7 +593,7 @@ API_CALLABLE(N(TakeCoinCost)) {
         script->functionTemp[0] = 0;
     }
     add_coins(-1);
-    sfx_play_sound(SOUND_211);
+    sfx_play_sound(SOUND_LRAW_211);
 
     script->functionTemp[0]++;
 

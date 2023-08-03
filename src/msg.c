@@ -797,7 +797,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                             printer->stateFlags |= MSG_STATE_FLAG_800;
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
                             if (arg == MSG_STYLE_INSPECT) {
-                                sfx_play_sound_with_params(SOUND_21C, 0, 0, 0);
+                                sfx_play_sound_with_params(SOUND_LRAW_21C, 0, 0, 0);
                             }
                         }
                         break;
@@ -806,7 +806,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->windowBasePos.y = *srcBuf++;
                         printer->windowSize.x = *srcBuf++;
                         printer->windowSize.y = *srcBuf++;
-                        sfx_play_sound_with_params(SOUND_21C, 0, 0, 0);
+                        sfx_play_sound_with_params(SOUND_LRAW_21C, 0, 0, 0);
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags |= MSG_STATE_FLAG_800;

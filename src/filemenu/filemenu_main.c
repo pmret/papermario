@@ -933,7 +933,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
 
     menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
     if (originalSelected != menu->selected) {
-        sfx_play_sound(SOUND_2101);
+        sfx_play_sound(SOUND_LRAW_2101);
     }
 
     if (menu->page == 0) {

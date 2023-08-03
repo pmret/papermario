@@ -534,7 +534,7 @@ EvtScript N(EVS_Attack_GroundSmash) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Pokey_Idle2)
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_342)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_342)
     EVT_CALL(MakeLerp, 0, -40, 20, EASING_COS_IN_OUT)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -781,7 +781,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CASE_EQ(3)
         EVT_END_SWITCH
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_342)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_342)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Anim_Windup, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
     EVT_WAIT(12)
@@ -933,7 +933,7 @@ EvtScript N(EVS_SummonBackup) = {
         EVT_END_IF
     EVT_CHILD_THREAD
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_344)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_344)
     EVT_END_CHILD_THREAD
     // lean forward
     EVT_CALL(MakeLerp, -20, 30, 20, EASING_COS_IN_OUT)
@@ -946,7 +946,7 @@ EvtScript N(EVS_SummonBackup) = {
         EVT_END_IF
     EVT_CHILD_THREAD
         EVT_WAIT(6)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_345)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_345)
     EVT_END_CHILD_THREAD
     // lean back
     EVT_CALL(MakeLerp, 30, -40, 20, EASING_COS_IN_OUT)
@@ -972,7 +972,7 @@ EvtScript N(EVS_SummonBackup) = {
         EVT_END_IF
     EVT_WAIT(20)
     // create new Pokey actor
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_346)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_346)
     EVT_CALL(StartRumble, 9)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))

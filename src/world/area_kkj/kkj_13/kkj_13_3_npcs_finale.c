@@ -12,7 +12,7 @@ API_CALLABLE(N(UpdatePropellerSoundPos)) {
     f32 y = npc->pos.y;
     f32 z = npc->pos.z;
 
-    sfx_adjust_env_sound_pos(SOUND_23D, SOUND_SPACE_MODE_0, x, y, z);
+    sfx_adjust_env_sound_pos(SOUND_LRAW_23D, SOUND_SPACE_MODE_0, x, y, z);
     script->varTable[0] = y;
 
     return ApiStatus_DONE2;

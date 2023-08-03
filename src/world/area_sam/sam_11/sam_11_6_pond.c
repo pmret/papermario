@@ -164,7 +164,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(EnableModel, MODEL_ice03, TRUE)
             EVT_THREAD
                 EVT_WAIT(10)
-                EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_397, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_LRAW_397, 0)
             EVT_END_THREAD
             EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Run)
@@ -185,7 +185,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, LVar0, LVar2, 0)
             EVT_THREAD
                 EVT_CALL(DisablePlayerPhysics, TRUE)
-                EVT_CALL(PlaySoundAtPlayer, SOUND_398, 0)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_LRAW_398, 0)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Thrown)
                 EVT_SET(MF_Unk_01, FALSE)
@@ -207,7 +207,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, -207, 110, 0)
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, -450, 0, 0)
             EVT_SET(MF_Unk_01, TRUE)
-            EVT_CALL(StopSound, SOUND_398)
+            EVT_CALL(StopSound, SOUND_LRAW_398)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Idle)
             EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Surprise)
             EVT_CALL(SpeakToPlayer, NPC_PenguinPatrol, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B8)
@@ -220,7 +220,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_ADD(LVar0, -20)
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, LVar0, LVar2, 0)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_390, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_LRAW_390, 0)
             EVT_THREAD
                 EVT_SET(MV_ThrownOut, 1)
                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))

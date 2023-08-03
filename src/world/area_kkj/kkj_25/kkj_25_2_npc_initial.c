@@ -30,7 +30,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
     EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_20000)
-    EVT_CALL(StopSound, SOUND_22C)
+    EVT_CALL(StopSound, SOUND_LRAW_22C)
     EVT_CALL(StartBossBattle, SONG_BOWSER_BATTLE)
     EVT_RETURN
     EVT_END
@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
 
 EvtScript N(EVS_NpcDefeat_Bowser) = {
     #define NAME_SUFFIX
-    EVT_CALL(PlaySound, SOUND_22D)
+    EVT_CALL(PlaySound, SOUND_LRAW_22D)
     EVT_EXEC(N(EVS_Scene_PeachBreaksFree))
     EVT_RETURN
     EVT_END
@@ -70,7 +70,7 @@ EvtScript N(EVS_NpcIdle_Kammy_Broom) = {
     EVT_CALL(GetNpcPos, NPC_Peach_01, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_20000)
-    EVT_CALL(StopSound, SOUND_22D)
+    EVT_CALL(StopSound, SOUND_LRAW_22D)
     EVT_CALL(StartBossBattle, SONG_BOWSER_BATTLE)
     EVT_CALL(EnablePartnerAI)
     EVT_RETURN

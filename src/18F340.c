@@ -368,7 +368,7 @@ API_CALLABLE(BattleFadeInMerlee) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(SOUND_24B);
+        sfx_play_sound(SOUND_LRAW_24B);
         merlee->alpha = 0;
     }
 
@@ -404,7 +404,7 @@ API_CALLABLE(BattleMerleeUpdateFX) {
         BattleMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
-        sfx_play_sound(SOUND_2074);
+        sfx_play_sound(SOUND_LRAW_2074);
     }
     merlee->pos.y = D_8029FB94 + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
 
@@ -1610,7 +1610,7 @@ EvtScript EVS_MerleeAttackBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LRAW_2075)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -1659,7 +1659,7 @@ EvtScript EVS_MerleeDefenseBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LRAW_2075)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -1713,7 +1713,7 @@ EvtScript EVS_MerleeExpBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LRAW_2075)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)

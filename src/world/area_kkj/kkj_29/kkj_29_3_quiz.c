@@ -85,7 +85,7 @@ EvtScript N(EVS_UpdateScores) = {
 };
 
 EvtScript N(EVS_WaitForBuzzIn) = {
-    EVT_CALL(PlaySound, SOUND_8E)
+    EVT_CALL(PlaySound, SOUND_LRAW_8E)
     EVT_CALL(N(AwaitPlayerBuzzIn))
     EVT_IF_EQ(LVar0, 0) // time's up
         // player took too long, decide who will answer based on score
@@ -104,7 +104,7 @@ EvtScript N(EVS_WaitForBuzzIn) = {
         // player will answer
         EVT_SET(AB_KKJ29_AnsweringContestant, CONTESTANT_PEACH)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_8E)
+    EVT_CALL(StopSound, SOUND_LRAW_8E)
     EVT_SET(AB_KKJ29_AnswerScore, ANSWER_PENDING)
     EVT_SWITCH(AB_KKJ29_AnsweringContestant)
         EVT_CASE_EQ(CONTESTANT_LEFT)
@@ -159,7 +159,7 @@ EvtScript N(Script_DoRound) = {
     EVT_END_SWITCH
     // handle the choice
     EVT_IF_EQ(LVar0, LVar5)
-        EVT_CALL(PlaySound, SOUND_21C)
+        EVT_CALL(PlaySound, SOUND_LRAW_21C)
         EVT_CALL(PlaySound, SOUND_8A)
         EVT_SET(AB_KKJ29_AnswerScore, ANSWER_RIGHT)
         EVT_EXEC_WAIT(N(EVS_UpdateScores))

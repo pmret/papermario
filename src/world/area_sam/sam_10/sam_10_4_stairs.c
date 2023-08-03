@@ -76,7 +76,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o61, SOUND_39C, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o61, SOUND_LRAW_39C, 0)
     EVT_CALL(MakeLerp, 0, -23, 100 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(2)
     EVT_CALL(UpdateLerp)
@@ -98,7 +98,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(30)
-    EVT_CALL(PlaySound, SOUND_39D)
+    EVT_CALL(PlaySound, SOUND_LRAW_39D)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, -20, -20, -66, 0)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 20, -20, -66, 0)
@@ -143,7 +143,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
                 EVT_GOTO(3)
             EVT_END_IF
             EVT_IF_EQ(LVar2, 30)
-                EVT_CALL(PlaySound, SOUND_39F)
+                EVT_CALL(PlaySound, SOUND_LRAW_39F)
                 EVT_CALL(StopSound, SOUND_LOOP_40)
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))

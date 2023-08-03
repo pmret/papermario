@@ -756,7 +756,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_34E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_LRAW_34E)
     EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY0, EVT_FLOAT(0.6))
     EVT_CALL(SetActorDispOffset, ACTOR_ENEMY0, 0, 0, 0)
     EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)

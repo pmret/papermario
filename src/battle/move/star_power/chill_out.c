@@ -98,7 +98,7 @@ API_CALLABLE(func_802A16F4_7907C4) {
     z = target->curPos.z + target->headOffset.z + 5.0f;
 
     fx_stat_change(5, x, y, z, 1.0f, 60);
-    sfx_play_sound(SOUND_2106);
+    sfx_play_sound(SOUND_LRAW_2106);
     D_802A2CC0 = 1;
 
     return ApiStatus_DONE2;
@@ -116,7 +116,7 @@ EvtScript N(802A18F0) = {
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_LRAW_241)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
@@ -140,7 +140,7 @@ EvtScript N(802A18F0) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
         EVT_CALL(N(UnkStarFunc), 4)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_LRAW_241)
         EVT_CALL(N(UnkStarFunc), 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
@@ -171,7 +171,7 @@ EvtScript N(802A1C88) = {
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_LRAW_241)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
@@ -195,7 +195,7 @@ EvtScript N(802A1C88) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
         EVT_CALL(N(UnkStarFunc), 4)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_LRAW_241)
         EVT_CALL(N(UnkStarFunc), 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
@@ -350,7 +350,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMuskular_Shout)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(PlaySound, SOUND_244)
+    EVT_CALL(PlaySound, SOUND_LRAW_244)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(10)
     EVT_CALL(ItemCheckHit, LVar0, 0, 0, 0, 0)

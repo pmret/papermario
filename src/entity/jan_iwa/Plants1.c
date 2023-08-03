@@ -143,8 +143,8 @@ void func_802BB314_E2DC44(Entity* entity) {
 }
 
 void func_802BB34C_E2DC7C(void) {
-    sfx_play_sound(SOUND_391 | SOUND_ID_TRIGGER_CHANGE_SOUND);
-    snd_stop_tracking_env_sound_pos(SOUND_391, TRUE);
+    sfx_play_sound(SOUND_LRAW_391 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+    snd_stop_tracking_env_sound_pos(SOUND_LRAW_391, TRUE);
 }
 
 void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {

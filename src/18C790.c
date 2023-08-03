@@ -551,7 +551,7 @@ void btl_state_update_celebration(void) {
                     battleStatus->totalStarPoints = EndBattleRewardTotal / 100;
                     deltaSP = prevSP - battleStatus->totalStarPoints;
                     if (deltaSP > 0) {
-                        sfx_play_sound(SOUND_215);
+                        sfx_play_sound(SOUND_LRAW_215);
                     }
 
                     playerData->starPoints += deltaSP;
@@ -981,7 +981,7 @@ void btl_state_update_celebration(void) {
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 if (!CantLevelUpStat[battleStatus->curSubmenu]) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    sfx_play_sound(SOUND_349 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                    sfx_play_sound(SOUND_LRAW_349 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_UPGRADE;
                 } else {
                     sfx_play_sound(SOUND_MENU_ERROR);

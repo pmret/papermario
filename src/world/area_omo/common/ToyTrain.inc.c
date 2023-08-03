@@ -377,7 +377,7 @@ EvtScript N(EVS_TrainUnk_D) = {
     EVT_CALL(NpcJump0, NPC_Conductor, LVar4, 50, LVar5, 10)
     EVT_CALL(InterpNpcYaw, NPC_Conductor, LVarA, 0)
     EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_0009)
-    EVT_CALL(PlaySound, SOUND_83)
+    EVT_CALL(PlaySound, SOUND_LRAW_83)
     EVT_CALL(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, 8)
     EVT_WAIT(10)
     EVT_RETURN
@@ -441,7 +441,7 @@ EvtScript N(EVS_TrainUnk_AltD) = {
     EVT_CALL(NpcJump0, NPC_Conductor, LVar4, 50, LVar5, 10)
     EVT_CALL(InterpNpcYaw, NPC_Conductor, LVarA, 0)
     EVT_CALL(SpeakToPlayer, NPC_Conductor, ANIM_TrainToad_Talk, ANIM_TrainToad_Idle, 5, MSG_CH4_0009)
-    EVT_CALL(PlaySound, SOUND_83)
+    EVT_CALL(PlaySound, SOUND_LRAW_83)
     EVT_CALL(SetMusicTrack, 0, SONG_TOYBOX_TRAIN, 0, 8)
     EVT_WAIT(10)
     EVT_RETURN
@@ -450,7 +450,7 @@ EvtScript N(EVS_TrainUnk_AltD) = {
 #endif
 
 EvtScript N(EVS_TrainUnk_E) = {
-    EVT_CALL(StopSound, SOUND_83)
+    EVT_CALL(StopSound, SOUND_LRAW_83)
     EVT_CALL(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
     EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
@@ -497,7 +497,7 @@ EvtScript N(EVS_TrainUnk_E) = {
 
 #ifdef INCLUDE_ALTERNATES
 EvtScript N(EVS_TrainUnk_AltE) = {
-    EVT_CALL(StopSound, SOUND_83)
+    EVT_CALL(StopSound, SOUND_LRAW_83)
     EVT_CALL(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
     EVT_CALL(SetNpcFlagBits, NPC_Conductor, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)

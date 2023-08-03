@@ -1305,9 +1305,9 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_CALL(PlaySoundAt, SOUND_FF, 0, 100, 22, -178)
     EVT_WAIT(20 * DT)
     EVT_CALL(FadeOutMusic, 0, 500)
-    EVT_CALL(PlaySoundAt, SOUND_394, 0, 100, 22, -178)
+    EVT_CALL(PlaySoundAt, SOUND_LRAW_394, 0, 100, 22, -178)
     EVT_CALL(N(AwaitPlayerPressATimer))
-    EVT_CALL(StopSound, SOUND_394)
+    EVT_CALL(StopSound, SOUND_LRAW_394)
     EVT_CALL(PlaySoundAt, SOUND_3F3, 0, 100, 22, -178)
     EVT_WAIT(10 * DT)
     // check baking time

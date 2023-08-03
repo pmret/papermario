@@ -5,7 +5,7 @@
 API_CALLABLE(N(PlaySentinelSounds)) {
     Npc* npc = get_npc_unsafe(get_enemy(NPC_Sentinel)->npcID);
 
-    sfx_adjust_env_sound_pos(SOUND_32E, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_adjust_env_sound_pos(SOUND_LRAW_32E, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
     return ApiStatus_DONE2;
 }
 
@@ -508,7 +508,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcPos, NPC_PARTNER, 320, 10, -160)
-    EVT_CALL(PlaySound, SOUND_32E)
+    EVT_CALL(PlaySound, SOUND_LRAW_32E)
     EVT_THREAD
         EVT_LOOP(180)
             EVT_CALL(GetNpcPos, NPC_Sentinel, LVar0, LVar1, LVar2)
@@ -559,7 +559,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
         EVT_WAIT(40)
         EVT_CALL(SetNpcAnimation, NPC_Sentinel, ANIM_Sentinel_Anim03)
         EVT_CALL(NpcMoveTo, NPC_Sentinel, 270, -120, 30)
-        EVT_CALL(StopSound, SOUND_32E)
+        EVT_CALL(StopSound, SOUND_LRAW_32E)
         EVT_CALL(SetNpcPos, NPC_Sentinel, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_THREAD

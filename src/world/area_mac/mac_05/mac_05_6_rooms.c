@@ -43,7 +43,7 @@ EvtScript N(D_802525B0_864720) = {
         EVT_CASE_EQ(0)
             EVT_CALL(SetMusicTrack, 0, SONG_CLUB64, 0, 8)
             EVT_CALL(StopSound, SOUND_LOOP_58)
-            EVT_CALL(func_802D62E4, SOUND_39)
+            EVT_CALL(func_802D62E4, SOUND_LRAW_39)
             EVT_CALL(EnableGroup, MODEL_bar_inn, TRUE)
             EVT_CALL(EnableModel, MODEL_o139, FALSE)
             EVT_CALL(EnableModel, MODEL_o140, FALSE)

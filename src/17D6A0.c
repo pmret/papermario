@@ -366,9 +366,9 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_FUZZY] = {
-        .walk = { SOUND_331, SOUND_331 },
-        .fly = { SOUND_331, SOUND_331 },
-        .jump = SOUND_331,
+        .walk = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .fly = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .jump = SOUND_LRAW_331,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
@@ -436,14 +436,14 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_POKEY] = {
-        .walk = { SOUND_343, NULL },
+        .walk = { SOUND_LRAW_343, NULL },
         .fly = { NULL, NULL },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_POKEY_MUMMY] = {
-        .walk = { SOUND_343, NULL },
+        .walk = { SOUND_LRAW_343, NULL },
         .fly = { NULL, NULL },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
@@ -478,9 +478,9 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_FOREST_FUZZY] = {
-        .walk = { SOUND_331, SOUND_331 },
-        .fly = { SOUND_331, SOUND_331 },
-        .jump = SOUND_331,
+        .walk = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .fly = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .jump = SOUND_LRAW_331,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
@@ -576,16 +576,16 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_AQUA_FUZZY] = {
-        .walk = { SOUND_331, SOUND_331 },
-        .fly = { SOUND_331, SOUND_331 },
-        .jump = SOUND_331,
+        .walk = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .fly = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .jump = SOUND_LRAW_331,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_JUNGLE_FUZZY] = {
-        .walk = { SOUND_331, SOUND_331 },
-        .fly = { SOUND_331, SOUND_331 },
-        .jump = SOUND_331,
+        .walk = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .fly = { SOUND_LRAW_331, SOUND_LRAW_331 },
+        .jump = SOUND_LRAW_331,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
@@ -618,8 +618,8 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_LAKITU] = {
-        .walk = { SOUND_295, SOUND_295 },
-        .fly = { SOUND_295, SOUND_295 },
+        .walk = { SOUND_LRAW_295, SOUND_LRAW_295 },
+        .fly = { SOUND_LRAW_295, SOUND_LRAW_295 },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { -5, -5 }
@@ -660,15 +660,15 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_RUFF_PUFF] = {
-        .walk = { SOUND_295, NULL },
-        .fly = { SOUND_295, NULL },
+        .walk = { SOUND_LRAW_295, NULL },
+        .fly = { SOUND_LRAW_295, NULL },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_SPIKE] = {
-        .walk = { SOUND_295, NULL },
-        .fly = { SOUND_295, NULL },
+        .walk = { SOUND_LRAW_295, NULL },
+        .fly = { SOUND_LRAW_295, NULL },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
@@ -765,8 +765,8 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_GHOST_LAKILESTER] = {
-        .walk = { SOUND_295, SOUND_295 },
-        .fly = { SOUND_295, SOUND_295 },
+        .walk = { SOUND_LRAW_295, SOUND_LRAW_295 },
+        .fly = { SOUND_LRAW_295, SOUND_LRAW_295 },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { -5, -5 }
@@ -1010,8 +1010,8 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_UNUSED_66] = {
-        .walk = { SOUND_295, SOUND_295 },
-        .fly = { SOUND_295, SOUND_295 },
+        .walk = { SOUND_LRAW_295, SOUND_LRAW_295 },
+        .fly = { SOUND_LRAW_295, SOUND_LRAW_295 },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { -5, -5 }
@@ -1122,8 +1122,8 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_LAKILESTER] = {
-        .walk = { SOUND_295, SOUND_295 },
-        .fly = { SOUND_295, SOUND_295 },
+        .walk = { SOUND_LRAW_295, SOUND_LRAW_295 },
+        .fly = { SOUND_LRAW_295, SOUND_LRAW_295 },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { -5, -5 }
@@ -1234,8 +1234,8 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_LEE_LAKILESTER] = {
-        .walk = { SOUND_295, SOUND_295 },
-        .fly = { SOUND_295, SOUND_295 },
+        .walk = { SOUND_LRAW_295, SOUND_LRAW_295 },
+        .fly = { SOUND_LRAW_295, SOUND_LRAW_295 },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { -5, -5 }

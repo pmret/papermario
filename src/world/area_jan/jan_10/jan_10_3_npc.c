@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, -566, 100, 65)
-    EVT_CALL(PlaySoundWithVolume, SOUND_331, 110)
+    EVT_CALL(PlaySoundWithVolume, SOUND_LRAW_331, 110)
     EVT_WAIT(20)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)

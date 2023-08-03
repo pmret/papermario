@@ -138,7 +138,7 @@ API_CALLABLE(N(AwaitPlayerNotPoundingFloor)) {
 #include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
 EvtScript N(EVS_BreakIce) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o116, SOUND_396, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o116, SOUND_LRAW_396, 0)
     EVT_CALL(N(AnimateIceShattering))
     EVT_LOOP(10)
         EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_VISIBLE)
@@ -188,7 +188,7 @@ EvtScript N(EVS_UseGreenSwitch) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(GetEntityPosition), MV_SwitchEntityID, LVar7, LVar8, LVar9)
     EVT_IF_EQ(GF_SAM07_FloorRaised, FALSE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_399, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_LRAW_399, 0)
         EVT_SUB(LVar8, -180)
         EVT_CALL(MakeLerp, -180, 0, 120, EASING_COS_IN_OUT)
         EVT_LABEL(0)
@@ -210,7 +210,7 @@ EvtScript N(EVS_UseGreenSwitch) = {
     EVT_ELSE
         EVT_CALL(EnableModel, MODEL_o137, TRUE)
         EVT_CALL(EnableModel, MODEL_o135, FALSE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_39A, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_yuka, SOUND_LRAW_39A, 0)
         EVT_CALL(MakeLerp, 0, -180, 120, EASING_COS_IN_OUT)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)

@@ -85,7 +85,7 @@ EvtScript N(EVS_SetupLowerChain) = {
         EVT_CALL(N(DetectLowerChainGrab))
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_229, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_LRAW_229, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
         EVT_WAIT(1)
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
@@ -159,8 +159,8 @@ EvtScript N(EVS_LowerWaterLevel0) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(30)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(func_802D62E4, SOUND_22B)
+    EVT_CALL(PlaySound, SOUND_LRAW_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(func_802D62E4, SOUND_LRAW_22B)
     EVT_CALL(SetGroupVisibility, MODEL_sui1, MODEL_GROUP_HIDDEN)
     EVT_CALL(EnableModel, MODEL_s_sui, FALSE)
     EVT_CALL(EnableModel, MODEL_o385, FALSE)
@@ -266,8 +266,8 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(40)
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_22A | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(func_802D62E4, SOUND_22A)
+        EVT_CALL(PlaySound, SOUND_LRAW_22A | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(func_802D62E4, SOUND_LRAW_22A)
         EVT_CALL(EnableModel, MODEL_o389, FALSE)
         EVT_CALL(EnableModel, MODEL_o388, FALSE)
     EVT_END_THREAD
@@ -332,7 +332,7 @@ EvtScript N(EVS_SetupUpperChain) = {
         EVT_CALL(N(DetectUpperChainGrab))
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_229, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_LRAW_229, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
         EVT_WAIT(1)
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
@@ -407,8 +407,8 @@ EvtScript N(EVS_LowerWaterLevel1) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(30)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(func_802D62E4, SOUND_22B)
+    EVT_CALL(PlaySound, SOUND_LRAW_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(func_802D62E4, SOUND_LRAW_22B)
     EVT_WAIT(10)
     EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
@@ -509,8 +509,8 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(40)
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_22A | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(func_802D62E4, SOUND_22A)
+        EVT_CALL(PlaySound, SOUND_LRAW_22A | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(func_802D62E4, SOUND_LRAW_22A)
         EVT_CALL(EnableModel, MODEL_o389, FALSE)
         EVT_CALL(EnableModel, MODEL_o388, FALSE)
     EVT_END_THREAD

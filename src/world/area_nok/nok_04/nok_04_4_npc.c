@@ -1441,7 +1441,7 @@ EvtScript N(EVS_HitTree) = {
     EVT_IF_EQ(LVar0, MV_CorrectTreeIndex)
         EVT_THREAD
             EVT_WAIT(15)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_LRAW_21C)
         EVT_END_THREAD
         EVT_EXEC_WAIT(N(EVS_HitTree_Correct))
     EVT_ELSE

@@ -262,7 +262,7 @@ EvtScript N(takeTurn) = {
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim07)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207A)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_207A)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 25)
     EVT_ADD(LVar1, 40)
@@ -272,7 +272,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetBattleCamTarget, 80, 95, 15)
     EVT_CALL(SetBattleCamZoom, 340)
     EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_207B)
     EVT_SUB(LVar0, 15)
     EVT_ADD(LVar1, 30)
     EVT_SET(LVar3, LVar1)
@@ -292,7 +292,7 @@ EvtScript N(takeTurn) = {
     EVT_THREAD
         EVT_CALL(func_8021833C_6DC0DC)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_207C)
     EVT_CALL(N(GetEntityPosition), LVar9, LVar2, LVar3, LVar4)
     EVT_CALL(MakeLerp, LVar3, 300, 20, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
@@ -319,7 +319,7 @@ EvtScript N(takeTurn) = {
         EVT_WAIT(5)
         EVT_CALL(func_802183EC_6DC18C)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_207D)
     EVT_SET(LVar5, LVar1)
     EVT_ADD(LVar5, 200)
     EVT_CALL(N(SetEntityPositionF), LVar9, LVar0, LVar5, LVar2)

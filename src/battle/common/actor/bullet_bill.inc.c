@@ -306,7 +306,7 @@ EvtScript N(EVS_MakeExplosionFX) = {
     EVT_ADD(LVar1, 16)
     EVT_ADD(LVar2, 2)
     EVT_PLAY_EFFECT(EFFECT_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(3.0), 30, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2078)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_2078)
     EVT_CALL(StartRumble, 11)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))

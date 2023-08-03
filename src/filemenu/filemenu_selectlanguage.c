@@ -299,7 +299,7 @@ void filemenu_selectlanguage_handle_input(MenuPanel* menu) {
     menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
     if (originalSelected != menu->selected) {
         if (var_a1 == 0) {
-            sfx_play_sound(SOUND_2101);
+            sfx_play_sound(SOUND_LRAW_2101);
         }
         switch (menu->selected) {                          /* irregular */
             case 0:
