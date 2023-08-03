@@ -497,7 +497,7 @@ class Configure:
         assert self.linker_entries is not None
 
         built_objects = set()
-        generated_headers = []
+        generated_code = []
 
         def build(
             object_paths: Union[Path, List[Path]],
@@ -516,8 +516,8 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c" or task == "pal_inc_c":
-                    generated_headers.append(str(object_path))
+                elif object_path.suffix.endswith(".h") or object_path.suffix.endswith(".c"):
+                    generated_code.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
                 if not str(object_path) in skip_outputs:
@@ -525,7 +525,7 @@ class Configure:
 
             for i_output in implicit_outputs:
                 if i_output.endswith(".h"):
-                    generated_headers.append(i_output)
+                    generated_code.append(i_output)
 
             if needs_build:
                 skip_outputs.update(object_strs)
@@ -536,7 +536,7 @@ class Configure:
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
                 elif task in ["cc", "cxx", "cc_modern"]:
-                    order_only.append("generated_headers_" + self.version)
+                    order_only.append("generated_code_" + self.version)
 
                 inputs = self.resolve_src_paths(src_paths)
                 for dir in asset_deps:
@@ -575,7 +575,7 @@ class Configure:
         )
 
         build(
-            self.build_path() / "include/recipes.h",
+            self.build_path() / "include/recipes.inc.c",
             [Path("src/recipes.yaml")],
             "recipes",
         )
@@ -1185,7 +1185,7 @@ class Configure:
                 implicit=[str(self.rom_path())],
             )
 
-        ninja.build("generated_headers_" + self.version, "phony", generated_headers)
+        ninja.build("generated_code_" + self.version, "phony", generated_code)
 
     def make_current(self, ninja: ninja_syntax.Writer):
         current = Path("ver/current")

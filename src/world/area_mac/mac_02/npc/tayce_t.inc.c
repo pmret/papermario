@@ -23,7 +23,7 @@ enum CookingResultQuality {
     QUALITY_ODD     = 4,
 };
 
-#include "recipes.h"
+#include "recipes.inc.c"
 
 API_CALLABLE(N(GetCookResultForSingleRecipe)) {
     Bytecode* args = script->ptrReadPos;
