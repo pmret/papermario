@@ -161,7 +161,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
         EVT_WAIT(1)
         EVT_GOTO(100)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_A)
+    EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
     EVT_THREAD
         EVT_WAIT(5)

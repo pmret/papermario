@@ -1,40 +1,5 @@
 #include "common.h"
 
-s32 D_802EB5C0[] = {
-    0x0000D178, 0x0000ED78, 0x00010978, 0x00012578, 0x00014178, 0x00015D78, 0x00017978, 0x00019578, 0x0001B178, 0x0001CD78, 0x0001E978, 0x00020578
-};
-
-s32 D_802EB5F0[] = {
-    0x0000EB78, 0x00010778, 0x00012378, 0x00013F78, 0x00015B78, 0x00017778, 0x00019378, 0x0001AF78, 0x0001CB78, 0x0001E778, 0x00020378, 0x00021F78
-};
-
-MsgVoice MsgVoices[] = {
-    {
-        .unk_00 = SOUND_NORMAL_VOICE_A,
-        .unk_04 = SOUND_NORMAL_VOICE_B,
-        .unk_08 = 0
-    },
-    {
-        .unk_00 = SOUND_BOWSER_VOICE_A,
-        .unk_04 = SOUND_BOWSER_VOICE_B,
-        .unk_08 = -50
-    },
-    {
-        .unk_00 = SOUND_STAR_VOICE,
-        .unk_04 = SOUND_STAR_VOICE,
-        .unk_08 = 0
-    },
-};
-
-s16 D_802EB644[] = {
-    0, -4, -4, -4,
-    -4, 0, -4, -4,
-    -4, 0, 0, 0,
-    0, -4, -4, 0,
-    0, 0, 0, 0,
-    0, 0
-};
-
 #include "ui/msg/bubble_left.png.inc.c"
 #include "ui/msg/bubble_mid.png.inc.c"
 #include "ui/msg/bubble_right.png.inc.c"
@@ -110,9 +75,9 @@ unsigned char ui_msg_palettes[16][32] = {
 #include "ui/msg/star.png.inc.c"
 #include "ui/msg/star_silhouette.png.inc.c"
 
-BSS IMG_BIN D_802ED970[0xF60];
-BSS IMG_BIN D_802EE8D0[0x5100];
-BSS IMG_BIN D_802F39D0[0xB88];
+BSS IMG_BIN MsgCharImgTitle[0xF60];
+BSS IMG_BIN MsgCharImgNormal[0x5100];
+BSS IMG_BIN MsgCharImgSubtitle[0xB88];
 BSS char MSG_unused[8];
 BSS PAL_BIN D_802F4560[80][8];
 

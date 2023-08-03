@@ -400,7 +400,7 @@ EvtScript N(executeAction) = {
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     EVT_THREAD
         EVT_SET(LVar0, 200)
         EVT_LOOP(20)
@@ -414,7 +414,7 @@ EvtScript N(returnHome2) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR_A)
     EVT_SET(LVar0, 55)
     EVT_LOOP(20)
         EVT_ADD(LVar0, 10)
@@ -429,7 +429,7 @@ EvtScript N(returnHome2) = {
 EvtScript N(returnHome) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     EVT_THREAD
         EVT_SET(LVar0, 200)
         EVT_LOOP(20)
@@ -443,7 +443,7 @@ EvtScript N(returnHome) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR_A)
     EVT_SET(LVar0, 55)
     EVT_LOOP(20)
         EVT_ADD(LVar0, 10)
@@ -492,7 +492,7 @@ EvtScript N(smack) = {
         EVT_CALL(action_command_smack_start, 0, LVar0, 3, 0)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 55)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -509,7 +509,7 @@ EvtScript N(smack) = {
     EVT_CALL(SetBattleCamOffsetZ, 9)
     EVT_CALL(func_8024EDA4)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR_A)
     EVT_SET(LVar0, 55)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 40)
@@ -1004,7 +1004,7 @@ EvtScript N(fanSmack) = {
         EVT_CALL(action_command_smack_start, 0, LVar0, 3, 1)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
     EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 55)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -1020,7 +1020,7 @@ EvtScript N(fanSmack) = {
     EVT_CALL(SetBattleCamOffsetZ, 9)
     EVT_CALL(func_8024EDA4)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_APPEAR_A)
     EVT_SET(LVar0, 55)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 40)

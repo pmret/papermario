@@ -276,12 +276,12 @@ glabel msg_copy_to_print_buffer
 /* B9A28 80122B48 92830508 */  lbu       $v1, 0x508($s4)
 /* B9A2C 80122B4C 00021080 */  sll       $v0, $v0, 2
 /* B9A30 80122B50 00031840 */  sll       $v1, $v1, 1
-/* B9A34 80122B54 3C01802F */  lui       $at, %hi(gMsgCharsets)
+/* B9A34 80122B54 3C01802F */  lui       $at, %hi(MsgCharsets)
 /* B9A38 80122B58 00220821 */  addu      $at, $at, $v0
-/* B9A3C 80122B5C 8C22B5A8 */  lw        $v0, %lo(gMsgCharsets)($at)
-/* B9A40 80122B60 3C01802F */  lui       $at, %hi(D_802EB644)
+/* B9A3C 80122B5C 8C22B5A8 */  lw        $v0, %lo(MsgCharsets)($at)
+/* B9A40 80122B60 3C01802F */  lui       $at, %hi(MsgStyleVerticalLineOffsets)
 /* B9A44 80122B64 00230821 */  addu      $at, $at, $v1
-/* B9A48 80122B68 8423B644 */  lh        $v1, %lo(D_802EB644)($at)
+/* B9A48 80122B68 8423B644 */  lh        $v1, %lo(MsgStyleVerticalLineOffsets)($at)
 /* B9A4C 80122B6C 90440003 */  lbu       $a0, 0x3($v0)
 /* B9A50 80122B70 24020006 */  addiu     $v0, $zero, 0x6
 /* B9A54 80122B74 A28204F8 */  sb        $v0, 0x4F8($s4)
@@ -467,9 +467,9 @@ glabel msg_copy_to_print_buffer
 /* B9CFC 80122E1C 00108080 */  sll       $s0, $s0, 2
 /* B9D00 80122E20 0040302D */  daddu     $a2, $v0, $zero
 /* B9D04 80122E24 AE82054C */  sw        $v0, 0x54C($s4)
-/* B9D08 80122E28 3C03802F */  lui       $v1, %hi(D_802EB5C0)
+/* B9D08 80122E28 3C03802F */  lui       $v1, %hi(MsgLetterRasterOffsets)
 /* B9D0C 80122E2C 00701821 */  addu      $v1, $v1, $s0
-/* B9D10 80122E30 8C63B5C0 */  lw        $v1, %lo(D_802EB5C0)($v1)
+/* B9D10 80122E30 8C63B5C0 */  lw        $v1, %lo(MsgLetterRasterOffsets)($v1)
 /* B9D14 80122E34 3C080011 */  lui       $t0, %hi(charset_ROM_START)
 /* B9D18 80122E38 2508E120 */  addiu     $t0, $t0, %lo(charset_ROM_START)
 /* B9D1C 80122E3C 00682021 */  addu      $a0, $v1, $t0
@@ -479,9 +479,9 @@ glabel msg_copy_to_print_buffer
 /* B9D2C 80122E4C 24040200 */   addiu    $a0, $zero, 0x200
 /* B9D30 80122E50 0040302D */  daddu     $a2, $v0, $zero
 /* B9D34 80122E54 AE820550 */  sw        $v0, 0x550($s4)
-/* B9D38 80122E58 3C03802F */  lui       $v1, %hi(D_802EB5F0)
+/* B9D38 80122E58 3C03802F */  lui       $v1, %hi(MsgLetterPaletteOffsets)
 /* B9D3C 80122E5C 00701821 */  addu      $v1, $v1, $s0
-/* B9D40 80122E60 8C63B5F0 */  lw        $v1, %lo(D_802EB5F0)($v1)
+/* B9D40 80122E60 8C63B5F0 */  lw        $v1, %lo(MsgLetterPaletteOffsets)($v1)
 /* B9D44 80122E64 3C080011 */  lui       $t0, %hi(charset_ROM_START)
 /* B9D48 80122E68 2508E120 */  addiu     $t0, $t0, %lo(charset_ROM_START)
 /* B9D4C 80122E6C 00682021 */  addu      $a0, $v1, $t0
@@ -633,12 +633,12 @@ glabel msg_copy_to_print_buffer
 /* B9F48 80123068 92830508 */  lbu       $v1, 0x508($s4)
 /* B9F4C 8012306C 00021080 */  sll       $v0, $v0, 2
 /* B9F50 80123070 00031840 */  sll       $v1, $v1, 1
-/* B9F54 80123074 3C01802F */  lui       $at, %hi(gMsgCharsets)
+/* B9F54 80123074 3C01802F */  lui       $at, %hi(MsgCharsets)
 /* B9F58 80123078 00220821 */  addu      $at, $at, $v0
-/* B9F5C 8012307C 8C22B5A8 */  lw        $v0, %lo(gMsgCharsets)($at)
-/* B9F60 80123080 3C01802F */  lui       $at, %hi(D_802EB644)
+/* B9F5C 8012307C 8C22B5A8 */  lw        $v0, %lo(MsgCharsets)($at)
+/* B9F60 80123080 3C01802F */  lui       $at, %hi(MsgStyleVerticalLineOffsets)
 /* B9F64 80123084 00230821 */  addu      $at, $at, $v1
-/* B9F68 80123088 8423B644 */  lh        $v1, %lo(D_802EB644)($at)
+/* B9F68 80123088 8423B644 */  lh        $v1, %lo(MsgStyleVerticalLineOffsets)($at)
 /* B9F6C 8012308C 90440003 */  lbu       $a0, 0x3($v0)
 /* B9F70 80123090 24020006 */  addiu     $v0, $zero, 0x6
 /* B9F74 80123094 A28204F8 */  sb        $v0, 0x4F8($s4)

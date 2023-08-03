@@ -1247,7 +1247,7 @@ typedef struct MessagePrintState {
     /* 0x519 */ u8 volume;
     /* 0x51A */ u8 speechPan; // just pan?
     /* 0x51B */ char unk_51B[0x1];
-    /* 0x51C */ u16 speechVolumePitch;
+    /* 0x51C */ u16 speechPitchShift;
     /* 0x51E */ char unk_51E[0x2];
     /* 0x520 */ s32 speechSoundIDA;
     /* 0x524 */ s32 speechSoundIDB;
@@ -2496,9 +2496,9 @@ typedef struct PartnerDMAData {
 } PartnerDMAData; // size = 0x14
 
 typedef struct MsgVoice {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
+    /* 0x00 */ s32 voiceA;
+    /* 0x04 */ s32 voiceB;
+    /* 0x08 */ s32 pitchShift;
 } MsgVoice; // size = 0x0C
 
 typedef struct Rect {

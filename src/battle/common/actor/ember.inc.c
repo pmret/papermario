@@ -673,7 +673,7 @@ EvtScript N(8021CBC8) = {
         EVT_CASE_OR_EQ(5)
             EVT_SET(LVarA, LVar0)
             EVT_WAIT(10)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2CF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -707,7 +707,7 @@ EvtScript N(8021CBC8) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_WAIT(5)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2CF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))

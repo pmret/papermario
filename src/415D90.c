@@ -2452,7 +2452,7 @@ void btl_state_update_player_menu(void) {
                 D_802ACC6C--;
             } else if (!(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) && (gGameStatusPtr->pressedButtons[0] & BUTTON_Z)) {
                 if (func_802A58D0() && battleStatus->hustleTurns != 1) {
-                    sfx_play_sound(SOUND_F);
+                    sfx_play_sound(SOUND_PARTNER_SWAP_BATTLE_POS);
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battle_menu_submenuIDs[BattleMenu_CurPos + BattleMenu_HomePos];
                     btl_main_menu_destroy();
                     btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
@@ -3771,7 +3771,7 @@ void btl_state_update_partner_menu(void) {
                 D_802ACC6C--;
             } else if (!(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE) && (gGameStatusPtr->pressedButtons[0] & BUTTON_Z)) {
                 if (can_btl_state_update_switch_to_player()) {
-                    sfx_play_sound(SOUND_F);
+                    sfx_play_sound(SOUND_PARTNER_SWAP_BATTLE_POS);
                     battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_MAIN] = battle_menu_submenuIDs[BattleMenu_CurPos + BattleMenu_HomePos];
                     btl_main_menu_destroy();
                     btl_set_state(BATTLE_STATE_SWITCH_TO_PLAYER);

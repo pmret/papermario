@@ -9,7 +9,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
 extern Addr charset_standard_OFFSET;
 #endif
 
-extern MessageCharset* gMsgCharsets[5];
+extern MessageCharset* MsgCharsets[5];
 extern PAL_BIN D_802F4560[80][8];
 extern u8 filemenu_glyphBuffer[20][0x80];
 
@@ -510,7 +510,7 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
         filemenu_charset_raster_id = 0;
     }
 
-    charset = gMsgCharsets[filemenu_charset];
+    charset = MsgCharsets[filemenu_charset];
     texSizeX = charset->texSize.x;
     texSizeY = charset->texSize.y;
     charRasterSize = charset->charRasterSize;

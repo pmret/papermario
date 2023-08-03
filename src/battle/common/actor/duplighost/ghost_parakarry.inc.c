@@ -247,7 +247,7 @@ EvtScript N(parakarry_doTakeTurn) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Still)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_01)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_0, SOUND_0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2004)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_FlyFast)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 10, 0)
@@ -308,7 +308,7 @@ EvtScript N(parakarry_doTakeTurn) = {
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
-    EVT_CALL(PlaySound, SOUND_0)
+    EVT_CALL(PlaySound, SOUND_NONE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

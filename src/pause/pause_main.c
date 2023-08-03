@@ -660,7 +660,7 @@ void pause_init(void) {
         }
 
         set_window_update(WINDOW_ID_PAUSE_TUTORIAL, WINDOW_UPDATE_SHOW);
-        sfx_play_sound(SOUND_MENU_START_TUTORIAL);
+        sfx_play_sound(SOUND_MENU_SHOW_CHOICE);
     }
 
     update_window_hierarchy(WINDOW_ID_PAUSE_CURSOR, 0x40);

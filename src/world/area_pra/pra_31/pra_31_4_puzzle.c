@@ -318,7 +318,7 @@ EvtScript N(EVS_Scene_PuzzleSolved) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySound, SOUND_B)
+    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
     EVT_WAIT(40)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 325, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 325, 0, 0)

@@ -84,7 +84,7 @@ SHIFT_BSS IMG_BIN D_80159B50[0x200];
 SHIFT_BSS PAL_BIN D_8015C7E0[0x10];
 SHIFT_BSS MessagePrintState gMessagePrinters[3];
 
-extern s16 D_802EB644[22];
+extern s16 MsgStyleVerticalLineOffsets[];
 
 extern IMG_BIN ui_msg_bubble_left_png[];
 extern IMG_BIN ui_msg_bubble_mid_png[];
@@ -111,10 +111,10 @@ extern IMG_BIN ui_msg_star_silhouette_png[];
 
 extern IMG_BIN D_802ED550[];
 extern PAL_BIN D_802ED670[];
-extern IMG_BIN D_802ED970[];
-extern IMG_BIN D_802EE8D0[];
-extern MessageCharset* gMsgCharsets[5];
-extern IMG_BIN D_802F39D0[];
+extern IMG_BIN MsgCharImgTitle[];
+extern IMG_BIN MsgCharImgNormal[];
+extern MessageCharset* MsgCharsets[5];
+extern IMG_BIN MsgCharImgSubtitle[];
 extern PAL_BIN D_802F4560[80][8];
 
 extern s32 gMessageBoxFrameParts[2][16];
@@ -124,14 +124,14 @@ extern PAL_BIN ui_point_right_pal[];
 
 MessageNumber gMsgNumbers[] = {
     {
-        .rasters = &D_802EE8D0[0x800],
+        .rasters = &MsgCharImgNormal[0x800],
         .texSize = 128,
         .texWidth = 16,
         .texHeight = 16,
         .digitWidth = {11, 8, 11, 11, 11, 11, 11, 11, 11, 11},
         .fixedWidth = 11
     }, {
-        .rasters = &D_802EE8D0[0x800],
+        .rasters = &MsgCharImgNormal[0x800],
         .texSize = 128,
         .texWidth = 16,
         .texHeight = 16,
@@ -274,11 +274,11 @@ void load_font_data(Addr offset, u16 size, void* dest) {
 void load_font(s32 font) {
     if (font != D_80155C98) {
         if (font == 0) {
-            load_font_data(charset_standard_OFFSET, 0x5100, D_802EE8D0);
+            load_font_data(charset_standard_OFFSET, 0x5100, MsgCharImgNormal);
             load_font_data(charset_standard_pal_OFFSET, 0x500, D_802F4560);
         } else if (font == 1) {
-            load_font_data(charset_title_OFFSET, 0xF60, D_802ED970);
-            load_font_data(charset_subtitle_OFFSET, 0xB88, D_802F39D0);
+            load_font_data(charset_title_OFFSET, 0xF60, MsgCharImgTitle);
+            load_font_data(charset_subtitle_OFFSET, 0xB88, MsgCharImgSubtitle);
             load_font_data(charset_credits_pal_OFFSET, 0x80, D_802F4560);
         }
     }
@@ -655,7 +655,7 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
 
     if (printer->stateFlags & MSG_STATE_FLAG_800000 && !(printer->delayFlags & (MSG_DELAY_FLAG_2 | MSG_DELAY_FLAG_4)) && printer->volume != 0) {
         volTemp = (f32)printer->volume / 100.0;
-        pitchShift = ((character % 20) * 10) + (printer->speechVolumePitch - baseShift);
+        pitchShift = ((character % 20) * 10) + (printer->speechPitchShift - baseShift);
         volume = ((rand_int(15) + 78) * volTemp);
 
         if (volume > 255) {
@@ -672,8 +672,8 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
 
 extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
-extern s32 D_802EB5C0[];
-extern s32 D_802EB5F0[];
+extern s32 MsgLetterRasterOffsets[];
+extern s32 MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
 #if VERSION_IQUE
@@ -746,7 +746,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     printer->lineEndPos[printer->curLine] = printer->curLinePos;
                     printer->curLine++;
                     *printBuf++ = MSG_CHAR_PRINT_NEXT;
-                    printer->nextLinePos = printer->curLinePos + (gMsgCharsets[printer->font]->newLineY + D_802EB644[printer->style]) * printer->lineCount;
+                    printer->nextLinePos = printer->curLinePos + (MsgCharsets[printer->font]->newLineY + MsgStyleVerticalLineOffsets[printer->style]) * printer->lineCount;
                     printer->windowState = MSG_WINDOW_STATE_SCROLLING;
                     printer->delayFlags |= MSG_DELAY_FLAG_1;
                 }
@@ -771,8 +771,8 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         if (nextArg != MSG_CHAR_UNK_C3) {
                             printer->stateFlags |= MSG_STATE_FLAG_80;
                         }
-                        printer->speechSoundIDA = SOUND_NORMAL_VOICE_A;
-                        printer->speechSoundIDB = SOUND_NORMAL_VOICE_B;
+                        printer->speechSoundIDA = SOUND_MSG_VOICE_1A;
+                        printer->speechSoundIDB = SOUND_MSG_VOICE_1B;
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         break;
                     case MSG_STYLE_CHOICE:
@@ -835,10 +835,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         romAddr = charset_ROM_START + ((s32)charset_postcard_pal_OFFSET + 5);
                         dma_copy(romAddr, romAddr + 0x20, printer->letterBackgroundPal);
                         printer->letterContentImg = heap_malloc(charset_letter_content_1_png_width * charset_letter_content_1_png_height);
-                        romAddr = charset_ROM_START + D_802EB5C0[arg];
+                        romAddr = charset_ROM_START + MsgLetterRasterOffsets[arg];
                         dma_copy(romAddr, romAddr + (charset_letter_content_1_png_width * charset_letter_content_1_png_height), printer->letterContentImg);
                         printer->letterContentPal = heap_malloc(0x200);
-                        romAddr = charset_ROM_START + D_802EB5F0[arg];
+                        romAddr = charset_ROM_START + MsgLetterPaletteOffsets[arg];
                         dma_copy(romAddr, romAddr + 0x200, printer->letterContentPal);
                         break;
                     case MSG_STYLE_POPUP:
@@ -926,7 +926,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->curLine++;
                         *printBuf++ = MSG_CHAR_PRINT_NEXT;
                         arg = *srcBuf++;
-                        printer->nextLinePos = printer->curLinePos + (gMsgCharsets[printer->font]->newLineY + D_802EB644[printer->style]) * arg;
+                        printer->nextLinePos = printer->curLinePos + (MsgCharsets[printer->font]->newLineY + MsgStyleVerticalLineOffsets[printer->style]) * arg;
                         printer->windowState = MSG_WINDOW_STATE_SCROLLING;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->lineCount = 0;
@@ -1089,7 +1089,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = *srcBuf++;
                         break;
                     case MSG_READ_FUNC_END_CHOICE:
-                        sfx_play_sound_with_params(SOUND_MENU_START_TUTORIAL, 0, 0, 0);
+                        sfx_play_sound_with_params(SOUND_MENU_SHOW_CHOICE, 0, 0, 0);
                         printer->maxOption = *srcBuf++;
                         printer->madeChoice = 0;
                         printer->curOption = 0;
@@ -1243,9 +1243,9 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     case MSG_READ_FUNC_VOICE:
                         arg = *srcBuf++;
                         printer->speechSoundType = arg;
-                        printer->speechSoundIDA = MsgVoices[arg].unk_00;
-                        printer->speechSoundIDB = MsgVoices[arg].unk_04;
-                        printer->speechVolumePitch = MsgVoices[arg].unk_08;
+                        printer->speechSoundIDA = MsgVoices[arg].voiceA;
+                        printer->speechSoundIDB = MsgVoices[arg].voiceB;
+                        printer->speechPitchShift = MsgVoices[arg].pitchShift;
                         break;
                     case MSG_READ_FUNC_VOLUME:
                         printer->volume = *srcBuf++;
@@ -1373,7 +1373,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->fadeOutCounter = 0;
     printer->windowSize.y = 0;
     printer->windowSize.x = 0;
-    printer->speechVolumePitch = 0;
+    printer->speechPitchShift = 0;
     printer->speechSoundIDA = 0;
     printer->speechSoundIDB = 0;
     printer->varBufferReadPos = 0;
@@ -1586,7 +1586,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
     if (overrideCharWidth != 0) {
         charWidth = overrideCharWidth;
     } else if (flags != 0) {
-        u8* charWidthTable = gMsgCharsets[charset]->rasters[variation].charWidthTable;
+        u8* charWidthTable = MsgCharsets[charset]->rasters[variation].charWidthTable;
 
         if (charWidthTable != NULL
                 && character != MSG_CHAR_READ_SPACE
@@ -1594,10 +1594,10 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
                 && character != MSG_CHAR_READ_HALF_SPACE) {
             charWidth = charWidthTable[character];
         } else {
-            charWidth = gMsgCharsets[charset]->rasters[variation].monospaceWidth;
+            charWidth = MsgCharsets[charset]->rasters[variation].monospaceWidth;
         }
     } else {
-        charWidth = gMsgCharsets[charset]->rasters[variation].monospaceWidth;
+        charWidth = MsgCharsets[charset]->rasters[variation].monospaceWidth;
     }
 
     if (character == MSG_CHAR_READ_SPACE) {
@@ -1629,7 +1629,7 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
     if (overrideCharWidth != 0) {
         baseWidth = overrideCharWidth;
     } else if (flags & MSG_PRINT_FLAG_100) {
-        u8* charWidthTable = gMsgCharsets[charset]->rasters[variation].charWidthTable;
+        u8* charWidthTable = MsgCharsets[charset]->rasters[variation].charWidthTable;
 
         if (charWidthTable != NULL
                 && character != MSG_CHAR_PRINT_SPACE
@@ -1637,10 +1637,10 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
                 && character != MSG_CHAR_PRINT_HALF_SPACE) {
             baseWidth = charWidthTable[character];
         } else {
-            baseWidth = gMsgCharsets[charset]->rasters[variation].monospaceWidth;
+            baseWidth = MsgCharsets[charset]->rasters[variation].monospaceWidth;
         }
     } else {
-        baseWidth = gMsgCharsets[charset]->rasters[variation].monospaceWidth;
+        baseWidth = MsgCharsets[charset]->rasters[variation].monospaceWidth;
     }
 
     if (character == MSG_CHAR_PRINT_SPACE) {
@@ -1943,7 +1943,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
         *width = maxLineWidth;
     }
     if (height != NULL) {
-        *height = lineCount * gMsgCharsets[font]->newLineY;
+        *height = lineCount * MsgCharsets[font]->newLineY;
     }
     if (maxLineChars != NULL) {
         *maxLineChars = maxCharsPerLine;
@@ -2478,8 +2478,8 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
         switch (msg_drawState->printBuffer[msg_drawState->drawBufferPos]) {
             case MSG_CHAR_PRINT_ENDL:
                 msg_drawState->nextPos[0] = 0;
-                msg_drawState->nextPos[1] += (s32)((msg_drawState->msgScale.y * gMsgCharsets[msg_drawState->font]->newLineY) +
-                                                   D_802EB644[printer->style]);
+                msg_drawState->nextPos[1] += (s32)((msg_drawState->msgScale.y * MsgCharsets[msg_drawState->font]->newLineY) +
+                                                   MsgStyleVerticalLineOffsets[printer->style]);
                 if (msg_drawState->printModeFlags & MSG_PRINT_FLAG_40) {
                     msg_drawState->printModeFlags |= MSG_PRINT_FLAG_80;
                 }
@@ -3347,7 +3347,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                (u16) posX));
                 }
 
-                msgCharset = gMsgCharsets[msg_drawState->font];
+                msgCharset = MsgCharsets[msg_drawState->font];
                 charPosY = (s8) msgCharset->rasters[msg_drawState->fontVariant].baseHeightOffset + (msg_drawState->nextPos[1] +
                            (msg_drawState->textStartPos[1] + (printer->windowBasePos.y + posY)) - additionalOffsetY);
 
@@ -3357,7 +3357,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                     (msg_drawState->clipX[0] < charPosX + (s32)(msg_drawState->msgScale.x *
                             msgCharset->rasters[msg_drawState->fontVariant].monospaceWidth)) &&
                     (msg_drawState->clipY[0] < charPosY + (s32)(msg_drawState->msgScale.y * msgCharset->newLineY +
-                            D_802EB644[printer->style]))) {
+                            MsgStyleVerticalLineOffsets[printer->style]))) {
                     palette = msg_drawState->textColor;
                     phi_s2_5 = sp8E;
                     if (msg_drawState->effectFlags & MSG_FX_FLAG_BLUR) {
@@ -3671,7 +3671,7 @@ void msg_reset_gfx_state(void) {
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 #else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
-    MessageCharset* messageCharset = gMsgCharsets[drawState->font];
+    MessageCharset* messageCharset = MsgCharsets[drawState->font];
     s32 fontVariant = drawState->fontVariant;
 
     s32 clipUly = drawState->clipY[0];
@@ -4236,10 +4236,10 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
 }
 
 void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out) {
-    out->raster = &gMsgCharsets[font]->rasters[variation].raster[(u16)gMsgCharsets[font]->charRasterSize * charIndex];
+    out->raster = &MsgCharsets[font]->rasters[variation].raster[(u16)MsgCharsets[font]->charRasterSize * charIndex];
     out->palette = D_802F4560[palette];
-    out->texSize.x = gMsgCharsets[font]->texSize.x;
-    out->texSize.y = gMsgCharsets[font]->texSize.y;
+    out->texSize.x = MsgCharsets[font]->texSize.x;
+    out->texSize.y = MsgCharsets[font]->texSize.y;
     out->charWidth = msg_get_draw_char_width(charIndex, font, variation, 1.0f, 0, 0);
     out->charHeight = out->texSize.y;
 }

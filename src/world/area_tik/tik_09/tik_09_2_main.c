@@ -8,7 +8,7 @@ EvtScript N(EVS_CloseGates) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(PlaySound, SOUND_A)
+    EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o59, SOUND_26B, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 60, 0, 25, EASING_COS_IN_OUT)
     EVT_LOOP(0)

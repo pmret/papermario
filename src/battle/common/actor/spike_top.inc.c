@@ -745,7 +745,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0A)
     EVT_WAIT(20)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 3, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

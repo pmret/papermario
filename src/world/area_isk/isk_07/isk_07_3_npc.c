@@ -41,7 +41,7 @@ EvtScript N(EVS_NpcDefeat_Pokey_01) = {
                     EVT_CALL(N(IsLastEnemy))
                     EVT_IF_EQ(LVar1, TRUE)
                         EVT_CALL(DisablePlayerInput, TRUE)
-                        EVT_CALL(PlaySound, SOUND_B)
+                        EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
                         EVT_WAIT(30)
                         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
                         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))

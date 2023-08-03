@@ -963,13 +963,13 @@ segments:
     vram: 0x802EB3D0
     subsegments:
     - [auto, c, msg_data]
-    - [auto, c, msg_data_2]
+    - [auto, c, msg_img]
     - [auto, .data, msg_data]
-    - start: 0x10CE00
+    - start: 0x10CEB0
       type: .data
-      name: msg_data_2
+      name: msg_img
       subsegments:
-      - [0x10CEB0, ci4, ui/msg/bubble_left, 32, 64, ui/msg/bubble_left]
+      - [auto, ci4, ui/msg/bubble_left, 32, 64, ui/msg/bubble_left]
       - [auto, ci4, ui/msg/bubble_mid, 8, 64, ui/msg/bubble_left]
       - [auto, ci4, ui/msg/bubble_right, 32, 64, ui/msg/bubble_left]
       - [auto, ci4, ui/msg/arrow, 16, 16, ui/msg/bubble_left]

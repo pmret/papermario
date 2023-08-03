@@ -45,7 +45,7 @@ EvtScript N(EVS_Scene_MeetBow) = {
     EVT_CALL(SetNpcPos, NPC_Bootler, 30, 70, -75)
     EVT_CALL(SetNpcYaw, NPC_Bow, 270)
     EVT_CALL(SetNpcYaw, NPC_Bootler, 270)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bow, SOUND_BOO_VANISH, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bow, SOUND_BOO_VANISH_A, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
         EVT_ADDF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))

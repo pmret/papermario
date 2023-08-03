@@ -380,9 +380,9 @@ glabel appendGfx_message
 /* BD250 80126370 9482003C */  lhu       $v0, 0x3C($a0)
 /* BD254 80126374 A4800042 */  sh        $zero, 0x42($a0)
 /* BD258 80126378 00021080 */  sll       $v0, $v0, 2
-/* BD25C 8012637C 3C01802F */  lui       $at, %hi(gMsgCharsets)
+/* BD25C 8012637C 3C01802F */  lui       $at, %hi(MsgCharsets)
 /* BD260 80126380 00220821 */  addu      $at, $at, $v0
-/* BD264 80126384 8C22B5A8 */  lw        $v0, %lo(gMsgCharsets)($at)
+/* BD264 80126384 8C22B5A8 */  lw        $v0, %lo(MsgCharsets)($at)
 /* BD268 80126388 90420003 */  lbu       $v0, 0x3($v0)
 /* BD26C 8012638C C4820014 */  lwc1      $f2, 0x14($a0)
 /* BD270 80126390 44820000 */  mtc1      $v0, $f0
@@ -392,9 +392,9 @@ glabel appendGfx_message
 /* BD280 801263A0 46001082 */  mul.s     $f2, $f2, $f0
 /* BD284 801263A4 00000000 */  nop
 /* BD288 801263A8 00021040 */  sll       $v0, $v0, 1
-/* BD28C 801263AC 3C01802F */  lui       $at, %hi(D_802EB644)
+/* BD28C 801263AC 3C01802F */  lui       $at, %hi(MsgStyleVerticalLineOffsets)
 /* BD290 801263B0 00220821 */  addu      $at, $at, $v0
-/* BD294 801263B4 8422B644 */  lh        $v0, %lo(D_802EB644)($at)
+/* BD294 801263B4 8422B644 */  lh        $v0, %lo(MsgStyleVerticalLineOffsets)($at)
 /* BD298 801263B8 44820000 */  mtc1      $v0, $f0
 /* BD29C 801263BC 00000000 */  nop
 /* BD2A0 801263C0 46800020 */  cvt.s.w   $f0, $f0
@@ -3378,9 +3378,9 @@ glabel appendGfx_message
 /* BFEB8 80128FD8 00441021 */  addu      $v0, $v0, $a0
 /* BFEBC 80128FDC 00021080 */  sll       $v0, $v0, 2
 /* BFEC0 80128FE0 97C4045C */  lhu       $a0, 0x45C($fp)
-/* BFEC4 80128FE4 3C08802F */  lui       $t0, %hi(gMsgCharsets)
+/* BFEC4 80128FE4 3C08802F */  lui       $t0, %hi(MsgCharsets)
 /* BFEC8 80128FE8 01034021 */  addu      $t0, $t0, $v1
-/* BFECC 80128FEC 8D08B5A8 */  lw        $t0, %lo(gMsgCharsets)($t0)
+/* BFECC 80128FEC 8D08B5A8 */  lw        $t0, %lo(MsgCharsets)($t0)
 /* BFED0 80128FF0 00982021 */  addu      $a0, $a0, $t8
 /* BFED4 80128FF4 8D030008 */  lw        $v1, 0x8($t0)
 /* BFED8 80128FF8 97B8008E */  lhu       $t8, 0x8E($sp)
@@ -3433,9 +3433,9 @@ glabel appendGfx_message
 /* BFF94 801290B4 46001082 */  mul.s     $f2, $f2, $f0
 /* BFF98 801290B8 00000000 */  nop
 /* BFF9C 801290BC 00021040 */  sll       $v0, $v0, 1
-/* BFFA0 801290C0 3C01802F */  lui       $at, %hi(D_802EB644)
+/* BFFA0 801290C0 3C01802F */  lui       $at, %hi(MsgStyleVerticalLineOffsets)
 /* BFFA4 801290C4 00220821 */  addu      $at, $at, $v0
-/* BFFA8 801290C8 8422B644 */  lh        $v0, %lo(D_802EB644)($at)
+/* BFFA8 801290C8 8422B644 */  lh        $v0, %lo(MsgStyleVerticalLineOffsets)($at)
 /* BFFAC 801290CC 44820000 */  mtc1      $v0, $f0
 /* BFFB0 801290D0 00000000 */  nop
 /* BFFB4 801290D4 46800020 */  cvt.s.w   $f0, $f0

@@ -667,7 +667,7 @@ void _use_partner_ability(void) {
             switch (PartnerCommandState) {
                 case 0: // put away current partner
                     disable_player_input();
-                    sfx_play_sound(SOUND_D);
+                    sfx_play_sound(SOUND_PARTNER_PUT_AWAY);
                     kill_script_by_ID(wPartnerCurrentScriptID);
                     wPartnerCurrentScript = start_script(wPartner->putAway, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -684,7 +684,7 @@ void _use_partner_ability(void) {
                     partner_free_npc();
                     playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     create_partner_npc();
-                    sfx_play_sound(SOUND_E);
+                    sfx_play_sound(SOUND_PARTNER_GET_OUT);
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
                     // fallthrough
@@ -746,7 +746,7 @@ void _use_partner_ability(void) {
             switch (PartnerCommandState) {
                 case 0: // put away current partner
                     disable_player_input();
-                    sfx_play_sound(SOUND_D);
+                    sfx_play_sound(SOUND_PARTNER_PUT_AWAY);
                     kill_script_by_ID(wPartnerCurrentScriptID);
                     wPartnerCurrentScript = start_script(wPartner->putAway, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;

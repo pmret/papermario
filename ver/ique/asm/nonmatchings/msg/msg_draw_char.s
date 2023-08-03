@@ -55,9 +55,9 @@ glabel msg_draw_char
 /* C16EC 8012A80C C6060018 */  lwc1      $f6, 0x18($s0)
 /* C16F0 8012A810 C602001C */  lwc1      $f2, 0x1C($s0)
 /* C16F4 8012A814 00021080 */  sll       $v0, $v0, 2
-/* C16F8 8012A818 3C09802F */  lui       $t1, %hi(gMsgCharsets)
+/* C16F8 8012A818 3C09802F */  lui       $t1, %hi(MsgCharsets)
 /* C16FC 8012A81C 01224821 */  addu      $t1, $t1, $v0
-/* C1700 8012A820 8D29B5A8 */  lw        $t1, %lo(gMsgCharsets)($t1)
+/* C1700 8012A820 8D29B5A8 */  lw        $t1, %lo(MsgCharsets)($t1)
 /* C1704 8012A824 8FA3003C */  lw        $v1, 0x3C($sp)
 /* C1708 8012A828 91220000 */  lbu       $v0, 0x0($t1)
 /* C170C 8012A82C 8E070004 */  lw        $a3, 0x4($s0)
