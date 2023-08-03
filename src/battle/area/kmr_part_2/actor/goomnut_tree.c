@@ -176,7 +176,7 @@ EvtScript N(idle_80223678) = {
 
 EvtScript N(handleEvent_80223688) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -201,7 +201,7 @@ EvtScript N(handleEvent_80223688) = {
         EVT_CASE_EQ(53)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -216,7 +216,7 @@ EvtScript N(takeTurn_80223804) = {
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(10)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

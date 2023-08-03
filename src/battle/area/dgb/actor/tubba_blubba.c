@@ -146,7 +146,7 @@ EvtScript N(80218E60) = {
 
 EvtScript N(nextTurn_80218FB0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
@@ -176,7 +176,7 @@ EvtScript N(nextTurn_80218FB0) = {
                 EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -213,7 +213,7 @@ EvtScript N(802192E0) = {
 
 EvtScript N(handleEvent_80219338) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -288,7 +288,7 @@ EvtScript N(handleEvent_80219338) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -296,7 +296,7 @@ EvtScript N(handleEvent_80219338) = {
 
 EvtScript N(takeTurn_80219750) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -379,7 +379,7 @@ EvtScript N(takeTurn_80219750) = {
     EVT_ELSE
         EVT_EXEC_WAIT(N(8021A36C))
     EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

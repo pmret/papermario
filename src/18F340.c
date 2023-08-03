@@ -793,7 +793,7 @@ EvtScript EVS_ExecuteMarioAction = {
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_RETURN
     EVT_END
@@ -823,7 +823,7 @@ EvtScript EVS_PlayerFirstStrike = {
             EVT_CALL(LoadMoveScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_RETURN
     EVT_END
@@ -1285,7 +1285,7 @@ EvtScript EVS_PlayerDies = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Dying)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)
     EVT_WAIT(15)
-    EVT_CALL(EnablePlayerBlur, 1)
+    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_371)
     EVT_SET(LVar0, 0)
     EVT_LOOP(30)
@@ -1299,7 +1299,7 @@ EvtScript EVS_PlayerDies = {
         EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3FB)
     EVT_SET(LVar0, 0)

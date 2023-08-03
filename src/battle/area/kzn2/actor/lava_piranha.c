@@ -659,7 +659,7 @@ EvtScript N(nextTurn) = {
 
 EvtScript N(spawnColorado) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(SpeakToPlayer, NPC_BTL_COMPANION, -1, -1, 0, MSG_CH5_0104)
     EVT_THREAD
@@ -720,7 +720,7 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(6.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, -300, 0, 0)
     EVT_CALL(EnableBattleStatusBar, TRUE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -948,7 +948,7 @@ EvtScript N(initVines) = {
 
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 0)
     EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -1023,7 +1023,7 @@ EvtScript N(handleEvent) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STOP)
         EVT_CALL(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 1)
     EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -1086,7 +1086,7 @@ EvtScript N(takeTurn) = {
                 EVT_SUB(LVar0, 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 11, LVar0)
                 EVT_IF_LE(LVar0, 0)
-                    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+                    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                     EVT_CALL(SetBattleCamTarget, 80, 70, 0)
                     EVT_CALL(SetBattleCamZoom, 300)
@@ -1112,7 +1112,7 @@ EvtScript N(takeTurn) = {
                     EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
                     EVT_CALL(LoadBattleDmaData, 0)
                     EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
-                    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+                    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
@@ -1182,7 +1182,7 @@ EvtScript N(attackFlameSpew) = {
             EVT_END_IF
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1206,7 +1206,7 @@ EvtScript N(attackFlameSpew) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -1266,7 +1266,7 @@ EvtScript N(attackFireStream) = {
             EVT_END_IF
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1288,7 +1288,7 @@ EvtScript N(attackFireStream) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -1640,7 +1640,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(GetEnemyMaxHP, ACTOR_ENEMY2, LVar0)
         EVT_CALL(SetEnemyHP, ACTOR_ENEMY2, LVar0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-        EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+        EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_ELSE
         EVT_CALL(HideHealthBar, ACTOR_ENEMY1)

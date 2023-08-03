@@ -103,7 +103,7 @@ EvtScript N(sushie_idle) = {
 
 EvtScript N(sushie_handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -202,7 +202,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -210,7 +210,7 @@ EvtScript N(sushie_handleEvent) = {
 
 EvtScript N(sushie_takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -329,7 +329,7 @@ EvtScript N(sushie_takeTurn) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -447,7 +447,7 @@ EvtScript N(sushie_takeTurn) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

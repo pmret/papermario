@@ -178,7 +178,7 @@ s32 N(bounceArray)[] = { 7, 13, 17, 21, 23, 24, 23, 21, 17, 13, 7, 0, 4, 7, 6, 4
 
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -360,7 +360,7 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -368,7 +368,7 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
@@ -394,7 +394,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_200000, TRUE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
         EVT_END_IF
-        EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+        EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -420,7 +420,7 @@ EvtScript N(takeTurn) = {
         EVT_WAIT(5)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EVT_END_THREAD
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Lakitu_Anim0C)
@@ -454,7 +454,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(16.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
@@ -487,14 +487,14 @@ EvtScript N(takeTurn) = {
             EVT_ADD(LVar0, 10)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_EXEC_WAIT(N(returnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

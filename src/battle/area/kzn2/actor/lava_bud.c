@@ -256,7 +256,7 @@ EvtScript N(playModelAnimation) = {
 
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(SetAnimatorFlags, LVar0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 0)
     EVT_CALL(GetLastElement, LVarE)
@@ -313,7 +313,7 @@ EvtScript N(handleEvent) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_CALL(SetAnimatorFlags, LVar0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 1)
     EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -404,7 +404,7 @@ EvtScript N(takeTurn) = {
             EVT_SUB(LVar0, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 11, LVar0)
             EVT_IF_LE(LVar0, 0)
-                EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+                EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -461,7 +461,7 @@ EvtScript N(takeTurn) = {
                 EVT_EXEC_WAIT(N(playModelAnimation))
                 EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
                 EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
-                EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+                EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
@@ -594,7 +594,7 @@ EvtScript N(summonPetitPiranha) = {
     EVT_END_IF
     EVT_CALL(LoadBattleDmaData, 31)
     EVT_EXEC_WAIT(N(playModelAnimation))
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -1083,7 +1083,7 @@ EvtScript N(attackPetitSpit) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

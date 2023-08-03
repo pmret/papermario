@@ -6472,4 +6472,16 @@ enum Language {
     LANGUAGE_ES = 3,
 };
 
+enum IdleScriptState {
+    IDLE_SCRIPT_ENABLE,
+    IDLE_SCRIPT_DISABLE,
+    IDLE_SCRIPT_RESTART = -1,
+};
+
+enum BlurState {
+    BLUR_ENABLE,
+    BLUR_DISABLE,
+    BLUR_RESET = -1,
+};
+
 #endif

@@ -172,7 +172,7 @@ s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0,
 
 EvtScript N(kooper_handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -325,7 +325,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -333,7 +333,7 @@ EvtScript N(kooper_handleEvent) = {
 
 EvtScript N(kooper_takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
     EVT_IF_EQ(LVar0, 1)
@@ -376,7 +376,7 @@ EvtScript N(kooper_takeTurn) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 38)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -9)
         EVT_END_IF
-        EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+        EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -481,7 +481,7 @@ EvtScript N(kooper_takeTurn) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.5))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -529,7 +529,7 @@ EvtScript N(kooper_takeTurn) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

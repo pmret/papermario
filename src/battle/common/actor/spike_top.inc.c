@@ -153,7 +153,7 @@ EvtScript N(init) = {
         EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_END_IF
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -219,7 +219,7 @@ EvtScript N(spikeTop_FallDown) = {
 
 EvtScript N(spikeTop_HandleEvent_Ceiling) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
@@ -301,7 +301,7 @@ EvtScript N(spikeTop_HandleEvent_Ceiling) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -324,7 +324,7 @@ s32 N(intTable_8021D5CC)[] = {
 
 EvtScript N(spikeTop_HandleEvent_Floor) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -545,7 +545,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_END_IF
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -553,7 +553,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
 
 EvtScript N(spikeTop_TakeTurn_Ceiling) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 24)
@@ -641,7 +641,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim03)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -686,7 +686,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_LABEL(10)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -694,7 +694,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
 
 EvtScript N(spikeTop_TakeTurn_Floor) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_IF_EQ(LVar0, 2)
         EVT_CALL(GetActorVar, ACTOR_SELF, 9, LVar0)
@@ -723,7 +723,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
         EVT_END_IF
-        EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+        EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_RETURN
     EVT_END_IF
@@ -787,7 +787,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0C)
             EVT_WAIT(10)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -823,7 +823,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim03)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

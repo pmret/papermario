@@ -331,7 +331,7 @@ EvtScript N(handleEvent_80227ABC) = {
 
 EvtScript N(slingshotAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
@@ -383,7 +383,7 @@ EvtScript N(slingshotAttack) = {
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(15)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -407,7 +407,7 @@ EvtScript N(slingshotAttack) = {
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -458,7 +458,7 @@ EvtScript N(80228778) = {
 
 EvtScript N(hammerAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -504,7 +504,7 @@ EvtScript N(hammerAttack) = {
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -598,7 +598,7 @@ EvtScript N(hammerAttack) = {
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

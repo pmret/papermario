@@ -1074,7 +1074,7 @@ EvtScript N(run_away) = {
 
 EvtScript N(attack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
@@ -1148,7 +1148,7 @@ EvtScript N(attack) = {
             EVT_EXEC_WAIT(N(run_squad_to_pos))
             EVT_SET(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(N(set_squad_animation))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1190,7 +1190,7 @@ EvtScript N(attack) = {
     EVT_EXEC_WAIT(N(run_squad_to_pos))
     EVT_SET(LVar1, ANIM_TankGuy_Anim01)
     EVT_EXEC_WAIT(N(set_squad_animation))
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

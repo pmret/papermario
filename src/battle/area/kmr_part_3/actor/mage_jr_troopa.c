@@ -246,7 +246,7 @@ extern EvtScript N(8022BF1C);
 
 EvtScript N(handleEvent_8022ADD8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(9)
@@ -363,7 +363,7 @@ EvtScript N(handleEvent_8022ADD8) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -371,7 +371,7 @@ EvtScript N(handleEvent_8022ADD8) = {
 
 EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_RaiseStaff)
@@ -420,7 +420,7 @@ EvtScript N(takeTurn_8022B4F0) = {
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -454,7 +454,7 @@ EvtScript N(takeTurn_8022B4F0) = {
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -462,7 +462,7 @@ EvtScript N(takeTurn_8022B4F0) = {
 
 EvtScript N(nextTurn_8022BB44) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(12)
@@ -517,7 +517,7 @@ EvtScript N(nextTurn_8022BB44) = {
                 EVT_EXEC_WAIT(N(8022AC40))
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

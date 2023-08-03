@@ -8,7 +8,7 @@
 extern EvtScript N(UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    EVT_CALL(EnablePlayerBlur, 1)
+    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -28,7 +28,7 @@ EvtScript N(EVS_UseMove) = {
             EVT_SET(LVarF, 8)
             EVT_EXEC_WAIT(N(UseMove_Impl))
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
     EVT_RETURN
     EVT_END
 };
@@ -61,7 +61,7 @@ EvtScript N(UseMove_Impl) = {
     EVT_EXEC_WAIT(N(EVS_802A3188))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_CALL(EnablePlayerBlur, 0)
+        EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF

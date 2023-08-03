@@ -143,12 +143,12 @@ s32 N(IdleAnimations3)[] = {
 
 EvtScript N(nextTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -295,7 +295,7 @@ EvtScript N(takeTurn) = {
 
 EvtScript N(attack_throw_bomb) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
@@ -346,7 +346,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -372,7 +372,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
@@ -407,7 +407,7 @@ EvtScript N(attack_throw_bomb) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -415,7 +415,7 @@ EvtScript N(attack_throw_bomb) = {
 
 EvtScript N(attack_lightning_shot) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -488,7 +488,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -517,7 +517,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
@@ -565,7 +565,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

@@ -8,7 +8,7 @@
 extern EvtScript N(UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    EVT_CALL(EnablePlayerBlur, 1)
+    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -28,7 +28,7 @@ EvtScript N(EVS_UseMove) = {
             EVT_SET(LVarF, 9)
             EVT_EXEC_WAIT(N(UseMove_Impl))
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
     EVT_RETURN
     EVT_END
 };

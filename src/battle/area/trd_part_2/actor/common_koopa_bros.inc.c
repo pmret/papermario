@@ -607,7 +607,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
-                    EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
+                    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                     EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(4)
@@ -621,7 +621,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                     EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK)
-                    EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
+                    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                     EVT_THREAD
                         EVT_CALL(SetPartRotationOffset, ACTOR_SELF, PRT_MAIN, 0, 15, 0)
                         EVT_SET(LVar0, 0)
@@ -688,7 +688,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 60)
                     EVT_WAIT(60)
-                    EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
+                    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosD)
@@ -703,7 +703,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                     EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK)
-                    EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
+                    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                     EVT_THREAD
                         EVT_CALL(SetPartRotationOffset, ACTOR_SELF, PRT_MAIN, 0, 15, 0)
                         EVT_SET(LVar0, 0)
@@ -799,13 +799,13 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
-                    EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
+                    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(16.0))
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                     EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK)
-                    EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
+                    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                     EVT_THREAD
                         EVT_CALL(SetPartRotationOffset, ACTOR_SELF, PRT_MAIN, 0, 15, 0)
                         EVT_SET(LVar0, 0)
@@ -871,7 +871,7 @@ s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0,
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -974,7 +974,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

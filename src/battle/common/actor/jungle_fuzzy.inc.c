@@ -117,7 +117,7 @@ EvtScript N(idle_8021EB8C) = {
 
 EvtScript N(handleEvent_8021EB9C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -234,7 +234,7 @@ EvtScript N(handleEvent_8021EB9C) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -242,7 +242,7 @@ EvtScript N(handleEvent_8021EB9C) = {
 
 EvtScript N(divide) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
@@ -293,7 +293,7 @@ EvtScript N(divide) = {
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, LVar0, 0, 2)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -303,7 +303,7 @@ EvtScript N(divide) = {
 
 EvtScript N(leechAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -378,7 +378,7 @@ EvtScript N(leechAttack) = {
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -679,7 +679,7 @@ EvtScript N(leechAttack) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Idle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
