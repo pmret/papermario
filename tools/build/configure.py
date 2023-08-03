@@ -569,7 +569,7 @@ class Configure:
         )
 
         build(
-            self.build_path() / "include/world_map.h",
+            self.build_path() / "include/world_map.inc.c",
             [Path("src/world_map.xml")],
             "world_map",
         )

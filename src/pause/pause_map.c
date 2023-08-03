@@ -35,7 +35,7 @@ static s32 PauseMapSpacesInSnapRange;
 HudScript* PauseMapIconScripts[] = { &HES_MapWalk0 };
 s32 D_8024FA34 = -1;
 
-#include "world_map.h"
+#include "world_map.inc.c"
 
 s32 PauseMapArrowWobble[] = { 0, 2, 3, 3, 4, 4, 4, 4, 3, 2, 1, 0 };
 MenuWindowBP PauseMapWindowBPs[] = {

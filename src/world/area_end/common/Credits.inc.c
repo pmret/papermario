@@ -30,69 +30,69 @@ enum {
     CREDITS_LINE_VANISHING       = 2
 };
 
-CreditsUnkBeta N(Font4Patterns)[] = {
-    { .unk_00 = 0x02, .unk_01 = 0x07, .size = 1 },
-    { .unk_00 = 0x02, .unk_01 = 0x0A, .size = 1 },
-    { .unk_00 = 0x03, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x07, .unk_01 = 0x0D, .size = 1 },
-    { .unk_00 = 0x09, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x0C, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x0C, .unk_01 = 0x0C, .size = 1 },
-    { .unk_00 = 0x0C, .unk_01 = 0x14, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x03, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x0A, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x14, .size = 1 },
-    { .unk_00 = 0x0E, .unk_01 = 0x0D, .size = 1 },
-    { .unk_00 = 0x0E, .unk_01 = 0x11, .size = 1 },
-    { .unk_00 = 0x11, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x11, .unk_01 = 0x0F, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x02, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x0D, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x0F, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x12, .size = 1 },
-    { .unk_00 = 0x12, .unk_01 = 0x02, .size = 1 },
-    { .unk_00 = 0x12, .unk_01 = 0x07, .size = 1 },
-    { .unk_00 = 0x12, .unk_01 = 0x0F, .size = 1 },
-    { .unk_00 = 0x15, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x16, .unk_01 = 0x11, .size = 1 },
+CreditsPairOffset N(Font4Patterns)[] = {
+    { .firstChar = 0x02, .secondChar = 0x07, .offset = 1 },
+    { .firstChar = 0x02, .secondChar = 0x0A, .offset = 1 },
+    { .firstChar = 0x03, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x07, .secondChar = 0x0D, .offset = 1 },
+    { .firstChar = 0x09, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x0C, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x0C, .secondChar = 0x0C, .offset = 1 },
+    { .firstChar = 0x0C, .secondChar = 0x14, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x03, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x0A, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x14, .offset = 1 },
+    { .firstChar = 0x0E, .secondChar = 0x0D, .offset = 1 },
+    { .firstChar = 0x0E, .secondChar = 0x11, .offset = 1 },
+    { .firstChar = 0x11, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x11, .secondChar = 0x0F, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x02, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x0D, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x0F, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x12, .offset = 1 },
+    { .firstChar = 0x12, .secondChar = 0x02, .offset = 1 },
+    { .firstChar = 0x12, .secondChar = 0x07, .offset = 1 },
+    { .firstChar = 0x12, .secondChar = 0x0F, .offset = 1 },
+    { .firstChar = 0x15, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x16, .secondChar = 0x11, .offset = 1 },
     {}
 };
 
-CreditsUnkBeta N(Font3Patterns)[] = {
-    { .unk_00 = 0x00, .unk_01 = 0x02, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x06, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x0E, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x03, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x0A, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x0D, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x13, .size = 1 },
-    { .unk_00 = 0x00, .unk_01 = 0x14, .size = 1 },
-    { .unk_00 = 0x07, .unk_01 = 0x00, .size = 1 },
-    { .unk_00 = 0x07, .unk_01 = 0x06, .size = 1 },
-    { .unk_00 = 0x07, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x02, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x06, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x0A, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x0D, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x0E, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x13, .size = 1 },
-    { .unk_00 = 0x08, .unk_01 = 0x18, .size = 1 },
-    { .unk_00 = 0x09, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x0C, .unk_01 = 0x0E, .size = 1 },
-    { .unk_00 = 0x0C, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x06, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x0E, .size = 1 },
-    { .unk_00 = 0x0D, .unk_01 = 0x13, .size = 1 },
-    { .unk_00 = 0x12, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x12, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x13, .unk_01 = 0x04, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x02, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x08, .size = 1 },
-    { .unk_00 = 0x14, .unk_01 = 0x0A, .size = 1 },
+CreditsPairOffset N(Font3Patterns)[] = {
+    { .firstChar = 0x00, .secondChar = 0x02, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x06, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x0E, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x03, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x0A, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x0D, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x13, .offset = 1 },
+    { .firstChar = 0x00, .secondChar = 0x14, .offset = 1 },
+    { .firstChar = 0x07, .secondChar = 0x00, .offset = 1 },
+    { .firstChar = 0x07, .secondChar = 0x06, .offset = 1 },
+    { .firstChar = 0x07, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x02, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x06, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x0A, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x0D, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x0E, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x13, .offset = 1 },
+    { .firstChar = 0x08, .secondChar = 0x18, .offset = 1 },
+    { .firstChar = 0x09, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x0C, .secondChar = 0x0E, .offset = 1 },
+    { .firstChar = 0x0C, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x06, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x0E, .offset = 1 },
+    { .firstChar = 0x0D, .secondChar = 0x13, .offset = 1 },
+    { .firstChar = 0x12, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x12, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x13, .secondChar = 0x04, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x02, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x08, .offset = 1 },
+    { .firstChar = 0x14, .secondChar = 0x0A, .offset = 1 },
     {}
 };
 
@@ -499,7 +499,7 @@ void N(CharAnim_FadeOut_3)(CreditsLine* line, CreditsChar* chr) {
 void N(credits_update_line)(CreditsLine* line) {
     CreditsChar creditsChar;
     CreditsChar* curChar = &creditsChar;
-    CreditsUnkBeta* curPattern;
+    CreditsPairOffset* curPattern;
     s32 msgHeight, msgWidth, msgMaxLineChars;
     s32 doneCurrentState;
     s32 readPos;
@@ -563,11 +563,11 @@ void N(credits_update_line)(CreditsLine* line) {
                     }
 
                     do {
-                        if (curMsgChar == curPattern[i].unk_00 && nextMsgChar1 == curPattern[i].unk_01) {
-                            msgWidth += curPattern[i].size;
+                        if (curMsgChar == curPattern[i].firstChar && nextMsgChar1 == curPattern[i].secondChar) {
+                            msgWidth += curPattern[i].offset;
                         }
                         i++;
-                    } while (curPattern[i].size != 0);
+                    } while (curPattern[i].offset != 0);
                 }
                 break;
         }
@@ -700,11 +700,11 @@ void N(credits_update_line)(CreditsLine* line) {
                         }
                     }
                     do {
-                        if (curMsgChar == curPattern[i].unk_00 && nextMsgChar2 == curPattern[i].unk_01) {
-                            posX += curPattern[i].size;
+                        if (curMsgChar == curPattern[i].firstChar && nextMsgChar2 == curPattern[i].secondChar) {
+                            posX += curPattern[i].offset;
                         }
                         i++;
-                    } while (curPattern[i].size != 0);
+                    } while (curPattern[i].offset != 0);
                 }
                 break;
         }

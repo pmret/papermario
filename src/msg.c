@@ -663,9 +663,9 @@ void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
         }
 
         if (character & flag) {
-            sfx_play_sound_with_params(printer->speedSoundIDA, volume, printer->speechPan, pitchShift);
+            sfx_play_sound_with_params(printer->speechSoundIDA, volume, printer->speechPan, pitchShift);
         } else {
-            sfx_play_sound_with_params(printer->speedSoundIDB, volume, printer->speechPan, pitchShift);
+            sfx_play_sound_with_params(printer->speechSoundIDB, volume, printer->speechPan, pitchShift);
         }
     }
 }
@@ -674,7 +674,7 @@ extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
 extern s32 D_802EB5C0[];
 extern s32 D_802EB5F0[];
-extern struct_D_802EB620 D_802EB620[];
+extern MsgVoice MsgVoices[];
 
 #if VERSION_IQUE
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
@@ -771,8 +771,8 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         if (nextArg != MSG_CHAR_UNK_C3) {
                             printer->stateFlags |= MSG_STATE_FLAG_80;
                         }
-                        printer->speedSoundIDA = SOUND_11;
-                        printer->speedSoundIDB = SOUND_12;
+                        printer->speechSoundIDA = SOUND_NORMAL_VOICE_A;
+                        printer->speechSoundIDB = SOUND_NORMAL_VOICE_B;
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         break;
                     case MSG_STYLE_CHOICE:
@@ -1243,9 +1243,9 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     case MSG_READ_FUNC_VOICE:
                         arg = *srcBuf++;
                         printer->speechSoundType = arg;
-                        printer->speedSoundIDA = D_802EB620[arg].unk_00;
-                        printer->speedSoundIDB = D_802EB620[arg].unk_04;
-                        printer->speechVolumePitch = D_802EB620[arg].unk_08;
+                        printer->speechSoundIDA = MsgVoices[arg].unk_00;
+                        printer->speechSoundIDB = MsgVoices[arg].unk_04;
+                        printer->speechVolumePitch = MsgVoices[arg].unk_08;
                         break;
                     case MSG_READ_FUNC_VOLUME:
                         printer->volume = *srcBuf++;
@@ -1255,12 +1255,12 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         argQ = *srcBuf++;
                         argW = *srcBuf++;
                         argE = *srcBuf++;
-                        printer->speedSoundIDA = (arg << 0x18) + (argQ << 0x10) + (argW << 0x8) + (argE);
+                        printer->speechSoundIDA = (arg << 0x18) + (argQ << 0x10) + (argW << 0x8) + (argE);
                         arg = *srcBuf++;
                         argQ = *srcBuf++;
                         argW = *srcBuf++;
                         argE = *srcBuf++;
-                        printer->speedSoundIDB = (arg << 0x18) + (argQ << 0x10) + (argW << 0x8) + (argE);
+                        printer->speechSoundIDB = (arg << 0x18) + (argQ << 0x10) + (argW << 0x8) + (argE);
                         break;
                     case MSG_READ_FUNC_CENTER_X:
                         *printBuf++ = MSG_CHAR_PRINT_FUNCTION;
@@ -1374,8 +1374,8 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->windowSize.y = 0;
     printer->windowSize.x = 0;
     printer->speechVolumePitch = 0;
-    printer->speedSoundIDA = 0;
-    printer->speedSoundIDB = 0;
+    printer->speechSoundIDA = 0;
+    printer->speechSoundIDB = 0;
     printer->varBufferReadPos = 0;
     printer->curImageIndex = 0;
     printer->varImageScreenPos.x = 0;

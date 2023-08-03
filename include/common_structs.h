@@ -1249,8 +1249,8 @@ typedef struct MessagePrintState {
     /* 0x51B */ char unk_51B[0x1];
     /* 0x51C */ u16 speechVolumePitch;
     /* 0x51E */ char unk_51E[0x2];
-    /* 0x520 */ s32 speedSoundIDA;
-    /* 0x524 */ s32 speedSoundIDB;
+    /* 0x520 */ s32 speechSoundIDA;
+    /* 0x524 */ s32 speechSoundIDB;
     /* 0x528 */ u16 varBufferReadPos;
     /* 0x52A */ s8 unk_52A;
     /* 0x52B */ u8 curImageIndex;
@@ -2472,11 +2472,11 @@ typedef struct CreditsData {
     /* 0x04 */ CreditsLine lines[32];
 } CreditsData; // size = 0x74
 
-typedef struct CreditsUnkBeta {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s16 size;
-} CreditsUnkBeta; // size = 0x4
+typedef struct CreditsPairOffset {
+    /* 0x00 */ u8 firstChar;
+    /* 0x01 */ u8 secondChar;
+    /* 0x02 */ s16 offset;
+} CreditsPairOffset; // size = 0x4
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
@@ -2495,11 +2495,11 @@ typedef struct PartnerDMAData {
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
 
-typedef struct struct_D_802EB620 {
+typedef struct MsgVoice {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
-} struct_D_802EB620; // size = 0x0C
+} MsgVoice; // size = 0x0C
 
 typedef struct Rect {
     /* 0x00 */ s32 ulx;

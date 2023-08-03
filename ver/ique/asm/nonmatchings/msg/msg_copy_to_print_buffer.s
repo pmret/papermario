@@ -1154,8 +1154,8 @@ glabel msg_copy_to_print_buffer
 /* BA694 801237B4 0280202D */   daddu    $a0, $s4, $zero
 .LIQUE_801237B8:
 /* BA698 801237B8 92700000 */  lbu       $s0, 0x0($s3)
-/* BA69C 801237BC 3C04802F */  lui       $a0, %hi(D_802EB620)
-/* BA6A0 801237C0 2484B620 */  addiu     $a0, $a0, %lo(D_802EB620)
+/* BA69C 801237BC 3C04802F */  lui       $a0, %hi(MsgVoices)
+/* BA6A0 801237C0 2484B620 */  addiu     $a0, $a0, %lo(MsgVoices)
 /* BA6A4 801237C4 320300FF */  andi      $v1, $s0, 0xFF
 /* BA6A8 801237C8 00031040 */  sll       $v0, $v1, 1
 /* BA6AC 801237CC 00431021 */  addu      $v0, $v0, $v1
