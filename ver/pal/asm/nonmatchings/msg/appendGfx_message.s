@@ -377,9 +377,9 @@ glabel appendGfx_message
 /* BCE24 80126AD4 9482003C */  lhu        $v0, 0x3C($a0)
 /* BCE28 80126AD8 A4800042 */  sh         $zero, 0x42($a0)
 /* BCE2C 80126ADC 00021080 */  sll        $v0, $v0, 2
-/* BCE30 80126AE0 3C01802F */  lui        $at, %hi(gMsgCharsets)
+/* BCE30 80126AE0 3C01802F */  lui        $at, %hi(MsgCharsets)
 /* BCE34 80126AE4 00220821 */  addu       $at, $at, $v0
-/* BCE38 80126AE8 8C2218A8 */  lw         $v0, %lo(gMsgCharsets)($at)
+/* BCE38 80126AE8 8C2218A8 */  lw         $v0, %lo(MsgCharsets)($at)
 /* BCE3C 80126AEC 90420003 */  lbu        $v0, 0x3($v0)
 /* BCE40 80126AF0 C4820014 */  lwc1       $f2, 0x14($a0)
 /* BCE44 80126AF4 44820000 */  mtc1       $v0, $f0
@@ -3397,9 +3397,9 @@ glabel appendGfx_message
 /* BFAD8 80129788 00441021 */  addu       $v0, $v0, $a0
 /* BFADC 8012978C 00021080 */  sll        $v0, $v0, 2
 /* BFAE0 80129790 97C4045C */  lhu        $a0, 0x45C($fp)
-/* BFAE4 80129794 3C08802F */  lui        $t0, %hi(gMsgCharsets)
+/* BFAE4 80129794 3C08802F */  lui        $t0, %hi(MsgCharsets)
 /* BFAE8 80129798 01034021 */  addu       $t0, $t0, $v1
-/* BFAEC 8012979C 8D0818A8 */  lw         $t0, %lo(gMsgCharsets)($t0)
+/* BFAEC 8012979C 8D0818A8 */  lw         $t0, %lo(MsgCharsets)($t0)
 /* BFAF0 801297A0 00982021 */  addu       $a0, $a0, $t8
 /* BFAF4 801297A4 8D030008 */  lw         $v1, 0x8($t0)
 /* BFAF8 801297A8 97B8008E */  lhu        $t8, 0x8E($sp)
