@@ -48,17 +48,18 @@ u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 #if VERSION_PAL
 s32 gCurrentLanguage = 0;
 
-u32 D_PAL_8014AE50[] = {
-    [LANGUAGE_EN] = 0x2030000,
-    [LANGUAGE_DE] = 0x21B0000,
-    [LANGUAGE_FR] = 0x2330000,
-    [LANGUAGE_ES] = 0x24B0000,
+void* D_PAL_8014AE50[] = {
+    [LANGUAGE_EN] = msg_pal_en_ROM_START,
+    [LANGUAGE_DE] = msg_pal_de_ROM_START,
+    [LANGUAGE_FR] = msg_pal_fr_ROM_START,
+    [LANGUAGE_ES] = msg_pal_es_ROM_START,
 };
 #endif
 
 s16 gNextMessageBuffer = 0;
 
 //TODO Vtx
+__attribute__ ((aligned (8)))
 s32 gRewindArrowQuad[] = {
     0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF,
     0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF,
@@ -451,7 +452,7 @@ s32 _update_message(MessagePrintState* printer) {
                     }
                 case MSG_WINDOW_STATE_SCROLLING_BACK:
                     printer->scrollingTime++;
-                    if (printer->scrollingTime >= 4) {
+                    if (printer->scrollingTime >= (s32)(5 * DT)) {
                         printer->windowState = MSG_WINDOW_STATE_WAITING_FOR_CHOICE;
                         printer->curOption = printer->targetOption;
                         printer->selectedOption = printer->curOption;

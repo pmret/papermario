@@ -13540,9 +13540,15 @@ segments:
       - 2E_Credits
   - [0x2132440, bin]
 
-  - [0x21B0000, bin] # German
-  - [0x2330000, bin] # French
-  - [0x24B0000, bin] # Spanish
+  - start: 0x21B0000
+    name: msg_pal_de
+    type: bin # TODO: turn into pm_msg
+  - start: 0x2330000
+    name: msg_pal_fr
+    type: bin # TODO: turn into pm_msg
+  - start: 0x24B0000
+    name: msg_pal_es
+    type: bin # TODO: turn into pm_msg
 
   - [0x2600000, pm_map_data, mapfs]
   - [0x2FD7362, bin]
