@@ -232,7 +232,7 @@ enum StoryProgress {
     STORY_CH8_REACHED_BOWSERS_CASTLE            = 94,
     STORY_CH8_REACHED_PEACHS_CASTLE             = 95,
     STORY_EPILOGUE                              = 96,
-    STORY_61                                    = 97,
+    STORY_NEVER                                 = 97,
 };
 
 enum KoopaKootFavors {

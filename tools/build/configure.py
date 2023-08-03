@@ -273,6 +273,11 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "recipes",
+        command=f"$python {BUILD_TOOLS}/recipes.py $in $out",
+    )
+
+    ninja.rule(
         "msg_combine",
         description="msg_combine $out",
         command=f"$python {BUILD_TOOLS}/msg/combine.py $out $in",
@@ -567,6 +572,12 @@ class Configure:
             self.build_path() / "include/world_map.h",
             [Path("src/world_map.xml")],
             "world_map",
+        )
+
+        build(
+            self.build_path() / "include/recipes.h",
+            [Path("src/recipes.yaml")],
+            "recipes",
         )
 
         build(
