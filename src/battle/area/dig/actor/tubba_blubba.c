@@ -350,7 +350,7 @@ EvtScript N(attackBodyCrush) = {
             EVT_SET(LVar1, 0)
             EVT_ADD(LVar2, 5)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySound, SOUND_JUMP_3E2)
+            EVT_CALL(PlaySound, SOUND_ACTOR_JUMP)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 23, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
@@ -390,7 +390,7 @@ EvtScript N(attackBodyCrush) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySound, SOUND_JUMP_3E2)
+            EVT_CALL(PlaySound, SOUND_ACTOR_JUMP)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_END_SWITCH
     EVT_WAIT(2)

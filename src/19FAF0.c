@@ -408,7 +408,7 @@ HitResult calc_player_damage_enemy(void) {
                     sfx_play_sound_at_position(SOUND_00F1, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 3:
-                    sfx_play_sound_at_position(SOUND_00DC, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_SLIDE_WHISTLE_OUT, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 4:
                     sfx_play_sound_at_position(SOUND_2072, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -1218,7 +1218,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         play_movement_dust_effects(2, player->curPos.x, player->curPos.y, player->curPos.z, player->yaw);
     }
     if (script->functionTemp[1] != 2) {
-        sfx_play_sound_at_position(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0, player->curPos.x, player->curPos.y, player->curPos.z);
+        sfx_play_sound_at_position(SOUND_LAND_SOFTLY, SOUND_SPACE_MODE_0, player->curPos.x, player->curPos.y, player->curPos.z);
     }
 
     return ApiStatus_DONE1;
@@ -1286,7 +1286,7 @@ ApiStatus PlayerFallToGoal(Evt* script, s32 isInitialCall) {
         player->curPos.y = state->goalPos.y;
         player->curPos.z = state->goalPos.z;
         play_movement_dust_effects(2, player->curPos.x, player->curPos.y, player->curPos.z, player->yaw);
-        sfx_play_sound_at_position(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0, player->curPos.x, player->curPos.y, player->curPos.z);
+        sfx_play_sound_at_position(SOUND_LAND_SOFTLY, SOUND_SPACE_MODE_0, player->curPos.x, player->curPos.y, player->curPos.z);
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
@@ -1332,7 +1332,7 @@ ApiStatus PlayerLandJump(Evt* script, s32 isInitialCall) {
         player->curPos.y = 0.0f;
 
         play_movement_dust_effects(2, player->curPos.x, player->curPos.y, player->curPos.z, player->yaw);
-        sfx_play_sound_at_position(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0, player->curPos.x, player->curPos.y, player->curPos.z);
+        sfx_play_sound_at_position(SOUND_LAND_SOFTLY, SOUND_SPACE_MODE_0, player->curPos.x, player->curPos.y, player->curPos.z);
 
         return ApiStatus_DONE1;
     }

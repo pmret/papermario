@@ -49,7 +49,7 @@ void action_update_hit_lava(void) {
         subtract_hp(1);
         open_status_bar_long();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
-        sfx_play_sound_at_player(SOUND_00E8, SOUND_SPACE_MODE_0);
+        sfx_play_sound_at_player(SOUND_TOUCH_LAVA, SOUND_SPACE_MODE_0);
     }
 
     switch (playerStatus->actionSubstate) {

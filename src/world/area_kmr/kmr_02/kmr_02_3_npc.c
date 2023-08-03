@@ -201,7 +201,7 @@ EvtScript N(EVS_Goombaria_Kiss) = {
         EVT_ADD(LVar0, 20)
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_RECOVER, 2, LVar0, LVar1, LVar2, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Goombaria, SOUND_0214, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Goombaria, SOUND_HEART_BOUNCE, SOUND_SPACE_MODE_0)
     EVT_RETURN
     EVT_END
 };

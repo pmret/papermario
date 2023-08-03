@@ -209,7 +209,7 @@ EvtScript N(takeTurn_80219444) = {
         EVT_WAIT(10)
         EVT_CALL(action_command_jump_start, 12, 3)
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_JUMP_3E2)
+    EVT_CALL(PlaySound, SOUND_ACTOR_JUMP)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))

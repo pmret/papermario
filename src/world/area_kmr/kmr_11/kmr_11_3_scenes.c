@@ -411,11 +411,11 @@ EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
     EVT_CALL(SetNpcJumpscale, NPC_RedGoombaBro, EVT_FLOAT(0.8))
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_BlueGoombaBro, -400, 0, -162)
-        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_010F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -432, 130, -146, 30 * DT)
     EVT_END_THREAD
     EVT_CALL(SetNpcPos, NPC_RedGoombaBro, -400, 0, -41)
-    EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_010F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_RedGoombaBro, -412, 130, -35, 30 * DT)
     EVT_WAIT(10 * DT)
     EVT_THREAD

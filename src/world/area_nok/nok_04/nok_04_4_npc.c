@@ -1344,7 +1344,7 @@ EvtScript N(EVS_HitTree_Correct) = {
                 EVT_ADD(LVar3, -16)
                 EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar3, LVar4, LVar5, 20)
             EVT_END_THREAD
-            EVT_CALL(PlaySound, SOUND_00D2)
+            EVT_CALL(PlaySound, SOUND_JINGLE_GOT_KEY)
             EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_GotKooperShell, 160, 40)
             EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)

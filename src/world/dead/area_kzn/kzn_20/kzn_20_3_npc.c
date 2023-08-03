@@ -281,7 +281,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Hurt)
                 EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_00E8, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TOUCH_LAVA, SOUND_SPACE_MODE_0)
                 EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 60)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
                 EVT_SET(MV_SceneState, SCENE_STATE_KOLORADO_BURNED)

@@ -933,7 +933,7 @@ EvtScript N(EVS_SummonBackup) = {
         EVT_END_IF
     EVT_CHILD_THREAD
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0344)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POKEY_LEAN_BACK)
     EVT_END_CHILD_THREAD
     // lean forward
     EVT_CALL(MakeLerp, -20, 30, 20, EASING_COS_IN_OUT)
@@ -946,7 +946,7 @@ EvtScript N(EVS_SummonBackup) = {
         EVT_END_IF
     EVT_CHILD_THREAD
         EVT_WAIT(6)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0345)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POKEY_LEAN_FORWARD)
     EVT_END_CHILD_THREAD
     // lean back
     EVT_CALL(MakeLerp, 30, -40, 20, EASING_COS_IN_OUT)
@@ -972,7 +972,7 @@ EvtScript N(EVS_SummonBackup) = {
         EVT_END_IF
     EVT_WAIT(20)
     // create new Pokey actor
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0346)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POKEY_EMERGE_FROM_GROUND)
     EVT_CALL(StartRumble, 9)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))

@@ -2294,7 +2294,7 @@ void btl_state_update_run_away(void) {
             enemyCount = prevSP - battleStatus->totalStarPoints;
 
             if (enemyCount > 0) {
-                sfx_play_sound(SOUND_0211);
+                sfx_play_sound(SOUND_COIN_PICKUP);
             }
             playerData->starPoints += enemyCount;
             BattleScreenFadeAmt++;

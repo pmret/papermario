@@ -121,7 +121,7 @@ s32 CUSTOM_ECHO_PARAMS_3[] = {
 AlUnkGemini D_80078370[] = {
     {
     .sound1 = SOUND_034A,
-    .sound2 = SOUND_LRAW_0349,
+    .sound2 = SOUND_LRAW_CHEERING,
     .flags = 1
     }
 };

@@ -268,7 +268,7 @@ EvtScript N(EVS_Scene_BeginGame) = {
     EVT_CALL(NpcFlyTo, NPC_Scene_Parakarry, 430, 20, -165, 60 * DT, -10, EASING_LINEAR)
     EVT_CALL(InterpNpcYaw, NPC_Scene_Parakarry, 45, 10)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Scene_Parakarry, SOUND_00E0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Scene_Parakarry, SOUNC_CHECK_MAILBOX, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(TranslateModel, MODEL_o222, 2, 0, 0)
         EVT_CALL(TranslateModel, MODEL_o223, 2, 0, 0)
@@ -307,7 +307,7 @@ EvtScript N(EVS_Scene_BeginGame) = {
     EVT_CALL(SetNpcAnimation, NPC_Scene_Luigi, ANIM_Luigi_Idle)
     EVT_KILL_THREAD(LVarA)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_00E0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUNC_CHECK_MAILBOX, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(TranslateModel, MODEL_o222, 1, 0, 0)
         EVT_CALL(TranslateModel, MODEL_o223, 1, 0, 0)
@@ -431,7 +431,7 @@ EvtScript N(EVS_Scene_SettingOff) = {
         EVT_WAIT(7 * DT)
         EVT_WAIT(7 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Scene_Luigi, ANIM_Luigi_Idle)
-        EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_SOFT_LAND, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_LAND_SOFTLY, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Scene_Luigi, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Scene_Luigi, 594, 30, -216, 15 * DT)

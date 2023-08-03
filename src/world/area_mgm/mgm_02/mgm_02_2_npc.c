@@ -688,7 +688,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (data->box[i].stateTimer <= 0) {
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         data->box[i].state = BOX_STATE_PEACH_POPUP;
-                        sfx_play_sound_at_position(SOUND_0214, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+                        sfx_play_sound_at_position(SOUND_HEART_BOUNCE, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         npc->jumpVel = 10.0f;
                         npc->pos.y = npc->moveToPos.y;
@@ -835,7 +835,7 @@ API_CALLABLE(N(RunMinigame)) {
             sfx_play_sound(SOUND_MENU_ERROR);
             gPlayerStatusPtr->anim = ANIM_Mario1_Idle;
         } else {
-            sfx_play_sound(SOUND_00D4);
+            sfx_play_sound(SOUND_JINGLE_WON_BATTLE);
             gPlayerStatusPtr->anim = ANIM_Mario1_Idle;
         }
 
@@ -901,7 +901,7 @@ API_CALLABLE(N(GiveCoinReward)) {
 
     data->curScore -= increment;
     add_coins(increment);
-    sfx_play_sound(SOUND_0211);
+    sfx_play_sound(SOUND_COIN_PICKUP);
 
     return (data->curScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
@@ -1008,7 +1008,7 @@ API_CALLABLE(N(TakeCoinCost)) {
         script->functionTemp[0] = 0;
     }
     add_coins(-1);
-    sfx_play_sound(SOUND_0211);
+    sfx_play_sound(SOUND_COIN_PICKUP);
 
     script->functionTemp[0]++;
     return (script->functionTemp[0] == PLAY_COST) ? ApiStatus_DONE2 : ApiStatus_BLOCK;

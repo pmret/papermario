@@ -369,7 +369,7 @@ EvtScript N(healOneAlly) = {
     EVT_CALL(GetOwnerID, LVar0)
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0214)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_NONE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
     EVT_ADD(LVar2, 50)
@@ -386,7 +386,7 @@ EvtScript N(healOneAlly) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, LVarA, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_0214)
+        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, LVarA, SOUND_SRAW_16_A)
     EVT_END_THREAD

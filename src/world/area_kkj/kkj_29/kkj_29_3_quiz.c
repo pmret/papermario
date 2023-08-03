@@ -35,7 +35,7 @@ EvtScript N(EVS_GiveItemToKoopatrol) = {
     EVT_ADD(LVar6, 40)
     EVT_CALL(MakeItemEntity, LVarA, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_SET(LVarB, LVar0)
-    EVT_CALL(PlaySound, SOUND_00D2)
+    EVT_CALL(PlaySound, SOUND_JINGLE_GOT_KEY)
     EVT_CALL(ShowMessageAtScreenPos, LVar2, 160, 40)
     EVT_CALL(RemoveItemEntity, LVarB)
     EVT_CALL(SetNpcAnimation, LVar1, ANIM_WorldKoopatrol_Anim03)

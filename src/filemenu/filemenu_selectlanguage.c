@@ -326,7 +326,7 @@ void filemenu_selectlanguage_handle_input(MenuPanel* menu) {
         if (var_s1 == 0) {
             sfx_play_sound(SOUND_00F1);
         } else {
-            sfx_play_sound(SOUND_00D6);
+            sfx_play_sound(SOUND_FILE_MENU_OUT);
         }
         set_game_mode(GAME_MODE_END_LANGUAGE_SELECT);
     }

@@ -93,7 +93,7 @@ EvtScript N(EVS_SpawnStarStoneSparkles) = {
 };
 
 EvtScript N(EVS_SpawnMerlarSparkles) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlar, SOUND_00B1, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Merlar, SOUND_MERLAR_APPEARS, 0)
     EVT_CALL(GetNpcPos, NPC_Merlar, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
     EVT_LOOP(8)

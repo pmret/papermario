@@ -529,7 +529,7 @@ API_CALLABLE(N(UseAbility)) {
             disable_player_shadow();
             playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
             suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
-            sfx_play_sound_at_npc(SOUND_2013, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_SUSHIE_EMBARK, SOUND_SPACE_MODE_0, NPC_PARTNER);
             playerStatus->pos.x = sushie->pos.x;
             playerStatus->pos.y = sushie->pos.y;
             playerStatus->pos.z = sushie->pos.z;
@@ -557,9 +557,9 @@ API_CALLABLE(N(UseAbility)) {
                     N(get_movement_from_input)(&angle, &speed);
                     if (N(DiveState) == DIVE_STATE_NONE) {
                         if (speed != 0.0f) {
-                            sfx_play_sound_at_npc(SOUND_2015, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_SUSHIE_RIDE_MOVING, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         } else {
-                            sfx_play_sound_at_npc(SOUND_2014, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_SUSHIE_RIDE_IDLE, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                     }
                 }

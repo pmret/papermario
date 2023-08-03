@@ -414,13 +414,13 @@ API_CALLABLE(N(UseAbility)) {
             fx_explosion(gPlayerData.partners[gPlayerData.curPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
             switch (gPlayerData.partners[gPlayerData.curPartner].level) {
                 case 0:
-                    sfx_play_sound_at_npc(SOUND_CANNON1, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
                 case 1:
-                    sfx_play_sound_at_npc(SOUND_CANNON2, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV2, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
                 case 2:
-                    sfx_play_sound_at_npc(SOUND_CANNON3, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV3, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
             }
             exec_ShakeCam1(0, 0, 20);

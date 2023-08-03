@@ -30,7 +30,7 @@ EvtScript N(EVS_SpawnStarCard) = {
             EVT_CALL(PlaySound, SOUND_LOOP_67)
             EVT_CALL(N(StarSpiritEffectFunc1))
             EVT_CALL(StopSound, SOUND_LOOP_67)
-            EVT_CALL(PlaySoundAt, SOUND_00B2, SOUND_SPACE_MODE_0, 408, -825, 414)
+            EVT_CALL(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_MODE_0, 408, -825, 414)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(45)

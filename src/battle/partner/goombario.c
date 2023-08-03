@@ -284,7 +284,7 @@ API_CALLABLE(N(OnMissHeadbonk)) {
 
         play_movement_dust_effects(2, partner->curPos.x, partner->curPos.y, partner->curPos.z,
                                    partner->yaw);
-        sfx_play_sound(SOUND_SOFT_LAND);
+        sfx_play_sound(SOUND_LAND_SOFTLY);
 
         return ApiStatus_DONE1;
     }

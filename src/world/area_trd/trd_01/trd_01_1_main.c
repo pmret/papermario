@@ -187,7 +187,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag0, FALSE)
             EVT_SET(LFlag0, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(EnableModel, MODEL_o145, TRUE)
         EVT_END_IF
     EVT_END_IF
@@ -196,7 +196,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag1, FALSE)
             EVT_SET(LFlag1, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 50, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -205,7 +205,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag2, FALSE)
             EVT_SET(LFlag2, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 100, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -214,7 +214,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag3, FALSE)
             EVT_SET(LFlag3, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 150, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -223,7 +223,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag4, FALSE)
             EVT_SET(LFlag4, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 200, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -232,7 +232,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag5, FALSE)
             EVT_SET(LFlag5, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 250, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -241,7 +241,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag6, FALSE)
             EVT_SET(LFlag6, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 300, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -250,7 +250,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag7, FALSE)
             EVT_SET(LFlag7, TRUE)
-            EVT_CALL(PlaySound, SOUND_DULL_THUD)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(EnableModel, MODEL_o145, FALSE)
         EVT_END_IF
     EVT_END_IF

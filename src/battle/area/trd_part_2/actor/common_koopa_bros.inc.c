@@ -528,7 +528,7 @@ EvtScript N(HandleCommand) = {
                         EVT_WAIT(12)
                         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
                         EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-                        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JUMP_3E2)
+                        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_JUMP)
                         EVT_THREAD
                             EVT_SET(LVar0, 0)
                             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 18, 0)

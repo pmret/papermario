@@ -88,7 +88,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_00E8, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TOUCH_LAVA, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_SELF, -700, 150, 0, 35)
     EVT_THREAD
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))

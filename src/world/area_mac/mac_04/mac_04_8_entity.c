@@ -135,7 +135,7 @@ EvtScript N(EVS_EnterToybox) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPlayer, SOUND_00D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_IN, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.35))
         EVT_CALL(PlayerJump, -450, 20, -160, 32)
     EVT_END_THREAD
@@ -177,7 +177,7 @@ EvtScript N(EVS_ExitToybox) = {
         EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_00DA, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_OUT, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, -480, 45, -90, 25)
     EVT_EXEC_WAIT(N(EVS_FinishUnshrinking))

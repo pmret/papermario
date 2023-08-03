@@ -1708,7 +1708,7 @@ API_CALLABLE(N(AnimateStorybookPages)) {
             } else {
                 N(CurrentStoryPageTime) = ARRAY_COUNT(N(NextPageAnimOffsetsX));
                 N(StoryPageState)++;
-                sfx_play_sound(SOUND_00B0);
+                sfx_play_sound(SOUND_INTRO_NEXT_PAGE);
             }
             break;
         case STORY_PAGE_STATE_NEXT:
@@ -1774,7 +1774,7 @@ API_CALLABLE(N(AnimateStorybookPages)) {
                 N(CurrentStoryPageTime) = ARRAY_COUNT(N(NextPageAnimOffsetsX));
                 N(StoryPageState)++;
                 N(StoryGraphicsPtr)->tapeAlpha = 255;
-                sfx_play_sound(SOUND_00B0);
+                sfx_play_sound(SOUND_INTRO_NEXT_PAGE);
             }
             break;
         case STORY_PAGE_STATE_BOWSER_NEXT:

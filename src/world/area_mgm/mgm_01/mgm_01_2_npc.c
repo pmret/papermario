@@ -143,7 +143,7 @@ void N(appendGfx_score_display) (void* renderData) {
             } else {
                 data->curScore++;
             }
-            sfx_play_sound_with_params(SOUND_0211, 0, 0x40, 0x32);
+            sfx_play_sound_with_params(SOUND_COIN_PICKUP, 0, 0x40, 0x32);
 
         }
         draw_number(data->curScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
@@ -413,7 +413,7 @@ API_CALLABLE(N(GiveCoinReward)) {
     data->curScore -= increment;
     add_coins(increment);
     data->targetScore = data->curScore;
-    sfx_play_sound(SOUND_0211);
+    sfx_play_sound(SOUND_COIN_PICKUP);
 
     if (data->curScore > 0) {
         return ApiStatus_BLOCK;
@@ -573,7 +573,7 @@ API_CALLABLE(N(CreateBlockEntities)) {
             N(BlockPosY)[curBlockIdx] + 13,
             N(BlockPosZ)[curBlockIdx] + 5,
             23.0f);
-        sfx_play_sound(SOUND_0213);
+        sfx_play_sound(SOUND_HEART_PICKUP);
         script->functionTemp[0] = 3;
         script->functionTemp[1]++;
     }
@@ -593,7 +593,7 @@ API_CALLABLE(N(TakeCoinCost)) {
         script->functionTemp[0] = 0;
     }
     add_coins(-1);
-    sfx_play_sound(SOUND_0211);
+    sfx_play_sound(SOUND_COIN_PICKUP);
 
     script->functionTemp[0]++;
 
@@ -795,9 +795,9 @@ EvtScript N(EVS_ManageMinigame) = {
     EVT_END_THREAD
     EVT_SWITCH(LVarB)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundWithVolume, SOUND_CANNON2, 0)
+            EVT_CALL(PlaySoundWithVolume, SOUND_BOMBETTE_BLAST_LV2, 0)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundWithVolume, SOUND_CANNON2, 0)
+            EVT_CALL(PlaySoundWithVolume, SOUND_BOMBETTE_BLAST_LV2, 0)
             EVT_WAIT(10)
             EVT_CALL(N(EndBowserPanelAnimation))
             EVT_CALL(TranslateModel, LVar1, LVar5, LVar6, LVar7)

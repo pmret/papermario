@@ -97,7 +97,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
             soundID = SOUND_00F1;
             break;
         case 3:
-            soundID = SOUND_00DC;
+            soundID = SOUND_SLIDE_WHISTLE_OUT;
             break;
         case 4:
             soundID = SOUND_2072;

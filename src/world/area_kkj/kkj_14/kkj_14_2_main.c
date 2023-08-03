@@ -30,7 +30,7 @@ Gfx N(setup_gfx_candle_lights)[] = {
 EvtScript N(EVS_EndPeachChapter7) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_00DC)
+    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("pra_01"), pra_01_ENTRY_4, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 };

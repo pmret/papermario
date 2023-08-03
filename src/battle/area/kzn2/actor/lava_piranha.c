@@ -674,7 +674,7 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SetNpcAnimationSpeed, NPC_BTL_COMPANION, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(10.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, 70, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_00E8, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_TOUCH_LAVA, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimationSpeed, NPC_BTL_COMPANION, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcJumpscale, NPC_BTL_COMPANION, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_BattleKolorado_Injured)
@@ -1301,7 +1301,7 @@ API_CALLABLE(N(UpdateSong)) {
 
     // play 'end battle' song
     if (isInitialCall) {
-        sfx_play_sound(SOUND_00D4);
+        sfx_play_sound(SOUND_JINGLE_WON_BATTLE);
         bgm_set_song(0, SONG_BATTLE_END, 0, 500, 8);
         return ApiStatus_BLOCK;
     }
