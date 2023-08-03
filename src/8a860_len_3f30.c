@@ -236,20 +236,20 @@ void func_800F16CC(void) {
             case POPUP_MENU_TAKE_FROM_CHEST:
             case POPUP_MENU_USEKEY:
                 set_window_update(WINDOW_ID_14, (s32) basic_window_update);
-                sfx_play_sound(SOUND_1);
+                sfx_play_sound(SOUND_OPEN_POPUP_1);
                 set_window_update(WINDOW_ID_19, (s32) basic_window_update);
                 break;
             case POPUP_MENU_SWITCH_PARTNER:
             case POPUP_MENU_UPGRADE_PARTNER:
                 set_window_update(WINDOW_ID_14, (s32) basic_window_update);
-                sfx_play_sound(SOUND_2);
+                sfx_play_sound(SOUND_OPEN_POPUP_2);
                 set_window_update(WINDOW_ID_19, (s32) basic_window_update);
                 break;
             case POPUP_MENU_READ_DIARY_PAGE:
             case POPUP_MENU_READ_POSTCARD:
             case POPUP_MENU_POST_OFFICE:
                 set_window_update(WINDOW_ID_14, (s32) basic_window_update);
-                sfx_play_sound(SOUND_1);
+                sfx_play_sound(SOUND_OPEN_POPUP_1);
                 break;
         }
         set_window_update(WINDOW_ID_21, (s32) basic_window_update);
@@ -730,20 +730,20 @@ s32 popup_menu_update(void) {
                     case POPUP_MENU_TAKE_FROM_CHEST:
                     case POPUP_MENU_USEKEY:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
-                        sfx_play_sound(SOUND_1);
+                        sfx_play_sound(SOUND_OPEN_POPUP_1);
                         set_window_update(WINDOW_ID_19, (s32)basic_window_update);
                         break;
                     case POPUP_MENU_SWITCH_PARTNER:
                     case POPUP_MENU_UPGRADE_PARTNER:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
-                        sfx_play_sound(SOUND_2);
+                        sfx_play_sound(SOUND_OPEN_POPUP_2);
                         set_window_update(WINDOW_ID_19, (s32)basic_window_update);
                         break;
                     case POPUP_MENU_READ_DIARY_PAGE:
                     case POPUP_MENU_READ_POSTCARD:
                     case POPUP_MENU_POST_OFFICE:
                         set_window_update(WINDOW_ID_14, (s32)basic_window_update);
-                        sfx_play_sound(SOUND_1);
+                        sfx_play_sound(SOUND_OPEN_POPUP_1);
                         break;
                 }
                 set_window_update(WINDOW_ID_21, WINDOW_UPDATE_SHOW);

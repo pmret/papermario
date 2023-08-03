@@ -386,14 +386,14 @@ void check_input_status_bar(void) {
                 open_status_bar_long();
 
                 if (!is_picking_up_item()) {
-                    sfx_play_sound(SOUND_3);
+                    sfx_play_sound(SOUND_LOWER_STATUS_BAR);
                 }
             }
         } else if (!(playerStatus->curButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
             close_status_bar();
 
             if (!is_picking_up_item()) {
-                sfx_play_sound(SOUND_4);
+                sfx_play_sound(SOUND_RAISE_STATUS_BAR);
             }
         }
     }

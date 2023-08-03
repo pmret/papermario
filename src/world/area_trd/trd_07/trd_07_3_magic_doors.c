@@ -209,7 +209,7 @@ EvtScript N(EVS_RaiseMagicDoors) = {
     EVT_SUSPEND_GROUP(EVT_GROUP_01)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(PlaySound, SOUND_A)
+    EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -252,7 +252,7 @@ EvtScript N(EVS_RaiseMagicDoors) = {
 EvtScript N(EVS_LowerMagicDoors) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(15)
-    EVT_CALL(PlaySound, SOUND_B)
+    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
     EVT_WAIT(15)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)

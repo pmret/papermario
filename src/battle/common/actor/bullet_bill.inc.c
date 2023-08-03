@@ -129,7 +129,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(CopyStatusEffects, LVar0, ACTOR_SELF)
         EVT_CALL(CopyBuffs, LVar0, ACTOR_SELF)
-        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(GetActorPos, LVar0, LVar1, LVarB, LVarC)
         EVT_SUB(LVar1, 90)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))

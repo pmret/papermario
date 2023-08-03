@@ -1639,7 +1639,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, GREEN_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(SetGoalPos, GREEN_ACTOR, -300, 250, 0)
         EVT_CALL(JumpToGoal, GREEN_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
@@ -1649,7 +1649,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, YELLOW_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(SetGoalPos, YELLOW_ACTOR, -200, 250, 0)
         EVT_CALL(JumpToGoal, YELLOW_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
@@ -1659,7 +1659,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, BLACK_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(SetGoalPos, BLACK_ACTOR, 0, 250, 0)
         EVT_CALL(JumpToGoal, BLACK_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
@@ -1669,7 +1669,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, RED_ACTOR, EVT_FLOAT(0.4))
-        EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(SetGoalPos, RED_ACTOR, 150, 250, 0)
         EVT_CALL(JumpToGoal, RED_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
@@ -1699,7 +1699,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(SetActorPos, GREEN_ACTOR, 20, 250, 0)
         EVT_CALL(SetGoalPos, GREEN_ACTOR, 20, 0, 0)
         EVT_CALL(SetActorJumpGravity, GREEN_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(FallToGoal, GREEN_ACTOR, 30)
         EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP)
@@ -1712,7 +1712,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(SetActorPos, YELLOW_ACTOR, 60, 250, -5)
         EVT_CALL(SetGoalPos, YELLOW_ACTOR, 60, 0, -5)
         EVT_CALL(SetActorJumpGravity, YELLOW_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(FallToGoal, YELLOW_ACTOR, 30)
         EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP)
@@ -1725,7 +1725,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 250, -10)
         EVT_CALL(SetGoalPos, BLACK_ACTOR, 100, 0, -10)
         EVT_CALL(SetActorJumpGravity, BLACK_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(FallToGoal, BLACK_ACTOR, 30)
         EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP)
@@ -1738,7 +1738,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(SetActorPos, RED_ACTOR, 140, 250, -15)
         EVT_CALL(SetGoalPos, RED_ACTOR, 140, 0, -15)
         EVT_CALL(SetActorJumpGravity, RED_ACTOR, EVT_FLOAT(1.5))
-        EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
+        EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
         EVT_CALL(FallToGoal, RED_ACTOR, 30)
         EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP)

@@ -123,7 +123,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa_01) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_SET(GF_TRD01_Defeated_KoopaGuard, TRUE)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySound, SOUND_B)
+            EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
             EVT_CALL(MakeItemEntity, ITEM_KOOPA_FORTRESS_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_TRD01_Item_FortressKey)
             EVT_EXEC(N(EVS_FocusCamOnLock))
             EVT_CALL(DoNpcDefeat)

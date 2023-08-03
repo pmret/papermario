@@ -18,7 +18,7 @@ EvtScript N(EVS_SetupSarcophagi) = {
                 EVT_WAIT(1)
                 EVT_GOTO(10)
             EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_A)
+        EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcYaw, NPC_Pokey_01, 105)

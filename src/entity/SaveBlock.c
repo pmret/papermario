@@ -124,7 +124,7 @@ void entity_SaveBlock_show_choice_message(void) {
 
 void entity_SaveBlock_show_result_message(void) {
     msg_printer_load_msg(MSG_Menus_SaveComplete, SaveBlockResultPrinter);
-    sfx_play_sound(SOUND_10);
+    sfx_play_sound(SOUND_SAVE_CONFIRM);
 }
 
 void entity_SaveBlock_wait_for_close_result(Entity* entity) {

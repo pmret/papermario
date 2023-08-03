@@ -59,7 +59,7 @@ EvtScript N(D_80248298_84AE68) = {
     EVT_CALL(RotateModel, MODEL_hkai1, LVar0, 0, 1, 0)
     EVT_CALL(RotateModel, MODEL_hkai2, LVar0, 0, 1, 0)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hk, SOUND_1AC, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySound, SOUND_A)
+    EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
     EVT_RETURN
     EVT_END
 };

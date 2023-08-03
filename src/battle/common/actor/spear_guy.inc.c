@@ -688,7 +688,7 @@ EvtScript N(summonBackup) = {
     EVT_CALL(GetGoalPos, LVarB, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 220)
     EVT_CALL(SetActorPos, LVarB, LVar0, 0, 0)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2FA)
         EVT_WAIT(15)

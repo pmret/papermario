@@ -67,7 +67,7 @@ EvtScript N(EVS_ItemPrompt_Scarf) = {
                     EVT_CALL(PlaySoundAt, SOUND_2043, 0, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 10)
                     EVT_WAIT(20)
-                    EVT_CALL(PlaySound, SOUND_B)
+                    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
                     EVT_SET(LVar0, 0)
                     EVT_EXEC_WAIT(N(EVS_Scene_SnowmenSpeak))
                 EVT_END_IF
@@ -107,7 +107,7 @@ EvtScript N(EVS_ItemPrompt_Bucket) = {
                     EVT_CALL(PlaySoundAt, SOUND_2043, 0, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 10)
                     EVT_WAIT(20)
-                    EVT_CALL(PlaySound, SOUND_B)
+                    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
                     EVT_SET(LVar0, 1)
                     EVT_EXEC_WAIT(N(EVS_Scene_SnowmenSpeak))
                 EVT_END_IF

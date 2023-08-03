@@ -527,7 +527,7 @@ EvtScript N(HandleCommand) = {
                         EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
                         EVT_WAIT(12)
                         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-                        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
+                        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
                         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JUMP_3E2)
                         EVT_THREAD
                             EVT_SET(LVar0, 0)
@@ -606,7 +606,7 @@ EvtScript N(HandleCommand) = {
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
                     EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                     EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar0)
                     EVT_SWITCH(LVar0)
@@ -698,7 +698,7 @@ EvtScript N(HandleCommand) = {
                         EVT_CASE_EQ(AVAL_Koopa_State_PosB)
                             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(16.0))
                     EVT_END_SWITCH
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, -160, LVar1, LVar2)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -798,7 +798,7 @@ EvtScript N(HandleCommand) = {
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
                     EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(16.0))
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

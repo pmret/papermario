@@ -754,7 +754,7 @@ EvtScript N(80226DEC) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, LVarB, 0)
     EVT_END_THREAD
-    EVT_CALL(SetActorSounds, LVarB, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+    EVT_CALL(SetActorSounds, LVarB, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_THREAD
         EVT_LOOP(2)
             EVT_CALL(PlaySoundAtActor, LVarB, SOUND_2E2)
@@ -800,7 +800,7 @@ EvtScript N(802271A0) = {
     EVT_SET(LVar1, LVar4)
     EVT_SET(LVar2, LVar5)
     EVT_CALL(SetActorPos, LVarB, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorSounds, LVarB, ACTOR_SOUND_WALK, SOUND_380, SOUND_0)
+    EVT_CALL(SetActorSounds, LVarB, ACTOR_SOUND_WALK, SOUND_380, SOUND_NONE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(4.0))

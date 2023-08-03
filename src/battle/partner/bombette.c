@@ -938,7 +938,7 @@ EvtScript N(bodySlam) = {
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_BodySlam)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-        EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+        EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Idle)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)

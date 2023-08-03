@@ -694,7 +694,7 @@ EvtScript N(copyPartner) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(SetActorSounds, LVarA, ACTOR_SOUND_JUMP, SOUND_0, 0)
+    EVT_CALL(SetActorSounds, LVarA, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(8)
             EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)

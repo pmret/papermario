@@ -63,7 +63,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
 };
 
 EvtScript N(EVS_OnBreak_SpecialBrick) = {
-    EVT_CALL(PlaySound, SOUND_B)
+    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
     EVT_CALL(PlaySoundAt, SOUND_2108, SOUND_SPACE_MODE_0, 665, 35, 70)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 665, 48, 70, 10)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 665, 35, 70, 45, ITEM_SUPER_SHROOM, MAKE_ENTITY_END)

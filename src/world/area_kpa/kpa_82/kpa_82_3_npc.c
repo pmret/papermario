@@ -190,7 +190,7 @@ EvtScript N(EVS_SetDoorRots) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_0)
+    EVT_CALL(StopSound, SOUND_NONE)
     EVT_RETURN
     EVT_END
 };
@@ -210,7 +210,7 @@ EvtScript N(EVS_CloseDoors) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_0)
+    EVT_CALL(StopSound, SOUND_NONE)
     EVT_RETURN
     EVT_END
 };

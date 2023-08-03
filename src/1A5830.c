@@ -717,7 +717,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
         func_80267018(target, 1);
 
-        if (attacker->actorTypeData1[5] != SOUND_0) {
+        if (attacker->actorTypeData1[5] != SOUND_NONE) {
             sfx_play_sound_at_position(attacker->actorTypeData1[5], SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 

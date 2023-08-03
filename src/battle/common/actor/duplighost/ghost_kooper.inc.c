@@ -381,7 +381,7 @@ EvtScript N(kooper_takeTurn) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKooper_EnterShell)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_NONE)
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200C)
@@ -430,7 +430,7 @@ EvtScript N(kooper_takeTurn) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200A)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
