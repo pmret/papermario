@@ -174,7 +174,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_292, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_0292, SOUND_SPACE_MODE_0)
     EVT_EXEC_WAIT(N(EVS_Bootler_SpookPlayer))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)

@@ -25,7 +25,7 @@ EvtScript N(D_80242890_9A3870) = {
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GF_TRD02_UnlockedDoor, TRUE)
     EVT_CALL(N(GetEntityPosition), MV_Padlock_EntityIndex, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Padlock_EntityIndex)
     EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(EVT_GROUP_01)

@@ -139,7 +139,7 @@ void N(update)(void) {
                 actionCommandStatus->hudPosX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
                 actionCommandStatus->hudPosY);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
-            sfx_play_sound(SOUND_233);
+            sfx_play_sound(SOUND_0233);
             actionCommandStatus->lookBackCounter = 1;
             actionCommandStatus->state = 12;
             // fallthrough
@@ -263,7 +263,7 @@ void N(update)(void) {
                         }
                         actionCommandStatus->state = 11;
                         battleStatus->actionResult++;
-                        sfx_play_sound(SOUND_LRAW_21C);
+                        sfx_play_sound(SOUND_021C);
                         return;
                     }
 

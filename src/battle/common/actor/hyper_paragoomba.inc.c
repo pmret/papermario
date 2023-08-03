@@ -785,7 +785,7 @@ EvtScript N(8021D9F4) = {
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Goomba_Hyper_Hurt)
     EVT_END_IF
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_301, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0301, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -964,7 +964,7 @@ EvtScript N(8021E218) = {
             EVT_END_THREAD
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 80)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_10F, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_010F, 0)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -200, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
@@ -994,7 +994,7 @@ EvtScript N(8021E218) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_10F, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_010F, 0)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 80)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

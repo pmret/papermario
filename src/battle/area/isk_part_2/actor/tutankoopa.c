@@ -629,7 +629,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     EVT_CALL(JumpPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 5, TRUE)
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar9, ANIM_BuzzyBeetle_Anim05)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F9)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -1002,7 +1002,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
                 EVT_GOTO(0)
             EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_26B)
+    EVT_CALL(PlaySound, SOUND_026B)
     EVT_LABEL(10)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, LVarD)
         EVT_CALL(TranslateModel, 31, 0, LVarD, 0)
@@ -1012,7 +1012,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
         EVT_IF_LT(LVarD, 60)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_26B)
+    EVT_CALL(StopSound, SOUND_026B)
     EVT_WAIT(10)
     // create the chomp and have him exit the gate
     EVT_CALL(SummonEnemy, EVT_PTR(N(SummonedChomp)), FALSE)
@@ -1099,7 +1099,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
                 EVT_GOTO(40)
             EVT_END_IF
         EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_26B)
+    EVT_CALL(PlaySound, SOUND_026B)
     EVT_LABEL(50)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, LVarD)
         EVT_CALL(TranslateModel, 31, 0, LVarD, 0)
@@ -1109,8 +1109,8 @@ EvtScript N(EVS_Move_SummonChomp) = {
         EVT_IF_GT(LVarD, 0)
             EVT_GOTO(50)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_26B)
-    EVT_CALL(PlaySound, SOUND_26C)
+    EVT_CALL(StopSound, SOUND_026B)
+    EVT_CALL(PlaySound, SOUND_026C)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(0.5))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, TRUE)
     EVT_RETURN
@@ -1166,7 +1166,7 @@ EvtScript N(EVS_LevitateToHomePos) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BA)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B4)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B4)
     EVT_END_THREAD
     EVT_WAIT(5)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Stunned, FALSE)
@@ -1186,7 +1186,7 @@ EvtScript N(EVS_GetBackUp) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BA)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B4)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B4)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TutankoopaAnims)))

@@ -443,7 +443,7 @@ EvtScript N(EVS_PostOfficeShyGuy_Escape) = {
     EVT_EXEC(N(EVS_CarryItem_PostOfficeShyGuy))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(60)
-    EVT_CALL(PlaySoundAtNpc, NPC_PostOfficeShyGuy, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PostOfficeShyGuy, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_PostOfficeShyGuy, 247, 20, -440, 20)
     EVT_SET(LVar0, 6)
     EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_MODE_0)

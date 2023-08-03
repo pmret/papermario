@@ -66,7 +66,7 @@ Vec3f N(FlightPath_Lakitu_02_Flee)[] = {
 
 EvtScript N(EVS_PlayFlightSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySound, SOUND_LRAW_295)
+        EVT_CALL(PlaySound, SOUND_LRAW_0295)
         EVT_WAIT(LVar0)
     EVT_END_LOOP
     EVT_RETURN

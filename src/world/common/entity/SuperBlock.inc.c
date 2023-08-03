@@ -437,11 +437,11 @@ API_CALLABLE(N(SuperBlock_WaitForPlayerToLand)) {
 
 EvtScript N(SuperBlock_ShowUpgradeEffects) = {
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySound, SOUND_LRAW_212D)
+    EVT_CALL(PlaySound, SOUND_212D)
     EVT_CALL(N(SuperBlock_GatherEnergyFX), SUPER_BLOCK_MAPVAR)
     EVT_WAIT(85 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_LRAW_212E)
+        EVT_CALL(PlaySound, SOUND_212E)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 70, 70)
         EVT_WAIT(27 * DT)
         EVT_CALL(PlaySound, SOUND_208E)

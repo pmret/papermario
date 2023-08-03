@@ -109,7 +109,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Idle)
     EVT_THREAD
         EVT_WAIT(59)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_3EF, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_03EF, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_CALL(SetNpcImgFXParams, NPC_Tutankoopa_01, IMGFX_SET_ALPHA, 255, 0, 0, 0)
     EVT_CALL(SetNpcImgFXFlags, NPC_Tutankoopa_01, IMGFX_FLAG_800)

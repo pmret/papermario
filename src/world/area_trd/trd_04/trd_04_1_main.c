@@ -194,7 +194,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_CALL(UpdateColliderTransform, COLLIDER_o86)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o87)
     EVT_CALL(StopSound, SOUND_LOOP_05)
-    EVT_CALL(PlaySound, SOUND_28)
+    EVT_CALL(PlaySound, SOUND_0028)
     EVT_WAIT(50 * DT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)

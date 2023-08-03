@@ -10,7 +10,7 @@
 #include "world/common/todo/GetPeachDisguise.inc.c"
 
 EvtScript N(EVS_OpenDresserDoors) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_1CF, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_01CF, 0)
     EVT_CALL(MakeLerp, 0, 80, 14, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -36,7 +36,7 @@ EvtScript N(EVS_CloseDresserDoors) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_1D0, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_01D0, 0)
     EVT_RETURN
     EVT_END
 };

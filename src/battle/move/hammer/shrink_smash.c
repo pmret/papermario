@@ -97,9 +97,9 @@ EvtScript N(EVS_UseMove_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 100), LVarF, 112)
         EVT_CASE_DEFAULT
@@ -108,9 +108,9 @@ EvtScript N(EVS_UseMove_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 75), LVarE, 48)
     EVT_END_SWITCH

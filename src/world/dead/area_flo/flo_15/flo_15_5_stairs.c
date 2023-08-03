@@ -44,7 +44,7 @@ EvtScript N(EVS_MonitorFallingStairs) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_LOOP(6)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_187, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_0187, SOUND_SPACE_MODE_0)
                 EVT_WAIT(20)
             EVT_END_LOOP
         EVT_END_THREAD

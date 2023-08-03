@@ -338,7 +338,7 @@ EvtScript N(slingshotAttack) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E7)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim15)
     EVT_WAIT(12)
     EVT_WAIT(12)
@@ -352,7 +352,7 @@ EvtScript N(slingshotAttack) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E8)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -468,7 +468,7 @@ EvtScript N(hammerAttack) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim07)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -483,7 +483,7 @@ EvtScript N(hammerAttack) = {
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_THREAD
         EVT_WAIT(4)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_327)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0327)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

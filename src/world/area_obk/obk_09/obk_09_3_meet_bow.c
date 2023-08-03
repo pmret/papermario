@@ -116,7 +116,7 @@ EvtScript N(EVS_Scene_MeetBow) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(StopSound, SOUND_LOOP_0F)
-    EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_9B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_009B, SOUND_SPACE_MODE_0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(0.2))
     EVT_WAIT(40 * DT)
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, TRUE)

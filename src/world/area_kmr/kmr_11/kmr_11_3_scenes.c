@@ -35,7 +35,7 @@ EvtScript N(EVS_GoombaKingBlastoff) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_GoombaKing, EVT_FLOAT(0.3))
     EVT_CALL(NpcJump0, NPC_GoombaKing, -1600, 1000, -1600, 150)
-    EVT_CALL(PlaySoundAt, SOUND_55, SOUND_SPACE_MODE_0, -1600, 1000, -1600)
+    EVT_CALL(PlaySoundAt, SOUND_0055, SOUND_SPACE_MODE_0, -1600, 1000, -1600)
     EVT_CALL(N(MakeLensFlare), -1600, 1000, -1600, 40)
     EVT_CALL(SetNpcPos, NPC_GoombaKing, NPC_DISPOSE_LOCATION)
     EVT_CALL(RemoveNpc, NPC_GoombaKing)
@@ -80,7 +80,7 @@ EvtScript N(EVS_FocusCam_Battlement) = {
 };
 
 EvtScript N(EVS_RandomQuaking) = {
-    EVT_CALL(PlaySound, SOUND_A5)
+    EVT_CALL(PlaySound, SOUND_00A5)
     EVT_LABEL(0)
         EVT_CALL(RandInt, 10, LVar0)
         EVT_ADD(LVar0, 5)
@@ -149,25 +149,25 @@ EvtScript N(EVS_FortressCollapse_MakeDust8) = {
 };
 
 EvtScript N(EVS_FortressCollapse_PlayFX) = {
-    EVT_CALL(PlaySound, SOUND_1E1)
+    EVT_CALL(PlaySound, SOUND_01E1)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust1))
     EVT_WAIT(97)
-    EVT_CALL(PlaySound, SOUND_1E2)
+    EVT_CALL(PlaySound, SOUND_01E2)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust2))
     EVT_WAIT(95)
-    EVT_CALL(PlaySound, SOUND_A6)
+    EVT_CALL(PlaySound, SOUND_00A6)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust3))
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust4))
     EVT_WAIT(34)
-    EVT_CALL(PlaySound, SOUND_A6)
+    EVT_CALL(PlaySound, SOUND_00A6)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust5))
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust6))
     EVT_WAIT(40)
-    EVT_CALL(PlaySound, SOUND_A7)
+    EVT_CALL(PlaySound, SOUND_00A7)
     EVT_WAIT(160)
-    EVT_CALL(PlaySound, SOUND_1E8)
+    EVT_CALL(PlaySound, SOUND_01E8)
     EVT_WAIT(40)
-    EVT_CALL(PlaySound, SOUND_1E2)
+    EVT_CALL(PlaySound, SOUND_01E2)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust7))
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust8))
     EVT_RETURN
@@ -215,7 +215,7 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
     EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcJumpscale, NPC_GoombaKing, EVT_FLOAT(0.8))
     EVT_CALL(NpcFacePlayer, NPC_GoombaKing, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_3E7, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_03E7, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump1, NPC_GoombaKing, -380, 120, -42, 25 * DT)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(10 * DT)
@@ -259,7 +259,7 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.5))
         EVT_WAIT(20)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.2))
-        EVT_CALL(PlaySound, SOUND_A5 | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_00A5 | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_EXEC(N(EVS_PlayFortressAnimation))
     EVT_EXEC(N(EVS_FortressCollapse_PlayFX))
@@ -411,17 +411,17 @@ EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
     EVT_CALL(SetNpcJumpscale, NPC_RedGoombaBro, EVT_FLOAT(0.8))
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_BlueGoombaBro, -400, 0, -162)
-        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_010F, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -432, 130, -146, 30 * DT)
     EVT_END_THREAD
     EVT_CALL(SetNpcPos, NPC_RedGoombaBro, -400, 0, -41)
-    EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_010F, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_RedGoombaBro, -412, 130, -35, 30 * DT)
     EVT_WAIT(10 * DT)
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_GoombaKing, EVT_FLOAT(0.8))
         EVT_CALL(SetNpcPos, NPC_GoombaKing, -405, 0, -91)
-        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_3E7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_03E7, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_GoombaKing, -419, 119, -91, 30 * DT)
         EVT_CALL(PlaySoundAt, SOUND_20EC, SOUND_SPACE_MODE_0, -330, 0, -130)
         EVT_CALL(PlaySoundAt, SOUND_20B4, SOUND_SPACE_MODE_0, -330, 0, -130)

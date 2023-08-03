@@ -162,7 +162,7 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_ChetRippo, ANIM_ChetRippo_Spread)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtNpc, NPC_ChetRippo, SOUND_LRAW_24B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ChetRippo, SOUND_024B, SOUND_SPACE_MODE_0)
     EVT_CALL(GetNpcPos, NPC_ChetRippo, LVar6, LVar7, LVar8)
     EVT_ADD(LVar7, 26)
     EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 0, LVar6, LVar7, LVar8, 1, 60)

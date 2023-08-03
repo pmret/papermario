@@ -19,7 +19,7 @@ API_CALLABLE(N(GetFlowerNormal)) {
 }
 
 EvtScript N(EVS_LaughingFlowers) = {
-    EVT_CALL(PlaySoundAt, SOUND_DF, SOUND_SPACE_MODE_0, 301, 0, -27)
+    EVT_CALL(PlaySoundAt, SOUND_00DF, SOUND_SPACE_MODE_0, 301, 0, -27)
     EVT_LOOP(6)
         EVT_SET(LVar0, 2)
         EVT_CALL(TranslateModel, MODEL_ea_1, 0, 0, LVar0)

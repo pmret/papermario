@@ -742,7 +742,7 @@ EvtScript N(dashToTarget) = {
 EvtScript N(charge) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
     EVT_CALL(N(WattFXDisable))
-    EVT_CALL(PlayLoopingSoundAtActor, ACTOR_PARTNER, 0, SOUND_289)
+    EVT_CALL(PlayLoopingSoundAtActor, ACTOR_PARTNER, 0, SOUND_0289)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 12)
     EVT_CALL(N(ElectroDashFX), LVar0, LVar1, LVar2)
@@ -1007,7 +1007,7 @@ EvtScript N(powerShock) = {
     EVT_END_THREAD
     EVT_WAIT(75 * DT)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28A)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028A)
     EVT_THREAD
         EVT_SETF(LVar0, EVT_FLOAT(1.0))
         EVT_LOOP(3)
@@ -1128,7 +1128,7 @@ EvtScript N(8023AE8C) = {
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028B)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 42)
     EVT_CALL(N(TurboChargeFX), LVar0, LVar1, LVar2)
@@ -1136,7 +1136,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(AddBattleCamZoom, 100)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_160)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0160)
         EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1211,7 +1211,7 @@ EvtScript N(8023B450) = {
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028B)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 42)
     EVT_CALL(N(TurboChargeFX), LVar0, LVar1, LVar2)
@@ -1313,7 +1313,7 @@ EvtScript N(megaShock) = {
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 12)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28C)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028C)
         EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2024)

@@ -270,7 +270,7 @@ EvtScript N(EVS_UpdateBasicPlatformB) = {
     EVT_USE_BUF(LVar0)
     EVT_BUF_READ4(LVar6, LVar7, LVar8, LVar9)
     EVT_LABEL(0)
-        EVT_CALL(PlaySound, SOUND_85)
+        EVT_CALL(PlaySound, SOUND_0085)
         EVT_CALL(MakeLerp, 0, 70, 51, EASING_COS_IN_OUT)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
@@ -283,7 +283,7 @@ EvtScript N(EVS_UpdateBasicPlatformB) = {
                 EVT_GOTO(1)
             EVT_END_IF
         EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_87)
+        EVT_CALL(PlaySound, SOUND_0087)
         EVT_CALL(MakeLerp, 70, 0, 51, EASING_COS_IN_OUT)
         EVT_LABEL(2)
             EVT_CALL(UpdateLerp)

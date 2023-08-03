@@ -333,7 +333,7 @@ EvtScript N(attack_throw_bomb) = {
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(HIT_RESULT_MISS)
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_2, SOUND_2F9)
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_2, SOUND_02F9)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -350,7 +350,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_2, SOUND_2F9)
+            EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_2, SOUND_02F9)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -376,7 +376,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_2, SOUND_2F9)
+    EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_2, SOUND_02F9)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(14.0))
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.1))
@@ -445,7 +445,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(GetModelCenter, 39)
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_3D2)
+            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_03D2)
             EVT_CALL(RandInt, 3, LVar0)
             EVT_ADD(LVar0, 3)
             EVT_WAIT(LVar0)

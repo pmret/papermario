@@ -108,7 +108,7 @@ EvtScript N(EVS_Scene_LowerStairs) = {
     EVT_CALL(UpdateColliderTransform, COLLIDER_o55)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o65)
     EVT_CALL(StopSound, SOUND_LOOP_04)
-    EVT_CALL(PlaySound, SOUND_25)
+    EVT_CALL(PlaySound, SOUND_0025)
     EVT_SET(GB_StoryProgress, STORY_CH1_LOWERED_SECOND_STAIRS)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetTimeFreezeMode, 0)

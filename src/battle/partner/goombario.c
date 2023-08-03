@@ -950,7 +950,7 @@ EvtScript N(headbonk1) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1009,7 +1009,7 @@ EvtScript N(headbonk1) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_281)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0281)
     EVT_CALL(N(JumpOnTarget), LVarA, 3)
     EVT_CHILD_THREAD
         EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
@@ -1055,7 +1055,7 @@ EvtScript N(headbonk2) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1115,7 +1115,7 @@ EvtScript N(headbonk2) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_281)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0281)
     EVT_CALL(N(JumpOnTarget), LVarA, 3)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_RESTART)
     EVT_CHILD_THREAD
@@ -1162,7 +1162,7 @@ EvtScript N(headbonk3) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1231,7 +1231,7 @@ EvtScript N(headbonk3) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_281)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0281)
     EVT_CALL(N(JumpOnTarget), LVarA, 3)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_RESTART)
     EVT_CHILD_THREAD
@@ -1282,7 +1282,7 @@ EvtScript N(multibonk) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1372,7 +1372,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_281)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0281)
     EVT_CALL(N(JumpOnTarget), LVarA, 3)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_RESTART)
     EVT_SUB(LVarD, 1)
@@ -1453,7 +1453,7 @@ EvtScript N(tattle) = {
     EVT_CALL(func_802CAE50, CAM_TATTLE, LVar0, LVar1, LVar2)
     EVT_CALL(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_282)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0282)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(N(GetTattleMessage))

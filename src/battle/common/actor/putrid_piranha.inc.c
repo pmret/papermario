@@ -414,7 +414,7 @@ EvtScript N(breath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim01)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LargePiranha_Putrid_Anim08)
     EVT_WAIT(11)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3AB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03AB)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)

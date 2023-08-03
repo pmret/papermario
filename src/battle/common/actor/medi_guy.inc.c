@@ -275,7 +275,7 @@ EvtScript N(flyingAttack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F8)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
@@ -283,7 +283,7 @@ EvtScript N(flyingAttack) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F9)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F9)
             EVT_THREAD
                 EVT_WAIT(5)
                 EVT_SET(LVar0, 0)
@@ -318,7 +318,7 @@ EvtScript N(flyingAttack) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F8)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
@@ -329,7 +329,7 @@ EvtScript N(flyingAttack) = {
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 1)
@@ -368,8 +368,8 @@ EvtScript N(healOneAlly) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(GetOwnerID, LVar0)
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0214)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_NONE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
     EVT_ADD(LVar2, 50)
@@ -386,9 +386,9 @@ EvtScript N(healOneAlly) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, LVarA, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_LRAW_214)
+        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_0214)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_25C)
+        EVT_CALL(PlaySoundAtActor, LVarA, SOUND_SRAW_16_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)

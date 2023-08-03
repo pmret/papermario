@@ -152,7 +152,7 @@ void star_update(EffectInstance* effect) {
             landing_dust_main(0, data->unk_04, data->unk_08 - 5.0f, data->unk_0C, 0.0f);
 
             if (!gGameStatusPtr->isBattle) {
-                sfx_play_sound_at_position(SOUND_PAIR_16, SOUND_SPACE_MODE_0, data->unk_04, data->unk_08, data->unk_0C);
+                sfx_play_sound_at_position(SOUND_SEQ_16, SOUND_SPACE_MODE_0, data->unk_04, data->unk_08, data->unk_0C);
             }
 
             data->unk_00 = 0;

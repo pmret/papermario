@@ -207,7 +207,7 @@ API_CALLABLE(N(UpdateChandelier)) {
         }
         // detect direction reversal
         if (nextSwingAngle * chandelier->swingAngle <= 0.0f) {
-            sfx_play_sound_at_player(SOUND_9D, SOUND_SPACE_MODE_0);
+            sfx_play_sound_at_player(SOUND_009D, SOUND_SPACE_MODE_0);
         }
         chandelier->swingAngle = nextSwingAngle;
     }
@@ -570,7 +570,7 @@ EvtScript N(EVS_LaunchFromCouch_Crash) = {
     EVT_CALL(PlayerJump, 51, -210, 87, 60)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_162, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0162, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Collapse)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_GetUp)

@@ -395,8 +395,8 @@ API_CALLABLE(N(UseAbility)) {
                 script->USE_STATE = SHELL_TOSS_STATE_KICK;
                 N(ShellTossKickFalling) = FALSE;
                 gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-                sfx_play_sound_at_npc(SOUND_283, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                sfx_play_sound_at_npc(SOUND_284, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_0283, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_0284, SOUND_SPACE_MODE_0, NPC_PARTNER);
             }
             break;
 
@@ -480,7 +480,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (N(check_for_item_collision)(kooper)) {
-                sfx_play_sound_at_npc(SOUND_286, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_0286, SOUND_SPACE_MODE_0, NPC_PARTNER);
                 fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                     sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
                 sfx_play_sound_at_npc(SOUND_NONE, SOUND_SPACE_MODE_0, NPC_PARTNER);
@@ -628,7 +628,7 @@ API_CALLABLE(N(UseAbility)) {
         kooper->jumpVel = 0.0f;
         kooper->collisionHeight = 24;
         kooper->curAnim = ANIM_WorldKooper_Walk;
-        sfx_stop_sound(SOUND_284);
+        sfx_stop_sound(SOUND_0284);
         disable_npc_blur(kooper);
 
         if (N(HasItem)) {
@@ -749,7 +749,7 @@ void N(pre_battle)(Npc* kooper) {
         kooper->flags &= ~NPC_FLAG_JUMPING;
         kooper->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
 
-        sfx_stop_sound(SOUND_284);
+        sfx_stop_sound(SOUND_0284);
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(kooper);
         disable_npc_blur(kooper);

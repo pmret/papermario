@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcAI_ShyGuy_03) = {
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim03)
     EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_02, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_02, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_02, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_ShyGuy_02, 400, 20, -300, 20)
     EVT_CALL(NpcFacePlayer, NPC_ShyGuy_02, 0)
     EVT_WAIT(10)

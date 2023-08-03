@@ -372,7 +372,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 1)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -634,7 +634,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DB)
     EVT_THREAD
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Magikoopa_White_Anim02)
         EVT_SET(LVar0, 200)
@@ -665,7 +665,7 @@ EvtScript N(wMagikoopa_WandStrike) = {
     EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Magikoopa_White_Anim03)
     EVT_WAIT(11)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DC)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DC)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -996,9 +996,9 @@ EvtScript N(healOne) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, LVar8, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_LRAW_214)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_0214)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_25C)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_SRAW_16_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1095,9 +1095,9 @@ EvtScript N(healAll) = {
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_LRAW_214)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_0214)
             EVT_WAIT(30)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_25C)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_SRAW_16_A)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(FreezeBattleState, TRUE)

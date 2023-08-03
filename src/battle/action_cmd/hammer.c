@@ -215,14 +215,14 @@ void N(update)(void) {
                 hud_element_set_script(actionCommandStatus->hudElements[4], &HES_TimingCharge3);
                 battleStatus->actionResult = 0;
                 if (actionCommandStatus->frameCounter == 0 && actionCommandStatus->playHammerSounds) {
-                    sfx_play_sound(SOUND_233);
+                    sfx_play_sound(SOUND_0233);
                 }
             } else if (actionCommandStatus->frameCounter < temp_f20 * 2) {
                 hud_element_set_script(actionCommandStatus->hudElements[3], &HES_TimingCharge2);
                 battleStatus->actionResult = 1;
                 if (actionCommandStatus->frameCounter == temp_f20) {
                     if (actionCommandStatus->playHammerSounds) {
-                        sfx_play_sound(SOUND_233);
+                        sfx_play_sound(SOUND_0233);
                     }
                 }
             } else if (actionCommandStatus->frameCounter < temp_f20 * 3.0f) {
@@ -230,7 +230,7 @@ void N(update)(void) {
                 battleStatus->actionResult = 2;
                 if (actionCommandStatus->frameCounter == temp_f20 * 2) {
                     if (actionCommandStatus->playHammerSounds) {
-                        sfx_play_sound(SOUND_233);
+                        sfx_play_sound(SOUND_0233);
                     }
                 }
             }
@@ -240,7 +240,7 @@ void N(update)(void) {
                 hud_element_set_script(actionCommandStatus->hudElements[1], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[5], &HES_StickTapNeutral);
                 if (actionCommandStatus->playHammerSounds) {
-                    sfx_play_sound(SOUND_234);
+                    sfx_play_sound(SOUND_0234);
                 }
                 if (actionCommandStatus->autoSucceed != 0 && actionCommandStatus->autoSucceed != 2) {
                     actionCommandStatus->autoSucceed = 2;

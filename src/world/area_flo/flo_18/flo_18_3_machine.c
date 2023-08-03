@@ -253,7 +253,7 @@ EvtScript N(EVS_DamagedLeftOnce) = {
     EVT_SETF(LVar5, EVT_FLOAT(3.0))
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o130, SOUND_1E6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o130, SOUND_01E6, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_LOOP(300)
         EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
@@ -296,7 +296,7 @@ EvtScript N(EVS_DamagedRightOnce) = {
     EVT_SETF(LVar5, EVT_FLOAT(-5.0))
     EVT_THREAD
         EVT_WAIT(12)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_1E7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o175, SOUND_01E7, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_LOOP(300)
         EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
@@ -342,7 +342,7 @@ EvtScript N(EVS_DamagedLeftTwice) = {
     EVT_SETF(LVar5, EVT_FLOAT(0.0))
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o174, SOUND_1E7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o174, SOUND_01E7, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_LOOP(300)
         EVT_ADDF(LVar5, EVT_FLOAT(0.5))
@@ -373,7 +373,7 @@ EvtScript N(EVS_DamagedRightTwice) = {
     EVT_SETF(LVar5, EVT_FLOAT(0.0))
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o127, SOUND_1E7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o127, SOUND_01E7, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_LOOP(300)
         EVT_ADDF(LVar5, EVT_FLOAT(0.5))
@@ -417,7 +417,7 @@ EvtScript N(EVS_BreakSmokestack) = {
     EVT_SETF(LVar5, EVT_FLOAT(3.0))
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o131, SOUND_1E6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o131, SOUND_01E6, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_LOOP(300)
         EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
@@ -455,7 +455,7 @@ EvtScript N(EVS_BreakAntenna) = {
     EVT_SETF(LVar5, EVT_FLOAT(5.0))
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_1E6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_01E6, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_LOOP(300)
         EVT_ADDF(LVar4, EVT_FLOAT(-0.5))
@@ -507,7 +507,7 @@ EvtScript N(EVS_DamageMachine) = {
     EVT_IF_LT(LVar0, -210)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_1E5)
+    EVT_CALL(PlaySound, SOUND_01E5)
     EVT_EXEC_WAIT(N(EVS_ShakeMachine))
     EVT_SET(LVar0, LVarA)
     EVT_IF_LT(GB_StoryProgress, STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS)
@@ -577,11 +577,11 @@ EvtScript N(EVS_DamageMachine) = {
                 EVT_USE_BUF(EVT_PTR(N(SmokeBurstPositions)))
                 EVT_LOOP(ARRAY_COUNT(N(SmokeBurstPositions)))
                     EVT_BUF_READ3(LVar0, LVar1, LVar2)
-                    EVT_CALL(PlaySoundAt, SOUND_190, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAt, SOUND_0190, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 6)
                     EVT_WAIT(2)
                     EVT_ADD(LVar1, 5)
-                    EVT_CALL(PlaySoundAt, SOUND_190, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAt, SOUND_0190, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 2, 15)
                     EVT_WAIT(LVar3)
                     EVT_ADD(LVar3, 1)
@@ -591,7 +591,7 @@ EvtScript N(EVS_DamageMachine) = {
                     EVT_USE_BUF(EVT_PTR(N(SmokeBurstPositions)))
                     EVT_LOOP(ARRAY_COUNT(N(SmokeBurstPositions)))
                         EVT_BUF_READ3(LVar0, LVar1, LVar2)
-                        EVT_CALL(PlaySoundAt, SOUND_190, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+                        EVT_CALL(PlaySoundAt, SOUND_0190, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
                         EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, 1, 25)
                         EVT_WAIT(LVar3)
                         EVT_ADD(LVar3, LVar4)
@@ -599,14 +599,14 @@ EvtScript N(EVS_DamageMachine) = {
                     EVT_END_LOOP
                 EVT_END_LOOP
             EVT_END_THREAD
-            EVT_CALL(PlaySoundAt, SOUND_1A0, SOUND_SPACE_MODE_0, 70, 40, 10)
+            EVT_CALL(PlaySoundAt, SOUND_01A0, SOUND_SPACE_MODE_0, 70, 40, 10)
             EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 70, 40, 10, EVT_FLOAT(3.0), 30)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAt, SOUND_1A0, SOUND_SPACE_MODE_0, 0, 30, 30)
+            EVT_CALL(PlaySoundAt, SOUND_01A0, SOUND_SPACE_MODE_0, 0, 30, 30)
             EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 0, 30, 30, EVT_FLOAT(4.0), 40)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
             EVT_EXEC_WAIT(N(EVS_BreakSmokestack))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_91 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_0091 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0)
             EVT_CALL(FadeOutMusic, 0, 1000)
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_WAIT(30)

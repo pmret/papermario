@@ -29,7 +29,7 @@ EvtScript N(FloatToPos) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(FallToGoal, ACTOR_SELF, 8)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_SET(LVar7, LVar4)
     EVT_ADD(LVar7, LVar4)
     EVT_ADD(LVar7, LVar0)
@@ -52,7 +52,7 @@ EvtScript N(FloatToPos) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.3))
     EVT_CALL(FallToGoal, ACTOR_SELF, 8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_SET(LVar7, LVar0)
     EVT_ADD(LVar7, LVar0)
     EVT_ADD(LVar7, LVar4)
@@ -75,7 +75,7 @@ EvtScript N(FloatToPos) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.3))
     EVT_CALL(FallToGoal, ACTOR_SELF, 8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, LVar3, -2, EASING_CUBIC_OUT)
@@ -211,7 +211,7 @@ ActorBlueprint NAMESPACE = {
 EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_CALL(N(StartRumbleWithParams), 80, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
@@ -224,7 +224,7 @@ EvtScript N(init) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(0.3))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 8, 0, EASING_LINEAR)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_CALL(N(StartRumbleWithParams), 80, 20)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar1)
@@ -407,7 +407,7 @@ EvtScript N(takeTurn) = {
     EVT_EXEC_WAIT(N(FloatToPos))
     EVT_THREAD
         EVT_WAIT(2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)
@@ -495,7 +495,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03E0)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
         EVT_SET(LFlag0, FALSE)
         EVT_LOOP(2)
@@ -563,13 +563,13 @@ EvtScript N(takeTurn) = {
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
         EVT_IF_NE(LVar3, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0214)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 10)
             EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)
             EVT_THREAD
                 EVT_WAIT(15)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
+                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_16_A)
                 EVT_CALL(N(SpawnDrainHealthContinueFX), LVar0, LVar1, LVar2, LVar3)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)

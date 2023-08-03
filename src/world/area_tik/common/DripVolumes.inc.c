@@ -151,7 +151,7 @@ EvtScript N(EVS_UpdateDripVolume) = {
         EVT_END_IF
         EVT_LABEL(10)
         EVT_CALL(EnableModel, ArrayVar(5), FALSE)
-        EVT_CALL(PlaySound, SOUND_3F6)
+        EVT_CALL(PlaySound, SOUND_03F6)
         EVT_EXEC_WAIT(N(EVS_UpdateDripSplash))
         EVT_GOTO(0)
     EVT_RETURN

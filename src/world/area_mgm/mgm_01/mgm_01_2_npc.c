@@ -143,7 +143,7 @@ void N(appendGfx_score_display) (void* renderData) {
             } else {
                 data->curScore++;
             }
-            sfx_play_sound_with_params(SOUND_LRAW_211, 0, 0x40, 0x32);
+            sfx_play_sound_with_params(SOUND_0211, 0, 0x40, 0x32);
 
         }
         draw_number(data->curScore, data->scoreWindowPosX + 63, 32, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
@@ -413,7 +413,7 @@ API_CALLABLE(N(GiveCoinReward)) {
     data->curScore -= increment;
     add_coins(increment);
     data->targetScore = data->curScore;
-    sfx_play_sound(SOUND_LRAW_211);
+    sfx_play_sound(SOUND_0211);
 
     if (data->curScore > 0) {
         return ApiStatus_BLOCK;
@@ -477,7 +477,7 @@ API_CALLABLE(N(DestroyBlockEntities)) {
         }
     }
 
-    sfx_play_sound_with_params(SOUND_283, 0x50, 0, 0);
+    sfx_play_sound_with_params(SOUND_0283, 0x50, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -573,7 +573,7 @@ API_CALLABLE(N(CreateBlockEntities)) {
             N(BlockPosY)[curBlockIdx] + 13,
             N(BlockPosZ)[curBlockIdx] + 5,
             23.0f);
-        sfx_play_sound(SOUND_LRAW_213);
+        sfx_play_sound(SOUND_0213);
         script->functionTemp[0] = 3;
         script->functionTemp[1]++;
     }
@@ -593,7 +593,7 @@ API_CALLABLE(N(TakeCoinCost)) {
         script->functionTemp[0] = 0;
     }
     add_coins(-1);
-    sfx_play_sound(SOUND_LRAW_211);
+    sfx_play_sound(SOUND_0211);
 
     script->functionTemp[0]++;
 
@@ -814,7 +814,7 @@ EvtScript N(EVS_ManageMinigame) = {
                 EVT_CASE_EQ(8)
                     EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0037)
                     EVT_CALL(N(DoubleScore))
-                    EVT_CALL(PlaySoundWithVolume, SOUND_3FC, 0)
+                    EVT_CALL(PlaySoundWithVolume, SOUND_03FC, 0)
                     EVT_WAIT(30)
                     EVT_CALL(N(UpdateRecords))
                     EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0038)

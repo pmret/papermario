@@ -63,7 +63,7 @@ s32 N(PedestalKeyList)[] = {
 EvtScript N(EVS_Pedestal_Sink) = {
     EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, 0, 0, 0, 20, 10, 0, 60)
     EVT_PLAY_EFFECT(EFFECT_DUST, 2, 0, 0, 0, 60)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_iwa, SOUND_5F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_iwa, SOUND_005F, SOUND_SPACE_MODE_0)
     EVT_SET(LVar2, 0)
     EVT_CALL(MakeLerp, 0, -50, 50, EASING_LINEAR)
     EVT_LOOP(0)
@@ -553,7 +553,7 @@ EvtScript N(EVS_Steps_FinishRising) = {
 };
 
 EvtScript N(EVS_Steps_Unfold) = {
-    EVT_CALL(PlaySoundAt, SOUND_5E, SOUND_SPACE_MODE_0, 0, 39, -80)
+    EVT_CALL(PlaySoundAt, SOUND_005E, SOUND_SPACE_MODE_0, 0, 39, -80)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.2))
     EVT_END_THREAD
@@ -677,7 +677,7 @@ EvtScript N(EVS_SetupRuins) = {
 };
 
 EvtScript N(EVS_Ruins_Arise_Continued) = {
-    EVT_CALL(PlaySound, SOUND_5C)
+    EVT_CALL(PlaySound, SOUND_005C)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802CF56C, 1)
     EVT_CALL(FacePlayerTowardPoint, 0, 0, 0)

@@ -955,7 +955,7 @@ EvtScript N(AttackIcyBreath) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035D)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -980,7 +980,7 @@ EvtScript N(AttackIcyBreath) = {
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 30, EVT_FLOAT(0.3))
             EVT_END_THREAD
             EVT_WAIT(30)
-            EVT_CALL(StopSound, SOUND_35D)
+            EVT_CALL(StopSound, SOUND_035D)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -1009,7 +1009,7 @@ EvtScript N(AttackIcyBreath) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 50, EVT_FLOAT(0.3))
     EVT_END_THREAD
     EVT_WAIT(60)
-    EVT_CALL(StopSound, SOUND_35D)
+    EVT_CALL(StopSound, SOUND_035D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim15)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -1052,7 +1052,7 @@ EvtScript N(AttackIceBolt) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1284,7 +1284,7 @@ EvtScript N(MakeIllusions) = {
     EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim00)
     EVT_CALL(SetAnimation, LVar0, 1, ANIM_CrystalKing_Anim09)
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DF)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
     EVT_CALL(EnableActorBlur, LVar0, IDLE_SCRIPT_DISABLE)
@@ -1505,7 +1505,7 @@ EvtScript N(SummonCrystalBits) = {
         EVT_CALL(SetPartScale, LVar0, 1, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1F)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2DE)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LVar0)
     EVT_SETF(LVar1, EVT_FLOAT(42.0))
     EVT_SETF(LVar2, EVT_FLOAT(85.0))
@@ -1605,7 +1605,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim1C)
     EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035D)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1656,7 +1656,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
                 EVT_CALL(func_80218280_6609D0, LVarF)
             EVT_END_IF
             EVT_WAIT(30)
-            EVT_CALL(StopSound, SOUND_35D)
+            EVT_CALL(StopSound, SOUND_035D)
             EVT_IF_EQ(LVar5, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -1715,7 +1715,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
         EVT_CALL(func_80218280_6609D0, LVarF)
     EVT_END_IF
     EVT_WAIT(60)
-    EVT_CALL(StopSound, SOUND_35D)
+    EVT_CALL(StopSound, SOUND_035D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim15)
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim15)
     EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim15)
@@ -1769,7 +1769,7 @@ EvtScript N(MoveBitToTarget) = {
 };
 
 EvtScript N(RemoveCrystalBit) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03D9)
     EVT_SET(LVarA, LVar0)
     EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, FALSE)
@@ -1803,7 +1803,7 @@ EvtScript N(RemoveCrystalBit) = {
 };
 
 EvtScript N(AttackWithCrystalBit) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03D9)
     EVT_SET(LVarA, LVar0)
     EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, FALSE)
@@ -1856,7 +1856,7 @@ EvtScript N(NormalAttack) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 30, EVT_FLOAT(0.2))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3AF)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03AF)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LVar0)
     EVT_CALL(ActorExists, LVar0, LVar1)
     EVT_IF_EQ(LVar1, TRUE)
@@ -2012,24 +2012,24 @@ EvtScript N(Heal) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0214)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_16_A)
     EVT_END_THREAD
     EVT_IF_EQ(LFlag0, TRUE)
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_LRAW_214)
+            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_0214)
             EVT_WAIT(30)
-            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_25C)
+            EVT_CALL(PlaySoundAtActor, LVarA, SOUND_SRAW_16_A)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVarB, SOUND_LRAW_214)
+            EVT_CALL(PlaySoundAtActor, LVarB, SOUND_0214)
             EVT_WAIT(30)
-            EVT_CALL(PlaySoundAtActor, LVarB, SOUND_25C)
+            EVT_CALL(PlaySoundAtActor, LVarB, SOUND_SRAW_16_A)
         EVT_END_THREAD
     EVT_END_IF
     EVT_IF_EQ(LFlag0, FALSE)

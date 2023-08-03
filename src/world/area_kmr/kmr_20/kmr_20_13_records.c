@@ -142,7 +142,7 @@ void N(appendGfx_records)(void* data) {
             records->unk_0A = 0;
             records->lerpTime = 0;
             records->state = RECORDS_STATE_FADING_IN;
-            snd_start_sound(SOUND_LRAW_21C, 0, 0);
+            snd_start_sound(SOUND_021C, 0, 0);
             // fallthrough
         case RECORDS_STATE_FADING_IN:
             records->lerpTime++;

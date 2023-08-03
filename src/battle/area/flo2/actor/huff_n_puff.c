@@ -807,7 +807,7 @@ EvtScript N(OnDeath) = {
             EVT_KILL_THREAD(LVar0)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT_SNAKING_STATIC), LVar0)
             EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(StopSound, SOUND_35C)
+            EVT_CALL(StopSound, SOUND_035C)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim08)
@@ -909,7 +909,7 @@ EvtScript N(OnBurnDeath) = {
             EVT_KILL_THREAD(LVar0)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT_SNAKING_STATIC), LVar0)
             EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(StopSound, SOUND_35C)
+            EVT_CALL(StopSound, SOUND_035C)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim27)
@@ -1522,7 +1522,7 @@ EvtScript N(attackBodySlam) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 20, 0)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03E7)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1780,7 +1780,7 @@ EvtScript N(normalAction) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim1B)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_HuffNPuff_Anim1C)
@@ -1863,7 +1863,7 @@ EvtScript N(normalAction) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(RemoveEffect, LVar8)
-    EVT_CALL(StopSound, SOUND_3B0)
+    EVT_CALL(StopSound, SOUND_03B0)
     EVT_CALL(StopSound, SOUND_BIG_POWER_UP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim18)
@@ -1871,7 +1871,7 @@ EvtScript N(normalAction) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0214)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SCALE_X), LVar3)
@@ -1938,7 +1938,7 @@ EvtScript N(attackWindBreath) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B0)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
@@ -1951,7 +1951,7 @@ EvtScript N(attackWindBreath) = {
     EVT_CALL(SetBattleCamOffsetZ, 20)
     EVT_CALL(MoveBattleCamOver, 180)
     EVT_WAIT(90)
-    EVT_CALL(StopSound, SOUND_3B0)
+    EVT_CALL(StopSound, SOUND_03B0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_HuffNPuff_Anim1E)
@@ -1959,7 +1959,7 @@ EvtScript N(attackWindBreath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim21)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_HuffNPuff_Anim22)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035D)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -2025,7 +2025,7 @@ EvtScript N(attackWindBreath) = {
                 EVT_WAIT(LVar0)
             EVT_END_LOOP
             EVT_WAIT(20)
-            EVT_CALL(StopSound, SOUND_35D)
+            EVT_CALL(StopSound, SOUND_035D)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -2178,7 +2178,7 @@ EvtScript N(attackWindBreath) = {
         EVT_WAIT(110)
         EVT_SET(LVar1, 0)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_35D)
+    EVT_CALL(StopSound, SOUND_035D)
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -2228,7 +2228,7 @@ EvtScript N(electricCharge) = {
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_2, EVT_PTR(N(IdleAnimations_charged2)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_3, EVT_PTR(N(IdleAnimations_charged3)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035C)
     EVT_CALL(N(StartRumbleWithParams), 70, 120)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 60, EVT_FLOAT(0.3))
@@ -2295,8 +2295,8 @@ EvtScript N(attackGroundLightning) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(StopSound, SOUND_35C)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D3)
+    EVT_CALL(StopSound, SOUND_035C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03D3)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 10)
     EVT_SET(LVar3, LVar0)
@@ -2372,7 +2372,7 @@ EvtScript N(electicCharge_copy) = {
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_2, EVT_PTR(N(IdleAnimations_charged2)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_3, EVT_PTR(N(IdleAnimations_charged3)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035C)
     EVT_CALL(N(StartRumbleWithParams), 70, 120)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 60, EVT_FLOAT(0.3))
@@ -2459,8 +2459,8 @@ EvtScript N(attackDirectLightning) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(StopSound, SOUND_35C)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35B)
+    EVT_CALL(StopSound, SOUND_035C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035B)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -2603,7 +2603,7 @@ EvtScript N(attackGroundSlam) = {
     EVT_CALL(SetBattleCamOffsetZ, 5)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B3)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim1B)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_HuffNPuff_Anim1C)
@@ -2653,9 +2653,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(4), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(4), LVarA, LVarB, LVarF)
@@ -2682,9 +2682,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(9), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(9), LVarA, LVarB, LVarF)
@@ -2711,9 +2711,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(3), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(3), LVarA, LVarB, LVarF)
@@ -2740,9 +2740,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(5), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(5), LVarA, LVarB, LVarF)
@@ -2769,9 +2769,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(1), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(1), LVarA, LVarB, LVarF)
@@ -2798,9 +2798,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(0), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(0), LVarA, LVarB, LVarF)
@@ -2827,9 +2827,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(8), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(8), LVarA, LVarB, LVarF)
@@ -2856,9 +2856,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(2), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(2), LVarA, LVarB, LVarF)
@@ -2885,9 +2885,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(7), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(7), LVarA, LVarB, LVarF)
@@ -2914,9 +2914,9 @@ EvtScript N(attackGroundSlam) = {
         EVT_THREAD
             EVT_MOD(LVar9, 2)
             EVT_IF_EQ(LVar9, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(GetActorPos, ArrayVar(6), LVarD, LVarE, LVarF)
             EVT_CALL(SetGoalPos, ArrayVar(6), LVarA, LVarB, LVarF)
@@ -3613,9 +3613,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(4))
                     EVT_CALL(FlyToGoal, ArrayVar(4), 20, -10, EASING_SIN_OUT)
@@ -3627,9 +3627,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(9))
                     EVT_CALL(FlyToGoal, ArrayVar(9), 20, -10, EASING_SIN_OUT)
@@ -3641,9 +3641,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(3))
                     EVT_CALL(FlyToGoal, ArrayVar(3), 20, -10, EASING_SIN_OUT)
@@ -3655,9 +3655,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(5))
                     EVT_CALL(FlyToGoal, ArrayVar(5), 20, -10, EASING_SIN_OUT)
@@ -3669,9 +3669,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(1))
                     EVT_CALL(FlyToGoal, ArrayVar(1), 20, -10, EASING_SIN_OUT)
@@ -3683,9 +3683,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(0))
                     EVT_CALL(FlyToGoal, ArrayVar(0), 20, -10, EASING_SIN_OUT)
@@ -3697,9 +3697,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(8))
                     EVT_CALL(FlyToGoal, ArrayVar(8), 20, -10, EASING_SIN_OUT)
@@ -3711,9 +3711,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(2))
                     EVT_CALL(FlyToGoal, ArrayVar(2), 20, -10, EASING_SIN_OUT)
@@ -3725,9 +3725,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(7))
                     EVT_CALL(FlyToGoal, ArrayVar(7), 20, -10, EASING_SIN_OUT)
@@ -3739,9 +3739,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(6))
                     EVT_CALL(FlyToGoal, ArrayVar(6), 20, -10, EASING_SIN_OUT)
@@ -3804,9 +3804,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(4))
                     EVT_CALL(FlyToGoal, ArrayVar(4), 20, -10, EASING_SIN_OUT)
@@ -3818,9 +3818,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(9))
                     EVT_CALL(FlyToGoal, ArrayVar(9), 20, -10, EASING_SIN_OUT)
@@ -3832,9 +3832,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(3))
                     EVT_CALL(FlyToGoal, ArrayVar(3), 20, -10, EASING_SIN_OUT)
@@ -3846,9 +3846,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(5))
                     EVT_CALL(FlyToGoal, ArrayVar(5), 20, -10, EASING_SIN_OUT)
@@ -3860,9 +3860,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(1))
                     EVT_CALL(FlyToGoal, ArrayVar(1), 20, -10, EASING_SIN_OUT)
@@ -3874,9 +3874,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(0))
                     EVT_CALL(FlyToGoal, ArrayVar(0), 20, -10, EASING_SIN_OUT)
@@ -3888,9 +3888,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(8))
                     EVT_CALL(FlyToGoal, ArrayVar(8), 20, -10, EASING_SIN_OUT)
@@ -3902,9 +3902,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(2))
                     EVT_CALL(FlyToGoal, ArrayVar(2), 20, -10, EASING_SIN_OUT)
@@ -3916,9 +3916,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(7))
                     EVT_CALL(FlyToGoal, ArrayVar(7), 20, -10, EASING_SIN_OUT)
@@ -3930,9 +3930,9 @@ EvtScript N(attackGroundSlam) = {
                 EVT_THREAD
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(6))
                     EVT_CALL(FlyToGoal, ArrayVar(6), 20, -10, EASING_SIN_OUT)
@@ -3969,7 +3969,7 @@ EvtScript N(tuffPuffMoveToPlayer) = {
     EVT_CALL(N(Atan2), LVarE, LVar0, LVar2, LVar3, LVar5)
     EVT_SET(LVarF, 0)
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3DB)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03DB)
         EVT_SET(LVarF, 0)
         EVT_SET(LVarC, LVarB)
         EVT_ADD(LVarC, LVarB)
@@ -4172,9 +4172,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(4), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(4), 30, -10, EASING_SIN_OUT)
@@ -4206,9 +4206,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(9), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(9), 30, -10, EASING_SIN_OUT)
@@ -4240,9 +4240,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(3), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(3), 30, -10, EASING_SIN_OUT)
@@ -4274,9 +4274,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(5), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(5), 30, -10, EASING_SIN_OUT)
@@ -4308,9 +4308,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(1), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(1), 30, -10, EASING_SIN_OUT)
@@ -4342,9 +4342,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(0), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(0), 30, -10, EASING_SIN_OUT)
@@ -4376,9 +4376,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(8), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(8), 30, -10, EASING_SIN_OUT)
@@ -4410,9 +4410,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(2), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(2), 30, -10, EASING_SIN_OUT)
@@ -4444,9 +4444,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(7), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(7), 30, -10, EASING_SIN_OUT)
@@ -4478,9 +4478,9 @@ EvtScript N(attackTuffPuffs) = {
             EVT_ADD(LVar2, LVar4)
             EVT_MOD(LVarA, 2)
             EVT_IF_EQ(LVarA, 0)
-                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D5)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D5)
             EVT_ELSE
-                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D6)
+                EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D6)
             EVT_END_IF
             EVT_CALL(SetGoalPos, ArrayVar(6), LVar1, LVar2, LVar3)
             EVT_CALL(FlyToGoal, ArrayVar(6), 30, -10, EASING_SIN_OUT)
@@ -4825,9 +4825,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(4), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(4))
                     EVT_CALL(FlyToGoal, ArrayVar(4), 30, 10, EASING_SIN_OUT)
@@ -4854,9 +4854,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(9), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(9))
                     EVT_CALL(FlyToGoal, ArrayVar(9), 30, 10, EASING_SIN_OUT)
@@ -4883,9 +4883,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(3), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(3))
                     EVT_CALL(FlyToGoal, ArrayVar(3), 30, 10, EASING_SIN_OUT)
@@ -4912,9 +4912,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(5), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(5))
                     EVT_CALL(FlyToGoal, ArrayVar(5), 30, 10, EASING_SIN_OUT)
@@ -4941,9 +4941,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(1), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(1))
                     EVT_CALL(FlyToGoal, ArrayVar(1), 30, 10, EASING_SIN_OUT)
@@ -4970,9 +4970,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(0), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(0))
                     EVT_CALL(FlyToGoal, ArrayVar(0), 30, 10, EASING_SIN_OUT)
@@ -4999,9 +4999,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(8), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(8))
                     EVT_CALL(FlyToGoal, ArrayVar(8), 30, 10, EASING_SIN_OUT)
@@ -5028,9 +5028,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(2), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(2))
                     EVT_CALL(FlyToGoal, ArrayVar(2), 30, 10, EASING_SIN_OUT)
@@ -5057,9 +5057,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(7), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(7))
                     EVT_CALL(FlyToGoal, ArrayVar(7), 30, 10, EASING_SIN_OUT)
@@ -5086,9 +5086,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(6), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(6))
                     EVT_CALL(FlyToGoal, ArrayVar(6), 30, 10, EASING_SIN_OUT)
@@ -5428,9 +5428,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(4), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(4), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(4))
                     EVT_CALL(FlyToGoal, ArrayVar(4), 30, 10, EASING_SIN_OUT)
@@ -5457,9 +5457,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(9), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(9), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(9))
                     EVT_CALL(FlyToGoal, ArrayVar(9), 30, 10, EASING_SIN_OUT)
@@ -5486,9 +5486,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(3), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(3), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(3))
                     EVT_CALL(FlyToGoal, ArrayVar(3), 30, 10, EASING_SIN_OUT)
@@ -5515,9 +5515,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(5), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(5), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(5))
                     EVT_CALL(FlyToGoal, ArrayVar(5), 30, 10, EASING_SIN_OUT)
@@ -5544,9 +5544,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(1), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(1), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(1))
                     EVT_CALL(FlyToGoal, ArrayVar(1), 30, 10, EASING_SIN_OUT)
@@ -5573,9 +5573,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(0), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(0), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(0))
                     EVT_CALL(FlyToGoal, ArrayVar(0), 30, 10, EASING_SIN_OUT)
@@ -5602,9 +5602,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(8), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(8), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(8))
                     EVT_CALL(FlyToGoal, ArrayVar(8), 30, 10, EASING_SIN_OUT)
@@ -5631,9 +5631,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(2), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(2), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(2))
                     EVT_CALL(FlyToGoal, ArrayVar(2), 30, 10, EASING_SIN_OUT)
@@ -5660,9 +5660,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(7), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(7), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(7))
                     EVT_CALL(FlyToGoal, ArrayVar(7), 30, 10, EASING_SIN_OUT)
@@ -5689,9 +5689,9 @@ EvtScript N(attackTuffPuffs) = {
                     EVT_CALL(SetActorVar, ArrayVar(6), 2, 0)
                     EVT_MOD(LVarA, 2)
                     EVT_IF_EQ(LVarA, 0)
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D5)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D5)
                     EVT_ELSE
-                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_3D6)
+                        EVT_CALL(PlaySoundAtActor, ArrayVar(6), SOUND_03D6)
                     EVT_END_IF
                     EVT_CALL(SetGoalToHome, ArrayVar(6))
                     EVT_CALL(FlyToGoal, ArrayVar(6), 30, 10, EASING_SIN_OUT)

@@ -70,19 +70,19 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     }
 
     if (shouldWakeUp) {
-        ai_enemy_play_sound(npc, SOUND_PAIR_0E, 0);
+        ai_enemy_play_sound(npc, SOUND_SEQ_0E, 0);
         npc->curAnim = enemy->animList[11];
         npc->duration = 10;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
+        ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
         script->AI_TEMP_STATE = AI_STATE_NAPPING_CLUBBA_WAKE_UP;
     }
 
     npc->duration++;
     if (npc->duration == 27) {
-        ai_enemy_play_sound(npc, SOUND_PAIR_0C, 0);
+        ai_enemy_play_sound(npc, SOUND_SEQ_0C, 0);
     } else if (npc->duration == 57) {
-        ai_enemy_play_sound(npc, SOUND_PAIR_0D, 0);
+        ai_enemy_play_sound(npc, SOUND_SEQ_0D, 0);
     } else if (npc->duration == 59) {
         npc->curAnim = enemy->animList[12];
     } else if (npc->duration == 60) {

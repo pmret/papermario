@@ -32,7 +32,7 @@ API_CALLABLE(N(func_802A1354_71B4F4)) {
     s32 scaleX, scaleY;
 
     if (actor != NULL) {
-        sfx_play_sound(SOUND_366);
+        sfx_play_sound(SOUND_0366);
 
         posX = actor->curPos.x;
         posY = actor->curPos.y + (actor->size.y / 10);
@@ -64,7 +64,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlaySound, SOUND_365)
+    EVT_CALL(PlaySound, SOUND_0365)
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

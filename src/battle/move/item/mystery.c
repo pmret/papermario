@@ -239,9 +239,9 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(220)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_3F3)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_03F3)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_368)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0368)
     EVT_CALL(N(func_802A13E4_72C994))
     EVT_WAIT(2)
     EVT_IF_NE(LVar0, 133)

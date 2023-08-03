@@ -1127,11 +1127,11 @@ EvtScript N(attack) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
         EVT_CASE_LT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EB)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EC)
     EVT_END_SWITCH
     EVT_SET(LVar0, 2)
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim03)
@@ -1202,12 +1202,12 @@ EvtScript N(attack) = {
             EVT_SUB(LVar0, LVar1)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
                 EVT_CASE_LT(5)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EB)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EC)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EC)
             EVT_END_SWITCH
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -1226,7 +1226,7 @@ EvtScript N(attack) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
     EVT_SUB(LVarE, LVar0)
     EVT_SET(LVarD, LVarE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_3AD)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_03AD)
     EVT_LOOP(LVarD)
         EVT_IF_GT(LVarE, 1)
             EVT_SET(LVar0, BS_FLAGS1_40)
@@ -1252,7 +1252,7 @@ EvtScript N(attack) = {
         EVT_END_IF
         EVT_WAIT(10)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LRAW_3AD)
+    EVT_CALL(StopSound, SOUND_LRAW_03AD)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(20)
@@ -1261,12 +1261,12 @@ EvtScript N(attack) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EB)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EC)
     EVT_END_SWITCH
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim04)
     EVT_EXEC_WAIT(N(move_squad_to_home))
@@ -1327,7 +1327,7 @@ EvtScript N(flee) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHY_GUY_SCREAMS3)
@@ -1339,7 +1339,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, 240, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_01E2)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(2.5))
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
     EVT_IF_LT(LVar0, 14)
@@ -1348,19 +1348,19 @@ EvtScript N(flee) = {
         EVT_CALL(ActorSpeak, MSG_CH4_0068, ACTOR_ENEMY0, PRT_MAIN, -1, -1)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_01E2)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
         EVT_WAIT(12)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_1E2)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_01E2)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
     EVT_END_THREAD
     EVT_CALL(EndActorSpeech, ACTOR_ENEMY0, PRT_MAIN, -1, -1)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_WAIT(40)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_173)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0173)
         EVT_WAIT(20)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_174)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0174)
     EVT_END_THREAD
     EVT_SET(LVar0, 2)
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim08)

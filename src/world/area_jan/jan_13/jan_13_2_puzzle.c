@@ -40,7 +40,7 @@ API_CALLABLE(N(AdjustEnvSoundPosition)) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
-        sfx_adjust_env_sound_pos(SOUND_LRAW_4E, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_004E, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     }
     return ApiStatus_DONE2;
 }
@@ -254,7 +254,7 @@ EvtScript N(EVS_ManageGeyserSounds) = {
 };
 
 EvtScript N(EVS_BoulderTremble) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o33, SOUND_191, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o33, SOUND_0191, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.5))
     EVT_RETURN
     EVT_END
@@ -340,7 +340,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 EVT_WAIT(8)
             EVT_END_LOOP
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_0262, 0)
                 EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
                 EVT_CALL(GetModelCenter, MODEL_o33)
                 EVT_CALL(FacePlayerTowardPoint, LVar0, LVar2, 4)

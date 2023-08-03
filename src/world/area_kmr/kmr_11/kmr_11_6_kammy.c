@@ -48,7 +48,7 @@ EvtScript N(EVS_Scene_KammyWatching) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(24 * DT)
-            EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_LRAW_295, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_LRAW_0295, SOUND_SPACE_MODE_0)
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD

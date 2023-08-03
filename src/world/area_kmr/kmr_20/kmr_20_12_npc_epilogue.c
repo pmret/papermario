@@ -78,7 +78,7 @@ EvtScript N(EVS_Luigi_PlayWalkSounds_Epilogue) = {
     EVT_END_SWITCH
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_PAIR_19, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_SEQ_19, SOUND_SPACE_MODE_0)
             EVT_WAIT(LVar1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -220,11 +220,11 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(35)
-    EVT_CALL(PlaySoundAt, SOUND_E0, SOUND_SPACE_MODE_0, 430, 0, -185)
+    EVT_CALL(PlaySoundAt, SOUND_00E0, SOUND_SPACE_MODE_0, 430, 0, -185)
     EVT_WAIT(25)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_263, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_263, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_0263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Luigi_1, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(30)
     EVT_CALL(SpeakToPlayer, NPC_Luigi_1, ANIM_Luigi_TalkSit, ANIM_Luigi_IdleSit, 0, MSG_Outro_0021)

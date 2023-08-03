@@ -296,8 +296,8 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_LRAW_36D | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(func_802D62E4, SOUND_LRAW_36D)
+        EVT_CALL(PlaySound, SOUND_LRAW_036D | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(func_802D62E4, SOUND_LRAW_036D)
     EVT_ELSE
         EVT_SET(LVar0, LVar9)
         EVT_SUB(LVar0, 0)
@@ -341,7 +341,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
                     EVT_WAIT(50)
                     EVT_LOOP(2)
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_3E4, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_03E4, SOUND_SPACE_MODE_0)
                         EVT_WAIT(7)
                     EVT_END_LOOP
                     EVT_WAIT(6)
@@ -351,9 +351,9 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                     EVT_CALL(InterpNpcYaw, LVar9, 90, 0)
                     EVT_WAIT(20)
                     EVT_THREAD
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_3A2, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_03A2, SOUND_SPACE_MODE_0)
                         EVT_WAIT(45)
-                        EVT_CALL(StopSound, SOUND_3A2)
+                        EVT_CALL(StopSound, SOUND_03A2)
                         EVT_CALL(SetNpcVar, NPC_ShyGuy_09, 0, MANAGER_ARMY_FLEE)
                     EVT_END_THREAD
             EVT_END_SWITCH

@@ -203,7 +203,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     EVT_CALL(FadeOutMusic, 0, 1000)
     EVT_CALL(SetSelfVar, 2, 1)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_42)
+        EVT_CALL(PlaySound, SOUND_0042)
         EVT_SET(LVar0, 0)
         EVT_LOOP(150)
             EVT_ADD(LVar0, 1)

@@ -109,7 +109,7 @@ void N(animate_and_draw_record)(void* renderData) {
         case RECORD_START_SHOW:
             data->stateTimer = 0;
             data->state = RECORD_STATE_FADE_IN;
-            snd_start_sound(SOUND_LRAW_21C, 0, 0);
+            snd_start_sound(SOUND_021C, 0, 0);
             // fallthrough
         case RECORD_STATE_FADE_IN:
             data->stateTimer++;

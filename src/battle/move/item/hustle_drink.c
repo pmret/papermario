@@ -56,7 +56,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0369)
     EVT_THREAD
         EVT_LOOP(2)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -106,7 +106,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_LOOP(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0369)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
         EVT_WAIT(4)

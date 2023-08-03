@@ -51,7 +51,7 @@ EvtScript N(EVS_UpdateDirectionArrow) = {
         EVT_END_IF
         EVT_IF_NE(LVar4, -1)
             EVT_IF_NE(LVar3, LVar4)
-                EVT_CALL(PlaySound, SOUND_1F9)
+                EVT_CALL(PlaySound, SOUND_01F9)
             EVT_END_IF
         EVT_END_IF
         EVT_SET(LVar4, LVar3)
@@ -63,7 +63,7 @@ EvtScript N(EVS_UpdateDirectionArrow) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(11)
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_1FA)
+        EVT_CALL(PlaySound, SOUND_01FA)
         EVT_IF_EQ(AF_OMO_UsingRightSwitch, FALSE)
             EVT_SET(MV_ArrowTexUOffset, 0x4000)
         EVT_ELSE

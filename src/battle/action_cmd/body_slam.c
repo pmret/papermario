@@ -132,7 +132,7 @@ void N(update)(void) {
                 hud_element_set_script(actionCommandStatus->hudElements[2], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
                 if (!actionCommandStatus->isBarFilled) {
-                    sfx_play_sound(SOUND_234);
+                    sfx_play_sound(SOUND_0234);
                     actionCommandStatus->isBarFilled = TRUE;
                 }
             }

@@ -43,7 +43,7 @@ EvtScript N(EVS_CloseCrossingGates) = {
 };
 
 EvtScript N(EVS_SpawnSmoke) = {
-    EVT_CALL(PlaySoundAtModel, MODEL_07, SOUND_PAIR_1A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_07, SOUND_SEQ_1A, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, MV_TrainMoveDist)
     EVT_IF_EQ(MF_TrainReverseDir, FALSE)
         EVT_ADDF(LVar0, -310)
@@ -409,7 +409,7 @@ EvtScript N(EVS_ArriveFromMtRugged) = {
     EVT_LABEL(1)
     EVT_SET(MV_TrainMoveDist, -90)
     EVT_SET(MV_TrainMoveSpeed, 0)
-    EVT_CALL(PlaySound, SOUND_1FD)
+    EVT_CALL(PlaySound, SOUND_01FD)
     EVT_KILL_THREAD(LVarE)
     EVT_SET(MF_TrainMoving, FALSE)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
@@ -543,7 +543,7 @@ EvtScript N(EVS_DepartForMtRugged) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_TrainToad_02, ANIM_TrainToad_Talk, ANIM_TrainToad_Still, 5, MSG_MAC_Station_0009)
-    EVT_CALL(PlaySound, SOUND_82)
+    EVT_CALL(PlaySound, SOUND_0082)
     EVT_THREAD
         EVT_LOOP(1000)
             EVT_ADDF(MV_TrainMoveSpeed, EVT_FLOAT(0.031))

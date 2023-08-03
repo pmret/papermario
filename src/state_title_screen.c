@@ -219,7 +219,7 @@ void state_step_title_screen(void) {
             if (pressedButtons & (BUTTON_A | BUTTON_START)) {
                 gGameStatusPtr->introState = INTRO_STATE_4;
                 *D_800779C0 = 5;
-                sfx_play_sound(SOUND_D5);
+                sfx_play_sound(SOUND_00D5);
                 bgm_set_song(0, SONG_FILE_SELECT, 0, 500, 8);
                 return;
             }

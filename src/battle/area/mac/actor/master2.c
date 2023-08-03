@@ -279,7 +279,7 @@ EvtScript N(singleStrike2) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 5, FALSE)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 8, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
@@ -314,7 +314,7 @@ EvtScript N(singleStrike2) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedMidair)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B4)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedLand)
             EVT_WAIT(20)
         EVT_END_CASE_GROUP
@@ -345,7 +345,7 @@ EvtScript N(doubleStrike2) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B9)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B9)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -386,7 +386,7 @@ EvtScript N(doubleStrike2) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_10)
@@ -407,7 +407,7 @@ EvtScript N(doubleStrike2) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
     EVT_END_THREAD
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3ED)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -444,7 +444,7 @@ EvtScript N(doubleStrike2) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedMidair)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3B4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B4)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedLand)
             EVT_WAIT(20)
         EVT_END_CASE_GROUP

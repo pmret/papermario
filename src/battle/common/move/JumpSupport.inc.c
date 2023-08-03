@@ -261,7 +261,7 @@ EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_CHILD_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_162)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_GetUp)
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)

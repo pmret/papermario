@@ -217,7 +217,7 @@ EvtScript N(EVS_UpdateActiveBlock1) = {
     EVT_SET(MF_Block1_Active, FALSE)
     EVT_SET(MV_SlotWheel1_Angle, LVar4)
     EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_h1, SOUND_3F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_h1, SOUND_03F3, SOUND_SPACE_MODE_0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -298,7 +298,7 @@ EvtScript N(EVS_UpdateActiveBlock2) = {
     EVT_SET(MF_Block2_Active, FALSE)
     EVT_SET(MV_SlotWheel2_Angle, LVar4)
     EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_h2, SOUND_3F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_h2, SOUND_03F3, SOUND_SPACE_MODE_0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -379,7 +379,7 @@ EvtScript N(EVS_UpdateActiveBlock3) = {
     EVT_SET(MF_Block3_Active, FALSE)
     EVT_SET(MV_SlotWheel3_Angle, LVar4)
     EVT_IF_EQ(AB_OMO09_IsPlayerNearSlotMachine, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_h3, SOUND_3F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_h3, SOUND_03F3, SOUND_SPACE_MODE_0)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -604,7 +604,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
             EVT_IF_NE(LVarA, SLOT_MATCH_NONE)
                 // partial match after two blocks hit
                 EVT_SET(MF_AnimateSlotLights, TRUE)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_LRAW_388 | SOUND_ID_TRIGGER_CHANGE_VOLUME, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_o881, SOUND_LRAW_0388 | SOUND_ID_TRIGGER_CHANGE_VOLUME, SOUND_SPACE_MODE_0)
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT(1)

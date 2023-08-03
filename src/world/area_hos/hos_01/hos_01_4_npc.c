@@ -78,7 +78,7 @@ EvtScript N(EVS_Scene_StarSpiritsPlea) = {
     EVT_CALL(SetNpcJumpscale, NPC_Eldstar, 0)
     EVT_CALL(NpcJump0, NPC_Eldstar, 21, 260, -277, 30 * DT)
     EVT_CALL(EnableModel, MODEL_1, TRUE)
-    EVT_CALL(PlaySound, SOUND_64)
+    EVT_CALL(PlaySound, SOUND_0064)
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_CALL(N(DrawAppearSparkles), 0, LVar0, LVar1, LVar2, 10)

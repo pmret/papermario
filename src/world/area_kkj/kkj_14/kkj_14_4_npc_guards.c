@@ -104,7 +104,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtPlayer, SOUND_162, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0162, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Land)
     EVT_THREAD
         EVT_ADD(LVar1, 10)

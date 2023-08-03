@@ -382,8 +382,8 @@ EvtScript N(attack) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 60)
     EVT_WAIT(60)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EA)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_36E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02EA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_036E)
     EVT_THREAD
         EVT_WAIT(10)
         EVT_LOOP(18)

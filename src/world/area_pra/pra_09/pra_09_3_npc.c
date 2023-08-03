@@ -164,7 +164,7 @@ EvtScript N(EVS_Imposter_Unmask) = {
         EVT_CALL(SetNpcAnimation, LVar4, ANIM_Duplighost_Anim04)
         EVT_CALL(InterpNpcYaw, LVar4, 90, 0)
         EVT_CALL(SetNpcSpeed, LVar4, EVT_FLOAT(6.5))
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_2CB, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_02CB, 0)
         EVT_CALL(NpcMoveTo, LVar4, 0, LVar2, 0)
         EVT_CALL(SetNpcPos, LVar4, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
@@ -551,7 +551,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
                                 EVT_ADD(LVar0, 20)
                             EVT_END_IF
                             EVT_PLAY_EFFECT(EFFECT_RECOVER, 2, LVar0, LVar1, LVar2, 0)
-                            EVT_CALL(PlaySoundAtPlayer, SOUND_LRAW_214, 0)
+                            EVT_CALL(PlaySoundAtPlayer, SOUND_0214, 0)
                         EVT_END_THREAD
                         EVT_CALL(NpcJump0, NPC_PARTNER, LVar0, LVar1, LVar2, 10)
                         EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldBombette_Idle)

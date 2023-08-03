@@ -35,7 +35,7 @@ EvtScript N(EVS_GiveItemToKoopatrol) = {
     EVT_ADD(LVar6, 40)
     EVT_CALL(MakeItemEntity, LVarA, LVar5, LVar6, LVar7, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_SET(LVarB, LVar0)
-    EVT_CALL(PlaySound, SOUND_D2)
+    EVT_CALL(PlaySound, SOUND_00D2)
     EVT_CALL(ShowMessageAtScreenPos, LVar2, 160, 40)
     EVT_CALL(RemoveItemEntity, LVarB)
     EVT_CALL(SetNpcAnimation, LVar1, ANIM_WorldKoopatrol_Anim03)
@@ -85,7 +85,7 @@ EvtScript N(EVS_UpdateScores) = {
 };
 
 EvtScript N(EVS_WaitForBuzzIn) = {
-    EVT_CALL(PlaySound, SOUND_LRAW_8E)
+    EVT_CALL(PlaySound, SOUND_LRAW_008E)
     EVT_CALL(N(AwaitPlayerBuzzIn))
     EVT_IF_EQ(LVar0, 0) // time's up
         // player took too long, decide who will answer based on score
@@ -104,21 +104,21 @@ EvtScript N(EVS_WaitForBuzzIn) = {
         // player will answer
         EVT_SET(AB_KKJ29_AnsweringContestant, CONTESTANT_PEACH)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_LRAW_8E)
+    EVT_CALL(StopSound, SOUND_LRAW_008E)
     EVT_SET(AB_KKJ29_AnswerScore, ANSWER_PENDING)
     EVT_SWITCH(AB_KKJ29_AnsweringContestant)
         EVT_CASE_EQ(CONTESTANT_LEFT)
-            EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_8D, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_008D, 0)
             EVT_CALL(EndSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5)
             EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_00FA)
             EVT_CALL(GetNpcPos, NPC_Koopatrol_01, LVar0, LVar1, LVar2)
         EVT_CASE_EQ(CONTESTANT_PEACH)
-            EVT_CALL(PlaySoundAtPlayer, SOUND_8D, 0)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_008D, 0)
             EVT_CALL(EndSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5)
             EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_00F9)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CASE_EQ(CONTESTANT_RIGHT)
-            EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_8D, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_008D, 0)
             EVT_CALL(EndSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5)
             EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_00FB)
             EVT_CALL(GetNpcPos, NPC_Koopatrol_02, LVar0, LVar1, LVar2)
@@ -141,7 +141,7 @@ EvtScript N(EVS_WaitForBuzzIn) = {
 // LVar5  rival choice selection
 // LVar6  host response to wrong answer
 EvtScript N(Script_DoRound) = {
-    EVT_CALL(PlaySound, SOUND_8C)
+    EVT_CALL(PlaySound, SOUND_008C)
     EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, LVar1)
     EVT_SET(LVar0, LVar2)
     // wait for input
@@ -159,14 +159,14 @@ EvtScript N(Script_DoRound) = {
     EVT_END_SWITCH
     // handle the choice
     EVT_IF_EQ(LVar0, LVar5)
-        EVT_CALL(PlaySound, SOUND_LRAW_21C)
-        EVT_CALL(PlaySound, SOUND_8A)
+        EVT_CALL(PlaySound, SOUND_021C)
+        EVT_CALL(PlaySound, SOUND_008A)
         EVT_SET(AB_KKJ29_AnswerScore, ANSWER_RIGHT)
         EVT_EXEC_WAIT(N(EVS_UpdateScores))
         EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_0110)
     EVT_ELSE
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
-        EVT_CALL(PlaySound, SOUND_8B)
+        EVT_CALL(PlaySound, SOUND_008B)
         EVT_SET(AB_KKJ29_AnswerScore, ANSWER_WRONG)
         EVT_EXEC_WAIT(N(EVS_UpdateScores))
         EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, LVar6)
@@ -660,7 +660,7 @@ EvtScript N(EVS_DeclareWinner) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_LEFT_WON)
             EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, NPC_Koopatrol_01, MSG_Peach_011B)
-            EVT_CALL(PlaySound, SOUND_8A)
+            EVT_CALL(PlaySound, SOUND_008A)
             EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim19)
             EVT_CALL(ContinueSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_011C)
             EVT_WAIT(10)
@@ -671,7 +671,7 @@ EvtScript N(EVS_DeclareWinner) = {
             EVT_WAIT(10)
         EVT_CASE_EQ(OUTCOME_PEACH_WON)
             EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, MSG_Peach_0121)
-            EVT_CALL(PlaySound, SOUND_8A)
+            EVT_CALL(PlaySound, SOUND_008A)
             EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Delighted)
             EVT_WAIT(1)
             EVT_CALL(ContinueSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, MSG_Peach_0122)
@@ -681,7 +681,7 @@ EvtScript N(EVS_DeclareWinner) = {
             EVT_WAIT(10)
         EVT_CASE_EQ(OUTCOME_RIGHT_WON)
             EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, NPC_Koopatrol_02, MSG_Peach_011E)
-            EVT_CALL(PlaySound, SOUND_8A)
+            EVT_CALL(PlaySound, SOUND_008A)
             EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim19)
             EVT_CALL(ContinueSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_011F)
             EVT_WAIT(10)
@@ -696,7 +696,7 @@ EvtScript N(EVS_DeclareWinner) = {
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_0123)
             EVT_END_IF
-            EVT_CALL(PlaySound, SOUND_8B)
+            EVT_CALL(PlaySound, SOUND_008B)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -918,7 +918,7 @@ EvtScript N(EVS_ManageQuizGame) = {
         EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_263, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_0263, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_01, EMOTE_QUESTION, -45, 15, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 5)
@@ -992,18 +992,18 @@ EvtScript N(EVS_ManageQuizGame) = {
     EVT_WAIT(30 * DT)
     EVT_CALL(SetMusicTrack, 0, SONG_PEACH_QUIZ_INTRO, 0, 8)
     EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_00F5)
-    EVT_CALL(PlaySound, SOUND_8A)
+    EVT_CALL(PlaySound, SOUND_008A)
     EVT_WAIT(10 * DT)
     EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 5, MSG_Peach_00F6)
-    EVT_CALL(PlaySound, SOUND_8A)
+    EVT_CALL(PlaySound, SOUND_008A)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LookAround)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_263, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, 0)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 45, 13, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(13 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_263, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, 0)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 13, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(13 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_263, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, 0)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 45, 13, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ForwardIdle)

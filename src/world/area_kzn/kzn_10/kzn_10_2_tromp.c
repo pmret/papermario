@@ -145,7 +145,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
                 EVT_END_IF
         EVT_END_SWITCH
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_1E3, SOUND_SPACE_MODE_0, -465, 0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_01E3, SOUND_SPACE_MODE_0, -465, 0, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.5))
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.2))
     EVT_WAIT(15)
@@ -201,7 +201,7 @@ EvtScript N(EVS_SetupSpinyTromp) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.5))
     EVT_END_THREAD
     EVT_CALL(StopSound, SOUND_LOOP_1B)
-    EVT_CALL(PlaySoundAt, SOUND_1E4, SOUND_SPACE_MODE_0, 415, -240, 0)
+    EVT_CALL(PlaySoundAt, SOUND_01E4, SOUND_SPACE_MODE_0, 415, -240, 0)
     EVT_CALL(EnableModel, MODEL_me, FALSE)
     EVT_THREAD
         EVT_SET(LVar0, 418)

@@ -415,7 +415,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_281)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
         EVT_CASE_EQ(1)
             EVT_THREAD
@@ -430,7 +430,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_281)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
         EVT_CASE_EQ(2)
@@ -455,7 +455,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_281)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_END_SWITCH
@@ -518,7 +518,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(func_802CAE50, 2, LVar0, LVar1, LVar2)
     EVT_CALL(func_802CABE8, 2, 0, LVar3, 100, 4)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_282)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0282)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)

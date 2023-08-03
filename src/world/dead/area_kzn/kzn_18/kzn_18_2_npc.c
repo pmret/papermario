@@ -57,7 +57,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
         EVT_CALL(SetNpcYaw, NPC_SELF, 90)
         EVT_SET(MV_KoloradoJumpDone, TRUE)

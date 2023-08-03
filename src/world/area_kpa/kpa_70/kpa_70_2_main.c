@@ -82,7 +82,7 @@ EvtScript N(EVS_Main) = {
         EVT_CALL(PlaySoundAt, SOUND_LOOP_51, SOUND_SPACE_MODE_0, 800, 100, -200)
         EVT_WAIT(28)
         EVT_LOOP(0)
-            EVT_CALL(PlaySoundAt, SOUND_LRAW_222, SOUND_SPACE_MODE_0, 800, 100, -200)
+            EVT_CALL(PlaySoundAt, SOUND_0222, SOUND_SPACE_MODE_0, 800, 100, -200)
             EVT_WAIT(90)
         EVT_END_LOOP
     EVT_END_THREAD

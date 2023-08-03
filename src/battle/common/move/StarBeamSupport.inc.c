@@ -19,7 +19,7 @@ EvtScript N(802A24F0) = {
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_LRAW_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
@@ -43,7 +43,7 @@ EvtScript N(802A24F0) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
         EVT_CALL(N(UnkStarFunc), 4)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_LRAW_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(N(UnkStarFunc), 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
@@ -74,7 +74,7 @@ EvtScript N(beforeUsePower) = {
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_LRAW_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
@@ -98,7 +98,7 @@ EvtScript N(beforeUsePower) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
         EVT_CALL(N(UnkStarFunc), 4)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_LRAW_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(N(UnkStarFunc), 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
@@ -122,7 +122,7 @@ EvtScript N(802A2C20) = {
     EVT_CALL(SetForegroundModelsVisible, FALSE)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
     EVT_CALL(MoveBattleCamOver, 1)
-    EVT_CALL(PlaySound, SOUND_2041)
+    EVT_CALL(PlaySound, SOUND_SRAW_1E_A)
     EVT_CALL(CreateNpc, NPC_BTL_SPIRIT, LVar0)
     EVT_CALL(N(SetNpcCollision32))
     EVT_CALL(SetNpcFlagBits, NPC_BTL_SPIRIT, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
@@ -459,9 +459,9 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 }
 
                 if (script->functionTemp[2] == 0) {
-                    sfx_play_sound(SOUND_LRAW_248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                    sfx_play_sound(SOUND_LRAW_0248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                 } else {
-                    sfx_play_sound(SOUND_LRAW_249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                    sfx_play_sound(SOUND_LRAW_0249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                 }
                 script->functionTemp[0] = PEACH_STAR_BEAM_FLY_TO_TARGET;
             } else {
@@ -569,7 +569,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
 
                 do {} while (0); // required to match
 
-                sfx_play_sound(SOUND_LRAW_24A);
+                sfx_play_sound(SOUND_024A);
                 script->functionTemp[1] = 45;
                 script->functionTemp[0] = PEACH_STAR_BEAM_MAKE_BEAM;
             } else {
@@ -638,11 +638,11 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 script->functionTemp[1]--;
                 if (script->functionTemp[1] == 0) {
                     if (script->functionTemp[2] == 0) {
-                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_248, TRUE);
-                        sfx_play_sound(SOUND_LRAW_248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_0248, TRUE);
+                        sfx_play_sound(SOUND_LRAW_0248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     } else {
-                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_249, TRUE);
-                        sfx_play_sound(SOUND_LRAW_249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_0249, TRUE);
+                        sfx_play_sound(SOUND_LRAW_0249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     }
                 }
             }
@@ -681,9 +681,9 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
 
             if (script->functionTemp[2] == 0) {
-                snd_stop_tracking_env_sound_pos(SOUND_LRAW_248, FALSE);
+                snd_stop_tracking_env_sound_pos(SOUND_LRAW_0248, FALSE);
             } else {
-                snd_stop_tracking_env_sound_pos(SOUND_LRAW_249, FALSE);
+                snd_stop_tracking_env_sound_pos(SOUND_LRAW_0249, FALSE);
             }
             script->functionTemp[0] = PEACH_STAR_BEAM_SPIRITS_SCATTER;
             break;

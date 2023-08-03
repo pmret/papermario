@@ -304,7 +304,7 @@ EvtScript N(EVS_NpcAI_Tubba_WakeUp) = {
     EVT_CALL(SetSleepBubbleTimeLeft, LVar0, 20)
     EVT_CALL(SetNpcVar, NPC_SELF, 1, 2)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SRAW_0E_A, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim19)
     EVT_WAIT(30)
     EVT_THREAD

@@ -330,7 +330,7 @@ NpcData N(NpcData_Sentinel_02) = {
 };
 
 API_CALLABLE(N(PlayAlertSound)) {
-    ai_enemy_play_sound(get_npc_unsafe(script->owner1.enemy->npcID), SOUND_32F, 0);
+    ai_enemy_play_sound(get_npc_unsafe(script->owner1.enemy->npcID), SOUND_SRAW_0C_A, 0);
     return ApiStatus_DONE2;
 }
 
@@ -359,7 +359,7 @@ EvtScript N(EVS_NpcIdle_LastClubba) = {
 
 EvtScript N(EVS_NpcInteract_LastClubba) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2F1, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SRAW_0E_A, SOUND_SPACE_MODE_0)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
     EVT_WAIT(20)

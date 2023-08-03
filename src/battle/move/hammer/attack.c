@@ -100,9 +100,9 @@ EvtScript N(EVS_UseMove0_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
@@ -111,9 +111,9 @@ EvtScript N(EVS_UseMove0_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarE, 48)
     EVT_END_SWITCH
@@ -166,19 +166,19 @@ EvtScript N(EVS_UseMove1) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LRAW_2115)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2115)
             EVT_CALL(StartRumble, 7)
             EVT_THREAD
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.3))
             EVT_END_THREAD
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LRAW_2116)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2116)
             EVT_CALL(StartRumble, 8)
             EVT_THREAD
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.6))
             EVT_END_THREAD
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LRAW_2117)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2117)
             EVT_CALL(StartRumble, 9)
             EVT_THREAD
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.9))
@@ -196,9 +196,9 @@ EvtScript N(EVS_UseMove1) = {
         EVT_CASE_EQ(0)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
     EVT_END_SWITCH
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVar9, 48)
     EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_A))
@@ -322,9 +322,9 @@ EvtScript N(EVS_UseMove2_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
@@ -333,9 +333,9 @@ EvtScript N(EVS_UseMove2_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarE, 48)
     EVT_END_SWITCH

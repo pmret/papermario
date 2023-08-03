@@ -925,9 +925,9 @@ EvtScript N(8021C004) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_214)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0214)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_16_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
