@@ -1,0 +1,336 @@
+- { priority: 320, name: Present, template: STANDARD_ITEM, icon: key/Gift }
+- { priority: 321, name: CakeDone, template: STANDARD_ITEM, icon: key/CakeDone }
+- { priority: 322, name: CakeBare, template: STANDARD_ITEM, icon: key/CakeBare }
+- { priority: 323, name: CakePan, template: STANDARD_ITEM, icon: key/CakePan }
+- { priority: 324, name: CakeBatter, template: STANDARD_ITEM, icon: key/CakeBatter }
+- { priority: 325, name: CakeBowl, template: STANDARD_ITEM, icon: key/CakeBowl }
+- { priority: 326, name: CakeMixed, template: STANDARD_ITEM, icon: key/CakeMixed }
+- { priority: 327, name: CakeWithIcing, template: STANDARD_ITEM, icon: key/CakeWithIcing }
+- { priority: 328, name: CakeWithBerries, template: STANDARD_ITEM, icon: key/CakeWithBerries }
+- { priority: 329, name: HES_MoveDiamond, pair: true }
+- { priority: 330, name: MenuHammer1, template: STANDARD_ITEM, icon: menu/hammer_1 }
+- { priority: 331, name: MenuHammer2, template: STANDARD_ITEM, icon: menu/hammer_2 }
+- { priority: 332, name: MenuHammer3, template: STANDARD_ITEM, icon: menu/hammer_3 }
+- { priority: 333, name: MenuBoots1, template: STANDARD_ITEM, icon: menu/boots_1 }
+- { priority: 334, name: MenuBoots2, template: STANDARD_ITEM, icon: menu/boots_2 }
+- { priority: 335, name: MenuBoots3, template: STANDARD_ITEM, icon: menu/boots_3 }
+- { priority: 336, name: MenuItems, template: STANDARD_ITEM, icon: menu/items }
+- { priority: 51, name: HeartPiece, template: HEART_PIECE }
+- { priority: 49, name: Heart, template: HEART }
+- { priority: 50, name: Coin, template: COIN }
+- { priority: 52, name: StarPoint, template: STAR_POINT }
+- { priority: 53, name: HeartPoint, template: HEART_POINT }
+- { priority: 54, name: FlowerPoint, template: FLOWER_POINT }
+- { priority: 55, name: StarPiece, template: STAR_PIECE }
+- { priority: 56, name: GearBoots1, template: STANDARD_ITEM, icon: gear/boots_1 }
+- { priority: 57, name: GearBoots2, template: STANDARD_ITEM, icon: gear/boots_2 }
+- { priority: 58, name: GearBoots3, template: STANDARD_ITEM, icon: gear/boots_3 }
+- { priority: 59, name: GearHammer1, template: STANDARD_ITEM, icon: gear/hammer_1 }
+- { priority: 60, name: GearHammer2, template: STANDARD_ITEM, icon: gear/hammer_2 }
+- { priority: 61, name: GearHammer3, template: STANDARD_ITEM, icon: gear/hammer_3 }
+- { priority: 62, name: LuckyStar, template: STANDARD_ITEM, icon: gear/lucky_star }
+- { priority: 63, name: Map, template: STANDARD_ITEM, icon: key/map }
+- { priority: 64, name: KoopaFortressKey, template: STANDARD_ITEM, icon: key/key_koopa_fortress }
+- { priority: 65, name: RuinsKey, template: STANDARD_ITEM, icon: key/key_ruins }
+- { priority: 66, name: TubbaCastleKey, template: STANDARD_ITEM, icon: key/key_tubba_castle }
+- { priority: 67, name: IcePalaceKey, template: STANDARD_ITEM, icon: key/key_ice_palace }
+- { priority: 68, name: BowserCastleKey, template: STANDARD_ITEM, icon: key/key_bowser_castle }
+- { priority: 69, name: Dolly, template: STANDARD_ITEM, icon: key/dolly }
+- { priority: 70, name: KooperShell, template: STANDARD_ITEM, icon: key/kooper_shell }
+- { priority: 71, name: PulseStone, template: STANDARD_ITEM, icon: key/pulse_stone }
+- { priority: 72, name: Artifact, template: STANDARD_ITEM, icon: key/artifact }
+- { priority: 73, name: AncientVase, template: STANDARD_ITEM, icon: key/vase }
+- { priority: 74, name: RuinsStonePyramid, template: STANDARD_ITEM, icon: key/ruins_stone_pyramid }
+- { priority: 75, name: RuinsStoneStar, template: STANDARD_ITEM, icon: key/ruins_stone_star }
+- { priority: 76, name: RuinsStoneMoon, template: STANDARD_ITEM, icon: key/ruins_stone_moon }
+- { priority: 77, name: ForestPass, template: STANDARD_ITEM, icon: key/forest_pass }
+- { priority: 78, name: BooRecordOutline, template: STANDARD_ITEM, icon: key/boo_record_mask }
+- { priority: 79, name: BooRecord, template: STANDARD_ITEM, icon: key/boo_record }
+- { priority: 80, name: BooWeight, template: STANDARD_ITEM, icon: key/boo_weight }
+- { priority: 81, name: BooPortrait, template: STANDARD_ITEM, icon: key/boo_portrait }
+- { priority: 82, name: MysticKey, template: STANDARD_ITEM, icon: key/mystic_key }
+- { priority: 83, name: IronKey, template: STANDARD_ITEM, icon: key/key_storeroom }
+- { priority: 84, name: ToyboxTrain, template: STANDARD_ITEM, icon: key/toybox_train }
+- { priority: 85, name: FryingPan, template: STANDARD_ITEM, icon: key/frying_pan }
+- { priority: 86, name: Dictionary, template: STANDARD_ITEM, icon: key/dictionary }
+- { priority: 87, name: MysteryNote, template: STANDARD_ITEM, icon: key/mystery_note }
+- { priority: 88, name: SuspiciousNote, template: STANDARD_ITEM, icon: key/suspicious_note }
+- { priority: 89, name: MagicalSeed1, template: STANDARD_ITEM, icon: key/seed_1 }
+- { priority: 90, name: MagicalSeed2, template: STANDARD_ITEM, icon: key/seed_2 }
+- { priority: 91, name: MagicalSeed3, template: STANDARD_ITEM, icon: key/seed_3 }
+- { priority: 92, name: MagicalSeed4, template: STANDARD_ITEM, icon: key/seed_4 }
+- { priority: 93, name: CrystalBerry, template: STANDARD_ITEM, icon: key/crystal_berry }
+- { priority: 94, name: WaterStone, template: STANDARD_ITEM, icon: key/water_stone }
+- { priority: 95, name: MagicBean, template: STANDARD_ITEM, icon: key/magic_bean }
+- { priority: 96, name: FertileSoil, template: STANDARD_ITEM, icon: key/fertile_soil }
+- { priority: 97, name: MiracleWater, template: STANDARD_ITEM, icon: key/miracle_water }
+- { priority: 98, name: UltraStone, template: STANDARD_ITEM, icon: key/ultra_stone }
+- { priority: 99, name: ToadDoll, template: STANDARD_ITEM, icon: key/toad_doll }
+- { priority: 100, name: Calculator, template: STANDARD_ITEM, icon: key/calculator }
+- { priority: 101, name: Screwdriver, template: STANDARD_ITEM, icon: key/screwdriver }
+- { priority: 102, name: CookBook, template: STANDARD_ITEM, icon: key/book_cook }
+- { priority: 103, name: JadeRaven, template: STANDARD_ITEM, icon: key/jade_raven }
+- { priority: 104, name: SnowmanBucket, template: STANDARD_ITEM, icon: key/snowman_bucket }
+- { priority: 105, name: SnowmanScarf, template: STANDARD_ITEM, icon: key/snowman_scarf }
+- { priority: 106, name: RedKey, template: STANDARD_ITEM, icon: key/key_red }
+- { priority: 107, name: BlueKey, template: STANDARD_ITEM, icon: key/key_blue }
+- { priority: 108, name: KootPackage, template: STANDARD_ITEM, icon: key/koot_package }
+- { priority: 109, name: KootRedJar, template: STANDARD_ITEM, icon: key/koot_red_jar }
+- { priority: 110, name: Melody, template: STANDARD_ITEM, icon: key/book_melody }
+- { priority: 111, name: Lyrics, template: STANDARD_ITEM, icon: key/book_lyrics }
+- { priority: 112, name: Mailbag, template: STANDARD_ITEM, icon: key/mailbag }
+- { priority: 113, name: StarStone, template: STANDARD_ITEM, icon: key/star_stone }
+- { priority: 114, name: SneakyParasol, template: STANDARD_ITEM, icon: peach/sneaky_parasol }
+- { priority: 115, name: PeachKey, template: STANDARD_ITEM, icon: key/key_peach }
+- { priority: 116, name: UNK_1DC210, template: STANDARD_ITEM, icon: key/1DC210 }
+- { priority: 117, name: UNK_1DC430, template: STANDARD_ITEM, icon: key/1DC430 }
+- { priority: 118, name: UNK_1DC650, template: STANDARD_ITEM, icon: key/1DC650 }
+- { priority: 119, name: UNK_1DC870, template: STANDARD_ITEM, icon: key/1DC870 }
+- { priority: 120, name: DojoCard1, template: STANDARD_ITEM, icon: key/dojo_card_1 }
+- { priority: 121, name: DojoCard2, template: STANDARD_ITEM, icon: key/dojo_card_2 }
+- { priority: 122, name: DojoCard3, template: STANDARD_ITEM, icon: key/dojo_card_3 }
+- { priority: 123, name: DojoCard4, template: STANDARD_ITEM, icon: key/dojo_card_4 }
+- { priority: 124, name: DojoCard5, template: STANDARD_ITEM, icon: key/dojo_card_5 }
+- { priority: 125, name: CrystalBall, template: STANDARD_ITEM, icon: key/crystal_ball }
+- { priority: 126, name: GoldCard, template: STANDARD_ITEM, icon: key/card_gold }
+- { priority: 127, name: SilverCard, template: STANDARD_ITEM, icon: key/card_silver }
+- { priority: 128, name: KootBook, template: STANDARD_ITEM, icon: key/koot_book }
+- { priority: 129, name: KootTheTape, template: STANDARD_ITEM, icon: key/koot_the_tape }
+- { priority: 130, name: KootLuigiAutograph, template: STANDARD_ITEM, icon: key/koot_autograph_luigi }
+- { priority: 131, name: KootEmptyWallet, template: STANDARD_ITEM, icon: key/koot_empty_wallet }
+- { priority: 132, name: KootMerluvleeAutograph, template: STANDARD_ITEM, icon: key/koot_autograph_merluvlee }
+- { priority: 133, name: KootShell, template: STANDARD_ITEM, icon: key/koot_shell }
+- { priority: 134, name: KootPhoto, template: STANDARD_ITEM, icon: key/koot_photo }
+- { priority: 135, name: KootGlasses, template: STANDARD_ITEM, icon: key/koot_glasses }
+- { priority: 136, name: Letter, template: STANDARD_ITEM, icon: key/Letter, pair: true }
+- { priority: 137, name: Unused_089, template: STANDARD_ITEM, icon: key/LongLetter, pair: true }
+- { priority: 138, name: Unused_08A, template: STANDARD_ITEM, icon: key/TealLetter, pair: true }
+- { priority: 139, name: Unused_08B, template: STANDARD_ITEM, icon: key/Postcard, pair: true }
+- { priority: 140, name: Unused_08C, template: STANDARD_ITEM, icon: key/EmptyBook, pair: true }
+- { priority: 141, name: Unused_08D, template: STANDARD_ITEM, icon: unused/item_08D, pair: true }
+- { priority: 142, name: Unused_08E, template: STANDARD_ITEM, icon: unused/item_08E, pair: true }
+- { priority: 143, name: Unused_08F, template: STANDARD_ITEM, icon: unused/item_08F, pair: true }
+- { priority: 312, name: PleaseComeBack, template: STANDARD_ITEM, icon: battle/PleaseComeBack, pair: true }
+- { priority: 313, name: Unused_139, template: STANDARD_ITEM, icon: battle/item_139, pair: true }
+- { priority: 314, name: FrightJar, template: STANDARD_ITEM, icon: battle/FrightJar, pair: true }
+- { priority: 315, name: Mystery, template: STANDARD_ITEM, icon: battle/Mystery, pair: true }
+- { priority: 316, name: RepelGel, template: STANDARD_ITEM, icon: battle/RepelGel, pair: true }
+- { priority: 317, name: InsecticideHerb, template: STANDARD_ITEM, icon: battle/InsecticideHerb, pair: true }
+- { priority: 318, name: Unused_13E, template: STANDARD_ITEM, icon: battle/item_13E, pair: true }
+- { priority: 319, name: Unused_13F, template: STANDARD_ITEM, icon: battle/item_13F, pair: true }
+- { priority: 1, name: SpicySoup, template: STANDARD_ITEM, icon: food/SpicySoup, pair: true }
+- { priority: 2, name: ApplePie, template: STANDARD_ITEM, icon: food/ApplePie, pair: true }
+- { priority: 3, name: HoneyUltra, template: STANDARD_ITEM, icon: food/HoneyUltra, pair: true }
+- { priority: 4, name: MapleUltra, template: STANDARD_ITEM, icon: food/MapleUltra, pair: true }
+- { priority: 5, name: JellyUltra, template: STANDARD_ITEM, icon: food/JellyUltra, pair: true }
+- { priority: 6, name: Koopasta, template: STANDARD_ITEM, icon: food/Koopasta, pair: true }
+- { priority: 7, name: FriedShroom, template: STANDARD_ITEM, icon: food/FriedShroom, pair: true }
+- { priority: 8, name: ShroomCake, template: STANDARD_ITEM, icon: food/ShroomCake, pair: true }
+- { priority: 9, name: ShroomSteak, template: STANDARD_ITEM, icon: food/ShroomSteak, pair: true }
+- { priority: 10, name: HotShroom, template: STANDARD_ITEM, icon: food/HotShroom, pair: true }
+- { priority: 11, name: SweetShroom, template: STANDARD_ITEM, icon: food/SweetShroom, pair: true }
+- { priority: 12, name: HealthyJuice, template: STANDARD_ITEM, icon: food/HealthyJuice, pair: true }
+- { priority: 13, name: BlandMeal, template: STANDARD_ITEM, icon: food/BlandMeal, pair: true }
+- { priority: 14, name: YummyMeal, template: STANDARD_ITEM, icon: food/YummyMeal, pair: true }
+- { priority: 15, name: DeluxeFeast, template: STANDARD_ITEM, icon: food/DeluxeFeast, pair: true }
+- { priority: 16, name: SpecialShake, template: STANDARD_ITEM, icon: food/SpecialShake, pair: true }
+- { priority: 17, name: BigCookie, template: STANDARD_ITEM, icon: food/BigCookie, pair: true }
+- { priority: 18, name: Cake, template: STANDARD_ITEM, icon: food/Cake, pair: true }
+- { priority: 19, name: Mistake, template: STANDARD_ITEM, icon: food/Mistake, pair: true }
+- { priority: 20, name: KoopaTea, template: STANDARD_ITEM, icon: food/KoopaTea, pair: true }
+- { priority: 21, name: HoneySuper, template: STANDARD_ITEM, icon: food/HoneySuper, pair: true }
+- { priority: 22, name: MapleSuper, template: STANDARD_ITEM, icon: food/MapleSuper, pair: true }
+- { priority: 23, name: JellySuper, template: STANDARD_ITEM, icon: food/JellySuper, pair: true }
+- { priority: 24, name: Spaghetti, template: STANDARD_ITEM, icon: food/Spaghetti, pair: true }
+- { priority: 25, name: EggMissile, template: STANDARD_ITEM, icon: food/EggMissile, pair: true }
+- { priority: 26, name: FriedEgg, template: STANDARD_ITEM, icon: food/FriedEgg, pair: true }
+- { priority: 27, name: HoneyShroom, template: STANDARD_ITEM, icon: food/HoneyShroom, pair: true }
+- { priority: 28, name: HoneyCandy, template: STANDARD_ITEM, icon: food/HoneyCandy, pair: true }
+- { priority: 29, name: ElectroPop, template: STANDARD_ITEM, icon: food/ElectroPop, pair: true }
+- { priority: 30, name: FirePop, template: STANDARD_ITEM, icon: food/FirePop, pair: true }
+- { priority: 31, name: LimeCandy, template: STANDARD_ITEM, icon: food/LimeCandy, pair: true }
+- { priority: 32, name: CocoPop, template: STANDARD_ITEM, icon: food/CocoPop, pair: true }
+- { priority: 33, name: LemonCandy, template: STANDARD_ITEM, icon: food/LemonCandy, pair: true }
+- { priority: 34, name: JellyPop, template: STANDARD_ITEM, icon: food/JellyPop, pair: true }
+- { priority: 35, name: StrangeCake, template: STANDARD_ITEM, icon: food/StrangeCake, pair: true }
+- { priority: 36, name: KookyCookie, template: STANDARD_ITEM, icon: food/KookyCookie, pair: true }
+- { priority: 37, name: FrozenFries, template: STANDARD_ITEM, icon: food/FrozenFries, pair: true }
+- { priority: 38, name: PotatoSalad, template: STANDARD_ITEM, icon: food/PotatoSalad, pair: true }
+- { priority: 39, name: NuttyCake, template: STANDARD_ITEM, icon: food/NuttyCake, pair: true }
+- { priority: 40, name: MapleShroom, template: STANDARD_ITEM, icon: food/MapleShroom, pair: true }
+- { priority: 41, name: BoiledEgg, template: STANDARD_ITEM, icon: food/BoiledEgg, pair: true }
+- { priority: 42, name: YoshiCookie, template: STANDARD_ITEM, icon: food/YoshiCookie, pair: true }
+- { priority: 43, name: JellyShroom, template: STANDARD_ITEM, icon: food/JellyShroom, pair: true }
+- { priority: 44, name: Unused_02C, template: STANDARD_ITEM, icon: unused/item_02C, pair: true }
+- { priority: 45, name: Unused_02D, template: STANDARD_ITEM, icon: unused/item_02D, pair: true }
+- { priority: 46, name: Unused_02E, template: STANDARD_ITEM, icon: unused/item_02E, pair: true }
+- { priority: 47, name: Unused_02F, template: STANDARD_ITEM, icon: unused/item_02F, pair: true }
+- { priority: 48, name: Unused_030, template: STANDARD_ITEM, icon: unused/item_030, pair: true }
+- { priority: 144, name: SpinSmash, template: STANDARD_ITEM, icon: badge/SpinSmash, pair: true }
+- { priority: 145, name: Multibounce, template: STANDARD_ITEM, icon: badge/Multibounce, pair: true }
+- { priority: 146, name: PowerPlus, template: STANDARD_ITEM, icon: badge/PowerPlus, pair: true }
+- { priority: 147, name: DodgeMaster, template: STANDARD_ITEM, icon: badge/DodgeMaster, pair: true }
+- { priority: 148, name: PowerBounce, template: STANDARD_ITEM, icon: badge/PowerBounce, pair: true }
+- { priority: 149, name: SpikeShield, template: STANDARD_ITEM, icon: badge/SpikeShield, pair: true }
+- { priority: 150, name: FirstAttack, template: STANDARD_ITEM, icon: badge/FirstAttack, pair: true }
+- { priority: 151, name: HPPlus, template: STANDARD_ITEM, icon: badge/HPPlus, pair: true }
+- { priority: 152, name: QuakeHammer, template: STANDARD_ITEM, icon: badge/QuakeHammer, pair: true }
+- { priority: 153, name: DoubleDip, template: STANDARD_ITEM, icon: badge/DoubleDip, pair: true }
+- { priority: 154, name: PowerQuake, template: STANDARD_ITEM, icon: badge/PowerQuake, pair: true }
+- { priority: 155, name: MegaQuake, template: STANDARD_ITEM, icon: badge/MegaQuake, pair: true }
+- { priority: 156, name: SleepStomp, template: STANDARD_ITEM, icon: badge/SleepStomp, pair: true }
+- { priority: 157, name: SmashCharge, template: STANDARD_ITEM, icon: badge/SmashCharge, pair: true }
+- { priority: 158, name: SSmashChg, template: STANDARD_ITEM, icon: badge/SSmashChg, pair: true }
+- { priority: 159, name: AutoSmash, template: STANDARD_ITEM, icon: badge/AutoSmash, pair: true }
+- { priority: 160, name: FireShield, template: STANDARD_ITEM, icon: badge/FireShield, pair: true }
+- { priority: 161, name: JumpCharge, template: STANDARD_ITEM, icon: badge/JumpCharge, pair: true }
+- { priority: 162, name: SJumpChg, template: STANDARD_ITEM, icon: badge/SJumpChg, pair: true }
+- { priority: 163, name: AutoJump, template: STANDARD_ITEM, icon: badge/AutoJump, pair: true }
+- { priority: 164, name: DDownPound, template: STANDARD_ITEM, icon: badge/DDownPound, pair: true }
+- { priority: 165, name: AutoMultibounce, template: STANDARD_ITEM, icon: badge/AutoMultibounce, pair: true }
+- { priority: 166, name: DizzyStomp, template: STANDARD_ITEM, icon: badge/DizzyStomp, pair: true }
+- { priority: 167, name: HammerThrow, template: STANDARD_ITEM, icon: badge/HammerThrow, pair: true }
+- { priority: 168, name: SmashCharge0, template: STANDARD_ITEM, icon: badge/SmashCharge0, pair: true }
+- { priority: 169, name: PrettyLucky, template: STANDARD_ITEM, icon: badge/PrettyLucky, pair: true }
+- { priority: 170, name: FeelingFine, template: STANDARD_ITEM, icon: badge/FeelingFine, pair: true }
+- { priority: 171, name: AttackFXA, template: STANDARD_ITEM, icon: badge/AttackFXA, pair: true }
+- { priority: 172, name: AllorNothing, template: STANDARD_ITEM, icon: badge/AllorNothing, pair: true }
+- { priority: 173, name: HPDrain, template: STANDARD_ITEM, icon: badge/HPDrain, pair: true }
+- { priority: 174, name: JumpCharge0, template: STANDARD_ITEM, icon: badge/JumpCharge0, pair: true }
+- { priority: 175, name: SlowGo, template: STANDARD_ITEM, icon: badge/SlowGo, pair: true }
+- { priority: 176, name: FPPlus, template: STANDARD_ITEM, icon: badge/FPPlus, pair: true }
+- { priority: 177, name: MegaRush, template: STANDARD_ITEM, icon: badge/MegaRush, pair: true }
+- { priority: 178, name: IcePower, template: STANDARD_ITEM, icon: badge/IcePower, pair: true }
+- { priority: 179, name: DefendPlus, template: STANDARD_ITEM, icon: badge/DefendPlus, pair: true }
+- { priority: 180, name: PayOff, template: STANDARD_ITEM, icon: badge/PayOff, pair: true }
+- { priority: 181, name: MoneyMoney, template: STANDARD_ITEM, icon: badge/MoneyMoney, pair: true }
+- { priority: 182, name: ChillOut, template: STANDARD_ITEM, icon: badge/ChillOut, pair: true }
+- { priority: 183, name: HappyHeart, template: STANDARD_ITEM, icon: badge/HappyHeart, pair: true }
+- { priority: 184, name: ZapTap, template: STANDARD_ITEM, icon: badge/ZapTap, pair: true }
+- { priority: 185, name: Berserker, template: STANDARD_ITEM, icon: badge/Berserker, pair: true }
+- { priority: 186, name: RightOn, template: STANDARD_ITEM, icon: badge/RightOn, pair: true }
+- { priority: 187, name: RunawayPay, template: STANDARD_ITEM, icon: badge/RunawayPay, pair: true }
+- { priority: 188, name: Refund, template: STANDARD_ITEM, icon: badge/Refund, pair: true }
+- { priority: 189, name: FlowerSaver, template: STANDARD_ITEM, icon: badge/FlowerSaver, pair: true }
+- { priority: 190, name: TripleDip, template: STANDARD_ITEM, icon: badge/TripleDip, pair: true }
+- { priority: 191, name: FlowerFanatic, template: STANDARD_ITEM, icon: badge/FlowerFanatic, pair: true }
+- { priority: 192, name: PowerJump, template: STANDARD_ITEM, icon: badge/PowerJump, pair: true }
+- { priority: 193, name: SuperJump, template: STANDARD_ITEM, icon: badge/SuperJump, pair: true }
+- { priority: 194, name: MegaJump, template: STANDARD_ITEM, icon: badge/MegaJump, pair: true }
+- { priority: 195, name: PowerSmash1, template: STANDARD_ITEM, icon: badge/PowerSmash, pair: true }
+- { priority: 196, name: SuperSmash, template: STANDARD_ITEM, icon: badge/SuperSmash, pair: true }
+- { priority: 197, name: MegaSmash, template: STANDARD_ITEM, icon: badge/MegaSmash, pair: true }
+- { priority: 198, name: LuckyDay, template: STANDARD_ITEM, icon: badge/LuckyDay, pair: true }
+- { priority: 199, name: MegaHPDrain, template: STANDARD_ITEM, icon: badge/MegaHPDrain, pair: true }
+- { priority: 200, name: BumpAttack, template: STANDARD_ITEM, icon: badge/BumpAttack, pair: true }
+- { priority: 201, name: PUpDDown, template: STANDARD_ITEM, icon: badge/PUpDDown, pair: true }
+- { priority: 202, name: PDownDUp, template: STANDARD_ITEM, icon: badge/PDownDUp, pair: true }
+- { priority: 203, name: HeartFinder, template: STANDARD_ITEM, icon: badge/HeartFinder, pair: true }
+- { priority: 204, name: FlowerFinder, template: STANDARD_ITEM, icon: badge/FlowerFinder, pair: true }
+- { priority: 205, name: DizzyAttack, template: STANDARD_ITEM, icon: badge/DizzyAttack, pair: true }
+- { priority: 206, name: SpeedySpin, template: STANDARD_ITEM, icon: badge/SpeedySpin, pair: true }
+- { priority: 207, name: SpinAttack, template: STANDARD_ITEM, icon: badge/SpinAttack, pair: true }
+- { priority: 208, name: ISpy, template: STANDARD_ITEM, icon: badge/ISpy, pair: true }
+- { priority: 209, name: PowerRush, template: STANDARD_ITEM, icon: badge/PowerRush, pair: true }
+- { priority: 210, name: LastStand, template: STANDARD_ITEM, icon: badge/LastStand, pair: true }
+- { priority: 211, name: CloseCall, template: STANDARD_ITEM, icon: badge/CloseCall, pair: true }
+- { priority: 212, name: CrazyHeart, template: STANDARD_ITEM, icon: badge/CrazyHeart, pair: true }
+- { priority: 213, name: Unused_0D5, template: STANDARD_ITEM, icon: unused/item_0D5, pair: true }
+- { priority: 214, name: Unused_0D6, template: STANDARD_ITEM, icon: unused/item_0D6, pair: true }
+- { priority: 215, name: Unused_0D7, template: STANDARD_ITEM, icon: unused/item_0D7, pair: true }
+- { priority: 216, name: ShrinkSmash, template: STANDARD_ITEM, icon: badge/ShrinkSmash, pair: true }
+- { priority: 217, name: ShrinkStomp, template: STANDARD_ITEM, icon: badge/ShrinkStomp, pair: true }
+- { priority: 218, name: DDownJump, template: STANDARD_ITEM, icon: badge/DDownJump, pair: true }
+- { priority: 219, name: DamageDodge, template: STANDARD_ITEM, icon: badge/DamageDodge, pair: true }
+- { priority: 220, name: EarthquakeJump, template: STANDARD_ITEM, icon: badge/EarthquakeJump, pair: true }
+- { priority: 221, name: HappyFlower, template: STANDARD_ITEM, icon: badge/HappyFlower, pair: true }
+- { priority: 222, name: Unused_0DE, template: STANDARD_ITEM, icon: badge/HappyCoin, pair: true }
+- { priority: 223, name: Unused_0DF, template: STANDARD_ITEM, icon: unused/item_0DF, pair: true }
+- { priority: 224, name: DeepFocus, template: STANDARD_ITEM, icon: badge/DeepFocus, pair: true }
+- { priority: 225, name: SuperFocus, template: STANDARD_ITEM, icon: badge/SuperFocus, pair: true }
+- { priority: 226, name: Kaiden, template: STANDARD_ITEM, icon: badge/Kaiden, pair: true }
+- { priority: 227, name: QuickChange, template: STANDARD_ITEM, icon: badge/QuickChange, pair: true }
+- { priority: 228, name: Unused_0E4, template: STANDARD_ITEM, icon: unused/item_0E4, pair: true }
+- { priority: 229, name: Unused_0E5, template: STANDARD_ITEM, icon: unused/item_0E5, pair: true }
+- { priority: 230, name: Unused_0E6, template: STANDARD_ITEM, icon: unused/item_0E6, pair: true }
+- { priority: 231, name: Unused_0E7, template: STANDARD_ITEM, icon: unused/item_0E7, pair: true }
+- { priority: 232, name: Peekaboo, template: STANDARD_ITEM, icon: badge/Peekaboo, pair: true }
+- { priority: 233, name: GroupFocus, template: STANDARD_ITEM, icon: badge/GroupFocus, pair: true }
+- { priority: 234, name: AttackFXD, template: STANDARD_ITEM, icon: badge/AttackFXD, pair: true }
+- { priority: 235, name: AttackFXB, template: STANDARD_ITEM, icon: badge/AttackFXB, pair: true }
+- { priority: 236, name: AttackFXE, template: STANDARD_ITEM, icon: badge/AttackFXE, pair: true }
+- { priority: 237, name: AttackFXC, template: STANDARD_ITEM, icon: badge/AttackFXC, pair: true }
+- { priority: 238, name: AttackFXF, template: STANDARD_ITEM, icon: badge/AttackFXF, pair: true }
+- { priority: 239, name: Unused_0EF, template: STANDARD_ITEM, icon: unused/item_0EF, pair: true }
+- { priority: 240, name: HealthyHealthy, template: STANDARD_ITEM, icon: badge/HealthyHealthy, pair: true }
+- { priority: 241, name: Unused_0F1, template: STANDARD_ITEM, icon: unused/item_0F1, pair: true }
+- { priority: 242, name: Unused_0F2, template: STANDARD_ITEM, icon: unused/item_0F2, pair: true }
+- { priority: 243, name: Unused_0F3, template: STANDARD_ITEM, icon: unused/item_0F3, pair: true }
+- { priority: 244, name: Unused_0F4, template: STANDARD_ITEM, icon: unused/item_0F4, pair: true }
+- { priority: 245, name: Unused_0F5, template: STANDARD_ITEM, icon: unused/item_0F5, pair: true }
+- { priority: 246, name: Unused_0F6, template: STANDARD_ITEM, icon: unused/item_0F6, pair: true }
+- { priority: 247, name: Unused_0F7, template: STANDARD_ITEM, icon: unused/item_0F7, pair: true }
+- { priority: 288, name: FireFlower, template: STANDARD_ITEM, icon: battle/FireFlower, pair: true }
+- { priority: 289, name: SnowmanDoll, template: STANDARD_ITEM, icon: battle/SnowmanDoll, pair: true }
+- { priority: 290, name: ThunderRage, template: STANDARD_ITEM, icon: battle/ThunderRage, pair: true }
+- { priority: 291, name: ThunderBolt, template: STANDARD_ITEM, icon: battle/ThunderBolt, pair: true }
+- { priority: 292, name: ShootingStar, template: STANDARD_ITEM, icon: battle/ShootingStar, pair: true }
+- { priority: 293, name: DustyHammer, template: STANDARD_ITEM, icon: battle/DustyHammer, pair: true }
+- { priority: 294, name: Pebble, template: STANDARD_ITEM, icon: battle/Pebble, pair: true }
+- { priority: 295, name: Unused_127, template: STANDARD_ITEM, icon: unused/item_127, pair: true }
+- { priority: 296, name: StoneCap, template: STANDARD_ITEM, icon: battle/StoneCap, pair: true }
+- { priority: 297, name: VoltShroom, template: STANDARD_ITEM, icon: battle/VoltShroom, pair: true }
+- { priority: 298, name: PowerStar, template: STANDARD_ITEM, icon: battle/PowerStar, pair: true }
+- { priority: 299, name: Parasol, template: STANDARD_ITEM, icon: battle/Parasol, pair: true }
+- { priority: 300, name: MagicMirror, template: STANDARD_ITEM, icon: battle/MagicMirror, pair: true }
+- { priority: 301, name: Unused_12D, template: STANDARD_ITEM, icon: unused/item_12D, pair: true }
+- { priority: 302, name: Unused_12E, template: STANDARD_ITEM, icon: unused/item_12E, pair: true }
+- { priority: 303, name: Unused_12F, template: STANDARD_ITEM, icon: unused/item_12F, pair: true }
+- { priority: 248, name: Mushroom, template: STANDARD_ITEM, icon: food/Mushroom, pair: true }
+- { priority: 249, name: SuperShroom, template: STANDARD_ITEM, icon: food/SuperShroom, pair: true }
+- { priority: 250, name: UltraShroom, template: STANDARD_ITEM, icon: food/UltraShroom, pair: true }
+- { priority: 251, name: LifeShroom, template: STANDARD_ITEM, icon: food/LifeShroom, pair: true }
+- { priority: 252, name: DriedShroom, template: STANDARD_ITEM, icon: food/DriedShroom, pair: true }
+- { priority: 253, name: TastyTonic, template: STANDARD_ITEM, icon: food/TastyTonic, pair: true }
+- { priority: 254, name: SuperSoda, template: STANDARD_ITEM, icon: food/SuperSoda, pair: true }
+- { priority: 255, name: BlueBerry, template: STANDARD_ITEM, icon: food/BlueBerry, pair: true }
+- { priority: 256, name: RedBerry, template: STANDARD_ITEM, icon: food/RedBerry, pair: true }
+- { priority: 257, name: YellowBerry, template: STANDARD_ITEM, icon: food/YellowBerry, pair: true }
+- { priority: 258, name: BubbleBerry, template: STANDARD_ITEM, icon: food/BubbleBerry, pair: true }
+- { priority: 259, name: Goomnut, template: STANDARD_ITEM, icon: food/Goomnut, pair: true }
+- { priority: 260, name: KoopaLeaf, template: STANDARD_ITEM, icon: food/KoopaLeaf, pair: true }
+- { priority: 261, name: DriedPasta, template: STANDARD_ITEM, icon: food/DriedPasta, pair: true }
+- { priority: 262, name: Lime, template: STANDARD_ITEM, icon: food/Lime, pair: true }
+- { priority: 263, name: Lemon, template: STANDARD_ITEM, icon: food/Lemon, pair: true }
+- { priority: 264, name: DriedFruit, template: STANDARD_ITEM, icon: food/DriedFruit, pair: true }
+- { priority: 265, name: StrangeLeaf, template: STANDARD_ITEM, icon: food/StrangeLeaf, pair: true }
+- { priority: 266, name: CakeMix, template: STANDARD_ITEM, icon: food/CakeMix, pair: true }
+- { priority: 267, name: Egg, template: STANDARD_ITEM, icon: food/Egg, pair: true }
+- { priority: 268, name: Coconut, template: STANDARD_ITEM, icon: food/Coconut, pair: true }
+- { priority: 269, name: Melon, template: STANDARD_ITEM, icon: food/Melon, pair: true }
+- { priority: 270, name: StinkyHerb, template: STANDARD_ITEM, icon: food/StinkyHerb, pair: true }
+- { priority: 271, name: IcedPotato, template: STANDARD_ITEM, icon: food/IcedPotato, pair: true }
+- { priority: 272, name: HoneySyrup, template: STANDARD_ITEM, icon: food/HoneySyrup, pair: true }
+- { priority: 273, name: MapleSyrup, template: STANDARD_ITEM, icon: food/MapleSyrup, pair: true }
+- { priority: 274, name: JamminJelly, template: STANDARD_ITEM, icon: food/JamminJelly, pair: true }
+- { priority: 275, name: WhackasBump, template: STANDARD_ITEM, icon: food/WhackasBump, pair: true }
+- { priority: 276, name: Apple, template: STANDARD_ITEM, icon: food/Apple, pair: true }
+- { priority: 277, name: BakingSalt, template: STANDARD_ITEM, icon: peach/BakingSalt, pair: true }
+- { priority: 278, name: BakingSugar, template: STANDARD_ITEM, icon: peach/BakingSugar, pair: true }
+- { priority: 279, name: BakingEgg, template: STANDARD_ITEM, icon: peach/BakingEgg, pair: true }
+- { priority: 280, name: BakingCream, template: STANDARD_ITEM, icon: peach/BakingCream, pair: true }
+- { priority: 281, name: BakingStrawberry, template: STANDARD_ITEM, icon: peach/BakingStrawberry, pair: true }
+- { priority: 282, name: BakingButter, template: STANDARD_ITEM, icon: peach/BakingButter, pair: true }
+- { priority: 283, name: BakingCleanser, template: STANDARD_ITEM, icon: peach/BakingCleanser, pair: true }
+- { priority: 284, name: BakingWater, template: STANDARD_ITEM, icon: peach/BakingWater, pair: true }
+- { priority: 285, name: BakingFlour, template: STANDARD_ITEM, icon: peach/BakingFlour, pair: true }
+- { priority: 286, name: BakingMilk, template: STANDARD_ITEM, icon: peach/BakingMilk, pair: true }
+- { priority: 287, name: Unused_11F, template: STANDARD_ITEM, icon: unused/item_11F, pair: true }
+- { priority: 304, name: SleepySheep, template: STANDARD_ITEM, icon: battle/SleepySheep, pair: true }
+- { priority: 305, name: XBandage, template: STANDARD_ITEM, icon: battle/XBandage, pair: true }
+- { priority: 306, name: POWBlock, template: STANDARD_ITEM, icon: battle/POWBlock, pair: true }
+- { priority: 307, name: HustleDrink, template: STANDARD_ITEM, icon: battle/HustleDrink, pair: true }
+- { priority: 308, name: StopWatch, template: STANDARD_ITEM, icon: battle/StopWatch, pair: true }
+- { priority: 309, name: DizzyDial, template: STANDARD_ITEM, icon: battle/DizzyDial, pair: true }
+- { priority: 310, name: Unused_136, template: STANDARD_ITEM, icon: battle/item_136, pair: true }
+- { priority: 311, name: Unused_137, template: STANDARD_ITEM, icon: battle/item_137, pair: true }

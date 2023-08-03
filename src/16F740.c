@@ -3825,15 +3825,15 @@ void btl_state_update_first_strike(void) {
             switch (encounterStatus->hitType) {
                 case ENCOUNTER_TRIGGER_JUMP:
                     battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;
-                    battleStatus->selectedMoveID = MOVE_UNUSED_JUMP4;
+                    battleStatus->selectedMoveID = MOVE_FIRST_STRIKE_JUMP;
                     battleStatus->moveArgument = encounterStatus->hitTier;
-                    battleStatus->curTargetListFlags = gMoveTable[MOVE_UNUSED_JUMP4].flags;
+                    battleStatus->curTargetListFlags = gMoveTable[MOVE_FIRST_STRIKE_JUMP].flags;
                     break;
                 case ENCOUNTER_TRIGGER_HAMMER:
                     battleStatus->moveCategory = BTL_MENU_TYPE_SMASH;
-                    battleStatus->selectedMoveID = MOVE_UNUSED_HAMMER4;
+                    battleStatus->selectedMoveID = MOVE_FIRST_STRIKE_HAMMER;
                     battleStatus->moveArgument = encounterStatus->hitTier;
-                    battleStatus->curTargetListFlags = gMoveTable[MOVE_UNUSED_HAMMER4].flags;
+                    battleStatus->curTargetListFlags = gMoveTable[MOVE_FIRST_STRIKE_HAMMER].flags;
                     break;
                 case ENCOUNTER_TRIGGER_PARTNER:
                     btl_set_state(BATTLE_STATE_PARTNER_FIRST_STRIKE);

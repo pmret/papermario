@@ -292,18 +292,7 @@ HudScript HES_HandPointLeftHeld = {
     hs_End
 };
 
-#include "item_hud_scripts.inc.c"
-
-//TODO padding
-s32 pad_after_item_hudscripts[] = {
-    0x00000000, 0x00000000
-};
-
-#include "item_table.inc.c"
-
-#include "item_hud_script_table.inc.c"
-
-#include "item_entity_scripts.inc.c"
+#include "item_data.inc.c"
 
 //TODO split for partner popup menu data?
 
@@ -460,7 +449,7 @@ IconHudScriptPair gPartnerIconHudScripts[] = {
     { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
 };
 
-#include "move_table.inc.c"
+#include "move_data.inc.c"
 
 //TODO padding
 s32 pad_after_move_table[] = {

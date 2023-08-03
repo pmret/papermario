@@ -3,26 +3,25 @@
 #include "sprite/player.h"
 
 AnimID WalkPeachAnims[] = {
-    ANIM_Peach1_Walk, // none
-    ANIM_Peach1_CarryCream, // cream
-    ANIM_Peach1_CarryStrawberry, // strawberry
-    ANIM_Peach1_CarryButter, // butter
-    ANIM_Peach1_CarryCleanser, // cleanser
-    ANIM_Peach1_CarryWater, // water
-    ANIM_Peach1_CarryMilk, // milk
-    ANIM_Peach1_CarryFlour, // flour
-    ANIM_Peach1_CarryEgg, // egg
-    ANIM_Peach1_CarryCompleteCake, // complete cake
-    ANIM_Peach1_CarryCakeBowl, // cake bowl
-    ANIM_Peach1_CarryCakeMixed, // cake mixed
-    ANIM_Peach1_CarryCakePan, // cake pan
-    ANIM_Peach1_CarryCakeBatter, // cake batter
-    ANIM_Peach1_CarryBareCake, // cake bare
-    ANIM_Peach1_CarrySalt, // salt
-    ANIM_Peach1_CarrySugar, // sugar
-    ANIM_Peach1_CarryIcingCake, // cake with icing
-    ANIM_Peach1_CarryBerryCake, // cake with berries
-    0x00000000
+    [PEACH_BAKING_NONE]                 ANIM_Peach1_Walk,
+    [PEACH_BAKING_CREAM]                ANIM_Peach1_CarryCream,
+    [PEACH_BAKING_STRAWBERRY]           ANIM_Peach1_CarryStrawberry,
+    [PEACH_BAKING_BUTTER]               ANIM_Peach1_CarryButter,
+    [PEACH_BAKING_CLEANSER]             ANIM_Peach1_CarryCleanser,
+    [PEACH_BAKING_WATER]                ANIM_Peach1_CarryWater,
+    [PEACH_BAKING_MILK]                 ANIM_Peach1_CarryMilk,
+    [PEACH_BAKING_FLOUR]                ANIM_Peach1_CarryFlour,
+    [PEACH_BAKING_EGG]                  ANIM_Peach1_CarryEgg,
+    [PEACH_BAKING_COMPLETE_CAKE]        ANIM_Peach1_CarryCompleteCake,
+    [PEACH_BAKING_CAKE_BOWL]            ANIM_Peach1_CarryCakeBowl,
+    [PEACH_BAKING_CAKE_MIXED]           ANIM_Peach1_CarryCakeMixed,
+    [PEACH_BAKING_CAKE_PAN]             ANIM_Peach1_CarryCakePan,
+    [PEACH_BAKING_CAKE_BATTER]          ANIM_Peach1_CarryCakeBatter,
+    [PEACH_BAKING_CAKE_BARE]            ANIM_Peach1_CarryBareCake,
+    [PEACH_BAKING_SALT]                 ANIM_Peach1_CarrySalt,
+    [PEACH_BAKING_SUGAR]                ANIM_Peach1_CarrySugar,
+    [PEACH_BAKING_CAKE_WITH_ICING]      ANIM_Peach1_CarryIcingCake,
+    [PEACH_BAKING_CAKE_WITH_BERRIES]    ANIM_Peach1_CarryBerryCake,
 };
 
 static void action_update_run_peach(void);

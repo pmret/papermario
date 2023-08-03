@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import argparse
 import re
+import argparse
 from pathlib import Path
 from typing import Dict, Tuple
 from common import get_asset_path
@@ -48,10 +48,10 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
         file = Icon.attrib["name"]
 
         if file is None:
-            raise Exception("Icon os missing attribute: 'name'")
+            raise Exception("Icon is missing attribute: 'name'")
 
         if type is None:
-            raise Exception("Icon os missing attribute: 'type'")
+            raise Exception("Icon is missing attribute: 'type'")
 
         name = re.sub("\\W", "_", file)
 

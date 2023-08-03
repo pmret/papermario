@@ -1,0 +1,36 @@
+<WorldMap>
+    <Location id="LOCATION_TOAD_TOWN" parent="LOCATION_TOAD_TOWN" requires="STORY_EPILOGUE" startX="116" startY="185" path="1,-10;1,-8;-9,-2;-8,0;-8,0;-7,-3;-5,-3"/>
+    <Location id="LOCATION_PEACH_CASTLE_GROUNDS" parent="LOCATION_TOAD_TOWN" requires="STORY_EPILOGUE" startX="118" startY="151" path="-1,24;1,-8;2,-7"/>
+    <Location id="LOCATION_SHOOTING_STAR_SUMMIT" parent="LOCATION_PEACH_CASTLE_GROUNDS" requires="STORY_CH0_BEGAN_PEACH_MISSION" startX="143" startY="134" path="-3,7;-7,4;-8,2"/>
+    <Location id="LOCATION_TOAD_TOWN_TUNNELS" parent="LOCATION_TOAD_TOWN" requires="STORY_NEVER" startX="100" startY="174" path=""/>
+    <Location id="LOCATION_GOOMBA_VILLAGE" parent="LOCATION_GOOMBA_ROAD" requires="STORY_CH0_GOOMBARIO_JOINED_PARTY" startX="36" startY="157" path=""/>
+    <Location id="LOCATION_GOOMBA_ROAD" parent="LOCATION_TOAD_TOWN" requires="STORY_CH0_ARRIVED_AT_TOAD_TOWN" startX="74" startY="154" path="-8,-3;-7,0;-8,1;-7,2"/>
+    <Location id="LOCATION_PLEASANT_PATH" parent="LOCATION_TOAD_TOWN" requires="STORY_CH1_STAR_SPRIT_DEPARTED" startX="148" startY="167" path="-9,0;-6,-1;-7,0;-8,1;-1,8"/>
+    <Location id="LOCATION_KOOPA_VILLAGE" parent="LOCATION_PLEASANT_PATH" requires="STORY_CH1_KOOPER_JOINED_PARTY" startX="154" startY="148" path="1,6;-3,6"/>
+    <Location id="LOCATION_KOOPA_BROS_FORTRESS" parent="LOCATION_PLEASANT_PATH" requires="STORY_CH1_STAR_SPRIT_DEPARTED" startX="205" startY="152" path="-7,1;-7,3;-7,3;-7,3;-7,1;-7,2;-7,0"/>
+    <Location id="LOCATION_MT_RUGGED" parent="LOCATION_TOAD_TOWN" requires="STORY_NEVER" startX="227" startY="243" path="-9,3;-8,0;-8,0;-9,-2;-7,-4;-7,-4;-6,-5;-5,-6;-1,-7;-3,-6;-3,-6;-7,-4;-7,0;-8,0;-8,0;-8,0;-8,0;0,-6;0,-6"/>
+    <Location id="LOCATION_DRY_DRY_DESERT" parent="LOCATION_MT_RUGGED" requires="STORY_CH2_UNCOVERED_DRY_DRY_RUINS" startX="266" startY="206" path="-6,5;-6,3;-8,0;-8,-4;-5,-5;-8,-3;-8,1;-5,5;-2,7;2,7;5,5;6,5;6,3"/>
+    <Location id="LOCATION_DRY_DRY_OUTPOST" parent="LOCATION_DRY_DRY_DESERT" requires="STORY_NEVER" startX="280" startY="191" path="-2,6;-4,4"/>
+    <Location id="LOCATION_DRY_DRY_RUINS" parent="LOCATION_DRY_DRY_DESERT" requires="STORY_CH2_BEGAN_PEACH_MISSION" startX="252" startY="188" path="4,6;4,5"/>
+    <Location id="LOCATION_FOREVER_FOREST" parent="LOCATION_TOAD_TOWN" requires="STORY_CH3_ARRIVED_AT_BOOS_MANSION" startX="187" startY="193" path="-8,-1;-10,-2;-8,-2;-9,-1;-8,-1;-10,0;-9,0"/>
+    <Location id="LOCATION_BOOS_MANSION" parent="LOCATION_FOREVER_FOREST" requires="STORY_CH3_UNLOCKED_GUSTY_GULCH" startX="170" startY="180" path="8,6"/>
+    <Location id="LOCATION_GUSTY_GULCH" parent="LOCATION_FOREVER_FOREST" requires="STORY_CH3_BEGAN_PEACH_MISSION" startX="223" startY="170" path="-7,4;-7,5;-7,4;-7,5"/>
+    <Location id="LOCATION_TUBBAS_MANOR" parent="LOCATION_GUSTY_GULCH" requires="STORY_CH3_BEGAN_PEACH_MISSION" startX="263" startY="156" path="-8,2;-8,3;-8,3;-8,3"/>
+    <Location id="LOCATION_WINDY_MILL" parent="LOCATION_GUSTY_GULCH" requires="STORY_CH3_BEGAN_PEACH_MISSION" startX="203" startY="171" path="10,-1"/>
+    <Location id="LOCATION_SHY_GUYS_TOYBOX" parent="LOCATION_TOAD_TOWN" requires="STORY_CH4_STAR_SPRIT_DEPARTED" startX="79" startY="173" path="6,6;6,6;8,2;7,-1"/>
+    <Location id="LOCATION_JADE_JUNGLE" parent="LOCATION_TOAD_TOWN" requires="STORY_CH5_ZIP_LINE_READY" startX="66" startY="289" path="11,2;11,0;11,-2;10,-3;7,-7;3,-8;0,-9;-4,-7;-9,-3;-10,-2;-9,-2;-7,-6;-2,-9;1,-9;0,-9;-8,-5;-9,-2;1,-8;9,-2;9,-2;8,-5"/>
+    <Location id="LOCATION_YOSHIS_VILLAGE" parent="LOCATION_JADE_JUNGLE" requires="STORY_NEVER" startX="84" startY="274" path="-9,3;-5,5"/>
+    <Location id="LOCATION_MT_LAVALAVA" parent="LOCATION_JADE_JUNGLE" requires="STORY_CH5_BEGAN_PEACH_MISSION" startX="47" startY="252" path="-5,6;-2,9;2,8;7,6;7,4"/>
+    <Location id="LOCATION_FLOWER_FIELDS" parent="LOCATION_TOAD_TOWN" requires="STORY_CH6_BEGAN_PEACH_MISSION" startX="59" startY="126" path=""/>
+    <Location id="LOCATION_CLOUDY_CLIMB" parent="LOCATION_FLOWER_FIELDS" requires="STORY_CH6_BEGAN_PEACH_MISSION" startX="58" startY="92" path="-3,6;0,7;5,6;1,7"/>
+    <Location id="LOCATION_SHIVER_CITY" parent="LOCATION_TOAD_TOWN_TUNNELS" requires="STORY_CH7_MAYOR_MURDER_SOLVED" startX="183" startY="125" path=""/>
+    <Location id="LOCATION_SHIVER_SNOWFIELD" parent="LOCATION_SHIVER_CITY" requires="STORY_CH7_DEFEATED_MONSTAR" startX="203" startY="126" path="-9,-2"/>
+    <Location id="LOCATION_STARBORN_VALLEY" parent="LOCATION_SHIVER_SNOWFIELD" requires="STORY_CH7_GOT_SNOWMAN_SCARF" startX="234" startY="128" path="-11,1;-9,-2"/>
+    <Location id="LOCATION_SHIVER_MOUNTAIN" parent="LOCATION_SHIVER_SNOWFIELD" requires="STORY_CH7_STAR_SPRIT_DEPARTED" startX="220" startY="112" path="-7,3;-6,5"/>
+    <Location id="LOCATION_CRYSTAL_PALACE" parent="LOCATION_SHIVER_MOUNTAIN" requires="STORY_CH7_STAR_SPRIT_DEPARTED" startX="223" startY="99" path="0,7"/>
+    <Location id="LOCATION_STAR_WAY" parent="LOCATION_SHOOTING_STAR_SUMMIT" requires="STORY_NEVER" startX="158" startY="110" path="-9,3;-8,1;-7,1;-7,4;2,6;8,3"/>
+    <Location id="LOCATION_STAR_HAVEN" parent="LOCATION_STAR_WAY" requires="STORY_NEVER" startX="163" startY="78" path="-3,6;2,6;8,3;6,5;-2,6;-6,3"/>
+    <Location id="LOCATION_BOWSERS_CASTLE" parent="LOCATION_STAR_HAVEN" requires="STORY_EPILOGUE" startX="96" startY="49" path="-6,5;-2,7;2,7;6,6;8,3;8,0;8,-3;8,-5;6,-5;7,-4;8,-1;8,3;2,8"/>
+    <Location id="LOCATION_PEACHS_CASTLE" parent="LOCATION_BOWSERS_CASTLE" requires="STORY_EPILOGUE" startX="88" startY="22" path="-3,7;0,6;4,7"/>
+    <Location id="LOCATION_MARIOS_HOUSE" parent="LOCATION_TOAD_TOWN" requires="STORY_NEVER" startX="98" startY="147" path=""/>
+</WorldMap>

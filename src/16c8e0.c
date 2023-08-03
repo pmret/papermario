@@ -26,9 +26,9 @@ BSS f32 D_8029EFB0;
 BSS f32 D_8029EFB4;
 BSS f32 D_8029EFB8;
 BSS s32 D_8029EFBC;
-BSS s32 D_8029EFC0[10];
-BSS s32 D_8029EFE8[10];
-BSS s32 D_8029F010[10];
+BSS s32 BtlStarPointTensHIDs[10];
+BSS s32 BtlStarPointShinesHIDs[10];
+BSS s32 BtlStarPointOnesHIDs[10];
 BSS PAL_BIN gTattleBgPalette[0x100];
 
 extern HudScript HES_HPDigit0;
@@ -204,20 +204,20 @@ void initialize_battle(void) {
     D_8029EFBC = hud_element_create(&HES_HPBar);
     hud_element_set_flags(D_8029EFBC, HUD_ELEMENT_FLAG_80);
 
-    for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
-        hudElemID = D_8029EFC0[i] = hud_element_create(&HES_Item_StarPoint);
+    for (i = 0; i < ARRAY_COUNT(BtlStarPointTensHIDs); i++) {
+        hudElemID = BtlStarPointTensHIDs[i] = hud_element_create(&HES_Item_StarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
-        hudElemID = D_8029EFE8[i] = hud_element_create(&HES_StatusSPShine);
+    for (i = 0; i < ARRAY_COUNT(BtlStarPointShinesHIDs); i++) {
+        hudElemID = BtlStarPointShinesHIDs[i] = hud_element_create(&HES_StatusSPShine);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
-        hudElemID = D_8029F010[i] = hud_element_create(&HES_Item_SmallStarPoint);
+    for (i = 0; i < ARRAY_COUNT(BtlStarPointOnesHIDs); i++) {
+        hudElemID = BtlStarPointOnesHIDs[i] = hud_element_create(&HES_Item_SmallStarPoint);
         hud_element_set_flags(hudElemID, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
         hud_element_set_render_depth(hudElemID, 20);
     }
@@ -1012,7 +1012,7 @@ void btl_update_starpoints_display(void) {
             ones = battleStatus->totalStarPoints % 10;
 
             for (i = 0; i < tens; i++) {
-                id = D_8029EFC0[i];
+                id = BtlStarPointTensHIDs[i];
                 if (hud_element_get_script(id) != &HES_Item_StarPoint) {
                     hud_element_set_script(id, &HES_Item_StarPoint);
                 }
@@ -1020,7 +1020,7 @@ void btl_update_starpoints_display(void) {
                 hud_element_set_render_pos(id, posX, posY);
                 hud_element_draw_clipped(id);
 
-                id = D_8029EFE8[i];
+                id = BtlStarPointShinesHIDs[i];
                 if (hud_element_get_script(id) != &HES_StatusSPShine) {
                     hud_element_set_script(id, &HES_StatusSPShine);
                 }
@@ -1030,9 +1030,9 @@ void btl_update_starpoints_display(void) {
                 posX -= (one * 20.0f);
             }
 
-           for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
-                hud_element_set_flags(D_8029EFC0[i], HUD_ELEMENT_FLAG_DISABLED);
-                hud_element_set_flags(D_8029EFE8[i], HUD_ELEMENT_FLAG_DISABLED);
+           for (; i < ARRAY_COUNT(BtlStarPointTensHIDs); i++) {
+                hud_element_set_flags(BtlStarPointTensHIDs[i], HUD_ELEMENT_FLAG_DISABLED);
+                hud_element_set_flags(BtlStarPointShinesHIDs[i], HUD_ELEMENT_FLAG_DISABLED);
             }
 
             posX = D_8029DA40;
@@ -1045,7 +1045,7 @@ void btl_update_starpoints_display(void) {
             }
 
             for (i = 0; i < ones; i++) {
-                id = D_8029F010[i];
+                id = BtlStarPointOnesHIDs[i];
                 if (hud_element_get_script(id) != &HES_Item_SmallStarPoint) {
                     hud_element_set_script(id, &HES_Item_SmallStarPoint);
                 }
@@ -1055,8 +1055,8 @@ void btl_update_starpoints_display(void) {
                 posX -= one * 10.0f;
             }
 
-            for (; i < ARRAY_COUNT(D_8029F010); i++) {
-                hud_element_set_flags(D_8029F010[i], HUD_ELEMENT_FLAG_DISABLED);
+            for (; i < ARRAY_COUNT(BtlStarPointOnesHIDs); i++) {
+                hud_element_set_flags(BtlStarPointOnesHIDs[i], HUD_ELEMENT_FLAG_DISABLED);
             }
         }
     }

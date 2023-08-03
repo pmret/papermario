@@ -35,7 +35,7 @@ EvtScript N(EVS_MakeEntities) = {
     EVT_CALL(MakeEntity, EVT_PTR(Entity_GiantChest), 180, 0, -175, -10, ITEM_NONE, MAKE_ENTITY_END)
     EVT_CALL(AssignChestFlag, GF_OBK04_GiantChest)
     EVT_CALL(AssignScript, EVT_PTR(N(EVS_OpenGiantChest)))
-    EVT_CALL(MakeItemEntity, ITEM_BOOTS2_ICON, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
+    EVT_CALL(MakeItemEntity, ITEM_MENU_BOOTS2, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_CALL(N(SetItemAlpha))
     EVT_SET(MV_KeepAwayItem, LVar0)
     EVT_IF_EQ(GF_OBK04_BoardedFloor, FALSE)

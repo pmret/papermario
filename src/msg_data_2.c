@@ -8,20 +8,20 @@ s32 D_802EB5F0[] = {
     0x0000EB78, 0x00010778, 0x00012378, 0x00013F78, 0x00015B78, 0x00017778, 0x00019378, 0x0001AF78, 0x0001CB78, 0x0001E778, 0x00020378, 0x00021F78
 };
 
-struct_D_802EB620 D_802EB620[] = {
+MsgVoice MsgVoices[] = {
     {
-        .unk_00 = 0x11,
-        .unk_04 = 0x12,
+        .unk_00 = SOUND_NORMAL_VOICE_A,
+        .unk_04 = SOUND_NORMAL_VOICE_B,
         .unk_08 = 0
     },
     {
-        .unk_00 = 0x17,
-        .unk_04 = 0x18,
+        .unk_00 = SOUND_BOWSER_VOICE_A,
+        .unk_04 = SOUND_BOWSER_VOICE_B,
         .unk_08 = -50
     },
     {
-        .unk_00 = 0x1B,
-        .unk_04 = 0x1B,
+        .unk_00 = SOUND_STAR_VOICE,
+        .unk_04 = SOUND_STAR_VOICE,
         .unk_08 = 0
     },
 };

@@ -1,6 +1,7 @@
 #ifndef _MESSAGE_IDS_JP_H_
 #define _MESSAGE_IDS_JP_H_
 
+#define MSG_NONE MESSAGE_ID(0x00, 0x000)
 #define MSG_Menus_Party_Goombario MESSAGE_ID(0x20, 0x00E)
 #define MSG_Menus_Party_Kooper MESSAGE_ID(0x20, 0x00F)
 #define MSG_Menus_Party_Bombette MESSAGE_ID(0x20, 0x010)
@@ -224,9 +225,9 @@
 #define MSG_ItemShortDesc_ShellCrack MESSAGE_ID(0x28, 0x0BB)
 #define MSG_ShortDesc_32 MESSAGE_ID(0x28, 0x0BD)
 #define MSG_ItemShortDesc_MysteryScroll MESSAGE_ID(0x28, 0x0C5)
-#define MSG_ItemShortDesc_Jump MESSAGE_ID(0x28, 0x0C6)
-#define MSG_ItemShortDesc_SpinJump MESSAGE_ID(0x28, 0x0C7)
-#define MSG_ItemShortDesc_TornadoJump MESSAGE_ID(0x28, 0x0C8)
+#define MSG_ItemShortDesc_Boots MESSAGE_ID(0x28, 0x0C6)
+#define MSG_ItemShortDesc_SuperBoots MESSAGE_ID(0x28, 0x0C7)
+#define MSG_ItemShortDesc_UltraBoots MESSAGE_ID(0x28, 0x0C8)
 #define MSG_ItemShortDesc_Hammer MESSAGE_ID(0x28, 0x0C9)
 #define MSG_ItemShortDesc_SuperHammer MESSAGE_ID(0x28, 0x0CA)
 #define MSG_ItemShortDesc_UltraHammer MESSAGE_ID(0x28, 0x0CB)
@@ -819,9 +820,9 @@
 #define MSG_ItemName_Kaiden MESSAGE_ID(0x2B, 0x0B8)
 #define MSG_ItemName_ShellCrack MESSAGE_ID(0x2B, 0x0BC)
 #define MSG_ItemName_MysteryScroll MESSAGE_ID(0x2B, 0x0C6)
-#define MSG_ItemName_Jump MESSAGE_ID(0x2B, 0x0C7)
-#define MSG_ItemName_SpinJump MESSAGE_ID(0x2B, 0x0C8)
-#define MSG_ItemName_TornadoJump MESSAGE_ID(0x2B, 0x0C9)
+#define MSG_ItemName_Boots MESSAGE_ID(0x2B, 0x0C7)
+#define MSG_ItemName_SuperBoots MESSAGE_ID(0x2B, 0x0C8)
+#define MSG_ItemName_UltraBoots MESSAGE_ID(0x2B, 0x0C9)
 #define MSG_ItemName_Hammer MESSAGE_ID(0x2B, 0x0CA)
 #define MSG_ItemName_SuperHammer MESSAGE_ID(0x2B, 0x0CB)
 #define MSG_ItemName_UltraHammer MESSAGE_ID(0x2B, 0x0CC)

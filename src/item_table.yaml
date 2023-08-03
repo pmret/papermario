@@ -1,0 +1,5459 @@
+- None:
+    category: NONE
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Boots:
+    category: GEAR
+    nameMsg: MSG_ItemName_Boots
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: GearBoots1
+    itemEntity: GearBoots1
+    icon: gear/boots_1
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SuperBoots:
+    category: GEAR
+    nameMsg: MSG_ItemName_SuperBoots
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: GearBoots2
+    itemEntity: GearBoots2
+    icon: gear/boots_2
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UltraBoots:
+    category: GEAR
+    nameMsg: MSG_ItemName_UltraBoots
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: GearBoots3
+    itemEntity: GearBoots3
+    icon: gear/boots_3
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Hammer:
+    category: GEAR
+    nameMsg: MSG_ItemName_Hammer
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: GearHammer1
+    itemEntity: GearHammer1
+    icon: gear/hammer_1
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SuperHammer:
+    category: GEAR
+    nameMsg: MSG_ItemName_SuperHammer
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: GearHammer2
+    itemEntity: GearHammer2
+    icon: gear/hammer_2
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UltraHammer:
+    category: GEAR
+    nameMsg: MSG_ItemName_UltraHammer
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: GearHammer3
+    itemEntity: GearHammer3
+    icon: gear/hammer_3
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LuckyStar:
+    category: QUEST
+    nameMsg: MSG_ItemName_LuckyStar
+    fullDescMsg: MSG_ItemFullDesc_LuckyStar
+    shortDescMsg: MSG_ItemShortDesc_LuckyStar
+    hudElement: LuckyStar
+    itemEntity: LuckyStar
+    icon: gear/lucky_star
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Map:
+    category: QUEST
+    nameMsg: MSG_ItemName_Map
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BigMap:
+    category: QUEST
+    nameMsg: MSG_ItemName_BigMap
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_GEAR, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- FirstDegreeCard:
+    category: QUEST
+    nameMsg: MSG_ItemName_FirstDegreeCard
+    fullDescMsg: MSG_ItemFullDesc_FirstDegreeCard
+    shortDescMsg: MSG_ItemShortDesc_FirstDegreeCard
+    hudElement: DojoCard1
+    itemEntity: DojoCard1
+    icon: key/dojo_card_1
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SecondDegreeCard:
+    category: QUEST
+    nameMsg: MSG_ItemName_SecondDegreeCard
+    fullDescMsg: MSG_ItemFullDesc_SecondDegreeCard
+    shortDescMsg: MSG_ItemShortDesc_SecondDegreeCard
+    hudElement: DojoCard2
+    itemEntity: DojoCard2
+    icon: key/dojo_card_2
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- ThirdDegreeCard:
+    category: QUEST
+    nameMsg: MSG_ItemName_ThirdDegreeCard
+    fullDescMsg: MSG_ItemFullDesc_ThirdDegreeCard
+    shortDescMsg: MSG_ItemShortDesc_ThirdDegreeCard
+    hudElement: DojoCard3
+    itemEntity: DojoCard3
+    icon: key/dojo_card_3
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- FourthDegreeCard:
+    category: QUEST
+    nameMsg: MSG_ItemName_FourthDegreeCard
+    fullDescMsg: MSG_ItemFullDesc_FourthDegreeCard
+    shortDescMsg: MSG_ItemShortDesc_FourthDegreeCard
+    hudElement: DojoCard4
+    itemEntity: DojoCard4
+    icon: key/dojo_card_4
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Diploma:
+    category: QUEST
+    nameMsg: MSG_ItemName_Diploma
+    fullDescMsg: MSG_ItemFullDesc_Diploma
+    shortDescMsg: MSG_ItemShortDesc_Diploma
+    hudElement: DojoCard5
+    itemEntity: DojoCard5
+    icon: key/dojo_card_5
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UltraStone:
+    category: QUEST
+    nameMsg: MSG_ItemName_UltraStone
+    fullDescMsg: MSG_ItemFullDesc_UltraStone
+    shortDescMsg: MSG_ItemShortDesc_UltraStone
+    hudElement: UltraStone
+    itemEntity: UltraStone
+    icon: key/ultra_stone
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2 ]
+    typeFlags: [ ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KoopaFortressKey:
+    category: KEY
+    nameMsg: MSG_ItemName_KoopaFortressKey
+    fullDescMsg: MSG_ItemFullDesc_KoopaFortressKey
+    shortDescMsg: MSG_ItemShortDesc_KoopaFortressKey
+    hudElement: KoopaFortressKey
+    itemEntity: KoopaFortressKey
+    icon: key/key_koopa_fortress
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- RuinsKey:
+    category: KEY
+    nameMsg: MSG_ItemName_RuinsKey
+    fullDescMsg: MSG_ItemFullDesc_RuinsKey
+    shortDescMsg: MSG_ItemShortDesc_RuinsKey
+    hudElement: RuinsKey
+    itemEntity: RuinsKey
+    icon: key/key_ruins
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PulseStone:
+    category: KEY
+    nameMsg: MSG_ItemName_PulseStone
+    fullDescMsg: MSG_ItemFullDesc_PulseStone
+    shortDescMsg: MSG_ItemShortDesc_PulseStone
+    hudElement: PulseStone
+    itemEntity: PulseStone
+    icon: key/pulse_stone
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- TubbaCastleKey:
+    category: KEY
+    nameMsg: MSG_ItemName_TubbaCastleKey
+    fullDescMsg: MSG_ItemFullDesc_TubbaCastleKey
+    shortDescMsg: MSG_ItemShortDesc_TubbaCastleKey
+    hudElement: TubbaCastleKey
+    itemEntity: TubbaCastleKey
+    icon: key/key_tubba_castle
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CrystalPalaceKey:
+    category: KEY
+    nameMsg: MSG_ItemName_CrystalPalaceKey
+    fullDescMsg: MSG_ItemFullDesc_CrystalPalaceKey
+    shortDescMsg: MSG_ItemShortDesc_CrystalPalaceKey
+    hudElement: IcePalaceKey
+    itemEntity: IcePalaceKey
+    icon: key/key_ice_palace
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LunarStone:
+    category: KEY
+    nameMsg: MSG_ItemName_LunarStone
+    fullDescMsg: MSG_ItemFullDesc_LunarStone
+    shortDescMsg: MSG_ItemShortDesc_LunarStone
+    hudElement: RuinsStoneMoon
+    itemEntity: RuinsStoneMoon
+    icon: key/ruins_stone_moon
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PyramidStone:
+    category: KEY
+    nameMsg: MSG_ItemName_PyramidStone
+    fullDescMsg: MSG_ItemFullDesc_PyramidStone
+    shortDescMsg: MSG_ItemShortDesc_PyramidStone
+    hudElement: RuinsStonePyramid
+    itemEntity: RuinsStonePyramid
+    icon: key/ruins_stone_pyramid
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- DiamondStone:
+    category: KEY
+    nameMsg: MSG_ItemName_DiamondStone
+    fullDescMsg: MSG_ItemFullDesc_DiamondStone
+    shortDescMsg: MSG_ItemShortDesc_DiamondStone
+    hudElement: RuinsStoneStar
+    itemEntity: RuinsStoneStar
+    icon: key/ruins_stone_star
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- GoldenJar:
+    category: KEY
+    nameMsg: MSG_ItemName_GoldenJar
+    fullDescMsg: MSG_ItemFullDesc_GoldenJar
+    shortDescMsg: MSG_ItemShortDesc_GoldenJar
+    hudElement: AncientVase
+    itemEntity: AncientVase
+    icon: key/vase
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KooperShell:
+    category: KEY
+    nameMsg: MSG_ItemName_KooperShell
+    fullDescMsg: MSG_ItemFullDesc_KooperShell
+    shortDescMsg: MSG_ItemShortDesc_KooperShell
+    hudElement: KooperShell
+    itemEntity: KooperShell
+    icon: key/kooper_shell
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BowserCastleKey:
+    category: KEY
+    nameMsg: MSG_ItemName_BowserCastleKey
+    fullDescMsg: MSG_ItemFullDesc_BowserCastleKey
+    shortDescMsg: MSG_ItemShortDesc_BowserCastleKey
+    hudElement: BowserCastleKey
+    itemEntity: BowserCastleKey
+    icon: key/key_bowser_castle
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- ForestPass:
+    category: KEY
+    nameMsg: MSG_ItemName_ForestPass
+    fullDescMsg: MSG_ItemFullDesc_ForestPass
+    shortDescMsg: MSG_ItemShortDesc_ForestPass
+    hudElement: ForestPass
+    itemEntity: ForestPass
+    icon: key/forest_pass
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BooWeight:
+    category: KEY
+    nameMsg: MSG_ItemName_BooWeight
+    fullDescMsg: MSG_ItemFullDesc_BooWeight
+    shortDescMsg: MSG_ItemShortDesc_BooWeight
+    hudElement: BooWeight
+    itemEntity: BooWeight
+    icon: key/boo_weight
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BooPortrait:
+    category: KEY
+    nameMsg: MSG_ItemName_BooPortrait
+    fullDescMsg: MSG_ItemFullDesc_BooPortrait
+    shortDescMsg: MSG_ItemShortDesc_BooPortrait
+    hudElement: BooPortrait
+    itemEntity: BoosPortrait
+    icon: key/boo_portrait
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CrystalBerry:
+    category: KEY
+    nameMsg: MSG_ItemName_CrystalBerry
+    fullDescMsg: MSG_ItemFullDesc_CrystalBerry
+    shortDescMsg: MSG_ItemShortDesc_CrystalBerry
+    hudElement: CrystalBerry
+    itemEntity: CrystalBerry
+    icon: key/crystal_berry
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MysticalKey:
+    category: KEY
+    nameMsg: MSG_ItemName_MysticalKey
+    fullDescMsg: MSG_ItemFullDesc_MysticalKey
+    shortDescMsg: MSG_ItemShortDesc_MysticalKey
+    hudElement: MysticKey
+    itemEntity: MysticKey
+    icon: key/mystic_key
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- StoreroomKey:
+    category: KEY
+    nameMsg: MSG_ItemName_StoreroomKey
+    fullDescMsg: MSG_ItemFullDesc_StoreroomKey
+    shortDescMsg: MSG_ItemShortDesc_StoreroomKey
+    hudElement: IronKey
+    itemEntity: StoreroomKey
+    icon: key/key_storeroom
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- ToyTrain:
+    category: KEY
+    nameMsg: MSG_ItemName_ToyTrain
+    fullDescMsg: MSG_ItemFullDesc_ToyTrain
+    shortDescMsg: MSG_ItemShortDesc_ToyTrain
+    hudElement: ToyboxTrain
+    itemEntity: ToyTrain
+    icon: key/toybox_train
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BooRecord:
+    category: KEY
+    nameMsg: MSG_ItemName_BooRecord
+    fullDescMsg: MSG_ItemFullDesc_BooRecord
+    shortDescMsg: MSG_ItemShortDesc_BooRecord
+    hudElement: BooRecord
+    itemEntity: BooRecord
+    icon: key/boo_record
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- FryingPan:
+    category: KEY
+    nameMsg: MSG_ItemName_FryingPan
+    fullDescMsg: MSG_ItemFullDesc_FryingPan
+    shortDescMsg: MSG_ItemShortDesc_FryingPan
+    hudElement: FryingPan
+    itemEntity: FryingPan
+    icon: key/frying_pan
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Dictionary:
+    category: KEY
+    nameMsg: MSG_ItemName_Dictionary
+    fullDescMsg: MSG_ItemFullDesc_Dictionary
+    shortDescMsg: MSG_ItemShortDesc_Dictionary
+    hudElement: Dictionary
+    itemEntity: Dictionary
+    icon: key/dictionary
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MysteryNote:
+    category: KEY
+    nameMsg: MSG_ItemName_MysteryNote
+    fullDescMsg: MSG_ItemFullDesc_MysteryNote
+    shortDescMsg: MSG_ItemShortDesc_MysteryNote
+    hudElement: MysteryNote
+    itemEntity: MysteryNote
+    icon: key/mystery_note
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SuspiciousNote:
+    category: KEY
+    nameMsg: MSG_ItemName_SuspiciousNote
+    fullDescMsg: MSG_ItemFullDesc_SuspiciousNote
+    shortDescMsg: MSG_ItemShortDesc_SuspiciousNote
+    hudElement: SuspiciousNote
+    itemEntity: SuspiciousNote
+    icon: key/suspicious_note
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CrystalBall:
+    category: KEY
+    nameMsg: MSG_ItemName_CrystalBall
+    fullDescMsg: MSG_ItemFullDesc_CrystalBall
+    shortDescMsg: MSG_ItemShortDesc_CrystalBall
+    hudElement: CrystalBall
+    itemEntity: CrystalBall
+    icon: key/crystal_ball
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Screwdriver:
+    category: KEY
+    nameMsg: MSG_ItemName_Screwdriver
+    fullDescMsg: MSG_ItemFullDesc_Screwdriver
+    shortDescMsg: MSG_ItemShortDesc_Screwdriver
+    hudElement: Screwdriver
+    itemEntity: Screwdriver
+    icon: key/screwdriver
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Cookbook:
+    category: KEY
+    nameMsg: MSG_ItemName_Cookbook
+    fullDescMsg: MSG_ItemFullDesc_Cookbook
+    shortDescMsg: MSG_ItemShortDesc_Cookbook
+    hudElement: CookBook
+    itemEntity: Cookbook
+    icon: key/book_cook
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- JadeRaven:
+    category: KEY
+    nameMsg: MSG_ItemName_JadeRaven
+    fullDescMsg: MSG_ItemFullDesc_JadeRaven
+    shortDescMsg: MSG_ItemShortDesc_JadeRaven
+    hudElement: JadeRaven
+    itemEntity: JadeRaven
+    icon: key/jade_raven
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MagicalSeed1:
+    category: KEY
+    nameMsg: MSG_ItemName_MagicalSeed1
+    fullDescMsg: MSG_ItemFullDesc_MagicalSeed1
+    shortDescMsg: MSG_ItemShortDesc_MagicalSeed1
+    hudElement: MagicalSeed1
+    itemEntity: MagicalSeed1
+    icon: key/seed_1
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MagicalSeed2:
+    category: KEY
+    nameMsg: MSG_ItemName_MagicalSeed2
+    fullDescMsg: MSG_ItemFullDesc_MagicalSeed2
+    shortDescMsg: MSG_ItemShortDesc_MagicalSeed2
+    hudElement: MagicalSeed2
+    itemEntity: MagicalSeed2
+    icon: key/seed_2
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MagicalSeed3:
+    category: KEY
+    nameMsg: MSG_ItemName_MagicalSeed3
+    fullDescMsg: MSG_ItemFullDesc_MagicalSeed3
+    shortDescMsg: MSG_ItemShortDesc_MagicalSeed3
+    hudElement: MagicalSeed3
+    itemEntity: MagicalSeed3
+    icon: key/seed_3
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MagicalSeed4:
+    category: KEY
+    nameMsg: MSG_ItemName_MagicalSeed4
+    fullDescMsg: MSG_ItemFullDesc_MagicalSeed4
+    shortDescMsg: MSG_ItemShortDesc_MagicalSeed4
+    hudElement: MagicalSeed4
+    itemEntity: MagicalSeed4
+    icon: key/seed_4
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- ToadDoll:
+    category: KEY
+    nameMsg: MSG_ItemName_ToadDoll
+    fullDescMsg: MSG_ItemFullDesc_ToadDoll
+    shortDescMsg: MSG_ItemShortDesc_ToadDoll
+    hudElement: ToadDoll
+    itemEntity: ToadDoll
+    icon: key/toad_doll
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Calculator:
+    category: KEY
+    nameMsg: MSG_ItemName_Calculator
+    fullDescMsg: MSG_ItemFullDesc_Calculator
+    shortDescMsg: MSG_ItemShortDesc_Calculator
+    hudElement: Calculator
+    itemEntity: Calculator
+    icon: key/calculator
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SnowmanBucket:
+    category: KEY
+    nameMsg: MSG_ItemName_SnowmanBucket
+    fullDescMsg: MSG_ItemFullDesc_SnowmanBucket
+    shortDescMsg: MSG_ItemShortDesc_SnowmanBucket
+    hudElement: SnowmanBucket
+    itemEntity: SnowmanBucket
+    icon: key/snowman_bucket
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SnowmanScarf:
+    category: KEY
+    nameMsg: MSG_ItemName_SnowmanScarf
+    fullDescMsg: MSG_ItemFullDesc_SnowmanScarf
+    shortDescMsg: MSG_ItemShortDesc_SnowmanScarf
+    hudElement: SnowmanScarf
+    itemEntity: SnowmanScarf
+    icon: key/snowman_scarf
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- RedKey:
+    category: KEY
+    nameMsg: MSG_ItemName_RedKey
+    fullDescMsg: MSG_ItemFullDesc_RedKey
+    shortDescMsg: MSG_ItemShortDesc_RedKey
+    hudElement: RedKey
+    itemEntity: RedKey
+    icon: key/key_red
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BlueKey:
+    category: KEY
+    nameMsg: MSG_ItemName_BlueKey
+    fullDescMsg: MSG_ItemFullDesc_BlueKey
+    shortDescMsg: MSG_ItemShortDesc_BlueKey
+    hudElement: BlueKey
+    itemEntity: BlueKey
+    icon: key/key_blue
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_1:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToMerlon:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter01
+    fullDescMsg: MSG_ItemFullDesc_Letter01
+    shortDescMsg: MSG_ItemShortDesc_Letter01
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToGoompa:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter02
+    fullDescMsg: MSG_ItemFullDesc_Letter02
+    shortDescMsg: MSG_ItemShortDesc_Letter02
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToMortT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter03
+    fullDescMsg: MSG_ItemFullDesc_Letter03
+    shortDescMsg: MSG_ItemShortDesc_Letter03
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToRussT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter04
+    fullDescMsg: MSG_ItemFullDesc_Letter04
+    shortDescMsg: MSG_ItemShortDesc_Letter04
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToMayorPenguin:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter05
+    fullDescMsg: MSG_ItemFullDesc_Letter05
+    shortDescMsg: MSG_ItemShortDesc_Letter05
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToMerlow:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter06
+    fullDescMsg: MSG_ItemFullDesc_Letter06
+    shortDescMsg: MSG_ItemShortDesc_Letter06
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToFiceT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter07
+    fullDescMsg: MSG_ItemFullDesc_Letter07
+    shortDescMsg: MSG_ItemShortDesc_Letter07
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToNomadimouse:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter08
+    fullDescMsg: MSG_ItemFullDesc_Letter08
+    shortDescMsg: MSG_ItemShortDesc_Letter08
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToMinhT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter09
+    fullDescMsg: MSG_ItemFullDesc_Letter09
+    shortDescMsg: MSG_ItemShortDesc_Letter09
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_2:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter02
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter02
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter02
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainGoompapa_1:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter10
+    fullDescMsg: MSG_ItemFullDesc_Letter10
+    shortDescMsg: MSG_ItemShortDesc_Letter10
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToIgor:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter11
+    fullDescMsg: MSG_ItemFullDesc_Letter11
+    shortDescMsg: MSG_ItemShortDesc_Letter11
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_3:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter03
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter03
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter03
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_4:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter04
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter04
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter04
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_5:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter05
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter05
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter05
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainFranky:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter12
+    fullDescMsg: MSG_ItemFullDesc_Letter12
+    shortDescMsg: MSG_ItemShortDesc_Letter12
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainMussT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter13
+    fullDescMsg: MSG_ItemFullDesc_Letter13
+    shortDescMsg: MSG_ItemShortDesc_Letter13
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainKoover_1:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter14
+    fullDescMsg: MSG_ItemFullDesc_Letter14
+    shortDescMsg: MSG_ItemShortDesc_Letter14
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainFishmael:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter15
+    fullDescMsg: MSG_ItemFullDesc_Letter15
+    shortDescMsg: MSG_ItemShortDesc_Letter15
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainKoover_2:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter16
+    fullDescMsg: MSG_ItemFullDesc_Letter16
+    shortDescMsg: MSG_ItemShortDesc_Letter16
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainMrE:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter17
+    fullDescMsg: MSG_ItemFullDesc_Letter17
+    shortDescMsg: MSG_ItemShortDesc_Letter17
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainMissT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter18
+    fullDescMsg: MSG_ItemFullDesc_Letter18
+    shortDescMsg: MSG_ItemShortDesc_Letter18
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainLittleMouser:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter19
+    fullDescMsg: MSG_ItemFullDesc_Letter19
+    shortDescMsg: MSG_ItemShortDesc_Letter19
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_6:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter06
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter06
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter06
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainDaneT_1:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter20
+    fullDescMsg: MSG_ItemFullDesc_Letter20
+    shortDescMsg: MSG_ItemShortDesc_Letter20
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainYoshiKid:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter21
+    fullDescMsg: MSG_ItemFullDesc_Letter21
+    shortDescMsg: MSG_ItemShortDesc_Letter21
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainDaneT_2:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter22
+    fullDescMsg: MSG_ItemFullDesc_Letter22
+    shortDescMsg: MSG_ItemShortDesc_Letter22
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainFrostT:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter23
+    fullDescMsg: MSG_ItemFullDesc_Letter23
+    shortDescMsg: MSG_ItemShortDesc_Letter23
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterChainGoompapa_2:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter24
+    fullDescMsg: MSG_ItemFullDesc_Letter24
+    shortDescMsg: MSG_ItemShortDesc_Letter24
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Artifact:
+    category: KEY
+    nameMsg: MSG_ItemName_Artifact
+    fullDescMsg: MSG_ItemFullDesc_Artifact
+    shortDescMsg: MSG_ItemShortDesc_Artifact
+    hudElement: Artifact
+    itemEntity: Artifact
+    icon: key/artifact
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- LetterToKolorado:
+    category: KEY
+    nameMsg: MSG_ItemName_Letter25
+    fullDescMsg: MSG_ItemFullDesc_Letter25
+    shortDescMsg: MSG_ItemShortDesc_Letter25
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- UnusedLetter_7:
+    category: KEY
+    nameMsg: MSG_ItemName_UnusedLetter
+    fullDescMsg: MSG_ItemFullDesc_UnusedLetter
+    shortDescMsg: MSG_ItemShortDesc_UnusedLetter
+    hudElement: Letter
+    itemEntity: Letter
+    icon: key/Letter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Dolly:
+    category: KEY
+    nameMsg: MSG_ItemName_Dolly
+    fullDescMsg: MSG_ItemFullDesc_Dolly
+    shortDescMsg: MSG_ItemShortDesc_Dolly
+    hudElement: Dolly
+    itemEntity: Dolly
+    icon: key/dolly
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- WaterStone:
+    category: KEY
+    nameMsg: MSG_ItemName_WaterStone
+    fullDescMsg: MSG_ItemFullDesc_WaterStone
+    shortDescMsg: MSG_ItemShortDesc_WaterStone
+    hudElement: WaterStone
+    itemEntity: WaterStone
+    icon: key/water_stone
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MagicalBean:
+    category: KEY
+    nameMsg: MSG_ItemName_MagicalBean
+    fullDescMsg: MSG_ItemFullDesc_MagicalBean
+    shortDescMsg: MSG_ItemShortDesc_MagicalBean
+    hudElement: MagicBean
+    itemEntity: MagicalBean
+    icon: key/magic_bean
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- FertileSoil:
+    category: KEY
+    nameMsg: MSG_ItemName_FertileSoil
+    fullDescMsg: MSG_ItemFullDesc_FertileSoil
+    shortDescMsg: MSG_ItemShortDesc_FertileSoil
+    hudElement: FertileSoil
+    itemEntity: FertileSoil
+    icon: key/fertile_soil
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MiracleWater:
+    category: KEY
+    nameMsg: MSG_ItemName_MiracleWater
+    fullDescMsg: MSG_ItemFullDesc_MiracleWater
+    shortDescMsg: MSG_ItemShortDesc_MiracleWater
+    hudElement: MiracleWater
+    itemEntity: MiracleWater
+    icon: key/miracle_water
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- VolcanoVase:
+    category: KEY
+    nameMsg: MSG_ItemName_VolcanoVase
+    fullDescMsg: MSG_ItemFullDesc_VolcanoVase
+    shortDescMsg: MSG_ItemShortDesc_VolcanoVase
+    hudElement: AncientVase
+    itemEntity: AncientVase
+    icon: key/vase
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootTheTape:
+    category: KEY
+    nameMsg: MSG_ItemName_KootTheTape
+    fullDescMsg: MSG_ItemFullDesc_KootTheTape
+    shortDescMsg: MSG_ItemShortDesc_KootTheTape
+    hudElement: KootTheTape
+    itemEntity: KootTheTape
+    icon: key/koot_the_tape
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingSugar:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingSugar
+    fullDescMsg: MSG_ItemFullDesc_BakingSugar
+    shortDescMsg: MSG_ItemShortDesc_BakingSugar
+    hudElement: BakingSugar
+    itemEntity: BakingSugar
+    icon: peach/BakingSugar
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingSalt:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingSalt
+    fullDescMsg: MSG_ItemFullDesc_BakingSalt
+    shortDescMsg: MSG_ItemShortDesc_BakingSalt
+    hudElement: BakingSalt
+    itemEntity: BakingSalt
+    icon: peach/BakingSalt
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingEgg:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingEgg
+    fullDescMsg: MSG_ItemFullDesc_BakingEgg
+    shortDescMsg: MSG_ItemShortDesc_BakingEgg
+    hudElement: BakingEgg
+    itemEntity: BakingEgg
+    icon: peach/BakingEgg
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingCream:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingCream
+    fullDescMsg: MSG_ItemFullDesc_BakingCream
+    shortDescMsg: MSG_ItemShortDesc_BakingCream
+    hudElement: BakingCream
+    itemEntity: BakingCream
+    icon: peach/BakingCream
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingStrawberry:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingStrawberry
+    fullDescMsg: MSG_ItemFullDesc_BakingStrawberry
+    shortDescMsg: MSG_ItemShortDesc_BakingStrawberry
+    hudElement: BakingStrawberry
+    itemEntity: BakingStrawberry
+    icon: peach/BakingStrawberry
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingButter:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingButter
+    fullDescMsg: MSG_ItemFullDesc_BakingButter
+    shortDescMsg: MSG_ItemShortDesc_BakingButter
+    hudElement: BakingButter
+    itemEntity: BakingButter
+    icon: peach/BakingButter
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingCleanser:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingCleanser
+    fullDescMsg: MSG_ItemFullDesc_BakingCleanser
+    shortDescMsg: MSG_ItemShortDesc_BakingCleanser
+    hudElement: BakingCleanser
+    itemEntity: BakingCleanser
+    icon: peach/BakingCleanser
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingWater:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingWater
+    fullDescMsg: MSG_ItemFullDesc_BakingWater
+    shortDescMsg: MSG_ItemShortDesc_BakingWater
+    hudElement: BakingWater
+    itemEntity: BakingWater
+    icon: peach/BakingWater
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingFlour:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingFlour
+    fullDescMsg: MSG_ItemFullDesc_BakingFlour
+    shortDescMsg: MSG_ItemShortDesc_BakingFlour
+    hudElement: BakingFlour
+    itemEntity: BakingFlour
+    icon: peach/BakingFlour
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- BakingMilk:
+    category: KEY
+    nameMsg: MSG_ItemName_BakingMilk
+    fullDescMsg: MSG_ItemFullDesc_BakingMilk
+    shortDescMsg: MSG_ItemShortDesc_BakingMilk
+    hudElement: BakingMilk
+    itemEntity: BakingMilk
+    icon: peach/BakingMilk
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Lyrics:
+    category: KEY
+    nameMsg: MSG_ItemName_Lyrics
+    fullDescMsg: MSG_ItemFullDesc_Lyrics
+    shortDescMsg: MSG_ItemShortDesc_Lyrics
+    hudElement: Lyrics
+    itemEntity: Lyrics
+    icon: key/book_lyrics
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Melody:
+    category: KEY
+    nameMsg: MSG_ItemName_Melody
+    fullDescMsg: MSG_ItemFullDesc_Melody
+    shortDescMsg: MSG_ItemShortDesc_Melody
+    hudElement: Melody
+    itemEntity: Melody
+    icon: key/book_melody
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Mailbag:
+    category: KEY
+    nameMsg: MSG_ItemName_Mailbag
+    fullDescMsg: MSG_ItemFullDesc_Mailbag
+    shortDescMsg: MSG_ItemShortDesc_Mailbag
+    hudElement: Mailbag
+    itemEntity: Mailbag
+    icon: key/mailbag
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PeachKey1:
+    category: KEY
+    nameMsg: MSG_ItemName_PeachKey
+    fullDescMsg: MSG_ItemFullDesc_PeachKey
+    shortDescMsg: MSG_ItemShortDesc_PeachKey
+    hudElement: PeachKey
+    itemEntity: PeachKey
+    icon: key/key_peach
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- OddKey:
+    category: KEY
+    nameMsg: MSG_ItemName_OddKey
+    fullDescMsg: MSG_ItemFullDesc_OddKey
+    shortDescMsg: MSG_ItemShortDesc_OddKey
+    hudElement: IronKey
+    itemEntity: StoreroomKey
+    icon: key/key_storeroom
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- StarStone:
+    category: KEY
+    nameMsg: MSG_ItemName_StarStone
+    fullDescMsg: MSG_ItemFullDesc_StarStone
+    shortDescMsg: MSG_ItemShortDesc_StarStone
+    hudElement: StarStone
+    itemEntity: StarStone
+    icon: key/star_stone
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SneakyParasol:
+    category: KEY
+    nameMsg: MSG_ItemName_SneakyParasol
+    fullDescMsg: MSG_ItemFullDesc_SneakyParasol
+    shortDescMsg: MSG_ItemShortDesc_SneakyParasol
+    hudElement: SneakyParasol
+    itemEntity: SneakyParasol
+    icon: peach/sneaky_parasol
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootKoopaLegends:
+    category: KEY
+    nameMsg: MSG_ItemName_KootKoopaLegends
+    fullDescMsg: MSG_ItemFullDesc_KootKoopaLegends
+    shortDescMsg: MSG_ItemShortDesc_KootKoopaLegends
+    hudElement: KootBook
+    itemEntity: KootBook
+    icon: key/koot_book
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootLuigiAutograph:
+    category: KEY
+    nameMsg: MSG_ItemName_KootLuigiAutograph
+    fullDescMsg: MSG_ItemFullDesc_KootLuigiAutograph
+    shortDescMsg: MSG_ItemShortDesc_KootLuigiAutograph
+    hudElement: KootLuigiAutograph
+    itemEntity: KootAutographMerluvlee
+    icon: key/koot_autograph_luigi
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootEmptyWallet:
+    category: KEY
+    nameMsg: MSG_ItemName_KootEmptyWallet
+    fullDescMsg: MSG_ItemFullDesc_KootEmptyWallet
+    shortDescMsg: MSG_ItemShortDesc_KootEmptyWallet
+    hudElement: KootEmptyWallet
+    itemEntity: KootEmptyWallet
+    icon: key/koot_empty_wallet
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootMerluvleeAutograph:
+    category: KEY
+    nameMsg: MSG_ItemName_KootMerluvleeAutograph
+    fullDescMsg: MSG_ItemFullDesc_KootMerluvleeAutograph
+    shortDescMsg: MSG_ItemShortDesc_KootMerluvleeAutograph
+    hudElement: KootMerluvleeAutograph
+    itemEntity: KootAutographLuigi
+    icon: key/koot_autograph_merluvlee
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootShell:
+    category: KEY
+    nameMsg: MSG_ItemName_KootShell
+    fullDescMsg: MSG_ItemFullDesc_KootShell
+    shortDescMsg: MSG_ItemShortDesc_KootShell
+    hudElement: KootShell
+    itemEntity: KootKoopaShell
+    icon: key/koot_shell
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootOldPhoto:
+    category: KEY
+    nameMsg: MSG_ItemName_KootOldPhoto
+    fullDescMsg: MSG_ItemFullDesc_KootOldPhoto
+    shortDescMsg: MSG_ItemShortDesc_KootOldPhoto
+    hudElement: KootPhoto
+    itemEntity: KootOldPhoto
+    icon: key/koot_photo
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootGlasses:
+    category: KEY
+    nameMsg: MSG_ItemName_KootGlasses
+    fullDescMsg: MSG_ItemFullDesc_KootGlasses
+    shortDescMsg: MSG_ItemShortDesc_KootGlasses
+    hudElement: KootGlasses
+    itemEntity: KootGlasses
+    icon: key/koot_glasses
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootAltPhoto:
+    category: KEY
+    nameMsg: MSG_ItemName_KootAltPhoto
+    fullDescMsg: MSG_ItemFullDesc_KootAltPhoto
+    shortDescMsg: MSG_ItemShortDesc_KootAltPhoto
+    hudElement: KootPhoto
+    itemEntity: KootOldPhoto
+    icon: key/koot_photo
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootPackage:
+    category: KEY
+    nameMsg: MSG_ItemName_KootPackage
+    fullDescMsg: MSG_ItemFullDesc_KootPackage
+    shortDescMsg: MSG_ItemShortDesc_KootPackage
+    hudElement: KootPackage
+    itemEntity: KootPackage
+    icon: key/koot_package
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KootRedJar:
+    category: KEY
+    nameMsg: MSG_ItemName_KootRedJar
+    fullDescMsg: MSG_ItemFullDesc_KootRedJar
+    shortDescMsg: MSG_ItemShortDesc_KootRedJar
+    hudElement: KootRedJar
+    itemEntity: KootRedJar
+    icon: key/koot_red_jar
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PeachKey2:
+    category: KEY
+    nameMsg: MSG_ItemName_PeachKey
+    fullDescMsg: MSG_ItemFullDesc_PeachKey
+    shortDescMsg: MSG_ItemShortDesc_PeachKey
+    hudElement: PeachKey
+    itemEntity: PeachKey
+    icon: key/key_peach
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- WarehouseKey:
+    category: KEY
+    nameMsg: MSG_ItemName_WarehouseKey
+    fullDescMsg: MSG_ItemFullDesc_WarehouseKey
+    shortDescMsg: MSG_ItemShortDesc_WarehouseKey
+    hudElement: IronKey
+    itemEntity: StoreroomKey
+    icon: key/key_storeroom
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PrisonKey1:
+    category: KEY
+    nameMsg: MSG_ItemName_PrisonKey
+    fullDescMsg: MSG_ItemFullDesc_PrisonKey
+    shortDescMsg: MSG_ItemShortDesc_PrisonKey
+    hudElement: IronKey
+    itemEntity: StoreroomKey
+    icon: key/key_storeroom
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- SilverCredit:
+    category: KEY
+    nameMsg: MSG_ItemName_SilverCredit
+    fullDescMsg: MSG_ItemFullDesc_SilverCredit
+    shortDescMsg: MSG_ItemShortDesc_SilverCredit
+    hudElement: SilverCard
+    itemEntity: SilverCard
+    icon: key/card_silver
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- GoldCredit:
+    category: KEY
+    nameMsg: MSG_ItemName_GoldCredit
+    fullDescMsg: MSG_ItemFullDesc_GoldCredit
+    shortDescMsg: MSG_ItemShortDesc_GoldCredit
+    hudElement: GoldCard
+    itemEntity: GoldCard
+    icon: key/card_gold
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PrisonKey2:
+    category: KEY
+    nameMsg: MSG_ItemName_PrisonKey
+    fullDescMsg: MSG_ItemFullDesc_PrisonKey
+    shortDescMsg: MSG_ItemShortDesc_PrisonKey
+    hudElement: PeachKey
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PrisonKey3:
+    category: KEY
+    nameMsg: MSG_ItemName_PrisonKey
+    fullDescMsg: MSG_ItemFullDesc_PrisonKey
+    shortDescMsg: MSG_ItemShortDesc_PrisonKey
+    hudElement: PeachKey
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PrisonKey4:
+    category: KEY
+    nameMsg: MSG_ItemName_PrisonKey
+    fullDescMsg: MSG_ItemFullDesc_PrisonKey
+    shortDescMsg: MSG_ItemShortDesc_PrisonKey
+    hudElement: PeachKey
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_KEY, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- FireFlower:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_FireFlower
+    fullDescMsg: MSG_ItemFullDesc_FireFlower
+    shortDescMsg: MSG_ItemShortDesc_FireFlower
+    hudElement: FireFlower
+    itemEntity: FireFlower
+    icon: battle/FireFlower
+    sellValue: 4
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 0
+- SnowmanDoll:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SnowmanDoll
+    fullDescMsg: MSG_ItemFullDesc_SnowmanDoll
+    shortDescMsg: MSG_ItemShortDesc_SnowmanDoll
+    hudElement: SnowmanDoll
+    itemEntity: SnowmanDoll
+    icon: battle/SnowmanDoll
+    sellValue: 6
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 4
+    potencyB: 0
+- ThunderRage:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ThunderRage
+    fullDescMsg: MSG_ItemFullDesc_ThunderRage
+    shortDescMsg: MSG_ItemShortDesc_ThunderRage
+    hudElement: ThunderRage
+    itemEntity: ThunderRage
+    icon: battle/ThunderRage
+    sellValue: 8
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- ShootingStar:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ShootingStar
+    fullDescMsg: MSG_ItemFullDesc_ShootingStar
+    shortDescMsg: MSG_ItemShortDesc_ShootingStar
+    hudElement: ShootingStar
+    itemEntity: ShootingStar
+    icon: battle/ShootingStar
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 6
+    potencyB: 0
+- ThunderBolt:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ThunderBolt
+    fullDescMsg: MSG_ItemFullDesc_ThunderBolt
+    shortDescMsg: MSG_ItemShortDesc_ThunderBolt
+    hudElement: ThunderBolt
+    itemEntity: ThunderBolt
+    icon: battle/ThunderBolt
+    sellValue: 4
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- Pebble:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Pebble
+    fullDescMsg: MSG_ItemFullDesc_Pebble
+    shortDescMsg: MSG_ItemShortDesc_Pebble
+    hudElement: Pebble
+    itemEntity: Pebble
+    icon: battle/Pebble
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 1
+    potencyB: 0
+- DustyHammer:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_DustyHammer
+    fullDescMsg: MSG_ItemFullDesc_DustyHammer
+    shortDescMsg: MSG_ItemShortDesc_DustyHammer
+    hudElement: DustyHammer
+    itemEntity: DustyHammer
+    icon: battle/DustyHammer
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 1
+    potencyB: 0
+- InsecticideHerb:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_InsecticideHerb
+    fullDescMsg: MSG_ItemFullDesc_InsecticideHerb
+    shortDescMsg: MSG_ItemShortDesc_InsecticideHerb
+    hudElement: InsecticideHerb
+    itemEntity: InsecticideHerb
+    icon: battle/InsecticideHerb
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- StoneCap:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_StoneCap
+    fullDescMsg: MSG_ItemFullDesc_StoneCap
+    shortDescMsg: MSG_ItemShortDesc_StoneCap
+    hudElement: StoneCap
+    itemEntity: StoneCap
+    icon: battle/StoneCap
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 0
+- TastyTonic:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_TastyTonic
+    fullDescMsg: MSG_ItemFullDesc_TastyTonic
+    shortDescMsg: MSG_ItemShortDesc_TastyTonic
+    hudElement: TastyTonic
+    itemEntity: TastyTonic
+    icon: food/TastyTonic
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Mushroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Mushroom
+    fullDescMsg: MSG_ItemFullDesc_Mushroom
+    shortDescMsg: MSG_ItemShortDesc_Mushroom
+    hudElement: Mushroom
+    itemEntity: Mushroom
+    icon: food/Mushroom
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- VoltShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_VoltShroom
+    fullDescMsg: MSG_ItemFullDesc_VoltShroom
+    shortDescMsg: MSG_ItemShortDesc_VoltShroom
+    hudElement: VoltShroom
+    itemEntity: VoltShroom
+    icon: battle/VoltShroom
+    sellValue: 7
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 4
+    potencyB: 0
+- SuperShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SuperShroom
+    fullDescMsg: MSG_ItemFullDesc_SuperShroom
+    shortDescMsg: MSG_ItemShortDesc_SuperShroom
+    hudElement: SuperShroom
+    itemEntity: SuperShroom
+    icon: food/SuperShroom
+    sellValue: 7
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 0
+- DriedShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_DriedShroom
+    fullDescMsg: MSG_ItemFullDesc_DriedShroom
+    shortDescMsg: MSG_ItemShortDesc_DriedShroom
+    hudElement: DriedShroom
+    itemEntity: DriedShroom
+    icon: food/DriedShroom
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 1
+    potencyB: 0
+- UltraShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_UltraShroom
+    fullDescMsg: MSG_ItemFullDesc_UltraShroom
+    shortDescMsg: MSG_ItemShortDesc_UltraShroom
+    hudElement: UltraShroom
+    itemEntity: UltraShroom
+    icon: food/UltraShroom
+    sellValue: 50
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 50
+    potencyB: 0
+- SleepySheep:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SleepySheep
+    fullDescMsg: MSG_ItemFullDesc_SleepySheep
+    shortDescMsg: MSG_ItemShortDesc_SleepySheep
+    hudElement: SleepySheep
+    itemEntity: SleepySheep
+    icon: battle/SleepySheep
+    sellValue: 4
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 0
+- POWBlock:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_POWBlock
+    fullDescMsg: MSG_ItemFullDesc_POWBlock
+    shortDescMsg: MSG_ItemShortDesc_POWBlock
+    hudElement: POWBlock
+    itemEntity: POWBlock
+    icon: battle/POWBlock
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 2
+    potencyB: 0
+- HustleDrink:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HustleDrink
+    fullDescMsg: MSG_ItemFullDesc_HustleDrink
+    shortDescMsg: MSG_ItemShortDesc_HustleDrink
+    hudElement: HustleDrink
+    itemEntity: HustleDrink
+    icon: battle/HustleDrink
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 2
+    potencyB: 0
+- StopWatch:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_StopWatch
+    fullDescMsg: MSG_ItemFullDesc_StopWatch
+    shortDescMsg: MSG_ItemShortDesc_StopWatch
+    hudElement: StopWatch
+    itemEntity: StopWatch
+    icon: battle/StopWatch
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 4
+    potencyB: 0
+- WhackasBump:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_WhackasBump
+    fullDescMsg: MSG_ItemFullDesc_WhackasBump
+    shortDescMsg: MSG_ItemShortDesc_WhackasBump
+    hudElement: WhackasBump
+    itemEntity: WhackasBump
+    icon: food/WhackasBump
+    sellValue: 30
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 25
+    potencyB: 25
+- Apple:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Apple
+    fullDescMsg: MSG_ItemFullDesc_Apple
+    shortDescMsg: MSG_ItemShortDesc_Apple
+    hudElement: Apple
+    itemEntity: Apple
+    icon: food/Apple
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- LifeShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_LifeShroom
+    fullDescMsg: MSG_ItemFullDesc_LifeShroom
+    shortDescMsg: MSG_ItemShortDesc_LifeShroom
+    hudElement: LifeShroom
+    itemEntity: LifeShroom
+    icon: food/LifeShroom
+    sellValue: 20
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 0
+- Mystery:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Mystery
+    fullDescMsg: MSG_ItemFullDesc_Mystery
+    shortDescMsg: MSG_ItemShortDesc_Mystery
+    hudElement: Mystery
+    itemEntity: Mystery
+    icon: battle/Mystery
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- RepelGel:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_RepelGel
+    fullDescMsg: MSG_ItemFullDesc_RepelGel
+    shortDescMsg: MSG_ItemShortDesc_RepelGel
+    hudElement: RepelGel
+    itemEntity: RepelGel
+    icon: battle/RepelGel
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 2
+    potencyB: 0
+- FrightJar:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_FrightJar
+    fullDescMsg: MSG_ItemFullDesc_FrightJar
+    shortDescMsg: MSG_ItemShortDesc_FrightJar
+    hudElement: FrightJar
+    itemEntity: FrightJar
+    icon: battle/FrightJar
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- PleaseComeBack:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_PleaseComeBack
+    fullDescMsg: MSG_ItemFullDesc_PleaseComeBack
+    shortDescMsg: MSG_ItemShortDesc_PleaseComeBack
+    hudElement: PleaseComeBack
+    itemEntity: PleaseComeBack
+    icon: battle/PleaseComeBack
+    sellValue: 5
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- DizzyDial:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_DizzyDial
+    fullDescMsg: MSG_ItemFullDesc_DizzyDial
+    shortDescMsg: MSG_ItemShortDesc_DizzyDial
+    hudElement: DizzyDial
+    itemEntity: DizzyDial
+    icon: battle/DizzyDial
+    sellValue: 6
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 0
+- SuperSoda:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SuperSoda
+    fullDescMsg: MSG_ItemFullDesc_SuperSoda
+    shortDescMsg: MSG_ItemShortDesc_SuperSoda
+    hudElement: SuperSoda
+    itemEntity: SuperSoda
+    icon: food/SuperSoda
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 5
+- Lemon:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Lemon
+    fullDescMsg: MSG_ItemFullDesc_Lemon
+    shortDescMsg: MSG_ItemShortDesc_Lemon
+    hudElement: Lemon
+    itemEntity: Lemon
+    icon: food/Lemon
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 1
+    potencyB: 2
+- Lime:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Lime
+    fullDescMsg: MSG_ItemFullDesc_Lime
+    shortDescMsg: MSG_ItemShortDesc_Lime
+    hudElement: Lime
+    itemEntity: Lime
+    icon: food/Lime
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 3
+- BlueBerry:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_BlueBerry
+    fullDescMsg: MSG_ItemFullDesc_BlueBerry
+    shortDescMsg: MSG_ItemShortDesc_BlueBerry
+    hudElement: BlueBerry
+    itemEntity: BlueBerry
+    icon: food/BlueBerry
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 5
+- RedBerry:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_RedBerry
+    fullDescMsg: MSG_ItemFullDesc_RedBerry
+    shortDescMsg: MSG_ItemShortDesc_RedBerry
+    hudElement: RedBerry
+    itemEntity: RedBerry
+    icon: food/RedBerry
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- YellowBerry:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_YellowBerry
+    fullDescMsg: MSG_ItemFullDesc_YellowBerry
+    shortDescMsg: MSG_ItemShortDesc_YellowBerry
+    hudElement: YellowBerry
+    itemEntity: YellowBerry
+    icon: food/YellowBerry
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 3
+- BubbleBerry:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_BubbleBerry
+    fullDescMsg: MSG_ItemFullDesc_BubbleBerry
+    shortDescMsg: MSG_ItemShortDesc_BubbleBerry
+    hudElement: BubbleBerry
+    itemEntity: BubbleBerry
+    icon: food/BubbleBerry
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- JamminJelly:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_JamminJelly
+    fullDescMsg: MSG_ItemFullDesc_JamminJelly
+    shortDescMsg: MSG_ItemShortDesc_JamminJelly
+    hudElement: JamminJelly
+    itemEntity: JamminJelly
+    icon: food/JamminJelly
+    sellValue: 50
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 50
+- MapleSyrup:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_MapleSyrup
+    fullDescMsg: MSG_ItemFullDesc_MapleSyrup
+    shortDescMsg: MSG_ItemShortDesc_MapleSyrup
+    hudElement: MapleSyrup
+    itemEntity: MapleSyrup
+    icon: food/MapleSyrup
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 10
+- HoneySyrup:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HoneySyrup
+    fullDescMsg: MSG_ItemFullDesc_HoneySyrup
+    shortDescMsg: MSG_ItemShortDesc_HoneySyrup
+    hudElement: HoneySyrup
+    itemEntity: HoneySyrup
+    icon: food/HoneySyrup
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 5
+- Goomnut:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Goomnut
+    fullDescMsg: MSG_ItemFullDesc_Goomnut
+    shortDescMsg: MSG_ItemShortDesc_Goomnut
+    hudElement: Goomnut
+    itemEntity: Goomnut
+    icon: food/Goomnut
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 3
+- KoopaLeaf:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_KoopaLeaf
+    fullDescMsg: MSG_ItemFullDesc_KoopaLeaf
+    shortDescMsg: MSG_ItemShortDesc_KoopaLeaf
+    hudElement: KoopaLeaf
+    itemEntity: KoopaLeaf
+    icon: food/KoopaLeaf
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 3
+- DriedPasta:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_DriedPasta
+    fullDescMsg: MSG_ItemFullDesc_DriedPasta
+    shortDescMsg: MSG_ItemShortDesc_DriedPasta
+    hudElement: DriedPasta
+    itemEntity: DriedPasta
+    icon: food/DriedPasta
+    sellValue: 4
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 2
+- DriedFruit:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_DriedFruit
+    fullDescMsg: MSG_ItemFullDesc_DriedFruit
+    shortDescMsg: MSG_ItemShortDesc_DriedFruit
+    hudElement: DriedFruit
+    itemEntity: DriedFruit
+    icon: food/DriedFruit
+    sellValue: 5
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 15
+    potencyB: 0
+- StrangeLeaf:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_StrangeLeaf
+    fullDescMsg: MSG_ItemFullDesc_StrangeLeaf
+    shortDescMsg: MSG_ItemShortDesc_StrangeLeaf
+    hudElement: StrangeLeaf
+    itemEntity: StrangeLeaf
+    icon: food/StrangeLeaf
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 5
+- CakeMix:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_CakeMix
+    fullDescMsg: MSG_ItemFullDesc_CakeMix
+    shortDescMsg: MSG_ItemShortDesc_CakeMix
+    hudElement: CakeMix
+    itemEntity: CakeMix
+    icon: food/CakeMix
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 1
+- Egg:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Egg
+    fullDescMsg: MSG_ItemFullDesc_Egg
+    shortDescMsg: MSG_ItemShortDesc_Egg
+    hudElement: Egg
+    itemEntity: Egg
+    icon: food/Egg
+    sellValue: 2
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- Coconut:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Coconut
+    fullDescMsg: MSG_ItemFullDesc_Coconut
+    shortDescMsg: MSG_ItemShortDesc_Coconut
+    hudElement: Coconut
+    itemEntity: Coconut
+    icon: food/Coconut
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 0
+- Melon:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Melon
+    fullDescMsg: MSG_ItemFullDesc_Melon
+    shortDescMsg: MSG_ItemShortDesc_Melon
+    hudElement: Melon
+    itemEntity: Melon
+    icon: food/Melon
+    sellValue: 7
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 15
+    potencyB: 0
+- StinkyHerb:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_StinkyHerb
+    fullDescMsg: MSG_ItemFullDesc_StinkyHerb
+    shortDescMsg: MSG_ItemShortDesc_StinkyHerb
+    hudElement: StinkyHerb
+    itemEntity: StinkyHerb
+    icon: food/StinkyHerb
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 5
+- IcedPotato:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_IcedPotato
+    fullDescMsg: MSG_ItemFullDesc_IcedPotato
+    shortDescMsg: MSG_ItemShortDesc_IcedPotato
+    hudElement: IcedPotato
+    itemEntity: IcedPotato
+    icon: food/IcedPotato
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 0
+- SpicySoup:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SpicySoup
+    fullDescMsg: MSG_ItemFullDesc_SpicySoup
+    shortDescMsg: MSG_ItemShortDesc_SpicySoup
+    hudElement: SpicySoup
+    itemEntity: SpicySoup
+    icon: food/SpicySoup
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 4
+    potencyB: 4
+- ApplePie:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ApplePie
+    fullDescMsg: MSG_ItemFullDesc_ApplePie
+    shortDescMsg: MSG_ItemShortDesc_ApplePie
+    hudElement: ApplePie
+    itemEntity: ApplePie
+    icon: food/ApplePie
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 15
+- HoneyUltra:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HoneyUltra
+    fullDescMsg: MSG_ItemFullDesc_HoneyUltra
+    shortDescMsg: MSG_ItemShortDesc_HoneyUltra
+    hudElement: HoneyUltra
+    itemEntity: HoneyUltra
+    icon: food/HoneyUltra
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 50
+    potencyB: 5
+- MapleUltra:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_MapleUltra
+    fullDescMsg: MSG_ItemFullDesc_MapleUltra
+    shortDescMsg: MSG_ItemShortDesc_MapleUltra
+    hudElement: MapleUltra
+    itemEntity: MapleUltra
+    icon: food/MapleUltra
+    sellValue: 100
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 50
+    potencyB: 10
+- JellyUltra:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_JellyUltra
+    fullDescMsg: MSG_ItemFullDesc_JellyUltra
+    shortDescMsg: MSG_ItemShortDesc_JellyUltra
+    hudElement: JellyUltra
+    itemEntity: JellyUltra
+    icon: food/JellyUltra
+    sellValue: 150
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 50
+    potencyB: 50
+- Koopasta:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Koopasta
+    fullDescMsg: MSG_ItemFullDesc_Koopasta
+    shortDescMsg: MSG_ItemShortDesc_Koopasta
+    hudElement: Koopasta
+    itemEntity: Koopasta
+    icon: food/Koopasta
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 7
+    potencyB: 7
+- FriedShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_FriedShroom
+    fullDescMsg: MSG_ItemFullDesc_FriedShroom
+    shortDescMsg: MSG_ItemShortDesc_FriedShroom
+    hudElement: FriedShroom
+    itemEntity: FriedShroom
+    icon: food/FriedShroom
+    sellValue: 5
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 6
+    potencyB: 2
+- ShroomCake:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ShroomCake
+    fullDescMsg: MSG_ItemFullDesc_ShroomCake
+    shortDescMsg: MSG_ItemShortDesc_ShroomCake
+    hudElement: ShroomCake
+    itemEntity: ShroomCake
+    icon: food/ShroomCake
+    sellValue: 20
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 10
+- ShroomSteak:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ShroomSteak
+    fullDescMsg: MSG_ItemFullDesc_ShroomSteak
+    shortDescMsg: MSG_ItemShortDesc_ShroomSteak
+    hudElement: ShroomSteak
+    itemEntity: ShroomSteak
+    icon: food/ShroomSteak
+    sellValue: 45
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 30
+    potencyB: 10
+- HotShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HotShroom
+    fullDescMsg: MSG_ItemFullDesc_HotShroom
+    shortDescMsg: MSG_ItemShortDesc_HotShroom
+    hudElement: HotShroom
+    itemEntity: HotShroom
+    icon: food/HotShroom
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 15
+    potencyB: 5
+- SweetShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SweetShroom
+    fullDescMsg: MSG_ItemFullDesc_SweetShroom
+    shortDescMsg: MSG_ItemShortDesc_SweetShroom
+    hudElement: SweetShroom
+    itemEntity: SweetShroom
+    icon: food/SweetShroom
+    sellValue: 50
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 30
+    potencyB: 20
+- YummyMeal:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_YummyMeal
+    fullDescMsg: MSG_ItemFullDesc_YummyMeal
+    shortDescMsg: MSG_ItemShortDesc_YummyMeal
+    hudElement: YummyMeal
+    itemEntity: YummyMeal
+    icon: food/YummyMeal
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 20
+    potencyB: 20
+- HealthyJuice:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HealthyJuice
+    fullDescMsg: MSG_ItemFullDesc_HealthyJuice
+    shortDescMsg: MSG_ItemShortDesc_HealthyJuice
+    hudElement: HealthyJuice
+    itemEntity: HealthyJuice
+    icon: food/HealthyJuice
+    sellValue: 25
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 40
+- BlandMeal:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_BlandMeal
+    fullDescMsg: MSG_ItemFullDesc_BlandMeal
+    shortDescMsg: MSG_ItemShortDesc_BlandMeal
+    hudElement: BlandMeal
+    itemEntity: BlandMeal
+    icon: food/BlandMeal
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 10
+- DeluxeFeast:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_DeluxeFeast
+    fullDescMsg: MSG_ItemFullDesc_DeluxeFeast
+    shortDescMsg: MSG_ItemShortDesc_DeluxeFeast
+    hudElement: DeluxeFeast
+    itemEntity: DeluxeFeast
+    icon: food/DeluxeFeast
+    sellValue: 60
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 40
+    potencyB: 40
+- SpecialShake:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_SpecialShake
+    fullDescMsg: MSG_ItemFullDesc_SpecialShake
+    shortDescMsg: MSG_ItemShortDesc_SpecialShake
+    hudElement: SpecialShake
+    itemEntity: SpecialShake
+    icon: food/SpecialShake
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 20
+- BigCookie:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_BigCookie
+    fullDescMsg: MSG_ItemFullDesc_BigCookie
+    shortDescMsg: MSG_ItemShortDesc_BigCookie
+    hudElement: BigCookie
+    itemEntity: BigCookie
+    icon: food/BigCookie
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 20
+- Cake:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Cake
+    fullDescMsg: MSG_ItemFullDesc_Cake
+    shortDescMsg: MSG_ItemShortDesc_Cake
+    hudElement: Cake
+    itemEntity: Cake
+    icon: food/Cake
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 15
+- Mistake:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Mistake
+    fullDescMsg: MSG_ItemFullDesc_Mistake
+    shortDescMsg: MSG_ItemShortDesc_Mistake
+    hudElement: Mistake
+    itemEntity: Mistake
+    icon: food/Mistake
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 1
+    potencyB: 1
+- KoopaTea:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_KoopaTea
+    fullDescMsg: MSG_ItemFullDesc_KoopaTea
+    shortDescMsg: MSG_ItemShortDesc_KoopaTea
+    hudElement: KoopaTea
+    itemEntity: KoopaTea
+    icon: food/KoopaTea
+    sellValue: 3
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_USE_DRINK_ANIMATION, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 7
+- HoneySuper:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HoneySuper
+    fullDescMsg: MSG_ItemFullDesc_HoneySuper
+    shortDescMsg: MSG_ItemShortDesc_HoneySuper
+    hudElement: HoneySuper
+    itemEntity: HoneySuper
+    icon: food/HoneySuper
+    sellValue: 20
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 5
+- MapleSuper:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_MapleSuper
+    fullDescMsg: MSG_ItemFullDesc_MapleSuper
+    shortDescMsg: MSG_ItemShortDesc_MapleSuper
+    hudElement: MapleSuper
+    itemEntity: MapleSuper
+    icon: food/MapleSuper
+    sellValue: 35
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 10
+- JellySuper:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_JellySuper
+    fullDescMsg: MSG_ItemFullDesc_JellySuper
+    shortDescMsg: MSG_ItemShortDesc_JellySuper
+    hudElement: JellySuper
+    itemEntity: JellySuper
+    icon: food/JellySuper
+    sellValue: 100
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 50
+- Spaghetti:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_Spaghetti
+    fullDescMsg: MSG_ItemFullDesc_Spaghetti
+    shortDescMsg: MSG_ItemShortDesc_Spaghetti
+    hudElement: Spaghetti
+    itemEntity: Spaghetti
+    icon: food/Spaghetti
+    sellValue: 7
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 6
+    potencyB: 4
+- EggMissile:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_EggMissile
+    fullDescMsg: MSG_ItemFullDesc_EggMissile
+    shortDescMsg: MSG_ItemShortDesc_EggMissile
+    hudElement: EggMissile
+    itemEntity: EggMissile
+    icon: food/EggMissile
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 6
+    potencyB: 0
+- FriedEgg:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_FriedEgg
+    fullDescMsg: MSG_ItemFullDesc_FriedEgg
+    shortDescMsg: MSG_ItemShortDesc_FriedEgg
+    hudElement: FriedEgg
+    itemEntity: FriedEgg
+    icon: food/FriedEgg
+    sellValue: 7
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 0
+- HoneyShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HoneyShroom
+    fullDescMsg: MSG_ItemFullDesc_HoneyShroom
+    shortDescMsg: MSG_ItemShortDesc_HoneyShroom
+    hudElement: HoneyShroom
+    itemEntity: HoneyShroom
+    icon: food/HoneyShroom
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 5
+- HoneyCandy:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_HoneyCandy
+    fullDescMsg: MSG_ItemFullDesc_HoneyCandy
+    shortDescMsg: MSG_ItemShortDesc_HoneyCandy
+    hudElement: HoneyCandy
+    itemEntity: HoneyCandy
+    icon: food/HoneyCandy
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 20
+- ElectroPop:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_ElectroPop
+    fullDescMsg: MSG_ItemFullDesc_ElectroPop
+    shortDescMsg: MSG_ItemShortDesc_ElectroPop
+    hudElement: ElectroPop
+    itemEntity: ElectroPop
+    icon: food/ElectroPop
+    sellValue: 25
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 15
+- FirePop:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_FirePop
+    fullDescMsg: MSG_ItemFullDesc_FirePop
+    shortDescMsg: MSG_ItemShortDesc_FirePop
+    hudElement: FirePop
+    itemEntity: FirePop
+    icon: food/FirePop
+    sellValue: 20
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: -1
+    potencyB: 20
+- LimeCandy:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_LimeCandy
+    fullDescMsg: MSG_ItemFullDesc_LimeCandy
+    shortDescMsg: MSG_ItemShortDesc_LimeCandy
+    hudElement: LimeCandy
+    itemEntity: LimeCandy
+    icon: food/LimeCandy
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 20
+- CocoPop:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_CocoPop
+    fullDescMsg: MSG_ItemFullDesc_CocoPop
+    shortDescMsg: MSG_ItemShortDesc_CocoPop
+    hudElement: CocoPop
+    itemEntity: CocoPop
+    icon: food/CocoPop
+    sellValue: 12
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 3
+    potencyB: 15
+- LemonCandy:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_LemonCandy
+    fullDescMsg: MSG_ItemFullDesc_LemonCandy
+    shortDescMsg: MSG_ItemShortDesc_LemonCandy
+    hudElement: LemonCandy
+    itemEntity: LemonCandy
+    icon: food/LemonCandy
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 15
+- JellyPop:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_JellyPop
+    fullDescMsg: MSG_ItemFullDesc_JellyPop
+    shortDescMsg: MSG_ItemShortDesc_JellyPop
+    hudElement: JellyPop
+    itemEntity: JellyPop
+    icon: food/JellyPop
+    sellValue: 100
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 64
+- StrangeCake:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_StrangeCake
+    fullDescMsg: MSG_ItemFullDesc_StrangeCake
+    shortDescMsg: MSG_ItemShortDesc_StrangeCake
+    hudElement: StrangeCake
+    itemEntity: StrangeCake
+    icon: food/StrangeCake
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- KookyCookie:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_KookyCookie
+    fullDescMsg: MSG_ItemFullDesc_KookyCookie
+    shortDescMsg: MSG_ItemShortDesc_KookyCookie
+    hudElement: KookyCookie
+    itemEntity: KookyCookie
+    icon: food/KookyCookie
+    sellValue: 12
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 15
+- FrozenFries:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_FrozenFries
+    fullDescMsg: MSG_ItemFullDesc_FrozenFries
+    shortDescMsg: MSG_ItemShortDesc_FrozenFries
+    hudElement: FrozenFries
+    itemEntity: FrozenFries
+    icon: food/FrozenFries
+    sellValue: 15
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 15
+    potencyB: 0
+- PotatoSalad:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_PotatoSalad
+    fullDescMsg: MSG_ItemFullDesc_PotatoSalad
+    shortDescMsg: MSG_ItemShortDesc_PotatoSalad
+    hudElement: PotatoSalad
+    itemEntity: PotatoSalad
+    icon: food/PotatoSalad
+    sellValue: 6
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 10
+    potencyB: 0
+- NuttyCake:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_NuttyCake
+    fullDescMsg: MSG_ItemFullDesc_NuttyCake
+    shortDescMsg: MSG_ItemShortDesc_NuttyCake
+    hudElement: NuttyCake
+    itemEntity: NuttyCake
+    icon: food/NuttyCake
+    sellValue: 6
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 10
+- MapleShroom:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_MapleShroom
+    fullDescMsg: MSG_ItemFullDesc_MapleShroom
+    shortDescMsg: MSG_ItemShortDesc_MapleShroom
+    hudElement: MapleShroom
+    itemEntity: MapleShroom
+    icon: food/MapleShroom
+    sellValue: 25
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 10
+- BoiledEgg:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_BoiledEgg
+    fullDescMsg: MSG_ItemFullDesc_BoiledEgg
+    shortDescMsg: MSG_ItemShortDesc_BoiledEgg
+    hudElement: BoiledEgg
+    itemEntity: BoiledEgg
+    icon: food/BoiledEgg
+    sellValue: 10
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 8
+    potencyB: 8
+- YoshiCookie:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_YoshiCookie
+    fullDescMsg: MSG_ItemFullDesc_YoshiCookie
+    shortDescMsg: MSG_ItemShortDesc_YoshiCookie
+    hudElement: YoshiCookie
+    itemEntity: YoshiCookie
+    icon: food/YoshiCookie
+    sellValue: 20
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 15
+    potencyB: 15
+- JellyShroom1:
+    category: CONSUMABLE
+    nameMsg: MSG_ItemName_JellyShroom
+    fullDescMsg: MSG_ItemFullDesc_JellyShroom
+    shortDescMsg: MSG_ItemShortDesc_JellyShroom
+    hudElement: JellyShroom
+    itemEntity: JellyShroom
+    icon: food/JellyShroom
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 50
+- JellyShroom2:
+    category: UNUSED
+    nameMsg: MSG_ItemName_JellyShroom
+    fullDescMsg: MSG_ItemFullDesc_JellyShroom
+    shortDescMsg: MSG_ItemShortDesc_JellyShroom
+    hudElement: JellyShroom
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 50
+- JellyShroom3:
+    category: UNUSED
+    nameMsg: MSG_ItemName_JellyShroom
+    fullDescMsg: MSG_ItemFullDesc_JellyShroom
+    shortDescMsg: MSG_ItemShortDesc_JellyShroom
+    hudElement: JellyShroom
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 50
+- JellyShroom4:
+    category: UNUSED
+    nameMsg: MSG_ItemName_JellyShroom
+    fullDescMsg: MSG_ItemFullDesc_JellyShroom
+    shortDescMsg: MSG_ItemShortDesc_JellyShroom
+    hudElement: JellyShroom
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 50
+- JellyShroom5:
+    category: UNUSED
+    nameMsg: MSG_ItemName_JellyShroom
+    fullDescMsg: MSG_ItemFullDesc_JellyShroom
+    shortDescMsg: MSG_ItemShortDesc_JellyShroom
+    hudElement: JellyShroom
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 50
+- JellyShroom6:
+    category: UNUSED
+    nameMsg: MSG_ItemName_JellyShroom
+    fullDescMsg: MSG_ItemFullDesc_JellyShroom
+    shortDescMsg: MSG_ItemShortDesc_JellyShroom
+    hudElement: JellyShroom
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 75
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_WORLD_USABLE, ITEM_TYPE_FLAG_BATTLE_USABLE, ITEM_TYPE_FLAG_CONSUMABLE, ITEM_TYPE_FLAG_FOOD_OR_DRINK, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 5
+    potencyB: 50
+- SpinSmash:
+    category: BADGE
+    nameMsg: MSG_ItemName_SpinSmash
+    fullDescMsg: MSG_ItemFullDesc_SpinSmash
+    shortDescMsg: MSG_ItemShortDesc_SpinSmash
+    hudElement: SpinSmash
+    itemEntity: SpinSmash
+    icon: badge/SpinSmash
+    sellValue: 75
+    sortValue: 23
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SPIN_SMASH
+    potencyA: 0
+    potencyB: 0
+- Multibounce:
+    category: BADGE
+    nameMsg: MSG_ItemName_Multibounce
+    fullDescMsg: MSG_ItemFullDesc_Multibounce
+    shortDescMsg: MSG_ItemShortDesc_Multibounce
+    hudElement: Multibounce
+    itemEntity: Multibounce
+    icon: badge/Multibounce
+    sellValue: 75
+    sortValue: 4
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MULTIBOUNCE
+    potencyA: 0
+    potencyB: 0
+- PowerPlusA:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerPlus
+    fullDescMsg: MSG_ItemFullDesc_PowerPlus
+    shortDescMsg: MSG_ItemShortDesc_PowerPlus
+    hudElement: PowerPlus
+    itemEntity: PowerPlus
+    icon: badge/PowerPlus
+    sellValue: 250
+    sortValue: 67
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_PLUS
+    potencyA: 0
+    potencyB: 0
+- DodgeMaster:
+    category: BADGE
+    nameMsg: MSG_ItemName_DodgeMaster
+    fullDescMsg: MSG_ItemFullDesc_DodgeMaster
+    shortDescMsg: MSG_ItemShortDesc_DodgeMaster
+    hudElement: DodgeMaster
+    itemEntity: DodgeMaster
+    icon: badge/DodgeMaster
+    sellValue: 100
+    sortValue: 40
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DODGE_MASTER
+    potencyA: 0
+    potencyB: 0
+- PowerBounce:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerBounce
+    fullDescMsg: MSG_ItemFullDesc_PowerBounce
+    shortDescMsg: MSG_ItemShortDesc_PowerBounce
+    hudElement: PowerBounce
+    itemEntity: PowerBounce
+    icon: badge/PowerBounce
+    sellValue: 100
+    sortValue: 13
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_BOUNCE
+    potencyA: 0
+    potencyB: 0
+- SpikeShield:
+    category: BADGE
+    nameMsg: MSG_ItemName_SpikeShield
+    fullDescMsg: MSG_ItemFullDesc_SpikeShield
+    shortDescMsg: MSG_ItemShortDesc_SpikeShield
+    hudElement: SpikeShield
+    itemEntity: SpikeShield
+    icon: badge/SpikeShield
+    sellValue: 100
+    sortValue: 92
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SPIKE_SHIELD
+    potencyA: 0
+    potencyB: 0
+- FirstAttack:
+    category: BADGE
+    nameMsg: MSG_ItemName_FirstAttack
+    fullDescMsg: MSG_ItemFullDesc_FirstAttack
+    shortDescMsg: MSG_ItemShortDesc_FirstAttack
+    hudElement: FirstAttack
+    itemEntity: FirstAttack
+    icon: badge/FirstAttack
+    sellValue: 100
+    sortValue: 109
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FIRST_ATTACK
+    potencyA: 0
+    potencyB: 0
+- HPPlusA:
+    category: BADGE
+    nameMsg: MSG_ItemName_HPPlus
+    fullDescMsg: MSG_ItemFullDesc_HPPlus
+    shortDescMsg: MSG_ItemShortDesc_HPPlus
+    hudElement: HPPlus
+    itemEntity: HPPlus
+    icon: badge/HPPlus
+    sellValue: 150
+    sortValue: 53
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HP_PLUS
+    potencyA: 0
+    potencyB: 0
+- QuakeHammer:
+    category: BADGE
+    nameMsg: MSG_ItemName_QuakeHammer
+    fullDescMsg: MSG_ItemFullDesc_QuakeHammer
+    shortDescMsg: MSG_ItemShortDesc_QuakeHammer
+    hudElement: QuakeHammer
+    itemEntity: QuakeHammer
+    icon: badge/QuakeHammer
+    sellValue: 100
+    sortValue: 24
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_QUAKE_HAMMER
+    potencyA: 0
+    potencyB: 0
+- DoubleDip:
+    category: BADGE
+    nameMsg: MSG_ItemName_DoubleDip
+    fullDescMsg: MSG_ItemFullDesc_DoubleDip
+    shortDescMsg: MSG_ItemShortDesc_DoubleDip
+    hudElement: DoubleDip
+    itemEntity: DoubleDip
+    icon: badge/DoubleDip
+    sellValue: 100
+    sortValue: 33
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DOUBLE_DIP
+    potencyA: 0
+    potencyB: 0
+- MysteryScroll:
+    category: BADGE
+    nameMsg: MSG_ItemName_MysteryScroll
+    fullDescMsg: MSG_ItemFullDesc_MysteryScroll
+    shortDescMsg: MSG_ItemShortDesc_MysteryScroll
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 100
+    sortValue: 0
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MYSTERY_SCROLL
+    potencyA: 0
+    potencyB: 0
+- SleepStomp:
+    category: BADGE
+    nameMsg: MSG_ItemName_SleepStomp
+    fullDescMsg: MSG_ItemFullDesc_SleepStomp
+    shortDescMsg: MSG_ItemShortDesc_SleepStomp
+    hudElement: SleepStomp
+    itemEntity: SleepStomp
+    icon: badge/SleepStomp
+    sellValue: 75
+    sortValue: 9
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SLEEP_STOMP
+    potencyA: 0
+    potencyB: 0
+- FireShield:
+    category: BADGE
+    nameMsg: MSG_ItemName_FireShield
+    fullDescMsg: MSG_ItemFullDesc_FireShield
+    shortDescMsg: MSG_ItemShortDesc_FireShield
+    hudElement: FireShield
+    itemEntity: FireShield
+    icon: badge/FireShield
+    sellValue: 75
+    sortValue: 91
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FIRE_SHIELD
+    potencyA: 0
+    potencyB: 0
+- QuickChange:
+    category: BADGE
+    nameMsg: MSG_ItemName_QuickChange
+    fullDescMsg: MSG_ItemFullDesc_QuickChange
+    shortDescMsg: MSG_ItemShortDesc_QuickChange
+    hudElement: QuickChange
+    itemEntity: QuickChange
+    icon: badge/QuickChange
+    sellValue: 200
+    sortValue: 36
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_QUICK_CHANGE
+    potencyA: 0
+    potencyB: 0
+- DDownPound:
+    category: BADGE
+    nameMsg: MSG_ItemName_DDownPound
+    fullDescMsg: MSG_ItemFullDesc_DDownPound
+    shortDescMsg: MSG_ItemShortDesc_DDownPound
+    hudElement: DDownPound
+    itemEntity: DDownPound
+    icon: badge/DDownPound
+    sellValue: 75
+    sortValue: 29
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_D_DOWN_POUND
+    potencyA: 0
+    potencyB: 0
+- DizzyStomp:
+    category: BADGE
+    nameMsg: MSG_ItemName_DizzyStomp
+    fullDescMsg: MSG_ItemFullDesc_DizzyStomp
+    shortDescMsg: MSG_ItemShortDesc_DizzyStomp
+    hudElement: DizzyStomp
+    itemEntity: DizzyStomp
+    icon: badge/DizzyStomp
+    sellValue: 75
+    sortValue: 10
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DIZZY_STOMP
+    potencyA: 0
+    potencyB: 0
+- SmashCharge0:
+    category: BADGE
+    nameMsg: MSG_ItemName_SmashCharge0
+    fullDescMsg: MSG_ItemFullDesc_SmashCharge0
+    shortDescMsg: MSG_ItemShortDesc_SmashCharge0
+    hudElement: SmashCharge0
+    itemEntity: SmashCharge0
+    icon: badge/SmashCharge0
+    sellValue: 30
+    sortValue: 20
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SMASH_CHARGE0
+    potencyA: 0
+    potencyB: 0
+- PrettyLucky:
+    category: BADGE
+    nameMsg: MSG_ItemName_PrettyLucky
+    fullDescMsg: MSG_ItemFullDesc_PrettyLucky
+    shortDescMsg: MSG_ItemShortDesc_PrettyLucky
+    hudElement: PrettyLucky
+    itemEntity: PrettyLucky
+    icon: badge/PrettyLucky
+    sellValue: 100
+    sortValue: 85
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_PRETTY_LUCKY
+    potencyA: 0
+    potencyB: 0
+- FeelingFine:
+    category: BADGE
+    nameMsg: MSG_ItemName_FeelingFine
+    fullDescMsg: MSG_ItemFullDesc_FeelingFine
+    shortDescMsg: MSG_ItemShortDesc_FeelingFine
+    hudElement: FeelingFine
+    itemEntity: FeelingFine
+    icon: badge/FeelingFine
+    sellValue: 100
+    sortValue: 94
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FEELING_FINE
+    potencyA: 0
+    potencyB: 0
+- AttackFX_A:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXA
+    fullDescMsg: MSG_ItemFullDesc_AttackFXA
+    shortDescMsg: MSG_ItemShortDesc_AttackFXA
+    hudElement: AttackFXA
+    itemEntity: AttackFXA
+    icon: badge/AttackFXA
+    sellValue: 30
+    sortValue: 112
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_A
+    potencyA: 0
+    potencyB: 0
+- AllorNothing:
+    category: BADGE
+    nameMsg: MSG_ItemName_AllorNothing
+    fullDescMsg: MSG_ItemFullDesc_AllorNothing
+    shortDescMsg: MSG_ItemShortDesc_AllorNothing
+    hudElement: AllorNothing
+    itemEntity: AllorNothing
+    icon: badge/AllorNothing
+    sellValue: 100
+    sortValue: 80
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ALLOR_NOTHING
+    potencyA: 0
+    potencyB: 0
+- HPDrain:
+    category: BADGE
+    nameMsg: MSG_ItemName_HPDrain
+    fullDescMsg: MSG_ItemFullDesc_HPDrain
+    shortDescMsg: MSG_ItemShortDesc_HPDrain
+    hudElement: HPDrain
+    itemEntity: HPDrain
+    icon: badge/HPDrain
+    sellValue: 50
+    sortValue: 79
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HP_DRAIN
+    potencyA: 0
+    potencyB: 0
+- JumpCharge0:
+    category: BADGE
+    nameMsg: MSG_ItemName_JumpCharge0
+    fullDescMsg: MSG_ItemFullDesc_JumpCharge0
+    shortDescMsg: MSG_ItemShortDesc_JumpCharge0
+    hudElement: JumpCharge0
+    itemEntity: JumpCharge0
+    icon: badge/JumpCharge0
+    sellValue: 30
+    sortValue: 4
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_JUMP_CHARGE0
+    potencyA: 0
+    potencyB: 0
+- SlowGo:
+    category: BADGE
+    nameMsg: MSG_ItemName_SlowGo
+    fullDescMsg: MSG_ItemFullDesc_SlowGo
+    shortDescMsg: MSG_ItemShortDesc_SlowGo
+    hudElement: SlowGo
+    itemEntity: SlowGo
+    icon: badge/SlowGo
+    sellValue: 10
+    sortValue: 111
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SLOW_GO
+    potencyA: 0
+    potencyB: 0
+- FPPlusA:
+    category: BADGE
+    nameMsg: MSG_ItemName_FPPlus
+    fullDescMsg: MSG_ItemFullDesc_FPPlus
+    shortDescMsg: MSG_ItemShortDesc_FPPlus
+    hudElement: FPPlus
+    itemEntity: FPPlus
+    icon: badge/FPPlus
+    sellValue: 150
+    sortValue: 58
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FP_PLUS
+    potencyA: 0
+    potencyB: 0
+- MegaRush:
+    category: BADGE
+    nameMsg: MSG_ItemName_MegaRush
+    fullDescMsg: MSG_ItemFullDesc_MegaRush
+    shortDescMsg: MSG_ItemShortDesc_MegaRush
+    hudElement: MegaRush
+    itemEntity: MegaRush
+    icon: badge/MegaRush
+    sellValue: 50
+    sortValue: 81
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_RUSH
+    potencyA: 0
+    potencyB: 0
+- IcePower:
+    category: BADGE
+    nameMsg: MSG_ItemName_IcePower
+    fullDescMsg: MSG_ItemFullDesc_IcePower
+    shortDescMsg: MSG_ItemShortDesc_IcePower
+    hudElement: IcePower
+    itemEntity: IcePower
+    icon: badge/IcePower
+    sellValue: 75
+    sortValue: 90
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ICE_POWER
+    potencyA: 0
+    potencyB: 0
+- DefendPlusA:
+    category: BADGE
+    nameMsg: MSG_ItemName_DefendPlus
+    fullDescMsg: MSG_ItemFullDesc_DefendPlus
+    shortDescMsg: MSG_ItemShortDesc_DefendPlus
+    hudElement: DefendPlus
+    itemEntity: DefendPlus
+    icon: badge/DefendPlus
+    sellValue: 250
+    sortValue: 70
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DEFEND_PLUS
+    potencyA: 0
+    potencyB: 0
+- PayOff:
+    category: BADGE
+    nameMsg: MSG_ItemName_PayOff
+    fullDescMsg: MSG_ItemFullDesc_PayOff
+    shortDescMsg: MSG_ItemShortDesc_PayOff
+    hudElement: PayOff
+    itemEntity: PayOff
+    icon: badge/PayOff
+    sellValue: 50
+    sortValue: 101
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_PAY_OFF
+    potencyA: 0
+    potencyB: 0
+- MoneyMoney:
+    category: BADGE
+    nameMsg: MSG_ItemName_MoneyMoney
+    fullDescMsg: MSG_ItemFullDesc_MoneyMoney
+    shortDescMsg: MSG_ItemShortDesc_MoneyMoney
+    hudElement: MoneyMoney
+    itemEntity: MoneyMoney
+    icon: badge/MoneyMoney
+    sellValue: 200
+    sortValue: 101
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MONEY_MONEY
+    potencyA: 0
+    potencyB: 0
+- ChillOut:
+    category: BADGE
+    nameMsg: MSG_ItemName_ChillOut
+    fullDescMsg: MSG_ItemFullDesc_ChillOut
+    shortDescMsg: MSG_ItemShortDesc_ChillOut
+    hudElement: ChillOut
+    itemEntity: ChillOut
+    icon: badge/ChillOut
+    sellValue: 50
+    sortValue: 105
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_CHILL_OUT_BADGE
+    potencyA: 0
+    potencyB: 0
+- HappyHeartA:
+    category: BADGE
+    nameMsg: MSG_ItemName_HappyHeart
+    fullDescMsg: MSG_ItemFullDesc_HappyHeart
+    shortDescMsg: MSG_ItemShortDesc_HappyHeart
+    hudElement: HappyHeart
+    itemEntity: HappyHeart
+    icon: badge/HappyHeart
+    sellValue: 100
+    sortValue: 42
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAPPY_HEART
+    potencyA: 0
+    potencyB: 0
+- ZapTap:
+    category: BADGE
+    nameMsg: MSG_ItemName_ZapTap
+    fullDescMsg: MSG_ItemFullDesc_ZapTap
+    shortDescMsg: MSG_ItemShortDesc_ZapTap
+    hudElement: ZapTap
+    itemEntity: ZapTap
+    icon: badge/ZapTap
+    sellValue: 100
+    sortValue: 95
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ZAP_TAP
+    potencyA: 0
+    potencyB: 0
+- Berserker:
+    category: BADGE
+    nameMsg: MSG_ItemName_Berserker
+    fullDescMsg: MSG_ItemFullDesc_Berserker
+    shortDescMsg: MSG_ItemShortDesc_Berserker
+    hudElement: Berserker
+    itemEntity: Berserker
+    icon: badge/Berserker
+    sellValue: 300
+    sortValue: 88
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_BERSERKER
+    potencyA: 0
+    potencyB: 0
+- RightOn:
+    category: BADGE
+    nameMsg: MSG_ItemName_RightOn
+    fullDescMsg: MSG_ItemFullDesc_RightOn
+    shortDescMsg: MSG_ItemShortDesc_RightOn
+    hudElement: RightOn
+    itemEntity: RightOn
+    icon: badge/RightOn
+    sellValue: 300
+    sortValue: 41
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_RIGHT_ON
+    potencyA: 0
+    potencyB: 0
+- RunawayPay:
+    category: BADGE
+    nameMsg: MSG_ItemName_RunawayPay
+    fullDescMsg: MSG_ItemFullDesc_RunawayPay
+    shortDescMsg: MSG_ItemShortDesc_RunawayPay
+    hudElement: RunawayPay
+    itemEntity: RunawayPay
+    icon: badge/RunawayPay
+    sellValue: 50
+    sortValue: 99
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_RUNAWAY_PAY
+    potencyA: 0
+    potencyB: 0
+- Refund:
+    category: BADGE
+    nameMsg: MSG_ItemName_Refund
+    fullDescMsg: MSG_ItemFullDesc_Refund
+    shortDescMsg: MSG_ItemShortDesc_Refund
+    hudElement: Refund
+    itemEntity: Refund
+    icon: badge/Refund
+    sellValue: 50
+    sortValue: 100
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_REFUND
+    potencyA: 0
+    potencyB: 0
+- FlowerSaverA:
+    category: BADGE
+    nameMsg: MSG_ItemName_FlowerSaver
+    fullDescMsg: MSG_ItemFullDesc_FlowerSaver
+    shortDescMsg: MSG_ItemShortDesc_FlowerSaver
+    hudElement: FlowerSaver
+    itemEntity: FlowerSaver
+    icon: badge/FlowerSaver
+    sellValue: 250
+    sortValue: 63
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FLOWER_SAVER
+    potencyA: 0
+    potencyB: 0
+- TripleDip:
+    category: BADGE
+    nameMsg: MSG_ItemName_TripleDip
+    fullDescMsg: MSG_ItemFullDesc_TripleDip
+    shortDescMsg: MSG_ItemShortDesc_TripleDip
+    hudElement: TripleDip
+    itemEntity: TripleDip
+    icon: badge/TripleDip
+    sellValue: 200
+    sortValue: 34
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_TRIPLE_DIP
+    potencyA: 0
+    potencyB: 0
+- HammerThrow:
+    category: BADGE
+    nameMsg: MSG_ItemName_HammerThrow
+    fullDescMsg: MSG_ItemFullDesc_HammerThrow
+    shortDescMsg: MSG_ItemShortDesc_HammerThrow
+    hudElement: HammerThrow
+    itemEntity: HammerThrow
+    icon: badge/HammerThrow
+    sellValue: 75
+    sortValue: 28
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAMMER_THROW
+    potencyA: 0
+    potencyB: 0
+- MegaQuake:
+    category: BADGE
+    nameMsg: MSG_ItemName_MegaQuake
+    fullDescMsg: MSG_ItemFullDesc_MegaQuake
+    shortDescMsg: MSG_ItemShortDesc_MegaQuake
+    hudElement: MegaQuake
+    itemEntity: MegaQuake
+    icon: badge/MegaQuake
+    sellValue: 200
+    sortValue: 26
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_QUAKE
+    potencyA: 0
+    potencyB: 0
+- SmashCharge:
+    category: BADGE
+    nameMsg: MSG_ItemName_SmashCharge
+    fullDescMsg: MSG_ItemFullDesc_SmashCharge
+    shortDescMsg: MSG_ItemShortDesc_SmashCharge
+    hudElement: SmashCharge
+    itemEntity: SmashCharge
+    icon: badge/SmashCharge
+    sellValue: 50
+    sortValue: 21
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SMASH_CHARGE
+    potencyA: 0
+    potencyB: 0
+- JumpCharge:
+    category: BADGE
+    nameMsg: MSG_ItemName_JumpCharge
+    fullDescMsg: MSG_ItemFullDesc_JumpCharge
+    shortDescMsg: MSG_ItemShortDesc_JumpCharge
+    hudElement: JumpCharge
+    itemEntity: JumpCharge
+    icon: badge/JumpCharge
+    sellValue: 50
+    sortValue: 5
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_JUMP_CHARGE
+    potencyA: 0
+    potencyB: 0
+- SSmashChg:
+    category: BADGE
+    nameMsg: MSG_ItemName_SSmashChg
+    fullDescMsg: MSG_ItemFullDesc_SSmashChg
+    shortDescMsg: MSG_ItemShortDesc_SSmashChg
+    hudElement: SSmashChg
+    itemEntity: SSmashChg
+    icon: badge/SSmashChg
+    sellValue: 100
+    sortValue: 22
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SUPER_SMASH_CHARGE
+    potencyA: 0
+    potencyB: 0
+- SJumpChg:
+    category: BADGE
+    nameMsg: MSG_ItemName_SJumpChg
+    fullDescMsg: MSG_ItemFullDesc_SJumpChg
+    shortDescMsg: MSG_ItemShortDesc_SJumpChg
+    hudElement: SJumpChg
+    itemEntity: SJumpChg
+    icon: badge/SJumpChg
+    sellValue: 100
+    sortValue: 6
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SUPER_JUMP_CHARGE
+    potencyA: 0
+    potencyB: 0
+- PowerRush:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerRush
+    fullDescMsg: MSG_ItemFullDesc_PowerRush
+    shortDescMsg: MSG_ItemShortDesc_PowerRush
+    hudElement: PowerRush
+    itemEntity: PowerRush
+    icon: badge/PowerRush
+    sellValue: 50
+    sortValue: 83
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_RUSH
+    potencyA: 0
+    potencyB: 0
+- AutoJump:
+    category: BADGE
+    nameMsg: MSG_ItemName_AutoJump
+    fullDescMsg: MSG_ItemFullDesc_AutoJump
+    shortDescMsg: MSG_ItemShortDesc_AutoJump
+    hudElement: AutoJump
+    itemEntity: AutoJump
+    icon: badge/AutoJump
+    sellValue: 50
+    sortValue: 15
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_AUTO_JUMP
+    potencyA: 0
+    potencyB: 0
+- AutoSmash:
+    category: BADGE
+    nameMsg: MSG_ItemName_AutoSmash
+    fullDescMsg: MSG_ItemFullDesc_AutoSmash
+    shortDescMsg: MSG_ItemShortDesc_AutoSmash
+    hudElement: AutoSmash
+    itemEntity: AutoSmash
+    icon: badge/AutoSmash
+    sellValue: 50
+    sortValue: 31
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_AUTO_SMASH
+    potencyA: 0
+    potencyB: 0
+- CrazyHeart:
+    category: BADGE
+    nameMsg: MSG_ItemName_CrazyHeart
+    fullDescMsg: MSG_ItemFullDesc_CrazyHeart
+    shortDescMsg: MSG_ItemShortDesc_CrazyHeart
+    hudElement: CrazyHeart
+    itemEntity: CrazyHeart
+    icon: badge/CrazyHeart
+    sellValue: 300
+    sortValue: 45
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_CRAZY_HEART
+    potencyA: 0
+    potencyB: 0
+- LastStand:
+    category: BADGE
+    nameMsg: MSG_ItemName_LastStand
+    fullDescMsg: MSG_ItemFullDesc_LastStand
+    shortDescMsg: MSG_ItemShortDesc_LastStand
+    hudElement: LastStand
+    itemEntity: LastStand
+    icon: badge/LastStand
+    sellValue: 50
+    sortValue: 82
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_LAST_STAND
+    potencyA: 0
+    potencyB: 0
+- CloseCall:
+    category: BADGE
+    nameMsg: MSG_ItemName_CloseCall
+    fullDescMsg: MSG_ItemFullDesc_CloseCall
+    shortDescMsg: MSG_ItemShortDesc_CloseCall
+    hudElement: CloseCall
+    itemEntity: CloseCall
+    icon: badge/CloseCall
+    sellValue: 50
+    sortValue: 84
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_CLOSE_CALL
+    potencyA: 0
+    potencyB: 0
+- PUpDDown:
+    category: BADGE
+    nameMsg: MSG_ItemName_PUpDDown
+    fullDescMsg: MSG_ItemFullDesc_PUpDDown
+    shortDescMsg: MSG_ItemShortDesc_PUpDDown
+    hudElement: PUpDDown
+    itemEntity: PUpDDown
+    icon: badge/PUpDDown
+    sellValue: 100
+    sortValue: 78
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_P_UP_D_DOWN
+    potencyA: 0
+    potencyB: 0
+- LuckyDay:
+    category: BADGE
+    nameMsg: MSG_ItemName_LuckyDay
+    fullDescMsg: MSG_ItemFullDesc_LuckyDay
+    shortDescMsg: MSG_ItemShortDesc_LuckyDay
+    hudElement: LuckyDay
+    itemEntity: LuckyDay
+    icon: badge/LuckyDay
+    sellValue: 300
+    sortValue: 86
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_LUCKY_DAY
+    potencyA: 0
+    potencyB: 0
+- MegaHPDrain:
+    category: BADGE
+    nameMsg: MSG_ItemName_MegaHPDrain
+    fullDescMsg: MSG_ItemFullDesc_MegaHPDrain
+    shortDescMsg: MSG_ItemShortDesc_MegaHPDrain
+    hudElement: MegaHPDrain
+    itemEntity: MegaHPDrain
+    icon: badge/MegaHPDrain
+    sellValue: 100
+    sortValue: 87
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_HP_DRAIN
+    potencyA: 0
+    potencyB: 0
+- PDownDUp:
+    category: BADGE
+    nameMsg: MSG_ItemName_PDownDUp
+    fullDescMsg: MSG_ItemFullDesc_PDownDUp
+    shortDescMsg: MSG_ItemShortDesc_PDownDUp
+    hudElement: PDownDUp
+    itemEntity: PDownDUp
+    icon: badge/PDownDUp
+    sellValue: 100
+    sortValue: 77
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_P_DOWN_D_UP
+    potencyA: 0
+    potencyB: 0
+- PowerQuake:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerQuake
+    fullDescMsg: MSG_ItemFullDesc_PowerQuake
+    shortDescMsg: MSG_ItemShortDesc_PowerQuake
+    hudElement: PowerQuake
+    itemEntity: PowerQuake
+    icon: badge/PowerQuake
+    sellValue: 150
+    sortValue: 25
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_QUAKE
+    potencyA: 0
+    potencyB: 0
+- AutoMultibounce:
+    category: BADGE
+    nameMsg: MSG_ItemName_AutoMultibounce
+    fullDescMsg: MSG_ItemFullDesc_AutoMultibounce
+    shortDescMsg: MSG_ItemShortDesc_AutoMultibounce
+    hudElement: AutoMultibounce
+    itemEntity: AutoMultibounce
+    icon: badge/AutoMultibounce
+    sellValue: 75
+    sortValue: 14
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_AUTO_MULTIBOUNCE
+    potencyA: 0
+    potencyB: 0
+- FlowerFanatic:
+    category: BADGE
+    nameMsg: MSG_ItemName_FlowerFanatic
+    fullDescMsg: MSG_ItemFullDesc_FlowerFanatic
+    shortDescMsg: MSG_ItemShortDesc_FlowerFanatic
+    hudElement: FlowerFanatic
+    itemEntity: FlowerFanatic
+    icon: badge/FlowerFanatic
+    sellValue: 300
+    sortValue: 66
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FLOWER_FANATIC
+    potencyA: 0
+    potencyB: 0
+- HeartFinder:
+    category: BADGE
+    nameMsg: MSG_ItemName_HeartFinder
+    fullDescMsg: MSG_ItemFullDesc_HeartFinder
+    shortDescMsg: MSG_ItemShortDesc_HeartFinder
+    hudElement: HeartFinder
+    itemEntity: HeartFinder
+    icon: badge/HeartFinder
+    sellValue: 75
+    sortValue: 97
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HEART_FINDER
+    potencyA: 0
+    potencyB: 0
+- FlowerFinder:
+    category: BADGE
+    nameMsg: MSG_ItemName_FlowerFinder
+    fullDescMsg: MSG_ItemFullDesc_FlowerFinder
+    shortDescMsg: MSG_ItemShortDesc_FlowerFinder
+    hudElement: FlowerFinder
+    itemEntity: FlowerFinder
+    icon: badge/FlowerFinder
+    sellValue: 75
+    sortValue: 98
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FLOWER_FINDER
+    potencyA: 0
+    potencyB: 0
+- SpinAttack:
+    category: BADGE
+    nameMsg: MSG_ItemName_SpinAttack
+    fullDescMsg: MSG_ItemFullDesc_SpinAttack
+    shortDescMsg: MSG_ItemShortDesc_SpinAttack
+    hudElement: SpinAttack
+    itemEntity: SpinAttack
+    icon: badge/SpinAttack
+    sellValue: 150
+    sortValue: 108
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SPIN_ATTACK
+    potencyA: 0
+    potencyB: 0
+- DizzyAttack:
+    category: BADGE
+    nameMsg: MSG_ItemName_DizzyAttack
+    fullDescMsg: MSG_ItemFullDesc_DizzyAttack
+    shortDescMsg: MSG_ItemShortDesc_DizzyAttack
+    hudElement: DizzyAttack
+    itemEntity: DizzyAttack
+    icon: badge/DizzyAttack
+    sellValue: 100
+    sortValue: 107
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DIZZY_ATTACK
+    potencyA: 0
+    potencyB: 0
+- ISpy:
+    category: BADGE
+    nameMsg: MSG_ItemName_ISpy
+    fullDescMsg: MSG_ItemFullDesc_ISpy
+    shortDescMsg: MSG_ItemShortDesc_ISpy
+    hudElement: ISpy
+    itemEntity: ISpy
+    icon: badge/ISpy
+    sellValue: 200
+    sortValue: 104
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_I_SPY
+    potencyA: 0
+    potencyB: 0
+- SpeedySpin:
+    category: BADGE
+    nameMsg: MSG_ItemName_SpeedySpin
+    fullDescMsg: MSG_ItemFullDesc_SpeedySpin
+    shortDescMsg: MSG_ItemShortDesc_SpeedySpin
+    hudElement: SpeedySpin
+    itemEntity: SpeedySpin
+    icon: badge/SpeedySpin
+    sellValue: 50
+    sortValue: 106
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SPEEDY_SPIN
+    potencyA: 0
+    potencyB: 0
+- BumpAttack:
+    category: BADGE
+    nameMsg: MSG_ItemName_BumpAttack
+    fullDescMsg: MSG_ItemFullDesc_BumpAttack
+    shortDescMsg: MSG_ItemShortDesc_BumpAttack
+    hudElement: BumpAttack
+    itemEntity: BumpAttack
+    icon: badge/BumpAttack
+    sellValue: 200
+    sortValue: 110
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_BUMP_ATTACK
+    potencyA: 0
+    potencyB: 0
+- PowerJump:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerJump
+    fullDescMsg: MSG_ItemFullDesc_PowerJump
+    shortDescMsg: MSG_ItemShortDesc_PowerJump
+    hudElement: PowerJump
+    itemEntity: PowerJump
+    icon: badge/PowerJump
+    sellValue: 50
+    sortValue: 1
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_JUMP
+    potencyA: 0
+    potencyB: 0
+- SuperJump:
+    category: BADGE
+    nameMsg: MSG_ItemName_SuperJump
+    fullDescMsg: MSG_ItemFullDesc_SuperJump
+    shortDescMsg: MSG_ItemShortDesc_SuperJump
+    hudElement: SuperJump
+    itemEntity: SuperJump
+    icon: badge/SuperJump
+    sellValue: 100
+    sortValue: 2
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SUPER_JUMP
+    potencyA: 0
+    potencyB: 0
+- MegaJump:
+    category: BADGE
+    nameMsg: MSG_ItemName_MegaJump
+    fullDescMsg: MSG_ItemFullDesc_MegaJump
+    shortDescMsg: MSG_ItemShortDesc_MegaJump
+    hudElement: MegaJump
+    itemEntity: MegaJump
+    icon: badge/MegaJump
+    sellValue: 200
+    sortValue: 3
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_JUMP
+    potencyA: 0
+    potencyB: 0
+- PowerSmash1:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerSmash
+    fullDescMsg: MSG_ItemFullDesc_PowerSmash
+    shortDescMsg: MSG_ItemShortDesc_PowerSmash
+    hudElement: PowerSmash1
+    itemEntity: PowerSmash
+    icon: badge/PowerSmash
+    sellValue: 50
+    sortValue: 17
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_SMASH
+    potencyA: 0
+    potencyB: 0
+- SuperSmash:
+    category: BADGE
+    nameMsg: MSG_ItemName_SuperSmash
+    fullDescMsg: MSG_ItemFullDesc_SuperSmash
+    shortDescMsg: MSG_ItemShortDesc_SuperSmash
+    hudElement: SuperSmash
+    itemEntity: SuperSmash
+    icon: badge/SuperSmash
+    sellValue: 100
+    sortValue: 18
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SUPER_SMASH
+    potencyA: 0
+    potencyB: 0
+- MegaSmash:
+    category: BADGE
+    nameMsg: MSG_ItemName_MegaSmash
+    fullDescMsg: MSG_ItemFullDesc_MegaSmash
+    shortDescMsg: MSG_ItemShortDesc_MegaSmash
+    hudElement: MegaSmash
+    itemEntity: MegaSmash
+    icon: badge/MegaSmash
+    sellValue: 200
+    sortValue: 19
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_SMASH
+    potencyA: 0
+    potencyB: 0
+- PowerSmash2:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerSmash
+    fullDescMsg: MSG_ItemFullDesc_PowerSmash
+    shortDescMsg: MSG_ItemShortDesc_PowerSmash
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 50
+    sortValue: 17
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_SMASH
+    potencyA: 0
+    potencyB: 0
+- PowerSmash3:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerSmash
+    fullDescMsg: MSG_ItemFullDesc_PowerSmash
+    shortDescMsg: MSG_ItemShortDesc_PowerSmash
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 50
+    sortValue: 17
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_MEGA_SMASH
+    potencyA: 0
+    potencyB: 0
+- DeepFocus1:
+    category: BADGE
+    nameMsg: MSG_ItemName_DeepFocus
+    fullDescMsg: MSG_ItemFullDesc_DeepFocus
+    shortDescMsg: MSG_ItemShortDesc_DeepFocus
+    hudElement: DeepFocus
+    itemEntity: DeepFocus
+    icon: badge/DeepFocus
+    sellValue: 50
+    sortValue: 49
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DEEP_FOCUS
+    potencyA: 0
+    potencyB: 0
+- SuperFocus:
+    category: BADGE
+    nameMsg: MSG_ItemName_SuperFocus
+    fullDescMsg: MSG_ItemFullDesc_SuperFocus
+    shortDescMsg: MSG_ItemShortDesc_SuperFocus
+    hudElement: SuperFocus
+    itemEntity: SuperFocus
+    icon: badge/SuperFocus
+    sellValue: 100
+    sortValue: 52
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SUPER_FOCUS
+    potencyA: 0
+    potencyB: 0
+- ShrinkSmash:
+    category: BADGE
+    nameMsg: MSG_ItemName_ShrinkSmash
+    fullDescMsg: MSG_ItemFullDesc_ShrinkSmash
+    shortDescMsg: MSG_ItemShortDesc_ShrinkSmash
+    hudElement: ShrinkSmash
+    itemEntity: ShrinkSmash
+    icon: badge/ShrinkSmash
+    sellValue: 75
+    sortValue: 27
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SHRINK_SMASH
+    potencyA: 0
+    potencyB: 0
+- ShellCrack:
+    category: BADGE
+    nameMsg: MSG_ItemName_ShellCrack
+    fullDescMsg: MSG_ItemFullDesc_ShellCrack
+    shortDescMsg: MSG_ItemShortDesc_ShellCrack
+    hudElement: Present
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 100
+    sortValue: 30
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SHELL_CRACK
+    potencyA: 0
+    potencyB: 0
+- Kaiden:
+    category: BADGE
+    nameMsg: MSG_ItemName_Kaiden
+    fullDescMsg: MSG_ItemFullDesc_Kaiden
+    shortDescMsg: MSG_ItemShortDesc_Kaiden
+    hudElement: Kaiden
+    itemEntity: Kaiden
+    icon: badge/Kaiden
+    sellValue: 300
+    sortValue: 39
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_KAIDEN
+    potencyA: 0
+    potencyB: 0
+- DDownJump:
+    category: BADGE
+    nameMsg: MSG_ItemName_DDownJump
+    fullDescMsg: MSG_ItemFullDesc_DDownJump
+    shortDescMsg: MSG_ItemShortDesc_DDownJump
+    hudElement: DDownJump
+    itemEntity: DDownJump
+    icon: badge/DDownJump
+    sellValue: 100
+    sortValue: 12
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_D_DOWN_JUMP
+    potencyA: 0
+    potencyB: 0
+- ShrinkStomp:
+    category: BADGE
+    nameMsg: MSG_ItemName_ShrinkStomp
+    fullDescMsg: MSG_ItemFullDesc_ShrinkStomp
+    shortDescMsg: MSG_ItemShortDesc_ShrinkStomp
+    hudElement: ShrinkStomp
+    itemEntity: ShrinkStomp
+    icon: badge/ShrinkStomp
+    sellValue: 75
+    sortValue: 8
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_SHRINK_STOMP
+    potencyA: 0
+    potencyB: 0
+- DamageDodgeA:
+    category: BADGE
+    nameMsg: MSG_ItemName_DamageDodge
+    fullDescMsg: MSG_ItemFullDesc_DamageDodge
+    shortDescMsg: MSG_ItemShortDesc_DamageDodge
+    hudElement: DamageDodge
+    itemEntity: DamageDodge
+    icon: badge/DamageDodge
+    sellValue: 150
+    sortValue: 73
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DAMAGE_DODGE
+    potencyA: 0
+    potencyB: 0
+- EarthquakeJump:
+    category: BADGE
+    nameMsg: MSG_ItemName_EarthquakeJump
+    fullDescMsg: MSG_ItemFullDesc_EarthquakeJump
+    shortDescMsg: MSG_ItemShortDesc_EarthquakeJump
+    hudElement: EarthquakeJump
+    itemEntity: EarthquakeJump
+    icon: badge/EarthquakeJump
+    sellValue: 100
+    sortValue: 11
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_EARTHQUAKE_JUMP
+    potencyA: 0
+    potencyB: 0
+- DeepFocus2:
+    category: BADGE
+    nameMsg: MSG_ItemName_DeepFocus
+    fullDescMsg: MSG_ItemFullDesc_DeepFocus
+    shortDescMsg: MSG_ItemShortDesc_DeepFocus
+    hudElement: DeepFocus
+    itemEntity: DeepFocus
+    icon: badge/DeepFocus
+    sellValue: 50
+    sortValue: 49
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DEEP_FOCUS
+    potencyA: 0
+    potencyB: 0
+- DeepFocus3:
+    category: BADGE
+    nameMsg: MSG_ItemName_DeepFocus
+    fullDescMsg: MSG_ItemFullDesc_DeepFocus
+    shortDescMsg: MSG_ItemShortDesc_DeepFocus
+    hudElement: DeepFocus
+    itemEntity: SuperFocus
+    icon: badge/SuperFocus
+    sellValue: 50
+    sortValue: 49
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DEEP_FOCUS
+    potencyA: 0
+    potencyB: 0
+- HPPlusB:
+    category: BADGE
+    nameMsg: MSG_ItemName_HPPlus
+    fullDescMsg: MSG_ItemFullDesc_HPPlus
+    shortDescMsg: MSG_ItemShortDesc_HPPlus
+    hudElement: HPPlus
+    itemEntity: HPPlus
+    icon: badge/HPPlus
+    sellValue: 150
+    sortValue: 53
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HP_PLUS
+    potencyA: 0
+    potencyB: 0
+- FPPlusB:
+    category: BADGE
+    nameMsg: MSG_ItemName_FPPlus
+    fullDescMsg: MSG_ItemFullDesc_FPPlus
+    shortDescMsg: MSG_ItemShortDesc_FPPlus
+    hudElement: FPPlus
+    itemEntity: FPPlus
+    icon: badge/FPPlus
+    sellValue: 150
+    sortValue: 58
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FP_PLUS
+    potencyA: 0
+    potencyB: 0
+- HappyHeartB:
+    category: BADGE
+    nameMsg: MSG_ItemName_HappyHeart
+    fullDescMsg: MSG_ItemFullDesc_HappyHeart
+    shortDescMsg: MSG_ItemShortDesc_HappyHeart
+    hudElement: HappyHeart
+    itemEntity: HappyHeart
+    icon: badge/HappyHeart
+    sellValue: 100
+    sortValue: 42
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAPPY_HEART
+    potencyA: 0
+    potencyB: 0
+- HappyHeartX:
+    category: BADGE
+    nameMsg: MSG_ItemName_HappyHeart
+    fullDescMsg: MSG_ItemFullDesc_HappyHeart
+    shortDescMsg: MSG_ItemShortDesc_HappyHeart
+    hudElement: HappyHeart
+    itemEntity: HappyHeart
+    icon: badge/HappyHeart
+    sellValue: 100
+    sortValue: 42
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAPPY_HEART
+    potencyA: 0
+    potencyB: 0
+- FlowerSaverB:
+    category: BADGE
+    nameMsg: MSG_ItemName_FlowerSaver
+    fullDescMsg: MSG_ItemFullDesc_FlowerSaver
+    shortDescMsg: MSG_ItemShortDesc_FlowerSaver
+    hudElement: FlowerSaver
+    itemEntity: FlowerSaver
+    icon: badge/FlowerSaver
+    sellValue: 250
+    sortValue: 63
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FLOWER_SAVER
+    potencyA: 0
+    potencyB: 0
+- FlowerSaverX:
+    category: BADGE
+    nameMsg: MSG_ItemName_FlowerSaver
+    fullDescMsg: MSG_ItemFullDesc_FlowerSaver
+    shortDescMsg: MSG_ItemShortDesc_FlowerSaver
+    hudElement: FlowerSaver
+    itemEntity: FlowerSaver
+    icon: badge/FlowerSaver
+    sellValue: 250
+    sortValue: 63
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FLOWER_SAVER
+    potencyA: 0
+    potencyB: 0
+- DamageDodgeB:
+    category: BADGE
+    nameMsg: MSG_ItemName_DamageDodge
+    fullDescMsg: MSG_ItemFullDesc_DamageDodge
+    shortDescMsg: MSG_ItemShortDesc_DamageDodge
+    hudElement: DamageDodge
+    itemEntity: DamageDodge
+    icon: badge/DamageDodge
+    sellValue: 150
+    sortValue: 73
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DAMAGE_DODGE
+    potencyA: 0
+    potencyB: 0
+- DamageDodgeX:
+    category: BADGE
+    nameMsg: MSG_ItemName_DamageDodge
+    fullDescMsg: MSG_ItemFullDesc_DamageDodge
+    shortDescMsg: MSG_ItemShortDesc_DamageDodge
+    hudElement: DamageDodge
+    itemEntity: DamageDodge
+    icon: badge/DamageDodge
+    sellValue: 150
+    sortValue: 73
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DAMAGE_DODGE
+    potencyA: 0
+    potencyB: 0
+- PowerPlusB:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerPlus
+    fullDescMsg: MSG_ItemFullDesc_PowerPlus
+    shortDescMsg: MSG_ItemShortDesc_PowerPlus
+    hudElement: PowerPlus
+    itemEntity: PowerPlus
+    icon: badge/PowerPlus
+    sellValue: 250
+    sortValue: 67
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_PLUS
+    potencyA: 0
+    potencyB: 0
+- PowerPlusX:
+    category: BADGE
+    nameMsg: MSG_ItemName_PowerPlus
+    fullDescMsg: MSG_ItemFullDesc_PowerPlus
+    shortDescMsg: MSG_ItemShortDesc_PowerPlus
+    hudElement: PowerPlus
+    itemEntity: PowerPlus
+    icon: badge/PowerPlus
+    sellValue: 250
+    sortValue: 67
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_POWER_PLUS
+    potencyA: 0
+    potencyB: 0
+- DefendPlusX:
+    category: BADGE
+    nameMsg: MSG_ItemName_DefendPlus
+    fullDescMsg: MSG_ItemFullDesc_DefendPlus
+    shortDescMsg: MSG_ItemShortDesc_DefendPlus
+    hudElement: DefendPlus
+    itemEntity: DefendPlus
+    icon: badge/DefendPlus
+    sellValue: 250
+    sortValue: 70
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DEFEND_PLUS
+    potencyA: 0
+    potencyB: 0
+- DefendPlusY:
+    category: BADGE
+    nameMsg: MSG_ItemName_DefendPlus
+    fullDescMsg: MSG_ItemFullDesc_DefendPlus
+    shortDescMsg: MSG_ItemShortDesc_DefendPlus
+    hudElement: DefendPlus
+    itemEntity: DefendPlus
+    icon: badge/DefendPlus
+    sellValue: 250
+    sortValue: 70
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_DEFEND_PLUS
+    potencyA: 0
+    potencyB: 0
+- HappyFlowerA:
+    category: BADGE
+    nameMsg: MSG_ItemName_HappyFlower
+    fullDescMsg: MSG_ItemFullDesc_HappyFlower
+    shortDescMsg: MSG_ItemShortDesc_HappyFlower
+    hudElement: HappyFlower
+    itemEntity: HappyFlower
+    icon: badge/HappyFlower
+    sellValue: 100
+    sortValue: 46
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAPPY_FLOWER
+    potencyA: 0
+    potencyB: 0
+- HappyFlowerB:
+    category: BADGE
+    nameMsg: MSG_ItemName_HappyFlower
+    fullDescMsg: MSG_ItemFullDesc_HappyFlower
+    shortDescMsg: MSG_ItemShortDesc_HappyFlower
+    hudElement: HappyFlower
+    itemEntity: HappyFlower
+    icon: badge/HappyFlower
+    sellValue: 100
+    sortValue: 46
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAPPY_FLOWER
+    potencyA: 0
+    potencyB: 0
+- HappyFlowerX:
+    category: BADGE
+    nameMsg: MSG_ItemName_HappyFlower
+    fullDescMsg: MSG_ItemFullDesc_HappyFlower
+    shortDescMsg: MSG_ItemShortDesc_HappyFlower
+    hudElement: HappyFlower
+    itemEntity: HappyFlower
+    icon: badge/HappyFlower
+    sellValue: 100
+    sortValue: 46
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HAPPY_FLOWER
+    potencyA: 0
+    potencyB: 0
+- GroupFocus:
+    category: BADGE
+    nameMsg: MSG_ItemName_GroupFocus
+    fullDescMsg: MSG_ItemFullDesc_GroupFocus
+    shortDescMsg: MSG_ItemShortDesc_GroupFocus
+    hudElement: GroupFocus
+    itemEntity: GroupFocus
+    icon: badge/GroupFocus
+    sellValue: 100
+    sortValue: 35
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_GROUP_FOCUS
+    potencyA: 0
+    potencyB: 0
+- Peekaboo:
+    category: BADGE
+    nameMsg: MSG_ItemName_Peekaboo
+    fullDescMsg: MSG_ItemFullDesc_Peekaboo
+    shortDescMsg: MSG_ItemShortDesc_Peekaboo
+    hudElement: Peekaboo
+    itemEntity: Peekaboo
+    icon: badge/Peekaboo
+    sellValue: 100
+    sortValue: 37
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_PEEKABOO
+    potencyA: 0
+    potencyB: 0
+- AttackFX_D:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXD
+    fullDescMsg: MSG_ItemFullDesc_AttackFXD
+    shortDescMsg: MSG_ItemShortDesc_AttackFXD
+    hudElement: AttackFXD
+    itemEntity: AttackFXD
+    icon: badge/AttackFXD
+    sellValue: 30
+    sortValue: 115
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_D
+    potencyA: 0
+    potencyB: 0
+- AttackFX_B:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXB
+    fullDescMsg: MSG_ItemFullDesc_AttackFXB
+    shortDescMsg: MSG_ItemShortDesc_AttackFXB
+    hudElement: AttackFXB
+    itemEntity: AttackFXB
+    icon: badge/AttackFXB
+    sellValue: 30
+    sortValue: 113
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_B
+    potencyA: 0
+    potencyB: 0
+- AttackFX_E:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXE
+    fullDescMsg: MSG_ItemFullDesc_AttackFXE
+    shortDescMsg: MSG_ItemShortDesc_AttackFXE
+    hudElement: AttackFXE
+    itemEntity: AttackFXE
+    icon: badge/AttackFXE
+    sellValue: 30
+    sortValue: 116
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_E
+    potencyA: 0
+    potencyB: 0
+- AttackFX_C:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXC
+    fullDescMsg: MSG_ItemFullDesc_AttackFXC
+    shortDescMsg: MSG_ItemShortDesc_AttackFXC
+    hudElement: AttackFXC
+    itemEntity: AttackFXC
+    icon: badge/AttackFXC
+    sellValue: 30
+    sortValue: 114
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_C
+    potencyA: 0
+    potencyB: 0
+- AttackFX_F:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXF
+    fullDescMsg: MSG_ItemFullDesc_AttackFXF
+    shortDescMsg: MSG_ItemShortDesc_AttackFXF
+    hudElement: AttackFXF
+    itemEntity: AttackFXF
+    icon: badge/AttackFXF
+    sellValue: 30
+    sortValue: 117
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_F
+    potencyA: 0
+    potencyB: 0
+- HPPlusC:
+    category: BADGE
+    nameMsg: MSG_ItemName_HPPlus
+    fullDescMsg: MSG_ItemFullDesc_HPPlus
+    shortDescMsg: MSG_ItemShortDesc_HPPlus
+    hudElement: HPPlus
+    itemEntity: HPPlus
+    icon: badge/HPPlus
+    sellValue: 150
+    sortValue: 53
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HP_PLUS
+    potencyA: 0
+    potencyB: 0
+- HPPlusX:
+    category: BADGE
+    nameMsg: MSG_ItemName_HPPlus
+    fullDescMsg: MSG_ItemFullDesc_HPPlus
+    shortDescMsg: MSG_ItemShortDesc_HPPlus
+    hudElement: HPPlus
+    itemEntity: HPPlus
+    icon: badge/HPPlus
+    sellValue: 150
+    sortValue: 53
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HP_PLUS
+    potencyA: 0
+    potencyB: 0
+- HPPlusY:
+    category: BADGE
+    nameMsg: MSG_ItemName_HPPlus
+    fullDescMsg: MSG_ItemFullDesc_HPPlus
+    shortDescMsg: MSG_ItemShortDesc_HPPlus
+    hudElement: HPPlus
+    itemEntity: HPPlus
+    icon: badge/HPPlus
+    sellValue: 150
+    sortValue: 53
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HP_PLUS
+    potencyA: 0
+    potencyB: 0
+- FPPlusC:
+    category: BADGE
+    nameMsg: MSG_ItemName_FPPlus
+    fullDescMsg: MSG_ItemFullDesc_FPPlus
+    shortDescMsg: MSG_ItemShortDesc_FPPlus
+    hudElement: FPPlus
+    itemEntity: FPPlus
+    icon: badge/FPPlus
+    sellValue: 150
+    sortValue: 58
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FP_PLUS
+    potencyA: 0
+    potencyB: 0
+- FPPlusX:
+    category: BADGE
+    nameMsg: MSG_ItemName_FPPlus
+    fullDescMsg: MSG_ItemFullDesc_FPPlus
+    shortDescMsg: MSG_ItemShortDesc_FPPlus
+    hudElement: FPPlus
+    itemEntity: FPPlus
+    icon: badge/FPPlus
+    sellValue: 150
+    sortValue: 58
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FP_PLUS
+    potencyA: 0
+    potencyB: 0
+- FPPlusY:
+    category: BADGE
+    nameMsg: MSG_ItemName_FPPlus
+    fullDescMsg: MSG_ItemFullDesc_FPPlus
+    shortDescMsg: MSG_ItemShortDesc_FPPlus
+    hudElement: FPPlus
+    itemEntity: FPPlus
+    icon: badge/FPPlus
+    sellValue: 150
+    sortValue: 58
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_FP_PLUS
+    potencyA: 0
+    potencyB: 0
+- HealthyHealthy:
+    category: BADGE
+    nameMsg: MSG_ItemName_HealthyHealthy
+    fullDescMsg: MSG_ItemFullDesc_HealthyHealthy
+    shortDescMsg: MSG_ItemShortDesc_HealthyHealthy
+    hudElement: HealthyHealthy
+    itemEntity: HealthyHealthy
+    icon: badge/HealthyHealthy
+    sellValue: 100
+    sortValue: 93
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_HEALTHY_HEALTHY
+    potencyA: 0
+    potencyB: 0
+- AttackFX_F2:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXF
+    fullDescMsg: MSG_ItemFullDesc_AttackFXF
+    shortDescMsg: MSG_ItemShortDesc_AttackFXF
+    hudElement: AttackFXF
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 30
+    sortValue: 117
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_F
+    potencyA: 0
+    potencyB: 0
+- AttackFX_F3:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXF
+    fullDescMsg: MSG_ItemFullDesc_AttackFXF
+    shortDescMsg: MSG_ItemShortDesc_AttackFXF
+    hudElement: AttackFXF
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 30
+    sortValue: 117
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_F
+    potencyA: 0
+    potencyB: 0
+- AttackFX_F4:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXF
+    fullDescMsg: MSG_ItemFullDesc_AttackFXF
+    shortDescMsg: MSG_ItemShortDesc_AttackFXF
+    hudElement: AttackFXF
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 30
+    sortValue: 117
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_F
+    potencyA: 0
+    potencyB: 0
+- AttackFX_F5:
+    category: BADGE
+    nameMsg: MSG_ItemName_AttackFXF
+    fullDescMsg: MSG_ItemFullDesc_AttackFXF
+    shortDescMsg: MSG_ItemShortDesc_AttackFXF
+    hudElement: AttackFXF
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 30
+    sortValue: 117
+    targetFlags: []
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_ATTACK_FX_F
+    potencyA: 0
+    potencyB: 0
+- PartnerAttack:
+    category: UTILITY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: HES_MoveDiamond
+    itemEntity: Placeholder
+    icon: key/Gift
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_BADGE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Heart:
+    category: UTILITY
+    nameMsg: MSG_ItemName_Heart
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: Heart
+    itemEntity: Heart
+    icon: anim/heart_0
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: []
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Coin:
+    category: UTILITY
+    nameMsg: MSG_ItemName_Coin
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: Coin
+    itemEntity: Coin
+    icon: anim/coin_0
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_COLLECTABLE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- HeartPiece:
+    category: UTILITY
+    nameMsg: MSG_ItemName_HeartPiece
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: HeartPiece
+    itemEntity: HeartPiece
+    icon: anim/heart_piece
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_COLLECTABLE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- StarPoint:
+    category: UTILITY
+    nameMsg: MSG_ItemName_StarPoint
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: StarPoint
+    itemEntity: StarPoint
+    icon: anim/sp_0
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_COLLECTABLE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- HeartPoint:
+    category: UTILITY
+    nameMsg: MSG_ItemName_HeartPoint
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: HeartPoint
+    itemEntity: HeartPoint
+    icon: anim/hp_0
+    sellValue: -1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_COLLECTABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- FlowerPoint:
+    category: UTILITY
+    nameMsg: MSG_ItemName_FlowerPoint
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: FlowerPoint
+    itemEntity: FlowerPoint
+    icon: anim/fp_0
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_COLLECTABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- StarPiece:
+    category: UTILITY
+    nameMsg: MSG_ItemName_StarPiece
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: StarPiece
+    itemEntity: StarPiece
+    icon: anim/star_piece_0
+    sellValue: 1
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_COLLECTABLE, ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- Present:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: Present
+    itemEntity: Present
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeDone:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeDone
+    itemEntity: CakeDone
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeBare:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeBare
+    itemEntity: CakeBare
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakePan:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakePan
+    itemEntity: CakePan
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeBatter:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeBatter
+    itemEntity: CakeBatter
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeBowl:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeBowl
+    itemEntity: CakeBowl
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeMixed:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeMixed
+    itemEntity: CakeMixed
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeWithIcing:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeWithIcing
+    itemEntity: CakeWithIcing
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- CakeWithBerries:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: CakeWithBerries
+    itemEntity: CakeWithBerries
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuHammer1:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuHammer1
+    itemEntity: MenuHammer1
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuHammer2:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuHammer2
+    itemEntity: MenuHammer2
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuHammer3:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuHammer3
+    itemEntity: MenuHammer3
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuBoots1:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuBoots1
+    itemEntity: MenuBoots1
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuBoots2:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuBoots2
+    itemEntity: MenuBoots2
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuBoots3:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuBoots3
+    itemEntity: MenuBoots3
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0
+- MenuItems:
+    category: DUMMY
+    nameMsg: MSG_NONE
+    fullDescMsg: MSG_NONE
+    shortDescMsg: MSG_NONE
+    hudElement: MenuItems
+    itemEntity: MenuItems
+    sellValue: 0
+    sortValue: 0
+    targetFlags: [ TARGET_FLAG_PLAYER ]
+    typeFlags: [ ITEM_TYPE_FLAG_ENTITY_FULLSIZE ]
+    moveID: MOVE_NONE
+    potencyA: 0
+    potencyB: 0

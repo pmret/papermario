@@ -2683,13 +2683,13 @@ extern HudScript HES_CDownButton;
 extern HudScript HES_CLeftButton;
 extern HudScript HES_CRightButton;
 extern HudScript HES_CUpButton;
-extern HudScript HES_Item_Boots1;
-extern HudScript HES_Item_Boots2;
-extern HudScript HES_Item_Boots3;
-extern HudScript HES_Item_Hammer1;
-extern HudScript HES_Item_Hammer2;
-extern HudScript HES_Item_Hammer3;
-extern HudScript HES_Item_Items;
+extern HudScript HES_Item_MenuBoots1;
+extern HudScript HES_Item_MenuBoots2;
+extern HudScript HES_Item_MenuBoots3;
+extern HudScript HES_Item_MenuHammer1;
+extern HudScript HES_Item_MenuHammer2;
+extern HudScript HES_Item_MenuHammer3;
+extern HudScript HES_Item_MenuItems;
 extern HudScript HES_MashBButton2;
 extern HudScript HES_MashCDownButton1;
 extern HudScript HES_MashCLeftButton;
@@ -3552,37 +3552,37 @@ void btl_update_message_popup(void* data) {
                 case 0:
                     switch (popup->messageIndex) {
                         case BTL_MSG_HAMMER_DISABLED_1:
-                            D_8029F642 = hud_element_create(&HES_Item_Hammer1);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuHammer1);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_HAMMER_DISABLED_2:
-                            D_8029F642 = hud_element_create(&HES_Item_Hammer2);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuHammer2);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_HAMMER_DISABLED_3:
-                            D_8029F642 = hud_element_create(&HES_Item_Hammer3);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuHammer3);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_JUMP_DISABLED_1:
-                            D_8029F642 = hud_element_create(&HES_Item_Boots1);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuBoots1);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_JUMP_DISABLED_2:
-                            D_8029F642 = hud_element_create(&HES_Item_Boots2);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuBoots2);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_JUMP_DISABLED_3:
-                            D_8029F642 = hud_element_create(&HES_Item_Boots3);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuBoots3);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;
                         case BTL_MSG_ITEMS_DISABLED:
-                            D_8029F642 = hud_element_create(&HES_Item_Items);
+                            D_8029F642 = hud_element_create(&HES_Item_MenuItems);
                             hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(D_8029F642, -100, -100);
                             break;

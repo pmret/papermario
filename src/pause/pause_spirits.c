@@ -9,7 +9,7 @@
 #include "sprite/npc/WorldKlevar.h"
 #include "sprite/npc/WorldKalmar.h"
 
-extern Gfx gPauseDLSpiritsBg[];
+extern Gfx PauseGfxSpiritsBg[];
 extern s8 pause_spirits_bg_png[];
 
 void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
@@ -159,7 +159,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
 
     gDPPipeSync(gMainGfxPos++);
     gSPViewport(gMainGfxPos++, &gPauseSpiritsViewport);
-    gSPDisplayList(gMainGfxPos++, gPauseDLSpiritsBg);
+    gSPDisplayList(gMainGfxPos++, PauseGfxSpiritsBg);
 
     for (i = 0; i < 5; i++) {
         gDPLoadTextureTile_4b(gMainGfxPos++, pause_spirits_bg_png, G_IM_FMT_CI, 128, 110,

@@ -324,7 +324,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
 };
 
 s32 N(LetterList_MinhT_Unused)[] = {
-    ITEM_LETTER_TO_MINHT,
+    ITEM_LETTER_TO_MINH_T,
     ITEM_NONE
 };
 

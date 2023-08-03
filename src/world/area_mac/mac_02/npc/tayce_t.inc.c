@@ -4,95 +4,16 @@
 #include "common.h"
 #include "gcc/string.h"
 
-// enum mapping itemIDs -> index in single recipe arrays and column/rows in double recipe matrix
-enum CookingIngredientID {
-    iRSH = 0,   // ITEM_MUSHROOM
-    iSSH = 1,   // ITEM_SUPER_SHROOM
-    iUSH = 2,   // ITEM_ULTRA_SHROOM
-    iLSH = 3,   // ITEM_LIFE_SHROOM
-    iVSH = 4,   // ITEM_VOLT_SHROOM
-    iFFL = 5,   // ITEM_FIRE_FLOWER
-    iCOC = 6,   // ITEM_COCONUT
-    iLIM = 7,   // ITEM_LIME
-    iLEM = 8,   // ITEM_LEMON
-    iHSY = 9,   // ITEM_HONEY_SYRUP
-    iMSY = 10,  // ITEM_MAPLE_SYRUP
-    iJAM = 11,  // ITEM_JAMMIN_JELLY
-    iAPP = 12,  // ITEM_APPLE
-    iRBY = 13,  // ITEM_RED_BERRY
-    iBBY = 14,  // ITEM_BLUE_BERRY
-    iYBY = 15,  // ITEM_YELLOW_BERRY
-    iGMN = 16,  // ITEM_GOOMNUT
-    iKLF = 17,  // ITEM_KOOPA_LEAF
-    iDRP = 18,  // ITEM_DRIED_PASTA
-    iDRF = 19,  // ITEM_DRIED_FRUIT
-    iSLF = 20,  // ITEM_STRANGE_LEAF
-    iMIX = 21,  // ITEM_CAKE_MIX
-    iEGG = 22,  // ITEM_EGG
-    iMEL = 23,  // ITEM_MELON
-    iSTK = 24,  // ITEM_STINKY_HERB
-    iPOT = 25,  // ITEM_ICED_POTATO
-    iDSH = 26,  // ITEM_DRIED_SHROOM
-    iBUB = 27,  // ITEM_BUBBLE_BERRY
-    iBMP = 28,  // ITEM_WHACKAS_BUMP
-    INPUT_END = 29,
-};
+typedef struct CookingResult {
+    /* 00 */ s32 quality;
+    /* 04 */ s32 itemID;
+} CookingResult; // size = 0x8
 
-// enum mapping cooking result to itemID/quality rating
-enum CookingResultID {
-    rXXX = 0,   // ITEM_MISTAKE
-    rFRS = 1,   // ITEM_FRIED_SHROOM
-    rSPS = 2,   // ITEM_SPICY_SOUP
-    rTTN = 3,   // ITEM_TASTY_TONIC
-    rNUT = 4,   // ITEM_NUTTY_CAKE
-    rTEA = 5,   // ITEM_KOOPA_TEA
-    rSPG = 6,   // ITEM_SPAGHETTI
-    rDZD = 7,   // ITEM_DIZZY_DIAL
-    rBCK = 8,   // ITEM_BIG_COOKIE
-    rCAK = 9,   // ITEM_CAKE
-    rFEG = 10,  // ITEM_FRIED_EGG
-    rBEG = 11,  // ITEM_BOILED_EGG
-    rSOD = 12,  // ITEM_SUPER_SODA
-    rYCK = 13,  // ITEM_YOSHI_COOKIE
-    rDLX = 14,  // ITEM_DELUXE_FEAST
-    rFZF = 15,  // ITEM_FROZEN_FRIES
-    rPOT = 16,  // ITEM_POTATO_SALAD
-    rHOT = 17,  // ITEM_HOT_SHROOM
-    rBLN = 18,  // ITEM_BLAND_MEAL
-    rHSH = 19,  // ITEM_HONEY_SHROOM
-    rMSH = 20,  // ITEM_MAPLE_SHROOM
-    rJSH = 21,  // ITEM_JELLY_SHROOM1
-    rLSH = 22,  // ITEM_LIFE_SHROOM
-    rVSH = 23,  // ITEM_VOLT_SHROOM
-    rSLS = 24,  // ITEM_SLEEPY_SHEEP
-    rSHC = 25,  // ITEM_SHROOM_CAKE
-    rSHS = 26,  // ITEM_SHROOM_STEAK
-    rHSU = 27,  // ITEM_HONEY_SUPER
-    rMSU = 28,  // ITEM_MAPLE_SUPER
-    rJSU = 29,  // ITEM_JELLY_SUPER
-    rYUM = 30,  // ITEM_YUMMY_MEAL
-    rHUL = 31,  // ITEM_HONEY_ULTRA
-    rMUL = 32,  // ITEM_MAPLE_ULTRA
-    rJUL = 33,  // ITEM_JELLY_ULTRA
-    rSWS = 34,  // ITEM_SWEET_SHROOM
-    rELP = 35,  // ITEM_ELECTRO_POP
-    rTHR = 36,  // ITEM_THUNDER_RAGE
-    rFIP = 37,  // ITEM_FIRE_POP
-    rEGM = 38,  // ITEM_EGG_MISSILE
-    rSSH = 39,  // ITEM_SPECIAL_SHAKE
-    rCOP = 40,  // ITEM_COCO_POP
-    rJUI = 41,  // ITEM_HEALTHY_JUICE
-    rLIC = 42,  // ITEM_LIME_CANDY
-    rLEC = 43,  // ITEM_LEMON_CANDY
-    rHNC = 44,  // ITEM_HONEY_CANDY
-    rJLP = 45,  // ITEM_JELLY_POP
-    rPIE = 46,  // ITEM_APPLE_PIE
-    rKOO = 47,  // ITEM_KOOPASTA
-    rKCK = 48,  // ITEM_KOOKY_COOKIE
-    rFFL = 49,  // ITEM_FIRE_FLOWER
-    rSTR = 50,  // ITEM_STRANGE_CAKE
-    RESULT_END = 51,
-};
+typedef struct ExtraCookingPair {
+    /* 00 */ s32 inputA;
+    /* 04 */ s32 inputB;
+    /* 04 */ s32 output;
+} ExtraCookingPair; // size = 0x8
 
 enum CookingResultQuality {
     QUALITY_BAD     = 0,
@@ -102,242 +23,7 @@ enum CookingResultQuality {
     QUALITY_ODD     = 4,
 };
 
-s32 CookingIngredients[] = {
-    [iRSH] ITEM_MUSHROOM,
-    [iSSH] ITEM_SUPER_SHROOM,
-    [iUSH] ITEM_ULTRA_SHROOM,
-    [iLSH] ITEM_LIFE_SHROOM,
-    [iVSH] ITEM_VOLT_SHROOM,
-    [iFFL] ITEM_FIRE_FLOWER,
-    [iCOC] ITEM_COCONUT,
-    [iLIM] ITEM_LIME,
-    [iLEM] ITEM_LEMON,
-    [iHSY] ITEM_HONEY_SYRUP,
-    [iMSY] ITEM_MAPLE_SYRUP,
-    [iJAM] ITEM_JAMMIN_JELLY,
-    [iAPP] ITEM_APPLE,
-    [iRBY] ITEM_RED_BERRY,
-    [iBBY] ITEM_BLUE_BERRY,
-    [iYBY] ITEM_YELLOW_BERRY,
-    [iGMN] ITEM_GOOMNUT,
-    [iKLF] ITEM_KOOPA_LEAF,
-    [iDRP] ITEM_DRIED_PASTA,
-    [iDRF] ITEM_DRIED_FRUIT,
-    [iSLF] ITEM_STRANGE_LEAF,
-    [iMIX] ITEM_CAKE_MIX,
-    [iEGG] ITEM_EGG,
-    [iMEL] ITEM_MELON,
-    [iSTK] ITEM_STINKY_HERB,
-    [iPOT] ITEM_ICED_POTATO,
-    [iDSH] ITEM_DRIED_SHROOM,
-    [iBUB] ITEM_BUBBLE_BERRY,
-    [iBMP] ITEM_WHACKAS_BUMP,
-    [INPUT_END] -1
-};
-
-typedef struct CookingResult {
-    /* 00 */ s32 quality;
-    /* 04 */ s32 itemID;
-} CookingResult; // size = 0x8
-
-CookingResult CookingResults[] = {
-    [rXXX] { QUALITY_BAD,   ITEM_MISTAKE },
-    [rFRS] { QUALITY_OK,    ITEM_FRIED_SHROOM },
-    [rSPS] { QUALITY_OK,    ITEM_SPICY_SOUP },
-    [rTTN] { QUALITY_OK,    ITEM_TASTY_TONIC },
-    [rNUT] { QUALITY_OK,    ITEM_NUTTY_CAKE },
-    [rTEA] { QUALITY_OK,    ITEM_KOOPA_TEA },
-    [rSPG] { QUALITY_OK,    ITEM_SPAGHETTI },
-    [rDZD] { QUALITY_ODD,   ITEM_DIZZY_DIAL },
-    [rBCK] { QUALITY_GOOD,  ITEM_BIG_COOKIE },
-    [rCAK] { QUALITY_OK,    ITEM_CAKE },
-    [rFEG] { QUALITY_OK,    ITEM_FRIED_EGG },
-    [rBEG] { QUALITY_OK,    ITEM_BOILED_EGG },
-    [rSOD] { QUALITY_OK,    ITEM_SUPER_SODA },
-    [rYCK] { QUALITY_OK,    ITEM_YOSHI_COOKIE },
-    [rDLX] { QUALITY_GREAT, ITEM_DELUXE_FEAST },
-    [rFZF] { QUALITY_OK,    ITEM_FROZEN_FRIES },
-    [rPOT] { QUALITY_OK,    ITEM_POTATO_SALAD },
-    [rHOT] { QUALITY_OK,    ITEM_HOT_SHROOM },
-    [rBLN] { QUALITY_GOOD,  ITEM_BLAND_MEAL },
-    [rHSH] { QUALITY_OK,    ITEM_HONEY_SHROOM },
-    [rMSH] { QUALITY_OK,    ITEM_MAPLE_SHROOM },
-    [rJSH] { QUALITY_OK,    ITEM_JELLY_SHROOM1 },
-    [rLSH] { QUALITY_OK,    ITEM_LIFE_SHROOM },
-    [rVSH] { QUALITY_OK,    ITEM_VOLT_SHROOM },
-    [rSLS] { QUALITY_ODD,   ITEM_SLEEPY_SHEEP },
-    [rSHC] { QUALITY_OK,    ITEM_SHROOM_CAKE },
-    [rSHS] { QUALITY_OK,    ITEM_SHROOM_STEAK },
-    [rHSU] { QUALITY_OK,    ITEM_HONEY_SUPER },
-    [rMSU] { QUALITY_OK,    ITEM_MAPLE_SUPER },
-    [rJSU] { QUALITY_OK,    ITEM_JELLY_SUPER },
-    [rYUM] { QUALITY_GOOD,  ITEM_YUMMY_MEAL },
-    [rHUL] { QUALITY_OK,    ITEM_HONEY_ULTRA },
-    [rMUL] { QUALITY_OK,    ITEM_MAPLE_ULTRA },
-    [rJUL] { QUALITY_OK,    ITEM_JELLY_ULTRA },
-    [rSWS] { QUALITY_OK,    ITEM_SWEET_SHROOM },
-    [rELP] { QUALITY_OK,    ITEM_ELECTRO_POP },
-    [rTHR] { QUALITY_ODD,   ITEM_THUNDER_RAGE },
-    [rFIP] { QUALITY_OK,    ITEM_FIRE_POP },
-    [rEGM] { QUALITY_OK,    ITEM_EGG_MISSILE },
-    [rSSH] { QUALITY_GOOD,  ITEM_SPECIAL_SHAKE },
-    [rCOP] { QUALITY_OK,    ITEM_COCO_POP },
-    [rJUI] { QUALITY_GREAT, ITEM_HEALTHY_JUICE },
-    [rLIC] { QUALITY_OK,    ITEM_LIME_CANDY },
-    [rLEC] { QUALITY_OK,    ITEM_LEMON_CANDY },
-    [rHNC] { QUALITY_OK,    ITEM_HONEY_CANDY },
-    [rJLP] { QUALITY_OK,    ITEM_JELLY_POP },
-    [rPIE] { QUALITY_OK,    ITEM_APPLE_PIE },
-    [rKOO] { QUALITY_OK,    ITEM_KOOPASTA },
-    [rKCK] { QUALITY_OK,    ITEM_KOOKY_COOKIE },
-    [rFFL] { QUALITY_ODD,   ITEM_FIRE_FLOWER },
-    [rSTR] { QUALITY_GOOD,  ITEM_STRANGE_CAKE },
-    [RESULT_END] { -1, -1 },
-};
-
-s8 SingleRecipesWithoutCookbook[] = {
-    [iRSH] rFRS,    // ITEM_MUSHROOM      -->  ITEM_FRIED_SHROOM
-    [iSSH] rFRS,    // ITEM_SUPER_SHROOM  -->  ITEM_FRIED_SHROOM
-    [iUSH] rSHS,    // ITEM_ULTRA_SHROOM  -->  ITEM_SHROOM_STEAK
-    [iLSH] rHOT,    // ITEM_LIFE_SHROOM   -->  ITEM_HOT_SHROOM
-    [iVSH] rHOT,    // ITEM_VOLT_SHROOM   -->  ITEM_HOT_SHROOM
-    [iFFL] rSPS,    // ITEM_FIRE_FLOWER   -->  ITEM_SPICY_SOUP
-    [iCOC] rTTN,    // ITEM_COCONUT       -->  ITEM_TASTY_TONIC
-    [iLIM] rTTN,    // ITEM_LIME          -->  ITEM_TASTY_TONIC
-    [iLEM] rTTN,    // ITEM_LEMON         -->  ITEM_TASTY_TONIC
-    [iHSY] rSOD,    // ITEM_HONEY_SYRUP   -->  ITEM_SUPER_SODA
-    [iMSY] rSOD,    // ITEM_MAPLE_SYRUP   -->  ITEM_SUPER_SODA
-    [iJAM] rSOD,    // ITEM_JAMMIN_JELLY  -->  ITEM_SUPER_SODA
-    [iAPP] rSOD,    // ITEM_APPLE         -->  ITEM_SUPER_SODA
-    [iRBY] rXXX,    // ITEM_RED_BERRY     -->  ITEM_MISTAKE
-    [iBBY] rXXX,    // ITEM_BLUE_BERRY    -->  ITEM_MISTAKE
-    [iYBY] rXXX,    // ITEM_YELLOW_BERRY  -->  ITEM_MISTAKE
-    [iGMN] rNUT,    // ITEM_GOOMNUT       -->  ITEM_NUTTY_CAKE
-    [iKLF] rTEA,    // ITEM_KOOPA_LEAF    -->  ITEM_KOOPA_TEA
-    [iDRP] rSPG,    // ITEM_DRIED_PASTA   -->  ITEM_SPAGHETTI
-    [iDRF] rXXX,    // ITEM_DRIED_FRUIT   -->  ITEM_MISTAKE
-    [iSLF] rXXX,    // ITEM_STRANGE_LEAF  -->  ITEM_MISTAKE
-    [iMIX] rCAK,    // ITEM_CAKE_MIX      -->  ITEM_CAKE
-    [iEGG] rFEG,    // ITEM_EGG           -->  ITEM_FRIED_EGG
-    [iMEL] rSSH,    // ITEM_MELON         -->  ITEM_SPECIAL_SHAKE
-    [iSTK] rXXX,    // ITEM_STINKY_HERB   -->  ITEM_MISTAKE
-    [iPOT] rPOT,    // ITEM_ICED_POTATO   -->  ITEM_POTATO_SALAD
-    [iDSH] rXXX,    // ITEM_DRIED_SHROOM  -->  ITEM_MISTAKE
-    [iBUB] rXXX,    // ITEM_BUBBLE_BERRY  -->  ITEM_MISTAKE
-    [iBMP] rXXX,    // ITEM_WHACKAS_BUMP  -->  ITEM_MISTAKE
-};
-
-// items with (*) are upgraded from ITEM_MISTAKE when using the cookbook
-s8 SingleRecipesWithCookbook[] = {
-    [iRSH] rFRS,    // ITEM_MUSHROOM      -->  ITEM_FRIED_SHROOM
-    [iSSH] rFRS,    // ITEM_SUPER_SHROOM  -->  ITEM_FRIED_SHROOM
-    [iUSH] rSHS,    // ITEM_ULTRA_SHROOM  -->  ITEM_SHROOM_STEAK
-    [iLSH] rHOT,    // ITEM_LIFE_SHROOM   -->  ITEM_HOT_SHROOM
-    [iVSH] rHOT,    // ITEM_VOLT_SHROOM   -->  ITEM_HOT_SHROOM
-    [iFFL] rSPS,    // ITEM_FIRE_FLOWER   -->  ITEM_SPICY_SOUP
-    [iCOC] rTTN,    // ITEM_COCONUT       -->  ITEM_TASTY_TONIC
-    [iLIM] rTTN,    // ITEM_LIME          -->  ITEM_TASTY_TONIC
-    [iLEM] rTTN,    // ITEM_LEMON         -->  ITEM_TASTY_TONIC
-    [iHSY] rSOD,    // ITEM_HONEY_SYRUP   -->  ITEM_SUPER_SODA
-    [iMSY] rSOD,    // ITEM_MAPLE_SYRUP   -->  ITEM_SUPER_SODA
-    [iJAM] rSOD,    // ITEM_JAMMIN_JELLY  -->  ITEM_SUPER_SODA
-    [iAPP] rSOD,    // ITEM_APPLE         -->  ITEM_SUPER_SODA
-    [iRBY] rSOD,    // ITEM_RED_BERRY     -->  ITEM_SUPER_SODA      (*)
-    [iBBY] rSOD,    // ITEM_BLUE_BERRY    -->  ITEM_SUPER_SODA      (*)
-    [iYBY] rSOD,    // ITEM_YELLOW_BERRY  -->  ITEM_SUPER_SODA      (*)
-    [iGMN] rNUT,    // ITEM_GOOMNUT       -->  ITEM_NUTTY_CAKE
-    [iKLF] rTEA,    // ITEM_KOOPA_LEAF    -->  ITEM_KOOPA_TEA
-    [iDRP] rSPG,    // ITEM_DRIED_PASTA   -->  ITEM_SPAGHETTI
-    [iDRF] rXXX,    // ITEM_DRIED_FRUIT   -->  ITEM_MISTAKE
-    [iSLF] rDZD,    // ITEM_STRANGE_LEAF  -->  ITEM_DIZZY_DIAL      (*)
-    [iMIX] rCAK,    // ITEM_CAKE_MIX      -->  ITEM_CAKE
-    [iEGG] rFEG,    // ITEM_EGG           -->  ITEM_FRIED_EGG
-    [iMEL] rSSH,    // ITEM_MELON         -->  ITEM_SPECIAL_SHAKE
-    [iSTK] rXXX,    // ITEM_STINKY_HERB   -->  ITEM_MISTAKE
-    [iPOT] rPOT,    // ITEM_ICED_POTATO   -->  ITEM_POTATO_SALAD
-    [iDSH] rFRS,    // ITEM_DRIED_SHROOM  -->  ITEM_FRIED_SHROOM    (*)
-    [iBUB] rTTN,    // ITEM_BUBBLE_BERRY  -->  ITEM_TASTY_TONIC     (*)
-    [iBMP] rYUM,    // ITEM_WHACKAS_BUMP  -->  ITEM_YUMMY_MEAL      (*)
-};
-
-s8 DoubleRecipesMatrix[] = {
-/*          iRSH  iSSH  iUSH  iLSH  iVSH  iFFL  iCOC  iLIM  iLEM  iHSY  iMSY  iJAM  iAPP  iRBY  iBBY  iYBY  iGMN  iKLF  iDRP  iDRF  iSLF  iMIX  iEGG  iMEL  iSTK  iPOT  iDSH  iBUB  iBMP */
-/* iRSH */  rXXX, rHOT, rSHS, rSHS, rHOT, rHOT, rXXX, rXXX, rXXX, rHSH, rMSH, rJSH, rXXX, rXXX, rXXX, rXXX, rVSH, rVSH, rBLN, rVSH, rVSH, rSHC, rBLN, rXXX, rXXX, rBLN, rFRS, rXXX, rXXX,
-/* iSSH */    -1, rXXX, rSHS, rSHS, rHOT, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rVSH, rLSH, rSHC, rBLN, rXXX, rXXX, rBLN, rHOT, rXXX, rXXX,
-/* iUSH */    -1,   -1, rXXX, rSHS, rSHS, rYUM, rXXX, rXXX, rXXX, rHUL, rMUL, rJUL, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rYUM, rVSH, rLSH, rSWS, rYUM, rXXX, rXXX, rYUM, rSHS, rXXX, rXXX,
-/* iLSH */    -1,   -1,   -1, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rVSH, rLSH, rSWS, rBLN, rXXX, rXXX, rBLN, rSHS, rXXX, rXXX,
-/* iVSH */    -1,   -1,   -1,   -1, rXXX, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rTHR, rDZD, rELP, rBLN, rXXX, rXXX, rBLN, rHOT, rXXX, rXXX,
-/* iFFL */    -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, rXXX, rFIP, rEGM, rXXX, rXXX, rFZF, rFRS, rXXX, rXXX,
-/* iCOC */    -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rBLN, rXXX, rXXX, rCOP, rXXX, rSOD, rXXX, rBLN, rXXX, rXXX, rXXX,
-/* iLIM */    -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rLIC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iLEM */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rLEC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iHSY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSSH, rTTN, rTTN, rTTN, rTTN, rXXX, rSOD, rXXX, rXXX, rXXX, rHNC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iMSY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rKCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iJAM */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSSH, rSSH, rSSH, rSSH, rXXX, rSOD, rXXX, rXXX, rXXX, rJLP, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iAPP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSOD, rSOD, rXXX, rXXX, rXXX, rXXX, rXXX, rPIE, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iRBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSOD, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iBBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iYBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iGMN */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rBLN, rBLN, rXXX, rBLN, rBCK, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iKLF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rKOO, rXXX, rXXX, rKCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iDRP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rYUM, rBLN, rXXX, rBLN, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX,
-/* iDRF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rFFL, rXXX, rXXX, rXXX, rXXX, rYUM, rXXX, rXXX, rXXX,
-/* iSLF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSTR, rBEG, rSSH, rDZD, rYUM, rXXX, rXXX, rXXX,
-/* iMIX */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rBCK, rYCK, rKCK, rBLN, rXXX, rXXX, rXXX,
-/* iEGG */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rBEG, rBLN, rXXX, rXXX, rXXX,
-/* iMEL */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iSTK */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX,
-/* iPOT */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX,
-/* iDSH */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX,
-/* iBUB */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX,
-/* iBMP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX,
-};
-
-typedef struct ExtraCookingPair {
-    /* 00 */ s32 inputA;
-    /* 04 */ s32 inputB;
-    /* 04 */ s32 output;
-} ExtraCookingPair; // size = 0x8
-
-// additional recipes checked for inputs not included in the matrix
-ExtraCookingPair ExtraDoubleRecipes[] = {
-    { ITEM_SPECIAL_SHAKE, ITEM_DRIED_SHROOM,  rJUI }, // --> ITEM_HEALTHY_JUICE
-    { ITEM_SPECIAL_SHAKE, ITEM_STRANGE_LEAF,  rJUI }, // --> ITEM_HEALTHY_JUICE
-    { ITEM_SPECIAL_SHAKE, ITEM_STINKY_HERB,   rJUI }, // --> ITEM_HEALTHY_JUICE
-    { ITEM_POTATO_SALAD,  ITEM_SPAGHETTI,     rYUM }, // --> ITEM_YUMMY_MEAL
-    { ITEM_POTATO_SALAD,  ITEM_FRIED_SHROOM,  rBLN }, // --> ITEM_BLAND_MEAL
-    { ITEM_POTATO_SALAD,  ITEM_HOT_SHROOM,    rYUM }, // --> ITEM_YUMMY_MEAL
-    { ITEM_POTATO_SALAD,  ITEM_SHROOM_STEAK,  rDLX }, // --> ITEM_DELUXE_FEAST
-    { ITEM_STRANGE_LEAF,  ITEM_WHACKAS_BUMP,  rDLX }, // --> ITEM_DELUXE_FEAST
-};
-
-// when cooking a mystery, theres is a 50% chance to create ITEM_MISTAKE, and a 50% chance to select
-// any one of these outcomes with equal probability
-s32 MysteryResultOptions[] = {
-    ITEM_FIRE_FLOWER,
-    ITEM_TASTY_TONIC,
-    ITEM_SUPER_SODA,
-    ITEM_SLEEPY_SHEEP,
-    ITEM_LIFE_SHROOM,
-    ITEM_DIZZY_DIAL,
-    ITEM_VOLT_SHROOM,
-    ITEM_FRIED_SHROOM,
-    ITEM_KOOPASTA,
-    ITEM_SPICY_SOUP,
-    ITEM_KOOPA_TEA,
-    ITEM_SPAGHETTI,
-    ITEM_FRIED_EGG,
-    ITEM_BOILED_EGG,
-    ITEM_POTATO_SALAD,
-    ITEM_HONEY_SHROOM,
-    ITEM_BLAND_MEAL,
-    ITEM_THUNDER_RAGE,
-    ITEM_EGG_MISSILE,
-    ITEM_APPLE_PIE,
-    ITEM_KOOKY_COOKIE,
-    ITEM_BIG_COOKIE,
-    ITEM_SPECIAL_SHAKE,
-};
+#include "recipes.inc.c"
 
 API_CALLABLE(N(GetCookResultForSingleRecipe)) {
     Bytecode* args = script->ptrReadPos;
@@ -364,12 +50,12 @@ API_CALLABLE(N(GetCookResultForSingleRecipe)) {
             resultQuality = 4;
         }
     } else {
-        for (i = 0; i < INPUT_END; i++) {
+        for (i = 0; i < NUM_INGREDIENTS; i++) {
             if (CookingIngredients[i] == inputItem) {
                 break;
             }
         }
-        if (i < INPUT_END) {
+        if (i < NUM_INGREDIENTS) {
             if (hasCookbook) {
                 i = SingleRecipesWithCookbook[i];
             } else {
@@ -400,23 +86,23 @@ API_CALLABLE(N(GetCookResultForDoubleRecipe)) {
     s32 i;
 
     // get ingredient enum values
-    for (inputIdxA = 0; inputIdxA < INPUT_END; inputIdxA++) {
+    for (inputIdxA = 0; inputIdxA < NUM_INGREDIENTS; inputIdxA++) {
         if (CookingIngredients[inputIdxA] == inputItemA) {
             break;
         }
     }
-    for (inputIdxB = 0; inputIdxB < INPUT_END; inputIdxB++) {
+    for (inputIdxB = 0; inputIdxB < NUM_INGREDIENTS; inputIdxB++) {
         if (CookingIngredients[inputIdxB] == inputItemB) {
             break;
         }
     }
     // check the recipe matrix
     resultIdx = 0;
-    if ((inputIdxA < INPUT_END) && (inputIdxB < INPUT_END)) {
+    if ((inputIdxA < NUM_INGREDIENTS) && (inputIdxB < NUM_INGREDIENTS)) {
         if (inputIdxA < inputIdxB) {
-            recipeIdx = inputIdxB + (inputIdxA * INPUT_END);
+            recipeIdx = inputIdxB + (inputIdxA * NUM_INGREDIENTS);
         } else {
-            recipeIdx = inputIdxA + (inputIdxB * INPUT_END);
+            recipeIdx = inputIdxA + (inputIdxB * NUM_INGREDIENTS);
         }
         resultIdx = DoubleRecipesMatrix[recipeIdx];
     }
@@ -438,71 +124,6 @@ API_CALLABLE(N(GetCookResultForDoubleRecipe)) {
     evt_set_variable(script, outVarQuality, resultQuality);
     return ApiStatus_DONE2;
 }
-
-const s32 CookableItemIDs[] = {
-    ITEM_SPICY_SOUP,
-    ITEM_APPLE_PIE,
-    ITEM_HONEY_ULTRA,
-    ITEM_MAPLE_ULTRA,
-    ITEM_JELLY_ULTRA,
-    ITEM_KOOPASTA,
-    ITEM_FRIED_SHROOM,
-    ITEM_SHROOM_CAKE,
-    ITEM_SHROOM_STEAK,
-    ITEM_HOT_SHROOM,
-    ITEM_SWEET_SHROOM,
-    ITEM_BLAND_MEAL,
-    ITEM_YUMMY_MEAL,
-    ITEM_DELUXE_FEAST,
-    ITEM_SPECIAL_SHAKE,
-    ITEM_HEALTHY_JUICE,
-    ITEM_BIG_COOKIE,
-    ITEM_CAKE,
-    ITEM_MISTAKE,
-    ITEM_KOOPA_TEA,
-    ITEM_HONEY_SUPER,
-    ITEM_MAPLE_SUPER,
-    ITEM_JELLY_SUPER,
-    ITEM_SPAGHETTI,
-    ITEM_EGG_MISSILE,
-    ITEM_FRIED_EGG,
-    ITEM_HONEY_SHROOM,
-    ITEM_HONEY_CANDY,
-    ITEM_ELECTRO_POP,
-    ITEM_FIRE_POP,
-    ITEM_LIME_CANDY,
-    ITEM_COCO_POP,
-    ITEM_LEMON_CANDY,
-    ITEM_JELLY_POP,
-    ITEM_STRANGE_CAKE,
-    ITEM_KOOKY_COOKIE,
-    ITEM_FROZEN_FRIES,
-    ITEM_POTATO_SALAD,
-    ITEM_NUTTY_CAKE,
-    ITEM_MAPLE_SHROOM,
-    ITEM_BOILED_EGG,
-    ITEM_YOSHI_COOKIE,
-    ITEM_JELLY_SHROOM1,
-    ITEM_TASTY_TONIC,
-    ITEM_DIZZY_DIAL,
-    ITEM_SUPER_SODA,
-    ITEM_REPEL_GEL,
-    ITEM_LIFE_SHROOM,
-    ITEM_VOLT_SHROOM,
-    ITEM_SLEEPY_SHEEP,
-    ITEM_THUNDER_RAGE,
-    ITEM_FIRE_FLOWER,
-};
-
-const s32 CookableDiscoveredFlags[] = {
-    GF_MAC02_DiscoveredRecipe_00, GF_MAC02_DiscoveredRecipe_01, GF_MAC02_DiscoveredRecipe_02, GF_MAC02_DiscoveredRecipe_03, GF_MAC02_DiscoveredRecipe_04, GF_MAC02_DiscoveredRecipe_05, GF_MAC02_DiscoveredRecipe_06, GF_MAC02_DiscoveredRecipe_07,
-    GF_MAC02_DiscoveredRecipe_08, GF_MAC02_DiscoveredRecipe_09, GF_MAC02_DiscoveredRecipe_0A, GF_MAC02_DiscoveredRecipe_0B, GF_MAC02_DiscoveredRecipe_0C, GF_MAC02_DiscoveredRecipe_0D, GF_MAC02_DiscoveredRecipe_0E, GF_MAC02_DiscoveredRecipe_0F,
-    GF_MAC02_DiscoveredRecipe_10, GF_MAC02_DiscoveredRecipe_11, GF_MAC02_DiscoveredRecipe_12, GF_MAC02_DiscoveredRecipe_13, GF_MAC02_DiscoveredRecipe_14, GF_MAC02_DiscoveredRecipe_15, GF_MAC02_DiscoveredRecipe_16, GF_MAC02_DiscoveredRecipe_17,
-    GF_MAC02_DiscoveredRecipe_18, GF_MAC02_DiscoveredRecipe_19, GF_MAC02_DiscoveredRecipe_1A, GF_MAC02_DiscoveredRecipe_1B, GF_MAC02_DiscoveredRecipe_1C, GF_MAC02_DiscoveredRecipe_1D, GF_MAC02_DiscoveredRecipe_1E, GF_MAC02_DiscoveredRecipe_1F,
-    GF_MAC02_DiscoveredRecipe_20, GF_MAC02_DiscoveredRecipe_21, GF_MAC02_DiscoveredRecipe_22, GF_MAC02_DiscoveredRecipe_23, GF_MAC02_DiscoveredRecipe_24, GF_MAC02_DiscoveredRecipe_25, GF_MAC02_DiscoveredRecipe_26, GF_MAC02_DiscoveredRecipe_27,
-    GF_MAC02_DiscoveredRecipe_28, GF_MAC02_DiscoveredRecipe_29, GF_MAC02_DiscoveredRecipe_2A, GF_MAC02_DiscoveredRecipe_2B, GF_MAC02_DiscoveredRecipe_2C, GF_MAC02_DiscoveredRecipe_2D, GF_MAC02_DiscoveredRecipe_2E, GF_MAC02_DiscoveredRecipe_2F,
-    GF_MAC02_DiscoveredRecipe_30, GF_MAC02_DiscoveredRecipe_31, GF_MAC02_DiscoveredRecipe_32, GF_MAC02_DiscoveredRecipe_33
-};
 
 API_CALLABLE(N(SetRecipeDiscovered)) {
     s32 cookedItems[ARRAY_COUNT(CookableItemIDs)];
