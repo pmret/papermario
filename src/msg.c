@@ -33,6 +33,14 @@ enum RewindArrowStates {
 #define MSG_ROM_START 0x1B83000
 #endif
 
+#if VERSION_PAL
+#define CONST_A 7
+#define CONST_B 5.0
+#else
+#define CONST_A 6
+#define CONST_B 6.0
+#endif
+
 typedef MessageImageData* MessageImageDataList[1];
 
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
@@ -517,7 +525,7 @@ s32 _update_message(MessagePrintState* printer) {
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
                     (gGameStatusPtr->curButtons[0] & BUTTON_A)))
                 {
-                    printer->curLinePos += 7;
+                    printer->curLinePos += CONST_A;
                 }
 
                 if (printer->curLinePos >= printer->nextLinePos) {
@@ -1338,7 +1346,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->printBuffer[0] = MSG_CHAR_PRINT_END;
     printer->printDelayTime = 1;
     printer->charsPerChunk = 1;
-    printer->unk_464 = 7;
+    printer->unk_464 = CONST_A;
     printer->srcBuffer = NULL;
     printer->msgID = 0;
     printer->curPrintDelay = 0;
@@ -2178,7 +2186,7 @@ void msg_draw_choice_pointer(MessagePrintState* printer) {
         posY = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
     } else {
         s32 baseX, baseY, targetX, targetY;
-        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / 5.0;
+        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / CONST_B;
 
         baseX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
         targetX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->targetOption];
