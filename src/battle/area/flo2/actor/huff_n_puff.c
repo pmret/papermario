@@ -1522,7 +1522,7 @@ EvtScript N(attackBodySlam) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 20, 0)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)

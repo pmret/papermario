@@ -389,11 +389,11 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
         EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim10)
     EVT_END_THREAD
     EVT_CALL(NpcJump0, NPC_ShyGuy_01, -45, 0, -8, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_MISS_JUMP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_ACTOR_TRIP, SOUND_SPACE_MODE_0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(50)
     EVT_LOOP(2)
-        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_03E4, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_MODE_0)
         EVT_WAIT(7)
     EVT_END_LOOP
     EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 0)

@@ -545,7 +545,7 @@ EvtScript N(OnDeath) = {
     EVT_ADD(LVar1, 10)
     EVT_ADD(LVar2, 10)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_SET(LVar3, 0)

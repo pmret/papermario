@@ -606,7 +606,7 @@ EvtScript N(recover) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2126)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1551,7 +1551,7 @@ EvtScript N(attackLightningBlast) = {
         EVT_CALL(RemoveEffect, LVarF)
         EVT_CALL(RemoveEffect, LVarE)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2127)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_LIGHTNING)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, 0, LVar1)

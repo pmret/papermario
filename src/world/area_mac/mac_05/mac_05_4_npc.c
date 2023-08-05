@@ -468,7 +468,7 @@ EvtScript N(EVS_80248878) = {
     EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_LOOP(10)
         EVT_ADD(LVar2, -60)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzipede, SOUND_20D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzipede, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_Fuzzipede, LVar0, LVar1, LVar2, 10)
         EVT_CALL(NpcFaceNpc, NPC_Kolorado, NPC_Fuzzipede, 0)
         EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Fuzzipede, 0)

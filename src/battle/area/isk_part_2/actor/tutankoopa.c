@@ -1163,10 +1163,10 @@ EvtScript N(EVS_LevitateToHomePos) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.1))
     EVT_CALL(SetGoalPos, ACTOR_SELF, 97, 70, 15)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 45, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_A)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B4)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_B)
     EVT_END_THREAD
     EVT_WAIT(5)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Stunned, FALSE)
@@ -1183,10 +1183,10 @@ EvtScript N(EVS_GetBackUp) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_A)
     EVT_THREAD
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B4)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_B)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TutankoopaAnims)))
@@ -1240,7 +1240,7 @@ EvtScript N(EVS_Tutankoopa_Death) = {
                 EVT_CALL(GetActorPos, ACTOR_ENEMY1, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 10)
                 EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
-                EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_DEATH)
+                EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_ACTOR_DEATH)
                 EVT_SET(LVar3, 0)
                 EVT_LOOP(12)
                     EVT_CALL(SetActorRotation, ACTOR_ENEMY1, LVar3, 0, 0)

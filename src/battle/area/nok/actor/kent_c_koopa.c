@@ -841,7 +841,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
     EVT_WAIT(8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)

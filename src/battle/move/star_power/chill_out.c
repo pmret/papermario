@@ -98,7 +98,7 @@ API_CALLABLE(func_802A16F4_7907C4) {
     z = target->curPos.z + target->headOffset.z + 5.0f;
 
     fx_stat_change(5, x, y, z, 1.0f, 60);
-    sfx_play_sound(SOUND_2106);
+    sfx_play_sound(SOUND_INFLICT_CHILL_OUT);
     D_802A2CC0 = 1;
 
     return ApiStatus_DONE2;

@@ -664,9 +664,9 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SpeakToPlayer, NPC_BTL_COMPANION, -1, -1, 0, MSG_CH5_0104)
     EVT_THREAD
         EVT_LOOP(9)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_20BA, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_A, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_03B4, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_B, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -705,9 +705,9 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(NpcJump0, NPC_BTL_COMPANION, 50, 0, 0, 12)
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_20BA, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_A, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_03B4, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_B, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1466,7 +1466,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetAnimatedModelRootPosition, VINE_2, 0, -250, 0)
         EVT_CALL(SetActorPos, ACTOR_SELF, 100, 0, 0)
         EVT_CALL(DropStarPoints, ACTOR_SELF)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
         EVT_CALL(ForceHomePos, ACTOR_SELF, 61, 61, 0)
         EVT_WAIT(65)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -1792,7 +1792,7 @@ EvtScript N(onDeath) = {
         EVT_WAIT(3)
         EVT_CALL(SetActorPos, ACTOR_SELF, -60, 0, 0)
         EVT_CALL(DropStarPoints, ACTOR_SELF)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
         EVT_WAIT(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar0)
         EVT_IF_NE(LVar0, 0)

@@ -503,7 +503,7 @@ EvtScript N(onDeath) = {
     EVT_ADD(LVar1, 10)
     EVT_ADD(LVar2, 10)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_SET(LVar3, 0)
@@ -755,7 +755,7 @@ EvtScript N(recover) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2126)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

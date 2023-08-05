@@ -215,7 +215,7 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
     EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcJumpscale, NPC_GoombaKing, EVT_FLOAT(0.8))
     EVT_CALL(NpcFacePlayer, NPC_GoombaKing, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_03E7, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_LARGE_ACTOR_JUMP, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump1, NPC_GoombaKing, -380, 120, -42, 25 * DT)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(10 * DT)
@@ -421,7 +421,7 @@ EvtScript N(EVS_Scene_MeetGoombaKing_Impl) = {
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_GoombaKing, EVT_FLOAT(0.8))
         EVT_CALL(SetNpcPos, NPC_GoombaKing, -405, 0, -91)
-        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_03E7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_LARGE_ACTOR_JUMP, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_GoombaKing, -419, 119, -91, 30 * DT)
         EVT_CALL(PlaySoundAt, SOUND_20EC, SOUND_SPACE_MODE_0, -330, 0, -130)
         EVT_CALL(PlaySoundAt, SOUND_20B4, SOUND_SPACE_MODE_0, -330, 0, -130)

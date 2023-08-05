@@ -341,7 +341,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 2, 100, 28, 10, EVT_FLOAT(2.8), 100)
-        EVT_CALL(PlaySound, SOUND_212D)
+        EVT_CALL(PlaySound, SOUND_RELEASE_ENERGY)
         EVT_WAIT(115)
         EVT_ADD(LVar1, 20)
         EVT_CALL(PlaySoundAt, SOUND_0188, 0, LVar0, LVar1, LVar2)

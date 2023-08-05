@@ -22,7 +22,7 @@ API_CALLABLE(N(func_80240118_90CD58)) {
         npc->flags |= NPC_FLAG_INVISIBLE;
     }
     if (script->functionTemp[1] == 15) {
-        sfx_play_sound_at_position(SOUND_DEATH, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z);
+        sfx_play_sound_at_position(SOUND_ACTOR_DEATH, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z);
         fx_damage_stars(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0.0f, -1.0f, 0.0f, 10);
     }
 

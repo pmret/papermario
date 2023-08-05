@@ -564,7 +564,7 @@ EvtScript N(8022BF1C) = {
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_WAIT(15)
-    EVT_CALL(PlaySound, SOUND_DEATH)
+    EVT_CALL(PlaySound, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)

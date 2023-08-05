@@ -1768,7 +1768,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_END_THREAD
     EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
     EVT_CALL(SetSelfVar, 3, 1)
-    EVT_CALL(PlaySoundWithVolume, SOUND_2108, 80)
+    EVT_CALL(PlaySoundWithVolume, SOUND_SPAWN_BLOCK, 80)
     EVT_EXEC(N(EVS_MakeAllBoxesAppear))
     EVT_EXEC(N(EVS_SetBoxContents))
     EVT_WAIT(25)

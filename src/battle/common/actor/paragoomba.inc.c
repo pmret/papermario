@@ -420,7 +420,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             EVT_THREAD
                 EVT_LOOP(4)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DF)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_FLY)
                     EVT_WAIT(4)
                 EVT_END_LOOP
             EVT_END_THREAD

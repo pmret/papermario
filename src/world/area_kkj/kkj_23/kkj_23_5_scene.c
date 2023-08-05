@@ -300,7 +300,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     EVT_ADD(LVar2, 5)
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar3, LVar4, LVar5)
     EVT_ADD(LVar4, 180)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_2127, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_BOWSER_LIGHTNING, 0)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 5, 20)
     EVT_CALL(N(SetLightningBoltColor), LVarF, 255, 0, 255)
     EVT_ADD(LVar1, 15)

@@ -172,7 +172,7 @@ EvtScript N(80224658) = {
     EVT_ADD(LVar1, 10)
     EVT_ADD(LVar2, 10)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySound, SOUND_DEATH)
+    EVT_CALL(PlaySound, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)

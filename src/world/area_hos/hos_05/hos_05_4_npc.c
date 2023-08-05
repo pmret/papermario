@@ -208,7 +208,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Idle)
     EVT_THREAD
         EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 2, 0, 154, 85, EVT_FLOAT(2.8), 100)
-        EVT_CALL(PlaySound, SOUND_212D)
+        EVT_CALL(PlaySound, SOUND_RELEASE_ENERGY)
         EVT_WAIT(115)
         EVT_CALL(PlaySoundAtPlayer, SOUND_0188, 0)
         EVT_ADD(LVar7, 20)

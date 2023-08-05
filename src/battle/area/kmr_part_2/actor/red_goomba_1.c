@@ -482,7 +482,7 @@ EvtScript N(doDeath_8021D0C4) = {
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar2, LVar3, LVar4, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_SET(LVar3, 0)
     EVT_LOOP(12)

@@ -439,7 +439,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10 * DT, EVT_FLOAT(4.0))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_2127, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_BOWSER_LIGHTNING, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 5)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING, 4, LVar0, LVar1, LVar2, 0, 0)

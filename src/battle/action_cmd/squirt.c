@@ -123,7 +123,7 @@ void N(update)(void) {
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
-            sfx_play_sound_with_params(SOUND_LOOP_41, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             actionCommandStatus->state = 11;
             // fallthrough
         case 11:
@@ -152,7 +152,7 @@ void N(update)(void) {
             }
 
             battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_LOOP_41, 0, 0, battleStatus->actionResult * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
             id = actionCommandStatus->hudElements[0];
             if (temp < 80) {
                 if (hud_element_get_script(id) != &HES_AButtonDown) {
@@ -186,7 +186,7 @@ void N(update)(void) {
                 func_80269160();
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(SOUND_LOOP_41);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             actionCommandStatus->frameCounter = 5;
             actionCommandStatus->state = 12;
             break;
@@ -217,7 +217,7 @@ void N(draw)(void) {
 }
 
 void N(free)(void) {
-    sfx_stop_sound(SOUND_LOOP_41);
+    sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
     hud_element_free(gActionCommandStatus.hudElements[0]);
     hud_element_free(gActionCommandStatus.hudElements[1]);
 }

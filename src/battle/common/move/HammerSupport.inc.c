@@ -292,10 +292,10 @@ EvtScript N(EVS_UseBasicHammer) = {
         EVT_END_LOOP
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PreSwing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2115)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_1)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Swing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2118)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_STRIKE_1)
     EVT_RETURN
     EVT_END
 };
@@ -361,10 +361,10 @@ EvtScript N(EVS_UseSuperHammer) = {
         EVT_WAIT(5)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_PreSwing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2116)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_2)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Swing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2119)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_STRIKE_2)
     EVT_RETURN
     EVT_END
 };
@@ -430,10 +430,10 @@ EvtScript N(EVS_UseUltraHammer) = {
         EVT_WAIT(5)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_PreSwing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2117)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_3)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Swing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_211A)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_STRIKE_3)
     EVT_RETURN
     EVT_END
 };
@@ -487,11 +487,11 @@ EvtScript N(EVS_Hammer_UseBasicQuake) = {
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2115)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_1)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PreSwing)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Swing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2118)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_STRIKE_1)
     EVT_RETURN
     EVT_END
 };
@@ -536,11 +536,11 @@ EvtScript N(EVS_Hammer_UseSuperQuake) = {
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2116)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_2)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_PreSwing)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash2_Swing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2119)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_STRIKE_2)
     EVT_RETURN
     EVT_END
 };
@@ -585,11 +585,11 @@ EvtScript N(EVS_Hammer_UseUltraQuake) = {
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2117)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_PreSwing)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash3_Swing)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_211A)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_STRIKE_3)
     EVT_RETURN
     EVT_END
 };

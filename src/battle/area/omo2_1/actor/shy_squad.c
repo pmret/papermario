@@ -996,7 +996,7 @@ EvtScript N(onHit) = {
                         EVT_WAIT(1)
                     EVT_END_LOOP
             EVT_END_SWITCH
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
             EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
             EVT_SET(LVar8, 0)
             EVT_LOOP(12)
@@ -1095,7 +1095,7 @@ EvtScript N(onDeath) = {
     EVT_END_LOOP
     EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_SET(LVar3, 0)
     EVT_LOOP(12)
@@ -1127,7 +1127,7 @@ EvtScript N(attack) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
         EVT_CASE_LT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
         EVT_CASE_DEFAULT
@@ -1202,7 +1202,7 @@ EvtScript N(attack) = {
             EVT_SUB(LVar0, LVar1)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
+                    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
                 EVT_CASE_LT(5)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
@@ -1261,7 +1261,7 @@ EvtScript N(attack) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(5)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
@@ -1327,7 +1327,7 @@ EvtScript N(flee) = {
     EVT_SUB(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_03B4)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHY_GUY_SCREAMS3)

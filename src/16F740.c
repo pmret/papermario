@@ -2852,7 +2852,7 @@ void btl_state_update_player_move(void) {
                         gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_CHECK_PLAYER_STATUS;
                         break;
                 }
-                sfx_play_sound(SOUND_2107);
+                sfx_play_sound(SOUND_INFLICT_KO);
                 btl_show_battle_message(messageIndex, 60);
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                     actor = battleStatus->enemyActors[i];
@@ -3362,7 +3362,7 @@ void btl_state_update_partner_move(void) {
                         break;
                 }
 
-                sfx_play_sound(SOUND_2107);
+                sfx_play_sound(SOUND_INFLICT_KO);
                 btl_show_battle_message(messageIndex, 60);
 
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
