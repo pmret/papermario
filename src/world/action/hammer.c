@@ -56,17 +56,17 @@ void action_hammer_play_hit_fx(s32 hitID) {
         shakeAmt = 1.2f;
         time = 1;
         radius = 28;
-        soundID = SOUND_211A;
+        soundID = SOUND_HAMMER_STRIKE_3;
     } else if (gPlayerData.hammerLevel == 1) {
         shakeAmt = 0.8f;
         time = 1;
         radius = 16;
-        soundID = SOUND_2119;
+        soundID = SOUND_HAMMER_STRIKE_2;
     } else {
         shakeAmt = 0.4f;
         time = 1;
         radius = 4;
-        soundID = SOUND_2118;
+        soundID = SOUND_HAMMER_STRIKE_1;
     }
 
     theta = DEG_TO_RAD(func_800E5348());
@@ -91,13 +91,13 @@ void action_hammer_play_hit_fx(s32 hitID) {
 
     switch (is_ability_active(ABILITY_ATTACK_FX)) {
         case 1:
-            soundID = SOUND_372;
+            soundID = SOUND_0372;
             break;
         case 2:
-            soundID = SOUND_F1;
+            soundID = SOUND_00F1;
             break;
         case 3:
-            soundID = SOUND_DC;
+            soundID = SOUND_SLIDE_WHISTLE_OUT;
             break;
         case 4:
             soundID = SOUND_2072;
@@ -243,24 +243,24 @@ void action_update_hammer(void) {
         HammerHit->hitID = func_802B62A4_E25174();
 
         if (gPlayerData.hammerLevel == 2) {
-            soundID = SOUND_2117;
+            soundID = SOUND_HAMMER_SWING_3;
             anim = ANIM_MarioW1_Smash3_Hit;
             if (HammerHit->hitID < 0) {
-                soundID = SOUND_2117;
+                soundID = SOUND_HAMMER_SWING_3;
                 anim = ANIM_MarioW1_Smash3_Miss;
             }
         } else if (gPlayerData.hammerLevel == 1) {
-            soundID = SOUND_2116;
+            soundID = SOUND_HAMMER_SWING_2;
             anim = ANIM_MarioW1_Smash2_Hit;
             if (HammerHit->hitID < 0) {
-                soundID = SOUND_2116;
+                soundID = SOUND_HAMMER_SWING_2;
                 anim = ANIM_MarioW1_Smash2_Miss;
             }
         } else {
-            soundID = SOUND_2115;
+            soundID = SOUND_HAMMER_SWING_1;
             anim = ANIM_MarioW1_Smash1_Hit;
             if (HammerHit->hitID < 0) {
-                soundID = SOUND_2115;
+                soundID = SOUND_HAMMER_SWING_1;
                 anim = ANIM_MarioW1_Smash1_Miss;
             }
         }
@@ -373,11 +373,11 @@ void func_802B6820_E256F0(void) {
     if (HammerHit->timer == 2) {
         hammerLevel = gPlayerData.hammerLevel;
         if (hammerLevel == 2) {
-            soundID = SOUND_2117;
+            soundID = SOUND_HAMMER_SWING_3;
         } else if (hammerLevel == 1) {
-            soundID = SOUND_2116;
+            soundID = SOUND_HAMMER_SWING_2;
         } else {
-            soundID = SOUND_2115;
+            soundID = SOUND_HAMMER_SWING_1;
         }
         sfx_play_sound_at_player(soundID, SOUND_SPACE_MODE_0);
 

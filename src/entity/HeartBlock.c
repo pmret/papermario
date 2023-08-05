@@ -213,7 +213,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                 data->sparkleTrailTimer = 0;
                 recover_hp(-1);
                 recover_fp(-1);
-                sfx_play_sound(SOUND_131);
+                sfx_play_sound(SOUND_0131);
             }
             data->yawBuffer[data->yawBufferPos] = entity->rot.y;
             data->yawBufferPos++;

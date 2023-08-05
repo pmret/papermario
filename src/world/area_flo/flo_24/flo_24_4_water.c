@@ -13,7 +13,7 @@ EvtScript N(EVS_Scene_FillWithWater) = {
     EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(300.0), EVT_FLOAT(-150.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(PlaySound, SOUND_80000050)
+    EVT_CALL(PlaySound, SOUND_LOOP_50)
     //@bug thread is never terminated
     EVT_THREAD
         EVT_CALL(MakeLerp, 80, 90, 10, EASING_LINEAR)

@@ -497,7 +497,7 @@ EvtScript N(80221CD4) = {
         EVT_CASE_OR_EQ(5)
             EVT_THREAD
                 EVT_WAIT(12)
-                EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_3, SOUND_301)
+                EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_3, SOUND_0301)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(10)
@@ -517,7 +517,7 @@ EvtScript N(80221CD4) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_4, SOUND_301)
+                EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_4, SOUND_0301)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(3)
@@ -537,7 +537,7 @@ EvtScript N(80221CD4) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(17)
-                EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_5, SOUND_301)
+                EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_5, SOUND_0301)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(15)
@@ -566,7 +566,7 @@ EvtScript N(80221CD4) = {
     EVT_END_SWITCH
     EVT_THREAD
         EVT_WAIT(12)
-        EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_3, SOUND_301)
+        EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_3, SOUND_0301)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
@@ -586,7 +586,7 @@ EvtScript N(80221CD4) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_4, SOUND_301)
+        EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_4, SOUND_0301)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(3)
@@ -606,7 +606,7 @@ EvtScript N(80221CD4) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(17)
-        EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_5, SOUND_301)
+        EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_5, SOUND_0301)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
@@ -742,7 +742,7 @@ EvtScript N(doDeath_80222F50) = {
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar2, LVar3, LVar4, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_SET(LVar3, 0)
     EVT_LOOP(12)

@@ -99,10 +99,10 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -173,27 +173,27 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_NONE)
+                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
                 EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
             EVT_ELSE
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_NONE)
+                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
                 EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
             EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0235)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0236)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0237)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_SWITCH(LVar0)
@@ -241,10 +241,10 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -315,27 +315,27 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_NONE)
+                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
                 EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
             EVT_ELSE
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_NONE)
+                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
                 EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
             EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0235)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0236)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0237)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_SWITCH(LVar0)
@@ -383,10 +383,10 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -453,27 +453,27 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_NONE)
+                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
                 EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 64)
             EVT_ELSE
-                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_NONE)
+                EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
                 EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 224)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
             EVT_CALL(PlayerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVarC, LVarD, 32)
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0235)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0236)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0237)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_SWITCH(LVar0)

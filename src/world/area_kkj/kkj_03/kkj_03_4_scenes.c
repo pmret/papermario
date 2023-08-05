@@ -49,7 +49,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
         EVT_WAIT(10 * DT)
         EVT_CALL(PlayerMoveTo, 590, 0, 10 * DT)
         EVT_WAIT(5 * DT)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, 0)
         EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, -45, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
@@ -57,7 +57,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
         EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
         EVT_CALL(NpcMoveTo, NPC_Peach, 640, 0, 10 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
-        EVT_CALL(PlaySoundAtNpc, NPC_Peach, SOUND_262, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Peach, SOUND_0262, 0)
         EVT_CALL(ShowEmote, NPC_Peach, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_LookAround)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
     EVT_END_THREAD
     EVT_WAIT(17 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_80000056)
+        EVT_CALL(PlaySound, SOUND_LOOP_56)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 200 * DT, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_WAIT(60 * DT)
@@ -135,7 +135,7 @@ EvtScript N(EVS_Scene_Ascending) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_80000056)
+        EVT_CALL(PlaySound, SOUND_LOOP_56)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 200, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_WAIT(100 * DT)

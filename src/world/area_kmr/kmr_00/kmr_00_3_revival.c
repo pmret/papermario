@@ -142,7 +142,7 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
                 npc->pos.y = 100.0f;
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
                 npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-                sfx_play_sound_at_position(SOUND_B000001E, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+                sfx_play_sound_at_position(SOUND_SEQ_1E, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
                 fx_sparkles(FX_SPARKLES_0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 20.0f);
                 script->functionTemp[0] = FUNC_STATE_1;
             }
@@ -218,7 +218,7 @@ API_CALLABLE(N(func_80240BD8_8ACB68)) {
     if (isInitialCall) {
         script->functionTemp[1] = evt_get_variable(script, *args);
         npc = get_npc_unsafe(script->functionTemp[1]);
-        sfx_play_sound_at_position(SOUND_B000001E, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+        sfx_play_sound_at_position(SOUND_SEQ_1E, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
         fx_sparkles(FX_SPARKLES_0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 10.0f);
         script->functionTemp[0] = 3;
     }
@@ -464,7 +464,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
         EVT_CALL(GetNpcPos, NPC_Eldstar, LVar6, LVar7, LVar8)
         EVT_CALL(NpcJump0, NPC_Eldstar, LVar6, LVar7, LVar8, 5 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Idle)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
         EVT_CALL(N(func_802403B8_8AC348), 0, 0, 0, 3, 10)
     EVT_END_THREAD
     EVT_THREAD
@@ -524,29 +524,29 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_WAIT(30 * DT)
     EVT_THREAD
         EVT_WAIT(45 * DT)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_188, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0188, SOUND_SPACE_MODE_0)
         EVT_CALL(N(func_802404A0_8AC430))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
     EVT_CALL(N(func_802403B8_8AC348), 0, 10, 10, 3, 10)
     EVT_WAIT(6 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
     EVT_CALL(N(func_802403B8_8AC348), 0, 0, 10, 3, 15)
     EVT_WAIT(6 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
     EVT_CALL(N(func_802403B8_8AC348), 0, -10, 10, 3, 20)
     EVT_WAIT(6 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
     EVT_CALL(N(func_802403B8_8AC348), 0, 10, 10, 3, 25)
     EVT_WAIT(6 * DT)
     EVT_LOOP(3)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
         EVT_CALL(N(func_802403B8_8AC348), 0, 0, 10, 3, 30)
         EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
         EVT_CALL(N(func_802403B8_8AC348), 0, -10, 10, 3, 30)
         EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_B000001F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)
         EVT_CALL(N(func_802403B8_8AC348), 0, 10, 10, 3, 30)
         EVT_WAIT(6 * DT)
     EVT_END_LOOP
@@ -600,7 +600,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
     EVT_WAIT(25 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_LeanOver)
-    EVT_CALL(PlaySoundAtNpc, NPC_Goombaria, SOUND_263, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Goombaria, SOUND_0263, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Goombaria, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_Stand)

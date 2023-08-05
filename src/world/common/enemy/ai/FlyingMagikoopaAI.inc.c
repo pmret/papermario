@@ -22,7 +22,7 @@ void N(FlyingMagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     if (N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, volume) == 1) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
+        ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
         npc->duration = 50;
         script->AI_TEMP_STATE = 20;
     } else {

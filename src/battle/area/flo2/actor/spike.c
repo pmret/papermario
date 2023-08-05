@@ -290,7 +290,7 @@ EvtScript N(attack) = {
         EVT_SETF(LVar3, EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 0, LVar0, LVar1, LVar2, LVar3, 30, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02C5)
     EVT_THREAD
         EVT_LOOP(15)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 1, 0, 0)
@@ -311,7 +311,7 @@ EvtScript N(attack) = {
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_2C6)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_02C6)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

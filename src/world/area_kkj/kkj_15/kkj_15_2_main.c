@@ -25,7 +25,7 @@ Gfx N(setup_gfx_candle_lights)[] = {
 EvtScript N(EVS_EndPeachChapter0) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_DC)
+    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_10"), kmr_10_ENTRY_0, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated
@@ -33,7 +33,7 @@ EvtScript N(EVS_EndPeachChapter0) = {
 EvtScript N(EVS_EndPeachChapter1) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_DC)
+    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("trd_00"), trd_00_ENTRY_5, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated
@@ -41,7 +41,7 @@ EvtScript N(EVS_EndPeachChapter1) = {
 EvtScript N(EVS_EndPeachChapter3) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_DC)
+    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("arn_07"), arn_07_ENTRY_3, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated
@@ -143,9 +143,9 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, kkj_15_ENTRY_1)
         EVT_IF_EQ(GB_StoryProgress, STORY_CH3_BEGAN_PEACH_MISSION)
-            EVT_CALL(StopSound, SOUND_93)
+            EVT_CALL(StopSound, SOUND_0093)
         EVT_ELSE
-            EVT_CALL(PlaySoundAt, SOUND_93, 0, 50, 5, -200)
+            EVT_CALL(PlaySoundAt, SOUND_0093, 0, 50, 5, -200)
         EVT_END_IF
         EVT_WAIT(10)
     EVT_END_IF

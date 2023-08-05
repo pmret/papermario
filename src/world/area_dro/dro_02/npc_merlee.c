@@ -402,7 +402,7 @@ void N(card_worker_update)(void) {
             if (N(RitualStateTime) == 20) {
                 N(RitualStateTime) = 0;
                 evt_set_variable(N(CreatorScript), RITUAL_VAR_STATE, RITUAL_STATE_FLIP_LEFT);
-                sfx_play_sound_with_params(SOUND_203, 0, 24, 0);
+                sfx_play_sound_with_params(SOUND_0203, 0, 24, 0);
             }
             break;
         case RITUAL_STATE_FLIP_LEFT:
@@ -417,7 +417,7 @@ void N(card_worker_update)(void) {
             if (N(RitualStateTime) == 10) {
                 N(RitualStateTime) = 0;
                 evt_set_variable(N(CreatorScript), RITUAL_VAR_STATE, RITUAL_STATE_FLIP_MIDDLE);
-                sfx_play_sound_with_params(SOUND_203, 0, 64, 0);
+                sfx_play_sound_with_params(SOUND_0203, 0, 64, 0);
             }
             break;
         case RITUAL_STATE_FLIP_MIDDLE:
@@ -432,7 +432,7 @@ void N(card_worker_update)(void) {
             if (N(RitualStateTime) == 10) {
                 N(RitualStateTime) = 0;
                 evt_set_variable(N(CreatorScript), RITUAL_VAR_STATE, RITUAL_STATE_FLIP_RIGHT);
-                sfx_play_sound_with_params(SOUND_203, 0, 104, 0);
+                sfx_play_sound_with_params(SOUND_0203, 0, 104, 0);
             }
             break;
         case RITUAL_STATE_FLIP_RIGHT:
@@ -551,7 +551,7 @@ void N(card_worker_update)(void) {
                 N(RitualCards)[1].unk_00 = 0;
                 N(GetCardOrientation)(1, &sp68, &sp6C, &sp70, &sp74);
                 fx_sparkles(0, sp68, sp6C + 20.0f, sp70, 30.0f);
-                sfx_play_sound(SOUND_206);
+                sfx_play_sound(SOUND_0206);
 
                 for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
                     N(D_8024EF90)[j]->flags |= FX_INSTANCE_FLAG_DISMISS;
@@ -584,12 +584,12 @@ void N(card_worker_render)(void) {
 }
 
 API_CALLABLE(N(func_8024303C_96C1FC)) {
-    sfx_play_sound_with_params(SOUND_202A, 0, 24, 0);
+    sfx_play_sound_with_params(SOUND_SRAW_1D_A, 0, 24, 0);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_80243068_96C228)) {
-    sfx_play_sound_with_params(SOUND_202B, 0, 104, 0);
+    sfx_play_sound_with_params(SOUND_SRAW_1D_B, 0, 104, 0);
     return ApiStatus_DONE2;
 }
 
@@ -609,7 +609,7 @@ EvtScript N(EVS_PerformRitual) = {
     EVT_CALL(GetNpcPos, NPC_Merlee, RITUAL_VAR_POS_X, RITUAL_VAR_POS_Y, RITUAL_VAR_POS_Z)
     EVT_ADD(RITUAL_VAR_POS_X, 60)
     EVT_ADD(RITUAL_VAR_POS_Z, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlee, SOUND_201, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Merlee, SOUND_0201, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(MakeLerp, 720, 0, 60, EASING_LINEAR)
         EVT_LOOP(0)
@@ -640,7 +640,7 @@ EvtScript N(EVS_PerformRitual) = {
         EVT_CALL(SetNpcAnimation, NPC_Merlee, ANIM_WorldMerlee_Release)
     EVT_END_THREAD
     EVT_WAIT(60)
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlee, SOUND_202, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Merlee, SOUND_0202, SOUND_SPACE_MODE_0)
     EVT_SET(LVar0, RITUAL_VAR_POS_Y)
     EVT_ADD(LVar0, 25)
     EVT_PLAY_EFFECT(EFFECT_RADIATING_ENERGY_ORB, 0, RITUAL_VAR_POS_X, LVar0, RITUAL_VAR_POS_Z, 1, -1)
@@ -660,37 +660,37 @@ EvtScript N(EVS_PerformRitual) = {
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(10)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(9)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(4)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(4)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(2)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(6)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_B000001D)
+        EVT_CALL(PlaySound, SOUND_SEQ_1D)
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(0)
@@ -710,7 +710,7 @@ EvtScript N(EVS_PerformRitual) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_WAIT(3)
-        EVT_CALL(PlaySound, SOUND_204)
+        EVT_CALL(PlaySound, SOUND_0204)
         EVT_LOOP(0)
             EVT_IF_GE(RITUAL_VAR_STATE, RITUAL_STATE_B)
                 EVT_BREAK_LOOP
@@ -718,7 +718,7 @@ EvtScript N(EVS_PerformRitual) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_WAIT(15)
-        EVT_CALL(PlaySound, SOUND_205)
+        EVT_CALL(PlaySound, SOUND_0205)
     EVT_END_THREAD
     EVT_LOOP(0)
         EVT_IF_EQ(RITUAL_VAR_STATE, RITUAL_STATE_D)

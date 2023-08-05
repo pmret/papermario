@@ -352,7 +352,7 @@ s32 _update_message(MessagePrintState* printer) {
                             if (printer->fontVariant != 0 || printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_UNK_C3) {
                                 printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_80 | MSG_STATE_FLAG_4;
                             }
-                            sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
+                            sfx_play_sound_with_params(SOUND_MSG_SKIP, 0, 0, 0);
                         } else if (printer->style == MSG_STYLE_RIGHT ||
                                    printer->style == MSG_STYLE_LEFT ||
                                    printer->style == MSG_STYLE_CENTER ||
@@ -368,7 +368,7 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->unk_4CC = 0;
                         printer->unkArraySize = printer->curLine - 1;
                         printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
-                        sfx_play_sound_with_params(SOUND_CD, 0, 0, 0);
+                        sfx_play_sound_with_params(SOUND_MSG_REWIND, 0, 0, 0);
                     }
                     break;
                 case MSG_WINDOW_STATE_C:
@@ -377,14 +377,14 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->unk_4CC = 0;
                         printer->unkArraySize = printer->curLine;
                         printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
-                        sfx_play_sound_with_params(SOUND_CC, 0, 0, 0);
+                        sfx_play_sound_with_params(SOUND_MSG_SKIP, 0, 0, 0);
                     } else if (gGameStatusPtr->pressedButtons[0] & BUTTON_Z) {
                         if (printer->unkArraySize > 0) {
                             printer->windowState = MSG_WINDOW_STATE_B;
                             printer->unk_4CC = 0;
                             printer->unkArraySize--;
                             printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
-                            sfx_play_sound_with_params(SOUND_CD, 0, 0, 0);
+                            sfx_play_sound_with_params(SOUND_MSG_REWIND, 0, 0, 0);
                         }
                     } else {
                         if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
@@ -392,7 +392,7 @@ s32 _update_message(MessagePrintState* printer) {
                             printer->unk_4CC = 0;
                             printer->unkArraySize++;
                             printer->unk_4C8 = abs(printer->curLinePos - printer->lineEndPos[printer->unkArraySize]);
-                            sfx_play_sound_with_params(SOUND_CE, 0, 0, 0);
+                            sfx_play_sound_with_params(SOUND_MSG_UNREWIND, 0, 0, 0);
                         }
                     }
                     break;
@@ -707,13 +707,13 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
             case MSG_CHAR_READ_WAIT:
                 printer->windowState = MSG_WINDOW_STATE_WAITING;
                 printer->delayFlags |= MSG_DELAY_FLAG_1;
-                printer->delayFlags &= ~2;
+                printer->delayFlags &= ~MSG_DELAY_FLAG_2;
                 printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
                 printer->rewindArrowCounter = 0;
                 printer->stateFlags &= ~MSG_STATE_FLAG_80;
                 printer->stateFlags &= ~MSG_STATE_FLAG_PRINT_QUICKLY;
                 if (printer->style != MSG_STYLE_F) {
-                    sfx_play_sound_with_params(SOUND_CB, 0, 0, 0);
+                    sfx_play_sound_with_params(SOUND_MSG_WAIT, 0, 0, 0);
                 }
                 break;
             case MSG_CHAR_READ_PAUSE:
@@ -797,7 +797,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                             printer->stateFlags |= MSG_STATE_FLAG_800;
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
                             if (arg == MSG_STYLE_INSPECT) {
-                                sfx_play_sound_with_params(SOUND_21C, 0, 0, 0);
+                                sfx_play_sound_with_params(SOUND_021C, 0, 0, 0);
                             }
                         }
                         break;
@@ -806,7 +806,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->windowBasePos.y = *srcBuf++;
                         printer->windowSize.x = *srcBuf++;
                         printer->windowSize.y = *srcBuf++;
-                        sfx_play_sound_with_params(SOUND_21C, 0, 0, 0);
+                        sfx_play_sound_with_params(SOUND_021C, 0, 0, 0);
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags |= MSG_STATE_FLAG_800;

@@ -288,7 +288,7 @@ void N(update_riding_physics)(Npc* sushie) {
         if (N(DiveTime) >= 10) {
             if (!(partnerStatus->curButtons & BUTTON_C_DOWN) || N(DiveTime) >= 30) {
                 sushie->curAnim = ANIM_WorldSushie_Rise;
-                sfx_play_sound_at_npc(SOUND_294 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_0294 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0, NPC_PARTNER);
                 N(DiveState) = DIVE_STATE_SURFACING;
             }
         }
@@ -529,7 +529,7 @@ API_CALLABLE(N(UseAbility)) {
             disable_player_shadow();
             playerStatus->flags &= ~PS_FLAG_MOVEMENT_LOCKED;
             suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
-            sfx_play_sound_at_npc(SOUND_2013, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_SUSHIE_EMBARK, SOUND_SPACE_MODE_0, NPC_PARTNER);
             playerStatus->pos.x = sushie->pos.x;
             playerStatus->pos.y = sushie->pos.y;
             playerStatus->pos.z = sushie->pos.z;
@@ -557,9 +557,9 @@ API_CALLABLE(N(UseAbility)) {
                     N(get_movement_from_input)(&angle, &speed);
                     if (N(DiveState) == DIVE_STATE_NONE) {
                         if (speed != 0.0f) {
-                            sfx_play_sound_at_npc(SOUND_2015, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_SUSHIE_RIDE_MOVING, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         } else {
-                            sfx_play_sound_at_npc(SOUND_2014, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                            sfx_play_sound_at_npc(SOUND_SUSHIE_RIDE_IDLE, SOUND_SPACE_MODE_0, NPC_PARTNER);
                         }
                     }
                 }
@@ -616,14 +616,14 @@ API_CALLABLE(N(UseAbility)) {
 
                 if (sushie->curWall < 0 || sushie->curWall & COLLISION_WITH_ENTITY_BIT) {
                     if (N(DiveState) == DIVE_STATE_DIVING && N(DiveTime) == 1) {
-                        sfx_play_sound_at_npc(SOUND_294, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                        sfx_play_sound_at_npc(SOUND_0294, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     }
                     break;
                 }
                 collider = get_collider_flags(sushie->curWall) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (collider != SURFACE_TYPE_DOCK_WALL) {
                     if (N(DiveState) == DIVE_STATE_DIVING && N(DiveTime) == 1) {
-                        sfx_play_sound_at_npc(SOUND_294, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                        sfx_play_sound_at_npc(SOUND_0294, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     }
                     break;
                 }

@@ -437,13 +437,13 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
 
     menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
     if (oldSelected != menu->selected) {
-        sfx_play_sound(SOUND_2102);
+        sfx_play_sound(SOUND_CREATE_FILE_MOVE_CURSOR);
     }
 
     if (filemenu_pressedButtons & BUTTON_A) {
         switch (menu->selected) {
             case 0xC6:
-                sfx_play_sound(SOUND_2103);
+                sfx_play_sound(SOUND_CREATE_FILE_SET_CHARACTER);
                 if (filemenu_filename_pos == ARRAY_COUNT(filemenu_filename)) {
                     filemenu_filename_pos = ARRAY_COUNT(filemenu_filename) - 1;
                 }
@@ -457,7 +457,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
                 break;
             case 0xC7:
                 if (menu->page != 1) {
-                    sfx_play_sound(SOUND_2105);
+                    sfx_play_sound(SOUND_CREATE_FILE_CHANGE_CHARSET);
                     menu->page = 1;
                     filemenu_set_selected(menu, menu->col, menu->row);
                     set_window_update(WINDOW_ID_FILEMENU_KEYBOARD, (s32)filemenu_update_change_layout);
@@ -465,7 +465,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
                 break;
             case 0xC8:
                 if (menu->page != 0) {
-                    sfx_play_sound(SOUND_2105);
+                    sfx_play_sound(SOUND_CREATE_FILE_CHANGE_CHARSET);
                     menu->page = 0;
                     filemenu_set_selected(menu, menu->col, menu->row);
                     set_window_update(WINDOW_ID_FILEMENU_KEYBOARD, (s32)filemenu_update_change_layout);
@@ -513,7 +513,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(newMenu, 0, 0);
                 return;
             default:
-                sfx_play_sound(SOUND_2103);
+                sfx_play_sound(SOUND_CREATE_FILE_SET_CHARACTER);
                 if (filemenu_filename_pos == ARRAY_COUNT(filemenu_filename)) {
                     filemenu_filename[7] = menu->selected;
                 } else {
@@ -534,7 +534,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
 
 
     if ((filemenu_pressedButtons & BUTTON_B) || ((filemenu_pressedButtons & BUTTON_A) && menu->selected == 0xC9)) {
-        sfx_play_sound(SOUND_2104);
+        sfx_play_sound(SOUND_CREATE_FILE_BACKSPACE);
         filemenu_filename_pos--;
         if (filemenu_filename_pos < 0) {
             filemenu_filename_pos = 0;

@@ -38,7 +38,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Crouch)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_367)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0367)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -40)
     EVT_ADD(LVar1, 5)

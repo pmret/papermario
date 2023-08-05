@@ -50,7 +50,7 @@ API_CALLABLE(N(PlayExplosionFX)) {
             } else {
                 fx_explosion(0, x, y + 20, z);
             }
-            sfx_play_sound(SOUND_CANNON1);
+            sfx_play_sound(SOUND_BOMBETTE_BLAST_LV1);
             break;
         case MOVE_POWER_BOMB:
             if (script->varTable[10] > 0) {
@@ -58,7 +58,7 @@ API_CALLABLE(N(PlayExplosionFX)) {
             } else {
                 fx_explosion(0, x, y + 20, z);
             }
-            sfx_play_sound(SOUND_CANNON2);
+            sfx_play_sound(SOUND_BOMBETTE_BLAST_LV2);
             break;
         case MOVE_MEGA_BOMB:
             if (script->varTable[10] > 0) {
@@ -66,11 +66,11 @@ API_CALLABLE(N(PlayExplosionFX)) {
             } else {
                 fx_explosion(1, x, y + 20, z);
             }
-            sfx_play_sound(SOUND_CANNON2);
+            sfx_play_sound(SOUND_BOMBETTE_BLAST_LV2);
             break;
         default:
             fx_explosion(0, x, y + 20, z);
-            sfx_play_sound(SOUND_CANNON1);
+            sfx_play_sound(SOUND_BOMBETTE_BLAST_LV1);
             break;
     }
 
@@ -350,7 +350,7 @@ EvtScript N(idle) = {
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(StopSound, SOUND_287)
+    EVT_CALL(StopSound, SOUND_LRAW_0287)
     EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -1068,7 +1068,7 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
             EVT_CALL(action_command_bomb_start, 0, 87 * DT, 3, 2)
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_287)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_0287)
     EVT_CHILD_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_RunLit)
@@ -1099,7 +1099,7 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_END_SWITCH
-    EVT_CALL(StopSound, SOUND_287)
+    EVT_CALL(StopSound, SOUND_LRAW_0287)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_SET(LVar0, 6 * DT + 1)
@@ -1233,7 +1233,7 @@ EvtScript N(bomb) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON1)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BLAST_LV1)
             EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
             EVT_IF_EQ(LVar0, 6)
                 EVT_BREAK_SWITCH
@@ -1248,7 +1248,7 @@ EvtScript N(bomb) = {
                     EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_END_SWITCH
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON1)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BLAST_LV1)
             EVT_LABEL(5)
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
             EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
@@ -1270,7 +1270,7 @@ EvtScript N(bomb) = {
                 EVT_GOTO(5)
             EVT_END_IF
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON3)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BLAST_LV3)
             EVT_LABEL(10)
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
             EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
@@ -1346,7 +1346,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_287)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_0287)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_11)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 1)
@@ -1354,7 +1354,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_WAIT(5)
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_WAIT(10)
-    EVT_CALL(StopSound, SOUND_287)
+    EVT_CALL(StopSound, SOUND_LRAW_0287)
     EVT_LOOP(7)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)
         EVT_WAIT(1)
@@ -1380,7 +1380,7 @@ EvtScript N(firstStrikeBodySlam) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(0.45))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.15))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CANNON1)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BLAST_LV1)
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(10)

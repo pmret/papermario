@@ -331,7 +331,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 1)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -848,9 +848,9 @@ EvtScript N(healOne) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_214)
+        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_25C)
+        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_SRAW_16_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -941,9 +941,9 @@ EvtScript N(healAll) = {
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_214)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_HEART_BOUNCE)
             EVT_WAIT(30)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_25C)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_SRAW_16_A)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(FreezeBattleState, TRUE)
@@ -1597,7 +1597,7 @@ EvtScript N(boostAttack) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_2DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1709,7 +1709,7 @@ EvtScript N(boostDefense) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_2DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1780,7 +1780,7 @@ EvtScript N(electrify) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_FlyingMagikoopa_Anim02)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F0)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, ACTOR_FLAG_FLYING)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1822,7 +1822,7 @@ EvtScript N(electrify) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_3D2)
+            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_03D2)
             EVT_CALL(RandInt, 3, LVar0)
             EVT_ADD(LVar0, 3)
             EVT_WAIT(LVar0)
@@ -1938,7 +1938,7 @@ EvtScript N(makeTransparent) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_2DB)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DB)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)

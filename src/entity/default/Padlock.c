@@ -88,7 +88,7 @@ void entity_Padlock_idle(Entity* entity) {
             entity_Padlock_push_player(entity);
             if (entity->flags & ENTITY_FLAG_100000) {
                 data->state++;
-                sfx_play_sound(SOUND_269);
+                sfx_play_sound(SOUND_0269);
             }
             break;
         case 1:
@@ -130,7 +130,7 @@ void entity_Padlock_idle(Entity* entity) {
                 data->fallSpeed = 10.0f;
                 data->rotSpeed = 0.2f;
                 data->state++;
-                sfx_play_sound(SOUND_26A);
+                sfx_play_sound(SOUND_026A);
             }
             break;
         case 4:
@@ -148,7 +148,7 @@ void entity_Padlock_idle(Entity* entity) {
                 entity->rot.x = 90.0f;
                 data->rotSpeed = -20.0f;
                 data->state++;
-                sfx_play_sound(SOUND_26A);
+                sfx_play_sound(SOUND_026A);
             }
             break;
         case 6:
@@ -161,7 +161,7 @@ void entity_Padlock_idle(Entity* entity) {
                 entity->rot.x = 90.0f;
                 data->timer = 5;
                 data->state++;
-                sfx_play_sound(SOUND_26A);
+                sfx_play_sound(SOUND_026A);
             }
             break;
         case 7:

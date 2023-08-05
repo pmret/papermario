@@ -237,7 +237,7 @@ EvtScript N(EVS_TexPan_Fireplace) = {
 };
 
 EvtScript N(EVS_RevealButton) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o128, SOUND_F9, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o128, SOUND_00F9, 0)
     EVT_CALL(MakeLerp, 0, 180, 15, EASING_LINEAR)
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateGroup, MODEL_g39, LVar0, 1, 0, 0)
@@ -267,7 +267,7 @@ EvtScript N(EVS_OpenHiddenPassage) = {
     EVT_ELSE
         EVT_SET(LVar0, 60 * DT)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o129, SOUND_FC, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o129, SOUND_00FC, 0)
     EVT_CALL(MakeLerp, 255, 0, LVar0, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -282,7 +282,7 @@ EvtScript N(EVS_OpenHiddenPassage) = {
     EVT_WAIT(10 * DT)
     EVT_THREAD
         EVT_WAIT(20 * DT)
-        EVT_CALL(PlaySoundAt, SOUND_FB, 0, -125, 10, -120)
+        EVT_CALL(PlaySoundAt, SOUND_00FB, 0, -125, 10, -120)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, -125, 10, -120, EVT_FLOAT(2.0), 30)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 0, -180, 30 * DT, EASING_QUADRATIC_IN)
@@ -316,7 +316,7 @@ EvtScript N(EVS_Inspect_HiddenButton) = {
         EVT_CALL(SetPlayerAnimation, ANIM_Peach3_PressButtonHigh)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o128, SOUND_FA, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o128, SOUND_00FA, 0)
         EVT_END_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
@@ -355,7 +355,7 @@ EvtScript N(EVS_Inspect_HiddenButton_FirstTime) = {
         EVT_CALL(SetPlayerAnimation, ANIM_Peach3_PressButtonHigh)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o128, SOUND_FA, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o128, SOUND_00FA, 0)
         EVT_END_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))

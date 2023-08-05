@@ -176,7 +176,7 @@ EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
 
 EvtScript N(D_8024E6F8_80EF78) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_B0000021, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_21, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -431,7 +431,7 @@ EvtScript N(EVS_MerlonBargeOut) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(N(KnockdownSetPos), -215, 21, -158)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_162, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0162, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(50 * DT)
     EVT_CALL(SetNpcPos, NPC_Merlon, -241, 20, -270)
@@ -586,7 +586,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlon, SOUND_209, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Merlon, SOUND_0209, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Gather1)
     EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 10)
@@ -606,7 +606,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
         EVT_SET(MF_KoopaBrosSceneLock, TRUE)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_20A, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_020A, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_DarkToad_01, LVar3, LVar4, LVar5)
         EVT_ADD(LVar5, 5)
         EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
@@ -623,7 +623,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_20A, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_020A, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_DarkToad_02, LVar3, LVar4, LVar5)
         EVT_ADD(LVar5, 5)
         EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
@@ -640,7 +640,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_20A, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_020A, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_DarkToad_03, LVar3, LVar4, LVar5)
         EVT_ADD(LVar5, 5)
         EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
@@ -656,7 +656,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
         EVT_CALL(NpcJump0, NPC_KoopaBros_03, LVar3, LVar4, LVar5, 10 * DT)
     EVT_END_THREAD
     EVT_WAIT(30 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_20A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_020A, SOUND_SPACE_MODE_0)
     EVT_CALL(GetNpcPos, NPC_DarkToad_04, LVar3, LVar4, LVar5)
     EVT_ADD(LVar5, 5)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
@@ -696,7 +696,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Run)
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Run)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_174, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_0174, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(SetNpcSpeed, NPC_KoopaBros_01, EVT_FLOAT(8.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_KoopaBros_01, 700, 0, 0)
@@ -1853,14 +1853,14 @@ EvtScript N(EVS_NpcIdle_ShyGuy_02) = {
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
         EVT_WAIT(3)
         EVT_IF_EQ(MF_InsideToadHouse, TRUE)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
         EVT_END_IF
         EVT_CALL(NpcJump0, NPC_SELF, 539, 36, -242, 8)
         EVT_WAIT(2)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
         EVT_WAIT(3)
         EVT_IF_EQ(MF_InsideToadHouse, TRUE)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
         EVT_END_IF
         EVT_CALL(NpcJump0, NPC_SELF, 572, 36, -226, 8)
         EVT_WAIT(2)
@@ -1878,7 +1878,7 @@ EvtScript N(EVS_NpcAI_ShyGuy_02) = {
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_SELF, 550, 20, -161, 0)
     EVT_THREAD
         EVT_WAIT(10)

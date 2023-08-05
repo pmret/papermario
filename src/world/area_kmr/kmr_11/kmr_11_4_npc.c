@@ -39,21 +39,21 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
         EVT_CALL(GetNpcPos, NPC_RedGoombaBro, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_RedGoombaBro, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
-        EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_RedGoombaBro, LVar0, 0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_BlueGoombaBro, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_BlueGoombaBro, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
-        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_BlueGoombaBro, LVar0, 0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_GoombaKing, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
-        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_3E7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_LARGE_ACTOR_JUMP, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_GoombaKing, LVar0, 0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_WAIT(15 * DT)

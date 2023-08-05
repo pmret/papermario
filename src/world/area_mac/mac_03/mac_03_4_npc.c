@@ -469,7 +469,7 @@ EvtScript N(EVS_NpcInit_Toad_03) = {
 
 EvtScript N(D_8024A7F4_83BFF4) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_B0000021, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_21, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -484,11 +484,11 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
     EVT_LOOP(0)
         EVT_CALL(NpcMoveTo, NPC_SELF, -250, -25, 30)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, -250, 0, 30, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, -100, 30, 30)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, -100, 0, -25, 15)
     EVT_END_LOOP
     EVT_RETURN
@@ -508,7 +508,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(ShowSweat, NPC_SELF, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_SELF, -30, 0, 0, 20)
     EVT_CALL(ShowSweat, NPC_SELF, 1, 45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203F, SOUND_SPACE_MODE_0)

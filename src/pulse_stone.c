@@ -129,7 +129,7 @@ void appendGfx_pulse_stone_icon(void) {
             PulseStonePtr->pingTime++;
             if (PulseStonePtr->pingTime >= pingDelay + 2) {
                 PulseStonePtr->pingTime = 0;
-                sfx_play_sound_at_player(SOUND_7D, SOUND_SPACE_MODE_0);
+                sfx_play_sound_at_player(SOUND_007D, SOUND_SPACE_MODE_0);
             }
             if (PulseStonePtr->pingTime < 2) {
                 ifxImg.palette = pulse_stone_icon_2_pal;

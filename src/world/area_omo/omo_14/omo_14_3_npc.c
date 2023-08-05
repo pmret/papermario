@@ -114,7 +114,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
                             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                             EVT_IF_EQ(LVar1, 0)
-                                EVT_CALL(PlaySound, SOUND_3ED)
+                                EVT_CALL(PlaySound, SOUND_03ED)
                                 EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
                                 EVT_THREAD
                                     EVT_CALL(ShakeCam, CAM_DEFAULT, 1, 4, EVT_FLOAT(1.0))
@@ -122,7 +122,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                                 EVT_WAIT(3 * DT)
                                 EVT_CALL(SetPlayerAnimation, ANIM_Mario1_PanicRun)
                                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-                                EVT_CALL(PlaySound, SOUND_3EE)
+                                EVT_CALL(PlaySound, SOUND_03EE)
                                 EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 15 * DT)
                                 EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                             EVT_ELSE
@@ -199,12 +199,12 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                     EVT_ADD(LVar0, 1)
                 EVT_END_LOOP
                 EVT_WAIT(45 * DT)
-                EVT_CALL(StopSound, SOUND_8000004C)
+                EVT_CALL(StopSound, SOUND_LOOP_4C)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005E)
                 EVT_THREAD
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
                 EVT_END_THREAD
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_1E4, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_01E4, SOUND_SPACE_MODE_0)
                 EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 37, 37, 1, 10, 30)
                 EVT_CALL(EnableModel, MODEL_o821, TRUE)
                 EVT_LOOP(10)

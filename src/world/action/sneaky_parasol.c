@@ -112,7 +112,7 @@ void action_update_parasol(void) {
             disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
             disguiseNpc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
             playerStatus->flags |= PS_FLAG_ROTATION_LOCKED;
-            sfx_play_sound_at_player(SOUND_FD, SOUND_SPACE_MODE_0);
+            sfx_play_sound_at_player(SOUND_00FD, SOUND_SPACE_MODE_0);
         }
     }
 
@@ -121,7 +121,7 @@ void action_update_parasol(void) {
             if (playerStatus->flipYaw[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_allow_backward(ANIM_Peach2_UseParasol);
-                    sfx_play_sound_at_player(SOUND_92, SOUND_SPACE_MODE_0);
+                    sfx_play_sound_at_player(SOUND_0092, SOUND_SPACE_MODE_0);
                     playerStatus->actionSubstate++; // SUBSTATE_USE_PARASOL
                 } else {
                     suggest_player_anim_allow_backward(ANIM_Peach2_CantFitParasol);
@@ -146,7 +146,7 @@ void action_update_parasol(void) {
                 playerStatus->curStateTime = 12;
                 playerStatus->flags |= PS_FLAG_ROTATION_LOCKED;
                 playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_BEGIN
-                sfx_play_sound_at_player(SOUND_FD, SOUND_SPACE_MODE_0);
+                sfx_play_sound_at_player(SOUND_00FD, SOUND_SPACE_MODE_0);
             }
             break;
         case SUBSTATE_DISGUISE_BEGIN:
@@ -385,7 +385,7 @@ void action_update_parasol(void) {
     if (transformation->revertTime != 0) {
         if (transformation->revertTime <= 10) {
             if (transformation->revertTime == 10) {
-                sfx_play_sound_at_player(SOUND_FE, SOUND_SPACE_MODE_0);
+                sfx_play_sound_at_player(SOUND_00FE, SOUND_SPACE_MODE_0);
             }
             if ((transformation->revertTime & 3) == 0) {
                 fx_stars_shimmer(4,

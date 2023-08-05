@@ -18,14 +18,14 @@ EvtScript N(EVS_UnlockPrompt_RuinsKey) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, 355, -460, 430)
+    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_MODE_0, 355, -460, 430)
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GF_ISK11_UnlockedDoor, TRUE)
     EVT_SET(LVar0, MV_LockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_SET(LVar1, 0)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_265, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_0265, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 65, 65, EASING_LINEAR)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)

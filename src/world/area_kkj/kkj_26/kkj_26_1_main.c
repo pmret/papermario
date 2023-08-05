@@ -5,7 +5,7 @@
 EvtScript N(EVS_GotoMap_hos_00_1) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_DC)
+    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("hos_00"), hos_00_ENTRY_1, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 };

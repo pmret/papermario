@@ -382,7 +382,7 @@ API_CALLABLE(func_80218250_52B8F0) {
 }
 
 EvtScript N(onDeath) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY2, SOUND_3AE)
+    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY2, SOUND_03AE)
     EVT_CALL(func_80218250_52B8F0)
     EVT_CALL(EnableModel, 39, FALSE)
     EVT_CALL(EnableModel, 41, FALSE)

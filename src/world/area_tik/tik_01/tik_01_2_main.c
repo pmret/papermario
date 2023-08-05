@@ -22,7 +22,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_80000027)
+    EVT_CALL(PlaySound, SOUND_LOOP_27)
     EVT_CALL(EnableTexPanning, MODEL_nagare1, TRUE)
     EVT_THREAD
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)

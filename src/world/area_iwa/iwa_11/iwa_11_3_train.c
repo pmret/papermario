@@ -17,7 +17,7 @@ API_CALLABLE(N(GetLargeWheelAngle)) {
 }
 
 EvtScript N(EVS_SpawnSmoke) = {
-    EVT_CALL(PlaySoundAtModel, MODEL_07, SOUND_B000001A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_07, SOUND_SEQ_1A, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, MV_TrainMoveDist)
     EVT_IF_EQ(MF_TrainReverseDir, FALSE)
         EVT_ADDF(LVar0, -310)

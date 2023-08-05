@@ -140,7 +140,7 @@ void N(update)(void) {
             actionCommandStatus->unk_5C = 0;
             D_802A98C0 = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
-            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             actionCommandStatus->state = 11;
 
             // fallthrough
@@ -194,7 +194,7 @@ void N(update)(void) {
             D_802A98C0 = battleStatus->curButtonsDown;
             battleStatus->actionResult = actionCommandStatus->unk_5C;
 
-            sfx_adjust_env_sound_params(SOUND_80000041, 0, 0, battleStatus->actionSuccess * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
 
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
@@ -219,7 +219,7 @@ void N(update)(void) {
             }
 
             btl_set_popup_duration(0);
-            sfx_stop_sound(SOUND_80000041);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             actionCommandStatus->frameCounter = 5;
             actionCommandStatus->state = 12;
             break;

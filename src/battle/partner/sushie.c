@@ -259,9 +259,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0);
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_29B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_029B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_29C, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_029C, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -283,9 +283,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_29B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_029B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_29C, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_029C, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -307,9 +307,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_29B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_029B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_29C, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_029C, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -332,7 +332,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             sEffect->data.waterFountain->unk_3C = partner->scale.x;
             sEffect->data.waterFountain->unk_40 = partner->scale.x;
             if (state->moveTime == 0x46) {
-                sfx_play_sound_at_position(SOUND_29D, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_029D, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
                 fx_underwater(0, -50.0f, 20.0f, 0.0f, 1.0f, 120);
             }
 
@@ -982,7 +982,7 @@ EvtScript N(squirt) = {
         EVT_SETF(LVarE, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_297)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0297)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
@@ -1014,10 +1014,10 @@ EvtScript N(squirt) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_110)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0110)
         EVT_CASE_DEFAULT
             EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_110)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0110)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1073,7 +1073,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(SetBattleCamZoom, 277)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_298)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0298)
         EVT_CALL(N(PlaySquirtFX))
         EVT_WAIT(65)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Celebrate)

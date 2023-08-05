@@ -31,7 +31,7 @@ API_CALLABLE(N(ActorJumpToPos)) {
     if (actor->curPos.y < 0.0f) {
         actor->curPos.y = 0.0f;
         play_movement_dust_effects(2, actor->curPos.x, actor->curPos.y, actor->curPos.z, actor->yaw);
-        sfx_play_sound(SOUND_SOFT_LAND);
+        sfx_play_sound(SOUND_LAND_SOFTLY);
         return ApiStatus_DONE1;
     }
 

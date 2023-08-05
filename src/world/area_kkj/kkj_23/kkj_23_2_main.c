@@ -6,7 +6,7 @@
 EvtScript N(EVS_EndPeachChapter6) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_DC)
+    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("flo_00"), flo_00_ENTRY_A, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated

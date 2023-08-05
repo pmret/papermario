@@ -23,7 +23,7 @@ EvtScript N(EVS_ActivateSwitch) = {
     EVT_CALL(N(UnsetCamera0MoveFlag1))
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_EF)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_227, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_0227, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, -50, 0, 15, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -36,7 +36,7 @@ EvtScript N(EVS_ActivateSwitch) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(80)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_228, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_0228, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, -50, 20, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -52,7 +52,7 @@ EvtScript N(EVS_ActivateSwitch) = {
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_EF)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_227, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_0227, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, -99, 0, 15, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -66,7 +66,7 @@ EvtScript N(EVS_ActivateSwitch) = {
         EVT_END_LOOP
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_WAIT(80)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_228, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_0228, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, -99, 15, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)

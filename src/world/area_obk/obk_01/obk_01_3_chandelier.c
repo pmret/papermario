@@ -207,7 +207,7 @@ API_CALLABLE(N(UpdateChandelier)) {
         }
         // detect direction reversal
         if (nextSwingAngle * chandelier->swingAngle <= 0.0f) {
-            sfx_play_sound_at_player(SOUND_9D, SOUND_SPACE_MODE_0);
+            sfx_play_sound_at_player(SOUND_009D, SOUND_SPACE_MODE_0);
         }
         chandelier->swingAngle = nextSwingAngle;
     }
@@ -216,13 +216,13 @@ API_CALLABLE(N(UpdateChandelier)) {
     if (!script->functionTemp[2]) {
         // is chain moving?
         if (chandelier->dropDistance != lastDropDistance) {
-            sfx_play_sound_at_position(SOUND_8000000F, SOUND_SPACE_MODE_0, 440.0f, chandelier->dropDistance, 271.0f);
+            sfx_play_sound_at_position(SOUND_LOOP_0F, SOUND_SPACE_MODE_0, 440.0f, chandelier->dropDistance, 271.0f);
             script->functionTemp[2] = TRUE;
         }
     } else {
         // is chain done moving?
         if (chandelier->dropDistance == lastDropDistance) {
-            sfx_stop_sound(SOUND_8000000F);
+            sfx_stop_sound(SOUND_LOOP_0F);
             script->functionTemp[2] = FALSE;
         }
     }
@@ -235,13 +235,13 @@ API_CALLABLE(N(UpdateChandelier)) {
             f32 x, y, z;
 
             get_collider_center(COLLIDER_o557, &x, &y, &z);
-            sfx_play_sound_at_position(SOUND_80000010, SOUND_SPACE_MODE_0, x, y, z);
+            sfx_play_sound_at_position(SOUND_LOOP_10, SOUND_SPACE_MODE_0, x, y, z);
             script->functionTemp[3] = TRUE;
         }
     } else {
         // is cabinet done moving?
         if (cabinetPos == script->varTable[1]) {
-            sfx_stop_sound(SOUND_80000010);
+            sfx_stop_sound(SOUND_LOOP_10);
             script->functionTemp[3] = FALSE;
         }
     }
@@ -570,7 +570,7 @@ EvtScript N(EVS_LaunchFromCouch_Crash) = {
     EVT_CALL(PlayerJump, 51, -210, 87, 60)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_162, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0162, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Collapse)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_GetUp)

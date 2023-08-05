@@ -60,7 +60,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_WAIT(10 * DT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
-    EVT_CALL(PlaySound, SOUND_80000006)
+    EVT_CALL(PlaySound, SOUND_LOOP_06)
     EVT_CHILD_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_WAIT(4 * DT)
@@ -100,13 +100,13 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_80000007)
+        EVT_CALL(PlaySound, SOUND_LOOP_07)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10 * DT, EVT_FLOAT(4.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20 * DT, EVT_FLOAT(0.7))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 250 * DT, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30 * DT, EVT_FLOAT(0.5))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10 * DT, EVT_FLOAT(1.2))
-        EVT_CALL(StopSound, SOUND_80000007)
+        EVT_CALL(StopSound, SOUND_LOOP_07)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(50 * DT)
@@ -125,13 +125,13 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaTroopa_02, SOUND_263, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaTroopa_02, SOUND_0263, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_KoopaTroopa_02, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(120 * DT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_02, ANIM_KoopaTroopa_ShellExit)
         EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_02, ANIM_KoopaTroopa_Panic)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaTroopa_02, SOUND_262, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaTroopa_02, SOUND_0262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_KoopaTroopa_02, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
         EVT_LOOP(4)
             EVT_CALL(InterpNpcYaw, NPC_KoopaTroopa_02, 270, 0)
@@ -162,7 +162,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
         EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_03, ANIM_KoopaTroopa_ShellExit)
         EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_03, ANIM_KoopaTroopa_Panic)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaTroopa_03, SOUND_262, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaTroopa_03, SOUND_0262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_KoopaTroopa_03, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
         EVT_LOOP(4)
             EVT_CALL(InterpNpcYaw, NPC_KoopaTroopa_03, 270, 0)
@@ -187,7 +187,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag0, FALSE)
             EVT_SET(LFlag0, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(EnableModel, MODEL_o145, TRUE)
         EVT_END_IF
     EVT_END_IF
@@ -196,7 +196,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag1, FALSE)
             EVT_SET(LFlag1, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 50, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -205,7 +205,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag2, FALSE)
             EVT_SET(LFlag2, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 100, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -214,7 +214,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag3, FALSE)
             EVT_SET(LFlag3, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 150, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -223,7 +223,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag4, FALSE)
             EVT_SET(LFlag4, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 200, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -232,7 +232,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag5, FALSE)
             EVT_SET(LFlag5, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 250, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -241,7 +241,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag6, FALSE)
             EVT_SET(LFlag6, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(TranslateModel, MODEL_o145, 300, 0, 0)
         EVT_END_IF
     EVT_END_IF
@@ -250,7 +250,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_IF_GE(LVar2, -20)
         EVT_IF_EQ(LFlag7, FALSE)
             EVT_SET(LFlag7, TRUE)
-            EVT_CALL(PlaySound, SOUND_23)
+            EVT_CALL(PlaySound, SOUND_TRD_WATER_SPLASH)
             EVT_CALL(EnableModel, MODEL_o145, FALSE)
         EVT_END_IF
     EVT_END_IF
@@ -269,7 +269,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(1)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
-    EVT_CALL(StopSound, SOUND_80000006)
+    EVT_CALL(StopSound, SOUND_LOOP_06)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
     EVT_UNBIND

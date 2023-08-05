@@ -64,7 +64,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetItemPos, MV_StarStoneItemID, -117, 179, -32)
-    EVT_CALL(PlaySoundAt, SOUND_1EB, 0, -117, 179, -32)
+    EVT_CALL(PlaySoundAt, SOUND_01EB, 0, -117, 179, -32)
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(MakeLerp, -32, -55, 100 * DT, EASING_COS_IN_OUT)
@@ -76,7 +76,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o61, SOUND_39C, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o61, SOUND_039C, 0)
     EVT_CALL(MakeLerp, 0, -23, 100 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(2)
     EVT_CALL(UpdateLerp)
@@ -98,7 +98,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(30)
-    EVT_CALL(PlaySound, SOUND_39D)
+    EVT_CALL(PlaySound, SOUND_039D)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, -20, -20, -66, 0)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 20, -20, -66, 0)
@@ -122,7 +122,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
     EVT_CALL(SetGroupVisibility, MODEL_move2, MODEL_GROUP_VISIBLE)
     EVT_CALL(SetGroupVisibility, MODEL_move3, MODEL_GROUP_HIDDEN)
-    EVT_CALL(PlaySound, SOUND_80000040)
+    EVT_CALL(PlaySound, SOUND_LOOP_40)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 600, EVT_FLOAT(0.15))
     EVT_END_THREAD
@@ -143,8 +143,8 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
                 EVT_GOTO(3)
             EVT_END_IF
             EVT_IF_EQ(LVar2, 30)
-                EVT_CALL(PlaySound, SOUND_39F)
-                EVT_CALL(StopSound, SOUND_80000040)
+                EVT_CALL(PlaySound, SOUND_039F)
+                EVT_CALL(StopSound, SOUND_LOOP_40)
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -153,7 +153,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
                 EVT_SET(LVarA, -20)
                 EVT_SUB(LVarA, LVarB)
             EVT_ELSE
-                EVT_CALL(PlaySoundAt, SOUND_1EC, 0, LVar0, LVarA, LVar2)
+                EVT_CALL(PlaySoundAt, SOUND_01EC, 0, LVar0, LVarA, LVar2)
                 EVT_MOD(LVar2, 3)
                 EVT_IF_EQ(LVar2, 0)
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))

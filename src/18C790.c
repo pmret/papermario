@@ -508,7 +508,7 @@ void btl_state_update_celebration(void) {
                 bFadeToBlackAmt = 0;
                 LevelUpSelectTextOffsetX = 0;
                 LevelUpSelectTextVelX = 0;
-                sfx_play_sound(SOUND_D4);
+                sfx_play_sound(SOUND_JINGLE_WON_BATTLE);
 
                 prevSP = playerData->starPoints + battleStatus->totalStarPoints;
                 if (prevSP > 99) {
@@ -551,7 +551,7 @@ void btl_state_update_celebration(void) {
                     battleStatus->totalStarPoints = EndBattleRewardTotal / 100;
                     deltaSP = prevSP - battleStatus->totalStarPoints;
                     if (deltaSP > 0) {
-                        sfx_play_sound(SOUND_215);
+                        sfx_play_sound(SOUND_STAR_POINT_PICKUP);
                     }
 
                     playerData->starPoints += deltaSP;
@@ -615,7 +615,7 @@ void btl_state_update_celebration(void) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
                 DMA_COPY_SEGMENT(level_up);
-                sfx_play_sound(SOUND_80000008);
+                sfx_play_sound(SOUND_LOOP_08);
                 CelebrateStateTime = 0;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_BEGIN;
             }
@@ -981,7 +981,7 @@ void btl_state_update_celebration(void) {
             if (battleStatus->curButtonsPressed & BUTTON_A) {
                 if (!CantLevelUpStat[battleStatus->curSubmenu]) {
                     sfx_play_sound(SOUND_MENU_NEXT);
-                    sfx_play_sound(SOUND_349 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                    sfx_play_sound(SOUND_LRAW_CHEERING | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_UPGRADE;
                 } else {
                     sfx_play_sound(SOUND_MENU_ERROR);

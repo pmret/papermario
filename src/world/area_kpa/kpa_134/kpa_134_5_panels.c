@@ -67,12 +67,12 @@ EvtScript N(EVS_FlipWallPanels) = {
         EVT_IF_EQ(LVar5, -1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_2040, SOUND_SPACE_MODE_0, LVar6, LVar7, LVar8)
+        EVT_CALL(PlaySoundAt, SOUND_LRAW_2040, SOUND_SPACE_MODE_0, LVar6, LVar7, LVar8)
         EVT_EXEC(N(EVS_FlipWallPanel))
         EVT_WAIT(10)
     EVT_END_LOOP
     EVT_WAIT(50)
-    EVT_CALL(StopSound, SOUND_2040)
+    EVT_CALL(StopSound, SOUND_LRAW_2040)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))

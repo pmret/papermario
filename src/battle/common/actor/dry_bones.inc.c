@@ -235,7 +235,7 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(reassemble) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D2)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02D2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim08)
     EVT_WAIT(20)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
@@ -440,10 +440,10 @@ EvtScript N(takeTurn) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_SUB(LVar0, 1)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02D4)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim09)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D3)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02D3)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim0A)
             EVT_WAIT(20)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
@@ -457,7 +457,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
             EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
         EVT_ELSE
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02D4)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim09)
             EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
@@ -490,7 +490,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
             EVT_WAIT(1)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_2D1)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_02D1)
             EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_WALK, 0, 0)
             EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
             EVT_EXEC_GET_TID(N(rotateBone), LVarA)
@@ -519,7 +519,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_2D1)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_02D1)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_WALK, 0, 0)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
     EVT_EXEC_GET_TID(N(rotateBone), LVarA)

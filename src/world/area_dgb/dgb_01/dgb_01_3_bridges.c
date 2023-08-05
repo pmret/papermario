@@ -76,25 +76,25 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
     EVT_CALL(SetAnimatedModelRootPosition, 0, 0, 0, 0)
     EVT_CALL(SetAnimatedModelRenderMode, 0, RENDER_MODE_SURFACE_OPA)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_95)
+        EVT_CALL(PlaySound, SOUND_0095)
         EVT_WAIT(60)
-        EVT_CALL(PlaySound, SOUND_96)
+        EVT_CALL(PlaySound, SOUND_0096)
         EVT_WAIT(25)
-        EVT_CALL(PlaySound, SOUND_98)
+        EVT_CALL(PlaySound, SOUND_0098)
         EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_97)
+        EVT_CALL(PlaySound, SOUND_0097)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(100)
-        EVT_CALL(PlaySound, SOUND_A8)
+        EVT_CALL(PlaySound, SOUND_00A8)
         EVT_WAIT(50)
-        EVT_CALL(PlaySound, SOUND_A8)
+        EVT_CALL(PlaySound, SOUND_00A8)
         EVT_WAIT(30)
-        EVT_CALL(PlaySound, SOUND_A8)
+        EVT_CALL(PlaySound, SOUND_00A8)
         EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_A8)
+        EVT_CALL(PlaySound, SOUND_00A8)
         EVT_WAIT(30)
-        EVT_CALL(PlaySound, SOUND_A8)
+        EVT_CALL(PlaySound, SOUND_00A8)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -127,7 +127,7 @@ EvtScript N(EVS_Scene_TubbaSmashBridges) = {
         EVT_CALL(EnablePartnerAI)
     EVT_END_THREAD
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 300, EVT_FLOAT(1.0))
-    EVT_CALL(StopSound, SOUND_8000005D)
+    EVT_CALL(StopSound, SOUND_LOOP_5D)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0D)
         EVT_CALL(SetNpcSpeed, NPC_Tubba, EVT_FLOAT(3.0))

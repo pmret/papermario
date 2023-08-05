@@ -136,7 +136,7 @@ void action_update_spin_jump(void) {
                         playerStatus->pitch = 0.0f;
                         playerStatus->actionSubstate++;
                         exec_ShakeCam1(0, 0, 4);
-                        sfx_play_sound_at_player(SOUND_149, SOUND_SPACE_MODE_0);
+                        sfx_play_sound_at_player(SOUND_LAND_SPIN_JUMP, SOUND_SPACE_MODE_0);
                         start_rumble(128, 25);
                         panels = &gCurrentHiddenPanels;
                         panels->tryFlipTrigger = TRUE;

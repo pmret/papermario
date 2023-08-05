@@ -98,7 +98,7 @@ API_CALLABLE(func_802A16F4_7907C4) {
     z = target->curPos.z + target->headOffset.z + 5.0f;
 
     fx_stat_change(5, x, y, z, 1.0f, 60);
-    sfx_play_sound(SOUND_2106);
+    sfx_play_sound(SOUND_INFLICT_CHILL_OUT);
     D_802A2CC0 = 1;
 
     return ApiStatus_DONE2;
@@ -116,7 +116,7 @@ EvtScript N(802A18F0) = {
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
@@ -140,7 +140,7 @@ EvtScript N(802A18F0) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
         EVT_CALL(N(UnkStarFunc), 4)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(N(UnkStarFunc), 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
@@ -171,7 +171,7 @@ EvtScript N(802A1C88) = {
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
@@ -195,7 +195,7 @@ EvtScript N(802A1C88) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
         EVT_CALL(N(UnkStarFunc), 4)
         EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_241)
+        EVT_CALL(PlaySound, SOUND_0241)
         EVT_CALL(N(UnkStarFunc), 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
@@ -219,7 +219,7 @@ EvtScript N(802A2020) = {
     EVT_CALL(SetForegroundModelsVisible, FALSE)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
     EVT_CALL(MoveBattleCamOver, 1)
-    EVT_CALL(PlaySound, SOUND_2041)
+    EVT_CALL(PlaySound, SOUND_SRAW_1E_A)
     EVT_CALL(CreateNpc, NPC_BTL_SPIRIT, LVar0)
     EVT_CALL(N(SetNpcCollision32))
     EVT_CALL(SetNpcFlagBits, NPC_BTL_SPIRIT, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
@@ -350,7 +350,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMuskular_Shout)
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(PlaySound, SOUND_244)
+    EVT_CALL(PlaySound, SOUND_0244)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(10)
     EVT_CALL(ItemCheckHit, LVar0, 0, 0, 0, 0)

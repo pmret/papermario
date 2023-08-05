@@ -39,7 +39,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcJumpscale, NPC_Oaklie, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Oaklie, -426, 58, -70, 20 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
@@ -60,7 +60,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         EVT_WAIT(15 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Oaklie, -333, 0, -81, 20 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
     EVT_WAIT(5 * DT)
@@ -69,7 +69,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         EVT_WAIT(15 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Oaklie, -300, 0, -170, 15 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
     EVT_WAIT(5 * DT)
@@ -78,7 +78,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         EVT_WAIT(15 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Oaklie, -226, 0, -245, 15 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
     EVT_WAIT(5 * DT)
@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcInteract_Oaklie) = {
         EVT_WAIT(15 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Fall)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Oaklie, -160, 0, -296, 15 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)
     EVT_WAIT(5 * DT)
@@ -127,7 +127,7 @@ EvtScript N(EVS_NpcIdle_Oaklie) = {
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
             EVT_END_THREAD
-            EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_32C, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Oaklie, SOUND_032C, SOUND_SPACE_MODE_0)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
             EVT_CALL(NpcJump0, NPC_SELF, -455, 0, 0, 20 * DT)
             EVT_CALL(SetNpcAnimation, NPC_Oaklie, ANIM_Oaklie_Land)

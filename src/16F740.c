@@ -771,7 +771,7 @@ void btl_state_update_begin_player_turn(void) {
                         fx_water_splash(0, player->curPos.x - 15.0f, player->curPos.y + 32.0f, player->curPos.z + 5.0f, 1.0f, 24);
                         fx_water_splash(1, player->curPos.x + 15.0f, player->curPos.y + 22.0f, player->curPos.z + 5.0f, 1.0f, 24);
                         battleStatus->waterBlockEffect = NULL;
-                        sfx_play_sound(SOUND_299);
+                        sfx_play_sound(SOUND_0299);
                         btl_show_battle_message(BTL_MSG_WATER_BLOCK_END, 60);
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_WATER_BLOCK;
                     } else {
@@ -2294,7 +2294,7 @@ void btl_state_update_run_away(void) {
             enemyCount = prevSP - battleStatus->totalStarPoints;
 
             if (enemyCount > 0) {
-                sfx_play_sound(SOUND_211);
+                sfx_play_sound(SOUND_COIN_PICKUP);
             }
             playerData->starPoints += enemyCount;
             BattleScreenFadeAmt++;
@@ -2852,7 +2852,7 @@ void btl_state_update_player_move(void) {
                         gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_CHECK_PLAYER_STATUS;
                         break;
                 }
-                sfx_play_sound(SOUND_2107);
+                sfx_play_sound(SOUND_INFLICT_KO);
                 btl_show_battle_message(messageIndex, 60);
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                     actor = battleStatus->enemyActors[i];
@@ -3362,7 +3362,7 @@ void btl_state_update_partner_move(void) {
                         break;
                 }
 
-                sfx_play_sound(SOUND_2107);
+                sfx_play_sound(SOUND_INFLICT_KO);
                 btl_show_battle_message(messageIndex, 60);
 
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {

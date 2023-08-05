@@ -177,7 +177,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_ADD(LVar2, 5)
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 18)
     EVT_CALL(DeleteVirtualEntity, LVarA)
-    EVT_CALL(PlaySound, SOUND_2010)
+    EVT_CALL(PlaySound, SOUND_EGG_MISSILE_BLAST)
     EVT_CALL(N(func_802A123C_71CF1C), LVar0, LVar1, LVar2)
     EVT_THREAD
         EVT_CALL(StartRumble, 5)

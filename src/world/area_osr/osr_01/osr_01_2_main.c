@@ -44,7 +44,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_PlaySong_Starship))
     EVT_EXEC(N(EVS_TexPan_Fountain))
-    EVT_CALL(PlaySoundAtF, SOUND_8000005A, SOUND_SPACE_MODE_1, 300, 2, 399)
+    EVT_CALL(PlaySoundAtF, SOUND_LOOP_5A, SOUND_SPACE_MODE_1, 300, 2, 399)
     EVT_CALL(GetEntryID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(osr_01_ENTRY_3)

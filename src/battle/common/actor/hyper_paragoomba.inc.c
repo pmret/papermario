@@ -696,7 +696,7 @@ EvtScript N(takeTurn_8021D1DC) = {
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             EVT_THREAD
                 EVT_LOOP(4)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DF)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_FLY)
                     EVT_WAIT(4)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -785,7 +785,7 @@ EvtScript N(8021D9F4) = {
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Goomba_Hyper_Hurt)
     EVT_END_IF
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_301, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0301, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -915,7 +915,7 @@ EvtScript N(8021E218) = {
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBA_STEP)
         EVT_CALL(N(StartRumbleWithParams), 128, 10)
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.5))
@@ -964,7 +964,7 @@ EvtScript N(8021E218) = {
             EVT_END_THREAD
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 80)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_10F, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_ACTOR_HURT, 0)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -200, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
@@ -994,7 +994,7 @@ EvtScript N(8021E218) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_10F, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_ACTOR_HURT, 0)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 80)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

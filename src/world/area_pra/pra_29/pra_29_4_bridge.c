@@ -56,7 +56,7 @@ EvtScript N(EVS_ExtendBridgeFromMirror) = {
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_2F, 0, 250, 0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_002F, 0, 250, 0, 0)
     EVT_CALL(MakeLerp, 0, 511, 80, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

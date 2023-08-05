@@ -115,7 +115,7 @@ void N(update)(void) {
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->thresholdLevel = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
-            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             actionCommandStatus->state = 11;
         case 11:
             btl_set_popup_duration(99);
@@ -132,13 +132,13 @@ void N(update)(void) {
                 hud_element_set_script(actionCommandStatus->hudElements[2], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButton);
                 if (!actionCommandStatus->isBarFilled) {
-                    sfx_play_sound(SOUND_234);
+                    sfx_play_sound(SOUND_0234);
                     actionCommandStatus->isBarFilled = TRUE;
                 }
             }
 
             battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_80000041, 0, 0, battleStatus->actionResult * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
                 return;
@@ -159,7 +159,7 @@ void N(update)(void) {
                 func_80269160();
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(SOUND_80000041);
+            sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
             actionCommandStatus->frameCounter = 5;
             actionCommandStatus->state = 12;
             break;

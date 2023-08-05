@@ -314,7 +314,7 @@ API_CALLABLE(N(UseAbility)) {
                 script->functionTemp[1]--;
                 break;
             }
-            sfx_play_sound_at_npc(SOUND_80000000, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_LOOP_00, SOUND_SPACE_MODE_0, NPC_PARTNER);
             N(PlayingFuseSound) = TRUE;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
             npc->curAnim = ANIM_WorldBombette_WalkLit;
@@ -409,18 +409,18 @@ API_CALLABLE(N(UseAbility)) {
             }
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
-                sfx_stop_sound(SOUND_80000000);
+                sfx_stop_sound(SOUND_LOOP_00);
             }
             fx_explosion(gPlayerData.partners[gPlayerData.curPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
             switch (gPlayerData.partners[gPlayerData.curPartner].level) {
                 case 0:
-                    sfx_play_sound_at_npc(SOUND_CANNON1, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
                 case 1:
-                    sfx_play_sound_at_npc(SOUND_CANNON2, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV2, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
                 case 2:
-                    sfx_play_sound_at_npc(SOUND_CANNON3, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV3, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
             }
             exec_ShakeCam1(0, 0, 20);
@@ -526,7 +526,7 @@ API_CALLABLE(N(UseAbility)) {
             partner_clear_player_tracking(npc);
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
-                sfx_stop_sound(SOUND_80000000);
+                sfx_stop_sound(SOUND_LOOP_00);
             }
             temp_ret = ApiStatus_DONE2;
             return temp_ret;
@@ -557,7 +557,7 @@ API_CALLABLE(N(UseAbility)) {
             temp_ret = ApiStatus_DONE2;
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
-                sfx_stop_sound(SOUND_80000000);
+                sfx_stop_sound(SOUND_LOOP_00);
             }
             temp_ret = ApiStatus_DONE2;
             break;
@@ -684,7 +684,7 @@ void N(pre_battle)(Npc* bombette) {
 
         if (N(PlayingFuseSound)) {
             N(PlayingFuseSound) = FALSE;
-            sfx_stop_sound(SOUND_80000000);
+            sfx_stop_sound(SOUND_LOOP_00);
         }
     }
 }

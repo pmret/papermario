@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, -566, 100, 65)
-    EVT_CALL(PlaySoundWithVolume, SOUND_331, 110)
+    EVT_CALL(PlaySoundWithVolume, SOUND_SRAW_17_A, 110)
     EVT_WAIT(20)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy) = {
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_1F0, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_01F0, 0)
         EVT_WAIT(20)
         EVT_IF_EQ(AF_JAN_02, TRUE)
             EVT_BREAK_LOOP

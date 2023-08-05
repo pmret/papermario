@@ -1045,15 +1045,15 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(N(Quizmo_SetStageLightsDelay), 2)
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_021C)
             EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_021C)
             EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_021C)
             EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_21C)
+            EVT_CALL(PlaySound, SOUND_021C)
         EVT_END_THREAD
-        EVT_CALL(PlaySound, SOUND_8A)
+        EVT_CALL(PlaySound, SOUND_008A)
         EVT_CALL(N(Quizmo_SetVannaAnim_Clap))
         EVT_THREAD
             EVT_WAIT(15)
@@ -1135,7 +1135,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenWrong)
         EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 2)
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
-        EVT_CALL(PlaySound, SOUND_8B)
+        EVT_CALL(PlaySound, SOUND_008B)
         EVT_EXEC_GET_TID(N(EVS_Quizmo_WrongAnswer), LVar1)
         EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
         EVT_PLAY_EFFECT(EFFECT_WINDY_LEAVES, 0, LVar2, LVar3, LVar4)
@@ -1154,11 +1154,11 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
     EVT_CALL(EnablePartnerAI)
     EVT_THREAD
         EVT_WAIT(30)
-        EVT_CALL(PlaySound, SOUND_8F)
+        EVT_CALL(PlaySound, SOUND_008F)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(45)
-        EVT_CALL(StopSound, SOUND_89)
+        EVT_CALL(StopSound, SOUND_LRAW_0089)
     EVT_END_THREAD
     EVT_CALL(N(Quizmo_SetVannaAnim_Wave))
     EVT_CALL(N(Quizmo_DestroyEffects))

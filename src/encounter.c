@@ -278,7 +278,7 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(SOUND_24B);
+        sfx_play_sound(SOUND_024B);
         npc->alpha = 0;
     }
 
@@ -421,7 +421,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1] == 15) {
-        sfx_play_sound(SOUND_DEATH);
+        sfx_play_sound(SOUND_ACTOR_DEATH);
         fx_damage_stars(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 
@@ -1100,7 +1100,7 @@ START_BATTLE:
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
-            sfx_play_sound(0);
+            sfx_play_sound(SOUND_NONE);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
@@ -1155,7 +1155,7 @@ START_BATTLE:
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
             playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
-            sfx_play_sound(0);
+            sfx_play_sound(SOUND_NONE);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
@@ -1237,7 +1237,7 @@ START_BATTLE:
             currentEncounter->unk_94 = 0;
             currentEncounter->scriptedBattle = FALSE;
             playerStatus->flags |= PS_FLAG_ENTERING_BATTLE;
-            sfx_play_sound(0);
+            sfx_play_sound(SOUND_NONE);
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
             D_8009A678 = 1;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
@@ -1389,10 +1389,10 @@ void update_encounters_pre_battle(void) {
                     currentEncounter->dizzyAttackDuration = 3;
                 }
 
-                sfx_stop_sound(SOUND_2111);
-                sfx_stop_sound(SOUND_2112);
-                sfx_stop_sound(SOUND_2113);
-                sfx_stop_sound(SOUND_2114);
+                sfx_stop_sound(SOUND_SPIN);
+                sfx_stop_sound(SOUND_SPEEDY_SPIN);
+                sfx_stop_sound(SOUND_SPIN_ATTACK);
+                sfx_stop_sound(SOUND_SPEEDY_SPIN_ATTACK);
                 set_battle_formation(NULL);
                 set_battle_stage(encounter->stage);
                 load_battle(encounter->battle);

@@ -631,7 +631,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EVT_END_THREAD
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_370)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0370)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0A)
     EVT_WAIT(10)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 3, BS_FLAGS1_10)
@@ -655,7 +655,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-                    EVT_CALL(StopSound, SOUND_370)
+                    EVT_CALL(StopSound, SOUND_0370)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
                     EVT_WAIT(8)
                     EVT_CALL(YieldTurn)
@@ -756,7 +756,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(StopSound, SOUND_370)
+            EVT_CALL(StopSound, SOUND_0370)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
@@ -806,7 +806,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(StopSound, SOUND_370)
+    EVT_CALL(StopSound, SOUND_0370)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
     EVT_WAIT(8)
     EVT_CALL(YieldTurn)
@@ -841,7 +841,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
     EVT_WAIT(8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)
@@ -1171,7 +1171,7 @@ API_CALLABLE(N(UnusedFunc)) {
 }
 
 EvtScript N(EVS_DropDummyCoin) = {
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_212)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_COIN_BOUNCE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar6, LVar7, LVar8)
     EVT_CALL(SetPartPos, ACTOR_SELF, LVar5, LVar6, 35, LVar8)
     EVT_CALL(N(GetCoinTrajectory), LVar6, LVar8, LVar0, LVar1, LVar2, LVar3)
@@ -1188,7 +1188,7 @@ EvtScript N(EVS_DropDummyCoin) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     // give coin to player
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_211)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, LVar5, SOUND_COIN_PICKUP)
     EVT_CALL(AddCoin, 1)
     EVT_RETURN
     EVT_END

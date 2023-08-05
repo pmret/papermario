@@ -104,7 +104,7 @@ void N(update)(void) {
             hud_element_set_script(actionCommandStatus->hudElements[0], &HES_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->frameCounter = actionCommandStatus->duration;
-            sfx_play_sound_with_params(SOUND_80000041, 0, 0, 0);
+            sfx_play_sound_with_params(SOUND_LOOP_CHARGE_BAR, 0, 0, 0);
             actionCommandStatus->state = 11;
 
             // fallthrough
@@ -148,7 +148,7 @@ void N(update)(void) {
             }
 
             battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_80000041, 0, 0, battleStatus->actionResult * 12);
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
 
             if (actionCommandStatus->frameCounter == 0) {
                 if (actionCommandStatus->barFillLevel == 0) {
@@ -168,7 +168,7 @@ void N(update)(void) {
                     func_80269160();
                 }
 
-                sfx_stop_sound(SOUND_80000041);
+                sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
                 btl_set_popup_duration(0);
                 actionCommandStatus->frameCounter = 5;
                 actionCommandStatus->state = 12;

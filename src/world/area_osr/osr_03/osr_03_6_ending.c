@@ -93,7 +93,7 @@ EvtScript N(EVS_PlayExplosionFX) = {
     EVT_LOOP(0)
         EVT_USE_BUF(EVT_PTR(N(ExplosionPositions)))
         EVT_LOOP(8)
-            EVT_CALL(PlaySoundWithVolume, SOUND_B000001C, LVar5)
+            EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_1C, LVar5)
             EVT_BUF_READ3(LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(6.0), 30)
             EVT_WAIT(LVar4)
@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_CastleDestruction) = {
     EVT_END_LOOP
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(50)
-    EVT_CALL(PlaySound, SOUND_A4)
+    EVT_CALL(PlaySound, SOUND_00A4)
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 0, -430, 1920, 15, LVar9)
     EVT_WAIT(30)
     EVT_THREAD

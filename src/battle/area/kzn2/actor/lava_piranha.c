@@ -664,9 +664,9 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SpeakToPlayer, NPC_BTL_COMPANION, -1, -1, 0, MSG_CH5_0104)
     EVT_THREAD
         EVT_LOOP(9)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_20BA, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_A, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_3B4, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_B, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -674,7 +674,7 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SetNpcAnimationSpeed, NPC_BTL_COMPANION, EVT_FLOAT(2.0))
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(10.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, 70, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_E8, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_TOUCH_LAVA, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimationSpeed, NPC_BTL_COMPANION, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcJumpscale, NPC_BTL_COMPANION, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_BattleKolorado_Injured)
@@ -705,9 +705,9 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(NpcJump0, NPC_BTL_COMPANION, 50, 0, 0, 12)
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_20BA, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_A, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
-            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_3B4, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_BTL_COMPANION, SOUND_ACTOR_STEP_B, SOUND_SPACE_MODE_0)
             EVT_WAIT(2)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -715,7 +715,7 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(8.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, -60, 0, 0)
     EVT_CALL(SpeakToPlayer, NPC_BTL_COMPANION, ANIM_BattleKolorado_Shout, ANIM_BattleKolorado_ShoutStill, 5, MSG_CH5_0106)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_174)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0174)
     EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_BattleKolorado_Run)
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(6.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, -300, 0, 0)
@@ -1101,7 +1101,7 @@ EvtScript N(takeTurn) = {
                     EVT_END_LOOP
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(MoveBattleCamOver, 15)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3BB)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03BB)
                     EVT_SET(LVar0, ACTOR_ENEMY0)
                     EVT_EXEC_WAIT(N(ignite))
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim04)
@@ -1150,7 +1150,7 @@ EvtScript N(attackFlameSpew) = {
     EVT_WAIT(14)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim05)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C1)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C1)
     EVT_WAIT(45)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim06)
     EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
@@ -1161,7 +1161,7 @@ EvtScript N(attackFlameSpew) = {
     EVT_SUB(LVar3, 40)
     EVT_SET(LVar4, -10)
     EVT_PLAY_EFFECT(EFFECT_63, 1, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 20, 20, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C3)
     EVT_WAIT(19)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_PLAY_EFFECT(EFFECT_EMBERS, 0, LVar3, 0, LVar5, 50, 50, EVT_FLOAT(1.0), 40, 55, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0)
@@ -1232,7 +1232,7 @@ EvtScript N(attackFireStream) = {
     EVT_WAIT(14)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0E)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C1)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C1)
     EVT_WAIT(45)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim08)
     EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
@@ -1241,7 +1241,7 @@ EvtScript N(attackFireStream) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_PLAY_EFFECT(EFFECT_63, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 16, 40, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C4)
     EVT_WAIT(15)
     EVT_THREAD
         EVT_WAIT(24)
@@ -1301,7 +1301,7 @@ API_CALLABLE(N(UpdateSong)) {
 
     // play 'end battle' song
     if (isInitialCall) {
-        sfx_play_sound(SOUND_D4);
+        sfx_play_sound(SOUND_JINGLE_WON_BATTLE);
         bgm_set_song(0, SONG_BATTLE_END, 0, 500, 8);
         return ApiStatus_BLOCK;
     }
@@ -1383,9 +1383,9 @@ EvtScript N(onDeath) = {
         EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
         EVT_WAIT(4)
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_3BC)
+            EVT_CALL(PlaySound, SOUND_LRAW_03BC)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 119, EVT_FLOAT(0.3))
-            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 234)
         EVT_CALL(HideHealthBar, ACTOR_SELF)
@@ -1396,7 +1396,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(LoadBattleDmaData, 10)
         EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
         EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C6)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C6)
             EVT_WAIT(35)
             EVT_SET(LVar0, 0)
             EVT_SET(LVar1, 0)
@@ -1466,7 +1466,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetAnimatedModelRootPosition, VINE_2, 0, -250, 0)
         EVT_CALL(SetActorPos, ACTOR_SELF, 100, 0, 0)
         EVT_CALL(DropStarPoints, ACTOR_SELF)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
         EVT_CALL(ForceHomePos, ACTOR_SELF, 61, 61, 0)
         EVT_WAIT(65)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -1481,15 +1481,15 @@ EvtScript N(onDeath) = {
         EVT_END_THREAD
         EVT_WAIT(80)
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_3BC)
+            EVT_CALL(PlaySound, SOUND_LRAW_03BC)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 165, EVT_FLOAT(1.2))
-            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 300)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
         EVT_WAIT(20)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_263)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0263)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 20)
         EVT_PLAY_EFFECT(EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 20, 315, 30, 0, 0)
@@ -1589,7 +1589,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(EnableModel, 85, TRUE)
         EVT_CALL(EnableModel, 87, TRUE)
         EVT_CALL(EnableModel, 88, TRUE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C5)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C5)
         EVT_PLAY_EFFECT(EFFECT_EMBERS, 0, 100, 0, 0, 70, 80, EVT_FLOAT(2.5), 80, 55, EVT_FLOAT(2.0), EVT_FLOAT(2.0), 0)
         EVT_CALL(LoadAnimatedModel, VINE_4, EVT_PTR(N(anim1)))
         EVT_CALL(PlayModelAnimation, VINE_4, EVT_PTR(N(anim1_8021A364)))
@@ -1653,14 +1653,14 @@ EvtScript N(onDeath) = {
         EVT_CALL(LoadBattleDmaData, 35)
         EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_3BC)
+            EVT_CALL(PlaySound, SOUND_LRAW_03BC)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 100, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.2))
-            EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 216)
         EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3CC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03CC)
             EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
@@ -1681,7 +1681,7 @@ EvtScript N(onDeath) = {
                 EVT_PLAY_EFFECT(EFFECT_EMBERS, 0, 105, 60, 2, 80, 60, EVT_FLOAT(1.8), 90, 100, EVT_FLOAT(1.5), EVT_FLOAT(1.5), 0)
             EVT_END_IF
             EVT_WAIT(121)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3CD)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03CD)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0A)
             EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
             EVT_CALL(LoadBattleDmaData, 11)
@@ -1792,7 +1792,7 @@ EvtScript N(onDeath) = {
         EVT_WAIT(3)
         EVT_CALL(SetActorPos, ACTOR_SELF, -60, 0, 0)
         EVT_CALL(DropStarPoints, ACTOR_SELF)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
         EVT_WAIT(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar0)
         EVT_IF_NE(LVar0, 0)
@@ -2039,7 +2039,7 @@ EvtScript N(doOnHit) = {
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_FIREY, FALSE)
             EVT_WAIT(29)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C8)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03C8)
             EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
             EVT_CALL(LoadBattleDmaData, 13)
             EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)

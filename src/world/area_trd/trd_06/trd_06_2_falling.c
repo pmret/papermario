@@ -170,7 +170,7 @@ EvtScript N(EVS_PlayerFalling) = {
     EVT_CALL(SetPlayerPos, 0, 130, 0)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_175)
+        EVT_CALL(PlaySound, SOUND_0175)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 180, 210, 25, EASING_QUADRATIC_IN)
@@ -195,7 +195,7 @@ EvtScript N(EVS_PlayerFalling) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_108)
+    EVT_CALL(PlaySound, SOUND_0108)
     EVT_ADD(LVar2, -1000)
     EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
     EVT_RETURN
@@ -207,7 +207,7 @@ EvtScript N(EVS_PartnerFalling) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, 0, LVar0, 0)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_176)
+        EVT_CALL(PlaySound, SOUND_0176)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 180, 150, 25, EASING_QUADRATIC_IN)
@@ -233,7 +233,7 @@ EvtScript N(EVS_PartnerFalling) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_108)
+    EVT_CALL(PlaySound, SOUND_0108)
     EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
     EVT_RETURN
     EVT_END

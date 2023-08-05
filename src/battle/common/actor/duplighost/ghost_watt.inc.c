@@ -397,7 +397,7 @@ EvtScript N(watt_takeTurn) = {
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, LVarA)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_289)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0289)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

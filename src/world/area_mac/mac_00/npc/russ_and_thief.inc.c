@@ -24,7 +24,7 @@ EvtScript N(EVS_LetterReward_RussT) = {
 
 EvtScript N(EVS_ShyGuy_PlayRunningSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_B0000021, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_21, SOUND_SPACE_MODE_0)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -215,7 +215,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
     EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, -10, -410, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_32C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_032C, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_ShyGuyThief, -10, 0, -340, 0)
     EVT_SET(LVar0, 21)
     EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_MODE_0)

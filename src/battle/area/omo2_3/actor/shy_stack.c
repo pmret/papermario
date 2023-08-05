@@ -371,7 +371,7 @@ EvtScript N(init) = {
         EVT_CALL(SetPartPos, ACTOR_SELF, PRT_11, LVar0, 200, 0)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_14, SOUND_301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_14, SOUND_0301)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_14, ANIM_ShyGuy_Red_Anim0A)
@@ -384,7 +384,7 @@ EvtScript N(init) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(36)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_13, SOUND_301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_13, SOUND_0301)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(31)
@@ -409,7 +409,7 @@ EvtScript N(init) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(67)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_12, SOUND_301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_12, SOUND_0301)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(62)
@@ -442,7 +442,7 @@ EvtScript N(init) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(98)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_11, SOUND_301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_11, SOUND_0301)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(93)
@@ -1031,7 +1031,7 @@ EvtScript N(fall_apart) = {
 };
 
 EvtScript N(lower_actor_pos) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 18)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1157,7 +1157,7 @@ EvtScript N(doSpinSmashHit) = {
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_10, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_10, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 10)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_10, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_10, SOUND_ACTOR_DEATH)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
@@ -1226,7 +1226,7 @@ EvtScript N(80235168) = {
     EVT_WAIT(20)
     EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_10, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 10)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_10, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_10, SOUND_ACTOR_DEATH)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
@@ -1270,9 +1270,9 @@ EvtScript N(takeTurn) = {
     EVT_WAIT(20)
     EVT_ADD(LVar0, 4)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E7)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E8)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1475,9 +1475,9 @@ EvtScript N(onSpinSmashLaunchDeath) = {
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_DEATH)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySound, SOUND_DEATH)
+    EVT_CALL(PlaySound, SOUND_ACTOR_DEATH)
     EVT_CALL(DropStarPoints, ACTOR_SELF)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_SET(LVar3, 0)

@@ -112,7 +112,7 @@ EvtScript N(EVS_SummonGateBlock) = {
         EVT_END_IF
     EVT_CALL(EnableGroup, MODEL_2, TRUE)
     EVT_CALL(EnableGroup, MODEL_1, FALSE)
-    EVT_CALL(PlaySoundAt, SOUND_DD, SOUND_SPACE_MODE_0, LVar2, LVar0, LVar4)
+    EVT_CALL(PlaySoundAt, SOUND_HEAVY_OBJECT_DROP, SOUND_SPACE_MODE_0, LVar2, LVar0, LVar4)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15 * DT, EVT_FLOAT(1.0))
     EVT_END_THREAD

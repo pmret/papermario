@@ -327,7 +327,7 @@ EvtScript N(EVS_TubbaWalking) = {
 EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(NpcFacePlayer, NPC_Boo_03, 1)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Boo_03, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)
     EVT_CALL(GetNpcPos, NPC_Boo_03, LVar0, LVar1, LVar2)
@@ -352,10 +352,10 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(SpeakToPlayer, NPC_Boo_03, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00A0)
     EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_MODE_0, 450, 200, 160)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(0.8))
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_05, SOUND_262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_05, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Boo_01, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_02, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_03, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
@@ -435,8 +435,8 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(NpcFaceNpc, NPC_Boo_01, NPC_Tubba, 1)
     EVT_CALL(NpcFaceNpc, NPC_Boo_02, NPC_Tubba, 1)
     EVT_CALL(SetNpcPos, NPC_Boo_03, 272, 190, 214)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Boo_01, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_02, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_THREAD
@@ -518,7 +518,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
         EVT_WAIT(50 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_315, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_0315, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcPos, NPC_Boo_03, NPC_DISPOSE_LOCATION)

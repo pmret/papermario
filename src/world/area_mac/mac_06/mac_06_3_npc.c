@@ -272,7 +272,7 @@ API_CALLABLE(N(MakeJrTroopaBubbles)) {
 
     if (y < 0.0f) {
         fx_rising_bubble(0, x, y, z, 0.0f);
-        sfx_adjust_env_sound_pos(SOUND_JR_TROOPA_SWIM, SOUND_SPACE_MODE_0, x, y, z);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_JR_TROOPA_SWIM, SOUND_SPACE_MODE_0, x, y, z);
     }
     return ApiStatus_DONE2;
 }
@@ -479,7 +479,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EVT_END_LOOP
     EVT_WAIT(60)
     EVT_CALL(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 0, 8)
-    EVT_CALL(PlaySound, SOUND_80000055)
+    EVT_CALL(PlaySound, SOUND_LOOP_JR_TROOPA_SWIM)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeTripped)
     EVT_CALL(SetNpcPos, NPC_SELF, 250, -30, 500)
     EVT_WAIT(5)

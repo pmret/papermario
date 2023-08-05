@@ -45,7 +45,7 @@ Vec3f N(FlightPath_KammyDepart)[] = {
 
 EvtScript N(EVS_PlayKammyFlightSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_295, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_LRAW_0295, SOUND_SPACE_MODE_0)
         EVT_WAIT(4 * DT)
     EVT_END_LOOP
     EVT_RETURN
@@ -149,7 +149,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
         EVT_END_IF
     EVT_KILL_THREAD(MV_Unk_04)
     EVT_KILL_THREAD(MV_Unk_05)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_32B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_032B, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim10)
         EVT_WAIT(1)

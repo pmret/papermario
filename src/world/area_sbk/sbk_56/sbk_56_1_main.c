@@ -101,7 +101,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeTransformGroup, MODEL_sui)
     EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
     EVT_CALL(N(StartOasisSongVariation))
-    EVT_CALL(PlaySound, SOUND_80000061)
+    EVT_CALL(PlaySound, SOUND_LOOP_61)
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC(N(EVS_SetupFoliage))

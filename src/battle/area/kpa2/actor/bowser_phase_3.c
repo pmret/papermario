@@ -538,7 +538,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(MoveBattleCamOver, 15)
     EVT_END_IF
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2128)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_POWER_DOWN)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Hurt)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 80, 8, EASING_QUADRATIC_OUT)
@@ -594,7 +594,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_HurtStill)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2129)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_COLLAPSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_DefeatedIdle)
     EVT_THREAD
         EVT_CALL(N(StartRumbleWithParams), 180, 16)
@@ -865,7 +865,7 @@ EvtScript N(recover) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2126)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -895,9 +895,9 @@ EvtScript N(recover) = {
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_16_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1327,7 +1327,7 @@ EvtScript N(attackClawSwipe) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpMock)
     EVT_WAIT(25)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Swipe)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035E)
     EVT_WAIT(3)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -1594,9 +1594,9 @@ EvtScript N(attackFlameBreath) = {
     EVT_END_IF
     EVT_THREAD
         EVT_CALL(N(StartRumbleWithParams), 50, 148)
-        EVT_CALL(PlaySound, SOUND_3BD)
+        EVT_CALL(PlaySound, SOUND_03BD)
         EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_3BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_03BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -1747,7 +1747,7 @@ EvtScript N(attackLightningBlast) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3EF)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -1784,7 +1784,7 @@ EvtScript N(attackLightningBlast) = {
         EVT_CALL(RemoveEffect, LVarF)
         EVT_CALL(RemoveEffect, LVarE)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2127)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_LIGHTNING)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, 0, LVar1)

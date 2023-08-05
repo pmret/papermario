@@ -9,7 +9,7 @@ EvtScript N(EVS_802441E0) = {
         EVT_CASE_DEFAULT
             EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_END_SWITCH
-    EVT_CALL(PlaySound, SOUND_80000058)
+    EVT_CALL(PlaySound, SOUND_LOOP_58)
     EVT_CALL(ClearAmbientSounds, 250)
     EVT_RETURN
     EVT_END

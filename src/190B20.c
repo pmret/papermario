@@ -2199,7 +2199,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == STATUS_KEY_DAZE) {
         if (statusTypeKey != target->koStatus) {
             inflict_status(target, STATUS_KEY_DAZE, duration);
-            sfx_play_sound(SOUND_2107);
+            sfx_play_sound(SOUND_INFLICT_KO);
         } else {
             target->koDuration += duration;
             if (target->koDuration > 9) {
@@ -2875,7 +2875,7 @@ void remove_player_buffs(s32 buffs) {
         fx_water_splash(1, player->curPos.x + 15.0f, player->curPos.y + 22.0f, player->curPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->waterBlockEffect = NULL;
-        sfx_play_sound(SOUND_299);
+        sfx_play_sound(SOUND_0299);
     }
     if (buffs & PLAYER_BUFF_TURBO_CHARGE && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
@@ -2907,7 +2907,7 @@ void btl_update_ko_status(void) {
         player->disableEffect->data.disableX->koDuration = player->koDuration;
 
         if (koDuration == 0) {
-            sfx_play_sound(SOUND_2107);
+            sfx_play_sound(SOUND_INFLICT_KO);
         }
     }
 

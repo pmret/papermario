@@ -191,14 +191,14 @@ void func_802BC3E4_E2ED14(Entity* entity) {
         data->unk_10 -= 360.0f;
     }
     if (data->unk_10 == 96.0f) {
-        sfx_play_sound(SOUND_392);
+        sfx_play_sound(SOUND_0392);
     }
 }
 
 EntityScript Entity_BellbellPlant_Script = {
     es_SetCallback(entity_BellbellPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
-    es_PlaySound(SOUND_F1)
+    es_PlaySound(SOUND_00F1)
     es_SetCallback(NULL, 60)
     es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
@@ -208,7 +208,7 @@ EntityScript Entity_BellbellPlant_Script = {
 EntityScript Entity_TrumpetPlant_Script = {
     es_SetCallback(entity_TrumpetPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
-    es_PlaySound(SOUND_F3)
+    es_PlaySound(SOUND_00F3)
     es_SetCallback(NULL, 15)
     es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 3)
@@ -291,7 +291,7 @@ EntityScript Entity_MunchlesiaChewing_Script = {
 EntityScript Entity_MunchlesiaSpitOut_Script = {
     es_SetCallback(NULL, 4)
     es_Call(func_802BC3A0_E2ECD0)
-    es_PlaySound(SOUND_393)
+    es_PlaySound(SOUND_0393)
     es_SetCallback(NULL, 4)
     es_Call(entity_Munchlesia_create_child_reset1)
     es_SetFlags(ENTITY_FLAG_HIDDEN)

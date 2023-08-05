@@ -129,19 +129,19 @@ EvtScript N(EVS_Fuzzipede_ReactToLight) = {
 
 EvtScript N(EVS_Fuzzipede_JumpAround) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, -100, 80, -80, 20)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, 100, 80, -80, 20)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, 30, 40, -80, 20)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, 135, 15, -100, 20)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 20)
         EVT_WAIT(10)
     EVT_END_LOOP
@@ -203,7 +203,7 @@ EvtScript N(EVS_NpcDefeat_Fuzzipede) = {
     EVT_CALL(FadeOutMusic, 0, 1000)
     EVT_CALL(SetSelfVar, 2, 1)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_42)
+        EVT_CALL(PlaySound, SOUND_0042)
         EVT_SET(LVar0, 0)
         EVT_LOOP(150)
             EVT_ADD(LVar0, 1)

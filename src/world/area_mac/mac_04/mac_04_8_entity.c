@@ -119,7 +119,7 @@ EvtScript N(EVS_EnterToybox) = {
     EVT_WAIT(1)
     EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_1AA, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, -90, 10, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -135,7 +135,7 @@ EvtScript N(EVS_EnterToybox) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPlayer, SOUND_D9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_IN, SOUND_SPACE_MODE_0)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.35))
         EVT_CALL(PlayerJump, -450, 20, -160, 32)
     EVT_END_THREAD
@@ -174,10 +174,10 @@ EvtScript N(EVS_ExitToybox) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_1AA, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_DA, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_OUT, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, -480, 45, -90, 25)
     EVT_EXEC_WAIT(N(EVS_FinishUnshrinking))
@@ -240,7 +240,7 @@ EvtScript N(EVS_ItemPrompt_StoreroomKey) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, 155, 48, -480)
+    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_MODE_0, 155, 48, -480)
     EVT_SET(LVar0, MV_StoreroomLockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_WAIT(5)

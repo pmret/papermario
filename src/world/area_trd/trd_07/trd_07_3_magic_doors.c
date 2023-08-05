@@ -29,7 +29,7 @@ API_CALLABLE(N(SpawnMovingDoorDust)) {
 EvtScript N(EVS_AnimateDoorRaising) = {
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_2B)
+        EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_JUMP)
     EVT_END_THREAD
     EVT_THREAD
         // input LVar0 ignored in this thread
@@ -135,7 +135,7 @@ EvtScript N(EVS_AnimateDoorLowering) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_2C)
+    EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
     EVT_IF_EQ(LVar9, MODEL_migi)
         EVT_CALL(N(SpawnMovingDoorDust), 270, 0, 40, 270)
         EVT_CALL(N(SpawnMovingDoorDust), 270, 0, -40, 270)
@@ -159,7 +159,7 @@ EvtScript N(EVS_AnimateDoorLowering) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(2)
         EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_2C)
+    EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
     EVT_IF_EQ(LVar9, MODEL_migi)
         EVT_CALL(N(SpawnMovingDoorDust), 270, 0, 40, 270)
         EVT_CALL(N(SpawnMovingDoorDust), 270, 0, -40, 270)
@@ -183,7 +183,7 @@ EvtScript N(EVS_AnimateDoorLowering) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(4)
         EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_2C)
+    EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
     EVT_IF_EQ(LVar9, MODEL_migi)
         EVT_CALL(N(SpawnMovingDoorDust), 270, 0, 40, 270)
         EVT_CALL(N(SpawnMovingDoorDust), 270, 0, -40, 270)

@@ -23,7 +23,7 @@ EvtScript N(EVS_UnlockPrompt_LockedDoor) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_269)
+    EVT_CALL(PlaySound, SOUND_0269)
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GF_KPA113_UnlockedDoor, TRUE)
     EVT_SET(LVar0, MV_PadlockEntityID)

@@ -73,7 +73,7 @@ EvtScript N(EVS_Main) = {
     EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
     EVT_EXEC(EnterWalk)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_80000017)
+    EVT_CALL(PlaySound, SOUND_LOOP_17)
     EVT_CALL(EnableTexPanning, MODEL_o202, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o203, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o103, TRUE)

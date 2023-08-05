@@ -413,7 +413,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
         EVT_ADD(LVar2, 11)
         EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(InterpNpcYaw, NPC_SELF, LVar4, 0)
-        EVT_CALL(func_80045838, -1, SOUND_328, SOUND_PARAM_MORE_QUIET)
+        EVT_CALL(func_80045838, -1, SOUND_0328, SOUND_PARAM_MORE_QUIET)
         EVT_SET(LVarA, LVar1)
         EVT_SUB(LVarA, 10)
         EVT_SET(LVarB, LVar2)
@@ -430,7 +430,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
             EVT_CASE_EQ(12)
                 EVT_CALL(NpcMoveTo, NPC_SELF, -450, LVar3, 0)
         EVT_END_SWITCH
-        EVT_CALL(func_80045838, -1, SOUND_B0000018, 0)
+        EVT_CALL(func_80045838, -1, SOUND_SEQ_18, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Hurt)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 5)

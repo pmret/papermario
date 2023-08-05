@@ -52,9 +52,9 @@ EvtScript N(EVS_UseMove0) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_CHARGE_UP)
     EVT_WAIT(10)
     EVT_CHILD_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0156)
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0156)
         EVT_WAIT(8)
     EVT_END_CHILD_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_FightingStance)
@@ -74,7 +74,7 @@ EvtScript N(EVS_UseMove0) = {
         EVT_CALL(N(func_802A1108_74D678), LVar0, LVar1, LVar2)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208F)
         EVT_WAIT(4)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_160)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0160)
         EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

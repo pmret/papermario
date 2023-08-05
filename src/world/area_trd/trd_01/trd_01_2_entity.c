@@ -46,7 +46,7 @@ EvtScript N(EVS_UnlockDoors) = {
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GF_TRD01_UnlockedDoor, TRUE)
     EVT_CALL(N(GetEntityPosition), MV_Padlock_EntityIndex, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_Padlock_EntityIndex)
     EVT_CALL(N(RemovePadlock))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

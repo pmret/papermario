@@ -737,7 +737,7 @@ API_CALLABLE(CloseActionCommandInfo) {
         }
     }
 
-    sfx_stop_sound(SOUND_80000041);
+    sfx_stop_sound(SOUND_LOOP_CHARGE_BAR);
     close_action_command_instruction_popup();
 
     return ApiStatus_DONE2;

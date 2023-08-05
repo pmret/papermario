@@ -2,7 +2,7 @@
 #include "effects.h"
 
 EvtScript N(EVS_ParadePhase_Luigi) = {
-    EVT_CALL(PlaySound, SOUND_89)
+    EVT_CALL(PlaySound, SOUND_LRAW_0089)
     EVT_WAIT(80 * DT)
     EVT_THREAD
         EVT_LOOP(9 * DT)
@@ -15,7 +15,7 @@ EvtScript N(EVS_ParadePhase_Luigi) = {
     EVT_WAIT(10 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Luigi, 90, 0)
     EVT_WAIT(25 * DT)
-    EVT_CALL(StopSound, SOUND_89)
+    EVT_CALL(StopSound, SOUND_LRAW_0089)
     EVT_WAIT(15 * DT)
     EVT_THREAD
         EVT_WAIT(10 * DT)

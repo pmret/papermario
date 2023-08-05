@@ -467,7 +467,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             } else {
                 sAimingTimer = (s32)(80 * DT);
                 hud_element_set_script(hudStick, &HES_StickTapRight);
-                sfx_play_sound_at_position(SOUND_312, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_0312, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
                 script->functionTemp[0] = 2;
             }
             break;
@@ -559,7 +559,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                 hud_element_free(id);
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(SOUND_312);
+            sfx_stop_sound(SOUND_0312);
             return ApiStatus_DONE2;
     }
 
@@ -1723,7 +1723,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetBattleCamZoom, 430)
     EVT_CALL(MoveBattleCamOver, 150 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_288)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0288)
     EVT_THREAD
         EVT_CALL(N(ProcessHurricane))
     EVT_END_THREAD

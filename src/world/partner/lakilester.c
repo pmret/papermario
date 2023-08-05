@@ -402,10 +402,10 @@ void N(update_riding_physics)(Npc* lakilester) {
 
             if (N(MovePitchAdjustment) < 60) {
                 pitchShift = update_lerp(EASING_LINEAR,  0.0f, 100.0f, N(MovePitchAdjustment), 60);
-                sfx_play_sound_with_params(SOUND_295, 0, 64, pitchShift);
+                sfx_play_sound_with_params(SOUND_LRAW_0295, 0, 64, pitchShift);
             } else {
                 pitchShift = update_lerp(EASING_LINEAR, 100.0f, 0.0f, N(MovePitchAdjustment) - 60, 60);
-                sfx_play_sound_with_params(SOUND_295, 0, 64, pitchShift);
+                sfx_play_sound_with_params(SOUND_LRAW_0295, 0, 64, pitchShift);
             }
         }
     }
@@ -1166,7 +1166,7 @@ API_CALLABLE(N(EnterMap)) {
                 }
             }
 
-            sfx_play_sound_at_npc(SOUND_295, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_LRAW_0295, SOUND_SPACE_MODE_0, NPC_PARTNER);
             playerStatus->anim = ANIM_MarioW2_RideLaki;
             playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;

@@ -350,7 +350,7 @@ EvtScript N(80223DBC) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetGoalPos, ACTOR_SELF, 10, 0, 10)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
-        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_301)
+        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_0301)
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.8))
         EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(4.0))
         EVT_CALL(FallPartTo, ACTOR_SELF, PRT_2, 10, 20, 10, 20)
@@ -364,7 +364,7 @@ EvtScript N(80223DBC) = {
         EVT_END_LOOP
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_301)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_0301)
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.8))
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(4.0))
     EVT_CALL(GetStatusFlags, ACTOR_ENEMY0, LVar0)
