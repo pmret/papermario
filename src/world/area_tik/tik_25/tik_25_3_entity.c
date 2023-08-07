@@ -54,7 +54,7 @@ EvtScript N(EVS_OnBreakBlock_SpringR) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(PlaySoundAt, SOUND_0048, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
-    EVT_CALL(PlaySoundAt, SOUND_2086, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_SPRING, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
     EVT_CALL(N(PlaySpringReboundAnimation), MV_EntityID_SpringR)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
@@ -89,7 +89,7 @@ EvtScript N(EVS_OnBreakBlock_SpringL) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(PlaySoundAt, SOUND_0048, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
-    EVT_CALL(PlaySoundAt, SOUND_2086, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_SPRING, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
     EVT_CALL(N(PlaySpringReboundAnimation), MV_EntityID_SpringL)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

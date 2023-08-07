@@ -2861,7 +2861,7 @@ void remove_player_buffs(s32 buffs) {
     if (buffs & PLAYER_BUFF_TRANSPARENT && (player->transparentStatus != 0)) {
         player->transparentDuration = 0;
         player->transparentStatus = 0;
-        playerActorParts->flags &= ~ACTOR_PART_FLAG_100;
+        playerActorParts->flags &= ~ACTOR_PART_FLAG_TRANSPARENT;
         remove_status_transparent(player->hudElementDataIndex);
     }
     if (buffs & PLAYER_BUFF_WATER_BLOCK && (battleStatus->waterBlockTurnsLeft != 0)) {

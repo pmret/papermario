@@ -176,7 +176,7 @@ EvtScript N(EVS_TurnCrank) = {
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_208B)
+    EVT_CALL(PlaySound, SOUND_FLOOR_SWITCH_ACTIVATE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)

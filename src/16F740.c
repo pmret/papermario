@@ -918,11 +918,11 @@ back:
                 }
                 if (player->transparentStatus != 0) {
                     player->transparentDuration--;
-                    part->flags |= ACTOR_PART_FLAG_100;
+                    part->flags |= ACTOR_PART_FLAG_TRANSPARENT;
                     do {
                         if (player->transparentDuration <= 0) {
                             player->transparentStatus = 0;
-                            part->flags &= ~ACTOR_PART_FLAG_100;
+                            part->flags &= ~ACTOR_PART_FLAG_TRANSPARENT;
                             remove_status_transparent(player->hudElementDataIndex);
                         }
                     } while (0); // TODO required to match

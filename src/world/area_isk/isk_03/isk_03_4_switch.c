@@ -38,7 +38,7 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1990, SOUND_208A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1990, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -49,7 +49,7 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1990, SOUND_208B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1990, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_MODE_0)
     EVT_SET(AF_ISK03_SandSwitchActivated, TRUE)
     EVT_UNBIND
     EVT_RETURN

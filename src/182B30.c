@@ -770,7 +770,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         set_standard_shadow_scale(shadow, dist);
                         shadow->scale.x *= actorPart->shadowScale;
                     }
-                    if (actorPart->opacity < 255 || actorPart->flags & ACTOR_PART_FLAG_100) {
+                    if (actorPart->opacity < 255 || actorPart->flags & ACTOR_PART_FLAG_TRANSPARENT) {
                         actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                     }
                 }
@@ -988,9 +988,9 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         }
 
         if (actor->transparentStatus == STATUS_KEY_TRANSPARENT) {
-            part->flags |= ACTOR_PART_FLAG_100;
+            part->flags |= ACTOR_PART_FLAG_TRANSPARENT;
         } else {
-            part->flags &= ~ACTOR_PART_FLAG_100;
+            part->flags &= ~ACTOR_PART_FLAG_TRANSPARENT;
         }
 
         do {
@@ -1152,7 +1152,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             if (actor->staticStatus == STATUS_KEY_STATIC) {
                 create_status_static(actor->hudElementDataIndex, STATUS_KEY_STATIC);
             }
-            if ((actor->transparentStatus == STATUS_KEY_TRANSPARENT) || (part->flags & ACTOR_PART_FLAG_100)) {
+            if ((actor->transparentStatus == STATUS_KEY_TRANSPARENT) || (part->flags & ACTOR_PART_FLAG_TRANSPARENT)) {
                 create_status_transparent(actor->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
             }
             if (actor->chillOutAmount != 0) {
@@ -1434,7 +1434,7 @@ void update_player_actor_shadow(void) {
     set_standard_shadow_scale(shadow, distance);
     shadow->scale.x *= player->shadowScale * player->scalingFactor;
 
-    if (parts->opacity >= 255 && !(parts->flags & ACTOR_PART_FLAG_100)) {
+    if (parts->opacity >= 255 && !(parts->flags & ACTOR_PART_FLAG_TRANSPARENT)) {
         player->renderMode = RENDER_MODE_ALPHATEST;
     } else {
         player->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
@@ -1597,7 +1597,7 @@ void appendGfx_player_actor(void* arg0) {
     }
 
     if (player->transparentStatus == STATUS_KEY_TRANSPARENT) {
-        playerParts->flags |= ACTOR_PART_FLAG_100;
+        playerParts->flags |= ACTOR_PART_FLAG_TRANSPARENT;
 
         if (FALSE) { // TODO required to match - also whyyyyyy compiler, whyyyyy
     back:
@@ -1606,7 +1606,7 @@ void appendGfx_player_actor(void* arg0) {
             goto end;
         }
     } else {
-        playerParts->flags &= ~ACTOR_PART_FLAG_100;
+        playerParts->flags &= ~ACTOR_PART_FLAG_TRANSPARENT;
     }
 
     do {
@@ -1785,7 +1785,7 @@ void appendGfx_player_actor(void* arg0) {
                 playerParts->curAnimation = get_player_anim_for_status(STATUS_KEY_STATIC);
                 animChanged = TRUE;
             }
-            if ((player->transparentStatus == STATUS_KEY_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
+            if ((player->transparentStatus == STATUS_KEY_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_TRANSPARENT)) {
                 if (!animChanged) {
                     playerParts->curAnimation = get_player_anim_for_status(STATUS_KEY_TRANSPARENT);
                     animChanged = TRUE;
@@ -1819,7 +1819,7 @@ void appendGfx_player_actor(void* arg0) {
                 create_status_static(player->hudElementDataIndex, STATUS_KEY_STATIC);
             }
         }
-        if ((player->transparentStatus == STATUS_KEY_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
+        if ((player->transparentStatus == STATUS_KEY_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_TRANSPARENT)) {
             create_status_transparent(player->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
         }
     } else {
@@ -1953,7 +1953,7 @@ s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
             sprDrawOpts = DRAW_SPRITE_OVERRIDE_ALPHA;
             opacity = part->opacity;
         }
-        if (part->flags & ACTOR_PART_FLAG_100) {
+        if (part->flags & ACTOR_PART_FLAG_TRANSPARENT) {
             sprDrawOpts = DRAW_SPRITE_OVERRIDE_ALPHA;
             opacity = opacity * 120 / 255;
         }
@@ -2056,7 +2056,7 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
-    if (part->flags & ACTOR_PART_FLAG_100) {
+    if (part->flags & ACTOR_PART_FLAG_TRANSPARENT) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
@@ -2100,7 +2100,7 @@ void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         opacity = part->opacity;
     }
 
-    if (part->flags & ACTOR_PART_FLAG_100) {
+    if (part->flags & ACTOR_PART_FLAG_TRANSPARENT) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
@@ -2125,7 +2125,7 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
-    if (part->flags & ACTOR_PART_FLAG_100) {
+    if (part->flags & ACTOR_PART_FLAG_TRANSPARENT) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }
@@ -2167,7 +2167,7 @@ void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = part->opacity;
     }
-    if (part->flags & ACTOR_PART_FLAG_100) {
+    if (part->flags & ACTOR_PART_FLAG_TRANSPARENT) {
         idMask = DRAW_SPRITE_OVERRIDE_ALPHA;
         opacity = (opacity * 120) / 255;
     }

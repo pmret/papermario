@@ -367,7 +367,7 @@ EvtScript N(EVS_Scene_CaughtLuigiInBasement) = {
     EVT_CALL(SetNpcAnimation, NPC_Luigi_0, ANIM_Luigi_Run)
     EVT_CALL(NpcMoveTo, NPC_Luigi_0, -130, -17, 15)
     EVT_CALL(NpcJump0, NPC_Luigi_0, -145, -54, -45, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_0, SOUND_2086, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_0, SOUND_SPRING, SOUND_SPACE_MODE_0)
     EVT_CALL(N(PlaySpringLaunchAnimation))
     EVT_THREAD
         EVT_WAIT(3)

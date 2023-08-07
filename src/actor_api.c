@@ -2855,7 +2855,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
 
     for (partsTable = actor->partsTable; partsTable != NULL; partsTable = partsTable->nextPart) {
-            if (partsTable->flags & 0x100) {
+            if (partsTable->flags & ACTOR_PART_FLAG_TRANSPARENT) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
             if (partsTable->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
@@ -2969,7 +2969,6 @@ ApiStatus GetBattleVar(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus ResetAllActorSounds(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
@@ -2985,39 +2984,39 @@ s32 SetActorSounds(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
-    s32 temp_s0_4;
-    s32 temp_s1;
-    s32 temp_s3;
+    s32 soundType;
+    s32 sound1;
+    s32 sound2;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    temp_s3 = evt_get_variable(script, *args++);
-    temp_s0_4 = evt_get_variable(script, *args++);
-    temp_s1 = evt_get_variable(script, *args++);
+    soundType = evt_get_variable(script, *args++);
+    sound1 = evt_get_variable(script, *args++);
+    sound2 = evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
-    switch (temp_s3) {
-        case 0:
-            actor->actorTypeData1[0] = temp_s0_4;
-            actor->actorTypeData1[1] = temp_s1;
+    switch (soundType) {
+        case ACTOR_SOUND_WALK:
+            actor->actorTypeData1[0] = sound1;
+            actor->actorTypeData1[1] = sound2;
             break;
-        case 1:
-            actor->actorTypeData1[2] = temp_s0_4;
-            actor->actorTypeData1[3] = temp_s1;
+        case ACTOR_SOUND_FLY:
+            actor->actorTypeData1[2] = sound1;
+            actor->actorTypeData1[3] = sound2;
             break;
-        case 2:
-            actor->actorTypeData1[4] = temp_s0_4;
+        case ACTOR_SOUND_JUMP:
+            actor->actorTypeData1[4] = sound1;
             break;
-        case 3:
-            actor->actorTypeData1[5] = temp_s0_4;
+        case ACTOR_SOUND_HURT:
+            actor->actorTypeData1[5] = sound1;
             break;
-        case 4:
-            actor->actorTypeData1b[0] = temp_s0_4;
+        case ACTOR_SOUND_WALK_INCREMENT:
+            actor->actorTypeData1b[0] = sound1;
             break;
-        case 5:
-            actor->actorTypeData1b[1] = temp_s0_4;
+        case ACTOR_SOUND_FLY_INCREMENT:
+            actor->actorTypeData1b[1] = sound1;
             break;
     }
 
@@ -3028,36 +3027,38 @@ ApiStatus ResetActorSounds(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
-    s32 temp_s3;
+    s32 soundType;
+    s32 sound1;
+    s32 sound2;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    temp_s3 = evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
-    evt_get_variable(script, *args++);
+    soundType = evt_get_variable(script, *args++);
+    sound1 = evt_get_variable(script, *args++);
+    sound2 = evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
-    switch (temp_s3) {
-        case 0:
+    switch (soundType) {
+        case ACTOR_SOUND_WALK:
             actor->actorTypeData1[0] = bActorSoundTable[actor->actorType].walk[0];
             actor->actorTypeData1[1] = bActorSoundTable[actor->actorType].walk[1];
             break;
-        case 1:
+        case ACTOR_SOUND_FLY:
             actor->actorTypeData1[2] = bActorSoundTable[actor->actorType].fly[0];
             actor->actorTypeData1[3] = bActorSoundTable[actor->actorType].fly[1];
             break;
-        case 2:
+        case ACTOR_SOUND_JUMP:
             actor->actorTypeData1[4] = bActorSoundTable[actor->actorType].jump;
             break;
-        case 3:
+        case ACTOR_SOUND_HURT:
             actor->actorTypeData1[5] = bActorSoundTable[actor->actorType].hurt;
             break;
-        case 4:
+        case ACTOR_SOUND_WALK_INCREMENT:
             actor->actorTypeData1b[0] = bActorSoundTable[actor->actorType].delay[0];
             break;
-        case 5:
+        case ACTOR_SOUND_FLY_INCREMENT:
             actor->actorTypeData1b[1] = bActorSoundTable[actor->actorType].delay[1];
             break;
     }
@@ -3070,40 +3071,40 @@ ApiStatus SetPartSounds(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partID;
-    s32 temp_s1_5;
-    s32 temp_s2;
-    s32 temp_s4;
+    s32 soundType;
+    s32 sound1;
+    s32 sound2;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partID = evt_get_variable(script, *args++);
-    temp_s4 = evt_get_variable(script, *args++);
-    temp_s1_5 = evt_get_variable(script, *args++);
-    temp_s2 = evt_get_variable(script, *args++);
+    soundType = evt_get_variable(script, *args++);
+    sound1 = evt_get_variable(script, *args++);
+    sound2 = evt_get_variable(script, *args++);
     actorPart = get_actor_part(get_actor(actorID), partID);
 
-    switch (temp_s4) {
-        case 0:
-            actorPart->partTypeData[0] = temp_s1_5;
-            actorPart->partTypeData[1] = temp_s2;
+    switch (soundType) {
+        case ACTOR_SOUND_WALK:
+            actorPart->partTypeData[0] = sound1;
+            actorPart->partTypeData[1] = sound2;
             break;
-        case 1:
-            actorPart->partTypeData[2] = temp_s1_5;
-            actorPart->partTypeData[3] = temp_s2;
+        case ACTOR_SOUND_FLY:
+            actorPart->partTypeData[2] = sound1;
+            actorPart->partTypeData[3] = sound2;
             break;
-        case 2:
-            actorPart->partTypeData[4] = temp_s1_5;
+        case ACTOR_SOUND_JUMP:
+            actorPart->partTypeData[4] = sound1;
             break;
-        case 3:
-            actorPart->partTypeData[5] = temp_s1_5;
+        case ACTOR_SOUND_HURT:
+            actorPart->partTypeData[5] = sound1;
             break;
-        case 4:
-            actorPart->actorTypeData2b[0] = temp_s1_5;
+        case ACTOR_SOUND_WALK_INCREMENT:
+            actorPart->actorTypeData2b[0] = sound1;
             break;
-        case 5:
-            actorPart->actorTypeData2b[1] = temp_s1_5;
+        case ACTOR_SOUND_FLY_INCREMENT:
+            actorPart->actorTypeData2b[1] = sound1;
             break;
     }
 
@@ -3130,7 +3131,6 @@ ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     enemy->actorType = actorType;
     return ApiStatus_DONE2;
 }
-
 
 ApiStatus ShowShockEffect(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *script->ptrReadPos);
