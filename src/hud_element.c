@@ -669,7 +669,7 @@ void init_hud_element_list(void) {
     if (!gGameStatusPtr->isBattle) {
         if (gHudElementCacheBufferBattle != NULL) {
 #if VERSION_PAL
-            if (gHudElementCacheBufferBattle != &D_80200000) {
+            if (gHudElementCacheBufferBattle != D_80200000) {
                 general_heap_free(gHudElementCacheBufferBattle);
             }
 #else
