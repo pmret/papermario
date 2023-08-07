@@ -3,7 +3,7 @@
 #include "sprite.h"
 #include "imgfx.h"
 
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 // TODO: remove if section is split in iQue release
 extern Addr imgfx_data_ROM_START;
 #endif
