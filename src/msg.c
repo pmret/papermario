@@ -33,18 +33,41 @@ enum RewindArrowStates {
 #define MSG_ROM_START 0x1B83000
 #endif
 
+#if VERSION_PAL
+#define CONST_A 7
+#define CONST_B 5.0
+#else
+#define CONST_A 6
+#define CONST_B 6.0
+#endif
+
 typedef MessageImageData* MessageImageDataList[1];
 
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
 
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
 
+#if VERSION_PAL
+u8 MessagePlural_de[] = { MSG_CHAR_LOWER_N, MSG_CHAR_READ_END };
+#endif
+
 u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
+
+#if VERSION_PAL
+s32 gCurrentLanguage = 0;
+
+void* D_PAL_8014AE50[] = {
+    [LANGUAGE_EN] = msg_pal_en_ROM_START,
+    [LANGUAGE_DE] = msg_pal_de_ROM_START,
+    [LANGUAGE_FR] = msg_pal_fr_ROM_START,
+    [LANGUAGE_ES] = msg_pal_es_ROM_START,
+};
+#endif
 
 s16 gNextMessageBuffer = 0;
 
 //TODO Vtx
-s32 gRewindArrowQuad[] = {
+ALIGNED(8) s32 gRewindArrowQuad[] = {
     0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF,
     0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF,
     0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF,
@@ -436,7 +459,7 @@ s32 _update_message(MessagePrintState* printer) {
                     }
                 case MSG_WINDOW_STATE_SCROLLING_BACK:
                     printer->scrollingTime++;
-                    if (printer->scrollingTime >= 5) {
+                    if (printer->scrollingTime >= (s32)(5 * DT)) {
                         printer->windowState = MSG_WINDOW_STATE_WAITING_FOR_CHOICE;
                         printer->curOption = printer->targetOption;
                         printer->selectedOption = printer->curOption;
@@ -502,7 +525,7 @@ s32 _update_message(MessagePrintState* printer) {
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
                     (gGameStatusPtr->curButtons[0] & BUTTON_A)))
                 {
-                    printer->curLinePos += 6;
+                    printer->curLinePos += CONST_A;
                 }
 
                 if (printer->curLinePos >= printer->nextLinePos) {
@@ -676,7 +699,7 @@ extern s32 MsgLetterRasterOffsets[];
 extern s32 MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 #else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
@@ -1323,7 +1346,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->printBuffer[0] = MSG_CHAR_PRINT_END;
     printer->printDelayTime = 1;
     printer->charsPerChunk = 1;
-    printer->unk_464 = 6;
+    printer->unk_464 = CONST_A;
     printer->srcBuffer = NULL;
     printer->msgID = 0;
     printer->curPrintDelay = 0;
@@ -1391,6 +1414,10 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->sizeScale = 1.0f;
 }
 
+#if VERSION_PAL
+void dma_load_msg(u32 msgID, void* dest);
+INCLUDE_ASM(s32, "msg", dma_load_msg);
+#else
 void dma_load_msg(u32 msgID, void* dest) {
     u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
     u8* offset[2]; // start, end
@@ -1403,6 +1430,7 @@ void dma_load_msg(u32 msgID, void* dest) {
     // Load the msg data
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
+#endif
 
 s8* load_message_to_buffer(s32 msgID) {
     s8* prevBufferPos;
@@ -2158,7 +2186,7 @@ void msg_draw_choice_pointer(MessagePrintState* printer) {
         posY = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
     } else {
         s32 baseX, baseY, targetX, targetY;
-        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / 6.0;
+        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / CONST_B;
 
         baseX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
         targetX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->targetOption];
@@ -2339,7 +2367,7 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
-#if VERSION_IQUE
+#if VERSION_IQUE || VERSION_PAL
 INCLUDE_ASM(s32, "msg", appendGfx_message);
 #else
 void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 additionalOffsetX, u16 additionalOffsetY,

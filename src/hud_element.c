@@ -661,10 +661,20 @@ void hud_element_clear_cache(void) {
     func_801413F8();
 }
 
+#if VERSION_PAL
+extern Addr D_80200000;
+#endif
+
 void init_hud_element_list(void) {
     if (!gGameStatusPtr->isBattle) {
         if (gHudElementCacheBufferBattle != NULL) {
+#if VERSION_PAL
+            if (gHudElementCacheBufferBattle != D_80200000) {
+                general_heap_free(gHudElementCacheBufferBattle);
+            }
+#else
             general_heap_free(gHudElementCacheBufferBattle);
+#endif
             gHudElementCacheBufferBattle = NULL;
         }
 

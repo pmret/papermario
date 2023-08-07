@@ -1,3 +1,9 @@
+ui_stencil_star_png = 0x8014B2D0; // rom:0xE1620
+ui_stencil_mario_png = 0x8014B6D0; // rom:0xE1A20
+ui_stencil_sharp_circle_png = 0x8014BED0; // rom:0xE2220
+ui_stencil_blurry_circle_png = 0x8014C0D0; // rom:0xE2420
+vtx_stencil1 = 0x8014D0D0; // rom:0xE3420
+vtx_stencil2 = 0x8014D340; // rom:0xE3690
 D_802E9170 = 0x802EF470; // rom:0x10C4F0
 D_802E91F0 = 0x802EF4F0; // rom:0x10C570
 D_802E9270 = 0x802EF570; // rom:0x10C5F0

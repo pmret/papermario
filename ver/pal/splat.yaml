@@ -545,9 +545,62 @@ segments:
       - [0xA3878, vtx, vtx/drawbox1]
       - [0xA38B8]
     - [0xA3900]
-
-  - [0xA4520, bin]
-
+  - name: engine2
+    type: code
+    start: 0xA4520
+    vram: 0x8010E1D0
+    follows_vram: engine1
+    subsegments:
+    - [auto, hasm, bss3]
+    - [auto, c, entity]
+    - [auto, c, game_states]
+    - [auto, c, model]
+    - [auto, c, B4580]
+    - [auto, c, entity_model]
+    - [auto, c, worker]
+    - [auto, c, msg]
+    - [auto, c, C50A0]
+    - [auto, c, cd180_len_38f0]
+    - [auto, c, CEE40]
+    - [auto, c, imgfx]
+    - [auto, c, hud_element]
+    - [auto, c, dba20_len_350]
+    - [auto, c, trigger]
+    - [auto, c, background]
+    - [auto, c, audio/ambience]
+    - [auto, c, windows]
+    - [auto, c, sprite_shading]
+    - [auto, c, audio/sfx]
+    - [auto, c, audio/e0b30_len_b80]
+    - [auto, .data, entity]
+    - [auto, .data, game_states]
+    - [auto, .data, model]
+    - [auto, .data, B4580]
+    - [auto, .data, entity_model]
+    - [auto, .data, msg]
+    - [auto, .data, C50A0]
+    - start: 0xE1610
+      type: .data
+      name: cd180_len_38f0
+      subsegments:
+      - [0xE1610]
+      - [0xE1620, i4, ui/stencil/star, 32, 64]
+      - [0xE1A20, i4, ui/stencil/mario, 64, 64]
+      - [0xE2220, i4, ui/stencil/sharp_circle, 32, 32]
+      - [0xE2420, i8, ui/stencil/blurry_circle, 64, 64]
+      - [0xE3420, vtx, vtx/stencil1]
+      - [0xE34C0]
+      - [0xE3690, vtx, vtx/stencil2]
+      - [0xE3810]
+    - [auto, .data, CEE40]
+    - [auto, .data, imgfx]
+    - [auto, .data, hud_element]
+    - [auto, .data, background]
+    - [auto, .data, audio/ambience]
+    - [auto, .data, windows]
+    - [auto, .data, audio/sfx]
+    - [auto, .data, audio/e0b30_len_b80]
+    - [0xE61D0]
   - name: evt
     type: code
     dir: evt
@@ -1056,6 +1109,32 @@ segments:
     # TODO: split into images
 
   - [0x2705A0, bin]
+
+  - start: 0x2705A0
+    type: pm_imgfx_data
+    name: imgfx_data
+    vram: 0
+    animations:
+    - ["shock", 0x14358]
+    - ["shiver", 0x18200]
+    - ["vertical_pipe_curl", 0x1A858]
+    - ["horizontal_pipe_curl", 0x1E830]
+    - ["startle", 0x29458]
+    - ["flutter_down", 0x314E0]
+    - ["unfurl", 0x33498]
+    - ["get_in_bed", 0x38988]
+    - ["spirit_capture", 0x39228]
+    - ["unused_1", 0x5B7A8]
+    - ["unused_2", 0x7CF10]
+    - ["unused_3", 0x86490]
+    - ["tutankoopa_gather", 0x96258]
+    - ["tutankoopa_swirl_2", 0xA1820]
+    - ["tutankoopa_swirl_1", 0xACDE8]
+    - ["shuffle_cards", 0xBBF68]
+    - ["flip_card_1", 0xC0490]
+    - ["flip_card_2", 0xC49B8]
+    - ["flip_card_3", 0xC6150]
+    - ["cymbal_crush", 0xCA380]
 
   - [0x33A930, pm_sprite_shading_profiles, sprite_shading_profiles]
 
@@ -13461,9 +13540,15 @@ segments:
       - 2E_Credits
   - [0x2132440, bin]
 
-  - [0x21B0000, bin] # German
-  - [0x2330000, bin] # French
-  - [0x24B0000, bin] # Spanish
+  - start: 0x21B0000
+    name: msg_pal_de
+    type: bin # TODO: turn into pm_msg
+  - start: 0x2330000
+    name: msg_pal_fr
+    type: bin # TODO: turn into pm_msg
+  - start: 0x24B0000
+    name: msg_pal_es
+    type: bin # TODO: turn into pm_msg
 
   - [0x2600000, pm_map_data, mapfs]
   - [0x2FD7362, bin]
