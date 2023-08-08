@@ -1405,7 +1405,7 @@ EvtScript D_80287834 = {
 EvtScript EVS_PlayEatFX = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1418,7 +1418,7 @@ EvtScript EVS_PlayEatFX = {
 EvtScript EVS_PlayDrinkFX = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD

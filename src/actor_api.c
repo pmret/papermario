@@ -3251,7 +3251,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
-                actor->isGlowing = 1;
+                actor->isGlowing = TRUE;
                 actor->attackBoost += attackBoost;
                 if (actor->attackBoost > 20) {
                     actor->attackBoost = 20;
@@ -3375,7 +3375,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
-                actor->isGlowing = 1;
+                actor->isGlowing = TRUE;
                 actor->defenseBoost += defenseBoost;
                 if (actor->defenseBoost > 20) {
                     actor->defenseBoost = 20;

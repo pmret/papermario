@@ -24,6 +24,7 @@ typedef void NoArgCallback(void*);
 #define PAL_BIN u16
 
 typedef s32 b32;
+typedef s16 b16;
 typedef s8 b8;
 
 typedef s32 HitID;
@@ -184,7 +185,7 @@ typedef struct NpcQuizmoBlur {
 } NpcQuizmoBlur; // size = 0x8;
 
 typedef struct NpcHistoryPoint {
-    /* 0x00 */ s8 isAirborne;
+    /* 0x00 */ b8 isAirborne;
     /* 0x01 */ char unk_01[0x3];
     /* 0x04 */ Vec3f pos;
 } NpcHistoryPoint; // size = 0x10
@@ -245,7 +246,7 @@ typedef struct Npc {
     /* 0x080 */ s32 collisionChannel; /* flags used with collision tracing */
     /* 0x084 */ s16 curFloor; /* colliderID */
     /* 0x086 */ s16 curWall; /* colliderID */
-    /* 0x088 */ s16 isFacingAway;
+    /* 0x088 */ b16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 turnAroundYawAdjustment;
     /* 0x08E */ s16 duration; // TODO: name less vaguely
@@ -760,7 +761,7 @@ typedef struct Camera {
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 updateMode;
     /* 0x006 */ s16 needsInit;
-    /* 0x008 */ s16 isChangingMap;
+    /* 0x008 */ b16 isChangingMap;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -1398,7 +1399,7 @@ typedef struct GameStatus {
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
     /* 0x06C */ s32 mainScriptID;
-    /* 0x070 */ s8 isBattle;
+    /* 0x070 */ b8 isBattle;
     /* 0x071 */ s8 demoState; // see DemoState enum
     /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
@@ -1432,7 +1433,7 @@ typedef struct GameStatus {
     /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9; // selected language?
-    /* 0x0AA */ s8 demoFlags;
+    /* 0x0AA */ s8 demoBattleFlags;
     /* 0x0AB */ u8 soundOutputMode;
     /* 0x0AC */ s8 introState;
     /* 0x0AD */ s8 introCounter;
@@ -1716,7 +1717,7 @@ typedef struct DecorationTable {
 } DecorationTable; // size = 0x8E8
 
 typedef struct PlayerPathElement {
-    /* 0x00 */ s8 isJumping;
+    /* 0x00 */ b8 isJumping;
     /* 0x03 */ char unk_01[3];
     /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
@@ -1905,7 +1906,7 @@ typedef struct Actor {
     /* 0x21C */ s8 statusAfflicted;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
-    /* 0x220 */ s8 isGlowing; // also used for goombario charge amount
+    /* 0x220 */ b8 isGlowing; // also used for goombario charge amount
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ s8 chillOutAmount; /* attack reduction */

@@ -745,9 +745,9 @@ void tattle_cam_pre_render(Camera* camera) {
         } else {
             for (i = 0; i < ARRAY_COUNT(gTattleBgPalette); i++) {
                 u16 palColor = gGameStatusPtr->backgroundPalette[i];
-                u16 blendedB = blend_background_channel_COPY((palColor >> 1) & 0x1F, fogB >> 3, fogA);
-                u16 blendedG = blend_background_channel_COPY((palColor >> 6) & 0x1F, fogG >> 3, fogA);
-                u16 blendedR = blend_background_channel_COPY((palColor >> 11) & 0x1F, fogR >> 3, fogA);
+                u16 blendedB = blend_background_channel_COPY(UNPACK_PAL_B(palColor), fogB >> 3, fogA);
+                u16 blendedG = blend_background_channel_COPY(UNPACK_PAL_G(palColor), fogG >> 3, fogA);
+                u16 blendedR = blend_background_channel_COPY(UNPACK_PAL_R(palColor), fogR >> 3, fogA);
                 gTattleBgPalette[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
             }
         }

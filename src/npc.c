@@ -1439,11 +1439,12 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
 }
 
 u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha) {
-    u32 r = ((((colorA >> 11) & 0x1F) * (255 - lerpAlpha)) + (((colorB >> 11) & 0x1F) * lerpAlpha)) / 255;
-    u32 g = ((((colorA >> 6)  & 0x1F) * (255 - lerpAlpha)) + (((colorB >> 6)  & 0x1F) * lerpAlpha)) / 255;
-    u32 b = ((((colorA >> 1)  & 0x1F) * (255 - lerpAlpha)) + (((colorB >> 1)  & 0x1F) * lerpAlpha)) / 255;
+    u8 r = (UNPACK_PAL_R(colorA) * (255 - lerpAlpha) + UNPACK_PAL_R(colorB) * lerpAlpha) / 255;
+    u8 g = (UNPACK_PAL_G(colorA) * (255 - lerpAlpha) + UNPACK_PAL_G(colorB) * lerpAlpha) / 255;
+    u8 b = (UNPACK_PAL_B(colorA) * (255 - lerpAlpha) + UNPACK_PAL_B(colorB) * lerpAlpha) / 255;
+    u8 a = UNPACK_PAL_A(colorB);
 
-    return (colorB & 1) | (((r & 0xFF) << 11) | ((g & 0xFF) << 6) | ((b & 0xFF) << 1));
+    return PACK_PAL_RGBA(r, g, b, a);
 }
 
 s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {

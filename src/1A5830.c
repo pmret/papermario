@@ -3434,7 +3434,7 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
     actor->disableEffect->data.disableX->koDuration = 0;
     actor->attackBoost = 0;
     actor->defenseBoost = 0;
-    actor->isGlowing = 0;
+    actor->isGlowing = FALSE;
 
     return ApiStatus_DONE2;
 }

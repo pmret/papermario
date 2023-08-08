@@ -1516,18 +1516,14 @@ ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
 }
 
 s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
-    u16 staticFlags = entity->blueprint->flags;
+    u16 bpFlags = entity->blueprint->flags;
     s32 type;
     s16 shadowIndex;
 
-    if (staticFlags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
-        if (staticFlags & ENTITY_FLAG_SQUARE_SHADOW) {
-            type = 2;
-        } else {
-            type = 3;
-        }
+    if (bpFlags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
+        type = (bpFlags & ENTITY_FLAG_SQUARE_SHADOW) ? 2 : 3;
     } else {
-        type = ((staticFlags >> 11) ^ 1) & 1;
+        type = (bpFlags & ENTITY_FLAG_SQUARE_SHADOW) ? 0 : 1;
     }
 
     shadowIndex = create_shadow_type(type, x, y, z);

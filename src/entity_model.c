@@ -418,7 +418,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
     f32 x, y, z, w;
     f32 inX, inY, inZ;
 
-    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
         modelIdx &= ~0x800;
         model = (*gCurrentEntityModelList)[modelIdx];
 
@@ -456,7 +456,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
     f32 x, y, z, w;
     f32 inX, inY, inZ;
 
-    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
         modelIdx &= ~0x800;
         model = (*gCurrentEntityModelList)[modelIdx];
 
@@ -491,7 +491,7 @@ void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
         modelIdx &= ~0x800;
         model = (*gCurrentEntityModelList)[modelIdx];
 
@@ -521,7 +521,7 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vec3s* verte
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if ((gGameStatusPtr->isBattle == 0) || (modelIdx & 0x800)) {
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
         modelIdx &= ~0x800;
         model = (*gCurrentEntityModelList)[modelIdx];
 

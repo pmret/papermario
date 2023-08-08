@@ -309,7 +309,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
         EVT_CALL(EnableGroup, MODEL_g147, FALSE)
         EVT_CALL(EnableGroup, MODEL_g152, TRUE)
         EVT_CALL(EnableGroup, MODEL_g154, TRUE)
-        EVT_CALL(PlaySoundAt, SOUND_2097, 0, 600, 60, -150)
+        EVT_CALL(PlaySoundAt, SOUND_GLASS_SHATTER, 0, 600, 60, -150)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 600, 60, -150, 120)
         EVT_CALL(N(ShatterWindow))
         EVT_WAIT(1)

@@ -10,13 +10,6 @@ enum StandardPalettes {
     STANDARD_PAL_STATIC     = 3,
 };
 
-#define UNPACK_PAL_R(color) (((color) >> 11) & 0x1F)
-#define UNPACK_PAL_G(color) (((color) >> 6) & 0x1F)
-#define UNPACK_PAL_B(color) (((color) >> 1) & 0x1F)
-#define UNPACK_PAL_A(color) ((color) & 1)
-
-#define PACK_PAL_RGBA(r, g, b, a) (((r) << 11) | ((g) << 6) | ((b) << 1) | (a));
-
 // lerp from A to B as alpha does from 0 to 255
 #define LERP_COMPONENT(a, b, alpha) ((a) * (255 - (alpha)) + (b) * (alpha)) / 255;
 

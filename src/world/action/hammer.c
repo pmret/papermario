@@ -106,7 +106,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
             soundID = SOUND_2073;
             break;
         case 6:
-            soundID = SOUND_205B;
+            soundID = SOUND_FLOWERS_LAUGH;
             break;
     }
 

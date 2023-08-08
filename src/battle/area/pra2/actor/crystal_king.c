@@ -1245,7 +1245,7 @@ EvtScript N(MakeIllusions) = {
     EVT_IF_FLAG(LVar0, N(FLAG_LOW_HP))
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1D)
         EVT_WAIT(20)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E7)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LEVITATE)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar7, LVar8, LVar9)
         EVT_CALL(MakeLerp, 0, 41, 30, EASING_SIN_OUT)
         EVT_LABEL(10)

@@ -168,7 +168,7 @@ void state_step_end_battle(void) {
             init_entity_data();
             init_trigger_list();
 
-            if (gGameStatusPtr->demoFlags & 1) {
+            if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
                 npc_reload_all();
                 playerStatus->animFlags = D_800A0904;
                 set_game_mode(GAME_MODE_DEMO);

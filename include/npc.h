@@ -223,7 +223,7 @@ typedef struct {
     /* 0x1C */ Vec3i detectPos;
     /* 0x28 */ VecXZi detectSize;
     /* 0x30 */ enum TerritoryShape detectShape;
-    /* 0x34 */ s32 isFlying;
+    /* 0x34 */ b32 isFlying;
 } EnemyTerritoryWander; // size = 0x38
 
 typedef struct {
@@ -233,7 +233,7 @@ typedef struct {
     /* 0x80 */ Vec3i detectPos;
     /* 0x8C */ VecXZi detectSize;
     /* 0x94 */ enum TerritoryShape detectShape;
-    /* 0x98 */ s32 isFlying;
+    /* 0x98 */ b32 isFlying;
 } EnemyTerritoryPatrol; // size = 0x9C
 
 typedef union {

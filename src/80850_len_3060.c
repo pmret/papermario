@@ -568,7 +568,7 @@ void update_status_bar(void) {
         return;
     }
 
-    if (gGameStatusPtr->isBattle == 0 && playerData->coins != uiStatus->displayCoins) {
+    if (!gGameStatusPtr->isBattle && playerData->coins != uiStatus->displayCoins) {
         status_bar_start_blinking_coins();
     }
 
@@ -612,7 +612,7 @@ void update_status_bar(void) {
     }
 
     if (uiStatus->displayHP != playerData->curHP) {
-        if (gGameStatusPtr->isBattle == 0 && playerData->curHP < uiStatus->displayHP) {
+        if (!gGameStatusPtr->isBattle && playerData->curHP < uiStatus->displayHP) {
             status_bar_start_blinking_hp();
         }
         if (uiStatus->displayHP < playerData->curHP) {
@@ -630,7 +630,7 @@ void update_status_bar(void) {
     }
 
     if (uiStatus->displayFP != playerData->curFP) {
-        if (gGameStatusPtr->isBattle == 0 && playerData->curFP < uiStatus->displayFP) {
+        if (!gGameStatusPtr->isBattle && playerData->curFP < uiStatus->displayFP) {
             status_bar_start_blinking_fp();
         }
         if (uiStatus->displayFP < playerData->curFP) {
@@ -684,7 +684,7 @@ void update_status_bar(void) {
                 } else {
                     if (!uiStatus->ignoreChanges) {
                         if (!uiStatus->unk_3B[0] || playerStatus->actionState != ACTION_STATE_IDLE) {
-                            if (gGameStatusPtr->isBattle == 0) {
+                            if (!gGameStatusPtr->isBattle) {
                                 uiStatus->hidden = 1;
                                 uiStatus->showTimer = 0;
                                 uiStatus->unk_3B[1] = 0;
@@ -707,7 +707,7 @@ void update_status_bar(void) {
                         uiStatus->showTimer++;
                     }
 
-                    if (uiStatus->showTimer >= 240 && gGameStatusPtr->isBattle == 0) {
+                    if (uiStatus->showTimer >= 240 && !gGameStatusPtr->isBattle) {
                         uiStatus->showTimer = 210;
                         uiStatus->hidden = 0;
                         uiStatus->unk_3B[0] = 1;
@@ -1355,7 +1355,7 @@ s32 is_status_bar_visible(void) {
 void status_bar_start_blinking_hp(void) {
     UiStatus* uiStatus = &gUIStatus;
 
-    if (gGameStatusPtr->isBattle == 0) {
+    if (!gGameStatusPtr->isBattle) {
         uiStatus->hpBlinkTimer = 120;
     }
 
@@ -1378,7 +1378,7 @@ void status_bar_stop_blinking_hp(void) {
 void status_bar_start_blinking_fp(void) {
     UiStatus* uiStatus = &gUIStatus;
 
-    if (gGameStatusPtr->isBattle == 0) {
+    if (!gGameStatusPtr->isBattle) {
         uiStatus->fpBlinkTimer = 120;
     }
 
@@ -1400,7 +1400,7 @@ void status_bar_stop_blinking_fp(void) {
 void status_bar_start_blinking_coins(void) {
     UiStatus* uiStatus = &gUIStatus;
 
-    if (gGameStatusPtr->isBattle == 0) {
+    if (!gGameStatusPtr->isBattle) {
         uiStatus->coinsBlinkTimer = 120;
     }
 

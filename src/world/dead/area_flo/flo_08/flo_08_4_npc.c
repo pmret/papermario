@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                 EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
                 EVT_CALL(MakeItemEntity, LVar8, -695, 20, -29, ITEM_SPAWN_MODE_DECORATION, 0)
                 EVT_SET(LVar7, LVar0)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Eat)
                 EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, LVar7)
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                     EVT_CASE_DEFAULT
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Chew, ANIM_GateFlower_Yellow_Idle, 0, MSG_CH6_0044)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Disgust)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2096, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SPIT_OUT, SOUND_SPACE_MODE_0)
                         EVT_CALL(MakeItemEntity, LVar8, 125, 20, 0, ITEM_SPAWN_MODE_DECORATION, 0)
                         EVT_SET(LVar7, LVar0)
                         EVT_WAIT(5)

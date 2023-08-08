@@ -10,7 +10,7 @@
 extern s32 bActorTattles[ACTOR_TYPE_COUNT];
 
 static EffectInstance* N(tattleEffect);
-static s32 N(isCharged);
+static b32 N(isCharged);
 
 extern s32 N(powerBounceChance);
 extern EvtScript N(init);
@@ -387,9 +387,9 @@ API_CALLABLE(N(ChargeAtPos)) {
     s32 boostAmount;
     s32 x, y, z;
 
-    N(isCharged) = 0;
+    N(isCharged) = FALSE;
     if (partner->isGlowing > 0) {
-        N(isCharged) = 1;
+        N(isCharged) = TRUE;
     }
 
     boostAmount = 0;
@@ -470,7 +470,7 @@ API_CALLABLE(N(PlayChargeFX)) {
 }
 
 API_CALLABLE(N(GetChargeMessage)) {
-    if (N(isCharged) == 0) {
+    if (!N(isCharged)) {
         script->varTable[0] = BTL_MSG_CHARGE_GOOMBARIO;
     } else {
         script->varTable[0] = BTL_MSG_CHARGE_GOOMBARIO_MORE;

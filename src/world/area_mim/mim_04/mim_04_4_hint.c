@@ -60,7 +60,7 @@ EvtScript N(EVS_ManageEvilTree) = {
         EVT_CALL(AwaitPlayerApproach, 0, -340, 50)
         EVT_CALL(AwaitPlayerLeave, 0, -340, 50)
         EVT_CALL(N(TryEvilTreeLaugh))
-        EVT_CALL(PlaySoundAt, SOUND_205F, SOUND_SPACE_MODE_0, 55, 96, -254)
+        EVT_CALL(PlaySoundAt, SOUND_TREE_LAUGHTER, SOUND_SPACE_MODE_0, 55, 96, -254)
         EVT_GOTO(0)
     EVT_RETURN
     EVT_END

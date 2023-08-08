@@ -178,7 +178,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_IF_EQ(LVar0, ACTOR_PLAYER)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Drink)
         EVT_WAIT(45)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

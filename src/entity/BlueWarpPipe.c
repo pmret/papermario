@@ -24,7 +24,7 @@ void entity_BlueWarpPipe_rise_up(Entity* entity) {
     BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
 
     pipeData->timer--;
-    if ((pipeData->timer != -1) && (pipeData->isRaised == 0)) {
+    if ((pipeData->timer != -1) && !pipeData->isRaised) {
         entity->pos.y += 2.3125;
     } else {
         pipeData->timer = 0;

@@ -179,7 +179,7 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_CALL(SpeakToPlayer, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, LVar7)
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, NPC_ChetRippo, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, NPC_ChetRippo, SOUND_2098, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ChetRippo, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
     EVT_CALL(SetNpcPos, NPC_ChetRippo, NPC_DISPOSE_LOCATION)
     EVT_SET(AF_MAC_32, TRUE)

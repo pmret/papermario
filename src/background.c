@@ -144,9 +144,9 @@ void appendGfx_background_texture(void) {
                 } else {
                     for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                         u16 palColor = gGameStatusPtr->backgroundPalette[i];
-                        blendedB = blend_background_channel((palColor >> 1) & 0x1F, fogB >> 3, fogA);
-                        blendedG = blend_background_channel((palColor >> 6) & 0x1F, fogG >> 3, fogA);
-                        blendedR = blend_background_channel((palColor >> 11) & 0x1F, fogR >> 3, fogA);
+                        blendedB = blend_background_channel(UNPACK_PAL_B(palColor), fogB >> 3, fogA);
+                        blendedG = blend_background_channel(UNPACK_PAL_G(palColor), fogG >> 3, fogA);
+                        blendedR = blend_background_channel(UNPACK_PAL_R(palColor), fogR >> 3, fogA);
                         gBackgroundPalette[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
                     }
                 }
@@ -156,9 +156,9 @@ void appendGfx_background_texture(void) {
             default:
                 for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                     u16 palColor = gGameStatusPtr->backgroundPalette[i];
-                    blendedB = (b2 >> 3) +  ((((palColor >> 1) & 0x1F) * b1) >> 8);
-                    blendedG = (g2 >> 3) +  ((((palColor >> 6) & 0x1F) * g1) >> 8);
-                    blendedR = (r2 >> 3) +  ((((palColor >> 11) & 0x1F) * r1) >> 8);
+                    blendedB = (b2 >> 3) +  ((UNPACK_PAL_B(palColor) * b1) >> 8);
+                    blendedG = (g2 >> 3) +  ((UNPACK_PAL_G(palColor) * g1) >> 8);
+                    blendedR = (r2 >> 3) +  ((UNPACK_PAL_R(palColor) * r1) >> 8);
 
                     if (blendedB > 0x1F) {
                         blendedB = 0x1F;

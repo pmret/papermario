@@ -110,9 +110,9 @@ ActorBlueprint N(slot_machine_start) = {
 };
 
 API_CALLABLE(N(IsDemoBattle)) {
-    script->varTable[0] = 0;
-    if (gGameStatusPtr->demoFlags & 1) {
-        script->varTable[0] = 1;
+    script->varTable[0] = FALSE;
+    if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
+        script->varTable[0] = TRUE;
     }
 
     return ApiStatus_DONE2;

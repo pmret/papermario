@@ -238,7 +238,7 @@ void btl_state_update_normal_start(void) {
                 read_background_size(&gBackgroundImage);
             }
 
-            if (gGameStatusPtr->demoFlags & 1) {
+            if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
                 set_curtain_scale_goal(1.0f);
             }
 
@@ -446,7 +446,7 @@ void btl_state_update_normal_start(void) {
                     btl_set_state(BATTLE_STATE_ENEMY_FIRST_STRIKE);
                     break;
                 default:
-                    if (!(gGameStatusPtr->demoFlags & 1)) {
+                    if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
                         actor = battleStatus->playerActor;
                         if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
                             script = start_script(&EVS_PeachEnterStage, EVT_PRIORITY_A, 0);
@@ -486,7 +486,7 @@ void btl_state_update_normal_start(void) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
             }
 
-            if (!(gGameStatusPtr->demoFlags & 1)) {
+            if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
                 BattleScreenFadeAmt -= 10;
             } else {
                 BattleScreenFadeAmt -= 50;
@@ -2763,7 +2763,7 @@ void btl_state_update_player_move(void) {
                 break;
             }
 
-            if (gGameStatusPtr->demoFlags & 1) {
+            if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
                 btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
                 break;
             }
@@ -3258,7 +3258,7 @@ void btl_state_update_partner_move(void) {
                 break;
             }
 
-            if (gGameStatusPtr->demoFlags & 1) {
+            if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
                 btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
                 break;
             }
@@ -3266,7 +3266,7 @@ void btl_state_update_partner_move(void) {
             if (playerData->curPartner == PARTNER_GOOMBARIO
                     && battleStatus->moveCategory == BTL_MENU_TYPE_CHANGE_PARTNER
                     && battleStatus->selectedMoveID != MOVE_CHARGE) {
-                partner->isGlowing = 0;
+                partner->isGlowing = FALSE;
                 gBattleStatus.flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
             }
             if (btl_check_player_defeated()) {
@@ -3677,7 +3677,7 @@ void btl_state_update_enemy_move(void) {
                 }
 
                 if (battleStatus->stateFreezeCount == 0) {
-                    if (gGameStatusPtr->demoFlags & 1) {
+                    if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
                         btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
                     } else {
                         btl_update_ko_status();
@@ -3952,7 +3952,7 @@ void btl_state_update_first_strike(void) {
 
             if (battleStatus->stateFreezeCount == 0) {
                 decrement_status_bar_disabled();
-                if (!(gGameStatusPtr->demoFlags & 1)) {
+                if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
                     Actor* target;
 
                     if (btl_check_player_defeated() || btl_check_enemies_defeated()) {
@@ -4003,7 +4003,7 @@ void btl_state_draw_first_stike(void) {
         if (BattleScreenFadeAmt == 0) {
             set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
-            if (!(gGameStatusPtr->demoFlags & 1)) {
+            if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
                 BattleScreenFadeAmt -= 20;
             } else {
                 BattleScreenFadeAmt -= 50;

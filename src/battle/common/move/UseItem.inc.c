@@ -80,7 +80,7 @@ EvtScript N(PlayerGoHome) = {
 EvtScript N(EatItem) = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -93,7 +93,7 @@ EvtScript N(EatItem) = {
 EvtScript N(DrinkItem) = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
