@@ -125,7 +125,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
     s32 j, k;
 
     if (isInitialCall) {
-        sfx_play_sound_at_position(SOUND_LOOP_16, SOUND_SPACE_MODE_0, 315.0f, 125.0f, -100.0f);
+        sfx_play_sound_at_position(SOUND_LOOP_OMO_ROTATING_WHEEL, SOUND_SPACE_MODE_0, 315.0f, 125.0f, -100.0f);
         script->functionTempPtr[0] = it = heap_malloc(sizeof(*it) * ARRAY_COUNT(N(RotatingPlatformModels)));
         script->functionTemp[1] = 0;
 
@@ -229,7 +229,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(EVS_UpdateBasicPlatformA) = {
+EvtScript N(EVS_UpdateBasicPlatform_Silent) = {
     EVT_CALL(RandInt, 20, LVarA)
     EVT_WAIT(LVarA)
     EVT_USE_BUF(LVar0)
@@ -264,13 +264,13 @@ EvtScript N(EVS_UpdateBasicPlatformA) = {
     EVT_END
 };
 
-EvtScript N(EVS_UpdateBasicPlatformB) = {
+EvtScript N(EVS_UpdateBasicPlatform_Audible) = {
     EVT_CALL(RandInt, 20, LVarA)
     EVT_WAIT(LVarA)
     EVT_USE_BUF(LVar0)
     EVT_BUF_READ4(LVar6, LVar7, LVar8, LVar9)
     EVT_LABEL(0)
-        EVT_CALL(PlaySound, SOUND_0085)
+        EVT_CALL(PlaySound, SOUND_OMO_PLATFORM_ASCEND)
         EVT_CALL(MakeLerp, 0, 70, 51, EASING_COS_IN_OUT)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
@@ -283,7 +283,7 @@ EvtScript N(EVS_UpdateBasicPlatformB) = {
                 EVT_GOTO(1)
             EVT_END_IF
         EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_0087)
+        EVT_CALL(PlaySound, SOUND_OMO_PLATFORM_DESCEND)
         EVT_CALL(MakeLerp, 70, 0, 51, EASING_COS_IN_OUT)
         EVT_LABEL(2)
             EVT_CALL(UpdateLerp)
@@ -325,15 +325,15 @@ EvtScript N(EVS_SetupGizmos) = {
     EVT_CALL(ParentColliderToModel, COLLIDER_2_5, MODEL_2_5)
     EVT_CALL(ParentColliderToModel, COLLIDER_f2_5, MODEL_f2_5)
     EVT_SET(LVar0, EVT_PTR(N(BasicPlatform1)))
-    EVT_EXEC(N(EVS_UpdateBasicPlatformA))
+    EVT_EXEC(N(EVS_UpdateBasicPlatform_Silent))
     EVT_SET(LVar0, EVT_PTR(N(BasicPlatform2)))
-    EVT_EXEC(N(EVS_UpdateBasicPlatformA))
+    EVT_EXEC(N(EVS_UpdateBasicPlatform_Silent))
     EVT_SET(LVar0, EVT_PTR(N(BasicPlatform3)))
-    EVT_EXEC(N(EVS_UpdateBasicPlatformA))
+    EVT_EXEC(N(EVS_UpdateBasicPlatform_Silent))
     EVT_SET(LVar0, EVT_PTR(N(BasicPlatform4)))
-    EVT_EXEC(N(EVS_UpdateBasicPlatformB))
+    EVT_EXEC(N(EVS_UpdateBasicPlatform_Audible))
     EVT_SET(LVar0, EVT_PTR(N(BasicPlatform5)))
-    EVT_EXEC(N(EVS_UpdateBasicPlatformA))
+    EVT_EXEC(N(EVS_UpdateBasicPlatform_Silent))
     EVT_THREAD
         EVT_CALL(N(UpdatePlatformShadows))
     EVT_END_THREAD

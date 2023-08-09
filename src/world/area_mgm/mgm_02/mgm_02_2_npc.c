@@ -731,7 +731,7 @@ API_CALLABLE(N(RunMinigame)) {
                     }
                     break;
                 case BOX_STATE_PEACH_HIT:
-                    sfx_play_sound(SOUND_021C);
+                    sfx_play_sound(SOUND_APPROVE);
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                     enable_npc_shadow(npc);
                     npc->duration = 0;

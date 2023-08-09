@@ -32,7 +32,7 @@ EvtScript N(EVS_AnimateRotatingWall_AlmostCaught) = {
         EVT_WAIT(180 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LookAround)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_0093, 0, 50, 5, -200)
+    EVT_CALL(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, 0, 50, 5, -200)
     EVT_CALL(MakeLerp, 0, -1800, 360 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -45,7 +45,7 @@ EvtScript N(EVS_AnimateRotatingWall_AlmostCaught) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_0093)
+    EVT_CALL(StopSound, SOUND_KKJ_ROTATING_WALL)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_g25, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
@@ -70,7 +70,7 @@ EvtScript N(EVS_AnimateRotatingWall_Default) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_0093)
+    EVT_CALL(StopSound, SOUND_KKJ_ROTATING_WALL)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_g25, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN

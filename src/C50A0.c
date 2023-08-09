@@ -2371,9 +2371,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                         item->flags |= ITEM_ENTITY_FLAG_DONE_FALLING;
                     } else {
                         if (IS_BADGE(item->itemID)) {
-                            sfx_play_sound_at_position(SOUND_021B, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
+                            sfx_play_sound_at_position(SOUND_BADGE_BOUNCE, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                         } else if (IS_ITEM(item->itemID)) {
-                            sfx_play_sound_at_position(SOUND_021A, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
+                            sfx_play_sound_at_position(SOUND_ITEM_BOUNCE, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                         } else {
                             switch (item->itemID) {
                                 case ITEM_HEART:

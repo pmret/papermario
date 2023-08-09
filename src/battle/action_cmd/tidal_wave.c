@@ -263,7 +263,7 @@ void N(update)(void) {
                         }
                         actionCommandStatus->state = 11;
                         battleStatus->actionResult++;
-                        sfx_play_sound(SOUND_021C);
+                        sfx_play_sound(SOUND_APPROVE);
                         return;
                     }
 

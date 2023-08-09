@@ -207,7 +207,7 @@ API_CALLABLE(N(UpdateChandelier)) {
         }
         // detect direction reversal
         if (nextSwingAngle * chandelier->swingAngle <= 0.0f) {
-            sfx_play_sound_at_player(SOUND_009D, SOUND_SPACE_MODE_0);
+            sfx_play_sound_at_player(SOUND_OBK_CHANDELIER_SWING, SOUND_SPACE_MODE_0);
         }
         chandelier->swingAngle = nextSwingAngle;
     }
@@ -216,13 +216,13 @@ API_CALLABLE(N(UpdateChandelier)) {
     if (!script->functionTemp[2]) {
         // is chain moving?
         if (chandelier->dropDistance != lastDropDistance) {
-            sfx_play_sound_at_position(SOUND_LOOP_0F, SOUND_SPACE_MODE_0, 440.0f, chandelier->dropDistance, 271.0f);
+            sfx_play_sound_at_position(SOUND_LOOP_OBK_LOWER_CHAIN, SOUND_SPACE_MODE_0, 440.0f, chandelier->dropDistance, 271.0f);
             script->functionTemp[2] = TRUE;
         }
     } else {
         // is chain done moving?
         if (chandelier->dropDistance == lastDropDistance) {
-            sfx_stop_sound(SOUND_LOOP_0F);
+            sfx_stop_sound(SOUND_LOOP_OBK_LOWER_CHAIN);
             script->functionTemp[2] = FALSE;
         }
     }
@@ -235,13 +235,13 @@ API_CALLABLE(N(UpdateChandelier)) {
             f32 x, y, z;
 
             get_collider_center(COLLIDER_o557, &x, &y, &z);
-            sfx_play_sound_at_position(SOUND_LOOP_10, SOUND_SPACE_MODE_0, x, y, z);
+            sfx_play_sound_at_position(SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_MODE_0, x, y, z);
             script->functionTemp[3] = TRUE;
         }
     } else {
         // is cabinet done moving?
         if (cabinetPos == script->varTable[1]) {
-            sfx_stop_sound(SOUND_LOOP_10);
+            sfx_stop_sound(SOUND_LOOP_MOVE_STATUE);
             script->functionTemp[3] = FALSE;
         }
     }

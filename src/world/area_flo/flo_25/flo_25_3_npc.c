@@ -41,7 +41,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(159)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Red_Chew, ANIM_GateFlower_Red_Idle, 0, MSG_CH6_003F)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_021C, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_APPROVE, SOUND_SPACE_MODE_0)
                         EVT_CALL(EndSpeech, NPC_SELF, ANIM_GateFlower_Red_HappyTalk, ANIM_GateFlower_Red_HappyIdle, 0)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Red_OpenGate)
                         EVT_CALL(PlaySoundAtCollider, COLLIDER_o94, SOUND_METAL_GATE_OPEN, SOUND_SPACE_MODE_0)

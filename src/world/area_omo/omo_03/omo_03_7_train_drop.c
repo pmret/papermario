@@ -45,7 +45,7 @@ EvtScript N(EVS_Scene_TrainDropped) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_p_8, SOUND_00A1, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_p_8, SOUND_OMO_TOYBOX_TRAIN_DROP, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(3.0))
     EVT_END_THREAD
@@ -82,7 +82,7 @@ EvtScript N(EVS_Scene_TrainDropped) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_p_8, SOUND_00A1, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_p_8, SOUND_OMO_TOYBOX_TRAIN_DROP, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 8, EVT_FLOAT(2.0))
     EVT_END_THREAD
@@ -115,7 +115,7 @@ EvtScript N(EVS_Scene_TrainDropped) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_p_8, SOUND_00A1, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_p_8, SOUND_OMO_TOYBOX_TRAIN_DROP, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
