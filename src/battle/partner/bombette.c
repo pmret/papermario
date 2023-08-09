@@ -1301,8 +1301,8 @@ EvtScript N(bomb) = {
     EVT_END_IF
     EVT_SET(LVar0, 0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(3)
             EVT_THREAD
@@ -1399,8 +1399,8 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_LABEL(10)
     EVT_SET(LVar0, 0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(3)
             EVT_THREAD

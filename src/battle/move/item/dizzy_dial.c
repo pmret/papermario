@@ -24,7 +24,7 @@ API_CALLABLE(N(func_802A1270_727B80)) {
         case 0:
             script->functionTemp[1] = 0;
             script->functionTemp[2] = 0;
-            sfx_play_sound(SOUND_2033);
+            sfx_play_sound(SOUND_DIZZY_DIAL);
             camera->auxPitch = 0;
             D_802A1CD0 = create_worker_frontUI(NULL, func_802A123C_727B4C);
             script->functionTemp[0] = 1;

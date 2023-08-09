@@ -1209,8 +1209,8 @@ EvtScript N(fanSmack) = {
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_END_THREAD
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
             EVT_EXEC_WAIT(N(returnHome))

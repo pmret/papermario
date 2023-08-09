@@ -304,7 +304,7 @@ EvtScript N(takeTurn_8021E33C) = {
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim05)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02C4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HURT_PLANT_BITE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim06)
     EVT_WAIT(6)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)

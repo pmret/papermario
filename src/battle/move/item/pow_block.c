@@ -82,7 +82,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(6.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(5.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2030)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_POW_BLOCK)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(2.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))

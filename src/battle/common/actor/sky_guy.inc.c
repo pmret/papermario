@@ -340,12 +340,12 @@ EvtScript N(80229CB0) = {
 
 EvtScript N(80229F08) = {
     EVT_CALL(GetLastElement, LVar0)
-    EVT_SET(LVar0, 65536)
+    EVT_SET(LVar0, DAMAGE_TYPE_SPINY_SURGE)
     EVT_IF_FLAG(LVar0, DAMAGE_TYPE_FIRE | DAMAGE_TYPE_BLAST | DAMAGE_TYPE_4000 | DAMAGE_TYPE_SPINY_SURGE)
         EVT_CALL(HideHealthBar, ACTOR_SELF)
         EVT_THREAD
             EVT_WAIT(20)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E1)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SKY_GUY_BALLOON_POP)
         EVT_END_THREAD
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_SkyGuy_Anim2E)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_4, ANIM_SkyGuy_Anim2D)
@@ -518,7 +518,7 @@ EvtScript N(takeTurn_8022A9D0) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SLINGSHOT_DRAW)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_SkyGuy_Anim08)
     EVT_WAIT(12)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -528,7 +528,7 @@ EvtScript N(takeTurn_8022A9D0) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_6, ANIM_SkyGuy_Anim0B)
     EVT_WAIT(12)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_6, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SLINGSHOT_FIRE)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_6, ACTOR_SOUND_JUMP, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)

@@ -71,9 +71,9 @@ EvtScript N(EVS_UseItem) = {
         EVT_WAIT(25)
         EVT_LOOP(12)
             EVT_WAIT(1)
-            EVT_CALL(PlaySound, SOUND_202C)
+            EVT_CALL(PlaySound, SOUND_FIRE_FLOWER_A)
             EVT_WAIT(2)
-            EVT_CALL(PlaySound, SOUND_202D)
+            EVT_CALL(PlaySound, SOUND_FIRE_FLOWER_B)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD

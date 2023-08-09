@@ -518,7 +518,7 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY;
                     }
                 }
-                printer->curLinePos += printer->unk_464;
+                printer->curLinePos += printer->windowScrollRate;
                 if ((printer->stateFlags & MSG_STATE_FLAG_PRINT_QUICKLY) ||
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
                     (gGameStatusPtr->curButtons[0] & BUTTON_A)))
@@ -1344,7 +1344,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->printBuffer[0] = MSG_CHAR_PRINT_END;
     printer->printDelayTime = 1;
     printer->charsPerChunk = 1;
-    printer->unk_464 = (s32)(6 / DT);
+    printer->windowScrollRate = (s32)(6 / DT);
     printer->srcBuffer = NULL;
     printer->msgID = 0;
     printer->curPrintDelay = 0;

@@ -29,7 +29,7 @@ void N(ParatroopaAI_Windup)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     enemy->unk_10.z = npc->pos.z;
     enemy->hitboxIsActive = TRUE;
 
-    ai_enemy_play_sound(npc, SOUND_UNUSED_2C1, 0);
+    ai_enemy_play_sound(npc, SOUND_PARAGOOMBA_DIVE, 0);
     yawTemp = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     npc->duration = 12;
     npc->yaw = yawTemp;

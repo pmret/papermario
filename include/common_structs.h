@@ -1199,7 +1199,7 @@ typedef struct MessagePrintState {
     /* 0x45E */ u8 printDelayTime; // delay to print each chunk
     /* 0x45F */ u8 charsPerChunk; // how many chars to print at once
     /* 0x460 */ s32 curLinePos; // position along current line
-    /* 0x464 */ u8 unk_464;
+    /* 0x464 */ u8 windowScrollRate;
     /* 0x465 */ char unk_465;
     /* 0x466 */ u16 nextLinePos; // ?
     /* 0x468 */ u8 lineCount;

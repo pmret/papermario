@@ -2875,7 +2875,7 @@ void remove_player_buffs(s32 buffs) {
         fx_water_splash(1, player->curPos.x + 15.0f, player->curPos.y + 22.0f, player->curPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->waterBlockEffect = NULL;
-        sfx_play_sound(SOUND_0299);
+        sfx_play_sound(SOUND_DESTROY_WATER_BLOCK);
     }
     if (buffs & PLAYER_BUFF_TURBO_CHARGE && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;

@@ -985,8 +985,8 @@ EvtScript N(shapeSpell) = {
     EVT_WAIT(30)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar9, 0, 0, 1, 16)
     EVT_SWITCH(LVar9)
-        EVT_CASE_OR_EQ(6)
-        EVT_CASE_OR_EQ(5)
+        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
+        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(PlaySoundAtActor, LVarA, SOUND_SPELL_CAST2)
             EVT_END_IF
@@ -1117,8 +1117,8 @@ EvtScript N(shapeSpell) = {
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, (DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT), 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(20)
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP
