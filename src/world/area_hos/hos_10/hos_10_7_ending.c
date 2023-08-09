@@ -184,7 +184,7 @@ EvtScript N(EVS_Scene_CastleDescending) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(PlaySound, SOUND_00A4 | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(PlaySound, SOUND_KPA_LIGHT_RAYS | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(SetPlayerPos, -130, 200, 1300)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -150, 200, 1300)

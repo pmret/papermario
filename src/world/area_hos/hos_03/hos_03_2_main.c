@@ -73,7 +73,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_SetupAurora))
     EVT_CALL(UseRoomDoorSounds, DOOR_SOUNDS_UNUSED)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_LOOP_63)
+    EVT_CALL(PlaySound, SOUND_LOOP_STAR_SANCTUARY_FAR)
     EVT_EXEC(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SetupShop))
     EVT_EXEC(N(EVS_SetupFoliage))
