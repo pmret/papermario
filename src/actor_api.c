@@ -3248,7 +3248,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->isGlowing = TRUE;
@@ -3372,7 +3372,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->isGlowing = TRUE;
@@ -3483,7 +3483,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 inflict_status(actor, 0xE, vanished);
@@ -3589,7 +3589,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 inflict_status(actor, 0xB, electrified);
@@ -3695,7 +3695,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 1:
             if (script->functionTemp[3] == 0) {
-                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 fx_recover(0, x2, y2, z2, hpBoost);
                 show_start_recovery_shimmer(x1, y1, z1, hpBoost);
                 script->functionTemp[3] = 30;

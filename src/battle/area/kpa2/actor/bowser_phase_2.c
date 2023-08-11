@@ -294,7 +294,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-        EVT_CASE_EQ(EVENT_SWAP_PARTNER)
+        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
             EVT_CALL(N(UnfadeBackgroundToBlack))
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, PRT_MAIN)

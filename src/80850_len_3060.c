@@ -672,7 +672,7 @@ void update_status_bar(void) {
     }
 
     switch (uiStatus->hidden) {
-        case 0:
+        case FALSE:
             uiStatus->drawPosY += 10;
             if (uiStatus->drawPosY >= 18) {
                 uiStatus->drawPosY = 18;
@@ -685,7 +685,7 @@ void update_status_bar(void) {
                     if (!uiStatus->ignoreChanges) {
                         if (!uiStatus->unk_3B[0] || playerStatus->actionState != ACTION_STATE_IDLE) {
                             if (!gGameStatusPtr->isBattle) {
-                                uiStatus->hidden = 1;
+                                uiStatus->hidden = TRUE;
                                 uiStatus->showTimer = 0;
                                 uiStatus->unk_3B[1] = 0;
                             }
@@ -694,7 +694,7 @@ void update_status_bar(void) {
                 }
             }
             break;
-        case 1:
+        case TRUE:
             uiStatus->drawPosY -= 5;
             if (uiStatus->drawPosY < -100) {
                 uiStatus->drawPosY = -100;
@@ -709,7 +709,7 @@ void update_status_bar(void) {
 
                     if (uiStatus->showTimer >= 240 && !gGameStatusPtr->isBattle) {
                         uiStatus->showTimer = 210;
-                        uiStatus->hidden = 0;
+                        uiStatus->hidden = FALSE;
                         uiStatus->unk_3B[0] = 1;
                         uiStatus->unk_3B[1] = 1;
                     }

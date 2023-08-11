@@ -297,7 +297,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(PlaySound, SOUND_LRAW_036D | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(func_802D62E4, SOUND_LRAW_036D)
+        EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_036D)
     EVT_ELSE
         EVT_SET(LVar0, LVar9)
         EVT_SUB(LVar0, 0)

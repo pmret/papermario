@@ -271,7 +271,7 @@ EvtScript N(D_80241DA4_99BA14) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Eldstar, SOUND_2045, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Eldstar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)

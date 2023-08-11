@@ -16,7 +16,7 @@ EvtScript N(EVS_OnShakeTree3) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundWithVolume, SOUND_208E, 0)
+    EVT_CALL(PlaySoundWithVolume, SOUND_GROW, 0)
     EVT_CALL(EnableModel, MODEL_o241, TRUE)
     EVT_SET(LVar0, -30)
     EVT_LOOP(30)

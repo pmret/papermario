@@ -386,7 +386,7 @@ EvtScript N(handleEvent_802197FC) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Fuzzipede_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_SWAP_PARTNER)
+        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim19)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))

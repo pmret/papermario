@@ -534,7 +534,7 @@ EvtScript N(EVS_Attack_GroundSmash) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Pokey_Idle2)
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0342)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POKEY_SWAY)
     EVT_CALL(MakeLerp, 0, -40, 20, EASING_COS_IN_OUT)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -781,7 +781,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CASE_EQ(3)
         EVT_END_SWITCH
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0342)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POKEY_SWAY)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Anim_Windup, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
     EVT_WAIT(12)

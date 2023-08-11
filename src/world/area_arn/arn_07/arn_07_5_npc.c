@@ -531,7 +531,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_2045, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)

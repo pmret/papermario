@@ -83,7 +83,7 @@ EvtScript N(EVS_MerlarFlickering) = {
 };
 
 EvtScript N(EVS_SpawnStarStoneSparkles) = {
-    EVT_CALL(PlaySoundAt, SOUND_2045, 0, 230, 30, 0)
+    EVT_CALL(PlaySoundAt, SOUND_STAR_SPIRIT_DEPART_1, 0, 230, 30, 0)
     EVT_LABEL(0)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 2, 230, 30, 0, 30)
         EVT_WAIT(20)

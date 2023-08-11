@@ -1369,7 +1369,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2045, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_STAR_SPIRIT_DEPART_1, 0)
     EVT_END_THREAD
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)

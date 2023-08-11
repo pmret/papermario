@@ -66,7 +66,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
     EVT_END_THREAD
     EVT_WAIT(17 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_LOOP_56)
+        EVT_CALL(PlaySound, SOUND_LOOP_KKJ_RUMBLING)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 200 * DT, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_WAIT(60 * DT)
@@ -135,7 +135,7 @@ EvtScript N(EVS_Scene_Ascending) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_LOOP_56)
+        EVT_CALL(PlaySound, SOUND_LOOP_KKJ_RUMBLING)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 200, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_WAIT(100 * DT)

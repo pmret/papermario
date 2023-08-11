@@ -786,7 +786,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
-        EVT_CASE_EQ(EVENT_SWAP_PARTNER)
+        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 20)
             EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 20, 0)

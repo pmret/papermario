@@ -46,7 +46,7 @@ EvtScript N(EVS_BreakBlock_DropSpring) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_0048, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
     EVT_CALL(PlaySoundAt, SOUND_SPRING, SOUND_SPACE_MODE_0, LVar5, LVar0, 0)
     EVT_CALL(N(PlaySpringAnimation), MV_Unk_00)
     EVT_CALL(DisablePlayerInput, FALSE)

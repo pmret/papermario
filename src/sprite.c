@@ -39,13 +39,13 @@ Quad spr_defaultQuad = {
     }
 };
 
-Vp D_802DF3D0 = {{
+Vp SprPauseVp = {{
         { 640, 480, 511, 0 },
         { 640, 480, 511, 0 },
     }
 };
 
-Vp D_802DF3E0 = {{
+Vp SprPauseVpAlt = {{
         { 640, 480, 511, 0 },
         { 640, 480, 512, 0 },
     }
@@ -240,7 +240,7 @@ void spr_appendGfx_component_flat(
         if (gSpriteShadingProfile->flags & 2) {
             Camera* camera = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
-                gSPViewport(gMainGfxPos++, &D_802DF3E0);
+                gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
             } else {
                 gSPViewport(gMainGfxPos++, &camera->vpAlt);
             }
@@ -267,7 +267,7 @@ void spr_appendGfx_component_flat(
         if (gSpriteShadingProfile->flags & 2) {
             Camera* camera =  &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
-                gSPViewport(gMainGfxPos++, &D_802DF3E0);
+                gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
             } else {
                 gSPViewport(gMainGfxPos++, &camera->vpAlt);
             }
@@ -303,9 +303,9 @@ void spr_appendGfx_component_flat(
         Camera* camera =  &gCameras[gCurrentCamID];
 
         if (gGameStatusPtr->isBattle == 2) {
-            gSPViewport(gMainGfxPos++, &D_802DF3D0);
-            D_802DF3E0.vp.vtrans[0] = D_802DF3D0.vp.vtrans[0] + gGameStatusPtr->unk_82;
-            D_802DF3E0.vp.vtrans[1] = D_802DF3D0.vp.vtrans[1] + gGameStatusPtr->unk_83;
+            gSPViewport(gMainGfxPos++, &SprPauseVp);
+            SprPauseVpAlt.vp.vtrans[0] = SprPauseVp.vp.vtrans[0] + gGameStatusPtr->unk_82.x;
+            SprPauseVpAlt.vp.vtrans[1] = SprPauseVp.vp.vtrans[1] + gGameStatusPtr->unk_82.y;
         } else {
             gSPViewport(gMainGfxPos++, &camera->vp);
         }

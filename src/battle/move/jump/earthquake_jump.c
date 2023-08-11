@@ -215,15 +215,15 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_LABEL(12)
@@ -441,15 +441,15 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_LABEL(12)
@@ -663,15 +663,15 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0235)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_1)
         EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0236)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_2)
         EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0237)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_3)
         EVT_CASE_EQ(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0238)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
     EVT_CALL(func_80269550, LVarE)
     EVT_LABEL(12)

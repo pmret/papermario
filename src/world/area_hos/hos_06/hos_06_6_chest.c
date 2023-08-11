@@ -149,7 +149,7 @@ API_CALLABLE(N(SetItemRetrieved)) {
 #include "world/common/todo/GetItemEmptyCount.inc.c"
 
 EvtScript N(EVS_OpenChest) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o207, SOUND_204A, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o207, SOUND_OPEN_MAGIC_CHEST, 0)
     EVT_CALL(MakeLerp, 0, 80, 20, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -173,7 +173,7 @@ EvtScript N(EVS_CloseChest) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o207, SOUND_204B, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o207, SOUND_CLOSE_MAGIC_CHEST, 0)
     EVT_RETURN
     EVT_END
 };

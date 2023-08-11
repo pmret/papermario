@@ -1485,7 +1485,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_LOOP
     EVT_CALL(RemoveEffect, LVar0)
     EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2055)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_START_RECOVERY)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0373)

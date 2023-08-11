@@ -7,6 +7,8 @@
 
 #include "common/StarPower.inc.c"
 
+#include "StarPowerSupport.inc.c"
+
 #include "common/AddHP.inc.c"
 
 API_CALLABLE(func_802A156C_7922FC) {
@@ -20,116 +22,6 @@ API_CALLABLE(func_802A156C_7922FC) {
 
     return ApiStatus_DONE2;
 }
-
-EvtScript N(802A1630) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_0241)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
-        EVT_CALL(N(FadeBackgroundToBlack))
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Pray)
-        EVT_WAIT(10)
-        EVT_CALL(PlaySound, SOUND_2051)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkStarFunc2), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(N(UnkStarFunc), 0)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
-        EVT_CALL(N(UnkStarFunc), 4)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_0241)
-        EVT_CALL(N(UnkStarFunc), 1)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
-        EVT_CALL(N(FadeBackgroundToBlack))
-        EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_2051)
-        EVT_CALL(N(UnkStarFunc), 1)
-        EVT_WAIT(10)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkStarFunc2), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(N(UnkStarFunc), 4)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802A19C8) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_0241)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkBackgroundFunc2))
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Pray)
-        EVT_WAIT(10)
-        EVT_CALL(PlaySound, SOUND_2051)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkStarFunc2), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(N(UnkStarFunc), 0)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
-        EVT_CALL(N(UnkStarFunc), 4)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_0241)
-        EVT_CALL(N(UnkStarFunc), 1)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(UnkStarFunc1), LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkBackgroundFunc2))
-        EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_2051)
-        EVT_CALL(N(UnkStarFunc), 1)
-        EVT_WAIT(10)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(UnkStarFunc2), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(N(UnkStarFunc), 4)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
 
 EvtScript N(802A1D60) = {
     EVT_WAIT(8)
@@ -167,9 +59,9 @@ EvtScript N(802A1D60) = {
 
 EvtScript N(802A1F6C) = {
     EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, 0)
+    EVT_IF_EQ(LVarA, ACTOR_PLAYER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(PlaySound, SOUND_2047)
+        EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_DEPART_3)
         EVT_THREAD
             EVT_LOOP(5)
                 EVT_WAIT(6)
@@ -201,7 +93,7 @@ EvtScript N(802A1F6C) = {
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(PlaySound, SOUND_2045)
+        EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_DEPART_1)
         EVT_THREAD
             EVT_LOOP(5)
                 EVT_WAIT(6)
@@ -268,7 +160,7 @@ Vec2i N(RecoverEffectPositions)[] = {
 };
 
 EvtScript N(EVS_UsePower) = {
-    EVT_EXEC_WAIT(N(802A1630))
+    EVT_EXEC_WAIT(N(EVS_StarPowerScriptA))
     EVT_SET_CONST(LVar0, ANIM_BattleMisstar_Still)
     EVT_EXEC_WAIT(N(802A1D60))
     EVT_WAIT(16)
@@ -299,7 +191,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, -5)
     EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 10, 0, EASING_COS_IN_OUT)
-    EVT_CALL(PlaySound, SOUND_0245)
+    EVT_CALL(PlaySound, SOUND_SMOOCH)
     EVT_THREAD
         EVT_PLAY_EFFECT(EFFECT_RECOVER, 2, LVar0, LVar1, LVar2, 1, 0)
         EVT_WAIT(2)

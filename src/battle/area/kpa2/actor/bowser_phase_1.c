@@ -355,7 +355,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_SWAP_PARTNER)
+        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
             EVT_CALL(N(UnfadeBackgroundToBlack))
         EVT_CASE_EQ(EVENT_STAR_BEAM)
             EVT_CALL(FreezeBattleCam, TRUE)

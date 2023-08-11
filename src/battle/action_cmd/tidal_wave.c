@@ -139,7 +139,7 @@ void N(update)(void) {
                 actionCommandStatus->hudPosX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
                 actionCommandStatus->hudPosY);
             hud_element_clear_flags(id, HUD_ELEMENT_FLAG_DISABLED);
-            sfx_play_sound(SOUND_0233);
+            sfx_play_sound(SOUND_TIMING_BAR_TICK);
             actionCommandStatus->lookBackCounter = 1;
             actionCommandStatus->state = 12;
             // fallthrough

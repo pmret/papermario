@@ -1505,7 +1505,7 @@ EvtScript N(charge) = {
         EVT_ADD(LVar0, 10)
         EVT_ADD(LVar1, 25)
         EVT_ADD(LVar2, 5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GROW)
         EVT_CALL(N(ChargeAtPos), LVar0, LVar1, LVar2)
         EVT_WAIT(4)
         EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.4))

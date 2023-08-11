@@ -9,14 +9,14 @@ API_CALLABLE(N(UpdatePropellerSoundPos_Intro)) {
     f32 y = npc->pos.y;
     f32 z = npc->pos.z;
 
-    sfx_adjust_env_sound_pos(SOUND_LRAW_023D, SOUND_SPACE_MODE_0, x, y, z);
+    sfx_adjust_env_sound_pos(SOUND_LRAW_BOWSER_PROPELLER, SOUND_SPACE_MODE_0, x, y, z);
     script->varTable[0] = y;
 
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_UpdatePropellerSounds_Intro) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_66, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, 0)
     EVT_LOOP(0)
         EVT_CALL(N(UpdatePropellerSoundPos_Intro))
         EVT_IF_LT(LVar0, 0)
@@ -24,7 +24,7 @@ EvtScript N(EVS_UpdatePropellerSounds_Intro) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LOOP_66)
+    EVT_CALL(StopSound, SOUND_LOOP_BOWSER_PROPELLER)
     EVT_RETURN
     EVT_END
 };
@@ -201,15 +201,15 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_LOOP_56)
+        EVT_CALL(PlaySound, SOUND_LOOP_KKJ_RUMBLING)
 #if VERSION_PAL
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 60 * DT, EVT_FLOAT(0.5))
 #else
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(0.5))
 #endif
-        EVT_CALL(PlaySound, SOUND_LRAW_0033 | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(func_802D62E4, SOUND_LRAW_0033)
+        EVT_CALL(PlaySound, SOUND_LRAW_KKJ_RUMBLING | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_KKJ_RUMBLING)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetPlayerJumpscale, 0)

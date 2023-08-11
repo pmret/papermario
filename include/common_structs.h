@@ -882,9 +882,9 @@ typedef struct BattleStatus {
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 actionCommandMode;
-    /* 0x084 */ s8 actionResult;
+    /* 0x084 */ s8 actionResult; // actionResultAmount?
     /* 0x085 */ s8 unk_85;
-    /* 0x086 */ s8 unk_86;
+    /* 0x086 */ s8 unk_86; // actionResult?
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
     /* 0x089 */ s8 hpDrainCount;
@@ -1399,7 +1399,7 @@ typedef struct GameStatus {
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
     /* 0x06C */ s32 mainScriptID;
-    /* 0x070 */ b8 isBattle;
+    /* 0x070 */ s8 isBattle;
     /* 0x071 */ s8 demoState; // see DemoState enum
     /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
@@ -1417,8 +1417,7 @@ typedef struct GameStatus {
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
     /* 0x081 */ s8 multiplayerEnabled;
-    /* 0x082 */ s8 unk_82;
-    /* 0x083 */ s8 unk_83;
+    /* 0x082 */ Vec2b unk_82;
     /* 0x084 */ s8 playerSpriteSet;
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;

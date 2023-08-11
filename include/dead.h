@@ -252,7 +252,7 @@
 #define AssignPanelFlag dead_AssignPanelFlag
 #define Entity_HiddenPanel dead_Entity_HiddenPanel
 #define ShakeCam dead_ShakeCam
-#define func_802D62E4 dead_func_802D62E4
+#define StopTrackingSoundPos dead_StopTrackingSoundPos
 #define IsStartingConversation dead_IsStartingConversation
 #define ModifyGlobalOverrideFlags dead_ModifyGlobalOverrideFlags
 #define FindKeyItem dead_FindKeyItem
