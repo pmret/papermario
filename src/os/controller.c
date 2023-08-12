@@ -45,13 +45,20 @@ s32 osContInit(OSMesgQueue* mq, u8* bitpattern, OSContStatus* data) {
     osRecvMesg(mq, &dummy, OS_MESG_BLOCK);
 
     __osContGetInitData(bitpattern, data);
+#if VERSION_IQUE
+    __osContLastCmd = 0xFD;
+#else
     __osContLastCmd = CONT_CMD_REQUEST_STATUS;
+#endif
     __osSiCreateAccessQueue();
     osCreateMesgQueue(&__osEepromTimerQ, &__osEepromTimerMsg, 1);
 
     return ret;
 }
 
+#if VERSION_IQUE
+INCLUDE_ASM(void, "os/controller", __osContGetInitData, u8* pattern, OSContStatus* data);
+#else
 void __osContGetInitData(u8* pattern, OSContStatus* data) {
     u8* ptr;
     __OSContRequesFormat requestHeader;
@@ -72,6 +79,7 @@ void __osContGetInitData(u8* pattern, OSContStatus* data) {
     }
     *pattern = bits;
 }
+#endif
 
 void __osPackRequestData(u8 cmd) {
     u8* ptr;

@@ -17,11 +17,18 @@ s32 osContStartReadData(OSMesgQueue *mq) {
     }
     ret = __osSiRawStartDma(OS_READ, &__osContPifRam);
 
+#if VERSION_IQUE
+    __osContLastCmd = 0xFD;
+#else
     __osContLastCmd = CONT_CMD_READ_BUTTON;
+#endif
     __osSiRelAccess();
     return ret;
 }
 
+#if VERSION_IQUE
+INCLUDE_ASM(void, "os/contreaddata", osContGetReadData, OSContPad *data);
+#else
 void osContGetReadData(OSContPad *data) {
     u8 *ptr;
     __OSContReadFormat readformat;
@@ -37,6 +44,7 @@ void osContGetReadData(OSContPad *data) {
         }
     }
 }
+#endif
 
 void __osPackReadData(void) {
     u8 *ptr;

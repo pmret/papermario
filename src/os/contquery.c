@@ -11,7 +11,11 @@ s32 osContStartQuery(OSMesgQueue* mq) {
         osRecvMesg(mq, NULL, 1);
     }
     ret = __osSiRawStartDma(0, &__osContPifRam);
+#if VERSION_IQUE
+    __osContLastCmd = 0xFD;
+#else
     __osContLastCmd = 0;
+#endif
     __osSiRelAccess();
 
     return ret;
