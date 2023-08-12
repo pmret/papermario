@@ -483,8 +483,8 @@ EvtScript N(attackFlameBreath) = {
     EVT_END
 };
 
-#include "common/FadeBackgroundToBlack.inc.c"
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 
 EvtScript N(attackShockwaveDrain) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -495,7 +495,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_WAIT(10)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 15)
     EVT_SUB(LVar2, 3)
@@ -513,7 +513,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_SET(LVar1, 55)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0)
     EVT_THREAD
-        EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_WAIT(8)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)

@@ -338,7 +338,7 @@ API_CALLABLE(BattleMerleeFadeStageToBlack) {
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 0xFE);
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {

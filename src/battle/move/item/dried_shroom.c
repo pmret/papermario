@@ -9,12 +9,12 @@
 
 API_CALLABLE(N(ShowHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = evt_get_variable(script, *args++);
-    s32 b = evt_get_variable(script, *args++);
-    s32 c = evt_get_variable(script, *args++);
-    s32 d = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
 
-    fx_recover(0, a, b, c, d);
+    fx_recover(0, x, y, z, duration);
 
     return ApiStatus_DONE2;
 }

@@ -256,8 +256,8 @@ API_CALLABLE(N(unused_func)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/FadeBackgroundToBlack.inc.c"
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 #include "common/SpitInk.inc.c"
 
 EvtScript N(init) = {
@@ -676,7 +676,7 @@ EvtScript N(makeBabies) = {
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(N(StartRumbleWithParams), 50, 20)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(0.3))
@@ -726,7 +726,7 @@ EvtScript N(makeBabies) = {
     EVT_END_IF
     EVT_WAIT(2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
-    EVT_CALL(N(UnfadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundLighten))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -746,7 +746,7 @@ EvtScript N(getEnraged) = {
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(N(StartRumbleWithParams), 70, 80)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 40, EVT_FLOAT(0.3))
@@ -760,7 +760,7 @@ EvtScript N(getEnraged) = {
     EVT_EXEC_WAIT(N(enrage))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(N(UnfadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundLighten))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

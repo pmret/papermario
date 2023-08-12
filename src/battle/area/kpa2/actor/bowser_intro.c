@@ -145,8 +145,8 @@ ActorBlueprint NAMESPACE = {
 #include "common/StartRumbleWithParams.inc.c"
 #include "common/UnkFireBreathFXFunc.inc.c"
 #include "common/UnkBowserFunc1.inc.c"
-#include "common/FadeBackgroundToBlack.inc.c"
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 #include "common/RemoveChillOut.inc.c"
 #include "common/StarRodAppearEffect.inc.c"
 #include "common/StarRodPowerUpEffect.inc.c"
@@ -531,7 +531,7 @@ EvtScript N(unkDecorationScript) = {
 };
 
 EvtScript N(useStarRod) = {
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -598,7 +598,7 @@ EvtScript N(useStarRod) = {
     EVT_END_THREAD
     EVT_WAIT(75)
     EVT_THREAD
-        EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)

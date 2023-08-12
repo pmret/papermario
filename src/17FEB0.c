@@ -758,7 +758,8 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     flags = *args++;
 
     if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
-        gBattleStatus.flags1 |= BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE;
+        gBattleStatus.flags1 |= BS_FLAGS1_10;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & BS_FLAGS1_10) {
         gBattleStatus.flags1 |= BS_FLAGS1_10;
         gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;

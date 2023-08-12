@@ -26,9 +26,9 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
-#include "common/FadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
 
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
@@ -440,7 +440,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
-        EVT_CALL(N(FadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundDarken))
     EVT_END_THREAD
     EVT_CALL(GetModelCenter, 39)
     EVT_THREAD
@@ -483,7 +483,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_3)
             EVT_END_IF
-            EVT_CALL(N(UnfadeBackgroundToBlack))
+            EVT_CALL(N(FadeBackgroundLighten))
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
@@ -512,7 +512,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_3)
             EVT_END_IF
-            EVT_CALL(N(UnfadeBackgroundToBlack))
+            EVT_CALL(N(FadeBackgroundLighten))
             EVT_CALL(SetAnimation, ACTOR_ENEMY0, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
@@ -560,7 +560,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_3)
     EVT_END_IF
-    EVT_CALL(N(UnfadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundLighten))
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))

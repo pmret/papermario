@@ -7,23 +7,9 @@
 #define NAMESPACE battle_item_thunder_rage
 
 #include "battle/common/move/ItemRefund.inc.c"
-#include "common/FadeBackgroundToBlack.inc.c"
 
-API_CALLABLE(N(func_802A12D4_71B474)) {
-    if (isInitialCall) {
-        script->functionTemp[0] = 20;
-    }
-
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 254);
-
-    script->functionTemp[0]--;
-    if (script->functionTemp[0] == 0) {
-        set_background_color_blend(0, 0, 0, 0);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 
 API_CALLABLE(N(func_802A1354_71B4F4)) {
     Actor* enemyTarget = get_actor(script->owner1.enemyID);
@@ -63,14 +49,14 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_CHILD_THREAD
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySound, SOUND_0365)
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
-        EVT_IF_EQ(LVar0, 6)
+        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
             EVT_GOTO(1)
         EVT_END_IF
         EVT_CALL(N(func_802A1354_71B4F4))
@@ -90,7 +76,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(30)
-    EVT_CALL(N(func_802A12D4_71B474))
+    EVT_CALL(N(FadeBackgroundLighten))
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END

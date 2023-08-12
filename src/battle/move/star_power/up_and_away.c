@@ -9,11 +9,9 @@ extern EntityModelScript EMS_StarIcon;
 
 #define NAMESPACE battle_move_up_and_away
 
-#include "common/StarPower.inc.c"
+#include "battle/common/move/StarPowerSupport.inc.c"
 
-#include "StarPowerSupport.inc.c"
-
-API_CALLABLE(func_802A1518_7957F8) {
+API_CALLABLE(N(DarkenBackground)) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -32,7 +30,7 @@ API_CALLABLE(func_802A1518_7957F8) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802A15B4_795894) {
+API_CALLABLE(N(RestoreBackground)) {
     if (isInitialCall) {
         script->functionTemp[0] = 254;
     }
@@ -49,166 +47,41 @@ API_CALLABLE(func_802A15B4_795894) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802A1628_795908) {
+API_CALLABLE(N(ShouldTargetBeCaptured)) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
-    u32 flags;
 
-    script->varTable[0] = 0;
-    flags = targetActor->flags;
+    script->varTable[0] = FALSE;
 
-    if (!(flags & ACTOR_FLAG_TARGET_ONLY)) {
-        if (!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
-            if (!(flags & ACTOR_FLAG_2000)
-                && targetActor->actorBlueprint->upAndAwayChance != 0
-                && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance
-            ) {
-                script->varTable[0] = 1;
-            }
-        } else {
-            return ApiStatus_DONE2;
-        }
+    if (targetActor->flags & ACTOR_FLAG_TARGET_ONLY) {
+        return ApiStatus_DONE2;
+    }
+
+    if (targetActor->flags & ACTOR_FLAG_NO_DMG_APPLY) {
+        return ApiStatus_DONE2;
+    }
+
+    if (targetActor->flags & ACTOR_FLAG_2000) {
+        return ApiStatus_DONE2;
+    }
+
+    if (targetActor->actorBlueprint->upAndAwayChance != 0
+        && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance
+    ) {
+        script->varTable[0] = TRUE;
     }
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(802A1E00) = {
-    EVT_WAIT(8)
-    EVT_CALL(SetForegroundModelsVisible, FALSE)
-    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
-    EVT_CALL(MoveBattleCamOver, 1)
-    EVT_CALL(PlaySound, SOUND_SRAW_1E_A)
-    EVT_CALL(CreateNpc, NPC_BTL_SPIRIT, LVar0)
-    EVT_CALL(N(SetNpcCollision32))
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_SPIRIT, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(SetNpcPos, NPC_BTL_SPIRIT, -75, 150, 0)
-    EVT_CALL(SetNpcDecoration, NPC_BTL_SPIRIT, 0, NPC_DECORATION_WHITE_GLOW_BEHIND)
-    EVT_CALL(N(UnkStarFunc3), -75, 167, 0)
-    EVT_WAIT(10)
-    EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(8)
-        EVT_ADD(LVar0, 67)
-        EVT_CALL(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(10)
-    EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 50)
-    EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 30, 0, EASING_COS_IN_OUT)
-    EVT_CALL(SetForegroundModelsVisible, TRUE)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802A200C) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_DEPART_3)
-        EVT_THREAD
-            EVT_LOOP(5)
-                EVT_WAIT(6)
-                EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-                EVT_CALL(N(UnkStarFunc4), LVar0, LVar1, LVar2)
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
-        EVT_THREAD
-            EVT_SET(LVar2, 0)
-            EVT_SET(LVar3, 720)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 30, EASING_CUBIC_IN)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 60)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_ADD(LVar1, 140)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_WAIT(10)
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
-        EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_DEPART_1)
-        EVT_THREAD
-            EVT_LOOP(5)
-                EVT_WAIT(6)
-                EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-                EVT_CALL(N(UnkStarFunc4), LVar0, LVar1, LVar2)
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
-        EVT_THREAD
-            EVT_SET(LVar2, 0)
-            EVT_SET(LVar3, 720)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 30, EASING_CUBIC_IN)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 60)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_ADD(LVar1, 140)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_WAIT(10)
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
-        EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802A245C) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(N(UnkBackgroundFunc))
-        EVT_WAIT(15)
-        EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_ELSE
-        EVT_CALL(N(UnkBackgroundFunc))
-        EVT_WAIT(15)
-        EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
-        EVT_CALL(N(UnkStarFunc), 3)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(N(UnkStarFunc), 4)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
 EvtScript N(EVS_UsePower) = {
-    EVT_EXEC_WAIT(N(EVS_StarPowerScriptA))
+    EVT_EXEC_WAIT(N(EVS_StarPower_WishForSpirit))
     EVT_SET_CONST(LVar0, ANIM_BattleKalmar_Idle)
-    EVT_EXEC_WAIT(N(802A1E00))
+    EVT_EXEC_WAIT(N(EVS_StarPower_SpiritSummoned))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleKalmar_Shout)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(20)
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
-    EVT_CALL(func_802A1518_7957F8)
+    EVT_CALL(N(DarkenBackground))
     EVT_CALL(PlaySound, SOUND_UP_AND_AWAY_CAST)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, 0, 20, 0, EVT_FLOAT(1.0), 90)
     EVT_WAIT(30)
@@ -221,10 +94,10 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(func_802A1628_795908)
+        EVT_CALL(N(ShouldTargetBeCaptured))
         EVT_SET(LFlag0, FALSE)
         EVT_CALL(ItemCheckHit, LVar1, 0, 0, 0, 0)
-        EVT_IF_EQ(LVar1, 6)
+        EVT_IF_EQ(LVar1, HIT_RESULT_MISS)
             EVT_SET(LVar0, 0)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -281,7 +154,7 @@ EvtScript N(EVS_UsePower) = {
                     EVT_CALL(SetActorPos, LVarA, NPC_DISPOSE_LOCATION)
                     EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
                     EVT_LOOP(10)
-                        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar1, LVar2, 20, 0)
+                        EVT_PLAY_EFFECT(EFFECT_SPARKLES, FX_SPARKLES_1, LVar0, LVar1, LVar2, 20, 0)
                         EVT_ADD(LVar1, 30)
                         EVT_WAIT(5)
                     EVT_END_LOOP
@@ -299,10 +172,10 @@ EvtScript N(EVS_UsePower) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(70)
-    EVT_CALL(func_802A15B4_795894)
-    EVT_EXEC_WAIT(N(802A200C))
+    EVT_CALL(N(RestoreBackground))
+    EVT_EXEC_WAIT(N(EVS_StarPower_SpiritDeparts))
     EVT_CALL(PlayerYieldTurn)
-    EVT_EXEC_WAIT(N(802A245C))
+    EVT_EXEC_WAIT(N(EVS_StarPower_EndWish))
     EVT_RETURN
     EVT_END
 };

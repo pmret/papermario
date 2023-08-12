@@ -3324,6 +3324,14 @@ enum ActorEventFlags {
     ACTOR_EVENT_FLAG_80000000               = 0x80000000,
 };
 
+enum PartnerWishAnims {
+    PARTNER_WISH_ANIM_WALK          = 0,
+    PARTNER_WISH_ANIM_PRAY          = 1,
+    PARTNER_WISH_ANIM_UNUSED        = 2,
+    PARTNER_WISH_ANIM_RETURN        = 3,
+    PARTNER_WISH_ANIM_IDLE          = 4,
+};
+
 enum PartnerAnimIndices {
     PARTNER_ANIM_INDEX_STILL      = 0x0,
     PARTNER_ANIM_INDEX_WALK       = 0x1,

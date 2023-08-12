@@ -2999,7 +2999,7 @@ ApiStatus DispatchDamageEvent(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 damageAmount;
-    s32 scriptExists;
+    s32 eventID;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -3007,13 +3007,17 @@ ApiStatus DispatchDamageEvent(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     damageAmount = evt_get_variable(script, *args++);
+    eventID = evt_get_variable(script, *args++);
 
-    if (dispatch_damage_event_actor_0(actor, damageAmount, evt_get_variable(script, *args++)) < 0) {
+    if (dispatch_damage_event_actor_0(actor, damageAmount, eventID) < 0) {
         return ApiStatus_BLOCK;
     }
 
-    scriptExists = does_script_exist_by_ref(script) != 0;
-    return scriptExists * ApiStatus_DONE2;
+    if (does_script_exist_by_ref(script)) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus DispatchEvent(Evt* script, s32 isInitialCall) {

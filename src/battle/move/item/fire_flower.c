@@ -19,30 +19,15 @@ API_CALLABLE(N(func_802A123C_716E9C)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/FadeBackgroundToBlack.inc.c"
-
-API_CALLABLE(N(func_802A1378_716FD8)) {
-    if (isInitialCall) {
-        script->functionTemp[0] = 20;
-    }
-
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 254);
-
-    script->functionTemp[0]--;
-    if (script->functionTemp[0] == 0) {
-        set_background_color_blend(0, 0, 0, 0);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_FIRE_FLOWER)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySound, SOUND_0377)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_PlantFireFlower)
     EVT_THREAD
@@ -84,7 +69,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(ItemCheckHit, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, LVar0, 0)
-    EVT_IF_EQ(LVar0, 6)
+    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -96,7 +81,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(N(func_802A1378_716FD8))
+    EVT_CALL(N(FadeBackgroundLighten))
     EVT_WAIT(30)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
