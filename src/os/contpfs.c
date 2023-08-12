@@ -80,11 +80,9 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid) {
     } while (j < PFS_MAX_BANKS);
 
     SET_ACTIVEBANK_TO_ZERO;
-    if (j > 0) {
-        mask = 1;
-    } else {
-        mask = 0;
-    }
+
+    mask = (j > 0) ? 1 : 0;
+
     newid->deviceid = (badid->deviceid & (u16)~1) | mask;
     newid->banks = j;
     newid->version = badid->version;

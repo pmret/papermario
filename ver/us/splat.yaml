@@ -230,6 +230,7 @@ segments:
     - [auto, c, os/pfsfilestate, gcc_272 -O3]
     - [auto, c, os/pfsfindfile, gcc_272 -O3]
     - [auto, c, os/pfsfreeblocks, gcc_272 -O3]
+    - [auto, c, os/pfsnumfiles, gcc_272 -O3]
     - [auto, c, os/pfsinitpak, gcc_272 -O3]
     - [auto, c, os/pfsrepairid, gcc_272 -O3]
     - [auto, c, os/pfsgetstatus, gcc_272 -O3]

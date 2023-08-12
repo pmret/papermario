@@ -1,6 +1,11 @@
 #include "PR/controller.h"
 #include "PR/osint.h"
 #include "PR/siint.h"
+#include "macros.h"
+
+#if VERSION_IQUE
+INCLUDE_ASM(s32, "os/contramwrite", __osContRamWrite, OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
+#else
 
 extern int __osPfsLastChannel;
 
@@ -66,3 +71,5 @@ s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int 
     __osSiRelAccess();
     return ret;
 }
+
+#endif

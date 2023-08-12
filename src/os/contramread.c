@@ -1,6 +1,11 @@
 #include "PR/controller.h"
 #include "PR/osint.h"
 #include "PR/siint.h"
+#include "macros.h"
+
+#if VERSION_IQUE
+INCLUDE_ASM(s32, "os/contramread", __osContRamRead, OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
+#else
 
 s32 __osPfsLastChannel = -1;
 
@@ -59,3 +64,5 @@ s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer) {
     __osSiRelAccess();
     return ret;
 }
+
+#endif

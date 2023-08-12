@@ -2,10 +2,21 @@
 
 extern u8 __osPfsInodeCacheBank;
 
+#if VERSION_IQUE
+extern s32 __osBbPakAddress[];
+#endif
+
 void __osPfsRequestOneChannel(int channel, u8 cmd);
 void __osPfsGetOneChannelData(int channel, OSContStatus *data);
 
 s32 __osPfsGetStatus(OSMesgQueue *queue, int channel) {
+#if VERSION_IQUE
+    if (__osBbPakAddress[channel] != 0) {
+        return 0;
+    }
+
+    return 1;
+#else
     s32 ret;
     OSMesg dummy;
     OSContStatus data;
@@ -27,6 +38,7 @@ s32 __osPfsGetStatus(OSMesgQueue *queue, int channel) {
         return PFS_ERR_CONTRFAIL;
     }
     return ret;
+#endif
 }
 
 void __osPfsRequestOneChannel(int channel, u8 cmd) {
