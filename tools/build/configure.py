@@ -82,7 +82,7 @@ def write_ninja_rules(
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3", "-g1")
 
-    cflags_egcs = f"-c -fno-PIC -mno-abicalls -mcpu=4300 -G 0 -mgp32 -mfp32 -mips2 -x c -B {cc_egcs_dir} {extra_cflags}"
+    cflags_egcs = f"-c -fno-PIC -mno-abicalls -mcpu=4300 -G 0 -mgp32 -mfp32 -x c -B {cc_egcs_dir} {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -169,7 +169,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc_egcs",
         description="cc_egcs $in",
-        command=f"bash -o pipefail -c '{cc_egcs} {CPPFLAGS_EGCS} {extra_cppflags} $cppflags {cflags_egcs} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
+        command=f"bash -o pipefail -c '{cc_egcs} {CPPFLAGS_EGCS} {extra_cppflags} $cppflags {cflags_egcs} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out && python ./tools/elfpatch.py $out'",
     )
 
     ninja.rule(
