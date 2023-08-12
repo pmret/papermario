@@ -444,7 +444,7 @@ EvtScript N(SuperBlock_ShowUpgradeEffects) = {
         EVT_CALL(PlaySound, SOUND_GATHER_ENERGY)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 70, 70)
         EVT_WAIT(27 * DT)
-        EVT_CALL(PlaySound, SOUND_208E)
+        EVT_CALL(PlaySound, SOUND_GROW)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 50, 50)
     EVT_END_THREAD
     EVT_THREAD

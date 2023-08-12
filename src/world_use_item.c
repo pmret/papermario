@@ -124,7 +124,7 @@ EvtScript EVS_WorldItem_ShowUsedItem = {
 EvtScript EVS_WorldItem_PlayEatingSounds = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySound, SOUND_2095)
+            EVT_CALL(PlaySound, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -137,7 +137,7 @@ EvtScript EVS_WorldItem_PlayEatingSounds = {
 EvtScript EVS_WorldItem_PlayDrinkingSounds = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySound, SOUND_2095)
+            EVT_CALL(PlaySound, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD

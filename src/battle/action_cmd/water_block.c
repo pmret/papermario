@@ -349,16 +349,16 @@ void N(update)(void) {
             btl_set_popup_duration(99);
             if (actionCommandStatus->frameCounter == 42) {
                 hud_element_set_script(actionCommandStatus->hudElements[11], &HES_TimingCharge3);
-                sfx_play_sound(SOUND_0233);
+                sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
             if (actionCommandStatus->frameCounter == 22) {
                 hud_element_set_script(actionCommandStatus->hudElements[12], &HES_TimingCharge2);
-                sfx_play_sound(SOUND_0233);
+                sfx_play_sound(SOUND_TIMING_BAR_TICK);
             }
             if (actionCommandStatus->frameCounter == 2) {
                 hud_element_set_script(actionCommandStatus->hudElements[2], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
-                sfx_play_sound(SOUND_0234);
+                sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
             actionCommandStatus->frameCounter--;
             if (actionCommandStatus->frameCounter == 0) {
@@ -428,7 +428,7 @@ void N(update)(void) {
             if (actionCommandStatus->frameCounter == 2) {
                 hud_element_set_script(actionCommandStatus->hudElements[3], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
-                sfx_play_sound(SOUND_0234);
+                sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
             actionCommandStatus->frameCounter--;
             if (actionCommandStatus->frameCounter == 0) {
@@ -502,7 +502,7 @@ void N(update)(void) {
             if (actionCommandStatus->frameCounter == 2) {
                 hud_element_set_script(actionCommandStatus->hudElements[4], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
-                sfx_play_sound(SOUND_0234);
+                sfx_play_sound(SOUND_TIMING_BAR_GO);
             }
             actionCommandStatus->frameCounter--;
             if (actionCommandStatus->frameCounter == 0) {

@@ -94,7 +94,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_WAIT(1)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.4), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_GROW)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
         EVT_WAIT(1)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))

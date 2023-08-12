@@ -157,8 +157,8 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/StartRumbleWithParams.inc.c"
 #include "common/UnkBowserFunc1.inc.c"
-#include "common/FadeBackgroundToBlack.inc.c"
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 #include "common/RemoveChillOut.inc.c"
 #include "common/StarRodAppearEffect.inc.c"
 #include "common/StarRodPowerUpEffect.inc.c"
@@ -355,8 +355,8 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_SWAP_PARTNER)
-            EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
+            EVT_CALL(N(FadeBackgroundLighten))
         EVT_CASE_EQ(EVENT_STAR_BEAM)
             EVT_CALL(FreezeBattleCam, TRUE)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 1)
@@ -587,7 +587,7 @@ EvtScript N(unkDecorationScript) = {
 };
 
 EvtScript N(useStarRod) = {
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -654,7 +654,7 @@ EvtScript N(useStarRod) = {
     EVT_END_THREAD
     EVT_WAIT(75)
     EVT_THREAD
-        EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
@@ -754,7 +754,7 @@ EvtScript N(recover) = {
         EVT_CALL(MoveBattleCamOver, 40)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -1323,7 +1323,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_WAIT(10)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2121)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
@@ -1364,7 +1364,7 @@ EvtScript N(attackShockwaveDrain) = {
         EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_WAIT(8)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

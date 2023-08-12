@@ -56,7 +56,7 @@ API_CALLABLE(N(AdjustEnvSoundPosition)) {
     script->functionTemp[0] = evt_get_variable(script, *args++);
     script->functionTemp[1] = evt_get_variable(script, *args++);
     script->functionTemp[2] = evt_get_variable(script, *args++);
-    sfx_adjust_env_sound_pos(SOUND_LRAW_009E, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+    sfx_adjust_env_sound_pos(SOUND_LRAW_MOVE_STATUE, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
 
     return ApiStatus_DONE2;
 }
@@ -72,10 +72,10 @@ EvtScript N(PlayMovingStatueSound) = {
 };
 
 EvtScript N(EVS_Scene_MoveStatue) = {
-    EVT_CALL(PlaySound, SOUND_LOOP_18)
+    EVT_CALL(PlaySound, SOUND_LOOP_MOVE_LARGE_STATUE)
     EVT_EXEC_WAIT(N(EVS_MoveStatue))
     EVT_CALL(GetModelCenter, MODEL_o162)
-    EVT_CALL(PlaySoundAt, SOUND_LOOP_10, 0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_LOOP_MOVE_STATUE, 0, LVar0, LVar1, LVar2)
     EVT_EXEC_GET_TID(N(PlayMovingStatueSound), LVar9)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 180, EVT_FLOAT(0.4))
@@ -93,8 +93,8 @@ EvtScript N(EVS_Scene_MoveStatue) = {
     EVT_END_LOOP
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(1.0))
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(StopSound, SOUND_LOOP_10)
-    EVT_CALL(StopSound, SOUND_LOOP_18)
+    EVT_CALL(StopSound, SOUND_LOOP_MOVE_STATUE)
+    EVT_CALL(StopSound, SOUND_LOOP_MOVE_LARGE_STATUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o166, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o247, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o180, COLLIDER_FLAGS_UPPER_MASK)

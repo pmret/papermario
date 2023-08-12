@@ -249,7 +249,7 @@ API_CALLABLE(N(func_802A1B14_731E14)) {
 
     inflict_status(player, STATUS_KEY_TRANSPARENT, 3);
     player->statusAfflicted = 0;
-    part->flags |= ACTOR_PART_FLAG_100;
+    part->flags |= ACTOR_PART_FLAG_TRANSPARENT;
 
     return ApiStatus_DONE2;
 }

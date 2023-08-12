@@ -413,7 +413,7 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
     EVT_CALL(BindNpcAI, NPC_Koopa_02, EVT_PTR(N(EVS_DoNothing)))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(NpcJump0, NPC_KoopaShell_02, 227, 0, 247, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaShell_02, SOUND_021A, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaShell_02, SOUND_ITEM_BOUNCE, 0)
     EVT_CALL(PlayerFaceNpc, NPC_KoopaShell_02, FALSE)
     EVT_CALL(NpcFaceNpc, NPC_Koopa_02, NPC_KoopaShell_02, 0)
     EVT_CALL(SetNpcFlagBits, NPC_Koopa_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)

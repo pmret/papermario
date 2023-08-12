@@ -417,7 +417,7 @@ HitResult calc_player_damage_enemy(void) {
                     sfx_play_sound_at_position(SOUND_2073, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 6:
-                    sfx_play_sound_at_position(SOUND_205B, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_FLOWERS_LAUGH, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
             }
         }

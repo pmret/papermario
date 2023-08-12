@@ -55,7 +55,7 @@ EvtScript N(EVS_PushClock_Impl) = {
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o77, SOUND_LOOP_10, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o77, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_MODE_0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateModel, MODEL_o77, LVar0, 0, 0)
@@ -67,7 +67,7 @@ EvtScript N(EVS_PushClock_Impl) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LOOP_10)
+    EVT_CALL(StopSound, SOUND_LOOP_MOVE_STATUE)
     EVT_RETURN
     EVT_END
 };

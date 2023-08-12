@@ -262,10 +262,10 @@ void load_engine_data(void) {
     gGameStatusPtr->musicEnabled = 1;
     gGameStatusPtr->unk_7C = 1;
     gGameStatusPtr->creditsViewportMode = -1;
-    gGameStatusPtr->demoFlags = 0;
+    gGameStatusPtr->demoBattleFlags = 0;
     gGameStatusPtr->multiplayerEnabled = 0;
-    gGameStatusPtr->unk_82 = -8;
-    gGameStatusPtr->unk_83 = 4;
+    gGameStatusPtr->unk_82.x = -8;
+    gGameStatusPtr->unk_82.y = 4;
     timeFreezeMode = 0;
     gGameStatusPtr->debugQuizmo = gGameStatusPtr->unk_13C = 0;
     gGameStepDelayCount = 5;

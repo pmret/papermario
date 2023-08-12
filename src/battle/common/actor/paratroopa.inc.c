@@ -459,7 +459,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_PREDIVE)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_ParaTroopa_Windup)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -468,7 +468,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, EASING_LINEAR)
             EVT_WAIT(6)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_UNUSED_2C1)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_DIVE)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 25)
@@ -528,7 +528,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_PREDIVE)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_ParaTroopa_Windup)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -537,7 +537,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, EASING_LINEAR)
     EVT_WAIT(6)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_UNUSED_2C1)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_DIVE)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))

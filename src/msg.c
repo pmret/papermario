@@ -34,11 +34,9 @@ enum RewindArrowStates {
 #endif
 
 #if VERSION_PAL
-#define CONST_A 7
-#define CONST_B 5.0
+#define CHOICE_POINTER_MOVE_RATE 5.0
 #else
-#define CONST_A 6
-#define CONST_B 6.0
+#define CHOICE_POINTER_MOVE_RATE 6.0
 #endif
 
 typedef MessageImageData* MessageImageDataList[1];
@@ -520,12 +518,12 @@ s32 _update_message(MessagePrintState* printer) {
                         printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY;
                     }
                 }
-                printer->curLinePos += printer->unk_464;
+                printer->curLinePos += printer->windowScrollRate;
                 if ((printer->stateFlags & MSG_STATE_FLAG_PRINT_QUICKLY) ||
                     (!(printer->stateFlags & (MSG_STATE_FLAG_10 | MSG_STATE_FLAG_4)) &&
                     (gGameStatusPtr->curButtons[0] & BUTTON_A)))
                 {
-                    printer->curLinePos += CONST_A;
+                    printer->curLinePos += (s32)(6 / DT);
                 }
 
                 if (printer->curLinePos >= printer->nextLinePos) {
@@ -820,7 +818,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                             printer->stateFlags |= MSG_STATE_FLAG_800;
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
                             if (arg == MSG_STYLE_INSPECT) {
-                                sfx_play_sound_with_params(SOUND_021C, 0, 0, 0);
+                                sfx_play_sound_with_params(SOUND_APPROVE, 0, 0, 0);
                             }
                         }
                         break;
@@ -829,7 +827,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->windowBasePos.y = *srcBuf++;
                         printer->windowSize.x = *srcBuf++;
                         printer->windowSize.y = *srcBuf++;
-                        sfx_play_sound_with_params(SOUND_021C, 0, 0, 0);
+                        sfx_play_sound_with_params(SOUND_APPROVE, 0, 0, 0);
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags |= MSG_STATE_FLAG_800;
@@ -1346,7 +1344,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->printBuffer[0] = MSG_CHAR_PRINT_END;
     printer->printDelayTime = 1;
     printer->charsPerChunk = 1;
-    printer->unk_464 = CONST_A;
+    printer->windowScrollRate = (s32)(6 / DT);
     printer->srcBuffer = NULL;
     printer->msgID = 0;
     printer->curPrintDelay = 0;
@@ -2186,7 +2184,7 @@ void msg_draw_choice_pointer(MessagePrintState* printer) {
         posY = printer->windowOffsetPos.y + printer->windowBasePos.y + printer->cursorPosY[printer->selectedOption];
     } else {
         s32 baseX, baseY, targetX, targetY;
-        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / CONST_B;
+        f32 moveToTargetAlpha = (f32)(printer->scrollingTime + 1.0) / CHOICE_POINTER_MOVE_RATE;
 
         baseX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->selectedOption];
         targetX = printer->windowOffsetPos.x + printer->windowBasePos.x + printer->cursorPosX[printer->targetOption];
@@ -4035,7 +4033,7 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
     s32 i;
     s32 frameType;
     s32 textures[16];
-    s32 r, g, b;
+    u8 r, g, b;
     Rect quads[16];
 
     if (sizeX < 16 || sizeY < 16) {
@@ -4059,9 +4057,9 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
         do {} while (0);
         switch (style) {
             case MSG_STYLE_CHOICE:
-                r = ((((u16*)(ui_msg_palettes[0]))[4] >> 11) & 0x1F) * 8;
-                g = ((((u16*)(ui_msg_palettes[0]))[4] >> 6) & 0x1F) * 8;
-                b = ((((u16*)(ui_msg_palettes[0]))[4] >> 1) & 0x1F) * 8;
+                r = UNPACK_PAL_R(((u16*)ui_msg_palettes)[4]) * 8;
+                g = UNPACK_PAL_G(((u16*)ui_msg_palettes)[4]) * 8;
+                b = UNPACK_PAL_B(((u16*)ui_msg_palettes)[4]) * 8;
                 gDPPipeSync(gMainGfxPos++);
                 if (fading != 0 && bgAlpha < 255) {
                     gDPSetRenderMode(gMainGfxPos++, IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));

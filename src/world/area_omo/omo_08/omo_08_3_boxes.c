@@ -409,7 +409,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b1_1)
         EVT_CALL(SetGroupVisibility, MODEL_b1, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_2098, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -431,7 +431,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b2_1)
         EVT_CALL(SetGroupVisibility, MODEL_b2, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_2098, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -453,7 +453,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b3_1)
         EVT_CALL(SetGroupVisibility, MODEL_b3, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_2098, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -475,7 +475,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b4_1)
         EVT_CALL(SetGroupVisibility, MODEL_b4, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_2098, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)

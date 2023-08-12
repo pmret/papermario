@@ -117,8 +117,8 @@ typedef struct Quad {
 } Quad; // size = 0x40
 
 extern Quad spr_defaultQuad;
-extern Vp D_802DF3D0;
-extern Vp D_802DF3E0;
+extern Vp SprPauseVp;
+extern Vp SprPauseVpAlt;
 extern Gfx D_802DF3F0[];
 extern Gfx D_802DF428[];
 extern Gfx D_802DF460[];

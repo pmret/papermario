@@ -332,7 +332,7 @@ EvtScript N(8021BC2C) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0234)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TIMING_BAR_GO)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Blue_Anim09)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Blue_Anim03)

@@ -339,7 +339,7 @@ EvtScript N(EVS_GourmetGuy_RunAround) = {
 };
 
 EvtScript N(EVS_RejectCake) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_2096, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_SPIT_OUT, 0)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_SpitOut)
     EVT_CALL(MakeItemEntity, MV_CakeItemIdx, 105, 30, 20, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_CALL(MakeLerp, 0, 100, 4, EASING_LINEAR)
@@ -519,7 +519,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Eat)
     EVT_LOOP(6)
         EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_2095, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_EAT_OR_DRINK, 0)
     EVT_END_LOOP
     EVT_IF_NE(AB_KKJ_CompletedBakeStep, CAKE_TYPE_DONE)
         EVT_EXEC_WAIT(N(EVS_RejectCake))

@@ -104,7 +104,7 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlaySound, SOUND_208C)
+            EVT_CALL(PlaySound, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)

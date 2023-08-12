@@ -147,12 +147,12 @@ EvtScript N(EVS_Scene_DefeatImposters) = {
     EVT_CALL(InterpNpcYaw, NPC_Duplighost_02, 270, 0)
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Duplighost_01, SOUND_02CB, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Duplighost_01, SOUND_DUPLIGHOST_LEAP, 0)
         EVT_CALL(SetNpcAnimation, NPC_Duplighost_01, ANIM_Duplighost_Anim04)
         EVT_CALL(NpcMoveTo, NPC_Duplighost_01, 0, -70, 45)
         EVT_CALL(SetNpcPos, NPC_Duplighost_01, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Duplighost_02, SOUND_02CB, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Duplighost_02, SOUND_DUPLIGHOST_LEAP, 0)
     EVT_CALL(SetNpcAnimation, NPC_Duplighost_02, ANIM_Duplighost_Anim04)
     EVT_CALL(NpcMoveTo, NPC_Duplighost_02, -30, -70, 45)
     EVT_CALL(SetNpcPos, NPC_Duplighost_02, -30, -1000, 0)

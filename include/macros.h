@@ -47,7 +47,7 @@
 
 #define PTR_LIST_END ((void*) -1)
 
-#define API_CALLABLE(name) ApiStatus name(Evt* script, s32 isInitialCall)
+#define API_CALLABLE(name) ApiStatus name(Evt* script, b32 isInitialCall)
 
 // standardized padding macros for map overlays
 #define MAP_RODATA_PAD(n,name) const s32 N(rodata_pad_##name)[n] = {};
@@ -256,6 +256,13 @@
         } \
     } \
 };
+
+#define UNPACK_PAL_R(color) (((color) >> 11) & 0x1F)
+#define UNPACK_PAL_G(color) (((color) >> 6) & 0x1F)
+#define UNPACK_PAL_B(color) (((color) >> 1) & 0x1F)
+#define UNPACK_PAL_A(color) ((color) & 1)
+
+#define PACK_PAL_RGBA(r, g, b, a) (((r) << 11) | ((g) << 6) | ((b) << 1) | (a));
 
 #define PM_CC_01        0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
 #define PM_CC_02        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0

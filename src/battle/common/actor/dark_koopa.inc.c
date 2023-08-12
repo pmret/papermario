@@ -723,7 +723,7 @@ EvtScript N(attackDizzyTornado) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KoopaTroopa_Dark_ShellSpin)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2026)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DIZZY_SHELL)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 1, ACTOR_DECORATION_WHIRLWIND)
     EVT_WAIT(40)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, 0, BS_FLAGS1_10)

@@ -12,7 +12,7 @@ void star_update(EffectInstance* effect);
 void star_render(EffectInstance* effect);
 void star_appendGfx(void* effect);
 
-EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
+EffectInstance* star_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
     EffectBlueprint bp;
     StarFXData* part;
     EffectInstance* effect;
@@ -45,30 +45,30 @@ EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 
     ASSERT(effect->data.star != NULL);
     part->unk_00 = 1;
-    part->unk_04 = arg1;
-    part->unk_08 = arg2;
-    part->unk_0C = arg3;
+    part->pos.x = posX;
+    part->pos.y = posY;
+    part->pos.z = posZ;
     part->unk_1C = 0;
-    part->unk_24 = 0.0f;
+    part->angle = 0.0f;
     part->unk_28 = 0;
-    part->unk_38 = arg0;
+    part->type = type;
 
-    if (arg0 == 3) {
-        part->unk_240 = 0.2f;
-        part->unk_244 = rand_int(255);
-        part->unk_248 = rand_int(255 - part->unk_244);
-        temp_s0 = 255 - part->unk_248;
-        part->unk_24C = temp_s0 - part->unk_244;
+    if (type == 3) {
+        part->scale = 0.2f;
+        part->primR = rand_int(255);
+        part->primG = rand_int(255 - part->primR);
+        temp_s0 = 255 - part->primG;
+        part->primB = temp_s0 - part->primR;
     } else {
-        part->unk_244 = 210;
-        part->unk_248 = 186;
-        part->unk_24C = 90;
-        part->unk_240 = 0.5f;
+        part->primR = 210;
+        part->primG = 186;
+        part->primB = 90;
+        part->scale = 0.5f;
     }
 
-    temp_f24 = arg4 - arg1;
-    temp_f22 = arg5 - arg2;
-    temp_f20 = arg6 - arg3;
+    temp_f24 = arg4 - posX;
+    temp_f22 = arg5 - posY;
+    temp_f20 = arg6 - posZ;
 
     temp_f26 = SQ(temp_f24) + SQ(temp_f22) + SQ(temp_f20);
     phi_f26 = temp_f26;
@@ -77,33 +77,33 @@ EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
         temp_f26 = arg7 / phi_f26;
     }
 
-    part->unk_10 = temp_f24 * temp_f26;
-    part->unk_14 = temp_f22 * temp_f26;
-    part->unk_18 = temp_f20 * temp_f26;
+    part->vel.x = temp_f24 * temp_f26;
+    part->vel.y = temp_f22 * temp_f26;
+    part->vel.z = temp_f20 * temp_f26;
 
     currentYaw = gCameras[gCurrentCameraID].curYaw;
     cosYaw = -cos_deg(currentYaw);
     sinYaw = -sin_deg(currentYaw);
 
-    temp_f4 = cosYaw * part->unk_10;
-    temp_f2 = sinYaw * part->unk_18;
+    temp_f4 = cosYaw * part->vel.x;
+    temp_f2 = sinYaw * part->vel.z;
     temp_f12 = SQ(temp_f4) + SQ(temp_f2);
 
     if (temp_f12 != 0.0f) {
         temp_f12 = sqrtf(temp_f12);
     }
 
-    if ((cosYaw * part->unk_10) + (sinYaw * part->unk_18) < 0.0f) {
+    if ((cosYaw * part->vel.x) + (sinYaw * part->vel.z) < 0.0f) {
         temp_f12 = -temp_f12;
         part->unk_2C = -20.0f;
     } else {
         part->unk_2C = 20.0f;
     }
 
-    part->unk_20 = part->unk_24 = atan2(0.0f, 0.0f, -part->unk_14, -temp_f12);
+    part->unk_20 = part->angle = atan2(0.0f, 0.0f, -part->vel.y, -temp_f12);
     part->unk_30 = phi_f26 / arg7;
     part->unk_34 = -temp_f12;
-    guTranslate(part->unk_40, part->unk_04, part->unk_08, part->unk_0C);
+    guTranslate(part->unk_40, part->pos.x, part->pos.y, part->pos.z);
 
     for (i = 1; i < ARRAY_COUNT(part->unk_40); i++) {
         part->unk_40[i] = part->unk_40[0];
@@ -124,35 +124,35 @@ void star_update(EffectInstance* effect) {
     f32 x, y, z, length;
     f32 xTemp, yTemp, zTemp;
 
-    if (data->unk_38 >= 2) {
-        length = SQ(data->unk_10) + SQ(data->unk_14) + SQ(data->unk_18);
+    if (data->type >= 2) {
+        length = SQ(data->vel.x) + SQ(data->vel.y) + SQ(data->vel.z);
         if (length > 0.01f) {
             length = 1.0f / sqrtf(length);
         }
 
-        xTemp = data->unk_10 * length * 32.0f;
-        yTemp = data->unk_14 * length * 32.0f;
-        zTemp = data->unk_18 * length * 32.0f;
-        x = data->unk_04 - xTemp;
-        y = data->unk_08 - yTemp;
-        z = data->unk_0C - zTemp;
+        xTemp = data->vel.x * length * 32.0f;
+        yTemp = data->vel.y * length * 32.0f;
+        zTemp = data->vel.z * length * 32.0f;
+        x = data->pos.x - xTemp;
+        y = data->pos.y - yTemp;
+        z = data->pos.z - zTemp;
         length = 64.0f;
 
         if (data->unk_00 != 0 &&
-            data->unk_14 < 0.0f &&
+            data->vel.y < 0.0f &&
             npc_raycast_down_sides(0, &x, &y, &z, &length) != 0 &&
             length < 42.0f)
         {
             data->unk_1C = data->unk_1C + 1.0f;
-            data->unk_14 = -data->unk_14 * 0.6;
-            data->unk_10 = data->unk_10 * 0.7;
+            data->vel.y = -data->vel.y * 0.6;
+            data->vel.x = data->vel.x * 0.7;
             data->unk_34 = data->unk_34 * 0.7;
             data->unk_2C = data->unk_2C * 0.7;
             load_effect(EFFECT_LANDING_DUST);
-            landing_dust_main(0, data->unk_04, data->unk_08 - 5.0f, data->unk_0C, 0.0f);
+            landing_dust_main(0, data->pos.x, data->pos.y - 5.0f, data->pos.z, 0.0f);
 
             if (!gGameStatusPtr->isBattle) {
-                sfx_play_sound_at_position(SOUND_SEQ_16, SOUND_SPACE_MODE_0, data->unk_04, data->unk_08, data->unk_0C);
+                sfx_play_sound_at_position(SOUND_SEQ_16, SOUND_SPACE_MODE_0, data->pos.x, data->pos.y, data->pos.z);
             }
 
             data->unk_00 = 0;
@@ -162,19 +162,19 @@ void star_update(EffectInstance* effect) {
         }
 
         if (data->unk_1C != 0.0f) {
-            data->unk_14 += -0.5;
-            data->unk_24 += data->unk_2C;
-            data->unk_20 = atan2(0.0f, 0.0f, -data->unk_14, data->unk_34);
+            data->vel.y += -0.5;
+            data->angle += data->unk_2C;
+            data->unk_20 = atan2(0.0f, 0.0f, -data->vel.y, data->unk_34);
         }
     }
 
-    if (playerStatus->pos.y - data->unk_08 > 300.0f) {
+    if (playerStatus->pos.y - data->pos.y > 300.0f) {
         data->unk_30 = -1;
     }
 
-    data->unk_04 += data->unk_10;
-    data->unk_08 += data->unk_14;
-    data->unk_0C += data->unk_18;
+    data->pos.x += data->vel.x;
+    data->pos.y += data->vel.y;
+    data->pos.z += data->vel.z;
 
     if (data->unk_30 < 0) {
         remove_effect(effect);
@@ -191,7 +191,7 @@ void star_render(EffectInstance* effect) {
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = star_appendGfx;
     renderTask.dist = 0;
-    if (effect15->unk_38 != 0) {
+    if (effect15->type != 0) {
         renderModeTemp = RENDER_MODE_2D;
     } else {
         renderModeTemp = RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0;
@@ -203,11 +203,11 @@ void star_render(EffectInstance* effect) {
 
 void star_appendGfx(void* effect) {
     StarFXData* data = ((EffectInstance*)effect)->data.star;
-    f32 unk_240 = data->unk_240;
-    s32 unk_38 = data->unk_38;
-    s32 unk_244 = data->unk_244;
-    s32 unk_248 = data->unk_248;
-    s32 unk_24C = data->unk_24C;
+    f32 scale = data->scale;
+    s32 type = data->type;
+    s32 primR = data->primR;
+    s32 primG = data->primG;
+    s32 primB = data->primB;
     s32 idx;
     Matrix4f sp20;
     Matrix4f sp60;
@@ -216,20 +216,20 @@ void star_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
-    guRotateF(sp60, data->unk_24, 0.0f, 0.0f, 1.0f);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, scale, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp60, data->angle, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp60, sp20, sp20);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMainGfxPos++, 0, 80, unk_244, unk_248, unk_24C, 255);
+    gDPSetPrimColor(gMainGfxPos++, 0, 80, primR, primG, primB, 255);
     gDPSetEnvColor(gMainGfxPos++, 127, 127, 127, 127);
 
-    gSPDisplayList(gMainGfxPos++, (data->unk_38 >= 2) ? D_09001650_333CF0 : D_09001530_333BD0);
+    gSPDisplayList(gMainGfxPos++, (data->type >= 2) ? D_09001650_333CF0 : D_09001530_333BD0);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMainGfxPos++);
 
-    if (unk_38 == 3) {
+    if (type == 3) {
         gSPDisplayList(gMainGfxPos++, D_090017D0_333E70);
     } else {
         gSPDisplayList(gMainGfxPos++, D_09001780_333E20);
@@ -242,8 +242,7 @@ void star_appendGfx(void* effect) {
 
     if (data->unk_1C <= 1.0f) {
         s32 baseIdx = (data->unk_3C + 5) % 8;
-
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, scale, data->pos.x, data->pos.y, data->pos.z);
         guRotateF(sp60, data->unk_20, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp60, sp20, sp20);
         guMtxF2L(sp20, &data->unk_40[data->unk_3C]);

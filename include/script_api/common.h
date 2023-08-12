@@ -4,8 +4,8 @@
 #include "common_structs.h"
 #include "macros.h"
 
-ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall);
-ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall);
+ApiStatus FadeBackgroundDarken(Evt* script, s32 isInitialCall);
+ApiStatus FadeBackgroundLighten(Evt* script, s32 isInitialCall);
 ApiStatus GetCamLookAtObjVector(Evt* script, s32 isInitialCall);
 ApiStatus HasMerleeCasts(Evt* script, s32 isInitialCall);
 ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall);
@@ -331,7 +331,7 @@ ApiStatus SetPlayerImgFXFlags(Evt* script, s32 isInitialCall);
 ApiStatus UpdatePlayerImgFX(Evt* script, s32 isInitialCall);
 ApiStatus PushSong(Evt* script, s32 isInitialCall);
 ApiStatus PopSong(Evt* script, s32 isInitialCall);
-ApiStatus func_802D62E4(Evt* script, s32 isInitialCall);
+ApiStatus StopTrackingSoundPos(Evt* script, s32 isInitialCall);
 ApiStatus func_80044238(Evt* script, s32 isInitialCall);
 ApiStatus MakeLocalVertexCopy(Evt* script, s32 isInitialCall);
 ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall);

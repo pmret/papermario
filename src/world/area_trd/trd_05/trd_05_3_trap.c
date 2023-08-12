@@ -293,7 +293,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
     EVT_CALL(EnableModel, MODEL_o95, TRUE)
     EVT_CALL(EnableModel, MODEL_o96, TRUE)
     EVT_CALL(SetGroupVisibility, MODEL_kesu, MODEL_GROUP_VISIBLE)
-    EVT_CALL(PlaySound, SOUND_2091)
+    EVT_CALL(PlaySound, SOUND_OPEN_TRAPDOOR)
     EVT_CALL(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)

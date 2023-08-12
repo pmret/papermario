@@ -338,7 +338,7 @@ API_CALLABLE(BattleMerleeFadeStageToBlack) {
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 0xFE);
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
@@ -1001,13 +1001,13 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Idle)
             EVT_EXEC_WAIT(EVS_Player_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Crouch)
             EVT_EXEC_WAIT(EVS_Player_NoDamageHit)
@@ -1331,7 +1331,7 @@ EvtScript D_80287404 = {
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 18)
@@ -1352,7 +1352,7 @@ EvtScript D_80287404 = {
         EVT_CALL(RemoveItemEntity, LVarA)
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         EVT_WAIT(4)
         EVT_ADD(LVar1, 45)
@@ -1405,7 +1405,7 @@ EvtScript D_80287834 = {
 EvtScript EVS_PlayEatFX = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1418,7 +1418,7 @@ EvtScript EVS_PlayEatFX = {
 EvtScript EVS_PlayDrinkFX = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -1485,7 +1485,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_LOOP
     EVT_CALL(RemoveEffect, LVar0)
     EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2055)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_START_RECOVERY)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0373)

@@ -121,7 +121,7 @@ void action_update_parasol(void) {
             if (playerStatus->flipYaw[CAM_DEFAULT] == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_allow_backward(ANIM_Peach2_UseParasol);
-                    sfx_play_sound_at_player(SOUND_0092, SOUND_SPACE_MODE_0);
+                    sfx_play_sound_at_player(SOUND_USE_SNEAKY_PARASOL, SOUND_SPACE_MODE_0);
                     playerStatus->actionSubstate++; // SUBSTATE_USE_PARASOL
                 } else {
                     suggest_player_anim_allow_backward(ANIM_Peach2_CantFitParasol);

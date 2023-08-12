@@ -274,7 +274,7 @@ void action_command_init_status(void) {
         }
     }
 
-    if (gGameStatusPtr->demoFlags & 1) {
+    if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
         actionCommandStatus->autoSucceed = TRUE;
     }
 
@@ -553,7 +553,7 @@ s32 check_block_input(s32 buttonMask) {
         return TRUE;
     }
 
-    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED || (gGameStatusPtr->demoFlags & 1)) {
+    if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
         return FALSE;
     }
 

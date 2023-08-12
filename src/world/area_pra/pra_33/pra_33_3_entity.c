@@ -39,7 +39,7 @@ EvtScript N(EVS_ActivateSwitch) = {
     EVT_ELSE
         EVT_SET(MV_WallFlipped, FALSE)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1063, SOUND_002E, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1063, SOUND_PRA_FLIP_WALL, SOUND_SPACE_MODE_0)
     EVT_CALL(N(CheckPlayerOnDais))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(N(GetDaisRelativePlayerPos))

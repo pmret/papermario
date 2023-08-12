@@ -606,7 +606,7 @@ EvtScript N(EVS_DamageMachine) = {
             EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, 0, 30, 30, EVT_FLOAT(4.0), 40)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
             EVT_EXEC_WAIT(N(EVS_BreakSmokestack))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_0091 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o126, SOUND_LRAW_PUFF_PUFF_MACHINE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0)
             EVT_CALL(FadeOutMusic, 0, 1000)
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_WAIT(30)

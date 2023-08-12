@@ -116,7 +116,7 @@ extern s32 gCurrentDisplayContextIndex;
 
 extern s16 gCurrentCamID;
 
-extern s32 D_8029C890[10][5];
+extern s32 PartnerWishAnims[][5];
 
 extern HeapNode heap_battleHead;
 

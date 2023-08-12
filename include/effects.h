@@ -181,26 +181,22 @@ typedef struct SnowflakeFXData {
 
 typedef struct StarFXData {
     /* 0x000 */ s32 unk_00;
-    /* 0x004 */ f32 unk_04;
-    /* 0x008 */ f32 unk_08;
-    /* 0x00C */ f32 unk_0C;
-    /* 0x010 */ f32 unk_10;
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
+    /* 0x004 */ Vec3f pos;
+    /* 0x010 */ Vec3f vel;
     /* 0x01C */ f32 unk_1C;
     /* 0x020 */ f32 unk_20;
-    /* 0x024 */ f32 unk_24;
+    /* 0x024 */ f32 angle;
     /* 0x028 */ s32 unk_28;
     /* 0x02C */ f32 unk_2C;
     /* 0x030 */ s32 unk_30;
     /* 0x034 */ f32 unk_34;
-    /* 0x038 */ s32 unk_38;
+    /* 0x038 */ s32 type;
     /* 0x03C */ s32 unk_3C;
     /* 0x040 */ Mtx unk_40[8];
-    /* 0x240 */ f32 unk_240;
-    /* 0x244 */ s32 unk_244;
-    /* 0x248 */ s32 unk_248;
-    /* 0x24C */ s32 unk_24C;
+    /* 0x240 */ f32 scale;
+    /* 0x244 */ s32 primR;
+    /* 0x248 */ s32 primG;
+    /* 0x24C */ s32 primB;
 } StarFXData; // size = 0x250
 
 typedef struct EmoteFXData {
@@ -572,17 +568,17 @@ typedef struct ShockwaveFXData {
 } ShockwaveFXData; // size = 0x58
 
 typedef struct MusicNoteFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x10 */ f32 scale;
+    /* 0x14 */ s32 alpha;
     /* 0x18 */ s32 timeLeft;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
+    /* 0x1C */ s32 lifetime;
+    /* 0x20 */ s32 noteType;
+    /* 0x24 */ f32 velX;
+    /* 0x28 */ f32 velY;
+    /* 0x2C */ f32 finalVelX;
+    /* 0x30 */ f32 finalVelY;
 } MusicNoteFXData; // size = 0x34
 
 typedef struct SmokeBurstFXData {
@@ -1077,22 +1073,18 @@ typedef struct FireFlowerFXData {
 } FireFlowerFXData; // size = 0x4C
 
 typedef struct RecoverFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f vel;
+    /* 0x1C */ f32 angle;
     /* 0x20 */ s32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
+    /* 0x24 */ f32 offsetX;
+    /* 0x28 */ s32 alpha;
+    /* 0x2C */ s32 timeLeft;
+    /* 0x30 */ s32 lifetime;
     /* 0x34 */ s32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
+    /* 0x38 */ f32 scaleX;
+    /* 0x3C */ f32 scaleY;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
 } RecoverFXData; // size = 0x48

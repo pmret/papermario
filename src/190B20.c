@@ -1219,7 +1219,7 @@ void load_player_actor(void) {
     player->actorBlueprint = &bPlayerActorBlueprint;
     player->actorType = bPlayerActorBlueprint.type;
 
-    if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
+    if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_PARTNER_ACTING)) {
         player->homePos.x = player->curPos.x = -130.0f;
         player->homePos.y = player->curPos.y = 0.0f;
         player->homePos.z = player->curPos.z = -10.0f;
@@ -1281,7 +1281,7 @@ void load_player_actor(void) {
     player->koDuration = 0;
     player->transparentStatus = 0;
     player->transparentDuration = 0;
-    player->isGlowing = 0;
+    player->isGlowing = FALSE;
     player->unk_21E = 0;
     player->disableDismissTimer = 0;
     player->attackBoost = 0;
@@ -1440,7 +1440,7 @@ void load_partner_actor(void) {
         ASSERT(actorBP != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
-        if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoFlags & 2)) {
+        if ((gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) || (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_PARTNER_ACTING)) {
             x = -95.0f;
             y = partnerData->y;
             z = 0.0f;
@@ -1520,7 +1520,7 @@ void load_partner_actor(void) {
         partnerActor->koDuration = 0;
         partnerActor->transparentStatus = 0;
         partnerActor->transparentDuration = 0;
-        partnerActor->isGlowing = 0;
+        partnerActor->isGlowing = FALSE;
         partnerActor->unk_21E = 0;
         partnerActor->disableDismissTimer = 0;
         partnerActor->attackBoost = 0;
@@ -1772,7 +1772,7 @@ Actor* create_actor(Formation formation) {
     actor->koDuration = 0;
     actor->transparentStatus = 0;
     actor->transparentDuration = 0;
-    actor->isGlowing = 0;
+    actor->isGlowing = FALSE;
     actor->unk_21E = 0;
     actor->disableDismissTimer = 0;
     actor->attackBoost = 0;
@@ -2861,7 +2861,7 @@ void remove_player_buffs(s32 buffs) {
     if (buffs & PLAYER_BUFF_TRANSPARENT && (player->transparentStatus != 0)) {
         player->transparentDuration = 0;
         player->transparentStatus = 0;
-        playerActorParts->flags &= ~ACTOR_PART_FLAG_100;
+        playerActorParts->flags &= ~ACTOR_PART_FLAG_TRANSPARENT;
         remove_status_transparent(player->hudElementDataIndex);
     }
     if (buffs & PLAYER_BUFF_WATER_BLOCK && (battleStatus->waterBlockTurnsLeft != 0)) {
@@ -2875,7 +2875,7 @@ void remove_player_buffs(s32 buffs) {
         fx_water_splash(1, player->curPos.x + 15.0f, player->curPos.y + 22.0f, player->curPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->waterBlockEffect = NULL;
-        sfx_play_sound(SOUND_0299);
+        sfx_play_sound(SOUND_DESTROY_WATER_BLOCK);
     }
     if (buffs & PLAYER_BUFF_TURBO_CHARGE && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;

@@ -25,7 +25,7 @@ EvtScript N(EVS_PushStatue_Impl) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o160, SOUND_LOOP_10, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o160, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 100, EVT_FLOAT(0.6))
     EVT_END_THREAD
@@ -72,7 +72,7 @@ EvtScript N(EVS_PushStatue_Impl) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LOOP_10)
+    EVT_CALL(StopSound, SOUND_LOOP_MOVE_STATUE)
     EVT_RETURN
     EVT_END
 };

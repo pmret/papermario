@@ -145,7 +145,7 @@ EvtScript N(8022A750) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0263)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 30)
-            EVT_CALL(ShowEmote, 0x00000000, EMOTE_QUESTION, -45, 30, EMOTER_POS, LVar0, LVar1, LVar2, 5)
+            EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 30, EMOTER_POS, LVar0, LVar1, LVar2, 5)
             EVT_WAIT(30)
         EVT_END_IF
     EVT_END_IF
@@ -396,8 +396,8 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_NO_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(6)
-        EVT_CASE_OR_EQ(5)
+        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
+        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST2)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
             EVT_SUB(LVar3, 120)

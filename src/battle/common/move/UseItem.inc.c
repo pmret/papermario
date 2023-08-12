@@ -6,7 +6,7 @@ EvtScript N(UseItemWithEffect) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 18)
@@ -27,7 +27,7 @@ EvtScript N(UseItemWithEffect) = {
         EVT_CALL(RemoveItemEntity, LVarA)
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
         EVT_WAIT(4)
         EVT_ADD(LVar1, 45)
@@ -80,7 +80,7 @@ EvtScript N(PlayerGoHome) = {
 EvtScript N(EatItem) = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -93,7 +93,7 @@ EvtScript N(EatItem) = {
 EvtScript N(DrinkItem) = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
             EVT_WAIT(10)
         EVT_END_LOOP
     EVT_END_THREAD

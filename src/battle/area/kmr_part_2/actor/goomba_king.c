@@ -414,8 +414,8 @@ EvtScript N(80221680) = {
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(6)
-        EVT_CASE_OR_EQ(5)
+        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
+        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0x80000000, 0, 0, 0)
             EVT_END_IF
@@ -493,8 +493,8 @@ EvtScript N(80221CD4) = {
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(6)
-        EVT_CASE_OR_EQ(5)
+        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
+        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_THREAD
                 EVT_WAIT(12)
                 EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY3, PRT_TREE_3, SOUND_0301)

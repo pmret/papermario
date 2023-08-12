@@ -110,7 +110,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.5))
     EVT_CALL(NpcJump0, NPC_SELF, -165, -90, 50, 20 * DT)
     EVT_WAIT(30 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0074, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_JR_TROOPA_SCAMPER, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ScamperBack)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
     EVT_THREAD

@@ -233,7 +233,7 @@ ApiStatus StopSound(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D62E4(Evt* script, s32 isInitialCall) {
+ApiStatus StopTrackingSoundPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 

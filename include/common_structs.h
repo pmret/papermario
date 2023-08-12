@@ -24,6 +24,7 @@ typedef void NoArgCallback(void*);
 #define PAL_BIN u16
 
 typedef s32 b32;
+typedef s16 b16;
 typedef s8 b8;
 
 typedef s32 HitID;
@@ -184,7 +185,7 @@ typedef struct NpcQuizmoBlur {
 } NpcQuizmoBlur; // size = 0x8;
 
 typedef struct NpcHistoryPoint {
-    /* 0x00 */ s8 isAirborne;
+    /* 0x00 */ b8 isAirborne;
     /* 0x01 */ char unk_01[0x3];
     /* 0x04 */ Vec3f pos;
 } NpcHistoryPoint; // size = 0x10
@@ -245,7 +246,7 @@ typedef struct Npc {
     /* 0x080 */ s32 collisionChannel; /* flags used with collision tracing */
     /* 0x084 */ s16 curFloor; /* colliderID */
     /* 0x086 */ s16 curWall; /* colliderID */
-    /* 0x088 */ s16 isFacingAway;
+    /* 0x088 */ b16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 turnAroundYawAdjustment;
     /* 0x08E */ s16 duration; // TODO: name less vaguely
@@ -760,7 +761,7 @@ typedef struct Camera {
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 updateMode;
     /* 0x006 */ s16 needsInit;
-    /* 0x008 */ s16 isChangingMap;
+    /* 0x008 */ b16 isChangingMap;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -881,9 +882,9 @@ typedef struct BattleStatus {
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 actionCommandMode;
-    /* 0x084 */ s8 actionResult;
+    /* 0x084 */ s8 actionResult; // actionResultAmount?
     /* 0x085 */ s8 unk_85;
-    /* 0x086 */ s8 unk_86;
+    /* 0x086 */ s8 unk_86; // actionResult?
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
     /* 0x089 */ s8 hpDrainCount;
@@ -1198,7 +1199,7 @@ typedef struct MessagePrintState {
     /* 0x45E */ u8 printDelayTime; // delay to print each chunk
     /* 0x45F */ u8 charsPerChunk; // how many chars to print at once
     /* 0x460 */ s32 curLinePos; // position along current line
-    /* 0x464 */ u8 unk_464;
+    /* 0x464 */ u8 windowScrollRate;
     /* 0x465 */ char unk_465;
     /* 0x466 */ u16 nextLinePos; // ?
     /* 0x468 */ u8 lineCount;
@@ -1416,8 +1417,7 @@ typedef struct GameStatus {
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
     /* 0x081 */ s8 multiplayerEnabled;
-    /* 0x082 */ s8 unk_82;
-    /* 0x083 */ s8 unk_83;
+    /* 0x082 */ Vec2b unk_82;
     /* 0x084 */ s8 playerSpriteSet;
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;
@@ -1432,7 +1432,7 @@ typedef struct GameStatus {
     /* 0x0A4 */ f32 playerYaw;
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9; // selected language?
-    /* 0x0AA */ s8 demoFlags;
+    /* 0x0AA */ s8 demoBattleFlags;
     /* 0x0AB */ u8 soundOutputMode;
     /* 0x0AC */ s8 introState;
     /* 0x0AD */ s8 introCounter;
@@ -1716,7 +1716,7 @@ typedef struct DecorationTable {
 } DecorationTable; // size = 0x8E8
 
 typedef struct PlayerPathElement {
-    /* 0x00 */ s8 isJumping;
+    /* 0x00 */ b8 isJumping;
     /* 0x03 */ char unk_01[3];
     /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
@@ -1905,7 +1905,7 @@ typedef struct Actor {
     /* 0x21C */ s8 statusAfflicted;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
-    /* 0x220 */ s8 isGlowing; // also used for goombario charge amount
+    /* 0x220 */ b8 isGlowing; // also used for goombario charge amount
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ s8 chillOutAmount; /* attack reduction */

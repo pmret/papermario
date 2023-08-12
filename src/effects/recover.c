@@ -41,7 +41,7 @@ void recover_render(EffectInstance* effect);
 void func_E008042C(EffectInstance* effect);
 void func_E0080448(EffectInstance* effect);
 
-EffectInstance* recover_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
+EffectInstance* recover_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) {
     EffectBlueprint bp;
     EffectInstance* effect;
     RecoverFXData* part;
@@ -60,45 +60,45 @@ EffectInstance* recover_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     part = effect->data.recover = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.recover != NULL);
 
-    part->unk_00 = arg0;
-    part->unk_04 = arg1;
-    part->unk_08 = arg2;
-    part->unk_0C = arg3;
-    part->unk_2C = 46;
-    part->unk_30 = 0;
-    if (arg4 < 0) {
+    part->type = type;
+    part->pos.x = posX;
+    part->pos.y = posY;
+    part->pos.z = posZ;
+    part->timeLeft = 46;
+    part->lifetime = 0;
+    if (duration < 0) {
         part->unk_44 = 1;
-        arg4 = -arg4;
+        duration = -duration;
     } else {
         part->unk_44 = 0;
     }
-    part->unk_40 = arg4;
+    part->unk_40 = duration;
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-        part->unk_04 = 0.0f;
-        part->unk_08 = 0;
-        part->unk_0C = 0;
-        part->unk_24 = 0;
-        part->unk_10 = 0;
-        part->unk_18 = 0;
+        part->pos.x = 0.0f;
+        part->pos.y = 0.0f;
+        part->pos.z = 0.0f;
+        part->offsetX = 0;
+        part->vel.x = 0;
+        part->vel.z = 0;
         part->unk_20 = 0;
-        part->unk_1C = 0;
+        part->angle = 0;
         if (i == 1) {
-            part->unk_04 = 0.0f;
+            part->pos.x = 0.0f;
             part->unk_34 = 0;
-            part->unk_38 = 0;
-            part->unk_3C = 0;
-            part->unk_14 = 1.4f;
+            part->scaleX = 0.0f;;
+            part->scaleY = 0.0f;;
+            part->vel.y = 1.4f;
         } else {
-            part->unk_14 = 1.4f;
+            part->vel.y = 1.4f;
             part->unk_34 = i + 10;
-            part->unk_38 = 0;
-            part->unk_3C = 0;
-            part->unk_04 = ((i & 1) * 2 - 1) * ((i - 1) >> 1) * 4;
+            part->scaleX = 0.0f;;
+            part->scaleY = 0.0f;;
+            part->pos.x = ((i & 1) * 2 - 1) * ((i - 1) >> 1) * 4;
         }
-        part->unk_2C = 0;
-        part->unk_28 = 255;
+        part->timeLeft = 0;
+        part->alpha = 255;
     }
 
     return effect;
@@ -109,49 +109,49 @@ void recover_init(EffectInstance* effect) {
 
 void recover_update(EffectInstance* effect) {
     RecoverFXData* part = effect->data.recover;
-    s32 unk_2C;
+    s32 time;
     s32 i;
 
-    part->unk_2C--;
-    part->unk_30++;
+    part->timeLeft--;
+    part->lifetime++;
 
-    if (part->unk_2C < 0) {
+    if (part->timeLeft < 0) {
         remove_effect(effect);
         return;
     }
 
-    unk_2C = part->unk_2C;
+    time = part->timeLeft;
 
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {
-        s32 unk_2C_2 = part->unk_2C;
+        s32 unk_2C_2 = part->timeLeft;
 
         if (part->unk_34 <= 0 || --part->unk_34 <= 0) {
             if (unk_2C_2 >= 7) {
-                part->unk_3C = 1.0f;
-                part->unk_38 = 1.0f;
+                part->scaleY = 1.0f;
+                part->scaleX = 1.0f;
             } else {
-                part->unk_38 = D_E0080AF0[unk_2C_2];
-                part->unk_3C = D_E0080B0C[unk_2C_2];
+                part->scaleX = D_E0080AF0[unk_2C_2];
+                part->scaleY = D_E0080B0C[unk_2C_2];
             }
 
-            part->unk_04 += part->unk_10;
-            part->unk_08 += part->unk_14;
-            part->unk_0C += part->unk_18;
-            part->unk_1C = sin_deg(i * 38 + unk_2C * 12) * -30.0f;
-            part->unk_24 = cos_deg(i * 38 + unk_2C * 12) * 8.0f;
+            part->pos.x += part->vel.x;
+            part->pos.y += part->vel.y;
+            part->pos.z += part->vel.z;
+            part->angle = sin_deg(i * 38 + time * 12) * -30.0f;
+            part->offsetX = cos_deg(i * 38 + time * 12) * 8.0f;
 
-            if (unk_2C < 20) {
-                part->unk_24 *= (f32) unk_2C * 0.05;
-                part->unk_1C *= (f32) unk_2C * 0.05;
+            if (time < 20) {
+                part->offsetX *= (f32) time * 0.05;
+                part->angle *= (f32) time * 0.05;
             }
 
-            if (unk_2C < 10) {
-                part->unk_28 = unk_2C * 25;
-                part->unk_14 *= 0.9;
+            if (time < 10) {
+                part->alpha = time * 25;
+                part->vel.y *= 0.9;
             }
 
-            part->unk_2C++;
+            part->timeLeft++;
         }
     }
 }
@@ -166,7 +166,7 @@ void func_E008042C(EffectInstance* effect) {
 void func_E0080448(EffectInstance* effect) {
     RecoverFXData* part = ((EffectInstance*)effect)->data.recover;
     s32 i;
-    s32 unk_00;
+    s32 type;
     s32 unk_40;
     s32 unk_44 = part->unk_44;
     Matrix4f sp18;
@@ -176,22 +176,22 @@ void func_E0080448(EffectInstance* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
     guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    unk_00 = part->unk_00;
+    type = part->type;
     unk_40 = part->unk_40;
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         if (part->unk_34 <= 0) {
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, part->unk_28);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, part->alpha);
 
-            if (part->unk_28 == 255) {
+            if (part->alpha == 255) {
                 gDPSetRenderMode(gMainGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
                 gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
             } else {
@@ -199,38 +199,38 @@ void func_E0080448(EffectInstance* effect) {
                 gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0);
             }
 
-            gSPDisplayList(gMainGfxPos++, (unk_00 == 0 || unk_00 == 2) ?
+            gSPDisplayList(gMainGfxPos++, (type == 0 || type == 2) ?
                 (unk_44 == 0 ? D_09003200_385000 : D_09003298_385098) :
                 D_09003330_385130);
 
-            guTranslateF(sp18, part->unk_04 + part->unk_24, part->unk_08, part->unk_0C);
-            guScaleF(sp58, part->unk_38, part->unk_3C, 1.0f);
+            guTranslateF(sp18, part->pos.x + part->offsetX, part->pos.y, part->pos.z);
+            guScaleF(sp58, part->scaleX, part->scaleY, 1.0f);
             guMtxCatF(sp58, sp18, sp18);
             guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-            guRotateF(sp18, part->unk_1C, 0.0f, 0.0f, 1.0f);
+            guRotateF(sp18, part->angle, 0.0f, 0.0f, 1.0f);
             guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-            if (i == 1 && unk_00 != 2) {
+            if (i == 1 && type != 2) {
                 gSPDisplayList(gMainGfxPos++, D_090033D0_3851D0);
                 gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
                 gSPDisplayList(gMainGfxPos++, D_090034D0_3852D0);
 
-                if (unk_40 < 0xA && unk_44 == 0) {
+                if (unk_40 < 10 && unk_44 == 0) {
                     gSPDisplayList(gMainGfxPos++, D_E0080AC0[unk_40]);
-                    gSPDisplayList(gMainGfxPos++, unk_00 == 0 ? D_09003410_385210 : D_09003470_385270);
+                    gSPDisplayList(gMainGfxPos++, type == 0 ? D_09003410_385210 : D_09003470_385270);
                 } else {
                     s32 ones = unk_40 % 10;
                     s32 tens = unk_44 == 0 ? (unk_40 / 10) : 10;
 
                     gSPDisplayList(gMainGfxPos++, D_E0080AC0[ones]);
-                    gSPDisplayList(gMainGfxPos++, unk_00 == 0 ? D_09003450_385250 : D_090034B0_3852B0);
+                    gSPDisplayList(gMainGfxPos++, type == 0 ? D_09003450_385250 : D_090034B0_3852B0);
                     gSPDisplayList(gMainGfxPos++, D_E0080AC0[tens]);
-                    gSPDisplayList(gMainGfxPos++, unk_00 == 0 ? D_09003430_385230 : D_09003490_385290);
+                    gSPDisplayList(gMainGfxPos++, type == 0 ? D_09003430_385230 : D_09003490_385290);
                 }
             } else {
                 gSPDisplayList(gMainGfxPos++, D_090033F0_3851F0);

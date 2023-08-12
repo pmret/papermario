@@ -257,7 +257,7 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
@@ -296,7 +296,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Partner_Recover)
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Block)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
@@ -1209,8 +1209,8 @@ EvtScript N(fanSmack) = {
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_END_THREAD
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
             EVT_EXEC_WAIT(N(returnHome))

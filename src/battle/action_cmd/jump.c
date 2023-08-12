@@ -187,7 +187,7 @@ void N(update)(void) {
 
 void N(draw)(void) {
     hud_element_draw_clipped(gActionCommandStatus.hudElements[0]);
-    if (!(gGameStatusPtr->demoFlags & 1)) {
+    if (!(gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED)) {
         hud_element_draw_clipped(gActionCommandStatus.hudElements[1]);
     }
 }

@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_SELF, 0, 25, -10, 6 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2086, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SPRING, SOUND_SPACE_MODE_0)
     EVT_CALL(N(PlaySpringAnimation))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))

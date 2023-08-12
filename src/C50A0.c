@@ -1654,7 +1654,7 @@ void render_item_entities(void) {
                                 alpha = alpha * (255 - a1) / 255;
                             }
                             if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_HIDING)) {
-                                if (gSpriteShadingProfile->flags) {
+                                if (gSpriteShadingProfile->flags != 0) {
                                     gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                                         AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
                                 } else {
@@ -1668,7 +1668,7 @@ void render_item_entities(void) {
 
                         if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
                             gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
-                            if (gSpriteShadingProfile->flags) {
+                            if (gSpriteShadingProfile->flags != 0) {
                                 gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
                                 gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
                                 gDPLoadSync(gMainGfxPos++);
@@ -2371,9 +2371,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                         item->flags |= ITEM_ENTITY_FLAG_DONE_FALLING;
                     } else {
                         if (IS_BADGE(item->itemID)) {
-                            sfx_play_sound_at_position(SOUND_021B, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
+                            sfx_play_sound_at_position(SOUND_BADGE_BOUNCE, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                         } else if (IS_ITEM(item->itemID)) {
-                            sfx_play_sound_at_position(SOUND_021A, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
+                            sfx_play_sound_at_position(SOUND_ITEM_BOUNCE, SOUND_SPACE_MODE_0, item->pos.x, item->pos.y, item->pos.z);
                         } else {
                             switch (item->itemID) {
                                 case ITEM_HEART:

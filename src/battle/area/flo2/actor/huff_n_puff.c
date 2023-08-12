@@ -807,7 +807,7 @@ EvtScript N(OnDeath) = {
             EVT_KILL_THREAD(LVar0)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT_SNAKING_STATIC), LVar0)
             EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(StopSound, SOUND_035C)
+            EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim08)
@@ -909,7 +909,7 @@ EvtScript N(OnBurnDeath) = {
             EVT_KILL_THREAD(LVar0)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT_SNAKING_STATIC), LVar0)
             EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(StopSound, SOUND_035C)
+            EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_HuffNPuff_Anim27)
@@ -2228,7 +2228,7 @@ EvtScript N(electricCharge) = {
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_2, EVT_PTR(N(IdleAnimations_charged2)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_3, EVT_PTR(N(IdleAnimations_charged3)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(N(StartRumbleWithParams), 70, 120)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 60, EVT_FLOAT(0.3))
@@ -2295,7 +2295,7 @@ EvtScript N(attackGroundLightning) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(StopSound, SOUND_035C)
+    EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03D3)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 10)
@@ -2372,7 +2372,7 @@ EvtScript N(electicCharge_copy) = {
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_2, EVT_PTR(N(IdleAnimations_charged2)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_3, EVT_PTR(N(IdleAnimations_charged3)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(N(StartRumbleWithParams), 70, 120)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 60, EVT_FLOAT(0.3))
@@ -2459,7 +2459,7 @@ EvtScript N(attackDirectLightning) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(StopSound, SOUND_035C)
+    EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035B)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -2576,8 +2576,8 @@ EvtScript N(attackDirectLightning) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_WAIT(30)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
@@ -5180,9 +5180,9 @@ EvtScript N(attackTuffPuffs) = {
         EVT_CALL(func_80269470)
     EVT_END_IF
     EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(1)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_1)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TUFF_PUFF_BIT_ARRAY), LVar0)

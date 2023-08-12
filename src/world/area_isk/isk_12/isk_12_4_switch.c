@@ -23,7 +23,7 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2059, SOUND_208A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2059, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -34,7 +34,7 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2059, SOUND_208B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2059, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_MODE_0)
     EVT_SET(AF_ISK12_SandSwitchActivated, TRUE)
     EVT_UNBIND
     EVT_RETURN
@@ -48,7 +48,7 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_208A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_FLOOR_SWITCH_DEPRESS, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -14, 30, EASING_LINEAR)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -58,7 +58,7 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_208B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_MODE_0)
     EVT_CALL(InterpPlayerYaw, 260, 0)
     EVT_SET(AF_ISK12_StairSwitchActivated, TRUE)
     EVT_THREAD

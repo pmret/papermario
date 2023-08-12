@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_CastleDestruction) = {
     EVT_END_LOOP
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(50)
-    EVT_CALL(PlaySound, SOUND_00A4)
+    EVT_CALL(PlaySound, SOUND_KPA_LIGHT_RAYS)
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 0, -430, 1920, 15, LVar9)
     EVT_WAIT(30)
     EVT_THREAD

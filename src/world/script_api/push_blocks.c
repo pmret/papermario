@@ -333,7 +333,7 @@ EvtScript EVS_PushWall_PushBlock = {
         EVT_END_IF
     // perform the push
     EVT_CALL(ClearPushedBlockFromGrid)
-    EVT_CALL(PlaySound, SOUND_2088)
+    EVT_CALL(PlaySound, SOUND_PUSH_BLOCK)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(UpdatePushBlockMotion)
     EVT_CALL(FinishPushBlockMotion)

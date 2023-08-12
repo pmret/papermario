@@ -199,8 +199,8 @@ API_CALLABLE(N(MakeLightnings)) {
     return ApiStatus_DONE2;
 }
 #include "common/UnkBowserFunc1.inc.c"
-#include "common/FadeBackgroundToBlack.inc.c"
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 #include "common/RemoveChillOut.inc.c"
 #include "common/StarRodAppearEffect.inc.c"
 #include "common/StarRodPowerUpEffect.inc.c"
@@ -429,8 +429,8 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
-        EVT_CASE_EQ(EVENT_SWAP_PARTNER)
-            EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CASE_EQ(EVENT_RECEIVE_BUFF)
+            EVT_CALL(N(FadeBackgroundLighten))
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
@@ -697,7 +697,7 @@ EvtScript N(unkDecorationScript) = {
 };
 
 EvtScript N(useStarRod) = {
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -764,7 +764,7 @@ EvtScript N(useStarRod) = {
     EVT_END_THREAD
     EVT_WAIT(75)
     EVT_THREAD
-        EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpLaugh)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
@@ -864,7 +864,7 @@ EvtScript N(recover) = {
         EVT_CALL(MoveBattleCamOver, 40)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_CAST_RECOVER)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -1407,7 +1407,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_WAIT(10)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2121)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
@@ -1448,7 +1448,7 @@ EvtScript N(attackShockwaveDrain) = {
         EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 60, 0)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(N(UnfadeBackgroundToBlack))
+        EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_WAIT(8)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -1512,8 +1512,8 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_JUMP_CHARGE | PLAYER_BUFF_HAMMER_CHARGE | PLAYER_BUFF_STONE | PLAYER_BUFF_HUSTLE | PLAYER_BUFF_STATIC | PLAYER_BUFF_TRANSPARENT | PLAYER_BUFF_CLOUD_NINE | PLAYER_BUFF_TURBO_CHARGE | PLAYER_BUFF_WATER_BLOCK | PLAYER_BUFF_PARTNER_GLOWING | 0xFFEFC04)
     EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(10)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
             EVT_WAIT(15)
@@ -1749,7 +1749,7 @@ EvtScript N(attackLightningBlast) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1798,10 +1798,10 @@ EvtScript N(attackLightningBlast) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EVT_WAIT(20)
-                EVT_CALL(N(UnfadeBackgroundToBlack))
+                EVT_CALL(N(FadeBackgroundLighten))
             EVT_ELSE
                 EVT_WAIT(20)
-                EVT_CALL(N(UnfadeBackgroundToBlack))
+                EVT_CALL(N(FadeBackgroundLighten))
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
@@ -1825,7 +1825,7 @@ EvtScript N(attackLightningBlast) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_WAIT(30)
-            EVT_CALL(N(UnfadeBackgroundToBlack))
+            EVT_CALL(N(FadeBackgroundLighten))
             EVT_IF_EQ(LVarF, HIT_RESULT_10)
                 EVT_RETURN
             EVT_END_IF

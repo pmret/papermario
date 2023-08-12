@@ -251,8 +251,8 @@ API_CALLABLE(N(unused_func)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/FadeBackgroundToBlack.inc.c"
-#include "common/UnfadeBackgroundToBlack.inc.c"
+#include "common/FadeBackgroundDarken.inc.c"
+#include "common/FadeBackgroundLighten.inc.c"
 
 API_CALLABLE(N(UpdateSnakingStatic)) {
     Bytecode* args = script->ptrReadPos;
@@ -525,7 +525,7 @@ EvtScript N(electricCharge) = {
     EVT_CALL(SetBattleCamZoom, 320)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_WAIT(20)
-    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(N(StartRumbleWithParams), 70, 80)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 40, EVT_FLOAT(0.3))
@@ -540,7 +540,7 @@ EvtScript N(electricCharge) = {
     EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(N(UnfadeBackgroundToBlack))
+    EVT_CALL(N(FadeBackgroundLighten))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -865,7 +865,7 @@ EvtScript N(charge) = {
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, LVar3, -1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, LVarF)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
     EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_STATIC)

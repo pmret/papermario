@@ -1,6 +1,6 @@
 #include "trd_04.h"
 
-extern EvtScript N(EVS_80245198);
+extern EvtScript N(EVS_DropSwitch);
 
 #include "world/common/enemy/KoopaTroopa_Wander.inc.c"
 #include "world/common/enemy/KoopaTroopa_Patrol.inc.c"
@@ -14,7 +14,7 @@ EvtScript N(EVS_NpcDefeat_KoopaTroopa) = {
             EVT_THREAD
                 EVT_CALL(DoNpcDefeat)
             EVT_END_THREAD
-            EVT_EXEC_WAIT(N(EVS_80245198))
+            EVT_EXEC_WAIT(N(EVS_DropSwitch))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

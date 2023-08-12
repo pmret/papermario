@@ -22,7 +22,7 @@ s32 D_80077C40 = 0;
 
 EvtScript EVS_MerleeDropCoins = {
     EVT_WAIT(10)
-    EVT_CALL(FadeBackgroundToBlack)
+    EVT_CALL(FadeBackgroundDarken)
     EVT_WAIT(10)
     EVT_CALL(CreateNpc, NPC_BTL_MERLEE, ANIM_BattleMerlee_Gather)
     EVT_CALL(SetNpcFlagBits, NPC_BTL_MERLEE, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
@@ -36,7 +36,7 @@ EvtScript EVS_MerleeDropCoins = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(MerleeStopFX)
-    EVT_CALL(UnfadeBackgroundFromBlack)
+    EVT_CALL(FadeBackgroundLighten)
     EVT_WAIT(20)
     EVT_THREAD
         EVT_CALL(FadeOutMerlee)
@@ -240,7 +240,7 @@ ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
+ApiStatus FadeBackgroundDarken(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -258,12 +258,12 @@ ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall) {
+ApiStatus FadeBackgroundLighten(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 0xFE);
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 254);
     script->functionTemp[0] -= 5;
 
     if (script->functionTemp[0] == 0) {

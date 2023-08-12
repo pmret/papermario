@@ -14,7 +14,7 @@ API_CALLABLE(N(func_802A123C_72DDAC)) {
 
     inflict_status(player, STATUS_KEY_TRANSPARENT, script->varTable[0]);
     player->statusAfflicted = 0;
-    part->flags |= ACTOR_PART_FLAG_100;
+    part->flags |= ACTOR_PART_FLAG_TRANSPARENT;
 
     return ApiStatus_DONE2;
 }

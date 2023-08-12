@@ -142,7 +142,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
 
 EvtScript N(EVS_PlayChompSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_ChainChomp, SOUND_2061, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_ChainChomp, SOUND_CHAIN_CHOMP_BITE, SOUND_SPACE_MODE_0)
         EVT_WAIT(5)
     EVT_END_LOOP
     EVT_RETURN

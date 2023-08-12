@@ -51,7 +51,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
     EVT_EXEC_GET_TID(N(EVS_TetherSwitchToBlueGoomba), LVarB)
     EVT_CALL(SetNpcJumpscale, NPC_BlueGoombaBro, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -445, 0, 92, 15 * DT)
-    EVT_CALL(PlaySoundAt, SOUND_0048, SOUND_SPACE_MODE_0, -469, 1, 92)
+    EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_MODE_0, -469, 1, 92)
     EVT_CALL(SetNpcJumpscale, NPC_BlueGoombaBro, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -469, 0, 92, 7 * DT)
     EVT_KILL_THREAD(LVarB)

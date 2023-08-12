@@ -176,34 +176,34 @@ EvtScript N(EVS_GatherRavensNearRaphael) = {
 
 EvtScript N(EVS_Ravens_LeapIntoTree) = {
     EVT_CHILD_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Raven_02, SOUND_SRAW_13_A, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Raven_02, SOUND_RAVEN_LEAP_A, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Raven_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_02, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_02, 271, 325, -17, 30 * DT)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_WAIT(3 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_SRAW_13_B, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_RAVEN_LEAP_B, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Raven_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_05, 400, 215, -23, 30 * DT)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Raven_01, SOUND_SRAW_13_A, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Raven_01, SOUND_RAVEN_LEAP_A, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_01, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_01, 208, 335, -17, 30 * DT)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
         EVT_WAIT(9 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Raven_03, SOUND_SRAW_13_B, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Raven_03, SOUND_RAVEN_LEAP_B, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Raven_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Raven_03, ANIM_Raven_Flail)
         EVT_CALL(NpcJump0, NPC_Raven_03, 327, 200, -8, 30 * DT)
     EVT_END_CHILD_THREAD
     EVT_WAIT(30 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_SRAW_13_A, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_RAVEN_LEAP_A, 0)
     EVT_CALL(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_Raven_04, ANIM_Raven_Flail)
     EVT_CALL(NpcJump0, NPC_Raven_04, 222, 284, -13, 15 * DT)
@@ -423,7 +423,7 @@ EvtScript N(EVS_ManageRavens) = {
                 EVT_CALL(SetNpcPos, NPC_Raven_02, 200, 185, 0)
                 EVT_CALL(SetNpcPos, NPC_Raven_03, 338, 212, -20)
                 EVT_CALL(SetNpcPos, NPC_Raven_04, 267, 314, -12)
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_SRAW_13_A, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_RAVEN_LEAP_A, 0)
                 EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 60)
                 EVT_CALL(NpcJump0, NPC_Raven_05, LVar0, 0, 40, 20 * DT)
@@ -439,7 +439,7 @@ EvtScript N(EVS_ManageRavens) = {
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
                 EVT_WAIT(15 * DT)
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_SRAW_13_A, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_RAVEN_LEAP_A, 0)
                 EVT_CALL(SetNpcPos, NPC_Raven_05, 350, 0, 100)
                 EVT_CALL(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Flail)
                 EVT_CALL(NpcJump0, NPC_Raven_05, 400, 215, -23, 20 * DT)
@@ -481,7 +481,7 @@ EvtScript N(EVS_ManageRavens) = {
                         EVT_BREAK_LOOP
                     EVT_END_IF
                 EVT_END_LOOP
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_SRAW_13_A, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_05, SOUND_RAVEN_LEAP_A, 0)
                 EVT_CALL(NpcJump0, NPC_Raven_05, 150, 0, 20, 15 * DT)
                 EVT_CALL(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Walk)
                 EVT_THREAD
@@ -489,7 +489,7 @@ EvtScript N(EVS_ManageRavens) = {
                     EVT_CALL(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Idle)
                     EVT_CALL(InterpNpcYaw, NPC_Raven_05, 90, 0)
                 EVT_END_THREAD
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_SRAW_13_B, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_RAVEN_LEAP_B, 0)
                 EVT_CALL(NpcJump0, NPC_Raven_04, 150, 0, 20, 15 * DT)
                 EVT_CALL(SetNpcAnimation, NPC_Raven_04, ANIM_Raven_Walk)
                 EVT_THREAD
@@ -497,7 +497,7 @@ EvtScript N(EVS_ManageRavens) = {
                     EVT_CALL(SetNpcAnimation, NPC_Raven_04, ANIM_Raven_Idle)
                     EVT_CALL(InterpNpcYaw, NPC_Raven_04, 90, 0)
                 EVT_END_THREAD
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_03, SOUND_SRAW_13_A, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_03, SOUND_RAVEN_LEAP_A, 0)
                 EVT_CALL(NpcJump0, NPC_Raven_03, 150, 0, 20, 15 * DT)
                 EVT_CALL(SetNpcAnimation, NPC_Raven_03, ANIM_Raven_Walk)
                 EVT_THREAD
@@ -505,7 +505,7 @@ EvtScript N(EVS_ManageRavens) = {
                     EVT_CALL(SetNpcAnimation, NPC_Raven_03, ANIM_Raven_Idle)
                     EVT_CALL(InterpNpcYaw, NPC_Raven_03, 90, 0)
                 EVT_END_THREAD
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_02, SOUND_SRAW_13_B, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_02, SOUND_RAVEN_LEAP_B, 0)
                 EVT_CALL(NpcJump0, NPC_Raven_02, 150, 0, 20, 15 * DT)
                 EVT_CALL(SetNpcAnimation, NPC_Raven_02, ANIM_Raven_Walk)
                 EVT_CALL(NpcMoveTo, NPC_Raven_02, 110, -10, 15 * DT)
@@ -1369,7 +1369,7 @@ EvtScript N(EVS_Scene_Misstar) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2045, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_STAR_SPIRIT_DEPART_1, 0)
     EVT_END_THREAD
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)

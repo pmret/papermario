@@ -986,7 +986,7 @@ EvtScript N(EVS_ShowResultCard) = {
     EVT_IF_EQ(MV_LastAnswerResult, ANSWER_CORRECT)
         EVT_SET(LVar0, 2160)
         EVT_EXEC_WAIT(N(EVS_ShowUnknownCard))
-        EVT_CALL(PlaySound, SOUND_021C)
+        EVT_CALL(PlaySound, SOUND_APPROVE)
         EVT_WAIT(10 * DT)
         EVT_CALL(EnableGroup, MODEL_g47, FALSE)
         EVT_SET(LVarA, MODEL_m_kai)

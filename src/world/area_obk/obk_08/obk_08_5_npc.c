@@ -145,7 +145,7 @@ API_CALLABLE(func_80240D10_BD4580) {
             npc->yaw = yaw;
             npc->duration--;
             if (npc->duration == 0) {
-                sfx_play_sound_at_position(SOUND_SEQ_0F, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+                sfx_play_sound_at_position(SOUND_SEQ_BOO_VANISH, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
                 script->functionTemp[1] = RING_STATE_2;
                 npc->duration = 0;
                 npc->moveToPos.x = npc->pos.x;

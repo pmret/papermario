@@ -353,8 +353,8 @@ EvtScript N(attackSpinyFlip) = {
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(0)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
+        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_THREAD
                 EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(1.0))

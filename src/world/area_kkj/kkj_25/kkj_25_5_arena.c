@@ -72,7 +72,7 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_01, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Bowser_01, 300, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_208B, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_20A0, 0)
     EVT_SET(AF_KKJ_1A, TRUE)
     EVT_RETURN

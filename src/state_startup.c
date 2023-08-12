@@ -27,7 +27,7 @@ void state_step_startup(void) {
     gGameStatusPtr->disableScripts = 0;
     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     gGameStatusPtr->creditsViewportMode = -1;
-    gGameStatusPtr->demoFlags = 0;
+    gGameStatusPtr->demoBattleFlags = 0;
     gGameStatusPtr->unk_A9 = -1;
     gGameStatusPtr->demoState = DEMO_STATE_NONE;
 

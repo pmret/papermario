@@ -60,7 +60,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_WAIT(10 * DT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o162, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(SetGroupVisibility, MODEL_move_saku, MODEL_GROUP_HIDDEN)
-    EVT_CALL(PlaySound, SOUND_LOOP_06)
+    EVT_CALL(PlaySound, SOUND_LOOP_TRD_FLOWING_WATER)
     EVT_CHILD_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_WAIT(4 * DT)
@@ -100,13 +100,13 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_LOOP_07)
+        EVT_CALL(PlaySound, SOUND_LOOP_TRD_RAISE_STAIRS)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10 * DT, EVT_FLOAT(4.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20 * DT, EVT_FLOAT(0.7))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 250 * DT, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30 * DT, EVT_FLOAT(0.5))
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10 * DT, EVT_FLOAT(1.2))
-        EVT_CALL(StopSound, SOUND_LOOP_07)
+        EVT_CALL(StopSound, SOUND_LOOP_TRD_RAISE_STAIRS)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(50 * DT)
@@ -269,7 +269,7 @@ EvtScript N(EVS_Scene_RaiseStairs) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(1)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
-    EVT_CALL(StopSound, SOUND_LOOP_06)
+    EVT_CALL(StopSound, SOUND_LOOP_TRD_FLOWING_WATER)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
     EVT_UNBIND

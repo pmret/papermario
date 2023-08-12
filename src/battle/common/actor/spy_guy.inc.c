@@ -338,7 +338,7 @@ EvtScript N(slingshotAttack) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SLINGSHOT_DRAW)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim15)
     EVT_WAIT(12)
     EVT_WAIT(12)
@@ -352,7 +352,7 @@ EvtScript N(slingshotAttack) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02E8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SLINGSHOT_FIRE)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

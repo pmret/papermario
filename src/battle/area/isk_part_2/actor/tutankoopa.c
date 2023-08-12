@@ -721,7 +721,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 70)
-    EVT_CALL(PlaySound, SOUND_20E7)
+    EVT_CALL(PlaySound, SOUND_LEVITATE)
     EVT_PLAY_EFFECT(EFFECT_CHOMP_DROP, 0, 0, 60, 0, EVT_FLOAT(0.2), 0, EVT_FLOAT(1.4), 255, EVT_FLOAT(0.1), 150, 0)
     EVT_WAIT(15)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
@@ -743,7 +743,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 20)
         EVT_PLAY_EFFECT(EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 20, 315, 30, 0, 0)
-        EVT_CALL(PlaySound, SOUND_20E8)
+        EVT_CALL(PlaySound, SOUND_ILLUSION_DISSOLVE)
     EVT_ELSE
         EVT_WAIT(50)
         EVT_CALL(PlaySound, SOUND_20E9)
@@ -751,7 +751,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
         EVT_CALL(StartRumble, 10)
         EVT_CALL(PlaySound, SOUND_20EA)
         EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_20E8)
+        EVT_CALL(PlaySound, SOUND_ILLUSION_DISSOLVE)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_DebrisDropState, LVar0)
     EVT_SWITCH(LVar0)
@@ -1047,7 +1047,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
             EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
             EVT_CALL(MoveBattleCamOver, 5)
             EVT_WAIT(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2061)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_BITE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
             EVT_CALL(SetBattleCamZoom, 200)
             EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
@@ -1128,7 +1128,7 @@ EvtScript N(EVS_SummonedChompHop) = {
     EVT_IF_LT(LVar6, LVar4)
         EVT_CALL(SetGoalPos, LVarB, LVar0, LVar1, LVar2)
         EVT_CALL(JumpToGoal, LVarB, LVar3, FALSE, TRUE, FALSE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2062)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_THREAD
@@ -1136,7 +1136,7 @@ EvtScript N(EVS_SummonedChompHop) = {
         EVT_SUB(LVar5, LVar4)
         EVT_CALL(SetGoalPos, LVarB, LVar5, LVar1, LVar2)
         EVT_CALL(JumpToGoal, LVarB, LVar3, FALSE, TRUE, FALSE)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2062)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHAIN_CHOMP_THUD)
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
         EVT_END_THREAD

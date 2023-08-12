@@ -10,7 +10,7 @@
 extern s32 bActorTattles[ACTOR_TYPE_COUNT];
 
 static EffectInstance* N(tattleEffect);
-static s32 N(isCharged);
+static b32 N(isCharged);
 
 extern s32 N(powerBounceChance);
 extern EvtScript N(init);
@@ -387,9 +387,9 @@ API_CALLABLE(N(ChargeAtPos)) {
     s32 boostAmount;
     s32 x, y, z;
 
-    N(isCharged) = 0;
+    N(isCharged) = FALSE;
     if (partner->isGlowing > 0) {
-        N(isCharged) = 1;
+        N(isCharged) = TRUE;
     }
 
     boostAmount = 0;
@@ -470,7 +470,7 @@ API_CALLABLE(N(PlayChargeFX)) {
 }
 
 API_CALLABLE(N(GetChargeMessage)) {
-    if (N(isCharged) == 0) {
+    if (!N(isCharged)) {
         script->varTable[0] = BTL_MSG_CHARGE_GOOMBARIO;
     } else {
         script->varTable[0] = BTL_MSG_CHARGE_GOOMBARIO_MORE;
@@ -586,7 +586,7 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
@@ -626,7 +626,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Partner_Recover)
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Block)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
@@ -1482,7 +1482,7 @@ EvtScript N(charge) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CHARGE_UP)
     EVT_CALL(N(PlayChargeFX), LVar0, LVar1, LVar2, EVT_FLOAT(1.2))
     EVT_WAIT(3)
     EVT_CALL(N(PlayChargeFX), LVar0, LVar1, LVar2, EVT_FLOAT(0.8))
@@ -1505,7 +1505,7 @@ EvtScript N(charge) = {
         EVT_ADD(LVar0, 10)
         EVT_ADD(LVar1, 25)
         EVT_ADD(LVar2, 5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GROW)
         EVT_CALL(N(ChargeAtPos), LVar0, LVar1, LVar2)
         EVT_WAIT(4)
         EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.4))

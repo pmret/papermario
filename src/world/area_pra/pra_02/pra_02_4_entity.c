@@ -35,7 +35,7 @@ EvtScript N(EVS_RaisePoundableSwitch) = {
 };
 
 EvtScript N(EVS_LowerPoundableSwitch) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1344, SOUND_208B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1344, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, -10, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

@@ -201,7 +201,7 @@ EvtScript N(EVS_Starship_Summon) = {
         EVT_EXEC(N(EVS_UpdateTexturePan_Starship))
     EVT_END_THREAD
     EVT_CALL(SetTexPanner, MODEL_o646, 9)
-    EVT_CALL(PlaySoundAt, SOUND_00A3, 0, 0, 250, 0)
+    EVT_CALL(PlaySoundAt, SOUND_STARSHIP_APPEARS, 0, 0, 250, 0)
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 0, 250, 0, 10, LVar9)
     EVT_WAIT(20)
     EVT_CALL(SetModelCustomGfx, MODEL_o646, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
@@ -232,7 +232,7 @@ EvtScript N(EVS_Starship_Summon) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(40)
-    EVT_CALL(PlaySoundAt, SOUND_00A3 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, 0, 250, 0)
+    EVT_CALL(PlaySoundAt, SOUND_STARSHIP_APPEARS | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, 0, 250, 0)
     EVT_CALL(DismissEffect, LVar9)
     EVT_CALL(EnableGroup, MODEL_g277, TRUE)
     EVT_CALL(MakeLerp, 200, 0, 45, EASING_QUADRATIC_OUT)
