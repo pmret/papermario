@@ -1,6 +1,11 @@
+#include "ultra64.h"
+#include "macros.h"
 #include "PR/os_internal.h"
 #include "PR/siint.h"
 
+#if VERSION_IQUE
+INCLUDE_ASM(s32, "os/sirawdma", __osSiRawStartDma, s32 direction, void *dramAddr);
+#else
 s32 __osSiRawStartDma(s32 direction, void *dramAddr)
 {
     if (IO_READ(SI_STATUS_REG) & (SI_STATUS_DMA_BUSY | SI_STATUS_RD_BUSY))
@@ -21,3 +26,4 @@ s32 __osSiRawStartDma(s32 direction, void *dramAddr)
 
     return 0;
 }
+#endif

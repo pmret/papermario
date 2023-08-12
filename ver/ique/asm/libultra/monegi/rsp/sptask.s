@@ -122,7 +122,7 @@ glabel osSpTaskLoad
 /* 3F160 80063D60 3C050400 */  lui       $a1, (0x4000FC0 >> 16)
 /* 3F164 80063D64 34A50FC0 */  ori       $a1, $a1, (0x4000FC0 & 0xFFFF)
 /* 3F168 80063D68 02003021 */  addu      $a2, $s0, $zero
-/* 3F16C 80063D6C 0C01ADEC */  jal       func_IQUE_8006B7B0
+/* 3F16C 80063D6C 0C01ADEC */  jal       __osSpRawStartDma
 /* 3F170 80063D70 24070040 */   addiu    $a3, $zero, 0x40
 /* 3F174 80063D74 1051FFFA */  beq       $v0, $s1, .LIQUE_80063D60
 /* 3F178 80063D78 24040001 */   addiu    $a0, $zero, 0x1
@@ -136,7 +136,7 @@ glabel osSpTaskLoad
 /* 3F190 80063D90 3C050400 */  lui       $a1, (0x4001000 >> 16)
 /* 3F194 80063D94 8E060008 */  lw        $a2, 0x8($s0)
 /* 3F198 80063D98 8E07000C */  lw        $a3, 0xC($s0)
-/* 3F19C 80063D9C 0C01ADEC */  jal       func_IQUE_8006B7B0
+/* 3F19C 80063D9C 0C01ADEC */  jal       __osSpRawStartDma
 /* 3F1A0 80063DA0 34A51000 */   ori      $a1, $a1, (0x4001000 & 0xFFFF)
 /* 3F1A4 80063DA4 1051FFFA */  beq       $v0, $s1, .LIQUE_80063D90
 /* 3F1A8 80063DA8 24040001 */   addiu    $a0, $zero, 0x1

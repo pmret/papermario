@@ -11,8 +11,29 @@
 
 extern OSTask tmp_task;
 
+#if VERSION_IQUE
+static OSTask* _VirtualToPhysicalTask(OSTask* intp) {
+    OSTask* tp;
+    tp = &tmp_task;
+    bcopy(intp, tp, sizeof(OSTask));
+
+    _osVirtualToPhysical(tp->t.ucode);
+    _osVirtualToPhysical(tp->t.ucode_data);
+    _osVirtualToPhysical(tp->t.dram_stack);
+    _osVirtualToPhysical(tp->t.output_buff);
+    _osVirtualToPhysical(tp->t.output_buff_size);
+    _osVirtualToPhysical(tp->t.data_ptr);
+    _osVirtualToPhysical(tp->t.yield_data_ptr);
+    return tp;
+}
+#endif
+
 void osSpTaskLoad(OSTask *intp) {
     OSTask *tp;
+
+#if VERSION_IQUE
+    tp = _VirtualToPhysicalTask(intp);
+#else
     tp = &tmp_task;
     bcopy(intp, tp, sizeof(OSTask));
     _osVirtualToPhysical(tp->t.ucode);
@@ -22,6 +43,7 @@ void osSpTaskLoad(OSTask *intp) {
     _osVirtualToPhysical(tp->t.output_buff_size);
     _osVirtualToPhysical(tp->t.data_ptr);
     _osVirtualToPhysical(tp->t.yield_data_ptr);
+#endif
 
     if (tp->t.flags & OS_TASK_YIELDED) {
         tp->t.ucode_data = tp->t.yield_data_ptr;
