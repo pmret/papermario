@@ -1,26 +1,23 @@
 #include "PR/osint.h"
 
 int osSetTimer(OSTimer *t, OSTime countdown, OSTime interval, OSMesgQueue *mq, OSMesg msg) {
-    register u32 saveMask;
     OSTime time;
     OSTimer* next;
     u32 count;
     u32 value;
+    u32 saveMask;
 
     t->next = NULL;
     t->prev = NULL;
-    t->value = countdown;
     t->interval = interval;
-
-    if (countdown == 0) {
-        t->value = interval;
-    }
-
+    t->value = (countdown != 0) ? countdown : interval;
     t->mq = mq;
     t->msg = msg;
 
     saveMask = __osDisableInt();
-    if (__osTimerList->next != __osTimerList) {
+    if (__osTimerList->next == __osTimerList) {
+
+    } else {
         next = __osTimerList->next;
         count = osGetCount();
         value = count - __osTimerCounter;
