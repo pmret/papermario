@@ -359,7 +359,7 @@ segments:
     - [auto, .data, os/xprintf]
     - [auto, .data, os/seteventmesg]
     - [auto, .data, os/siacs]
-    - [auto, .data, os/setthreadpri]
+    - [auto, .data, os/thread]
     - [auto, .data, os/timerintr]
     - [auto, .data, os/vimgr]
     - [auto, .data, os/vitbl]
