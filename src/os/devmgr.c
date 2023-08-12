@@ -1,6 +1,10 @@
 #include "PR/rcp.h"
 #include "PR/piint.h"
+#include "macros.h"
 
+#if VERSION_IQUE
+INCLUDE_ASM(void, "os/devmgr", __osDevMgrMain, void *args);
+#else
 void __osDevMgrMain(void *args) {
     OSIoMesg *mb = NULL;
     OSMesg em;
@@ -106,3 +110,4 @@ doMessageSend:
         }
     }
 }
+#endif

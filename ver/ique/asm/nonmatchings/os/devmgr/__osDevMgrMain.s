@@ -1,9 +1,20 @@
-.include "macro.inc"
-
 /* assembler directives */
 .set noat      /* allow manual use of $at */
 .set noreorder /* don't insert nops after branches */
-.set gp=64     /* allow use of 64-bit general purpose registers */
+
+.section .rodata
+
+.align 3
+glabel jtbl_IQUE_80098980
+/* 73D80 80098980 80067A7C */ .word .LIQUE_80067A7C
+/* 73D84 80098984 8006790C */ .word .LIQUE_8006790C
+/* 73D88 80098988 80067984 */ .word .LIQUE_80067984
+/* 73D8C 8009898C 80067A88 */ .word .LIQUE_80067A88
+/* 73D90 80098990 80067A88 */ .word .LIQUE_80067A88
+/* 73D94 80098994 800679B8 */ .word .LIQUE_800679B8
+/* 73D98 80098998 80067A40 */ .word .LIQUE_80067A40
+/* 73D9C 8009899C 00000000 */ .word 0x00000000
+.size jtbl_IQUE_80098980, . - jtbl_IQUE_80098980
 
 .section .text, "ax"
 

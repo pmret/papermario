@@ -43,7 +43,11 @@ void osCreatePiManager(OSPri pri, OSMesgQueue *cmdQ, OSMesg *cmdBuf, s32 cmdMsgC
         __osPiDevMgr.acsQueue = &__osPiAccessQueue;
         __osPiDevMgr.dma = __osPiRawStartDma;
         __osPiDevMgr.edma = __osEPiRawStartDma;
+#if VERSION_IQUE
+        osCreateThread(&piThread, 0xCE5, __osDevMgrMain, &__osPiDevMgr, &piThreadStack[OS_PIM_STACKSIZE], pri);
+#else
         osCreateThread(&piThread, 0, __osDevMgrMain, &__osPiDevMgr, &piThreadStack[OS_PIM_STACKSIZE], pri);
+#endif
         osStartThread(&piThread);
         __osRestoreInt(savedMask);
 

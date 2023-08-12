@@ -1,5 +1,9 @@
 #include "PR/piint.h"
+#include "macros.h"
 
+#if VERSION_IQUE
+INCLUDE_ASM(s32, "os/epirawdma", __osEPiRawStartDma, OSPiHandle *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size);
+#else
 s32 __osEPiRawStartDma(OSPiHandle *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size)
 {
     u32 stat;
@@ -22,3 +26,4 @@ s32 __osEPiRawStartDma(OSPiHandle *pihandle, s32 direction, u32 devAddr, void *d
     }
     return 0;
 }
+#endif
