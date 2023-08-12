@@ -672,11 +672,11 @@ EvtScript N(executeAction) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
             EVT_RETURN
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(BTL_MENU_TYPE_ITEMS)
             EVT_CALL(LoadItemScript)
             EVT_EXEC_WAIT(LVar0)
             EVT_RETURN

@@ -395,6 +395,7 @@ EvtScript N(attack) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(60)
+            // choose from FX_STAR_0 to FX_STAR_SMALL
             EVT_CALL(RandInt, 1, LVar0)
             EVT_ADD(LVar0, 2)
             EVT_CALL(RandInt, 400, LVar1)

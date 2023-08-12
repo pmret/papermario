@@ -179,16 +179,23 @@ typedef struct SnowflakeFXData {
     /* 0x28 */ s32 unk_28;
 } SnowflakeFXData; // size = 0x2C
 
+enum StarFXTypes {
+    FX_STAR_0       = 0,
+    FX_STAR_1       = 1,
+    FX_STAR_2       = 2,
+    FX_STAR_SMALL   = 3,
+};
+
 typedef struct StarFXData {
     /* 0x000 */ s32 unk_00;
     /* 0x004 */ Vec3f pos;
     /* 0x010 */ Vec3f vel;
     /* 0x01C */ f32 unk_1C;
-    /* 0x020 */ f32 unk_20;
-    /* 0x024 */ f32 angle;
+    /* 0x020 */ f32 rollAngle2;
+    /* 0x024 */ f32 rollAngle1;
     /* 0x028 */ s32 unk_28;
     /* 0x02C */ f32 unk_2C;
-    /* 0x030 */ s32 unk_30;
+    /* 0x030 */ s32 timeLeft;
     /* 0x034 */ f32 unk_34;
     /* 0x038 */ s32 type;
     /* 0x03C */ s32 unk_3C;

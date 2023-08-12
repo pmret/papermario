@@ -4653,14 +4653,14 @@ void btl_state_draw_peach_menu(void) {
     }
 }
 
-static const f32 padding2 = 0.0f;
-
 s32 btl_menu_show_switch_to_peach(void) {
     if (gBattleStatus.flags2 & BS_FLAGS2_2) {
         return FALSE;
     }
     return TRUE;
 }
+
+static const f32 padding2 = 0.0f;
 
 void btl_state_update_twink_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;

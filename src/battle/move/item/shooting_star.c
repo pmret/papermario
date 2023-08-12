@@ -16,10 +16,10 @@ API_CALLABLE(N(func_802A123C_71D9AC)) {
 
     if ((script->varTable[0] % 4) != 0) {
         var_f22 = r1 - (rand_int(100) + t1);
-        fx_star(2, r1, t1, r2, var_f22, 0.0f, r2 + 50 - rand_int(100), rand_int(10) + 7);
+        fx_star(FX_STAR_2, r1, t1, r2, var_f22, 0.0f, r2 + 50 - rand_int(100), rand_int(10) + 7);
     } else {
         var_f22 = r1 - (rand_int(100) + t1);
-        fx_star(3, r1, t1, r2, var_f22, 0.0f, r2 + 50 - rand_int(100), rand_int(10) + 7);
+        fx_star(FX_STAR_SMALL, r1, t1, r2, var_f22, 0.0f, r2 + 50 - rand_int(100), rand_int(10) + 7);
     }
     return ApiStatus_DONE2;
 }
@@ -94,10 +94,10 @@ EvtScript N(EVS_UseItem) = {
         EVT_SET(LVar0, 0)
         EVT_WAIT(50)
         EVT_LOOP(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SRAW_16_A)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SRAW_STAR_BOUNCE_A)
             EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SRAW_16_B)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SRAW_STAR_BOUNCE_B)
             EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
         EVT_END_LOOP

@@ -897,7 +897,7 @@ EvtScript N(recover) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_16_A)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_STAR_BOUNCE_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1514,7 +1514,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(10)
+        EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
             EVT_WAIT(15)
             EVT_IF_EQ(LVarF, 10)

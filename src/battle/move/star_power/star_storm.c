@@ -14,10 +14,10 @@ API_CALLABLE(N(func_802A1518_78ECE8)) {
 
     if (script->varTable[0] % 4) {
         var4 = x + (rand_int(50) + y);
-        fx_star(2, x, y, z, var4, 0, z, rand_int(10) + 7);
+        fx_star(FX_STAR_2, x, y, z, var4, 0, z, rand_int(10) + 7);
     } else {
         var4 = x + (rand_int(50) + y);
-        fx_star(3, x, y, z, var4, 0, z, rand_int(10) + 7);
+        fx_star(FX_STAR_SMALL, x, y, z, var4, 0, z, rand_int(10) + 7);
     }
 
     return ApiStatus_DONE2;
@@ -58,10 +58,10 @@ EvtScript N(EVS_UsePower) = {
         EVT_SET(LVar0, 0)
         EVT_WAIT(50)
         EVT_LOOP(10)
-            EVT_CALL(PlaySound, SOUND_SRAW_16_A)
+            EVT_CALL(PlaySound, SOUND_SRAW_STAR_BOUNCE_A)
             EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
-            EVT_CALL(PlaySound, SOUND_SRAW_16_B)
+            EVT_CALL(PlaySound, SOUND_SRAW_STAR_BOUNCE_B)
             EVT_ADD(LVar0, 1)
             EVT_WAIT(5)
         EVT_END_LOOP

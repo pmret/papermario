@@ -777,19 +777,19 @@ EvtScript EVS_Peach_HandlePhase = {
 
 EvtScript EVS_ExecuteMarioAction = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(BTL_MENU_TYPE_JUMP)
             EVT_CALL(LoadMoveScript)
             EVT_EXEC_WAIT(LVar0)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(BTL_MENU_TYPE_SMASH)
             EVT_CALL(LoadMoveScript)
             EVT_EXEC_WAIT(LVar0)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(BTL_MENU_TYPE_ITEMS)
             EVT_CALL(LoadItemScript)
             EVT_EXEC_WAIT(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
@@ -803,7 +803,7 @@ EvtScript EVS_ExecutePeachAction = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
