@@ -49,7 +49,7 @@ EffectInstance* star_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 arg4, f32 
     part->pos.y = posY;
     part->pos.z = posZ;
     part->unk_1C = 0;
-    part->rotation = 0.0f;
+    part->angle = 0.0f;
     part->unk_28 = 0;
     part->type = type;
 
@@ -100,7 +100,7 @@ EffectInstance* star_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 arg4, f32 
         part->unk_2C = 20.0f;
     }
 
-    part->unk_20 = part->rotation = atan2(0.0f, 0.0f, -part->vel.y, -temp_f12);
+    part->unk_20 = part->angle = atan2(0.0f, 0.0f, -part->vel.y, -temp_f12);
     part->unk_30 = phi_f26 / arg7;
     part->unk_34 = -temp_f12;
     guTranslate(part->unk_40, part->pos.x, part->pos.y, part->pos.z);
@@ -163,7 +163,7 @@ void star_update(EffectInstance* effect) {
 
         if (data->unk_1C != 0.0f) {
             data->vel.y += -0.5;
-            data->rotation += data->unk_2C;
+            data->angle += data->unk_2C;
             data->unk_20 = atan2(0.0f, 0.0f, -data->vel.y, data->unk_34);
         }
     }
@@ -217,7 +217,7 @@ void star_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, scale, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp60, data->rotation, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp60, data->angle, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp60, sp20, sp20);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 

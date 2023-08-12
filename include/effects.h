@@ -185,7 +185,7 @@ typedef struct StarFXData {
     /* 0x010 */ Vec3f vel;
     /* 0x01C */ f32 unk_1C;
     /* 0x020 */ f32 unk_20;
-    /* 0x024 */ f32 rotation;
+    /* 0x024 */ f32 angle;
     /* 0x028 */ s32 unk_28;
     /* 0x02C */ f32 unk_2C;
     /* 0x030 */ s32 unk_30;
