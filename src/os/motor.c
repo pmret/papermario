@@ -3,6 +3,8 @@
 #include "controller.h"
 #include "PR/siint.h"
 
+#if !VERSION_IQUE
+
 extern OSPifRam __MotorDataBuf[MAXCONTROLLERS];
 
 #define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
@@ -133,3 +135,15 @@ s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel) {
     pfs->status = PFS_MOTOR_INITIALIZED;
     return 0;
 }
+
+#else
+
+s32 __osMotorAccess(OSPfs* pfs, s32 flag) {
+    return 0x5;
+}
+
+s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel) {
+    return 0xB;
+}
+
+#endif

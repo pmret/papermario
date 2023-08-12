@@ -226,7 +226,7 @@ segments:
     # TODO: these files are separate in libultra_rom, but aren't aligned
     # - [0x43504, asm, libultra/bb/sa/memcmp]
     # - [0x4353C, asm, libultra/bb/sa/strncmp]
-    - [0x435C0, asm, libultra/shared/motor/motor]
+    - [0x435C0, c, os/motor, egcs -O2 -mips2]
     - [0x435D0, asm, libultra/shared/pfs/pfsallocatefile]
     - [0x43A00, asm, libultra/shared/pfs/pfsdeletefile]
     - [0x43C00, asm, libultra/shared/pfs/pfsreadwritefile]
