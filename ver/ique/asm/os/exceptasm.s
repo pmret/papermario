@@ -836,7 +836,7 @@ glabel __osDispatchThread
 /* 420EC 80066CEC 42000018 */  eret # handwritten instruction
 
 glabel __osCleanupThread
-/* 420F0 80066CF0 0C01AE38 */  jal       func_IQUE_8006B8E0
+/* 420F0 80066CF0 0C01AE38 */  jal       osDestroyThread
 /* 420F4 80066CF4 0000202D */   daddu    $a0, $zero, $zero
 /* 420F8 80066CF8 00000000 */  nop
 /* 420FC 80066CFC 00000000 */  nop

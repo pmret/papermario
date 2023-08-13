@@ -373,6 +373,7 @@ segments:
     - [auto, .data, os/initialize]
     - [auto, .data, os/xlitob]
     - [auto, .data, os/vi]
+    - [auto, .data, os/vimodepallan1]
     - [auto, .data, battle/battle]
     - [0x71430, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
