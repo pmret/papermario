@@ -467,7 +467,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             } else {
                 sAimingTimer = (s32)(80 * DT);
                 hud_element_set_script(hudStick, &HES_StickTapRight);
-                sfx_play_sound_at_position(SOUND_0312, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_AIM_SPINY_FLIP, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
                 script->functionTemp[0] = 2;
             }
             break;
@@ -559,7 +559,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                 hud_element_free(id);
             }
             btl_set_popup_duration(0);
-            sfx_stop_sound(SOUND_0312);
+            sfx_stop_sound(SOUND_AIM_SPINY_FLIP);
             return ApiStatus_DONE2;
     }
 

@@ -182,9 +182,9 @@ EvtScript N(EVS_Scene_RideTrain) = {
                         EVT_SETF(ArrayVar(15), EVT_FLOAT(-10.0))
                         EVT_SET(LFlag0, TRUE)
                         EVT_IF_EQ(AF_OMO_03, FALSE)
-                            EVT_CALL(PlaySound, SOUND_TOYBOX_TRAIN_WHISTLE_A)
+                            EVT_CALL(PlaySound, SOUND_OMO_TOY_TRAIN_WHISTLE_A)
                         EVT_ELSE
-                            EVT_CALL(PlaySound, SOUND_TOYBOX_TRAIN_WHISTLE_B)
+                            EVT_CALL(PlaySound, SOUND_OMO_TOY_TRAIN_WHISTLE_B)
                         EVT_END_IF
                     EVT_END_IF
                 EVT_ELSE
@@ -198,10 +198,10 @@ EvtScript N(EVS_Scene_RideTrain) = {
                         EVT_SETF(ArrayVar(15), EVT_FLOAT(10.0))
                         EVT_SET(LFlag0, FALSE)
                         EVT_IF_EQ(AF_OMO_03, FALSE)
-                            EVT_CALL(PlaySound, SOUND_01FE)
+                            EVT_CALL(PlaySound, SOUND_OMO_TOY_TRAIN_CLICK)
                             EVT_SET(AF_OMO_03, TRUE)
                         EVT_ELSE
-                            EVT_CALL(PlaySound, SOUND_01FE)
+                            EVT_CALL(PlaySound, SOUND_OMO_TOY_TRAIN_CLICK)
                             EVT_SET(AF_OMO_03, FALSE)
                         EVT_END_IF
                     EVT_END_IF

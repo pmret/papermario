@@ -43,13 +43,13 @@ API_CALLABLE(N(SpawnLightningFX)) {
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_THUNDER_BOLT)
-    EVT_EXEC_WAIT(battle_item_thunder_bolt_UseItemWithEffect)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
-    EVT_CALL(battle_item_thunder_bolt_FadeBackgroundDarken)
+    EVT_CALL(N(FadeBackgroundDarken))
     EVT_CALL(PlaySound, SOUND_0365)
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
@@ -58,7 +58,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(battle_item_thunder_bolt_SpawnLightningFX)
+    EVT_CALL(N(SpawnLightningFX))
     EVT_WAIT(5)
     EVT_CALL(StartRumble, 10)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
@@ -70,8 +70,8 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(30)
-    EVT_CALL(battle_item_thunder_bolt_FadeBackgroundLighten)
-    EVT_EXEC_WAIT(battle_item_thunder_bolt_PlayerGoHome)
+    EVT_CALL(N(FadeBackgroundLighten))
+    EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN
     EVT_END
 };

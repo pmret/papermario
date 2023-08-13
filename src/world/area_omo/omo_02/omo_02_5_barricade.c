@@ -250,7 +250,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_01F4, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_MODE_0)
         EVT_CALL(GetModelCenter, MODEL_t1)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -287,7 +287,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_01F4, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_MODE_0)
         EVT_CALL(GetModelCenter, MODEL_t2_1)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -334,7 +334,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_01F4, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_MODE_0)
     EVT_CALL(GetModelCenter, MODEL_t3_2)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))

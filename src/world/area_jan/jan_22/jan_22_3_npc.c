@@ -365,7 +365,7 @@ EvtScript N(EVS_ManageRavens) = {
                     EVT_CALL(InterpNpcYaw, NPC_Raven_02, 270, 0)
                 EVT_END_THREAD
                 EVT_WAIT(3 * DT)
-                EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_SRAW_14_A, 0)
+                EVT_CALL(PlaySoundAtNpc, NPC_Raven_04, SOUND_SRAW_RAVEN_FALL_A, 0)
                 EVT_CALL(SetNpcRotation, NPC_Raven_04, 0, 0, 180)
                 EVT_CALL(SetNpcFlagBits, NPC_Raven_04, NPC_FLAG_GRAVITY, TRUE)
                 EVT_CALL(InterpNpcYaw, NPC_Raven_03, 270, 0)

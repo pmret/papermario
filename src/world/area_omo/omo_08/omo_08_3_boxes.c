@@ -346,7 +346,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o875)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -362,7 +362,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o877)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -378,7 +378,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o879)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -394,7 +394,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o881)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD

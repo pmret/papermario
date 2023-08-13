@@ -646,15 +646,15 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_CRAZEE_DAYZEE] = {
-        .walk = { SOUND_02D6, SOUND_02D6 },
-        .fly = { SOUND_02D6, SOUND_02D6 },
+        .walk = { SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP },
+        .fly = { SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP },
         .jump = SOUND_DAYZEE_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_AMAZY_DAYZEE] = {
-        .walk = { SOUND_02D6, SOUND_02D6 },
-        .fly = { SOUND_02D6, SOUND_02D6 },
+        .walk = { SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP },
+        .fly = { SOUND_DAYZEE_STEP, SOUND_DAYZEE_STEP },
         .jump = SOUND_DAYZEE_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }

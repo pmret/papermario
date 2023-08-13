@@ -219,7 +219,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
                 }
             }
 
-            sfx_play_sound(SOUND_0311);
+            sfx_play_sound(SOUND_AIM_SHELL_SHOT);
             shellShotTimer = 60;
             script->functionTemp[0] = 2;
             break;
@@ -1020,7 +1020,7 @@ EvtScript N(shellShot) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_ShellFly)
     EVT_CALL(N(ShellShotActionCommand))
-    EVT_CALL(StopSound, SOUND_0311)
+    EVT_CALL(StopSound, SOUND_AIM_SHELL_SHOT)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2006)
     EVT_CALL(GetActionResult, LVar0)
     EVT_CALL(PartnerTestEnemy, LVarA, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)

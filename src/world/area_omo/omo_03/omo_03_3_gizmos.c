@@ -71,7 +71,7 @@ EvtScript N(EVS_Scene_PullBlueSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_01F1, SOUND_SPACE_MODE_0, -440, 10, 40)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_TRAIN_TRACK_LEVER, SOUND_SPACE_MODE_0, -440, 10, 40)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o978, COLLIDER_FLAGS_UPPER_MASK)
     EVT_WAIT(20)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -184, 10, -229)
@@ -82,7 +82,7 @@ EvtScript N(EVS_Scene_PullBlueSwitch) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAt, SOUND_01F2, SOUND_SPACE_MODE_0, -130, 0, -215)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_FLIP_TRAIN_TRACK, SOUND_SPACE_MODE_0, -130, 0, -215)
     EVT_CALL(MakeLerp, 0, 180, 30, EASING_COS_IN_OUT)
     EVT_LABEL(1)
         EVT_CALL(UpdateLerp)

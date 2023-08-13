@@ -220,7 +220,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
                 EVT_END_IF
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_01F5)
+    EVT_CALL(PlaySound, SOUND_OMO_LANTERN_BREAK)
     EVT_SET(AF_OMO_10, FALSE)
     EVT_LOOP(8)
         EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)

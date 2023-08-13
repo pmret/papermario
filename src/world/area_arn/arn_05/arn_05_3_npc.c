@@ -518,7 +518,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
         EVT_WAIT(50 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_0315, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_TUBBA_GULP, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcPos, NPC_Boo_03, NPC_DISPOSE_LOCATION)

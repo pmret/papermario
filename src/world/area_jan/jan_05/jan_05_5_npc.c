@@ -103,7 +103,7 @@ EvtScript N(EVS_YoshiKid_PlaySounds) = {
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKid, ANIM_YoshiKid_Purple_Cry)
     EVT_LOOP(3)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_01F0, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, 0)
         EVT_WAIT(13)
     EVT_END_LOOP
     EVT_RETURN
