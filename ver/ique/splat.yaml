@@ -124,7 +124,6 @@ segments:
     - [0x3B690, c, os/nusys/nucontdatalock]
     - [0x3B6F0, c, os/nusys/nucontqueryread]
 
-    # TODO: libultra for iQue was probably compiled using EGCS. Files typed as 'asm' should be C files instead
     - [0x3B710, c, os/aigetlength, egcs -O2 -mips2]
     - [0x3B720, c, os/aigetstatus, egcs -O2 -mips2]
     - [0x3B730, c, os/aisetfrequency, egcs -O2 -mips2]
@@ -223,11 +222,8 @@ segments:
     - [0x43150, c, os/flashwritearray, egcs -O2 -mips2]
     - [0x431B0, c, os/flashreadarray, egcs -O2 -mips2]
     - [0x43240, hasm, os/skapi]
-    - [0x43490, asm, libultra/bb/sa/strcmp]
-    - [0x434E0, asm, libultra/bb/sa/common]
-    # TODO: these files are separate in libultra_rom, but aren't aligned
-    # - [0x43504, asm, libultra/bb/sa/memcmp]
-    # - [0x4353C, asm, libultra/bb/sa/strncmp]
+    - [0x43490, c, os/strcmp, egcs -O2 -mips2]
+    - [0x434E0, c, os/common, egcs -O2 -mips2]
     - [0x435C0, c, os/motor, egcs -O2 -mips2]
     - [0x435D0, c, os/pfsallocatefile, egcs -O2 -mips2]
     - [0x43A00, c, os/pfsdeletefile, egcs -O2 -mips2]
@@ -256,8 +252,7 @@ segments:
     - [0x46A50, hasm, os/setfpccsr]
     - [0x46A60, hasm, os/setsr]
     - [0x46A70, hasm, os/setwatchlo]
-    - [0x46A80, asm, libultra/monegi/reg/_setcompare]
-    #- [0x46A80, c, os/_setcompare, egcs -O0 -mips3 -mgp64 -mfp64]
+    - [0x46A80, c, os/_setcompare, egcs -O0 -mips3 -mgp64 -mfp64]
     - [0x46B30, c, os/sp, egcs -O2 -mips2]
     - [0x46B60, c, os/spgetstat, egcs -O2 -mips2]
     - [0x46B70, c, os/spsetstat, egcs -O2 -mips2]
@@ -282,8 +277,8 @@ segments:
     - [0x47400, c, os/epirawwrite, egcs -O2 -mips2]
     - [0x47580, c, os/pfschecker, egcs -O2 -mips2]
     - [0x47CA0, c, os/pfsisplug, egcs -O2 -mips2]
-    - [0x48020, asm, libultra/monegi/libc/ldiv]
-    - [0x481E0, asm, libultra/monegi/si/si]
+    - [0x48020, c, os/ldiv, egcs -O2 -mips2]
+    - [0x481E0, c, os/si, egcs -O2 -mips2]
 
     - [0x48210, c, gcc/divdi3, -g2]
     - [0x487D0, c, gcc/moddi3, -g2]
