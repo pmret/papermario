@@ -169,7 +169,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc_egcs",
         description="cc_egcs $in",
-        command=f"bash -o pipefail -c '{cc_egcs} {CPPFLAGS_EGCS} {extra_cppflags} $cppflags {cflags_egcs} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out && python ./tools/patch_64bit_compile.py $out'",
+        command=f"bash -o pipefail -c '{cc_egcs} {CPPFLAGS_EGCS} {extra_cppflags} $cppflags {cflags_egcs} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out && python3 ./tools/patch_64bit_compile.py $out'",
     )
 
     ninja.rule(
