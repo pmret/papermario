@@ -365,6 +365,7 @@ segments:
     - [auto, .data, os/timerintr]
     - [auto, .data, os/vimgr]
     - [auto, .data, os/vitbl]
+    - [auto, .data, os/vimodentsclan1]
     - [auto, .data, os/vimodempallan1]
     - [auto, .data, os/guRotate]
     - [auto, .data, os/contpfs]
