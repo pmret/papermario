@@ -399,7 +399,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_8000,
+    .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_HALF_HEIGHT,
     .type = ACTOR_TYPE_HUFF_N_PUFF,
     .level = 80,
     .maxHP = 60,

@@ -232,7 +232,7 @@ EvtScript N(EVS_BooSpookAndVanish) = {
     EVT_END
 };
 
-EvtScript N(EVS_ShowGotSuperBootsFX) = {
+EvtScript N(EVS_SpawnGotSuperBootsFX) = {
     EVT_THREAD
         EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(17.5), EVT_FLOAT(-9.5))
     EVT_END_THREAD
@@ -451,7 +451,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     EVT_WAIT(1)
     EVT_SET(MF_WaitForUpgradeDone, FALSE)
     EVT_EXEC(N(EVS_PlayUpgradeSong))
-    EVT_EXEC(N(EVS_ShowGotSuperBootsFX))
+    EVT_EXEC(N(EVS_SpawnGotSuperBootsFX))
     EVT_CALL(N(UpgradeBootsToSuper))
     EVT_WAIT(30)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0180, 160, 40)

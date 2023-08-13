@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_KooverGetsMugged) = {
     EVT_CALL(SetNpcPos, NPC_FuzzyWithShell, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, -200)
     EVT_CALL(NpcJump0, NPC_FuzzyWithShell, LVar0, LVar1, LVar2, 20)
-    EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, 3, LVar0, LVar1, LVar2, 0, -1, 0, 3)
+    EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, LVar0, LVar1, LVar2, 0, -1, 0, 3)
     EVT_THREAD
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 4)

@@ -190,7 +190,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
         EVT_IF_NE(AF_JAN01_KoloradoShouting, TRUE)
             EVT_CHILD_THREAD
                 EVT_CALL(InterpNpcYaw, NPC_Kolorado, LVar5, 2)
-                EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, 3, LVar7, LVar8, LVar9, 0, -1, 0, 3)
+                EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, LVar7, LVar8, LVar9, 0, -1, 0, 3)
             EVT_END_CHILD_THREAD
         EVT_END_IF
         EVT_ADD(LVar0, LVar4)

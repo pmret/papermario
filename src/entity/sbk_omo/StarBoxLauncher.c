@@ -87,7 +87,7 @@ void entity_StarBoxLauncher_check_launch(Entity* entity) {
 
     if (result != 0) {
         data->flags &= ~1;
-        fx_damage_stars(3, entity->pos.x, entity->pos.y + 35.0f, entity->pos.z, 0, -1.0f, 0, 3);
+        fx_damage_stars(FX_DAMAGE_STARS_3, entity->pos.x, entity->pos.y + 35.0f, entity->pos.z, 0, -1.0f, 0, 3);
         if (result > 0) {
             data->flags |= 1;
         }

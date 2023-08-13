@@ -321,7 +321,7 @@ API_CALLABLE(N(GetTattleCamPos)) {
         script->varTable[1] -= ((target->size.y / 4) * target->scalingFactor);
     }
 
-    if (target->flags & ACTOR_FLAG_8000) {
+    if (target->flags & ACTOR_FLAG_HALF_HEIGHT) {
         script->varTable[1] -= (target->size.y / 2) * target->scalingFactor;
     }
 

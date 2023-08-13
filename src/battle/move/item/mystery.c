@@ -229,7 +229,7 @@ API_CALLABLE(N(func_802A188C_72CE3C)) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    fx_damage_stars(2, a, b, c, 0, -1.0f, 0, 5);
+    fx_damage_stars(FX_DAMAGE_STARS_2, a, b, c, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }

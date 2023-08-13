@@ -7,7 +7,7 @@
 
 #include "battle/common/move/ItemRefund.inc.c"
 
-API_CALLABLE(N(ShowHeartRecoveryFX)) {
+API_CALLABLE(N(SpawnHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -39,7 +39,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 0)
     EVT_ADD(LVar1, 35)
-    EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, 10)
+    EVT_CALL(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, 10)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
     EVT_ADD(LVar2, 5)

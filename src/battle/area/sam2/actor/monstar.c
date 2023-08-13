@@ -147,7 +147,7 @@ ImgFXOverlayTexture N(MonstarDetailTexture) = {
     .displayList = N(dlist),
 };
 
-API_CALLABLE(func_80218000_63D1E0) {
+API_CALLABLE(N(func_80218000_63D1E0)) {
     ActorPart* part = get_actor_part(get_actor(script->owner1.actorID), 1);
     s32 i;
     u8 colR[20];
@@ -191,7 +191,7 @@ API_CALLABLE(func_80218000_63D1E0) {
 
 EvtScript N(idle) = {
     EVT_CHILD_THREAD
-        EVT_CALL(func_80218000_63D1E0)
+        EVT_CALL(N(func_80218000_63D1E0))
     EVT_END_CHILD_THREAD
     EVT_LABEL(0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
@@ -395,7 +395,7 @@ EvtScript N(attack) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(60)
-            // choose from FX_STAR_0 to FX_STAR_SMALL
+            // choose from FX_STAR_BACKGROUND to FX_STAR_SMALL_BOUNCING
             EVT_CALL(RandInt, 1, LVar0)
             EVT_ADD(LVar0, 2)
             EVT_CALL(RandInt, 400, LVar1)

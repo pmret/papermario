@@ -152,7 +152,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_CALL(NpcJump0, NPC_Twink_01, 205, 90, 0, 20)
     EVT_CALL(PlaySoundAtNpc, NPC_Twink_01, SOUND_HIT_NORMAL, 0)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_02, ANIM_WorldBowser_Shock)
-    EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, 3, 205, 90, 0, -1, -1, 0, 3)
+    EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, 205, 90, 0, -1, -1, 0, 3)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 8, EVT_FLOAT(1.5))
     EVT_END_THREAD

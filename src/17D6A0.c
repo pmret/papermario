@@ -4111,7 +4111,7 @@ void apply_shock_effect(Actor* actor) {
             s32 f1 = (part->size.x + (part->size.x / 4)) * actor->scalingFactor;
             s32 f2 = (part->size.y - 2) * actor->scalingFactor;
 
-            if (actor->flags & ACTOR_FLAG_8000) {
+            if (actor->flags & ACTOR_FLAG_HALF_HEIGHT) {
                 y -= actor->size.y / 2;
             }
 

@@ -3216,7 +3216,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
     x1 = actor->curPos.x + actor->headOffset.x;
     if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y1 = actor->curPos.y + actor->headOffset.y - actor->size.y / 2;
-    } else if (!(flags & ACTOR_FLAG_8000)) {
+    } else if (!(flags & ACTOR_FLAG_HALF_HEIGHT)) {
         y1 = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
     } else {
         y1 = actor->curPos.y + actor->headOffset.y + actor->size.y;
@@ -3227,7 +3227,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
     x2 = actor->curPos.x + actor->headOffset.x + actor->size.x / 2;
     if (flags2 & ACTOR_FLAG_UPSIDE_DOWN) {
         y2 = actor->curPos.y + actor->headOffset.y - actor->size.y;
-    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+    } else if (!(flags2 & ACTOR_FLAG_HALF_HEIGHT)) {
         y2 = actor->curPos.y + actor->headOffset.y + actor->size.y;
     } else {
         y2 = actor->curPos.y + actor->headOffset.y + actor->size.y * 2;
@@ -3340,7 +3340,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
     x1 = actor->curPos.x + actor->headOffset.x;
     if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y1 = actor->curPos.y + actor->headOffset.y - actor->size.y / 2;
-    } else if (!(flags & ACTOR_FLAG_8000)) {
+    } else if (!(flags & ACTOR_FLAG_HALF_HEIGHT)) {
         y1 = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
     } else {
         y1 = actor->curPos.y + actor->headOffset.y + actor->size.y;
@@ -3351,7 +3351,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
     x2 = actor->curPos.x + actor->headOffset.x + actor->size.x / 2;
     if (flags2 & ACTOR_FLAG_UPSIDE_DOWN) {
         y2 = actor->curPos.y + actor->headOffset.y - actor->size.y;
-    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+    } else if (!(flags2 & ACTOR_FLAG_HALF_HEIGHT)) {
         y2 = actor->curPos.y + actor->headOffset.y + actor->size.y;
     } else {
         y2 = actor->curPos.y + actor->headOffset.y + actor->size.y * 2;
@@ -3462,7 +3462,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
     x = actor->curPos.x + actor->headOffset.x;
     if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y = actor->curPos.y + actor->headOffset.y - actor->size.y / 2;
-    } else if (!(flags & ACTOR_FLAG_8000)) {
+    } else if (!(flags & ACTOR_FLAG_HALF_HEIGHT)) {
         y = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
     } else {
         y = actor->curPos.y + actor->headOffset.y + actor->size.y;
@@ -3568,7 +3568,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
     x = actor->curPos.x + actor->headOffset.x;
     if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y = actor->curPos.y + actor->headOffset.y - actor->size.y / 2;
-    } else if (!(flags & ACTOR_FLAG_8000)) {
+    } else if (!(flags & ACTOR_FLAG_HALF_HEIGHT)) {
         y = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
     } else {
         y = actor->curPos.y + actor->headOffset.y + actor->size.y;
@@ -3674,7 +3674,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
     x1 = actor->curPos.x + actor->headOffset.x;
     if (flags & ACTOR_FLAG_UPSIDE_DOWN) {
         y1 = actor->curPos.y + actor->headOffset.y - actor->size.y / 2;
-    } else if (!(flags & ACTOR_FLAG_8000)) {
+    } else if (!(flags & ACTOR_FLAG_HALF_HEIGHT)) {
         y1 = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
     } else {
         y1 = actor->curPos.y + actor->headOffset.y + actor->size.y;
@@ -3685,7 +3685,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
     x2 = actor->curPos.x + actor->headOffset.x + actor->size.x / 2;
     if (flags2 & ACTOR_FLAG_UPSIDE_DOWN) {
         y2 = actor->curPos.y + actor->headOffset.y - actor->size.y;
-    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+    } else if (!(flags2 & ACTOR_FLAG_HALF_HEIGHT)) {
         y2 = actor->curPos.y + actor->headOffset.y + actor->size.y;
     } else {
         y2 = actor->curPos.y + actor->headOffset.y + actor->size.y * 2;

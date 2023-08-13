@@ -6,30 +6,27 @@
 
 #include "battle/common/move/StarPowerSupport.inc.c"
 
-API_CALLABLE(N(func_802A1518_78ECE8)) {
+API_CALLABLE(N(SpawnShootingStarFX)) {
     s32 x = -50 - rand_int(200);
     s32 y = 200;
     s32 z = rand_int(40);
-    f32 var4;
 
-    if (script->varTable[0] % 4) {
-        var4 = x + (rand_int(50) + y);
-        fx_star(FX_STAR_2, x, y, z, var4, 0, z, rand_int(10) + 7);
+    if (script->varTable[0] % 4 != 0) {
+        fx_star(FX_STAR_LARGE_BOUNCING, x, y, z, x + (rand_int(50) + y), 0, z, rand_int(10) + 7);
     } else {
-        var4 = x + (rand_int(50) + y);
-        fx_star(FX_STAR_SMALL, x, y, z, var4, 0, z, rand_int(10) + 7);
+        fx_star(FX_STAR_SMALL_BOUNCING, x, y, z, x + (rand_int(50) + y), 0, z, rand_int(10) + 7);
     }
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(func_802A1628_78EDF8)) {
+API_CALLABLE(N(SpawnDamageStarsFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
 
-    fx_damage_stars(2, x, y, z, 0, -1.0f, 0, 5);
+    fx_damage_stars(FX_DAMAGE_STARS_2, x, y, z, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }
@@ -44,12 +41,12 @@ EvtScript N(EVS_UsePower) = {
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
-            EVT_CALL(PlaySound, SOUND_SRAW_15_A)
-            EVT_CALL(N(func_802A1518_78ECE8))
+            EVT_CALL(PlaySound, SOUND_SRAW_SHOOTING_STAR_FALL_A)
+            EVT_CALL(N(SpawnShootingStarFX))
             EVT_WAIT(5)
             EVT_ADD(LVar0, 1)
-            EVT_CALL(PlaySound, SOUND_SRAW_15_B)
-            EVT_CALL(N(func_802A1518_78ECE8))
+            EVT_CALL(PlaySound, SOUND_SRAW_SHOOTING_STAR_FALL_B)
+            EVT_CALL(N(SpawnShootingStarFX))
             EVT_WAIT(5)
             EVT_ADD(LVar0, 1)
         EVT_END_LOOP
@@ -82,7 +79,7 @@ EvtScript N(EVS_UsePower) = {
             EVT_GOTO(1)
         EVT_END_IF
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(N(func_802A1628_78EDF8), LVar0, LVar1, LVar2)
+        EVT_CALL(N(SpawnDamageStarsFX), LVar0, LVar1, LVar2)
         EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 7, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_LABEL(1)
         EVT_WAIT(10)

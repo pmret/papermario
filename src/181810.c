@@ -142,10 +142,10 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         gSpeakingActorPart = part;
 
         headX = actor->curPos.x + actor->headOffset.x;
-        if (!(actor->flags & ACTOR_FLAG_8000)) {
-            headY = actor->size.y + (actor->curPos.y + actor->headOffset.y);
+        if (!(actor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y;
         } else {
-            headY = actor->curPos.y + actor->headOffset.y + (actor->size.y / 2);
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
         }
 
         headZ = actor->curPos.z + actor->headOffset.z;
@@ -168,11 +168,10 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         part = gSpeakingActorPart;
 
         headX = actor->curPos.x + actor->headOffset.x;
-        if (!(actor->flags & ACTOR_FLAG_8000)) {
-            headY = actor->size.y + (actor->curPos.y + actor->headOffset.y);
+        if (!(actor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y;
         } else {
-            headY = actor->headOffset.y;
-            headY = actor->curPos.y + actor->headOffset.y + (actor->size.y / 2);
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
         }
 
         headZ = actor->curPos.z + actor->headOffset.z;
@@ -236,7 +235,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         ActorPart* actorPart = gSpeakingActorPart;
 
         x = actor->curPos.x + actor->headOffset.x;
-        if (!(gSpeakingActor->flags & ACTOR_FLAG_8000)) {
+        if (!(gSpeakingActor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
             y = actor->curPos.y + actor->headOffset.y + actor->size.y ;
         } else {
             y = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;

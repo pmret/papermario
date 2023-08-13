@@ -114,7 +114,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                 EVT_THREAD
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15 * DT, EVT_FLOAT(1.0))
                 EVT_END_THREAD
-                EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, 1, 495, 15, 9, 460, 15, 9, 6)
+                EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_1, 495, 15, 9, 460, 15, 9, 6)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Injured)
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, 250, 6, 60 * DT)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Injured)

@@ -942,10 +942,10 @@ enum SoundIDs {
     SOUND_LRAW_0249                               = 0x00000249,
     SOUND_024A                                    = 0x0000024A,
     SOUND_024B                                    = 0x0000024B,
-    SOUND_SRAW_15_A                               = 0x00000259,
-    SOUND_SRAW_15_B                               = 0x0000025A,
-    SOUND_SRAW_STAR_BOUNCE_A                     = 0x0000025C,
-    SOUND_SRAW_STAR_BOUNCE_B                     = 0x0000025D,
+    SOUND_SRAW_SHOOTING_STAR_FALL_A             = 0x00000259,
+    SOUND_SRAW_SHOOTING_STAR_FALL_B             = 0x0000025A,
+    SOUND_SRAW_STAR_BOUNCE_A                    = 0x0000025C,
+    SOUND_SRAW_STAR_BOUNCE_B                    = 0x0000025D,
     SOUND_0261                                    = 0x00000261,
     SOUND_0262                                    = 0x00000262,
     SOUND_0263                                    = 0x00000263,
@@ -1136,7 +1136,7 @@ enum SoundIDs {
     SOUND_0363                                    = 0x00000363,
     SOUND_0364                                    = 0x00000364,
     SOUND_0365                                    = 0x00000365,
-    SOUND_0366                                    = 0x00000366,
+    SOUND_LIGHTNING_STRIKE                      = 0x00000366,
     SOUND_0367                                    = 0x00000367,
     SOUND_0368                                    = 0x00000368,
     SOUND_0369                                    = 0x00000369,
@@ -1674,7 +1674,7 @@ enum SoundIDs {
     SOUND_SEQ_12                                  = 0xB0000012,
     SOUND_SEQ_RAVEN_LEAP                        = 0xB0000013, // unused
     SOUND_SEQ_14                                  = 0xB0000014, // unused
-    SOUND_SEQ_15                                  = 0xB0000015,
+    SOUND_SEQ_SHOOTING_STAR_FALL                = 0xB0000015,
     SOUND_SEQ_SHOOTING_STAR_BOUNCE              = 0xB0000016,
     SOUND_SEQ_17                                  = 0xB0000017,
     SOUND_SEQ_18                                  = 0xB0000018,
@@ -3234,7 +3234,7 @@ enum ActorFlags {
     ACTOR_FLAG_TYPE_CHANGED      = 0x00001000, ///< Indicates actors type has changed, triggers recheck for if HP bar should be shown based on tattle status.
     ACTOR_FLAG_2000              = 0x00002000,
     ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.
-    ACTOR_FLAG_8000              = 0x00008000,
+    ACTOR_FLAG_HALF_HEIGHT       = 0x00008000,
     ACTOR_FLAG_10000             = 0x00010000,
     ACTOR_FLAG_20000             = 0x00020000,
     ACTOR_FLAG_NO_HEALTH_BAR     = 0x00040000, // Health bar is not shown for this actor type

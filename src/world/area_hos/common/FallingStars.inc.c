@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(UnkEffect0FFunc2)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpawnDirectedShootingStarFX)) {
     Bytecode* args = script->ptrReadPos;
     f32 type = evt_get_float_variable(script, *args++); // @bug? s32 accessed as a float
     f32 startX = evt_get_float_variable(script, *args++);
@@ -16,105 +16,98 @@ ApiStatus N(UnkEffect0FFunc2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkEffect0FFunc1)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpawnRandomBackgroundShootingStarFX)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 yaw = gCameras[CAM_DEFAULT].curYaw / 180.0f * PI;
     f32 yawPlus = yaw + (PI_D / 2);
     f32 yawMinus = yaw - (PI_D / 2);
+    f32 startX, startY, startZ;
+    f32 endX, endY, endZ;
+    f32 startOffset = rand_int(500) - 250;
+    f32 endOffset = rand_int(500) - 250;
+    f32 fwdOffset = rand_int(100) + 600;
     f32 temp_f30;
-    f32 startX;
-    f32 startY;
-    f32 rand1 = rand_int(500) - 250;
-    f32 rand2 = rand_int(500) - 250;
-    f32 rand3 = rand_int(100) + 600;
-    f32 startZ;
-    f32 endX;
-    f32 endY;
-    f32 endZ;
 
-    temp_f30 = playerStatus->pos.x + (rand3 * sin_rad(yaw));
-    startX = temp_f30 + (rand1 * sin_rad(yawPlus));
+    temp_f30 = playerStatus->pos.x + (fwdOffset * sin_rad(yaw));
+    startX = temp_f30 + (startOffset * sin_rad(yawPlus));
     startY = playerStatus->pos.y + 200.0f;
-    startZ = playerStatus->pos.z - (rand3 * cos_rad(yaw));
-    startZ -= (rand1 * cos_rad(yawPlus));
-    endX = playerStatus->pos.x + (rand3 * sin_rad(yaw));
-    endX += (rand2 * sin_rad(yawMinus));
+    startZ = playerStatus->pos.z - (fwdOffset * cos_rad(yaw));
+    startZ -= startOffset * cos_rad(yawPlus);
+
+    endX = playerStatus->pos.x + (fwdOffset * sin_rad(yaw));
+    endX += endOffset * sin_rad(yawMinus);
     endY = playerStatus->pos.y;
-    endZ = playerStatus->pos.z - (rand3 * cos_rad(yaw));
-    endZ -= (rand2 * cos_rad(yawMinus));
-    fx_star(FX_STAR_0, startX, startY, startZ, endX, endY, endZ, rand_int(10) + 10);
+    endZ = playerStatus->pos.z - (fwdOffset * cos_rad(yaw));
+    endZ -= endOffset * cos_rad(yawMinus);
+
+    fx_star(FX_STAR_BACKGROUND, startX, startY, startZ, endX, endY, endZ, rand_int(10) + 10);
     return ApiStatus_DONE2;
 }
 
 
-ApiStatus N(UnkEffect0FFunc3)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpawnRandomForegroundShootingStarFX)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 yaw = gCameras[CAM_DEFAULT].curYaw / 180.0f * PI;
     f32 yawPlus = yaw + (PI_D / 2);
     f32 yawMinus = yaw - (PI_D / 2);
-    f32 temp_f30;
-    f32 startX;
-    f32 startY;
-    f32 rand1 = rand_int(300) - 150;
-    f32 rand2 = rand_int(300) - 150;
-    f32 rand3 = rand_int(100) + 50;
-    f32 startZ;
-    f32 var4;
-    f32 var5;
-    f32 var6;
+    f32 startOffset = rand_int(300) - 150;
+    f32 endOffset = rand_int(300) - 150;
+    f32 fwdOffset = rand_int(100) + 50;
+    f32 startX, startY, startZ;
+    f32 endX, endY, endZ;
 
     if ((playerStatus->pos.y >= 250.0f)) {
         return ApiStatus_DONE2;
     }
 
-    temp_f30 = playerStatus->pos.x - (rand3 * sin_rad(yaw));
-    startX = temp_f30 + (rand1 * sin_rad(yawPlus));
+    startX = playerStatus->pos.x - (fwdOffset * sin_rad(yaw));
+    startX += (startOffset * sin_rad(yawPlus));
     startY = playerStatus->pos.y + 200.0f;
-    startZ = playerStatus->pos.z + (rand3 * cos_rad(yaw));
-    startZ = startZ - (rand1 * cos_rad(yawPlus));
-    var4 = playerStatus->pos.x - (rand3 * sin_rad(yaw));
-    var4 = var4 + (rand2 * sin_rad(yawMinus));
-    var5 = playerStatus->pos.y;
-    var6 = playerStatus->pos.z + (rand3 * cos_rad(yaw));
-    var6 = var6 - (rand2 * cos_rad(yawMinus));
-    fx_star(FX_STAR_1, startX, startY, startZ, var4, var5, var6, rand_int(10) + 10);
+    startZ = playerStatus->pos.z + (fwdOffset * cos_rad(yaw));
+    startZ -= startOffset * cos_rad(yawPlus);
+
+    endX = playerStatus->pos.x - (fwdOffset * sin_rad(yaw));
+    endX += endOffset * sin_rad(yawMinus);
+    endY = playerStatus->pos.y;
+    endZ = playerStatus->pos.z + (fwdOffset * cos_rad(yaw));
+    endZ -= endOffset * cos_rad(yawMinus);
+
+    fx_star(FX_STAR_FOREGROUND, startX, startY, startZ, endX, endY, endZ, rand_int(10) + 10);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkEffect0FFunc4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpawnRandomBouncingShootingStarFX)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 yaw = gCameras[CAM_DEFAULT].curYaw / 180.0f * PI;
     f32 yawPlus = yaw + (PI_D / 2);
     f32 yawMinus = yaw - (PI_D / 2);
-    f32 temp_f30;
-    f32 var1;
-    f32 var2;
-    f32 rand1 = rand_int(150);
-    f32 rand2 = rand_int(150);
-    f32 rand3 = rand_int(100) - 50;
-    f32 var3;
-    f32 var4;
-    f32 var5;
-    f32 var6;
+    f32 startOffset = rand_int(150);
+    f32 endOffset = rand_int(150);
+    f32 fwdOffset = rand_int(100) - 50;
+    f32 startX, startY, startZ;
+    f32 endX, endY, endZ;
 
     if ((playerStatus->pos.z < 200.0f)) {
         return ApiStatus_DONE2;
     }
 
-    temp_f30 = playerStatus->pos.x - (rand3 * sin_rad(yaw));
-    var1 = temp_f30 + (rand1 * sin_rad(yawPlus));
-    var2 = playerStatus->pos.y + 200.0f;
-    var3 = playerStatus->pos.z + (rand3 * cos_rad(yaw));
-    var3 = var3 - (rand1 * cos_rad(yawPlus));
-    script->varTable[1] = var1;
-    script->varTable[2] = var2;
-    script->varTable[3] = var3;
-    var4 = playerStatus->pos.x - (rand3 * sin_rad(yaw));
-    var4 += rand2 * sin_rad(yawMinus);
-    var5 = playerStatus->pos.y;
-    var6 = playerStatus->pos.z + (rand3 * cos_rad(yaw));
-    var6 -= rand2 * cos_rad(yawMinus);
-    fx_star(FX_STAR_2, var1, var2, var3, var4, var5, var6, rand_int(4) + 10);
+    startX = playerStatus->pos.x - (fwdOffset * sin_rad(yaw));
+    startX += (startOffset * sin_rad(yawPlus));
+    startY = playerStatus->pos.y + 200.0f;
+    startZ = playerStatus->pos.z + (fwdOffset * cos_rad(yaw));
+    startZ -= startOffset * cos_rad(yawPlus);
+
+    script->varTable[1] = startX;
+    script->varTable[2] = startY;
+    script->varTable[3] = startZ;
+
+    endX = playerStatus->pos.x - (fwdOffset * sin_rad(yaw));
+    endX += endOffset * sin_rad(yawMinus);
+    endY = playerStatus->pos.y;
+    endZ = playerStatus->pos.z + (fwdOffset * cos_rad(yaw));
+    endZ -= endOffset * cos_rad(yawMinus);
+
+    fx_star(FX_STAR_LARGE_BOUNCING, startX, startY, startZ, endX, endY, endZ, rand_int(4) + 10);
     return ApiStatus_DONE2;
 }
 
@@ -172,15 +165,15 @@ EvtScript N(EVS_Starfall_Directed) = {
         // choose random star type
         EVT_SWITCH(LV_PosZ)
             EVT_CASE_LT(-290)
-                EVT_SET(LV_Type, FX_STAR_0)
+                EVT_SET(LV_Type, FX_STAR_BACKGROUND)
             EVT_CASE_LT(40)
-                EVT_SET(LV_Type, FX_STAR_2)
+                EVT_SET(LV_Type, FX_STAR_LARGE_BOUNCING)
             EVT_CASE_GE(40)
-                EVT_SET(LV_Type, FX_STAR_1)
+                EVT_SET(LV_Type, FX_STAR_FOREGROUND)
         EVT_END_SWITCH
         // play sound (subject to minimum delay)
         EVT_IF_LT(LV_SoundDelay, 2)
-            EVT_CALL(PlaySoundAt, SOUND_SEQ_15, 0, LV_PosX, LV_PosY, LV_PosZ)
+            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, 0, LV_PosX, LV_PosY, LV_PosZ)
             EVT_ADD(LV_SoundDelay, 1)
         EVT_END_IF
         EVT_ADD(LV_Time, LV_Delay)
@@ -189,7 +182,7 @@ EvtScript N(EVS_Starfall_Directed) = {
             EVT_SET(LV_SoundDelay, 0)
         EVT_END_IF
         // spawn the effect
-        EVT_CALL(N(UnkEffect0FFunc2), LV_Type, LV_PosX, LV_PosY, LV_PosZ, LV_EndX, LV_EndY, LV_EndZ, LV_Speed)
+        EVT_CALL(N(SpawnDirectedShootingStarFX), LV_Type, LV_PosX, LV_PosY, LV_PosZ, LV_EndX, LV_EndY, LV_EndZ, LV_Speed)
         EVT_WAIT(LV_Delay)
         EVT_GOTO(0)
     EVT_RETURN
@@ -202,7 +195,7 @@ EvtScript N(EVS_Starfall_Random) = {
         EVT_LABEL(0)
             EVT_CALL(RandInt, 50, LVar0)
             EVT_ADD(LVar0, 10)
-            EVT_CALL(N(UnkEffect0FFunc1))
+            EVT_CALL(N(SpawnRandomBackgroundShootingStarFX))
             EVT_WAIT(LVar0)
             EVT_GOTO(0)
     EVT_END_THREAD
@@ -210,7 +203,7 @@ EvtScript N(EVS_Starfall_Random) = {
         EVT_LABEL(1)
             EVT_CALL(RandInt, 50, LVar0)
             EVT_ADD(LVar0, 20)
-            EVT_CALL(N(UnkEffect0FFunc3))
+            EVT_CALL(N(SpawnRandomForegroundShootingStarFX))
             EVT_WAIT(LVar0)
             EVT_GOTO(1)
     EVT_END_THREAD
@@ -218,8 +211,8 @@ EvtScript N(EVS_Starfall_Random) = {
         EVT_LABEL(2)
             EVT_CALL(RandInt, 50, LVar0)
             EVT_ADD(LVar0, 20)
-            EVT_CALL(N(UnkEffect0FFunc4))
-            EVT_CALL(PlaySoundAt, SOUND_SEQ_15, 0, LVar1, LVar2, LVar3)
+            EVT_CALL(N(SpawnRandomBouncingShootingStarFX))
+            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, 0, LVar1, LVar2, LVar3)
             EVT_WAIT(LVar0)
             EVT_GOTO(2)
     EVT_END_THREAD

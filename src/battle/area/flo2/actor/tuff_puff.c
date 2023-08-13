@@ -114,7 +114,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_8000 | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_HALF_HEIGHT | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_TUFF_PUFF,
     .level = 0,
     .maxHP = 1,
