@@ -19,7 +19,7 @@ NpcData N(NpcData_Pokey_01) = {
         }
     },
     .settings = &N(NpcSettings_Pokey),
-    .flags = ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_FLYING,
     .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -42,7 +42,7 @@ NpcData N(NpcData_Pokey_02) = {
         }
     },
     .settings = &N(NpcSettings_Pokey),
-    .flags = ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_FLYING,
     .drops = POKEY_DROPS,
     .animations = POKEY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

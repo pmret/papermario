@@ -35,7 +35,7 @@ EvtScript N(EVS_GoombaKingBlastoff) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_GoombaKing, EVT_FLOAT(0.3))
     EVT_CALL(NpcJump0, NPC_GoombaKing, -1600, 1000, -1600, 150)
-    EVT_CALL(PlaySoundAt, SOUND_0055, SOUND_SPACE_DEFAULT, -1600, 1000, -1600)
+    EVT_CALL(PlaySoundAt, SOUND_LENS_FLARE, SOUND_SPACE_DEFAULT, -1600, 1000, -1600)
     EVT_CALL(N(MakeLensFlare), -1600, 1000, -1600, 40)
     EVT_CALL(SetNpcPos, NPC_GoombaKing, NPC_DISPOSE_LOCATION)
     EVT_CALL(RemoveNpc, NPC_GoombaKing)

@@ -19,7 +19,7 @@ NpcData N(NpcData_Swoopula) = {
         }
     },
     .settings = &N(NpcSettings_Swoopula),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = SWOOPULA_DROPS,
     .animations = SWOOPULA_ANIMS,
 };

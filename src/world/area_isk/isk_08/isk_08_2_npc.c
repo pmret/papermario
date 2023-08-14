@@ -19,7 +19,7 @@ NpcData N(NpcData_BuzzyBeetle) = {
         }
     },
     .settings = &N(NpcSettings_BuzzyBeetle),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = ISK_BUZZY_BEETLE_DROPS,
     .animations = BUZZY_BEETLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

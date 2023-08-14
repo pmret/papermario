@@ -28,7 +28,7 @@ NpcData N(NpcData_FrostClubba)[] = {
         },
         .init = &N(EVS_NpcInit_FrostClubba),
         .settings = &N(NpcSettings_FrostClubba_Wander),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

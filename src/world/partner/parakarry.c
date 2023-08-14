@@ -93,7 +93,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
-            parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
@@ -258,7 +258,7 @@ API_CALLABLE(N(UseAbility)) {
             N(UsingAbility) = TRUE;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
-            parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             partnerStatus->actingPartner = PARTNER_PARAKARRY;
             partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();

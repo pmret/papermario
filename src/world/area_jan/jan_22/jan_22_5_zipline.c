@@ -8,7 +8,7 @@ API_CALLABLE(N(Zipline_AdjustMoveDownSound)) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
-        sfx_adjust_env_sound_pos(SOUND_LRAW_ZIPLINE, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_ZIPLINE_RIDE, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     }
     return ApiStatus_DONE2;
 }
@@ -20,7 +20,7 @@ API_CALLABLE(N(Zipline_AdjustMoveUpSound)) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
-        sfx_adjust_env_sound_pos(SOUND_LRAW_0185, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_ZIPLINE_RETURN, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     }
     return ApiStatus_DONE2;
 }
@@ -124,7 +124,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-    EVT_CALL(PlaySound, SOUND_LOOP_ZIPLINE)
+    EVT_CALL(PlaySound, SOUND_LOOP_ZIPLINE_RIDE)
     EVT_CHILD_THREAD
         EVT_SET(MF_RidingZipline1, TRUE)
         EVT_SET(LVar0, ArrayVar(6))
@@ -156,7 +156,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_LABEL(10)
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_SCRIPTED_FALL, TRUE)
     EVT_SET(MF_RidingZipline1, FALSE)
-    EVT_CALL(StopSound, SOUND_LOOP_ZIPLINE)
+    EVT_CALL(StopSound, SOUND_LOOP_ZIPLINE_RIDE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o339, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o339, COLLIDER_FLAG_IGNORE_SHELL)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o276, COLLIDER_FLAGS_UPPER_MASK)
@@ -166,7 +166,7 @@ EvtScript N(EVS_RideZipline) = {
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(20)
-    EVT_CALL(PlaySound, SOUND_LOOP_1A)
+    EVT_CALL(PlaySound, SOUND_LOOP_ZIPLINE_RETURN)
     EVT_CHILD_THREAD
         EVT_SET(MF_RidingZipline2, TRUE)
         EVT_SET(LVar0, ArrayVar(6))
@@ -193,7 +193,7 @@ EvtScript N(EVS_RideZipline) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_SET(MF_RidingZipline2, FALSE)
-    EVT_CALL(StopSound, SOUND_LOOP_1A)
+    EVT_CALL(StopSound, SOUND_LOOP_ZIPLINE_RETURN)
     EVT_RETURN
     EVT_END
 };

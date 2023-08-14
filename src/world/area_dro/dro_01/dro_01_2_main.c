@@ -25,7 +25,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_Scene_RuinsRising) = {
-    EVT_CALL(PlaySound, SOUND_LOOP_60)
+    EVT_CALL(PlaySound, SOUND_LOOP_SBK_RUINS_RISING_DISTANT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 175, 0, -201)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 175, 0, -201)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))

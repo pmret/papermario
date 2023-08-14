@@ -2567,8 +2567,8 @@ void create_encounters(void) {
                     if (enemy->flags & ENEMY_FLAG_IGNORE_ENTITY_COLLISION) {
                         newNpc->flags |= NPC_FLAG_IGNORE_ENTITY_COLLISION;
                     }
-                    if (enemy->flags & ENEMY_FLAG_800) {
-                        newNpc->flags |= NPC_FLAG_8;
+                    if (enemy->flags & ENEMY_FLAG_FLYING) {
+                        newNpc->flags |= NPC_FLAG_FLYING;
                     }
                     if (enemy->flags & ENEMY_FLAG_GRAVITY) {
                         newNpc->flags |= NPC_FLAG_GRAVITY;

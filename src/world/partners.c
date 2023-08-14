@@ -2191,7 +2191,7 @@ s32 partner_put_away(Npc* partner) {
             tempMoveToY = partner->pos.y;
             tempMoveToZ = partner->pos.z;
             partner->flags &= ~NPC_FLAG_GRAVITY;
-            partner->flags &= ~NPC_FLAG_8;
+            partner->flags &= ~NPC_FLAG_FLYING;
             tempPosX = playerStatus->pos.x;
             partner->moveToPos.x = tempPosX;
             tempPosY = playerStatus->pos.y + (playerStatus->colliderHeight / 2);

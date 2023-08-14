@@ -105,7 +105,7 @@ NpcData N(NpcData_Goomba) = {
     },
     .init = &N(EVS_NpcInit_Goomba),
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };

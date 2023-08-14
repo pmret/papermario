@@ -4,7 +4,7 @@ EvtScript N(EVS_FlipStairsCCW) = {
     EVT_WAIT(20)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar3, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, LVar4, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_LOOP_02, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_LOOP_ISK_FLIP_STAIRS, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 90, LVar5, EASING_COS_IN)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -13,7 +13,7 @@ EvtScript N(EVS_FlipStairsCCW) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_LOOP_02)
+    EVT_CALL(StopSound, SOUND_LOOP_ISK_FLIP_STAIRS)
     EVT_RETURN
     EVT_END
 };
@@ -21,7 +21,7 @@ EvtScript N(EVS_FlipStairsCCW) = {
 EvtScript N(EVS_FlipStairsCW) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, LVar3, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, LVar4, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, LVar3, SOUND_LOOP_02, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, LVar3, SOUND_LOOP_ISK_FLIP_STAIRS, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 90, 0, LVar5, EASING_COS_IN)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -30,7 +30,7 @@ EvtScript N(EVS_FlipStairsCW) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_LOOP_02)
+    EVT_CALL(StopSound, SOUND_LOOP_ISK_FLIP_STAIRS)
     EVT_RETURN
     EVT_END
 };

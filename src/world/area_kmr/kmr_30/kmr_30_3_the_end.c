@@ -121,7 +121,7 @@ EvtScript N(EVS_Scene_TheEnd) = {
     EVT_THREAD
         EVT_CALL(SetNpcSpeed, NPC_ParadePeach, EVT_FLOAT(2.0))
         EVT_CALL(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_8, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_ParadePeach, NPC_FLAG_FLYING, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_ParadePeach, ANIM_ParadePeach_ShadeWalk)
         EVT_CALL(NpcMoveTo, NPC_ParadePeach, 450, -60, 0)
         EVT_CALL(SetNpcAnimation, NPC_ParadePeach, ANIM_ParadePeach_ShadeWalkBack)

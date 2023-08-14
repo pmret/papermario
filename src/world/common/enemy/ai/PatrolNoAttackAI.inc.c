@@ -41,10 +41,10 @@ API_CALLABLE(N(PatrolNoAttackAI_Main)) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->patrol.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_8;
+            npc->flags &= ~NPC_FLAG_FLYING;
         } else {
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_8;
+            npc->flags |= NPC_FLAG_FLYING;
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {

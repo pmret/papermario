@@ -46,7 +46,7 @@ EvtScript N(EVS_Luigi_PlayWalkSounds_Intro) = {
     EVT_END_SWITCH
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_SEQ_19, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_SEQ_LUIGI_STEP, SOUND_SPACE_DEFAULT)
             EVT_WAIT(LVar1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -87,7 +87,7 @@ EvtScript N(EVS_Player_EnterPipe_Intro) = {
 
 EvtScript N(EVS_Luigi_EnterPipe_Intro) = {
     EVT_CALL(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Scene_Luigi, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(EnableNpcShadow, NPC_Scene_Luigi, FALSE)
     EVT_SET(LVar0, kmr_20_ENTRY_4)
     EVT_CALL(N(Pipe_GetEntryPos_Intro))

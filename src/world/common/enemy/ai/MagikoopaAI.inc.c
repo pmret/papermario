@@ -85,7 +85,7 @@ void N(MagikoopaAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     npc->scale.x = 0.1f;
     npc->scale.y = 0.1f;
     npc->scale.z = 0.1f;
-    if (!(npc->flags & NPC_FLAG_8)) {
+    if (!(npc->flags & NPC_FLAG_FLYING)) {
         posX = npc->pos.x;
         dist = 200.0f;
         posZ = npc->pos.z;

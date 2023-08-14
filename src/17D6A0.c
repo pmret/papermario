@@ -366,9 +366,9 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_FUZZY] = {
-        .walk = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .fly = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .jump = SOUND_SRAW_17_A,
+        .walk = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .fly = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .jump = SOUND_FUZZY_HOP_A,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
@@ -478,9 +478,9 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_FOREST_FUZZY] = {
-        .walk = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .fly = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .jump = SOUND_SRAW_17_A,
+        .walk = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .fly = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .jump = SOUND_FUZZY_HOP_A,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
@@ -576,16 +576,16 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_AQUA_FUZZY] = {
-        .walk = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .fly = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .jump = SOUND_SRAW_17_A,
+        .walk = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .fly = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .jump = SOUND_FUZZY_HOP_A,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_JUNGLE_FUZZY] = {
-        .walk = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .fly = { SOUND_SRAW_17_A, SOUND_SRAW_17_A },
-        .jump = SOUND_SRAW_17_A,
+        .walk = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .fly = { SOUND_FUZZY_HOP_A, SOUND_FUZZY_HOP_A },
+        .jump = SOUND_FUZZY_HOP_A,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },

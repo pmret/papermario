@@ -21,7 +21,7 @@ NpcData N(NpcData_Koopatrol) = {
         }
     },
     .settings = &N(NpcSettings_Koopatrol_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPATROL_DROPS,
     .animations = KOOPATROL_ANIMS,
 };
@@ -44,7 +44,7 @@ NpcData N(NpcData_FlyingMagikoopa)[] = {
             }
         },
         .settings = &N(NpcSettings_FlyingMagikoopa),
-        .flags = ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_FLYING,
         .drops = FLYING_MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_ANIMS,
         .extraAnimations = N(ExtraAnims_FlyingMagikoopa),
@@ -71,7 +71,7 @@ NpcData N(NpcData_HammerBros)[] = {
             }
         },
         .settings = &N(NpcSettings_HammerBros_Wander),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },

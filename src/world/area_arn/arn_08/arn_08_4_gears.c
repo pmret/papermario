@@ -1,7 +1,7 @@
 #include "arn_08.h"
 
 EvtScript N(EVS_AnimateGears) = {
-    EVT_CALL(PlaySound, SOUND_LOOP_WINDILL_GEARS)
+    EVT_CALL(PlaySound, SOUND_LOOP_WINDMILL_GEARS)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LABEL(10)

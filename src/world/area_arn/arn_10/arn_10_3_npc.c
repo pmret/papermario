@@ -65,7 +65,7 @@ NpcData N(NpcData_TubbasHeart) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_TubbasHeart),
     .settings = &N(NpcSettings_TubbasHeart),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
@@ -88,7 +88,7 @@ NpcData N(NpcData_HyperGoomba) = {
     },
     .init = &N(EVS_NpcInit_HyperGoomba),
     .settings = &N(NpcSettings_HyperGoomba),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = HYPER_GOOMBA_DROPS,
     .animations = HYPER_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

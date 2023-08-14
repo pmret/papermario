@@ -223,9 +223,9 @@ API_CALLABLE(N(ClubbaNappingAI_Main)) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_8;
+            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_FLYING;
         } else {
-            npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_8;
+            npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_FLYING;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;

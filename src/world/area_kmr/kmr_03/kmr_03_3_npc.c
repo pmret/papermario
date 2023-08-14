@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_GE(STORY_CH0_GOOMPA_JOINED_PARTY)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_SWITCH
     EVT_RETURN

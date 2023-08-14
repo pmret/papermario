@@ -67,7 +67,7 @@
     .settings = &N(NpcSettings_BulletBill), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 270, \
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000, \
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000, \
     .initVarCount = 1, \
     .initVar = { .value = 0 }, \
     .drops = BULLET_BILL_DROPS, \

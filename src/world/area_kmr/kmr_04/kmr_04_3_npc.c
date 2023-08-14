@@ -9,7 +9,7 @@ NpcSettings N(NpcSettings_JrTroopa) = {
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_RETURN
@@ -90,13 +90,13 @@ EvtScript N(EVS_NpcAI_Goompa) = {
                     EVT_CALL(PlayerMoveTo, 395, 0, 0)
                     EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_END_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8, TRUE)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, TRUE)
                 EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(6.0))
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Run)
                 EVT_CALL(NpcMoveTo, NPC_PARTNER, 582, 6, 0)
                 EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8, FALSE)
-                EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0061, SOUND_SPACE_DEFAULT)
+                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING, FALSE)
+                EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_GOOMPA_ATTACKED, SOUND_SPACE_DEFAULT)
                 EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AD)
                 EVT_WAIT(10 * DT)
                 EVT_THREAD
@@ -268,7 +268,7 @@ NpcData N(NpcData_JrTroopa) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_JrTroopa),
     .settings = &N(NpcSettings_JrTroopa),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,

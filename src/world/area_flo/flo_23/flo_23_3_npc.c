@@ -187,7 +187,7 @@ NpcData N(NpcData_Spiny_01) = {
         }
     },
     .settings = &N(NpcSettings_Spiny),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
 };
@@ -209,7 +209,7 @@ NpcData N(NpcData_Spiny_02) = {
         }
     },
     .settings = &N(NpcSettings_Spiny),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPINY_DROPS,
     .animations = SPINY_ANIMS,
 };

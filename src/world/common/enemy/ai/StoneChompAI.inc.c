@@ -38,7 +38,7 @@ API_CALLABLE(N(StoneChompAI_Main)) {
         npc->duration = 0;
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_8;
+        npc->flags |= NPC_FLAG_FLYING;
         script->functionTemp[1] = 0;
         script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
         if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {

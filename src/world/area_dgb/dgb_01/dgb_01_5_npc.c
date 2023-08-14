@@ -190,7 +190,7 @@ EvtScript N(EVS_NpcInit_Tubba_Floor1) = {
 EvtScript N(EVS_NpcInit_Sentinel_01) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -33, -3, 8)
@@ -204,7 +204,7 @@ EvtScript N(EVS_NpcInit_Sentinel_01) = {
 EvtScript N(EVS_NpcInit_Sentinel_02) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -486, 182, 28)
@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcInit_Sentinel_02) = {
 EvtScript N(EVS_NpcInit_Sentinel_03) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -201, 0, -143)
@@ -232,7 +232,7 @@ EvtScript N(EVS_NpcInit_Sentinel_03) = {
 EvtScript N(EVS_NpcInit_Sentinel_04) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -305, -1, -80)
@@ -261,7 +261,7 @@ NpcData N(NpcData_Sentinel_01) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_01),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -284,7 +284,7 @@ NpcData N(NpcData_Sentinel_02) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_02),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -307,7 +307,7 @@ NpcData N(NpcData_Sentinel_03) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_03),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -330,7 +330,7 @@ NpcData N(NpcData_Sentinel_04) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_04),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };

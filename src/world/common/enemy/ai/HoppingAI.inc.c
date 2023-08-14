@@ -12,7 +12,7 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     npc->flags |= NPC_FLAG_JUMPING;
     npc->jumpVel = (rand_int(45) / 10.0) + 8.0;
     npc->jumpScale = 1.5f;
-    ai_enemy_play_sound(npc, SOUND_SEQ_17, 0);
+    ai_enemy_play_sound(npc, SOUND_SEQ_FUZZY_HOP, 0);
 
     if (is_point_within_region(enemy->territory->wander.wanderShape,
                                enemy->territory->wander.centerPos.x,
@@ -150,13 +150,13 @@ void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     Npc* enemy = get_npc_unsafe(script->owner1.enemy->npcID);
 
     basic_ai_chase_init(script, aiSettings, territory);
-    enemy->flags |= ENEMY_FLAG_800;
+    enemy->flags |= ENEMY_FLAG_FLYING;
     enemy->jumpVel = rand_int(5) + 10.0;
     enemy->jumpScale = 1.5f;
     enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     enemy->moveSpeed = aiSettings->chaseSpeed;
     script->AI_TEMP_STATE = 13;
-    ai_enemy_play_sound(enemy, SOUND_SEQ_17, 0);
+    ai_enemy_play_sound(enemy, SOUND_SEQ_FUZZY_HOP, 0);
 }
 
 void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -243,7 +243,7 @@ API_CALLABLE(N(HoppingAI_Main)) {
         script->functionTemp[1] = 0;
         npc->flags &= ~NPC_FLAG_JUMPING;
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_8;
+        npc->flags |= NPC_FLAG_FLYING;
 
         enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
         if (enemy->flags & ENEMY_FLAG_BEGIN_WITH_CHASING) {

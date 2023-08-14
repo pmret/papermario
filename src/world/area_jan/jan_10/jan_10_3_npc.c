@@ -14,12 +14,12 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
         EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim09)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, -566, 100, 65)
-    EVT_CALL(PlaySoundWithVolume, SOUND_SRAW_17_A, 110)
+    EVT_CALL(PlaySoundWithVolume, SOUND_FUZZY_HOP_A, 110)
     EVT_WAIT(20)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_JungleFuzzy_Wander)))
     EVT_RETURN
     EVT_END
@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     EVT_CALL(SetSelfVar, 7, FALSE)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JungleFuzzy)))
     EVT_RETURN
     EVT_END
@@ -111,7 +111,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_BLUE_ANIMS,
     .tattle = MSG_NpcTattle_BlueYoshiKid,

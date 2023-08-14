@@ -62,7 +62,7 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
     EVT_CALL(InterpPlayerYaw, 260, 0)
     EVT_SET(AF_ISK12_StairSwitchActivated, TRUE)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_0058, SOUND_SPACE_DEFAULT, 449, -822, 148)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_RUMBLE, SOUND_SPACE_DEFAULT, 449, -822, 148)
         EVT_CALL(MakeLerp, -50, 0, 60, EASING_QUADRATIC_IN)
         EVT_LABEL(20)
         EVT_CALL(UpdateLerp)
@@ -71,12 +71,12 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_0059, SOUND_SPACE_DEFAULT, 449, -822, 148)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_THUD, SOUND_SPACE_DEFAULT, 449, -822, 148)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.1))
     EVT_END_THREAD
     EVT_WAIT(50)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_0058, SOUND_SPACE_DEFAULT, 460, -806, 108)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_RUMBLE, SOUND_SPACE_DEFAULT, 460, -806, 108)
         EVT_CALL(MakeLerp, -50, 0, 60, EASING_QUADRATIC_IN)
         EVT_LABEL(22)
         EVT_CALL(UpdateLerp)
@@ -85,12 +85,12 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(22)
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_0059, SOUND_SPACE_DEFAULT, 460, -806, 108)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_THUD, SOUND_SPACE_DEFAULT, 460, -806, 108)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.1))
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_0058, SOUND_SPACE_DEFAULT, 432, -825, 189)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_RUMBLE, SOUND_SPACE_DEFAULT, 432, -825, 189)
         EVT_CALL(MakeLerp, -50, 0, 60, EASING_QUADRATIC_IN)
         EVT_LABEL(24)
         EVT_CALL(UpdateLerp)
@@ -99,12 +99,12 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(24)
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_0059, SOUND_SPACE_DEFAULT, 432, -825, 189)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_THUD, SOUND_SPACE_DEFAULT, 432, -825, 189)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.1))
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_0058, SOUND_SPACE_DEFAULT, 451, -812, 137)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_RUMBLE, SOUND_SPACE_DEFAULT, 451, -812, 137)
         EVT_CALL(MakeLerp, -50, 0, 50, EASING_QUADRATIC_IN)
         EVT_LABEL(26)
         EVT_CALL(UpdateLerp)
@@ -113,7 +113,7 @@ EvtScript N(EVS_OnTouch_StaircaseSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(26)
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_0059, SOUND_SPACE_DEFAULT, 451, -812, 137)
+        EVT_CALL(PlaySoundAt, SOUND_ISK_STAIRS_EMERGE_THUD, SOUND_SPACE_DEFAULT, 451, -812, 137)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.3))
     EVT_END_THREAD
     EVT_WAIT(50)

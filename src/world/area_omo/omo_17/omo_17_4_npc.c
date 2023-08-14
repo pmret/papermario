@@ -28,7 +28,7 @@ NpcSettings N(NpcSettings_Conductor) = {
     .otherAI = &N(EVS_NpcAuxAI_Conductor),
     .onInteract = &N(EVS_NpcInteract_Conductor),
     .ai = &N(EVS_NpcAI_Conductor),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcData N(NpcData_Conductor) = {
@@ -59,7 +59,7 @@ NpcData N(NpcData_SpyGuy)[] = {
             }
         },
         .settings = &N(NpcSettings_SpyGuy),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = SPY_GUY_DROPS,
         .animations = SPY_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -86,7 +86,7 @@ NpcData N(NpcData_PyroGuy) = {
         }
     },
     .settings = &N(NpcSettings_PyroGuy),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = PYRO_GUY_DROPS,
     .animations = PYRO_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -109,7 +109,7 @@ NpcData N(NpcData_GrooveGuy) = {
         }
     },
     .settings = &N(NpcSettings_GrooveGuy),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = GROOVE_GUY_DROPS_B,
     .animations = GROOVE_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

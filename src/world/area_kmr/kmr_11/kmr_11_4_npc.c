@@ -288,7 +288,7 @@ NpcSettings N(NpcSettings_Kammy) = {
     .otherAI = &N(EVS_NpcAuxAI_Kammy),
     .ai = &N(EVS_NpcAI_Kammy),
     .aux = &N(EVS_NpcAux_Kammy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
 };
 
 NpcData N(NpcData_Enemies)[] = {

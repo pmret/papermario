@@ -21,7 +21,7 @@ NpcData N(NpcData_Goomba_01) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -43,7 +43,7 @@ NpcData N(NpcData_Goomba_02) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -145,7 +145,7 @@ NpcData N(NpcData_Goomba_Ambush) = {
     },
     .init = &N(EVS_NpcInit_Goomba_Ambush),
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -167,7 +167,7 @@ NpcData N(NpcData_Paragoomba) = {
         }
     },
     .settings = &N(NpcSettings_Paragoomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };

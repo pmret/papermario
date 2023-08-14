@@ -144,7 +144,7 @@ EvtScript N(EVS_PlayClubbaDefeatFX) = {
         EVT_ADD(LVar0, LVar3)
         EVT_ADD(LVar1, LVar4)
         EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 0)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_18, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_BULLET_BILL_EXPLODE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_WAIT(2)
         EVT_SET(LVar0, LVarA)
         EVT_SET(LVar1, LVarB)
@@ -155,7 +155,7 @@ EvtScript N(EVS_PlayClubbaDefeatFX) = {
         EVT_ADD(LVar0, LVar3)
         EVT_ADD(LVar1, LVar4)
         EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 0)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_18, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_BULLET_BILL_EXPLODE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_WAIT(8)
     EVT_END_LOOP
     EVT_RETURN
@@ -345,7 +345,7 @@ NpcData N(NpcData_Clubba_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_01),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -355,7 +355,7 @@ NpcData N(NpcData_Clubba_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_01_Aux),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -368,7 +368,7 @@ NpcData N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_02),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -378,7 +378,7 @@ NpcData N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_02_Aux),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -391,7 +391,7 @@ NpcData N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_03),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -401,7 +401,7 @@ NpcData N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_03_Aux),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },

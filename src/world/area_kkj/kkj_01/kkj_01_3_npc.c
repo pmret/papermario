@@ -293,7 +293,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_ToadMinister),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOAD_MINISTER_ANIMS,
     },
     {
@@ -303,7 +303,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Toad_01),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOAD_BLUE_ANIMS,
     },
     {
@@ -325,7 +325,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Toad_02),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOAD_GREEN_ANIMS,
     },
     {
@@ -349,7 +349,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Toad_03),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOAD_RED_ANIMS,
     },
     {
@@ -371,7 +371,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Toadette),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOADETTE_ORANGE_ANIMS,
     },
     {
@@ -381,7 +381,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_ToadGuard_01),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOAD_GUARD_RED_ANIMS,
     },
     {
@@ -391,7 +391,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_ToadGuard_02),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .animations = TOAD_GUARD_YELLOW_ANIMS,
     },
     {
@@ -401,7 +401,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Dryite),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Dryite),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
         .animations = DRYITE_YELLOW_ANIMS,
     },
     {
@@ -411,7 +411,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Mouser),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Mouser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
         .animations = MOUSER_BLUE_ANIMS,
     },
     {
@@ -421,7 +421,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_MayorPenguin),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Penguin),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
         .animations = MAYOR_PENGUIN_ANIMS,
     },
     {
@@ -431,7 +431,7 @@ NpcData N(NpcData_ToadMinister)[] = {
         .init = &N(EVS_NpcInit_Koopa),
         .drops  = NO_DROPS,
         .settings = &N(NpcSettings_Koopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
         .animations = KOOPA_ANIMS,
     },
 };

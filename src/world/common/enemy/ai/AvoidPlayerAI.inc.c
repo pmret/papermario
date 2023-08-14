@@ -188,10 +188,10 @@ API_CALLABLE(N(AvoidPlayerAI_Main)) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
-            npc->flags &= ~NPC_FLAG_8;
+            npc->flags &= ~NPC_FLAG_FLYING;
         } else {
             npc->flags &= ~NPC_FLAG_GRAVITY;
-            npc->flags |= NPC_FLAG_8;
+            npc->flags |= NPC_FLAG_FLYING;
         }
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->functionTemp[0] = AI_STATE_SUSPEND;

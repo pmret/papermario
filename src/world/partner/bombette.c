@@ -126,7 +126,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
-            bombette->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            bombette->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
@@ -250,7 +250,7 @@ API_CALLABLE(N(UseAbility)) {
             N(IsBlasting) = FALSE;
             N(MaintainPosAfterBlast) = FALSE;
             N(TriggeredEarlyDetonation) = FALSE;
-            npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
+            npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING);
             partnerStatus->partnerActionState = PARTNER_ACTION_USE;
             partnerStatus->actingPartner = PARTNER_BOMBETTE;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
@@ -314,7 +314,7 @@ API_CALLABLE(N(UseAbility)) {
                 script->functionTemp[1]--;
                 break;
             }
-            sfx_play_sound_at_npc(SOUND_LOOP_00, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_LOOP_BOMBETTE_FUSE, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             N(PlayingFuseSound) = TRUE;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
             npc->curAnim = ANIM_WorldBombette_WalkLit;
@@ -409,7 +409,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
-                sfx_stop_sound(SOUND_LOOP_00);
+                sfx_stop_sound(SOUND_LOOP_BOMBETTE_FUSE);
             }
             fx_explosion(gPlayerData.partners[gPlayerData.curPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
             switch (gPlayerData.partners[gPlayerData.curPartner].level) {
@@ -526,7 +526,7 @@ API_CALLABLE(N(UseAbility)) {
             partner_clear_player_tracking(npc);
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
-                sfx_stop_sound(SOUND_LOOP_00);
+                sfx_stop_sound(SOUND_LOOP_BOMBETTE_FUSE);
             }
             temp_ret = ApiStatus_DONE2;
             return temp_ret;
@@ -557,7 +557,7 @@ API_CALLABLE(N(UseAbility)) {
             temp_ret = ApiStatus_DONE2;
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
-                sfx_stop_sound(SOUND_LOOP_00);
+                sfx_stop_sound(SOUND_LOOP_BOMBETTE_FUSE);
             }
             temp_ret = ApiStatus_DONE2;
             break;
@@ -684,7 +684,7 @@ void N(pre_battle)(Npc* bombette) {
 
         if (N(PlayingFuseSound)) {
             N(PlayingFuseSound) = FALSE;
-            sfx_stop_sound(SOUND_LOOP_00);
+            sfx_stop_sound(SOUND_LOOP_BOMBETTE_FUSE);
         }
     }
 }

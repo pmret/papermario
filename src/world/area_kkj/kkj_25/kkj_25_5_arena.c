@@ -31,7 +31,7 @@ API_CALLABLE(N(SpawnLensFlare)) {
 #define NAME_SUFFIX
 
 EvtScript N(EVS_ArenaEyesFlash) = {
-    EVT_CALL(PlaySoundAt, SOUND_005A, SOUND_SPACE_DEFAULT, 300, -70, 280)
+    EVT_CALL(PlaySoundAt, SOUND_KKJ_ARENA_LENS_FLARE, SOUND_SPACE_DEFAULT, 300, -70, 280)
     EVT_CALL(N(SpawnLensFlare), 225, -70, 280, 240)
     EVT_CALL(N(SpawnLensFlare), 380, -70, 280, 240)
     EVT_RETURN
@@ -241,7 +241,7 @@ EvtScript N(EVS_AnimateBridgeCollapsing) = {
     EVT_SET(LVar2, 35)
     EVT_SET(LVar5, -15)
     EVT_LOOP(ARRAY_COUNT(N(BridgeModels)))
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_1B, SOUND_SPACE_DEFAULT, LVar5, 0, 0)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_FINALE_BRIDGE_COLLAPSE, SOUND_SPACE_DEFAULT, LVar5, 0, 0)
         EVT_ADD(LVar5, -30)
         EVT_BUF_READ1(LVar3)
         EVT_THREAD

@@ -47,7 +47,7 @@ NpcSettings N(NpcSettings_Swooper) = {
     .ai = &N(EVS_NpcAI_Swooper),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
-    .flags = ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_Swoopula) = {
@@ -57,5 +57,5 @@ NpcSettings N(NpcSettings_Swoopula) = {
     .ai = &N(EVS_NpcAI_Swoopula),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
-    .flags = ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_FLYING,
 };

@@ -302,7 +302,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_EXEC_WAIT(N(EVS_PlayerFalling))
     EVT_CALL(InterpNpcYaw, NPC_Bombette, 90, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_INACTIVE | NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_EXEC_WAIT(N(EVS_PartnerFalling))
     EVT_CALL(InterpNpcYaw, NPC_Bombette, 270, 0)
     EVT_WAIT(20)
@@ -310,7 +310,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_CALL(SpeakToPlayer, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00D8)
     EVT_CALL(N(EnableFallingAnimation))
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_8 | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(N(DeleteFallingSprite))
     EVT_THREAD
         EVT_CALL(SetNpcRotation, NPC_PARTNER, 0, 0, 0)

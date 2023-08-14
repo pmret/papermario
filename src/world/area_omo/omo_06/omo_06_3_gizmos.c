@@ -81,7 +81,7 @@ EvtScript N(EVS_Scene_PullPinkSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(1)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0051, SOUND_SPACE_DEFAULT, 265, 0, -235)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_FLIP_TRACK_THUD, SOUND_SPACE_DEFAULT, 265, 0, -235)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
     EVT_CALL(GetModelCenter, MODEL_o897)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0)

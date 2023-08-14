@@ -18,8 +18,8 @@ EvtScript N(EVS_OnReadPoster) = {
     EVT_END
 };
 
-EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(PlaySound, SOUND_LOOP_60)
+EvtScript N(EVS_EnterScene) = {
+    EVT_CALL(PlaySound, SOUND_LOOP_SBK_RUINS_RISING_DISTANT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 190, 0, -37)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 190, 0, -37)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))
@@ -60,7 +60,7 @@ EvtScript N(EVS_Main) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(dro_02_ENTRY_2)
         EVT_CASE_OR_EQ(dro_02_ENTRY_3)
-            EVT_EXEC_WAIT(N(EVS_EnterMap))
+            EVT_EXEC_WAIT(N(EVS_EnterScene))
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))

@@ -736,7 +736,7 @@ EvtScript N(EVS_ReturnToVillage) = {
     EVT_CALL(SetNpcPos, NPC_Gooma, 115, 0, -309)
     EVT_CALL(SetNpcFlagBits, NPC_Gooma, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_8, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_FLYING, FALSE)
     EVT_CALL(SetNpcPos, NPC_Goompa, 184, 0, -149)
     EVT_CALL(EnableNpcShadow, NPC_Goompa, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, 200, 0, 100)
@@ -925,7 +925,7 @@ EvtScript N(EVS_NpcInit_Goompa) = {
             EVT_CALL(InterpNpcYaw, NPC_SELF, 200, 0)
         EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CASE_LT(STORY_CH0_GOOMBARIO_JOINED_PARTY)
@@ -1448,7 +1448,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LayingDown)
     EVT_CALL(GetPlayerPos, -220, 33, -342)
     EVT_WAIT(90 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Eldstar_02, SOUND_SRAW_1E_A, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Eldstar_02, SOUND_STAR_SPIRIT_APPEAR_A, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, -198, 115, -272, 10)
     EVT_CALL(SetNpcPos, NPC_Eldstar_02, -198, 140, -272)
     EVT_SET(MV_Unk_01, 120)
@@ -1457,32 +1457,32 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 120, 80 * DT, EASING_LINEAR)
         EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, NPC_Eldstar_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(SetNpcImgFXParams, NPC_Eldstar_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(0)
+            EVT_END_IF
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 2880, 80 * DT, EASING_QUADRATIC_OUT)
         EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_Eldstar_02, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(SetNpcRotation, NPC_Eldstar_02, 0, LVar0, 0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(1)
+            EVT_END_IF
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 140, 60, 80 * DT, EASING_QUADRATIC_OUT)
         EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcPos, NPC_Eldstar_02, -198, LVar0, -272)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(2)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(SetNpcPos, NPC_Eldstar_02, -198, LVar0, -272)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(2)
+            EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(100 * DT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -1497,12 +1497,12 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_CALL(SpeakToPlayer, NPC_Eldstar_02, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_CH0_0009)
     EVT_CALL(MakeLerp, 120, 60, 20 * DT, EASING_LINEAR)
     EVT_LABEL(5)
-    EVT_CALL(UpdateLerp)
-    EVT_SET(MV_Unk_01, LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(5)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_SET(MV_Unk_01, LVar0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(5)
+        EVT_END_IF
     EVT_SETF(MV_Unk_00, 50)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -1517,18 +1517,18 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_THREAD
         EVT_CALL(MakeLerp, 60, 0, 40 * DT, EASING_LINEAR)
         EVT_LABEL(6)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, NPC_Eldstar_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(6)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(SetNpcImgFXParams, NPC_Eldstar_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(6)
+            EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(BindNpcAI, NPC_Eldstar_02, EVT_PTR(N(EVS_NpcAI_Eldstar_02_NoAI)))
     EVT_CALL(GetNpcPos, NPC_Eldstar_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Eldstar_02, SOUND_SRAW_1E_A, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Eldstar_02, SOUND_STAR_SPIRIT_APPEAR_A, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SetNpcPos, NPC_Eldstar_02, NPC_DISPOSE_LOCATION)
     EVT_WAIT(60 * DT)
@@ -1572,21 +1572,21 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit7, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, 90, 10 * DT, EASING_LINEAR)
         EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_o275, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(RotateModel, MODEL_o275, LVar0, 0, 1, 0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(10)
+            EVT_END_IF
         EVT_WAIT(10 * DT)
         EVT_CALL(MakeLerp, 90, 0, 10 * DT, EASING_LINEAR)
         EVT_LABEL(11)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_o275, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(11)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(RotateModel, MODEL_o275, LVar0, 0, 1, 0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(11)
+            EVT_END_IF
         EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit7, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_Toad, -192, -230, 20 * DT)
@@ -1759,7 +1759,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         },
         .init = &N(EVS_NpcInit_Goompa),
         .settings = &N(NpcSettings_GoombaFamily_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = GOOMPA_ANIMS,
         .tattle = MSG_NpcTattle_Goompa,
@@ -1782,7 +1782,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         },
         .init = &N(EVS_NpcInit_Goombaria),
         .settings = &N(NpcSettings_GoombaFamily_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = GOOMBARIA_ANIMS,
         .tattle = MSG_NpcTattle_Goombaria,
@@ -1805,7 +1805,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         },
         .init = &N(EVS_NpcInit_Goombario),
         .settings = &N(NpcSettings_GoombaFamily_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = GOOMBARIO_ANIMS,
     },
@@ -1827,7 +1827,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         },
         .init = &N(EVS_NpcInit_Gooma),
         .settings = &N(NpcSettings_GoombaFamily_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = GOOMA_ANIMS,
         .tattle = MSG_NpcTattle_Gooma,
@@ -1850,7 +1850,7 @@ NpcData N(NpcData_GoombaFamily)[] = {
         },
         .init = &N(EVS_NpcInit_Goompapa),
         .settings = &N(NpcSettings_GoombaFamily_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = GOOMPAPA_ANIMS,
         .tattle = MSG_NpcTattle_Goompapa,
@@ -1875,7 +1875,7 @@ NpcData N(NpcData_Goomama) = {
     },
     .init = &N(EVS_NpcInit_Goomama),
     .settings = &N(NpcSettings_GoombaFamily_Wander),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = NO_DROPS,
     .animations = GOOMAMA_ANIMS,
     .tattle = MSG_NpcTattle_Goomama,
@@ -1905,7 +1905,7 @@ NpcData N(NpcData_Toad) = {
     },
     .init = &N(EVS_NpcInit_Toad),
     .settings = &N(NpcSettings_Toad_Guard),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_KMR_ToadHouseToad,
@@ -1939,7 +1939,7 @@ NpcData N(NpcData_Kammy) = {
     },
     .init = &N(EVS_NpcInit_Kammy),
     .settings = &N(NpcSettings_Kammy_Guard),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),
@@ -1952,7 +1952,7 @@ NpcData N(NpcData_ChuckQuizmo) = {
     .initVarCount = 1,
     .initVar = { .bytes = { 0, QUIZ_AREA_KMR, QUIZ_COUNT_KMR, QUIZ_MAP_KMR_02 }},
     .settings = &N(NpcSettings_ChuckQuizmo),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = QUIZMO_ANIMS,
     .tattle = MSG_NpcTattle_ChuckQuizmo,
@@ -1998,7 +1998,7 @@ NpcData N(NpcData_Eldstar_Prologue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Eldstar_01),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
@@ -2009,7 +2009,7 @@ NpcData N(NpcData_Eldstar_Prologue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Eldstar_02),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
@@ -2214,7 +2214,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Eldstar_Epilogue),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
@@ -2225,7 +2225,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Parakarry_Epilogue),
         .settings = &N(NpcSettings_GoombaFamily),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldParakarry_Idle,
@@ -2252,7 +2252,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Goombario_Epilogue),
         .settings = &N(NpcSettings_GoombaFamily),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = GOOMBARIO_ANIMS,
     },
@@ -2262,7 +2262,7 @@ NpcData N(NpcData_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Goombaria_Epilogue),
         .settings = &N(NpcSettings_GoombaFamily),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = GOOMBARIA_ANIMS,
     },

@@ -430,7 +430,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
             EVT_CASE_EQ(12)
                 EVT_CALL(NpcMoveTo, NPC_SELF, -450, LVar3, 0)
         EVT_END_SWITCH
-        EVT_CALL(func_80045838, -1, SOUND_SEQ_18, 0)
+        EVT_CALL(func_80045838, -1, SOUND_SEQ_BULLET_BILL_EXPLODE, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Hurt)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 5)
@@ -561,7 +561,7 @@ NpcData N(NpcData_BillBlasters)[] = {
         },
         .init = &N(EVS_NpcInit_BillBlaster),
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -582,7 +582,7 @@ NpcData N(NpcData_BillBlasters)[] = {
             }
         },
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = BILL_BLASTER_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -603,7 +603,7 @@ NpcData N(NpcData_BillBlasters)[] = {
             }
         },
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -710,7 +710,7 @@ NpcData N(NpcData_BulletBill_Demo1) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -760,7 +760,7 @@ NpcData N(NpcData_BulletBill_Demo2) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -810,7 +810,7 @@ NpcData N(NpcData_BulletBill_Demo3) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -860,7 +860,7 @@ NpcData N(NpcData_BulletBill_Demo4) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -910,7 +910,7 @@ NpcData N(NpcData_BulletBill_Demo5) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,

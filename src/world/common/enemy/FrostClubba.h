@@ -40,7 +40,7 @@
     .settings = &N(NpcSettings_FrostClubba_Hitbox), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 0, \
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DROPS, \
     .drops = NO_DROPS, \
     .animations = FROST_CLUBBA_ANIMS, \
     .extraAnimations = N(ExtraAnims_FrostClubba_Hitbox), \
