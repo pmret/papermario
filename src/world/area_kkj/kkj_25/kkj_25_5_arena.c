@@ -31,7 +31,7 @@ API_CALLABLE(N(SpawnLensFlare)) {
 #define NAME_SUFFIX
 
 EvtScript N(EVS_ArenaEyesFlash) = {
-    EVT_CALL(PlaySoundAt, SOUND_005A, 0, 300, -70, 280)
+    EVT_CALL(PlaySoundAt, SOUND_005A, SOUND_SPACE_DEFAULT, 300, -70, 280)
     EVT_CALL(N(SpawnLensFlare), 225, -70, 280, 240)
     EVT_CALL(N(SpawnLensFlare), 380, -70, 280, 240)
     EVT_RETURN
@@ -72,8 +72,8 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_01, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Bowser_01, 300, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_20A0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_20A0, SOUND_SPACE_DEFAULT)
     EVT_SET(AF_KKJ_1A, TRUE)
     EVT_RETURN
     EVT_END
@@ -241,7 +241,7 @@ EvtScript N(EVS_AnimateBridgeCollapsing) = {
     EVT_SET(LVar2, 35)
     EVT_SET(LVar5, -15)
     EVT_LOOP(ARRAY_COUNT(N(BridgeModels)))
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_1B, 0, LVar5, 0, 0)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_1B, SOUND_SPACE_DEFAULT, LVar5, 0, 0)
         EVT_ADD(LVar5, -30)
         EVT_BUF_READ1(LVar3)
         EVT_THREAD
@@ -364,7 +364,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim08)
     EVT_CALL(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -30)
-    EVT_CALL(PlaySoundAt, SOUND_207A, 0, LVar0, 22, 0)
+    EVT_CALL(PlaySoundAt, SOUND_207A, SOUND_SPACE_DEFAULT, LVar0, 22, 0)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, 22, 0, 1, 80)
     EVT_THREAD
         EVT_WAIT(80)
@@ -411,7 +411,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
         EVT_CALL(SetNpcDecoration, NPC_Bowser_01, 0, NPC_DECORATION_BOWSER_AURA)
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_0223, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_0223, SOUND_SPACE_DEFAULT)
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_LOOP(50)
         EVT_ADDF(LVar0, EVT_FLOAT(0.01))

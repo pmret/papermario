@@ -16,7 +16,7 @@ ApiStatus ShowStartRecoveryShimmer(Evt* script, s32 isInitialCall) {
     f32 z = evt_get_float_variable(script, *args++);
 
     show_start_recovery_shimmer(x, y, z, evt_get_variable(script, *args++));
-    sfx_play_sound_at_position(SOUND_START_RECOVERY, SOUND_SPACE_MODE_0, x, y, z);
+    sfx_play_sound_at_position(SOUND_START_RECOVERY, SOUND_SPACE_DEFAULT, x, y, z);
     return ApiStatus_DONE2;
 }
 
@@ -27,7 +27,7 @@ ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall) {
     f32 z = evt_get_float_variable(script, *args++);
 
     show_recovery_shimmer(x, y, z, evt_get_variable(script, *args++));
-    sfx_play_sound_at_position(SOUND_0378, SOUND_SPACE_MODE_0, x, y, z);
+    sfx_play_sound_at_position(SOUND_0378, SOUND_SPACE_DEFAULT, x, y, z);
     return ApiStatus_DONE2;
 }
 

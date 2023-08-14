@@ -457,7 +457,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (data->box[i].stateTimer <= 0) {
                         npc->curAnim = ANIM_Fuzzy_Walk;
                         data->box[i].state = BOX_STATE_FUZZY_POPUP;
-                        sfx_play_sound_at_position(enemy->varTable[8], SOUND_SPACE_MODE_0 | SOUND_PARAM_MOST_QUIET, npc->pos.x, npc->pos.y, npc->pos.z);
+                        sfx_play_sound_at_position(enemy->varTable[8], SOUND_SPACE_DEFAULT | SOUND_PARAM_MOST_QUIET, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         npc->jumpVel = 10.5f;
                         npc->pos.x = centerX;
@@ -688,7 +688,7 @@ API_CALLABLE(N(RunMinigame)) {
                     if (data->box[i].stateTimer <= 0) {
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         data->box[i].state = BOX_STATE_PEACH_POPUP;
-                        sfx_play_sound_at_position(SOUND_HEART_BOUNCE, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+                        sfx_play_sound_at_position(SOUND_HEART_BOUNCE, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_DEFAULT, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                         npc->jumpVel = 10.0f;
                         npc->pos.y = npc->moveToPos.y;

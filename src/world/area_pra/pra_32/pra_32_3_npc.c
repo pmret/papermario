@@ -179,7 +179,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_CrystalKing_01, SOUND_036B, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_CrystalKing_01, SOUND_036B, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetNpcPos, NPC_CrystalKing_01, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 0, LVar0, LVar1, LVar2, 1, 130)
     EVT_END_THREAD

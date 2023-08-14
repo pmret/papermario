@@ -99,7 +99,7 @@ EvtScript N(EVS_SetupHiddenSpring) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(18)
-        EVT_CALL(PlaySoundAtNpc, NPC_Dummy, SOUND_KPA_DROP_WALL, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Dummy, SOUND_KPA_DROP_WALL, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, -90, 0, 15, EASING_QUADRATIC_IN)

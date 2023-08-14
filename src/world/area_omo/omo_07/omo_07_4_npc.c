@@ -72,7 +72,7 @@ EvtScript N(EVS_Push_SecretDoor) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(AF_OMO07_DoorOpening, TRUE)
-    EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_MODE_0, 25, 0, -55)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
     EVT_THREAD
         EVT_IF_LT(LVar0, 25)
             EVT_CALL(MakeLerp, 0, 180, 30, EASING_COS_IN_OUT)
@@ -200,7 +200,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
                     EVT_CALL(SetSelfVar, SHYGUY_VAR_WAIT_TIME, 0)
                 EVT_END_IF
             EVT_CASE_EQ(SHYGUY_STATE_OPEN_DOOR)
-                EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_MODE_0, 25, 0, -55)
+                EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
                 EVT_THREAD
                     EVT_SET(AF_OMO07_DoorOpening, TRUE)
                     EVT_SET(LVar2, MV_SecretDoorAngle)

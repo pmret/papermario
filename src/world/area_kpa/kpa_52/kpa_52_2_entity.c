@@ -24,7 +24,7 @@ EvtScript N(EVS_UnlockPrompt_Door) = {
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GF_KPA52_UnlockedDoor, TRUE)
     EVT_CALL(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_PadlockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_SET(LVar1, 0)

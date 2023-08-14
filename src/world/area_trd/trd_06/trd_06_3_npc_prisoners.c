@@ -111,7 +111,7 @@ EvtScript N(EVS_NpcInteract_Bombette) = {
         EVT_WAIT(15 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(25 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, -45, 30, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(40 * DT)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00E0)
@@ -140,7 +140,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 90, 15, EASING_COS_IN_OUT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -193,7 +193,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(20)
         EVT_END_IF
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Jailer_KoopaTroopa, -233, 147, 0)

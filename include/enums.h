@@ -567,26 +567,27 @@ enum SoundIDs {
     SOUND_PRA_UNFOLD_EXIT                       = 0x00000030,
     SOUND_LRAW_KKJ_RUMBLING                     = 0x00000033,
     SOUND_LRAW_OSR_RUMBLING                     = 0x00000034, // doesn't loop?
-    SOUND_0035                                    = 0x00000035,
-    SOUND_0036                                    = 0x00000036,
-    SOUND_0037                                    = 0x00000037,
-    SOUND_0038                                    = 0x00000038,
-    SOUND_LRAW_0039                               = 0x00000039,
-    SOUND_003F                                    = 0x0000003F,
-    SOUND_0040                                    = 0x00000040,
-    SOUND_0041                                    = 0x00000041,
-    SOUND_0042                                    = 0x00000042,
-    SOUND_LRAW_0043                               = 0x00000043,
-    SOUND_0044                                    = 0x00000044,
+    SOUND_OSR_GROUND_CRACKING                   = 0x00000035,
+    SOUND_OSR_SMOKE_RISING_1                    = 0x00000036,
+    SOUND_OSR_SMOKE_RISING_2                    = 0x00000037,
+    SOUND_OSR_SMOKE_RISING_3                    = 0x00000038,
+    SOUND_LRAW_MAC_HARBOR_WATER                 = 0x00000039, // loops
+    SOUND_PRA_SHIFT_FLOORS_RUMBLE               = 0x0000003F, // loops
+    SOUND_PRA_SHIFT_FLOORS_THUD                 = 0x00000040,
+    SOUND_WHALE_JIGGLE                          = 0x00000041,
+    SOUND_WHALE_FILL                            = 0x00000042,
+    SOUND_LRAW_WHALE_GEYSER                     = 0x00000043, // loops
+    SOUND_WHALE_EJECT                           = 0x00000044,
     SOUND_JR_TROOPA_SPLASH                      = 0x00000045,
     SOUND_LRAW_JR_TROOPA_SWIM                   = 0x00000046,
     SOUND_BOO_SPOOK                             = 0x00000047,
     SOUND_OBJECT_LAND                           = 0x00000048,
-    SOUND_LRAW_004A                               = 0x0000004A,
-    SOUND_LRAW_004C                               = 0x0000004C,
-    SOUND_LRAW_004D                               = 0x0000004D,
-    SOUND_LRAW_004E                               = 0x0000004E,
-    SOUND_LRAW_004F                               = 0x0000004F,
+    SOUND_UNUSED_WATER_RUNNING                  = 0x00000049, // loops
+    SOUND_LRAW_JAN_BEACH_WAVES                  = 0x0000004A,
+    SOUND_LRAW_OSR_FOUNTAIN_INTACT              = 0x0000004C,
+    SOUND_LRAW_OSR_FOUNTAIN_BROKEN              = 0x0000004D,
+    SOUND_LRAW_JAN_SMALL_GEYSER                 = 0x0000004E,
+    SOUND_LRAW_JAN_LARGE_GEYSER                 = 0x0000004F,
     SOUND_LRAW_0050                               = 0x00000050,
     SOUND_0051                                    = 0x00000051,
     SOUND_LRAW_0052                               = 0x00000052,
@@ -1094,7 +1095,7 @@ enum SoundIDs {
     SOUND_0328                                    = 0x00000328,
     SOUND_032B                                    = 0x0000032B,
     SOUND_032C                                    = 0x0000032C,
-    SOUND_LRAW_032E                               = 0x0000032E,
+    SOUND_LRAW_SENTINEL_ALARM                   = 0x0000032E,
     SOUND_SRAW_0C_A                               = 0x0000032F,
     SOUND_SRAW_0C_B                               = 0x00000330,
     SOUND_SRAW_17_A                               = 0x00000331,
@@ -1545,7 +1546,7 @@ enum SoundIDs {
     SOUND_LOOP_02                                 = 0x80000002,
     SOUND_LOOP_03                                 = 0x80000003,
     SOUND_LOOP_TRD_02_LOWER_STAIRS              = 0x80000004,
-    SOUND_LOOP_TRD_04_LOWER_STAIRS                                 = 0x80000005,
+    SOUND_LOOP_TRD_04_LOWER_STAIRS              = 0x80000005,
     SOUND_LOOP_TRD_FLOWING_WATER                = 0x80000006,
     SOUND_LOOP_TRD_RAISE_STAIRS                 = 0x80000007,
     SOUND_LOOP_08                                 = 0x80000008,
@@ -1557,19 +1558,19 @@ enum SoundIDs {
     SOUND_LOOP_0E                                 = 0x8000000E,
     SOUND_LOOP_OBK_LOWER_CHAIN                  = 0x8000000F,
     SOUND_LOOP_MOVE_STATUE                      = 0x80000010,
-    SOUND_LOOP_11                                 = 0x80000011,
+    SOUND_LOOP_SENTINEL_ALARM                   = 0x80000011,
     SOUND_LOOP_QUIZ_TICKING                     = 0x80000012, // unused
     SOUND_LOOP_AUDIENCE_MURMUR                  = 0x80000013, // unused
     SOUND_LOOP_TOYBOX_TRAIN_GEAR                = 0x80000014, // unused
     SOUND_LOOP_15                                 = 0x80000015,
     SOUND_LOOP_OMO_ROTATING_WHEEL               = 0x80000016,
-    SOUND_LOOP_17                                 = 0x80000017,
+    SOUND_LOOP_JAN_BEACH_WAVES                                 = 0x80000017,
     SOUND_LOOP_MOVE_LARGE_STATUE                = 0x80000018,
-    SOUND_LOOP_ZIPLINE                                 = 0x80000019,
+    SOUND_LOOP_ZIPLINE                          = 0x80000019,
     SOUND_LOOP_1A                                 = 0x8000001A,
     SOUND_LOOP_1B                                 = 0x8000001B,
-    SOUND_LOOP_1C                                 = 0x8000001C,
-    SOUND_LOOP_1D                                 = 0x8000001D,
+    SOUND_LOOP_JAN_SMALL_GEYSER                                 = 0x8000001C,
+    SOUND_LOOP_JAN_LARGE_GEYSER                                 = 0x8000001D,
     SOUND_LOOP_1E                                 = 0x8000001E,
     SOUND_LOOP_1F                                 = 0x8000001F, // unused, no data
     SOUND_LOOP_20                                 = 0x80000020, // unused, no data
@@ -1619,7 +1620,7 @@ enum SoundIDs {
     SOUND_LOOP_4C                                 = 0x8000004C,
     SOUND_LOOP_4D                                 = 0x8000004D,
     SOUND_LOOP_4E                                 = 0x8000004E, // unused
-    SOUND_LOOP_4F                                 = 0x8000004F,
+    SOUND_LOOP_WHALE_GEYSER                                 = 0x8000004F,
     SOUND_LOOP_50                                 = 0x80000050,
     SOUND_LOOP_KPA_CHAIN_DRIVE                  = 0x80000051,
     SOUND_LOOP_KPA_FILL_WATER                   = 0x80000052,
@@ -1628,9 +1629,9 @@ enum SoundIDs {
     SOUND_LOOP_JR_TROOPA_SWIM                   = 0x80000055,
     SOUND_LOOP_KKJ_RUMBLING                     = 0x80000056,
     SOUND_LOOP_OSR_RUMBLING                     = 0x80000057,
-    SOUND_LOOP_58                                 = 0x80000058,
-    SOUND_LOOP_59                                 = 0x80000059,
-    SOUND_LOOP_5A                                 = 0x8000005A,
+    SOUND_LOOP_MAC_HARBOR_WATER                 = 0x80000058,
+    SOUND_LOOP_OSR_FOUNTAIN_INTACT                                 = 0x80000059,
+    SOUND_LOOP_OSR_FOUNTAIN_BROKEN                                 = 0x8000005A,
     SOUND_LOOP_5B                                 = 0x8000005B,
     SOUND_LOOP_5C                                 = 0x8000005C,
     SOUND_LOOP_DGB_COLLAPSE                     = 0x8000005D,
@@ -1696,8 +1697,8 @@ enum SoundIDs {
 
 enum SoundSpatializationFlags {
     SOUND_SPACE_MODE_MASK           = 0x0000FFFF,
-    SOUND_SPACE_MODE_0              = 0x00000000,
-    SOUND_SPACE_MODE_1              = 0x00000001,
+    SOUND_SPACE_DEFAULT             = 0x00000000,
+    SOUND_SPACE_WITH_DEPTH          = 0x00000001,
     SOUND_SPACE_FULL                = 0x00000002,
     SOUND_SPACE_PARAMS_MASK         = 0xFFFF0000,
     SOUND_PARAM_MUTE                = 0x00010000,
@@ -4561,14 +4562,11 @@ enum ColliderFlags {
     COLLIDER_FLAG_HAS_MODEL_PARENT      = 0x80000000
 };
 
-//TODO reversed for map dumper with 0 separated
 enum ColliderFlagsModifyMode {
-    MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
-    MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
-    MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
-};
-enum TempColliderFlagsModifyMode {
     MODIFY_COLLIDER_FLAGS_SET_BITS       = 0,
+    MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
+    MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
+    MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
 };
 
 enum CollisionChannels {

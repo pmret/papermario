@@ -219,7 +219,7 @@ EvtScript N(EVS_SwingSign_Shop) = {
 
 EvtScript N(EVS_OpenShopDoor) = {
     EVT_CALL(SetGroupVisibility, MODEL_mise_naka, MODEL_GROUP_VISIBLE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_em_1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_em_1, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 100, 15, EASING_QUADRATIC_OUT)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -241,7 +241,7 @@ EvtScript N(EVS_CloseShopDoor) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_em_1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_em_1, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetGroupVisibility, MODEL_mise_naka, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END

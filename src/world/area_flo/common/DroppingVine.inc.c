@@ -47,7 +47,7 @@ EvtScript N(EVS_DroppingVine) = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAt, SOUND_FLIP_PAGE, SOUND_SPACE_MODE_0, LVar3, LVar4, LVar5)
+        EVT_CALL(PlaySoundAt, SOUND_FLIP_PAGE, SOUND_SPACE_DEFAULT, LVar3, LVar4, LVar5)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 0, 180, 20, EASING_CUBIC_IN)
     EVT_LABEL(1)

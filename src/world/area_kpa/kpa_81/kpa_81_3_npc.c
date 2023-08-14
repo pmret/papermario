@@ -164,7 +164,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_WAIT(25)
         EVT_CALL(EnableModel, MODEL_o165, FALSE)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_OPEN_TRAPDOOR, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_OPEN_TRAPDOOR, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -180,7 +180,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_LOOP(65)

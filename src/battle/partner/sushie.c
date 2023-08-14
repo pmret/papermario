@@ -259,9 +259,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0);
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -283,9 +283,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -307,9 +307,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -332,7 +332,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             sEffect->data.waterFountain->unk_3C = partner->scale.x;
             sEffect->data.waterFountain->unk_40 = partner->scale.x;
             if (state->moveTime == 70) {
-                sfx_play_sound_at_position(SOUND_TIDAL_WAVE_WATER, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_TIDAL_WAVE_WATER, SOUND_SPACE_DEFAULT, 0.0f, 0.0f, 0.0f);
                 fx_underwater(0, -50.0f, 20.0f, 0.0f, 1.0f, 120);
             }
 

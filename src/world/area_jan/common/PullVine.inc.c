@@ -68,7 +68,7 @@ EvtScript N(EVS_PullVine_Manage) = {
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(DisablePlayerPhysics, TRUE)
             EVT_CALL(GetModelCenter, LVarD)
-            EVT_CALL(PlaySoundAt, SOUND_PULL_VINE, 0, LVar0, LVar1, LVar2)
+            EVT_CALL(PlaySoundAt, SOUND_PULL_VINE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
             EVT_SETF(LVar0, EVT_FLOAT(0.0))
             EVT_SETF(LVar1, EVT_FLOAT(0.0))
             EVT_THREAD
@@ -135,7 +135,7 @@ EvtScript N(EVS_PullVine_Manage) = {
             EVT_CALL(PlayerJump, LVar6, LVar1, LVar4, 10)
             EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
             EVT_CALL(GetModelCenter, LVarD)
-            EVT_CALL(PlaySoundAt, SOUND_PULL_VINE, 0, LVar0, LVar1, LVar2)
+            EVT_CALL(PlaySoundAt, SOUND_PULL_VINE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
             EVT_THREAD
                 EVT_WAIT(10)
                 EVT_LOOP(5)

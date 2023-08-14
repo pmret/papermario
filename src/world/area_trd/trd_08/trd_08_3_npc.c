@@ -29,7 +29,7 @@ EvtScript N(EVS_FireBar_Defeated) = {
         EVT_SET(LVar1, LVarB)
     EVT_END_LOOP
     EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_FIRE_BAR_DEAD, SOUND_SPACE_MODE_0, LVar1, LVar2, LVar3)
+    EVT_CALL(PlaySoundAt, SOUND_SEQ_FIRE_BAR_DEAD, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
     EVT_LOOP(10)
         EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(RandInt, 50, LVar4)

@@ -8,7 +8,7 @@
 EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(AwaitPlayerApproach, -650, -35, 100)
-    EVT_CALL(PlaySoundAt, SOUND_SEARCH_BUSH, SOUND_SPACE_MODE_0, -650, 75, -120)
+    EVT_CALL(PlaySoundAt, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT, -650, 75, -120)
     EVT_THREAD
         EVT_LOOP(5)
             EVT_CALL(TranslateModel, MODEL_o122, 2, 0, 0)

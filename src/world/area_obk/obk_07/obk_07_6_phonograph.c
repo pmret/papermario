@@ -1080,7 +1080,7 @@ EvtScript N(EVS_DummyUpdateGuardBoo) = {
 EvtScript N(EVS_GuardBooVanish) = {
     EVT_THREAD
         EVT_WAIT(25)
-        EVT_CALL(PlaySoundAtNpc, NPC_GuardBoo, SOUND_BOO_SPOOK, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GuardBoo, SOUND_BOO_SPOOK, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Spook)
     EVT_WAIT(10)

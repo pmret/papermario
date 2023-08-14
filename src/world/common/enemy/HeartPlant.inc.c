@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcInteract_HeartPlant) = {
     EVT_CALL(GetSelfVar, 1, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetSelfVar, 1, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEART_PLANT, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEART_PLANT, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
         EVT_WAIT(1)
         EVT_CALL(N(HeartPlant_SpawnHeart))

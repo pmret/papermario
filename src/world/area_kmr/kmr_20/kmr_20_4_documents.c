@@ -444,7 +444,7 @@ EvtScript N(EVS_Inspect_LuigisDiary) = {
 };
 
 EvtScript N(EVS_Shake_Mailbox) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o305, SOUNC_CHECK_MAILBOX, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o305, SOUNC_CHECK_MAILBOX, SOUND_SPACE_DEFAULT)
     EVT_CALL(TranslateModel, MODEL_o222, 2, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o223, 3, 0, 0)
     EVT_CALL(TranslateModel, MODEL_o224, 1, 0, 0)
@@ -470,7 +470,7 @@ EvtScript N(EVS_Shake_Mailbox) = {
 
 EvtScript N(EVS_SecretPanel_Flip) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AB, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AB, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 2160, 60, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -480,7 +480,7 @@ EvtScript N(EVS_SecretPanel_Flip) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AC, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_20AC, SOUND_SPACE_DEFAULT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN
     EVT_END

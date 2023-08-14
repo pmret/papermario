@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_CALL(AwaitPlayerApproach, -580, 276, 50)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, 100, 10, EASING_COS_IN_OUT)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Black_Talk, ANIM_KoopaBros_Black_Idle, 0, MSG_CH1_00D2)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Walk)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 45, 2)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0173, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0173, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -71,7 +71,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_WAIT(8 * DT)
     EVT_WAIT(12 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0174, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0174, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(8.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_SELF, -496, 101, 0)
     EVT_END_THREAD
@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_IF_NE(LVar1, 0)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_METAL_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_METAL_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_WAIT(10 * DT)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.5 / DT))
@@ -168,7 +168,7 @@ EvtScript N(D_80241DA4_99BA14) = {
     EVT_CALL(EnableNpcAI, NPC_Eldstar, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Leap)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar1)
@@ -185,7 +185,7 @@ EvtScript N(D_80241DA4_99BA14) = {
     EVT_WAIT(20 * DT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
     EVT_WAIT(40 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -271,7 +271,7 @@ EvtScript N(D_80241DA4_99BA14) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Eldstar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Eldstar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)

@@ -165,7 +165,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_0266, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_0266, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 65, 0, 15, EASING_QUADRATIC_IN)
         EVT_LABEL(101)
         EVT_CALL(UpdateLerp)
@@ -174,7 +174,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(101)
         EVT_END_IF
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_0267, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_0267, SOUND_SPACE_DEFAULT)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_THREAD
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -232,7 +232,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
             EVT_SET(GF_ISK05_Defeated_StoneChomp, TRUE)
             EVT_SET(AF_ISK05_StoneChompDefeated, TRUE)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_0265, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_0265, SOUND_SPACE_DEFAULT)
             EVT_THREAD
                 EVT_WAIT(5)
                 EVT_CALL(MakeLerp, 0, 65, 65, EASING_LINEAR)

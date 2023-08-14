@@ -67,7 +67,7 @@ EvtScript N(EVS_FlipWallPanels) = {
         EVT_IF_EQ(LVar5, -1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_KPA_FLIP_BRIDGE_PANEL, SOUND_SPACE_MODE_0, LVar6, LVar7, LVar8)
+        EVT_CALL(PlaySoundAt, SOUND_KPA_FLIP_BRIDGE_PANEL, SOUND_SPACE_DEFAULT, LVar6, LVar7, LVar8)
         EVT_EXEC(N(EVS_FlipWallPanel))
         EVT_WAIT(10)
     EVT_END_LOOP

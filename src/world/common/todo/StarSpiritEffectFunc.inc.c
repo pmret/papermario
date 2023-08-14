@@ -19,7 +19,7 @@
 API_CALLABLE(N(StarSpiritEffectFunc1)) {
     StarSpiritData* ptr = script->varTablePtr[0];
 
-    sfx_adjust_env_sound_pos(SOUND_LRAW_STAR_ORB_RISING, SOUND_SPACE_MODE_0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
+    sfx_adjust_env_sound_pos(SOUND_LRAW_STAR_ORB_RISING, SOUND_SPACE_DEFAULT, ptr->unk_00, ptr->unk_04, ptr->unk_08);
 
     if (ptr->unk_44 < 2) {
         return ApiStatus_BLOCK;

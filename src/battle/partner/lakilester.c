@@ -467,7 +467,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             } else {
                 sAimingTimer = (s32)(80 * DT);
                 hud_element_set_script(hudStick, &HES_StickTapRight);
-                sfx_play_sound_at_position(SOUND_AIM_SPINY_FLIP, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_AIM_SPINY_FLIP, SOUND_SPACE_DEFAULT, 0.0f, 0.0f, 0.0f);
                 script->functionTemp[0] = 2;
             }
             break;
@@ -1476,7 +1476,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = NPC_DISPOSE_POS_Z;
 
             if (script->functionTemp[2] != 0) {
-                sfx_play_sound_at_position(SOUND_201E, SOUND_SPACE_MODE_0, partner->curPos.x, partner->curPos.y, partner->curPos.z);
+                sfx_play_sound_at_position(SOUND_201E, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
             }
             script->functionTemp[2] = 0;
 
@@ -1499,7 +1499,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             sHuffPuffBreathEffect->data.huffPuffBreath->speedX = 2.0f;
 
             if (script->functionTemp[2] == 0) {
-                sfx_play_sound_at_position(SOUND_201F, SOUND_SPACE_MODE_0, partner->curPos.x, partner->curPos.y, partner->curPos.z);
+                sfx_play_sound_at_position(SOUND_201F, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
             }
             script->functionTemp[2] = 1;
 

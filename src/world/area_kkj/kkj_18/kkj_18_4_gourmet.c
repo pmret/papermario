@@ -167,7 +167,7 @@ EvtScript N(EVS_CarryPeachAway) = {
 };
 
 EvtScript N(EVS_OpenAndCloseWindow) = {
-    EVT_CALL(PlaySoundAt, SOUND_SRAW_11_A, 0, 190, 78, -20)
+    EVT_CALL(PlaySoundAt, SOUND_SRAW_11_A, SOUND_SPACE_DEFAULT, 190, 78, -20)
     EVT_CALL(MakeLerp, 0, 80, 14, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -189,7 +189,7 @@ EvtScript N(EVS_OpenAndCloseWindow) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_SRAW_12_A, 0, 190, 78, -20)
+    EVT_CALL(PlaySoundAt, SOUND_SRAW_12_A, SOUND_SPACE_DEFAULT, 190, 78, -20)
     EVT_RETURN
     EVT_END
 };
@@ -253,19 +253,19 @@ EvtScript N(EVS_GourmetGuy_LovesCake) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(20.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0381, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0381, SOUND_SPACE_DEFAULT)
     EVT_WAIT(33 * DT)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(65.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(7.5), EVT_FLOAT(-1.3))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0382, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0382, SOUND_SPACE_DEFAULT)
     EVT_WAIT(33 * DT)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(3.5), 0)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0383, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0383, SOUND_SPACE_DEFAULT)
     EVT_WAIT(18 * DT)
     EVT_CALL(SetMusicTrack, 0, SONG_GOURMET_GUY_FREAKOUT, 0, 8)
     EVT_WAIT(30 * DT)
@@ -292,7 +292,7 @@ EvtScript N(EVS_GourmetGuy_LovesCake) = {
 };
 
 EvtScript N(EVS_GourmetGuy_RunAround) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Leap)
     EVT_CALL(SetNpcJumpscale, NPC_GourmetGuy, EVT_FLOAT(0.001953125))
     EVT_CALL(GetNpcPos, NPC_GourmetGuy, LVar0, LVar1, LVar2)
@@ -300,7 +300,7 @@ EvtScript N(EVS_GourmetGuy_RunAround) = {
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Panic)
     EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_GourmetGuy, EVT_FLOAT(20.0 / DT))
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcRotation, NPC_GourmetGuy, 0, 0, -45)
     EVT_CALL(SetNpcYaw, NPC_GourmetGuy, 90)
     EVT_CALL(MakeLerp, 0, 100, 30, EASING_LINEAR)
@@ -321,14 +321,14 @@ EvtScript N(EVS_GourmetGuy_RunAround) = {
     EVT_END_LOOP
     EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcRotation, NPC_GourmetGuy, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_UPSIDE_DOWN, TRUE)
     EVT_CALL(SetNpcYaw, NPC_GourmetGuy, 270)
     EVT_CALL(SetNpcPos, NPC_GourmetGuy, 250, 160, 50)
     EVT_CALL(NpcMoveTo, NPC_GourmetGuy, -100, 50, 0)
     EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy, NPC_FLAG_UPSIDE_DOWN, FALSE)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_0384, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcYaw, NPC_GourmetGuy, 90)
     EVT_CALL(SetNpcPos, NPC_GourmetGuy, -100, 0, 70)
     EVT_CALL(NpcMoveTo, NPC_GourmetGuy, 140, 70, 0)
@@ -339,7 +339,7 @@ EvtScript N(EVS_GourmetGuy_RunAround) = {
 };
 
 EvtScript N(EVS_RejectCake) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_SPIT_OUT, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_SPIT_OUT, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_SpitOut)
     EVT_CALL(MakeItemEntity, MV_CakeItemIdx, 105, 30, 20, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_CALL(MakeLerp, 0, 100, 4, EASING_LINEAR)
@@ -519,7 +519,7 @@ EvtScript N(EVS_Scene_JudgeCake) = {
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Eat)
     EVT_LOOP(6)
         EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GourmetGuy, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
     EVT_END_LOOP
     EVT_IF_NE(AB_KKJ_CompletedBakeStep, CAKE_TYPE_DONE)
         EVT_EXEC_WAIT(N(EVS_RejectCake))

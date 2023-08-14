@@ -158,9 +158,9 @@ EvtScript N(EVS_NpcIdle_Guards) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_0262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_0262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_01, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_02, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Koopatrol_03, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Koopatrol_01, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_02, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_03, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)

@@ -244,7 +244,7 @@ EvtScript N(EVS_ShakeTree) = {
                     EVT_CALL(N(TransformFoliage), LVar3, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
                     EVT_IF_EQ(LFlag0, FALSE)
                         EVT_SET(LFlag0, TRUE)
-                        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
                     EVT_END_IF
                 EVT_END_LOOP
                 EVT_WAIT(1)
@@ -276,7 +276,7 @@ EvtScript N(EVS_ShakeTree) = {
                     EVT_CALL(N(TransformFoliage), LVar4, EVT_FLOAT(0.1), EVT_FLOAT(0.2), LVarF, 0)
                     EVT_IF_EQ(LFlag0, FALSE)
                         EVT_SET(LFlag0, TRUE)
-                        EVT_CALL(PlaySoundAtModel, LVar4, SOUND_SMACK_TREE, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtModel, LVar4, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
                     EVT_END_IF
                 EVT_END_LOOP
                 EVT_WAIT(1)

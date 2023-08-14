@@ -361,7 +361,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
 };
 
 EvtScript N(EVS_Scene_BeanstalkGrowing) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o261, SOUND_019B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o261, SOUND_019B, SOUND_SPACE_DEFAULT)
     EVT_SET(LVarF, 0)
     EVT_LOOP(100)
         EVT_ADD(LVarF, 1)

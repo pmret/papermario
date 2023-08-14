@@ -337,11 +337,11 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                         EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 3)
                     EVT_END_THREAD
                     EVT_CALL(NpcJump0, LVar9, -220, 0, 63, 10)
-                    EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TRIP, SOUND_SPACE_MODE_0)
+                    EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
                     EVT_WAIT(50)
                     EVT_LOOP(2)
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_DEFAULT)
                         EVT_WAIT(7)
                     EVT_END_LOOP
                     EVT_WAIT(6)
@@ -351,7 +351,7 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                     EVT_CALL(InterpNpcYaw, LVar9, 90, 0)
                     EVT_WAIT(20)
                     EVT_THREAD
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_03A2, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_03A2, SOUND_SPACE_DEFAULT)
                         EVT_WAIT(45)
                         EVT_CALL(StopSound, SOUND_03A2)
                         EVT_CALL(SetNpcVar, NPC_ShyGuy_09, 0, MANAGER_ARMY_FLEE)

@@ -395,7 +395,7 @@ EvtScript N(EVS_80248878) = {
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_CALL(SetPlayerPos, -120, 24, 375)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0044, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_WHALE_EJECT, SOUND_SPACE_DEFAULT)
         EVT_CALL(PlayerJump1, -310, -10, 372, 80)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
         EVT_CALL(PlayerFaceNpc, NPC_Whale, FALSE)
@@ -404,7 +404,7 @@ EvtScript N(EVS_80248878) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcPos, NPC_PARTNER, -120, 24, 375)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.5))
-        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0044, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_WHALE_EJECT, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_PARTNER, -345, 0, 372, 80)
         EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
         EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Whale, 0)
@@ -414,7 +414,7 @@ EvtScript N(EVS_80248878) = {
         EVT_WAIT(10)
         EVT_CALL(SetNpcPos, NPC_Fuzzipede, -120, 24, 375)
         EVT_CALL(SetNpcJumpscale, NPC_Fuzzipede, EVT_FLOAT(0.5))
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzipede, SOUND_0044, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzipede, SOUND_WHALE_EJECT, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_Fuzzipede, -280, -10, 372, 90)
         EVT_CALL(NpcFaceNpc, NPC_Fuzzipede, NPC_Whale, 0)
     EVT_END_THREAD
@@ -468,7 +468,7 @@ EvtScript N(EVS_80248878) = {
     EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_LOOP(10)
         EVT_ADD(LVar2, -60)
-        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzipede, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Fuzzipede, SOUND_FUZZIPEDE_MOTION, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_Fuzzipede, LVar0, LVar1, LVar2, 10)
         EVT_CALL(NpcFaceNpc, NPC_Kolorado, NPC_Fuzzipede, 0)
         EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Fuzzipede, 0)
@@ -599,7 +599,7 @@ EvtScript N(EVS_802496FC) = {
     EVT_IF_EQ(GB_StoryProgress, STORY_CH5_TRADED_VASE_FOR_SEED)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
         EVT_CALL(N(func_80242A90_854C00), 5, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcJumpscale, NPC_Kolorado, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_Kolorado, LVar0, LVar1, LVar2, 20)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
@@ -637,7 +637,7 @@ EvtScript N(EVS_802496FC) = {
         EVT_CASE_EQ(STORY_CH5_TRADED_VASE_FOR_SEED)
             EVT_CALL(SetNpcVar, NPC_Kolorado, 0, 1)
     EVT_END_SWITCH
-    EVT_EXEC(N(EVS_802441E0))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(EnablePartnerAI)
@@ -751,7 +751,7 @@ EvtScript N(D_80249E84_85BFF4) = {
                         EVT_CALL(PlayerJump1, LVar2, LVar3, LVar4, 10)
                         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                     EVT_END_THREAD
-                    EVT_CALL(PlaySoundAt, SOUND_0041, SOUND_SPACE_MODE_0, 0, 0, 480)
+                    EVT_CALL(PlaySoundAt, SOUND_WHALE_JIGGLE, SOUND_SPACE_DEFAULT, 0, 0, 480)
                     EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Panic)
                     EVT_WAIT(10)
                     EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_WalkSad)
@@ -781,7 +781,7 @@ EvtScript N(D_8024A1F8_85C368) = {
     EVT_EXEC_WAIT(N(D_80249E84_85BFF4))
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAt, SOUND_0041, SOUND_SPACE_MODE_0, 0, 0, 480)
+    EVT_CALL(PlaySoundAt, SOUND_WHALE_JIGGLE, SOUND_SPACE_DEFAULT, 0, 0, 480)
     EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Panic)
     EVT_WAIT(10)
     EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -1019,7 +1019,7 @@ EvtScript N(EVS_NpcInteract_Toad_01) = {
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)
         EVT_CALL(NpcMoveTo, NPC_Kolorado, LVar3, LVar5, 20)
         EVT_CALL(N(func_80242A90_854C00), 2, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcJumpscale, NPC_Kolorado, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_Kolorado, LVar0, LVar1, LVar2, 20)
         EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
@@ -1190,7 +1190,7 @@ API_CALLABLE(N(func_802431B0_855320)) {
 
     if (y < 0.0f) {
         fx_rising_bubble(0, x, y, z, 0.0f);
-        sfx_adjust_env_sound_pos(SOUND_LRAW_JR_TROOPA_SWIM, SOUND_SPACE_MODE_0, x, y, z);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_JR_TROOPA_SWIM, SOUND_SPACE_DEFAULT, x, y, z);
     }
     return ApiStatus_DONE2;
 }
@@ -1246,9 +1246,9 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
         EVT_WAIT(20)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
-        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Port_00B4, 160, 40)
@@ -1264,7 +1264,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
     EVT_CALL(NpcMoveTo, NPC_SELF, -40, 490, 0)
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(StopSound, SOUND_LOOP_JR_TROOPA_SWIM)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_JR_TROOPA_SPLASH, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_JR_TROOPA_SPLASH, SOUND_SPACE_DEFAULT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_kujira, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o236, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Charge)
@@ -2017,7 +2017,7 @@ EvtScript N(EVS_NpcInteract_Toad_03) = {
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_MAC_Port_00C0)
         EVT_WAIT(10)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
         EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
         EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_SET(GF_TradingEvent3_Active, FALSE)
@@ -2038,7 +2038,7 @@ EvtScript N(EVS_NpcInteract_Toad_03) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_MAC_Port_00C3)
             EVT_WAIT(10)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
             EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_SET(GF_TradingEvent3_Active, FALSE)

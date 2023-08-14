@@ -164,7 +164,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(EnableModel, MODEL_ice03, TRUE)
             EVT_THREAD
                 EVT_WAIT(10)
-                EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_0397, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_0397, SOUND_SPACE_DEFAULT)
             EVT_END_THREAD
             EVT_CALL(SetNpcFlagBits, NPC_PenguinPatrol, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_PenguinPatrol, ANIM_PenguinPatrol_Run)
@@ -185,7 +185,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, LVar0, LVar2, 0)
             EVT_THREAD
                 EVT_CALL(DisablePlayerPhysics, TRUE)
-                EVT_CALL(PlaySoundAtPlayer, SOUND_0398, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_0398, SOUND_SPACE_DEFAULT)
                 EVT_CALL(InterpPlayerYaw, 90, 0)
                 EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Thrown)
                 EVT_SET(MF_Unk_01, FALSE)
@@ -220,7 +220,7 @@ EvtScript N(EVS_DamageFrozenPond_Before) = {
             EVT_ADD(LVar0, -20)
             EVT_CALL(NpcMoveTo, NPC_PenguinPatrol, LVar0, LVar2, 0)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_0390, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_PenguinPatrol, SOUND_0390, SOUND_SPACE_DEFAULT)
             EVT_THREAD
                 EVT_SET(MV_ThrownOut, 1)
                 EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
@@ -314,10 +314,10 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
         EVT_THREAD
             EVT_CALL(DisablePartnerAI, 0)
             EVT_WAIT(1)
-            EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0302, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0302, SOUND_SPACE_DEFAULT)
             EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.5))
             EVT_CALL(NpcJump1, NPC_PARTNER, 265, 0, 225, 30)
-            EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_TRIP, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_TRIP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump1, NPC_PARTNER, 275, 0, 225, 8)
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
@@ -338,7 +338,7 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_038B, 0, 0, 60, 220)
+    EVT_CALL(PlaySoundAt, SOUND_038B, SOUND_SPACE_DEFAULT, 0, 60, 220)
     EVT_CALL(N(SpawnIceShards))
     EVT_CALL(EnableModel, MODEL_ice03, FALSE)
     EVT_CALL(SetGroupVisibility, MODEL_ice04, MODEL_GROUP_VISIBLE)
@@ -374,9 +374,9 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
     EVT_IF_EQ(LVarA, 1)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_DustOff)
         EVT_WAIT(7)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, SOUND_SPACE_DEFAULT)
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_DUST_OFF, SOUND_SPACE_DEFAULT)
         EVT_WAIT(15)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(1)

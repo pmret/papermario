@@ -79,7 +79,7 @@ HitResult calc_partner_test_enemy(void) {
         && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)
         && !(target->flags2 & ACTOR_FLAG_UPSIDE_DOWN)
     ) {
-        sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_LANDED_ON_SPIKE;
     }
 
@@ -89,7 +89,7 @@ HitResult calc_partner_test_enemy(void) {
         && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SPIKY_FRONT)
         && !player_team_is_ability_active(partner, ABILITY_SPIKE_SHIELD)
     ) {
-        sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
         dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
         return HIT_RESULT_BACKFIRE;
@@ -100,7 +100,7 @@ HitResult calc_partner_test_enemy(void) {
         && (part->eventFlags & ACTOR_EVENT_FLAG_FIREY)
         && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_BURN_CONTACT)
     ) {
-        sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         dispatch_damage_event_partner_1(1, EVENT_BURN_CONTACT);
         dispatch_event_actor(target, EVENT_BURN_TAUNT);
         return HIT_RESULT_BACKFIRE;
@@ -114,7 +114,7 @@ HitResult calc_partner_test_enemy(void) {
                 && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
                 && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SPIKY_TOP)
             ) {
-                sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
                 dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
                 return HIT_RESULT_BACKFIRE;
@@ -125,7 +125,7 @@ HitResult calc_partner_test_enemy(void) {
                 && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
                 && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
             ) {
-                sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
                 dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
                 return HIT_RESULT_BACKFIRE;
@@ -138,7 +138,7 @@ HitResult calc_partner_test_enemy(void) {
             && !(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT))
         {
-            sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             apply_shock_effect(partner);
             dispatch_damage_event_partner_1(1, EVENT_SHOCK_HIT);
             return HIT_RESULT_BACKFIRE;
@@ -149,7 +149,7 @@ HitResult calc_partner_test_enemy(void) {
             && (part->eventFlags & ACTOR_EVENT_FLAG_FIREY)
             && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_BURN_CONTACT))
         {
-            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_BURN_CONTACT);
             dispatch_event_actor(target, EVENT_BURN_TAUNT);
             return HIT_RESULT_BACKFIRE;
@@ -201,7 +201,7 @@ HitResult calc_partner_damage_enemy(void) {
     if (gBattleStatus.flags1 & BS_FLAGS1_FORCE_HIT_IMMUNE) {
         retVal = 2;
         dispatchEvent = EVENT_ZERO_DAMAGE;
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     } else {
         if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY
             || target->transparentStatus == STATUS_KEY_TRANSPARENT
@@ -211,7 +211,7 @@ HitResult calc_partner_damage_enemy(void) {
         }
 
         if (target->stoneStatus == STATUS_KEY_STONE) {
-            sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
             show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
@@ -228,7 +228,7 @@ HitResult calc_partner_damage_enemy(void) {
         if (battleStatus->curAttackElement & DAMAGE_TYPE_JUMP
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
@@ -241,12 +241,12 @@ HitResult calc_partner_damage_enemy(void) {
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
 
             if (!(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_EXPLODE_CONTACT)) {
-                sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_damage_event_partner_1(1, EVENT_BURN_CONTACT);
                 return HIT_RESULT_BACKFIRE;
             }
 
-            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                 return HIT_RESULT_1;
             }
@@ -258,7 +258,7 @@ HitResult calc_partner_damage_enemy(void) {
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_FIREY
             && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_BURN_CONTACT)
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_BURN_CONTACT);
             dispatch_event_actor(target, EVENT_BURN_TAUNT);
             return HIT_RESULT_BACKFIRE;
@@ -269,7 +269,7 @@ HitResult calc_partner_damage_enemy(void) {
             && targetPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT
             && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SPIKY_FRONT)
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
@@ -280,7 +280,7 @@ HitResult calc_partner_damage_enemy(void) {
             && battleStatus->curAttackElement & DAMAGE_TYPE_FIRE
             && targetPart->eventFlags & (ACTOR_EVENT_FLAG_FIRE_EXPLODE | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                 return HIT_RESULT_1;
@@ -294,7 +294,7 @@ HitResult calc_partner_damage_enemy(void) {
             && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
             && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
@@ -306,7 +306,7 @@ HitResult calc_partner_damage_enemy(void) {
             && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
             && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SPIKY_TOP)
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
             dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
             return HIT_RESULT_BACKFIRE;
@@ -317,7 +317,7 @@ HitResult calc_partner_damage_enemy(void) {
             && battleStatus->curAttackElement & DAMAGE_TYPE_FIRE
             && targetPart->eventFlags & (ACTOR_EVENT_FLAG_FIRE_EXPLODE | ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
         ) {
-            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_event_actor(target, EVENT_EXPLODE_TRIGGER);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                 return HIT_RESULT_1;
@@ -332,7 +332,7 @@ HitResult calc_partner_damage_enemy(void) {
                 && !(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)
                 && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
             ) {
-                sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 apply_shock_effect(partner);
                 dispatch_damage_event_partner_1(1, EVENT_SHOCK_HIT);
                 return HIT_RESULT_BACKFIRE;
@@ -435,7 +435,7 @@ HitResult calc_partner_damage_enemy(void) {
             if (!(battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
                 retVal = 2;
                 dispatchEvent = EVENT_ZERO_DAMAGE;
-                sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
                 retVal = 2;
                 if (target->curHP < 1) {
@@ -478,7 +478,7 @@ HitResult calc_partner_damage_enemy(void) {
                 || battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT
             ) {
                 dispatchEvent = (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) ? EVENT_ZERO_DAMAGE : EVENT_IMMUNE;
-                sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_event_actor(target, dispatchEvent);
                 show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                 if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
@@ -487,7 +487,7 @@ HitResult calc_partner_damage_enemy(void) {
                 return HIT_RESULT_HIT;
             }
 
-            sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             apply_shock_effect(partner);
             dispatch_damage_event_partner_1(1, EVENT_SHOCK_HIT);
             return HIT_RESULT_BACKFIRE;
@@ -684,7 +684,7 @@ HitResult calc_partner_damage_enemy(void) {
                             retVal = 0;
                             tempBinary = TRUE;
                             gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_SHOW_PLAYER_DECORATIONS | BS_FLAGS1_ACTORS_VISIBLE);
-                            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         } else {
                             dispatchEvent = EVENT_IMMUNE;
                             retVal = 2;
@@ -725,7 +725,7 @@ HitResult calc_partner_damage_enemy(void) {
                     retVal = 0;
                     tempBinary = TRUE;
                     gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_SHOW_PLAYER_DECORATIONS | BS_FLAGS1_ACTORS_VISIBLE);
-                    sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 } else {
                     dispatchEvent = EVENT_IMMUNE;
                     retVal = 2;
@@ -764,7 +764,7 @@ HitResult calc_partner_damage_enemy(void) {
         && !(gBattleStatus.flags1 & BS_FLAGS1_80)
     ) {
         if (battleStatus->lastAttackDamage > 0) {
-            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 
         if (battleStatus->lastAttackDamage > 0 || (battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && tempBinary)) {
@@ -783,19 +783,19 @@ HitResult calc_partner_damage_enemy(void) {
     if (battleStatus->lastAttackDamage > 0) {
         if (partImmuneToElement == 0) {
             if (partner->actorTypeData1[5] != 0) {
-                sfx_play_sound_at_position(partner->actorTypeData1[5], SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(partner->actorTypeData1[5], SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             }
 
             func_80267018(target, 1);
 
             if (isFireDamage) {
-                sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else if (isShockDamage) {
-                sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else if (isIceDamage) {
-                sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
-                sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             }
         }
     }
@@ -804,7 +804,7 @@ HitResult calc_partner_damage_enemy(void) {
         && !(tempBinary || wasStatusInflicted)
         || targetPart->flags & ACTOR_PART_FLAG_2000
     ) {
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_SLEEP && wasStatusInflicted) {
@@ -812,7 +812,7 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_DIZZY && wasStatusInflicted) {
@@ -820,7 +820,7 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE && wasStatusInflicted) {
@@ -828,7 +828,7 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_POISON && wasStatusInflicted) {
@@ -836,7 +836,7 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_STOP && wasStatusInflicted) {
@@ -844,7 +844,7 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_FROZEN && wasStatusInflicted) {
@@ -853,7 +853,7 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
         evt->varTablePtr[3] = target;
-        sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackStatus & STATUS_FLAG_SHRINK && wasStatusInflicted) {
@@ -862,11 +862,11 @@ HitResult calc_partner_damage_enemy(void) {
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
         evt->varTablePtr[3] = target;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (battleStatus->curAttackElement & DAMAGE_TYPE_SMASH && target->actorType == ACTOR_TYPE_GOOMNUT_TREE) {
-        sfx_play_sound_at_position(SOUND_SMACK_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     show_actor_health_bar(target);
@@ -884,7 +884,7 @@ HitResult calc_partner_damage_enemy(void) {
     if (partner->staticStatus != STATUS_KEY_STATIC && (target->staticStatus == STATUS_KEY_STATIC ||
             targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED) && !(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT) &&
         !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)) {
-        sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         apply_shock_effect(partner);
         dispatch_damage_event_partner_1(1, EVENT_SHOCK_HIT);
         return -1;

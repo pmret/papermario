@@ -46,7 +46,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Flee) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 5)
@@ -71,7 +71,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Caught) = {
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Follower, SOUND_20B8, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Follower, SOUND_20B8, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 1440, 20, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -81,7 +81,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Caught) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_Follower, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Follower, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcPos, NPC_Guardian, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcPos, NPC_Follower, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_Follower, FALSE)

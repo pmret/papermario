@@ -11,7 +11,7 @@
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
         EVT_WAIT(20)
         EVT_IF_EQ(AF_JAN_02, TRUE)
             EVT_BREAK_LOOP

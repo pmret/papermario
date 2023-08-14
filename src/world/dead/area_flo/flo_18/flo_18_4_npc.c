@@ -89,7 +89,7 @@ EvtScript N(EVS_Scene_LakilesterLikesBeingGood) = {
 
 EvtScript N(EVS_GangRetreat) = {
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_FlyingMagikoopa, SOUND_019E, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_FlyingMagikoopa, SOUND_019E, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcFlagBits, NPC_FlyingMagikoopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(InterpNpcYaw, NPC_FlyingMagikoopa, 270, 0)
         EVT_CALL(LoadPath, 60, EVT_PTR(N(RetreatPath_Magikoopa)), ARRAY_COUNT(N(RetreatPath_Magikoopa)), EASING_LINEAR)
@@ -104,7 +104,7 @@ EvtScript N(EVS_GangRetreat) = {
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_01, SOUND_019F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_01, SOUND_019F, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcFlagBits, NPC_Lakitu_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(InterpNpcYaw, NPC_Lakitu_01, 270, 0)
         EVT_CALL(LoadPath, 60, EVT_PTR(N(RetreatPath_Lakitu_01)), ARRAY_COUNT(N(RetreatPath_Lakitu_01)), EASING_LINEAR)
@@ -130,7 +130,7 @@ EvtScript N(EVS_GangRetreat) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_03, SOUND_019F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_03, SOUND_019F, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcFlagBits, NPC_Lakitu_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(InterpNpcYaw, NPC_Lakitu_03, 270, 0)
     EVT_CALL(LoadPath, 80, EVT_PTR(N(RetreatPath_Lakitu_03)), ARRAY_COUNT(N(RetreatPath_Lakitu_03)), EASING_LINEAR)

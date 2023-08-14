@@ -364,7 +364,7 @@ EvtScript BaseExitDoor = {
     EVT_ADD(LVarB, 180)
     EVT_CALL(InterpPlayerYaw, LVarB, 2)
     EVT_CALL(ModifyColliderFlags, 0, LVar1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAt, SOUND_DOOR_OPEN, 0, LVarC, LVarD, LVarE)
+    EVT_CALL(PlaySoundAt, SOUND_DOOR_OPEN, SOUND_SPACE_DEFAULT, LVarC, LVarD, LVarE)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
@@ -438,7 +438,7 @@ EvtScript BaseEnterDoor = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAt, SOUND_DOOR_CLOSE, 0, LVar7, LVar8, LVar9)
+        EVT_CALL(PlaySoundAt, SOUND_DOOR_CLOSE, SOUND_SPACE_DEFAULT, LVar7, LVar8, LVar9)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, -80, 0, 10, EASING_LINEAR)
     EVT_LABEL(0)

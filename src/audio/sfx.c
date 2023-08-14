@@ -27,19 +27,19 @@ s32 LoopingSounds[] = {
     [SOUND_LOOP_IDX(SOUND_LOOP_0E)] SOUND_LRAW_0274,
     [SOUND_LOOP_IDX(SOUND_LOOP_OBK_LOWER_CHAIN)] SOUND_LRAW_OBK_LOWER_CHAIN,
     [SOUND_LOOP_IDX(SOUND_LOOP_MOVE_STATUE)] SOUND_LRAW_MOVE_STATUE,
-    [SOUND_LOOP_IDX(SOUND_LOOP_11)] SOUND_LRAW_032E,
+    [SOUND_LOOP_IDX(SOUND_LOOP_SENTINEL_ALARM)] SOUND_LRAW_SENTINEL_ALARM,
     [SOUND_LOOP_IDX(SOUND_LOOP_QUIZ_TICKING)] SOUND_LRAW_QUIZ_TICKING,
     [SOUND_LOOP_IDX(SOUND_LOOP_AUDIENCE_MURMUR)] SOUND_LRAW_AUDIENCE_MURMUR,
     [SOUND_LOOP_IDX(SOUND_LOOP_TOYBOX_TRAIN_GEAR)] SOUND_LRAW_TOYBOX_TRAIN_GEAR,
     [SOUND_LOOP_IDX(SOUND_LOOP_15)] SOUND_LRAW_0388,
     [SOUND_LOOP_IDX(SOUND_LOOP_OMO_ROTATING_WHEEL)] SOUND_LRAW_OMO_ROTATING_WHEEL,
-    [SOUND_LOOP_IDX(SOUND_LOOP_17)] SOUND_LRAW_004A,
+    [SOUND_LOOP_IDX(SOUND_LOOP_JAN_BEACH_WAVES)] SOUND_LRAW_JAN_BEACH_WAVES,
     [SOUND_LOOP_IDX(SOUND_LOOP_MOVE_LARGE_STATUE)] SOUND_LRAW_MOVE_LARGE_STATUE,
     [SOUND_LOOP_IDX(SOUND_LOOP_ZIPLINE)] SOUND_LRAW_ZIPLINE,
     [SOUND_LOOP_IDX(SOUND_LOOP_1A)] SOUND_LRAW_0185,
     [SOUND_LOOP_IDX(SOUND_LOOP_1B)] SOUND_LRAW_0052,
-    [SOUND_LOOP_IDX(SOUND_LOOP_1C)] SOUND_LRAW_004E,
-    [SOUND_LOOP_IDX(SOUND_LOOP_1D)] SOUND_LRAW_004F,
+    [SOUND_LOOP_IDX(SOUND_LOOP_JAN_SMALL_GEYSER)] SOUND_LRAW_JAN_SMALL_GEYSER,
+    [SOUND_LOOP_IDX(SOUND_LOOP_JAN_LARGE_GEYSER)] SOUND_LRAW_JAN_LARGE_GEYSER,
     [SOUND_LOOP_IDX(SOUND_LOOP_1E)] SOUND_LRAW_0189,
     [SOUND_LOOP_IDX(SOUND_LOOP_1F)] SOUND_NONE,
     [SOUND_LOOP_IDX(SOUND_LOOP_20)] SOUND_NONE,
@@ -89,7 +89,7 @@ s32 LoopingSounds[] = {
     [SOUND_LOOP_IDX(SOUND_LOOP_4C)] SOUND_LRAW_036C,
     [SOUND_LOOP_IDX(SOUND_LOOP_4D)] SOUND_LRAW_036D,
     [SOUND_LOOP_IDX(SOUND_LOOP_4E)] SOUND_FLIGHT,
-    [SOUND_LOOP_IDX(SOUND_LOOP_4F)] SOUND_LRAW_0043,
+    [SOUND_LOOP_IDX(SOUND_LOOP_WHALE_GEYSER)] SOUND_LRAW_WHALE_GEYSER,
     [SOUND_LOOP_IDX(SOUND_LOOP_50)] SOUND_LRAW_0197,
     [SOUND_LOOP_IDX(SOUND_LOOP_KPA_CHAIN_DRIVE)] SOUND_LRAW_KPA_CHAIN_DRIVE,
     [SOUND_LOOP_IDX(SOUND_LOOP_KPA_FILL_WATER)] SOUND_LRAW_KPA_FILL_WATER,
@@ -98,9 +98,9 @@ s32 LoopingSounds[] = {
     [SOUND_LOOP_IDX(SOUND_LOOP_JR_TROOPA_SWIM)] SOUND_LRAW_JR_TROOPA_SWIM,
     [SOUND_LOOP_IDX(SOUND_LOOP_KKJ_RUMBLING)] SOUND_LRAW_KKJ_RUMBLING,
     [SOUND_LOOP_IDX(SOUND_LOOP_OSR_RUMBLING)] SOUND_LRAW_OSR_RUMBLING,
-    [SOUND_LOOP_IDX(SOUND_LOOP_58)] SOUND_LRAW_0039,
-    [SOUND_LOOP_IDX(SOUND_LOOP_59)] SOUND_LRAW_004C,
-    [SOUND_LOOP_IDX(SOUND_LOOP_5A)] SOUND_LRAW_004D,
+    [SOUND_LOOP_IDX(SOUND_LOOP_MAC_HARBOR_WATER)] SOUND_LRAW_MAC_HARBOR_WATER,
+    [SOUND_LOOP_IDX(SOUND_LOOP_OSR_FOUNTAIN_INTACT)] SOUND_LRAW_OSR_FOUNTAIN_INTACT,
+    [SOUND_LOOP_IDX(SOUND_LOOP_OSR_FOUNTAIN_BROKEN)] SOUND_LRAW_OSR_FOUNTAIN_BROKEN,
     [SOUND_LOOP_IDX(SOUND_LOOP_5B)] SOUND_LRAW_01B1,
     [SOUND_LOOP_IDX(SOUND_LOOP_5C)] SOUND_LRAW_01B2,
     [SOUND_LOOP_IDX(SOUND_LOOP_DGB_COLLAPSE)] SOUND_LRAW_DGB_COLLAPSE,
@@ -559,11 +559,11 @@ void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan
     } while (0); // required to match
 
     switch (spaceMode) {
-        case SOUND_SPACE_MODE_0:
-            sfx_compute_spatialized_sound_params_0(x, y, z, volume, pan);
+        case SOUND_SPACE_DEFAULT:
+            sfx_compute_spatialized_sound_params_ignore_depth(x, y, z, volume, pan);
             break;
-        case SOUND_SPACE_MODE_1:
-            sfx_compute_spatialized_sound_params_1(x, y, z, volume, pan);
+        case SOUND_SPACE_WITH_DEPTH:
+            sfx_compute_spatialized_sound_params_with_depth(x, y, z, volume, pan);
             break;
         case SOUND_SPACE_FULL:
             sfx_compute_spatialized_sound_params_full(x, y, z, volume, pan, paramFlags);
@@ -594,7 +594,7 @@ void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan
     }
 }
 
-void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
+void sfx_compute_spatialized_sound_params_ignore_depth(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
     s32 screenX, screenY, screenZ;
 
     get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
@@ -628,7 +628,7 @@ void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s1
     }
 }
 
-void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
+void sfx_compute_spatialized_sound_params_with_depth(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 screenX, screenY, screenZ;
     f32 depth;
@@ -646,7 +646,6 @@ void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s1
         *volume = (screenX * 0.3f) + 127.0f;
         screenX = 0;
     }
-
     if (camera->viewportW < screenX) {
         *volume = 127.0f - ((screenX - camera->viewportW) * 0.3f);
         screenX = camera->viewportW;

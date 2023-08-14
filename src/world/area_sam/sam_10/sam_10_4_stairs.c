@@ -64,7 +64,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetItemPos, MV_StarStoneItemID, -117, 179, -32)
-    EVT_CALL(PlaySoundAt, SOUND_01EB, 0, -117, 179, -32)
+    EVT_CALL(PlaySoundAt, SOUND_01EB, SOUND_SPACE_DEFAULT, -117, 179, -32)
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(MakeLerp, -32, -55, 100 * DT, EASING_COS_IN_OUT)
@@ -153,7 +153,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
                 EVT_SET(LVarA, -20)
                 EVT_SUB(LVarA, LVarB)
             EVT_ELSE
-                EVT_CALL(PlaySoundAt, SOUND_01EC, 0, LVar0, LVarA, LVar2)
+                EVT_CALL(PlaySoundAt, SOUND_01EC, SOUND_SPACE_DEFAULT, LVar0, LVarA, LVar2)
                 EVT_MOD(LVar2, 3)
                 EVT_IF_EQ(LVar2, 0)
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))

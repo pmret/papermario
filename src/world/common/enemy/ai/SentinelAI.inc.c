@@ -105,7 +105,7 @@ void N(SentinelAI_DescendInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
     if (!(enemy->varTable[0] & SENTINEL_AI_FLAG_PLAYING_SOUND)) {
         enemy->varTable[0] |= SENTINEL_AI_FLAG_PLAYING_SOUND;
     }
-    sfx_play_sound_at_position(SOUND_LOOP_11, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(SOUND_LOOP_SENTINEL_ALARM, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
     npc->duration = 0;
     script->AI_TEMP_STATE = AI_STATE_SENTINEL_DESCEND;
 }
@@ -117,7 +117,7 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     s32 color;
 
     // @bug need to use real sound id, not environmental sound id
-    sfx_adjust_env_sound_pos(SOUND_LOOP_11, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_adjust_env_sound_pos(SOUND_LOOP_SENTINEL_ALARM, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
         npc->rot.y = 0.0f;
@@ -162,7 +162,7 @@ void N(SentinelAI_LosePlayerInit)(Evt* script, MobileAISettings* aiSettings, Ene
     enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
     set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
     if (enemy->varTable[0] & SENTINEL_AI_FLAG_PLAYING_SOUND) {
-        sfx_stop_sound(SOUND_LOOP_11);
+        sfx_stop_sound(SOUND_LOOP_SENTINEL_ALARM);
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_PLAYING_SOUND;
     }
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];

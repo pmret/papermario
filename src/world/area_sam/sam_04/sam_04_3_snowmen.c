@@ -105,7 +105,7 @@ EvtScript N(EVS_SnowmanMove) = {
         EVT_SETF(LVar3, LVar7)
         EVT_SET(LVar4, 20)
         EVT_EXEC_WAIT(N(EVS_SnowmanJump))
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_038C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_038C, SOUND_SPACE_DEFAULT)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -263,7 +263,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_038D, 0, 0, 0, -300)
+    EVT_CALL(PlaySoundAt, SOUND_038D, SOUND_SPACE_DEFAULT, 0, 0, -300)
     EVT_CALL(MakeLerp, 0, 100, 200 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
@@ -284,7 +284,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
         EVT_CALL(GetModelCenter, MODEL_o64)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, 0, LVar2, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_038E, 0, 0, 0, -300)
+    EVT_CALL(PlaySoundAt, SOUND_038E, SOUND_SPACE_DEFAULT, 0, 0, -300)
     EVT_CALL(MakeLerp, 0, 80, 100 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)

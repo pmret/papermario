@@ -54,10 +54,10 @@ void action_update_jump(void) {
 
         if (playerStatus->actionState == ACTION_STATE_JUMP) {
             if (playerStatus->animFlags & PA_FLAG_8BIT_MARIO) {
-                sfx_play_sound_at_player(SOUND_JUMP_8BIT_MARIO, SOUND_SPACE_MODE_0);
+                sfx_play_sound_at_player(SOUND_JUMP_8BIT_MARIO, SOUND_SPACE_DEFAULT);
             }
             else {
-                sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_MODE_0);
+                sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT);
             }
         }
     }

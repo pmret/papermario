@@ -32,14 +32,14 @@ HitResult calc_item_check_hit(void) {
     }
 
     if (actor->stoneStatus == STATUS_KEY_STONE) {
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_IMMUNE;
     }
 
     if ((battleStatus->curAttackElement & DAMAGE_TYPE_JUMP)
         && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP))
     {
-        sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_LANDED_ON_SPIKE;
     }
 
@@ -123,7 +123,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if (target->stoneStatus == STATUS_KEY_STONE) {
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
         show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
         if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
@@ -164,7 +164,7 @@ HitResult calc_item_damage_enemy(void) {
 
         if (!(battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
             dispatchEvent = EVENT_ZERO_DAMAGE;
-            sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             battleStatus->lastAttackDamage = 0;
         } else {
             dispatchEvent = EVENT_ZERO_DAMAGE;
@@ -195,7 +195,7 @@ HitResult calc_item_damage_enemy(void) {
     if (targetPart->flags & ACTOR_PART_FLAG_2000) {
         dispatch_event_actor(target, dispatchEvent);
         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_NO_DAMAGE;
     }
 
@@ -391,7 +391,7 @@ HitResult calc_item_damage_enemy(void) {
             hitResult = HIT_RESULT_HIT;
             sp1C = TRUE;
             gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_SHOW_PLAYER_DECORATIONS | BS_FLAGS1_ACTORS_VISIBLE;
-            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             wasStatusInflicted = TRUE;
             gBattleStatus.flags1 |= BS_FLAGS1_40;
         } else {
@@ -407,7 +407,7 @@ HitResult calc_item_damage_enemy(void) {
         || ((gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) && !(gBattleStatus.flags1 & BS_FLAGS1_80))
     ) {
         if (battleStatus->lastAttackDamage > 0) {
-            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 
         if (battleStatus->lastAttackDamage > 0 || (battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS) && sp1C) {
@@ -451,18 +451,18 @@ HitResult calc_item_damage_enemy(void) {
     if (battleStatus->lastAttackDamage > 0 && !partImmuneToElement) {
         func_80267018(target, 1);
         if (isFireDamage) {
-            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         } else if (isShockDamage) {
-            sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         } else if (isIceDamage) {
-            sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         } else {
-            sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
     }
 
     if ((battleStatus->lastAttackDamage <= 0 && !wasStatusInflicted) || (targetPart->flags & ACTOR_FLAG_2000)) {
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if ((battleStatus->curAttackStatus & STATUS_FLAG_SLEEP) && wasStatusInflicted) {
@@ -470,35 +470,35 @@ HitResult calc_item_damage_enemy(void) {
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_DIZZY) && wasStatusInflicted) {
         script = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE) && wasStatusInflicted) {
         script = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_POISON) && wasStatusInflicted) {
         script = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_STOP) && wasStatusInflicted) {
         script = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_FROZEN) && wasStatusInflicted) {
         script = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
@@ -506,7 +506,7 @@ HitResult calc_item_damage_enemy(void) {
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         script->varTablePtr[3] = target;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_SHRINK) && wasStatusInflicted) {
         script = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
@@ -514,10 +514,10 @@ HitResult calc_item_damage_enemy(void) {
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         script->varTablePtr[3] = target;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackElement & DAMAGE_TYPE_SMASH) && (target->actorType == ACTOR_TYPE_GOOMNUT_TREE)) {
-        sfx_play_sound_at_position(SOUND_SMACK_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     show_actor_health_bar(target);

@@ -197,7 +197,7 @@ EvtScript N(EVS_TouchFloor_RightRoof) = {
     EVT_CALL(N(UnsetCamera0MoveFlag1))
     EVT_SET(LVar3, 500)
     EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayerCappedY), LVarA)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_SLIDE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SLIDE, SOUND_SPACE_DEFAULT)
     EVT_CALL(N(MovePlayerAlongRoofSlide))
     EVT_CALL(StopSound, SOUND_SLIDE)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.5))
@@ -216,7 +216,7 @@ EvtScript N(EVS_TouchFloor_RightRoof) = {
 };
 
 EvtScript N(EVS_SpawnChimneySmokeAtPlayer) = {
-    EVT_CALL(PlaySoundAtPlayer, SOUND_FIREPLACE_BURST, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_FIREPLACE_BURST, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar1, LVar2, LVar3, 0)
@@ -282,7 +282,7 @@ EvtScript N(EVS_TouchFloor_LeftRoof) = {
     EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 1, 10, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(SetNpcPos, NPC_PARTNER, -214, 150, -375)

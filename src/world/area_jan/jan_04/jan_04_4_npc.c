@@ -19,7 +19,7 @@ EvtScript N(EVS_ShakeTree_Sushie) = {
     EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterB, FALSE)
         EVT_IF_EQ(GF_JAN04_SushieTreeHitCounterA, FALSE)
             EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_Sushie, 90, 140, -85, 20 * DT)
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 90, 140, -85)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, 90, 140, -85)
@@ -39,7 +39,7 @@ EvtScript N(EVS_ShakeTree_Sushie) = {
             EVT_SET(AF_JAN_08, FALSE)
         EVT_ELSE
             EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_Sushie, -10, 112, -80, 15 * DT)
             EVT_SET(GF_JAN04_SushieTreeHitCounterA, FALSE)
             EVT_SET(GF_JAN04_SushieTreeHitCounterB, TRUE)
@@ -48,7 +48,7 @@ EvtScript N(EVS_ShakeTree_Sushie) = {
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(SetNpcJumpscale, NPC_Sushie, EVT_FLOAT(1.0))
-        EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Sushie, SOUND_SUSHIE_FLOP, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_Sushie, 50, 0, 0, 20 * DT)
         EVT_SET(GF_JAN04_SushieTreeHitCounterA, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_Sushie, TRUE)
@@ -223,8 +223,8 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
                 EVT_WAIT(30)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_PopUp)
                 EVT_WAIT(10)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_MODE_0)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
                 EVT_WAIT(35)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_Idle)
                 EVT_CALL(SetNpcCollisionSize, NPC_SELF, 45, 26)

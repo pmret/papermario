@@ -22,7 +22,7 @@ EvtScript N(EVS_RestrictCamFromBarricade) = {
 
 EvtScript N(EVS_PlayShyGuyRunSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SEQ_21, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SEQ_21, SOUND_SPACE_DEFAULT)
         EVT_WAIT(8)
     EVT_END_LOOP
     EVT_RETURN
@@ -45,7 +45,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(6.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_SELF, -575, 0, 0)
         EVT_KILL_THREAD(LVarA)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, -460, 0, -20, 40 / DT)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
@@ -62,7 +62,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
             EVT_GOTO(10)
         EVT_END_IF
         EVT_WAIT(20 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, -460, 0, -20, 40 / DT)
     EVT_END_IF
     EVT_RETURN

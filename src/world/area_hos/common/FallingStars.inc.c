@@ -173,7 +173,7 @@ EvtScript N(EVS_Starfall_Directed) = {
         EVT_END_SWITCH
         // play sound (subject to minimum delay)
         EVT_IF_LT(LV_SoundDelay, 2)
-            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, 0, LV_PosX, LV_PosY, LV_PosZ)
+            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, SOUND_SPACE_DEFAULT, LV_PosX, LV_PosY, LV_PosZ)
             EVT_ADD(LV_SoundDelay, 1)
         EVT_END_IF
         EVT_ADD(LV_Time, LV_Delay)
@@ -212,7 +212,7 @@ EvtScript N(EVS_Starfall_Random) = {
             EVT_CALL(RandInt, 50, LVar0)
             EVT_ADD(LVar0, 20)
             EVT_CALL(N(SpawnRandomBouncingShootingStarFX))
-            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, 0, LVar1, LVar2, LVar3)
+            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
             EVT_WAIT(LVar0)
             EVT_GOTO(2)
     EVT_END_THREAD

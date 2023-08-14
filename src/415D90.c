@@ -2600,7 +2600,7 @@ void btl_state_update_player_menu(void) {
                                         battleStatus->submenuStatus[entryIdx] = -1;
                                     }
                                     entryIdx++;
-                                } while (0);
+                                } while (0); // TODO required to match
                             } while (0); // TODO required to match
                         }
                         battleStatus->submenuMoveCount = entryIdx;

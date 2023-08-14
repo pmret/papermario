@@ -18,14 +18,14 @@ EvtScript N(EVS_UnlockDoor) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_MODE_0, 272, 60, 486)
+    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_DEFAULT, 272, 60, 486)
     EVT_CALL(RemoveKeyItemAt, LVar1)
     EVT_SET(GF_ISK02_UnlockedDoor, TRUE)
     EVT_SET(LVar0, MV_EntityID_Padlock)
     EVT_CALL(N(RemovePadlock))
     EVT_SET(LVar1, 0)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_0265, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_0265, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 65, 65, EASING_LINEAR)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)

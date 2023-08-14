@@ -230,8 +230,12 @@ API_CALLABLE(LifeShroomShroudWorld) {
     set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
     script->functionTemp[0] -= 1;
-    do {} while (0); // TODO required to match
-    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
+
+    if (script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    }
+    
+    return ApiStatus_BLOCK;
 }
 
 API_CALLABLE(LifeShroomRevealWorld) {
@@ -247,7 +251,7 @@ API_CALLABLE(LifeShroomRevealWorld) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
-
+    
     return ApiStatus_BLOCK;
 }
 

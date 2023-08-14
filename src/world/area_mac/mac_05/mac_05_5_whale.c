@@ -93,7 +93,7 @@ EvtScript N(D_80250FB4_863124) = {
     EVT_CALL(GetNpcVar, NPC_Whale, 0, LVar3)
     EVT_IF_EQ(LVar3, 0)
         EVT_CALL(N(UnkPlayerPosFunc))
-        EVT_CALL(PlaySoundAt, SOUND_LOOP_4F, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_LOOP_WHALE_GEYSER, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(N(CreateWhaleGeyser), 0, LVar0, LVar1, LVar2, 0, -1, 0, 30)
         EVT_CALL(SetNpcVar, NPC_Whale, 0, LVar0)
     EVT_END_IF
@@ -226,7 +226,7 @@ EvtScript N(D_802516CC_86383C) = {
     EVT_END
 };
 
-EvtScript N(EVS_8025194C) = {
+EvtScript N(EVS_SetupWhale) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_karada, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(unkAngleFunc002)), NULL)
@@ -296,20 +296,20 @@ EvtScript N(EVS_8025194C) = {
             EVT_IF_NE(LVarB, ANIM_Kolorado_Shout)
                 EVT_CALL(GetNpcVar, NPC_Whale, 0, LVar0)
                 EVT_IF_NE(LVar0, 0)
-                    EVT_CALL(PlaySound, SOUND_LRAW_0043 | SOUND_ID_TRIGGER_CHANGE_SOUND)
-                    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_0043)
+                    EVT_CALL(PlaySound, SOUND_LRAW_WHALE_GEYSER | SOUND_ID_TRIGGER_CHANGE_SOUND)
+                    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_WHALE_GEYSER)
                     EVT_CALL(N(DisposeWhaleGeyser), LVar0)
                     EVT_CALL(SetNpcVar, NPC_Whale, 0, 0)
                 EVT_END_IF
             EVT_END_IF
             EVT_SWITCH(LVarB)
                 EVT_CASE_EQ(ANIM_Kolorado_IdleSad)
-                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_WHALE_CLOSE_MOUTH, SOUND_SPACE_MODE_0)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_WHALE_CLOSE_MOUTH, SOUND_SPACE_DEFAULT)
                     EVT_SET(LVarD, EVT_PTR(N(D_80250D58_862EC8)))
                 EVT_CASE_EQ(ANIM_Kolorado_Still)
                     EVT_SET(LVarD, EVT_PTR(N(D_80250A5C_862BCC)))
                 EVT_CASE_EQ(ANIM_Kolorado_Yell)
-                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_WHALE_OPEN_MOUTH, SOUND_SPACE_MODE_0)
+                    EVT_CALL(PlaySoundAtNpc, NPC_Whale, SOUND_WHALE_OPEN_MOUTH, SOUND_SPACE_DEFAULT)
                     EVT_SET(LVarD, EVT_PTR(N(D_80250AD4_862C44)))
                 EVT_CASE_EQ(ANIM_Kolorado_Idle)
                     EVT_SET(LVarD, EVT_PTR(N(D_80251654_8637C4)))

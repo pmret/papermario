@@ -20,7 +20,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(GB_ARN_Tubba_MapID, 1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_0101)
     EVT_THREAD
@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
     EVT_CALL(SetNpcJumpscale, NPC_Tubba, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Tubba, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20A0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20A0, SOUND_SPACE_DEFAULT)
     EVT_CALL(PlaySound, SOUND_LOOP_DGB_COLLAPSE)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(4.0))
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(2.0))
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
     EVT_CALL(AwaitPlayerApproach, 0, 420, 400)
     EVT_SET(GB_ARN_Tubba_MapID, 1)
     EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -148,7 +148,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(0)

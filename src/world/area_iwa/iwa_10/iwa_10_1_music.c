@@ -17,7 +17,7 @@ EvtScript N(EVS_PopSong) = {
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_WAIT(15)
     EVT_CALL(PopSong)
-    EVT_CALL(PlaySoundAtF, SOUND_LOOP_09, SOUND_SPACE_MODE_1, -560, 0, -233)
+    EVT_CALL(PlaySoundAtF, SOUND_LOOP_09, SOUND_SPACE_WITH_DEPTH, -560, 0, -233)
     EVT_RETURN
     EVT_END
 };

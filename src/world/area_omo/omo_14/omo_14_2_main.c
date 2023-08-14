@@ -19,7 +19,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_IF_LT(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_LOOP_4C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_LOOP_4C, SOUND_SPACE_DEFAULT)
     EVT_END_IF
     EVT_EXEC(N(EVS_CreateDarkness))
     EVT_IF_GE(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)

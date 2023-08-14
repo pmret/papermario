@@ -85,7 +85,7 @@ EvtScript N(EVS_OnInspectEvilRock) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_WAIT(10)
         EVT_EXEC_GET_TID(N(EVS_ManageEvilRock), LVar9)
-        EVT_CALL(PlaySoundAt, SOUND_ROCK_LAUGHTER, SOUND_SPACE_MODE_0, -34, 0, -300)
+        EVT_CALL(PlaySoundAt, SOUND_ROCK_LAUGHTER, SOUND_SPACE_DEFAULT, -34, 0, -300)
         EVT_LOOP(18)
             EVT_CALL(TranslateModel, MODEL_o289, EVT_FLOAT(1.0), 0, EVT_FLOAT(1.0))
             EVT_CALL(TranslateModel, MODEL_o440, EVT_FLOAT(1.0), 0, EVT_FLOAT(1.0))

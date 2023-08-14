@@ -41,60 +41,60 @@ void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
 
     switch (hitSound) {
         case HIT_SOUND_MISS:
-            sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, x, y, z);
+            sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, x, y, z);
             break;
         case HIT_SOUND_BONES:
-            sfx_play_sound_at_position(SOUND_HIT_BONES, SOUND_SPACE_MODE_0, x, y, z);
+            sfx_play_sound_at_position(SOUND_HIT_BONES, SOUND_SPACE_DEFAULT, x, y, z);
             break;
         case HIT_SOUND_NORMAL:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_FIRE:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_ICE:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_ICE, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_ICE, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_SHOCK:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_SHOCK, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_SHOCK, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, x, y, z);
                     break;
             }
             break;
@@ -438,7 +438,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                 if (blocked) {
                     damage--;
                     damage -= player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
-                    sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                     break;
@@ -451,7 +451,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                 if (target->koStatus == 0 && !(battleStatus->curAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
-                        sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                        sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                         break;
@@ -718,7 +718,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         func_80267018(target, 1);
 
         if (attacker->actorTypeData1[5] != SOUND_NONE) {
-            sfx_play_sound_at_position(attacker->actorTypeData1[5], SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+            sfx_play_sound_at_position(attacker->actorTypeData1[5], SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 
         if (isFire) {
@@ -733,7 +733,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((battleStatus->lastAttackDamage < 1 && !statusInflicted2 && !madeElectricContact) || targetPart->flags & ACTOR_PART_FLAG_2000) {
-        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if ((battleStatus->curAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
@@ -741,35 +741,35 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
         script = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
         script = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
         script = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
         script = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
         script = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
@@ -777,7 +777,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         script->varTablePtr[3] = target;
-        sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->curAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
         script = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
@@ -785,11 +785,11 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         script->varTablePtr[3] = target;
-        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if ((battleStatus->curAttackElement & DAMAGE_TYPE_SMASH) && target->actorType == ACTOR_TYPE_GOOMNUT_TREE) {
-        sfx_play_sound_at_position(SOUND_SMACK_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     show_actor_health_bar(target);
@@ -801,7 +801,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && (attacker->transparentStatus != STATUS_KEY_TRANSPARENT)
         && !has_enchanted_part(attacker))
     {
-        sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         apply_shock_effect(attacker);
         dispatch_damage_event_actor_1(attacker, 1, EVENT_SHOCK_HIT);
         return HIT_RESULT_BACKFIRE;
@@ -1080,7 +1080,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
             set_animation(actor->actorID, (s8) actor->state.jumpPartIndex, actor->state.animJumpRise);
         }
         if (!(script->functionTemp[3] & 2) && (actor->actorTypeData1[4] != 0)) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -1266,7 +1266,7 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
         state->vel = ((state->acceleration * state->moveTime) * 0.5f) + (posY / state->moveTime);
         state->speed += moveDist / state->moveTime;
         if (actor->actorTypeData1[4] != 0) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1354,7 +1354,7 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
         actorState->speed += moveDist / actorState->moveTime;
 
         if (actor->actorTypeData1[4] != 0) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1491,7 +1491,7 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
         state->acceleration = (posY / state->moveTime - state->vel) / (-state->moveTime * 0.5);
 
         if (actor->actorTypeData1[4] != 0) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -1573,7 +1573,7 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
             actorState->dist = ~actor->actorTypeData1b[0]; //TODO optimization?
         }
         if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] == 0)) {
-            sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1600,11 +1600,11 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
                 actorState->dist = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[0] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[1] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -1615,11 +1615,11 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
                 actorState->dist = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[0] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[1] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -1792,7 +1792,7 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
         movement->moveSpeed += deltaDist / movement->moveTime;
         movement->unk_2C = movement->jumpScale * movement->moveTime * 0.5f + posY / movement->moveTime;
         if (part->partTypeData[4] != 0) {
-            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -1883,7 +1883,7 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
         movement->unk_2C = 0.0f;
         movement->jumpScale = (posY / movement->moveTime - movement->unk_2C) / (-movement->moveTime * 0.5);
         if (part->partTypeData[4] != 0) {
-            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -2017,7 +2017,7 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
             movement->dist = ~part->actorTypeData2b[0];
         }
         if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
-            sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+            sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -2044,11 +2044,11 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
                 movement->dist = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[0] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[1] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
@@ -2059,11 +2059,11 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
                 movement->dist = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[0] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[1] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
@@ -2214,7 +2214,7 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
             actorState->vel = ~actor->actorTypeData1b[1];
         }
         if ((actor->actorTypeData1[2] != 0) && (actor->actorTypeData1[3] == 0)) {
-            sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
     }
 
@@ -2250,11 +2250,11 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
                 actorState->vel = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[2] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[3] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -2265,11 +2265,11 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
                 actorState->vel = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[2] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[3] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -2468,7 +2468,7 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
         }
 
         if (part->partTypeData[2] != 0 && part->partTypeData[3] == 0) {
-            sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+            sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         partMovement->unk_3C = 0;
         partMovement->angle = 0.0f;
@@ -2506,11 +2506,11 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
                 partMovement->unk_2C = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[2] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[3] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
@@ -2521,11 +2521,11 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
                 partMovement->unk_2C = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[2] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[3] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
+                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_DEFAULT, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }

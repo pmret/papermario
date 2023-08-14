@@ -11,7 +11,7 @@ EvtScript N(EVS_SetupExitHint) = {
         EVT_ADD(LVar2, 1)
         EVT_CALL(EnableModel, MODEL_o414, FALSE)
         EVT_CALL(EnableModel, MODEL_me, TRUE)
-        EVT_CALL(PlaySoundAt, SOUND_IMPISH_LAUGH, SOUND_SPACE_MODE_0, 10, 110, -200)
+        EVT_CALL(PlaySoundAt, SOUND_IMPISH_LAUGH, SOUND_SPACE_DEFAULT, 10, 110, -200)
         EVT_LOOP(LVar2)
             EVT_CALL(EnableModel, MODEL_o414, TRUE)
             EVT_CALL(EnableModel, MODEL_me, FALSE)

@@ -145,10 +145,10 @@ EvtScript N(EVS_PlayPyroclastSounds) = {
         EVT_BUF_READ1(LVar1)
     EVT_END_LOOP
     EVT_IF_EQ(AF_KZN23_UseAlternateSound, FALSE)
-        EVT_CALL(PlaySoundAt, SOUND_01AD, SOUND_SPACE_MODE_0, LVar1, 2800, 0)
+        EVT_CALL(PlaySoundAt, SOUND_01AD, SOUND_SPACE_DEFAULT, LVar1, 2800, 0)
         EVT_SET(AF_KZN23_UseAlternateSound, TRUE)
     EVT_ELSE
-        EVT_CALL(PlaySoundAt, SOUND_01AE, SOUND_SPACE_MODE_0, LVar1, 2800, 0)
+        EVT_CALL(PlaySoundAt, SOUND_01AE, SOUND_SPACE_DEFAULT, LVar1, 2800, 0)
         EVT_SET(AF_KZN23_UseAlternateSound, FALSE)
     EVT_END_IF
     EVT_RETURN

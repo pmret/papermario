@@ -40,7 +40,7 @@ API_CALLABLE(N(AdjustEnvSoundPosition)) {
         script->functionTemp[0] = evt_get_variable(script, *args++);
         script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
-        sfx_adjust_env_sound_pos(SOUND_LRAW_004E, SOUND_SPACE_MODE_0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+        sfx_adjust_env_sound_pos(SOUND_LRAW_JAN_SMALL_GEYSER, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     }
     return ApiStatus_DONE2;
 }
@@ -228,8 +228,8 @@ EvtScript N(EVS_ManageGeyserSounds) = {
     EVT_IF_NE(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         EVT_SET(AB_JAN13_LastPuzzleProgress, MV_PuzzleProgress)
         EVT_SET(MF_GeyserSoundPlaying, FALSE)
-        EVT_CALL(StopSound, SOUND_LOOP_1C)
-        EVT_CALL(StopSound, SOUND_LOOP_1D)
+        EVT_CALL(StopSound, SOUND_LOOP_JAN_SMALL_GEYSER)
+        EVT_CALL(StopSound, SOUND_LOOP_JAN_LARGE_GEYSER)
         EVT_IF_EQ(MV_PuzzleProgress, 5)
             EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, FALSE)
                 EVT_RETURN
@@ -239,7 +239,7 @@ EvtScript N(EVS_ManageGeyserSounds) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(PlaySound, SOUND_LOOP_1C)
+        EVT_CALL(PlaySound, SOUND_LOOP_JAN_SMALL_GEYSER)
         EVT_SET(MF_GeyserSoundPlaying, TRUE)
         EVT_SET(LVar0, MV_PuzzleProgress)
         EVT_ADD(LVar0, 1)
@@ -340,7 +340,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 EVT_WAIT(8)
             EVT_END_LOOP
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
                 EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
                 EVT_CALL(GetModelCenter, MODEL_o33)
                 EVT_CALL(FacePlayerTowardPoint, LVar0, LVar2, 4)
@@ -393,7 +393,7 @@ EvtScript N(EVS_ManagePuzzle) = {
             EVT_THREAD
                 EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(0.4))
             EVT_END_THREAD
-            EVT_CALL(PlaySoundAt, SOUND_LOOP_1D, 0, 37, 0, -138)
+            EVT_CALL(PlaySoundAt, SOUND_LOOP_JAN_LARGE_GEYSER, SOUND_SPACE_DEFAULT, 37, 0, -138)
             EVT_SET(AB_JAN_2, 1)
             EVT_THREAD
                 EVT_LOOP(200)
@@ -446,9 +446,9 @@ EvtScript N(EVS_ManagePuzzle) = {
         EVT_END_IF
         EVT_SET(MV_PuzzleProgress, 6)
         EVT_LABEL(1)
-        EVT_EXEC(N(EVS_ManageGeyserSounds))
-        EVT_WAIT(1)
-        EVT_GOTO(0)
+            EVT_EXEC(N(EVS_ManageGeyserSounds))
+            EVT_WAIT(1)
+            EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };

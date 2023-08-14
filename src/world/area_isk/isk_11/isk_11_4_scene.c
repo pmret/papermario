@@ -31,7 +31,7 @@ EvtScript N(EVS_DropHiddenStairs) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_MODE_0, 16, -562, 621)
+    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_DEFAULT, 16, -562, 621)
     EVT_CALL(MakeLerp, LVar0, -550, 25 * DT, EASING_LINEAR)
     EVT_CALL(UpdateLerp)
     EVT_LABEL(20)
@@ -48,7 +48,7 @@ EvtScript N(EVS_DropHiddenStairs) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(20)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_MODE_0, 41, -587, 618)
+    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_DEFAULT, 41, -587, 618)
     EVT_CALL(MakeLerp, LVar0, -800, 25 * DT, EASING_LINEAR)
     EVT_CALL(UpdateLerp)
     EVT_LABEL(30)
@@ -63,7 +63,7 @@ EvtScript N(EVS_DropHiddenStairs) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(30)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_MODE_0, 66, -612, 616)
+    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_DEFAULT, 66, -612, 616)
     EVT_CALL(MakeLerp, LVar0, 0xFFFFFBE6, 25 * DT, EASING_LINEAR)
     EVT_CALL(UpdateLerp)
     EVT_LABEL(40)
@@ -76,7 +76,7 @@ EvtScript N(EVS_DropHiddenStairs) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(40)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_MODE_0, 95, -637, 614)
+    EVT_CALL(PlaySoundAt, SOUND_0057, SOUND_SPACE_DEFAULT, 95, -637, 614)
     EVT_RETURN
     EVT_END
 };
@@ -111,7 +111,7 @@ EvtScript N(EVS_ManageSecretPassage) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_WAIT(10 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o2092, SOUND_0055, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o2092, SOUND_0055, SOUND_SPACE_DEFAULT)
         EVT_CALL(N(SpawnLensFlare), -16, -438, 510, 240)
         EVT_CALL(N(SpawnLensFlare), 16, -438, 510, 240)
         EVT_WAIT(5 * DT)

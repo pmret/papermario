@@ -155,10 +155,10 @@ EvtScript N(EVS_Main) = {
     EVT_END_SWITCH
     EVT_CALL(MakeNpcs, FALSE, LVar0)
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_8025194C))
+    EVT_EXEC(N(EVS_SetupWhale))
     EVT_CALL(GetEntryID, LVar0)
     EVT_EXEC(N(EVS_SetupRooms))
-    EVT_EXEC(N(EVS_802441E0))
+    EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitne, COLLIDER_FLAGS_UPPER_MASK)
     EVT_EXEC(N(D_802448C4_856A34))
     EVT_WAIT(1)

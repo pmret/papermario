@@ -151,7 +151,7 @@ EvtScript N(EVS_StarKid_RunAway) = {
     EVT_ADD(LVarB, 20 * DT)
     EVT_WAIT(LVarB)
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(PlaySoundAtNpc, LVarA, SOUND_STAR_KID_FLYING, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, LVarA, SOUND_STAR_KID_FLYING, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetNpcPos, LVarA, LVar7, LVar8, LVar9)
     EVT_CALL(LoadPath, 60 * DT, EVT_PTR(N(RelativeFleePath)), ARRAY_COUNT(N(RelativeFleePath)), EASING_LINEAR)
     EVT_LABEL(0)
@@ -200,7 +200,7 @@ EvtScript N(EVS_StarKidsFlee) = {
         EVT_END_IF
         EVT_CALL(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_Monstar, SOUND_MONSTAR_BREAKS_APART, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Monstar, SOUND_MONSTAR_BREAKS_APART, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(NpcMoveTo, NPC_Monstar, 615, -5, 10 * DT)
     EVT_END_THREAD

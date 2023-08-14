@@ -28,7 +28,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
 
 EvtScript N(EVS_Heart_OpenDoor) = {
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -52,7 +52,7 @@ EvtScript N(EVS_Heart_CloseDoor) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };
@@ -85,7 +85,7 @@ EvtScript N(EVS_Scene_HeartEscape) = {
     EVT_LOOP(2)
         EVT_CALL(GetNpcPos, NPC_TubbasHeart, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_TubbasHeart, EVT_FLOAT(2.5))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12 * DT)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -107,7 +107,7 @@ EvtScript N(EVS_Scene_HeartEscape) = {
         EVT_IF_EQ(LVar0, SUBLIST_DONE)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12 * DT)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -117,7 +117,7 @@ EvtScript N(EVS_Scene_HeartEscape) = {
         EVT_IF_EQ(LVar0, SUBLIST_DONE)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12 * DT)
         EVT_WAIT(1)
     EVT_END_LOOP

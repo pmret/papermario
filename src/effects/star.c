@@ -152,7 +152,7 @@ void star_update(EffectInstance* effect) {
             landing_dust_main(0, data->pos.x, data->pos.y - 5.0f, data->pos.z, 0.0f);
 
             if (!gGameStatusPtr->isBattle) {
-                sfx_play_sound_at_position(SOUND_SEQ_SHOOTING_STAR_BOUNCE, SOUND_SPACE_MODE_0, data->pos.x, data->pos.y, data->pos.z);
+                sfx_play_sound_at_position(SOUND_SEQ_SHOOTING_STAR_BOUNCE, SOUND_SPACE_DEFAULT, data->pos.x, data->pos.y, data->pos.z);
             }
 
             data->canBounce = FALSE;

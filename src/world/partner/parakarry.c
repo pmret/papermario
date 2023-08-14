@@ -305,7 +305,7 @@ API_CALLABLE(N(UseAbility)) {
                     parakarry->curAnim = ANIM_WorldParakarry_CarryHeavy;
                     parakarry->planarFlyDist = 0;
                     suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
-                    sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     gCollisionStatus.lastTouchedFloor = NO_COLLIDER;
                     gCollisionStatus.curFloor = NO_COLLIDER;
                     parakarry->curFloor = NO_COLLIDER;
@@ -330,7 +330,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (gGameStatusPtr->frameCounter % 6 == 0) {
-                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             }
 
             length = fabsf(sin_rad(DEG_TO_RAD((20 - N(AbilityStateTime)) * 18))) * 1.3;
@@ -467,7 +467,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (gGameStatusPtr->frameCounter % 6 == 0) {
-                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             }
 
             parakarry->jumpVel -= parakarry->jumpScale;

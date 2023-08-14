@@ -726,7 +726,7 @@ API_CALLABLE(N(UseAbility)) {
             N(AbilityState) = RIDE_STATE_MOUNT_2;
             break;
         case RIDE_STATE_MOUNT_2:
-            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             // fallthrough
         case RIDE_STATE_MOUNT_3:
@@ -817,7 +817,7 @@ API_CALLABLE(N(UseAbility)) {
                     N(AbilityState) = RIDE_STATE_DISMOUNT_1;
                 } else {
                     if (!(playerStatus->animFlags & PA_FLAG_FORCED_PARTNER_ABILITY_END)) {
-                        sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                        sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     }
                     playerStatus->animFlags &= ~PA_FLAG_FORCED_PARTNER_ABILITY_END;
                 }
@@ -1166,7 +1166,7 @@ API_CALLABLE(N(EnterMap)) {
                 }
             }
 
-            sfx_play_sound_at_npc(SOUND_FLIGHT, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_FLIGHT, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             playerStatus->anim = ANIM_MarioW2_RideLaki;
             playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;

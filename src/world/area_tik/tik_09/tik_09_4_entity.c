@@ -19,7 +19,7 @@ EvtScript N(EVS_SpawnSwitch) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(InterpCamTargetPos, 0, 1, -10, -10, 10, 20)
     EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-    EVT_CALL(PlaySoundAt, SOUND_0301, SOUND_SPACE_MODE_0, -10, 200, 10)
+    EVT_CALL(PlaySoundAt, SOUND_0301, SOUND_SPACE_DEFAULT, -10, 200, 10)
     EVT_CALL(MakeLerp, 200, -10, 25, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -29,7 +29,7 @@ EvtScript N(EVS_SpawnSwitch) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_MODE_0, -10, LVar0, 10)
+    EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_DEFAULT, -10, LVar0, 10)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

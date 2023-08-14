@@ -18,7 +18,7 @@ API_CALLABLE(N(UpgradeStarPowerCh3)) {
 
 EvtScript N(EVS_TubbaWalking) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_LOOP
     EVT_RETURN
@@ -55,22 +55,22 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
     EVT_WAIT(15 * DT)
     EVT_LOOP(4)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcVar, NPC_Boo_02, 0, 1)
         EVT_WAIT(4 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcVar, NPC_Boo_05, 0, 1)
         EVT_WAIT(4 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcVar, NPC_Boo_01, 0, 1)
         EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcVar, NPC_Boo_03, 0, 1)
         EVT_WAIT(8 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcVar, NPC_Boo_04, 0, 1)
         EVT_WAIT(6 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcVar, NPC_Boo_06, 0, 1)
         EVT_WAIT(6 * DT)
     EVT_END_LOOP
@@ -79,7 +79,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim22)
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_BOO_APPEAR, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcVar, NPC_Boo_02, 0, 1)
     EVT_WAIT(15 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim21)
@@ -452,7 +452,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_Leap)
     EVT_WAIT(20 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar1)
     EVT_ADD(LVar1, 50)
@@ -465,7 +465,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
         EVT_WAIT(6 * DT)
     EVT_END_LOOP
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
@@ -531,7 +531,7 @@ EvtScript N(EVS_Scene_SkolarRescued) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Skolar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)

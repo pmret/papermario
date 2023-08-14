@@ -130,7 +130,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
         if (chain->velY < 2.0f * -chain->gravAccel) {
             chain->velY = 2.0f * -chain->gravAccel;
             if (actor->state.varTable[CHOMP_CHAIN_AVAR_SOUNDS] && i == 0) {
-                sfx_play_sound_at_position(SOUND_CHAIN_RATTLE, SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+                sfx_play_sound_at_position(SOUND_CHAIN_RATTLE, SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
             }
         }
 

@@ -22,7 +22,7 @@ API_CALLABLE(N(func_80240118_90CD58)) {
         npc->flags |= NPC_FLAG_INVISIBLE;
     }
     if (script->functionTemp[1] == 15) {
-        sfx_play_sound_at_position(SOUND_ACTOR_DEATH, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z);
+        sfx_play_sound_at_position(SOUND_ACTOR_DEATH, SOUND_SPACE_DEFAULT, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z);
         fx_damage_stars(FX_DAMAGE_STARS_1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0.0f, -1.0f, 0.0f, 10);
     }
 
@@ -184,7 +184,7 @@ EvtScript N(EVS_NpcIdle_Whacka_01) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Whacka_01, LVarA, LVarB, LVarC)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Whacka_PopUp)
     EVT_WAIT(15)
     EVT_CALL(SetNpcPos, NPC_Whacka_02, LVarA, LVarB, LVarC)
@@ -245,7 +245,7 @@ EvtScript N(EVS_NpcHit_Whacka_02) = {
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(PlaySoundAtNpc, NPC_Whacka_01, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Whacka_01, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_SWITCH(LVarA)

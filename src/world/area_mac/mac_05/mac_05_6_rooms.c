@@ -42,8 +42,8 @@ EvtScript N(D_802525B0_864720) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetMusicTrack, 0, SONG_CLUB64, 0, 8)
-            EVT_CALL(StopSound, SOUND_LOOP_58)
-            EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_0039)
+            EVT_CALL(StopSound, SOUND_LOOP_MAC_HARBOR_WATER)
+            EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_MAC_HARBOR_WATER)
             EVT_CALL(EnableGroup, MODEL_bar_inn, TRUE)
             EVT_CALL(EnableModel, MODEL_o139, FALSE)
             EVT_CALL(EnableModel, MODEL_o140, FALSE)
@@ -53,7 +53,7 @@ EvtScript N(D_802525B0_864720) = {
             EVT_CALL(EnableModel, MODEL_o139, TRUE)
             EVT_CALL(EnableModel, MODEL_o140, TRUE)
             EVT_WAIT(5)
-            EVT_EXEC(N(EVS_802441E0))
+            EVT_EXEC(N(EVS_SetupMusic))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
