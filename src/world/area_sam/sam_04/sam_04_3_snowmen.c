@@ -105,7 +105,7 @@ EvtScript N(EVS_SnowmanMove) = {
         EVT_SETF(LVar3, LVar7)
         EVT_SET(LVar4, 20)
         EVT_EXEC_WAIT(N(EVS_SnowmanJump))
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_038C, 0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_038C, SOUND_SPACE_MODE_0)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END

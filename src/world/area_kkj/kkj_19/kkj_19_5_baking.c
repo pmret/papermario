@@ -1302,13 +1302,13 @@ EvtScript N(EVS_ManageBaking) = {
     EVT_END_LOOP
     EVT_EXEC_WAIT(N(EVS_CloseOverDoor))
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAt, SOUND_00FF, 0, 100, 22, -178)
+    EVT_CALL(PlaySoundAt, SOUND_START_OVEN_TIMER, 0, 100, 22, -178)
     EVT_WAIT(20 * DT)
     EVT_CALL(FadeOutMusic, 0, 500)
-    EVT_CALL(PlaySoundAt, SOUND_0394, 0, 100, 22, -178)
+    EVT_CALL(PlaySoundAt, SOUND_OVEN_TIMER_TICKING, 0, 100, 22, -178)
     EVT_CALL(N(AwaitPlayerPressATimer))
-    EVT_CALL(StopSound, SOUND_0394)
-    EVT_CALL(PlaySoundAt, SOUND_03F3, 0, 100, 22, -178)
+    EVT_CALL(StopSound, SOUND_OVEN_TIMER_TICKING)
+    EVT_CALL(PlaySoundAt, SOUND_DING, 0, 100, 22, -178)
     EVT_WAIT(10 * DT)
     // check baking time
     EVT_IF_LT(LVar0, BAKING_TIME_MIN_FRAMES)

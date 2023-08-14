@@ -180,7 +180,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0161, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_LOOP(65)

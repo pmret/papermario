@@ -63,7 +63,7 @@ EvtScript N(EVS_OnShakeTree_Yoshi) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcVar, NPC_YoshiKid, 0, 9)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_0301, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_0301, SOUND_SPACE_MODE_0)
         EVT_CALL(SetNpcJumpscale, NPC_YoshiKid, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_YoshiKid, -308, 0, -248, 30)
     EVT_END_THREAD
@@ -78,9 +78,9 @@ EvtScript N(EVS_OnShakeTree_Yoshi) = {
 
 EvtScript N(EVS_YoshiKid_Sleeping) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0C_A, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0C_A, SOUND_SPACE_MODE_0)
         EVT_WAIT(24)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0D_A, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0D_A, SOUND_SPACE_MODE_0)
         EVT_WAIT(21)
         EVT_CALL(GetNpcVar, NPC_YoshiKid, 0, LVar0)
         EVT_IF_GE(LVar0, 9)
@@ -103,7 +103,7 @@ EvtScript N(EVS_YoshiKid_PlaySounds) = {
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKid, ANIM_YoshiKid_Purple_Cry)
     EVT_LOOP(3)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_MODE_0)
         EVT_WAIT(13)
     EVT_END_LOOP
     EVT_RETURN

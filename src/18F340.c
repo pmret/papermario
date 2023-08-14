@@ -695,7 +695,7 @@ EvtScript EVS_MarioEnterStage = {
             EVT_CHILD_THREAD
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
             EVT_END_CHILD_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TRIP)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_GetUp)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)
@@ -1059,7 +1059,7 @@ EvtScript EVS_Player_Celebrate = {
 
 EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB3_Hustled)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_IN_PLACE)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -1096,7 +1096,7 @@ EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_AWAY)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1106,7 +1106,7 @@ EvtScript EVS_RunAwayNoCommand = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_CHILD_THREAD
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Trip)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TRIP)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -100, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(10.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1168,7 +1168,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(func_80260E38)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB3_Hustled)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_IN_PLACE)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -1210,7 +1210,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_AWAY)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1220,7 +1220,7 @@ EvtScript EVS_RunAwayStart = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_CHILD_THREAD
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Trip)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TRIP)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -100, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(10.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1551,7 +1551,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0160)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_JUMP)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

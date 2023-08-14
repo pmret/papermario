@@ -287,7 +287,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
                 disable_player_input();
                 set_action_state(ACTION_STATE_IDLE);
                 play_model_animation(entity->virtualModelIndex, Entity_CymbalPlant_AnimationGrab);
-                sfx_play_sound(SOUND_00F2);
+                sfx_play_sound(SOUND_PLANTS_CYMBAL_CRASH);
                 func_802BB8D4_E2E204(entity);
             } else {
                 data->unk_01 = 0;
@@ -355,7 +355,7 @@ EntityScript Entity_SpinningFlower_Script = {
 
 EntityScript Entity_PinkFlower_Script = {
     es_SetCallback(entity_PinkFlower_idle, 0)
-    es_PlaySound(SOUND_00F4)
+    es_PlaySound(SOUND_PLANTS_LIGHT_UP)
     es_SetCallback(NULL, 50)
     es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart

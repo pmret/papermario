@@ -49,7 +49,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
         EVT_WAIT(10 * DT)
         EVT_CALL(PlayerMoveTo, 590, 0, 10 * DT)
         EVT_WAIT(5 * DT)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, -45, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_THREAD
@@ -57,7 +57,7 @@ EvtScript N(EVS_Scene_MeetingPeach) = {
         EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
         EVT_CALL(NpcMoveTo, NPC_Peach, 640, 0, 10 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
-        EVT_CALL(PlaySoundAtNpc, NPC_Peach, SOUND_0262, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Peach, SOUND_0262, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, NPC_Peach, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_LookAround)

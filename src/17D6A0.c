@@ -723,7 +723,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_GHOST_KOOPER] = {
-        .walk = { SOUND_0100, SOUND_0100 },
+        .walk = { SOUND_KOOPER_STEP, SOUND_KOOPER_STEP },
         .fly = { NULL, NULL },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
@@ -1080,7 +1080,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_KOOPER] = {
-        .walk = { SOUND_0100, SOUND_0100 },
+        .walk = { SOUND_KOOPER_STEP, SOUND_KOOPER_STEP },
         .fly = { NULL, NULL },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
@@ -1192,7 +1192,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .delay = { 30, 30 }
     },
     [ACTOR_TYPE_LEE_KOOPER] = {
-        .walk = { SOUND_0100, SOUND_0100 },
+        .walk = { SOUND_KOOPER_STEP, SOUND_KOOPER_STEP },
         .fly = { NULL, NULL },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,

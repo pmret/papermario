@@ -157,7 +157,7 @@ Vec2i N(DustEmitters_NearCabinet)[] = {
 };
 
 EvtScript N(EVS_MiddleCabinet_OpenDoors) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu2, SOUND_00F6, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu2, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 120, 15, EASING_QUARTIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -183,7 +183,7 @@ EvtScript N(EVS_MiddleCabinet_CloseDoors) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu2, SOUND_00F6, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu2, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_MODE_0)
     EVT_RETURN
     EVT_END
 };
@@ -215,12 +215,12 @@ EvtScript N(EVS_Interact_NearCabinet) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(InterruptUsePartner)
     EVT_LOOP(3)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_00F6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_MODE_0)
         EVT_CALL(RotateModel, MODEL_tansu1, -1, 1, 0, 0)
         EVT_WAIT(2)
         EVT_CALL(RotateModel, MODEL_tansu1, 0, 1, 0, 0)
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_00F6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_MODE_0)
         EVT_CALL(TranslateModel, MODEL_tansu1, 0, 0, 100)
         EVT_CALL(RotateModel, MODEL_tansu1, 1, 1, 0, 0)
         EVT_CALL(TranslateModel, MODEL_tansu1, 0, 0, -100)
@@ -239,7 +239,7 @@ EvtScript N(EVS_Interact_NearCabinet) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_00F7, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu1, SOUND_OBK_CABINET_CRASH, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.5))
     EVT_END_THREAD
@@ -270,12 +270,12 @@ EvtScript N(EVS_Interact_FarCabinet) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(InterruptUsePartner)
     EVT_LOOP(5)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_00F6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_MODE_0)
         EVT_CALL(RotateModel, MODEL_tansu3, -1, 1, 0, 0)
         EVT_WAIT(2)
         EVT_CALL(RotateModel, MODEL_tansu3, 0, 1, 0, 0)
         EVT_WAIT(1)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_00F6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_OBK_CHECK_CABINET, SOUND_SPACE_MODE_0)
         EVT_CALL(TranslateModel, MODEL_tansu3, 0, 0, 100)
         EVT_CALL(RotateModel, MODEL_tansu3, 1, 1, 0, 0)
         EVT_CALL(TranslateModel, MODEL_tansu3, 0, 0, -100)
@@ -294,7 +294,7 @@ EvtScript N(EVS_Interact_FarCabinet) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(20)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_00F7, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tansu3, SOUND_OBK_CABINET_CRASH, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.5))
     EVT_END_THREAD

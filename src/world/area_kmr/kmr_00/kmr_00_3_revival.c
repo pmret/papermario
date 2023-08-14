@@ -524,7 +524,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_WAIT(30 * DT)
     EVT_THREAD
         EVT_WAIT(45 * DT)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0188, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_MODE_0)
         EVT_CALL(N(func_802404A0_8AC430))
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtPlayer, SOUND_SEQ_1F, SOUND_SPACE_MODE_0)

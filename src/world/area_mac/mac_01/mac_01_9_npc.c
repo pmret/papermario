@@ -431,7 +431,7 @@ EvtScript N(EVS_MerlonBargeOut) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(N(KnockdownSetPos), -215, 21, -158)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0162, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(50 * DT)
     EVT_CALL(SetNpcPos, NPC_Merlon, -241, 20, -270)

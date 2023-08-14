@@ -19,7 +19,7 @@ API_CALLABLE(N(UpdatePropellerSoundPos)) {
 }
 
 EvtScript N(EVS_UpdatePropellerSounds) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, SOUND_SPACE_MODE_0)
     EVT_LOOP(0)
         EVT_CALL(N(UpdatePropellerSoundPos))
         EVT_IF_LT(LVar0, 0)
@@ -51,7 +51,7 @@ EvtScript N(EVS_MoveToBattlePositions) = {
         EVT_WAIT(20)
         EVT_CALL(SetNpcJumpscale, NPC_Bowser_Body, EVT_FLOAT(0.0))
         EVT_CALL(NpcJump0, NPC_Bowser_Body, 675, 0, 0, 10)
-        EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_20A0, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_20A0, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20)

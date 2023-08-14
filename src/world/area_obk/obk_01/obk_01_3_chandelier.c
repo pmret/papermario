@@ -570,7 +570,7 @@ EvtScript N(EVS_LaunchFromCouch_Crash) = {
     EVT_CALL(PlayerJump, 51, -210, 87, 60)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0162, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Collapse)
     EVT_WAIT(30)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_GetUp)

@@ -94,7 +94,7 @@ EvtScript N(EVS_EnterFalling) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-        EVT_CALL(PlaySoundAtPlayer, SOUND_SHAKE_TREE, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_MODE_0)
         EVT_CALL(PlayerJump, -35, 0, 385, 30)
         EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
     EVT_END_THREAD

@@ -46,9 +46,9 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_000D, 320, 60)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 25, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -186,7 +186,7 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy_01) = {
         EVT_MUL(LVar6, -1)
         EVT_ADD(LVar0, LVar4)
         EVT_CALL(NpcJump0, NPC_SELF, LVar0, 18, LVar2, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
         EVT_IF_NE(AF_JAN01_KoloradoShouting, TRUE)
             EVT_CHILD_THREAD
                 EVT_CALL(InterpNpcYaw, NPC_Kolorado, LVar5, 2)

@@ -569,7 +569,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
     EVT_END_THREAD
     EVT_CALL(SetPlayerJumpscale, 0)
     EVT_CALL(PlayerJump1, 175, 0, -35, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_Sentinel, SOUND_0162, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Sentinel, SOUND_TRIP, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Collapse)
     EVT_THREAD
         EVT_WAIT(2)

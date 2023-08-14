@@ -340,7 +340,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 EVT_WAIT(8)
             EVT_END_LOOP
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPlayer, SOUND_0262, 0)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_MODE_0)
                 EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
                 EVT_CALL(GetModelCenter, MODEL_o33)
                 EVT_CALL(FacePlayerTowardPoint, LVar0, LVar2, 4)

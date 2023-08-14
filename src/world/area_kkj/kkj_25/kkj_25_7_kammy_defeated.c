@@ -150,7 +150,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_CALL(SetNpcPos, NPC_Twink_01, 500, 200, 0)
     EVT_CALL(SetNpcJumpscale, NPC_Twink_01, EVT_FLOAT(0.0))
     EVT_CALL(NpcJump0, NPC_Twink_01, 205, 90, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Twink_01, SOUND_HIT_NORMAL, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Twink_01, SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcAnimation, NPC_Bowser_02, ANIM_WorldBowser_Shock)
     EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, 205, 90, 0, -1, -1, 0, 3)
     EVT_THREAD
@@ -344,7 +344,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
         EVT_CALL(PlaySound, SOUND_RELEASE_ENERGY)
         EVT_WAIT(115)
         EVT_ADD(LVar1, 20)
-        EVT_CALL(PlaySoundAt, SOUND_0188, 0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_GET_STAR_POWER_WAVE, 0, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(0.3), 30)
     EVT_END_THREAD
     EVT_WAIT(40)

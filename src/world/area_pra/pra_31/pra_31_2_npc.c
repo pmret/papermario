@@ -78,7 +78,7 @@ EvtScript N(EVS_ChangeDinoDirection) = {
                 EVT_END_IF
             EVT_END_LOOP
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_01ED, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_01ED, SOUND_SPACE_MODE_0)
         EVT_SWITCH(LVar5)
             EVT_CASE_OR_EQ(90)
             EVT_CASE_OR_EQ(270)

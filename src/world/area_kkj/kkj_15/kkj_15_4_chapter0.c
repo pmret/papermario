@@ -147,9 +147,9 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_CALL(FadeOutMusic, 0, 2000)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Peach_CH1_KoopaBros_0007, 300, 20)
     EVT_WAIT(5 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Bowser, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_Kammy, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)
     EVT_THREAD
@@ -240,7 +240,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_20F3, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_20F3, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_02, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -249,7 +249,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_20F3, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_20F3, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_01, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -258,7 +258,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_20F3, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_20F3, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_03, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -267,7 +267,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_04, SOUND_20F3, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_04, SOUND_20F3, SOUND_SPACE_MODE_0)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_04, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -332,13 +332,13 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_EXEC_WAIT(N(EVS_FocusCam_KoopaBros))
     EVT_WAIT(10 * DT)
     EVT_CALL(FadeOutMusic, 0, 500)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_KoopaBros_03, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_KoopaBros_02, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_04, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_04, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_KoopaBros_04, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_0262, SOUND_SPACE_MODE_0)
     EVT_CALL(ShowEmote, NPC_KoopaBros_01, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(30 * DT)
     EVT_CALL(SpeakToNpc, NPC_KoopaBros_02, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 0, NPC_Bowser, MSG_Peach_CH1_KoopaBros_0014)
@@ -371,12 +371,12 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_CALL(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, NPC_KoopaBros_02, MSG_Peach_CH1_KoopaBros_0015)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_0173, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_0173, SOUND_SPACE_MODE_0)
         EVT_CALL(InterpNpcYaw, NPC_KoopaBros_02, 90, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBros_02, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Red_Run)
         EVT_WAIT(30 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_0174, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_0174, SOUND_SPACE_MODE_0)
         EVT_CALL(NpcMoveTo, NPC_KoopaBros_02, 200, -60, 10 * DT)
     EVT_END_THREAD
     EVT_THREAD

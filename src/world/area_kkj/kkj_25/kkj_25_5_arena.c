@@ -72,8 +72,8 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_01, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Bowser_01, 300, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_20A0, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_20A0, SOUND_SPACE_MODE_0)
     EVT_SET(AF_KKJ_1A, TRUE)
     EVT_RETURN
     EVT_END
@@ -411,7 +411,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
         EVT_CALL(SetNpcDecoration, NPC_Bowser_01, 0, NPC_DECORATION_BOWSER_AURA)
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_0223, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_0223, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_LOOP(50)
         EVT_ADDF(LVar0, EVT_FLOAT(0.01))

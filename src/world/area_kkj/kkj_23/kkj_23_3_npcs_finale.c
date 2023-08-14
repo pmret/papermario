@@ -25,7 +25,7 @@ API_CALLABLE(N(UpdatePropellerSoundPos)) {
 }
 
 EvtScript N(EVS_UpdatePropellerSounds) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Prop, SOUND_LOOP_BOWSER_PROPELLER, SOUND_SPACE_MODE_0)
     EVT_LOOP(0)
         EVT_CALL(N(UpdatePropellerSoundPos))
         EVT_IF_LT(LVar0, 0)

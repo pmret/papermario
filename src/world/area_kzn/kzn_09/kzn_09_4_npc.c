@@ -151,7 +151,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
     EVT_CALL(NpcJump0, NPC_SELF, LVar3, 700, LVar5, 5)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0161, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetSelfVar, 0, 0)
@@ -174,7 +174,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00F5, 160, 40)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0162, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TRIP, SOUND_SPACE_MODE_0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(7.0))
     EVT_WAIT(10 * DT)
     EVT_CALL(SetSelfVar, 0, 0)

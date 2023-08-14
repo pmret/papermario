@@ -21,7 +21,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_ELSE
         EVT_CALL(func_802CF56C, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0161, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_MODE_0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(0)

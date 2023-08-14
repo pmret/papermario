@@ -14,7 +14,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_MODE_0)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetSelfVar, 10, LVar0)
     EVT_CALL(SetSelfVar, 11, LVar1)

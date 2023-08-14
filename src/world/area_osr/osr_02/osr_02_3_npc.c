@@ -152,7 +152,7 @@ EvtScript N(EVS_Scene_ReturnStarRod) = {
     EVT_CALL(SetNpcJumpscale, NPC_StarRod, EVT_FLOAT(0.5))
     EVT_CALL(NpcJump1, NPC_StarRod, LVar0, LVar1, LVar2, 20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(PlaySound, SOUND_0139)
+    EVT_CALL(PlaySound, SOUND_RECEIVE_STAR_POWER)
     EVT_LOOP(6)
         EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 9, LVar0, LVar1, LVar2, 1, 20)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar1, LVar2, 30)

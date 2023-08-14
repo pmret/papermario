@@ -45,7 +45,7 @@ void action_update_land(void) {
         }
 
         suggest_player_anim_allow_backward(anim);
-        sfx_play_sound_at_player(SOUND_0161 | SOUND_ID_STOP, SOUND_SPACE_MODE_0);
+        sfx_play_sound_at_player(SOUND_PLAYER_LONG_FALL | SOUND_ID_STOP, SOUND_SPACE_MODE_0);
         sfx_play_sound_at_player(SOUND_LAND_SOFTLY, SOUND_SPACE_MODE_0);
 
         if (!(collisionStatus->curFloor & COLLISION_WITH_ENTITY_BIT)) {

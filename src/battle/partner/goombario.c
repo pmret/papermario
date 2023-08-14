@@ -950,7 +950,7 @@ EvtScript N(headbonk1) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1055,7 +1055,7 @@ EvtScript N(headbonk2) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1162,7 +1162,7 @@ EvtScript N(headbonk3) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
@@ -1282,7 +1282,7 @@ EvtScript N(multibonk) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN

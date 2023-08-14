@@ -154,7 +154,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_CALL(N(FadeBackgroundLighten))
     EVT_END_THREAD
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0160)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_JUMP)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
