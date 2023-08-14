@@ -1780,7 +1780,7 @@ EvtScript N(electrify) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_FlyingMagikoopa_Anim02)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02F0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MAGIKOOPA_ELECTRIFY)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, ACTOR_FLAG_FLYING)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

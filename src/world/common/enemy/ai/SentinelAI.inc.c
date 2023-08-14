@@ -255,7 +255,7 @@ void N(SentinelAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDe
         script->functionTemp[1] = aiSettings->playerSearchInterval;
         if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->alertOffsetDist * 0.5, 0)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-            ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+            ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
             npc->moveToPos.y = npc->pos.y;
             script->AI_TEMP_STATE = AI_STATE_SENTINEL_CHASE_INIT;
             return;

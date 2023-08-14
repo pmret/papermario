@@ -144,7 +144,7 @@ EvtScript N(EVS_RideBigBubble) = {
     EVT_END_IF
     EVT_CALL(GetModelCenter, MODEL_o167)
     EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, 2, 0)
-    EVT_CALL(PlaySoundAt, SOUND_02F3, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_BUBBLE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
     EVT_CALL(EnableModel, MODEL_o167, FALSE)
     EVT_SET(AF_FLO_BigBubbleReady, FALSE)

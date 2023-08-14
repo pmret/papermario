@@ -227,7 +227,7 @@ EvtScript N(EVS_Scene_Chapter0) = {
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_WAIT(15 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_OpenDoors)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tte, SOUND_SRAW_11_A, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tte, SOUND_WINDOW_OPEN_A, 0)
     EVT_CALL(MakeLerp, 0, 80, 14, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

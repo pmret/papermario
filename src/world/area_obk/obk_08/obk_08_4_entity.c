@@ -14,8 +14,8 @@ API_CALLABLE(N(EnableItemTransparency)) {
 }
 
 EvtScript N(EVS_AnimateShutterLeft) = {
-    EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_11, 0)
-    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_SEQ_11, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_WINDOW_OPEN, 0)
+    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_SEQ_WINDOW_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(N(ShutterCrashRumble), 5)
     EVT_SET(LVar3, 90)
     EVT_CALL(MakeLerp, 0, LVar3, 15, EASING_COS_FAST_OVERSHOOT)
@@ -63,8 +63,8 @@ EvtScript N(EVS_AnimateShutterLeft) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(40)
         EVT_END_IF
-    EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_12, 0)
-    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_SEQ_12, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_WINDOW_CLOSE, 0)
+    EVT_CALL(PlaySoundAtModel, LVar2, SOUND_SEQ_WINDOW_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };

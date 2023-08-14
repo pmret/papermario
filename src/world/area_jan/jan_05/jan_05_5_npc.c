@@ -78,9 +78,9 @@ EvtScript N(EVS_OnShakeTree_Yoshi) = {
 
 EvtScript N(EVS_YoshiKid_Sleeping) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0C_A, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SNORE_INHALE_A, SOUND_SPACE_DEFAULT)
         EVT_WAIT(24)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0D_A, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SNORE_EXHALE_A, SOUND_SPACE_DEFAULT)
         EVT_WAIT(21)
         EVT_CALL(GetNpcVar, NPC_YoshiKid, 0, LVar0)
         EVT_IF_GE(LVar0, 9)

@@ -167,7 +167,7 @@ EvtScript N(EVS_CarryPeachAway) = {
 };
 
 EvtScript N(EVS_OpenAndCloseWindow) = {
-    EVT_CALL(PlaySoundAt, SOUND_SRAW_11_A, SOUND_SPACE_DEFAULT, 190, 78, -20)
+    EVT_CALL(PlaySoundAt, SOUND_WINDOW_OPEN_A, SOUND_SPACE_DEFAULT, 190, 78, -20)
     EVT_CALL(MakeLerp, 0, 80, 14, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -189,7 +189,7 @@ EvtScript N(EVS_OpenAndCloseWindow) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_SRAW_12_A, SOUND_SPACE_DEFAULT, 190, 78, -20)
+    EVT_CALL(PlaySoundAt, SOUND_WINDOW_CLOSE_A, SOUND_SPACE_DEFAULT, 190, 78, -20)
     EVT_RETURN
     EVT_END
 };

@@ -683,7 +683,7 @@ EvtScript N(attack) = {
             EVT_SET(LVar1, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02EF)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_HOP)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2066)
@@ -717,7 +717,7 @@ EvtScript N(attack) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02EF)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_HOP)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
@@ -1080,7 +1080,7 @@ EvtScript N(shy_guy_attack1) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_02EF, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_ACTOR_HOP, 0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -1119,7 +1119,7 @@ EvtScript N(shy_guy_attack1) = {
     EVT_END_SWITCH
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02EF)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_HOP)
     EVT_END_THREAD
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)

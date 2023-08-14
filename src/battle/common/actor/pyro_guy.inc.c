@@ -266,7 +266,7 @@ EvtScript N(takeTurn_8022D344) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_02EF, 0)
+            EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_ACTOR_HOP, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim05)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -296,7 +296,7 @@ EvtScript N(takeTurn_8022D344) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02EF)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_HOP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim05)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

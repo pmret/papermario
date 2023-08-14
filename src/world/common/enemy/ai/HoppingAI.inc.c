@@ -51,7 +51,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
                 if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0) != 0) {
                     EffectInstance* emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-                    ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+                    ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                     script->AI_TEMP_STATE = 12;
                     return;
@@ -129,7 +129,7 @@ void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
     if (aiSettings->playerSearchInterval >= 0 && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0) != 0) {
         EffectInstance* emoteTemp;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+        ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = 12;
     } else if (npc->turnAroundYawAdjustment == 0) {

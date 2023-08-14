@@ -28,7 +28,7 @@ void N(PiranhaPlantAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0)) {
         ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
         fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &temp);
-        ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+        ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         npc->duration = enemy->varTable[8];
         script->functionTemp[0] = 10;
