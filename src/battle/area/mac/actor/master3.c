@@ -267,10 +267,10 @@ EvtScript N(singleStrike3) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BD)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MASTER_STANCE_CHANGE)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MASTER_STANCE_CHANGE)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPunch)
     EVT_WAIT(30)
@@ -597,9 +597,9 @@ EvtScript N(tripleStrike3) = {
     EVT_SET(LVar1, 0)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MASTER_STANCE_CHANGE)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MASTER_STANCE_CHANGE)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPunch)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

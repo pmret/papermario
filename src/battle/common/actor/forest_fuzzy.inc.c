@@ -432,7 +432,7 @@ EvtScript N(80219054) = {
         EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)
         EVT_THREAD
             EVT_WAIT(15)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_STAR_BOUNCE_A)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_STAR_BOUNCE_A)
             EVT_CALL(N(SpawnDrainHealthContinueFX), LVar0, LVar1, LVar2, LVar3)
         EVT_END_THREAD
         EVT_ADD(LVar0, 20)

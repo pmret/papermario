@@ -799,7 +799,7 @@ EvtScript N(healOne) = {
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_SRAW_STAR_BOUNCE_A)
+        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_STAR_BOUNCE_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -892,7 +892,7 @@ EvtScript N(healAll) = {
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_HEART_BOUNCE)
             EVT_WAIT(30)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_SRAW_STAR_BOUNCE_A)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_STAR_BOUNCE_A)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(FreezeBattleState, TRUE)
@@ -1771,7 +1771,7 @@ EvtScript N(electrify) = {
     EVT_THREAD
         EVT_WAIT(10)
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_03D2)
+            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_ELECTRIC_BUZZ)
             EVT_CALL(RandInt, 3, LVar0)
             EVT_ADD(LVar0, 3)
             EVT_WAIT(LVar0)

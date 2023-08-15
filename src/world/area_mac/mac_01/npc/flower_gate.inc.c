@@ -287,7 +287,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
     EVT_WAIT(30 / DT)
     EVT_CALL(EnableModel, MODEL_r_door, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_DOOR_SPINNING, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_SPINNING, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 3060, 80, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -300,7 +300,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_CALL(EnableModel, MODEL_r_door, FALSE)
     EVT_CALL(EnableGroup, MODEL_to_flo, TRUE)
     EVT_CALL(DismissEffect, LVar9)
-    EVT_CALL(PlaySoundAt, SOUND_FLOWER_DOOR_WAVES, SOUND_SPACE_DEFAULT, 266, 50, 338)
+    EVT_CALL(PlaySoundAt, SOUND_WOODEN_DOOR_WAVES, SOUND_SPACE_DEFAULT, 266, 50, 338)
     EVT_LOOP(3)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, 266, 50, 338, 1, 20)
         EVT_WAIT(5)
@@ -655,7 +655,7 @@ EvtScript N(EVS_ExitFlowerGate) = {
     EVT_CALL(PlayerMoveTo, 300, 370, 15)
     EVT_CALL(InterpPlayerYaw, -22, 0)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01CF, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, -120, 15, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -675,7 +675,7 @@ EvtScript N(EVS_ExitFlowerGate) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01D0, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_CALL(PlayerMoveTo, 257, 300, 30)
@@ -729,7 +729,7 @@ EvtScript N(EVS_EnterFlowerGate) = {
     EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
     EVT_SET(LVar0, 2)
     EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01CF, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, -120, 15, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -751,7 +751,7 @@ EvtScript N(EVS_EnterFlowerGate) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01D0, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_IS_THREAD_RUNNING(LVar2, LVar0)

@@ -3,7 +3,7 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_OpenAirshipDockDoor) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_01DF, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_AIRSHIP_DOCK_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(EnableModel, MODEL_o1616, FALSE)
     EVT_CALL(MakeLerp, 0, -10, 20, EASING_CUBIC_IN)
     EVT_LOOP(0)
@@ -47,7 +47,7 @@ EvtScript N(EVS_CloseAirshipDockDoor) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(EnableModel, MODEL_o1616, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_01E0, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_AIRSHIP_DOCK_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };

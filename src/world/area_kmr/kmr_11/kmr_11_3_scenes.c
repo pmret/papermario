@@ -80,7 +80,7 @@ EvtScript N(EVS_FocusCam_Battlement) = {
 };
 
 EvtScript N(EVS_RandomQuaking) = {
-    EVT_CALL(PlaySound, SOUND_KMR_TOWER_COLLAPSE_RUMBLE)
+    EVT_CALL(PlaySound, SOUND_KMR_TOWER_COLLAPSE_RUMBLE_LOOP)
     EVT_LABEL(0)
         EVT_CALL(RandInt, 10, LVar0)
         EVT_ADD(LVar0, 5)
@@ -149,10 +149,10 @@ EvtScript N(EVS_FortressCollapse_MakeDust8) = {
 };
 
 EvtScript N(EVS_FortressCollapse_PlayFX) = {
-    EVT_CALL(PlaySound, SOUND_01E1)
+    EVT_CALL(PlaySound, SOUND_KMR_TOWER_RUMBLE)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust1))
     EVT_WAIT(97)
-    EVT_CALL(PlaySound, SOUND_01E2)
+    EVT_CALL(PlaySound, SOUND_DISTANT_THUD)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust2))
     EVT_WAIT(95)
     EVT_CALL(PlaySound, SOUND_KMR_TOWER_COLLAPSE_THUD)
@@ -165,9 +165,9 @@ EvtScript N(EVS_FortressCollapse_PlayFX) = {
     EVT_WAIT(40)
     EVT_CALL(PlaySound, SOUND_KMR_TOWER_COLLAPSE_UNFOLD)
     EVT_WAIT(160)
-    EVT_CALL(PlaySound, SOUND_01E8)
+    EVT_CALL(PlaySound, SOUND_BOING)
     EVT_WAIT(40)
-    EVT_CALL(PlaySound, SOUND_01E2)
+    EVT_CALL(PlaySound, SOUND_DISTANT_THUD)
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust7))
     EVT_EXEC(N(EVS_FortressCollapse_MakeDust8))
     EVT_RETURN
@@ -259,7 +259,7 @@ EvtScript N(EVS_Scene_SelfDestruct) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.5))
         EVT_WAIT(20)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.2))
-        EVT_CALL(PlaySound, SOUND_KMR_TOWER_COLLAPSE_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_KMR_TOWER_COLLAPSE_RUMBLE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_EXEC(N(EVS_PlayFortressAnimation))
     EVT_EXEC(N(EVS_FortressCollapse_PlayFX))

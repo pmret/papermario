@@ -71,9 +71,9 @@ EvtScript N(EVS_ResetGates) = {
 };
 
 EvtScript N(EVS_PlayGateSounds) = {
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_01D4, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_FOREST_GATE_OPEN, SOUND_SPACE_DEFAULT)
     EVT_WAIT(19)
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_01D5, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_FOREST_GATE_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };

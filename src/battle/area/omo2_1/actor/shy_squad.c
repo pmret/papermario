@@ -1339,7 +1339,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, 240, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_01E2)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DISTANT_THUD)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(2.5))
     EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar0)
     EVT_IF_LT(LVar0, 14)
@@ -1348,10 +1348,10 @@ EvtScript N(flee) = {
         EVT_CALL(ActorSpeak, MSG_CH4_0068, ACTOR_ENEMY0, PRT_MAIN, -1, -1)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_01E2)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DISTANT_THUD)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
         EVT_WAIT(12)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_01E2)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DISTANT_THUD)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(2.0))
     EVT_END_THREAD
     EVT_CALL(EndActorSpeech, ACTOR_ENEMY0, PRT_MAIN, -1, -1)

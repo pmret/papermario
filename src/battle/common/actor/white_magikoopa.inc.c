@@ -998,7 +998,7 @@ EvtScript N(healOne) = {
         EVT_CALL(PlaySoundAtActor, LVar8, SOUND_206D)
         EVT_CALL(PlaySoundAtActor, LVar8, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_SRAW_STAR_BOUNCE_A)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_STAR_BOUNCE_A)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1097,7 +1097,7 @@ EvtScript N(healAll) = {
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_HEART_BOUNCE)
             EVT_WAIT(30)
-            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_SRAW_STAR_BOUNCE_A)
+            EVT_CALL(PlaySoundAtActor, LVar0, SOUND_STAR_BOUNCE_A)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(FreezeBattleState, TRUE)

@@ -240,10 +240,10 @@ EvtScript N(singleStrike2) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BD)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MASTER_STANCE_CHANGE)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BD)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MASTER_STANCE_CHANGE)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPunch)
     EVT_WAIT(30)

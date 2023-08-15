@@ -14,7 +14,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
-        EVT_CALL(N(ProcessPeachStarBeam), 1)
+        EVT_CALL(N(ProcessPeachStarBeam), TRUE)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_LOOP(0)

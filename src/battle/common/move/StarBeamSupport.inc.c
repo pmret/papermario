@@ -68,10 +68,16 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
     Evt* newScript;
     f32 dist;
 
+    enum {
+        FT_STATE            = 0,
+        FT_DELAY            = 1,
+        FT_IS_PEACH_BEAM    = 2,
+    };
+
     if (isInitialCall) {
         N(StarBeamStage) = 0;
-        script->functionTemp[2] = evt_get_variable(script, *args++);
-        script->functionTemp[0] = PEACH_STAR_BEAM_CREATE_EFFECT;
+        script->functionTemp[FT_IS_PEACH_BEAM] = evt_get_variable(script, *args++);
+        script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_CREATE_EFFECT;
     }
 
     if (player->targetListLength == 1) {
@@ -95,7 +101,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
         targetPosZ = 0.0f;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->functionTemp[FT_STATE]) {
         case PEACH_STAR_BEAM_SPIRITS_APPEAR:
         case PEACH_STAR_BEAM_ZOOM_OUT:
         case PEACH_STAR_BEAM_SHRINK_CIRCLE:
@@ -107,7 +113,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
         case PEACH_STAR_BEAM_START_FLY_AWAY:
             effectData = N(BeamEffect)->data.peachStarBeam;
             for (i = 0; i < ARRAY_COUNT(effectData->spirits); i++) {
-                if (script->functionTemp[2] != 0 || i != 0) {
+                if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
                     spirit = &effectData->spirits[i];
                     if (N(MiscParticlesTimeLeft)[i] != 0) {
                         N(MiscParticlesTimeLeft)[i]--;
@@ -125,7 +131,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
         case PEACH_STAR_BEAM_SPIRITS_FLY_AWAY:
             effectData = N(BeamEffect)->data.peachStarBeam;
             for (i = 0; i < ARRAY_COUNT(effectData->spirits); i++) {
-                if (script->functionTemp[2] != 0 || i != 0) {
+                if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
                     spirit = &effectData->spirits[i];
                     if (N(MiscParticlesTimeLeft)[i] != 0) {
                         N(MiscParticlesTimeLeft)[i]--;
@@ -142,7 +148,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             break;
     }
 
-    switch (script->functionTemp[0]) {
+    switch (script->functionTemp[FT_STATE]) {
         case PEACH_STAR_BEAM_CREATE_EFFECT:
             currentPosX = player->curPos.x;
             currentPosY = player->curPos.y + player->size.y + 30.0f;
@@ -156,7 +162,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             playerState->goalPos.y = currentPosY;
             playerState->goalPos.z = currentPosZ;
 
-            if (script->functionTemp[2] == 0) {
+            if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
                 N(BeamEffect) = fx_peach_star_beam(0, currentPosX, currentPosY, currentPosZ, 1.0f, 0);
             } else {
                 N(BeamEffect) = fx_peach_star_beam(1, currentPosX, currentPosY, currentPosZ, 1.0f, 0);
@@ -171,13 +177,13 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 N(MiscParticlesTimeLeft)[i] = rand_int(20);
             }
 
-            script->functionTemp[1] = 40;
-            if (script->functionTemp[2] == 0) {
-                sfx_play_sound(SOUND_LOOP_68);
+            script->functionTemp[FT_DELAY] = 40;
+            if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
+                sfx_play_sound(SOUND_LOOP_USE_STAR_BEAM);
             } else {
-                sfx_play_sound(SOUND_LOOP_69);
+                sfx_play_sound(SOUND_LOOP_USE_PEACH_BEAM);
             }
-            script->functionTemp[0] = PEACH_STAR_BEAM_SPIRITS_APPEAR;
+            script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_SPIRITS_APPEAR;
             break;
         case PEACH_STAR_BEAM_SPIRITS_APPEAR:
             playerState->curPos.y += (playerState->goalPos.y - playerState->curPos.y) / 10.0f;
@@ -187,27 +193,27 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             N(BeamEffect)->data.peachStarBeam->unk_3C = 0;
             N(BeamEffect)->data.peachStarBeam->circleRadius = playerState->dist;
             N(BeamEffect)->data.peachStarBeam->beamAlpha = 0;
-            if (script->functionTemp[1] == 0) {
-                script->functionTemp[1] = 20;
-                script->functionTemp[0] = PEACH_STAR_BEAM_ZOOM_OUT;
+            if (script->functionTemp[FT_DELAY] == 0) {
+                script->functionTemp[FT_DELAY] = 20;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_ZOOM_OUT;
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_ZOOM_OUT:
-            if (script->functionTemp[1] == 0) {
+            if (script->functionTemp[FT_DELAY] == 0) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(10);
-                script->functionTemp[1] = 15;
-                script->functionTemp[0] = PEACH_STAR_BEAM_SHRINK_CIRCLE;
+                script->functionTemp[FT_DELAY] = 15;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_SHRINK_CIRCLE;
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_SHRINK_CIRCLE:
             playerState->dist += (24.0f - playerState->dist) * 0.125f;
             N(BeamEffect)->data.peachStarBeam->circleRadius = playerState->dist;
-            if (script->functionTemp[1] == 0) {
+            if (script->functionTemp[FT_DELAY] == 0) {
                 playerState->goalPos.x = targetPosX;
                 playerState->goalPos.y = targetPosY;
                 playerState->goalPos.z = targetPosZ;
@@ -215,14 +221,14 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                     N(SpiritsMoveTime)[i] = 30;
                 }
 
-                if (script->functionTemp[2] == 0) {
-                    sfx_play_sound(SOUND_LRAW_0248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
+                    sfx_play_sound(SOUND_LRAW_USE_STAR_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                 } else {
-                    sfx_play_sound(SOUND_LRAW_0249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                    sfx_play_sound(SOUND_LRAW_USE_PEACH_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                 }
-                script->functionTemp[0] = PEACH_STAR_BEAM_FLY_TO_TARGET;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_FLY_TO_TARGET;
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_FLY_TO_TARGET:
@@ -291,7 +297,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 N(BeamEffect)->data.peachStarBeam->pos.z = playerState->curPos.z;
                 effectData = N(BeamEffect)->data.peachStarBeam;
                 for (i = 0; i < ARRAY_COUNT(effectData->spirits); i++) {
-                    if (script->functionTemp[2] != 0 || i != 0) {
+                    if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
                         spirit = &effectData->spirits[i];
                         N(SpiritsFlyDelay)[i] = 1;
                         spirit->flags &= ~2;
@@ -300,16 +306,16 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
 
                 btl_cam_use_preset(BTL_CAM_PRESET_03);
                 btl_cam_move(30);
-                script->functionTemp[1] = 15;
-                script->functionTemp[0] = PEACH_STAR_BEAM_MAKE_ADDITIONAL_EFFECTS;
+                script->functionTemp[FT_DELAY] = 15;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_MAKE_ADDITIONAL_EFFECTS;
             }
             break;
         case PEACH_STAR_BEAM_MAKE_ADDITIONAL_EFFECTS:
-            if (script->functionTemp[1] == 0) {
+            if (script->functionTemp[FT_DELAY] == 0) {
                 playerState->moveTime = 0;
                 N(BeamEffect)->data.peachStarBeam->unk_3C = 0;
                 N(BeamEffect)->data.peachStarBeam->beamAlpha = 0;
-                if (script->functionTemp[2] != 0) {
+                if (script->functionTemp[FT_IS_PEACH_BEAM]) {
                     N(BeamEffect)->data.peachStarBeam->primR = 240;
                     N(BeamEffect)->data.peachStarBeam->primG = 80;
                     N(BeamEffect)->data.peachStarBeam->primB = 200;
@@ -322,15 +328,15 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 newScript->varTable[0] = playerState->curPos.x;
                 newScript->varTable[1] = playerState->curPos.y * 0.5f;
                 newScript->varTable[2] = playerState->curPos.z;
-                newScript->varTable[10] = script->functionTemp[2];
+                newScript->varTable[10] = script->functionTemp[FT_IS_PEACH_BEAM];
 
                 do {} while (0); // required to match
 
-                sfx_play_sound(SOUND_024A);
-                script->functionTemp[1] = 45;
-                script->functionTemp[0] = PEACH_STAR_BEAM_MAKE_BEAM;
+                sfx_play_sound(SOUND_STAR_BEAM_FIRE);
+                script->functionTemp[FT_DELAY] = 45;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_MAKE_BEAM;
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_MAKE_BEAM:
@@ -340,29 +346,29 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
             N(BeamEffect)->data.peachStarBeam->unk_3C = playerState->moveTime;
             N(BeamEffect)->data.peachStarBeam->beamAlpha = playerState->moveTime;
-            if (script->functionTemp[1] == 0) {
+            if (script->functionTemp[FT_DELAY] == 0) {
                 N(StarBeamStage) = 1;
-                if (script->functionTemp[2] == 0 && player->targetListLength == 1) {
+                if (!script->functionTemp[FT_IS_PEACH_BEAM] && player->targetListLength == 1) {
                     if (get_actor_part(get_actor(player->targetActorID), player->targetPartIndex)->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
-                        script->functionTemp[0] = PEACH_STAR_BEAM_IMMUNE;
+                        script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_IMMUNE;
                     } else {
-                        script->functionTemp[1] = 15;
-                        script->functionTemp[0] = PEACH_STAR_BEAM_WAIT;
+                        script->functionTemp[FT_DELAY] = 15;
+                        script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_WAIT;
                     }
                 } else {
-                    script->functionTemp[1] = 15;
-                    script->functionTemp[0] = PEACH_STAR_BEAM_WAIT;
+                    script->functionTemp[FT_DELAY] = 15;
+                    script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_WAIT;
                 }
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_WAIT:
-            if (script->functionTemp[1] == 0) {
-                script->functionTemp[1] = 10;
-                script->functionTemp[0] = PEACH_STAR_BEAM_FADE_OUT_BEAM;
+            if (script->functionTemp[FT_DELAY] == 0) {
+                script->functionTemp[FT_DELAY] = 10;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_FADE_OUT_BEAM;
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_FADE_OUT_BEAM:
@@ -372,41 +378,41 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
             N(BeamEffect)->data.peachStarBeam->unk_3C = playerState->moveTime;
             N(BeamEffect)->data.peachStarBeam->beamAlpha = playerState->moveTime;
-            if (script->functionTemp[1] == 0) {
-                script->functionTemp[1] = 10;
-                script->functionTemp[0] = PEACH_STAR_BEAM_START_FLY_AWAY;
+            if (script->functionTemp[FT_DELAY] == 0) {
+                script->functionTemp[FT_DELAY] = 10;
+                script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_START_FLY_AWAY;
             } else {
-                script->functionTemp[1]--;
+                script->functionTemp[FT_DELAY]--;
             }
             break;
         case PEACH_STAR_BEAM_START_FLY_AWAY:
-            if (script->functionTemp[1] != 0) {
-                script->functionTemp[1]--;
+            if (script->functionTemp[FT_DELAY] != 0) {
+                script->functionTemp[FT_DELAY]--;
                 break;
             }
             playerState->goalPos.x = targetPosX;
             playerState->goalPos.y = targetPosY + 170.0f;
             playerState->goalPos.z = targetPosZ;
-            script->functionTemp[1] = 20;
-            script->functionTemp[0] = PEACH_STAR_BEAM_SPIRITS_FLY_AWAY;
+            script->functionTemp[FT_DELAY] = 20;
+            script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_SPIRITS_FLY_AWAY;
             break;
         case PEACH_STAR_BEAM_SPIRITS_FLY_AWAY:
-            if (script->functionTemp[1] != 0) {
-                script->functionTemp[1]--;
-                if (script->functionTemp[1] == 0) {
-                    if (script->functionTemp[2] == 0) {
-                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_0248, TRUE);
-                        sfx_play_sound(SOUND_LRAW_0248 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+            if (script->functionTemp[FT_DELAY] != 0) {
+                script->functionTemp[FT_DELAY]--;
+                if (script->functionTemp[FT_DELAY] == 0) {
+                    if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
+                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, TRUE);
+                        sfx_play_sound(SOUND_LRAW_USE_STAR_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     } else {
-                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_0249, TRUE);
-                        sfx_play_sound(SOUND_LRAW_0249 | SOUND_ID_TRIGGER_CHANGE_SOUND);
+                        snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, TRUE);
+                        sfx_play_sound(SOUND_LRAW_USE_PEACH_BEAM | SOUND_ID_TRIGGER_CHANGE_SOUND);
                     }
                 }
             }
             cond = FALSE;
             effectData = N(BeamEffect)->data.peachStarBeam;
             for (i = 0; i < ARRAY_COUNT(effectData->spirits); i++) {
-                if (script->functionTemp[2] != 0 || i != 0) {
+                if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
                     spirit = &effectData->spirits[i];
                     if (N(SpiritsFlyAwayDelay)[i] >= 0) {
                         cond = TRUE;
@@ -437,18 +443,18 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                 N(SpiritsMoveTime)[i] = 15;
             }
 
-            if (script->functionTemp[2] == 0) {
-                snd_stop_tracking_env_sound_pos(SOUND_LRAW_0248, FALSE);
+            if (!script->functionTemp[FT_IS_PEACH_BEAM]) {
+                snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_STAR_BEAM, FALSE);
             } else {
-                snd_stop_tracking_env_sound_pos(SOUND_LRAW_0249, FALSE);
+                snd_stop_tracking_env_sound_pos(SOUND_LRAW_USE_PEACH_BEAM, FALSE);
             }
-            script->functionTemp[0] = PEACH_STAR_BEAM_SPIRITS_SCATTER;
+            script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_SPIRITS_SCATTER;
             break;
         case PEACH_STAR_BEAM_SPIRITS_SCATTER:
             cond = FALSE;
             effectData = N(BeamEffect)->data.peachStarBeam;
             for (i = 0; i < ARRAY_COUNT(effectData->spirits);  i++) {
-                if (script->functionTemp[2] != 0 || i != 0) {
+                if (script->functionTemp[FT_IS_PEACH_BEAM] || i != 0) {
                     spirit = &effectData->spirits[i];
                     if (N(SpiritsFlyDelay)[i] < 0) {
                         currentPosX = spirit->lockedPos.x;

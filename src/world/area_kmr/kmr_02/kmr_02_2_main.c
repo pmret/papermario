@@ -101,7 +101,7 @@ EvtScript N(EVS_ShowMessage_ItsLocked) = {
 
 EvtScript N(EVS_OpenGoombaRoadGate) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_01D2, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_GOOMBA_GATE_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 120, 20, EASING_COS_IN_OUT)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)

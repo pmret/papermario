@@ -584,12 +584,12 @@ void N(card_worker_render)(void) {
 }
 
 API_CALLABLE(N(func_8024303C_96C1FC)) {
-    sfx_play_sound_with_params(SOUND_SRAW_SHUFFLE_CARD_A, 0, 24, 0);
+    sfx_play_sound_with_params(SOUND_SHUFFLE_CARD_A, 0, 24, 0);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_80243068_96C228)) {
-    sfx_play_sound_with_params(SOUND_SRAW_SHUFFLE_CARD_B, 0, 104, 0);
+    sfx_play_sound_with_params(SOUND_SHUFFLE_CARD_B, 0, 104, 0);
     return ApiStatus_DONE2;
 }
 

@@ -19,7 +19,7 @@ API_CALLABLE(N(PlaySpringReboundAnimation)) {
 
 EvtScript N(EVS_PlayWalkingSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_03AC, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_GOOMBA_BROS_STEP, SOUND_SPACE_DEFAULT)
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_RETURN

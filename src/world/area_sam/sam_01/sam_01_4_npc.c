@@ -111,7 +111,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Walk)
             EVT_CALL(NpcMoveTo, NPC_SELF, -338, -247, 20)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_01CF, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_OPEN, 0)
             EVT_CALL(MakeLerp, 0, 70, 30, EASING_LINEAR)
             EVT_LABEL(10)
                 EVT_CALL(UpdateLerp)
@@ -131,7 +131,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
                 EVT_IF_EQ(LVar1, 1)
                     EVT_GOTO(20)
                 EVT_END_IF
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_01D0, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_CLOSE, 0)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Carry)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 180, 0)
             EVT_EXEC_GET_TID(N(EVS_Mayor_CarryBucket), LVarA)

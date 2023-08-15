@@ -2296,7 +2296,7 @@ EvtScript N(attackGroundLightning) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03D3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_LIGHTNING_BLAST)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 10)
     EVT_SET(LVar3, LVar0)

@@ -199,12 +199,12 @@ EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
                     EVT_ADD(LVar0, 1)
                 EVT_END_LOOP
                 EVT_WAIT(45 * DT)
-                EVT_CALL(StopSound, SOUND_LOOP_4C)
+                EVT_CALL(StopSound, SOUND_LOOP_SHY_GUY_CROWD_1)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005E)
                 EVT_THREAD
                     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
                 EVT_END_THREAD
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_01E4, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_TROMP_CRASH, SOUND_SPACE_DEFAULT)
                 EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 37, 37, 1, 10, 30)
                 EVT_CALL(EnableModel, MODEL_o821, TRUE)
                 EVT_LOOP(10)

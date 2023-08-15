@@ -278,7 +278,7 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(SOUND_024B);
+        sfx_play_sound(SOUND_MERLEE_APPEAR);
         npc->alpha = 0;
     }
 

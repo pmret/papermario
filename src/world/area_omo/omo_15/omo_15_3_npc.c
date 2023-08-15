@@ -67,7 +67,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02, ANIM_GeneralGuy_Anim0A, 0, MSG_CH4_0064)
     EVT_THREAD
         EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySound, SOUND_LOOP_4D)
+        EVT_CALL(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
         EVT_SET(LVar0, NPC_ShyGuy_01)
         EVT_LOOP(9)
             EVT_CALL(SetNpcVar, LVar0, 0, MANAGER_ARMY_CHARGE)
@@ -261,7 +261,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
                 EVT_IF_EQ(LVar0, NPC_ShyGuy_09)
                     EVT_THREAD
                         EVT_WAIT(20)
-                        EVT_CALL(StopSound, SOUND_LOOP_4D)
+                        EVT_CALL(StopSound, SOUND_LOOP_SHY_GUY_CROWD_2)
                     EVT_END_THREAD
                     EVT_CALL(StartBossBattle, SONG_GENERAL_GUY_BATTLE)
                 EVT_END_IF
@@ -275,7 +275,7 @@ EvtScript N(EVS_NpcIdle_ShyGuy) = {
 EvtScript N(EVS_BossDefeated_RunAway) = {
     EVT_CALL(GetSelfNpcID, LVar9)
     EVT_IF_EQ(LVar9, NPC_GeneralGuy)
-        EVT_CALL(PlaySound, SOUND_LOOP_4D)
+        EVT_CALL(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
         EVT_USE_BUF(EVT_PTR(N(GeneralGuyFleeScripts)))
         EVT_BUF_READ1(LVar1)
         EVT_USE_BUF(LVar1)
@@ -296,8 +296,8 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_LRAW_036D | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_036D)
+        EVT_CALL(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
     EVT_ELSE
         EVT_SET(LVar0, LVar9)
         EVT_SUB(LVar0, 0)
@@ -351,9 +351,9 @@ EvtScript N(EVS_BossDefeated_RunAway) = {
                     EVT_CALL(InterpNpcYaw, LVar9, 90, 0)
                     EVT_WAIT(20)
                     EVT_THREAD
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_03A2, SOUND_SPACE_DEFAULT)
+                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
                         EVT_WAIT(45)
-                        EVT_CALL(StopSound, SOUND_03A2)
+                        EVT_CALL(StopSound, SOUND_SHY_GUY_FLEE_LOOP)
                         EVT_CALL(SetNpcVar, NPC_ShyGuy_09, 0, MANAGER_ARMY_FLEE)
                     EVT_END_THREAD
             EVT_END_SWITCH
