@@ -1,17 +1,21 @@
 #ifndef _CONTROLLER_H
 #define _CONTROLLER_H
+
 #include "os_internal.h"
 #include "rcp.h"
 
 //should go somewhere else but
-#define CHNL_ERR(format) ((format.rxsize & CHNL_ERR_MASK) >> 4)
+#define ARRLEN(x) ((s32)(sizeof(x) / sizeof(x[0])))
+#define CHNL_ERR(format) (((format).rxsize & CHNL_ERR_MASK) >> 4)
 
-typedef struct {
+typedef struct
+{
     /* 0x0 */ u32 ramarray[15];
     /* 0x3C */ u32 pifstatus;
 } OSPifRam;
 
-typedef struct {
+typedef struct
+{
     /* 0x0 */ u8 dummy;
     /* 0x1 */ u8 txsize;
     /* 0x2 */ u8 rxsize;
@@ -103,70 +107,93 @@ typedef struct
     /* 0x4 */ u8 data[EEPROM_BLOCK_SIZE];
 } __OSContEepromFormat;
 
-#define PFS_ONE_PAGE                8
-#define PFS_PAGE_SIZE               (BLOCKSIZE*PFS_ONE_PAGE)
-
-#define PFS_INODE_SIZE_PER_PAGE     128
-
-#define PFS_ID_0AREA                1
-#define PFS_ID_1AREA                3
-#define PFS_ID_2AREA                4
-#define PFS_ID_3AREA                6
-#define PFS_LABEL_AREA              7
-
-#define PFS_WRITTEN                 2
-
-#define PFS_EOF                     1
-#define PFS_PAGE_NOT_EXIST          2
-#define PFS_PAGE_NOT_USED           3
-
-#define PFS_FORCE                   1
-
-#define	PFS_ID_BANK_256K            0
-
+// Joybus commands
 //from: http://en64.shoutwiki.com/wiki/SI_Registers_Detailed#CONT_CMD_Usage
-#define CONT_CMD_REQUEST_STATUS     0
-#define CONT_CMD_READ_BUTTON        1
-#define CONT_CMD_READ_MEMPACK       2
-#define CONT_CMD_WRITE_MEMPACK      3
-#define CONT_CMD_READ_EEPROM        4
-#define CONT_CMD_WRITE_EEPROM       5
-#define CONT_CMD_RESET              0xff
+#define CONT_CMD_REQUEST_STATUS 0
+#define CONT_CMD_READ_BUTTON    1
+#define CONT_CMD_READ_PAK       2
+#define CONT_CMD_WRITE_PAK      3
+#define CONT_CMD_READ_EEPROM    4
+#define CONT_CMD_WRITE_EEPROM   5
+#define CONT_CMD_READ36_VOICE   9
+#define CONT_CMD_WRITE20_VOICE  10
+#define CONT_CMD_READ2_VOICE    11
+#define CONT_CMD_WRITE4_VOICE   12
+#define CONT_CMD_SWRITE_VOICE   13
+#define CONT_CMD_CHANNEL_RESET  0xFD
+#define CONT_CMD_RESET          0xFF
 
-#define CONT_CMD_REQUEST_STATUS_TX  1
-#define CONT_CMD_READ_BUTTON_TX     1
-#define CONT_CMD_READ_MEMPACK_TX    3
-#define CONT_CMD_WRITE_MEMPACK_TX   35
-#define CONT_CMD_READ_EEPROM_TX     2
-#define CONT_CMD_WRITE_EEPROM_TX    10
-#define CONT_CMD_RESET_TX           1
+// Bytes transmitted for each joybus command
+#define CONT_CMD_REQUEST_STATUS_TX 1
+#define CONT_CMD_READ_BUTTON_TX    1
+#define CONT_CMD_READ_PAK_TX       3
+#define CONT_CMD_WRITE_PAK_TX      35
+#define CONT_CMD_READ_EEPROM_TX    2
+#define CONT_CMD_WRITE_EEPROM_TX   10
+#define CONT_CMD_READ36_VOICE_TX   3
+#define CONT_CMD_WRITE20_VOICE_TX  23
+#define CONT_CMD_READ2_VOICE_TX    3
+#define CONT_CMD_WRITE4_VOICE_TX   7
+#define CONT_CMD_SWRITE_VOICE_TX   3
+#define CONT_CMD_RESET_TX          1
 
-#define CONT_CMD_REQUEST_STATUS_RX  3
-#define CONT_CMD_READ_BUTTON_RX     4
-#define CONT_CMD_READ_MEMPACK_RX    33
-#define CONT_CMD_WRITE_MEMPACK_RX   1
-#define CONT_CMD_READ_EEPROM_RX     8
-#define CONT_CMD_WRITE_EEPROM_RX    1
-#define CONT_CMD_RESET_RX           3
+// Bytes received for each joybus command
+#define CONT_CMD_REQUEST_STATUS_RX 3
+#define CONT_CMD_READ_BUTTON_RX    4
+#define CONT_CMD_READ_PAK_RX       33
+#define CONT_CMD_WRITE_PAK_RX      1
+#define CONT_CMD_READ_EEPROM_RX    8
+#define CONT_CMD_WRITE_EEPROM_RX   1
+#define CONT_CMD_READ36_VOICE_RX   37
+#define CONT_CMD_WRITE20_VOICE_RX  1
+#define CONT_CMD_READ2_VOICE_RX    3
+#define CONT_CMD_WRITE4_VOICE_RX   1
+#define CONT_CMD_SWRITE_VOICE_RX   1
+#define CONT_CMD_RESET_RX          3
 
-#define CONT_CMD_NOP                0xff
-#define CONT_CMD_END                0xfe //indicates end of a command
-#define CONT_CMD_EXE                1    //set pif ram status byte to this to do a command
+#define CONT_CMD_NOP 0xff
+#define CONT_CMD_END 0xfe //indicates end of a command
+#define CONT_CMD_EXE 1    //set pif ram status byte to this to do a command
 
-#define DIR_STATUS_EMPTY            0
-#define DIR_STATUS_UNKNOWN          1
-#define DIR_STATUS_OCCUPIED         2
+#define DIR_STATUS_EMPTY 0
+#define DIR_STATUS_UNKNOWN 1
+#define DIR_STATUS_OCCUPIED 2
 
-#define	PFS_BANK_LAPPED_BY          8	/* => u8 */
-#define	PFS_SECTOR_PER_BANK         32
-#define	PFS_INODE_DIST_MAP          (PFS_BANK_LAPPED_BY * PFS_SECTOR_PER_BANK)
-#define	PFS_SECTOR_SIZE             (PFS_INODE_SIZE_PER_PAGE/PFS_SECTOR_PER_BANK)
+// Controller accessory addresses
+// https://github.com/joeldipops/TransferBoy/blob/master/docs/TransferPakReference.md
+
+// Accesory detection
+#define CONT_ADDR_DETECT    0x8000
+// Rumble
+#define CONT_ADDR_RUMBLE    0xC000
+// Controller Pak
+// Transfer Pak
+#define CONT_ADDR_GB_POWER  0x8000 // Same as the detection address, but semantically different
+#define CONT_ADDR_GB_BANK   0xA000
+#define CONT_ADDR_GB_STATUS 0xB000
+
+// Addresses sent to controller accessories are in blocks, not bytes
+#define CONT_BLOCKS(x) ((x) / BLOCKSIZE)
+
+// Block addresses of the above
+#define CONT_BLOCK_DETECT    CONT_BLOCKS(CONT_ADDR_DETECT)
+#define CONT_BLOCK_RUMBLE    CONT_BLOCKS(CONT_ADDR_RUMBLE)
+#define CONT_BLOCK_GB_POWER  CONT_BLOCKS(CONT_ADDR_GB_POWER)
+#define CONT_BLOCK_GB_BANK   CONT_BLOCKS(CONT_ADDR_GB_BANK)
+#define CONT_BLOCK_GB_STATUS CONT_BLOCKS(CONT_ADDR_GB_STATUS)
+
+
+// Transfer pak
+
+#define GB_POWER_ON  0x84
+#define GB_POWER_OFF 0xFE
+
 
 typedef struct
 {
     /* 0x0 */ __OSInode inode;
     /* 0x100 */ u8 bank;
-    /* 0x101 */ u8 map[256];
+    /* 0x101 */ u8 map[PFS_INODE_DIST_MAP];
 } __OSInodeCache;
 
 extern s32 __osEepStatus(OSMesgQueue *, OSContStatus *);
@@ -178,6 +205,8 @@ s32 __osGetId(OSPfs *pfs);
 s32 __osCheckId(OSPfs *pfs);
 s32 __osPfsRWInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
 s32 __osPfsSelectBank(OSPfs *pfs, u8 bank);
+s32 __osPfsDeclearPage(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int *first_page, u8 bank, int *decleared, int *last_page);
+s32 __osPfsReleasePages(OSPfs *pfs, __OSInode *inode, u8 start_page, u8 bank, __OSInodeUnit *last_page);
 s32 __osBlockSum(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank);
 s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
 s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
@@ -202,26 +231,27 @@ extern u8 __osMaxControllers;
 #define ERRCK(fn) \
     ret = fn;     \
     if (ret != 0) \
-        return ret;
+        return ret
 
 #define SET_ACTIVEBANK_TO_ZERO        \
     if (pfs->activebank != 0)         \
     {                                 \
-        ERRCK(__osPfsSelectBank(pfs, 0)) \
-    }
+        ERRCK(__osPfsSelectBank(pfs, 0)); \
+    } (void)0
 
 #define PFS_CHECK_ID                              \
     if (__osCheckId(pfs) == PFS_ERR_NEW_PACK) \
-        return PFS_ERR_NEW_PACK;
-#endif
+        return PFS_ERR_NEW_PACK
 
 #define PFS_CHECK_STATUS                          \
     if ((pfs->status & PFS_INITIALIZED) == 0) \
-        return PFS_ERR_INVALID;
+        return PFS_ERR_INVALID
 
 #define PFS_GET_STATUS                      \
     __osSiGetAccess();                      \
     ret = __osPfsGetStatus(queue, channel); \
     __osSiRelAccess();                      \
     if (ret != 0)                           \
-        return ret;
+        return ret
+
+#endif

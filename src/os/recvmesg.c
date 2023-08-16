@@ -9,8 +9,10 @@ s32 osRecvMesg(OSMesgQueue *mq, OSMesg *msg, s32 flags) {
             __osRestoreInt(saveMask);
             return -1;
         }
-        __osRunningThread->state = OS_STATE_WAITING;
-        __osEnqueueAndYield(&mq->mtqueue);
+        else {
+            __osRunningThread->state = OS_STATE_WAITING;
+            __osEnqueueAndYield(&mq->mtqueue);
+        }
     }
 
     if (msg != NULL) {

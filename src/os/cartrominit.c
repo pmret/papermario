@@ -31,9 +31,7 @@ OSPiHandle *osCartRomInit(void)
 
     bzero(&__CartRomHandle.transferInfo, sizeof(__OSTranxInfo));
 
-    while (stat = IO_READ(PI_STATUS_REG), stat & (PI_STATUS_DMA_BUSY | PI_STATUS_IO_BUSY)) {
-        ;
-    }
+    WAIT_ON_IOBUSY(stat);
 
     latency = IO_READ(PI_BSD_DOM1_LAT_REG);
     pageSize = IO_READ(PI_BSD_DOM1_PGS_REG);

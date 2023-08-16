@@ -1,10 +1,10 @@
 #include "PR/os_internal.h"
 #include "PR/osint.h"
 
-void osDestroyThread(OSThread *t) {
+void osDestroyThread(OSThread* t) {
     register u32 saveMask;
-    register OSThread *pred;
-    register OSThread *succ;
+    register OSThread* pred;
+    register OSThread* succ;
 
     saveMask = __osDisableInt();
 
@@ -25,7 +25,6 @@ void osDestroyThread(OSThread *t) {
                 break;
             }
             pred = succ;
-            succ = pred->tlnext;
         }
     }
 

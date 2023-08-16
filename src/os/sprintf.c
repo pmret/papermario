@@ -10,11 +10,10 @@ int sprintf(char* s, const char* fmt, ...) {
 
     ret = _Printf(&proutSprintf, s, fmt, argp);
 
-    if (ret < 0) {
-        return ret;
+    if (ret >= 0) {
+        s[ret] = 0;
     }
 
-    s[ret] = 0;
     return ret;
 }
 

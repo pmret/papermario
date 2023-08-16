@@ -1,61 +1,97 @@
+#include "PR/os_internal.h"
+#include "PR/rcp.h"
 #include "PR/controller.h"
-#include "PR/osint.h"
 #include "PR/siint.h"
 
-s32 __osPfsLastChannel = -1;
+extern u32 __osBbPakAddress[4];
+extern u32 __osBbPakSize;
 
-s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer) {
+#ifndef BBPLAYER
+s32 __osPfsLastChannel = -1;
+#endif
+
+#define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
+
+s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
+#ifdef BBPLAYER
     s32 ret;
-    u8* ptr;
-    s32 i;
-    int retry = 2;
 
     __osSiGetAccess();
-    do {
-        ptr = (u8 *)(&__osPfsPifRam);
 
-        if (__osContLastCmd != CONT_CMD_READ_MEMPACK || __osPfsLastChannel != channel) {
-            __osContLastCmd = CONT_CMD_READ_MEMPACK;
+    ret = 0;
+    if (__osBbPakAddress[channel] != 0) {
+        if (__osBbPakSize - 0x20 >= address * 0x20) {
+            int i;
+
+            for (i = 0; i < 0x20; i++) {
+                buffer[i] = *(u8*)(__osBbPakAddress[channel] + address * 0x20 + i);
+            }
+        }
+    } else {
+        ret = 1;
+    }
+
+    __osSiRelAccess();
+
+    return ret;
+#else
+    s32 ret = 0;
+    s32 i;
+    u8* ptr;
+    s32 retry = 2;
+
+    __osSiGetAccess();
+
+    do {
+        ptr = (u8*)&__osPfsPifRam;
+
+        if (__osContLastCmd != CONT_CMD_READ_PAK || (u32)__osPfsLastChannel != channel) {
+            __osContLastCmd = CONT_CMD_READ_PAK;
             __osPfsLastChannel = channel;
 
-            for (i = 0; i < channel; i++) {
-                *ptr++ = 0;
-            }
+            for (i = 0; i < channel; i++) { *ptr++ = CONT_CMD_REQUEST_STATUS; }
 
             __osPfsPifRam.pifstatus = CONT_CMD_EXE;
-            ((__OSContRamReadFormat *)ptr)->dummy = 0xff;
-            ((__OSContRamReadFormat *)ptr)->txsize = 3;
-            ((__OSContRamReadFormat *)ptr)->rxsize = 33;
-            ((__OSContRamReadFormat *)ptr)->cmd = CONT_CMD_READ_MEMPACK;
-            ((__OSContRamReadFormat *)ptr)->datacrc = 0xff;
+
+            READFORMAT(ptr)->dummy = CONT_CMD_NOP;
+            READFORMAT(ptr)->txsize = CONT_CMD_READ_PAK_TX;
+            READFORMAT(ptr)->rxsize = CONT_CMD_READ_PAK_RX;
+            READFORMAT(ptr)->cmd = CONT_CMD_READ_PAK;
+            READFORMAT(ptr)->datacrc = 0xFF;
+
             ptr[sizeof(__OSContRamReadFormat)] = CONT_CMD_END;
         } else {
             ptr += channel;
         }
-        ((__OSContRamReadFormat *)ptr)->addrh = address >> 3;
-        ((__OSContRamReadFormat *)ptr)->addrl = (address << 5) | __osContAddressCrc(address) ;
-        __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);
-        osRecvMesg(mq, NULL, OS_MESG_BLOCK);
-        __osSiRawStartDma(OS_READ, &__osPfsPifRam);
+
+        READFORMAT(ptr)->addrh = address >> 3;
+        READFORMAT(ptr)->addrl = (u8)((address << 5) | __osContAddressCrc(address));
+
+        ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);
         osRecvMesg(mq, NULL, OS_MESG_BLOCK);
 
-        ret = (((__OSContRamReadFormat *)ptr)->rxsize & 0xC0) >> 4;
-        if (ret == 0) {
-            if (__osContDataCrc(((__OSContRamReadFormat *)ptr)->data) != ((__OSContRamReadFormat *)ptr)->datacrc) {
+        ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);
+        osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+
+        ret = CHNL_ERR(*READFORMAT(ptr));
+
+        if (!ret) {
+            if (__osContDataCrc(READFORMAT(ptr)->data) != READFORMAT(ptr)->datacrc) {
                 ret = __osPfsGetStatus(mq, channel);
-                if (ret != 0) {
+
+                if (ret) {
                     break;
                 } else {
                     ret = PFS_ERR_CONTRFAIL;
                 }
             } else {
-                bcopy(((__OSContRamReadFormat *)ptr)->data, buffer, BLOCKSIZE);
+                bcopy(READFORMAT(ptr)->data, buffer, BLOCKSIZE);
             }
         } else {
             ret = PFS_ERR_NOPACK;
         }
-    } while (ret == PFS_ERR_CONTRFAIL && retry-- >= 0);
-
+    } while ((ret == PFS_ERR_CONTRFAIL) && (retry-- >= 0));
     __osSiRelAccess();
     return ret;
+#endif
 }

@@ -1740,7 +1740,3 @@ OSViMode osViModeTable[56] = {
         }
     }
 };
-
-// TODO move into separate files and define properly
-
-OSViMode osViModeNtscLan1 = { 0x02, { 0x0000311E, 0x00000140, 0x03E52239, 0x0000020D, 0x00000C15, 0x0C150C15, 0x006C02EC, 0x00000200, 0x00000000 }, { { 0x00000280, 0x00000400, 0x002501FF, 0x000E0204, 0x00000002 }, { 0x00000280, 0x00000400, 0x002501FF, 0x000E0204, 0x00000002 } } };

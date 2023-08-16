@@ -11,52 +11,50 @@ void __osTimerServicesInit(void) {
     __osCurrentTime = 0;
     __osBaseCounter = 0;
     __osViIntrCount = 0;
-    __osTimerList->prev = __osTimerList;
-    __osTimerList->next = __osTimerList->prev;
-    __osTimerList->value = 0;
-    __osTimerList->interval = __osTimerList->value;
+    __osTimerList->next = __osTimerList->prev = __osTimerList;
+    __osTimerList->interval = __osTimerList->value = 0;
     __osTimerList->mq = NULL;
     __osTimerList->msg = 0;
 }
 
 void __osTimerInterrupt(void) {
-    OSTimer *t;
+    OSTimer* t;
     u32 count;
     u32 elapsed_cycles;
 
-    if (__osTimerList->next != __osTimerList) {
-        while (TRUE) {
-            t = __osTimerList->next;
-            if (t == __osTimerList) {
-                __osSetCompare(0);
-                __osTimerCounter = 0;
-                break;
-            }
+    if (__osTimerList->next == __osTimerList) {
+        return;
+    }
+    for (;;) {
+        t = __osTimerList->next;
 
-            count = osGetCount();
-            elapsed_cycles = count - __osTimerCounter;
-            __osTimerCounter = count;
+        if (t == __osTimerList) {
+            __osSetCompare(0);
+            __osTimerCounter = 0;
+            break;
+        }
 
-            if (elapsed_cycles < t->value)
-            {
-                t->value -= elapsed_cycles;
-                __osSetTimerIntr(t->value);
-                break;
-            } else {
-                t->prev->next = t->next;
-                t->next->prev = t->prev;
-                t->next = NULL;
-                t->prev = NULL;
+        count = osGetCount();
+        elapsed_cycles = count - __osTimerCounter;
+        __osTimerCounter = count;
 
-                if (t->mq != NULL) {
-                    osSendMesg(t->mq, t->msg, OS_MESG_NOBLOCK);
-                }
+        if (elapsed_cycles < t->value) {
+            t->value -= elapsed_cycles;
+            __osSetTimerIntr(t->value);
+            break;
+        }
 
-                if (t->interval != 0) {
-                    t->value = t->interval;
-                    __osInsertTimer(t);
-                }
-            }
+        t->prev->next = t->next;
+        t->next->prev = t->prev;
+        t->next = NULL;
+        t->prev = NULL;
+
+        if (t->mq != NULL) {
+            osSendMesg(t->mq, t->msg, OS_MESG_NOBLOCK);
+        }
+        if (t->interval != 0) {
+            t->value = t->interval;
+            __osInsertTimer(t);
         }
     }
 }
@@ -77,17 +75,14 @@ void __osSetTimerIntr(OSTime tim) {
 }
 
 OSTime __osInsertTimer(OSTimer *t) {
-    OSTimer *timep;
+    OSTimer* timep;
     OSTime tim;
-    u32 savedMask;
-    savedMask = __osDisableInt();
+    u32 savedMask = __osDisableInt();
 
     timep = __osTimerList->next;
     tim = t->value;
-
-    while (timep != __osTimerList && tim > timep->value) {
+    for (; timep != __osTimerList && tim > timep->value; timep = timep->next) {
         tim -= timep->value;
-        timep = timep->next;
     }
 
     t->value = tim;
