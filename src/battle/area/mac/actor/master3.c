@@ -497,7 +497,7 @@ EvtScript N(tripleStrike3) = {
     EVT_CALL(MoveBattleCamOver, 60)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedDownwardStance)
     EVT_WAIT(20)
-    EVT_CALL(ActorSpeak, MSG_MAC_Gate_003C, ACTOR_SELF, PRT_MAIN, 0x00A2000A, 0x00A20006)
+    EVT_CALL(ActorSpeak, MSG_MAC_Gate_003C, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -868,7 +868,7 @@ EvtScript N(nextTurn_80230D44) = {
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                 EVT_WAIT(10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002E, ACTOR_SELF, PRT_MAIN, 0x00A20009, 0x00A20005)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002E, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Talk, ANIM_TheMaster_Walk)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Cough)
                 EVT_WAIT(15)
@@ -925,7 +925,7 @@ EvtScript N(nextTurn_80230D44) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0038, ACTOR_SELF, PRT_MAIN, 0x00A2000A, 0x00A20006)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0038, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
             EVT_END_IF
         EVT_CASE_EQ(12)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -938,14 +938,14 @@ EvtScript N(nextTurn_80230D44) = {
             EVT_IF_LE(LVar0, LVar1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_003B, ACTOR_SELF, PRT_MAIN, 0x00A2000A, 0x00A20006)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_003B, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetPlayerHP, LVar0)
             EVT_IF_LE(LVar0, 10)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_003D, ACTOR_SELF, PRT_MAIN, 0x00A2000A, 0x00A20006)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_003D, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
                 EVT_BREAK_SWITCH
             EVT_END_IF
     EVT_END_SWITCH
@@ -1000,13 +1000,13 @@ EvtScript N(handleEvent_80231408) = {
                 EVT_IF_GT(LVarB, 2)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(MoveBattleCamOver, 10)
-                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_003A, ACTOR_SELF, PRT_MAIN, 0x00A2000A, 0x00A20006)
+                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_003A, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
                 EVT_END_IF
             EVT_ELSE
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0039, ACTOR_SELF, PRT_MAIN, 0x00A2000A, 0x00A20006)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0039, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
             EVT_END_IF
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

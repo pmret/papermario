@@ -1,5 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/GoombaKing.h"
+#include "sprite/npc/GoombaBros.h"
 #include "sprite/player.h"
 
 #define NAMESPACE A(goomba_king)
@@ -653,7 +654,7 @@ EvtScript N(nextTurn_802229C4) = {
                 EVT_WAIT(20)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
                 EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
-                EVT_CALL(ActorSpeak, MSG_CH0_00CB, ACTOR_ENEMY1, PRT_MAIN, 0x0062000A, 0x0062000A)
+                EVT_CALL(ActorSpeak, MSG_CH0_00CB, ACTOR_ENEMY1, PRT_MAIN, ANIM_GoombaBros_Red_Talk, ANIM_GoombaBros_Red_Talk)
                 EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, TRUE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
@@ -662,14 +663,14 @@ EvtScript N(nextTurn_802229C4) = {
                 EVT_WAIT(10)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, FALSE)
                 EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 0)
-                EVT_CALL(ActorSpeak, MSG_CH0_00CC, ACTOR_ENEMY2, PRT_MAIN, 0x0062010A, 0x0062010A)
+                EVT_CALL(ActorSpeak, MSG_CH0_00CC, ACTOR_ENEMY2, PRT_MAIN, ANIM_GoombaBros_Blue_Talk, ANIM_GoombaBros_Blue_Talk)
                 EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, TRUE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
-                EVT_CALL(ActorSpeak, MSG_CH0_00CD, ACTOR_ENEMY0, PRT_MAIN, 0x00630009, 0x00630009)
+                EVT_CALL(ActorSpeak, MSG_CH0_00CD, ACTOR_ENEMY0, PRT_MAIN, ANIM_GoombaKing_Angry, ANIM_GoombaKing_Angry)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
@@ -760,7 +761,7 @@ EvtScript N(doDeath_80222F50) = {
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
         EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
-        EVT_CALL(ActorSpeak, MSG_CH0_00CF, ACTOR_ENEMY1, PRT_MAIN, 0x0062000B, 0x0062000B)
+        EVT_CALL(ActorSpeak, MSG_CH0_00CF, ACTOR_ENEMY1, PRT_MAIN, ANIM_GoombaBros_Red_CryTalk, ANIM_GoombaBros_Red_CryTalk)
         EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, TRUE)
     EVT_END_IF
@@ -771,7 +772,7 @@ EvtScript N(doDeath_80222F50) = {
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, FALSE)
         EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 0)
-        EVT_CALL(ActorSpeak, MSG_CH0_00D0, ACTOR_ENEMY2, PRT_MAIN, 0x0062010B, 0x0062010B)
+        EVT_CALL(ActorSpeak, MSG_CH0_00D0, ACTOR_ENEMY2, PRT_MAIN, ANIM_GoombaBros_Blue_CryTalk, ANIM_GoombaBros_Blue_CryTalk)
         EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, TRUE)
     EVT_END_IF

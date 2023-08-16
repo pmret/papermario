@@ -1969,7 +1969,7 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026D8EC(Evt* script, s32 isInitialCall) {
+ApiStatus HideHPBar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
 
@@ -1982,7 +1982,7 @@ ApiStatus func_8026D8EC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
+ApiStatus SetHPBarOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;

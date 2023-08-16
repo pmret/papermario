@@ -299,6 +299,11 @@ typedef enum ActorType {
     ACTOR_TYPE_COUNT                       = 0xD4,
 } ActorType;
 
+
+enum ActorLevel {
+    ACTOR_LEVEL_BOB_OMB         = 6,
+};
+
 extern s32 bActorNames[];
 
 typedef struct BattleMoveEntry {

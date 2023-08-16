@@ -849,7 +849,7 @@ EvtScript N(nextTurn_8021CD7C) = {
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_001F, ACTOR_SELF, PRT_MAIN, 0x00A30004, 0x00A30003)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_001F, ACTOR_SELF, PRT_MAIN, ANIM_Chan_Run, ANIM_Chan_Walk)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_END_IF
         EVT_CASE_EQ(12)
@@ -930,7 +930,7 @@ EvtScript N(handleEvent_8021D0CC) = {
                     EVT_CASE_EQ(1)
                         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                         EVT_CALL(MoveBattleCamOver, 10)
-                        EVT_CALL(ActorSpeak, MSG_MAC_Gate_0020, ACTOR_SELF, PRT_MAIN, 0x00A30007, 0x00A30002)
+                        EVT_CALL(ActorSpeak, MSG_MAC_Gate_0020, ACTOR_SELF, PRT_MAIN, ANIM_Chan_ToppledHurt, ANIM_Chan_Toppled)
                     EVT_CASE_EQ(2)
                     EVT_CASE_EQ(3)
                         EVT_SET(LVar0, 0)

@@ -316,7 +316,7 @@ EvtScript N(nextTurn_8022B06C) = {
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002E, ACTOR_SELF, PRT_MAIN, 0x00A20009, 0x00A20005)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002E, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Talk, ANIM_TheMaster_Walk)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_END_IF
         EVT_CASE_EQ(12)
@@ -330,14 +330,14 @@ EvtScript N(nextTurn_8022B06C) = {
             EVT_IF_LE(LVar0, LVar1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0031, ACTOR_SELF, PRT_MAIN, 0x00A20009, 0x00A20005)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0031, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Talk, ANIM_TheMaster_Walk)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetPlayerHP, LVar0)
             EVT_IF_LE(LVar0, 5)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0032, ACTOR_SELF, PRT_MAIN, 0x00A20009, 0x00A20005)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0032, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Talk, ANIM_TheMaster_Walk)
                 EVT_BREAK_SWITCH
             EVT_END_IF
     EVT_END_SWITCH
@@ -392,13 +392,13 @@ EvtScript N(handleEvent_8022B2CC) = {
                 EVT_IF_GT(LVarB, 2)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(MoveBattleCamOver, 10)
-                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0030, ACTOR_SELF, PRT_MAIN, 0x00A20009, 0x00A20005)
+                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0030, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Talk, ANIM_TheMaster_Walk)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
                 EVT_END_IF
             EVT_ELSE
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002F, ACTOR_SELF, PRT_MAIN, 0x00A20009, 0x00A20005)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_002F, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_Talk, ANIM_TheMaster_Walk)
             EVT_END_IF
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

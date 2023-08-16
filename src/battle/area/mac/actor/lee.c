@@ -4314,9 +4314,9 @@ EvtScript N(nextTurn_8022A038) = {
                 EVT_CALL(MoveBattleCamOver, 10)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
                 EVT_IF_EQ(LVar0, 1)
-                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0028, ACTOR_ENEMY1, PRT_MAIN, 0x00A40006, 0x00A40003)
+                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0028, ACTOR_ENEMY1, PRT_MAIN, ANIM_Lee_Talk, ANIM_Lee_Walk)
                 EVT_ELSE
-                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0028, ACTOR_SELF, PRT_MAIN, 0x00A40006, 0x00A40003)
+                    EVT_CALL(ActorSpeak, MSG_MAC_Gate_0028, ACTOR_SELF, PRT_MAIN, ANIM_Lee_Talk, ANIM_Lee_Walk)
                 EVT_END_IF
                 EVT_BREAK_SWITCH
             EVT_END_IF
@@ -4324,7 +4324,7 @@ EvtScript N(nextTurn_8022A038) = {
             EVT_IF_LE(LVar0, 5)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0029, ACTOR_SELF, PRT_MAIN, 0x00A40006, 0x00A40003)
+                EVT_CALL(ActorSpeak, MSG_MAC_Gate_0029, ACTOR_SELF, PRT_MAIN, ANIM_Lee_Talk, ANIM_Lee_Walk)
                 EVT_BREAK_SWITCH
             EVT_END_IF
     EVT_END_SWITCH

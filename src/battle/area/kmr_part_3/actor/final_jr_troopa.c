@@ -613,7 +613,7 @@ EvtScript N(8022DD48) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(ActorSpeak, MSG_CH8_005E, ACTOR_SELF, PRT_MAIN, 0x00210018, 0x00210018)
+    EVT_CALL(ActorSpeak, MSG_CH8_005E, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_TiredTalk, ANIM_JrTroopa_TiredTalk)
     EVT_EXEC_WAIT(N(8022C804))
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 0x00020001, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 0x00800000, FALSE)
@@ -1348,7 +1348,7 @@ EvtScript N(nextTurn_8023147C) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(MoveBattleCamOver, 20)
-                EVT_CALL(ActorSpeak, MSG_CH8_005D, ACTOR_SELF, PRT_MAIN, 0x0021001A, 0x0021001A)
+                EVT_CALL(ActorSpeak, MSG_CH8_005D, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTalk)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Idle)
             EVT_END_IF
         EVT_CASE_EQ(12)
@@ -1367,11 +1367,11 @@ EvtScript N(802315F0) = {
         EVT_CASE_EQ(0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(2)
-                    EVT_SET(LVar1, 2293769)
+                    EVT_SET(LVar1, ANIM_SpikedParaJrTroopa_Hurt)
                 EVT_CASE_EQ(3)
-                    EVT_SET(LVar1, 2359305)
+                    EVT_SET(LVar1, ANIM_MageJrTroopa_Hurt)
                 EVT_CASE_DEFAULT
-                    EVT_SET(LVar1, 2162705)
+                    EVT_SET(LVar1, ANIM_JrTroopa_Hurt)
             EVT_END_SWITCH
         EVT_CASE_EQ(1)
             EVT_SWITCH(LVar0)
