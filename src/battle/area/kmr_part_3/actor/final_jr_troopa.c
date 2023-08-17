@@ -6,29 +6,29 @@
 #define NAMESPACE A(final_jr_troopa)
 
 // Invalid value used in some scripts here == -91,999,590
-// The closest evt variable for this is MapFlag(-1999590),
-// which is way out of range.
+// The closest evt variable for this is MapFlag(-1999590), which is way out of range.
+// Looks like it was supposed to be a value for EVT_FLOAT(), but its likewise out of range.
 #define INVALID_VAR 0xFA84329A
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
-extern EvtScript N(handleEvent_8022D1C4);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 
 extern EvtScript N(EVS_GetFormAnims);
+extern EvtScript N(EVS_TryFearReaction);
 extern EvtScript N(EVS_JrTroopa_Death);
 extern EvtScript N(EVS_JrTroopa_ReturnHome);
-extern EvtScript N(EVS_TryFearReaction);
 
 extern EvtScript N(EVS_Transform_Flying);
 extern EvtScript N(EVS_Transform_Mage);
+extern EvtScript N(EVS_Attack_Leap);
 extern EvtScript N(EVS_Attack_Swoop);
 extern EvtScript N(EVS_Attack_SpikeDive);
 extern EvtScript N(EVS_Attack_MagicSpell);
-extern EvtScript N(EVS_Attack_LightningSpell);
+extern EvtScript N(EVS_Attack_LightningBolt);
 extern EvtScript N(EVS_Move_HealSelf);
-extern EvtScript N(EVS_Attack_Leap);
 
 API_CALLABLE(N(CalculateArcsinDeg));
 
@@ -407,7 +407,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HealsLeft, 5)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022D1C4)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_RETURN
     EVT_END
@@ -437,7 +437,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8022D1C4) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVarA)
@@ -622,7 +622,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CASE_LT(60)
                     EVT_EXEC_WAIT(N(EVS_Attack_MagicSpell))
                 EVT_CASE_LT(80)
-                    EVT_EXEC_WAIT(N(EVS_Attack_LightningSpell))
+                    EVT_EXEC_WAIT(N(EVS_Attack_LightningBolt))
                 EVT_CASE_DEFAULT
                     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
                     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
@@ -1193,7 +1193,7 @@ EvtScript N(EVS_Attack_MagicSpell) = {
 
 #include "common/SetBackgroundAlpha.inc.c"
 
-EvtScript N(EVS_Attack_LightningSpell) = {
+EvtScript N(EVS_Attack_LightningBolt) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
