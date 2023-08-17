@@ -207,12 +207,12 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_LEE_SUSHIE]                  MSG_Menus_Party_Sushie,
     [ACTOR_TYPE_LEE_LAKILESTER]              MSG_Menus_Party_Lakilester,
     [ACTOR_TYPE_KAMMY_KOOPA]                 MSG_EnemyName_KammyKoopa,
-    [ACTOR_TYPE_JR_TROOPA1]                  MSG_EnemyName_JrTroopa,
-    [ACTOR_TYPE_JR_TROOPA2]                  MSG_EnemyName_JrTroopa,
-    [ACTOR_TYPE_JR_TROOPA3]                  MSG_EnemyName_JrTroopa,
-    [ACTOR_TYPE_JR_TROOPA4]                  MSG_EnemyName_JrTroopa,
-    [ACTOR_TYPE_JR_TROOPA5]                  MSG_EnemyName_JrTroopa,
-    [ACTOR_TYPE_JR_TROOPA6]                  MSG_EnemyName_JrTroopa,
+    [ACTOR_TYPE_JR_TROOPA_1]                  MSG_EnemyName_JrTroopa,
+    [ACTOR_TYPE_JR_TROOPA_2]                  MSG_EnemyName_JrTroopa,
+    [ACTOR_TYPE_JR_TROOPA_3]                  MSG_EnemyName_JrTroopa,
+    [ACTOR_TYPE_JR_TROOPA_4]                  MSG_EnemyName_JrTroopa,
+    [ACTOR_TYPE_JR_TROOPA_5]                  MSG_EnemyName_JrTroopa,
+    [ACTOR_TYPE_JR_TROOPA_6]                  MSG_EnemyName_JrTroopa,
     [ACTOR_TYPE_JR_TROOPA_DUP1]              MSG_EnemyName_JrTroopa,
     [ACTOR_TYPE_JR_TROOPA_DUP2]              MSG_EnemyName_JrTroopa,
     [ACTOR_TYPE_BLUE_GOOMBA_BOSS]            MSG_EnemyName_BlueGoombaBoss,
@@ -1247,42 +1247,42 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .hurt = SOUND_NONE,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_JR_TROOPA1] = {
+    [ACTOR_TYPE_JR_TROOPA_1] = {
         .walk = { SOUND_20C1, SOUND_20C1 },
         .fly = { SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_JR_TROOPA2] = {
+    [ACTOR_TYPE_JR_TROOPA_2] = {
         .walk = { SOUND_20C1, SOUND_20C1 },
         .fly = { SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_JR_TROOPA3] = {
+    [ACTOR_TYPE_JR_TROOPA_3] = {
         .walk = { SOUND_20C1, SOUND_20C1 },
         .fly = { SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_JR_TROOPA4] = {
+    [ACTOR_TYPE_JR_TROOPA_4] = {
         .walk = { SOUND_20C1, SOUND_20C1 },
         .fly = { SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_JR_TROOPA5] = {
+    [ACTOR_TYPE_JR_TROOPA_5] = {
         .walk = { SOUND_20C1, SOUND_20C1 },
         .fly = { SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT },
         .jump = SOUND_ACTOR_JUMP,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_JR_TROOPA6] = {
+    [ACTOR_TYPE_JR_TROOPA_6] = {
         .walk = { SOUND_20C1, SOUND_20C1 },
         .fly = { SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT },
         .jump = SOUND_ACTOR_JUMP,
@@ -1918,12 +1918,12 @@ s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_LEE_SUSHIE] = MSG_EnemyTattle_LeeSushie,
     [ACTOR_TYPE_LEE_LAKILESTER] = MSG_EnemyTattle_LeeLakilester,
     [ACTOR_TYPE_KAMMY_KOOPA] = MSG_NONE,
-    [ACTOR_TYPE_JR_TROOPA1] = MSG_NONE,
-    [ACTOR_TYPE_JR_TROOPA2] = MSG_EnemyTattle_JrTroopa1,
-    [ACTOR_TYPE_JR_TROOPA3] = MSG_EnemyTattle_JrTroopa2,
-    [ACTOR_TYPE_JR_TROOPA4] = MSG_EnemyTattle_JrTroopa3,
-    [ACTOR_TYPE_JR_TROOPA5] = MSG_EnemyTattle_JrTroopa4,
-    [ACTOR_TYPE_JR_TROOPA6] = MSG_EnemyTattle_JrTroopa5,
+    [ACTOR_TYPE_JR_TROOPA_1] = MSG_NONE,
+    [ACTOR_TYPE_JR_TROOPA_2] = MSG_EnemyTattle_JrTroopa1,
+    [ACTOR_TYPE_JR_TROOPA_3] = MSG_EnemyTattle_JrTroopa2,
+    [ACTOR_TYPE_JR_TROOPA_4] = MSG_EnemyTattle_JrTroopa3,
+    [ACTOR_TYPE_JR_TROOPA_5] = MSG_EnemyTattle_JrTroopa4,
+    [ACTOR_TYPE_JR_TROOPA_6] = MSG_EnemyTattle_JrTroopa5,
     [ACTOR_TYPE_JR_TROOPA_DUP1] = MSG_EnemyTattle_JrTroopa5,
     [ACTOR_TYPE_JR_TROOPA_DUP2] = MSG_EnemyTattle_JrTroopa5,
     [ACTOR_TYPE_BLUE_GOOMBA_BOSS] = MSG_EnemyTattle_BlueGoombaBoss,
@@ -2133,12 +2133,12 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_LEE_SUSHIE] = { .tattleCam = { 0, 8, 0 }, .shadow = 0 },
     [ACTOR_TYPE_LEE_LAKILESTER] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_KAMMY_KOOPA] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_JR_TROOPA1] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_JR_TROOPA2] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_JR_TROOPA3] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_JR_TROOPA4] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_JR_TROOPA5] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_JR_TROOPA6] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_JR_TROOPA_1] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_JR_TROOPA_2] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_JR_TROOPA_3] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_JR_TROOPA_4] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_JR_TROOPA_5] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_JR_TROOPA_6] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_JR_TROOPA_DUP1] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_JR_TROOPA_DUP2] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BLUE_GOOMBA_BOSS] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },

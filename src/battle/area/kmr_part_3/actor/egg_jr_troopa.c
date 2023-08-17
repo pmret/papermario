@@ -102,8 +102,8 @@ ActorPartBlueprint N(ActorParts)[] = {
 
 ActorBlueprint NAMESPACE = {
     .flags = 0,
-    .type = ACTOR_TYPE_JR_TROOPA2,
-    .level = 44,
+    .type = ACTOR_TYPE_JR_TROOPA_2,
+    .level = ACTOR_LEVEL_JR_TROOPA_2,
     .maxHP = 15,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),

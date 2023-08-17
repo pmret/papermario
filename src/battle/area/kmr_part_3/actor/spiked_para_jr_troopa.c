@@ -16,8 +16,8 @@ extern EvtScript N(EVS_JrTroopa_Death);
 extern EvtScript N(EVS_JrTroopa_FlyHome);
 
 enum N(ActorPartIDs) {
-    PRT_GROUND          = 1,
-    PRT_FLYING          = 2,
+    PRT_GROUND      = 1,
+    PRT_FLYING      = 2,
 };
 
 enum N(ActorVars) {
@@ -32,7 +32,7 @@ enum N(ActorVars) {
 };
 
 enum N(ActorParams) {
-    DMG_DIVE            = 6,
+    DMG_DIVE        = 6,
 };
 
 s32 N(DefaultAnims)[] = {
@@ -116,8 +116,8 @@ ActorPartBlueprint N(ActorParts)[] = {
 
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
-    .type = ACTOR_TYPE_JR_TROOPA4,
-    .level = 59,
+    .type = ACTOR_TYPE_JR_TROOPA_4,
+    .level = ACTOR_LEVEL_JR_TROOPA_4,
     .maxHP = 40,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
@@ -566,7 +566,7 @@ API_CALLABLE(N(ShowPointerHudElem)) {
     hud_element_set_scale(iconIdx, 1.5f);
     hud_element_clear_flags(iconIdx, HUD_ELEMENT_FLAG_200000 | HUD_ELEMENT_FLAG_DISABLED);
     evt_set_variable(script, *args++, iconIdx);
-    load_tattle_flags(ACTOR_TYPE_JR_TROOPA4);
+    load_tattle_flags(ACTOR_TYPE_JR_TROOPA_4);
     return ApiStatus_DONE2;
 }
 
