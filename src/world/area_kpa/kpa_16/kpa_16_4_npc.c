@@ -21,7 +21,7 @@ API_CALLABLE(N(MuteAmbience)) {
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 40,
     .radius = 24,
-    .level = 25,
+    .level = ACTOR_LEVEL_KOOPATROL,
 };
 
 EvtScript N(EVS_Scene_LavaShutoff) = {

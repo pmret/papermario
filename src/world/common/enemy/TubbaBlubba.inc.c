@@ -4,7 +4,7 @@
 NpcSettings N(NpcSettings_TubbaBlubba) = {
     .height = 90,
     .radius = 65,
-    .level = 13,
+    .level = ACTOR_LEVEL_CLUBBA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

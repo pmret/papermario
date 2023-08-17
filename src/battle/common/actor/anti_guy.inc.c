@@ -70,7 +70,7 @@ ActorBlueprint NAMESPACE = {
     #else
     .type = ACTOR_TYPE_ANTI_GUY_OMO,
     #endif
-    .level = 42,
+    .level = ACTOR_LEVEL_ANTI_GUY,
     .maxHP = 50,
     .partCount = ARRAY_COUNT( N(ActorParts_802219C8)),
     .partsData = N(ActorParts_802219C8),

@@ -3,12 +3,12 @@
 
 #include "world/common/enemy/BulletBill.h"
 
-API_CALLABLE(N(func_80240000_9BD660)) {
+API_CALLABLE(N(GetBulletBillVar)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
     s32 varIdx = evt_get_variable(script, *args++);
-    s32 var3 = *args++;
+    s32 outVar = *args++;
 
     if (npcID == NPC_SELF) {
         npcID = npc->npcID;
@@ -16,9 +16,9 @@ API_CALLABLE(N(func_80240000_9BD660)) {
 
     npc = get_enemy(npcID);
     if (npc != NULL) {
-        evt_set_variable(script, var3, npc->varTable[varIdx]);
+        evt_set_variable(script, outVar, npc->varTable[varIdx]);
     } else {
-        evt_set_variable(script, var3, -1);
+        evt_set_variable(script, outVar, -1);
     }
 
     return ApiStatus_DONE2;
@@ -32,35 +32,35 @@ EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
 
 EvtScript N(D_80240844_9BDEA4) = {
     EVT_LABEL(0)
-    EVT_SETF(LVar0, EVT_FLOAT(400.0))
-    EVT_SET(LVar1, 1)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar2)
-    EVT_SET(LVar3, 10)
-    EVT_SET(LVarA, ANIM_BillBlaster_Idle)
-    EVT_SET(LVarB, ANIM_BillBlaster_Idle)
-    EVT_EXEC_WAIT(EVS_800936C0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
-    EVT_WAIT(15)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar3)
-    EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(20.0), LVar3)
-    EVT_ADD(LVar1, 12)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_CALL(SetNpcVar, LVar0, 0, 1)
-    EVT_LABEL(1)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_CALL(GetNpcVar, LVar0, 0, LVar1)
-    EVT_IF_EQ(LVar1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(RandInt, 30, LVar0)
-    EVT_ADD(LVar0, 30)
-    EVT_WAIT(LVar0)
-    EVT_GOTO(0)
+        EVT_SETF(LVar0, EVT_FLOAT(400.0))
+        EVT_SET(LVar1, 1)
+        EVT_CALL(GetNpcYaw, NPC_SELF, LVar2)
+        EVT_SET(LVar3, 10)
+        EVT_SET(LVarA, ANIM_BillBlaster_Idle)
+        EVT_SET(LVarB, ANIM_BillBlaster_Idle)
+        EVT_EXEC_WAIT(EVS_800936C0)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
+        EVT_WAIT(15)
+        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcYaw, NPC_SELF, LVar3)
+        EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(20.0), LVar3)
+        EVT_ADD(LVar1, 12)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
+        EVT_CALL(GetSelfNpcID, LVar0)
+        EVT_ADD(LVar0, 1)
+        EVT_CALL(SetNpcVar, LVar0, 0, 1)
+        EVT_LABEL(1)
+            EVT_CALL(GetSelfNpcID, LVar0)
+            EVT_ADD(LVar0, 1)
+            EVT_CALL(GetNpcVar, LVar0, 0, LVar1)
+            EVT_IF_EQ(LVar1, 0)
+                EVT_WAIT(1)
+                EVT_GOTO(1)
+            EVT_END_IF
+        EVT_CALL(RandInt, 30, LVar0)
+        EVT_ADD(LVar0, 30)
+        EVT_WAIT(LVar0)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -136,7 +136,7 @@ NpcSettings N(missing_80240CE4) = {
     .defaultAnim = ANIM_BillBlaster_Idle,
     .height = 26,
     .radius = 32,
-    .level = 10,
+    .level = ACTOR_LEVEL_BILL_BLASTER,
     .otherAI = &N(EVS_NpcAuxAI_BillBlaster),
     .ai = &N(D_80240844_9BDEA4),
     .onHit = &N(EVS_NpcHit_BillBlaster),
@@ -147,7 +147,7 @@ NpcSettings N(missing_80240D10) = {
     .defaultAnim = ANIM_BulletBill_Idle,
     .height = 14,
     .radius = 31,
-    .level = 5,
+    .level = ACTOR_LEVEL_BULLET_BILL,
     .otherAI = &N(EVS_NpcAuxAI_BulletBill),
     .ai = &N(D_80240C1C_9BE27C),
     .onHit = &EnemyNpcHit,
@@ -367,9 +367,10 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
             EVT_END_IF
     EVT_END_IF
     EVT_LABEL(0)
-        EVT_SET(LVarA, 20)
+        EVT_SET(LVarA, NPC_BulletBill_01)
         EVT_LOOP(10)
-            EVT_CALL(N(func_80240000_9BD660), LVarA, 0, LVar0)
+            // if the bullet bill does not have an assigned owner, assign ourself and fire
+            EVT_CALL(N(GetBulletBillVar), LVarA, 0, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(GetSelfNpcID, LVar0)
                 EVT_CALL(SetNpcVar, LVarA, 0, LVar0)

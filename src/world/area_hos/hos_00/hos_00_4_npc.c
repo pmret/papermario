@@ -8,7 +8,7 @@
 NpcSettings N(NpcSettings_FlyingMagikoopa) = {
     .height = 34,
     .radius = 24,
-    .level = 26,
+    .level = ACTOR_LEVEL_MAGIKOOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

@@ -7,7 +7,7 @@
 NpcSettings N(NpcSettings_Fuzzy) = {
     .height = 23,
     .radius = 22,
-    .level = 14,
+    .level = ACTOR_LEVEL_SHY_GUY,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_Fuzzy) = {
 NpcSettings N(NpcSettings_HammerBros) = {
     .height = 36,
     .radius = 24,
-    .level = 27,
+    .level = ACTOR_LEVEL_HAMMER_BROS,
 };
 
 #include "world/common/enemy/Kammy_Flying.inc.c"

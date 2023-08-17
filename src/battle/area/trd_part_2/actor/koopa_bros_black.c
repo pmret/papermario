@@ -7,7 +7,7 @@
 enum N(ThisBrosParams) {
     THIS_ACTOR_ID               = ACTOR_ENEMY2,
     THIS_ACTOR_TYPE             = ACTOR_TYPE_BLACK_NINJAKOOPA,
-    THIS_LEVEL                  = 17,
+    THIS_LEVEL                  = ACTOR_LEVEL_BLACK_NINJAKOOPA,
     THIS_SLEEP_CHANCE           = 40,
     THIS_DIZZY_CHANCE           = 30,
     THIS_PARALYZE_CHANCE        = 60,

@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Lakilester) = {
     .height = 32,
     .radius = 24,
-    .level = 20,
+    .level = ACTOR_LEVEL_LAKITU,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

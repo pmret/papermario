@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcAI_FrostPiranha) = {
 NpcSettings N(NpcSettings_FrostPiranha) = {
     .height = 50,
     .radius = 36,
-    .level = 22,
+    .level = ACTOR_LEVEL_FROST_PIRANHA,
     .ai = &N(EVS_NpcAI_FrostPiranha),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
@@ -64,7 +64,7 @@ EvtScript N(EVS_802425A8) = {
 NpcSettings N(NpcSettings_FrostPiranha_Hitbox) = {
     .height = 20,
     .radius = 28,
-    .level = 22,
+    .level = ACTOR_LEVEL_FROST_PIRANHA,
     .ai = &N(EVS_NpcAI_FrostPiranha_Hitbox),
     .onDefeat = &N(EVS_GenericHitboxDefeat),
 };

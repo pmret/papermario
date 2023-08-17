@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
     .radius = 24,
-    .level = 13,
+    .level = ACTOR_LEVEL_CLUBBA,
 };
 
 #define INCLUDE_CLUBBA_WANDER
