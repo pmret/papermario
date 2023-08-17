@@ -19,6 +19,6 @@ EvtScript N(EVS_NpcAI_Yoshi_Patrol) = {
 NpcSettings N(NpcSettings_Yoshi_Patrol) = {
     .height = 48,
     .radius = 32,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_Yoshi_Patrol),
 };

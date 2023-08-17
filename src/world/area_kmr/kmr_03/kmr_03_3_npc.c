@@ -17,7 +17,7 @@ API_CALLABLE(N(func_802401B0_8C8140)) {
 NpcSettings N(NpcSettings_Goompa) = {
     .height = 22,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };
 

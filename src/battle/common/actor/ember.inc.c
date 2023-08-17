@@ -116,7 +116,7 @@ extern EvtScript N(init_8021AEB4);
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_EMBER,
-    .level = 24,
+    .level = ACTOR_LEVEL_EMBER,
     .maxHP = 10,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),

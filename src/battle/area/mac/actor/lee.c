@@ -96,7 +96,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
@@ -517,7 +517,7 @@ extern EvtScript N(init_Goombario);
 ActorBlueprint N(goombario) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_GOOMBARIO,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_GOOMBARIO,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(GoombarioParts)),
     .partsData = N(GoombarioParts),
@@ -1157,7 +1157,7 @@ extern EvtScript N(init_Kooper);
 ActorBlueprint N(kooper) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_KOOPER,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_KOOPER,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(KooperParts)),
     .partsData = N(KooperParts),
@@ -1664,7 +1664,7 @@ extern EvtScript N(init_LeeBombette);
 ActorBlueprint N(bombette) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_BOMBETTE,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_BOMBETTE,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(BombetteParts)),
     .partsData = N(BombetteParts),
@@ -2030,7 +2030,7 @@ extern EvtScript N(init_Parakarry);
 ActorBlueprint N(parakarry) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_PARAKARRY,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_PARAKARRY,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(ParakarryParts)),
     .partsData = N(ParakarryParts),
@@ -2392,7 +2392,7 @@ extern EvtScript N(init_Bow);
 ActorBlueprint N(bow) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_BOW,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_BOW,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(BowParts)),
     .partsData = N(BowParts),
@@ -2844,7 +2844,7 @@ extern EvtScript N(init_Watt);
 ActorBlueprint N(watt) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_WATT,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_WATT,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(WattParts)),
     .partsData = N(WattParts),
@@ -3310,7 +3310,7 @@ extern EvtScript N(init_Sushie);
 ActorBlueprint N(sushie) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_SUSHIE,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_SUSHIE,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(SushieParts)),
     .partsData = N(SushieParts),
@@ -3801,7 +3801,7 @@ extern EvtScript N(init_Lakilester);
 ActorBlueprint N(lakilester) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_LAKILESTER,
-    .level = 0,
+    .level = ACTOR_LEVEL_LEE_LAKILESTER,
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(LakilesterParts)),
     .partsData = N(LakilesterParts),

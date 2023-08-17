@@ -65,13 +65,13 @@ API_CALLABLE(N(DarkenBackground)) {
 NpcSettings N(NpcSettings_Bootler) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(EVS_Bootler_SpookPlayer) = {

@@ -5,7 +5,7 @@
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 s32 N(D_80242944_BACA84)[] = {

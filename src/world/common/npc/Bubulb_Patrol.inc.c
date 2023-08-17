@@ -20,6 +20,6 @@ EvtScript N(EVS_NpcAI_Bubulb_Patrol) = {
 NpcSettings N(NpcSettings_Bubulb_Patrol) = {
     .height = 42,
     .radius = 28,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_Bubulb_Patrol),
 };

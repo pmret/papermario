@@ -8,13 +8,13 @@
 NpcSettings N(NpcSettings_Unused) = {
     .height = 35,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Archeologist_01) = {
     .height = 42,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/GiveReward.inc.c"

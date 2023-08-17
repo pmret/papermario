@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Clubba) = {
     .height = 70,
     .radius = 60,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

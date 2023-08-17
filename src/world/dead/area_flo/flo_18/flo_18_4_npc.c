@@ -9,7 +9,7 @@
 NpcSettings N(NpcSettings_Lakitu) = {
     .height = 32,
     .radius = 24,
-    .level = 20,
+    .level = ACTOR_LEVEL_LAKITU,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -17,7 +17,7 @@ NpcSettings N(NpcSettings_Lakitu) = {
 NpcSettings N(NpcSettings_Magikoopa) = {
     .height = 34,
     .radius = 24,
-    .level = 26,
+    .level = ACTOR_LEVEL_MAGIKOOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Kolorado_01) = {
     .height = 24,
     .radius = 48,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Kolorado.inc.c"

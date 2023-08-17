@@ -842,5 +842,5 @@ NpcSettings N(NpcSettings_Merlee) = {
     .otherAI = &N(EVS_NpcAuxAI_Merlee),
     .onInteract = &N(EVS_NpcInteract_Merlee),
     .ai = &N(EVS_NpcAI_Merlee),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

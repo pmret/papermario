@@ -87,7 +87,7 @@ extern EvtScript N(nextTurn_8022CFFC);
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_THE_MASTER_2,
-    .level = 0,
+    .level = ACTOR_LEVEL_THE_MASTER_2,
     .maxHP = 75,
     .partCount = ARRAY_COUNT( N(ActorParts_8022B790)),
     .partsData = N(ActorParts_8022B790),

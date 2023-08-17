@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Koopatrol_Stationary) = {
     .height = 40,
     .radius = 24,
-    .level = 25,
+    .level = ACTOR_LEVEL_KOOPATROL,
 };

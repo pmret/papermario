@@ -3,7 +3,7 @@
 NpcSettings N(NpcSettings_Nomadimouse) = {
     .height = 22,
     .radius = 25,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/LetterDelivery.inc.c"

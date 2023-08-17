@@ -10,7 +10,7 @@
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

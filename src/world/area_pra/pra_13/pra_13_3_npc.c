@@ -8,7 +8,7 @@
 NpcSettings N(NpcSettings_Player) = {
     .height = 30,
     .radius = 45,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/KeyItemChoice.inc.c"

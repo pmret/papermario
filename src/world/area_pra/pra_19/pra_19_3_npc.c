@@ -13,14 +13,14 @@ NpcSettings N(NpcSettings_Kooper) = {
 NpcSettings N(NpcSettings_Goompa) = {
     .height = 22,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };
 
 NpcSettings N(NpcSettings_KoopaKoot) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Kolorado.inc.c"
@@ -28,7 +28,7 @@ NpcSettings N(NpcSettings_KoopaKoot) = {
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
     .radius = 45,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Luigi.h"

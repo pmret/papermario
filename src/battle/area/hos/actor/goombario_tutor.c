@@ -73,7 +73,7 @@ extern EvtScript N(init_80219160);
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_GOOMBARIO_TUTOR1,
-    .level = 99,
+    .level = ACTOR_LEVEL_GOOMBARIO_TUTOR1,
     .maxHP = 99,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),

@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_BigLanternGhost) = {
     .height = 68,
     .radius = 60,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

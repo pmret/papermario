@@ -7,7 +7,7 @@
 NpcSettings N(NpcSettings_Bzzap_02) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(EVS_NpcAI_Bzzap_02) = {

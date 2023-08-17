@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcAI_Ninji_Wander) = {
 NpcSettings N(NpcSettings_Ninji_Wander) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_Ninji_Wander),
 };
 
@@ -42,7 +42,7 @@ EvtScript N(EVS_NpcAI_ShiverToad_Wander) = {
 NpcSettings N(NpcSettings_ShiverToad_Wander) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_ShiverToad_Wander),
 };
 
@@ -54,13 +54,13 @@ NpcSettings N(NpcSettings_ShiverToad_Wander) = {
 NpcSettings N(NpcSettings_Ninji_Stationary) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_ShiverToad_Stationary) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/GiveReward.inc.c"

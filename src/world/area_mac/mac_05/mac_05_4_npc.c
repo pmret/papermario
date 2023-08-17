@@ -4,7 +4,7 @@
 NpcSettings N(NpcSettings_Whale) = {
     .height = 24,
     .radius = 48,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Kolorado.inc.c"
@@ -12,7 +12,7 @@ NpcSettings N(NpcSettings_Whale) = {
 NpcSettings N(NpcSettings_JrTroopa_01) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Toad_Patrol.inc.c"
@@ -21,7 +21,7 @@ NpcSettings N(NpcSettings_JrTroopa_01) = {
 NpcSettings N(NpcSettings_Unused1) = {
     .height = 48,
     .radius = 32,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo

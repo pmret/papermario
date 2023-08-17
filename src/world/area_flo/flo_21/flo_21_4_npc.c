@@ -18,7 +18,7 @@ NpcSettings N(NpcSettings_TuffPuff) = {
 NpcSettings N(NpcSettings_HuffNPuff) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/StarSpirit.inc.c"

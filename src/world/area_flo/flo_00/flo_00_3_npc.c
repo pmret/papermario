@@ -4,7 +4,7 @@
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Bubulb_Patrol.inc.c"

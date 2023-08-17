@@ -14,7 +14,7 @@ extern EvtScript N(EVS_MerlonBargeOut);
 NpcSettings N(NpcSettings_Ninji) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Twink.inc.c"
@@ -24,7 +24,7 @@ NpcSettings N(NpcSettings_Ninji) = {
 NpcSettings N(NpcSettings_Parakarry) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
@@ -1060,7 +1060,7 @@ NpcSettings N(NpcSettings_Merlon) = {
     .defaultAnim = ANIM_Merlon_Idle,
     .height = 36,
     .radius = 32,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcData N(NpcData_Merlon) = {

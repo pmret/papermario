@@ -4,7 +4,7 @@
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(EVS_NpcAuxAI_Goompa) = {

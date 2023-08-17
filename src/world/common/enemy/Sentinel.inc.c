@@ -115,7 +115,7 @@ EvtScript N(EVS_UnusedSentinelDefeat) = {
 NpcSettings N(NpcSettings_Sentinel) = {
     .height = 38,
     .radius = 32,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_Sentinel),
     .ai = &N(EVS_NpcAI_Sentinel),
 };

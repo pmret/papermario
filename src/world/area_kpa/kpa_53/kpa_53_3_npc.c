@@ -32,7 +32,7 @@ API_CALLABLE(N(UpdateFollowerPosition)) {
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
     .radius = 45,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(EVS_NpcAI_Duplighost_Flee) = {

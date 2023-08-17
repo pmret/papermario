@@ -9,7 +9,7 @@
 NpcSettings N(NpcSettings_Zipline) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/LetterDelivery.inc.c"

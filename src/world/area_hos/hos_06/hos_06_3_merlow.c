@@ -6,13 +6,13 @@ extern IconHudScriptPair gItemHudScripts[];
 NpcSettings N(NpcSettings_Merluvlee) = {
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Merlow) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #define NAME_SUFFIX _Merlow

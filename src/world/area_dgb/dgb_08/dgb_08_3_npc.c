@@ -19,7 +19,7 @@ NpcSettings N(NpcSettings_Yakkey) = {
 NpcSettings N(NpcSettings_LastClubba) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 extern EvtScript N(EVS_NpcAI_Tubba);

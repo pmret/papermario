@@ -11,13 +11,13 @@ enum {
 NpcSettings N(NpcSettings_RipCheato) = {
     .height = 30,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Unused1) = {
     .height = 23,
     .radius = 19,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/GiveReward.inc.c"

@@ -23,20 +23,20 @@ EvtScript N(EVS_NpcAI_StarSpirit_Wander) = {
 NpcSettings N(NpcSettings_StarSpirit_Wander) = {
     .height = 26,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_StarSpirit_Wander),
 };
 
 NpcSettings N(NpcSettings_StarKid_Wander) = {
     .height = 20,
     .radius = 20,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_StarSpirit_Wander),
 };
 
 NpcSettings N(NpcSettings_StarMan_Wander) = {
     .height = 22,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_StarSpirit_Wander),
 };

@@ -11,7 +11,7 @@ NpcSettings N(NpcSettings_Kooper) = {
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
     .radius = 45,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #define INCLUDE_FROST_CLUBBA_WANDER

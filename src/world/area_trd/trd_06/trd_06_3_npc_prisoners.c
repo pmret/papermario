@@ -19,7 +19,7 @@ NpcSettings N(NpcSettings_Bobomb) = {
 NpcSettings N(NpcSettings_KoopaTroopa) = {
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

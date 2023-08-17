@@ -3,7 +3,7 @@
 NpcSettings N(NpcSettings_ParadePeach) = {
     .height = 46,
     .radius = 36,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcData N(NpcData_ParadePeach) = {

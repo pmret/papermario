@@ -3,7 +3,7 @@
 NpcSettings N(NpcSettings_Scenes) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(EVS_NpcInit_Luigi_Scenes) = {

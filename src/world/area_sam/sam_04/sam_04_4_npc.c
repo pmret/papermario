@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Snowman) = {
     .height = 60,
     .radius = 40,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/KeyItemChoice.inc.c"

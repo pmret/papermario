@@ -132,7 +132,7 @@ extern EvtScript N(doDeath_80222F50);
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBA_KING,
-    .level = 49,
+    .level = ACTOR_LEVEL_GOOMBA_KING,
     .maxHP = 10,
     .partCount = ARRAY_COUNT( N(ActorParts_802209C8)),
     .partsData = N(ActorParts_802209C8),

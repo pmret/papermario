@@ -33,7 +33,7 @@ NpcSettings N(NpcSettings_Archeologist_Wander) = {
     .height = 35,
     .radius = 24,
     .ai = &N(EVS_NpcAI_Archeologist),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = ENEMY_AI_FLAG_10,
 };
 
@@ -41,7 +41,7 @@ NpcSettings N(NpcSettings_Archeologist) = {
     .height = 42,
     .radius = 24,
     .ai = &N(EVS_NpcAI_Archeologist),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Dryite_Wander.inc.c"

@@ -43,7 +43,7 @@ EvtScript N(EVS_NpcInteract_HeartPlant) = {
 NpcSettings N(NpcSettings_HeartPlant) = {
     .height = 20,
     .radius = 28,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_HeartPlant),
     .onInteract = &N(EVS_NpcInteract_HeartPlant),
 };

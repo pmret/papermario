@@ -4,13 +4,13 @@
 NpcSettings N(NpcSettings_Dayzee) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Petunia) = {
     .height = 56,
     .radius = 40,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/GiveReward.inc.c"

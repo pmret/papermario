@@ -19,7 +19,7 @@ EvtScript N(EVS_NpcAI_KoopaBros) = {
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 35,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_KoopaBros),
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };
@@ -27,7 +27,7 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 NpcSettings N(NpcSettings_Unused) = {
     .height = 42,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_KoopaBros),
 };
 

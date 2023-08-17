@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Posie) = {
     .height = 56,
     .radius = 40,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

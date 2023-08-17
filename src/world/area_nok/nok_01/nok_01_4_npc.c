@@ -9,13 +9,13 @@
 NpcSettings N(NpcSettings_Unused2) = {
     .height = 35,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Unused3) = {
     .height = 42,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Koopa.inc.c"

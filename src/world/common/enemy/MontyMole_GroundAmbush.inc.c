@@ -73,7 +73,7 @@ EvtScript N(EVS_NpcAI_MontyMole_GroundAmbush) = {
 NpcSettings N(NpcSettings_MontyMole_GroundAmbush) = {
     .height = 24,
     .radius = 22,
-    .level = 8,
+    .level = ACTOR_LEVEL_MONTY_MOLE,
     .otherAI = &N(EVS_NpcAuxAI_MontyMole_GroundAmbush),
     .ai = &N(EVS_NpcAI_MontyMole_GroundAmbush),
     .onHit = &EnemyNpcHit,
@@ -84,7 +84,7 @@ NpcSettings N(NpcSettings_MontyMole_GroundAmbush) = {
 NpcSettings N(NpcSettings_MontyMole_GroundAmbush_Hole) = {
     .height = 24,
     .radius = 22,
-    .level = 8,
+    .level = ACTOR_LEVEL_MONTY_MOLE,
     .otherAI = &N(EVS_NpcAuxAI_MontyMole_GroundAmbush_Hole),
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
 };

@@ -8,7 +8,7 @@
 NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/enemy/SpearGuy_Wander.inc.c"

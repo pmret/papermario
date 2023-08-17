@@ -20,7 +20,7 @@ EvtScript N(EVS_NpcAI_KoopaWithoutShell_Patrol) = {
 NpcSettings N(NpcSettings_KoopaWithoutShell_Patrol) = {
     .height = 35,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_KoopaWithoutShell_Patrol),
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };

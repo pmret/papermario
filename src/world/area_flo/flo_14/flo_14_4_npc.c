@@ -7,7 +7,7 @@
 NpcSettings N(NpcSettings_BubbleFlower) = {
     .height = 56,
     .radius = 40,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Dummy.inc.c"

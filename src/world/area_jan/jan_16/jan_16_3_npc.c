@@ -11,14 +11,14 @@ EvtScript N(EVS_NpcAuxAI_RaphaelRaven) = {
 NpcSettings N(NpcSettings_RaphaelRaven) = {
     .height = 98,
     .radius = 80,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_RaphaelRaven),
 };
 
 NpcSettings N(NpcSettings_Raven) = {
     .height = 26,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(D_802412D4_B812D4) = {

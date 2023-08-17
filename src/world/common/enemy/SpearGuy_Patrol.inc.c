@@ -19,6 +19,6 @@ EvtScript N(EVS_NpcAI_SpearGuy_Patrol) = {
 NpcSettings N(NpcSettings_SpearGuy_Patrol) = {
     .height = 28,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_SpearGuy_Patrol),
 };

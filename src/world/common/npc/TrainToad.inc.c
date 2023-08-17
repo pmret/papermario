@@ -8,6 +8,6 @@ EvtScript N(EVS_NpcAuxAI_TrainToad) = {
 NpcSettings N(NpcSettings_TrainToad) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_TrainToad),
 };

@@ -9,14 +9,14 @@ MAP_RODATA_PAD(1,npc);
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 // Kolorado?
 NpcSettings N(NpcSettings_Unused) = {
     .height = 40,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "npc/lava_piranha.inc.c"

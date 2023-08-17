@@ -9,6 +9,6 @@ EvtScript N(EVS_NpcAuxAI_Bubulb) = {
 NpcSettings N(NpcSettings_Bubulb) = {
     .height = 42,
     .radius = 26,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_Bubulb),
 };

@@ -1224,7 +1224,7 @@ NpcSettings N(NpcSettings_ChuckQuizmo) = {
     .onInteract = &N(EVS_Quizmo_NPC_Interact),
     .aux = &N(EVS_Quizmo_NPC_Aux),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 // alternate (unused?) variant of quizmo with AI and ENEMY_FLAG_IGNORE_WORLD_COLLISION unset
@@ -1237,6 +1237,6 @@ NpcSettings N(Quizmo_AltNpcSettings) = {
     .ai = &N(EVS_Quizmo_Npc_AI),
     .aux = &N(EVS_Quizmo_NPC_Aux),
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = 16,
 };

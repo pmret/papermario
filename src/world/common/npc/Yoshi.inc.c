@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Yoshi) = {
     .height = 48,
     .radius = 32,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

@@ -20,6 +20,6 @@ NpcSettings N(NpcSettings_Dryite_Patrol) = {
     .height = 26,
     .radius = 23,
     .ai = &N(EVS_NpcAI_Dryite_Patrol),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = 16,
 };
