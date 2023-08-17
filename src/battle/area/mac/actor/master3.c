@@ -986,8 +986,8 @@ EvtScript N(handleEvent_80231408) = {
             EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar0)
-                EVT_CASE_OR_EQ(1)
-                EVT_CASE_OR_EQ(0)
+                EVT_CASE_OR_EQ(BTL_MENU_TYPE_SMASH)
+                EVT_CASE_OR_EQ(BTL_MENU_TYPE_JUMP)
                     EVT_SET(LFlag0, TRUE)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
