@@ -42,12 +42,24 @@ enum N(ActorPartIDs) {
     PRT_16              = 16,
 };
 
-enum N(ActorVars) {
+enum N(OldActorVars) {
     N(ACTOR_VAR_SQUAD_APPEARED) = 0,
     N(ACTOR_VAR_TIMES_ATTACKED) = 1,
     N(ACTOR_VAR_WAS_ATTACKED) = 2,
     N(ACTOR_VARS_GUYS_KILLED) = 3,
     N(ACTOR_VAR_TOTAL_DAMAGE) = 4,
+};
+
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
 };
 
 API_CALLABLE(N(GetActorPartSize)) {
@@ -504,9 +516,9 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_ADD(LVar0, 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, N(ACTOR_VAR_TIMES_ATTACKED), LVar0)
                 EVT_IF_GE(LVar0, 2)
-                    EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)
+                    EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_1, LVar0)
                     EVT_BITWISE_OR_CONST(LVar0, 0x1) // set 'squadFleed' flag
-                    EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LVar0)
+                    EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_Unk_1, LVar0)
                     EVT_EXEC_WAIT(N(flee))
                     EVT_RETURN
                 EVT_END_IF
@@ -1429,7 +1441,7 @@ EvtScript N(flee) = {
 
 EvtScript N(next_phase) = {
     EVT_CALL(FreezeBattleState, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_ENEMY1, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_1, 1)
     EVT_RETURN
     EVT_END
 };

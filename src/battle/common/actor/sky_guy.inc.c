@@ -25,6 +25,14 @@ enum N(ActorPartIDs) {
     PRT_6               = 6,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_802294C0)[] = {
     STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim01,
     STATUS_KEY_STONE,     ANIM_SkyGuy_Anim00,
@@ -247,7 +255,7 @@ EvtScript N(init_8022987C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022A9D0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80229A24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022A398)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_4, LVar0, LVar1, LVar2)
@@ -270,11 +278,11 @@ EvtScript N(idle_80229A24) = {
 };
 
 EvtScript N(80229A34) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar2)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar2)
     EVT_IF_NE(LVar2, 0)
         EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_ELSE
-        EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar7, LVar8, LVar9)
         EVT_ADD(LVar8, 20)
         EVT_PLAY_EFFECT(EFFECT_BALLOON, 2, LVar7, LVar8, LVar9, EVT_FLOAT(1.0), 150, 0)
@@ -283,7 +291,7 @@ EvtScript N(80229A34) = {
         EVT_PLAY_EFFECT(EFFECT_BALLOON, 0, LVar7, LVar8, LVar9, EVT_FLOAT(1.0), 150, 0)
         EVT_ADD(LVar7, 28)
         EVT_PLAY_EFFECT(EFFECT_BALLOON, 1, LVar7, LVar8, LVar9, EVT_FLOAT(1.0), 150, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 2)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_5, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
@@ -354,7 +362,7 @@ EvtScript N(80229F08) = {
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_5, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 2)
         EVT_WAIT(15)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_SkyGuy_Anim00)

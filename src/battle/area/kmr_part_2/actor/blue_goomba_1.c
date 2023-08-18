@@ -9,6 +9,15 @@ enum N(ActorPartIDs) {
     PRT_RED_MAIN        = 1, // main part for red goomba
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable_802198B0)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -462,21 +471,21 @@ EvtScript N(takeTurn_8021A5A0) = {
 
 EvtScript N(init_8021B268) = {
     EVT_EXEC_WAIT(N(init_80219A4C))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B2C8)))
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(takeTurn_8021B2C8) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         EVT_CALL(ActorSpeak, MSG_CH0_00BF, ACTOR_SELF, PRT_MAIN, -1, -1)
     EVT_END_IF
     EVT_EXEC_WAIT(N(takeTurn_8021A5A0))

@@ -18,6 +18,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -98,7 +107,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 16)
@@ -106,7 +115,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_ELSE
-        EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
         EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(GetStatusFlags, LVar0, LVar4)
         EVT_IF_FLAG(LVar4, STATUS_FLAG_SHRINK)

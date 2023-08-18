@@ -427,7 +427,7 @@ EvtScript N(watt_takeTurn) = {
         EVT_WAIT(2)
         EVT_CALL(N(SetBackgroundAlpha), 0)
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)

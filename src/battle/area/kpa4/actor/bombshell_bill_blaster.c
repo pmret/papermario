@@ -21,6 +21,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   4,
     ELEMENT_END,
@@ -101,7 +110,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_RETURN
     EVT_END
 };
@@ -176,7 +185,7 @@ EvtScript N(EVS_HandleEvent) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_EXEC_WAIT(N(bulletShot))
@@ -215,17 +224,17 @@ EvtScript N(bulletShot) = {
     EVT_WAIT(2)
     EVT_CALL(ApplyBillSettings)
     EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bill)), FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(wait) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_CALL(ActorExists, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_END_IF
     EVT_RETURN
     EVT_END

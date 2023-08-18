@@ -387,7 +387,7 @@ EvtScript N(EVS_Move_Headbonk) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_WAIT(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_10)
@@ -401,7 +401,7 @@ EvtScript N(EVS_Move_Headbonk) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_SET(LVarA, 24)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_THREAD
@@ -468,7 +468,7 @@ EvtScript N(EVS_Move_Headbonk) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_WAIT(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)

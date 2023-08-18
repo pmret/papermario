@@ -258,7 +258,7 @@ EvtScript N(sushie_takeTurn) = {
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 20)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
                 EVT_SWITCH(LVar0)
                     EVT_CASE_EQ(0)
                         EVT_WAIT(13)
@@ -348,7 +348,7 @@ EvtScript N(sushie_takeTurn) = {
         EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 20)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(0)
                 EVT_WAIT(13)
@@ -402,7 +402,7 @@ EvtScript N(sushie_takeTurn) = {
         EVT_WAIT(3)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVarA)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVarA)
     EVT_SWITCH(LVarA)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)

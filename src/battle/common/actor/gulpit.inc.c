@@ -16,6 +16,14 @@ enum N(ActorPartIDs) {
     PRT_3               = 3,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations1)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim01,
     STATUS_KEY_STONE,     ANIM_Gulpit_Anim00,
@@ -337,7 +345,7 @@ EvtScript N(attack_rock) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EE)
-    EVT_CALL(GetActorVar, LVarA, 0, LVar0)
+    EVT_CALL(GetActorVar, LVarA, AVAR_Unk_0, LVar0)
     EVT_SET(LVarB, LVar0)
     EVT_SWITCH(LVarB)
         EVT_CASE_EQ(0)

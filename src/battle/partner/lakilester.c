@@ -61,6 +61,14 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 typedef struct HurricaneState {
     /* 0x00 */ char unk_00[0x44];
     /* 0x44 */ s16 breathSizeIncrease;
@@ -853,7 +861,7 @@ EvtScript N(spinyFlip) = {
     EVT_ADD(LVar1, 40)
     EVT_ADD(LVar2, 5)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 80 * DT, 0)
-    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 1)
+    EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, 1)
     EVT_THREAD
         EVT_LOOP(40 * DT)
             EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 1, 0, 0)
@@ -862,7 +870,7 @@ EvtScript N(spinyFlip) = {
             EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, -1, 0, 0)
             EVT_CALL(SetPartDispOffset, ACTOR_PARTNER, 2, -1, 0, 0)
             EVT_WAIT(1)
-            EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -872,7 +880,7 @@ EvtScript N(spinyFlip) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(N(SpinyFlipActionCommand))
-    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
@@ -985,7 +993,7 @@ EvtScript N(spinySurge) = {
     EVT_CALL(action_command_spiny_surge_start, 0, LVarB, 3)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, 0)
     EVT_SET(LVar9, 0)
     EVT_SET(LFlag2, FALSE)
     EVT_SET(LFlag3, FALSE)
@@ -1026,13 +1034,13 @@ EvtScript N(spinySurge) = {
                 EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpinyAlt)
                 EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 EVT_CHILD_THREAD
-                    EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
+                    EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
                     EVT_ADD(LVar0, 1)
-                    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, LVar0)
+                    EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
                     EVT_WAIT(15)
-                    EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
+                    EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
                     EVT_SUB(LVar0, 1)
-                    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, LVar0)
+                    EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
                 EVT_END_CHILD_THREAD
                 EVT_SET(LFlag3, TRUE)
                 EVT_SET(LVar9, 0)
@@ -1042,7 +1050,7 @@ EvtScript N(spinySurge) = {
     EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     EVT_LOOP(0)
-        EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF

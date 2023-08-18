@@ -17,6 +17,14 @@ enum N(ActorPartIDs) {
     PRT_3               = 3,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -154,7 +162,7 @@ ActorPartBlueprint N(ActorParts_hole)[] = {
 };
 
 EvtScript N(init_hole) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF

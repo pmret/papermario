@@ -26,6 +26,15 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 EvtScript N(FloatToPos) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
@@ -264,8 +273,8 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(ForceHomePos, ACTOR_SELF, 90, 45, -10)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(2.0), EVT_FLOAT(2.0), EVT_FLOAT(2.0))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
@@ -440,46 +449,46 @@ EvtScript N(onDeath) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(3)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
             EVT_END_IF
         EVT_CASE_EQ(1)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 2)
             EVT_ELSE
                 EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
                 EVT_IF_NE(LVar0, 0)
                     EVT_CALL(ActorExists, ACTOR_ENEMY2, LVar0)
                     EVT_IF_NE(LVar0, 0)
-                        EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
+                        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 2)
                     EVT_END_IF
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 2)
             EVT_EXEC_WAIT(N(makeBabies))
             EVT_RETURN
         EVT_CASE_EQ(2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 3)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 3)
             EVT_EXEC_WAIT(N(getEnraged))
             EVT_RETURN
         EVT_CASE_EQ(3)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
             EVT_EXEC_WAIT(N(attackEnragedDrops))
             EVT_RETURN
         EVT_CASE_DEFAULT
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
                 EVT_CALL(RandInt, 100, LVar0)
                 EVT_IF_LT(LVar0, 50)
                     EVT_EXEC_WAIT(N(attackSpinDrop))
@@ -873,7 +882,7 @@ EvtScript N(attackEnragedDrops) = {
 };
 
 EvtScript N(enrage) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
     EVT_CALL(SetActorPaletteSwapParams, ACTOR_SELF, PRT_MAIN, SPR_PAL_Blooper, SPR_PAL_Blooper_Supercharged, 0, 6, 12, 6, 0, 0)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
@@ -884,7 +893,7 @@ EvtScript N(enrage) = {
 };
 
 EvtScript N(unEnrage) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)

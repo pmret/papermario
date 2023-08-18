@@ -26,6 +26,16 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_E      = 14,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+enum N(OldActorVars) {
     N(VAR_TURN_COUNTER) = 0,
     N(VAR_PEACH_SPOKE) = 1,
 };
@@ -154,7 +164,7 @@ ActorBlueprint NAMESPACE = {
 EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 14, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_E, 0)
     EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
     EVT_CALL(CreateNpc, NPC_BTL_COMPANION, ANIM_ParadePeach_IdleRaisedArms)
     EVT_CALL(SetNpcYaw, NPC_BTL_COMPANION, 90)

@@ -19,6 +19,14 @@ enum N(ActorPartIDs) {
     PRT_3               = 3,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Lakitu_Anim01,
     STATUS_KEY_STONE,     ANIM_Lakitu_Anim00,
@@ -139,7 +147,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -495,9 +503,9 @@ EvtScript N(summonSpiny) = {
     EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, LVarB)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_ADD(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -557,7 +565,7 @@ EvtScript N(calcSummonChance) = {
         EVT_CASE_EQ(ACTOR_TYPE_LAKITU)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, 0, LVar3)
+                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_0, LVar3)
                 EVT_IF_LT(LVar3, 3)
                     EVT_ADD(LVar9, 1)
                 EVT_END_IF
@@ -572,7 +580,7 @@ EvtScript N(calcSummonChance) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_GE(LVar0, 3)
         EVT_EXEC_WAIT(N(attackSpinyFlip))
         EVT_RETURN

@@ -10,6 +10,25 @@ enum N(ActorPartIDs) {
     PRT_3               = 3,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_6      = 6,
+    AVAR_Unk_7      = 7,
+    AVAR_Unk_8      = 8,
+    AVAR_Unk_9      = 9,
+    AVAR_Unk_A      = 10,
+    AVAR_Unk_B      = 11,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -223,7 +242,7 @@ EvtScript N(8021D784) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(N(GetSelectedMoveID), LVar0)
@@ -234,7 +253,7 @@ EvtScript N(8021D784) = {
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
                 EVT_END_IF
             EVT_END_CASE_GROUP
         EVT_END_SWITCH
@@ -250,7 +269,7 @@ EvtScript N(8021D784) = {
 extern EvtScript N(handleEvent_8021E6D8);
 
 EvtScript N(8021D890) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Magikoopa_Anim04)
         EVT_GOTO(0)
@@ -360,9 +379,9 @@ EvtScript N(runAway) = {
 };
 
 EvtScript N(nextTurn_8021E0B0) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_BITWISE_AND_CONST(LVar0, -2) // TODO
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -378,18 +397,18 @@ EvtScript N(init_8021E100) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 7, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 9, -1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, -1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_6, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_7, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_9, -1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, -1)
     EVT_RETURN
     EVT_END
 };
@@ -404,33 +423,33 @@ EvtScript N(init_8021E2C0) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 7, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 9, -1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, -1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_6, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_7, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_9, -1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, -1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(8021E46C) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 9, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_9, LVar0)
     EVT_CALL(ActorExists, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
     EVT_CALL(GetLastElement, LVarA)
     EVT_IF_FLAG(LVarA, DAMAGE_TYPE_MULTIPLE_POPUPS)
         EVT_LABEL(0)
@@ -440,8 +459,8 @@ EvtScript N(8021E46C) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 9, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 9, -1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_9, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_9, -1)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, ACTOR_FLAG_FLYING)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
@@ -468,9 +487,9 @@ EvtScript N(handleEvent_8021E6D8) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(9)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_BITWISE_OR_CONST(LVar0, 1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -519,7 +538,7 @@ EvtScript N(handleEvent_8021E6D8) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_IF_FLAG(LVar0, 1)
                 EVT_EXEC_WAIT(N(8021E46C))
                 EVT_RETURN
@@ -595,9 +614,9 @@ EvtScript N(handleEvent_8021EDF0) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(9)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_BITWISE_OR_CONST(LVar0, 1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_EXEC_WAIT(N(8021D784))
             EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
@@ -658,7 +677,7 @@ EvtScript N(handleEvent_8021EDF0) = {
             EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_IF_FLAG(LVar0, 1)
                 EVT_EXEC_WAIT(N(8021E46C))
                 EVT_RETURN
@@ -738,9 +757,9 @@ EvtScript N(handleEvent_8021EDF0) = {
 };
 
 EvtScript N(healOne) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 0)
-    EVT_CALL(AddActorVar, ACTOR_SELF, 4, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 0)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_4, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -818,9 +837,9 @@ EvtScript N(healOne) = {
 };
 
 EvtScript N(healAll) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 1)
-    EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 1)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -881,7 +900,7 @@ EvtScript N(healAll) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 71)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -917,13 +936,13 @@ EvtScript N(healAll) = {
 };
 
 EvtScript N(shapeSpell) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 2)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 2)
     EVT_SET(LFlag0, FALSE)
     EVT_SET(LFlag1, FALSE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 10, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_A, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_SET(LFlag0, TRUE)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 9, LVarA)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_9, LVarA)
     EVT_END_IF
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, ACTOR_FLAG_FLYING)
@@ -1196,14 +1215,14 @@ EvtScript N(handleEvent_8022142C) = {
 
 EvtScript N(init_8022143C) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022142C)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(init_80221478) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022142C)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_RETURN
     EVT_END
 };
@@ -1360,8 +1379,8 @@ EvtScript N(makeCopy) = {
         EVT_EXEC_WAIT(N(runAway))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 3)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 3)
     EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, ACTOR_FLAG_FLYING)
@@ -1372,7 +1391,7 @@ EvtScript N(makeCopy) = {
     EVT_ELSE
         EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216E4)), FALSE)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 9, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_9, LVar0)
     EVT_SET(LVarA, LVar0)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(EnableIdleScript, LVarA, 0)
@@ -1488,9 +1507,9 @@ EvtScript N(boostAttack) = {
     EVT_EXEC_WAIT(N(shapeSpell))
     EVT_RETURN
     EVT_LABEL(100)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 4)
-    EVT_CALL(AddActorVar, ACTOR_SELF, 5, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 4)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_5, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1600,9 +1619,9 @@ EvtScript N(boostDefense) = {
     EVT_EXEC_WAIT(N(shapeSpell))
     EVT_RETURN
     EVT_LABEL(100)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 5)
-    EVT_CALL(AddActorVar, ACTOR_SELF, 6, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 5)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_6, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1712,9 +1731,9 @@ EvtScript N(electrify) = {
     EVT_EXEC_WAIT(N(shapeSpell))
     EVT_RETURN
     EVT_LABEL(100)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 6)
-    EVT_CALL(AddActorVar, ACTOR_SELF, 7, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 6)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_7, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1829,9 +1848,9 @@ EvtScript N(vanish) = {
     EVT_EXEC_WAIT(N(shapeSpell))
     EVT_RETURN
     EVT_LABEL(100)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 10, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 11, 7)
-    EVT_CALL(AddActorVar, ACTOR_SELF, 8, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_B, 7)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1910,7 +1929,7 @@ EvtScript N(takeTurn_80223B24) = {
         EVT_EXEC_WAIT(N(shapeSpell))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 10, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_A, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_GOTO(20)
     EVT_END_IF
@@ -1922,7 +1941,7 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 71)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -1956,7 +1975,7 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 71)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -1990,7 +2009,7 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 71)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -2024,7 +2043,7 @@ EvtScript N(takeTurn_80223B24) = {
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVarA, 1)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
         EVT_IF_LT(LVar0, 0)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 0)
@@ -2032,7 +2051,7 @@ EvtScript N(takeTurn_80223B24) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_ELSE
-            EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
             EVT_IF_LT(LVar0, 0)
                 EVT_CALL(RandInt, 1000, LVar0)
                 EVT_IF_LT(LVar0, 0)
@@ -2042,7 +2061,7 @@ EvtScript N(takeTurn_80223B24) = {
             EVT_END_IF
         EVT_END_IF
     EVT_ELSE
-        EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
         EVT_IF_LT(LVar0, 0)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 0)
@@ -2050,7 +2069,7 @@ EvtScript N(takeTurn_80223B24) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_ELSE
-            EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
             EVT_IF_LT(LVar0, 0)
                 EVT_SETF(LVar9, EVT_FLOAT(100.0))
                 EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
@@ -2060,7 +2079,7 @@ EvtScript N(takeTurn_80223B24) = {
                 EVT_CALL(GetOwnerTarget, LVar0, LVar1)
                 EVT_CALL(GetOriginalActorType, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, 71)
-                    EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+                    EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
                     EVT_IF_EQ(LVar1, 1)
                         EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
@@ -2094,7 +2113,7 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_SET(LVarD, 0)
     EVT_SET(LVarE, 0)
     EVT_SET(LVarF, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 10, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_A, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_SET(LVarA, 100)
         EVT_SET(LVarB, 0)
@@ -2113,10 +2132,10 @@ EvtScript N(takeTurn_80223B24) = {
     EVT_IF_NE(LVar0, 0)
         EVT_SET(LVarB, 0)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 11, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_B, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(4)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_5, LVar1)
             EVT_IF_LT(LVar1, 0)
                 EVT_CALL(RandInt, 99, LVar0)
                 EVT_ADD(LVar0, 1)
@@ -2130,7 +2149,7 @@ EvtScript N(takeTurn_80223B24) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(5)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_6, LVar1)
             EVT_IF_LT(LVar1, 0)
                 EVT_CALL(RandInt, 99, LVar0)
                 EVT_ADD(LVar0, 1)
@@ -2144,19 +2163,19 @@ EvtScript N(takeTurn_80223B24) = {
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_5, LVar0)
     EVT_IF_GE(LVar0, 0)
         EVT_SET(LVarC, 0)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_6, LVar0)
     EVT_IF_GE(LVar0, 0)
         EVT_SET(LVarD, 0)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 7, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_7, LVar0)
     EVT_IF_GE(LVar0, 0)
         EVT_SET(LVarE, 0)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_IF_GE(LVar0, 0)
         EVT_SET(LVarF, 0)
     EVT_END_IF

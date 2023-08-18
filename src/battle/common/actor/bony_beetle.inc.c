@@ -24,6 +24,17 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_8      = 8,
+    AVAR_Unk_9      = 9,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+enum N(OldActorVars) {
     N(VAR_WAS_HIT) = 1,
     N(VAR_STATE) = 8,
     N(VAR_FLIP_TRIGGERED) = 9,
@@ -162,7 +173,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar1)
     EVT_IF_EQ(LVar0, 1)
         EVT_IF_EQ(LVar1, 1)

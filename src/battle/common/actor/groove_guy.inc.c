@@ -24,6 +24,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_802249E0)[] = {
     STATUS_KEY_NORMAL,    ANIM_GrooveGuy_Anim01,
     STATUS_KEY_STONE,     ANIM_GrooveGuy_Anim00,
@@ -112,7 +120,7 @@ EvtScript N(init_80224B38) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80226338)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80224B9C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224D10)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -501,7 +509,7 @@ EvtScript N(countActiveSummoners) = {
         EVT_CASE_EQ(ACTOR_TYPE_GROOVE_GUY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, 0, LVar3)
+                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_0, LVar3)
                 EVT_IF_NE(LVar3, 2)
                     EVT_ADD(LVar9, 1)
                 EVT_END_IF
@@ -516,7 +524,7 @@ EvtScript N(countActiveSummoners) = {
 };
 
 EvtScript N(takeTurn_80226338) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 2)
         EVT_CALL(RandInt, 100, LVar0)
         EVT_IF_LT(LVar0, 60)
@@ -775,12 +783,12 @@ EvtScript N(80226DEC) = {
     EVT_CALL(HPBarToHome, LVarB)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, LVarB, 0, 1)
+            EVT_CALL(SetActorVar, LVarB, AVAR_Unk_0, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, LVarB, 0, 2)
+            EVT_CALL(SetActorVar, LVarB, AVAR_Unk_0, 2)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

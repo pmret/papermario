@@ -10,6 +10,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_80219010)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Idle,
     STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
@@ -102,7 +110,7 @@ EvtScript N(init_80219160) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219444)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802191D0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802191E0)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EVT_EXEC(N(80219C74))
     EVT_RETURN
     EVT_END
@@ -120,7 +128,7 @@ EvtScript N(handleEvent_802191E0) = {
         EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(10)
-                EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
                 EVT_IF_EQ(LVar0, 0)
                     EVT_CALL(RandInt, 2, LVar0)
                     EVT_SWITCH(LVar0)
@@ -227,7 +235,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetDamageSource, DMG_SRC_TUTORIAL_GOOMBARIO)
     EVT_END_IF
@@ -488,7 +496,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, MSG_HOS_0028, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, FALSE)
     EVT_LABEL(10)
     EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP | BTL_MENU_ENABLED_SMASH | BTL_MENU_ENABLED_STRATEGIES)

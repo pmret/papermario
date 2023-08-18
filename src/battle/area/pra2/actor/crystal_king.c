@@ -7,6 +7,22 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_6      = 6,
+    AVAR_Unk_7      = 7,
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 enum N(StatusFlags) {
     N(FLAG_IGNORE_IMMUNE)           = 0x01,
     N(FLAG_LOW_HP)                  = 0x02,
@@ -25,7 +41,7 @@ enum N(Phase) {
     N(PHASE_ATTACKED_WITH_CLONES)   = 5,
 };
 
-enum N(ActorVars) {
+enum N(OldActorVars) {
     N(VAR_FLAGS)            = 0,
     N(VAR_PHASE)            = 1,
     N(VAR_CLONE1_ID)        = 2,
@@ -1795,7 +1811,7 @@ EvtScript N(RemoveCrystalBit) = {
     EVT_CALL(SetActorSpeed, LVarA, EVT_FLOAT(16.0))
     EVT_CALL(SetGoalPos, LVarA, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, LVarA, 0, 0, EASING_LINEAR)
-    EVT_CALL(GetActorVar, LVarA, 0, LVarF)
+    EVT_CALL(GetActorVar, LVarA, AVAR_Unk_0, LVarF)
     EVT_CALL(RemoveEffect, LVarF)
     EVT_CALL(RemoveActor, LVarA)
     EVT_RETURN
@@ -1837,7 +1853,7 @@ EvtScript N(AttackWithCrystalBit) = {
     EVT_ADD(LVar2, LVar4)
     EVT_CALL(SetGoalPos, LVarA, LVar1, LVar2, LVar3)
     EVT_CALL(JumpToGoal, LVarA, 20, FALSE, TRUE, FALSE)
-    EVT_CALL(GetActorVar, LVarA, 0, LVarF)
+    EVT_CALL(GetActorVar, LVarA, AVAR_Unk_0, LVarF)
     EVT_CALL(RemoveEffect, LVarF)
     EVT_CALL(RemoveActor, LVarA)
     EVT_RETURN

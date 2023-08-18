@@ -15,6 +15,16 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleTubba_Anim02,
     STATUS_KEY_STONE,     ANIM_BattleTubba_Anim00,
@@ -103,10 +113,10 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_EXEC_GET_TID(N(shakeCam), LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
     EVT_RETURN
     EVT_END
 };
@@ -210,17 +220,17 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_SET(LVar0, 220)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
         EVT_KILL_THREAD(LVar0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
         EVT_CALL(SetEndBattleFadeOutRate, 10)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(EnableBattleStatusBar, FALSE)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 2)
         EVT_CALL(ActorSpeak, MSG_CH3_0103, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim09, ANIM_BattleTubba_Anim02)
         EVT_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim15)

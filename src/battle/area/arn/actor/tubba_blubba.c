@@ -16,6 +16,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_80225C40)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleTubba_Anim01,
     STATUS_KEY_STONE,     ANIM_BattleTubba_Anim00,
@@ -102,7 +110,7 @@ EvtScript N(init_80225D98) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802264AC)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80225F58)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802260D0)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_EXEC(N(80225E08))
     EVT_RETURN
     EVT_END
@@ -145,7 +153,7 @@ EvtScript N(idle_80225F58) = {
 };
 
 EvtScript N(80225F8C) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF

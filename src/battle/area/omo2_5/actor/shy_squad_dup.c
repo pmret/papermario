@@ -41,6 +41,16 @@ enum N(ActorPartIDs) {
     PRT_16              = 16,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_F      = 15,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -306,9 +316,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 15, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_F, 0)
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 0, -20)
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 1, -10)
     EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 0, -10)
@@ -466,7 +476,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(move_guy_to_pos) = {
     EVT_SET(LVarA, 2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarB)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVarB)
     EVT_ADD(LVarA, LVarB)
     EVT_IF_LT(LVar0, LVarA)
         EVT_RETURN
@@ -490,8 +500,8 @@ EvtScript N(move_guy_to_pos) = {
 EvtScript N(onSpinSmash) = {
     EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarD)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVarE)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVarD)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVarE)
         EVT_ADD(LVarD, 2)
         EVT_ADD(LVarD, LVarE)
         EVT_IF_GE(LVar0, LVarD)
@@ -676,8 +686,8 @@ EvtScript N(displace_guy) = {
 EvtScript N(onShock) = {
     EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarD)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVarE)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVarD)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVarE)
         EVT_ADD(LVarD, 2)
         EVT_ADD(LVarD, LVarE)
         EVT_IF_GE(LVar0, LVarD)
@@ -844,16 +854,16 @@ EvtScript N(EVS_HandleEvent) = {
 EvtScript N(onHit) = {
     EVT_SET(LVar1, LVar1)
     EVT_EXEC_WAIT(N(set_squad_animation))
-    EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar1)
     EVT_ADD(LVar0, LVar1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
     EVT_LABEL(0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar1)
     EVT_IF_GE(LVar1, 15)
         EVT_RETURN
     EVT_END_IF
@@ -900,12 +910,12 @@ EvtScript N(onHit) = {
             EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
     EVT_SUB(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
     EVT_ADD(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
     EVT_GOTO(0)
     EVT_RETURN
     EVT_END
@@ -913,7 +923,7 @@ EvtScript N(onHit) = {
 
 EvtScript N(set_squad_animation) = {
     EVT_SET(LVar2, 2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
     EVT_LOOP(15)
         EVT_IF_EQ(LVar0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, LVar2, LVar1)
@@ -966,8 +976,8 @@ EvtScript N(80233E48) = {
 EvtScript N(onDeath) = {
     EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(14)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar3)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar2)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar3)
         EVT_ADD(LVar2, 2)
         EVT_ADD(LVar2, LVar3)
         EVT_IF_GE(LVar0, LVar2)
@@ -1025,23 +1035,23 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(next_phase) = {
     EVT_CALL(FreezeBattleState, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_ENEMY1, 4, 1)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_4, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(run_away) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 15, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_F, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_SET(LVar0, 2)
     EVT_SET(LVar1, 0)
     EVT_LOOP(15)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar2)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar2)
         EVT_ADD(LVar2, 2)
         EVT_IF_GE(LVar0, LVar2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 15, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_F, 1)
             EVT_THREAD
                 EVT_WAIT(LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim03)
@@ -1049,20 +1059,20 @@ EvtScript N(run_away) = {
                 EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, 55, 0, 47, 20)
                 EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, 185, 0, 47, 30)
                 EVT_IF_EQ(LVar0, 16)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 15, 2)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_F, 2)
                 EVT_END_IF
             EVT_END_THREAD
             EVT_ADD(LVar1, 5)
         EVT_END_IF
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
-    EVT_CALL(GetActorVar, ACTOR_SELF, 15, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_F, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 15, 2)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_F, 2)
     EVT_END_IF
     EVT_SET(LVar0, 15)
     EVT_LOOP(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 15, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_F, LVar0)
         EVT_IF_EQ(LVar0, 2)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -1129,7 +1139,7 @@ EvtScript N(attack) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
             EVT_IF_LT(LVar0, 14)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
                 EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
@@ -1156,7 +1166,7 @@ EvtScript N(attack) = {
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_SET(LVarE, 15)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
     EVT_SUB(LVarE, LVar0)
     EVT_SET(LVarD, LVarE)
     EVT_LOOP(LVarD)

@@ -19,6 +19,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable_8021E9D0)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_FIRE,     0,
@@ -105,7 +114,7 @@ EvtScript N(init_8021EB28) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221628)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021EB8C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EB9C)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -286,12 +295,12 @@ EvtScript N(divide) = {
     EVT_CALL(ForceHomePos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(HPBarToHome, LVar0)
     EVT_CALL(SetAnimation, LVar0, 1, ANIM_Fuzzy_Jungle_Idle)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar1)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, LVar0, 0, 1)
+            EVT_CALL(SetActorVar, LVar0, AVAR_Unk_0, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, LVar0, 0, 2)
+            EVT_CALL(SetActorVar, LVar0, AVAR_Unk_0, 2)
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -767,7 +776,7 @@ EvtScript N(80221468) = {
         EVT_CASE_OR_EQ(ACTOR_TYPE_JUNGLE_FUZZY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, 0, LVar3)
+                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_0, LVar3)
                 EVT_IF_NE(LVar3, 2)
                     EVT_ADD(LVar9, 1)
                 EVT_END_IF
@@ -776,7 +785,7 @@ EvtScript N(80221468) = {
         EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, 1, LVar3)
+                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_1, LVar3)
                 EVT_IF_LT(LVar3, 2)
                     EVT_ADD(LVar9, 1)
                 EVT_END_IF
@@ -796,7 +805,7 @@ EvtScript N(takeTurn_80221628) = {
         EVT_EXEC_WAIT(N(leechAttack))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 2)
         EVT_EXEC_WAIT(N(leechAttack))
         EVT_RETURN

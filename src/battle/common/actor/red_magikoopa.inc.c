@@ -22,6 +22,14 @@ enum N(ActorPartIDs) {
     PRT_3               = 3,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -320,7 +328,7 @@ EvtScript N(canBeKnockedOff) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(N(GetSelectedMoveID), LVar0)
@@ -331,7 +339,7 @@ EvtScript N(canBeKnockedOff) = {
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
                 EVT_END_IF
             EVT_END_CASE_GROUP
         EVT_END_SWITCH
@@ -341,7 +349,7 @@ EvtScript N(canBeKnockedOff) = {
 };
 
 EvtScript N(knockOff) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Magikoopa_Red_Anim04)
         EVT_GOTO(0)
@@ -768,7 +776,7 @@ EvtScript N(EVS_Init) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -781,7 +789,7 @@ EvtScript N(init_flying) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };

@@ -352,7 +352,7 @@ EvtScript N(lakilester_takeTurn) = {
         EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_SPINY, LVar0, 0, LVar2, 15, TRUE)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_SPINY, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)

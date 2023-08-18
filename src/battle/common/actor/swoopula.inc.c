@@ -18,6 +18,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -116,7 +125,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_RETURN
     EVT_END
 };
@@ -127,7 +136,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
@@ -254,7 +263,7 @@ EvtScript N(knockDown) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarA)
     EVT_IF_EQ(LVarA, -1)
         EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, 45, LVar2)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
@@ -281,13 +290,13 @@ EvtScript N(knockDown) = {
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flying)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, TRUE)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(hadleEvent_flying))
         EVT_RETURN
@@ -889,7 +898,7 @@ EvtScript N(takeTurn_flying) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(takeTurn_flying))
         EVT_RETURN

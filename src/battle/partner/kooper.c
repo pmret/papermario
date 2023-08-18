@@ -30,6 +30,15 @@ enum N(ActorPartIDs) {
     PRT_ZERO            = 0,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 API_CALLABLE(N(SlowDown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
@@ -793,7 +802,7 @@ EvtScript N(powerShell) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200B)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
@@ -807,7 +816,7 @@ EvtScript N(powerShell) = {
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, LVarA)
         EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
     EVT_END_THREAD
     EVT_SET(LFlag0, FALSE)
@@ -856,7 +865,7 @@ EvtScript N(powerShell) = {
         EVT_END_SWITCH
     EVT_END_IF
     EVT_LABEL(11)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_WAIT(1)
         EVT_GOTO(11)
@@ -902,7 +911,7 @@ EvtScript N(dizzyShell) = {
     EVT_SET(LVarA, EVT_FLOAT(8.0))
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_DIZZY_SHELL)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 1, ACTOR_DECORATION_WHIRLWIND)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_SET(LVar9, 1)
     EVT_LOOP(LVarD)
         EVT_WAIT(1)
@@ -959,12 +968,12 @@ EvtScript N(dizzyShell) = {
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(12.0))
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, 0, EASING_QUARTIC_OUT)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(SetTargetsYaw))
     EVT_END_THREAD
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_WAIT(1)
@@ -1025,7 +1034,7 @@ EvtScript N(dizzyShell) = {
         EVT_END_SWITCH
     EVT_END_IF
     EVT_LABEL(11)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_WAIT(1)
         EVT_GOTO(11)
@@ -1066,7 +1075,7 @@ EvtScript N(fireShell) = {
     EVT_SET(LVarC, LVarD)
     EVT_ADD(LVarC, -3)
     EVT_CALL(action_command_fire_shell_start, 0, LVarC, 3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_SET(LVarA, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200C)
@@ -1074,7 +1083,7 @@ EvtScript N(fireShell) = {
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_RED_FLAMES)
     EVT_WAIT(1)
     EVT_CALL(ModifyActorDecoration, ACTOR_PARTNER, -1, 0, 10, 10, 255, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, SPR_PAL_BattleKooper, SPR_PAL_BattleKooper, 1, 10, 1000, 10, 0, 0)
     EVT_CALL(func_8026ED20, ACTOR_PARTNER, 0, 1)
@@ -1208,9 +1217,9 @@ EvtScript N(fireShell) = {
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(12.0))
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, 0, EASING_QUARTIC_OUT)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EVT_END_THREAD
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_WAIT(1)
@@ -1258,7 +1267,7 @@ EvtScript N(fireShell) = {
         EVT_END_SWITCH
     EVT_END_IF
     EVT_LABEL(11)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_WAIT(1)
         EVT_GOTO(11)

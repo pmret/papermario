@@ -21,6 +21,16 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 EvtScript N(FloatToPos) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
@@ -275,9 +285,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(ForceHomePos, ACTOR_SELF, 90, 45, -10)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.0))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
     EVT_EXEC(N(updateEffect))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
@@ -292,11 +302,11 @@ EvtScript N(updateEffect) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_NE(LVar0, 1)
         EVT_GOTO(99)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_GOTO(99)
     EVT_END_IF
@@ -487,20 +497,20 @@ EvtScript N(onDeath) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
         EVT_EXEC_WAIT(N(attackElectricDrop))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(electricCharge))
         EVT_RETURN
     EVT_ELSE
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LT(LVar0, 50)
                 EVT_EXEC_WAIT(N(attackSpinDrop))
@@ -849,11 +859,11 @@ EvtScript N(attackInkBlast) = {
 };
 
 EvtScript N(charge) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -864,7 +874,7 @@ EvtScript N(charge) = {
         EVT_SETF(LVar3, EVT_FLOAT(0.64))
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, LVar3, -1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, LVarF)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, LVarF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
     EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
@@ -875,16 +885,16 @@ EvtScript N(charge) = {
 };
 
 EvtScript N(discharge) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_NE(LVar0, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(RemoveEffect, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_END_IF
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)

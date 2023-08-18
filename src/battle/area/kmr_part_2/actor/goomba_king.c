@@ -14,6 +14,20 @@ enum N(ActorPartIDs) {
     PRT_TREE_5          = 5,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_6      = 6,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_80220800)[] = {
     STATUS_KEY_NORMAL,    ANIM_GoombaKing_Idle,
     STATUS_KEY_STONE,     ANIM_GoombaKing_Still,
@@ -168,13 +182,13 @@ EvtScript N(init_80220A38) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80220F34)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_802229C4)))
     EVT_EXEC_GET_TID(N(80222D9C), LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_6, 0)
     EVT_RETURN
     EVT_END
 };
@@ -275,7 +289,7 @@ EvtScript N(handleEvent_80220F34) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
@@ -292,7 +306,7 @@ EvtScript N(handleEvent_80220F34) = {
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
@@ -304,7 +318,7 @@ EvtScript N(handleEvent_80220F34) = {
             EVT_SET_CONST(LVar2, ANIM_GoombaKing_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_WAIT(10)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_BurnStill)
@@ -314,7 +328,7 @@ EvtScript N(handleEvent_80220F34) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
             EVT_KILL_THREAD(LVar0)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
@@ -353,12 +367,12 @@ EvtScript N(takeTurn_80221530) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, 0x80000)
-        EVT_CALL(GetActorVar, ACTOR_ENEMY3, 6, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_ENEMY3, AVAR_Unk_6, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_CALL(RandInt, 100, LVar1)
             EVT_IF_LT(LVar1, 60)
                 EVT_SUB(LVar0, 1)
-                EVT_CALL(SetActorVar, ACTOR_ENEMY3, 6, LVar0)
+                EVT_CALL(SetActorVar, ACTOR_ENEMY3, AVAR_Unk_6, LVar0)
                 EVT_EXEC_WAIT(N(80221CD4))
                 EVT_RETURN
             EVT_END_IF
@@ -645,7 +659,7 @@ EvtScript N(nextTurn_802229C4) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(10)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
@@ -671,7 +685,7 @@ EvtScript N(nextTurn_802229C4) = {
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
                 EVT_CALL(ActorSpeak, MSG_CH0_00CD, ACTOR_ENEMY0, PRT_MAIN, ANIM_GoombaKing_Angry, ANIM_GoombaKing_Angry)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
                 EVT_CALL(MoveBattleCamOver, 10)
@@ -711,7 +725,7 @@ EvtScript N(80222D9C) = {
     EVT_CALL(StartRumble, 1)
     EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, 0x80000)

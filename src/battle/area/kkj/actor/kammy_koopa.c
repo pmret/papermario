@@ -19,6 +19,15 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim05,
     STATUS_END,
@@ -115,8 +124,8 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -388,7 +397,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -416,7 +425,7 @@ EvtScript N(EVS_HandlePhase) = {
                     EVT_CALL(ActorSpeak, MSG_CH8_0095, ACTOR_PLAYER, 1, ANIM_BattleParakarry_EnterShell, ANIM_BattleParakarry_ShellFly)
                     EVT_WAIT(10)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-                    EVT_CALL(AddActorVar, ACTOR_SELF, 0, 1)
+                    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
             EVT_END_SWITCH
         EVT_CASE_EQ(12)
     EVT_END_SWITCH
@@ -428,7 +437,7 @@ EvtScript N(EVS_HandlePhase) = {
 EvtScript N(speakOnHit) = {
     EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(10)
@@ -464,7 +473,7 @@ EvtScript N(speakOnHit) = {
         EVT_CASE_OR_EQ(3)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(1)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_IF_EQ(LVar0, 2)
                 EVT_BREAK_SWITCH
             EVT_END_IF
@@ -479,10 +488,10 @@ EvtScript N(speakOnHit) = {
             EVT_WAIT(10)
             EVT_CALL(FreezeBattleCam, FALSE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(AddActorVar, ACTOR_SELF, 0, 1)
+            EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN

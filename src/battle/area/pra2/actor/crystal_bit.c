@@ -14,6 +14,17 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_6      = 6,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_1)[] = {
     STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0A,
     STATUS_END,
@@ -243,7 +254,7 @@ API_CALLABLE(UpdateCrystalBitEffect) {
 
 EvtScript N(EVS_Idle) = {
     EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UpdateCrystalBitEffect, LVarF)
     EVT_END_CHILD_THREAD
@@ -266,19 +277,19 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 4, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_4, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 5, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_5, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 6, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_6, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
@@ -303,15 +314,15 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 4, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_4, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 5, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_5, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 6, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_6, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
             EVT_END_IF
@@ -333,25 +344,25 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 4, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_4, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 5, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_5, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, 6, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_6, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
@@ -382,12 +393,12 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_RETURN
         EVT_CASE_DEFAULT

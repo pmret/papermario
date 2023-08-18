@@ -16,6 +16,16 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 EvtScript N(FloatToPos) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
@@ -226,9 +236,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(FlyToGoal, ACTOR_SELF, 8, 0, EASING_LINEAR)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_CALL(N(StartRumbleWithParams), 80, 20)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar1)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar2)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

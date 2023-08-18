@@ -20,6 +20,19 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_80223BC0)[] = {
     STATUS_KEY_NORMAL,    ANIM_TubbasHeart_Anim01,
     STATUS_KEY_STONE,     ANIM_TubbasHeart_Anim00,
@@ -131,12 +144,12 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(init_80223DA0) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802245C8)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E98)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224038)))
@@ -166,7 +179,7 @@ EvtScript N(idle_80223E98) = {
     EVT_LABEL(0)
     EVT_CALL(ActorExists, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, FALSE)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
         EVT_IF_NE(LVar0, 0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar4)
@@ -188,7 +201,7 @@ EvtScript N(idle_80223E98) = {
 
 EvtScript N(80223FD8) = {
     EVT_SET(LVar1, 7077902)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_SET(LVar1, 7077899)
     EVT_END_IF
@@ -234,7 +247,7 @@ EvtScript N(handleEvent_80224038) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET(LVar1, 7077889)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_SET(LVar1, 7077899)
             EVT_END_IF
@@ -309,13 +322,13 @@ EvtScript N(takeTurn_802245C8) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_IF_NE(LVar0, HIT_RESULT_MISS)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
         EVT_IF_NOT_FLAG(LVar0, 0x00000001)
             EVT_CALL(GetCurrentPartnerID, LVar0)
             EVT_IF_EQ(LVar0, 9)
                 EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_BITWISE_OR_CONST(LVar0, 0x3)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 2, LVar0)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(MoveBattleCamOver, 40)
@@ -333,9 +346,9 @@ EvtScript N(takeTurn_802245C8) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
                 EVT_CALL(MoveBattleCamOver, 30)
-                EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
                 EVT_IF_EQ(LVar0, 0)
-                    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+                    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
                     EVT_IF_NE(LVar0, 0)
                         EVT_CALL(EnableBattleStatusBar, TRUE)
                     EVT_END_IF
@@ -345,12 +358,12 @@ EvtScript N(takeTurn_802245C8) = {
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(MoveBattleCamOver, 40)
@@ -358,31 +371,31 @@ EvtScript N(takeTurn_802245C8) = {
                 EVT_CALL(ActorSpeak, MSG_CH3_00C5, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim0B, ANIM_TubbasHeart_Anim01)
             EVT_END_IF
             EVT_EXEC_WAIT(N(80225258))
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
             EVT_IF_FLAG(LVar0, 0x00000002)
                 EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
         EVT_CASE_EQ(1)
             EVT_EXEC_WAIT(N(802255D8))
-            EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar1)
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_5, LVar1)
                 EVT_ADD(LVar1, 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 5, LVar1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, LVar1)
                 EVT_IF_GE(LVar1, 2)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 2)
                 EVT_ELSE
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
             EVT_EXEC_WAIT(N(80224B3C))
     EVT_END_SWITCH
-    EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
     EVT_BITWISE_AND_CONST(LVar0, -3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -513,7 +526,7 @@ EvtScript N(80225258) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar4)
     EVT_IF_NOT_FLAG(LVar4, STATUS_FLAG_SHRINK)
@@ -524,7 +537,7 @@ EvtScript N(80225258) = {
         EVT_SETF(LVar3, EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar0, LVar1, LVar2, LVar3, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVarF)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, LVarF)
     EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80223C1C)))
     EVT_RETURN
@@ -559,14 +572,14 @@ EvtScript N(802255D8) = {
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_SUB(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
         EVT_CALL(RemoveEffect, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80223BC0)))
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_20F9)

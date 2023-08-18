@@ -327,7 +327,7 @@ EvtScript N(bow_takeTurn) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_SET(LVarA, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar8)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar8)
     EVT_SWITCH(LVar8)
         EVT_CASE_EQ(0)
             EVT_SET(LVar8, 4)
@@ -366,7 +366,7 @@ EvtScript N(bow_takeTurn) = {
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.2))
         EVT_END_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
         EVT_SWITCH(LVar9)
             EVT_CASE_EQ(0)
                 EVT_WAIT(2)

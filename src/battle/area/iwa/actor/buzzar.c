@@ -29,6 +29,17 @@ enum N(ActorPartIDs) {
     PRT_5               = 5,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_8021B600)[] = {
     STATUS_KEY_NORMAL,    ANIM_Buzzar_Anim01,
     STATUS_KEY_STONE,     ANIM_Buzzar_Anim00,
@@ -163,10 +174,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
@@ -224,7 +235,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
             EVT_EXEC_WAIT(N(EVS_FlyToHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -266,27 +277,27 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 2)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
             EVT_EXEC_WAIT(N(EVS_Attack_WindBlast))
         EVT_CASE_EQ(2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 3)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 3)
             EVT_EXEC_WAIT(N(EVS_Attack_ClawSwipe))
         EVT_CASE_EQ(4)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 5)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 5)
             EVT_EXEC_WAIT(N(EVS_Attack_FeatherFling))
         EVT_CASE_DEFAULT
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_IF_EQ(LVar0, 5)
                 EVT_SET(LVar0, 0)
             EVT_ELSE
                 EVT_ADD(LVar0, 1)
             EVT_END_IF
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_EXEC_WAIT(N(EVS_Attack_GrappleDrop))
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)

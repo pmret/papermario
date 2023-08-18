@@ -14,6 +14,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_RockType      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
     STATUS_END,
@@ -96,17 +104,17 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim10)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, 0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, 0)
             EVT_CALL(SetActorSize, ACTOR_SELF, 24, 15)
         EVT_CASE_EQ(1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim12)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, 1)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 10, 8)
     EVT_END_SWITCH
     EVT_RETURN
@@ -119,7 +127,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(setAnim) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVarA)
     EVT_SWITCH(LVarA)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
@@ -161,7 +169,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(N(setAnim))
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim11)

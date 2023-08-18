@@ -18,6 +18,14 @@ enum N(ActorPartIDs) {
     PRT_HAMMER_5        = 6,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_HammerBros_Anim02,
     STATUS_KEY_STONE,     ANIM_HammerBros_Anim00,
@@ -168,7 +176,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_RETURN
     EVT_END
 };
@@ -181,7 +189,7 @@ EvtScript N(EVS_Idle) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
         EVT_CASE_DEFAULT
-            EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 35)

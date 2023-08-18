@@ -7,6 +7,11 @@
 
 #include "battle/common/move/StarPowerSupport.inc.c"
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
 API_CALLABLE(N(IncreaseTwinkDefense)) {
     // a pointer to Twink's DefenseTable is stored in his actorVar1 in twink.c
     // it has now been copied to this script var, where we can retrieve it
@@ -49,7 +54,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_ADD(LVar1, 20)
     EVT_CALL(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
     EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(ActorSpeak, MSG_CH8_0096, ACTOR_PLAYER, 0, ANIM_Peach3_Pray, ANIM_Peach3_Pray)
     EVT_END_IF
@@ -61,11 +66,11 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
     EVT_WAIT(30)
     EVT_CALL(PlaySound, SOUND_STAR_POWER_RECOVERY)
-    EVT_CALL(GetActorVar, ACTOR_PARTNER, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
     EVT_ADD(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, LVar0)
     EVT_CALL(ModifyActorDecoration, ACTOR_PARTNER, 1, 0, LVar0, 0, 0, 0)
-    EVT_CALL(GetActorVar, ACTOR_PARTNER, 1, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_PARTNER, AVAR_Unk_1, LVar0)
     EVT_CALL(N(IncreaseTwinkDefense))
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

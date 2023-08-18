@@ -15,6 +15,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Whacka_Idle,
     STATUS_KEY_STONE,     ANIM_Whacka_Still,
@@ -109,7 +117,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(N(IsHitEightTimes))
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
@@ -288,7 +296,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 EvtScript N(spawnWhackasBump) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
     EVT_THREAD
         EVT_WAIT(15)
@@ -309,7 +317,7 @@ EvtScript N(die) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Burrow)
     EVT_WAIT(40)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, TRUE)
     EVT_END_IF

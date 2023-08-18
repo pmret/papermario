@@ -19,6 +19,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 API_CALLABLE(func_80238000_714CF0) {
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -114,8 +123,8 @@ EvtScript N(EVS_Init) = {
     EVT_IF_NE(LVar0, 1)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, TRUE)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, EVT_PTR(N(DefenseTable)))
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_9)
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 0, 0, 0, 0)
     EVT_RETURN
@@ -246,7 +255,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -40, 15, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -20, EASING_QUARTIC_OUT)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
     EVT_IF_GT(LVarF, 1)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_END_IF
@@ -255,7 +264,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
     EVT_IF_GT(LVarF, 0)
         EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_ELSE
@@ -270,7 +279,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_1, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF

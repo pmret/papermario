@@ -26,6 +26,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 enum {
     LF_MashEnded    = LFlag0,
     LF_MashStarted  = LFlag2,
@@ -1070,7 +1078,7 @@ EvtScript N(bomb) = {
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LRAW_BOMBETTE_FUSE)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_RunLit)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_SWITCH(LVar2)
@@ -1083,7 +1091,7 @@ EvtScript N(bomb) = {
         EVT_END_SWITCH
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 45 * DT)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AboutToExplode)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_END_CHILD_THREAD
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)

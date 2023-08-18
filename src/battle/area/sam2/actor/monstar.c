@@ -20,6 +20,16 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_3      = 3,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_COSMIC,  99,
@@ -127,9 +137,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
     EVT_RETURN
     EVT_END
 };
@@ -201,7 +211,7 @@ EvtScript N(EVS_Idle) = {
     EVT_ADD(LVar0, LVar3)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar2, LVar0, LVar4)
     EVT_LABEL(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar5)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar5)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar5, 1)
         EVT_GOTO(2)
@@ -216,7 +226,7 @@ EvtScript N(EVS_Idle) = {
     EVT_ADD(LVar0, LVar3)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar2, LVar0, LVar4)
     EVT_LABEL(4)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar5)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar5)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar5, 1)
         EVT_GOTO(4)
@@ -231,7 +241,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -255,7 +265,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -266,7 +276,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -290,7 +300,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -301,7 +311,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -312,7 +322,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
     EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -320,7 +330,7 @@ EvtScript N(EVS_HandleEvent) = {
 
 EvtScript N(unused) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
     EVT_CALL(SetBattleCamZoom, 10)
@@ -336,7 +346,7 @@ EvtScript N(unused) = {
     EVT_WAIT(75)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -344,7 +354,7 @@ EvtScript N(unused) = {
 
 EvtScript N(attack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -439,7 +449,7 @@ EvtScript N(attack) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -464,7 +474,7 @@ EvtScript N(attack) = {
             EVT_WAIT(20)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -484,7 +494,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(SetBattleCamZoom, 340)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_3, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
@@ -495,7 +505,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_DEFAULT
             EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
     EVT_END_SWITCH
-    EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
+    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)

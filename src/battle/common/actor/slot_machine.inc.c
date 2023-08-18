@@ -14,6 +14,14 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(intTable1)[] = { 0, 1, 0, 2, 0, 2, 0, 2 };
 s32 N(intTable2)[] = { 0, 1, 0, 2, 1, 2, 0, 2 };
 s32 N(intTable3)[] = { 0, 1, 0, 2, 0, 2, 0, 2 };
@@ -165,7 +173,7 @@ EvtScript N(EVS_Idle) = {
     EVT_SET(LVarE, 0)
     EVT_SET(LVarF, 0)
     EVT_LABEL(0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
@@ -262,7 +270,7 @@ EvtScript N(EVS_Idle) = {
     EVT_IF_EQ(ArrayVar(1), 0)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_GOTO(1)
     EVT_END_IF
@@ -376,7 +384,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(TranslateModel, 28, 0, -2, 0)

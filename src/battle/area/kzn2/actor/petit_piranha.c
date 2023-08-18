@@ -14,6 +14,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_9      = 9,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_PetitPiranha_Anim01,
     STATUS_KEY_STONE,     ANIM_PetitPiranha_Anim01,
@@ -397,10 +406,10 @@ EvtScript N(onDeath) = {
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
-    EVT_CALL(GetActorVar, LVar0, 9, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+    EVT_CALL(GetActorVar, LVar0, AVAR_Unk_9, LVar1)
     EVT_SUB(LVar1, 1)
-    EVT_CALL(SetActorVar, LVar0, 9, LVar1)
+    EVT_CALL(SetActorVar, LVar0, AVAR_Unk_9, LVar1)
     EVT_RETURN
     EVT_END
 };

@@ -19,6 +19,15 @@ enum N(ActorPartIDs) {
     PRT_3               = 3,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable_80223B20)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -325,7 +334,7 @@ EvtScript N(canBeKnockedOff) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(N(GetSelectedMoveID), LVar0)
@@ -336,7 +345,7 @@ EvtScript N(canBeKnockedOff) = {
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
                 EVT_END_IF
             EVT_END_CASE_GROUP
         EVT_END_SWITCH
@@ -346,7 +355,7 @@ EvtScript N(canBeKnockedOff) = {
 };
 
 EvtScript N(knockOff) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Magikoopa_White_Anim04)
         EVT_GOTO(0)
@@ -769,7 +778,7 @@ EvtScript N(EVS_Init_Ground) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -778,7 +787,7 @@ EvtScript N(EVS_Init_Flying) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224A44)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -844,7 +853,7 @@ EvtScript N(healOne) = {
     EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetOriginalActorType, LVar0, LVarA)
     EVT_IF_EQ(LVarA, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVarA)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVarA)
         EVT_IF_EQ(LVarA, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -883,7 +892,7 @@ EvtScript N(healOne) = {
     EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetOriginalActorType, LVar0, LVarA)
     EVT_IF_EQ(LVarA, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVarA)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVarA)
         EVT_IF_EQ(LVarA, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -1086,7 +1095,7 @@ EvtScript N(healAll) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -1135,7 +1144,7 @@ EvtScript N(takeTurn_802274E4) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF

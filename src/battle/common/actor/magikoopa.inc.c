@@ -24,6 +24,25 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_6      = 6,
+    AVAR_Unk_7      = 7,
+    AVAR_Unk_8      = 8,
+    AVAR_Unk_9      = 9,
+    AVAR_Unk_A      = 10,
+    AVAR_Unk_B      = 11,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+enum N(OldActorVars) {
     N(VAR_FLAG_HIT_COMBO) = 0,
     N(VAR_HAS_CLONE) = 1,
     N(VAR_CAN_FALL) = 2,
@@ -932,7 +951,7 @@ EvtScript N(healAll) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -1973,7 +1992,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -2007,7 +2026,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -2041,7 +2060,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-        EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
         EVT_IF_EQ(LVar1, 1)
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
@@ -2111,7 +2130,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CALL(GetOwnerTarget, LVar0, LVar1)
                 EVT_CALL(GetOriginalActorType, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
-                    EVT_CALL(GetActorVar, LVar0, 8, LVar1)
+                    EVT_CALL(GetActorVar, LVar0, AVAR_Unk_8, LVar1)
                     EVT_IF_EQ(LVar1, 1)
                         EVT_SET(LFlag0, TRUE)
                     EVT_END_IF

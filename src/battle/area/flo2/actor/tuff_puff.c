@@ -14,7 +14,19 @@ enum N(ActorPartIDs) {
     PRT_2               = 2,
 };
 
-enum N(actorVars) {
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+enum N(OldActorVars) {
     N(VAR_IS_BIG) = 0,
     N(VAR_INDEX) = 1,
     N(VAR_2) = 2,
@@ -215,7 +227,7 @@ EvtScript N(onDeath) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_INDEX), LVar0)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY0, 2, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_2, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_BITWISE_AND_CONST(LVar1, ~0x1)
@@ -238,7 +250,7 @@ EvtScript N(onDeath) = {
         EVT_CASE_EQ(9)
             EVT_BITWISE_AND_CONST(LVar1, ~0x200)
     EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_ENEMY0, 2, LVar1)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_Unk_2, LVar1)
     EVT_RETURN
     EVT_END
 };

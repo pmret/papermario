@@ -32,6 +32,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_9      = 9,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   1,
     ELEMENT_SHOCK,    0,
@@ -112,8 +121,8 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -131,14 +140,14 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(onHit))
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(func_8026E914, LVar0, LVar1)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
@@ -175,7 +184,7 @@ EvtScript N(onHit) = {
 };
 
 EvtScript N(shake_tank) = {
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
         EVT_WAIT(30)
@@ -386,10 +395,10 @@ EvtScript N(onDeath) = {
     EVT_CALL(func_80218250_52B8F0)
     EVT_CALL(EnableModel, 39, FALSE)
     EVT_CALL(EnableModel, 41, FALSE)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 5, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_5, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(RemoveEffect, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_ENEMY1, 5, 0)
+        EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_5, 0)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

@@ -9,6 +9,15 @@ enum N(ActorPartIDs) {
     PRT_BLUE_MAIN       = 1, // main part for blue goomba
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(DefenseTable_8021B6C0)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -462,8 +471,8 @@ EvtScript N(takeTurn_8021C3B0) = {
 
 EvtScript N(init_8021D078) = {
     EVT_EXEC_WAIT(N(init_8021B85C))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_RETURN
     EVT_END
 };
@@ -490,7 +499,7 @@ EvtScript N(doDeath_8021D0C4) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_ZERO, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_ZERO, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4, TRUE)
     EVT_WAIT(30)
     EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)

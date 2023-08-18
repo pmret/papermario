@@ -11,6 +11,20 @@ enum N(ActorPartIDs) {
     PRT_5               = 5,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_6      = 6,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 s32 N(IdleAnimations_802232D0)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpikyGoomnut_Still,
     STATUS_END,
@@ -150,13 +164,13 @@ EvtScript N(init_80223488) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223804)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223678)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223688)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 6, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_6, 1)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, 10, 140, 10)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_3, -95, 140, 10)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_4, -115, 130, 0)
@@ -338,14 +352,14 @@ EvtScript N(shake_goomnut_tree) = {
 
 EvtScript N(80223DBC) = {
     EVT_PLAY_EFFECT(EFFECT_DROP_LEAVES, 0, -25, 120, 0, 90, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_5, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_WAIT(20)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 5, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 1)
     EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetGoalPos, ACTOR_SELF, 10, 0, 10)

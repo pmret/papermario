@@ -33,6 +33,17 @@ enum N(ActorPartIDs) {
     PRT_8               = 8,
 };
 
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
 #include "common/GetSelectedMoveID.inc.c"
 
 API_CALLABLE(N(SetActorLevelToZero)) {
@@ -248,8 +259,8 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_TARGET_FLAG_1, TRUE)
     EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 24, 30)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -280,7 +291,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_8, EVT_FLOAT(0.6))
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_8, ANIM_StiltGuyUnfold_Anim03)
         EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar1)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar1)
         EVT_IF_EQ(LVar1, 0)
             EVT_SET(LVar0, 10)
             EVT_CALL(PlaySound, SOUND_0305)
@@ -320,7 +331,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_7, EVT_FLOAT(0.6))
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_7, ANIM_StiltGuyUnfold_Anim02)
         EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(LVar0, 10)
         EVT_ELSE
@@ -355,7 +366,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_6, EVT_FLOAT(0.6))
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_6, ANIM_StiltGuyUnfold_Anim01)
         EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(LVar0, 10)
         EVT_ELSE
@@ -390,7 +401,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_5, EVT_FLOAT(0.6))
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_5, ANIM_StiltGuyUnfold_Anim00)
         EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(LVar0, 10)
         EVT_ELSE
@@ -437,9 +448,9 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
         EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY1, 1, 3)
+            EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_1, 3)
         EVT_ELSE
         EVT_END_IF
     EVT_END_THREAD
@@ -456,7 +467,7 @@ EvtScript N(EVS_Idle) = {
 };
 
 EvtScript N(return_home) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(shy_guy_return_home))
         EVT_RETURN
@@ -496,7 +507,7 @@ EvtScript N(EVS_HandleEvent) = {
                     EVT_SET(LVar1, ANIM_StiltGuy_Anim01)
                     EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
@@ -504,11 +515,11 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_StiltGuy_Anim06)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(check_fall_off_2))
-            EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_EXEC_WAIT(N(fallOff))
             EVT_END_IF
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_StiltGuy_Anim06)
@@ -602,7 +613,7 @@ EvtScript N(check_fall_off) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(N(GetSelectedMoveID), LVar0)
@@ -613,7 +624,7 @@ EvtScript N(check_fall_off) = {
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
                 EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
                 EVT_END_IF
             EVT_END_CASE_GROUP
         EVT_END_SWITCH
@@ -627,16 +638,16 @@ EvtScript N(check_fall_off_2) = {
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         EVT_IF_FLAG(LVarF, DAMAGE_TYPE_JUMP)
             EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVarF, DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_SHRINK | STATUS_FLAG_STOP)
-        EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -748,7 +759,7 @@ EvtScript N(attack) = {
 };
 
 EvtScript N(fallOff) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
     EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET)
     EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
     EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
@@ -808,9 +819,9 @@ EvtScript N(onDeath) = {
     EVT_EXEC_WAIT(EVS_Enemy_DeathWithoutRemove)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 2, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_2, LVar0)
     EVT_ADD(LVar0, 1)
-    EVT_CALL(SetActorVar, ACTOR_ENEMY1, 2, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_2, LVar0)
     EVT_IF_GE(LVar0, 2)
         EVT_CALL(FreezeBattleState, TRUE)
     EVT_END_IF
