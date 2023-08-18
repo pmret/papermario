@@ -5964,9 +5964,9 @@ enum IdleScriptState {
 };
 
 enum BlurState {
-    BLUR_ENABLE     = 0,
-    BLUR_DISABLE    = 1,
-    BLUR_RESET      = -1,
+    ACTOR_BLUR_DISABLE  = 0,
+    ACTOR_BLUR_ENABLE   = 1,
+    ACTOR_BLUR_RESET    = -1,
 };
 
 #endif

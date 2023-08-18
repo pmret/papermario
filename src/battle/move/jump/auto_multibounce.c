@@ -237,7 +237,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_IF_EQ(LVarF, 1)
         EVT_CALL(func_802752AC, 20, 3)
         EVT_WAIT(7)
@@ -247,7 +247,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_WAIT(7)
         EVT_CALL(func_802752AC, 3, 5)
     EVT_END_IF
-    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))

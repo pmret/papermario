@@ -1735,9 +1735,9 @@ ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
 ApiStatus EnablePlayerBlur(Evt* script, s32 isInitialCall) {
     s32 setting = evt_get_variable(script, *script->ptrReadPos);
 
-    if (setting == 0) {
+    if (setting == ACTOR_BLUR_DISABLE) {
         disable_player_blur();
-    } else if (setting == 1) {
+    } else if (setting == ACTOR_BLUR_ENABLE) {
         enable_player_blur();
     } else {
         func_80254950();

@@ -428,11 +428,11 @@ EvtScript N(EVS_Move_Headbonk) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
         EVT_CASE_EQ(2)
             EVT_THREAD
                 EVT_WAIT(4)
@@ -453,11 +453,11 @@ EvtScript N(EVS_Move_Headbonk) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
     EVT_END_SWITCH
     EVT_CHILD_THREAD
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))

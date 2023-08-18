@@ -296,7 +296,7 @@ EvtScript N(EVS_DropCoin) = {
             EVT_END_IF
             EVT_GOTO(5)
             EVT_LABEL(10)
-            EVT_CALL(EnableActorBlur, LVarA, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, LVarA, ACTOR_BLUR_ENABLE)
             EVT_CALL(SetTargetActor, LVarA, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, LVarA)
             EVT_CALL(JumpToGoal, LVarA, 15, FALSE, FALSE, FALSE)

@@ -3130,9 +3130,9 @@ ApiStatus EnableActorBlur(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (enable == 0) {
+    if (enable == ACTOR_BLUR_DISABLE) {
         disable_actor_blur(actor);
-    } else if (enable == 1) {
+    } else if (enable == ACTOR_BLUR_ENABLE) {
         enable_actor_blur(actor);
     } else {
         reset_actor_blur(actor);
@@ -3168,20 +3168,20 @@ ApiStatus AfflictActor(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     switch (statusTypeKey) {
-        case 7:
-            statusDurationKey = 38;
+        case STATUS_KEY_FROZEN:
+            statusDurationKey = STATUS_TURN_MOD_PARALYZE; // @bug should be STATUS_TURN_MOD_FROZEN
             break;
-        case 6:
-            statusDurationKey = 32;
+        case STATUS_KEY_SLEEP:
+            statusDurationKey = STATUS_TURN_MOD_SLEEP;
             break;
-        case 5:
-            statusDurationKey = 38;
+        case STATUS_KEY_PARALYZE:
+            statusDurationKey = STATUS_TURN_MOD_PARALYZE;
             break;
-        case 4:
-            statusDurationKey = 36;
+        case STATUS_KEY_DIZZY:
+            statusDurationKey = STATUS_TURN_MOD_DIZZY;
             break;
         default:
-            statusDurationKey = 38;
+            statusDurationKey = STATUS_TURN_MOD_PARALYZE;
             break;
     }
 

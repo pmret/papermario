@@ -418,7 +418,7 @@ EvtScript N(flee) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_WAIT(10)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
