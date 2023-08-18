@@ -1,58 +1,91 @@
+#include "PR/os_internal.h"
+#include "PR/rcp.h"
 #include "PR/controller.h"
-#include "PR/osint.h"
 #include "PR/siint.h"
 
-extern int __osPfsLastChannel;
+extern u32 __osBbPakAddress[4];
+extern u32 __osBbPakSize;
 
-s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force) {
-    s32 ret;
-    u8* ptr;
-    s32 i;
-    int retry = 2;
-    u8 crc;
+extern s32 __osPfsLastChannel;
 
-    if (force != PFS_FORCE && address < PFS_LABEL_AREA && address != 0) {
+#define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
+
+s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int force) {
+#ifdef BBPLAYER
+    s32 ret = 0;
+
+    if ((force != TRUE) && (address < PFS_LABEL_AREA) && (address != 0)) {
         return 0;
     }
 
     __osSiGetAccess();
-    do {
-        ptr = (u8 *)(&__osPfsPifRam);
 
-        if (__osContLastCmd != CONT_CMD_WRITE_MEMPACK || __osPfsLastChannel != channel) {
-            __osContLastCmd = CONT_CMD_WRITE_MEMPACK;
+    if (__osBbPakAddress[channel] != 0) {
+        if (__osBbPakSize - 0x20 >= address * 0x20) {
+            int i = 0;
+
+            for (i = 0; i < 0x20; i++) {
+                *(u8*)(__osBbPakAddress[channel] + address * 0x20 + i) = buffer[i];
+            }
+        }
+    } else {
+        ret = 1;
+    }
+
+    __osSiRelAccess();
+    return ret;
+#else
+    s32 ret = 0;
+    s32 i;
+    u8* ptr;
+    s32 retry = 2;
+    u8 crc;
+
+    if ((force != TRUE) && (address < PFS_LABEL_AREA) && (address != 0)) {
+        return 0;
+    }
+
+    __osSiGetAccess();
+
+    do {
+        ptr = (u8*)__osPfsPifRam.ramarray;
+
+        if (__osContLastCmd != CONT_CMD_WRITE_PAK || (u32)__osPfsLastChannel != channel) {
+            __osContLastCmd = CONT_CMD_WRITE_PAK;
             __osPfsLastChannel = channel;
 
-            for (i = 0; i < channel; i++) {
-                *ptr++ = 0;
-            }
+            for (i = 0; i < channel; i++) { *ptr++ = CONT_CMD_REQUEST_STATUS; }
 
             __osPfsPifRam.pifstatus = CONT_CMD_EXE;
-            ((__OSContRamReadFormat *)ptr)->dummy = 0xff;
-            ((__OSContRamReadFormat *)ptr)->txsize = 35;
-            ((__OSContRamReadFormat *)ptr)->rxsize = 1;
-            ((__OSContRamReadFormat *)ptr)->cmd = CONT_CMD_WRITE_MEMPACK;
-            ((__OSContRamReadFormat *)ptr)->datacrc = 0xff;
+
+            READFORMAT(ptr)->dummy = CONT_CMD_NOP;
+            READFORMAT(ptr)->txsize = CONT_CMD_WRITE_PAK_TX;
+            READFORMAT(ptr)->rxsize = CONT_CMD_WRITE_PAK_RX;
+            READFORMAT(ptr)->cmd = CONT_CMD_WRITE_PAK;
+            READFORMAT(ptr)->datacrc = 0xFF;
+
             ptr[sizeof(__OSContRamReadFormat)] = CONT_CMD_END;
         } else {
             ptr += channel;
         }
-        ((__OSContRamReadFormat *)ptr)->addrh = address >> 3;
-        ((__OSContRamReadFormat *)ptr)->addrl = (address << 5) | __osContAddressCrc(address);
 
-        bcopy(buffer, ((__OSContRamReadFormat *)ptr)->data, BLOCKSIZE);
+        READFORMAT(ptr)->addrh = address >> 3;
+        READFORMAT(ptr)->addrl = ((address << 5) | __osContAddressCrc(address));
+
+        bcopy(buffer, READFORMAT(ptr)->data, BLOCKSIZE);
 
         ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);
         crc = __osContDataCrc(buffer);
         osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+
         ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);
         osRecvMesg(mq, NULL, OS_MESG_BLOCK);
 
-        ret = (((__OSContRamReadFormat *)ptr)->rxsize & 0xC0) >> 4;
-        if (ret == 0) {
-            if (crc != ((__OSContRamReadFormat *)ptr)->datacrc) {
-                ret = __osPfsGetStatus(mq, channel);
-                if (ret != 0) {
+        ret = CHNL_ERR(*READFORMAT(ptr));
+
+        if (!ret) {
+            if (crc != READFORMAT(ptr)->datacrc) {
+                if ((ret = __osPfsGetStatus(mq, channel))) {
                     break;
                 } else {
                     ret = PFS_ERR_CONTRFAIL;
@@ -61,8 +94,10 @@ s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int 
         } else {
             ret = PFS_ERR_NOPACK;
         }
-    } while (ret == PFS_ERR_CONTRFAIL && retry-- >= 0);
+    } while ((ret == PFS_ERR_CONTRFAIL) && (retry-- >= 0));
 
     __osSiRelAccess();
+
     return ret;
+#endif
 }

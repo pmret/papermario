@@ -11,17 +11,6 @@ static __OSViContext vi[2] ALIGNED(8) = {{0}, {0}};
 __OSViContext *__osViCurr = &vi[0];
 __OSViContext *__osViNext = &vi[1];
 
-s32 meowp12345[] = {0, 0};
-
-OSViMode osViModePalLan1 = {
-    0x10,
-    { 0x0000311E, 0x00000140, 0x04541E3A, 0x00000271, 0x00170C69, 0x0C6F0C6D, 0x00800300, 0x00000200, 0x00000000 },
-    {
-        { 0x00000280, 0x00000400, 0x005F0239, 0x0009026B, 0x00000002 },
-        { 0x00000280, 0x00000400, 0x005F0239, 0x0009026B, 0x00000002 }
-    }
-};
-
 void __osViInit(void) {
     bzero(vi, sizeof(vi));
     __osViCurr = &vi[0];

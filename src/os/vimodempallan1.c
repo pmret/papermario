@@ -1,10 +1,37 @@
-#include "PR/os_vi.h"
+#include "PR/os.h"
+#include "PR/rcp.h"
+#include "PR/viint.h"
 
 OSViMode osViModeMpalLan1 = {
-        0x1E,
-        { 0x0000311E, 0x00000140, 0x04651E39, 0x0000020D, 0x00040C11, 0x0C190C1A, 0x006C02EC, 0x00000200, 0x00000000 },
-        {
-                { 0x00000280, 0x00000400, 0x002501FF, 0x000E0204, 0x00000002 },
-                { 0x00000280, 0x00000400, 0x002501FF, 0x000E0204, 0x00000002 }
-        }
+    OS_VI_MPAL_LAN1, // type
+    {
+        // comRegs
+        VI_CTRL_TYPE_16 | VI_CTRL_GAMMA_DITHER_ON | VI_CTRL_GAMMA_ON | VI_CTRL_DIVOT_ON | VI_CTRL_ANTIALIAS_MODE_1 |
+            VI_CTRL_PIXEL_ADV_3, // ctrl
+        WIDTH(320),              // width
+        BURST(57, 30, 5, 70),    // burst
+        VSYNC(525),              // vSync
+        HSYNC(3089, 4),          // hSync
+        LEAP(3097, 3098),        // leap
+        HSTART(108, 748),        // hStart
+        SCALE(2, 0),             // xScale
+        VCURRENT(0),             // vCurrent
+    },
+    { // fldRegs
+      {
+          // [0]
+          ORIGIN(640),        // origin
+          SCALE(1, 0),        // yScale
+          HSTART(37, 511),    // vStart
+          BURST(4, 2, 14, 0), // vBurst
+          VINTR(2),           // vIntr
+      },
+      {
+          // [1]
+          ORIGIN(640),        // origin
+          SCALE(1, 0),        // yScale
+          HSTART(37, 511),    // vStart
+          BURST(4, 2, 14, 0), // vBurst
+          VINTR(2),           // vIntr
+      } },
 };

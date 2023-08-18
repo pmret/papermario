@@ -1,16 +1,25 @@
 #include "macros.h"
 #include "PR/os_internal.h"
-#include "controller.h"
+#include "PR/controller.h"
 #include "PR/siint.h"
 
+#ifndef BBPLAYER
+/*
+static OSPifRam __MotorDataBuf[MAXCONTROLLERS] ALIGNED(8);
+*/
+
 extern OSPifRam __MotorDataBuf[MAXCONTROLLERS];
+#endif
 
 #define READFORMAT(ptr) ((__OSContRamReadFormat*)(ptr))
 
 s32 __osMotorAccess(OSPfs* pfs, s32 flag) {
+#ifdef BBPLAYER
+    return PFS_ERR_INVALID;
+#else
     int i;
     s32 ret;
-    u8* ptr = (u8*) &__MotorDataBuf[pfs->channel];
+    u8* ptr = (u8*)&__MotorDataBuf[pfs->channel];
 
     if (!(pfs->status & PFS_MOTOR_INITIALIZED)) {
         return 5;
@@ -46,10 +55,12 @@ s32 __osMotorAccess(OSPfs* pfs, s32 flag) {
     __osSiRelAccess();
 
     return ret;
+#endif
 }
 
-static void _MakeMotorData(int channel, OSPifRam *mdata) {
-    u8 *ptr = (u8*) mdata->ramarray;
+#ifndef BBPLAYER
+static void __osMakeMotorData(int channel, OSPifRam* mdata) {
+    u8* ptr = (u8*)mdata->ramarray;
     __OSContRamReadFormat ramreadformat;
     int i;
 
@@ -70,8 +81,12 @@ static void _MakeMotorData(int channel, OSPifRam *mdata) {
     ptr += sizeof(__OSContRamReadFormat);
     ptr[0] = CONT_CMD_END;
 }
+#endif
 
-s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel) {
+s32 osMotorInit(OSMesgQueue* mq, OSPfs* pfs, int channel) {
+#ifdef BBPLAYER
+    return PFS_ERR_DEVICE;
+#else
     s32 ret;
     u8 temp[32];
 
@@ -127,9 +142,10 @@ s32 osMotorInit(OSMesgQueue *mq, OSPfs *pfs, int channel) {
     }
 
     if (!(pfs->status & PFS_MOTOR_INITIALIZED)) {
-        _MakeMotorData(channel, &__MotorDataBuf[channel]);
+        __osMakeMotorData(channel, &__MotorDataBuf[channel]);
     }
 
     pfs->status = PFS_MOTOR_INITIALIZED;
     return 0;
+#endif
 }

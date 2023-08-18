@@ -2,9 +2,6 @@
 #include "PR/rcp.h"
 #include "PR/osint.h"
 
-// TODO: this comes from a header
-#ident "$Revision: 1.17 $"
-
 s32 __osSpRawStartDma(s32 direction, u32 devAddr, void *dramAddr, u32 size)
 {
     if (__osSpDeviceBusy())

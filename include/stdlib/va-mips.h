@@ -86,7 +86,7 @@ enum {
 
 /* Get definitions for _MIPS_SIM_ABI64 etc.  */
 #ifdef _MIPS_SIM
-#include <sgidefs.h>
+#include "gcc/sgidefs.h"
 #endif
 
 #ifdef _STDARG_H

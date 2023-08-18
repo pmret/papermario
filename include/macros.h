@@ -26,7 +26,14 @@
 #define TRANSPARENT_UNION
 #endif
 
-#define ALIGNED(x) __attribute__((aligned(x)))
+#ifndef BBPLAYER
+# define ALIGNED(x) __attribute__((aligned(x)))
+# define BBALIGNED(x) ALIGNED(x)
+#else
+# define ALIGNED(x)
+# define BBALIGNED(x) __attribute__((aligned(x)))
+#endif
+
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 #define ALIGN8(val) (((val) + 0x7) & ~0x7)
 

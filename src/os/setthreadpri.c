@@ -1,12 +1,5 @@
 #include "ultra64.h"
 #include <PR/osint.h>
-#include "include_asm.h"
-
-struct __osThreadTail __osThreadTail = {0, -1};
-OSThread* __osRunQueue = (OSThread*) &__osThreadTail;
-OSThread* __osActiveQueue = (OSThread*) &__osThreadTail;
-OSThread* __osRunningThread = NULL;
-OSThread* __osFaultedThread = NULL;
 
 void osSetThreadPri(OSThread* thread, OSPri pri) {
     register u32 prevInt = __osDisableInt();

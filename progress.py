@@ -208,8 +208,8 @@ def main(args):
             )
         )
     elif args.pr_comment:
-        if funcs_delta > 0:
-            if funcs_delta == 1:
+        if funcs_delta > 0 or ratio_delta > 0:
+            if funcs_delta == 0 or funcs_delta == 1:
                 s = ""
             else:
                 s = "s"
@@ -247,8 +247,8 @@ def main(args):
             0x80250000,
         )
 
-        if funcs_delta > 0:
-            if funcs_delta == 1:
+        if funcs_delta > 0 or ratio_delta > 0:
+            if funcs_delta == 0 or funcs_delta == 1:
                 s = ""
             else:
                 s = "s"

@@ -13,7 +13,11 @@ void osCreateThread(OSThread *t, OSId id, void (*entry)(void *), void *arg, void
     t->context.sp = (s64)(s32)sp - 16;
     t->context.ra = (u64)__osCleanupThread;
     mask = OS_IM_ALL;
+#if VERSION_IQUE
+    t->context.sr = (mask & (SR_IMASK | SR_IE)) | SR_EXL;
+#else
     t->context.sr = SR_IMASK | SR_EXL | SR_IE;
+#endif
     t->context.rcp = (mask & RCP_IMASK) >> RCP_IMASKSHIFT;
     t->context.fpcsr = (u32)(FPCSR_FS | FPCSR_EV);
     t->fp = 0;
