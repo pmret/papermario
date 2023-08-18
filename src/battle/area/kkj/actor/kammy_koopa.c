@@ -6,11 +6,11 @@
 
 #define NAMESPACE A(kammy_koopa)
 
-extern EvtScript N(init);
-extern EvtScript N(idle);
-extern EvtScript N(takeTurn);
-extern EvtScript N(nextTurn);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandlePhase);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(speakOnHit);
 extern EvtScript N(onDeath);
 
@@ -93,7 +93,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -109,11 +109,11 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -133,7 +133,7 @@ API_CALLABLE(N(unknownFunction)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LOOP(0)
         EVT_CALL(N(unknownFunction))
         EVT_WAIT(1)
@@ -142,7 +142,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -254,7 +254,7 @@ API_CALLABLE(N(DropBlock)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -383,7 +383,7 @@ EvtScript N(takeTurn) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)

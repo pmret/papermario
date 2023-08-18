@@ -10,8 +10,8 @@ extern s32 N(IdleAnimations)[];
 extern s32 N(IdleAnimations_flying)[];
 extern s32 N(80225248)[];
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(init_flying);
 extern EvtScript N(flee);
 
@@ -142,7 +142,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 11,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 80,
@@ -212,7 +212,7 @@ s32 N(80225248)[] = {
     STATUS_END,
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -223,7 +223,7 @@ EvtScript N(idle) = {
 #include "common/StartRumbleWithParams.inc.c"
 #include "world/common/todo/UnkFunc52.inc.c"
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -397,7 +397,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Magikoopa_Yellow_Anim01)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_YELLOW_MAGIKOOPA)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 32)
@@ -759,10 +759,10 @@ EvtScript N(flee) = {
     EVT_END
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(GetBattleVar, 2, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
@@ -773,8 +773,8 @@ EvtScript N(init) = {
 };
 
 EvtScript N(init_flying) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_flying)))
     EVT_CALL(GetBattleVar, 2, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -785,7 +785,7 @@ EvtScript N(init_flying) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)

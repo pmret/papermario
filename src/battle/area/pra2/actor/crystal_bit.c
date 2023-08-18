@@ -3,11 +3,11 @@
 
 #define NAMESPACE A(crystal_bit)
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -149,7 +149,7 @@ ActorBlueprint N(1) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(ActorParts_1)),
     .partsData = N(ActorParts_1),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -172,7 +172,7 @@ ActorBlueprint N(2) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(ActorParts_2)),
     .partsData = N(ActorParts_2),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -195,7 +195,7 @@ ActorBlueprint N(3) = {
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(ActorParts_3)),
     .partsData = N(ActorParts_3),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -211,11 +211,11 @@ ActorBlueprint N(3) = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_RETURN
     EVT_END
 };
@@ -241,7 +241,7 @@ API_CALLABLE(UpdateCrystalBitEffect) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVarF)
     EVT_CHILD_THREAD
@@ -254,7 +254,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -397,12 +397,12 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_RETURN
     EVT_END
 };

@@ -228,7 +228,7 @@ EvtScript N(init_80218980) = {
     EVT_END_SWITCH
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021BCB4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80218E3C)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80218B24)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80218B24)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(GetEncounterTrigger, LVar0)
     EVT_SWITCH(LVar0)
@@ -245,7 +245,7 @@ EvtScript N(init_80218980) = {
 };
 
 EvtScript N(nextTurn_80218B24) = {
-    EVT_CALL(BindNextTurn, ACTOR_SELF, 0)
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, 0)
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80218BE0)))
     EVT_RETURN
     EVT_END

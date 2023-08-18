@@ -96,11 +96,11 @@ EntityModelScript N(ModelScript4) = {
 #include "battle/area/kzn2/lava_piranha_vine.pal.inc.c"
 #include "battle/area/kzn2/lava_piranha_vine.gfx.inc.c"
 
-extern EvtScript N(init);
-extern EvtScript N(idle);
-extern EvtScript N(takeTurn);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(initVines);
 extern EvtScript N(spawnColorado);
 extern EvtScript N(onComboHit);
@@ -253,7 +253,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 40,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -541,7 +541,7 @@ API_CALLABLE(N(CreateVineRenderer)) {
 static s32 N(unused);
 static s32 N(unusedArray)[64];
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_USE_ARRAY(N(unusedArray))
     EVT_CALL(EnableGroup, 23, TRUE)
     EVT_CALL(EnableGroup, 28, FALSE)
@@ -588,10 +588,10 @@ EvtScript N(init) = {
     EVT_CALL(CreateNpc, NPC_BTL_COMPANION, ANIM_BattleKolorado_Idle)
     EVT_CALL(SetNpcYaw, NPC_BTL_COMPANION, 90)
     EVT_CALL(SetNpcPos, NPC_BTL_COMPANION, -300, 0, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(ForceHomePos, ACTOR_ENEMY1, 57, 57, 0)
     EVT_CALL(ForceHomePos, ACTOR_ENEMY2, 107, 71, 20)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY1)
@@ -601,7 +601,7 @@ EvtScript N(init) = {
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -638,7 +638,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_END)
@@ -946,7 +946,7 @@ EvtScript N(initVines) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 0)
@@ -1068,7 +1068,7 @@ EvtScript N(onBurnHit) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, ACTOR_FLAG_NO_DMG_APPLY)
         EVT_RETURN

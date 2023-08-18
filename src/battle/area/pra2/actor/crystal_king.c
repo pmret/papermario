@@ -43,10 +43,10 @@ extern ActorBlueprint A(crystal_bit_1);
 extern ActorBlueprint A(crystal_bit_2);
 extern ActorBlueprint A(crystal_bit_3);
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 extern EvtScript N(AttackIcyBreath);
 extern EvtScript N(AttackIceBolt);
@@ -119,7 +119,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 70,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -135,10 +135,10 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 15, 40 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PHASE), N(PHASE_BEGIN))
@@ -234,7 +234,7 @@ API_CALLABLE(func_8021848C_660BDC) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_SET(LVarF, 0)
     EVT_LABEL(0)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
@@ -541,7 +541,7 @@ EvtScript N(OnDeath) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
@@ -801,7 +801,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_IF_LE(LVar0, 20)
         EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)

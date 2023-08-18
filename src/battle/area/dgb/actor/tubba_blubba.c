@@ -103,7 +103,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219750)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219204)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219338)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80218FB0)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80218FB0)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_IF_GE(GB_StoryProgress, -30)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)

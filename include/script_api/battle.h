@@ -213,7 +213,7 @@ ApiStatus ResumeTakeTurn(Evt* script, s32 isInitialCall);
 ApiStatus BindIdle(Evt* script, s32 isInitialCall);
 ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall);
 ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall);
-ApiStatus BindNextTurn(Evt* script, s32 isInitialCall);
+ApiStatus BindHandlePhase(Evt* script, s32 isInitialCall);
 ApiStatus JumpToGoal(Evt* script, s32 isInitialCall);
 ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall);
 ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall);

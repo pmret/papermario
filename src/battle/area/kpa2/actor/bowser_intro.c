@@ -6,11 +6,11 @@
 
 #define NAMESPACE A(bowser_intro)
 
-extern EvtScript N(init);
-extern EvtScript N(idle);
-extern EvtScript N(takeTurn);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(unkDecorationScript);
 extern EvtScript N(makeWalkingSounds);
 extern EvtScript N(onHit);
@@ -126,7 +126,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -151,7 +151,7 @@ ActorBlueprint NAMESPACE = {
 #include "common/StarRodAppearEffect.inc.c"
 #include "common/StarRodPowerUpEffect.inc.c"
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 14, 0)
@@ -160,10 +160,10 @@ EvtScript N(init) = {
     EVT_CALL(SetNpcYaw, NPC_BTL_COMPANION, 90)
     EVT_CALL(SetNpcPos, NPC_BTL_COMPANION, -130, 0, -12)
     EVT_CALL(EnableNpcShadow, NPC_BTL_COMPANION, TRUE)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 100, 0, 0, 0)
     EVT_EXEC(N(unkDecorationScript))
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, TRUE)
@@ -172,7 +172,7 @@ EvtScript N(init) = {
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_LABEL(0)
     EVT_EXEC_WAIT(N(makeWalkingSounds))
@@ -182,7 +182,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
@@ -220,7 +220,7 @@ EvtScript N(nextTurn) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -306,7 +306,7 @@ EvtScript N(onDeath) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar0)
     EVT_ADD(LVar0, 1)

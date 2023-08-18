@@ -999,7 +999,7 @@ ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
+ApiStatus BindHandlePhase(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     EvtScript* src;

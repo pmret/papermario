@@ -181,7 +181,7 @@ s32 N(IdleAnimations_8021B518)[] = {
 EvtScript N(init_8021B564) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C690)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C9C4)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021B5F4)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021B5F4)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C36C)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -852,7 +852,7 @@ EvtScript N(8021DFC8) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021F140)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021F41C)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021EE34)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021E194)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021E194)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_RETURN
@@ -863,7 +863,7 @@ EvtScript N(8021E058) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021F140)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021F41C)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021EE34)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021E194)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021E194)))
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)

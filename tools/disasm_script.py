@@ -408,7 +408,7 @@ replace_funcs = {
     "BattleCamTargetActor": {0: "ActorIDs"},
     "BindHandleEvent": {0: "ActorIDs"},
     "BindIdle": {0: "ActorIDs"},
-    "BindNextTurn": {0: "ActorIDs"},
+    "BindHandlePhase": {0: "ActorIDs"},
     "BindNpcAI": {0: "NpcIDs"},
     "BindNpcDefeat": {0: "NpcIDs"},
     "BindNpcIdle": {0: "NpcIDs"},

@@ -39,10 +39,10 @@ enum N(Flags) {
 extern ActorBlueprint A(tuff_puff);
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(attackDirectLightning);
 extern EvtScript N(normalAction);
 extern EvtScript N(electricCharge);
@@ -422,10 +422,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_NUMBER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TUFF_PUFF_BIT_ARRAY), 0)
@@ -509,7 +509,7 @@ EvtScript N(updateCharged) = {
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_SET(LVarF, 0)
     EVT_LOOP(0)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_COMBO_COUNTER), LVarA)
@@ -969,7 +969,7 @@ EvtScript N(OnDamaged) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -1387,7 +1387,7 @@ EvtScript N(Speak4) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_NUMBER), LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(4)
@@ -1482,7 +1482,7 @@ EvtScript N(takeTurn) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)

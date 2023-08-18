@@ -13,10 +13,10 @@ extern ActorBlueprint b_area_omo2_2_stilt_guy;
 extern ActorBlueprint b_area_omo2_3_shy_stack;
 extern ActorBlueprint b_area_omo2_5_shy_squad_dup;
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(onHit);
 extern EvtScript N(shake_tank);
 extern EvtScript N(select_phase);
@@ -147,7 +147,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 30,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -163,7 +163,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
@@ -187,15 +187,15 @@ EvtScript N(init) = {
     EVT_CALL(GetModelCenter, 39)
     EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVar5, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 5, LVar5)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_EXEC(N(select_phase))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
     EVT_IF_NE(LVar0, FALSE)
@@ -229,7 +229,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -291,7 +291,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_RETURN
     EVT_END
 };

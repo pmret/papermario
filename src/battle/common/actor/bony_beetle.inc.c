@@ -5,10 +5,10 @@
 
 #define NAMESPACE A(bony_beetle)
 
-extern EvtScript N(init);
-extern EvtScript N(idle);
-extern EvtScript N(takeTurn);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(handleEvent_normal);
 extern EvtScript N(handleEvent_spiky);
 extern EvtScript N(handleEvent_flipped);
@@ -145,7 +145,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 70,
@@ -161,7 +161,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar1)
     EVT_IF_EQ(LVar0, 1)
@@ -194,21 +194,21 @@ EVT_END_IF
 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
 EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
 EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
+EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
 EVT_CALL(HPBarToHome, ACTOR_SELF)
 EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_WAS_HIT), 0)
 EVT_RETURN
 EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_STATE), LVar0)
@@ -274,7 +274,7 @@ EvtScript N(changeSpikesState) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_STATE), LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(N(STATE_NORMAL))

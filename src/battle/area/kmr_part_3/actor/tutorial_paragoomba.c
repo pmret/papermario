@@ -581,18 +581,18 @@ s32 N(IdleAnimations_8021DBE8)[] = {
 };
 
 extern EvtScript N(takeTurn_8021E788);
-extern EvtScript N(idle);
+extern EvtScript N(EVS_Idle);
 extern EvtScript N(handleEvent_8021DF5C);
 
 EvtScript N(8021DC34) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021E788)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021DF5C)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -939,7 +939,7 @@ EvtScript N(init_8021F450) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021CDFC)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C4D4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C808)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021F690)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021F690)))
     EVT_RETURN
     EVT_END
 };

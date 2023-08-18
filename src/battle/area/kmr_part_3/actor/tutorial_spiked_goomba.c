@@ -484,7 +484,7 @@ EvtScript N(init_8021BEBC) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B19C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021A578)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021A854)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8021C0FC)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021C0FC)))
     EVT_RETURN
     EVT_END
 };

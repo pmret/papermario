@@ -7,8 +7,8 @@
 #define NAMESPACE A(spike_top)
 
 extern s32 N(IdleAnimations)[];
-extern EvtScript N(init);
-extern EvtScript N(idle);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
 extern EvtScript N(spikeTop_TakeTurn_Ceiling);
 extern EvtScript N(spikeTop_HandleEvent_Ceiling);
 extern EvtScript N(spikeTop_TakeTurn_Floor);
@@ -77,7 +77,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 4,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 60,
     .airLiftChance = 70,
@@ -133,8 +133,8 @@ s32 N(IdleAnimations_8021CA68)[] = {
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(init) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
@@ -159,7 +159,7 @@ EvtScript N(init) = {
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -719,7 +719,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021C9D0)))
-            EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
+            EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
         EVT_END_IF

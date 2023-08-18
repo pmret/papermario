@@ -844,7 +844,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
 EvtScript N(EVS_Init) = {
     EVT_EXEC_WAIT(N(EVS_SetInitialState))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Initial)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_BattleCry, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FlipCount, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Respect, FALSE)

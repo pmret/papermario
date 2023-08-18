@@ -133,7 +133,7 @@ EvtScript N(init_8021D4C8) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80229F9C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D5B4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D600)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8022A038)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8022A038)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_THREAD
@@ -546,7 +546,7 @@ EvtScript N(init_Goombario) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802203F4)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021EB14)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EB24)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80220450)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80220450)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END
@@ -1186,7 +1186,7 @@ EvtScript N(init_Kooper) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221200)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80220790)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80220908)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_802221A0)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_802221A0)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
@@ -1693,7 +1693,7 @@ EvtScript N(init_LeeBombette) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802229C4)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80222458)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80222468)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80223298)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80223298)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END
@@ -2059,7 +2059,7 @@ EvtScript N(init_Parakarry) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224304)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223574)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223584)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80224320)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80224320)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END
@@ -2421,7 +2421,7 @@ EvtScript N(init_Bow) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224CA0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802245FC)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022460C)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80225884)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80225884)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END
@@ -2873,7 +2873,7 @@ EvtScript N(init_Watt) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80226004)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80225B68)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80225B90)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80226880)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80226880)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END
@@ -3339,7 +3339,7 @@ EvtScript N(init_Sushie) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802270BC)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80226B44)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80226B54)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_8022831C)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8022831C)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END
@@ -3830,7 +3830,7 @@ EvtScript N(init_Lakilester) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80228B78)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80228604)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80228614)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80229658)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80229658)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_RETURN
     EVT_END

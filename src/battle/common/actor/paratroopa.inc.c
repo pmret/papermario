@@ -221,7 +221,7 @@ EvtScript N(EVS_Flying_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_Flying_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Flying_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_Flying_HandleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_Flying_HandlePhase)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_Flying_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_AerialFlip, FALSE)
     EVT_RETURN
     EVT_END
@@ -645,7 +645,7 @@ EvtScript N(EVS_KnockDown) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_DOWNED, ANIM_KoopaTroopa_Idle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(DownedStatusTable)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, 0)
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, 0)
     EVT_EXEC_WAIT(N(EVS_Downed_Init))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_KOOPA_TROOPA)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)

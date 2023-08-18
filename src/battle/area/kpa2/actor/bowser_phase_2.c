@@ -3,10 +3,10 @@
 
 #define NAMESPACE A(bowser_phase_2)
 
-extern EvtScript N(init);
-extern EvtScript N(idle);
-extern EvtScript N(takeTurn);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(attackFlameBreath);
 extern EvtScript N(attackLightningBlast);
 extern EvtScript N(attackShockwaveDrain);
@@ -137,7 +137,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -166,7 +166,7 @@ ActorBlueprint NAMESPACE = {
 #include "common/ItemEntityJumpToPos.inc.c"
 #include "common/GetItemEntityPosition.inc.c"
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURNS_SINCE_LAST_SHOCKWAVE_DRAIN), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURNS_SINCE_LAST_CLAW_SWIPE), 3)
@@ -182,15 +182,15 @@ EvtScript N(init) = {
     EVT_EXEC(N(unkDecorationScript))
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 150, 150, 0, 0)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_A)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_400 | BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar3)
     EVT_LABEL(0)
@@ -213,7 +213,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -393,7 +393,7 @@ EvtScript N(onImmune) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_EXEC_WAIT(N(doTakeTurn))
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
