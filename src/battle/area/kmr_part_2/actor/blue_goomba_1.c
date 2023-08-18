@@ -18,12 +18,12 @@ enum N(ActorParams) {
     DMG_UNK         = 0,
 };
 
-s32 N(DefenseTable_802198B0)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_802198BC)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,             100,
@@ -64,7 +64,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 24 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_802199B4),
-        .defenseTable = N(DefenseTable_802198B0),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -3 },
@@ -79,7 +79,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(init_8021B268),
-    .statusTable = N(StatusTable_802198BC),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

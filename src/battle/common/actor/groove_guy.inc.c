@@ -32,7 +32,7 @@ enum N(ActorParams) {
     DMG_UNK         = 0,
 };
 
-s32 N(IdleAnimations_802249E0)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_GrooveGuy_Anim01,
     STATUS_KEY_STONE,     ANIM_GrooveGuy_Anim00,
     STATUS_KEY_SLEEP,     ANIM_GrooveGuy_Anim06,
@@ -45,13 +45,13 @@ s32 N(IdleAnimations_802249E0)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_80224A2C)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_SHOCK,    0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80224A40)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              70,
@@ -78,15 +78,15 @@ s32 N(StatusTable_80224A40)[] = {
 
 BSS PlayerStatus D_802310D0;
 
-ActorPartBlueprint N(ActorParts_80224AEC)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_802249E0),
-        .defenseTable = N(DefenseTable_80224A2C),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -98,10 +98,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GROOVE_GUY,
     .level = ACTOR_LEVEL_GROOVE_GUY,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(ActorParts_80224AEC)),
-    .partsData = N(ActorParts_80224AEC),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_80224A40),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -603,7 +603,7 @@ EvtScript N(randomSummon) = {
             EVT_EXEC_WAIT(N(802271A0))
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_802249E0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
     EVT_RETURN
     EVT_END
 };

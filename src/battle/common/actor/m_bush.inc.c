@@ -13,7 +13,7 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
-s32 N(IdleAnimations_80221830)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_MBush_Anim02,
     STATUS_KEY_STONE,     ANIM_MBush_Anim01,
     STATUS_KEY_SLEEP,     ANIM_MBush_Anim08,
@@ -26,13 +26,13 @@ s32 N(IdleAnimations_80221830)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_8022187C)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_FIRE,     0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80221890)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              95,
@@ -57,15 +57,15 @@ s32 N(StatusTable_80221890)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_8022193C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 22 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80221830),
-        .defenseTable = N(DefenseTable_8022187C),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -77,10 +77,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_M_BUSH,
     .level = ACTOR_LEVEL_M_BUSH,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT( N(ActorParts_8022193C)),
-    .partsData = N(ActorParts_8022193C),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_80221890),
+    .statusTable = N(StatusTable),
     .escapeChance = 70,
     .airLiftChance = 85,
     .hurricaneChance = 80,

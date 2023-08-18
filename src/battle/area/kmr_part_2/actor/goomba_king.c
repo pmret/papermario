@@ -76,12 +76,12 @@ s32 N(IdleAnimations_802208CC)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_80220910)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_8022091C)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,             100,
@@ -106,7 +106,7 @@ s32 N(StatusTable_8022091C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_802209C8)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -114,7 +114,7 @@ ActorPartBlueprint N(ActorParts_802209C8)[] = {
         .targetOffset = { -25, 15 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80220800),
-        .defenseTable = N(DefenseTable_80220910),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -126,7 +126,7 @@ ActorPartBlueprint N(ActorParts_802209C8)[] = {
         .targetOffset = { 0, 80 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_80220910),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -148,10 +148,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBA_KING,
     .level = ACTOR_LEVEL_GOOMBA_KING,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(ActorParts_802209C8)),
-    .partsData = N(ActorParts_802209C8),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_8022091C),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

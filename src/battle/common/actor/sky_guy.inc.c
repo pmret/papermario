@@ -152,7 +152,7 @@ s32 N(StatusTable_802296D0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_8022977C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -233,8 +233,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SKY_GUY,
     .level = ACTOR_LEVEL_SKY_GUY,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(ActorParts_8022977C)),
-    .partsData = N(ActorParts_8022977C),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80229624),
     .escapeChance = 50,

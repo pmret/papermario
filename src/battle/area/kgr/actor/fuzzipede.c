@@ -52,12 +52,12 @@ s32 N(IdleAnimations_802189FC)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_80218A48)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80218A54)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              50,
@@ -90,7 +90,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 2, 24 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_802189B0),
-        .defenseTable = N(DefenseTable_80218A48),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -102,7 +102,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 2, -16 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_80218A48),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -117,7 +117,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_80218A54),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

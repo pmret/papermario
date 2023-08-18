@@ -15,7 +15,7 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
-s32 N(IdleAnimations_8022CB00)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_PyroGuy_Anim01,
     STATUS_KEY_STONE,     ANIM_PyroGuy_Anim00,
     STATUS_KEY_SLEEP,     ANIM_PyroGuy_Anim07,
@@ -28,7 +28,7 @@ s32 N(IdleAnimations_8022CB00)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_8022CB4C)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_WATER,   -2,
     ELEMENT_ICE,     -2,
@@ -39,7 +39,7 @@ s32 N(DefenseTable_8022CB4C)[] = {
     ELEMENT_END,
 };
 
-s32 N(StatusTable_8022CB88)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              70,
@@ -64,15 +64,15 @@ s32 N(StatusTable_8022CB88)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_8022CC34)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8022CB00),
-        .defenseTable = N(DefenseTable_8022CB4C),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_FIREY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -84,10 +84,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PYRO_GUY,
     .level = ACTOR_LEVEL_PYRO_GUY,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(ActorParts_8022CC34)),
-    .partsData = N(ActorParts_8022CC34),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_8022CB88),
+    .statusTable = N(StatusTable),
     .escapeChance = 60,
     .airLiftChance = 85,
     .hurricaneChance = 80,

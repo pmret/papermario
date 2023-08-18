@@ -46,12 +46,12 @@ enum N(ActorParams) {
     DMG_UNK         = 0,
 };
 
-s32 N(DefenseTable_80218C10)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80218C1C)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              80,
@@ -84,7 +84,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 20 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80218DC8),
-        .defenseTable = N(DefenseTable_80218C10),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -96,7 +96,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 72 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_80218C10),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -108,7 +108,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 54 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_80218C10),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -120,7 +120,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 36 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_80218C10),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -132,7 +132,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 16 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_80218C10),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -144,7 +144,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80218EB8),
-        .defenseTable = N(DefenseTable_80218C10),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -159,7 +159,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_80218C1C),
+    .statusTable = N(StatusTable),
     .escapeChance = 60,
     .airLiftChance = 90,
     .hurricaneChance = 85,

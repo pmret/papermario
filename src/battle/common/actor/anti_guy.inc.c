@@ -4,7 +4,7 @@
 
 #define NAMESPACE A(anti_guy)
 
-extern s32 N(IdleAnimations_80221A14)[];
+extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
@@ -14,12 +14,12 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
-s32 N(DefenseTable_80221910)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_8022191C)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              50,
@@ -48,15 +48,15 @@ s32 N(StatusTable_8022191C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_802219C8)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80221A14),
-        .defenseTable = N(DefenseTable_80221910),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -72,10 +72,10 @@ ActorBlueprint NAMESPACE = {
     #endif
     .level = ACTOR_LEVEL_ANTI_GUY,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT( N(ActorParts_802219C8)),
-    .partsData = N(ActorParts_802219C8),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_8022191C),
+    .statusTable = N(StatusTable),
     #ifdef ANTIGUY_TRIO
     .escapeChance = 0,
     #else
@@ -94,7 +94,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-s32 N(IdleAnimations_80221A14)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_ShyGuy_Black_Anim01,
     STATUS_KEY_STONE,     ANIM_ShyGuy_Black_Anim00,
     STATUS_KEY_SLEEP,     ANIM_ShyGuy_Black_Anim12,

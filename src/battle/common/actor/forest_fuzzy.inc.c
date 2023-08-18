@@ -5,7 +5,7 @@
 
 #define NAMESPACE A(forest_fuzzy)
 
-extern s32 N(IdleAnimations_802184C4)[];
+extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
@@ -25,12 +25,12 @@ enum N(ActorParams) {
     DMG_UNK         = 0,
 };
 
-s32 N(DefenseTable_802183C0)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_802183CC)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              95,
@@ -62,8 +62,8 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_802184C4),
-        .defenseTable = N(DefenseTable_802183C0),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -78,7 +78,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_802183CC),
+    .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -93,7 +93,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-s32 N(IdleAnimations_802184C4)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Fuzzy_Forest_Idle,
     STATUS_KEY_STONE,     ANIM_Fuzzy_Forest_Still,
     STATUS_KEY_SLEEP,     ANIM_Fuzzy_Forest_Sleep,

@@ -38,7 +38,7 @@ s32 N(DefenseTable_8021872C)[] = {
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80218740)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              40,
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_80218740),
+    .statusTable = N(StatusTable),
     .escapeChance = 80,
     .airLiftChance = 40,
     .hurricaneChance = 40,
