@@ -1096,6 +1096,7 @@ enum SoundIDs {
     SOUND_0328                                    = 0x00000328,
     SOUND_032B                                    = 0x0000032B,
     SOUND_032C                                    = 0x0000032C,
+    SOUND_032D                                    = 0x0000032D,
     SOUND_LRAW_SENTINEL_ALARM                   = 0x0000032E,
     SOUND_SNORE_INHALE_A                        = 0x0000032F,
     SOUND_SNORE_INHALE_B                        = 0x00000330,
