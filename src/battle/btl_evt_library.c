@@ -1785,7 +1785,7 @@ EvtScript EVS_Enemy_ScareAway = {
     EVT_WAIT(17)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_WAIT(3)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
     EVT_ADD(LVarA, 300)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)

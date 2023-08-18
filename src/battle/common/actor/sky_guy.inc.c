@@ -518,7 +518,7 @@ EvtScript N(handleEvent_8022A398) = {
 
 EvtScript N(takeTurn_8022A9D0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetBattlePhase, LVar0)
@@ -551,7 +551,7 @@ EvtScript N(takeTurn_8022A9D0) = {
             EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_6, LVar0, LVar1, LVar2, 0, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_6, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_EXEC_WAIT(N(80229C40))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -573,7 +573,7 @@ EvtScript N(takeTurn_8022A9D0) = {
             EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_6, LVar0, LVar1, LVar2, 0, 15, EASING_LINEAR)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_6, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_EXEC_WAIT(N(80229C40))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
@@ -601,7 +601,7 @@ EvtScript N(takeTurn_8022A9D0) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_EXEC_WAIT(N(80229C40))
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -755,7 +755,7 @@ EvtScript N(handleEvent_8022B310) = {
 
 EvtScript N(8022B7EC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -806,7 +806,7 @@ EvtScript N(8022B7EC) = {
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Red_Anim01)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -842,7 +842,7 @@ EvtScript N(8022B7EC) = {
     EVT_WAIT(8)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_EXEC_WAIT(N(8022B2AC))
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -850,7 +850,7 @@ EvtScript N(8022B7EC) = {
 
 EvtScript N(8022BF14) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -917,7 +917,7 @@ EvtScript N(8022BF14) = {
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Red_Anim01)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1003,7 +1003,7 @@ EvtScript N(8022BF14) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Red_Anim01)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

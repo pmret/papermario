@@ -157,7 +157,7 @@ EvtScript N(80224CAC) = {
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -249,7 +249,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -257,7 +257,7 @@ EvtScript N(EVS_HandleEvent) = {
 
 EvtScript N(basicAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -303,7 +303,7 @@ EvtScript N(basicAttack) = {
             EVT_EXEC_WAIT(N(80224CAC))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -341,7 +341,7 @@ EvtScript N(basicAttack) = {
             EVT_EXEC_WAIT(N(80224CAC))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -349,7 +349,7 @@ EvtScript N(basicAttack) = {
 
 EvtScript N(sleepySpin) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -387,7 +387,7 @@ EvtScript N(sleepySpin) = {
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_EXEC_WAIT(N(80224CAC))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -446,7 +446,7 @@ EvtScript N(sleepySpin) = {
             EVT_EXEC_WAIT(N(80224CAC))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -713,7 +713,7 @@ EvtScript N(8022671C) = {
 
 EvtScript N(80226C00) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_EXEC_WAIT(N(8022671C))
     EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802273A8)), FALSE)
     EVT_SET(LVarB, LVar0)
@@ -733,7 +733,7 @@ EvtScript N(80226C00) = {
     EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, LVarB)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -741,7 +741,7 @@ EvtScript N(80226C00) = {
 
 EvtScript N(80226DEC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_EXEC_WAIT(N(8022671C))
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -781,7 +781,7 @@ EvtScript N(80226DEC) = {
     EVT_WAIT(25)
     EVT_CALL(SetAnimation, LVarB, PRT_MAIN, ANIM_GrooveGuy_Anim01)
     EVT_CALL(HPBarToHome, LVarB)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
@@ -796,7 +796,7 @@ EvtScript N(80226DEC) = {
 
 EvtScript N(802271A0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_EXEC_WAIT(N(8022671C))
     EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802273E0)), FALSE)
     EVT_SET(LVarB, LVar0)
@@ -817,7 +817,7 @@ EvtScript N(802271A0) = {
     EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, LVarB)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

@@ -144,7 +144,7 @@ EvtScript N(EVS_UsePower) = {
                 EVT_THREAD
                     EVT_CALL(PlaySound, SOUND_UP_AND_AWAY_CAPTURE)
                     EVT_CALL(GetOwnerTarget, LVarA, LVar1)
-                    EVT_CALL(SetActorFlagBits, LVarA, 4, TRUE)
+                    EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, TRUE)
                     EVT_SETF(LVar0, EVT_FLOAT(1.0))
                     EVT_LOOP(18)
                         EVT_SUBF(LVar0, EVT_FLOAT(0.05))

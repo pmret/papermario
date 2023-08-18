@@ -163,7 +163,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent_Inner) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -270,7 +270,7 @@ EvtScript N(EVS_HandleEvent_Inner) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -303,12 +303,12 @@ EvtScript N(EVS_Attack_StrikeOnce) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -322,11 +322,11 @@ EvtScript N(EVS_Attack_StrikeOnce) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 5, FALSE)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03ED)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20BB)
     EVT_WAIT(2)
@@ -373,7 +373,7 @@ EvtScript N(EVS_Attack_StrikeOnce) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedRun)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -400,13 +400,13 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPalmStance)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -420,12 +420,12 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPalmStance)
     EVT_CALL(RunToGoal, ACTOR_SELF, 5, FALSE)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
@@ -442,11 +442,11 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_JUMP)
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedUppercut)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.9))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 25, FALSE, TRUE, FALSE)
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
@@ -503,7 +503,7 @@ EvtScript N(EVS_Attack_StrikeTwice) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedRun)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -531,13 +531,13 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPalmStance)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -551,12 +551,12 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedPalmStance)
     EVT_CALL(RunToGoal, ACTOR_SELF, 5, FALSE)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
@@ -572,13 +572,13 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
     EVT_WAIT(15)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
         EVT_WAIT(5)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_JUMP)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedUppercut)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 25, FALSE, TRUE, FALSE)
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
@@ -628,11 +628,11 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_B)
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedKick)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 3, FALSE)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
@@ -693,7 +693,7 @@ EvtScript N(EVS_Attack_StrikeThrice) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedRun)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -717,13 +717,13 @@ EvtScript N(EVS_AscendToFinalForm) = {
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedDownwardStance)
     EVT_WAIT(15)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 50)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedIdle)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 90, 0, EASING_COS_IN_OUT)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -744,7 +744,7 @@ EvtScript N(EVS_AscendToFinalForm) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -796,7 +796,7 @@ EvtScript N(EVS_Attack_SpiritStrike) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -831,7 +831,7 @@ EvtScript N(EVS_Attack_FlyingGrab) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -839,7 +839,7 @@ EvtScript N(EVS_Attack_FlyingGrab) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IsFinalForm, LVar0)
     EVT_IF_EQ(LVar0, FALSE)
         EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
@@ -877,7 +877,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_EXEC_WAIT(N(EVS_Attack_SpiritStrike))
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -885,7 +885,7 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
@@ -979,7 +979,7 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_BREAK_SWITCH
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -1025,7 +1025,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_IF_EQ(LVarA, TRUE)
                 EVT_IF_GT(LVarB, INITIAL_HIT_COUNT)
                     // 'You have great hidden strength'
@@ -1040,7 +1040,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(MoveBattleCamOver, 10)
                 EVT_CALL(ActorSpeak, MSG_MAC_Gate_0039, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedTalk, ANIM_TheMaster_AscendedWalk)
             EVT_END_IF
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

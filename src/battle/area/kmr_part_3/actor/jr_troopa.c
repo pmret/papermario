@@ -252,7 +252,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HitReact_State, LVar0)
     EVT_IF_EQ(LVar0, AVAL_HitReact_Init)
         EVT_CALL(GetLastDamage, ACTOR_SELF, LVar1)
@@ -285,7 +285,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -293,7 +293,7 @@ EvtScript N(EVS_HandleEvent) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_TurnCount, 1)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
@@ -306,7 +306,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_WAIT(20)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(ActorSpeak, MSG_CH0_00B1, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle)
         EVT_END_IF
     EVT_END_IF
@@ -397,7 +397,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -405,7 +405,7 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
@@ -495,7 +495,7 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

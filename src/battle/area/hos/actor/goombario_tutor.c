@@ -165,7 +165,7 @@ EvtScript N(EVS_HandleEvent) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 400)
@@ -275,7 +275,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -294,7 +294,7 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)

@@ -131,7 +131,7 @@ EvtScript N(goombario_idle) = {
 
 EvtScript N(goombario_handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -230,7 +230,7 @@ EvtScript N(goombario_handleEvent) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -331,7 +331,7 @@ EvtScript N(goombario_8021C7FC) = {
 
 EvtScript N(EVS_Move_Headbonk) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_EXEC_WAIT(N(goombario_runToPlayer))
     EVT_EXEC_WAIT(N(goombario_8021C7FC))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
@@ -373,7 +373,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_WAIT(20)
             EVT_CALL(YieldTurn)
             EVT_EXEC_WAIT(N(goombario_returnBack))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -428,11 +428,11 @@ EvtScript N(EVS_Move_Headbonk) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
         EVT_CASE_EQ(2)
             EVT_THREAD
                 EVT_WAIT(4)
@@ -453,11 +453,11 @@ EvtScript N(EVS_Move_Headbonk) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
-            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_END_SWITCH
     EVT_CHILD_THREAD
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
@@ -485,7 +485,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_EXEC_WAIT(N(goombario_returnBack))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -493,7 +493,7 @@ EvtScript N(EVS_Move_Headbonk) = {
 
 EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -529,7 +529,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

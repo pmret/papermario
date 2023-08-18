@@ -5958,15 +5958,15 @@ enum Language {
 };
 
 enum IdleScriptState {
-    IDLE_SCRIPT_ENABLE,
-    IDLE_SCRIPT_DISABLE,
+    IDLE_SCRIPT_DISABLE = 0,
+    IDLE_SCRIPT_ENABLE  = 1,
     IDLE_SCRIPT_RESTART = -1,
 };
 
 enum BlurState {
-    BLUR_ENABLE,
-    BLUR_DISABLE,
-    BLUR_RESET = -1,
+    BLUR_ENABLE     = 0,
+    BLUR_DISABLE    = 1,
+    BLUR_RESET      = -1,
 };
 
 #endif

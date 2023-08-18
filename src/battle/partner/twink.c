@@ -232,7 +232,7 @@ EvtScript N(EVS_HandlePhase) = {
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_TWINK_FLY_B)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
@@ -257,7 +257,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -20, EASING_QUARTIC_OUT)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
     EVT_IF_GT(LVarF, 1)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_207E)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -274,7 +274,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, 150, 100, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 20, EASING_LINEAR)
-    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_LOOP(0)
@@ -289,7 +289,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, -20, EASING_COS_IN_OUT)
-    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_RETURN
     EVT_END

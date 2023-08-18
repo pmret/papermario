@@ -969,14 +969,14 @@ ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall) {
 
     if (actor->idleScript != NULL) {
         switch (var1) {
-            case -1:
+            case IDLE_SCRIPT_RESTART:
                 restart_script(actor->idleScript);
                 resume_all_script(actor->idleScriptID);
                 break;
-            case 1:
+            case IDLE_SCRIPT_ENABLE:
                 resume_all_script(actor->idleScriptID);
                 break;
-            case 0:
+            case IDLE_SCRIPT_DISABLE:
                 suspend_all_script(actor->idleScriptID);
                 break;
         }

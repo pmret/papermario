@@ -2,16 +2,13 @@
 #include "sprite/npc/GoombaKing.h"
 #include "sprite/npc/GoombaBros.h"
 #include "sprite/player.h"
+#include "goomba_king_common.h"
 
 #define NAMESPACE A(goomba_king)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
-    // note: these reference the goomnut tree actor
-    PRT_TREE_3          = 3,
-    PRT_TREE_4          = 4,
-    PRT_TREE_5          = 5,
 };
 
 enum N(ActorVars) {
@@ -254,7 +251,7 @@ EvtScript N(80220DB0) = {
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -353,7 +350,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -361,7 +358,7 @@ EvtScript N(EVS_HandleEvent) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -450,7 +447,7 @@ EvtScript N(80221680) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaKing_Run)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaKing_Idle)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -474,7 +471,7 @@ EvtScript N(80221680) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaKing_Idle)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -574,7 +571,7 @@ EvtScript N(80221CD4) = {
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0x80000000, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -647,7 +644,7 @@ EvtScript N(80221CD4) = {
         EVT_CASE_EQ(10)
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -655,7 +652,7 @@ EvtScript N(80221CD4) = {
 
 EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(10)
@@ -667,18 +664,18 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
-                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
+                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, IDLE_SCRIPT_DISABLE)
                 EVT_CALL(ActorSpeak, MSG_CH0_00CB, ACTOR_ENEMY1, PRT_MAIN, ANIM_GoombaBros_Red_Talk, ANIM_GoombaBros_Red_Talk)
-                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 1)
+                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, IDLE_SCRIPT_ENABLE)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, TRUE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
                 EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY2)
                 EVT_CALL(MoveBattleCamOver, 10)
                 EVT_WAIT(10)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, FALSE)
-                EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 0)
+                EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, IDLE_SCRIPT_DISABLE)
                 EVT_CALL(ActorSpeak, MSG_CH0_00CC, ACTOR_ENEMY2, PRT_MAIN, ANIM_GoombaBros_Blue_Talk, ANIM_GoombaBros_Blue_Talk)
-                EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 1)
+                EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, IDLE_SCRIPT_ENABLE)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, TRUE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
@@ -705,7 +702,7 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -766,7 +763,7 @@ EvtScript N(doDeath_80222F50) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_WAIT(30)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
     EVT_IF_EQ(LVar0, 1)
@@ -774,9 +771,9 @@ EvtScript N(doDeath_80222F50) = {
     EVT_END_IF
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
-        EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
+        EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, IDLE_SCRIPT_DISABLE)
         EVT_CALL(ActorSpeak, MSG_CH0_00CF, ACTOR_ENEMY1, PRT_MAIN, ANIM_GoombaBros_Red_CryTalk, ANIM_GoombaBros_Red_CryTalk)
-        EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 1)
+        EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, IDLE_SCRIPT_ENABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, TRUE)
     EVT_END_IF
     EVT_CALL(ActorExists, ACTOR_ENEMY2, LVar0)
@@ -785,9 +782,9 @@ EvtScript N(doDeath_80222F50) = {
     EVT_END_IF
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, FALSE)
-        EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 0)
+        EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, IDLE_SCRIPT_DISABLE)
         EVT_CALL(ActorSpeak, MSG_CH0_00D0, ACTOR_ENEMY2, PRT_MAIN, ANIM_GoombaBros_Blue_CryTalk, ANIM_GoombaBros_Blue_CryTalk)
-        EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, 1)
+        EVT_CALL(EnableIdleScript, ACTOR_ENEMY2, IDLE_SCRIPT_ENABLE)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY2, TRUE)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)

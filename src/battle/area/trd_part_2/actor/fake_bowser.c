@@ -1634,7 +1634,7 @@ API_CALLABLE(N(PlayKoopaBrosSong)) {
 
 EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(UseIdleAnimation, GREEN_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, GREEN_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, GREEN_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, GREEN_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Launched)
     EVT_THREAD
@@ -1644,7 +1644,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(JumpToGoal, GREEN_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, YELLOW_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, YELLOW_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, YELLOW_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, YELLOW_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Launched)
     EVT_THREAD
@@ -1654,7 +1654,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(JumpToGoal, YELLOW_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, BLACK_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, BLACK_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, BLACK_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Launched)
     EVT_THREAD
@@ -1664,7 +1664,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(JumpToGoal, BLACK_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, RED_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, RED_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, RED_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, RED_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Launched)
     EVT_THREAD
