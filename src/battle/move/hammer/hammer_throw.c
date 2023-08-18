@@ -206,11 +206,11 @@ EvtScript N(EVS_UseMove_Impl) = {
         EVT_END_IF
         EVT_ADD(LVarD, 6)
         EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
-        EVT_CALL(SetActionResult, 0)
+        EVT_CALL(SetActionQuality, 0)
         EVT_SET(LVar1, 0)
         EVT_LOOP(30)
             EVT_WAIT(1)
-            EVT_CALL(GetActionResult, LVar0)
+            EVT_CALL(GetActionQuality, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_IF_NE(LVar1, 1)
                     EVT_CALL(GetMenuSelection, LVar3, LVar4, LVar5)

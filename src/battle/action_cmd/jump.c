@@ -11,7 +11,7 @@ API_CALLABLE(N(init)) {
 
     gBattleStatus.unk_82 = 1;
     gBattleStatus.actionCmdDifficultyTable = actionCmdTableJump;
-    gBattleStatus.unk_86 = 0;
+    gBattleStatus.actionResult = ACTION_RESULT_FAIL;
 
     if (gBattleStatus.actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         gBattleStatus.actionSuccess = 0;
@@ -125,7 +125,7 @@ void N(update)(void) {
             }
             if ((battleStatus->curButtonsPressed & BUTTON_A) && (actionCommandStatus->autoSucceed == 0)) {
                 actionCommandStatus->wrongButtonPressed = TRUE;
-                battleStatus->unk_86 = -1;
+                battleStatus->actionResult = ACTION_RESULT_EARLY;
             }
             if ((actionCommandStatus->prepareTime - temp_s0_3) > 0) {
                 actionCommandStatus->prepareTime -= 1;
@@ -157,7 +157,7 @@ void N(update)(void) {
                     !actionCommandStatus->wrongButtonPressed) ||
                     (actionCommandStatus->autoSucceed != 0)) {
                     battleStatus->actionSuccess = 1;
-                    battleStatus->unk_86 = 1;
+                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                     gBattleStatus.flags1 |= BS_FLAGS1_2000;
                 }
             }

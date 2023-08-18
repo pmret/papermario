@@ -86,7 +86,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarE)
+    EVT_CALL(GetActionResult, LVarE)
     EVT_ADD(LVarF, 1)
     EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
@@ -151,7 +151,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
@@ -237,7 +237,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarE)
+    EVT_CALL(GetActionResult, LVarE)
     EVT_SET(LFlag0, FALSE)
     EVT_SET(LVarF, 0)
     EVT_ADD(LVarF, 1)
@@ -307,7 +307,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
@@ -393,7 +393,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarE)
+    EVT_CALL(GetActionResult, LVarE)
     EVT_SET(LFlag0, FALSE)
     EVT_SET(LVarF, 0)
     EVT_ADD(LVarF, 1)
@@ -456,7 +456,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)

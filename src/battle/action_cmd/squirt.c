@@ -26,7 +26,7 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
-    battleStatus->actionResult = 0;
+    battleStatus->actionQuality = 0;
     actionCommandStatus->hudPosX = -48;
     actionCommandStatus->unk_5C = 0;
     actionCommandStatus->hudPosY = 80;
@@ -65,7 +65,7 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_80269118();
@@ -151,8 +151,8 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
             id = actionCommandStatus->hudElements[0];
             if (temp < 80) {
                 if (hud_element_get_script(id) != &HES_AButtonDown) {
@@ -172,14 +172,14 @@ void N(update)(void) {
             if (actionCommandStatus->barFillLevel == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionResult;
+                battleStatus->actionSuccess = battleStatus->actionQuality;
             }
 
             cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
-            if (cutoff / 2 < battleStatus->actionResult) {
-                battleStatus->unk_86 = 1;
+            if (cutoff / 2 < battleStatus->actionQuality) {
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
-                battleStatus->unk_86 = -4;
+                battleStatus->actionResult = ACTION_RESULT_MINUS_4;
             }
 
             if (battleStatus->actionSuccess == 100) {

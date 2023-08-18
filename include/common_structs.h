@@ -882,10 +882,10 @@ typedef struct BattleStatus {
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 actionCommandMode;
-    /* 0x084 */ s8 actionResult; // actionResultAmount?
-    /* 0x085 */ s8 unk_85;
-    /* 0x086 */ s8 unk_86; // actionResult?
-    /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
+    /* 0x084 */ s8 actionQuality; // actionCommandVar1 ?
+    /* 0x085 */ s8 unk_85; // actionCommandVar2 ?
+    /* 0x086 */ s8 actionResult; // see enum ActionResult
+    /* 0x087 */ s8 blockResult; // see enum BlockResult
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
     /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;

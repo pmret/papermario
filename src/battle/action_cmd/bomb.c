@@ -14,7 +14,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBomb;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
 
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -147,8 +147,8 @@ void N(update)(void) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             if (actionCommandStatus->frameCounter == 0) {
                 if (actionCommandStatus->barFillLevel == 0) {
@@ -159,9 +159,9 @@ void N(update)(void) {
 
                 mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
                 if (mashMeterCutoff >= battleStatus->actionSuccess) {
-                    battleStatus->unk_86 = -2;
+                    battleStatus->actionResult = ACTION_RESULT_MINUS_2;
                 } else {
-                    battleStatus->unk_86 = 1;
+                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 }
 
                 if (battleStatus->actionSuccess == 100) {

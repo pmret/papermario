@@ -16,7 +16,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 0;
     battleStatus->actionCmdDifficultyTable = actionCmdTableFlee;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
     action_command_init_status();
     actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
@@ -82,7 +82,7 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->difficulty = adjust_action_command_difficulty(actionCommandStatus->difficulty);
     actionCommandStatus->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
     battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
     actionCommandStatus->state = 10;
@@ -156,10 +156,10 @@ void N(update)(void) {
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
             if (actionCommandStatus->frameCounter == 0) {
                 if (battleStatus->actionSuccess >= (100 - actionCommandStatus->thresholdLevel)) {
-                    battleStatus->unk_86 = 1;
+                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                     battleStatus->actionSuccess = 1;
                 } else {
-                    battleStatus->unk_86 = -2;
+                    battleStatus->actionResult = ACTION_RESULT_MINUS_2;
                     battleStatus->actionSuccess = -1;
                 }
                 actionCommandStatus->frameCounter = 20;

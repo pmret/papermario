@@ -102,7 +102,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_80269524, LVarE)
+    EVT_CALL(GetActionResult, LVarE)
     EVT_SET(LVarD, 0)
     EVT_SET(LVarF, 0)
     EVT_SET(LFlag0, FALSE)
@@ -175,7 +175,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -232,7 +232,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarE)
+    EVT_CALL(GetActionResult, LVarE)
     EVT_SET(LVarD, 0)
     EVT_SET(LVarF, 0)
     EVT_SET(LFlag0, FALSE)
@@ -311,7 +311,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -368,7 +368,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarE)
+    EVT_CALL(GetActionResult, LVarE)
     EVT_SET(LVarD, 0)
     EVT_SET(LVarF, 0)
     EVT_SET(LFlag0, FALSE)
@@ -443,7 +443,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_CASE_DEFAULT
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

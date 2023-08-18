@@ -140,11 +140,11 @@ API_CALLABLE(CloseActionCommandInfo);
 API_CALLABLE(func_80269470);
 API_CALLABLE(ShowActionHud);
 API_CALLABLE(GetActionSuccessCopy);
-API_CALLABLE(func_80269524);
-API_CALLABLE(func_80269550);
-API_CALLABLE(GetBlockResult);
 API_CALLABLE(GetActionResult);
 API_CALLABLE(SetActionResult);
+API_CALLABLE(GetBlockResult);
+API_CALLABLE(GetActionQuality);
+API_CALLABLE(SetActionQuality);
 API_CALLABLE(func_80269600);
 API_CALLABLE(func_8026962C);
 

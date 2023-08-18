@@ -991,7 +991,7 @@ EvtScript N(headbonk1) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -1023,7 +1023,7 @@ EvtScript N(headbonk1) = {
     EVT_ADD(LVar0, 1)
     EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(returnHome2))
     EVT_RETURN
     EVT_END
@@ -1096,7 +1096,7 @@ EvtScript N(headbonk2) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -1130,7 +1130,7 @@ EvtScript N(headbonk2) = {
     EVT_ADD(LVar0, 2)
     EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(returnHome2))
     EVT_RETURN
     EVT_END
@@ -1203,7 +1203,7 @@ EvtScript N(headbonk3) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -1246,7 +1246,7 @@ EvtScript N(headbonk3) = {
     EVT_ADD(LVar0, 3)
     EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(returnHome2))
     EVT_RETURN
     EVT_END
@@ -1323,7 +1323,7 @@ EvtScript N(multibonk) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_53)
     EVT_END_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_SET(LVarD, 0)
     EVT_SET(LVarF, 0)
     EVT_SET(LFlag0, FALSE)
@@ -1407,7 +1407,7 @@ EvtScript N(multibonk) = {
             EVT_SET(LFlag0, FALSE)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
-    EVT_CALL(func_80269550, LVarE)
+    EVT_CALL(SetActionResult, LVarE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

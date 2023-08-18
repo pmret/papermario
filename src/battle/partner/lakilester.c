@@ -998,7 +998,7 @@ EvtScript N(spinySurge) = {
     EVT_SET(LFlag2, FALSE)
     EVT_SET(LFlag3, FALSE)
     EVT_LOOP(LVarA)
-        EVT_CALL(GetActionResult, LVar0)
+        EVT_CALL(GetActionQuality, LVar0)
         EVT_IF_EQ(LVar9, 2)
             EVT_SET(LVar0, 3)
         EVT_END_IF

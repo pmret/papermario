@@ -27,7 +27,7 @@ API_CALLABLE(N(init)) {
         actionCommandStatus->wrongButtonPressed = FALSE;
         actionCommandStatus->barFillLevel = 0;
         actionCommandStatus->barFillWidth = 0;
-        battleStatus->actionResult = 0;
+        battleStatus->actionQuality = 0;
         actionCommandStatus->hudPosX = -48;
         actionCommandStatus->hudPosY = 80;
 
@@ -68,8 +68,8 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionResult = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionQuality = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_80269118();
@@ -262,7 +262,7 @@ void N(update)(void) {
                             actionCommandStatus->barFillLevel = 10000;
                         }
                         actionCommandStatus->state = 11;
-                        battleStatus->actionResult++;
+                        battleStatus->actionQuality++;
                         sfx_play_sound(SOUND_APPROVE);
                         return;
                     }
@@ -272,12 +272,12 @@ void N(update)(void) {
             }
             break;
         case 13:
-            if (battleStatus->actionResult == 0) {
+            if (battleStatus->actionQuality == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionResult;
+                battleStatus->actionSuccess = battleStatus->actionQuality;
             }
-            battleStatus->unk_86 = 1;
+            battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             if (battleStatus->actionSuccess >= 10) {
                 func_80269160();
             }

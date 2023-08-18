@@ -41,7 +41,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableSmack;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
@@ -56,7 +56,7 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->barFillWidth = 0;
     actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionResult = 0;
+    battleStatus->actionQuality = 0;
     actionCommandStatus->hudPosX = -48;
     actionCommandStatus->hudPosY = 80;
 
@@ -184,54 +184,54 @@ void N(update)(void) {
                 hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             switch (partnerActor->actorBlueprint->level) {
                 case 0:
-                    if (battleStatus->actionResult >= D_802A99E4_42ED84[battleStatus->unk_85]) {
+                    if (battleStatus->actionQuality >= D_802A99E4_42ED84[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
 
                     if (battleStatus->unk_85 > 0) {
                         s32 index = battleStatus->unk_85 - 1;
-                        if (battleStatus->actionResult < D_802A99E4_42ED84[index]) {
+                        if (battleStatus->actionQuality < D_802A99E4_42ED84[index]) {
                             battleStatus->unk_85--;
                         }
                     }
                     break;
                 case 1:
-                    if (battleStatus->actionResult >= D_802A99F4_42ED94[battleStatus->unk_85]) {
+                    if (battleStatus->actionQuality >= D_802A99F4_42ED94[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
 
                     if (battleStatus->unk_85 > 0) {
                         s32 index = battleStatus->unk_85 - 1;
-                        if (battleStatus->actionResult < D_802A99F4_42ED94[index]) {
+                        if (battleStatus->actionQuality < D_802A99F4_42ED94[index]) {
                             battleStatus->unk_85--;
                         }
                     }
                     break;
                 case 2:
                     if (actionCommandStatus->targetWeakness == 0) {
-                        if (battleStatus->actionResult >= D_802A9A08_42EDA8[battleStatus->unk_85]) {
+                        if (battleStatus->actionQuality >= D_802A9A08_42EDA8[battleStatus->unk_85]) {
                             battleStatus->unk_85++;
                         }
 
                         if (battleStatus->unk_85 > 0) {
                             s32 index = battleStatus->unk_85 - 1;
-                            if (battleStatus->actionResult < D_802A9A08_42EDA8[index]) {
+                            if (battleStatus->actionQuality < D_802A9A08_42EDA8[index]) {
                                 battleStatus->unk_85--;
                             }
                         }
                     } else {
-                        if (battleStatus->actionResult >= D_802A9A20_42EDC0[battleStatus->unk_85]) {
+                        if (battleStatus->actionQuality >= D_802A9A20_42EDC0[battleStatus->unk_85]) {
                             battleStatus->unk_85++;
                         }
 
                         if (battleStatus->unk_85 > 0) {
                             s32 index = battleStatus->unk_85 - 1;
-                            if (battleStatus->actionResult < D_802A9A20_42EDC0[index]) {
+                            if (battleStatus->actionQuality < D_802A9A20_42EDC0[index]) {
                                 battleStatus->unk_85--;
                             }
                         }
@@ -251,9 +251,9 @@ void N(update)(void) {
 
                 mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
                 if (mashMeterCutoff < battleStatus->actionSuccess) {
-                    battleStatus->unk_86 = 1;
+                    battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 } else {
-                    battleStatus->unk_86 = -2;
+                    battleStatus->actionResult = ACTION_RESULT_MINUS_2;
                 }
 
                 if (battleStatus->actionSuccess == 100) {

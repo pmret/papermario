@@ -17,7 +17,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableAirRaid;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
 
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -158,32 +158,32 @@ void N(update)(void) {
                 hud_element_clear_flags(id, 2);
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
 
             switch (partner->actorBlueprint->level) {
                 case 0:
-                    if (battleStatus->actionResult >= D_802A9984_429CA4[battleStatus->unk_85]) {
+                    if (battleStatus->actionQuality >= D_802A9984_429CA4[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
 
-                    if (battleStatus->unk_85 > 0 && battleStatus->actionResult < D_802A9984_429CA4[battleStatus->unk_85 - 1]) {
+                    if (battleStatus->unk_85 > 0 && battleStatus->actionQuality < D_802A9984_429CA4[battleStatus->unk_85 - 1]) {
                         battleStatus->unk_85--;
                     }
                     break;
                 case 1:
-                    if (battleStatus->actionResult >= D_802A9994_429CB4[battleStatus->unk_85]) {
+                    if (battleStatus->actionQuality >= D_802A9994_429CB4[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
-                    if (battleStatus->unk_85 > 0 && battleStatus->actionResult < D_802A9994_429CB4[battleStatus->unk_85 - 1]) {
+                    if (battleStatus->unk_85 > 0 && battleStatus->actionQuality < D_802A9994_429CB4[battleStatus->unk_85 - 1]) {
                         battleStatus->unk_85--;
                     }
                     break;
                 case 2:
-                    if (battleStatus->actionResult >= D_802A99A8_429CC8[battleStatus->unk_85]) {
+                    if (battleStatus->actionQuality >= D_802A99A8_429CC8[battleStatus->unk_85]) {
                         battleStatus->unk_85++;
                     }
-                    if (battleStatus->unk_85 > 0 && battleStatus->actionResult < D_802A99A8_429CC8[battleStatus->unk_85 - 1]) {
+                    if (battleStatus->unk_85 > 0 && battleStatus->actionQuality < D_802A99A8_429CC8[battleStatus->unk_85 - 1]) {
                         battleStatus->unk_85--;
                     }
                     break;
@@ -202,9 +202,9 @@ void N(update)(void) {
 
             cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
             if (battleStatus->actionSuccess <= cutoff) {
-                battleStatus->unk_86 = -2;
+                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
             } else {
-                battleStatus->unk_86 = 1;
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             }
 
             if (battleStatus->actionSuccess == 100) {

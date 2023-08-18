@@ -1933,6 +1933,22 @@ typedef enum HitResult {
     HIT_RESULT_10                   = 10,
 } HitResult;
 
+typedef enum ActionResult {
+    ACTION_RESULT_NONE      = 127,
+    ACTION_RESULT_MINUS_4   = -4,
+    ACTION_RESULT_MINUS_2   = -2,
+    ACTION_RESULT_EARLY     = -1,
+    ACTION_RESULT_FAIL      = 0,
+    ACTION_RESULT_SUCCESS   = 1,
+} ActionResult;
+
+typedef enum BlockResult {
+    BLOCK_RESULT_NONE       = 127,
+    BLOCK_RESULT_EARLY      = -1,
+    BLOCK_RESULT_FAIL       = 0,
+    BLOCK_RESULT_SUCCESS    = 1,
+} BlockResult;
+
 enum ActionRatings {
     ACTION_RATING_NICE              = 0, ///< sets nice hits = 1
     ACTION_RATING_MISS              = 1, ///< clears nice hits

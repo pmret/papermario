@@ -796,7 +796,7 @@ EvtScript N(spook) = {
     EVT_END_THREAD
     EVT_CALL(N(AverageSpookChance))
     EVT_CALL(action_command_spook_start, 0, 87 * DT, 3, LVar0)
-    EVT_CALL(GetActionResult, LVar1)
+    EVT_CALL(GetActionQuality, LVar1)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Conceal)
     EVT_SET(LVar1, 0)
     EVT_SET(LVar2, 0)
@@ -887,7 +887,7 @@ EvtScript N(spook) = {
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOW_SPOOK)
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
-    EVT_CALL(GetActionResult, LVar2)
+    EVT_CALL(GetActionQuality, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_LE(20)
             EVT_SETF(LVar1, EVT_FLOAT(0.3))
@@ -926,7 +926,7 @@ EvtScript N(spook) = {
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 45, 0)
     EVT_WAIT(15)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(GetActionResult, LVarF)
+    EVT_CALL(GetActionQuality, LVarF)
     EVT_LOOP(0)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
@@ -963,7 +963,7 @@ EvtScript N(spook) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(GetActionResult, LVar2)
+    EVT_CALL(GetActionQuality, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_LE(20)
             EVT_SETF(LVar1, EVT_FLOAT(0.3))

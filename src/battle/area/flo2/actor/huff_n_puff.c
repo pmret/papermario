@@ -2129,7 +2129,7 @@ EvtScript N(attackWindBreath) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_CALL(GetActionResult, LVar1)
+        EVT_CALL(GetActionQuality, LVar1)
     EVT_ELSE
         EVT_THREAD
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SCALE_X), LVar2)

@@ -130,7 +130,7 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     actionCommandStatus->targetWeakness = evt_get_variable(script, *args++);
-    battleStatus->actionResult = 1;
+    battleStatus->actionQuality = 1;
     actionCommandStatus->hudPrepareTime = 30;
     actionCommandStatus->hudPosX = -48;
     actionCommandStatus->hudPosY = 80;
@@ -232,9 +232,9 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->wrongButtonPressed = FALSE;
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
-    battleStatus->actionResult = 1;
+    battleStatus->actionQuality = 1;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_80269118();
@@ -396,7 +396,7 @@ void N(update)(void) {
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !actionCommandStatus->wrongButtonPressed) ||
                         (actionCommandStatus->autoSucceed != 0)) {
                         actionCommandStatus->unk_5C = 1;
-                        battleStatus->actionResult++;
+                        battleStatus->actionQuality++;
                         break;
                     }
                 }
@@ -471,7 +471,7 @@ void N(update)(void) {
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !actionCommandStatus->wrongButtonPressed) ||
                         (actionCommandStatus->autoSucceed != 0)) {
                         actionCommandStatus->unk_5C = 1;
-                        battleStatus->actionResult++;
+                        battleStatus->actionQuality++;
                         break;
                     }
                 }
@@ -545,7 +545,7 @@ void N(update)(void) {
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !actionCommandStatus->wrongButtonPressed) ||
                         (actionCommandStatus->autoSucceed != 0)) {
                         actionCommandStatus->unk_5C = 1;
-                        battleStatus->actionResult++;
+                        battleStatus->actionQuality++;
                         break;
                     }
                 }
@@ -578,12 +578,12 @@ void N(update)(void) {
             actionCommandStatus->unk_5D--;
             break;
         case 16:
-            if (battleStatus->actionResult == 0) {
+            if (battleStatus->actionQuality == 0) {
                 battleStatus->actionSuccess = -1;
             } else {
-                battleStatus->actionSuccess = battleStatus->actionResult;
+                battleStatus->actionSuccess = battleStatus->actionQuality;
             }
-            battleStatus->unk_86 = 1;
+            battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             if (battleStatus->actionSuccess == 3) {
                 func_80269160();
             }
@@ -617,8 +617,8 @@ void N(draw)(void) {
     hud_element_draw_clipped(actionCommandStatus->hudElements[13]);
 
     hudElement = actionCommandStatus->hudElements[10];
-    if (hud_element_get_script(hudElement) != D_802AB180_42C670[battleStatus->actionResult]) {
-        hud_element_set_script(hudElement, D_802AB180_42C670[battleStatus->actionResult]);
+    if (hud_element_get_script(hudElement) != D_802AB180_42C670[battleStatus->actionQuality]) {
+        hud_element_set_script(hudElement, D_802AB180_42C670[battleStatus->actionQuality]);
     }
 
     hud_element_draw_clipped(hudElement);

@@ -81,7 +81,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -96,7 +96,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -132,7 +132,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_27)
         EVT_WAIT(5)
@@ -157,7 +157,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -193,7 +193,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_28)
         EVT_WAIT(5)
@@ -216,7 +216,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 3, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END

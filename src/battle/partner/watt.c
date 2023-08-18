@@ -1056,7 +1056,7 @@ EvtScript N(powerShock) = {
         EVT_EXEC_WAIT(N(returnHome))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActionResult, LVarF)
+    EVT_CALL(GetActionQuality, LVarF)
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -1297,7 +1297,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(N(WattFXDisable))
-    EVT_CALL(GetActionResult, LVar1)
+    EVT_CALL(GetActionQuality, LVar1)
     EVT_WAIT(90 * DT)
     EVT_CALL(N(SetBackgroundAlpha), 0)
     EVT_THREAD
@@ -1341,7 +1341,7 @@ EvtScript N(megaShock) = {
     EVT_THREAD
         EVT_CALL(N(PowerShockDischargeFX), 10)
     EVT_END_THREAD
-    EVT_CALL(GetActionResult, LVar0)
+    EVT_CALL(GetActionQuality, LVar0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar1, LVar2, LVar3)
     EVT_ADD(LVar2, 12)
     EVT_CALL(N(MegaShockFX), LVar0, LVar1, LVar2, LVar3)

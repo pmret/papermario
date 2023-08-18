@@ -196,7 +196,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 #else
             state->vel = 3.0f;
 #endif
-            battleStatus->unk_86 = 0;
+            battleStatus->actionResult = ACTION_RESULT_FAIL;
             action_command_init_status();
             func_80269118();
             script->functionTemp[0] = 1;
@@ -262,23 +262,23 @@ API_CALLABLE(N(ShellShotActionCommand)) {
 
             if (state->vel >= 0.0f) {
                 if (clampedAngleDiff < 0.0f) {
-                    battleStatus->unk_86 = 0;
+                    battleStatus->actionResult = ACTION_RESULT_FAIL;
                 } else {
-                    battleStatus->unk_86 = -1;
+                    battleStatus->actionResult = ACTION_RESULT_EARLY;
                 }
             } else if (clampedAngleDiff < 0.0f) {
-                battleStatus->unk_86 = -1;
+                battleStatus->actionResult = ACTION_RESULT_EARLY;
             } else {
-                battleStatus->unk_86 = 0;
+                battleStatus->actionResult = ACTION_RESULT_FAIL;
             }
-            battleStatus->actionResult = 0;
+            battleStatus->actionQuality = 0;
 
             if (aimAngle < 7.0f) {
-                battleStatus->actionResult = 1;
-                battleStatus->unk_86 = 1;
+                battleStatus->actionQuality = 1;
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 func_80269160();
             } else if (state->angle < state->bounceDivisor) {
-                battleStatus->actionResult = -1;
+                battleStatus->actionQuality = -1;
             }
 
             for (i = 0; i < ARRAY_COUNT(hudMarkers); i++) {
@@ -448,7 +448,7 @@ API_CALLABLE(N(CarryAway)) {
             }
 
             if (parakarry->state.curPos.x > 240.0f) {
-                battleStatus->actionResult = temp_s4;
+                battleStatus->actionQuality = temp_s4;
                 return ApiStatus_DONE2;
             }
             break;
@@ -1022,7 +1022,7 @@ EvtScript N(shellShot) = {
     EVT_CALL(N(ShellShotActionCommand))
     EVT_CALL(StopSound, SOUND_AIM_SHELL_SHOT)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2006)
-    EVT_CALL(GetActionResult, LVar0)
+    EVT_CALL(GetActionQuality, LVar0)
     EVT_CALL(PartnerTestEnemy, LVarA, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVarA, HIT_RESULT_MISS)
         EVT_SET(LVar0, -2)
@@ -1152,11 +1152,11 @@ EvtScript N(airLift) = {
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
         EVT_CHILD_THREAD
             EVT_WAIT(1)
-            EVT_CALL(GetActionResult, LVar1)
+            EVT_CALL(GetActionQuality, LVar1)
             EVT_DIV(LVar1, 10)
             EVT_ADD(LVar1, 1)
             EVT_LOOP(88 * DT)
-                EVT_CALL(GetActionResult, LVar0)
+                EVT_CALL(GetActionQuality, LVar0)
                 EVT_SET(LVar2, LVar1)
                 EVT_MUL(LVar2, 10)
                 EVT_IF_GT(LVar0, LVar2)
@@ -1254,7 +1254,7 @@ EvtScript N(airRaid) = {
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(GetActionResult, LVar0)
+    EVT_CALL(GetActionQuality, LVar0)
     EVT_CALL(N(GetAirRaidDamage))
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(10)

@@ -18,7 +18,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->actionCmdDifficultyTable = actionCmdTableAirLift;
     battleStatus->unk_82 = 0;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
     action_command_init_status();
     actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_AIR_LIFT;
@@ -29,7 +29,7 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->barFillWidth = 0;
     actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionResult = 0;
+    battleStatus->actionQuality = 0;
     actionCommandStatus->hudPrepareTime = 30;
     actionCommandStatus->hudPosX = -48;
     air_lift_bss_0 = 0;
@@ -72,7 +72,7 @@ API_CALLABLE(N(start)) {
 
     actionCommandStatus->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
 
     mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
     actionCommandStatus->unk_5C = 0;
@@ -181,8 +181,8 @@ void N(update)(void) {
             }
 
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
-            if (battleStatus->actionResult < battleStatus->actionSuccess) {
-                battleStatus->actionResult = battleStatus->actionSuccess;
+            if (battleStatus->actionQuality < battleStatus->actionSuccess) {
+                battleStatus->actionQuality = battleStatus->actionSuccess;
             }
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
 
@@ -192,15 +192,15 @@ void N(update)(void) {
             }
 
             if (actionCommandStatus->unk_5A == 0) {
-                battleStatus->actionResult = 0;
+                battleStatus->actionQuality = 0;
             }
 
-            battleStatus->actionSuccess = battleStatus->actionResult;
+            battleStatus->actionSuccess = battleStatus->actionQuality;
             if (rand_int(99) < battleStatus->actionSuccess) {
-                battleStatus->unk_86 = 1;
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                 battleStatus->actionSuccess = 1;
             } else {
-                battleStatus->unk_86 = -2;
+                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
                 battleStatus->actionSuccess = -1;
             }
 
