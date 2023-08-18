@@ -229,7 +229,7 @@ s32 N(IdleAnimations_broomstick)[] = {
     STATUS_END,
 };
 
-EvtScript N(idle_8021D774) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -378,7 +378,7 @@ EvtScript N(runAway) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_8021E0B0) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_BITWISE_AND_CONST(LVar0, -2) // TODO
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
@@ -389,10 +389,10 @@ EvtScript N(nextTurn_8021E0B0) = {
 extern EvtScript N(takeTurn_80223B24);
 
 EvtScript N(init_8021E100) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D774)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223B24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021E6D8)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021E0B0)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(GetBattleVar, 2, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetBattleVar, 2, -1)
@@ -416,7 +416,7 @@ EvtScript N(init_8021E100) = {
 extern EvtScript N(handleEvent_8021EDF0);
 
 EvtScript N(init_8021E2C0) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D774)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223B24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EDF0)))
     EVT_CALL(GetBattleVar, 2, LVar0)

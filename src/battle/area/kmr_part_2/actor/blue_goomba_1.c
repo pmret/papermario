@@ -52,8 +52,8 @@ extern s32 N(IdleAnimations_802199B4)[];
 extern EvtScript N(init_8021B268);
 extern EvtScript N(doDeath_8021B388);
 extern EvtScript N(takeTurn_8021A5A0);
-extern EvtScript N(idle_80219A98);
-extern EvtScript N(handleEvent_80219D74);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(takeTurn_8021B2C8);
 
 ActorPartBlueprint N(ActorParts)[] = {
@@ -122,13 +122,13 @@ s32 N(IdleAnimations_80219A00)[] = {
 
 EvtScript N(init_80219A4C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A5A0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219A98)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219D74)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_80219A98) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -178,7 +178,7 @@ EvtScript N(idle_80219A98) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80219D74) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))

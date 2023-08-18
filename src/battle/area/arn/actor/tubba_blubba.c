@@ -3,10 +3,10 @@
 
 #define NAMESPACE A(tubba_blubba)
 
-extern EvtScript N(init_80225D98);
-extern EvtScript N(takeTurn_802264AC);
-extern EvtScript N(idle_80225F58);
-extern EvtScript N(handleEvent_802260D0);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(80225E08);
 extern EvtScript N(80226558);
 extern EvtScript N(80226B88);
@@ -90,7 +90,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT( N(ActorParts_80225D4C)),
     .partsData = N(ActorParts_80225D4C),
-    .initScript = &N(init_80225D98),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80225CA0),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -106,10 +106,10 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 75 },
 };
 
-EvtScript N(init_80225D98) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802264AC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80225F58)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802260D0)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_EXEC(N(80225E08))
     EVT_RETURN
@@ -144,7 +144,7 @@ EvtScript N(80225E08) = {
     EVT_END
 };
 
-EvtScript N(idle_80225F58) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -179,7 +179,7 @@ EvtScript N(80225FD4) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_802260D0) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVarA)
@@ -255,7 +255,7 @@ EvtScript N(handleEvent_802260D0) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_802264AC) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(RandInt, 100, LVar0)

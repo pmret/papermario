@@ -7,10 +7,10 @@
 #define NAMESPACE A(cleft)
 
 extern s32 N(IdleAnimations_80218838)[];
-extern EvtScript N(init_802188D0);
-extern EvtScript N(idle_80218934);
-extern EvtScript N(takeTurn_8021A3EC);
-extern EvtScript N(handleEvent_80218C3C);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -85,7 +85,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 2,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_802188D0),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80218740),
     .escapeChance = 80,
     .airLiftChance = 40,
@@ -131,16 +131,16 @@ s32 N(IdleAnimations_80218884)[] = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-EvtScript N(init_802188D0) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80218934)))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A3EC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80218C3C)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_80218934) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -183,7 +183,7 @@ EvtScript N(80218944) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80218C3C) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -549,7 +549,7 @@ EvtScript N(80219BA0) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021A3EC) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(802197AC))

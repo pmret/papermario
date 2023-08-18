@@ -133,11 +133,11 @@ ActorPartBlueprint N(ActorParts_802209C8)[] = {
     },
 };
 
-extern EvtScript N(init_80220A38);
-extern EvtScript N(takeTurn_80221530);
-extern EvtScript N(idle_80220B50);
-extern EvtScript N(handleEvent_80220F34);
-extern EvtScript N(nextTurn_802229C4);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(80222D9C);
 extern EvtScript N(80221CD4);
 extern EvtScript N(80221680);
@@ -150,7 +150,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT( N(ActorParts_802209C8)),
     .partsData = N(ActorParts_802209C8),
-    .initScript = &N(init_80220A38),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8022091C),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -176,11 +176,11 @@ API_CALLABLE(func_80218A60_43A4F0) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(init_80220A38) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221530)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80220B50)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80220F34)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_802229C4)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_EXEC_GET_TID(N(80222D9C), LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
@@ -193,7 +193,7 @@ EvtScript N(init_80220A38) = {
     EVT_END
 };
 
-EvtScript N(idle_80220B50) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -252,7 +252,7 @@ EvtScript N(80220DB0) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80220F34) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -359,7 +359,7 @@ EvtScript N(handleEvent_80220F34) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80221530) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -653,7 +653,7 @@ EvtScript N(80221CD4) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_802229C4) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetBattlePhase, LVar0)

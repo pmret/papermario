@@ -61,10 +61,10 @@ s32 N(StatusTable_802232F0)[] = {
     STATUS_END,
 };
 
-extern EvtScript N(init_80223488);
-extern EvtScript N(takeTurn_80223804);
-extern EvtScript N(idle_80223678);
-extern EvtScript N(handleEvent_80223688);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(shake_goomnut_tree);
 extern EvtScript N(80223DBC);
 
@@ -138,7 +138,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 255,
     .partCount = ARRAY_COUNT( N(ActorParts_8022339C)),
     .partsData = N(ActorParts_8022339C),
-    .initScript = &N(init_80223488),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_802232F0),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -160,10 +160,10 @@ s32 N(unk_missing_80223478)[] = {
     1, 0,
 };
 
-EvtScript N(init_80223488) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80223804)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223678)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223688)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
@@ -183,12 +183,12 @@ EvtScript N(init_80223488) = {
     EVT_END
 };
 
-EvtScript N(idle_80223678) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_80223688) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastElement, LVarE)
@@ -221,7 +221,7 @@ EvtScript N(handleEvent_80223688) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80223804) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(6)
             EVT_RETURN

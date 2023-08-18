@@ -11,7 +11,7 @@
 
 #define NAMESPACE A(lee)
 
-extern EvtScript N(init_8021D4C8);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_80229F9C);
 extern EvtScript N(idle_8021D5B4);
 extern EvtScript N(handleEvent_8021D600);
@@ -113,7 +113,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021D4C8),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021D3D0),
     .escapeChance = 100,
     .airLiftChance = 0,
@@ -142,7 +142,7 @@ API_CALLABLE(func_802180D0_464560) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(init_8021D4C8) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80229F9C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D5B4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D600)))

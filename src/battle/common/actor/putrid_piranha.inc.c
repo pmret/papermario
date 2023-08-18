@@ -4,10 +4,10 @@
 
 #define NAMESPACE A(putrid_piranha)
 
-extern EvtScript N(init_8021B1F8);
-extern EvtScript N(takeTurn_8021B8A8);
-extern EvtScript N(idle_8021B244);
-extern EvtScript N(handleEvent_8021B3D0);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(bite);
 extern EvtScript N(breath);
 
@@ -81,7 +81,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 12,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021B1F8),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021B100),
     .escapeChance = 60,
     .airLiftChance = 20,
@@ -97,17 +97,17 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 1, 44 },
 };
 
-EvtScript N(init_8021B1F8) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B8A8)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021B244)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B3D0)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(idle_8021B244) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_DIZZY)
@@ -135,7 +135,7 @@ EvtScript N(8021B354) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021B3D0) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -229,7 +229,7 @@ EvtScript N(handleEvent_8021B3D0) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021B8A8) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_EXEC_WAIT(N(bite))

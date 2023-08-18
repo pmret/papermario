@@ -6,10 +6,10 @@
 
 #define NAMESPACE A(spy_guy)
 
-extern EvtScript N(init_802275D4);
-extern EvtScript N(takeTurn_802293DC);
-extern EvtScript N(idle_802276C4);
-extern EvtScript N(handleEvent_80227ABC);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -123,7 +123,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts_80227564)),
     .partsData = N(ActorParts_80227564),
-    .initScript = &N(init_802275D4),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_802274B8),
     .escapeChance = 50,
     .airLiftChance = 85,
@@ -139,10 +139,10 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init_802275D4) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802293DC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802276C4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80227ABC)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
     EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar0)
@@ -155,7 +155,7 @@ EvtScript N(init_802275D4) = {
     EVT_END
 };
 
-EvtScript N(idle_802276C4) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -219,7 +219,7 @@ EvtScript N(802276D4) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80227ABC) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -615,7 +615,7 @@ EvtScript N(hammerAttack) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_802293DC) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)

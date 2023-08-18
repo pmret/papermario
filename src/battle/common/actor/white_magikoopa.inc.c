@@ -233,7 +233,7 @@ s32 N(IdleAnimations_80223E08)[] = {
 
 #include "common/UnkBattleFunc5.inc.c"
 
-EvtScript N(idle_80223E14) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -775,7 +775,7 @@ EvtScript N(run_away) = {
 };
 
 EvtScript N(EVS_Init_Ground) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
@@ -784,7 +784,7 @@ EvtScript N(EVS_Init_Ground) = {
 };
 
 EvtScript N(EVS_Init_Flying) = {
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224A44)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)

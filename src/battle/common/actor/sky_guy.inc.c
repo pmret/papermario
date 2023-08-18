@@ -8,7 +8,7 @@
 #define NAMESPACE A(sky_guy)
 
 extern s32 N(IdleAnimations_8022B104)[];
-extern EvtScript N(init_8022987C);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_8022A9D0);
 extern EvtScript N(takeTurn_8022CA9C);
 extern EvtScript N(idle_80229A24);
@@ -235,7 +235,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts_8022977C)),
     .partsData = N(ActorParts_8022977C),
-    .initScript = &N(init_8022987C),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80229624),
     .escapeChance = 50,
     .airLiftChance = 90,
@@ -251,7 +251,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init_8022987C) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022A9D0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80229A24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022A398)))

@@ -3,12 +3,12 @@
 
 #define NAMESPACE A(fuzzipede)
 
-extern EvtScript N(init_80218B70);
-extern EvtScript N(takeTurn_8021C1A4);
-extern EvtScript N(idle_80218D58);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
 extern EvtScript N(handleEvent_802197FC);
 extern EvtScript N(handleEvent_80219ED4);
-extern EvtScript N(nextTurn_80218C58);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(8021A2E8);
 
 enum N(ActorPartIDs) {
@@ -116,7 +116,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 20,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_80218B70),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80218A54),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -134,11 +134,11 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(init_80218B70) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C1A4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80218D58)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802197FC)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80218C58)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
     EVT_CALL(SetActorPos, ACTOR_SELF, 125, 33, -15)
@@ -149,7 +149,7 @@ EvtScript N(init_80218B70) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_80218C58) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
@@ -168,7 +168,7 @@ EvtScript N(nextTurn_80218C58) = {
     EVT_END
 };
 
-EvtScript N(idle_80218D58) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -952,7 +952,7 @@ EvtScript N(8021C004) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021C1A4) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)

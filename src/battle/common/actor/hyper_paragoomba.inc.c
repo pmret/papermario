@@ -9,7 +9,7 @@ extern s32 N(IdleAnimations_8021C594)[];
 extern s32 N(IdleAnimations_8021C62C)[];
 extern s32 N(IdleAnimations_8021C638)[];
 extern s32 N(IdleAnimations_8021F05C)[];
-extern EvtScript N(init_8021B564);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(idle_8021C690);
 extern EvtScript N(handleEvent_8021C9C4);
 extern EvtScript N(nextTurn_8021B5F4);
@@ -158,7 +158,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021B564),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021B3B4),
     .escapeChance = 50,
     .airLiftChance = 95,
@@ -187,7 +187,7 @@ s32 N(IdleAnimations_8021B518)[] = {
     STATUS_END,
 };
 
-EvtScript N(init_8021B564) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C690)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C9C4)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021B5F4)))

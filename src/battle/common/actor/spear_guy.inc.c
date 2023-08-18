@@ -8,10 +8,10 @@
 #define NAMESPACE A(spear_guy)
 
 extern s32 N(IdleAnimations_8021BF40)[];
-extern EvtScript N(init_80218980);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_8021BCB4);
 extern EvtScript N(handleEvent_80218E3C);
-extern EvtScript N(nextTurn_80218B24);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(idle_80218BE0);
 extern EvtScript N(takeTurn_8021D8D8);
 extern EvtScript N(idle_8021BFD8);
@@ -192,7 +192,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_80218980),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80218698),
     .escapeChance = 50,
     .airLiftChance = 85,
@@ -224,7 +224,7 @@ EvtScript N(setSpearStance) = {
     EVT_END
 };
 
-EvtScript N(init_80218980) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -237,7 +237,7 @@ EvtScript N(init_80218980) = {
     EVT_END_SWITCH
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021BCB4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80218E3C)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80218B24)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(GetEncounterTrigger, LVar0)
     EVT_SWITCH(LVar0)
@@ -253,7 +253,7 @@ EvtScript N(init_80218980) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_80218B24) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(BindHandlePhase, ACTOR_SELF, 0)
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80218BE0)))
     EVT_RETURN

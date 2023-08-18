@@ -6,10 +6,10 @@
 
 #define NAMESPACE A(pyro_guy)
 
-extern EvtScript N(init_8022CC80);
-extern EvtScript N(takeTurn_8022D344);
-extern EvtScript N(idle_8022CCCC);
-extern EvtScript N(handleEvent_8022CE60);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts_8022CC34)),
     .partsData = N(ActorParts_8022CC34),
-    .initScript = &N(init_8022CC80),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8022CB88),
     .escapeChance = 60,
     .airLiftChance = 85,
@@ -102,17 +102,17 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init_8022CC80) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8022D344)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8022CCCC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022CE60)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(idle_8022CCCC) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
@@ -141,7 +141,7 @@ EvtScript N(8022CDDC) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8022CE60) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -237,7 +237,7 @@ EvtScript N(handleEvent_8022CE60) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8022D344) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)

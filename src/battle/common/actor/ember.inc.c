@@ -6,6 +6,10 @@
 
 extern s32 N(IdleAnimations_8021AE5C)[];
 extern s32 N(IdleAnimations_8021AEA8)[];
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -121,8 +125,6 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
 };
 
-extern EvtScript N(init_8021AEB4);
-
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_EMBER,
@@ -130,7 +132,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 10,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021AEB4),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021ACD4),
     .escapeChance = 60,
     .airLiftChance = 80,
@@ -164,14 +166,10 @@ s32 N(IdleAnimations_8021AEA8)[] = {
     STATUS_END,
 };
 
-extern EvtScript N(takeTurn_8021D284);
-extern EvtScript N(idle_8021B07C);
-extern EvtScript N(handleEvent_8021B8BC);
-
-EvtScript N(init_8021AEB4) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021D284)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021B07C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B8BC)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -193,7 +191,7 @@ EvtScript N(init_8021AEB4) = {
     EVT_END
 };
 
-EvtScript N(idle_8021B07C) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(MakeLerp, 0, 10, 25, EASING_COS_IN_OUT)
     EVT_LABEL(1)
@@ -352,7 +350,7 @@ EvtScript N(split) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021B8BC) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -754,7 +752,7 @@ EvtScript N(8021CBC8) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021D284) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)

@@ -5,10 +5,10 @@
 
 #define NAMESPACE A(tubbas_heart)
 
-extern EvtScript N(init_80223DA0);
-extern EvtScript N(takeTurn_802245C8);
-extern EvtScript N(idle_80223E98);
-extern EvtScript N(handleEvent_80224038);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(80224414);
 extern EvtScript N(802244DC);
 extern EvtScript N(80224B3C);
@@ -127,7 +127,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 50,
     .partCount = ARRAY_COUNT( N(ActorParts_80223D30)),
     .partsData = N(ActorParts_80223D30),
-    .initScript = &N(init_80223DA0),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80223C84),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -143,16 +143,16 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init_80223DA0) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_4, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_5, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802245C8)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E98)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224038)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_TARGET_FLAG_2, TRUE)
     EVT_RETURN
     EVT_END
@@ -175,7 +175,7 @@ API_CALLABLE(N(func_80218680_4FF0D0)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(idle_80223E98) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(ActorExists, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, FALSE)
@@ -209,7 +209,7 @@ EvtScript N(80223FD8) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80224038) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -317,7 +317,7 @@ EvtScript N(802244DC) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_802245C8) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)

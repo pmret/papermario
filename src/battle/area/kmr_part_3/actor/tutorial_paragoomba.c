@@ -9,7 +9,7 @@ extern s32 N(IdleAnimations_8021DB9C)[];
 extern s32 N(IdleAnimations_8021C3D8)[];
 extern s32 N(IdleAnimations_8021C470)[];
 extern s32 N(IdleAnimations_8021C47C)[];
-extern EvtScript N(init_8021F450);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_8021CDFC);
 extern EvtScript N(idle_8021C4D4);
 extern EvtScript N(handleEvent_8021C808);
@@ -139,7 +139,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 2,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021F450),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021C274),
     .escapeChance = 90,
     .airLiftChance = 100,
@@ -933,13 +933,13 @@ EvtScript N(takeTurn_8021E788) = {
     EVT_END
 };
 
-extern EvtScript N(nextTurn_8021F690);
+extern EvtScript N(EVS_HandlePhase);
 
-EvtScript N(init_8021F450) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021CDFC)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021C4D4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021C808)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021F690)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_RETURN
     EVT_END
 };
@@ -977,7 +977,7 @@ EvtScript N(8021F4B0) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_8021F690) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
     EVT_CALL(GetBattlePhase, LVar0)

@@ -9,10 +9,10 @@
 #define NAMESPACE A(jungle_fuzzy)
 
 extern s32 N(IdleAnimations_8021EADC)[];
-extern EvtScript N(init_8021EB28);
-extern EvtScript N(takeTurn_80221628);
-extern EvtScript N(idle_8021EB8C);
-extern EvtScript N(handleEvent_8021EB9C);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern Formation N(specialFormation_8022180C);
 
 enum N(ActorPartIDs) {
@@ -81,7 +81,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021EB28),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021E9E4),
     .escapeChance = 30,
     .airLiftChance = 85,
@@ -110,21 +110,21 @@ s32 N(IdleAnimations_8021EADC)[] = {
     STATUS_END,
 };
 
-EvtScript N(init_8021EB28) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221628)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021EB8C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EB9C)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021EB8C) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_8021EB9C) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -799,7 +799,7 @@ EvtScript N(80221468) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80221628) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_EXEC_WAIT(N(leechAttack))

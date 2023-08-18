@@ -4,10 +4,10 @@
 
 #define NAMESPACE A(piranha_plant)
 
-extern EvtScript N(init_8021D498);
-extern EvtScript N(takeTurn_8021DCD4);
-extern EvtScript N(idle_8021D4E4);
-extern EvtScript N(handleEvent_8021D60C);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -88,7 +88,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 5,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021D498),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021D3A0),
     .escapeChance = 70,
     .airLiftChance = 20,
@@ -104,15 +104,15 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 33 },
 };
 
-EvtScript N(init_8021D498) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021DCD4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D4E4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D60C)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021D4E4) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
@@ -135,7 +135,7 @@ EvtScript N(8021D4F4) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021D60C) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -257,7 +257,7 @@ EvtScript N(handleEvent_8021D60C) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021DCD4) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

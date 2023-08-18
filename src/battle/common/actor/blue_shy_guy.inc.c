@@ -5,10 +5,10 @@
 #define NAMESPACE A(blue_shy_guy)
 
 extern s32 N(IdleAnimations_8021AE1C)[];
-extern EvtScript N(init_8021AE68);
-extern EvtScript N(takeTurn_8021C7B4);
-extern EvtScript N(idle_8021AEB4);
-extern EvtScript N(handleEvent_8021B028);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -67,7 +67,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 7,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021AE68),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021AD24),
     .escapeChance = 60,
     .airLiftChance = 85,
@@ -96,17 +96,17 @@ s32 N(IdleAnimations_8021AE1C)[] = {
     STATUS_END,
 };
 
-EvtScript N(init_8021AE68) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C7B4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021AEB4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B028)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(idle_8021AEB4) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
@@ -134,7 +134,7 @@ EvtScript N(8021AFC4) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021B028) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -485,7 +485,7 @@ EvtScript N(8021BC2C) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021C7B4) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(RandInt, 1, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_EXEC_WAIT(N(8021B504))

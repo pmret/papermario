@@ -5,10 +5,10 @@
 #define NAMESPACE A(tutorial_spiked_goomba)
 
 extern s32 N(IdleAnimations_8021A494)[];
-extern EvtScript N(init_8021BEBC);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_8021B19C);
-extern EvtScript N(idle_8021A578);
-extern EvtScript N(handleEvent_8021A854);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -66,7 +66,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 2,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021BEBC),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_8021A39C),
     .escapeChance = 90,
     .airLiftChance = 95,
@@ -110,13 +110,13 @@ s32 N(IdleAnimations_8021A4E0)[] = {
 
 EvtScript N(8021A52C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B19C)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021A578)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021A854)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021A578) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -166,7 +166,7 @@ EvtScript N(idle_8021A578) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021A854) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -478,13 +478,13 @@ EvtScript N(takeTurn_8021B19C) = {
     EVT_END
 };
 
-extern EvtScript N(nextTurn_8021C0FC);
+extern EvtScript N(EVS_HandlePhase);
 
-EvtScript N(init_8021BEBC) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B19C)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021A578)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021A854)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_8021C0FC)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_RETURN
     EVT_END
 };
@@ -522,7 +522,7 @@ EvtScript N(8021BF1C) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_8021C0FC) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
     EVT_CALL(GetBattlePhase, LVar0)

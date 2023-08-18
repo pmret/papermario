@@ -4,10 +4,10 @@
 #define NAMESPACE A(tubba_blubba)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(takeTurn_80219750);
-extern EvtScript N(idle_80219204);
-extern EvtScript N(handleEvent_80219338);
-extern EvtScript N(nextTurn_80218FB0);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(80218E60);
 extern EvtScript N(80219D88);
 extern EvtScript N(8021A36C);
@@ -110,10 +110,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219750)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219204)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219338)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80218FB0)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
     EVT_IF_GE(GB_StoryProgress, -30)
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
@@ -154,7 +154,7 @@ EvtScript N(80218E60) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_80218FB0) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetBattlePhase, LVar0)
@@ -192,7 +192,7 @@ EvtScript N(nextTurn_80218FB0) = {
     EVT_END
 };
 
-EvtScript N(idle_80219204) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -221,7 +221,7 @@ EvtScript N(802192E0) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80219338) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -304,7 +304,7 @@ EvtScript N(handleEvent_80219338) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80219750) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

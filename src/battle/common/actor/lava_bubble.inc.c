@@ -6,10 +6,10 @@
 
 extern s32 N(IdleAnimations_80218FC4)[];
 extern s32 N(IdleAnimations_80219010)[];
-extern EvtScript N(init_8021901C);
-extern EvtScript N(takeTurn_8021AEA4);
-extern EvtScript N(idle_802191E4);
-extern EvtScript N(handleEvent_80219500);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -133,7 +133,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 9,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021901C),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80218E3C),
     .escapeChance = 50,
     .airLiftChance = 90,
@@ -167,10 +167,10 @@ s32 N(IdleAnimations_80219010)[] = {
     STATUS_END,
 };
 
-EvtScript N(init_8021901C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021AEA4)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802191E4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219500)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -192,7 +192,7 @@ EvtScript N(init_8021901C) = {
     EVT_END
 };
 
-EvtScript N(idle_802191E4) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_CALL(MakeLerp, 0, 10, 25, EASING_COS_IN_OUT)
     EVT_LABEL(1)
@@ -252,7 +252,7 @@ EvtScript N(80219464) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_80219500) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -651,7 +651,7 @@ EvtScript N(fireballs_Player) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_8021AEA4) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)

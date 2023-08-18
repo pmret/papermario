@@ -9,9 +9,9 @@
 extern s32 N(IdleAnimations_80218DC8)[];
 extern s32 N(IdleAnimations_80218EB8)[];
 extern EvtScript N(EVS_Init);
-extern EvtScript N(takeTurn_80219D88);
-extern EvtScript N(idle_80219040);
-extern EvtScript N(handleEvent_80219050);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(8021B998);
 extern EvtScript N(8021A6C8);
 extern EvtScript N(8021B088);
@@ -226,9 +226,9 @@ s32 N(IdleAnimations_80218EB8)[] = {
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219D88)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219040)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219050)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_A, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_9, LVar0)
@@ -246,12 +246,12 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-EvtScript N(idle_80219040) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_80219050) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -483,7 +483,7 @@ EvtScript N(handleEvent_80219050) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80219D88) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarA)
     EVT_IF_EQ(LVarA, 3)
         EVT_EXEC_WAIT(N(8021A6C8))

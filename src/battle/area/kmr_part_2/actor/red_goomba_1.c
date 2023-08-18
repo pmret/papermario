@@ -49,9 +49,9 @@ s32 N(StatusTable_8021B6CC)[] = {
 };
 
 extern s32 N(IdleAnimations_8021B7C4)[];
-extern EvtScript N(idle_8021B8A8);
-extern EvtScript N(handleEvent_8021BB84);
-extern EvtScript N(takeTurn_8021C3B0);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(init_8021D078);
 extern EvtScript N(doDeath_8021D0C4);
 
@@ -121,14 +121,14 @@ s32 N(IdleAnimations_8021B810)[] = {
 };
 
 EvtScript N(init_8021B85C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C3B0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021B8A8)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021BB84)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021B8A8) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -178,7 +178,7 @@ EvtScript N(idle_8021B8A8) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021BB84) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -297,7 +297,7 @@ EvtScript N(handleEvent_8021BB84) = {
 
 #include "common/CalculateArcsinDeg.inc.c"
 
-EvtScript N(takeTurn_8021C3B0) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
