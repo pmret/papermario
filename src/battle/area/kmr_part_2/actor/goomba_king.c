@@ -524,9 +524,9 @@ EvtScript N(80221CD4) = {
                 EVT_SUB(LVar0, 7)
                 EVT_CALL(JumpPartTo, ACTOR_ENEMY3, PRT_TREE_3, LVar0, 10, LVar2, 7, TRUE)
                 EVT_LOOP(20)
-                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, 1, FALSE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, 1, TRUE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -544,9 +544,9 @@ EvtScript N(80221CD4) = {
                 EVT_SUB(LVar0, 7)
                 EVT_CALL(JumpPartTo, ACTOR_ENEMY3, PRT_TREE_4, LVar0, 10, LVar2, 7, TRUE)
                 EVT_LOOP(20)
-                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, 1, FALSE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, 1, TRUE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -564,9 +564,9 @@ EvtScript N(80221CD4) = {
                 EVT_ADD(LVar0, 7)
                 EVT_CALL(JumpPartTo, ACTOR_ENEMY3, PRT_TREE_5, LVar0, 10, LVar2, 7, TRUE)
                 EVT_LOOP(20)
-                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, 1, FALSE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, 1, TRUE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -593,9 +593,9 @@ EvtScript N(80221CD4) = {
         EVT_SUB(LVar0, 7)
         EVT_CALL(JumpPartTo, ACTOR_ENEMY3, PRT_TREE_3, LVar0, 10, LVar2, 7, TRUE)
         EVT_LOOP(20)
-            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, 1, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -613,9 +613,9 @@ EvtScript N(80221CD4) = {
         EVT_SUB(LVar0, 7)
         EVT_CALL(JumpPartTo, ACTOR_ENEMY3, PRT_TREE_4, LVar0, 10, LVar2, 7, TRUE)
         EVT_LOOP(20)
-            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, 1, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_4, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -633,9 +633,9 @@ EvtScript N(80221CD4) = {
         EVT_ADD(LVar0, 7)
         EVT_CALL(JumpPartTo, ACTOR_ENEMY3, PRT_TREE_5, LVar0, 10, LVar2, 7, TRUE)
         EVT_LOOP(20)
-            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, 1, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, PRT_TREE_5, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -765,7 +765,7 @@ EvtScript N(doDeath_80222F50) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4, TRUE)
     EVT_WAIT(30)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)

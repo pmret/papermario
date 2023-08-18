@@ -1491,8 +1491,8 @@ EvtScript N(EVS_JrTroopa_Death) = {
                     EVT_WAIT(3)
                 EVT_END_LOOP
             EVT_END_THREAD
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, 1, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_DefeatedBegin)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 5)
@@ -1544,8 +1544,8 @@ EvtScript N(EVS_JrTroopa_Death) = {
                     EVT_WAIT(3)
                 EVT_END_LOOP
             EVT_END_THREAD
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, 1, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_DefeatedBegin)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 5)

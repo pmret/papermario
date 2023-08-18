@@ -389,7 +389,7 @@ EvtScript N(8021E118) = {
     EVT_CALL(SetActorFlagBits, LVarA, (ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY), FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetActorVar, LVarA, AVAR_Unk_8, 2)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations_8021D3AC)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Lee_Hurt)
     EVT_WAIT(30)
@@ -3984,7 +3984,7 @@ EvtScript N(takeTurn_80228B78) = {
     EVT_END_IF
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, 1, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_BattleLakilester_Spiny)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_LiftSpiny)
     EVT_LOOP(4)
@@ -4032,7 +4032,7 @@ EvtScript N(takeTurn_80228B78) = {
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_201B)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -4049,7 +4049,7 @@ EvtScript N(takeTurn_80228B78) = {
             EVT_THREAD
                 EVT_ADD(LVar0, -50)
                 EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_3, LVar0, 0, LVar2, 15, TRUE)
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, 1, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_END_THREAD
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -4074,7 +4074,7 @@ EvtScript N(takeTurn_80228B78) = {
     EVT_THREAD
         EVT_ADD(LVar0, -50)
         EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_3, LVar0, 0, LVar2, 15, TRUE)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, 1, TRUE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_END_THREAD
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
     EVT_SWITCH(LVar9)
@@ -4240,8 +4240,8 @@ EvtScript N(copyPartner) = {
     EVT_WAIT(5)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorPos, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 0x00020001, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 0x00800000, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, (ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY), TRUE)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_CALL(SetEnemyHP, LVarA, LVar0)

@@ -237,14 +237,14 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-#include "common/UnkSfxFunc.inc.c"
+#include "common/PlayLavaBubbleFlightSound.inc.c"
 
 EvtScript N(80219464) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Anim03)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_THREAD
-        EVT_CALL(N(UnkSfxFunc))
+        EVT_CALL(N(PlayLavaBubbleFlightSound))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Anim01)
@@ -372,7 +372,7 @@ EvtScript N(fireTackle) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_THREAD
-        EVT_CALL(N(UnkSfxFunc))
+        EVT_CALL(N(PlayLavaBubbleFlightSound))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Anim01)
@@ -454,7 +454,7 @@ EvtScript N(8021A074) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar6, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVar6, EVT_FLOAT(8.0))
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar6, EVT_FLOAT(0.01))
-            EVT_CALL(SetPartSounds, ACTOR_SELF, LVar6, ACTOR_SOUND_JUMP, 720, 0)
+            EVT_CALL(SetPartSounds, ACTOR_SELF, LVar6, ACTOR_SOUND_JUMP, SOUND_EMBER_SPIT, SOUND_NONE)
             EVT_CALL(JumpPartTo, ACTOR_SELF, LVar6, LVar3, LVar4, LVar5, 0, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar6, ACTOR_PART_FLAG_INVISIBLE, TRUE)
         EVT_END_THREAD
@@ -495,7 +495,7 @@ EvtScript N(fireballs_Partner) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Anim03)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_THREAD
-        EVT_CALL(N(UnkSfxFunc))
+        EVT_CALL(N(PlayLavaBubbleFlightSound))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, EASING_SIN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Anim01)
@@ -571,7 +571,7 @@ EvtScript N(fireballs_Player) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_THREAD
-        EVT_CALL(N(UnkSfxFunc))
+        EVT_CALL(N(PlayLavaBubbleFlightSound))
     EVT_END_THREAD
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, EASING_SIN_OUT)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)

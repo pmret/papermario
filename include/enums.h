@@ -1015,7 +1015,7 @@ enum SoundIDs {
     SOUND_SMOKE_BURST                           = 0x000002CD,
     SOUND_POKEY_THROW                           = 0x000002CE,
     SOUND_EMBER_JUMP                            = 0x000002CF,
-    SOUND_EMBER_DOUSE                           = 0x000002D0, // unused
+    SOUND_EMBER_SPIT                            = 0x000002D0,
     SOUND_DRY_BONES_THROW                       = 0x000002D1,
     SOUND_DRY_BONES_COLLAPSE                    = 0x000002D2,
     SOUND_DRY_BONES_ARISE                       = 0x000002D3,

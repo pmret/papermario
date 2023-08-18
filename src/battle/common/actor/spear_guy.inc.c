@@ -783,7 +783,7 @@ EvtScript N(becomeShyGuy) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_4, SOUND_02FC)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_4, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_4, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_4, LVar0, 0, LVar2, 30, TRUE)
     EVT_WAIT(5)
     EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET)
@@ -863,7 +863,7 @@ EvtScript N(spearThrow) = {
                 EVT_END_IF
             EVT_END_THREAD
             EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_3, SOUND_030A)
-            EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_JUMP, 0, 0)
+            EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
@@ -916,7 +916,7 @@ EvtScript N(spearThrow) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_3, SOUND_030A)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 2)

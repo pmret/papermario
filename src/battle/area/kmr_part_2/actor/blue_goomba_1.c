@@ -515,7 +515,7 @@ EvtScript N(doDeath_8021B388) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_ZER0, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_ZER0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4, TRUE)
     EVT_WAIT(30)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)

@@ -308,7 +308,7 @@ EvtScript N(lakilester_takeTurn) = {
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_SPINY, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_SPINY, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_201B)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

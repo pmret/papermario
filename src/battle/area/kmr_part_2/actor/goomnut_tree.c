@@ -363,7 +363,7 @@ EvtScript N(80223DBC) = {
     EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetGoalPos, ACTOR_SELF, 10, 0, 10)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
         EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_0301)
         EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.8))
         EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(4.0))
@@ -371,9 +371,9 @@ EvtScript N(80223DBC) = {
         EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, 30, 20, 10, 10, TRUE)
         EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, 40, 20, 10, 5, TRUE)
         EVT_LOOP(20)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_RETURN
@@ -402,9 +402,9 @@ EvtScript N(80223DBC) = {
         EVT_ADD(LVar0, 12)
         EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, 8, TRUE)
         EVT_LOOP(20)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_RETURN
@@ -431,9 +431,9 @@ EvtScript N(80223DBC) = {
         EVT_ADD(LVar0, 12)
         EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, 8, TRUE)
         EVT_LOOP(20)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_RETURN
@@ -458,9 +458,9 @@ EvtScript N(80223DBC) = {
     EVT_ADD(LVar0, 12)
     EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, 8, TRUE)
     EVT_LOOP(20)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
         EVT_WAIT(1)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, TRUE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN

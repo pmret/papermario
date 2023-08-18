@@ -319,7 +319,7 @@ EvtScript N(attackSpinyFlip) = {
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Lakitu_Anim0C)
     EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_20D2)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -441,7 +441,7 @@ EvtScript N(summonSpiny) = {
     EVT_END_THREAD
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_20D2)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Lakitu_Anim0C)
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(1.6))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

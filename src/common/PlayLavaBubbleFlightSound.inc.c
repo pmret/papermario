@@ -1,16 +1,18 @@
 #include "common.h"
 
-API_CALLABLE(N(UnkSfxFunc)) {
+API_CALLABLE(N(PlayLavaBubbleFlightSound)) {
     Actor* actor = get_actor(script->owner1.actorID);
     f32 distX;
     f32 distY;
     f32 distZ;
+    f32 dist;
 
     if (isInitialCall) {
         distX = actor->state.goalPos.x - actor->curPos.x;
         distY = actor->state.goalPos.y - actor->curPos.y;
         distZ = actor->state.goalPos.z - actor->curPos.z;
-        script->functionTemp[0] = ((sqrtf(SQ(distX) + SQ(distY) + SQ(distZ)) / actor->state.speed) * 0.5f) + 1.0f;
+        dist = sqrtf(SQ(distX) + SQ(distY) + SQ(distZ));
+        script->functionTemp[0] = ((dist / actor->state.speed) * 0.5f) + 1.0f;
         sfx_play_sound_at_position(SOUND_EMBER_FLY, SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
     }
 

@@ -367,7 +367,7 @@ EvtScript N(attack_rock) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim0A)
             EVT_SET(LVarA, 3)
     EVT_END_SWITCH
-    EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, 985, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, SOUND_03D9, SOUND_NONE)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
