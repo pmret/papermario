@@ -296,10 +296,10 @@ EvtScript N(EVS_GetAvailableColumn) = {
     EVT_END
 };
 
-Vec3i N(DisposePos) = { NPC_DISPOSE_LOCATION };
+Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(SummonFormation) = {
-    ACTOR_BY_POS(NAMESPACE, N(DisposePos), 0),
+    ACTOR_BY_POS(NAMESPACE, N(SummonPos), 0),
 };
 
 EvtScript N(EVS_TrySplit) = {

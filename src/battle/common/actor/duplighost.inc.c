@@ -523,54 +523,54 @@ EvtScript N(OnShockDeath) = {
     EVT_END
 };
 
-Vec3i N(pos_summon) = { NPC_DISPOSE_LOCATION };
+Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 
 #include "duplighost/ghost_goombario.inc.c"
 
 Formation N(formation_goombario) = {
-    ACTOR_BY_POS(N(goombario), N(pos_summon), 0),
+    ACTOR_BY_POS(N(goombario), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_kooper.inc.c"
 
 Formation N(formation_kooper) = {
-    ACTOR_BY_POS(N(kooper), N(pos_summon), 0),
+    ACTOR_BY_POS(N(kooper), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_bombette.inc.c"
 
 Formation N(formation_bombette) = {
-    ACTOR_BY_POS(N(bombette), N(pos_summon), 0),
+    ACTOR_BY_POS(N(bombette), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_parakarry.inc.c"
 
 Formation N(formation_parakarry) = {
-    ACTOR_BY_POS(N(parakarry), N(pos_summon), 0),
+    ACTOR_BY_POS(N(parakarry), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_bow.inc.c"
 
 Formation N(formation_bow) = {
-    ACTOR_BY_POS(N(bow), N(pos_summon), 0),
+    ACTOR_BY_POS(N(bow), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_watt.inc.c"
 
 Formation N(formation_watt) = {
-    ACTOR_BY_POS(N(watt), N(pos_summon), 0),
+    ACTOR_BY_POS(N(watt), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_sushie.inc.c"
 
 Formation N(formation_sushie) = {
-    ACTOR_BY_POS(N(sushie), N(pos_summon), 0),
+    ACTOR_BY_POS(N(sushie), N(SummonPos), 0),
 };
 
 #include "duplighost/ghost_lakilester.inc.c"
 
 Formation N(formation_lakilester) = {
-    ACTOR_BY_POS(N(lakilester), N(pos_summon), 0),
+    ACTOR_BY_POS(N(lakilester), N(SummonPos), 0),
 };
 
 API_CALLABLE(N(GetPartnerAndLevel)) {
@@ -581,7 +581,7 @@ API_CALLABLE(N(GetPartnerAndLevel)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(CopyPriority)) {
+API_CALLABLE(N(AdjustFormationPriority)) {
     s32 partnerID = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(script->owner1.actorID);
     FormationRow* formation = NULL;
@@ -618,7 +618,7 @@ API_CALLABLE(N(CopyPriority)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(copyPartner) = {
+EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -647,7 +647,7 @@ EvtScript N(copyPartner) = {
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(N(GetPartnerAndLevel), LVar5, LVar6)
-    EVT_CALL(N(CopyPriority), LVar5)
+    EVT_CALL(N(AdjustFormationPriority), LVar5)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(1)
             EVT_CALL(SummonEnemy, EVT_PTR(N(formation_goombario)), FALSE)
@@ -747,12 +747,12 @@ EvtScript N(EVS_TakeTurn) = {
                     EVT_CALL(GetBattleVar, 0, LVar0)
                     EVT_BITWISE_OR_CONST(LVar0, 0x4)
                     EVT_CALL(SetBattleVar, 0, LVar0)
-                    EVT_EXEC_WAIT(N(copyPartner))
+                    EVT_EXEC_WAIT(N(EVS_CopyPartner))
                 EVT_ELSE
                     EVT_CALL(GetBattleVar, 3, LVar0)
                     EVT_CALL(N(GetPartnerAndLevel), LVar1, LVar2)
                     EVT_IF_EQ(LVar0, LVar1)
-                        EVT_EXEC_WAIT(N(copyPartner))
+                        EVT_EXEC_WAIT(N(EVS_CopyPartner))
                     EVT_ELSE
                         EVT_EXEC_WAIT(N(attack))
                     EVT_END_IF
