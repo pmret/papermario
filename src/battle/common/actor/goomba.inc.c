@@ -2,7 +2,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Goomba.h"
 
-#ifndef NESTED_ACTOR_INCLUDE
+#ifndef NESTED_GOOMBA_INCLUDE
 #define NAMESPACE A(goomba)
 #endif
 
@@ -14,7 +14,7 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
-#ifndef NESTED_ACTOR_INCLUDE
+#ifndef NESTED_GOOMBA_INCLUDE
 
 extern EvtScript N(EVS_Init);
 extern s32 N(DefaultAnims)[];
@@ -91,7 +91,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-#endif // NESTED_ACTOR_INCLUDE
+#endif // NESTED_GOOMBA_INCLUDE
 
 s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Goomba_Idle,

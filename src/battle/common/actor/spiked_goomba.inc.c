@@ -4,6 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/SpikedGoomba.h"
 
+
 #define NAMESPACE A(spiked_goomba)
 
 extern s32 N(DefaultAnims)[];

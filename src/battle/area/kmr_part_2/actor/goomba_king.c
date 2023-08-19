@@ -643,7 +643,7 @@ EvtScript N(EVS_Attack_GroundStomp) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, DMG_STOMP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(10)
+        EVT_CASE_EQ(HIT_RESULT_10)
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)

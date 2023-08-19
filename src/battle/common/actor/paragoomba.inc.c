@@ -560,6 +560,6 @@ EvtScript N(EVS_KnockDown) = {
 };
 
 // downed paragoombas are handled via a special nested goomba import
-#define NESTED_ACTOR_INCLUDE 1
+#define NESTED_GOOMBA_INCLUDE
 #define NAMESPACE A(downed_goomba)
 #include "goomba.inc.c"
