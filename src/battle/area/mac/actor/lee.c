@@ -12,9 +12,9 @@
 #define NAMESPACE A(lee)
 
 extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
-extern EvtScript N(idle_8021D5B4);
-extern EvtScript N(handleEvent_8021D600);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_CopyPartner);
 
@@ -26,12 +26,17 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_PartnerLevel       = 1,
-    AVAR_Unk_2      = 2,
-    AVAR_Kooper_Toppled     = 4,
-    AVAR_Unk_5      = 5,
-    AVAR_Unk_8      = 8,
+    AVAR_HandledEvent           = 0,
+    AVAR_Copy_ParentActorID     = 0,
+    AVAR_Copy_PartnerLevel      = 1,
+    AVAR_FormDuration           = 2,
+    AVAR_Kooper_Toppled         = 4,
+    AVAR_Kooper_ToppleTurns     = 5,
+    AVAR_State                  = 8,
+    AVAL_State_ReadyToCopy      = 0, // will copy partner next turn
+    AVAL_State_CopiedPartner    = 1, // currently transformed
+    AVAL_State_ReadyToTackle    = 2, // will use flying tackle next turn
+    AVAL_State_WaitToTackle     = 3, // do nothing this turn and tackle next turn (unused)
 };
 
 enum N(ActorParams) {
@@ -50,7 +55,6 @@ API_CALLABLE(N(InitPartnerCopyHistory)) {
     LastPartnerCopied = -1;
     return ApiStatus_DONE2;
 }
-
 
 API_CALLABLE(N(RegisterPartnerToCopy)) {
     PlayerData* playerData = &gPlayerData;
@@ -120,7 +124,7 @@ API_CALLABLE(N(RegisterPartnerToCopy)) {
     }
 }
 
-s32 N(IdleAnimations_8021D360)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Lee_Idle,
     STATUS_KEY_STONE,     ANIM_Lee_Still,
     STATUS_KEY_SLEEP,     ANIM_Lee_Sleep,
@@ -133,7 +137,7 @@ s32 N(IdleAnimations_8021D360)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations_8021D3AC)[] = {
+s32 N(FlailingAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Lee_Hurt,
     STATUS_END,
 };
@@ -143,12 +147,12 @@ s32 N(UnusedAnims)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_8021D3C4)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_8021D3D0)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -180,8 +184,8 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 25 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021D360),
-        .defenseTable = N(DefenseTable_8021D3C4),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -193,10 +197,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LEE,
     .level = ACTOR_LEVEL_LEE,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(StatusTable_8021D3D0),
+    .statusTable = N(StatusTable),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -213,11 +217,11 @@ ActorBlueprint NAMESPACE = {
 
 EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021D5B4)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D600)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_ReadyToCopy)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HandledEvent, FALSE)
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
         EVT_EXEC_WAIT(N(EVS_CopyPartner))
@@ -229,12 +233,12 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-EvtScript N(idle_8021D5B4) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(8021D5C4) = {
+EvtScript N(EVS_Lee_ReturnHome) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Lee_Run)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
@@ -242,8 +246,8 @@ EvtScript N(8021D5C4) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021D600) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
+EvtScript N(EVS_HandleEvent) = {
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HandledEvent, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -288,7 +292,7 @@ EvtScript N(handleEvent_8021D600) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(8021D5C4))
+            EVT_EXEC_WAIT(N(EVS_Lee_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
@@ -340,10 +344,10 @@ EvtScript N(handleEvent_8021D600) = {
     EVT_END
 };
 
-EvtScript N(flyingTackle) = {
+EvtScript N(EVS_Attack_FlyingTackle) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_ReadyToCopy)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -363,7 +367,7 @@ EvtScript N(flyingTackle) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.3))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 17, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
@@ -375,7 +379,7 @@ EvtScript N(flyingTackle) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_EXEC_WAIT(N(8021D5C4))
+            EVT_EXEC_WAIT(N(EVS_Lee_ReturnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -412,7 +416,7 @@ EvtScript N(flyingTackle) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(8021D5C4))
+            EVT_EXEC_WAIT(N(EVS_Lee_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -421,19 +425,19 @@ EvtScript N(flyingTackle) = {
     EVT_END
 };
 
-EvtScript N(8021E0E0) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+EvtScript N(EVS_RemoveParentActor) = {
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_ParentActorID, LVar0)
     EVT_CALL(RemoveActor, LVar0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(8021E118) = {
+EvtScript N(EVS_LoseDisguise) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_WAIT(30)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarA)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_ParentActorID, LVarA)
     EVT_CALL(UseIdleAnimation, LVarA, FALSE)
     EVT_CALL(HideHealthBar, LVarA)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)
@@ -453,14 +457,14 @@ EvtScript N(8021E118) = {
     EVT_CALL(CopyBuffs, ACTOR_SELF, LVarA)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(SetActorPos, LVarA, LVarB, LVarC, LVarD)
-    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetActorFlagBits, LVarA, (ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY), FALSE)
+    EVT_CALL(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, LVarA, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
-    EVT_CALL(SetActorVar, LVarA, AVAR_Unk_8, 2)
+    EVT_CALL(SetActorVar, LVarA, AVAR_State, AVAL_State_ReadyToTackle)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations_8021D3AC)))
-    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Lee_Hurt)
+    EVT_CALL(SetIdleAnimations, LVarA, PRT_MAIN, EVT_PTR(N(FlailingAnims)))
+    EVT_CALL(SetAnimation, LVarA, PRT_MAIN, ANIM_Lee_Hurt)
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorPos, LVarA, LVarB, LVarC, LVarD)
@@ -478,8 +482,8 @@ EvtScript N(8021E118) = {
     EVT_END_IF
     EVT_CALL(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations_8021D360)))
-    EVT_CALL(SetAnimation, LVarA, 1, ANIM_Lee_Idle)
+    EVT_CALL(SetIdleAnimations, LVarA, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
+    EVT_CALL(SetAnimation, LVarA, PRT_MAIN, ANIM_Lee_Idle)
     EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -488,7 +492,7 @@ EvtScript N(8021E118) = {
     EVT_END
 };
 
-EvtScript N(8021E5DC) = {
+EvtScript N(EVS_ShockKnockback) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
@@ -544,7 +548,6 @@ Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 #include "lee_watt.inc.c"
 #include "lee_sushie.inc.c"
 #include "lee_lakilester.inc.c"
-#define NAMESPACE A(lee)
 
 API_CALLABLE(N(GetPartnerAndLevel)) {
     Bytecode* args = script->ptrReadPos;
@@ -614,12 +617,12 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_CALL(MakeLerp, 0, 200, 20, EASING_LINEAR)
     EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(N(SetBackgroundAlpha), LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(N(SetBackgroundAlpha), LVar0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(N(GetPartnerAndLevel), LVar5, LVar6)
     EVT_CALL(N(RegisterPartnerToCopy))
@@ -664,20 +667,20 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(SetEnemyHP, LVarA, LVar0)
     EVT_CALL(CopyBuffs, ACTOR_SELF, LVarA)
     EVT_CALL(GetOwnerID, LVar0)
-    EVT_CALL(SetActorVar, LVarA, AVAR_Unk_0, LVar0)
-    EVT_CALL(SetActorVar, LVarA, AVAR_PartnerLevel, LVar6)
+    EVT_CALL(SetActorVar, LVarA, AVAR_Copy_ParentActorID, LVar0)
+    EVT_CALL(SetActorVar, LVarA, AVAR_Copy_PartnerLevel, LVar6)
     EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
         EVT_CALL(MakeLerp, 200, 0, 20, EASING_LINEAR)
         EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetBackgroundAlpha), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(N(SetBackgroundAlpha), LVar0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(1)
+            EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetActorSounds, LVarA, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
     EVT_SWITCH(LVar5)
@@ -704,7 +707,7 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_CopiedPartner)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -712,15 +715,16 @@ EvtScript N(EVS_CopyPartner) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_State, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(AVAL_State_ReadyToCopy)
             EVT_EXEC_WAIT(N(EVS_CopyPartner))
-        EVT_CASE_EQ(1)
-        EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(flyingTackle))
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 2)
+        EVT_CASE_EQ(AVAL_State_CopiedPartner)
+            // do nothing
+        EVT_CASE_EQ(AVAL_State_ReadyToTackle)
+            EVT_EXEC_WAIT(N(EVS_Attack_FlyingTackle))
+        EVT_CASE_EQ(AVAL_State_WaitToTackle)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_ReadyToTackle)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -742,8 +746,8 @@ EvtScript N(EVS_HandlePhase) = {
             EVT_IF_LE(LVar0, LVar1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 10)
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
-                EVT_IF_EQ(LVar0, 1)
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_State, LVar0)
+                EVT_IF_EQ(LVar0, AVAL_State_CopiedPartner)
                     EVT_CALL(ActorSpeak, MSG_MAC_Gate_0028, ACTOR_ENEMY1, PRT_MAIN, ANIM_Lee_Talk, ANIM_Lee_Walk)
                 EVT_ELSE
                     EVT_CALL(ActorSpeak, MSG_MAC_Gate_0028, ACTOR_SELF, PRT_MAIN, ANIM_Lee_Talk, ANIM_Lee_Walk)

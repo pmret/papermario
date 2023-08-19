@@ -231,7 +231,7 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_KENT_C_KOOPA,
     .level = ACTOR_LEVEL_KENT_C_KOOPA,
     .maxHP = 70,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
@@ -687,7 +687,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
                     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                    EVT_IF_EQ(LVarA, 5)
+                    EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                         EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                     EVT_END_IF
                     EVT_SET(LVarA, 1)
@@ -894,7 +894,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
                 EVT_END_IF
             EVT_END_THREAD
             EVT_WAIT(8)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

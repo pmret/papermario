@@ -242,7 +242,7 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_JR_TROOPA_6,
     .level = ACTOR_LEVEL_JR_TROOPA_6,
     .maxHP = 60,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(BaseStatusTable),
@@ -887,7 +887,7 @@ EvtScript N(EVS_Attack_Swoop) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SpikedParaJrTroopa_Dive)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
@@ -988,7 +988,7 @@ EvtScript N(EVS_Attack_SpikeDive) = {
                 EVT_SET(LVar3, LVar6)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LVarF, 5)
+            EVT_IF_EQ(LVarF, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -1277,7 +1277,7 @@ EvtScript N(EVS_Attack_LightningBolt) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAGE, ANIM_MageJrTroopa_Idle)
             EVT_END_THREAD
             EVT_WAIT(20)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)

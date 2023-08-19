@@ -1062,7 +1062,7 @@ EvtScript N(shapeSpell) = {
                 EVT_CALL(N(ShrinkActor), LVar0, LVar1, LVar6, LVar4, LVar5, LVar6, 30)
             EVT_END_IF
             EVT_WAIT(50)
-            EVT_IF_EQ(LVar9, 5)
+            EVT_IF_EQ(LVar9, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
@@ -1322,7 +1322,7 @@ ActorBlueprint N(clone) = {
     .type = ACTOR_TYPE_MAGICLONE,
     .level = ACTOR_LEVEL_MAGICLONE,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT( N(ActorParts_80221624)),
+    .partCount = ARRAY_COUNT(N(ActorParts_80221624)),
     .partsData = N(ActorParts_80221624),
     .initScript = &N(init_8022143C),
     .statusTable = N(StatusTable_802214CC),
@@ -1345,7 +1345,7 @@ ActorBlueprint N(flying_clone) = {
     .type = ACTOR_TYPE_FLYING_MAGICLONE,
     .level = ACTOR_LEVEL_FLYING_MAGICLONE,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT( N(ActorParts_80221648)),
+    .partCount = ARRAY_COUNT(N(ActorParts_80221648)),
     .partsData = N(ActorParts_80221648),
     .initScript = &N(init_80221478),
     .statusTable = N(StatusTable_80221578),

@@ -1927,16 +1927,15 @@ typedef struct Effect6BFXData {
 } Effect6BFXData; // size = 0x44
 
 typedef struct TattleWindowFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ s32 timeLeft;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 scale;
     /* 0x20 */ Vec3f rot;
     /* 0x2C */ Vec2f offset;
-    /* 0x34 */ u8 unk_34;
-    /* 0x35 */ u8 unk_35;
+    /* 0x34 */ Vec2bu closeAmt;
 } TattleWindowFXData; // size = 0x38
 
 typedef struct ShinyFlareFXData {

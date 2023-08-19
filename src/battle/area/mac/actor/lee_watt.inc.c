@@ -76,7 +76,7 @@ ActorBlueprint N(watt) = {
     .type = ACTOR_TYPE_LEE_WATT,
     .level = ACTOR_LEVEL_LEE_WATT,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(WattParts)),
+    .partCount = ARRAY_COUNT(N(WattParts)),
     .partsData = N(WattParts),
     .initScript = &N(init_Watt),
     .statusTable = N(StatusTable_802259D4),
@@ -104,7 +104,7 @@ EvtScript N(init_Watt) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80225B68)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80225B90)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80226880)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
     EVT_RETURN
     EVT_END
 };
@@ -265,7 +265,7 @@ EvtScript N(handleEvent_80225B90) = {
             EVT_SET_CONST(LVar2, ANIM_BattleWatt_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_CALL(func_80219604_465A94)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -276,7 +276,7 @@ EvtScript N(handleEvent_80225B90) = {
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_CALL(func_80219604_465A94)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -293,7 +293,7 @@ EvtScript N(handleEvent_80225B90) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(func_80219604_465A94)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -369,7 +369,7 @@ EvtScript N(takeTurn_80226004) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -40, 10, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 10, -20, EASING_QUADRATIC_OUT)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(func_802196A4_465B34, 1)
@@ -420,7 +420,7 @@ EvtScript N(takeTurn_80226004) = {
         EVT_WAIT(2)
         EVT_CALL(N(SetBackgroundAlpha), 0)
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_PartnerLevel, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)
@@ -457,16 +457,16 @@ EvtScript N(nextTurn_80226880) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
             EVT_IF_GT(LVar0, 0)
                 EVT_SUB(LVar0, 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_CALL(func_80219604_465A94)
-            EVT_EXEC_WAIT(N(8021E118))
+            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN

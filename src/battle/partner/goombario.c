@@ -1453,7 +1453,7 @@ EvtScript N(tattle) = {
     EVT_CALL(func_802CAE50, CAM_TATTLE, LVar0, LVar1, LVar2)
     EVT_CALL(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0282)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TATTLE_WINDOW_OPEN)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(N(GetTattleMessage))

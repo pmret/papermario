@@ -91,7 +91,7 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_CHAN,
     .level = ACTOR_LEVEL_CHAN,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
@@ -629,7 +629,7 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
             EVT_SET(LVar1, 0)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -775,7 +775,7 @@ EvtScript N(EVS_TakeTurn_Ground) = {
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
-                EVT_IF_EQ(LVarA, 5)
+                EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EVT_END_IF
                 EVT_WAIT(15)

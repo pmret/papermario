@@ -346,7 +346,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 7, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Goomba_Dark_Hurt)
             EVT_WAIT(HIT_RESULT_LUCKY)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(5)

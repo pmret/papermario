@@ -75,7 +75,7 @@ ActorBlueprint N(bow) = {
     .type = ACTOR_TYPE_LEE_BOW,
     .level = ACTOR_LEVEL_LEE_BOW,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(BowParts)),
+    .partCount = ARRAY_COUNT(N(BowParts)),
     .partsData = N(BowParts),
     .initScript = &N(init_Bow),
     .statusTable = N(StatusTable_80224468),
@@ -103,7 +103,7 @@ EvtScript N(init_Bow) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802245FC)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022460C)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80225884)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
     EVT_RETURN
     EVT_END
 };
@@ -134,7 +134,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnHurtAlt)
             EVT_SET_CONST(LVar2, ANIM_BattleBow_BurnStillAlt)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnStillAlt)
@@ -145,7 +145,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -158,7 +158,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_SET(LVar2, 14)
-            EVT_EXEC_WAIT(N(8021E5DC))
+            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
             EVT_THREAD
                 EVT_SET(LVar0, 200)
                 EVT_LOOP(20)
@@ -183,11 +183,11 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_SET(LVar2, 14)
-            EVT_EXEC_WAIT(N(8021E5DC))
+            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -200,7 +200,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -295,7 +295,7 @@ EvtScript N(takeTurn_80224CA0) = {
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_Injured)
@@ -333,7 +333,7 @@ EvtScript N(takeTurn_80224CA0) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_SET(LVarA, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_PartnerLevel, LVar8)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar8)
     EVT_SWITCH(LVar8)
         EVT_CASE_EQ(0)
             EVT_SET(LVar8, 4)
@@ -372,7 +372,7 @@ EvtScript N(takeTurn_80224CA0) = {
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.2))
         EVT_END_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_PartnerLevel, LVar9)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
         EVT_SWITCH(LVar9)
             EVT_CASE_EQ(0)
                 EVT_WAIT(2)
@@ -430,15 +430,15 @@ EvtScript N(nextTurn_80225884) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
             EVT_IF_GT(LVar0, 0)
                 EVT_SUB(LVar0, 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(N(8021E118))
+            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN

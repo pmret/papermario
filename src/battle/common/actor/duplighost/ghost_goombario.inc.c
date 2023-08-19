@@ -9,7 +9,32 @@ extern EvtScript N(goombario_handleEvent);
 
 #include "world/common/todo/UnkFunc62.inc.c"
 #include "common/ActorJumpToPos.inc.c"
-#include "common/UnkActorSizeFunc.inc.c"
+
+API_CALLABLE(N(CalculateTattleCamBoomLength)) {
+    Actor* actor = get_actor(script->owner1.actorID);
+    Actor* targetActor = get_actor(actor->targetActorID);
+    s16 targetActorSizeX;
+    u8 targetActorSizeY;
+    u8 targetActorLargerDimension;
+
+    if (!(targetActor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
+        script->varTable[1] += targetActor->size.y / 2;
+        script->varTable[1] += targetActor->size.y / 4;
+    } else {
+        script->varTable[1] -= targetActor->size.y / 2;
+        script->varTable[1] -= targetActor->size.y / 4;
+    }
+
+    targetActorSizeY = targetActor->size.y;
+    targetActorSizeX = targetActor->size.x;
+    targetActorLargerDimension = targetActorSizeY;
+    if (targetActorSizeY < targetActorSizeX) {
+        targetActorLargerDimension = targetActorSizeX;
+    }
+
+    script->varTable[3] = targetActorLargerDimension + 126;
+    return ApiStatus_DONE2;
+}
 
 API_CALLABLE(N(OpenTattleWindow)) {
     Bytecode* args = script->ptrReadPos;
@@ -513,12 +538,12 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 8)
     EVT_SET(LVar1, 0)
-    EVT_CALL(N(UnkActorSizeFunc))
+    EVT_CALL(N(CalculateTattleCamBoomLength))
     EVT_WAIT(1)
-    EVT_CALL(func_802CAE50, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(func_802CABE8, 2, 0, LVar3, 100, 4)
+    EVT_CALL(func_802CAE50, CAM_TATTLE, LVar0, LVar1, LVar2)
+    EVT_CALL(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0282)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TATTLE_WINDOW_OPEN)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)

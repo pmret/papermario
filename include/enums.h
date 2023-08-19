@@ -968,7 +968,7 @@ enum SoundIDs {
     SOUND_LRAW_0275                               = 0x00000275,
     SOUND_LRAW_0276                               = 0x00000276,
     SOUND_0281                                    = 0x00000281,
-    SOUND_0282                                    = 0x00000282,
+    SOUND_TATTLE_WINDOW_OPEN                    = 0x00000282,
     SOUND_0283                                    = 0x00000283,
     SOUND_0284                                    = 0x00000284,
     SOUND_0286                                    = 0x00000286,
@@ -1986,6 +1986,12 @@ enum DamageSources {
     DMG_SRC_CRUSH                   = 24,
     DMG_SRC_CRUSH_PARTNER           = 25,
     DMG_SRC_INK_BLAST               = 26,
+};
+
+enum PartnerRank {
+    PARTNER_RANK_NORMAL = 0,
+    PARTNER_RANK_SUPER  = 1,
+    PARTNER_RANK_ULTRA  = 2,
 };
 
 enum Iters {

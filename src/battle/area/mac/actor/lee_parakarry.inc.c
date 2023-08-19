@@ -75,7 +75,7 @@ ActorBlueprint N(parakarry) = {
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = ACTOR_LEVEL_LEE_PARAKARRY,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(ParakarryParts)),
+    .partCount = ARRAY_COUNT(N(ParakarryParts)),
     .partsData = N(ParakarryParts),
     .initScript = &N(init_Parakarry),
     .statusTable = N(StatusTable_802233E0),
@@ -103,7 +103,7 @@ EvtScript N(init_Parakarry) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223574)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223584)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80224320)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
     EVT_RETURN
     EVT_END
 };
@@ -134,7 +134,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleParakarry_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnStill)
@@ -145,7 +145,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -157,17 +157,17 @@ EvtScript N(handleEvent_80223584) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_SET(LVar2, 22)
-            EVT_EXEC_WAIT(N(8021E5DC))
+            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_SET(LVar2, 22)
-            EVT_EXEC_WAIT(N(8021E5DC))
+            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -180,7 +180,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(8021E0E0))
+            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -268,7 +268,7 @@ EvtScript N(80223B74) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -40, 10, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 10, -20, EASING_QUADRATIC_OUT)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
@@ -288,7 +288,7 @@ EvtScript N(80223B74) = {
     EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_PostDive)
     EVT_WAIT(1)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_PartnerLevel, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(0)
             EVT_WAIT(2)
@@ -341,15 +341,15 @@ EvtScript N(nextTurn_80224320) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
             EVT_IF_GT(LVar0, 0)
                 EVT_SUB(LVar0, 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar0)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, LVar0)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
-            EVT_EXEC_WAIT(N(8021E118))
+            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN

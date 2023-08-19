@@ -72,7 +72,7 @@ ActorBlueprint NAMESPACE = {
     #endif
     .level = ACTOR_LEVEL_ANTI_GUY,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
