@@ -326,7 +326,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -547,7 +547,7 @@ EvtScript N(EVS_Attack_FeatherFling) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -743,7 +743,7 @@ EvtScript N(EVS_LiftMario) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -796,7 +796,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -869,7 +869,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
                 EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
                 EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
                     EVT_LOOP(0)
-                        EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                        EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                         EVT_IF_EQ(LVar0, 1)
                             EVT_BREAK_LOOP
                         EVT_END_IF
@@ -1002,7 +1002,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
                 EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
                 EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
                     EVT_LOOP(0)
-                        EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                        EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                         EVT_IF_EQ(LVar0, 1)
                             EVT_BREAK_LOOP
                         EVT_END_IF
@@ -1046,7 +1046,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -1115,7 +1115,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
                 EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
                 EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
                     EVT_LOOP(0)
-                        EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                        EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                         EVT_IF_EQ(LVar0, 1)
                             EVT_BREAK_LOOP
                         EVT_END_IF
@@ -1163,7 +1163,7 @@ EvtScript N(EVS_FlyToHome_Impl) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF
@@ -1197,7 +1197,7 @@ EvtScript N(EVS_FlyToHome_GrappleFail_Impl) = {
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim16)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim17)
             EVT_LOOP(0)
-                EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_BREAK_LOOP
                 EVT_END_IF

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 
 #define LERP(a, b, alpha) ((a) * (alpha) + (b) * (1.0f-(alpha)))
+#define CUBIC_SINE_INTERP(alpha) (1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2))
 
 static f32 BattleCam_PosX;
 static f32 BattleCam_PosY;
@@ -323,7 +324,7 @@ s32 CamPresetUpdate_F(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -537,7 +538,7 @@ s32 CamPresetUpdate_M(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -738,7 +739,7 @@ s32 CamPresetUpdate_G(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -860,7 +861,7 @@ s32 CamPresetUpdate_I(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -980,7 +981,7 @@ s32 CamPresetUpdate_H(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -1028,7 +1029,7 @@ ApiStatus CamPresetUpdate_N(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -1141,7 +1142,7 @@ ApiStatus CamPresetUpdate_D(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -1195,7 +1196,7 @@ ApiStatus CamPresetUpdate_E(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
@@ -1246,7 +1247,7 @@ ApiStatus CamPresetUpdate_J(Evt* script, s32 isInitialCall) {
     if (!BattleCam_UseLinearInterp) {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;
-        alpha = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - alpha) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+        alpha = CUBIC_SINE_INTERP(alpha);
     } else {
         alpha = BattleCam_MoveTimeLeft;
         alpha /= BattleCam_MoveTimeTotal;

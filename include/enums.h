@@ -4700,7 +4700,7 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_11               = 11,
     BTL_CAM_PRESET_12               = 12,   // unused?
     BTL_CAM_PRESET_13               = 13,
-    BTL_CAM_PRESET_14               = 14,
+    BTL_CAM_PRESET_14               = 14,  // FOCUS_ON_TARGET?
     BTL_CAM_PRESET_15               = 15,
     BTL_CAM_PRESET_16               = 16,   // unused?
     BTL_CAM_PRESET_17               = 17,   // unused?

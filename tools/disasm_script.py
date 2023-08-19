@@ -448,7 +448,7 @@ replace_funcs = {
     "FlyPartTo": {0: "ActorIDs"},
     "FlyToGoal": {0: "ActorIDs"},
     "ForceHomePos": {0: "ActorIDs"},
-    "func_8026DF88": {0: "ActorIDs"},
+    "GetPartAnimNotify": {0: "ActorIDs"},
     "SetActorPaletteEffect": {0: "ActorIDs"},
     "SetActorPaletteSwapParams": {0: "ActorIDs"},
     "func_8026ED20": {0: "ActorIDs"},
