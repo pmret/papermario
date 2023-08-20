@@ -8,10 +8,7 @@
 #include "PR/controller.h"
 #include "PR/osint.h"
 SHIFT_BSS OSPifRam __osEepPifRam;
-SHIFT_BSS OSPifRam __osPfsPifRam;
 SHIFT_BSS __OSEventState __osEventStateTab[OS_NUM_EVENTS];
-SHIFT_BSS u32 __osFinalrom;
-SHIFT_BSS __OSInode __osPfsInodeCache;
 SHIFT_BSS OSPifRam __MotorDataBuf[MAXCONTROLLERS];
 SHIFT_BSS u16 retrace;
 SHIFT_BSS OSThread viThread;
