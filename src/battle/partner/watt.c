@@ -59,7 +59,7 @@ API_CALLABLE(N(WattFXUpdate)) {
         sWattEffectData_initialized = TRUE;
     }
 
-    if (sWattEffectData_initialized == 0) {
+    if (!sWattEffectData_initialized) {
         return ApiStatus_DONE2;
     }
 
@@ -118,7 +118,7 @@ API_CALLABLE(N(WattFXUpdate)) {
 }
 
 API_CALLABLE(N(WattFXRemove)) {
-    sWattEffectData_initialized = 0;
+    sWattEffectData_initialized = FALSE;
     if (sWattEffectData_effect1 != NULL) {
         remove_effect(sWattEffectData_effect1);
     }

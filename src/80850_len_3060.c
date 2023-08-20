@@ -73,7 +73,7 @@ void clear_player_data(void) {
 
     for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
         playerData->partners[i].enabled = FALSE;
-        playerData->partners[i].level = 0;
+        playerData->partners[i].level = PARTNER_RANK_NORMAL;
         playerData->partners[i].unk_02[0] = 0;
         playerData->partners[i].unk_02[1] = 0;
         playerData->partners[i].unk_02[2] = 0;

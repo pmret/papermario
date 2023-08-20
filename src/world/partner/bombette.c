@@ -413,13 +413,13 @@ API_CALLABLE(N(UseAbility)) {
             }
             fx_explosion(gPlayerData.partners[gPlayerData.curPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
             switch (gPlayerData.partners[gPlayerData.curPartner].level) {
-                case 0:
+                case PARTNER_RANK_NORMAL:
                     sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     break;
-                case 1:
+                case PARTNER_RANK_SUPER:
                     sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV2, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     break;
-                case 2:
+                case PARTNER_RANK_ULTRA:
                     sfx_play_sound_at_npc(SOUND_BOMBETTE_BLAST_LV3, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     break;
             }

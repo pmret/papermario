@@ -37,8 +37,8 @@ API_CALLABLE(N(func_80240048_7E73E8)) {
 API_CALLABLE(N(func_802400C8_7E7468)) {
     gPlayerData.partners[script->varTable[0] + 1].level++;
     script->varTable[0] = PARTNER_NONE;
-    if (gPlayerData.partners[PARTNER_GOOMBARIO].level > 2) {
-        gPlayerData.partners[PARTNER_GOOMBARIO].level = 2;
+    if (gPlayerData.partners[PARTNER_GOOMBARIO].level > PARTNER_RANK_ULTRA) {
+        gPlayerData.partners[PARTNER_GOOMBARIO].level = PARTNER_RANK_ULTRA;
         script->varTable[0] = PARTNER_GOOMBARIO;
     }
 

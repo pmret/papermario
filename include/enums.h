@@ -2105,7 +2105,7 @@ enum Events {
     EVENT_FALL_TRIGGER                = 0x0000000C,
     EVENT_FLIP_TRIGGER                = 0x0000000D,
     EVENT_BURN_HIT                    = 0x0000000E,
-    EVENT_15                          = 0x0000000F,
+    EVENT_15                          = 0x0000000F, // FLAME_HIT?
     EVENT_SPIN_SMASH_LAUNCH_HIT       = 0x00000011,
     EVENT_SHELL_CRACK_HIT             = 0x00000012,
     EVENT_STAR_BEAM                   = 0x00000013,

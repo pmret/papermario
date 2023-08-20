@@ -1,4 +1,12 @@
-s32 N(IdleAnimations_80224410)[] = {
+#define NAMESPACE A(lee_bow)
+
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
+
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleBow_Idle,
     STATUS_KEY_STONE,     ANIM_BattleBow_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleBow_Still,
@@ -11,12 +19,12 @@ s32 N(IdleAnimations_80224410)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_8022445C)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80224468)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -41,15 +49,15 @@ s32 N(StatusTable_80224468)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(BowParts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80224410),
-        .defenseTable = N(DefenseTable_8022445C),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -61,24 +69,22 @@ ActorPartBlueprint N(BowParts)[] = {
         .targetOffset = { 0, -26 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_8022445C),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },
 };
 
-extern EvtScript N(init_Bow);
-
-ActorBlueprint N(bow) = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_BOW,
     .level = ACTOR_LEVEL_LEE_BOW,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(BowParts)),
-    .partsData = N(BowParts),
-    .initScript = &N(init_Bow),
-    .statusTable = N(StatusTable_80224468),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -93,27 +99,22 @@ ActorBlueprint N(bow) = {
     .statusTextOffset = { 10, 20 },
 };
 
-extern EvtScript N(takeTurn_80224CA0);
-extern EvtScript N(idle_802245FC);
-extern EvtScript N(handleEvent_8022460C);
-extern EvtScript N(nextTurn_80225884);
-
-EvtScript N(init_Bow) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224CA0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802245FC)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8022460C)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80225884)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_802245FC) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_8022460C) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -134,7 +135,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnHurtAlt)
             EVT_SET_CONST(LVar2, ANIM_BattleBow_BurnStillAlt)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_BurnStillAlt)
@@ -145,7 +146,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -158,7 +159,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_SET(LVar2, 14)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_THREAD
                 EVT_SET(LVar0, 200)
                 EVT_LOOP(20)
@@ -183,11 +184,11 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_SET(LVar2, 14)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -200,7 +201,7 @@ EvtScript N(handleEvent_8022460C) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -236,7 +237,7 @@ EvtScript N(handleEvent_8022460C) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80224CA0) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_WAIT(10)
@@ -335,11 +336,11 @@ EvtScript N(takeTurn_80224CA0) = {
     EVT_SET(LVarA, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar8)
     EVT_SWITCH(LVar8)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_SET(LVar8, 4)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_SET(LVar8, 5)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_SET(LVar8, 6)
     EVT_END_SWITCH
     EVT_SET(LVar7, LVar8)
@@ -374,13 +375,13 @@ EvtScript N(takeTurn_80224CA0) = {
         EVT_END_THREAD
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
         EVT_SWITCH(LVar9)
-            EVT_CASE_EQ(0)
+            EVT_CASE_EQ(PARTNER_RANK_NORMAL)
                 EVT_WAIT(2)
                 EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_10)
-            EVT_CASE_EQ(1)
+            EVT_CASE_EQ(PARTNER_RANK_SUPER)
                 EVT_WAIT(2)
                 EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_10)
-            EVT_CASE_EQ(2)
+            EVT_CASE_EQ(PARTNER_RANK_ULTRA)
                 EVT_WAIT(2)
                 EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_10)
         EVT_END_SWITCH
@@ -426,7 +427,7 @@ EvtScript N(takeTurn_80224CA0) = {
     EVT_END
 };
 
-EvtScript N(nextTurn_80225884) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
@@ -438,13 +439,13 @@ EvtScript N(nextTurn_80225884) = {
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
+            EVT_EXEC_WAIT(A(EVS_Lee_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-Formation N(formation_bow) = {
-    ACTOR_BY_POS(N(bow), N(SummonPos), 0)
+Formation A(LeeBowFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(Lee_SummonPos), 0)
 };

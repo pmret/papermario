@@ -1,10 +1,12 @@
-extern EvtScript N(EVS_Init_Goombario);
-extern EvtScript N(EVS_Idle_Goombario);
-extern EvtScript N(EVS_TakeTurn_Goombario);
-extern EvtScript N(EVS_HandleEvent_Goombario);
-extern EvtScript N(EVS_HandlePhase_Goombario);
+#define NAMESPACE A(lee_goombario)
 
-s32 N(GoombarioAnims)[] = {
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
+
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Idle,
     STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleGoombario_Still,
@@ -17,12 +19,12 @@ s32 N(GoombarioAnims)[] = {
     STATUS_END,
 };
 
-s32 N(GoombarioDefense)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(GoombarioStatusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -47,30 +49,30 @@ s32 N(GoombarioStatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(GoombarioParts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(GoombarioAnims),
-        .defenseTable = N(GoombarioDefense),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -9 },
     },
 };
 
-ActorBlueprint N(goombario) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_GOOMBARIO,
     .level = ACTOR_LEVEL_LEE_GOOMBARIO,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(GoombarioParts)),
-    .partsData = N(GoombarioParts),
-    .initScript = &N(EVS_Init_Goombario),
-    .statusTable = N(GoombarioStatusTable),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -85,22 +87,22 @@ ActorBlueprint N(goombario) = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(EVS_Init_Goombario) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn_Goombario)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle_Goombario)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Goombario)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase_Goombario)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_Idle_Goombario) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_HandleEvent_Goombario) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -121,7 +123,7 @@ EvtScript N(EVS_HandleEvent_Goombario) = {
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt1)
             EVT_SET_CONST(LVar2, ANIM_BattleGoombario_BurnHurt2)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt2)
@@ -132,7 +134,7 @@ EvtScript N(EVS_HandleEvent_Goombario) = {
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -144,17 +146,17 @@ EvtScript N(EVS_HandleEvent_Goombario) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_SET(LVar2, 12)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_SET(LVar2, 12)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -167,7 +169,7 @@ EvtScript N(EVS_HandleEvent_Goombario) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -203,7 +205,7 @@ EvtScript N(EVS_HandleEvent_Goombario) = {
     EVT_END
 };
 
-EvtScript N(EVS_Goombario_HeadbonkFollowthrough) = {
+EvtScript N(EVS_HeadbonkFollowthrough) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
     EVT_THREAD
@@ -263,7 +265,7 @@ EvtScript N(EVS_Goombario_HeadbonkFollowthrough) = {
     EVT_END
 };
 
-EvtScript N(EVS_Goombario_ApproachPlayer) = {
+EvtScript N(EVS_ApproachPlayer) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -279,7 +281,7 @@ EvtScript N(EVS_Goombario_ApproachPlayer) = {
 };
 
 // copied from goombario.c and used, but result is discarded
-EvtScript N(EVS_Goombario_CalculateJumpTime) = {
+EvtScript N(EVS_CalculateJumpTime) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarC, LVarD, LVarE)
@@ -303,8 +305,8 @@ EvtScript N(EVS_Goombario_CalculateJumpTime) = {
 EvtScript N(EVS_Attack_Headbonk) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_EXEC_WAIT(N(EVS_Goombario_ApproachPlayer))
-    EVT_EXEC_WAIT(N(EVS_Goombario_CalculateJumpTime))
+    EVT_EXEC_WAIT(N(EVS_ApproachPlayer))
+    EVT_EXEC_WAIT(N(EVS_CalculateJumpTime))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
         EVT_SETF(LVar0, EVT_FLOAT(7.2))
@@ -341,7 +343,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
             EVT_END_IF
             EVT_WAIT(20)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_Goombario_HeadbonkFollowthrough))
+            EVT_EXEC_WAIT(N(EVS_HeadbonkFollowthrough))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -448,7 +450,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_Goombario_HeadbonkFollowthrough))
+            EVT_EXEC_WAIT(N(EVS_HeadbonkFollowthrough))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -550,7 +552,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_END
 };
 
-EvtScript N(EVS_TakeTurn_Goombario) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 40)
         EVT_EXEC_WAIT(N(EVS_Move_Tattle))
@@ -561,7 +563,7 @@ EvtScript N(EVS_TakeTurn_Goombario) = {
     EVT_END
 };
 
-EvtScript N(EVS_HandlePhase_Goombario) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
@@ -573,13 +575,13 @@ EvtScript N(EVS_HandlePhase_Goombario) = {
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
+            EVT_EXEC_WAIT(A(EVS_Lee_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-Formation N(formation_goombario) = {
-    ACTOR_BY_POS(N(goombario), N(SummonPos), 0),
+Formation A(LeeGoombarioFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(Lee_SummonPos), 0),
 };

@@ -1,10 +1,12 @@
-extern EvtScript N(EVS_Kooper_Init);
-extern EvtScript N(EVS_Kooper_Idle);
-extern EvtScript N(EVS_Kooper_TakeTurn);
-extern EvtScript N(EVS_Kooper_HandleEvent);
-extern EvtScript N(EVS_Kooper_HandlePhase);
+#define NAMESPACE A(lee_kooper)
 
-s32 N(KooperAnims)[] = {
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
+
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleKooper_Idle,
     STATUS_KEY_STONE,     ANIM_BattleKooper_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleKooper_Still,
@@ -17,7 +19,7 @@ s32 N(KooperAnims)[] = {
     STATUS_END,
 };
 
-s32 N(KooperToppledAnims)[] = {
+s32 N(ToppledAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleKooper_Toppled,
     STATUS_KEY_STONE,     ANIM_BattleKooper_StillToppled,
     STATUS_KEY_SLEEP,     ANIM_BattleKooper_StillToppled,
@@ -30,17 +32,17 @@ s32 N(KooperToppledAnims)[] = {
     STATUS_END,
 };
 
-s32 N(KooperDefenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
-s32 N(KooperToppledDefenseTable)[] = {
+s32 N(ToppledDefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(KooperStatusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -65,30 +67,30 @@ s32 N(KooperStatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(KooperParts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 32 },
         .opacity = 255,
-        .idleAnimations = N(KooperAnims),
-        .defenseTable = N(KooperDefenseTable),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
     },
 };
 
-ActorBlueprint N(kooper) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_KOOPER,
     .level = ACTOR_LEVEL_LEE_KOOPER,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(KooperParts)),
-    .partsData = N(KooperParts),
-    .initScript = &N(EVS_Kooper_Init),
-    .statusTable = N(KooperStatusTable),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -103,11 +105,11 @@ ActorBlueprint N(kooper) = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(EVS_Kooper_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_Kooper_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Kooper_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_Kooper_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_Kooper_HandlePhase)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Kooper_Toppled, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Kooper_ToppleTurns, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
@@ -115,22 +117,20 @@ EvtScript N(EVS_Kooper_Init) = {
     EVT_END
 };
 
-#define NAMESPACE A(lee_kooper)
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
-#define NAMESPACE A(lee)
 
-EvtScript N(EVS_Kooper_Idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Kooper_Toppled, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(0)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 38)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -9)
-                EVT_CALL(A(lee_kooper_SetAbsoluteStatusOffsets), -10, 25, 10, 25)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 25, 10, 25)
             EVT_CASE_EQ(1)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 5, 15)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -6)
-                EVT_CALL(A(lee_kooper_SetAbsoluteStatusOffsets), -10, 20, 10, 20)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
         EVT_END_SWITCH
         EVT_WAIT(1)
         EVT_GOTO(0)
@@ -140,7 +140,7 @@ EvtScript N(EVS_Kooper_Idle) = {
 
 s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
-EvtScript N(EVS_Kooper_HandleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -161,7 +161,7 @@ EvtScript N(EVS_Kooper_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleKooper_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -171,7 +171,7 @@ EvtScript N(EVS_Kooper_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -182,8 +182,8 @@ EvtScript N(EVS_Kooper_HandleEvent) = {
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Kooper_Toppled, TRUE)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Kooper_ToppleTurns, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(KooperToppledDefenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(KooperToppledAnims)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -6)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKooper_Hurt)
@@ -227,7 +227,7 @@ EvtScript N(EVS_Kooper_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -295,7 +295,7 @@ EvtScript N(EVS_Kooper_HandleEvent) = {
 
 #include "common/UnkActorPosFunc.inc.c"
 
-EvtScript N(EVS_Kooper_TakeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -335,8 +335,8 @@ EvtScript N(EVS_Kooper_TakeTurn) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKooper_Idle)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Kooper_Toppled, 0)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(KooperDefenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(KooperAnims)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 38)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -9)
         EVT_END_IF
@@ -499,7 +499,7 @@ EvtScript N(EVS_Kooper_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(EVS_Kooper_HandlePhase) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
@@ -511,13 +511,13 @@ EvtScript N(EVS_Kooper_HandlePhase) = {
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
-            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
+            EVT_EXEC_WAIT(A(EVS_Lee_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-Formation N(formation_kooper) = {
-    ACTOR_BY_POS(N(kooper), N(SummonPos), 0)
+Formation A(LeeKooperFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(Lee_SummonPos), 0)
 };

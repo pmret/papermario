@@ -1,4 +1,12 @@
-s32 N(IdleAnimations_80223388)[] = {
+#define NAMESPACE A(lee_parakarry)
+
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
+
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleParakarry_Idle,
     STATUS_KEY_STONE,     ANIM_BattleParakarry_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleParakarry_Still,
@@ -11,12 +19,12 @@ s32 N(IdleAnimations_80223388)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_802233D4)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_802233E0)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -41,15 +49,15 @@ s32 N(StatusTable_802233E0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ParakarryParts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 32 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80223388),
-        .defenseTable = N(DefenseTable_802233D4),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
@@ -61,24 +69,22 @@ ActorPartBlueprint N(ParakarryParts)[] = {
         .targetOffset = { -3, -18 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(DefenseTable_802233D4),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
     },
 };
 
-extern EvtScript N(init_Parakarry);
-
-ActorBlueprint N(parakarry) = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = ACTOR_LEVEL_LEE_PARAKARRY,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(ParakarryParts)),
-    .partsData = N(ParakarryParts),
-    .initScript = &N(init_Parakarry),
-    .statusTable = N(StatusTable_802233E0),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -93,27 +99,22 @@ ActorBlueprint N(parakarry) = {
     .statusTextOffset = { 10, 20 },
 };
 
-extern EvtScript N(takeTurn_80224304);
-extern EvtScript N(idle_80223574);
-extern EvtScript N(handleEvent_80223584);
-extern EvtScript N(nextTurn_80224320);
-
-EvtScript N(init_Parakarry) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80224304)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223574)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223584)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(nextTurn_80224320)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FormDuration, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_80223574) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_80223584) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -134,7 +135,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleParakarry_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_BurnStill)
@@ -145,7 +146,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -157,17 +158,17 @@ EvtScript N(handleEvent_80223584) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_SET(LVar2, 22)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Run)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_SET(LVar2, 22)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -180,7 +181,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(EVS_RemoveParentActor))
+            EVT_EXEC_WAIT(A(EVS_Lee_RemoveParentActor))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -224,7 +225,7 @@ EvtScript N(handleEvent_80223584) = {
     EVT_END
 };
 
-EvtScript N(80223B74) = {
+EvtScript N(EVS_Move_SkyDive) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -290,13 +291,13 @@ EvtScript N(80223B74) = {
     EVT_WAIT(1)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
@@ -331,13 +332,13 @@ EvtScript N(80223B74) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80224304) = {
-    EVT_EXEC_WAIT(N(80223B74))
+EvtScript N(EVS_TakeTurn) = {
+    EVT_EXEC_WAIT(N(EVS_Move_SkyDive))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(nextTurn_80224320) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
@@ -349,13 +350,13 @@ EvtScript N(nextTurn_80224320) = {
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
-            EVT_EXEC_WAIT(N(EVS_LoseDisguise))
+            EVT_EXEC_WAIT(A(EVS_Lee_LoseDisguise))
             EVT_RETURN
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-Formation N(formation_parakarry) = {
-    ACTOR_BY_POS(N(parakarry), N(SummonPos), 0)
+Formation A(LeeParakarryFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(Lee_SummonPos), 0)
 };

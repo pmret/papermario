@@ -21,29 +21,29 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
     if (isInitialCall) {
         wattEffectData = heap_malloc(sizeof(*wattEffectData));
         actor->state.varTablePtr[2] = wattEffectData;
-        wattEffectData->unk_04 = TRUE;
-        wattEffectData->angle = 0;
-        wattEffectData->unk_0C = TRUE;
-        wattEffectData->unk_10 = 0;
+        wattEffectData->isBouncing = TRUE;
+        wattEffectData->bouncePhase = 0;
+        wattEffectData->isActive = TRUE;
+        wattEffectData->currentEffectIndex = 0;
         wattEffectData->effect1 = fx_static_status(0, actor->curPos.x, actor->curPos.y, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->effect2 = fx_static_status(1, actor->curPos.x, -1000.0f, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->flags = TRUE;
+        wattEffectData->initialized = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
 
     wattEffectData = state->varTablePtr[2];
-    if (wattEffectData->flags) {
-        if (wattEffectData->unk_04 && actor->debuff != STATUS_KEY_STOP) {
-            wattEffectData->angle += 15;
-            wattEffectData->angle = clamp_angle(wattEffectData->angle);
+    if (wattEffectData->initialized) {
+        if (wattEffectData->isBouncing && actor->debuff != STATUS_KEY_STOP) {
+            wattEffectData->bouncePhase += 15;
+            wattEffectData->bouncePhase = clamp_angle(wattEffectData->bouncePhase);
         }
-        actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
+        actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->bouncePhase)) * 3.0f;
 
         x = actor->curPos.x + actor->headOffset.x;
         y = actor->curPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_KEY_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
         z = actor->curPos.z + actor->headOffset.z;
-        if (wattEffectData->unk_0C) {
-            switch (wattEffectData->unk_10) {
+        if (wattEffectData->isActive) {
+            switch (wattEffectData->currentEffectIndex) {
                 case 0:
                     if (wattEffectData->effect1 == NULL) {
                         wattEffectData->effect1 = fx_static_status(0, x, y, z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
@@ -81,7 +81,7 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
                 wattEffectData->effect2 = NULL;
             }
         }
-        if (wattEffectData->debuff != actor->debuff && wattEffectData->unk_0C) {
+        if (wattEffectData->debuff != actor->debuff && wattEffectData->isActive) {
             if (wattEffectData->effect1 != NULL) {
                 wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
                 wattEffectData->effect1 = NULL;
@@ -102,7 +102,7 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
 API_CALLABLE(N(UnkWattEffectFunc2)) {
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
-    wattEffectData->flags = FALSE;
+    wattEffectData->initialized = FALSE;
 
     if (wattEffectData->effect1 != NULL) {
         wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
@@ -119,7 +119,7 @@ API_CALLABLE(N(UnkWattEffectFunc3)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
-    wattEffectData->unk_04 = evt_get_variable(script, *args++);
+    wattEffectData->isBouncing = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -127,7 +127,7 @@ API_CALLABLE(N(UnkWattEffectFunc4)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
-    wattEffectData->unk_0C = evt_get_variable(script, *args++);
+    wattEffectData->isActive = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -135,7 +135,7 @@ API_CALLABLE(N(UnkWattEffectFunc5)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
-    wattEffectData->unk_10 = evt_get_variable(script, *args++);
+    wattEffectData->currentEffectIndex = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

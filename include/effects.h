@@ -2604,11 +2604,11 @@ typedef struct EffectInstance {
 
 // composite struct for watt effects -- NOT the same as StaticStatusFXData
 typedef struct WattEffectData {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 angle;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
+    /* 0x00 */ s32 initialized;
+    /* 0x04 */ s32 isBouncing;
+    /* 0x08 */ s32 bouncePhase;
+    /* 0x0C */ s32 isActive;
+    /* 0x10 */ s32 currentEffectIndex;
     /* 0x14 */ EffectInstance* effect1;
     /* 0x18 */ EffectInstance* effect2;
     /* 0x1C */ s32 debuff;

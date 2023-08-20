@@ -11,12 +11,16 @@
 
 #define NAMESPACE A(lee)
 
+// scripts in lee.c calls two functions defined in lee_watt.c for adjusting the background fade
+// this macro is used to highlight those instances
+#define WATT(x) A( lee_watt_##x )
+
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
-extern EvtScript N(EVS_CopyPartner);
+extern EvtScript N(EVS_Move_CopyPartner);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -95,12 +99,12 @@ API_CALLABLE(N(RegisterPartnerToCopy)) {
     for (i = 0; i < ARRAY_COUNT(PartnerCopyHistory); i++) {
         partnerId = randomPartnerMap[i];
 
-        if (playerData->partners[partnerId].enabled &&
-            partnerId != PARTNER_GOOMPA &&
-            partnerId != PARTNER_GOOMBARIA &&
-            partnerId != PARTNER_TWINK &&
-            partnerId != currentPartner &&
-            !PartnerCopyHistory[partnerId]
+        if (playerData->partners[partnerId].enabled
+            && partnerId != PARTNER_GOOMPA
+            && partnerId != PARTNER_GOOMBARIA
+            && partnerId != PARTNER_TWINK
+            && partnerId != currentPartner
+            && !PartnerCopyHistory[partnerId]
         ) {
             break;
         }
@@ -224,7 +228,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HandledEvent, FALSE)
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
-        EVT_EXEC_WAIT(N(EVS_CopyPartner))
+        EVT_EXEC_WAIT(N(EVS_Move_CopyPartner))
         EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(N(InitPartnerCopyHistory))
@@ -425,14 +429,14 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
     EVT_END
 };
 
-EvtScript N(EVS_RemoveParentActor) = {
+EvtScript A(EVS_Lee_RemoveParentActor) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_ParentActorID, LVar0)
     EVT_CALL(RemoveActor, LVar0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_LoseDisguise) = {
+EvtScript A(EVS_Lee_LoseDisguise) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -492,7 +496,7 @@ EvtScript N(EVS_LoseDisguise) = {
     EVT_END
 };
 
-EvtScript N(EVS_ShockKnockback) = {
+EvtScript A(EVS_Lee_ShockKnockback) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
@@ -538,7 +542,7 @@ EvtScript N(EVS_ShockKnockback) = {
     EVT_END
 };
 
-Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
+Vec3i A(Lee_SummonPos) = { NPC_DISPOSE_LOCATION };
 
 #include "lee_goombario.inc.c"
 #include "lee_kooper.inc.c"
@@ -548,6 +552,7 @@ Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 #include "lee_watt.inc.c"
 #include "lee_sushie.inc.c"
 #include "lee_lakilester.inc.c"
+#define NAMESPACE A(lee)
 
 API_CALLABLE(N(GetPartnerAndLevel)) {
     Bytecode* args = script->ptrReadPos;
@@ -565,35 +570,35 @@ API_CALLABLE(N(AdjustFormationPriority)) {
 
     switch (partnerID) {
         case PARTNER_GOOMBARIO:
-            formation = N(formation_goombario);
+            formation = A(LeeGoombarioFormation);
             break;
         case PARTNER_KOOPER:
-            formation = N(formation_kooper);
+            formation = A(LeeKooperFormation);
             break;
         case PARTNER_BOMBETTE:
-            formation = N(formation_bombette);
+            formation = A(LeeBombetteFormation);
             break;
         case PARTNER_PARAKARRY:
-            formation = N(formation_parakarry);
+            formation = A(LeeParakarryFormation);
             break;
         case PARTNER_BOW:
-            formation = N(formation_bow);
+            formation = A(LeeBowFormation);
             break;
         case PARTNER_WATT:
-            formation = N(formation_watt);
+            formation = A(LeeWattFormation);
             break;
         case PARTNER_SUSHIE:
-            formation = N(formation_sushie);
+            formation = A(LeeSushieFormation);
             break;
         case PARTNER_LAKILESTER:
-            formation = N(formation_lakilester);
+            formation = A(LeeLakilesterFormation);
             break;
     }
     formation->priority = actor->turnPriority + 10;
     return ApiStatus_DONE2;
 }
 
-EvtScript N(EVS_CopyPartner) = {
+EvtScript N(EVS_Move_CopyPartner) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -614,11 +619,11 @@ EvtScript N(EVS_CopyPartner) = {
         EVT_SETF(LVar3, EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 1, LVar0, LVar1, LVar2, LVar3, 40, 0)
-    EVT_CALL(N(UnkBackgroundFunc3))
+    EVT_CALL(WATT(UnkBackgroundFunc3))
     EVT_CALL(MakeLerp, 0, 200, 20, EASING_LINEAR)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetBackgroundAlpha), LVar0)
+        EVT_CALL(WATT(SetBackgroundAlpha), LVar0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
@@ -629,21 +634,21 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(N(AdjustFormationPriority), LVar5)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(PARTNER_GOOMBARIO)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_goombario)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeGoombarioFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_KOOPER)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_kooper)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeKooperFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_BOMBETTE)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bombette)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeBombetteFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_PARAKARRY)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_parakarry)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeParakarryFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_BOW)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bow)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeBowFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_WATT)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_watt)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeWattFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_SUSHIE)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_sushie)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeSushieFormation)), FALSE)
         EVT_CASE_EQ(PARTNER_LAKILESTER)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_lakilester)), FALSE)
+            EVT_CALL(SummonEnemy, EVT_PTR(A(LeeLakilesterFormation)), FALSE)
     EVT_END_SWITCH
     EVT_SET(LVarA, LVar0)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)
@@ -676,7 +681,7 @@ EvtScript N(EVS_CopyPartner) = {
         EVT_CALL(MakeLerp, 200, 0, 20, EASING_LINEAR)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetBackgroundAlpha), LVar0)
+            EVT_CALL(WATT(SetBackgroundAlpha), LVar0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 1)
                 EVT_GOTO(1)
@@ -718,7 +723,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_State, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(AVAL_State_ReadyToCopy)
-            EVT_EXEC_WAIT(N(EVS_CopyPartner))
+            EVT_EXEC_WAIT(N(EVS_Move_CopyPartner))
         EVT_CASE_EQ(AVAL_State_CopiedPartner)
             // do nothing
         EVT_CASE_EQ(AVAL_State_ReadyToTackle)

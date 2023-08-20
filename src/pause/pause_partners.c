@@ -474,13 +474,14 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     s32 msgID = gPartnerPopupProperties[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].nameMsg;
     s32 level = get_player_data()->partners[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].level;
     s32 msgWidth = get_msg_width(msgID, 0);
-    s32 offset = 16;
+    s32 offset;
 
-    if (level != 1) {
+    if (level == PARTNER_RANK_SUPER) {
+        offset = 16;
+    } else  if (level == PARTNER_RANK_ULTRA) {
+        offset = 20;
+    } else {
         offset = 0;
-        if (level == 2) {
-            offset = 20;
-        }
     }
 
     if (offset != 0) {
@@ -509,11 +510,11 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 level = get_player_data()->partners[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].level;
 
 
-    if (level == 2) {
+    if (level == PARTNER_RANK_ULTRA) {
         level = 4;
-    } else if (level == 1) {
+    } else if (level == PARTNER_RANK_SUPER) {
         level = 3;
-    } else if (level == 0) {
+    } else if (level == PARTNER_RANK_NORMAL) {
         level = 2;
     }
     for (i = 0; i < 4; i++) {
@@ -687,11 +688,11 @@ void pause_partners_handle_input(MenuPanel* panel) {
     }
 
     level = get_player_data()->partners[gPausePartnersPartnerIDs[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].level;
-    if (level == 2) {
+    if (level == PARTNER_RANK_ULTRA) {
         level = 4;
-    } else if (level == 1) {
+    } else if (level == PARTNER_RANK_SUPER) {
         level = 3;
-    } else if (level == 0) {
+    } else if (level == PARTNER_RANK_NORMAL) {
         level = 2;
     }
 

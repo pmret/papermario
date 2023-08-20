@@ -231,7 +231,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(EVS_ShockKnockback) = {
+EvtScript A(EVS_Lee_ShockKnockback) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -280,7 +280,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Dead)
-            EVT_EXEC_WAIT(N(EVS_ShockKnockback))
+            EVT_EXEC_WAIT(A(EVS_Lee_ShockKnockback))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_GoombaKing_Run)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
