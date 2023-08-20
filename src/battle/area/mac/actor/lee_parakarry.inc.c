@@ -1,4 +1,4 @@
-#define NAMESPACE A(lee_parakarry)
+#define NAMESPACE A(parakarry_lee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
@@ -64,7 +64,7 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { -3, -18 },
         .opacity = 255,
@@ -225,7 +225,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(EVS_Move_SkyDive) = {
+EvtScript N(EVS_Attack_SkyDive) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -333,7 +333,7 @@ EvtScript N(EVS_Move_SkyDive) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_EXEC_WAIT(N(EVS_Move_SkyDive))
+    EVT_EXEC_WAIT(N(EVS_Attack_SkyDive))
     EVT_RETURN
     EVT_END
 };

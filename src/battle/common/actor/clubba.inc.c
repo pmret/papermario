@@ -10,7 +10,7 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 s32 N(IdleAnimations)[] = {

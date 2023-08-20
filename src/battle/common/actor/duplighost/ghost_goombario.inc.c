@@ -2,65 +2,14 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleGoombario.h"
 
-extern EvtScript N(goombario_init);
-extern EvtScript N(goombario_takeTurn);
-extern EvtScript N(goombario_idle);
-extern EvtScript N(goombario_handleEvent);
+#define NAMESPACE A(goombario_clone)
 
-#include "world/common/todo/UnkFunc62.inc.c"
-#include "common/ActorJumpToPos.inc.c"
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 
-API_CALLABLE(N(CalculateTattleCamBoomLength)) {
-    Actor* actor = get_actor(script->owner1.actorID);
-    Actor* targetActor = get_actor(actor->targetActorID);
-    s16 targetActorSizeX;
-    u8 targetActorSizeY;
-    u8 targetActorLargerDimension;
-
-    if (!(targetActor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
-        script->varTable[1] += targetActor->size.y / 2;
-        script->varTable[1] += targetActor->size.y / 4;
-    } else {
-        script->varTable[1] -= targetActor->size.y / 2;
-        script->varTable[1] -= targetActor->size.y / 4;
-    }
-
-    targetActorSizeY = targetActor->size.y;
-    targetActorSizeX = targetActor->size.x;
-    targetActorLargerDimension = targetActorSizeY;
-    if (targetActorSizeY < targetActorSizeX) {
-        targetActorLargerDimension = targetActorSizeX;
-    }
-
-    script->varTable[3] = targetActorLargerDimension + 126;
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(OpenTattleWindow)) {
-    Bytecode* args = script->ptrReadPos;
-
-    evt_set_variable(script, *args++, (s32) fx_tattle_window(0, 106.0f, 144.0f, 0, 1.0f, 0));
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(HideTattleWindow)) {
-    Bytecode* args = script->ptrReadPos;
-    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-
-    effect->data.tattleWindow->pos.y = NPC_DISPOSE_POS_Y;
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(CloseTattleWindow)) {
-    Bytecode* args = script->ptrReadPos;
-    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
-
-    effect->data.tattleWindow->pos.y = 144.0f;
-    effect->flags |= FX_INSTANCE_FLAG_DISMISS;
-    return ApiStatus_DONE2;
-}
-
-s32 N(goombario_idleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Idle,
     STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleGoombario_Still,
@@ -73,12 +22,12 @@ s32 N(goombario_idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(goombario_defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(goombario_statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -103,30 +52,30 @@ s32 N(goombario_statusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(goombario_parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(goombario_idleAnimations),
-        .defenseTable = N(goombario_defenseTable),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -9 },
     },
 };
 
-ActorBlueprint N(goombario) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GHOST_GOOMBARIO,
     .level = ACTOR_LEVEL_GHOST_GOOMBARIO,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT(N(goombario_parts)),
-    .partsData = N(goombario_parts),
-    .initScript = &N(goombario_init),
-    .statusTable = N(goombario_statusTable),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
     .hurricaneChance = 70,
@@ -141,20 +90,20 @@ ActorBlueprint N(goombario) = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(goombario_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(goombario_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(goombario_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(goombario_handleEvent)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(goombario_idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(goombario_handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -165,7 +114,7 @@ EvtScript N(goombario_handleEvent) = {
             EVT_IF_FLAG(LVar1, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-                EVT_EXEC_WAIT(N(OnHitElectric))
+                EVT_EXEC_WAIT(A(EVS_Duplighost_OnHitElectric))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -183,7 +132,7 @@ EvtScript N(goombario_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt1)
             EVT_SET_CONST(LVar2, ANIM_BattleGoombario_BurnHurt2)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_BurnHurt2)
@@ -194,7 +143,7 @@ EvtScript N(goombario_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -205,14 +154,14 @@ EvtScript N(goombario_handleEvent) = {
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
-            EVT_EXEC_WAIT(N(OnShockHit))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnShockHit))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_SET(LVar2, 12)
-            EVT_EXEC_WAIT(N(OnShockDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnShockDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -225,7 +174,7 @@ EvtScript N(goombario_handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -261,7 +210,10 @@ EvtScript N(goombario_handleEvent) = {
     EVT_END
 };
 
-EvtScript N(goombario_returnBack) = {
+#include "world/common/todo/UnkFunc62.inc.c"
+#include "common/ActorJumpToPos.inc.c"
+
+EvtScript N(EVS_HeadbonkFollowthrough) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
     EVT_THREAD
@@ -321,7 +273,7 @@ EvtScript N(goombario_returnBack) = {
     EVT_END
 };
 
-EvtScript N(goombario_runToPlayer) = {
+EvtScript N(EVS_ApproachPlayer) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -336,7 +288,8 @@ EvtScript N(goombario_runToPlayer) = {
     EVT_END
 };
 
-EvtScript N(goombario_8021C7FC) = {
+// copied from goombario.c and used, but result is discarded
+EvtScript N(EVS_CalculateJumpTime) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarC, LVarD, LVarE)
@@ -354,11 +307,11 @@ EvtScript N(goombario_8021C7FC) = {
     EVT_END
 };
 
-EvtScript N(EVS_Move_Headbonk) = {
+EvtScript N(EVS_Attack_Headbonk) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_EXEC_WAIT(N(goombario_runToPlayer))
-    EVT_EXEC_WAIT(N(goombario_8021C7FC))
+    EVT_EXEC_WAIT(N(EVS_ApproachPlayer))
+    EVT_EXEC_WAIT(N(EVS_CalculateJumpTime))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
         EVT_SETF(LVar0, EVT_FLOAT(7.2))
@@ -397,7 +350,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_END_IF
             EVT_WAIT(20)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(goombario_returnBack))
+            EVT_EXEC_WAIT(N(EVS_HeadbonkFollowthrough))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -412,13 +365,13 @@ EvtScript N(EVS_Move_Headbonk) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_WAIT(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_10)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_10)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_10)
     EVT_END_SWITCH
     EVT_CALL(GetActorHP, ACTOR_PLAYER, LVar0)
@@ -426,9 +379,9 @@ EvtScript N(EVS_Move_Headbonk) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_SET(LVarA, 24)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_THREAD
                 EVT_WAIT(4)
                 EVT_SET(LVar0, 0)
@@ -442,7 +395,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_THREAD
                 EVT_WAIT(4)
                 EVT_SET(LVar0, 0)
@@ -458,7 +411,7 @@ EvtScript N(EVS_Move_Headbonk) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_THREAD
                 EVT_WAIT(4)
                 EVT_SET(LVar0, 0)
@@ -493,13 +446,13 @@ EvtScript N(EVS_Move_Headbonk) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(1)
     EVT_WAIT(2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_LABEL(100)
@@ -507,7 +460,7 @@ EvtScript N(EVS_Move_Headbonk) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(goombario_returnBack))
+            EVT_EXEC_WAIT(N(EVS_HeadbonkFollowthrough))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -515,6 +468,56 @@ EvtScript N(EVS_Move_Headbonk) = {
     EVT_RETURN
     EVT_END
 };
+
+API_CALLABLE(N(CalculateTattleCamBoomLength)) {
+    Actor* actor = get_actor(script->owner1.actorID);
+    Actor* targetActor = get_actor(actor->targetActorID);
+    s16 targetActorSizeX;
+    u8 targetActorSizeY;
+    u8 targetActorLargerDimension;
+
+    if (!(targetActor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
+        script->varTable[1] += targetActor->size.y / 2;
+        script->varTable[1] += targetActor->size.y / 4;
+    } else {
+        script->varTable[1] -= targetActor->size.y / 2;
+        script->varTable[1] -= targetActor->size.y / 4;
+    }
+
+    targetActorSizeY = targetActor->size.y;
+    targetActorSizeX = targetActor->size.x;
+    targetActorLargerDimension = targetActorSizeY;
+    if (targetActorSizeY < targetActorSizeX) {
+        targetActorLargerDimension = targetActorSizeX;
+    }
+
+    script->varTable[3] = targetActorLargerDimension + 126;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(OpenTattleWindow)) {
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, (s32) fx_tattle_window(0, 106.0f, 144.0f, 0, 1.0f, 0));
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(HideTattleWindow)) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
+
+    effect->data.tattleWindow->pos.y = NPC_DISPOSE_POS_Y;
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(CloseTattleWindow)) {
+    Bytecode* args = script->ptrReadPos;
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
+
+    effect->data.tattleWindow->pos.y = 144.0f;
+    effect->flags |= FX_INSTANCE_FLAG_DISMISS;
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -560,13 +563,17 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_END
 };
 
-EvtScript N(goombario_takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 10)
         EVT_EXEC_WAIT(N(EVS_Move_Tattle))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(EVS_Move_Headbonk))
+        EVT_EXEC_WAIT(N(EVS_Attack_Headbonk))
     EVT_END_IF
     EVT_RETURN
     EVT_END
+};
+
+Formation A(GoombarioCloneFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(DuplighostSummonPos), 0),
 };

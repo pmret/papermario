@@ -13,7 +13,7 @@
 
 // scripts in lee.c calls two functions defined in lee_watt.c for adjusting the background fade
 // this macro is used to highlight those instances
-#define WATT(x) A( lee_watt_##x )
+#define WATT(x) A( watt_lee_##x )
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
@@ -23,10 +23,10 @@ extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_Move_CopyPartner);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
-    PRT_3               = 3,
-    PRT_ZERO            = 0,
+    PRT_MAIN        = 1,
+    PRT_TARGET      = 2,
+    PRT_SPINY       = 3,
+    PRT_ZERO        = 0,
 };
 
 enum N(ActorVars) {
@@ -44,7 +44,7 @@ enum N(ActorVars) {
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_FLYING_LEAP     = 5,
 };
 
 BSS s32 PartnerCopyHistory[12];
@@ -403,7 +403,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_FLYING_LEAP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

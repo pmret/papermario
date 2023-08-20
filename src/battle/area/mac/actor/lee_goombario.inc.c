@@ -1,4 +1,4 @@
-#define NAMESPACE A(lee_goombario)
+#define NAMESPACE A(goombario_lee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
@@ -205,6 +205,9 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
+#include "world/common/todo/UnkFunc62.inc.c"
+#include "common/ActorJumpToPos.inc.c"
+
 EvtScript N(EVS_HeadbonkFollowthrough) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
@@ -298,9 +301,6 @@ EvtScript N(EVS_CalculateJumpTime) = {
     EVT_RETURN
     EVT_END
 };
-
-#include "world/common/todo/UnkFunc62.inc.c"
-#include "common/ActorJumpToPos.inc.c"
 
 EvtScript N(EVS_Attack_Headbonk) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

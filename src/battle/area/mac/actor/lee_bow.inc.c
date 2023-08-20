@@ -1,4 +1,4 @@
-#define NAMESPACE A(lee_bow)
+#define NAMESPACE A(bow_lee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
@@ -64,7 +64,7 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -26 },
         .opacity = 255,

@@ -1,4 +1,4 @@
-#define NAMESPACE A(lee_sushie)
+#define NAMESPACE A(sushie_lee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);

@@ -3,20 +3,120 @@
 #include "sprite/npc/BattleWatt.h"
 #include "effects.h"
 
-extern EvtScript N(watt_init);
-extern EvtScript N(watt_takeTurn);
-extern EvtScript N(watt_idle);
-extern EvtScript N(watt_handleEvent);
+#define NAMESPACE A(watt_clone)
 
-enum N(WattActorPartIDs) {
-    PRT_WATT_TARGET     = 2,
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+
+s32 N(DefaultAnims)[] = {
+    STATUS_KEY_NORMAL,    ANIM_BattleWatt_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleWatt_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleWatt_Still,
+    STATUS_KEY_POISON,    ANIM_BattleWatt_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleWatt_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleWatt_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleWatt_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleWatt_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleWatt_Injured,
+    STATUS_END,
 };
 
-API_CALLABLE(N(UnkWattEffectFunc1)) {
-    WattEffectData* wattEffectData;
-    f32 x, y, z;
+s32 N(DefenseTable)[] = {
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,   99,
+    ELEMENT_END,
+};
+
+s32 N(StatusTable)[] = {
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              60,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              75,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,           75,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               80,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,         -1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,         -1,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,          -1,
+    STATUS_END,
+};
+
+ActorPartBlueprint N(ActorParts)[] = {
+    {
+        .flags = ACTOR_PART_FLAG_NO_TARGET,
+        .index = PRT_MAIN,
+        .posOffset = { 0, 0, 0 },
+        .targetOffset = { -1, 20 },
+        .opacity = 255,
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
+        .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
+        .elementImmunityFlags = 0,
+        .projectileTargetOffset = { 0, -8 },
+    },
+    {
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
+        .index = PRT_TARGET,
+        .posOffset = { 0, 50, 0 },
+        .targetOffset = { -1, -30 },
+        .opacity = 255,
+        .idleAnimations = NULL,
+        .defenseTable = N(DefenseTable),
+        .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
+        .elementImmunityFlags = 0,
+        .projectileTargetOffset = { 0, -8 },
+    },
+};
+
+ActorBlueprint NAMESPACE = {
+    .flags = ACTOR_FLAG_FLYING,
+    .type = ACTOR_TYPE_GHOST_WATT,
+    .level = ACTOR_LEVEL_GHOST_WATT,
+    .maxHP = 15,
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
+    .escapeChance = 50,
+    .airLiftChance = 80,
+    .hurricaneChance = 70,
+    .spookChance = 50,
+    .upAndAwayChance = 95,
+    .spinSmashReq = 0,
+    .powerBounceChance = 90,
+    .coinReward = 2,
+    .size = { 34, 28 },
+    .healthBarOffset = { 0, 0 },
+    .statusIconOffset = { -10, 20 },
+    .statusTextOffset = { 10, 20 },
+};
+
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_RETURN
+    EVT_END
+};
+
+API_CALLABLE(N(WattFXUpdate)) {
     Actor* actor = get_actor(script->owner1.enemyID);
     ActorState* state = &actor->state;
+    WattEffectData* wattEffectData;
+    f32 x, y, z;
 
     if (isInitialCall) {
         wattEffectData = heap_malloc(sizeof(*wattEffectData));
@@ -26,7 +126,7 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
         wattEffectData->isActive = TRUE;
         wattEffectData->currentEffectIndex = 0;
         wattEffectData->effect1 = fx_static_status(0, actor->curPos.x, actor->curPos.y, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->effect2 = fx_static_status(1, actor->curPos.x, -1000.0f, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->curPos.x, NPC_DISPOSE_POS_Y, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->initialized = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
@@ -97,9 +197,14 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
     return ApiStatus_DONE2;
 }
 
+EvtScript N(EVS_Idle) = {
+    EVT_SET_PRIORITY(99)
+    EVT_CALL(N(WattFXUpdate))
+    EVT_RETURN
+    EVT_END
+};
 
-
-API_CALLABLE(N(UnkWattEffectFunc2)) {
+API_CALLABLE(N(WattFXRemove)) {
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
     wattEffectData->initialized = FALSE;
@@ -115,7 +220,7 @@ API_CALLABLE(N(UnkWattEffectFunc2)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(UnkWattEffectFunc3)) {
+API_CALLABLE(N(WattFXSetBouncing)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
@@ -123,7 +228,7 @@ API_CALLABLE(N(UnkWattEffectFunc3)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(UnkWattEffectFunc4)) {
+API_CALLABLE(N(WattFXSetActive)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
@@ -131,7 +236,7 @@ API_CALLABLE(N(UnkWattEffectFunc4)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(UnkWattEffectFunc5)) {
+API_CALLABLE(N(WattFXSetEffect)) {
     Bytecode* args = script->ptrReadPos;
     WattEffectData* wattEffectData = get_actor(script->owner1.enemyID)->state.varTablePtr[2];
 
@@ -139,124 +244,11 @@ API_CALLABLE(N(UnkWattEffectFunc5)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkBackgroundFunc3.inc.c"
-
-#include "common/SetBackgroundAlpha.inc.c"
-
-s32 N(watt_idleAnimations)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BattleWatt_Idle,
-    STATUS_KEY_STONE,     ANIM_BattleWatt_Still,
-    STATUS_KEY_SLEEP,     ANIM_BattleWatt_Still,
-    STATUS_KEY_POISON,    ANIM_BattleWatt_Idle,
-    STATUS_KEY_STOP,      ANIM_BattleWatt_Still,
-    STATUS_KEY_STATIC,    ANIM_BattleWatt_Idle,
-    STATUS_KEY_PARALYZE,  ANIM_BattleWatt_Still,
-    STATUS_KEY_DIZZY,     ANIM_BattleWatt_Injured,
-    STATUS_KEY_FEAR,      ANIM_BattleWatt_Injured,
-    STATUS_END,
-};
-
-s32 N(watt_defenseTable)[] = {
-    ELEMENT_NORMAL,   0,
-    ELEMENT_SHOCK,   99,
-    ELEMENT_END,
-};
-
-s32 N(watt_statusTable)[] = {
-    STATUS_KEY_NORMAL,              0,
-    STATUS_KEY_DEFAULT,             0,
-    STATUS_KEY_SLEEP,              60,
-    STATUS_KEY_POISON,              0,
-    STATUS_KEY_FROZEN,              0,
-    STATUS_KEY_DIZZY,              75,
-    STATUS_KEY_FEAR,                0,
-    STATUS_KEY_STATIC,              0,
-    STATUS_KEY_PARALYZE,           75,
-    STATUS_KEY_SHRINK,             75,
-    STATUS_KEY_STOP,               80,
-    STATUS_TURN_MOD_DEFAULT,        0,
-    STATUS_TURN_MOD_SLEEP,         -1,
-    STATUS_TURN_MOD_POISON,         0,
-    STATUS_TURN_MOD_FROZEN,         0,
-    STATUS_TURN_MOD_DIZZY,         -1,
-    STATUS_TURN_MOD_FEAR,           0,
-    STATUS_TURN_MOD_STATIC,         0,
-    STATUS_TURN_MOD_PARALYZE,       0,
-    STATUS_TURN_MOD_SHRINK,         0,
-    STATUS_TURN_MOD_STOP,          -1,
-    STATUS_END,
-};
-
-ActorPartBlueprint N(watt_parts)[] = {
-    {
-        .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = PRT_MAIN,
-        .posOffset = { 0, 0, 0 },
-        .targetOffset = { -1, 20 },
-        .opacity = 255,
-        .idleAnimations = N(watt_idleAnimations),
-        .defenseTable = N(watt_defenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
-        .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0, -8 },
-    },
-    {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = PRT_WATT_TARGET,
-        .posOffset = { 0, 50, 0 },
-        .targetOffset = { -1, -30 },
-        .opacity = 255,
-        .idleAnimations = NULL,
-        .defenseTable = N(watt_defenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
-        .elementImmunityFlags = 0,
-        .projectileTargetOffset = { 0, -8 },
-    },
-};
-
-ActorBlueprint N(watt) = {
-    .flags = ACTOR_FLAG_FLYING,
-    .type = ACTOR_TYPE_GHOST_WATT,
-    .level = ACTOR_LEVEL_GHOST_WATT,
-    .maxHP = 15,
-    .partCount = ARRAY_COUNT(N(watt_parts)),
-    .partsData = N(watt_parts),
-    .initScript = &N(watt_init),
-    .statusTable = N(watt_statusTable),
-    .escapeChance = 50,
-    .airLiftChance = 80,
-    .hurricaneChance = 70,
-    .spookChance = 50,
-    .upAndAwayChance = 95,
-    .spinSmashReq = 0,
-    .powerBounceChance = 90,
-    .coinReward = 2,
-    .size = { 34, 28 },
-    .healthBarOffset = { 0, 0 },
-    .statusIconOffset = { -10, 20 },
-    .statusTextOffset = { 10, 20 },
-};
-
-EvtScript N(watt_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(watt_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(watt_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(watt_handleEvent)))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(watt_idle) = {
-    EVT_SET_PRIORITY(99)
-    EVT_CALL(N(UnkWattEffectFunc1))
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(watt_handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(N(UnkWattEffectFunc3), 0)
-    EVT_CALL(N(UnkWattEffectFunc4), 1)
-    EVT_CALL(N(UnkWattEffectFunc5), 0)
+    EVT_CALL(N(WattFXSetBouncing), 0)
+    EVT_CALL(N(WattFXSetActive), 1)
+    EVT_CALL(N(WattFXSetEffect), 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -275,8 +267,8 @@ EvtScript N(watt_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleWatt_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_CALL(N(UnkWattEffectFunc2))
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_CALL(N(WattFXRemove))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -286,8 +278,8 @@ EvtScript N(watt_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_CALL(N(UnkWattEffectFunc2))
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_CALL(N(WattFXRemove))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -303,8 +295,8 @@ EvtScript N(watt_handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_CALL(N(UnkWattEffectFunc2))
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_CALL(N(WattFXRemove))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -334,13 +326,17 @@ EvtScript N(watt_handleEvent) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(N(UnkWattEffectFunc3), 1)
+    EVT_CALL(N(WattFXSetBouncing), 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(watt_takeTurn) = {
+#include "common/UnkBackgroundFunc3.inc.c"
+
+#include "common/SetBackgroundAlpha.inc.c"
+
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -352,13 +348,13 @@ EvtScript N(watt_takeTurn) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleWatt_Run)
-    EVT_CALL(N(UnkWattEffectFunc5), 1)
+    EVT_CALL(N(WattFXSetEffect), 1)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 15, -10, 5)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 0, EASING_COS_IN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleWatt_Idle)
-    EVT_CALL(N(UnkWattEffectFunc5), 0)
+    EVT_CALL(N(WattFXSetEffect), 0)
     EVT_WAIT(5)
-    EVT_CALL(N(UnkWattEffectFunc3), 0)
+    EVT_CALL(N(WattFXSetBouncing), 0)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 25, 20, 0)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 15, -20, EASING_COS_IN_OUT)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleWatt_Strain)
@@ -379,8 +375,8 @@ EvtScript N(watt_takeTurn) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(N(UnkWattEffectFunc4), 1)
-            EVT_CALL(N(UnkWattEffectFunc3), 1)
+            EVT_CALL(N(WattFXSetActive), 1)
+            EVT_CALL(N(WattFXSetBouncing), 1)
             EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
@@ -392,7 +388,7 @@ EvtScript N(watt_takeTurn) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(N(UnkWattEffectFunc4), 0)
+    EVT_CALL(N(WattFXSetActive), 0)
     EVT_SET(LVarA, 40)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, LVarA)
@@ -427,15 +423,15 @@ EvtScript N(watt_takeTurn) = {
         EVT_WAIT(2)
         EVT_CALL(N(SetBackgroundAlpha), 0)
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar9)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar9)
     EVT_SWITCH(LVar9)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_ALL, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
@@ -443,8 +439,8 @@ EvtScript N(watt_takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(N(UnkWattEffectFunc4), 1)
-            EVT_CALL(N(UnkWattEffectFunc3), 1)
+            EVT_CALL(N(WattFXSetActive), 1)
+            EVT_CALL(N(WattFXSetBouncing), 1)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 25, 10, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 15, -10, EASING_COS_IN_OUT)
             EVT_WAIT(15)
@@ -458,4 +454,8 @@ EvtScript N(watt_takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
+};
+
+Formation A(WattCloneFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(DuplighostSummonPos), 0),
 };

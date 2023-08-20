@@ -1,4 +1,4 @@
-#define NAMESPACE A(lee_watt)
+#define NAMESPACE A(watt_lee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
@@ -65,7 +65,7 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { -1, -30 },
         .opacity = 255,
@@ -197,6 +197,13 @@ API_CALLABLE(N(WattFXUpdate)) {
     return ApiStatus_BLOCK;
 }
 
+EvtScript N(EVS_Idle) = {
+    EVT_SET_PRIORITY(99)
+    EVT_CALL(N(WattFXUpdate))
+    EVT_RETURN
+    EVT_END
+};
+
 API_CALLABLE(N(WattFXRemove)) {
     WattEffectData* wattEffectData = (WattEffectData*)get_actor(script->owner1.actorID)->state.varTable[3];
 
@@ -212,13 +219,6 @@ API_CALLABLE(N(WattFXRemove)) {
 
     return ApiStatus_DONE2;
 }
-
-EvtScript N(EVS_Idle) = {
-    EVT_SET_PRIORITY(99)
-    EVT_CALL(N(WattFXUpdate))
-    EVT_RETURN
-    EVT_END
-};
 
 API_CALLABLE(N(WattFXSetBouncing)) {
     Bytecode* args = script->ptrReadPos;

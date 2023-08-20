@@ -1,4 +1,4 @@
-#define NAMESPACE A(lee_bombette)
+#define NAMESPACE A(bombette_lee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);

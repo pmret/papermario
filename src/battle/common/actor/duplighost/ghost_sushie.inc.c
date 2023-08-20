@@ -2,12 +2,14 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleSushie.h"
 
-extern EvtScript N(sushie_handleEvent);
-extern EvtScript N(sushie_takeTurn);
-extern EvtScript N(sushie_idle);
-extern EvtScript N(sushie_init);
+#define NAMESPACE A(sushie_clone)
 
-s32 N(sushie_idleAnimations)[] = {
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleSushie_Idle,
     STATUS_KEY_STONE,     ANIM_BattleSushie_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleSushie_Still,
@@ -20,12 +22,12 @@ s32 N(sushie_idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(sushie_defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(sushie_statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              60,
@@ -50,30 +52,30 @@ s32 N(sushie_statusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(sushie_parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(sushie_idleAnimations),
-        .defenseTable = N(sushie_defenseTable),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -12 },
     },
 };
 
-ActorBlueprint N(sushie) = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GHOST_SUSHIE,
     .level = ACTOR_LEVEL_GHOST_SUSHIE,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT(N(sushie_parts)),
-    .partsData = N(sushie_parts),
-    .initScript = &N(sushie_init),
-    .statusTable = N(sushie_statusTable),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
     .hurricaneChance = 70,
@@ -88,20 +90,20 @@ ActorBlueprint N(sushie) = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(sushie_init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(sushie_takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(sushie_idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(sushie_handleEvent)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(sushie_idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(sushie_handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -112,7 +114,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_IF_FLAG(LVar1, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-                EVT_EXEC_WAIT(N(OnHitElectric))
+                EVT_EXEC_WAIT(A(EVS_Duplighost_OnHitElectric))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -130,7 +132,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleSushie_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnStill)
@@ -141,7 +143,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
@@ -152,14 +154,14 @@ EvtScript N(sushie_handleEvent) = {
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(N(OnShockHit))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnShockHit))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_SET(LVar2, 20)
-            EVT_EXEC_WAIT(N(OnShockDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnShockDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -172,7 +174,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(OnDeath))
+            EVT_EXEC_WAIT(A(EVS_Duplighost_OnDeath))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -208,7 +210,7 @@ EvtScript N(sushie_handleEvent) = {
     EVT_END
 };
 
-EvtScript N(sushie_takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
@@ -258,9 +260,9 @@ EvtScript N(sushie_takeTurn) = {
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 20)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar0)
                 EVT_SWITCH(LVar0)
-                    EVT_CASE_EQ(0)
+                    EVT_CASE_EQ(PARTNER_RANK_NORMAL)
                         EVT_WAIT(13)
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                         EVT_WAIT(1)
@@ -271,7 +273,7 @@ EvtScript N(sushie_takeTurn) = {
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                         EVT_WAIT(1)
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_CASE_EQ(1)
+                    EVT_CASE_EQ(PARTNER_RANK_SUPER)
                         EVT_WAIT(13)
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.05), EVT_FLOAT(1.05), EVT_FLOAT(1.05))
                         EVT_WAIT(1)
@@ -282,7 +284,7 @@ EvtScript N(sushie_takeTurn) = {
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.2))
                         EVT_WAIT(1)
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
-                    EVT_CASE_EQ(2)
+                    EVT_CASE_EQ(PARTNER_RANK_ULTRA)
                         EVT_WAIT(13)
                         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.1), EVT_FLOAT(1.1), EVT_FLOAT(1.1))
                         EVT_WAIT(1)
@@ -348,9 +350,9 @@ EvtScript N(sushie_takeTurn) = {
         EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 20)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVar0)
         EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
+            EVT_CASE_EQ(PARTNER_RANK_NORMAL)
                 EVT_WAIT(13)
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.1), EVT_FLOAT(1.1), EVT_FLOAT(1.1))
                 EVT_WAIT(1)
@@ -361,7 +363,7 @@ EvtScript N(sushie_takeTurn) = {
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.2))
                 EVT_WAIT(1)
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.3), EVT_FLOAT(1.3), EVT_FLOAT(1.3))
-            EVT_CASE_EQ(1)
+            EVT_CASE_EQ(PARTNER_RANK_SUPER)
                 EVT_WAIT(13)
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.15), EVT_FLOAT(1.15), EVT_FLOAT(1.15))
                 EVT_WAIT(1)
@@ -372,7 +374,7 @@ EvtScript N(sushie_takeTurn) = {
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.4))
                 EVT_WAIT(1)
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.55), EVT_FLOAT(1.55), EVT_FLOAT(1.55))
-            EVT_CASE_EQ(2)
+            EVT_CASE_EQ(PARTNER_RANK_ULTRA)
                 EVT_WAIT(13)
                 EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.2))
                 EVT_WAIT(1)
@@ -402,15 +404,15 @@ EvtScript N(sushie_takeTurn) = {
         EVT_WAIT(3)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVarA)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Copy_PartnerLevel, LVarA)
     EVT_SWITCH(LVarA)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(PARTNER_RANK_NORMAL)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(PARTNER_RANK_ULTRA)
             EVT_WAIT(2)
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
@@ -451,4 +453,8 @@ EvtScript N(sushie_takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
+};
+
+Formation A(SushieCloneFormation) = {
+    ACTOR_BY_POS(NAMESPACE, A(DuplighostSummonPos), 0),
 };
