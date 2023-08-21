@@ -1692,7 +1692,7 @@ typedef struct DecorationTable {
     /* 0x78C */ char unk_7AC[0x2C];
     /* 0x7D8 */ s8 unk_7D8;
     /* 0x7D9 */ s8 blurBufferPos;
-    /* 0x7DA */ s8 blurDrawCount; // how many recent frames to skip
+    /* 0x7DA */ s8 blurDrawCount;
     /* 0x7DB */ s8 blurEnableCount;
     /* 0x7DC */ s16 yaw[16];
     /* 0x7FC */ s16 posX[16];
