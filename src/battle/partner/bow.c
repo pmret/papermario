@@ -426,7 +426,7 @@ EvtScript N(returnHome2) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH_A)
@@ -552,7 +552,7 @@ EvtScript N(smack) = {
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         EVT_WAIT(10)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_ADD(LVarE, 1)
@@ -640,7 +640,7 @@ EvtScript N(smack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
@@ -1069,7 +1069,7 @@ EvtScript N(fanSmack) = {
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         EVT_WAIT(10)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_ADD(LVarE, 1)
@@ -1213,7 +1213,7 @@ EvtScript N(fanSmack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(3)

@@ -21,7 +21,7 @@ extern EvtScript N(doOnHit);
 extern EvtScript N(onImmune);
 extern EvtScript N(onDeath);
 extern EvtScript N(jumpHome);
-extern EvtScript N(returnHome);
+extern EvtScript N(EVS_ReturnHome);
 extern EvtScript N(onHit);
 extern EvtScript N(onBurnHit);
 extern EvtScript N(makeWalkingSounds);
@@ -410,7 +410,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(N(jumpHome))
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
@@ -686,7 +686,7 @@ EvtScript N(powerUp) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_SET(LVar0, 1)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -1157,7 +1157,7 @@ EvtScript N(attackHeavyJump) = {
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -1295,7 +1295,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-    EVT_EXEC_WAIT(N(returnHome))
+    EVT_EXEC_WAIT(N(EVS_ReturnHome))
     EVT_RETURN
     EVT_END
 };
@@ -1364,7 +1364,7 @@ EvtScript N(attackClawSwipe) = {
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -1393,7 +1393,7 @@ EvtScript N(attackClawSwipe) = {
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -1824,7 +1824,7 @@ EvtScript N(attackLightningBlast) = {
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -1850,7 +1850,7 @@ EvtScript N(attackLightningBlast) = {
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

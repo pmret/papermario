@@ -163,7 +163,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim02)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -296,7 +296,7 @@ EvtScript N(attackFistDrop) = {
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -324,7 +324,7 @@ EvtScript N(attackFistDrop) = {
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -390,7 +390,7 @@ EvtScript N(attackBodyCrush) = {
             EVT_WAIT(8)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim13)
             EVT_WAIT(4)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -485,7 +485,7 @@ EvtScript N(attackBodyCrush) = {
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN

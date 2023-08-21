@@ -498,7 +498,7 @@ EvtScript N(returnHomeOnMiss) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(PartnerYieldTurn)
@@ -691,7 +691,7 @@ EvtScript N(shellToss) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
@@ -873,7 +873,7 @@ EvtScript N(powerShell) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_DEFAULT
             EVT_EXEC_WAIT(N(returnHomeOnMiss))
     EVT_END_SWITCH

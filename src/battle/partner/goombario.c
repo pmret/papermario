@@ -768,7 +768,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
@@ -952,7 +952,7 @@ EvtScript N(headbonk1) = {
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
@@ -978,7 +978,7 @@ EvtScript N(headbonk1) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
@@ -1057,7 +1057,7 @@ EvtScript N(headbonk2) = {
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
@@ -1083,7 +1083,7 @@ EvtScript N(headbonk2) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
@@ -1164,7 +1164,7 @@ EvtScript N(headbonk3) = {
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
@@ -1190,7 +1190,7 @@ EvtScript N(headbonk3) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
@@ -1284,7 +1284,7 @@ EvtScript N(multibonk) = {
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TRIP)
         EVT_WAIT(20)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
@@ -1310,7 +1310,7 @@ EvtScript N(multibonk) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
@@ -1411,7 +1411,7 @@ EvtScript N(multibonk) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)

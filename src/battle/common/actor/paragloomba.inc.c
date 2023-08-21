@@ -254,7 +254,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
@@ -315,7 +315,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Paragoomba_Dark_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Paragoomba_Dark_Dizzy)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_Paragoomba_Dark_Electrocute)
@@ -346,7 +346,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Paragoomba_Dark_Run)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_2)
@@ -436,7 +436,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Paragoomba_Dark_Run)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_2, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
@@ -479,7 +479,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_WAIT(5)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Paragoomba_Dark_Run)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)

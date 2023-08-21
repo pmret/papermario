@@ -739,7 +739,7 @@ EvtScript N(returnHome2) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
@@ -1012,7 +1012,7 @@ EvtScript N(bodySlam) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)

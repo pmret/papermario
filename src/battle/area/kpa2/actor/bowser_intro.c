@@ -18,7 +18,7 @@ extern EvtScript N(onDeath);
 extern EvtScript N(attackClawSwipe);
 extern EvtScript N(powerUp);
 extern EvtScript N(attackFireBreath);
-extern EvtScript N(returnHome);
+extern EvtScript N(EVS_ReturnHome);
 extern EvtScript N(useStarRod);
 
 enum N(ActorPartIDs) {
@@ -392,7 +392,7 @@ EvtScript N(attackClawSwipe) = {
             EVT_END_IF
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -511,7 +511,7 @@ EvtScript N(powerUp) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_SET(LVar0, 1)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)

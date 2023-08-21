@@ -4,14 +4,18 @@
 
 #define NAMESPACE A(crazee_dayzee)
 
-extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
-extern EvtScript N(EVS_Idle);
-extern EvtScript N(EVS_HandleEvent);
 extern s32 N(IdleAnimations)[];
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
+};
+
+enum N(ActorParams) {
+    DMG_SING        = 4,
 };
 
 s32 N(DefenseTable)[] = {
@@ -108,7 +112,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Dayzee_Anim03)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
@@ -159,7 +163,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Dayzee_Anim08)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Dayzee_Anim08)
@@ -218,7 +222,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(attackPainfulSong) = {
+EvtScript N(EVS_Attack_Sing) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
@@ -294,7 +298,7 @@ EvtScript N(attackPainfulSong) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -304,7 +308,7 @@ EvtScript N(attackPainfulSong) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 20), 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 20), DMG_SING, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -312,7 +316,7 @@ EvtScript N(attackPainfulSong) = {
             EVT_CALL(MoveBattleCamOver, 10)
             EVT_WAIT(20)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -320,7 +324,7 @@ EvtScript N(attackPainfulSong) = {
     EVT_END
 };
 
-EvtScript N(flee) = {
+EvtScript N(EVS_Move_Flee) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamZoom, 300)
@@ -356,7 +360,7 @@ EvtScript N(flee) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_EXEC_WAIT(N(attackPainfulSong))
+        EVT_EXEC_WAIT(N(EVS_Attack_Sing))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
@@ -364,26 +368,26 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
             EVT_IF_LT(LVar1, 80)
-                EVT_EXEC_WAIT(N(flee))
+                EVT_EXEC_WAIT(N(EVS_Move_Flee))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(2)
             EVT_IF_LT(LVar1, 40)
-                EVT_EXEC_WAIT(N(flee))
+                EVT_EXEC_WAIT(N(EVS_Move_Flee))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(3)
             EVT_IF_LT(LVar1, 20)
-                EVT_EXEC_WAIT(N(flee))
+                EVT_EXEC_WAIT(N(EVS_Move_Flee))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(4)
             EVT_IF_LT(LVar1, 10)
-                EVT_EXEC_WAIT(N(flee))
+                EVT_EXEC_WAIT(N(EVS_Move_Flee))
                 EVT_RETURN
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(attackPainfulSong))
+    EVT_EXEC_WAIT(N(EVS_Attack_Sing))
     EVT_RETURN
     EVT_END
 };
