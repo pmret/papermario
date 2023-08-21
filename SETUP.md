@@ -6,7 +6,7 @@ This repository supports:
 - [macOS](#unix)
 - [Windows Subsystem for Linux 2](#wsl-2)
 
-If you encounter any issues setting up the repo, please feel free to [reach out to us on Discord](https://discord.gg/urUm3VG).
+If you encounter any issues setting up the repo, please feel free to [reach out to us on Discord](https://discord.gg/PgcMpQTzh5).
 
 ## Common
 

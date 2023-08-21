@@ -35,5 +35,5 @@ Also see our website at [papermar.io](https://papermar.io/).
 [progress-ique]: https://papermar.io/progress-ique
 [progress-ique-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_ique_shield.json
 
-[discord]: https://discord.gg/urUm3VG
-[discord-badge]: https://img.shields.io/discord/279322074412089344?color=%237289DA&logo=discord&logoColor=ffffff
+[discord]: https://discord.gg/PgcMpQTzh5
+[discord-badge]: https://img.shields.io/discord/1141775228440158338?color=%237289DA&logo=discord&logoColor=ffffff

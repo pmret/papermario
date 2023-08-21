@@ -79,7 +79,7 @@ If you use Visual Studio Code, you can use _Run Test Task_ to run `diff.py` and 
 
 If you have any questions or encounter any issues, we suggest:
 
-- Reaching out [on Discord](https://discord.gg/urUm3VG)
+- Reaching out [on Discord](https://discord.gg/PgcMpQTzh5)
 - Using [decomp permuter](https://github.com/simonlindholm/decomp-permuter) if your code is logically equivalent
 - Wrapping what you have in `#ifdef NON_MATCHING` (see other examples of this in the codebase) and trying a smaller function
 
