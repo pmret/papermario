@@ -112,6 +112,12 @@ pipeline {
                 sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
             }
         }
+        stage('Build (shift US)') {
+            steps {
+                sh './configure --shift us'
+                sh 'ninja'
+            }
+        }
     }
     post {
         always {

@@ -540,7 +540,7 @@ if splat_loaded:
             data = rom_bytes[self.rom_start : self.rom_end]
 
             if dir.exists():
-                raise Exception(f"SBN directory {dir} already exists")
+                self.warn(f"SBN directory {dir} already exists")
 
             sbn = SBN()
             byte_count = sbn.decode(data)
