@@ -69,7 +69,7 @@ EvtScript N(EVS_Scene_TreasureChest) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_EQ(LVar0, jan_04_ENTRY_1)
-        EVT_CALL(PlaySound, SOUND_0302)
+        EVT_CALL(PlaySound, SOUND_FALL_LONG)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -350, 300, 0)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, -350, 300, 0)
         EVT_CALL(SetCamPitch, CAM_DEFAULT, 10, EVT_FLOAT(-7.0))

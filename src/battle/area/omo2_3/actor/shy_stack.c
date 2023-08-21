@@ -387,7 +387,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetPartPos, ACTOR_SELF, PRT_11, LVar0, 200, 0)
         EVT_THREAD
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_14, SOUND_0301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_14, SOUND_FALL_QUICK)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_14, ANIM_ShyGuy_Red_Anim0A)
@@ -400,7 +400,7 @@ EvtScript N(EVS_Init) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(36)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_13, SOUND_0301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_13, SOUND_FALL_QUICK)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(31)
@@ -425,7 +425,7 @@ EvtScript N(EVS_Init) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(67)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_12, SOUND_0301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_12, SOUND_FALL_QUICK)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(62)
@@ -458,7 +458,7 @@ EvtScript N(EVS_Init) = {
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(98)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_11, SOUND_0301)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_11, SOUND_FALL_QUICK)
         EVT_END_THREAD
         EVT_THREAD
             EVT_WAIT(93)
@@ -1047,7 +1047,7 @@ EvtScript N(fall_apart) = {
 };
 
 EvtScript N(lower_actor_pos) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 18)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

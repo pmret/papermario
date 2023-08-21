@@ -140,7 +140,7 @@ void create_target_list(Actor* actor, s32 arg1) {
         for (j = 0; j < numParts; targetPart = targetPart->nextPart, j++) {
             if (!(targetPart->flags & ACTOR_PART_FLAG_NO_TARGET)) {
                 ActorPartBlueprint* partBlueprint = targetPart->staticData;
-                s8 partIndex;
+                
                 if (!(targetPart->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                     row = !arg1; // required to match
                     if (row) {
@@ -178,17 +178,16 @@ void create_target_list(Actor* actor, s32 arg1) {
                 }
 
                 targetDataList->actorID = ACTOR_CLASS_ENEMY | i;
-                partIndex = partBlueprint->index;
+                targetDataList->partID = partBlueprint->index;
                 targetDataList->posA.x = targetX;
                 targetDataList->posA.y = targetY;
                 targetDataList->posA.z = targetZ;
                 targetDataList->unk_10 = 0;
-                targetDataList->partID = partIndex;
 
                 if ((targetActor->flags & ACTOR_FLAG_TARGET_ONLY) && !(targetActor->flags & ACTOR_FLAG_10)) {
                     targetDataList->unk_10 = 100;
                 }
-                targetDataList->unk_10 += targetPart->unk_70;
+                targetDataList->unk_10 += targetPart->targetPriorityOffset;
                 targetDataList->posB.x = f12 + targetDataList->unk_10 * 100;
                 targetDataList->posB.y = f2;
                 targetDataList->posB.z = f14;
@@ -1346,7 +1345,7 @@ void load_player_actor(void) {
     part->yaw = 0.0f;
     part->targetOffset.x = 0;
     part->targetOffset.y = 0;
-    part->unk_70 = 0;
+    part->targetPriorityOffset = 0;
     part->rot.x = 0.0f;
     part->rot.y = 0.0f;
     part->rot.z = 0.0f;
@@ -1381,7 +1380,7 @@ void load_player_actor(void) {
         decorationTable->unk_764 = 0;
         decorationTable->unk_768 = 0;
         decorationTable->unk_7D8 = 0;
-        decorationTable->unk_7D9 = 0;
+        decorationTable->blurBufferPos = 0;
 
         for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
             decorationTable->posX[j] = player->curPos.x;
@@ -1389,9 +1388,9 @@ void load_player_actor(void) {
             decorationTable->posZ[j] = player->curPos.z;
         }
 
-        decorationTable->unk_7DA = 3;
-        decorationTable->unk_7DB = 0;
-        decorationTable->effectType = 0;
+        decorationTable->blurDrawCount = 3;
+        decorationTable->blurEnableCount = 0;
+        decorationTable->blurDisableDelay = 0;
 
         for (j = 0; j < ARRAY_COUNT(decorationTable->effect); j++) {
             decorationTable->effect[j] = NULL;
@@ -1574,7 +1573,7 @@ void load_partner_actor(void) {
             part->yaw = 0.0f;
             part->targetOffset.x = ActorPartBlueprint->targetOffset.x;
             part->targetOffset.y = ActorPartBlueprint->targetOffset.y;
-            part->unk_70 = 0;
+            part->targetPriorityOffset = 0;
             part->rotPivotOffset.x = 0;
             part->rotPivotOffset.y = 0;
             part->rotPivotOffset.z = 0;
@@ -1610,7 +1609,7 @@ void load_partner_actor(void) {
                 decorationTable->unk_764 = 0;
                 decorationTable->unk_768 = 0;
                 decorationTable->unk_7D8 = 0;
-                decorationTable->unk_7D9 = 0;
+                decorationTable->blurBufferPos = 0;
 
                 for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
                     decorationTable->posX[j] = partnerActor->curPos.x;
@@ -1618,9 +1617,9 @@ void load_partner_actor(void) {
                     decorationTable->posZ[j] = partnerActor->curPos.z;
                 }
 
-                decorationTable->unk_7DA = 3;
-                decorationTable->unk_7DB = 0;
-                decorationTable->effectType = 0;
+                decorationTable->blurDrawCount = 3;
+                decorationTable->blurEnableCount = 0;
+                decorationTable->blurDisableDelay = 0;
 
                 for (j = 0; j < ARRAY_COUNT(decorationTable->effect); j++) {
                     decorationTable->effect[j] = NULL;
@@ -1838,7 +1837,7 @@ Actor* create_actor(Formation formation) {
         part->yaw = 0.0f;
         part->targetOffset.x = actorPartBP->targetOffset.x;
         part->targetOffset.y = actorPartBP->targetOffset.y;
-        part->unk_70 = 0;
+        part->targetPriorityOffset = 0;
         part->projectileTargetOffset.x = actorPartBP->projectileTargetOffset.x;
         part->projectileTargetOffset.y = actorPartBP->projectileTargetOffset.y;
         part->rot.x = 0.0f;
@@ -1872,7 +1871,7 @@ Actor* create_actor(Formation formation) {
             decorationTable->unk_764 = 0;
             decorationTable->unk_768 = 0;
             decorationTable->unk_7D8 = 0;
-            decorationTable->unk_7D9 = 0;
+            decorationTable->blurBufferPos = 0;
 
             for (k = 0; k < ARRAY_COUNT(decorationTable->posX); k++) {
                 decorationTable->posX[k] = actor->curPos.x;
@@ -1880,9 +1879,9 @@ Actor* create_actor(Formation formation) {
                 decorationTable->posZ[k] = actor->curPos.z;
             }
 
-            decorationTable->unk_7DA = 3;
-            decorationTable->unk_7DB = 0;
-            decorationTable->effectType = 0;
+            decorationTable->blurDrawCount = 3;
+            decorationTable->blurEnableCount = 0;
+            decorationTable->blurDisableDelay = 0;
 
             for (k = 0; k < ARRAY_COUNT(decorationTable->effect); k++) {
                 decorationTable->effect[k] = NULL;

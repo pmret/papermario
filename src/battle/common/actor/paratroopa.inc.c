@@ -592,7 +592,7 @@ EvtScript N(EVS_KnockDown) = {
     EVT_SUB(LVar2, 2)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_DUMMY_WINGS, LVar0, LVar1, LVar2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_DOWNED, ANIM_KoopaTroopa_Hurt)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0301, 0)
+    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_AerialFlip, LVarA)
     EVT_IF_FALSE(LVarA)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

@@ -3090,7 +3090,7 @@ ApiStatus func_8027D434(Evt* script, s32 isInitialCall) {
 
     partID = evt_get_variable(script, *args++);
     part = get_actor_part(get_actor(actorID), partID);
-    part->unk_70 = evt_get_variable(script, *args++);
+    part->targetPriorityOffset = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -3140,14 +3140,17 @@ ApiStatus EnableActorBlur(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D628(Evt* script, s32 isInitialCall) {
-    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
+ApiStatus ForceDisableActorBlur(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    Actor* actor;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    func_80254610(get_actor(actorID));
+    actor = get_actor(actorID);
+    force_disable_actor_blur(actor);
     return ApiStatus_DONE2;
 }
 

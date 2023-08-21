@@ -25,7 +25,11 @@ API_CALLABLE(N(func_80218240_649050)) { // unused
 }
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
+};
+
+enum N(ActorParams) {
+    DMG_TACKLE      = 4,
 };
 
 s32 N(IdleAnimations)[] = {
@@ -123,7 +127,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -177,7 +181,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
@@ -228,24 +232,24 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(stamp) = {
+EvtScript N(EVS_AddWalkQuakeFX) = {
     EVT_SET(LVarA, 0)
     EVT_LABEL(0)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorYaw, ACTOR_SELF, LVar3)
-    EVT_IF_EQ(LVar3, 0)
-        EVT_ADD(LVar0, 20)
-    EVT_ELSE
-        EVT_ADD(LVar0, -20)
-    EVT_END_IF
-    EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 25, 8, 45, 20, 0)
-    EVT_IF_GT(LVarA, 3)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
-        EVT_SET(LVarA, 0)
-    EVT_END_IF
-    EVT_ADD(LVarA, 1)
-    EVT_WAIT(2)
-    EVT_GOTO(0)
+        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(GetActorYaw, ACTOR_SELF, LVar3)
+        EVT_IF_EQ(LVar3, 0)
+            EVT_ADD(LVar0, 20)
+        EVT_ELSE
+            EVT_ADD(LVar0, -20)
+        EVT_END_IF
+        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 25, 8, 45, 20, 0)
+        EVT_IF_GT(LVarA, 3)
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
+            EVT_SET(LVarA, 0)
+        EVT_END_IF
+        EVT_ADD(LVarA, 1)
+        EVT_WAIT(2)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -257,7 +261,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_EXEC_GET_TID(N(stamp), LVar9)
+    EVT_EXEC_GET_TID(N(EVS_AddWalkQuakeFX), LVar9)
     EVT_THREAD
         EVT_LOOP(3)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_030B)
@@ -289,7 +293,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -313,7 +317,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     // invalid status field has 24% chance, but no status and doesn't have STATUS_FLAG_80000000 set
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -328,7 +332,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)

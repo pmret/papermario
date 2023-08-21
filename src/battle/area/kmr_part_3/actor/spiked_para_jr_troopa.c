@@ -178,7 +178,7 @@ EvtScript N(EVS_Transform) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(32)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0300)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JR_TROOPA_TRANSFORM)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 40, 0)
@@ -658,7 +658,7 @@ EvtScript N(EVS_JrTroopa_Death) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)

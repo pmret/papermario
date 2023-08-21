@@ -314,7 +314,7 @@ EvtScript N(EVS_DamageFrozenPond_After) = {
         EVT_THREAD
             EVT_CALL(DisablePartnerAI, 0)
             EVT_WAIT(1)
-            EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0302, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_FALL_LONG, SOUND_SPACE_DEFAULT)
             EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(1.5))
             EVT_CALL(NpcJump1, NPC_PARTNER, 265, 0, 225, 30)
             EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_TRIP, SOUND_SPACE_DEFAULT)

@@ -238,7 +238,7 @@ void initialize_battle(void) {
 void func_8023E3FC(void) {
 }
 
-void update_actor_shadows(void) {
+void update_nonplayer_actor_shadows(void) {
     if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
         update_enemy_shadows();
         update_hero_shadows();
@@ -410,7 +410,7 @@ void btl_update(void) {
     update_action_ratings();
     update_health_bars();
     btl_popup_messages_update();
-    update_actor_shadows();
+    update_nonplayer_actor_shadows();
 
     if (battleStatus->darknessMode != BTL_DARKNESS_STATE_LOCKED) {
         u8 paramType;

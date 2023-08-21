@@ -389,7 +389,7 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
     EVT_IF_GT(LVarC, 0)
         EVT_SET(LVarC, 0)
         EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(0.5))
-        EVT_CALL(SetActorSounds, LVarA, ACTOR_SOUND_JUMP, SOUND_0301, 0)
+        EVT_CALL(SetActorSounds, LVarA, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
         EVT_CALL(SetGoalPos, LVarA, LVarB, LVarC, LVarD)
         EVT_CALL(JumpToGoal, LVarA, 15, FALSE, TRUE, FALSE)
         EVT_CALL(ResetActorSounds, LVarA, ACTOR_SOUND_JUMP)

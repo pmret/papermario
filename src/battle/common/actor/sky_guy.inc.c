@@ -376,7 +376,7 @@ EvtScript N(80229F08) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_SET(LVar1, 0)
         EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0301, 0)
+        EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_FALL_QUICK, 0)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
         EVT_CALL(N(StartRumbleWithParams), 120, 10)

@@ -1686,13 +1686,13 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(EnableGroup, MODEL_ashi, FALSE)
     EVT_THREAD
         EVT_WAIT(23)
-        EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_FALL_QUICK)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_FALL_QUICK)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_FALL_QUICK)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_FALL_QUICK)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Land)

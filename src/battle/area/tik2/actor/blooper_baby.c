@@ -417,7 +417,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_EXEC_WAIT(N(FloatToPos))
     EVT_THREAD
         EVT_WAIT(2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)

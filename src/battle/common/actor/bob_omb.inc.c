@@ -80,7 +80,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-s32 N(StatusTable_Ignited)[] = {
+s32 N(IgnitedStatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,               0,
@@ -168,7 +168,7 @@ EvtScript N(EVS_Ignite) = {
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IgnitedAnims)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Ignited)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, TRUE)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_Ignited)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(IgnitedStatusTable)))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, SOUND_LOOP_BOBOMB_FUSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_WalkLit)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

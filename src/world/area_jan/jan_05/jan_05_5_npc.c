@@ -63,7 +63,7 @@ EvtScript N(EVS_OnShakeTree_Yoshi) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcVar, NPC_YoshiKid, 0, 9)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_0301, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcJumpscale, NPC_YoshiKid, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_YoshiKid, -308, 0, -248, 30)
     EVT_END_THREAD

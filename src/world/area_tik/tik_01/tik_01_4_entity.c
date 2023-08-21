@@ -6,7 +6,7 @@
 EvtScript N(EVS_SpawnSwitch) = {
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_ADD(LVar2, -75)
-    EVT_CALL(PlaySoundAt, SOUND_0301, SOUND_SPACE_DEFAULT, LVar2, 200, 25)
+    EVT_CALL(PlaySoundAt, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT, LVar2, 200, 25)
     EVT_CALL(MakeLerp, 200, -10, 25, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

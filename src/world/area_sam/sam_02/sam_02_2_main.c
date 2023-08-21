@@ -81,7 +81,7 @@ EvtScript N(EVS_EnterMap) = {
             EVT_CALL(SetPlayerPos, 650, 0, 50)
             EVT_WAIT(1)
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPlayer, SOUND_0302, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_FALL_LONG, SOUND_SPACE_DEFAULT)
                 EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Thrown)
                 EVT_CALL(PlayerJump1, 450, 0, 50, 30)
                 EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_DEFAULT)

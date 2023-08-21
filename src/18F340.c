@@ -29,7 +29,7 @@ BSS s32 D_8029FBA8;
 BSS s32 D_8029FBAC;
 BSS s32 D_8029FBB0[3];
 
-API_CALLABLE(func_802749F8);
+API_CALLABLE(ForceDisablePlayerBlurImmediately);
 
 void btl_set_player_idle_anims(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -848,7 +848,7 @@ EvtScript EVS_Player_HandleEvent = {
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(func_802693F0)
-    EVT_CALL(func_802749F8)
+    EVT_CALL(ForceDisablePlayerBlurImmediately)
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)

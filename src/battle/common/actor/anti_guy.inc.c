@@ -4,6 +4,16 @@
 
 #define NAMESPACE A(anti_guy)
 
+#ifdef ANTIGUY_TRIO
+#define ACTOR_TYPE          ACTOR_TYPE_ANTI_GUY_KPA
+#define PARALYZE_CHANCE     50
+#define ESCAPE_CHANCE       0
+#else
+#define ACTOR_TYPE          ACTOR_TYPE_ANTI_GUY_OMO
+#define PARALYZE_CHANCE     60
+#define ESCAPE_CHANCE       50
+#endif
+
 extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
@@ -11,7 +21,12 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
+};
+
+enum N(ActorParams) {
+    DMG_TACKLE      = 10,
+    DMG_VAULT       = 12,
 };
 
 s32 N(DefenseTable)[] = {
@@ -28,11 +43,7 @@ s32 N(StatusTable)[] = {
     STATUS_KEY_DIZZY,              50,
     STATUS_KEY_FEAR,                0,
     STATUS_KEY_STATIC,              0,
-    #ifdef ANTIGUY_TRIO
-    STATUS_KEY_PARALYZE,           50,
-    #else
-    STATUS_KEY_PARALYZE,           60,
-    #endif
+    STATUS_KEY_PARALYZE,           PARALYZE_CHANCE,
     STATUS_KEY_SHRINK,             50,
     STATUS_KEY_STOP,               50,
     STATUS_TURN_MOD_DEFAULT,        0,
@@ -65,22 +76,14 @@ ActorPartBlueprint N(ActorParts)[] = {
 
 ActorBlueprint NAMESPACE = {
     .flags = 0,
-    #ifdef ANTIGUY_TRIO
-    .type = ACTOR_TYPE_ANTI_GUY_KPA,
-    #else
-    .type = ACTOR_TYPE_ANTI_GUY_OMO,
-    #endif
+    .type = ACTOR_TYPE,
     .level = ACTOR_LEVEL_ANTI_GUY,
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
-    #ifdef ANTIGUY_TRIO
-    .escapeChance = 0,
-    #else
-    .escapeChance = 50,
-    #endif
+    .escapeChance = ESCAPE_CHANCE,
     .airLiftChance = 0,
     .hurricaneChance = 0,
     .spookChance = 0,
@@ -135,7 +138,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(80221BBC) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_ShyGuy_Black_Anim03)
@@ -189,7 +192,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Black_Anim0C)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_EXEC_WAIT(N(80221BBC))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Black_Anim0C)
@@ -240,7 +243,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(802220FC) = {
+EvtScript N(EVS_Attack_Tackle) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -315,7 +318,7 @@ EvtScript N(802220FC) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Black_Anim05)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
@@ -328,14 +331,14 @@ EvtScript N(802220FC) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Black_Anim01)
     EVT_WAIT(8)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_EXEC_WAIT(N(80221BBC))
+    EVT_EXEC_WAIT(N(EVS_ReturnHome))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80222824) = {
+EvtScript N(EVS_Attack_Vault) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -419,7 +422,7 @@ EvtScript N(80222824) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 12, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_VAULT, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -499,9 +502,9 @@ EvtScript N(80222824) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(RandInt, 1, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_EXEC_WAIT(N(802220FC))
+        EVT_EXEC_WAIT(N(EVS_Attack_Tackle))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(80222824))
+        EVT_EXEC_WAIT(N(EVS_Attack_Vault))
     EVT_END_IF
     EVT_RETURN
     EVT_END

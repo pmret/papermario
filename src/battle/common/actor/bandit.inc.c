@@ -7,10 +7,10 @@
 #define NAMESPACE A(bandit)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_Init_Coin);
 extern EvtScript N(EVS_Idle);
-extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_Init_Coin);
 extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 
 BSS s32 N(DropCoinScript)[1];
 

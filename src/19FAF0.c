@@ -1740,19 +1740,19 @@ ApiStatus EnablePlayerBlur(Evt* script, s32 isInitialCall) {
     } else if (setting == ACTOR_BLUR_ENABLE) {
         enable_player_blur();
     } else {
-        func_80254950();
+        reset_player_blur();
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802749D8(Evt* script, s32 isInitialCall) {
-    func_802549A0();
+ApiStatus ForceDisablePlayerBlur(Evt* script, s32 isInitialCall) {
+    force_disable_player_blur();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802749F8(Evt* script, s32 isInitialCall) {
-    func_802549C0();
+ApiStatus ForceDisablePlayerBlurImmediately(Evt* script, s32 isInitialCall) {
+    force_disable_player_blur_immediately();
     return ApiStatus_DONE2;
 }
 

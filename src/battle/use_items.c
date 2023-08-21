@@ -118,7 +118,7 @@ API_CALLABLE(LoadItemScript) {
     s32 i = 0;
     s32* itemPtr;
 
-    while (1) {
+    while (TRUE) {
         if (playerData->invItems[i] == itemID) {
             playerData->invItems[i] = 0;
             break;
