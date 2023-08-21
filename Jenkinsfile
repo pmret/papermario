@@ -113,7 +113,7 @@ pipeline {
             }
         }
         stage('Build (shift US)') {
-            stage {
+            steps {
                 sh './configure --shift us'
                 sh 'ninja'
             }
