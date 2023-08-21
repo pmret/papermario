@@ -250,9 +250,9 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW,
     .type = ACTOR_TYPE_FAKE_BOWSER,
-    .level = 0,
+    .level = ACTOR_LEVEL_FAKE_BOWSER,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
@@ -287,7 +287,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_HandleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_HandlePhase)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_HandlePhase)))
     EVT_USE_ARRAY(FakeBowserAnimState)
     EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_None)
@@ -474,42 +474,42 @@ EvtScript N(EVS_AnimBowser_DeathMain) = {
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_HEAD, EVT_FLOAT(0.5))
     EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HEAD, LVar0, LVar1, LVar2, 60, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, MODEL_k1, SOUND_01E2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_k1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, MODEL_u1, SOUND_01E2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_u1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 150, 20)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, MODEL_p1, SOUND_01E2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_p1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtModel, MODEL_d1, SOUND_01E2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_d1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 70, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, MODEL_s1, SOUND_01E2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_s1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 100, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtModel, MODEL_km1, SOUND_01E2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_km1, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT)
     EVT_CALL(N(StartRumbleWithParams), 60, 20)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
@@ -1634,7 +1634,7 @@ API_CALLABLE(N(PlayKoopaBrosSong)) {
 
 EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(UseIdleAnimation, GREEN_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, GREEN_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, GREEN_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, GREEN_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Launched)
     EVT_THREAD
@@ -1644,7 +1644,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(JumpToGoal, GREEN_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, YELLOW_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, YELLOW_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, YELLOW_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, YELLOW_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Launched)
     EVT_THREAD
@@ -1654,7 +1654,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(JumpToGoal, YELLOW_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, BLACK_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, BLACK_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, BLACK_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Launched)
     EVT_THREAD
@@ -1664,7 +1664,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(JumpToGoal, BLACK_ACTOR, 50, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, RED_ACTOR, FALSE)
-    EVT_CALL(EnableIdleScript, RED_ACTOR, 0)
+    EVT_CALL(EnableIdleScript, RED_ACTOR, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorPos, RED_ACTOR, 100, 0, 10)
     EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Launched)
     EVT_THREAD
@@ -1686,13 +1686,13 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(EnableGroup, MODEL_ashi, FALSE)
     EVT_THREAD
         EVT_WAIT(23)
-        EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_FALL_QUICK)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_FALL_QUICK)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_FALL_QUICK)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_0301)
+        EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_FALL_QUICK)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Land)
@@ -1795,7 +1795,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_HandleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_HandlePhase)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_KoopaBros_HandlePhase)))
     EVT_CALL(SetActorFlagBits, GREEN_ACTOR, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_CALL(SetPartFlagBits, GREEN_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(HPBarToHome, GREEN_ACTOR)

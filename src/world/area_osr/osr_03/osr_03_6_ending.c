@@ -93,7 +93,7 @@ EvtScript N(EVS_PlayExplosionFX) = {
     EVT_LOOP(0)
         EVT_USE_BUF(EVT_PTR(N(ExplosionPositions)))
         EVT_LOOP(8)
-            EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_1C, LVar5)
+            EVT_CALL(PlaySoundWithVolume, SOUND_SEQ_FINALE_EXPLOSION, LVar5)
             EVT_BUF_READ3(LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(6.0), 30)
             EVT_WAIT(LVar4)

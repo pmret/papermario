@@ -11,14 +11,14 @@
 #include "common/FadeBackgroundDarken.inc.c"
 #include "common/FadeBackgroundLighten.inc.c"
 
-API_CALLABLE(N(func_802A1354_71B4F4)) {
+API_CALLABLE(N(SpawnLightningFX)) {
     Actor* enemyTarget = get_actor(script->owner1.enemyID);
     Actor* actor = get_actor(enemyTarget->targetActorID);
     f32 posY, posX, posZ;
     s32 scaleX, scaleY;
 
     if (actor != NULL) {
-        sfx_play_sound(SOUND_0366);
+        sfx_play_sound(SOUND_LIGHTNING_STRIKE);
 
         posX = actor->curPos.x;
         posY = actor->curPos.y + (actor->size.y / 10);
@@ -27,7 +27,7 @@ API_CALLABLE(N(func_802A1354_71B4F4)) {
         scaleX = (actor->size.x + (actor->size.x >> 2)) * actor->scalingFactor;
         scaleY = (actor->size.y - 2) * actor->scalingFactor;
 
-        if (actor->flags & ACTOR_FLAG_8000) {
+        if (actor->flags & ACTOR_FLAG_HALF_HEIGHT) {
             posY -= actor->size.y / 2;
         }
 
@@ -59,7 +59,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_CALL(N(func_802A1354_71B4F4))
+        EVT_CALL(N(SpawnLightningFX))
         EVT_WAIT(5)
         EVT_CALL(StartRumble, 10)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))

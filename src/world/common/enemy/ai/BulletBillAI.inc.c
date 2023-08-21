@@ -123,7 +123,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
 
             if (hitDetected) {
                 npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_HIT];
-                ai_enemy_play_sound(npc, SOUND_SEQ_18, 0);
+                ai_enemy_play_sound(npc, SOUND_SEQ_BULLET_BILL_EXPLODE, 0);
                 fx_ring_blast(0, npc->pos.x, npc->pos.y + 5.0f, npc->pos.z + 1.0f, 0.05f, 20);
                 fx_smoke_burst(0, npc->pos.x, npc->pos.y + 5.0f, npc->pos.z + 0.0f, 1.2f, 25);
                 npc->duration = 1;

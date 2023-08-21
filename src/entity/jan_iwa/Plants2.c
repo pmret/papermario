@@ -198,7 +198,7 @@ void func_802BC3E4_E2ED14(Entity* entity) {
 EntityScript Entity_BellbellPlant_Script = {
     es_SetCallback(entity_BellbellPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
-    es_PlaySound(SOUND_00F1)
+    es_PlaySound(SOUND_PLANTS_BELL)
     es_SetCallback(NULL, 60)
     es_SetFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
     es_Restart
@@ -208,7 +208,7 @@ EntityScript Entity_BellbellPlant_Script = {
 EntityScript Entity_TrumpetPlant_Script = {
     es_SetCallback(entity_TrumpetPlant_idle, 0)
     es_ClearFlags(ENTITY_FLAG_SHOWS_INSPECT_PROMPT)
-    es_PlaySound(SOUND_00F3)
+    es_PlaySound(SOUND_PLANTS_TRUMPET)
     es_SetCallback(NULL, 15)
     es_Call(entity_TrumpetPlant_create_effect)
     es_SetCallback(NULL, 3)
@@ -241,7 +241,7 @@ EntityScript Entity_MunchlesiaReset_Script = {
     es_Call(func_802BC0B8_E2E9E8)
     es_SetCallback(NULL, 7)
     es_Call(func_802BC250_E2EB80)
-    es_PlaySound(SOUND_209B)
+    es_PlaySound(SOUND_MUNCHLESIA_SUCTION)
     es_SetFlags(ENTITY_FLAG_HIDDEN)
     es_SetCallback(NULL, 3)
     es_SetFlags(ENTITY_FLAG_PENDING_INSTANCE_DELETE)
@@ -291,7 +291,7 @@ EntityScript Entity_MunchlesiaChewing_Script = {
 EntityScript Entity_MunchlesiaSpitOut_Script = {
     es_SetCallback(NULL, 4)
     es_Call(func_802BC3A0_E2ECD0)
-    es_PlaySound(SOUND_0393)
+    es_PlaySound(SOUND_MUNCHLESIA_SPIT)
     es_SetCallback(NULL, 4)
     es_Call(entity_Munchlesia_create_child_reset1)
     es_SetFlags(ENTITY_FLAG_HIDDEN)

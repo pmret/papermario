@@ -326,7 +326,7 @@ EvtScript N(EVS_LiftCastleUp) = {
 EvtScript N(EVS_RaiseSmokeClouds) = {
     EVT_SET(MV_SmokeVelY, 0)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_0036)
+        EVT_CALL(PlaySound, SOUND_OSR_SMOKE_RISING_1)
         EVT_CALL(MakeLerp, 0, 650, 40 * DT, EASING_CUBIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -362,7 +362,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20 * DT)
-        EVT_CALL(PlaySound, SOUND_0037)
+        EVT_CALL(PlaySound, SOUND_OSR_SMOKE_RISING_2)
         EVT_CALL(MakeLerp, 0, 400, 30 * DT, EASING_CUBIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -397,7 +397,7 @@ EvtScript N(EVS_RaiseSmokeClouds) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(40)
-        EVT_CALL(PlaySound, SOUND_0038)
+        EVT_CALL(PlaySound, SOUND_OSR_SMOKE_RISING_3)
         EVT_CALL(MakeLerp, 0, 200, 20 * DT, EASING_CUBIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -504,7 +504,7 @@ EvtScript N(EVS_Scene_BowsersAssault) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_0035)
+        EVT_CALL(PlaySound, SOUND_OSR_GROUND_CRACKING)
         EVT_CALL(MakeLerp, 0, 30, 50 * DT, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)

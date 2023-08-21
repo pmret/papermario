@@ -11,10 +11,10 @@ extern ActorBlueprint b_area_omo2_1_shy_squad;
 extern AnimScript toy_tank_as_close_hatch;
 extern AnimScript toy_tank_as_open_hatch;
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(attack_throw_bomb);
 extern EvtScript N(attack_lightning_shot);
 extern s32 N(IdleAnimations)[];
@@ -24,6 +24,18 @@ extern Formation N(formation_shy_squad);
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
+};
+
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_6      = 6,
+    AVAR_Unk_7      = 7,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
 };
 
 #include "common/FadeBackgroundDarken.inc.c"
@@ -90,11 +102,11 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_GENERAL_GUY,
-    .level = 73,
+    .level = ACTOR_LEVEL_GENERAL_GUY,
     .maxHP = 10,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -141,38 +153,38 @@ s32 N(IdleAnimations3)[] = {
     STATUS_END,
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, 200, 0, 0)
     EVT_CALL(ForceHomePos, ACTOR_SELF, 200, 0, 0)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim02)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
     EVT_CALL(LoadBattleSection, 41)
     EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_squad)), TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -180,7 +192,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -272,8 +284,8 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+EvtScript N(EVS_TakeTurn) = {
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
@@ -295,7 +307,7 @@ EvtScript N(takeTurn) = {
 
 EvtScript N(attack_throw_bomb) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
@@ -346,7 +358,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -372,7 +384,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
@@ -407,7 +419,7 @@ EvtScript N(attack_throw_bomb) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -415,7 +427,7 @@ EvtScript N(attack_throw_bomb) = {
 
 EvtScript N(attack_lightning_shot) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -430,13 +442,13 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_open_hatch))
     EVT_WAIT(10)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_7, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_2)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim03)
     EVT_WAIT(20)
-    EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 1)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_6, 1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
@@ -445,7 +457,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(GetModelCenter, 39)
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_03D2)
+            EVT_CALL(PlaySoundAtActor, LVar8, SOUND_ELECTRIC_BUZZ)
             EVT_CALL(RandInt, 3, LVar0)
             EVT_ADD(LVar0, 3)
             EVT_WAIT(LVar0)
@@ -471,15 +483,15 @@ EvtScript N(attack_lightning_shot) = {
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
                 EVT_CALL(PlaySound, SOUND_2069)
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
-                EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 0)
+                EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_6, 0)
                 EVT_WAIT(12)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_ELSE
-                EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 0)
+                EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_6, 0)
                 EVT_WAIT(20)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_7, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_3)
             EVT_END_IF
@@ -488,7 +500,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -506,9 +518,9 @@ EvtScript N(attack_lightning_shot) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, 0, LVar5)
             EVT_CALL(PlaySound, SOUND_2069)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 0)
+            EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_6, 0)
             EVT_WAIT(12)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_7, LVar0)
             EVT_IF_NE(LVar0, 0)
                 EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_3)
             EVT_END_IF
@@ -517,7 +529,7 @@ EvtScript N(attack_lightning_shot) = {
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
             EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
@@ -536,7 +548,7 @@ EvtScript N(attack_lightning_shot) = {
         EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_IF_EQ(LVarF, HIT_RESULT_10)
-                EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 0)
+                EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_6, 0)
                 EVT_WAIT(30)
                 EVT_CALL(SetAnimation, ACTOR_ENEMY0, PRT_MAIN, ANIM_GeneralGuy_Anim02)
                 EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
@@ -552,11 +564,11 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_CALL(PlaySound, SOUND_2069)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
-    EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 0)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_6, 0)
     EVT_WAIT(12)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 7, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_7, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_3)
     EVT_END_IF
@@ -565,7 +577,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_206B)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

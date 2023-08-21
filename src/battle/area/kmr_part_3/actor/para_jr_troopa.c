@@ -4,12 +4,32 @@
 
 #define NAMESPACE A(para_jr_troopa)
 
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
+extern EvtScript N(EVS_JrTroopa_Death);
+extern EvtScript N(EVS_JrTroopa_FlyHome);
+extern EvtScript N(EVS_TryFearReaction);
+
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
+    PRT_GROUND      = 1,
+    PRT_FLYING      = 2,
 };
 
-s32 N(IdleAnimations_80225DC0)[] = {
+enum N(ActorVars) {
+    AVAR_Transformed        = 0,
+    AVAR_SpookReact         = 1,
+    AVAL_SpookReact_None    = 0,
+    AVAL_SpookReact_Ready   = 1,
+};
+
+enum N(ActorParams) {
+    DMG_DIVE        = 5,
+};
+
+s32 N(FlyingAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_ParaJrTroopa_Idle,
     STATUS_KEY_SLEEP,     ANIM_ParaJrTroopa_Sleep,
     STATUS_KEY_STONE,     ANIM_ParaJrTroopa_Still,
@@ -21,7 +41,7 @@ s32 N(IdleAnimations_80225DC0)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations_80225E04)[] = {
+s32 N(BaseAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_Idle,
     STATUS_KEY_SLEEP,     ANIM_JrTroopa_Sleep,
     STATUS_KEY_STONE,     ANIM_JrTroopa_Still,
@@ -33,17 +53,17 @@ s32 N(IdleAnimations_80225E04)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations_80225E48)[] = {
+s32 N(DefeatedAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_Defeated,
     STATUS_END,
 };
 
-s32 N(DefenseTable_80225E54)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80225E60)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,            100,
     STATUS_KEY_DEFAULT,           100,
     STATUS_KEY_SLEEP,              50,
@@ -68,44 +88,42 @@ s32 N(StatusTable_80225E60)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_80225F0C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PRT_MAIN,
+        .index = PRT_GROUND,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80225DC0),
-        .defenseTable = N(DefenseTable_80225E54),
+        .idleAnimations = N(FlyingAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -6 },
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = PRT_2,
+        .index = PRT_FLYING,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80225E04),
-        .defenseTable = N(DefenseTable_80225E54),
+        .idleAnimations = N(BaseAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
 };
 
-extern EvtScript N(init_80226510);
-
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
-    .type = ACTOR_TYPE_JR_TROOPA3,
-    .level = 52,
+    .type = ACTOR_TYPE_JR_TROOPA_3,
+    .level = ACTOR_LEVEL_JR_TROOPA_3,
     .maxHP = 40,
-    .partCount = ARRAY_COUNT( N(ActorParts_80225F0C)),
-    .partsData = N(ActorParts_80225F0C),
-    .initScript = &N(init_80226510),
-    .statusTable = N(StatusTable_80225E60),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -120,7 +138,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 25 },
 };
 
-EvtScript N(80225F7C) = {
+EvtScript N(EVS_SetupFearReaction) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
     EVT_IF_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_RETURN
@@ -129,7 +147,7 @@ EvtScript N(80225F7C) = {
     EVT_IF_FLAG(LVar2, BS_FLAGS1_PARTNER_ACTING)
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_IF_EQ(LVar2, MOVE_SPOOK)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpookReact, AVAL_SpookReact_Ready)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0263)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 30)
@@ -141,11 +159,11 @@ EvtScript N(80225F7C) = {
     EVT_END
 };
 
-EvtScript N(802260AC) = {
+EvtScript N(EVS_Transform) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B9)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_IF_NOT_FLAG(LVar3, 0x80000)
+    EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
         EVT_ADD(LVar1, 16)
     EVT_ELSE
         EVT_ADD(LVar1, 6)
@@ -161,7 +179,7 @@ EvtScript N(802260AC) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(32)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0300)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JR_TROOPA_TRANSFORM)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 40, 0)
@@ -173,7 +191,7 @@ EvtScript N(802260AC) = {
     EVT_END
 };
 
-EvtScript N(802263D4) = {
+EvtScript N(EVS_Cam_FocusOnJrTroopa) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
@@ -185,7 +203,7 @@ EvtScript N(802263D4) = {
     EVT_END
 };
 
-EvtScript N(8022646C) = {
+EvtScript N(EVS_Cam_ResetFocus) = {
     EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
@@ -193,7 +211,7 @@ EvtScript N(8022646C) = {
     EVT_END
 };
 
-EvtScript N(802264AC) = {
+EvtScript N(EVS_Cam_FocusOnGoompa) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_55)
@@ -203,167 +221,158 @@ EvtScript N(802264AC) = {
     EVT_END
 };
 
-extern EvtScript N(takeTurn_80226F58);
-extern EvtScript N(idle_802265A0);
-extern EvtScript N(handleEvent_802266B0);
-extern EvtScript N(nextTurn_80227724);
-
-EvtScript N(init_80226510) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80226F58)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802265A0)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802266B0)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80227724)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Transformed, FALSE)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpookReact, AVAL_SpookReact_None)
     EVT_RETURN
     EVT_END
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(idle_802265A0) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_DIZZY | STATUS_FLAG_SLEEP)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -12, 28)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 4, -6)
-        EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
-    EVT_ELSE
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 33)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -6)
-        EVT_CALL(N(SetAbsoluteStatusOffsets), -22, 30, 2, 28)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+        EVT_IF_FLAG(LVarA, STATUS_FLAG_DIZZY | STATUS_FLAG_SLEEP)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_GROUND, -12, 28)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_GROUND, 4, -6)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
+        EVT_ELSE
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_GROUND, -5, 33)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_GROUND, 0, -6)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -22, 30, 2, 28)
+        EVT_END_IF
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-extern EvtScript N(802279B0);
-extern EvtScript N(80227D38);
-extern EvtScript N(80227E1C);
-
-EvtScript N(handleEvent_802266B0) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(9)
-        EVT_CASE_OR_EQ(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
+        EVT_CASE_OR_EQ(EVENT_HIT)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_EXEC_WAIT(N(80225F7C))
-            EVT_EXEC_WAIT(N(80227E1C))
+            EVT_EXEC_WAIT(N(EVS_SetupFearReaction))
+            EVT_EXEC_WAIT(N(EVS_TryFearReaction))
         EVT_END_CASE_GROUP
-        EVT_CASE_EQ(32)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_DEATH)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
-            EVT_EXEC_WAIT(N(802279B0))
+            EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))
             EVT_RETURN
-        EVT_CASE_EQ(14)
-            EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, 2424840)
-            EVT_SET(LVar2, 2424841)
+        EVT_CASE_EQ(EVENT_BURN_HIT)
+            EVT_SET(LVar0, PRT_GROUND)
+            EVT_SET(LVar1, ANIM_ParaJrTroopa_BurnHurt)
+            EVT_SET(LVar2, ANIM_ParaJrTroopa_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_EQ(36)
-            EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, 2424840)
-            EVT_SET(LVar2, 2424841)
+        EVT_CASE_EQ(EVENT_BURN_DEATH)
+            EVT_SET(LVar0, PRT_GROUND)
+            EVT_SET(LVar1, ANIM_ParaJrTroopa_BurnHurt)
+            EVT_SET(LVar2, ANIM_ParaJrTroopa_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_BurnStill)
-            EVT_EXEC_WAIT(N(802279B0))
+            EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))
             EVT_RETURN
-        EVT_CASE_EQ(11)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-        EVT_CASE_EQ(33)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
-            EVT_EXEC_WAIT(N(802279B0))
+            EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))
             EVT_RETURN
-        EVT_CASE_EQ(47)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_SHOCK_HIT)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(80227D38))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
-        EVT_CASE_EQ(38)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_EXEC_WAIT(N(EVS_JrTroopa_FlyHome))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
+        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
-            EVT_EXEC_WAIT(N(802279B0))
+            EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))
             EVT_RETURN
-        EVT_CASE_EQ(23)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(25)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_IMMUNE)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_EXEC_WAIT(N(80225F7C))
-            EVT_EXEC_WAIT(N(80227E1C))
-        EVT_CASE_EQ(42)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Hurt)
+            EVT_EXEC_WAIT(N(EVS_SetupFearReaction))
+            EVT_EXEC_WAIT(N(EVS_TryFearReaction))
+        EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Hurt)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
-        EVT_CASE_EQ(58)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
+        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Flail)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Flail)
                 EVT_WAIT(1000)
             EVT_END_IF
-        EVT_CASE_EQ(31)
+        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_SET_CONST(LVar0, PRT_MAIN)
+                EVT_SET_CONST(LVar0, PRT_GROUND)
                 EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Flail)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-                EVT_EXEC_WAIT(N(802263D4))
-                EVT_CALL(ActorSpeak, MSG_Menus_019B, ACTOR_SELF, PRT_MAIN, 0x0025000C, 0x0025000C)
-                EVT_EXEC_WAIT(N(8022646C))
+                EVT_EXEC_WAIT(N(EVS_Cam_FocusOnJrTroopa))
+                EVT_CALL(ActorSpeak, MSG_Menus_019B, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Talk, ANIM_ParaJrTroopa_Talk)
+                EVT_EXEC_WAIT(N(EVS_Cam_ResetFocus))
             EVT_END_IF
-        EVT_CASE_EQ(53)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
-        EVT_CASE_EQ(49)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
+        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
+            EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80226D4C) = {
+EvtScript N(EVS_Overshoot_Unused) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 40)
     EVT_SET(LVar1, 0)
@@ -378,28 +387,28 @@ EvtScript N(80226D4C) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
     EVT_SUB(LVar0, 10)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(takeTurn_80226F58) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -415,7 +424,7 @@ EvtScript N(takeTurn_80226F58) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_PARAGOOMBA_PREDIVE, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -426,23 +435,23 @@ EvtScript N(takeTurn_80226F58) = {
             EVT_SET(LVar1, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Dive)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Dive)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
-            EVT_IF_EQ(LVarA, 5)
+            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_GROUND, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_GROUND, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -454,7 +463,7 @@ EvtScript N(takeTurn_80226F58) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_PARAGOOMBA_PREDIVE, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -462,58 +471,59 @@ EvtScript N(takeTurn_80226F58) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAGOOMBA_DIVE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Dive)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Dive)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     EVT_END_SWITCH
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_DIVE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-        EVT_CASE_OR_EQ(10)
+        EVT_CASE_OR_EQ(HIT_RESULT_10)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
             EVT_WAIT(10)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(nextTurn_80227724) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetBattlePhase, LVarF)
     EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(10)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
+            // trying showing the scene where Jr Troopa transforms
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Transformed, LVar0)
+            EVT_IF_FALSE(LVar0)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Transformed, TRUE)
                 EVT_WAIT(15)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(SetBattleCamOffsetZ, 35)
                 EVT_CALL(MoveBattleCamOver, 30)
                 EVT_WAIT(30)
-                EVT_CALL(ActorSpeak, MSG_CH3_0020, ACTOR_SELF, PRT_2, 0x0021001A, 0x0021001B)
+                EVT_CALL(ActorSpeak, MSG_CH3_0020, ACTOR_SELF, PRT_FLYING, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot)
                 EVT_WAIT(8)
-                EVT_EXEC_WAIT(N(802260AC))
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, TRUE)
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 1, FALSE)
+                EVT_EXEC_WAIT(N(EVS_Transform))
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                 EVT_WAIT(30)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 20)
@@ -522,25 +532,25 @@ EvtScript N(nextTurn_80227724) = {
                 EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, 60, LVar2)
                 EVT_CALL(HPBarToHome, ACTOR_SELF)
                 EVT_WAIT(8)
-                EVT_CALL(ActorSpeak, MSG_CH3_0021, ACTOR_SELF, PRT_MAIN, 0x0025000C, 0x00250002)
+                EVT_CALL(ActorSpeak, MSG_CH3_0021, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Talk, ANIM_ParaJrTroopa_Idle)
                 EVT_WAIT(10)
-                EVT_EXEC_WAIT(N(8022646C))
+                EVT_EXEC_WAIT(N(EVS_Cam_ResetFocus))
             EVT_END_IF
-        EVT_CASE_EQ(12)
+        EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(802279B0) = {
+EvtScript N(EVS_JrTroopa_Death) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_EQ(LVar1, 0)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0301)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
@@ -560,9 +570,9 @@ EvtScript N(802279B0) = {
             EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 1, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_JrTroopa_DefeatedBegin)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_JrTroopa_DefeatedBegin)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -576,17 +586,17 @@ EvtScript N(802279B0) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_JrTroopa_Defeated)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_2, EVT_PTR(N(IdleAnimations_80225E48)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_JrTroopa_Defeated)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_FLYING, EVT_PTR(N(DefeatedAnims)))
     EVT_WAIT(60)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00400000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(80227D38) = {
+EvtScript N(EVS_JrTroopa_FlyHome) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_FlyFast)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_FlyFast)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -599,18 +609,18 @@ EvtScript N(80227D38) = {
     EVT_END
 };
 
-EvtScript N(80227E1C) = {
+EvtScript N(EVS_TryFearReaction) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-        EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_SpookReact, LVar0)
+        EVT_IF_EQ(LVar0, AVAL_SpookReact_Ready)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpookReact, AVAL_SpookReact_None)
             EVT_WAIT(15)
-            EVT_EXEC_WAIT(N(802263D4))
+            EVT_EXEC_WAIT(N(EVS_Cam_FocusOnJrTroopa))
             EVT_WAIT(10)
-            EVT_CALL(ActorSpeak, MSG_Menus_019A, ACTOR_SELF, PRT_MAIN, 0x0025000C, 0x00250002)
+            EVT_CALL(ActorSpeak, MSG_Menus_019A, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Talk, ANIM_ParaJrTroopa_Idle)
             EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(8022646C))
+            EVT_EXEC_WAIT(N(EVS_Cam_ResetFocus))
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN

@@ -888,7 +888,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         if (wExtraPartnerID != 0) {
             partner->flags &= ~NPC_FLAG_GRAVITY;
-            partner->flags &= ~NPC_FLAG_8;
+            partner->flags &= ~NPC_FLAG_FLYING;
             targetX = playerStatus->pos.x;
             partner->moveToPos.x = targetX;
             partnerX = partner->pos.x;

@@ -720,8 +720,8 @@ void btl_state_update_begin_player_turn(void) {
             if (btl_cam_is_moving_done()) {
                 gBattleStatus.flags1 &= ~BS_FLAGS1_PARTNER_ACTING;
                 reset_actor_turn_info();
-                battleStatus->unk_86 = 127;
-                battleStatus->blockResult = 127;
+                battleStatus->actionResult = ACTION_RESULT_NONE;
+                battleStatus->blockResult = BLOCK_RESULT_NONE;
                 battleStatus->selectedMoveID = 0;
                 gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
                 gBattleStatus.flags2 &= ~BS_FLAGS2_1000000;
@@ -1066,8 +1066,8 @@ void btl_state_update_switch_to_player(void) {
         gBattleStatus.flags1 &= ~BS_FLAGS1_PARTNER_ACTING;
         reset_actor_turn_info();
         gBattleStatus.selectedMoveID = MOVE_NONE;
-        gBattleStatus.unk_86 = 127;
-        gBattleStatus.blockResult = 127;
+        gBattleStatus.actionResult = ACTION_RESULT_NONE;
+        gBattleStatus.blockResult = BLOCK_RESULT_NONE;
         gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
         player->flags |= ACTOR_FLAG_8000000;
         if (partner != NULL) {
@@ -1121,8 +1121,8 @@ void btl_state_update_begin_partner_turn(void) {
             D_8029F258 = 0;
             reset_actor_turn_info();
             partner = battleStatus->partnerActor;
-            battleStatus->unk_86 = 127;
-            battleStatus->blockResult = 127;
+            battleStatus->actionResult = ACTION_RESULT_NONE;
+            battleStatus->blockResult = BLOCK_RESULT_NONE;
             D_8029F254 = 0;
             gBattleStatus.flags1 |= BS_FLAGS1_PARTNER_ACTING;
             gBattleStatus.flags2 |= BS_FLAGS1_PLAYER_IN_BACK;
@@ -1213,8 +1213,8 @@ void btl_state_update_switch_to_partner(void) {
         reset_actor_turn_info();
         gBattleStatus.flags1 |= BS_FLAGS1_PARTNER_ACTING;
         gBattleStatus.selectedMoveID = MOVE_NONE;
-        gBattleStatus.unk_86 = 127;
-        gBattleStatus.blockResult = 127;
+        gBattleStatus.actionResult = ACTION_RESULT_NONE;
+        gBattleStatus.blockResult = BLOCK_RESULT_NONE;
         gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
         player->flags |= (ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000);
         partner->flags |= ACTOR_FLAG_8000000;
@@ -2597,8 +2597,8 @@ void btl_state_update_player_move(void) {
 
     if (gBattleSubState == BTL_SUBSTATE_PLAYER_MOVE_INIT) {
         battleStatus->stateFreezeCount = 0;
-        battleStatus->unk_86 = 127;
-        battleStatus->blockResult = 127;
+        battleStatus->actionResult = ACTION_RESULT_NONE;
+        battleStatus->blockResult = BLOCK_RESULT_NONE;
         battleStatus->lastAttackDamage = 0;
         battleStatus->curDamageSource = DMG_SRC_DEFAULT;
         gBattleStatus.flags1 &= ~BS_FLAGS1_AUTO_SUCCEED_ACTION;
@@ -3155,8 +3155,8 @@ void btl_state_update_partner_move(void) {
                 break;
             }
             battleStatus->stateFreezeCount = 0;
-            battleStatus->unk_86 = 127;
-            battleStatus->blockResult = 127;
+            battleStatus->actionResult = ACTION_RESULT_NONE;
+            battleStatus->blockResult = BLOCK_RESULT_NONE;
             battleStatus->curDamageSource = DMG_SRC_DEFAULT;
             gBattleStatus.flags1 &= ~BS_FLAGS1_AUTO_SUCCEED_ACTION;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
@@ -3582,8 +3582,8 @@ void btl_state_update_enemy_move(void) {
             battleStatus->stateFreezeCount = 0;
             battleStatus->lastAttackDamage = 0;
             battleStatus->actionSuccess = 0;
-            battleStatus->unk_86 = 127;
-            battleStatus->blockResult = 127;
+            battleStatus->actionResult = ACTION_RESULT_NONE;
+            battleStatus->blockResult = BLOCK_RESULT_NONE;
             battleStatus->curDamageSource = DMG_SRC_DEFAULT;
             reset_actor_turn_info();
             gBattleStatus.flags1 |= BS_FLAGS1_100;

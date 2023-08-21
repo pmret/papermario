@@ -51,7 +51,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
     EVT_EXEC_GET_TID(N(EVS_TetherSwitchToBlueGoomba), LVarB)
     EVT_CALL(SetNpcJumpscale, NPC_BlueGoombaBro, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -445, 0, 92, 15 * DT)
-    EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_MODE_0, -469, 1, 92)
+    EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_DEFAULT, -469, 1, 92)
     EVT_CALL(SetNpcJumpscale, NPC_BlueGoombaBro, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_BlueGoombaBro, -469, 0, 92, 7 * DT)
     EVT_KILL_THREAD(LVarB)
@@ -64,7 +64,7 @@ EvtScript N(EVS_Interact_SwitchBush) = {
 
 EvtScript N(EVS_OnBreak_SpecialBrick) = {
     EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-    EVT_CALL(PlaySoundAt, SOUND_SPAWN_BLOCK, SOUND_SPACE_MODE_0, 665, 35, 70)
+    EVT_CALL(PlaySoundAt, SOUND_SPAWN_BLOCK, SOUND_SPACE_DEFAULT, 665, 35, 70)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 665, 48, 70, 10)
     EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 665, 35, 70, 45, ITEM_SUPER_SHROOM, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, GF_KMR11_ItemBlock_SuperShroom)

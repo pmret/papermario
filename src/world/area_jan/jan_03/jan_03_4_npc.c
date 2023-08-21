@@ -573,25 +573,25 @@ EvtScript N(EVS_NpcInit_YoshiKid_05) = {
 EvtScript N(EVS_NpcInteract_Raven) = {
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(10)
+        EVT_CASE_EQ(NPC_Raven_01)
             EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008C)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008D)
             EVT_END_IF
-        EVT_CASE_EQ(12)
+        EVT_CASE_EQ(NPC_Raven_03)
             EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008E)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_008F)
             EVT_END_IF
-        EVT_CASE_EQ(13)
+        EVT_CASE_EQ(NPC_Raven_04)
             EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0090)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0091)
             EVT_END_IF
-        EVT_CASE_EQ(14)
+        EVT_CASE_EQ(NPC_Raven_05)
             EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_0092)
             EVT_ELSE
@@ -668,7 +668,7 @@ EvtScript N(EVS_NpcInteract_Kolorado) = {
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_IdleSad)
                         EVT_WAIT(15)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, 0)
+                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
                         EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
                         EVT_WAIT(25)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_001A)

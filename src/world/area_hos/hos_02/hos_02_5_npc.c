@@ -19,7 +19,7 @@ NpcData N(NpcData_Ember) = {
         }
     },
     .settings = &N(NpcSettings_Ember),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -42,7 +42,7 @@ NpcData N(NpcData_Ember_02) = {
         }
     },
     .settings = &N(NpcSettings_Ember),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -65,7 +65,7 @@ NpcData N(NpcData_Ember_03) = {
         }
     },
     .settings = &N(NpcSettings_Ember),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = EMBER_DROPS,
     .animations = EMBER_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

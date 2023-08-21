@@ -324,7 +324,7 @@ void filemenu_selectlanguage_handle_input(MenuPanel* menu) {
         set_window_update(WINDOW_ID_FILEMENU_FILE3_INFO, (s32) &filemenu_selectlanguage_80248018);
         set_window_update(WINDOW_ID_FILEMENU_TITLE, (s32) filemenu_update_hidden_title);
         if (var_s1 == 0) {
-            sfx_play_sound(SOUND_00F1);
+            sfx_play_sound(SOUND_PLANTS_BELL);
         } else {
             sfx_play_sound(SOUND_FILE_MENU_OUT);
         }

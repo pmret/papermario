@@ -17,7 +17,7 @@ f32 shim_clamp_angle(f32 theta);
 f32 shim_sin_deg(f32 x);
 f32 shim_cos_deg(f32 x);
 f32 shim_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
-s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+b32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 s32 shim_load_effect(s32 effectIndex);
 float shim_sqrtf(float value);
 void shim_mdl_draw_hidden_panel_surface(Gfx**, u16 treeIndex);

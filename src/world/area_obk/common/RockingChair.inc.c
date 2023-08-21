@@ -161,7 +161,7 @@ API_CALLABLE(N(UpdateRockingChair)) {
     if (physics->rotAngle <= -7.0f) {
         if (script->functionTemp[2] != -1) {
             get_collider_center(COLLIDER_i3, &centerX, &centerY, &centerZ);
-            sfx_play_sound_at_position(SOUND_CREAKY_ROCKING_CHAIR, SOUND_SPACE_MODE_0, centerX, centerY, centerZ);
+            sfx_play_sound_at_position(SOUND_CREAKY_ROCKING, SOUND_SPACE_DEFAULT, centerX, centerY, centerZ);
             script->functionTemp[2] = -1;
         }
     } else {

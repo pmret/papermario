@@ -26,147 +26,141 @@ void damage_stars_update(EffectInstance* effect);
 void damage_stars_render(EffectInstance* effect);
 void damage_stars_appendGfx(void* effect);
 
-void damage_stars_main(
-    s32 arg0,
-    f32 arg1,
-    f32 arg2,
-    f32 arg3,
-    f32 arg4,
-    f32 arg5,
-    f32 arg6,
-    s32 arg7
-) {
+void damage_stars_main(s32 type, f32 x, f32 y, f32 z, f32 rotAxisX, f32 rotAxisY, f32 rotAxisZ, s32 number) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
     DamageStarsFXData* part;
-    f32 temp_f12;
+    f32 norm;
     f32 var_f28;
     f32 var_f30;
     f32 rotateX;
     f32 rotateZ;
     f32 sp70;
-    Matrix4f sp30;
+    Matrix4f mtxRot;
     s32 i;
 
-    if (arg7 != 0) {
-        temp_f12 = SQ(arg4) + SQ(arg5) + SQ(arg6);
-        if (temp_f12 != 0.0f) {
-            temp_f12 = -1.0f / sqrtf(temp_f12);
+    if (number == 0) {
+        return;
+    }
 
-            arg4 *= temp_f12;
-            arg5 *= temp_f12;
-            arg6 *= temp_f12;
+    norm = SQ(rotAxisX) + SQ(rotAxisY) + SQ(rotAxisZ);
+    if (norm == 0.0f) {
+        return;
+    }
+    norm = -1.0f / sqrtf(norm);
 
-            if (arg4 != 0.0f) {
-                sp70 = 1.0f;
-                var_f30 = -arg5 / arg4;
-                var_f28 = 0.0f;
-            } else if (arg5 != 0.0f) {
-                sp70 = -arg4 / arg5;
-                var_f30 = 1.0f;
-                var_f28 = 0.0f;
-            } else {
-                sp70 = 0.0f;
-                var_f30 = 1.0f;
-                var_f28 = -arg4 / arg6;
+    rotAxisX *= norm;
+    rotAxisY *= norm;
+    rotAxisZ *= norm;
+
+    if (rotAxisX != 0.0f) {
+        sp70 = 1.0f;
+        var_f30 = -rotAxisY / rotAxisX;
+        var_f28 = 0.0f;
+    } else if (rotAxisY != 0.0f) {
+        sp70 = -rotAxisX / rotAxisY;
+        var_f30 = 1.0f;
+        var_f28 = 0.0f;
+    } else {
+        sp70 = 0.0f;
+        var_f30 = 1.0f;
+        var_f28 = -rotAxisX / rotAxisZ;
+    }
+
+    norm = SQ(var_f30) + SQ(sp70) + SQ(var_f28);
+    if (norm != 0) {
+        norm = 1.0f / sqrtf(norm);
+
+        var_f30 *= norm;
+        sp70 *= norm;
+        var_f28 *= norm;
+
+        var_f30 *= 8.0f;
+        sp70 *= 8.0f;
+        var_f28 *= 8.0f;
+        rotAxisX *= 8.0f;
+        rotAxisY *= 8.0f;
+        rotAxisZ *= 8.0f;
+
+        bpPtr->unk_00 = 0;
+        bpPtr->init = damage_stars_init;
+        bpPtr->update = damage_stars_update;
+        bpPtr->renderWorld = damage_stars_render;
+        bpPtr->renderUI = NULL;
+        bpPtr->effectID = EFFECT_DAMAGE_STARS;
+
+        effect = create_effect_instance(bpPtr);
+        effect->numParts = number;
+        part = effect->data.damageStars = general_heap_malloc(number * sizeof(*part));
+        ASSERT(effect->data.damageStars != NULL);
+
+        for (i = 0; i < number; i++, part++) {
+            part->type = type;
+            part->pos.x = x;
+            part->pos.y = y;
+            part->pos.z = z;
+
+            switch (type) {
+                case FX_DAMAGE_STARS_0:
+                case FX_DAMAGE_STARS_1:
+                case FX_DAMAGE_STARS_2:
+                    guRotateF(mtxRot, (i * 360) / (number - 1), rotAxisX, rotAxisY, rotAxisZ);
+                    part->vel.x = rotAxisX + mtxRot[0][0] * var_f30 + mtxRot[1][0] * sp70 + mtxRot[2][0] * var_f28;
+                    part->vel.y = rotAxisY + mtxRot[0][1] * var_f30 + mtxRot[1][1] * sp70 + mtxRot[2][1] * var_f28;
+                    part->vel.z = rotAxisZ + mtxRot[0][2] * var_f30 + mtxRot[1][2] * sp70 + mtxRot[2][2] * var_f28;
+                    break;
+                case FX_DAMAGE_STARS_3:
+                    rotateX = sin_deg(gCameras[gCurrentCameraID].curYaw);
+                    rotateZ = -cos_deg(gCameras[gCurrentCameraID].curYaw);
+                    guRotateF(mtxRot,
+                        (number != 1) ? (i * 100) / (number - 1) - 50 : 0.0f,
+                        rotateX, 0.0f, rotateZ);
+                    part->vel.x = mtxRot[0][0] * rotAxisX + mtxRot[1][0] * rotAxisY + mtxRot[2][0] * rotAxisZ;
+                    part->vel.y = mtxRot[0][1] * rotAxisX + mtxRot[1][1] * rotAxisY + mtxRot[2][1] * rotAxisZ;
+                    part->vel.z = mtxRot[0][2] * rotAxisX + mtxRot[1][2] * rotAxisY + mtxRot[2][2] * rotAxisZ;
+                    break;
+                case FX_DAMAGE_STARS_4:
+                    rotateX = sin_deg(gCameras[gCurrentCameraID].curYaw);
+                    rotateZ = -cos_deg(gCameras[gCurrentCameraID].curYaw);
+                    guRotateF(mtxRot, (i * 360.0f) / (number - 1), rotateX, 0.0f, rotateZ);
+                    part->vel.x = mtxRot[0][0] * rotAxisX + mtxRot[1][0] * rotAxisY + mtxRot[2][0] * rotAxisZ;
+                    part->vel.y = mtxRot[0][1] * rotAxisX + mtxRot[1][1] * rotAxisY + mtxRot[2][1] * rotAxisZ;
+                    part->vel.z = mtxRot[0][2] * rotAxisX + mtxRot[1][2] * rotAxisY + mtxRot[2][2] * rotAxisZ;
+                    break;
             }
 
-            temp_f12 = SQ(var_f30) + SQ(sp70) + SQ(var_f28);
-            if (temp_f12 != 0) {
-                temp_f12 = 1.0f / sqrtf(temp_f12);
-
-                var_f30 *= temp_f12;
-                sp70 *= temp_f12;
-                var_f28 *= temp_f12;
-
-                var_f30 *= 8.0f;
-                sp70 *= 8.0f;
-                var_f28 *= 8.0f;
-                arg4 *= 8.0f;
-                arg5 *= 8.0f;
-                arg6 *= 8.0f;
-
-                bpPtr->unk_00 = 0;
-                bpPtr->init = damage_stars_init;
-                bpPtr->update = damage_stars_update;
-                bpPtr->renderWorld = damage_stars_render;
-                bpPtr->renderUI = NULL;
-                bpPtr->effectID = EFFECT_DAMAGE_STARS;
-
-                effect = create_effect_instance(bpPtr);
-                effect->numParts = arg7;
-                part = effect->data.damageStars = general_heap_malloc(arg7 * sizeof(*part));
-                ASSERT(effect->data.damageStars != NULL);
-
-                for (i = 0; i < arg7; i++, part++) {
-                    part->unk_00 = arg0;
-                    part->unk_04 = arg1;
-                    part->unk_08 = arg2;
-                    part->unk_0C = arg3;
-
-                    switch (arg0) {
-                        case 0:
-                        case 1:
-                        case 2:
-                            guRotateF(sp30, (i * 360) / (arg7 - 1), arg4, arg5, arg6);
-                            part->unk_10 = arg4 + sp30[0][0] * var_f30 + sp30[1][0] * sp70 + sp30[2][0] * var_f28;
-                            part->unk_14 = arg5 + sp30[0][1] * var_f30 + sp30[1][1] * sp70 + sp30[2][1] * var_f28;
-                            part->unk_18 = arg6 + sp30[0][2] * var_f30 + sp30[1][2] * sp70 + sp30[2][2] * var_f28;
-                            break;
-                        case 3:
-                            rotateX = sin_deg(gCameras[gCurrentCameraID].curYaw);
-                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].curYaw);
-                            guRotateF(sp30,
-                                (arg7 != 1) ? (i * 100) / (arg7 - 1) - 50 : 0.0f,
-                                rotateX, 0.0f, rotateZ);
-                            part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
-                            part->unk_14 = sp30[0][1] * arg4 + sp30[1][1] * arg5 + sp30[2][1] * arg6;
-                            part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
-                            break;
-                        case 4:
-                            rotateX = sin_deg(gCameras[gCurrentCameraID].curYaw);
-                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].curYaw);
-                            guRotateF(sp30, (i * 360.0f) / (arg7 - 1), rotateX, 0.0f, rotateZ);
-                            part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
-                            part->unk_14 = sp30[0][1] * arg4 + sp30[1][1] * arg5 + sp30[2][1] * arg6;
-                            part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
-                            break;
-                    }
-
-                    switch (arg0) {
-                        case 0:
-                            part->unk_20 = 0;
-                            part->unk_28 = 24;
-                            break;
-                        case 1:
-                            part->unk_20 = 20.0f;
-                            part->unk_28 = 24;
-                            break;
-                        case 2:
-                            part->unk_20 = 20.0f;
-                            part->unk_28 = 40;
-                            part->unk_10 *= 0.5;
-                            part->unk_14 *= 0.5;
-                            part->unk_18 *= 0.5;
-                            break;
-                        case 3:
-                        case 4:
-                            part->unk_20 = 20.0f;
-                            part->unk_28 = 24;
-                            break;
-                    }
-
-                    part->unk_1C = 0;
-                    part->unk_2C = 0;
-                    part->unk_24 = 255;
-                }
-
-                D_E0030EB4 += 15.0f;
-                if (D_E0030EB4 > 360.0f) {
-                    D_E0030EB4 = 0.0f;
-                }
+            switch (type) {
+                case FX_DAMAGE_STARS_0:
+                    part->rollAngleVel = 0;
+                    part->timeLeft = 24;
+                    break;
+                case FX_DAMAGE_STARS_1:
+                    part->rollAngleVel = 20.0f;
+                    part->timeLeft = 24;
+                    break;
+                case FX_DAMAGE_STARS_2:
+                    part->rollAngleVel = 20.0f;
+                    part->timeLeft = 40;
+                    part->vel.x *= 0.5;
+                    part->vel.y *= 0.5;
+                    part->vel.z *= 0.5;
+                    break;
+                case FX_DAMAGE_STARS_3:
+                case FX_DAMAGE_STARS_4:
+                    part->rollAngleVel = 20.0f;
+                    part->timeLeft = 24;
+                    break;
             }
+
+            part->rollAngle = 0;
+            part->lifetime = 0;
+            part->alpha = 255;
+        }
+
+        D_E0030EB4 += 15.0f;
+        if (D_E0030EB4 > 360.0f) {
+            D_E0030EB4 = 0.0f;
         }
     }
 }
@@ -176,53 +170,53 @@ void damage_stars_init(EffectInstance* effect) {
 
 void damage_stars_update(EffectInstance* effect) {
     DamageStarsFXData* part = effect->data.damageStars;
-    s32 unk_28;
+    s32 time;
     s32 unk_2C;
     s32 i;
 
-    part->unk_28--;
-    part->unk_2C++;
+    part->timeLeft--;
+    part->lifetime++;
 
-    if (part->unk_28 < 0) {
+    if (part->timeLeft < 0) {
         remove_effect(effect);
         return;
     }
 
-    unk_28 = part->unk_28;
-    unk_2C = part->unk_2C;
+    time = part->timeLeft;
+    unk_2C = part->lifetime;
 
     for (i = 0; i < effect->numParts; i++, part++) {
-        if (part->unk_00 == 2) {
-            part->unk_14 = cos_deg(unk_2C * 6) * 4.0f;
-            part->unk_10 *= 0.94;
-            part->unk_18 *= 0.94;
-            if (part->unk_14 < 0.0f) {
-                part->unk_20 *= 0.8;
-                part->unk_24 *= 0.6;
+        if (part->type == FX_DAMAGE_STARS_2) {
+            part->vel.y = cos_deg(unk_2C * 6) * 4.0f;
+            part->vel.x *= 0.94;
+            part->vel.z *= 0.94;
+            if (part->vel.y < 0.0f) {
+                part->rollAngleVel *= 0.8;
+                part->alpha *= 0.6;
             }
         } else {
-            if (unk_28 >= 6) {
-                part->unk_10 *= 0.8;
-                part->unk_14 *= 0.8;
-                part->unk_18 *= 0.8;
+            if (time >= 6) {
+                part->vel.x *= 0.8;
+                part->vel.y *= 0.8;
+                part->vel.z *= 0.8;
             }
-            if (unk_28 >= 6 && unk_28 <= 19) {
-                if (part->unk_00 == 0) {
-                    part->unk_20 += 1.0f;
+            if (time >= 6 && time <= 19) {
+                if (part->type == FX_DAMAGE_STARS_0) {
+                    part->rollAngleVel += 1.0f;
                 }
-            } else if (unk_28 < 5) {
-                part->unk_20 *= 0.8;
-                part->unk_24 *= 0.6;
-                part->unk_10 *= 0.7;
-                part->unk_14 *= 0.7;
-                part->unk_18 *= 0.7;
+            } else if (time < 5) {
+                part->rollAngleVel *= 0.8;
+                part->alpha *= 0.6;
+                part->vel.x *= 0.7;
+                part->vel.y *= 0.7;
+                part->vel.z *= 0.7;
             }
         }
 
-        part->unk_04 += part->unk_10;
-        part->unk_08 += part->unk_14;
-        part->unk_0C += part->unk_18;
-        part->unk_1C += part->unk_20;
+        part->pos.x += part->vel.x;
+        part->pos.y += part->vel.y;
+        part->pos.z += part->vel.z;
+        part->rollAngle += part->rollAngleVel;
     }
 }
 
@@ -241,8 +235,8 @@ void damage_stars_render(EffectInstance* effect) {
 
 void damage_stars_appendGfx(void* effect) {
     DamageStarsFXData* part = ((EffectInstance*)effect)->data.damageStars;
-    Matrix4f sp18;
-    Matrix4f sp58;
+    Matrix4f mtxTransform;
+    Matrix4f mtxTemp;
     s32 baseIdx;
     s32 i;
 
@@ -250,7 +244,7 @@ void damage_stars_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_090004C0_343500);
 
-    baseIdx = (part->unk_2C - 1) * 3;
+    baseIdx = (part->lifetime - 1) * 3;
     baseIdx %= 36;
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
@@ -258,16 +252,16 @@ void damage_stars_appendGfx(void* effect) {
         s32 gIdx = baseIdx + 1 + i * 3;
         s32 bIdx = baseIdx + 2 + i * 3;
 
-        gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0030E90[rIdx % 36], D_E0030E90[gIdx % 36], D_E0030E90[bIdx % 36], part->unk_24);
-        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
-        guMtxCatF(sp58, sp18, sp18);
-        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0030E90[rIdx % 36], D_E0030E90[gIdx % 36], D_E0030E90[bIdx % 36], part->alpha);
+        guTranslateF(mtxTransform, part->pos.x, part->pos.y, part->pos.z);
+        guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        guRotateF(sp18, part->unk_1C, 0.0f, 0.0f, 1.0f);
-        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(mtxTransform, part->rollAngle, 0.0f, 0.0f, 1.0f);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090005E0_343620);

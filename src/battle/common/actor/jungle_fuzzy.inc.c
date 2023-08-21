@@ -8,24 +8,33 @@
 
 #define NAMESPACE A(jungle_fuzzy)
 
-extern s32 N(IdleAnimations_8021EADC)[];
-extern EvtScript N(init_8021EB28);
-extern EvtScript N(takeTurn_80221628);
-extern EvtScript N(idle_8021EB8C);
-extern EvtScript N(handleEvent_8021EB9C);
+extern s32 N(DefaultAnims)[];
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern Formation N(specialFormation_8022180C);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
-s32 N(DefenseTable_8021E9D0)[] = {
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_FIRE,     0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_8021E9E4)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              95,
@@ -57,8 +66,8 @@ ActorPartBlueprint  N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021EADC),
-        .defenseTable = N(DefenseTable_8021E9D0),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -68,12 +77,12 @@ ActorPartBlueprint  N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_JUNGLE_FUZZY,
-    .level = 16,
+    .level = ACTOR_LEVEL_JUNGLE_FUZZY,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021EB28),
-    .statusTable = N(StatusTable_8021E9E4),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 30,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -88,7 +97,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-s32 N(IdleAnimations_8021EADC)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Fuzzy_Jungle_Idle,
     STATUS_KEY_STONE,     ANIM_Fuzzy_Jungle_Still,
     STATUS_KEY_SLEEP,     ANIM_Fuzzy_Jungle_Sleep,
@@ -101,23 +110,23 @@ s32 N(IdleAnimations_8021EADC)[] = {
     STATUS_END,
 };
 
-EvtScript N(init_8021EB28) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80221628)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021EB8C)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021EB9C)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021EB8C) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent_8021EB9C) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -234,7 +243,7 @@ EvtScript N(handleEvent_8021EB9C) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -242,7 +251,7 @@ EvtScript N(handleEvent_8021EB9C) = {
 
 EvtScript N(divide) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
@@ -286,14 +295,14 @@ EvtScript N(divide) = {
     EVT_CALL(ForceHomePos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(HPBarToHome, LVar0)
     EVT_CALL(SetAnimation, LVar0, 1, ANIM_Fuzzy_Jungle_Idle)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar1)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, LVar0, 0, 1)
+            EVT_CALL(SetActorVar, LVar0, AVAR_Unk_0, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, LVar0, 0, 2)
+            EVT_CALL(SetActorVar, LVar0, AVAR_Unk_0, 2)
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -303,7 +312,7 @@ EvtScript N(divide) = {
 
 EvtScript N(leechAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -378,7 +387,7 @@ EvtScript N(leechAttack) = {
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -570,7 +579,7 @@ EvtScript N(leechAttack) = {
                 EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)
                 EVT_THREAD
                     EVT_WAIT(15)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SRAW_16_A)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_STAR_BOUNCE_A)
                     EVT_CALL(N(SpawnDrainHealthContinueFX), LVar0, LVar1, LVar2, LVar3)
                 EVT_END_THREAD
                 EVT_ADD(LVar0, 20)
@@ -679,7 +688,7 @@ EvtScript N(leechAttack) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Idle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -767,7 +776,7 @@ EvtScript N(80221468) = {
         EVT_CASE_OR_EQ(ACTOR_TYPE_JUNGLE_FUZZY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, 0, LVar3)
+                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_0, LVar3)
                 EVT_IF_NE(LVar3, 2)
                     EVT_ADD(LVar9, 1)
                 EVT_END_IF
@@ -776,7 +785,7 @@ EvtScript N(80221468) = {
         EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
             EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, 1, LVar3)
+                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_1, LVar3)
                 EVT_IF_LT(LVar3, 2)
                     EVT_ADD(LVar9, 1)
                 EVT_END_IF
@@ -790,13 +799,13 @@ EvtScript N(80221468) = {
     EVT_END
 };
 
-EvtScript N(takeTurn_80221628) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_EXEC_WAIT(N(leechAttack))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_EQ(LVar0, 2)
         EVT_EXEC_WAIT(N(leechAttack))
         EVT_RETURN

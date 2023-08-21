@@ -6,7 +6,7 @@ EvtScript N(EVS_SetupMusic) = {
     EVT_ELSE
         EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_VILLAGE, 0, 8)
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_LOOP_5B, 0, 887, 0, -41)
+    EVT_CALL(PlaySoundAt, SOUND_LOOP_NOK_WATER, SOUND_SPACE_DEFAULT, 887, 0, -41)
     EVT_RETURN
     EVT_END
 };

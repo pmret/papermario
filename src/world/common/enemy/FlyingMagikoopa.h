@@ -44,7 +44,7 @@
     .settings = &N(NpcSettings_FlyingMagikoopa_Hitbox), \
     .pos = { NPC_DISPOSE_LOCATION }, \
     .yaw = 90, \
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_DROPS, \
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_DROPS, \
     .drops = NO_DROPS, \
     .animations = { \
         .idle   = ANIM_FlyingMagikoopa_Anim00, \

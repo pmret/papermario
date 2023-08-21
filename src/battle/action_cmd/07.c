@@ -71,7 +71,7 @@ API_CALLABLE(N(start)) {
 
     actionCommandStatus->wrongButtonPressed = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
 
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_8024FAFC();
@@ -160,7 +160,7 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
 
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;

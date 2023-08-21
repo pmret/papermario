@@ -271,7 +271,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_THREAD
-            EVT_CALL(PlaySoundAtNpc, NPC_LeaderBoo, SOUND_THROW, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_LeaderBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
             EVT_CALL(GetNpcPos, NPC_LeaderBoo, LVar3, LVar4, LVar5)
             EVT_ADD(LVar5, 20)
             EVT_SET(LVar6, LVar4)
@@ -316,7 +316,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EVT_SET(LVar0, NPC_DummyBoo)
             EVT_VEC3I_SET(LVar3, 0, 0, -20)
             EVT_EXEC(N(EVS_TetherItemToNpcWithOffset))
-            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
             EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(2.0))
             EVT_CALL(NpcJump0, NPC_DummyBoo, 0, 0, 0, 20)
             EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)

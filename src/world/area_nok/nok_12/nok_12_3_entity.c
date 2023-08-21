@@ -43,7 +43,7 @@ EvtScript N(EVS_OnShakeTree_DropSwitch) = {
             EVT_IF_EQ(LVar1, 1)
                 EVT_GOTO(0)
             EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, 0, -470, LVar0, -150)
+        EVT_CALL(PlaySoundAt, SOUND_OBJECT_LAND, SOUND_SPACE_DEFAULT, -470, LVar0, -150)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
         EVT_THREAD
             EVT_WAIT(5)

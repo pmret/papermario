@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush) = {
         EVT_SUB(LVar2, 30)
         EVT_ADD(LVar3, 80)
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, LVar1, LVar2, LVar3, 20)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
         EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
@@ -83,7 +83,7 @@ EvtScript N(EVS_NpcAI_MontyMole_WallAmbush_Hole_Unused) = {
 NpcSettings N(NpcSettings_MontyMole_WallAmbush) = {
     .height = 24,
     .radius = 22,
-    .level = 8,
+    .level = ACTOR_LEVEL_MONTY_MOLE,
     .otherAI = &N(EVS_NpcAuxAI_MontyMole_WallAmbush),
     .ai = &N(EVS_NpcAI_MontyMole_WallAmbush),
     .onHit = &EnemyNpcHit,
@@ -94,7 +94,7 @@ NpcSettings N(NpcSettings_MontyMole_WallAmbush) = {
 NpcSettings N(NpcSettings_MontyMole_WallAmbush_Hole) = {
     .height = 24,
     .radius = 22,
-    .level = 8,
+    .level = ACTOR_LEVEL_MONTY_MOLE,
     .otherAI = &N(EVS_NpcAuxAI_MontyMole_WallAmbush_Hole),
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
 };

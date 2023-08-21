@@ -3,15 +3,23 @@
 
 // namespace not defined here; actor is associated with stages
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 
 BSS s32 N(slot_machine_buffer)[10];
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
+};
+
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
 };
 
 s32 N(intTable1)[] = { 0, 1, 0, 2, 0, 2, 0, 2 };
@@ -66,11 +74,11 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint N(slot_machine_stop) = {
     .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_STOP,
-    .level = 99,
+    .level = ACTOR_LEVEL_SLOT_MACHINE_STOP,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -89,11 +97,11 @@ ActorBlueprint N(slot_machine_stop) = {
 ActorBlueprint N(slot_machine_start) = {
     .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_START,
-    .level = 99,
+    .level = ACTOR_LEVEL_SLOT_MACHINE_START,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -123,7 +131,7 @@ API_CALLABLE(N(Add1Coin)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LVar0)
     EVT_IF_EQ(LVar0, LANGUAGE_ES)
@@ -132,9 +140,9 @@ EvtScript N(init) = {
     EVT_CALL(SetModelTexVariant, 28, LVar0)
 #endif
     EVT_USE_ARRAY(N(slot_machine_buffer))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_SET(ArrayVar(1), 0)
     EVT_SET(ArrayVar(2), 0)
     EVT_SET(ArrayVar(3), 0)
@@ -159,13 +167,13 @@ EvtScript N(init) = {
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_USE_ARRAY(N(slot_machine_buffer))
     EVT_CALL(EnableTexPanning, 45, TRUE)
     EVT_SET(LVarE, 0)
     EVT_SET(LVarF, 0)
     EVT_LABEL(0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
@@ -262,7 +270,7 @@ EvtScript N(idle) = {
     EVT_IF_EQ(ArrayVar(1), 0)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_GOTO(1)
     EVT_END_IF
@@ -367,7 +375,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_USE_ARRAY(N(slot_machine_buffer))
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -376,7 +384,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
-            EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(TranslateModel, 28, 0, -2, 0)
@@ -490,7 +498,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_USE_ARRAY(N(slot_machine_buffer))
     EVT_RETURN
     EVT_END

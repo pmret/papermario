@@ -3,7 +3,7 @@
 NpcSettings N(NpcSettings_Nomadimouse) = {
     .height = 22,
     .radius = 25,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/LetterDelivery.inc.c"
@@ -84,7 +84,7 @@ NpcData N(NpcData_Nomadimouse)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Nomadimouse),
         .settings = &N(NpcSettings_Nomadimouse),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Nomadimouse_Idle,
@@ -112,7 +112,7 @@ NpcData N(NpcData_Nomadimouse)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Sack),
         .settings = &N(NpcSettings_Nomadimouse),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Nomadimouse_Idle,

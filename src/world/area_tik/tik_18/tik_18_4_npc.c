@@ -13,7 +13,7 @@ EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
         EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Sleep)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_03E1, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_03E1, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
@@ -68,7 +68,7 @@ NpcData N(NpcData_Gloomba) = {
         }
     },
     .settings = &N(NpcSettings_Gloomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = GLOOMBA_DROPS,
     .animations = GLOOMBA_ANIMS,
 };
@@ -91,7 +91,7 @@ NpcData N(NpcData_SpikedGloomba) = {
     },
     .init = &N(EVS_NpcInit_SpikedGloomba),
     .settings = &N(NpcSettings_SpikedGloomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPIKED_GLOOMBA_DROPS,
     .animations = SPIKED_GLOOMBA_ANIMS,
 };

@@ -8,21 +8,21 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 8 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
     EVT_WAIT(1)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_SUB(LVar0, 80)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
     EVT_WAIT(1)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
     EVT_SUB(LVar0, 80)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12 * DT)
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
@@ -66,7 +66,7 @@ NpcData N(NpcData_TubbasHeart) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_TubbasHeart),
     .settings = &N(NpcSettings_TubbasHeart),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
@@ -89,7 +89,7 @@ NpcData N(NpcData_HyperGoomba) = {
     },
     .init = &N(EVS_NpcInit_HyperGoomba),
     .settings = &N(NpcSettings_HyperGoomba),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = HYPER_GOOMBA_DROPS,
     .animations = HYPER_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

@@ -12,11 +12,11 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 1;
     battleStatus->actionCmdDifficultyTable = actionCmdTableHammer;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
 
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
-        battleStatus->actionResult = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -80,7 +80,7 @@ API_CALLABLE(N(start)) {
 
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
-        battleStatus->actionResult = 0;
+        battleStatus->actionQuality = 0;
         return ApiStatus_DONE2;
     }
 
@@ -98,8 +98,8 @@ API_CALLABLE(N(start)) {
 
     actionCommandStatus->hammerMissedStart = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->actionResult = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionQuality = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~BS_FLAGS1_8000;
     func_80269118();
@@ -213,13 +213,13 @@ void N(update)(void) {
 
             if (actionCommandStatus->frameCounter < temp_f20) {
                 hud_element_set_script(actionCommandStatus->hudElements[4], &HES_TimingCharge3);
-                battleStatus->actionResult = 0;
+                battleStatus->actionQuality = 0;
                 if (actionCommandStatus->frameCounter == 0 && actionCommandStatus->playHammerSounds) {
                     sfx_play_sound(SOUND_TIMING_BAR_TICK);
                 }
             } else if (actionCommandStatus->frameCounter < temp_f20 * 2) {
                 hud_element_set_script(actionCommandStatus->hudElements[3], &HES_TimingCharge2);
-                battleStatus->actionResult = 1;
+                battleStatus->actionQuality = 1;
                 if (actionCommandStatus->frameCounter == temp_f20) {
                     if (actionCommandStatus->playHammerSounds) {
                         sfx_play_sound(SOUND_TIMING_BAR_TICK);
@@ -227,7 +227,7 @@ void N(update)(void) {
                 }
             } else if (actionCommandStatus->frameCounter < temp_f20 * 3.0f) {
                 hud_element_set_script(actionCommandStatus->hudElements[2], &HES_TimingCharge1);
-                battleStatus->actionResult = 2;
+                battleStatus->actionQuality = 2;
                 if (actionCommandStatus->frameCounter == temp_f20 * 2) {
                     if (actionCommandStatus->playHammerSounds) {
                         sfx_play_sound(SOUND_TIMING_BAR_TICK);
@@ -236,7 +236,7 @@ void N(update)(void) {
             }
 
             if (actionCommandStatus->frameCounter == (~phi_s0 + actionCommandStatus->duration)) {
-                battleStatus->actionResult = 3;
+                battleStatus->actionQuality = 3;
                 hud_element_set_script(actionCommandStatus->hudElements[1], &HES_TimingReady);
                 hud_element_set_script(actionCommandStatus->hudElements[5], &HES_StickTapNeutral);
                 if (actionCommandStatus->playHammerSounds) {
@@ -260,7 +260,7 @@ void N(update)(void) {
                 battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL)
             {
                 battleStatus->actionSuccess = -1;
-                battleStatus->unk_86 = -1;
+                battleStatus->actionResult = ACTION_RESULT_EARLY;
                 action_command_free();
             } else {
                 s32 i;
@@ -282,7 +282,7 @@ void N(update)(void) {
                             actionCommandStatus->autoSucceed != 0)
                         {
                             battleStatus->actionSuccess = 1;
-                            battleStatus->unk_86 = 1;
+                            battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                             gBattleStatus.flags1 |= BS_FLAGS1_2000;
                         }
                     }

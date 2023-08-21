@@ -87,7 +87,7 @@ EvtScript N(D_80245E6C_B263AC) = {
     EVT_MOD(LVar1, 4)
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(N(UnkPlayerPosFunc))
-        EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, 2, LVar0, LVar1, LVar2, 0, -1, 0, 5)
+        EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_2, LVar0, LVar1, LVar2, 0, -1, 0, 5)
     EVT_END_IF
     EVT_CALL(N(UnkFloatFunc001), LVarC, LVar0, 30, 60, 30, 0, 0)
     EVT_CALL(RotateModel, MODEL_o167, LVar0, 1, 0, 0)

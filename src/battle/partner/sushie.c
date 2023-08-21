@@ -10,11 +10,11 @@
 
 #define NAMESPACE battle_partner_sushie
 
-extern EvtScript N(handleEvent);
-extern EvtScript N(idle);
-extern EvtScript N(nextTurn);
-extern EvtScript N(takeTurn);
-extern EvtScript N(init);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandlePhase);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(executeAction);
 extern EvtScript N(celebrate);
 extern EvtScript N(runAway);
@@ -259,9 +259,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0);
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -283,9 +283,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -307,9 +307,9 @@ API_CALLABLE(N(ProcessTidalWave)) {
                 } while (0); // TODO macro?
 
                 if (script->functionTemp[2] != 0) {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_A, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 } else {
-                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_MODE_0, state->curPos.x, state->curPos.y, state->curPos.z);
+                    sfx_play_sound_at_position(SOUND_TIDAL_WAVE_LEAP_B, SOUND_SPACE_DEFAULT, state->curPos.x, state->curPos.y, state->curPos.z);
                 }
                 script->functionTemp[2] = 1 - script->functionTemp[2];
             }
@@ -332,7 +332,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             sEffect->data.waterFountain->unk_3C = partner->scale.x;
             sEffect->data.waterFountain->unk_40 = partner->scale.x;
             if (state->moveTime == 70) {
-                sfx_play_sound_at_position(SOUND_TIDAL_WAVE_WATER, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
+                sfx_play_sound_at_position(SOUND_TIDAL_WAVE_WATER, SOUND_SPACE_DEFAULT, 0.0f, 0.0f, 0.0f);
                 fx_underwater(0, -50.0f, 20.0f, 0.0f, 1.0f, 120);
             }
 
@@ -446,11 +446,11 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_SUSHIE,
-    .level = 0,
+    .level = ACTOR_LEVEL_SUSHIE,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -466,21 +466,21 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
@@ -547,7 +547,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
@@ -592,7 +592,7 @@ EvtScript N(runAwayFail) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_RETURN
     EVT_END
 };
@@ -602,7 +602,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
             EVT_RETURN
@@ -655,7 +655,7 @@ EvtScript N(returnHome2) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
@@ -745,7 +745,7 @@ EvtScript N(bellyFlop) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(action_command_hammer_start, 0, 57, 3)
-    EVT_CALL(SetActionResult, 0)
+    EVT_CALL(SetActionQuality, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_59)
     EVT_SET(LVar0, 30)
@@ -921,7 +921,7 @@ EvtScript N(bellyFlop) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
@@ -965,7 +965,7 @@ EvtScript N(squirt) = {
     EVT_CALL(MoveBattleCamOver, 90 * DT)
     EVT_CALL(action_command_squirt_start, 0, 87 * DT, 3)
     EVT_LOOP(90 * DT)
-        EVT_CALL(GetActionResult, LVar0)
+        EVT_CALL(GetActionQuality, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_CALL(GetActorScale, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SETF(LVar1, LVar0)
@@ -1009,15 +1009,15 @@ EvtScript N(squirt) = {
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
     EVT_PLAY_EFFECT(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
     EVT_WAIT(10)
-    EVT_CALL(GetActionResult, LVar0)
+    EVT_CALL(GetActionQuality, LVar0)
     EVT_CALL(N(GetSquirtDamage))
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0110)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_HIT_RATTLE)
         EVT_CASE_DEFAULT
             EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0110)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_HIT_RATTLE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1183,17 +1183,17 @@ EvtScript N(tidalWave) = {
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_END_THREAD
     EVT_LOOP(100)
-        EVT_CALL(GetActionResult, LVar0)
+        EVT_CALL(GetActionQuality, LVar0)
         EVT_CALL(N(SetScaleTidalWaveCharge))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_WAIT(10)
-    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
     EVT_CALL(N(ProcessTidalWave))
     EVT_CALL(SetActorPos, ACTOR_PARTNER, -220, 0, 0)
-    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     EVT_WAIT(15)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)

@@ -21,7 +21,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_ELSE
         EVT_CALL(func_802CF56C, 1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0161, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(0)
@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
         EVT_WAIT(1)
         EVT_IF_LE(LVar1, 30)
             EVT_CALL(SetPlayerPos, LVar0, 30, LVar2)
-            EVT_CALL(PlaySoundAtPlayer, SOUND_03FB, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_03FB, SOUND_SPACE_DEFAULT)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
@@ -195,7 +195,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Toad_01),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadA,
@@ -206,7 +206,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Toad_02),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TOAD_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveToadB,
@@ -217,7 +217,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_ToadGuard),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TOAD_GUARD_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_KPA_CaptiveSoldierA,
@@ -228,7 +228,7 @@ NpcData N(NpcData_Prisoners)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_ToadMinister),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TOAD_MINISTER_ANIMS,
         .tattle = MSG_NpcTattle_KPA_ToadMinister,

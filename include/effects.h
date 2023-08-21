@@ -179,20 +179,27 @@ typedef struct SnowflakeFXData {
     /* 0x28 */ s32 unk_28;
 } SnowflakeFXData; // size = 0x2C
 
+enum StarFXTypes {
+    FX_STAR_BACKGROUND      = 0,
+    FX_STAR_FOREGROUND      = 1,
+    FX_STAR_LARGE_BOUNCING  = 2,
+    FX_STAR_SMALL_BOUNCING  = 3,
+};
+
 typedef struct StarFXData {
-    /* 0x000 */ s32 unk_00;
+    /* 0x000 */ b32 canBounce;
     /* 0x004 */ Vec3f pos;
     /* 0x010 */ Vec3f vel;
-    /* 0x01C */ f32 unk_1C;
-    /* 0x020 */ f32 unk_20;
-    /* 0x024 */ f32 angle;
-    /* 0x028 */ s32 unk_28;
-    /* 0x02C */ f32 unk_2C;
-    /* 0x030 */ s32 unk_30;
-    /* 0x034 */ f32 unk_34;
+    /* 0x01C */ f32 bounceTime;
+    /* 0x020 */ f32 trailAngle;
+    /* 0x024 */ f32 starAngle;
+    /* 0x028 */ f32 unk_28;
+    /* 0x02C */ f32 starAngleVel;
+    /* 0x030 */ s32 timeLeft;
+    /* 0x034 */ f32 projVel;
     /* 0x038 */ s32 type;
-    /* 0x03C */ s32 unk_3C;
-    /* 0x040 */ Mtx unk_40[8];
+    /* 0x03C */ s32 trailMatrixPos;
+    /* 0x040 */ Mtx trailMatrices[8];
     /* 0x240 */ f32 scale;
     /* 0x244 */ s32 primR;
     /* 0x248 */ s32 primG;
@@ -355,19 +362,23 @@ typedef struct SmokeRingFXData {
     /* 0x40 */ s32 unk_40;
 } SmokeRingFXData; // size = 0x44
 
+enum DamageStarsFXTypes {
+    FX_DAMAGE_STARS_0   = 0,
+    FX_DAMAGE_STARS_1   = 1,
+    FX_DAMAGE_STARS_2   = 2,
+    FX_DAMAGE_STARS_3   = 3,
+    FX_DAMAGE_STARS_4   = 4,
+};
+
 typedef struct DamageStarsFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x14 */ f32 unk_04;
-    /* 0x18 */ f32 unk_08;
-    /* 0x1C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x00 */ s32 type;
+    /* 0x14 */ Vec3f pos;
+    /* 0x10 */ Vec3f vel;
+    /* 0x1C */ f32 rollAngle;
+    /* 0x20 */ f32 rollAngleVel;
+    /* 0x24 */ s32 alpha;
+    /* 0x28 */ s32 timeLeft;
+    /* 0x2C */ s32 lifetime;
 } DamageStarsFXData; // size = 0x30
 
 typedef struct ExplosionFXData {
@@ -1916,16 +1927,15 @@ typedef struct Effect6BFXData {
 } Effect6BFXData; // size = 0x44
 
 typedef struct TattleWindowFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ s32 timeLeft;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 scale;
     /* 0x20 */ Vec3f rot;
     /* 0x2C */ Vec2f offset;
-    /* 0x34 */ u8 unk_34;
-    /* 0x35 */ u8 unk_35;
+    /* 0x34 */ Vec2bu closeAmt;
 } TattleWindowFXData; // size = 0x38
 
 typedef struct ShinyFlareFXData {
@@ -2594,11 +2604,11 @@ typedef struct EffectInstance {
 
 // composite struct for watt effects -- NOT the same as StaticStatusFXData
 typedef struct WattEffectData {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 angle;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
+    /* 0x00 */ s32 initialized;
+    /* 0x04 */ s32 isBouncing;
+    /* 0x08 */ s32 bouncePhase;
+    /* 0x0C */ s32 isActive;
+    /* 0x10 */ s32 currentEffectIndex;
     /* 0x14 */ EffectInstance* effect1;
     /* 0x18 */ EffectInstance* effect2;
     /* 0x1C */ s32 debuff;

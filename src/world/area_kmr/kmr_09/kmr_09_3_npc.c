@@ -21,7 +21,7 @@ NpcData N(NpcData_Goomba_01) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -43,7 +43,7 @@ NpcData N(NpcData_Goomba_02) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_00F8, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FLIP_PAGE, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcImgFXFlags, NPC_SELF, IMGFX_FLAG_2000)
     EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ANIM, IMGFX_ANIM_UNFURL, 1, 1, 0)
     EVT_WAIT(15)
@@ -103,7 +103,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
         EVT_END_LOOP
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
     EVT_CALL(NpcJump0, NPC_SELF, -35, 0, 25, 23)
@@ -145,7 +145,7 @@ NpcData N(NpcData_Goomba_Ambush) = {
     },
     .init = &N(EVS_NpcInit_Goomba_Ambush),
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
 };
@@ -167,7 +167,7 @@ NpcData N(NpcData_Paragoomba) = {
         }
     },
     .settings = &N(NpcSettings_Paragoomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = PARAGOOMBA_DROPS,
     .animations = PARAGOOMBA_ANIMS,
 };

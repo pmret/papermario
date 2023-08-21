@@ -13,7 +13,7 @@ API_CALLABLE(N(MakeHammerDust)) {
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -53,32 +53,32 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_POUNDING_HIGH)
+        EVT_CALL(PlaySound, SOUND_TRD_POUNDING_HIGH)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Yellow_Hammering)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, -100, 240, 30)
         EVT_CALL(SetNpcYaw, NPC_KoopaBros_02, 90)
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySound, SOUND_POUNDING_LOW)
+        EVT_CALL(PlaySound, SOUND_TRD_POUNDING_LOW)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Yellow_Hammering)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, -35, 240, -75)
         EVT_CALL(SetNpcYaw, NPC_KoopaBros_02, 270)
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySound, SOUND_POUNDING_HIGH)
+        EVT_CALL(PlaySound, SOUND_TRD_POUNDING_HIGH)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Yellow_Hammering)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, -40, 240, 10)
         EVT_CALL(SetNpcYaw, NPC_KoopaBros_02, 270)
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySound, SOUND_POUNDING_LOW)
+        EVT_CALL(PlaySound, SOUND_TRD_POUNDING_LOW)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Yellow_Hammering)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, -110, 240, -20)
         EVT_CALL(SetNpcYaw, NPC_KoopaBros_02, 90)
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySound, SOUND_POUNDING_HIGH)
+        EVT_CALL(PlaySound, SOUND_TRD_POUNDING_HIGH)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Yellow_Hammering)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, -90, 240, 30)
         EVT_CALL(SetNpcYaw, NPC_KoopaBros_02, 90)
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySound, SOUND_POUNDING_LOW)
+        EVT_CALL(PlaySound, SOUND_TRD_POUNDING_LOW)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Yellow_Hammering)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, -30, 240, -50)
         EVT_CALL(SetNpcYaw, NPC_KoopaBros_02, 270)
@@ -144,7 +144,7 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
     EVT_WAIT(10 * DT)
     EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle, 5, MSG_CH1_00D5)
     EVT_CALL(GetNpcPos, NPC_KoopaBros_01, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_KoopaBros_01, EMOTE_EXCLAMATION, 0, 25, EMOTER_POS, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(25 * DT)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 270, 2)
@@ -208,7 +208,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_KoopaBros),
         .settings = &N(NpcSettings_KoopaBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Idle,
@@ -235,7 +235,7 @@ NpcData N(NpcData_KoopaBros)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_KoopaBros),
         .settings = &N(NpcSettings_KoopaBros),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Idle,

@@ -7,7 +7,7 @@
 NpcSettings N(NpcSettings_ChetRippo) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/GoombaFamily.inc.c"
@@ -68,7 +68,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(RemoveKeyItemAt, LVar1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, -90, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -94,7 +94,7 @@ EvtScript N(EVS_ItemPrompt_ToyTrain) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_DEFAULT)
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GB_StoryProgress, STORY_CH4_RETURNED_TOY_TRAIN)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
@@ -371,7 +371,7 @@ NpcData N(NpcData_Chapter4)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Red_Anim01,
@@ -398,7 +398,7 @@ NpcData N(NpcData_Chapter4)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_ShyGuy_02),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_ShyGuy_Red_Anim01,

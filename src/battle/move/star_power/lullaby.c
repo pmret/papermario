@@ -42,7 +42,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_WAIT(15)
-    EVT_CALL(PlaySound, SOUND_03F4)
+    EVT_CALL(PlaySound, SOUND_LULLABY)
     EVT_CALL(N(SpawnMusicNotesFX))
     EVT_WAIT(30)
     EVT_CALL(InitTargetIterator)

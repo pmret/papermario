@@ -12,7 +12,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTableBodySlam;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
@@ -137,8 +137,8 @@ void N(update)(void) {
                 }
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
-            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionResult * 12);
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
+            sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionQuality * 12);
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
                 return;
@@ -154,7 +154,7 @@ void N(update)(void) {
                 }
             } while (0); // required to match
 
-            battleStatus->unk_86 = 0;
+            battleStatus->actionResult = ACTION_RESULT_FAIL;
             if (battleStatus->actionSuccess == 1) {
                 func_80269160();
             }

@@ -8,7 +8,7 @@ EvtScript N(EVS_NpcAuxAI_Unused) = {
 NpcSettings N(NpcSettings_Unused) = {
     .height = 70,
     .radius = 25,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_Unused),
 };
 

@@ -7,7 +7,7 @@
 NpcSettings N(NpcSettings_BubbleFlower) = {
     .height = 56,
     .radius = 40,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Dummy.inc.c"
@@ -84,7 +84,7 @@ NpcData N(NpcData_BubbleFlower) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_BubbleFlower),
     .settings = &N(NpcSettings_BubbleFlower),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE,
     .drops = NO_DROPS,
     .animations = BUBULB_PINK_ANIMS,
     .tattle = MSG_NpcTattle_BubblePlant,
@@ -107,7 +107,7 @@ NpcData N(NpcData_Bzzap) = {
         }
     },
     .settings = &N(NpcSettings_Bzzap),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = BZZAP_DROPS,
     .animations = BZZAP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

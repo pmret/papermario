@@ -21,7 +21,7 @@ NpcData N(NpcData_Gulpit)[] = {
             }
         },
         .settings = &N(NpcSettings_Gulpit),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = GULPIT_DROPS,
         .animations = GULPIT_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

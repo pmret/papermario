@@ -9,7 +9,7 @@
 NpcSettings N(NpcSettings_Lakitu) = {
     .height = 32,
     .radius = 24,
-    .level = 20,
+    .level = ACTOR_LEVEL_LAKITU,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -17,7 +17,7 @@ NpcSettings N(NpcSettings_Lakitu) = {
 NpcSettings N(NpcSettings_Magikoopa) = {
     .height = 34,
     .radius = 24,
-    .level = 26,
+    .level = ACTOR_LEVEL_MAGIKOOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -89,7 +89,7 @@ EvtScript N(EVS_Scene_LakilesterLikesBeingGood) = {
 
 EvtScript N(EVS_GangRetreat) = {
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_FlyingMagikoopa, SOUND_019E, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_FlyingMagikoopa, SOUND_019E, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcFlagBits, NPC_FlyingMagikoopa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(InterpNpcYaw, NPC_FlyingMagikoopa, 270, 0)
         EVT_CALL(LoadPath, 60 * DT, EVT_PTR(N(RetreatPath_Magikoopa)), ARRAY_COUNT(N(RetreatPath_Magikoopa)), EASING_LINEAR)
@@ -104,7 +104,7 @@ EvtScript N(EVS_GangRetreat) = {
     EVT_END_THREAD
     EVT_WAIT(15 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_01, SOUND_019F, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_01, SOUND_019F, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcFlagBits, NPC_Lakitu_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(InterpNpcYaw, NPC_Lakitu_01, 270, 0)
         EVT_CALL(LoadPath, 60 * DT, EVT_PTR(N(RetreatPath_Lakitu_01)), ARRAY_COUNT(N(RetreatPath_Lakitu_01)), EASING_LINEAR)
@@ -130,7 +130,7 @@ EvtScript N(EVS_GangRetreat) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_03, SOUND_019F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Lakitu_03, SOUND_019F, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcFlagBits, NPC_Lakitu_03, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(InterpNpcYaw, NPC_Lakitu_03, 270, 0)
     EVT_CALL(LoadPath, 80 * DT, EVT_PTR(N(RetreatPath_Lakitu_03)), ARRAY_COUNT(N(RetreatPath_Lakitu_03)), EASING_LINEAR)
@@ -605,7 +605,7 @@ NpcData N(NpcData_MachineGang)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Lakitu_01),
         .settings = &N(NpcSettings_Lakitu),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
@@ -616,7 +616,7 @@ NpcData N(NpcData_MachineGang)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Lakitu_02),
         .settings = &N(NpcSettings_Lakitu),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
@@ -627,7 +627,7 @@ NpcData N(NpcData_MachineGang)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Lakitu_03),
         .settings = &N(NpcSettings_Lakitu),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = LAKITU_DROPS,
         .animations = LAKITU_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
@@ -638,7 +638,7 @@ NpcData N(NpcData_MachineGang)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Magikoopa),
         .settings = &N(NpcSettings_Magikoopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = MAGINO_DROPS,
         .animations = MAGIKOOPA_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,
@@ -649,7 +649,7 @@ NpcData N(NpcData_MachineGang)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_FlyingMagikoopa),
         .settings = &N(NpcSettings_Magikoopa),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
         .drops = MAGINO_DROPS,
         .animations = FLYING_MAGIKOOPA_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_PuffPuffOperator,

@@ -17,13 +17,13 @@ EvtScript N(EVS_NpcAI_Toad_Guard) = {
 NpcSettings N(NpcSettings_Toad_Guard) = {
     .height = 30,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_Toad_Guard),
 };
 
 NpcSettings N(NpcSettings_ToadKid_Guard) = {
     .height = 23,
     .radius = 19,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_Toad_Guard),
 };

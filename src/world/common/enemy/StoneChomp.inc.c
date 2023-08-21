@@ -16,7 +16,7 @@ API_CALLABLE(N(StoneChompFXA)) {
     npc->blur.chomp = blurData;
 
     bp.flags = NPC_FLAG_IGNORE_ENTITY_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION
-        | NPC_FLAG_8 | NPC_FLAG_INVISIBLE;
+        | NPC_FLAG_FLYING | NPC_FLAG_INVISIBLE;
     bp.initialAnim = ANIM_StoneChomp_Chain;
     bp.onUpdate = NULL;
     bp.onRender = NULL;
@@ -199,7 +199,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp) = {
 NpcSettings N(NpcSettings_StoneChomp) = {
     .height = 32,
     .radius = 32,
-    .level = 14,
+    .level = ACTOR_LEVEL_STONE_CHOMP,
     .otherAI = &N(EVS_NpcAuxAI_StoneChomp),
     .ai = &N(EVS_NpcAI_StoneChomp),
     .onHit = &N(EVS_NpcHit_StoneChomp),

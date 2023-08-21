@@ -20,16 +20,25 @@ typedef struct IceShardBlueprint {
 
 extern AnimScript toy_tank_as_close_hatch;
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(onHit);
 extern EvtScript N(shake_tank);
 extern EvtScript N(onDeath);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
+};
+
+enum N(ActorVars) {
+    AVAR_Unk_5      = 5,
+    AVAR_Unk_9      = 9,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
 };
 
 s32 N(DefenseTable)[] = {
@@ -81,11 +90,11 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_80 | ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_LIGHT_BULB,
-    .level = 0,
+    .level = ACTOR_LEVEL_LIGHT_BULB,
     .maxHP = 8,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -101,24 +110,24 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(SetActorPos, ACTOR_SELF, 116, 70, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -131,14 +140,14 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(onHit))
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(func_8026E914, LVar0, LVar1)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
                 EVT_WAIT(30)
@@ -163,7 +172,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_RETURN
     EVT_END
 };
@@ -175,7 +184,7 @@ EvtScript N(onHit) = {
 };
 
 EvtScript N(shake_tank) = {
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 9, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
         EVT_WAIT(30)
@@ -386,10 +395,10 @@ EvtScript N(onDeath) = {
     EVT_CALL(func_80218250_52B8F0)
     EVT_CALL(EnableModel, 39, FALSE)
     EVT_CALL(EnableModel, 41, FALSE)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, 5, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_5, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(RemoveEffect, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_ENEMY1, 5, 0)
+        EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_5, 0)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

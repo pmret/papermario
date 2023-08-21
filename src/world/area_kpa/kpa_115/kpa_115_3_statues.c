@@ -55,7 +55,7 @@ EvtScript N(EVS_PushMiddleStatue_Impl) = {
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateGroup, MODEL_g20, LVar0, 0, 0)

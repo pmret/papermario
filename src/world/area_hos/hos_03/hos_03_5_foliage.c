@@ -9,8 +9,8 @@ EvtScript N(EVS_ShakeTree_StarHaven) = {
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
     EVT_BUF_READ1(LVar5)
     EVT_CALL(GetPlayerPos, LVar6, LVarF, LVar8)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_SMASH_GOOMNUT_TREE, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_SHAKE_TREE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SMACK_TREE, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_SHAKE_TREE_LEAVES, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_IF_NE(LVar1, 0)
             EVT_WAIT(1)

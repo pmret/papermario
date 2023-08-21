@@ -250,7 +250,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_01F4, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtModel, MODEL_t1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_t1)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -287,7 +287,7 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_01F4, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtModel, MODEL_t2_1, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_t2_1)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
@@ -334,13 +334,13 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_01F4, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtModel, MODEL_t3_2, SOUND_OMO_BARRICADE_DROP, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetModelCenter, MODEL_t3_2)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_THREAD
         EVT_WAIT(35)
-        EVT_CALL(PlaySound, SOUND_LOOP_4D)
+        EVT_CALL(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
     EVT_END_THREAD
     EVT_SET(LVar0, 1)
     EVT_SET(LVar5, 1)
@@ -366,8 +366,8 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(165)
-    EVT_CALL(PlaySound, SOUND_LRAW_036D | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_036D)
+    EVT_CALL(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
     EVT_CALL(SetNpcPos, NPC_ShyGuy_01, -285, 0, 35)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuy_01, EVT_FLOAT(8.0))
@@ -389,11 +389,11 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
         EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim10)
     EVT_END_THREAD
     EVT_CALL(NpcJump0, NPC_ShyGuy_01, -45, 0, -8, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_ACTOR_TRIP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_WAIT(50)
     EVT_LOOP(2)
-        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_DEFAULT)
         EVT_WAIT(7)
     EVT_END_LOOP
     EVT_CALL(SetNpcRotationPivot, NPC_ShyGuy_01, 0)
@@ -401,13 +401,13 @@ EvtScript N(EVS_Scene_BreakBarricade) = {
     EVT_CALL(NpcJump0, NPC_ShyGuy_01, -50, 0, -8, 10)
     EVT_CALL(InterpNpcYaw, NPC_ShyGuy_01, 270, 0)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_03A2, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_01, ANIM_ShyGuy_Red_Anim04)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuy_01, EVT_FLOAT(6.0))
     EVT_CALL(NpcMoveTo, NPC_ShyGuy_01, 100, 50, 0)
     EVT_CALL(RemoveNpc, NPC_ShyGuy_01)
     EVT_WAIT(30)
-    EVT_CALL(StopSound, SOUND_03A2)
+    EVT_CALL(StopSound, SOUND_SHY_GUY_FLEE_LOOP)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)

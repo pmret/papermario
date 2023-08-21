@@ -33,7 +33,7 @@ NpcSettings N(NpcSettings_Archeologist_Wander) = {
     .height = 35,
     .radius = 24,
     .ai = &N(EVS_NpcAI_Archeologist),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = ENEMY_AI_FLAG_10,
 };
 
@@ -41,7 +41,7 @@ NpcSettings N(NpcSettings_Archeologist) = {
     .height = 42,
     .radius = 24,
     .ai = &N(EVS_NpcAI_Archeologist),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Dryite_Wander.inc.c"
@@ -269,7 +269,7 @@ EvtScript N(EVS_NpcIdle_Mouser_03) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 150, 18, 20)
     EVT_CALL(EnableNpcBlur, NPC_SELF, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0174, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0174, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcMoveTo, NPC_SELF, -83, 11, 20 * DT)
     EVT_CALL(NpcMoveTo, NPC_SELF, -239, 5, 20 * DT)
     EVT_CALL(NpcMoveTo, NPC_SELF, -371, 5, 20 * DT)
@@ -363,7 +363,7 @@ NpcData N(PassiveNPCs)[] = {
         .territory = { .temp = { -303, 0, 22, 146, 38, -32767, 1, 0, 0, 0, 0, 0, 0, 1 }},
         .init = &N(EVS_NpcInit_Archeologist),
         .settings = &N(NpcSettings_Archeologist),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             ANIM_Archeologist_Idle,
@@ -392,7 +392,7 @@ NpcData N(PassiveNPCs)[] = {
         .territory = { .temp = { -20, 0, 40, 60, 0, -32767, 0, 0, 0, 0, 0, 0, 0, 1 }},
         .init = &N(EVS_NpcInit_MrE),
         .settings = &N(NpcSettings_Dryite_Wander),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = DRYITE_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteE,
@@ -403,7 +403,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_DisguisedMoustafa),
         .settings = &N(NpcSettings_Mouser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = DISGUISED_MOUSTAFA_ANIMS,
         .tattle = MSG_NpcTattle_Sheek,
@@ -414,7 +414,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_ToadHouseKeeper),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
         .tattle = MSG_NpcTattle_DRO_ToadHouseToad,
@@ -425,7 +425,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcAuxAI_Merlee),
         .settings = &N(NpcSettings_Merlee),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = {
             ANIM_WorldMerlee_Idle,
@@ -453,7 +453,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Moustafa),
         .settings = &N(NpcSettings_Mouser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = MOUSTAFA_ANIMS,
         .tattle = MSG_NpcTattle_Moustafa,
@@ -464,7 +464,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Dryite_02),
         .settings = &N(NpcSettings_Dryite),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_DRO_DryiteF,
@@ -475,7 +475,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Dryite_03),
         .settings = &N(NpcSettings_Dryite),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = DRYITE_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_DRO_VisitedShootingStarSummit,
@@ -486,7 +486,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 180,
         .init = &N(EVS_NpcInit_Mouser_01),
         .settings = &N(NpcSettings_Mouser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = MOUSER_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_CrushingOnMerlee,
@@ -497,7 +497,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Mouser_02),
         .settings = &N(NpcSettings_Mouser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = MOUSER_BLUE_ANIMS,
         .tattle = MSG_NpcTattle_DRO_TellsTales,
@@ -508,7 +508,7 @@ NpcData N(PassiveNPCs)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Mouser_03),
         .settings = &N(NpcSettings_Mouser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = MOUSER_PURPLE_ANIMS,
     },

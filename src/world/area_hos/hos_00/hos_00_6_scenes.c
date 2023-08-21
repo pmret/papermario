@@ -202,7 +202,7 @@ EvtScript N(EVS_Scene_MeetingTwink) = {
     EVT_CALL(SetNpcJumpscale, NPC_Twink, 0)
     EVT_ADD(LVar0, -10)
     EVT_CALL(NpcJump0, NPC_Twink, LVar0, 20, LVar2, 15 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, 0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_VacantStare)
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Cringe)
     EVT_THREAD

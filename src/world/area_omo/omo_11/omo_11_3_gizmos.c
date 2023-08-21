@@ -125,7 +125,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
     s32 j, k;
 
     if (isInitialCall) {
-        sfx_play_sound_at_position(SOUND_LOOP_OMO_ROTATING_WHEEL, SOUND_SPACE_MODE_0, 315.0f, 125.0f, -100.0f);
+        sfx_play_sound_at_position(SOUND_LOOP_OMO_ROTATING_WHEEL, SOUND_SPACE_DEFAULT, 315.0f, 125.0f, -100.0f);
         script->functionTempPtr[0] = it = heap_malloc(sizeof(*it) * ARRAY_COUNT(N(RotatingPlatformModels)));
         script->functionTemp[1] = 0;
 

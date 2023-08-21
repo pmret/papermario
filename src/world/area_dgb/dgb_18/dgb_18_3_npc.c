@@ -40,7 +40,7 @@ API_CALLABLE(N(UnusedChasePlayer)) {
 NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
     .radius = 24,
-    .level = 13,
+    .level = ACTOR_LEVEL_CLUBBA,
 };
 
 EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
@@ -62,7 +62,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_LOOP(3)
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
-        EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_MODE_0, 382, 0, 218)
+        EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_DEFAULT, 382, 0, 218)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
         EVT_WAIT(20)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -84,7 +84,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookClosely)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -97,7 +97,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_END_LOOP
     EVT_THREAD
         EVT_LOOP(3)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.3))
             EVT_WAIT(5)
         EVT_END_LOOP
@@ -118,7 +118,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 5, MSG_CH3_00F4)
@@ -131,14 +131,14 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
             EVT_IF_EQ(LVar0, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.3))
             EVT_WAIT(9)
             EVT_CALL(GetSelfVar, 0, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(0.15))
             EVT_WAIT(12)
         EVT_END_LOOP
@@ -228,7 +228,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_WAIT(15)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim24)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_INHALE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_INHALE, SOUND_SPACE_DEFAULT)
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(SetSelfVar, 1, 0)
@@ -237,12 +237,12 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
             EVT_IF_EQ(LVar0, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_EXHALE, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_EXHALE, SOUND_SPACE_DEFAULT)
             EVT_CALL(RandInt, 10, LVar1)
             EVT_ADD(LVar1, 15)
             EVT_CALL(ShowSleepBubble, NPC_Tubba, 0, 0, 2, 628, 121, 127, LVar1, LVar0)
             EVT_WAIT(48)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_INHALE, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_INHALE, SOUND_SPACE_DEFAULT)
             EVT_CALL(RandInt, 10, LVar1)
             EVT_ADD(LVar1, 10)
             EVT_CALL(SetSleepBubbleTimeLeft, LVar0, LVar1)
@@ -271,7 +271,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Asleep) = {
     EVT_WAIT(15)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim24)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_INHALE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_INHALE, SOUND_SPACE_DEFAULT)
     EVT_WAIT(30)
     EVT_THREAD
         EVT_CALL(SetSelfVar, 1, 0)
@@ -280,12 +280,12 @@ EvtScript N(EVS_NpcIdle_Tubba_Asleep) = {
             EVT_IF_EQ(LVar0, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_EXHALE, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_EXHALE, SOUND_SPACE_DEFAULT)
             EVT_CALL(RandInt, 10, LVar1)
             EVT_ADD(LVar1, 15)
             EVT_CALL(ShowSleepBubble, NPC_Tubba, 0, 0, 2, 628, 121, 127, LVar1, LVar0)
             EVT_WAIT(48)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_INHALE, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_INHALE, SOUND_SPACE_DEFAULT)
             EVT_CALL(RandInt, 10, LVar1)
             EVT_ADD(LVar1, 10)
             EVT_CALL(SetSleepBubbleTimeLeft, LVar0, LVar1)
@@ -298,13 +298,13 @@ EvtScript N(EVS_NpcIdle_Tubba_Asleep) = {
 
 EvtScript N(EVS_NpcAI_Tubba_WakeUp) = {
     EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNORE_EXHALE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_SNORE_EXHALE, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowSleepBubble, NPC_Tubba, 0, 50, 2, 552, 111, 128, 30, LVar0)
     EVT_WAIT(360)
     EVT_CALL(SetSleepBubbleTimeLeft, LVar0, 20)
     EVT_CALL(SetNpcVar, NPC_SELF, 1, 2)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SRAW_0E_A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNAP_AWAKE_A, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim19)
     EVT_WAIT(30)
     EVT_THREAD
@@ -510,7 +510,7 @@ NpcData N(NpcData_Tubba) = {
     },
     .init = &N(EVS_NpcInit_Tubba),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = TUBBA_ANGRY_ANIMS,
 };
@@ -521,7 +521,7 @@ NpcData N(NpcData_Yakkey) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Yakkey),
     .settings = &N(NpcSettings_Yakkey),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Yakkey_Idle,

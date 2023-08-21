@@ -146,7 +146,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
-            lakilester->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            lakilester->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
@@ -603,13 +603,13 @@ API_CALLABLE(N(UseAbility)) {
             } else {
                 partnerStatus->shouldResumeAbility = FALSE;
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
-                lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
+                lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING);
                 lakilester->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 set_action_state(ACTION_STATE_RIDE);
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideLaki);
                 lakilester->curAnim = ANIM_WorldLakilester_Walk;
                 N(MountState) = MOUNT_STATE_IN_PROGRESS; // unexpected
-                lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
+                lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING);
                 lakilester->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
                 partnerStatus->actingPartner = PARTNER_LAKILESTER;
                 partnerStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
@@ -695,7 +695,7 @@ API_CALLABLE(N(UseAbility)) {
                 N(LockingPlayerInput) = TRUE;
             }
 
-            lakilester->flags &= ~NPC_FLAG_8;
+            lakilester->flags &= ~NPC_FLAG_FLYING;
             lakilester->flags |= (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_IGNORE_PLAYER_COLLISION);
             set_action_state(ACTION_STATE_RIDE);
             N(MountState) = MOUNT_STATE_IN_PROGRESS;
@@ -726,7 +726,7 @@ API_CALLABLE(N(UseAbility)) {
             N(AbilityState) = RIDE_STATE_MOUNT_2;
             break;
         case RIDE_STATE_MOUNT_2:
-            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             // fallthrough
         case RIDE_STATE_MOUNT_3:
@@ -817,7 +817,7 @@ API_CALLABLE(N(UseAbility)) {
                     N(AbilityState) = RIDE_STATE_DISMOUNT_1;
                 } else {
                     if (!(playerStatus->animFlags & PA_FLAG_FORCED_PARTNER_ABILITY_END)) {
-                        sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                        sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     }
                     playerStatus->animFlags &= ~PA_FLAG_FORCED_PARTNER_ABILITY_END;
                 }
@@ -888,7 +888,7 @@ API_CALLABLE(N(UseAbility)) {
 
         if (N(AbilityState) == RIDE_STATE_FINISH_1) {
             N(MountState) = MOUNT_STATE_NONE;
-            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
+            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_FLYING);
 
             if (N(PlayerCollisionDisabled)) {
                 N(PlayerCollisionDisabled) = FALSE;
@@ -920,7 +920,7 @@ API_CALLABLE(N(UseAbility)) {
         }
 
         if (N(AbilityState) == RIDE_STATE_FINISH_2) {
-            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
+            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_FLYING);
             partnerStatus->actingPartner = PARTNER_NONE;
             partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
@@ -1020,7 +1020,7 @@ API_CALLABLE(N(PutAway)) {
 
     switch (N(PutAwayState)) {
         case PUT_AWAY_FINISH_1:
-            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
+            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING);
 
             if (N(PlayerCollisionDisabled)) {
                 N(PlayerCollisionDisabled) = FALSE;
@@ -1166,7 +1166,7 @@ API_CALLABLE(N(EnterMap)) {
                 }
             }
 
-            sfx_play_sound_at_npc(SOUND_FLIGHT, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_FLIGHT, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             playerStatus->anim = ANIM_MarioW2_RideLaki;
             playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;

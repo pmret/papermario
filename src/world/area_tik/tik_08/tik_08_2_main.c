@@ -33,7 +33,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(PlaySound, SOUND_LOOP_33)
-    EVT_CALL(PlaySoundAtF, SOUND_LOOP_34, SOUND_SPACE_MODE_1, -30, -30, -85)
+    EVT_CALL(PlaySoundAtF, SOUND_LOOP_34, SOUND_SPACE_WITH_DEPTH, -30, -30, -85)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_CALL(EnableTexPanning, MODEL_nagare1, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_o92, TRUE)

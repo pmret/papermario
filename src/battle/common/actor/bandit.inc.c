@@ -7,10 +7,10 @@
 #define NAMESPACE A(bandit)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_Init_Coin);
 extern EvtScript N(EVS_Idle);
-extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_Init_Coin);
 extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_HandleEvent);
 
 BSS s32 N(DropCoinScript)[1];
 
@@ -135,7 +135,7 @@ ActorPartBlueprint N(CoinParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BANDIT,
-    .level = 9,
+    .level = ACTOR_LEVEL_BANDIT,
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
@@ -158,7 +158,7 @@ ActorBlueprint NAMESPACE = {
 ActorBlueprint N(coin) = {
     .flags = ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_BANDIT,
-    .level = 9,
+    .level = ACTOR_LEVEL_BANDIT,
     .maxHP = 5,
     .partCount = ARRAY_COUNT(N(CoinParts)),
     .partsData = N(CoinParts),
@@ -296,7 +296,7 @@ EvtScript N(EVS_DropCoin) = {
             EVT_END_IF
             EVT_GOTO(5)
             EVT_LABEL(10)
-            EVT_CALL(EnableActorBlur, LVarA, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableActorBlur, LVarA, ACTOR_BLUR_ENABLE)
             EVT_CALL(SetTargetActor, LVarA, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, LVarA)
             EVT_CALL(JumpToGoal, LVarA, 15, FALSE, FALSE, FALSE)
@@ -314,7 +314,7 @@ EvtScript N(EVS_DropCoin) = {
 EvtScript N(EVS_HandleEvent) = {
     EVT_USE_ARRAY(EVT_PTR(N(DropCoinScript)))
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
@@ -492,7 +492,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Idle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -500,7 +500,7 @@ EvtScript N(EVS_HandleEvent) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     // if carrying a coin, run away
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HasCoin, LVar0)
@@ -577,7 +577,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -699,7 +699,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

@@ -8,7 +8,7 @@
 extern EvtScript N(UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -28,7 +28,7 @@ EvtScript N(EVS_UseMove) = {
             EVT_SET(LVarF, 10)
             EVT_EXEC_WAIT(N(UseMove_Impl))
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_RETURN
     EVT_END
 };
@@ -78,9 +78,9 @@ EvtScript N(UseMove_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
@@ -89,9 +89,9 @@ EvtScript N(UseMove_Impl) = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_010E)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarE, 48)
     EVT_END_SWITCH

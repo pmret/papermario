@@ -5,7 +5,7 @@
 NpcSettings N(NpcSettings_Kooper) = {
     .height = 35,
     .radius = 24,
-    .level = 6,
+    .level = ACTOR_LEVEL_KOOPA_TROOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -13,14 +13,14 @@ NpcSettings N(NpcSettings_Kooper) = {
 NpcSettings N(NpcSettings_Goompa) = {
     .height = 22,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };
 
 NpcSettings N(NpcSettings_KoopaKoot) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Kolorado.inc.c"
@@ -28,7 +28,7 @@ NpcSettings N(NpcSettings_KoopaKoot) = {
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
     .radius = 45,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Luigi.h"
@@ -258,7 +258,7 @@ EvtScript N(EVS_Imposter_Unmask) = {
     EVT_CALL(SetNpcPos, LVar3, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcFlagBits, LVar3, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcPos, LVar4, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 8 * 360, 40, EASING_QUADRATIC_OUT)
     EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
@@ -274,7 +274,7 @@ EvtScript N(EVS_Imposter_Unmask) = {
         EVT_CALL(SetNpcAnimation, LVar4, ANIM_Duplighost_Anim04)
         EVT_CALL(InterpNpcYaw, LVar4, 90, 0)
         EVT_CALL(SetNpcSpeed, LVar4, EVT_FLOAT(6.5))
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_DUPLIGHOST_LEAP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_DUPLIGHOST_LEAP, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcMoveTo, LVar4, 0, LVar2, 0)
         EVT_CALL(SetNpcPos, LVar4, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
@@ -300,7 +300,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeGoompa, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_GoompaGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_GoompaGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_GoompaGhost, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_GoompaGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -311,7 +311,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeLuigi, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_LuigiGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_LuigiGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_LuigiGhost, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_LuigiGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -322,7 +322,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeKoopaKoot, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_KoopaKootGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_KoopaKootGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_KoopaKootGhost, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_KoopaKootGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -333,7 +333,7 @@ EvtScript N(EVS_RevealEveryImposter) = {
             EVT_CALL(SetNpcPos, NPC_FakeKolorado, NPC_DISPOSE_LOCATION)
             EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
             EVT_CALL(SetNpcPos, NPC_KoloradoGhost, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_KoloradoGhost, SOUND_SMOKE_BURST, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_KoloradoGhost, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(NpcMoveTo, NPC_KoloradoGhost, LVar0, LVar2, 30)
         EVT_END_THREAD
@@ -628,11 +628,11 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_WAIT(60)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(35)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1054, SOUND_01E4, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1054, SOUND_TROMP_CRASH, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 34, 22, 1, 10, 30)
     EVT_CALL(EnableModel, MODEL_o1024, FALSE)
     EVT_CALL(EnableModel, MODEL_o1026, TRUE)
@@ -1151,7 +1151,7 @@ NpcData N(NpcData_Imposters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ExamplePlayer),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1179,7 +1179,7 @@ NpcData N(NpcData_Imposters)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_ExampleKooper),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -1209,7 +1209,7 @@ NpcData N(NpcData_Duplighosts)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Duplighost_Goompa),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1237,7 +1237,7 @@ NpcData N(NpcData_Duplighosts)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Duplighost_Luigi),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1265,7 +1265,7 @@ NpcData N(NpcData_Duplighosts)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Duplighost_KoopaKoot),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1293,7 +1293,7 @@ NpcData N(NpcData_Duplighosts)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Duplighost_Kolorado),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1321,7 +1321,7 @@ NpcData N(NpcData_Duplighosts)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Duplighost_Controller),
         .settings = &N(NpcSettings_Duplighost),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Duplighost_Anim02,
@@ -1492,7 +1492,7 @@ NpcData N(NpcData_Targets)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TargetKooper),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -1519,7 +1519,7 @@ NpcData N(NpcData_Targets)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TargetGoompa),
         .settings = &N(NpcSettings_Goompa),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Goompa_Idle,
@@ -1547,7 +1547,7 @@ NpcData N(NpcData_Targets)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TargetLuigi),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = LUIGI_ANIMS,
         .extraAnimations = N(ExtraAnims_Luigi),
@@ -1558,7 +1558,7 @@ NpcData N(NpcData_Targets)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TargetKoopaKoot),
         .settings = &N(NpcSettings_KoopaKoot),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaKoot_Idle,
@@ -1586,7 +1586,7 @@ NpcData N(NpcData_Targets)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_TargetKolorado),
         .settings = &N(NpcSettings_Kolorado),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .extraAnimations = N(ExtraAnims_Kolorado),

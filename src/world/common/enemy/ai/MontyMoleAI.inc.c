@@ -114,7 +114,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
         }
         script->functionTemp[1]--;
     }
-    if (!(npc->flags & (NPC_FLAG_8 | NPC_FLAG_GROUNDED))) {
+    if (!(npc->flags & (NPC_FLAG_FLYING | NPC_FLAG_GROUNDED))) {
         npc->homePos.x = npc->pos.x;
         npc->homePos.z = npc->pos.z;
     }

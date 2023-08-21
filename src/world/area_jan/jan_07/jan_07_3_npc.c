@@ -8,7 +8,7 @@
 NpcSettings N(NpcSettings_PutridPiranha) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_PutridPiranha) = {
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_01F0, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
         EVT_WAIT(20)
         EVT_IF_EQ(AF_JAN_02, TRUE)
             EVT_BREAK_LOOP
@@ -30,9 +30,9 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_IF_EQ(GF_JAN07_YoshiCriedForHelp, FALSE)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00B4, 320, 60)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
-        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(30)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -183, 50, -11)
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcIdle_YoshiKid) = {
     EVT_WAIT(15)
     EVT_SET(AF_JAN_02, TRUE)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_WAIT(30)
@@ -181,11 +181,11 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(InterpNpcYaw, NPC_PutridPiranha_01, 270, 0)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim04)
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_PutridPiranha_02, EMOTE_EXCLAMATION, 0, 38, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(3)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim04)
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_0262, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_PutridPiranha_01, EMOTE_EXCLAMATION, 0, 35, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(35)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim01)
@@ -198,7 +198,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_01, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B1, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B1, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim01)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim04)
@@ -208,7 +208,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_20B1, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_20B1, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim01)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim04)
@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
         EVT_ADD(LVar0, 30)
@@ -228,7 +228,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
         EVT_ADD(LVar0, 30)
@@ -236,17 +236,17 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
     EVT_LOOP(3)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B3, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B3, SOUND_SPACE_DEFAULT)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim05)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim05)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim06)
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_03B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_03B2, SOUND_SPACE_DEFAULT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
     EVT_RETURN
@@ -311,7 +311,7 @@ NpcData N(NpcData_SpearGuy)[] = {
             }
         },
         .settings = &N(NpcSettings_SpearGuy_Wander),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = SPEAR_GUY_DROPS,
         .animations = SPEAR_GUY_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -322,7 +322,7 @@ NpcData N(NpcData_SpearGuy)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_SpearGuy_Hitbox),
         .settings = &N(NpcSettings_SpearGuy_Hitbox),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = SPEAR_GUY_ANIMS,
     },
@@ -335,7 +335,7 @@ NpcData N(NpcData_PutridPiranhas)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_PutridPiranha),
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
@@ -344,7 +344,7 @@ NpcData N(NpcData_PutridPiranhas)[] = {
         .pos = { 80.0f, 0.0f, 20.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
     },
@@ -356,7 +356,7 @@ NpcData N(NpcData_YoshiKid) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_YoshiKid),
     .settings = &N(NpcSettings_YoshiKid),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = YOSHI_KID_YELLOW_ANIMS,
     .tattle = MSG_NpcTattle_YellowYoshiKid,

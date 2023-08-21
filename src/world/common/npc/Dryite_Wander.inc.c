@@ -18,6 +18,6 @@ NpcSettings N(NpcSettings_Dryite_Wander) = {
     .height = 26,
     .radius = 23,
     .ai = &N(EVS_NpcAI_Dryite_Wander),
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = 16,
 };

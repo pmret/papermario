@@ -20,7 +20,7 @@ NpcData N(NpcData_DryBones)[] = {
             }
         },
         .settings = &N(NpcSettings_DryBones),
-        .flags = ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_FLYING,
         .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
     },
@@ -47,7 +47,7 @@ NpcData N(NpcData_DryBones_02)[] = {
             }
         },
         .settings = &N(NpcSettings_DryBones),
-        .flags = ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_FLYING,
         .drops = DRY_BONES_DROPS,
         .animations = DRY_BONES_ANIMS,
     },

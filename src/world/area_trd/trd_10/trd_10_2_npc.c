@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcAI_KoopaBros_01) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F6, 300, 100)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F7, 300, 100)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F8, 300, 100)
-    EVT_CALL(PlaySoundAt, SOUND_01E2, SOUND_SPACE_MODE_0, 0, 0, 0)
+    EVT_CALL(PlaySoundAt, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT, 0, 0, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(1.0))
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH1_00F9, 300, 100)
     EVT_WAIT(30 * DT)
@@ -170,7 +170,7 @@ EvtScript N(EVS_NpcDefeat_KoopaBros_01) = {
                 EVT_CALL(DisablePlayerInput, FALSE)
             EVT_END_THREAD
             EVT_WAIT(120)
-            EVT_CALL(PlaySoundAt, SOUND_01E2, SOUND_SPACE_MODE_0, 0, 0, 0)
+            EVT_CALL(PlaySoundAt, SOUND_DISTANT_THUD, SOUND_SPACE_DEFAULT, 0, 0, 0)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(0.5))
             EVT_WAIT(15)
             EVT_SET(GF_TRD10_Defeated_KoopaBros, TRUE)
@@ -293,7 +293,7 @@ NpcSettings N(NpcSettings_KoopaBros_01) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_01),
     .aux = &N(EVS_NpcAux_KoopaBros_01),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_01),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_02) = {
@@ -306,7 +306,7 @@ NpcSettings N(NpcSettings_KoopaBros_02) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_02),
     .aux = &N(EVS_NpcAux_KoopaBros_02),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_02),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_03) = {
@@ -319,7 +319,7 @@ NpcSettings N(NpcSettings_KoopaBros_03) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_03),
     .aux = &N(EVS_NpcAux_KoopaBros_03),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_03),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_KoopaBros_04) = {
@@ -332,7 +332,7 @@ NpcSettings N(NpcSettings_KoopaBros_04) = {
     .onHit = &N(EVS_NpcHit_KoopaBros_04),
     .aux = &N(EVS_NpcAux_KoopaBros_04),
     .onDefeat = &N(EVS_NpcDefeat_KoopaBros_04),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcData N(NpcData_KoopaBros_01)[] = {
@@ -341,7 +341,7 @@ NpcData N(NpcData_KoopaBros_01)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_KoopaBros_01),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Black_Idle,
@@ -367,7 +367,7 @@ NpcData N(NpcData_KoopaBros_01)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_KoopaBros_02),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Red_Idle,
@@ -393,7 +393,7 @@ NpcData N(NpcData_KoopaBros_01)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_KoopaBros_03),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Yellow_Idle,
@@ -419,7 +419,7 @@ NpcData N(NpcData_KoopaBros_01)[] = {
         .pos = { 0.0f, 0.0f, 0.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_KoopaBros_04),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_NO_DROPS,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_KoopaBros_Green_Idle,

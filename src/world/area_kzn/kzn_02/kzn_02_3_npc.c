@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Thrown)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, -655, 20, 0, 20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
     EVT_CALL(NpcJump0, NPC_SELF, -645, 20, 0, 5)
@@ -88,7 +88,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
             EVT_GOTO(15)
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TOUCH_LAVA, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TOUCH_LAVA, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, -700, 150, 0, 35)
     EVT_THREAD
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
@@ -99,7 +99,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 2)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, -760, 50, -40, 10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_WAIT(4)
@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 2)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, -760, 40, -40, 10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_WAIT(4)
@@ -192,7 +192,7 @@ NpcData N(NpcData_LavaBubble) = {
         }
     },
     .settings = &N(NpcSettings_LavaBubble),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

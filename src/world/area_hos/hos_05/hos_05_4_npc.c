@@ -157,7 +157,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_CALL(NpcJump0, NPC_Eldstar, LVar0, LVar1, LVar2, 5)
         EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Idle)
         EVT_ADD(LVar7, 20)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, LVar6, LVar7, LVar8)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, LVar6, LVar7, LVar8)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar6, LVar7, LVar8, 10)
     EVT_END_THREAD
     EVT_THREAD
@@ -210,32 +210,32 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
         EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 2, 0, 154, 85, EVT_FLOAT(2.8), 100)
         EVT_CALL(PlaySound, SOUND_RELEASE_ENERGY)
         EVT_WAIT(115)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0188, 0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
         EVT_ADD(LVar7, 20)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar6, LVar7, LVar8, EVT_FLOAT(0.3), 30)
     EVT_END_THREAD
     EVT_WAIT(40)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, 10, 154, 88)
+    EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, 10, 154, 88)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 10, 154, 88, 10)
     EVT_WAIT(6)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, 10, 154, 88)
+    EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, 10, 154, 88)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 10, 154, 88, 15)
     EVT_WAIT(6)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, -10, 154, 88)
+    EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, -10, 154, 88)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, -10, 154, 88, 20)
     EVT_WAIT(6)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, 10, 154, 88)
+    EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, 10, 154, 88)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 10, 154, 88, 25)
     EVT_WAIT(6)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
     EVT_LOOP(3)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, 0, 154, 88)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, 0, 154, 88)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 0, 154, 88, 30)
         EVT_WAIT(6)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, -10, 154, 88)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, -10, 154, 88)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, -10, 154, 88, 30)
         EVT_WAIT(6)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_1F, 0, 10, 154, 88)
+        EVT_CALL(PlaySoundAt, SOUND_SEQ_STAR_SPIRIT_CAST, SOUND_SPACE_DEFAULT, 10, 154, 88)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, 10, 154, 88, 30)
         EVT_WAIT(6)
     EVT_END_LOOP
@@ -389,7 +389,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = MAMAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Mamar),
@@ -400,7 +400,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = SKOLAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Skolar),
@@ -411,7 +411,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = MUSKULAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Muskular),
@@ -422,7 +422,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = MISSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Misstar),
@@ -433,7 +433,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = KLEVAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Klevar),
@@ -444,7 +444,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = KALMAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Kalmar),
@@ -455,7 +455,7 @@ NpcData N(NpcData_StarSpirits)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_StarSpirit),
         .settings = &N(NpcSettings_StarSpirit),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = ELDSTAR_ANIMS,
         .extraAnimations = N(ExtraAnims_Eldstar),
@@ -493,7 +493,7 @@ NpcData N(NpcData_Thieves)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Bowser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = BOWSER_ANIMS,
         .extraAnimations = N(ExtraAnims_Bowser),
@@ -503,7 +503,7 @@ NpcData N(NpcData_Thieves)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Bowser),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = BOWSER_ANIMS,
         .extraAnimations = N(ExtraAnims_Bowser),
@@ -513,7 +513,7 @@ NpcData N(NpcData_Thieves)[] = {
         .pos = { NPC_DISPOSE_LOCATION },
         .yaw = 270,
         .settings = &N(NpcSettings_Kammy_Flying),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = KAMMY_ANIMS,
         .extraAnimations = N(ExtraAnims_Kammy),
@@ -523,7 +523,7 @@ NpcData N(NpcData_Thieves)[] = {
         .pos = { 0.0f, 174.0f, 0.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_StarRod),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = STAR_ROD_ANIMS,
     },

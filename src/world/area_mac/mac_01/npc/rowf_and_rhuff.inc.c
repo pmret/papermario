@@ -413,7 +413,7 @@ EvtScript N(EVS_Rhuff_RevealBadges) = {
     EVT_SET(MF_BadgeShopOpen, TRUE)
     EVT_CALL(SetNpcYaw, NPC_Rowf, 270)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_ROWF_OPEN_SHOP, SOUND_SPACE_MODE_0, -220, 37, 271)
+        EVT_CALL(PlaySoundAt, SOUND_ROWF_OPEN_SHOP, SOUND_SPACE_DEFAULT, -220, 37, 271)
         EVT_CALL(MakeLerp, 0, -220, 30, EASING_COS_BOUNCE)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Rhuff_RevealBadges) = {
     EVT_END_THREAD
     EVT_CALL(EnableModel, MODEL_ju_1, TRUE)
     EVT_CALL(N(RevealRowfBadges))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PULL_RUG_OUT, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PULL_RUG_OUT, SOUND_SPACE_DEFAULT)
     EVT_USE_BUF(EVT_PTR(N(D_802555AC_815E2C)))
     EVT_LOOP(50)
         EVT_BUF_READ2(LVar0, MV_RowfRugRippleAmount)
@@ -488,7 +488,7 @@ EvtScript N(EVS_Rhuff_HideBadges) = {
     EVT_END_IF
     EVT_CALL(NpcJump0, NPC_Rowf, -220, -54, 261, 16)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PUSH_RUG_IN, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PUSH_RUG_IN, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, 600, 50, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -516,7 +516,7 @@ EvtScript N(EVS_Rhuff_HideBadges) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_ROWF_CLOSE_SHOP, SOUND_SPACE_MODE_0, -220, 37, 271)
+        EVT_CALL(PlaySoundAt, SOUND_ROWF_CLOSE_SHOP, SOUND_SPACE_DEFAULT, -220, 37, 271)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_THREAD

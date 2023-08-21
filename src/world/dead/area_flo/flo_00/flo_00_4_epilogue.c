@@ -3,7 +3,7 @@
 NpcSettings N(NpcSettings_Lakilester_Epilogue) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Parakarry.inc.c"
@@ -82,7 +82,7 @@ NpcData N(NpcData_Lakilester_Epilogue)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_Lakilester_Epilogue),
         .settings = &N(NpcSettings_Lakilester_Epilogue),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldLakilester_Idle,
@@ -109,7 +109,7 @@ NpcData N(NpcData_Lakilester_Epilogue)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Lakilulu_Epilogue),
         .settings = &N(NpcSettings_Lakilester_Epilogue),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Lakilulu_Idle,
@@ -136,7 +136,7 @@ NpcData N(NpcData_Lakilester_Epilogue)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Parakarry_Epilogue),
         .settings = &N(NpcSettings_Parakarry),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = PARAKARRY_ANIMS,
     },

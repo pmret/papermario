@@ -546,10 +546,10 @@ s32 check_block_input(s32 buttonMask) {
     s32 i;
     s32 ignoreWindow;
 
-    battleStatus->blockResult = 0; // Fail
+    battleStatus->blockResult = BLOCK_RESULT_FAIL;
 
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL_BLOCK && (battleStatus->flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
-        battleStatus->blockResult = 1;
+        battleStatus->blockResult = BLOCK_RESULT_SUCCESS;
         return TRUE;
     }
 
@@ -603,7 +603,7 @@ s32 check_block_input(s32 buttonMask) {
         }
 
         if (battleStatus->pushInputBuffer[bufferPos] & buttonMask) {
-            battleStatus->blockResult = 1; // Block
+            battleStatus->blockResult = BLOCK_RESULT_SUCCESS;
             block = TRUE;
             break;
         }
@@ -611,7 +611,7 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     if (mash) {
-        battleStatus->blockResult = -1; // Mash
+        battleStatus->blockResult = BLOCK_RESULT_EARLY;
         block = FALSE;
     }
 
@@ -769,13 +769,13 @@ API_CALLABLE(GetActionSuccessCopy) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80269524) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_86);
+API_CALLABLE(GetActionResult) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionResult);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80269550) {
-    gBattleStatus.unk_86 = evt_get_variable(script, *script->ptrReadPos);
+API_CALLABLE(SetActionResult) {
+    gBattleStatus.actionResult = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -784,13 +784,13 @@ API_CALLABLE(GetBlockResult) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(GetActionResult) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionResult);
+API_CALLABLE(GetActionQuality) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionQuality);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(SetActionResult) {
-    gBattleStatus.actionResult = evt_get_variable(script, *script->ptrReadPos);
+API_CALLABLE(SetActionQuality) {
+    gBattleStatus.actionQuality = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 

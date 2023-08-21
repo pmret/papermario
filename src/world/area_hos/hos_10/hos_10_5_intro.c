@@ -38,7 +38,7 @@ void N(lerp_value_with_max_step)(f32 start, f32 end, f32 current, f32 maxStep, f
 }
 
 API_CALLABLE(N(MakeShootingStar)) {
-    fx_star(1, 200.0f, 400.0f, 1200.0f, -300.0f, -100.0f, 0.0f, 30.0f);
+    fx_star(FX_STAR_FOREGROUND, 200.0f, 400.0f, 1200.0f, -300.0f, -100.0f, 0.0f, 30.0f);
     return ApiStatus_DONE2;
 }
 

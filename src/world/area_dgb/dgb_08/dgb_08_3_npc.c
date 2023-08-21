@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Yakkey) = {
     .height = 24,
     .radius = 24,
-    .level = 13,
+    .level = ACTOR_LEVEL_CLUBBA,
 };
 
 #define INCLUDE_CLUBBA_WANDER
@@ -19,7 +19,7 @@ NpcSettings N(NpcSettings_Yakkey) = {
 NpcSettings N(NpcSettings_LastClubba) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 extern EvtScript N(EVS_NpcAI_Tubba);
@@ -34,7 +34,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
     EVT_END_LOOP
     EVT_SET(GB_ARN_Tubba_MapID, 8)
     EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -61,7 +61,7 @@ EvtScript N(EVS_NpcIdle_Tubba) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(NpcMoveTo, NPC_SELF, -500, 80, 10)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Tubba)))
@@ -330,7 +330,7 @@ NpcData N(NpcData_Sentinel_02) = {
 };
 
 API_CALLABLE(N(PlayAlertSound)) {
-    ai_enemy_play_sound(get_npc_unsafe(script->owner1.enemy->npcID), SOUND_SRAW_0C_A, 0);
+    ai_enemy_play_sound(get_npc_unsafe(script->owner1.enemy->npcID), SOUND_SNORE_INHALE_A, 0);
     return ApiStatus_DONE2;
 }
 
@@ -359,7 +359,7 @@ EvtScript N(EVS_NpcIdle_LastClubba) = {
 
 EvtScript N(EVS_NpcInteract_LastClubba) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SRAW_0E_A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNAP_AWAKE_A, SOUND_SPACE_DEFAULT)
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
     EVT_WAIT(20)
@@ -412,7 +412,7 @@ NpcData N(NpcData_LastClubba) = {
     },
     .init = &N(EVS_NpcInit_LastClubba),
     .settings = &N(NpcSettings_LastClubba),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = CLUBBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

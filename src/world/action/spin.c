@@ -108,7 +108,7 @@ void action_update_spin(void) {
             playerSpinState->spinSoundID = SOUND_SPEEDY_SPIN_ATTACK;
         }
 
-        sfx_play_sound_at_player(playerSpinState->spinSoundID, SOUND_SPACE_MODE_0);
+        sfx_play_sound_at_player(playerSpinState->spinSoundID, SOUND_SPACE_DEFAULT);
         suggest_player_anim_always_forward(anim);
 
         if ((clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].curYaw) <= 180.0f)) {

@@ -278,7 +278,7 @@ ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(SOUND_024B);
+        sfx_play_sound(SOUND_MERLEE_APPEAR);
         npc->alpha = 0;
     }
 
@@ -422,7 +422,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
 
     if (script->functionTemp[1] == 15) {
         sfx_play_sound(SOUND_ACTOR_DEATH);
-        fx_damage_stars(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
+        fx_damage_stars(FX_DAMAGE_STARS_1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 
     temp1 = script->functionTemp[1];
@@ -762,7 +762,7 @@ void update_encounters_neutral(void) {
                         triggeredBattle = TRUE;
                     }
                     if (triggeredBattle) {
-                        sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
+                        sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
                         currentEncounter->hitType = ENCOUNTER_TRIGGER_HAMMER;
                         currentEncounter->hitTier = gPlayerData.hammerLevel;
                         enemy->encountered = ENCOUNTER_TRIGGER_HAMMER;
@@ -848,7 +848,7 @@ void update_encounters_neutral(void) {
                                     currentEncounter->hitTier = 2;
                                     break;
                             }
-                            sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
+                            sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
                             enemy->encountered = ENCOUNTER_STATE_NEUTRAL;
                             currentEncounter->curEncounter = encounter;
                             currentEncounter->curEnemy = enemy;
@@ -896,11 +896,11 @@ void update_encounters_neutral(void) {
                 triggeredBattle = TRUE;
             }
             if ((playerStatus->animFlags & PA_FLAG_SPINNING) && !(enemy->flags & ENEMY_FLAG_IGNORE_SPIN) && triggeredBattle) {
-                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
+                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
                 testX = playerStatus->pos.x + ((npc->pos.x - playerStatus->pos.x) * 0.5f);
                 testY = playerStatus->pos.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->pos.y + playerStatus->colliderHeight)) * 0.5f);
                 testZ = playerStatus->pos.z + ((npc->pos.z - playerStatus->pos.z) * 0.5f);
-                fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 currentEncounter->hitType = ENCOUNTER_TRIGGER_SPIN;
                 playerStatus->animFlags |= PA_FLAG_DIZZY_ATTACK_ENCOUNTER;
                 enemy->encountered = ENCOUNTER_TRIGGER_SPIN;
@@ -916,7 +916,7 @@ void update_encounters_neutral(void) {
                 testX = playerStatus->pos.x + ((npc->pos.x - playerStatus->pos.x) * 0.5f);
                 testY = playerStatus->pos.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->pos.y + playerStatus->colliderHeight)) * 0.5f);
                 testZ = playerStatus->pos.z + ((npc->pos.z - playerStatus->pos.z) * 0.5f);
-                fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 // if the hitbox is active, trigger a first strike
                 firstStrikeType = FIRST_STRIKE_NONE;
                 if (enemy->hitboxIsActive) {
@@ -989,7 +989,7 @@ START_BATTLE:
             if (!is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
                 set_action_state(ACTION_STATE_ENEMY_FIRST_STRIKE);
                 npc = get_npc_unsafe(enemy->npcID);
-                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
+                sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, npc->pos.x, npc->pos.y, npc->pos.z);
             }
             currentEncounter->scriptedBattle = FALSE;
             gEncounterState = ENCOUNTER_STATE_PRE_BATTLE;
@@ -1081,14 +1081,14 @@ START_BATTLE:
                     testX =  playerStatus->pos.x + ((npc->pos.x - playerStatus->pos.x) * 0.5f);
                     testY = playerStatus->pos.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->pos.y + playerStatus->colliderHeight)) * 0.5f);
                     testZ = playerStatus->pos.z + ((npc->pos.z - playerStatus->pos.z) * 0.5f);
-                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                    fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 } else if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
                     npc = get_npc_unsafe(enemy->npcID);
                     cond2 = TRUE;
                     testX =  playerStatus->pos.x + ((npc->pos.x - playerStatus->pos.x) * 0.5f);
                     testY = playerStatus->pos.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->pos.y + playerStatus->colliderHeight)) * 0.5f);
                     testZ = playerStatus->pos.z + ((npc->pos.z - playerStatus->pos.z) * 0.5f);
-                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                    fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 }
             }
             disable_player_input();
@@ -1140,13 +1140,13 @@ START_BATTLE:
                     testX =  playerStatus->pos.x + ((npc->pos.x - playerStatus->pos.x) * 0.5f);
                     testY = playerStatus->pos.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->pos.y + playerStatus->colliderHeight)) * 0.5f);
                     testZ = playerStatus->pos.z + ((npc->pos.z - playerStatus->pos.z) * 0.5f);
-                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                    fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 } else if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
                     npc = get_npc_unsafe(enemy->npcID);
                     testX =  playerStatus->pos.x + ((npc->pos.x - playerStatus->pos.x) * 0.5f);
                     testY = playerStatus->pos.y + (((npc->pos.y + npc->collisionHeight) - (playerStatus->pos.y + playerStatus->colliderHeight)) * 0.5f);
                     testZ = playerStatus->pos.z + ((npc->pos.z - playerStatus->pos.z) * 0.5f);
-                    fx_damage_stars(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 0.0f, -1.0f, 0.0f, 3);
+                    fx_damage_stars(FX_DAMAGE_STARS_3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 0.0f, -1.0f, 0.0f, 3);
                 }
             }
             disable_player_input();
@@ -1222,13 +1222,13 @@ START_BATTLE:
                     testX = npc->pos.x;
                     testY = npc->pos.y + npc->collisionHeight;
                     testZ = npc->pos.z;
-                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                    fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 } else if (!(enemy->flags & ENEMY_FLAG_PASSIVE)) {
                     npc = get_npc_unsafe(enemy->npcID);
                     testX = npc->pos.x;
                     testY = npc->pos.y + npc->collisionHeight;
                     testZ = npc->pos.z;
-                    fx_damage_stars(3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
+                    fx_damage_stars(FX_DAMAGE_STARS_3, testX, testY, testZ, 0.0f, -1.0f, 0.0f, 3);
                 }
             }
             disable_player_input();
@@ -2567,8 +2567,8 @@ void create_encounters(void) {
                     if (enemy->flags & ENEMY_FLAG_IGNORE_ENTITY_COLLISION) {
                         newNpc->flags |= NPC_FLAG_IGNORE_ENTITY_COLLISION;
                     }
-                    if (enemy->flags & ENEMY_FLAG_800) {
-                        newNpc->flags |= NPC_FLAG_8;
+                    if (enemy->flags & ENEMY_FLAG_FLYING) {
+                        newNpc->flags |= NPC_FLAG_FLYING;
                     }
                     if (enemy->flags & ENEMY_FLAG_GRAVITY) {
                         newNpc->flags |= NPC_FLAG_GRAVITY;

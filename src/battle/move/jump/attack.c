@@ -75,10 +75,10 @@ EvtScript N(EVS_UseMove0_ImplA) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -97,7 +97,7 @@ EvtScript N(EVS_UseMove0_ImplA) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -107,9 +107,9 @@ EvtScript N(EVS_UseMove0_ImplA) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -126,10 +126,10 @@ EvtScript N(EVS_UseMove0_ImplB) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -142,7 +142,7 @@ EvtScript N(EVS_UseMove0_ImplB) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_27)
         EVT_WAIT(5)
@@ -155,16 +155,16 @@ EvtScript N(EVS_UseMove0_ImplB) = {
     EVT_CALL(ShowActionHud, FALSE)
     EVT_CALL(action_command_jump_start, 37, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     EVT_CALL(func_802752AC, 20, 4)
     EVT_WAIT(7)
     EVT_CALL(func_802752AC, 3, 5)
-    EVT_CALL(EnablePlayerBlur, BLUR_RESET)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -181,10 +181,10 @@ EvtScript N(EVS_UseMove0_ImplC) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -197,7 +197,7 @@ EvtScript N(EVS_UseMove0_ImplC) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_28)
         EVT_WAIT(5)
@@ -210,14 +210,14 @@ EvtScript N(EVS_UseMove0_ImplC) = {
     EVT_CALL(ShowActionHud, FALSE)
     EVT_CALL(action_command_jump_start, 25, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
     EVT_CALL(func_80275F00, 25, 4)
-    EVT_CALL(EnablePlayerBlur, BLUR_RESET)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -264,7 +264,7 @@ EvtScript N(EVS_UseMove1_ImplA) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_MarioB1_Stomp)
     EVT_CALL(func_80274A18, LVarA, 0)
     EVT_CALL(N(GetJumpDamage))
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVarF, 48)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -287,7 +287,7 @@ EvtScript N(EVS_UseMove1_ImplB) = {
     EVT_CALL(func_802752AC, 3, 1)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_34)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 4, 48)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -308,7 +308,7 @@ EvtScript N(EVS_UseMove1_ImplC) = {
     EVT_CALL(func_80275F00, LVarA, 0)
     EVT_SET(LVarA, 4)
     EVT_CALL(func_80275F00, LVarA, 1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 6, 48)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -345,10 +345,10 @@ EvtScript N(EVS_UseMove2_ImplA) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -367,7 +367,7 @@ EvtScript N(EVS_UseMove2_ImplA) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -377,9 +377,9 @@ EvtScript N(EVS_UseMove2_ImplA) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -396,10 +396,10 @@ EvtScript N(EVS_UseMove2_ImplB) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -412,7 +412,7 @@ EvtScript N(EVS_UseMove2_ImplB) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_27)
         EVT_WAIT(5)
@@ -425,16 +425,16 @@ EvtScript N(EVS_UseMove2_ImplB) = {
     EVT_CALL(ShowActionHud, FALSE)
     EVT_CALL(action_command_jump_start, 37, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     EVT_CALL(func_802752AC, 20, 4)
     EVT_WAIT(7)
     EVT_CALL(func_802752AC, 3, 5)
-    EVT_CALL(EnablePlayerBlur, BLUR_RESET)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015B, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -453,10 +453,10 @@ EvtScript N(EVS_UseMove2_ImplC) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -469,7 +469,7 @@ EvtScript N(EVS_UseMove2_ImplC) = {
         EVT_CASE_OR_EQ(HIT_RESULT_3)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_28)
         EVT_WAIT(5)
@@ -482,14 +482,14 @@ EvtScript N(EVS_UseMove2_ImplC) = {
     EVT_CALL(ShowActionHud, FALSE)
     EVT_CALL(action_command_jump_start, 25, 3)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
     EVT_CALL(func_80275F00, 25, 4)
-    EVT_CALL(EnablePlayerBlur, BLUR_RESET)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015C, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END
@@ -529,10 +529,10 @@ EvtScript N(EVS_802A4018) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 80)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+            EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
@@ -551,7 +551,7 @@ EvtScript N(EVS_802A4018) = {
         EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_80269524, LVarF)
+    EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
@@ -561,9 +561,9 @@ EvtScript N(EVS_802A4018) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_SpinFall)
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
-    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_015A, SOUND_NONE)
+    EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
     EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 224)
-    EVT_CALL(func_80269550, LVarF)
+    EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
     EVT_END

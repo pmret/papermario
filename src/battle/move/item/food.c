@@ -48,7 +48,7 @@ API_CALLABLE(N(func_802A12EC_7333BC)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(ShowHeartRecoveryFX)) {
+API_CALLABLE(N(SpawnHeartRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -60,7 +60,7 @@ API_CALLABLE(N(ShowHeartRecoveryFX)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(ShowFlowerRecoveryFX)) {
+API_CALLABLE(N(SpawnFlowerRecoveryFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 a = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
@@ -75,26 +75,26 @@ API_CALLABLE(N(ShowFlowerRecoveryFX)) {
 #include "common/AddHP.inc.c"
 #include "common/AddFP.inc.c"
 
-API_CALLABLE(N(func_802A15A0_733670)) {
+API_CALLABLE(N(GetFoodParameters)) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = evt_get_variable(script, *args++);
     ItemData* item = &gItemTable[itemIdx];
-    s32 temp;
+    b32 isHarmful;
 
     script->varTable[11] = item->potencyA;
     script->varTable[12] = item->potencyB;
-    script->varTable[13] = 0;
+    script->varTable[13] = FALSE;
 
     if (item->typeFlags & ITEM_TYPE_FLAG_USE_DRINK_ANIMATION) {
-        script->varTable[13] = 1;
+        script->varTable[13] = TRUE;
     }
 
-    temp = 0;
+    isHarmful = FALSE;
     if ((script->varTable[11] < 0) || (script->varTable[11] <= 0 && script->varTable[12] < 0)) {
-        temp = 1;
+        isHarmful = TRUE;
     }
 
-    script->varTable[15] = temp;
+    script->varTable[15] = isHarmful;
 
     return ApiStatus_DONE2;
 }
@@ -180,54 +180,61 @@ EvtScript N(EVS_UseOnPartner) = {
 };
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET(LVarE, LVar1)
+    #define LV_ItemID LVarA
+    #define LV_HPAmt LVarB
+    #define LV_FPAmt LVarC
+    #define LV_IsDrink LVarD
+    #define LV_NoRefund LVarE
+    #define LV_IsHarmful LVarF
+    
+    EVT_SET(LV_NoRefund, LVar1)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SET(LVarA, LVar1)
-    EVT_CALL(N(func_802A15A0_733670), LVarA)
+    EVT_SET(LV_ItemID, LVar1)
+    EVT_CALL(N(GetFoodParameters), LV_ItemID)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_IF_EQ(LVar0, ACTOR_PARTNER)
         EVT_EXEC_WAIT(N(EVS_UseOnPartner))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LVar1, LVarE)
+    EVT_SET(LVar1, LV_NoRefund)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_IF_EQ(LVarD, 0)
+    EVT_IF_EQ(LV_IsDrink, FALSE)
         EVT_EXEC_WAIT(N(EatItem))
     EVT_ELSE
         EVT_EXEC_WAIT(N(DrinkItem))
     EVT_END_IF
-    EVT_IF_EQ(LVarF, 1)
+    EVT_IF_EQ(LV_IsHarmful, TRUE)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
     EVT_END_IF
-    EVT_IF_GT(LVarB, 0)
+    EVT_IF_GT(LV_HPAmt, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, LV_HPAmt)
     EVT_END_IF
-    EVT_IF_LT(LVarB, 0)
+    EVT_IF_LT(LV_HPAmt, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 0)
         EVT_ADD(LVar1, 35)
-        EVT_CALL(N(ShowHeartRecoveryFX), LVar0, LVar1, LVar2, LVarB)
+        EVT_CALL(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, LV_HPAmt)
     EVT_END_IF
-    EVT_IF_GT(LVarC, 0)
+    EVT_IF_GT(LV_FPAmt, 0)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 25)
-        EVT_CALL(N(ShowFlowerRecoveryFX), LVar0, LVar1, LVar2, LVarC)
+        EVT_CALL(N(SpawnFlowerRecoveryFX), LVar0, LVar1, LVar2, LV_FPAmt)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
-    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_IF_NE(LVarB, 0)
-        EVT_CALL(N(AddHP), LVarB)
+    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LV_HPAmt)
+    EVT_IF_NE(LV_HPAmt, 0)
+        EVT_CALL(N(AddHP), LV_HPAmt)
     EVT_END_IF
-    EVT_IF_NE(LVarC, 0)
-        EVT_CALL(N(AddFP), LVarC)
+    EVT_IF_NE(LV_FPAmt, 0)
+        EVT_CALL(N(AddFP), LV_FPAmt)
     EVT_END_IF
-    EVT_IF_EQ(LVarF, 0)
+    EVT_IF_EQ(LV_IsHarmful, FALSE)
         EVT_WAIT(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
         EVT_WAIT(30)
@@ -235,7 +242,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_WAIT(30)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LV_HPAmt)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))

@@ -14,14 +14,14 @@ EvtScript N(EVS_NpcIdle_GardenShyGuy1) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
     EVT_LOOP(0)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, 180, 27, 280, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 220, 250, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, 310, 27, 250, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 350, 280, 15)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, 360, 27, 380, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 300, 450, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 230, 450, 15)
@@ -36,16 +36,16 @@ EvtScript N(EVS_NpcIdle_GardenShyGuy2) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
     EVT_LOOP(0)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, 360, 27, 380, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 300, 450, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 230, 450, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 170, 380, 15)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, 180, 27, 280, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 220, 250, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, 310, 27, 250, 15)
         EVT_CALL(NpcMoveTo, NPC_SELF, 350, 280, 15)
     EVT_END_LOOP
@@ -65,7 +65,7 @@ EvtScript N(EVS_GardenShyGuy_RunAway) = {
     EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
     EVT_SET(LVar0, -1)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_DEFAULT)
     EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVar9)
     EVT_CALL(NpcMoveTo, NPC_SELF, 160, 400, 0)
     EVT_KILL_THREAD(LVar9)
@@ -74,10 +74,10 @@ EvtScript N(EVS_GardenShyGuy_RunAway) = {
         EVT_EXEC(N(EVS_MinhThankYou))
     EVT_END_IF
     EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, 110, 20, 420, 0)
     EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, 40, 0, 450, 0)
     EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
     EVT_CALL(NpcMoveTo, NPC_SELF, -30, 550, 0)
@@ -104,8 +104,8 @@ EvtScript N(EVS_GardenShyGuy_PlayHitReactionSounds) = {
     EVT_IF_LE(LVar3, 80)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203E, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203E, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_RETURN
     EVT_END
@@ -273,7 +273,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
 #endif
     EVT_EXEC(N(EVS_PlayFlowerGateSong))
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 0, 266, 50, 338, 1, LVar9)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
     EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
     EVT_THREAD
         EVT_WAIT(10)
@@ -287,7 +287,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
     EVT_WAIT(30 / DT)
     EVT_CALL(EnableModel, MODEL_r_door, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_DOOR_SPINNING, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_SPINNING, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 3060, 80, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -300,7 +300,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_CALL(EnableModel, MODEL_r_door, FALSE)
     EVT_CALL(EnableGroup, MODEL_to_flo, TRUE)
     EVT_CALL(DismissEffect, LVar9)
-    EVT_CALL(PlaySoundAt, SOUND_FLOWER_DOOR_WAVES, SOUND_SPACE_MODE_0, 266, 50, 338)
+    EVT_CALL(PlaySoundAt, SOUND_WOODEN_DOOR_WAVES, SOUND_SPACE_DEFAULT, 266, 50, 338)
     EVT_LOOP(3)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, 266, 50, 338, 1, 20)
         EVT_WAIT(5)
@@ -367,7 +367,7 @@ EvtScript N(EVS_MinhT_PlantSeed) = {
     EVT_END_SWITCH
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Cheer)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_PLANT_FLOWERS, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_PLANT_FLOWERS, SOUND_SPACE_DEFAULT)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
             EVT_CALL(EnableModel, MODEL_o375, TRUE)
@@ -648,14 +648,14 @@ EvtScript N(EVS_ExitFlowerGate) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(SetPartnerTetherClose))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
     EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
     EVT_SET(LVar0, 3)
     EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
     EVT_CALL(PlayerMoveTo, 300, 370, 15)
     EVT_CALL(InterpPlayerYaw, -22, 0)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01CF, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, -120, 15, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -675,7 +675,7 @@ EvtScript N(EVS_ExitFlowerGate) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01D0, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(15)
     EVT_CALL(PlayerMoveTo, 257, 300, 30)
@@ -692,7 +692,7 @@ EvtScript N(EVS_ExitFlowerGate) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
     EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
     EVT_CALL(EnableGroup, MODEL_to_flo, FALSE)
     EVT_CALL(EnableGroup, MODEL_r_door, TRUE)
@@ -725,11 +725,11 @@ EvtScript N(EVS_EnterFlowerGate) = {
     EVT_CALL(SetPlayerPos, 264, 27, 320)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcPos, NPC_PARTNER, 264, 27, 320)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
     EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
     EVT_SET(LVar0, 2)
     EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01CF, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, -120, 15, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -751,7 +751,7 @@ EvtScript N(EVS_EnterFlowerGate) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_01D0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_IS_THREAD_RUNNING(LVar2, LVar0)
@@ -762,7 +762,7 @@ EvtScript N(EVS_EnterFlowerGate) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(N(ResetPartnerTetherDist))
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
     EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN

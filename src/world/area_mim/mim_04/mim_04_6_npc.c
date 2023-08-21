@@ -8,8 +8,8 @@
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
     EVT_IF_EQ(GF_MIM04_Gift_MagicalSeed3, FALSE)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_MODE_0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Green_PopUp)
         EVT_WAIT(45)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Green_Idle)
@@ -83,7 +83,7 @@ NpcData N(NpcData_Bubulb) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bubulb),
     .settings = &N(NpcSettings_Bubulb),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = BUBULB_GREEN_ANIMS,
     .tattle = MSG_NpcTattle_MIM_Bubulb_Revealed,

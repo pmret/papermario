@@ -22,7 +22,7 @@ void N(FlyingMagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     if (N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, volume) == 1) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+        ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
         npc->duration = 50;
         script->AI_TEMP_STATE = 20;
     } else {
@@ -295,7 +295,7 @@ API_CALLABLE(N(FlyingMagikoopaAI_Main)) {
 
     if (isInitialCall) {
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_8;
+        npc->flags |= NPC_FLAG_FLYING;
         npc->flags |= NPC_FLAG_200000;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         enemy->varTable[1] = npc->pos.y * 100.0;

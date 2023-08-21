@@ -13,7 +13,7 @@ EvtScript N(EVS_NpcDefeat_TubbasHeart) = {
 NpcSettings N(NpcSettings_TubbasHeart) = {
     .height = 24,
     .radius = 24,
-    .level = 13,
+    .level = ACTOR_LEVEL_CLUBBA,
     .otherAI = &N(EVS_NpcAuxAI_TubbasHeart),
     .onDefeat = &N(EVS_NpcDefeat_TubbasHeart),
 };

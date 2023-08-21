@@ -7684,14 +7684,14 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, peach_focus]
-  - name: battle_move_twink_dash
+  - name: battle_move_peach_focus_alt
     dir: battle/move/star_power
     type: code
     start: 0x79D8A0
     vram: 0x802A1000
     follows_vram: battle_code
     subsegments:
-    - [auto, c, twink_dash]
+    - [auto, c, peach_focus_alt]
   - type: code
     name: level_up
     start: 0x79EF40

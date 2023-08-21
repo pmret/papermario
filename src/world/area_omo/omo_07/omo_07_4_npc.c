@@ -7,7 +7,7 @@
 NpcSettings N(NpcSettings_Fuzzy) = {
     .height = 23,
     .radius = 22,
-    .level = 14,
+    .level = ACTOR_LEVEL_SHY_GUY,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_Fuzzy) = {
 NpcSettings N(NpcSettings_HammerBros) = {
     .height = 36,
     .radius = 24,
-    .level = 27,
+    .level = ACTOR_LEVEL_HAMMER_BROS,
 };
 
 #include "world/common/enemy/Kammy_Flying.inc.c"
@@ -72,7 +72,7 @@ EvtScript N(EVS_Push_SecretDoor) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(AF_OMO07_DoorOpening, TRUE)
-    EVT_CALL(PlaySoundAt, SOUND_01D9, SOUND_SPACE_MODE_0, 25, 0, -55)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
     EVT_THREAD
         EVT_IF_LT(LVar0, 25)
             EVT_CALL(MakeLerp, 0, 180, 30, EASING_COS_IN_OUT)
@@ -200,7 +200,7 @@ EvtScript N(EVS_NpcAI_ShyGuy) = {
                     EVT_CALL(SetSelfVar, SHYGUY_VAR_WAIT_TIME, 0)
                 EVT_END_IF
             EVT_CASE_EQ(SHYGUY_STATE_OPEN_DOOR)
-                EVT_CALL(PlaySoundAt, SOUND_01D9, SOUND_SPACE_MODE_0, 25, 0, -55)
+                EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
                 EVT_THREAD
                     EVT_SET(AF_OMO07_DoorOpening, TRUE)
                     EVT_SET(LVar2, MV_SecretDoorAngle)
@@ -371,7 +371,7 @@ NpcData N(NpcData_ShyGuy) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy),
     .settings = &N(NpcSettings_ShyGuy_Patrol),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -400,7 +400,7 @@ NpcData N(NpcData_ShyGuy_02) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy),
     .settings = &N(NpcSettings_ShyGuy_Patrol),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -429,7 +429,7 @@ NpcData N(NpcData_ShyGuy_03) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy),
     .settings = &N(NpcSettings_ShyGuy_Patrol),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -458,7 +458,7 @@ NpcData N(NpcData_ShyGuy_04) = {
     },
     .init = &N(EVS_NpcInit_ShyGuy),
     .settings = &N(NpcSettings_ShyGuy_Patrol),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = RED_SHY_GUY_ANIMS,
 };
@@ -469,7 +469,7 @@ NpcData N(NpcData_Fuzzy) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Fuzzy),
     .settings = &N(NpcSettings_Fuzzy),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Fuzzy_Walk,
@@ -497,7 +497,7 @@ NpcData N(NpcData_HammerBros) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_HammerBros),
     .settings = &N(NpcSettings_HammerBros),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_HammerBros_Anim02,
@@ -536,7 +536,7 @@ NpcData N(NpcData_SkyGuy_01) = {
         }
     },
     .settings = &N(NpcSettings_SkyGuy),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -559,7 +559,7 @@ NpcData N(NpcData_SkyGuy_02) = {
         }
     },
     .settings = &N(NpcSettings_SkyGuy),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = SKY_GUY_DROPS,
     .animations = SKY_GUY_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -581,7 +581,7 @@ NpcData N(NpcData_Kammy) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Kammy),
     .settings = &N(NpcSettings_Kammy_Flying),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = KAMMY_ANIMS,
     .extraAnimations = N(ExtraAnims_Kammy),

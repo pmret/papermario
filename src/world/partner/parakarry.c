@@ -93,7 +93,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
-            parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
@@ -258,7 +258,7 @@ API_CALLABLE(N(UseAbility)) {
             N(UsingAbility) = TRUE;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
-            parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             partnerStatus->actingPartner = PARTNER_PARAKARRY;
             partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
@@ -305,7 +305,7 @@ API_CALLABLE(N(UseAbility)) {
                     parakarry->curAnim = ANIM_WorldParakarry_CarryHeavy;
                     parakarry->planarFlyDist = 0;
                     suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
-                    sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     gCollisionStatus.lastTouchedFloor = NO_COLLIDER;
                     gCollisionStatus.curFloor = NO_COLLIDER;
                     parakarry->curFloor = NO_COLLIDER;
@@ -330,7 +330,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (gGameStatusPtr->frameCounter % 6 == 0) {
-                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             }
 
             length = fabsf(sin_rad(DEG_TO_RAD((20 - N(AbilityStateTime)) * 18))) * 1.3;
@@ -467,7 +467,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (gGameStatusPtr->frameCounter % 6 == 0) {
-                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             }
 
             parakarry->jumpVel -= parakarry->jumpScale;

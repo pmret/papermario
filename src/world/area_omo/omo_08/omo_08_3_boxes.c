@@ -208,16 +208,16 @@ EvtScript N(EVS_BoxResult_GiveCoins) = {
         EVT_WAIT(LVar0)
         EVT_EXEC(N(EVS_BlueLightOff))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A6, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_GreenLightOn))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A5, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A5, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_YellowLightOn))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A7, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_RedLightOn))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A8, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A8, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_BlueLightOn))
         EVT_WAIT(LVar0)
         EVT_SUB(LVar0, 1)
@@ -315,16 +315,16 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
         EVT_WAIT(3)
         EVT_EXEC(N(EVS_BlueLightOff))
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A6, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_GreenLightOn))
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A5, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A5, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_YellowLightOn))
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A7, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_RedLightOn))
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A8, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A8, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_BlueLightOn))
         EVT_WAIT(3)
     EVT_END_LOOP
@@ -346,7 +346,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o875)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -362,7 +362,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o877)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -378,7 +378,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o879)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -394,7 +394,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_CALL(GetModelCenter, MODEL_o881)
-        EVT_CALL(PlaySoundAt, SOUND_01F3, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+        EVT_CALL(PlaySoundAt, SOUND_OMO_COLORED_PANEL_DROP, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_THREAD
@@ -409,7 +409,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b1_1)
         EVT_CALL(SetGroupVisibility, MODEL_b1, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_DEFAULT)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -431,7 +431,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b2_1)
         EVT_CALL(SetGroupVisibility, MODEL_b2, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_DEFAULT)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -453,7 +453,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b3_1)
         EVT_CALL(SetGroupVisibility, MODEL_b3, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_DEFAULT)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -475,7 +475,7 @@ EvtScript N(EVS_BoxResult_RepairTrack) = {
     EVT_THREAD
         EVT_CALL(GetModelCenter, MODEL_b4_1)
         EVT_CALL(SetGroupVisibility, MODEL_b4, MODEL_GROUP_HIDDEN)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_VANISH_IN_SMOKE, SOUND_SPACE_DEFAULT)
         EVT_LOOP(4)
             EVT_SET(LVar3, 20)
             EVT_CALL(RandInt, 40, LVar6)
@@ -516,16 +516,16 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
         EVT_WAIT(LVar0)
         EVT_EXEC(N(EVS_BlueLightOff))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A6, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_BlueLightOn))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A5, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A5, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_RedLightOn))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A7, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A7, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_YellowLightOn))
         EVT_WAIT(LVar0)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A8, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A8, SOUND_SPACE_DEFAULT)
         EVT_EXEC(N(EVS_GreenLightOn))
         EVT_WAIT(LVar0)
         EVT_SUB(LVar0, 1)
@@ -558,7 +558,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b1_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_01, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_01, EVT_FLOAT(1.0))
@@ -578,7 +578,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b2_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_02, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_02, EVT_FLOAT(1.0))
@@ -598,7 +598,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b3_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_03, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_03, EVT_FLOAT(1.0))
@@ -618,7 +618,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b4_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_04, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_04, EVT_FLOAT(1.0))
@@ -635,13 +635,13 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
 EvtScript N(EVS_HitBox) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVT_PTR(N(GreenBoxInfo)))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A2, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_01A2, SOUND_SPACE_DEFAULT)
         EVT_CASE_EQ(EVT_PTR(N(YellowBoxInfo)))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A1, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_01A1, SOUND_SPACE_DEFAULT)
         EVT_CASE_EQ(EVT_PTR(N(RedBoxInfo)))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A3, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_01A3, SOUND_SPACE_DEFAULT)
         EVT_CASE_EQ(EVT_PTR(N(BlueBoxInfo)))
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A4, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_01A4, SOUND_SPACE_DEFAULT)
     EVT_END_SWITCH
     EVT_USE_BUF(LVar0)
     EVT_BUF_READ1(LVar1)

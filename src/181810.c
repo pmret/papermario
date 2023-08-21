@@ -142,10 +142,10 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         gSpeakingActorPart = part;
 
         headX = actor->curPos.x + actor->headOffset.x;
-        if (!(actor->flags & ACTOR_FLAG_8000)) {
-            headY = actor->size.y + (actor->curPos.y + actor->headOffset.y);
+        if (!(actor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y;
         } else {
-            headY = actor->curPos.y + actor->headOffset.y + (actor->size.y / 2);
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
         }
 
         headZ = actor->curPos.z + actor->headOffset.z;
@@ -168,11 +168,10 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         part = gSpeakingActorPart;
 
         headX = actor->curPos.x + actor->headOffset.x;
-        if (!(actor->flags & ACTOR_FLAG_8000)) {
-            headY = actor->size.y + (actor->curPos.y + actor->headOffset.y);
+        if (!(actor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y;
         } else {
-            headY = actor->headOffset.y;
-            headY = actor->curPos.y + actor->headOffset.y + (actor->size.y / 2);
+            headY = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
         }
 
         headZ = actor->curPos.z + actor->headOffset.z;
@@ -236,7 +235,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         ActorPart* actorPart = gSpeakingActorPart;
 
         x = actor->curPos.x + actor->headOffset.x;
-        if (!(gSpeakingActor->flags & ACTOR_FLAG_8000)) {
+        if (!(gSpeakingActor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
             y = actor->curPos.y + actor->headOffset.y + actor->size.y ;
         } else {
             y = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -401,7 +400,7 @@ ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+    sfx_play_sound_at_position(soundID, SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -418,7 +417,7 @@ ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
     }
 
     part = get_actor_part(get_actor(actorID), partID);
-    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, part->curPos.x, part->curPos.y, part->curPos.z);
+    sfx_play_sound_at_position(soundID, SOUND_SPACE_DEFAULT, part->curPos.x, part->curPos.y, part->curPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -436,7 +435,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actor->loopingSoundID[idx] = soundID;
-    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
+    sfx_play_sound_at_position(soundID, SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
 
     return ApiStatus_DONE2;
 }

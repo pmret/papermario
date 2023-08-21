@@ -882,10 +882,10 @@ typedef struct BattleStatus {
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 actionCommandMode;
-    /* 0x084 */ s8 actionResult; // actionResultAmount?
-    /* 0x085 */ s8 unk_85;
-    /* 0x086 */ s8 unk_86; // actionResult?
-    /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
+    /* 0x084 */ s8 actionQuality; // actionCommandVar1 ?
+    /* 0x085 */ s8 unk_85; // actionCommandVar2 ?
+    /* 0x086 */ s8 actionResult; // see enum ActionResult
+    /* 0x087 */ s8 blockResult; // see enum BlockResult
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
     /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
@@ -1581,7 +1581,7 @@ typedef struct ActorPart {
     /* 0x64 */ f32 yaw;
     /* 0x68 */ s16 palAnimPosOffset[2]; // used by some palette animations to slightly adjust the screen position
     /* 0x6C */ Vec2s targetOffset;
-    /* 0x70 */ s16 unk_70;
+    /* 0x70 */ s16 targetPriorityOffset;
     /* 0x72 */ Vec2bu size;
     /* 0x74 */ s8 verticalStretch;
     /* 0x75 */ Vec2b projectileTargetOffset;
@@ -1691,9 +1691,9 @@ typedef struct DecorationTable {
     /* 0x76C */ PAL_PTR unk_76C[16];
     /* 0x78C */ char unk_7AC[0x2C];
     /* 0x7D8 */ s8 unk_7D8;
-    /* 0x7D9 */ s8 unk_7D9;
-    /* 0x7DA */ char unk_7DA;
-    /* 0x7DB */ s8 unk_7DB;
+    /* 0x7D9 */ s8 blurBufferPos;
+    /* 0x7DA */ s8 blurDrawCount;
+    /* 0x7DB */ s8 blurEnableCount;
     /* 0x7DC */ s16 yaw[16];
     /* 0x7FC */ s16 posX[16];
     /* 0x81C */ s16 posY[16];
@@ -1703,7 +1703,7 @@ typedef struct DecorationTable {
     /* 0x87C */ u8 rotX[16];
     /* 0x88C */ u8 rotY[16];
     /* 0x89C */ u8 rotZ[16];
-    /* 0x8AC */ s8 effectType; /* 0 =  blur, 14 = none? */
+    /* 0x8AC */ s8 blurDisableDelay; // infinite when zero
     /* 0x8AD */ char unk_8AD[3];
     /* substruct for decorations? */
     /* 0x8B0 */ struct EffectInstance* effect[MAX_ACTOR_DECORATIONS];

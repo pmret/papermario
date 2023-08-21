@@ -30,7 +30,7 @@ void action_update_use_tweester(void) {
         PlayerTweesterPhysicsPtr->angularVel = 6.0f;
         PlayerTweesterPhysicsPtr->liftoffVelPhase = 50.0f;
         PlayerTweesterPhysicsPtr->countdown = 120;
-        sfx_play_sound_at_player(SOUND_TWEESTER_LAUNCH, SOUND_SPACE_MODE_0);
+        sfx_play_sound_at_player(SOUND_TWEESTER_LAUNCH, SOUND_SPACE_DEFAULT);
     }
 
     switch (playerStatus->actionSubstate) {

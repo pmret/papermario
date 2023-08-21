@@ -24,7 +24,7 @@ extern EvtScript battle_move_up_and_away_EVS_UsePower;
 extern EvtScript battle_move_star_beam_EVS_UsePower;
 extern EvtScript battle_move_peach_beam_EVS_UsePower;
 extern EvtScript battle_move_peach_focus_EVS_UsePower;
-extern EvtScript battle_move_twink_dash_EVS_UsePower;
+extern EvtScript battle_move_peach_focus_alt_EVS_UsePower;
 
 BattleMoveEntry StarPowersTable[] = {
     BTL_MOVE(focus,           EVS_UsePower),
@@ -38,7 +38,7 @@ BattleMoveEntry StarPowersTable[] = {
     BTL_MOVE(star_beam,       EVS_UsePower),
     BTL_MOVE(peach_beam,      EVS_UsePower),
     BTL_MOVE(peach_focus,     EVS_UsePower),
-    BTL_MOVE(twink_dash,      EVS_UsePower),
+    BTL_MOVE(peach_focus_alt, EVS_UsePower),
 };
 
 s32 PartnerWishAnims[][5] = {

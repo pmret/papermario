@@ -11,14 +11,14 @@ EvtScript N(EVS_NpcAuxAI_RaphaelRaven) = {
 NpcSettings N(NpcSettings_RaphaelRaven) = {
     .height = 98,
     .radius = 80,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_RaphaelRaven),
 };
 
 NpcSettings N(NpcSettings_Raven) = {
     .height = 26,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(D_802412D4_B812D4) = {
@@ -114,7 +114,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_SELF, 2)
     EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_018A, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_018A, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 50, EVT_FLOAT(1.0))
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)

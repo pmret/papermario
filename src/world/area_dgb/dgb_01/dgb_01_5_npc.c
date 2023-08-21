@@ -20,7 +20,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(GB_ARN_Tubba_MapID, 1)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_0101)
     EVT_THREAD
@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
     EVT_CALL(SetNpcJumpscale, NPC_Tubba, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Tubba, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20A0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20A0, SOUND_SPACE_DEFAULT)
     EVT_CALL(PlaySound, SOUND_LOOP_DGB_COLLAPSE)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(4.0))
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(2.0))
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
     EVT_CALL(AwaitPlayerApproach, 0, 420, 400)
     EVT_SET(GB_ARN_Tubba_MapID, 1)
     EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -148,7 +148,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittse, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(0)
@@ -190,7 +190,7 @@ EvtScript N(EVS_NpcInit_Tubba_Floor1) = {
 EvtScript N(EVS_NpcInit_Sentinel_01) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -33, -3, 8)
@@ -204,7 +204,7 @@ EvtScript N(EVS_NpcInit_Sentinel_01) = {
 EvtScript N(EVS_NpcInit_Sentinel_02) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -486, 182, 28)
@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcInit_Sentinel_02) = {
 EvtScript N(EVS_NpcInit_Sentinel_03) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -201, 0, -143)
@@ -232,7 +232,7 @@ EvtScript N(EVS_NpcInit_Sentinel_03) = {
 EvtScript N(EVS_NpcInit_Sentinel_04) = {
     EVT_SET(LVar0, GB_StoryProgress)
     EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
         EVT_CALL(SetNpcPos, NPC_SELF, -305, -1, -80)
@@ -261,7 +261,7 @@ NpcData N(NpcData_Sentinel_01) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_01),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -284,7 +284,7 @@ NpcData N(NpcData_Sentinel_02) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_02),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -307,7 +307,7 @@ NpcData N(NpcData_Sentinel_03) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_03),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };
@@ -330,7 +330,7 @@ NpcData N(NpcData_Sentinel_04) = {
     },
     .init = &N(EVS_NpcInit_Sentinel_04),
     .settings = &N(NpcSettings_Sentinel),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = SENTINEL_ANIMS,
 };

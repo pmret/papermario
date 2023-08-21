@@ -18,7 +18,7 @@ NpcSettings N(NpcSettings_TuffPuff) = {
 NpcSettings N(NpcSettings_HuffNPuff) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/StarSpirit.inc.c"
@@ -40,7 +40,7 @@ EvtScript N(EVS_PlayRumbleSounds) = {
 };
 
 EvtScript N(EVS_HuffNPuff_JumpOut) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_03C0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_03C0, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, 650, 104, 0)
     EVT_WAIT(15)
     EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_02, EVT_FLOAT(0.0))
@@ -316,7 +316,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
     EVT_CHILD_THREAD
         EVT_USE_BUF(EVT_PTR(N(BeginAnimScaleX)))
         EVT_LOOP(ARRAY_COUNT(N(BeginAnimScaleX)))
-            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_DEFAULT)
             EVT_BUF_READ3(LVar6, LVar7, LVar8)
             EVT_CALL(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
             EVT_LOOP(0)
@@ -333,7 +333,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
         EVT_LOOP(0)
             EVT_USE_BUF(EVT_PTR(N(LoopAnimScaleX)))
             EVT_LOOP(ARRAY_COUNT(N(LoopAnimScaleX)))
-                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_DEFAULT)
                 EVT_BUF_READ2(LVar6, LVar7)
                 EVT_CALL(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
                 EVT_LOOP(0)
@@ -418,7 +418,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
             EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
             EVT_CALL(RandInt, 2, LVar5)
             EVT_ADD(LVar5, 8)
-            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_03D5, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_03D5, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, LVar5)
             EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
         EVT_END_THREAD
@@ -431,7 +431,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
     EVT_WAIT(5)
     EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
-    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_03D6, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_03D6, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, 10)
     EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
     EVT_RETURN
@@ -594,7 +594,7 @@ NpcData N(NpcData_HuffNPuff)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_HuffNPuff_Face),
         .settings = &N(NpcSettings_HuffNPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = HUFF_N_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_HuffNPuff),
@@ -605,7 +605,7 @@ NpcData N(NpcData_HuffNPuff)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_HuffNPuff_Body),
         .settings = &N(NpcSettings_HuffNPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = HUFF_N_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_HuffNPuff),
@@ -616,7 +616,7 @@ NpcData N(NpcData_HuffNPuff)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_HuffNPuff_Arms),
         .settings = &N(NpcSettings_HuffNPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
         .drops = NO_DROPS,
         .animations = HUFF_N_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_HuffNPuff),
@@ -635,7 +635,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -646,7 +646,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -657,7 +657,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -668,7 +668,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -679,7 +679,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -690,7 +690,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -701,7 +701,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -712,7 +712,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -723,7 +723,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -734,7 +734,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -745,7 +745,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -756,7 +756,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -767,7 +767,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -778,7 +778,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),
@@ -789,7 +789,7 @@ NpcData N(NpcData_TuffPuffs)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_TuffPuff),
         .settings = &N(NpcSettings_TuffPuff),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = TUFF_PUFF_ANIMS,
         .extraAnimations = N(ExtraAnims_TuffPuff),

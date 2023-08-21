@@ -117,16 +117,16 @@ ApiStatus SetCamViewport(Evt* script, s32 isInitialCall) {
 ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
-    s16 value1 = evt_get_variable(script, *args++);
-    s32 value2 = evt_get_variable(script, *args++);
-    s32 value3 = evt_get_variable(script, *args++);
-    s16 value4 = evt_get_variable(script, *args++);
+    s16 pitch = evt_get_variable(script, *args++);
+    s32 boomLength = evt_get_variable(script, *args++);
+    s32 dist = evt_get_variable(script, *args++);
+    s16 boomPitch = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->auxBoomPitch = value4;
-    camera->auxPitch = value1;
-    camera->auxBoomLength = value2;
-    camera->lookAt_dist = value3;
+    camera->auxPitch = pitch;
+    camera->auxBoomLength = boomLength;
+    camera->lookAt_dist = dist;
+    camera->auxBoomPitch = boomPitch;
     return ApiStatus_DONE2;
 }
 
@@ -163,14 +163,14 @@ ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall) {
 ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
-    s32 value1 = evt_get_variable(script, *args++);
-    s32 value2 = evt_get_variable(script, *args++);
-    s32 value3 = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
 
-    camera->lookAt_obj_target.x = value1;
-    camera->lookAt_obj_target.y = value2;
-    camera->lookAt_obj_target.z = value3;
+    camera->lookAt_obj_target.x = x;
+    camera->lookAt_obj_target.y = y;
+    camera->lookAt_obj_target.z = z;
     return ApiStatus_DONE2;
 }
 

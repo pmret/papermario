@@ -6,13 +6,13 @@ extern IconHudScriptPair gItemHudScripts[];
 NpcSettings N(NpcSettings_Merluvlee) = {
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Merlow) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #define NAME_SUFFIX _Merlow
@@ -259,7 +259,7 @@ NpcData N(NpcData_Merluvlee)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Merluvlee_Passthrough),
         .settings = &N(NpcSettings_Merluvlee),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merluvlee_Idle,
@@ -272,7 +272,7 @@ NpcData N(NpcData_Merluvlee)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Merlow),
         .settings = &N(NpcSettings_Merlow),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Merlow_Idle,

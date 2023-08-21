@@ -65,13 +65,13 @@ API_CALLABLE(N(DarkenBackground)) {
 NpcSettings N(NpcSettings_Bootler) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 EvtScript N(EVS_Bootler_SpookPlayer) = {
@@ -128,7 +128,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_WAIT(20 * DT)
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH_A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_VANISH_A, SOUND_SPACE_DEFAULT)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
         EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
@@ -153,7 +153,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_WAIT(30 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Bootler, ANIM_Bootler_Talk, ANIM_Bootler_Idle, 0, MSG_CH3_0001)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR_A, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOO_APPEAR_A, SOUND_SPACE_DEFAULT)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20 * DT)
         EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
@@ -174,7 +174,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOOTLER_SPOOK, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bootler, SOUND_BOOTLER_SPOOK, SOUND_SPACE_DEFAULT)
     EVT_EXEC_WAIT(N(EVS_Bootler_SpookPlayer))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
@@ -259,7 +259,7 @@ NpcData N(NpcData_Bootler) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bootler),
     .settings = &N(NpcSettings_Bootler),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Bootler_Idle,
@@ -287,7 +287,7 @@ NpcData N(NpcData_JrTroopa) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_JrTroopa),
     .settings = &N(NpcSettings_JrTroopa),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_JrTroopa_Idle,

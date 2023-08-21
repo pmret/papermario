@@ -22,7 +22,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH2_000E, 320, 150)
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT), 30, 300, EVT_FLOAT(15.0), EVT_FLOAT(-9.5))
@@ -82,8 +82,8 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_DIV(LVar0, 2)
     EVT_ADD(LVar2, LVar5)
     EVT_DIV(LVar2, 2)
-    EVT_CALL(PlaySoundAt, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0, LVar0, 230, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, 3, LVar0, 230, LVar2, 0, -1, 0, 2)
+    EVT_CALL(PlaySoundAt, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT, LVar0, 230, LVar2)
+    EVT_PLAY_EFFECT(EFFECT_DAMAGE_STARS, FX_DAMAGE_STARS_3, LVar0, 230, LVar2, 0, -1, 0, 2)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, 230)
     EVT_SET(LVarC, LVar2)
@@ -105,7 +105,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_SUB(LVar0, 30)
     EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 15 * DT)
     EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_0162, SOUND_SPACE_MODE_0, LVarA, LVarB, LVarC)
+    EVT_CALL(PlaySoundAt, SOUND_TRIP, SOUND_SPACE_DEFAULT, LVarA, LVarB, LVarC)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD

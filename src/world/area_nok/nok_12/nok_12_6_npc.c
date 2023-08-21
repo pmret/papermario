@@ -16,7 +16,7 @@ EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Sleep)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_03E1, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_03E1, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
@@ -114,7 +114,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
         }
     },
     .settings = &N(NpcSettings_KoopaTroopa_Patrol),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -138,7 +138,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -162,7 +162,7 @@ NpcData N(NpcData_KoopaTroopa_02_Demo) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02_Demo),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -185,7 +185,7 @@ NpcData N(NpcData_Goomba) = {
         }
     },
     .settings = &N(NpcSettings_Goomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = GOOMBA_DROPS,
     .animations = GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -209,7 +209,7 @@ NpcData N(NpcData_SpikedGoomba) = {
     },
     .init = &N(EVS_NpcInit_SpikedGoomba),
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

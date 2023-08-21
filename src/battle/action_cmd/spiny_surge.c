@@ -31,7 +31,7 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->barFillWidth = 0;
     actionCommandStatus->isBarFilled = FALSE;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->hudPrepareTime = 30;
     actionCommandStatus->hudPosX = -48;
     actionCommandStatus->hudPosY = 80;
@@ -192,7 +192,7 @@ void N(update)(void) {
             }
             battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
             D_802A98C0 = battleStatus->curButtonsDown;
-            battleStatus->actionResult = actionCommandStatus->unk_5C;
+            battleStatus->actionQuality = actionCommandStatus->unk_5C;
 
             sfx_adjust_env_sound_params(SOUND_LOOP_CHARGE_BAR, 0, 0, battleStatus->actionSuccess * 12);
 
@@ -209,9 +209,9 @@ void N(update)(void) {
 
             cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
             if (cutoff >= battleStatus->actionSuccess) {
-                battleStatus->unk_86 = -2;
+                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
             } else {
-                battleStatus->unk_86 = 1;
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             }
 
             if (battleStatus->actionSuccess == 100) {

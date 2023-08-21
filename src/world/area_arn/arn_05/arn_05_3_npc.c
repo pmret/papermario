@@ -249,7 +249,7 @@ NpcData N(NpcData_Boo_01)[] = {
         },
         .init = &N(EVS_NpcInit_Boo_01),
         .settings = &N(NpcSettings_Boo_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooD,
@@ -260,7 +260,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Boo_02),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooE,
@@ -271,7 +271,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Boo_03),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooF,
@@ -282,7 +282,7 @@ NpcData N(NpcData_Boo_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Boo_04),
         .settings = &N(NpcSettings_Boo),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooG,
@@ -307,7 +307,7 @@ NpcData N(NpcData_Boo_01)[] = {
         },
         .init = &N(EVS_NpcInit_Boo_05),
         .settings = &N(NpcSettings_Boo_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = GUSTY_BOO_ANIMS,
         .tattle = MSG_NpcTattle_ARN_BooH,
@@ -316,7 +316,7 @@ NpcData N(NpcData_Boo_01)[] = {
 
 EvtScript N(EVS_TubbaWalking) = {
     EVT_LOOP(LVar0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.5))
         EVT_WAIT(5)
     EVT_END_LOOP
@@ -327,7 +327,7 @@ EvtScript N(EVS_TubbaWalking) = {
 EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(NpcFacePlayer, NPC_Boo_03, 1)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Boo_03, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)
     EVT_CALL(GetNpcPos, NPC_Boo_03, LVar0, LVar1, LVar2)
@@ -350,12 +350,12 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_Boo_03, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00A0)
-    EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_MODE_0, 450, 200, 160)
+    EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_DEFAULT, 450, 200, 160)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(0.8))
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_0262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_0262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_0262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_05, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_03, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_05, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Boo_01, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_02, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_03, EMOTE_EXCLAMATION, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
@@ -435,8 +435,8 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(NpcFaceNpc, NPC_Boo_01, NPC_Tubba, 1)
     EVT_CALL(NpcFaceNpc, NPC_Boo_02, NPC_Tubba, 1)
     EVT_CALL(SetNpcPos, NPC_Boo_03, 272, 190, 214)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_0262, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Boo_01, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_02, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_THREAD
@@ -518,7 +518,7 @@ EvtScript N(EVS_Scene_TubbaRaid) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
         EVT_WAIT(50 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_0315, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_TUBBA_GULP, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcPos, NPC_Boo_03, NPC_DISPOSE_LOCATION)
@@ -640,7 +640,7 @@ NpcData N(NpcData_Tubba) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Tubba),
     .settings = &N(NpcSettings_TubbaBlubba),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = TUBBA_ANIMS,
     .extraAnimations = N(ExtraAnims_Tubba),

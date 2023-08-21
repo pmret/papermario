@@ -11,11 +11,11 @@
 
 #define NAMESPACE battle_partner_watt
 
-extern EvtScript N(handleEvent);
-extern EvtScript N(idle);
-extern EvtScript N(nextTurn);
-extern EvtScript N(takeTurn);
-extern EvtScript N(init);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandlePhase);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(executeAction);
 extern EvtScript N(celebrate);
 extern EvtScript N(runAway);
@@ -59,7 +59,7 @@ API_CALLABLE(N(WattFXUpdate)) {
         sWattEffectData_initialized = TRUE;
     }
 
-    if (sWattEffectData_initialized == 0) {
+    if (!sWattEffectData_initialized) {
         return ApiStatus_DONE2;
     }
 
@@ -118,7 +118,7 @@ API_CALLABLE(N(WattFXUpdate)) {
 }
 
 API_CALLABLE(N(WattFXRemove)) {
-    sWattEffectData_initialized = 0;
+    sWattEffectData_initialized = FALSE;
     if (sWattEffectData_effect1 != NULL) {
         remove_effect(sWattEffectData_effect1);
     }
@@ -505,11 +505,11 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_WATT,
-    .level = 0,
+    .level = ACTOR_LEVEL_WATT,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -525,23 +525,23 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_SET_PRIORITY(99)
     EVT_CALL(N(WattFXUpdate))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(N(WattFXDisableBounce))
@@ -622,7 +622,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
@@ -676,7 +676,7 @@ EvtScript N(runAwayFail) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_RETURN
     EVT_END
 };
@@ -686,7 +686,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
             EVT_RETURN
@@ -720,7 +720,7 @@ EvtScript N(returnHome2) = {
     EVT_END
 };
 
-EvtScript N(returnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -957,7 +957,7 @@ EvtScript N(electroDash) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -1053,10 +1053,10 @@ EvtScript N(powerShock) = {
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_WAIT(15)
-        EVT_EXEC_WAIT(N(returnHome))
+        EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActionResult, LVarF)
+    EVT_CALL(GetActionQuality, LVarF)
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -1080,7 +1080,7 @@ EvtScript N(powerShock) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -1117,7 +1117,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(MoveBattleCamOver, 100 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_CALL(N(TurboChargeUnwindWatt), 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -1125,7 +1125,7 @@ EvtScript N(8023AE8C) = {
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_CUBIC_OUT)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_WAIT(10)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028B)
@@ -1136,7 +1136,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(AddBattleCamZoom, 100)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0160)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_JUMP)
         EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1200,7 +1200,7 @@ EvtScript N(8023B450) = {
     EVT_CALL(MoveBattleCamOver, 100 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_CALL(N(TurboChargeUnwindWatt), 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -1208,7 +1208,7 @@ EvtScript N(8023B450) = {
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_CUBIC_OUT)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_WAIT(10)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028B)
@@ -1297,7 +1297,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(N(WattFXDisable))
-    EVT_CALL(GetActionResult, LVar1)
+    EVT_CALL(GetActionQuality, LVar1)
     EVT_WAIT(90 * DT)
     EVT_CALL(N(SetBackgroundAlpha), 0)
     EVT_THREAD
@@ -1341,7 +1341,7 @@ EvtScript N(megaShock) = {
     EVT_THREAD
         EVT_CALL(N(PowerShockDischargeFX), 10)
     EVT_END_THREAD
-    EVT_CALL(GetActionResult, LVar0)
+    EVT_CALL(GetActionQuality, LVar0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar1, LVar2, LVar3)
     EVT_ADD(LVar2, 12)
     EVT_CALL(N(MegaShockFX), LVar0, LVar1, LVar2, LVar3)
@@ -1372,7 +1372,7 @@ EvtScript N(megaShock) = {
         EVT_CASE_GT(99)
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_CASE_DEFAULT
-            EVT_EXEC_WAIT(N(returnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

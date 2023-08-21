@@ -3,10 +3,10 @@
 
 #define NAMESPACE A(tubba_blubba)
 
-extern EvtScript N(init_80225D98);
-extern EvtScript N(takeTurn_802264AC);
-extern EvtScript N(idle_80225F58);
-extern EvtScript N(handleEvent_802260D0);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(80225E08);
 extern EvtScript N(80226558);
 extern EvtScript N(80226B88);
@@ -16,7 +16,15 @@ enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
-s32 N(IdleAnimations_80225C40)[] = {
+enum N(ActorVars) {
+    AVAR_Unk_8      = 8,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleTubba_Anim01,
     STATUS_KEY_STONE,     ANIM_BattleTubba_Anim00,
     STATUS_KEY_SLEEP,     ANIM_BattleTubba_Anim18,
@@ -30,12 +38,12 @@ s32 N(IdleAnimations_80225C40)[] = {
     STATUS_END,
 };
 
-s32 N(DefenseTable_80225C94)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80225CA0)[] = {
+s32 N(StatusTable)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              80,
@@ -60,15 +68,15 @@ s32 N(StatusTable_80225CA0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_80225D4C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -15, 75 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_80225C40),
-        .defenseTable = N(DefenseTable_80225C94),
+        .idleAnimations = N(DefaultAnims),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -78,12 +86,12 @@ ActorPartBlueprint N(ActorParts_80225D4C)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE,
-    .level = 70,
+    .level = ACTOR_LEVEL_TUBBA_BLUBBA_INVINCIBLE,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(ActorParts_80225D4C)),
-    .partsData = N(ActorParts_80225D4C),
-    .initScript = &N(init_80225D98),
-    .statusTable = N(StatusTable_80225CA0),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
+    .initScript = &N(EVS_Init),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -98,11 +106,11 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 75 },
 };
 
-EvtScript N(init_80225D98) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802264AC)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80225F58)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802260D0)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
     EVT_EXEC(N(80225E08))
     EVT_RETURN
     EVT_END
@@ -136,7 +144,7 @@ EvtScript N(80225E08) = {
     EVT_END
 };
 
-EvtScript N(idle_80225F58) = {
+EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -145,7 +153,7 @@ EvtScript N(idle_80225F58) = {
 };
 
 EvtScript N(80225F8C) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
@@ -171,9 +179,9 @@ EvtScript N(80225FD4) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_802260D0) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVarA)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -241,22 +249,22 @@ EvtScript N(handleEvent_802260D0) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(takeTurn_802264AC) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 60)
         EVT_EXEC_WAIT(N(80226558))
     EVT_ELSE
         EVT_EXEC_WAIT(N(80226B88))
     EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

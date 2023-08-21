@@ -11,13 +11,13 @@ enum {
 NpcSettings N(NpcSettings_RipCheato) = {
     .height = 30,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Unused1) = {
     .height = 23,
     .radius = 19,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/GiveReward.inc.c"
@@ -132,7 +132,7 @@ NpcData N(NpcData_RipCheato) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_RipCheato),
     .settings = &N(NpcSettings_RipCheato),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_RipCheato_Idle,

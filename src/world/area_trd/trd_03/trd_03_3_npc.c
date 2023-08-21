@@ -9,7 +9,7 @@ extern EvtScript N(EVS_EnterMap);
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -51,7 +51,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
     EVT_WAIT(25 * DT)
     EVT_CALL(SetNpcAnimation, NPC_KoopaTroopa_01, ANIM_KoopaTroopa_Idle)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_ori1, SOUND_026B, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_ori1, SOUND_026B, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 100, 0, 40 * DT, EASING_QUADRATIC_IN)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -60,7 +60,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_ori1, SOUND_026C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_ori1, SOUND_026C, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
         EVT_WAIT(10 * DT)
     EVT_END_THREAD
@@ -75,7 +75,7 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_METAL_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -98,13 +98,13 @@ EvtScript N(EVS_Scene_GreenKoopaBros) = {
     EVT_CALL(SpeakToPlayer, NPC_KoopaBros, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle, 0, MSG_CH1_00D4)
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Walk)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros, 45, 2)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros, SOUND_0173, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros, SOUND_0173, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros, ANIM_KoopaBros_Green_Run)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBros, EVT_FLOAT(0.8))
     EVT_CALL(GetNpcPos, NPC_KoopaBros, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_KoopaBros, LVar0, LVar1, LVar2, 8 * DT)
     EVT_WAIT(8 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros, SOUND_0174, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros, SOUND_0174, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcSpeed, NPC_KoopaBros, EVT_FLOAT(8.0 / DT))
     EVT_CALL(NpcMoveTo, NPC_KoopaBros, -300, 70, 0)
     EVT_SET(GB_StoryProgress, STORY_CH1_KOOPA_BROS_HID_KEY)
@@ -186,7 +186,7 @@ NpcData N(NpcData_KoopaBros) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_KoopaBros),
     .settings = &N(NpcSettings_KoopaBros),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_KoopaBros_Green_Idle,
@@ -226,7 +226,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_01),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -250,7 +250,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -273,7 +273,7 @@ NpcData N(NpcData_KoopaTroopa_03) = {
         }
     },
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

@@ -190,7 +190,7 @@ NpcData N(NpcData_Pokey_01) = {
     },
     .init = &N(EVS_NpcInit_Pokey_01),
     .settings = &N(NpcSettings_PokeyMummy),
-    .flags = ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
     .drops = POKEY_MUMMY_DROPS,
     .animations = POKEY_MUMMY_ANIMS,
 };
@@ -213,7 +213,7 @@ NpcData N(NpcData_Pokey_02) = {
     },
     .init = &N(EVS_NpcInit_Pokey_02),
     .settings = &N(NpcSettings_PokeyMummy),
-    .flags = ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
     .drops = POKEY_MUMMY_DROPS,
     .animations = POKEY_MUMMY_ANIMS,
 };
@@ -236,7 +236,7 @@ NpcData N(NpcData_Pokey_03) = {
     },
     .init = &N(EVS_NpcInit_Pokey_03),
     .settings = &N(NpcSettings_PokeyMummy),
-    .flags = ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
     .drops = POKEY_MUMMY_DROPS,
     .animations = POKEY_MUMMY_ANIMS,
 };

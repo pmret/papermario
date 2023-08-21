@@ -19,7 +19,7 @@ API_CALLABLE(N(PlaySpringReboundAnimation)) {
 
 EvtScript N(EVS_PlayWalkingSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_03AC, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_GOOMBA_BROS_STEP, SOUND_SPACE_DEFAULT)
         EVT_WAIT(4)
     EVT_END_LOOP
     EVT_RETURN
@@ -86,14 +86,14 @@ EvtScript N(EVS_NpcIdle_GoombaBros_Red) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcJumpscale, NPC_GoombaBros_Blue, EVT_FLOAT(0.8))
         EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Blue, ANIM_GoombaBros_Blue_Walk)
-        EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_ACTOR_HURT, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_GoombaBros_Blue, 267, 0, 28, 30 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_GoombaBros_Red, EVT_FLOAT(0.8))
         EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_Walk)
-        EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_ACTOR_HURT, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_GoombaBros_Red, 276, 0, 55, 30 * DT)
     EVT_END_THREAD
     EVT_WAIT(15 * DT)
@@ -123,10 +123,10 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
             EVT_THREAD
                 EVT_CALL(SetNpcJumpscale, NPC_GoombaBros_Blue, EVT_FLOAT(1.8))
                 EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Blue, ANIM_GoombaBros_Blue_CryWalk)
-                EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_ACTOR_HURT, SOUND_SPACE_DEFAULT)
                 EVT_CALL(NpcJump0, NPC_GoombaBros_Blue, 307, 25, 49, 20 * DT)
                 EVT_CALL(N(PlaySpringReboundAnimation))
-                EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_SPRING, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Blue, SOUND_SPRING, SOUND_SPACE_DEFAULT)
                 EVT_CALL(NpcJump0, NPC_GoombaBros_Blue, 401, 80, 25, 30 * DT)
                 EVT_WAIT(5 * DT)
                 EVT_CALL(SetNpcSpeed, NPC_GoombaBros_Blue, EVT_FLOAT(6.0 / DT))
@@ -141,10 +141,10 @@ EvtScript N(EVS_NpcDefeat_GoombaBros_Red) = {
             EVT_WAIT(30 * DT)
             EVT_CALL(SetNpcJumpscale, NPC_GoombaBros_Red, EVT_FLOAT(1.8))
             EVT_CALL(SetNpcAnimation, NPC_GoombaBros_Red, ANIM_GoombaBros_Red_CryWalk)
-            EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_ACTOR_HURT, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_ACTOR_HURT, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_GoombaBros_Red, 307, 25, 49, 20 * DT)
             EVT_CALL(N(PlaySpringReboundAnimation))
-            EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_SPRING, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_GoombaBros_Red, SOUND_SPRING, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_GoombaBros_Red, 401, 80, 25, 30 * DT)
             EVT_WAIT(5 * DT)
             EVT_CALL(SetNpcSpeed, NPC_GoombaBros_Red, EVT_FLOAT(6.0 / DT))

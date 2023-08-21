@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Peach) = {
     .height = 46,
     .radius = 36,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

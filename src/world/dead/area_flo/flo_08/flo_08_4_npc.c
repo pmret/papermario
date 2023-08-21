@@ -34,17 +34,17 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                 EVT_CALL(N(FlowerGuard_JudgeItemTastiness), LVar0)
                 EVT_CALL(MakeItemEntity, LVar8, -695, 20, -29, ITEM_SPAWN_MODE_DECORATION, 0)
                 EVT_SET(LVar7, LVar0)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Eat)
                 EVT_WAIT(20)
                 EVT_CALL(RemoveItemEntity, LVar7)
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(160)
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Chew, ANIM_GateFlower_Yellow_Idle, 0, MSG_CH6_0046)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_APPROVE, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_APPROVE, SOUND_SPACE_DEFAULT)
                         EVT_CALL(EndSpeech, NPC_SELF, ANIM_GateFlower_Yellow_HappyTalk, ANIM_GateFlower_Yellow_HappyIdle, 0)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_OpenGate)
-                        EVT_CALL(PlaySoundAtCollider, COLLIDER_o96, SOUND_METAL_GATE_OPEN, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtCollider, COLLIDER_o96, SOUND_METAL_GATE_OPEN, SOUND_SPACE_DEFAULT)
                         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o96, COLLIDER_FLAGS_UPPER_MASK)
                         EVT_CALL(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
                         EVT_LOOP(0)
@@ -75,7 +75,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                     EVT_CASE_DEFAULT
                         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Chew, ANIM_GateFlower_Yellow_Idle, 0, MSG_CH6_0044)
                         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Disgust)
-                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SPIT_OUT, SOUND_SPACE_MODE_0)
+                        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SPIT_OUT, SOUND_SPACE_DEFAULT)
                         EVT_CALL(MakeItemEntity, LVar8, 125, 20, 0, ITEM_SPAWN_MODE_DECORATION, 0)
                         EVT_SET(LVar7, LVar0)
                         EVT_WAIT(5)
@@ -187,7 +187,7 @@ NpcData N(NpcData_Dayzee_01) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -210,7 +210,7 @@ NpcData N(NpcData_Dayzee_02) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -233,7 +233,7 @@ NpcData N(NpcData_Dayzee_03) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -256,7 +256,7 @@ NpcData N(NpcData_Dayzee_04) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -279,7 +279,7 @@ NpcData N(NpcData_Dayzee_05) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -302,7 +302,7 @@ NpcData N(NpcData_Dayzee_06) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -325,7 +325,7 @@ NpcData N(NpcData_Dayzee_07) = {
         }
     },
     .settings = &N(NpcSettings_CrazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = CRAZY_DAYZEE_DROPS,
     .animations = CRAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -370,7 +370,7 @@ NpcData N(NpcData_AmazyDayzee) = {
     },
     .init = &N(EVS_NpcInit_AmazyDayzee),
     .settings = &N(NpcSettings_AmazyDayzee),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = AMAZY_DAYZEE_DROPS,
     .animations = AMAZY_DAYZEE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

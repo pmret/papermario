@@ -19,7 +19,7 @@ API_CALLABLE(N(UnkFunc62)) {
     f64 temp_f22_3;
     f64 temp_f22_5;
     f64 temp_f22_6;
-    f32 phi_f8;
+    f32 temp;
     f64 phi_f20;
     f32 phi_f0;
     f64 phi_f2;
@@ -49,10 +49,10 @@ API_CALLABLE(N(UnkFunc62)) {
         state->dist = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         if (state->moveTime == 0) {
             state->moveTime = state->dist / state->speed;
-            phi_f8 = state->dist - (state->moveTime * state->speed);
+            temp = state->dist - (state->moveTime * state->speed);
         } else {
             state->speed = state->dist / state->moveTime;
-            phi_f8 = state->dist - (state->moveTime * state->speed);
+            temp = state->dist - (state->moveTime * state->speed);
         }
 
         if (state->moveTime == 0) {
@@ -64,16 +64,16 @@ API_CALLABLE(N(UnkFunc62)) {
         state->unk_30.z = (state->goalPos.z - state->curPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
         state->vel = 0.0f;
-        state->speed += phi_f8 / state->moveTime;
+        state->speed += temp / state->moveTime;
 
         if (state->moveArcAmplitude < 3) {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
-            phi_f8 = state->dist;
-            phi_f8 -= 20.0;
-            phi_f8 /= 6.0;
-            phi_f8 += 47.0;
-            state->bounceDivisor = phi_f8;
+            temp = state->dist;
+            temp -= 20.0;
+            temp /= 6.0;
+            temp += 47.0;
+            state->bounceDivisor = temp;
             if (state->moveArcAmplitude == 2) {
                 state->bounceDivisor *= 1.12;
             }
@@ -87,11 +87,11 @@ API_CALLABLE(N(UnkFunc62)) {
         } else {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
-            phi_f8 = state->dist;
-            phi_f8 -= 20.0;
-            phi_f8 /= 6.0;
-            phi_f8 += 47.0;
-            state->bounceDivisor = phi_f8;
+            temp = state->dist;
+            temp -= 20.0;
+            temp /= 6.0;
+            temp += 47.0;
+            state->bounceDivisor = temp;
             if (state->moveArcAmplitude == 4) {
                 state->bounceDivisor *= 1.25;
             }

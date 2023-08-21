@@ -51,7 +51,7 @@ NpcData N(NpcData_TubbasHeart) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_TubbasHeart),
     .settings = &N(NpcSettings_TubbasHeart),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = TUBBAS_HEART_ANIMS,
 };
@@ -62,7 +62,7 @@ NpcData N(NpcData_Yakkey) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Yakkey),
     .settings = &N(NpcSettings_Yakkey),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = YAKKEY_ANIMS,
     .tattle = MSG_NpcTattle_Yakkey,

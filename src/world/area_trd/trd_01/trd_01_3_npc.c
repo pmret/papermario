@@ -22,7 +22,7 @@ API_CALLABLE(N(SetNewWanderCenterPos)) {
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_IF_EQ(LVar0, 1)
@@ -79,7 +79,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
@@ -93,7 +93,7 @@ EvtScript N(EVS_NpcIdle_KoopaTroopa_02) = {
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(1.5))
     EVT_CALL(N(SetNewWanderCenterPos))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
     EVT_RETURN
@@ -162,7 +162,7 @@ NpcData N(NpcData_KoopaTroopa_01) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_01),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_NO_DROPS,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_NO_DROPS,
     .drops = NO_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -186,7 +186,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     },
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
     .settings = &N(NpcSettings_KoopaTroopa_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = KOOPA_TROOPA_TRD_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,
@@ -233,7 +233,7 @@ NpcData N(NpcData_Bobomb) = {
         }
     },
     .settings = &N(NpcSettings_Bobomb_Guard),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = BOBOMB_DROPS,
     .animations = BOBOMB_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT,

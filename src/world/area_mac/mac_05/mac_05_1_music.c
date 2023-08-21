@@ -1,6 +1,6 @@
 #include "mac_05.h"
 
-EvtScript N(EVS_802441E0) = {
+EvtScript N(EVS_SetupMusic) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_RANGE(STORY_CH5_WHALE_MOUTH_OPEN, STORY_CH5_ENTERED_WHALE)
             EVT_CALL(SetMusicTrack, 0, SONG_WHALE_THEME, 0, 8)
@@ -9,7 +9,7 @@ EvtScript N(EVS_802441E0) = {
         EVT_CASE_DEFAULT
             EVT_CALL(FadeOutMusic, 0, 3000)
     EVT_END_SWITCH
-    EVT_CALL(PlaySound, SOUND_LOOP_58)
+    EVT_CALL(PlaySound, SOUND_LOOP_MAC_HARBOR_WATER)
     EVT_CALL(ClearAmbientSounds, 250)
     EVT_RETURN
     EVT_END

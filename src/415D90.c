@@ -2600,7 +2600,7 @@ void btl_state_update_player_menu(void) {
                                         battleStatus->submenuStatus[entryIdx] = -1;
                                     }
                                     entryIdx++;
-                                } while (0);
+                                } while (0); // TODO required to match
                             } while (0); // TODO required to match
                         }
                         battleStatus->submenuMoveCount = entryIdx;
@@ -4653,14 +4653,14 @@ void btl_state_draw_peach_menu(void) {
     }
 }
 
-static const f32 padding2 = 0.0f;
-
 s32 btl_menu_show_switch_to_peach(void) {
     if (gBattleStatus.flags2 & BS_FLAGS2_2) {
         return FALSE;
     }
     return TRUE;
 }
+
+static const f32 padding2 = 0.0f;
 
 void btl_state_update_twink_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;

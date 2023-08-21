@@ -40,7 +40,7 @@ void action_update_spin_jump(void) {
         disable_player_input();
         playerStatus->flags |= PS_FLAG_SPECIAL_JUMP;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-        sfx_play_sound_at_player(SOUND_SPIN_JUMP, SOUND_SPACE_MODE_0);
+        sfx_play_sound_at_player(SOUND_SPIN_JUMP, SOUND_SPACE_DEFAULT);
     }
 
     landed = FALSE;
@@ -136,7 +136,7 @@ void action_update_spin_jump(void) {
                         playerStatus->pitch = 0.0f;
                         playerStatus->actionSubstate++;
                         exec_ShakeCam1(0, 0, 4);
-                        sfx_play_sound_at_player(SOUND_LAND_SPIN_JUMP, SOUND_SPACE_MODE_0);
+                        sfx_play_sound_at_player(SOUND_LAND_SPIN_JUMP, SOUND_SPACE_DEFAULT);
                         start_rumble(128, 25);
                         panels = &gCurrentHiddenPanels;
                         panels->tryFlipTrigger = TRUE;

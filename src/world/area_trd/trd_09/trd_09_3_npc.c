@@ -3,12 +3,12 @@
 
 #include "world/common/enemy/BulletBill.h"
 
-API_CALLABLE(N(func_80240000_9BD660)) {
+API_CALLABLE(N(GetBulletBillVar)) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
     s32 varIdx = evt_get_variable(script, *args++);
-    s32 var3 = *args++;
+    s32 outVar = *args++;
 
     if (npcID == NPC_SELF) {
         npcID = npc->npcID;
@@ -16,9 +16,9 @@ API_CALLABLE(N(func_80240000_9BD660)) {
 
     npc = get_enemy(npcID);
     if (npc != NULL) {
-        evt_set_variable(script, var3, npc->varTable[varIdx]);
+        evt_set_variable(script, outVar, npc->varTable[varIdx]);
     } else {
-        evt_set_variable(script, var3, -1);
+        evt_set_variable(script, outVar, -1);
     }
 
     return ApiStatus_DONE2;
@@ -32,35 +32,35 @@ EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
 
 EvtScript N(D_80240844_9BDEA4) = {
     EVT_LABEL(0)
-    EVT_SETF(LVar0, EVT_FLOAT(400.0))
-    EVT_SET(LVar1, 1)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar2)
-    EVT_SET(LVar3, 10)
-    EVT_SET(LVarA, ANIM_BillBlaster_Idle)
-    EVT_SET(LVarB, ANIM_BillBlaster_Idle)
-    EVT_EXEC_WAIT(EVS_800936C0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
-    EVT_WAIT(15)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar3)
-    EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(20.0), LVar3)
-    EVT_ADD(LVar1, 12)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_CALL(SetNpcVar, LVar0, 0, 1)
-    EVT_LABEL(1)
-    EVT_CALL(GetSelfNpcID, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_CALL(GetNpcVar, LVar0, 0, LVar1)
-    EVT_IF_EQ(LVar1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(RandInt, 30, LVar0)
-    EVT_ADD(LVar0, 30)
-    EVT_WAIT(LVar0)
-    EVT_GOTO(0)
+        EVT_SETF(LVar0, EVT_FLOAT(400.0))
+        EVT_SET(LVar1, 1)
+        EVT_CALL(GetNpcYaw, NPC_SELF, LVar2)
+        EVT_SET(LVar3, 10)
+        EVT_SET(LVarA, ANIM_BillBlaster_Idle)
+        EVT_SET(LVarB, ANIM_BillBlaster_Idle)
+        EVT_EXEC_WAIT(EVS_800936C0)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
+        EVT_WAIT(15)
+        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcYaw, NPC_SELF, LVar3)
+        EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(20.0), LVar3)
+        EVT_ADD(LVar1, 12)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
+        EVT_CALL(GetSelfNpcID, LVar0)
+        EVT_ADD(LVar0, 1)
+        EVT_CALL(SetNpcVar, LVar0, 0, 1)
+        EVT_LABEL(1)
+            EVT_CALL(GetSelfNpcID, LVar0)
+            EVT_ADD(LVar0, 1)
+            EVT_CALL(GetNpcVar, LVar0, 0, LVar1)
+            EVT_IF_EQ(LVar1, 0)
+                EVT_WAIT(1)
+                EVT_GOTO(1)
+            EVT_END_IF
+        EVT_CALL(RandInt, 30, LVar0)
+        EVT_ADD(LVar0, 30)
+        EVT_WAIT(LVar0)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -136,7 +136,7 @@ NpcSettings N(missing_80240CE4) = {
     .defaultAnim = ANIM_BillBlaster_Idle,
     .height = 26,
     .radius = 32,
-    .level = 10,
+    .level = ACTOR_LEVEL_BILL_BLASTER,
     .otherAI = &N(EVS_NpcAuxAI_BillBlaster),
     .ai = &N(D_80240844_9BDEA4),
     .onHit = &N(EVS_NpcHit_BillBlaster),
@@ -147,7 +147,7 @@ NpcSettings N(missing_80240D10) = {
     .defaultAnim = ANIM_BulletBill_Idle,
     .height = 14,
     .radius = 31,
-    .level = 5,
+    .level = ACTOR_LEVEL_BULLET_BILL,
     .otherAI = &N(EVS_NpcAuxAI_BulletBill),
     .ai = &N(D_80240C1C_9BE27C),
     .onHit = &EnemyNpcHit,
@@ -367,9 +367,10 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
             EVT_END_IF
     EVT_END_IF
     EVT_LABEL(0)
-        EVT_SET(LVarA, 20)
+        EVT_SET(LVarA, NPC_BulletBill_01)
         EVT_LOOP(10)
-            EVT_CALL(N(func_80240000_9BD660), LVarA, 0, LVar0)
+            // if the bullet bill does not have an assigned owner, assign ourself and fire
+            EVT_CALL(N(GetBulletBillVar), LVarA, 0, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(GetSelfNpcID, LVar0)
                 EVT_CALL(SetNpcVar, LVarA, 0, LVar0)
@@ -423,14 +424,14 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVarA, LVarB, LVarC, 0, 0)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(6.0))
         EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(10)
+            EVT_CASE_EQ(NPC_BillBlaster_01)
                 EVT_CALL(NpcMoveTo, NPC_SELF, -437, LVar3, 0)
-            EVT_CASE_EQ(11)
+            EVT_CASE_EQ(NPC_BillBlaster_02)
                 EVT_CALL(NpcMoveTo, NPC_SELF, -460, LVar3, 0)
-            EVT_CASE_EQ(12)
+            EVT_CASE_EQ(NPC_BillBlaster_03)
                 EVT_CALL(NpcMoveTo, NPC_SELF, -450, LVar3, 0)
         EVT_END_SWITCH
-        EVT_CALL(func_80045838, -1, SOUND_SEQ_18, 0)
+        EVT_CALL(func_80045838, -1, SOUND_SEQ_BULLET_BILL_EXPLODE, 0)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Hurt)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 5)
@@ -467,7 +468,7 @@ NpcSettings N(NpcSettings_KoopaBros_Red) = {
     .defaultAnim = ANIM_KoopaBros_Red_Walk,
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Red),
     .ai = &N(EVS_NpcAI_KoopaBros_Red),
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
@@ -477,7 +478,7 @@ NpcSettings N(NpcSettings_KoopaBros_Black) = {
     .defaultAnim = ANIM_KoopaBros_Black_Walk,
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Black),
     .ai = &N(EVS_NpcAI_KoopaBros_Black),
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
@@ -487,7 +488,7 @@ NpcSettings N(NpcSettings_KoopaBros_Yellow) = {
     .defaultAnim = ANIM_KoopaBros_Yellow_Walk,
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Yellow),
     .ai = &N(EVS_NpcAI_KoopaBros_Yellow),
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
@@ -497,7 +498,7 @@ NpcSettings N(NpcSettings_KoopaBros_Green) = {
     .defaultAnim = ANIM_KoopaBros_Green_Walk,
     .height = 34,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_KoopaBros_Green),
     .ai = &N(EVS_NpcAI_KoopaBros_Green),
     .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
@@ -507,7 +508,7 @@ NpcSettings N(NpcSettings_BillBlaster) = {
     .defaultAnim = ANIM_BillBlaster_Idle,
     .height = 26,
     .radius = 32,
-    .level = 10,
+    .level = ACTOR_LEVEL_BILL_BLASTER,
     .otherAI = &N(EVS_NpcAuxAI_BillBlaster),
     .ai = &N(EVS_NpcAI_BillBlaster),
     .onHit = &N(EVS_NpcHit_BillBlaster),
@@ -517,7 +518,7 @@ NpcSettings N(NpcSettings_BulletBill) = {
     .defaultAnim = ANIM_BulletBill_Idle,
     .height = 14,
     .radius = 31,
-    .level = 5,
+    .level = ACTOR_LEVEL_BULLET_BILL,
     .otherAI = &N(EVS_NpcAuxAI_BulletBill),
     .ai = &N(EVS_NpcAI_BulletBill),
     .onHit = &EnemyNpcHit,
@@ -561,7 +562,7 @@ NpcData N(NpcData_BillBlasters)[] = {
         },
         .init = &N(EVS_NpcInit_BillBlaster),
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -582,7 +583,7 @@ NpcData N(NpcData_BillBlasters)[] = {
             }
         },
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = BILL_BLASTER_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -603,7 +604,7 @@ NpcData N(NpcData_BillBlasters)[] = {
             }
         },
         .settings = &N(NpcSettings_BillBlaster),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_40000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = BILL_BLASTER_ANIMS,
     },
@@ -710,7 +711,7 @@ NpcData N(NpcData_BulletBill_Demo1) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -760,7 +761,7 @@ NpcData N(NpcData_BulletBill_Demo2) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -810,7 +811,7 @@ NpcData N(NpcData_BulletBill_Demo3) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -860,7 +861,7 @@ NpcData N(NpcData_BulletBill_Demo4) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,
@@ -910,7 +911,7 @@ NpcData N(NpcData_BulletBill_Demo5) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BulletBill),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_80000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_80000,
     .drops = {
         .dropFlags = NPC_DROP_FLAG_80,
         .itemDropChance = 3,

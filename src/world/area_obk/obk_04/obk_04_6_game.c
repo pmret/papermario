@@ -232,7 +232,7 @@ EvtScript N(EVS_BooSpookAndVanish) = {
     EVT_END
 };
 
-EvtScript N(EVS_ShowGotSuperBootsFX) = {
+EvtScript N(EVS_SpawnGotSuperBootsFX) = {
     EVT_THREAD
         EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(8.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(17.5), EVT_FLOAT(-9.5))
     EVT_END_THREAD
@@ -324,7 +324,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
         EVT_SET(LVar1, 30)
         EVT_CALL(N(GetKeepAwayCarrierYaw))
         EVT_CALL(N(GetItemJumpDest))
-        EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 14 * DT)
         EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
@@ -359,7 +359,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
             EVT_SET(LVar1, 30)
             EVT_CALL(N(GetKeepAwayCarrierYaw))
             EVT_CALL(N(GetItemJumpDest))
-            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
             EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(1.5))
             EVT_CALL(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 14 * DT)
             EVT_CALL(SetNpcPos, NPC_DummyBoo, NPC_DISPOSE_LOCATION)
@@ -416,7 +416,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
                 EVT_END_IF
             EVT_END_LOOP
             EVT_CALL(SpeakToPlayer, MV_ItemCarrierNpc, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003E)
-            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
             EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(2.0))
             EVT_CALL(NpcJump0, NPC_DummyBoo, 0, 65, 0, 10)
             EVT_CALL(SpeakToPlayer, NPC_LeaderBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 5, MSG_CH3_003B)
@@ -443,7 +443,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     EVT_WAIT(1)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_DummyBoo, SOUND_THROW, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcJumpscale, NPC_DummyBoo, EVT_FLOAT(2.0))
     EVT_CALL(NpcJump0, NPC_DummyBoo, LVar0, LVar1, LVar2, 10)
     EVT_WAIT(10)
@@ -451,7 +451,7 @@ EvtScript N(EVS_Scene_BoosUnleashed) = {
     EVT_WAIT(1)
     EVT_SET(MF_WaitForUpgradeDone, FALSE)
     EVT_EXEC(N(EVS_PlayUpgradeSong))
-    EVT_EXEC(N(EVS_ShowGotSuperBootsFX))
+    EVT_EXEC(N(EVS_SpawnGotSuperBootsFX))
     EVT_CALL(N(UpgradeBootsToSuper))
     EVT_WAIT(30)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0180, 160, 40)

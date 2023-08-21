@@ -12,7 +12,7 @@ API_CALLABLE(N(init)) {
 
     battleStatus->unk_82 = 100;
     battleStatus->actionCmdDifficultyTable = actionCmdTable0A;
-    battleStatus->unk_86 = 127;
+    battleStatus->actionResult = ACTION_RESULT_NONE;
 
     if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
         battleStatus->actionSuccess = 0;
@@ -118,7 +118,7 @@ void N(update)(void) {
                 hud_element_clear_flags(id, 2);
             }
 
-            battleStatus->actionResult = actionCommandStatus->barFillLevel / 100;
+            battleStatus->actionQuality = actionCommandStatus->barFillLevel / 100;
 
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
@@ -133,9 +133,9 @@ void N(update)(void) {
 
             cutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
             if (battleStatus->actionSuccess >= cutoff) {
-                battleStatus->unk_86 = 1;
+                battleStatus->actionResult = ACTION_RESULT_SUCCESS;
             } else {
-                battleStatus->unk_86 = -2;
+                battleStatus->actionResult = ACTION_RESULT_MINUS_2;
             }
 
             if (battleStatus->actionSuccess == 100) {

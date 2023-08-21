@@ -76,7 +76,7 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->angularVel = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
-            bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_FLYING;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
@@ -284,7 +284,7 @@ API_CALLABLE(N(UseAbility)) {
                     bow->yaw = playerStatus->targetYaw;
                     npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
                     suggest_player_anim_always_forward(ANIM_Mario1_Crouch);
-                    sfx_play_sound_at_npc(SOUND_BOW_VANISH, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_BOW_VANISH, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     script->USE_STATE = OUTTA_SIGHT_VANISH;
                 }
                 break;
@@ -349,7 +349,7 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
 
-            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE1;
     }
@@ -399,7 +399,7 @@ API_CALLABLE(N(PutAway)) {
     if (isInitialCall) {
         partner_init_put_away(bow);
         if (N(IsHiding)) {
-            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_DEFAULT, NPC_PARTNER);
         }
         N(end_outta_sight_cleanup)(bow);
     }

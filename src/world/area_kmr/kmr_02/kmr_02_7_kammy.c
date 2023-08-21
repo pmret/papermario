@@ -45,7 +45,7 @@ Vec3f N(FlightPath_KammyDepart)[] = {
 
 EvtScript N(EVS_PlayKammyFlightSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_FLIGHT, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_FLIGHT, SOUND_SPACE_DEFAULT)
         EVT_WAIT(4 * DT)
     EVT_END_LOOP
     EVT_RETURN
@@ -149,7 +149,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
         EVT_END_IF
     EVT_KILL_THREAD(MV_Unk_04)
     EVT_KILL_THREAD(MV_Unk_05)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_032B, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_032B, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim10)
         EVT_WAIT(1)
@@ -329,7 +329,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Goombaria, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_Goompa, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(SetNpcPos, NPC_Goompa, NPC_DISPOSE_LOCATION)
     EVT_CALL(EnableNpcShadow, NPC_Goompa, FALSE)
     EVT_SET(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)

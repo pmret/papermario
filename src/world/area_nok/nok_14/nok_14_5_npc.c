@@ -8,7 +8,7 @@
 EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(AwaitPlayerApproach, -650, -35, 100)
-    EVT_CALL(PlaySoundAt, SOUND_SEARCH_BUSH, SOUND_SPACE_MODE_0, -650, 75, -120)
+    EVT_CALL(PlaySoundAt, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT, -650, 75, -120)
     EVT_THREAD
         EVT_LOOP(5)
             EVT_CALL(TranslateModel, MODEL_o122, 2, 0, 0)
@@ -92,7 +92,7 @@ NpcData N(NpcData_ParaTroopa) = {
         }
     },
     .settings = &N(NpcSettings_ParaTroopa),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = PARATROOPA_DROPS,
     .animations = PARATROOPA_ANIMS,
 };
@@ -114,7 +114,7 @@ NpcData N(NpcData_SpikedGoomba) = {
         }
     },
     .settings = &N(NpcSettings_SpikedGoomba_Wander),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPIKED_GOOMBA_DROPS,
     .animations = SPIKED_GOOMBA_ANIMS,
 };
@@ -125,7 +125,7 @@ NpcData N(NpcData_KoopaTroopa_02) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_KoopaTroopa_02),
     .settings = &N(NpcSettings_KoopaTroopa_Stationary),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE,
     .drops = KOOPA_TROOPA_NOK_DROPS,
     .animations = KOOPA_TROOPA_ANIMS,
 };

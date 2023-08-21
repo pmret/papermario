@@ -55,7 +55,7 @@ EvtScript N(EVS_NpcAI_Sentinel) = {
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
     EVT_WAIT(10)
-    EVT_CALL(func_80045838, -1, SOUND_LRAW_032E | SOUND_ID_TRIGGER_CHANGE_SOUND, 0)
+    EVT_CALL(func_80045838, -1, SOUND_LRAW_SENTINEL_ALARM | SOUND_ID_TRIGGER_CHANGE_SOUND, 0)
     EVT_THREAD
         EVT_LOOP(100)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -115,7 +115,7 @@ EvtScript N(EVS_UnusedSentinelDefeat) = {
 NpcSettings N(NpcSettings_Sentinel) = {
     .height = 38,
     .radius = 32,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_Sentinel),
     .ai = &N(EVS_NpcAI_Sentinel),
 };

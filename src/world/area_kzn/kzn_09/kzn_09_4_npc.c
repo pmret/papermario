@@ -9,7 +9,7 @@
 NpcSettings N(NpcSettings_Zipline) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/LetterDelivery.inc.c"
@@ -73,14 +73,14 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_WAIT(5)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 3)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25 * DT)
     EVT_CALL(SetSelfVar, 0, 2)
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
         EVT_LABEL(1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
         EVT_CALL(NpcJump0, NPC_SELF, -410, 870, -15, 10 * DT)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_NE(LVar0, 1)
@@ -108,11 +108,11 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_SET(LVar3, -350)
     EVT_SET(LVar4, 870)
     EVT_SET(LVar5, -15)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10 * DT)
     EVT_ADD(LVar3, 90)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Thrown)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10 * DT)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
     EVT_CALL(SetSelfVar, 0, 1)
@@ -151,7 +151,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Fallen)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
     EVT_CALL(NpcJump0, NPC_SELF, LVar3, 700, LVar5, 5)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0161, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetSelfVar, 0, 0)
@@ -174,7 +174,7 @@ EvtScript N(EVS_Scene_KoloradoFallsDown) = {
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00F5, 160, 40)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0162, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TRIP, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(7.0))
     EVT_WAIT(10 * DT)
     EVT_CALL(SetSelfVar, 0, 0)
@@ -244,7 +244,7 @@ NpcData N(NpcData_PassiveNPCs)[] = {
         .yaw = 90,
         .init = &N(EVS_Dummy_Init),
         .settings = &N(NpcSettings_Zipline),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN,
         .drops = NO_DROPS,
         .animations = KOLORADO_ANIMS,
         .tattle = MSG_NpcTattle_Kolorado,
@@ -268,7 +268,7 @@ NpcData N(NpcData_SpikeTop) = {
         }
     },
     .settings = &N(NpcSettings_SpikeTop),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
     .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

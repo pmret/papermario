@@ -145,7 +145,7 @@ EvtScript N(EVS_Main) = {
         EVT_IF_EQ(GB_StoryProgress, STORY_CH3_BEGAN_PEACH_MISSION)
             EVT_CALL(StopSound, SOUND_KKJ_ROTATING_WALL)
         EVT_ELSE
-            EVT_CALL(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, 0, 50, 5, -200)
+            EVT_CALL(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, SOUND_SPACE_DEFAULT, 50, 5, -200)
         EVT_END_IF
         EVT_WAIT(10)
     EVT_END_IF

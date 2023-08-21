@@ -5,7 +5,7 @@ EvtScript N(EVS_FlowersGentleRocking) = {
     EVT_WAIT(2)
     EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x10000)
     EVT_WAIT(2)
-    EVT_CALL(PlaySoundAt, SOUND_FLOWERS_LAUGH, SOUND_SPACE_MODE_0, -23, 0, 300)
+    EVT_CALL(PlaySoundAt, SOUND_FLOWERS_LAUGH, SOUND_SPACE_DEFAULT, -23, 0, 300)
     EVT_CALL(MakeLerp, 0, 30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
@@ -19,7 +19,7 @@ EvtScript N(EVS_FlowersGentleRocking) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_FLOWERS_LAUGH, SOUND_SPACE_MODE_0, -23, 0, 300)
+    EVT_CALL(PlaySoundAt, SOUND_FLOWERS_LAUGH, SOUND_SPACE_DEFAULT, -23, 0, 300)
     EVT_CALL(MakeLerp, 30, -30, 50, EASING_COS_IN_OUT)
     EVT_LABEL(20)
     EVT_CALL(UpdateLerp)
@@ -33,7 +33,7 @@ EvtScript N(EVS_FlowersGentleRocking) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(20)
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_FLOWERS_LAUGH, SOUND_SPACE_MODE_0, -23, 0, 300)
+    EVT_CALL(PlaySoundAt, SOUND_FLOWERS_LAUGH, SOUND_SPACE_DEFAULT, -23, 0, 300)
     EVT_CALL(MakeLerp, -30, 0, 50, EASING_COS_IN_OUT)
     EVT_LABEL(30)
     EVT_CALL(UpdateLerp)

@@ -4,7 +4,7 @@ EvtScript N(EVS_OpenCellDoor) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(PlayerMoveTo, -30, 15, 20)
     EVT_CALL(InterpPlayerYaw, 90, 2)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_METAL_GATE_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_METAL_GATE_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 140, 60, EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)

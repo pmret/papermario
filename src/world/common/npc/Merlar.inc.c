@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcAuxAI_Merlar) = {
 NpcSettings N(NpcSettings_Merlar) = {
     .height = 60,
     .radius = 60,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_Merlar),
 };
 

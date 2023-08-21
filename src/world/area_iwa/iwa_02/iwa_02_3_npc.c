@@ -94,7 +94,7 @@ NpcData N(NpcData_MontyMole_01)[] = {
             }
         },
         .settings = &N(NpcSettings_MontyMole_WallAmbush),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = MONTY_MOLE_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -116,7 +116,7 @@ NpcData N(NpcData_MontyMole_01)[] = {
             }
         },
         .settings = &N(NpcSettings_MontyMole_WallAmbush_Hole),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_DISABLE_AI | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = MONTY_MOLE_AMBUSH_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT,
@@ -138,8 +138,8 @@ EvtScript N(EVS_Bubulb_Conversation) = {
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
     EVT_IF_EQ(GF_IWA02_Gift_MagicalSeed2, FALSE)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_MODE_0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_PopUp)
         EVT_WAIT(45)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_Idle)
@@ -186,7 +186,7 @@ NpcData N(NpcData_Bubulb) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Bubulb),
     .settings = &N(NpcSettings_Bubulb),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = BUBULB_PURPLE_ANIMS,
     .tattle = MSG_NpcTattle_IWA_Bubulb_Revealed,

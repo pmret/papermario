@@ -11,7 +11,7 @@ EvtScript N(EVS_SetupMusic) = {
         EVT_END_SWITCH
         EVT_THREAD
             EVT_WAIT(60)
-            EVT_CALL(StopSound, SOUND_LOOP_17)
+            EVT_CALL(StopSound, SOUND_LOOP_JAN_BEACH_WAVES)
         EVT_END_THREAD
     EVT_END_IF
     EVT_RETURN

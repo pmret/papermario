@@ -137,7 +137,7 @@ EvtScript N(EVS_NpcInteract_Lily) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Lily_TalkPlead, ANIM_Lily_IdlePlead, 5, MSG_CH6_0079)
                 EVT_CALL(NpcFacePlayer, NPC_SELF, 1)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Lily_Idle)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_MODE_0)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
                 EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
                 EVT_WAIT(15)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Lily_Idle, ANIM_Lily_Idle, 0, MSG_CH6_007A)
@@ -205,7 +205,7 @@ NpcData N(NpcData_Lily) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Lily),
     .settings = &N(NpcSettings_Lily),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = LILY_ANIMS,
     .tattle = MSG_NpcTattle_Lily,

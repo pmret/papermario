@@ -191,8 +191,8 @@ void enable_actor_blur(Actor* actor) {
     s32 i, j;
     s32 numParts;
 
-    decorationTable->effectType = 0;
-    decorationTable->unk_7DB++;
+    decorationTable->blurDisableDelay = 0;
+    decorationTable->blurEnableCount++;
     actor->flags |= ACTOR_FLAG_BLUR_ENABLED;
     partsTable = actor->partsTable;
     numParts = actor->numParts;
@@ -201,7 +201,7 @@ void enable_actor_blur(Actor* actor) {
         if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_2)) {
             decorationTable = partsTable->decorationTable;
             decorationTable->unk_7D8 = 0;
-            decorationTable->unk_7D9 = 0;
+            decorationTable->blurBufferPos = 0;
             for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
                 decorationTable->posX[j] = partsTable->curPos.x;
                 decorationTable->posY[j] = partsTable->curPos.y;
@@ -225,10 +225,10 @@ void disable_actor_blur(Actor* actor) {
     if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
-        if (decorationTable->unk_7DB != 0) {
-            decorationTable->unk_7DB--;
-            if (decorationTable->unk_7DB == 0) {
-                decorationTable->effectType = 20;
+        if (decorationTable->blurEnableCount != 0) {
+            decorationTable->blurEnableCount--;
+            if (decorationTable->blurEnableCount == 0) {
+                decorationTable->blurDisableDelay = 20;
             }
         }
     }
@@ -240,24 +240,24 @@ void reset_actor_blur(Actor* actor) {
     if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
-        if (decorationTable->unk_7DB != 0) {
-            decorationTable->unk_7DB--;
-            if (decorationTable->unk_7DB == 0) {
+        if (decorationTable->blurEnableCount != 0) {
+            decorationTable->blurEnableCount--;
+            if (decorationTable->blurEnableCount == 0) {
                 actor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
-                decorationTable->effectType = 1;
+                decorationTable->blurDisableDelay = 1;
             }
         }
     }
 }
 
-void func_80254610(Actor* actor) {
+void force_disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
     if (actorPart->idleAnimations != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
-        decorationTable->unk_7DB = 0;
-        decorationTable->effectType = 20;
+        decorationTable->blurEnableCount = 0;
+        decorationTable->blurDisableDelay = 20;
     }
 }
 
@@ -273,8 +273,8 @@ void reset_partner_blur(void) {
     reset_actor_blur(gBattleStatus.partnerActor);
 }
 
-void func_802546B0(void) {
-    func_80254610(gBattleStatus.partnerActor);
+void force_disable_partner_blur(void) {
+    force_disable_actor_blur(gBattleStatus.partnerActor);
 }
 
 void enable_player_blur(void) {
@@ -283,11 +283,11 @@ void enable_player_blur(void) {
     DecorationTable* decorationTable = partsTable->decorationTable;
     s32 i;
 
-    decorationTable->effectType = 0;
-    decorationTable->unk_7DB++;
+    decorationTable->blurDisableDelay = 0;
+    decorationTable->blurEnableCount++;
     playerActor->flags |= ACTOR_FLAG_BLUR_ENABLED;
     decorationTable->unk_7D8 = 0;
-    decorationTable->unk_7D9 = 0;
+    decorationTable->blurBufferPos = 0;
 
     for (i = 0; i < ARRAY_COUNT(decorationTable->posX); i++) {
         decorationTable->posX[i] = partsTable->curPos.x;
@@ -304,51 +304,57 @@ void enable_player_blur(void) {
 }
 
 void disable_player_blur(void) {
-    DecorationTable* decorationTable = gBattleStatus.playerActor->partsTable->decorationTable;
+    Actor* playerActor = gBattleStatus.playerActor;
+    ActorPart* partsTable = playerActor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
 
-    if (decorationTable->unk_7DB != 0) {
-        decorationTable->unk_7DB--;
-        if (decorationTable->unk_7DB == 0) {
-            decorationTable->effectType = 20;
+    if (decorationTable->blurEnableCount != 0) {
+        decorationTable->blurEnableCount--;
+        if (decorationTable->blurEnableCount == 0) {
+            decorationTable->blurDisableDelay = 20;
         }
     }
 }
 
-void func_80254950(void) {
+void reset_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
-    DecorationTable* decorationTable = playerActor->partsTable->decorationTable;
+    ActorPart* partsTable = playerActor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
 
-    if (decorationTable->unk_7DB != 0) {
-        decorationTable->unk_7DB--;
-        if (decorationTable->unk_7DB == 0) {
+    if (decorationTable->blurEnableCount != 0) {
+        decorationTable->blurEnableCount--;
+        if (decorationTable->blurEnableCount == 0) {
             playerActor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
-            decorationTable->effectType = 1;
+            decorationTable->blurDisableDelay = 1;
         }
     }
 }
 
-void func_802549A0(void) {
-    DecorationTable* decorationTable = gBattleStatus.playerActor->partsTable->decorationTable;
+void force_disable_player_blur(void) {
+    Actor* playerActor = gBattleStatus.playerActor;
+    ActorPart* partsTable = playerActor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
 
-    decorationTable->unk_7DB = 0;
-    decorationTable->effectType = 20;
+    decorationTable->blurEnableCount = 0;
+    decorationTable->blurDisableDelay = 20;
 }
 
-void func_802549C0(void) {
+void force_disable_player_blur_immediately(void) {
     Actor* playerActor = gBattleStatus.playerActor;
-    DecorationTable* decorationTable = playerActor->partsTable->decorationTable;
+    ActorPart* partsTable = playerActor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
 
     playerActor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
-    decorationTable->unk_7DB = 0;
-    decorationTable->effectType = 1;
+    decorationTable->blurEnableCount = 0;
+    decorationTable->blurDisableDelay = 1;
 }
 
-void func_802549F4(Actor* actor) {
+void update_player_actor_blur_history(Actor* actor) {
     ActorPart* partsTable = actor->partsTable;
     DecorationTable* decorationTable = partsTable->decorationTable;
 
     if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != NULL) {
-        s32 i = decorationTable->unk_7D9;
+        s32 i = decorationTable->blurBufferPos;
 
         decorationTable->posX[i] = partsTable->curPos.x;
         decorationTable->posY[i] = partsTable->curPos.y;
@@ -366,7 +372,7 @@ void func_802549F4(Actor* actor) {
         if (i >= ARRAY_COUNT(decorationTable->posX)) {
             i = 0;
         }
-        decorationTable->unk_7D9 = i;
+        decorationTable->blurBufferPos = i;
     }
 }
 
@@ -375,105 +381,110 @@ void appendGfx_player_actor_blur(Actor* actor) {
     Matrix4f mtxScale;
     Matrix4f mtxPivotOn, mtxPivotOff, mtxTranslate;
     Matrix4f mtxTransform, mtxTemp;
-    s32 delay;
-    s32 num;
+    s32 strideIdx;
+    s32 drawIdx;
     s32 yaw;
     ActorPart* partTable;
     DecorationTable* decorationTable;
     f32 rotX, rotY, rotZ;
     s32 prevOpacity;
-    s32 temp_v1;
+    s32 opacity;
     s32 pivotOffsetX;
     s32 pivotOffsetY;
     s32 bufPos;
-    s32 newOpacityBase;
-    s32 newOpacityModulus;
+    s32 blurOpacityBase;
+    s32 opacityLossIncrement;
     f32 x, y, z;
 
     partTable = actor->partsTable;
     decorationTable = partTable->decorationTable;
-    if (decorationTable->effectType != 0) {
-        decorationTable->effectType--;
-        if (decorationTable->effectType == 0) {
+    if (decorationTable->blurDisableDelay != 0) {
+        decorationTable->blurDisableDelay--;
+        if (decorationTable->blurDisableDelay == 0) {
             actor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
             return;
         }
     }
 
     if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != NULL) {
-        delay = 0;
-        num = 0;
-        bufPos = decorationTable->unk_7D9;
+        bufPos = decorationTable->blurBufferPos;
+        strideIdx = 0;
+        drawIdx = 0;
 
-        while (1) {
+        while (TRUE) {
             bufPos--;
-            delay++;
+            strideIdx++;
             if (bufPos < 0) {
                 bufPos = ARRAY_COUNT(decorationTable->posX) - 1;
             }
-            if (bufPos == decorationTable->unk_7D9) {
+            if (bufPos == decorationTable->blurBufferPos) {
                 break;
             }
 
-            if (delay >= 3) {
-                delay = 0;
-                num++;
-
-                if (decorationTable->unk_7DA < num) {
-                    break;
-                }
-                temp_v1 = partTable->opacity;
-                x = decorationTable->posX[bufPos];
-                y = decorationTable->posY[bufPos];
-                z = decorationTable->posZ[bufPos];
-
-                yaw = decorationTable->yaw[bufPos];
-
-                pivotOffsetX = decorationTable->rotPivotOffsetX[bufPos];
-                pivotOffsetY = decorationTable->rotPivotOffsetY[bufPos];
-
-                rotX = decorationTable->rotX[bufPos] * 2;
-                rotY = decorationTable->rotY[bufPos] * 2;
-                rotZ = decorationTable->rotZ[bufPos] * 2;
-
-                newOpacityBase = 120;
-                newOpacityModulus = 20;
-                if (temp_v1 < 50) {
-                    newOpacityBase = 50;
-                    newOpacityModulus = 8;
-                } else if (temp_v1 < 100) {
-                    newOpacityBase = 70;
-                    newOpacityModulus = 10;
-                } else if (temp_v1 < 150) {
-                    newOpacityBase = 100;
-                    newOpacityModulus = 15;
-                }
-
-                guTranslateF(mtxTranslate, x, y, z);
-                guTranslateF(mtxPivotOn, -pivotOffsetX, -pivotOffsetY, 0.0f);
-                guTranslateF(mtxPivotOff, pivotOffsetX, pivotOffsetY, 0.0f);
-                guRotateF(mtxRotX, rotX, 1.0f, 0.0f, 0.0f);
-                guRotateF(mtxRotY, rotY, 0.0f, 1.0f, 0.0f);
-                guRotateF(mtxRotZ, rotZ, 0.0f, 0.0f, 1.0f);
-                guMtxCatF(mtxRotX, mtxRotY, mtxTransform);
-                guMtxCatF(mtxTransform, mtxRotZ, mtxRotation);
-                guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
-                                actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor * partTable->verticalStretch,
-                                actor->scale.z * SPRITE_WORLD_SCALE_D);
-                guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
-                guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
-                guMtxCatF(mtxTransform, mtxPivotOff, mtxTemp);
-                guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
-                prevOpacity = partTable->opacity;
-                partTable->opacity = newOpacityBase - (num * newOpacityModulus);
-                render_with_adjusted_palettes(SPRITE_MODE_PLAYER, partTable, clamp_angle(yaw + 180), mtxTransform, 1);
-                partTable->opacity = prevOpacity;
+            // only draw every third blur frame
+            if (strideIdx < 3) {
+                continue;
             }
+
+            strideIdx = 0;
+            drawIdx++;
+
+            if (decorationTable->blurDrawCount < drawIdx) {
+                break;
+            }
+
+            opacity = partTable->opacity;
+
+            x = decorationTable->posX[bufPos];
+            y = decorationTable->posY[bufPos];
+            z = decorationTable->posZ[bufPos];
+
+            yaw = decorationTable->yaw[bufPos];
+
+            pivotOffsetX = decorationTable->rotPivotOffsetX[bufPos];
+            pivotOffsetY = decorationTable->rotPivotOffsetY[bufPos];
+
+            rotX = decorationTable->rotX[bufPos] * 2;
+            rotY = decorationTable->rotY[bufPos] * 2;
+            rotZ = decorationTable->rotZ[bufPos] * 2;
+
+            blurOpacityBase = 120;
+            opacityLossIncrement = 20;
+            if (opacity < 50) {
+                blurOpacityBase = 50;
+                opacityLossIncrement = 8;
+            } else if (opacity < 100) {
+                blurOpacityBase = 70;
+                opacityLossIncrement = 10;
+            } else if (opacity < 150) {
+                blurOpacityBase = 100;
+                opacityLossIncrement = 15;
+            }
+
+            guTranslateF(mtxTranslate, x, y, z);
+            guTranslateF(mtxPivotOn, -pivotOffsetX, -pivotOffsetY, 0.0f);
+            guTranslateF(mtxPivotOff, pivotOffsetX, pivotOffsetY, 0.0f);
+            guRotateF(mtxRotX, rotX, 1.0f, 0.0f, 0.0f);
+            guRotateF(mtxRotY, rotY, 0.0f, 1.0f, 0.0f);
+            guRotateF(mtxRotZ, rotZ, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(mtxRotX, mtxRotY, mtxTransform);
+            guMtxCatF(mtxTransform, mtxRotZ, mtxRotation);
+            guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
+                            actor->scale.y * SPRITE_WORLD_SCALE_D * actor->scalingFactor * partTable->verticalStretch,
+                            actor->scale.z * SPRITE_WORLD_SCALE_D);
+            guMtxCatF(mtxScale, mtxPivotOn, mtxTemp);
+            guMtxCatF(mtxTemp, mtxRotation, mtxTransform);
+            guMtxCatF(mtxTransform, mtxPivotOff, mtxTemp);
+            guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
+            prevOpacity = partTable->opacity;
+            partTable->opacity = blurOpacityBase - (drawIdx * opacityLossIncrement);
+            render_with_adjusted_palettes(SPRITE_MODE_PLAYER, partTable, clamp_angle(yaw + 180), mtxTransform, 1);
+            partTable->opacity = prevOpacity;
         }
     }
 }
 
-void func_802550BC(s32 arg0, Actor* actor) {
+void update_nonplayer_actor_blur_history(b32 isPartner, Actor* actor) {
     s32 numParts = actor->numParts;
     ActorPart* partsTable = actor->partsTable;
     DecorationTable* decorationTable;
@@ -484,7 +495,7 @@ void func_802550BC(s32 arg0, Actor* actor) {
             partsTable = partsTable->nextPart;
         } else {
             decorationTable = partsTable->decorationTable;
-            j = decorationTable->unk_7D9;
+            j = decorationTable->blurBufferPos;
 
             decorationTable->posX[j] = partsTable->curPos.x;
             decorationTable->posY[j] = partsTable->curPos.y;
@@ -502,12 +513,12 @@ void func_802550BC(s32 arg0, Actor* actor) {
             if (j >= ARRAY_COUNT(decorationTable->posX)) {
                 j = 0;
             }
-            decorationTable->unk_7D9 = j;
+            decorationTable->blurBufferPos = j;
         }
     }
 }
 
-void func_802552EC(s32 arg0, Actor* actor) {
+void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
     DecorationTable* decorationTable;
     ActorPart* partTable;
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation;
@@ -516,16 +527,16 @@ void func_802552EC(s32 arg0, Actor* actor) {
     Matrix4f mtxPivotOn, mtxPivotOff;
     Matrix4f mtxActor, mtxPartScale;
     s32 numParts;
-    s32 i, j, k, l;
+    s32 i, bufPos, strideIdx, drawIdx;
     f32 x, y, z;
     f32 rotX, rotY, rotZ;
     s32 yaw;
     s32 opacity;
     s32 pivotX;
     s32 pivotY;
-    s32 phi_fp;
-    s32 phi_s6;
-    s32 temp;
+    s32 blurOpacityBase;
+    s32 opacityLossIncrement;
+    s32 blurOpacity;
     s32 flags;
 
     guRotateF(mtxRotX, actor->rot.x, 1.0f, 0.0f, 0.0f);
@@ -547,9 +558,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
         }
 
         decorationTable = partTable->decorationTable;
-        if (decorationTable->effectType != 0) {
-            decorationTable->effectType--;
-            if (decorationTable->effectType == 0) {
+        if (decorationTable->blurDisableDelay != 0) {
+            decorationTable->blurDisableDelay--;
+            if (decorationTable->blurDisableDelay == 0) {
                 actor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
                 partTable = partTable->nextPart;
                 continue;
@@ -565,59 +576,60 @@ void func_802552EC(s32 arg0, Actor* actor) {
             guScaleF(mtxPartScale, actor->scale.x * SPRITE_WORLD_SCALE_D, actor->scale.y * SPRITE_WORLD_SCALE_D, actor->scale.z * SPRITE_WORLD_SCALE_D);
         }
 
-        j = decorationTable->unk_7D9;
-        k = 0;
-        l = 0;
+        bufPos = decorationTable->blurBufferPos;
+        strideIdx = 0;
+        drawIdx = 0;
 
-        while (1) {
-            j--;
-            k++;
+        while (TRUE) {
+            bufPos--;
+            strideIdx++;
 
-            if (j < 0) {
-                j = 15;
+            if (bufPos < 0) {
+                bufPos = 15;
             }
 
-            if (j == decorationTable->unk_7D9) {
+            if (bufPos == decorationTable->blurBufferPos) {
                 break;
             }
 
-            if (k < 3) {
+            // only draw every third blur frame
+            if (strideIdx < 3) {
                 continue;
             }
 
-            k = 0;
-            l++;
+            strideIdx = 0;
+            drawIdx++;
 
-            if (decorationTable->unk_7DA < l) {
+            if (decorationTable->blurDrawCount < drawIdx) {
                 break;
             }
 
             opacity = partTable->opacity;
 
-            x = decorationTable->posX[j];
-            y = decorationTable->posY[j];
-            z = decorationTable->posZ[j];
+            x = decorationTable->posX[bufPos];
+            y = decorationTable->posY[bufPos];
+            z = decorationTable->posZ[bufPos];
 
-            yaw = decorationTable->yaw[j];
+            yaw = decorationTable->yaw[bufPos];
 
-            pivotX = decorationTable->rotPivotOffsetX[j];
-            pivotY = decorationTable->rotPivotOffsetY[j];
+            pivotX = decorationTable->rotPivotOffsetX[bufPos];
+            pivotY = decorationTable->rotPivotOffsetY[bufPos];
 
-            rotX = decorationTable->rotX[j] * 2;
-            rotY = decorationTable->rotY[j] * 2;
-            rotZ = decorationTable->rotZ[j] * 2;
+            rotX = decorationTable->rotX[bufPos] * 2;
+            rotY = decorationTable->rotY[bufPos] * 2;
+            rotZ = decorationTable->rotZ[bufPos] * 2;
 
-            phi_fp = 120;
-            phi_s6 = 20;
+            blurOpacityBase = 120;
+            opacityLossIncrement = 20;
             if (opacity < 50) {
-                phi_fp = 50;
-                phi_s6 = 8;
+                blurOpacityBase = 50;
+                opacityLossIncrement = 8;
             } else if (opacity < 100) {
-                phi_fp = 70;
-                phi_s6 = 10;
+                blurOpacityBase = 70;
+                opacityLossIncrement = 10;
             } else if (opacity < 150) {
-                phi_fp = 100;
-                phi_s6 = 15;
+                blurOpacityBase = 100;
+                opacityLossIncrement = 15;
             }
 
             if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
@@ -647,37 +659,37 @@ void func_802552EC(s32 arg0, Actor* actor) {
             guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
             flags = ACTOR_PART_FLAG_80000000;
-            temp = phi_fp - l * phi_s6;
-            if (arg0 == 0) {
-                spr_draw_npc_sprite(partTable->spriteInstanceID | flags, yaw, temp, 0, mtxTransform);
+            blurOpacity = blurOpacityBase - drawIdx * opacityLossIncrement;
+            if (!isPartner) {
+                spr_draw_npc_sprite(partTable->spriteInstanceID | flags, yaw, blurOpacity, 0, mtxTransform);
             } else {
-                spr_draw_npc_sprite(partTable->spriteInstanceID | flags, clamp_angle(yaw + 180), temp, 0, mtxTransform);
+                spr_draw_npc_sprite(partTable->spriteInstanceID | flags, clamp_angle(yaw + 180), blurOpacity, 0, mtxTransform);
             }
         }
     }
 }
 
-void func_8025593C(Actor* actor) {
-    func_802550BC(0, actor);
+void update_enemy_actor_blur_history(Actor* actor) {
+    update_nonplayer_actor_blur_history(FALSE, actor);
 }
 
 void appendGfx_enemy_actor_blur(void* data) {
     Actor* actor = data;
 
-    func_802552EC(0, actor);
+    appendGfx_nonplayer_actor_blur(FALSE, actor);
 }
 
-void func_8025597C(Actor* actor) {
-    func_802550BC(1, actor);
+void update_partner_actor_blur_history(Actor* actor) {
+    update_nonplayer_actor_blur_history(TRUE, actor);
 }
 
 void appendGfx_partner_actor_blur(void* data) {
     Actor* actor = data;
 
-    func_802552EC(1, actor);
+    appendGfx_nonplayer_actor_blur(TRUE, actor);
 }
 
-void update_actor_shadow(s32 arg0, Actor* actor) {
+void update_nonplayer_actor_shadow(b32 isPartner, Actor* actor) {
     Camera* camera = &gCameras[CAM_BATTLE];
     ActorPart* actorPart;
     Shadow* shadow;
@@ -694,10 +706,10 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
         shadow->flags |= ENTITY_FLAG_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
-                if (arg0 == 0) {
-                    func_8025593C(actor);
+                if (!isPartner) {
+                    update_enemy_actor_blur_history(actor);
                 } else {
-                    func_8025597C(actor);
+                    update_partner_actor_blur_history(actor);
                 }
             }
 
@@ -804,19 +816,19 @@ void update_enemy_shadows(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-        update_actor_shadow(0, battleStatus->enemyActors[i]);
+        update_nonplayer_actor_shadow(FALSE, battleStatus->enemyActors[i]);
     }
 }
 
 void update_hero_shadows(void) {
-    update_actor_shadow(1, gBattleStatus.partnerActor);
+    update_nonplayer_actor_shadow(TRUE, gBattleStatus.partnerActor);
     update_player_actor_shadow();
 }
 
 void func_80255FD8(void) {
 }
 
-void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
+void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
     BattleStatus* battleStatus = &gBattleStatus;
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation;
     Matrix4f mtxScale, mtxScaleMod;
@@ -1399,7 +1411,7 @@ void update_player_actor_shadow(void) {
     parts->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_MAIN, parts->curAnimation, parts->animationRate);
 
     if (player->flags & ACTOR_FLAG_BLUR_ENABLED) {
-        func_802549F4(player);
+        update_player_actor_blur_history(player);
     }
 
     shadow = get_shadow_by_index(player->shadow.id);

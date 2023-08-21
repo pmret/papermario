@@ -2,7 +2,7 @@
 #include "script_api/battle.h"
 #include "sprite/player.h"
 
-#define NAMESPACE battle_move_twink_dash
+#define NAMESPACE battle_move_peach_focus_alt
 
 #include "battle/common/move/StarPowerSupport.inc.c"
 

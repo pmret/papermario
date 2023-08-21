@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcInteract_HeartPlant) = {
     EVT_CALL(GetSelfVar, 1, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetSelfVar, 1, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEART_PLANT, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEART_PLANT, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
         EVT_WAIT(1)
         EVT_CALL(N(HeartPlant_SpawnHeart))
@@ -43,14 +43,14 @@ EvtScript N(EVS_NpcInteract_HeartPlant) = {
 NpcSettings N(NpcSettings_HeartPlant) = {
     .height = 20,
     .radius = 28,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_HeartPlant),
     .onInteract = &N(EVS_NpcInteract_HeartPlant),
 };
 
 #define HEART_PLANT_NPC_DATA \
     .settings = &N(NpcSettings_HeartPlant), \
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
     .drops = NO_DROPS, \
     .animations = HEART_PLANT_ANIMS, \
     .tattle = MSG_NpcTattle_HeartPlant, \

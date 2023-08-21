@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Snowman) = {
     .height = 60,
     .radius = 40,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/complete/KeyItemChoice.inc.c"
@@ -64,7 +64,7 @@ EvtScript N(EVS_ItemPrompt_Scarf) = {
                     EVT_CALL(GetNpcPos, NPC_Snowman_03, LVar0, LVar1, LVar2)
                     EVT_ADD(LVar1, 30)
                     EVT_ADD(LVar2, 20)
-                    EVT_CALL(PlaySoundAt, SOUND_SRAW_1F_A, 0, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAt, SOUND_STAR_SPIRIT_CAST_A, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 10)
                     EVT_WAIT(20)
                     EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
@@ -104,7 +104,7 @@ EvtScript N(EVS_ItemPrompt_Bucket) = {
                     EVT_CALL(GetNpcPos, NPC_Snowman_06, LVar0, LVar1, LVar2)
                     EVT_ADD(LVar1, 60)
                     EVT_ADD(LVar2, 20)
-                    EVT_CALL(PlaySoundAt, SOUND_SRAW_1F_A, 0, LVar0, LVar1, LVar2)
+                    EVT_CALL(PlaySoundAt, SOUND_STAR_SPIRIT_CAST_A, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 10)
                     EVT_WAIT(20)
                     EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
@@ -294,7 +294,7 @@ NpcData N(NpcData_Dummy) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Dummy),
     .settings = &N(NpcSettings_Snowman),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = PENGUIN_ANIMS,
 };

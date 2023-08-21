@@ -4,7 +4,7 @@
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #include "world/common/npc/Bubulb_Patrol.inc.c"
@@ -478,7 +478,7 @@ EvtScript N(EVS_Scene_RescuedKlevar) = {
     EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Leap)
     EVT_WAIT(20)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0139, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, LVar1)
     EVT_ADD(LVar1, 50)
@@ -491,7 +491,7 @@ EvtScript N(EVS_Scene_RescuedKlevar) = {
         EVT_WAIT(6)
     EVT_END_LOOP
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0188, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
@@ -557,7 +557,7 @@ EvtScript N(EVS_Scene_RescuedKlevar) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtNpc, NPC_Klevar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_Klevar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
@@ -625,7 +625,7 @@ NpcData N(NpcData_Wisterwood) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Wisterwood),
     .settings = &N(NpcSettings_Dummy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = BUBULB_PINK_ANIMS,
 };
@@ -651,7 +651,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_01),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_PINK_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbA,
@@ -676,7 +676,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_02),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_PURPLE_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbB,
@@ -701,7 +701,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_03),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_GREEN_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbC,
@@ -726,7 +726,7 @@ NpcData N(NpcData_Bubulbs)[] = {
         },
         .init = &N(EVS_NpcInit_Bubulb_04),
         .settings = &N(NpcSettings_Bubulb_Patrol),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = NO_DROPS,
         .animations = BUBULB_YELLOW_ANIMS,
         .tattle = MSG_NpcTattle_FLO_BubulbD,
@@ -739,7 +739,7 @@ NpcData N(NpcData_Tolielup) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Tolielup),
     .settings = &N(NpcSettings_Tolielup),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = TOLIELUP_ANIMS,
     .tattle = MSG_NpcTattle_Tolielup,
@@ -751,7 +751,7 @@ NpcData N(NpcData_Klevar) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Klevar),
     .settings = &N(NpcSettings_StarSpirit),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = KLEVAR_ANIMS,
 };
@@ -762,7 +762,7 @@ NpcData N(NpcData_Lakilulu) = {
     .yaw = 270,
     .init = &N(EVS_NpcInit_Lakilulu),
     .settings = &N(NpcSettings_Dummy),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,

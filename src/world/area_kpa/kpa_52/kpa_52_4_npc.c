@@ -21,7 +21,7 @@ NpcData N(NpcData_HammerBros_01)[] = {
             }
         },
         .settings = &N(NpcSettings_HammerBros_Wander),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },
@@ -51,7 +51,7 @@ NpcData N(NpcData_HammerBros_02)[] = {
             }
         },
         .settings = &N(NpcSettings_HammerBros_Wander),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = HAMMER_BROS_DROPS,
         .animations = HAMMER_BROS_ANIMS,
     },

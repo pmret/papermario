@@ -60,7 +60,7 @@ EvtScript N(EVS_Scene_PullPinkSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_01F1, SOUND_SPACE_MODE_0, -395, 0, -185)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_TRAIN_TRACK_LEVER, SOUND_SPACE_DEFAULT, -395, 0, -185)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o930, COLLIDER_FLAGS_UPPER_MASK)
     EVT_WAIT(20 * DT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 223, 10, -165)
@@ -70,7 +70,7 @@ EvtScript N(EVS_Scene_PullPinkSwitch) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAt, SOUND_01F2, SOUND_SPACE_MODE_0, 265, 0, -235)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_FLIP_TRAIN_TRACK, SOUND_SPACE_DEFAULT, 265, 0, -235)
     EVT_CALL(MakeLerp, 0, 180, 30 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
@@ -81,7 +81,7 @@ EvtScript N(EVS_Scene_PullPinkSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(1)
         EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0051, SOUND_SPACE_MODE_0, 265, 0, -235)
+    EVT_CALL(PlaySoundAt, SOUND_OMO_FLIP_TRACK_THUD, SOUND_SPACE_DEFAULT, 265, 0, -235)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
     EVT_CALL(GetModelCenter, MODEL_o897)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0)

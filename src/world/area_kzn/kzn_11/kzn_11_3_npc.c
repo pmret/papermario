@@ -31,7 +31,7 @@ EvtScript N(EVS_FireBar_Defeated) = {
         EVT_SET(LVar1, LVarB)
     EVT_END_LOOP
     EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_FIRE_BAR_DEAD, SOUND_SPACE_MODE_0, LVar1, LVar2, LVar3)
+    EVT_CALL(PlaySoundAt, SOUND_SEQ_FIRE_BAR_DEAD, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
     EVT_LOOP(10)
         EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
         EVT_CALL(RandInt, 50, LVar4)
@@ -117,7 +117,7 @@ NpcSettings N(NpcSettings_FireBar_01) = {
     .height = 12,
     .radius = 20,
     .ai = &N(EVS_NpcAI_FireBar_01),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_FireBar_02) = {
@@ -125,7 +125,7 @@ NpcSettings N(NpcSettings_FireBar_02) = {
     .height = 12,
     .radius = 20,
     .ai = &N(EVS_NpcAI_FireBar_02),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_FireBar_03) = {
@@ -133,14 +133,14 @@ NpcSettings N(NpcSettings_FireBar_03) = {
     .height = 12,
     .radius = 20,
     .ai = &N(EVS_NpcAI_FireBar_03),
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcSettings N(NpcSettings_FireBar_Extra) = {
     .defaultAnim = ANIM_Fire_Brighest_Burn,
     .height = 12,
     .radius = 20,
-    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
 };
 
 NpcData N(NpcData_FireBar_01)[] = {
@@ -289,7 +289,7 @@ NpcData N(NpcData_Bubble_01) = {
         }
     },
     .settings = &N(NpcSettings_LavaBubble),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,
@@ -312,7 +312,7 @@ NpcData N(NpcData_Bubble_02) = {
         }
     },
     .settings = &N(NpcSettings_LavaBubble),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = LAVA_BUBBLE_DROPS,
     .animations = LAVA_BUBBLE_ANIMS,
     .aiDetectFlags = AI_DETECT_SENSITIVE_MOTION,

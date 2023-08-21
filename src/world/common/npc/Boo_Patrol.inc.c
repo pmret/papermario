@@ -118,6 +118,6 @@ EvtScript N(EVS_NpcAI_Boo_Patrol) = {
 NpcSettings N(NpcSettings_Boo_Patrol) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .ai = &N(EVS_NpcAI_Boo_Patrol),
 };

@@ -85,7 +85,7 @@ battle_move_end = MAX(battle_move_end, battle_move_up_and_away_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_move_star_beam_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_move_peach_beam_VRAM_END);
 battle_move_end = MAX(battle_move_end, battle_move_peach_focus_VRAM_END);
-battle_move_end = MAX(battle_move_end, battle_move_twink_dash_VRAM_END);
+battle_move_end = MAX(battle_move_end, battle_move_peach_focus_alt_VRAM_END);
 
 world_battle_vram_end = battle_code_VRAM_END;
 world_battle_vram_end = MAX(world_battle_vram_end, world_script_api_VRAM_END);

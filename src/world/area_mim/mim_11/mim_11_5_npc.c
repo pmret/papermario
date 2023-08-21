@@ -5,25 +5,25 @@ void increment_max_SP(void);
 NpcSettings N(NpcSettings_Bootler) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Skolar) = {
     .height = 26,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Unused1) = {
     .height = 20,
     .radius = 20,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 NpcSettings N(NpcSettings_Unused2) = {
     .height = 22,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 API_CALLABLE(N(IncreaseMaxSP)) {
@@ -81,7 +81,7 @@ NpcData N(NpcData_Bootler)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Bootler),
         .settings = &N(NpcSettings_Bootler),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_Bootler_Idle,
@@ -108,7 +108,7 @@ NpcData N(NpcData_Bootler)[] = {
         .yaw = 135,
         .init = &N(EVS_NpcInit_Skolar),
         .settings = &N(NpcSettings_Skolar),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_FLYING,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldSkolar_Idle,

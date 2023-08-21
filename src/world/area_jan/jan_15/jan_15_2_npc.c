@@ -78,7 +78,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
             EVT_CALL(SetNpcRotation, NPC_PutridPiranha_03, 0, LVar0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_03, SOUND_03B1, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_03, SOUND_03B1, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_03, ANIM_LargePiranha_Putrid_Anim01)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim04)
@@ -88,7 +88,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_01, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B1, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B1, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim01)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim04)
@@ -98,7 +98,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_20B1, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_20B1, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim01)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim04)
@@ -112,7 +112,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_03, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
         EVT_ADD(LVar0, 30)
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_03, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
         EVT_ADD(LVar0, 30)
@@ -130,10 +130,10 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_03, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
     EVT_LOOP(3)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B3, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B3, SOUND_SPACE_DEFAULT)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim05)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim05)
@@ -142,7 +142,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_03, ANIM_LargePiranha_Putrid_Anim06)
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_03B2, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_03B2, SOUND_SPACE_DEFAULT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
     EVT_RETURN
@@ -181,7 +181,7 @@ NpcData N(NpcData_Piranhas)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_PutridPiranha),
         .settings = &N(NpcSettings_PutridPiranhaSentinel),
-        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
         .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
@@ -190,7 +190,7 @@ NpcData N(NpcData_Piranhas)[] = {
         .pos = { 325.0f, 0.0f, 0.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_PutridPiranhaSentinel),
-        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
         .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
@@ -199,7 +199,7 @@ NpcData N(NpcData_Piranhas)[] = {
         .pos = { 375.0f, 0.0f, 45.0f },
         .yaw = 270,
         .settings = &N(NpcSettings_PutridPiranhaSentinel),
-        .flags = ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+        .flags = ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
         .drops = PIRANHA_NO_DROPS,
         .animations = PIRANHA_SENTINEL_ANIMS,
     },
@@ -210,7 +210,7 @@ NpcData N(NpcData_HeartPlant_01) = {
     .pos = { -183.0f, 0.0f, 47.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -221,7 +221,7 @@ NpcData N(NpcData_HeartPlant_02) = {
     .pos = { -124.0f, 0.0f, 20.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,

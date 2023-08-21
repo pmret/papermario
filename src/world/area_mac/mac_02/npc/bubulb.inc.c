@@ -1,8 +1,8 @@
 EvtScript N(EVS_NpcInteract_Bubulb) = {
     EVT_IF_EQ(GF_MAC02_Gift_MagicalSeed1, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_BuriedIdle, ANIM_Bubulb_Pink_BuriedIdle, 0, MSG_MAC_Bridge_0085)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_MODE_0)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Pink_PopUp)
         EVT_WAIT(45)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Pink_Idle)

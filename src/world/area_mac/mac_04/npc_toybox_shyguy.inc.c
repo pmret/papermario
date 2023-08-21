@@ -11,7 +11,7 @@ API_CALLABLE(N(IsPartnerBow)) {
 
 EvtScript N(D_802480E0_84ACB0) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_21, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_SHY_GUY_STEP, SOUND_SPACE_DEFAULT)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -19,7 +19,7 @@ EvtScript N(D_802480E0_84ACB0) = {
 };
 
 EvtScript N(D_80248128_84ACF8) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hu, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hu, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(20)
         EVT_ADD(LVar0, 3)
@@ -41,13 +41,13 @@ EvtScript N(D_802481E0_84ADB0) = {
     EVT_END_LOOP
     EVT_SET(LVar0, 0)
     EVT_CALL(RotateModel, MODEL_hh_door, LVar0, 0, -1, 0)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hu, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hu, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(D_80248298_84AE68) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hk, SOUND_01AB, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hk, SOUND_01AB, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(36)
         EVT_ADD(LVar0, 10)
@@ -58,7 +58,7 @@ EvtScript N(D_80248298_84AE68) = {
     EVT_SET(LVar0, 0)
     EVT_CALL(RotateModel, MODEL_hkai1, LVar0, 0, 1, 0)
     EVT_CALL(RotateModel, MODEL_hkai2, LVar0, 0, 1, 0)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hk, SOUND_01AC, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_hk, SOUND_01AC, SOUND_SPACE_DEFAULT)
     EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
     EVT_RETURN
     EVT_END
@@ -102,8 +102,8 @@ EvtScript N(D_802483B8_84AF88) = {
 };
 
 EvtScript N(D_80248624_84B1F4) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_203E, SOUND_SPACE_MODE_0)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_203E, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_ShyGuy_01, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_ShyGuy_01, ANIM_ShyGuy_Pink_Anim11, ANIM_ShyGuy_Pink_Anim01, 0, MSG_MAC_Housing_00B2)
@@ -222,7 +222,7 @@ EvtScript N(EVS_80248B08) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(23)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_mu, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_mu, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
             EVT_ADD(LVar0, 8)
@@ -234,7 +234,7 @@ EvtScript N(EVS_80248B08) = {
             EVT_CALL(RotateModel, MODEL_msdoor, LVar0, 0, -1, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_mu, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit_mu, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_EXEC(N(D_80248A14_84B5E4))
     EVT_SET(LVar0, 15)

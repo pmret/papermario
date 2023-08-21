@@ -131,7 +131,7 @@ void appendGfx_player_actor(void*);
 void appendGfx_player_actor_blur(Actor*);
 void appendGfx_player_actor_reflection(void*);
 
-void func_80254610(Actor*);
+void force_disable_actor_blur(Actor*);
 
 void player_handle_floor_collider_type(s32 colliderID);
 f32 player_fall_distance(void);
@@ -403,7 +403,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
 PlayerData* get_player_data(void);
 
 b32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
-s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
+b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
 s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
@@ -990,9 +990,9 @@ void clear_script_flags(Evt* script, s32 flags);
 
 void disable_player_blur(void);
 void enable_player_blur(void);
-void func_80254950(void);
-void func_802549A0(void);
-void func_802549C0(void);
+void reset_player_blur(void);
+void force_disable_player_blur(void);
+void force_disable_player_blur_immediately(void);
 
 void func_8023E104(void);
 void func_8023E11C(void);

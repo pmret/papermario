@@ -18,12 +18,12 @@ EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Jungle_Anim09)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, FALSE)
     EVT_CALL(SetNpcPos, NPC_SELF, 125, 100, -392)
-    EVT_CALL(PlaySoundWithVolume, SOUND_SRAW_17_A, 110)
+    EVT_CALL(PlaySoundWithVolume, SOUND_FUZZY_HOP_A, 110)
     EVT_WAIT(20)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_JungleFuzzy_Wander)))
     EVT_RETURN
     EVT_END
@@ -33,7 +33,7 @@ EvtScript N(EVS_NpcInit_JungleFuzzy) = {
     EVT_CALL(SetSelfVar, 7, 0)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JungleFuzzy)))
     EVT_RETURN
     EVT_END
@@ -63,7 +63,7 @@ EvtScript N(EVS_OnShakeTree_Yoshi) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcVar, NPC_YoshiKid, 0, 9)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_0301, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_FALL_QUICK, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcJumpscale, NPC_YoshiKid, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_YoshiKid, -308, 0, -248, 30)
     EVT_END_THREAD
@@ -78,9 +78,9 @@ EvtScript N(EVS_OnShakeTree_Yoshi) = {
 
 EvtScript N(EVS_YoshiKid_Sleeping) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0C_A, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SNORE_INHALE_A, SOUND_SPACE_DEFAULT)
         EVT_WAIT(24)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SRAW_0D_A, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_SNORE_EXHALE_A, SOUND_SPACE_DEFAULT)
         EVT_WAIT(21)
         EVT_CALL(GetNpcVar, NPC_YoshiKid, 0, LVar0)
         EVT_IF_GE(LVar0, 9)
@@ -103,7 +103,7 @@ EvtScript N(EVS_YoshiKid_PlaySounds) = {
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKid, ANIM_YoshiKid_Purple_Cry)
     EVT_LOOP(3)
-        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_01F0, 0)
+        EVT_CALL(PlaySoundAtNpc, NPC_YoshiKid, SOUND_YOSHI_KID_CRY, SOUND_SPACE_DEFAULT)
         EVT_WAIT(13)
     EVT_END_LOOP
     EVT_RETURN
@@ -282,7 +282,7 @@ NpcData N(NpcData_SpearGuy)[] = {
                 .detectSize = { 100 },
             }
         },
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         SPEAR_GUY_WANDER_NPC_DATA
     },
     SPEAR_GUY_HITBOX(NPC_SpearGuy_Hitbox)
@@ -293,7 +293,7 @@ NpcData N(NpcData_HeartPlant) = {
     .pos = { 430.0f, 0.0f, 205.0f },
     .yaw = 270,
     .settings = &N(NpcSettings_HeartPlant),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = HEART_PLANT_ANIMS,
     .tattle = MSG_NpcTattle_HeartPlant,
@@ -311,7 +311,7 @@ NpcData N(NpcData_MBush) = {
     .pos = { 400.0f, 0.0f, -75.0f },
     .yaw = 90,
     .settings = &N(NpcSettings_MBush),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000,
     .drops = MBUSH_DROPS,
     .animations = MBUSH_ANIMS,
     .tattle = MSG_NpcTattle_MBush,

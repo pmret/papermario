@@ -24,7 +24,7 @@ EvtScript N(EVS_LetterReward_RussT) = {
 
 EvtScript N(EVS_ShyGuy_PlayRunningSounds) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_21, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_SHY_GUY_STEP, SOUND_SPACE_DEFAULT)
         EVT_WAIT(2)
     EVT_END_LOOP
     EVT_RETURN
@@ -194,7 +194,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
     EVT_EXEC(N(EVS_ManageCarriedDictionary))
     EVT_THREAD
         EVT_CALL(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_VISIBLE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
             EVT_ADD(LVar0, 8)
@@ -206,7 +206,7 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
             EVT_CALL(RotateModel, MODEL_o210, LVar0, 0, 1, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetGroupVisibility, MODEL_intel_inn, MODEL_GROUP_HIDDEN)
     EVT_END_THREAD
     EVT_WAIT(5)
@@ -215,10 +215,10 @@ EvtScript N(EVS_ShyGuy_StealDictionary) = {
     EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, -10, -410, 0)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_032C, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuyThief, SOUND_032C, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_ShyGuyThief, -10, 0, -340, 0)
     EVT_SET(LVar0, 21)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_DEFAULT)
     EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 45, -186, 0)
     EVT_CALL(NpcMoveTo, NPC_ShyGuyThief, 139, -67, 0)
@@ -377,6 +377,6 @@ NpcSettings N(NpcSettings_RussT) = {
     .defaultAnim = ANIM_RussT_Idle,
     .height = 30,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .flags = ENEMY_FLAG_PASSIVE,
 };

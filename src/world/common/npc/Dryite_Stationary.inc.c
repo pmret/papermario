@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Dryite) = {
     .height = 26,
     .radius = 23,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

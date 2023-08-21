@@ -201,7 +201,7 @@ EvtScript N(EVS_StarPower_SpiritSummoned) = {
     EVT_CALL(SetForegroundModelsVisible, FALSE)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
     EVT_CALL(MoveBattleCamOver, 1)
-    EVT_CALL(PlaySound, SOUND_SRAW_1E_A)
+    EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_APPEAR_A)
     EVT_CALL(CreateNpc, NPC_BTL_SPIRIT, LVar0)
     EVT_CALL(N(SetStarSpiritSize))
     EVT_CALL(SetNpcFlagBits, NPC_BTL_SPIRIT, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)

@@ -237,9 +237,9 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_TUTANKOOPA,
-    .level = 55,
+    .level = ACTOR_LEVEL_TUTANKOOPA,
     .maxHP = 30,
-    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
@@ -276,7 +276,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(ForceHomePos, ACTOR_SELF, 97, 70, 15)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_SHELL_1, 70, 70, 3)
@@ -326,7 +326,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -448,7 +448,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -528,7 +528,7 @@ EvtScript N(EVS_TemporaryKnockout) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_LABEL(0)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar0)
         EVT_IF_EQ(LVar0, FALSE)
@@ -537,7 +537,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextSummonTime, LVar0)
                 EVT_IF_EQ(LVar0, 0)
                     EVT_EXEC_WAIT(N(EVS_Move_SummonChomp))
-                    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+                    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_RETURN
                 EVT_ELSE
@@ -574,7 +574,7 @@ EvtScript N(EVS_TakeTurn) = {
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_TRY_TOSS_NEXT)
                     EVT_EXEC_WAIT(N(EVS_Attack_DropDebris))
             EVT_END_SWITCH
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_ELSE
@@ -584,7 +584,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_EXEC_WAIT(N(EVS_LevitateToHomePos))
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_RETURN
@@ -1023,7 +1023,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     EVT_CALL(SetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorDispOffset, LVarB, 0, 0, 0)
     EVT_CALL(UseIdleAnimation, LVarB, FALSE)
-    EVT_CALL(EnableIdleScript, LVarB, 0)
+    EVT_CALL(EnableIdleScript, LVarB, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetAnimation, LVarB, 1, ANIM_ChainChomp_SlowBite)
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, LVarB, EVT_FLOAT(0.8))
@@ -1084,7 +1084,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     EVT_CALL(HPBarToHome, LVarB)
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, LVarB, EVT_FLOAT(0.8))
-    EVT_CALL(EnableIdleScript, LVarB, 1)
+    EVT_CALL(EnableIdleScript, LVarB, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, LVarB, TRUE)
     // close the gate
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, 60)
@@ -1226,7 +1226,7 @@ EvtScript N(EVS_Tutankoopa_Death) = {
         EVT_IF_NE(LVar2, 0)
             EVT_THREAD
                 EVT_CALL(HideHealthBar, ACTOR_ENEMY1)
-                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
+                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, IDLE_SCRIPT_DISABLE)
                 EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
                 EVT_CALL(SetAnimation, ACTOR_ENEMY1, PRT_MAIN, ANIM_ChainChomp_Hurt)
                 EVT_WAIT(10)

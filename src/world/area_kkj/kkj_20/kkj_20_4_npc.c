@@ -10,7 +10,7 @@
 #include "world/common/todo/GetPeachDisguise.inc.c"
 
 EvtScript N(EVS_OpenDresserDoors) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_01CF, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_WOODEN_DOOR_OPEN, 0)
     EVT_CALL(MakeLerp, 0, 80, 14, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -36,7 +36,7 @@ EvtScript N(EVS_CloseDresserDoors) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_01D0, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_WOODEN_DOOR_CLOSE, 0)
     EVT_RETURN
     EVT_END
 };
@@ -344,7 +344,7 @@ NpcData N(NpcData_Toad) = {
     .yaw = 0,
     .init = &N(EVS_NpcInit_Toad),
     .settings = &N(NpcSettings_Toad_Stationary),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = TOAD_RED_ANIMS,
     .tattle = MSG_NpcTattle_KKJ_ToadHouseToad,

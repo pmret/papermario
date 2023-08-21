@@ -83,7 +83,7 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC(N(EVS_EnterMap))
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_LOOP_17)
+    EVT_CALL(PlaySound, SOUND_LOOP_JAN_BEACH_WAVES)
     EVT_EXEC(N(EVS_SetupRooms))
     EVT_EXEC(N(EVS_SetupFoliage))
     EVT_CALL(EnableTexPanning, MODEL_o121, TRUE)

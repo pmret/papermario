@@ -25,7 +25,7 @@ EvtScript N(EVS_SpinKooperCeilingFan) = {
 EvtScript N(EVS_UpdateKooperFightSounds) = {
     EVT_LOOP(0)
         EVT_IF_EQ(GF_Quizmo_TakingQuiz, FALSE)
-            EVT_CALL(PlaySoundAt, SOUND_NOK_HOUSE_CONFLICT, 0, 0, 0, -180)
+            EVT_CALL(PlaySoundAt, SOUND_NOK_HOUSE_CONFLICT, SOUND_SPACE_DEFAULT, 0, 0, -180)
         EVT_END_IF
         EVT_CALL(RandInt, 30, LVar5)
         EVT_ADD(LVar5, 30)

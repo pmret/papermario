@@ -13,7 +13,7 @@ EvtScript N(EVS_Wisterwood_Exit) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(PlayerMoveTo, 30, -170, 10)
     EVT_CALL(InterpPlayerYaw, 0, 0)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_01CF, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, -100, 20, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -38,7 +38,7 @@ EvtScript N(EVS_Wisterwood_Exit) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_01D0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_CALL(GotoMap, EVT_PTR("mac_01"), mac_01_ENTRY_5)
     EVT_WAIT(100)
     EVT_RETURN
@@ -49,7 +49,7 @@ EvtScript N(EVS_Wisterwood_Enter) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(InterpPlayerYaw, 180, 0)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_01CF, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, -100, 30, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -71,7 +71,7 @@ EvtScript N(EVS_Wisterwood_Enter) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_01D0, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittn, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittn, COLLIDER_FLAGS_UPPER_MASK)
     EVT_RETURN

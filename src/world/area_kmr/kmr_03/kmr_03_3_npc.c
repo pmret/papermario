@@ -17,7 +17,7 @@ API_CALLABLE(N(func_802401B0_8C8140)) {
 NpcSettings N(NpcSettings_Goompa) = {
     .height = 22,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .actionFlags = AI_ACTION_LOOK_AROUND_DURING_LOITER,
 };
 
@@ -64,7 +64,7 @@ EvtScript N(EVS_NpcAI_Goompa) = {
             EVT_END_IF
             EVT_CALL(DisablePlayerInput, TRUE)
             EVT_CALL(SetNpcAux, NPC_Goompa, 0)
-            EVT_CALL(PlaySoundAtNpc, NPC_Goompa, SOUND_0262, SOUND_SPACE_MODE_0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Goompa, SOUND_0262, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShowEmote, NPC_Goompa, EMOTE_EXCLAMATION, 45, 15, EMOTER_NPC, 0, 0, 0, 0)
             EVT_WAIT(15 * DT)
             EVT_CALL(NpcFacePlayer, NPC_SELF, 5)
@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_Goompa) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_GE(STORY_CH0_GOOMPA_JOINED_PARTY)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8, TRUE)
+            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING, TRUE)
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_END_SWITCH
     EVT_RETURN

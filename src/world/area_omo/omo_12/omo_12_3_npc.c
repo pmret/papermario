@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Watt) = {
     .height = 23,
     .radius = 22,
-    .level = 14,
+    .level = ACTOR_LEVEL_SHY_GUY,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
     .actionFlags = AI_ACTION_JUMP_WHEN_SEE_PLAYER,
@@ -220,7 +220,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
                 EVT_END_IF
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_01F5)
+    EVT_CALL(PlaySound, SOUND_OMO_LANTERN_BREAK)
     EVT_SET(AF_OMO_10, FALSE)
     EVT_LOOP(8)
         EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
@@ -306,7 +306,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(func_802D2C14, 0)
     EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Idle)
-    EVT_CALL(PlaySoundAtNpc, NPC_Watt, SOUND_0262, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Watt, SOUND_0262, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(40 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_0059)
@@ -629,7 +629,7 @@ NpcData N(NpcData_BigLanternGhost) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_BigLanternGhost),
-    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
     .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),
@@ -690,7 +690,7 @@ NpcData N(NpcData_LanternBottom) = {
     .initVarCount = 1,
     .initVar = { .value = 0 },
     .settings = &N(NpcSettings_Watt),
-    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_CANT_INTERACT,
+    .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_CANT_INTERACT,
     .drops = NO_DROPS,
     .animations = BIG_LANTERN_GHOST_ANIMS,
     .extraAnimations = N(ExtraAnims_LanternGhost),

@@ -592,7 +592,7 @@ s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
     f32 length;
     s32 hitID;
 
-    if (npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8)) {
+    if (npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_FLYING)) {
         return FALSE;
     }
 
@@ -2041,7 +2041,7 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
         if (npc->pos.y < y) {
             continue;
         }
-        if (npc->flags & (NPC_FLAG_IGNORE_ENTITY_COLLISION | NPC_FLAG_8)) {
+        if (npc->flags & (NPC_FLAG_IGNORE_ENTITY_COLLISION | NPC_FLAG_FLYING)) {
             var_v1 = npc_get_collider_below(npc);
             if (var_v1 != 0) {
                 if (idx == var_v1) {

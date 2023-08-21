@@ -8,7 +8,7 @@
 NpcSettings N(NpcSettings_FlyingMagikoopa) = {
     .height = 34,
     .radius = 24,
-    .level = 26,
+    .level = ACTOR_LEVEL_MAGIKOOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -129,7 +129,7 @@ NpcData N(NpcData_Twink) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Twink),
     .settings = &N(NpcSettings_Twink),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = TWINK_ANIMS,
 };

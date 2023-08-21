@@ -32,7 +32,7 @@ EvtScript N(EVS_AnimateRotatingWall_AlmostCaught) = {
         EVT_WAIT(180 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LookAround)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, 0, 50, 5, -200)
+    EVT_CALL(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, SOUND_SPACE_DEFAULT, 50, 5, -200)
     EVT_CALL(MakeLerp, 0, -1800, 360 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Bowser) = {
     .height = 75,
     .radius = 72,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };

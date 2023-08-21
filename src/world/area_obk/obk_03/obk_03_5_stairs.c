@@ -15,7 +15,7 @@ EvtScript N(EVS_DropStep) = {
 };
 
 EvtScript N(EVS_PlayDropStepFX) = {
-    EVT_CALL(PlaySoundAt, SOUND_203D, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_203D, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     EVT_WAIT(LVarA)
     EVT_SET(LVar3, LVar0)
     EVT_SET(LVar4, LVar1)

@@ -83,9 +83,9 @@ API_CALLABLE(N(init)) {
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     if (actionCommandStatus->targetWeakness == 0) {
-        battleStatus->actionResult = 0;
+        battleStatus->actionQuality = 0;
     } else {
-        battleStatus->actionResult = 3;
+        battleStatus->actionQuality = 3;
     }
     actionCommandStatus->hudPosX = -48;
     actionCommandStatus->hudPosY = 80;
@@ -136,11 +136,11 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0;
+    battleStatus->actionResult = ACTION_RESULT_FAIL;
     if (actionCommandStatus->targetWeakness == 0) {
-        battleStatus->actionResult = 0;
+        battleStatus->actionQuality = 0;
     } else {
-        battleStatus->actionResult = 3;
+        battleStatus->actionQuality = 3;
     }
     actionCommandStatus->state = 10;
     gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
@@ -241,17 +241,17 @@ void N(update)(void) {
                 actionCommandStatus->barFillLevel = cutoff * 100;
             }
             if (!actionCommandStatus->targetWeakness) {
-                battleStatus->actionResult = actionCommandStatus->barFillLevel / 2000;
+                battleStatus->actionQuality = actionCommandStatus->barFillLevel / 2000;
             } else {
-                battleStatus->actionResult = D_802AA8B4_425524[actionCommandStatus->barFillLevel / 1000];
+                battleStatus->actionQuality = D_802AA8B4_425524[actionCommandStatus->barFillLevel / 1000];
             }
 
             if (actionCommandStatus->frameCounter != 0) {
                 actionCommandStatus->frameCounter--;
                 return;
             }
-            battleStatus->unk_86 = 127;
-            battleStatus->actionSuccess = battleStatus->actionResult;
+            battleStatus->actionResult = ACTION_RESULT_NONE;
+            battleStatus->actionSuccess = battleStatus->actionQuality;
             btl_set_popup_duration(0);
             actionCommandStatus->frameCounter = 5;
             actionCommandStatus->state = 12;
@@ -283,12 +283,12 @@ void N(draw)(void) {
     hud_element_draw_clipped(actionCommandStatus->hudElements[3]);
     id = actionCommandStatus->hudElements[2];
     if (!actionCommandStatus->targetWeakness) {
-        if (D_802AA888_4254F8[battleStatus->actionResult] != hud_element_get_script(id)) {
-            hud_element_set_script(id, D_802AA888_4254F8[battleStatus->actionResult]);
+        if (D_802AA888_4254F8[battleStatus->actionQuality] != hud_element_get_script(id)) {
+            hud_element_set_script(id, D_802AA888_4254F8[battleStatus->actionQuality]);
         }
     } else {
-        if (D_802AA8A0_425510[battleStatus->actionResult] != hud_element_get_script(id)) {
-            hud_element_set_script(id, D_802AA8A0_425510[battleStatus->actionResult]);
+        if (D_802AA8A0_425510[battleStatus->actionQuality] != hud_element_get_script(id)) {
+            hud_element_set_script(id, D_802AA8A0_425510[battleStatus->actionQuality]);
         }
     }
     hud_element_draw_clipped(id);

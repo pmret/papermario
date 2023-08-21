@@ -1,6 +1,5 @@
 #include "common.h"
 #include "script_api/battle.h"
-#include "effects.h"
 #include "model.h"
 
 #define NAMESPACE battle_move_star_beam
@@ -15,7 +14,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_THREAD
-        EVT_CALL(N(ProcessPeachStarBeam), 0)
+        EVT_CALL(N(ProcessPeachStarBeam), FALSE)
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_LOOP(0)

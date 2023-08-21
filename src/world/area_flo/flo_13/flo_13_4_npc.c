@@ -6,7 +6,7 @@
 NpcSettings N(NpcSettings_Lakilester) = {
     .height = 32,
     .radius = 24,
-    .level = 20,
+    .level = ACTOR_LEVEL_LAKITU,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -206,7 +206,7 @@ EvtScript N(EVS_Lakilulu_SpinyToss) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
     EVT_SET(LVar0, 90)
     EVT_LOOP(20)
@@ -599,7 +599,7 @@ NpcData N(NpcData_Lakilester) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilester),
     .settings = &N(NpcSettings_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_40000,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_WorldLakilester_Idle,
@@ -627,7 +627,7 @@ NpcData N(NpcData_Lakilulu) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilulu),
     .settings = &N(NpcSettings_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,
@@ -656,7 +656,7 @@ NpcData N(NpcData_Lakilulu_Spiny) = {
     .yaw = 90,
     .init = &N(EVS_NpcInit_Lakilulu_Spiny),
     .settings = &N(NpcSettings_Lakilester),
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = NO_DROPS,
     .animations = {
         .idle   = ANIM_Lakilulu_Idle,
@@ -696,7 +696,7 @@ NpcData N(NpcData_Lakitu_01) = {
     },
     .init = &N(EVS_NpcInit_Lakitu),
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -720,7 +720,7 @@ NpcData N(NpcData_Lakitu_02) = {
     },
     .init = &N(EVS_NpcInit_Lakitu),
     .settings = &N(NpcSettings_Lakitu_SpinySpawner),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = LAKITU_DROPS,
     .animations = LAKITU_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

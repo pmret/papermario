@@ -27,7 +27,7 @@ EvtScript N(EVS_SetupLogObjects) = {
 };
 
 EvtScript N(EVS_LogAnim_RiseUp) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o167, SOUND_SMASH_GOOMNUT_TREE, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o167, SOUND_SMACK_TREE, 0)
     EVT_CALL(MakeLerp, -150, -169, 5, EASING_QUARTIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -73,7 +73,7 @@ EvtScript N(EVS_LogAnim_FallDown) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o167, SOUND_209D, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o167, SOUND_JAN_LOG_LAND, 0)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, -100, 0, 60, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 2, 3, 1)
     EVT_RETURN
@@ -105,7 +105,7 @@ EvtScript N(EVS_LogAnim_FallOver) = {
 };
 
 EvtScript N(EVS_LogAnim_Split) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o167, SOUND_209E, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o167, SOUND_JAN_LOG_SPLIT, 0)
     EVT_CALL(EnableModel, MODEL_o95, TRUE)
     EVT_CALL(EnableModel, MODEL_o96, TRUE)
     EVT_CALL(MakeLerp, 0, 90, 30, EASING_COS_FAST_OVERSHOOT)

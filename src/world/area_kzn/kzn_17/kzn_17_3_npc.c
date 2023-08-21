@@ -46,7 +46,7 @@ EvtScript N(EVS_Kolorado_TrompImpact) = {
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
     EVT_CALL(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
         EVT_CALL(LoadPath, 30, EVT_PTR(N(KoloradoThrownPath)), ARRAY_COUNT(N(KoloradoThrownPath)), EASING_LINEAR)
@@ -163,7 +163,7 @@ NpcData N(NpcData_Piranha)[] = {
             }
         },
         .settings = &N(NpcSettings_PutridPiranha),
-        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+        .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
         .drops = PUTRID_PIRANHA_DROPS,
         .animations = PUTRID_PIRANHA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
@@ -188,7 +188,7 @@ NpcData N(NpcData_SpikeTop) = {
         }
     },
     .settings = &N(NpcSettings_SpikeTop),
-    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800,
+    .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING,
     .drops = SPIKE_TOP_DROPS,
     .animations = SPIKE_TOP_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

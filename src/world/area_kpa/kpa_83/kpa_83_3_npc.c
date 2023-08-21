@@ -8,7 +8,7 @@
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 35,
     .radius = 24,
-    .level = 6,
+    .level = ACTOR_LEVEL_KOOPA_TROOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -16,7 +16,7 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 NpcSettings N(NpcSettings_JrTroopa) = {
     .height = 32,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 API_CALLABLE(N(SetPlayerSpriteFacingAngle)) {
@@ -122,7 +122,7 @@ EvtScript N(EVS_KoopaBros_SpinAround) = {
 
 EvtScript N(EVS_KoopaBros_FlingAway) = {
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_HIT_NORMAL, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.6))
     EVT_END_THREAD
     EVT_SWITCH(LVar0)
@@ -199,9 +199,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosRed, TRUE)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosRed, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_8, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosRed, NPC_FLAG_FLYING, FALSE)
         EVT_CALL(NpcMoveTo, NPC_KoopaBrosRed, 20, 160, 20)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_03E9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_03E9, SOUND_SPACE_DEFAULT)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 20, 0, 160, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosRed, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_IdleCrouch)
@@ -214,9 +214,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosBlk, TRUE)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosBlk, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_8, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosBlk, NPC_FLAG_FLYING, FALSE)
         EVT_CALL(NpcMoveTo, NPC_KoopaBrosBlk, 48, 185, 20)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_03E9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_03E9, SOUND_SPACE_DEFAULT)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 48, 0, 185, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosBlk, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_IdleCrouch)
@@ -229,9 +229,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosYlw, TRUE)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosYlw, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_8, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosYlw, NPC_FLAG_FLYING, FALSE)
         EVT_CALL(NpcMoveTo, NPC_KoopaBrosYlw, 60, 110, 20)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_03E9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_03E9, SOUND_SPACE_DEFAULT)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 60, 0, 110, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosYlw, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_IdleCrouch)
@@ -244,9 +244,9 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosGrn, TRUE)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosGrn, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_GRAVITY, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_8, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_KoopaBrosGrn, NPC_FLAG_FLYING, FALSE)
         EVT_CALL(NpcMoveTo, NPC_KoopaBrosGrn, 88, 155, 20)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_03E9, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_03E9, SOUND_SPACE_DEFAULT)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 88, 0, 155, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosGrn, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_IdleCrouch)
@@ -259,7 +259,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_20F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_20F3, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_20F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_20F3, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
@@ -277,7 +277,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_20F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_20F3, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
@@ -286,7 +286,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_20F3, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_20F3, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_ThumbsUp)
     EVT_END_THREAD
     EVT_WAIT(45)
@@ -518,7 +518,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KoopaBros),
         .settings = &N(NpcSettings_KoopaBros),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = BLACK_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
@@ -529,7 +529,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KoopaBros),
         .settings = &N(NpcSettings_KoopaBros),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = RED_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
@@ -540,7 +540,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KoopaBros),
         .settings = &N(NpcSettings_KoopaBros),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = YELLOW_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
@@ -551,7 +551,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_KoopaBros),
         .settings = &N(NpcSettings_KoopaBros),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = GREEN_KOOPA_BROS_ANIMS,
         .extraAnimations = N(ExtraAnims_KoopaBros),
@@ -562,7 +562,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 90,
         .init = &N(EVS_NpcInit_JrTroopa),
         .settings = &N(NpcSettings_JrTroopa),
-        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_JrTroopa_Idle,
@@ -589,7 +589,7 @@ NpcData N(NpcData_Enemies)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_Door),
         .settings = &N(NpcSettings_Toad_Stationary),
-        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = TOAD_RED_ANIMS,
     },

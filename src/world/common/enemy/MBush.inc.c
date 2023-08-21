@@ -14,7 +14,7 @@ EvtScript N(EVS_NpcAI_MBush) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, 0)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetSelfVar, 10, LVar0)
     EVT_CALL(SetSelfVar, 11, LVar1)
@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcDefeat_MBush) = {
 NpcSettings N(NpcSettings_MBush) = {
     .height = 30,
     .radius = 30,
-    .level = 16,
+    .level = ACTOR_LEVEL_M_BUSH,
     .onInteract = &N(EVS_NpcInteract_MBush),
     .ai = &N(EVS_NpcAI_MBush),
     .onDefeat = &N(EVS_NpcDefeat_MBush),
@@ -97,7 +97,7 @@ NpcSettings N(NpcSettings_MBush) = {
 
 #define MBUSH_NPC_DATA \
     .settings = &N(NpcSettings_MBush), \
-    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
+    .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_8000 | ENEMY_FLAG_400000, \
     .drops = MBUSH_DROPS, \
     .animations = MBUSH_ANIMS, \
     .tattle = MSG_NpcTattle_MBush, \

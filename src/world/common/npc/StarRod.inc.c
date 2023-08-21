@@ -8,6 +8,6 @@ EvtScript N(EVS_NpcAuxAI_StarRod) = {
 NpcSettings N(NpcSettings_StarRod) = {
     .height = 24,
     .radius = 24,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
     .otherAI = &N(EVS_NpcAuxAI_StarRod),
 };

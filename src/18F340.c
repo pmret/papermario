@@ -29,7 +29,7 @@ BSS s32 D_8029FBA8;
 BSS s32 D_8029FBAC;
 BSS s32 D_8029FBB0[3];
 
-API_CALLABLE(func_802749F8);
+API_CALLABLE(ForceDisablePlayerBlurImmediately);
 
 void btl_set_player_idle_anims(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -230,8 +230,12 @@ API_CALLABLE(LifeShroomShroudWorld) {
     set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
     script->functionTemp[0] -= 1;
-    do {} while (0); // TODO required to match
-    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
+
+    if (script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    }
+    
+    return ApiStatus_BLOCK;
 }
 
 API_CALLABLE(LifeShroomRevealWorld) {
@@ -247,7 +251,7 @@ API_CALLABLE(LifeShroomRevealWorld) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
-
+    
     return ApiStatus_BLOCK;
 }
 
@@ -368,7 +372,7 @@ API_CALLABLE(BattleFadeInMerlee) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
-        sfx_play_sound(SOUND_024B);
+        sfx_play_sound(SOUND_MERLEE_APPEAR);
         merlee->alpha = 0;
     }
 
@@ -695,7 +699,7 @@ EvtScript EVS_MarioEnterStage = {
             EVT_CHILD_THREAD
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
             EVT_END_CHILD_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TRIP)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_GetUp)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)
@@ -777,23 +781,23 @@ EvtScript EVS_Peach_HandlePhase = {
 
 EvtScript EVS_ExecuteMarioAction = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(BTL_MENU_TYPE_JUMP)
             EVT_CALL(LoadMoveScript)
             EVT_EXEC_WAIT(LVar0)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(BTL_MENU_TYPE_SMASH)
             EVT_CALL(LoadMoveScript)
             EVT_EXEC_WAIT(LVar0)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(BTL_MENU_TYPE_ITEMS)
             EVT_CALL(LoadItemScript)
             EVT_EXEC_WAIT(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_RETURN
     EVT_END
@@ -803,7 +807,7 @@ EvtScript EVS_ExecutePeachAction = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(8)
+        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
             EVT_CALL(LoadStarPowerScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
@@ -823,7 +827,7 @@ EvtScript EVS_PlayerFirstStrike = {
             EVT_CALL(LoadMoveScript)
             EVT_EXEC_WAIT(LVar0)
     EVT_END_SWITCH
-    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_RETURN
     EVT_END
@@ -844,7 +848,7 @@ EvtScript EVS_Player_HandleEvent = {
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(func_802693F0)
-    EVT_CALL(func_802749F8)
+    EVT_CALL(ForceDisablePlayerBlurImmediately)
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)
@@ -1059,7 +1063,7 @@ EvtScript EVS_Player_Celebrate = {
 
 EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB3_Hustled)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_IN_PLACE)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -1096,7 +1100,7 @@ EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_AWAY)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1106,7 +1110,7 @@ EvtScript EVS_RunAwayNoCommand = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_CHILD_THREAD
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Trip)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TRIP)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -100, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(10.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1168,7 +1172,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(func_80260E38)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB3_Hustled)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_IN_PLACE)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -1210,7 +1214,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_015E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_RUN_AWAY)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -240, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(16.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1220,7 +1224,7 @@ EvtScript EVS_RunAwayStart = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_CHILD_THREAD
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Trip)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0162)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TRIP)
         EVT_CALL(SetGoalPos, ACTOR_PLAYER, -100, 0, 10)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(10.0))
         EVT_CALL(PlayerRunToGoal, 0)
@@ -1285,7 +1289,7 @@ EvtScript EVS_PlayerDies = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Dying)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)
     EVT_WAIT(15)
-    EVT_CALL(EnablePlayerBlur, BLUR_DISABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0371)
     EVT_SET(LVar0, 0)
     EVT_LOOP(30)
@@ -1299,7 +1303,7 @@ EvtScript EVS_PlayerDies = {
         EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(EnablePlayerBlur, BLUR_ENABLE)
+    EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_03FB)
     EVT_SET(LVar0, 0)
@@ -1551,7 +1555,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0160)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_JUMP)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

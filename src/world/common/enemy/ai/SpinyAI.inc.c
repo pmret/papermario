@@ -48,7 +48,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->flags &= ~NPC_FLAG_GRAVITY;
-        npc->flags |= NPC_FLAG_8;
+        npc->flags |= NPC_FLAG_FLYING;
         enemy->varTable[10] = 0;
         enemy->varTable[11] = -1;
         npc->pos.x = NPC_DISPOSE_POS_X;
@@ -86,10 +86,10 @@ API_CALLABLE(N(SpinyAI_Main)) {
             if (enemy->varTable[13] != 0) {
                 if (npc->pos.y <= 0.0) {
                     npc->flags &= ~NPC_FLAG_GRAVITY;
-                    npc->flags |= NPC_FLAG_8;
+                    npc->flags |= NPC_FLAG_FLYING;
                 } else {
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    npc->flags &= ~NPC_FLAG_8;
+                    npc->flags &= ~NPC_FLAG_FLYING;
                 }
             }
             basic_ai_wander(script, aiSettings, territoryPtr);
@@ -127,7 +127,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->pos.y = npc2->pos.y + 25.0;
             npc->pos.z = npc2->pos.z + 1.0;
             npc->rot.y = 0.0f;
-            npc->flags |= NPC_FLAG_8;
+            npc->flags |= NPC_FLAG_FLYING;
             npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
@@ -173,17 +173,17 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     if (enemy->varTable[13] != 0) {
                         if (npc->pos.y <= 0.0) {
                             npc->flags &= ~NPC_FLAG_GRAVITY;
-                            npc->flags |= NPC_FLAG_8;
+                            npc->flags |= NPC_FLAG_FLYING;
                         } else {
                             npc->flags |= NPC_FLAG_GRAVITY;
-                            npc->flags &= ~NPC_FLAG_8;
+                            npc->flags &= ~NPC_FLAG_FLYING;
                         }
                     } else if (!enemy->territory->wander.isFlying) {
                         npc->flags |= NPC_FLAG_GRAVITY;
-                        npc->flags &= ~NPC_FLAG_8;
+                        npc->flags &= ~NPC_FLAG_FLYING;
                     } else {
                         npc->flags &= ~NPC_FLAG_GRAVITY;
-                        npc->flags |= NPC_FLAG_8;
+                        npc->flags |= NPC_FLAG_FLYING;
                     }
                     npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     npc->flags &= ~NPC_FLAG_JUMPING;
@@ -211,7 +211,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->pos.x = NPC_DISPOSE_POS_X;
             npc->pos.y = NPC_DISPOSE_POS_Y;
             npc->pos.z = NPC_DISPOSE_POS_Z;
-            npc->flags |= NPC_FLAG_8 | NPC_FLAG_INVISIBLE;
+            npc->flags |= NPC_FLAG_FLYING | NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             script->AI_TEMP_STATE = 111;
         case 111:

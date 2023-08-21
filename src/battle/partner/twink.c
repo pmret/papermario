@@ -5,11 +5,11 @@
 
 #define NAMESPACE battle_partner_twink
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(executeAction);
 extern EvtScript N(celebrate);
 extern EvtScript N(runAway);
@@ -17,6 +17,15 @@ extern EvtScript N(runAwayFail);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
+};
+
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
 };
 
 API_CALLABLE(func_80238000_714CF0) {
@@ -85,11 +94,11 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_TWINK,
-    .level = 0,
+    .level = ACTOR_LEVEL_TWINK,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -105,17 +114,17 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 13, 31 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(func_80238000_714CF0)
     EVT_IF_NE(LVar0, 1)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, TRUE)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, EVT_PTR(N(DefenseTable)))
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_9)
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 0, 0, 0, 0)
     EVT_RETURN
@@ -133,7 +142,7 @@ API_CALLABLE(func_80238028_714D18) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_LOOP(0)
         EVT_CALL(func_80238028_714D18)
         EVT_WAIT(1)
@@ -142,7 +151,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(CloseActionCommandInfo)
@@ -171,7 +180,7 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
@@ -217,13 +226,13 @@ EvtScript N(runAwayFail) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(executeAction) = {
-    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_TWINK_FLY_B)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
@@ -246,16 +255,16 @@ EvtScript N(executeAction) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -40, 15, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -20, EASING_QUARTIC_OUT)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
     EVT_IF_GT(LVarF, 1)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_207E)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
-    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarF)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
     EVT_IF_GT(LVarF, 0)
         EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_ELSE
@@ -265,12 +274,12 @@ EvtScript N(executeAction) = {
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, 150, 100, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 20, EASING_LINEAR)
-    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
+    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_1, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -280,7 +289,7 @@ EvtScript N(executeAction) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, -20, EASING_COS_IN_OUT)
-    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_RETURN
     EVT_END

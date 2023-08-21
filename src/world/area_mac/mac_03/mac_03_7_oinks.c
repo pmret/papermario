@@ -192,7 +192,7 @@ EvtScript N(EVS_TurnCrank) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_20A7, SOUND_SPACE_MODE_0, 111, 89, -358)
+        EVT_CALL(PlaySoundAt, SOUND_20A7, SOUND_SPACE_DEFAULT, 111, 89, -358)
         EVT_SET(LVar0, 0)
         EVT_LOOP(5)
             EVT_ADD(LVar0, 6)
@@ -231,13 +231,13 @@ EvtScript N(EVS_TurnCrank) = {
         EVT_CALL(ScaleModel, MODEL_boo, 1, LVar0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_20A8, SOUND_SPACE_MODE_0, 134, 132, -399)
+    EVT_CALL(PlaySoundAt, SOUND_20A8, SOUND_SPACE_DEFAULT, 134, 132, -399)
     EVT_LOOP(5)
         EVT_SUBF(LVar0, EVT_FLOAT(0.08))
         EVT_CALL(ScaleModel, MODEL_boo, 1, LVar0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0, 170, 73, -450)
+    EVT_CALL(PlaySoundAt, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT, 170, 73, -450)
     EVT_SET(GB_MAC03_LilOinkCapsuleState, 1)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 230, 20, -270)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, 15, -6)
@@ -263,12 +263,12 @@ EvtScript N(EVS_TurnCrank) = {
     EVT_END_LOOP
     EVT_CALL(SetNpcJumpscale, NPC_Capsule, 1)
     EVT_CALL(NpcJump0, NPC_Capsule, LVar2, EVT_FLOAT(63.0), -273, 5)
-    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetNpcPos, NPC_Capsule, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Capsule, LVar0, LVar1, LVar2, 10)
-    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_Capsule, LVar0, LVar1, LVar2, 5)
-    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_EAT_OR_DRINK, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_EAT_OR_DRINK, SOUND_SPACE_DEFAULT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_capsule, COLLIDER_FLAGS_UPPER_MASK)
     EVT_WAIT(10)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -435,7 +435,7 @@ EvtScript N(EVS_OpenCapsule) = {
         EVT_CASE_DEFAULT
             EVT_SET(LVar3, LIL_OINK_TYPE_PIKACHU)
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_TORNADO_JUMP, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, NPC_Capsule, SOUND_TORNADO_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(N(CreateLilOink), 10, LVar3, LVar0, LVar1, LVar2, 90)
     EVT_WAIT(10)
     EVT_IF_GE(GB_MAC03_LilOinkCount, 10)
@@ -451,7 +451,7 @@ EvtScript N(EVS_OpenCapsule) = {
         EVT_WAIT(10)
         EVT_CALL(NpcJump0, NPC_LilOink_01, LVar0, LVar1, LVar2, 15)
         EVT_EXEC(N(EVS_SpawnLilOinkPrize))
-        EVT_CALL(PlaySoundAtNpc, NPC_LilOink_01, SOUND_015E, SOUND_SPACE_MODE_0)
+        EVT_CALL(PlaySoundAtNpc, NPC_LilOink_01, SOUND_PLAYER_RUN_AWAY, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcSpeed, NPC_LilOink_01, 4)
         EVT_CALL(NpcMoveTo, NPC_LilOink_01, 580, -170, 0)
         EVT_CALL(NpcJump0, NPC_LilOink_01, 620, 20, -170, 15)
@@ -512,7 +512,7 @@ EvtScript N(EVS_LilOinkFlee) = {
     EVT_WAIT(10)
     EVT_CALL(GetNpcPos, LVar1, LVar2, LVar3, LVar4)
     EVT_CALL(NpcJump0, LVar1, LVar2, LVar3, LVar4, 10)
-    EVT_CALL(PlaySoundAtNpc, LVar1, SOUND_015E, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtNpc, LVar1, SOUND_PLAYER_RUN_AWAY, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcSpeed, LVar1, 8)
     EVT_CALL(NpcMoveTo, LVar1, 580, LVar4, 0)
     EVT_CALL(NpcJump0, LVar1, 620, 20, LVar4, 15)
@@ -531,7 +531,7 @@ EvtScript N(EVS_EnterPen) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deili, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deili, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deili, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -551,7 +551,7 @@ EvtScript N(EVS_EnterPen) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deili, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deili, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deili, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
     EVT_CALL(func_802D2C14, 0)
@@ -585,7 +585,7 @@ EvtScript N(EVS_ExitPen) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(func_802D2C14, 1)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliu, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deiliu, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deiliu, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -605,7 +605,7 @@ EvtScript N(EVS_ExitPen) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deiliu, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_deiliu, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deiliu, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(func_802D2C14, 0)
     EVT_CALL(DisablePlayerInput, FALSE)

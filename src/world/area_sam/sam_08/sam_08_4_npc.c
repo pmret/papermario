@@ -3,7 +3,7 @@
 NpcSettings N(NpcSettings_Kooper) = {
     .height = 35,
     .radius = 24,
-    .level = 6,
+    .level = ACTOR_LEVEL_KOOPA_TROOPA,
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };
@@ -11,7 +11,7 @@ NpcSettings N(NpcSettings_Kooper) = {
 NpcSettings N(NpcSettings_Duplighost) = {
     .height = 30,
     .radius = 45,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
 
 #define INCLUDE_FROST_CLUBBA_WANDER
@@ -71,22 +71,22 @@ EvtScript N(EVS_NpcDefeat_Duplighost) = {
             EVT_CALL(SetNpcAnimation, NPC_Duplighost, ANIM_Duplighost_Anim04)
             EVT_CALL(GetNpcPos, NPC_Duplighost, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
             EVT_CALL(InterpPlayerYaw, 90, 0)
             EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
             EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
             EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 13 * DT)
             EVT_SET(GB_StoryProgress, STORY_CH7_DEFEATED_FIRST_DUPLIGHOST)
             EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, FALSE)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o47, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(DisablePlayerInput, FALSE)
             EVT_ADD(LVar0, 50)
-            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, 0)
+            EVT_CALL(PlaySoundAtNpc, NPC_Duplighost, SOUND_DUPLIGHOST_STEP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_Duplighost, LVar0, LVar1, LVar2, 20 * DT)
         EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
         EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
@@ -258,7 +258,7 @@ NpcData N(NpcData_Hittable)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_TrueKooperB),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -285,7 +285,7 @@ NpcData N(NpcData_Hittable)[] = {
         .yaw = 0,
         .init = &N(EVS_NpcInit_FakeKooperB),
         .settings = &N(NpcSettings_Kooper),
-        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
+        .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_40000 | ENEMY_FLAG_100000 | ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN | ENEMY_FLAG_400000 | ENEMY_FLAG_NO_DROPS | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP,
         .drops = NO_DROPS,
         .animations = {
             .idle   = ANIM_WorldKooper_Idle,
@@ -326,7 +326,7 @@ NpcData N(NpcData_FrostClubba)[] = {
             }
         },
         .settings = &N(NpcSettings_FrostClubba_Wander),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_FLYING | ENEMY_FLAG_NO_SHADOW_RAYCAST,
         .drops = FROST_CLUBBA_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
         .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,

@@ -22,7 +22,7 @@ EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Run)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_NO_SHADOW_RAYCAST, FALSE)
+    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_FLYING | NPC_FLAG_NO_SHADOW_RAYCAST, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_SELF, 2)
     EVT_CALL(GetSelfNpcID, LVar0)

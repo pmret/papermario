@@ -55,7 +55,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     temp_f24 = vt3 + vt7;
 
     if ((enemy->varTable[0] & 0x11) == 1) {
-        if (npc->flags & NPC_FLAG_8) {
+        if (npc->flags & NPC_FLAG_FLYING) {
             if (vt1 < temp_f24 - npc->pos.y) {
                 enemy->varTable[0] |= 0x10;
             }
@@ -76,7 +76,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         f32 yTemp;
 
         do {
-            if (npc->flags & NPC_FLAG_8) {
+            if (npc->flags & NPC_FLAG_FLYING) {
                 yTemp = temp_f24;
                 test = vt4 + ((temp_f24 - vt4) * 0.09);
                 npc->pos.y = test;
@@ -105,7 +105,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             f32 sinTemp = sin_deg(enemy->varTable[2]);
             s32 hit;
 
-            if (npc->flags & NPC_FLAG_8) {
+            if (npc->flags & NPC_FLAG_FLYING) {
                 hit = FALSE;
             } else {
                 posX = npc->pos.x;
@@ -135,7 +135,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
                     EffectInstance* emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
                     npc->moveToPos.y = npc->pos.y;
-                    ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+                    ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
 
                     if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                         script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
@@ -209,8 +209,8 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         f32 undulateAmount = sin_deg(enemy->varTable[2]);
         s32 hitResult;
 
-        if (npc->flags & NPC_FLAG_8) {
-            hitResult = 0;
+        if (npc->flags & NPC_FLAG_FLYING) {
+            hitResult = FALSE;
         } else {
             posX = npc->pos.x;
             posY = npc->pos.y;
@@ -233,7 +233,7 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
-            ai_enemy_play_sound(npc, SOUND_SRAW_0B_A, SOUND_PARAM_MORE_QUIET);
+            ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
             if (enemy->npcSettings->actionFlags & AI_ACTION_JUMP_WHEN_SEE_PLAYER) {
                 script->AI_TEMP_STATE = AI_STATE_ALERT_INIT;
             } else {
@@ -325,7 +325,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     f32 temp_f20;
     f32 temp_f22;
     f32 temp_f2;
-    s32 phi_v0;
+    s32 hitBelow;
     f32 angle;
     f32 a = enemy->varTable[3];
     f32 b = enemy->varTable[7];
@@ -339,16 +339,16 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         npc->pos.y += npc->jumpVel;
         npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
         enemy->hitboxIsActive = FALSE;
-        if (!(npc->flags & NPC_FLAG_8)) {
+        if (!(npc->flags & NPC_FLAG_FLYING)) {
             posX = npc->pos.x;
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
+            hitBelow = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
         } else {
-            phi_v0 = FALSE;
+            hitBelow = FALSE;
         }
-        if (phi_v0) {
+        if (hitBelow) {
             temp_f2 = posY + temp_f20;
             if (temp_f2 <= npc->pos.y) {
                 npc->pos.y = temp_f2;
@@ -374,7 +374,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
             npc->yaw = clamp_angle(angle);
         }
 
-        if (npc->flags & NPC_FLAG_8) {
+        if (npc->flags & NPC_FLAG_FLYING) {
             if (npc->pos.y + npc->jumpVel < temp_f22) {
                 npc->pos.y = temp_f22;
                 npc->jumpVel = 0.0f;
@@ -413,9 +413,9 @@ void N(FlyingAI_Init)(Npc* npc, Enemy* enemy, Evt* script, MobileAISettings* aiS
     npc->flags &= ~NPC_FLAG_GRAVITY;
     npc->flags |= NPC_FLAG_JUMPING;
     if (enemy->territory->wander.isFlying) {
-        npc->flags |= NPC_FLAG_8;
+        npc->flags |= NPC_FLAG_FLYING;
     } else {
-        npc->flags &= ~NPC_FLAG_8;
+        npc->flags &= ~NPC_FLAG_FLYING;
     }
 
     posX = npc->pos.x;

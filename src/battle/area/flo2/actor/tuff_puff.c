@@ -3,18 +3,30 @@
 
 #define NAMESPACE A(tuff_puff)
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
+extern EvtScript N(EVS_Init);
+extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
 
-enum N(actorVars) {
+enum N(ActorVars) {
+    AVAR_Unk_0      = 0,
+    AVAR_Unk_1      = 1,
+    AVAR_Unk_2      = 2,
+    AVAR_Unk_3      = 3,
+    AVAR_Unk_4      = 4,
+};
+
+enum N(ActorParams) {
+    DMG_UNK         = 0,
+};
+
+enum N(OldActorVars) {
     N(VAR_IS_BIG) = 0,
     N(VAR_INDEX) = 1,
     N(VAR_2) = 2,
@@ -114,13 +126,13 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_8000 | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_HALF_HEIGHT | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_TUFF_PUFF,
-    .level = 0,
+    .level = ACTOR_LEVEL_TUFF_PUFF,
     .maxHP = 1,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
@@ -136,11 +148,11 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 10 },
 };
 
-EvtScript N(init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
+EvtScript N(EVS_Init) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
+    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
@@ -168,14 +180,14 @@ EvtScript N(init) = {
     EVT_END
 };
 
-EvtScript N(nextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_RETURN
     EVT_END
 };
 
 #include "common/CosInterpMinMax.inc.c"
 
-EvtScript N(idle) = {
+EvtScript N(EVS_Idle) = {
     EVT_SET(LVarF, 0)
     EVT_LOOP(0)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_2), LVarA)
@@ -215,7 +227,7 @@ EvtScript N(onDeath) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_INDEX), LVar0)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY0, 2, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_2, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_BITWISE_AND_CONST(LVar1, ~0x1)
@@ -238,12 +250,12 @@ EvtScript N(onDeath) = {
         EVT_CASE_EQ(9)
             EVT_BITWISE_AND_CONST(LVar1, ~0x200)
     EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_ENEMY0, 2, LVar1)
+    EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_Unk_2, LVar1)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(handleEvent) = {
+EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
@@ -387,10 +399,10 @@ EvtScript N(handleEvent) = {
     EVT_END
 };
 
-EvtScript N(takeTurn) = {
+EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

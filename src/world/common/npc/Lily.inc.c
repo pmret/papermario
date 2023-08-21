@@ -3,5 +3,5 @@
 NpcSettings N(NpcSettings_Lily) = {
     .height = 45,
     .radius = 65,
-    .level = 99,
+    .level = ACTOR_LEVEL_NONE,
 };
