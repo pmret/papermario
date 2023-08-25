@@ -13,8 +13,8 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorParams) {
-    DMG_TACKLE      = 10,
-    DMG_VAULT       = 12,
+    DMG_TACKLE      = 2,
+    DMG_VAULT       = 3,
 };
 
 s32 N(DefenseTable)[] = {
@@ -307,7 +307,7 @@ EvtScript N(EVS_Attack_Tackle) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SHYGUY_Anim05)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
@@ -411,7 +411,7 @@ EvtScript N(EVS_Attack_Vault) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_VAULT, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

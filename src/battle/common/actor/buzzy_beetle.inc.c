@@ -6,7 +6,7 @@
 
 #define NAMESPACE A(buzzy_beetle)
 
-extern s32 N(DefaultAnims)[];
+extern s32 N(CeilingAnims)[];
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn_Ceiling);
@@ -22,7 +22,7 @@ enum N(ActorVars) {
     AVAR_IsCeiling      = 0,
     AVAR_ToppleState    = 8,
     AVAL_State_Ceiling  = 0,
-    AVAL_State_Upright  = 1,
+    AVAL_State_Ground   = 1,
     AVAL_State_Toppled  = 2,
     AVAR_ToppleTurns    = 9,
 };
@@ -32,14 +32,14 @@ enum N(ActorParams) {
     DMG_CEILING_DROP    = 3,
 };
 
-s32 N(UprightDefenseTable)[] = {
+s32 N(UprightDefense)[] = {
     ELEMENT_NORMAL,   2,
     ELEMENT_FIRE,    99,
     ELEMENT_BLAST,   99,
     ELEMENT_END,
 };
 
-s32 N(FlippedDefenseTable)[] = {
+s32 N(ToppledDefense)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
@@ -76,8 +76,8 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(DefaultAnims),
-        .defenseTable = N(UprightDefenseTable),
+        .idleAnimations = N(CeilingAnims),
+        .defenseTable = N(UprightDefense),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 1, 7 },
@@ -107,7 +107,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 8, 13 },
 };
 
-s32 N(UprightAnims)[] = {
+s32 N(GroundAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim01,
     STATUS_KEY_STONE,     ANIM_BuzzyBeetle_Anim00,
     STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_Anim09,
@@ -120,7 +120,7 @@ s32 N(UprightAnims)[] = {
     STATUS_END,
 };
 
-s32 N(DefaultAnims)[] = {
+s32 N(CeilingAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim0F,
     STATUS_KEY_STONE,     ANIM_BuzzyBeetle_Anim0E,
     STATUS_KEY_SLEEP,     ANIM_BuzzyBeetle_Anim14,
@@ -157,12 +157,12 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Ceiling)))
         EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, FALSE)
     EVT_ELSE
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Upright)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Ground)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 16)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn_Ground)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Ground)))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(UprightAnims)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(GroundAnims)))
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_END_IF
@@ -187,7 +187,7 @@ EvtScript N(EVS_FallFromCeiling) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn_Ground)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Ground)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(FlippedDefenseTable)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefense)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
@@ -391,7 +391,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 16)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(FlippedDefenseTable)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefense)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BuzzyBeetle_Anim07)
@@ -439,7 +439,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0C)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
@@ -452,7 +452,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0C)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
@@ -501,14 +501,14 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim01)
                 EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
                 EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim07)
@@ -521,7 +521,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim04)
             EVT_ELSE
@@ -531,7 +531,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim07)
             EVT_ELSE
@@ -542,7 +542,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleState, LVar0)
-            EVT_IF_EQ(LVar0, AVAL_State_Upright)
+            EVT_IF_EQ(LVar0, AVAL_State_Ground)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BuzzyBeetle_Anim0C)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
@@ -565,13 +565,13 @@ EvtScript N(EVS_TakeTurn_Ceiling) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Upright)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Ground)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 16)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
     EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn_Ground)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Ground)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(UprightAnims)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(GroundAnims)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
@@ -724,11 +724,11 @@ EvtScript N(EVS_TakeTurn_Ground) = {
             EVT_SET_CONST(LVar2, ANIM_BuzzyBeetle_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_FlipBackUp)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Upright)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleState, AVAL_State_Ground)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 16)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(UprightDefenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(UprightAnims)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(UprightDefense)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(GroundAnims)))
             EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
         EVT_END_IF

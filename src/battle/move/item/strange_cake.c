@@ -67,7 +67,7 @@ void N(func_802A123C_73153C(void)) {
     }
 }
 
-s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(func_802A13E4_7316E4)) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 temp_a0_4;
     s32 temp_v1_3;

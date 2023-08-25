@@ -5,15 +5,18 @@
 
 #define NAMESPACE A(spiked_gloomba)
 
+extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
-extern s32 N(IdleAnimations)[];
-
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
+};
+
+enum N(ActorParams) {
+    DMG_SPIKEBONK   = 3,
 };
 
 s32 N(DefenseTable)[] = {
@@ -53,7 +56,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP,
         .elementImmunityFlags = 0,
@@ -84,7 +87,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpikedGoomba_Dark_Idle,
     STATUS_KEY_STONE,     ANIM_SpikedGoomba_Dark_Still,
     STATUS_KEY_SLEEP,     ANIM_SpikedGoomba_Dark_Sleep,
@@ -97,7 +100,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations_step)[] = {
+s32 N(ShuffleAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpikedGoomba_Dark_Run,
     STATUS_KEY_STONE,     ANIM_SpikedGoomba_Dark_Still,
     STATUS_KEY_SLEEP,     ANIM_SpikedGoomba_Dark_Sleep,
@@ -120,50 +123,50 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(10)
-    EVT_CALL(RandInt, 80, LVar0)
-    EVT_ADD(LVar0, 80)
-    EVT_LOOP(LVar0)
-        EVT_LABEL(0)
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
+        EVT_CALL(RandInt, 80, LVar0)
+        EVT_ADD(LVar0, 80)
+        EVT_LOOP(LVar0)
+            EVT_LABEL(0)
+                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
+                EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
+                    EVT_WAIT(1)
+                    EVT_GOTO(0)
+                EVT_END_IF
             EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 5)
-    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_step)))
-    EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
-    EVT_LOOP(20)
-        EVT_LABEL(1)
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
+        EVT_END_LOOP
+        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar0, 5)
+        EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ShuffleAnims)))
+        EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
+        EVT_LOOP(20)
+            EVT_LABEL(1)
+                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
+                EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
+                    EVT_WAIT(1)
+                    EVT_GOTO(1)
+                EVT_END_IF
             EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 5)
-    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_step)))
-    EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
-    EVT_LOOP(80)
-        EVT_LABEL(2)
-        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
+        EVT_END_LOOP
+        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_SUB(LVar0, 5)
+        EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ShuffleAnims)))
+        EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
+        EVT_LOOP(80)
+            EVT_LABEL(2)
+                EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
+                EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
+                    EVT_WAIT(1)
+                    EVT_GOTO(2)
+                EVT_END_IF
             EVT_WAIT(1)
-            EVT_GOTO(2)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_GOTO(10)
+        EVT_END_LOOP
+        EVT_GOTO(10)
     EVT_RETURN
     EVT_END
 };
@@ -433,7 +436,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_WAIT(1)
     EVT_END_SWITCH
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SPIKEBONK, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

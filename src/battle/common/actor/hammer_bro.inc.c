@@ -5,28 +5,29 @@
 #define NAMESPACE A(hammer_bro)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_HAMMER_1        = 2,
-    PRT_HAMMER_2        = 3,
-    PRT_HAMMER_3        = 4,
-    PRT_HAMMER_4        = 5,
-    PRT_HAMMER_5        = 6,
+    PRT_MAIN        = 1,
+    PRT_HAMMER_1    = 2,
+    PRT_HAMMER_2    = 3,
+    PRT_HAMMER_3    = 4,
+    PRT_HAMMER_4    = 5,
+    PRT_HAMMER_5    = 6,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_8      = 8,
+    AVAR_Unused     = 8, // possibly a topple state that was never implemented
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_HAMMER_THROW    = 5,
+    DMG_HAMMER_SURGE    = 2,
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_HammerBros_Anim02,
     STATUS_KEY_STONE,     ANIM_HammerBros_Anim00,
     STATUS_KEY_SLEEP,     ANIM_HammerBros_Anim11,
@@ -81,7 +82,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 35 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -176,31 +177,31 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unused, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
-        EVT_CASE_DEFAULT
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 35)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -10)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
-            EVT_END_SWITCH
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
+        EVT_SWITCH(LVar0)
+            EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
+                EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
+            EVT_CASE_DEFAULT
+                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unused, LVar0)
+                EVT_SWITCH(LVar0)
+                    EVT_CASE_EQ(0)
+                        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 35)
+                        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -10)
+                    EVT_CASE_EQ(1)
+                        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
+                        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
+                EVT_END_SWITCH
+        EVT_END_SWITCH
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -301,7 +302,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(attackHammerThrow) = {
+EvtScript N(EVS_Attack_HammerThrow) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -394,7 +395,7 @@ EvtScript N(attackHammerThrow) = {
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(1.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 15, TRUE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 50), 5, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 50), DMG_HAMMER_THROW, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -417,7 +418,7 @@ EvtScript N(attackHammerThrow) = {
     EVT_END
 };
 
-EvtScript N(hammerMiss) = {
+EvtScript N(EVS_HammerSurge_Miss) = {
     EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
@@ -446,7 +447,7 @@ EvtScript N(hammerMiss) = {
     EVT_END
 };
 
-EvtScript N(hammerHit) = {
+EvtScript N(EVS_HammerSurge_Hit) = {
     EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
@@ -470,7 +471,7 @@ EvtScript N(hammerHit) = {
     EVT_END
 };
 
-EvtScript N(attackHammerSurge) = {
+EvtScript N(EVS_Attack_HammerSurge) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -515,20 +516,20 @@ EvtScript N(attackHammerSurge) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_SET(LVar0, 2)
-            EVT_EXEC(N(hammerMiss))
+            EVT_SET(LVar0, PRT_HAMMER_1)
+            EVT_EXEC(N(EVS_HammerSurge_Miss))
             EVT_WAIT(5)
-            EVT_SET(LVar0, 3)
-            EVT_EXEC(N(hammerMiss))
+            EVT_SET(LVar0, PRT_HAMMER_2)
+            EVT_EXEC(N(EVS_HammerSurge_Miss))
             EVT_WAIT(5)
-            EVT_SET(LVar0, 4)
-            EVT_EXEC(N(hammerMiss))
+            EVT_SET(LVar0, PRT_HAMMER_3)
+            EVT_EXEC(N(EVS_HammerSurge_Miss))
             EVT_WAIT(5)
-            EVT_SET(LVar0, 5)
-            EVT_EXEC(N(hammerMiss))
+            EVT_SET(LVar0, PRT_HAMMER_4)
+            EVT_EXEC(N(EVS_HammerSurge_Miss))
             EVT_WAIT(5)
-            EVT_SET(LVar0, 6)
-            EVT_EXEC(N(hammerMiss))
+            EVT_SET(LVar0, PRT_HAMMER_5)
+            EVT_EXEC(N(EVS_HammerSurge_Miss))
             EVT_WAIT(5)
             EVT_WAIT(20)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
@@ -546,37 +547,37 @@ EvtScript N(attackHammerSurge) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
-        EVT_SET(LVar0, 2)
-        EVT_EXEC(N(hammerHit))
+        EVT_SET(LVar0, PRT_HAMMER_1)
+        EVT_EXEC(N(EVS_HammerSurge_Hit))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 3)
-        EVT_EXEC(N(hammerHit))
+        EVT_SET(LVar0, PRT_HAMMER_2)
+        EVT_EXEC(N(EVS_HammerSurge_Hit))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 4)
-        EVT_EXEC(N(hammerHit))
+        EVT_SET(LVar0, PRT_HAMMER_3)
+        EVT_EXEC(N(EVS_HammerSurge_Hit))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 5)
-        EVT_EXEC(N(hammerHit))
+        EVT_SET(LVar0, PRT_HAMMER_4)
+        EVT_EXEC(N(EVS_HammerSurge_Hit))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 6)
-        EVT_EXEC(N(hammerHit))
+        EVT_SET(LVar0, PRT_HAMMER_5)
+        EVT_EXEC(N(EVS_HammerSurge_Hit))
     EVT_END_THREAD
     EVT_WAIT(21)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HAMMER_SURGE, BS_FLAGS1_10)
     EVT_WAIT(5)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HAMMER_SURGE, BS_FLAGS1_40)
     EVT_WAIT(5)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HAMMER_SURGE, BS_FLAGS1_40)
     EVT_WAIT(5)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HAMMER_SURGE, BS_FLAGS1_40)
     EVT_WAIT(5)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 50), 2, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 50), DMG_HAMMER_SURGE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -596,9 +597,9 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_MULF(LVar0, EVT_FLOAT(100.0))
     EVT_DIVF(LVar0, LVar1)
     EVT_IF_GT(LVar0, 34)
-        EVT_EXEC_WAIT(N(attackHammerThrow))
+        EVT_EXEC_WAIT(N(EVS_Attack_HammerThrow))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(attackHammerSurge))
+        EVT_EXEC_WAIT(N(EVS_Attack_HammerSurge))
     EVT_END_IF
     EVT_RETURN
     EVT_END

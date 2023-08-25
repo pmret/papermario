@@ -534,7 +534,7 @@ EvtScript N(80227878) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim14)
     EVT_CALL(ActorSpeak, MSG_CH3_00C9, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim14, ANIM_BattleTubba_Anim14)
     EVT_SET(LVar0, 1)
-    EVT_SET(LVar1, 7012372)
+    EVT_SET(LVar1, ANIM_BattleTubba_Anim14)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END

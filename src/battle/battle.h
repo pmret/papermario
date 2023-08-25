@@ -299,6 +299,27 @@ typedef enum ActorType {
     ACTOR_TYPE_COUNT                       = 0xD4,
 } ActorType;
 
+enum BattleVars {
+    BTL_VAR_0                       = 0, // used by duplighost
+    BTL_VAR_HyperSync               = 1,
+    BTL_VAL_HyperSync_None          = 0,
+    BTL_VAL_HyperSync_Done          = 1,
+    BTL_VAL_HyperSync_Active        = 2,
+    BTL_VAR_UNK_MAGIKOOPA           = 2,
+    BTL_VAR_LastCopiedPartner       = 3, // used by duplighost
+    BTL_VAR_KoopatrolSummonCount_0  = 4, // count summons from Koopatrol and 'children' originally from column 0
+    BTL_VAR_KoopatrolSummonCount_1  = 5, // count summons from Koopatrol and 'children' originally from column 1
+    BTL_VAR_KoopatrolSummonCount_2  = 6, // count summons from Koopatrol and 'children' originally from column 2
+    BTL_VAR_KoopatrolSummonCount_3  = 7, // count summons from Koopatrol and 'children' originally from column 3
+};
+
+// document special actor vars referenced from other actors
+enum CommonActorVars {
+    AVAR_DryBones_Collapsed     = 8,
+    AVAR_SpearGuy_Generation    = 1,
+    AVAR_JungleFuzzy_Generation = 0,
+};
+
 extern s32 bActorNames[];
 
 typedef struct BattleMoveEntry {

@@ -159,7 +159,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(EVS_Duplighost_ReturnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim04)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
@@ -212,7 +212,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(EVS_Duplighost_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
@@ -297,7 +297,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_EXEC_WAIT(N(EVS_Duplighost_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -334,7 +334,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_Duplighost_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -643,7 +643,7 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_END_SWITCH
     EVT_SET(LVarA, LVar0)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)
-    EVT_CALL(SetBattleVar, 3, LVar5)
+    EVT_CALL(SetBattleVar, BTL_VAR_LastCopiedPartner, LVar5)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMOKE_BURST)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -717,14 +717,14 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(AVAL_State_ReadyToCopy)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 600)
-                EVT_CALL(GetBattleVar, 0, LVar0)
+                EVT_CALL(GetBattleVar, BTL_VAR_0, LVar0)
                 EVT_IF_NOT_FLAG(LVar0, 0x4)
-                    EVT_CALL(GetBattleVar, 0, LVar0)
+                    EVT_CALL(GetBattleVar, BTL_VAR_0, LVar0)
                     EVT_BITWISE_OR_CONST(LVar0, 0x4)
-                    EVT_CALL(SetBattleVar, 0, LVar0)
+                    EVT_CALL(SetBattleVar, BTL_VAR_0, LVar0)
                     EVT_EXEC_WAIT(N(EVS_CopyPartner))
                 EVT_ELSE
-                    EVT_CALL(GetBattleVar, 3, LVar0)
+                    EVT_CALL(GetBattleVar, BTL_VAR_LastCopiedPartner, LVar0)
                     EVT_CALL(N(GetPartnerAndLevel), LVar1, LVar2)
                     EVT_IF_EQ(LVar0, LVar1)
                         EVT_EXEC_WAIT(N(EVS_CopyPartner))

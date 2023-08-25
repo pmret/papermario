@@ -42,12 +42,12 @@ API_CALLABLE(N(func_802A12E0_72AA30)) {
 
     effect = fx_cold_breath(0, a, b, c, 1.0f, 30);
 
-    effect->data.coldBreath->unk_18 = 244;
-    effect->data.coldBreath->unk_1C = 244;
-    effect->data.coldBreath->unk_20 = 220;
-    effect->data.coldBreath->unk_28 = 210;
-    effect->data.coldBreath->unk_2C = 210;
-    effect->data.coldBreath->unk_30 = 190;
+    effect->data.coldBreath->primCol.r = 244;
+    effect->data.coldBreath->primCol.g = 244;
+    effect->data.coldBreath->primCol.b = 220;
+    effect->data.coldBreath->envCol.r = 210;
+    effect->data.coldBreath->envCol.g = 210;
+    effect->data.coldBreath->envCol.b = 190;
 
     return ApiStatus_DONE2;
 }

@@ -18,7 +18,7 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
-    AVAR_In_CantSummon      = 1,
+    AVAR_IN_CantSummon      = 1,
     AVAR_PartsThrown        = 0,
     AVAR_Anim_Immune        = 1,
     AVAR_Anim_Run           = 2,
@@ -241,7 +241,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Generation, AVAL_Generation_First)
     // copy input var from Formation
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_In_CantSummon, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_CantSummon, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_CantSummon, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_PartsThrown, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_Immune, ANIM_Pokey_Idle4)

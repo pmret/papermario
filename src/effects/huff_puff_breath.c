@@ -40,29 +40,29 @@ EffectInstance* huff_puff_breath_main(s32 type, f32 posX, f32 posY, f32 posZ, f3
         data->timeLeft = timeLeft;
     }
 
-    data->primA = 0;
+    data->primCol.a = 0;
     data->pos.x = posX;
     data->pos.y = posY;
     data->pos.z = posZ;
     data->scale = scale;
-    data->primR = 255;
-    data->envG = 230;
-    data->primG = 255;
-    data->primB = 255;
-    data->envR = 255;
-    data->envB = 50;
-    data->envA = 255;
+    data->primCol.r = 255;
+    data->primCol.g = 255;
+    data->primCol.b = 255;
+    data->envCol.r = 255;
+    data->envCol.g = 230;
+    data->envCol.b = 50;
+    data->envCol.a = 255;
     data->angle = angle;
     data->speedY = 0;
     data->speedX = speed;
     data->texOffsetX = rand_int(32);
     data->texOffsetY = rand_int(16);
-    data->primB = 150;
-    data->envR = 215;
-    data->envG = 210;
-    data->primR = 255;
-    data->primG = 255;
-    data->envB = 10;
+    data->primCol.r = 255;
+    data->primCol.g = 255;
+    data->primCol.b = 150;
+    data->envCol.r = 215;
+    data->envCol.g = 210;
+    data->envCol.b = 10;
 
     return effect;
 }
@@ -88,10 +88,10 @@ void huff_puff_breath_update(EffectInstance* effect) {
         return;
     }
     if (data->timeLeft < 16) {
-        data->primA = data->timeLeft * 16;
+        data->primCol.a = data->timeLeft * 16;
     }
     if (temp_a2 < 16) {
-        data->primA = (temp_a2 * 16) + 15;
+        data->primCol.a = (temp_a2 * 16) + 15;
     }
     data->texOffsetX += data->speedX;
     if (data->texOffsetX >= 256.0f) {
@@ -127,7 +127,7 @@ void func_E00DC2FC(void) {
 void huff_puff_breath_appendGfx(void* effect) {
     HuffPuffBreathFXData* data = ((EffectInstance*)effect)->data.huffPuffBreath;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 primA = data->primA;
+    s32 alpha = data->primCol.a;
     s32 unk_00 = data->type;
     s32 uls = data->texOffsetX * 4.0f;
     s32 ult = data->texOffsetY * 4.0f;
@@ -146,8 +146,8 @@ void huff_puff_breath_appendGfx(void* effect) {
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, primA);
-    gDPSetEnvColor(gMainGfxPos++, data->envR, data->envG, data->envB, data->envA);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, alpha);
+    gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, data->envCol.a);
     gSPDisplayList(gMainGfxPos++, D_E00DC648[unk_00]);
     gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 31 * 4, ult + 15 * 4);
     gSPDisplayList(gMainGfxPos++, D_E00DC640[unk_00]);

@@ -701,7 +701,7 @@ EvtScript N(8021A6D8) = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-#include "common/SpyGuyActionFunc.inc.c"
+#include "common/battle/CheckPlayerCanLoseCommand.inc.c"
 
 EvtScript N(8021B008) = {
     EVT_LABEL(0)
@@ -974,7 +974,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_IF_LT(LVar0, 500)
         EVT_EXEC_WAIT(N(8021A6D8))
     EVT_ELSE
-        EVT_CALL(N(SpyGuyActionFunc), LVar0)
+        EVT_CALL(N(CheckPlayerCanLoseCommand), LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_EXEC_WAIT(N(8021B22C))
         EVT_ELSE

@@ -6,13 +6,13 @@
 #define NAMESPACE A(goomba)
 #endif
 
-enum N(ActorParams) {
-    DMG_HEADBONK        = 1,
-};
-
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
+
+enum N(ActorParams) {
+    DMG_HEADBONK        = 1,
+};
 
 #ifndef NESTED_GOOMBA_INCLUDE
 

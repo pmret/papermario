@@ -1,6 +1,6 @@
 #include "battle/battle.h"
 
-API_CALLABLE(N(UnkFunc52)) {
+API_CALLABLE(N(CheckMagikoopaCastTarget)) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
 
@@ -41,7 +41,7 @@ API_CALLABLE(N(UnkFunc52)) {
             break;
 
         case ACTOR_TYPE_DRY_BONES:
-            if (actor->state.varTable[8] == 1) {
+            if (actor->state.varTable[AVAR_DryBones_Collapsed] == 1) {
                 evt_set_variable(script, *args++, -1);
                 break;
             }

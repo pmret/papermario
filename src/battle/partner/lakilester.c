@@ -1395,13 +1395,13 @@ API_CALLABLE(N(ProcessHurricane)) {
             D_8023D338 = 255;
             sHuffPuffBreathEffect = effect = fx_huff_puff_breath(0, NPC_DISPOSE_LOCATION, 0.0f, -2.0f, 0.6f, 0);
 
-            effect->data.huffPuffBreath->primR = 20;
-            effect->data.huffPuffBreath->primG = 80;
-            effect->data.huffPuffBreath->primB = 255;
+            effect->data.huffPuffBreath->primCol.r = 20;
+            effect->data.huffPuffBreath->primCol.g = 80;
+            effect->data.huffPuffBreath->primCol.b = 255;
 
-            effect->data.huffPuffBreath->envR = 200;
-            effect->data.huffPuffBreath->envG = 240;
-            effect->data.huffPuffBreath->envB = 240;
+            effect->data.huffPuffBreath->envCol.r = 200;
+            effect->data.huffPuffBreath->envCol.g = 240;
+            effect->data.huffPuffBreath->envCol.b = 240;
 
             hurricaneState->unk_54 = HURRICANE_UNUSED_TIME;
             hurricaneState->breathSizeIncrease = 0;

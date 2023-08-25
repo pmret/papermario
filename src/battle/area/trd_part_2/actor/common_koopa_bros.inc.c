@@ -460,7 +460,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
                     EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefense)))
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_State, AVAL_Koopa_State_Toppled)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppledTurns, 2)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, 2)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 18)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -506,7 +506,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
                     EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefense)))
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_State, AVAL_Koopa_State_Toppled)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppledTurns, 2)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, 2)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 18)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -514,11 +514,11 @@ EvtScript N(HandleCommand) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_Toppled)
-                    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_ToppledTurns, LVar0)
+                    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, LVar0)
                     EVT_SUB(LVar0, 1)
                     EVT_IF_GT(LVar0, 0)
                         // still has topple turns left, just struggle a bit
-                        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppledTurns, LVar0)
+                        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, LVar0)
                         EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
                         EVT_WAIT(20)
                         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
@@ -857,7 +857,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_State, AVAL_Koopa_State_Ready)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppledTurns, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, 0)
     EVT_RETURN
     EVT_END
 };
@@ -908,7 +908,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_State, AVAL_Koopa_State_Toppled)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppledTurns, 2)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_ToppleTurns, 2)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
             EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefense)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 18)

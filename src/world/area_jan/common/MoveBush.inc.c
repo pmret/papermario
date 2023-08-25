@@ -8,7 +8,7 @@ void N(MoveBush_apply_shear_mtx)(Matrix4f mtx, f32 f) {
     mtx[1][2] = 0.0f;
 }
 
-ApiStatus N(MoveBush_AnimateShearing)(Evt* script) {
+API_CALLABLE(N(MoveBush_AnimateShearing)) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     s32 modelIndex = get_model_list_index_from_tree_index(modelID);

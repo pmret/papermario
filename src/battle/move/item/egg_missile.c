@@ -11,12 +11,12 @@
 
 API_CALLABLE(N(func_802A123C_71CF1C)) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = evt_get_variable(script, *args++);
-    s32 b = evt_get_variable(script, *args++);
-    s32 c = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
 
-    fx_smoke_ring(0, a, b, c);
-    fx_explosion(0, a, b + 20, c);
+    fx_smoke_ring(0, x, y, z);
+    fx_explosion(0, x, y + 20, z);
 
     return ApiStatus_DONE2;
 }
@@ -145,8 +145,7 @@ EntityModelScript N(EMS_EggMissile) = {
     ems_End
 };
 
-EntityModelScript unusedModelScript = STANDARD_ENTITY_MODEL_SCRIPT(
-    N(Frame4Gfx), RENDER_MODE_ALPHATEST);
+EntityModelScript unusedModelScript = STANDARD_ENTITY_MODEL_SCRIPT(N(Frame4Gfx), RENDER_MODE_ALPHATEST);
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_EGG_MISSILE)

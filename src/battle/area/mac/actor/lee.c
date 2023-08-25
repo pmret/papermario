@@ -242,7 +242,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(EVS_Lee_ReturnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Lee_Run)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
@@ -296,7 +296,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(EVS_Lee_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Lee_Hurt)
@@ -383,7 +383,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_EXEC_WAIT(N(EVS_Lee_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -420,7 +420,7 @@ EvtScript N(EVS_Attack_FlyingTackle) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)
-            EVT_EXEC_WAIT(N(EVS_Lee_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
