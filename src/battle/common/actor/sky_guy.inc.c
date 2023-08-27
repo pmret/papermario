@@ -374,7 +374,7 @@ EvtScript N(EVS_PopBalloons) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim00)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0263)
-        EVT_PLAY_EFFECT(EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 24, 0, 25, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_EMOTE, EMOTE_QUESTION, 0, LVar0, LVar1, LVar2, 24, 0, 25, 0, 0)
         EVT_WAIT(25)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_SkyGuy_Anim06)
         EVT_WAIT(30)

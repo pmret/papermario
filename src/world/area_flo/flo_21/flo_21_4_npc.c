@@ -418,7 +418,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
             EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
             EVT_CALL(RandInt, 2, LVar5)
             EVT_ADD(LVar5, 8)
-            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_03D5, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_RUFF_PUFF_FLY_A, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, LVar5)
             EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
         EVT_END_THREAD
@@ -431,7 +431,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
     EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
     EVT_WAIT(5)
     EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
-    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_03D6, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_RUFF_PUFF_FLY_B, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, 10)
     EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
     EVT_RETURN

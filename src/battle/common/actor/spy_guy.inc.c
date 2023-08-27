@@ -607,7 +607,7 @@ EvtScript N(EVS_Attack_Mallet) = {
                 EVT_WAIT(10)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 10)
-                EVT_PLAY_EFFECT(EFFECT_EMOTE, 2, 0, LVar0, LVar1, LVar2, 25, -45, 20, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_EMOTE, EMOTE_QUESTION, 0, LVar0, LVar1, LVar2, 25, -45, 20, 0, 0)
                 EVT_WAIT(20)
             EVT_END_IF
             EVT_LABEL(100)

@@ -24,7 +24,7 @@ enum N(ActorVars) {
 };
 
 enum N(ActorParams) {
-    DMG_SPINY_FLIP  = 3,
+    DMG_SPINY_TOSS  = 3,
 };
 
 s32 N(DefaultAnims)[] = {
@@ -269,7 +269,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(EVS_Attack_SpinyFlip) = {
+EvtScript N(EVS_Attack_SpinyToss) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -359,7 +359,7 @@ EvtScript N(EVS_Attack_SpinyFlip) = {
     EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_SPINY_BALL, LVar0, LVar1, LVar2, 20, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_SPINY_FLIP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_SPINY_TOSS, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -582,12 +582,12 @@ EvtScript N(EVS_CountActiveSummoners) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_SummonCount, LVar0)
     EVT_IF_GE(LVar0, 3)
-        EVT_EXEC_WAIT(N(EVS_Attack_SpinyFlip))
+        EVT_EXEC_WAIT(N(EVS_Attack_SpinyToss))
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_GetAvailableColumn))
     EVT_IF_EQ(LVarA, -1)
-        EVT_EXEC_WAIT(N(EVS_Attack_SpinyFlip))
+        EVT_EXEC_WAIT(N(EVS_Attack_SpinyToss))
         EVT_RETURN
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_CountActiveSummoners))
@@ -611,7 +611,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_RETURN
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_Attack_SpinyFlip))
+    EVT_EXEC_WAIT(N(EVS_Attack_SpinyToss))
     EVT_RETURN
     EVT_END
 };

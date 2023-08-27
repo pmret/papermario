@@ -7,8 +7,8 @@
 extern s32 N(DefaultAnims)[];
 extern s32 N(RockAnims)[];
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
@@ -18,7 +18,7 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
-    AVAR_Hole_Small     = 0,
+    AVAR_IN_Hole_Small  = 0,
 };
 
 enum N(ActorParams) {
@@ -140,12 +140,13 @@ s32 N(EmptyHoleAnims)[] = {
     STATUS_END,
 };
 
+// unused
 s32 N(LeapAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_MontyMole_Anim06,
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_hole)[] = {
+ActorPartBlueprint N(HoleParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -161,7 +162,7 @@ ActorPartBlueprint N(ActorParts_hole)[] = {
 };
 
 EvtScript N(EVS_Hole_Init) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Hole_Small, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_Hole_Small, LVar0)
     EVT_IF_EQ(LVar0, TRUE)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
@@ -174,8 +175,8 @@ ActorBlueprint N(hole) = {
     .type = ACTOR_TYPE_MONTY_HOLE,
     .level = ACTOR_LEVEL_MONTY_HOLE,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(ActorParts_hole)),
-    .partsData = N(ActorParts_hole),
+    .partCount = ARRAY_COUNT(N(HoleParts)),
+    .partsData = N(HoleParts),
     .initScript = &N(EVS_Hole_Init),
     .statusTable = NULL,
     .escapeChance = 80,
