@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 #include "world/common/npc/GateFlower.inc.c"
-#include "world/common/enemy/TuffPuff.inc.c"
+#include "world/common/enemy/RuffPuff.inc.c"
 #include "world/common/enemy/Bzzap.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
@@ -170,8 +170,8 @@ NpcData N(NpcData_GateFlower) = {
     .tattle = MSG_NpcTattle_RedGateFlower,
 };
 
-NpcData N(NpcData_TuffPuff) = {
-    .id = NPC_TuffPuff,
+NpcData N(NpcData_RuffPuff) = {
+    .id = NPC_RuffPuff,
     .pos = { -200.0f, 45.0f, 0.0f },
     .yaw = 90,
     .territory = {
@@ -186,10 +186,10 @@ NpcData N(NpcData_TuffPuff) = {
             .detectSize = { 200 },
         }
     },
-    .settings = &N(NpcSettings_TuffPuff),
+    .settings = &N(NpcSettings_RuffPuff),
     .flags = ENEMY_FLAG_IGNORE_ENTITY_COLLISION,
-    .drops = TUFF_PUFF_DROPS,
-    .animations = TUFF_PUFF_ANIMS,
+    .drops = RUFF_PUFF_DROPS,
+    .animations = RUFF_PUFF_ANIMS,
     .aiDetectFlags = AI_DETECT_SIGHT | AI_DETECT_SENSITIVE_MOTION,
 };
 
@@ -217,7 +217,7 @@ NpcData N(NpcData_Bzzap) = {
 };
 
 NpcGroupList N(DefaultNPCs) = {
-    NPC_GROUP(N(NpcData_TuffPuff), BTL_FLO_FORMATION_22, BTL_FLO_STAGE_05),
+    NPC_GROUP(N(NpcData_RuffPuff), BTL_FLO_FORMATION_22, BTL_FLO_STAGE_05),
     NPC_GROUP(N(NpcData_Bzzap), BTL_FLO_FORMATION_1A, BTL_FLO_STAGE_01),
     NPC_GROUP(N(NpcData_GateFlower)),
     {}

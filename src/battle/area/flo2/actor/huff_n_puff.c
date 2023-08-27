@@ -1,6 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/HuffNPuff.h"
-#include "sprite/npc/RuffPuff.h"
+#include "sprite/npc/TuffPuff.h"
 #include "sprite/player.h"
 #include "battle/action_cmd/whirlwind.h"
 #include "battle/action_cmd/stop_leech.h"
@@ -361,7 +361,7 @@ s32 N(ChargedArmAnims)[] = {
 };
 
 s32 N(DummyAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_RuffPuff_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_TuffPuff_Anim02,
     STATUS_END,
 };
 
@@ -1019,10 +1019,10 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
     EVT_CALL(UseIdleAnimation, LVar0, FALSE)
     EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SetAnimation, LVar0, 1, ANIM_RuffPuff_Anim09)
-        EVT_CALL(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_RuffPuff_Anim14, ANIM_RuffPuff_Anim02)
+        EVT_CALL(SetAnimation, LVar0, 1, ANIM_TuffPuff_Anim09)
+        EVT_CALL(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
     EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_RuffPuff_Anim15, ANIM_RuffPuff_Anim03)
+        EVT_CALL(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
     EVT_WAIT(20)
@@ -1093,10 +1093,10 @@ EvtScript N(EVS_Dialogue_FullPower) = {
     EVT_CALL(UseIdleAnimation, LVar0, FALSE)
     EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SetAnimation, LVar0, 1, ANIM_RuffPuff_Anim09)
-        EVT_CALL(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_RuffPuff_Anim14, ANIM_RuffPuff_Anim02)
+        EVT_CALL(SetAnimation, LVar0, 1, ANIM_TuffPuff_Anim09)
+        EVT_CALL(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
     EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_RuffPuff_Anim15, ANIM_RuffPuff_Anim03)
+        EVT_CALL(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -1163,9 +1163,9 @@ EvtScript N(EVS_Dialogue_PraiseHuff) = {
     EVT_CALL(UseIdleAnimation, LVar0, FALSE)
     EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_RuffPuff_Anim14, ANIM_RuffPuff_Anim02)
+        EVT_CALL(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
     EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_RuffPuff_Anim15, ANIM_RuffPuff_Anim03)
+        EVT_CALL(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
     EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -1222,9 +1222,9 @@ EvtScript N(EVS_Dialogue_Concerned) = {
     EVT_CALL(UseIdleAnimation, LVar0, FALSE)
     EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_RuffPuff_Anim14, ANIM_RuffPuff_Anim02)
+        EVT_CALL(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
     EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_RuffPuff_Anim15, ANIM_RuffPuff_Anim03)
+        EVT_CALL(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, LVar0, TRUE)
     // Huff N Puff replies
@@ -1518,9 +1518,9 @@ EvtScript N(EVS_RuffPuff_Inhale) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 2)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TuffPuff_IsLarge, LVar0)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_RuffPuff_Anim12)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim12)
         EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_RuffPuff_Anim13)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim13)
         EVT_END_IF
     EVT_END_THREAD
     EVT_WAIT(15)
@@ -2425,9 +2425,9 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_CALL(UseIdleAnimation, ArrayVar(idx), FALSE) \
             EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
             EVT_IF_EQ(LVar1, 0) \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim09) \
+                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim09) \
             EVT_ELSE \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim0B) \
+                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim0B) \
             EVT_END_IF \
             EVT_THREAD \
                 EVT_MOD(LVar9, 2) \
@@ -2806,9 +2806,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_CALL(SetPartAlpha, ArrayVar(idx), 1, 254) \
             EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
             EVT_IF_EQ(LVar1, 0) \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim09) \
+                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim09) \
             EVT_ELSE \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim0B) \
+                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim0B) \
             EVT_END_IF \
             EVT_THREAD \
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3) \
@@ -2891,9 +2891,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     EVT_KILL_THREAD(ArrayVar(idx + MAX_RUFF_PUFFS)) \
                     EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
                     EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim12) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim12) \
                     EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim13) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim13) \
                     EVT_END_IF \
                     EVT_THREAD \
                         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2) \
@@ -2923,9 +2923,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                 EVT_IF_FLAG(LVar0, 1 << idx) \
                     EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
                     EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim06) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim06) \
                     EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim07) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim07) \
                     EVT_END_IF \
                     EVT_THREAD \
                         EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_WobbleMode, 0) \
@@ -2941,9 +2941,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                         EVT_CALL(SetActorYaw, ArrayVar(idx), 0) \
                         EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
                         EVT_IF_EQ(LVar1, 0) \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim02) \
+                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim02) \
                         EVT_ELSE \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim03) \
+                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim03) \
                         EVT_END_IF \
                     EVT_END_THREAD \
                     EVT_ADD(LVarA, 1) \
@@ -3041,9 +3041,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     EVT_KILL_THREAD(ArrayVar(idx + MAX_RUFF_PUFFS)) \
                     EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
                     EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim12) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim12) \
                     EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim13) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim13) \
                     EVT_END_IF \
                     EVT_THREAD \
                         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2) \
@@ -3097,9 +3097,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                 EVT_IF_FLAG(LVar0, 1 << idx) \
                     EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
                     EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim06) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim06) \
                     EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim07) \
+                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim07) \
                     EVT_END_IF \
                     EVT_THREAD \
                         EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_WobbleMode, 0) \
@@ -3115,9 +3115,9 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                         EVT_CALL(SetActorYaw, ArrayVar(idx), 0) \
                         EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
                         EVT_IF_EQ(LVar1, 0) \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim02) \
+                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim02) \
                         EVT_ELSE \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_RuffPuff_Anim03) \
+                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim03) \
                         EVT_END_IF \
                     EVT_END_THREAD \
                     EVT_ADD(LVarA, 1) \

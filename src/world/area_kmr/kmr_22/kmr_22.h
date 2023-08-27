@@ -14,7 +14,7 @@
 #include "sprite/npc/WorldTubba.h"
 #include "sprite/npc/GeneralGuy.h"
 #include "sprite/npc/HuffNPuff.h"
-#include "sprite/npc/TuffPuff.h"
+#include "sprite/npc/RuffPuff.h"
 #include "sprite/npc/CrystalKing.h"
 #include "sprite/npc/WorldBowser.h"
 
@@ -46,8 +46,8 @@ enum {
     NPC_HuffNPuff_Body          = 25,
     NPC_HuffNPuff_Face          = 26,
     NPC_HuffNPuff_Arms          = 27,
-    NPC_TuffPuff_01             = 28,
-    NPC_TuffPuff_02             = 29,
+    NPC_RuffPuff_01             = 28,
+    NPC_RuffPuff_02             = 29,
     NPC_CrystalKing             = 30,
     NPC_IceCube                 = 31,
     NPC_IceSphere               = 32,

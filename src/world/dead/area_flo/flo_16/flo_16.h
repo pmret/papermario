@@ -9,11 +9,11 @@
 #include "mapfs/flo_16_shape.h"
 #include "mapfs/flo_16_hit.h"
 
-#include "sprite/npc/TuffPuff.h"
+#include "sprite/npc/RuffPuff.h"
 
 enum {
-    NPC_TuffPuff_01     = 0,
-    NPC_TuffPuff_02     = 1,
+    NPC_RuffPuff_01     = 0,
+    NPC_RuffPuff_02     = 1,
 };
 
 enum {
