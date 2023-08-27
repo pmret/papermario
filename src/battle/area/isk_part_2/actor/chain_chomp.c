@@ -1,12 +1,13 @@
 #include "../area.h"
 #include "sprite/npc/ChainChomp.h"
 #include "sprite/npc/Tutankoopa.h"
+#include "tutankoopa_common.h"
 
 #define NAMESPACE A(chain_chomp)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_UpdateChain);
 extern EvtScript N(EVS_Chomp_SpinSmashHit);
@@ -15,8 +16,6 @@ extern EvtScript N(EVS_Chomp_HopToPos);
 
 enum N(ActorVars) {
     AVAR_EnableChainSounds      = 8,
-    AVAR_BOSS_Stunned           = 8,  // actor var for Tutankoopa
-    AVAR_BOSS_NextSummonTime    = 12, // actor var for Tutankoopa to signal chomp has died
 };
 
 enum N(ActorPartIDs) {
@@ -421,7 +420,7 @@ EvtScript N(EVS_Idle) = {
 EvtScript N(EVS_UpdateChain) = {
     EVT_LABEL(0)
         EVT_WAIT(1)
-        EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
+        EVT_CALL(ActorExists, ACTOR_CHOMP, LVar0)
         EVT_IF_EQ(LVar0, TRUE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(N(ChompChainUpdate), LVar2)
@@ -459,7 +458,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_WAIT(10)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_BOSS_NextSummonTime, 2)
+            EVT_CALL(SetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_NextSummonTime, 2)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -549,7 +548,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
             EVT_WAIT(10)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_BOSS_NextSummonTime, 2)
+            EVT_CALL(SetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_NextSummonTime, 2)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -559,7 +558,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_BOSS_NextSummonTime, 2)
+            EVT_CALL(SetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_NextSummonTime, 2)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -568,7 +567,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Hurt)
             EVT_EXEC_WAIT(N(EVS_Chomp_SpinSmashHit))
-            EVT_CALL(SetActorVar, ACTOR_ENEMY0, AVAR_BOSS_NextSummonTime, 2)
+            EVT_CALL(SetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_NextSummonTime, 2)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -595,17 +594,17 @@ EvtScript N(EVS_HandleEvent) = {
 };
 
 EvtScript N(EVS_Chomp_SpinSmashHit) = {
-    EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)
+    EVT_CALL(ActorExists, ACTOR_TUTANKOOPA, LVar0)
     EVT_IF_EQ(LVar0, FALSE)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_BOSS_Stunned, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_TUTANKOOPA, AVAR_Tutankoopa_Stunned, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_GOTO(1)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ChainChomp_Hurt)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_ENEMY0)
+    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_TUTANKOOPA)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 20, LVar2)

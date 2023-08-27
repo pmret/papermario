@@ -7,8 +7,8 @@
 #define NAMESPACE A(buzzar)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_Attack_WindBlast);
@@ -19,28 +19,36 @@ extern EvtScript N(EVS_FlyToHome);
 extern EvtScript N(EVS_FlyToHome_GrappleFail);
 extern EvtScript N(EVS_FlyToHome_Impl);
 extern EvtScript N(EVS_FlyToHome_GrappleFail_Impl);
-extern EvtScript N(8021FC34);
+extern EvtScript N(EVS_DummyHit);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
-    PRT_3               = 3,
-    PRT_4               = 4,
-    PRT_5               = 5,
+    PRT_MAIN        = 1,
+    PRT_TARGET      = 2,
+    PRT_FEATHER_1   = 3,
+    PRT_FEATHER_2   = 4,
+    PRT_FEATHER_3   = 5,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_1      = 1,
-    AVAR_Unk_2      = 2,
-    AVAR_Unk_3      = 3,
+    AVAR_NextMove               = 0,
+    AVAL_Move_WindBlast         = 0,
+    AVAL_Move_GrappleThenSwipe  = 1,
+    AVAL_Move_ClawSwipe         = 2,
+    AVAL_Move_GrappleThenFling  = 3,
+    AVAL_Move_FlingFeather      = 4,
+    AVAL_Move_GrappleThenWind   = 5,
+    AVAR_Unused_1               = 1,
+    AVAR_Unused_2               = 2,
+    AVAR_Unused_3               = 3,
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_FEATHER     = 2,
+    DMG_SWIPE       = 3,
+    DMG_DROP        = 4,
 };
 
-s32 N(IdleAnimations_8021B600)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Buzzar_Anim01,
     STATUS_KEY_STONE,     ANIM_Buzzar_Anim00,
     STATUS_KEY_SLEEP,     ANIM_Buzzar_Anim19,
@@ -52,7 +60,7 @@ s32 N(IdleAnimations_8021B600)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations_8021B644)[] = {
+s32 N(FeatherAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Buzzar_Anim14,
     STATUS_END,
 };
@@ -94,7 +102,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -20, 60 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021B600),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -102,11 +110,11 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 31, 0 },
         .targetOffset = { -14, 20 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021B600),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -114,11 +122,11 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = PRT_3,
+        .index = PRT_FEATHER_1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021B644),
+        .idleAnimations = N(FeatherAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -126,11 +134,11 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = PRT_4,
+        .index = PRT_FEATHER_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021B644),
+        .idleAnimations = N(FeatherAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -138,11 +146,11 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = PRT_5,
+        .index = PRT_FEATHER_3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021B644),
+        .idleAnimations = N(FeatherAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -174,10 +182,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_2, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_3, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unused_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_WindBlast)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unused_2, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unused_3, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
@@ -214,7 +222,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Buzzar_Anim0B)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_EXEC_WAIT(N(8021FC34))
+            EVT_EXEC_WAIT(N(EVS_DummyHit))
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Buzzar_Anim0B)
@@ -235,7 +243,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_WindBlast)
             EVT_EXEC_WAIT(N(EVS_FlyToHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -277,27 +285,27 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 2)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_ClawSwipe)
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
+        EVT_CASE_EQ(AVAL_Move_WindBlast)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_GrappleThenSwipe)
             EVT_EXEC_WAIT(N(EVS_Attack_WindBlast))
-        EVT_CASE_EQ(2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 3)
+        EVT_CASE_EQ(AVAL_Move_ClawSwipe)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_GrappleThenFling)
             EVT_EXEC_WAIT(N(EVS_Attack_ClawSwipe))
-        EVT_CASE_EQ(4)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 5)
+        EVT_CASE_EQ(AVAL_Move_FlingFeather)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_GrappleThenWind)
             EVT_EXEC_WAIT(N(EVS_Attack_FeatherFling))
         EVT_CASE_DEFAULT
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
-            EVT_IF_EQ(LVar0, 5)
-                EVT_SET(LVar0, 0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+            EVT_IF_EQ(LVar0, AVAL_Move_GrappleThenWind)
+                EVT_SET(LVar0, AVAL_Move_WindBlast)
             EVT_ELSE
                 EVT_ADD(LVar0, 1)
             EVT_END_IF
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
             EVT_EXEC_WAIT(N(EVS_Attack_GrappleDrop))
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -560,15 +568,15 @@ EvtScript N(EVS_Attack_FeatherFling) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -30)
     EVT_ADD(LVar1, 25)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEATHER_1, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -30)
     EVT_ADD(LVar1, 35)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_4, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEATHER_2, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -20)
     EVT_ADD(LVar1, 25)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_5, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_FEATHER_3, LVar0, LVar1, LVar2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim0E)
     EVT_WAIT(15)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -577,9 +585,9 @@ EvtScript N(EVS_Attack_FeatherFling) = {
     EVT_PLAY_EFFECT(EFFECT_SHINY_FLARE, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.6), 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F3)
     EVT_WAIT(10)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_3, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_4, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_5, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_FEATHER_1, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_FEATHER_2, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_FEATHER_3, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
@@ -587,22 +595,22 @@ EvtScript N(EVS_Attack_FeatherFling) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim01)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim10)
-    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_3, 0, 0, -45)
-    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_4, 0, 0, -45)
-    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_5, 0, 0, -45)
+    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_1, 0, 0, -45)
+    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_2, 0, 0, -45)
+    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_3, 0, 0, -45)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_Buzzar_Anim14)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_4, ANIM_Buzzar_Anim14)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_5, ANIM_Buzzar_Anim14)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_5, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_3, EVT_FLOAT(6.0))
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_3, EVT_FLOAT(0.1))
-    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_4, EVT_FLOAT(6.0))
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_4, EVT_FLOAT(0.1))
-    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_5, EVT_FLOAT(6.0))
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_5, EVT_FLOAT(0.1))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_1, ANIM_Buzzar_Anim14)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_2, ANIM_Buzzar_Anim14)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_3, ANIM_Buzzar_Anim14)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_FEATHER_1, EVT_FLOAT(6.0))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEATHER_1, EVT_FLOAT(0.1))
+    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_FEATHER_2, EVT_FLOAT(6.0))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEATHER_2, EVT_FLOAT(0.1))
+    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_FEATHER_3, EVT_FLOAT(6.0))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEATHER_3, EVT_FLOAT(0.1))
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F4)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -615,30 +623,30 @@ EvtScript N(EVS_Attack_FeatherFling) = {
                 EVT_CALL(RandInt, 10, LVar3)
                 EVT_SUB(LVar3, 30)
                 EVT_ADD(LVar0, LVar3)
-                EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_4, LVar0, 5, LVar2, 9, 0, EASING_LINEAR)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_4, ANIM_Buzzar_Anim15)
+                EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_FEATHER_2, LVar0, 5, LVar2, 9, 0, EASING_LINEAR)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_2, ANIM_Buzzar_Anim15)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(RandInt, 10, LVar3)
                 EVT_SUB(LVar3, 40)
                 EVT_ADD(LVar0, LVar3)
-                EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_5, LVar0, 5, LVar2, 9, 0, EASING_LINEAR)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_5, ANIM_Buzzar_Anim15)
+                EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_FEATHER_3, LVar0, 5, LVar2, 9, 0, EASING_LINEAR)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_3, ANIM_Buzzar_Anim15)
             EVT_END_THREAD
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 30)
-            EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_3, LVar0, 5, LVar2, 9, 0, EASING_LINEAR)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_Buzzar_Anim15)
+            EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_FEATHER_1, LVar0, 5, LVar2, 9, 0, EASING_LINEAR)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_1, ANIM_Buzzar_Anim15)
             EVT_THREAD
                 EVT_WAIT(10)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_Buzzar_Anim14)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_4, ANIM_Buzzar_Anim14)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_5, ANIM_Buzzar_Anim14)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_1, ANIM_Buzzar_Anim14)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_2, ANIM_Buzzar_Anim14)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FEATHER_3, ANIM_Buzzar_Anim14)
                 EVT_WAIT(20)
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_5, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_END_THREAD
             EVT_WAIT(10)
             EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_1, FALSE)
@@ -660,67 +668,67 @@ EvtScript N(EVS_Attack_FeatherFling) = {
         EVT_CALL(RandInt, 10, LVar3)
         EVT_SUB(LVar3, 10)
         EVT_ADD(LVar1, LVar3)
-        EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_4, LVar0, LVar1, LVar2, 6, 0, EASING_LINEAR)
+        EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_FEATHER_2, LVar0, LVar1, LVar2, 6, 0, EASING_LINEAR)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(RandInt, 10, LVar3)
         EVT_ADD(LVar3, 10)
         EVT_ADD(LVar1, LVar3)
-        EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_5, LVar0, LVar1, LVar2, 6, 0, EASING_LINEAR)
+        EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_FEATHER_3, LVar0, LVar1, LVar2, 6, 0, EASING_LINEAR)
     EVT_END_THREAD
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2, 6, 0, EASING_LINEAR)
+    EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_FEATHER_1, LVar0, LVar1, LVar2, 6, 0, EASING_LINEAR)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_FEATHER, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_DEFAULT
             EVT_THREAD
-                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_4, 0, 45, 90)
-                EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_4, LVar0, LVar1, LVar2)
+                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_2, 0, 45, 90)
+                EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_FEATHER_2, LVar0, LVar1, LVar2)
                 EVT_SUB(LVar0, 40)
                 EVT_SET(LVar1, 2)
-                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_4, EVT_FLOAT(1.5))
-                EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_4, LVar0, LVar1, LVar2, 10, TRUE)
-                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_4, 0, 80, 90)
+                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEATHER_2, EVT_FLOAT(1.5))
+                EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_FEATHER_2, LVar0, LVar1, LVar2, 10, TRUE)
+                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_2, 0, 80, 90)
                 EVT_WAIT(8)
                 EVT_LOOP(15)
-                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_4, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_5, 0, 45, -90)
-                EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_5, LVar0, LVar1, LVar2)
+                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_3, 0, 45, -90)
+                EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_FEATHER_3, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 20)
                 EVT_SET(LVar1, 4)
-                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_5, EVT_FLOAT(1.5))
-                EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_5, LVar0, LVar1, LVar2, 10, TRUE)
-                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_5, 0, 90, -90)
+                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEATHER_3, EVT_FLOAT(1.5))
+                EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_FEATHER_3, LVar0, LVar1, LVar2, 10, TRUE)
+                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_3, 0, 90, -90)
                 EVT_WAIT(8)
                 EVT_LOOP(15)
-                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_5, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_5, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_3, 0, 45, -90)
-                EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2)
+                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_1, 0, 45, -90)
+                EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_FEATHER_1, LVar0, LVar1, LVar2)
                 EVT_SUB(LVar0, 5)
                 EVT_SET(LVar1, 4)
-                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_3, EVT_FLOAT(1.5))
-                EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_3, LVar0, LVar1, LVar2, 10, TRUE)
-                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_3, 0, 90, -90)
+                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_FEATHER_1, EVT_FLOAT(1.5))
+                EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_FEATHER_1, LVar0, LVar1, LVar2, 10, TRUE)
+                EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FEATHER_1, 0, 90, -90)
                 EVT_WAIT(8)
                 EVT_LOOP(15)
-                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_WAIT(1)
-                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FEATHER_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_WAIT(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -857,7 +865,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim18)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 8, -5, EASING_LINEAR)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_DROP, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 10, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -916,7 +924,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim18)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 8, -5, EASING_LINEAR)
     EVT_IF_EQ(LVarA, HIT_RESULT_HIT_STATIC)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_DROP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F5)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim16)
@@ -986,7 +994,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     EVT_CALL(PlayerFallToGoal, 24)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_DROP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1102,7 +1110,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Buzzar_Anim18)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 8, 0, EASING_LINEAR)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SWIPE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1222,7 +1230,7 @@ EvtScript N(EVS_FlyToHome_GrappleFail_Impl) = {
     EVT_END
 };
 
-EvtScript N(8021FC34) = {
+EvtScript N(EVS_DummyHit) = {
     EVT_RETURN
     EVT_RETURN
     EVT_END

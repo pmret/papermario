@@ -3,13 +3,14 @@
 #include "sprite/npc/ChainChomp.h"
 #include "sprite/npc/BuzzyBeetle.h"
 #include "sprite/player.h"
+#include "tutankoopa_common.h"
 
 #define NAMESPACE A(tutankoopa)
 
 extern ActorBlueprint A(chain_chomp);
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_Tutankoopa_SpinSmashHit);
@@ -36,22 +37,22 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
-    AVAR_NextAttack             = 0,
-    AVAL_TRY_TOSS_NEXT          = 0,
-    AVAL_DROP_DEBRIS_NEXT       = 1,
+    AVAR_NextMove               = 0,
+    AVAL_Move_Toss              = 0,
+    AVAL_Move_DropDebris        = 1,
 
     AVAR_StunState              = 1,
-    AVAL_NOT_STUNNED            = 0,
-    AVAL_STUNNED                = 2,
+    AVAL_State_Normal           = 0,
+    AVAL_State_Stunned          = 2,
 
     AVAR_ShellsLeft             = 2,
     AVAR_HasSummoned            = 3, // FALSE until a chomp has been summoned
     AVAR_Dialogue_Recover       = 4,
     AVAR_GateOpenAmount         = 5,
     AVAR_DebrisDropState        = 6,
-    AVAR_07                     = 7,
+    AVAR_Unknown                = 7,  // always zero
     AVAR_Stunned                = 8,  // overlapping usage with AVAR_StunState?
-    AVAR_10                     = 10,
+    AVAR_DoneFirstStrike        = 10, // unused
     AVAR_UsedSpikeTaunt         = 11, // unused dialogue toggle for spiky-taunting
     AVAR_NextSummonTime         = 12, // set by chomp actor when it dies
     AVAR_HittingSelf            = 13, // signal to HandleEvent to treat hit as self-inflicted
@@ -64,7 +65,7 @@ enum N(ActorParams) {
     DMG_THROW_SHELL             = 3,
 };
 
-s32 N(TutankoopaAnims)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Tutankoopa_Idle,
     STATUS_KEY_STONE,     ANIM_Tutankoopa_Still,
     STATUS_KEY_SLEEP,     ANIM_Tutankoopa_Sleep,
@@ -77,7 +78,7 @@ s32 N(TutankoopaAnims)[] = {
     STATUS_END,
 };
 
-s32 N(TutankoopaFallenAnims)[] = {
+s32 N(FallenAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Tutankoopa_Dizzy,
     STATUS_KEY_STONE,     ANIM_Tutankoopa_Fall,
     STATUS_KEY_SLEEP,     ANIM_Tutankoopa_SleepGround,
@@ -142,7 +143,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 40 },
         .opacity = 255,
-        .idleAnimations = N(TutankoopaAnims),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -154,7 +155,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 39 },
         .opacity = 255,
-        .idleAnimations = N(TutankoopaAnims),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -283,14 +284,14 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_SHELL_2, 80, 70, -7)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_SHELL_3, 60, 70, -7)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Stunned, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_TRY_TOSS_NEXT)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_NOT_STUNNED)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Toss)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_State_Normal)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Dialogue_Recover, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShellsLeft, 3)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_DebrisDropState, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_07, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_10, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextSummonTime, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, FALSE)
@@ -383,7 +384,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
                 EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_StunState, LVar1)
-                EVT_IF_NE(LVar1, AVAL_NOT_STUNNED)
+                EVT_IF_NE(LVar1, AVAL_State_Normal)
                     EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Dizzy)
                 EVT_ELSE
                     EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Idle)
@@ -395,7 +396,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_StunState, LVar1)
-            EVT_IF_EQ(LVar1, AVAL_NOT_STUNNED)
+            EVT_IF_EQ(LVar1, AVAL_State_Normal)
                 EVT_IF_FLAG(LVarE, DAMAGE_TYPE_JUMP)
                     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_UsedSpikeTaunt, LVar0)
                     EVT_IF_EQ(LVar0, FALSE)
@@ -516,9 +517,9 @@ EvtScript N(EVS_TemporaryKnockout) = {
     EVT_WAIT(30)
     EVT_CALL(RemoveEffect, LVarF)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Stunned, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_07, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_STUNNED)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TutankoopaFallenAnims)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_State_Stunned)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(FallenAnims)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
@@ -532,7 +533,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_LABEL(0)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar0)
         EVT_IF_EQ(LVar0, FALSE)
-            EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
+            EVT_CALL(ActorExists, ACTOR_CHOMP, LVar0)
             EVT_IF_EQ(LVar0, FALSE)
                 EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextSummonTime, LVar0)
                 EVT_IF_EQ(LVar0, 0)
@@ -548,38 +549,38 @@ EvtScript N(EVS_TakeTurn) = {
             // override to only use "drop debris" while shrunk
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_DROP_DEBRIS_NEXT)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_DropDebris)
             EVT_END_IF
             // select next attack, alternating between "throw shell" and "drop debris" when possible
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextAttack, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
             EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(AVAL_TRY_TOSS_NEXT)
+                EVT_CASE_EQ(AVAL_Move_Toss)
                     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ShellsLeft, LVar0)
                     EVT_IF_EQ(LVar0, 0)
                         // always use "drop debris" after all shells are gone
                         EVT_EXEC_WAIT(N(EVS_Attack_DropDebris))
-                        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_DROP_DEBRIS_NEXT)
+                        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_DropDebris)
                     EVT_ELSE
                         // throw a shell if not shrunk
                         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
                             EVT_EXEC_WAIT(N(EVS_Attack_ThrowShell))
-                            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_DROP_DEBRIS_NEXT)
+                            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_DropDebris)
                         EVT_ELSE
                             EVT_EXEC_WAIT(N(EVS_Attack_DropDebris))
-                            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_TRY_TOSS_NEXT)
+                            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Toss)
                         EVT_END_IF
                     EVT_END_IF
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_TRY_TOSS_NEXT)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Toss)
                     EVT_EXEC_WAIT(N(EVS_Attack_DropDebris))
             EVT_END_SWITCH
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_07, 0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_NOT_STUNNED)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StunState, AVAL_State_Normal)
             EVT_EXEC_WAIT(N(EVS_GetBackUp))
             EVT_EXEC_WAIT(N(EVS_LevitateToHomePos))
             EVT_GOTO(0)
@@ -787,7 +788,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
 };
 
 EvtScript N(EVS_DropDebris_Self) = {
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_ENEMY0)
+    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_TUTANKOOPA)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, 170)
@@ -1148,7 +1149,7 @@ EvtScript N(EVS_SummonedChompHop) = {
 };
 
 EvtScript N(EVS_LevitateToHomePos) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_07, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unknown, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E1)
@@ -1189,7 +1190,7 @@ EvtScript N(EVS_GetBackUp) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_STEP_B)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TutankoopaAnims)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
     EVT_WAIT(10)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Dialogue_Recover, LVar0)
     EVT_IF_FALSE(LVar0)
@@ -1208,10 +1209,10 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_10, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_10, 1)
+                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_DoneFirstStrike, TRUE)
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_RETURN
@@ -1220,40 +1221,40 @@ EvtScript N(EVS_HandlePhase) = {
 
 // kills the summoned chomp before dying
 EvtScript N(EVS_Tutankoopa_Death) = {
-    EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar2)
+    EVT_CALL(ActorExists, ACTOR_CHOMP, LVar2)
     EVT_IF_NE(LVar2, FALSE)
-        EVT_CALL(GetActorHP, ACTOR_ENEMY1, LVar2)
+        EVT_CALL(GetActorHP, ACTOR_CHOMP, LVar2)
         EVT_IF_NE(LVar2, 0)
             EVT_THREAD
-                EVT_CALL(HideHealthBar, ACTOR_ENEMY1)
-                EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, IDLE_SCRIPT_DISABLE)
-                EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_ENEMY1, PRT_MAIN, ANIM_ChainChomp_Hurt)
+                EVT_CALL(HideHealthBar, ACTOR_CHOMP)
+                EVT_CALL(EnableIdleScript, ACTOR_CHOMP, IDLE_SCRIPT_DISABLE)
+                EVT_CALL(UseIdleAnimation, ACTOR_CHOMP, FALSE)
+                EVT_CALL(SetAnimation, ACTOR_CHOMP, PRT_MAIN, ANIM_ChainChomp_Hurt)
                 EVT_WAIT(10)
                 EVT_SET(LVar2, 0)
                 EVT_LOOP(24)
-                    EVT_CALL(SetActorYaw, ACTOR_ENEMY1, LVar2)
+                    EVT_CALL(SetActorYaw, ACTOR_CHOMP, LVar2)
                     EVT_ADD(LVar2, 30)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(SetActorYaw, ACTOR_ENEMY1, 0)
-                EVT_CALL(GetActorPos, ACTOR_ENEMY1, LVar0, LVar1, LVar2)
+                EVT_CALL(SetActorYaw, ACTOR_CHOMP, 0)
+                EVT_CALL(GetActorPos, ACTOR_CHOMP, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 10)
                 EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0)
-                EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_ACTOR_DEATH)
+                EVT_CALL(PlaySoundAtActor, ACTOR_CHOMP, SOUND_ACTOR_DEATH)
                 EVT_SET(LVar3, 0)
                 EVT_LOOP(12)
-                    EVT_CALL(SetActorRotation, ACTOR_ENEMY1, LVar3, 0, 0)
+                    EVT_CALL(SetActorRotation, ACTOR_CHOMP, LVar3, 0, 0)
                     EVT_ADD(LVar3, 8)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(RemoveActor, ACTOR_ENEMY1)
+                EVT_CALL(RemoveActor, ACTOR_CHOMP)
             EVT_END_THREAD
         EVT_END_IF
     EVT_END_IF
     EVT_EXEC_WAIT(EVS_Enemy_DeathWithoutRemove)
     EVT_LABEL(0)
-        EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
+        EVT_CALL(ActorExists, ACTOR_CHOMP, LVar0)
         EVT_IF_NE(LVar0, FALSE)
             EVT_WAIT(1)
             EVT_GOTO(0)
