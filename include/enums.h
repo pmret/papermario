@@ -3275,7 +3275,7 @@ enum ActorFlags {
     ACTOR_FLAG_NO_ATTACK         = 0x00200000, ///< Skip attack turn.
     ACTOR_FLAG_NO_DMG_APPLY      = 0x00400000, ///< Damage is not applied to actor HP.
     ACTOR_FLAG_800000            = 0x00800000,
-    ACTOR_FLAG_1000000           = 0x01000000,
+    ACTOR_FLAG_1000000           = 0x01000000, // Enraged? Only used for Super Blooper.
     ACTOR_FLAG_NO_DMG_POPUP      = 0x02000000, ///< Hide damage popup.
     ACTOR_FLAG_4000000           = 0x04000000,
     ACTOR_FLAG_8000000           = 0x08000000,

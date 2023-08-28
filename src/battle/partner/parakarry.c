@@ -617,7 +617,7 @@ API_CALLABLE(N(GetAirRaidDamage)) {
     return ApiStatus_DONE2;
 }
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleParakarry_Walk,
     STATUS_KEY_STONE,     ANIM_BattleParakarry_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleParakarry_Pray,
@@ -665,7 +665,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 11, 28 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
         .elementImmunityFlags = 0,

@@ -216,7 +216,7 @@ EvtScript N(EVS_HuffNPuff_AnimateBodyScale) = {
     EVT_END
 };
 
-// start and end positions for each of the Tuff Puffs when HuffNPuff explodes
+// start and end positions for each of the Ruff Puffs when HuffNPuff explodes
 Vec2i N(BlowUpPositions)[] = {
     { 635, 165}, { 450, 120 },
     { 640, 170}, { 520, 270 },

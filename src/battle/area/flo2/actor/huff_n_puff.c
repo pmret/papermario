@@ -787,7 +787,7 @@ EvtScript N(EVS_HuffNPuff_Death) = {
             EVT_CALL(DispatchEvent, ArrayVar(idx), EVENT_DEATH) \
         EVT_END_IF
 
-    // kill any remaining Ruff Puffs
+    // kill any remaining Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_KILL_CHILD)
 
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
@@ -868,7 +868,7 @@ EvtScript N(EVS_HuffNPuff_BurnDeath) = {
             EVT_CALL(DispatchEvent, ArrayVar(idx), EVENT_DEATH) \
         EVT_END_IF
 
-    // kill any remaining Ruff Puffs
+    // kill any remaining Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_KILL_CHILD)
 
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
@@ -1004,11 +1004,11 @@ EvtScript N(EVS_Dialogue_PummelPermission) = {
             EVT_GOTO(0) \
         EVT_END_IF
 
-    // select the first available Ruff Puff
+    // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
     EVT_GOTO(1)
-    // found a Ruff Puff to speak
+    // found a Tuff Puff to speak
     EVT_LABEL(0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
     EVT_CALL(BattleCamTargetActor, LVar0)
@@ -1069,11 +1069,11 @@ EvtScript N(EVS_Dialogue_FullPower) = {
             EVT_GOTO(0) \
         EVT_END_IF
 
-    // select the first available Ruff Puff
+    // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
     EVT_GOTO(1)
-    // found a Ruff Puff to speak
+    // found a Tuff Puff to speak
     EVT_LABEL(0)
     EVT_CALL(BattleCamTargetActor, LVar0)
     EVT_CALL(SetBattleCamZoom, 300)
@@ -1139,11 +1139,11 @@ EvtScript N(EVS_Dialogue_PraiseHuff) = {
             EVT_GOTO(0) \
         EVT_END_IF
 
-    // select the first available Ruff Puff
+    // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
     EVT_GOTO(1)
-    // found a Ruff Puff to speak
+    // found a Tuff Puff to speak
     EVT_LABEL(0)
     EVT_CALL(BattleCamTargetActor, LVar0)
     EVT_CALL(SetBattleCamZoom, 300)
@@ -1208,11 +1208,11 @@ EvtScript N(EVS_Dialogue_Concerned) = {
             EVT_GOTO(0) \
         EVT_END_IF
 
-    // select the first available Ruff Puff
+    // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
     EVT_GOTO(1)
-    // found a Ruff Puff to speak
+    // found a Tuff Puff to speak
     EVT_LABEL(0)
     EVT_CALL(BattleCamTargetActor, LVar0)
     EVT_CALL(SetBattleCamZoom, 300)
@@ -1273,7 +1273,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_EXEC_WAIT(N(EVS_Dialogue_FullPower))
             EVT_END_IF
     EVT_END_SWITCH
-    // try Ruff Puff swarm attack
+    // try Tuff Puff swarm attack
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
@@ -1504,7 +1504,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
 
 EvtScript N(EVS_RuffPuff_Inhale) = {
     EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(SetOwnerID, LVar0) // note: ownership transferred to Ruff Puff actor here
+    EVT_CALL(SetOwnerID, LVar0) // note: ownership transferred to Tuff Puff actor here
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
     EVT_CALL(GetActorPos, ACTOR_HUFF_N_PUFF, LVar5, LVar6, LVar7)
@@ -1542,7 +1542,7 @@ EvtScript N(EVS_RuffPuff_Inhale) = {
             EVT_CASE_EQ(idx) \
                 EVT_CALL(LoadPath, 40, EVT_PTR(N(SuctionPaths)[idx]), 3, EASING_QUADRATIC_IN)
         
-        // select the suction path for this Ruff Puff
+        // select the suction path for this Tuff Puff
         FOR_CHILDREN_ORDERED(HNP_LOAD_SUCTION_PATH)
 
     EVT_END_SWITCH
@@ -1576,7 +1576,7 @@ EvtScript N(EVS_RuffPuff_Inhale) = {
 
 EvtScript N(EVS_Move_HealOrSlam) = {
     EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    // use basic attack if no Ruff Puffs are present
+    // use basic attack if no Tuff Puffs are present
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar9)
     EVT_IF_EQ(LVar9, 0)
         EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
@@ -1590,7 +1590,7 @@ EvtScript N(EVS_Move_HealOrSlam) = {
             EVT_ADD(LVarA, LVarB) \
         EVT_END_IF
 
-    // add heal values from Ruff Puffs
+    // add heal values from Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_ADD_HEAL_VALUE)
 
     // 50% chance to use basic attack if healing would give 2 or less HP and Huff has healed before
@@ -1630,7 +1630,7 @@ EvtScript N(EVS_Move_HealOrSlam) = {
             EVT_WAIT(5) \
         EVT_END_IF
 
-    // inhale each Ruff Puff
+    // inhale each Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_INHALE_CHILD)
 
     EVT_LABEL(0)
@@ -2451,7 +2451,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_WAIT(8) \
         EVT_END_IF
 
-    // have each Ruff Puff ascend above the battlefield
+    // have each Tuff Puff ascend above the battlefield
     FOR_CHILDREN_SCATTERED(HNP_GROUP_ASCEND)
 
     EVT_WAIT(20)
@@ -2479,7 +2479,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_END_THREAD \
         EVT_END_IF
 
-    // have each Ruff Puff drop down from the sky
+    // have each Tuff Puff drop down from the sky
     FOR_CHILDREN_ORDERED(HNP_GROUP_DROP)
 
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
@@ -2594,7 +2594,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_END_THREAD \
         EVT_END_IF
 
-    // have each Ruff Puff oscillate after slamming into the ground
+    // have each Tuff Puff oscillate after slamming into the ground
     FOR_CHILDREN_ORDERED(HNP_IMPACT_JIGGLE)
 
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -2629,7 +2629,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
                     EVT_WAIT(8) \
                 EVT_END_IF
 
-            // have each Ruff Puff return to their home position
+            // have each Tuff Puff return to their home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
             
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -2647,7 +2647,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_ADD(LVarA, 1) \
         EVT_END_IF
     
-    // add 1 damage for each Ruff Puff
+    // add 1 damage for each Tuff Puff
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
     EVT_WAIT(2)
@@ -2679,7 +2679,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
                     EVT_WAIT(8) \
                 EVT_END_IF
 
-            // make each Ruff Puff return home
+            // make each Tuff Puff return home
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
 
             EVT_WAIT(20)
@@ -2698,7 +2698,7 @@ EvtScript N(EVS_TuffPuff_SqueezePlayer) = {
     EVT_SET(LVarB, LVar2)
     EVT_DIV(LVarB, 2)
     EVT_ADD(LVarB, 1)
-    EVT_CALL(SetOwnerID, LVar1) // note: ownership transferred to Ruff Puff actor here
+    EVT_CALL(SetOwnerID, LVar1) // note: ownership transferred to Tuff Puff actor here
     EVT_CALL(RandInt, 1000, LVar0)
     EVT_IF_LT(LVar0, 500)
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 1)
@@ -2770,7 +2770,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_END_THREAD \
         EVT_END_IF
 
-    // each Ruff Puff moves up slightly
+    // each Tuff Puff moves up slightly
     FOR_CHILDREN_SCATTERED(HNP_SWARM_MOVE_UP)
 
     EVT_WAIT(20)
@@ -2782,7 +2782,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_ADD(LVarA, 1) \
         EVT_END_IF
     
-    // count the number of Ruff Puffs to compute radial spacing around the player
+    // count the number of Tuff Puffs to compute radial spacing around the player
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
     // radial increment will be stored in LVarB
@@ -2836,7 +2836,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_WAIT(4) \
         EVT_END_IF
 
-    // move each Ruff Puff to a position surrounding the player
+    // move each Tuff Puff to a position surrounding the player
     FOR_CHILDREN_SCATTERED(HNP_SWARM_SURROUND_PLAYER)
     
     EVT_WAIT(30)
@@ -2849,7 +2849,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_ADD(LVar9, 1) \
         EVT_END_IF
     
-    // count the number of Ruff Puffs
+    // count the number of Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
     EVT_SET(LVarA, 30 * DT)
@@ -2865,7 +2865,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_ADD(LVar3, 1) \
         EVT_END_IF
 
-    // have each Ruff Puff squeeze the player
+    // have each Tuff Puff squeeze the player
     FOR_CHILDREN_ORDERED(HNP_SQUEEZE_PLAYER)
 
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -2908,7 +2908,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     EVT_END_THREAD \
                 EVT_END_IF
 
-            // throw each Ruff Puff away in a large fan pattern
+            // throw each Tuff Puff away in a large fan pattern
             FOR_CHILDREN_ORDERED(HNP_SCATTER_PUFF)
 
             EVT_WAIT(15)
@@ -2950,7 +2950,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     EVT_WAIT(4) \
                 EVT_END_IF
 
-            // have each Ruff Puff fly back to its home position
+            // have each Tuff Puff fly back to its home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
 
             EVT_WAIT(50)
@@ -3058,7 +3058,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     EVT_END_THREAD \
                 EVT_END_IF
 
-            // throw each Ruff Puff away in a large fan pattern
+            // throw each Tuff Puff away in a large fan pattern
             FOR_CHILDREN_ORDERED(HNP_SCATTER_PUFF)
 
             EVT_CALL(GetPlayerHP, LVar0)
@@ -3124,7 +3124,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                     EVT_WAIT(4) \
                 EVT_END_IF
 
-            // have each Ruff Puff fly back to its home position
+            // have each Tuff Puff fly back to its home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
 
             EVT_WAIT(50)

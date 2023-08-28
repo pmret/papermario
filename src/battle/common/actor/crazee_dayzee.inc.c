@@ -4,7 +4,7 @@
 
 #define NAMESPACE A(crazee_dayzee)
 
-extern s32 N(IdleAnimations)[];
+extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
@@ -55,7 +55,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 30 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 9, 25 },
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Dayzee_Anim01,
     STATUS_KEY_STONE,     ANIM_Dayzee_Anim00,
     STATUS_KEY_SLEEP,     ANIM_Dayzee_Anim0C,

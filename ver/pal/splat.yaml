@@ -6141,7 +6141,7 @@ segments:
     start: 0x71EF00
     vram: 0x80218000
     subsegments:
-    - [0x71EF00, c, actor/bombshell_bill_blaster]
+    - [0x71EF00, c, actor/bombshell_blaster]
     - [0x71EF20, c, actor/bombshell_bill]
     - [0x71EF20, c, actor/koopatrol]
     - [0x71F050, c, actor/magikoopa]

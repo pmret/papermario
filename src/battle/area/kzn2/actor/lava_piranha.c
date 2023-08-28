@@ -156,7 +156,7 @@ API_CALLABLE(DeleteAnimatedModel);
 extern Formation N(formation_lava_bud_1);
 extern Formation N(formation_lava_bud_2);
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim03,
     STATUS_KEY_STONE,     ANIM_LavaPiranha_Anim00,
     STATUS_KEY_SLEEP,     ANIM_LavaPiranha_Anim0A,
@@ -247,7 +247,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 40 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,

@@ -262,7 +262,7 @@ API_CALLABLE(N(GetMegaBombDamage)) {
     return ApiStatus_DONE2;
 }
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleBombette_Walk,
     STATUS_KEY_STONE,     ANIM_BattleBombette_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleBombette_Sleep,
@@ -310,7 +310,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 9, 20 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,

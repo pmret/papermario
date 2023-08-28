@@ -17,7 +17,7 @@ enum N(ActorParams) {
     DMG_TACKLE      = 4,
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_RuffPuff_Idle,
     STATUS_KEY_STONE,     ANIM_RuffPuff_Still,
     STATUS_KEY_SLEEP,     ANIM_RuffPuff_Sleep,
@@ -67,7 +67,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 26 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,

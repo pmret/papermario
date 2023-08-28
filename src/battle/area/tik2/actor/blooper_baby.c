@@ -6,27 +6,27 @@
 #define NAMESPACE A(blooper_baby)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(onDeath);
+extern EvtScript N(EVS_Death);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
+    PRT_MAIN        = 1,
+    PRT_TARGET      = 2,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_1      = 1,
-    AVAR_Unk_2      = 2,
+    AVAR_HomePosX   = 0,
+    AVAR_HomePosY   = 1,
+    AVAR_HomePosZ   = 2,
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_LEECH       = 2,
 };
 
-EvtScript N(FloatToPos) = {
+EvtScript N(EVS_FloatToPos) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -93,16 +93,16 @@ EvtScript N(FloatToPos) = {
     EVT_END
 };
 
-EvtScript N(FloatToHome) = {
+EvtScript N(EVS_FloatToHome) = {
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar3, 12)
-    EVT_EXEC_WAIT(N(FloatToPos))
+    EVT_EXEC_WAIT(N(EVS_FloatToPos))
     EVT_RETURN
     EVT_END
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim00,
     STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
     STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
@@ -113,7 +113,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations2)[] = {
+s32 N(AscendAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim01,
     STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
     STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
@@ -124,7 +124,7 @@ s32 N(IdleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations3)[] = {
+s32 N(DescendAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim00,
     STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
     STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
@@ -172,7 +172,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 85 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -180,7 +180,7 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 27, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -236,9 +236,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(FlyToGoal, ACTOR_SELF, 8, 0, EASING_LINEAR)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035F)
     EVT_CALL(N(StartRumbleWithParams), 80, 20)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_1, LVar1)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_2, LVar2)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HomePosX, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HomePosY, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HomePosZ, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -252,64 +252,64 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+        EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
+        EVT_CALL(SetGoalToHome, ACTOR_SELF)
+        EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 0)
+        EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
+        EVT_IF_GE(LVar4, LVar1)
+            EVT_GOTO(11)
+        EVT_END_IF
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(AscendAnims)))
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
+        EVT_WAIT(9)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+        EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
+        EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
+        EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
+        EVT_LABEL(11)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+        EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
+        EVT_CALL(SetGoalToHome, ACTOR_SELF)
+        EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, 5)
+        EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
+        EVT_IF_GE(LVar4, LVar1)
+            EVT_GOTO(12)
+        EVT_END_IF
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(AscendAnims)))
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
+        EVT_WAIT(9)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
+        EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
+        EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
+        EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
+        EVT_WAIT(3)
+        EVT_LABEL(12)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
+        EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_WAIT(1)
+            EVT_GOTO(0)
+        EVT_END_IF
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DescendAnims)))
+        EVT_CALL(SetGoalToHome, ACTOR_SELF)
+        EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_ADD(LVar1, -5)
+        EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
+        EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.3))
+        EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
+        EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
         EVT_WAIT(1)
         EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 0)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-    EVT_IF_GE(LVar4, LVar1)
-        EVT_GOTO(11)
-    EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
-    EVT_WAIT(9)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
-    EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
-    EVT_LABEL(11)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 5)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-    EVT_IF_GE(LVar4, LVar1)
-        EVT_GOTO(12)
-    EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim00)
-    EVT_WAIT(9)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim01)
-    EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, 0, EASING_SIN_OUT)
-    EVT_WAIT(3)
-    EVT_LABEL(12)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations3)))
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, -5)
-    EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
-    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.3))
-    EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -330,7 +330,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim03)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LVar0, 1)
@@ -343,7 +343,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET(LVar2, ANIM_BabyBlooper_Anim05)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim05)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -355,7 +355,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim03)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -372,7 +372,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(FloatToHome))
+            EVT_EXEC_WAIT(N(EVS_FloatToHome))
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -383,10 +383,10 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim03)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_EXEC_WAIT(N(FloatToHome))
+            EVT_EXEC_WAIT(N(EVS_FloatToHome))
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim00)
@@ -399,7 +399,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(onDeath) = {
+EvtScript N(EVS_Death) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
@@ -414,7 +414,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 100)
     EVT_SET(LVar3, 12)
-    EVT_EXEC_WAIT(N(FloatToPos))
+    EVT_EXEC_WAIT(N(EVS_FloatToPos))
     EVT_THREAD
         EVT_WAIT(2)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
@@ -439,7 +439,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_EXEC_WAIT(N(FloatToHome))
+            EVT_EXEC_WAIT(N(EVS_FloatToHome))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -458,7 +458,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_ADD(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_EXEC_WAIT(N(FloatToHome))
+            EVT_EXEC_WAIT(N(EVS_FloatToHome))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -568,7 +568,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_END_IF
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LEECH)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
         EVT_CALL(StartRumble, 2)
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
         EVT_IF_NE(LVar3, 0)
@@ -682,7 +682,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-    EVT_EXEC_WAIT(N(FloatToHome))
+    EVT_EXEC_WAIT(N(EVS_FloatToHome))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

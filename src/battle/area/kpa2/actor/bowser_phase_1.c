@@ -62,7 +62,7 @@ enum N(OldActorVars) {
     N(VAR_LOST_ABILITY_ITEM) = 10,
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleBowser_Idle,
     STATUS_KEY_STONE,     ANIM_BattleBowser_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleBowser_Idle,
@@ -143,7 +143,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -18, 72 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
