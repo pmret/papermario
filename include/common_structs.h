@@ -864,7 +864,7 @@ typedef struct BattleStatus {
     /*       */ };
     /* 0x048 */ s8 curSubmenu;
     /* 0x049 */ s8 unk_49;
-    /* 0x04A */ s8 unk_4A;
+    /* 0x04A */ s8 curPartnerSubmenu;
     /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 lastPlayerMenuSelection[16];
     /* 0x05C */ s8 lastPartnerMenuSelection[16];

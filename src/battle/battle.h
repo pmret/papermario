@@ -300,7 +300,8 @@ typedef enum ActorType {
 } ActorType;
 
 enum BattleVars {
-    BTL_VAR_0                       = 0, // used by duplighost
+    BTL_VAR_DuplighostCopyFlags     = 0, // used by duplighost
+    BTL_VAL_Duplighost_HasCopied    = 0x4,
     BTL_VAR_HyperSync               = 1,
     BTL_VAL_HyperSync_None          = 0,
     BTL_VAL_HyperSync_Done          = 1,

@@ -1,5 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/CrystalKing.h"
+#include "crystal_king_common.h"
 
 #define NAMESPACE A(crystal_bit)
 
@@ -277,19 +278,19 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_4, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_4, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_5, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_5, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_6, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_6, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
@@ -314,15 +315,15 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_4, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_4, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_5, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_5, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_6, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_6, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
             EVT_END_IF
@@ -350,19 +351,19 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_4, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_4, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_5, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_5, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_6, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_6, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)

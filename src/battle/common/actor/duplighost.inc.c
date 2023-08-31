@@ -717,13 +717,15 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(AVAL_State_ReadyToCopy)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 600)
-                EVT_CALL(GetBattleVar, BTL_VAR_0, LVar0)
-                EVT_IF_NOT_FLAG(LVar0, 0x4)
-                    EVT_CALL(GetBattleVar, BTL_VAR_0, LVar0)
-                    EVT_BITWISE_OR_CONST(LVar0, 0x4)
-                    EVT_CALL(SetBattleVar, BTL_VAR_0, LVar0)
+                EVT_CALL(GetBattleVar, BTL_VAR_DuplighostCopyFlags, LVar0)
+                EVT_IF_NOT_FLAG(LVar0, BTL_VAL_Duplighost_HasCopied)
+                    // first time partner is copied, set battle flag and proceed
+                    EVT_CALL(GetBattleVar, BTL_VAR_DuplighostCopyFlags, LVar0)
+                    EVT_BITWISE_OR_CONST(LVar0, BTL_VAL_Duplighost_HasCopied)
+                    EVT_CALL(SetBattleVar, BTL_VAR_DuplighostCopyFlags, LVar0)
                     EVT_EXEC_WAIT(N(EVS_CopyPartner))
                 EVT_ELSE
+                    // partner has been copied before, try to avoid copying the same one
                     EVT_CALL(GetBattleVar, BTL_VAR_LastCopiedPartner, LVar0)
                     EVT_CALL(N(GetPartnerAndLevel), LVar1, LVar2)
                     EVT_IF_EQ(LVar0, LVar1)

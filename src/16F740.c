@@ -249,7 +249,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->initBattleCallback = NULL;
             battleStatus->curSubmenu = 0;
             battleStatus->unk_49 = 0;
-            battleStatus->unk_4A = 0;
+            battleStatus->curPartnerSubmenu = 0;
             battleStatus->unk_4B = 0;
             battleStatus->totalStarPoints = 0;
             battleStatus->pendingStarPoints = 0;

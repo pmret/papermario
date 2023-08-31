@@ -28,6 +28,8 @@ enum N(ActorVars) {
 enum N(ActorParams) {
     DMG_MAGIC_BLAST     = 3,
     DMG_WAND_STRIKE     = 3,
+    MAX_ATTACK_BOOST    = 3,
+    ATTACK_BOOST_AMT    = 1,
 };
 
 s32 N(DefenseTable)[] = {
@@ -797,32 +799,32 @@ EvtScript N(EVS_Init_Flying) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_CALL(GetIndexFromHome, LVar0, LVar1)
-    EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar2)
-    EVT_IF_GT(LVar1, LVar2)
-        EVT_CALL(N(CheckMagikoopaCastTarget), LVar0, LVar3)
-        EVT_IF_EQ(LVar3, 0)
-            EVT_CALL(GetActorAttackBoost, LVar0, LVar4)
-            EVT_IF_LT(LVar4, 3)
-                EVT_SET(LVar8, LVar0)
-                EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar1)
-                EVT_GOTO(100)
+        EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+        EVT_CALL(InitTargetIterator)
+        EVT_LABEL(0)
+            EVT_CALL(GetOwnerTarget, LVar0, LVar1)
+            EVT_CALL(GetIndexFromHome, LVar0, LVar1)
+            EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar2)
+            EVT_IF_GT(LVar1, LVar2)
+                EVT_CALL(N(CheckMagikoopaCastTarget), LVar0, LVar3)
+                EVT_IF_EQ(LVar3, 0)
+                    EVT_CALL(GetActorAttackBoost, LVar0, LVar4)
+                    EVT_IF_LT(LVar4, MAX_ATTACK_BOOST)
+                        EVT_SET(LVar8, LVar0)
+                        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar1)
+                        EVT_GOTO(100)
+                    EVT_END_IF
+                EVT_END_IF
             EVT_END_IF
+            EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+            EVT_IF_NE(LVar0, -1)
+                EVT_GOTO(0)
+            EVT_END_IF
+        EVT_IF_EQ(LFlag0, FALSE)
+            EVT_SET(LFlag0, TRUE)
+            EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
+            EVT_GOTO(10)
         EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_IF_EQ(LFlag0, FALSE)
-        EVT_SET(LFlag0, TRUE)
-        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
-        EVT_GOTO(10)
-    EVT_END_IF
     EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(EVS_Flee))
@@ -895,7 +897,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
-        EVT_CALL(BoostAttack, LVar8, 1)
+        EVT_CALL(BoostAttack, LVar8, ATTACK_BOOST_AMT)
         EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)

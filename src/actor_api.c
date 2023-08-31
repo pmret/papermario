@@ -271,7 +271,7 @@ ApiStatus GetIndexFromPos(Evt* script, s32 isInitialCall) {
 ApiStatus GetIndexFromHome(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1 = *args++;
+    s32 outVar = *args++;
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -279,7 +279,7 @@ ApiStatus GetIndexFromHome(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    evt_set_variable(script, a1, get_nearest_home_index(actor->homePos.x, actor->homePos.y, actor->homePos.z));
+    evt_set_variable(script, outVar, get_nearest_home_index(actor->homePos.x, actor->homePos.y, actor->homePos.z));
 
     return ApiStatus_DONE2;
 }
