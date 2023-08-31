@@ -4757,7 +4757,7 @@ Bzzap:
     - Anim09
     - Anim0A
     - Anim0B
-RuffPuff:
+TuffPuff:
   frames:
     - Raster00
     - Raster01
@@ -7537,7 +7537,7 @@ HuffNPuff:
     - Anim2F
     - Anim30
     - Anim31
-TuffPuff:
+RuffPuff:
   frames:
     - Neutral
     - Grin

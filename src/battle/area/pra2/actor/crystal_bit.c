@@ -4,18 +4,18 @@
 #define NAMESPACE A(crystal_bit)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
+    PRT_MAIN        = 1,
+    PRT_TARGET      = 2,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
+    AVAR_ParticlesEffect    = 0,
     AVAR_Unk_4      = 4,
     AVAR_Unk_5      = 5,
     AVAR_Unk_6      = 6,
@@ -87,7 +87,7 @@ ActorPartBlueprint N(ActorParts_1)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -114,7 +114,7 @@ ActorPartBlueprint N(ActorParts_2)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -141,7 +141,7 @@ ActorPartBlueprint N(ActorParts_3)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = PRT_2,
+        .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -231,7 +231,7 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-API_CALLABLE(UpdateCrystalBitEffect) {
+API_CALLABLE(N(UpdateCrystalBitEffect)) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
     ActorPart* actorPart = get_actor_part(actor, 1);
@@ -254,9 +254,9 @@ API_CALLABLE(UpdateCrystalBitEffect) {
 
 EvtScript N(EVS_Idle) = {
     EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVarF)
     EVT_CHILD_THREAD
-        EVT_CALL(UpdateCrystalBitEffect, LVarF)
+        EVT_CALL(N(UpdateCrystalBitEffect), LVarF)
     EVT_END_CHILD_THREAD
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -344,7 +344,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
@@ -393,12 +393,12 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_RETURN
         EVT_CASE_DEFAULT

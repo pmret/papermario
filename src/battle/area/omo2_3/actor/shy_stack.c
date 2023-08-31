@@ -9,7 +9,7 @@
 
 #define NAMESPACE b_area_omo2_3_shy_stack
 
-extern s32 N(IdleAnimations)[];
+extern s32 N(DefaultAnims)[];
 extern s32 N(IdleAnimations_rock)[];
 extern s32 N(IdleAnimations_damage)[];
 extern s32 N(IdleAnimations_shy_guy)[];
@@ -103,7 +103,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -290,7 +290,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 65 },
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_ShyStackGuy_Anim04,
     STATUS_KEY_STONE,     ANIM_ShyStackGuy_Anim00,
     STATUS_KEY_SLEEP,     ANIM_ShyStackGuy_Anim00,

@@ -72,7 +72,7 @@ extern EvtScript N(AttackIcyBreathWithClones);
 extern EvtScript N(NormalAttack);
 extern EvtScript N(Heal);
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim09,
     STATUS_KEY_SLEEP,     ANIM_CrystalKing_Anim1B,
     STATUS_KEY_DIZZY,     ANIM_CrystalKing_Anim1A,
@@ -120,7 +120,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 54 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
@@ -187,12 +187,12 @@ API_CALLABLE(func_80218280_6609D0) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    effect->data.huffPuffBreath->primR = 248;
-    effect->data.huffPuffBreath->primG = 248;
-    effect->data.huffPuffBreath->primB = 255;
-    effect->data.huffPuffBreath->envR = 128;
-    effect->data.huffPuffBreath->envG = 224;
-    effect->data.huffPuffBreath->envB = 255;
+    effect->data.huffPuffBreath->primCol.r = 248;
+    effect->data.huffPuffBreath->primCol.g = 248;
+    effect->data.huffPuffBreath->primCol.b = 255;
+    effect->data.huffPuffBreath->envCol.r = 128;
+    effect->data.huffPuffBreath->envCol.g = 224;
+    effect->data.huffPuffBreath->envCol.b = 255;
     return ApiStatus_DONE2;
 }
 
@@ -213,12 +213,12 @@ API_CALLABLE(func_80218344_660A94) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    effect->data.coldBreath->unk_18 = 255;
-    effect->data.coldBreath->unk_1C = 255;
-    effect->data.coldBreath->unk_20 = 255;
-    effect->data.coldBreath->unk_28 = 200;
-    effect->data.coldBreath->unk_2C = 240;
-    effect->data.coldBreath->unk_30 = 255;
+    effect->data.coldBreath->primCol.r = 255;
+    effect->data.coldBreath->primCol.g = 255;
+    effect->data.coldBreath->primCol.b = 255;
+    effect->data.coldBreath->envCol.r = 200;
+    effect->data.coldBreath->envCol.g = 240;
+    effect->data.coldBreath->envCol.b = 255;
     return ApiStatus_DONE2;
 }
 

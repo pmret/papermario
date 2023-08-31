@@ -18,7 +18,7 @@ enum N(ActorPartIDs) {
 
 enum N(ActorVars) {
     AVAR_Toppled        = 0,
-    AVAR_ToppledTurns   = 1,
+    AVAR_ToppleTurns    = 1,
 };
 
 enum N(ActorParams) {
@@ -147,7 +147,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_FlipOver) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Toppled, 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, 2)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Cleft_Anim07)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 16, 0)
     EVT_THREAD
@@ -397,10 +397,10 @@ EvtScript N(EVS_TryGettingUp) = {
     EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Cleft_Anim05)
     EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppledTurns, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
     EVT_IF_GT(LVar0, 0)
         EVT_SUB(LVar0, 1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, LVar0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
     EVT_ELSE
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 16, 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Cleft_Anim03)

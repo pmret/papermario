@@ -46,8 +46,8 @@ EvtScript N(EVS_HoldPosition_Puffs) = {
     EVT_CALL(SetNpcPos, NPC_HuffNPuffBody, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_HuffNPuffFace, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_HuffNPuffArms, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcPos, NPC_TuffPuff1, LVar3, 60, 0)
-    EVT_CALL(SetNpcPos, NPC_TuffPuff2, LVar4, 60, 0)
+    EVT_CALL(SetNpcPos, NPC_RuffPuff1, LVar3, 60, 0)
+    EVT_CALL(SetNpcPos, NPC_RuffPuff2, LVar4, 60, 0)
     EVT_CHILD_THREAD
         EVT_CALL(N(AddScrollToNpcPos), NPC_HuffNPuffFace)
     EVT_END_CHILD_THREAD
@@ -55,10 +55,10 @@ EvtScript N(EVS_HoldPosition_Puffs) = {
         EVT_CALL(N(AddScrollToNpcPos), NPC_HuffNPuffArms)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(AddScrollToNpcPos), NPC_TuffPuff1)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_RuffPuff1)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_CALL(N(AddScrollToNpcPos), NPC_TuffPuff2)
+        EVT_CALL(N(AddScrollToNpcPos), NPC_RuffPuff2)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(AddScrollToNpcPos), NPC_HuffNPuffBody)
     EVT_RETURN
@@ -69,8 +69,8 @@ EvtScript N(EVS_Puffs_Surprise) = {
     EVT_CALL(SetNpcAnimation, NPC_HuffNPuffBody, ANIM_HuffNPuff_Anim26)
     EVT_CALL(SetNpcAnimation, NPC_HuffNPuffFace, ANIM_HuffNPuff_Anim27)
     EVT_CALL(SetNpcAnimation, NPC_HuffNPuffArms, ANIM_HuffNPuff_Anim28)
-    EVT_CALL(SetNpcAnimation, NPC_TuffPuff1, ANIM_TuffPuff_Blush)
-    EVT_CALL(SetNpcAnimation, NPC_TuffPuff2, ANIM_TuffPuff_Blush)
+    EVT_CALL(SetNpcAnimation, NPC_RuffPuff1, ANIM_RuffPuff_Blush)
+    EVT_CALL(SetNpcAnimation, NPC_RuffPuff2, ANIM_RuffPuff_Blush)
     EVT_RETURN
     EVT_END
 };
@@ -79,8 +79,8 @@ EvtScript N(EVS_Puffs_Hurt) = {
     EVT_CALL(SetNpcAnimation, NPC_HuffNPuffBody, ANIM_HuffNPuff_Anim07)
     EVT_CALL(SetNpcAnimation, NPC_HuffNPuffFace, ANIM_HuffNPuff_Anim08)
     EVT_CALL(SetNpcAnimation, NPC_HuffNPuffArms, ANIM_HuffNPuff_Anim09)
-    EVT_CALL(SetNpcAnimation, NPC_TuffPuff1, ANIM_TuffPuff_Hurt)
-    EVT_CALL(SetNpcAnimation, NPC_TuffPuff2, ANIM_TuffPuff_Hurt)
+    EVT_CALL(SetNpcAnimation, NPC_RuffPuff1, ANIM_RuffPuff_Hurt)
+    EVT_CALL(SetNpcAnimation, NPC_RuffPuff2, ANIM_RuffPuff_Hurt)
     EVT_RETURN
     EVT_END
 };
@@ -97,9 +97,9 @@ EvtScript N(EVS_Puffs_Retreat) = {
         EVT_CALL(SetNpcPos, NPC_HuffNPuffFace, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcPos, NPC_HuffNPuffArms, LVar0, LVar1, LVar2)
         EVT_ADD(LVar3, -2)
-        EVT_CALL(SetNpcPos, NPC_TuffPuff1, LVar3, 60, 0)
+        EVT_CALL(SetNpcPos, NPC_RuffPuff1, LVar3, 60, 0)
         EVT_ADD(LVar4, -2)
-        EVT_CALL(SetNpcPos, NPC_TuffPuff2, LVar4, 60, 0)
+        EVT_CALL(SetNpcPos, NPC_RuffPuff2, LVar4, 60, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -114,7 +114,7 @@ EvtScript N(EVS_GourmetGuy_Enter) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(GetNpcPos, NPC_TuffPuff2, LVar0, LVar1, LVar2)
+    EVT_CALL(GetNpcPos, NPC_RuffPuff2, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcSpeed, NPC_GourmetGuy, EVT_FLOAT(1.0))
     EVT_CALL(NpcMoveTo, NPC_GourmetGuy, LVar0, -20, 0)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Idle)
@@ -225,9 +225,9 @@ EvtScript N(EVS_YoshiKids) = {
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_HuffNPuffBody, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcPos, NPC_TuffPuff1, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_RuffPuff1, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcPos, NPC_TuffPuff2, LVar0, LVar1, LVar2)
+        EVT_CALL(GetNpcPos, NPC_RuffPuff2, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_RING, 0, LVar0, LVar1, LVar2)
         EVT_CALL(MakeLerp, 750, 375, 5, EASING_LINEAR)
         EVT_LOOP(0)
@@ -249,8 +249,8 @@ EvtScript N(EVS_YoshiKids) = {
             EVT_CALL(UpdateLerp)
             EVT_SETF(LVar2, LVar0)
             EVT_DIVF(LVar2, 100)
-            EVT_CALL(SetNpcScale, NPC_TuffPuff1, LVar2, LVar2, 1)
-            EVT_CALL(SetNpcScale, NPC_TuffPuff2, LVar2, LVar2, 1)
+            EVT_CALL(SetNpcScale, NPC_RuffPuff1, LVar2, LVar2, 1)
+            EVT_CALL(SetNpcScale, NPC_RuffPuff2, LVar2, LVar2, 1)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -331,8 +331,8 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
         EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffFace, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffArms, NPC_FLAG_TOUCHES_GROUND, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_TuffPuff1, NPC_FLAG_TOUCHES_GROUND, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_TuffPuff2, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_RuffPuff1, NPC_FLAG_TOUCHES_GROUND, FALSE)
+        EVT_CALL(SetNpcFlagBits, NPC_RuffPuff2, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcScale, NPC_HuffNPuffBody, EVT_FLOAT(0.75), EVT_FLOAT(0.75), 1)
         EVT_CALL(SetNpcScale, NPC_HuffNPuffFace, EVT_FLOAT(0.75), EVT_FLOAT(0.75), 1)
         EVT_CALL(SetNpcScale, NPC_HuffNPuffArms, EVT_FLOAT(0.75), EVT_FLOAT(0.75), 1)
@@ -362,8 +362,8 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
     EVT_CALL(InterpNpcYaw, NPC_HuffNPuffBody, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_HuffNPuffFace, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_HuffNPuffArms, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_TuffPuff1, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_TuffPuff2, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_RuffPuff1, 90, 0)
+    EVT_CALL(InterpNpcYaw, NPC_RuffPuff2, 90, 0)
     EVT_WAIT(30 * DT)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 3, EASING_LINEAR)
@@ -424,16 +424,16 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
         EVT_CALL(NpcMoveTo, NPC_HuffNPuffArms, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_TuffPuff1, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_TuffPuff1, LVar0, LVar1, LVar2, 10 * DT)
+        EVT_CALL(GetNpcPos, NPC_RuffPuff1, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_RuffPuff1, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_TuffPuff1, LVar0, LVar2, 50 * DT)
+        EVT_CALL(NpcMoveTo, NPC_RuffPuff1, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_TuffPuff2, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_TuffPuff2, LVar0, LVar1, LVar2, 10 * DT)
+        EVT_CALL(GetNpcPos, NPC_RuffPuff2, LVar0, LVar1, LVar2)
+        EVT_CALL(NpcJump0, NPC_RuffPuff2, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_TuffPuff2, LVar0, LVar2, 50 * DT)
+        EVT_CALL(NpcMoveTo, NPC_RuffPuff2, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Inspect)

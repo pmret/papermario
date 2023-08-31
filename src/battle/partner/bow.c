@@ -149,7 +149,7 @@ API_CALLABLE(N(AverageSpookChance)) {
     return ApiStatus_DONE2;
 }
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleBow_Walk,
     STATUS_KEY_STONE,     ANIM_BattleBow_Still,
     STATUS_KEY_SLEEP,     ANIM_BattleBow_Pray,
@@ -197,7 +197,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 9, 19 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,

@@ -5,8 +5,8 @@
 #define NAMESPACE A(stone_chomp)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_Chomp_HopToPos);
 extern EvtScript N(EVS_UpdateChain);

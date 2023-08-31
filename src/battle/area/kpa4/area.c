@@ -1,6 +1,6 @@
 #include "area.h"
 
-extern ActorBlueprint A(bombshell_bill_blaster);
+extern ActorBlueprint A(bombshell_blaster);
 extern ActorBlueprint A(bombshell_bill);
 extern ActorBlueprint A(magikoopa);
 extern ActorBlueprint A(koopatrol);
@@ -36,21 +36,21 @@ Vec3i A(blaster_pos_1) = { 70, 0, -20 };
 Vec3i A(blaster_pos_2) = { 100, 0, 0 };
 
 Formation A(Formation_02) = {
-    ACTOR_BY_POS(A(bombshell_bill_blaster), A(blaster_pos_1), 10),
-    ACTOR_BY_POS(A(bombshell_bill_blaster), A(blaster_pos_2), 9),
+    ACTOR_BY_POS(A(bombshell_blaster), A(blaster_pos_1), 10),
+    ACTOR_BY_POS(A(bombshell_blaster), A(blaster_pos_2), 9),
 };
 
 Vec3i A(pos_3) = { 130, 0, 25 };
 
 Formation A(Formation_03) = {
-    ACTOR_BY_POS(A(bombshell_bill_blaster), A(blaster_pos_1), 10),
-    ACTOR_BY_POS(A(bombshell_bill_blaster), A(blaster_pos_2), 9),
+    ACTOR_BY_POS(A(bombshell_blaster), A(blaster_pos_1), 10),
+    ACTOR_BY_POS(A(bombshell_blaster), A(blaster_pos_2), 9),
     ACTOR_BY_POS(A(koopatrol), A(pos_3), 8),
 };
 
 Formation A(Formation_04) = {
-    ACTOR_BY_POS(A(bombshell_bill_blaster), A(blaster_pos_1), 10),
-    ACTOR_BY_POS(A(bombshell_bill_blaster), A(blaster_pos_2), 9),
+    ACTOR_BY_POS(A(bombshell_blaster), A(blaster_pos_1), 10),
+    ACTOR_BY_POS(A(bombshell_blaster), A(blaster_pos_2), 9),
     ACTOR_BY_POS(A(magikoopa), A(pos_3), 8),
 };
 

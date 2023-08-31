@@ -88,9 +88,9 @@ EffectInstance* lightning_main(
             load_effect(EFFECT_SNAKING_STATIC);
             data->unk_48 = snaking_static_main(0, -120.0f, 189.0f, 72.0f, 1.0f, 0);
 
-            data->unk_48->data.snakingStatic->unk_28 = 255;
-            data->unk_48->data.snakingStatic->unk_2C = 255;
-            data->unk_48->data.snakingStatic->unk_30 = 255;
+            data->unk_48->data.snakingStatic->envCol.r = 255;
+            data->unk_48->data.snakingStatic->envCol.g = 255;
+            data->unk_48->data.snakingStatic->envCol.b = 255;
             data->unk_48->data.snakingStatic->unk_18 = 255;
             data->unk_48->data.snakingStatic->unk_1C = 0;
             data->unk_48->data.snakingStatic->unk_20 = 255;

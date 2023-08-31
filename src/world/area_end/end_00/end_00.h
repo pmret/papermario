@@ -31,7 +31,7 @@
 #include "sprite/npc/GoombaBros.h"
 #include "sprite/npc/GoombaKing.h"
 #include "sprite/npc/HuffNPuff.h"
-#include "sprite/npc/TuffPuff.h"
+#include "sprite/npc/RuffPuff.h"
 #include "sprite/npc/GourmetGuy.h"
 
 #include "sprite/npc/RaphaelRaven.h"
@@ -119,8 +119,8 @@ enum {
     NPC_HuffNPuffBody           = 69,
     NPC_HuffNPuffFace           = 70,
     NPC_HuffNPuffArms           = 71,
-    NPC_TuffPuff1               = 72,
-    NPC_TuffPuff2               = 73,
+    NPC_RuffPuff1               = 72,
+    NPC_RuffPuff2               = 73,
     NPC_GourmetGuy              = 74,
     NPC_Duplighost1             = 75,
     NPC_Duplighost2             = 76,

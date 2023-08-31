@@ -76,7 +76,7 @@ void cold_breath_update(EffectInstance* effect);
 void cold_breath_render(EffectInstance* effect);
 void cold_breath_appendGfx(void* effect);
 
-EffectInstance* cold_breath_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* cold_breath_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, s32 duration) {
     EffectBlueprint bp;
     EffectInstance* effect;
     ColdBreathFXData* data;
@@ -94,25 +94,25 @@ EffectInstance* cold_breath_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     data = effect->data.coldBreath = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.coldBreath != NULL);
 
-    data->unk_00 = arg0;
-    data->unk_14 = 0;
-    if (arg5 <= 0) {
-        data->unk_10 = 1000;
+    data->type = type;
+    data->lifetime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = duration;
     }
-    data->unk_24 = 255;
-    data->unk_04 = arg1;
-    data->unk_08 = arg2;
-    data->unk_0C = arg3;
-    data->unk_40 = arg4;
-    data->unk_18 = 255;
-    data->unk_1C = 255;
-    data->unk_20 = 255;
-    data->unk_28 = 255;
-    data->unk_2C = 255;
-    data->unk_30 = 255;
-    data->unk_34 = 255;
+    data->primCol.a = 255;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+    data->scale = scale;
+    data->primCol.r = 255;
+    data->primCol.g = 255;
+    data->primCol.b = 255;
+    data->envCol.r = 255;
+    data->envCol.g = 255;
+    data->envCol.b = 255;
+    data->envCol.a = 255;
     data->unk_38 = 0;
     data->unk_3C = 0;
 
@@ -124,34 +124,34 @@ void cold_breath_init(EffectInstance* effect) {
 
 void cold_breath_update(EffectInstance* effect) {
     ColdBreathFXData* data = effect->data.coldBreath;
-    s32 unk00 = data->unk_00;
+    s32 type = data->type;
 
     if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
         effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
-        data->unk_10 = 0x10;
+        data->timeLeft = 16;
     }
 
-    if (data->unk_10 < 1000) {
-        data->unk_10--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_14++;
+    data->lifetime++;
 
-    if (data->unk_10 < 0) {
+    if (data->timeLeft < 0) {
         remove_effect(effect);
         return;
     }
-    if (data->unk_10 < 16) {
-        data->unk_24 = data->unk_10 * 16;
+    if (data->timeLeft < 16) {
+        data->primCol.a = data->timeLeft * 16;
     }
 
-    if (unk00 < 2) {
-        if (unk00 >= 0) {
+    if (type < 2) {
+        if (type >= 0) {
             data->unk_3C += 0.02;
         }
     }
 
-    data->unk_08 += data->unk_3C;
+    data->pos.y += data->unk_3C;
 
     if (data->unk_3C > 0.5) {
         data->unk_3C = 0.5f;
@@ -179,9 +179,9 @@ void cold_breath_render(EffectInstance* effect) {
 void cold_breath_appendGfx(void* effect) {
     ColdBreathFXData* data = ((EffectInstance*)effect)->data.coldBreath;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 unk14 = data->unk_14;
-    s32 unk24 = data->unk_24;
-    s32 unk00 = data->unk_00;
+    s32 unk14 = data->lifetime;
+    s32 unk24 = data->primCol.a;
+    s32 unk00 = data->type;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 unkIndex;
@@ -196,14 +196,14 @@ void cold_breath_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
-    guScaleF(sp60, data->unk_40, data->unk_40, data->unk_40);
+    guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
+    guScaleF(sp60, data->scale, data->scale, data->scale);
     guMtxCatF(sp60, sp20, sp20);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, 0.5 * unk24);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, 0.5 * unk24);
     gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
     gSPDisplayList(gMainGfxPos++, D_E00DE84C[unk00]);
 
@@ -227,7 +227,7 @@ void cold_breath_appendGfx(void* effect) {
         } else {
             gDPSetTileSize(gMainGfxPos++, 1, 0, 0, 31 << 2, 127 << 2);
         }
-        gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, envAlpha);
+        gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, envAlpha);
         gSPDisplayList(gMainGfxPos++, D_E00DE810[unk00][temp_s32]);
     }
 

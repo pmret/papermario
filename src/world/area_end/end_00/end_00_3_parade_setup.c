@@ -278,10 +278,10 @@ AnimID N(ExtraAnims_HuffNPuff)[] = {
     ANIM_LIST_END
 };
 
-AnimID N(ExtraAnims_TuffPuff)[] = {
-    ANIM_TuffPuff_Idle,
-    ANIM_TuffPuff_Hurt,
-    ANIM_TuffPuff_Blush,
+AnimID N(ExtraAnims_RuffPuff)[] = {
+    ANIM_RuffPuff_Idle,
+    ANIM_RuffPuff_Hurt,
+    ANIM_RuffPuff_Blush,
     ANIM_LIST_END
 };
 
@@ -690,15 +690,15 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .pos = { 1060.0f, 80.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_TuffPuff1] {
-        .initialAnim = ANIM_TuffPuff_Idle,
-        .animList = N(ExtraAnims_TuffPuff),
+    [NPC_RuffPuff1] {
+        .initialAnim = ANIM_RuffPuff_Idle,
+        .animList = N(ExtraAnims_RuffPuff),
         .pos = { 980.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
-    [NPC_TuffPuff2] {
-        .initialAnim = ANIM_TuffPuff_Idle,
-        .animList = N(ExtraAnims_TuffPuff),
+    [NPC_RuffPuff2] {
+        .initialAnim = ANIM_RuffPuff_Idle,
+        .animList = N(ExtraAnims_RuffPuff),
         .pos = { 1140.0f, 60.0f, 0.0f },
         .yaw = 270.0f
     },
@@ -1061,8 +1061,8 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(N(CreateParadeNPC), NPC_HuffNPuffFace)
     EVT_CALL(N(CreateParadeNPC), NPC_HuffNPuffArms)
     EVT_CALL(N(CreateParadeNPC), NPC_GourmetGuy)
-    EVT_CALL(N(CreateParadeNPC), NPC_TuffPuff1)
-    EVT_CALL(N(CreateParadeNPC), NPC_TuffPuff2)
+    EVT_CALL(N(CreateParadeNPC), NPC_RuffPuff1)
+    EVT_CALL(N(CreateParadeNPC), NPC_RuffPuff2)
     EVT_CALL(N(SetNpcShadowScale), 69, EVT_FLOAT(6.0))
     EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_DIRTY_SHADOW, TRUE)
     EVT_CALL(N(SetNpcShadowScale), 74, EVT_FLOAT(3.0))
@@ -1102,8 +1102,8 @@ EvtScript N(EVS_ManageNpcPool) = {
     EVT_CALL(DeleteNpc, NPC_HuffNPuffFace)
     EVT_CALL(DeleteNpc, NPC_HuffNPuffArms)
     EVT_CALL(DeleteNpc, NPC_GourmetGuy)
-    EVT_CALL(DeleteNpc, NPC_TuffPuff1)
-    EVT_CALL(DeleteNpc, NPC_TuffPuff2)
+    EVT_CALL(DeleteNpc, NPC_RuffPuff1)
+    EVT_CALL(DeleteNpc, NPC_RuffPuff2)
     EVT_WAIT(1)
     EVT_CALL(N(CreateParadeNPC), NPC_Duplighost1)
     EVT_CALL(N(CreateParadeNPC), NPC_Duplighost2)

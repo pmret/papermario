@@ -9,7 +9,7 @@ void snaking_static_appendGfx(void* effect);
 extern Gfx D_09001000_3B3D90[];
 extern Gfx D_090010F8_3B3E88[];
 
-EffectInstance* snaking_static_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 timeLeft) {
+EffectInstance* snaking_static_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, s32 timeLeft) {
     EffectBlueprint effectBp;
     EffectInstance* effect;
     SnakingStaticFXData* data;
@@ -29,7 +29,7 @@ EffectInstance* snaking_static_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     data = effect->data.snakingStatic = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
-    data->unk_00 = arg0;
+    data->type = type;
     data->lifeTime = 0;
 
     if (timeLeft <= 0) {
@@ -42,15 +42,15 @@ EffectInstance* snaking_static_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     data->pos.x = posX;
     data->pos.y = posY;
     data->pos.z = posZ;
-    data->unk_38 = arg4;
+    data->scale = scale;
 
     data->unk_18 = 255;
     data->unk_1C = 230;
     data->unk_20 = 0;
 
-    data->unk_28 = 255;
-    data->unk_2C = 255;
-    data->unk_30 = 255;
+    data->envCol.r = 255;
+    data->envCol.g = 255;
+    data->envCol.b = 255;
 
     data++;
     for(i = 1; i < numParts; i++, data++) {
@@ -174,14 +174,14 @@ void snaking_static_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guScaleF(sp58, data->unk_38, data->unk_38, data->unk_38);
+    guScaleF(sp58, data->scale, data->scale, data->scale);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, 0);
     gSPDisplayList(gMainGfxPos++, D_09001000_3B3D90);
 
     data++;

@@ -14,11 +14,11 @@ extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorParams) {
-    DMG_SPIKEBONK       = 2,
+    DMG_SPIKEBONK   = 2,
 };
 
 s32 N(DefenseTable)[] = {

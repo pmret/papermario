@@ -241,7 +241,7 @@ EvtScript N(EVS_Idle) = {
 
 #include "common/PlayLavaBubbleFlightSound.inc.c"
 
-EvtScript N(EVS_Ember_FlyHome) = {
+EvtScript N(EVS_FlyHome) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBubble_Blue_Anim03)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -401,7 +401,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_EMBER_FLY | SOUND_ID_TRIGGER_CHANGE_SOUND)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -431,7 +431,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -511,7 +511,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
@@ -536,7 +536,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_SET(LVar1, ANIM_LavaBubble_Blue_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_WAIT(5)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
@@ -636,7 +636,7 @@ EvtScript N(EVS_Attack_ShootPartner) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
             EVT_WAIT(20)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
@@ -662,7 +662,7 @@ EvtScript N(EVS_Attack_ShootPartner) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
@@ -717,7 +717,7 @@ EvtScript N(EVS_Attack_AirSweep) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)
@@ -754,7 +754,7 @@ EvtScript N(EVS_Attack_AirSweep) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
             EVT_WAIT(20)
-            EVT_EXEC_WAIT(N(EVS_Ember_FlyHome))
+            EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_RESTART)

@@ -6,28 +6,26 @@
 
 #define AREA b_area_kpa4
 
-#define NAMESPACE A(bombshell_bill_blaster)
+#define NAMESPACE A(bombshell_blaster)
 
+extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(bulletShot);
-extern EvtScript N(wait);
+extern EvtScript N(EVS_Move_FireBullet);
+extern EvtScript N(EVS_Move_CheckForBullet);
 
-extern s32 N(IdleAnimations)[];
+extern ActorBlueprint A(bombshell_bill);
+extern Formation N(BombshellFormation);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_8      = 8,
-};
-
-enum N(ActorParams) {
-    DMG_UNK         = 0,
+    AVAR_BulletID       = 0,
+    AVAR_HasBullet      = 8,
 };
 
 s32 N(DefenseTable)[] = {
@@ -67,7 +65,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -6, 29 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -98,7 +96,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 5, 25 },
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BillBlaster_Gold_Idle,
     STATUS_KEY_STONE,     ANIM_BillBlaster_Gold_Still,
     STATUS_KEY_STOP,      ANIM_BillBlaster_Gold_Still,
@@ -110,7 +108,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasBullet, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -185,12 +183,12 @@ EvtScript N(EVS_HandleEvent) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_8, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HasBullet, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(bulletShot))
+            EVT_EXEC_WAIT(N(EVS_Move_FireBullet))
         EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(wait))
+            EVT_EXEC_WAIT(N(EVS_Move_CheckForBullet))
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -198,16 +196,14 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-extern Formation N(formation_bill);
-
-API_CALLABLE(ApplyBillSettings) {
-    N(formation_bill)[0].var0 = 1;
-    N(formation_bill)[0].var1 = script->owner1.actorID;
+API_CALLABLE(N(SetBulletInitVars)) {
+    N(BombshellFormation)[0].var0 = TRUE;
+    N(BombshellFormation)[0].var1 = script->owner1.actorID;
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(bulletShot) = {
+EvtScript N(EVS_Move_FireBullet) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BillBlaster_Gold_Fire)
     EVT_WAIT(13)
     EVT_THREAD
@@ -222,28 +218,26 @@ EvtScript N(bulletShot) = {
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 0, 2, 0)
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     EVT_WAIT(2)
-    EVT_CALL(ApplyBillSettings)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bill)), FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 1)
+    EVT_CALL(N(SetBulletInitVars))
+    EVT_CALL(SummonEnemy, EVT_PTR(N(BombshellFormation)), FALSE)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_BulletID, LVar0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasBullet, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(wait) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+EvtScript N(EVS_Move_CheckForBullet) = {
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_BulletID, LVar0)
     EVT_CALL(ActorExists, LVar0, LVar1)
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_8, 0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasBullet, FALSE)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-extern ActorBlueprint A(bombshell_bill);
+Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 
-Vec3i N(bill_pos) = { NPC_DISPOSE_LOCATION };
-
-Formation N(formation_bill) = {
-    ACTOR_BY_POS(A(bombshell_bill), N(bill_pos), 100),
+Formation N(BombshellFormation) = {
+    ACTOR_BY_POS(A(bombshell_bill), N(SummonPos), 100),
 };

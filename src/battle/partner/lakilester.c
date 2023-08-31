@@ -99,7 +99,7 @@ API_CALLABLE(N(SpinyFlipUpdatePopup)) {
 }
 
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Walk,
     STATUS_KEY_DAZE,      ANIM_BattleLakilester_Injured,
     STATUS_KEY_INACTIVE,  ANIM_BattleLakilester_Still,
@@ -148,7 +148,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 30 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -1395,13 +1395,13 @@ API_CALLABLE(N(ProcessHurricane)) {
             D_8023D338 = 255;
             sHuffPuffBreathEffect = effect = fx_huff_puff_breath(0, NPC_DISPOSE_LOCATION, 0.0f, -2.0f, 0.6f, 0);
 
-            effect->data.huffPuffBreath->primR = 20;
-            effect->data.huffPuffBreath->primG = 80;
-            effect->data.huffPuffBreath->primB = 255;
+            effect->data.huffPuffBreath->primCol.r = 20;
+            effect->data.huffPuffBreath->primCol.g = 80;
+            effect->data.huffPuffBreath->primCol.b = 255;
 
-            effect->data.huffPuffBreath->envR = 200;
-            effect->data.huffPuffBreath->envG = 240;
-            effect->data.huffPuffBreath->envB = 240;
+            effect->data.huffPuffBreath->envCol.r = 200;
+            effect->data.huffPuffBreath->envCol.g = 240;
+            effect->data.huffPuffBreath->envCol.b = 240;
 
             hurricaneState->unk_54 = HURRICANE_UNUSED_TIME;
             hurricaneState->breathSizeIncrease = 0;

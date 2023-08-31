@@ -62,7 +62,7 @@ enum {
 
     // actor vars for each koopa
     AVAR_Koopa_State            = 1,
-    AVAR_Koopa_ToppledTurns     = 2, // number of toppled turns remaining
+    AVAR_Koopa_ToppleTurns      = 2, // number of toppled turns remaining
     // state values for koopas (AVAR_Koopa_State)
     AVAL_Koopa_State_Ready      = 0,
     AVAL_Koopa_State_Toppled    = 1,

@@ -11,29 +11,29 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(speakOnHit);
-extern EvtScript N(onDeath);
+extern EvtScript N(EVS_CommentOnHit);
+extern EvtScript N(EVS_Death);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
+    PRT_MAIN        = 1,
+    PRT_BROOM       = 2,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_1      = 1,
+    AVAR_PlayerTurnCount    = 0,
+    AVAR_Speaking           = 1,
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_BLOCK_DROP  = 4,
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim05,
     STATUS_END,
 };
 
-s32 N(IdleAnimations_broomstick)[] = {
+s32 N(BroomAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim0C,
     STATUS_END,
 };
@@ -75,7 +75,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -83,11 +83,11 @@ ActorPartBlueprint N(ActorParts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = PRT_2,
+        .index = PRT_BROOM,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_broomstick),
+        .idleAnimations = N(BroomAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -124,8 +124,8 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DONT_STOP_MUSIC, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_PlayerTurnCount, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Speaking, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -161,21 +161,21 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim0D)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_EXEC_WAIT(N(speakOnHit))
+            EVT_EXEC_WAIT(N(EVS_CommentOnHit))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim05)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_EXEC_WAIT(N(speakOnHit))
+            EVT_EXEC_WAIT(N(EVS_CommentOnHit))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim0D)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -208,7 +208,7 @@ API_CALLABLE(N(BlockAppear)) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_8021833C_6DC0DC) {
+API_CALLABLE(N(FadeInScreenBlur)) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
@@ -226,7 +226,7 @@ API_CALLABLE(func_8021833C_6DC0DC) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802183EC_6DC18C) {
+API_CALLABLE(N(FadeOutScreenBlur)) {
     if (isInitialCall) {
         script->functionTemp[0] = 30;
         set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
@@ -299,7 +299,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_SET(LVar9, LVar0)
     EVT_CALL(N(BlockAppear))
     EVT_THREAD
-        EVT_CALL(func_8021833C_6DC0DC)
+        EVT_CALL(N(FadeInScreenBlur))
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207C)
     EVT_CALL(N(GetEntityPosition), LVar9, LVar2, LVar3, LVar4)
@@ -326,7 +326,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CALL(AddBattleCamZoom, 100)
         EVT_CALL(MoveBattleCamOver, 10)
         EVT_WAIT(5)
-        EVT_CALL(func_802183EC_6DC18C)
+        EVT_CALL(N(FadeOutScreenBlur))
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207D)
     EVT_SET(LVar5, LVar1)
@@ -358,7 +358,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_CHILD_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim05)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_BLOCK_DROP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -397,7 +397,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_PlayerTurnCount, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -425,19 +425,20 @@ EvtScript N(EVS_HandlePhase) = {
                     EVT_CALL(ActorSpeak, MSG_CH8_0095, ACTOR_PLAYER, 1, ANIM_BattleParakarry_EnterShell, ANIM_BattleParakarry_ShellFly)
                     EVT_WAIT(10)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-                    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
+                    EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_PlayerTurnCount, 1)
             EVT_END_SWITCH
-        EVT_CASE_EQ(12)
+        EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
+            // do nothing
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(speakOnHit) = {
+EvtScript N(EVS_CommentOnHit) = {
     EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Speaking, TRUE)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(10)
@@ -473,7 +474,7 @@ EvtScript N(speakOnHit) = {
         EVT_CASE_OR_EQ(3)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(1)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_PlayerTurnCount, LVar0)
             EVT_IF_EQ(LVar0, 2)
                 EVT_BREAK_SWITCH
             EVT_END_IF
@@ -488,17 +489,17 @@ EvtScript N(speakOnHit) = {
             EVT_WAIT(10)
             EVT_CALL(FreezeBattleCam, FALSE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_Unk_0, 1)
+            EVT_CALL(AddActorVar, ACTOR_SELF, AVAR_PlayerTurnCount, 1)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Speaking, FALSE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(onDeath) = {
+EvtScript N(EVS_Death) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -508,8 +509,8 @@ EvtScript N(onDeath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim02)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 1)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_BROOM, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)

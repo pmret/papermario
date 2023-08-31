@@ -17,7 +17,7 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(attack_throw_bomb);
 extern EvtScript N(attack_lightning_shot);
-extern s32 N(IdleAnimations)[];
+extern s32 N(DefaultAnims)[];
 extern s32 N(IdleAnimations_bomb)[];
 extern Formation N(formation_shy_squad);
 
@@ -79,7 +79,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -122,7 +122,7 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_GeneralGuy_Anim02,
     STATUS_KEY_STONE,     ANIM_GeneralGuy_Anim00,
     STATUS_KEY_SLEEP,     ANIM_GeneralGuy_Anim00,

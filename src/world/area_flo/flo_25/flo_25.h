@@ -11,7 +11,7 @@
 
 enum {
     NPC_GateFlower              = 0,
-    NPC_TuffPuff                = 1,
+    NPC_RuffPuff                = 1,
     NPC_Bzzap                   = 2,
 };
 

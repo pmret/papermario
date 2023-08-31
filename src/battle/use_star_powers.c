@@ -110,7 +110,7 @@ s32 PartnerWishAnims[][5] = {
     },
 };
 
-ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadStarPowerScript) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     s16 starPowerIdx;

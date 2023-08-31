@@ -1,9 +1,9 @@
-#include "TuffPuff.h"
+#include "RuffPuff.h"
 
 #include "world/common/enemy/ai/FlyingAI.inc.c"
 #include "world/common/enemy/ai/FlyingNoAttackAI.inc.c"
 
-MobileAISettings N(AISettings_TuffPuff) = {
+MobileAISettings N(AISettings_RuffPuff) = {
     .moveSpeed = 1.0f,
     .moveTime = 45,
     .waitTime = 60,
@@ -16,21 +16,21 @@ MobileAISettings N(AISettings_TuffPuff) = {
     .unk_AI_2C = 1,
 };
 
-EvtScript N(EVS_NpcAI_TuffPuff) = {
+EvtScript N(EVS_NpcAI_RuffPuff) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(AISettings_TuffPuff)))
+    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(AISettings_RuffPuff)))
     EVT_RETURN
     EVT_END
 };
 
-NpcSettings N(NpcSettings_TuffPuff) = {
+NpcSettings N(NpcSettings_RuffPuff) = {
     .height = 24,
     .radius = 28,
     .level = ACTOR_LEVEL_RUFF_PUFF,
-    .ai = &N(EVS_NpcAI_TuffPuff),
+    .ai = &N(EVS_NpcAI_RuffPuff),
     .onHit = &EnemyNpcHit,
     .onDefeat = &EnemyNpcDefeat,
 };

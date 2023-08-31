@@ -6,28 +6,24 @@
 #define NAMESPACE A(gulpit_rocks)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorVars) {
-    AVAR_RockType      = 0,
+    AVAR_RockType   = 0,
 };
 
-enum N(ActorParams) {
-    DMG_UNK         = 0,
-};
-
-s32 N(IdleAnimations)[] = {
+s32 N(BigRockAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
     STATUS_END,
 };
 
-s32 N(IdleAnimations2)[] = {
+s32 N(SmallRockAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim12,
     STATUS_END,
 };
@@ -69,7 +65,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 14 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(BigRockAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -107,12 +103,12 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BigRockAnims)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim10)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, 0)
             EVT_CALL(SetActorSize, ACTOR_SELF, 24, 15)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(SmallRockAnims)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim12)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 10, 8)
@@ -126,7 +122,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(setAnim) = {
+EvtScript N(EVS_SelectRockAnim) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVarA)
     EVT_SWITCH(LVarA)
         EVT_CASE_EQ(0)
@@ -148,7 +144,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
-            EVT_EXEC_WAIT(N(setAnim))
+            EVT_EXEC_WAIT(N(EVS_SelectRockAnim))
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -158,7 +154,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
-            EVT_EXEC_WAIT(N(setAnim))
+            EVT_EXEC_WAIT(N(EVS_SelectRockAnim))
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
@@ -166,7 +162,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
-            EVT_EXEC_WAIT(N(setAnim))
+            EVT_EXEC_WAIT(N(EVS_SelectRockAnim))
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)

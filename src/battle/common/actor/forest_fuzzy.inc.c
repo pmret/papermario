@@ -7,22 +7,21 @@
 
 extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
-extern Formation N(specialFormation_8021A800);
+extern Formation N(CloneFormation);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_1      = 1,
+    AVAR_Generation     = 0,
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_LEECH       = 1,
 };
 
 s32 N(DefenseTable)[] = {
@@ -110,7 +109,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Generation, 0)
     EVT_RETURN
     EVT_END
 };
@@ -245,7 +244,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(80218C48) = {
+EvtScript N(EVS_Move_Clone) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -270,7 +269,7 @@ EvtScript N(80218C48) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim0D)
     EVT_WAIT(130)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A800)), FALSE)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(CloneFormation)), FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(SetGoalToIndex, LVar0, LVarA)
@@ -291,12 +290,12 @@ EvtScript N(80218C48) = {
     EVT_CALL(ForceHomePos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(HPBarToHome, LVar0)
     EVT_CALL(SetAnimation, LVar0, 1, ANIM_Fuzzy_Forest_Idle)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Generation, LVar1)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, LVar0, AVAR_Unk_0, 1)
+            EVT_CALL(SetActorVar, LVar0, AVAR_Generation, 1)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, LVar0, AVAR_Unk_0, 2)
+            EVT_CALL(SetActorVar, LVar0, AVAR_Generation, 2)
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -306,7 +305,7 @@ EvtScript N(80218C48) = {
 
 #include "common/SpawnEnemyDrainFX.inc.c"
 
-EvtScript N(80219054) = {
+EvtScript N(EVS_Attack_Leech) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
@@ -428,7 +427,7 @@ EvtScript N(80219054) = {
     EVT_WAIT(10)
     EVT_WAIT(2)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -519,7 +518,8 @@ EvtScript N(80219054) = {
     EVT_END
 };
 
-EvtScript N(8021A0D4) = {
+EvtScript N(EVS_GetAvailableSpawnPos) = {
+    // find which columns are occupied
     EVT_SET(LFlag1, FALSE)
     EVT_SET(LFlag2, FALSE)
     EVT_SET(LFlag3, FALSE)
@@ -527,23 +527,24 @@ EvtScript N(8021A0D4) = {
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar5)
-    EVT_CALL(GetIndexFromHome, LVar0, LVar5)
-    EVT_MOD(LVar5, 4)
-    EVT_SWITCH(LVar5)
-        EVT_CASE_EQ(0)
-            EVT_SET(LFlag1, TRUE)
-        EVT_CASE_EQ(1)
-            EVT_SET(LFlag2, TRUE)
-        EVT_CASE_EQ(2)
-            EVT_SET(LFlag3, TRUE)
-        EVT_CASE_EQ(3)
-            EVT_SET(LFlag4, TRUE)
-    EVT_END_SWITCH
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(GetOwnerTarget, LVar0, LVar5)
+        EVT_CALL(GetIndexFromHome, LVar0, LVar5)
+        EVT_MOD(LVar5, 4)
+        EVT_SWITCH(LVar5)
+            EVT_CASE_EQ(0)
+                EVT_SET(LFlag1, TRUE)
+            EVT_CASE_EQ(1)
+                EVT_SET(LFlag2, TRUE)
+            EVT_CASE_EQ(2)
+                EVT_SET(LFlag3, TRUE)
+            EVT_CASE_EQ(3)
+                EVT_SET(LFlag4, TRUE)
+        EVT_END_SWITCH
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+        EVT_IF_NE(LVar0, -1)
+            EVT_GOTO(0)
+        EVT_END_IF
+    // check adjacent positions to self
     EVT_SET(LVarA, -1)
     EVT_SET(LVarB, -1)
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVar0)
@@ -579,6 +580,7 @@ EvtScript N(8021A0D4) = {
                 EVT_SET(LVarA, 2)
             EVT_END_IF
     EVT_END_SWITCH
+    // if both positions are open, choose one at random
     EVT_IF_NE(LVarB, -1)
         EVT_CALL(RandInt, 1000, LVar0)
         EVT_IF_LT(LVar0, 500)
@@ -589,37 +591,37 @@ EvtScript N(8021A0D4) = {
     EVT_END
 };
 
-EvtScript N(8021A45C) = {
+EvtScript N(EVS_CountSummoners) = {
     EVT_SET(LVar9, 0)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_CALL(GetOriginalActorType, LVar0, LVar2)
-    EVT_SWITCH(LVar2)
-        EVT_CASE_OR_EQ(ACTOR_TYPE_FOREST_FUZZY)
-        EVT_CASE_OR_EQ(ACTOR_TYPE_JUNGLE_FUZZY)
-            EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_0, LVar3)
-                EVT_IF_NE(LVar3, 2)
-                    EVT_ADD(LVar9, 1)
+        EVT_CALL(GetOwnerTarget, LVar0, LVar1)
+        EVT_CALL(GetOriginalActorType, LVar0, LVar2)
+        EVT_SWITCH(LVar2)
+            EVT_CASE_OR_EQ(ACTOR_TYPE_FOREST_FUZZY)
+            EVT_CASE_OR_EQ(ACTOR_TYPE_JUNGLE_FUZZY)
+                EVT_CALL(GetStatusFlags, LVar0, LVar3)
+                EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
+                    EVT_CALL(GetActorVar, LVar0, AVAR_Generation, LVar3)
+                    EVT_IF_NE(LVar3, 2)
+                        EVT_ADD(LVar9, 1)
+                    EVT_END_IF
                 EVT_END_IF
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
-            EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(GetActorVar, LVar0, AVAR_Unk_1, LVar3)
-                EVT_IF_LT(LVar3, 2)
-                    EVT_ADD(LVar9, 1)
+            EVT_END_CASE_GROUP
+            EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
+                EVT_CALL(GetStatusFlags, LVar0, LVar3)
+                EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
+                    EVT_CALL(GetActorVar, LVar0, AVAR_SpearGuy_Generation, LVar3)
+                    EVT_IF_LT(LVar3, 2)
+                        EVT_ADD(LVar9, 1)
+                    EVT_END_IF
                 EVT_END_IF
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_END_SWITCH
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+        EVT_IF_NE(LVar0, -1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
@@ -627,47 +629,48 @@ EvtScript N(8021A45C) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_EXEC_WAIT(N(80219054))
+        EVT_EXEC_WAIT(N(EVS_Attack_Leech))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Generation, LVar0)
     EVT_IF_EQ(LVar0, 2)
-        EVT_EXEC_WAIT(N(80219054))
+        EVT_EXEC_WAIT(N(EVS_Attack_Leech))
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC_WAIT(N(8021A0D4))
+    EVT_EXEC_WAIT(N(EVS_GetAvailableSpawnPos))
     EVT_IF_EQ(LVarA, -1)
-        EVT_EXEC_WAIT(N(80219054))
+        EVT_EXEC_WAIT(N(EVS_Attack_Leech))
         EVT_RETURN
     EVT_END_IF
-    EVT_EXEC_WAIT(N(8021A45C))
+    // lower chance to summon when more summoners are in battle
+    EVT_EXEC_WAIT(N(EVS_CountSummoners))
     EVT_SWITCH(LVar9)
         EVT_CASE_EQ(1)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 300)
-                EVT_EXEC_WAIT(N(80218C48))
+                EVT_EXEC_WAIT(N(EVS_Move_Clone))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(2)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 150)
-                EVT_EXEC_WAIT(N(80218C48))
+                EVT_EXEC_WAIT(N(EVS_Move_Clone))
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(3)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 100)
-                EVT_EXEC_WAIT(N(80218C48))
+                EVT_EXEC_WAIT(N(EVS_Move_Clone))
                 EVT_RETURN
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(80219054))
+    EVT_EXEC_WAIT(N(EVS_Attack_Leech))
     EVT_RETURN
     EVT_END
 };
 
-Vec3i N(vector3D_8021A7F4) = { NPC_DISPOSE_LOCATION };
+Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 
-Formation N(specialFormation_8021A800) = {
-    ACTOR_BY_POS(NAMESPACE, N(vector3D_8021A7F4), 0),
+Formation N(CloneFormation) = {
+    ACTOR_BY_POS(NAMESPACE, N(SummonPos), 0),
 };

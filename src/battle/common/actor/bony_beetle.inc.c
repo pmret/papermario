@@ -31,7 +31,7 @@ enum N(ActorVars) {
     AVAL_State_SpikyUpright     = 1,
     AVAL_State_SmoothToppled    = 2,
     AVAL_State_SpikyToppled     = 3,
-    AVAR_ToppledTurns           = 9,
+    AVAR_ToppleTurns            = 9,
 };
 
 enum N(ActorParams) {
@@ -337,7 +337,7 @@ EvtScript N(EVS_HandleEvent_SmoothUpright) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SmoothToppled)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
@@ -559,7 +559,7 @@ EvtScript N(EVS_HandleEvent_SpikyUpright) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SpikyToppled)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledSpikyAnims)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
@@ -868,7 +868,7 @@ EvtScript N(EVS_Attack_SpikeBounce) = {
 EvtScript N(EVS_FallFromCeiling) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_State, AVAL_State_SmoothToppled)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, 1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
     EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefenseTable)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
@@ -937,7 +937,7 @@ EvtScript N(EVS_HandleEvent_SmoothToppled) = {
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledAnims)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1A)
@@ -995,10 +995,10 @@ EvtScript N(EVS_TryGettingUp_Smooth) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppledTurns, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
     EVT_SUB(LVar0, 1)
     EVT_IF_GT(LVar0, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, LVar0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
         EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1C)
         EVT_WAIT(20)
@@ -1069,7 +1069,7 @@ EvtScript N(EVS_HandleEvent_SpikyToppled) = {
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, 1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledDefenseTable)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ToppledSpikyAnims)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1B)
@@ -1128,10 +1128,10 @@ EvtScript N(EVS_TryGettingUp_Spiky) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppledTurns, LVar0)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
     EVT_SUB(LVar0, 1)
     EVT_IF_GT(LVar0, 0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppledTurns, LVar0)
+        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ToppleTurns, LVar0)
         EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1D)
         EVT_WAIT(20)

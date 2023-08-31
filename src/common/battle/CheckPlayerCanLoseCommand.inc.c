@@ -1,6 +1,6 @@
 #include "common.h"
 
-API_CALLABLE(N(SpyGuyActionFunc)) {
+API_CALLABLE(N(CheckPlayerCanLoseCommand)) {
     BattleStatus* status = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 

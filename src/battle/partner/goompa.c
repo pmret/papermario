@@ -26,7 +26,7 @@ enum N(ActorParams) {
     DMG_UNK         = 0,
 };
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Goompa_Walk,
     STATUS_END,
 };
@@ -65,7 +65,7 @@ ActorPartBlueprint N(ActorParts)[] = {
     {
         .index = PRT_MAIN,
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
     },
 };

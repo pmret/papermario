@@ -7,19 +7,22 @@
 #define NAMESPACE A(medi_guy)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
+};
+
+enum N(ActorParams) {
+    DMG_SWOOP       = 1,
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
-
 #include "common/MediGuySpriteRotationFunc.inc.c"
 
-s32 N(IdleAnimations)[] = {
+s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_MediGuy_Anim01,
     STATUS_KEY_STONE,     ANIM_MediGuy_Anim00,
     STATUS_KEY_SLEEP,     ANIM_MediGuy_Anim04,
@@ -70,7 +73,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 38 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations),
+        .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
@@ -115,18 +118,18 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 24)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -5)
-        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
-    EVT_ELSE
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 38)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -5)
-        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 12, 31)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
+        EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 24)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -5)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
+        EVT_ELSE
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 38)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -5)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 12, 31)
+        EVT_END_IF
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -250,7 +253,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(flyingAttack) = {
+EvtScript N(EVS_Attack_Swoop) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -338,7 +341,7 @@ EvtScript N(flyingAttack) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_SWOOP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -360,7 +363,7 @@ EvtScript N(flyingAttack) = {
     EVT_END
 };
 
-EvtScript N(healOneAlly) = {
+EvtScript N(EVS_Move_HealOne) = {
     EVT_SET(LVarA, LVar0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
@@ -403,35 +406,35 @@ EvtScript N(healOneAlly) = {
     EVT_END
 };
 
-EvtScript N(findTargetsToHeal) = {
+EvtScript N(EVS_FindInjuredActor) = {
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_CALL(GetActorHP, LVar0, LVar2)
-    EVT_CALL(GetEnemyMaxHP, LVar0, LVar3)
-    EVT_IF_NE(LVar2, LVar3)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(GetActorHP, LVar0, LVar2)
+        EVT_CALL(GetEnemyMaxHP, LVar0, LVar3)
+        EVT_IF_NE(LVar2, LVar3)
+            EVT_CALL(GetOwnerTarget, LVar0, LVar1)
+            EVT_RETURN
+        EVT_END_IF
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+        EVT_IF_NE(LVar0, -1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_EXEC_WAIT(N(findTargetsToHeal))
+    EVT_EXEC_WAIT(N(EVS_FindInjuredActor))
     EVT_IF_EQ(LVar0, -1)
-        EVT_EXEC_WAIT(N(flyingAttack))
+        EVT_EXEC_WAIT(N(EVS_Attack_Swoop))
     EVT_ELSE
         EVT_CALL(RandInt, 1000, LVarA)
         EVT_IF_LT(LVarA, 600)
-            EVT_EXEC_WAIT(N(healOneAlly))
+            EVT_EXEC_WAIT(N(EVS_Move_HealOne))
         EVT_ELSE
-            EVT_EXEC_WAIT(N(flyingAttack))
+            EVT_EXEC_WAIT(N(EVS_Attack_Swoop))
         EVT_END_IF
     EVT_END_IF
     EVT_RETURN

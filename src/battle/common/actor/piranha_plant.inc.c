@@ -5,12 +5,16 @@
 #define NAMESPACE A(piranha_plant)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
+};
+
+enum N(ActorParams) {
+    DMG_BITE        = 3,
 };
 
 s32 N(DefaultAnims)[] = {
@@ -26,12 +30,12 @@ s32 N(DefaultAnims)[] = {
     STATUS_END,
 };
 
-s32 N(unk_missing_8021D37C)[] = {
+s32 N(UnusedAnims1)[] = {
     STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
     STATUS_END,
 };
 
-s32 N(unk_missing_8021D388)[] = {
+s32 N(UnusedAnims2)[] = {
     STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim06,
     STATUS_END,
 };
@@ -117,7 +121,7 @@ EvtScript N(EVS_Idle) = {
     EVT_END
 };
 
-EvtScript N(8021D4F4) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
@@ -177,7 +181,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_EXEC_WAIT(N(8021D4F4))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
@@ -337,7 +341,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_EXEC_WAIT(N(8021D4F4))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -353,7 +357,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(10)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_BITE, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -363,7 +367,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_EXEC_WAIT(N(8021D4F4))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)

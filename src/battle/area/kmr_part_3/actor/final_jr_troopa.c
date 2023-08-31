@@ -19,7 +19,7 @@ extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_GetFormAnims);
 extern EvtScript N(EVS_TryFearReaction);
 extern EvtScript N(EVS_JrTroopa_Death);
-extern EvtScript N(EVS_JrTroopa_ReturnHome);
+extern EvtScript N(EVS_ReturnHome);
 
 extern EvtScript N(EVS_Transform_Flying);
 extern EvtScript N(EVS_Transform_Mage);
@@ -489,7 +489,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET(LVar1, FORM_ANIM_HURT)
             EVT_EXEC_WAIT(N(EVS_GetFormAnims))
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_EXEC_WAIT(N(EVS_JrTroopa_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FLYING, 0, 0, 0)
             EVT_CALL(SetPartRotationOffset, ACTOR_SELF, PRT_FLYING, 0, 0, 0)
@@ -555,7 +555,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(N(EVS_GetFormAnims))
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_EXEC_WAIT(N(EVS_JrTroopa_ReturnHome))
+            EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_BASE)
@@ -1575,7 +1575,7 @@ EvtScript N(EVS_JrTroopa_Death) = {
     EVT_END
 };
 
-EvtScript N(EVS_JrTroopa_ReturnHome) = {
+EvtScript N(EVS_ReturnHome) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Form, LVar0)
     EVT_SWITCH(LVar0)

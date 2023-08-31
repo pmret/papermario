@@ -1248,10 +1248,10 @@ enum SoundIDs {
     SOUND_ELECTRIC_BUZZ                         = 0x000003D2,
     SOUND_HUFF_N_PUFF_LIGHTNING_BLAST           = 0x000003D3,
     SOUND_OPEN_SHELL                            = 0x000003D4,
-    SOUND_03D5                                    = 0x000003D5,
-    SOUND_03D6                                    = 0x000003D6,
+    SOUND_RUFF_PUFF_FLY_A                       = 0x000003D5,
+    SOUND_RUFF_PUFF_FLY_B                       = 0x000003D6,
     SOUND_03D9                                    = 0x000003D9,
-    SOUND_03DB                                    = 0x000003DB,
+    SOUND_SQUEEZE                               = 0x000003DB,
     SOUND_03DC                                    = 0x000003DC,
     SOUND_03DD                                    = 0x000003DD,
     SOUND_03DE                                    = 0x000003DE,
@@ -3275,7 +3275,7 @@ enum ActorFlags {
     ACTOR_FLAG_NO_ATTACK         = 0x00200000, ///< Skip attack turn.
     ACTOR_FLAG_NO_DMG_APPLY      = 0x00400000, ///< Damage is not applied to actor HP.
     ACTOR_FLAG_800000            = 0x00800000,
-    ACTOR_FLAG_1000000           = 0x01000000,
+    ACTOR_FLAG_1000000           = 0x01000000, // Enraged? Only used for Super Blooper.
     ACTOR_FLAG_NO_DMG_POPUP      = 0x02000000, ///< Hide damage popup.
     ACTOR_FLAG_4000000           = 0x04000000,
     ACTOR_FLAG_8000000           = 0x08000000,

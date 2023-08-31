@@ -98,7 +98,7 @@ BattleMoveEntry gMoveScriptTable[] = {
     [MOVE_EARTHQUAKE_JUMP]      BTL_MOVE(earthquake_jump, EVS_UseMove),
 };
 
-ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadMoveScript) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleMoveEntry* moveTableEntry = &gMoveScriptTable[battleStatus->selectedMoveID];
 

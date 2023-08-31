@@ -14,7 +14,7 @@ extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_MakeExplosionFX);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorVars) {
@@ -23,7 +23,7 @@ enum N(ActorVars) {
 };
 
 enum N(ActorParams) {
-    DMG_IMPACT          = 2,
+    DMG_IMPACT      = 2,
 };
 
 s32 N(DefenseTable)[] = {

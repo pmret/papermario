@@ -573,7 +573,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Collapse)
     EVT_THREAD
         EVT_WAIT(2)
-        EVT_PLAY_EFFECT(EFFECT_EMOTE, 3, 0, 175, 0, -35, 20, -20, 30, 0)
+        EVT_PLAY_EFFECT(EFFECT_EMOTE, EMOTE_FRUSTRATION, 0, 175, 0, -35, 20, -20, 30, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(320.0))

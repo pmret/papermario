@@ -156,7 +156,7 @@ void N(LakituAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     }
 }
 
-s32 N(LakituAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(LakituAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);

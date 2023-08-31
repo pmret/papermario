@@ -15,7 +15,7 @@ extern EvtScript N(EVS_Move_FireBullet);
 extern EvtScript N(EVS_Move_CheckForBullet);
 
 extern ActorBlueprint A(bullet_bill);
-extern Formation N(BulletBillSummon);
+extern Formation N(BulletFormation);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -208,8 +208,8 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 API_CALLABLE(N(SetBulletInitVars)) {
-    N(BulletBillSummon)[0].var0 = TRUE;
-    N(BulletBillSummon)[0].var1 = script->owner1.actorID;
+    N(BulletFormation)[0].var0 = TRUE;
+    N(BulletFormation)[0].var1 = script->owner1.actorID;
 
     return ApiStatus_DONE2;
 }
@@ -230,7 +230,7 @@ EvtScript N(EVS_Move_FireBullet) = {
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     EVT_WAIT(2)
     EVT_CALL(N(SetBulletInitVars))
-    EVT_CALL(SummonEnemy, EVT_PTR(N(BulletBillSummon)), FALSE)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(BulletFormation)), FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_BulletID, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasBullet, TRUE)
     EVT_RETURN
@@ -247,8 +247,8 @@ EvtScript N(EVS_Move_CheckForBullet) = {
     EVT_END
 };
 
-Vec3i N(DefaultPos) = { NPC_DISPOSE_LOCATION };
+Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
 
-Formation N(BulletBillSummon) = {
-    ACTOR_BY_POS(A(bullet_bill), N(DefaultPos), 100),
+Formation N(BulletFormation) = {
+    ACTOR_BY_POS(A(bullet_bill), N(SummonPos), 100),
 };

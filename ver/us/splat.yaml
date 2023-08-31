@@ -6844,7 +6844,7 @@ segments:
     vram: 0x80218000
     follows_vram: heaps
     subsegments:
-    - [auto, c, actor/bombshell_bill_blaster]
+    - [auto, c, actor/bombshell_blaster]
     - [auto, c, actor/bombshell_bill]
     - [auto, c, actor/koopatrol]
     - [auto, c, actor/magikoopa]
