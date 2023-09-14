@@ -89,22 +89,22 @@ void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
 }
 
 // Unused
-void func_80112DD4(s32 i) {
+void set_game_mode_flag_3(s32 i) {
     gMainGameMode[i].flags |= MODE_FLAG_3;
 }
 
 // Unused
-void func_80112DFC(s32 i) {
+void set_game_mode_flag_4(s32 i) {
     gMainGameMode[i].flags |= MODE_FLAG_4;
 }
 
 // Unused
-void clear_mode_flags(s32 i) {
+void clear_game_mode_unk_flags(s32 i) {
     gMainGameMode[i].flags &= ~(MODE_FLAG_3|MODE_FLAG_4|MODE_FLAG_5);
 }
 
 // Unused
-void func_80112E4C(s32 i) {
+void set_game_mode_flag_5(s32 i) {
     gMainGameMode[i].flags &= ~(MODE_FLAG_3|MODE_FLAG_4);
     gMainGameMode[i].flags |= MODE_FLAG_5;
 }
