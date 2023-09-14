@@ -1,5 +1,6 @@
 #include "kmr_24.h"
 #include "fio.h"
+#include "game_modes.h"
 
 API_CALLABLE(N(ExitGame)) {
     s16 progress;
@@ -17,7 +18,7 @@ API_CALLABLE(N(ExitGame)) {
         script->functionTemp[1] = progress;
         return ApiStatus_BLOCK;
     } else {
-        set_game_mode(0);
+        set_game_mode(GAME_MODE_STARTUP);
         return ApiStatus_DONE2;
     }
 }

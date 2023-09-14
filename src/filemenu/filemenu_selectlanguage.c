@@ -3,6 +3,7 @@
 #include "message_ids.h"
 #include "hud_element.h"
 #include "ld_addrs.h"
+#include "game_modes.h"
 
 extern HudScript HES_Spirit1;
 

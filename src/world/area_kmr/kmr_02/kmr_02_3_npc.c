@@ -1,6 +1,7 @@
 #include "kmr_02.h"
 #include "effects.h"
 #include "model.h"
+#include "game_modes.h"
 #include "sprite/player.h"
 
 extern EvtScript N(EVS_NpcAI_Eldstar_02);

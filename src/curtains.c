@@ -5,6 +5,7 @@
 #include "ui/no_controller.png.h"
 #include "ld_addrs.h"
 #include "nu/nusys.h"
+#include "game_modes.h"
 
 #include "theater/walls.png.inc.c"
 

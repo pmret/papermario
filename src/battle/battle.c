@@ -4,6 +4,7 @@
 #include "battle_tables.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "game_modes.h"
 
 SHIFT_BSS s32 D_800DC060;
 SHIFT_BSS StageListRow* gCurrentStagePtr;
