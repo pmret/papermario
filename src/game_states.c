@@ -89,24 +89,24 @@ void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
 }
 
 // Unused
-void set_game_mode_flag_3(s32 i) {
-    gMainGameMode[i].flags |= MODE_FLAG_3;
-}
-
-// Unused
 void set_game_mode_flag_4(s32 i) {
     gMainGameMode[i].flags |= MODE_FLAG_4;
 }
 
 // Unused
-void clear_game_mode_unk_flags(s32 i) {
-    gMainGameMode[i].flags &= ~(MODE_FLAG_3|MODE_FLAG_4|MODE_FLAG_5);
+void set_game_mode_flag_8(s32 i) {
+    gMainGameMode[i].flags |= MODE_FLAG_8;
 }
 
 // Unused
-void set_game_mode_flag_5(s32 i) {
-    gMainGameMode[i].flags &= ~(MODE_FLAG_3|MODE_FLAG_4);
-    gMainGameMode[i].flags |= MODE_FLAG_5;
+void clear_game_mode_unk_flags(s32 i) {
+    gMainGameMode[i].flags &= ~(MODE_FLAG_4 | MODE_FLAG_8 | MODE_FLAG_10);
+}
+
+// Unused
+void set_game_mode_flag_10(s32 i) {
+    gMainGameMode[i].flags &= ~(MODE_FLAG_4 | MODE_FLAG_8);
+    gMainGameMode[i].flags |= MODE_FLAG_10;
 }
 
 void step_current_game_mode(void) {
@@ -115,8 +115,8 @@ void step_current_game_mode(void) {
 
     for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
         if (gameMode->flags != MODE_FLAG_NONE) {
-            if (!(gameMode->flags & MODE_FLAG_3)) {
-                if (!(gameMode->flags & MODE_FLAG_4)) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_8)) {
                     gameMode->flags &= ~MODE_FLAG_STEP_NOT_DONE;
                     gameMode->step();
                 }
@@ -132,8 +132,8 @@ void state_do_unk(void) {
 
     for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
         if (gameMode->flags != MODE_FLAG_NONE) {
-            if (!(gameMode->flags & MODE_FLAG_3)) {
-                if (!(gameMode->flags & MODE_FLAG_5)) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_10)) {
                     gameMode->unusedFunc();
                 }
             }
@@ -147,8 +147,8 @@ void state_render_backUI(void) {
 
     for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
         if (gameMode->flags != MODE_FLAG_NONE) {
-            if (!(gameMode->flags & MODE_FLAG_3)) {
-                if (!(gameMode->flags & MODE_FLAG_5)) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_10)) {
                     gameMode->render();
                 }
             }
@@ -162,7 +162,7 @@ void state_render_frontUI(void) {
 
     for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
         if (gameMode->flags != MODE_FLAG_NONE) {
-            if (!(gameMode->flags & MODE_FLAG_3)) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
                 if (!(gameMode->flags & MODE_FLAG_STEP_NOT_DONE)) {
                     if (gameMode->flags & MODE_FLAG_RENDER_AUX_SET) {
                         gameMode->renderAux();
@@ -176,9 +176,9 @@ void state_render_frontUI(void) {
     gameMode = &gMainGameMode[0];
     for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
         if (gameMode->flags != MODE_FLAG_NONE) {
-            if (!(gameMode->flags & MODE_FLAG_3)) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
                 if (!(gameMode->flags & MODE_FLAG_STEP_NOT_DONE)) {
-                    if (gameMode->flags & MODE_FLAG_5) {
+                    if (gameMode->flags & MODE_FLAG_10) {
                         gameMode->render();
                     }
                 }

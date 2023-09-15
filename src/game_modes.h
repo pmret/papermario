@@ -8,9 +8,9 @@ enum GameModeFlags {
     MODE_FLAG_NONE           = 0,
     MODE_FLAG_INITIALIZED    = (1 << 0), // Set when the mod is initialized
     MODE_FLAG_STEP_NOT_DONE  = (1 << 1), // Turned off after the first step is done
-    MODE_FLAG_3              = (1 << 2),
-    MODE_FLAG_4              = (1 << 3),
-    MODE_FLAG_5              = (1 << 4),
+    MODE_FLAG_4              = (1 << 2),
+    MODE_FLAG_8              = (1 << 3),
+    MODE_FLAG_10             = (1 << 4),
     MODE_FLAG_RENDER_AUX_SET = (1 << 5), // Set when the renderAux function is set
 };
 
@@ -34,19 +34,6 @@ enum GameModeIDs {
     GAME_MODE_INTRO               = 16,
     GAME_MODE_DEMO                = 17,
 };
-
-// GameModeStub are treated as GameMode structs, which creates UB behavior as
-// renderAux accesses are outside the range of the struct.
-typedef struct GameModeStub {
-    /* 0x00 */ u16 flags;
-    /* 0x04 */ void (*init)(void);
-    /* 0x08 */ void (*step)(void);
-    /* 0x0C */ UNK_FUN_PTR(unusedFunc);
-    /* 0x10 */ void (*render)(void);
-    #ifdef AVOID_UB
-    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
-    #endif
-} GameModeStub; // size = 0x14
 
 typedef struct GameMode {
     /* 0x00 */ u16 flags;

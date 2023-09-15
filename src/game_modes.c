@@ -26,8 +26,19 @@ s32 D_80077420[] = {
 // These GameModeStub are used as the struct GameMode. As GameModeStub is 0x14 long and GameMode is 0x18 long, the last element
 // and first element of the next struct are shared in data.
 
+typedef struct GameModeStub {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(void);
+    /* 0x0C */ UNK_FUN_PTR(unusedFunc);
+    /* 0x10 */ void (*render)(void);
+    #ifdef AVOID_UB
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+    #endif
+} GameModeStub; // size = 0x14
+
 GameModeStub GameModeStartup = {
-    0,
+    MODE_FLAG_NONE,
     state_init_startup,
     state_step_startup,
     NULL,
@@ -38,7 +49,7 @@ GameModeStub GameModeStartup = {
 };
 
 GameModeStub GameModeLogos = {
-    0,
+    MODE_FLAG_NONE,
     state_init_logos,
     state_step_logos,
     NULL,
@@ -49,7 +60,7 @@ GameModeStub GameModeLogos = {
 };
 
 GameModeStub GameModeTitleScreen = {
-    0,
+    MODE_FLAG_NONE,
     state_init_title_screen,
     state_step_title_screen,
     NULL,
@@ -60,7 +71,7 @@ GameModeStub GameModeTitleScreen = {
 };
 
 GameModeStub GameModeEnterDemoWorld = {
-    0,
+    MODE_FLAG_NONE,
     state_init_enter_demo,
     state_step_enter_world,
     NULL,
@@ -71,7 +82,7 @@ GameModeStub GameModeEnterDemoWorld = {
 };
 
 GameModeStub GameModeChangeMap = {
-    0,
+    MODE_FLAG_NONE,
     state_init_change_map,
     state_step_change_map,
     NULL,
@@ -82,7 +93,7 @@ GameModeStub GameModeChangeMap = {
 };
 
 GameModeStub GameModeGameOver = {
-    0,
+    MODE_FLAG_NONE,
     state_init_game_over,
     state_step_game_over,
     NULL,
@@ -93,7 +104,7 @@ GameModeStub GameModeGameOver = {
 };
 
 GameModeStub GameModeEnterWorld = {
-    0,
+    MODE_FLAG_NONE,
     state_init_enter_world,
     state_step_enter_world,
     NULL,
@@ -104,7 +115,7 @@ GameModeStub GameModeEnterWorld = {
 };
 
 GameModeStub GameModeWorld = {
-    0,
+    MODE_FLAG_NONE,
     state_init_world,
     state_step_world,
     NULL,
@@ -115,7 +126,7 @@ GameModeStub GameModeWorld = {
 };
 
 GameModeStub GameModeBattle = {
-    0,
+    MODE_FLAG_NONE,
     state_init_battle,
     state_step_battle,
     NULL,
@@ -126,7 +137,7 @@ GameModeStub GameModeBattle = {
 };
 
 GameModeStub GameModeEndBattle = {
-    0,
+    MODE_FLAG_NONE,
     state_init_end_battle,
     state_step_end_battle,
     NULL,
@@ -137,7 +148,7 @@ GameModeStub GameModeEndBattle = {
 };
 
 GameModeStub GameModePause = {
-    0,
+    MODE_FLAG_NONE,
     state_init_pause,
     state_step_pause,
     NULL,
@@ -148,7 +159,7 @@ GameModeStub GameModePause = {
 };
 
 GameModeStub GameModeUnpause = {
-    0,
+    MODE_FLAG_NONE,
     state_init_unpause,
     state_step_unpause,
     NULL,
@@ -159,7 +170,7 @@ GameModeStub GameModeUnpause = {
 };
 
 GameModeStub GameModeLanguageSelect = {
-    0,
+    MODE_FLAG_NONE,
     state_init_language_select,
     state_step_language_select,
     NULL,
@@ -170,7 +181,7 @@ GameModeStub GameModeLanguageSelect = {
 };
 
 GameModeStub GameModeEndLanguageSelect = {
-    0,
+    MODE_FLAG_NONE,
     state_init_exit_language_select,
     state_step_exit_language_select,
     NULL,
@@ -181,7 +192,7 @@ GameModeStub GameModeEndLanguageSelect = {
 };
 
 GameModeStub GameModeFileSelect = {
-    0,
+    MODE_FLAG_NONE,
     state_init_file_select,
     state_step_file_select,
     NULL,
@@ -203,7 +214,7 @@ GameModeStub GameModeEndFileSelect = {
 };
 
 GameModeStub GameModeIntro = {
-    0,
+    MODE_FLAG_NONE,
     state_init_intro,
     state_step_intro,
     NULL,
@@ -214,7 +225,7 @@ GameModeStub GameModeIntro = {
 };
 
 GameModeStub GameModeDemo = {
-    0,
+    MODE_FLAG_NONE,
     state_init_demo,
     state_step_demo,
     NULL,
@@ -243,17 +254,15 @@ GameMode* gameModeMap[] = {
     (GameMode*) &GameModeEndFileSelect,
     (GameMode*) &GameModeIntro,
     (GameMode*) &GameModeDemo,
-    NULL,
-    NULL,
 };
 
-SHIFT_BSS s16 activeGameMode;
+SHIFT_BSS s16 CurGameMode;
 
 void set_game_mode(s16 mode) {
-    activeGameMode = mode;
+    CurGameMode = mode;
     set_game_mode_slot(0, gameModeMap[mode]);
 }
 
 s16 get_game_mode(void) {
-    return activeGameMode;
+    return CurGameMode;
 }
