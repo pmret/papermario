@@ -23,10 +23,10 @@ s32 D_80077420[] = {
     0x000000D4, 0x000000D5, 0x000000D6, 0x000000D7, 0x000000D8, 0x000000D9, 0x000000DA,
 };
 
-// These GameModeStub are used as the struct GameMode. As GameModeStub is 0x14 long and GameMode is 0x18 long, the last element
+// These GameModeIncomplete are used as the struct GameMode. As GameModeIncomplete is 0x14 long and GameMode is 0x18 long, the last element
 // and first element of the next struct are shared in data.
 
-typedef struct GameModeStub {
+typedef struct GameModeIncomplete {
     /* 0x00 */ u16 flags;
     /* 0x04 */ void (*init)(void);
     /* 0x08 */ void (*step)(void);
@@ -35,9 +35,9 @@ typedef struct GameModeStub {
     #ifdef AVOID_UB
     /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
     #endif
-} GameModeStub; // size = 0x14
+} GameModeIncomplete; // size = 0x14
 
-GameModeStub GameModeStartup = {
+GameModeIncomplete GameModeStartup = {
     MODE_FLAG_NONE,
     state_init_startup,
     state_step_startup,
@@ -48,7 +48,7 @@ GameModeStub GameModeStartup = {
     #endif
 };
 
-GameModeStub GameModeLogos = {
+GameModeIncomplete GameModeLogos = {
     MODE_FLAG_NONE,
     state_init_logos,
     state_step_logos,
@@ -59,7 +59,7 @@ GameModeStub GameModeLogos = {
     #endif
 };
 
-GameModeStub GameModeTitleScreen = {
+GameModeIncomplete GameModeTitleScreen = {
     MODE_FLAG_NONE,
     state_init_title_screen,
     state_step_title_screen,
@@ -70,7 +70,7 @@ GameModeStub GameModeTitleScreen = {
     #endif
 };
 
-GameModeStub GameModeEnterDemoWorld = {
+GameModeIncomplete GameModeEnterDemoWorld = {
     MODE_FLAG_NONE,
     state_init_enter_demo,
     state_step_enter_world,
@@ -81,7 +81,7 @@ GameModeStub GameModeEnterDemoWorld = {
     #endif
 };
 
-GameModeStub GameModeChangeMap = {
+GameModeIncomplete GameModeChangeMap = {
     MODE_FLAG_NONE,
     state_init_change_map,
     state_step_change_map,
@@ -92,7 +92,7 @@ GameModeStub GameModeChangeMap = {
     #endif
 };
 
-GameModeStub GameModeGameOver = {
+GameModeIncomplete GameModeGameOver = {
     MODE_FLAG_NONE,
     state_init_game_over,
     state_step_game_over,
@@ -103,7 +103,7 @@ GameModeStub GameModeGameOver = {
     #endif
 };
 
-GameModeStub GameModeEnterWorld = {
+GameModeIncomplete GameModeEnterWorld = {
     MODE_FLAG_NONE,
     state_init_enter_world,
     state_step_enter_world,
@@ -114,7 +114,7 @@ GameModeStub GameModeEnterWorld = {
     #endif
 };
 
-GameModeStub GameModeWorld = {
+GameModeIncomplete GameModeWorld = {
     MODE_FLAG_NONE,
     state_init_world,
     state_step_world,
@@ -125,7 +125,7 @@ GameModeStub GameModeWorld = {
     #endif
 };
 
-GameModeStub GameModeBattle = {
+GameModeIncomplete GameModeBattle = {
     MODE_FLAG_NONE,
     state_init_battle,
     state_step_battle,
@@ -136,7 +136,7 @@ GameModeStub GameModeBattle = {
     #endif
 };
 
-GameModeStub GameModeEndBattle = {
+GameModeIncomplete GameModeEndBattle = {
     MODE_FLAG_NONE,
     state_init_end_battle,
     state_step_end_battle,
@@ -147,7 +147,7 @@ GameModeStub GameModeEndBattle = {
     #endif
 };
 
-GameModeStub GameModePause = {
+GameModeIncomplete GameModePause = {
     MODE_FLAG_NONE,
     state_init_pause,
     state_step_pause,
@@ -158,7 +158,7 @@ GameModeStub GameModePause = {
     #endif
 };
 
-GameModeStub GameModeUnpause = {
+GameModeIncomplete GameModeUnpause = {
     MODE_FLAG_NONE,
     state_init_unpause,
     state_step_unpause,
@@ -169,7 +169,7 @@ GameModeStub GameModeUnpause = {
     #endif
 };
 
-GameModeStub GameModeLanguageSelect = {
+GameModeIncomplete GameModeLanguageSelect = {
     MODE_FLAG_NONE,
     state_init_language_select,
     state_step_language_select,
@@ -180,7 +180,7 @@ GameModeStub GameModeLanguageSelect = {
     #endif
 };
 
-GameModeStub GameModeEndLanguageSelect = {
+GameModeIncomplete GameModeEndLanguageSelect = {
     MODE_FLAG_NONE,
     state_init_exit_language_select,
     state_step_exit_language_select,
@@ -191,7 +191,7 @@ GameModeStub GameModeEndLanguageSelect = {
     #endif
 };
 
-GameModeStub GameModeFileSelect = {
+GameModeIncomplete GameModeFileSelect = {
     MODE_FLAG_NONE,
     state_init_file_select,
     state_step_file_select,
@@ -202,7 +202,7 @@ GameModeStub GameModeFileSelect = {
     #endif
 };
 
-GameModeStub GameModeEndFileSelect = {
+GameModeIncomplete GameModeEndFileSelect = {
     0,
     state_init_exit_file_select,
     state_step_exit_file_select,
@@ -213,7 +213,7 @@ GameModeStub GameModeEndFileSelect = {
     #endif
 };
 
-GameModeStub GameModeIntro = {
+GameModeIncomplete GameModeIntro = {
     MODE_FLAG_NONE,
     state_init_intro,
     state_step_intro,
@@ -224,7 +224,7 @@ GameModeStub GameModeIntro = {
     #endif
 };
 
-GameModeStub GameModeDemo = {
+GameModeIncomplete GameModeDemo = {
     MODE_FLAG_NONE,
     state_init_demo,
     state_step_demo,
