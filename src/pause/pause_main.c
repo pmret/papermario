@@ -2,6 +2,7 @@
 #include "message_ids.h"
 #include "sprite.h"
 #include "pause_common.h"
+#include "game_modes.h"
 #include "sprite/npc/Goombaria.h"
 #include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/Goompa.h"

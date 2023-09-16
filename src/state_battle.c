@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "battle/battle.h"
 #include "model.h"
+#include "game_modes.h"
 
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
@@ -203,7 +204,7 @@ void state_step_end_battle(void) {
                 if (D_800A0908 != 0) {
                     set_time_freeze_mode(D_800A0908);
                 }
-                set_game_mode(GAME_MODE_CHANGE_MAP);
+                set_game_mode(GAME_MODE_WORLD);
             }
         }
     }

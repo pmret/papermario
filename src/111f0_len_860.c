@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include "game_modes.h"
 
 SHIFT_BSS s16 gMapTransitionAlpha;
 SHIFT_BSS s16 gMapTransitionFadeRate;
@@ -85,7 +86,7 @@ void state_step_enter_world(void) {
                     enable_player_input();
                 }
                 set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
-                set_game_mode(GAME_MODE_CHANGE_MAP);
+                set_game_mode(GAME_MODE_WORLD);
             }
             break;
     }
@@ -173,7 +174,7 @@ void state_step_change_map(void) {
                     enable_player_input();
                 }
                 set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
-                set_game_mode(GAME_MODE_CHANGE_MAP);
+                set_game_mode(GAME_MODE_WORLD);
             }
             break;
         }
@@ -185,14 +186,14 @@ void state_drawUI_change_map(void) {
     }
 }
 
-void func_80036430(void) {
+void state_init_game_over(void) {
     gMapTransitionAlpha = 255;
     gMapTransitionFadeRate = 20;
     gMapTransitionState = 0x01;
     gPlayerStatus.flags |= PS_FLAG_NO_STATIC_COLLISION;
 }
 
-void func_8003646C(void) {
+void state_step_game_over(void) {
     switch (gMapTransitionState) {
         case 1:
             gOverrideFlags |= GLOBAL_OVERRIDES_8;
@@ -226,7 +227,7 @@ void func_8003646C(void) {
                 gMapTransitionAlpha = 0;
                 gMapTransitionState++;
                 set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
-                set_game_mode(GAME_MODE_CHANGE_MAP);
+                set_game_mode(GAME_MODE_WORLD);
             }
             update_npcs();
             update_player();
@@ -238,5 +239,5 @@ void func_8003646C(void) {
     set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, gMapTransitionAlpha);
 }
 
-void func_80036640(void) {
+void state_drawUI_game_over(void) {
 }

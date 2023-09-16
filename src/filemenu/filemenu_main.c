@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "audio/public.h"
 #include "fio.h"
+#include "game_modes.h"
 
 extern HudScript HES_Spirit1;
 extern HudScript HES_Spirit2;

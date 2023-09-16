@@ -1,6 +1,4 @@
-#include "common.h"
-
-// TODO: decide whether to call these 'game modes' or 'states'
+#include "game_modes.h"
 
 s32 D_80077420[] = {
     0x000000E4, 0x000000E1, 0x000000EB, 0x000000EF, 0x000000F6, 0x0000010A, 0x0000010C, 0x00000121, 0x00000122,
@@ -25,82 +23,246 @@ s32 D_80077420[] = {
     0x000000D4, 0x000000D5, 0x000000D6, 0x000000D7, 0x000000D8, 0x000000D9, 0x000000DA,
 };
 
-// These StateFunc[] should really be GameMode but they seem to sometimes only take up 0x14 bytes of data rather than 0x18 like they should if they were really a struct.
+// These GameModeIncomplete are used as the struct GameMode. As GameModeIncomplete is 0x14 long and GameMode is 0x18 long, the last element
+// and first element of the next struct are shared in data.
 
-StateFunc gameModeBlueprints[] = { NULL, state_init_startup, state_step_startup, NULL, state_drawUI_startup };
+typedef struct GameModeIncomplete {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(void);
+    /* 0x0C */ UNK_FUN_PTR(unusedFunc);
+    /* 0x10 */ void (*render)(void);
+    #ifdef AVOID_UB
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+    #endif
+} GameModeIncomplete; // size = 0x14
 
-StateFunc D_800776FC[] = { NULL, state_init_logos, state_step_logos, NULL, state_drawUI_logos };
-
-StateFunc D_80077710[] = { NULL, state_init_title_screen, state_step_title_screen, NULL, state_drawUI_title_screen };
-
-StateFunc D_80077724[] = { NULL, state_init_enter_demo, state_step_enter_world, NULL, state_drawUI_enter_world };
-
-StateFunc D_80077738[] = { NULL, state_init_change_map, state_step_change_map, NULL, state_drawUI_change_map };
-
-StateFunc D_8007774C[] = { NULL, func_80036430, func_8003646C, NULL, func_80036640 };
-
-StateFunc D_80077760[] = { NULL, state_init_enter_world, state_step_enter_world, NULL, state_drawUI_enter_world };
-
-StateFunc D_80077774[] = { NULL, state_init_world, state_step_world, NULL, state_drawUI_world };
-
-StateFunc D_80077788[] = { NULL, state_init_battle, state_step_battle, NULL, state_drawUI_battle };
-
-StateFunc D_8007779C[] = { NULL, state_init_end_battle, state_step_end_battle, NULL, state_drawUI_end_battle };
-
-StateFunc D_800777B0[] = { NULL, state_init_pause, state_step_pause, NULL, state_drawUI_pause };
-
-StateFunc D_800777C4[] = { NULL, state_init_unpause, state_step_unpause, NULL, state_drawUI_unpause };
-
-StateFunc D_800777D8[] = {
-    NULL, state_init_language_select, state_step_language_select, NULL, state_drawUI_language_select
+GameModeIncomplete GameModeStartup = {
+    MODE_FLAG_NONE,
+    state_init_startup,
+    state_step_startup,
+    NULL,
+    state_drawUI_startup,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
 };
 
-StateFunc D_800777EC[] = {
-    NULL, state_init_exit_language_select, state_step_exit_language_select, NULL, state_drawUI_exit_language_select
+GameModeIncomplete GameModeLogos = {
+    MODE_FLAG_NONE,
+    state_init_logos,
+    state_step_logos,
+    NULL,
+    state_drawUI_logos,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
 };
 
-StateFunc D_80077800[] = { NULL, state_init_file_select, state_step_file_select, NULL, state_drawUI_file_select };
-
-StateFunc D_80077814[] = {
-    NULL, state_init_exit_file_select, state_step_exit_file_select, NULL, state_drawUI_exit_file_select
+GameModeIncomplete GameModeTitleScreen = {
+    MODE_FLAG_NONE,
+    state_init_title_screen,
+    state_step_title_screen,
+    NULL,
+    state_drawUI_title_screen,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
 };
 
-StateFunc D_80077828[] = { NULL, state_init_intro, state_step_intro, NULL, state_drawUI_intro };
+GameModeIncomplete GameModeEnterDemoWorld = {
+    MODE_FLAG_NONE,
+    state_init_enter_demo,
+    state_step_enter_world,
+    NULL,
+    state_drawUI_enter_world,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
 
-StateFunc D_8007783C[] = { NULL, state_init_demo, state_step_demo, NULL, state_drawUI_demo };
+GameModeIncomplete GameModeChangeMap = {
+    MODE_FLAG_NONE,
+    state_init_change_map,
+    state_step_change_map,
+    NULL,
+    state_drawUI_change_map,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeGameOver = {
+    MODE_FLAG_NONE,
+    state_init_game_over,
+    state_step_game_over,
+    NULL,
+    state_drawUI_game_over,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeEnterWorld = {
+    MODE_FLAG_NONE,
+    state_init_enter_world,
+    state_step_enter_world,
+    NULL,
+    state_drawUI_enter_world,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeWorld = {
+    MODE_FLAG_NONE,
+    state_init_world,
+    state_step_world,
+    NULL,
+    state_drawUI_world,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeBattle = {
+    MODE_FLAG_NONE,
+    state_init_battle,
+    state_step_battle,
+    NULL,
+    state_drawUI_battle,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeEndBattle = {
+    MODE_FLAG_NONE,
+    state_init_end_battle,
+    state_step_end_battle,
+    NULL,
+    state_drawUI_end_battle,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModePause = {
+    MODE_FLAG_NONE,
+    state_init_pause,
+    state_step_pause,
+    NULL,
+    state_drawUI_pause,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeUnpause = {
+    MODE_FLAG_NONE,
+    state_init_unpause,
+    state_step_unpause,
+    NULL,
+    state_drawUI_unpause,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeLanguageSelect = {
+    MODE_FLAG_NONE,
+    state_init_language_select,
+    state_step_language_select,
+    NULL,
+    state_drawUI_language_select,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeEndLanguageSelect = {
+    MODE_FLAG_NONE,
+    state_init_exit_language_select,
+    state_step_exit_language_select,
+    NULL,
+    state_drawUI_exit_language_select,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeFileSelect = {
+    MODE_FLAG_NONE,
+    state_init_file_select,
+    state_step_file_select,
+    NULL,
+    state_drawUI_file_select,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeEndFileSelect = {
+    0,
+    state_init_exit_file_select,
+    state_step_exit_file_select,
+    NULL,
+    state_drawUI_exit_file_select,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeIntro = {
+    MODE_FLAG_NONE,
+    state_init_intro,
+    state_step_intro,
+    NULL,
+    state_drawUI_intro,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
+
+GameModeIncomplete GameModeDemo = {
+    MODE_FLAG_NONE,
+    state_init_demo,
+    state_step_demo,
+    NULL,
+    state_drawUI_demo,
+    #ifdef AVOID_UB
+    NULL,
+    #endif
+};
 
 GameMode* gameModeMap[] = {
-    (GameMode*) gameModeBlueprints,
-    (GameMode*) D_800776FC,
-    (GameMode*) D_80077710,
-    (GameMode*) D_80077724,
-    (GameMode*) D_80077774,
-    (GameMode*) D_80077738,
-    (GameMode*) D_8007774C,
-    (GameMode*) D_80077760,
-    (GameMode*) D_80077788,
-    (GameMode*) D_8007779C,
-    (GameMode*) D_800777B0,
-    (GameMode*) D_800777C4,
-    (GameMode*) D_800777D8,
-    (GameMode*) D_800777EC,
-    (GameMode*) D_80077800,
-    (GameMode*) D_80077814,
-    (GameMode*) D_80077828,
-    (GameMode*) D_8007783C,
-    NULL,
-    NULL,
+    (GameMode*) &GameModeStartup,
+    (GameMode*) &GameModeLogos,
+    (GameMode*) &GameModeTitleScreen,
+    (GameMode*) &GameModeEnterDemoWorld,
+    (GameMode*) &GameModeWorld,
+    (GameMode*) &GameModeChangeMap,
+    (GameMode*) &GameModeGameOver,
+    (GameMode*) &GameModeEnterWorld,
+    (GameMode*) &GameModeBattle,
+    (GameMode*) &GameModeEndBattle,
+    (GameMode*) &GameModePause,
+    (GameMode*) &GameModeUnpause,
+    (GameMode*) &GameModeLanguageSelect,
+    (GameMode*) &GameModeEndLanguageSelect,
+    (GameMode*) &GameModeFileSelect,
+    (GameMode*) &GameModeEndFileSelect,
+    (GameMode*) &GameModeIntro,
+    (GameMode*) &GameModeDemo,
 };
 
-SHIFT_BSS s16 gameMode;
-
-GameMode* set_game_mode_slot(s32 i, GameMode* mode);
+SHIFT_BSS s16 CurGameMode;
 
 void set_game_mode(s16 mode) {
-    gameMode = mode;
+    CurGameMode = mode;
     set_game_mode_slot(0, gameModeMap[mode]);
 }
 
 s16 get_game_mode(void) {
-    return gameMode;
+    return CurGameMode;
 }

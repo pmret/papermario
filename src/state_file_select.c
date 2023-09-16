@@ -5,6 +5,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 #include "model.h"
+#include "game_modes.h"
 
 #if VERSION_JP
 // TODO: split the filemenu segment
@@ -369,7 +370,7 @@ void state_step_exit_language_select(void) {
             update_encounters();
             update_effects();
             enable_player_input();
-            set_game_mode(GAME_MODE_CHANGE_MAP);
+            set_game_mode(GAME_MODE_WORLD);
             set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
             break;
         }
@@ -432,7 +433,7 @@ void state_step_exit_file_select(void) {
             }
             break;
         case 6:
-            set_game_mode(GAME_MODE_WORLD);
+            set_game_mode(GAME_MODE_ENTER_WORLD);
             break;
     }
 }

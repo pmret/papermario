@@ -1,6 +1,7 @@
 #include "common.h"
 #include "model.h"
 #include "evt.h"
+#include "game_modes.h"
 
 extern LavaReset* gLavaResetList;
 extern s32 LastSafeFloor;
@@ -721,7 +722,7 @@ void goto_map(Evt* script, s32 mode) {
     }
 
     set_map_transition_effect(mapTransitionEffect);
-    set_game_mode(GAME_MODE_UNUSED);
+    set_game_mode(GAME_MODE_CHANGE_MAP);
 }
 
 ApiStatus GotoMap(Evt* script, s32 isInitialCall) {
