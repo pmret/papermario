@@ -170,7 +170,7 @@ dlabel bEntityBlueprint
 dlabel D_801516FC
 .space 4
 
-dlabel gMainGameState
+dlabel gMainGameMode
 .space 0x00000040
 
 dlabel gCurrentTextureHeader

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "game_modes.h"
 
 SHIFT_BSS s32 D_800A0950;
 SHIFT_BSS s16 D_800A0954;

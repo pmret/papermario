@@ -2,6 +2,7 @@
 #include "nu/nusys.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "game_modes.h"
 
 #if VERSION_JP
 #define TITLE_WIDTH 272

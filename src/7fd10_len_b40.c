@@ -4,6 +4,7 @@
 #include "macros.h"
 #include "common.h"
 #include "sprite.h"
+#include "game_modes.h"
 #include "pause/pause_common.h"
 #include "world/partners.h"
 #include "world/partner/lakilester.h"

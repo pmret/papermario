@@ -5,6 +5,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 #include "model.h"
+#include "game_modes.h"
 
 #if VERSION_JP
 // TODO: split this segment
@@ -249,7 +250,7 @@ void state_step_unpause(void) {
             update_player();
             update_effects();
             enable_player_input();
-            set_game_mode(GAME_MODE_CHANGE_MAP);
+            set_game_mode(GAME_MODE_WORLD);
             break;
     }
 }

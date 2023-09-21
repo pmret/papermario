@@ -1,116 +1,123 @@
 #include "common.h"
+#include "game_modes.h"
 
-SHIFT_BSS GameMode gMainGameState[2]; // TODO rename
+SHIFT_BSS GameMode gMainGameMode[2];
 
-void state_delegate_NOP(void) {
+void mode_default_nop(void) {
 }
 
 void clear_game_modes(void) {
     GameMode* gameMode;
     s32 i;
 
-    for (gameMode = gMainGameState, i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        gameMode->flags = 0;
+    for (gameMode = gMainGameMode, i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        gameMode->flags = MODE_FLAG_NONE;
     }
 }
 
-GameMode* set_next_game_mode(GameMode* arg0) {
+
+// Function is unused.
+GameMode* set_next_game_mode(GameMode* mode) {
     GameMode* gameMode;
     s32 i;
 
-    for (gameMode = gMainGameState, i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        if (gameMode->flags == 0) {
+    for (gameMode = gMainGameMode, i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        if (gameMode->flags == MODE_FLAG_NONE) {
             break;
         }
     }
 
-    ASSERT(i < ARRAY_COUNT(gMainGameState));
+    ASSERT(i < ARRAY_COUNT(gMainGameMode));
 
-    gameMode->flags = 1 | 2;
-    gameMode->init = arg0->init;
-    gameMode->step = arg0->step;
-    gameMode->render = arg0->render;
-    gameMode->unk_0C = NULL;
+    gameMode->flags = MODE_FLAG_INITIALIZED | MODE_FLAG_STEP_NOT_DONE;
+    gameMode->init = mode->init;
+    gameMode->step = mode->step;
+    gameMode->render = mode->render;
+    gameMode->unusedFunc = NULL;
 
     if (gameMode->init == NULL) {
-        gameMode->init = state_delegate_NOP;
+        gameMode->init = mode_default_nop;
     }
     if (gameMode->step == NULL) {
-        gameMode->step = state_delegate_NOP;
+        gameMode->step = mode_default_nop;
     }
-    if (gameMode->unk_0C == NULL) {
-        gameMode->unk_0C = state_delegate_NOP;
+    if (gameMode->unusedFunc == NULL) {
+        gameMode->unusedFunc = mode_default_nop;
     }
     if (gameMode->render == NULL) {
-        gameMode->render = state_delegate_NOP;
+        gameMode->render = mode_default_nop;
     }
 
-    gameMode->renderAux = state_delegate_NOP;
+    gameMode->renderAux = mode_default_nop;
     gameMode->init();
 
     return gameMode;
 }
 
 GameMode* set_game_mode_slot(s32 i, GameMode* mode) {
-    GameMode* gameMode = &gMainGameState[i];
+    GameMode* gameMode = &gMainGameMode[i];
 
-    ASSERT(i < ARRAY_COUNT(gMainGameState));
+    ASSERT(i < ARRAY_COUNT(gMainGameMode));
 
-    gameMode->flags = 2 | 1;
+    gameMode->flags = MODE_FLAG_INITIALIZED | MODE_FLAG_STEP_NOT_DONE;
     gameMode->init = mode->init;
     gameMode->step = mode->step;
     gameMode->render = mode->render;
-    gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
-    if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = state_delegate_NOP;
-    if (gameMode->render == NULL) gameMode->render = state_delegate_NOP;
+    gameMode->unusedFunc = NULL;
+    if (gameMode->init == NULL) gameMode->init = mode_default_nop;
+    if (gameMode->step == NULL) gameMode->step = mode_default_nop;
+    if (gameMode->unusedFunc == NULL) gameMode->unusedFunc = mode_default_nop;
+    if (gameMode->render == NULL) gameMode->render = mode_default_nop;
 
-    gameMode->renderAux = state_delegate_NOP;
+    gameMode->renderAux = mode_default_nop;
     gameMode->init();
 
     return gameMode;
 }
 
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
-    GameMode* gameMode = &gMainGameState[i];
+    GameMode* gameMode = &gMainGameMode[i];
 
-    ASSERT(i < ARRAY_COUNT(gMainGameState));
+    ASSERT(i < ARRAY_COUNT(gMainGameMode));
 
     gameMode->renderAux = fn;
-    gameMode->flags |= 0x20;
+    gameMode->flags |= MODE_FLAG_RENDER_AUX_SET;
 
     if (fn == NULL) {
-        gameMode->renderAux = state_delegate_NOP;
+        gameMode->renderAux = mode_default_nop;
     }
 }
 
-void func_80112DD4(s32 i) {
-    gMainGameState[i].flags |= 4;
+// Unused
+void set_game_mode_flag_4(s32 i) {
+    gMainGameMode[i].flags |= MODE_FLAG_4;
 }
 
-void func_80112DFC(s32 i) {
-    gMainGameState[i].flags |= 8;
+// Unused
+void set_game_mode_flag_8(s32 i) {
+    gMainGameMode[i].flags |= MODE_FLAG_8;
 }
 
-void func_80112E24(s32 i) {
-    gMainGameState[i].flags &= ~0x1C;
+// Unused
+void clear_game_mode_unk_flags(s32 i) {
+    gMainGameMode[i].flags &= ~(MODE_FLAG_4 | MODE_FLAG_8 | MODE_FLAG_10);
 }
 
-void func_80112E4C(s32 i) {
-    gMainGameState[i].flags &= ~0x0C;
-    gMainGameState[i].flags |= 0x10;
+// Unused
+void set_game_mode_flag_10(s32 i) {
+    gMainGameMode[i].flags &= ~(MODE_FLAG_4 | MODE_FLAG_8);
+    gMainGameMode[i].flags |= MODE_FLAG_10;
 }
 
 void step_current_game_mode(void) {
-    GameMode* gameMode = gMainGameState;
+    GameMode* gameMode = gMainGameMode;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        if (gameMode->flags != 0) {
-            if (!(gameMode->flags & 4)) {
-                if (!(gameMode->flags & 8)) {
-                    gameMode->flags &= ~2;
+    for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        if (gameMode->flags != MODE_FLAG_NONE) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_8)) {
+                    gameMode->flags &= ~MODE_FLAG_STEP_NOT_DONE;
                     gameMode->step();
                 }
             }
@@ -118,15 +125,16 @@ void step_current_game_mode(void) {
     }
 }
 
+// Unused
 void state_do_unk(void) {
-    GameMode* gameMode = gMainGameState;
+    GameMode* gameMode = gMainGameMode;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        if (gameMode->flags != 0) {
-            if (!(gameMode->flags & 4)) {
-                if (!(gameMode->flags & 0x10)) {
-                    gameMode->unk_0C();
+    for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        if (gameMode->flags != MODE_FLAG_NONE) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_10)) {
+                    gameMode->unusedFunc();
                 }
             }
         }
@@ -134,13 +142,13 @@ void state_do_unk(void) {
 }
 
 void state_render_backUI(void) {
-    GameMode* gameMode = gMainGameState;
+    GameMode* gameMode = gMainGameMode;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        if (gameMode->flags != 0) {
-            if (!(gameMode->flags & 4)) {
-                if (!(gameMode->flags & 0x10)) {
+    for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        if (gameMode->flags != MODE_FLAG_NONE) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_10)) {
                     gameMode->render();
                 }
             }
@@ -149,14 +157,14 @@ void state_render_backUI(void) {
 }
 
 void state_render_frontUI(void) {
-    GameMode* gameMode = gMainGameState;
+    GameMode* gameMode = gMainGameMode;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        if (gameMode->flags != 0) {
-            if (!(gameMode->flags & 4)) {
-                if (!(gameMode->flags & 2)) {
-                    if (gameMode->flags & 0x20) {
+    for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        if (gameMode->flags != MODE_FLAG_NONE) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_STEP_NOT_DONE)) {
+                    if (gameMode->flags & MODE_FLAG_RENDER_AUX_SET) {
                         gameMode->renderAux();
                     }
                 }
@@ -165,12 +173,12 @@ void state_render_frontUI(void) {
     }
 
     // re-initialization needed - evidence of inlining? or just copy/pasting?
-    gameMode = &gMainGameState[0];
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
-        if (gameMode->flags != 0) {
-            if (!(gameMode->flags & 4)) {
-                if (!(gameMode->flags & 2)) {
-                    if (gameMode->flags & 0x10) {
+    gameMode = &gMainGameMode[0];
+    for (i = 0; i < ARRAY_COUNT(gMainGameMode); i++, gameMode++) {
+        if (gameMode->flags != MODE_FLAG_NONE) {
+            if (!(gameMode->flags & MODE_FLAG_4)) {
+                if (!(gameMode->flags & MODE_FLAG_STEP_NOT_DONE)) {
+                    if (gameMode->flags & MODE_FLAG_10) {
                         gameMode->render();
                     }
                 }

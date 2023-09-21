@@ -2,6 +2,7 @@
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "sprite.h"
+#include "game_modes.h"
 
 typedef struct DemoSceneData {
     /* 0x0 */ s16 sceneType;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game_modes.h"
 
 // args: start, end, duration, EasingType
 ApiStatus MakeLerp(Evt* script, s32 isInitialCall) {
