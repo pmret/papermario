@@ -974,7 +974,9 @@ void phys_main_collision_below(void) {
                     break;
             }
         } else if (!(playerStatus->flags & PS_FLAG_FLYING)
+#ifndef VERSION_JP
              && playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER
+#endif
         ) {
             if (outLength <= collHeightHalf + temp_f24 && hitDirX == 0.0f && hitDirZ == 0.0f) {
                 set_action_state(ACTION_STATE_STEP_DOWN);

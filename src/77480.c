@@ -17,6 +17,15 @@
 #define i_spy_VRAM (void*)0x802B7000
 #endif
 
+extern Addr i_spy_ROM_START;
+extern Addr i_spy_ROM_END;
+extern Addr pulse_stone_ROM_START;
+extern Addr pulse_stone_ROM_END;
+extern Addr speech_bubble_ROM_START;
+extern Addr speech_bubble_ROM_END;
+extern Addr inspect_icon_ROM_START;
+extern Addr inspect_icon_ROM_END;
+
 SHIFT_BSS UNK_FUN_PTR(ISpyNotificationCallback);
 SHIFT_BSS UNK_FUN_PTR(PulseStoneNotificationCallback);
 SHIFT_BSS UNK_FUN_PTR(TalkNotificationCallback);
