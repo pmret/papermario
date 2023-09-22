@@ -448,11 +448,14 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, hasm, bss2_2]
-    - [0x89140, bin]
+    - [auto, c, 891b0_len_fb0]
+    - [0x8A0F0, bin]
     - [0x91170, .data, npc_collision]
     - [auto, .data, world/actions]
     - [auto, .data, world/partners]
     - [0x91B40, bin]
+    - [0xA2AC0, .data, 891b0_len_fb0]
+    - [0xA2AF0, bin]
     - [0xA5250, .rodata, 77480]
     - [auto, .rodata, 7B440]
     - [auto, .rodata, 7bb60_len_41b0]
@@ -460,7 +463,8 @@ segments:
     - [auto, .rodata, 7fd10_len_b40]
     - [auto, .rodata, 80850_len_3060]
     - [auto, .rodata, world/partners]
-    - [0xA58E8, bin]
+    - [auto, .rodata, 891b0_len_fb0]
+    - [0xA5910, bin]
     - [0xa5f90]
 
   - name: engine4
