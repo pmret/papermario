@@ -375,7 +375,7 @@ extern EvtScript EVS_Enemy_DeathWithoutRemove;
 extern EvtScript EVS_Enemy_ScareAway;
 extern EvtScript EVS_Enemy_SpinSmashHit;
 extern EvtScript EVS_Enemy_FlipBackUp;
-extern EvtScript EVS_Enemy_JumpBack;
+extern EvtScript EVS_Enemy_Knockback;
 extern EvtScript EVS_Enemy_ReturnHome;
 extern EvtScript EVS_Enemy_Recover;
 extern EvtScript EVS_Enemy_HopHome;

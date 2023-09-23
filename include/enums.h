@@ -3547,7 +3547,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_SP_EVT_ACTIVE                 = 0x00000020, // enable special events (other than hit/death/immune?)
     BS_FLAGS1_40                            = 0x00000040,
     BS_FLAGS1_80                            = 0x00000080,
-    BS_FLAGS1_100                           = 0x00000100,
+    BS_FLAGS1_EXECUTING_MOVE                = 0x00000100,
     BS_FLAGS1_200                           = 0x00000200,
     BS_FLAGS1_400                           = 0x00000400, // UNUSED
     BS_FLAGS1_FORCE_HIT_IMMUNE              = 0x00000800,
@@ -3948,7 +3948,7 @@ enum BattlePlayerMenuSubstates {
     BTL_SUBSTATE_PLAYER_MENU_DIPPING_5                      = 74,
     BTL_SUBSTATE_PLAYER_MENU_DIPPING_6                      = 75,
     // Berserker
-    BTL_SUBSTATE_PLAYER_MENU_BERSERKER_1                    = 100,
+    BTL_SUBSTATE_PLAYER_MENU_BERSERKER_CHOOSE               = 100,
     // Strategies
     BTL_SUBSTATE_PLAYER_MENU_BUILD_STRATEGIES               = 200,
     BTL_SUBSTATE_PLAYER_MENU_STRATEGIES_2                   = 201,
@@ -4143,6 +4143,21 @@ enum BattleMoveSubmenuStates {
     BTL_SUBMENU_MOVES_STATE_UNK_28               = 40,
     BTL_SUBMENU_MOVES_STATE_UNK_29               = 41,
     BTL_SUBMENU_MOVES_STATE_UNK_2A               = 42,
+};
+
+
+enum BattleStratsSubmenuStates {
+    BTL_SUBMENU_STRATS_STATE_CANCEL               = -2, // go back
+    BTL_SUBMENU_STRATS_STATE_SELECT               = -1, // approve choice
+    BTL_SUBMENU_STRATS_STATE_INIT                 = 0,
+    BTL_SUBMENU_STRATS_STATE_CHOOSE               = 1,
+    BTL_SUBMENU_STRATS_STATE_UNK_10               = 10,
+    BTL_SUBMENU_STRATS_STATE_UNK_11               = 11,
+    BTL_SUBMENU_STRATS_STATE_UNK_20               = 20,
+    BTL_SUBMENU_STRATS_STATE_UNK_30               = 30,
+    BTL_SUBMENU_STRATS_STATE_ERROR_INIT           = 40,
+    BTL_SUBMENU_STRATS_STATE_ERROR_SHOW           = 41,
+    BTL_SUBMENU_STRATS_STATE_ERROR_DONE           = 42,
 };
 
 enum BattleMenuIndex {

@@ -1,10 +1,10 @@
 #include "area.h"
 
-extern ActorBlueprint A(bowser);
-extern ActorBlueprint A(bowser_intro);
-extern ActorBlueprint A(bowser_phase_1);
-extern ActorBlueprint A(bowser_phase_2);
-extern ActorBlueprint A(bowser_phase_3);
+extern ActorBlueprint A(unused_bowser);
+extern ActorBlueprint A(intro_bowser);
+extern ActorBlueprint A(hallway_bowser);
+extern ActorBlueprint A(final_bowser_1);
+extern ActorBlueprint A(final_bowser_2);
 
 extern Stage A(kpa_01);
 extern Stage A(kkj_01);
@@ -13,23 +13,23 @@ extern Stage A(kkj_02);
 Vec3i A(bowser_pos) = { 80, 0, -10 };
 
 Formation A(Formation_00) = {
-    ACTOR_BY_IDX(A(bowser), BTL_POS_GROUND_C, 10),
+    ACTOR_BY_IDX(A(unused_bowser), BTL_POS_GROUND_C, 10),
 };
 
 Formation A(Formation_01) = {
-    ACTOR_BY_IDX(A(bowser_intro), BTL_POS_GROUND_C, 10),
+    ACTOR_BY_IDX(A(intro_bowser), BTL_POS_GROUND_C, 10),
 };
 
 Formation A(Formation_02) = {
-    ACTOR_BY_IDX(A(bowser_phase_1), BTL_POS_GROUND_C, 10),
+    ACTOR_BY_IDX(A(hallway_bowser), BTL_POS_GROUND_C, 10),
 };
 
 Formation A(Formation_03) = {
-    ACTOR_BY_POS(A(bowser_phase_2), A(bowser_pos), 10),
+    ACTOR_BY_POS(A(final_bowser_1), A(bowser_pos), 10),
 };
 
 Formation A(Formation_04) = {
-    ACTOR_BY_POS(A(bowser_phase_3), A(bowser_pos), 10),
+    ACTOR_BY_POS(A(final_bowser_2), A(bowser_pos), 10),
 };
 
 BattleList A(Formations) = {

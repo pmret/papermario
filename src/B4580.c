@@ -45,8 +45,8 @@ extern Gfx D_8014BF40[];
 extern Gfx D_8014BF68[];
 
 AnimScript gAnimScriptDefault = {
-    AS_WAIT, 60,
-    AS_END,
+    as_Wait(60)
+    as_End
 };
 
 void appendGfx_animator_node(ModelAnimator*, AnimatorNode*, Matrix4f);

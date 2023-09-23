@@ -1,687 +1,687 @@
 #include "animation_script.h"
 
 AnimScript LavaPiranha_ModelScript_1C = {
-    AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-    AS_SET_POS, 1, 0, 0, 0,
-    AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 2, 69, -167, -21,
-    AS_SET_SCALE, 2, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 3, 69, -127, -21,
-    AS_SET_SCALE, 3, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 4, 68, -87, -21,
-    AS_SET_SCALE, 4, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 5, 69, -187, -20,
-    AS_SET_SCALE, 5, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 6, 69, -147, -20,
-    AS_SET_SCALE, 6, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 7, 68, -107, -20,
-    AS_SET_SCALE, 7, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-89.325),
-    AS_SET_POS, 8, 68, -71, -20,
-    AS_SET_SCALE, 8, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -158, -21,
-    AS_SET_POS, 3, 69, -118, -21,
-    AS_SET_POS, 4, 68, -78, -21,
-    AS_SET_POS, 5, 69, -178, -20,
-    AS_SET_POS, 6, 69, -138, -20,
-    AS_SET_POS, 7, 68, -98, -20,
-    AS_SET_POS, 8, 68, -63, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -150, -21,
-    AS_SET_POS, 3, 69, -110, -21,
-    AS_SET_POS, 4, 68, -70, -21,
-    AS_SET_POS, 5, 69, -170, -20,
-    AS_SET_POS, 6, 69, -130, -20,
-    AS_SET_POS, 7, 68, -90, -20,
-    AS_SET_POS, 8, 68, -54, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -141, -21,
-    AS_SET_POS, 3, 69, -101, -21,
-    AS_SET_POS, 4, 68, -61, -21,
-    AS_SET_POS, 5, 69, -161, -20,
-    AS_SET_POS, 6, 69, -121, -20,
-    AS_SET_POS, 7, 68, -81, -20,
-    AS_SET_POS, 8, 68, -46, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -133, -21,
-    AS_SET_POS, 3, 69, -93, -21,
-    AS_SET_POS, 4, 68, -53, -21,
-    AS_SET_POS, 5, 69, -153, -20,
-    AS_SET_POS, 6, 69, -113, -20,
-    AS_SET_POS, 7, 68, -73, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-89.335),
-    AS_SET_POS, 8, 68, -37, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -124, -21,
-    AS_SET_POS, 3, 69, -84, -21,
-    AS_SET_POS, 4, 68, -44, -21,
-    AS_SET_POS, 5, 69, -144, -20,
-    AS_SET_POS, 6, 69, -104, -20,
-    AS_SET_POS, 7, 68, -64, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-91.125),
-    AS_SET_POS, 8, 68, -28, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -116, -21,
-    AS_SET_POS, 3, 69, -76, -21,
-    AS_SET_POS, 4, 68, -36, -21,
-    AS_SET_POS, 5, 69, -136, -20,
-    AS_SET_POS, 6, 69, -96, -20,
-    AS_SET_POS, 7, 68, -56, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-98.715),
-    AS_SET_POS, 8, 67, -20, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -107, -21,
-    AS_SET_POS, 3, 69, -67, -21,
-    AS_SET_POS, 4, 68, -27, -21,
-    AS_SET_POS, 5, 69, -127, -20,
-    AS_SET_POS, 6, 69, -87, -20,
-    AS_SET_POS, 7, 68, -47, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-104.925),
-    AS_SET_POS, 8, 66, -11, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -98, -21,
-    AS_SET_POS, 3, 69, -58, -21,
-    AS_SET_POS, 4, 68, -18, -21,
-    AS_SET_POS, 5, 69, -118, -20,
-    AS_SET_POS, 6, 69, -78, -20,
-    AS_SET_POS, 7, 68, -38, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-100.83),
-    AS_SET_POS, 8, 66, -3, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -90, -21,
-    AS_SET_POS, 3, 69, -50, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(0.385),
-    AS_SET_POS, 4, 68, -10, -21,
-    AS_SET_POS, 5, 69, -110, -20,
-    AS_SET_POS, 6, 69, -70, -20,
-    AS_SET_POS, 7, 68, -30, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-91.8),
-    AS_SET_POS, 8, 68, 5, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -81, -21,
-    AS_SET_POS, 3, 69, -41, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-8.065),
-    AS_SET_POS, 4, 67, -1, -21,
-    AS_SET_POS, 5, 69, -101, -20,
-    AS_SET_POS, 6, 69, -61, -20,
-    AS_SET_POS, 7, 68, -21, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-75.76),
-    AS_SET_POS, 8, 73, 14, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -73, -21,
-    AS_SET_POS, 3, 69, -33, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-26.85),
-    AS_SET_POS, 4, 66, 7, -21,
-    AS_SET_POS, 5, 69, -93, -20,
-    AS_SET_POS, 6, 69, -53, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(0.655),
-    AS_SET_POS, 7, 68, -13, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-58.66),
-    AS_SET_POS, 8, 82, 21, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -64, -21,
-    AS_SET_POS, 3, 69, -24, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-28.775),
-    AS_SET_POS, 4, 67, 15, -21,
-    AS_SET_POS, 5, 69, -84, -20,
-    AS_SET_POS, 6, 69, -44, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-3.375),
-    AS_SET_POS, 7, 68, -4, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-57.41),
-    AS_SET_POS, 8, 84, 29, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -56, -21,
-    AS_SET_POS, 3, 69, -16, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(9.75),
-    AS_SET_POS, 4, 76, 22, -21,
-    AS_SET_POS, 5, 69, -76, -20,
-    AS_SET_POS, 6, 69, -36, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-20.71),
-    AS_SET_POS, 7, 67, 4, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-75.865),
-    AS_SET_POS, 8, 74, 38, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -47, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-0.69),
-    AS_SET_POS, 3, 68, -7, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(41.15),
-    AS_SET_POS, 4, 82, 30, -21,
-    AS_SET_POS, 5, 69, -67, -20,
-    AS_SET_POS, 6, 69, -27, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-32.41),
-    AS_SET_POS, 7, 66, 13, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-97.73),
-    AS_SET_POS, 8, 65, 40, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -38, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-14.16),
-    AS_SET_POS, 3, 67, 1, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(55.175),
-    AS_SET_POS, 4, 79, 42, -21,
-    AS_SET_POS, 5, 69, -58, -20,
-    AS_SET_POS, 6, 69, -18, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-5.99),
-    AS_SET_POS, 7, 73, 20, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-117.585),
-    AS_SET_POS, 8, 55, 48, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -30, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-31.335),
-    AS_SET_POS, 3, 66, 10, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(33.275),
-    AS_SET_POS, 4, 70, 44, -21,
-    AS_SET_POS, 5, 69, -50, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(0.385),
-    AS_SET_POS, 6, 69, -10, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(33.565),
-    AS_SET_POS, 7, 81, 27, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-120.835),
-    AS_SET_POS, 8, 53, 57, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 2, 69, -21, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-19.775),
-    AS_SET_POS, 3, 70, 18, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(0.995),
-    AS_SET_POS, 4, 62, 48, -21,
-    AS_SET_POS, 5, 69, -41, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-8.08),
-    AS_SET_POS, 6, 68, -1, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(53.395),
-    AS_SET_POS, 7, 82, 38, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-106.885),
-    AS_SET_POS, 8, 59, 64, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(0.655),
-    AS_SET_POS, 2, 69, -13, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(23.49),
-    AS_SET_POS, 3, 79, 24, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-37.79),
-    AS_SET_POS, 4, 54, 58, -21,
-    AS_SET_POS, 5, 69, -33, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-26.875),
-    AS_SET_POS, 6, 67, 7, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(41.51),
-    AS_SET_POS, 7, 73, 44, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-83.885),
-    AS_SET_POS, 8, 70, 69, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-2.62),
-    AS_SET_POS, 2, 69, -8, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(37.92),
-    AS_SET_POS, 3, 81, 30, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-43.115),
-    AS_SET_POS, 4, 57, 65, -21,
-    AS_SET_POS, 5, 69, -28, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-24.01),
-    AS_SET_POS, 6, 68, 12, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(16.685),
-    AS_SET_POS, 7, 67, 45, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-67.55),
-    AS_SET_POS, 8, 77, 75, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-16.575),
-    AS_SET_POS, 2, 68, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(44.26),
-    AS_SET_POS, 3, 76, 40, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-36.54),
-    AS_SET_POS, 4, 64, 73, -21,
-    AS_SET_POS, 5, 69, -19, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(3.555),
-    AS_SET_POS, 6, 75, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-21.1),
-    AS_SET_POS, 7, 58, 53, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-58.025),
-    AS_SET_POS, 8, 83, 85, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-18.6),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(24.51),
-    AS_SET_POS, 3, 71, 38, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-12.885),
-    AS_SET_POS, 4, 69, 74, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(-0.105),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(17.485),
-    AS_SET_POS, 6, 77, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-26.28),
-    AS_SET_POS, 7, 59, 56, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-71.065),
-    AS_SET_POS, 8, 77, 89, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-6.835),
-    AS_SET_POS, 2, 71, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(5.34),
-    AS_SET_POS, 3, 67, 38, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(8.65),
-    AS_SET_POS, 4, 74, 76, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(-5.685),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(20.26),
-    AS_SET_POS, 6, 75, 20, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-24.365),
-    AS_SET_POS, 7, 63, 58, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-87.74),
-    AS_SET_POS, 8, 70, 92, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(4.155),
-    AS_SET_POS, 2, 73, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-6.66),
-    AS_SET_POS, 3, 65, 38, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(16.725),
-    AS_SET_POS, 4, 74, 78, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(-10.7),
-    AS_SET_POS, 5, 68, -19, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(18.13),
-    AS_SET_POS, 6, 73, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-14.525),
-    AS_SET_POS, 7, 66, 58, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-99.06),
-    AS_SET_POS, 8, 65, 92, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(9.28),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-11.74),
-    AS_SET_POS, 3, 65, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(18.105),
-    AS_SET_POS, 4, 72, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(-8.305),
-    AS_SET_POS, 5, 69, -19, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(8.275),
-    AS_SET_POS, 6, 69, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-1.68),
-    AS_SET_POS, 7, 70, 58, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-103.205),
-    AS_SET_POS, 8, 62, 93, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(10.79),
-    AS_SET_POS, 2, 71, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-11.71),
-    AS_SET_POS, 3, 66, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(11.295),
-    AS_SET_POS, 4, 69, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(-2.515),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-1.33),
-    AS_SET_POS, 6, 66, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(6.55),
-    AS_SET_POS, 7, 71, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-97.715),
-    AS_SET_POS, 8, 64, 94, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(6.87),
-    AS_SET_POS, 2, 69, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-4.79),
-    AS_SET_POS, 3, 68, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(1.635),
-    AS_SET_POS, 4, 66, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(2.67),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-6.885),
-    AS_SET_POS, 6, 65, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(10.415),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-91.045),
-    AS_SET_POS, 8, 66, 95, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(0.98),
-    AS_SET_POS, 2, 67, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(1.995),
-    AS_SET_POS, 3, 70, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-4.74),
-    AS_SET_POS, 4, 65, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(6.545),
-    AS_SET_POS, 5, 70, -19, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-8.92),
-    AS_SET_POS, 6, 66, 20, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(9.6),
-    AS_SET_POS, 7, 70, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-85.18),
-    AS_SET_POS, 8, 68, 95, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-3.285),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(6.38),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-8.06),
-    AS_SET_POS, 4, 66, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(6.87),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-5.195),
-    AS_SET_POS, 6, 68, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(3.75),
-    AS_SET_POS, 7, 68, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-81.71),
-    AS_SET_POS, 8, 70, 95, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-5.505),
-    AS_SET_POS, 2, 68, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(8.355),
-    AS_SET_POS, 3, 70, 40, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-6.515),
-    AS_SET_POS, 4, 67, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(3.44),
-    AS_SET_POS, 5, 69, -19, -20,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(0.395),
-    AS_SET_POS, 6, 70, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-1.29),
-    AS_SET_POS, 7, 67, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-83.97),
-    AS_SET_POS, 8, 71, 95, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-5.385),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(7.43),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(-4.57),
-    AS_SET_POS, 4, 68, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(2.175),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(1.88),
-    AS_SET_POS, 6, 70, 20, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(-2.285),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-85.445),
-    AS_SET_POS, 8, 70, 95, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-6.465),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(7.26),
-    AS_SET_POS, 3, 71, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(0.5),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(2.135),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-0.62),
-    AS_SET_POS, 6, 71, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(0.255),
-    AS_SET_POS, 7, 68, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-79.1),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-8.385),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(6.8),
-    AS_SET_POS, 3, 74, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(10.185),
-    AS_SET_POS, 4, 70, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(2.035),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-5.365),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(5.12),
-    AS_SET_POS, 7, 71, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-67.49),
-    AS_SET_POS, 8, 69, 95, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-10.93),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(6.115),
-    AS_SET_POS, 3, 77, 39, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(23.375),
-    AS_SET_POS, 4, 72, 79, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(1.885),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-11.815),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(11.75),
-    AS_SET_POS, 7, 75, 59, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-51.83),
-    AS_SET_POS, 8, 68, 94, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-13.91),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(5.27),
-    AS_SET_POS, 3, 80, 38, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(38.96),
-    AS_SET_POS, 4, 74, 78, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(1.69),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-19.43),
-    AS_SET_POS, 6, 72, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(19.585),
-    AS_SET_POS, 7, 80, 58, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-33.33),
-    AS_SET_POS, 8, 66, 92, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-17.105),
-    AS_SET_POS, 2, 67, 0, -21,
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(4.335),
-    AS_SET_POS, 3, 84, 36, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(55.83),
-    AS_SET_POS, 4, 76, 76, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(1.485),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-27.67),
-    AS_SET_POS, 6, 73, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(28.065),
-    AS_SET_POS, 7, 84, 57, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(-13.195),
-    AS_SET_POS, 8, 65, 88, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-20.325),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(3.375),
-    AS_SET_POS, 3, 88, 35, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(72.875),
-    AS_SET_POS, 4, 78, 74, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(1.27),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-35.99),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(36.635),
-    AS_SET_POS, 7, 89, 55, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(7.35),
-    AS_SET_POS, 8, 64, 82, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-23.36),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(2.46),
-    AS_SET_POS, 3, 91, 32, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(88.99),
-    AS_SET_POS, 4, 80, 71, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(1.065),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-43.865),
-    AS_SET_POS, 6, 74, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(44.74),
-    AS_SET_POS, 7, 93, 54, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(27.11),
-    AS_SET_POS, 8, 63, 75, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-26.005),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(1.66),
-    AS_SET_POS, 3, 93, 30, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(103.065),
-    AS_SET_POS, 4, 81, 68, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.89),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-50.73),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(51.82),
-    AS_SET_POS, 7, 96, 52, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(44.87),
-    AS_SET_POS, 8, 63, 68, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-28.065),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(1.04),
-    AS_SET_POS, 3, 95, 28, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(114.0),
-    AS_SET_POS, 4, 82, 65, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.755),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-56.07),
-    AS_SET_POS, 6, 75, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(57.31),
-    AS_SET_POS, 7, 98, 50, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(59.415),
-    AS_SET_POS, 8, 64, 63, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-29.33),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 3, 96, 27, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(120.665),
-    AS_SET_POS, 4, 82, 63, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-59.33),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(60.67),
-    AS_SET_POS, 7, 99, 49, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(69.535),
-    AS_SET_POS, 8, 64, 59, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-30.05),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.465),
-    AS_SET_POS, 3, 97, 27, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(124.435),
-    AS_SET_POS, 4, 82, 62, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.62),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-61.17),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(62.565),
-    AS_SET_POS, 7, 100, 49, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(76.485),
-    AS_SET_POS, 8, 64, 57, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-30.62),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.3),
-    AS_SET_POS, 3, 97, 26, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(127.43),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.59),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-62.63),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(64.07),
-    AS_SET_POS, 7, 101, 48, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(82.28),
-    AS_SET_POS, 8, 64, 55, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.06),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.18),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(129.72),
-    AS_SET_POS, 4, 82, 61, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.56),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-63.75),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(65.215),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(86.895),
-    AS_SET_POS, 8, 64, 54, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.37),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.09),
-    AS_SET_POS, 3, 97, 25, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(131.355),
-    AS_SET_POS, 4, 82, 60, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.54),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-64.55),
-    AS_SET_POS, 6, 76, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(66.04),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(90.285),
-    AS_SET_POS, 8, 64, 53, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.57),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.035),
-    AS_SET_POS, 3, 98, 25, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(132.41),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.525),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-65.065),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(66.57),
-    AS_SET_POS, 7, 102, 48, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(92.41),
-    AS_SET_POS, 8, 64, 52, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.675),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.005),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(132.945),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.52),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-65.325),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(66.835),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(93.295),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.685),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(133.015),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-65.36),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(66.875),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(93.09),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.625),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.015),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(132.69),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-65.2),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(66.71),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(91.945),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.5),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.055),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(132.03),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.535),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-64.88),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(66.38),
-    AS_SET_POS, 7, 101, 48, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(90.025),
-    AS_SET_POS, 8, 64, 53, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.325),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.105),
-    AS_SET_POS, 3, 97, 25, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(131.105),
-    AS_SET_POS, 4, 82, 61, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.545),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-64.425),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(65.915),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(87.465),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-31.105),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.165),
-    AS_SET_POS, 3, 97, 26, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(129.965),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.555),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-63.87),
-    AS_SET_POS, 6, 75, 19, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(65.345),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(84.435),
-    AS_SET_POS, 8, 65, 54, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-30.86),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.235),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(128.68),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.57),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-63.245),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(64.695),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(81.065),
-    AS_SET_POS, 8, 65, 55, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-30.6),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.31),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(127.32),
-    AS_SET_POS, 4, 82, 62, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.59),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-62.575),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(64.01),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(77.525),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-30.335),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.385),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(125.93),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.605),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-61.9),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(63.31),
-    AS_SET_POS, 7, 100, 49, -20,
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(73.97),
-    AS_SET_POS, 8, 65, 56, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-30.075),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.455),
-    AS_SET_POS, 3, 97, 27, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(124.585),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.62),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-61.24),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(62.635),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(70.54),
-    AS_SET_POS, 8, 65, 57, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-29.84),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.52),
-    AS_SET_POS, 3, 96, 27, -21,
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(123.34),
-    AS_SET_POS, 4, 82, 63, -21,
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.635),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-60.63),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(62.01),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(67.39),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-29.63),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.58),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(122.265),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.65),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-60.11),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(61.47),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(64.68),
-    AS_SET_POS, 8, 65, 58, -20,
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-29.47),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.625),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(121.42),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.66),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-59.695),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(61.045),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(62.555),
-    AS_WAIT, 1,
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-29.36),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.66),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(120.865),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.665),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(-59.42),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(60.765),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(61.165),
-    AS_WAIT, 1,
-AS_END_LOOP,
-AS_END,
+    as_SetRotation(1, 0.0, 0.0, 0.0)
+    as_SetPos(1, 0, 0, 0)
+    as_SetScale(1, 1.0, 1.0, 1.0)
+    as_SetRotation(2, 0.0, 0.0, 0.67)
+    as_SetPos(2, 69, -167, -21)
+    as_SetScale(2, 1.0, 1.0, 1.0)
+    as_SetRotation(3, 0.0, 0.0, 0.67)
+    as_SetPos(3, 69, -127, -21)
+    as_SetScale(3, 1.0, 1.0, 1.0)
+    as_SetRotation(4, 0.0, 0.0, 0.67)
+    as_SetPos(4, 68, -87, -21)
+    as_SetScale(4, 1.0, 1.0, 1.0)
+    as_SetRotation(5, 0.0, 0.0, 0.67)
+    as_SetPos(5, 69, -187, -20)
+    as_SetScale(5, 1.0, 1.0, 1.0)
+    as_SetRotation(6, 0.0, 0.0, 0.67)
+    as_SetPos(6, 69, -147, -20)
+    as_SetScale(6, 1.0, 1.0, 1.0)
+    as_SetRotation(7, 0.0, 0.0, 0.67)
+    as_SetPos(7, 68, -107, -20)
+    as_SetScale(7, 1.0, 1.0, 1.0)
+    as_SetRotation(8, 0.0, 0.0, -89.325)
+    as_SetPos(8, 68, -71, -20)
+    as_SetScale(8, 1.0, 1.0, 1.0)
+    as_Wait(1)
+    as_SetPos(2, 69, -158, -21)
+    as_SetPos(3, 69, -118, -21)
+    as_SetPos(4, 68, -78, -21)
+    as_SetPos(5, 69, -178, -20)
+    as_SetPos(6, 69, -138, -20)
+    as_SetPos(7, 68, -98, -20)
+    as_SetPos(8, 68, -63, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -150, -21)
+    as_SetPos(3, 69, -110, -21)
+    as_SetPos(4, 68, -70, -21)
+    as_SetPos(5, 69, -170, -20)
+    as_SetPos(6, 69, -130, -20)
+    as_SetPos(7, 68, -90, -20)
+    as_SetPos(8, 68, -54, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -141, -21)
+    as_SetPos(3, 69, -101, -21)
+    as_SetPos(4, 68, -61, -21)
+    as_SetPos(5, 69, -161, -20)
+    as_SetPos(6, 69, -121, -20)
+    as_SetPos(7, 68, -81, -20)
+    as_SetPos(8, 68, -46, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -133, -21)
+    as_SetPos(3, 69, -93, -21)
+    as_SetPos(4, 68, -53, -21)
+    as_SetPos(5, 69, -153, -20)
+    as_SetPos(6, 69, -113, -20)
+    as_SetPos(7, 68, -73, -20)
+    as_SetRotation(8, 0.0, 0.0, -89.335)
+    as_SetPos(8, 68, -37, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -124, -21)
+    as_SetPos(3, 69, -84, -21)
+    as_SetPos(4, 68, -44, -21)
+    as_SetPos(5, 69, -144, -20)
+    as_SetPos(6, 69, -104, -20)
+    as_SetPos(7, 68, -64, -20)
+    as_SetRotation(8, 0.0, 0.0, -91.125)
+    as_SetPos(8, 68, -28, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -116, -21)
+    as_SetPos(3, 69, -76, -21)
+    as_SetPos(4, 68, -36, -21)
+    as_SetPos(5, 69, -136, -20)
+    as_SetPos(6, 69, -96, -20)
+    as_SetPos(7, 68, -56, -20)
+    as_SetRotation(8, 0.0, 0.0, -98.715)
+    as_SetPos(8, 67, -20, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -107, -21)
+    as_SetPos(3, 69, -67, -21)
+    as_SetPos(4, 68, -27, -21)
+    as_SetPos(5, 69, -127, -20)
+    as_SetPos(6, 69, -87, -20)
+    as_SetPos(7, 68, -47, -20)
+    as_SetRotation(8, 0.0, 0.0, -104.925)
+    as_SetPos(8, 66, -11, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -98, -21)
+    as_SetPos(3, 69, -58, -21)
+    as_SetPos(4, 68, -18, -21)
+    as_SetPos(5, 69, -118, -20)
+    as_SetPos(6, 69, -78, -20)
+    as_SetPos(7, 68, -38, -20)
+    as_SetRotation(8, 0.0, 0.0, -100.83)
+    as_SetPos(8, 66, -3, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -90, -21)
+    as_SetPos(3, 69, -50, -21)
+    as_SetRotation(4, 0.0, 0.0, 0.385)
+    as_SetPos(4, 68, -10, -21)
+    as_SetPos(5, 69, -110, -20)
+    as_SetPos(6, 69, -70, -20)
+    as_SetPos(7, 68, -30, -20)
+    as_SetRotation(8, 0.0, 0.0, -91.8)
+    as_SetPos(8, 68, 5, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -81, -21)
+    as_SetPos(3, 69, -41, -21)
+    as_SetRotation(4, 0.0, 0.0, -8.065)
+    as_SetPos(4, 67, -1, -21)
+    as_SetPos(5, 69, -101, -20)
+    as_SetPos(6, 69, -61, -20)
+    as_SetPos(7, 68, -21, -20)
+    as_SetRotation(8, 0.0, 0.0, -75.76)
+    as_SetPos(8, 73, 14, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -73, -21)
+    as_SetPos(3, 69, -33, -21)
+    as_SetRotation(4, 0.0, 0.0, -26.85)
+    as_SetPos(4, 66, 7, -21)
+    as_SetPos(5, 69, -93, -20)
+    as_SetPos(6, 69, -53, -20)
+    as_SetRotation(7, 0.0, 0.0, 0.655)
+    as_SetPos(7, 68, -13, -20)
+    as_SetRotation(8, 0.0, 0.0, -58.66)
+    as_SetPos(8, 82, 21, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -64, -21)
+    as_SetPos(3, 69, -24, -21)
+    as_SetRotation(4, 0.0, 0.0, -28.775)
+    as_SetPos(4, 67, 15, -21)
+    as_SetPos(5, 69, -84, -20)
+    as_SetPos(6, 69, -44, -20)
+    as_SetRotation(7, 0.0, 0.0, -3.375)
+    as_SetPos(7, 68, -4, -20)
+    as_SetRotation(8, 0.0, 0.0, -57.41)
+    as_SetPos(8, 84, 29, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -56, -21)
+    as_SetPos(3, 69, -16, -21)
+    as_SetRotation(4, 0.0, 0.0, 9.75)
+    as_SetPos(4, 76, 22, -21)
+    as_SetPos(5, 69, -76, -20)
+    as_SetPos(6, 69, -36, -20)
+    as_SetRotation(7, 0.0, 0.0, -20.71)
+    as_SetPos(7, 67, 4, -20)
+    as_SetRotation(8, 0.0, 0.0, -75.865)
+    as_SetPos(8, 74, 38, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -47, -21)
+    as_SetRotation(3, 0.0, 0.0, -0.69)
+    as_SetPos(3, 68, -7, -21)
+    as_SetRotation(4, 0.0, 0.0, 41.15)
+    as_SetPos(4, 82, 30, -21)
+    as_SetPos(5, 69, -67, -20)
+    as_SetPos(6, 69, -27, -20)
+    as_SetRotation(7, 0.0, 0.0, -32.41)
+    as_SetPos(7, 66, 13, -20)
+    as_SetRotation(8, 0.0, 0.0, -97.73)
+    as_SetPos(8, 65, 40, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -38, -21)
+    as_SetRotation(3, 0.0, 0.0, -14.16)
+    as_SetPos(3, 67, 1, -21)
+    as_SetRotation(4, 0.0, 0.0, 55.175)
+    as_SetPos(4, 79, 42, -21)
+    as_SetPos(5, 69, -58, -20)
+    as_SetPos(6, 69, -18, -20)
+    as_SetRotation(7, 0.0, 0.0, -5.99)
+    as_SetPos(7, 73, 20, -20)
+    as_SetRotation(8, 0.0, 0.0, -117.585)
+    as_SetPos(8, 55, 48, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -30, -21)
+    as_SetRotation(3, 0.0, 0.0, -31.335)
+    as_SetPos(3, 66, 10, -21)
+    as_SetRotation(4, 0.0, 0.0, 33.275)
+    as_SetPos(4, 70, 44, -21)
+    as_SetPos(5, 69, -50, -20)
+    as_SetRotation(6, 0.0, 0.0, 0.385)
+    as_SetPos(6, 69, -10, -20)
+    as_SetRotation(7, 0.0, 0.0, 33.565)
+    as_SetPos(7, 81, 27, -20)
+    as_SetRotation(8, 0.0, 0.0, -120.835)
+    as_SetPos(8, 53, 57, -20)
+    as_Wait(1)
+    as_SetPos(2, 69, -21, -21)
+    as_SetRotation(3, 0.0, 0.0, -19.775)
+    as_SetPos(3, 70, 18, -21)
+    as_SetRotation(4, 0.0, 0.0, 0.995)
+    as_SetPos(4, 62, 48, -21)
+    as_SetPos(5, 69, -41, -20)
+    as_SetRotation(6, 0.0, 0.0, -8.08)
+    as_SetPos(6, 68, -1, -20)
+    as_SetRotation(7, 0.0, 0.0, 53.395)
+    as_SetPos(7, 82, 38, -20)
+    as_SetRotation(8, 0.0, 0.0, -106.885)
+    as_SetPos(8, 59, 64, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, 0.655)
+    as_SetPos(2, 69, -13, -21)
+    as_SetRotation(3, 0.0, 0.0, 23.49)
+    as_SetPos(3, 79, 24, -21)
+    as_SetRotation(4, 0.0, 0.0, -37.79)
+    as_SetPos(4, 54, 58, -21)
+    as_SetPos(5, 69, -33, -20)
+    as_SetRotation(6, 0.0, 0.0, -26.875)
+    as_SetPos(6, 67, 7, -20)
+    as_SetRotation(7, 0.0, 0.0, 41.51)
+    as_SetPos(7, 73, 44, -20)
+    as_SetRotation(8, 0.0, 0.0, -83.885)
+    as_SetPos(8, 70, 69, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -2.62)
+    as_SetPos(2, 69, -8, -21)
+    as_SetRotation(3, 0.0, 0.0, 37.92)
+    as_SetPos(3, 81, 30, -21)
+    as_SetRotation(4, 0.0, 0.0, -43.115)
+    as_SetPos(4, 57, 65, -21)
+    as_SetPos(5, 69, -28, -20)
+    as_SetRotation(6, 0.0, 0.0, -24.01)
+    as_SetPos(6, 68, 12, -20)
+    as_SetRotation(7, 0.0, 0.0, 16.685)
+    as_SetPos(7, 67, 45, -20)
+    as_SetRotation(8, 0.0, 0.0, -67.55)
+    as_SetPos(8, 77, 75, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -16.575)
+    as_SetPos(2, 68, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, 44.26)
+    as_SetPos(3, 76, 40, -21)
+    as_SetRotation(4, 0.0, 0.0, -36.54)
+    as_SetPos(4, 64, 73, -21)
+    as_SetPos(5, 69, -19, -20)
+    as_SetRotation(6, 0.0, 0.0, 3.555)
+    as_SetPos(6, 75, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, -21.1)
+    as_SetPos(7, 58, 53, -20)
+    as_SetRotation(8, 0.0, 0.0, -58.025)
+    as_SetPos(8, 83, 85, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -18.6)
+    as_SetRotation(3, 0.0, 0.0, 24.51)
+    as_SetPos(3, 71, 38, -21)
+    as_SetRotation(4, 0.0, 0.0, -12.885)
+    as_SetPos(4, 69, 74, -21)
+    as_SetRotation(5, 0.0, 0.0, -0.105)
+    as_SetRotation(6, 0.0, 0.0, 17.485)
+    as_SetPos(6, 77, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, -26.28)
+    as_SetPos(7, 59, 56, -20)
+    as_SetRotation(8, 0.0, 0.0, -71.065)
+    as_SetPos(8, 77, 89, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -6.835)
+    as_SetPos(2, 71, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, 5.34)
+    as_SetPos(3, 67, 38, -21)
+    as_SetRotation(4, 0.0, 0.0, 8.65)
+    as_SetPos(4, 74, 76, -21)
+    as_SetRotation(5, 0.0, 0.0, -5.685)
+    as_SetRotation(6, 0.0, 0.0, 20.26)
+    as_SetPos(6, 75, 20, -20)
+    as_SetRotation(7, 0.0, 0.0, -24.365)
+    as_SetPos(7, 63, 58, -20)
+    as_SetRotation(8, 0.0, 0.0, -87.74)
+    as_SetPos(8, 70, 92, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, 4.155)
+    as_SetPos(2, 73, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, -6.66)
+    as_SetPos(3, 65, 38, -21)
+    as_SetRotation(4, 0.0, 0.0, 16.725)
+    as_SetPos(4, 74, 78, -21)
+    as_SetRotation(5, 0.0, 0.0, -10.7)
+    as_SetPos(5, 68, -19, -20)
+    as_SetRotation(6, 0.0, 0.0, 18.13)
+    as_SetPos(6, 73, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, -14.525)
+    as_SetPos(7, 66, 58, -20)
+    as_SetRotation(8, 0.0, 0.0, -99.06)
+    as_SetPos(8, 65, 92, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, 9.28)
+    as_SetRotation(3, 0.0, 0.0, -11.74)
+    as_SetPos(3, 65, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, 18.105)
+    as_SetPos(4, 72, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, -8.305)
+    as_SetPos(5, 69, -19, -20)
+    as_SetRotation(6, 0.0, 0.0, 8.275)
+    as_SetPos(6, 69, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, -1.68)
+    as_SetPos(7, 70, 58, -20)
+    as_SetRotation(8, 0.0, 0.0, -103.205)
+    as_SetPos(8, 62, 93, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, 10.79)
+    as_SetPos(2, 71, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, -11.71)
+    as_SetPos(3, 66, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, 11.295)
+    as_SetPos(4, 69, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, -2.515)
+    as_SetRotation(6, 0.0, 0.0, -1.33)
+    as_SetPos(6, 66, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 6.55)
+    as_SetPos(7, 71, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -97.715)
+    as_SetPos(8, 64, 94, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, 6.87)
+    as_SetPos(2, 69, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, -4.79)
+    as_SetPos(3, 68, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, 1.635)
+    as_SetPos(4, 66, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 2.67)
+    as_SetRotation(6, 0.0, 0.0, -6.885)
+    as_SetPos(6, 65, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 10.415)
+    as_SetRotation(8, 0.0, 0.0, -91.045)
+    as_SetPos(8, 66, 95, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, 0.98)
+    as_SetPos(2, 67, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, 1.995)
+    as_SetPos(3, 70, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, -4.74)
+    as_SetPos(4, 65, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 6.545)
+    as_SetPos(5, 70, -19, -20)
+    as_SetRotation(6, 0.0, 0.0, -8.92)
+    as_SetPos(6, 66, 20, -20)
+    as_SetRotation(7, 0.0, 0.0, 9.6)
+    as_SetPos(7, 70, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -85.18)
+    as_SetPos(8, 68, 95, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -3.285)
+    as_SetRotation(3, 0.0, 0.0, 6.38)
+    as_SetRotation(4, 0.0, 0.0, -8.06)
+    as_SetPos(4, 66, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 6.87)
+    as_SetRotation(6, 0.0, 0.0, -5.195)
+    as_SetPos(6, 68, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 3.75)
+    as_SetPos(7, 68, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -81.71)
+    as_SetPos(8, 70, 95, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -5.505)
+    as_SetPos(2, 68, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, 8.355)
+    as_SetPos(3, 70, 40, -21)
+    as_SetRotation(4, 0.0, 0.0, -6.515)
+    as_SetPos(4, 67, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 3.44)
+    as_SetPos(5, 69, -19, -20)
+    as_SetRotation(6, 0.0, 0.0, 0.395)
+    as_SetPos(6, 70, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, -1.29)
+    as_SetPos(7, 67, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -83.97)
+    as_SetPos(8, 71, 95, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -5.385)
+    as_SetRotation(3, 0.0, 0.0, 7.43)
+    as_SetRotation(4, 0.0, 0.0, -4.57)
+    as_SetPos(4, 68, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 2.175)
+    as_SetRotation(6, 0.0, 0.0, 1.88)
+    as_SetPos(6, 70, 20, -20)
+    as_SetRotation(7, 0.0, 0.0, -2.285)
+    as_SetRotation(8, 0.0, 0.0, -85.445)
+    as_SetPos(8, 70, 95, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -6.465)
+    as_SetRotation(3, 0.0, 0.0, 7.26)
+    as_SetPos(3, 71, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, 0.5)
+    as_SetRotation(5, 0.0, 0.0, 2.135)
+    as_SetRotation(6, 0.0, 0.0, -0.62)
+    as_SetPos(6, 71, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 0.255)
+    as_SetPos(7, 68, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -79.1)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -8.385)
+    as_SetRotation(3, 0.0, 0.0, 6.8)
+    as_SetPos(3, 74, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, 10.185)
+    as_SetPos(4, 70, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 2.035)
+    as_SetRotation(6, 0.0, 0.0, -5.365)
+    as_SetRotation(7, 0.0, 0.0, 5.12)
+    as_SetPos(7, 71, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -67.49)
+    as_SetPos(8, 69, 95, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -10.93)
+    as_SetRotation(3, 0.0, 0.0, 6.115)
+    as_SetPos(3, 77, 39, -21)
+    as_SetRotation(4, 0.0, 0.0, 23.375)
+    as_SetPos(4, 72, 79, -21)
+    as_SetRotation(5, 0.0, 0.0, 1.885)
+    as_SetRotation(6, 0.0, 0.0, -11.815)
+    as_SetRotation(7, 0.0, 0.0, 11.75)
+    as_SetPos(7, 75, 59, -20)
+    as_SetRotation(8, 0.0, 0.0, -51.83)
+    as_SetPos(8, 68, 94, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -13.91)
+    as_SetRotation(3, 0.0, 0.0, 5.27)
+    as_SetPos(3, 80, 38, -21)
+    as_SetRotation(4, 0.0, 0.0, 38.96)
+    as_SetPos(4, 74, 78, -21)
+    as_SetRotation(5, 0.0, 0.0, 1.69)
+    as_SetRotation(6, 0.0, 0.0, -19.43)
+    as_SetPos(6, 72, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 19.585)
+    as_SetPos(7, 80, 58, -20)
+    as_SetRotation(8, 0.0, 0.0, -33.33)
+    as_SetPos(8, 66, 92, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -17.105)
+    as_SetPos(2, 67, 0, -21)
+    as_SetRotation(3, 0.0, 0.0, 4.335)
+    as_SetPos(3, 84, 36, -21)
+    as_SetRotation(4, 0.0, 0.0, 55.83)
+    as_SetPos(4, 76, 76, -21)
+    as_SetRotation(5, 0.0, 0.0, 1.485)
+    as_SetRotation(6, 0.0, 0.0, -27.67)
+    as_SetPos(6, 73, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 28.065)
+    as_SetPos(7, 84, 57, -20)
+    as_SetRotation(8, 0.0, 0.0, -13.195)
+    as_SetPos(8, 65, 88, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -20.325)
+    as_SetRotation(3, 0.0, 0.0, 3.375)
+    as_SetPos(3, 88, 35, -21)
+    as_SetRotation(4, 0.0, 0.0, 72.875)
+    as_SetPos(4, 78, 74, -21)
+    as_SetRotation(5, 0.0, 0.0, 1.27)
+    as_SetRotation(6, 0.0, 0.0, -35.99)
+    as_SetRotation(7, 0.0, 0.0, 36.635)
+    as_SetPos(7, 89, 55, -20)
+    as_SetRotation(8, 0.0, 0.0, 7.35)
+    as_SetPos(8, 64, 82, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -23.36)
+    as_SetRotation(3, 0.0, 0.0, 2.46)
+    as_SetPos(3, 91, 32, -21)
+    as_SetRotation(4, 0.0, 0.0, 88.99)
+    as_SetPos(4, 80, 71, -21)
+    as_SetRotation(5, 0.0, 0.0, 1.065)
+    as_SetRotation(6, 0.0, 0.0, -43.865)
+    as_SetPos(6, 74, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 44.74)
+    as_SetPos(7, 93, 54, -20)
+    as_SetRotation(8, 0.0, 0.0, 27.11)
+    as_SetPos(8, 63, 75, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -26.005)
+    as_SetRotation(3, 0.0, 0.0, 1.66)
+    as_SetPos(3, 93, 30, -21)
+    as_SetRotation(4, 0.0, 0.0, 103.065)
+    as_SetPos(4, 81, 68, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.89)
+    as_SetRotation(6, 0.0, 0.0, -50.73)
+    as_SetRotation(7, 0.0, 0.0, 51.82)
+    as_SetPos(7, 96, 52, -20)
+    as_SetRotation(8, 0.0, 0.0, 44.87)
+    as_SetPos(8, 63, 68, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -28.065)
+    as_SetRotation(3, 0.0, 0.0, 1.04)
+    as_SetPos(3, 95, 28, -21)
+    as_SetRotation(4, 0.0, 0.0, 114.0)
+    as_SetPos(4, 82, 65, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.755)
+    as_SetRotation(6, 0.0, 0.0, -56.07)
+    as_SetPos(6, 75, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 57.31)
+    as_SetPos(7, 98, 50, -20)
+    as_SetRotation(8, 0.0, 0.0, 59.415)
+    as_SetPos(8, 64, 63, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -29.33)
+    as_SetRotation(3, 0.0, 0.0, 0.67)
+    as_SetPos(3, 96, 27, -21)
+    as_SetRotation(4, 0.0, 0.0, 120.665)
+    as_SetPos(4, 82, 63, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.67)
+    as_SetRotation(6, 0.0, 0.0, -59.33)
+    as_SetRotation(7, 0.0, 0.0, 60.67)
+    as_SetPos(7, 99, 49, -20)
+    as_SetRotation(8, 0.0, 0.0, 69.535)
+    as_SetPos(8, 64, 59, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -30.05)
+    as_SetRotation(3, 0.0, 0.0, 0.465)
+    as_SetPos(3, 97, 27, -21)
+    as_SetRotation(4, 0.0, 0.0, 124.435)
+    as_SetPos(4, 82, 62, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.62)
+    as_SetRotation(6, 0.0, 0.0, -61.17)
+    as_SetRotation(7, 0.0, 0.0, 62.565)
+    as_SetPos(7, 100, 49, -20)
+    as_SetRotation(8, 0.0, 0.0, 76.485)
+    as_SetPos(8, 64, 57, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -30.62)
+    as_SetRotation(3, 0.0, 0.0, 0.3)
+    as_SetPos(3, 97, 26, -21)
+    as_SetRotation(4, 0.0, 0.0, 127.43)
+    as_SetRotation(5, 0.0, 0.0, 0.59)
+    as_SetRotation(6, 0.0, 0.0, -62.63)
+    as_SetRotation(7, 0.0, 0.0, 64.07)
+    as_SetPos(7, 101, 48, -20)
+    as_SetRotation(8, 0.0, 0.0, 82.28)
+    as_SetPos(8, 64, 55, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.06)
+    as_SetRotation(3, 0.0, 0.0, 0.18)
+    as_SetRotation(4, 0.0, 0.0, 129.72)
+    as_SetPos(4, 82, 61, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.56)
+    as_SetRotation(6, 0.0, 0.0, -63.75)
+    as_SetRotation(7, 0.0, 0.0, 65.215)
+    as_SetRotation(8, 0.0, 0.0, 86.895)
+    as_SetPos(8, 64, 54, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.37)
+    as_SetRotation(3, 0.0, 0.0, 0.09)
+    as_SetPos(3, 97, 25, -21)
+    as_SetRotation(4, 0.0, 0.0, 131.355)
+    as_SetPos(4, 82, 60, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.54)
+    as_SetRotation(6, 0.0, 0.0, -64.55)
+    as_SetPos(6, 76, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 66.04)
+    as_SetRotation(8, 0.0, 0.0, 90.285)
+    as_SetPos(8, 64, 53, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.57)
+    as_SetRotation(3, 0.0, 0.0, 0.035)
+    as_SetPos(3, 98, 25, -21)
+    as_SetRotation(4, 0.0, 0.0, 132.41)
+    as_SetRotation(5, 0.0, 0.0, 0.525)
+    as_SetRotation(6, 0.0, 0.0, -65.065)
+    as_SetRotation(7, 0.0, 0.0, 66.57)
+    as_SetPos(7, 102, 48, -20)
+    as_SetRotation(8, 0.0, 0.0, 92.41)
+    as_SetPos(8, 64, 52, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.675)
+    as_SetRotation(3, 0.0, 0.0, 0.005)
+    as_SetRotation(4, 0.0, 0.0, 132.945)
+    as_SetRotation(5, 0.0, 0.0, 0.52)
+    as_SetRotation(6, 0.0, 0.0, -65.325)
+    as_SetRotation(7, 0.0, 0.0, 66.835)
+    as_SetRotation(8, 0.0, 0.0, 93.295)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.685)
+    as_SetRotation(3, 0.0, 0.0, 0.0)
+    as_SetRotation(4, 0.0, 0.0, 133.015)
+    as_SetRotation(6, 0.0, 0.0, -65.36)
+    as_SetRotation(7, 0.0, 0.0, 66.875)
+    as_SetRotation(8, 0.0, 0.0, 93.09)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.625)
+    as_SetRotation(3, 0.0, 0.0, 0.015)
+    as_SetRotation(4, 0.0, 0.0, 132.69)
+    as_SetRotation(6, 0.0, 0.0, -65.2)
+    as_SetRotation(7, 0.0, 0.0, 66.71)
+    as_SetRotation(8, 0.0, 0.0, 91.945)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.5)
+    as_SetRotation(3, 0.0, 0.0, 0.055)
+    as_SetRotation(4, 0.0, 0.0, 132.03)
+    as_SetRotation(5, 0.0, 0.0, 0.535)
+    as_SetRotation(6, 0.0, 0.0, -64.88)
+    as_SetRotation(7, 0.0, 0.0, 66.38)
+    as_SetPos(7, 101, 48, -20)
+    as_SetRotation(8, 0.0, 0.0, 90.025)
+    as_SetPos(8, 64, 53, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.325)
+    as_SetRotation(3, 0.0, 0.0, 0.105)
+    as_SetPos(3, 97, 25, -21)
+    as_SetRotation(4, 0.0, 0.0, 131.105)
+    as_SetPos(4, 82, 61, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.545)
+    as_SetRotation(6, 0.0, 0.0, -64.425)
+    as_SetRotation(7, 0.0, 0.0, 65.915)
+    as_SetRotation(8, 0.0, 0.0, 87.465)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -31.105)
+    as_SetRotation(3, 0.0, 0.0, 0.165)
+    as_SetPos(3, 97, 26, -21)
+    as_SetRotation(4, 0.0, 0.0, 129.965)
+    as_SetRotation(5, 0.0, 0.0, 0.555)
+    as_SetRotation(6, 0.0, 0.0, -63.87)
+    as_SetPos(6, 75, 19, -20)
+    as_SetRotation(7, 0.0, 0.0, 65.345)
+    as_SetRotation(8, 0.0, 0.0, 84.435)
+    as_SetPos(8, 65, 54, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -30.86)
+    as_SetRotation(3, 0.0, 0.0, 0.235)
+    as_SetRotation(4, 0.0, 0.0, 128.68)
+    as_SetRotation(5, 0.0, 0.0, 0.57)
+    as_SetRotation(6, 0.0, 0.0, -63.245)
+    as_SetRotation(7, 0.0, 0.0, 64.695)
+    as_SetRotation(8, 0.0, 0.0, 81.065)
+    as_SetPos(8, 65, 55, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -30.6)
+    as_SetRotation(3, 0.0, 0.0, 0.31)
+    as_SetRotation(4, 0.0, 0.0, 127.32)
+    as_SetPos(4, 82, 62, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.59)
+    as_SetRotation(6, 0.0, 0.0, -62.575)
+    as_SetRotation(7, 0.0, 0.0, 64.01)
+    as_SetRotation(8, 0.0, 0.0, 77.525)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -30.335)
+    as_SetRotation(3, 0.0, 0.0, 0.385)
+    as_SetRotation(4, 0.0, 0.0, 125.93)
+    as_SetRotation(5, 0.0, 0.0, 0.605)
+    as_SetRotation(6, 0.0, 0.0, -61.9)
+    as_SetRotation(7, 0.0, 0.0, 63.31)
+    as_SetPos(7, 100, 49, -20)
+    as_SetRotation(8, 0.0, 0.0, 73.97)
+    as_SetPos(8, 65, 56, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -30.075)
+    as_SetRotation(3, 0.0, 0.0, 0.455)
+    as_SetPos(3, 97, 27, -21)
+    as_SetRotation(4, 0.0, 0.0, 124.585)
+    as_SetRotation(5, 0.0, 0.0, 0.62)
+    as_SetRotation(6, 0.0, 0.0, -61.24)
+    as_SetRotation(7, 0.0, 0.0, 62.635)
+    as_SetRotation(8, 0.0, 0.0, 70.54)
+    as_SetPos(8, 65, 57, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -29.84)
+    as_SetRotation(3, 0.0, 0.0, 0.52)
+    as_SetPos(3, 96, 27, -21)
+    as_SetRotation(4, 0.0, 0.0, 123.34)
+    as_SetPos(4, 82, 63, -21)
+    as_SetRotation(5, 0.0, 0.0, 0.635)
+    as_SetRotation(6, 0.0, 0.0, -60.63)
+    as_SetRotation(7, 0.0, 0.0, 62.01)
+    as_SetRotation(8, 0.0, 0.0, 67.39)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -29.63)
+    as_SetRotation(3, 0.0, 0.0, 0.58)
+    as_SetRotation(4, 0.0, 0.0, 122.265)
+    as_SetRotation(5, 0.0, 0.0, 0.65)
+    as_SetRotation(6, 0.0, 0.0, -60.11)
+    as_SetRotation(7, 0.0, 0.0, 61.47)
+    as_SetRotation(8, 0.0, 0.0, 64.68)
+    as_SetPos(8, 65, 58, -20)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -29.47)
+    as_SetRotation(3, 0.0, 0.0, 0.625)
+    as_SetRotation(4, 0.0, 0.0, 121.42)
+    as_SetRotation(5, 0.0, 0.0, 0.66)
+    as_SetRotation(6, 0.0, 0.0, -59.695)
+    as_SetRotation(7, 0.0, 0.0, 61.045)
+    as_SetRotation(8, 0.0, 0.0, 62.555)
+    as_Wait(1)
+    as_SetRotation(2, 0.0, 0.0, -29.36)
+    as_SetRotation(3, 0.0, 0.0, 0.66)
+    as_SetRotation(4, 0.0, 0.0, 120.865)
+    as_SetRotation(5, 0.0, 0.0, 0.665)
+    as_SetRotation(6, 0.0, 0.0, -59.42)
+    as_SetRotation(7, 0.0, 0.0, 60.765)
+    as_SetRotation(8, 0.0, 0.0, 61.165)
+    as_Wait(1)
+    as_Restart
+    as_End
 };

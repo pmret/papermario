@@ -103,7 +103,7 @@ EvtScript N(EVS_JumpSupport_D) = {
 
 EvtScript N(EVS_JumpSupport_E) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
@@ -132,7 +132,7 @@ EvtScript N(EVS_JumpSupport_E) = {
 
 EvtScript N(EVS_JumpSupport_F) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -161,7 +161,7 @@ EvtScript N(EVS_JumpSupport_F) = {
 
 EvtScript N(EVS_JumpSupport_G) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -190,7 +190,7 @@ EvtScript N(EVS_JumpSupport_G) = {
 
 EvtScript N(EVS_JumpSupport_H) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -219,7 +219,7 @@ EvtScript N(EVS_JumpSupport_H) = {
 
 EvtScript N(EVS_JumpSupport_I) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
@@ -266,7 +266,7 @@ EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)
     EVT_WAIT(20)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)

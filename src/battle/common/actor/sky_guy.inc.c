@@ -708,7 +708,7 @@ EvtScript N(EVS_Ground_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Red_Anim0C)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(EVS_Ground_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)

@@ -400,7 +400,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_EMBER_FLY | SOUND_ID_TRIGGER_CHANGE_SOUND)
@@ -534,7 +534,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_SET(LVar0, PRT_MAIN)
             EVT_SET(LVar1, ANIM_LavaBubble_Blue_Anim04)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_WAIT(5)
             EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_END_CASE_GROUP

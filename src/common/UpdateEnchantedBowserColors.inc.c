@@ -7,13 +7,13 @@
 #define BOWSER_FLAG_TOCHECK ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED
 #endif
 
-API_CALLABLE(N(UnkBowserFunc1)) {
+API_CALLABLE(N(UpdateEnchantedBowserColors)) {
     Actor* actor = get_actor(script->owner1.actorID);
     ActorPart* part;
     s32 i, j;
-    u8 sp20[20];
-    u8 sp38[20];
-    u8 sp50[20];
+    u8 colR[20];
+    u8 colG[20];
+    u8 colB[20];
     s32 colorRGBA;
     s32 temp;
     s32 lol;
@@ -40,15 +40,15 @@ API_CALLABLE(N(UnkBowserFunc1)) {
     }
 
     for (j = 0; j < 20; j++) {
-        sp20[j] = (cosine(script->functionTemp[1] + j * 25 + 120) + 1.0) * 56.0;
-        sp38[j] = (cosine(script->functionTemp[1] + j * 25 + 60) + 1.0) * 56.0;
-        sp50[j] = (cosine(script->functionTemp[1] + j * 25 + 180) + 1.0) * 56.0;
+        colR[j] = (cosine(script->functionTemp[1] + j * 25 + 120) + 1.0) * 56.0;
+        colG[j] = (cosine(script->functionTemp[1] + j * 25 + 60) + 1.0) * 56.0;
+        colB[j] = (cosine(script->functionTemp[1] + j * 25 + 180) + 1.0) * 56.0;
     }
 
     if (part->eventFlags & BOWSER_FLAG_TOCHECK) {
 
         for (j = 0; j < 20; j++) {
-            colorRGBA = sp20[j] << 0x18 | sp38[j] << 0x10 | sp50[j] << 8 | 0xFF;
+            colorRGBA = colR[j] << 0x18 | colG[j] << 0x10 | colB[j] << 8 | 0xFF;
             for (i = 0; i < 10; i++) {
                 set_npc_imgfx_comp(part->spriteInstanceID, i, IMGFX_COLOR_BUF_SET_MODULATE, j, colorRGBA, 0, 255, 0);
             }

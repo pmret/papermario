@@ -209,7 +209,7 @@ void squirt_appendGfx(void* effect) {
         } else {
             var_f22 = ((f32) data->unk_1A8[i] * 0.5) + 1.0;
             if (var_f22 > 30.0f) {
-                do { } while (0); // TODO required to match
+                do {} while (0); // TODO required to match
                 var_f22 = 30.0f;
             }
             cnA = (D_E00B2BA0[i] * data->unk_1D8[i]) / 255;

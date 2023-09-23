@@ -775,7 +775,7 @@ EvtScript N(EVS_HuffNPuff_Death) = {
     EVT_USE_ARRAY(N(RuffPuffDataBuffer))
     EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVar0)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_100)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_EXECUTING_MOVE)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -857,7 +857,7 @@ EvtScript N(EVS_HuffNPuff_BurnDeath) = {
     EVT_USE_ARRAY(N(RuffPuffDataBuffer))
     EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVar0)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_100)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_EXECUTING_MOVE)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF

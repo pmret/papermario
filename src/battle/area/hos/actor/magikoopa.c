@@ -478,7 +478,7 @@ EvtScript N(EVS_RemoveClone) = {
     EVT_IF_FLAG(LVarA, DAMAGE_TYPE_MULTIPLE_POPUPS)
         EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVarA)
-        EVT_IF_FLAG(LVarA, BS_FLAGS1_100)
+        EVT_IF_FLAG(LVarA, BS_FLAGS1_EXECUTING_MOVE)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF

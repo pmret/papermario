@@ -250,7 +250,7 @@ void btl_state_update_normal_start(void) {
             battleStatus->initBattleCallback = NULL;
             battleStatus->curSubmenu = 0;
             battleStatus->unk_49 = 0;
-            battleStatus->unk_4A = 0;
+            battleStatus->curPartnerSubmenu = 0;
             battleStatus->unk_4B = 0;
             battleStatus->totalStarPoints = 0;
             battleStatus->pendingStarPoints = 0;
@@ -2683,7 +2683,7 @@ void btl_state_update_player_move(void) {
             gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
             gBattleStatus.flags1 &= ~BS_FLAGS1_10000;
             increment_status_bar_disabled();
-            gBattleStatus.flags1 |= BS_FLAGS1_100;
+            gBattleStatus.flags1 |= BS_FLAGS1_EXECUTING_MOVE;
             reset_all_actor_sounds(player);
             battleStatus->battlePhase = PHASE_EXECUTE_ACTION;
             if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
@@ -2705,7 +2705,7 @@ void btl_state_update_player_move(void) {
                 player->takeTurnScript = NULL;
             }
 
-            gBattleStatus.flags1 &= ~BS_FLAGS1_100;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_EXECUTING_MOVE;
 
              // wait for player battle event script to finish
             if (player->handleEventScript != NULL && does_script_exist(player->handleEventScriptID)) {
@@ -3189,7 +3189,7 @@ void btl_state_update_partner_move(void) {
             }
 
             increment_status_bar_disabled();
-            gBattleStatus.flags1 |= BS_FLAGS1_100;
+            gBattleStatus.flags1 |= BS_FLAGS1_EXECUTING_MOVE;
             reset_actor_turn_info();
             reset_all_actor_sounds(partner);
             battleStatus->battlePhase = PHASE_EXECUTE_ACTION;
@@ -3206,7 +3206,7 @@ void btl_state_update_partner_move(void) {
                 }
                 partner->takeTurnScript = NULL;
             }
-            gBattleStatus.flags1 &= ~BS_FLAGS1_100;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_EXECUTING_MOVE;
 
             if (partner->handleEventScript != NULL && does_script_exist(partner->handleEventScriptID)) {
                 break;
@@ -3587,7 +3587,7 @@ void btl_state_update_enemy_move(void) {
             battleStatus->blockResult = BLOCK_RESULT_NONE;
             battleStatus->curDamageSource = DMG_SRC_DEFAULT;
             reset_actor_turn_info();
-            gBattleStatus.flags1 |= BS_FLAGS1_100;
+            gBattleStatus.flags1 |= BS_FLAGS1_EXECUTING_MOVE;
             player->statusAfflicted = 0;
             if (partner != NULL) {
                 partner->statusAfflicted = 0;
@@ -3670,58 +3670,62 @@ void btl_state_update_enemy_move(void) {
                 }
             }
 
-            if (!waitingForEnemyScript || (gBattleStatus.flags1 & BS_FLAGS1_YIELD_TURN)) {
-                gBattleStatus.flags1 &= ~BS_FLAGS1_100;
-                gBattleStatus.flags2 &= ~BS_FLAGS2_4000;
-                if (btl_check_enemies_defeated()) {
-                    return;
-                }
+            if (waitingForEnemyScript && !(gBattleStatus.flags1 & BS_FLAGS1_YIELD_TURN)) {
+                break;
+            }
 
-                if (battleStatus->stateFreezeCount == 0) {
-                    if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
-                        btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
-                    } else {
-                        btl_update_ko_status();
-                        if (player->statusAfflicted != 0) {
-                            player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
-                            if (partner != NULL) {
-                                partner->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
-                            }
-                            btl_cam_use_preset(BTL_CAM_PLAYER_STATUS_AFFLICTED);
+            gBattleStatus.flags1 &= ~BS_FLAGS1_EXECUTING_MOVE;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_4000;
+            if (btl_check_enemies_defeated()) {
+                return;
+            }
 
-                            switch (player->statusAfflicted) {
-                                case STATUS_KEY_DIZZY:
-                                    messageIndex = BTL_MSG_PLAYER_DAZED;
-                                    break;
-                                case STATUS_KEY_SLEEP:
-                                    messageIndex = BTL_MSG_PLAYER_ASLEEP;
-                                    break;
-                                case STATUS_KEY_FROZEN:
-                                    messageIndex = BTL_MSG_PLAYER_FROZEN;
-                                    break;
-                                case STATUS_KEY_POISON:
-                                    messageIndex = BTL_MSG_PLAYER_POISONED;
-                                    break;
-                                case STATUS_KEY_SHRINK:
-                                    messageIndex = BTL_MSG_PLAYER_SHRUNK;
-                                    break;
-                                case STATUS_KEY_PARALYZE:
-                                    messageIndex = BTL_MSG_PLAYER_PARALYZED;
-                                    break;
-                                default:
-                                    messageIndex = 0;
-                                    gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_CHECK_PARTNER;
-                                    break;
-                            }
-                            btl_show_battle_message(messageIndex, 60);
-                            player->statusAfflicted = 0;
-                            gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PLAYER_POPUP_DONE;
+            if (battleStatus->stateFreezeCount != 0) {
+                break;
+            }
+
+            if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {
+                btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
+            } else {
+                btl_update_ko_status();
+                if (player->statusAfflicted != 0) {
+                    player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
+                    if (partner != NULL) {
+                        partner->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
+                    }
+                    btl_cam_use_preset(BTL_CAM_PLAYER_STATUS_AFFLICTED);
+
+                    switch (player->statusAfflicted) {
+                        case STATUS_KEY_DIZZY:
+                            messageIndex = BTL_MSG_PLAYER_DAZED;
                             break;
-                        } else {
+                        case STATUS_KEY_SLEEP:
+                            messageIndex = BTL_MSG_PLAYER_ASLEEP;
+                            break;
+                        case STATUS_KEY_FROZEN:
+                            messageIndex = BTL_MSG_PLAYER_FROZEN;
+                            break;
+                        case STATUS_KEY_POISON:
+                            messageIndex = BTL_MSG_PLAYER_POISONED;
+                            break;
+                        case STATUS_KEY_SHRINK:
+                            messageIndex = BTL_MSG_PLAYER_SHRUNK;
+                            break;
+                        case STATUS_KEY_PARALYZE:
+                            messageIndex = BTL_MSG_PLAYER_PARALYZED;
+                            break;
+                        default:
+                            messageIndex = 0;
                             gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_CHECK_PARTNER;
                             break;
-                        }
                     }
+                    btl_show_battle_message(messageIndex, 60);
+                    player->statusAfflicted = 0;
+                    gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PLAYER_POPUP_DONE;
+                    break;
+                } else {
+                    gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_CHECK_PARTNER;
+                    break;
                 }
             }
             break;
@@ -3896,7 +3900,7 @@ void btl_state_update_first_strike(void) {
                 player->takeTurnScript = NULL;
             }
 
-            gBattleStatus.flags1 &= ~BS_FLAGS1_100;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_EXECUTING_MOVE;
 
             // wait for player handle event script
             if (player->handleEventScript != NULL && does_script_exist(player->handleEventScriptID)) {

@@ -14,7 +14,7 @@ extern EvtScript N(EVS_UseMove_ImplC);
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_AUTO_SUCCEED_ACTION, TRUE)
     EVT_CALL(ShowActionHud, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, TRUE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)

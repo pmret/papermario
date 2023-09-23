@@ -112,10 +112,10 @@ SimpleWindowUpdateData gSimpleWindowUpdates[] = {
         .darkening = 100,
         .opacity = 0
     },
-    { },
-    { },
-    { },
-    { }
+    {},
+    {},
+    {},
+    {}
 };
 
 u8 gWindowAppearScales[] = { 50, 80, 100, 105, 100 };

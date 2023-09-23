@@ -313,7 +313,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_FLYING)
             EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_Paragoomba_Dizzy)
             EVT_EXEC_WAIT(N(EVS_Paragoomba_GoHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)

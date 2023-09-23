@@ -248,9 +248,9 @@ void water_block_appendGfx(void *effect) {
         f32 z = var_s6->unk_02 * 10;
 
         if (y != 0.0f) {
-            f32 dx = sin_deg(temp_s0 + func_E0200044(1000, (x + (y * 10.0f) + (z * 100.0f)))) * 20.0f;
-            f32 dy = sin_deg(temp_s0 + func_E0200044(1000, ((x * 10.0f) + (y * 100.0f) + z))) * 20.0f;
-            f32 dz = sin_deg(temp_s0 + func_E0200044(1000, ((x * 100.0f) + y + (z * 10.0f)))) * 20.0f;
+            f32 dx = sin_deg(temp_s0 + effect_simple_rand(1000, (x + (y * 10.0f) + (z * 100.0f)))) * 20.0f;
+            f32 dy = sin_deg(temp_s0 + effect_simple_rand(1000, ((x * 10.0f) + (y * 100.0f) + z))) * 20.0f;
+            f32 dz = sin_deg(temp_s0 + effect_simple_rand(1000, ((x * 100.0f) + y + (z * 10.0f)))) * 20.0f;
             x += dx;
             y += dy;
             z += dz;

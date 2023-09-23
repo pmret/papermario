@@ -7,7 +7,7 @@
 BSS EffectInstance* N(TorchFlame);
 
 API_CALLABLE(N(CreateTorchFX)) {
-    fx_flame(1, -110.0f, 80.0f, -146.0f, 0.3f, &N(TorchFlame));
+    fx_flame(FX_FLAME_RED, -110.0f, 80.0f, -146.0f, 0.3f, &N(TorchFlame));
     return ApiStatus_DONE2;
 }
 

@@ -1954,7 +1954,7 @@ EvtScript EVS_Enemy_FlipBackUp = {
     EVT_END
 };
 
-EvtScript EVS_Enemy_JumpBack = {
+EvtScript EVS_Enemy_Knockback = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

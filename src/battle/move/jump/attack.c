@@ -33,7 +33,7 @@ extern EvtScript N(EVS_802A4018);
 EvtScript N(EVS_UseMove0) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(GetBattleFlags2, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_200)
+    EVT_IF_FLAG(LVar0, BS_FLAGS2_200)
         EVT_EXEC_WAIT(N(EVS_802A4018))
         EVT_RETURN
     EVT_END_IF

@@ -124,6 +124,7 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall);
 ApiStatus ResetCam(Evt* script, s32 isInitialCall);
 ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall);
 ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall);
+ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall);
 ApiStatus SetAnimatedModelRootPosition(Evt* script, s32 isInitialCall);
 ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall);
 ApiStatus DeleteNpc(Evt* script, s32 isInitialCall);

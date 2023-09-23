@@ -123,7 +123,7 @@ void windy_leaves_update(EffectInstance* effect) {
                     part->unk_14 += -0.05f;
                     part->unk_10 *= 0.92;
                 }
-                part->unk_1C += func_E0200044(50, temp_a1 + i * 20) - 25;
+                part->unk_1C += effect_simple_rand(50, temp_a1 + i * 20) - 25;
                 part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
                 part->unk_20 += cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
@@ -167,7 +167,7 @@ void windy_leaves_update(EffectInstance* effect) {
                 part->unk_14 += -0.05f;
                 part->unk_10 *= 0.8464;
                 part->unk_14 += -0.05f;
-                part->unk_1C += func_E0200044(50, temp_a1 + i * 20) - 25;
+                part->unk_1C += effect_simple_rand(50, temp_a1 + i * 20) - 25;
                 part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
                 part->unk_20 += cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
@@ -207,7 +207,7 @@ void windy_leaves_update(EffectInstance* effect) {
             break;
         case 2:
             for (i = 1; i < effect->numParts; i++, part++) {
-                part->unk_1C += func_E0200044(50,  temp_a1 + i * 20) - 25;
+                part->unk_1C += effect_simple_rand(50,  temp_a1 + i * 20) - 25;
                 part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
                 part->unk_20 += cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
