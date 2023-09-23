@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "npc.h"
+#include "game_modes.h"
 
 void state_world_draw_aux_ui(void);
 

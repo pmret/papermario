@@ -4,6 +4,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 #include "nu/nusys.h"
+#include "game_modes.h"
 
 void appendGfx_intro_logos(void);
 

@@ -5,6 +5,7 @@
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "model.h"
+#include "game_modes.h"
 
 extern StageListRow* gCurrentStagePtr;
 
@@ -2144,7 +2145,7 @@ void btl_state_update_end_battle(void) {
                 gGameStatusPtr->areaID = areaID;
                 gGameStatusPtr->mapID = mapID;
                 gGameStatusPtr->entryID = gv_01_ENTRY_0;
-                set_game_mode(GAME_MODE_ENTER_WORLD);
+                set_game_mode(GAME_MODE_GAME_OVER);
             } else {
                 btl_set_state(BATTLE_STATE_0);
                 gLastDrawBattleState = gBattleState;

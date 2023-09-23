@@ -223,7 +223,7 @@ dlabel D_800A08E8
 dlabel D_800A08EC
 .space 4
 
-dlabel gameMode
+dlabel CurGameMode
 .space 0x00000010
 
 dlabel D_800A0900

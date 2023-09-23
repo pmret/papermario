@@ -1,6 +1,7 @@
 #include "gv_01.h"
 #include "sprite.h"
 #include "hud_element.h"
+#include "game_modes.h"
 #include "sprite/player.h"
 
 #include "world/common/entity/Pipe.inc.c"

@@ -3,6 +3,7 @@
 #include "hud_element.h"
 #include "fio.h"
 #include "ld_addrs.h"
+#include "game_modes.h"
 
 extern HudScript HES_AnimatedCursorHand;
 

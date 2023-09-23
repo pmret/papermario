@@ -10,8 +10,6 @@
 #define UNK_FUN_PTR(name) void(*name)(void)
 #define UNK_ARGS
 
-typedef void (*StateFunc)(void);
-
 typedef char* (*PrintCallback)(void*, const char*, u32);
 
 /// Linker symbol address, as in `ld_addrs.h`.

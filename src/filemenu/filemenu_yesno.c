@@ -1,6 +1,7 @@
 #include "common.h"
 #include "filemenu.h"
 #include "fio.h"
+#include "game_modes.h"
 
 #if VERSION_IQUE
 #define DELETE_FILE_DELETE_X            20

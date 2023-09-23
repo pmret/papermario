@@ -3491,27 +3491,6 @@ enum EffectGfxDataFlags {
 
 #include "move_enum.h"
 
-enum GameModeIDs {
-    GAME_MODE_STARTUP                     = 0x00000000,
-    GAME_MODE_LOGOS                       = 0x00000001,
-    GAME_MODE_TITLE_SCREEN                = 0x00000002,
-    GAME_MODE_ENTER_DEMO_WORLD            = 0x00000003,
-    GAME_MODE_CHANGE_MAP                  = 0x00000004,
-    GAME_MODE_UNUSED                      = 0x00000005,
-    GAME_MODE_ENTER_WORLD                 = 0x00000006,
-    GAME_MODE_WORLD                       = 0x00000007,
-    GAME_MODE_BATTLE                      = 0x00000008,
-    GAME_MODE_END_BATTLE                  = 0x00000009,
-    GAME_MODE_PAUSE                       = 0x0000000A,
-    GAME_MODE_UNPAUSE                     = 0x0000000B,
-    GAME_MODE_LANGUAGE_SELECT             = 0x0000000C,
-    GAME_MODE_END_LANGUAGE_SELECT         = 0x0000000D,
-    GAME_MODE_FILE_SELECT                 = 0x0000000E,
-    GAME_MODE_END_FILE_SELECT             = 0x0000000F,
-    GAME_MODE_INTRO                       = 0x00000010,
-    GAME_MODE_DEMO                        = 0x00000011,
-};
-
 enum DemoState {
     DEMO_STATE_NONE         = 0,
     DEMO_STATE_ACTIVE       = 1,

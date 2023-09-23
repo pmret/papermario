@@ -2,6 +2,7 @@
 #include "hud_element.h"
 #include "fio.h"
 #include "sprite.h"
+#include "game_modes.h"
 
 void state_init_startup(void) {
     gOverrideFlags |= GLOBAL_OVERRIDES_8;
