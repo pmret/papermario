@@ -53,8 +53,8 @@ u8 ActorTypesShyGuyBoss[] = {
 };
 
 u8 ActorTypesBowser[] = {
-    ACTOR_TYPE_BOWSER_PHASE_2,
-    ACTOR_TYPE_BOWSER_PHASE_3,
+    ACTOR_TYPE_FINAL_BOWSER_1,
+    ACTOR_TYPE_FINAL_BOWSER_2,
     ACTOR_TYPE_LIST_END
 };
 

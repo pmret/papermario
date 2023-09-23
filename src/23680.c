@@ -77,7 +77,7 @@ void spawn_drops(Enemy* enemy) {
 
             if (totalWeight >= dropCount) {
                 itemToDrop = drops->itemDrops[3 * i];
-                do { } while (0); // TODO required to match
+                do {} while (0); // TODO required to match
                 break;
             }
         }

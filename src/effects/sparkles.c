@@ -183,7 +183,7 @@ void sparkles_update(EffectInstance *effect) {
                     part->unk_08 = part->unk_14 * D_E0022D14[unk_20 - 1] * 0.01 + part->unk_18;
                     part->unk_1C = (f32) D_E0022D1C[unk_20 - 1] * 0.01;
                 } else {
-                    angle = func_E0200044(360, i + 177);
+                    angle = effect_simple_rand(360, i + 177);
                     temp_f20 = (i & 3) * 0.5f + 1.0f;
                     firstPart->unk_00 = 10;
                     part->unk_10 = temp_f20 * sin_deg(angle);

@@ -488,7 +488,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET(LVar1, FORM_ANIM_HURT)
             EVT_EXEC_WAIT(N(EVS_GetFormAnims))
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FLYING, 0, 0, 0)
@@ -498,7 +498,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET(LVar1, FORM_ANIM_HURT)
             EVT_EXEC_WAIT(N(EVS_GetFormAnims))
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)

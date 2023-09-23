@@ -481,7 +481,7 @@ void btl_draw_ui(void) {
     s32 changed = FALSE;
     s32 state;
 
-    do { } while (0); // TODO required to match (probably can be removed with some sort of control flow inversion)
+    do {} while (0); // TODO required to match (probably can be removed with some sort of control flow inversion)
 
     // do not draw UI during the frame of a state change
     state = gBattleState;

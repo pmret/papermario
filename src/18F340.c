@@ -846,7 +846,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_END_SWITCH
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(func_802693F0)
     EVT_CALL(ForceDisablePlayerBlurImmediately)
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)

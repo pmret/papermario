@@ -6117,10 +6117,10 @@ segments:
     vram: 0x80218000
     subsegments:
     - [0x6F2090, c, actor/bowser]
-    - [0x6F21B0, c, actor/bowser_intro]
-    - [0x6F2F90, c, actor/bowser_phase_1]
-    - [0x6F4350, c, actor/bowser_phase_2]
-    - [0x6F59E0, c, actor/bowser_phase_3]
+    - [0x6F21B0, c, actor/intro_bowser]
+    - [0x6F2F90, c, actor/hallway_bowser]
+    - [0x6F4350, c, actor/final_bowser_1]
+    - [0x6F59E0, c, actor/final_bowser_2]
     - [0x6F7320, c, stage/kpa_01]
     - [0x6F7320, c, stage/kkj_01]
     - [0x6F7320, c, stage/kkj_02]

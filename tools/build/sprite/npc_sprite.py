@@ -66,7 +66,7 @@ def from_dir(
     for Palette in SpriteSheet.findall("./PaletteList/Palette"):
         if asset_stack is not None and load_images:
             img_name = Palette.attrib["src"]
-            img_path = str(get_asset_path(sprite_dir / img_name, asset_stack))
+            img_path = str(get_asset_path(sprite_dir / "palettes" / img_name, asset_stack))
             img = png.Reader(img_path)
             img.preamble(True)
             palette = img.palette(alpha="force")
@@ -83,7 +83,7 @@ def from_dir(
     for Raster in SpriteSheet.findall("./RasterList/Raster"):
         if asset_stack is not None and load_images:
             img_name = Raster.attrib["src"]
-            img_path = str(get_asset_path(sprite_dir / img_name, asset_stack))
+            img_path = str(get_asset_path(sprite_dir / "rasters" / img_name, asset_stack))
             width, height, raster, info = png.Reader(img_path).read_flat()
 
             palette_index = int(Raster.attrib["palette"], base=16)

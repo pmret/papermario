@@ -13,7 +13,7 @@ void* effectFuncs[] = {
     guFrustumF, draw_prev_frame_buffer_at_screen_pos, draw_box, draw_msg, get_msg_width, get_background_color_blend, sfx_play_sound_at_position
 };
 
-s32 D_E0200734[128] = {
+s32 SimpleRandLUT[128] = {
     0x100B2AF5, 0x45B59924, 0x35094B45, 0x4ABFA67A, 0x164F5371, 0x7B195845, 0x58562A56, 0x25733D41,
     0x48008107, 0x0E004F28, 0x6963B8AD, 0x5B82AB71, 0x6BC1F51B, 0x3D947816, 0x39705175, 0x44409A59,
     0x0ED99067, 0x5F70B6F8, 0x3225AEEE, 0x08B5E97C, 0x2CDE7594, 0x5E9E5B7D, 0x5B2A2888, 0x107F0F50,
@@ -45,9 +45,9 @@ u32 effect_rand_int(s32 max) {
     return effect_prng_seed % (max + 1);
 }
 
-// very simple 'random' number generator using a LUT
-s32 func_E0200044(s32 max, s32 idx) {
-    s32 lookupVal = D_E0200734[idx % ARRAY_COUNT(D_E0200734)];
+// very simple stateless 'random' number generator using a LUT
+s32 effect_simple_rand(s32 max, s32 idx) {
+    s32 lookupVal = SimpleRandLUT[idx % ARRAY_COUNT(SimpleRandLUT)];
 
     if (lookupVal < 0) {
         lookupVal = -lookupVal;

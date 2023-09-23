@@ -6819,11 +6819,11 @@ segments:
     vram: 0x80218000
     follows_vram: heaps
     subsegments:
-    - [auto, c, actor/bowser]
-    - [auto, c, actor/bowser_intro]
-    - [auto, c, actor/bowser_phase_1]
-    - [auto, c, actor/bowser_phase_2]
-    - [auto, c, actor/bowser_phase_3]
+    - [auto, c, actor/unused_bowser]
+    - [auto, c, actor/intro_bowser]
+    - [auto, c, actor/hallway_bowser]
+    - [auto, c, actor/final_bowser_1]
+    - [auto, c, actor/final_bowser_2]
     - [auto, c, stage/kpa_01]
     - [auto, c, stage/kkj_01]
     - [auto, c, stage/kkj_02]

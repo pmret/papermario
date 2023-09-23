@@ -79,7 +79,7 @@ void energy_shockwave_update(EffectInstance* effect) {
     }
 
     if (unk_2C % 2) {
-        angle = func_E0200044(360, unk_2C);
+        angle = effect_simple_rand(360, unk_2C);
         sin_deg(angle);
         cos_deg(angle);
         load_effect(EFFECT_SHIMMER_WAVE);

@@ -245,7 +245,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_EXEC_WAIT(N(EVS_SelectAnimation))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP

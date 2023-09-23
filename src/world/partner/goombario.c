@@ -211,7 +211,7 @@ s32 N(can_pause)(Npc* goombario) {
 
     if ((goombario->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_JUMPING)) != NPC_FLAG_GROUNDED) {
         return new_var = 0;
-        do { } while (new_var); // why though
+        do {} while (new_var); // why though
     }
 
     return TRUE;

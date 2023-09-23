@@ -2,33 +2,56 @@
 #include "effects_internal.h"
 #include "nu/nusys.h"
 
-typedef struct UnkStruct {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ s8 unk_02;
-    /* 0x03 */ s8 unk_03;
-    /* 0x04 */ s8 unk_04;
-    /* 0x05 */ s8 unk_05;
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ s8 unk_07;
-    /* 0x08 */ u8 unk_08;
-    /* 0x09 */ char unk_09[3]; // likely padding
-    /* 0x0C */ Gfx* unk_0C;
-} UnkStruct; // size = 0x10
+typedef struct FlamePreset {
+    /* 0x00 */ Color_RGB8 colorScale;
+    /* 0x03 */ s8 keyCenter;
+    /* 0x04 */ Color_RGB8 envColor;
+    /* 0x07 */ s8 primIntensity;
+    /* 0x08 */ u8 sizeScale;
+    /* 0x0C */ Gfx* dlist;
+} FlamePreset; // size = 0x10
 
 extern Gfx D_09000800_3543B0[];
-extern Gfx D_090008F8_3544A8[];
+extern Gfx D_090008F8_3544A8[]; //TODO rename EffectGfx_Flame_DrawQuad
 extern Gfx D_09000918_3544C8[];
 extern Gfx D_090009E0_354590[];
 
-UnkStruct D_E0040840[] = {
-    { 255, 109, 255,  92, 102, 191, 255, 75,  50, {}, D_09000800_3543B0 },
-    { 255, 255, 255,   0, 255,  32,   0, 75, 100, {}, D_09000800_3543B0 },
-    { 255,   0, 255,  92, 107, 168, 255, 75,  10, {}, D_09000800_3543B0 },
-    { 255, 255, 255, 244, 247, 175, 175, 22,  30, {}, D_09000800_3543B0 }
+FlamePreset FlamePresets[] = {
+    [FX_FLAME_BLUE] {
+        .colorScale = { 255, 109, 255 },
+        .keyCenter = 92,
+        .envColor = { 102, 191, 255 },
+        .primIntensity = 75, 
+        .sizeScale = 50,
+        .dlist = D_09000800_3543B0,
+    },
+    [FX_FLAME_RED] {
+        .colorScale = { 255, 255, 255 },
+        .keyCenter = 0,
+        .envColor = { 255, 32, 0 },
+        .primIntensity = 75, 
+        .sizeScale = 100,
+        .dlist = D_09000800_3543B0,
+    },
+    [FX_FLAME_SMALL_BLUE] {
+        .colorScale = { 255, 0, 255 },
+        .keyCenter = 92,
+        .envColor = { 107, 168, 255 },
+        .primIntensity = 75, 
+        .sizeScale = 10,
+        .dlist = D_09000800_3543B0,
+    },
+    [FX_FLAME_PINK] {
+        .colorScale = { 255, 255, 255 },
+        .keyCenter = 244,
+        .envColor = { 247, 175, 175 },
+        .primIntensity = 22, 
+        .sizeScale = 30,
+        .dlist = D_09000800_3543B0,
+    },
 };
 
-s32 D_E0040880;
+s32 LastFlameRenderFrame;
 
 void flame_init(EffectInstance* effect);
 void flame_update(EffectInstance* effect);
@@ -36,7 +59,7 @@ void flame_render(EffectInstance* effect);
 void flame_appendGfx(void* effect);
 
 void flame_main(
-    s32 arg0,
+    s32 type,
     f32 arg1,
     f32 arg2,
     f32 arg3,
@@ -49,8 +72,8 @@ void flame_main(
     FlameFXData* data;
     s32 numParts = 1;
 
-    if (arg0 > 3) {
-        arg0 = 3;
+    if (type > FX_FLAME_PINK) {
+        type = FX_FLAME_PINK;
     }
 
     bpPtr->init = flame_init;
@@ -65,17 +88,17 @@ void flame_main(
     data = effect->data.flame = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.flame != NULL);
 
-    data->unk_00 = arg0;
+    data->type = type;
     data->unk_18 = 0;
     data->pos.x = arg1;
     data->pos.y = arg2;
     data->pos.z = arg3;
-    data->unk_10 = arg4 * D_E0040840[arg0].unk_08 * 0.01;
+    data->baseScale = arg4 * FlamePresets[type].sizeScale * 0.01;
     data->unk_1C = 0;
     data->unk_24 = 0;
     data->unk_20 = 0;
-    data->unk_30 = 1.0f;
-    data->unk_2C = 1.0f;
+    data->scaleW = 1.0f;
+    data->scaleH = 1.0f;
     data->unk_28 = 1.0f;
 
     if (outEffect != NULL) {
@@ -145,10 +168,10 @@ void flame_render(EffectInstance* effect) {
 void flame_appendGfx(void* effect) {
     FlameFXData* data = ((EffectInstance*)effect)->data.flame;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 unk_00 = data->unk_00;
+    s32 type = data->type;
     s32 uls = data->unk_1C * 4.0f;
     s32 ult = data->unk_24 * 4.0f;
-    UnkStruct* unkStruct;
+    FlamePreset* preset;
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;
@@ -156,8 +179,8 @@ void flame_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    if (D_E0040880 != gGameStatusPtr->frameCounter) {
-        D_E0040880 = gGameStatusPtr->frameCounter;
+    if (LastFlameRenderFrame != gGameStatusPtr->frameCounter) {
+        LastFlameRenderFrame = gGameStatusPtr->frameCounter;
         gSPDisplayList(gMainGfxPos++, D_09000918_3544C8);
         gDPSetTileSize(gMainGfxPos++, 1, uls, ult, uls + 128, ult + 256);
         gSPDisplayList(gMainGfxPos++, D_090009E0_354590);
@@ -169,18 +192,18 @@ void flame_appendGfx(void* effect) {
             (camera->viewportStartY + camera->viewportH) * 4.0f);
     }
 
-    unkStruct = &D_E0040840[unk_00];
+    preset = &FlamePresets[type];
 
-    gSPDisplayList(gMainGfxPos++, unkStruct->unk_0C);
-    gDPSetKeyR(gMainGfxPos++, unkStruct->unk_03, unkStruct->unk_00, 0);
-    gDPSetKeyGB(gMainGfxPos++, unkStruct->unk_03, unkStruct->unk_01, 0, unkStruct->unk_03, unkStruct->unk_02, 0);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, unkStruct->unk_07, unkStruct->unk_07, unkStruct->unk_07, 0);
-    gDPSetEnvColor(gMainGfxPos++, unkStruct->unk_04, unkStruct->unk_05, unkStruct->unk_06, 0);
+    gSPDisplayList(gMainGfxPos++, preset->dlist);
+    gDPSetKeyR(gMainGfxPos++, preset->keyCenter, preset->colorScale.r, 0);
+    gDPSetKeyGB(gMainGfxPos++, preset->keyCenter, preset->colorScale.g, 0, preset->keyCenter, preset->colorScale.b, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, preset->primIntensity, preset->primIntensity, preset->primIntensity, 0);
+    gDPSetEnvColor(gMainGfxPos++, preset->envColor.r, preset->envColor.g, preset->envColor.b, 0);
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
-    guScaleF(sp58, data->unk_10 * data->unk_30, data->unk_10 * data->unk_2C, data->unk_10);
+    guScaleF(sp58, data->baseScale * data->scaleW, data->baseScale * data->scaleH, data->baseScale);
     guMtxCatF(sp58, sp98, sp98);
     guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 

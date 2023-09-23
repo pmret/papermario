@@ -67,11 +67,11 @@ MenuWindowBP PauseMapWindowBPs[] = {
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_28 }
     },
-    { },
-    { },
-    { },
-    { },
-    { }
+    {},
+    {},
+    {},
+    {},
+    {}
 };
 MenuPanel gPausePanelMap = {
     .initialized = FALSE,

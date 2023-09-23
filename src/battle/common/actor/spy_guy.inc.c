@@ -191,7 +191,7 @@ EvtScript N(EVS_TrySwitchWeapon) = {
     EVT_END_SWITCH
     EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVar0)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_100)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_EXECUTING_MOVE)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF

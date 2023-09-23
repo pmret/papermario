@@ -3568,7 +3568,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_SP_EVT_ACTIVE                 = 0x00000020, // enable special events (other than hit/death/immune?)
     BS_FLAGS1_40                            = 0x00000040,
     BS_FLAGS1_80                            = 0x00000080,
-    BS_FLAGS1_100                           = 0x00000100,
+    BS_FLAGS1_EXECUTING_MOVE                = 0x00000100,
     BS_FLAGS1_200                           = 0x00000200,
     BS_FLAGS1_400                           = 0x00000400, // UNUSED
     BS_FLAGS1_FORCE_HIT_IMMUNE              = 0x00000800,

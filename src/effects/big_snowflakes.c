@@ -86,7 +86,7 @@ void big_snowflakes_update(EffectInstance* effect) {
         data->unk_14 += -0.05f;
         data->unk_10 *= 0.92;
         data->unk_14 += -0.05f;
-        data->unk_1C += func_E0200044(50, unk_28 + (i * 20)) - 25;
+        data->unk_1C += effect_simple_rand(50, unk_28 + (i * 20)) - 25;
         data->unk_18 += sin_deg(data->unk_1C) * 10.0f;
         data->unk_20 += cos_deg(data->unk_1C * 0.5f) * 10.0f;
         data->unk_04 += data->unk_10;

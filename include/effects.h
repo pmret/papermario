@@ -486,18 +486,25 @@ typedef struct PurpleRingFXData {
     /* 0x7A */ char unk_7A[2];
 } PurpleRingFXData; // size = 0x7C
 
+enum FlameFXTypes {
+    FX_FLAME_BLUE           = 0,
+    FX_FLAME_RED            = 1,
+    FX_FLAME_SMALL_BLUE     = 2,
+    FX_FLAME_PINK           = 3,
+};
+
 typedef struct FlameFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
+    /* 0x10 */ f32 baseScale;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
+    /* 0x2C */ f32 scaleH;
+    /* 0x30 */ f32 scaleW;
 } FlameFXData; // size = 0x34
 
 typedef struct StarsBurstFXData {
@@ -881,17 +888,17 @@ typedef struct FireBreathFXData {
     /* 0x0C */ Vec3f pos;
     /* 0x18 */ Vec3f initPos;
     /* 0x24 */ Vec3f endPos;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
+    /* 0x30 */ f32 initialScale;
+    /* 0x34 */ f32 targetScale;
     /* 0x38 */ f32 scale;
-    /* 0x3C */ f32 scaleChangeFactor;
+    /* 0x3C */ f32 scaleChangeRate;
     /* 0x40 */ s32 alpha;
-    /* 0x44 */ s32 lifeTime;
+    /* 0x44 */ s32 duration;
     /* 0x48 */ s32 timeLeft;
-    /* 0x4C */ s32 spawnTimer;
-    /* 0x50 */ Vec3f unk_50;
-    /* 0x5C */ f32 unk_5C;
-    /* 0x60 */ f32 unk_60;
+    /* 0x4C */ s32 lifetime;
+    /* 0x50 */ Vec3f offsetPos;
+    /* 0x5C */ f32 animTime; // each integer value corresponds to a new frame
+    /* 0x60 */ f32 velY;
     /* 0x64 */ s32 primR;
     /* 0x68 */ s32 primG;
     /* 0x6C */ s32 primB;

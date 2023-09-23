@@ -15,28 +15,17 @@ enum N(ActorPartIDs) {
     PRT_TARGET      = 2,
 };
 
-enum N(ActorVars) {
-    AVAR_ParticlesEffect    = 0,
-    AVAR_Unk_4      = 4,
-    AVAR_Unk_5      = 5,
-    AVAR_Unk_6      = 6,
-};
-
-enum N(ActorParams) {
-    DMG_UNK         = 0,
-};
-
-s32 N(IdleAnimations_1)[] = {
+s32 N(CubeAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0A,
     STATUS_END,
 };
 
-s32 N(IdleAnimations_2)[] = {
+s32 N(SphereAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0B,
     STATUS_END,
 };
 
-s32 N(IdleAnimations_3)[] = {
+s32 N(PrismAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0C,
     STATUS_END,
 };
@@ -73,14 +62,14 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_1)[] = {
+ActorPartBlueprint N(CubeParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_1),
+        .idleAnimations = N(CubeAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
@@ -100,14 +89,14 @@ ActorPartBlueprint N(ActorParts_1)[] = {
     },
 };
 
-ActorPartBlueprint N(ActorParts_2)[] = {
+ActorPartBlueprint N(SphereParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_2),
+        .idleAnimations = N(SphereAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
@@ -127,14 +116,14 @@ ActorPartBlueprint N(ActorParts_2)[] = {
     },
 };
 
-ActorPartBlueprint N(ActorParts_3)[] = {
+ActorPartBlueprint N(PrismParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_3),
+        .idleAnimations = N(PrismAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
@@ -154,13 +143,13 @@ ActorPartBlueprint N(ActorParts_3)[] = {
     },
 };
 
-ActorBlueprint N(1) = {
+ActorBlueprint N(cube) = {
     .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = ACTOR_LEVEL_CRYSTAL_BIT,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(ActorParts_1)),
-    .partsData = N(ActorParts_1),
+    .partCount = ARRAY_COUNT(N(CubeParts)),
+    .partsData = N(CubeParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -177,13 +166,13 @@ ActorBlueprint N(1) = {
     .statusTextOffset = { 10, 20 },
 };
 
-ActorBlueprint N(2) = {
+ActorBlueprint N(sphere) = {
     .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = ACTOR_LEVEL_CRYSTAL_BIT,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(ActorParts_2)),
-    .partsData = N(ActorParts_2),
+    .partCount = ARRAY_COUNT(N(SphereParts)),
+    .partsData = N(SphereParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -200,13 +189,13 @@ ActorBlueprint N(2) = {
     .statusTextOffset = { 10, 20 },
 };
 
-ActorBlueprint N(3) = {
+ActorBlueprint N(prism) = {
     .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = ACTOR_LEVEL_CRYSTAL_BIT,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(ActorParts_3)),
-    .partsData = N(ActorParts_3),
+    .partCount = ARRAY_COUNT(N(PrismParts)),
+    .partsData = N(PrismParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -255,7 +244,7 @@ API_CALLABLE(N(UpdateCrystalBitEffect)) {
 
 EvtScript N(EVS_Idle) = {
     EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 1, NPC_DISPOSE_LOCATION, 24, 24, EVT_FLOAT(1.0), 5, 0, 0, 0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVarF)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVarF)
     EVT_CHILD_THREAD
         EVT_CALL(N(UpdateCrystalBitEffect), LVarF)
     EVT_END_CHILD_THREAD
@@ -278,19 +267,19 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_4, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_5, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_6, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
@@ -315,15 +304,15 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, 0, LVar3)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_4, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_5, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_6, LVar1)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
             EVT_END_IF
@@ -345,25 +334,25 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetOwnerID, LVar0)
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_4, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_CubeBitID, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim22)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_5, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_SphereBitID, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim23)
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_Unk_6, LVar3)
+            EVT_CALL(GetActorVar, ACTOR_KING, AVAR_King_PrismBitID, LVar3)
             EVT_IF_EQ(LVar0, LVar3)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim24)
@@ -394,12 +383,12 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ParticlesEffect, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Bit_ParticlesEffect, LVar0)
             EVT_CALL(RemoveEffect, LVar0)
             EVT_RETURN
         EVT_CASE_DEFAULT

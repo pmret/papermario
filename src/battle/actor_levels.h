@@ -151,9 +151,9 @@
 
 #define ACTOR_LEVEL_KAMMY_KOOPA              99
 #define ACTOR_LEVEL_INTRO_BOWSER             0
-#define ACTOR_LEVEL_BOWSER_PHASE_1           100
-#define ACTOR_LEVEL_BOWSER_PHASE_2           0
-#define ACTOR_LEVEL_BOWSER_PHASE_3           0
+#define ACTOR_LEVEL_HALLWAY_BOWSER           100
+#define ACTOR_LEVEL_FINAL_BOWSER_1           0
+#define ACTOR_LEVEL_FINAL_BOWSER_2           0
 
 #define ACTOR_LEVEL_JR_TROOPA_1              41
 #define ACTOR_LEVEL_JR_TROOPA_2              44

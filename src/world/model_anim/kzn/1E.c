@@ -1,60 +1,60 @@
 #include "animation_script.h"
 
 AnimScript LavaPiranha_ModelScript_1E = {
-    AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-    AS_SET_POS, 1, 0, 0, 0,
-    AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(-9.33),
-    AS_SET_POS, 2, 68, 0, -21,
-    AS_SET_SCALE, 2, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(-9.33),
-    AS_SET_POS, 3, 52, 19, -21,
-    AS_SET_SCALE, 3, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(20.665),
-    AS_SET_POS, 4, 44, 24, -21,
-    AS_SET_SCALE, 4, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.67),
-    AS_SET_POS, 5, 69, -19, -20,
-    AS_SET_SCALE, 5, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(90.665),
-    AS_SET_POS, 6, 77, 24, -20,
-    AS_SET_SCALE, 6, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(140.67),
-    AS_SET_POS, 7, 58, 46, -20,
-    AS_SET_SCALE, 7, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(35.67),
-    AS_SET_POS, 8, 43, 51, -20,
-    AS_SET_SCALE, 8, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-    AS_WAIT, 1,
-    AS_SET_POS, 3, 52, 18, -21,
-    AS_SET_POS, 4, 46, 22, -21,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(93.165),
-    AS_SET_POS, 6, 76, 24, -20,
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(145.665),
-    AS_SET_POS, 8, 44, 49, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 3, 52, 17, -21,
-    AS_SET_POS, 4, 47, 20, -21,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(95.665),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(150.665),
-    AS_SET_POS, 7, 58, 45, -20,
-    AS_SET_POS, 8, 46, 48, -20,
-    AS_WAIT, 1,
-    AS_SET_POS, 3, 52, 18, -21,
-    AS_SET_POS, 4, 46, 22, -21,
-    AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(93.165),
-    AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(145.665),
-    AS_SET_POS, 7, 58, 46, -20,
-    AS_SET_POS, 8, 44, 49, -20,
-    AS_WAIT, 1,
-    AS_LOOP,
-        AS_SET_POS, 3, 52, 19, -21,
-        AS_SET_POS, 4, 44, 24, -21,
-        AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(90.665),
-        AS_SET_POS, 6, 77, 24, -20,
-        AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(140.67),
-        AS_SET_POS, 8, 43, 51, -20,
-        AS_WAIT, 1,
-    AS_END_LOOP,
-    AS_END,
+    as_SetRotation(1, 0.0, 0.0, 0.0)
+    as_SetPos(1, 0, 0, 0)
+    as_SetScale(1, 1.0, 1.0, 1.0)
+    as_SetRotation(2, 0.0, 0.0, -9.33)
+    as_SetPos(2, 68, 0, -21)
+    as_SetScale(2, 1.0, 1.0, 1.0)
+    as_SetRotation(3, 0.0, 0.0, -9.33)
+    as_SetPos(3, 52, 19, -21)
+    as_SetScale(3, 1.0, 1.0, 1.0)
+    as_SetRotation(4, 0.0, 0.0, 20.665)
+    as_SetPos(4, 44, 24, -21)
+    as_SetScale(4, 1.0, 1.0, 1.0)
+    as_SetRotation(5, 0.0, 0.0, 0.67)
+    as_SetPos(5, 69, -19, -20)
+    as_SetScale(5, 1.0, 1.0, 1.0)
+    as_SetRotation(6, 0.0, 0.0, 90.665)
+    as_SetPos(6, 77, 24, -20)
+    as_SetScale(6, 1.0, 1.0, 1.0)
+    as_SetRotation(7, 0.0, 0.0, 140.67)
+    as_SetPos(7, 58, 46, -20)
+    as_SetScale(7, 1.0, 1.0, 1.0)
+    as_SetRotation(8, 0.0, 0.0, 35.67)
+    as_SetPos(8, 43, 51, -20)
+    as_SetScale(8, 1.0, 1.0, 1.0)
+    as_Wait(1)
+    as_SetPos(3, 52, 18, -21)
+    as_SetPos(4, 46, 22, -21)
+    as_SetRotation(6, 0.0, 0.0, 93.165)
+    as_SetPos(6, 76, 24, -20)
+    as_SetRotation(7, 0.0, 0.0, 145.665)
+    as_SetPos(8, 44, 49, -20)
+    as_Wait(1)
+    as_SetPos(3, 52, 17, -21)
+    as_SetPos(4, 47, 20, -21)
+    as_SetRotation(6, 0.0, 0.0, 95.665)
+    as_SetRotation(7, 0.0, 0.0, 150.665)
+    as_SetPos(7, 58, 45, -20)
+    as_SetPos(8, 46, 48, -20)
+    as_Wait(1)
+    as_SetPos(3, 52, 18, -21)
+    as_SetPos(4, 46, 22, -21)
+    as_SetRotation(6, 0.0, 0.0, 93.165)
+    as_SetRotation(7, 0.0, 0.0, 145.665)
+    as_SetPos(7, 58, 46, -20)
+    as_SetPos(8, 44, 49, -20)
+    as_Wait(1)
+    as_Loop
+        as_SetPos(3, 52, 19, -21)
+        as_SetPos(4, 44, 24, -21)
+        as_SetRotation(6, 0.0, 0.0, 90.665)
+        as_SetPos(6, 77, 24, -20)
+        as_SetRotation(7, 0.0, 0.0, 140.67)
+        as_SetPos(8, 43, 51, -20)
+        as_Wait(1)
+    as_EndLoop
+    as_End
 };

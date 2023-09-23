@@ -1,6 +1,7 @@
 #include "../area.h"
 #include "sprite/npc/PetitPiranha.h"
 #include "effects.h"
+#include "boss_common.h"
 
 #define NAMESPACE A(petit_piranha)
 
@@ -8,19 +9,14 @@ extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(onDeath);
+extern EvtScript N(EVS_Death);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-};
-
-enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_9      = 9,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorParams) {
-    DMG_UNK         = 0,
+    DMG_IMPACT      = 6,
 };
 
 s32 N(DefaultAnims)[] = {
@@ -120,8 +116,8 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -149,7 +145,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -162,7 +158,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -175,7 +171,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -197,7 +193,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_PetitPiranha_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -220,7 +216,8 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_END
 };
 
-EvtScript N(recoverHP) = {
+// unused
+EvtScript N(EVS_AbsorbDamage) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0)
     EVT_ADD(LVar0, 20)
@@ -237,17 +234,17 @@ EvtScript N(recoverHP) = {
     EVT_END
 };
 
-API_CALLABLE(N(SetFlameUnk2C)) {
+API_CALLABLE(N(SetFlameScaleH)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     FlameFXData* flame = effect->data.flame;
 
-    flame->unk_2C = evt_get_float_variable(script, *args++);
+    flame->scaleH = evt_get_float_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetFlameX)) {
+API_CALLABLE(N(SetFlamePosX)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
     FlameFXData* flame = effect->data.flame;
@@ -313,7 +310,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_ADD(LVar0, 10)
     EVT_SET(LVar1, 0)
     EVT_ADD(LVar2, 2)
-    EVT_PLAY_EFFECT(EFFECT_FLAME, 1, LVar0, LVar1, LVar2, EVT_FLOAT(0.3), LVarA, 0)
+    EVT_PLAY_EFFECT(EFFECT_FLAME, FX_FLAME_RED, LVar0, LVar1, LVar2, EVT_FLOAT(0.3), LVarA, 0)
     EVT_THREAD
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
@@ -322,7 +319,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(UpdateLerp)
             EVT_SET(LVar4, LVar3)
             EVT_SUB(LVar4, LVar0)
-            EVT_CALL(N(SetFlameX), LVarA, LVar4)
+            EVT_CALL(N(SetFlamePosX), LVarA, LVar4)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
@@ -333,7 +330,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_MULF(LVar0, EVT_FLOAT(0.01))
-        EVT_CALL(N(SetFlameUnk2C), LVarA, LVar0)
+        EVT_CALL(N(SetFlameScaleH), LVarA, LVar0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
@@ -347,7 +344,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
                 EVT_MULF(LVar0, EVT_FLOAT(0.01))
-                EVT_CALL(N(SetFlameUnk2C), LVarA, LVar0)
+                EVT_CALL(N(SetFlameScaleH), LVarA, LVar0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
                     EVT_BREAK_LOOP
@@ -359,13 +356,13 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_WAIT(2)
-    EVT_SET(LVar8, 6)
+    EVT_SET(LVar8, DMG_IMPACT)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar9, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, LVar8, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar9)
@@ -376,7 +373,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
                 EVT_MULF(LVar0, EVT_FLOAT(0.01))
-                EVT_CALL(N(SetFlameUnk2C), LVarA, LVar0)
+                EVT_CALL(N(SetFlameScaleH), LVarA, LVar0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
                     EVT_BREAK_LOOP
@@ -391,25 +388,25 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(onDeath))
+    EVT_EXEC_WAIT(N(EVS_Death))
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(onDeath) = {
-    EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)
+EvtScript N(EVS_Death) = {
+    EVT_CALL(ActorExists, ACTOR_BOSS, LVar0)
+    EVT_IF_FALSE(LVar0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(GetActorHP, ACTOR_BOSS, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(GetActorHP, ACTOR_ENEMY0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVar0)
-    EVT_CALL(GetActorVar, LVar0, AVAR_Unk_9, LVar1)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Petit_Parent, LVar0)
+    EVT_CALL(GetActorVar, LVar0, AVAR_Bud_PetitCount, LVar1)
     EVT_SUB(LVar1, 1)
-    EVT_CALL(SetActorVar, LVar0, AVAR_Unk_9, LVar1)
+    EVT_CALL(SetActorVar, LVar0, AVAR_Bud_PetitCount, LVar1)
     EVT_RETURN
     EVT_END
 };

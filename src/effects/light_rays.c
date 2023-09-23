@@ -41,9 +41,9 @@ void light_rays_appendGfx(void* effect);
 void func_E006A000(LightRaysFXData* part, s32 beamIdx) {
     s32 temp = beamIdx * 3;
 
-    part->initialRot.x = func_E0200044(180, temp);
-    part->initialRot.y = func_E0200044(180, temp + 1);
-    part->initialRot.z = func_E0200044(180, temp + 2);
+    part->initialRot.x = effect_simple_rand(180, temp);
+    part->initialRot.y = effect_simple_rand(180, temp + 1);
+    part->initialRot.z = effect_simple_rand(180, temp + 2);
     part->alpha = 0;
     part->lifetime = 0;
     part->unk_58 = part->unk_68;

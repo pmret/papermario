@@ -18,7 +18,7 @@ EffectInstance* fire_breath_main(
     s32 type,
     f32 startX, f32 startY, f32 startZ,
     f32 endX, f32 endY, f32 endZ,
-    s32 numExtra, s32 spawnDelay, s32 lifetime
+    s32 numExtra, s32 spawnDelay, s32 duration
 ) {
     EffectBlueprint bp;
     FireBreathFXData* data;
@@ -58,29 +58,29 @@ EffectInstance* fire_breath_main(
         data->scale = 0.04f;
     }
 
-    data->unk_30 = data->scale;
-    data->lifeTime = lifetime;
-    data->timeLeft = lifetime;
-    data->spawnTimer = 0;
+    data->initialScale = data->scale;
+    data->duration = duration;
+    data->timeLeft = duration;
+    data->lifetime = 0;
     data->alpha = 255;
-    data->unk_5C = 0.0f;
-    data->scaleChangeFactor = 0.1f;
-    data->unk_34 = data->unk_30;
+    data->animTime = 0.0f;
+    data->scaleChangeRate = 0.1f;
+    data->targetScale = data->initialScale;
 
     if (type == FIRE_BREATH_LARGE) {
-        data->unk_50.x = (endX - startX) * 0.2 * (func_E0200044(10, spawnDelay + 0) - 5) * 0.2;
-        data->unk_50.y = (endY - startY) * 0.2 * (func_E0200044(10, spawnDelay + 1) - 5) * 0.2;
-        data->unk_50.z = (endZ - startZ) * 0.2 * (func_E0200044(10, spawnDelay + 2) - 5) * 0.2;
+        data->offsetPos.x = (endX - startX) * 0.2 * (effect_simple_rand(10, spawnDelay + 0) - 5) * 0.2;
+        data->offsetPos.y = (endY - startY) * 0.2 * (effect_simple_rand(10, spawnDelay + 1) - 5) * 0.2;
+        data->offsetPos.z = (endZ - startZ) * 0.2 * (effect_simple_rand(10, spawnDelay + 2) - 5) * 0.2;
     } else {
-        data->unk_50.x = (endX - startX) * 0.2 * (func_E0200044(10, spawnDelay + 3) - 5);
-        data->unk_50.y = (endY - startY) * 0.2 * (func_E0200044(10, spawnDelay + 4) - 5);
-        data->unk_50.z = (endZ - startZ) * 0.2 * (func_E0200044(10, spawnDelay + 5) - 5);
+        data->offsetPos.x = (endX - startX) * 0.2 * (effect_simple_rand(10, spawnDelay + 3) - 5);
+        data->offsetPos.y = (endY - startY) * 0.2 * (effect_simple_rand(10, spawnDelay + 4) - 5);
+        data->offsetPos.z = (endZ - startZ) * 0.2 * (effect_simple_rand(10, spawnDelay + 5) - 5);
     }
 
     data->primR = 255;
     data->primG = 170;
     data->primB = 42;
-    data->unk_60 = 0.0f;
+    data->velY = 0.0f;
     data->envR = 243;
     data->envG = 48;
     data->envB = 0;
@@ -93,13 +93,13 @@ void fire_breath_init(EffectInstance* effect) {
 
 void fire_breath_update(EffectInstance* effect) {
     FireBreathFXData* data = effect->data.fireBreath;
-    s32 lifeTime;
+    s32 duration;
     s32 timeLeft;
-    s32 spawnTimer;
+    s32 lifetime;
 
     data->timeLeft--;
-    data->unk_5C = (data->spawnTimer * 4.0f) / 10.0f;
-    data->spawnTimer++;
+    data->animTime = (data->lifetime * 4.0f) / 10.0f;
+    data->lifetime++;
 
     if (data->timeLeft < 0) {
         remove_effect(effect);
@@ -107,29 +107,29 @@ void fire_breath_update(EffectInstance* effect) {
     }
 
     timeLeft = data->timeLeft;
-    lifeTime = data->lifeTime;
-    spawnTimer = data->spawnTimer;
+    duration = data->duration;
+    lifetime = data->lifetime;
 
     if (timeLeft >= 6 && data->type == FIRE_BREATH_LARGE) {
         data->scale += (2.5 - data->scale) * 0.05;
     }
 
-    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->unk_50.x) * spawnTimer) / lifeTime);
-    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->unk_50.y) * spawnTimer) / lifeTime);
-    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->unk_50.z) * spawnTimer) / lifeTime);
+    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->offsetPos.x) * lifetime) / duration);
+    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->offsetPos.y) * lifetime) / duration);
+    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->offsetPos.z) * lifetime) / duration);
 
     if (data->type == FIRE_BREATH_SMALL) {
-        data->unk_60 += (f32) spawnTimer * 0.01;
-        data->pos.y += data->unk_60;
+        data->velY += (f32) lifetime * 0.01;
+        data->pos.y += data->velY;
     }
 
-    if (spawnTimer == data->spawnDelay + 1 && data->numChildren > 0) {
+    if (lifetime == data->spawnDelay + 1 && data->numChildren > 0) {
         EffectInstance* spawned;
 
         load_effect(EFFECT_FIRE_BREATH);
         spawned = fire_breath_main(
             data->type, data->initPos.x, data->initPos.y, data->initPos.z, data->endPos.x, data->endPos.y,
-            data->endPos.z, data->numChildren - 1, data->spawnDelay, lifeTime
+            data->endPos.z, data->numChildren - 1, data->spawnDelay, duration
         );
 
         spawned->data.fireBreath->primR = data->primR;
@@ -138,9 +138,9 @@ void fire_breath_update(EffectInstance* effect) {
         spawned->data.fireBreath->envR = data->envR;
         spawned->data.fireBreath->envG = data->envG;
         spawned->data.fireBreath->envB = data->envB;
-        spawned->data.fireBreath->unk_30 = spawned->data.fireBreath->scale = data->unk_30;
-        spawned->data.fireBreath->unk_34 = data->unk_34;
-        spawned->data.fireBreath->scaleChangeFactor = data->scaleChangeFactor;
+        spawned->data.fireBreath->initialScale = spawned->data.fireBreath->scale = data->initialScale;
+        spawned->data.fireBreath->targetScale = data->targetScale;
+        spawned->data.fireBreath->scaleChangeRate = data->scaleChangeRate;
     }
 
     if (timeLeft < 10 && data->type == FIRE_BREATH_LARGE) {
@@ -149,12 +149,12 @@ void fire_breath_update(EffectInstance* effect) {
 
     if (data->type == FIRE_BREATH_SMALL) {
         data->scale += (0.3 - data->scale) * 0.008;
-        data->alpha = (timeLeft * 224) / lifeTime;
+        data->alpha = (timeLeft * 224) / duration;
     }
 
     if (data->type == FIRE_BREATH_TINY) {
-        data->scale += (data->unk_34 - data->scale) * data->scaleChangeFactor;
-        data->alpha = (timeLeft * 224) / lifeTime;
+        data->scale += (data->targetScale - data->scale) * data->scaleChangeRate;
+        data->alpha = (timeLeft * 224) / duration;
     }
 }
 
@@ -179,23 +179,23 @@ void fire_breath_render(EffectInstance* effect) {
 }
 
 void fire_breath_appendGfx(void* effect) {
-    Matrix4f sp18;
-    Matrix4f sp58;
+    Matrix4f transformMtx;
+    Matrix4f tempMtx;
     FireBreathFXData* data = ((EffectInstance*)effect)->data.fireBreath;
     s32 type = data->type;
-    s32 envAlpha = (data->unk_5C - (s32)data->unk_5C) * 256.0f;
+    s32 envAlpha = (data->animTime - (s32)data->animTime) * 256.0f;
     Gfx* dlist = D_E006EC00[type];
     Gfx* dlist2 = D_E006EC0C[type];
-    s32 unk_5C = data->unk_5C;
+    s32 imgFrame = data->animTime;
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (type == FIRE_BREATH_SMALL) {
-        guTranslateF(sp18, data->initPos.x, data->initPos.y, data->initPos.z);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
-        guMtxCatF(sp58, sp18, sp18);
-        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(transformMtx, data->initPos.x, data->initPos.y, data->initPos.z);
+        guRotateF(tempMtx, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(tempMtx, transformMtx, transformMtx);
+        guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -207,15 +207,15 @@ void fire_breath_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, dlist2);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, data->alpha);
     gDPSetEnvColor(gMainGfxPos++, data->envR, data->envG, data->envB, envAlpha);
-    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, ((unk_5C * 32) + 0)  * 4, 0, ((unk_5C * 32) + 32) * 4, 128);
-    gDPSetTileSize(gMainGfxPos++, 1,               ((unk_5C * 32) + 32) * 4, 0, ((unk_5C * 32) + 64) * 4, 128);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, ((imgFrame * 32) + 0)  * 4, 0, ((imgFrame * 32) + 32) * 4, 128);
+    gDPSetTileSize(gMainGfxPos++, 1,               ((imgFrame * 32) + 32) * 4, 0, ((imgFrame * 32) + 64) * 4, 128);
 
-    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
-    guMtxCatF(sp58, sp18, sp18);
-    guScaleF(sp58, data->scale, data->scale, 0.0f);
-    guMtxCatF(sp58, sp18, sp18);
-    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(transformMtx, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(tempMtx, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guScaleF(tempMtx, data->scale, data->scale, 0.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
