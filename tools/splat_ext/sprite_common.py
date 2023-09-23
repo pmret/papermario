@@ -17,6 +17,7 @@ class CMD(IntEnum):
     LOOP = 7
     SET_META = 8
 
+
 XML_ATTR_NAME = "name"
 XML_ATTR_INDEX = "index"
 XML_ATTR_VALUE = "value"
@@ -28,6 +29,7 @@ XML_ATTR_MODE = "mode"
 XML_ATTR_PCT = "percent"
 XML_ATTR_XYZ = "xyz"
 XML_ATTR_FLAG = "flag"
+
 
 def iter_in_groups(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
