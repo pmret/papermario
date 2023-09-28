@@ -1056,10 +1056,10 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
             }
             palChanged = TRUE;
         }
-        if ((!palChanged) && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
+        if (!palChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
             set_actor_pal_adjustment(actor, PAL_ADJUST_NONE);
         }
-        if ((!decorChanged) && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
+        if (!decorChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
             func_80266EE8(actor, UNK_PAL_EFFECT_0);
         }
         if (actor->flags & ACTOR_FLAG_4000000) {
