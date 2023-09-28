@@ -79,8 +79,8 @@
 #define ACTOR_LEVEL_STILT_GUY                0
 #define ACTOR_LEVEL_SHY_STACK                0
 #define ACTOR_LEVEL_SIGNAL_GUY               0
-#define ACTOR_LEVEL_SHY_SQUAD_DUP            0
-#define ACTOR_LEVEL_SHY_GUY_DUP              0
+#define ACTOR_LEVEL_SHY_SQUAD_REDUX          0
+#define ACTOR_LEVEL_SHY_SQUAD_STUB           0
 
 #define ACTOR_LEVEL_FUZZIPEDE                43
 #define ACTOR_LEVEL_JUNGLE_FUZZY             16

@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-extern s32 D_8029FBD0;
-extern s8 D_8029FBD4;
+extern s32 isGroupHeal;
+extern s8 ApplyingBuff;
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -2655,7 +2655,7 @@ ApiStatus SetActorPaletteSwapParams(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026ED20(Evt* script, s32 isInitialCall) {
+ApiStatus EnableActorPaletteEffects(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
@@ -2670,9 +2670,9 @@ ApiStatus func_8026ED20(Evt* script, s32 isInitialCall) {
     actorPart = get_actor_part(actor, partID);
 
     if (enable) {
-        actorPart->flags |= ACTOR_FLAG_1000000;
+        actorPart->flags |= ACTOR_PART_FLAG_HAS_PAL_EFFECT;
     } else {
-        actorPart->flags &= ~ACTOR_FLAG_1000000;
+        actorPart->flags &= ~ACTOR_PART_FLAG_HAS_PAL_EFFECT;
     }
 
     return ApiStatus_DONE2;
@@ -3231,7 +3231,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             btl_cam_set_zoffset(0);
         }
-        D_8029FBD4 = 1;
+        ApplyingBuff = TRUE;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3312,11 +3312,11 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
-                D_8029FBD4 = 0;
-                return ApiStatus_DONE2;
+            if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
+                break;
             }
-            break;
+            ApplyingBuff = FALSE;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
@@ -3355,7 +3355,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             btl_cam_set_zoffset(0);
         }
 
-        D_8029FBD4 = 1;
+        ApplyingBuff = TRUE;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3436,11 +3436,11 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
-                D_8029FBD4 = 0;
-                return ApiStatus_DONE2;
+            if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
+                break;
             }
-            break;
+            ApplyingBuff = FALSE;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
@@ -3477,7 +3477,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             btl_cam_set_zoffset(0);
         }
 
-        D_8029FBD4 = 1;
+        ApplyingBuff = TRUE;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3501,7 +3501,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 fx_radial_shimmer(3, x, y, z, 1.0f, 30);
                 btl_cam_use_preset_immediately(BTL_CAM_PRESET_19);
-                script->functionTemp[3] = 0x1E;
+                script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
             } else {
                 script->functionTemp[3]--;
@@ -3513,7 +3513,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
                 dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
-                inflict_status(actor, 0xE, vanished);
+                inflict_status(actor, STATUS_KEY_TRANSPARENT, vanished);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
             } else {
@@ -3542,11 +3542,11 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
-                D_8029FBD4 = 0;
-                return ApiStatus_DONE2;
+            if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
+                break;
             }
-            break;
+            ApplyingBuff = FALSE;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
@@ -3583,7 +3583,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             btl_cam_set_zoffset(0);
         }
 
-        D_8029FBD4 = 1;
+        ApplyingBuff = TRUE;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3607,7 +3607,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 fx_snaking_static(8, x, y, z, 1.0f, 30);
                 btl_cam_use_preset_immediately(BTL_CAM_PRESET_19);
-                script->functionTemp[3] = 0x1E;
+                script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
             } else {
                 script->functionTemp[3]--;
@@ -3619,7 +3619,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
                 dispatch_event_actor(actor, EVENT_RECEIVE_BUFF);
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
-                inflict_status(actor, 0xB, electrified);
+                inflict_status(actor, STATUS_KEY_STATIC, electrified);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
             } else {
@@ -3648,11 +3648,11 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
-                D_8029FBD4 = 0;
-                return ApiStatus_DONE2;
+            if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
+                break;
             }
-            break;
+            ApplyingBuff = FALSE;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
@@ -3678,7 +3678,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
             actorID = script->owner1.enemyID;
         }
         hpBoost = evt_get_variable(script, *args++);
-        D_8029FBD0 = evt_get_variable(script, *args++);
+        isGroupHeal = evt_get_variable(script, *args++);
         actor = get_actor(actorID);
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = hpBoost;
@@ -3689,7 +3689,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         btl_cam_move(10);
         func_8024E60C();
 
-        D_8029FBD4 = 1;
+        ApplyingBuff = TRUE;
         script->functionTemp[3] = 5;
         script->functionTemp[0] = 1;
     }
@@ -3750,9 +3750,9 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                message = 0x20;
-                if (D_8029FBD0 == 0) {
-                    message = 0x1F;
+                message = BTL_MSG_HEAL_ALL;
+                if (!isGroupHeal) {
+                    message = BTL_MSG_HEAL_ONE;
                 }
                 btl_show_variable_battle_message(message, 60, hpBoost);
                 script->functionTemp[0] = 4;
@@ -3772,17 +3772,21 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->handleEventScript == NULL) || !does_script_exist(actor->handleEventScriptID)) {
-                D_8029FBD4 = 0;
-                return ApiStatus_DONE2;
+            if ((actor->handleEventScript != NULL) && does_script_exist(actor->handleEventScriptID)) {
+                break;
             }
-            break;
+            ApplyingBuff = FALSE;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
 
 ApiStatus WaitForBuffDone(Evt* script, s32 isInitialCall) {
-    return (D_8029FBD4 == 0) * ApiStatus_DONE2;
+    if (!ApplyingBuff) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus CopyBuffs(Evt* script, s32 isInitialCall) {

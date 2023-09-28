@@ -8,8 +8,8 @@
 extern s32 N(DefaultAnims)[];
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 
 enum N(ActorPartIDs) {
@@ -115,8 +115,8 @@ EvtScript N(EVS_Init) = {
 
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };

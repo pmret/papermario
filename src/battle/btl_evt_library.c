@@ -1008,14 +1008,14 @@ EvtScript EVS_Player_NextSlapLeft_Impl = {
 
 EvtScript EVS_Player_LastSlapRight_Impl = {
     EVT_CHILD_THREAD
-        EVT_CALL(MakeLerp, 0, 0x00000870, 60, EASING_COS_IN_OUT)
+        EVT_CALL(MakeLerp, 0, 2160, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(1)
+            EVT_END_IF
     EVT_END_CHILD_THREAD
     EVT_CALL(GetDamageIntensity)
     EVT_EXEC_WAIT(EVS_Player_Hit_Impl)
@@ -1026,14 +1026,14 @@ EvtScript EVS_Player_LastSlapRight_Impl = {
 
 EvtScript EVS_Player_LastSlapLeft_Impl = {
     EVT_CHILD_THREAD
-        EVT_CALL(MakeLerp, 0x00000870, 0, 60, EASING_COS_IN_OUT)
+        EVT_CALL(MakeLerp, 2160, 0, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
+            EVT_CALL(UpdateLerp)
+            EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
+            EVT_WAIT(1)
+            EVT_IF_EQ(LVar1, 1)
+                EVT_GOTO(1)
+            EVT_END_IF
     EVT_END_CHILD_THREAD
     EVT_CALL(GetDamageIntensity)
     EVT_EXEC_WAIT(EVS_Player_Hit_Impl)

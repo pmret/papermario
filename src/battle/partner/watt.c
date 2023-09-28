@@ -208,7 +208,7 @@ API_CALLABLE(N(PowerShockDischargeFX)) {
 
     script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
-        N(bulbGlow)->data.bulbGlow->unk_14 = 5;
+        N(bulbGlow)->data.bulbGlow->timeLeft = 5;
         return ApiStatus_DONE2;
     }
 

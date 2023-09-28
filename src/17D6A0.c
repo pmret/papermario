@@ -244,8 +244,8 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_TOY_TANK]                    MSG_EnemyName_GeneralGuy,
     [ACTOR_TYPE_LIGHT_BULB]                  MSG_EnemyName_Bulb,
     [ACTOR_TYPE_SIGNAL_GUY]                  MSG_EnemyName_ShyGuy,
-    [ACTOR_TYPE_SHY_SQUAD_DUP]               MSG_EnemyName_ShySquadDup,
-    [ACTOR_TYPE_SHY_GUY_DUP]                 MSG_EnemyName_ShyGuy,
+    [ACTOR_TYPE_SHY_SQUAD_REDUX]             MSG_EnemyName_ShySquadRedux,
+    [ACTOR_TYPE_SHY_SQUAD_STUB]              MSG_EnemyName_ShyGuy,
     [ACTOR_TYPE_ANTI_GUY_OMO]                MSG_EnemyName_AntiGuy,
     [ACTOR_TYPE_ANTI_GUY_KPA]                MSG_EnemyName_AntiGuy,
     [ACTOR_TYPE_BIG_LANTERN_GHOST]           MSG_EnemyName_BigLanternGhost,
@@ -1506,14 +1506,14 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_SHY_SQUAD_DUP] = {
+    [ACTOR_TYPE_SHY_SQUAD_REDUX] = {
         .walk = { SOUND_NONE, SOUND_NONE },
         .fly = { SOUND_NONE, SOUND_NONE },
         .jump = SOUND_NONE,
         .hurt = SOUND_ACTOR_HURT,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_SHY_GUY_DUP] = {
+    [ACTOR_TYPE_SHY_SQUAD_STUB] = {
         .walk = { SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_A },
         .fly = { SOUND_NONE, SOUND_NONE },
         .jump = SOUND_NONE,
@@ -1955,8 +1955,8 @@ s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_TOY_TANK]                   MSG_EnemyTattle_GeneralGuy,
     [ACTOR_TYPE_LIGHT_BULB]                 MSG_NONE,
     [ACTOR_TYPE_SIGNAL_GUY]                 MSG_EnemyTattle_ShyGuy,
-    [ACTOR_TYPE_SHY_SQUAD_DUP]              MSG_NONE,
-    [ACTOR_TYPE_SHY_GUY_DUP]                MSG_EnemyTattle_ShyGuy,
+    [ACTOR_TYPE_SHY_SQUAD_REDUX]            MSG_NONE,
+    [ACTOR_TYPE_SHY_SQUAD_STUB]             MSG_EnemyTattle_ShyGuy,
     [ACTOR_TYPE_ANTI_GUY_OMO]               MSG_EnemyTattle_AntiGuy,
     [ACTOR_TYPE_ANTI_GUY_KPA]               MSG_EnemyTattle_AntiGuy,
     [ACTOR_TYPE_BIG_LANTERN_GHOST]          MSG_EnemyTattle_BigLanternGhost,
@@ -2170,8 +2170,8 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_TOY_TANK] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_LIGHT_BULB] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_SIGNAL_GUY] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_SHY_SQUAD_DUP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_SHY_GUY_DUP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_SHY_SQUAD_REDUX] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_SHY_SQUAD_STUB] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_ANTI_GUY_OMO] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_ANTI_GUY_KPA] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BIG_LANTERN_GHOST] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
@@ -2458,8 +2458,8 @@ s32 bMessages[] = {
     [BTL_MSG_STAR_POWER_FILLED]     MSG_Menus_StarEnergyFilled,
     [BTL_MSG_ATTACK_UP]             MSG_Menus_AttackUp,
     [BTL_MSG_DEFENCE_UP]            MSG_Menus_DefenseUp,
-    [BTL_MSG_1F]                    MSG_Menus_0084,
-    [BTL_MSG_20]                    MSG_Menus_0085,
+    [BTL_MSG_HEAL_ONE]              MSG_Menus_HealOne,
+    [BTL_MSG_HEAL_ALL]              MSG_Menus_HealAll,
 
     [BTL_MSG_ENEMY_TRANSPARENT]     MSG_Menus_EnemyTransparent,
     [BTL_MSG_ENEMY_CHARGED]         MSG_Menus_EnemyElectricCharge,
@@ -3140,8 +3140,8 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_STAR_POWER_FILLED:
         case BTL_MSG_ATTACK_UP:
         case BTL_MSG_DEFENCE_UP:
-        case BTL_MSG_1F:
-        case BTL_MSG_20:
+        case BTL_MSG_HEAL_ONE:
+        case BTL_MSG_HEAL_ALL:
         case BTL_MSG_ENEMY_TRANSPARENT:
         case BTL_MSG_ENEMY_CHARGED:
         case BTL_MSG_PARTNER_INJURED:
@@ -3673,8 +3673,8 @@ void func_80250818(void* data, s32 x, s32 y) {
         case BTL_MSG_CHARGE_JUMP_MORE:
         case BTL_MSG_ATTACK_UP:
         case BTL_MSG_DEFENCE_UP:
-        case BTL_MSG_1F:
-        case BTL_MSG_20:
+        case BTL_MSG_HEAL_ONE:
+        case BTL_MSG_HEAL_ALL:
         case BTL_MSG_ENEMY_TRANSPARENT:
         case BTL_MSG_ENEMY_CHARGED:
             messageID = bMessages[popup->messageIndex];
@@ -3958,8 +3958,8 @@ void btl_show_message_popup(void* data) {
         case BTL_MSG_CHARGE_JUMP_MORE:
         case BTL_MSG_ATTACK_UP:
         case BTL_MSG_DEFENCE_UP:
-        case BTL_MSG_1F:
-        case BTL_MSG_20:
+        case BTL_MSG_HEAL_ONE:
+        case BTL_MSG_HEAL_ALL:
         case BTL_MSG_ENEMY_TRANSPARENT:
         case BTL_MSG_ENEMY_CHARGED:
             if (popup->needsInit) {

@@ -88,7 +88,7 @@ void create_target_list(Actor* actor, s32 arg1) {
     s32 row;
     s32 skip;
 
-    if (battleStatus->curTargetListFlags & TARGET_FLAG_80000000) {
+    if (battleStatus->curTargetListFlags & TARGET_FLAG_OVERRIDE) {
         actor->targetListLength = -1;
         return;
     }
@@ -247,7 +247,7 @@ void create_target_list(Actor* actor, s32 arg1) {
         if (targetData->actorID == ACTOR_PLAYER || targetData->actorID == ACTOR_PARTNER) {
             continue;
         }
-        if (battleStatus->curTargetListFlags & TARGET_FLAG_80000000) {
+        if (battleStatus->curTargetListFlags & TARGET_FLAG_OVERRIDE) {
             skip = TRUE;
             goto END2;
         }

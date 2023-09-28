@@ -257,8 +257,8 @@ typedef enum ActorType {
     ACTOR_TYPE_TOY_TANK                    = 0xAA,
     ACTOR_TYPE_LIGHT_BULB                  = 0xAB,
     ACTOR_TYPE_SIGNAL_GUY                  = 0xAC,
-    ACTOR_TYPE_SHY_SQUAD_DUP               = 0xAD,
-    ACTOR_TYPE_SHY_GUY_DUP                 = 0xAE,
+    ACTOR_TYPE_SHY_SQUAD_REDUX             = 0xAD,
+    ACTOR_TYPE_SHY_SQUAD_STUB              = 0xAE,
     ACTOR_TYPE_ANTI_GUY_OMO                = 0xAF,
     ACTOR_TYPE_ANTI_GUY_KPA                = 0xB0,
     ACTOR_TYPE_BIG_LANTERN_GHOST           = 0xB1,
@@ -300,18 +300,21 @@ typedef enum ActorType {
 } ActorType;
 
 enum BattleVars {
-    BTL_VAR_DuplighostCopyFlags     = 0, // used by duplighost
-    BTL_VAL_Duplighost_HasCopied    = 0x4,
-    BTL_VAR_HyperSync               = 1,
-    BTL_VAL_HyperSync_None          = 0,
-    BTL_VAL_HyperSync_Done          = 1,
-    BTL_VAL_HyperSync_Active        = 2,
-    BTL_VAR_UNK_MAGIKOOPA           = 2,
-    BTL_VAR_LastCopiedPartner       = 3, // used by duplighost
-    BTL_VAR_KoopatrolSummonCount_0  = 4, // count summons from Koopatrol and 'children' originally from column 0
-    BTL_VAR_KoopatrolSummonCount_1  = 5, // count summons from Koopatrol and 'children' originally from column 1
-    BTL_VAR_KoopatrolSummonCount_2  = 6, // count summons from Koopatrol and 'children' originally from column 2
-    BTL_VAR_KoopatrolSummonCount_3  = 7, // count summons from Koopatrol and 'children' originally from column 3
+    BTL_VAR_DuplighostCopyFlags         = 0, // used by duplighost
+    BTL_VAL_Duplighost_HasCopied        = 0x4,
+    BTL_VAR_HyperSync                   = 1,
+    BTL_VAL_HyperSync_None              = 0,
+    BTL_VAL_HyperSync_Done              = 1,
+    BTL_VAL_HyperSync_Active            = 2,
+    // index of the last enemy boosted by a magikoopa
+    // intended to prevent multiple boosts for the same actor in the same turn
+    // selected enemies go from left to right and are reset if none are found
+    BTL_VAR_Magikoopa_LastIndexBoosted  = 2,
+    BTL_VAR_LastCopiedPartner           = 3, // used by duplighost
+    BTL_VAR_KoopatrolSummonCount_0      = 4, // count summons from Koopatrol and 'children' originally from column 0
+    BTL_VAR_KoopatrolSummonCount_1      = 5, // count summons from Koopatrol and 'children' originally from column 1
+    BTL_VAR_KoopatrolSummonCount_2      = 6, // count summons from Koopatrol and 'children' originally from column 2
+    BTL_VAR_KoopatrolSummonCount_3      = 7, // count summons from Koopatrol and 'children' originally from column 3
 };
 
 // document special actor vars referenced from other actors

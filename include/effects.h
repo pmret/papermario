@@ -742,7 +742,7 @@ typedef struct DebuffFXData {
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ s32 alpha;
     /* 0x38 */ Color_RGB8 primCol;
-    /* 0x38 */ Color_RGB8 envCol;
+    /* 0x3B */ Color_RGB8 envCol;
     /* 0x3E */ char unk_3E[2];
 } DebuffFXData; // size = 0x40
 
@@ -1024,12 +1024,12 @@ typedef struct AuraFXData {
 } AuraFXData; // size = 0x70
 
 typedef struct BulbGlowFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x10 */ s32 brightness;
+    /* 0x14 */ s32 timeLeft;
+    /* 0x18 */ s32 lifetime;
+    /* 0x1C */ s32 depthQueryID;
     /* 0x20 */ s32 unk_20;
 } BulbGlowFXData; // size = 0x24
 
