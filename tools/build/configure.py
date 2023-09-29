@@ -624,7 +624,9 @@ class Configure:
                 self.build_path() / "include/battle/actor_types.inc.c",
                 self.build_path() / "include/battle/actor_types.h",
             ],
-            [Path("src/battle/actors.yaml"),],
+            [
+                Path("src/battle/actors.yaml"),
+            ],
             "actor_types",
         )
 
