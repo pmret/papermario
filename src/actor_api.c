@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-extern s32 isGroupHeal;
+extern s32 IsGroupHeal;
 extern s8 ApplyingBuff;
 
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
@@ -3678,7 +3678,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
             actorID = script->owner1.enemyID;
         }
         hpBoost = evt_get_variable(script, *args++);
-        isGroupHeal = evt_get_variable(script, *args++);
+        IsGroupHeal = evt_get_variable(script, *args++);
         actor = get_actor(actorID);
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = hpBoost;
@@ -3751,7 +3751,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         case 3:
             if (script->functionTemp[3] == 0) {
                 message = BTL_MSG_HEAL_ALL;
-                if (!isGroupHeal) {
+                if (!IsGroupHeal) {
                     message = BTL_MSG_HEAL_ONE;
                 }
                 btl_show_variable_battle_message(message, 60, hpBoost);
