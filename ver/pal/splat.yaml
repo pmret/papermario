@@ -5703,14 +5703,14 @@ segments:
     start: 0x5A59A0
     vram: 0x80231000
     subsegments:
-    - [0x5A59A0, c, actor/shy_squad_dup]
+    - [0x5A59A0, c, actor/shy_squad_redux]
     - [0x5A59A0]
   - dir: battle/area/omo2_6
     type: code
     start: 0x5A9A80
     vram: 0x80231000
     subsegments:
-    - [0x5A9A80, c, actor/shy_guy_dup]
+    - [0x5A9A80, c, actor/shy_squad_stub]
     - [0x5A9A80,]
   - dir: battle/area/omo3
     type: code

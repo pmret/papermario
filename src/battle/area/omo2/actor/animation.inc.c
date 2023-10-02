@@ -1,213 +1,213 @@
 #include "animation_script.h"
 #include "mapfs/omo_bt07_shape.h"
 
-StaticAnimatorNode N(8021A2A0) = {
+StaticAnimatorNode N(Node02) = {
     .pos = { 79.0f, 47.0f, 0.0f },
     .vertexStartOffset = -1,
-    .modelID = 29,
+    .modelID = MODEL_tanp,
 };
 
-StaticAnimatorNode N(8021A2CC) = {
+StaticAnimatorNode N(Node23) = {
     .pos = { 80.0f, 15.0f, 0.0f },
-    .sibling = &N(8021A2A0),
+    .sibling = &N(Node02),
     .vertexStartOffset = -1,
-    .modelID = 32,
+    .modelID = MODEL_h2,
 };
 
-StaticAnimatorNode N(8021A2F8) = {
+StaticAnimatorNode N(Node22) = {
     .pos = { 79.0f, 20.0f, 30.0f },
-    .sibling = &N(8021A2CC),
+    .sibling = &N(Node23),
     .vertexStartOffset = -1,
-    .modelID = 34,
+    .modelID = MODEL_sya2,
 };
 
-StaticAnimatorNode N(8021A324) = {
+StaticAnimatorNode N(Node21) = {
     .pos = { 80.0f, 20.0f, 30.0f },
-    .sibling = &N(8021A2F8),
+    .sibling = &N(Node22),
     .vertexStartOffset = -1,
-    .modelID = 35,
+    .modelID = MODEL_h3,
 };
 
-StaticAnimatorNode N(8021A350) = {
+StaticAnimatorNode N(Node20) = {
     .pos = { 80.0f, 20.0f, -29.0f },
-    .sibling = &N(8021A324),
+    .sibling = &N(Node21),
     .vertexStartOffset = -1,
-    .modelID = 37,
+    .modelID = MODEL_n2,
 };
 
-StaticAnimatorNode N(8021A37C) = {
+StaticAnimatorNode N(Node19) = {
     .pos = { 79.0f, 20.0f, -30.0f },
-    .sibling = &N(8021A350),
+    .sibling = &N(Node20),
     .vertexStartOffset = -1,
-    .modelID = 38,
+    .modelID = MODEL_h4,
 };
 
-StaticAnimatorNode N(8021A3A8) = {
+StaticAnimatorNode N(Node18) = {
     .rot = { 0, 0, -6 },
     .pos = { 97.0f, 73.0f, 0.0f },
-    .sibling = &N(8021A37C),
+    .sibling = &N(Node19),
     .vertexStartOffset = -1,
-    .modelID = 40,
+    .modelID = MODEL_kyu2,
 };
 
-StaticAnimatorNode N(8021A3D4) = {
+StaticAnimatorNode N(Node17) = {
     .rot = { 0, 0, -6 },
     .pos = { 97.0f, 73.0f, 0.0f },
-    .sibling = &N(8021A3A8),
+    .sibling = &N(Node18),
     .vertexStartOffset = -1,
-    .modelID = 41,
+    .modelID = MODEL_kyu1,
 };
 
-StaticAnimatorNode N(8021A400) = {
+StaticAnimatorNode N(Node16) = {
     .rot = { 0, 0, -6 },
     .pos = { 97.0f, 73.0f, 0.0f },
-    .sibling = &N(8021A3D4),
+    .sibling = &N(Node17),
     .vertexStartOffset = -1,
-    .modelID = 42,
+    .modelID = MODEL_kyu,
 };
 
-StaticAnimatorNode N(8021A42C) = {
+StaticAnimatorNode N(Node15) = {
     .rot = { 0, 0, -6 },
     .pos = { 97.0f, 55.0f, 0.0f },
-    .sibling = &N(8021A400),
+    .sibling = &N(Node16),
     .vertexStartOffset = -1,
-    .modelID = 44,
+    .modelID = MODEL_en2,
 };
 
-StaticAnimatorNode N(8021A458) = {
+StaticAnimatorNode N(Node14) = {
     .rot = { 0, 0, -6 },
     .pos = { 97.0f, 54.0f, 0.0f },
-    .sibling = &N(8021A42C),
+    .sibling = &N(Node15),
     .vertexStartOffset = -1,
-    .modelID = 45,
+    .modelID = MODEL_en,
 };
 
-StaticAnimatorNode N(8021A484) = {
+StaticAnimatorNode N(Node13) = {
     .pos = { 112.0f, 48.0f, 0.0f },
-    .sibling = &N(8021A458),
+    .sibling = &N(Node14),
     .vertexStartOffset = -1,
-    .modelID = 47,
+    .modelID = MODEL_nob,
 };
 
-StaticAnimatorNode N(8021A4B0) = {
+StaticAnimatorNode N(Node12) = {
     .rot = { 0, 0, -16383 },
     .pos = { 77.0f, 60.0f, 0.0f },
-    .sibling = &N(8021A484),
+    .sibling = &N(Node13),
     .vertexStartOffset = -1,
-    .modelID = 49,
+    .modelID = MODEL_futa,
 };
 
-StaticAnimatorNode N(8021A4DC) = {
+StaticAnimatorNode N(Node11) = {
     .rot = { 0, 0, 5469 },
     .pos = { 60.0f, 9.0f, 34.0f },
-    .sibling = &N(8021A4B0),
+    .sibling = &N(Node12),
     .vertexStartOffset = -1,
-    .modelID = 52,
+    .modelID = MODEL_a1,
 };
 
-StaticAnimatorNode N(8021A508) = {
+StaticAnimatorNode N(Node10) = {
     .rot = { 0, 0, 5469 },
     .pos = { 60.0f, 9.0f, 34.0f },
-    .sibling = &N(8021A4DC),
+    .sibling = &N(Node11),
     .vertexStartOffset = -1,
-    .modelID = 51,
+    .modelID = MODEL_n3,
 };
 
-StaticAnimatorNode N(8021A534) = {
+StaticAnimatorNode N(Node09) = {
     .rot = { 0, 0, 5708 },
     .pos = { 100.0f, 10.0f, 34.0f },
-    .sibling = &N(8021A508),
+    .sibling = &N(Node10),
     .vertexStartOffset = -1,
-    .modelID = 55,
+    .modelID = MODEL_a2,
 };
 
-StaticAnimatorNode N(8021A560) = {
+StaticAnimatorNode N(Node08) = {
     .rot = { 0, 0, 5708 },
     .pos = { 100.0f, 10.0f, 34.0f },
-    .sibling = &N(8021A534),
+    .sibling = &N(Node09),
     .vertexStartOffset = -1,
-    .modelID = 54,
+    .modelID = MODEL_n4,
 };
 
-StaticAnimatorNode N(8021A58C) = {
+StaticAnimatorNode N(Node07) = {
     .rot = { 0, 0, 5708 },
     .pos = { 59.0f, 9.0f, -34.0f },
-    .sibling = &N(8021A560),
+    .sibling = &N(Node08),
     .vertexStartOffset = -1,
-    .modelID = 57,
+    .modelID = MODEL_n5,
 };
 
-StaticAnimatorNode N(8021A5B8) = {
+StaticAnimatorNode N(Node06) = {
     .rot = { 0, 0, 5708 },
     .pos = { 59.0f, 9.0f, -34.0f },
-    .sibling = &N(8021A58C),
+    .sibling = &N(Node07),
     .vertexStartOffset = -1,
-    .modelID = 58,
+    .modelID = MODEL_a3,
 };
 
-StaticAnimatorNode N(8021A5E4) = {
+StaticAnimatorNode N(Node05) = {
     .rot = { 0, 0, 5708 },
     .pos = { 100.0f, 9.0f, -34.0f },
-    .sibling = &N(8021A5B8),
+    .sibling = &N(Node06),
     .vertexStartOffset = -1,
-    .modelID = 60,
+    .modelID = MODEL_n6,
 };
 
-StaticAnimatorNode N(8021A610) = {
+StaticAnimatorNode N(Node04) = {
     .rot = { 0, 0, 5708 },
     .pos = { 100.0f, 9.0f, -34.0f },
-    .sibling = &N(8021A5E4),
+    .sibling = &N(Node05),
     .vertexStartOffset = -1,
-    .modelID = 61,
+    .modelID = MODEL_a4,
 };
 
-StaticAnimatorNode N(8021A63C) = {
+StaticAnimatorNode N(Node03) = {
     .pos = { 65.0f, 46.0f, 0.0f },
-    .sibling = &N(8021A610),
+    .sibling = &N(Node04),
     .vertexStartOffset = -1,
-    .modelID = 63,
+    .modelID = MODEL_g106,
 };
 
-StaticAnimatorNode N(8021A668) = {
+StaticAnimatorNode N(Node01) = {
     .pos = { 79.0f, 47.0f, 0.0f },
-    .sibling = &N(8021A63C),
+    .sibling = &N(Node03),
     .vertexStartOffset = -1,
-    .modelID = 30,
+    .modelID = MODEL_h1,
 };
 
-StaticAnimatorNode N(8021A694) = {
-    .child = &N(8021A668),
+StaticAnimatorNode N(Root) = {
+    .child = &N(Node01),
 };
 
 StaticAnimatorNode* toy_tank_model[] = {
-    &N(8021A694),
-    &N(8021A668),
-    &N(8021A2A0),
-    &N(8021A63C),
-    &N(8021A610),
-    &N(8021A5E4),
-    &N(8021A5B8),
-    &N(8021A58C),
-    &N(8021A560),
-    &N(8021A534),
-    &N(8021A508),
-    &N(8021A4DC),
-    &N(8021A4B0),
-    &N(8021A484),
-    &N(8021A458),
-    &N(8021A42C),
-    &N(8021A400),
-    &N(8021A3D4),
-    &N(8021A3A8),
-    &N(8021A37C),
-    &N(8021A350),
-    &N(8021A324),
-    &N(8021A2F8),
-    &N(8021A2CC),
+    &N(Root),
+    &N(Node01),
+    &N(Node02),
+    &N(Node03),
+    &N(Node04),
+    &N(Node05),
+    &N(Node06),
+    &N(Node07),
+    &N(Node08),
+    &N(Node09),
+    &N(Node10),
+    &N(Node11),
+    &N(Node12),
+    &N(Node13),
+    &N(Node14),
+    &N(Node15),
+    &N(Node16),
+    &N(Node17),
+    &N(Node18),
+    &N(Node19),
+    &N(Node20),
+    &N(Node21),
+    &N(Node22),
+    &N(Node23),
     NULL,
 };
 
-AnimScript toy_tank_as_shake = {
+AnimScript AS_ToyTank_Shake = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
     as_SetScale(1, 1.0, 1.0, 1.0)
@@ -1356,7 +1356,7 @@ AnimScript toy_tank_as_shake = {
     as_End
 };
 
-AnimScript toy_tank_as_fall_apart = {
+AnimScript AS_ToyTank_FallApart = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
     as_SetScale(1, 1.0, 1.0, 1.0)
@@ -1928,7 +1928,7 @@ AnimScript toy_tank_as_fall_apart = {
     as_End
 };
 
-AnimScript toy_tank_as_close_hatch = {
+AnimScript AS_ToyTank_CloseHatch = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
     as_SetScale(1, 1.0, 1.0, 1.0)
@@ -2922,7 +2922,7 @@ AnimScript toy_tank_as_close_hatch = {
     as_End
 };
 
-AnimScript toy_tank_as_open_hatch = {
+AnimScript AS_ToyTank_OpenHatch = {
     as_DisableMirroring
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
@@ -3088,7 +3088,7 @@ AnimScript toy_tank_as_open_hatch = {
     as_End
 };
 
-AnimScript toy_tank_as_5 = {
+AnimScript AS_ToyTank_Unused1 = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
     as_SetScale(1, 1.0, 1.0, 1.0)
@@ -3702,7 +3702,7 @@ AnimScript toy_tank_as_5 = {
     as_End
 };
 
-AnimScript toy_tank_as_move_forward = {
+AnimScript AS_ToyTank_MoveForward = {
     as_DisableMirroring
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
@@ -7139,7 +7139,7 @@ AnimScript toy_tank_as_move_forward = {
     as_End
 };
 
-AnimScript toy_tank_as_7 = {
+AnimScript AS_ToyTank_Unused2 = {
     as_SetRotation(0, 0.0, 0.0, 0.0)
     as_SetPos(0, 0, 0, 0)
     as_SetScale(0, 1.0, 1.0, 1.0)
@@ -7753,7 +7753,7 @@ AnimScript toy_tank_as_7 = {
     as_End
 };
 
-AnimScript toy_tank_as_idle = {
+AnimScript AS_ToyTank_Idle = {
     as_SetRotation(1, 0.0, 0.0, 0.0)
     as_SetPos(1, 0, 0, 0)
     as_SetScale(1, 1.0, 1.0, 1.0)

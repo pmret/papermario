@@ -6401,14 +6401,14 @@ segments:
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
-    - [auto, c, actor/shy_squad_dup]
+    - [auto, c, actor/shy_squad_redux]
   - dir: battle/area/omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
     vram_of_symbol: Vine1Base
     subsegments:
-    - [auto, c, actor/shy_guy_dup]
+    - [auto, c, actor/shy_squad_stub]
   - dir: battle/area/omo3
     type: code
     start: 0x5573E0

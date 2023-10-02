@@ -342,7 +342,6 @@ ApiStatus EnableBattleFloorReflections(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 ApiStatus SetDarknessMode(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -366,25 +365,25 @@ ApiStatus SetDarknessMode(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802537C0(Evt* script, s32 isInitialCall) {
+ApiStatus GetDarknessStatus(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a0 = *args++;
-    s32 a1 = *args++;
-    u8 t1;
-    f32 t2;
-    s32 t3;
+    s32 out1 = *args++;
+    s32 out2 = *args++;
+    u8 type;
+    f32 amt;
+    s32 isLight;
 
     // While loop may not be necessary in the future
-    do { get_screen_overlay_params(SCREEN_LAYER_BACK, &t1, &t2); } while (0);
+    do { get_screen_overlay_params(SCREEN_LAYER_BACK, &type, &amt); } while (0);
 
-    if (t2 < 128.0f) {
-        t3 = 0;
+    if (amt < 128.0f) {
+        isLight = FALSE;
     } else {
-        t3 = 1;
+        isLight = TRUE;
     }
 
-    evt_set_variable(script, a0, 1);
-    evt_set_variable(script, a1, t3);
+    evt_set_variable(script, out1, SCREEN_LAYER_BACK);
+    evt_set_variable(script, out2, isLight);
 
     return ApiStatus_DONE2;
 }

@@ -6,10 +6,12 @@
 
 #ifdef ANTIGUY_TRIO
 #define ACTOR_TYPE          ACTOR_TYPE_ANTI_GUY_KPA
+#define ACTOR_LEVEL         ACTOR_LEVEL_ANTI_GUY_KPA
 #define PARALYZE_CHANCE     50
 #define ESCAPE_CHANCE       0
 #else
 #define ACTOR_TYPE          ACTOR_TYPE_ANTI_GUY_OMO
+#define ACTOR_LEVEL         ACTOR_LEVEL_ANTI_GUY_OMO
 #define PARALYZE_CHANCE     60
 #define ESCAPE_CHANCE       50
 #endif
@@ -77,7 +79,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE,
-    .level = ACTOR_LEVEL_ANTI_GUY,
+    .level = ACTOR_LEVEL,
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),

@@ -451,7 +451,7 @@ replace_funcs = {
     "GetPartAnimNotify": {0: "ActorIDs"},
     "SetActorPaletteEffect": {0: "ActorIDs"},
     "SetActorPaletteSwapParams": {0: "ActorIDs"},
-    "func_8026ED20": {0: "ActorIDs"},
+    "EnableActorPaletteEffects": {0: "ActorIDs"},
     "HideHealthBar": {0: "ActorIDs"},
     "func_8027D434": {0: "ActorIDs"},
     "SetProjectileTargetOffset": {0: "ActorIDs"},

@@ -888,7 +888,7 @@ EvtScript N(EVS_Attack_RageDrop) = {
 
 EvtScript N(EVS_Enrage) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Enraged, TRUE)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
+    EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, TRUE)
     EVT_CALL(SetActorPaletteSwapParams, ACTOR_SELF, PRT_MAIN, SPR_PAL_Blooper, SPR_PAL_Blooper_Supercharged, 0, 6, 12, 6, 0, 0)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(EnragedStatusTable)))
@@ -899,7 +899,7 @@ EvtScript N(EVS_Enrage) = {
 
 EvtScript N(EVS_LoseRage) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Enraged, FALSE)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)
+    EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, FALSE)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
     EVT_RETURN

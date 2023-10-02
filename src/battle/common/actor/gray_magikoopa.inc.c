@@ -773,9 +773,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar0)
+    EVT_CALL(GetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
+        EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, FALSE)
     EVT_RETURN
@@ -786,9 +786,9 @@ EvtScript N(EVS_Init_Flying) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Flying)))
-    EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar0)
+    EVT_CALL(GetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
+        EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, FALSE)
     EVT_RETURN
@@ -803,14 +803,14 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_LABEL(0)
             EVT_CALL(GetOwnerTarget, LVar0, LVar1)
             EVT_CALL(GetIndexFromHome, LVar0, LVar1)
-            EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar2)
+            EVT_CALL(GetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar2)
             EVT_IF_GT(LVar1, LVar2)
                 EVT_CALL(N(CheckMagikoopaCastTarget), LVar0, LVar3)
                 EVT_IF_EQ(LVar3, 0)
                     EVT_CALL(GetStatusFlags, LVar0, LVar4)
                     EVT_IF_NOT_FLAG(LVar4, STATUS_FLAG_STATIC | STATUS_FLAG_TRANSPARENT)
                         EVT_SET(LVar8, LVar0)
-                        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar1)
+                        EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar1)
                         EVT_GOTO(100)
                     EVT_END_IF
                 EVT_END_IF
@@ -821,7 +821,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_END_IF
         EVT_IF_EQ(LFlag0, FALSE)
             EVT_SET(LFlag0, TRUE)
-            EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
+            EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
             EVT_GOTO(10)
         EVT_END_IF
     EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)

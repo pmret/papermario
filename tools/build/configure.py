@@ -280,6 +280,11 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "actor_types",
+        command=f"$python {BUILD_TOOLS}/actor_types.py $out $in",
+    )
+
+    ninja.rule(
         "world_map",
         command=f"$python {BUILD_TOOLS}/world_map.py $in $out",
     )
@@ -612,6 +617,17 @@ class Configure:
                 Path("src/item_hud_scripts.yaml"),
             ],
             "item_data",
+        )
+
+        build(
+            [
+                self.build_path() / "include/battle/actor_types.inc.c",
+                self.build_path() / "include/battle/actor_types.h",
+            ],
+            [
+                Path("src/battle/actors.yaml"),
+            ],
+            "actor_types",
         )
 
         # Build objects

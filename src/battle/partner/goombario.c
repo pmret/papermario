@@ -7,7 +7,7 @@
 
 #define NAMESPACE battle_partner_goombario
 
-extern s32 bActorTattles[ACTOR_TYPE_COUNT];
+extern s32 bActorTattles[];
 
 static EffectInstance* N(tattleEffect);
 static b32 N(isCharged);

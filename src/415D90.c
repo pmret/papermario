@@ -301,7 +301,7 @@ BSS s32 D_802ACC60;
 BSS s32 D_802ACC64;
 BSS s32 D_802ACC68;
 BSS s32 D_802ACC6C;
-BSS s32 D_802ACC70[24];
+BSS s32 BattleMenu_TargetHudElems[24];
 BSS PopupMenu D_802ACCD0;
 BSS s8 BattleMenuState;
 BSS s8 D_802AD001;
@@ -4911,7 +4911,7 @@ void btl_state_update_select_target(void) {
                 }
             }
 
-            if (battleStatus->curTargetListFlags & TARGET_FLAG_80000000) {
+            if (battleStatus->curTargetListFlags & TARGET_FLAG_OVERRIDE) {
                 if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
                     gBattleSubState = battleStatus->acceptTargetMenuSubstate;
                     if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
@@ -4955,7 +4955,7 @@ void btl_state_update_select_target(void) {
 
             for (i = 0; i < targetListLength; i++) {
                 id = hud_element_create(&HES_HandPointDownLoop);
-                D_802ACC70[i] = id;
+                BattleMenu_TargetHudElems[i] = id;
                 hud_element_set_render_depth(id, 0);
                 hud_element_set_render_pos(id, 0, -100);
             }
@@ -5009,7 +5009,7 @@ void btl_state_update_select_target(void) {
 
                     target = &actor->targetData[targetIndexList[selectedTargetIndex]];
                     actorFlags = get_actor(target->actorID)->flags;
-                    id = D_802ACC70[0];
+                    id = BattleMenu_TargetHudElems[0];
 
                     if (actorFlags & ACTOR_FLAG_UPSIDE_DOWN) {
                         hud_element_set_script(id, &HES_HandPointLeftLoop);
@@ -5027,7 +5027,7 @@ void btl_state_update_select_target(void) {
             actor->targetActorID = target->actorID;
             actor->targetPartIndex = target->partID;
             for (i = 0; i < targetListLength; i++) {
-                hud_element_free(D_802ACC70[i]);
+                hud_element_free(BattleMenu_TargetHudElems[i]);
             }
 
             if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
@@ -5050,7 +5050,7 @@ void btl_state_update_select_target(void) {
             break;
         case BTL_SUBSTATE_SELECT_TARGET_CANCEL:
             for (i = 0; i < targetListLength; i++) {
-                hud_element_free(D_802ACC70[i]);
+                hud_element_free(BattleMenu_TargetHudElems[i]);
             }
             gBattleStatus.flags1 |= BS_FLAGS1_10000 | BS_FLAGS1_MENU_OPEN;
             actor->flags |= ACTOR_FLAG_8000000;
@@ -5122,7 +5122,7 @@ void btl_state_draw_select_target(void) {
         if (battleStatus->curTargetListFlags & TARGET_FLAG_ENEMY) {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
             anotherActor = get_actor(target->actorID);
-            id = D_802ACC70[0];
+            id = BattleMenu_TargetHudElems[0];
             targetX = target->posA.x;
             targetY = target->posA.y;
             targetZ = target->posA.z;
@@ -5150,7 +5150,7 @@ void btl_state_draw_select_target(void) {
             for (i = 0; i < targetListLength; i++) {
                 target = &actor->targetData[targetIndexList[i]];
                 anotherActor = get_actor(target->actorID);
-                id = D_802ACC70[i];
+                id = BattleMenu_TargetHudElems[i];
                 targetX = target->posA.x;
                 targetY = target->posA.y;
                 targetZ = target->posA.z;

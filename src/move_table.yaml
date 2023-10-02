@@ -1037,7 +1037,7 @@
     nameMsg: MSG_ItemName_Kaiden
     fullDescMsg: MSG_ItemFullDesc_Kaiden
     shortDescMsg: MSG_ItemShortDesc_Kaiden
-    flags: [ TARGET_FLAG_80000000 ]
+    flags: [ TARGET_FLAG_OVERRIDE ]
     category: MOVE_TYPE_NONE
     actionTip: MOVE_ACTION_TIP_NONE
     costFP: 0
@@ -1073,7 +1073,7 @@
     nameMsg: MSG_Menus_StarPower_Focus
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
-    flags: [ TARGET_FLAG_80000000 ]
+    flags: [ TARGET_FLAG_OVERRIDE ]
     category: MOVE_TYPE_STAR_POWER
     actionTip: MOVE_ACTION_TIP_NONE
     costFP: 0

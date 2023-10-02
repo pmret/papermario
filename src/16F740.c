@@ -13,7 +13,7 @@ extern s16 D_802809F6;
 extern s16 DemoBattleBeginDelay;
 extern s32 BattleScreenFadeAmt;
 extern EvtScript EVS_OnBattleInit;
-extern s32 D_80281454[];
+extern s32 bActorsIgnoreDuringCount[];
 extern EvtScript EVS_Mario_OnActorCreate;
 extern EvtScript EVS_Peach_OnActorCreate;
 
@@ -343,7 +343,7 @@ void btl_state_update_normal_start(void) {
 
             for (i = 0; i < BattleEnemiesCreated; i++) {
                 create_actor(&(*battle->formation)[i]);
-                types = D_80281454;
+                types = bActorsIgnoreDuringCount;
                 actor = battleStatus->enemyActors[i];
 
                 while (TRUE) {
