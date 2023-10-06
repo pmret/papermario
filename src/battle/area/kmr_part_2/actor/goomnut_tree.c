@@ -72,7 +72,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
@@ -179,7 +179,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(SetPartScale, ACTOR_SELF, PRT_TREE_NUT_1, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
     EVT_CALL(SetPartScale, ACTOR_SELF, PRT_TREE_NUT_2, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
     EVT_CALL(SetPartScale, ACTOR_SELF, PRT_TREE_NUT_3, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_TARGET_FLAG_4, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_TARGET_NO_DAMAGE, TRUE)
     EVT_RETURN
     EVT_END
 };

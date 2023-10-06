@@ -24,8 +24,8 @@ void state_step_startup(void) {
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
-    gGameStatusPtr->unk_76 = 0;
-    gGameStatusPtr->disableScripts = 0;
+    gGameStatusPtr->unk_76 = FALSE;
+    gGameStatusPtr->disableScripts = FALSE;
     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     gGameStatusPtr->creditsViewportMode = -1;
     gGameStatusPtr->demoBattleFlags = 0;

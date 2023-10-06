@@ -20,7 +20,7 @@ API_CALLABLE(N(ImprisonedCardSetup)) {
     card->rot.y = 0.0f;
     card->effect = fx_spirit_card(1, card->pos.x, card->pos.y, card->pos.z, 1.0f, 0);
     card->effect->data.spiritCard->chapter = 2;
-    card->shadowID = create_shadow_type(0, card->pos.x, card->pos.y, card->pos.z);
+    card->shadowID = create_shadow_type(SHADOW_VARYING_CIRCLE, card->pos.x, card->pos.y, card->pos.z);
     return ApiStatus_DONE2;
 }
 

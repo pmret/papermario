@@ -1,10 +1,10 @@
 #include "common.h"
 
-SHIFT_BSS s32 D_8010C94C;
-SHIFT_BSS s32 D_8010C968;
-SHIFT_BSS s32 D_8010C98C;
-SHIFT_BSS s32 D_8010C970;
-SHIFT_BSS s32 D_8010C974;
+SHIFT_BSS s32 NpcHitQueryBehindRightY;
+SHIFT_BSS s32 NpcHitQueryBehindCollider;
+SHIFT_BSS s32 NpcHitQueryAheadCollider;
+SHIFT_BSS s32 NpcHitQueryAheadY;
+SHIFT_BSS s32 NpcHitQueryBehindLeftY;
 SHIFT_BSS s32 NpcHitQueryColliderID;
 
 PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
@@ -33,7 +33,7 @@ s32 npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32
     sy = *startY;
     sz = *startZ;
     colliderID = test_ray_colliders(ignoreFlags, sx, sy, sz, 0.0f, -1.0f, 0.0f, &cHitX, &cHitY, &cHitZ, &cHitDepth, &cHitNx, &cHitNy, &cHitNz);
-    if ((ignoreFlags & COLLISION_IGNORE_ENTITIES) == 0)  {
+    if (!(ignoreFlags & COLLISION_IGNORE_ENTITIES))  {
         entityID = test_ray_entities(*startX, *startY, *startZ, 0.0f, -1.0f, 0.0f, &eHitX, &eHitY, &eHitZ, &eHitDepth, &eHitNx, &eHitNy, &eHitNz);
         if (entityID >= 0) {
             colliderID = entityID | COLLISION_WITH_ENTITY_BIT;
@@ -91,9 +91,9 @@ b32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
     x = *posX;
     y = *posY;
     z = *posZ;
-    D_8010C970 = y;
-    D_8010C94C = *posY;
-    D_8010C974 = *posY;
+    NpcHitQueryAheadY = *posY;
+    NpcHitQueryBehindRightY = *posY;
+    NpcHitQueryBehindLeftY = *posY;
     radius /= 2.5;
     hitYBehindLeft = hitYBehindRight = hitYAhead = -32767.0f;
     minDepth = fabsf(*hitDepth);
@@ -114,8 +114,8 @@ b32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
         if (depth <= minDepth) {
             hitYAhead = startY;
             NpcHitQueryColliderID = colliderID;
-            D_8010C98C = colliderID;
-            D_8010C970 = hitYAhead;
+            NpcHitQueryAheadCollider = colliderID;
+            NpcHitQueryAheadY = hitYAhead;
             minDepth = depth;
             hasCollision = TRUE;
         }
@@ -137,8 +137,8 @@ b32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
         if (depth <= minDepth) {
             hitYBehindRight = startY;
             NpcHitQueryColliderID = colliderID;
-            D_8010C968 = colliderID;
-            D_8010C94C = hitYBehindRight;
+            NpcHitQueryBehindCollider = colliderID;
+            NpcHitQueryBehindRightY = hitYBehindRight;
             minDepth = depth;
             hasCollision = TRUE;
         }
@@ -160,8 +160,8 @@ b32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
         if (depth <= minDepth) {
             hitYBehindLeft = startY;
             NpcHitQueryColliderID = colliderID;
-            D_8010C968 = colliderID;
-            D_8010C974 = hitYBehindLeft;
+            NpcHitQueryBehindCollider = colliderID;
+            NpcHitQueryBehindLeftY = hitYBehindLeft;
             minDepth = depth;
             hasCollision = TRUE;
         }
@@ -203,9 +203,9 @@ b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     y = *posY;
     z = *posZ;
 
-    D_8010C970 = y;
-    D_8010C94C = *posY;
-    D_8010C974 = *posY;
+    NpcHitQueryAheadY = y;
+    NpcHitQueryBehindRightY = *posY;
+    NpcHitQueryBehindLeftY = *posY;
 
     hitYUnused = hitYBehind = hitYAhead = -32767.0f;
     yaw = 0.0f;
@@ -230,8 +230,8 @@ b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
         if (depth <= minDepth) {
             hitYAhead = startY;
             NpcHitQueryColliderID = colliderID;
-            D_8010C98C = colliderID;
-            D_8010C970 = hitYAhead;
+            NpcHitQueryAheadCollider = colliderID;
+            NpcHitQueryAheadY = hitYAhead;
             minDepth = depth;
             hasCollision = TRUE;
         }
@@ -253,8 +253,8 @@ b32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
         if (depth <= minDepth) {
             hitYBehind = startY;
             NpcHitQueryColliderID = colliderID;
-            D_8010C968 = colliderID;
-            D_8010C94C = hitYBehind;
+            NpcHitQueryBehindCollider = colliderID;
+            NpcHitQueryBehindRightY = hitYBehind;
             minDepth = depth;
             hasCollision = TRUE;
         }
@@ -298,7 +298,7 @@ s32 npc_raycast_up(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* 
     sz = *startZ;
     ret = test_ray_colliders(ignoreFlags, sx, sy, sz, 0.0f, 1.0f, 0.0f, &cHitX, &cHitY, &cHitZ, &cHitDepth, &cHitNx, &cHitNy, &cHitNz);
     colliderID = ret;
-    if ((ignoreFlags & COLLISION_IGNORE_ENTITIES) == 0)  {
+    if (!(ignoreFlags & COLLISION_IGNORE_ENTITIES))  {
         entityID = test_ray_entities(sx, sy, sz, 0.0f, 1.0f, 0.0f, &eHitX, &eHitY, &eHitZ, &eHitDepth, &eHitNx, &eHitNy, &eHitNz);
         ret = entityID | COLLISION_WITH_ENTITY_BIT;
         if (entityID >= 0) {
@@ -316,7 +316,7 @@ s32 npc_raycast_up(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* 
 
     if (ret < 0) {
         // TODO find better match
-        colliderID = 0;
+        colliderID = FALSE;
         return colliderID;
     } else {
         *hitDepth = cHitDepth;
@@ -340,7 +340,7 @@ s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) 
     s32 entityID;
     f32 sx, sy, sz;
     f32 sx2, sy2, sz2;
-    s32 ret = -1;
+    s32 ret = NO_COLLIDER;
 
     // needed to match
     sx2 = sx = *x;
@@ -399,7 +399,7 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     startY = y;
     startZ = z + deltaZ;
 
-    ret = -1;
+    ret = NO_COLLIDER;
     hitID = npc_raycast_up_corner(ignoreFlags, &startX, &startY, &startZ, &depth);
 
     if (hitID < 0) {
@@ -446,7 +446,7 @@ s32 npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX,
     s32 ret;
     s32 entityID;
 
-    ret = -1;
+    ret = NO_COLLIDER;
     if (flags & COLLISION_ONLY_ENTITIES) {
         entityID = test_ray_entities(startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, outDepth, hitNx, hitNy,
                                      hitNz);
@@ -522,7 +522,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
         hitResult = raycastHitID;
     }
 
-    if (phi_s5 == 0) {
+    if (!phi_s5) {
         *x += aX;
         *z += aZ;
     }
@@ -531,7 +531,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
 }
 
 s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
-    s32 ret = -1;
+    s32 ret = NO_COLLIDER;
     f32 depth;
     f32 originalDepth;
     f32 dirY;

@@ -53,7 +53,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
@@ -120,7 +120,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
@@ -152,7 +152,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
     EVT_CALL(SetActionResult, LVarE)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
         EVT_CASE_OR_EQ(2)
@@ -204,7 +204,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
@@ -276,7 +276,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
@@ -308,7 +308,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
     EVT_CALL(SetActionResult, LVarE)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
         EVT_CASE_OR_EQ(2)
@@ -360,7 +360,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
@@ -425,7 +425,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_IF_EQ(LFlag0, FALSE)
@@ -457,7 +457,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_JUMP_COMBO_4)
     EVT_END_SWITCH
     EVT_CALL(SetActionResult, LVarE)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
         EVT_CASE_OR_EQ(2)

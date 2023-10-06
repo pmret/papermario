@@ -73,7 +73,7 @@ API_CALLABLE(N(SetPartnerWishAnim)) {
     s32 wishAnimIdx = evt_get_variable(script, *args++);
     AnimID anim = PartnerWishAnims[playerData->curPartner][wishAnimIdx];
 
-    set_animation(ACTOR_PARTNER, 0, anim);
+    set_actor_anim(ACTOR_PARTNER, 0, anim);
 
     return ApiStatus_DONE2;
 }

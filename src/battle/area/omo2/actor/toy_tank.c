@@ -119,7 +119,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_2,
         .posOffset = { 0, 30, 0 },
         .targetOffset = { 0, 50 },
@@ -189,7 +189,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_Idle))
     EVT_CALL(EnableModel, MODEL_shy, FALSE)
     EVT_CALL(SetAnimatedModelRootPosition, 0, 200, 0, 0)
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_TARGET_FLAG_1, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_TARGET_NO_JUMP, TRUE)
     EVT_CALL(GetModelCenter, MODEL_kyu3)
     EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVar5, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, LVar5)
@@ -743,7 +743,7 @@ EvtScript N(EVS_BeginWave_Tank) = {
     EVT_CALL(ActorSpeak, MSG_CH4_0071, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim00, ANIM_GeneralGuy_Anim00)
     EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim05)
     EVT_CALL(EndActorSpeech, ACTOR_GENERAL, PRT_MAIN, -1, -1)
-    EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_20000000, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_NO_STATUS_ANIMS, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_BULB, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_TANK, PRT_2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_TANK, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)

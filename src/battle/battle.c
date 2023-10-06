@@ -288,7 +288,7 @@ void load_demo_battle(u32 index) {
     }
 
     gGameStatusPtr->debugEnemyContact = DEBUG_CONTACT_NONE;
-    gGameStatusPtr->unk_7C = 1;
+    gGameStatusPtr->healthBarsEnabled = TRUE;
 
     switch (mode) {
         case 0:

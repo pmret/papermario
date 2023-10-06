@@ -76,7 +76,7 @@ ActorPartBlueprint N(CubeParts)[] = {
         .projectileTargetOffset = { 0, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_PRIMARY_TARGET | ACTOR_PART_FLAG_SKIP_MOVEMENT_ALLOC,
         .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
@@ -103,7 +103,7 @@ ActorPartBlueprint N(SphereParts)[] = {
         .projectileTargetOffset = { 0, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_PRIMARY_TARGET | ACTOR_PART_FLAG_SKIP_MOVEMENT_ALLOC,
         .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
@@ -130,7 +130,7 @@ ActorPartBlueprint N(PrismParts)[] = {
         .projectileTargetOffset = { 0, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_PRIMARY_TARGET | ACTOR_PART_FLAG_SKIP_MOVEMENT_ALLOC,
         .index = PRT_TARGET,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },

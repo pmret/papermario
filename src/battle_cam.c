@@ -1314,7 +1314,7 @@ ApiStatus CamPresetUpdate_K(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    get_screen_coords(1, BattleCam_PosX, y, BattleCam_PosZ, &screenX, &screenY, &screenZ);
+    get_screen_coords(CAM_BATTLE, BattleCam_PosX, y, BattleCam_PosZ, &screenX, &screenY, &screenZ);
 
     if (screenY < 100) {
         y += 25.0f;
@@ -1383,7 +1383,7 @@ ApiStatus CamPresetUpdate_L(Evt* script, s32 isInitialCall) {
         BattleCam_InitialBoomPitch = camera->auxBoomPitch;
     }
 
-    get_screen_coords(1, x, y, z, &screenX, &screenY, &screenZ);
+    get_screen_coords(CAM_BATTLE, x, y, z, &screenX, &screenY, &screenZ);
 
     if (screenY < 100) {
         y += 25.0f;

@@ -452,7 +452,7 @@ EvtScript EVS_Partner_BurnHit = {
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
-            EVT_CALL(StartRumble, 3)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_LIGHT)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
@@ -482,7 +482,7 @@ EvtScript EVS_Partner_BurnHit = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
-            EVT_CALL(StartRumble, 3)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_LIGHT)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 4, 0)
@@ -512,7 +512,7 @@ EvtScript EVS_Partner_BurnHit = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
-            EVT_CALL(StartRumble, 4)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 6, 0)
@@ -542,7 +542,7 @@ EvtScript EVS_Partner_BurnHit = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
-            EVT_CALL(StartRumble, 5)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -591,7 +591,7 @@ EvtScript EVS_Partner_Hit_Impl = {
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
-            EVT_CALL(StartRumble, 3)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_LIGHT)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
@@ -621,7 +621,7 @@ EvtScript EVS_Partner_Hit_Impl = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
-            EVT_CALL(StartRumble, 3)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_LIGHT)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 4, 0)
@@ -651,7 +651,7 @@ EvtScript EVS_Partner_Hit_Impl = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
-            EVT_CALL(StartRumble, 4)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 6, 0)
@@ -681,7 +681,7 @@ EvtScript EVS_Partner_Hit_Impl = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
-            EVT_CALL(StartRumble, 5)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -723,7 +723,7 @@ EvtScript EVS_Partner_Hit_Impl = {
 
 // Internal script for animating a partner hit by a crushing attack
 EvtScript EVS_Partner_Crushed_Impl = {
-    EVT_CALL(StartRumble, 6)
+    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MAX)
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_SETF(LVar1, EVT_FLOAT(1.0))
     EVT_LOOP(10)
@@ -824,7 +824,7 @@ EvtScript EVS_Player_Hit_Impl = {
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
-            EVT_CALL(StartRumble, 3)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_LIGHT)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
@@ -854,7 +854,7 @@ EvtScript EVS_Player_Hit_Impl = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
-            EVT_CALL(StartRumble, 3)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_LIGHT)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 4, 0)
@@ -884,7 +884,7 @@ EvtScript EVS_Player_Hit_Impl = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
-            EVT_CALL(StartRumble, 4)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 6, 0)
@@ -914,7 +914,7 @@ EvtScript EVS_Player_Hit_Impl = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
         EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
-            EVT_CALL(StartRumble, 5)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
             EVT_WAIT(1)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -955,7 +955,7 @@ EvtScript EVS_Player_Hit_Impl = {
 };
 
 EvtScript EVS_Player_Crushed_Impl = {
-    EVT_CALL(StartRumble, 6)
+    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MAX)
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_SETF(LVar1, EVT_FLOAT(1.0))
     EVT_LOOP(10)
@@ -1142,7 +1142,7 @@ EvtScript EVS_Player_NoDamageHit = {
 
 EvtScript EVS_ForceNextTarget = {
     EVT_CALL(GetOwnerID, LVarA)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1153,10 +1153,10 @@ EvtScript EVS_ForceNextTarget = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1167,16 +1167,16 @@ EvtScript EVS_ForceNextTarget = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(1)
         EVT_END_IF
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
         EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(2)
         EVT_END_IF
     EVT_RETURN
@@ -1799,7 +1799,7 @@ EvtScript EVS_Enemy_ScareAway = {
 };
 
 EvtScript EVS_Enemy_SpinSmash_HitNext = {
-    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_10000)
+    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_ALLOW_TARGET_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerID, LVar1)
@@ -1810,7 +1810,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
         EVT_END_IF
     EVT_LABEL(1)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_EQ(LVar0, -1)
+        EVT_IF_EQ(LVar0, ITER_NO_MORE)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(GetOwnerTarget, LVar0, LVar9)

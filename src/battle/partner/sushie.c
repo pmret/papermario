@@ -194,7 +194,7 @@ API_CALLABLE(N(PlayWaterBlockFX)) {
         remove_effect(effect);
     }
 
-    battleStatus->waterBlockEffect = fx_water_block(0, posX, posY, posZ, 1.5f, 0);
+    battleStatus->waterBlockEffect = fx_water_block(FX_WATER_BLOCK_CREATE, posX, posY, posZ, 1.5f, 0);
 
     return ApiStatus_DONE2;
 }
@@ -761,7 +761,7 @@ EvtScript N(bellyFlop) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_THREAD
-        EVT_CALL(GetActionCommandResult, LVar0)
+        EVT_CALL(GetPartnerActionSuccess, LVar0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
@@ -777,7 +777,7 @@ EvtScript N(bellyFlop) = {
         EVT_CALL(SetActorRotation, ACTOR_PARTNER, 0, 0, 20)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(GetActionCommandResult, LVar0)
+        EVT_CALL(GetPartnerActionSuccess, LVar0)
         EVT_IF_GT(LVar0, 0)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar2)
@@ -856,7 +856,7 @@ EvtScript N(bellyFlop) = {
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_BELLY_FLOP)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_IF_GT(LVar0, 0)
         EVT_THREAD
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
@@ -910,7 +910,7 @@ EvtScript N(bellyFlop) = {
         EVT_WAIT(3)
         EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
@@ -1061,7 +1061,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(action_command_water_block_start, 0, 100, 3)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
     EVT_WAIT(110)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_SET(LVarA, LVar0)
         EVT_GOTO(10)
@@ -1105,7 +1105,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(N(PlayWaterBlockFX), LVar0, LVar1, LVar2)
     EVT_WAIT(30)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_CALL(N(ApplyWaterBlock))
     EVT_SET(LVarA, LVar0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1216,7 +1216,7 @@ EvtScript N(tidalWave) = {
         EVT_WAIT(5)
         EVT_LABEL(10)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_EQ(LVar0, -1)
+        EVT_IF_EQ(LVar0, ITER_NO_MORE)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

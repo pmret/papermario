@@ -107,7 +107,7 @@ s32 N(IgnitedStatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -211,7 +211,7 @@ EvtScript N(EVS_Cleanup) = {
 
 EvtScript N(EVS_Explode) = {
     EVT_EXEC_WAIT(N(EVS_Cleanup))
-    EVT_CALL(StartRumble, 11)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MAX)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))

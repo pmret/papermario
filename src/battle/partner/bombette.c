@@ -939,7 +939,7 @@ EvtScript N(bodySlam) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2020)
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -988,7 +988,7 @@ EvtScript N(bodySlam) = {
             EVT_SET(LVarF, 5)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2020)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_IF_GT(LVar0, 0)
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
@@ -1135,7 +1135,7 @@ EvtScript N(bomb) = {
         EVT_SWITCH(LVar2)
             EVT_CASE_EQ(MOVE_BOMB)
                 EVT_IF_GT(LVarA, 0)
-                    EVT_CALL(StartRumble, 4)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(4.5))
@@ -1147,7 +1147,7 @@ EvtScript N(bomb) = {
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(0.45))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.15))
                 EVT_ELSE
-                    EVT_CALL(StartRumble, 4)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.4))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.6))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(2.4))
@@ -1161,7 +1161,7 @@ EvtScript N(bomb) = {
                 EVT_END_IF
             EVT_CASE_EQ(MOVE_POWER_BOMB)
                 EVT_IF_GT(LVarA, 0)
-                    EVT_CALL(StartRumble, 5)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(4.5))
@@ -1173,7 +1173,7 @@ EvtScript N(bomb) = {
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(0.45))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.15))
                 EVT_ELSE
-                    EVT_CALL(StartRumble, 5)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.4))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.6))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(2.4))
@@ -1187,7 +1187,7 @@ EvtScript N(bomb) = {
                 EVT_END_IF
             EVT_CASE_EQ(MOVE_MEGA_BOMB)
                 EVT_IF_GT(LVarA, 0)
-                    EVT_CALL(StartRumble, 6)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MAX)
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(4.0))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(6.0))
@@ -1199,7 +1199,7 @@ EvtScript N(bomb) = {
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(0.6))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.2))
                 EVT_ELSE
-                    EVT_CALL(StartRumble, 6)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MAX)
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 1, EVT_FLOAT(0.5))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(2.0))
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
@@ -1258,48 +1258,48 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_POWER_BOMB)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BLAST_LV1)
             EVT_LABEL(5)
-            EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-            EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
-            EVT_IF_EQ(LVar0, 6)
-                EVT_GOTO(6)
-            EVT_END_IF
-            EVT_CALL(GetActionSuccessCopy, LVar0)
-            EVT_CALL(N(GetPowerBombDamage), LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_GT(0)
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
-                    EVT_SET(LF_MashEnded, 1)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
-            EVT_END_SWITCH
-            EVT_LABEL(6)
-            EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-            EVT_IF_NE(LVar0, -1)
-                EVT_GOTO(5)
-            EVT_END_IF
+                EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
+                EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
+                EVT_IF_EQ(LVar0, 6)
+                    EVT_GOTO(6)
+                EVT_END_IF
+                EVT_CALL(GetActionSuccessCopy, LVar0)
+                EVT_CALL(N(GetPowerBombDamage), LVar0)
+                EVT_SWITCH(LVar0)
+                    EVT_CASE_GT(0)
+                        EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                        EVT_SET(LF_MashEnded, 1)
+                    EVT_CASE_DEFAULT
+                        EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                EVT_END_SWITCH
+                EVT_LABEL(6)
+                EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+                EVT_IF_NE(LVar0, ITER_NO_MORE)
+                    EVT_GOTO(5)
+                EVT_END_IF
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BLAST_LV3)
             EVT_LABEL(10)
-            EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-            EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
-            EVT_IF_EQ(LVar0, 6)
-                EVT_GOTO(11)
-            EVT_END_IF
-            EVT_CALL(GetActionSuccessCopy, LVar0)
-            EVT_CALL(N(GetMegaBombDamage), LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_GT(0)
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
-                    EVT_SET(LF_MashEnded, 1)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
-            EVT_END_SWITCH
-            EVT_LABEL(11)
-            EVT_WAIT(5)
-            EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-            EVT_IF_NE(LVar0, -1)
-                EVT_GOTO(10)
-            EVT_END_IF
+                EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
+                EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
+                EVT_IF_EQ(LVar0, 6)
+                    EVT_GOTO(11)
+                EVT_END_IF
+                EVT_CALL(GetActionSuccessCopy, LVar0)
+                EVT_CALL(N(GetMegaBombDamage), LVar0)
+                EVT_SWITCH(LVar0)
+                    EVT_CASE_GT(0)
+                        EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                        EVT_SET(LF_MashEnded, 1)
+                    EVT_CASE_DEFAULT
+                        EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                EVT_END_SWITCH
+                EVT_LABEL(11)
+                EVT_WAIT(5)
+                EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+                EVT_IF_NE(LVar0, ITER_NO_MORE)
+                    EVT_GOTO(10)
+                EVT_END_IF
     EVT_END_SWITCH
     EVT_IF_GT(LF_MashEnded, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
@@ -1376,7 +1376,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 8)
     EVT_THREAD
-        EVT_CALL(StartRumble, 4)
+        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(4.5))

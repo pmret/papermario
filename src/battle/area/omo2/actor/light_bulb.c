@@ -63,7 +63,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
@@ -77,7 +77,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_80 | ACTOR_FLAG_NO_HEALTH_BAR,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_TATTLE | ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_LIGHT_BULB,
     .level = ACTOR_LEVEL_LIGHT_BULB,
     .maxHP = 8,

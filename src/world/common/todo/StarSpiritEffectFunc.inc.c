@@ -90,7 +90,7 @@ API_CALLABLE(N(StarSpiritEffectFunc3)) {
                 ptr->unk_54 = fx_spirit_card(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
                 ptr->unk_54->data.spiritCard->chapter = ptr->unk_38;
                 ptr->unk_54->data.spiritCard->unk_20 = 0;
-                ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
+                ptr->unk_40 = create_shadow_type(SHADOW_VARYING_CIRCLE, ptr->unk_18, ptr->unk_28, ptr->unk_20);
                 ptr->unk_44 = 3;
                 ptr->unk_46 = 0;
                 ptr->unk_2C = 0.0f;
@@ -171,7 +171,7 @@ API_CALLABLE(N(StarSpiritEffectFunc5)) {
         ptr->unk_54 = fx_spirit_card(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
         ptr->unk_54->data.spiritCard->chapter = ptr->unk_38;
         ptr->unk_54->data.spiritCard->unk_20 = 0;
-        ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
+        ptr->unk_40 = create_shadow_type(SHADOW_VARYING_CIRCLE, ptr->unk_18, ptr->unk_28, ptr->unk_20);
         ptr->unk_4C = 270;
     }
 

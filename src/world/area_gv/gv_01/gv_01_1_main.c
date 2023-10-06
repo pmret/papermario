@@ -283,8 +283,8 @@ API_CALLABLE(N(FadeToTitleScreen)) {
 
 API_CALLABLE(N(ChangeStateToTitleScreen)) {
     gGameStatusPtr->isBattle = FALSE;
-    gGameStatusPtr->unk_76 = 0;
-    gGameStatusPtr->disableScripts = 0;
+    gGameStatusPtr->unk_76 = FALSE;
+    gGameStatusPtr->disableScripts = FALSE;
     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     general_heap_create();

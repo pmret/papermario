@@ -161,17 +161,18 @@ s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32);
 s32 get_player_anim_for_status(s32 animID);
 void func_8026709C(ActorPart* part);
 
+// thresholds slightly lower than in GetDamageIntensity
 s32 func_80254250(ActorPart* part) {
     s32 ret;
 
     if (gBattleStatus.lastAttackDamage < 3) {
-        ret = 0;
+        ret = DAMAGE_INTENSITY_LIGHT;
     } else if (gBattleStatus.lastAttackDamage < 5) {
-        ret = 1;
+        ret = DAMAGE_INTENSITY_MEDIUM;
     } else if (gBattleStatus.lastAttackDamage < 9) {
-        ret = 2;
+        ret = DAMAGE_INTENSITY_HEAVY;
     } else {
-        ret = 3;
+        ret = DAMAGE_INTENSITY_EXTREME;
     }
 
     return ret;
@@ -198,7 +199,7 @@ void enable_actor_blur(Actor* actor) {
     numParts = actor->numParts;
 
     for (i = 0; i < numParts; i++) {
-        if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_2)) {
+        if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
             decorationTable = partsTable->decorationTable;
             decorationTable->unk_7D8 = 0;
             decorationTable->blurBufferPos = 0;
@@ -222,7 +223,7 @@ void enable_actor_blur(Actor* actor) {
 void disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
+    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         if (decorationTable->blurEnableCount != 0) {
@@ -237,7 +238,7 @@ void disable_actor_blur(Actor* actor) {
 void reset_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
+    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         if (decorationTable->blurEnableCount != 0) {
@@ -253,7 +254,7 @@ void reset_actor_blur(Actor* actor) {
 void force_disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if (actorPart->idleAnimations != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
+    if (actorPart->idleAnimations != NULL && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         decorationTable->blurEnableCount = 0;
@@ -491,7 +492,7 @@ void update_nonplayer_actor_blur_history(b32 isPartner, Actor* actor) {
     s32 i, j;
 
     for (i = 0; i < numParts; i++) {
-        if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == NULL || partsTable->flags & ACTOR_PART_FLAG_2) {
+        if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == NULL || partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS) {
             partsTable = partsTable->nextPart;
         } else {
             decorationTable = partsTable->decorationTable;
@@ -552,7 +553,7 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
     numParts = actor->numParts;
     partTable = actor->partsTable;
     for (i = 0; i < numParts; i++) {
-        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {
+        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
             partTable = partTable->nextPart;
             continue;
         }
@@ -658,7 +659,7 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
             }
             guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
-            flags = ACTOR_PART_FLAG_80000000;
+            flags = DRAW_SPRITE_OVERRIDE_ALPHA;
             blurOpacity = blurOpacityBase - drawIdx * opacityLossIncrement;
             if (!isPartner) {
                 spr_draw_npc_sprite(partTable->spriteInstanceID | flags, yaw, blurOpacity, 0, mtxTransform);
@@ -704,7 +705,7 @@ void update_nonplayer_actor_shadow(b32 isPartner, Actor* actor) {
     if (actor != NULL) {
         shadow = get_shadow_by_index(actor->shadow.id);
         shadow->flags |= ENTITY_FLAG_HIDDEN;
-        if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
+        if (!(actor->flags & ACTOR_FLAG_INVISIBLE)) {
             if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                 if (!isPartner) {
                     update_enemy_actor_blur_history(actor);
@@ -751,7 +752,7 @@ void update_nonplayer_actor_shadow(b32 isPartner, Actor* actor) {
                     actorPart->curPos.y = y2;
                     actorPart->curPos.z = z2;
 
-                    if (!(actorPart->flags & ACTOR_PART_FLAG_4)) {
+                    if (!(actorPart->flags & ACTOR_PART_FLAG_NO_SHADOW)) {
                         shadow = get_shadow_by_index(actorPart->shadowIndex);
                         shadow->flags &= ~ENTITY_FLAG_HIDDEN;
                         x1 = actorPart->curPos.x;
@@ -865,7 +866,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         (actor->actorBlueprint->statusIconOffset.y + actor->statusIconOffset.y) * actor->scalingFactor;
     actor->disableEffect->data.disableX->pos.z = actorPosZ;
 
-    if (!(gBattleStatus.flags1 & ACTOR_PART_FLAG_4) && (actor->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)) {
         if (actor->disableDismissTimer != 0) {
             actor->disableDismissTimer--;
             actor->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
@@ -880,7 +881,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         effect = actor->icePillarEffect;
         if (actor->icePillarEffect != NULL) {
             if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
-                (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_8000000)))
+                (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)))
             {
                 effect->data.icePillar->pos.x = actorPosX;
                 effect->data.icePillar->pos.y = actorPosY;
@@ -1062,8 +1063,10 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         if (!decorChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
             func_80266EE8(actor, UNK_PAL_EFFECT_0);
         }
-        if (actor->flags & ACTOR_FLAG_4000000) {
-            if (!(part->flags & ACTOR_PART_FLAG_20000000)) {
+
+        // adjust idle animation for status
+        if (actor->flags & ACTOR_FLAG_USING_IDLE_ANIM) {
+            if (!(part->flags & ACTOR_PART_FLAG_NO_STATUS_ANIMS)) {
                 if (actor->debuff == STATUS_KEY_FROZEN) {
                     if (!animChanged) {
                         part->curAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_FROZEN);
@@ -1137,7 +1140,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
             }
         }
 
-        if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_8000000)) {
+        if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)) {
             do {
                 if (actor->debuff == STATUS_KEY_POISON) {
                     create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_POISON);
@@ -1478,7 +1481,7 @@ void appendGfx_player_actor(void* arg0) {
         (player->actorBlueprint->statusIconOffset.y + player->statusIconOffset.y) * player->scalingFactor;
     player->disableEffect->data.disableX->pos.z = playerPosZ;
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)) {
         if (player->disableDismissTimer != 0) {
             player->disableDismissTimer--;
             player->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
@@ -1492,7 +1495,7 @@ void appendGfx_player_actor(void* arg0) {
 
     if (battleStatus->waterBlockTurnsLeft != 0) {
         if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
-            (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)))
+            (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)))
         {
             effect = battleStatus->waterBlockEffect;
             effect->data.waterBlock->pos.x = playerPosX;
@@ -1507,7 +1510,7 @@ void appendGfx_player_actor(void* arg0) {
     }
     if (battleStatus->cloudNineTurnsLeft != 0) {
         if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
-            (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)))
+            (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)))
         {
             effect = battleStatus->cloudNineEffect;
             effect->data.endingDecals->pos.x = playerPosX;
@@ -1525,7 +1528,7 @@ void appendGfx_player_actor(void* arg0) {
         effect = player->icePillarEffect;
         if (player->icePillarEffect != NULL) {
             if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
-                (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)))
+                (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)))
             {
                 effect->data.icePillar->pos.x = playerPosX - 8.0f;
                 effect->data.icePillar->pos.y = playerPosY;
@@ -1549,7 +1552,7 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
 
-    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)) {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 1;
     } else {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 0;
@@ -1563,7 +1566,7 @@ void appendGfx_player_actor(void* arg0) {
         }
     } while (0); // required to match
 
-    if (player->flags & ACTOR_FLAG_8000000) {
+    if (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS) {
         if (battleStatus->hammerCharge > 0) {
             create_status_icon_boost_hammer(player->hudElementDataIndex);
             remove_status_icon_boost_jump(player->hudElementDataIndex);
@@ -1581,7 +1584,7 @@ void appendGfx_player_actor(void* arg0) {
         enable_status_icon_boost_hammer(player->hudElementDataIndex);
     }
 
-    if ((player->flags & ACTOR_FLAG_8000000) && !(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
+    if ((player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS) && !(gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         if (playerData->curHP > PERIL_THRESHOLD) {
             remove_status_icon_peril(player->hudElementDataIndex);
             do {
@@ -1623,7 +1626,7 @@ void appendGfx_player_actor(void* arg0) {
     } while (0); // required to match
 
     if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0))
-        && !(player->flags & ACTOR_FLAG_20000000)
+        && !(player->flags & ACTOR_FLAG_NO_INACTIVE_ANIM)
         && ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK)))
     {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_100000)) {
@@ -1681,7 +1684,7 @@ void appendGfx_player_actor(void* arg0) {
         enable_status_chill_out(player->hudElementDataIndex);
     }
 
-    if ((player->flags & ACTOR_FLAG_4000000) && !animChanged) {
+    if ((player->flags & ACTOR_FLAG_USING_IDLE_ANIM) && !animChanged) {
         s32 temp = playerParts->curAnimation;
         if (temp == get_player_anim_for_status(STATUS_KEY_STONE)) {
             playerParts->curAnimation = get_player_anim_for_status(STATUS_KEY_NORMAL);
@@ -1730,7 +1733,7 @@ void appendGfx_player_actor(void* arg0) {
     if (!cond3) {
         func_80266EE8(player, UNK_PAL_EFFECT_0);
     }
-    if (player->flags & ACTOR_FLAG_4000000) {
+    if (player->flags & ACTOR_FLAG_USING_IDLE_ANIM) {
         if (battleStatus->hustleTurns != 0) {
             playerParts->curAnimation = get_player_anim_for_status(STATUS_KEY_HUSTLE);
             animChanged = TRUE;
@@ -1803,7 +1806,7 @@ void appendGfx_player_actor(void* arg0) {
         } while (0); // needed to match
     }
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)) {
         if (!cond4) {
             do {
                 if (player->debuff == STATUS_KEY_POISON) {
@@ -1951,7 +1954,7 @@ s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
     s32 opacity;
     s32 sprDrawOpts;
 
-    if (part->flags & ACTOR_PART_FLAG_2) {
+    if (part->flags & ACTOR_PART_FLAG_NO_DECORATIONS) {
         opacity = 255;
         sprDrawOpts = 0;
         if (part->opacity < 255) {
@@ -3355,7 +3358,7 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
 }
 
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
-    if (!(part->flags & ACTOR_PART_FLAG_2)) {
+    if (!(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         switch (part->decorationTable->unk_750) {
             case 0:
                 func_8025C8A0(arg0, part, yaw, arg3);
@@ -3437,7 +3440,7 @@ void func_8025C918(b32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
 }
 
 s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
-    if (!(part->flags & ACTOR_PART_FLAG_2)) {
+    if (!(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         switch (part->decorationTable->unk_764) {
             case 0:
                 func_8025CD28(arg0, part, yaw, arg3);
@@ -3464,17 +3467,17 @@ void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
 
     if (decor->unk_765 != 0) {
         switch (func_80254250(part)) {
-            case 0:
+            case DAMAGE_INTENSITY_LIGHT:
                 decor->unk_767 = 1;
                 decor->unk_766 = 0;
                 break;
-            case 1:
+            case DAMAGE_INTENSITY_MEDIUM:
                 decor->unk_767 = 8;
                 decor->unk_766 = 1;
                 break;
-            case 2:
+            case DAMAGE_INTENSITY_HEAVY:
             default:
-                decor->unk_767 = 0xE;
+                decor->unk_767 = 14;
                 decor->unk_766 = 2;
                 break;
         }

@@ -80,7 +80,7 @@ void update_cameras(void) {
             guOrthoF(cam->perspectiveMatrix, -w * 0.5, w * 0.5, -h * 0.5, h * 0.5, -1000.0f, 1000.0f, 1.0f);
         }
 
-        get_screen_coords(0, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
+        get_screen_coords(CAM_DEFAULT, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
         cam->targetScreenCoords.x = sx;
         cam->targetScreenCoords.y = sy;
         cam->targetScreenCoords.z = sz;

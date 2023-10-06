@@ -68,7 +68,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 38 },
@@ -407,7 +407,7 @@ EvtScript N(EVS_Move_HealOne) = {
 };
 
 EvtScript N(EVS_FindInjuredActor) = {
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -418,7 +418,7 @@ EvtScript N(EVS_FindInjuredActor) = {
             EVT_RETURN
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_RETURN

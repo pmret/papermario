@@ -1119,7 +1119,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
-            item->shadowIndex = create_shadow_type(0, item->pos.x, item->pos.y, item->pos.z);
+            item->shadowIndex = create_shadow_type(SHADOW_VARYING_CIRCLE, item->pos.x, item->pos.y, item->pos.z);
             shadow = get_shadow_by_index(item->shadowIndex);
 
             if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
@@ -1224,7 +1224,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     }
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
 
-    item->shadowIndex = create_shadow_type(0, item->pos.x, item->pos.y, item->pos.z);
+    item->shadowIndex = create_shadow_type(SHADOW_VARYING_CIRCLE, item->pos.x, item->pos.y, item->pos.z);
     shadow = get_shadow_by_index(item->shadowIndex);
     shadow->flags |= ENTITY_FLAG_HIDDEN;
 

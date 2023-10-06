@@ -929,8 +929,8 @@ typedef struct BattleStatus {
     /* 0x0CC */ Vec3f camLookatObjPos;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
-    /* 0x0E0 */ struct Actor* enemyActors[24];
-    /* 0x140 */ s16 enemyIDs[24];
+    /* 0x0E0 */ struct Actor* enemyActors[MAX_ENEMY_ACTORS];
+    /* 0x140 */ s16 enemyIDs[MAX_ENEMY_ACTORS];
     /* 0x170 */ s8 nextEnemyIndex; /* (during enemy turn) who should go next */
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 activeEnemyActorID; /* (during enemy turn) enemy currently using their move */
@@ -949,7 +949,7 @@ typedef struct BattleStatus {
     /* 0x194 */ u8 statusChance;
     /* 0x195 */ s8 statusDuration;
     /* 0x196 */ char unk_196;
-    /* 0x197 */ s8 targetHomeIndex; /* some sort of home index used for target list construction */
+    /* 0x197 */ s8 sampleTargetHomeIndex;
     /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ u8 curDamageSource;
@@ -1405,18 +1405,18 @@ typedef struct GameStatus {
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ s8 debugEnemyContact;
     /* 0x075 */ s8 debugQuizmo;
-    /* 0x076 */ s8 unk_76;
-    /* 0x077 */ char unk_77;
+    /* 0x076 */ b8 unk_76;
+    /* 0x077 */ b8 unk_77;
     /* 0x078 */ s8 disableScripts;
     /* 0x079 */ char unk_79;
-    /* 0x07A */ s8 musicEnabled;
+    /* 0x07A */ b8 musicEnabled;
     /* 0x07B */ char unk_7B;
-    /* 0x07C */ s8 unk_7C;
+    /* 0x07C */ b8 healthBarsEnabled;
     /* 0x07D */ s8 keepUsingPartnerOnMapChange;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
-    /* 0x081 */ s8 multiplayerEnabled;
+    /* 0x081 */ b8 multiplayerEnabled;
     /* 0x082 */ Vec2b unk_82;
     /* 0x084 */ s8 playerSpriteSet;
     /* 0x085 */ char unk_85;
@@ -1518,13 +1518,13 @@ typedef struct RenderTask {
 
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
-    /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
-    /* 0x04 */ Vec3s posA;
-    /* 0x0A */ Vec3s posB;
-    /* 0x10 */ s8 unk_10;
-    /* 0x11 */ s8 homeCol; /* from xpos --> 0-3 */
-    /* 0x12 */ s8 homeRow; /* from ypos --> 0-3 */
-    /* 0x13 */ s8 layer; /* from zpos? --> 0-1 */
+    /* 0x02 */ s16 partID;
+    /* 0x04 */ Vec3s truePos; // position where the cursor will be drawn
+    /* 0x0A */ Vec3s sortPos; // effective position used for sorting, includes priority-based x offsets
+    /* 0x10 */ s8 priorityOffset;
+    /* 0x11 */ s8 column; // from xpos --> 0-3
+    /* 0x12 */ s8 row; // from ypos --> 0-3
+    /* 0x13 */ s8 layer; // from zpos --> 0-1
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
@@ -1799,7 +1799,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ Vec3f unk_30;
+    /* 0x30 */ Vec3f velStep;
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 vel;
@@ -1912,9 +1912,9 @@ typedef struct Actor {
     /* 0x224 */ s8 chillOutTurns;
     /* 0x225 */ char unk_225[3];
     /* 0x228 */ struct EffectInstance* icePillarEffect;
-    /* 0x22C */ struct SelectableTarget targetData[24];
+    /* 0x22C */ struct SelectableTarget targetData[MAX_ENEMY_ACTORS];
     /* 0x40C */ s8 targetListLength;
-    /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
+    /* 0x40D */ s8 targetIndexList[MAX_ENEMY_ACTORS]; /* into targetData */
     /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427[1];
@@ -2065,9 +2065,9 @@ typedef struct SaveData {
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
     /* 0x12E0 */ s8 debugEnemyContact;
-    /* 0x12E0 */ s8 unk_12E1;
-    /* 0x12E0 */ s8 unk_12E2;
-    /* 0x12E0 */ s8 musicEnabled;
+    /* 0x12E0 */ b8 unk_12E1;
+    /* 0x12E0 */ b8 unk_12E2;
+    /* 0x12E0 */ b8 musicEnabled;
     /* 0x12E4 */ char unk_12E4[0x2];
     /* 0x12E6 */ Vec3s savePos;
     /* 0x12EC */ SaveMetadata unk_12EC;

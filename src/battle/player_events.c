@@ -37,7 +37,7 @@ void btl_set_player_idle_anims(void) {
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
         actorPart->idleAnimations = bPeachIdleAnims;
-        set_animation(0, 0, ANIM_Peach1_Walk);
+        set_actor_anim(0, 0, ANIM_Peach1_Walk);
     } else if (!battleStatus->outtaSightActive) {
         actorPart->idleAnimations = bMarioIdleAnims;
     }
@@ -67,7 +67,7 @@ API_CALLABLE(ActivateDefend) {
     deduct_current_move_fp();
     gBattleStatus.flags1 |= BS_FLAGS1_PLAYER_DEFENDING;
     actorPart->idleAnimations = bMarioDefendAnims;
-    set_animation(0, 0, ANIM_Mario1_Crouch);
+    set_actor_anim(0, 0, ANIM_Mario1_Crouch);
     return ApiStatus_DONE2;
 }
 
@@ -468,7 +468,7 @@ API_CALLABLE(HasMerleeCastsLeft) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802619E8) {
+API_CALLABLE(SpawnTurnEndFX) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -495,7 +495,7 @@ API_CALLABLE(func_802619E8) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80261B40) {
+API_CALLABLE(RemoveTurnEndFX) {
     if (script->varTable[10] > 0) {
         hud_element_free(D_8029FBAC);
     }
@@ -505,7 +505,7 @@ API_CALLABLE(func_80261B40) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(FXRecoverHP) {
+API_CALLABLE(SpawnRecoverHeartFX) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -516,7 +516,7 @@ API_CALLABLE(FXRecoverHP) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(FXRecoverFP) {
+API_CALLABLE(SpawnRecoverFlowerFX) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -547,8 +547,8 @@ API_CALLABLE(IncrementPlayerFP) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80261D98) {
-    inflict_status_set_duration(get_actor(script->owner1.actorID), 4, 0, 1);
+API_CALLABLE(InflictDizzyAttackStatus) {
+    inflict_status_set_duration(get_actor(script->owner1.actorID), STATUS_KEY_DIZZY, 0, 1);
     btl_update_ko_status();
     return ApiStatus_DONE2;
 }
@@ -561,7 +561,7 @@ API_CALLABLE(GetLostHammerAndBootsLevel) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80261DF4) {
+API_CALLABLE(DropAbilityItem) {
     ItemEntity* item = get_item_entity(script->varTable[10]);
 
     if (isInitialCall) {
@@ -607,10 +607,10 @@ API_CALLABLE(func_80261DF4) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_80261FB4) {
+API_CALLABLE(PlayerGatherAbilityItem) {
     ItemEntity* item = get_item_entity(script->varTable[10]);
     Actor* player = gBattleStatus.playerActor;
-    s32 ft1;
+    s32 interpAmt;
     f32 deltaX;
     f32 deltaY;
     f32 deltaZ;
@@ -622,20 +622,20 @@ API_CALLABLE(func_80261FB4) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            ft1 = script->functionTemp[1];
+            interpAmt = script->functionTemp[1];
             deltaX = player->curPos.x - item->pos.x;
             deltaY = player->curPos.y + 12.0f - item->pos.y;
             deltaZ = player->curPos.z - 5.0f - item->pos.z;
 
-            item->pos.x += deltaX / ft1;
-            item->pos.y += deltaY / ft1;
-            item->pos.z += deltaZ / ft1;
+            item->pos.x += deltaX / interpAmt;
+            item->pos.y += deltaY / interpAmt;
+            item->pos.z += deltaZ / interpAmt;
 
             item->pos.y += dist2D(item->pos.x, item->pos.y, player->curPos.x,
                                        player->curPos.y + 12.0f) / 5.0f;
 
             if (script->functionTemp[1] == 1) {
-                script->functionTemp[0] = script->functionTemp[1];
+                script->functionTemp[0] = 1;
             }
 
             script->functionTemp[1]--;
@@ -646,12 +646,11 @@ API_CALLABLE(func_80261FB4) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802620F8) {
-    // TODO get type correct
-    s32* temp_v1 = &D_8029FBB0[script->varTable[14]];
+API_CALLABLE(AbilityItemUnkDelay) {
+    s32* delayCounter = &D_8029FBB0[script->varTable[14]];
 
-    if (*temp_v1 != 0) {
-        (*temp_v1)--;
+    if (*delayCounter != 0) {
+        (*delayCounter)--;
         return ApiStatus_BLOCK;
     }
 
@@ -1627,7 +1626,7 @@ EvtScript EVS_MerleeAttackBonus = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
     EVT_WAIT(4)
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)
-    EVT_CALL(ShowMessageBox, 0, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_MERLEE_ATK_UP, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(EVS_MerleeRunOut)
     EVT_RETURN
@@ -1681,7 +1680,7 @@ EvtScript EVS_MerleeDefenseBonus = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)
     EVT_END_IF
-    EVT_CALL(ShowMessageBox, 1, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_MERLEE_DEF_UP, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(EVS_MerleeRunOut)
     EVT_RETURN
@@ -1730,7 +1729,7 @@ EvtScript EVS_MerleeExpBonus = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Land)
     EVT_WAIT(4)
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)
-    EVT_CALL(ShowMessageBox, 2, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_MERLEE_EXP_UP, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(EVS_MerleeRunOut)
     EVT_RETURN
@@ -1742,19 +1741,19 @@ EvtScript EVS_PlayerHappy = {
     EVT_CALL(UseBattleCamPresetWait, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(func_802619E8, LVar0, LVar1, LVar2)
+    EVT_CALL(SpawnTurnEndFX, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 0)
     EVT_ADD(LVar1, 35)
     EVT_SET(LVar3, LVarA)
     EVT_ADD(LVar3, LVarB)
     EVT_IF_GT(LVar3, 0)
-        EVT_CALL(FXRecoverHP, LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(SpawnRecoverHeartFX, LVar0, LVar1, LVar2, LVar3)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_ADD(LVar1, 25)
     EVT_IF_GT(LVarC, 0)
-        EVT_CALL(FXRecoverFP, LVar0, LVar1, LVar2, LVarC)
+        EVT_CALL(SpawnRecoverFlowerFX, LVar0, LVar1, LVar2, LVarC)
     EVT_END_IF
     EVT_SET(LVar3, LVarA)
     EVT_ADD(LVar3, LVarB)
@@ -1785,7 +1784,7 @@ EvtScript EVS_PlayerHappy = {
     EVT_END_IF
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Mario1_Idle)
-    EVT_CALL(func_80261B40)
+    EVT_CALL(RemoveTurnEndFX)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_RETURN
     EVT_END
@@ -1798,7 +1797,7 @@ EvtScript EVS_ApplyDizzyAttack = {
         EVT_CALL(SetActorRotation, ACTOR_ENEMY0, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_80261D98)
+    EVT_CALL(InflictDizzyAttackStatus)
     EVT_CALL(SetActorRotation, ACTOR_ENEMY0, 0, 0, 0)
     EVT_RETURN
     EVT_END
@@ -1813,10 +1812,10 @@ EvtScript EVS_PlayerRegainAbility = {
     EVT_END_LOOP
     EVT_CALL(GetLostHammerAndBootsLevel)
     EVT_SWITCH(LVarA)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(BTL_MENU_TYPE_ITEMS)
             EVT_SET(LVarE, 0)
             EVT_SET(LVarA, ITEM_MENU_ITEMS)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(BTL_MENU_TYPE_SMASH)
             EVT_SET(LVarE, 1)
             EVT_SWITCH(LVarC)
                 EVT_CASE_EQ(0)
@@ -1826,7 +1825,7 @@ EvtScript EVS_PlayerRegainAbility = {
                 EVT_CASE_EQ(2)
                     EVT_SET(LVarA, ITEM_MENU_HAMMER3)
             EVT_END_SWITCH
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(BTL_MENU_TYPE_JUMP)
             EVT_SET(LVarE, 2)
             EVT_SWITCH(LVarB)
                 EVT_CASE_EQ(0)
@@ -1842,9 +1841,9 @@ EvtScript EVS_PlayerRegainAbility = {
     EVT_ADD(LVar1, 150)
     EVT_CALL(MakeItemEntity, LVarA, LVarF, LVar1, LVar2, 1, 0)
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(func_80261DF4)
-    EVT_CALL(func_802620F8)
-    EVT_CALL(func_80261FB4)
+    EVT_CALL(DropAbilityItem)
+    EVT_CALL(AbilityItemUnkDelay)
+    EVT_CALL(PlayerGatherAbilityItem)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30)

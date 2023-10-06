@@ -8,9 +8,9 @@ extern s8 ApplyingBuff;
 s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->targetHomeIndex = targetHomeIndex;
+    battleStatus->sampleTargetHomeIndex = targetHomeIndex;
     battleStatus->curTargetListFlags = targetSelectionFlags;
-    player_create_target_list(actor);
+    create_current_pos_target_list(actor);
     return actor->targetListLength;
 }
 
@@ -61,7 +61,7 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partID) {
             part = get_actor_part(actor, partID);
             if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                 state->goalPos.x = actor->curPos.x + (part->partOffset.x + part->targetOffset.x) * actor->scalingFactor;
-                if (!(actor->flags & ACTOR_PART_FLAG_800)) {
+                if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                     state->goalPos.y = actor->curPos.y + (part->partOffset.y + part->targetOffset.y) * actor->scalingFactor;
                 } else {
                     state->goalPos.y = actor->curPos.y + (-part->partOffset.y - part->targetOffset.y) * actor->scalingFactor;
@@ -69,7 +69,7 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partID) {
                 state->goalPos.z = actor->curPos.z + part->partOffset.z + 10.0f;
             } else {
                 state->goalPos.x = part->absolutePos.x + part->targetOffset.x;
-                if (!(actor->flags & ACTOR_PART_FLAG_800)) {
+                if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                     state->goalPos.y = part->absolutePos.y + part->targetOffset.y * actor->scalingFactor;
                 } else {
                     state->goalPos.y = part->absolutePos.y - part->targetOffset.y * actor->scalingFactor;
@@ -97,7 +97,7 @@ void set_part_goal_to_actor_part(ActorPartMovement* movement, s32 actorID, s32 p
             part = get_actor_part(actor, partID);
             if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                 part->movement->goalPos.x = actor->curPos.x + (part->partOffset.x + part->targetOffset.x) * actor->scalingFactor;
-                if (!(actor->flags & ACTOR_PART_FLAG_800)) {
+                if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                     part->movement->goalPos.y = actor->curPos.y + (part->partOffset.y + part->targetOffset.y) * actor->scalingFactor;
                 } else {
                     part->movement->goalPos.y = actor->curPos.y + (-part->partOffset.y - part->targetOffset.y) * actor->scalingFactor;
@@ -105,7 +105,7 @@ void set_part_goal_to_actor_part(ActorPartMovement* movement, s32 actorID, s32 p
                 part->movement->goalPos.z = actor->curPos.z + part->partOffset.z;
             } else {
                 part->movement->goalPos.x = part->absolutePos.x + part->targetOffset.x;
-                if (!(actor->flags & ACTOR_PART_FLAG_800)) {
+                if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
                     part->movement->goalPos.y = part->absolutePos.y + part->targetOffset.y * actor->scalingFactor;
                 } else {
                     part->movement->goalPos.y = part->absolutePos.y - part->targetOffset.y * actor->scalingFactor;
@@ -255,15 +255,17 @@ ApiStatus SetGoalToIndex(Evt* script, s32 isInitialCall) {
 ApiStatus GetIndexFromPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1 = *args++;
+    s32 outVar = *args++;
     Actor* actor;
+    s32 homeIdx;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
-    evt_set_variable(script, a1, get_nearest_home_index(actor->curPos.x, actor->curPos.y, actor->curPos.z));
+    homeIdx = get_nearest_home_index(actor->curPos.x, actor->curPos.y, actor->curPos.z);
+    evt_set_variable(script, outVar, homeIdx);
 
     return ApiStatus_DONE2;
 }
@@ -273,31 +275,36 @@ ApiStatus GetIndexFromHome(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
     Actor* actor;
+    s32 homeIdx;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
-    evt_set_variable(script, outVar, get_nearest_home_index(actor->homePos.x, actor->homePos.y, actor->homePos.z));
+    homeIdx = get_nearest_home_index(actor->homePos.x, actor->homePos.y, actor->homePos.z);
+    evt_set_variable(script, outVar, homeIdx);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus CountPlayerTargets(Evt* script, s32 isInitialCall) {
+ApiStatus CountTargets(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 targetSelectionFlags = *args++;
     s32 outVar = *args++;
     Actor* actor;
+    s32 homeIdx;
+    s32 numTargets;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
-    evt_set_variable(script, outVar, count_targets(actor, get_nearest_home_index(actor->curPos.x, actor->curPos.y,
-                 actor->curPos.z), targetSelectionFlags));
+    homeIdx = get_nearest_home_index(actor->curPos.x, actor->curPos.y, actor->curPos.z);
+    numTargets = count_targets(actor, homeIdx, targetSelectionFlags);
+    evt_set_variable(script, outVar, numTargets);
 
     return ApiStatus_DONE2;
 }
@@ -317,12 +324,9 @@ ApiStatus ForceHomePos(Evt* script, s32 isInitialCall) {
     z = evt_get_variable(script, *args++);
 
     actor = get_actor(actorID);
-    actor->homePos.x = x;
-    actor->curPos.x = x;
-    actor->homePos.y = y;
-    actor->curPos.y = y;
-    actor->homePos.z = z;
-    actor->curPos.z = z;
+    actor->curPos.x = actor->homePos.x = x;
+    actor->curPos.y = actor->homePos.y = y;
+    actor->curPos.z = actor->homePos.z = z;
 
     return ApiStatus_DONE2;
 }
@@ -820,7 +824,7 @@ ApiStatus SetAnimation(Evt* script, s32 isInitialCall) {
     partID = evt_get_variable(script, *args++);
     animID = evt_get_variable(script, *args++);
 
-    set_animation(actorID, partID, animID);
+    set_actor_anim(actorID, partID, animID);
 
     return ApiStatus_DONE2;
 }
@@ -860,7 +864,7 @@ ApiStatus SetAnimationRate(Evt* script, s32 isInitialCall) {
     partID = evt_get_variable(script, *args++);
     rate = evt_get_float_variable(script, *args++);
 
-    set_animation_rate(actorID, partID, rate);
+    set_actor_anim_rate(actorID, partID, rate);
 
     return ApiStatus_DONE2;
 }
@@ -2331,22 +2335,22 @@ ApiStatus func_8026E260(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerCreateTargetList(Evt* script, s32 isInitialCall) {
+ApiStatus CreateCurrentPosTargetList(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
     gBattleStatus.curTargetListFlags = *args;
-    player_create_target_list(actor);
+    create_current_pos_target_list(actor);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnemyCreateTargetList(Evt* script, s32 isInitialCall) {
+ApiStatus CreateHomeTargetList(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
     gBattleStatus.curTargetListFlags = *args;
-    enemy_create_target_list(actor);
+    create_home_target_list(actor);
 
     return ApiStatus_DONE2;
 }
@@ -2376,14 +2380,14 @@ ApiStatus SetOwnerTarget(Evt* script, s32 isInitialCall) {
 ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
-    s32 temp_v0 = evt_get_variable(script, *args++);
+    s32 mode = evt_get_variable(script, *args++);
     s32 temp = *args++;
     SelectableTarget* target;
-    s32 temp_v0_3;
-    s32 phi_v1;
-    s32 phi_a2;
+    s32 length;
+    s32 curIdx;
+    s32 retVal;
 
-    if (temp_v0 == -1) {
+    if (mode == ITER_FIRST) {
         actor->selectedTargetIndex = 0;
         target = &actor->targetData[actor->targetIndexList[0]];
         actor->targetActorID = target->actorID;
@@ -2391,7 +2395,7 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if (temp_v0 == 0xA) {
+    if (mode == ITER_LAST) {
         actor->selectedTargetIndex = actor->targetListLength - 1;
         target = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
         actor->targetActorID = target->actorID;
@@ -2399,31 +2403,31 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    phi_v1 = actor->selectedTargetIndex;
-    temp_v0_3 = actor->targetListLength;
-    phi_a2 = 0;
+    curIdx = actor->selectedTargetIndex;
+    length = actor->targetListLength;
+    retVal = ITER_HAS_MORE;
 
-    if (temp_v0 == 0) {
-        phi_v1++;
+    if (mode == ITER_NEXT) {
+        curIdx++;
     } else {
-        phi_v1--;
+        curIdx--;
     }
 
-    if (phi_v1 < 0) {
-        phi_v1 = temp_v0_3 - 1;
-        phi_a2 = -1;
+    if (curIdx < 0) {
+        curIdx = length - 1;
+        retVal = ITER_NO_MORE;
     }
 
-    if (phi_v1 >= temp_v0_3) {
-        phi_v1 = 0;
-        phi_a2 = -1;
+    if (curIdx >= length) {
+        curIdx = 0;
+        retVal = ITER_NO_MORE;
     }
 
-    actor->selectedTargetIndex = phi_v1;
+    actor->selectedTargetIndex = curIdx;
     target = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
     actor->targetActorID = target->actorID;
     actor->targetPartIndex = target->partID;
-    evt_set_variable(script, temp, phi_a2);
+    evt_set_variable(script, temp, retVal);
 
     return ApiStatus_DONE2;
 }
@@ -2487,7 +2491,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
             for (i = 0; i < actor->targetListLength; i++) {
                 target = &actor->targetData[actor->targetIndexList[i]];
 
-                if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
+                if (target->column == column && target->layer == layer && target->row < row) {
                     actor->targetActorID = target->actorID;
                     actor->targetPartIndex = target->partID;
                     outVal = 0;
@@ -2498,7 +2502,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
             for (i = 0; i < actor->targetListLength; i++) {
                 target = &actor->targetData[actor->targetIndexList[i]];
 
-                if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
+                if (target->column == column && target->layer == layer && target->row < row) {
                     actor->targetActorID = target->actorID;
                     actor->targetPartIndex = target->partID;
                     outVal = 0;
@@ -2509,7 +2513,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
             for (i = 0; i < actor->targetListLength; i++) {
                 target = &actor->targetData[actor->targetIndexList[i]];
 
-                if (target->homeCol == column && target->layer == layer && target->homeRow < row) {
+                if (target->column == column && target->layer == layer && target->row < row) {
                     actor->targetActorID = target->actorID;
                     actor->targetPartIndex = target->partID;
                     outVal = 0;
@@ -2761,19 +2765,19 @@ ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
     Actor* actor;
     s32* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 temp_s0_3 = evt_get_variable(script, *args++);
+    s32 useIdle = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
-    if (temp_s0_3 == 0) {
-        actor->flags &= ~ACTOR_FLAG_4000000;
-        actor->flags &= ~ACTOR_FLAG_8000000;
+    if (!useIdle) {
+        actor->flags &= ~ACTOR_FLAG_USING_IDLE_ANIM;
+        actor->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
         func_80266E40(actor);
     } else {
-        actor->flags |= ACTOR_FLAG_4000000;
+        actor->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
     }
 
     return ApiStatus_DONE2;
@@ -2792,7 +2796,7 @@ ApiStatus func_8026F1A0(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     if (temp_s0_3 == 0) {
-        actor->flags &= ~ACTOR_FLAG_8000000;
+        actor->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
         func_80266E40(actor);
     }
 

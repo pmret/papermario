@@ -1521,9 +1521,9 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     s16 shadowIndex;
 
     if (bpFlags & ENTITY_FLAG_FIXED_SHADOW_SIZE) {
-        type = (bpFlags & ENTITY_FLAG_SQUARE_SHADOW) ? 2 : 3;
+        type = (bpFlags & ENTITY_FLAG_CIRCULAR_SHADOW) ? SHADOW_FIXED_CIRCLE : SHADOW_FIXED_SQUARE;
     } else {
-        type = (bpFlags & ENTITY_FLAG_SQUARE_SHADOW) ? 0 : 1;
+        type = (bpFlags & ENTITY_FLAG_CIRCULAR_SHADOW) ? SHADOW_VARYING_CIRCLE : SHADOW_VARYING_SQUARE;
     }
 
     shadowIndex = create_shadow_type(type, x, y, z);
@@ -1540,19 +1540,19 @@ s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
     s32 shadowIndex;
 
     switch (type) {
-        case 2:
+        case SHADOW_FIXED_CIRCLE:
             isFixedSize = TRUE;
-        case 0:
+        case SHADOW_VARYING_CIRCLE:
             bp = &CircularShadowA;
             break;
-        case 3:
+        case SHADOW_FIXED_SQUARE:
             isFixedSize = TRUE;
-        case 1:
+        case SHADOW_VARYING_SQUARE:
             bp = &SquareShadow;
             break;
-        case 5:
+        case SHADOW_FIXED_ALT_CIRCLE:
             isFixedSize = TRUE;
-        case 4:
+        case SHADOW_VARYING_ALT_CIRCLE:
             bp = &CircularShadowB;
             break;
     }

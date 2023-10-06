@@ -89,7 +89,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(DidActionSucceed, LVarB)
+    EVT_CALL(GetPlayerActionSuccess, LVarB)
     EVT_SET(LVar9, 0)
     EVT_LABEL(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
@@ -192,7 +192,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(DidActionSucceed, LVarB)
+    EVT_CALL(GetPlayerActionSuccess, LVarB)
     EVT_SET(LVar9, 0)
     EVT_LABEL(11)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
@@ -309,7 +309,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(DidActionSucceed, LVarB)
+    EVT_CALL(GetPlayerActionSuccess, LVarB)
     EVT_SET(LVar9, 0)
     EVT_LABEL(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
@@ -418,7 +418,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(DidActionSucceed, LVarB)
+    EVT_CALL(GetPlayerActionSuccess, LVarB)
     EVT_SET(LVar9, 0)
     EVT_LABEL(11)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
@@ -535,7 +535,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(DidActionSucceed, LVarB)
+    EVT_CALL(GetPlayerActionSuccess, LVarB)
     EVT_SET(LVar9, 0)
     EVT_LABEL(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
@@ -640,7 +640,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(DidActionSucceed, LVarB)
+    EVT_CALL(GetPlayerActionSuccess, LVarB)
     EVT_SET(LVar9, 0)
     EVT_LABEL(11)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)

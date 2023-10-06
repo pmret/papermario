@@ -98,7 +98,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_8 | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_DEFAULT_TARGET | ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 54 },
@@ -771,7 +771,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
-            EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+            EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
             EVT_IF_LE(LVar0, 1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim0E)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
@@ -855,7 +855,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(AVAL_Move_First)
-            EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+            EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
             EVT_IF_LE(LVar0, 1)
                 EVT_EXEC_WAIT(N(EVS_Move_SummonBits))
                 EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_AttackWithBits)
@@ -867,7 +867,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_EXEC_WAIT(N(EVS_Move_SummonBits))
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_AttackWithBits)
         EVT_CASE_EQ(AVAL_Move_AttackWithBits)
-            EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+            EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
             EVT_IF_LE(LVar0, 1)
                 EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_FROZEN)
@@ -903,7 +903,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CALL(SetActorVar, ACTOR_KING, AVAR_Flags, LVar0)
             EVT_END_IF
         EVT_CASE_EQ(AVAL_Move_AttackWithClones)
-            EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+            EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
             EVT_IF_LE(LVar0, 1)
                 EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_FROZEN)
@@ -917,7 +917,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_AfterClonesAttack)
             EVT_END_IF
         EVT_CASE_EQ(AVAL_Move_AfterClonesAttack)
-            EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+            EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
             EVT_IF_GT(LVar0, 1)
                 EVT_EXEC_WAIT(N(EVS_Attack_CloneBreath))
                 EVT_RETURN

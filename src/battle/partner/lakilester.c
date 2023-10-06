@@ -449,8 +449,8 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                                             partnerState->goalPos.x,
                                             partnerState->goalPos.y);
             partnerState->speed = 0.0f;
-            partnerState->unk_30.x = 0.0f;
-            partnerState->unk_30.y = 0.0f;
+            partnerState->velStep.x = 0.0f;
+            partnerState->velStep.y = 0.0f;
             sTargetMarkRotation = 0;
             D_8023D294 = 0;
             sAimingTimer = 30;
@@ -541,10 +541,10 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                 sAimingTimer = 0;
             }
             if (sAimingTimer == 60) {
-                set_animation(ACTOR_PARTNER, 0,  ANIM_BattleLakilester_HoldSpiny);
+                set_actor_anim(ACTOR_PARTNER, 0,  ANIM_BattleLakilester_HoldSpiny);
             }
             if (sAimingTimer == 30) {
-                set_animation(ACTOR_PARTNER, 0, ANIM_BattleLakilester_StrainHoldSpiny);
+                set_actor_anim(ACTOR_PARTNER, 0, ANIM_BattleLakilester_StrainHoldSpiny);
             }
             if (sAimingTimer != 0) {
                 sAimingTimer--;
@@ -1065,31 +1065,31 @@ EvtScript N(spinySurge) = {
     EVT_END_IF
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_GOTO(12)
-    EVT_END_IF
-    EVT_CALL(GetActionCommandResult, LVarA)
-    EVT_CALL(N(GetSpinySurgeDamage))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
-        EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
-        EVT_CASE_DEFAULT
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-    EVT_END_SWITCH
-    EVT_WAIT(6)
-    EVT_LABEL(12)
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar1)
-    EVT_IF_NE(LVar1, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
+        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
+        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
+            EVT_GOTO(12)
+        EVT_END_IF
+        EVT_CALL(GetPartnerActionSuccess, LVarA)
+        EVT_CALL(N(GetSpinySurgeDamage))
+        EVT_SWITCH(LVar0)
+            EVT_CASE_GT(0)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CASE_DEFAULT
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_END_SWITCH
+        EVT_SWITCH(LVar0)
+            EVT_CASE_GT(0)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
+            EVT_CASE_DEFAULT
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
+        EVT_END_SWITCH
+        EVT_WAIT(6)
+        EVT_LABEL(12)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar1)
+        EVT_IF_NE(LVar1, ITER_NO_MORE)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_WAIT(30)
     EVT_LABEL(13)
     EVT_SWITCH(LVar0)
@@ -1109,7 +1109,7 @@ EvtScript N(spinySurge) = {
 EvtScript N(cloudNine_normal) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, FALSE)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 2)
     EVT_CALL(SetActionHudPrepareTime, 50)
@@ -1160,13 +1160,13 @@ EvtScript N(cloudNine_normal) = {
     EVT_WAIT(3)
     EVT_CALL(AddBattleCamZoom, 50)
     EVT_CALL(MoveBattleCamOver, 5)
-    EVT_CALL(GetActionCommandResult, LVarA)
+    EVT_CALL(GetPartnerActionSuccess, LVarA)
     EVT_IF_GT(LVarA, 0)
         EVT_CALL(N(RemoveCloudNineFX))
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
         EVT_CALL(N(CloudNineFX))
         EVT_CALL(N(ApplyCloudNine))
-        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_8000000, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_SHOW_STATUS_ICONS, TRUE)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_CloudNineEnd)
@@ -1200,7 +1200,7 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
         EVT_CALL(PlayerRunToGoal, 0)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
+        EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, FALSE)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1275,7 +1275,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_WAIT(3)
     EVT_CALL(AddBattleCamZoom, 50)
     EVT_CALL(MoveBattleCamOver, 5)
-    EVT_CALL(GetActionCommandResult, LVarA)
+    EVT_CALL(GetPartnerActionSuccess, LVarA)
     EVT_IF_GT(LVarA, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
         EVT_CALL(N(CloudNineFX))
@@ -1489,7 +1489,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             script->functionTemp[2] = 0;
 
             partnerState->moveArcAmplitude = 0;
-            set_animation(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneInhale);
+            set_actor_anim(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneInhale);
             break;
         case STATE_DISABLED:
             sHuffPuffBreathEffect->data.huffPuffBreath->pos.x = NPC_DISPOSE_POS_X;
@@ -1516,7 +1516,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             }
             partnerState->moveArcAmplitude = 1;
 
-            set_animation(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneExhale);
+            set_actor_anim(ACTOR_PARTNER, -1, ANIM_BattleLakilester_HurricaneExhale);
             break;
     }
 
@@ -1773,7 +1773,7 @@ EvtScript N(hurricane) = {
     EVT_END_IF
     EVT_LABEL(11)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
+    EVT_IF_NE(LVar0, ITER_NO_MORE)
         EVT_GOTO(10)
     EVT_END_IF
     EVT_WAIT(34)

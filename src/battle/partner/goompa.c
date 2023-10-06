@@ -71,7 +71,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_PART_FLAG_200000,
+    .flags = ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_GOOMBARIO,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),

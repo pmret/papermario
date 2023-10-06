@@ -118,7 +118,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_STACK_1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 67 },
@@ -166,7 +166,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, -8 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_ROCK_1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -178,7 +178,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_ROCK_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -190,7 +190,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_ROCK_3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -202,7 +202,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_ROCK_4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -214,7 +214,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_KNOCKOFF,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -922,7 +922,7 @@ EvtScript N(EVS_SpinSmashHit_Top) = {
     EVT_EXEC_GET_TID(N(EVS_SpinAround), LVarE)
     EVT_CALL(GetPartEventFlags, ACTOR_SELF, LVar0, LVarA)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_10000)
+    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_ALLOW_TARGET_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerID, LVar1)
@@ -934,7 +934,7 @@ EvtScript N(EVS_SpinSmashHit_Top) = {
     EVT_LABEL(1)
         EVT_ADD(LVarF, 1)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_EQ(LVar0, -1)
+        EVT_IF_EQ(LVar0, ITER_NO_MORE)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(GetOwnerTarget, LVar0, LVar9)
@@ -1010,10 +1010,10 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim15)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1C)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ThreeStackAnims)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_1, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_1, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
             EVT_CALL(SetActorSize, ACTOR_SELF, 62, EVT_IGNORE_ARG)
             EVT_CALL(SetActorStatusOffsets, ACTOR_SELF, 0, -20, 0, -20)
             EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 57, 30)
@@ -1026,10 +1026,10 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim16)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1D)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TwoStackAnims)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_2, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
             EVT_CALL(SetActorSize, ACTOR_SELF, 44, EVT_IGNORE_ARG)
             EVT_CALL(SetActorStatusOffsets, ACTOR_SELF, 0, -40, 0, -40)
             EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 39, 30)
@@ -1042,10 +1042,10 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_ShyStackGuy_Anim17)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_Attack, ANIM_ShyStackGuy_Anim1E)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(OneStackAnims)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_3, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_4, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_4, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_STACK_4, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
             EVT_CALL(SetActorSize, ACTOR_SELF, 26, EVT_IGNORE_ARG)
             EVT_CALL(SetActorStatusOffsets, ACTOR_SELF, 0, -60, 0, -60)
             EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 21, 30)
@@ -1115,7 +1115,7 @@ EvtScript N(EVS_SpinSmashHit_Stack) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_EXEC_WAIT(N(lower_actor_pos))
-    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000 | TARGET_FLAG_10000)
+    EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_PRIMARY_ONLY | TARGET_FLAG_ALLOW_TARGET_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerID, LVar1)
@@ -1128,7 +1128,7 @@ EvtScript N(EVS_SpinSmashHit_Stack) = {
         EVT_ADD(LVarF, 1)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_CALL(N(PrintDebugValue), EVT_PTR("T"), LVar0)
-        EVT_IF_EQ(LVar0, -1)
+        EVT_IF_EQ(LVar0, ITER_NO_MORE)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(GetOwnerTarget, LVar0, LVar9)

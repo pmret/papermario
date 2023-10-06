@@ -66,7 +66,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_END_THREAD
     EVT_CALL(N(AnimateDizzyDialCameraFX))
     EVT_THREAD
-        EVT_CALL(StartRumble, 8)
+        EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
@@ -91,7 +91,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_LABEL(1)
         EVT_WAIT(5)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(30)

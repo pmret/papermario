@@ -150,7 +150,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_TARGET,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 39 },
@@ -162,7 +162,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { -5, -15 },
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_40000000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_SKIP_SHOCK_EFFECT,
         .index = PRT_SHELL_1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -174,7 +174,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_40000000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_SKIP_SHOCK_EFFECT,
         .index = PRT_SHELL_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -186,7 +186,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_40000000,
+        .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_SKIP_SHOCK_EFFECT,
         .index = PRT_SHELL_3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -505,7 +505,7 @@ EvtScript N(EVS_TemporaryKnockout) = {
         EVT_WAIT(1)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_CALL(StartRumble, 1)
+    EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Fall)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
@@ -736,7 +736,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
         EVT_WAIT(8)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Crouch)
         EVT_WAIT(5)
-        EVT_CALL(StartRumble, 10)
+        EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_EXTREME)
         EVT_CALL(PlaySound, SOUND_20EA)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(4.0))
         EVT_WAIT(20)
@@ -749,7 +749,7 @@ EvtScript N(EVS_Attack_DropDebris) = {
         EVT_WAIT(50)
         EVT_CALL(PlaySound, SOUND_20E9)
         EVT_WAIT(18)
-        EVT_CALL(StartRumble, 10)
+        EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_EXTREME)
         EVT_CALL(PlaySound, SOUND_20EA)
         EVT_WAIT(20)
         EVT_CALL(PlaySound, SOUND_ILLUSION_DISSOLVE)
@@ -995,7 +995,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     EVT_THREAD
         // rumble while gate is opening
         EVT_LABEL(0)
-            EVT_CALL(StartRumble, 1)
+            EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
             EVT_WAIT(1)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, LVar0)
@@ -1092,7 +1092,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     EVT_THREAD
         // rumble while gate is opening
         EVT_LABEL(40)
-            EVT_CALL(StartRumble, 1)
+            EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
             EVT_WAIT(1)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, LVar0)

@@ -501,7 +501,7 @@ void btl_state_update_celebration(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_CELEBRATE_INIT:
             if (battleStatus->pendingStarPoints <= 0) {
-                player->flags &= ~ACTOR_FLAG_8000000;
+                player->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
                 EndBattleRewardTotal = battleStatus->totalStarPoints * 100;
                 pendingLevelUps = 0;
                 D_8029FB50 = 0;
@@ -573,9 +573,9 @@ void btl_state_update_celebration(void) {
                 if (battleStatus->totalStarPoints == 0) {
                     if (EndBattleRewardStep == 0) {
                         EndBattleRewardsDone = TRUE;
-                        player->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
+                        player->flags &= ~(ACTOR_FLAG_USING_IDLE_ANIM | ACTOR_FLAG_SHOW_STATUS_ICONS);
                         if (partner != NULL) {
-                            partner->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
+                            partner->flags &= ~(ACTOR_FLAG_USING_IDLE_ANIM | ACTOR_FLAG_SHOW_STATUS_ICONS);
                         }
                         battleStatus->battlePhase = PHASE_CELEBRATE;
                         script = start_script(&EVS_Mario_HandlePhase, EVT_PRIORITY_A, 0);
@@ -1051,7 +1051,7 @@ void btl_state_update_celebration(void) {
                     break;
             }
 
-            set_animation(0, 0, ANIM_MarioB1_AdjustCap);
+            set_actor_anim(0, 0, ANIM_MarioB1_AdjustCap);
 
             if (partner != NULL) {
                 script = start_script(partner->takeTurnSource, EVT_PRIORITY_A, 0);
@@ -1149,9 +1149,9 @@ void btl_state_update_celebration(void) {
                 }
                 bFadeToBlackAmt = 0;
                 btl_cam_set_params(1, 270, 100, 8, 0, 0x2400, 0, 100);
-                set_animation(0, 0, ANIM_MarioB1_AdjustCap);
+                set_actor_anim(0, 0, ANIM_MarioB1_AdjustCap);
                 if (partner != NULL) {
-                    set_animation(ACTOR_PARTNER, 0, D_80284154[playerData->curPartner]);
+                    set_actor_anim(ACTOR_PARTNER, 0, D_80284154[playerData->curPartner]);
                 }
                 CelebrateSubstateTime = 6;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_WALK_AWAY;
@@ -1162,7 +1162,7 @@ void btl_state_update_celebration(void) {
             if (CelebrateSubstateTime != 0) {
                 CelebrateSubstateTime--;
                 if (CelebrateSubstateTime == 0) {
-                    set_animation(0, 0, ANIM_Mario1_Walk);
+                    set_actor_anim(0, 0, ANIM_Mario1_Walk);
                 }
             } else {
                 player->yaw = 0.0f;

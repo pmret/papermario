@@ -179,7 +179,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_TARGET,
         .posOffset = { 0, 27, 0 },
         .targetOffset = { 0, 0 },
@@ -569,7 +569,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LEECH)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
-        EVT_CALL(StartRumble, 2)
+        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MIN)
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
         EVT_IF_NE(LVar3, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)

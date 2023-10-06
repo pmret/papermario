@@ -523,7 +523,7 @@ void imgfx_update(u32 idx, ImgFXType type, s32 imgfxArg1, s32 imgfxArg2, s32 img
             if (flags != 0) {
                 state->flags |= flags;
             } else {
-                state->flags |= flags; // required to match
+                state->flags |= 0; // required to match
             }
             return;
         case IMGFX_UNK_1:

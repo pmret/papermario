@@ -111,7 +111,7 @@ u8* ActorTypesLists[] = {
     NULL,
 };
 
-ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ActorSpeak) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
     ActorPart* part;
@@ -158,7 +158,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         gOverrideFlags |= GLOBAL_OVERRIDES_10;
         if (gSpeakingActorTalkAnim >= 0) {
-            func_80263E08(actor, part, gSpeakingActorTalkAnim);
+            set_actor_anim_by_ref(actor, part, gSpeakingActorTalkAnim);
         }
         increment_status_bar_disabled();
     }
@@ -184,14 +184,14 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE1;
         }
 
-        if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_80) { // "is talking" flag
+        if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_SPEAKING) {
             anim = gSpeakingActorTalkAnim;
         } else {
             anim = gSpeakingActorIdleAnim;
         }
 
         if (anim >= 0) {
-            func_80263E08(actor, part, anim);
+            set_actor_anim_by_ref(actor, part, anim);
         }
 
         if (gSpeakingActorPrintIsDone == TRUE) {
@@ -203,7 +203,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EndActorSpeech) {
     Bytecode* args = script->ptrReadPos;
     s32 flags;
     s32 anim;
@@ -257,7 +257,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         }
 
         if (anim >= 0) {
-            func_80263E08(actor, actorPart, anim);
+            set_actor_anim_by_ref(actor, actorPart, anim);
         }
 
         if (gSpeakingActorPrintIsDone == TRUE) {
@@ -270,7 +270,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowBattleChoice) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -292,7 +292,7 @@ ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus EnableBattleStatusBar(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableBattleStatusBar) {
     Bytecode* args = script->ptrReadPos;
     b32 shouldEnable = evt_get_variable(script, *args++);
 
@@ -304,12 +304,12 @@ ApiStatus EnableBattleStatusBar(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
+API_CALLABLE(OverrideBattleDmaDest) {
     gBattleDmaDest = (u8*) evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadBattleDmaData) {
     s32 dmaIndex = evt_get_variable(script, *script->ptrReadPos);
     BattleArea* battleArea = &gBattleAreas[UNPACK_BTL_AREA(gCurrentBattleID)];
     DmaTable* dmaEntry = &battleArea->dmaTable[dmaIndex];
@@ -327,7 +327,7 @@ ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableBattleFloorReflections(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableBattleFloorReflections) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
@@ -342,7 +342,7 @@ ApiStatus EnableBattleFloorReflections(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetDarknessMode(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetDarknessMode) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 darknessMode = evt_get_variable(script, *args++);
@@ -365,7 +365,7 @@ ApiStatus SetDarknessMode(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetDarknessStatus(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetDarknessStatus) {
     Bytecode* args = script->ptrReadPos;
     s32 out1 = *args++;
     s32 out2 = *args++;
@@ -388,7 +388,7 @@ ApiStatus GetDarknessStatus(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundAtActor) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
@@ -404,7 +404,7 @@ ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundAtPart) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
@@ -421,7 +421,7 @@ ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayLoopingSoundAtActor) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 idx = evt_get_variable(script, *args++);
@@ -439,7 +439,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StopLoopingSoundAtActor) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 idx = evt_get_variable(script, *args++);
@@ -460,7 +460,7 @@ ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetForegroundModelsVisibleUnchecked(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetForegroundModelsVisibleUnchecked) {
     if (evt_get_variable(script, *script->ptrReadPos)) {
         show_foreground_models_unchecked();
     } else {
@@ -469,7 +469,7 @@ ApiStatus SetForegroundModelsVisibleUnchecked(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetForegroundModelsVisible(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetForegroundModelsVisible) {
     if (evt_get_variable(script, *script->ptrReadPos)) {
         show_foreground_models();
     } else {
@@ -478,7 +478,7 @@ ApiStatus SetForegroundModelsVisible(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MakeIgnoreResStatusField(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeIgnoreResStatusField) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     Bytecode typeFlag = *args++; // STATUS_FLAG_*
@@ -488,7 +488,7 @@ ApiStatus MakeIgnoreResStatusField(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MakeStatusField(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeStatusField) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32 typeFlag = *args++; // STATUS_FLAG_*
@@ -601,14 +601,14 @@ void load_tattle_flags(s32 actorType) {
     battleStatus->tattleFlags[actorType / 8] |= gb;
 }
 
-ApiStatus SetEnemiesFled(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetEnemiesFled) {
     gCurrentEncounter.battleOutcome = OUTCOME_ENEMY_FLED;
     btl_set_state(BATTLE_STATE_END_BATTLE);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus MultiplyByActorScale(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MultiplyByActorScale) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
@@ -616,7 +616,7 @@ ApiStatus MultiplyByActorScale(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MultiplyVec2ByActorScale(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MultiplyVec2ByActorScale) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
@@ -626,7 +626,7 @@ ApiStatus MultiplyVec2ByActorScale(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MultiplyVec3ByActorScale(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MultiplyVec3ByActorScale) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
@@ -637,7 +637,7 @@ ApiStatus MultiplyVec3ByActorScale(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ApplyShrinkFromOwner(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ApplyShrinkFromOwner) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
     s32 amt = evt_get_variable(script, *args);
@@ -650,7 +650,7 @@ ApiStatus ApplyShrinkFromOwner(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus StartRumble(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StartRumble) {
     start_rumble_type(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

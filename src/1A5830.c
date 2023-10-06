@@ -289,8 +289,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if (target->transparentStatus == STATUS_KEY_TRANSPARENT
-        || targetPart->eventFlags & ACTOR_EVENT_FLAG_800
-        && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE)
+        || (targetPart->eventFlags & ACTOR_EVENT_FLAG_BURIED && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE))
     ) {
         return HIT_RESULT_MISS;
     }
@@ -347,9 +346,12 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
-    // begin calulating damage
+    // ------------------------------------------------------------------------
+    // damage calculation
 
     gBattleStatus.flags1 &= ~BS_FLAGS1_ATK_BLOCKED;
+
+    // determine target defense
 
     defense = get_defense(target, targetPart->defenseTable, battleStatus->curAttackElement);
 
@@ -370,6 +372,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             }
         }
     }
+
+    // apply attacker damage modifiers
 
     damage = battleStatus->curAttackDamage;
 
@@ -404,6 +408,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     target->hpChangeCounter = 0;
     damage -= defense;
 
+    // apply damage mitigation from defensive badges
+
     isPlayer = actorClass == ACTOR_CLASS_PLAYER;
     if (isPlayer) {
         if (player_team_is_ability_active(target, ABILITY_FIRE_SHIELD)) {
@@ -423,10 +429,15 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         }
     }
 
+    // apply damage mitigation from blocking
+
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             // TODO figure out how to better write target->debuff >= STATUS_KEY_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == 0) && !(battleStatus->curAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON)
+                && (target->stoneStatus == 0)
+                && !(battleStatus->curAttackElement & DAMAGE_TYPE_UNBLOCKABLE)
+            ) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -487,7 +498,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         target->hpChangeCounter -= damage;
         battleStatus->lastAttackDamage = 0;
         hitResult = HIT_RESULT_HIT;
-        if (!(targetPart->flags & ACTOR_PART_FLAG_2000)
+        if (!(targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE)
             && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)
         ) {
             if (!(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
@@ -589,7 +600,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && event != EVENT_SPIN_SMASH_DEATH
         && event != EVENT_EXPLODE_TRIGGER
         && !(gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED)
-        && !(gBattleStatus.flags2 & BS_FLAGS2_1000000)
+        && !(gBattleStatus.flags2 & BS_FLAGS2_IS_FIRST_STRIKE)
         && !(actorClass == ACTOR_PLAYER && is_ability_active(ABILITY_HEALTHY_HEALTHY) && (rand_int(100) < 50)))
     {
         if (battleStatus->curAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_KEY_SHRINK, STATUS_TURN_MOD_SHRINK)) {
@@ -732,7 +743,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         play_hit_sound(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, hitSound);
     }
 
-    if ((battleStatus->lastAttackDamage < 1 && !statusInflicted2 && !madeElectricContact) || targetPart->flags & ACTOR_PART_FLAG_2000) {
+    if ((battleStatus->lastAttackDamage < 1 && !statusInflicted2 && !madeElectricContact) || targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -857,15 +868,14 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     }
 
     if (!stopMotion) {
-        s32 oldTargetActorID = actor->targetActorID;
+        s32 savedTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
-            show_next_damage_popup(actor->targetData[0].posA.x, actor->targetData[0].posA.y, actor->targetData[0].posA.z, battleStatus->lastAttackDamage, 0);
-            show_damage_fx(actor, actor->targetData[0].posA.x, actor->targetData[0].posA.y, actor->targetData[0].posA.z, battleStatus->lastAttackDamage);
-            actor->targetActorID = oldTargetActorID;
-        } else {
-            actor->targetActorID = oldTargetActorID;
+            show_next_damage_popup(actor->targetData[0].truePos.x, actor->targetData[0].truePos.y, actor->targetData[0].truePos.z, battleStatus->lastAttackDamage, 0);
+            show_damage_fx(actor, actor->targetData[0].truePos.x, actor->targetData[0].truePos.y, actor->targetData[0].truePos.z, battleStatus->lastAttackDamage);
         }
+        actor->targetActorID = savedTargetActorID;
+        
     } else {
         show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
         show_damage_fx(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
@@ -1077,7 +1087,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
         actorState->speed += (moveDist / actorState->moveTime);
 
         if (script->functionTemp[2] != 0) {
-            set_animation(actor->actorID, (s8) actor->state.jumpPartIndex, actor->state.animJumpRise);
+            set_actor_anim(actor->actorID, (s8) actor->state.jumpPartIndex, actor->state.animJumpRise);
         }
         if (!(script->functionTemp[3] & 2) && (actor->actorTypeData1[4] != 0)) {
             sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_DEFAULT, actor->curPos.x, actor->curPos.y, actor->curPos.z);
@@ -1092,7 +1102,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
     actorState->vel -= actorState->acceleration;
 
     if ((script->functionTemp[2] != 0) && (actorState->vel < 0.0f)) {
-        set_animation(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpFall);
+        set_actor_anim(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpFall);
     }
     if (actorState->vel < 0.0f) {
         if (actorState->curPos.y < actorState->goalPos.y) {
@@ -1117,7 +1127,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
     actor->curPos.y = actorState->goalPos.y;
     actor->curPos.z = actorState->goalPos.z;
     if (script->functionTemp[2] != 0) {
-        set_animation(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpLand);
+        set_actor_anim(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpLand);
     }
     return ApiStatus_DONE1;
 }

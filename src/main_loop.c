@@ -260,11 +260,11 @@ void load_engine_data(void) {
     gOverrideFlags = 0;
     gGameStatusPtr->unk_79 = 0;
     gGameStatusPtr->backgroundFlags = 0;
-    gGameStatusPtr->musicEnabled = 1;
-    gGameStatusPtr->unk_7C = 1;
+    gGameStatusPtr->musicEnabled = TRUE;
+    gGameStatusPtr->healthBarsEnabled = TRUE;
     gGameStatusPtr->creditsViewportMode = -1;
     gGameStatusPtr->demoBattleFlags = 0;
-    gGameStatusPtr->multiplayerEnabled = 0;
+    gGameStatusPtr->multiplayerEnabled = FALSE;
     gGameStatusPtr->unk_82.x = -8;
     gGameStatusPtr->unk_82.y = 4;
     timeFreezeMode = 0;

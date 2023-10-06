@@ -53,7 +53,7 @@ HitResult calc_item_damage_enemy(void) {
     Actor* partner = battleStatus->partnerActor;
     s32 currentTargetPartID = battleStatus->curTargetPart;
     s32 partImmuneToElement;
-    s32 sp1C = FALSE;
+    s32 fearInflicted = FALSE;
     s32 actorClass;
     s32 isFireDamage = FALSE;
     s32 isWaterDamage = FALSE;
@@ -115,8 +115,7 @@ HitResult calc_item_damage_enemy(void) {
     if (!(battleStatus->curAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
         if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)
             || (target->transparentStatus == STATUS_KEY_TRANSPARENT)
-            || (targetPart->eventFlags & ACTOR_EVENT_FLAG_800)
-            && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE)
+            || (targetPart->eventFlags & ACTOR_EVENT_FLAG_BURIED && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE))
         ) {
             return HIT_RESULT_MISS;
         }
@@ -177,9 +176,9 @@ HitResult calc_item_damage_enemy(void) {
         dispatchEvent = EVENT_HIT_COMBO;
         hitResult = HIT_RESULT_HIT;
 
-        if (!(targetPart->flags & ACTOR_PART_FLAG_2000)
+        if (!(targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE)
             && !partImmuneToElement
-            && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
+            && !(targetPart->targetFlags & ACTOR_PART_TARGET_NO_DAMAGE)
         ) {
             target->curHP -= attackDamage;
             if (target->curHP <= 0) {
@@ -192,7 +191,7 @@ HitResult calc_item_damage_enemy(void) {
         target->hpChangeCounter = 0;
     }
 
-    if (targetPart->flags & ACTOR_PART_FLAG_2000) {
+    if (targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE) {
         dispatch_event_actor(target, dispatchEvent);
         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -371,7 +370,6 @@ HitResult calc_item_damage_enemy(void) {
                 dispatchEvent = EVENT_HIT;
             }
         }
-
     }
 
     temp = target->actorBlueprint->spookChance;
@@ -389,7 +387,7 @@ HitResult calc_item_damage_enemy(void) {
         {
             dispatchEvent = EVENT_SCARE_AWAY;
             hitResult = HIT_RESULT_HIT;
-            sp1C = TRUE;
+            fearInflicted = TRUE;
             gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_SHOW_PLAYER_DECORATIONS | BS_FLAGS1_ACTORS_VISIBLE;
             sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             wasStatusInflicted = TRUE;
@@ -402,7 +400,7 @@ HitResult calc_item_damage_enemy(void) {
 
     battleStatus->wasStatusInflicted = wasStatusInflicted;
 
-    if ((sp1C
+    if ((fearInflicted
         && (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)))
         || ((gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) && !(gBattleStatus.flags1 & BS_FLAGS1_80))
     ) {
@@ -410,7 +408,7 @@ HitResult calc_item_damage_enemy(void) {
             sfx_play_sound_at_position(SOUND_0231, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 
-        if (battleStatus->lastAttackDamage > 0 || (battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS) && sp1C) {
+        if (battleStatus->lastAttackDamage > 0 || (battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS) && fearInflicted) {
             if (gBattleStatus.flags1 & BS_FLAGS1_40) {
                 show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
@@ -433,7 +431,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
         if (battleStatus->lastAttackDamage == 0) {
-            if (!sp1C && !wasStatusInflicted) {
+            if (!fearInflicted && !wasStatusInflicted) {
                 show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
             }
         } else if (!partImmuneToElement) {
@@ -442,7 +440,7 @@ HitResult calc_item_damage_enemy(void) {
             } else {
                 show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             }
-            if (!(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)) {
+            if (!(targetPart->targetFlags & ACTOR_PART_TARGET_NO_DAMAGE)) {
                 show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
             }
         }
@@ -461,7 +459,7 @@ HitResult calc_item_damage_enemy(void) {
         }
     }
 
-    if ((battleStatus->lastAttackDamage <= 0 && !wasStatusInflicted) || (targetPart->flags & ACTOR_FLAG_2000)) {
+    if ((battleStatus->lastAttackDamage <= 0 && !wasStatusInflicted) || (targetPart->flags & ACTOR_FLAG_DAMAGE_IMMUNE)) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 

@@ -187,7 +187,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
         }
     }
 
-    npc->shadowIndex = create_shadow_type(0, npc->pos.x, npc->pos.y, npc->pos.z);
+    npc->shadowIndex = create_shadow_type(SHADOW_VARYING_CIRCLE, npc->pos.x, npc->pos.y, npc->pos.z);
     npc->shadowScale = 1.0f;
 
     if (gGameStatusPtr->isBattle) {

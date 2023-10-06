@@ -216,7 +216,6 @@ void set_time_freeze_mode(s32);
 
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
-void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outW);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
@@ -373,7 +372,7 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void btl_bonk_cleanup(void);
-void func_80263E08(Actor*, ActorPart*, AnimID);
+void set_actor_anim_by_ref(Actor*, ActorPart*, AnimID);
 void update_action_ratings(void);
 void update_health_bars(void);
 s32 btl_cam_is_moving_done(void);
@@ -443,8 +442,8 @@ void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius);
 void set_npc_animation(Npc* npc, u32 animID);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
-void set_animation(s32 actorID, s32 partID, AnimID animID);
-void set_animation_rate(s32 actorID, s32 partID, f32 rate);
+void set_actor_anim(s32 actorID, s32 partID, AnimID animID);
+void set_actor_anim_rate(s32 actorID, s32 partID, f32 rate);
 void set_model_group_visibility(u16, s32, s32);
 void init_enter_world_shared(void);
 s16 update_enter_map_screen_overlay(s16* progress);
@@ -541,8 +540,8 @@ void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32*
 void basic_hidden_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
-void player_create_target_list(Actor* actor);
-void enemy_create_target_list(Actor* actor);
+void create_current_pos_target_list(Actor* actor);
+void create_home_target_list(Actor* actor);
 
 void set_actor_yaw(s32 actorID, s32 yaw);
 void set_part_yaw(s32 actorID, s32 partID, s32 value);

@@ -297,8 +297,8 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
 }
 
 void sfx_reset_door_sounds(void) {
-    gCurrentDoorSounds = 0;
-    gCurrentRoomDoorSounds = 0;
+    gCurrentDoorSounds = DOOR_SOUNDS_BASIC;
+    gCurrentRoomDoorSounds = DOOR_SOUNDS_BASIC;
 }
 
 void sfx_clear_sounds(void) {

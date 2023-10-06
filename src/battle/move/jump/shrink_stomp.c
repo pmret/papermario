@@ -34,7 +34,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
@@ -85,7 +85,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_ACTOR_JUMPED_2)
@@ -140,7 +140,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_ACTOR_JUMPED_3)

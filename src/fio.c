@@ -222,8 +222,8 @@ void fio_deserialize_state(void) {
 
 
     gGameStatusPtr->debugEnemyContact = DEBUG_CONTACT_NONE;
-    gGameStatusPtr->unk_76 = 0;
-    gGameStatusPtr->unk_77 = 0;
+    gGameStatusPtr->unk_76 = FALSE;
+    gGameStatusPtr->unk_77 = FALSE;
     gGameStatusPtr->musicEnabled = TRUE;
 
     gSaveSlotMetadata[gGameStatusPtr->saveSlot] = saveData->unk_12EC;

@@ -1964,7 +1964,7 @@ void apply_shock_effect(Actor* actor) {
     while (part != NULL) {
         if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)
             && part->idleAnimations != NULL
-            && !(part->flags & ACTOR_PART_FLAG_40000000)
+            && !(part->flags & ACTOR_PART_FLAG_SKIP_SHOCK_EFFECT)
         ) {
             f32 x = part->curPos.x;
             f32 y = part->curPos.y + (actor->size.y / 10);

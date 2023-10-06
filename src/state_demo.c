@@ -192,7 +192,7 @@ void state_step_demo(void) {
                 gGameStatusPtr->peachFlags = 0;
                 enable_sounds();
                 gGameStatusPtr->isBattle = FALSE;
-                gGameStatusPtr->unk_76 = 0;
+                gGameStatusPtr->unk_76 = FALSE;
                 gGameStatusPtr->disableScripts = FALSE;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_8;

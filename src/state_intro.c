@@ -146,7 +146,7 @@ void state_step_intro(void) {
         case INTRO_STATE_2:
             set_curtain_draw_callback(NULL);
             gGameStatusPtr->isBattle = FALSE;
-            gGameStatusPtr->unk_76 = 0;
+            gGameStatusPtr->unk_76 = FALSE;
             gGameStatusPtr->disableScripts = FALSE;
             gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
 

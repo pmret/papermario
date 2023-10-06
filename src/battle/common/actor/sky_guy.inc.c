@@ -173,7 +173,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_FLYING,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -185,7 +185,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { -1, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_YELLOW_BALLOON,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 50 },
@@ -198,7 +198,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .overrideNameMsg = MSG_EnemyName_Balloon,
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_RED_BALLOON,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -210,7 +210,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { -1, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_DECORATIONS | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_BLUE_BALLOON,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -274,7 +274,7 @@ EvtScript N(EVS_Flying_Init) = {
     EVT_SUB(LVar1, 5)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_YELLOW_BALLOON, ACTOR_PART_TARGET_FLAG_4, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_YELLOW_BALLOON, ACTOR_PART_TARGET_NO_DAMAGE, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -392,8 +392,8 @@ EvtScript N(EVS_PopBalloons) = {
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
         EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
-        EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
-        EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET)
+        EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_NO_TARGET)
+        EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_PRIMARY_TARGET)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ShyGuy_Red_Anim12)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
         EVT_WAIT(40)

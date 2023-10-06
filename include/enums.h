@@ -1828,36 +1828,38 @@ enum ItemTypeFlags {
     ITEM_TYPE_FLAG_ENTITY_FULLSIZE      = 0x1000,
 };
 
+// both items and moves use these flags to determine what type of targets are eligible
+// they are used during the construction of target lists and during the select target battle state
 enum TargetFlags {
-    TARGET_FLAG_ENEMY              = 0x00000001,
-    TARGET_FLAG_2                  = 0x00000002,
-    TARGET_FLAG_4                  = 0x00000004,
-    TARGET_FLAG_PLAYER             = 0x00000008,
-    TARGET_FLAG_10                 = 0x00000010,
-    TARGET_FLAG_20                 = 0x00000020,
-    TARGET_FLAG_40                 = 0x00000040,
-    TARGET_FLAG_80                 = 0x00000080,
-    TARGET_FLAG_100                = 0x00000100,
-    TARGET_FLAG_400                = 0x00000400,
-    TARGET_FLAG_800                = 0x00000800,
-    TARGET_FLAG_1000               = 0x00001000,
-    TARGET_FLAG_2000               = 0x00002000,
-    TARGET_FLAG_4000               = 0x00004000,
-    TARGET_FLAG_8000               = 0x00008000,
-    TARGET_FLAG_10000              = 0x00010000,
-    TARGET_FLAG_20000              = 0x00020000,
-    TARGET_FLAG_40000              = 0x00040000,
-    TARGET_FLAG_100000             = 0x00100000,
-    TARGET_FLAG_200000             = 0x00200000,
-    TARGET_FLAG_400000             = 0x00400000,
-    TARGET_FLAG_800000             = 0x00800000,
-    TARGET_FLAG_OVERRIDE           = 0x80000000, // skip choosing a target
+    TARGET_FLAG_SELECT_ONE              = 0x00000001, // player selects a single target
+    TARGET_FLAG_2                       = 0x00000002,
+    TARGET_FLAG_GROUND                  = 0x00000004, // only allow targets on the ground (row = 0)
+    TARGET_FLAG_PLAYER                  = 0x00000008, // allow the player as a target, prevents enemies from being targets
+    TARGET_FLAG_NOT_HIGH                = 0x00000010, // only allow targets in the first two rows (no moves use this)
+    TARGET_FLAG_NOT_FLYING              = 0x00000020, // reject targets which have ACTOR_FLAG_FLYING
+    TARGET_FLAG_NOT_GROUND              = 0x00000040, // reject targets on the ground (row = 0)
+    TARGET_FLAG_80                      = 0x00000080, // jump, headbonk, belly flop (not read)
+    TARGET_FLAG_PARTNER                 = 0x00000100, // allow the partner as a target, prevents enemies from being targets
+    TARGET_FLAG_AIRLIFT                 = 0x00000400, // special case for air lift, only rejects targets on the ceiling
+    TARGET_FLAG_JUMP_LIKE               = 0x00000800, // jump, headbonk, belly flop, ... and jump charge
+    TARGET_FLAG_SMASH_LIKE              = 0x00001000, // smash moves
+    TARGET_FLAG_NOT_BEHIND              = 0x00002000, // hammer, bombette body slam, kooper shell toss
+    TARGET_FLAG_NOT_BELOW               = 0x00004000, // reject all targets below other targets
+    TARGET_FLAG_PRIMARY_ONLY            = 0x00008000, // rejects all targets without ACTOR_PART_FLAG_PRIMARY_TARGET
+    TARGET_FLAG_ALLOW_TARGET_ONLY       = 0x00010000, // allow targets which have ACTOR_FLAG_TARGET_ONLY
+    TARGET_FLAG_TATTLE                  = 0x00020000, // special case for tattle, only rejects targets with ACTOR_FLAG_NO_TATTLE
+    TARGET_FLAG_NO_CEILING              = 0x00040000, // rejects targets on the ceiling (those with ACTOR_FLAG_UPSIDE_DOWN)
+    TARGET_FLAG_DIR_RIGHT               = 0x00100000, // directional filter used with CountTargets (bugged, unused)
+    TARGET_FLAG_DIR_LEFT                = 0x00200000, // directional filter used with CountTargets (bugged, unused)
+    TARGET_FLAG_DIR_BELOW               = 0x00400000, // directional filter used with CountTargets (bugged, unused)
+    TARGET_FLAG_DIR_ABOVE               = 0x00800000, // directional filter used with CountTargets (bugged, unused)
+    TARGET_FLAG_OVERRIDE                = 0x80000000, // skip choosing a target
 };
 
 enum ActorPartTargetFlags {
-    ACTOR_PART_TARGET_FLAG_1    = 0x01,
-    ACTOR_PART_TARGET_FLAG_2    = 0x02,
-    ACTOR_PART_TARGET_FLAG_4    = 0x04,
+    ACTOR_PART_TARGET_NO_JUMP           = 0x01, // prevent any jump attacks from targeting
+    ACTOR_PART_TARGET_NO_SMASH          = 0x02, // prevent any smash attacks from targeting
+    ACTOR_PART_TARGET_NO_DAMAGE         = 0x04, // exempts from damage or status infliction
 };
 
 enum AmbientSounds {
@@ -2000,6 +2002,9 @@ enum Iters {
     ITER_NEXT        = 0,
     ITER_PREV        = 1,
     ITER_LAST        = 10,
+    // return values
+    ITER_HAS_MORE    = 0,
+    ITER_NO_MORE     = -1,
 };
 
 enum ActorSoundIDs {
@@ -2494,6 +2499,15 @@ enum NpcIDs {
     NPC_BTL_SPIRIT      = 100,
 };
 
+enum ShadowType {
+    SHADOW_VARYING_CIRCLE       = 0,
+    SHADOW_VARYING_SQUARE       = 1,
+    SHADOW_FIXED_CIRCLE         = 2,
+    SHADOW_FIXED_SQUARE         = 3,
+    SHADOW_VARYING_ALT_CIRCLE   = 4, // unused?
+    SHADOW_FIXED_ALT_CIRCLE     = 5, // unused?
+};
+
 enum EntityTypes {
     ENTITY_TYPE_SHADOW                  =   0x01,
     ENTITY_TYPE_2                       =   0x02,
@@ -2575,7 +2589,7 @@ enum EntityFlags {
     ENTITY_FLAG_HAS_SHADOW                                  = 0x00000100,
     ENTITY_FLAG_FIXED_SHADOW_SIZE                           = 0x00000200,
     ENTITY_FLAG_400                                         = 0x00000400,
-    ENTITY_FLAG_SQUARE_SHADOW                               = 0x00000800,
+    ENTITY_FLAG_CIRCULAR_SHADOW                             = 0x00000800,
     ENTITY_FLAG_SHOWS_INSPECT_PROMPT                        = 0x00001000,
     ENTITY_FLAG_ALWAYS_FACE_CAMERA                          = 0x00002000,
     ENTITY_FLAG_4000                                        = 0x00004000,
@@ -2856,7 +2870,7 @@ enum EventSupressFlags {
     SUPPRESS_EVENT_SPIKY_FRONT      = 0x4,
     SUPPRESS_EVENT_SHOCK_CONTACT    = 0x8,
     SUPPRESS_EVENT_BURN_CONTACT     = 0x10,
-    SUPPRESS_EVENT_FLAG_80          = 0x80,     // supresses events associated with ACTOR_EVENT_FLAG_200000 used by pokeys and spinies
+    SUPPRESS_EVENT_ALT_SPIKY        = 0x80,
     SUPPRESS_EVENT_FLAG_200         = 0x200,    // unused?
     SUPPRESS_EVENT_ALL              = 0xFFFF,
     SUPPRESS_EVENT_FLAG_10000       = 0x10000,  // usage is a bug?
@@ -3250,110 +3264,75 @@ enum RenderTaskFlags {
     RENDER_TASK_FLAG_20             = 0x20,
 };
 
+// same as ActorPartFlags, kept separate for clarity
 enum ActorFlags {
-    ACTOR_FLAG_DISABLED          = 0x00000001, ///< Disables the actor.
-    ACTOR_FLAG_2                 = 0x00000002,
-    ACTOR_FLAG_NO_SHADOW         = 0x00000004, ///< Hide shadow.
-    ACTOR_FLAG_8                 = 0x00000008,
-    ACTOR_FLAG_10                = 0x00000010,
-    ACTOR_FLAG_20                = 0x00000020,
-    ACTOR_FLAG_40                = 0x00000040,
-    ACTOR_FLAG_80                = 0x00000080,
-    ACTOR_FLAG_100               = 0x00000100,
-    ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
-    ACTOR_FLAG_FLIPPED           = 0x00000400, ///< Actor has been flipped over.
-    ACTOR_FLAG_UPSIDE_DOWN       = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
-    ACTOR_FLAG_TYPE_CHANGED      = 0x00001000, ///< Indicates actors type has changed, triggers recheck for if HP bar should be shown based on tattle status.
-    ACTOR_FLAG_2000              = 0x00002000,
-    ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.
-    ACTOR_FLAG_HALF_HEIGHT       = 0x00008000,
-    ACTOR_FLAG_10000             = 0x00010000,
-    ACTOR_FLAG_20000             = 0x00020000,
-    ACTOR_FLAG_NO_HEALTH_BAR     = 0x00040000, // Health bar is not shown for this actor type
-    ACTOR_FLAG_HEALTH_BAR_HIDDEN = 0x00080000, // Health bar is temporarily hidden
-    ACTOR_FLAG_100000            = 0x00100000,
-    ACTOR_FLAG_NO_ATTACK         = 0x00200000, ///< Skip attack turn.
-    ACTOR_FLAG_NO_DMG_APPLY      = 0x00400000, ///< Damage is not applied to actor HP.
-    ACTOR_FLAG_800000            = 0x00800000,
-    ACTOR_FLAG_1000000           = 0x01000000, // Enraged? Only used for Super Blooper.
-    ACTOR_FLAG_NO_DMG_POPUP      = 0x02000000, ///< Hide damage popup.
-    ACTOR_FLAG_4000000           = 0x04000000,
-    ACTOR_FLAG_8000000           = 0x08000000,
-    ACTOR_FLAG_BLUR_ENABLED      = 0x10000000,
-    ACTOR_FLAG_20000000          = 0x20000000,
-    ACTOR_FLAG_40000000          = 0x40000000,
-    ACTOR_FLAG_80000000          = 0x80000000,
+    ACTOR_FLAG_INVISIBLE                    = 0x00000001, ///< Actor is not rendered.
+    ACTOR_FLAG_NO_SHADOW                    = 0x00000004, ///< Hide shadow.
+    ACTOR_FLAG_LOW_PRIORITY_TARGET          = 0x00000010, // only usable with ACTOR_FLAG_TARGET_ONLY, treats the target's sort position as off-stage to the right
+    ACTOR_FLAG_MINOR_TARGET                 = 0x00000040, // ignored by moves using TARGET_FLAG_PRIMARY_ONLY (unused)
+    ACTOR_FLAG_NO_TATTLE                    = 0x00000080,
+    ACTOR_FLAG_FLYING                       = 0x00000200, ///< Quake Hammer can't hit.
+    ACTOR_FLAG_FLIPPED                      = 0x00000400, ///< Actor has been flipped over.
+    ACTOR_FLAG_UPSIDE_DOWN                  = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
+    ACTOR_FLAG_TYPE_CHANGED                 = 0x00001000, ///< Indicates actors type has changed, triggers recheck for if HP bar should be shown based on tattle status.
+    ACTOR_FLAG_DAMAGE_IMMUNE                = 0x00002000, // prevents hits from items, chill out, and up & away
+    ACTOR_FLAG_TARGET_ONLY                  = 0x00004000, ///< Battle ends even if undefeated. No turn.
+    ACTOR_FLAG_HALF_HEIGHT                  = 0x00008000,
+    ACTOR_FLAG_SKIP_TURN                    = 0x00010000,
+    ACTOR_FLAG_NO_HEALTH_BAR                = 0x00040000, // Health bar is not shown for this actor type
+    ACTOR_FLAG_HEALTH_BAR_HIDDEN            = 0x00080000, // Health bar is temporarily hidden
+    ACTOR_FLAG_NO_ATTACK                    = 0x00200000, ///< Skip attack turn.
+    ACTOR_FLAG_NO_DMG_APPLY                 = 0x00400000, ///< Damage is not applied to actor HP.
+    ACTOR_FLAG_NO_DMG_POPUP                 = 0x02000000, ///< Hide damage popup.
+    ACTOR_FLAG_USING_IDLE_ANIM              = 0x04000000,
+    ACTOR_FLAG_SHOW_STATUS_ICONS            = 0x08000000,
+    ACTOR_FLAG_BLUR_ENABLED                 = 0x10000000,
+    ACTOR_FLAG_NO_INACTIVE_ANIM             = 0x20000000, // only used for player Actor
 };
 
+// same as ActorFlags, kept separate for clarity
 enum ActorPartFlags {
     ACTOR_PART_FLAG_INVISIBLE               = 0x00000001,
-    ACTOR_PART_FLAG_2                       = 0x00000002,
-    ACTOR_PART_FLAG_4                       = 0x00000004,
-    ACTOR_PART_FLAG_8                       = 0x00000008,
-    ACTOR_PART_FLAG_10                      = 0x00000010,
-    ACTOR_PART_FLAG_20                      = 0x00000020,
-    ACTOR_PART_FLAG_40                      = 0x00000040,
-    ACTOR_PART_FLAG_80                      = 0x00000080,
+    ACTOR_PART_FLAG_NO_DECORATIONS          = 0x00000002,
+    ACTOR_PART_FLAG_NO_SHADOW               = 0x00000004,
+    ACTOR_PART_FLAG_DEFAULT_TARGET          = 0x00000008, // Part will be the default selected target for player.
+    ACTOR_PART_FLAG_IGNORE_BELOW_CHECK      = 0x00000020, // ignore below check while targeting
+    ACTOR_PART_FLAG_MINOR_TARGET            = 0x00000040, // ignored by moves using TARGET_FLAG_PRIMARY_ONLY (unused)
+    ACTOR_PART_FLAG_NO_TATTLE               = 0x00000080,
     ACTOR_PART_FLAG_TRANSPARENT             = 0x00000100,
-    ACTOR_PART_FLAG_200                     = 0x00000200,
-    ACTOR_PART_FLAG_400                     = 0x00000400,
-    ACTOR_PART_FLAG_800                     = 0x00000800,
-    ACTOR_PART_FLAG_1000                    = 0x00001000,
-    ACTOR_PART_FLAG_2000                    = 0x00002000, ///< electrified Plays extra hurt SFX?
-    ACTOR_PART_FLAG_4000                    = 0x00004000,
-    ACTOR_PART_FLAG_8000                    = 0x00008000,
-    ACTOR_PART_FLAG_10000                   = 0x00010000,
+    ACTOR_PART_FLAG_DAMAGE_IMMUNE           = 0x00002000, ///< electrified Plays extra hurt SFX?
+    ACTOR_PART_FLAG_TARGET_ONLY             = 0x00004000, // Has no effect on ActorPart. Use the ACTOR_FLAG on Actor instead.
     ACTOR_PART_FLAG_NO_TARGET               = 0x00020000, ///< Cannot be targeted.
-    ACTOR_PART_FLAG_40000                   = 0x00040000,
-    ACTOR_PART_FLAG_80000                   = 0x00080000,
     ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION   = 0x00100000,
-    ACTOR_PART_FLAG_200000                  = 0x00200000,
-    ACTOR_PART_FLAG_400000                  = 0x00400000,
-    ACTOR_PART_FLAG_MULTI_TARGET            = 0x00800000, ///< Can be targeted with multi-target attacks (e.g. Star Storm).
+    ACTOR_PART_FLAG_PRIMARY_TARGET          = 0x00800000, // Multi-target attacks will target this part of an Actor with multiple parts.
     ACTOR_PART_FLAG_HAS_PAL_EFFECT          = 0x01000000,
-    ACTOR_PART_FLAG_2000000                 = 0x02000000,
-    ACTOR_PART_FLAG_4000000                 = 0x04000000,
-    ACTOR_PART_FLAG_8000000                 = 0x08000000,
-    ACTOR_PART_FLAG_10000000                = 0x10000000,
-    ACTOR_PART_FLAG_20000000                = 0x20000000,
-    ACTOR_PART_FLAG_40000000                = 0x40000000,
-    ACTOR_PART_FLAG_80000000                = 0x80000000,
+    ACTOR_PART_FLAG_NO_STATUS_ANIMS         = 0x20000000, // Do not update idle animation based on Actor status
+    ACTOR_PART_FLAG_SKIP_SHOCK_EFFECT       = 0x40000000, // Do not apply a shock effect to this ActorPart when its Actor is shocked
+    ACTOR_PART_FLAG_SKIP_MOVEMENT_ALLOC     = 0x80000000, // Do not allocate ActorPartMovement for this ActorPart
 };
 
 enum ActorEventFlags {
     ACTOR_EVENT_FLAGS_NONE                  = 0x00000000,
-    ACTOR_EVENT_FLAG_1                      = 0x00000001,
     ACTOR_EVENT_FLAG_FIREY                  = 0x00000002, ///< Player takes burn damage upon contact.
-    ACTOR_EVENT_FLAG_4                      = 0x00000004,
     ACTOR_EVENT_FLAG_ICY                    = 0x00000008, ///< No known effect, but is used.
     ACTOR_EVENT_FLAG_SPIKY_TOP              = 0x00000010, ///< Player takes spike damage from jump attacks.
     ACTOR_EVENT_FLAG_ILLUSORY               = 0x00000020, ///< Player attacks pass through and miss.
-    ACTOR_EVENT_FLAG_40                     = 0x00000040,
     ACTOR_EVENT_FLAG_ELECTRIFIED            = 0x00000080, ///< Player takes shock damage upon contact.
-    ACTOR_EVENT_FLAG_100                    = 0x00000100,
+    ACTOR_EVENT_FLAG_MONSTAR                = 0x00000100, ///< Set by Monstar, but has no effect
     ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION    = 0x00000200, ///< Blast and fire attacks trigger an explosion.
     ACTOR_EVENT_FLAG_FIRE_EXPLODE           = 0x00000400, ///< Fire attacks trigger an explosion, used only by bullet/bombshell bills.
-    ACTOR_EVENT_FLAG_800                    = 0x00000800,
+    ACTOR_EVENT_FLAG_BURIED                 = 0x00000800, ///< Actor can only by hit by quake-element attacks.
     ACTOR_EVENT_FLAG_FLIPABLE               = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
-    ACTOR_EVENT_FLAG_2000                   = 0x00002000,
+    ACTOR_EVENT_FLAG_EXTREME_DEFENSE        = 0x00002000, ///< Actor has 127 extra defense during damage calculation, unaffected by IGNORE_DEFENSE.
     ACTOR_EVENT_FLAG_GROUNDABLE             = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
-    ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT     = 0x00008000,
+    ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT     = 0x00008000, ///< Attacks that contact will trigger an explosion.
     ACTOR_EVENT_FLAG_SPIKY_FRONT            = 0x00010000, ///< Player takes spike damage from hammer attacks.
-    ACTOR_EVENT_FLAG_20000                  = 0x00020000,
     ACTOR_EVENT_FLAG_ENCHANTED              = 0x00040000, ///< Actor glows and listens for the Star Beam event.
     ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED     = 0x00080000, ///< Actor glows and listens for Star Beam and Peach Beam events.
     ACTOR_EVENT_FLAG_POWER_BOUNCE           = 0x00100000, ///< Actor listens for Power Bounce events.
-    ACTOR_EVENT_FLAG_200000                 = 0x00200000,
+    ACTOR_EVENT_FLAG_ALT_SPIKY              = 0x00200000, ///< Additional spiky quality associated with Pokeys and Spinies
     ACTOR_EVENT_FLAG_ATTACK_CHARGED         = 0x00400000, ///< Actor has charged an attack that can be removed with Star Beam.
     ACTOR_EVENT_FLAG_RIDING_BROOMSTICK      = 0x00800000, ///< Actor is on Magikoopa Broomstick, effect seems to be redundant.
-    ACTOR_EVENT_FLAG_1000000                = 0x01000000,
-    ACTOR_EVENT_FLAG_2000000                = 0x02000000,
-    ACTOR_EVENT_FLAG_4000000                = 0x04000000,
-    ACTOR_EVENT_FLAG_8000000                = 0x08000000,
-    ACTOR_EVENT_FLAG_10000000               = 0x10000000,
-    ACTOR_EVENT_FLAG_20000000               = 0x20000000,
-    ACTOR_EVENT_FLAG_40000000               = 0x40000000,
-    ACTOR_EVENT_FLAG_80000000               = 0x80000000,
 };
 
 enum PartnerWishAnims {
@@ -3587,10 +3566,10 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_400                           = 0x00000400,
     BS_FLAGS2_800                           = 0x00000800,
     BS_FLAGS2_NO_TARGET_AVAILABLE           = 0x00001000,
-    BS_FLAGS2_4000                          = 0x00004000,
+    BS_FLAGS2_IGNORE_DARKNESS               = 0x00004000,
     BS_FLAGS2_10000                         = 0x00010000,
     BS_FLAGS2_100000                        = 0x00100000,
-    BS_FLAGS2_1000000                       = 0x01000000, // possible IS_FIRST_STRIKE
+    BS_FLAGS2_IS_FIRST_STRIKE               = 0x01000000,
     BS_FLAGS2_DONT_STOP_MUSIC               = 0x02000000, // don't stop playing the current song when the battle ends
     BS_FLAGS2_HAS_DRAINED_HP                = 0x04000000,
     BS_FLAGS2_HAS_RUSH                      = 0x08000000,
@@ -3971,8 +3950,8 @@ enum BattlePartnerMenuSubstates {
     BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_4                     = 5,
     BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_5                     = 6,
     BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_6                     = 7,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_7                     = 8,
-    BTL_SUBSTATE_PARTNER_MENU_MAIN_MENU_8                     = 9,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_SHOW_CANT_SWAP             = 8,
+    BTL_SUBSTATE_PARTNER_MENU_MAIN_AWAIT_CANT_SWAP            = 9,
     // Abilities
     BTL_SUBSTATE_PARTNER_MENU_ABILITIES_1                     = 10,
     BTL_SUBSTATE_PARTNER_MENU_ABILITIES_2                     = 11,
@@ -4198,6 +4177,21 @@ enum BattleMenuDisableFlags {
     BTL_MENU_ENABLED_STRATEGIES     = 1 << BTL_MENU_TYPE_STRATEGIES,
     BTL_MENU_ENABLED_STAR_POWERS    = 1 << BTL_MENU_TYPE_STAR_POWERS,
     BTL_MENU_ENABLED_PARTNER_FOCUS  = 1 << BTL_MENU_TYPE_PARTNER_FOCUS,
+};
+
+enum BattleRumbleModes {
+    BTL_RUMBLE_STOP                 = 0,
+    BTL_RUMBLE_LONG                 = 1,
+    BTL_RUMBLE_HIT_MIN              = 2,
+    BTL_RUMBLE_HIT_LIGHT            = 3,
+    BTL_RUMBLE_HIT_HEAVY            = 4,
+    BTL_RUMBLE_HIT_EXTREME          = 5,
+    BTL_RUMBLE_HIT_MAX              = 6,
+    BTL_RUMBLE_PLAYER_MIN           = 7,
+    BTL_RUMBLE_PLAYER_LIGHT         = 8,
+    BTL_RUMBLE_PLAYER_HEAVY         = 9,
+    BTL_RUMBLE_PLAYER_EXTREME       = 10,
+    BTL_RUMBLE_PLAYER_MAX           = 11,
 };
 
 enum DebugEnemyContactModes {
@@ -5789,7 +5783,7 @@ enum MsgStateFlags {
     MSG_STATE_FLAG_10               = 0x000010,
     MSG_STATE_FLAG_20               = 0x000020,
     MSG_STATE_FLAG_40               = 0x000040,
-    MSG_STATE_FLAG_80               = 0x000080,
+    MSG_STATE_FLAG_SPEAKING         = 0x000080, // determines animation of speaker (talk vs idle)
     MSG_STATE_FLAG_PRINT_QUICKLY    = 0x000100,
     MSG_STATE_FLAG_400              = 0x000400,
     MSG_STATE_FLAG_800              = 0x000800,

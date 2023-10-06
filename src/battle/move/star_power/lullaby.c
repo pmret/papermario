@@ -56,7 +56,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_LABEL(1)
         EVT_WAIT(5)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(5)

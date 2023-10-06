@@ -111,7 +111,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_THREAD
         EVT_LOOP(5)
             EVT_WAIT(15)
-            EVT_CALL(StartRumble, 8)
+            EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
         EVT_END_LOOP
     EVT_END_THREAD
@@ -132,7 +132,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_LABEL(1)
         EVT_WAIT(10)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(20)

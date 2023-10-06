@@ -106,7 +106,7 @@ HitResult calc_partner_test_enemy(void) {
         return HIT_RESULT_BACKFIRE;
     }
 
-    // specifal handling for air lift
+    // special handling for air lift
     if (battleStatus->curAttackElement & DAMAGE_TYPE_AIR_LIFT) {
         // check partner airlifting top-spiky enemy
         if (!(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)) {
@@ -121,9 +121,9 @@ HitResult calc_partner_test_enemy(void) {
             }
 
             if (!(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)
-                && (part->eventFlags & ACTOR_EVENT_FLAG_200000)
+                && (part->eventFlags & ACTOR_EVENT_FLAG_ALT_SPIKY)
                 && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
-                && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
+                && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_ALT_SPIKY)
             ) {
                 sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
@@ -203,9 +203,9 @@ HitResult calc_partner_damage_enemy(void) {
         dispatchEvent = EVENT_ZERO_DAMAGE;
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     } else {
-        if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY
-            || target->transparentStatus == STATUS_KEY_TRANSPARENT
-            || (targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE))
+        if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)
+            || (target->transparentStatus == STATUS_KEY_TRANSPARENT)
+            || (targetPart->eventFlags & ACTOR_EVENT_FLAG_BURIED && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE))
         ) {
             return HIT_RESULT_MISS;
         }
@@ -290,9 +290,9 @@ HitResult calc_partner_damage_enemy(void) {
 
         // unknown alternate spiky #1
         if (!(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)
-            && targetPart->eventFlags & ACTOR_EVENT_FLAG_200000
+            && targetPart->eventFlags & ACTOR_EVENT_FLAG_ALT_SPIKY
             && !(target->flags & ACTOR_FLAG_UPSIDE_DOWN)
-            && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_FLAG_80)
+            && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_ALT_SPIKY)
         ) {
             sfx_play_sound_at_position(SOUND_HIT_SPIKE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             dispatch_damage_event_partner_1(1, EVENT_SPIKE_CONTACT);
@@ -453,10 +453,10 @@ HitResult calc_partner_damage_enemy(void) {
             dispatchEvent = EVENT_HIT_COMBO;
             retVal = 0;
 
-            if (!(targetPart->flags & ACTOR_PART_FLAG_2000)
+            if (!(targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE)
                 && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)
                 && !partImmuneToElement
-                && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
+                && !(targetPart->targetFlags & ACTOR_PART_TARGET_NO_DAMAGE)
             ) {
                 target->curHP -= damageDealt;
 
@@ -471,7 +471,7 @@ HitResult calc_partner_damage_enemy(void) {
             target->hpChangeCounter = 0;
         }
 
-        if (targetPart->flags & ACTOR_PART_FLAG_2000) {
+        if (targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE) {
             if (partner->staticStatus == STATUS_KEY_STATIC
                 || !(target->staticStatus == STATUS_KEY_STATIC || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
                 || battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT
@@ -640,7 +640,7 @@ HitResult calc_partner_damage_enemy(void) {
                 && dispatchEvent != EVENT_DEATH
                 && dispatchEvent != EVENT_SPIN_SMASH_DEATH
                 && dispatchEvent != EVENT_EXPLODE_TRIGGER
-                && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
+                && !(targetPart->targetFlags & ACTOR_PART_TARGET_NO_DAMAGE)
             ) {
                 #define INFLICT_STATUS(STATUS_TYPE) \
                     if ((battleStatus->curAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
@@ -752,7 +752,7 @@ HitResult calc_partner_damage_enemy(void) {
                 show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             }
 
-            if (!(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)) {
+            if (!(targetPart->targetFlags & ACTOR_PART_TARGET_NO_DAMAGE)) {
                 show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
             }
         }
@@ -802,7 +802,7 @@ HitResult calc_partner_damage_enemy(void) {
 
     if (battleStatus->lastAttackDamage < 1
         && !(tempBinary || wasStatusInflicted)
-        || targetPart->flags & ACTOR_PART_FLAG_2000
+        || targetPart->flags & ACTOR_PART_FLAG_DAMAGE_IMMUNE
     ) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
@@ -1367,7 +1367,7 @@ ApiStatus DeletePartner(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall) {
+ApiStatus GetPartnerActionSuccess(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var = *script->ptrReadPos;
     s32 actionSuccess = battleStatus->actionSuccess;

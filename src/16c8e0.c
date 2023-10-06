@@ -103,7 +103,7 @@ extern HudScript HES_StatusSPShine;
 
 void btl_render_actors(void);
 void tattle_cam_pre_render(Camera*);
-void func_8023FF84(Camera*);
+void tattle_cam_post_render(Camera*);
 void btl_draw_enemy_health_bars(void);
 void btl_update_starpoints_display(void);
 
@@ -223,7 +223,7 @@ void initialize_battle(void) {
     }
 
     tattleCam->fpDoPreRender = tattle_cam_pre_render;
-    tattleCam->fpDoPostRender = func_8023FF84;
+    tattleCam->fpDoPostRender = tattle_cam_post_render;
 
     if (playerData->battlesCount < 9999) {
         playerData->battlesCount++;
@@ -254,7 +254,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
-        if ((battleStatus->flags1 & BS_FLAGS1_PARTNER_ACTING) && gGameStatusPtr->multiplayerEnabled != 0) {
+        if ((battleStatus->flags1 & BS_FLAGS1_PARTNER_ACTING) && gGameStatusPtr->multiplayerEnabled) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
             battleStatus->curButtonsDown = gGameStatusPtr->curButtons[1] & inputBitmask;
@@ -633,7 +633,7 @@ void btl_render_actors(void) {
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                     actor = battleStatus->enemyActors[i];
 
-                    if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
+                    if (actor != NULL && !(actor->flags & ACTOR_FLAG_INVISIBLE)) {
                         renderTaskPtr->appendGfxArg = (void*)i;
                         renderTaskPtr->appendGfx = appendGfx_enemy_actor;
                         renderTaskPtr->dist = actor->curPos.z;
@@ -659,7 +659,7 @@ void btl_render_actors(void) {
                 }
 
                 actor = battleStatus->partnerActor;
-                if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
+                if (actor != NULL && !(actor->flags & ACTOR_FLAG_INVISIBLE)) {
                     renderTaskPtr->appendGfxArg = NULL;
                     renderTaskPtr->appendGfx = appendGfx_partner_actor;
                     renderTaskPtr->dist = actor->curPos.z;
@@ -684,7 +684,7 @@ void btl_render_actors(void) {
                 }
 
                 actor = battleStatus->playerActor;
-                if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
+                if (actor != NULL && !(actor->flags & ACTOR_FLAG_INVISIBLE)) {
                     renderTaskPtr->appendGfxArg = NULL;
                     renderTaskPtr->appendGfx = appendGfx_player_actor;
                     renderTaskPtr->dist = actor->curPos.z;
@@ -712,8 +712,8 @@ void btl_render_actors(void) {
     }
 }
 
-u16 blend_background_channel_COPY(u16 arg0, s32 arg1, s32 alpha) {
-    return arg0 + (arg1 - arg0) * alpha / 256;
+u16 blend_tattle_background_channel(u16 a, s32 b, s32 alpha) {
+    return a + (b - a) * alpha / 256;
 }
 
 void tattle_cam_pre_render(Camera* camera) {
@@ -745,9 +745,9 @@ void tattle_cam_pre_render(Camera* camera) {
         } else {
             for (i = 0; i < ARRAY_COUNT(gTattleBgPalette); i++) {
                 u16 palColor = gGameStatusPtr->backgroundPalette[i];
-                u16 blendedB = blend_background_channel_COPY(UNPACK_PAL_B(palColor), fogB >> 3, fogA);
-                u16 blendedG = blend_background_channel_COPY(UNPACK_PAL_G(palColor), fogG >> 3, fogA);
-                u16 blendedR = blend_background_channel_COPY(UNPACK_PAL_R(palColor), fogR >> 3, fogA);
+                u16 blendedB = blend_tattle_background_channel(UNPACK_PAL_B(palColor), fogB >> 3, fogA);
+                u16 blendedG = blend_tattle_background_channel(UNPACK_PAL_G(palColor), fogG >> 3, fogA);
+                u16 blendedR = blend_tattle_background_channel(UNPACK_PAL_R(palColor), fogR >> 3, fogA);
                 gTattleBgPalette[i] = blendedB << 1 | blendedG << 6 | blendedR << 11 | 1;
             }
         }
@@ -849,88 +849,90 @@ void tattle_cam_pre_render(Camera* camera) {
     gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 }
 
-void func_8023FF84(Camera* camera) {
+void tattle_cam_post_render(Camera* camera) {
     show_foreground_models_unchecked();
 }
 
 void btl_draw_enemy_health_bars(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    if (gGameStatusPtr->unk_7C != 0) {
-        if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
-            s32 i;
+    if (!gGameStatusPtr->healthBarsEnabled) {
+        return;
+    }
 
-            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-                Actor* enemy = battleStatus->enemyActors[i];
+    if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
+        s32 i;
 
-                if (enemy != NULL) {
-                    s32 currentHP;
-                    s32 temp;
-                    s32 ones;
+        for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+            Actor* enemy = battleStatus->enemyActors[i];
 
-                    currentHP = enemy->curHP;
-                    temp = (currentHP * 25) / enemy->maxHP;
+            if (enemy != NULL) {
+                s32 currentHP;
+                s32 temp;
+                s32 ones;
 
-                    if (temp < enemy->healthFraction) {
-                        enemy->healthFraction -= 2;
-                        if (enemy->healthFraction < temp) {
-                            enemy->healthFraction = temp;
-                        }
-                    }
+                currentHP = enemy->curHP;
+                temp = (currentHP * 25) / enemy->maxHP;
 
+                if (temp < enemy->healthFraction) {
+                    enemy->healthFraction -= 2;
                     if (enemy->healthFraction < temp) {
-                        enemy->healthFraction += 2;
-                        if (enemy->healthFraction > temp) {
-                            enemy->healthFraction = temp;
-                        }
+                        enemy->healthFraction = temp;
                     }
+                }
 
-                    if (!(enemy->flags & (ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_TARGET_ONLY))
-                        && ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_HEALTH_BAR_HIDDEN))
-                        && is_actor_health_bar_visible(enemy)
-                    ) {
-                        f32 x = enemy->healthBarPos.x;
-                        f32 y = enemy->healthBarPos.y;
-                        f32 z = enemy->healthBarPos.z;
+                if (enemy->healthFraction < temp) {
+                    enemy->healthFraction += 2;
+                    if (enemy->healthFraction > temp) {
+                        enemy->healthFraction = temp;
+                    }
+                }
 
-                        if (enemy->healthBarPos.y >= -500) {
-                            s32 screenX, screenY, screenZ;
-                            s32 id;
+                if (!(enemy->flags & (ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_TARGET_ONLY))
+                    && ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_HEALTH_BAR_HIDDEN))
+                    && is_actor_health_bar_visible(enemy)
+                ) {
+                    f32 x = enemy->healthBarPos.x;
+                    f32 y = enemy->healthBarPos.y;
+                    f32 z = enemy->healthBarPos.z;
 
-                            get_screen_coords(1, x, y, z, &screenX, &screenY, &screenZ);
-                            screenY += 16;
+                    if (enemy->healthBarPos.y >= -500) {
+                        s32 screenX, screenY, screenZ;
+                        s32 id;
+
+                        get_screen_coords(CAM_BATTLE, x, y, z, &screenX, &screenY, &screenZ);
+                        screenY += 16;
+                        id = D_8029EFBC;
+                        hud_element_set_render_depth(id, 10);
+                        hud_element_set_script(id, &HES_HPBar);
+                        hud_element_set_render_pos(id, screenX, screenY);
+                        hud_element_draw_clipped(id);
+
+                        temp = currentHP / 10;
+                        ones = currentHP % 10;
+
+                        // tens digit
+                        if (temp > 0) {
                             id = D_8029EFBC;
                             hud_element_set_render_depth(id, 10);
-                            hud_element_set_script(id, &HES_HPBar);
-                            hud_element_set_render_pos(id, screenX, screenY);
-                            hud_element_draw_clipped(id);
-
-                            temp = currentHP / 10;
-                            ones = currentHP % 10;
-
-                            // tens digit
-                            if (temp > 0) {
-                                id = D_8029EFBC;
-                                hud_element_set_render_depth(id, 10);
-                                hud_element_set_script(id, bHPDigitHudScripts[temp]);
-                                btl_draw_prim_quad(0, 0, 0, 0, screenX, screenY + 2, 8, 8);
-                                hud_element_set_render_pos(id, screenX + 4, screenY + 6);
-                                hud_element_draw_next(id);
-                            }
-
-                            // ones digit
-                            id = D_8029EFBC;
-                            hud_element_set_render_depth(id, 10);
-                            hud_element_set_script(id, bHPDigitHudScripts[ones]);
-                            btl_draw_prim_quad(0, 0, 0, 0, screenX + 6, screenY + 2, 8, 8);
-                            hud_element_set_render_pos(id, screenX + 10, screenY + 6);
+                            hud_element_set_script(id, bHPDigitHudScripts[temp]);
+                            btl_draw_prim_quad(0, 0, 0, 0, screenX, screenY + 2, 8, 8);
+                            hud_element_set_render_pos(id, screenX + 4, screenY + 6);
                             hud_element_draw_next(id);
-
-                            temp = enemy->healthFraction;
-                            temp = 25 - temp;
-                            btl_draw_prim_quad(168, 0, 0, 255, screenX + 11 - temp, screenY - 7, temp, 1);
-                            btl_draw_prim_quad(255, 0, 0, 255, screenX + 11 - temp, screenY - 6, temp, 4);
                         }
+
+                        // ones digit
+                        id = D_8029EFBC;
+                        hud_element_set_render_depth(id, 10);
+                        hud_element_set_script(id, bHPDigitHudScripts[ones]);
+                        btl_draw_prim_quad(0, 0, 0, 0, screenX + 6, screenY + 2, 8, 8);
+                        hud_element_set_render_pos(id, screenX + 10, screenY + 6);
+                        hud_element_draw_next(id);
+
+                        temp = enemy->healthFraction;
+                        temp = 25 - temp;
+                        btl_draw_prim_quad(168, 0, 0, 255, screenX + 11 - temp, screenY - 7, temp, 1);
+                        btl_draw_prim_quad(255, 0, 0, 255, screenX + 11 - temp, screenY - 6, temp, 4);
                     }
                 }
             }
@@ -1127,7 +1129,7 @@ void btl_delete_actor(Actor* actor) {
     part = actor->partsTable;
 
     while (part != NULL) {
-        if (!(part->flags & ACTOR_PART_FLAG_4)) {
+        if (!(part->flags & ACTOR_PART_FLAG_NO_SHADOW)) {
             delete_shadow(part->shadowIndex);
         }
 
@@ -1136,11 +1138,11 @@ void btl_delete_actor(Actor* actor) {
 
             ASSERT(spr_free_sprite(part->spriteInstanceID) == 0);
 
-            if (!(part->flags & ACTOR_PART_FLAG_80000000)) {
+            if (!(part->flags & ACTOR_PART_FLAG_SKIP_MOVEMENT_ALLOC)) {
                 heap_free(part->movement);
             }
 
-            if (!(part->flags & ACTOR_PART_FLAG_2)) {
+            if (!(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
                 heap_free(part->decorationTable);
             }
         }

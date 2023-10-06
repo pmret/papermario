@@ -145,7 +145,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
         get_screen_coords(gCurrentCameraID, speakerNpc->pos.x, speakerNpc->pos.y + speakerNpc->collisionHeight, speakerNpc->pos.z, &screenX, &screenY, &screenZ);
         animID = script->varTable[13];
         if (animID != -1) {
-            if (!(gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_80)) {
+            if (!(gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_SPEAKING)) {
                 animID = script->varTable[14];
             }
             set_npc_animation(speakerNpc, animID);
@@ -153,7 +153,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
     } else {
         get_screen_coords(gCurrentCameraID, playerStatus->pos.x, playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z, &screenX, &screenY, &screenZ);
         if (script->varTable[13] != -1) {
-            if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_80) {
+            if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_SPEAKING) {
                 playerStatus->anim = script->varTable[13];
             } else {
                 playerStatus->anim = script->varTable[14];
