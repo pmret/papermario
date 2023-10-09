@@ -238,7 +238,7 @@ void load_demo_battle(u32 index) {
     func_80138188();
     reset_battle_status();
     clear_encounter_status();
-    clear_entity_data(1);
+    clear_entity_data(TRUE);
     clear_effect_data();
     clear_player_status();
     clear_printers();
@@ -329,6 +329,6 @@ void load_demo_battle(u32 index) {
     gCurrentEncounter.instigatorValue = 0;
     set_battle_stage(BTL_STAGE_DEFAULT);
     gGameStatusPtr->demoBattleFlags |= DEMO_BTL_FLAG_ENABLED;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     load_battle(battleID);
 }

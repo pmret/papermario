@@ -5,16 +5,16 @@
 #include "game_modes.h"
 
 void state_init_startup(void) {
-    gOverrideFlags |= GLOBAL_OVERRIDES_8;
-    gGameStatusPtr->introState = INTRO_STATE_3;
+    gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
+    gGameStatusPtr->startupState = 3;
 }
 
 void state_step_startup(void) {
     GameStatus* gameStatus = gGameStatusPtr;
     s32 i;
 
-    if (gameStatus->introState != INTRO_STATE_0) {
-        gameStatus->introState--;
+    if (gameStatus->startupState != 0) {
+        gameStatus->startupState--;
         return;
     }
 
@@ -27,7 +27,7 @@ void state_step_startup(void) {
     gGameStatusPtr->unk_76 = FALSE;
     gGameStatusPtr->disableScripts = FALSE;
     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-    gGameStatusPtr->creditsViewportMode = -1;
+    gGameStatusPtr->introPart = INTRO_PART_NONE;
     gGameStatusPtr->demoBattleFlags = 0;
     gGameStatusPtr->unk_A9 = -1;
     gGameStatusPtr->demoState = DEMO_STATE_NONE;
@@ -47,7 +47,7 @@ void state_step_startup(void) {
     hud_element_clear_cache();
     clear_trigger_data();
     clear_printers();
-    clear_entity_data(0);
+    clear_entity_data(FALSE);
     clear_screen_overlays();
     clear_player_status();
     clear_npcs();
@@ -67,7 +67,7 @@ void state_step_startup(void) {
 
     for (i = 0; i < 4; i++) {
         gGameStatusPtr->unk_50[i] = 4;
-        gGameStatusPtr->unk_48[i] = 0xF;
+        gGameStatusPtr->unk_48[i] = 15;
     }
 
     fio_has_valid_backup();
@@ -80,7 +80,7 @@ void state_step_startup(void) {
         audio_set_mono();
     }
 
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     set_game_mode(GAME_MODE_LOGOS);
 }
 

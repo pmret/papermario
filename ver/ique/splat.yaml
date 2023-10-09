@@ -58,7 +58,7 @@ segments:
     - [0xCCC0, c, camera]
     - [0xDFA0, c, game_modes]
     - [0xDFF0, c, state_startup]
-    - [0xE280, c, intro_logos]
+    - [0xE280, c, startup_screen_fading]
     - [0xE380, c, state_battle]
     - [0xE920, c, state_logos]
     - [0xF3F0, c, state_pause]

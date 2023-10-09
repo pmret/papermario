@@ -53,7 +53,7 @@ API_CALLABLE(N(ApplyOuttaSight)) {
     ActorPart* playerActorPartTable = gBattleStatus.playerActor->partsTable;
 
     gBattleStatus.outtaSightActive = 1;
-    if (!(gBattleStatus.flags2 & BS_FLAGS2_2)) {
+    if (!(gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED)) {
         gBattleStatus.outtaSightActive = -1;
     }
 

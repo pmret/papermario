@@ -280,8 +280,8 @@ API_CALLABLE(N(AdjustCamVfov)) {
 
 API_CALLABLE(N(ResumeIntro)) {
     GameStatus* gameStatus = gGameStatusPtr;
-    if (gameStatus->creditsViewportMode < 5U) {
-        gameStatus->creditsViewportMode++;
+    if (gameStatus->introPart > INTRO_PART_NONE && gameStatus->introPart < INTRO_PART_5) {
+        gameStatus->introPart++;
         state_init_intro();
     }
     return ApiStatus_DONE1;

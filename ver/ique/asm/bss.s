@@ -361,28 +361,28 @@ dlabel gLoadedFromFileSelect
 dlabel D_800A094C
 .space 4
 
-dlabel D_800A0950
+dlabel IntroEnableDrawFrameDelay
 .space 4
 
-dlabel D_800A0954
+dlabel IntroOverlayAlpha
 .space 2
 
-dlabel D_800A0956
+dlabel IntroFrontFadeAlpha
 .space 2
 
-dlabel D_800A0958
+dlabel IntroOverlayDelta
 .space 2
 
-dlabel D_800A095A
+dlabel IntroFadeColorR
 .space 2
 
-dlabel D_800A095C
+dlabel IntroFadeColorG
 .space 2
 
-dlabel D_800A095E
+dlabel IntroFadeColorB
 .space 2
 
-dlabel D_800A0960
+dlabel IntroOverlayType
 .space 0x00000004
 
 dlabel D_800A0964
@@ -391,7 +391,7 @@ dlabel D_800A0964
 dlabel D_800A0968
 .space 8
 
-dlabel D_800A0970
+dlabel TitleScreen_AppearDelay
 .space 4
 
 dlabel TitleScreen_ImgList
@@ -409,7 +409,7 @@ dlabel TitleScreen_ImgList_PressStart
 dlabel D_800A0984
 .space 4
 
-dlabel D_800A0988
+dlabel TitleScreen_TimeLeft
 .space 4
 
 dlabel D_800A098C

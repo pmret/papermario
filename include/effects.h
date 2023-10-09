@@ -2319,7 +2319,7 @@ typedef struct BuffData {
 
 typedef struct PartnerBuffFXData {
     /* 0x00 */ s16 useRandomValues;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 visible;
     /* 0x04 */ s32 timeLeft;
     /* 0x08 */ s32 lifeTime;
     /* 0x0C */ BuffData unk_0C[3];

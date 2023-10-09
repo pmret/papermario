@@ -29,7 +29,7 @@ void N(UpdateIntroMessages)(IntroMessage** introMessageLists) {
     static s32 N(IntroMessageDelay);
 
     if (N(CurMessageList) == NULL) {
-        N(CurMessageList) = introMessageLists[D_800779B0];
+        N(CurMessageList) = introMessageLists[IntroMessageIdx];
     }
 
     switch (N(IntroMessageState)) {

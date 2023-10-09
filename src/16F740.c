@@ -278,7 +278,7 @@ void btl_state_update_normal_start(void) {
                 gBattleStatus.flags2 &= ~BS_FLAGS2_CANT_FLEE;
             }
             battleStatus->endBattleFadeOutRate = 10;
-            battleStatus->unk_95 = 0;
+            battleStatus->waitForState = BATTLE_STATE_0;
             battleStatus->hammerLossTurns = -1;
             battleStatus->jumpLossTurns = -1;
             battleStatus->itemLossTurns = -1;
@@ -300,12 +300,12 @@ void btl_state_update_normal_start(void) {
             battleStatus->hustleTurns = 0;
             battleStatus->unk_93 = 0;
             battleStatus->unk_94 = 0;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_100;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_200;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_STORED_TURBO_CHARGE_TURN;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_DOING_JUMP_TUTORIAL;
 
             for (i = 0; i < ARRAY_COUNT(battleStatus->varTable); i++) {
                 battleStatus->varTable[i] = 0;
@@ -535,8 +535,8 @@ void btl_state_update_begin_turn(void) {
     s16* enemyIDs;
 
     if (gBattleSubState == BTL_SUBSTATE_BEGIN_TURN_INIT) {
-        battleStatus->flags2 &= ~BS_FLAGS2_2;
-        battleStatus->flags2 &= ~BS_FLAGS2_4;
+        battleStatus->flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+        battleStatus->flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
         battleStatus->flags2 &= ~BS_FLAGS2_8;
         battleStatus->flags2 &= ~BS_FLAGS2_10;
         battleStatus->merleeAttackBoost = 0;
@@ -754,7 +754,7 @@ void btl_state_update_begin_player_turn(void) {
             if (!does_script_exist(partner->handleBatttlePhaseScriptID)) {
                 battleStatus->outtaSightActive = 0;
                 gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_WATER_BLOCK;
-                gBattleStatus.flags2 |= BS_FLAGS2_4;
+                gBattleStatus.flags2 |= BS_FLAGS2_PARTNER_TURN_USED;
             }
             break;
     }
@@ -818,8 +818,8 @@ void btl_state_update_begin_player_turn(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_TURBO_CHARGE:
             if (battleStatus->turboChargeTurnsLeft != 0) {
-                if (gBattleStatus.flags2 & BS_FLAGS2_100) {
-                    gBattleStatus.flags2 &= ~BS_FLAGS2_100;
+                if (gBattleStatus.flags2 & BS_FLAGS2_STORED_TURBO_CHARGE_TURN) {
+                    gBattleStatus.flags2 &= ~BS_FLAGS2_STORED_TURBO_CHARGE_TURN;
                     gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_DAMAGE;
                 } else {
                     battleStatus->turboChargeTurnsLeft--;
@@ -1049,7 +1049,7 @@ back:
                 btl_set_state(BATTLE_STATE_SWITCH_TO_PLAYER);
             } else{
                 btl_set_state(BATTLE_STATE_BEGIN_PARTNER_TURN);
-                gBattleStatus.flags2 |= BS_FLAGS2_2;
+                gBattleStatus.flags2 |= BS_FLAGS2_PLAYER_TURN_USED;
             }
         }
     }
@@ -1102,7 +1102,7 @@ void btl_state_update_begin_partner_turn(void) {
         if (partner == NULL) {
             D_8029F254 = TRUE;
             gBattleSubState = BTL_SUBSTATE_BEGIN_PARTNER_TURN_END_DELAY;
-        } else if ((battleStatus->flags2 & (BS_FLAGS2_4 | BS_FLAGS2_2)) != (BS_FLAGS2_4 | BS_FLAGS2_2)) {
+        } else if ((battleStatus->flags2 & (BS_FLAGS2_PARTNER_TURN_USED | BS_FLAGS2_PLAYER_TURN_USED)) != (BS_FLAGS2_PARTNER_TURN_USED | BS_FLAGS2_PLAYER_TURN_USED)) {
             if (!(partner->flags & ACTOR_FLAG_NO_ATTACK)) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
@@ -1191,11 +1191,11 @@ void btl_state_update_begin_partner_turn(void) {
             D_8029F258--;
             return;
         }
-        gBattleStatus.flags2 &= ~BS_FLAGS2_100000;
+        gBattleStatus.flags2 &= ~BS_FLAGS2_NO_PLAYER_PAL_ADJUST;
         if (!D_8029F254) {
             btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
         } else {
-            gBattleStatus.flags2 |= BS_FLAGS2_4;
+            gBattleStatus.flags2 |= BS_FLAGS2_PARTNER_TURN_USED;
             btl_set_state(BATTLE_STATE_9);
         }
     }
@@ -1247,31 +1247,31 @@ void btl_state_update_9(void) {
     s32 oldKoDuration;
 
     if (gBattleSubState == BTL_SUBSTATE_9_INIT) {
-        if (gBattleStatus.flags2 & BS_FLAGS2_2) {
-            if (partner != NULL) {
-                if (!(gBattleStatus.flags2 & BS_FLAGS2_4) && !(partner->flags & ACTOR_FLAG_NO_ATTACK)) {
-                    btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
-                    return;
-                }
-            }
-
-            player->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
-            player->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
-            if (partner != NULL) {
-                partner->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
-                partner->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
-            }
-
-            gBattleSubState = BTL_SUBSTATE_9_1;
-            D_8029F258 = 0;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_8;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_10;
-        } else {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED)) {
             btl_set_state(BATTLE_STATE_SWITCH_TO_PLAYER);
             return;
         }
+
+        if (partner != NULL) {
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_PARTNER_TURN_USED) && !(partner->flags & ACTOR_FLAG_NO_ATTACK)) {
+                btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
+                return;
+            }
+        }
+
+        player->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
+        player->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
+        if (partner != NULL) {
+            partner->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
+            partner->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
+        }
+
+        gBattleSubState = BTL_SUBSTATE_9_1;
+        D_8029F258 = 0;
+        gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+        gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
+        gBattleStatus.flags2 &= ~BS_FLAGS2_8;
+        gBattleStatus.flags2 &= ~BS_FLAGS2_10;
     }
 
     if (gBattleSubState == BTL_SUBSTATE_9_1) {
@@ -1297,13 +1297,13 @@ void btl_state_update_9(void) {
                     actor->flags &= ~ACTOR_FLAG_SKIP_TURN;
 
                     if (actor->debuff != 0) {
-                        if (actor->debuff == STATUS_KEY_FEAR ||
-                            actor->debuff == STATUS_KEY_DIZZY ||
-                            actor->debuff == STATUS_KEY_PARALYZE ||
-                            actor->debuff == STATUS_KEY_SLEEP ||
-                            actor->debuff == STATUS_KEY_FROZEN ||
-                            actor->debuff == STATUS_KEY_STOP)
-                        {
+                        if (actor->debuff == STATUS_KEY_FEAR
+                            || actor->debuff == STATUS_KEY_DIZZY
+                            || actor->debuff == STATUS_KEY_PARALYZE
+                            || actor->debuff == STATUS_KEY_SLEEP
+                            || actor->debuff == STATUS_KEY_FROZEN
+                            || actor->debuff == STATUS_KEY_STOP
+                        ) {
                             actor->flags |= ACTOR_FLAG_SKIP_TURN;
                         }
                         actor->debuffDuration--;
@@ -1484,8 +1484,8 @@ void btl_state_update_9(void) {
                 partner->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
             }
             gBattleSubState = BTL_SUBSTATE_9_5;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
         }
@@ -1781,8 +1781,8 @@ void btl_state_update_victory(void) {
                 partner->flags &= ~(ACTOR_FLAG_SHOW_STATUS_ICONS | ACTOR_FLAG_USING_IDLE_ANIM);
             }
             gBattleSubState = BTL_SUBSTATE_VICTORY_CHECK_SWAP;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
@@ -1954,8 +1954,8 @@ void btl_state_update_end_training_battle(void) {
                 partner->flags &= ~(ACTOR_FLAG_SHOW_STATUS_ICONS | ACTOR_FLAG_USING_IDLE_ANIM);
             }
             gBattleSubState = BTL_SUBSTATE_END_TRAINING_CHECK_OUTTA_SIGHT;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
@@ -2004,8 +2004,8 @@ void btl_state_update_end_training_battle(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_END_TRAINING_CHECK_OUTTA_SIGHT:
             battleStatus->stateFreezeCount = 0;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
@@ -2214,7 +2214,7 @@ void btl_state_update_run_away(void) {
         case BTL_SUBSTATE_RUN_AWAY_EXEC_SCRIPT:
             battleStatus->stateFreezeCount = 0;
             gBattleStatus.flags1 &= ~BS_FLAGS1_BATTLE_FLED;
-            gBattleStatus.flags2 |= BS_FLAGS2_10 | BS_FLAGS2_8 | BS_FLAGS2_4 | BS_FLAGS2_2;
+            gBattleStatus.flags2 |= BS_FLAGS2_10 | BS_FLAGS2_8 | BS_FLAGS2_PARTNER_TURN_USED | BS_FLAGS2_PLAYER_TURN_USED;
             playerData->unk_2A6++;
             btl_cam_use_preset(BTL_CAM_PRESET_25);
             btl_cam_target_actor(ACTOR_PLAYER);
@@ -2375,8 +2375,8 @@ void btl_state_update_defeat(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_DEFEAT_INIT:
             battleStatus->flags1 &= ~BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
             battleStatus->stateFreezeCount = 0;
@@ -3082,9 +3082,9 @@ void btl_state_update_end_player_turn(void) {
             if (battleStatus->moveCategory == BTL_MENU_TYPE_ITEMS && battleStatus->itemUsesLeft >= 2) {
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(10);
-                gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+                gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
             } else {
-                gBattleStatus.flags2 |= BS_FLAGS2_2;
+                gBattleStatus.flags2 |= BS_FLAGS2_PLAYER_TURN_USED;
             }
 
             if (battleStatus->unk_94 < 0) {
@@ -3110,7 +3110,7 @@ void btl_state_update_end_player_turn(void) {
                 }
 
                 if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & BS_FLAGS1_HUSTLED)) {
-                    gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+                    gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
                     btl_set_state(BATTLE_STATE_PREPARE_MENU);
                     return;
                 } else {
@@ -3127,7 +3127,7 @@ void btl_state_update_end_player_turn(void) {
             }
 
             if (battleStatus->hustleTurns != 0 && (gBattleStatus.flags1 & BS_FLAGS1_HUSTLED)) {
-                gBattleStatus.flags2 &= ~BS_FLAGS2_2;
+                gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
                 btl_set_state(BATTLE_STATE_PREPARE_MENU);
             } else {
                 gBattleStatus.flags1 &= ~BS_FLAGS2_HAS_DRAINED_HP;
@@ -3415,7 +3415,7 @@ void btl_state_update_end_partner_turn(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (gBattleSubState == BTL_SUBSTATE_INIT) {
-        battleStatus->flags2 |= BS_FLAGS2_4;
+        battleStatus->flags2 |= BS_FLAGS2_PARTNER_TURN_USED;
         if (btl_check_enemies_defeated()) {
             return;
         }
@@ -3527,8 +3527,8 @@ void btl_state_update_next_enemy(void) {
                 partner->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
             }
 
-            gBattleStatus.flags2 &= ~BS_FLAGS2_2;
-            gBattleStatus.flags2 &= ~BS_FLAGS2_4;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
+            gBattleStatus.flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
             gBattleStatus.flags2 |= BS_FLAGS2_10000;
 
             D_8029F244 = enemy->unk_134;

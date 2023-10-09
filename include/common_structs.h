@@ -898,7 +898,7 @@ typedef struct BattleStatus {
     /* 0x092 */ s8 reflectFlags;
     /* 0x093 */ s8 unk_93;
     /* 0x094 */ s8 unk_94;
-    /* 0x095 */ s8 unk_95;
+    /* 0x095 */ s8 waitForState;
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
@@ -1412,17 +1412,17 @@ typedef struct GameStatus {
     /* 0x07A */ b8 musicEnabled;
     /* 0x07B */ char unk_7B;
     /* 0x07C */ b8 healthBarsEnabled;
-    /* 0x07D */ s8 keepUsingPartnerOnMapChange;
+    /* 0x07D */ b8 keepUsingPartnerOnMapChange;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
     /* 0x081 */ b8 multiplayerEnabled;
-    /* 0x082 */ Vec2b unk_82;
+    /* 0x082 */ Vec2b altViewportOffset;
     /* 0x084 */ s8 playerSpriteSet;
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
-    /* 0x08A */ s16 didAreaChange;
+    /* 0x08A */ b16 didAreaChange;
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
     /* 0x090 */ u16 unk_90;
@@ -1430,20 +1430,20 @@ typedef struct GameStatus {
     /* 0x094 */ f32 exitTangent;
     /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
-    /* 0x0A8 */ s8 creditsViewportMode;
+    /* 0x0A8 */ s8 introPart;
     /* 0x0A9 */ s8 unk_A9; // selected language?
     /* 0x0AA */ s8 demoBattleFlags;
     /* 0x0AB */ u8 soundOutputMode;
-    /* 0x0AC */ s8 introState;
-    /* 0x0AD */ s8 introCounter;
-    /* 0x0AE */ s8 bSkipIntro;
-    /* 0x0AF */ s8 unk_AF;
-    /* 0x0B0 */ s8 unk_B0;
+    /* 0x0AC */ s8 startupState; // used for various startup states like logos, title screen, intro, and demo
+    /* 0x0AD */ s8 logoTime;
+    /* 0x0AE */ b8 skipLogos;
+    /* 0x0AF */ s8 titleScreenTimer;
+    /* 0x0B0 */ s8 titleScreenDismissTime;
     /* 0x0B1 */ char unk_B1[0x5];
-    /* 0x0B6 */ s16 bootAlpha;
-    /* 0x0B8 */ s16 bootBlue;
-    /* 0x0BA */ s16 bootGreen;
-    /* 0x0BC */ s16 bootRed;
+    /* 0x0B6 */ s16 screenColorA;
+    /* 0x0B8 */ s16 screenColorR;
+    /* 0x0BA */ s16 screenColorG;
+    /* 0x0BC */ s16 screenColorB;
     /* 0x0BE */ char unk_BE[94];
     /* 0x11C */ Vec3f playerGroundTraceAngles;
     /* 0x128 */ Vec3f playerGroundTraceNormal;

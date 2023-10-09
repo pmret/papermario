@@ -66,7 +66,7 @@ void state_step_pause(void) {
             if (nuGfxCfb[1] == nuGfxCfb_ptr) {
                 D_800A0920 = 4;
                 D_800A0921 = 2;
-                gOverrideFlags |= GLOBAL_OVERRIDES_8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
                 gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_1;
 
@@ -102,14 +102,14 @@ void state_step_pause(void) {
                     clear_item_entity_data();
                     clear_script_list();
                     clear_npcs();
-                    clear_entity_data(0);
+                    clear_entity_data(FALSE);
                     clear_trigger_data();
                     SavedReverbMode = sfx_get_reverb_mode();
                     sfx_set_reverb_mode(0);
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
                     pause_init();
-                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 }
 
                 if (D_800A0920 >= 0) {
@@ -145,7 +145,7 @@ void state_step_unpause(void) {
         case 0:
         case 1:
             if (D_800A0920 == 4) {
-                gOverrideFlags |= GLOBAL_OVERRIDES_8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
             }
 
             if (D_800A0920 >= 0) {
@@ -163,7 +163,7 @@ void state_step_unpause(void) {
                         D_800A0920 = -1;
                         nuGfxSetCfb(pause_frameBuffers, ARRAY_COUNT(pause_frameBuffers));
                         pause_cleanup();
-                        gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                        gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                         mapSettings = get_current_map_settings();
                         mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                         gGameStatusPtr->isBattle = FALSE;

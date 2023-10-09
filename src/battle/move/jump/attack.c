@@ -28,13 +28,13 @@ API_CALLABLE(N(GetJumpDamage)) {
 extern EvtScript N(EVS_UseMove0_ImplA);
 extern EvtScript N(EVS_UseMove0_ImplB);
 extern EvtScript N(EVS_UseMove0_ImplC);
-extern EvtScript N(EVS_802A4018);
+extern EvtScript N(EVS_UseMove_Tutorial);
 
 EvtScript N(EVS_UseMove0) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(GetBattleFlags2, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS2_200)
-        EVT_EXEC_WAIT(N(EVS_802A4018))
+    EVT_IF_FLAG(LVar0, BS_FLAGS2_DOING_JUMP_TUTORIAL)
+        EVT_EXEC_WAIT(N(EVS_UseMove_Tutorial))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -495,7 +495,7 @@ EvtScript N(EVS_UseMove2_ImplC) = {
     EVT_END
 };
 
-EvtScript N(EVS_802A4018) = {
+EvtScript N(EVS_UseMove_Tutorial) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_A))

@@ -283,34 +283,34 @@ dlabel gMapTransitionStateTime
 dlabel gLoadedFromFileSelect
 .space 8
 
-dlabel D_800A0950
+dlabel IntroEnableDrawFrameDelay
 .space 4
 
-dlabel D_800A0954
+dlabel IntroOverlayAlpha
 .space 2
 
-dlabel D_800A0956
+dlabel IntroFrontFadeAlpha
 .space 2
 
-dlabel D_800A0958
+dlabel IntroOverlayDelta
 .space 2
 
-dlabel D_800A095A
+dlabel IntroFadeColorR
 .space 2
 
-dlabel D_800A095C
+dlabel IntroFadeColorG
 .space 2
 
-dlabel D_800A095E
+dlabel IntroFadeColorB
 .space 2
 
-dlabel D_800A0960
+dlabel IntroOverlayType
 .space 4
 
 dlabel D_800A0964
 .space 12
 
-dlabel D_800A0970
+dlabel TitleScreen_AppearDelay
 .space 4
 
 dlabel TitleScreen_ImgList
@@ -328,7 +328,7 @@ dlabel TitleScreen_ImgList_PressStart
 dlabel TitleScreen_ImgList_CopyrightPalette
 .space 4
 
-dlabel D_800A0988
+dlabel TitleScreen_TimeLeft
 .space 8
 
 dlabel gWorldNpcList

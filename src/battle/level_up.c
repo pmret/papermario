@@ -522,7 +522,7 @@ void btl_state_update_celebration(void) {
                 EndBattleRewardStep = 0;
                 CelebrateSubstateTime = 1;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LOAD_STAR_POINTS;
-                gBattleStatus.flags2 |= BS_FLAGS2_1;
+                gBattleStatus.flags2 |= BS_FLAGS2_AWARDING_STAR_POINTS;
             }
             break;
         case BTL_SUBSTATE_CELEBRATE_LOAD_STAR_POINTS:

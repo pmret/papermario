@@ -203,7 +203,7 @@ GameModeIncomplete GameModeFileSelect = {
 };
 
 GameModeIncomplete GameModeEndFileSelect = {
-    0,
+    MODE_FLAG_NONE,
     state_init_exit_file_select,
     state_step_exit_file_select,
     NULL,
@@ -236,24 +236,24 @@ GameModeIncomplete GameModeDemo = {
 };
 
 GameMode* gameModeMap[] = {
-    (GameMode*) &GameModeStartup,
-    (GameMode*) &GameModeLogos,
-    (GameMode*) &GameModeTitleScreen,
-    (GameMode*) &GameModeEnterDemoWorld,
-    (GameMode*) &GameModeWorld,
-    (GameMode*) &GameModeChangeMap,
-    (GameMode*) &GameModeGameOver,
-    (GameMode*) &GameModeEnterWorld,
-    (GameMode*) &GameModeBattle,
-    (GameMode*) &GameModeEndBattle,
-    (GameMode*) &GameModePause,
-    (GameMode*) &GameModeUnpause,
-    (GameMode*) &GameModeLanguageSelect,
-    (GameMode*) &GameModeEndLanguageSelect,
-    (GameMode*) &GameModeFileSelect,
-    (GameMode*) &GameModeEndFileSelect,
-    (GameMode*) &GameModeIntro,
-    (GameMode*) &GameModeDemo,
+    [GAME_MODE_STARTUP]             (GameMode*) &GameModeStartup,
+    [GAME_MODE_LOGOS]               (GameMode*) &GameModeLogos,
+    [GAME_MODE_TITLE_SCREEN]        (GameMode*) &GameModeTitleScreen,
+    [GAME_MODE_ENTER_DEMO_WORLD]    (GameMode*) &GameModeEnterDemoWorld,
+    [GAME_MODE_WORLD]               (GameMode*) &GameModeWorld,
+    [GAME_MODE_CHANGE_MAP]          (GameMode*) &GameModeChangeMap,
+    [GAME_MODE_GAME_OVER]           (GameMode*) &GameModeGameOver,
+    [GAME_MODE_ENTER_WORLD]         (GameMode*) &GameModeEnterWorld,
+    [GAME_MODE_BATTLE]              (GameMode*) &GameModeBattle,
+    [GAME_MODE_END_BATTLE]          (GameMode*) &GameModeEndBattle,
+    [GAME_MODE_PAUSE]               (GameMode*) &GameModePause,
+    [GAME_MODE_UNPAUSE]             (GameMode*) &GameModeUnpause,
+    [GAME_MODE_LANGUAGE_SELECT]     (GameMode*) &GameModeLanguageSelect,
+    [GAME_MODE_END_LANGUAGE_SELECT] (GameMode*) &GameModeEndLanguageSelect,
+    [GAME_MODE_FILE_SELECT]         (GameMode*) &GameModeFileSelect,
+    [GAME_MODE_END_FILE_SELECT]     (GameMode*) &GameModeEndFileSelect,
+    [GAME_MODE_INTRO]               (GameMode*) &GameModeIntro,
+    [GAME_MODE_DEMO]                (GameMode*) &GameModeDemo,
 };
 
 SHIFT_BSS s16 CurGameMode;

@@ -2286,31 +2286,35 @@ ApiStatus SetBattleState(Evt* script, s32 isInitialCall) {
 ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 temp_v0;
+    s32 waitForState;
 
     if (isInitialCall) {
-        temp_v0 = evt_get_variable(script, *args++);
-        if (temp_v0 == 0) {
-            battleStatus->unk_95 = 0;
+        waitForState = evt_get_variable(script, *args++);
+        if (waitForState == BATTLE_STATE_0) {
+            battleStatus->waitForState = BATTLE_STATE_0;
             return ApiStatus_DONE2;
         }
-        battleStatus->unk_95 = temp_v0;
+        battleStatus->waitForState = waitForState;
     }
 
-    temp_v0 = battleStatus->unk_95;
-    if (temp_v0) {
-        return (gBattleState == temp_v0) * ApiStatus_DONE2;
+    waitForState = battleStatus->waitForState;
+    if (waitForState == BATTLE_STATE_0) {
+        return ApiStatus_DONE2;
     }
 
-    return ApiStatus_DONE2;
+    if (gBattleState == waitForState) {
+        return ApiStatus_DONE2;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus CancelEnemyTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 temp_v0 = evt_get_variable(script, *args++);
+    s32 cancelMode = evt_get_variable(script, *args++);
 
-    switch (temp_v0) {
+    switch (cancelMode) {
         case 0:
             battleStatus->unk_94 = 1;
             break;

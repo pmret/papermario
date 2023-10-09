@@ -149,7 +149,7 @@ API_CALLABLE(N(func_80218170_4CF320)) {
         script->functionTemp[0] = 10;
     }
 
-    battleStatus->flags2 &= ~BS_FLAGS2_2;
+    battleStatus->flags2 &= ~BS_FLAGS2_PLAYER_TURN_USED;
 
     if (script->functionTemp[0] != 0) {
         script->functionTemp[0]--;
@@ -166,7 +166,7 @@ API_CALLABLE(N(func_802181B4_4CF364)) {
         script->functionTemp[0] = 10;
     }
 
-    battleStatus->flags2 &= ~BS_FLAGS2_4;
+    battleStatus->flags2 &= ~BS_FLAGS2_PARTNER_TURN_USED;
 
     if (script->functionTemp[0] != 0) {
         script->functionTemp[0]--;

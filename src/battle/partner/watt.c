@@ -72,7 +72,7 @@ API_CALLABLE(N(WattFXUpdate)) {
     x = partner->curPos.x + partner->headOffset.x;
     y = partner->curPos.y + partner->headOffset.y + partner->verticalRenderOffset + 12.0f;
     z = partner->curPos.z + partner->headOffset.z;
-    if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
+    if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_PARTNER_TURN_USED)) == BS_FLAGS2_PARTNER_TURN_USED) {
         y = NPC_DISPOSE_POS_Y;
     }
 
@@ -361,8 +361,8 @@ API_CALLABLE(N(ApplyTurboCharge)) {
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
     }
 
-    if (gBattleStatus.flags2 & BS_FLAGS2_2) {
-        gBattleStatus.flags2 |= BS_FLAGS2_100;
+    if (gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED) {
+        gBattleStatus.flags2 |= BS_FLAGS2_STORED_TURBO_CHARGE_TURN;
     }
 
     return ApiStatus_DONE2;

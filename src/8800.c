@@ -192,8 +192,8 @@ void render_frame(s32 isSecondPass) {
         camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
         matrixListPos = gMatrixListPos++;
         guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRot.x, 0.0f, 1.0f, 0.0f);
-        camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->unk_82.x;
-        camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_82.y;
+        camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
+        camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
 
         if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
             if (gCurrentCamID != CAM_3) {
@@ -436,8 +436,8 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->vpAlt.vp.vscale[2] = 0x1FF;
     camera->vpAlt.vp.vscale[3] = 0;
 
-    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->unk_82.x + 4 * (s16) ((u16) camera->viewportStartX + (camera->viewportW / 2));
-    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->unk_82.y + 4 * (s16) ((u16) camera->viewportStartY + (camera->viewportH / 2));
+    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->altViewportOffset.x + 4 * (s16) ((u16) camera->viewportStartX + (camera->viewportW / 2));
+    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->altViewportOffset.y + 4 * (s16) ((u16) camera->viewportStartY + (camera->viewportH / 2));
     camera->vpAlt.vp.vtrans[2] = 0x200;
     camera->vpAlt.vp.vtrans[3] = 0;
 }

@@ -385,7 +385,7 @@ void gfx_draw_background(void) {
             break;
         default:
             // Draw the scene's background as normal
-            if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
+            if (gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME) {
                 gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
                 return;
             }

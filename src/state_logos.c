@@ -11,11 +11,27 @@ void appendGfx_intro_logos(void);
 #if VERSION_JP
 #define LOGO_1_Y 54
 #define LOGO_2_Y 104
+#define N64_FADE_IN_TIME 30
 #else
 #define LOGO_1_Y 89
 #define LOGO_2_Y 59
+#define N64_FADE_IN_TIME 40
 #endif
 
+enum LogoStates {
+    LOGOS_STATE_N64_FADE_IN         = 0x00000000,
+    LOGOS_STATE_N64_HOLD            = 0x00000001,
+    LOGOS_STATE_N64_FADE_OUT        = 0x00000002,
+    LOGOS_STATE_NINTENDO_FADE_IN    = 0x00000003,
+    LOGOS_STATE_NINTENDO_HOLD       = 0x00000004,
+    LOGOS_STATE_NINTENDO_FADE_OUT   = 0x00000005,
+    LOGOS_STATE_IS_FADE_IN          = 0x00000006,
+    LOGOS_STATE_IS_HOLD_1           = 0x00000007,
+    LOGOS_STATE_IS_HOLD_2           = 0x00000008,
+    LOGOS_STATE_IS_FADE_OUT         = 0x00000009,
+    LOGOS_STATE_CURTAINS_APPEAR     = 0x0000000A,
+    LOGOS_STATE_CLEANUP             = 0x0000000B,
+};
 
 s32 D_800778C0[] = { 0, 0 };
 
@@ -51,11 +67,11 @@ void state_init_logos(void) {
     s8* romEnd;
 
     general_heap_create();
-    gGameStatusPtr->introState = INTRO_STATE_0;
-    gGameStatusPtr->introCounter = 0;
-    gGameStatusPtr->bSkipIntro = FALSE;
-    intro_logos_set_fade_alpha(255);
-    intro_logos_set_fade_color(0);
+    gGameStatusPtr->startupState = LOGOS_STATE_N64_FADE_IN;
+    gGameStatusPtr->logoTime = 0;
+    gGameStatusPtr->skipLogos = FALSE;
+    startup_set_fade_screen_alpha(255);
+    startup_set_fade_screen_color(0);
 
     romEnd = logos_ROM_END;
     romStart = logos_ROM_START;
@@ -78,7 +94,7 @@ void state_init_logos(void) {
     gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
-    set_cam_viewport(0, 12, 28, 296, 184);
+    set_cam_viewport(CAM_DEFAULT, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
@@ -101,10 +117,10 @@ void state_init_logos(void) {
     clear_npcs();
     hud_element_clear_cache();
     reset_background_settings();
-    clear_entity_data(1);
+    clear_entity_data(TRUE);
     clear_effect_data();
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
-    intro_logos_update_fade();
+    startup_fade_screen_update();
     gGameStatusPtr->backgroundFlags = 0;
 }
 
@@ -113,128 +129,124 @@ void state_step_logos(void) {
     int pressedButtons = gGameStatusPtr->pressedButtons[0];
 #endif
 
-    if (gGameStatusPtr->bSkipIntro) {
-        if (intro_logos_fade_out(10)) {
+    if (gGameStatusPtr->skipLogos) {
+        if (startup_fade_screen_out(10)) {
             set_curtain_scale(1.0f);
             set_curtain_fade(0.0f);
             set_game_mode(GAME_MODE_TITLE_SCREEN);
         }
     } else {
 #if VERSION_JP
-        if ((gGameStatusPtr->introState == INTRO_STATE_1 ||
-             gGameStatusPtr->introState == INTRO_STATE_2 ||
-             gGameStatusPtr->introState == INTRO_STATE_3 ||
-             gGameStatusPtr->introState == INTRO_STATE_4 ||
-             gGameStatusPtr->introState == INTRO_STATE_5 ||
-             gGameStatusPtr->introState == INTRO_STATE_6 ||
-             gGameStatusPtr->introState == INTRO_STATE_7 ||
-             gGameStatusPtr->introState == INTRO_STATE_8 ||
-             gGameStatusPtr->introState == INTRO_STATE_9 ||
-             gGameStatusPtr->introState == INTRO_STATE_A) &&
-            (pressedButtons & (BUTTON_START | BUTTON_Z | BUTTON_A)))
-        {
-            intro_logos_set_fade_color(208);
-            gGameStatusPtr->bSkipIntro = 1;
+        if ((gGameStatusPtr->startupState == LOGOS_STATE_N64_HOLD
+            || gGameStatusPtr->startupState == LOGOS_STATE_N64_FADE_OUT
+            || gGameStatusPtr->startupState == LOGOS_STATE_NINTENDO_FADE_IN
+            || gGameStatusPtr->startupState == LOGOS_STATE_NINTENDO_HOLD
+            || gGameStatusPtr->startupState == LOGOS_STATE_NINTENDO_FADE_OUT
+            || gGameStatusPtr->startupState == LOGOS_STATE_IS_FADE_IN
+            || gGameStatusPtr->startupState == LOGOS_STATE_IS_HOLD_1
+            || gGameStatusPtr->startupState == LOGOS_STATE_IS_HOLD_2
+            || gGameStatusPtr->startupState == LOGOS_STATE_IS_FADE_OUT
+            || gGameStatusPtr->startupState == LOGOS_STATE_CURTAINS_APPEAR)
+            && (pressedButtons & (BUTTON_START | BUTTON_Z | BUTTON_A))
+        ) {
+            startup_set_fade_screen_color(208);
+            gGameStatusPtr->skipLogos = TRUE;
         }
 #endif
 
-        switch (gGameStatusPtr->introState) {
-            case INTRO_STATE_0:
-                if (intro_logos_fade_in(10)) {
-                    gGameStatusPtr->introState++;
-                    gGameStatusPtr->introCounter = 30;
+        switch (gGameStatusPtr->startupState) {
+            case LOGOS_STATE_N64_FADE_IN:
+                if (startup_fade_screen_in(10)) {
+                    gGameStatusPtr->startupState++;
+                    gGameStatusPtr->logoTime = 30;
                 }
                 break;
-            case INTRO_STATE_1:
-                if (gGameStatusPtr->introCounter == 0) {
-                    intro_logos_set_fade_color(208);
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_N64_HOLD:
+                if (gGameStatusPtr->logoTime == 0) {
+                    startup_set_fade_screen_color(208);
+                    gGameStatusPtr->startupState++;
                 }
-                gGameStatusPtr->introCounter--;
+                gGameStatusPtr->logoTime--;
                 break;
-            case INTRO_STATE_2:
-                if (intro_logos_fade_out(10)) {
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_N64_FADE_OUT:
+                if (startup_fade_screen_out(10)) {
+                    gGameStatusPtr->startupState++;
 #if VERSION_JP
-                    gGameStatusPtr->introState += 2;
+                    gGameStatusPtr->startupState += 2;
 #endif
                 }
                 break;
-            case INTRO_STATE_3:
-                if (intro_logos_fade_in(10)) {
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_NINTENDO_FADE_IN:
+                if (startup_fade_screen_in(10)) {
+                    gGameStatusPtr->startupState++;
+                    gGameStatusPtr->logoTime = N64_FADE_IN_TIME;
+                }
+                break;
+            case LOGOS_STATE_NINTENDO_HOLD:
+                if (gGameStatusPtr->logoTime == 0) {
+                    gGameStatusPtr->startupState++;
 #if VERSION_JP
-                    gGameStatusPtr->introCounter = 30;
+                    startup_set_fade_screen_color(0);
 #else
-                    gGameStatusPtr->introCounter = 40;
+                    startup_set_fade_screen_color(208);
 #endif
                 }
+                gGameStatusPtr->logoTime--;
                 break;
-            case INTRO_STATE_4:
-                if (gGameStatusPtr->introCounter == 0) {
-                    gGameStatusPtr->introState++;
-#if VERSION_JP
-                    intro_logos_set_fade_color(0);
-#else
-                    intro_logos_set_fade_color(208);
-#endif
-                }
-                gGameStatusPtr->introCounter--;
-                break;
-            case INTRO_STATE_5:
-                if (intro_logos_fade_out(10)) {
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_NINTENDO_FADE_OUT:
+                if (startup_fade_screen_out(10)) {
+                    gGameStatusPtr->startupState++;
                 }
                 break;
-            case INTRO_STATE_6:
-                if (intro_logos_fade_in(10)) {
-                    gGameStatusPtr->introState++;
-                    gGameStatusPtr->introCounter = 30;
+            case LOGOS_STATE_IS_FADE_IN:
+                if (startup_fade_screen_in(10)) {
+                    gGameStatusPtr->startupState++;
+                    gGameStatusPtr->logoTime = 30;
                 }
                 break;
-            case INTRO_STATE_7:
-                if (gGameStatusPtr->introCounter == 0) {
-                    gGameStatusPtr->introState++;
-                    intro_logos_set_fade_color(208);
-                    gGameStatusPtr->introCounter = 30;
+            case LOGOS_STATE_IS_HOLD_1:
+                if (gGameStatusPtr->logoTime == 0) {
+                    gGameStatusPtr->startupState++;
+                    startup_set_fade_screen_color(208);
+                    gGameStatusPtr->logoTime = 30;
                 }
-                gGameStatusPtr->introCounter--;
+                gGameStatusPtr->logoTime--;
                 break;
-            case INTRO_STATE_8:
-                if (gGameStatusPtr->introCounter == 0) {
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_IS_HOLD_2:
+                if (gGameStatusPtr->logoTime == 0) {
+                    gGameStatusPtr->startupState++;
                     set_curtain_scale_goal(1.0f);
                     set_curtain_draw_callback(NULL);
                     set_curtain_fade_goal(0.3f);
                 } else {
-                    gGameStatusPtr->introCounter--;
+                    gGameStatusPtr->logoTime--;
                 }
                 break;
-            case INTRO_STATE_9:
-                if (intro_logos_fade_out(10)) {
-                    gGameStatusPtr->introCounter = 15;
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_IS_FADE_OUT:
+                if (startup_fade_screen_out(10)) {
+                    gGameStatusPtr->logoTime = 15;
+                    gGameStatusPtr->startupState++;
                 }
                 break;
-            case INTRO_STATE_A:
-                if (gGameStatusPtr->introCounter == 0) {
-                    gGameStatusPtr->introState++;
+            case LOGOS_STATE_CURTAINS_APPEAR:
+                if (gGameStatusPtr->logoTime == 0) {
+                    gGameStatusPtr->startupState++;
                 } else {
-                    gGameStatusPtr->introCounter--;
+                    gGameStatusPtr->logoTime--;
                 }
                 break;
-            case INTRO_STATE_B:
+            case LOGOS_STATE_CLEANUP:
                 heap_free(gLogosImages);
                 gLogosImages = NULL;
-                intro_logos_set_fade_alpha(255);
-                gGameStatusPtr->creditsViewportMode = 0;
+                startup_set_fade_screen_alpha(255);
+                gGameStatusPtr->introPart = INTRO_PART_0;
                 set_game_mode(GAME_MODE_INTRO);
                 break;
         }
     }
     update_npcs();
     update_cameras();
-    intro_logos_update_fade();
+    startup_fade_screen_update();
 }
 
 void state_drawUI_logos(void) {
@@ -252,10 +264,10 @@ void appendGfx_intro_logos(void) {
     gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gDPPipeSync(gMainGfxPos++);
 
-    switch (gGameStatusPtr->introState) {
-        case INTRO_STATE_0:
-        case INTRO_STATE_1:
-        case INTRO_STATE_2:
+    switch (gGameStatusPtr->startupState) {
+        case LOGOS_STATE_N64_FADE_IN:
+        case LOGOS_STATE_N64_HOLD:
+        case LOGOS_STATE_N64_FADE_OUT:
             gSPDisplayList(gMainGfxPos++, D_80077908);
             for (i = 0; i < 7; i++) {
                 gDPLoadTextureTile(gMainGfxPos++, gLogosImage1 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 112,
@@ -265,15 +277,15 @@ void appendGfx_intro_logos(void) {
                 gDPPipeSync(gMainGfxPos++);
             }
             break;
-        case INTRO_STATE_3:
-        case INTRO_STATE_4:
-        case INTRO_STATE_5:
+        case LOGOS_STATE_NINTENDO_FADE_IN:
+        case LOGOS_STATE_NINTENDO_HOLD:
+        case LOGOS_STATE_NINTENDO_FADE_OUT:
 #if VERSION_JP
             break;
-        case INTRO_STATE_6:
-        case INTRO_STATE_7:
-        case INTRO_STATE_8:
-        case INTRO_STATE_9:
+        case LOGOS_STATE_IS_FADE_IN:
+        case LOGOS_STATE_IS_HOLD_1:
+        case LOGOS_STATE_IS_HOLD_2:
+        case LOGOS_STATE_IS_FADE_OUT:
 #endif
             gSPDisplayList(gMainGfxPos++, D_80077908);
             for (i = 0; i < 6; i++) {
@@ -289,10 +301,10 @@ void appendGfx_intro_logos(void) {
             }
 #if !VERSION_JP
             break;
-        case INTRO_STATE_6:
-        case INTRO_STATE_7:
-        case INTRO_STATE_8:
-        case INTRO_STATE_9:
+        case LOGOS_STATE_IS_FADE_IN:
+        case LOGOS_STATE_IS_HOLD_1:
+        case LOGOS_STATE_IS_HOLD_2:
+        case LOGOS_STATE_IS_FADE_OUT:
             gSPDisplayList(gMainGfxPos++, D_80077908);
 #endif
             for (i = 0; i < 14; i++) {

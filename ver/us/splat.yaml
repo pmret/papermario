@@ -68,7 +68,7 @@ segments:
     - [auto, c, camera]
     - [auto, c, game_modes]
     - [auto, c, state_startup]
-    - [auto, c, intro_logos]
+    - [auto, c, startup_screen_fading]
     - [auto, c, state_battle]
     - [auto, c, state_logos]
     - [auto, c, state_pause]

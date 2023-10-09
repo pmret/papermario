@@ -2119,7 +2119,7 @@ s32 can_switch_to_player(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    if (battleStatus->flags2 & BS_FLAGS2_2) {
+    if (battleStatus->flags2 & BS_FLAGS2_PLAYER_TURN_USED) {
         return FALSE;
     } else {
         s8 debuff = player->debuff;
@@ -2170,7 +2170,7 @@ s32 can_switch_to_partner(void) {
     s8 partnerDebuff;
     s32 partnerCantMove;
 
-    if (battleStatus->flags2 & BS_FLAGS2_4 || partner == PARTNER_NONE || partner->flags & ACTOR_FLAG_NO_ATTACK) {
+    if (battleStatus->flags2 & BS_FLAGS2_PARTNER_TURN_USED || partner == PARTNER_NONE || partner->flags & ACTOR_FLAG_NO_ATTACK) {
         return FALSE;
     }
 
@@ -2806,7 +2806,7 @@ void btl_state_update_player_menu(void) {
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_MAIN_SHOW_CANT_SWAP:
-            if (gBattleStatus.flags2 & BS_FLAGS2_4) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_PARTNER_TURN_USED) {
                 btl_show_variable_battle_message(BTL_MSG_CANT_SWITCH, 60, 0);
             } else {
                 btl_show_variable_battle_message(BTL_MSG_CANT_MOVE, 60, playerData->curPartner);
@@ -3295,7 +3295,7 @@ void btl_state_update_player_menu(void) {
 
             if (jumpTargetCount <= 0 && hammerTargetCount <= 0) {
                 battleStatus->moveCategory = BTL_MENU_TYPE_DO_NOTHING;
-                battleStatus->unk_95 = 0;
+                battleStatus->waitForState = BATTLE_STATE_0;
                 btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
             } else {
                 jumpChance = 50;
@@ -4482,7 +4482,7 @@ void btl_state_draw_partner_menu(void) {
 }
 
 s32 btl_menu_show_switch_to_twink(void) {
-    if (gBattleStatus.flags2 & BS_FLAGS2_4) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_PARTNER_TURN_USED) {
         return FALSE;
     }
     return TRUE;
@@ -4657,7 +4657,7 @@ void btl_state_draw_peach_menu(void) {
 }
 
 s32 btl_menu_show_switch_to_peach(void) {
-    if (gBattleStatus.flags2 & BS_FLAGS2_2) {
+    if (gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED) {
         return FALSE;
     }
     return TRUE;

@@ -17,14 +17,14 @@ BSS s32 bSavedPartner;
 BSS s32 bSavedOverrideFlags;
 BSS s32 D_8029DA38; // unused?
 BSS s32 D_8029DA3C; // unused?
-BSS s32 D_8029DA40;
-BSS s32 D_8029DA44;
-BSS s32 D_8029DA48;
+BSS s32 StarPointsBasePosX;
+BSS s32 StarPointsBasePosY;
+BSS s32 StarPointsMoveInterpAmt;
 BSS s32 D_8029DA4C;
-BSS Camera D_8029DA50[ARRAY_COUNT(gCameras)];
-BSS f32 D_8029EFB0;
-BSS f32 D_8029EFB4;
-BSS f32 D_8029EFB8;
+BSS Camera SavedWorldCameras[ARRAY_COUNT(gCameras)];
+BSS f32 SavedWorldPlayerPosX;
+BSS f32 SavedWorldPlayerPosY;
+BSS f32 SavedWorldPlayerPosZ;
 BSS s32 D_8029EFBC;
 BSS s32 BtlStarPointTensHIDs[10];
 BSS s32 BtlStarPointShinesHIDs[10];
@@ -172,7 +172,7 @@ void initialize_battle(void) {
 
     battleStatus->inputBufferPos = 0;
     battleStatus->holdInputBufferPos = 0;
-    battleStatus->unk_95 = 0;
+    battleStatus->waitForState = BATTLE_STATE_0;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
         battleStatus->enemyActors[i] = NULL;
@@ -289,7 +289,7 @@ void btl_update(void) {
     }
 
     cond = TRUE;
-    if (battleStatus->unk_95 == 0 || battleStatus->unk_95 != gBattleState) {
+    if (battleStatus->waitForState == BATTLE_STATE_0 || battleStatus->waitForState != gBattleState) {
         switch (gBattleState) {
             case BATTLE_STATE_NEGATIVE_1:
             case BATTLE_STATE_0:
@@ -470,8 +470,8 @@ void btl_update(void) {
 
                 set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_802809F6);
                 set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
-                intro_logos_set_fade_alpha(255);
-                intro_logos_set_fade_color(224);
+                startup_set_fade_screen_alpha(255);
+                startup_set_fade_screen_color(224);
             }
         }
     }
@@ -948,17 +948,17 @@ void btl_update_starpoints_display(void) {
     s32 i;
 
     if (gBattleStatus.flags1 & BS_FLAGS1_ACTORS_VISIBLE) {
-        if (!(gBattleStatus.flags2 & BS_FLAGS2_1)) {
-            D_8029DA40 = 292;
-            D_8029DA44 = 196;
-            D_8029DA48 = 6;
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_AWARDING_STAR_POINTS)) {
+            StarPointsBasePosX = 292;
+            StarPointsBasePosY = 196;
+            StarPointsMoveInterpAmt = 6;
             D_8029DA4C = battleStatus->totalStarPoints % 10;
         } else {
-            D_8029DA40 += (202 - D_8029DA40) / D_8029DA48;
-            D_8029DA44 += (120 - D_8029DA44) / D_8029DA48;
-            D_8029DA48--;
-            if (D_8029DA48 < 1) {
-                D_8029DA48 = 1;
+            StarPointsBasePosX += (202 - StarPointsBasePosX) / StarPointsMoveInterpAmt;
+            StarPointsBasePosY += (120 - StarPointsBasePosY) / StarPointsMoveInterpAmt;
+            StarPointsMoveInterpAmt--;
+            if (StarPointsMoveInterpAmt < 1) {
+                StarPointsMoveInterpAmt = 1;
             }
         }
 
@@ -1008,8 +1008,8 @@ void btl_update_starpoints_display(void) {
                 }
             }
 
-            posX = D_8029DA40;
-            posY = D_8029DA44;
+            posX = StarPointsBasePosX;
+            posY = StarPointsBasePosY;
             tens = battleStatus->totalStarPoints / 10;
             ones = battleStatus->totalStarPoints % 10;
 
@@ -1037,9 +1037,9 @@ void btl_update_starpoints_display(void) {
                 hud_element_set_flags(BtlStarPointShinesHIDs[i], HUD_ELEMENT_FLAG_DISABLED);
             }
 
-            posX = D_8029DA40;
-            posY = D_8029DA44 + (one * 14.0f);
-            if (gBattleStatus.flags2 & BS_FLAGS2_1) {
+            posX = StarPointsBasePosX;
+            posY = StarPointsBasePosY + (one * 14.0f);
+            if (gBattleStatus.flags2 & BS_FLAGS2_AWARDING_STAR_POINTS) {
                 if (ones != 0) {
                     draw_box(0, WINDOW_STYLE_4, posX - 100, posY - 5, 0, 110, 12, 120, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL,
                              NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
@@ -1069,12 +1069,12 @@ void btl_save_world_cameras(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
-        D_8029DA50[i] = gCameras[i];
+        SavedWorldCameras[i] = gCameras[i];
     }
 
-    D_8029EFB0 = playerStatus->pos.x;
-    D_8029EFB4 = playerStatus->pos.y;
-    D_8029EFB8 = playerStatus->pos.z;
+    SavedWorldPlayerPosX = playerStatus->pos.x;
+    SavedWorldPlayerPosY = playerStatus->pos.y;
+    SavedWorldPlayerPosZ = playerStatus->pos.z;
     playerStatus->pos.x = NPC_DISPOSE_POS_X;
     playerStatus->pos.y = NPC_DISPOSE_POS_Y;
     playerStatus->pos.z = NPC_DISPOSE_POS_Z;
@@ -1086,13 +1086,13 @@ void btl_restore_world_cameras(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
-        gCameras[i] = D_8029DA50[i];
+        gCameras[i] = SavedWorldCameras[i];
     }
 
     gCurrentCameraID = CAM_DEFAULT;
-    playerStatus->pos.x = D_8029EFB0;
-    playerStatus->pos.y = D_8029EFB4;
-    playerStatus->pos.z = D_8029EFB8;
+    playerStatus->pos.x = SavedWorldPlayerPosX;
+    playerStatus->pos.y = SavedWorldPlayerPosY;
+    playerStatus->pos.z = SavedWorldPlayerPosZ;
 
     if (bSavedOverrideFlags & GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION) {
         gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;

@@ -16,14 +16,14 @@ s8 gGameStepDelayAmount = 1;
 s8 gGameStepDelayCount = 5;
 
 GameStatus gGameStatus = {
-    .curButtons = {0},
-    .pressedButtons = {0},
-    .heldButtons = {0},
-    .prevButtons = {0},
-    .stickX = {0},
-    .stickY = {0},
-    .unk_48 = {0},
-    .unk_50 = {0},
+    .curButtons = { 0 },
+    .pressedButtons = { 0 },
+    .heldButtons = { 0 },
+    .prevButtons = { 0 },
+    .stickX = { 0 },
+    .stickY = { 0 },
+    .unk_48 = { 0 },
+    .unk_50 = { 0 },
 };
 
 GameStatus* gGameStatusPtr = &gGameStatus;
@@ -111,7 +111,7 @@ void step_game_loop(void) {
                 }
                 break;
             case 1:
-                gOverrideFlags |= GLOBAL_OVERRIDES_8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 D_8009A690--;
                 if (D_8009A690 == 0) {
                     sfx_stop_env_sounds();
@@ -175,7 +175,7 @@ void gfx_draw_frame(void) {
     gMatrixListPos = 0;
     gMainGfxPos = &gDisplayContext->mainGfx[0];
 
-    if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME) {
         gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
         return;
     }
@@ -262,11 +262,11 @@ void load_engine_data(void) {
     gGameStatusPtr->backgroundFlags = 0;
     gGameStatusPtr->musicEnabled = TRUE;
     gGameStatusPtr->healthBarsEnabled = TRUE;
-    gGameStatusPtr->creditsViewportMode = -1;
+    gGameStatusPtr->introPart = INTRO_PART_NONE;
     gGameStatusPtr->demoBattleFlags = 0;
     gGameStatusPtr->multiplayerEnabled = FALSE;
-    gGameStatusPtr->unk_82.x = -8;
-    gGameStatusPtr->unk_82.y = 4;
+    gGameStatusPtr->altViewportOffset.x = -8;
+    gGameStatusPtr->altViewportOffset.y = 4;
     timeFreezeMode = 0;
     gGameStatusPtr->debugQuizmo = gGameStatusPtr->unk_13C = 0;
     gGameStepDelayCount = 5;
@@ -291,7 +291,7 @@ void load_engine_data(void) {
     clear_npcs();
     hud_element_clear_cache();
     clear_trigger_data();
-    clear_entity_data(0);
+    clear_entity_data(FALSE);
     clear_player_data();
     init_encounter_status();
     clear_screen_overlays();
@@ -310,7 +310,7 @@ void load_engine_data(void) {
         gGameStatusPtr->unk_48[i] = 12;
     }
 
-    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+    gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     set_game_mode(GAME_MODE_STARTUP);
 }
 

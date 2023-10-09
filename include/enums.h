@@ -2365,8 +2365,8 @@ typedef enum ScreenOverlayType {
     OVERLAY_WORLD_DARKNESS          = 11,
     OVERLAY_BLUR                    = 12,
     OVERLAY_BATTLE_DARKNESS         = 13,
-    OVERLAY_UNUSED_1                = 14,
-    OVERLAY_UNUSED_2                = 15,
+    OVERLAY_INTRO_1                 = 14,
+    OVERLAY_INTRO_2                 = 15,
 } ScreenOverlayType;
 
 enum DoorSounds {
@@ -3487,34 +3487,17 @@ enum DemoFlags {
     DEMO_BTL_FLAG_40                = 0x40,
 };
 
+enum IntroParts {
+    INTRO_PART_0            = 0,
+    INTRO_PART_1            = 1,
+    INTRO_PART_5            = 5,
+    INTRO_PART_100          = 100,
+    INTRO_PART_NONE         = -1,
+};
+
 enum MapLoadType {
     LOAD_FROM_MAP           = 0,
     LOAD_FROM_FILE_SELECT   = 1,
-};
-
-enum IntroStates {
-    INTRO_STATE_0                        = 0x00000000,
-    INTRO_STATE_1                        = 0x00000001,
-    INTRO_STATE_2                        = 0x00000002,
-    INTRO_STATE_3                        = 0x00000003,
-    INTRO_STATE_4                        = 0x00000004,
-    INTRO_STATE_5                        = 0x00000005,
-    INTRO_STATE_6                        = 0x00000006,
-    INTRO_STATE_7                        = 0x00000007,
-    INTRO_STATE_8                        = 0x00000008,
-    INTRO_STATE_9                        = 0x00000009,
-    INTRO_STATE_A                        = 0x0000000A,
-    INTRO_STATE_B                        = 0x0000000B,
-    INTRO_STATE_C                        = 0x0000000C,
-    INTRO_STATE_D                        = 0x0000000D,
-    INTRO_STATE_E                        = 0x0000000E,
-    INTRO_STATE_F                        = 0x0000000F,
-    INTRO_STATE_10                       = 0x00000010,
-    INTRO_STATE_11                       = 0x00000011,
-    INTRO_STATE_12                       = 0x00000012,
-    INTRO_STATE_13                       = 0x00000013,
-    INTRO_STATE_14                       = 0x00000014,
-    INTRO_STATE_15                       = 0x00000015,
 };
 
 enum BattleStatusFlags1 {
@@ -3553,22 +3536,20 @@ enum BattleStatusFlags1 {
 };
 
 enum BattleStatusFlags2 {
-    BS_FLAGS2_1                             = 0x00000001,
-    BS_FLAGS2_2                             = 0x00000002,
-    BS_FLAGS2_4                             = 0x00000004,
+    BS_FLAGS2_AWARDING_STAR_POINTS          = 0x00000001, // star points move to the center of the screen
+    BS_FLAGS2_PLAYER_TURN_USED              = 0x00000002, // set after player has used their action for this turn
+    BS_FLAGS2_PARTNER_TURN_USED             = 0x00000004, // set after partner has used their action for this turn
     BS_FLAGS2_8                             = 0x00000008,
     BS_FLAGS2_10                            = 0x00000010,
     BS_FLAGS2_CANT_FLEE                     = 0x00000020,
     BS_FLAGS2_PEACH_BATTLE                  = 0x00000040,
-    BS_FLAGS2_80                            = 0x00000080,
-    BS_FLAGS2_100                           = 0x00000100, // dont decrement turbo charge on begin player turn
-    BS_FLAGS2_200                           = 0x00000200,
+    BS_FLAGS2_STORED_TURBO_CHARGE_TURN      = 0x00000100, // prevents turbo charge turns from decrementing on begin player turn
+    BS_FLAGS2_DOING_JUMP_TUTORIAL           = 0x00000200,
     BS_FLAGS2_400                           = 0x00000400,
-    BS_FLAGS2_800                           = 0x00000800,
     BS_FLAGS2_NO_TARGET_AVAILABLE           = 0x00001000,
     BS_FLAGS2_IGNORE_DARKNESS               = 0x00004000,
     BS_FLAGS2_10000                         = 0x00010000,
-    BS_FLAGS2_100000                        = 0x00100000,
+    BS_FLAGS2_NO_PLAYER_PAL_ADJUST          = 0x00100000,
     BS_FLAGS2_IS_FIRST_STRIKE               = 0x01000000,
     BS_FLAGS2_DONT_STOP_MUSIC               = 0x02000000, // don't stop playing the current song when the battle ends
     BS_FLAGS2_HAS_DRAINED_HP                = 0x04000000,
@@ -4218,7 +4199,7 @@ enum DebuffTypes {
 
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
-    GLOBAL_OVERRIDES_8                                          = 0x00000008,
+    GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME                         = 0x00000008,
     GLOBAL_OVERRIDES_10                                         = 0x00000010,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
     GLOBAL_OVERRIDES_40                                         = 0x00000040,

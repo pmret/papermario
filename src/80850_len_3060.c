@@ -560,7 +560,7 @@ void update_status_bar(void) {
     s32 spBars;
     s32 maxStarPower;
 
-    if (gGameStatusPtr->creditsViewportMode >= 0
+    if (gGameStatusPtr->introPart >= INTRO_PART_0
         || gGameStatusPtr->demoState != DEMO_STATE_NONE
         || (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)
         || evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE

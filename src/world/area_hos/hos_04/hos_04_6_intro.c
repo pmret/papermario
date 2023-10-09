@@ -41,14 +41,8 @@ API_CALLABLE(N(SetCamVfov)) {
 }
 
 API_CALLABLE(N(ResumeIntroState)) {
-    if (
-        gGameStatusPtr->creditsViewportMode == 0 ||
-        gGameStatusPtr->creditsViewportMode == 1 ||
-        gGameStatusPtr->creditsViewportMode == 2 ||
-        gGameStatusPtr->creditsViewportMode == 3 ||
-        gGameStatusPtr->creditsViewportMode == 4)
-    {
-        gGameStatusPtr->creditsViewportMode++;
+    if (gGameStatusPtr->introPart > INTRO_PART_NONE && gGameStatusPtr->introPart < INTRO_PART_5) {
+        gGameStatusPtr->introPart++;
         state_init_intro();
     }
     return ApiStatus_DONE1;

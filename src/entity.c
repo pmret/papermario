@@ -784,7 +784,7 @@ void load_area_specific_entity_data(void) {
     }
 }
 
-void clear_entity_data(s32 arg0) {
+void clear_entity_data(b32 arg0) {
     s32 i;
 
     D_801516FC = 1;

@@ -1007,7 +1007,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         } while (0); // required to match
 
         if (isPartner) {
-            if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
+            if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_PARTNER_TURN_USED)) == BS_FLAGS2_PARTNER_TURN_USED) {
                 do {
                     if (actor->koStatus == 0) {
                         part->curAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_INACTIVE);
@@ -1552,10 +1552,13 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
 
-    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)) {
-        battleStatus->buffEffect->data.partnerBuff->unk_02 = 1;
+    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000)
+        && !(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN)
+        && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)
+    ) {
+        battleStatus->buffEffect->data.partnerBuff->visible = TRUE;
     } else {
-        battleStatus->buffEffect->data.partnerBuff->unk_02 = 0;
+        battleStatus->buffEffect->data.partnerBuff->visible = FALSE;
     }
 
     do {
@@ -1625,11 +1628,13 @@ void appendGfx_player_actor(void* arg0) {
         lastAnim = playerParts->curAnimation;
     } while (0); // required to match
 
-    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_2)) == BS_FLAGS2_2) && (partner != NULL)) || (battleStatus->outtaSightActive > 0))
+    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_PLAYER_TURN_USED)) == BS_FLAGS2_PLAYER_TURN_USED)
+                && (partner != NULL))
+            || (battleStatus->outtaSightActive > 0))
         && !(player->flags & ACTOR_FLAG_NO_INACTIVE_ANIM)
-        && ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK)))
+        && !((partner != NULL) && (partner->flags & ACTOR_FLAG_NO_ATTACK)))
     {
-        if (!(gBattleStatus.flags2 & BS_FLAGS2_100000)) {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_NO_PLAYER_PAL_ADJUST)) {
             if ((player->debuff != STATUS_KEY_FEAR)
                 && (player->debuff != STATUS_KEY_PARALYZE)
                 && (player->debuff != STATUS_KEY_FROZEN)
@@ -1637,7 +1642,7 @@ void appendGfx_player_actor(void* arg0) {
             ) {
                 if ((player->transparentStatus != STATUS_KEY_TRANSPARENT) &&
                     (player->stoneStatus != STATUS_KEY_STONE) &&
-                    ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2)))
+                    ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED)))
                 {
                     if (is_ability_active(ABILITY_BERSERKER)) {
                         playerParts->curAnimation = get_player_anim_for_status(STATUS_KEY_INACTIVE_BERSERK);

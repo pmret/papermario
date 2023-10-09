@@ -349,8 +349,8 @@ void _render_transition_stencil(u8 stencilType, f32 progress, ScreenOverlay* ove
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
             appendGfx_darkness_stencil(FALSE, x1, y1, alpha, progress);
             break;
-        case OVERLAY_UNUSED_1:
-        case OVERLAY_UNUSED_2:
+        case OVERLAY_INTRO_1:
+        case OVERLAY_INTRO_2:
             break;
     }
 

@@ -54,9 +54,9 @@ s32 is_picking_up_item(void);
 f32 integrate_gravity(void);
 void gravity_use_fall_parms(void);
 f32 get_clamped_angle_diff(f32, f32);
-s32 intro_logos_fade_in(s16 subtractAlpha);
-s32 intro_logos_fade_out(s16 addAlpha);
-void intro_logos_update_fade(void);
+b32 startup_fade_screen_in(s16 subtractAlpha);
+b32 startup_fade_screen_out(s16 addAlpha);
+void startup_fade_screen_update(void);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
@@ -279,8 +279,8 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
 
 void mem_clear(void* data, s32 numBytes);
 
-void intro_logos_set_fade_color(s16 color);
-void intro_logos_set_fade_alpha(s16 alpha);
+void startup_set_fade_screen_color(s16 color);
+void startup_set_fade_screen_alpha(s16 alpha);
 
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
@@ -1068,7 +1068,7 @@ void clear_sprite_shading_data(void);
 void clear_character_set(void);
 void clear_trigger_data(void);
 void clear_script_list(void);
-void clear_entity_data(s32);
+void clear_entity_data(b32);
 void clear_effect_data(void);
 
 void clear_saved_variables(void);
