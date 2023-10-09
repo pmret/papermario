@@ -1544,7 +1544,7 @@ void btl_state_update_prepare_menu(void) {
     battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STAR_POWER] = -1;
     battleStatus->lastPartnerMenuSelection[BTL_MENU_IDX_STRATEGY] = -1;
 
-    DMA_COPY_SEGMENT(_415D90);
+    DMA_COPY_SEGMENT(btl_states_menus);
 
     if (battleStatus->flags1 & BS_FLAGS1_PARTNER_ACTING) {
         btl_set_state(BATTLE_STATE_PARTNER_MENU);

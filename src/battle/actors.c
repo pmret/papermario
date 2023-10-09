@@ -2,11 +2,6 @@
 #include "battle/battle.h"
 #include "sprite/player.h"
 
-extern IMG_BIN ui_battle_menu_spirits_png[];
-extern PAL_BIN ui_battle_menu_spirits_pal[];
-extern IMG_BIN ui_battle_solid_star_png[];
-extern PAL_BIN ui_battle_solid_star_pal[];
-
 PlayerCelebrationAnimOptions bPlayerCelebrations = {
     10, 90,
     {
