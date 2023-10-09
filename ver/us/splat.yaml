@@ -1375,8 +1375,11 @@ segments:
     subsegments:
     - [auto, c, 16c8e0]
     - [auto, c, 16F740]
-    - [auto, c, battle_cam]
-    - [auto, c, 17D6A0]
+    - [auto, c, battle/camera]
+    - [auto, c, battle/actors]
+    - [auto, c, battle/popup_messages]
+    - [auto, c, battle/bonk_icons]
+    - [auto, c, battle/partner_dma]
     - [auto, c, battle/dmg_item]
     - [auto, c, 181810]
     - [auto, c, battle/actor_rendering]
@@ -1394,11 +1397,14 @@ segments:
     - [auto, c, battle/standard_events]
     - [auto, c, battle/use_star_powers]
     - [auto, .data, 16c8e0]
-    - [auto, .data, battle_cam]
-    - [auto, .data, 17D6A0]
+    - [auto, .data, battle/camera]
+    - [auto, .data, battle/actors]
+    - [auto, .data, battle/popup_messages]
+    - [auto, .data, battle/bonk_icons]
+    - [auto, .data, battle/partner_dma]
     - start: 0x1B2050
       type: .data
-      name: 17D6A0
+      name: battle/popup_messages
       subsegments:
       - [0x1B2050]
       - [0x1B21E0, ci4, ui/battle/cursor_hand, 32, 32]

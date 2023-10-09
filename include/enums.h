@@ -4077,6 +4077,14 @@ enum BattleMessages {
     BTL_MSG_CANT_SELECT_NOW_ALT         = 0x54,
 };
 
+enum BattleMessageStates {
+    BTL_MSG_STATE_0                     = 0,
+    BTL_MSG_STATE_1                     = 1,
+    BTL_MSG_STATE_2                     = 2,
+    BTL_MSG_STATE_3                     = 3,
+    BTL_MSG_STATE_4                     = 4,
+};
+
 // BattleMenuState
 enum BattleMenuStates {
     BTL_MENU_STATE_OPENED_SUBMENU       = -1,

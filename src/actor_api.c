@@ -245,9 +245,9 @@ ApiStatus SetGoalToIndex(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->state.goalPos.x = btl_actorHomePositions[index].x;
-    actor->state.goalPos.y = btl_actorHomePositions[index].y;
-    actor->state.goalPos.z = btl_actorHomePositions[index].z;
+    actor->state.goalPos.x = StandardActorHomePositions[index].x;
+    actor->state.goalPos.y = StandardActorHomePositions[index].y;
+    actor->state.goalPos.z = StandardActorHomePositions[index].z;
 
     return ApiStatus_DONE2;
 }

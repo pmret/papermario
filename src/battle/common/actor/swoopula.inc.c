@@ -564,14 +564,14 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x7FFF)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 32767)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)
         EVT_CALL(SetupMashMeter, 1, 30, 0, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        EVT_CALL(action_command_stop_leech_start, 0, 0x7FFF, 3)
+        EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
         EVT_SET(LVarD, 0)
         EVT_LOOP(MAX_LEECH_COUNT)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
@@ -1014,14 +1014,14 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x7FFF)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 32767)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)
         EVT_CALL(SetupMashMeter, 1, 30, 0, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        EVT_CALL(action_command_stop_leech_start, 0, 0x7FFF, 3)
+        EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
         EVT_SET(LVarD, 0)
         EVT_LOOP(MAX_LEECH_COUNT)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)

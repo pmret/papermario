@@ -1,242 +1,15 @@
 #include "common.h"
 #include "effects.h"
-#include "message_ids.h"
-#include "battle/battle.h"
-#include "hud_element.h"
 #include "entity.h"
-#include "ld_addrs.h"
+#include "battle/battle.h"
 #include "battle/action_cmd.h"
-#include "sprite/player.h"
 
-extern IMG_BIN ui_battle_menu_spirits_png[];
-extern PAL_BIN ui_battle_menu_spirits_pal[];
-extern IMG_BIN ui_battle_solid_star_png[];
-extern PAL_BIN ui_battle_solid_star_pal[];
+extern EntityModelScript EMS_BonkIcon;
 
-extern ActorBlueprint battle_partner_goombario;
-extern ActorBlueprint battle_partner_kooper;
-extern ActorBlueprint battle_partner_bombette;
-extern ActorBlueprint battle_partner_parakarry;
-extern ActorBlueprint battle_partner_goompa;
-extern ActorBlueprint battle_partner_watt;
-extern ActorBlueprint battle_partner_sushie;
-extern ActorBlueprint battle_partner_lakilester;
-extern ActorBlueprint battle_partner_bow;
-extern ActorBlueprint battle_partner_twink;
-
-PlayerCelebrationAnimOptions D_80280FC0 = {
-    10, 90,
-    {
-        50, ANIM_MarioB1_JumpForJoy,
-        50, ANIM_Mario1_Chuckle,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        50, ANIM_Mario1_DustOff,
-        50, ANIM_Mario1_DustOff,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        50, ANIM_Mario1_ThumbsUp,
-        50, ANIM_Mario1_ThumbsUp,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        50, ANIM_MarioB1_FingerWag,
-        50, ANIM_MarioB1_FingerWag,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        80, ANIM_MarioB1_FingerWag,
-        20, ANIM_MarioB1_JumpForJoy,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-        0, 0,
-    }
-};
-
-#include "battle/actor_types.inc.c"
-
-u32 bMarioIdleAnims[] = {
-    STATUS_KEY_NORMAL,            ANIM_Mario1_Walk,
-    STATUS_KEY_DANGER,            ANIM_Mario1_TiredIdle,
-    STATUS_KEY_STONE,             ANIM_MarioB3_Petrified,
-    STATUS_KEY_SLEEP,             ANIM_MarioB1_Sleep,
-    STATUS_KEY_DIZZY,             ANIM_MarioB1_Sick,
-    STATUS_KEY_STOP,              ANIM_Mario1_Still,
-    STATUS_KEY_HUSTLE,            ANIM_Mario1_Run,
-    STATUS_KEY_BERSERK,           ANIM_MarioB2_BerserkIdle,
-    STATUS_KEY_PARALYZE,          ANIM_MarioB1_Sleep,
-    STATUS_KEY_FROZEN,            ANIM_Mario1_Frozen,
-    STATUS_KEY_TRANSPARENT,       ANIM_Mario1_Idle,
-    STATUS_KEY_INACTIVE,          ANIM_Mario1_Still,
-    STATUS_KEY_INACTIVE_BERSERK,  ANIM_MarioB2_BerserkStill,
-    STATUS_KEY_14,                ANIM_MarioB2_Inert,
-    STATUS_KEY_INACTIVE_SLEEP,    ANIM_MarioB1_SleepStill,
-    STATUS_KEY_INACTIVE_DIZZY,    ANIM_MarioB1_SickStill,
-    STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
-    STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
-    STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
-    STATUS_END
-};
-
-s32 bMarioDefendAnims[] = {
-    STATUS_KEY_NORMAL,            ANIM_Mario1_Crouch,
-    STATUS_KEY_DANGER,            ANIM_Mario1_TiredIdle,
-    STATUS_KEY_STONE,             ANIM_MarioB3_Petrified,
-    STATUS_KEY_SLEEP,             ANIM_MarioB1_Sleep,
-    STATUS_KEY_DIZZY,             ANIM_MarioB1_Sick,
-    STATUS_KEY_STOP,              ANIM_Mario1_Still,
-    STATUS_KEY_HUSTLE,            ANIM_Mario1_Crouch,
-    STATUS_KEY_BERSERK,           ANIM_Mario1_Crouch,
-    STATUS_KEY_PARALYZE,          ANIM_MarioB1_Sleep,
-    STATUS_KEY_FROZEN,            ANIM_Mario1_Frozen,
-    STATUS_KEY_TRANSPARENT,       ANIM_Mario1_Idle,
-    STATUS_KEY_INACTIVE,          ANIM_Mario1_Still,
-    STATUS_KEY_INACTIVE_BERSERK,  ANIM_MarioB2_BerserkStill,
-    STATUS_KEY_14,                ANIM_MarioB2_Inert,
-    STATUS_KEY_INACTIVE_SLEEP,    ANIM_MarioB1_SleepStill,
-    STATUS_KEY_INACTIVE_DIZZY,    ANIM_MarioB1_SickStill,
-    STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
-    STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
-    STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
-    STATUS_END
-};
-
-s32 bMarioHideAnims[] = {
-    STATUS_KEY_NORMAL,            ANIM_Mario1_Crouch,
-    STATUS_KEY_DANGER,            ANIM_Mario1_TiredIdle,
-    STATUS_KEY_STONE,             ANIM_MarioB3_Petrified,
-    STATUS_KEY_SLEEP,             ANIM_MarioB1_Sleep,
-    STATUS_KEY_DIZZY,             ANIM_MarioB1_Sick,
-    STATUS_KEY_STOP,              ANIM_Mario1_Still,
-    STATUS_KEY_HUSTLE,            ANIM_MarioW2_RideLaki,
-    STATUS_KEY_BERSERK,           ANIM_MarioW2_RideLaki,
-    STATUS_KEY_PARALYZE,          ANIM_MarioB1_Sleep,
-    STATUS_KEY_FROZEN,            ANIM_Mario1_Frozen,
-    STATUS_KEY_TRANSPARENT,       ANIM_Mario1_Idle,
-    STATUS_KEY_INACTIVE,          ANIM_Mario1_Crouch,
-    STATUS_KEY_INACTIVE_BERSERK,  ANIM_MarioB2_BerserkStill,
-    STATUS_KEY_14,                ANIM_MarioB2_Inert,
-    STATUS_KEY_INACTIVE_SLEEP,    ANIM_MarioB1_SleepStill,
-    STATUS_KEY_INACTIVE_DIZZY,    ANIM_MarioB1_SickStill,
-    STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
-    STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
-    STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
-    STATUS_END
-};
-
-s32 bPeachIdleAnims[] = {
-    STATUS_KEY_NORMAL,    ANIM_Peach1_Walk,
-    STATUS_KEY_INACTIVE,  ANIM_Peach2_Inert,
-    STATUS_END
-};
-
-s32 bMarioDefenseTable[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_END
-};
-
-s32 bPlayerStatusTable[] = {
-    STATUS_KEY_NORMAL,          100,
-    STATUS_KEY_DEFAULT,         100,
-    STATUS_KEY_SLEEP,           100,
-    STATUS_KEY_POISON,          100,
-    STATUS_KEY_FROZEN,          100,
-    STATUS_KEY_DIZZY,           100,
-    STATUS_KEY_FEAR,            100,
-    STATUS_KEY_STATIC,          100,
-    STATUS_KEY_PARALYZE,        100,
-    STATUS_KEY_SHRINK,          100,
-    STATUS_KEY_STOP,            100,
-    STATUS_TURN_MOD_DEFAULT,  0,
-    STATUS_TURN_MOD_SLEEP,    0,
-    STATUS_TURN_MOD_POISON,   0,
-    STATUS_TURN_MOD_FROZEN,   0,
-    STATUS_TURN_MOD_DIZZY,    0,
-    STATUS_TURN_MOD_FEAR,     0,
-    STATUS_TURN_MOD_STATIC,   0,
-    STATUS_TURN_MOD_PARALYZE, 0,
-    STATUS_TURN_MOD_SHRINK,   0,
-    STATUS_TURN_MOD_STOP,     0,
-    STATUS_END
-};
-
-ActorBlueprint bPlayerActorBlueprint = {
-    .type = ACTOR_TYPE_PLAYER,
-    .maxHP = 99,
-    .statusTable = bPlayerStatusTable,
-
-    .escapeChance = 0,
-    .airLiftChance = 0,
-    .hurricaneChance = 0,
-    .spookChance = 0,
-    .upAndAwayChance = 0,
-    .spinSmashReq = 4,
-    .powerBounceChance = 80,
-
-    .size = { 33, 43 },
-    .healthBarOffset = { 0, 0 },
-    .statusIconOffset = { -10, 30 },
-    .statusTextOffset = { 10, 30 },
-};
-
-ActorPartBlueprint bMarioParts[] = {
-    {
-        .index = 1,
-        .posOffset = { 0, 0, 0 },
-        .targetOffset = { 0, 32 },
-        .opacity = 255,
-        .idleAnimations = bMarioIdleAnims,
-        .defenseTable = bMarioDefenseTable,
-    },
-};
-
-Vec3s btl_actorHomePositions[] = {
-    [BTL_POS_GROUND_A] { 5, 0, -20 },
-    [BTL_POS_GROUND_B] { 45, 0, -5 },
-    [BTL_POS_GROUND_C] { 85, 0, 10 },
-    [BTL_POS_GROUND_D] { 125, 0, 25 },
-    [BTL_POS_AIR_A] { 10, 50, -20 },
-    [BTL_POS_AIR_B] { 50, 45, -5 },
-    [BTL_POS_AIR_C] { 90, 50, 10 },
-    [BTL_POS_AIR_D] { 130, 55, 25 },
-    [BTL_POS_HIGH_A] { 15, 85, -20 },
-    [BTL_POS_HIGH_B] { 55, 80, -5 },
-    [BTL_POS_HIGH_C] { 95, 85, 10 },
-    [BTL_POS_HIGH_D] { 135, 90, 25 },
-    [BTL_POS_TOP_A] { 15, 125, -20 },
-    [BTL_POS_TOP_B] { 55, 120, -5 },
-    [BTL_POS_TOP_C] { 95, 125, 10 },
-    [BTL_POS_TOP_D] { 135, 130, 25 },
-    [BTL_POS_CENTER] { 105, 0, 0 },
-};
-
-// TODO: what is this, and look into warnings that are silenced via casts
-s32* D_8028358C[] = {
-    (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1,
-    (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C,
-    (s32*)D_8028358C, (s32*)D_8028358C, 0
-};
-
-s16 bMsgHeights[] = { 28, 40 }; // keyed by number of lines in the message (1 or 2)
-s16 D_802835D4[] = { 0, -2 };
-s16 D_802835D8[] = { 0, -12 };
+ // all keyed by number of lines in the message (1 or 2)
+s16 BattleMessage_BoxSizesY[] = { 28, 40 };
+s16 BattleMessage_TextOffsetsY[] = { 0, -2 };
+s16 BattleMessage_BoxOffsetsY[] = { 0, -12 };
 
 //TODO Vec3f[]
 f32 D_802835DC[] = {
@@ -275,14 +48,13 @@ Vec3f D_80283690[] = {
     { 0.9f, 0.9f, 0.9f },
 };
 
-extern EntityModelScript EMS_BonkIcon;
-EntityModelScript* bBonkModelScripts[] = {
+EntityModelScript* BonkModelScripts[] = {
     NULL,
     &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon,
     &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon, &EMS_BonkIcon,
 };
 
-s32 bMessages[] = {
+s32 BattleMessages[] = {
     [BTL_MSG_MERLEE_ATK_UP]         MSG_Menus_Merlee_IncreaseAttack,
     [BTL_MSG_MERLEE_DEF_UP]         MSG_Menus_Merlee_DecreaseDamage,
     [BTL_MSG_MERLEE_EXP_UP]         MSG_Menus_Merlee_IncreaseStarPoints,
@@ -400,141 +172,14 @@ s32 bActorMessages[] = {
 
 PopupMessage* bPopupMessage = NULL;
 
-s32 D_802838FC_padding = 0;
-
-//TODO split files
-
-#include "ui/battle/cursor_hand.png.inc.c"
-#include "ui/battle/cursor_hand.pal.inc.c"
-
-Vtx BtlCursorModelVtx[] = {
-    {{{ -22, -6, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
-    {{{   9, -6, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},
-    {{{   9, 25, 0 }, 0, {    0,    0 }, { 0, 0, 0, 255 }}},
-    {{{ -22, 25, 0 }, 0, { 1024,    0 }, { 0, 0, 0, 255 }}},
-};
-
-Gfx BtlCursorModelGfx[] = {
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
-    gsDPSetTexturePersp(G_TP_PERSP),
-    gsDPSetTextureDetail(G_TD_CLAMP),
-    gsDPSetTextureLOD(G_TL_TILE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetTextureFilter(G_TF_AVERAGE),
-    gsDPSetTextureConvert(G_TC_FILT),
-    gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, ui_battle_cursor_hand_pal),
-    gsDPLoadTextureTile_4b(ui_battle_cursor_hand_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPClearGeometryMode(G_LIGHTING),
-    gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(BtlCursorModelVtx, 4, 0),
-    gsSP1Triangle(0, 1, 2, 0),
-    gsSP1Triangle(0, 2, 3, 0),
-    gsSPEndDisplayList(),
-};
-
-EntityModelScript EMS_CursorIcon = STANDARD_ENTITY_MODEL_SCRIPT(BtlCursorModelGfx, RENDER_MODE_ALPHATEST);
-
-Vtx BtlBonkModelVtx[] = {
-    {{{ -16, -16, 0 }, 0, {    0,    0 }, { 0, 0, 0, 255 }}},
-    {{{  15, -16, 0 }, 0, { 1024,    0 }, { 0, 0, 0, 255 }}},
-    {{{  15,  15, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
-    {{{ -16,  15, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},
-};
-
-Gfx BtlBonkModelGfx[] = {
-    gsDPPipeSync(),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineMode(PM_CC_01, PM_CC_02),
-    gsDPSetTexturePersp(G_TP_PERSP),
-    gsDPSetTextureDetail(G_TD_CLAMP),
-    gsDPSetTextureLOD(G_TL_TILE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetTextureFilter(G_TF_AVERAGE),
-    gsDPSetTextureConvert(G_TC_FILT),
-    gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, ui_battle_menu_spirits_pal),
-    gsDPLoadTextureTile_4b(ui_battle_menu_spirits_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPClearGeometryMode(G_LIGHTING),
-    gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(BtlBonkModelVtx, 4, 0),
-    gsSP1Triangle(0, 1, 2, 0),
-    gsSP1Triangle(0, 2, 3, 0),
-    gsDPPipeSync(),
-    gsSPEndDisplayList(),
-};
-
-EntityModelScript EMS_BonkIcon = STANDARD_ENTITY_MODEL_SCRIPT(BtlBonkModelGfx, RENDER_MODE_2D);
-
-Vtx BtlStarModelVtx[] = {
-    {{{ -16, -16, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},
-    {{{  15, -16, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},
-    {{{  15,  15, 0 }, 0, { 1024,    0 }, { 0, 0, 0, 255 }}},
-    {{{ -16,  15, 0 }, 0, {    0,    0 }, { 0, 0, 0, 255 }}},
-};
-
-Gfx BtlStarModelGfx[] = {
-    gsDPPipeSync(),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
-    gsDPSetTexturePersp(G_TP_PERSP),
-    gsDPSetTextureDetail(G_TD_CLAMP),
-    gsDPSetTextureLOD(G_TL_TILE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetTextureFilter(G_TF_AVERAGE),
-    gsDPSetTextureConvert(G_TC_FILT),
-    gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, ui_battle_solid_star_pal),
-    gsDPLoadTextureTile_4b(ui_battle_solid_star_png, G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    gsSPClearGeometryMode(G_LIGHTING),
-    gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(BtlStarModelVtx, 4, 0),
-    gsSP1Triangle(0, 1, 2, 0),
-    gsSP1Triangle(0, 2, 3, 0),
-    gsDPPipeSync(),
-    gsSPEndDisplayList(),
-};
-
-EntityModelScript EMS_StarIcon = STANDARD_ENTITY_MODEL_SCRIPT(BtlStarModelGfx, RENDER_MODE_ALPHATEST);
-
-s32 D_80283F04_padding = 0;
-s32 D_80283F08_padding = 0;
-s32 D_80283F0C_padding = 0;
-
-#define BATTLE_PARTNER_ENTRY(name, Y) \
-    { \
-        (u32)battle_partner_##name##_ROM_START, \
-        (u32)battle_partner_##name##_ROM_END, \
-        battle_partner_##name##_VRAM, \
-        &battle_partner_##name, \
-        Y \
-    }
-
-PartnerDMAData bPartnerDmaTable[] = {
-    {},
-    BATTLE_PARTNER_ENTRY(goombario, 0),
-    BATTLE_PARTNER_ENTRY(kooper, 0),
-    BATTLE_PARTNER_ENTRY(bombette, 0),
-    BATTLE_PARTNER_ENTRY(parakarry, 30),
-    BATTLE_PARTNER_ENTRY(goompa, 0),
-    BATTLE_PARTNER_ENTRY(watt, 20),
-    BATTLE_PARTNER_ENTRY(sushie, 0),
-    BATTLE_PARTNER_ENTRY(lakilester, 10),
-    BATTLE_PARTNER_ENTRY(bow, 20),
-    {},
-    BATTLE_PARTNER_ENTRY(twink, 30),
-};
-
 BSS PopupMessage popupMessages[32];
-BSS s16 D_8029F640;
-BSS s16 D_8029F642;
-BSS s16 D_8029F644;
-BSS s16 D_8029F646;
-BSS s16 D_8029F648;
-BSS s16 D_8029F64A;
-BSS s16 D_8029F64C;
+BSS s16 BattlePopupMessageVar;
+BSS s16 HID_BattleMessage1;
+BSS s16 HID_BattleMessage2;
+BSS s16 HID_BattleMessage3;
+BSS s16 HID_BattleMessage4;
+BSS b16 D_8029F64A;
+BSS b16 D_8029F64C;
 BSS s16 D_8029F64E;
 BSS s16 D_8029F650;
 
@@ -705,7 +350,7 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
         ASSERT (popup->message != NULL);
 
         for (i = 0; i < numStars; i++, message++) {
-            modelScript = &bBonkModelScripts[numStars];
+            modelScript = &BonkModelScripts[numStars];
             message->unk_00 = TRUE;
             message->entityModelIndex = load_entity_model(*modelScript);
             set_entity_model_flags(message->entityModelIndex, ENTITY_MODEL_FLAG_HIDDEN);
@@ -899,13 +544,13 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->showMsgState = 0;
+        popup->showMsgState = BTL_MSG_STATE_0;
         popup->needsInit = TRUE;
         popup->message = NULL;
-        D_8029F640 = 0;
+        BattlePopupMessageVar = 0;
         bPopupMessage = popup;
         D_8029F64A = FALSE;
-        D_8029F64C = 0;
+        D_8029F64C = FALSE;
         D_8029F64E = 0;
         D_8029F650 = 0;
     }
@@ -922,13 +567,13 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->showMsgState = 0;
+        popup->showMsgState = BTL_MSG_STATE_0;
         popup->needsInit = TRUE;
         popup->message = NULL;
-        D_8029F640 = varValue;
+        BattlePopupMessageVar = varValue;
         bPopupMessage = popup;
         D_8029F64A = FALSE;
-        D_8029F64C = 0;
+        D_8029F64C = FALSE;
         D_8029F64E = 0;
         D_8029F650 = 0;
     }
@@ -947,11 +592,11 @@ void btl_set_popup_duration(s32 duration) {
 }
 
 void func_8024FAE8(void) {
-    D_8029F64C = 1;
+    D_8029F64C = TRUE;
 }
 
 void func_8024FAFC(void) {
-    D_8029F64C = 0;
+    D_8029F64C = FALSE;
 }
 
 void close_action_command_instruction_popup(void) {
@@ -1024,13 +669,13 @@ void btl_update_message_popup(void* data) {
             switch (popup->showMsgState) {
                 default:
                     break;
-                case 0:
-                    popup->showMsgState = 1;
+                case BTL_MSG_STATE_0:
+                    popup->showMsgState = BTL_MSG_STATE_1;
                     break;
-                case 1:
-                    popup->showMsgState = 2;
+                case BTL_MSG_STATE_1:
+                    popup->showMsgState = BTL_MSG_STATE_2;
                     break;
-                case 2:
+                case BTL_MSG_STATE_2:
                     if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
@@ -1038,14 +683,14 @@ void btl_update_message_popup(void* data) {
                     if (popup->duration != 0) {
                         popup->duration--;
                     } else {
-                        popup->showMsgState = 3;
+                        popup->showMsgState = BTL_MSG_STATE_3;
                     }
                     break;
-                case 4:
-                    shouldDisposeWindow = TRUE;
+                case BTL_MSG_STATE_3:
+                    popup->showMsgState = BTL_MSG_STATE_4;
                     break;
-                case 3:
-                    popup->showMsgState = 4;
+                case BTL_MSG_STATE_4:
+                    shouldDisposeWindow = TRUE;
                     break;
             }
             break;
@@ -1080,129 +725,129 @@ void btl_update_message_popup(void* data) {
             }
 
             switch (popup->showMsgState) {
-                case 0:
+                case BTL_MSG_STATE_0:
                     gBattleStatus.flags1 |= BS_FLAGS1_4000;
                     gBattleStatus.flags1 &= ~BS_FLAGS1_10000;
                     switch (popup->messageIndex) {
                         case BTL_MSG_ACTION_TIP_04:
-                            D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_01:
-                            D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_TimingReady);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_05:
-                            D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_AimTarget);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
-                            hud_element_create_transform_B(D_8029F644);
+                            HID_BattleMessage2 = hud_element_create(&HES_AimTarget);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
+                            hud_element_create_transform_B(HID_BattleMessage2);
                             break;
                         case BTL_MSG_ACTION_TIP_06:
-                            D_8029F642 = hud_element_create(&HES_CUpButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_CUpButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_CDownButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_CDownButton);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
 
-                            D_8029F646 = hud_element_create(&HES_CLeftButton);
-                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F646, -100, -100);
+                            HID_BattleMessage3 = hud_element_create(&HES_CLeftButton);
+                            hud_element_set_flags(HID_BattleMessage3, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage3, -100, -100);
 
-                            D_8029F648 = hud_element_create(&HES_CRightButton);
-                            hud_element_set_flags(D_8029F648, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F648, -100, -100);
+                            HID_BattleMessage4 = hud_element_create(&HES_CRightButton);
+                            hud_element_set_flags(HID_BattleMessage4, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage4, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_07:
-                            D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_08:
-                            D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_BButton);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
 
-                            D_8029F646 = hud_element_create(&HES_CDownButton);
-                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F646, -100, -100);
+                            HID_BattleMessage3 = hud_element_create(&HES_CDownButton);
+                            hud_element_set_flags(HID_BattleMessage3, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage3, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_09:
-                            D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_0A:
-                            D_8029F642 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_TimingReady);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_0B:
-                            D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
-                            D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_BButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_0C:
-                            D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_BButton);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_BButton);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_0F:
-                            D_8029F642 = hud_element_create(&HES_TimingReady);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_TimingReady);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_AButtonDown);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
+                            HID_BattleMessage2 = hud_element_create(&HES_AButtonDown);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
                         case BTL_MSG_ACTION_TIP_10:
-                            D_8029F642 = hud_element_create(&HES_StickNeutral);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
 
-                            D_8029F644 = hud_element_create(&HES_AimTarget);
-                            hud_element_set_flags(D_8029F644, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F644, -100, -100);
-                            hud_element_create_transform_B(D_8029F644);
+                            HID_BattleMessage2 = hud_element_create(&HES_AimTarget);
+                            hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
+                            hud_element_create_transform_B(HID_BattleMessage2);
 
-                            D_8029F646 = hud_element_create(&HES_AimReticle);
-                            hud_element_set_flags(D_8029F646, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F646, -100, -100);
-                            hud_element_create_transform_B(D_8029F646);
+                            HID_BattleMessage3 = hud_element_create(&HES_AimReticle);
+                            hud_element_set_flags(HID_BattleMessage3, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage3, -100, -100);
+                            hud_element_create_transform_B(HID_BattleMessage3);
                             break;
                         case BTL_MSG_ACTION_TIP_12:
                         case BTL_MSG_ACTION_TIP_13:
-                            D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             // fallthrough
                         case BTL_MSG_ACTION_TIP_00:
                         case BTL_MSG_ACTION_TIP_02:
@@ -1211,102 +856,102 @@ void btl_update_message_popup(void* data) {
                         case BTL_MSG_ACTION_TIP_0E:
                         case BTL_MSG_ACTION_TIP_11:
                         case BTL_MSG_ACTION_TIP_14:
-                            D_8029F642 = hud_element_create(&HES_AButton);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_AButton);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                     }
-                    popup->showMsgState = 1;
+                    popup->showMsgState = BTL_MSG_STATE_1;
                     break;
-                case 1:
+                case BTL_MSG_STATE_1:
                     if (gBattleStatus.flags1 & BS_FLAGS1_10000) {
                         gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         popup->duration = 0;
-                        popup->showMsgState = 2;
+                        popup->showMsgState = BTL_MSG_STATE_2;
                     } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
                             case BTL_MSG_ACTION_TIP_03:
-                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 break;
                             case BTL_MSG_ACTION_TIP_04:
-                                hud_element_set_script(D_8029F642, &HES_StickMashLeft);
+                                hud_element_set_script(HID_BattleMessage1, &HES_StickMashLeft);
                                 break;
                             case BTL_MSG_ACTION_TIP_01:
-                                hud_element_set_script(D_8029F642, &HES_StickTapLeft);
-                                hud_element_set_script(D_8029F644, &HES_TimingBlink);
+                                hud_element_set_script(HID_BattleMessage1, &HES_StickTapLeft);
+                                hud_element_set_script(HID_BattleMessage2, &HES_TimingBlink);
                                 break;
                             case BTL_MSG_ACTION_TIP_05:
-                                hud_element_set_script(D_8029F642, &HES_StickTapLeft);
-                                hud_element_set_script(D_8029F644, &HES_AimTarget);
+                                hud_element_set_script(HID_BattleMessage1, &HES_StickTapLeft);
+                                hud_element_set_script(HID_BattleMessage2, &HES_AimTarget);
                                 break;
                             case BTL_MSG_ACTION_TIP_06:
-                                hud_element_set_script(D_8029F642, &HES_MashCUpButton);
-                                hud_element_set_script(D_8029F644, &HES_MashCDownButton1);
-                                hud_element_set_script(D_8029F646, &HES_MashCLeftButton);
-                                hud_element_set_script(D_8029F648, &HES_MashCRightButton1);
+                                hud_element_set_script(HID_BattleMessage1, &HES_MashCUpButton);
+                                hud_element_set_script(HID_BattleMessage2, &HES_MashCDownButton1);
+                                hud_element_set_script(HID_BattleMessage3, &HES_MashCLeftButton);
+                                hud_element_set_script(HID_BattleMessage4, &HES_MashCRightButton1);
                                 break;
                             case BTL_MSG_ACTION_TIP_07:
-                                hud_element_set_script(D_8029F642, &HES_StickBackAndForth);
+                                hud_element_set_script(HID_BattleMessage1, &HES_StickBackAndForth);
                                 break;
                             case BTL_MSG_ACTION_TIP_08:
-                                hud_element_set_script(D_8029F642, &HES_PressAButton);
-                                hud_element_set_script(D_8029F644, &HES_PressBButton);
-                                hud_element_set_script(D_8029F646, &HES_PressCDownButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_PressAButton);
+                                hud_element_set_script(HID_BattleMessage2, &HES_PressBButton);
+                                hud_element_set_script(HID_BattleMessage3, &HES_PressCDownButton);
                                 break;
                             case BTL_MSG_ACTION_TIP_09:
-                                hud_element_set_script(D_8029F642, &HES_RotateStickCW);
+                                hud_element_set_script(HID_BattleMessage1, &HES_RotateStickCW);
                                 break;
                             case BTL_MSG_ACTION_TIP_0A:
-                                hud_element_set_script(D_8029F642, &HES_TimingBlink);
-                                hud_element_set_script(D_8029F644, &HES_MashAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_TimingBlink);
+                                hud_element_set_script(HID_BattleMessage2, &HES_MashAButton);
                                 break;
                             case BTL_MSG_ACTION_TIP_0B:
-                                hud_element_set_script(D_8029F642, &HES_MashAButton);
-                                hud_element_set_script(D_8029F644, &HES_MashBButton2);
+                                hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
+                                hud_element_set_script(HID_BattleMessage2, &HES_MashBButton2);
                                 break;
                             case BTL_MSG_ACTION_TIP_0C:
-                                hud_element_set_script(D_8029F642, &HES_MashAButton);
-                                hud_element_set_script(D_8029F644, &HES_MashBButton1);
+                                hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
+                                hud_element_set_script(HID_BattleMessage2, &HES_MashBButton1);
                                 break;
                             case BTL_MSG_ACTION_TIP_0D:
-                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 break;
                             case BTL_MSG_ACTION_TIP_0F:
-                                hud_element_set_script(D_8029F642, &HES_TimingBlink);
-                                hud_element_set_script(D_8029F644, &HES_PressAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_TimingBlink);
+                                hud_element_set_script(HID_BattleMessage2, &HES_PressAButton);
                                 break;
                             case BTL_MSG_ACTION_TIP_10:
-                                hud_element_set_script(D_8029F642, &HES_StickTapRight);
+                                hud_element_set_script(HID_BattleMessage1, &HES_StickTapRight);
                                 break;
                             case BTL_MSG_ACTION_TIP_11:
-                                hud_element_set_script(D_8029F642, &HES_MashAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 break;
                             case BTL_MSG_ACTION_TIP_12:
                             case BTL_MSG_ACTION_TIP_13:
-                                hud_element_set_script(D_8029F642, &HES_PressAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_PressAButton);
                                 // fallthrough
                             case BTL_MSG_ACTION_TIP_00:
                             case BTL_MSG_ACTION_TIP_02:
                             case BTL_MSG_ACTION_TIP_0E:
                             case BTL_MSG_ACTION_TIP_14:
-                                hud_element_set_script(D_8029F642, &HES_PressAButton);
+                                hud_element_set_script(HID_BattleMessage1, &HES_PressAButton);
                                 break;
                         }
                         if (popup->duration != -1) {
                             popup->duration = 30;
                         }
-                        popup->showMsgState = 2;
+                        popup->showMsgState = BTL_MSG_STATE_2;
                         break;
                     }
                     break;
-                case 2:
+                case BTL_MSG_STATE_2:
                     if ((actionCommandMode != popup->showMsgState) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
                         s16* duration;
 
                         if (D_8029F64E < 192) {
-                            if (D_8029F64C == 0) {
+                            if (!D_8029F64C) {
                                 D_8029F64E += 10;
                                 if (D_8029F64E > 192) {
                                     D_8029F64E = 192;
@@ -1318,52 +963,54 @@ void btl_update_message_popup(void* data) {
 
                         gWindows[WINDOW_ID_BATTLE_POPUP].pos.y = D_8029F64E + D_8029F650;
 
-                        duration = &popup->duration; // TODO required to match
-                        if (*duration != -1) {
-                            if (popup->duration != 0) {
-                                popup->duration--;
-                            } else {
-                                switch (popup->messageIndex) {
-                                    case BTL_MSG_ACTION_TIP_00:
-                                    case BTL_MSG_ACTION_TIP_02:
-                                    case BTL_MSG_ACTION_TIP_03:
-                                    case BTL_MSG_ACTION_TIP_04:
-                                    case BTL_MSG_ACTION_TIP_07:
-                                    case BTL_MSG_ACTION_TIP_09:
-                                    case BTL_MSG_ACTION_TIP_0D:
-                                    case BTL_MSG_ACTION_TIP_0E:
-                                    case BTL_MSG_ACTION_TIP_11:
-                                    case BTL_MSG_ACTION_TIP_12:
-                                    case BTL_MSG_ACTION_TIP_13:
-                                    case BTL_MSG_ACTION_TIP_14:
-                                        hud_element_free(D_8029F642);
-                                        break;
-                                    case BTL_MSG_ACTION_TIP_01:
-                                    case BTL_MSG_ACTION_TIP_05:
-                                    case BTL_MSG_ACTION_TIP_0A:
-                                    case BTL_MSG_ACTION_TIP_0B:
-                                    case BTL_MSG_ACTION_TIP_0C:
-                                    case BTL_MSG_ACTION_TIP_0F:
-                                        hud_element_free(D_8029F642);
-                                        hud_element_free(D_8029F644);
-                                        break;
-                                    case BTL_MSG_ACTION_TIP_08:
-                                    case BTL_MSG_ACTION_TIP_10:
-                                        hud_element_free(D_8029F642);
-                                        hud_element_free(D_8029F644);
-                                        hud_element_free(D_8029F646);
-                                        break;
-                                    case BTL_MSG_ACTION_TIP_06:
-                                        hud_element_free(D_8029F642);
-                                        hud_element_free(D_8029F644);
-                                        hud_element_free(D_8029F646);
-                                        hud_element_free(D_8029F648);
-                                        break;
-                                }
-                                D_8029F64A = FALSE;
-                                shouldDisposeWindow = TRUE;
-                            }
+                        if (popup->duration == -1) {
+                            break;
                         }
+
+                        if (popup->duration != 0) {
+                            popup->duration--;
+                            break;
+                        }
+
+                        switch (popup->messageIndex) {
+                            case BTL_MSG_ACTION_TIP_00:
+                            case BTL_MSG_ACTION_TIP_02:
+                            case BTL_MSG_ACTION_TIP_03:
+                            case BTL_MSG_ACTION_TIP_04:
+                            case BTL_MSG_ACTION_TIP_07:
+                            case BTL_MSG_ACTION_TIP_09:
+                            case BTL_MSG_ACTION_TIP_0D:
+                            case BTL_MSG_ACTION_TIP_0E:
+                            case BTL_MSG_ACTION_TIP_11:
+                            case BTL_MSG_ACTION_TIP_12:
+                            case BTL_MSG_ACTION_TIP_13:
+                            case BTL_MSG_ACTION_TIP_14:
+                                hud_element_free(HID_BattleMessage1);
+                                break;
+                            case BTL_MSG_ACTION_TIP_01:
+                            case BTL_MSG_ACTION_TIP_05:
+                            case BTL_MSG_ACTION_TIP_0A:
+                            case BTL_MSG_ACTION_TIP_0B:
+                            case BTL_MSG_ACTION_TIP_0C:
+                            case BTL_MSG_ACTION_TIP_0F:
+                                hud_element_free(HID_BattleMessage1);
+                                hud_element_free(HID_BattleMessage2);
+                                break;
+                            case BTL_MSG_ACTION_TIP_08:
+                            case BTL_MSG_ACTION_TIP_10:
+                                hud_element_free(HID_BattleMessage1);
+                                hud_element_free(HID_BattleMessage2);
+                                hud_element_free(HID_BattleMessage3);
+                                break;
+                            case BTL_MSG_ACTION_TIP_06:
+                                hud_element_free(HID_BattleMessage1);
+                                hud_element_free(HID_BattleMessage2);
+                                hud_element_free(HID_BattleMessage3);
+                                hud_element_free(HID_BattleMessage4);
+                                break;
+                        }
+                        D_8029F64A = FALSE;
+                        shouldDisposeWindow = TRUE;
                     }
                     break;
             }
@@ -1377,13 +1024,13 @@ void btl_update_message_popup(void* data) {
             switch (popup->showMsgState) {
                 default:
                     break;
-                case 0:
-                    popup->showMsgState = 1;
+                case BTL_MSG_STATE_0:
+                    popup->showMsgState = BTL_MSG_STATE_1;
                     break;
-                case 1:
-                    popup->showMsgState = 2;
+                case BTL_MSG_STATE_1:
+                    popup->showMsgState = BTL_MSG_STATE_2;
                     break;
-                case 2:
+                case BTL_MSG_STATE_2:
                     if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
@@ -1391,13 +1038,13 @@ void btl_update_message_popup(void* data) {
                     if (popup->duration != 0) {
                         popup->duration--;
                     } else {
-                        popup->showMsgState = 3;
+                        popup->showMsgState = BTL_MSG_STATE_3;
                     }
                     break;
-                case 3:
-                    popup->showMsgState = 4;
+                case BTL_MSG_STATE_3:
+                    popup->showMsgState = BTL_MSG_STATE_4;
                     break;
-                case 4:
+                case BTL_MSG_STATE_4:
                     shouldDisposeWindow = TRUE;
                     break;
             }
@@ -1410,53 +1057,53 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_JUMP_DISABLED_3:
         case BTL_MSG_ITEMS_DISABLED:
             switch (popup->showMsgState) {
-                case 0:
+                case BTL_MSG_STATE_0:
                     switch (popup->messageIndex) {
                         case BTL_MSG_HAMMER_DISABLED_1:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuHammer1);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuHammer1);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_HAMMER_DISABLED_2:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuHammer2);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuHammer2);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_HAMMER_DISABLED_3:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuHammer3);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuHammer3);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_JUMP_DISABLED_1:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuBoots1);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuBoots1);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_JUMP_DISABLED_2:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuBoots2);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuBoots2);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_JUMP_DISABLED_3:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuBoots3);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuBoots3);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                         case BTL_MSG_ITEMS_DISABLED:
-                            D_8029F642 = hud_element_create(&HES_Item_MenuItems);
-                            hud_element_set_flags(D_8029F642, HUD_ELEMENT_FLAG_80);
-                            hud_element_set_render_pos(D_8029F642, -100, -100);
+                            HID_BattleMessage1 = hud_element_create(&HES_Item_MenuItems);
+                            hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
+                            hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                     }
-                    popup->showMsgState = 1;
+                    popup->showMsgState = BTL_MSG_STATE_1;
                     break;
-                case 1:
+                case BTL_MSG_STATE_1:
                     if (popup->duration != 0) {
                         popup->duration--;
                         break;
                     }
                     shouldDisposeWindow = TRUE;
-                    hud_element_free(D_8029F642);
+                    hud_element_free(HID_BattleMessage1);
                     break;
             }
             break;
@@ -1468,7 +1115,7 @@ void btl_update_message_popup(void* data) {
     }
 }
 
-void func_80250818(void* data, s32 x, s32 y) {
+void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
     PopupMessage* popup = data;
     s32 messageID;
     s32 msgLinesIdx;
@@ -1524,9 +1171,10 @@ void func_80250818(void* data, s32 x, s32 y) {
         case BTL_MSG_CANT_SWITCH_UNUSED:
         case BTL_MSG_CANT_MOVE_UNUSED:
         case BTL_MSG_CANT_SELECT_NOW_ALT:
-            messageID = bMessages[popup->messageIndex];
+            messageID = BattleMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
-            draw_msg(messageID, x, y + D_802835D4[msgLinesIdx], 255, MSG_PAL_0F, 0);
+            y += BattleMessage_TextOffsetsY[msgLinesIdx];
+            draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case BTL_MSG_CHARGE_HAMMER:
         case BTL_MSG_CHARGE_HAMMER_MORE:
@@ -1538,17 +1186,17 @@ void func_80250818(void* data, s32 x, s32 y) {
         case BTL_MSG_HEAL_ALL:
         case BTL_MSG_ENEMY_TRANSPARENT:
         case BTL_MSG_ENEMY_CHARGED:
-            messageID = bMessages[popup->messageIndex];
+            messageID = BattleMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
-            y += D_802835D4[msgLinesIdx];
-            set_message_value(D_8029F640, 0);
+            y += BattleMessage_TextOffsetsY[msgLinesIdx];
+            set_message_value(BattlePopupMessageVar, 0);
             draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case BTL_MSG_CANT_MOVE:
-            messageID = bMessages[popup->messageIndex];
+            messageID = BattleMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
-            y += D_802835D4[msgLinesIdx];
-            set_message_msg(bActorMessages[D_8029F640], 0);
+            y += BattleMessage_TextOffsetsY[msgLinesIdx];
+            set_message_msg(bActorMessages[BattlePopupMessageVar], 0);
             draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case BTL_MSG_HAMMER_DISABLED_1:
@@ -1558,10 +1206,10 @@ void func_80250818(void* data, s32 x, s32 y) {
         case BTL_MSG_JUMP_DISABLED_2:
         case BTL_MSG_JUMP_DISABLED_3:
         case BTL_MSG_ITEMS_DISABLED:
-            messageID = bMessages[popup->messageIndex];
-            draw_msg(messageID, x + 0x1D, y + 6, 255, MSG_PAL_0F, 0);
-            hud_element_set_render_pos(D_8029F642, x + 13, y + 14);
-            hud_element_draw_clipped(D_8029F642);
+            messageID = BattleMessages[popup->messageIndex];
+            draw_msg(messageID, x + 29, y + 6, 255, MSG_PAL_0F, 0);
+            hud_element_set_render_pos(HID_BattleMessage1, x + 13, y + 14);
+            hud_element_draw_clipped(HID_BattleMessage1);
             break;
         case BTL_MSG_ACTION_TIP_00:
         case BTL_MSG_ACTION_TIP_01:
@@ -1585,7 +1233,7 @@ void func_80250818(void* data, s32 x, s32 y) {
         case BTL_MSG_ACTION_TIP_13:
         case BTL_MSG_ACTION_TIP_14:
             opacity = 255;
-            if (popup->showMsgState < 2) {
+            if (popup->showMsgState < BTL_MSG_STATE_2) {
                 opacity = 160;
             }
             if (popup->messageIndex == BTL_MSG_ACTION_TIP_0D) {
@@ -1594,132 +1242,132 @@ void func_80250818(void* data, s32 x, s32 y) {
 
             x -= 11;
             y -= 6;
-            messageID = bMessages[popup->messageIndex];
+            messageID = BattleMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
-            y += D_802835D4[msgLinesIdx];
+            y += BattleMessage_TextOffsetsY[msgLinesIdx];
             draw_msg(messageID, x + 11, y + 6, opacity, MSG_PAL_0F, 0);
 
             switch (popup->messageIndex) {
                 case BTL_MSG_ACTION_TIP_00:
-                    hud_element_set_render_pos(D_8029F642, x + 65, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 65, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
                     break;
                 case BTL_MSG_ACTION_TIP_01:
-                    hud_element_set_render_pos(D_8029F642, x + 55, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.6f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 55, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.6f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 73, y + 31);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    hud_element_draw_clipped(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 73, y + 31);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage2);
                     break;
                 case BTL_MSG_ACTION_TIP_02:
-                    hud_element_set_render_pos(D_8029F642, x + 64, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 64, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
                     break;
                 case BTL_MSG_ACTION_TIP_03:
-                    hud_element_set_render_pos(D_8029F642, x + 67, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 67, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
                     break;
                 case BTL_MSG_ACTION_TIP_04:
-                    hud_element_set_render_pos(D_8029F642, x + 56, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.6f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 56, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.6f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
                     break;
                 case BTL_MSG_ACTION_TIP_05:
-                    hud_element_set_render_pos(D_8029F642, x + 65, y + 13);
-                    hud_element_set_scale(D_8029F642, 0.6f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 65, y + 13);
+                    hud_element_set_scale(HID_BattleMessage1, 0.6f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 146, y + 32);
-                    hud_element_set_scale(D_8029F644, 0.8f);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    func_80144218(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 146, y + 32);
+                    hud_element_set_scale(HID_BattleMessage2, 0.8f);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    func_80144218(HID_BattleMessage2);
                     break;
                 case BTL_MSG_ACTION_TIP_08:
-                    hud_element_set_render_pos(D_8029F642, x + 86, y + 13);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 86, y + 13);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 64, y + 13);
-                    hud_element_set_scale(D_8029F644, 0.5f);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    hud_element_draw_clipped(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 64, y + 13);
+                    hud_element_set_scale(HID_BattleMessage2, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage2);
 
-                    hud_element_set_render_pos(D_8029F646, x + 108, y + 13);
-                    hud_element_set_scale(D_8029F646, 0.5f);
-                    hud_element_set_alpha(D_8029F646, opacity);
-                    hud_element_draw_clipped(D_8029F646);
+                    hud_element_set_render_pos(HID_BattleMessage3, x + 108, y + 13);
+                    hud_element_set_scale(HID_BattleMessage3, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage3, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage3);
                     break;
                 case BTL_MSG_ACTION_TIP_0A:
-                    hud_element_set_render_pos(D_8029F642, x + 105, y + 13);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 105, y + 13);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 65, y + 14);
-                    hud_element_set_scale(D_8029F644, 0.5f);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    hud_element_draw_clipped(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 65, y + 14);
+                    hud_element_set_scale(HID_BattleMessage2, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage2);
                     break;
                 case BTL_MSG_ACTION_TIP_0C:
-                    hud_element_set_render_pos(D_8029F642, x + 63, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 63, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 84, y + 14);
-                    hud_element_set_scale(D_8029F644, 0.5f);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    hud_element_draw_clipped(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 84, y + 14);
+                    hud_element_set_scale(HID_BattleMessage2, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage2);
                     break;
                 case BTL_MSG_ACTION_TIP_0E:
-                    hud_element_set_render_pos(D_8029F642, x + 124, y + 14);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 124, y + 14);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
                     break;
                 case BTL_MSG_ACTION_TIP_0F:
-                    hud_element_set_render_pos(D_8029F642, x + 56, y + 31);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 56, y + 31);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 53, y + 14);
-                    hud_element_set_scale(D_8029F644, 0.5f);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    hud_element_draw_clipped(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 53, y + 14);
+                    hud_element_set_scale(HID_BattleMessage2, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage2);
                     break;
                 case BTL_MSG_ACTION_TIP_10:
-                    hud_element_set_render_pos(D_8029F642, x + 107, y + 13);
-                    hud_element_set_scale(D_8029F642, 0.6f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 107, y + 13);
+                    hud_element_set_scale(HID_BattleMessage1, 0.6f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
 
-                    hud_element_set_render_pos(D_8029F644, x + 210, y + 15);
-                    hud_element_set_scale(D_8029F644, 0.8f);
-                    hud_element_set_alpha(D_8029F644, opacity);
-                    func_80144218(D_8029F644);
+                    hud_element_set_render_pos(HID_BattleMessage2, x + 210, y + 15);
+                    hud_element_set_scale(HID_BattleMessage2, 0.8f);
+                    hud_element_set_alpha(HID_BattleMessage2, opacity);
+                    func_80144218(HID_BattleMessage2);
 
-                    hud_element_set_render_pos(D_8029F646, x + 56, y + 15);
-                    hud_element_set_scale(D_8029F646, 0.8f);
-                    hud_element_set_alpha(D_8029F646, opacity);
-                    func_80144218(D_8029F646);
+                    hud_element_set_render_pos(HID_BattleMessage3, x + 56, y + 15);
+                    hud_element_set_scale(HID_BattleMessage3, 0.8f);
+                    hud_element_set_alpha(HID_BattleMessage3, opacity);
+                    func_80144218(HID_BattleMessage3);
                     break;
                 case BTL_MSG_ACTION_TIP_12:
                 case BTL_MSG_ACTION_TIP_13:
-                    hud_element_set_render_pos(D_8029F642, x + 64, y + 13);
-                    hud_element_set_scale(D_8029F642, 0.5f);
-                    hud_element_set_alpha(D_8029F642, opacity);
-                    hud_element_draw_clipped(D_8029F642);
+                    hud_element_set_render_pos(HID_BattleMessage1, x + 64, y + 13);
+                    hud_element_set_scale(HID_BattleMessage1, 0.5f);
+                    hud_element_set_alpha(HID_BattleMessage1, opacity);
+                    hud_element_draw_clipped(HID_BattleMessage1);
                     break;
             }
             break;
@@ -1786,13 +1434,13 @@ void btl_show_message_popup(void* data) {
                 s32 messageID;
 
                 popup->needsInit = FALSE;
-                messageID = bMessages[popup->messageIndex];
+                messageID = BattleMessages[popup->messageIndex];
                 msgWidth = get_msg_width(messageID, 0) + 30;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
-                height = bMsgHeights[numLines];
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
+                height = BattleMessage_BoxSizesY[numLines];
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -1805,11 +1453,11 @@ void btl_show_message_popup(void* data) {
         case BTL_MSG_ITEMS_DISABLED:
             if (popup->needsInit) {
                 popup->needsInit = FALSE;
-                msgWidth = get_msg_width(bMessages[popup->messageIndex], 0) + 55;
+                msgWidth = get_msg_width(BattleMessages[popup->messageIndex], 0) + 55;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
                 height = 40;
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -1827,14 +1475,14 @@ void btl_show_message_popup(void* data) {
                 s32 messageID;
 
                 popup->needsInit = FALSE;
-                messageID = bMessages[popup->messageIndex];
-                set_message_value(D_8029F640, 0);
+                messageID = BattleMessages[popup->messageIndex];
+                set_message_value(BattlePopupMessageVar, 0);
                 msgWidth = get_msg_width(messageID, 0) + 31;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
-                height = bMsgHeights[numLines];
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
+                height = BattleMessage_BoxSizesY[numLines];
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -1843,14 +1491,14 @@ void btl_show_message_popup(void* data) {
                 s32 messageID;
 
                 popup->needsInit = FALSE;
-                messageID = bMessages[popup->messageIndex];
-                set_message_msg(bActorMessages[D_8029F640], 0);
+                messageID = BattleMessages[popup->messageIndex];
+                set_message_msg(bActorMessages[BattlePopupMessageVar], 0);
                 msgWidth = get_msg_width(messageID, 0) + 31;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
-                height = bMsgHeights[numLines];
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
+                height = BattleMessage_BoxSizesY[numLines];
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
@@ -1879,22 +1527,22 @@ void btl_show_message_popup(void* data) {
                 s32 messageID;
 
                 popup->needsInit = FALSE;
-                messageID = bMessages[popup->messageIndex];
+                messageID = BattleMessages[popup->messageIndex];
                 msgWidth = get_msg_width(messageID, 0) + 31;
                 posX = 160 - (msgWidth / 2);
                 posY = 192;
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
-                height = bMsgHeights[numLines];
+                height = BattleMessage_BoxSizesY[numLines];
                 if (popup->messageIndex == BTL_MSG_ACTION_TIP_0D) {
                     posY = 120;
-                    D_8029F64C = 1;
+                    D_8029F64C = TRUE;
                 }
                 D_8029F64E = posY;
-                D_8029F650 = D_802835D8[numLines];
+                D_8029F650 = BattleMessage_BoxOffsetsY[numLines];
 
                 posY = D_8029F64E + D_8029F650;
-                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, func_80250818, popup, -1);
+                set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
                 if (popup->messageIndex == BTL_MSG_ACTION_TIP_0D) {
                     set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
                 } else {

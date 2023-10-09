@@ -1741,9 +1741,9 @@ Actor* create_actor(Formation formation) {
     s32 i, j, k;
 
     if (formation->home.index >= EVT_LIMIT) {
-        x = btl_actorHomePositions[formation->home.index].x;
-        y = btl_actorHomePositions[formation->home.index].y;
-        z = btl_actorHomePositions[formation->home.index].z;
+        x = StandardActorHomePositions[formation->home.index].x;
+        y = StandardActorHomePositions[formation->home.index].y;
+        z = StandardActorHomePositions[formation->home.index].z;
     } else {
         x = formation->home.vec->x;
         y = formation->home.vec->y;

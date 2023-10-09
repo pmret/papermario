@@ -17,7 +17,7 @@ extern EvtScript EVS_Player_SimpleHit;
 extern EvtScript EVS_Player_ComplexHit;
 extern EvtScript EVS_Player_NoDamageHit;
 
-extern PlayerCelebrationAnimOptions D_80280FC0;
+extern PlayerCelebrationAnimOptions bPlayerCelebrations;
 
 BSS s32 D_8029FB90;
 BSS f32 D_8029FB94;
@@ -85,7 +85,7 @@ API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
 }
 
 API_CALLABLE(ChoosePlayerCelebrationAnim) {
-    PlayerCelebrationAnimOptions* pcao = &D_80280FC0;
+    PlayerCelebrationAnimOptions* pcao = &bPlayerCelebrations;
     PlayerData* playerData = &gPlayerData;
     s32 temp;
     s32 i;
