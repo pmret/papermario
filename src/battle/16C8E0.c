@@ -1124,7 +1124,7 @@ void btl_delete_actor(Actor* actor) {
     if (actor->takeTurnScript != NULL) {
         kill_script_by_ID(actor->takeTurnScriptID);
     }
-    func_80266EE8(actor, UNK_PAL_EFFECT_0);
+    set_actor_pal_effect(actor, GLOW_PAL_OFF);
 
     part = actor->partsTable;
 
@@ -1173,7 +1173,7 @@ void btl_delete_actor(Actor* actor) {
 void btl_delete_player_actor(Actor* player) {
     ActorPart* partsTable;
     ActorPartMovement* movement;
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     s32 i;
 
     for (i = 0; i < 2; i++) {
@@ -1191,7 +1191,7 @@ void btl_delete_player_actor(Actor* player) {
     }
 
     partsTable = player->partsTable;
-    decorationTable = partsTable->decorationTable;
+    decorations = partsTable->decorationTable;
     movement = partsTable->movement;
 
     delete_shadow(player->shadow.id);
@@ -1203,7 +1203,7 @@ void btl_delete_player_actor(Actor* player) {
     }
 
     heap_free(movement);
-    heap_free(decorationTable);
+    heap_free(decorations);
     heap_free(partsTable);
     heap_free(player);
 }

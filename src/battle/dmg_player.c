@@ -935,7 +935,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if ((battleStatus->lastAttackDamage > 0 || wasSpecialHit) && !partImmuneToElement) {
-        func_80267018(target, 1);
+        set_actor_flash_mode(target, 1);
 
         if (isFireDamage) {
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -1103,7 +1103,7 @@ s32 dispatch_damage_event_player(s32 damageAmount, s32 event, s32 arg2) {
     show_damage_fx(player, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
 
     if (battleStatus->lastAttackDamage > 0) {
-        func_80267018(player, 1);
+        set_actor_flash_mode(player, 1);
     }
 
     flags = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) != 0;

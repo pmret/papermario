@@ -380,7 +380,7 @@ void btl_popup_messages_update(void);
 void btl_popup_messages_draw_world_geometry(void);
 void func_80255FD8(void);
 
-void func_80266EE8(Actor* actor, s32 arg1);
+void set_actor_pal_effect(Actor* actor, s32 arg1);
 
 void btl_set_popup_duration(s32 duration);
 void switch_to_partner(s32 arg0);
@@ -795,9 +795,9 @@ void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void PatrolAI_LoiterInit(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 s32 func_80263230(Actor*, Actor*);
-void func_80266EA8(ActorPart*, s32);
+void set_part_pal_effect(ActorPart*, s32);
 void func_80266E40(Actor*);
-void func_80267018(Actor* actor, s32 arg1);
+void set_actor_flash_mode(Actor* actor, s32 arg1);
 void remove_player_buffs(s32);
 s32 is_actor_health_bar_visible(Actor*);
 
@@ -959,22 +959,23 @@ void disable_actor_blur(Actor*);
 void reset_actor_blur(Actor*);
 void enable_actor_blur(Actor*);
 void apply_shock_effect(Actor*);
-void func_8025C8A0(s32, ActorPart*, s32 yaw, s32 arg3);
-void func_8025CD28(s32, ActorPart*, s32 yaw, s32 arg3);
+void part_glow_off(s32, ActorPart*, s32 yaw, b32 arg3);
+void part_flash_off(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection);
+void part_flash_on(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection);
 void _add_part_decoration(ActorPart*);
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex);
-void func_8025D158(ActorPart*, s32);
-void func_8025D290(ActorPart*, s32);
-void func_8025D3C4(ActorPart*, s32);
-void func_8025D4A0(ActorPart*, s32);
-void func_8025D620(ActorPart*, s32);
-void func_8025D6FC(ActorPart*, s32);
-void func_8025D810(ActorPart*, s32);
-void func_8025D8EC(ActorPart*, s32);
-void func_8025DA60(ActorPart*, s32);
-void func_8025DBC8(ActorPart*, s32);
-void func_8025DD40(ActorPart*, s32);
-void func_8025DE88(ActorPart*, s32);
+void remove_part_decor_none(ActorPart*, s32);
+void remove_part_decor_golden_flames(ActorPart*, s32);
+void remove_part_decor_sweat(ActorPart*, s32);
+void remove_part_decor_seeing_stars(ActorPart*, s32);
+void remove_part_decor_red_flames(ActorPart*, s32);
+void remove_part_decor_smoky_trail(ActorPart*, s32);
+void remove_part_decor_fiery_trail(ActorPart*, s32);
+void remove_part_decor_whirlwind(ActorPart*, s32);
+void remove_part_decor_steam(ActorPart*, s32);
+void remove_part_decor_sparkles(ActorPart*, s32);
+void remove_part_decor_bowser_aura(ActorPart*, s32);
+void remove_part_decor_radiating_stars(ActorPart*, s32);
 void status_bar_ignore_changes(void);
 void imgfx_release_instance(u32);
 

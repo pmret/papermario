@@ -125,7 +125,7 @@ EvtScript N(EVS_Init) = {
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, EVT_PTR(N(DefenseTable)))
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_9)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SPARKLES)
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END

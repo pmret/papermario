@@ -212,6 +212,8 @@ typedef struct NpcFollowData {
     /* 0x2A0 */ f32 walkRadius;
 } NpcFollowData; // size = 0x2A4
 
+#define MAX_NPC_DECORATIONS 2
+
 typedef struct Npc {
     /* 0x000 */ s32 flags;
     /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
@@ -271,31 +273,31 @@ typedef struct Npc {
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
     /* 0x0B6 */ s8 dirtyPalettes;
-    /* 0x0B7 */ s8 palSwapState;
+    /* 0x0B7 */ s8 palAnimState;
     /* 0x0B8 */ char unk_B8[4];
-    /* 0x0BC */ s16 palSwapTimer;
-    /* 0x0BE */ s16 palSwapLerpAlpha;
+    /* 0x0BC */ s16 nextPalTime;
+    /* 0x0BE */ s16 palBlendAlpha;
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
     /* 0x0C4 */ PAL_PTR* spritePaletteList;
     /* 0x0C8 */ PAL_BIN localPaletteData[16][16];
     /* 0x2C8 */ PAL_PTR localPalettes[16];
-    /* 0x308 */ s16 unk_308;
-    /* 0x30A */ s16 unk_30A;
-    /* 0x30C */ u16 unk_30C;
-    /* 0x30E */ s16 unk_30E;
-    /* 0x310 */ s16 unk_310;
-    /* 0x312 */ s16 unk_312;
+    /* 0x308 */ s16 blendPalA;
+    /* 0x30A */ s16 blendPalB;
+    /* 0x30C */ u16 palswapTimeHoldA;
+    /* 0x30E */ s16 palswapTimeAtoB;
+    /* 0x310 */ s16 palswapTimeHoldB;
+    /* 0x312 */ s16 palswapTimeBtoA;
     /* 0x314 */ s16 unk_314;
     /* 0x316 */ s16 unk_316;
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
-    /* 0x324 */ struct EffectInstance* decorations[2];
-    /* 0x32C */ s8 decorationType[2];
-    /* 0x32E */ s8 changedDecoration[2];
-    /* 0x330 */ s8 decorationInitialised[2];
-    /* 0x332 */ s16 decorationUnk[2];
+    /* 0x324 */ struct EffectInstance* decorations[MAX_NPC_DECORATIONS];
+    /* 0x32C */ s8 decorationType[MAX_NPC_DECORATIONS];
+    /* 0x32E */ s8 changedDecoration[MAX_NPC_DECORATIONS];
+    /* 0x330 */ s8 decorationInitialised[MAX_NPC_DECORATIONS];
+    /* 0x332 */ s16 decorationGlowPhase[MAX_NPC_DECORATIONS];
     /* 0x336 */ char unk_336[10];
 } Npc; // size = 0x340
 
@@ -1639,17 +1641,52 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
-// seems to be a union differing for each decoration
-typedef struct DecorationUnk {
-    /* 0x00 */ s16 unk00;
-    /* 0x02 */ s16 unk02;
-    /* 0x04 */ s16 unk04;
-    /* 0x06 */ s16 unk06;
-    /* 0x08 */ s16 unk08;
-    /* 0x0A */ s16 unk0A;
-    /* 0x0C */ s16 unk0C;
-    /* 0x0E */ s16 unk0E;
-} DecorationUnk; // size = 0x10
+typedef struct DecorFireTrail {
+    /* 0x00 */ s16 scale;
+} DecorFireTrail;
+
+typedef struct DecorGoldenFlames {
+    /* 0x00 */ s16 scaleX;
+    /* 0x02 */ s16 scaleY;
+    /* 0x04 */ s16 offsetX;
+} DecorGoldenFlames;
+
+typedef struct DecorRedFlames {
+    /* 0x00 */ s16 scaleX;
+    /* 0x02 */ s16 scaleY;
+    /* 0x04 */ s16 alpha;
+    /* 0x06 */ s16 offsetZ;
+    /* 0x08 */ s16 unused1;
+    /* 0x0A */ s16 unused2;
+    /* 0x0C */ s16 unused3;
+} DecorRedFlames;
+
+typedef struct DecorBowserAura {
+    /* 0x00 */ s16 scaleX;
+    /* 0x02 */ s16 scaleY;
+    /* 0x04 */ s16 alpha;
+    /* 0x06 */ s16 offsetZ;
+} DecorBowserAura;
+
+typedef struct DecorDataSparkles {
+    /* 0x00 */ s16 spawnInterval;
+} DecorDataSparkles;
+
+typedef struct DecorDataStars {
+    /* 0x00 */ s16 scalePct;
+    /* 0x02 */ s16 offsetY;
+} DecorDataStars;
+
+// data for any type of decoration can be stored here
+typedef union DecorationData {
+    s16 raw[8];
+    DecorFireTrail fireTrail;
+    DecorRedFlames redFlames;
+    DecorGoldenFlames goldenFlames;
+    DecorBowserAura bowserAura;
+    DecorDataSparkles sparkles;
+    DecorDataStars stars;
+} DecorationData; // size = 0x10
 
 #define MAX_ACTOR_DECORATIONS 2
 
@@ -1674,23 +1711,23 @@ typedef struct DecorationTable {
     /* 0x74A */ s16 palswapTimeBtoA;
     /* 0x74C */ s16 palswapUnused1; // presumably palswapTimeHoldC for unimplemented triple cycling (A->B->C->A)
     /* 0x74E */ s16 palswapUnused2; // presumably palswapTimeCtoA  for unimplemented triple cycling (A->B->C->A)
-    /* 0x750 */ s8 unk_750;
-    /* 0x751 */ s8 unk_751;
-    /* 0x752 */ s8 unk_752;
+    /* 0x750 */ s8 glowState;
+    /* 0x751 */ b8 glowStateChanged;
+    /* 0x752 */ s8 glowPalUnk1;
     /* 0x753 */ char pad753[5];
-    /* 0x758 */ s16 unk758;
-    /* 0x75A */ s16 unk75A;
-    /* 0x75C */ s16 unk75C;
+    /* 0x758 */ s16 glowUnk2;
+    /* 0x75A */ s16 glowUnk3;
+    /* 0x75C */ s16 glowPhase;
     /* 0x75E */ char pad75E[6];
-    /* 0x764 */ s8 unk_764;
-    /* 0x765 */ s8 unk_765;
-    /* 0x766 */ s8 unk_766;
-    /* 0x767 */ s8 unk_767;
-    /* 0x768 */ u8 unk_768;
+    /* 0x764 */ s8 flashState;
+    /* 0x765 */ s8 flashStateChanged;
+    /* 0x766 */ s8 flashMode;
+    /* 0x767 */ s8 flashFramesLeft;
+    /* 0x768 */ u8 flashEnabled;
     /* 0x769 */ char unk_769[3];
-    /* 0x76C */ PAL_PTR unk_76C[16];
+    /* 0x76C */ PAL_PTR flashPalettes[16];
     /* 0x78C */ char unk_7AC[0x2C];
-    /* 0x7D8 */ s8 unk_7D8;
+    /* 0x7D8 */ s8 blurUnused;
     /* 0x7D9 */ s8 blurBufferPos;
     /* 0x7DA */ s8 blurDrawCount;
     /* 0x7DB */ s8 blurEnableCount;
@@ -1712,7 +1749,7 @@ typedef struct DecorationTable {
     /* 0x8BC */ s8 state[MAX_ACTOR_DECORATIONS];
     /* 0x8BE */ s16 stateResetTimer[MAX_ACTOR_DECORATIONS];
     /* 0x8C2 */ char unk_8C0[4];
-    /* 0x8C6 */ DecorationUnk unk_8C6[MAX_ACTOR_DECORATIONS];
+    /* 0x8C6 */ DecorationData decorData[MAX_ACTOR_DECORATIONS];
 } DecorationTable; // size = 0x8E8
 
 typedef struct PlayerPathElement {

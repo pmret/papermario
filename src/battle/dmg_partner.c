@@ -786,7 +786,7 @@ HitResult calc_partner_damage_enemy(void) {
                 sfx_play_sound_at_position(partner->actorTypeData1[5], SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             }
 
-            func_80267018(target, 1);
+            set_actor_flash_mode(target, 1);
 
             if (isFireDamage) {
                 sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -946,7 +946,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
                   battleStatus->lastAttackDamage);
 
     if (battleStatus->lastAttackDamage > 0) {
-        func_80267018(partner, 1);
+        set_actor_flash_mode(partner, 1);
     }
 
     partner->flags |= ACTOR_FLAG_HEALTH_BAR_HIDDEN;

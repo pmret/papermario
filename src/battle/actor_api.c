@@ -2619,19 +2619,19 @@ ApiStatus SetActorPaletteSwapTimes(Evt* script, s32 isInitialCall) {
     s32 partID = evt_get_variable(script, *args++);
     Actor* actor;
     ActorPart* actorPart;
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
-    decorationTable = actorPart->decorationTable;
+    decorations = actorPart->decorationTable;
 
-    decorationTable->blendPalA = evt_get_variable(script, *args++);
-    decorationTable->blendPalB = evt_get_variable(script, *args++);
-    decorationTable->palswapTimeHoldA = evt_get_variable(script, *args++);
-    decorationTable->palswapTimeAtoB = evt_get_variable(script, *args++);
+    decorations->blendPalA = evt_get_variable(script, *args++);
+    decorations->blendPalB = evt_get_variable(script, *args++);
+    decorations->palswapTimeHoldA = evt_get_variable(script, *args++);
+    decorations->palswapTimeAtoB = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
@@ -2700,7 +2700,7 @@ ApiStatus func_8026EDE4(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
 
-    func_80266EA8(actorPart, temp_s3);
+    set_part_pal_effect(actorPart, temp_s3);
 
     return ApiStatus_DONE2;
 }
@@ -2746,7 +2746,7 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
-    s32 temp_s4 = evt_get_variable(script, *args++);
+    s32 idx = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     DecorationTable* decorationtable;
     Actor* actor;
@@ -2758,10 +2758,10 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     actorPart = get_actor_part(actor, partID);
     decorationtable = actorPart->decorationTable;
 
-    decorationtable->unk_8C6[temp_s4].unk00 = evt_get_variable(script, *args++);
-    decorationtable->unk_8C6[temp_s4].unk02 = evt_get_variable(script, *args++);
-    decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);
-    decorationtable->unk_8C6[temp_s4].unk06 = evt_get_variable(script, *args++);
+    decorationtable->decorData[idx].raw[0] = evt_get_variable(script, *args++);
+    decorationtable->decorData[idx].raw[1] = evt_get_variable(script, *args++);
+    decorationtable->decorData[idx].raw[2] = evt_get_variable(script, *args++);
+    decorationtable->decorData[idx].raw[3] = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

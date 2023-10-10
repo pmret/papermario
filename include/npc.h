@@ -512,13 +512,13 @@ void npc_set_palswap_2(Npc* npc, s32 timeHoldB, s32 timeBA, s32 palIndexC, s32 p
 
 void npc_draw_with_palswap(Npc* npc, s32 arg1, Matrix4f mtx);
 
-void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx);
+void npc_render_without_adjusted_palettes(Npc* npc, s32 arg1, Matrix4f mtx);
 
-s32 npc_draw_palswap_mode_1(Npc*, s32, Matrix4f mtx);
+s32 npc_render_with_watt_idle_palettes(Npc*, s32, Matrix4f mtx);
 
 u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha);
 
-s32 npc_draw_palswap_mode_2(Npc*, s32, s32, Matrix4f mtx);
+s32 npc_render_with_pal_blending(Npc*, s32, s32, Matrix4f mtx);
 
 s32 npc_draw_palswap_mode_4(Npc*, s32, Matrix4f mtx);
 

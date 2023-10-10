@@ -726,7 +726,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     if (battleStatus->lastAttackDamage > 0) {
         u32 hitSound;
 
-        func_80267018(target, 1);
+        set_actor_flash_mode(target, 1);
 
         if (attacker->actorTypeData1[5] != SOUND_NONE) {
             sfx_play_sound_at_position(attacker->actorTypeData1[5], SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -882,7 +882,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     }
 
     if (battleStatus->lastAttackDamage > 0) {
-        func_80267018(actor, 1);
+        set_actor_flash_mode(actor, 1);
     }
     actor->flags |= ACTOR_FLAG_HEALTH_BAR_HIDDEN;
     dispatch_event_actor(actor, dispatchEvent);
@@ -3357,7 +3357,7 @@ ApiStatus EnableActorGlow(Evt* script, s32 isInitialCall) {
             }
             it = it->nextPart;
         }
-        func_80266EE8(actor, UNK_PAL_EFFECT_0);
+        set_actor_pal_effect(actor, GLOW_PAL_OFF);
     }
 
     return ApiStatus_DONE2;

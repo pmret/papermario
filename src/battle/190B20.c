@@ -1264,7 +1264,7 @@ void load_player_actor(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player;
     ActorPart* part;
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     ActorPartMovement* partMovement;
     s32 i;
     s32 j;
@@ -1431,31 +1431,31 @@ void load_player_actor(void) {
     if (part->idleAnimations != NULL) {
         s32 j;
 
-        part->decorationTable = heap_malloc(sizeof(*decorationTable));
-        decorationTable = part->decorationTable;
+        part->decorationTable = heap_malloc(sizeof(*decorations));
+        decorations = part->decorationTable;
 
-        ASSERT(decorationTable != NULL);
+        ASSERT(decorations != NULL);
 
-        decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
-        decorationTable->unk_750 = 0;
-        decorationTable->unk_764 = 0;
-        decorationTable->unk_768 = 0;
-        decorationTable->unk_7D8 = 0;
-        decorationTable->blurBufferPos = 0;
+        decorations->paletteAdjustment = PAL_ADJUST_NONE;
+        decorations->glowState = GLOW_PAL_OFF;
+        decorations->flashState = 0;
+        decorations->flashEnabled = FLASH_PAL_OFF;
+        decorations->blurUnused = 0;
+        decorations->blurBufferPos = 0;
 
-        for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
-            decorationTable->posX[j] = player->curPos.x;
-            decorationTable->posY[j] = player->curPos.y;
-            decorationTable->posZ[j] = player->curPos.z;
+        for (j = 0; j < ARRAY_COUNT(decorations->posX); j++) {
+            decorations->posX[j] = player->curPos.x;
+            decorations->posY[j] = player->curPos.y;
+            decorations->posZ[j] = player->curPos.z;
         }
 
-        decorationTable->blurDrawCount = 3;
-        decorationTable->blurEnableCount = 0;
-        decorationTable->blurDisableDelay = 0;
+        decorations->blurDrawCount = 3;
+        decorations->blurEnableCount = 0;
+        decorations->blurDisableDelay = 0;
 
-        for (j = 0; j < ARRAY_COUNT(decorationTable->effect); j++) {
-            decorationTable->effect[j] = NULL;
-            decorationTable->type[j] = 0;
+        for (j = 0; j < ARRAY_COUNT(decorations->effect); j++) {
+            decorations->effect[j] = NULL;
+            decorations->type[j] = 0;
         }
     }
 
@@ -1657,34 +1657,34 @@ void load_partner_actor(void) {
             part->actorTypeData2b[1] = bActorSoundTable[partnerActor->actorType].delay[1];
 
             if (part->idleAnimations != NULL) {
-                DecorationTable* decorationTable;
+                DecorationTable* decorations;
                 s32 j;
 
-                part->decorationTable  = heap_malloc(sizeof(*decorationTable));
-                decorationTable = part->decorationTable;
+                part->decorationTable  = heap_malloc(sizeof(*decorations));
+                decorations = part->decorationTable;
 
-                ASSERT(decorationTable != NULL);
+                ASSERT(decorations != NULL);
 
-                decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
-                decorationTable->unk_750 = 0;
-                decorationTable->unk_764 = 0;
-                decorationTable->unk_768 = 0;
-                decorationTable->unk_7D8 = 0;
-                decorationTable->blurBufferPos = 0;
+                decorations->paletteAdjustment = PAL_ADJUST_NONE;
+                decorations->glowState = GLOW_PAL_OFF;
+                decorations->flashState = 0;
+                decorations->flashEnabled = FLASH_PAL_OFF;
+                decorations->blurUnused = 0;
+                decorations->blurBufferPos = 0;
 
-                for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
-                    decorationTable->posX[j] = partnerActor->curPos.x;
-                    decorationTable->posY[j] = partnerActor->curPos.y;
-                    decorationTable->posZ[j] = partnerActor->curPos.z;
+                for (j = 0; j < ARRAY_COUNT(decorations->posX); j++) {
+                    decorations->posX[j] = partnerActor->curPos.x;
+                    decorations->posY[j] = partnerActor->curPos.y;
+                    decorations->posZ[j] = partnerActor->curPos.z;
                 }
 
-                decorationTable->blurDrawCount = 3;
-                decorationTable->blurEnableCount = 0;
-                decorationTable->blurDisableDelay = 0;
+                decorations->blurDrawCount = 3;
+                decorations->blurEnableCount = 0;
+                decorations->blurDisableDelay = 0;
 
-                for (j = 0; j < ARRAY_COUNT(decorationTable->effect); j++) {
-                    decorationTable->effect[j] = NULL;
-                    decorationTable->type[j] = 0;
+                for (j = 0; j < ARRAY_COUNT(decorations->effect); j++) {
+                    decorations->effect[j] = NULL;
+                    decorations->type[j] = 0;
                 }
             }
 
@@ -1737,7 +1737,7 @@ Actor* create_actor(Formation formation) {
     Evt* takeTurnScript;
     s32 partCount;
     f32 x, y, z;
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     s32 i, j, k;
 
     if (formation->home.index >= EVT_LIMIT) {
@@ -1923,30 +1923,30 @@ Actor* create_actor(Formation formation) {
         part->actorTypeData2b[1] = bActorSoundTable[actor->actorType].delay[1];
 
         if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-            part->decorationTable = heap_malloc(sizeof(*decorationTable));
-            decorationTable = part->decorationTable;
-            ASSERT(decorationTable != NULL);
+            part->decorationTable = heap_malloc(sizeof(*decorations));
+            decorations = part->decorationTable;
+            ASSERT(decorations != NULL);
 
-            decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
-            decorationTable->unk_750 = 0;
-            decorationTable->unk_764 = 0;
-            decorationTable->unk_768 = 0;
-            decorationTable->unk_7D8 = 0;
-            decorationTable->blurBufferPos = 0;
+            decorations->paletteAdjustment = PAL_ADJUST_NONE;
+            decorations->glowState = GLOW_PAL_OFF;
+            decorations->flashState = 0;
+            decorations->flashEnabled = FLASH_PAL_OFF;
+            decorations->blurUnused = 0;
+            decorations->blurBufferPos = 0;
 
-            for (k = 0; k < ARRAY_COUNT(decorationTable->posX); k++) {
-                decorationTable->posX[k] = actor->curPos.x;
-                decorationTable->posY[k] = actor->curPos.y;
-                decorationTable->posZ[k] = actor->curPos.z;
+            for (k = 0; k < ARRAY_COUNT(decorations->posX); k++) {
+                decorations->posX[k] = actor->curPos.x;
+                decorations->posY[k] = actor->curPos.y;
+                decorations->posZ[k] = actor->curPos.z;
             }
 
-            decorationTable->blurDrawCount = 3;
-            decorationTable->blurEnableCount = 0;
-            decorationTable->blurDisableDelay = 0;
+            decorations->blurDrawCount = 3;
+            decorations->blurEnableCount = 0;
+            decorations->blurDisableDelay = 0;
 
-            for (k = 0; k < ARRAY_COUNT(decorationTable->effect); k++) {
-                decorationTable->effect[k] = NULL;
-                decorationTable->type[k] = 0;
+            for (k = 0; k < ARRAY_COUNT(decorations->effect); k++) {
+                decorations->effect[k] = NULL;
+                decorations->type[k] = 0;
             }
 
         }
@@ -2654,12 +2654,12 @@ s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurat
 
 void set_part_pal_adjustment(ActorPart* part, s32 palAdjust) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
-        if (decorationTable->paletteAdjustment != palAdjust) {
-            decorationTable->paletteAdjustment = palAdjust;
-            decorationTable->palAnimState = 0;
-            decorationTable->resetPalAdjust = TRUE;
+        if (decorations->paletteAdjustment != palAdjust) {
+            decorations->paletteAdjustment = palAdjust;
+            decorations->palAnimState = 0;
+            decorations->resetPalAdjust = TRUE;
         }
     }
 }
@@ -2691,15 +2691,15 @@ void func_80266E40(Actor* actor) {
     s8 f = PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS;
 
     while (part != NULL) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
         do {
             if (!(part->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
                 (part->idleAnimations != NULL) &&
                 !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS))
             {
-                if (decorationTable->paletteAdjustment != e && decorationTable->paletteAdjustment != f) {
-                    decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
+                if (decorations->paletteAdjustment != e && decorations->paletteAdjustment != f) {
+                    decorations->paletteAdjustment = PAL_ADJUST_NONE;
                 }
             }
         } while (0); // required to match
@@ -2707,19 +2707,19 @@ void func_80266E40(Actor* actor) {
     }
 }
 
-void func_80266EA8(ActorPart* part, s32 arg1) {
+void set_part_pal_effect(ActorPart* part, s32 palEffect) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
-        if (decorationTable->unk_750 != arg1) {
-            decorationTable->unk_750 = arg1;
-            decorationTable->unk_752 = 0;
-            decorationTable->unk_751 = 1;
+        if (decorations->glowState != palEffect) {
+            decorations->glowState = palEffect;
+            decorations->glowPalUnk1 = 0;
+            decorations->glowStateChanged = TRUE;
         }
     }
 }
 
-void func_80266EE8(Actor* actor, s32 arg1) {
+void set_actor_pal_effect(Actor* actor, s32 palEffect) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
@@ -2727,47 +2727,47 @@ void func_80266EE8(Actor* actor, s32 arg1) {
             && (part->idleAnimations != NULL)
             && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)
         ) {
-            func_80266EA8(part, arg1);
+            set_part_pal_effect(part, palEffect);
         }
     }
 }
 
-void func_80266F60(ActorPart* part) {
+void clear_part_pal_effect(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        part->decorationTable->unk_750 = 0;
+        part->decorationTable->glowState = GLOW_PAL_OFF;
     }
 }
 
-void func_80266F8C(Actor* actor) {
+void clear_actor_pal_effect(Actor* actor) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
         do {
             if (!(part->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE))
                 && part->idleAnimations != NULL
                 && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)
             ) {
-                decorationTable->unk_750 = 0;
+                decorations->glowState = GLOW_PAL_OFF;
             }
         } while (0); // required to match
     }
 }
 
-void func_80266FD8(ActorPart* part, s32 arg1) {
+void set_part_flash_mode(ActorPart* part, s32 flashState) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
-        if (decorationTable->unk_764 != arg1) {
-            decorationTable->unk_764 = arg1;
-            decorationTable->unk_766 = 0;
-            decorationTable->unk_765 = 1;
+        if (decorations->flashState != flashState) {
+            decorations->flashState = flashState;
+            decorations->flashMode = FLASH_MODE_LIGHT;
+            decorations->flashStateChanged = TRUE;
         }
     }
 }
 
-void func_80267018(Actor* actor, s32 arg1) {
+void set_actor_flash_mode(Actor* actor, s32 flashState) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
@@ -2776,29 +2776,29 @@ void func_80267018(Actor* actor, s32 arg1) {
             && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)
             && part->idleAnimations != NULL
         ) {
-            func_80266FD8(part, arg1);
+            set_part_flash_mode(part, flashState);
         }
     }
 }
 
-void func_8026709C(ActorPart* part) {
+void clear_part_flash_mode(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        part->decorationTable->unk_764 = 0;
+        part->decorationTable->flashState = 0;
     }
 }
 
-void func_802670C8(Actor* actor) {
+void clear_actor_flash_mode(Actor* actor) {
     ActorPart* part;
 
    for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
         do {
             if (!(part->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
                 (part->idleAnimations != NULL) &&
                 !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS))
             {
-                decorationTable->unk_764 = 0;
+                decorations->flashState = 0;
             }
         } while (0); // TODO make match better
     }
@@ -2806,12 +2806,12 @@ void func_802670C8(Actor* actor) {
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType) {
     if ((part->idleAnimations) && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = part->decorationTable;
+        DecorationTable* decorations = part->decorationTable;
 
         _remove_part_decoration(part, decorationIndex);
-        decorationTable->type[decorationIndex] = decorationType;
-        decorationTable->changed[decorationIndex] = TRUE;
-        decorationTable->state[decorationIndex] = 0;
+        decorations->type[decorationIndex] = decorationType;
+        decorations->changed[decorationIndex] = TRUE;
+        decorations->state[decorationIndex] = 0;
         _add_part_decoration(part);
     }
 }

@@ -72,7 +72,7 @@ enum {
 
 // animated palettes for Watt
 // each pair gives { mode, duration }
-u8 WattIdlePalettesAnim[] = {
+u8 bWattIdlePalettesAnim[] = {
     WATT_BRIGHTEST,   2,
     WATT_DEFAULT,    52,
     WATT_BRIGHTEST,   4,
@@ -101,7 +101,7 @@ u8 WattAttackPalettesAnim[] = {
     PAL_ANIM_END
 };
 
-s16 D_80284134[] = { -1, 15, 10, 7, 5, 3, 2, 1, 0, 0, 0, 0, 0, 0 };
+s16 SparkleSpawnIntervals[] = { -1, 15, 10, 7, 5, 3, 2, 1 };
 
 void update_player_actor_shadow(void);
 void appendGfx_npc_actor(s32 isPartner, s32 actorIndex);
@@ -123,46 +123,46 @@ void set_status_icons_offset(s32 iconID, s32 offsetY, s32 arg2);
 void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 arg2, s32 radius, s32 offsetY);
 
 void appendGfx_npc_actor_reflection(s32, Actor*);
-void func_80259494(ActorPart*);
-void func_8025950C(ActorPart*, s32, Matrix4f);
-void func_802596C0(ActorPart*, s32, Matrix4f);
-void func_802597B0(ActorPart*, s32, Matrix4f);
-void func_8025995C(ActorPart*, s32, Matrix4f);
-void func_8025C918(s32 arg0, ActorPart* part, s32 yaw, s32 arg3);
-void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3);
+void make_flash_palettes(ActorPart*);
+void func_unkA_draw_npc(ActorPart*, s32, Matrix4f);
+void func_unkB_draw_npc(ActorPart*, s32, Matrix4f);
+void func_unkA_draw_player(ActorPart*, s32, Matrix4f);
+void func_unkB_draw_player(ActorPart*, s32, Matrix4f);
+void part_glow_on(b32 arg0, ActorPart* part, s32 yaw, b32 arg3);
+void part_flash_on(b32 arg0, ActorPart* part, s32 yaw, b32 arg3);
 
-void func_8025D150(ActorPart*, s32);
-void func_8025D160(ActorPart*, s32);
-void func_8025D2B0(ActorPart*, s32);
-void func_8025D3CC(ActorPart*, s32);
-void func_8025D4C8(ActorPart*, s32);
-void func_8025D640(ActorPart*, s32);
-void func_8025D71C(ActorPart*, s32);
-void func_8025D830(ActorPart*, s32);
-void func_8025D90C(ActorPart*, s32);
-void func_8025DA68(ActorPart*, s32);
-void func_8025DBD0(ActorPart*, s32);
-void func_8025DD60(ActorPart*, s32);
+void add_part_decor_none(ActorPart*, s32);
+void add_part_decor_golden_flames(ActorPart*, s32);
+void add_part_decor_sweat(ActorPart*, s32);
+void add_part_decor_seeing_stars(ActorPart*, s32);
+void add_part_decor_red_flames(ActorPart*, s32);
+void add_part_decor_smoky_trail(ActorPart*, s32);
+void add_part_decor_fiery_trail(ActorPart*, s32);
+void add_part_decor_whirlwind(ActorPart*, s32);
+void add_part_decor_steam(ActorPart*, s32);
+void add_part_decor_sparkles(ActorPart*, s32);
+void add_part_decor_bowser_aura(ActorPart*, s32);
+void add_part_decor_radiating_stars(ActorPart*, s32);
 
-void render_without_adjusted_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_sleep_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_static_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_fear_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_poison_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_paralyze_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_berserk_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_watt_idle_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_watt_attack_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-void render_with_player_debuff_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation, s32 isPoison);
-void render_with_pal_blending(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 skipAnimation);
-void render_with_palset_blending(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
-s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32);
-s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32);
+void render_without_adjusted_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_sleep_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_static_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_fear_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_poison_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_paralyze_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_berserk_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_watt_idle_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_watt_attack_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_player_debuff_palettes(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation, s32 isPoison);
+void render_with_pal_blending(b32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 skipAnimation);
+void render_with_palset_blending(b32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+s32 update_part_glow(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection);
+s32 update_part_flash(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection);
 s32 get_player_anim_for_status(s32 animID);
-void func_8026709C(ActorPart* part);
+void clear_part_flash_mode(ActorPart* part);
 
 // thresholds slightly lower than in GetDamageIntensity
-s32 func_80254250(ActorPart* part) {
+s32 get_flash_damage_intensity(ActorPart* part) {
     s32 ret;
 
     if (gBattleStatus.lastAttackDamage < 3) {
@@ -188,32 +188,32 @@ void mtx_mirror_y(Matrix4f mtx) {
 
 void enable_actor_blur(Actor* actor) {
     ActorPart* partsTable = actor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
     s32 i, j;
     s32 numParts;
 
-    decorationTable->blurDisableDelay = 0;
-    decorationTable->blurEnableCount++;
+    decorations->blurDisableDelay = 0;
+    decorations->blurEnableCount++;
     actor->flags |= ACTOR_FLAG_BLUR_ENABLED;
     partsTable = actor->partsTable;
     numParts = actor->numParts;
 
     for (i = 0; i < numParts; i++) {
         if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-            decorationTable = partsTable->decorationTable;
-            decorationTable->unk_7D8 = 0;
-            decorationTable->blurBufferPos = 0;
-            for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
-                decorationTable->posX[j] = partsTable->curPos.x;
-                decorationTable->posY[j] = partsTable->curPos.y;
-                decorationTable->posZ[j] = partsTable->curPos.z;
-                decorationTable->yaw[j] = actor->yaw;
-                decorationTable->rotPivotOffsetX[j] = (s32)(actor->rotPivotOffset.x * actor->scalingFactor);
-                decorationTable->rotPivotOffsetY[j] = (s32)(actor->rotPivotOffset.y * actor->scalingFactor);
+            decorations = partsTable->decorationTable;
+            decorations->blurUnused = 0;
+            decorations->blurBufferPos = 0;
+            for (j = 0; j < ARRAY_COUNT(decorations->posX); j++) {
+                decorations->posX[j] = partsTable->curPos.x;
+                decorations->posY[j] = partsTable->curPos.y;
+                decorations->posZ[j] = partsTable->curPos.z;
+                decorations->yaw[j] = actor->yaw;
+                decorations->rotPivotOffsetX[j] = (s32)(actor->rotPivotOffset.x * actor->scalingFactor);
+                decorations->rotPivotOffsetY[j] = (s32)(actor->rotPivotOffset.y * actor->scalingFactor);
 
-                decorationTable->rotX[j] = clamp_angle(actor->rot.x) * 0.5f;
-                decorationTable->rotY[j] = clamp_angle(actor->rot.y) * 0.5f;
-                decorationTable->rotZ[j] = clamp_angle(actor->rot.z) * 0.5f;
+                decorations->rotX[j] = clamp_angle(actor->rot.x) * 0.5f;
+                decorations->rotY[j] = clamp_angle(actor->rot.y) * 0.5f;
+                decorations->rotZ[j] = clamp_angle(actor->rot.z) * 0.5f;
             }
         }
         partsTable = partsTable->nextPart;
@@ -224,12 +224,12 @@ void disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
     if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = actorPart->decorationTable;
+        DecorationTable* decorations = actorPart->decorationTable;
 
-        if (decorationTable->blurEnableCount != 0) {
-            decorationTable->blurEnableCount--;
-            if (decorationTable->blurEnableCount == 0) {
-                decorationTable->blurDisableDelay = 20;
+        if (decorations->blurEnableCount != 0) {
+            decorations->blurEnableCount--;
+            if (decorations->blurEnableCount == 0) {
+                decorations->blurDisableDelay = 20;
             }
         }
     }
@@ -239,13 +239,13 @@ void reset_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
     if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = actorPart->decorationTable;
+        DecorationTable* decorations = actorPart->decorationTable;
 
-        if (decorationTable->blurEnableCount != 0) {
-            decorationTable->blurEnableCount--;
-            if (decorationTable->blurEnableCount == 0) {
+        if (decorations->blurEnableCount != 0) {
+            decorations->blurEnableCount--;
+            if (decorations->blurEnableCount == 0) {
                 actor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
-                decorationTable->blurDisableDelay = 1;
+                decorations->blurDisableDelay = 1;
             }
         }
     }
@@ -255,10 +255,10 @@ void force_disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
     if (actorPart->idleAnimations != NULL && !(actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        DecorationTable* decorationTable = actorPart->decorationTable;
+        DecorationTable* decorations = actorPart->decorationTable;
 
-        decorationTable->blurEnableCount = 0;
-        decorationTable->blurDisableDelay = 20;
+        decorations->blurEnableCount = 0;
+        decorations->blurDisableDelay = 20;
     }
 }
 
@@ -281,38 +281,38 @@ void force_disable_partner_blur(void) {
 void enable_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
     s32 i;
 
-    decorationTable->blurDisableDelay = 0;
-    decorationTable->blurEnableCount++;
+    decorations->blurDisableDelay = 0;
+    decorations->blurEnableCount++;
     playerActor->flags |= ACTOR_FLAG_BLUR_ENABLED;
-    decorationTable->unk_7D8 = 0;
-    decorationTable->blurBufferPos = 0;
+    decorations->blurUnused = 0;
+    decorations->blurBufferPos = 0;
 
-    for (i = 0; i < ARRAY_COUNT(decorationTable->posX); i++) {
-        decorationTable->posX[i] = partsTable->curPos.x;
-        decorationTable->posY[i] = partsTable->curPos.y;
-        decorationTable->posZ[i] = partsTable->curPos.z;
-        decorationTable->yaw[i] = playerActor->yaw;
-        decorationTable->rotPivotOffsetX[i] = playerActor->rotPivotOffset.x * playerActor->scalingFactor;
-        decorationTable->rotPivotOffsetY[i] = playerActor->rotPivotOffset.y * playerActor->scalingFactor;
+    for (i = 0; i < ARRAY_COUNT(decorations->posX); i++) {
+        decorations->posX[i] = partsTable->curPos.x;
+        decorations->posY[i] = partsTable->curPos.y;
+        decorations->posZ[i] = partsTable->curPos.z;
+        decorations->yaw[i] = playerActor->yaw;
+        decorations->rotPivotOffsetX[i] = playerActor->rotPivotOffset.x * playerActor->scalingFactor;
+        decorations->rotPivotOffsetY[i] = playerActor->rotPivotOffset.y * playerActor->scalingFactor;
 
-        decorationTable->rotX[i] = clamp_angle(playerActor->rot.x) * 0.5f;
-        decorationTable->rotY[i] = clamp_angle(playerActor->rot.y) * 0.5f;
-        decorationTable->rotZ[i] = clamp_angle(playerActor->rot.z) * 0.5f;
+        decorations->rotX[i] = clamp_angle(playerActor->rot.x) * 0.5f;
+        decorations->rotY[i] = clamp_angle(playerActor->rot.y) * 0.5f;
+        decorations->rotZ[i] = clamp_angle(playerActor->rot.z) * 0.5f;
     }
 }
 
 void disable_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
 
-    if (decorationTable->blurEnableCount != 0) {
-        decorationTable->blurEnableCount--;
-        if (decorationTable->blurEnableCount == 0) {
-            decorationTable->blurDisableDelay = 20;
+    if (decorations->blurEnableCount != 0) {
+        decorations->blurEnableCount--;
+        if (decorations->blurEnableCount == 0) {
+            decorations->blurDisableDelay = 20;
         }
     }
 }
@@ -320,13 +320,13 @@ void disable_player_blur(void) {
 void reset_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
 
-    if (decorationTable->blurEnableCount != 0) {
-        decorationTable->blurEnableCount--;
-        if (decorationTable->blurEnableCount == 0) {
+    if (decorations->blurEnableCount != 0) {
+        decorations->blurEnableCount--;
+        if (decorations->blurEnableCount == 0) {
             playerActor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
-            decorationTable->blurDisableDelay = 1;
+            decorations->blurDisableDelay = 1;
         }
     }
 }
@@ -334,46 +334,46 @@ void reset_player_blur(void) {
 void force_disable_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
 
-    decorationTable->blurEnableCount = 0;
-    decorationTable->blurDisableDelay = 20;
+    decorations->blurEnableCount = 0;
+    decorations->blurDisableDelay = 20;
 }
 
 void force_disable_player_blur_immediately(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
 
     playerActor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
-    decorationTable->blurEnableCount = 0;
-    decorationTable->blurDisableDelay = 1;
+    decorations->blurEnableCount = 0;
+    decorations->blurDisableDelay = 1;
 }
 
 void update_player_actor_blur_history(Actor* actor) {
     ActorPart* partsTable = actor->partsTable;
-    DecorationTable* decorationTable = partsTable->decorationTable;
+    DecorationTable* decorations = partsTable->decorationTable;
 
     if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != NULL) {
-        s32 i = decorationTable->blurBufferPos;
+        s32 i = decorations->blurBufferPos;
 
-        decorationTable->posX[i] = partsTable->curPos.x;
-        decorationTable->posY[i] = partsTable->curPos.y;
-        decorationTable->posZ[i] = partsTable->curPos.z;
-        decorationTable->yaw[i] = actor->yaw;
+        decorations->posX[i] = partsTable->curPos.x;
+        decorations->posY[i] = partsTable->curPos.y;
+        decorations->posZ[i] = partsTable->curPos.z;
+        decorations->yaw[i] = actor->yaw;
 
-        decorationTable->rotPivotOffsetX[i] = actor->rotPivotOffset.x * actor->scalingFactor;
-        decorationTable->rotPivotOffsetY[i] = actor->rotPivotOffset.y * actor->scalingFactor;
+        decorations->rotPivotOffsetX[i] = actor->rotPivotOffset.x * actor->scalingFactor;
+        decorations->rotPivotOffsetY[i] = actor->rotPivotOffset.y * actor->scalingFactor;
 
-        decorationTable->rotX[i] = clamp_angle(actor->rot.x) * 0.5f;
-        decorationTable->rotY[i] = clamp_angle(actor->rot.y) * 0.5f;
-        decorationTable->rotZ[i] = clamp_angle(actor->rot.z) * 0.5f;
+        decorations->rotX[i] = clamp_angle(actor->rot.x) * 0.5f;
+        decorations->rotY[i] = clamp_angle(actor->rot.y) * 0.5f;
+        decorations->rotZ[i] = clamp_angle(actor->rot.z) * 0.5f;
 
         i++;
-        if (i >= ARRAY_COUNT(decorationTable->posX)) {
+        if (i >= ARRAY_COUNT(decorations->posX)) {
             i = 0;
         }
-        decorationTable->blurBufferPos = i;
+        decorations->blurBufferPos = i;
     }
 }
 
@@ -386,7 +386,7 @@ void appendGfx_player_actor_blur(Actor* actor) {
     s32 drawIdx;
     s32 yaw;
     ActorPart* partTable;
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     f32 rotX, rotY, rotZ;
     s32 prevOpacity;
     s32 opacity;
@@ -398,17 +398,17 @@ void appendGfx_player_actor_blur(Actor* actor) {
     f32 x, y, z;
 
     partTable = actor->partsTable;
-    decorationTable = partTable->decorationTable;
-    if (decorationTable->blurDisableDelay != 0) {
-        decorationTable->blurDisableDelay--;
-        if (decorationTable->blurDisableDelay == 0) {
+    decorations = partTable->decorationTable;
+    if (decorations->blurDisableDelay != 0) {
+        decorations->blurDisableDelay--;
+        if (decorations->blurDisableDelay == 0) {
             actor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
             return;
         }
     }
 
     if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != NULL) {
-        bufPos = decorationTable->blurBufferPos;
+        bufPos = decorations->blurBufferPos;
         strideIdx = 0;
         drawIdx = 0;
 
@@ -416,9 +416,9 @@ void appendGfx_player_actor_blur(Actor* actor) {
             bufPos--;
             strideIdx++;
             if (bufPos < 0) {
-                bufPos = ARRAY_COUNT(decorationTable->posX) - 1;
+                bufPos = ARRAY_COUNT(decorations->posX) - 1;
             }
-            if (bufPos == decorationTable->blurBufferPos) {
+            if (bufPos == decorations->blurBufferPos) {
                 break;
             }
 
@@ -430,24 +430,24 @@ void appendGfx_player_actor_blur(Actor* actor) {
             strideIdx = 0;
             drawIdx++;
 
-            if (decorationTable->blurDrawCount < drawIdx) {
+            if (decorations->blurDrawCount < drawIdx) {
                 break;
             }
 
             opacity = partTable->opacity;
 
-            x = decorationTable->posX[bufPos];
-            y = decorationTable->posY[bufPos];
-            z = decorationTable->posZ[bufPos];
+            x = decorations->posX[bufPos];
+            y = decorations->posY[bufPos];
+            z = decorations->posZ[bufPos];
 
-            yaw = decorationTable->yaw[bufPos];
+            yaw = decorations->yaw[bufPos];
 
-            pivotOffsetX = decorationTable->rotPivotOffsetX[bufPos];
-            pivotOffsetY = decorationTable->rotPivotOffsetY[bufPos];
+            pivotOffsetX = decorations->rotPivotOffsetX[bufPos];
+            pivotOffsetY = decorations->rotPivotOffsetY[bufPos];
 
-            rotX = decorationTable->rotX[bufPos] * 2;
-            rotY = decorationTable->rotY[bufPos] * 2;
-            rotZ = decorationTable->rotZ[bufPos] * 2;
+            rotX = decorations->rotX[bufPos] * 2;
+            rotY = decorations->rotY[bufPos] * 2;
+            rotZ = decorations->rotZ[bufPos] * 2;
 
             blurOpacityBase = 120;
             opacityLossIncrement = 20;
@@ -488,39 +488,39 @@ void appendGfx_player_actor_blur(Actor* actor) {
 void update_nonplayer_actor_blur_history(b32 isPartner, Actor* actor) {
     s32 numParts = actor->numParts;
     ActorPart* partsTable = actor->partsTable;
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     s32 i, j;
 
     for (i = 0; i < numParts; i++) {
         if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == NULL || partsTable->flags & ACTOR_PART_FLAG_NO_DECORATIONS) {
             partsTable = partsTable->nextPart;
         } else {
-            decorationTable = partsTable->decorationTable;
-            j = decorationTable->blurBufferPos;
+            decorations = partsTable->decorationTable;
+            j = decorations->blurBufferPos;
 
-            decorationTable->posX[j] = partsTable->curPos.x;
-            decorationTable->posY[j] = partsTable->curPos.y;
-            decorationTable->posZ[j] = partsTable->curPos.z;
-            decorationTable->yaw[j] = actor->yaw;
+            decorations->posX[j] = partsTable->curPos.x;
+            decorations->posY[j] = partsTable->curPos.y;
+            decorations->posZ[j] = partsTable->curPos.z;
+            decorations->yaw[j] = actor->yaw;
 
-            decorationTable->rotPivotOffsetX[j] = actor->rotPivotOffset.x;
-            decorationTable->rotPivotOffsetY[j] = actor->rotPivotOffset.y;
+            decorations->rotPivotOffsetX[j] = actor->rotPivotOffset.x;
+            decorations->rotPivotOffsetY[j] = actor->rotPivotOffset.y;
 
-            decorationTable->rotX[j] = clamp_angle(actor->rot.x) * 0.5f;
-            decorationTable->rotY[j] = clamp_angle(actor->rot.y) * 0.5f;
-            decorationTable->rotZ[j] = clamp_angle(actor->rot.z) * 0.5f;
+            decorations->rotX[j] = clamp_angle(actor->rot.x) * 0.5f;
+            decorations->rotY[j] = clamp_angle(actor->rot.y) * 0.5f;
+            decorations->rotZ[j] = clamp_angle(actor->rot.z) * 0.5f;
 
             j++;
-            if (j >= ARRAY_COUNT(decorationTable->posX)) {
+            if (j >= ARRAY_COUNT(decorations->posX)) {
                 j = 0;
             }
-            decorationTable->blurBufferPos = j;
+            decorations->blurBufferPos = j;
         }
     }
 }
 
 void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     ActorPart* partTable;
     Matrix4f mtxRotX, mtxRotY, mtxRotZ, mtxRotation;
     Matrix4f mtxScale, mtxTranslate;
@@ -558,10 +558,10 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
             continue;
         }
 
-        decorationTable = partTable->decorationTable;
-        if (decorationTable->blurDisableDelay != 0) {
-            decorationTable->blurDisableDelay--;
-            if (decorationTable->blurDisableDelay == 0) {
+        decorations = partTable->decorationTable;
+        if (decorations->blurDisableDelay != 0) {
+            decorations->blurDisableDelay--;
+            if (decorations->blurDisableDelay == 0) {
                 actor->flags &= ~ACTOR_FLAG_BLUR_ENABLED;
                 partTable = partTable->nextPart;
                 continue;
@@ -577,7 +577,7 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
             guScaleF(mtxPartScale, actor->scale.x * SPRITE_WORLD_SCALE_D, actor->scale.y * SPRITE_WORLD_SCALE_D, actor->scale.z * SPRITE_WORLD_SCALE_D);
         }
 
-        bufPos = decorationTable->blurBufferPos;
+        bufPos = decorations->blurBufferPos;
         strideIdx = 0;
         drawIdx = 0;
 
@@ -589,7 +589,7 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
                 bufPos = 15;
             }
 
-            if (bufPos == decorationTable->blurBufferPos) {
+            if (bufPos == decorations->blurBufferPos) {
                 break;
             }
 
@@ -601,24 +601,24 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
             strideIdx = 0;
             drawIdx++;
 
-            if (decorationTable->blurDrawCount < drawIdx) {
+            if (decorations->blurDrawCount < drawIdx) {
                 break;
             }
 
             opacity = partTable->opacity;
 
-            x = decorationTable->posX[bufPos];
-            y = decorationTable->posY[bufPos];
-            z = decorationTable->posZ[bufPos];
+            x = decorations->posX[bufPos];
+            y = decorations->posY[bufPos];
+            z = decorations->posZ[bufPos];
 
-            yaw = decorationTable->yaw[bufPos];
+            yaw = decorations->yaw[bufPos];
 
-            pivotX = decorationTable->rotPivotOffsetX[bufPos];
-            pivotY = decorationTable->rotPivotOffsetY[bufPos];
+            pivotX = decorations->rotPivotOffsetX[bufPos];
+            pivotY = decorations->rotPivotOffsetY[bufPos];
 
-            rotX = decorationTable->rotX[bufPos] * 2;
-            rotY = decorationTable->rotY[bufPos] * 2;
-            rotZ = decorationTable->rotZ[bufPos] * 2;
+            rotX = decorations->rotX[bufPos] * 2;
+            rotY = decorations->rotY[bufPos] * 2;
+            rotZ = decorations->rotZ[bufPos] * 2;
 
             blurOpacityBase = 120;
             opacityLossIncrement = 20;
@@ -1017,7 +1017,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
                 } while (0); // required to match
                 set_actor_pal_adjustment(actor, PAL_ADJUST_PLAYER_DEBUFF);
                 palChanged = TRUE;
-                func_80266EE8(actor, UNK_PAL_EFFECT_0);
+                set_actor_pal_effect(actor, GLOW_PAL_OFF);
                 decorChanged = TRUE;
             }
             if (isPartner && (gPlayerData.curPartner == PARTNER_WATT)) {
@@ -1029,7 +1029,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         }
         if (actor->isGlowing) {
             if (!decorChanged) {
-                func_80266EE8(actor, UNK_PAL_EFFECT_11);
+                set_actor_pal_effect(actor, GLOW_PAL_ON);
             }
             decorChanged = TRUE;
         }
@@ -1061,7 +1061,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
             set_actor_pal_adjustment(actor, PAL_ADJUST_NONE);
         }
         if (!decorChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
-            func_80266EE8(actor, UNK_PAL_EFFECT_0);
+            set_actor_pal_effect(actor, GLOW_PAL_OFF);
         }
 
         // adjust idle animation for status
@@ -1224,12 +1224,12 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
 
         if (part->spriteInstanceID >= 0) {
             if (!isPartner) {
-                func_8025C840(1, part, partYaw, 0);
-                func_8025CCC8(1, part, partYaw, 0);
+                update_part_glow(TRUE, part, partYaw, FALSE);
+                update_part_flash(TRUE, part, partYaw, FALSE);
                 render_with_adjusted_palettes(SPRITE_MODE_NPC, part, partYaw, mtxTransform, 0);
             } else {
-                func_8025C840(1, part, clamp_angle(180.0f - partYaw), 0);
-                func_8025CCC8(1, part, clamp_angle(180.0f - partYaw), 0);
+                update_part_glow(TRUE, part, clamp_angle(180.0f - partYaw), FALSE);
+                update_part_flash(TRUE, part, clamp_angle(180.0f - partYaw), FALSE);
                 render_with_adjusted_palettes(SPRITE_MODE_NPC, part, clamp_angle(180.0f - partYaw), mtxTransform, 0);
             }
 
@@ -1372,12 +1372,12 @@ void appendGfx_npc_actor_reflection(s32 flipYaw, Actor* actor) {
         guMtxCatF(mtxTemp, mtxMirror, mtxTransform);
 
         if (flipYaw == 0) {
-            func_8025C840(1, part, partYaw, 1);
-            func_8025CCC8(1, part, partYaw, 1);
+            update_part_glow(TRUE, part, partYaw, TRUE);
+            update_part_flash(TRUE, part, partYaw, TRUE);
             render_with_adjusted_palettes(SPRITE_MODE_NPC, part, partYaw, mtxTransform, 1);
         } else {
-            func_8025C840(1, part, clamp_angle(partYaw + 180.0f), 1);
-            func_8025CCC8(1, part, clamp_angle(partYaw + 180.0f), 1);
+            update_part_glow(TRUE, part, clamp_angle(partYaw + 180.0f), TRUE);
+            update_part_flash(TRUE, part, clamp_angle(partYaw + 180.0f), TRUE);
             render_with_adjusted_palettes(SPRITE_MODE_NPC, part, clamp_angle(partYaw + 180.0f), mtxTransform, 1);
         }
 
@@ -1462,7 +1462,7 @@ void appendGfx_player_actor(void* arg0) {
     ActorPart* playerParts;
     EffectInstance* effect;
     f32 playerPosX, playerPosY, playerPosZ, playerYaw;
-    s32 animChanged, palChanged, cond3, cond4;
+    s32 animChanged, palChanged, decorChanged, cond4;
     u32 lastAnim;
 
     player = battleStatus->playerActor;
@@ -1623,7 +1623,7 @@ void appendGfx_player_actor(void* arg0) {
     do {
         animChanged = FALSE;
         palChanged = FALSE;
-        cond3 = FALSE;
+        decorChanged = FALSE;
         cond4 = FALSE;
         lastAnim = playerParts->curAnimation;
     } while (0); // required to match
@@ -1665,8 +1665,8 @@ void appendGfx_player_actor(void* arg0) {
             }
             palChanged = TRUE;
 
-            func_80266EE8(player, UNK_PAL_EFFECT_0);
-            cond3 = TRUE;
+            set_actor_pal_effect(player, GLOW_PAL_OFF);
+            decorChanged = TRUE;
         }
     }
 
@@ -1678,10 +1678,10 @@ void appendGfx_player_actor(void* arg0) {
         if (!palChanged) {
             set_actor_pal_adjustment(player, PAL_ADJUST_NONE);
         }
-        func_80266EE8(player, UNK_PAL_EFFECT_0);
+        set_actor_pal_effect(player, GLOW_PAL_OFF);
         palChanged = TRUE;
         enable_status_debuff(player->hudElementDataIndex);
-        cond3 = TRUE;
+        decorChanged = TRUE;
         enable_status_2(player->hudElementDataIndex);
         cond4 = TRUE;
 
@@ -1721,10 +1721,10 @@ void appendGfx_player_actor(void* arg0) {
         palChanged = TRUE;
     }
     if (battleStatus->turboChargeTurnsLeft != 0) {
-        if (!cond3) {
-            func_80266EE8(player, UNK_PAL_EFFECT_11);
+        if (!decorChanged) {
+            set_actor_pal_effect(player, GLOW_PAL_ON);
         }
-        cond3 = TRUE;
+        decorChanged = TRUE;
     }
     if (is_ability_active(ABILITY_ZAP_TAP)) {
         if (!palChanged) {
@@ -1735,8 +1735,8 @@ void appendGfx_player_actor(void* arg0) {
     if (!palChanged) {
         set_actor_pal_adjustment(player, PAL_ADJUST_NONE);
     }
-    if (!cond3) {
-        func_80266EE8(player, UNK_PAL_EFFECT_0);
+    if (!decorChanged) {
+        set_actor_pal_effect(player, GLOW_PAL_OFF);
     }
     if (player->flags & ACTOR_FLAG_USING_IDLE_ANIM) {
         if (battleStatus->hustleTurns != 0) {
@@ -1900,8 +1900,8 @@ end:
     if (lastAnim != playerParts->curAnimation) {
         spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->curAnimation, playerParts->animationRate);
     }
-    func_8025C840(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
-    func_8025CCC8(0, playerParts, clamp_angle(playerYaw + 180.0f), 0);
+    update_part_glow(FALSE, playerParts, clamp_angle(playerYaw + 180.0f), FALSE);
+    update_part_flash(FALSE, playerParts, clamp_angle(playerYaw + 180.0f), FALSE);
     render_with_adjusted_palettes(SPRITE_MODE_PLAYER, playerParts, clamp_angle(playerYaw + 180.0f), mtxTransform, 0);
     _add_part_decoration(playerParts);
 }
@@ -1950,8 +1950,8 @@ void appendGfx_player_actor_reflection(void* arg0) {
     guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
     guMtxCatF(mtxTransform, mtxMirror, mtxTransform);
 
-    func_8025C840(0, part, clamp_angle(playerYaw + 180.0f), 1);
-    func_8025CCC8(0, part, clamp_angle(playerYaw + 180.0f), 1);
+    update_part_glow(FALSE, part, clamp_angle(playerYaw + 180.0f), TRUE);
+    update_part_flash(FALSE, part, clamp_angle(playerYaw + 180.0f), TRUE);
     render_with_adjusted_palettes(SPRITE_MODE_PLAYER, part, clamp_angle(playerYaw + 180.0f), mtxTransform, TRUE);
 }
 
@@ -2035,30 +2035,30 @@ s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
     return 0;
 }
 
-void func_80259494(ActorPart* part) {
-    DecorationTable* decor = part->decorationTable;
+void make_flash_palettes(ActorPart* part) {
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR src;
     PAL_PTR dest;
     s32 i, j;
 
-    for (i = 0; i < decor->originalPalettesCount; i++) {
-        if (decor->adjustedPalettes[i] != NULL) {
-            src = decor->adjustedPalettes[i];
-            dest = decor->copiedPalettes[1][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        if (decorations->adjustedPalettes[i] != NULL) {
+            src = decorations->adjustedPalettes[i];
+            dest = decorations->copiedPalettes[1][i];
 
             for (j = 0; j < SPR_PAL_SIZE; j++) {
-                *dest = *src | 0xFFFE;
+                *dest = *src | 0xFFFE; // pure white, not affecting alpha bit
                 src++;
                 dest++;
 
             }
-            decor->unk_76C[i] = decor->copiedPalettes[1][i];
+            decorations->flashPalettes[i] = decorations->copiedPalettes[1][i];
         }
     }
 }
 
-void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
-    DecorationTable* decor = part->decorationTable;
+void func_unkA_draw_npc(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* decorations = part->decorationTable;
     s32 opacity = 255;
     s32 idMask = 0;
     PAL_PTR dest;
@@ -2074,18 +2074,18 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
         opacity = (opacity * 120) / 255;
     }
 
-    if (decor->unk_768 != 0) {
-        decor->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 0x10);
-        decor->originalPalettesCount = 0;
-        while (decor->originalPalettesList[decor->originalPalettesCount] != (PAL_PTR) -1) {
-            decor->originalPalettesCount++;
+    if (decorations->flashEnabled != FLASH_PAL_OFF) {
+        decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 0x10);
+        decorations->originalPalettesCount = 0;
+        while (decorations->originalPalettesList[decorations->originalPalettesCount] != (PAL_PTR) -1) {
+            decorations->originalPalettesCount++;
         }
 
-        for (i = 0; i < decor->originalPalettesCount; i++) {
-            src = decor->originalPalettesList[i];
-            dest = decor->copiedPalettes[0][i];
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            src = decorations->originalPalettesList[i];
+            dest = decorations->copiedPalettes[0][i];
             if (src != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decor->copiedPalettes[0][i]); j++) {
+                for (j = 0; j < ARRAY_COUNT(decorations->copiedPalettes[0][i]); j++) {
                     *dest = *src;
                     src++;
                     dest++;
@@ -2093,18 +2093,18 @@ void func_8025950C(ActorPart* part, s32 yaw, Matrix4f mtx) {
             }
         }
 
-        for (i = 0; i < decor->originalPalettesCount; i++) {
-            decor->adjustedPalettes[i] = decor->copiedPalettes[0][i];
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
         }
 
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     } else {
         spr_draw_npc_sprite(part->spriteInstanceID | idMask, yaw, opacity, NULL, mtx);
     }
 }
 
-void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
-    DecorationTable* decorationTable = part->decorationTable;
+void func_unkB_draw_npc(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* decorations = part->decorationTable;
     s32 opacity = 255;
     s32 idMask = 0;
 
@@ -2118,16 +2118,16 @@ void func_802596C0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         opacity = (opacity * 120) / 255;
     }
 
-    if (decorationTable->unk_768 != 0) {
-        func_80259494(part);
-        spr_draw_npc_sprite(part->spriteInstanceID | DRAW_SPRITE_OVERRIDE_PALETTES | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
+    if (decorations->flashEnabled != FLASH_PAL_OFF) {
+        make_flash_palettes(part);
+        spr_draw_npc_sprite(part->spriteInstanceID | DRAW_SPRITE_OVERRIDE_PALETTES | idMask, yaw, opacity, decorations->flashPalettes, mtx);
     } else {
-        spr_draw_npc_sprite(part->spriteInstanceID | DRAW_SPRITE_OVERRIDE_PALETTES | idMask, yaw, opacity, decorationTable->adjustedPalettes, mtx);
+        spr_draw_npc_sprite(part->spriteInstanceID | DRAW_SPRITE_OVERRIDE_PALETTES | idMask, yaw, opacity, decorations->adjustedPalettes, mtx);
     }
 }
 
-void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
-    DecorationTable* decor = part->decorationTable;
+void func_unkA_draw_player(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* decorations = part->decorationTable;
     s32 opacity = 255;
     s32 idMask = 0;
     PAL_PTR src;
@@ -2143,36 +2143,36 @@ void func_802597B0(ActorPart* part, s32 yaw, Matrix4f mtx) {
         opacity = (opacity * 120) / 255;
     }
 
-    if (decor->unk_768 != 0) {
-        decor->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-        decor->originalPalettesCount = 0;
+    if (decorations->flashEnabled != FLASH_PAL_OFF) {
+        decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+        decorations->originalPalettesCount = 0;
 
-        while (decor->originalPalettesList[decor->originalPalettesCount] != (PAL_PTR) -1) {
-            decor->originalPalettesCount++;
+        while (decorations->originalPalettesList[decorations->originalPalettesCount] != (PAL_PTR) -1) {
+            decorations->originalPalettesCount++;
         }
 
-        for (i = 0; i < decor->originalPalettesCount; i++) {
-            src = decor->originalPalettesList[i];
-            dest = decor->copiedPalettes[0][i];
-            if (decor->originalPalettesList[i] != NULL) {
-                for (j = 0; j < ARRAY_COUNT(decor->copiedPalettes[0][i]); j++) {
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            src = decorations->originalPalettesList[i];
+            dest = decorations->copiedPalettes[0][i];
+            if (decorations->originalPalettesList[i] != NULL) {
+                for (j = 0; j < ARRAY_COUNT(decorations->copiedPalettes[0][i]); j++) {
                     *dest = *src;
                     dest++;
                     src++;
                 }
             }
         }
-        for (i = 0; i < decor->originalPalettesCount; i++) {
-            decor->adjustedPalettes[i] = decor->copiedPalettes[0][i];
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
         }
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
         spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, NULL, mtx);
     }
 }
 
-void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
-    DecorationTable* decorationTable = part->decorationTable;
+void func_unkB_draw_player(ActorPart* part, s32 yaw, Matrix4f mtx) {
+    DecorationTable* decorations = part->decorationTable;
     s32 opacity = 255;
     s32 idMask = 0;
 
@@ -2185,58 +2185,58 @@ void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
         opacity = (opacity * 120) / 255;
     }
 
-    if (decorationTable->unk_768 != 0) {
-        func_80259494(part);
+    if (decorations->flashEnabled != FLASH_PAL_OFF) {
+        make_flash_palettes(part);
         idMask |= DRAW_SPRITE_OVERRIDE_PALETTES;
-        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorationTable->unk_76C, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorations->flashPalettes, mtx);
     } else {
         idMask |= DRAW_SPRITE_OVERRIDE_PALETTES;
-        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorationTable->adjustedPalettes, mtx);
+        spr_draw_player_sprite(PLAYER_SPRITE_MAIN | idMask, yaw, opacity, decorations->adjustedPalettes, mtx);
     }
 }
 
 void render_without_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         part->verticalStretch = 1;
         part->palAnimPosOffset[0] = 0;
         part->palAnimPosOffset[1] = 0;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->resetPalAdjust = FALSE;
     }
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_802597B0(part, yaw, mtx);
+        func_unkA_draw_player(part, yaw, mtx);
     } else {
-        func_8025950C(part, yaw, mtx);
+        func_unkA_draw_npc(part, yaw, mtx);
     }
 }
 
 void render_with_sleep_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     s32 i, j;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         }
-        decorationTable->palAnimState = 0;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->palAnimState = 0;
+        decorations->resetPalAdjust = FALSE;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        PAL_PTR palIn = decorationTable->originalPalettesList[i];
-        PAL_PTR palOut = decorationTable->copiedPalettes[0][i];
-        decorationTable->adjustedPalettes[i] = palOut;
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        PAL_PTR palIn = decorations->originalPalettesList[i];
+        PAL_PTR palOut = decorations->copiedPalettes[0][i];
+        decorations->adjustedPalettes[i] = palOut;
         if (palIn != NULL) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
@@ -2254,46 +2254,46 @@ void render_with_sleep_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matri
             }
         }
     }
-    switch (decorationTable->palAnimState) {
+    switch (decorations->palAnimState) {
         case 0:
         case 1:
             if (isNpcSprite == SPRITE_MODE_PLAYER) {
-                func_8025995C(part, yaw, mtx);
+                func_unkB_draw_player(part, yaw, mtx);
             } else {
-                func_802596C0(part, yaw, mtx);
+                func_unkB_draw_npc(part, yaw, mtx);
             }
             break;
     }
 }
 
 void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
     s32 i, j;
     s32 paletteType;
     s32 staticPalIdx;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
+            decorations->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
+            decorations->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
         }
 
-        for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-            palIn = decorationTable->originalPalettesList[i];
-            palOut = decorationTable->copiedPalettes[0][i];
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            palIn = decorations->originalPalettesList[i];
+            palOut = decorations->copiedPalettes[0][i];
             if (palIn != NULL) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *palIn++;
@@ -2301,31 +2301,31 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             }
         }
 
-        decorationTable->palAnimState = -2;
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->resetPalAdjust = FALSE;
-        decorationTable->nextPalTime = 0;
+        decorations->palAnimState = -2;
+        decorations->palBlendAlpha = 0;
+        decorations->resetPalAdjust = FALSE;
+        decorations->nextPalTime = 0;
     }
 
     if (!skipAnimation) {
-        if (decorationTable->nextPalTime == 0) {
-            decorationTable->palAnimState += 2;
-            if (StaticPalettesAnim[decorationTable->palAnimState] == PAL_ANIM_END) {
-                decorationTable->palAnimState = 0;
+        if (decorations->nextPalTime == 0) {
+            decorations->palAnimState += 2;
+            if (StaticPalettesAnim[decorations->palAnimState] == PAL_ANIM_END) {
+                decorations->palAnimState = 0;
             }
-            decorationTable->nextPalTime = StaticPalettesAnim[decorationTable->palAnimState + 1] / 2;
+            decorations->nextPalTime = StaticPalettesAnim[decorations->palAnimState + 1] / 2;
         }
-        paletteType = StaticPalettesAnim[decorationTable->palAnimState];
-        decorationTable->nextPalTime--;
+        paletteType = StaticPalettesAnim[decorations->palAnimState];
+        decorations->nextPalTime--;
     } else {
-        paletteType = StaticPalettesAnim[decorationTable->palAnimState];
+        paletteType = StaticPalettesAnim[decorations->palAnimState];
     }
 
     switch (paletteType) {
         case STATIC_DEFAULT: // no change
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-                palIn = decorationTable->originalPalettesList[i];
-                palOut = decorationTable->copiedPalettes[0][i];
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                palIn = decorations->originalPalettesList[i];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2334,10 +2334,10 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             }
             break;
         case STATIC_BRIGHT: // bright yellow
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-                staticPalIdx = decorationTable->spriteColorVariations * STANDARD_PAL_STATIC + i;
-                palIn = decorationTable->originalPalettesList[staticPalIdx];
-                palOut = decorationTable->copiedPalettes[0][i];
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                staticPalIdx = decorations->spriteColorVariations * STANDARD_PAL_STATIC + i;
+                palIn = decorations->originalPalettesList[staticPalIdx];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2346,9 +2346,9 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             }
             break;
         case STATIC_DARK: // darkened via code
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-                palIn = decorationTable->originalPalettesList[i];
-                palOut = decorationTable->copiedPalettes[0][i];
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                palIn = decorations->originalPalettesList[i];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         u8 r = UNPACK_PAL_R(*palIn);
@@ -2368,53 +2368,53 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             break;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     }
 
     if (!skipAnimation) {
-        decorationTable->palBlendAlpha--;
+        decorations->palBlendAlpha--;
     }
 }
 
 void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
     s32 i, j;
     s32 temp;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 2;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 2;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         }
 
-        decorationTable->palAnimState = 0;
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->nextPalTime = 0;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->palAnimState = 0;
+        decorations->palBlendAlpha = 0;
+        decorations->nextPalTime = 0;
+        decorations->resetPalAdjust = FALSE;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        palIn = decorationTable->originalPalettesList[i];
-        palOut = decorationTable->copiedPalettes[0][i];
-        decorationTable->adjustedPalettes[i] = palOut;
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        palIn = decorations->originalPalettesList[i];
+        palOut = decorations->copiedPalettes[0][i];
+        decorations->adjustedPalettes[i] = palOut;
         if (palIn != NULL) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
@@ -2433,66 +2433,66 @@ void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix
         }
     }
 
-    if (decorationTable->nextPalTime <= 0) {
-        part->palAnimPosOffset[0] = FearPaletteAnimXOffsets[abs(decorationTable->nextPalTime)];
+    if (decorations->nextPalTime <= 0) {
+        part->palAnimPosOffset[0] = FearPaletteAnimXOffsets[abs(decorations->nextPalTime)];
         if (part->palAnimPosOffset[0] == PAL_ANIM_END) {
             part->palAnimPosOffset[0] = 0;
             // 30-90
-            decorationTable->nextPalTime = rand_int(60) + 30;
+            decorations->nextPalTime = rand_int(60) + 30;
         }
     }
 
     if (!skipAnimation) {
-        decorationTable->nextPalTime--;
+        decorations->nextPalTime--;
     }
 
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     }
 }
 
 void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
     s32 i, j;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
+            decorations->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
+            decorations->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
         }
 
-        decorationTable->palAnimState = 0;
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->palAnimState = 0;
+        decorations->palBlendAlpha = 0;
+        decorations->resetPalAdjust = FALSE;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        palIn = decorationTable->originalPalettesList[i];
-        palOut = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        palIn = decorations->originalPalettesList[i];
+        palOut = decorations->copiedPalettes[0][i];
         if (palIn != NULL) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 *palOut++ = *palIn++;
             }
         }
     }
-    for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-        palIn = decorationTable->originalPalettesList[decorationTable->spriteColorVariations + i];
-        palOut = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->spriteColorVariations; i++) {
+        palIn = decorations->originalPalettesList[decorations->spriteColorVariations + i];
+        palOut = decorations->copiedPalettes[0][i];
         if (palIn != NULL) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 *palOut++ = *palIn++;
@@ -2500,47 +2500,47 @@ void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
         }
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     }
 }
 
 void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
     s32 i, j;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         }
 
-        decorationTable->palAnimState = 0;
-        decorationTable->nextPalTime = 0;
-        decorationTable->palBlendAlpha = 10;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->palAnimState = 0;
+        decorations->nextPalTime = 0;
+        decorations->palBlendAlpha = 10;
+        decorations->resetPalAdjust = FALSE;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        palIn = decorationTable->originalPalettesList[i];
-        palOut = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        palIn = decorations->originalPalettesList[i];
+        palOut = decorations->copiedPalettes[0][i];
         if (palIn != NULL) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
@@ -2566,83 +2566,82 @@ void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Ma
         }
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
-    switch (decorationTable->palAnimState) {
+    switch (decorations->palAnimState) {
         case 0:
         case 1:
-            if (decorationTable->nextPalTime <= 0) {
-                part->palAnimPosOffset[1] = ParalyzePaletteAnimXOffsets[abs(decorationTable->nextPalTime)];
+            if (decorations->nextPalTime <= 0) {
+                part->palAnimPosOffset[1] = ParalyzePaletteAnimXOffsets[abs(decorations->nextPalTime)];
                 if (part->palAnimPosOffset[1] == PAL_ANIM_END) {
                     part->palAnimPosOffset[1] = 0;
-                    // 30-90
-                    decorationTable->nextPalTime = rand_int(60) + 30;
+                    decorations->nextPalTime = rand_int(60) + 30; // 30-90
                 }
             }
 
             if (!skipAnimation) {
-                decorationTable->nextPalTime--;
+                decorations->nextPalTime--;
             }
 
-            switch (decorationTable->palBlendAlpha) {
+            switch (decorations->palBlendAlpha) {
                 case 10:
                 case 12:
                     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-                        func_8025995C(part, yaw, mtx);
+                        func_unkB_draw_player(part, yaw, mtx);
                     } else {
-                        func_802596C0(part, yaw, mtx);
+                        func_unkB_draw_npc(part, yaw, mtx);
                     }
                     break;
                 case 13:
-                    decorationTable->palBlendAlpha = 0;
+                    decorations->palBlendAlpha = 0;
                     // fallthrough
                 default:
                     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-                        func_802597B0(part, yaw, mtx);
+                        func_unkA_draw_player(part, yaw, mtx);
                     } else {
-                        func_8025950C(part, yaw, mtx);
+                        func_unkA_draw_npc(part, yaw, mtx);
                     }
                     break;
             }
 
             if (!skipAnimation) {
-                decorationTable->palBlendAlpha++;
+                decorations->palBlendAlpha++;
             }
             break;
     }
 }
 
 void render_with_berserk_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     s32 i, j;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->palAnimState = 0;
+            decorations->palAnimState = 0;
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->palAnimState = 0;
+            decorations->palAnimState = 0;
         }
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->palAnimState = 0;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->palBlendAlpha = 0;
+        decorations->palAnimState = 0;
+        decorations->resetPalAdjust = FALSE;
     }
 
     // adjust each palette
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        PAL_PTR palIn = decorationTable->originalPalettesList[i];
-        PAL_PTR palOut = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        PAL_PTR palIn = decorations->originalPalettesList[i];
+        PAL_PTR palOut = decorations->copiedPalettes[0][i];
         if (palIn != NULL) {
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 u8 r = UNPACK_PAL_R(*palIn);
@@ -2661,45 +2660,45 @@ void render_with_berserk_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
         }
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     }
 }
 
 void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
     s32 i, j;
     s32 palIdx;
     s32 brightnessLevel;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
+            decorations->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
+            decorations->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
         }
 
-        for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-            palIn = decorationTable->originalPalettesList[i];
-            palOut = decorationTable->copiedPalettes[0][i];
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            palIn = decorations->originalPalettesList[i];
+            palOut = decorations->copiedPalettes[0][i];
             if (palIn != NULL) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *palIn++;
@@ -2707,33 +2706,33 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
             }
         }
 
-        decorationTable->palAnimState = -2;
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->resetPalAdjust = FALSE;
-        decorationTable->nextPalTime = 0;
+        decorations->palAnimState = -2;
+        decorations->palBlendAlpha = 0;
+        decorations->resetPalAdjust = FALSE;
+        decorations->nextPalTime = 0;
     }
 
     if (!skipAnimation) {
-        if (decorationTable->nextPalTime == 0) {
-            decorationTable->palAnimState += 2;
-            if (WattIdlePalettesAnim[decorationTable->palAnimState] == PAL_ANIM_END) {
-                decorationTable->palAnimState = 0;
+        if (decorations->nextPalTime == 0) {
+            decorations->palAnimState += 2;
+            if (bWattIdlePalettesAnim[decorations->palAnimState] == PAL_ANIM_END) {
+                decorations->palAnimState = 0;
             }
-            decorationTable->nextPalTime = WattIdlePalettesAnim[decorationTable->palAnimState + 1] / 2;
+            decorations->nextPalTime = bWattIdlePalettesAnim[decorations->palAnimState + 1] / 2;
         }
-        brightnessLevel = WattIdlePalettesAnim[decorationTable->palAnimState];
-        decorationTable->nextPalTime--;
+        brightnessLevel = bWattIdlePalettesAnim[decorations->palAnimState];
+        decorations->nextPalTime--;
     } else {
         //@bug if only called with skipAnimation set, palAnimPos will always be -2 and the array access is OOB
-        brightnessLevel = WattIdlePalettesAnim[decorationTable->palAnimState];
+        brightnessLevel = bWattIdlePalettesAnim[decorations->palAnimState];
     }
 
     switch (brightnessLevel) {
         case WATT_DEFAULT:
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
                 // use watt's base palettes
-                palIn = decorationTable->originalPalettesList[i];
-                palOut = decorationTable->copiedPalettes[0][i];
+                palIn = decorations->originalPalettesList[i];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2742,11 +2741,11 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
             }
             break;
         case WATT_BRIGHTEST:
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
                 // use watt's Brightest palettes
-                palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
-                palIn = decorationTable->originalPalettesList[palIdx];
-                palOut = decorationTable->copiedPalettes[0][i];
+                palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
+                palIn = decorations->originalPalettesList[palIdx];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2755,11 +2754,11 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
             }
             break;
         case WATT_BRIGHTER:
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
                 // use watt's Brighter palettes
-                palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
-                palIn = decorationTable->originalPalettesList[palIdx];
-                palOut = decorationTable->copiedPalettes[0][i];
+                palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
+                palIn = decorations->originalPalettesList[palIdx];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2769,49 +2768,49 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
             break;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     }
 
     if (!skipAnimation) {
-        decorationTable->palBlendAlpha--;
+        decorations->palBlendAlpha--;
     }
 }
 
 void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
     s32 i, j;
     s32 palIdx;
     s32 brightness;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
+            decorations->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
+            decorations->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
         }
 
-        for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-            palIn = decorationTable->originalPalettesList[i];
-            palOut = decorationTable->copiedPalettes[0][i];
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            palIn = decorations->originalPalettesList[i];
+            palOut = decorations->copiedPalettes[0][i];
             if (palIn != NULL) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *palIn++;
@@ -2819,32 +2818,32 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
             }
         }
 
-        decorationTable->palAnimState = -2;
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->resetPalAdjust = FALSE;
-        decorationTable->nextPalTime = 0;
+        decorations->palAnimState = -2;
+        decorations->palBlendAlpha = 0;
+        decorations->resetPalAdjust = FALSE;
+        decorations->nextPalTime = 0;
     }
 
     if (!skipAnimation) {
-        if (decorationTable->nextPalTime == 0) {
-            decorationTable->palAnimState += 2;
-            if (WattAttackPalettesAnim[decorationTable->palAnimState] == PAL_ANIM_END) {
-                decorationTable->palAnimState = 0;
+        if (decorations->nextPalTime == 0) {
+            decorations->palAnimState += 2;
+            if (WattAttackPalettesAnim[decorations->palAnimState] == PAL_ANIM_END) {
+                decorations->palAnimState = 0;
             }
-            decorationTable->nextPalTime = WattAttackPalettesAnim[decorationTable->palAnimState + 1] / 2;
+            decorations->nextPalTime = WattAttackPalettesAnim[decorations->palAnimState + 1] / 2;
         }
-        brightness = WattAttackPalettesAnim[decorationTable->palAnimState];
-        decorationTable->nextPalTime--;
+        brightness = WattAttackPalettesAnim[decorations->palAnimState];
+        decorations->nextPalTime--;
     } else {
         //@bug if only called with skipAnimation set, palAnimPos will always be -2 and the array access is OOB
-        brightness = WattAttackPalettesAnim[decorationTable->palAnimState];
+        brightness = WattAttackPalettesAnim[decorations->palAnimState];
     }
 
     switch (brightness) {
         case WATT_DEFAULT:
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-                palIn = decorationTable->originalPalettesList[i];
-                palOut = decorationTable->copiedPalettes[0][i];
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                palIn = decorations->originalPalettesList[i];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2853,11 +2852,11 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
             }
             break;
         case WATT_BRIGHTEST:
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
                 // use watt's Brightest palettes
-                palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
-                palIn = decorationTable->originalPalettesList[palIdx];
-                palOut = decorationTable->copiedPalettes[0][i];
+                palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
+                palIn = decorations->originalPalettesList[palIdx];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2866,11 +2865,11 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
             }
             break;
         case WATT_BRIGHTER:
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
                 // use watt's Brighter palettes
-                palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
-                palIn = decorationTable->originalPalettesList[palIdx];
-                palOut = decorationTable->copiedPalettes[0][i];
+                palIdx = decorations->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
+                palIn = decorations->originalPalettesList[palIdx];
+                palOut = decorations->copiedPalettes[0][i];
                 if (palIn != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *palOut++ = *palIn++;
@@ -2880,63 +2879,63 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
             break;
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
     if (isNpcSprite == SPRITE_MODE_PLAYER) {
-        func_8025995C(part, yaw, mtx);
+        func_unkB_draw_player(part, yaw, mtx);
     } else {
-        func_802596C0(part, yaw, mtx);
+        func_unkB_draw_npc(part, yaw, mtx);
     }
 
     if (!skipAnimation) {
-        decorationTable->palBlendAlpha--;
+        decorations->palBlendAlpha--;
     }
 }
 
 void render_with_player_debuff_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation, b32 isPoison) {
-    DecorationTable* decorationTable = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR color2;
     PAL_PTR color1;
     PAL_PTR palOut;
     s32 i, j;
     u8 blendAlpha;
 
-    if (decorationTable->resetPalAdjust) {
+    if (decorations->resetPalAdjust) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decorationTable->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
 
             if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
-                decorationTable->spriteColorVariations = SPR_PEACH_BTL_PAL_STRIDE;
+                decorations->spriteColorVariations = SPR_PEACH_BTL_PAL_STRIDE;
             } else {
-                decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
+                decorations->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
             }
         } else {
-            decorationTable->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decorationTable->originalPalettesCount = 0;
-            while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
-                decorationTable->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
+            decorations->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
         }
 
-        if (decorationTable->resetPalAdjust == TRUE) {
-            decorationTable->palAnimState = 0;
-            decorationTable->palBlendAlpha = 0;
+        if (decorations->resetPalAdjust == TRUE) {
+            decorations->palAnimState = 0;
+            decorations->palBlendAlpha = 0;
         } else {
-            decorationTable->palAnimState = 0;
-            decorationTable->palBlendAlpha = 255;
+            decorations->palAnimState = 0;
+            decorations->palBlendAlpha = 255;
         }
 
-        for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-            color2 = decorationTable->originalPalettesList[i];
-            color1 = decorationTable->copiedPalettes[0][i];
-            decorationTable->adjustedPalettes[i] = color1;
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            color2 = decorations->originalPalettesList[i];
+            color1 = decorations->copiedPalettes[0][i];
+            decorations->adjustedPalettes[i] = color1;
             if (color2 != NULL) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
@@ -2945,40 +2944,40 @@ void render_with_player_debuff_palettes(b32 isNpcSprite, ActorPart* part, s32 ya
         }
 
         if (isPoison) {
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
-                color2 = decorationTable->originalPalettesList[decorationTable->spriteColorVariations + i];
-                palOut = decorationTable->copiedPalettes[0][i];
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                color2 = decorations->originalPalettesList[decorations->spriteColorVariations + i];
+                palOut = decorations->copiedPalettes[0][i];
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *palOut++ = *color2++;
                 }
             }
         }
 
-        decorationTable->nextPalTime = 10;
-        decorationTable->palBlendAlpha = 0;
-        decorationTable->palAnimState = 0;
-        decorationTable->resetPalAdjust = FALSE;
+        decorations->nextPalTime = 10;
+        decorations->palBlendAlpha = 0;
+        decorations->palAnimState = 0;
+        decorations->resetPalAdjust = FALSE;
     }
 
-    if (decorationTable->palAnimState == 0) {
-        if (!skipAnimation && decorationTable->nextPalTime != 0) {
-            decorationTable->nextPalTime--;
+    if (decorations->palAnimState == 0) {
+        if (!skipAnimation && decorations->nextPalTime != 0) {
+            decorations->nextPalTime--;
         } else {
             if (!skipAnimation) {
-                decorationTable->palBlendAlpha += 2560;
-                if (decorationTable->palBlendAlpha > 255 * 100) {
-                    decorationTable->palBlendAlpha = 255 * 100;
+                decorations->palBlendAlpha += 2560;
+                if (decorations->palBlendAlpha > 255 * 100) {
+                    decorations->palBlendAlpha = 255 * 100;
                 }
             }
-            blendAlpha = decorationTable->palBlendAlpha / 100;
-            for (i = 0; i < decorationTable->spriteColorVariations; i++) {
+            blendAlpha = decorations->palBlendAlpha / 100;
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
                 if (!isPoison) {
-                    color2 = decorationTable->originalPalettesList[i];
+                    color2 = decorations->originalPalettesList[i];
                 } else {
-                    color2 = decorationTable->originalPalettesList[decorationTable->spriteColorVariations * STANDARD_PAL_POISON + i];
+                    color2 = decorations->originalPalettesList[decorations->spriteColorVariations * STANDARD_PAL_POISON + i];
                 }
-                color1 = decorationTable->originalPalettesList[decorationTable->spriteColorVariations * STANDARD_PAL_DIZZY + i];
-                palOut = decorationTable->copiedPalettes[0][i];
+                color1 = decorations->originalPalettesList[decorations->spriteColorVariations * STANDARD_PAL_DIZZY + i];
+                palOut = decorations->copiedPalettes[0][i];
 
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     u8 r2 = UNPACK_PAL_R(*color2);
@@ -2999,29 +2998,29 @@ void render_with_player_debuff_palettes(b32 isNpcSprite, ActorPart* part, s32 ya
                 }
             }
             if (blendAlpha == 255) {
-                decorationTable->palAnimState = 1;
+                decorations->palAnimState = 1;
             }
         }
     }
 
-    for (i = 0; i < decorationTable->originalPalettesCount; i++) {
-        decorationTable->adjustedPalettes[i] = decorationTable->copiedPalettes[0][i];
+    for (i = 0; i < decorations->originalPalettesCount; i++) {
+        decorations->adjustedPalettes[i] = decorations->copiedPalettes[0][i];
     }
 
-    switch (decorationTable->palAnimState) {
+    switch (decorations->palAnimState) {
         case 0:
         case 1:
             if (isNpcSprite == SPRITE_MODE_PLAYER) {
-                func_8025995C(part, yaw, mtx);
+                func_unkB_draw_player(part, yaw, mtx);
             } else {
-                func_802596C0(part, yaw, mtx);
+                func_unkB_draw_npc(part, yaw, mtx);
             }
             break;
     }
 }
 
 void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 hasDifferentIntervals, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decor = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR color1;
     PAL_PTR color2;
     PAL_PTR outColor;
@@ -3030,33 +3029,33 @@ void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 has
     u8 r2, g2, b2, a1;
     u8 r1, g1, b1;
 
-    if (decor->resetPalAdjust != 0) {
+    if (decorations->resetPalAdjust != 0) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decor->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decor->originalPalettesCount = 0;
-            while ((s32)decor->originalPalettesList[decor->originalPalettesCount] != -1) {
-                decor->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         } else {
-            decor->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decor->originalPalettesCount = 0;
-            while ((s32)decor->originalPalettesList[decor->originalPalettesCount] != -1) {
-                decor->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while ((s32)decorations->originalPalettesList[decorations->originalPalettesCount] != -1) {
+                decorations->originalPalettesCount++;
             }
         }
 
-        if (decor->resetPalAdjust == 1) {
-            decor->palAnimState = 0;
-            decor->palBlendAlpha = 0;
+        if (decorations->resetPalAdjust == 1) {
+            decorations->palAnimState = 0;
+            decorations->palBlendAlpha = 0;
         } else {
-            decor->palAnimState = 0;
-            decor->palBlendAlpha = 255;
+            decorations->palAnimState = 0;
+            decorations->palBlendAlpha = 255;
         }
 
-        for (i = 0; i < decor->originalPalettesCount; i++) {
-            color2 = decor->originalPalettesList[i];
-            color1 = decor->copiedPalettes[0][i];
-            decor->adjustedPalettes[i] = color1;
+        for (i = 0; i < decorations->originalPalettesCount; i++) {
+            color2 = decorations->originalPalettesList[i];
+            color1 = decorations->copiedPalettes[0][i];
+            decorations->adjustedPalettes[i] = color1;
             if (color2 != NULL) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
@@ -3065,43 +3064,43 @@ void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 has
         }
 
         if (!hasDifferentIntervals) {
-            decor->palswapTimeAtoB = decor->palswapTimeHoldA;
-            decor->palswapTimeHoldB = decor->palswapTimeAtoB;
-            decor->palswapTimeBtoA = decor->palswapTimeAtoB;
-            decor->palswapTimeHoldA = 0;
+            decorations->palswapTimeAtoB = decorations->palswapTimeHoldA;
+            decorations->palswapTimeHoldB = decorations->palswapTimeAtoB;
+            decorations->palswapTimeBtoA = decorations->palswapTimeAtoB;
+            decorations->palswapTimeHoldA = 0;
         }
 
-        decor->nextPalTime = decor->palswapTimeHoldA;
-        decor->palBlendAlpha = 0;
-        decor->palAnimState = PAL_SWAP_HOLD_A;
-        decor->resetPalAdjust = FALSE;
+        decorations->nextPalTime = decorations->palswapTimeHoldA;
+        decorations->palBlendAlpha = 0;
+        decorations->palAnimState = PAL_SWAP_HOLD_A;
+        decorations->resetPalAdjust = FALSE;
     }
 
     // blending from A -> B
-    switch (decor->palAnimState) {
+    switch (decorations->palAnimState) {
         case PAL_SWAP_HOLD_A:
             if (skipAnimation) {
                 break;
             }
-            if (decor->nextPalTime != 0) {
-                decor->nextPalTime--;
+            if (decorations->nextPalTime != 0) {
+                decorations->nextPalTime--;
                 break;
             }
-            decor->palBlendAlpha = 0;
-            decor->palAnimState = PAL_SWAP_A_TO_B;
+            decorations->palBlendAlpha = 0;
+            decorations->palAnimState = PAL_SWAP_A_TO_B;
             // fallthrough
         case PAL_SWAP_A_TO_B:
             if (!skipAnimation) {
-                decor->palBlendAlpha += 25600 / decor->palswapTimeAtoB;
-                if (decor->palBlendAlpha > 255 * 100) {
-                    decor->palBlendAlpha = 255 * 100;
+                decorations->palBlendAlpha += 25600 / decorations->palswapTimeAtoB;
+                if (decorations->palBlendAlpha > 255 * 100) {
+                    decorations->palBlendAlpha = 255 * 100;
                 }
             }
-            blendAlpha = decor->palBlendAlpha / 100;
+            blendAlpha = decorations->palBlendAlpha / 100;
             // blend two palettes
-            color2 = decor->originalPalettesList[decor->blendPalA];
-            color1 = decor->originalPalettesList[decor->blendPalB];
-            outColor = decor->adjustedPalettes[0] = decor->copiedPalettes[0][0];
+            color2 = decorations->originalPalettesList[decorations->blendPalA];
+            color1 = decorations->originalPalettesList[decorations->blendPalB];
+            outColor = decorations->adjustedPalettes[0] = decorations->copiedPalettes[0][0];
 
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 r2 = UNPACK_PAL_R(*color2);
@@ -3121,38 +3120,38 @@ void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 has
                 *outColor++ = PACK_PAL_RGBA(r1, g1, b1, a1);
             }
             if (blendAlpha == 255) {
-                decor->palAnimState = PAL_SWAP_HOLD_B;
-                decor->nextPalTime = decor->palswapTimeHoldB;
+                decorations->palAnimState = PAL_SWAP_HOLD_B;
+                decorations->nextPalTime = decorations->palswapTimeHoldB;
             }
             break;
     }
 
     // blending from B -> A
-    switch (decor->palAnimState) {
+    switch (decorations->palAnimState) {
         case PAL_SWAP_HOLD_B:
             if (skipAnimation) {
                 break;
             }
-            if (decor->nextPalTime != 0) {
-                decor->nextPalTime--;
+            if (decorations->nextPalTime != 0) {
+                decorations->nextPalTime--;
                 break;
             }
-            decor->palBlendAlpha = 0;
-            decor->palAnimState = PAL_SWAP_B_TO_A;
+            decorations->palBlendAlpha = 0;
+            decorations->palAnimState = PAL_SWAP_B_TO_A;
             // fallthrough
         case PAL_SWAP_B_TO_A:
             if (!skipAnimation) {
-                decor->palBlendAlpha += 25600 / decor->palswapTimeBtoA;
-                if (decor->palBlendAlpha > 255 * 100) {
-                    decor->palBlendAlpha = 255 * 100;
+                decorations->palBlendAlpha += 25600 / decorations->palswapTimeBtoA;
+                if (decorations->palBlendAlpha > 255 * 100) {
+                    decorations->palBlendAlpha = 255 * 100;
                 }
             }
-            blendAlpha = decor->palBlendAlpha / 100;
+            blendAlpha = decorations->palBlendAlpha / 100;
             // blend two palettes
-            color2 = decor->originalPalettesList[decor->blendPalB];
-            color1 = decor->originalPalettesList[decor->blendPalA];
-            outColor = decor->copiedPalettes[0][0];
-            decor->adjustedPalettes[0] = outColor;
+            color2 = decorations->originalPalettesList[decorations->blendPalB];
+            color1 = decorations->originalPalettesList[decorations->blendPalA];
+            outColor = decorations->copiedPalettes[0][0];
+            decorations->adjustedPalettes[0] = outColor;
 
             for (j = 0; j < SPR_PAL_SIZE; j++) {
                 r2 = UNPACK_PAL_R(*color2);
@@ -3172,28 +3171,28 @@ void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 has
                 *outColor++ = PACK_PAL_RGBA(r1, g1, b1, a1);
             }
             if (blendAlpha == 255) {
-                decor->palAnimState = PAL_SWAP_HOLD_A;
-                decor->nextPalTime = decor->palswapTimeHoldA;
+                decorations->palAnimState = PAL_SWAP_HOLD_A;
+                decorations->nextPalTime = decorations->palswapTimeHoldA;
             }
             break;
     }
 
-    switch (decor->palAnimState) {
+    switch (decorations->palAnimState) {
         case PAL_SWAP_HOLD_A:
         case PAL_SWAP_A_TO_B:
         case PAL_SWAP_HOLD_B:
         case PAL_SWAP_B_TO_A:
             if (isNpcSprite == SPRITE_MODE_PLAYER) {
-                func_8025995C(part, yaw, mtx);
+                func_unkB_draw_player(part, yaw, mtx);
             } else {
-                func_802596C0(part, yaw, mtx);
+                func_unkB_draw_npc(part, yaw, mtx);
             }
             break;
     }
 }
 
 void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
-    DecorationTable* decor = part->decorationTable;
+    DecorationTable* decorations = part->decorationTable;
     PAL_PTR color1;
     PAL_PTR color2;
     PAL_PTR outColor;
@@ -3202,34 +3201,34 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
     u8 r2, g2, b2, a1;
     u8 r1, g1, b1;
 
-    if (decor->resetPalAdjust != 0) {
+    if (decorations->resetPalAdjust != 0) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            decor->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
-            decor->originalPalettesCount = 0;
-            while (decor->originalPalettesList[decor->originalPalettesCount] != (PAL_PTR) -1) {
-                decor->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while (decorations->originalPalettesList[decorations->originalPalettesCount] != (PAL_PTR) -1) {
+                decorations->originalPalettesCount++;
             }
         } else {
-            decor->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
-            decor->originalPalettesCount = 0;
-            while (decor->originalPalettesList[decor->originalPalettesCount] != (PAL_PTR) -1) {
-                decor->originalPalettesCount++;
+            decorations->originalPalettesList = spr_get_npc_palettes(part->curAnimation >> 16);
+            decorations->originalPalettesCount = 0;
+            while (decorations->originalPalettesList[decorations->originalPalettesCount] != (PAL_PTR) -1) {
+                decorations->originalPalettesCount++;
             }
-            decor->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
+            decorations->spriteColorVariations = spr_get_npc_color_variations(part->curAnimation >> 16);
         }
 
-        if (decor->resetPalAdjust == 1) {
-            decor->palAnimState = 0;
-            decor->palBlendAlpha = 0;
+        if (decorations->resetPalAdjust == 1) {
+            decorations->palAnimState = 0;
+            decorations->palBlendAlpha = 0;
         } else {
-            decor->palAnimState = 0;
-            decor->palBlendAlpha = 255;
+            decorations->palAnimState = 0;
+            decorations->palBlendAlpha = 255;
         }
 
-         for (i = 0; i < decor->originalPalettesCount; i++) {
-            color2 = decor->originalPalettesList[i];
-            color1 = decor->copiedPalettes[0][i];
-            decor->adjustedPalettes[i] = color1;
+         for (i = 0; i < decorations->originalPalettesCount; i++) {
+            color2 = decorations->originalPalettesList[i];
+            color1 = decorations->copiedPalettes[0][i];
+            decorations->adjustedPalettes[i] = color1;
             if (color2 != NULL) {
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *color1++ = *color2++;
@@ -3237,39 +3236,39 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             }
         }
 
-        decor->nextPalTime = decor->palswapTimeHoldA;
-        decor->palBlendAlpha = 0;
-        decor->palAnimState = PAL_SWAP_HOLD_A;
-        decor->resetPalAdjust = FALSE;
+        decorations->nextPalTime = decorations->palswapTimeHoldA;
+        decorations->palBlendAlpha = 0;
+        decorations->palAnimState = PAL_SWAP_HOLD_A;
+        decorations->resetPalAdjust = FALSE;
     }
 
     // blending from A -> B
-    switch (decor->palAnimState) {
+    switch (decorations->palAnimState) {
         case PAL_SWAP_HOLD_A:
             if (skipAnimation) {
                 break;
             }
-            if (decor->nextPalTime != 0) {
-                decor->nextPalTime--;
+            if (decorations->nextPalTime != 0) {
+                decorations->nextPalTime--;
                 break;
             }
-            decor->palBlendAlpha = 0;
-            decor->palAnimState = PAL_SWAP_A_TO_B;
+            decorations->palBlendAlpha = 0;
+            decorations->palAnimState = PAL_SWAP_A_TO_B;
             // fallthrough
         case PAL_SWAP_A_TO_B:
             if (!skipAnimation) {
-                decor->palBlendAlpha += 25600 / decor->palswapTimeAtoB;
-                if (decor->palBlendAlpha > 255 * 100) {
-                    decor->palBlendAlpha = 255 * 100;
+                decorations->palBlendAlpha += 25600 / decorations->palswapTimeAtoB;
+                if (decorations->palBlendAlpha > 255 * 100) {
+                    decorations->palBlendAlpha = 255 * 100;
                 }
             }
-            blendAlpha = decor->palBlendAlpha / 100;
+            blendAlpha = decorations->palBlendAlpha / 100;
             // blend all palettes from two palette sets
-            for (i = 0; i < decor->spriteColorVariations; i++) {
-                color2 = decor->originalPalettesList[decor->blendPalA * decor->spriteColorVariations + i];
-                color1 = decor->originalPalettesList[decor->blendPalB * decor->spriteColorVariations + i];
-                outColor = decor->copiedPalettes[0][i];
-                decor->adjustedPalettes[i] = outColor;
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                color2 = decorations->originalPalettesList[decorations->blendPalA * decorations->spriteColorVariations + i];
+                color1 = decorations->originalPalettesList[decorations->blendPalB * decorations->spriteColorVariations + i];
+                outColor = decorations->copiedPalettes[0][i];
+                decorations->adjustedPalettes[i] = outColor;
 
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     r2 = UNPACK_PAL_R(*color2);
@@ -3290,38 +3289,38 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
                 }
             }
             if (blendAlpha == 255) {
-                decor->palAnimState = PAL_SWAP_HOLD_B;
-                decor->nextPalTime = decor->palswapTimeHoldB;
+                decorations->palAnimState = PAL_SWAP_HOLD_B;
+                decorations->nextPalTime = decorations->palswapTimeHoldB;
             }
             break;
     }
 
-    switch (decor->palAnimState) {
+    switch (decorations->palAnimState) {
         case PAL_SWAP_HOLD_B:
             if (skipAnimation) {
                 break;
             }
-            if (decor->nextPalTime != 0) {
-                decor->nextPalTime--;
+            if (decorations->nextPalTime != 0) {
+                decorations->nextPalTime--;
                 break;
             }
-            decor->palBlendAlpha = 0;
-            decor->palAnimState = PAL_SWAP_B_TO_A;
+            decorations->palBlendAlpha = 0;
+            decorations->palAnimState = PAL_SWAP_B_TO_A;
             // fallthrough
         case PAL_SWAP_B_TO_A:
             if (!skipAnimation) {
-                decor->palBlendAlpha += 25600 / decor->palswapTimeBtoA;
-                if (decor->palBlendAlpha > 255 * 100) {
-                    decor->palBlendAlpha = 255 * 100;
+                decorations->palBlendAlpha += 25600 / decorations->palswapTimeBtoA;
+                if (decorations->palBlendAlpha > 255 * 100) {
+                    decorations->palBlendAlpha = 255 * 100;
                 }
             }
-            blendAlpha = decor->palBlendAlpha / 100;
+            blendAlpha = decorations->palBlendAlpha / 100;
             // blend all palettes from two palette sets
-            for (i = 0; i < decor->spriteColorVariations; i++) {
-                color2 = decor->originalPalettesList[decor->blendPalA * decor->spriteColorVariations + i];
-                color1 = decor->originalPalettesList[decor->blendPalB * decor->spriteColorVariations + i];
-                outColor = decor->copiedPalettes[0][i];
-                decor->adjustedPalettes[i] = outColor;
+            for (i = 0; i < decorations->spriteColorVariations; i++) {
+                color2 = decorations->originalPalettesList[decorations->blendPalA * decorations->spriteColorVariations + i];
+                color1 = decorations->originalPalettesList[decorations->blendPalB * decorations->spriteColorVariations + i];
+                outColor = decorations->copiedPalettes[0][i];
+                decorations->adjustedPalettes[i] = outColor;
 
                 for (j = 0; j < SPR_PAL_SIZE; j++) {
                     r2 = UNPACK_PAL_R(*color2);
@@ -3342,43 +3341,43 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
                 }
             }
             if (blendAlpha == 255) {
-                decor->palAnimState = PAL_SWAP_HOLD_A;
-                decor->nextPalTime = decor->palswapTimeHoldA;
+                decorations->palAnimState = PAL_SWAP_HOLD_A;
+                decorations->nextPalTime = decorations->palswapTimeHoldA;
             }
             break;
     }
 
-    switch (decor->palAnimState) {
+    switch (decorations->palAnimState) {
         case PAL_SWAP_HOLD_A:
         case PAL_SWAP_A_TO_B:
         case PAL_SWAP_HOLD_B:
         case PAL_SWAP_B_TO_A:
             if (isNpcSprite == SPRITE_MODE_PLAYER) {
-                func_8025995C(part, yaw, mtx);
+                func_unkB_draw_player(part, yaw, mtx);
             } else {
-                func_802596C0(part, yaw, mtx);
+                func_unkB_draw_npc(part, yaw, mtx);
             }
             break;
     }
 }
 
-s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+s32 update_part_glow(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
     if (!(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        switch (part->decorationTable->unk_750) {
-            case 0:
-                func_8025C8A0(arg0, part, yaw, arg3);
+        switch (part->decorationTable->glowState) {
+            case GLOW_PAL_OFF:
+                part_glow_off(isNpcSprite, part, yaw, isReflection);
                 return 0;
-            case 11:
-                func_8025C918(arg0, part, yaw, arg3);
+            case GLOW_PAL_ON:
+                part_glow_on(isNpcSprite, part, yaw, isReflection);
                 break;
         }
     }
     return 0;
 }
 
-void func_8025C8A0(b32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
-    if (part->decorationTable->unk_751 != 0) {
-        part->decorationTable->unk_751 = 0;
+void part_glow_off(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
+    if (part->decorationTable->glowStateChanged) {
+        part->decorationTable->glowStateChanged = FALSE;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
             set_player_imgfx_all(PLAYER_SPRITE_MAIN, IMGFX_CLEAR, 0, 0, 0, 0, 0);
         } else {
@@ -3387,21 +3386,20 @@ void func_8025C8A0(b32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     }
 }
 
-void func_8025C918(b32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
-    DecorationTable* decor = part->decorationTable;
+void part_glow_on(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
+    DecorationTable* decorations = part->decorationTable;
     u8 rbuf[20];
     u8 gbuf[20];
     u8 bbuf[20];
-    s32 alpha;
     s32 color;
+    s32 alpha;
     s32 i;
-    s32 baseAngle;
 
-    if (decor->unk_751 != 0) {
-        decor->unk_752 = -2;
-        decor->unk75A = 0;
-        decor->unk_751 = 0;
-        decor->unk758 = 0;
+    if (decorations->glowStateChanged) {
+        decorations->glowPalUnk1 = -2;
+        decorations->glowUnk3 = 0;
+        decorations->glowStateChanged = FALSE;
+        decorations->glowUnk2 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
             set_player_imgfx_all(PLAYER_SPRITE_MAIN, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         } else {
@@ -3409,24 +3407,23 @@ void func_8025C918(b32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
         }
     }
 
-    decor->unk75C += 7;
-    baseAngle = decor->unk75C;
+    decorations->glowPhase += 7;
 
-    if (decor->unk75C >= 360) {
-        decor->unk75C = baseAngle % 360;
+    if (decorations->glowPhase >= 360) {
+        decorations->glowPhase %= 360;
     }
 
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
-        rbuf[i] = (cosine(decor->unk75C + (25 * i)) + 1.0) * 112.0;
-        gbuf[i] = (cosine(decor->unk75C + (25 * i) + 45) + 1.0) * 112.0;
-        bbuf[i] = (cosine(decor->unk75C + (25 * i) + 90) + 1.0) * 112.0;
+        rbuf[i] = (cosine(decorations->glowPhase + (25 * i)) + 1.0) * 112.0;
+        gbuf[i] = (cosine(decorations->glowPhase + (25 * i) + 45) + 1.0) * 112.0;
+        bbuf[i] = (cosine(decorations->glowPhase + (25 * i) + 90) + 1.0) * 112.0;
     }
 
     alpha = 255;
     if (part->opacity < 255) {
         alpha = part->opacity;
     }
-    if (part->flags & 0x100) {
+    if (part->flags & ACTOR_PART_FLAG_TRANSPARENT) {
         alpha = (alpha * 120) / 255;
     }
 
@@ -3439,101 +3436,101 @@ void func_8025C918(b32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
         }
     }
 
-    if (arg3 == 0) {
-        decor->unk75A -= 1;
+    if (!isReflection) {
+        decorations->glowUnk3 -= 1;
     }
 }
 
-s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
+s32 update_part_flash(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
     if (!(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        switch (part->decorationTable->unk_764) {
+        switch (part->decorationTable->flashState) {
             case 0:
-                func_8025CD28(arg0, part, yaw, arg3);
+                part_flash_off(isNpcSprite, part, yaw, isReflection);
                 return 0;
             case 1:
-                func_8025CD40(arg0, part, yaw, arg3);
+                part_flash_on(isNpcSprite, part, yaw, isReflection);
                 return 0;
         }
     }
     return 0;
 }
 
-void func_8025CD28(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
-    DecorationTable* decorationTable = part->decorationTable;
+void part_flash_off(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
+    DecorationTable* decorations = part->decorationTable;
 
-    if (decorationTable->unk_765 != 0) {
-        decorationTable->unk_765 = 0;
+    if (decorations->flashStateChanged) {
+        decorations->flashStateChanged = FALSE;
     }
-    decorationTable->unk_768 = 0;
+    decorations->flashEnabled = FLASH_PAL_OFF;
 }
 
-void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
-    DecorationTable* decor = part->decorationTable;
+void part_flash_on(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
+    DecorationTable* decorations = part->decorationTable;
 
-    if (decor->unk_765 != 0) {
-        switch (func_80254250(part)) {
+    if (decorations->flashStateChanged) {
+        switch (get_flash_damage_intensity(part)) {
             case DAMAGE_INTENSITY_LIGHT:
-                decor->unk_767 = 1;
-                decor->unk_766 = 0;
+                decorations->flashFramesLeft = 1;
+                decorations->flashMode = FLASH_MODE_LIGHT;
                 break;
             case DAMAGE_INTENSITY_MEDIUM:
-                decor->unk_767 = 8;
-                decor->unk_766 = 1;
+                decorations->flashFramesLeft = 8;
+                decorations->flashMode = FLASH_MODE_MEDIUM;
                 break;
             case DAMAGE_INTENSITY_HEAVY:
             default:
-                decor->unk_767 = 14;
-                decor->unk_766 = 2;
+                decorations->flashFramesLeft = 14;
+                decorations->flashMode = FLASH_MODE_HEAVY;
                 break;
         }
-        decor->unk_768 = 0;
-        decor->unk_765 = 0;
+        decorations->flashEnabled = FLASH_PAL_OFF;
+        decorations->flashStateChanged = FALSE;
     }
 
-    if (decor->unk_766 == 3) {
-        decor->unk_768 = 0;
-        func_8026709C(part);
+    if (decorations->flashMode == FLASH_MODE_DISPOSE) {
+        decorations->flashEnabled = FLASH_PAL_OFF;
+        clear_part_flash_mode(part);
     }
 
-    switch (decor->unk_766) {
-        case 0:
-            switch (decor->unk_767) {
+    switch (decorations->flashMode) {
+        case FLASH_MODE_LIGHT:
+            switch (decorations->flashFramesLeft) {
                 case 0:
-                    decor->unk_768 = -1;
-                    decor->unk_766 = 3;
+                    decorations->flashEnabled = FLASH_PAL_ON;
+                    decorations->flashMode = FLASH_MODE_DISPOSE;
                     break;
                 default:
-                    decor->unk_768 = 0;
-                    if (arg3 == 0) {
-                        decor->unk_767--;
+                    decorations->flashEnabled = FLASH_PAL_OFF;
+                    if (!isReflection) {
+                        decorations->flashFramesLeft--;
                     }
                     break;
             }
             break;
-        case 1:
-           switch (decor->unk_767) {
+        case FLASH_MODE_MEDIUM:
+           switch (decorations->flashFramesLeft) {
                 case 1:
                 case 2:
                 case 5:
                 case 6:
-                    decor->unk_768 = -1;
+                    decorations->flashEnabled = FLASH_PAL_ON;
                     break;
                 case 3:
                 case 4:
                 case 7:
                 case 8:
-                    decor->unk_768 = 0;
+                    decorations->flashEnabled = FLASH_PAL_OFF;
                     break;
                 case 0:
-                    decor->unk_766 = 3;
+                    decorations->flashMode = FLASH_MODE_DISPOSE;
                     break;
             }
-            if (arg3 == 0) {
-                decor->unk_767--;
+            if (!isReflection) {
+                decorations->flashFramesLeft--;
             }
             break;
-        case 2:
-           switch (decor->unk_767) {
+        case FLASH_MODE_HEAVY:
+           switch (decorations->flashFramesLeft) {
                 case 1:
                 case 2:
                 case 5:
@@ -3542,7 +3539,7 @@ void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
                 case 10:
                 case 13:
                 case 14:
-                    decor->unk_768 = 0;
+                    decorations->flashEnabled = FLASH_PAL_OFF;
                     break;
                 case 3:
                 case 4:
@@ -3550,193 +3547,193 @@ void func_8025CD40(s32 arg0, ActorPart* part, s32 yaw, s32 arg3) {
                 case 8:
                 case 11:
                 case 12:
-                    decor->unk_768 = -1;
+                    decorations->flashEnabled = FLASH_PAL_ON;
                     break;
                 case 0:
-                    decor->unk_766 = 3;
+                    decorations->flashMode = FLASH_MODE_DISPOSE;
                     break;
             }
-            if (arg3 == 0) {
-                decor->unk_767--;
+            if (!isReflection) {
+                decorations->flashFramesLeft--;
             }
             break;
     }
 }
 
 void _add_part_decoration(ActorPart* actorPart) {
-    DecorationTable* decorationTable;
+    DecorationTable* decorations;
     s32 i;
 
-    if (!(actorPart->flags & 2)) {
-        decorationTable = actorPart->decorationTable;
-        for (i = 0; i < ARRAY_COUNT(decorationTable->type); i++) {
-            switch (decorationTable->type[i]) {
-                case ACTOR_DECORATION_NONE:
-                    func_8025D150(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_GOLDEN_FLAMES:
-                    func_8025D160(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_SWEAT:
-                    func_8025D2B0(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_SEEING_STARS:
-                    func_8025D3CC(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_RED_FLAMES:
-                    func_8025D4C8(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_GREY_SMOKE_TRAIL:
-                    func_8025D640(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_FIRE_SMOKE_TRAIL:
-                    func_8025D71C(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_WHIRLWIND:
-                    func_8025D830(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_STEAM_EMITTER:
-                    func_8025D90C(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_9:
-                    func_8025DA68(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_A:
-                    func_8025DBD0(actorPart, i);
-                    break;
-                case ACTOR_DECORATION_RADIAL_STAR_EMITTER:
-                    func_8025DD60(actorPart, i);
-                    break;
-            }
+    if (actorPart->flags & ACTOR_PART_FLAG_NO_DECORATIONS) {
+        return;
+    }
+
+    decorations = actorPart->decorationTable;
+    for (i = 0; i < ARRAY_COUNT(decorations->type); i++) {
+        switch (decorations->type[i]) {
+            case ACTOR_DECORATION_NONE:
+                add_part_decor_none(actorPart, i);
+                break;
+            case ACTOR_DECORATION_GOLDEN_FLAMES:
+                add_part_decor_golden_flames(actorPart, i);
+                break;
+            case ACTOR_DECORATION_SWEAT:
+                add_part_decor_sweat(actorPart, i);
+                break;
+            case ACTOR_DECORATION_SEEING_STARS:
+                add_part_decor_seeing_stars(actorPart, i);
+                break;
+            case ACTOR_DECORATION_RED_FLAMES:
+                add_part_decor_red_flames(actorPart, i);
+                break;
+            case ACTOR_DECORATION_GREY_SMOKE_TRAIL:
+                add_part_decor_smoky_trail(actorPart, i);
+                break;
+            case ACTOR_DECORATION_FIRE_SMOKE_TRAIL:
+                add_part_decor_fiery_trail(actorPart, i);
+                break;
+            case ACTOR_DECORATION_WHIRLWIND:
+                add_part_decor_whirlwind(actorPart, i);
+                break;
+            case ACTOR_DECORATION_STEAM_EMITTER:
+                add_part_decor_steam(actorPart, i);
+                break;
+            case ACTOR_DECORATION_SPARKLES:
+                add_part_decor_sparkles(actorPart, i);
+                break;
+            case ACTOR_DECORATION_BOWSER_AURA:
+                add_part_decor_bowser_aura(actorPart, i);
+                break;
+            case ACTOR_DECORATION_RADIAL_STAR_EMITTER:
+                add_part_decor_radiating_stars(actorPart, i);
+                break;
         }
     }
 }
 
-void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decorationTable = part->decorationTable;
+void _remove_part_decoration(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
 
-    switch (decorationTable->type[decorationIndex]) {
+    switch (decorations->type[idx]) {
         case ACTOR_DECORATION_NONE:
-            func_8025D158(part, decorationIndex);
+            remove_part_decor_none(part, idx);
             break;
         case ACTOR_DECORATION_GOLDEN_FLAMES:
-            func_8025D290(part, decorationIndex);
+            remove_part_decor_golden_flames(part, idx);
             break;
         case ACTOR_DECORATION_SWEAT:
-            func_8025D3C4(part, decorationIndex);
+            remove_part_decor_sweat(part, idx);
             break;
         case ACTOR_DECORATION_SEEING_STARS:
-            func_8025D4A0(part, decorationIndex);
+            remove_part_decor_seeing_stars(part, idx);
             break;
         case ACTOR_DECORATION_RED_FLAMES:
-            func_8025D620(part, decorationIndex);
+            remove_part_decor_red_flames(part, idx);
             break;
         case ACTOR_DECORATION_GREY_SMOKE_TRAIL:
-            func_8025D6FC(part, decorationIndex);
+            remove_part_decor_smoky_trail(part, idx);
             break;
         case ACTOR_DECORATION_FIRE_SMOKE_TRAIL:
-            func_8025D810(part, decorationIndex);
+            remove_part_decor_fiery_trail(part, idx);
             break;
         case ACTOR_DECORATION_WHIRLWIND:
-            func_8025D8EC(part, decorationIndex);
+            remove_part_decor_whirlwind(part, idx);
             break;
         case ACTOR_DECORATION_STEAM_EMITTER:
-            func_8025DA60(part, decorationIndex);
+            remove_part_decor_steam(part, idx);
             break;
-        case ACTOR_DECORATION_9:
-            func_8025DBC8(part, decorationIndex);
+        case ACTOR_DECORATION_SPARKLES:
+            remove_part_decor_sparkles(part, idx);
             break;
-        case ACTOR_DECORATION_A:
-            func_8025DD40(part, decorationIndex);
+        case ACTOR_DECORATION_BOWSER_AURA:
+            remove_part_decor_bowser_aura(part, idx);
             break;
         case ACTOR_DECORATION_RADIAL_STAR_EMITTER:
-            func_8025DE88(part, decorationIndex);
+            remove_part_decor_radiating_stars(part, idx);
             break;
     }
 
-    decorationTable->type[decorationIndex] = 0;
+    decorations->type[idx] = ACTOR_DECORATION_NONE;
 }
 
-void func_8025D150(ActorPart* actorPart, s32 i) {
+void add_part_decor_none(ActorPart* actorPart, s32 i) {
 }
 
-void func_8025D158(ActorPart* part, s32 decorationIndex) {
+void remove_part_decor_none(ActorPart* part, s32 idx) {
 }
 
-void func_8025D160(ActorPart* arg0, s32 index) {
-    DecorationTable* table = arg0->decorationTable;
+void add_part_decor_golden_flames(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EffectInstance* effect;
     AuraFXData* data;
     f32 scale;
 
-    switch (table->state[index]) {
+    switch (decorations->state[idx]) {
         case 0:
-            fx_aura(3, arg0->curPos.x, arg0->curPos.y, arg0->curPos.z, 0.4f, &table->effect[index]);
-            table->state[index] = 1;
-            table->unk_8C6[index].unk00 = 40;
-            table->unk_8C6[index].unk02 = 40;
-            table->unk_8C6[index].unk04 = 0;
+            fx_aura(FX_AURA_GOLD, part->curPos.x, part->curPos.y, part->curPos.z, 0.4f, &decorations->effect[idx]);
+            decorations->state[idx] = 1;
+            decorations->decorData[idx].goldenFlames.scaleX = 40;
+            decorations->decorData[idx].goldenFlames.scaleY = 40;
+            decorations->decorData[idx].goldenFlames.offsetX = 0;
             break;
         case 1:
-            effect = table->effect[index];
+            effect = decorations->effect[idx];
             data = effect->data.aura;
-            data->posA.x = arg0->curPos.x + table->unk_8C6[index].unk04;
-            data->posA.y = arg0->curPos.y;
-            data->posA.z = arg0->curPos.z;
-            scale = table->unk_8C6[index].unk00;
+            data->posA.x = part->curPos.x + decorations->decorData[idx].goldenFlames.offsetX;
+            data->posA.y = part->curPos.y;
+            data->posA.z = part->curPos.z;
+            scale = decorations->decorData[idx].goldenFlames.scaleX;
             scale /= 100.0f;
             effect->data.aura->scale.x = scale;
-            scale = table->unk_8C6[index].unk02;
+            scale = decorations->decorData[idx].goldenFlames.scaleY;
             scale /= 100.0f;
             effect->data.aura->scale.y = scale;
             break;
     }
 }
 
-void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->data.aura->fadeTime = 5;
+void remove_part_decor_golden_flames(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->data.aura->fadeTime = 5;
 }
 
-void func_8025D2B0(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_sweat(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
             if (part->yaw > 90.0f) {
                 fx_sweat(0, part->curPos.x, part->curPos.y + part->size.y, part->curPos.z, 5.0f, 45.0f, 20);
             } else {
                 fx_sweat(0, part->curPos.x, part->curPos.y + part->size.y, part->curPos.z, 5.0f, -45.0f, 20);
             }
-            decor->stateResetTimer[decorationIndex] = 10;
-            decor->state[decorationIndex] = TRUE;
+            decorations->stateResetTimer[idx] = 10;
+            decorations->state[idx] = TRUE;
             break;
         case 1:
-            if (decor->stateResetTimer[decorationIndex] != 0) {
-                decor->stateResetTimer[decorationIndex]--;
+            if (decorations->stateResetTimer[idx] != 0) {
+                decorations->stateResetTimer[idx]--;
             } else {
-                decor->state[decorationIndex] = FALSE;
+                decorations->state[idx] = FALSE;
             }
             break;
     }
 }
 
-void func_8025D3C4(ActorPart* part, s32 decorationIndex) {
+void remove_part_decor_sweat(ActorPart* part, s32 idx) {
 }
 
-void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor;
+void add_part_decor_seeing_stars(ActorPart* part, s32 idx) {
+    DecorationTable* decorations;
     StarsOrbitingFXData* data;
-    s8 temp_v1;
 
-    decor = part->decorationTable;
-    switch (decor->state[decorationIndex]) {
+    decorations = part->decorationTable;
+    switch (decorations->state[idx]) {
         case 0:
-            fx_stars_orbiting(0, part->curPos.x, part->curPos.y + part->size.y, part->curPos.z,
-                20.0f, 3, &decor->effect[decorationIndex]);
-            decor->state[decorationIndex] = 1;
+            fx_stars_orbiting(0, part->curPos.x, part->curPos.y + part->size.y, part->curPos.z, 20.0f, 3, &decorations->effect[idx]);
+            decorations->state[idx] = 1;
             break;
         case 1:
-            data = decor->effect[decorationIndex]->data.starsOrbiting;
+            data = decorations->effect[idx]->data.starsOrbiting;
             data->pos.x = part->curPos.x;
             data->pos.y = part->curPos.y + part->size.y;
             data->pos.z = part->curPos.z;
@@ -3744,61 +3741,61 @@ void func_8025D3CC(ActorPart* part, s32 decorationIndex) {
     }
 }
 
-void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
-    remove_effect(part->decorationTable->effect[decorationIndex]);
+void remove_part_decor_seeing_stars(ActorPart* part, s32 idx) {
+    remove_effect(part->decorationTable->effect[idx]);
 }
 
-void func_8025D4C8(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_red_flames(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EffectInstance* effect;
     AuraFXData* data;
     f32 scale;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            fx_aura(1, part->curPos.x, part->curPos.y, part->curPos.z, 0.4f, &decor->effect[decorationIndex]);
-            decor->state[decorationIndex] = 1;
-            decor->unk_8C6[decorationIndex].unk00 = 40;
-            decor->unk_8C6[decorationIndex].unk02 = 40;
-            decor->unk_8C6[decorationIndex].unk04 = 255;
-            decor->unk_8C6[decorationIndex].unk06 = 0;
-            decor->unk_8C6[decorationIndex].unk08 = 255;
-            decor->unk_8C6[decorationIndex].unk0A = 0;
-            decor->unk_8C6[decorationIndex].unk0C = 0;
+            fx_aura(FX_AURA_RED, part->curPos.x, part->curPos.y, part->curPos.z, 0.4f, &decorations->effect[idx]);
+            decorations->state[idx] = 1;
+            decorations->decorData[idx].redFlames.scaleX = 40;
+            decorations->decorData[idx].redFlames.scaleY = 40;
+            decorations->decorData[idx].redFlames.alpha = 255;
+            decorations->decorData[idx].redFlames.offsetZ = 0;
+            decorations->decorData[idx].redFlames.unused1 = 255;
+            decorations->decorData[idx].redFlames.unused2 = 0;
+            decorations->decorData[idx].redFlames.unused3 = 0;
             // fallthrough
         case 1:
-            effect = decor->effect[decorationIndex];
+            effect = decorations->effect[idx];
             data = effect->data.aura;
             data->posA.x = part->curPos.x;
             data->posA.y = part->curPos.y;
-            data->posA.z = part->curPos.z + decor->unk_8C6[decorationIndex].unk06;
+            data->posA.z = part->curPos.z + decorations->decorData[idx].redFlames.offsetZ;
 
-            scale = decor->unk_8C6[decorationIndex].unk00;
+            scale = decorations->decorData[idx].redFlames.scaleX;
             scale /= 100.0f;
             effect->data.aura->scale.x = scale;
-            scale = decor->unk_8C6[decorationIndex].unk02;
+            scale = decorations->decorData[idx].redFlames.scaleY;
             scale /= 100.0f;
             effect->data.aura->scale.y = scale;
-            effect->data.aura->primA = decor->unk_8C6[decorationIndex].unk04;
+            effect->data.aura->primA = decorations->decorData[idx].redFlames.alpha;
             break;
     }
 }
 
-void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->data.aura->fadeTime = 5;
+void remove_part_decor_red_flames(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->data.aura->fadeTime = 5;
 }
 
-void func_8025D640(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_smoky_trail(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EffectInstance* effect;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            decor->effect[decorationIndex] = fx_effect_65(1, part->curPos.x, part->curPos.y, part->curPos.z, 1.0f, 0);
-            decor->state[decorationIndex] = 1;
+            decorations->effect[idx] = fx_effect_65(1, part->curPos.x, part->curPos.y, part->curPos.z, 1.0f, 0);
+            decorations->state[idx] = 1;
             break;
         case 1:
-            effect = decor->effect[decorationIndex];
+            effect = decorations->effect[idx];
             effect->data.unk_65->pos.x = part->curPos.x;
             effect->data.unk_65->pos.y = part->curPos.y;
             effect->data.unk_65->pos.z = part->curPos.z;
@@ -3806,45 +3803,45 @@ void func_8025D640(ActorPart* part, s32 decorationIndex) {
     }
 }
 
-void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->flags |= 0x10;
+void remove_part_decor_smoky_trail(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->flags |= FX_INSTANCE_FLAG_DISMISS;
 }
 
-void func_8025D71C(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_fiery_trail(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EffectInstance* effect;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            decor->effect[decorationIndex] = fx_effect_65(2, part->curPos.x, part->curPos.y, part->curPos.z, 1.0f, 0);
-            decor->unk_8C6[decorationIndex].unk00 = 1;
-            decor->state[decorationIndex] = 1;
+            decorations->effect[idx] = fx_effect_65(2, part->curPos.x, part->curPos.y, part->curPos.z, 1.0f, 0);
+            decorations->decorData[idx].fireTrail.scale = 1;
+            decorations->state[idx] = 1;
             break;
         case 1:
-            effect = decor->effect[decorationIndex];
+            effect = decorations->effect[idx];
             effect->data.unk_65->pos.x = part->curPos.x;
             effect->data.unk_65->pos.y = part->curPos.y;
             effect->data.unk_65->pos.z = part->curPos.z;
-            effect->data.unk_65->scale = decor->unk_8C6[decorationIndex].unk00 / 100.0f;
+            effect->data.unk_65->scale = decorations->decorData[idx].fireTrail.scale / 100.0f;
             break;
     }
 }
 
-void func_8025D810(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->flags |= 0x10;
+void remove_part_decor_fiery_trail(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->flags |= FX_INSTANCE_FLAG_DISMISS;
 }
 
-void func_8025D830(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_whirlwind(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EffectInstance* effect;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            decor->effect[decorationIndex] = fx_whirlwind(2, part->curPos.x, part->curPos.y, part->curPos.z, 1.0f, 0);
-            decor->state[decorationIndex] = 1;
+            decorations->effect[idx] = fx_whirlwind(2, part->curPos.x, part->curPos.y, part->curPos.z, 1.0f, 0);
+            decorations->state[idx] = 1;
             break;
         case 1:
-            effect = decor->effect[decorationIndex];
+            effect = decorations->effect[idx];
             effect->data.whirlwind->pos.x = part->curPos.x;
             effect->data.whirlwind->pos.y = part->curPos.y;
             effect->data.whirlwind->pos.z = part->curPos.z;
@@ -3852,23 +3849,23 @@ void func_8025D830(ActorPart* part, s32 decorationIndex) {
     }
 }
 
-void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->flags |= FX_INSTANCE_FLAG_DISMISS;
+void remove_part_decor_whirlwind(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->flags |= FX_INSTANCE_FLAG_DISMISS;
 }
 
-void func_8025D90C(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_steam(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     f32 angle, sinA, cosA;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            decor->stateResetTimer[decorationIndex] = 0;
-            decor->state[decorationIndex] = 1;
+            decorations->stateResetTimer[idx] = 0;
+            decorations->state[idx] = 1;
             // fallthrough
         case 1:
-            decor->stateResetTimer[decorationIndex]++;
-            if (decor->stateResetTimer[decorationIndex] >= 4) {
-                decor->stateResetTimer[decorationIndex] = 0;
+            decorations->stateResetTimer[idx]++;
+            if (decorations->stateResetTimer[idx] >= 4) {
+                decorations->stateResetTimer[idx] = 0;
                 angle = DEG_TO_RAD(clamp_angle(-part->yaw));
                 sinA = sin_rad(angle);
                 cosA = cos_rad(angle);
@@ -3882,30 +3879,30 @@ void func_8025D90C(ActorPart* part, s32 decorationIndex) {
     }
 }
 
-void func_8025DA60(ActorPart* part, s32 decorationIndex) {
+void remove_part_decor_steam(ActorPart* part, s32 idx) {
 }
 
-void func_8025DA68(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_sparkles(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     f32 x, y, z;
 
-    if (D_80284134[decor->unk_8C6[decorationIndex].unk00] >= 0) {
-        switch (decor->state[decorationIndex]) {
+    if (SparkleSpawnIntervals[decorations->decorData[idx].sparkles.spawnInterval] >= 0) {
+        switch (decorations->state[idx]) {
             case 0:
-                decor->stateResetTimer[decorationIndex] = 0;
-                decor->state[decorationIndex] = 1;
+                decorations->stateResetTimer[idx] = 0;
+                decorations->state[idx] = 1;
                 // fallthrough
             case 1:
                 x = part->curPos.x;
                 y = part->curPos.y + (part->size.y / 2);
                 z = part->curPos.z - 5.0f;
-                // @bug? perhaps this should be % 4?
+                // @bug this should be % 4
                 if ((gGameStatusPtr->frameCounter / 4) == 0) {
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 10.0f);
                 }
-                decor->stateResetTimer[decorationIndex]++;
-                if (D_80284134[decor->unk_8C6[decorationIndex].unk00] < decor->stateResetTimer[decorationIndex]) {
-                    decor->stateResetTimer[decorationIndex] = 0;
+                decorations->stateResetTimer[idx]++;
+                if (SparkleSpawnIntervals[decorations->decorData[idx].sparkles.spawnInterval] < decorations->stateResetTimer[idx]) {
+                    decorations->stateResetTimer[idx] = 0;
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 20.0f);
                 }
                 break;
@@ -3913,71 +3910,71 @@ void func_8025DA68(ActorPart* part, s32 decorationIndex) {
     }
 }
 
-void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
+void remove_part_decor_sparkles(ActorPart* part, s32 idx) {
 }
 
-void func_8025DBD0(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_bowser_aura(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EffectInstance* effect;
     AuraFXData* data;
     f32 scale;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            fx_aura(2, part->curPos.x, part->curPos.y, part->curPos.z, 1.2f, &decor->effect[decorationIndex]);
-            decor->state[decorationIndex] = 1;
-            decor->unk_8C6[decorationIndex].unk00 = 150;
-            decor->unk_8C6[decorationIndex].unk02 = 150;
-            decor->unk_8C6[decorationIndex].unk04 = 255;
-            decor->unk_8C6[decorationIndex].unk06 = 0;
+            fx_aura(FX_AURA_BLUE, part->curPos.x, part->curPos.y, part->curPos.z, 1.2f, &decorations->effect[idx]);
+            decorations->state[idx] = 1;
+            decorations->decorData[idx].bowserAura.scaleX = 150;
+            decorations->decorData[idx].bowserAura.scaleY = 150;
+            decorations->decorData[idx].bowserAura.alpha = 255;
+            decorations->decorData[idx].bowserAura.offsetZ = 0;
             // fallthrough
         case 1:
-            effect = decor->effect[decorationIndex];
+            effect = decorations->effect[idx];
             data = effect->data.aura;
             data->posA.x = part->curPos.x;
             data->posA.y = part->curPos.y;
-            data->posA.z = part->curPos.z + decor->unk_8C6[decorationIndex].unk06;
+            data->posA.z = part->curPos.z + decorations->decorData[idx].bowserAura.offsetZ;
 
-            scale = decor->unk_8C6[decorationIndex].unk00;
+            scale = decorations->decorData[idx].bowserAura.scaleX;
             scale /= 100.0f;
             effect->data.aura->scale.x = scale;
-            scale = decor->unk_8C6[decorationIndex].unk02;
+            scale = decorations->decorData[idx].bowserAura.scaleY;
             scale /= 100.0f;
-            effect->data.aura->scale.y = scale * (0.8 - 1e-16); // epsilon?
-            effect->data.aura->primA = decor->unk_8C6[decorationIndex].unk04;
+            effect->data.aura->scale.y = scale * (0.8 - 1e-16); // small epsilon
+            effect->data.aura->primA = decorations->decorData[idx].bowserAura.alpha;
             effect->data.aura->renderYaw = part->yaw;
             break;
     }
 }
 
-void func_8025DD40(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->data.aura->fadeTime = 5;
+void remove_part_decor_bowser_aura(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->data.aura->fadeTime = 5;
 }
 
-void func_8025DD60(ActorPart* part, s32 decorationIndex) {
-    DecorationTable* decor = part->decorationTable;
+void add_part_decor_radiating_stars(ActorPart* part, s32 idx) {
+    DecorationTable* decorations = part->decorationTable;
     EnergyInOutFXData* data;
     f32 scale;
 
-    switch (decor->state[decorationIndex]) {
+    switch (decorations->state[idx]) {
         case 0:
-            decor->effect[decorationIndex] = fx_energy_in_out(4, part->curPos.x, part->curPos.y, part->curPos.z, 1.2f, 0);
-            decor->state[decorationIndex] = 1;
-            decor->unk_8C6[decorationIndex].unk00 = 120;
-            decor->unk_8C6[decorationIndex].unk02 = 0;
+            decorations->effect[idx] = fx_energy_in_out(4, part->curPos.x, part->curPos.y, part->curPos.z, 1.2f, 0);
+            decorations->state[idx] = 1;
+            decorations->decorData[idx].stars.scalePct = 120;
+            decorations->decorData[idx].stars.offsetY = 0;
             // fallthrough
         case 1:
-            data = decor->effect[decorationIndex]->data.energyInOut;
-            scale = decor->unk_8C6[decorationIndex].unk00;
+            data = decorations->effect[idx]->data.energyInOut;
+            scale = decorations->decorData[idx].stars.scalePct;
             scale /= 100.0f;
             data->unk_44 = scale;
             data->pos.x = part->curPos.x;
             data->pos.y = (part->curPos.y + (scale * 41.0f));
-            data->pos.z = (part->curPos.z + decor->unk_8C6[decorationIndex].unk02);
+            data->pos.z = (part->curPos.z + decorations->decorData[idx].stars.offsetY);
             break;
     }
 }
 
-void func_8025DE88(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->flags |= 0x10;
+void remove_part_decor_radiating_stars(ActorPart* part, s32 idx) {
+    part->decorationTable->effect[idx]->flags |= FX_INSTANCE_FLAG_DISMISS;
 }

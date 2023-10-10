@@ -2017,18 +2017,18 @@ enum ActorSoundIDs {
 };
 
 enum ActorDecorationIDs {
-    ACTOR_DECORATION_NONE                          = 0x00000000,
-    ACTOR_DECORATION_GOLDEN_FLAMES                 = 0x00000001,
-    ACTOR_DECORATION_SWEAT                         = 0x00000002,
-    ACTOR_DECORATION_SEEING_STARS                  = 0x00000003,
-    ACTOR_DECORATION_RED_FLAMES                    = 0x00000004,
-    ACTOR_DECORATION_GREY_SMOKE_TRAIL              = 0x00000005,
-    ACTOR_DECORATION_FIRE_SMOKE_TRAIL              = 0x00000006,
-    ACTOR_DECORATION_WHIRLWIND                     = 0x00000007,
-    ACTOR_DECORATION_STEAM_EMITTER                 = 0x00000008,
-    ACTOR_DECORATION_9                             = 0x00000009,
-    ACTOR_DECORATION_A                             = 0x0000000A,
-    ACTOR_DECORATION_RADIAL_STAR_EMITTER           = 0x0000000B,
+    ACTOR_DECORATION_NONE                   = 0x00000000,
+    ACTOR_DECORATION_GOLDEN_FLAMES          = 0x00000001,
+    ACTOR_DECORATION_SWEAT                  = 0x00000002,
+    ACTOR_DECORATION_SEEING_STARS           = 0x00000003,
+    ACTOR_DECORATION_RED_FLAMES             = 0x00000004,
+    ACTOR_DECORATION_GREY_SMOKE_TRAIL       = 0x00000005,
+    ACTOR_DECORATION_FIRE_SMOKE_TRAIL       = 0x00000006,
+    ACTOR_DECORATION_WHIRLWIND              = 0x00000007,
+    ACTOR_DECORATION_STEAM_EMITTER          = 0x00000008,
+    ACTOR_DECORATION_SPARKLES               = 0x00000009,
+    ACTOR_DECORATION_BOWSER_AURA            = 0x0000000A,
+    ACTOR_DECORATION_RADIAL_STAR_EMITTER    = 0x0000000B,
 };
 
 enum Phases {
@@ -2231,10 +2231,21 @@ enum PaletteShifts {
     PAL_ADJUST_BLEND_PALSETS    = 16,
 };
 
-// func_80266EE8
-enum {
-    UNK_PAL_EFFECT_0        = 0,
-    UNK_PAL_EFFECT_11       = 11,
+enum GlowPaletteModes {
+    GLOW_PAL_OFF    = 0,
+    GLOW_PAL_ON     = 11,
+};
+
+enum ActorPartFlashState {
+    FLASH_MODE_LIGHT    = 0,
+    FLASH_MODE_MEDIUM    = 1,
+    FLASH_MODE_HEAVY    = 2,
+    FLASH_MODE_DISPOSE    = 3,
+};
+
+enum FlashPaletteModes {
+    FLASH_PAL_OFF    = 0,
+    FLASH_PAL_ON     = -1,
 };
 
 enum DoorSwing {

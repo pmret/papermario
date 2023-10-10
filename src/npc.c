@@ -4,6 +4,7 @@
 #include "effects.h"
 #include "sprite.h"
 #include "world/partners.h"
+#include "sprite/npc/BattleWatt.h" // maybe world?
 
 SHIFT_BSS s16 gNpcCount;
 SHIFT_BSS NpcList gWorldNpcList;
@@ -11,21 +12,37 @@ SHIFT_BSS NpcList gBattleNpcList;
 SHIFT_BSS NpcList* gCurrentNpcListPtr;
 SHIFT_BSS b8 gNpcPlayerCollisionsEnabled;
 
-u8 D_80077BF0[] = {
-    1, 2,
-    0, 52,
-    1, 4,
-    0, 54,
-    0, 54,
-    1, 2,
-    0, 28,
-    1, 2,
-    0, 6,
-    1, 2,
-    0, 44,
-    1, 2,
-    0, 44,
-    255, 0,
+#define PAL_ANIM_END 0xFF
+
+enum PalSwapState {
+    PAL_SWAP_HOLD_A     = 0,
+    PAL_SWAP_A_TO_B     = 1,
+    PAL_SWAP_HOLD_B     = 2,
+    PAL_SWAP_B_TO_A     = 3,
+};
+
+// palette types for watt palette animations
+enum {
+    WATT_DEFAULT   = 0,
+    WATT_BRIGHTEST = 1,
+    WATT_BRIGHTER  = 2,
+};
+
+u8 wWattIdlePalettesAnim[] = {
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    52,
+    WATT_BRIGHTEST,   4,
+    WATT_DEFAULT,    54,
+    WATT_DEFAULT,    54,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    28,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,     6,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    44,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    44,
+    PAL_ANIM_END
 };
 
 s32 D_80077C0C = 0; //  padding?
@@ -1261,7 +1278,7 @@ void npc_set_palswap_mode_A(Npc* npc, s32 mode) {
     if (npc->palSwapType != mode) {
         npc->palSwapPrevType = npc->palSwapType;
         npc->palSwapType = mode;
-        npc->palSwapState = 0;
+        npc->palAnimState = 0;
         npc->dirtyPalettes = 1;
     }
 }
@@ -1270,7 +1287,7 @@ void npc_set_palswap_mode_B(Npc* npc, s32 mode) {
     if (npc->palSwapType != mode) {
         npc->palSwapPrevType = npc->palSwapType;
         npc->palSwapType = mode;
-        npc->palSwapState = 0;
+        npc->palAnimState = 0;
         npc->dirtyPalettes = -1;
     }
 }
@@ -1282,50 +1299,50 @@ void func_8003B420(Npc* npc) {
     }
     npc->palSwapType = npc->palSwapPrevType;
     npc->palSwapPrevType = 0;
-    npc->palSwapState = 0;
+    npc->palAnimState = 0;
     npc->dirtyPalettes = 1;
 }
 
 void npc_set_palswap_1(Npc* npc, s32 palIndexA, s32 palIndexB, s32 timeHoldA, s32 timeAB) {
-    npc->unk_308 = palIndexA;
-    npc->unk_30A = palIndexB;
-    npc->unk_30C = timeHoldA;
-    npc->unk_30E = timeAB;
+    npc->blendPalA = palIndexA;
+    npc->blendPalB = palIndexB;
+    npc->palswapTimeHoldA = timeHoldA;
+    npc->palswapTimeAtoB = timeAB;
 }
 
 void npc_set_palswap_2(Npc* npc, s32 timeHoldB, s32 timeBA, s32 palIndexC, s32 palIndexD) {
-    npc->unk_310 = timeHoldB;
-    npc->unk_312 = timeBA;
+    npc->palswapTimeHoldB = timeHoldB;
+    npc->palswapTimeBtoA = timeBA;
     npc->unk_314 = palIndexC;
     npc->unk_316 = palIndexD;
 }
 
-void npc_draw_with_palswap(Npc* npc, s32 arg1, Matrix4f mtx) {
+void npc_draw_with_palswap(Npc* npc, s32 yaw, Matrix4f mtx) {
     switch (npc->palSwapType) {
         case 0:
-            npc_draw_palswap_mode_0(npc, arg1, mtx);
+            npc_render_without_adjusted_palettes(npc, yaw, mtx);
             break;
         case 1:
-            npc_draw_palswap_mode_1(npc, arg1, mtx);
+            npc_render_with_watt_idle_palettes(npc, yaw, mtx);
             break;
         case 2:
-            npc_draw_palswap_mode_2(npc, arg1, 0, mtx);
+            npc_render_with_pal_blending(npc, yaw, FALSE, mtx);
             break;
         case 3:
-            npc_draw_palswap_mode_2(npc, arg1, 1, mtx);
+            npc_render_with_pal_blending(npc, yaw, TRUE, mtx);
             break;
         case 4:
-            npc_draw_palswap_mode_4(npc, arg1, mtx);
+            npc_draw_palswap_mode_4(npc, yaw, mtx);
             break;
     }
 }
 
-void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx) {
+void npc_render_without_adjusted_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
     if (npc->dirtyPalettes != 0) {
+        npc->verticalStretch = 1.0f;
         npc->screenSpaceOffset2D[0] = 0.0f;
         npc->screenSpaceOffset2D[1] = 0.0f;
         npc->dirtyPalettes = 0;
-        npc->verticalStretch = 1.0f;
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
@@ -1342,9 +1359,9 @@ void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx) {
     }
 }
 
-s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
+s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
     s32 i, j;
-    s32 temp3;
+    s32 brightness;
     PAL_PTR src;
     PAL_PTR dst;
 
@@ -1360,59 +1377,61 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
             dst = npc->localPaletteData[i];
             src = npc->spritePaletteList[i];
             if (src != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *dst++ = *src++;
                 }
             }
         }
 
-        npc->palSwapState = -2;
-        npc->palSwapLerpAlpha = 0;
+        npc->palAnimState = -2;
+        npc->palBlendAlpha = 0;
         npc->dirtyPalettes = 0;
-        npc->palSwapTimer = 0;
+        npc->nextPalTime = 0;
     }
 
-    if (npc->palSwapTimer == 0) {
-        npc->palSwapState += 2;
-        temp3 = D_80077BF0[npc->palSwapState];
-        if (temp3 == 255) {
-            npc->palSwapState = 0;
+    if (npc->nextPalTime == 0) {
+        npc->palAnimState += 2;
+        brightness = wWattIdlePalettesAnim[npc->palAnimState];
+        if (brightness == 255) {
+            npc->palAnimState = 0;
         }
-        npc->palSwapTimer = D_80077BF0[npc->palSwapState + 1] / 2;
+        npc->nextPalTime = wWattIdlePalettesAnim[npc->palAnimState + 1] / 2;
     }
 
-    temp3 = D_80077BF0[npc->palSwapState];
-    npc->palSwapTimer--;
+    brightness = wWattIdlePalettesAnim[npc->palAnimState];
+    npc->nextPalTime--;
 
-    switch(temp3) {
-        case 0:
+    switch(brightness) {
+        case WATT_DEFAULT:
             for (i = 0; i < npc->unk_C0; i++) {
                 dst = npc->localPaletteData[i];
                 src = npc->spritePaletteList[i];
                 if (src != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
                     }
                 }
             }
             break;
-        case 1:
+        case WATT_BRIGHTEST:
             for (i = 0; i < npc->unk_C0; i++) {
+                // use watt's Brightest palettes
                 dst = npc->localPaletteData[i];
-                src = npc->spritePaletteList[npc->unk_C0 * 5 + i];
+                src = npc->spritePaletteList[npc->unk_C0 * SPR_PAL_BattleWatt_Brightest + i];
                 if (src != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
                     }
                 }
             }
             break;
-        case 2:
+        case WATT_BRIGHTER:
             for (i = 0; i < npc->unk_C0; i++) {
+                // use watt's Brighter palettes
                 dst = npc->localPaletteData[i];
-                src = npc->spritePaletteList[npc->unk_C0 * 6 + i];
+                src = npc->spritePaletteList[npc->unk_C0 * SPR_PAL_BattleWatt_Brighter + i];
                 if (src != NULL) {
-                    for (j = 0; j < 16; j++) {
+                    for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
                     }
                 }
@@ -1426,16 +1445,14 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         s32 alpha = npc->alpha * npc->hideAlpha / 255;
-        u32 mask;
+        u32 mask = 0;
         if (alpha < 255) {
-            mask = DRAW_SPRITE_OVERRIDE_ALPHA;
-        } else {
-            mask = 0;
+            mask |= DRAW_SPRITE_OVERRIDE_ALPHA;
         }
         mask |= DRAW_SPRITE_OVERRIDE_PALETTES;
         spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, alpha, npc->localPalettes, mtx);
     }
-    npc->palSwapLerpAlpha--;
+    npc->palBlendAlpha--;
 }
 
 u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha) {
@@ -1447,7 +1464,7 @@ u16 npc_blend_palette_colors(u16 colorA, u16 colorB, s32 lerpAlpha) {
     return PACK_PAL_RGBA(r, g, b, a);
 }
 
-s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
+s32 npc_render_with_pal_blending(Npc* npc, s32 yaw, b32 hasDifferentIntervals, Matrix4f mtx) {
     s32 i, j;
     PAL_PTR src;
     PAL_PTR dst;
@@ -1465,11 +1482,11 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
         }
 
         if (npc->dirtyPalettes == 1) {
-            npc->palSwapState = 0;
-            npc->palSwapLerpAlpha = 0;
+            npc->palAnimState = 0;
+            npc->palBlendAlpha = 0;
         } else {
-            npc->palSwapState = 0;
-            npc->palSwapLerpAlpha = 255;
+            npc->palAnimState = 0;
+            npc->palBlendAlpha = 255;
         }
 
         for (i = 0; i < npc->paletteCount; i++) {
@@ -1477,110 +1494,114 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
             src = npc->spritePaletteList[i];
             npc->localPalettes[i] = src2;
             if (src != NULL) {
-                for (j = 0; j < 16; j++) {
+                for (j = 0; j < SPR_PAL_SIZE; j++) {
                     *src2++ = *src++;
                 }
             }
         }
 
-        if (arg2 == 0) {
-            s32 temp2 = npc->unk_30C;
-            npc->unk_30C = 0;
-            npc->unk_30E = temp2;
-            npc->unk_310 = temp2;
-            npc->unk_312 = npc->unk_30E;
+        if (hasDifferentIntervals == 0) {
+            s32 temp2 = npc->palswapTimeHoldA;
+            npc->palswapTimeHoldA = 0;
+            npc->palswapTimeAtoB = temp2;
+            npc->palswapTimeHoldB = temp2;
+            npc->palswapTimeBtoA = npc->palswapTimeAtoB;
         }
 
-        npc->palSwapLerpAlpha = 0;
-        npc->palSwapState = 0;
+        npc->nextPalTime = npc->palswapTimeHoldA;
+        npc->palBlendAlpha = 0;
+        npc->palAnimState = PAL_SWAP_HOLD_A;
         npc->dirtyPalettes = 0;
-        npc->palSwapTimer = npc->unk_30C;
     }
 
-    switch (npc->palSwapState) {
-        case 0:
-            if (npc->palSwapTimer != 0) {
-                npc->palSwapTimer--;
+    // blending from A -> B
+    switch (npc->palAnimState) {
+        case PAL_SWAP_HOLD_A:
+            if (npc->nextPalTime != 0) {
+                npc->nextPalTime--;
                 break;
             } else {
-                npc->palSwapLerpAlpha = 0;
-                npc->palSwapState = 1;
+                npc->palBlendAlpha = 0;
+                npc->palAnimState = PAL_SWAP_A_TO_B;
             }
             // fallthrough
-        case 1:
-            npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
-            if (npc->palSwapLerpAlpha > 25500) {
-                npc->palSwapLerpAlpha = 25500;
+        case PAL_SWAP_A_TO_B:
+            npc->palBlendAlpha += 25600 / npc->palswapTimeAtoB;
+            if (npc->palBlendAlpha > 25500) {
+                npc->palBlendAlpha = 25500;
             }
-            blendAlpha = npc->palSwapLerpAlpha / 100;
+            blendAlpha = npc->palBlendAlpha / 100;
             dst = npc->localPaletteData[0];
-            src = npc->spritePaletteList[npc->unk_308];
-            src2 = npc->spritePaletteList[npc->unk_30A];
+            src = npc->spritePaletteList[npc->blendPalA];
+            src2 = npc->spritePaletteList[npc->blendPalB];
             npc->localPalettes[0] = dst;
 
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < SPR_PAL_SIZE; j++) {
                 *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
             }
 
             if (blendAlpha == 255) {
-                npc->palSwapState = 2;
-                npc->palSwapTimer = npc->unk_310;
+                npc->palAnimState = PAL_SWAP_HOLD_B;
+                npc->nextPalTime = npc->palswapTimeHoldB;
             }
             break;
     }
-    switch (npc->palSwapState) {
-        case 2:
-            if (npc->palSwapTimer != 0) {
-                npc->palSwapTimer--;
+
+    // blending from B -> A
+    switch (npc->palAnimState) {
+        case PAL_SWAP_HOLD_B:
+            if (npc->nextPalTime != 0) {
+                npc->nextPalTime--;
                 break;
             } else {
-                npc->palSwapLerpAlpha = 0;
-                npc->palSwapState = 3;
+                npc->palBlendAlpha = 0;
+                npc->palAnimState = PAL_SWAP_B_TO_A;
             }
             // fallthrough
-        case 3:
-            npc->palSwapLerpAlpha += 25600 / npc->unk_312;
-            if (npc->palSwapLerpAlpha > 25500) {
-                npc->palSwapLerpAlpha = 25500;
+        case PAL_SWAP_B_TO_A:
+            npc->palBlendAlpha += 25600 / npc->palswapTimeBtoA;
+            if (npc->palBlendAlpha > 25500) {
+                npc->palBlendAlpha = 25500;
             }
-            blendAlpha = npc->palSwapLerpAlpha / 100;
+            blendAlpha = npc->palBlendAlpha / 100;
             dst = npc->localPaletteData[0];
-            src = npc->spritePaletteList[npc->unk_30A];
-            src2 = npc->spritePaletteList[npc->unk_308];
+            src = npc->spritePaletteList[npc->blendPalB];
+            src2 = npc->spritePaletteList[npc->blendPalA];
             npc->localPalettes[0] = dst;
 
-            for (j = 0; j < 16; j++) {
+            for (j = 0; j < SPR_PAL_SIZE; j++) {
                 *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
             }
 
             if (blendAlpha == 255) {
-                npc->palSwapState = 0;
-                npc->palSwapTimer = npc->unk_30C;
+                npc->palAnimState = PAL_SWAP_HOLD_A;
+                npc->nextPalTime = npc->palswapTimeHoldA;
             }
             break;
     }
 
-    if (npc->palSwapState < 4) {
-        if (npc->palSwapState >= 0) {
+    switch (npc->palAnimState) {
+        case PAL_SWAP_HOLD_A:
+        case PAL_SWAP_A_TO_B:
+        case PAL_SWAP_HOLD_B:
+        case PAL_SWAP_B_TO_A:
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-                u32 mask;
+                u32 mask = 0;
                 blendAlpha = npc->alpha * npc->hideAlpha / 255;
                 if (blendAlpha < 255) {
-                    mask = DRAW_SPRITE_OVERRIDE_ALPHA;
-                } else {
-                    mask = 0;
+                    mask |= DRAW_SPRITE_OVERRIDE_ALPHA;
                 }
                 mask |= DRAW_SPRITE_OVERRIDE_PALETTES;
-                spr_draw_npc_sprite(npc->spriteInstanceID | mask, arg1, blendAlpha, npc->localPalettes, mtx);
+                spr_draw_npc_sprite(npc->spriteInstanceID | mask, yaw, blendAlpha, npc->localPalettes, mtx);
             }
-        }
+            break;
     }
 }
 
-s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
+s32 npc_draw_palswap_mode_4(Npc* npc, s32 yaw, Matrix4f mtx) {
     s32 i, j;
-    PAL_PTR src;
-    PAL_PTR src2;
+    PAL_PTR color2;
+    PAL_PTR color1;
     PAL_PTR dst;
     u8 blendAlpha;
 
@@ -1595,115 +1616,120 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
         }
 
         if (npc->dirtyPalettes == 1) {
-            npc->palSwapState = 0;
-            npc->palSwapLerpAlpha = 0;
+            npc->palAnimState = 0;
+            npc->palBlendAlpha = 0;
         } else {
-            npc->palSwapState = 0;
-            npc->palSwapLerpAlpha = 255;
+            npc->palAnimState = 0;
+            npc->palBlendAlpha = 255;
         }
 
         for (i = 0; i < npc->paletteCount; i++) {
-            src2 = npc->localPaletteData[i];
-            src = npc->spritePaletteList[i];
-            npc->localPalettes[i] = src2;
-            if (src != NULL) {
-                for (j = 0; j < 16; j++) {
-                    *src2++ = *src++;
+            color1 = npc->localPaletteData[i];
+            color2 = npc->spritePaletteList[i];
+            npc->localPalettes[i] = color1;
+            if (color2 != NULL) {
+                for (j = 0; j < SPR_PAL_SIZE; j++) {
+                    *color1++ = *color2++;
                 }
             }
         }
 
-        npc->palSwapLerpAlpha = 0;
-        npc->palSwapState = 0;
+        npc->nextPalTime = npc->palswapTimeHoldA;
+        npc->palBlendAlpha = 0;
+        npc->palAnimState = PAL_SWAP_HOLD_A;
         npc->dirtyPalettes = 0;
-        npc->palSwapTimer = npc->unk_30C;
     }
 
-    switch (npc->palSwapState) {
-        case 0:
-            if (npc->palSwapTimer != 0) {
-                npc->palSwapTimer--;
+    switch (npc->palAnimState) {
+        case PAL_SWAP_HOLD_A:
+            if (npc->nextPalTime != 0) {
+                npc->nextPalTime--;
                 break;
             } else {
-                npc->palSwapLerpAlpha = 0;
-                npc->palSwapState = 1;
+                npc->palBlendAlpha = 0;
+                npc->palAnimState = PAL_SWAP_A_TO_B;
             }
             // fallthrough
-        case 1:
-            npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
-            if (npc->palSwapLerpAlpha > 25500) {
-                npc->palSwapLerpAlpha = 25500;
+        case PAL_SWAP_A_TO_B:
+            npc->palBlendAlpha += 25600 / npc->palswapTimeAtoB;
+            if (npc->palBlendAlpha > 25500) {
+                npc->palBlendAlpha = 25500;
             }
-            blendAlpha = npc->palSwapLerpAlpha / 100;
+            blendAlpha = npc->palBlendAlpha / 100;
 
             dst = npc->localPaletteData[0];
-            src = npc->spritePaletteList[npc->unk_308];
-            src2 = npc->spritePaletteList[npc->unk_30A];
+            color2 = npc->spritePaletteList[npc->blendPalA];
+            color1 = npc->spritePaletteList[npc->blendPalB];
             npc->localPalettes[0] = dst;
 
-            for (j = 0; j < 16; j++) {
-                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            for (j = 0; j < SPR_PAL_SIZE; j++) {
+                *dst++ = npc_blend_palette_colors(*color2++, *color1++, blendAlpha);
             }
 
             dst = npc->localPaletteData[3];
-            src = npc->spritePaletteList[npc->unk_314];
-            src2 = npc->spritePaletteList[npc->unk_316];
+            color2 = npc->spritePaletteList[npc->unk_314];
+            color1 = npc->spritePaletteList[npc->unk_316];
             npc->localPalettes[3] = dst;
 
-            for (j = 0; j < 16; j++) {
-                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            for (j = 0; j < SPR_PAL_SIZE; j++) {
+                *dst++ = npc_blend_palette_colors(*color2++, *color1++, blendAlpha);
             }
 
             if (blendAlpha == 255) {
-                npc->palSwapState = 2;
-                npc->palSwapTimer = npc->unk_310;
+                npc->palAnimState = PAL_SWAP_HOLD_B;
+                npc->nextPalTime = npc->palswapTimeHoldB;
             }
             break;
     }
-    switch (npc->palSwapState) {
-        case 2:
-            if (npc->palSwapTimer != 0) {
-                npc->palSwapTimer--;
+
+    // blending from B -> A
+    switch (npc->palAnimState) {
+        case PAL_SWAP_HOLD_B:
+            if (npc->nextPalTime != 0) {
+                npc->nextPalTime--;
                 break;
             } else {
-                npc->palSwapLerpAlpha = 0;
-                npc->palSwapState = 3;
+                npc->palBlendAlpha = 0;
+                npc->palAnimState = PAL_SWAP_B_TO_A;
             }
             // fallthrough
-        case 3:
-            npc->palSwapLerpAlpha += 25600 / npc->unk_312;
-            if (npc->palSwapLerpAlpha > 25500) {
-                npc->palSwapLerpAlpha = 25500;
+        case PAL_SWAP_B_TO_A:
+            npc->palBlendAlpha += 25600 / npc->palswapTimeBtoA;
+            if (npc->palBlendAlpha > 25500) {
+                npc->palBlendAlpha = 25500;
             }
-            blendAlpha = npc->palSwapLerpAlpha / 100;
+            blendAlpha = npc->palBlendAlpha / 100;
 
             dst = npc->localPaletteData[0];
-            src = npc->spritePaletteList[npc->unk_30A];
-            src2 = npc->spritePaletteList[npc->unk_308];
+            color2 = npc->spritePaletteList[npc->blendPalB];
+            color1 = npc->spritePaletteList[npc->blendPalA];
             npc->localPalettes[0] = dst;
 
-            for (j = 0; j < 16; j++) {
-                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            for (j = 0; j < SPR_PAL_SIZE; j++) {
+                *dst++ = npc_blend_palette_colors(*color2++, *color1++, blendAlpha);
             }
 
             dst = npc->localPaletteData[1];
-            src = npc->spritePaletteList[npc->unk_316];
-            src2 = npc->spritePaletteList[npc->unk_314];
+            color2 = npc->spritePaletteList[npc->unk_316];
+            color1 = npc->spritePaletteList[npc->unk_314];
             npc->localPalettes[3] = npc->localPaletteData[3];
 
-            for (j = 0; j < 16; j++) {
-                *dst++ = npc_blend_palette_colors(*src++, *src2++, blendAlpha);
+            for (j = 0; j < SPR_PAL_SIZE; j++) {
+                *dst++ = npc_blend_palette_colors(*color2++, *color1++, blendAlpha);
             }
 
             if (blendAlpha == 255) {
-                npc->palSwapState = 0;
-                npc->palSwapTimer = npc->unk_30C;
+                npc->palAnimState = PAL_SWAP_HOLD_A;
+                npc->nextPalTime = npc->palswapTimeHoldA;
             }
             break;
     }
 
-    if (npc->palSwapState < 4) {
-        if (npc->palSwapState >= 0) {
+    switch (npc->palAnimState) {
+        case PAL_SWAP_HOLD_A:
+        case PAL_SWAP_A_TO_B:
+        case PAL_SWAP_HOLD_B:
+        case PAL_SWAP_B_TO_A:
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                 s32 temp;
                 u32 spriteInstanceMask;
@@ -1711,9 +1737,9 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
                 blendAlpha = npc->alpha * npc->hideAlpha / 255;
                 temp = blendAlpha < 255;
                 spriteInstanceMask = ((temp) << 31) | DRAW_SPRITE_OVERRIDE_PALETTES;
-                spr_draw_npc_sprite(npc->spriteInstanceID | spriteInstanceMask, arg1, blendAlpha, npc->localPalettes, mtx);
+                spr_draw_npc_sprite(npc->spriteInstanceID | spriteInstanceMask, yaw, blendAlpha, npc->localPalettes, mtx);
             }
-        }
+            break;
     }
 }
 
@@ -1731,27 +1757,27 @@ void npc_remove_decoration(Npc* npc, s32 idx) {
 s32 npc_update_decorations(Npc* npc) {
     s32 i;
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < MAX_NPC_DECORATIONS; i++) {
         switch (npc->decorationType[i]) {
-            case 0:
+            case NPC_DECORATION_NONE:
                 npc_update_decoration_none(npc, i);
                 break;
-            case 1:
+            case NPC_DECORATION_BOWSER_AURA:
                 npc_update_decoration_bowser_aura(npc, i);
                 break;
-            case 2:
+            case NPC_DECORATION_SWEAT:
                 npc_update_decoration_sweat(npc, i);
                 break;
-            case 3:
+            case NPC_DECORATION_SEEING_STARS:
                 npc_update_decoration_seeing_stars(npc, i);
                 break;
-            case 4:
+            case NPC_DECORATION_WHITE_GLOW_FRONT:
                 npc_update_decoration_glow_in_front(npc, i);
                 break;
-            case 5:
+            case NPC_DECORATION_WHITE_GLOW_BEHIND:
                 npc_update_decoration_glow_behind(npc, i);
                 break;
-            case 6:
+            case NPC_DECORATION_CHARGED:
                 npc_update_decoration_charged(npc, i);
                 break;
         }
@@ -1760,41 +1786,41 @@ s32 npc_update_decorations(Npc* npc) {
 
 void npc_remove_decoration_impl(Npc* npc, s32 idx) {
     switch (npc->decorationType[idx]) {
-        case 0:
+        case NPC_DECORATION_NONE:
             npc_remove_decoration_none(npc, idx);
             break;
-        case 1:
+        case NPC_DECORATION_BOWSER_AURA:
             npc_remove_decoration_bowser_aura(npc, idx);
             break;
-        case 2:
+        case NPC_DECORATION_SWEAT:
             npc_remove_decoration_sweat(npc, idx);
             break;
-        case 3:
+        case NPC_DECORATION_SEEING_STARS:
             npc_remove_decoration_seeing_stars(npc, idx);
             break;
-        case 4:
+        case NPC_DECORATION_WHITE_GLOW_FRONT:
             npc_remove_decoration_glow_in_front(npc, idx);
             break;
-        case 5:
+        case NPC_DECORATION_WHITE_GLOW_BEHIND:
             npc_remove_decoration_glow_behind(npc, idx);
             break;
-        case 6:
+        case NPC_DECORATION_CHARGED:
             npc_remove_decoration_charged(npc, idx);
             break;
     }
-    npc->decorationType[idx] = 0;
+    npc->decorationType[idx] = NPC_DECORATION_NONE;
 }
 
 void npc_reset_current_decoration(Npc* npc, s32 idx) {
     switch (npc->decorationType[idx]) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
+        case NPC_DECORATION_NONE:
+        case NPC_DECORATION_BOWSER_AURA:
+        case NPC_DECORATION_SWEAT:
+        case NPC_DECORATION_SEEING_STARS:
+        case NPC_DECORATION_WHITE_GLOW_FRONT:
+        case NPC_DECORATION_WHITE_GLOW_BEHIND:
             break;
-        case 6:
+        case NPC_DECORATION_CHARGED:
             npc__reset_current_decoration(npc, idx);
             break;
     }
@@ -1811,7 +1837,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            fx_aura(2, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &npc->decorations[idx]);
+            fx_aura(FX_AURA_BLUE, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &npc->decorations[idx]);
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
@@ -1841,12 +1867,12 @@ void npc_update_decoration_sweat(Npc* npc, s32 idx) {
             } else {
                 fx_sweat(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 5.0f, -45.0f, 20);
             }
-            npc->decorationUnk[idx] = 10;
+            npc->decorationGlowPhase[idx] = 10;
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
-            if (npc->decorationUnk[idx] != 0) {
-                npc->decorationUnk[idx]--;
+            if (npc->decorationGlowPhase[idx] != 0) {
+                npc->decorationGlowPhase[idx]--;
             } else {
                 npc->decorationInitialised[idx] = 0;
             }
@@ -1927,30 +1953,33 @@ void npc_remove_decoration_glow_behind(Npc* npc, s32 idx) {
 }
 
 void npc_update_decoration_charged(Npc* npc, s32 idx) {
-    u8 sp50[20];
-    u8 sp38[20];
-    u8 sp20[20];
+    u8 rbuf[20];
+    u8 gbuf[20];
+    u8 bbuf[20];
+    s32 color;
+    s32 alpha;
     s32 i;
-    s32 temp3;
 
     if (!npc->decorationInitialised[idx]) {
         set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         npc->decorationInitialised[idx] = TRUE;
     }
     if (npc->decorationInitialised[idx] == TRUE) {
-        npc->decorationUnk[idx] += 7;
-        if (npc->decorationUnk[idx] >= 360) {
-            npc->decorationUnk[idx] = npc->decorationUnk[idx] % 360;
+        npc->decorationGlowPhase[idx] += 7;
+        if (npc->decorationGlowPhase[idx] >= 360) {
+            npc->decorationGlowPhase[idx] %= 360;
         }
 
         for (i = 0; i < 20; i++) {
-            sp50[i] = (cosine(npc->decorationUnk[idx] + i * 25) + 1.0) * 80.0f;
-            sp38[i] = (cosine(npc->decorationUnk[idx] + i * 25 + 45) + 1.0) * 80.0f;
-            sp20[i] = (cosine(npc->decorationUnk[idx] + i * 25 + 90) + 1.0) * 80.0f;
+            rbuf[i] = (cosine(npc->decorationGlowPhase[idx] + (25 * i)) + 1.0) * 80.0f;
+            gbuf[i] = (cosine(npc->decorationGlowPhase[idx] + (25 * i) + 45) + 1.0) * 80.0f;
+            bbuf[i] = (cosine(npc->decorationGlowPhase[idx] + (25 * i) + 90) + 1.0) * 80.0f;
         }
 
-        for (temp3 = 255, i = 0; i < 20; i++) {
-            set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_COLOR_BUF_SET_MODULATE, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
+        alpha = 255;
+        for (i = 0; i < 20; i++) {
+            color = (rbuf[i] << 24) | (gbuf[i] << 16) | (bbuf[i] << 8) | alpha;
+            set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_COLOR_BUF_SET_MODULATE, i, color, 0, 255, 0);
         }
     }
 }

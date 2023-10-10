@@ -447,7 +447,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if (battleStatus->lastAttackDamage > 0 && !partImmuneToElement) {
-        func_80267018(target, 1);
+        set_actor_flash_mode(target, 1);
         if (isFireDamage) {
             sfx_play_sound_at_position(SOUND_HIT_FIRE, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         } else if (isShockDamage) {

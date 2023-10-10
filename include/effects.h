@@ -992,6 +992,13 @@ typedef struct ShimmerWaveFXData {
     /* 0x68 */ f32 unk_68;
 } ShimmerWaveFXData; // size = 0x6C
 
+enum AuraFXTypes {
+    FX_AURA_CAPTURE     = 0, // star spirit being captured in the intro
+    FX_AURA_RED         = 1, // used by Kooper's Fire Shell
+    FX_AURA_BLUE        = 2, // used by Final Bowser
+    FX_AURA_GOLD        = 3, // used by The Master (final form)
+};
+
 typedef struct AuraFXData {
     /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f posA;
