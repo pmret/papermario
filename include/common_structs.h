@@ -277,7 +277,7 @@ typedef struct Npc {
     /* 0x0B8 */ char unk_B8[4];
     /* 0x0BC */ s16 nextPalTime;
     /* 0x0BE */ s16 palBlendAlpha;
-    /* 0x0C0 */ s8 unk_C0;
+    /* 0x0C0 */ s8 spriteColorVariations;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
     /* 0x0C4 */ PAL_PTR* spritePaletteList;
@@ -1713,7 +1713,7 @@ typedef struct DecorationTable {
     /* 0x74E */ s16 palswapUnused2; // presumably palswapTimeCtoA  for unimplemented triple cycling (A->B->C->A)
     /* 0x750 */ s8 glowState;
     /* 0x751 */ b8 glowStateChanged;
-    /* 0x752 */ s8 glowPalUnk1;
+    /* 0x752 */ s8 glowUnk1;
     /* 0x753 */ char pad753[5];
     /* 0x758 */ s16 glowUnk2;
     /* 0x75A */ s16 glowUnk3;

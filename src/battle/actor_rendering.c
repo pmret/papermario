@@ -3396,7 +3396,7 @@ void part_glow_on(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection) {
     s32 i;
 
     if (decorations->glowStateChanged) {
-        decorations->glowPalUnk1 = -2;
+        decorations->glowUnk1 = -2;
         decorations->glowUnk3 = 0;
         decorations->glowStateChanged = FALSE;
         decorations->glowUnk2 = 0;

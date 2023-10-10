@@ -2713,7 +2713,7 @@ void set_part_pal_effect(ActorPart* part, s32 palEffect) {
 
         if (decorations->glowState != palEffect) {
             decorations->glowState = palEffect;
-            decorations->glowPalUnk1 = 0;
+            decorations->glowUnk1 = 0;
             decorations->glowStateChanged = TRUE;
         }
     }

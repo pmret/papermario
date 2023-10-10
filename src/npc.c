@@ -4,7 +4,7 @@
 #include "effects.h"
 #include "sprite.h"
 #include "world/partners.h"
-#include "sprite/npc/BattleWatt.h" // maybe world?
+#include "sprite/npc/WorldWatt.h"
 
 SHIFT_BSS s16 gNpcCount;
 SHIFT_BSS NpcList gWorldNpcList;
@@ -245,7 +245,7 @@ void free_npc_by_index(s32 listIndex) {
 
             delete_shadow(npc->shadowIndex);
 
-            for (i = 0; i < 2; i++) {
+            for (i = 0; i < MAX_NPC_DECORATIONS; i++) {
                 npc_remove_decoration(npc, i);
             }
 
@@ -274,7 +274,7 @@ void free_npc(Npc* npc) {
 
     delete_shadow(npc->shadowIndex);
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < MAX_NPC_DECORATIONS; i++) {
         npc_remove_decoration(npc, i);
     }
 
@@ -1246,11 +1246,11 @@ void npc_reload_all(void) {
                         while (npc->spritePaletteList[npc->paletteCount] != (PAL_PTR) -1) {
                             npc->paletteCount++;
                         }
-                        npc->unk_C0 = spr_get_npc_color_variations(npc->curAnim >> 16);
+                        npc->spriteColorVariations = spr_get_npc_color_variations(npc->curAnim >> 16);
                     }
                     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                         if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
-                            for (j = 0; j < 2; j++) {
+                            for (j = 0; j < MAX_NPC_DECORATIONS; j++) {
                                 npc_reset_current_decoration(npc, j);
                             }
                             npc_imgfx_update(npc);
@@ -1372,7 +1372,7 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
             npc->paletteCount++;
         }
 
-        npc->unk_C0 = spr_get_npc_color_variations(npc->curAnim >> 16);
+        npc->spriteColorVariations = spr_get_npc_color_variations(npc->curAnim >> 16);
         for (i = 0; i < npc->paletteCount; i++) {
             dst = npc->localPaletteData[i];
             src = npc->spritePaletteList[i];
@@ -1403,7 +1403,7 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
 
     switch(brightness) {
         case WATT_DEFAULT:
-            for (i = 0; i < npc->unk_C0; i++) {
+            for (i = 0; i < npc->spriteColorVariations; i++) {
                 dst = npc->localPaletteData[i];
                 src = npc->spritePaletteList[i];
                 if (src != NULL) {
@@ -1414,10 +1414,10 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
             }
             break;
         case WATT_BRIGHTEST:
-            for (i = 0; i < npc->unk_C0; i++) {
+            for (i = 0; i < npc->spriteColorVariations; i++) {
                 // use watt's Brightest palettes
                 dst = npc->localPaletteData[i];
-                src = npc->spritePaletteList[npc->unk_C0 * SPR_PAL_BattleWatt_Brightest + i];
+                src = npc->spritePaletteList[npc->spriteColorVariations * SPR_PAL_WorldWatt_Brightest + i];
                 if (src != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
@@ -1426,10 +1426,10 @@ s32 npc_render_with_watt_idle_palettes(Npc* npc, s32 arg1, Matrix4f mtx) {
             }
             break;
         case WATT_BRIGHTER:
-            for (i = 0; i < npc->unk_C0; i++) {
+            for (i = 0; i < npc->spriteColorVariations; i++) {
                 // use watt's Brighter palettes
                 dst = npc->localPaletteData[i];
-                src = npc->spritePaletteList[npc->unk_C0 * SPR_PAL_BattleWatt_Brighter + i];
+                src = npc->spritePaletteList[npc->spriteColorVariations * SPR_PAL_WorldWatt_Brighter + i];
                 if (src != NULL) {
                     for (j = 0; j < SPR_PAL_SIZE; j++) {
                         *dst++ = *src++;
