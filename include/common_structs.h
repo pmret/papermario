@@ -1409,9 +1409,9 @@ typedef struct GameStatus {
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ s8 debugEnemyContact;
     /* 0x075 */ s8 debugQuizmo;
-    /* 0x076 */ b8 unk_76;
-    /* 0x077 */ b8 unk_77;
-    /* 0x078 */ s8 disableScripts;
+    /* 0x076 */ b8 debugUnused1;
+    /* 0x077 */ b8 debugUnused2;
+    /* 0x078 */ s8 debugScripts;
     /* 0x079 */ char unk_79;
     /* 0x07A */ b8 musicEnabled;
     /* 0x07B */ char unk_7B;
@@ -2021,7 +2021,7 @@ typedef struct PlayerStatus {
     /* 0x064 */ f32 overlapPushAmount;
     /* 0x068 */ f32 groundNormalPitch;
     /* 0x06C */ f32 maxJumpSpeed;
-    /* 0x070 */ f32 gravityIntegrator[4];
+    /* 0x070 */ f32 gravityIntegrator[4]; // derivatives of y; 0 = velocity, 1 = accel, etc
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 curYaw;
     /* 0x088 */ f32 overlapPushYaw;
@@ -2066,26 +2066,24 @@ typedef struct PlayerStatus {
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
-typedef struct SaveDataHeader {
-    /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
-    /* 0x0010 */ s8 pad[0x20]; /* always zero */
-    /* 0x0030 */ s32 crc1;
-    /* 0x0034 */ s32 crc2;
-    /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ u32 saveCount;
-    /* 0x0040 */ s8 ignored[0x40];
-} SaveDataHeader;
-
 typedef struct SaveMetadata {
     /* 0x00 */ s32 timePlayed;
     /* 0x04 */ u8 spiritsRescued;
-    /* 0x05 */ char unk_05[0x1];
+    /* 0x05 */ char unk_05[1];
     /* 0x06 */ s8 level;
     /* 0x07 */ unsigned char filename[8];
-    /* 0x0F */ char unk_0F[0x1];
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x0F */ char unk_0F[9];
 } SaveMetadata; // size = 0x18
+
+typedef struct SaveGlobals {
+    /* 0x00 */ char magicString[16]; /* "Mario Story 006" string */
+    /* 0x10 */ s8 pad[32]; /* always zero */
+    /* 0x30 */ s32 crc1;
+    /* 0x34 */ s32 crc2;
+    /* 0x38 */ s32 useMonoSound;
+    /* 0x3C */ u32 lastFileSelected;
+    /* 0x40 */ s8 reserved[64]; // unused
+} SaveGlobals; // size = 0x80
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
@@ -2105,12 +2103,12 @@ typedef struct SaveData {
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
     /* 0x12E0 */ s8 debugEnemyContact;
-    /* 0x12E0 */ b8 unk_12E1;
-    /* 0x12E0 */ b8 unk_12E2;
+    /* 0x12E0 */ b8 debugUnused1;
+    /* 0x12E0 */ b8 debugUnused2;
     /* 0x12E0 */ b8 musicEnabled;
     /* 0x12E4 */ char unk_12E4[0x2];
     /* 0x12E6 */ Vec3s savePos;
-    /* 0x12EC */ SaveMetadata unk_12EC;
+    /* 0x12EC */ SaveMetadata metadata;
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 

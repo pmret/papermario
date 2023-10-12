@@ -266,7 +266,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 
-s32 game_scripts_disabled(void);
+b32 check_player_action_debug(void);
 
 s32 battle_heap_create(void);
 
@@ -502,8 +502,8 @@ void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
 s32 enable_player_static_collisions(void);
-s32 check_input_jump(void);
-s32 check_input_hammer(void);
+b32 check_input_jump(void);
+b32 check_input_hammer(void);
 
 Npc* resolve_npc(Evt* script, s32 npcIdOrPtr);
 void enable_npc_blur(Npc* npc);

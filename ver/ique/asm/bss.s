@@ -207,16 +207,16 @@ dlabel D_8009A6A6
 dlabel D_8009A6A8
 .space 8
 
-dlabel D_8009A6B0
+dlabel FetchSaveBuffer
 .space 0x00001380
 
-dlabel logicalSaveInfo
+dlabel LogicalSaveInfo
 .space 0x00000020
 
-dlabel physicalSaveInfo
+dlabel PhysicalSaveInfo
 .space 0x00000030
 
-dlabel nextAvailableSavePage
+dlabel NextAvailablePhysicalSave
 .space 4
 
 dlabel D_8009BA84
@@ -316,13 +316,13 @@ dlabel gLogosImage1
 dlabel gLogosImage2
 .space 4
 
-dlabel D_800A0920
+dlabel StepPauseDelay
 .space 1
 
-dlabel D_800A0921
+dlabel StepPauseState
 .space 1
 
-dlabel D_800A0922
+dlabel StepPauseAlpha
 .space 2
 
 dlabel SavedReverbMode
@@ -828,7 +828,7 @@ dlabel __osFlashMessageQ
 dlabel nuGfxTask
 .space 0x58*10
 
-dlabel D_800D95E8
+dlabel gSaveGlobals
 .space 0x80
 
 dlabel wMapBgName

@@ -27,7 +27,7 @@ dlabel wPartnerNpc
 dlabel TweesterTouchingPlayer
 .space 4
 
-dlabel D_8010C938
+dlabel PlayerNormalYaw
 .space 4
 
 dlabel ISpyNotificationCallback
@@ -81,7 +81,7 @@ dlabel NpcHitQueryColliderID
 dlabel JumpedOnSwitchZ
 .space 4
 
-dlabel D_8010C980
+dlabel PlayerRunStateTime
 .space 4
 
 dlabel D_8010C984
@@ -93,7 +93,7 @@ dlabel D_8010C988
 dlabel NpcHitQueryAheadCollider
 .space 4
 
-dlabel D_8010C990
+dlabel PlayerNormalPitch
 .space 4
 
 dlabel D_8010C994

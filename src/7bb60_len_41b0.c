@@ -120,7 +120,7 @@ s32 collision_main_above(void) {
     return hitResult;
 }
 
-void handle_switch_hit(void) {
+void handle_jumping_land_on_switch(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 colliderID;
     f32 groundPosY;
@@ -166,7 +166,7 @@ void handle_switch_hit(void) {
     }
 }
 
-void func_800E2BB0(void) {
+void handle_jumping_launch(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 cond = FALSE;
 
@@ -205,10 +205,10 @@ void phys_update_jump(void) {
     if (playerStatus->timeInAir != 0) {
         switch (playerStatus->actionState) {
             case ACTION_STATE_LAUNCH:
-                func_800E2BB0();
+                handle_jumping_launch();
                 return;
             case ACTION_STATE_LANDING_ON_SWITCH:
-                handle_switch_hit();
+                handle_jumping_land_on_switch();
                 return;
             case ACTION_STATE_BOUNCE:
                 integrate_gravity();
@@ -463,7 +463,7 @@ f32 integrate_gravity(void) {
 f32 player_fall_distance(void) {
     f32 velocity = integrate_gravity();
 
-    if (game_scripts_disabled()) {
+    if (check_player_action_debug()) {
         velocity = 0.0f;
     }
     return velocity;
@@ -908,7 +908,7 @@ void phys_main_collision_below(void) {
         playerStatus->groundAnglesXZ.y = hitDirZ;
     }
 
-    if (game_scripts_disabled()) {
+    if (check_player_action_debug()) {
         return;
     }
 

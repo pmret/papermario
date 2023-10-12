@@ -24,8 +24,8 @@ void state_step_startup(void) {
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
-    gGameStatusPtr->unk_76 = FALSE;
-    gGameStatusPtr->disableScripts = FALSE;
+    gGameStatusPtr->debugUnused1 = FALSE;
+    gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     gGameStatusPtr->introPart = INTRO_PART_NONE;
     gGameStatusPtr->demoBattleFlags = 0;
@@ -70,9 +70,9 @@ void state_step_startup(void) {
         gGameStatusPtr->unk_48[i] = 15;
     }
 
-    fio_has_valid_backup();
+    fio_has_valid_globals();
 
-    if (D_800D95E8.saveSlot == 0) {
+    if (gSaveGlobals.useMonoSound == 0) {
         gGameStatusPtr->soundOutputMode = SOUND_OUT_STEREO;
         audio_set_stereo();
     } else {

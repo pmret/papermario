@@ -41,8 +41,6 @@ extern HiddenPanelsData gCurrentHiddenPanels;
 
 extern BackgroundHeader gBackgroundImage;
 
-extern s32 CreateEntityVarArgBuffer[4];
-
 extern f32 D_800F7B74;
 
 extern CollisionData gZoneCollisionData;
@@ -84,11 +82,11 @@ extern Entity* TweesterTouchingPlayer;
 
 extern s32 PrevPlayerDirection;
 extern s32 PeachDisguiseNpcIndex;
-extern s32 D_8010C980;
+extern s32 PlayerRunStateTime;
 extern s32 PrevPlayerCamRelativeYaw;
 extern s32 D_800F7B44;
-extern f32 D_8010C938;
-extern f32 D_8010C990;
+extern f32 PlayerNormalYaw;
+extern f32 PlayerNormalPitch;
 extern s32 NpcHitQueryColliderID;
 extern Vec3s StandardActorHomePositions[];
 

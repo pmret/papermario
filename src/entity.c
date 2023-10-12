@@ -153,7 +153,7 @@ void update_entities(void) {
                     entity->rot.y = -gCameras[gCurrentCameraID].curYaw;
                 }
 
-                if (!gGameStatusPtr->disableScripts) {
+                if (gGameStatusPtr->debugScripts == DEBUG_SCRIPTS_NONE) {
                     if (entity->updateScriptCallback != NULL) {
                         entity->updateScriptCallback(entity);
                     }

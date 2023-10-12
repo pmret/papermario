@@ -3043,7 +3043,7 @@ enum PlayerStatusFlags {
     /* Mario just interacted with something (usually cleared on the same frame) */
     PS_FLAG_INTERACTED                       = 0x08000000,
     /* Makes Mario face forwards, used when talking to NPCs, or when on Lakilester */
-    PS_FLAG_FACE_FORWARDS                    = 0x10000000,
+    PS_FLAG_FACE_FORWARD                     = 0x10000000,
     /* Freezes physics and animations - is usually reset at the start of a frame so often does nothing */
     PS_FLAG_TIME_STOPPED                     = 0x20000000,
     /* Indicates that Mario needs his sprite redrawn */
@@ -3075,7 +3075,6 @@ enum PlayerStatusAnimFlags {
     /* Began an encounter by spinning into an enemy with the Dizzy Attack badge on */
     PA_FLAG_DIZZY_ATTACK_ENCOUNTER           = 0x00020000,
     PA_FLAG_INTERRUPT_SPIN                   = 0x00040000,
-    PA_FLAG_80000                            = 0x00080000,
     /* When Mario is in a transition to a new map, either through a loading zone or pipe */
     PA_FLAG_CHANGING_MAP                     = 0x00100000,
     /* Occurs after PA_FLAG_FORCE_USE_PARTNER. Some partners - namely Bow and Lakilester, unset this immediately.
@@ -3085,9 +3084,6 @@ enum PlayerStatusAnimFlags {
     PA_FLAG_ABORT_PUSHING_BLOCK              = 0x00800000,
     /* Changes how Mario is rendered. Seems to be intended to make Mario's depth render properly when using Bow behind a switch (two translucent objects on top of eachother), but it doesn't actually work. */
     PA_FLAG_MAP_HAS_SWITCH                   = 0x01000000,
-    PA_FLAG_2000000                          = 0x02000000,
-    PA_FLAG_4000000                          = 0x04000000,
-    PA_FLAG_8000000                          = 0x08000000,
     /* Usually, if Mario falls for too long, he eventually gets reset to his last safe position. This prevents that. Used by some scripts. */
     PA_FLAG_NO_OOB_RESPAWN                   = 0x10000000,
     /* This allows dismounting from Lakilester, even if in a precarious situation (like over spikes, lava, or water). */
@@ -4212,6 +4208,13 @@ enum DebugEnemyContactModes {
     DEBUG_CONTACT_DIE_IN_BATTLE     = 3, // all enemies wll die during BATTLE_STATE_BEGIN_TURN
     DEBUG_CONTACT_AUTO_FLEE         = 4, // the player flees during BATTLE_STATE_BEGIN_TURN
 };
+
+enum DebugScriptstModes {
+    DEBUG_SCRIPTS_NONE              = 0,
+    DEBUG_SCRIPTS_NO_UPDATE         = 1,
+    DEBUG_SCRIPTS_BLOCK_FUNC_DONE   = 2,
+};
+
 
 enum DebuffTypes {
     DEBUFF_TYPE_SLEEP               = 0x00001000,

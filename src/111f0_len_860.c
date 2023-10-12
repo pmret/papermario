@@ -52,7 +52,7 @@ void state_step_enter_world(void) {
             }
 
             gGameStatusPtr->isBattle = FALSE;
-            gGameStatusPtr->disableScripts = FALSE;
+            gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
 
             if (!gLoadedFromFileSelect) {
                 load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
@@ -156,7 +156,7 @@ void state_step_change_map(void) {
                 gMapTransitionStateTime--;
             } else {
                 gGameStatusPtr->isBattle = FALSE;
-                gGameStatusPtr->disableScripts = FALSE;
+                gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
                 load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 nuContRmbForceStopEnd();
@@ -231,7 +231,7 @@ void state_step_game_over(void) {
                 gMapTransitionStateTime--;
             } else {
                 gGameStatusPtr->isBattle = FALSE;
-                gGameStatusPtr->disableScripts = FALSE;
+                gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
                 load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
                 nuContRmbForceStopEnd();
                 gMapTransitionState++;

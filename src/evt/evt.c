@@ -1688,7 +1688,7 @@ s32 evt_execute_next_command(Evt* script) {
             // return 0
         } else if (status == ApiStatus_DONE2) {
             script->curOpcode = EVT_OP_INTERNAL_FETCH;
-            if (gGameStatusPtr->disableScripts != 2) {
+            if (gGameStatusPtr->debugScripts != DEBUG_SCRIPTS_BLOCK_FUNC_DONE) {
                 continue;
             }
             // return 0

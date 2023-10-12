@@ -192,8 +192,8 @@ void state_step_demo(void) {
                 gGameStatusPtr->peachFlags = 0;
                 enable_sounds();
                 gGameStatusPtr->isBattle = FALSE;
-                gGameStatusPtr->unk_76 = FALSE;
-                gGameStatusPtr->disableScripts = FALSE;
+                gGameStatusPtr->debugUnused1 = FALSE;
+                gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 general_heap_create();

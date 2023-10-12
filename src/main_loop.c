@@ -200,7 +200,7 @@ void gfx_draw_frame(void) {
         render_window_root();
     }
 
-    if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD) && !gGameStatusPtr->disableScripts) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD) && gGameStatusPtr->debugScripts == DEBUG_SCRIPTS_NONE) {
         render_frame(TRUE);
     }
 

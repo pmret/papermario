@@ -36,7 +36,7 @@ void action_update_idle_peach(void);
 void action_update_idle(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    s32 wasMoving = FALSE;
+    s32 firstFrame = FALSE;
     f32 angle, magnitude;
     AnimID anim;
 
@@ -49,7 +49,7 @@ void action_update_idle(void) {
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
-        wasMoving = TRUE;
+        firstFrame = TRUE;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->curStateTime = 0;
         playerStatus->timeInAir = 0;
@@ -71,25 +71,31 @@ void action_update_idle(void) {
 
     if (playerStatus->animFlags & PA_FLAG_RAISED_ARMS) {
         set_action_state(ACTION_STATE_RAISE_ARMS);
-    } else {
-        player_input_to_move_vector(&angle, &magnitude);
-        phys_update_interact_collider();
+        return;
+    }
 
-        if (check_input_jump()) {
-            if (magnitude != 0.0f || playerStatus->targetYaw != angle) {
-                playerStatus->targetYaw = angle;
-            }
-        } else if (wasMoving || !check_input_hammer()) {
-            if (magnitude == 0.0f) {
-                playerData->idleFrameCounter++;
-            } else {
-                playerStatus->curStateTime = 0;
-                set_action_state(ACTION_STATE_WALK);
-                if (magnitude != 0.0f) {
-                    playerStatus->targetYaw = angle;
-                    playerStatus->animFlags &= ~PA_FLAG_80000000;
-                }
-            }
+    player_input_to_move_vector(&angle, &magnitude);
+    phys_update_interact_collider();
+
+    if (check_input_jump()) {
+        if (magnitude != 0.0f || playerStatus->targetYaw != angle) {
+            playerStatus->targetYaw = angle;
+        }
+        return;
+    }
+    
+    if (!firstFrame && check_input_hammer()) {
+        return;
+    }
+
+    if (magnitude == 0.0f) {
+        playerData->idleFrameCounter++;
+    } else {
+        playerStatus->curStateTime = 0;
+        set_action_state(ACTION_STATE_WALK);
+        if (magnitude != 0.0f) {
+            playerStatus->targetYaw = angle;
+            playerStatus->animFlags &= ~PA_FLAG_80000000;
         }
     }
 }
@@ -123,7 +129,8 @@ void action_update_idle_peach(void) {
         switch (playerStatus->actionSubstate) {
             case SUBSTATE_IDLE_DEFAULT:
                 if (!(playerStatus->flags & (PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_INPUT_DISABLED))
-                    && (playerStatus->peachItemHeld == 0)) {
+                    && (playerStatus->peachItemHeld == PEACH_BAKING_NONE)
+                ) {
                     if (playerStatus->curStateTime > 1800) {
                         // begin first yawm
                         playerStatus->actionSubstate++;
