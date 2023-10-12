@@ -13,25 +13,21 @@ extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
-extern EvtScript N(celebrate);
-extern EvtScript N(executeAction);
-extern EvtScript N(firstStrikeBodySlam);
-extern EvtScript N(firstStrike);
-extern EvtScript N(runAway);
-extern EvtScript N(runAwayFail);
-extern EvtScript N(bodySlam);
-extern EvtScript N(bomb);
+extern EvtScript N(EVS_Celebrate);
+extern EvtScript N(EVS_ExecuteAction);
+extern EvtScript N(EVS_Attack_FirstStrike);
+extern EvtScript N(EVS_FirstStrike);
+extern EvtScript N(EVS_RunAway);
+extern EvtScript N(EVS_RunAwayFail);
+extern EvtScript N(EVS_Attack_BodySlam);
+extern EvtScript N(EVS_Attack_Bomb);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorVars) {
     AVAR_Unk_0      = 0,
-};
-
-enum N(ActorParams) {
-    DMG_UNK         = 0,
 };
 
 enum {
@@ -127,7 +123,7 @@ API_CALLABLE(N(GetBombDamage)) {
     s32 damage = 0;
 
     switch (partnerActor->actorBlueprint->level) {
-        case 0:
+        case PARTNER_RANK_NORMAL:
             if (mashResult <= 35) {
                 damage = 1;
             } else if (mashResult <= 60) {
@@ -140,7 +136,7 @@ API_CALLABLE(N(GetBombDamage)) {
                 damage = 5;
             }
             break;
-        case 1:
+        case PARTNER_RANK_SUPER:
             if (mashResult <= 35) {
                 damage = 1;
             } else if (mashResult <= 60) {
@@ -153,7 +149,7 @@ API_CALLABLE(N(GetBombDamage)) {
                 damage = 6;
             }
             break;
-        case 2:
+        case PARTNER_RANK_ULTRA:
             if (mashResult <= 35) {
                 damage = 1;
             } else if (mashResult <= 60) {
@@ -168,11 +164,10 @@ API_CALLABLE(N(GetBombDamage)) {
             break;
     }
 
-
-    if (!(mashResult < 100)) {
-        script->varTable[0] = 1;
+    if (mashResult > 99) {
+        script->varTable[0] = TRUE;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0] = FALSE;
     }
 
     script->varTable[15] = damage;
@@ -188,7 +183,7 @@ API_CALLABLE(N(GetPowerBombDamage)) {
     s32 damage = 0;
 
     switch (partnerActor->actorBlueprint->level) {
-        case 1:
+        case PARTNER_RANK_SUPER:
             if (mashResult <= 35) {
                 damage = 1;
             } else if (mashResult <= 60) {
@@ -201,7 +196,7 @@ API_CALLABLE(N(GetPowerBombDamage)) {
                 damage = 6;
             }
             break;
-        case 2:
+        case PARTNER_RANK_ULTRA:
             if (mashResult <= 35) {
                 damage = 1;
             } else if (mashResult <= 60) {
@@ -213,13 +208,13 @@ API_CALLABLE(N(GetPowerBombDamage)) {
             } else {
                 damage = 7;
             }
+            break;
     }
 
-
-    if (!(mashResult < 100)) {
-        script->varTable[0] = 1;
+    if (mashResult > 99) {
+        script->varTable[0] = TRUE;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0] = FALSE;
     }
 
     script->varTable[15] = damage;
@@ -235,7 +230,7 @@ API_CALLABLE(N(GetMegaBombDamage)) {
     s32 damage = 0;
 
     switch (partnerActor->actorBlueprint->level) {
-        case 2:
+        case PARTNER_RANK_ULTRA:
             if (mashResult <= 35) {
                 damage = 1;
             } else if (mashResult <= 60) {
@@ -250,8 +245,7 @@ API_CALLABLE(N(GetMegaBombDamage)) {
             break;
     }
 
-
-    if (!(mashResult < 100)) {
+    if (mashResult > 99) {
         script->varTable[0] = TRUE;
     } else {
         script->varTable[0] = FALSE;
@@ -604,21 +598,21 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_FIRST_STRIKE)
-            EVT_EXEC_WAIT(N(firstStrike))
+            EVT_EXEC_WAIT(N(EVS_FirstStrike))
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(runAway))
+            EVT_EXEC_WAIT(N(EVS_RunAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(runAwayFail))
+            EVT_EXEC_WAIT(N(EVS_RunAwayFail))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_CelebrateLoop)
     EVT_SET_CONST(LVar2, ANIM_BattleBombette_Celebrate)
@@ -628,7 +622,7 @@ EvtScript N(celebrate) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -641,37 +635,37 @@ EvtScript N(executeAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BODY_SLAM1)
-            EVT_EXEC_WAIT(N(bodySlam))
+            EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
         EVT_CASE_EQ(MOVE_BODY_SLAM2)
-            EVT_EXEC_WAIT(N(bodySlam))
+            EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
         EVT_CASE_EQ(MOVE_BODY_SLAM3)
-            EVT_EXEC_WAIT(N(bodySlam))
+            EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
         EVT_CASE_EQ(MOVE_BOMB)
-            EVT_EXEC_WAIT(N(bomb))
+            EVT_EXEC_WAIT(N(EVS_Attack_Bomb))
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-            EVT_EXEC_WAIT(N(bomb))
+            EVT_EXEC_WAIT(N(EVS_Attack_Bomb))
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
-            EVT_EXEC_WAIT(N(bomb))
+            EVT_EXEC_WAIT(N(EVS_Attack_Bomb))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(firstStrike) = {
+EvtScript N(EVS_FirstStrike) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BODY_SLAM1)
-            EVT_EXEC_WAIT(N(firstStrikeBodySlam))
+            EVT_EXEC_WAIT(N(EVS_Attack_FirstStrike))
         EVT_CASE_EQ(MOVE_BODY_SLAM2)
-            EVT_EXEC_WAIT(N(firstStrikeBodySlam))
+            EVT_EXEC_WAIT(N(EVS_Attack_FirstStrike))
         EVT_CASE_EQ(MOVE_BODY_SLAM3)
-            EVT_EXEC_WAIT(N(firstStrikeBodySlam))
+            EVT_EXEC_WAIT(N(EVS_Attack_FirstStrike))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(runAway) = {
+EvtScript N(EVS_RunAway) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_Run)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
@@ -679,7 +673,7 @@ EvtScript N(runAway) = {
     EVT_END
 };
 
-EvtScript N(runAwayFail) = {
+EvtScript N(EVS_RunAwayFail) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
@@ -810,7 +804,7 @@ EvtScript N(animHold) = {
     EVT_END
 };
 
-EvtScript N(bodySlam) = {
+EvtScript N(EVS_Attack_BodySlam) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BODY_SLAM)
     EVT_CALL(action_command_body_slam_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
@@ -1023,7 +1017,7 @@ EvtScript N(bodySlam) = {
     EVT_END
 };
 
-EvtScript N(bomb) = {
+EvtScript N(EVS_Attack_Bomb) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BOMB)
     EVT_CALL(action_command_bomb_init)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -1347,7 +1341,7 @@ EvtScript N(bomb) = {
     EVT_END
 };
 
-EvtScript N(firstStrikeBodySlam) = {
+EvtScript N(EVS_Attack_FirstStrike) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -20, 0, 0)

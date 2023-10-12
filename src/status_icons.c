@@ -213,7 +213,7 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->showMsgState = BTL_MSG_STATE_0;
+        popup->showMsgState = BTL_MSG_STATE_INIT;
         D_800A0F40 = 1;
     }
 }
@@ -223,7 +223,7 @@ void update_merlee_message(void* data) {
     s32 closeMessage = FALSE;
 
     switch (popup->showMsgState) {
-        case BTL_MSG_STATE_0:
+        case BTL_MSG_STATE_INIT:
             popup->showMsgState = BTL_MSG_STATE_1;
             break;
         case BTL_MSG_STATE_1:
@@ -1096,7 +1096,7 @@ void remove_status_static(s32 iconID) {
     }
 }
 
-void enable_status_2(s32 iconID) {
+void enable_status_static(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags |= STATUS_ICON_FLAG_STATIC;

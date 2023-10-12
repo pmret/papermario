@@ -17,8 +17,8 @@ EvtScript N(EVS_OpenChest_DefendPlus) = EVT_OPEN_CHEST_BADGE(ITEM_DEFEND_PLUS_A,
 
 EvtScript N(EVS_OpenChest_IcePower) = EVT_OPEN_CHEST_BADGE(ITEM_ICE_POWER, GF_OMO07_Chest_IcePower);
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
-#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
+#include "world/common/DisableCameraFollowPlayerY.inc.c"
 
 EvtScript N(EVS_TetherCamToPlayer) = {
     EVT_LABEL(0)
@@ -50,14 +50,14 @@ EvtScript N(EVS_StarBoxLaunch_Impl) = {
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, LVar7, LVar8, LVar9, 40)
     EVT_KILL_THREAD(LVarA)
     EVT_WAIT(3)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_CALL(N(SetCamera0MoveFlag1))
+    EVT_CALL(N(DisableCameraFollowPlayerY))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

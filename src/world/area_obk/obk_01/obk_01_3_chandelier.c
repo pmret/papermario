@@ -2,8 +2,8 @@
 #include "model.h"
 #include "sprite/player.h"
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
-#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
+#include "world/common/DisableCameraFollowPlayerY.inc.c"
 
 extern EvtScript N(EVS_LaunchFromCouch_Crash);
 
@@ -424,7 +424,7 @@ EvtScript N(EVS_LaunchFromCouch_GrabChandelier) = {
     EVT_EXEC(N(EVS_Couch_AnimateSpring))
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_WAIT(1)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
     EVT_SUB(LVar3, 1)
     EVT_CALL(SetPlayerPos, LVar2, LVar3, LVar4)

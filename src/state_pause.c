@@ -68,7 +68,7 @@ void state_step_pause(void) {
                 D_800A0921 = 2;
                 gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
-                gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_1;
+                gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_BEGIN_PAUSED;
 
             }
             break;

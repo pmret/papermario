@@ -435,7 +435,7 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_UNFOLD_1, ANIM_StiltGuyUnfold_Anim05)
         EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_UNFOLD_1, TRUE)
         EVT_CALL(SetActorPaletteSwapParams, ACTOR_SELF, PRT_UNFOLD_1, SPR_PAL_StiltGuyUnfold_Alt, SPR_PAL_StiltGuyUnfold, 0, 36, 0, 255, 0, 0)
-        EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_UNFOLD_1, PAL_ADJUST_BLEND_PALSETS)
+        EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_UNFOLD_1, ACTOR_PAL_ADJUST_BLEND_PALSETS)
         EVT_WAIT(18)
         EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_UNFOLD_1, FALSE)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_UNFOLD_1, ANIM_StiltGuyUnfold_Anim04)

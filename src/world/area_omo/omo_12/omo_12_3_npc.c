@@ -16,8 +16,8 @@ NpcSettings N(NpcSettings_Watt) = {
 
 #include "world/common/atomic/CreateDarkness.inc.c"
 
-#include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
+#include "world/common/DisableCameraLeadingPlayer.inc.c"
+#include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 API_CALLABLE(N(SetLightOriginAndPower)) {
     Bytecode* args = script->ptrReadPos;
@@ -193,7 +193,7 @@ BombTrigger N(BombPos_Lantern_Unused) = {
 
 EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(SetCamera0Flag1000))
+    EVT_CALL(N(DisableCameraLeadingPlayer))
     EVT_CALL(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0 / DT), LVar0, LVar1, LVar2, EVT_FLOAT(450.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
     EVT_SET(LVarA, 0)
@@ -398,7 +398,7 @@ EvtScript N(EVS_Scene_ReleaseWatt) = {
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005B)
     EVT_CALL(EnablePartnerAI)
     EVT_EXEC(N(EVS_UseWattTutorial))
-    EVT_CALL(N(UnsetCamera0Flag1000))
+    EVT_CALL(N(EnableCameraLeadingPlayer))
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
     EVT_SET(GB_StoryProgress, STORY_CH4_WATT_JOINED_PARTY)
     EVT_CALL(DisablePlayerInput, FALSE)

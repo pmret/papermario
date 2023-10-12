@@ -201,12 +201,14 @@ void appendGfx_darkness_stencil(b32 isWorld, s32 posX, s32 posY, f32 alpha, f32 
                        0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 6, 6, 15, 15);
     gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, 0, 0x01FC, 0x01FC);
     gDPPipeSync(gMainGfxPos++);
+
     gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
     gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_32b, 64, osVirtualToPhysical(nuGfxZBuffer));
     gDPSetFillColor(gMainGfxPos++, GPACK_ZDZ(G_MAXFBZ, 0)<<16 | GPACK_ZDZ(G_MAXFBZ, 0));
     gDPFillRectangle(gMainGfxPos++, 0, 0, 63, 63);
     gDPPipeSync(gMainGfxPos++);
+
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);

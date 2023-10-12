@@ -48,7 +48,7 @@ HudScript* bHPDigitHudScripts[] = {
     NULL, NULL, NULL,
 };
 
-s32 BattleScreenFadeAmt = 0xFF;
+s32 BattleScreenFadeAmt = 255;
 
 EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, ACTOR_PARTNER, EVENT_PUT_PARTNER_AWAY)

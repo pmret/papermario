@@ -310,7 +310,7 @@ s32 create_model_animator(s16* animPos) {
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ID_BIT;
     }
     return i;
 }
@@ -350,7 +350,7 @@ s32 create_mesh_animator(s16* animPos, s16* animBuffer) {
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ID_BIT;
     }
     return i;
 }
@@ -428,114 +428,128 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
 }
 
 void update_model_animator(s32 animatorID) {
-    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
-        ModelAnimator* animator;
+    ModelAnimator* animator;
+    s32 temp;
+    s32 i;
 
-        animatorID &= ~0x800;
-        animator = (*gCurrentAnimMeshListPtr)[animatorID];
+    if (gGameStatusPtr->isBattle && !(animatorID & BATTLE_ID_BIT)) {
+        return;
+    }
 
-        if (animator != NULL && animator->flags != 0) {
-            s32 temp = 0;
+    animatorID &= ~BATTLE_ID_BIT;
+    animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-            if (!(animator->flags & MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION)) {
-                animator->flags &= ~MODEL_ANIMATOR_FLAG_UPDATE_PENDING;
-                animator->nextUpdateTime -= animator->timeScale;
-                if (animator->nextUpdateTime <= 0.0f) {
-                    if (!(animator->flags & MODEL_ANIMATOR_FLAG_MESH)) {
-                        do {
-                            temp = step_model_animator(animator);
-                        } while (temp > 0);
-                    } else {
-                        animator->nextUpdateTime = 1.0f;
-                        reload_mesh_animator_tree(animator);
-                        do {
-                            temp = step_mesh_animator(animator);
-                        } while (temp > 0);
-                    }
-                }
+    if (animator == NULL || animator->flags == 0) {
+        return;
+    }
 
-                if (temp != -1) {
-                    s32 i;
+    if (animator->flags & MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION) {
+        return;
+    }
+    
+    animator->flags &= ~MODEL_ANIMATOR_FLAG_UPDATE_PENDING;
+    animator->nextUpdateTime -= animator->timeScale;
 
-                    animator_update_model_transforms(animator, NULL);
+    temp = 0;
+    if (animator->nextUpdateTime <= 0.0f) {
+        if (!(animator->flags & MODEL_ANIMATOR_FLAG_MESH)) {
+            do {
+                temp = step_model_animator(animator);
+            } while (temp > 0);
+        } else {
+            animator->nextUpdateTime = 1.0f;
+            reload_mesh_animator_tree(animator);
+            do {
+                temp = step_mesh_animator(animator);
+            } while (temp > 0);
+        }
+    }
+    if (temp == -1) {
+        return;
+    }
 
-                    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
-                        if (D_801533C0[i].ttl >= 0) {
-                            D_801533C0[i].ttl--;
-                            if (D_801533C0[i].ttl == 0) {
-                                D_801533C0[i].ttl = -1;
-                                general_heap_free(D_801533C0[i].addr);
-                            }
-                        }
-                    }
+    animator_update_model_transforms(animator, NULL);
 
-                    for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
-                        if (D_801536C0[i].ttl >= 0) {
-                            D_801536C0[i].ttl--;
-                            if (D_801536C0[i].ttl == 0) {
-                                D_801536C0[i].ttl = -1;
-                                general_heap_free(D_801536C0[i].addr);
-                            }
-                        }
-                    }
-                }
+    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+        if (D_801533C0[i].ttl >= 0) {
+            D_801533C0[i].ttl--;
+            if (D_801533C0[i].ttl == 0) {
+                D_801533C0[i].ttl = -1;
+                general_heap_free(D_801533C0[i].addr);
+            }
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
+        if (D_801536C0[i].ttl >= 0) {
+            D_801536C0[i].ttl--;
+            if (D_801536C0[i].ttl == 0) {
+                D_801536C0[i].ttl = -1;
+                general_heap_free(D_801536C0[i].addr);
             }
         }
     }
 }
 
 void update_model_animator_with_transform(s32 animatorID, Mtx* mtx) {
-    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
-        ModelAnimator* animator;
+    ModelAnimator* animator;
+    s32 temp;
+    s32 i;
 
-        animatorID &= ~0x800;
-        animator = (*gCurrentAnimMeshListPtr)[animatorID];
+    if (gGameStatusPtr->isBattle && !(animatorID & BATTLE_ID_BIT)) {
+        return;
+    }
 
-        if (animator != NULL && animator->flags != 0) {
-            s32 temp = 0;
+    animatorID &= ~BATTLE_ID_BIT;
+    animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-            if (!(animator->flags & MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION)) {
-                animator->flags &= ~MODEL_ANIMATOR_FLAG_UPDATE_PENDING;
-                animator->nextUpdateTime -= animator->timeScale;
-                if (animator->nextUpdateTime <= 0.0f) {
-                    if (!(animator->flags & MODEL_ANIMATOR_FLAG_MESH)) {
-                        do {
-                            temp = step_model_animator(animator);
-                        } while (temp > 0);
-                    } else {
-                        animator->nextUpdateTime = 1.0f;
-                        reload_mesh_animator_tree(animator);
-                        do {
-                            temp = step_mesh_animator(animator);
-                        } while (temp > 0);
-                    }
-                }
+    if (animator == NULL || animator->flags == 0) {
+        return;
+    }
 
-                if (temp != -1) {
-                    s32 i;
+    if (animator->flags & MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION) {
+        return;
+    }
 
-                    animator_update_model_transforms(animator, mtx);
+    animator->flags &= ~MODEL_ANIMATOR_FLAG_UPDATE_PENDING;
+    animator->nextUpdateTime -= animator->timeScale;
 
-                    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
-                        if (D_801533C0[i].ttl >= 0) {
-                            D_801533C0[i].ttl--;
-                            if (D_801533C0[i].ttl == 0) {
-                                D_801533C0[i].ttl = -1;
-                                general_heap_free(D_801533C0[i].addr);
-                            }
-                        }
-                    }
+    temp = 0;
+    if (animator->nextUpdateTime <= 0.0f) {
+        if (!(animator->flags & MODEL_ANIMATOR_FLAG_MESH)) {
+            do {
+                temp = step_model_animator(animator);
+            } while (temp > 0);
+        } else {
+            animator->nextUpdateTime = 1.0f;
+            reload_mesh_animator_tree(animator);
+            do {
+                temp = step_mesh_animator(animator);
+            } while (temp > 0);
+        }
+    }
+    if (temp == -1) {
+        return;
+    }
 
-                    for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
-                        if (D_801536C0[i].ttl >= 0) {
-                            D_801536C0[i].ttl--;
-                            if (D_801536C0[i].ttl == 0) {
-                                D_801536C0[i].ttl = -1;
-                                general_heap_free(D_801536C0[i].addr);
-                            }
-                        }
-                    }
-                }
+    animator_update_model_transforms(animator, mtx);
+
+    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+        if (D_801533C0[i].ttl >= 0) {
+            D_801533C0[i].ttl--;
+            if (D_801533C0[i].ttl == 0) {
+                D_801533C0[i].ttl = -1;
+                general_heap_free(D_801533C0[i].addr);
+            }
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
+        if (D_801536C0[i].ttl >= 0) {
+            D_801536C0[i].ttl--;
+            if (D_801536C0[i].ttl == 0) {
+                D_801536C0[i].ttl = -1;
+                general_heap_free(D_801536C0[i].addr);
             }
         }
     }
@@ -697,49 +711,63 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
 }
 
 void render_animated_model(s32 animatorID, Mtx* rootTransform) {
+    ModelAnimator* animator;
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
-        ModelAnimator* animator;
+    if (gGameStatusPtr->isBattle && !(animatorID & BATTLE_ID_BIT)) {
+        return;
+    }
+    
+    animatorID &= ~BATTLE_ID_BIT;
+    animator = (*gCurrentAnimMeshListPtr)[animatorID];
 
-        animatorID &= ~0x800;
-        animator = (*gCurrentAnimMeshListPtr)[animatorID];
-        if (animator != NULL && animator->flags != 0 && !(animator->flags & MODEL_ANIMATOR_FLAG_UPDATE_PENDING) &&
-            animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN))
-        {
-            animator->mtx = *rootTransform;
-            animator->baseAddr = NULL;
-            rtPtr->appendGfxArg = animator;
-            rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
-            rtPtr->dist = 0;
-            rtPtr->renderMode = animator->renderMode;
-            queue_render_task(rtPtr);
-        }
+    if (animator == NULL || animator->flags == 0) {
+        return;
+    }
+
+    if (!(animator->flags & MODEL_ANIMATOR_FLAG_UPDATE_PENDING)
+        && animator->flags & (1 << gCurrentCamID)
+        && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN)
+    ) {
+        animator->mtx = *rootTransform;
+        animator->baseAddr = NULL;
+        rtPtr->appendGfxArg = animator;
+        rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
+        rtPtr->dist = 0;
+        rtPtr->renderMode = animator->renderMode;
+        queue_render_task(rtPtr);
     }
 }
 
 void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32 segment, void* baseAddr) {
+    ModelAnimator* animator;
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
-        ModelAnimator* animator;
+    if (gGameStatusPtr->isBattle && !(animatorID & BATTLE_ID_BIT)) {
+        return;
+    }
 
-        animatorID &= ~0x800;
-        animator = (*gCurrentAnimMeshListPtr)[animatorID];
-        if (animator != NULL && animator->flags != 0 && !(animator->flags & MODEL_ANIMATOR_FLAG_UPDATE_PENDING) &&
-            animator->flags & (1 << gCurrentCamID) && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN))
-        {
-            animator->mtx = *rootTransform;
-            gAnimVtxSegment = segment;
-            animator->baseAddr = baseAddr;
-            rtPtr->appendGfxArg = animator;
-            rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
-            rtPtr->dist = 0;
-            rtPtr->renderMode = animator->renderMode;
-            queue_render_task(rtPtr);
-        }
+    animatorID &= ~BATTLE_ID_BIT;
+    animator = (*gCurrentAnimMeshListPtr)[animatorID];
+
+    if (animator == NULL || animator->flags == 0) {
+        return;
+    }
+
+    if (!(animator->flags & MODEL_ANIMATOR_FLAG_UPDATE_PENDING)
+        && animator->flags & (1 << gCurrentCamID)
+        && !(animator->flags & MODEL_ANIMATOR_FLAG_HIDDEN)
+    ) {
+        animator->mtx = *rootTransform;
+        gAnimVtxSegment = segment;
+        animator->baseAddr = baseAddr;
+        rtPtr->appendGfxArg = animator;
+        rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
+        rtPtr->dist = 0;
+        rtPtr->renderMode = animator->renderMode;
+        queue_render_task(rtPtr);
     }
 }
 
@@ -959,11 +987,11 @@ void set_animator_tree_to_node_map(ModelAnimator* animator, s32* nodeIDs, s32 co
 }
 
 ModelAnimator* get_animator_by_index(s32 animModelID) {
-    return (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
+    return (*gCurrentAnimMeshListPtr)[animModelID & ~BATTLE_ID_BIT];
 }
 
 ModelAnimator* set_animator_render_callback(s32 animModelID, void* callbackArg, void (*callbackFunc)(void*)) {
-    ModelAnimator* ret = (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
+    ModelAnimator* ret = (*gCurrentAnimMeshListPtr)[animModelID & ~BATTLE_ID_BIT];
 
     ret->fpRenderCallback = callbackFunc;
     ret->renderCallbackArg = callbackArg;
@@ -1007,19 +1035,19 @@ void get_anim_model_fog_color(s32* r, s32* g, s32* b, s32* a) {
 }
 
 void set_animator_flags(s32 index, s32 bits) {
-    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~BATTLE_ID_BIT];
 
     animator->flags |= bits;
 }
 
 void clear_animator_flags(s32 index, s32 bits) {
-    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~BATTLE_ID_BIT];
 
     animator->flags &= ~bits;
 }
 
 void play_model_animation(s32 index, s16* animPos) {
-    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~BATTLE_ID_BIT];
 
     if (animator->animationBuffer != NULL) {
         animPos = (s16*) (((s32)animPos & 0xFFFFFF) + (s32)animator->animationBuffer); // TODO: array access? / cleanup
@@ -1031,7 +1059,7 @@ void play_model_animation(s32 index, s16* animPos) {
 }
 
 void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSkip) {
-    s32 indexMasked = index & ~0x800;
+    s32 indexMasked = index & ~BATTLE_ID_BIT;
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[indexMasked];
     s32 i;
 
@@ -1089,14 +1117,16 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
 }
 
 void load_model_animator_tree(s32 index, StaticAnimatorNode** tree) {
-    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~BATTLE_ID_BIT];
     s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
 
-    if (animator != NULL && animator->flags != 0) {
-        gAnimTreeRoot = tree;
-        load_model_animator_node(*tree, animator, 0, nodeIDs);
-        set_animator_tree_to_node_map(animator, nodeIDs, ARRAY_COUNT(animator->staticNodeIDs));
+    if (animator == NULL || animator->flags == 0) {
+        return;
     }
+    
+    gAnimTreeRoot = tree;
+    load_model_animator_node(*tree, animator, 0, nodeIDs);
+    set_animator_tree_to_node_map(animator, nodeIDs, ARRAY_COUNT(animator->staticNodeIDs));
 }
 
 void load_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, s32 parentNodeID, s32* treeIndexToNodeIDs) {
@@ -1114,29 +1144,31 @@ void load_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, 
 }
 
 void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree) {
-    s32 indexMasked = index & ~0x800;
+    s32 indexMasked = index & ~BATTLE_ID_BIT;
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[indexMasked];
     s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
     s32 i;
 
-    if (animator != NULL && animator->flags != 0) {
-        if ((*tree)->vertexStartOffset == 0) {
-            load_model_animator_tree(indexMasked, tree);
-            return;
-        }
-
-        gAnimTreeRoot = tree;
-        animator->staticRoot = tree;
-        animator->treeIndexPos = 0;
-        animator->savedTreePos = 0;
-
-        for (i = 0; i < ARRAY_COUNT(animator->staticNodes); i++) {
-            animator->staticNodes[i] = NULL;
-        }
-
-        load_mesh_animator_node(*gAnimTreeRoot, animator, 0, nodeIDs);
-        animator->flags |= MODEL_ANIMATOR_FLAG_MESH;
+    if (animator == NULL || animator->flags == 0) {
+        return;
     }
+
+    if ((*tree)->vertexStartOffset == 0) {
+        load_model_animator_tree(indexMasked, tree);
+        return;
+    }
+
+    gAnimTreeRoot = tree;
+    animator->staticRoot = tree;
+    animator->treeIndexPos = 0;
+    animator->savedTreePos = 0;
+
+    for (i = 0; i < ARRAY_COUNT(animator->staticNodes); i++) {
+        animator->staticNodes[i] = NULL;
+    }
+
+    load_mesh_animator_node(*gAnimTreeRoot, animator, 0, nodeIDs);
+    animator->flags |= MODEL_ANIMATOR_FLAG_MESH;
 }
 
 void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, s32 parentNodeID, s32* treeIndexToNodeIDs) {

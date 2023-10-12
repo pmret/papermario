@@ -164,14 +164,16 @@ typedef struct HeapNode {
     /* 0x0C */ u32 capacity;
 } HeapNode; // size = 0x10
 
+#define NPC_BLUR_FRAMES 20
+
 /// Ring buffer of an NPC's position over the past 20 frames.
 typedef struct NpcMotionBlur {
-    /* 0x00 */ s8 unk_00;
+    /* 0x00 */ s8 unused;
     /* 0x01 */ s8 index; ///< Current blur ring buffer index
     /* 0x02 */ char unk_02[2]; // padding?
-    /* 0x04 */ f32 x[20];
-    /* 0x54 */ f32 y[20];
-    /* 0xA4 */ f32 z[20];
+    /* 0x04 */ f32 posX[NPC_BLUR_FRAMES];
+    /* 0x54 */ f32 posY[NPC_BLUR_FRAMES];
+    /* 0xA4 */ f32 posZ[NPC_BLUR_FRAMES];
 } NpcMotionBlur; // size = 0xF4
 
 typedef struct NpcChompBlur {
@@ -272,31 +274,31 @@ typedef struct Npc {
     /* 0x0B0 */ AnimID* extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
-    /* 0x0B6 */ s8 dirtyPalettes;
+    /* 0x0B6 */ s8 resetPalAdjust;
     /* 0x0B7 */ s8 palAnimState;
     /* 0x0B8 */ char unk_B8[4];
     /* 0x0BC */ s16 nextPalTime;
     /* 0x0BE */ s16 palBlendAlpha;
     /* 0x0C0 */ s8 spriteColorVariations;
-    /* 0x0C1 */ s8 paletteCount;
+    /* 0x0C1 */ s8 originalPalettesCount;
     /* 0x0C2 */ char unk_C2[2];
-    /* 0x0C4 */ PAL_PTR* spritePaletteList;
-    /* 0x0C8 */ PAL_BIN localPaletteData[16][16];
-    /* 0x2C8 */ PAL_PTR localPalettes[16];
+    /* 0x0C4 */ PAL_PTR* originalPalettesList;
+    /* 0x0C8 */ PAL_BIN copiedPalettes[16][SPR_PAL_SIZE];
+    /* 0x2C8 */ PAL_PTR adjustedPalettes[16];
     /* 0x308 */ s16 blendPalA;
     /* 0x30A */ s16 blendPalB;
     /* 0x30C */ u16 palswapTimeHoldA;
     /* 0x30E */ s16 palswapTimeAtoB;
     /* 0x310 */ s16 palswapTimeHoldB;
     /* 0x312 */ s16 palswapTimeBtoA;
-    /* 0x314 */ s16 unk_314;
-    /* 0x316 */ s16 unk_316;
+    /* 0x314 */ s16 blendPalC;
+    /* 0x316 */ s16 blendPalD;
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
     /* 0x324 */ struct EffectInstance* decorations[MAX_NPC_DECORATIONS];
     /* 0x32C */ s8 decorationType[MAX_NPC_DECORATIONS];
     /* 0x32E */ s8 changedDecoration[MAX_NPC_DECORATIONS];
-    /* 0x330 */ s8 decorationInitialised[MAX_NPC_DECORATIONS];
+    /* 0x330 */ s8 decorationInitialized[MAX_NPC_DECORATIONS];
     /* 0x332 */ s16 decorationGlowPhase[MAX_NPC_DECORATIONS];
     /* 0x336 */ char unk_336[10];
 } Npc; // size = 0x340
@@ -825,31 +827,31 @@ typedef struct Camera {
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
-    /* 0x494 */ f32 unk_494;
-    /* 0x498 */ f32 unk_498;
-    /* 0x49C */ f32 unk_49C;
-    /* 0x4A0 */ f32 savedTargetY;
+    /* 0x494 */ f32 yinterpGoal;
+    /* 0x498 */ f32 yinterpAlpha;
+    /* 0x49C */ f32 yinterpRate; // smaller is faster; not valid for values less than 1.0, unstable below 0.5
+    /* 0x4A0 */ f32 yinterpCur;
     /* 0x4A4 */ Vec3f prevTargetPos;
     /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ Vec3f prevPrevMovePos;
     /* 0x4C8 */ Vec3f prevMovePos;
-    /* 0x4D4 */ u16 prevPrevFollowFlags;
-    /* 0x4D6 */ u16 prevFollowFlags;
+    /* 0x4D4 */ u16 prevPrevFollowPlayer;
+    /* 0x4D6 */ u16 prevFollowPlayer;
     /* 0x4D8 */ CameraControlSettings controlSettings;
     /* 0x504 */ u16 followPlayer;
     /* 0x506 */ u16 panActive;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ f32 unk_510;
-    /* 0x514 */ f32 unk_514;
-    /* 0x518 */ f32 unk_518;
-    /* 0x51C */ s32 unk_51C;
+    /* 0x510 */ f32 targetLeadAmount;
+    /* 0x514 */ f32 leadInterpAlpha;
+    /* 0x518 */ f32 accumulatedStickLead;
+    /* 0x51C */ s32 increasingLeadInterp;
     /* 0x520 */ f32 unk_520;
-    /* 0x524 */ f32 unk_524;
-    /* 0x528 */ f32 unk_528;
+    /* 0x524 */ f32 leadUnkX;
+    /* 0x528 */ f32 leadUnkZ;
     /* 0x52C */ s32 unk_52C;
     /* 0x530 */ s32 unk_530;
-    /* 0x534 */ CameraControlSettings* aabbForZoneBelow;
+    /* 0x534 */ CameraControlSettings* leadControlSettings;
     /* 0x538 */ char unk_538[0x18];
     /* 0x550 */ f32 unk_550;
     /* 0x554 */ s16 unk_554;
@@ -1689,6 +1691,7 @@ typedef union DecorationData {
 } DecorationData; // size = 0x10
 
 #define MAX_ACTOR_DECORATIONS 2
+#define ACTOR_BLUR_FRAMES 16
 
 typedef struct DecorationTable {
     /* 0x000 */ PAL_BIN copiedPalettes[2][27][SPR_PAL_SIZE];
@@ -1731,15 +1734,15 @@ typedef struct DecorationTable {
     /* 0x7D9 */ s8 blurBufferPos;
     /* 0x7DA */ s8 blurDrawCount;
     /* 0x7DB */ s8 blurEnableCount;
-    /* 0x7DC */ s16 yaw[16];
-    /* 0x7FC */ s16 posX[16];
-    /* 0x81C */ s16 posY[16];
-    /* 0x83C */ s16 posZ[16];
-    /* 0x85C */ s8 rotPivotOffsetX[16];
-    /* 0x86C */ s8 rotPivotOffsetY[16];
-    /* 0x87C */ u8 rotX[16];
-    /* 0x88C */ u8 rotY[16];
-    /* 0x89C */ u8 rotZ[16];
+    /* 0x7DC */ s16 yaw[ACTOR_BLUR_FRAMES];
+    /* 0x7FC */ s16 posX[ACTOR_BLUR_FRAMES];
+    /* 0x81C */ s16 posY[ACTOR_BLUR_FRAMES];
+    /* 0x83C */ s16 posZ[ACTOR_BLUR_FRAMES];
+    /* 0x85C */ s8 rotPivotOffsetX[ACTOR_BLUR_FRAMES];
+    /* 0x86C */ s8 rotPivotOffsetY[ACTOR_BLUR_FRAMES];
+    /* 0x87C */ u8 rotX[ACTOR_BLUR_FRAMES];
+    /* 0x88C */ u8 rotY[ACTOR_BLUR_FRAMES];
+    /* 0x89C */ u8 rotZ[ACTOR_BLUR_FRAMES];
     /* 0x8AC */ s8 blurDisableDelay; // infinite when zero
     /* 0x8AD */ char unk_8AD[3];
     /* substruct for decorations? */

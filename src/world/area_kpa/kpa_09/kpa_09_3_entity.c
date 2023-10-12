@@ -1,7 +1,7 @@
 #include "kpa_09.h"
 #include "entity.h"
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
 
 API_CALLABLE(N(ElevatePlayer)) {
     Bytecode* args = script->ptrReadPos;
@@ -20,7 +20,7 @@ EvtScript N(EVS_ActivateSwitch) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(AF_KPA09_PlatformRaised, TRUE)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_EF)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_0227, SOUND_SPACE_DEFAULT)

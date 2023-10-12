@@ -143,6 +143,7 @@
 
 #define SPR_PAL_SIZE 16
 
+#define BATTLE_ID_BIT 0x800
 #define BATTLE_NPC_ID_BIT 0x800
 #define BATTLE_ENTITY_ID_BIT 0x800
 

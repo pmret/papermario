@@ -192,15 +192,15 @@ void setup_demo_player(void) {
     playerData->curPartner = PARTNER_GOOMBARIO;
 
     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
-        playerData->badges[i] = 0;
+        playerData->badges[i] = ITEM_NONE;
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-        playerData->equippedBadges[i] = 0;
+        playerData->equippedBadges[i] = ITEM_NONE;
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-        playerData->invItems[i] = 0;
+        playerData->invItems[i] = ITEM_NONE;
     }
 
     playerData->unk_288 = 0;

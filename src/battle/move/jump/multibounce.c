@@ -11,9 +11,9 @@ s32 N(DifficultyTable)[] = {
     7, 6, 5, 4, 3, 2, 1, 0
 };
 
-extern EvtScript N(EVS_UseMove_ImplA);
-extern EvtScript N(EVS_UseMove_ImplB);
-extern EvtScript N(EVS_UseMove_ImplC);
+extern EvtScript N(EVS_UseMove_Basic);
+extern EvtScript N(EVS_UseMove_Super);
+extern EvtScript N(EVS_UseMove_Ultra);
 
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(ShowActionHud, TRUE)
@@ -21,17 +21,17 @@ EvtScript N(EVS_UseMove) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(EVS_UseMove_ImplA))
+            EVT_EXEC_WAIT(N(EVS_UseMove_Basic))
         EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(EVS_UseMove_ImplB))
+            EVT_EXEC_WAIT(N(EVS_UseMove_Super))
         EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(EVS_UseMove_ImplC))
+            EVT_EXEC_WAIT(N(EVS_UseMove_Ultra))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(EVS_UseMove_ImplA) = {
+EvtScript N(EVS_UseMove_Basic) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
     EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
@@ -182,7 +182,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_END
 };
 
-EvtScript N(EVS_UseMove_ImplB) = {
+EvtScript N(EVS_UseMove_Super) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
     EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))
@@ -338,7 +338,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_END
 };
 
-EvtScript N(EVS_UseMove_ImplC) = {
+EvtScript N(EVS_UseMove_Ultra) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
     EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(DifficultyTable)))

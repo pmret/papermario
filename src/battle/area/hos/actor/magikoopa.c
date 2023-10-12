@@ -272,7 +272,7 @@ EvtScript N(EVS_Idle) = {
 EvtScript N(EVS_KnockDownCheck) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -283,7 +283,7 @@ EvtScript N(EVS_KnockDownCheck) = {
             EVT_CASE_OR_EQ(MOVE_HEADBONK3)
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
-                EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
+                EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
                 EVT_END_IF
             EVT_END_CASE_GROUP

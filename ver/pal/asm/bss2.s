@@ -99,7 +99,7 @@ dlabel D_8010C990
 dlabel D_8010C994
 .space 0x0000000c
 
-dlabel D_8010C9A0
+dlabel PlayerYInterpUpdateDelay
 .space 4
 
 dlabel D_8010C9A4

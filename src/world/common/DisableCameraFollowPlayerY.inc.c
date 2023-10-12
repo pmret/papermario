@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-API_CALLABLE(N(SetCamera0MoveFlag1)) {
+API_CALLABLE(N(DisableCameraFollowPlayerY)) {
     Camera* camera = &gCameras[CAM_DEFAULT];
 
     camera->moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;

@@ -205,34 +205,36 @@ API_CALLABLE(ActorSpeak) {
 
 API_CALLABLE(EndActorSpeech) {
     Bytecode* args = script->ptrReadPos;
-    s32 flags;
+    ActorPart* actorPart;
+    Actor* actor;
     s32 anim;
     f32 x, y, z;
     s32 screenX, screenY, screenZ;
 
     if (isInitialCall) {
-        s32 actor = evt_get_variable(script, *args++);
+        s32 actorID = evt_get_variable(script, *args++);
         s32 partID = evt_get_variable(script, *args++);
-        ActorPart* actorPart;
-
+        
         gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
         gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
 
-        if (actor == ACTOR_SELF) {
-            actor = script->owner1.actorID;
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
         }
-        actor = (s32) get_actor(actor);
-        actorPart = get_actor_part((Actor*)actor, partID);
-        gSpeakingActor = (Actor*) actor;
+        
+        actor = get_actor(actorID);
+        actorPart = get_actor_part(actor, partID);
+        gSpeakingActor = actor;
         gSpeakingActorPart = actorPart;
+
         close_message(gSpeakingActorPrintCtx);
         script->functionTemp[0] = 0;
         increment_status_bar_disabled();
     }
 
     if (script->functionTemp[0] == 0) {
-        Actor* actor = gSpeakingActor;
-        ActorPart* actorPart = gSpeakingActorPart;
+        actor = gSpeakingActor;
+        actorPart = gSpeakingActorPart;
 
         x = actor->curPos.x + actor->headOffset.x;
         if (!(gSpeakingActor->flags & ACTOR_FLAG_HALF_HEIGHT)) {
@@ -244,13 +246,12 @@ API_CALLABLE(EndActorSpeech) {
         get_screen_coords(CAM_BATTLE, x, y, z, &screenX, &screenY, &screenZ);
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
-        flags = gSpeakingActorPrintCtx->stateFlags;
-        if (flags & 0x40) {
+        if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_40) {
             decrement_status_bar_disabled();
             return ApiStatus_DONE1;
         }
 
-        if (flags & 0x80) {
+        if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_SPEAKING) {
             anim = gSpeakingActorTalkAnim;
         } else {
             anim = gSpeakingActorIdleAnim;
@@ -319,9 +320,9 @@ API_CALLABLE(LoadBattleDmaData) {
     }
 
     if (gBattleDmaDest == NULL) {
-            dma_copy(dmaEntry->start, dmaEntry->end, dmaEntry->dest);
-        } else {
-            dma_copy(dmaEntry->start, dmaEntry->end, gBattleDmaDest);
+        dma_copy(dmaEntry->start, dmaEntry->end, dmaEntry->dest);
+    } else {
+        dma_copy(dmaEntry->start, dmaEntry->end, gBattleDmaDest);
     }
 
     return ApiStatus_DONE2;
@@ -373,7 +374,7 @@ API_CALLABLE(GetDarknessStatus) {
     f32 amt;
     s32 isLight;
 
-    // While loop may not be necessary in the future
+    //TODO While loop may not be necessary in the future
     do { get_screen_overlay_params(SCREEN_LAYER_BACK, &type, &amt); } while (0);
 
     if (amt < 128.0f) {

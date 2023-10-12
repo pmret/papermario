@@ -184,8 +184,8 @@ EvtScript N(EVS_NpcInit_Sun_01) = {
 EvtScript N(EVS_NpcInit_Sun_02) = {
     EVT_CALL(EnableNpcShadow, NPC_Sun_02, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Sun_02, ANIM_Sun_FireIdle)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Sun_01, 3)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Sun_02, 3)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Sun_01, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Sun_02, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Sun_01, 0, 1, 5, 5, 13, 5, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Sun_02, 0, 1, 5, 5, 13, 5, 0, 0)
     EVT_IF_LT(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)

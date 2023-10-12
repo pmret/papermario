@@ -209,7 +209,7 @@ s32 BattleMenu_CenteredMessages[] = {
     MSG_Menus_Focus_Centered,
 };
 
-s32 D_802AB4F0[] = {
+s32 BattleMenu_CategoryForSubmenu[] = {
     [BTL_MENU_TYPE_JUMP]            MOVE_TYPE_JUMP,
     [BTL_MENU_TYPE_SMASH]           MOVE_TYPE_HAMMER,
     [BTL_MENU_TYPE_ITEMS]           MOVE_TYPE_ITEMS,
@@ -2461,86 +2461,114 @@ void btl_state_update_player_menu(void) {
 
             if (D_802ACC60 != 0) {
                 D_802ACC60--;
-            } else if (submenuResult != 0) {
-                set_actor_anim(ACTOR_PLAYER, 0, ANIM_Mario1_Walk);
-                battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->curSubmenu = battle_menu_submenuIDs[submenuResult - 1];
-                for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
-                    battleStatus->submenuMoves[i] = 0;
-                    battleStatus->submenuIcons[0] = 0; ///< @bug ?
-                    battleStatus->submenuStatus[i] = 0;
-                }
+                break;
+            }
+            
+            if (submenuResult == 0) {
+                break;
+            }
+            
+            set_actor_anim(ACTOR_PLAYER, 0, ANIM_Mario1_Walk);
+            battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->curSubmenu = battle_menu_submenuIDs[submenuResult - 1];
+            for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
+                battleStatus->submenuMoves[i] = 0;
+                battleStatus->submenuIcons[0] = 0; ///< @bug ?
+                battleStatus->submenuStatus[i] = 0;
+            }
 
-                switch (battleStatus->curSubmenu) {
-                    case BTL_MENU_TYPE_ITEMS:
-                        battleStatus->submenuMoves[0] = D_802AB4F0[BTL_MENU_TYPE_STAR_POWERS]; // ???
-                        battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
-                        battleStatus->submenuStatus[0] = 1;
-                        for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-                            if (playerData->invItems[i] == 0) {
-                                continue;
-                            }
-                            itemData = &gItemTable[playerData->invItems[i]];
-
-                            battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
-                            battleStatus->moveArgument = playerData->invItems[i];
-                            battleStatus->curTargetListFlags = itemData->targetFlags;
-                            create_current_pos_target_list(playerActor);
+            switch (battleStatus->curSubmenu) {
+                case BTL_MENU_TYPE_ITEMS:
+                    battleStatus->submenuMoves[0] = BattleMenu_CategoryForSubmenu[BTL_MENU_TYPE_STAR_POWERS]; // ???
+                    battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
+                    battleStatus->submenuStatus[0] = 1;
+                    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+                        if (playerData->invItems[i] == ITEM_NONE) {
+                            continue;
                         }
-                        entryIdx = 1;
-                        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-                            if (playerData->equippedBadges[i] != 0) {
-                                s32 moveID = gItemTable[playerData->equippedBadges[i]].moveID;
-                                moveData = &gMoveTable[moveID];
-                                if (moveData->category == D_802AB4F0[battleStatus->curSubmenu]) {
-                                    battleStatus->submenuMoves[entryIdx] = moveID;
-                                    battleStatus->submenuIcons[entryIdx] = playerData->equippedBadges[i];
-                                    battleStatus->submenuStatus[entryIdx] = 1;
-                                    if (playerData->curFP < moveData->costFP) {
-                                        battleStatus->submenuStatus[entryIdx] = 0;
-                                    }
-                                    entryIdx++;
+                        itemData = &gItemTable[playerData->invItems[i]];
+
+                        battleStatus->moveCategory = BTL_MENU_TYPE_ITEMS;
+                        battleStatus->moveArgument = playerData->invItems[i];
+                        battleStatus->curTargetListFlags = itemData->targetFlags;
+                        create_current_pos_target_list(playerActor);
+                    }
+                    entryIdx = 1;
+                    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+                        if (playerData->equippedBadges[i] != 0) {
+                            s32 moveID = gItemTable[playerData->equippedBadges[i]].moveID;
+                            moveData = &gMoveTable[moveID];
+                            if (moveData->category == BattleMenu_CategoryForSubmenu[battleStatus->curSubmenu]) {
+                                battleStatus->submenuMoves[entryIdx] = moveID;
+                                battleStatus->submenuIcons[entryIdx] = playerData->equippedBadges[i];
+                                battleStatus->submenuStatus[entryIdx] = 1;
+                                if (playerData->curFP < moveData->costFP) {
+                                    battleStatus->submenuStatus[entryIdx] = 0;
                                 }
+                                entryIdx++;
                             }
                         }
-                        battleStatus->submenuMoveCount = entryIdx;
-                        if (entryIdx == 1) {
-                            battleStatus->submenuMoveCount = 0;
+                    }
+                    battleStatus->submenuMoveCount = entryIdx;
+                    if (entryIdx == 1) {
+                        battleStatus->submenuMoveCount = 0;
+                    }
+                    break;
+                    do { // required to match
+                case BTL_MENU_TYPE_SMASH:
+                    btl_init_menu_hammer();
+                    if (battleStatus->submenuMoveCount == 1) {
+                        battleStatus->submenuMoveCount = 0;
+                    }
+                    if (battleStatus->actionCommandMode == 2) {
+                        battleStatus->submenuMoveCount = 0;
+                    }
+                    break;
+                case BTL_MENU_TYPE_JUMP:
+                    btl_init_menu_boots();
+                    if (battleStatus->submenuMoveCount == 1) {
+                        battleStatus->submenuMoveCount = 0;
+                    }
+                    if (battleStatus->actionCommandMode == 2) {
+                        battleStatus->submenuMoveCount = 0;
+                    }
+                    break;
+                case BTL_MENU_TYPE_STAR_POWERS:
+                    battleStatus->submenuMoves[0] = MOVE_FOCUS;
+                    battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
+                    battleStatus->submenuStatus[0] = 1;
+                    entryIdx = 1;
+                    initialPos = 8;
+                    for (i = 0; i < playerData->maxStarPower; i++) {
+                        moveData = &gMoveTable[MOVE_REFRESH + i];
+                        battleStatus->submenuMoves[entryIdx] = MOVE_REFRESH + i;
+                        battleStatus->submenuIcons[entryIdx] = 0;
+                        battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
+                        battleStatus->moveArgument = MOVE_REFRESH + i;
+                        battleStatus->curTargetListFlags = moveData->flags;
+                        create_current_pos_target_list(playerActor);
+                        battleStatus->submenuStatus[entryIdx] = 1;
+                        if (playerActor->targetListLength == 0) {
+                            battleStatus->submenuStatus[entryIdx] = -2;
                         }
-                        break;
-                        do { // required to match
-                    case BTL_MENU_TYPE_SMASH:
-                        btl_init_menu_hammer();
-                        if (battleStatus->submenuMoveCount == 1) {
-                            battleStatus->submenuMoveCount = 0;
+                        if (playerData->specialBarsFilled / 256 < moveData->costFP) {
+                            battleStatus->submenuStatus[entryIdx] = 0;
                         }
-                        if (battleStatus->actionCommandMode == 2) {
-                            battleStatus->submenuMoveCount = 0;
+                        if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
+                            battleStatus->submenuStatus[entryIdx] = -1;
                         }
-                        break;
-                    case BTL_MENU_TYPE_JUMP:
-                        btl_init_menu_boots();
-                        if (battleStatus->submenuMoveCount == 1) {
-                            battleStatus->submenuMoveCount = 0;
-                        }
-                        if (battleStatus->actionCommandMode == 2) {
-                            battleStatus->submenuMoveCount = 0;
-                        }
-                        break;
-                    case BTL_MENU_TYPE_STAR_POWERS:
-                        battleStatus->submenuMoves[0] = MOVE_FOCUS;
-                        battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
-                        battleStatus->submenuStatus[0] = 1;
-                        entryIdx = 1;
-                        initialPos = 8;
-                        for (i = 0; i < playerData->maxStarPower; i++) {
-                            moveData = &gMoveTable[MOVE_REFRESH + i];
-                            battleStatus->submenuMoves[entryIdx] = MOVE_REFRESH + i;
+                        entryIdx++;
+                    }
+                    starBeamLevel = playerData->starBeamLevel;
+                    if (starBeamLevel == 1) {
+                        do {
+                            moveData = &gMoveTable[MOVE_STAR_BEAM];
+                            battleStatus->submenuMoves[entryIdx] = MOVE_STAR_BEAM;
                             battleStatus->submenuIcons[entryIdx] = 0;
                             battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                             battleStatus->moveArgument = MOVE_REFRESH + i;
                             battleStatus->curTargetListFlags = moveData->flags;
                             create_current_pos_target_list(playerActor);
-                            battleStatus->submenuStatus[entryIdx] = 1;
+                            battleStatus->submenuStatus[entryIdx] = starBeamLevel;
                             if (playerActor->targetListLength == 0) {
                                 battleStatus->submenuStatus[entryIdx] = -2;
                             }
@@ -2551,18 +2579,19 @@ void btl_state_update_player_menu(void) {
                                 battleStatus->submenuStatus[entryIdx] = -1;
                             }
                             entryIdx++;
-                        }
-                        starBeamLevel = playerData->starBeamLevel;
-                        if (starBeamLevel == 1) {
+                        } while (0);
+                    }
+                    if (playerData->starBeamLevel == 2) {
+                        do {
                             do {
-                                moveData = &gMoveTable[MOVE_STAR_BEAM];
-                                battleStatus->submenuMoves[entryIdx] = MOVE_STAR_BEAM;
+                                moveData = &gMoveTable[MOVE_PEACH_BEAM];
+                                battleStatus->submenuMoves[entryIdx] = MOVE_PEACH_BEAM;
                                 battleStatus->submenuIcons[entryIdx] = 0;
                                 battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
                                 battleStatus->moveArgument = MOVE_REFRESH + i;
                                 battleStatus->curTargetListFlags = moveData->flags;
                                 create_current_pos_target_list(playerActor);
-                                battleStatus->submenuStatus[entryIdx] = starBeamLevel;
+                                battleStatus->submenuStatus[entryIdx] = 1;
                                 if (playerActor->targetListLength == 0) {
                                     battleStatus->submenuStatus[entryIdx] = -2;
                                 }
@@ -2573,144 +2602,120 @@ void btl_state_update_player_menu(void) {
                                     battleStatus->submenuStatus[entryIdx] = -1;
                                 }
                                 entryIdx++;
-                            } while (0);
-                        }
-                        if (playerData->starBeamLevel == 2) {
-                            do {
-                                do {
-                                    moveData = &gMoveTable[MOVE_PEACH_BEAM];
-                                    battleStatus->submenuMoves[entryIdx] = MOVE_PEACH_BEAM;
-                                    battleStatus->submenuIcons[entryIdx] = 0;
-                                    battleStatus->moveCategory = BTL_MENU_TYPE_STAR_POWERS;
-                                    battleStatus->moveArgument = MOVE_REFRESH + i;
-                                    battleStatus->curTargetListFlags = moveData->flags;
-                                    create_current_pos_target_list(playerActor);
-                                    battleStatus->submenuStatus[entryIdx] = 1;
-                                    if (playerActor->targetListLength == 0) {
-                                        battleStatus->submenuStatus[entryIdx] = -2;
-                                    }
-                                    if (playerData->specialBarsFilled / 256 < moveData->costFP) {
-                                        battleStatus->submenuStatus[entryIdx] = 0;
-                                    }
-                                    if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                                        battleStatus->submenuStatus[entryIdx] = -1;
-                                    }
-                                    entryIdx++;
-                                } while (0); // TODO required to match
                             } while (0); // TODO required to match
-                        }
-                        battleStatus->submenuMoveCount = entryIdx;
-                        break;
-                    } while (0); // TODO required to match
-                }
+                        } while (0); // TODO required to match
+                    }
+                    battleStatus->submenuMoveCount = entryIdx;
+                    break;
+                } while (0); // TODO required to match
+            }
 
-                currentSubmenu = battleStatus->curSubmenu;
-                if (currentSubmenu == BTL_MENU_TYPE_STAR_POWERS) {
-                    gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_1;
+            currentSubmenu = battleStatus->curSubmenu;
+            if (currentSubmenu == BTL_MENU_TYPE_STAR_POWERS) {
+                gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_STAR_SPIRITS_1;
+                btl_state_update_player_menu();
+                btl_state_update_player_menu();
+                break;
+            } else if (currentSubmenu == BTL_MENU_TYPE_STRATEGIES) {
+                if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
+                    gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_BUILD_STRATEGIES;
                     btl_state_update_player_menu();
                     btl_state_update_player_menu();
                     break;
-                } else if (currentSubmenu == BTL_MENU_TYPE_STRATEGIES) {
-                    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)) {
-                        gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_BUILD_STRATEGIES;
-                        btl_state_update_player_menu();
-                        btl_state_update_player_menu();
+                } else {
+                    btl_main_menu_destroy();
+                    battleStatus->moveCategory = currentSubmenu;
+                    battleStatus->moveArgument = 0;
+                    battleStatus->selectedMoveID = 0;
+                    btl_set_state(BATTLE_STATE_PLAYER_MOVE);
+                    break;
+                }
+            } else {
+                if (battleStatus->submenuMoveCount == 0) {
+                    if (currentSubmenu != BTL_MENU_TYPE_ITEMS) {
+                        gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_10;
                         break;
                     } else {
-                        btl_main_menu_destroy();
-                        battleStatus->moveCategory = currentSubmenu;
-                        battleStatus->moveArgument = 0;
-                        battleStatus->selectedMoveID = 0;
-                        btl_set_state(BATTLE_STATE_PLAYER_MOVE);
+                        gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_ITEMS_1;
+                        btl_state_update_player_menu();
+                        btl_state_update_player_menu();
                         break;
                     }
-                } else {
-                    if (battleStatus->submenuMoveCount == 0) {
-                        if (currentSubmenu != BTL_MENU_TYPE_ITEMS) {
-                            gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_10;
-                            break;
-                        } else {
-                            gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_ITEMS_1;
-                            btl_state_update_player_menu();
-                            btl_state_update_player_menu();
-                            break;
-                        }
-                    }
-
-                    initialPos = 0;
-                    if (currentSubmenu == BTL_MENU_TYPE_JUMP) {
-                        if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] < 0) {
-                            battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] = 0;
-                        }
-                        initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP];
-                    }
-                    if (battleStatus->curSubmenu == BTL_MENU_TYPE_SMASH) {
-                        if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] < 0) {
-                            battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] = 0;
-                        }
-                        initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH];
-                    }
-                    if (battleStatus->curSubmenu == BTL_MENU_TYPE_ITEMS) {
-                        if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] < 0) {
-                            battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] = 0;
-                        }
-                        initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS];
-                    }
-
-                    for (i = 0; i < battleStatus->submenuMoveCount; i++) {
-                        moveData = &gMoveTable[battleStatus->submenuMoves[i]];
-                        itemData = &gItemTable[battleStatus->submenuIcons[i]];
-                        hudScriptPair = &gItemHudScripts[itemData->hudElemID];
-
-                        BattleMenu_Moves_OptionCantUseMessages[i] = 0;
-                        if (battleStatus->submenuStatus[i] == 0) {
-                            BattleMenu_Moves_OptionCantUseMessages[i] = 0;
-                        }
-                        if (battleStatus->submenuStatus[i] == -1) {
-                            battleStatus->submenuStatus[i] = 0;
-                            BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW;
-                        }
-                        if (battleStatus->submenuStatus[i] == -2) {
-                            battleStatus->submenuStatus[i] = 0;
-                            BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW;
-                        }
-                        if (battleStatus->submenuStatus[i] == -3) {
-                            battleStatus->submenuStatus[i] = 0;
-                            BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW_ALT;
-                        }
-                        battle_menu_moveOptionIconScripts[i] = hudScriptPair->enabled;
-                        if (battleStatus->submenuStatus[i] == 0) {
-                            battle_menu_moveOptionIconScripts[i] = hudScriptPair->disabled;
-                        }
-
-                        battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
-                        battle_menu_moveOptionBPCosts[i] = moveData->costBP;
-                        BattleMenu_Moves_OptionSortPriority[i] = 0;
-                        battle_menu_moveOptionDisplayCostReductions[i] = 0;
-                        battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
-
-                        if (player_team_is_ability_active(playerActor, ABILITY_FLOWER_SAVER)) {
-                            battle_menu_moveOptionDisplayCostReductions[i] += player_team_is_ability_active(playerActor, ABILITY_FLOWER_SAVER);
-                            battle_menu_moveOptionDisplayCostReductionColors[i] = 1;
-                        }
-                        if (player_team_is_ability_active(playerActor, ABILITY_FLOWER_FANATIC)) {
-                            battle_menu_moveOptionDisplayCostReductions[i] += 2 * player_team_is_ability_active(playerActor, ABILITY_FLOWER_FANATIC);
-                            battle_menu_moveOptionDisplayCostReductionColors[i] = 2;
-                        }
-
-                        BattleMenu_Moves_OptionIndices[i] = i;
-                        BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
-                        battle_menu_moveOptionNames[i] = moveData->nameMsg;
-                        BattleMenu_Moves_OptionDescMessages[i] = moveData->shortDescMsg;
-
-                    }
-                    BattleMenu_UsingSpiritsSubmenu = FALSE;
-                    D_802AD4A8 = initialPos;
-                    BattleMenu_Moves_OptionCount = battleStatus->submenuMoveCount;
-                    func_802A2684();
-                    gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_2;
-                    break;
                 }
+
+                initialPos = 0;
+                if (currentSubmenu == BTL_MENU_TYPE_JUMP) {
+                    if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] < 0) {
+                        battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP] = 0;
+                    }
+                    initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_JUMP];
+                }
+                if (battleStatus->curSubmenu == BTL_MENU_TYPE_SMASH) {
+                    if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] < 0) {
+                        battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH] = 0;
+                    }
+                    initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_SMASH];
+                }
+                if (battleStatus->curSubmenu == BTL_MENU_TYPE_ITEMS) {
+                    if (battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] < 0) {
+                        battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS] = 0;
+                    }
+                    initialPos = battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_ITEMS];
+                }
+
+                for (i = 0; i < battleStatus->submenuMoveCount; i++) {
+                    moveData = &gMoveTable[battleStatus->submenuMoves[i]];
+                    itemData = &gItemTable[battleStatus->submenuIcons[i]];
+                    hudScriptPair = &gItemHudScripts[itemData->hudElemID];
+
+                    BattleMenu_Moves_OptionCantUseMessages[i] = 0;
+                    if (battleStatus->submenuStatus[i] == 0) {
+                        BattleMenu_Moves_OptionCantUseMessages[i] = 0;
+                    }
+                    if (battleStatus->submenuStatus[i] == -1) {
+                        battleStatus->submenuStatus[i] = 0;
+                        BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW;
+                    }
+                    if (battleStatus->submenuStatus[i] == -2) {
+                        battleStatus->submenuStatus[i] = 0;
+                        BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW;
+                    }
+                    if (battleStatus->submenuStatus[i] == -3) {
+                        battleStatus->submenuStatus[i] = 0;
+                        BattleMenu_Moves_OptionCantUseMessages[i] = BTL_MSG_CANT_SELECT_NOW_ALT;
+                    }
+                    battle_menu_moveOptionIconScripts[i] = hudScriptPair->enabled;
+                    if (battleStatus->submenuStatus[i] == 0) {
+                        battle_menu_moveOptionIconScripts[i] = hudScriptPair->disabled;
+                    }
+
+                    battle_menu_moveOptionDisplayCosts[i] = moveData->costFP;
+                    battle_menu_moveOptionBPCosts[i] = moveData->costBP;
+                    BattleMenu_Moves_OptionSortPriority[i] = 0;
+                    battle_menu_moveOptionDisplayCostReductions[i] = 0;
+                    battle_menu_moveOptionDisplayCostReductionColors[i] = 0;
+
+                    if (player_team_is_ability_active(playerActor, ABILITY_FLOWER_SAVER)) {
+                        battle_menu_moveOptionDisplayCostReductions[i] += player_team_is_ability_active(playerActor, ABILITY_FLOWER_SAVER);
+                        battle_menu_moveOptionDisplayCostReductionColors[i] = 1;
+                    }
+                    if (player_team_is_ability_active(playerActor, ABILITY_FLOWER_FANATIC)) {
+                        battle_menu_moveOptionDisplayCostReductions[i] += 2 * player_team_is_ability_active(playerActor, ABILITY_FLOWER_FANATIC);
+                        battle_menu_moveOptionDisplayCostReductionColors[i] = 2;
+                    }
+
+                    BattleMenu_Moves_OptionIndices[i] = i;
+                    BattleMenu_Moves_OptionEnabled[i] = battleStatus->submenuStatus[i];
+                    battle_menu_moveOptionNames[i] = moveData->nameMsg;
+                    BattleMenu_Moves_OptionDescMessages[i] = moveData->shortDescMsg;
+
+                }
+                BattleMenu_UsingSpiritsSubmenu = FALSE;
+                D_802AD4A8 = initialPos;
+                BattleMenu_Moves_OptionCount = battleStatus->submenuMoveCount;
+                func_802A2684();
+                gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_2;
+                break;
             }
             break;
         case BTL_SUBSTATE_PLAYER_MENU_MAIN_MENU_2:
@@ -2880,7 +2885,7 @@ void btl_state_update_player_menu(void) {
             }
             entryIdx = 0;
             for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-                if (playerData->invItems[i] == 0) {
+                if (playerData->invItems[i] == ITEM_NONE) {
                     continue;
                 }
                 itemData = &gItemTable[playerData->invItems[i]];
@@ -2984,7 +2989,7 @@ void btl_state_update_player_menu(void) {
         case BTL_SUBSTATE_PLAYER_MENU_ITEMS_1:
             entryIdx = 0;
             for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-                if (playerData->invItems[i] == 0) {
+                if (playerData->invItems[i] == ITEM_NONE) {
                     continue;
                 }
                 itemData = &gItemTable[playerData->invItems[i]];
@@ -3183,7 +3188,7 @@ void btl_state_update_player_menu(void) {
             } else {
                 entryIdx = 0;
                 for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-                    if (playerData->invItems[i] == 0) {
+                    if (playerData->invItems[i] == ITEM_NONE) {
                         continue;
                     }
                     itemData = &gItemTable[playerData->invItems[i]];
@@ -3971,7 +3976,7 @@ void btl_state_update_partner_menu(void) {
         for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
             ItemData* item;
             HudScript** hudScript;
-            if (playerData->invItems[i] == 0) {
+            if (playerData->invItems[i] == ITEM_NONE) {
                 continue;
             }
             item = &gItemTable[playerData->invItems[i]];
@@ -4894,7 +4899,7 @@ void btl_state_update_select_target(void) {
                     s8 actionTip = gMoveTable[battleStatus->selectedMoveID].actionTip;
 
                     if (actionTip >= 0) {
-                        btl_show_battle_message(BTL_MSG_ACTION_TIP_00 + actionTip, 60);
+                        btl_show_battle_message(BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING + actionTip, 60);
                     }
                 }
             }

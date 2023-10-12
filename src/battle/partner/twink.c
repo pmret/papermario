@@ -10,8 +10,8 @@ extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
-extern EvtScript N(executeAction);
-extern EvtScript N(celebrate);
+extern EvtScript N(EVS_ExecuteAction);
+extern EvtScript N(EVS_Celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 
@@ -184,9 +184,9 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -196,7 +196,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Twink_Fly)
     EVT_SET_CONST(LVar2, ANIM_Twink_Fly)
@@ -231,7 +231,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_TWINK_FLY_B)

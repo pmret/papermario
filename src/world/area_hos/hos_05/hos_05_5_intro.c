@@ -1974,15 +1974,15 @@ API_CALLABLE(N(func_80244934_A2EB74)) {
 }
 
 EvtScript N(EVS_Scene_IntroStory) = {
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StarRod, 2)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_StarRod, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
     EVT_CALL(SetNpcPaletteSwapLower, NPC_StarRod, 0, 1, 20, 5)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Eldstar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Mamar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Skolar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Muskular, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Misstar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Klevar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Kalmar, 2)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Eldstar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Mamar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Skolar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Muskular, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Misstar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Klevar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Kalmar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Eldstar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Mamar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Skolar, 0, 1, 25, 12, 4, 18, 0, 0)

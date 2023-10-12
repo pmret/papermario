@@ -2669,7 +2669,7 @@ void btl_state_update_player_move(void) {
                 if (battleStatus->selectedMoveID != MOVE_NONE) {
                     tipIndex = gMoveTable[battleStatus->selectedMoveID].actionTip;
                     if (tipIndex >= 0) {
-                        btl_show_battle_message(BTL_MSG_ACTION_TIP_00 + tipIndex, 60);
+                        btl_show_battle_message(BTL_MSG_FIRST_ACTION_TIP + tipIndex, 60);
                     }
                 }
             }

@@ -366,7 +366,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
+    EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
         EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
         EVT_IF_GT(LVar0, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WasHit, TRUE)

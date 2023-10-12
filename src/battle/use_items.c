@@ -120,7 +120,7 @@ API_CALLABLE(LoadItemScript) {
 
     while (TRUE) {
         if (playerData->invItems[i] == itemID) {
-            playerData->invItems[i] = 0;
+            playerData->invItems[i] = ITEM_NONE;
             break;
         }
         i++;

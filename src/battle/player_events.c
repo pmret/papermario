@@ -157,7 +157,7 @@ API_CALLABLE(DetermineAutoRunAwaySuccess) {
 }
 
 API_CALLABLE(func_80260E38) {
-    btl_show_battle_message(BTL_MSG_ACTION_TIP_03, 60);
+    btl_show_battle_message(BTL_MSG_ACTION_TIP_MASH_BUTTON, 60);
     return ApiStatus_DONE2;
 }
 

@@ -1436,7 +1436,7 @@ void load_player_actor(void) {
 
         ASSERT(decorations != NULL);
 
-        decorations->paletteAdjustment = PAL_ADJUST_NONE;
+        decorations->paletteAdjustment = ACTOR_PAL_ADJUST_NONE;
         decorations->glowState = GLOW_PAL_OFF;
         decorations->flashState = 0;
         decorations->flashEnabled = FLASH_PAL_OFF;
@@ -1665,7 +1665,7 @@ void load_partner_actor(void) {
 
                 ASSERT(decorations != NULL);
 
-                decorations->paletteAdjustment = PAL_ADJUST_NONE;
+                decorations->paletteAdjustment = ACTOR_PAL_ADJUST_NONE;
                 decorations->glowState = GLOW_PAL_OFF;
                 decorations->flashState = 0;
                 decorations->flashEnabled = FLASH_PAL_OFF;
@@ -1927,7 +1927,7 @@ Actor* create_actor(Formation formation) {
             decorations = part->decorationTable;
             ASSERT(decorations != NULL);
 
-            decorations->paletteAdjustment = PAL_ADJUST_NONE;
+            decorations->paletteAdjustment = ACTOR_PAL_ADJUST_NONE;
             decorations->glowState = GLOW_PAL_OFF;
             decorations->flashState = 0;
             decorations->flashEnabled = FLASH_PAL_OFF;
@@ -2176,22 +2176,22 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                             }
                             return TRUE;
                         case STATUS_KEY_SLEEP:
-                            set_actor_pal_adjustment(target, PAL_ADJUST_SLEEP);
+                            set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_SLEEP);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_SLEEP);
                             return TRUE;
                         case STATUS_KEY_PARALYZE:
-                            set_actor_pal_adjustment(target, PAL_ADJUST_PARALYZE);
+                            set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_PARALYZE);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_PARALYZE);
                             return TRUE;
                         case STATUS_KEY_DIZZY:
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_DIZZY);
                             return TRUE;
                         case STATUS_KEY_FEAR:
-                            set_actor_pal_adjustment(target, PAL_ADJUST_FEAR);
+                            set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_FEAR);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_FEAR);
                             return TRUE;
                         case STATUS_KEY_POISON:
-                            set_actor_pal_adjustment(target, PAL_ADJUST_POISON);
+                            set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_POISON);
                             create_status_debuff(target->hudElementDataIndex, STATUS_KEY_POISON);
                             return TRUE;
                         case STATUS_KEY_SHRINK:
@@ -2212,7 +2212,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     target->staticDuration = 9;
                 }
                 target->statusAfflicted = STATUS_KEY_STATIC;
-                set_actor_pal_adjustment(target, PAL_ADJUST_STATIC);
+                set_actor_pal_adjustment(target, ACTOR_PAL_ADJUST_STATIC);
                 create_status_static(target->hudElementDataIndex, STATUS_KEY_STATIC);
             }
             return TRUE;
@@ -2680,15 +2680,15 @@ void set_actor_pal_adjustment(Actor* actor, s32 palAdjust) {
 
 void clear_part_pal_adjustment(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
-        part->decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
+        part->decorationTable->paletteAdjustment = ACTOR_PAL_ADJUST_NONE;
     }
 }
 
 // TODO: improve match
 void func_80266E40(Actor* actor) {
     ActorPart* part = actor->partsTable;
-    s8 e = PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS;
-    s8 f = PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS;
+    s8 e = ACTOR_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS;
+    s8 f = ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS;
 
     while (part != NULL) {
         DecorationTable* decorations = part->decorationTable;
@@ -2699,7 +2699,7 @@ void func_80266E40(Actor* actor) {
                 !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS))
             {
                 if (decorations->paletteAdjustment != e && decorations->paletteAdjustment != f) {
-                    decorations->paletteAdjustment = PAL_ADJUST_NONE;
+                    decorations->paletteAdjustment = ACTOR_PAL_ADJUST_NONE;
                 }
             }
         } while (0); // required to match

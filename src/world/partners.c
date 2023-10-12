@@ -488,7 +488,7 @@ s32 use_consumable(s32 invSlot) {
 }
 
 void remove_consumable(void) {
-    gPlayerData.invItems[D_8010CD20] = 0;
+    gPlayerData.invItems[D_8010CD20] = ITEM_NONE;
     sort_items();
 }
 

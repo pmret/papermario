@@ -64,8 +64,8 @@ API_CALLABLE(N(SetEntityHideMode0)) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
-#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
+#include "world/common/DisableCameraFollowPlayerY.inc.c"
 
 API_CALLABLE(N(MovePlayerAlongRoofSlide)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -194,7 +194,7 @@ EvtScript N(EVS_TouchFloor_RightRoof) = {
     EVT_WAIT(1)
     EVT_CALL(SetZoneEnabled, ZONE_gon, FALSE)
     EVT_CALL(SetZoneEnabled, ZONE_sou, FALSE)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_SET(LVar3, 500)
     EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayerCappedY), LVarA)
     EVT_CALL(PlaySoundAtPlayer, SOUND_SLIDE, SOUND_SPACE_DEFAULT)
@@ -206,7 +206,7 @@ EvtScript N(EVS_TouchFloor_RightRoof) = {
     EVT_CALL(SetZoneEnabled, ZONE_s, TRUE)
     EVT_CALL(SetZoneEnabled, ZONE_gon, TRUE)
     EVT_CALL(SetZoneEnabled, ZONE_sou, TRUE)
-    EVT_CALL(N(SetCamera0MoveFlag1))
+    EVT_CALL(N(DisableCameraFollowPlayerY))
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)

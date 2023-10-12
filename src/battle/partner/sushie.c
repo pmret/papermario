@@ -15,8 +15,8 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Init);
-extern EvtScript N(executeAction);
-extern EvtScript N(celebrate);
+extern EvtScript N(EVS_ExecuteAction);
+extern EvtScript N(EVS_Celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(bellyFlop);
@@ -551,9 +551,9 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -563,7 +563,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Celebrate)
     EVT_WAIT(36)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
@@ -597,7 +597,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

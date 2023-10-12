@@ -1035,7 +1035,7 @@ void func_80266970(Actor*);
 void show_actor_health_bar(Actor*);
 void hide_actor_health_bar(Actor*);
 void clear_part_pal_adjustment(ActorPart*);
-void func_800E24F8(void);
+void calculate_camera_yinterp_rate(void);
 void load_tattle_flags(s32);
 s32 use_consumable(s32 invSlot);
 void remove_consumable(void);

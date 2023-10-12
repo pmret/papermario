@@ -1,5 +1,6 @@
 #include "common.h"
 
+// implementation for CAM_UPDATE_MODE_6
 void update_camera_mode_6(Camera* camera) {
     f32 sinBoom;
     f32 cosBoom;

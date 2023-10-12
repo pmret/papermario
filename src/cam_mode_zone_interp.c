@@ -10,179 +10,6 @@ SHIFT_BSS f32 D_800A08EC;
 void cam_interp_lookat_pos(Camera* camera, f32 arg1, f32 arg2, s16 arg3);
 void func_8003034C(Camera* camera);
 
-void update_camera_mode_unused(Camera* camera) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 sinBoom;
-    f32 cosBoom;
-    f32 deltaX;
-    f32 deltaY;
-    f32 deltaZ;
-    f32 deltaX2;
-    f32 deltaY2;
-    f32 deltaZ2;
-    f32 boomYaw;
-
-    if (camera->needsInit || camera->isChangingMap) {
-        camera->needsInit = FALSE;
-        camera->isChangingMap = FALSE;
-        camera->auxPitch = 0;
-        camera->auxBoomLength = 100;
-        camera->lookAt_dist = 100;
-        camera->auxBoomPitch = 0;
-        camera->auxBoomYaw = 0;
-        camera->lookAt_obj.x = camera->lookAt_obj_target.x;
-        camera->lookAt_obj.y = camera->lookAt_obj_target.y;
-        camera->lookAt_obj.z = camera->lookAt_obj_target.z;
-    }
-
-    if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
-        camera->lookAt_obj_target.y = playerStatus->pos.y + 60.0f;
-    }
-    camera->lookAt_obj_target.x = playerStatus->pos.x;
-    camera->lookAt_obj_target.z = playerStatus->pos.z + 400.0f;
-
-    if (camera->auxPitch == 0) {
-        camera->lookAt_obj.x = camera->lookAt_obj_target.x;
-        camera->lookAt_obj.y = camera->lookAt_obj_target.y;
-        camera->lookAt_obj.z = camera->lookAt_obj_target.z;
-        camera->trueRot.x = camera->auxBoomYaw;
-        camera->curBoomYaw = camera->auxBoomPitch;
-        camera->curBoomLength = camera->auxBoomLength;
-        camera->vfov = (10000 / camera->lookAt_dist) / 4;
-        boomYaw = DEG_TO_RAD(camera->curBoomYaw);
-        sinBoom = sin_rad(boomYaw);
-        cosBoom = cos_rad(boomYaw);
-        deltaX = 0.0f;
-        deltaY = 0.0f;
-        deltaZ = camera->curBoomLength;
-        deltaX2 = deltaX;
-        deltaY2 = deltaY;
-        boomYaw = deltaX = -deltaY2;
-        deltaZ2 = deltaZ;
-        deltaX = deltaX2;
-        deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
-        deltaZ = sinBoom * boomYaw + deltaZ2 * cosBoom;
-        boomYaw = DEG_TO_RAD(camera->trueRot.x);
-        sinBoom = sin_rad(boomYaw);
-        cosBoom = cos_rad(boomYaw);
-        deltaZ2 = cosBoom * deltaX - deltaZ * sinBoom;
-        deltaX2 = cosBoom * deltaX - deltaZ * sinBoom;
-        deltaY2 = deltaY;
-        deltaZ2 = sinBoom * deltaX + deltaZ * cosBoom;
-        camera->lookAt_eye.x = camera->lookAt_obj.x + deltaX2;
-        camera->lookAt_eye.y = camera->lookAt_obj.y + deltaY2;
-        camera->lookAt_eye.z = camera->lookAt_obj.z + deltaZ2;
-    }
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
-    deltaX = camera->lookAt_obj.x - camera->lookAt_eye.x;
-    deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
-    deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->curBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->curPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
-}
-
-//TODO CODE SPLIT?
-
-void update_camera_mode_5(Camera* camera) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 lookXDelta, lookYDelta, lookZDelta;
-
-    camera->curBoomYaw = 18.0f;
-    camera->curBoomLength = 690.0f;
-    camera->curYOffset = 47.0f;
-
-    if (camera->needsInit) {
-        camera->unk_550 = 0.0f;
-        camera->unk_70 = 0.0f;
-        camera->trueRot.x = 0.0f;
-        camera->needsInit = FALSE;
-        camera->unk_554 = 0;
-        camera->lookAt_obj.x = camera->targetPos.x;
-        camera->lookAt_obj.y = camera->targetPos.y + camera->curYOffset;
-        camera->lookAt_obj.z = camera->targetPos.z;
-        cam_interp_lookat_pos(camera, 0.0f, 0.0f, FALSE);
-    } else {
-        f32 maxInterpSpeed = (playerStatus->curSpeed * 1.5f) + 1.0f;
-        f32 interpRate = (playerStatus->curSpeed * 0.05f) + 0.05f;
-
-        camera->lookAt_obj_target.x = camera->targetPos.x + camera->unk_550;
-        camera->lookAt_obj_target.y = camera->targetPos.y + camera->curYOffset;
-        camera->lookAt_obj_target.z = camera->targetPos.z;
-        func_8003034C(camera);
-        if (!(camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y)) {
-            cam_interp_lookat_pos(camera, interpRate, maxInterpSpeed, FALSE);
-        } else {
-            lookXDelta = maxInterpSpeed; // needed to match
-
-            cam_interp_lookat_pos(camera, interpRate, lookXDelta, TRUE);
-        }
-    }
-
-    camera->curYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
-    lookXDelta = camera->lookAt_obj.x - camera->lookAt_eye.x;
-    lookYDelta = camera->lookAt_obj.y - camera->lookAt_eye.y;
-    lookZDelta = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->curBlendedYawNegated = -atan2(0.0f, 0.0f, lookXDelta, lookZDelta);
-    camera->curPitch = atan2(0.0f, 0.0f, lookYDelta, -sqrtf(SQ(lookXDelta) + SQ(lookZDelta)));
-}
-
-void cam_interp_lookat_pos(Camera* camera, f32 interpAmtXZ, f32 maxDeltaXZ, s16 lockPosY) {
-    f32 xDelta = (camera->lookAt_obj_target.x - camera->lookAt_obj.x) * interpAmtXZ;
-    f32 theta;
-    f32 cosTheta;
-    f32 sinTheta;
-
-    if (xDelta < -maxDeltaXZ) {
-        xDelta = -maxDeltaXZ;
-    }
-    if (xDelta > maxDeltaXZ) {
-        xDelta = maxDeltaXZ;
-    }
-
-    camera->lookAt_obj.x = camera->lookAt_eye.x = camera->lookAt_obj.x + xDelta;
-
-    theta = DEG_TO_RAD(camera->curBoomYaw);
-    cosTheta = cos_rad(DEG_TO_RAD(camera->curBoomYaw));
-    camera->lookAt_obj.z += (camera->lookAt_obj_target.z - camera->lookAt_obj.z) * interpAmtXZ;
-    camera->lookAt_eye.z = camera->lookAt_obj.z + (camera->curBoomLength * cosTheta);
-
-    if (!lockPosY) {
-        sinTheta = sin_rad(theta);
-        camera->lookAt_obj.y += (camera->lookAt_obj_target.y - camera->lookAt_obj.y) * 0.125f;
-        camera->lookAt_eye.y = camera->lookAt_obj.y + (camera->curBoomLength * sinTheta);
-    }
-}
-
-void func_8003034C(Camera* camera) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-
-    if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 90.0f)) < 45.0f) {
-        if (camera->unk_556 == 0) {
-            if (camera->unk_554 <= 0) {
-                camera->unk_550 = 35.0f;
-            } else {
-                camera->unk_554--;
-            }
-        } else {
-            camera->unk_554 = 15;
-            camera->unk_556 = 0;
-        }
-    } else if (fabsf(get_clamped_angle_diff(playerStatus->curYaw, 270.0f)) < 45.0f) {
-        if (camera->unk_556 == 1) {
-            if (camera->unk_554 <= 0) {
-                camera->unk_550 = -35.0f;
-            } else {
-                camera->unk_554--;
-            }
-        } else {
-            camera->unk_554 = 15;
-            camera->unk_556 = 1;
-        }
-    }
-}
-
-//TODO CODE SPLIT?
-
 void func_80030450(Camera* camera) {
 }
 
@@ -792,50 +619,51 @@ void update_camera_zone_interp(Camera* camera) {
         camera->curController = NULL;
         camera->prevController = NULL;
         camera->linearInterp = 0.0f;
-        camera->unk_494 = 0.0f;
-        camera->savedTargetY = targetY;
+        camera->yinterpGoal = 0.0f;
+        camera->yinterpCur = targetY;
         camera->unk_98 = 0;
         camera->unk_9C = 0;
         camera->prevTargetPos.x = 0.0f;
         camera->prevTargetPos.y = 0.0f;
         camera->prevTargetPos.z = 0.0f;
-        camera->prevPrevFollowFlags = 0;
-        camera->prevFollowFlags = 0;
+        camera->prevPrevFollowPlayer = FALSE;
+        camera->prevFollowPlayer = FALSE;
         camera->panPhase = 0.0f;
         D_800A08DC = 0.0f;
         D_800A08E0 = 0.0f;
         camera->interpAlpha = 1.0f;
-        camera->unk_498 = 1.0f;
+        camera->yinterpAlpha = 1.0f;
         camera->linearInterpScale = 1.0f;
     }
     tempX = targetX;
     if (camera->moveFlags & CAMERA_MOVE_IGNORE_PLAYER_Y) {
-        camera->unk_498 = 0.0f;
-    } else if (camera->unk_494 != targetY) {
-        camera->unk_494 = targetY;
-        camera->unk_498 = 0.0f;
+        camera->yinterpAlpha = 0.0f;
+    } else if (camera->yinterpGoal != targetY) {
+        camera->yinterpGoal = targetY;
+        camera->yinterpAlpha = 0.0f;
     }
 
-    if (targetY < camera->unk_494 && targetY <= camera->savedTargetY) {
-        camera->unk_494 = targetY;
-        camera->unk_498 = 1.0f;
+    // always follow player moving down with no interp
+    if (targetY < camera->yinterpGoal && targetY <= camera->yinterpCur) {
+        camera->yinterpGoal = targetY;
+        camera->yinterpAlpha = 1.0f;
     }
 
-    camera->unk_498 += (1.01 - camera->unk_498) / camera->unk_49C;
+    camera->yinterpAlpha += (1.01 - camera->yinterpAlpha) / camera->yinterpRate;
 
-    if (camera->unk_498 > 1.0) {
-        camera->unk_498 = 1.0f;
+    if (camera->yinterpAlpha > 1.0) {
+        camera->yinterpAlpha = 1.0f;
     }
 
     if (camera->moveFlags & CAMERA_MOVE_FLAG_4) {
-        camera->unk_498 += 0.3;
-        if (camera->unk_498 >= 1.0) {
-            camera->unk_498 = 1.0f;
+        camera->yinterpAlpha += 0.3;
+        if (camera->yinterpAlpha >= 1.0) {
+            camera->yinterpAlpha = 1.0f;
         }
     }
 
     if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
-        camera->savedTargetY += (camera->unk_494 - camera->savedTargetY) * camera->unk_498;
+        camera->yinterpCur += (camera->yinterpGoal - camera->yinterpCur) * camera->yinterpAlpha;
     }
 
     tempZ = targetZ;
@@ -920,8 +748,8 @@ void update_camera_zone_interp(Camera* camera) {
             camera->linearInterp = 0.0f;
             camera->panActive = FALSE;
             camera->linearInterpScale = camera->moveSpeed;
-            camera->prevPrevFollowFlags = camera->prevFollowFlags;
-            camera->prevFollowFlags = camera->followPlayer;
+            camera->prevPrevFollowPlayer = camera->prevFollowPlayer;
+            camera->prevFollowPlayer = camera->followPlayer;
             camera->prevPrevMovePos.x = camera->prevMovePos.x;
             camera->prevPrevMovePos.y = camera->prevMovePos.y;
             camera->prevPrevMovePos.z = camera->prevMovePos.z;
@@ -931,24 +759,24 @@ void update_camera_zone_interp(Camera* camera) {
         }
     }
 
-    if (camera->prevPrevFollowFlags) {
+    if (camera->prevPrevFollowPlayer) {
         posX = camera->prevPrevMovePos.x;
         posY = camera->prevPrevMovePos.y;
         posZ = camera->prevPrevMovePos.z;
     } else {
         posX = tempX;
-        posY = camera->savedTargetY;
+        posY = camera->yinterpCur;
         posZ = tempZ;
     }
 
-    if (camera->prevFollowFlags) {
-        camera->savedTargetY = camera->prevMovePos.y;
+    if (camera->prevFollowPlayer) {
+        camera->yinterpCur = camera->prevMovePos.y;
         tX = camera->prevMovePos.x;
-        tY = camera->savedTargetY;
+        tY = camera->yinterpCur;
         tZ = camera->prevMovePos.z;
     } else {
         tX = tempX;
-        tY = camera->savedTargetY;
+        tY = camera->yinterpCur;
         tZ = tempZ;
     }
 

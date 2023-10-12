@@ -1909,6 +1909,14 @@ enum NpcDecorationIDs {
     NPC_DECORATION_CHARGED                       = 0x00000006,
 };
 
+enum NpcPaletteAdjustments {
+    NPC_PAL_ADJUST_NONE                             = 0,
+    NPC_PAL_ADJUST_WATT_IDLE                        = 1,
+    NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS = 2,
+    NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS = 3,
+    NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES            = 4,
+};
+
 enum SpeechFlags {
     SPEECH_FLAG_10              = 0x010,
     SPEECH_FLAG_HAS_OFFSET      = 0x100,
@@ -2214,21 +2222,21 @@ enum StatusKeys {
     STATUS_TURN_MOD_STOP            = 0x00000029,
 };
 
-enum PaletteShifts {
-    PAL_ADJUST_NONE             = 0,
-    PAL_ADJUST_SLEEP            = 3,
-    PAL_ADJUST_STATIC           = 4,
-    PAL_ADJUST_FEAR             = 5,  // darker
-    PAL_ADJUST_POISON           = 6,
-    PAL_ADJUST_PARALYZE         = 7,
-    PAL_ADJUST_BERSERK          = 8,
-    PAL_ADJUST_WATT_IDLE        = 9,
-    PAL_ADJUST_WATT_ATTACK      = 10,
-    PAL_ADJUST_PLAYER_DEBUFF    = 12,
-    PAL_ADJUST_PLAYER_POISON    = 13,
-    PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS = 14,
-    PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS = 15,
-    PAL_ADJUST_BLEND_PALSETS    = 16,
+enum ActorPaletteAdjustments {
+    ACTOR_PAL_ADJUST_NONE             = 0,
+    ACTOR_PAL_ADJUST_SLEEP            = 3,
+    ACTOR_PAL_ADJUST_STATIC           = 4,
+    ACTOR_PAL_ADJUST_FEAR             = 5,  // darker
+    ACTOR_PAL_ADJUST_POISON           = 6,
+    ACTOR_PAL_ADJUST_PARALYZE         = 7,
+    ACTOR_PAL_ADJUST_BERSERK          = 8,
+    ACTOR_PAL_ADJUST_WATT_IDLE        = 9,
+    ACTOR_PAL_ADJUST_WATT_ATTACK      = 10,
+    ACTOR_PAL_ADJUST_PLAYER_DEBUFF    = 12,
+    ACTOR_PAL_ADJUST_PLAYER_POISON    = 13,
+    ACTOR_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS = 14,
+    ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS = 15,
+    ACTOR_PAL_ADJUST_BLEND_PALSETS    = 16,
 };
 
 enum GlowPaletteModes {
@@ -4001,95 +4009,98 @@ enum BattlePartnerMenuSubstates {
 };
 
 enum BattleMessages {
-    BTL_MSG_MERLEE_ATK_UP               = 0x00,
-    BTL_MSG_MERLEE_DEF_UP               = 0x01,
-    BTL_MSG_MERLEE_EXP_UP               = 0x02,
-    BTL_MSG_MERLEE_DONE                 = 0x03,
-    BTL_MSG_CHARGE_HAMMER               = 0x04,
-    BTL_MSG_CHARGE_HAMMER_MORE          = 0x05,
-    BTL_MSG_CHARGE_JUMP                 = 0x06,
-    BTL_MSG_CHARGE_JUMP_MORE            = 0x07,
-    BTL_MSG_CANT_CHARGE                 = 0x08,
-    BTL_MSG_ENEMY_MISSED                = 0x09,
-    BTL_MSG_PLAYER_DAZED                = 0x0A,
-    BTL_MSG_PLAYER_ASLEEP               = 0x0B,
-    BTL_MSG_PLAYER_FROZEN               = 0x0C,
-    BTL_MSG_PLAYER_POISONED             = 0x0D,
-    BTL_MSG_PLAYER_SHRUNK               = 0x0E,
-    BTL_MSG_PLAYER_PARALYZED            = 0x0F,
-    BTL_MSG_PLAYER_CHARGED              = 0x10,
-    BTL_MSG_PLAYER_TRANSPARENT          = 0x11,
-    BTL_MSG_ENEMY_DAZED                 = 0x12,
-    BTL_MSG_ENEMY_ASLEEP                = 0x13,
-    BTL_MSG_ENEMY_FROZEN                = 0x14,
-    BTL_MSG_ENEMY_POISONED              = 0x15,
-    BTL_MSG_ENEMY_SHRUNK                = 0x16,
-    BTL_MSG_ENEMY_PARALYZED             = 0x17,
-    BTL_MSG_ENEMY_ELECTRIFIED           = 0x18,
-    BTL_MSG_ENEMY_CANT_MOVE             = 0x19,
-    BTL_MSG_STAR_POWER_RECHARGED        = 0x1A,
-    BTL_MSG_STAR_POWER_MAXED            = 0x1B,
-    BTL_MSG_STAR_POWER_FILLED           = 0x1C,
-    BTL_MSG_ATTACK_UP                   = 0x1D,
-    BTL_MSG_DEFENCE_UP                  = 0x1E,
-    BTL_MSG_HEAL_ONE                    = 0x1F,
-    BTL_MSG_HEAL_ALL                    = 0x20,
-    BTL_MSG_ENEMY_TRANSPARENT           = 0x21,
-    BTL_MSG_ENEMY_CHARGED               = 0x22,
-    BTL_MSG_PARTNER_INJURED             = 0x23,
-    BTL_MSG_CHARGE_GOOMBARIO            = 0x24,
-    BTL_MSG_CHARGE_GOOMBARIO_MORE       = 0x25,
-    BTL_MSG_WATER_BLOCK_BEGIN           = 0x26,
-    BTL_MSG_WATER_BLOCK_END             = 0x27,
-    BTL_MSG_CLOUD_NINE_BEGIN            = 0x28,
-    BTL_MSG_CLOUD_NINE_END              = 0x29,
-    BTL_MSG_TURBO_CHARGE_BEGIN          = 0x2A,
-    BTL_MSG_TURBO_CHARGE_END            = 0x2B,
-    BTL_MSG_CHILL_OUT_BEGIN             = 0x2C,
-    BTL_MSG_UNUSED_CLOUD_NINE           = 0x2D,
-    BTL_MSG_ACTION_TIP_00               = 0x2E,
-    BTL_MSG_ACTION_TIP_01               = 0x2F,
-    BTL_MSG_ACTION_TIP_02               = 0x30,
-    BTL_MSG_ACTION_TIP_03               = 0x31,
-    BTL_MSG_ACTION_TIP_04               = 0x32,
-    BTL_MSG_ACTION_TIP_05               = 0x33,
-    BTL_MSG_ACTION_TIP_06               = 0x34,
-    BTL_MSG_ACTION_TIP_07               = 0x35,
-    BTL_MSG_ACTION_TIP_08               = 0x36,
-    BTL_MSG_ACTION_TIP_09               = 0x37,
-    BTL_MSG_ACTION_TIP_0A               = 0x38,
-    BTL_MSG_ACTION_TIP_0B               = 0x39,
-    BTL_MSG_ACTION_TIP_0C               = 0x3A,
-    BTL_MSG_ACTION_TIP_0D               = 0x3B,
-    BTL_MSG_ACTION_TIP_0E               = 0x3C,
-    BTL_MSG_ACTION_TIP_0F               = 0x3D,
-    BTL_MSG_ACTION_TIP_10               = 0x3E,
-    BTL_MSG_ACTION_TIP_11               = 0x3F,
-    BTL_MSG_ACTION_TIP_12               = 0x40,
-    BTL_MSG_ACTION_TIP_13               = 0x41,
-    BTL_MSG_ACTION_TIP_14               = 0x42,
-    BTL_MSG_NO_JUMP_TARGET              = 0x43,
-    BTL_MSG_NO_HAMMER_TARGET            = 0x44,
-    BTL_MSG_NO_ITEM_TARGET              = 0x45,
-    BTL_MSG_46                          = 0x46,
-    BTL_MSG_47                          = 0x47,
-    BTL_MSG_CANT_SELECT_NOW             = 0x48,
-    BTL_MSG_HAMMER_DISABLED_1           = 0x49,
-    BTL_MSG_HAMMER_DISABLED_2           = 0x4A,
-    BTL_MSG_HAMMER_DISABLED_3           = 0x4B,
-    BTL_MSG_JUMP_DISABLED_1             = 0x4C,
-    BTL_MSG_JUMP_DISABLED_2             = 0x4D,
-    BTL_MSG_JUMP_DISABLED_3             = 0x4E,
-    BTL_MSG_ITEMS_DISABLED              = 0x4F,
-    BTL_MSG_CANT_SWITCH                 = 0x50,
-    BTL_MSG_CANT_MOVE                   = 0x51,
-    BTL_MSG_CANT_SWITCH_UNUSED          = 0x52,
-    BTL_MSG_CANT_MOVE_UNUSED            = 0x53,
-    BTL_MSG_CANT_SELECT_NOW_ALT         = 0x54,
+    BTL_MSG_MERLEE_ATK_UP                           = 0x00,
+    BTL_MSG_MERLEE_DEF_UP                           = 0x01,
+    BTL_MSG_MERLEE_EXP_UP                           = 0x02,
+    BTL_MSG_MERLEE_DONE                             = 0x03,
+    BTL_MSG_CHARGE_HAMMER                           = 0x04,
+    BTL_MSG_CHARGE_HAMMER_MORE                      = 0x05,
+    BTL_MSG_CHARGE_JUMP                             = 0x06,
+    BTL_MSG_CHARGE_JUMP_MORE                        = 0x07,
+    BTL_MSG_CANT_CHARGE                             = 0x08,
+    BTL_MSG_ENEMY_MISSED                            = 0x09,
+    BTL_MSG_PLAYER_DAZED                            = 0x0A,
+    BTL_MSG_PLAYER_ASLEEP                           = 0x0B,
+    BTL_MSG_PLAYER_FROZEN                           = 0x0C,
+    BTL_MSG_PLAYER_POISONED                         = 0x0D,
+    BTL_MSG_PLAYER_SHRUNK                           = 0x0E,
+    BTL_MSG_PLAYER_PARALYZED                        = 0x0F,
+    BTL_MSG_PLAYER_CHARGED                          = 0x10,
+    BTL_MSG_PLAYER_TRANSPARENT                      = 0x11,
+    BTL_MSG_ENEMY_DAZED                             = 0x12,
+    BTL_MSG_ENEMY_ASLEEP                            = 0x13,
+    BTL_MSG_ENEMY_FROZEN                            = 0x14,
+    BTL_MSG_ENEMY_POISONED                          = 0x15,
+    BTL_MSG_ENEMY_SHRUNK                            = 0x16,
+    BTL_MSG_ENEMY_PARALYZED                         = 0x17,
+    BTL_MSG_ENEMY_ELECTRIFIED                       = 0x18,
+    BTL_MSG_ENEMY_CANT_MOVE                         = 0x19,
+    BTL_MSG_STAR_POWER_RECHARGED                    = 0x1A,
+    BTL_MSG_STAR_POWER_MAXED                        = 0x1B,
+    BTL_MSG_STAR_POWER_FILLED                       = 0x1C,
+    BTL_MSG_ATTACK_UP                               = 0x1D,
+    BTL_MSG_DEFENCE_UP                              = 0x1E,
+    BTL_MSG_HEAL_ONE                                = 0x1F,
+    BTL_MSG_HEAL_ALL                                = 0x20,
+    BTL_MSG_ENEMY_TRANSPARENT                       = 0x21,
+    BTL_MSG_ENEMY_CHARGED                           = 0x22,
+    BTL_MSG_PARTNER_INJURED                         = 0x23,
+    BTL_MSG_CHARGE_GOOMBARIO                        = 0x24,
+    BTL_MSG_CHARGE_GOOMBARIO_MORE                   = 0x25,
+    BTL_MSG_WATER_BLOCK_BEGIN                       = 0x26,
+    BTL_MSG_WATER_BLOCK_END                         = 0x27,
+    BTL_MSG_CLOUD_NINE_BEGIN                        = 0x28,
+    BTL_MSG_CLOUD_NINE_END                          = 0x29,
+    BTL_MSG_TURBO_CHARGE_BEGIN                      = 0x2A,
+    BTL_MSG_TURBO_CHARGE_END                        = 0x2B,
+    BTL_MSG_CHILL_OUT_BEGIN                         = 0x2C,
+    BTL_MSG_UNUSED_CLOUD_NINE                       = 0x2D,
+    BTL_MSG_FIRST_ACTION_TIP                        = 0x2E,
+    BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING         = 0x2E, // jump moves, Sky Dive
+    BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED              = 0x2F, // hammer moves, Belly Flop, Shell Toss
+    BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE          = 0x30, // Headbonk and Multibonk
+    BTL_MSG_ACTION_TIP_MASH_BUTTON                  = 0x31, // Dizzy Shell, Power Shock, Air Lift, Bombette's moves
+    BTL_MSG_ACTION_TIP_MASH_LEFT                    = 0x32, // Fire Shell, Air Raid, Spiny Surge, Bow's moves
+    BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM                = 0x33, // Shell Shot
+    BTL_MSG_ACTION_TIP_UNUSED_1                     = 0x34, // unused
+    BTL_MSG_ACTION_TIP_UNUSED_2                     = 0x35, // unused
+    BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN          = 0x36, // Tidal Wave
+    BTL_MSG_ACTION_TIP_NOT_USED_1                   = 0x37, // unused, special message
+    BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING            = 0x38, // Turbo Charge, Water Block, Cloud Nine
+    BTL_MSG_ACTION_TIP_NOT_USED_2                   = 0x39, // unused, special message
+    BTL_MSG_ACTION_TIP_MASH_BOTH                    = 0x3A, // Mega Shock and Hurricane
+    BTL_MSG_ACTION_TIP_UNUSED_3                     = 0x3B, // unused
+    BTL_MSG_ACTION_TIP_HOLD_THEN_TAP                = 0x3C, // Squirt
+    BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE            = 0x3D, // Body Slam and Electro Dash
+    BTL_MSG_ACTION_TIP_MOVE_TO_AIM                  = 0x3E, // Spiny Flip
+    BTL_MSG_ACTION_TIP_UNUSED_4                     = 0x3F, // unused
+    BTL_MSG_ACTION_TIP_BREAK_FREE                   = 0x40, // unused
+    BTL_MSG_ACTION_TIP_REDUCE_DAMAGE                = 0x41, // unused
+    BTL_MSG_ACTION_TIP_NOT_USED_3                   = 0x42, // Earthquake Jump
+    BTL_MSG_LAST_ACTION_TIP                         = 0x42,
+    BTL_MSG_NO_JUMP_TARGET                          = 0x43,
+    BTL_MSG_NO_HAMMER_TARGET                        = 0x44,
+    BTL_MSG_NO_ITEM_TARGET                          = 0x45,
+    BTL_MSG_46                                      = 0x46,
+    BTL_MSG_47                                      = 0x47,
+    BTL_MSG_CANT_SELECT_NOW                         = 0x48,
+    BTL_MSG_HAMMER_DISABLED_1                       = 0x49,
+    BTL_MSG_HAMMER_DISABLED_2                       = 0x4A,
+    BTL_MSG_HAMMER_DISABLED_3                       = 0x4B,
+    BTL_MSG_JUMP_DISABLED_1                         = 0x4C,
+    BTL_MSG_JUMP_DISABLED_2                         = 0x4D,
+    BTL_MSG_JUMP_DISABLED_3                         = 0x4E,
+    BTL_MSG_ITEMS_DISABLED                          = 0x4F,
+    BTL_MSG_CANT_SWITCH                             = 0x50,
+    BTL_MSG_CANT_MOVE                               = 0x51,
+    BTL_MSG_CANT_SWITCH_UNUSED                      = 0x52,
+    BTL_MSG_CANT_MOVE_UNUSED                        = 0x53,
+    BTL_MSG_CANT_SELECT_NOW_ALT                     = 0x54,
 };
 
+// states after INIT are different for each type of battle message
 enum BattleMessageStates {
-    BTL_MSG_STATE_0                     = 0,
+    BTL_MSG_STATE_INIT                  = 0,
     BTL_MSG_STATE_1                     = 1,
     BTL_MSG_STATE_2                     = 2,
     BTL_MSG_STATE_3                     = 3,
@@ -4593,38 +4604,15 @@ enum CollisionChannels {
 };
 
 enum CameraFlags {
-    CAMERA_FLAG_1                   = 0x00000001,
+    CAMERA_FLAG_INITIALIZED         = 0x00000001,
     CAMERA_FLAG_DISABLED            = 0x00000002,
     CAMERA_FLAG_LEAD_PLAYER         = 0x00000004,
     CAMERA_FLAG_SHAKING             = 0x00000008,
     CAMERA_FLAG_ORTHO               = 0x00000010,
-    CAMERA_FLAG_20                  = 0x00000020,
-    CAMERA_FLAG_40                  = 0x00000040,
-    CAMERA_FLAG_80                  = 0x00000080,
-    CAMERA_FLAG_100                 = 0x00000100,
+    CAMERA_FLAG_NO_DRAW             = 0x00000080,
     CAMERA_FLAG_RENDER_ENTITIES     = 0x00000200,
     CAMERA_FLAG_RENDER_MODELS       = 0x00000400,
-    CAMERA_FLAG_800                 = 0x00000800,
-    CAMERA_FLAG_1000                = 0x00001000,
-    CAMERA_FLAG_2000                = 0x00002000,
-    CAMERA_FLAG_4000                = 0x00004000,
-    CAMERA_FLAG_8000                = 0x00008000,
-    CAMERA_FLAG_10000               = 0x00010000,
-    CAMERA_FLAG_20000               = 0x00020000,
-    CAMERA_FLAG_40000               = 0x00040000,
-    CAMERA_FLAG_80000               = 0x00080000,
-    CAMERA_FLAG_100000              = 0x00100000,
-    CAMERA_FLAG_200000              = 0x00200000,
-    CAMERA_FLAG_400000              = 0x00400000,
-    CAMERA_FLAG_800000              = 0x00800000,
-    CAMERA_FLAG_1000000             = 0x01000000,
-    CAMERA_FLAG_2000000             = 0x02000000,
-    CAMERA_FLAG_4000000             = 0x04000000,
-    CAMERA_FLAG_8000000             = 0x08000000,
-    CAMERA_FLAG_10000000            = 0x10000000,
-    CAMERA_FLAG_20000000            = 0x20000000,
-    CAMERA_FLAG_40000000            = 0x40000000,
-    CAMERA_FLAG_80000000            = 0x80000000,
+    CAMERA_FLAG_SUPRESS_LEADING     = 0x00001000,
 };
 
 enum CameraMoveFlags {
@@ -4767,31 +4755,6 @@ enum BattleCamYModes {
     BTL_CAM_MODEY_MINUS_1   = -1,
     BTL_CAM_MODEY_0         = 0,
     BTL_CAM_MODEY_1         = 1,
-};
-
-enum MoveActionTips {
-    MOVE_ACTION_TIP_NONE            = -1,
-    MOVE_ACTION_TIP_0               = 0,
-    MOVE_ACTION_TIP_1               = 1,
-    MOVE_ACTION_TIP_2               = 2,
-    MOVE_ACTION_TIP_3               = 3,
-    MOVE_ACTION_TIP_4               = 4,
-    MOVE_ACTION_TIP_5               = 5,
-    MOVE_ACTION_TIP_6               = 6,
-    MOVE_ACTION_TIP_7               = 7,
-    MOVE_ACTION_TIP_8               = 8,
-    MOVE_ACTION_TIP_9               = 9,
-    MOVE_ACTION_TIP_10              = 10,
-    MOVE_ACTION_TIP_11              = 11,
-    MOVE_ACTION_TIP_12              = 12,
-    MOVE_ACTION_TIP_13              = 13,
-    MOVE_ACTION_TIP_14              = 14,
-    MOVE_ACTION_TIP_15              = 15,
-    MOVE_ACTION_TIP_16              = 16,
-    MOVE_ACTION_TIP_17              = 17,
-    MOVE_ACTION_TIP_18              = 18,
-    MOVE_ACTION_TIP_19              = 19,
-    MOVE_ACTION_TIP_20              = 20
 };
 
 enum ModelAnimatorFlags {
@@ -5823,12 +5786,12 @@ enum MsgWindowStates {
 };
 
 enum BackgroundFlags {
-    BACKGROUND_FLAG_TEXTURE         = 0x01,
-    BACKGROUND_FLAG_FOG             = 0x02,
-    BACKGROUND_RENDER_STATE_1       = 0x10,
-    BACKGROUND_RENDER_STATE_2       = 0x20,
-    BACKGROUND_RENDER_STATE_3       = 0x30,
-    BACKGROUND_RENDER_STATE_MASK    = 0xF0,
+    BACKGROUND_FLAG_TEXTURE                 = 0x01,
+    BACKGROUND_FLAG_FOG                     = 0x02,
+    BACKGROUND_RENDER_STATE_BEGIN_PAUSED    = 0x10,
+    BACKGROUND_RENDER_STATE_FILTER_PAUSED   = 0x20,
+    BACKGROUND_RENDER_STATE_SHOW_PAUSED     = 0x30,
+    BACKGROUND_RENDER_STATE_MASK            = 0xF0,
 };
 
 enum FogModes {

@@ -57,12 +57,14 @@ BSS VirtualEntityList wWorldVirtualEntityList;
 BSS VirtualEntityList* gCurrentVirtualEntityListPtr;
 BSS s32 D_802DB7C4[3]; // unused
 
-// fa4c0_len_3bf0
+// audio_api
 BSS MusicEvent* MusicEventList;
 BSS s32 D_802DB7D4; // unused?
 BSS Evt* RunningMusicEvents[10];
 BSS s32 RunningMusicEventIDs[10];
 BSS s32 D_802DB828[2]; // unused?
+
+// item_api
 BSS PopupMenu D_802DB830;
 
 #if VERSION_PAL

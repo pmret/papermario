@@ -65,7 +65,7 @@ void state_step_startup(void) {
     bgm_reset_volume();
     initialize_curtains();
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(gGameStatusPtr->unk_50); i++) {
         gGameStatusPtr->unk_50[i] = 4;
         gGameStatusPtr->unk_48[i] = 15;
     }
@@ -85,5 +85,5 @@ void state_step_startup(void) {
 }
 
 void state_drawUI_startup(void) {
-    startup_draw_prim_rect(0, 0, 0x13F, 0xEF, 0, 0, 0, 0xFF);
+    startup_draw_prim_rect(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, 0, 0, 0, 255);
 }

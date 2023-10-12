@@ -18,10 +18,14 @@ class MoveEntry:
         self.shortDescMsg = data.get("shortDescMsg", "MSG_NONE")
         self.flags = data.get("flags", [])
         self.category = data.get("category", "")
-        self.actionTip = data.get("actionTip", "")
+        self.actionTip = data.get("actionTip", "NONE")
         self.costFP = data.get("costFP", 0)
         self.costBP = data.get("costBP", 0)
 
+        if self.actionTip == "NONE":
+            self.actionTip = "-1"
+        else:
+            self.actionTip = f"({self.actionTip} - BTL_MSG_FIRST_ACTION_TIP)"
 
 def read_moves_yaml(in_yaml: Path) -> List[MoveEntry]:
     items: List[MoveEntry] = []

@@ -15,8 +15,8 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(firstStrike);
-extern EvtScript N(executeAction);
-extern EvtScript N(celebrate);
+extern EvtScript N(EVS_ExecuteAction);
+extern EvtScript N(EVS_Celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(shellToss);
@@ -359,9 +359,9 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(PHASE_FIRST_STRIKE)
             EVT_EXEC_WAIT(N(firstStrike))
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -371,7 +371,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleKooper_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_BattleKooper_Walk)
@@ -407,7 +407,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -1084,7 +1084,7 @@ EvtScript N(fireShell) = {
     EVT_WAIT(1)
     EVT_CALL(ModifyActorDecoration, ACTOR_PARTNER, -1, 0, 10, 10, 255, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 1)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, SPR_PAL_BattleKooper, SPR_PAL_BattleKooper, 1, 10, 1000, 10, 0, 0)
     EVT_CALL(EnableActorPaletteEffects, ACTOR_PARTNER, 0, TRUE)
     EVT_SET(LVar6, SPR_PAL_BattleKooper)
@@ -1100,7 +1100,7 @@ EvtScript N(fireShell) = {
                 EVT_SET(LVar9, 80 * DT)
                 EVT_SET(LVar7, SPR_PAL_BattleKooper_Red4)
                 EVT_IF_NE(LVar6, LVar7)
-                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
                     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, LVar6, LVar7, 1, 10, 1000, 10, 0, 0)
                     EVT_SET(LVar6, LVar7)
                 EVT_END_IF
@@ -1109,7 +1109,7 @@ EvtScript N(fireShell) = {
                 EVT_SET(LVar9, 60 * DT)
                 EVT_SET(LVar7, SPR_PAL_BattleKooper_Red3)
                 EVT_IF_NE(LVar6, LVar7)
-                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
                     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, LVar6, LVar7, 1, 10, 1000, 10, 0, 0)
                     EVT_SET(LVar6, LVar7)
                 EVT_END_IF
@@ -1118,7 +1118,7 @@ EvtScript N(fireShell) = {
                 EVT_SET(LVar9, 40 * DT)
                 EVT_SET(LVar7, SPR_PAL_BattleKooper_Red2)
                 EVT_IF_NE(LVar6, LVar7)
-                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
                     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, LVar6, LVar7, 1, 10, 1000, 10, 0, 0)
                     EVT_SET(LVar6, LVar7)
                 EVT_END_IF
@@ -1127,7 +1127,7 @@ EvtScript N(fireShell) = {
                 EVT_SET(LVar9, 35 * DT)
                 EVT_SET(LVar7, SPR_PAL_BattleKooper_Red1)
                 EVT_IF_NE(LVar6, LVar7)
-                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
                     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, LVar6, LVar7, 1, 10, 1000, 10, 0, 0)
                     EVT_SET(LVar6, LVar7)
                 EVT_END_IF
@@ -1136,7 +1136,7 @@ EvtScript N(fireShell) = {
                 EVT_SET(LVar9, 30 * DT)
                 EVT_SET(LVar7, SPR_PAL_BattleKooper)
                 EVT_IF_NE(LVar6, LVar7)
-                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+                    EVT_CALL(SetActorPaletteEffect, ACTOR_PARTNER, -1, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
                     EVT_CALL(SetActorPaletteSwapParams, ACTOR_PARTNER, -1, LVar6, LVar7, 1, 10, 1000, 10, 0, 0)
                     EVT_SET(LVar6, LVar7)
                 EVT_END_IF

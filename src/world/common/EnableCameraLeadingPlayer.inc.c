@@ -2,9 +2,9 @@
 #include "npc.h"
 #include "camera.h"
 
-API_CALLABLE(N(SetCamera0Flag1000)) {
+API_CALLABLE(N(EnableCameraLeadingPlayer)) {
     Camera* camera = &gCameras[CAM_DEFAULT];
 
-    camera->flags |= CAMERA_FLAG_1000;
+    camera->flags &= ~CAMERA_FLAG_SUPRESS_LEADING;
     return ApiStatus_DONE2;
 }

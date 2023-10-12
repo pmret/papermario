@@ -439,7 +439,7 @@ EvtScript N(EVS_Attack_Leech) = {
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 32767)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 32767)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)

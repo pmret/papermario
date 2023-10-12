@@ -451,7 +451,9 @@ HitResult calc_player_damage_enemy(void) {
         currentAttackDamage = battleStatus->curAttackDamage;
         currentAttackDamage += count_power_plus(battleStatus->curAttackElement);
 
-        if (battleStatus->merleeAttackBoost > 0 && (gBattleStatus.flags1 & BS_FLAGS1_10 || battleStatus->curAttackElement & DAMAGE_TYPE_JUMP)) {
+        if (battleStatus->merleeAttackBoost > 0
+            && (gBattleStatus.flags1 & BS_FLAGS1_10 || battleStatus->curAttackElement & DAMAGE_TYPE_JUMP)
+        ) {
             currentAttackDamage += battleStatus->merleeAttackBoost;
         }
 
@@ -517,8 +519,9 @@ HitResult calc_player_damage_enemy(void) {
             }
         }
 
-        if (gBattleStatus.flags2 & BS_FLAGS2_HAS_RUSH && (gBattleStatus.flags1 & BS_FLAGS1_10 ||
-                battleStatus->curAttackElement & DAMAGE_TYPE_JUMP)) {
+        if (gBattleStatus.flags2 & BS_FLAGS2_HAS_RUSH
+            && (gBattleStatus.flags1 & BS_FLAGS1_10 || battleStatus->curAttackElement & DAMAGE_TYPE_JUMP)
+        ) {
             if (battleStatus->rushFlags & RUSH_FLAG_POWER) {
                 currentAttackDamage += 2;
             }
@@ -534,7 +537,7 @@ HitResult calc_player_damage_enemy(void) {
         ) {
             currentAttackDamage++;
 
-            if (!(gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40))) {
+            if (!(gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200))) {
                 sp24 = TRUE;
                 currentAttackDamage = 0;
                 targetDefense = 0;
@@ -1016,7 +1019,7 @@ HitResult calc_player_damage_enemy(void) {
 
     show_actor_health_bar(target);
 
-    if (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) {
+    if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
         if (hitResult == HIT_RESULT_HIT) {
             hitResult = HIT_RESULT_1;
         }
@@ -1106,7 +1109,7 @@ s32 dispatch_damage_event_player(s32 damageAmount, s32 event, s32 arg2) {
         set_actor_flash_mode(player, 1);
     }
 
-    flags = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) != 0;
+    flags = (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) != 0;
     dispatch_event_player(dispatchEvent);
     return flags;
 }

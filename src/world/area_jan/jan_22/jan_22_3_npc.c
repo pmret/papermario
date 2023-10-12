@@ -10,8 +10,8 @@
 
 #include "world/common/complete/GiveReward.inc.c"
 
-#include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
+#include "world/common/DisableCameraLeadingPlayer.inc.c"
+#include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 enum {
     RAVEN_SCENE_AWAITING_COMMAND    = 0,
@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(SetCamera0Flag1000))
+    EVT_CALL(N(DisableCameraLeadingPlayer))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcFlagBits, NPC_RaphaelRaven, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
@@ -556,7 +556,7 @@ EvtScript N(EVS_ManageRavens) = {
                     EVT_WAIT(40 * DT)
                     EVT_CALL(BindNpcInteract, NPC_Raven_01, EVT_PTR(N(EVS_NpcInteract_Raven)))
                     EVT_CALL(SetNpcFlagBits, NPC_Raven_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-                    EVT_CALL(N(UnsetCamera0Flag1000))
+                    EVT_CALL(N(EnableCameraLeadingPlayer))
                     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
                     EVT_SET(GB_StoryProgress, STORY_CH5_ZIP_LINE_READY)
                     EVT_CALL(DisablePlayerInput, FALSE)
@@ -740,7 +740,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
                 EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.5))
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                EVT_CALL(N(SetCamera0Flag1000))
+                EVT_CALL(N(DisableCameraLeadingPlayer))
                 EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
                 EVT_WAIT(10 * DT)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_00C1)
@@ -780,7 +780,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
             EVT_END_THREAD
             EVT_EXEC_GET_TID(N(D_8024511C_B8929C), LVar9)
             EVT_WAIT(35)
-            EVT_CALL(N(UnsetCamera0Flag1000))
+            EVT_CALL(N(EnableCameraLeadingPlayer))
             EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
             EVT_KILL_THREAD(LVar9)
             EVT_CALL(SetSelfVar, 0, 3)
@@ -1133,7 +1133,7 @@ EvtScript N(EVS_NpcDefeat_SpearGuy) = {
                 EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
                 EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.5))
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-                EVT_CALL(N(SetCamera0Flag1000))
+                EVT_CALL(N(DisableCameraLeadingPlayer))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
                 EVT_CALL(SetNpcFlagBits, NPC_Kolorado_01, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Kolorado_01, ANIM_Kolorado_Run)

@@ -109,27 +109,27 @@ s32 BattleMessages[] = {
     [BTL_MSG_UNUSED_CLOUD_NINE]     MSG_Menus_CloudNineBegin,
 
     // move action command tips
-    [BTL_MSG_ACTION_TIP_00]         MSG_Menus_MoveTip_PressBeforeLanding,
-    [BTL_MSG_ACTION_TIP_01]         MSG_Menus_MoveTip_PushLeftWithTiming,
-    [BTL_MSG_ACTION_TIP_02]         MSG_Menus_MoveTip_PressBeforeStriking,
-    [BTL_MSG_ACTION_TIP_03]         MSG_Menus_MoveTip_PressRepeatedly,
-    [BTL_MSG_ACTION_TIP_04]         MSG_Menus_MoveTip_PushLeftRepeatedly,
-    [BTL_MSG_ACTION_TIP_05]         MSG_Menus_MoveTip_PushLeftToAim,
-    [BTL_MSG_ACTION_TIP_06]         MSG_Menus_MoveTip_PressBeforeLanding,
-    [BTL_MSG_ACTION_TIP_07]         MSG_Menus_MoveTip_PressBeforeLanding,
-    [BTL_MSG_ACTION_TIP_08]         MSG_Menus_MoveTip_PressAsShown,
-    [BTL_MSG_ACTION_TIP_09]         MSG_Menus_MoveTip_NOT_USED_1,
-    [BTL_MSG_ACTION_TIP_0A]         MSG_Menus_MoveTip_PressAsLightsUp,
-    [BTL_MSG_ACTION_TIP_0B]         MSG_Menus_MoveTip_NOT_USED_2,
-    [BTL_MSG_ACTION_TIP_0C]         MSG_Menus_MoveTip_PressBothRepeatedly,
-    [BTL_MSG_ACTION_TIP_0D]         MSG_Menus_MoveTip_PressBeforeLanding,
-    [BTL_MSG_ACTION_TIP_0E]         MSG_Menus_MoveTip_HoldThenTap,
-    [BTL_MSG_ACTION_TIP_0F]         MSG_Menus_MoveTip_HoldThenRelease,
-    [BTL_MSG_ACTION_TIP_10]         MSG_Menus_MoveTip_MoveToAim,
-    [BTL_MSG_ACTION_TIP_11]         MSG_Menus_MoveTip_PressBeforeLanding,
-    [BTL_MSG_ACTION_TIP_12]         MSG_Menus_MoveTip_PressToRunAway,
-    [BTL_MSG_ACTION_TIP_13]         MSG_Menus_MoveTip_PressToReduceDamage,
-    [BTL_MSG_ACTION_TIP_14]         MSG_Menus_MoveTip_NOT_USED_3,
+    [BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING]   MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED]        MSG_Menus_MoveTip_PushLeftWithTiming,
+    [BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE]    MSG_Menus_MoveTip_PressBeforeStriking,
+    [BTL_MSG_ACTION_TIP_MASH_BUTTON]            MSG_Menus_MoveTip_PressRepeatedly,
+    [BTL_MSG_ACTION_TIP_MASH_LEFT]              MSG_Menus_MoveTip_PushLeftRepeatedly,
+    [BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM]          MSG_Menus_MoveTip_PushLeftToAim,
+    [BTL_MSG_ACTION_TIP_UNUSED_1]               MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_ACTION_TIP_UNUSED_2]               MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN]    MSG_Menus_MoveTip_PressAsShown,
+    [BTL_MSG_ACTION_TIP_NOT_USED_1]             MSG_Menus_MoveTip_NOT_USED_1,
+    [BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING]      MSG_Menus_MoveTip_PressAsLightsUp,
+    [BTL_MSG_ACTION_TIP_NOT_USED_2]             MSG_Menus_MoveTip_NOT_USED_2,
+    [BTL_MSG_ACTION_TIP_MASH_BOTH]              MSG_Menus_MoveTip_PressBothRepeatedly,
+    [BTL_MSG_ACTION_TIP_UNUSED_3]               MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_ACTION_TIP_HOLD_THEN_TAP]          MSG_Menus_MoveTip_HoldThenTap,
+    [BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE]      MSG_Menus_MoveTip_HoldThenRelease,
+    [BTL_MSG_ACTION_TIP_MOVE_TO_AIM]            MSG_Menus_MoveTip_MoveToAim,
+    [BTL_MSG_ACTION_TIP_UNUSED_4]               MSG_Menus_MoveTip_PressBeforeLanding,
+    [BTL_MSG_ACTION_TIP_BREAK_FREE]             MSG_Menus_MoveTip_PressToRunAway,
+    [BTL_MSG_ACTION_TIP_REDUCE_DAMAGE]          MSG_Menus_MoveTip_PressToReduceDamage,
+    [BTL_MSG_ACTION_TIP_NOT_USED_3]             MSG_Menus_MoveTip_NOT_USED_3,
 
     // no targets available
     [BTL_MSG_NO_JUMP_TARGET]        MSG_Menus_Battle_NoTarget_Jump,
@@ -319,7 +319,7 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
         var_f20 = 0.7f;
     }
 
-    if (battleStatus->flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) {
+    if (battleStatus->flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
         baseScale *= 2.0;
     }
 
@@ -544,7 +544,7 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->showMsgState = BTL_MSG_STATE_0;
+        popup->showMsgState = BTL_MSG_STATE_INIT;
         popup->needsInit = TRUE;
         popup->message = NULL;
         BattlePopupMessageVar = 0;
@@ -567,7 +567,7 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->showMsgState = BTL_MSG_STATE_0;
+        popup->showMsgState = BTL_MSG_STATE_INIT;
         popup->needsInit = TRUE;
         popup->message = NULL;
         BattlePopupMessageVar = varValue;
@@ -602,7 +602,10 @@ void func_8024FAFC(void) {
 void close_action_command_instruction_popup(void) {
     PopupMessage* popup = bPopupMessage;
 
-    if (popup != NULL && popup->messageIndex < BTL_MSG_NO_JUMP_TARGET && popup->messageIndex >= BTL_MSG_ACTION_TIP_00) {
+    if (popup != NULL
+        && popup->messageIndex <= BTL_MSG_LAST_ACTION_TIP
+        && popup->messageIndex >= BTL_MSG_FIRST_ACTION_TIP
+    ) {
         popup->duration = 0;
     }
 }
@@ -669,7 +672,7 @@ void btl_update_message_popup(void* data) {
             switch (popup->showMsgState) {
                 default:
                     break;
-                case BTL_MSG_STATE_0:
+                case BTL_MSG_STATE_INIT:
                     popup->showMsgState = BTL_MSG_STATE_1;
                     break;
                 case BTL_MSG_STATE_1:
@@ -695,27 +698,27 @@ void btl_update_message_popup(void* data) {
             }
             break;
         // move action command tips
-        case BTL_MSG_ACTION_TIP_00:
-        case BTL_MSG_ACTION_TIP_01:
-        case BTL_MSG_ACTION_TIP_02:
-        case BTL_MSG_ACTION_TIP_03:
-        case BTL_MSG_ACTION_TIP_04:
-        case BTL_MSG_ACTION_TIP_05:
-        case BTL_MSG_ACTION_TIP_06:
-        case BTL_MSG_ACTION_TIP_07:
-        case BTL_MSG_ACTION_TIP_08:
-        case BTL_MSG_ACTION_TIP_09:
-        case BTL_MSG_ACTION_TIP_0A:
-        case BTL_MSG_ACTION_TIP_0B:
-        case BTL_MSG_ACTION_TIP_0C:
-        case BTL_MSG_ACTION_TIP_0D:
-        case BTL_MSG_ACTION_TIP_0E:
-        case BTL_MSG_ACTION_TIP_0F:
-        case BTL_MSG_ACTION_TIP_10:
-        case BTL_MSG_ACTION_TIP_11:
-        case BTL_MSG_ACTION_TIP_12:
-        case BTL_MSG_ACTION_TIP_13:
-        case BTL_MSG_ACTION_TIP_14:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+        case BTL_MSG_ACTION_TIP_MASH_BUTTON:
+        case BTL_MSG_ACTION_TIP_MASH_LEFT:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_1:
+        case BTL_MSG_ACTION_TIP_UNUSED_2:
+        case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
+        case BTL_MSG_ACTION_TIP_NOT_USED_1:
+        case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
+        case BTL_MSG_ACTION_TIP_NOT_USED_2:
+        case BTL_MSG_ACTION_TIP_MASH_BOTH:
+        case BTL_MSG_ACTION_TIP_UNUSED_3:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
+        case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_4:
+        case BTL_MSG_ACTION_TIP_BREAK_FREE:
+        case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
+        case BTL_MSG_ACTION_TIP_NOT_USED_3:
             actionCommandMode = battleStatus->actionCommandMode;
             D_8029F64A = TRUE;
             if (actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
@@ -725,16 +728,16 @@ void btl_update_message_popup(void* data) {
             }
 
             switch (popup->showMsgState) {
-                case BTL_MSG_STATE_0:
+                case BTL_MSG_STATE_INIT:
                     gBattleStatus.flags1 |= BS_FLAGS1_4000;
                     gBattleStatus.flags1 &= ~BS_FLAGS1_10000;
                     switch (popup->messageIndex) {
-                        case BTL_MSG_ACTION_TIP_04:
+                        case BTL_MSG_ACTION_TIP_MASH_LEFT:
                             HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_01:
+                        case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
                             HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -743,7 +746,7 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_05:
+                        case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
                             HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -753,7 +756,7 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             hud_element_create_transform_B(HID_BattleMessage2);
                             break;
-                        case BTL_MSG_ACTION_TIP_06:
+                        case BTL_MSG_ACTION_TIP_UNUSED_1:
                             HID_BattleMessage1 = hud_element_create(&HES_CUpButton);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -770,12 +773,12 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage4, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage4, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_07:
+                        case BTL_MSG_ACTION_TIP_UNUSED_2:
                             HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_08:
+                        case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
                             HID_BattleMessage1 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -788,12 +791,12 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage3, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage3, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_09:
+                        case BTL_MSG_ACTION_TIP_NOT_USED_1:
                             HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_0A:
+                        case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
                             HID_BattleMessage1 = hud_element_create(&HES_TimingReady);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -802,7 +805,7 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_0B:
+                        case BTL_MSG_ACTION_TIP_NOT_USED_2:
                             HID_BattleMessage1 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -810,7 +813,7 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_0C:
+                        case BTL_MSG_ACTION_TIP_MASH_BOTH:
                             HID_BattleMessage1 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -819,7 +822,7 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_0F:
+                        case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
                             HID_BattleMessage1 = hud_element_create(&HES_TimingReady);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -828,7 +831,7 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_flags(HID_BattleMessage2, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage2, -100, -100);
                             break;
-                        case BTL_MSG_ACTION_TIP_10:
+                        case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
                             HID_BattleMessage1 = hud_element_create(&HES_StickNeutral);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -843,19 +846,19 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_render_pos(HID_BattleMessage3, -100, -100);
                             hud_element_create_transform_B(HID_BattleMessage3);
                             break;
-                        case BTL_MSG_ACTION_TIP_12:
-                        case BTL_MSG_ACTION_TIP_13:
+                        case BTL_MSG_ACTION_TIP_BREAK_FREE:
+                        case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
                             HID_BattleMessage1 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             // fallthrough
-                        case BTL_MSG_ACTION_TIP_00:
-                        case BTL_MSG_ACTION_TIP_02:
-                        case BTL_MSG_ACTION_TIP_03:
-                        case BTL_MSG_ACTION_TIP_0D:
-                        case BTL_MSG_ACTION_TIP_0E:
-                        case BTL_MSG_ACTION_TIP_11:
-                        case BTL_MSG_ACTION_TIP_14:
+                        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+                        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+                        case BTL_MSG_ACTION_TIP_MASH_BUTTON:
+                        case BTL_MSG_ACTION_TIP_UNUSED_3:
+                        case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+                        case BTL_MSG_ACTION_TIP_UNUSED_4:
+                        case BTL_MSG_ACTION_TIP_NOT_USED_3:
                             HID_BattleMessage1 = hud_element_create(&HES_AButton);
                             hud_element_set_flags(HID_BattleMessage1, HUD_ELEMENT_FLAG_FILTER_TEX | HUD_ELEMENT_FLAG_80);
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
@@ -863,79 +866,84 @@ void btl_update_message_popup(void* data) {
                     }
                     popup->showMsgState = BTL_MSG_STATE_1;
                     break;
-                case BTL_MSG_STATE_1:
+                case BTL_MSG_STATE_1: // show the message
                     if (gBattleStatus.flags1 & BS_FLAGS1_10000) {
                         gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         popup->duration = 0;
                         popup->showMsgState = BTL_MSG_STATE_2;
-                    } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)) {
+                        break;
+                    }
+                    
+                    if (!(gBattleStatus.flags1 & BS_FLAGS1_4000)
+                        && (actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)
+                    ) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
-                            case BTL_MSG_ACTION_TIP_03:
+                            case BTL_MSG_ACTION_TIP_MASH_BUTTON:
                                 hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 break;
-                            case BTL_MSG_ACTION_TIP_04:
+                            case BTL_MSG_ACTION_TIP_MASH_LEFT:
                                 hud_element_set_script(HID_BattleMessage1, &HES_StickMashLeft);
                                 break;
-                            case BTL_MSG_ACTION_TIP_01:
+                            case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
                                 hud_element_set_script(HID_BattleMessage1, &HES_StickTapLeft);
                                 hud_element_set_script(HID_BattleMessage2, &HES_TimingBlink);
                                 break;
-                            case BTL_MSG_ACTION_TIP_05:
+                            case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
                                 hud_element_set_script(HID_BattleMessage1, &HES_StickTapLeft);
                                 hud_element_set_script(HID_BattleMessage2, &HES_AimTarget);
                                 break;
-                            case BTL_MSG_ACTION_TIP_06:
+                            case BTL_MSG_ACTION_TIP_UNUSED_1:
                                 hud_element_set_script(HID_BattleMessage1, &HES_MashCUpButton);
                                 hud_element_set_script(HID_BattleMessage2, &HES_MashCDownButton1);
                                 hud_element_set_script(HID_BattleMessage3, &HES_MashCLeftButton);
                                 hud_element_set_script(HID_BattleMessage4, &HES_MashCRightButton1);
                                 break;
-                            case BTL_MSG_ACTION_TIP_07:
+                            case BTL_MSG_ACTION_TIP_UNUSED_2:
                                 hud_element_set_script(HID_BattleMessage1, &HES_StickBackAndForth);
                                 break;
-                            case BTL_MSG_ACTION_TIP_08:
+                            case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
                                 hud_element_set_script(HID_BattleMessage1, &HES_PressAButton);
                                 hud_element_set_script(HID_BattleMessage2, &HES_PressBButton);
                                 hud_element_set_script(HID_BattleMessage3, &HES_PressCDownButton);
                                 break;
-                            case BTL_MSG_ACTION_TIP_09:
+                            case BTL_MSG_ACTION_TIP_NOT_USED_1:
                                 hud_element_set_script(HID_BattleMessage1, &HES_RotateStickCW);
                                 break;
-                            case BTL_MSG_ACTION_TIP_0A:
+                            case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
                                 hud_element_set_script(HID_BattleMessage1, &HES_TimingBlink);
                                 hud_element_set_script(HID_BattleMessage2, &HES_MashAButton);
                                 break;
-                            case BTL_MSG_ACTION_TIP_0B:
+                            case BTL_MSG_ACTION_TIP_NOT_USED_2:
                                 hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 hud_element_set_script(HID_BattleMessage2, &HES_MashBButton2);
                                 break;
-                            case BTL_MSG_ACTION_TIP_0C:
+                            case BTL_MSG_ACTION_TIP_MASH_BOTH:
                                 hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 hud_element_set_script(HID_BattleMessage2, &HES_MashBButton1);
                                 break;
-                            case BTL_MSG_ACTION_TIP_0D:
+                            case BTL_MSG_ACTION_TIP_UNUSED_3:
                                 hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 break;
-                            case BTL_MSG_ACTION_TIP_0F:
+                            case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
                                 hud_element_set_script(HID_BattleMessage1, &HES_TimingBlink);
                                 hud_element_set_script(HID_BattleMessage2, &HES_PressAButton);
                                 break;
-                            case BTL_MSG_ACTION_TIP_10:
+                            case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
                                 hud_element_set_script(HID_BattleMessage1, &HES_StickTapRight);
                                 break;
-                            case BTL_MSG_ACTION_TIP_11:
+                            case BTL_MSG_ACTION_TIP_UNUSED_4:
                                 hud_element_set_script(HID_BattleMessage1, &HES_MashAButton);
                                 break;
-                            case BTL_MSG_ACTION_TIP_12:
-                            case BTL_MSG_ACTION_TIP_13:
+                            case BTL_MSG_ACTION_TIP_BREAK_FREE:
+                            case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
                                 hud_element_set_script(HID_BattleMessage1, &HES_PressAButton);
                                 // fallthrough
-                            case BTL_MSG_ACTION_TIP_00:
-                            case BTL_MSG_ACTION_TIP_02:
-                            case BTL_MSG_ACTION_TIP_0E:
-                            case BTL_MSG_ACTION_TIP_14:
+                            case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+                            case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+                            case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+                            case BTL_MSG_ACTION_TIP_NOT_USED_3:
                                 hud_element_set_script(HID_BattleMessage1, &HES_PressAButton);
                                 break;
                         }
@@ -946,8 +954,10 @@ void btl_update_message_popup(void* data) {
                         break;
                     }
                     break;
-                case BTL_MSG_STATE_2:
-                    if ((actionCommandMode != popup->showMsgState) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
+                case BTL_MSG_STATE_2: // show message
+                    if ((actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)
+                        || (gBattleStatus.flags1 & BS_FLAGS1_10000)
+                    ) {
                         s16* duration;
 
                         if (D_8029F64E < 192) {
@@ -973,36 +983,36 @@ void btl_update_message_popup(void* data) {
                         }
 
                         switch (popup->messageIndex) {
-                            case BTL_MSG_ACTION_TIP_00:
-                            case BTL_MSG_ACTION_TIP_02:
-                            case BTL_MSG_ACTION_TIP_03:
-                            case BTL_MSG_ACTION_TIP_04:
-                            case BTL_MSG_ACTION_TIP_07:
-                            case BTL_MSG_ACTION_TIP_09:
-                            case BTL_MSG_ACTION_TIP_0D:
-                            case BTL_MSG_ACTION_TIP_0E:
-                            case BTL_MSG_ACTION_TIP_11:
-                            case BTL_MSG_ACTION_TIP_12:
-                            case BTL_MSG_ACTION_TIP_13:
-                            case BTL_MSG_ACTION_TIP_14:
+                            case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+                            case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+                            case BTL_MSG_ACTION_TIP_MASH_BUTTON:
+                            case BTL_MSG_ACTION_TIP_MASH_LEFT:
+                            case BTL_MSG_ACTION_TIP_UNUSED_2:
+                            case BTL_MSG_ACTION_TIP_NOT_USED_1:
+                            case BTL_MSG_ACTION_TIP_UNUSED_3:
+                            case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+                            case BTL_MSG_ACTION_TIP_UNUSED_4:
+                            case BTL_MSG_ACTION_TIP_BREAK_FREE:
+                            case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
+                            case BTL_MSG_ACTION_TIP_NOT_USED_3:
                                 hud_element_free(HID_BattleMessage1);
                                 break;
-                            case BTL_MSG_ACTION_TIP_01:
-                            case BTL_MSG_ACTION_TIP_05:
-                            case BTL_MSG_ACTION_TIP_0A:
-                            case BTL_MSG_ACTION_TIP_0B:
-                            case BTL_MSG_ACTION_TIP_0C:
-                            case BTL_MSG_ACTION_TIP_0F:
+                            case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
+                            case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
+                            case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
+                            case BTL_MSG_ACTION_TIP_NOT_USED_2:
+                            case BTL_MSG_ACTION_TIP_MASH_BOTH:
+                            case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
                                 hud_element_free(HID_BattleMessage1);
                                 hud_element_free(HID_BattleMessage2);
                                 break;
-                            case BTL_MSG_ACTION_TIP_08:
-                            case BTL_MSG_ACTION_TIP_10:
+                            case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
+                            case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
                                 hud_element_free(HID_BattleMessage1);
                                 hud_element_free(HID_BattleMessage2);
                                 hud_element_free(HID_BattleMessage3);
                                 break;
-                            case BTL_MSG_ACTION_TIP_06:
+                            case BTL_MSG_ACTION_TIP_UNUSED_1:
                                 hud_element_free(HID_BattleMessage1);
                                 hud_element_free(HID_BattleMessage2);
                                 hud_element_free(HID_BattleMessage3);
@@ -1024,7 +1034,7 @@ void btl_update_message_popup(void* data) {
             switch (popup->showMsgState) {
                 default:
                     break;
-                case BTL_MSG_STATE_0:
+                case BTL_MSG_STATE_INIT:
                     popup->showMsgState = BTL_MSG_STATE_1;
                     break;
                 case BTL_MSG_STATE_1:
@@ -1057,7 +1067,7 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_JUMP_DISABLED_3:
         case BTL_MSG_ITEMS_DISABLED:
             switch (popup->showMsgState) {
-                case BTL_MSG_STATE_0:
+                case BTL_MSG_STATE_INIT:
                     switch (popup->messageIndex) {
                         case BTL_MSG_HAMMER_DISABLED_1:
                             HID_BattleMessage1 = hud_element_create(&HES_Item_MenuHammer1);
@@ -1211,32 +1221,32 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
             hud_element_set_render_pos(HID_BattleMessage1, x + 13, y + 14);
             hud_element_draw_clipped(HID_BattleMessage1);
             break;
-        case BTL_MSG_ACTION_TIP_00:
-        case BTL_MSG_ACTION_TIP_01:
-        case BTL_MSG_ACTION_TIP_02:
-        case BTL_MSG_ACTION_TIP_03:
-        case BTL_MSG_ACTION_TIP_04:
-        case BTL_MSG_ACTION_TIP_05:
-        case BTL_MSG_ACTION_TIP_06:
-        case BTL_MSG_ACTION_TIP_07:
-        case BTL_MSG_ACTION_TIP_08:
-        case BTL_MSG_ACTION_TIP_09:
-        case BTL_MSG_ACTION_TIP_0A:
-        case BTL_MSG_ACTION_TIP_0B:
-        case BTL_MSG_ACTION_TIP_0C:
-        case BTL_MSG_ACTION_TIP_0D:
-        case BTL_MSG_ACTION_TIP_0E:
-        case BTL_MSG_ACTION_TIP_0F:
-        case BTL_MSG_ACTION_TIP_10:
-        case BTL_MSG_ACTION_TIP_11:
-        case BTL_MSG_ACTION_TIP_12:
-        case BTL_MSG_ACTION_TIP_13:
-        case BTL_MSG_ACTION_TIP_14:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+        case BTL_MSG_ACTION_TIP_MASH_BUTTON:
+        case BTL_MSG_ACTION_TIP_MASH_LEFT:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_1:
+        case BTL_MSG_ACTION_TIP_UNUSED_2:
+        case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
+        case BTL_MSG_ACTION_TIP_NOT_USED_1:
+        case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
+        case BTL_MSG_ACTION_TIP_NOT_USED_2:
+        case BTL_MSG_ACTION_TIP_MASH_BOTH:
+        case BTL_MSG_ACTION_TIP_UNUSED_3:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
+        case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_4:
+        case BTL_MSG_ACTION_TIP_BREAK_FREE:
+        case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
+        case BTL_MSG_ACTION_TIP_NOT_USED_3:
             opacity = 255;
             if (popup->showMsgState < BTL_MSG_STATE_2) {
                 opacity = 160;
             }
-            if (popup->messageIndex == BTL_MSG_ACTION_TIP_0D) {
+            if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
                 opacity = 255;
             }
 
@@ -1248,13 +1258,13 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
             draw_msg(messageID, x + 11, y + 6, opacity, MSG_PAL_0F, 0);
 
             switch (popup->messageIndex) {
-                case BTL_MSG_ACTION_TIP_00:
+                case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 65, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
                     break;
-                case BTL_MSG_ACTION_TIP_01:
+                case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 55, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.6f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
@@ -1264,25 +1274,25 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage2, opacity);
                     hud_element_draw_clipped(HID_BattleMessage2);
                     break;
-                case BTL_MSG_ACTION_TIP_02:
+                case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 64, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
                     break;
-                case BTL_MSG_ACTION_TIP_03:
+                case BTL_MSG_ACTION_TIP_MASH_BUTTON:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 67, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
                     break;
-                case BTL_MSG_ACTION_TIP_04:
+                case BTL_MSG_ACTION_TIP_MASH_LEFT:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 56, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.6f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
                     break;
-                case BTL_MSG_ACTION_TIP_05:
+                case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 65, y + 13);
                     hud_element_set_scale(HID_BattleMessage1, 0.6f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
@@ -1293,7 +1303,7 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage2, opacity);
                     func_80144218(HID_BattleMessage2);
                     break;
-                case BTL_MSG_ACTION_TIP_08:
+                case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 86, y + 13);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
@@ -1309,7 +1319,7 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage3, opacity);
                     hud_element_draw_clipped(HID_BattleMessage3);
                     break;
-                case BTL_MSG_ACTION_TIP_0A:
+                case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 105, y + 13);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
@@ -1319,7 +1329,7 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage2, opacity);
                     hud_element_draw_clipped(HID_BattleMessage2);
                     break;
-                case BTL_MSG_ACTION_TIP_0C:
+                case BTL_MSG_ACTION_TIP_MASH_BOTH:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 63, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
@@ -1330,13 +1340,13 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage2, opacity);
                     hud_element_draw_clipped(HID_BattleMessage2);
                     break;
-                case BTL_MSG_ACTION_TIP_0E:
+                case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 124, y + 14);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
                     break;
-                case BTL_MSG_ACTION_TIP_0F:
+                case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 56, y + 31);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
                     hud_element_draw_clipped(HID_BattleMessage1);
@@ -1346,7 +1356,7 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage2, opacity);
                     hud_element_draw_clipped(HID_BattleMessage2);
                     break;
-                case BTL_MSG_ACTION_TIP_10:
+                case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 107, y + 13);
                     hud_element_set_scale(HID_BattleMessage1, 0.6f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
@@ -1362,8 +1372,8 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
                     hud_element_set_alpha(HID_BattleMessage3, opacity);
                     func_80144218(HID_BattleMessage3);
                     break;
-                case BTL_MSG_ACTION_TIP_12:
-                case BTL_MSG_ACTION_TIP_13:
+                case BTL_MSG_ACTION_TIP_BREAK_FREE:
+                case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
                     hud_element_set_render_pos(HID_BattleMessage1, x + 64, y + 13);
                     hud_element_set_scale(HID_BattleMessage1, 0.5f);
                     hud_element_set_alpha(HID_BattleMessage1, opacity);
@@ -1502,27 +1512,27 @@ void btl_show_message_popup(void* data) {
                 set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
             }
             break;
-        case BTL_MSG_ACTION_TIP_00:
-        case BTL_MSG_ACTION_TIP_01:
-        case BTL_MSG_ACTION_TIP_02:
-        case BTL_MSG_ACTION_TIP_03:
-        case BTL_MSG_ACTION_TIP_04:
-        case BTL_MSG_ACTION_TIP_05:
-        case BTL_MSG_ACTION_TIP_06:
-        case BTL_MSG_ACTION_TIP_07:
-        case BTL_MSG_ACTION_TIP_08:
-        case BTL_MSG_ACTION_TIP_09:
-        case BTL_MSG_ACTION_TIP_0A:
-        case BTL_MSG_ACTION_TIP_0B:
-        case BTL_MSG_ACTION_TIP_0C:
-        case BTL_MSG_ACTION_TIP_0D:
-        case BTL_MSG_ACTION_TIP_0E:
-        case BTL_MSG_ACTION_TIP_0F:
-        case BTL_MSG_ACTION_TIP_10:
-        case BTL_MSG_ACTION_TIP_11:
-        case BTL_MSG_ACTION_TIP_12:
-        case BTL_MSG_ACTION_TIP_13:
-        case BTL_MSG_ACTION_TIP_14:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED:
+        case BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE:
+        case BTL_MSG_ACTION_TIP_MASH_BUTTON:
+        case BTL_MSG_ACTION_TIP_MASH_LEFT:
+        case BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_1:
+        case BTL_MSG_ACTION_TIP_UNUSED_2:
+        case BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN:
+        case BTL_MSG_ACTION_TIP_NOT_USED_1:
+        case BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING:
+        case BTL_MSG_ACTION_TIP_NOT_USED_2:
+        case BTL_MSG_ACTION_TIP_MASH_BOTH:
+        case BTL_MSG_ACTION_TIP_UNUSED_3:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_TAP:
+        case BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE:
+        case BTL_MSG_ACTION_TIP_MOVE_TO_AIM:
+        case BTL_MSG_ACTION_TIP_UNUSED_4:
+        case BTL_MSG_ACTION_TIP_BREAK_FREE:
+        case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
+        case BTL_MSG_ACTION_TIP_NOT_USED_3:
             if (popup->needsInit) {
                 s32 messageID;
 
@@ -1534,7 +1544,7 @@ void btl_show_message_popup(void* data) {
                 width = msgWidth;
                 numLines = get_msg_lines(messageID) - 1;
                 height = BattleMessage_BoxSizesY[numLines];
-                if (popup->messageIndex == BTL_MSG_ACTION_TIP_0D) {
+                if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
                     posY = 120;
                     D_8029F64C = TRUE;
                 }
@@ -1543,7 +1553,7 @@ void btl_show_message_popup(void* data) {
 
                 posY = D_8029F64E + D_8029F650;
                 set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
-                if (popup->messageIndex == BTL_MSG_ACTION_TIP_0D) {
+                if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
                     set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
                 } else {
                     set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_DARKENED);

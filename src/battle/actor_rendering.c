@@ -107,7 +107,7 @@ void update_player_actor_shadow(void);
 void appendGfx_npc_actor(s32 isPartner, s32 actorIndex);
 
 void create_status_chill_out(s32 iconID);
-void enable_status_2(s32 iconID);
+void enable_status_static(s32 iconID);
 void enable_status_chill_out(s32 iconID);
 void enable_status_debuff(s16);
 void enable_status_transparent(s16);
@@ -586,7 +586,7 @@ void appendGfx_nonplayer_actor_blur(b32 isPartner, Actor* actor) {
             strideIdx++;
 
             if (bufPos < 0) {
-                bufPos = 15;
+                bufPos = ACTOR_BLUR_FRAMES - 1;
             }
 
             if (bufPos == decorations->blurBufferPos) {
@@ -1015,14 +1015,14 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
                         animChanged = TRUE;
                     }
                 } while (0); // required to match
-                set_actor_pal_adjustment(actor, PAL_ADJUST_PLAYER_DEBUFF);
+                set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_PLAYER_DEBUFF);
                 palChanged = TRUE;
                 set_actor_pal_effect(actor, GLOW_PAL_OFF);
                 decorChanged = TRUE;
             }
             if (isPartner && (gPlayerData.curPartner == PARTNER_WATT)) {
                 if (!palChanged) {
-                    set_actor_pal_adjustment(actor, PAL_ADJUST_WATT_IDLE);
+                    set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_WATT_IDLE);
                 }
                 palChanged = TRUE;
             }
@@ -1035,30 +1035,30 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         }
         if (actor->debuff == STATUS_KEY_POISON) {
             if (!palChanged) {
-                set_actor_pal_adjustment(actor, PAL_ADJUST_POISON);
+                set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_POISON);
             }
             palChanged = TRUE;
         }
         if (actor->debuff == STATUS_KEY_PARALYZE) {
             if (!palChanged) {
-                set_actor_pal_adjustment(actor, PAL_ADJUST_PARALYZE);
+                set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_PARALYZE);
             }
             palChanged = TRUE;
         }
         if (actor->debuff == STATUS_KEY_FEAR) {
             if (!palChanged) {
-                set_actor_pal_adjustment(actor, PAL_ADJUST_FEAR);
+                set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_FEAR);
             }
             palChanged = TRUE;
         }
         if (actor->staticStatus == STATUS_KEY_STATIC) {
             if (!palChanged) {
-                set_actor_pal_adjustment(actor, PAL_ADJUST_STATIC);
+                set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_STATIC);
             }
             palChanged = TRUE;
         }
         if (!palChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
-            set_actor_pal_adjustment(actor, PAL_ADJUST_NONE);
+            set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_NONE);
         }
         if (!decorChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
             set_actor_pal_effect(actor, GLOW_PAL_OFF);
@@ -1168,7 +1168,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
             }
         } else {
             enable_status_debuff(actor->hudElementDataIndex);
-            enable_status_2(actor->hudElementDataIndex);
+            enable_status_static(actor->hudElementDataIndex);
             enable_status_transparent(actor->hudElementDataIndex);
             enable_status_chill_out(actor->hudElementDataIndex);
         }
@@ -1659,9 +1659,9 @@ void appendGfx_player_actor(void* arg0) {
             }
 
             if (player->debuff != STATUS_KEY_POISON) {
-                set_actor_pal_adjustment(player, PAL_ADJUST_PLAYER_DEBUFF);
+                set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_PLAYER_DEBUFF);
             } else {
-                set_actor_pal_adjustment(player, PAL_ADJUST_PLAYER_POISON);
+                set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_PLAYER_POISON);
             }
             palChanged = TRUE;
 
@@ -1676,13 +1676,13 @@ void appendGfx_player_actor(void* arg0) {
         animChanged = TRUE;
 
         if (!palChanged) {
-            set_actor_pal_adjustment(player, PAL_ADJUST_NONE);
+            set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_NONE);
         }
         set_actor_pal_effect(player, GLOW_PAL_OFF);
         palChanged = TRUE;
         enable_status_debuff(player->hudElementDataIndex);
         decorChanged = TRUE;
-        enable_status_2(player->hudElementDataIndex);
+        enable_status_static(player->hudElementDataIndex);
         cond4 = TRUE;
 
         enable_status_transparent(player->hudElementDataIndex);
@@ -1698,25 +1698,25 @@ void appendGfx_player_actor(void* arg0) {
 
     if (is_ability_active(ABILITY_BERSERKER)) {
         if (!palChanged) {
-            set_actor_pal_adjustment(player, PAL_ADJUST_BERSERK);
+            set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_BERSERK);
         }
         palChanged = TRUE;
     }
     if (player->debuff == STATUS_KEY_POISON) {
         if (!palChanged) {
-            set_actor_pal_adjustment(player, PAL_ADJUST_POISON);
+            set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_POISON);
         }
         palChanged = TRUE;
     }
     if (player->debuff == STATUS_KEY_PARALYZE) {
         if (!palChanged) {
-            set_actor_pal_adjustment(player, PAL_ADJUST_PARALYZE);
+            set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_PARALYZE);
         }
         palChanged = TRUE;
     }
     if (player->staticStatus == STATUS_KEY_STATIC) {
         if (!palChanged) {
-            set_actor_pal_adjustment(player, PAL_ADJUST_STATIC);
+            set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_STATIC);
         }
         palChanged = TRUE;
     }
@@ -1728,12 +1728,12 @@ void appendGfx_player_actor(void* arg0) {
     }
     if (is_ability_active(ABILITY_ZAP_TAP)) {
         if (!palChanged) {
-            set_actor_pal_adjustment(player, PAL_ADJUST_STATIC);
+            set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_STATIC);
         }
         palChanged = TRUE;
     }
     if (!palChanged) {
-        set_actor_pal_adjustment(player, PAL_ADJUST_NONE);
+        set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_NONE);
     }
     if (!decorChanged) {
         set_actor_pal_effect(player, GLOW_PAL_OFF);
@@ -1837,7 +1837,7 @@ void appendGfx_player_actor(void* arg0) {
         }
     } else {
         enable_status_debuff(player->hudElementDataIndex);
-        enable_status_2(player->hudElementDataIndex);
+        enable_status_static(player->hudElementDataIndex);
         enable_status_transparent(player->hudElementDataIndex);
         enable_status_chill_out(player->hudElementDataIndex);
     }
@@ -1987,46 +1987,46 @@ s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
     }
 
     switch (part->decorationTable->paletteAdjustment) {
-        case PAL_ADJUST_NONE:
+        case ACTOR_PAL_ADJUST_NONE:
             render_without_adjusted_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_SLEEP:
+        case ACTOR_PAL_ADJUST_SLEEP:
             render_with_sleep_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_STATIC:
+        case ACTOR_PAL_ADJUST_STATIC:
             render_with_static_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_FEAR:
+        case ACTOR_PAL_ADJUST_FEAR:
             render_with_fear_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_POISON:
+        case ACTOR_PAL_ADJUST_POISON:
             render_with_poison_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_PARALYZE:
+        case ACTOR_PAL_ADJUST_PARALYZE:
             render_with_paralyze_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_BERSERK:
+        case ACTOR_PAL_ADJUST_BERSERK:
             render_with_berserk_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_WATT_IDLE:
+        case ACTOR_PAL_ADJUST_WATT_IDLE:
             render_with_watt_idle_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_WATT_ATTACK:
+        case ACTOR_PAL_ADJUST_WATT_ATTACK:
             render_with_watt_attack_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_PLAYER_DEBUFF:
+        case ACTOR_PAL_ADJUST_PLAYER_DEBUFF:
             render_with_player_debuff_palettes(isNpcSprite, part, yaw, mtx, skipAnimation, FALSE);
             break;
-        case PAL_ADJUST_PLAYER_POISON:
+        case ACTOR_PAL_ADJUST_PLAYER_POISON:
             render_with_player_debuff_palettes(isNpcSprite, part, yaw, mtx, skipAnimation, TRUE);
             break;
-        case PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS:
+        case ACTOR_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS:
             render_with_pal_blending(isNpcSprite, part, yaw, FALSE, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS:
+        case ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS:
             render_with_pal_blending(isNpcSprite, part, yaw, TRUE, mtx, skipAnimation);
             break;
-        case PAL_ADJUST_BLEND_PALSETS:
+        case ACTOR_PAL_ADJUST_BLEND_PALSETS:
             render_with_palset_blending(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         default:
@@ -3119,6 +3119,7 @@ void render_with_pal_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 has
 
                 *outColor++ = PACK_PAL_RGBA(r1, g1, b1, a1);
             }
+
             if (blendAlpha == 255) {
                 decorations->palAnimState = PAL_SWAP_HOLD_B;
                 decorations->nextPalTime = decorations->palswapTimeHoldB;
@@ -3201,6 +3202,7 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
     u8 r2, g2, b2, a1;
     u8 r1, g1, b1;
 
+    // copy palettes from sprite data
     if (decorations->resetPalAdjust != 0) {
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
             decorations->originalPalettesList = spr_get_player_palettes(part->curAnimation >> 16);
@@ -3218,10 +3220,10 @@ void render_with_palset_blending(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
         }
 
         if (decorations->resetPalAdjust == 1) {
-            decorations->palAnimState = 0;
+            decorations->palAnimState = PAL_SWAP_HOLD_A;
             decorations->palBlendAlpha = 0;
         } else {
-            decorations->palAnimState = 0;
+            decorations->palAnimState = PAL_SWAP_HOLD_A;
             decorations->palBlendAlpha = 255;
         }
 

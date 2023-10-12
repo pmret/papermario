@@ -111,7 +111,7 @@ void render_frame(s32 isSecondPass) {
         Camera* camera = &gCameras[camID];
         u16 matrixListPos;
 
-        if (camera->flags == 0 || (camera->flags & (CAMERA_FLAG_80 | CAMERA_FLAG_DISABLED))) {
+        if (camera->flags == 0 || (camera->flags & (CAMERA_FLAG_NO_DRAW | CAMERA_FLAG_DISABLED))) {
             continue;
         }
 
@@ -358,7 +358,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
 
     ASSERT(camID < ARRAY_COUNT(gCameras));
 
-    camera->flags = initData->flags | (CAMERA_FLAG_1 | CAMERA_FLAG_LEAD_PLAYER);
+    camera->flags = initData->flags | CAMERA_FLAG_INITIALIZED | CAMERA_FLAG_LEAD_PLAYER;
     camera->moveFlags = 0;
     camera->lookAt_eye.x = 0;
     camera->lookAt_eye.y = 0;
@@ -380,7 +380,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->zoomPercent = 100;
     set_cam_viewport(camID, initData->viewStartX, initData->viewStartY, initData->viewWidth, initData->viewHeight);
     camera->unk_212 = -1;
-    camera->unk_530 = 1;
+    camera->unk_530 = TRUE;
     camera->bgColor[0] = 0;
     camera->bgColor[1] = 0;
     camera->bgColor[2] = 0;
@@ -395,17 +395,17 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->unk_9C = 0;
     camera->fpDoPreRender = NULL;
     camera->fpDoPostRender = NULL;
-    camera->leadAmount = 0;
-    camera->unk_510 = 0.0f;
-    camera->unk_514 = 0.0f;
-    camera->unk_518 = 0.0f;
-    camera->unk_51C = 0;
-    camera->unk_524 = 0.0f;
-    camera->unk_528 = 0.0f;
+    camera->leadAmount = 0.0f;
+    camera->targetLeadAmount = 0.0f;
+    camera->leadInterpAlpha = 0.0f;
+    camera->accumulatedStickLead = 0.0f;
+    camera->increasingLeadInterp = FALSE;
+    camera->leadUnkX = 0.0f;
+    camera->leadUnkZ = 0.0f;
     camera->unk_52C = 0;
-    camera->aabbForZoneBelow = 0;
+    camera->leadControlSettings = NULL;
     camera->panActive = FALSE;
-    camera->followPlayer = 0;
+    camera->followPlayer = FALSE;
     camera->unk_C4 = 1000.0f;
     camera->unk_520 = 0.2f;
     camera->moveSpeed = 1.0f;

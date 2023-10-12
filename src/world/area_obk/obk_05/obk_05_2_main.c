@@ -44,8 +44,8 @@ EvtScript N(EVS_TexPan_Fog) = {
     EVT_END
 };
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
-#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
+#include "world/common/DisableCameraFollowPlayerY.inc.c"
 
 API_CALLABLE(N(RetroJar_AwaitPlayerEntry)) {
     if (gCollisionStatus.curFloor == COLLIDER_o420) {
@@ -71,11 +71,11 @@ EvtScript N(EVS_ManageRetroJar) = {
             EVT_EXEC(N(EVS_SetupMusic))
             EVT_SET(MF_IsRetroMario, FALSE)
         EVT_END_IF
-        EVT_CALL(N(SetCamera0MoveFlag1))
+        EVT_CALL(N(DisableCameraFollowPlayerY))
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
         EVT_CALL(PlayerJump, -105, 30, -55, 30)
         EVT_WAIT(1)
-        EVT_CALL(N(UnsetCamera0MoveFlag1))
+        EVT_CALL(N(EnableCameraFollowPlayerY))
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_LOOP
     EVT_RETURN

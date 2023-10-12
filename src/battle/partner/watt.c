@@ -16,8 +16,8 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Init);
-extern EvtScript N(executeAction);
-extern EvtScript N(celebrate);
+extern EvtScript N(EVS_ExecuteAction);
+extern EvtScript N(EVS_Celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(electroDash);
@@ -626,9 +626,9 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -638,7 +638,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_CALL(N(WattFXEnable))
     EVT_CALL(N(WattFXSetEffect), 1)
     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -681,7 +681,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -757,7 +757,7 @@ EvtScript N(charge) = {
         EVT_CALL(N(SetBackgroundAlpha), LVar9)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
     EVT_RETURN
     EVT_END
 };
@@ -904,7 +904,7 @@ EvtScript N(electroDash) = {
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
     EVT_CALL(SetDamageSource, DMG_SRC_ELECTRO_DASH)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -5, 0, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
@@ -997,7 +997,7 @@ EvtScript N(powerShock) = {
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     EVT_THREAD
         EVT_LOOP(75 * DT)
             EVT_ADD(LVar9, 3)
@@ -1006,7 +1006,7 @@ EvtScript N(powerShock) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(75 * DT)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028A)
     EVT_THREAD
         EVT_SETF(LVar0, EVT_FLOAT(1.0))
@@ -1295,7 +1295,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(MoveBattleCamOver, 90 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(GetActionQuality, LVar1)
     EVT_WAIT(90 * DT)
@@ -1308,7 +1308,7 @@ EvtScript N(megaShock) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
     EVT_CALL(InitTargetIterator)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)

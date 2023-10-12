@@ -245,7 +245,7 @@ void phys_update_action_state(void) {
         LastMidairPlayerVelY = playerStatus->gravityIntegrator[0];
     }
 
-    func_800E24F8();
+    calculate_camera_yinterp_rate();
     if (playerSpinState->stopSoundTimer != 0) {
         playerSpinState->stopSoundTimer--;
         if (playerSpinState->stopSoundTimer == 0) {
@@ -289,7 +289,7 @@ void phys_update_action_state(void) {
 void phys_peach_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    func_800E24F8();
+    calculate_camera_yinterp_rate();
 
     do {
         if (!(playerStatus->flags & PS_FLAG_PAUSED) && check_conversation_trigger()) {

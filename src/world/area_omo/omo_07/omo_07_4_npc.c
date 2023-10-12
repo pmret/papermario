@@ -20,8 +20,8 @@ NpcSettings N(NpcSettings_HammerBros) = {
 };
 
 #include "world/common/enemy/Kammy_Flying.inc.c"
-#include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
+#include "world/common/DisableCameraLeadingPlayer.inc.c"
+#include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 // an 'unlimited' number of shy guys walk along the path and emerge from the playhouse
 // they are drawn from a pool of 4 NPCs, with their lifecycle tracked via these states
@@ -288,7 +288,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(SetCamera0Flag1000))
+    EVT_CALL(N(DisableCameraLeadingPlayer))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
     EVT_IF_EQ(GB_OMO_PeachChoice2, 0)
@@ -297,7 +297,7 @@ EvtScript N(EVS_NpcIdle_Fuzzy) = {
         EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_CH4_003D)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(N(UnsetCamera0Flag1000))
+        EVT_CALL(N(EnableCameraLeadingPlayer))
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_END_THREAD
     EVT_CALL(DisablePlayerInput, FALSE)

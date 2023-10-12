@@ -8,7 +8,7 @@ SHIFT_BSS s32 D_8010C980;
 SHIFT_BSS f32 D_8010C938;
 SHIFT_BSS f32 D_8010C990;
 SHIFT_BSS PlayerSpinState gPlayerSpinState;
-SHIFT_BSS s32 D_8010C9A0;
+SHIFT_BSS s32 PlayerYInterpUpdateDelay;
 
 void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -184,45 +184,46 @@ void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
     *outMagnitude = magnitude;
 }
 
-void func_800E24F8(void) {
+void calculate_camera_yinterp_rate(void) {
     Shadow* shadow = get_shadow_by_index(gPlayerStatus.shadowID);
     f32 x = shadow->rot.x + 180.0;
     f32 z = shadow->rot.z + 180.0;
     Camera* camera = &gCameras[CAM_DEFAULT];
-    f32 temp;
+    f32 rate;
 
     if (x != 0.0f || z != 0.0f) {
         switch (gPlayerStatus.actionState) {
             case ACTION_STATE_JUMP:
             case ACTION_STATE_FALLING:
-                temp = 32.0f;
-                camera->unk_49C = temp;
+                rate = 32.0f;
+                camera->yinterpRate = rate;
                 break;
             case ACTION_STATE_WALK:
             case ACTION_STATE_RUN:
                 if (camera->targetScreenCoords.y < 130) {
-                    camera->unk_49C = 3.0f;
+                    camera->yinterpRate = 3.0f;
                     break;
                 }
-                temp = 3.0f;
-                if (D_8010C9A0++ > 10) {
-                    D_8010C9A0 = 10;
-                    camera->unk_49C -= 2.0f;
-                    if (camera->unk_49C < temp) {
-                        camera->unk_49C = temp;
-                    }
+                rate = 3.0f;
+                if (PlayerYInterpUpdateDelay++ <= 10) {
+                    return;
+                }
+                PlayerYInterpUpdateDelay = 10;
+                camera->yinterpRate -= 2.0f;
+                if (camera->yinterpRate < rate) {
+                    camera->yinterpRate = rate;
                 }
                 break;
             case ACTION_STATE_SLIDING:
-                temp = 3.0f;
-                camera->unk_49C = temp;
+                rate = 3.0f;
+                camera->yinterpRate = rate;
                 break;
             default:
-                temp = 3.0f;
-                D_8010C9A0 = 0;
-                camera->unk_49C -= 2.0f;
-                if (camera->unk_49C < temp) {
-                    camera->unk_49C = temp;
+                rate = 3.0f;
+                PlayerYInterpUpdateDelay = 0;
+                camera->yinterpRate -= 2.0f;
+                if (camera->yinterpRate < rate) {
+                    camera->yinterpRate = rate;
                 }
                 break;
         }
@@ -232,13 +233,13 @@ void func_800E24F8(void) {
             case ACTION_STATE_RUN:
             case ACTION_STATE_JUMP:
             case ACTION_STATE_SLIDING:
-                temp = 7.2f;
+                rate = 7.2f;
                 break;
             default:
-                temp = 24.0f;
+                rate = 24.0f;
                 break;
         }
 
-        camera->unk_49C = temp;
+        camera->yinterpRate = rate;
     }
 }

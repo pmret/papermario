@@ -524,7 +524,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_WAIT(12)
     // enable the tattle viewport
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
-    EVT_CALL(SetCamFlag80, CAM_TATTLE, FALSE)
+    EVT_CALL(SetCamNoDraw, CAM_TATTLE, FALSE)
     EVT_CALL(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
     EVT_CALL(SetCamViewport, CAM_TATTLE, 37, 95, 138, 99)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -537,7 +537,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
     EVT_WAIT(2)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TATTLE_WINDOW_OPEN)
-    EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
+    EVT_CALL(SetCamNoDraw, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
     EVT_CALL(N(CloseTattleWindow), LVar5)
