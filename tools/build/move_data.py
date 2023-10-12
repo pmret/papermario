@@ -27,6 +27,7 @@ class MoveEntry:
         else:
             self.actionTip = f"({self.actionTip} - BTL_MSG_FIRST_ACTION_TIP)"
 
+
 def read_moves_yaml(in_yaml: Path) -> List[MoveEntry]:
     items: List[MoveEntry] = []
 
