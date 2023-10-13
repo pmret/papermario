@@ -696,7 +696,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Run)
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Run)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_0174, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(SetNpcSpeed, NPC_KoopaBros_01, EVT_FLOAT(8.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_KoopaBros_01, 700, 0, 0)

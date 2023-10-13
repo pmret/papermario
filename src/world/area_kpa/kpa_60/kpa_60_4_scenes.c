@@ -37,7 +37,7 @@ EvtScript N(EVS_Scene_Arrival) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, -70, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(PlaySound, SOUND_0182)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_FLY_AWAY)
     EVT_CALL(LoadPath, 45, EVT_PTR(N(FlightPath_Arrival)), ARRAY_COUNT(N(FlightPath_Arrival)), EASING_LINEAR)
     EVT_LABEL(90)
         EVT_CALL(GetNextPathPos)
@@ -88,7 +88,7 @@ EvtScript N(EVS_Scene_Departure) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_0183)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_FLY_TOWARD)
         EVT_CALL(LoadPath, 45, EVT_PTR(N(FlightPath_Departure)), ARRAY_COUNT(N(FlightPath_Departure)), EASING_LINEAR)
         EVT_LABEL(90)
             EVT_CALL(GetNextPathPos)

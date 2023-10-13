@@ -134,7 +134,7 @@ EvtScript N(EVS_UnlockPrompt_LeftHouse) = {
     EVT_CALL(CloseChoicePopup)
     EVT_SET(GF_SAM11_UnlockedDoor, TRUE)
     EVT_CALL(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    EVT_CALL(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
     EVT_SET(LVar0, MV_PadlockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_RESUME_GROUP(EVT_GROUP_01)

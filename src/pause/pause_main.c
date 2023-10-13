@@ -664,7 +664,7 @@ void pause_init(void) {
         sfx_play_sound(SOUND_MENU_SHOW_CHOICE);
     }
 
-    update_window_hierarchy(WINDOW_ID_PAUSE_CURSOR, 0x40);
+    update_window_hierarchy(WINDOW_ID_PAUSE_CURSOR, 64);
 }
 
 void pause_tutorial_input(s32 *pressed, s32 *held) {

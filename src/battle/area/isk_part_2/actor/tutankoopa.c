@@ -1003,7 +1003,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
                 EVT_GOTO(0)
             EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_026B)
+    EVT_CALL(PlaySound, SOUND_LARGE_GATE_OPEN)
     EVT_LABEL(10)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, LVarD)
         EVT_CALL(TranslateModel, 31, 0, LVarD, 0)
@@ -1013,7 +1013,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
         EVT_IF_LT(LVarD, 60)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_026B)
+    EVT_CALL(StopSound, SOUND_LARGE_GATE_OPEN)
     EVT_WAIT(10)
     // create the chomp and have him exit the gate
     EVT_CALL(SummonEnemy, EVT_PTR(N(SummonedChomp)), FALSE)
@@ -1100,7 +1100,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
                 EVT_GOTO(40)
             EVT_END_IF
         EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_026B)
+    EVT_CALL(PlaySound, SOUND_LARGE_GATE_OPEN)
     EVT_LABEL(50)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_GateOpenAmount, LVarD)
         EVT_CALL(TranslateModel, 31, 0, LVarD, 0)
@@ -1110,8 +1110,8 @@ EvtScript N(EVS_Move_SummonChomp) = {
         EVT_IF_GT(LVarD, 0)
             EVT_GOTO(50)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_026B)
-    EVT_CALL(PlaySound, SOUND_026C)
+    EVT_CALL(StopSound, SOUND_LARGE_GATE_OPEN)
+    EVT_CALL(PlaySound, SOUND_LARGE_GATE_CLOSE)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(0.5))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasSummoned, TRUE)
     EVT_RETURN

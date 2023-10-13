@@ -47,7 +47,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_LOOP_6B)
+    EVT_CALL(PlaySound, SOUND_LOOP_RUMBLE)
     EVT_EXEC_GET_TID(N(EVS_ShakeGround), MV_GroundShakingScript)
     EVT_CALL(SpeakToPlayer, NPC_Posie, ANIM_Posie_Strain, ANIM_Posie_Strain, 0, MSG_CH6_0069)
     EVT_KILL_THREAD(MV_GroundShakingScript)
@@ -65,8 +65,8 @@ EvtScript N(EVS_MakeCrystalBerry) = {
         EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -265, 100, 54, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO07_Item_CrystalBerry)
         EVT_SET(GF_FLO07_CrystalBerryFellOnLeftSide, TRUE)
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_03BC)
+    EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_RUMBLE)
     EVT_SET(AF_FLO_MadeCrystalBerry, TRUE)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006A)

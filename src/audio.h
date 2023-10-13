@@ -61,7 +61,6 @@ typedef u8* WaveData;
 
 typedef u32 SegData;
 
-
 typedef enum AuPriority {
     AU_PRIORITY_FREE            = 0,
     AU_PRIORITY_BGM_PLAYER_MAIN = 1,

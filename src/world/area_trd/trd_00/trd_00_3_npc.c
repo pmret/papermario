@@ -63,7 +63,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Black_Talk, ANIM_KoopaBros_Black_Idle, 0, MSG_CH1_00D2)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Walk)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 45, 2)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0173, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_RUN_AWAY_BUILDUP, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -71,7 +71,7 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_WAIT(8 * DT)
     EVT_WAIT(12 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0174, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(8.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_SELF, -496, 101, 0)
     EVT_END_THREAD

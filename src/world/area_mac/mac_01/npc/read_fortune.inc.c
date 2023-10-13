@@ -413,7 +413,7 @@ EvtScript N(EVS_Merlon_GiveHint) = {
             EVT_SET(LVar0, MSG_MerlonHint_002D)
         EVT_CASE_LT(STORY_CH5_MOVED_RAVEN_STATUE)
             EVT_SET(LVar0, MSG_MerlonHint_002E)
-        EVT_CASE_LT(STORY_CH5_RAFAEL_LEFT_NEST)
+        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
             EVT_SET(LVar0, MSG_MerlonHint_002F)
         EVT_CASE_LT(STORY_CH5_ENTERED_MT_LAVA_LAVA)
             EVT_SET(LVar0, MSG_MerlonHint_0030)

@@ -628,7 +628,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_WAIT(60)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(35)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)

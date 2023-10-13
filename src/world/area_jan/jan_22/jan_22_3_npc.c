@@ -78,7 +78,7 @@ EvtScript N(EVS_UseBasketElevator) = {
     EVT_END_IF
     EVT_EXEC_GET_TID(N(EVS_TetherCamToBasketPlayer), LVar7)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_0186, 0)
+    EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_JAN_BASKET_ELEVATOR, 0)
     EVT_CALL(MakeLerp, 0, 170, 60, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -109,7 +109,7 @@ EvtScript N(EVS_UseBasketElevator) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_0186, 0)
+        EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_JAN_BASKET_ELEVATOR, 0)
         EVT_CALL(MakeLerp, 170, 0, 60, EASING_CUBIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -234,7 +234,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
 
 EvtScript N(EVS_NpcIdle_RaphaelRaven) = {
     EVT_LABEL(0)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -245,9 +245,9 @@ EvtScript N(EVS_NpcIdle_RaphaelRaven) = {
 
 EvtScript N(EVS_NpcInit_RaphaelRaven) = {
     EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH5_RAFAEL_MOVED_ROOT)
+        EVT_CASE_EQ(STORY_CH5_RAPHAEL_MOVED_ROOT)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_RaphaelRaven)))
-        EVT_CASE_EQ(STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+        EVT_CASE_EQ(STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
             EVT_CALL(SetNpcPos, NPC_SELF, 125, 0, -40)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven)))
@@ -281,7 +281,7 @@ EvtScript N(EVS_Raven_HopAndWalkAway) = {
 };
 
 EvtScript N(EVS_BuildingEffects) = {
-    EVT_CALL(PlaySoundAt, SOUND_LOOP_1E, SOUND_SPACE_DEFAULT, 270, 130, 0)
+    EVT_CALL(PlaySoundAt, SOUND_LOOP_JAN_CONSTRUCTION, SOUND_SPACE_DEFAULT, 270, 130, 0)
     EVT_LOOP(0)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(1.0))
         EVT_WAIT(30 * DT)
@@ -302,7 +302,7 @@ EvtScript N(EVS_BuildingEffects) = {
 
 EvtScript N(EVS_ManageRavens) = {
     EVT_LABEL(0)
-        EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+        EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -407,7 +407,7 @@ EvtScript N(EVS_ManageRavens) = {
                         EVT_GOTO(11)
                     EVT_END_IF
                 EVT_WAIT(40 * DT)
-                EVT_CALL(StopSound, SOUND_LOOP_1E)
+                EVT_CALL(StopSound, SOUND_LOOP_JAN_CONSTRUCTION)
                 EVT_KILL_THREAD(LVarA)
                 EVT_CALL(SetSelfVar, 0, RAVEN_SCENE_FINISH_WORK)
             EVT_CASE_EQ(RAVEN_SCENE_FINISH_WORK)
@@ -445,7 +445,7 @@ EvtScript N(EVS_ManageRavens) = {
                 EVT_CALL(NpcJump0, NPC_Raven_05, 400, 215, -23, 20 * DT)
                 EVT_CALL(SpeakToPlayer, NPC_Raven_05, ANIM_Raven_Talk, ANIM_Raven_Idle, 0, MSG_CH5_00CD)
                 EVT_THREAD
-                    EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_0186, 0)
+                    EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_JAN_BASKET_ELEVATOR, 0)
                     EVT_CALL(MakeLerp, 170, 0, 60, EASING_CUBIC_OUT)
                     EVT_LOOP(0)
                         EVT_CALL(UpdateLerp)
@@ -571,9 +571,9 @@ EvtScript N(EVS_ManageRavens) = {
 
 EvtScript N(EVS_NpcInit_Raven) = {
     EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH5_RAFAEL_MOVED_ROOT)
+        EVT_CASE_EQ(STORY_CH5_RAPHAEL_MOVED_ROOT)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_ManageRavens)))
-        EVT_CASE_EQ(STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+        EVT_CASE_EQ(STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_ManageRavens)))
             EVT_EXEC(N(EVS_GatherRavensNearRaphael))
         EVT_CASE_RANGE(STORY_CH5_ZIP_LINE_READY, STORY_CH5_OPENED_ESCAPE_ROUTE)
@@ -669,7 +669,7 @@ EvtScript N(EVS_Scene_RaphaelComingThrough) = {
     EVT_CALL(NpcMoveTo, NPC_Raven_05, -150, -10, 0)
     EVT_CALL(NpcMoveTo, NPC_Raven_05, 77, -10, 0)
     EVT_CALL(SetNpcAnimation, NPC_Raven_05, ANIM_Raven_Idle)
-    EVT_SET(GB_StoryProgress, STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+    EVT_SET(GB_StoryProgress, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -703,9 +703,9 @@ EvtScript N(EVS_NpcIdle_Kolorado_HeldCaptive) = {
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00BC, 320, 60)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 25, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -809,9 +809,9 @@ EvtScript N(EVS_NpcIdle_Kolorado_Before) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00C5, 0, 60)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -869,7 +869,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
             EVT_CALL(NpcJump0, NPC_SELF, 200, 0, 0, 20 * DT)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
             EVT_CALL(SetSelfVar, 0, 21)
-            EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_0186, 0)
+            EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_JAN_BASKET_ELEVATOR, 0)
             EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
             EVT_CALL(MakeLerp, 0, 170, 60, EASING_LINEAR)
             EVT_LOOP(0)
@@ -890,7 +890,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
             EVT_END_LOOP
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
             EVT_WAIT(40 * DT)
-            EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_0186, 0)
+            EVT_CALL(PlaySoundAtModel, MODEL_o123, SOUND_JAN_BASKET_ELEVATOR, 0)
             EVT_CALL(MakeLerp, 170, 0, 60, EASING_CUBIC_OUT)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
@@ -1017,7 +1017,7 @@ EvtScript N(EVS_NpcInit_Kolorado_WaitingToExplore) = {
             EVT_CALL(SetSelfVar, 0, 0)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado_Before)))
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado_Before)))
-        EVT_CASE_RANGE(STORY_CH5_RAFAEL_MOVED_ROOT, STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+        EVT_CASE_RANGE(STORY_CH5_RAPHAEL_MOVED_ROOT, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
             EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado_After)))
             EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
         EVT_CASE_DEFAULT

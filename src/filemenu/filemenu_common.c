@@ -1056,7 +1056,7 @@ void filemenu_init(s32 arg0) {
                 (*panelIt)->fpInit((*panelIt));
             }
         }
-        update_window_hierarchy(23, 64);
+        update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
     } else {
         filemenu_currentMenu = 4;
         filemenu_set_selected(filemenu_menus[4], 0, gCurrentLanguage);
@@ -1069,7 +1069,7 @@ void filemenu_init(s32 arg0) {
                 }
             }
         }
-        update_window_hierarchy(23, 64);
+        update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
     }
 #else
     menu = filemenu_menus[0];
@@ -1108,7 +1108,7 @@ void filemenu_init(s32 arg0) {
             (*panelIt)->fpInit((*panelIt));
         }
     }
-    update_window_hierarchy(23, 64);
+    update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
 #endif
 }
 

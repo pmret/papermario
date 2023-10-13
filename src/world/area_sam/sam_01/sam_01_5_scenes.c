@@ -117,7 +117,7 @@ EvtScript N(EVS_Scene_MysteryBegins) = {
     EVT_CALL(InterpNpcYaw, NPC_PARTNER, 0, 0)
     EVT_CALL(NpcMoveTo, NPC_MayorPenguinWife, -255, -185, 0)
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguinWife, ANIM_MayorPenguinWife_Idle)
-    EVT_CALL(PlaySoundAtNpc, NPC_MayorPenguinWife, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_MayorPenguinWife, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_MayorPenguinWife, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguinWife, ANIM_MayorPenguinWife_Walk)

@@ -3,7 +3,7 @@
 
 #define EVT_MOVE_BUSHES(collider, bushModelL, bushmodelR, moveVarL, moveVarR) \
 { \
-    EVT_CALL(PlaySoundAtCollider, collider, SOUND_209F, 0) \
+    EVT_CALL(PlaySoundAtCollider, collider, SOUND_SEPARATE_BUSHES, 0) \
     EVT_SET(LVar0, moveVarL) \
     EVT_SET(LVar1, moveVarR) \
     EVT_SET(LVar6, 0) \
@@ -35,7 +35,7 @@
 
 #define EVT_MOVE_BUSH(collider, bushModel, moveVar) \
 { \
-    EVT_CALL(PlaySoundAtCollider, collider, SOUND_209F, 0) \
+    EVT_CALL(PlaySoundAtCollider, collider, SOUND_SEPARATE_BUSHES, 0) \
     EVT_SET(LVar0, MV_CliffTopBush1OffsetR) \
     EVT_SET(LVar6, 0) \
     EVT_LOOP(60) \

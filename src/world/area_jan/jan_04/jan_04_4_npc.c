@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcInit_Sushie) = {
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
     EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_RAFAEL_LEFT_NEST)
+        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
             EVT_IF_EQ(GF_JAN04_Met_Bubulb, FALSE)
                 EVT_WAIT(30)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_PopUp)
@@ -248,7 +248,7 @@ EvtScript N(EVS_NpcInteract_Bubulb) = {
 
 EvtScript N(EVS_NpcInit_Bubulb) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
+    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
         EVT_IF_EQ(GF_JAN04_Met_Bubulb, FALSE)
             EVT_CALL(SetNpcCollisionSize, NPC_SELF, 25, 25)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Yellow_BuriedIdle)

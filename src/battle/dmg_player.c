@@ -916,7 +916,7 @@ HitResult calc_player_damage_enemy(void) {
             }
 
             if (battleStatus->lastAttackDamage > 0) {
-                sfx_play_sound(SOUND_0231);
+                sfx_play_sound(SOUND_DAMAGE_STARS);
             }
 
             if (battleStatus->lastAttackDamage > 0 || ((battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS) && wasSpecialHit)) {

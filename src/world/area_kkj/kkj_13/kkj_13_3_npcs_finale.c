@@ -51,7 +51,7 @@ EvtScript N(EVS_MoveToBattlePositions) = {
         EVT_WAIT(20)
         EVT_CALL(SetNpcJumpscale, NPC_Bowser_Body, EVT_FLOAT(0.0))
         EVT_CALL(NpcJump0, NPC_Bowser_Body, 675, 0, 0, 10)
-        EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_20A0, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_LARGE_NPC_IMPACT, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(20)

@@ -8,7 +8,7 @@
 #include "../common/MoveBush.inc.c"
 
 EvtScript N(EVS_MoveBushes_Separate) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o149, SOUND_209F, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o149, SOUND_SEPARATE_BUSHES, 0)
     EVT_SET(LVar0, MV_BushOffsetL)
     EVT_SET(LVar1, MV_BushOffsetR)
     EVT_SET(LVar6, 0)

@@ -19,7 +19,7 @@ EvtScript N(EVS_ItemPrompt_Lock) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_DEFAULT, 0, 10, 490)
+    EVT_CALL(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, 0, 10, 490)
     EVT_SET(LVar0, MV_PadlockEntityIdx)
     EVT_CALL(N(RemovePadlock))
     EVT_WAIT(5)

@@ -19,7 +19,7 @@ EvtScript N(EVS_ChooseItem_OddKey) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_DEFAULT, -470, 30, -155)
+    EVT_CALL(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, -470, 30, -155)
     EVT_SET(LVar0, MV_BlueHouseLockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_WAIT(5)

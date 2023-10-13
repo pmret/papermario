@@ -9,7 +9,7 @@ API_CALLABLE(N(AdjustFightingSoundsPos)) {
     s32 z = evt_get_variable(script, *args++);
 
     // @bug need to use real sound id, not environmental sound id
-    sfx_adjust_env_sound_pos(SOUND_LOOP_6C, SOUND_SPACE_DEFAULT, x, y, z);
+    sfx_adjust_env_sound_pos(SOUND_LOOP_FIGHTING, SOUND_SPACE_DEFAULT, x, y, z);
 
     return ApiStatus_DONE2;
 }
@@ -25,7 +25,7 @@ API_CALLABLE(N(StartFightingRumble)) {
 }
 
 EvtScript N(EVS_TwoKoopesFightingFX) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_LOOP_6C, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_LOOP_FIGHTING, SOUND_SPACE_DEFAULT)
     EVT_LOOP(0)
         EVT_CALL(N(StartFightingRumble), 80, 10)
         EVT_CALL(GetNpcPos, NPC_Kooper_01A, LVar0, LVar1, LVar2)
@@ -93,19 +93,19 @@ EvtScript N(EVS_Scene_ImposterAppears) = {
     EVT_CALL(InterpNpcYaw, NPC_Kooper_01A, 270, 0)
     EVT_CALL(InterpNpcYaw, NPC_Kooper_02A, 90, 0)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Kooper_02A, EMOTE_QUESTION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Kooper_01A, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Kooper_02A, EMOTE_QUESTION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_01A, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_Kooper_01A, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(SpeakToPlayer, NPC_Kooper_01A, ANIM_WorldKooper_Idle, ANIM_WorldKooper_Idle, 5, MSG_CH7_011F)
     EVT_THREAD
@@ -377,7 +377,7 @@ EvtScript N(EVS_Scene_HitTrueKooper) = {
         EVT_CALL(N(PlayBigSmokePuff), LVar0, LVar1, LVar2)
         EVT_WAIT(6 * DT)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LOOP_6C)
+    EVT_CALL(StopSound, SOUND_LOOP_FIGHTING)
     EVT_KILL_THREAD(MV_KoopersFightingScript)
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_GT(LVar0, 50)

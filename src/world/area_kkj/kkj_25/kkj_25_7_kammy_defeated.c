@@ -93,7 +93,7 @@ EvtScript N(EVS_Scene_KammyDefeated) = {
     EVT_CALL(InterpNpcYaw, NPC_Peach_01, 90, 0)
     EVT_CALL(SpeakToPlayer, NPC_Twink_01, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_CH8_009D)
     EVT_WAIT(10)
-    EVT_CALL(StopSound, SOUND_LRAW_022D)
+    EVT_CALL(StopSound, SOUND_LRAW_KPA_ARENA_ACTIVE)
     EVT_CALL(SetMusicTrack, 0, SONG_PEACH_WISHES, 0, 8)
     EVT_CALL(InterpNpcYaw, NPC_Peach_01, 270, 0)
     EVT_WAIT(10)

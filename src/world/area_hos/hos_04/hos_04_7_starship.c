@@ -39,7 +39,7 @@ EvtScript N(EVS_Starship_FlyingAway) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_0181)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_ASCEND)
         EVT_CALL(MakeLerp, 0, 900, 45, EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)

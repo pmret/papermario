@@ -538,7 +538,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven_Before) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(15 * DT)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(2.0 * DT))
-    EVT_SET(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
+    EVT_SET(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -553,7 +553,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven_After) = {
 EvtScript N(EVS_NpcInit_RaphaelRaven) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RaphaelRaven_IdleNoFeet)
     EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_RAFAEL_LEFT_NEST)
+        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven_Before)))
         EVT_CASE_GE(STORY_CH5_ZIP_LINE_READY)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven_After)))

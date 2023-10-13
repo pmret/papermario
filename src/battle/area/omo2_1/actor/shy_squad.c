@@ -1236,7 +1236,7 @@ EvtScript N(EVS_Attack_Swarm) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
     EVT_SUB(LVarE, LVar0)
     EVT_SET(LVarD, LVarE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_03AD)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_FIGHTING)
     EVT_LOOP(LVarD)
         EVT_IF_GT(LVarE, 1)
             EVT_SET(LVar0, BS_FLAGS1_40)
@@ -1262,7 +1262,7 @@ EvtScript N(EVS_Attack_Swarm) = {
         EVT_END_IF
         EVT_WAIT(10)
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LRAW_03AD)
+    EVT_CALL(StopSound, SOUND_LRAW_FIGHTING)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(20)
@@ -1367,9 +1367,9 @@ EvtScript N(EVS_Flee) = {
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_WAIT(40)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0173)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RUN_AWAY_BUILDUP)
         EVT_WAIT(20)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0174)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RUN_AWAY)
     EVT_END_THREAD
     EVT_SET(LVar0, PRT_MEMBER_01)
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim08)

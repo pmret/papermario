@@ -56,7 +56,7 @@ EvtScript N(EVS_Inspect_FlipBush) = {
             EVT_CALL(PlayerMoveTo, -340, LVar5, 20)
             EVT_CALL(PlayerFaceNpc, NPC_YoshiKid, FALSE)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o88, SOUND_209F, 0)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEPARATE_BUSHES, 0)
             EVT_SET(LVar3, 0)
             EVT_LOOP(10)
                 EVT_ADD(LVar3, 9)

@@ -723,7 +723,7 @@ EvtScript N(EVS_Scene_KoloradoToTheRescue) = {
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(8.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, -60, 0, 0)
     EVT_CALL(SpeakToPlayer, NPC_BTL_COMPANION, ANIM_BattleKolorado_Shout, ANIM_BattleKolorado_ShoutStill, 5, MSG_CH5_0106)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0174)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RUN_AWAY)
     EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_BattleKolorado_Run)
     EVT_CALL(SetNpcSpeed, NPC_BTL_COMPANION, EVT_FLOAT(6.0))
     EVT_CALL(NpcMoveTo, NPC_BTL_COMPANION, -300, 0, 0)
@@ -1435,9 +1435,9 @@ EvtScript N(EVS_Death) = {
         EVT_CALL(PlayModelAnimation, VINE_2, VINE_2_BASE)
         EVT_WAIT(4)
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_LRAW_03BC)
+            EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 119, EVT_FLOAT(0.3))
-            EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 234)
         EVT_CALL(HideHealthBar, ACTOR_SELF)
@@ -1533,15 +1533,15 @@ EvtScript N(EVS_Death) = {
         EVT_END_THREAD
         EVT_WAIT(80)
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_LRAW_03BC)
+            EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 165, EVT_FLOAT(1.2))
-            EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 300)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
         EVT_WAIT(20)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0263)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EMOTE_QUESTION)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 20)
         EVT_PLAY_EFFECT(EFFECT_EMOTE, EMOTE_QUESTION, 0, LVar0, LVar1, LVar2, 20, 315, 30, 0, 0)
@@ -1705,10 +1705,10 @@ EvtScript N(EVS_Death) = {
         EVT_CALL(LoadBattleDmaData, VINE_ANIM_EXTRA_DEATH)
         EVT_CALL(PlayModelAnimation, VINE_3, VINE_3_BASE)
         EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_LRAW_03BC)
+            EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 100, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.2))
-            EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 216)
         EVT_THREAD

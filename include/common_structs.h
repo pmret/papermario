@@ -2066,15 +2066,6 @@ typedef struct PlayerStatus {
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
-typedef struct SaveMetadata {
-    /* 0x00 */ s32 timePlayed;
-    /* 0x04 */ u8 spiritsRescued;
-    /* 0x05 */ char unk_05[1];
-    /* 0x06 */ s8 level;
-    /* 0x07 */ unsigned char filename[8];
-    /* 0x0F */ char unk_0F[9];
-} SaveMetadata; // size = 0x18
-
 typedef struct SaveGlobals {
     /* 0x00 */ char magicString[16]; /* "Mario Story 006" string */
     /* 0x10 */ s8 pad[32]; /* always zero */
@@ -2084,6 +2075,15 @@ typedef struct SaveGlobals {
     /* 0x3C */ u32 lastFileSelected;
     /* 0x40 */ s8 reserved[64]; // unused
 } SaveGlobals; // size = 0x80
+
+typedef struct SaveMetadata {
+    /* 0x00 */ s32 timePlayed;
+    /* 0x04 */ u8 spiritsRescued;
+    /* 0x05 */ char unk_05[1];
+    /* 0x06 */ s8 level;
+    /* 0x07 */ unsigned char filename[8];
+    /* 0x0F */ char unk_0F[9];
+} SaveMetadata; // size = 0x18
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */

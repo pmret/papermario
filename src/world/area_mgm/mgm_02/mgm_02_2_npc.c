@@ -771,31 +771,31 @@ API_CALLABLE(N(RunMinigame)) {
         if (data->found < NUM_PANELS) {
             data->timeLeft--;
             if (data->timeLeft == 750) {
-                sfx_play_sound(SOUND_01A5);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_1);
             } else if (data->timeLeft == 600) {
-                sfx_play_sound(SOUND_01A5);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_1);
             } else if (data->timeLeft == 450) {
-                sfx_play_sound(SOUND_01A5);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_1);
             } else if (data->timeLeft == 300) {
-                sfx_play_sound(SOUND_01A6);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
             } else if (data->timeLeft == 270) {
-                sfx_play_sound(SOUND_01A6);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
             } else if (data->timeLeft == 240) {
-                sfx_play_sound(SOUND_01A6);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
             } else if (data->timeLeft == 210) {
-                sfx_play_sound(SOUND_01A6);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
             } else if (data->timeLeft == 180) {
-                sfx_play_sound(SOUND_01A6);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_2);
             } else if (data->timeLeft == 150) {
-                sfx_play_sound(SOUND_01A7);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
             } else if (data->timeLeft == 120) {
-                sfx_play_sound(SOUND_01A7);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
             } else if (data->timeLeft == 90) {
-                sfx_play_sound(SOUND_01A7);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
             } else if (data->timeLeft == 60) {
-                sfx_play_sound(SOUND_01A7);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
             } else if (data->timeLeft == 30) {
-                sfx_play_sound(SOUND_01A7);
+                sfx_play_sound(SOUND_OMO_BOX_CHIME_3);
             }
         }
         if ((data->timeLeft > 0) && (data->found == NUM_PANELS)) {
