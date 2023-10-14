@@ -37,6 +37,45 @@ void action_update_use_munchlesia(void);
 void action_update_use_tweester(void);
 void action_update_state_23(void);
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr world_action_idle_ROM_START;
+extern Addr world_action_idle_ROM_END;
+extern Addr world_action_walk_ROM_START;
+extern Addr world_action_walk_ROM_END;
+extern Addr world_action_jump_ROM_START;
+extern Addr world_action_jump_ROM_END;
+extern Addr world_action_land_ROM_START;
+extern Addr world_action_land_ROM_END;
+extern Addr world_action_misc_ROM_START;
+extern Addr world_action_misc_ROM_END;
+extern Addr world_action_spin_jump_ROM_START;
+extern Addr world_action_spin_jump_ROM_END;
+extern Addr world_action_tornado_jump_ROM_START;
+extern Addr world_action_tornado_jump_ROM_END;
+extern Addr world_action_slide_ROM_START;
+extern Addr world_action_slide_ROM_END;
+extern Addr world_action_hammer_ROM_START;
+extern Addr world_action_hammer_ROM_END;
+extern Addr world_action_hit_fire_ROM_START;
+extern Addr world_action_hit_fire_ROM_END;
+extern Addr world_action_knockback_ROM_START;
+extern Addr world_action_knockback_ROM_END;
+extern Addr world_action_hit_lava_ROM_START;
+extern Addr world_action_hit_lava_ROM_END;
+extern Addr world_action_step_up_ROM_START;
+extern Addr world_action_step_up_ROM_END;
+extern Addr world_action_sneaky_parasol_ROM_START;
+extern Addr world_action_sneaky_parasol_ROM_END;
+extern Addr world_action_spin_ROM_START;
+extern Addr world_action_spin_ROM_END;
+extern Addr world_action_use_spinning_flower_ROM_START;
+extern Addr world_action_use_spinning_flower_ROM_END;
+extern Addr world_action_use_munchlesia_ROM_START;
+extern Addr world_action_use_munchlesia_ROM_END;
+extern Addr world_action_use_tweester_ROM_START;
+extern Addr world_action_use_tweester_ROM_END;
+#endif
+
 s32 PrevPlayerCamRelativeYaw = 0;
 s32 D_800F7B44 = 0;
 f32 D_800F7B48 = 0.0f;

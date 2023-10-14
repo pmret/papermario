@@ -6,7 +6,7 @@
 
 #define STANDARD_POS_X              160
 
-#ifdef VERSION_PAL
+#if VERSION_PAL
 #define STANDARD_APPEAR_TIME        33
 #define STANDARD_HOLD_TIME          116
 #define STANDARD_VANISH_TIME        25
