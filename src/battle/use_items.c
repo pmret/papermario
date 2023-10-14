@@ -120,7 +120,7 @@ API_CALLABLE(LoadItemScript) {
 
     while (TRUE) {
         if (playerData->invItems[i] == itemID) {
-            playerData->invItems[i] = 0;
+            playerData->invItems[i] = ITEM_NONE;
             break;
         }
         i++;
@@ -170,10 +170,10 @@ API_CALLABLE(LoadMysteryItemScript) {
     s32* itemPtr;
     s32 i;
 
-    battleStatus->curTargetListFlags = item->targetFlags | TARGET_FLAG_8000;
+    battleStatus->curTargetListFlags = item->targetFlags | TARGET_FLAG_PRIMARY_ONLY;
     battleStatus->curAttackElement = 0;
 
-    player_create_target_list(actor);
+    create_current_pos_target_list(actor);
     target = &actor->targetData[actor->targetIndexList[0]];
 
     battleStatus->curTargetID = target->actorID;

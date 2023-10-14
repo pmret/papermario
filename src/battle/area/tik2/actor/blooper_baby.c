@@ -179,7 +179,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_TARGET,
         .posOffset = { 0, 27, 0 },
         .targetOffset = { 0, 0 },
@@ -371,7 +371,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim02)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_FloatToHome))
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -380,7 +380,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim02)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim03)
             EVT_EXEC_WAIT(N(EVS_Death))
@@ -480,7 +480,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BabyBlooper_Anim08)
-    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x00007FFF)
+    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 32767)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
     EVT_CALL(action_command_stop_leech_init)
@@ -569,7 +569,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LEECH)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
-        EVT_CALL(StartRumble, 2)
+        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MIN)
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
         EVT_IF_NE(LVar3, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)

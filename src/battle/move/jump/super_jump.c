@@ -28,7 +28,7 @@ EvtScript N(EVS_UseMove) = {
 };
 
 EvtScript N(EVS_802A26B4) = {
-    EVT_CALL(StartRumble, 10)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_EXTREME)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(4.0))
@@ -50,7 +50,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_802A26B4))
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
@@ -78,7 +78,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_802A26B4))
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
@@ -105,7 +105,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)

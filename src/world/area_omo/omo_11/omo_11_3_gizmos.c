@@ -78,7 +78,7 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
         script->functionTempPtr[0] = shadowIDs = heap_malloc(sizeof(*shadowIDs));
         for (i = 0; i < ARRAY_COUNT(N(PlatformFloorModels)); i++) {
             model = get_model_from_list_index(get_model_list_index_from_tree_index(N(PlatformFloorModels)[i]));
-            (*shadowIDs)[i] = create_shadow_type(0, model->center.x, model->center.y - 100.0f, model->center.z);
+            (*shadowIDs)[i] = create_shadow_type(SHADOW_VARYING_CIRCLE, model->center.x, model->center.y - 100.0f, model->center.z);
         }
     }
 

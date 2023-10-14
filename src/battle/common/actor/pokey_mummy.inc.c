@@ -92,19 +92,19 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(FourPartAnims),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
+        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_ALT_SPIKY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_BODY3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 72 },
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
+        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_ALT_SPIKY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },
@@ -116,7 +116,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
+        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_ALT_SPIKY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },
@@ -128,7 +128,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
+        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_ALT_SPIKY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },
@@ -140,7 +140,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
+        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_ALT_SPIKY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
     },
@@ -152,7 +152,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(ThrownPartAnims),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
+        .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_ALT_SPIKY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -789,10 +789,10 @@ EvtScript N(EVS_DecrementSize) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_Pokey_Mummy_BurnHurt3)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_Pokey_Mummy_BurnStill3)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ThreePartAnims)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY3, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY3, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY3, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY2, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY2, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_PartsThrown, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 62, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 62, EVT_IGNORE_ARG)
@@ -806,10 +806,10 @@ EvtScript N(EVS_DecrementSize) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_Pokey_Mummy_BurnHurt2)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_Pokey_Mummy_BurnStill2)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TwoPartAnims)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY2, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY2, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY1, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_PartsThrown, 2)
             EVT_CALL(SetActorSize, ACTOR_SELF, 44, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 44, EVT_IGNORE_ARG)
@@ -821,10 +821,10 @@ EvtScript N(EVS_DecrementSize) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnHurt, ANIM_Pokey_Mummy_BurnHurt1)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Anim_BurnStill, ANIM_Pokey_Mummy_BurnStill1)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(OnePartAnims)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY1, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY1, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BODY1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_SINGLE, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_SINGLE, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_SINGLE, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_PartsThrown, 3)
             EVT_CALL(SetActorSize, ACTOR_SELF, 26, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, PRT_MAIN, 26, EVT_IGNORE_ARG)
@@ -895,7 +895,7 @@ EvtScript N(EVS_KnockPartAway) = {
         EVT_WAIT(4)
         EVT_EXEC_WAIT(N(EVS_HitReactionBounce))
     EVT_END_CHILD_THREAD
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000 | TARGET_FLAG_10000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_PRIMARY_ONLY | TARGET_FLAG_ALLOW_TARGET_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerID, LVar1)
@@ -907,7 +907,7 @@ EvtScript N(EVS_KnockPartAway) = {
     EVT_LABEL(1)
         EVT_ADD(LVarF, 1)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_EQ(LVar0, -1)
+        EVT_IF_EQ(LVar0, ITER_NO_MORE)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(GetOwnerTarget, LVar0, LVar9)

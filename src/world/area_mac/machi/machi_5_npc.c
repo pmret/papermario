@@ -66,7 +66,7 @@ API_CALLABLE(N(SetupChapter0)) {
 API_CALLABLE(N(SetupStarRodPaletteCycling)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    npc_set_palswap_mode_A(npc, 3);
+    npc_set_palswap_mode_A(npc, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS);
     npc_set_palswap_1(npc, 0, 1, 30, 10);
     npc_set_palswap_2(npc, 60, 20, 0, 0);
     return ApiStatus_DONE2;

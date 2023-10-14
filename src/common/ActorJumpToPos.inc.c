@@ -15,10 +15,10 @@ API_CALLABLE(N(ActorJumpToPos)) {
     }
 
     if (actor->state.vel > 0.0f) {
-        set_animation(ACTOR_SELF, 1, actor->state.animJumpRise);
+        set_actor_anim(ACTOR_SELF, 1, actor->state.animJumpRise);
     }
     if (actor->state.vel < 0.0f) {
-        set_animation(ACTOR_SELF, 1, actor->state.animJumpFall);
+        set_actor_anim(ACTOR_SELF, 1, actor->state.animJumpFall);
     }
 
     actor->state.curPos.y += actor->state.vel;

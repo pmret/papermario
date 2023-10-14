@@ -213,7 +213,7 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->showMsgState = 0;
+        popup->showMsgState = BTL_MSG_STATE_INIT;
         D_800A0F40 = 1;
     }
 }
@@ -223,26 +223,26 @@ void update_merlee_message(void* data) {
     s32 closeMessage = FALSE;
 
     switch (popup->showMsgState) {
-        case 0:
-            popup->showMsgState = 1;
+        case BTL_MSG_STATE_INIT:
+            popup->showMsgState = BTL_MSG_STATE_1;
             break;
-        case 1:
-            popup->showMsgState = 2;
+        case BTL_MSG_STATE_1:
+            popup->showMsgState = BTL_MSG_STATE_2;
             break;
-        case 2:
-            if (gGameStatusPtr->pressedButtons[0] & 0xC000) {
+        case BTL_MSG_STATE_2:
+            if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
                 popup->duration = 0;
             }
             if (popup->duration != 0) {
                 popup->duration--;
             } else {
-                popup->showMsgState = 3;
+                popup->showMsgState = BTL_MSG_STATE_3;
             }
             break;
-        case 3:
-            popup->showMsgState = 4;
+        case BTL_MSG_STATE_3:
+            popup->showMsgState = BTL_MSG_STATE_4;
             break;
-        case 4:
+        case BTL_MSG_STATE_4:
             closeMessage = TRUE;
             break;
     }
@@ -1096,7 +1096,7 @@ void remove_status_static(s32 iconID) {
     }
 }
 
-void enable_status_2(s32 iconID) {
+void enable_status_static(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags |= STATUS_ICON_FLAG_STATIC;

@@ -4,7 +4,7 @@ EvtScript N(EVS_ExitWalk_jan_16) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(UseExitHeading, 60, jan_15_ENTRY_1)
     EVT_EXEC(ExitWalk)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_RAFAELS_TREE)
+    EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
         EVT_CALL(GotoMap, EVT_PTR("jan_16"), jan_16_ENTRY_3)
     EVT_ELSE
         EVT_CALL(GotoMap, EVT_PTR("jan_16"), jan_16_ENTRY_0)

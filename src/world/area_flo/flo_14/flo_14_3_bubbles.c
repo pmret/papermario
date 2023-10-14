@@ -63,7 +63,7 @@ API_CALLABLE(N(UpdateBubbleSoundPos)) {
     script->functionTemp[0] = evt_get_variable(script, *args++);
     script->functionTemp[1] = evt_get_variable(script, *args++);
     script->functionTemp[2] = evt_get_variable(script, *args++);
-    sfx_adjust_env_sound_pos(SOUND_LRAW_0194, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+    sfx_adjust_env_sound_pos(SOUND_LRAW_BUBBLE_DRIFT, SOUND_SPACE_DEFAULT, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     return ApiStatus_DONE2;
 }
 
@@ -85,7 +85,7 @@ Vec3f N(BubbleFlightPath)[] = {
 
 EvtScript N(EVS_BubbleFollowPath) = {
     EVT_WAIT(20)
-    EVT_CALL(PlaySound, SOUND_LOOP_23)
+    EVT_CALL(PlaySound, SOUND_LOOP_BUBBLE_DRIFT)
     EVT_CALL(LoadPath, 165, EVT_PTR(N(BubbleFlightPath)), ARRAY_COUNT(N(BubbleFlightPath)), EASING_COS_IN_OUT)
     EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
@@ -98,7 +98,7 @@ EvtScript N(EVS_BubbleFollowPath) = {
         EVT_IF_EQ(LVar0, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(StopSound, SOUND_LOOP_23)
+    EVT_CALL(StopSound, SOUND_LOOP_BUBBLE_DRIFT)
     EVT_RETURN
     EVT_END
 };
@@ -159,7 +159,7 @@ EvtScript N(EVS_RideBigBubble) = {
 };
 
 EvtScript N(EVS_BlowBigBubble) = {
-    EVT_CALL(PlaySoundAt, SOUND_0193, SOUND_SPACE_DEFAULT, 591, 55, 121)
+    EVT_CALL(PlaySoundAt, SOUND_FLO_BLOW_BUBBLE, SOUND_SPACE_DEFAULT, 591, 55, 121)
     EVT_CALL(EnableModel, MODEL_o167, TRUE)
     EVT_SETF(LVar2, EVT_FLOAT(1.0))
     EVT_SETF(LVar4, EVT_FLOAT(0.0))

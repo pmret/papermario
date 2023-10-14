@@ -2,12 +2,12 @@
 
 EvtScript N(EVS_ParadePhase_Toads1) = {
     EVT_WAIT(10)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_HornPlayer1, 3)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_HornPlayer2, 3)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Drummer1, 3)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Drummer2, 3)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer1, 4)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer2, 4)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_HornPlayer1, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_HornPlayer2, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Drummer1, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Drummer2, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer1, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer2, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
     EVT_CALL(SetNpcPaletteSwapping, NPC_HornPlayer1, 1, 2, 10, 5, 10, 5, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_HornPlayer2, 1, 2, 10, 5, 10, 5, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Drummer1, 1, 2, 10, 5, 10, 5, 0, 0)
@@ -268,11 +268,11 @@ EvtScript N(EVS_StandardBearer) = {
 };
 
 EvtScript N(EVS_ParadePhase_Toads2) = {
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler1, 4)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler2, 4)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler3, 4)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer3, 4)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer4, 4)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler1, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler2, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler3, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer3, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer4, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Twirler1, 1, 2, 10, 5, 10, 5, 4, 5)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Twirler2, 1, 2, 10, 5, 10, 5, 4, 5)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Twirler3, 1, 2, 10, 5, 10, 5, 4, 5)

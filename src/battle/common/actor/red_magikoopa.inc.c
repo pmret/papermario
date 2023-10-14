@@ -28,6 +28,8 @@ enum N(ActorVars) {
 enum N(ActorParams) {
     DMG_MAGIC_BLAST     = 3,
     DMG_WAND_STRIKE     = 3,
+    MAX_ATTACK_BOOST    = 3,
+    ATTACK_BOOST_AMT    = 1,
 };
 
 s32 N(DefenseTable)[] = {
@@ -92,7 +94,7 @@ s32 N(FlyingStatusTable)[] = {
 
 ActorPartBlueprint N(GroundParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_GROUND,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
@@ -119,7 +121,7 @@ ActorPartBlueprint N(FlyingParts)[] = {
         .projectileTargetOffset = { -5, -12 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_FLYING,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
@@ -366,10 +368,10 @@ EvtScript N(EVS_KnockDown) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_BROOM, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -772,9 +774,9 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar0)
+    EVT_CALL(GetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
+        EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, FALSE)
     EVT_RETURN
@@ -785,9 +787,9 @@ EvtScript N(EVS_Init_Flying) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent_Flying)))
-    EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar0)
+    EVT_CALL(GetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
+        EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, FALSE)
     EVT_RETURN
@@ -797,33 +799,33 @@ EvtScript N(EVS_Init_Flying) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_CALL(GetIndexFromHome, LVar0, LVar1)
-    EVT_CALL(GetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar2)
-    EVT_IF_GT(LVar1, LVar2)
-        EVT_CALL(N(CheckMagikoopaCastTarget), LVar0, LVar3)
-        EVT_IF_EQ(LVar3, 0)
-            EVT_CALL(GetActorAttackBoost, LVar0, LVar4)
-            EVT_IF_LT(LVar4, 3)
-                EVT_SET(LVar8, LVar0)
-                EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, LVar1)
-                EVT_GOTO(100)
+        EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
+        EVT_CALL(InitTargetIterator)
+        EVT_LABEL(0)
+            EVT_CALL(GetOwnerTarget, LVar0, LVar1)
+            EVT_CALL(GetIndexFromHome, LVar0, LVar1)
+            EVT_CALL(GetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar2)
+            EVT_IF_GT(LVar1, LVar2)
+                EVT_CALL(N(CheckMagikoopaCastTarget), LVar0, LVar3)
+                EVT_IF_EQ(LVar3, 0)
+                    EVT_CALL(GetActorAttackBoost, LVar0, LVar4)
+                    EVT_IF_LT(LVar4, MAX_ATTACK_BOOST)
+                        EVT_SET(LVar8, LVar0)
+                        EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, LVar1)
+                        EVT_GOTO(100)
+                    EVT_END_IF
+                EVT_END_IF
             EVT_END_IF
+            EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+            EVT_IF_NE(LVar0, ITER_NO_MORE)
+                EVT_GOTO(0)
+            EVT_END_IF
+        EVT_IF_EQ(LFlag0, FALSE)
+            EVT_SET(LFlag0, TRUE)
+            EVT_CALL(SetBattleVar, BTL_VAR_Magikoopa_LastIndexBoosted, -1)
+            EVT_GOTO(10)
         EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_IF_EQ(LFlag0, FALSE)
-        EVT_SET(LFlag0, TRUE)
-        EVT_CALL(SetBattleVar, BTL_VAR_UNK_MAGIKOOPA, -1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+    EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(EVS_Flee))
         EVT_RETURN
@@ -895,7 +897,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
-        EVT_CALL(BoostAttack, LVar8, 1)
+        EVT_CALL(BoostAttack, LVar8, ATTACK_BOOST_AMT)
         EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)

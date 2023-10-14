@@ -174,28 +174,28 @@ void state_step_demo(void) {
 
     switch (mode) {
         case DEMO_SCENE_DONE:
-            intro_logos_set_fade_alpha(255);
-            intro_logos_set_fade_color(224);
-            gGameStatusPtr->introState = INTRO_STATE_3;
-            gOverrideFlags |= GLOBAL_OVERRIDES_8;
-            intro_logos_update_fade();
+            startup_set_fade_screen_alpha(255);
+            startup_set_fade_screen_color(224);
+            gGameStatusPtr->startupState = 3;
+            gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
+            startup_fade_screen_update();
             gGameStatusPtr->demoState = DEMO_STATE_DONE;
             break;
         case DEMO_SCENE_EXIT:
-            if (gGameStatusPtr->introState != INTRO_STATE_0) {
-                gGameStatusPtr->introState--;
+            if (gGameStatusPtr->startupState != 0) {
+                gGameStatusPtr->startupState--;
             }
 
-            if (gGameStatusPtr->introState == INTRO_STATE_0) {
+            if (gGameStatusPtr->startupState == 0) {
                 gGameStatusPtr->nextDemoScene = 0;
                 gGameStatusPtr->demoState = DEMO_STATE_NONE;
                 gGameStatusPtr->peachFlags = 0;
                 enable_sounds();
                 gGameStatusPtr->isBattle = FALSE;
-                gGameStatusPtr->unk_76 = 0;
-                gGameStatusPtr->disableScripts = FALSE;
+                gGameStatusPtr->debugUnused1 = FALSE;
+                gGameStatusPtr->debugScripts = DEBUG_SCRIPTS_NONE;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 general_heap_create();
                 clear_render_tasks();
                 clear_worker_list();
@@ -210,7 +210,7 @@ void state_step_demo(void) {
                 hud_element_clear_cache();
                 clear_trigger_data();
                 clear_printers();
-                clear_entity_data(0);
+                clear_entity_data(FALSE);
                 clear_screen_overlays();
                 clear_player_status();
                 clear_npcs();
@@ -231,7 +231,7 @@ void state_step_demo(void) {
             gGameStatusPtr->entryID = demoSceneData->index;
             gGameStatusPtr->peachFlags = 0;
             playerData->curPartner = demoSceneData->partnerID;
-            set_cam_viewport(0, 29, 20, -262, 177);
+            set_cam_viewport(CAM_DEFAULT, 29, 20, -262, 177);
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
@@ -249,7 +249,7 @@ void state_step_demo(void) {
             gGameStatusPtr->entryID = demoSceneData->index;
             gGameStatusPtr->peachFlags = PEACH_STATUS_FLAG_IS_PEACH;
             playerData->curPartner = demoSceneData->partnerID;
-            set_cam_viewport(0, 29, 20, -262, 177);
+            set_cam_viewport(CAM_DEFAULT, 29, 20, -262, 177);
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {

@@ -280,8 +280,8 @@ API_CALLABLE(N(AdjustCamVfov)) {
 
 API_CALLABLE(N(ResumeIntro)) {
     GameStatus* gameStatus = gGameStatusPtr;
-    if (gameStatus->creditsViewportMode < 5U) {
-        gameStatus->creditsViewportMode++;
+    if (gameStatus->introPart > INTRO_PART_NONE && gameStatus->introPart < INTRO_PART_5) {
+        gameStatus->introPart++;
         state_init_intro();
     }
     return ApiStatus_DONE1;
@@ -1974,15 +1974,15 @@ API_CALLABLE(N(func_80244934_A2EB74)) {
 }
 
 EvtScript N(EVS_Scene_IntroStory) = {
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StarRod, 2)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_StarRod, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
     EVT_CALL(SetNpcPaletteSwapLower, NPC_StarRod, 0, 1, 20, 5)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Eldstar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Mamar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Skolar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Muskular, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Misstar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Klevar, 2)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Kalmar, 2)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Eldstar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Mamar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Skolar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Muskular, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Misstar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Klevar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
+    EVT_CALL(SetNpcPaletteSwapMode, NPC_Kalmar, NPC_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Eldstar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Mamar, 0, 1, 25, 12, 4, 18, 0, 0)
     EVT_CALL(SetNpcPaletteSwapping, NPC_Skolar, 0, 1, 25, 12, 4, 18, 0, 0)
@@ -2387,19 +2387,19 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Hurt)
     EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Hurt)
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(1))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(1))
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(2))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(2))
     EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(3))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(3))
     EVT_CALL(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(4))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(4))
     EVT_CALL(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(5))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(5))
     EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(6))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(6))
     EVT_CALL(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_AURA, 0, LVar0, LVar1, LVar2, 1, ArrayVar(7))
+    EVT_PLAY_EFFECT(EFFECT_AURA, FX_AURA_CAPTURE, LVar0, LVar1, LVar2, 1, ArrayVar(7))
     EVT_CALL(N(SetWorldColorParams), 110, 110, 110, 255, 255, 255, 0)
     EVT_THREAD
         EVT_CALL(N(SetWorldColorParams), 230, 230, 230, 0, 0, 0, 30)

@@ -192,10 +192,10 @@ void check_input_open_menus(void) {
     playerData = &gPlayerData;
     popup = &D_8010C9C8;
 
-    if (gGameStatusPtr->disableScripts ||
-        (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) ||
-        evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO)
-    {
+    if (gGameStatusPtr->debugScripts != DEBUG_SCRIPTS_NONE
+        || (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)
+        || evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO
+    ) {
         return;
     }
 

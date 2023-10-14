@@ -2,57 +2,53 @@
 #include "effects_internal.h"
 
 typedef struct WaterBlockVtxData {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ s8 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ u8 unk_08;
-    /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
+    /* 0x00 */ Vec3b pos;
+    /* 0x04 */ s16 normX;
+    /* 0x06 */ s16 normY;
+    /* 0x08 */ Color_RGB8 color;
 } WaterBlockVtxData; // size = 0xC
 
 WaterBlockVtxData D_E00B4CF0[] = {
-                     { 25,  4,  -25,    1025, 72,      176, 176, 176},
-                     { 22,  0,  -22,    963,  0,       176, 176, 176},
-                     {-22,  0,  -22,    61,   0,       176, 176, 176},
-                     {-25,  4,  -25,    1,    72,      176, 176, 176},
-                     { 25,  46, -25,    1025, 951,     176, 176, 176},
-                     {-25,  46, -25,    1,    951,     176, 176, 176},
-                     { 22,  50, -22,    890,  997,     174, 208, 216},
-                     {-22,  50, -22,    133,  997,     174, 208, 216},
-                     {-22,  50,  22,    133,  997,     174, 208, 216},
-                     { 22,  50,  22,    890,  997,     174, 208, 216},
-                     {-22,  0,  -22,    133,  25,      148, 165, 176},
-                     { 22,  0,  -22,    890,  25,      148, 165, 176},
-                     { 22,  0,   22,    890,  25,      148, 165, 176},
-                     {-22,  0,   22,    133,  25,      148, 165, 176},
-                     {-22,  50,  22,    963,  1021,    120, 110, 136},
-                     {-22,  50, -22,    61,   1021,    120, 110, 136},
-                     {-25,  46, -25,    0,    951,     120, 110, 136},
-                     {-25,  46,  25,    1024, 951,     120, 110, 136},
-                     {-25,  4,  -25,    0,    72,      120, 110, 136},
-                     {-25,  4,   25,    1024, 72,      120, 110, 136},
-                     {-22,  0,  -22,    61,   0,       120, 110, 136},
-                     {-22,  0,   22,    963,  0,       120, 110, 136},
-                     {-22,  50, -22,    61,   1021,    176, 176, 176},
-                     { 22,  50, -22,    963,  1021,    176, 176, 176},
-                     { 22,  0,   22,    963,  0,       120, 110, 136},
-                     { 22,  0,  -22,    61,   0,       120, 110, 136},
-                     { 25,  4,  -25,    0,    72,      120, 110, 136},
-                     { 25,  4,   25,    1024, 72,      120, 110, 136},
-                     { 25,  46, -25,    0,    951,     120, 110, 136},
-                     { 25,  46,  25,    1024, 951,     120, 110, 136},
-                     { 22,  50, -22,    61,   1021,    120, 110, 136},
-                     {-22,  0,   22,    61,   0,       240, 240, 240},
-                     { 25,  4,   25,    1025, 72,      240, 240, 240},
-                     { 25,  46,  25,    1025, 951,     240, 240, 240},
-                     { 22,  50,  22,    963,  1021,    120, 110, 136},
-                     { 22,  0,   22,    963,  0,       240, 240, 240},
-                     {-25,  4,   25,    1,    72,      240, 240, 240},
-                     {-25,  46,  25,    1,    951,     240, 240, 240},
-                     { 22,  50,  22,    963,  1021,    240, 240, 240},
-                     {-22,  50,  22,    61,   1021,    240, 240, 240},
+    {{ 25,  4,  -25 },    1025, 72,     { 176, 176, 176 }},
+    {{ 22,  0,  -22 },    963,  0,      { 176, 176, 176 }},
+    {{-22,  0,  -22 },    61,   0,      { 176, 176, 176 }},
+    {{-25,  4,  -25 },    1,    72,     { 176, 176, 176 }},
+    {{ 25,  46, -25 },    1025, 951,    { 176, 176, 176 }},
+    {{-25,  46, -25 },    1,    951,    { 176, 176, 176 }},
+    {{ 22,  50, -22 },    890,  997,    { 174, 208, 216 }},
+    {{-22,  50, -22 },    133,  997,    { 174, 208, 216 }},
+    {{-22,  50,  22 },    133,  997,    { 174, 208, 216 }},
+    {{ 22,  50,  22 },    890,  997,    { 174, 208, 216 }},
+    {{-22,  0,  -22 },    133,  25,     { 148, 165, 176 }},
+    {{ 22,  0,  -22 },    890,  25,     { 148, 165, 176 }},
+    {{ 22,  0,   22 },    890,  25,     { 148, 165, 176 }},
+    {{-22,  0,   22 },    133,  25,     { 148, 165, 176 }},
+    {{-22,  50,  22 },    963,  1021,   { 120, 110, 136 }},
+    {{-22,  50, -22 },    61,   1021,   { 120, 110, 136 }},
+    {{-25,  46, -25 },    0,    951,    { 120, 110, 136 }},
+    {{-25,  46,  25 },    1024, 951,    { 120, 110, 136 }},
+    {{-25,  4,  -25 },    0,    72,     { 120, 110, 136 }},
+    {{-25,  4,   25 },    1024, 72,     { 120, 110, 136 }},
+    {{-22,  0,  -22 },    61,   0,      { 120, 110, 136 }},
+    {{-22,  0,   22 },    963,  0,      { 120, 110, 136 }},
+    {{-22,  50, -22 },    61,   1021,   { 176, 176, 176 }},
+    {{ 22,  50, -22 },    963,  1021,   { 176, 176, 176 }},
+    {{ 22,  0,   22 },    963,  0,      { 120, 110, 136 }},
+    {{ 22,  0,  -22 },    61,   0,      { 120, 110, 136 }},
+    {{ 25,  4,  -25 },    0,    72,     { 120, 110, 136 }},
+    {{ 25,  4,   25 },    1024, 72,     { 120, 110, 136 }},
+    {{ 25,  46, -25 },    0,    951,    { 120, 110, 136 }},
+    {{ 25,  46,  25 },    1024, 951,    { 120, 110, 136 }},
+    {{ 22,  50, -22 },    61,   1021,   { 120, 110, 136 }},
+    {{-22,  0,   22 },    61,   0,      { 240, 240, 240 }},
+    {{ 25,  4,   25 },    1025, 72,     { 240, 240, 240 }},
+    {{ 25,  46,  25 },    1025, 951,    { 240, 240, 240 }},
+    {{ 22,  50,  22 },    963,  1021,   { 120, 110, 136 }},
+    {{ 22,  0,   22 },    963,  0,      { 240, 240, 240 }},
+    {{-25,  4,   25 },    1,    72,     { 240, 240, 240 }},
+    {{-25,  46,  25 },    1,    951,    { 240, 240, 240 }},
+    {{ 22,  50,  22 },    963,  1021,   { 240, 240, 240 }},
+    {{-22,  50,  22 },    61,   1021,   { 240, 240, 240 }},
 };
 
 extern Gfx D_09000300_3B6EF0[];
@@ -66,7 +62,7 @@ void water_block_update(EffectInstance* effect);
 void water_block_render(EffectInstance* effect);
 void water_block_appendGfx(void* effect);
 
-EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 arg5) {
+EffectInstance* water_block_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s32 duration) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -87,22 +83,22 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     data = effect->data.waterBlock = general_heap_malloc(sizeof(*data));
     ASSERT(data != NULL);
 
-    data->unk_00 = arg0;
-    data->unk_14 = 0;
-    if (arg5 <= 0) {
-        data->unk_10 = 1000;
+    data->type = type;
+    data->lifetime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = duration;
     }
 
-    data->unk_24 = 0;
+    data->color.a = 0;
     data->pos.x = x;
     data->pos.y = y;
     data->pos.z = z;
     data->unk_2C = arg4;
-    data->unk_18 = 47;
-    data->unk_1C = 127;
-    data->unk_20 = 255;
+    data->color.r = 47;
+    data->color.g = 127;
+    data->color.b = 255;
     data->unk_30 = 0.0f;
     data->unk_34 = 0.0f;
 
@@ -120,60 +116,60 @@ EFFECT_DEF_WATER_SPLASH(water_splash_main);
 void water_block_update(EffectInstance* effect) {
     WaterBlockFXData *data;
     f32 temp_f20;
-    s32 temp_a0;
-    s32 temp_s0;
-    s32 temp_v1_3;
+    s32 type;
+    s32 time;
+    s32 timeLeft;
     s32 i;
 
     data = effect->data.waterBlock;
-    temp_a0 = data->unk_00;
+    type = data->type;
     if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
-        if (temp_a0 == 1) {
+        if (type == FX_WATER_BLOCK_DESTROY) {
             effect->flags = effect->flags & ~FX_INSTANCE_FLAG_DISMISS;
-            data->unk_10 = 4;
+            data->timeLeft = 4;
         } else {
             effect->flags = effect->flags & ~FX_INSTANCE_FLAG_DISMISS;
-            data->unk_10 = 16;
+            data->timeLeft = 16;
         }
     }
 
-    if (data->unk_10 < 1000) {
-        data->unk_10--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_14++;
-    if (data->unk_14 > 324000) {
-        data->unk_14 = 256;
+    data->lifetime++;
+    if (data->lifetime > 90 * 60 * 60) {
+        data->lifetime = 256;
     }
 
-    temp_v1_3 = data->unk_10;
-    if (temp_v1_3 < 0) {
-        if (temp_a0 == 1) {
+    timeLeft = data->timeLeft;
+    if (timeLeft < 0) {
+        if (type == FX_WATER_BLOCK_DESTROY) {
             load_effect(EFFECT_WATER_SPLASH);
-            water_splash_main(0, data->pos.x, data->pos.y + 24.0f, data->pos.z, 2.0f, 0x1E);
-            water_splash_main(1, data->pos.x, data->pos.y + 24.0f, data->pos.z, 2.0f, 0x1E);
+            water_splash_main(0, data->pos.x, data->pos.y + 24.0f, data->pos.z, 2.0f, 30);
+            water_splash_main(1, data->pos.x, data->pos.y + 24.0f, data->pos.z, 2.0f, 30);
         }
         remove_effect(effect);
         return;
     }
-    temp_s0 = data->unk_14;
-    if (temp_a0 == 0) {
-        if (temp_v1_3 < 16) {
-            data->unk_24 = temp_v1_3 * 16;
-            data->unk_28 = temp_v1_3 * 16;
+
+    time = data->lifetime;
+    if (type == FX_WATER_BLOCK_CREATE) {
+        if (timeLeft < 16) {
+            data->color.a = timeLeft * 16;
+            data->alpha = timeLeft * 16;
         }
-        if (temp_s0 < 16) {
-            data->unk_24 = (temp_s0 * 16) + 15;
-            data->unk_28 = (temp_s0 * 16) + 15;
+        if (time < 16) {
+            data->color.a = (time * 16) + 15;
+            data->alpha = (time * 16) + 15;
         }
-    } else if (temp_s0 < 4) {
-        data->unk_24 = (temp_s0 * 64) + 63;
-        data->unk_28 = (temp_s0 * 64) + 63;
+    } else if (time < 4) {
+        data->color.a = (time * 64) + 63;
+        data->alpha = (time * 64) + 63;
     }
 
-
-    data->unk_1C = sin_deg((temp_s0 * 6) + temp_s0) * 32.0f + 127.0f;
-    temp_f20 = (f32)temp_s0 * 0.01;
+    data->color.g = sin_deg((time * 6) + time) * 32.0f + 127.0f;
+    temp_f20 = (f32)time * 0.01;
     data->unk_30 = (sin_deg(temp_f20 * 6.0f) * 32.0f * sin_deg(temp_f20)) + 256.0f + (cos_deg(2.0f * temp_f20) * 32.0f) + (cos_deg(temp_f20) * 32.0f);
     data->unk_34 += 0.2;
     if (data->unk_34 >= 128.0f) {
@@ -221,12 +217,12 @@ void water_block_appendGfx(void *effect) {
     Matrix4f sp20;
     Matrix4f sp60;
     WaterBlockFXData* data = ((EffectInstance*)effect)->data.waterBlock;
-    s32 spA4 = data->unk_24;
-    Vtx* spA8;
+    s32 alpha = data->color.a;
+    Vtx* vtxBase;
     EffectInstance* effectTemp = effect;
-    WaterBlockVtxData* var_s6;
-    Vtx* var_fp;
-    s32 temp_s0;
+    WaterBlockVtxData* vtxData;
+    Vtx* curVtx;
+    s32 timePhase;
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
@@ -237,44 +233,44 @@ void water_block_appendGfx(void *effect) {
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPBranchList(gMainGfxPos, &gMainGfxPos[81]);
-    spA8 = (Vtx*)++gMainGfxPos;
+    vtxBase = (Vtx*)++gMainGfxPos;
     gMainGfxPos = &gMainGfxPos[80];
 
-    temp_s0 = gGameStatusPtr->frameCounter * 4;
+    timePhase = gGameStatusPtr->frameCounter * 4;
 
-    for (var_s6 = D_E00B4CF0, i = 0, var_fp = spA8; i < 40; i++, var_s6++, var_fp++) {
-        f32 x = var_s6->unk_00 * 10;
-        f32 y = var_s6->unk_01 * 10;
-        f32 z = var_s6->unk_02 * 10;
+    for (vtxData = D_E00B4CF0, i = 0, curVtx = vtxBase; i < ARRAY_COUNT(D_E00B4CF0); i++, vtxData++, curVtx++) {
+        f32 x = vtxData->pos.x * 10;
+        f32 y = vtxData->pos.y * 10;
+        f32 z = vtxData->pos.z * 10;
 
         if (y != 0.0f) {
-            f32 dx = sin_deg(temp_s0 + func_E0200044(1000, (x + (y * 10.0f) + (z * 100.0f)))) * 20.0f;
-            f32 dy = sin_deg(temp_s0 + func_E0200044(1000, ((x * 10.0f) + (y * 100.0f) + z))) * 20.0f;
-            f32 dz = sin_deg(temp_s0 + func_E0200044(1000, ((x * 100.0f) + y + (z * 10.0f)))) * 20.0f;
+            f32 dx = sin_deg(timePhase + effect_simple_rand(1000, (x + (y * 10.0f) + (z * 100.0f)))) * 20.0f;
+            f32 dy = sin_deg(timePhase + effect_simple_rand(1000, ((x * 10.0f) + (y * 100.0f) + z))) * 20.0f;
+            f32 dz = sin_deg(timePhase + effect_simple_rand(1000, ((x * 100.0f) + y + (z * 10.0f)))) * 20.0f;
             x += dx;
             y += dy;
             z += dz;
         }
 
-        var_fp->v.ob[0] = x;
-        var_fp->v.ob[1] = y;
-        var_fp->v.ob[2] = z;
+        curVtx->v.ob[0] = x;
+        curVtx->v.ob[1] = y;
+        curVtx->v.ob[2] = z;
 
-        var_fp->v.tc[0] = var_s6->unk_04;
-        var_fp->v.tc[1] = var_s6->unk_06;
+        curVtx->v.tc[0] = vtxData->normX;
+        curVtx->v.tc[1] = vtxData->normY;
 
-        var_fp->v.cn[0] = var_s6->unk_08;
-        var_fp->v.cn[1] = var_s6->unk_09;
-        var_fp->v.cn[2] = var_s6->unk_0A;
-        var_fp->v.cn[3] = 80;
+        curVtx->v.cn[0] = vtxData->color.r;
+        curVtx->v.cn[1] = vtxData->color.g;
+        curVtx->v.cn[2] = vtxData->color.b;
+        curVtx->v.cn[3] = 80;
     }
 
     guScaleF(sp20, 0.1f, 0.1f, 0.1f);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetEnvColor(gMainGfxPos++, 0, 0, 255, data->unk_28);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, spA4);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 255, data->alpha);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, alpha);
     gSPDisplayList(gMainGfxPos++, D_090003B0_3B6FA0);
 
     for (i = 0; i < NUM_WATER_BLOCK_COMPONENTS; i++) {
@@ -288,15 +284,15 @@ void water_block_appendGfx(void *effect) {
     }
 
     gSPDisplayList(gMainGfxPos++, D_09000300_3B6EF0);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, spA4 * 0.3);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->color.r, data->color.g, data->color.b, alpha * 0.3);
     gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH);
     gSPSetGeometryMode(gMainGfxPos++, G_CULL_BACK);
 
-    gSPVertex(gMainGfxPos++, spA8, 30, 0);
+    gSPVertex(gMainGfxPos++, vtxBase, 30, 0);
 
     gSPDisplayList(gMainGfxPos++, D_090004D8_3B70C8);
 
-    gSPVertex(gMainGfxPos++, &spA8[28], 12, 0);
+    gSPVertex(gMainGfxPos++, &vtxBase[28], 12, 0);
 
     gSPDisplayList(gMainGfxPos++, D_09000538_3B7128)
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

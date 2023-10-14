@@ -366,14 +366,14 @@ void pause_items_load_items(s32 invItems) {
     D_802705D0 = 0;
     if (invItems == TRUE) {
         for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-            if (playerData->invItems[i] != 0) {
+            if (playerData->invItems[i] != ITEM_NONE) {
                 gPauseItemsItemIDs[totalItems] = playerData->invItems[i];
                 totalItems++;
             }
         }
     } else {
         for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
-            if (playerData->keyItems[i] != 0) {
+            if (playerData->keyItems[i] != ITEM_NONE) {
                 gPauseItemsItemIDs[totalItems] = playerData->keyItems[i];
                 totalItems++;
             }

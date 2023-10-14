@@ -14,7 +14,7 @@ void ice_shard_render(EffectInstance* effect);
 void ice_shard_appendGfx(void* effect);
 
 EffectInstance* ice_shard_main(
-    s32 arg0,
+    s32 type,
     f32 posX,
     f32 posY,
     f32 posZ,
@@ -38,7 +38,7 @@ EffectInstance* ice_shard_main(
     data = effect->data.iceShard = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.iceShard != NULL);
 
-    data->type = arg0;
+    data->type = type;
     data->lifetime = 0;
     if (duration <= 0) {
         data->timeLeft = 1000;
@@ -74,7 +74,7 @@ void ice_shard_init(EffectInstance* effect) {
 
 void ice_shard_update(EffectInstance* effect) {
     IceShardFXData* data = effect->data.iceShard;
-    s32 unk_00 = data->type;
+    s32 type = data->type;
 
     if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
         effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
@@ -111,7 +111,7 @@ void ice_shard_update(EffectInstance* effect) {
     data->pos.z += data->vel.z;
     data->rot += data->angularVel;
 
-    if (unk_00 >= 2 && data->pos.y < 0.0f && data->vel.y < 0.0f) {
+    if (type >= 2 && data->pos.y < 0.0f && data->vel.y < 0.0f) {
         data->pos.y = 0.0f;
         data->vel.y *= -0.7;
     }

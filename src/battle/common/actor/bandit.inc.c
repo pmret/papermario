@@ -92,7 +92,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 28 },
@@ -250,7 +250,7 @@ EvtScript N(EVS_DropCoin) = {
                 EVT_IF_FLAG(LVar1, BS_FLAGS1_PARTNER_ACTING)
                     EVT_BREAK_LOOP
                 EVT_END_IF
-                EVT_IF_NOT_FLAG(LVar1, BS_FLAGS1_100)
+                EVT_IF_NOT_FLAG(LVar1, BS_FLAGS1_EXECUTING_MOVE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
@@ -407,7 +407,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Run)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)

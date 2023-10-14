@@ -14,7 +14,7 @@ extern EvtScript N(EVS_UseMove_ImplC);
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_AUTO_SUCCEED_ACTION, TRUE)
     EVT_CALL(ShowActionHud, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, TRUE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -47,7 +47,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
@@ -98,7 +98,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
@@ -153,7 +153,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)

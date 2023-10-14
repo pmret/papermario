@@ -7,7 +7,7 @@ EvtScript N(EVS_SetupMusic) = {
         EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
     EVT_END_IF
     EVT_IF_GE(GB_StoryProgress, STORY_CH6_FILLED_SPRING_WITH_WATER)
-        EVT_CALL(PlaySound, SOUND_LOOP_22)
+        EVT_CALL(PlaySound, SOUND_LOOP_FLO_WATER_FLOW_2)
     EVT_END_IF
     EVT_RETURN
     EVT_END

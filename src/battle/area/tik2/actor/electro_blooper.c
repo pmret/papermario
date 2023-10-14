@@ -211,7 +211,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_TARGET,
         .posOffset = { 0, 20, 0 },
         .targetOffset = { 0, 60 },
@@ -464,7 +464,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_FloatToHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -472,7 +472,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(EVS_Death))
@@ -733,7 +733,7 @@ EvtScript N(EVS_Attack_ChargedDrop) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK, 8, 0, DMG_CHARGED_DROP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_CHARGED_DROP, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_IF_NE(LVarF, HIT_RESULT_HIT_STATIC)
         EVT_EXEC_WAIT(N(EVS_Discharge))
     EVT_END_IF
@@ -879,8 +879,8 @@ EvtScript N(EVS_Charge) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StaticEffect, LVarF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_TARGET, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_STATIC)
+    EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, TRUE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_STATIC)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(ChargedStatusTable)))
     EVT_RETURN
     EVT_END
@@ -899,7 +899,7 @@ EvtScript N(EVS_Discharge) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_StaticEffect, 0)
     EVT_END_IF
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_TARGET, 0)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)
+    EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, FALSE)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_RETURN
     EVT_END

@@ -60,7 +60,7 @@ API_CALLABLE(N(ShouldTargetBeCaptured)) {
         return ApiStatus_DONE2;
     }
 
-    if (targetActor->flags & ACTOR_FLAG_2000) {
+    if (targetActor->flags & ACTOR_FLAG_DAMAGE_IMMUNE) {
         return ApiStatus_DONE2;
     }
 
@@ -168,7 +168,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_END_SWITCH
         EVT_WAIT(5)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(70)

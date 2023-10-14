@@ -81,7 +81,7 @@ EvtScript N(EVS_Starship_Flight1) = {
     EVT_SET(MV_Starship_Yaw, 0)
     EVT_EXEC(N(EVS_AnimateStarship))
     EVT_WAIT(1)
-    EVT_CALL(PlaySound, SOUND_017C)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP)
     EVT_IF_LT(GB_StoryProgress, STORY_UNUSED_0000005D)
         EVT_CALL(MakeLerp, -300, 0, 120, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
@@ -93,7 +93,7 @@ EvtScript N(EVS_Starship_Flight1) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(100)
-        EVT_CALL(PlaySound, SOUND_017C | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(GotoMap, EVT_PTR("hos_00"), hos_00_ENTRY_3)
     EVT_ELSE
         EVT_THREAD
@@ -107,8 +107,8 @@ EvtScript N(EVS_Starship_Flight1) = {
                 EVT_END_IF
             EVT_END_LOOP
             EVT_WAIT(75)
-            EVT_CALL(PlaySound, SOUND_017C | SOUND_ID_TRIGGER_CHANGE_SOUND)
-            EVT_CALL(PlaySound, SOUND_20A1)
+            EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
+            EVT_CALL(PlaySound, SOUND_STARSHIP_BOOST)
             EVT_CALL(MakeLerp, 0, 300, 60, EASING_CUBIC_IN)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
@@ -128,7 +128,7 @@ EvtScript N(EVS_Starship_Flight1) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_017C | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_CALL(GotoMap, EVT_PTR("kpa_60"), kpa_60_ENTRY_4)
     EVT_END_IF
     EVT_WAIT(100)
@@ -149,13 +149,13 @@ EvtScript N(EVS_Starship_Flight2) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.5), EVT_FLOAT(-3.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(PlaySound, SOUND_017C)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP)
     EVT_SET(MV_Starship_PosX, 0)
     EVT_SET(MV_Starship_Yaw, 0)
     EVT_EXEC(N(EVS_AnimateStarship))
     EVT_WAIT(100)
-    EVT_CALL(PlaySound, SOUND_017C | SOUND_ID_TRIGGER_CHANGE_SOUND)
-    EVT_CALL(PlaySound, SOUND_20A1)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_BOOST)
     EVT_CALL(MakeLerp, 0, 300, 60, EASING_CUBIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -189,7 +189,7 @@ EvtScript N(EVS_Starship_Return) = {
     EVT_SET(MV_Starship_Yaw, 180)
     EVT_EXEC(N(EVS_AnimateStarship))
     EVT_WAIT(2)
-    EVT_CALL(PlaySound, SOUND_017C)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP)
     EVT_THREAD
         EVT_CALL(MakeLerp, 300, 0, 120, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
@@ -201,8 +201,8 @@ EvtScript N(EVS_Starship_Return) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(75)
-        EVT_CALL(PlaySound, SOUND_017C | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(PlaySound, SOUND_20A1)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_BOOST)
         EVT_CALL(MakeLerp, 0, -300, 60, EASING_CUBIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -222,7 +222,7 @@ EvtScript N(EVS_Starship_Return) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(PlaySound, SOUND_017C | SOUND_ID_TRIGGER_CHANGE_SOUND)
+    EVT_CALL(PlaySound, SOUND_STARSHIP_ENGINE_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(GotoMap, EVT_PTR("hos_05"), hos_05_ENTRY_1)
     EVT_WAIT(100)
     EVT_RETURN

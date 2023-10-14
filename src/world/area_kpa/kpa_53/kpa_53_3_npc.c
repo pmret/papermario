@@ -46,7 +46,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Flee) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 5)

@@ -116,7 +116,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_NO_TARGET,
+        .flags = ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -25, 15 },
@@ -128,7 +128,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_TARGET,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 80 },
@@ -495,7 +495,7 @@ EvtScript N(EVS_Attack_GroundStomp) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaKing_Still)
     EVT_THREAD
-        EVT_CALL(StartRumble, 11)
+        EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MAX)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
         EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SHRINK)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(4.0))
@@ -721,7 +721,7 @@ EvtScript N(EVS_ShakeScreenWhileWalking) = {
         EVT_IF_NE(LVar0, ANIM_GoombaKing_Run)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_CALL(StartRumble, 1)
+        EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
         EVT_CALL(GetPartAnimNotify, ACTOR_SELF, PRT_MAIN, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IncreaseShaking, LVar0)

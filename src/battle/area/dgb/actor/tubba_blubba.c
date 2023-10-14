@@ -77,7 +77,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -15, 75 },
@@ -150,7 +150,7 @@ EvtScript N(EVS_PlayFootstepQuaking) = {
         EVT_END_IF
         EVT_GOTO(0)
         EVT_LABEL(1)
-        EVT_CALL(StartRumble, 1)
+        EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
         EVT_WAIT(1)
         EVT_GOTO(0)
@@ -262,7 +262,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -429,7 +429,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0, 0)
         EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 1, LVar0, LVar1, LVar2, 0)
         EVT_THREAD
-            EVT_CALL(StartRumble, 1)
+            EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(15.0))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
@@ -525,7 +525,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
                 EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(StartRumble, 1)
+                EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
             EVT_END_THREAD
             EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
@@ -536,7 +536,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(StartRumble, 1)
+            EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)
@@ -603,7 +603,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
                 EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)
             EVT_END_THREAD
             EVT_THREAD
-                EVT_CALL(StartRumble, 1)
+                EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
             EVT_END_THREAD
             EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
@@ -614,7 +614,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(StartRumble, 1)
+            EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)
@@ -625,7 +625,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
                 EVT_WAIT(3)
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 1, LVar0, 0, LVar2, 0)
-                EVT_CALL(StartRumble, 1)
+                EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
             EVT_END_IF
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -639,7 +639,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
-                EVT_CALL(StartRumble, 1)
+                EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 60, 8, 10, 20, 0)

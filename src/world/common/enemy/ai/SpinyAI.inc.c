@@ -74,7 +74,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             script->AI_TEMP_STATE = 200;
         }
     }
-    get_screen_coords(0, npc->pos.x, npc->pos.y, npc->pos.z, &x, &y, &z);
+    get_screen_coords(CAM_DEFAULT, npc->pos.x, npc->pos.y, npc->pos.z, &x, &y, &z);
     if (script->AI_TEMP_STATE < 100 && x + 50 >= 421) {
         script->AI_TEMP_STATE = 110;
     }

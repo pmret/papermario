@@ -1,4 +1,4 @@
-#include "lava_piranha_anim1.inc.c"
-#include "lava_piranha_anim2.inc.c"
-#include "lava_piranha_anim3.inc.c"
-#include "lava_piranha_anim4.inc.c"
+#include "anim_shatter_ground.inc.c"
+#include "skel_main_vine.inc.c"
+#include "skel_side_vine.inc.c"
+#include "skel_extra_vine.inc.c"

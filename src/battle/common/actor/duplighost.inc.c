@@ -93,7 +93,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 25 },
@@ -211,7 +211,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -375,7 +375,7 @@ EvtScript A(EVS_Duplighost_OnHitElectric) = {
     EVT_CALL(CopyBuffs, ACTOR_SELF, LVarA)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(SetActorPos, LVarA, LVarB, LVarC, LVarD)
-    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
@@ -444,7 +444,7 @@ EvtScript A(EVS_Duplighost_OnShockHit) = {
     EVT_CALL(CopyBuffs, ACTOR_SELF, LVarA)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(SetActorPos, LVarA, LVarB, LVarC, LVarD)
-    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
@@ -658,7 +658,7 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorPos, LVarA, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_CALL(SetEnemyHP, LVarA, LVar0)
@@ -717,13 +717,15 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(AVAL_State_ReadyToCopy)
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 600)
-                EVT_CALL(GetBattleVar, BTL_VAR_0, LVar0)
-                EVT_IF_NOT_FLAG(LVar0, 0x4)
-                    EVT_CALL(GetBattleVar, BTL_VAR_0, LVar0)
-                    EVT_BITWISE_OR_CONST(LVar0, 0x4)
-                    EVT_CALL(SetBattleVar, BTL_VAR_0, LVar0)
+                EVT_CALL(GetBattleVar, BTL_VAR_DuplighostCopyFlags, LVar0)
+                EVT_IF_NOT_FLAG(LVar0, BTL_VAL_Duplighost_HasCopied)
+                    // first time partner is copied, set battle flag and proceed
+                    EVT_CALL(GetBattleVar, BTL_VAR_DuplighostCopyFlags, LVar0)
+                    EVT_BITWISE_OR_CONST(LVar0, BTL_VAL_Duplighost_HasCopied)
+                    EVT_CALL(SetBattleVar, BTL_VAR_DuplighostCopyFlags, LVar0)
                     EVT_EXEC_WAIT(N(EVS_CopyPartner))
                 EVT_ELSE
+                    // partner has been copied before, try to avoid copying the same one
                     EVT_CALL(GetBattleVar, BTL_VAR_LastCopiedPartner, LVar0)
                     EVT_CALL(N(GetPartnerAndLevel), LVar1, LVar2)
                     EVT_IF_EQ(LVar0, LVar1)

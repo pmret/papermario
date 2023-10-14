@@ -4,7 +4,7 @@
     shortDescMsg: 0
     flags: []
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Unused_01:
@@ -13,7 +13,7 @@
     shortDescMsg: 0
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Unused_02:
@@ -22,79 +22,79 @@
     shortDescMsg: 0
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Hammer1:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: 0
     shortDescMsg: MSG_ItemShortDesc_Hammer
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - Hammer2:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: MSG_ItemShortDesc_SuperHammer
     shortDescMsg: MSG_ItemShortDesc_SuperHammer
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - Hammer3:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: MSG_ItemShortDesc_UltraHammer
     shortDescMsg: MSG_ItemShortDesc_UltraHammer
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - FirstStrikeHammer:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - BerserkerHammer:
     nameMsg: MSG_MoveName_Berserker
     fullDescMsg: MSG_ItemFullDesc_Berserker
     shortDescMsg: MSG_ItemShortDesc_Berserker
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - SpinSmash:
     nameMsg: MSG_PlayerMoveName_SpinSmash
     fullDescMsg: MSG_ItemFullDesc_SpinSmash
     shortDescMsg: MSG_ItemShortDesc_SpinSmash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 2
     costBP: 1
 - QuakeHammer:
     nameMsg: MSG_PlayerMoveName_QuakeHammer
     fullDescMsg: MSG_ItemFullDesc_QuakeHammer
     shortDescMsg: MSG_ItemShortDesc_QuakeHammer
-    flags: [ TARGET_FLAG_20, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_NOT_FLYING, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 2
     costBP: 1
 - DDownPound:
     nameMsg: MSG_PlayerMoveName_DDownPound
     fullDescMsg: MSG_ItemFullDesc_DDownPound
     shortDescMsg: MSG_ItemShortDesc_DDownPound
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 2
     costBP: 2
 - SmashCharge0:
@@ -103,34 +103,34 @@
     shortDescMsg: MSG_ItemShortDesc_SmashCharge0
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 1
 - Unused_Hammer_0C:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: MSG_ItemFullDesc_SmashCharge0
     shortDescMsg: MSG_ItemShortDesc_SmashCharge0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_1000, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - HammerThrow:
     nameMsg: MSG_PlayerMoveName_HammerThrow
     fullDescMsg: MSG_ItemFullDesc_HammerThrow
     shortDescMsg: MSG_ItemShortDesc_HammerThrow
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 2
     costBP: 2
 - MegaQuake:
     nameMsg: MSG_PlayerMoveName_MegaQuake
     fullDescMsg: MSG_ItemFullDesc_MegaQuake
     shortDescMsg: MSG_ItemShortDesc_MegaQuake
-    flags: [ TARGET_FLAG_20, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_NOT_FLYING, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 7
     costBP: 3
 - SmashCharge:
@@ -139,16 +139,16 @@
     shortDescMsg: MSG_ItemShortDesc_SmashCharge
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 1
 - Unused_Hammer_10:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: MSG_ItemFullDesc_SmashCharge
     shortDescMsg: MSG_ItemShortDesc_SmashCharge
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - SuperSmashCharge:
@@ -157,295 +157,295 @@
     shortDescMsg: MSG_ItemShortDesc_SSmashChg
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 4
     costBP: 2
 - Unused_Hammer_12:
     nameMsg: MSG_Menus_Hammer
     fullDescMsg: MSG_ItemFullDesc_SSmashChg
     shortDescMsg: MSG_ItemShortDesc_SSmashChg
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_1000, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - AutoSmash:
     nameMsg: MSG_MoveName_AutoSmash
     fullDescMsg: MSG_ItemFullDesc_AutoSmash
     shortDescMsg: MSG_ItemShortDesc_AutoSmash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 1
 - PowerQuake:
     nameMsg: MSG_PlayerMoveName_PowerQuake
     fullDescMsg: MSG_ItemFullDesc_PowerQuake
     shortDescMsg: MSG_ItemShortDesc_PowerQuake
-    flags: [ TARGET_FLAG_20, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_NOT_FLYING, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 4
     costBP: 2
 - PowerSmash:
     nameMsg: MSG_PlayerMoveName_PowerSmash
     fullDescMsg: MSG_ItemFullDesc_PowerSmash
     shortDescMsg: MSG_ItemShortDesc_PowerSmash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 2
     costBP: 1
 - SuperSmash:
     nameMsg: MSG_MoveName_SuperSmash
     fullDescMsg: MSG_ItemFullDesc_SuperSmash
     shortDescMsg: MSG_ItemShortDesc_SuperSmash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 4
     costBP: 2
 - MegaSmash:
     nameMsg: MSG_PlayerMoveName_MegaSmash
     fullDescMsg: MSG_ItemFullDesc_MegaSmash
     shortDescMsg: MSG_ItemShortDesc_MegaSmash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 6
     costBP: 3
 - ShrinkSmash:
     nameMsg: MSG_PlayerMoveName_ShrinkSmash
     fullDescMsg: MSG_ItemFullDesc_ShrinkSmash
     shortDescMsg: MSG_ItemShortDesc_ShrinkSmash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 2
     costBP: 1
 - ShellCrack:
     nameMsg: MSG_ItemName_ShellCrack
     fullDescMsg: MSG_ItemFullDesc_ShellCrack
     shortDescMsg: MSG_ItemShortDesc_ShellCrack
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_1000, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_SMASH_LIKE, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_HAMMER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 6
     costBP: 3
 - Jump1:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemShortDesc_Boots
     shortDescMsg: MSG_ItemShortDesc_Boots
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Jump2:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemShortDesc_SuperBoots
     shortDescMsg: MSG_ItemShortDesc_SuperBoots
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Jump3:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemShortDesc_UltraBoots
     shortDescMsg: MSG_ItemShortDesc_UltraBoots
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - FirstStrikeJump:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - BerserkerJump:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemFullDesc_Berserker
     shortDescMsg: MSG_ItemShortDesc_Berserker
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Multibounce:
     nameMsg: MSG_PlayerMoveName_Multibounce
     fullDescMsg: MSG_ItemFullDesc_Multibounce
     shortDescMsg: MSG_ItemShortDesc_Multibounce
-    flags: [ TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_8000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_PRIMARY_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 2
     costBP: 1
 - PowerBounce:
     nameMsg: MSG_PlayerMoveName_PowerBounce
     fullDescMsg: MSG_ItemFullDesc_PowerBounce
     shortDescMsg: MSG_ItemShortDesc_PowerBounce
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 3
     costBP: 2
 - SleepStomp:
     nameMsg: MSG_PlayerMoveName_SleepStomp
     fullDescMsg: MSG_ItemFullDesc_SleepStomp
     shortDescMsg: MSG_ItemShortDesc_SleepStomp
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 2
     costBP: 1
 - DizzyStomp:
     nameMsg: MSG_PlayerMoveName_DizzyStomp
     fullDescMsg: MSG_ItemFullDesc_DizzyStomp
     shortDescMsg: MSG_ItemShortDesc_DizzyStomp
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 2
     costBP: 1
 - JumpCharge0:
     nameMsg: MSG_MoveName_JumpCharge0
     fullDescMsg: MSG_ItemFullDesc_JumpCharge0
     shortDescMsg: MSG_ItemShortDesc_JumpCharge0
-    flags: [ TARGET_FLAG_PLAYER, TARGET_FLAG_800 ]
+    flags: [ TARGET_FLAG_PLAYER, TARGET_FLAG_JUMP_LIKE ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 1
 - Unused_24:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemFullDesc_JumpCharge0
     shortDescMsg: MSG_ItemShortDesc_JumpCharge0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 1
     costBP: 1
 - JumpCharge:
     nameMsg: MSG_PlayerMoveName_JumpCharge
     fullDescMsg: MSG_ItemFullDesc_JumpCharge
     shortDescMsg: MSG_ItemShortDesc_JumpCharge
-    flags: [ TARGET_FLAG_PLAYER, TARGET_FLAG_800 ]
+    flags: [ TARGET_FLAG_PLAYER, TARGET_FLAG_JUMP_LIKE ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 1
 - Unused_26:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemFullDesc_JumpCharge
     shortDescMsg: MSG_ItemShortDesc_JumpCharge
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - SuperJumpCharge:
     nameMsg: MSG_PlayerMoveName_SuperJumpCharge
     fullDescMsg: MSG_ItemFullDesc_SJumpChg
     shortDescMsg: MSG_ItemShortDesc_SJumpChg
-    flags: [ TARGET_FLAG_PLAYER, TARGET_FLAG_800 ]
+    flags: [ TARGET_FLAG_PLAYER, TARGET_FLAG_JUMP_LIKE ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 4
     costBP: 2
 - Unused_28:
     nameMsg: MSG_Menus_Jump
     fullDescMsg: MSG_ItemFullDesc_SJumpChg
     shortDescMsg: MSG_ItemShortDesc_SJumpChg
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - AutoJump:
     nameMsg: MSG_MoveName_AutoJump
     fullDescMsg: MSG_ItemFullDesc_AutoJump
     shortDescMsg: MSG_ItemShortDesc_AutoJump
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 1
 - AutoMultibounce:
     nameMsg: MSG_MoveName_AutoMultibounce
     fullDescMsg: MSG_ItemFullDesc_AutoMultibounce
     shortDescMsg: MSG_ItemShortDesc_AutoMultibounce
-    flags: [ TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_8000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_PRIMARY_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 5
     costBP: 2
 - PowerJump:
     nameMsg: MSG_PlayerMoveName_PowerJump
     fullDescMsg: MSG_ItemFullDesc_PowerJump
     shortDescMsg: MSG_ItemShortDesc_PowerJump
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 2
     costBP: 1
 - SuperJump:
     nameMsg: MSG_MoveName_SuperJump
     fullDescMsg: MSG_ItemFullDesc_SuperJump
     shortDescMsg: MSG_ItemShortDesc_SuperJump
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 4
     costBP: 2
 - MegaJump:
     nameMsg: MSG_PlayerMoveName_MegaJump
     fullDescMsg: MSG_ItemFullDesc_MegaJump
     shortDescMsg: MSG_ItemShortDesc_MegaJump
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 6
     costBP: 3
 - DDownJump:
     nameMsg: MSG_PlayerMoveName_DDownJump
     fullDescMsg: MSG_ItemFullDesc_DDownJump
     shortDescMsg: MSG_ItemShortDesc_DDownJump
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 2
     costBP: 2
 - ShrinkStomp:
     nameMsg: MSG_PlayerMoveName_ShrinkStomp
     fullDescMsg: MSG_ItemFullDesc_ShrinkStomp
     shortDescMsg: MSG_ItemShortDesc_ShrinkStomp
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 2
     costBP: 1
 - EarthquakeJump:
     nameMsg: MSG_MoveName_EarthquakeJump
     fullDescMsg: MSG_ItemFullDesc_EarthquakeJump
     shortDescMsg: MSG_ItemShortDesc_EarthquakeJump
-    flags: [ TARGET_FLAG_20, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_NOT_FLYING, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_JUMP
-    actionTip: MOVE_ACTION_TIP_20
+    actionTip: BTL_MSG_ACTION_TIP_NOT_USED_3
     costFP: 2
     costBP: 2
 - Unused_DefendPlus:
     nameMsg: MSG_MoveName_DefendPlus
     fullDescMsg: MSG_ItemFullDesc_DefendPlus
     shortDescMsg: MSG_ItemShortDesc_DefendPlus
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_3
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 6
 - Unused_32:
@@ -454,7 +454,7 @@
     shortDescMsg: MSG_ShortDesc_32
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_3
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 8
 - DamageDodge:
@@ -463,16 +463,16 @@
     shortDescMsg: MSG_ItemShortDesc_DamageDodge
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_3
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - Items:
     nameMsg: MSG_Menus_Items
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_Action_UseItem
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_ITEMS
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - DoubleDip:
@@ -481,7 +481,7 @@
     shortDescMsg: MSG_ItemShortDesc_DoubleDip
     flags: []
     category: MOVE_TYPE_ITEMS
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 3
     costBP: 1
 - TripleDip:
@@ -490,7 +490,7 @@
     shortDescMsg: MSG_ItemShortDesc_TripleDip
     flags: []
     category: MOVE_TYPE_ITEMS
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 6
     costBP: 3
 - Unused_37:
@@ -499,7 +499,7 @@
     shortDescMsg: 0
     flags: []
     category: MOVE_TYPE_SWITCH
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - QuickChange:
@@ -508,16 +508,16 @@
     shortDescMsg: MSG_ItemShortDesc_QuickChange
     flags: []
     category: MOVE_TYPE_SWITCH
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 4
 - Unused_39:
     nameMsg: (s32) "つうじょう"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_6
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Unused_3A:
@@ -526,7 +526,7 @@
     shortDescMsg: 0
     flags: []
     category: MOVE_TYPE_ATTACK_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - PowerPlus:
@@ -535,7 +535,7 @@
     shortDescMsg: MSG_ItemShortDesc_PowerPlus
     flags: []
     category: MOVE_TYPE_ATTACK_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 6
 - AllorNothing:
@@ -544,7 +544,7 @@
     shortDescMsg: MSG_ItemShortDesc_AllorNothing
     flags: []
     category: MOVE_TYPE_ATTACK_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 4
 - IcePower:
@@ -553,7 +553,7 @@
     shortDescMsg: MSG_ItemShortDesc_IcePower
     flags: []
     category: MOVE_TYPE_ATTACK_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - PUpDDown:
@@ -562,16 +562,16 @@
     shortDescMsg: MSG_ItemShortDesc_PUpDDown
     flags: []
     category: MOVE_TYPE_ATTACK_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - Unused_3F:
     nameMsg: (s32) "つうじょう"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - SpikeShield:
@@ -580,7 +580,7 @@
     shortDescMsg: MSG_ItemShortDesc_SpikeShield
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - FireShield:
@@ -589,7 +589,7 @@
     shortDescMsg: MSG_ItemShortDesc_FireShield
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - PrettyLucky:
@@ -598,7 +598,7 @@
     shortDescMsg: MSG_ItemShortDesc_PrettyLucky
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - FeelingFine:
@@ -607,7 +607,7 @@
     shortDescMsg: MSG_ItemShortDesc_FeelingFine
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - ZapTap:
@@ -616,7 +616,7 @@
     shortDescMsg: MSG_ItemShortDesc_ZapTap
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 4
 - DefendPlus:
@@ -625,7 +625,7 @@
     shortDescMsg: MSG_ItemShortDesc_DefendPlus
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 6
 - LastStand:
@@ -634,7 +634,7 @@
     shortDescMsg: MSG_ItemShortDesc_LastStand
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - CloseCall:
@@ -643,7 +643,7 @@
     shortDescMsg: MSG_ItemShortDesc_CloseCall
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - LuckyDay:
@@ -652,7 +652,7 @@
     shortDescMsg: MSG_ItemShortDesc_LuckyDay
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 7
 - PDownDUp:
@@ -661,7 +661,7 @@
     shortDescMsg: MSG_ItemShortDesc_PDownDUp
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - HealthyHealthy:
@@ -670,7 +670,7 @@
     shortDescMsg: MSG_ItemShortDesc_HealthyHealthy
     flags: []
     category: MOVE_TYPE_DEFENSE_UP
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - Unused_4B:
@@ -679,7 +679,7 @@
     shortDescMsg: 0
     flags: []
     category: MOVE_TYPE_9
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - DodgeMaster:
@@ -688,7 +688,7 @@
     shortDescMsg: MSG_ItemShortDesc_DodgeMaster
     flags: []
     category: MOVE_TYPE_9
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - FirstAttack:
@@ -697,7 +697,7 @@
     shortDescMsg: MSG_ItemShortDesc_FirstAttack
     flags: []
     category: MOVE_TYPE_9
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - SlowGo:
@@ -706,7 +706,7 @@
     shortDescMsg: MSG_ItemShortDesc_SlowGo
     flags: []
     category: MOVE_TYPE_9
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - RightOn:
@@ -715,7 +715,7 @@
     shortDescMsg: MSG_ItemShortDesc_RightOn
     flags: []
     category: MOVE_TYPE_9
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 8
 - BumpAttack:
@@ -724,25 +724,25 @@
     shortDescMsg: MSG_ItemShortDesc_BumpAttack
     flags: []
     category: MOVE_TYPE_9
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 5
 - Unused_51:
     nameMsg: (s32) "つうじょう"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - HPPlus:
     nameMsg: MSG_ItemName_HPPlus
     fullDescMsg: MSG_ItemFullDesc_HPPlus
     shortDescMsg: MSG_ItemShortDesc_HPPlus
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - MysteryScroll:
@@ -751,7 +751,7 @@
     shortDescMsg: MSG_ItemShortDesc_MysteryScroll
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - AttackFX_A:
@@ -760,7 +760,7 @@
     shortDescMsg: MSG_ItemShortDesc_AttackFXA
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - AttackFX_D:
@@ -769,7 +769,7 @@
     shortDescMsg: MSG_ItemShortDesc_AttackFXD
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - AttackFX_B:
@@ -778,7 +778,7 @@
     shortDescMsg: MSG_ItemShortDesc_AttackFXB
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - AttackFX_E:
@@ -787,7 +787,7 @@
     shortDescMsg: MSG_ItemShortDesc_AttackFXE
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - AttackFX_C:
@@ -796,7 +796,7 @@
     shortDescMsg: MSG_ItemShortDesc_AttackFXC
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - AttackFX_F:
@@ -805,7 +805,7 @@
     shortDescMsg: MSG_ItemShortDesc_AttackFXF
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - HPDrain:
@@ -814,7 +814,7 @@
     shortDescMsg: MSG_ItemShortDesc_HPDrain
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - FPPlus:
@@ -823,7 +823,7 @@
     shortDescMsg: MSG_ItemShortDesc_FPPlus
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - MoneyMoney:
@@ -832,7 +832,7 @@
     shortDescMsg: MSG_ItemShortDesc_MoneyMoney
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 7
 - ChillOutBadge:
@@ -841,7 +841,7 @@
     shortDescMsg: MSG_ItemShortDesc_ChillOut
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - HappyHeart:
@@ -850,7 +850,7 @@
     shortDescMsg: MSG_ItemShortDesc_HappyHeart
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - MegaRush:
@@ -859,7 +859,7 @@
     shortDescMsg: MSG_ItemShortDesc_MegaRush
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - Berserker:
@@ -868,7 +868,7 @@
     shortDescMsg: MSG_ItemShortDesc_Berserker
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 8
 - RunawayPay:
@@ -877,7 +877,7 @@
     shortDescMsg: MSG_ItemShortDesc_RunawayPay
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - FlowerSaver:
@@ -886,7 +886,7 @@
     shortDescMsg: MSG_ItemShortDesc_FlowerSaver
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 6
 - PayOff:
@@ -895,7 +895,7 @@
     shortDescMsg: MSG_ItemShortDesc_PayOff
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - PowerRush:
@@ -904,7 +904,7 @@
     shortDescMsg: MSG_ItemShortDesc_PowerRush
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - CrazyHeart:
@@ -913,7 +913,7 @@
     shortDescMsg: MSG_ItemShortDesc_CrazyHeart
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 10
 - MegaHPDrain:
@@ -922,7 +922,7 @@
     shortDescMsg: MSG_ItemShortDesc_MegaHPDrain
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 10
 - FlowerFanatic:
@@ -931,7 +931,7 @@
     shortDescMsg: MSG_ItemShortDesc_FlowerFanatic
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 10
 - HeartFinder:
@@ -940,7 +940,7 @@
     shortDescMsg: MSG_ItemShortDesc_HeartFinder
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - FlowerFinder:
@@ -949,7 +949,7 @@
     shortDescMsg: MSG_ItemShortDesc_FlowerFinder
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - SpinAttack:
@@ -958,7 +958,7 @@
     shortDescMsg: MSG_ItemShortDesc_SpinAttack
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - DizzyAttack:
@@ -967,7 +967,7 @@
     shortDescMsg: MSG_ItemShortDesc_DizzyAttack
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - ISpy:
@@ -976,7 +976,7 @@
     shortDescMsg: MSG_ItemShortDesc_ISpy
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - SpeedySpin:
@@ -985,7 +985,7 @@
     shortDescMsg: MSG_ItemShortDesc_SpeedySpin
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - Refund:
@@ -994,7 +994,7 @@
     shortDescMsg: MSG_ItemShortDesc_Refund
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - Unused_FinalGoompa:
@@ -1003,7 +1003,7 @@
     shortDescMsg: 0
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - Unused_FinalBobomb:
@@ -1012,7 +1012,7 @@
     shortDescMsg: 0
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - DeepFocus:
@@ -1021,7 +1021,7 @@
     shortDescMsg: MSG_ItemShortDesc_DeepFocus
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 1
 - SuperFocus:
@@ -1030,16 +1030,16 @@
     shortDescMsg: MSG_ItemShortDesc_SuperFocus
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 5
 - Kaiden:
     nameMsg: MSG_ItemName_Kaiden
     fullDescMsg: MSG_ItemFullDesc_Kaiden
     shortDescMsg: MSG_ItemShortDesc_Kaiden
-    flags: [ TARGET_FLAG_80000000 ]
+    flags: [ TARGET_FLAG_OVERRIDE ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - HappyFlower:
@@ -1048,7 +1048,7 @@
     shortDescMsg: MSG_ItemShortDesc_HappyFlower
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - GroupFocus:
@@ -1057,7 +1057,7 @@
     shortDescMsg: MSG_ItemShortDesc_GroupFocus
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 2
 - Peekaboo:
@@ -1066,16 +1066,16 @@
     shortDescMsg: MSG_ItemShortDesc_Peekaboo
     flags: [ TARGET_FLAG_2 ]
     category: MOVE_TYPE_NONE
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 3
 - Focus:
     nameMsg: MSG_Menus_StarPower_Focus
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
-    flags: [ TARGET_FLAG_80000000 ]
+    flags: [ TARGET_FLAG_OVERRIDE ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Refresh:
@@ -1084,34 +1084,34 @@
     shortDescMsg: MSG_Menus_StarPowerDesc_Refresh
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 1
 - Lullaby:
     nameMsg: MSG_Menus_StarPower_Lullaby
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_Lullaby
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 1
 - StarStorm:
     nameMsg: MSG_Menus_StarPower_StarStorm
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_StarStorm
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 2
 - ChillOutMove:
     nameMsg: MSG_Menus_StarPower_ChillOut
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_ChillOut
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 2
 - Smooch:
@@ -1120,367 +1120,367 @@
     shortDescMsg: MSG_Menus_StarPowerDesc_Smooch
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 3
     costBP: 3
 - TimeOut:
     nameMsg: MSG_Menus_StarPower_TimeOut
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_TimeOut
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 2
 - UpAndAway:
     nameMsg: MSG_Menus_StarPower_UpAndAway
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_UpAndAway
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 2
 - StarBeam:
     nameMsg: MSG_Menus_StarPower_StarBeam
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_StarBeam
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - PeachBeam:
     nameMsg: MSG_Menus_StarPower_PeachBeam
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_PeachBeam
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - PeachFocus:
     nameMsg: MSG_Menus_StarPower_Peach_Focus
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
-    flags: [ TARGET_FLAG_100 ]
+    flags: [ TARGET_FLAG_PARTNER ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - TwinkDash:
     nameMsg: MSG_Menus_StarPower_Twink_Dash
     fullDescMsg: 0
     shortDescMsg: MSG_Menus_StarPowerDesc_Focus
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_STAR_POWER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Headbonk1:
     nameMsg: MSG_PartnerMoveName_Headbonk1
     fullDescMsg: MSG_PartnerDesc_Goombario_Pause_Headbonk1
     shortDescMsg: MSG_PartnerDesc_Goombario_Battle_Headbonk
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_2
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE
     costFP: 0
     costBP: 0
 - Headbonk2:
     nameMsg: MSG_PartnerMoveName_Headbonk2
     fullDescMsg: MSG_PartnerDesc_Goombario_Pause_Headbonk2
     shortDescMsg: MSG_PartnerDesc_Goombario_Battle_Headbonk
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_2
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE
     costFP: 0
     costBP: 0
 - Headbonk3:
     nameMsg: MSG_PartnerMoveName_Headbonk3
     fullDescMsg: MSG_PartnerDesc_Goombario_Pause_Headbonk3
     shortDescMsg: MSG_PartnerDesc_Goombario_Battle_Headbonk
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_2
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE
     costFP: 0
     costBP: 0
 - Tattle:
     nameMsg: MSG_PartnerMoveName_Tattle
     fullDescMsg: MSG_PartnerDesc_Goombario_Pause_Tattle
     shortDescMsg: MSG_PartnerDesc_Goombario_Battle_Tattle
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_8000, TARGET_FLAG_10000, TARGET_FLAG_20000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_TATTLE ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 0
     costBP: 0
 - Charge:
     nameMsg: MSG_PartnerMoveName_Charge
     fullDescMsg: MSG_PartnerDesc_Goombario_Pause_Charge
     shortDescMsg: MSG_PartnerDesc_Goombario_Battle_Charge
-    flags: [ TARGET_FLAG_100 ]
+    flags: [ TARGET_FLAG_PARTNER ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 1
     costBP: 0
 - Multibonk:
     nameMsg: MSG_PartnerMoveName_Multibonk
     fullDescMsg: MSG_PartnerDesc_Goombario_Pause_Multibonk
     shortDescMsg: MSG_PartnerDesc_Goombario_Battle_Multibonk
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_2
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_STRIKE
     costFP: 3
     costBP: 0
 - ShellToss1:
     nameMsg: MSG_PartnerMoveName_ShellToss1
     fullDescMsg: MSG_PartnerDesc_Kooper_Pause_ShellToss1
     shortDescMsg: MSG_PartnerDesc_Kooper_Battle_ShellToss
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - ShellToss2:
     nameMsg: MSG_PartnerMoveName_ShellToss2
     fullDescMsg: MSG_PartnerDesc_Kooper_Pause_ShellToss2
     shortDescMsg: MSG_PartnerDesc_Kooper_Battle_ShellToss
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - ShellToss3:
     nameMsg: MSG_PartnerMoveName_ShellToss3
     fullDescMsg: MSG_PartnerDesc_Kooper_Pause_ShellToss3
     shortDescMsg: MSG_PartnerDesc_Kooper_Battle_ShellToss
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - PowerShell:
     nameMsg: MSG_PartnerMoveName_PowerShell
     fullDescMsg: MSG_PartnerDesc_Kooper_Pause_PowerShell
     shortDescMsg: MSG_PartnerDesc_Kooper_Battle_PowerShell
-    flags: [ TARGET_FLAG_4, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_GROUND, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 3
     costBP: 0
 - DizzyShell:
     nameMsg: MSG_PartnerMoveName_DizzyShell
     fullDescMsg: MSG_PartnerDesc_Kooper_Pause_DizzyShell
     shortDescMsg: MSG_PartnerDesc_Kooper_Battle_DizzyShell
-    flags: [ TARGET_FLAG_4, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_GROUND, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_3
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BUTTON
     costFP: 4
     costBP: 0
 - FireShell:
     nameMsg: MSG_PartnerMoveName_FireShell
     fullDescMsg: MSG_PartnerDesc_Kooper_Pause_FireShell
     shortDescMsg: MSG_PartnerDesc_Kooper_Battle_FireShell
-    flags: [ TARGET_FLAG_4, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_GROUND, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 5
     costBP: 0
 - BodySlam1:
     nameMsg: MSG_PartnerMoveName_BodySlam1
     fullDescMsg: MSG_PartnerDesc_Bombette_Pause_BodySlam1
     shortDescMsg: MSG_PartnerDesc_Bombette_Battle_BodySlam
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_15
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE
     costFP: 0
     costBP: 0
 - BodySlam2:
     nameMsg: MSG_PartnerMoveName_BodySlam2
     fullDescMsg: MSG_PartnerDesc_Bombette_Pause_BodySlam2
     shortDescMsg: MSG_PartnerDesc_Bombette_Battle_BodySlam
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_15
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE
     costFP: 0
     costBP: 0
 - BodySlam3:
     nameMsg: MSG_PartnerMoveName_BodySlam3
     fullDescMsg: MSG_PartnerDesc_Bombette_Pause_BodySlam3
     shortDescMsg: MSG_PartnerDesc_Bombette_Battle_BodySlam
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_15
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE
     costFP: 0
     costBP: 0
 - Bomb:
     nameMsg: MSG_PartnerMoveName_Bomb
     fullDescMsg: MSG_PartnerDesc_Bombette_Pause_Bomb
     shortDescMsg: MSG_PartnerDesc_Bombette_Battle_Bomb
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_4, TARGET_FLAG_2000, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_GROUND, TARGET_FLAG_NOT_BEHIND, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_3
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BUTTON
     costFP: 3
     costBP: 0
 - PowerBomb:
     nameMsg: MSG_PartnerMoveName_PowerBomb
     fullDescMsg: MSG_PartnerDesc_Bombette_Pause_PowerBomb
     shortDescMsg: MSG_PartnerDesc_Bombette_Battle_PowerBomb
-    flags: [ TARGET_FLAG_4, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_GROUND, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_3
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BUTTON
     costFP: 6
     costBP: 0
 - MegaBomb:
     nameMsg: MSG_PartnerMoveName_MegaBomb
     fullDescMsg: MSG_PartnerDesc_Bombette_Pause_MegaBomb
     shortDescMsg: MSG_PartnerDesc_Bombette_Battle_MegaBomb
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_3
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BUTTON
     costFP: 8
     costBP: 0
 - SkyDive1:
     nameMsg: MSG_PartnerMoveName_SkyDive1
     fullDescMsg: MSG_PartnerDesc_Parakarry_Pause_SkyDive1
     shortDescMsg: MSG_PartnerDesc_Parakarry_Battle_SkyDive
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - SkyDive2:
     nameMsg: MSG_PartnerMoveName_SkyDive2
     fullDescMsg: MSG_PartnerDesc_Parakarry_Pause_SkyDive2
     shortDescMsg: MSG_PartnerDesc_Parakarry_Battle_SkyDive
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - SkyDive3:
     nameMsg: MSG_PartnerMoveName_SkyDive3
     fullDescMsg: MSG_PartnerDesc_Parakarry_Pause_SkyDive3
     shortDescMsg: MSG_PartnerDesc_Parakarry_Battle_SkyDive
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - ShellShot:
     nameMsg: MSG_PartnerMoveName_ShellShot
     fullDescMsg: MSG_PartnerDesc_Parakarry_Pause_ShellShot
     shortDescMsg: MSG_PartnerDesc_Parakarry_Battle_ShellShot
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_10000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_ALLOW_TARGET_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_5
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_AIM
     costFP: 3
     costBP: 0
 - AirLift:
     nameMsg: MSG_PartnerMoveName_AirLift
     fullDescMsg: MSG_PartnerDesc_Parakarry_Pause_AirLift
     shortDescMsg: MSG_PartnerDesc_Parakarry_Battle_AirLift
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2, TARGET_FLAG_400, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2, TARGET_FLAG_AIRLIFT, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_3
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BUTTON
     costFP: 3
     costBP: 0
 - AirRaid:
     nameMsg: MSG_PartnerMoveName_AirRaid
     fullDescMsg: MSG_PartnerDesc_Parakarry_Pause_AirRaid
     shortDescMsg: MSG_PartnerDesc_Parakarry_Battle_AirRaid
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 6
     costBP: 0
 - Unused_LoneFool1:
     nameMsg: (s32) "ひとりぼけ"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Unused_LoneFool2:
     nameMsg: (s32) "ひとりぼけ"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Unused_LoneFool3:
     nameMsg: (s32) "ひとりぼけ"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Unused_Mumble:
     nameMsg: (s32) "むにゃむにゃ"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_4 ]
+    flags: [ TARGET_FLAG_GROUND ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Unused_Preach:
     nameMsg: (s32) "せっきょう"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - Unused_Awakening:
     nameMsg: (s32) "かくせい"
     fullDescMsg: 0
     shortDescMsg: 0
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_0
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BEFORE_LANDING
     costFP: 0
     costBP: 0
 - ElectroDash1:
     nameMsg: MSG_PartnerMoveName_ElectroDash1
     fullDescMsg: MSG_PartnerDesc_Watt_Pause_ElectroDash1
     shortDescMsg: MSG_PartnerDesc_Watt_Battle_ElectroDash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_15
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE
     costFP: 0
     costBP: 0
 - ElectroDash2:
     nameMsg: MSG_PartnerMoveName_ElectroDash2
     fullDescMsg: MSG_PartnerDesc_Watt_Pause_ElectroDash2
     shortDescMsg: MSG_PartnerDesc_Watt_Battle_ElectroDash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_15
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE
     costFP: 0
     costBP: 0
 - ElectroDash3:
     nameMsg: MSG_PartnerMoveName_ElectroDash3
     fullDescMsg: MSG_PartnerDesc_Watt_Pause_ElectroDash3
     shortDescMsg: MSG_PartnerDesc_Watt_Battle_ElectroDash
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_15
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_RELEASE
     costFP: 0
     costBP: 0
 - PowerShock:
     nameMsg: MSG_PartnerMoveName_PowerShock
     fullDescMsg: MSG_PartnerDesc_Watt_Pause_PowerShock
     shortDescMsg: MSG_PartnerDesc_Watt_Battle_PowerShock
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_3
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BUTTON
     costFP: 2
     costBP: 0
 - TurboCharge:
@@ -1489,52 +1489,52 @@
     shortDescMsg: MSG_PartnerDesc_Watt_Battle_TurboCharge
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_10
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING
     costFP: 3
     costBP: 0
 - MegaShock:
     nameMsg: MSG_PartnerMoveName_MegaShock
     fullDescMsg: MSG_PartnerDesc_Watt_Pause_MegaShock
     shortDescMsg: MSG_PartnerDesc_Watt_Battle_MegaShock
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_12
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BOTH
     costFP: 5
     costBP: 0
 - BellyFlop1:
     nameMsg: MSG_PartnerMoveName_BellyFlop1
     fullDescMsg: MSG_PartnerDesc_Sushie_Pause_BellyFlop1
     shortDescMsg: MSG_PartnerDesc_Sushie_Battle_BellyFlop
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - BellyFlop2:
     nameMsg: MSG_PartnerMoveName_BellyFlop2
     fullDescMsg: MSG_PartnerDesc_Sushie_Pause_BellyFlop2
     shortDescMsg: MSG_PartnerDesc_Sushie_Battle_BellyFlop
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - BellyFlop3:
     nameMsg: MSG_PartnerMoveName_BellyFlop3
     fullDescMsg: MSG_PartnerDesc_Sushie_Pause_BellyFlop3
     shortDescMsg: MSG_PartnerDesc_Sushie_Battle_BellyFlop
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_80, TARGET_FLAG_800, TARGET_FLAG_4000, TARGET_FLAG_10000, TARGET_FLAG_40000 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_80, TARGET_FLAG_JUMP_LIKE, TARGET_FLAG_NOT_BELOW, TARGET_FLAG_ALLOW_TARGET_ONLY, TARGET_FLAG_NO_CEILING ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_1
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_LEFT_TIMED
     costFP: 0
     costBP: 0
 - Squirt:
     nameMsg: MSG_PartnerMoveName_Squirt
     fullDescMsg: MSG_PartnerDesc_Sushie_Pause_Squirt
     shortDescMsg: MSG_PartnerDesc_Sushie_Battle_Squirt
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_14
+    actionTip: BTL_MSG_ACTION_TIP_HOLD_THEN_TAP
     costFP: 3
     costBP: 0
 - WaterBlock:
@@ -1543,52 +1543,52 @@
     shortDescMsg: MSG_PartnerDesc_Sushie_Battle_WaterBlock
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_10
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING
     costFP: 3
     costBP: 0
 - TidalWave:
     nameMsg: MSG_PartnerMoveName_TidalWave
     fullDescMsg: MSG_PartnerDesc_Sushie_Pause_TidalWave
     shortDescMsg: MSG_PartnerDesc_Sushie_Battle_TidalWave
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_8
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_BUTTONS_SHOWN
     costFP: 6
     costBP: 0
 - SpinyFlip1:
     nameMsg: MSG_PartnerMoveName_SpinyFlip1
     fullDescMsg: MSG_PartnerDesc_Lakilester_Pause_SpinyFlip1
     shortDescMsg: MSG_PartnerDesc_Lakilester_Battle_SpinyFlip
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_16
+    actionTip: BTL_MSG_ACTION_TIP_MOVE_TO_AIM
     costFP: 0
     costBP: 0
 - SpinyFlip2:
     nameMsg: MSG_PartnerMoveName_SpinyFlip2
     fullDescMsg: MSG_PartnerDesc_Lakilester_Pause_SpinyFlip2
     shortDescMsg: MSG_PartnerDesc_Lakilester_Battle_SpinyFlip
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_16
+    actionTip: BTL_MSG_ACTION_TIP_MOVE_TO_AIM
     costFP: 0
     costBP: 0
 - SpinyFlip3:
     nameMsg: MSG_PartnerMoveName_SpinyFlip3
     fullDescMsg: MSG_PartnerDesc_Lakilester_Pause_SpinyFlip3
     shortDescMsg: MSG_PartnerDesc_Lakilester_Battle_SpinyFlip
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_16
+    actionTip: BTL_MSG_ACTION_TIP_MOVE_TO_AIM
     costFP: 0
     costBP: 0
 - SpinySurge:
     nameMsg: MSG_PartnerMoveName_SpinySurge
     fullDescMsg: MSG_PartnerDesc_Lakilester_Pause_SpinySurge
     shortDescMsg: MSG_PartnerDesc_Lakilester_Battle_SpinySurge
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 4
     costBP: 0
 - CloudNine:
@@ -1597,43 +1597,43 @@
     shortDescMsg: MSG_PartnerDesc_Lakilester_Battle_CloudNine
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_10
+    actionTip: BTL_MSG_ACTION_TIP_PRESS_WITH_TIMING
     costFP: 4
     costBP: 0
 - Hurricane:
     nameMsg: MSG_PartnerMoveName_Hurricane
     fullDescMsg: MSG_PartnerDesc_Lakilester_Pause_Hurricane
     shortDescMsg: MSG_PartnerDesc_Lakilester_Battle_Hurricane
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_12
+    actionTip: BTL_MSG_ACTION_TIP_MASH_BOTH
     costFP: 5
     costBP: 0
 - Smack1:
     nameMsg: MSG_PartnerMoveName_Smack1
     fullDescMsg: MSG_PartnerDesc_Bow_Pause_Smack1
     shortDescMsg: MSG_PartnerDesc_Bow_Battle_Smack
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 0
     costBP: 0
 - Smack2:
     nameMsg: MSG_PartnerMoveName_Smack2
     fullDescMsg: MSG_PartnerDesc_Bow_Pause_Smack2
     shortDescMsg: MSG_PartnerDesc_Bow_Battle_Smack
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 0
     costBP: 0
 - Smack3:
     nameMsg: MSG_PartnerMoveName_Smack3
     fullDescMsg: MSG_PartnerDesc_Bow_Pause_Smack3
     shortDescMsg: MSG_PartnerDesc_Bow_Battle_Smack
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 0
     costBP: 0
 - OuttaSight:
@@ -1642,24 +1642,24 @@
     shortDescMsg: MSG_PartnerDesc_Bow_Battle_OuttaSight
     flags: [ TARGET_FLAG_PLAYER ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_NONE
+    actionTip: NONE
     costFP: 2
     costBP: 0
 - Spook:
     nameMsg: MSG_PartnerMoveName_Spook
     fullDescMsg: MSG_PartnerDesc_Bow_Pause_Spook
     shortDescMsg: MSG_PartnerDesc_Bow_Battle_Spook
-    flags: [ TARGET_FLAG_2, TARGET_FLAG_8000 ]
+    flags: [ TARGET_FLAG_2, TARGET_FLAG_PRIMARY_ONLY ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 3
     costBP: 0
 - FanSmack:
     nameMsg: MSG_PartnerMoveName_FanSmack
     fullDescMsg: MSG_PartnerDesc_Bow_Pause_FanSmack
     shortDescMsg: MSG_PartnerDesc_Bow_Battle_FanSmack
-    flags: [ TARGET_FLAG_ENEMY, TARGET_FLAG_2 ]
+    flags: [ TARGET_FLAG_SELECT_ONE, TARGET_FLAG_2 ]
     category: MOVE_TYPE_PARTNER
-    actionTip: MOVE_ACTION_TIP_4
+    actionTip: BTL_MSG_ACTION_TIP_MASH_LEFT
     costFP: 5
     costBP: 0

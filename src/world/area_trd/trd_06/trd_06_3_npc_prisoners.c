@@ -111,7 +111,7 @@ EvtScript N(EVS_NpcInteract_Bombette) = {
         EVT_WAIT(15 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_WAIT(25 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, -45, 30, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(40 * DT)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00E0)

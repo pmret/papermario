@@ -486,18 +486,25 @@ typedef struct PurpleRingFXData {
     /* 0x7A */ char unk_7A[2];
 } PurpleRingFXData; // size = 0x7C
 
+enum FlameFXTypes {
+    FX_FLAME_BLUE           = 0,
+    FX_FLAME_RED            = 1,
+    FX_FLAME_SMALL_BLUE     = 2,
+    FX_FLAME_PINK           = 3,
+};
+
 typedef struct FlameFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
+    /* 0x10 */ f32 baseScale;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
+    /* 0x2C */ f32 scaleH;
+    /* 0x30 */ f32 scaleW;
 } FlameFXData; // size = 0x34
 
 typedef struct StarsBurstFXData {
@@ -735,7 +742,7 @@ typedef struct DebuffFXData {
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ s32 alpha;
     /* 0x38 */ Color_RGB8 primCol;
-    /* 0x38 */ Color_RGB8 envCol;
+    /* 0x3B */ Color_RGB8 envCol;
     /* 0x3E */ char unk_3E[2];
 } DebuffFXData; // size = 0x40
 
@@ -881,17 +888,17 @@ typedef struct FireBreathFXData {
     /* 0x0C */ Vec3f pos;
     /* 0x18 */ Vec3f initPos;
     /* 0x24 */ Vec3f endPos;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
+    /* 0x30 */ f32 initialScale;
+    /* 0x34 */ f32 targetScale;
     /* 0x38 */ f32 scale;
-    /* 0x3C */ f32 scaleChangeFactor;
+    /* 0x3C */ f32 scaleChangeRate;
     /* 0x40 */ s32 alpha;
-    /* 0x44 */ s32 lifeTime;
+    /* 0x44 */ s32 duration;
     /* 0x48 */ s32 timeLeft;
-    /* 0x4C */ s32 spawnTimer;
-    /* 0x50 */ Vec3f unk_50;
-    /* 0x5C */ f32 unk_5C;
-    /* 0x60 */ f32 unk_60;
+    /* 0x4C */ s32 lifetime;
+    /* 0x50 */ Vec3f offsetPos;
+    /* 0x5C */ f32 animTime; // each integer value corresponds to a new frame
+    /* 0x60 */ f32 velY;
     /* 0x64 */ s32 primR;
     /* 0x68 */ s32 primG;
     /* 0x6C */ s32 primB;
@@ -985,6 +992,13 @@ typedef struct ShimmerWaveFXData {
     /* 0x68 */ f32 unk_68;
 } ShimmerWaveFXData; // size = 0x6C
 
+enum AuraFXTypes {
+    FX_AURA_CAPTURE     = 0, // star spirit being captured in the intro
+    FX_AURA_RED         = 1, // used by Kooper's Fire Shell
+    FX_AURA_BLUE        = 2, // used by Final Bowser
+    FX_AURA_GOLD        = 3, // used by The Master (final form)
+};
+
 typedef struct AuraFXData {
     /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f posA;
@@ -1017,12 +1031,12 @@ typedef struct AuraFXData {
 } AuraFXData; // size = 0x70
 
 typedef struct BulbGlowFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x10 */ s32 brightness;
+    /* 0x14 */ s32 timeLeft;
+    /* 0x18 */ s32 lifetime;
+    /* 0x1C */ s32 depthQueryID;
     /* 0x20 */ s32 unk_20;
 } BulbGlowFXData; // size = 0x24
 
@@ -1526,18 +1540,20 @@ typedef struct SquirtFXData {
     /* 0x1D8 */ u8 unk_1D8[12];
 } SquirtFXData; // size = 0x1E4
 
+enum WaterBlockFXTypes {
+    FX_WATER_BLOCK_CREATE   = 0,
+    FX_WATER_BLOCK_DESTROY  = 1,
+};
+
 #define NUM_WATER_BLOCK_COMPONENTS 4
 
 typedef struct WaterBlockFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifetime;
+    /* 0x18 */ Color4i color;
+    /* 0x28 */ s32 alpha;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
@@ -2310,7 +2326,7 @@ typedef struct BuffData {
 
 typedef struct PartnerBuffFXData {
     /* 0x00 */ s16 useRandomValues;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 visible;
     /* 0x04 */ s32 timeLeft;
     /* 0x08 */ s32 lifeTime;
     /* 0x0C */ BuffData unk_0C[3];

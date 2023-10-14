@@ -35,7 +35,7 @@ EvtScript N(EVS_RoomListener_Shop) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(EnableGroup, MODEL_mise_in, TRUE)
-            EVT_EXEC(N(EVS_80248B08))
+            EVT_EXEC(N(EVS_OnEnterShop))
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(EnableGroup, MODEL_mise_in, FALSE)
     EVT_END_SWITCH
@@ -134,7 +134,7 @@ EvtScript N(EVS_RoomListener_Warehouse) = {
             EVT_CALL(EnableGroup, MODEL_heiho_in, TRUE)
             EVT_SET(MF_MusicMixTrigger, TRUE)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
-            EVT_EXEC(N(D_80248798_84B368))
+            EVT_EXEC(N(EVS_HiddenRoom_WaitForOuttaSight))
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_END)
             EVT_CALL(EnableGroup, MODEL_heiho_in, FALSE)
             EVT_CALL(EnableGroup, MODEL_hi_soto, TRUE)

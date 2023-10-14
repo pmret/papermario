@@ -82,8 +82,8 @@ void* actionCommandDmaTable[] = {
 BSS s32 sMashMeterSmoothDivisor;
 BSS s32 D_8029FBC4_pad[3];
 // TODO move to actor_api
-BSS s32 D_8029FBD0;
-BSS s8 D_8029FBD4;
+BSS s32 IsGroupHeal;
+BSS s8 ApplyingBuff;
 BSS s32 D_8029FBD8_pad[2];
 
 #include "action_cmd.h"

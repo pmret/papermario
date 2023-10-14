@@ -42,7 +42,7 @@ void state_step_battle(void) {
             return;
         }
         D_800A0900--;
-        gOverrideFlags |= GLOBAL_OVERRIDES_8;
+        gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
         nuContRmbForceStop();
     }
 
@@ -50,62 +50,62 @@ void state_step_battle(void) {
         if (D_800A0900 > 0) {
             D_800A0900--;
             return;
-        } else {
-            D_800A0900 = -1;
-            nuGfxSetCfb(bFrameBuffers, 2);
-            nuContRmbForceStopEnd();
-            sfx_stop_env_sounds();
-            func_8003B1A8();
-            gGameStatusPtr->isBattle = TRUE;
-            backup_map_collision_data();
+        }
+
+        D_800A0900 = -1;
+        nuGfxSetCfb(bFrameBuffers, 2);
+        nuContRmbForceStopEnd();
+        sfx_stop_env_sounds();
+        func_8003B1A8();
+        gGameStatusPtr->isBattle = TRUE;
+        backup_map_collision_data();
 
 #if VERSION_IQUE
-            battle_heap_create();
+        battle_heap_create();
 #else
-            load_obfuscation_shims();
-            shim_battle_heap_create_obfuscated();
+        load_obfuscation_shims();
+        shim_battle_heap_create_obfuscated();
 #endif
 
-            sfx_clear_env_sounds(0);
+        sfx_clear_env_sounds(0);
 
-            currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);
-            currentBattleIndex = UNPACK_BTL_INDEX(gCurrentBattleID);
+        currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);
+        currentBattleIndex = UNPACK_BTL_INDEX(gCurrentBattleID);
 
-            if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH ||
-                (currentBattleSelection == BTL_AREA_KKJ && currentBattleIndex == 0)) {
-                gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
-                spr_init_sprites(PLAYER_SPRITES_PEACH_BATTLE);
-            } else {
-                spr_init_sprites(PLAYER_SPRITES_MARIO_BATTLE);
-            }
+        if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH ||
+            (currentBattleSelection == BTL_AREA_KKJ && currentBattleIndex == 0)) {
+            gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
+            spr_init_sprites(PLAYER_SPRITES_PEACH_BATTLE);
+        } else {
+            spr_init_sprites(PLAYER_SPRITES_MARIO_BATTLE);
+        }
 
-            clear_model_data();
-            clear_sprite_shading_data();
-            reset_background_settings();
-            clear_entity_models();
-            clear_animator_list();
-            clear_worker_list();
-            hud_element_set_aux_cache(NULL, 0);
-            hud_element_clear_cache();
-            reset_status_bar();
-            clear_item_entity_data();
-            clear_script_list();
-            clear_npcs();
-            clear_entity_data(1);
-            clear_trigger_data();
-            DMA_COPY_SEGMENT(battle_code);
-            initialize_battle();
-            btl_save_world_cameras();
-            load_battle_section();
-            D_800A0904 = gPlayerStatusPtr->animFlags;
-            gPlayerStatusPtr->animFlags &= ~PA_FLAG_PULSE_STONE_VISIBLE;
-            D_800A0908 = get_time_freeze_mode();
-            set_time_freeze_mode(TIME_FREEZE_NORMAL);
-            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+        clear_model_data();
+        clear_sprite_shading_data();
+        reset_background_settings();
+        clear_entity_models();
+        clear_animator_list();
+        clear_worker_list();
+        hud_element_set_aux_cache(NULL, 0);
+        hud_element_clear_cache();
+        reset_status_bar();
+        clear_item_entity_data();
+        clear_script_list();
+        clear_npcs();
+        clear_entity_data(TRUE);
+        clear_trigger_data();
+        DMA_COPY_SEGMENT(battle_code);
+        initialize_battle();
+        btl_save_world_cameras();
+        load_battle_section();
+        D_800A0904 = gPlayerStatusPtr->animFlags;
+        gPlayerStatusPtr->animFlags &= ~PA_FLAG_PULSE_STONE_VISIBLE;
+        D_800A0908 = get_time_freeze_mode();
+        set_time_freeze_mode(TIME_FREEZE_NORMAL);
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
 
-            if (D_800A0900 >= 0) {
-                return;
-            }
+        if (D_800A0900 >= 0) {
+            return;
         }
     }
 
@@ -126,7 +126,7 @@ void state_drawUI_battle(void) {
 }
 
 void state_init_end_battle(void) {
-    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+    gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     nuContRmbForceStop();
     D_800A0900 = 5;
 }
@@ -134,16 +134,15 @@ void state_init_end_battle(void) {
 void state_step_end_battle(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
+    MapSettings* mapSettings;
+    MapConfig* mapConfig;
 
     if (D_800A0900 >= 0) {
         D_800A0900--;
         if (D_800A0900 == 0) {
-            MapSettings* mapSettings;
-            MapConfig* mapConfig;
-
             D_800A0900 = -1;
             nuGfxSetCfb(bFrameBuffers, 3);
-            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
             mapSettings = get_current_map_settings();

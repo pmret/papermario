@@ -133,118 +133,118 @@ StaticAnimatorNode* N(D_80248D8C_971F4C)[] = {
 #include "world/toad_house/blanket.png.inc.c"
 
 AnimScript N(ANS_ToadHouseBlanket) = {
-        AS_OP_19,
-        AS_SET_ROTATION, 1, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 1, 0, 0, 0,
-        AS_SET_SCALE, 1, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 2, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 2, 0, 0, 0,
-        AS_SET_SCALE, 2, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 3, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 3, 0, 0, 0,
-        AS_SET_SCALE, 3, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 4, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 4, 0, 0, 0,
-        AS_SET_SCALE, 4, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 5, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 5, 0, 0, 0,
-        AS_SET_SCALE, 5, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 6, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 6, 0, 0, 0,
-        AS_SET_SCALE, 6, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 7, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 7, 0, 0, 0,
-        AS_SET_SCALE, 7, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 8, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 8, 0, 0, 0,
-        AS_SET_SCALE, 8, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 9, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 9, 0, 0, 0,
-        AS_SET_SCALE, 9, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 10, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 10, 0, 0, 0,
-        AS_SET_SCALE, 10, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 11, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 11, 0, 0, 0,
-        AS_SET_SCALE, 11, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 12, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 12, 0, 0, 0,
-        AS_SET_SCALE, 12, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 13, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 13, 0, 0, 0,
-        AS_SET_SCALE, 13, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 14, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 14, 0, 0, 0,
-        AS_SET_SCALE, 14, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 15, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 15, 0, 0, 0,
-        AS_SET_SCALE, 15, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 16, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 16, 0, 0, 0,
-        AS_SET_SCALE, 16, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_SET_ROTATION, 17, AS_F(0.0), AS_F(0.0), AS_F(0.0),
-        AS_SET_POS, 17, 0, 0, 0,
-        AS_SET_SCALE, 17, AS_F(1.0), AS_F(1.0), AS_F(1.0),
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-        AS_WAIT, 1,
-    AS_END_LOOP,
-    AS_END,
+        as_DisableMirroring
+        as_SetRotation(1, 0.0, 0.0, 0.0)
+        as_SetPos(1, 0, 0, 0)
+        as_SetScale(1, 1.0, 1.0, 1.0)
+        as_SetRotation(2, 0.0, 0.0, 0.0)
+        as_SetPos(2, 0, 0, 0)
+        as_SetScale(2, 1.0, 1.0, 1.0)
+        as_SetRotation(3, 0.0, 0.0, 0.0)
+        as_SetPos(3, 0, 0, 0)
+        as_SetScale(3, 1.0, 1.0, 1.0)
+        as_SetRotation(4, 0.0, 0.0, 0.0)
+        as_SetPos(4, 0, 0, 0)
+        as_SetScale(4, 1.0, 1.0, 1.0)
+        as_SetRotation(5, 0.0, 0.0, 0.0)
+        as_SetPos(5, 0, 0, 0)
+        as_SetScale(5, 1.0, 1.0, 1.0)
+        as_SetRotation(6, 0.0, 0.0, 0.0)
+        as_SetPos(6, 0, 0, 0)
+        as_SetScale(6, 1.0, 1.0, 1.0)
+        as_SetRotation(7, 0.0, 0.0, 0.0)
+        as_SetPos(7, 0, 0, 0)
+        as_SetScale(7, 1.0, 1.0, 1.0)
+        as_SetRotation(8, 0.0, 0.0, 0.0)
+        as_SetPos(8, 0, 0, 0)
+        as_SetScale(8, 1.0, 1.0, 1.0)
+        as_SetRotation(9, 0.0, 0.0, 0.0)
+        as_SetPos(9, 0, 0, 0)
+        as_SetScale(9, 1.0, 1.0, 1.0)
+        as_SetRotation(10, 0.0, 0.0, 0.0)
+        as_SetPos(10, 0, 0, 0)
+        as_SetScale(10, 1.0, 1.0, 1.0)
+        as_SetRotation(11, 0.0, 0.0, 0.0)
+        as_SetPos(11, 0, 0, 0)
+        as_SetScale(11, 1.0, 1.0, 1.0)
+        as_SetRotation(12, 0.0, 0.0, 0.0)
+        as_SetPos(12, 0, 0, 0)
+        as_SetScale(12, 1.0, 1.0, 1.0)
+        as_SetRotation(13, 0.0, 0.0, 0.0)
+        as_SetPos(13, 0, 0, 0)
+        as_SetScale(13, 1.0, 1.0, 1.0)
+        as_SetRotation(14, 0.0, 0.0, 0.0)
+        as_SetPos(14, 0, 0, 0)
+        as_SetScale(14, 1.0, 1.0, 1.0)
+        as_SetRotation(15, 0.0, 0.0, 0.0)
+        as_SetPos(15, 0, 0, 0)
+        as_SetScale(15, 1.0, 1.0, 1.0)
+        as_SetRotation(16, 0.0, 0.0, 0.0)
+        as_SetPos(16, 0, 0, 0)
+        as_SetScale(16, 1.0, 1.0, 1.0)
+        as_SetRotation(17, 0.0, 0.0, 0.0)
+        as_SetPos(17, 0, 0, 0)
+        as_SetScale(17, 1.0, 1.0, 1.0)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+        as_Wait(1)
+    as_Restart
+    as_End
 };

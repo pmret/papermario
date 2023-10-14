@@ -33,13 +33,13 @@ UnkBulbGlow D_E0078918[] = {
 s32 D_E00789A8 = 0;
 
 Color_RGB8 D_E00789AC[] = {
-    {255, 255, 255},
-    {255, 255, 128},
-    {255, 128, 255},
-    {128, 255, 255},
-    {255, 128, 128},
-    {128, 255, 128},
-    {128, 128, 255},
+    { 255, 255, 255 },
+    { 255, 255, 128 },
+    { 255, 128, 255 },
+    { 128, 255, 255 },
+    { 255, 128, 128 },
+    { 128, 255, 128 },
+    { 128, 128, 255 },
 };
 
 void bulb_glow_init(EffectInstance* effect);
@@ -47,7 +47,7 @@ void bulb_glow_update(EffectInstance* effect);
 void bulb_glow_render(EffectInstance* effect);
 void bulb_glow_appendGfx(void* effect);
 
-void bulb_glow_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance** outEffect) {
+void bulb_glow_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, EffectInstance** outEffect) {
     EffectBlueprint bp;
     EffectInstance* effect;
     BulbGlowFXData* data;
@@ -65,18 +65,18 @@ void bulb_glow_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInst
     data = effect->data.bulbGlow = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.bulbGlow != NULL);
 
-    data->unk_00 = arg0 & 255;
+    data->type = arg0 & 255;
     if (arg0 < 256) {
-        data->unk_14 = 100;
+        data->timeLeft = 100;
     } else {
-        data->unk_14 = 80;
+        data->timeLeft = 80;
     }
-    data->unk_18 = 0;
-    data->unk_10 = 127;
-    data->pos.x = arg1;
-    data->pos.y = arg2;
-    data->pos.z = arg3;
-    data->unk_1C = D_E00789A8;
+    data->lifetime = 0;
+    data->brightness = 127;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
+    data->depthQueryID = D_E00789A8;
 
     D_E00789A8++;
     if (D_E00789A8 >= 16) {
@@ -92,38 +92,38 @@ void bulb_glow_init(EffectInstance* effect) {
 
 void bulb_glow_update(EffectInstance* effect) {
     BulbGlowFXData* data = effect->data.bulbGlow;
-    s32 unk18;
+    s32 time;
 
     if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
         effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
-        data->unk_14 = 10;
+        data->timeLeft = 10;
     }
 
-    data->unk_18++;
+    data->lifetime++;
 
-    if (data->unk_14 < 100) {
-        data->unk_14--;
+    if (data->timeLeft < 100) {
+        data->timeLeft--;
     }
-    if (data->unk_14 < 0) {
+    if (data->timeLeft < 0) {
         remove_effect(effect);
         return;
     }
 
-    unk18 = data->unk_18;
-    if (data->unk_00 == 0) {
-        if (unk18 < 11) {
-            data->unk_10 = (unk18 * 6) + 4;
+    time = data->lifetime;
+    if (data->type == 0) {
+        if (time < 11) {
+            data->brightness = (time * 6) + 4;
         } else {
-            data->unk_10 = 64;
+            data->brightness = 64;
         }
 
-        if (unk18 & 1) {
-            data->unk_10 *= 0.6;
+        if (time & 1) {
+            data->brightness *= 0.6;
         }
 
-        if (unk18 >= 15) {
-            data->unk_00 = 4;
-            data->unk_10 = 127;
+        if (time >= 15) {
+            data->type = 4;
+            data->brightness = 127;
         }
     }
 }
@@ -136,7 +136,7 @@ void bulb_glow_render(EffectInstance* effect) {
 
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = bulb_glow_appendGfx;
-    if (data->unk_00 == 5) {
+    if (data->type == 5) {
         renderTask.dist = 0;
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
     } else {
@@ -160,7 +160,7 @@ void bulb_glow_appendGfx(void* effect) {
     s32 xMin;
     s32 numRects;
     s32 yMin;
-    s32 temp_s2;
+    s32 type;
     s32 rectHeight;
     s32 glowExtent;
     s32 colorScale;
@@ -171,13 +171,13 @@ void bulb_glow_appendGfx(void* effect) {
     s32 isPointVisible;
     s32 yStart;
     UnkBulbGlow* temp_s1;
-    Color_RGB8* temp_v0;
+    Color_RGB8* color;
     s32 i;
     s32 j;
     u8 r, g, b;
 
-    brightness = data->unk_10;
-    temp_s2 = data->unk_00;
+    brightness = data->brightness;
+    type = data->type;
     if (brightness > 127) {
         brightness = 127;
     }
@@ -185,13 +185,13 @@ void bulb_glow_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    temp_s1 = &D_E0078918[temp_s2];
+    temp_s1 = &D_E0078918[type];
     glowExtent = temp_s1->unk_10;
     rectHeight = temp_s1->unk_14;
 
-    isPointVisible = is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &centerX, &centerY);
+    isPointVisible = is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->depthQueryID, &centerX, &centerY);
 
-    if (temp_s2 == 5) {
+    if (type == 5) {
         isPointVisible = TRUE;
     }
 
@@ -199,12 +199,12 @@ void bulb_glow_appendGfx(void* effect) {
         return;
     }
 
-    gSPDisplayList(gMainGfxPos++, D_E0078900[temp_s2]);
-    temp_v0 = &D_E00789AC[data->unk_20];
+    gSPDisplayList(gMainGfxPos++, D_E0078900[type]);
+    color = &D_E00789AC[data->unk_20];
     colorScale = brightness * 2;
-    r = temp_v0->r * colorScale / 255;
-    g = temp_v0->g * colorScale / 255;
-    b = temp_v0->b * colorScale / 255;
+    r = color->r * colorScale / 255;
+    g = color->g * colorScale / 255;
+    b = color->b * colorScale / 255;
 
     gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, 127);
 
@@ -237,10 +237,10 @@ void bulb_glow_appendGfx(void* effect) {
         }
 
         gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
-            (s32) (xMin * temp_s1->unk_08) << 2,
-            (s32) (temp_s1->unk_04 * 20 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2,
-            (s32) (xMin * temp_s1->unk_08 + temp_s1->unk_00) << 2,
-            (s32) (temp_s1->unk_04 * 21 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2);
+            (s32) (xMin * temp_s1->unk_08) * 4,
+            (s32) (temp_s1->unk_04 * 20 - i * temp_s1->unk_14 * temp_s1->unk_0C) * 4,
+            (s32) (xMin * temp_s1->unk_08 + temp_s1->unk_00) * 4,
+            (s32) (temp_s1->unk_04 * 21 - i * temp_s1->unk_14 * temp_s1->unk_0C) * 4);
 
         for (j = 0; j < 1; j++) {
             gDPLoadMultiTile(gMainGfxPos++,
@@ -249,8 +249,8 @@ void bulb_glow_appendGfx(void* effect) {
                 xMin + xStart, 0, xMax - 1, rectHeight - 1,
                 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gMainGfxPos++,
-                (xMin + xStart) << 2, y << 2,
-                xMax << 2, (y + rectHeight) << 2,
+                (xMin + xStart) * 4, y * 4,
+                xMax * 4, (y + rectHeight) * 4,
                 G_TX_RENDERTILE,
                 ((xMin + xStart) & 0x1FF) << 5, 0,
                 1 << 10, 1 << 10);

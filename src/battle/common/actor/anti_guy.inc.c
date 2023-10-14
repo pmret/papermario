@@ -6,10 +6,12 @@
 
 #ifdef ANTIGUY_TRIO
 #define ACTOR_TYPE          ACTOR_TYPE_ANTI_GUY_KPA
+#define ACTOR_LEVEL         ACTOR_LEVEL_ANTI_GUY_KPA
 #define PARALYZE_CHANCE     50
 #define ESCAPE_CHANCE       0
 #else
 #define ACTOR_TYPE          ACTOR_TYPE_ANTI_GUY_OMO
+#define ACTOR_LEVEL         ACTOR_LEVEL_ANTI_GUY_OMO
 #define PARALYZE_CHANCE     60
 #define ESCAPE_CHANCE       50
 #endif
@@ -61,7 +63,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -77,7 +79,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE,
-    .level = ACTOR_LEVEL_ANTI_GUY,
+    .level = ACTOR_LEVEL,
     .maxHP = 50,
     .partCount = ARRAY_COUNT(N(ActorParts)),
     .partsData = N(ActorParts),
@@ -190,7 +192,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Black_Anim0C)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)

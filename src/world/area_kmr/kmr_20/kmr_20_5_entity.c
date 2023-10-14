@@ -6,7 +6,7 @@ API_CALLABLE(N(SetAmbienceVolumeHalf_Entity)){
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
 
 EvtScript N(EVS_SecretPanel_FlipBack) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
@@ -48,7 +48,7 @@ EvtScript N(EVS_UseSpring_Basement) = {
         EVT_CALL(PlayerJump, -110, -80, -35, 20)
         EVT_SET(AF_KMR_0B, TRUE)
     EVT_ELSE
-        EVT_CALL(N(UnsetCamera0MoveFlag1))
+        EVT_CALL(N(EnableCameraFollowPlayerY))
         EVT_EXEC(N(EVS_SecretPanel_FlipBack))
         EVT_CALL(PlayerJump, -150, 30, -90, 30)
         EVT_CALL(InterpPlayerYaw, 180, 0)

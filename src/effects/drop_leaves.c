@@ -105,7 +105,7 @@ void drop_leaves_update(EffectInstance *effect) {
             part->unk_10 *= 0.92;
         }
 
-        part->unk_1C += func_E0200044(50, unk_2C + i * 20) - 25;
+        part->unk_1C += effect_simple_rand(50, unk_2C + i * 20) - 25;
         part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
         part->unk_20 += cos_deg(part->unk_1C * 0.5f) * 10.0f;
         part->unk_04 += part->unk_10;

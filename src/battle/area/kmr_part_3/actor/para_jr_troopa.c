@@ -90,7 +90,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_GROUND,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
@@ -148,7 +148,7 @@ EvtScript N(EVS_SetupFearReaction) = {
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_IF_EQ(LVar2, MOVE_SPOOK)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpookReact, AVAL_SpookReact_Ready)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0263)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_EMOTE_QUESTION)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 30)
             EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 30, EMOTER_POS, LVar0, LVar1, LVar2, 5)
@@ -307,7 +307,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_JrTroopa_FlyHome))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ParaJrTroopa_Idle)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
@@ -316,7 +316,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_SET_CONST(LVar0, PRT_GROUND)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))

@@ -113,7 +113,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_PRIMARY_TARGET | ACTOR_PART_FLAG_SKIP_MOVEMENT_ALLOC,
         .index = PRT_TARGET,
         .posOffset = { 0, 54, 0 },
         .targetOffset = { 0, -30 },
@@ -159,7 +159,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_TARGET_FLAG_2, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PRT_TARGET, ACTOR_PART_TARGET_NO_SMASH, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -245,7 +245,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_EXEC_WAIT(N(EVS_SelectAnimation))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim03)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_END_CASE_GROUP

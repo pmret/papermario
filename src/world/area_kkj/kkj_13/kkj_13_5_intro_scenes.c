@@ -332,7 +332,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcJumpscale, NPC_Bowser_Body, EVT_FLOAT(0.0))
         EVT_CALL(NpcJump0, NPC_Bowser_Body, 810, 0, 0, 5)
-        EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_20A0, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_LARGE_NPC_IMPACT, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_PostJump)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20 * DT, EVT_FLOAT(2.0))
         EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_Idle)

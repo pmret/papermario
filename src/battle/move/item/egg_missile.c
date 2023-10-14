@@ -179,7 +179,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(PlaySound, SOUND_EGG_MISSILE_BLAST)
     EVT_CALL(N(func_802A123C_71CF1C), LVar0, LVar1, LVar2)
     EVT_THREAD
-        EVT_CALL(StartRumble, 5)
+        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.5))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(1.2))

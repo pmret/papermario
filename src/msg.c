@@ -371,7 +371,7 @@ s32 _update_message(MessagePrintState* printer) {
                         } else if (printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_READ_END) {
                             printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_4;
                             if (printer->fontVariant != 0 || printer->srcBuffer[printer->srcBufferPos] != MSG_CHAR_UNK_C3) {
-                                printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_80 | MSG_STATE_FLAG_4;
+                                printer->stateFlags |= MSG_STATE_FLAG_PRINT_QUICKLY | MSG_STATE_FLAG_SPEAKING | MSG_STATE_FLAG_4;
                             }
                             sfx_play_sound_with_params(SOUND_MSG_SKIP, 0, 0, 0);
                         } else if (printer->style == MSG_STYLE_RIGHT ||
@@ -731,7 +731,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 printer->delayFlags &= ~MSG_DELAY_FLAG_2;
                 printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
                 printer->rewindArrowCounter = 0;
-                printer->stateFlags &= ~MSG_STATE_FLAG_80;
+                printer->stateFlags &= ~MSG_STATE_FLAG_SPEAKING;
                 printer->stateFlags &= ~MSG_STATE_FLAG_PRINT_QUICKLY;
                 if (printer->style != MSG_STYLE_F) {
                     sfx_play_sound_with_params(SOUND_MSG_WAIT, 0, 0, 0);
@@ -740,7 +740,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
             case MSG_CHAR_READ_PAUSE:
                 printer->curPrintDelay = *srcBuf++;
                 printer->delayFlags |= MSG_DELAY_FLAG_1;
-                printer->stateFlags &= ~MSG_STATE_FLAG_80;
+                printer->stateFlags &= ~MSG_STATE_FLAG_SPEAKING;
                 break;
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
@@ -790,7 +790,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags |= MSG_STATE_FLAG_800000 | MSG_STATE_FLAG_800;
                         if (nextArg != MSG_CHAR_UNK_C3) {
-                            printer->stateFlags |= MSG_STATE_FLAG_80;
+                            printer->stateFlags |= MSG_STATE_FLAG_SPEAKING;
                         }
                         printer->speechSoundIDA = SOUND_MSG_VOICE_1A;
                         printer->speechSoundIDB = SOUND_MSG_VOICE_1B;
@@ -1133,7 +1133,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     case MSG_READ_FUNC_YIELD:
                         printer->stateFlags |= MSG_STATE_FLAG_100000 | MSG_STATE_FLAG_40;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
-                        printer->stateFlags &= ~MSG_STATE_FLAG_80;
+                        printer->stateFlags &= ~MSG_STATE_FLAG_SPEAKING;
                         printer->stateFlags &= ~MSG_STATE_FLAG_PRINT_QUICKLY;
                         break;
                     case MSG_READ_FUNC_SAVE_POS:
@@ -1258,7 +1258,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         }
                         msg_play_speech_sound(printer, argQ);
                         if (printer->stateFlags & MSG_STATE_FLAG_800000) {
-                            printer->stateFlags |= MSG_STATE_FLAG_80;
+                            printer->stateFlags |= MSG_STATE_FLAG_SPEAKING;
                         }
                         break;
                     case MSG_READ_FUNC_VOICE:
@@ -1304,11 +1304,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 *printBuf++ = c;
                 arg1--;
                 if (printer->fontVariant == 0 && c == MSG_CHAR_UNK_C3) {
-                    printer->stateFlags &= ~MSG_STATE_FLAG_80;
+                    printer->stateFlags &= ~MSG_STATE_FLAG_SPEAKING;
                 } else {
                     msg_play_speech_sound(printer, c);
                     if (printer->stateFlags & MSG_STATE_FLAG_800000) {
-                        printer->stateFlags |= MSG_STATE_FLAG_80;
+                        printer->stateFlags |= MSG_STATE_FLAG_SPEAKING;
                     }
                 }
                 break;

@@ -1,8 +1,8 @@
 #include "kzn_03.h"
 #include "entity.h"
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
-#include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
+#include "world/common/DisableCameraFollowPlayerY.inc.c"
 
 API_CALLABLE(N(IsPlayerOnFirstCliff)) {
     s32 result = -1;
@@ -37,7 +37,7 @@ EvtScript N(EVS_UseSpringA) = {
     EVT_WAIT(1)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
     EVT_WAIT(1)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, 335, 290, 360, 40)
@@ -45,7 +45,7 @@ EvtScript N(EVS_UseSpringA) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_FALLING)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(N(SetCamera0MoveFlag1))
+    EVT_CALL(N(DisableCameraFollowPlayerY))
     EVT_RETURN
     EVT_END
 };
@@ -56,7 +56,7 @@ EvtScript N(EVS_UseSpringB) = {
     EVT_WAIT(1)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_WAIT(1)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
     EVT_CALL(PlayerJump, 350, 470, 210, 40)
@@ -64,7 +64,7 @@ EvtScript N(EVS_UseSpringB) = {
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(N(SetCamera0MoveFlag1))
+    EVT_CALL(N(DisableCameraFollowPlayerY))
     EVT_RETURN
     EVT_END
 };
@@ -76,7 +76,7 @@ EvtScript N(EVS_UseSpringC) = {
     EVT_WAIT(1)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_WAIT(1)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
     EVT_IF_EQ(MV_PlayerCliffState, 0)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.4))
@@ -89,7 +89,7 @@ EvtScript N(EVS_UseSpringC) = {
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_KILL_THREAD(LVarA)
-    EVT_CALL(N(SetCamera0MoveFlag1))
+    EVT_CALL(N(DisableCameraFollowPlayerY))
     EVT_RETURN
     EVT_END
 };

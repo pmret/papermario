@@ -182,7 +182,8 @@ s32 find_item(s32 itemID) {
     ItemData* item = &gItemTable[itemID];
     s32 i;
 
-    if ((item->typeFlags & ITEM_TYPE_FLAG_KEY) != 0) {
+    if (item->typeFlags & ITEM_TYPE_FLAG_KEY) {
+        // check key items
         for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
             if (playerData->keyItems[i] == itemID) {
                 break;
@@ -194,19 +195,20 @@ s32 find_item(s32 itemID) {
         }
 
         return i;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-        if (playerData->invItems[i] == itemID) {
-            break;
+    } else {
+        // check consumable items
+        for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+            if (playerData->invItems[i] == itemID) {
+                break;
+            }
         }
-    }
 
-    if (i == ARRAY_COUNT(playerData->invItems)) {
-        return -1;
-    }
+        if (i == ARRAY_COUNT(playerData->invItems)) {
+            return -1;
+        }
 
-    return i;
+        return i;
+    }
 }
 
 /// Bubbles up player inventory items such that all ITEM_NONE values are at the bottom.
@@ -216,13 +218,16 @@ void sort_items(void) {
     s32 i;
 
     for (i = ARRAY_COUNT(playerData->invItems) - 2; i >= 0; i--) {
-        if (playerData->invItems[i] != ITEM_NONE) {
-            for (j = ARRAY_COUNT(playerData->invItems) - 1; i < j; j--) {
-                if (playerData->invItems[j] == ITEM_NONE) {
-                    playerData->invItems[j] = playerData->invItems[i];
-                    playerData->invItems[i] = ITEM_NONE;
-                    break;
-                }
+        // leave ITEM_NONE at the end of the list alone
+        if (playerData->invItems[i] == ITEM_NONE) {
+            continue;
+        }
+        // swap any other ITEM_NONE to the end of the list
+        for (j = ARRAY_COUNT(playerData->invItems) - 1; i < j; j--) {
+            if (playerData->invItems[j] == ITEM_NONE) {
+                playerData->invItems[j] = playerData->invItems[i];
+                playerData->invItems[i] = ITEM_NONE;
+                break;
             }
         }
     }
@@ -560,7 +565,7 @@ void update_status_bar(void) {
     s32 spBars;
     s32 maxStarPower;
 
-    if (gGameStatusPtr->creditsViewportMode >= 0
+    if (gGameStatusPtr->introPart >= INTRO_PART_0
         || gGameStatusPtr->demoState != DEMO_STATE_NONE
         || (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)
         || evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE

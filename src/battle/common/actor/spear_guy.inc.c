@@ -144,7 +144,7 @@ s32 N(ShyGuyStatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_SPEAR_GUY,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 22 },
@@ -156,7 +156,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { -3, -8 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_SHY_GUY,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -168,7 +168,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { -1, -10 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_SPEAR,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -180,7 +180,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_GRASS_SKIRT,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -415,7 +415,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_SpearGuy_Anim07)
             EVT_SET_CONST(LVar2, ANIM_SpearGuy_Anim08)
             EVT_EXEC_WAIT(N(EVS_SelectAnim))
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_SPEAR_GUY)
@@ -659,7 +659,7 @@ EvtScript N(EVS_Move_SummonBackup) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SPEAR_GUY, ANIM_SpearGuy_Anim0E)
     EVT_WAIT(20)
     EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar0)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar1, LVar2)
@@ -678,11 +678,11 @@ EvtScript N(EVS_Move_SummonBackup) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar1)
-        EVT_IF_NE(LVar1, -1)
+        EVT_IF_NE(LVar1, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_SET(LFlag0, FALSE)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -691,7 +691,7 @@ EvtScript N(EVS_Move_SummonBackup) = {
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(1)
         EVT_END_IF
     EVT_IF_EQ(LFlag0, FALSE)
@@ -795,10 +795,10 @@ EvtScript N(EVS_BecomeShyGuy) = {
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_GRASS_SKIRT, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
     EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_GRASS_SKIRT, LVar0, 0, LVar2, 30, TRUE)
     EVT_WAIT(5)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_SPEAR_GUY, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_SHY_GUY, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_SPEAR, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_GRASS_SKIRT, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_SPEAR_GUY, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_SHY_GUY, ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_PRIMARY_TARGET)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_SPEAR, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_GRASS_SKIRT, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_DAMAGE_IMMUNE | ACTOR_PART_FLAG_NO_TARGET)
     EVT_EXEC_WAIT(N(EVS_ShyGuy_Init))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
@@ -950,7 +950,7 @@ EvtScript N(EVS_Attack_ThrowSpear) = {
 };
 
 EvtScript N(EVS_GetAvailableColumn) = {
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -967,7 +967,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
                 EVT_SET(LFlag4, TRUE)
         EVT_END_SWITCH
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_IF_EQ(LFlag1, FALSE)
@@ -993,7 +993,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
 
 EvtScript N(EVS_CountActiveSummoners) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1017,7 +1017,7 @@ EvtScript N(EVS_CountActiveSummoners) = {
                 EVT_END_IF
         EVT_END_SWITCH
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_RETURN
@@ -1027,7 +1027,7 @@ EvtScript N(EVS_CountActiveSummoners) = {
 EvtScript N(EVS_SwitchSpearStance) = {
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVarA)
     EVT_SET(LFlag0, FALSE)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1036,7 +1036,7 @@ EvtScript N(EVS_SwitchSpearStance) = {
             EVT_SET(LFlag0, TRUE)
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_IF_EQ(LFlag0, TRUE)
@@ -1098,7 +1098,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_EXEC_WAIT(N(EVS_SwitchSpearStance))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(2)
-            EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+            EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
             EVT_CALL(GetTargetListLength, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_EXEC_WAIT(N(EVS_Attack_ThrowSpear))
@@ -1206,7 +1206,7 @@ EvtScript N(EVS_ShyGuy_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_SHY_GUY)
             EVT_SET_CONST(LVar1, ANIM_ShyGuy_Red_Anim0C)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(EVS_ShyGuy_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)

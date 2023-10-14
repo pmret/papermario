@@ -18,9 +18,14 @@ class MoveEntry:
         self.shortDescMsg = data.get("shortDescMsg", "MSG_NONE")
         self.flags = data.get("flags", [])
         self.category = data.get("category", "")
-        self.actionTip = data.get("actionTip", "")
+        self.actionTip = data.get("actionTip", "NONE")
         self.costFP = data.get("costFP", 0)
         self.costBP = data.get("costBP", 0)
+
+        if self.actionTip == "NONE":
+            self.actionTip = "-1"
+        else:
+            self.actionTip = f"({self.actionTip} - BTL_MSG_FIRST_ACTION_TIP)"
 
 
 def read_moves_yaml(in_yaml: Path) -> List[MoveEntry]:
@@ -68,14 +73,11 @@ def generate_move_enum(fout: TextIOWrapper, moves: List[MoveEntry]):
 
     fout.write("enum MoveIDs {\n")
 
-    item_enum: List[str] = []
-
     for idx, move in enumerate(moves):
         if re.match(r"Unused_(?:Hammer_)?([0-9A-F]{2})", move.name):
             name = "MOVE_" + move.name.upper()
         else:
             name = "MOVE_" + re.sub("((?<=[a-z0-9])[A-Z]|(?!^)(?<!_)[A-Z](?=[a-z]))", r"_\1", move.name).upper()
-        item_enum.append(name)
         fout.write(f"    {name:39} = 0x{idx:03X},\n")
 
     fout.write("};\n")

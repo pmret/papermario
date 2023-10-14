@@ -12,7 +12,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
     battleStatus->moveArgument = gCurrentEncounter.hitTier;
     battleStatus->curTargetListFlags = gMoveTable[MOVE_POWER_BOUNCE].flags;
 
-    player_create_target_list(player);
+    create_current_pos_target_list(player);
     player->selectedTargetIndex = 1;
     selectableTarget = &player->targetData[player->targetIndexList[player->selectedTargetIndex]];
     player->targetActorID = selectableTarget->actorID;

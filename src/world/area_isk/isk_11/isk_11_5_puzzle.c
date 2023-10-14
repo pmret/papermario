@@ -73,7 +73,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
         EVT_CALL(ShowChoice, MSG_Choice_000D)
         EVT_CALL(CloseMessage)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2087, SOUND_0261, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2087, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
             EVT_CALL(AddKeyItem, GB_ISK11_ItemSocket1)
             EVT_SET(LVar0, GB_ISK11_ItemSocket1)
             EVT_SET(GB_ISK11_ItemSocket1, 0)
@@ -103,7 +103,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
     EVT_CALL(MakeItemEntity, GB_ISK11_ItemSocket1, -88, -508, 502, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_SET(MV_Socket1_ItemEntity, LVar0)
     EVT_CALL(CloseChoicePopup)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2087, SOUND_0261, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2087, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
     EVT_RETURN
     EVT_END
@@ -124,7 +124,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
         EVT_CALL(ShowChoice, MSG_Choice_000D)
         EVT_CALL(CloseMessage)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2091, SOUND_0261, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2091, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
             EVT_CALL(AddKeyItem, GB_ISK11_ItemSocket2)
             EVT_SET(LVar0, GB_ISK11_ItemSocket2)
             EVT_SET(GB_ISK11_ItemSocket2, 0)
@@ -155,7 +155,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
     EVT_SET(MV_Socket2_ItemEntity, LVar0)
     EVT_CALL(CloseChoicePopup)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2091, SOUND_0261, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2091, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };
@@ -175,7 +175,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
         EVT_CALL(ShowChoice, MSG_Choice_000D)
         EVT_CALL(CloseMessage)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_0261, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
             EVT_CALL(AddKeyItem, GB_ISK11_ItemSocket3)
             EVT_SET(LVar0, GB_ISK11_ItemSocket3)
             EVT_SET(GB_ISK11_ItemSocket3, 0)
@@ -206,7 +206,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
     EVT_SET(MV_Socket3_ItemEntity, LVar0)
     EVT_CALL(CloseChoicePopup)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_0261, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2090, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };
@@ -226,7 +226,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
         EVT_CALL(ShowChoice, MSG_Choice_000D)
         EVT_CALL(CloseMessage)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2089, SOUND_0261, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2089, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
             EVT_CALL(AddKeyItem, GB_ISK11_ItemSocket4)
             EVT_SET(LVar0, GB_ISK11_ItemSocket4)
             EVT_SET(GB_ISK11_ItemSocket4, 0)
@@ -257,7 +257,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
     EVT_SET(MV_Socket4_ItemEntity, LVar0)
     EVT_CALL(CloseChoicePopup)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2089, SOUND_0261, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2089, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };
@@ -277,7 +277,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
         EVT_CALL(ShowChoice, MSG_Choice_000D)
         EVT_CALL(CloseMessage)
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2088, SOUND_0261, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtCollider, COLLIDER_o2088, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
             EVT_CALL(AddKeyItem, GB_ISK11_ItemSocket5)
             EVT_SET(LVar0, GB_ISK11_ItemSocket5)
             EVT_SET(GB_ISK11_ItemSocket5, 0)
@@ -308,7 +308,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
     EVT_SET(MV_Socket5_ItemEntity, LVar0)
     EVT_CALL(CloseChoicePopup)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2088, SOUND_0261, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o2088, SOUND_ISK_PLACE_IN_SOCKET, SOUND_SPACE_DEFAULT)
     EVT_RETURN
     EVT_END
 };

@@ -8,7 +8,32 @@ s32 N(D_802A10F0)[] = {
     7, 3, 6, 2, 5, 2, 4, 2,
 };
 
-#include "world/common/todo/UnkMoveFunc1.inc.c"
+API_CALLABLE(N(UnkMoveFunc1)) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* playerActor = battleStatus->playerActor;
+    f32 posX = playerActor->curPos.x;
+    f32 posY = playerActor->curPos.y;
+    f32 posZ = playerActor->curPos.z;
+    f32 goalX = playerActor->state.goalPos.x;
+    f32 goalY = playerActor->state.goalPos.y;
+    f32 goalZ = playerActor->state.goalPos.z;
+
+    script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
+
+    if (script->varTable[0] > 20) {
+        script->varTable[0] = 20;
+    }
+
+    if (battleStatus->actionCommandMode != ACTION_COMMAND_MODE_NOT_LEARNED) {
+        if (script->varTable[0] < 6) {
+            script->varTable[0] = 6;
+        }
+    } else if (script->varTable[0] < 12) {
+        script->varTable[0] = 12;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_BeforeJump)
@@ -103,7 +128,7 @@ EvtScript N(EVS_JumpSupport_D) = {
 
 EvtScript N(EVS_JumpSupport_E) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
@@ -132,7 +157,7 @@ EvtScript N(EVS_JumpSupport_E) = {
 
 EvtScript N(EVS_JumpSupport_F) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -161,7 +186,7 @@ EvtScript N(EVS_JumpSupport_F) = {
 
 EvtScript N(EVS_JumpSupport_G) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -190,7 +215,7 @@ EvtScript N(EVS_JumpSupport_G) = {
 
 EvtScript N(EVS_JumpSupport_H) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -219,7 +244,7 @@ EvtScript N(EVS_JumpSupport_H) = {
 
 EvtScript N(EVS_JumpSupport_I) = {
     EVT_CALL(PlayerYieldTurn)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
@@ -266,7 +291,7 @@ EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)
     EVT_WAIT(20)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_EXECUTING_MOVE, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_RESET)
@@ -309,7 +334,7 @@ EvtScript N(EVS_JumpSupport_L) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
     EVT_CALL(func_802752AC, LVarA, 0)
     EVT_WAIT(7)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(func_802752AC, 3, 1)
@@ -336,7 +361,7 @@ EvtScript N(EVS_JumpSupport_M) = {
     EVT_CALL(func_80275F00, LVarA, 0)
     EVT_CALL(CloseActionCommandInfo)
     EVT_SET(LVar9, 0)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_IF_GT(LVar0, 0)
         EVT_SET(LVar9, 1)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Stomp)

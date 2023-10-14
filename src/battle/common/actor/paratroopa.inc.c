@@ -124,7 +124,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, -7 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_FLYING,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -4, 36 },
@@ -368,7 +368,7 @@ EvtScript N(EVS_Flying_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_DOWNED)
             EVT_SET_CONST(LVar1, ANIM_ParaTroopa_HurtStill)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_FlyHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_FLYING)
@@ -584,9 +584,9 @@ EvtScript N(EVS_Flying_TakeTurn) = {
 EvtScript N(EVS_KnockDown) = {
     EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_FLYING, 0, 0, 0)
     EVT_CALL(HideHealthBar, ACTOR_SELF)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_DUMMY_WINGS, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)
-    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_DOWNED, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_NO_TARGET)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_DUMMY_WINGS, ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_DOWNED, ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_PRIMARY_TARGET)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 8)
     EVT_SUB(LVar2, 2)
@@ -890,7 +890,7 @@ EvtScript N(EVS_Downed_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_DOWNED)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Hurt)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, PRT_DOWNED)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Run)

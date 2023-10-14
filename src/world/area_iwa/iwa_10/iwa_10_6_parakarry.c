@@ -22,7 +22,7 @@ EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH2_000E, 320, 150)
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT), 30, 300, EVT_FLOAT(15.0), EVT_FLOAT(-9.5))

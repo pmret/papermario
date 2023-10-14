@@ -16,6 +16,13 @@ git clone https://github.com/pmret/papermario
 cd papermario
 ```
 
+Install pigment64 (our image-processing tool)
+```sh
+curl https://sh.rustup.rs -sSf | sh
+cargo install pigment64
+```
+and make sure pigment64 is in your system path.
+
 ## Unix
 
 Install build dependencies:

@@ -200,7 +200,7 @@ s32 N(MageStatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_BASE,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 26 },
@@ -270,7 +270,7 @@ EvtScript N(EVS_SetupFearReaction) = {
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_IF_EQ(LVar2, MOVE_SPOOK)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpookReact, AVAL_SpookReact_Ready)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0263)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_EMOTE_QUESTION)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 30)
             EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 30, EMOTER_POS, LVar0, LVar1, LVar2, 5)
@@ -488,7 +488,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET(LVar1, FORM_ANIM_HURT)
             EVT_EXEC_WAIT(N(EVS_GetFormAnims))
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_FLYING, 0, 0, 0)
@@ -498,7 +498,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET(LVar1, FORM_ANIM_HURT)
             EVT_EXEC_WAIT(N(EVS_GetFormAnims))
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_EXEC_WAIT(N(EVS_JrTroopa_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
@@ -655,9 +655,9 @@ EvtScript N(EVS_Transform_Flying) = {
     EVT_CALL(ActorSpeak, MSG_CH8_005E, ACTOR_SELF, PRT_BASE, ANIM_JrTroopa_TiredTalk, ANIM_JrTroopa_TiredTalk)
     EVT_EXEC_WAIT(N(EVS_TransformFX))
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BASE, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
     EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
@@ -685,9 +685,9 @@ EvtScript N(EVS_Transform_Mage) = {
     EVT_CALL(MoveBattleCamOver, 120)
     EVT_EXEC_WAIT(N(EVS_TransformFX))
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAGE, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

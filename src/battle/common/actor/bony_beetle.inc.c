@@ -128,7 +128,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 21 },
@@ -250,7 +250,7 @@ EvtScript N(EVS_TrySwitchingSpikyState) = {
     EVT_END_IF
     EVT_LABEL(0)
     EVT_CALL(GetBattleFlags, LVarA)
-    EVT_IF_FLAG(LVarA, BS_FLAGS1_100)
+    EVT_IF_FLAG(LVarA, BS_FLAGS1_EXECUTING_MOVE)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
@@ -356,7 +356,7 @@ EvtScript N(EVS_HandleEvent_SmoothUpright) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BonyBeetle_Anim18)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BonyBeetle_Anim0E)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
@@ -580,7 +580,7 @@ EvtScript N(EVS_HandleEvent_SpikyUpright) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BonyBeetle_Anim19)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BonyBeetle_Anim0F)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)

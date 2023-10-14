@@ -3,42 +3,31 @@
 #include "effects.h"
 #include "animation_script.h"
 
+#include "battle/area/omo2/actor/boss_common.h"
+
 #define NAMESPACE b_area_omo2_light_bulb
 
-typedef struct IceShardBlueprint {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-} IceShardBlueprint; // size = 0x28
+typedef struct BulbFragment {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 scale;
+    /* 0x14 */ s32 duration;
+    /* 0x18 */ Vec3f vel;
+    /* 0x24 */ f32 gravAccel;
+} BulbFragment; // size = 0x28
 
-extern AnimScript toy_tank_as_close_hatch;
+extern AnimScript AS_ToyTank_CloseHatch;
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(onHit);
-extern EvtScript N(shake_tank);
-extern EvtScript N(onDeath);
+extern EvtScript N(EVS_Hit);
+extern EvtScript N(EVS_Death);
+extern EvtScript N(EVS_ShakeTank);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-};
-
-enum N(ActorVars) {
-    AVAR_Unk_5      = 5,
-    AVAR_Unk_9      = 9,
-};
-
-enum N(ActorParams) {
-    DMG_UNK         = 0,
+    PRT_MAIN        = 1,
 };
 
 s32 N(DefenseTable)[] = {
@@ -74,7 +63,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
@@ -88,7 +77,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_80 | ACTOR_FLAG_NO_HEALTH_BAR,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_TATTLE | ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_LIGHT_BULB,
     .level = ACTOR_LEVEL_LIGHT_BULB,
     .maxHP = 8,
@@ -132,34 +121,34 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_WAIT(N(onHit))
+            EVT_EXEC_WAIT(N(EVS_Hit))
         EVT_CASE_OR_EQ(EVENT_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_WAIT(N(onHit))
+            EVT_EXEC_WAIT(N(EVS_Hit))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_EXEC_WAIT(N(onHit))
+            EVT_EXEC_WAIT(N(EVS_Hit))
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
-            EVT_IF_EQ(LVar0, 0)
+            EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
+            EVT_IF_FALSE(LVar0)
                 EVT_CALL(func_8026E914, LVar0, LVar1)
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+            EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
+            EVT_IF_FALSE(LVar0)
+                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
                 EVT_WAIT(30)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_DEATH)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(onDeath))
+            EVT_EXEC_WAIT(N(EVS_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
@@ -177,228 +166,168 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(onHit) = {
-    EVT_EXEC_WAIT(N(shake_tank))
+EvtScript N(EVS_Hit) = {
+    EVT_EXEC_WAIT(N(EVS_ShakeTank))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(shake_tank) = {
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_9, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
+EvtScript N(EVS_ShakeTank) = {
+    EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
+    EVT_IF_FALSE(LVar0)
+        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
         EVT_WAIT(30)
     EVT_END_IF
     EVT_RETURN
     EVT_END
 };
 
-API_CALLABLE(func_80218250_52B8F0) {
+API_CALLABLE(N(SpawnShatterFX)) {
     s32 i;
-    IceShardBlueprint bpArray[] = {
+    BulbFragment shards[] = {
         {
-            .unk_00 = 1,
-            .unk_04 = 117.0f,
-            .unk_08 = 102.0f,
-            .unk_0C = 0.0f,
-            .unk_10 = 0.2f,
-            .unk_14 = 20,
-            .unk_18 = 0.3f,
-            .unk_1C = 0.7f,
-            .unk_20 = 0.0f,
-            .unk_24 = -0.3f,
+            .type = 1,
+            .pos = { 117.0f, 102.0f, 0.0f },
+            .vel = { 0.3f, 0.7f, 0.0f },
+            .scale = 0.2f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 117.0f,
-            .unk_08 = 82.0f,
-            .unk_0C = 11.0f,
-            .unk_10 = 0.5f,
-            .unk_14 = 20,
-            .unk_18 = 0.3f,
-            .unk_1C = 0.9f,
-            .unk_20 = 0.1f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 117.0f, 82.0f, 11.0f },
+            .vel = { 0.3f, 0.9f, 0.1f },
+            .scale = 0.5f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 117.0f,
-            .unk_08 = 92.0f,
-            .unk_0C = 14.0f,
-            .unk_10 = 0.4f,
-            .unk_14 = 20,
-            .unk_18 = 0.3f,
-            .unk_1C = 0.8f,
-            .unk_20 = 0.3f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 117.0f, 92.0f, 14.0f },
+            .vel = { 0.3f, 0.8f, 0.3f },
+            .scale = 0.4f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 1,
-            .unk_04 = 125.0f,
-            .unk_08 = 82.0f,
-            .unk_0C = 0.0f,
-            .unk_10 = 0.2f,
-            .unk_14 = 20,
-            .unk_18 = 0.5f,
-            .unk_1C = 0.9f,
-            .unk_20 = 0.0f,
-            .unk_24 = -0.3f,
+            .type = 1,
+            .pos = { 125.0f, 82.0f, 0.0f },
+            .vel = { 0.5f, 0.9f, 0.0f },
+            .scale = 0.2f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 108.0f,
-            .unk_08 = 82.0f,
-            .unk_0C = 0.0f,
-            .unk_10 = 0.3f,
-            .unk_14 = 20,
-            .unk_18 = -0.2f,
-            .unk_1C = 0.9f,
-            .unk_20 = 0.0f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 108.0f, 82.0f, 0.0f },
+            .vel = { -0.2f, 0.9f, 0.0f },
+            .scale = 0.3f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 105.0f,
-            .unk_08 = 92.0f,
-            .unk_0C = 0.0f,
-            .unk_10 = 0.4f,
-            .unk_14 = 20,
-            .unk_18 = -0.1f,
-            .unk_1C = 0.8f,
-            .unk_20 = 0.0f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 105.0f, 92.0f, 0.0f },
+            .vel = { -0.1f, 0.8f, 0.0f },
+            .scale = 0.4f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 1,
-            .unk_04 = 127.0f,
-            .unk_08 = 92.0f,
-            .unk_0C = 0.0f,
-            .unk_10 = 0.2f,
-            .unk_14 = 20,
-            .unk_18 = 0.7f,
-            .unk_1C = 0.8f,
-            .unk_20 = 0.0f,
-            .unk_24 = -0.3f,
+            .type = 1,
+            .pos = { 127.0f, 92.0f, 0.0f },
+            .vel = { 0.7f, 0.8f, 0.0f },
+            .scale = 0.2f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 117.0f,
-            .unk_08 = 97.0f,
-            .unk_0C = 7.0f,
-            .unk_10 = 0.1f,
-            .unk_14 = 20,
-            .unk_18 = 0.7f,
-            .unk_1C = 0.8f,
-            .unk_20 = 0.2f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 117.0f, 97.0f, 7.0f },
+            .vel = { 0.7f, 0.8f, 0.2f },
+            .scale = 0.1f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 117.0f,
-            .unk_08 = 87.0f,
-            .unk_0C = 7.0f,
-            .unk_10 = 0.3f,
-            .unk_14 = 20,
-            .unk_18 = 0.7f,
-            .unk_1C = 0.8f,
-            .unk_20 = 0.2f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 117.0f, 87.0f, 7.0f },
+            .vel = { 0.7f, 0.8f, 0.2f },
+            .scale = 0.3f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 111.0f,
-            .unk_08 = 97.0f,
-            .unk_0C = 3.0f,
-            .unk_10 = 0.2f,
-            .unk_14 = 20,
-            .unk_18 = 0.0f,
-            .unk_1C = 1.0f,
-            .unk_20 = 0.1f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 111.0f, 97.0f, 3.0f },
+            .vel = { 0.0f, 1.0f, 0.1f },
+            .scale = 0.2f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 111.0f,
-            .unk_08 = 92.0f,
-            .unk_0C = 7.0f,
-            .unk_10 = 0.1f,
-            .unk_14 = 20,
-            .unk_18 = 0.0f,
-            .unk_1C = 1.0f,
-            .unk_20 = 0.2f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 111.0f, 92.0f, 7.0f },
+            .vel = { 0.0f, 1.0f, 0.2f },
+            .scale = 0.1f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 111.0f,
-            .unk_08 = 87.0f,
-            .unk_0C = 3.0f,
-            .unk_10 = 0.5f,
-            .unk_14 = 20,
-            .unk_18 = 0.0f,
-            .unk_1C = 1.0f,
-            .unk_20 = 0.1f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 111.0f, 87.0f, 3.0f },
+            .vel = { 0.0f, 1.0f, 0.1f },
+            .scale = 0.5f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 1,
-            .unk_04 = 123.0f,
-            .unk_08 = 97.0f,
-            .unk_0C = 3.0f,
-            .unk_10 = 0.2f,
-            .unk_14 = 20,
-            .unk_18 = 0.1f,
-            .unk_1C = 1.0f,
-            .unk_20 = 0.1f,
-            .unk_24 = -0.3f,
+            .type = 1,
+            .pos = { 123.0f, 97.0f, 3.0f },
+            .vel = { 0.1f, 1.0f, 0.1f },
+            .scale = 0.2f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 123.0f,
-            .unk_08 = 92.0f,
-            .unk_0C = 7.0f,
-            .unk_10 = 0.4f,
-            .unk_14 = 20,
-            .unk_18 = 0.1f,
-            .unk_1C = 1.0f,
-            .unk_20 = 0.2f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 123.0f, 92.0f, 7.0f },
+            .vel = { 0.1f, 1.0f, 0.2f },
+            .scale = 0.4f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
         {
-            .unk_00 = 0,
-            .unk_04 = 123.0f,
-            .unk_08 = 87.0f,
-            .unk_0C = 3.0f,
-            .unk_10 = 0.3f,
-            .unk_14 = 20,
-            .unk_18 = 0.1f,
-            .unk_1C = 1.0f,
-            .unk_20 = 0.1f,
-            .unk_24 = -0.3f,
+            .type = 0,
+            .pos = { 123.0f, 87.0f, 3.0f },
+            .vel = { 0.1f, 1.0f, 0.1f },
+            .scale = 0.3f,
+            .duration = 20,
+            .gravAccel = -0.3f,
         },
     };
 
-    for (i = 0; i < ARRAY_COUNT(bpArray); i++) {
-        EffectInstance* effect = fx_ice_shard(bpArray[i].unk_00, bpArray[i].unk_04, bpArray[i].unk_08,
-                                              bpArray[i].unk_0C, bpArray[i].unk_10, bpArray[i].unk_14);
-        effect->data.iceShard->vel.x = bpArray[i].unk_18;
-        effect->data.iceShard->vel.y = bpArray[i].unk_1C;
-        effect->data.iceShard->vel.z = bpArray[i].unk_20;
-        effect->data.iceShard->gravAccel = bpArray[i].unk_24;
+    for (i = 0; i < ARRAY_COUNT(shards); i++) {
+        EffectInstance* effect = fx_ice_shard(shards[i].type, shards[i].pos.x, shards[i].pos.y,
+                                              shards[i].pos.z, shards[i].scale, shards[i].duration);
+        effect->data.iceShard->vel.x = shards[i].vel.x;
+        effect->data.iceShard->vel.y = shards[i].vel.y;
+        effect->data.iceShard->vel.z = shards[i].vel.z;
+        effect->data.iceShard->gravAccel = shards[i].gravAccel;
     }
 
     return ApiStatus_DONE2;
 }
 
-EvtScript N(onDeath) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY2, SOUND_03AE)
-    EVT_CALL(func_80218250_52B8F0)
-    EVT_CALL(EnableModel, 39, FALSE)
-    EVT_CALL(EnableModel, 41, FALSE)
-    EVT_CALL(GetActorVar, ACTOR_ENEMY1, AVAR_Unk_5, LVar0)
-    EVT_IF_NE(LVar0, 0)
+EvtScript N(EVS_Death) = {
+    EVT_CALL(PlaySoundAtActor, ACTOR_BULB, SOUND_03AE)
+    EVT_CALL(N(SpawnShatterFX))
+    EVT_CALL(EnableModel, MODEL_kyu3, FALSE)
+    EVT_CALL(EnableModel, MODEL_kyu1, FALSE)
+    EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, LVar0)
+    EVT_IF_NE(LVar0, NULL)
         EVT_CALL(RemoveEffect, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_ENEMY1, AVAR_Unk_5, 0)
+        EVT_CALL(SetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, NULL)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

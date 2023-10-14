@@ -18,6 +18,19 @@ class CMD(IntEnum):
     SET_META = 8
 
 
+XML_ATTR_NAME = "name"
+XML_ATTR_INDEX = "index"
+XML_ATTR_VALUE = "value"
+XML_ATTR_DURATION = "duration"
+XML_ATTR_DEST = "dest"
+XML_ATTR_POS = "pos"
+XML_ATTR_COUNT = "count"
+XML_ATTR_MODE = "mode"
+XML_ATTR_PCT = "percent"
+XML_ATTR_XYZ = "xyz"
+XML_ATTR_FLAG = "flag"
+
+
 def iter_in_groups(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
@@ -49,7 +62,7 @@ class Label(Animation):
 
     def get_attributes(self):
         return {
-            "name": str(self.lbl_name),
+            XML_ATTR_NAME: str(self.lbl_name),
         }
 
 
@@ -59,7 +72,7 @@ class Wait(Animation):
 
     def get_attributes(self):
         return {
-            "duration": str(self.duration),
+            XML_ATTR_DURATION: str(self.duration),
         }
 
 
@@ -69,7 +82,7 @@ class SetRaster(Animation):
 
     def get_attributes(self):
         return {
-            "raster": f"{self.raster:X}",
+            XML_ATTR_INDEX: f"{self.raster:X}",
         }
 
 
@@ -79,7 +92,7 @@ class SetPalette(Animation):
 
     def get_attributes(self):
         return {
-            "palette": f"{self.palette:X}",
+            XML_ATTR_INDEX: f"{self.palette:X}",
         }
 
 
@@ -91,11 +104,11 @@ class Goto(Animation):
     def get_attributes(self):
         if self.pos != 0:
             return {
-                "pos": str(self.pos),
+                XML_ATTR_POS: str(self.pos),
             }
         else:
             return {
-                "dest": str(self.dest),
+                XML_ATTR_DEST: str(self.dest),
             }
 
 
@@ -108,13 +121,13 @@ class Loop(Animation):
     def get_attributes(self):
         if self.pos != 0:
             return {
-                "count": str(self.count),
-                "pos": str(self.pos),
+                XML_ATTR_COUNT: str(self.count),
+                XML_ATTR_POS: str(self.pos),
             }
         else:
             return {
-                "count": str(self.count),
-                "dest": str(self.dest),
+                XML_ATTR_COUNT: str(self.count),
+                XML_ATTR_DEST: str(self.dest),
             }
 
 
@@ -127,8 +140,8 @@ class SetPos(Animation):
 
     def get_attributes(self):
         return {
-            "flag": str(self.flag),
-            "xyz": f"{self.x},{self.y},{self.z}",
+            XML_ATTR_FLAG: str(self.flag),
+            XML_ATTR_XYZ: f"{self.x},{self.y},{self.z}",
         }
 
 
@@ -140,7 +153,7 @@ class SetRot(Animation):
 
     def get_attributes(self):
         return {
-            "xyz": f"{self.x},{self.y},{self.z}",
+            XML_ATTR_XYZ: f"{self.x},{self.y},{self.z}",
         }
 
 
@@ -166,8 +179,8 @@ class SetScale(Animation):
 
     def get_attributes(self):
         return {
-            "mode": self.get_mode_str(),
-            "percent": str(self.percent),
+            XML_ATTR_MODE: self.get_mode_str(),
+            XML_ATTR_PCT: str(self.percent),
         }
 
 
@@ -177,17 +190,17 @@ class Unknown(Animation):
 
     def get_attributes(self):
         return {
-            "v": str(self.v),
+            XML_ATTR_VALUE: str(self.v),
         }
 
 
 @dataclass
 class SetParent(Animation):
-    component_index: int
+    index: int
 
     def get_attributes(self):
         return {
-            "component_index": str(self.component_index),
+            XML_ATTR_INDEX: str(self.index),
         }
 
 
@@ -197,7 +210,7 @@ class SetNotify(Animation):
 
     def get_attributes(self):
         return {
-            "v": str(self.v),
+            XML_ATTR_VALUE: str(self.v),
         }
 
 
@@ -342,68 +355,68 @@ class AnimComponent:
         for cmd in xml:
             if cmd.tag == "Label":
                 idx = len(commands)
-                labels[cmd.attrib["name"]] = idx
+                labels[cmd.attrib[XML_ATTR_NAME]] = idx
             elif cmd.tag == "Wait":
-                duration = int(cmd.attrib["duration"])
-                commands.append(duration)
+                duration = int(cmd.attrib[XML_ATTR_DURATION])
+                commands.append(duration & 0xFFF)
             elif cmd.tag == "SetRaster":
-                raster = int(cmd.attrib["raster"], 0x10)
+                raster = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
                 if raster == -1:
                     raster = 0xFFF
-                commands.append(0x1000 + raster)
+                commands.append(0x1000 + (raster & 0xFFF))
             elif cmd.tag == "Goto":
-                if "pos" in cmd.attrib:
+                if XML_ATTR_POS in cmd.attrib:
                     # support hardcoded positions for glitched animations
-                    pos = int(cmd.attrib["pos"])
+                    pos = int(cmd.attrib[XML_ATTR_POS])
                 else:
                     # properly formatted animations will have labels
-                    lbl_name = cmd.attrib["dest"]
+                    lbl_name = cmd.attrib[XML_ATTR_DEST]
                     if not lbl_name in labels:
                         raise Exception("Label missing for Goto dest: " + lbl_name)
                     pos = labels[lbl_name]
-                commands.append(0x2000 + pos)
+                commands.append(0x2000 + (pos & 0xFFF))
             elif cmd.tag == "SetPos":
-                flag = int(cmd.attrib["flag"])
-                x, y, z = cmd.attrib["xyz"].split(",")
-                commands.append(0x3000 + flag)
+                flag = int(cmd.attrib[XML_ATTR_FLAG], 0x10)
+                x, y, z = cmd.attrib[XML_ATTR_XYZ].split(",")
+                commands.append(0x3000 + (flag & 0xFFF))
                 commands.append(int(x) & 0xFFFF)
                 commands.append(int(y) & 0xFFFF)
                 commands.append(int(z) & 0xFFFF)
             elif cmd.tag == "SetRot":
-                x, y, z = cmd.attrib["xyz"].split(",")
-                commands.append(0x4000 + (int(x) & 0xFFFF))
+                x, y, z = cmd.attrib[XML_ATTR_XYZ].split(",")
+                commands.append(0x4000 + (int(x) & 0xFFF))
                 commands.append(int(y) & 0xFFFF)
                 commands.append(int(z) & 0xFFFF)
             elif cmd.tag == "SetScale":
-                mode = SCALE_MODE_STR_TO_INT[cmd.attrib["mode"]]
-                percent = int(cmd.attrib["percent"])
+                mode = SCALE_MODE_STR_TO_INT[cmd.attrib[XML_ATTR_MODE]]
+                percent = int(cmd.attrib[XML_ATTR_PCT])
                 commands.append(0x5000 + mode)
                 commands.append(percent)
             elif cmd.tag == "SetPalette":
-                palette = int(cmd.attrib["palette"], 0x10)
+                palette = int(cmd.attrib[XML_ATTR_INDEX], 0x10)
                 if palette == -1:
                     palette = 0xFFF
-                commands.append(0x6000 + palette)
+                commands.append(0x6000 + (palette & 0xFFF))
             elif cmd.tag == "Loop":
-                count = int(cmd.attrib["count"])
-                if "pos" in cmd.attrib:
+                count = int(cmd.attrib[XML_ATTR_COUNT])
+                if XML_ATTR_POS in cmd.attrib:
                     # support hardcoded positions for glitched animations
-                    pos = int(cmd.attrib["pos"])
+                    pos = int(cmd.attrib[XML_ATTR_POS])
                 else:
                     # properly formatted animations will have labels
-                    lbl_name = cmd.attrib["dest"]
+                    lbl_name = cmd.attrib[XML_ATTR_DEST]
                     if not lbl_name in labels:
                         raise Exception("Label missing for Loop dest: " + lbl_name)
                     pos = labels[lbl_name]
-                commands.append(0x7000 + count)
+                commands.append(0x7000 + (count & 0xFFF))
                 commands.append(pos)
             elif cmd.tag == "Unknown":
-                commands.append(0x8000 + int(cmd.attrib["v"]))
+                commands.append(0x8000 + (int(cmd.attrib[XML_ATTR_VALUE]) & 0xFF))
             elif cmd.tag == "SetParent":
-                commands.append(0x8100 + int(cmd.attrib["component_index"]))
+                commands.append(0x8100 + (int(cmd.attrib[XML_ATTR_INDEX]) & 0xFF))
             elif cmd.tag == "SetNotify":
-                commands.append(0x8200 + int(cmd.attrib["v"]))
+                commands.append(0x8200 + (int(cmd.attrib[XML_ATTR_VALUE]) & 0xFF))
             else:
                 raise ValueError(f"unknown command {cmd.tag}")
-        x, y, z = xml.attrib["xyz"].split(",")
+        x, y, z = xml.attrib[XML_ATTR_XYZ].split(",")
         return AnimComponent(int(x), int(y), int(z), commands)

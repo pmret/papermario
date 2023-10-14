@@ -596,7 +596,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_TiredTalk, ANIM_JrTroopa_OutOfBreath, 0, MSG_CH5_000A)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Panic)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20)
     EVT_CALL(NpcJump0, NPC_SELF, 250, 0, 90, 10)

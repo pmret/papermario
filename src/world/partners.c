@@ -527,7 +527,7 @@ s32 use_consumable(s32 invSlot) {
 }
 
 void remove_consumable(void) {
-    gPlayerData.invItems[D_8010CD20] = 0;
+    gPlayerData.invItems[D_8010CD20] = ITEM_NONE;
     sort_items();
 }
 
@@ -1240,7 +1240,7 @@ void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)
+    if (!gGameStatusPtr->multiplayerEnabled || playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)
         || partnerStatus->inputDisabledCount != 0 || partnerStatus->partnerAction_unk_2) {
         if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL)) {
             partner_walking_follow_player(partner);
@@ -1817,7 +1817,7 @@ void partner_flying_update_motion(Npc* partner) {
     f32 var_f0;
     f32 var_f2;
 
-    if (gGameStatusPtr->multiplayerEnabled == 0 ||
+    if (!gGameStatusPtr->multiplayerEnabled ||
         (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) ||
         partnerStatus->inputDisabledCount ||
         partnerStatus->partnerAction_unk_2)

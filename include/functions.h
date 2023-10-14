@@ -54,9 +54,9 @@ s32 is_picking_up_item(void);
 f32 integrate_gravity(void);
 void gravity_use_fall_parms(void);
 f32 get_clamped_angle_diff(f32, f32);
-s32 intro_logos_fade_in(s16 subtractAlpha);
-s32 intro_logos_fade_out(s16 addAlpha);
-void intro_logos_update_fade(void);
+b32 startup_fade_screen_in(s16 subtractAlpha);
+b32 startup_fade_screen_out(s16 addAlpha);
+void startup_fade_screen_update(void);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
@@ -216,7 +216,6 @@ void set_time_freeze_mode(s32);
 
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
-void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outW);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
@@ -267,7 +266,7 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 
-s32 game_scripts_disabled(void);
+b32 check_player_action_debug(void);
 
 s32 battle_heap_create(void);
 
@@ -280,8 +279,8 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
 
 void mem_clear(void* data, s32 numBytes);
 
-void intro_logos_set_fade_color(s16 color);
-void intro_logos_set_fade_alpha(s16 alpha);
+void startup_set_fade_screen_color(s16 color);
+void startup_set_fade_screen_alpha(s16 alpha);
 
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
@@ -373,7 +372,7 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void btl_bonk_cleanup(void);
-void func_80263E08(Actor*, ActorPart*, AnimID);
+void set_actor_anim_by_ref(Actor*, ActorPart*, AnimID);
 void update_action_ratings(void);
 void update_health_bars(void);
 s32 btl_cam_is_moving_done(void);
@@ -381,7 +380,7 @@ void btl_popup_messages_update(void);
 void btl_popup_messages_draw_world_geometry(void);
 void func_80255FD8(void);
 
-void func_80266EE8(Actor* actor, s32 arg1);
+void set_actor_pal_effect(Actor* actor, s32 arg1);
 
 void btl_set_popup_duration(s32 duration);
 void switch_to_partner(s32 arg0);
@@ -443,8 +442,8 @@ void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius);
 void set_npc_animation(Npc* npc, u32 animID);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
-void set_animation(s32 actorID, s32 partID, AnimID animID);
-void set_animation_rate(s32 actorID, s32 partID, f32 rate);
+void set_actor_anim(s32 actorID, s32 partID, AnimID animID);
+void set_actor_anim_rate(s32 actorID, s32 partID, f32 rate);
 void set_model_group_visibility(u16, s32, s32);
 void init_enter_world_shared(void);
 s16 update_enter_map_screen_overlay(s16* progress);
@@ -503,8 +502,8 @@ void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
 s32 enable_player_static_collisions(void);
-s32 check_input_jump(void);
-s32 check_input_hammer(void);
+b32 check_input_jump(void);
+b32 check_input_hammer(void);
 
 Npc* resolve_npc(Evt* script, s32 npcIdOrPtr);
 void enable_npc_blur(Npc* npc);
@@ -541,8 +540,8 @@ void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32*
 void basic_hidden_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
-void player_create_target_list(Actor* actor);
-void enemy_create_target_list(Actor* actor);
+void create_current_pos_target_list(Actor* actor);
+void create_home_target_list(Actor* actor);
 
 void set_actor_yaw(s32 actorID, s32 yaw);
 void set_part_yaw(s32 actorID, s32 partID, s32 value);
@@ -796,9 +795,9 @@ void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void PatrolAI_LoiterInit(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 s32 func_80263230(Actor*, Actor*);
-void func_80266EA8(ActorPart*, s32);
+void set_part_pal_effect(ActorPart*, s32);
 void func_80266E40(Actor*);
-void func_80267018(Actor* actor, s32 arg1);
+void set_actor_flash_mode(Actor* actor, s32 arg1);
 void remove_player_buffs(s32);
 s32 is_actor_health_bar_visible(Actor*);
 
@@ -960,22 +959,23 @@ void disable_actor_blur(Actor*);
 void reset_actor_blur(Actor*);
 void enable_actor_blur(Actor*);
 void apply_shock_effect(Actor*);
-void func_8025C8A0(s32, ActorPart*, s32 yaw, s32 arg3);
-void func_8025CD28(s32, ActorPart*, s32 yaw, s32 arg3);
+void part_glow_off(s32, ActorPart*, s32 yaw, b32 arg3);
+void part_flash_off(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection);
+void part_flash_on(b32 isNpcSprite, ActorPart* part, s32 yaw, b32 isReflection);
 void _add_part_decoration(ActorPart*);
 void _remove_part_decoration(ActorPart* part, s32 decorationIndex);
-void func_8025D158(ActorPart*, s32);
-void func_8025D290(ActorPart*, s32);
-void func_8025D3C4(ActorPart*, s32);
-void func_8025D4A0(ActorPart*, s32);
-void func_8025D620(ActorPart*, s32);
-void func_8025D6FC(ActorPart*, s32);
-void func_8025D810(ActorPart*, s32);
-void func_8025D8EC(ActorPart*, s32);
-void func_8025DA60(ActorPart*, s32);
-void func_8025DBC8(ActorPart*, s32);
-void func_8025DD40(ActorPart*, s32);
-void func_8025DE88(ActorPart*, s32);
+void remove_part_decor_none(ActorPart*, s32);
+void remove_part_decor_golden_flames(ActorPart*, s32);
+void remove_part_decor_sweat(ActorPart*, s32);
+void remove_part_decor_seeing_stars(ActorPart*, s32);
+void remove_part_decor_red_flames(ActorPart*, s32);
+void remove_part_decor_smoky_trail(ActorPart*, s32);
+void remove_part_decor_fiery_trail(ActorPart*, s32);
+void remove_part_decor_whirlwind(ActorPart*, s32);
+void remove_part_decor_steam(ActorPart*, s32);
+void remove_part_decor_sparkles(ActorPart*, s32);
+void remove_part_decor_bowser_aura(ActorPart*, s32);
+void remove_part_decor_radiating_stars(ActorPart*, s32);
 void status_bar_ignore_changes(void);
 void imgfx_release_instance(u32);
 
@@ -1035,7 +1035,7 @@ void func_80266970(Actor*);
 void show_actor_health_bar(Actor*);
 void hide_actor_health_bar(Actor*);
 void clear_part_pal_adjustment(ActorPart*);
-void func_800E24F8(void);
+void calculate_camera_yinterp_rate(void);
 void load_tattle_flags(s32);
 s32 use_consumable(s32 invSlot);
 void remove_consumable(void);
@@ -1069,7 +1069,7 @@ void clear_sprite_shading_data(void);
 void clear_character_set(void);
 void clear_trigger_data(void);
 void clear_script_list(void);
-void clear_entity_data(s32);
+void clear_entity_data(b32);
 void clear_effect_data(void);
 
 void clear_saved_variables(void);

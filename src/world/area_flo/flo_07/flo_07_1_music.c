@@ -12,7 +12,7 @@ EvtScript N(EVS_SetupMusic) = {
                 EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_LOOP_21)
+    EVT_CALL(PlaySound, SOUND_LOOP_FLO_WATER_FLOW_1)
     EVT_RETURN
     EVT_END
 };

@@ -23,7 +23,7 @@ NpcSettings N(NpcSettings_Raven) = {
 
 EvtScript N(D_802412D4_B812D4) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_RAFAELS_TREE)
+    EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
         EVT_CALL(EnableGroup, MODEL_g38, FALSE)
         EVT_CALL(EnableGroup, MODEL_g54, FALSE)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -45,7 +45,7 @@ EvtScript N(D_802412D4_B812D4) = {
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_WAIT(30 * DT)
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_SET(GB_StoryProgress, STORY_CH5_REACHED_RAFAELS_TREE)
+        EVT_SET(GB_StoryProgress, STORY_CH5_REACHED_RAPHAELS_TREE)
     EVT_END_IF
     EVT_CALL(EnableGroup, MODEL_g38, TRUE)
     EVT_CALL(EnableGroup, MODEL_g54, TRUE)
@@ -64,9 +64,9 @@ EvtScript N(EVS_NpcInteract_Raven) = {
 
 EvtScript N(EVS_NpcInit_Raven) = {
     EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_RAFAEL_LEFT_NEST)
+        EVT_CASE_LT(STORY_CH5_RAPHAEL_LEFT_NEST)
             EVT_GOTO(20)
-        EVT_CASE_RANGE(STORY_CH5_RAFAEL_LEFT_NEST, STORY_CH5_RAFAEL_MOVED_ROOT)
+        EVT_CASE_RANGE(STORY_CH5_RAPHAEL_LEFT_NEST, STORY_CH5_RAPHAEL_MOVED_ROOT)
             EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Raven)))
             EVT_CALL(GetSelfNpcID, LVar0)
             EVT_IF_EQ(LVar0, 1)
@@ -76,7 +76,7 @@ EvtScript N(EVS_NpcInit_Raven) = {
                 EVT_CALL(SetNpcPos, NPC_Raven_04, -390, 0, -40)
                 EVT_CALL(SetNpcPos, NPC_Raven_05, -411, 93, -16)
             EVT_END_IF
-        EVT_CASE_GT(STORY_CH5_RAFAEL_MOVED_ROOT)
+        EVT_CASE_GT(STORY_CH5_RAPHAEL_MOVED_ROOT)
             EVT_LABEL(20)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o113, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -114,7 +114,7 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_SELF, 2)
     EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_018A, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_JAN_RAPHAEL_POUND, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 50, EVT_FLOAT(1.0))
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -156,11 +156,11 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
         EVT_LOOP(6)
             EVT_SWITCH(LVar0)
                 EVT_CASE_RANGE(1, 4)
-                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_018C, 0)
+                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_1, 0)
                 EVT_CASE_EQ(5)
-                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_018D, 0)
+                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_2, 0)
                 EVT_CASE_EQ(6)
-                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_018E, 0)
+                    EVT_CALL(PlaySoundAtCollider, COLLIDER_o97, SOUND_JAN_ROOT_WOBBLE_3, 0)
             EVT_END_SWITCH
             EVT_ADD(LVar0, 1)
             EVT_WAIT(20)
@@ -198,21 +198,21 @@ EvtScript N(EVS_NpcInteract_RaphaelRaven) = {
 #else
     EVT_CALL(ResetCam, CAM_DEFAULT, 5)
 #endif
-    EVT_SET(GB_StoryProgress, STORY_CH5_RAFAEL_MOVED_ROOT)
+    EVT_SET(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInit_RaphaelRaven) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
+    EVT_IF_EQ(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
         EVT_CALL(SetNpcPos, NPC_SELF, 85, 0, 410)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RaphaelRaven)))
         EVT_RETURN
     EVT_ELSE
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_IF_GE(GB_StoryProgress, STORY_CH5_RAFAEL_MOVED_ROOT)
+        EVT_IF_GE(GB_StoryProgress, STORY_CH5_RAPHAEL_MOVED_ROOT)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o97, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(TranslateGroup, MODEL_g40, 0, 100, 0)
         EVT_END_IF

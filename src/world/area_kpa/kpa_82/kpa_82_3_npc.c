@@ -177,7 +177,7 @@ EvtScript N(EVS_SetCam_BeforeBattle) = {
 
 EvtScript N(EVS_SetDoorRots) = {
     EVT_CALL(MakeLerp, 0, 60, 30 * DT, EASING_LINEAR)
-    EVT_CALL(PlaySound, SOUND_0225)
+    EVT_CALL(PlaySound, SOUND_KPA_QUIZ_DOORS_OPEN)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateModel, MODEL_o100, 0, LVar0, 0)
@@ -197,7 +197,7 @@ EvtScript N(EVS_SetDoorRots) = {
 
 EvtScript N(EVS_CloseDoors) = {
     EVT_CALL(MakeLerp, 60, 0, 30 * DT, EASING_LINEAR)
-    EVT_CALL(PlaySound, SOUND_0226)
+    EVT_CALL(PlaySound, SOUND_KPA_QUIZ_DOORS_CLOSE)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateModel, MODEL_o100, 0, LVar0, 0)

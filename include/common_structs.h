@@ -164,14 +164,16 @@ typedef struct HeapNode {
     /* 0x0C */ u32 capacity;
 } HeapNode; // size = 0x10
 
+#define NPC_BLUR_FRAMES 20
+
 /// Ring buffer of an NPC's position over the past 20 frames.
 typedef struct NpcMotionBlur {
-    /* 0x00 */ s8 unk_00;
+    /* 0x00 */ s8 unused;
     /* 0x01 */ s8 index; ///< Current blur ring buffer index
     /* 0x02 */ char unk_02[2]; // padding?
-    /* 0x04 */ f32 x[20];
-    /* 0x54 */ f32 y[20];
-    /* 0xA4 */ f32 z[20];
+    /* 0x04 */ f32 posX[NPC_BLUR_FRAMES];
+    /* 0x54 */ f32 posY[NPC_BLUR_FRAMES];
+    /* 0xA4 */ f32 posZ[NPC_BLUR_FRAMES];
 } NpcMotionBlur; // size = 0xF4
 
 typedef struct NpcChompBlur {
@@ -211,6 +213,8 @@ typedef struct NpcFollowData {
     /* 0x29C */ f32 idleRadius;
     /* 0x2A0 */ f32 walkRadius;
 } NpcFollowData; // size = 0x2A4
+
+#define MAX_NPC_DECORATIONS 2
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -270,32 +274,32 @@ typedef struct Npc {
     /* 0x0B0 */ AnimID* extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
     /* 0x0B5 */ s8 palSwapPrevType;
-    /* 0x0B6 */ s8 dirtyPalettes;
-    /* 0x0B7 */ s8 palSwapState;
+    /* 0x0B6 */ s8 resetPalAdjust;
+    /* 0x0B7 */ s8 palAnimState;
     /* 0x0B8 */ char unk_B8[4];
-    /* 0x0BC */ s16 palSwapTimer;
-    /* 0x0BE */ s16 palSwapLerpAlpha;
-    /* 0x0C0 */ s8 unk_C0;
-    /* 0x0C1 */ s8 paletteCount;
+    /* 0x0BC */ s16 nextPalTime;
+    /* 0x0BE */ s16 palBlendAlpha;
+    /* 0x0C0 */ s8 spriteColorVariations;
+    /* 0x0C1 */ s8 originalPalettesCount;
     /* 0x0C2 */ char unk_C2[2];
-    /* 0x0C4 */ PAL_PTR* spritePaletteList;
-    /* 0x0C8 */ PAL_BIN localPaletteData[16][16];
-    /* 0x2C8 */ PAL_PTR localPalettes[16];
-    /* 0x308 */ s16 unk_308;
-    /* 0x30A */ s16 unk_30A;
-    /* 0x30C */ u16 unk_30C;
-    /* 0x30E */ s16 unk_30E;
-    /* 0x310 */ s16 unk_310;
-    /* 0x312 */ s16 unk_312;
-    /* 0x314 */ s16 unk_314;
-    /* 0x316 */ s16 unk_316;
+    /* 0x0C4 */ PAL_PTR* originalPalettesList;
+    /* 0x0C8 */ PAL_BIN copiedPalettes[16][SPR_PAL_SIZE];
+    /* 0x2C8 */ PAL_PTR adjustedPalettes[16];
+    /* 0x308 */ s16 blendPalA;
+    /* 0x30A */ s16 blendPalB;
+    /* 0x30C */ u16 palswapTimeHoldA;
+    /* 0x30E */ s16 palswapTimeAtoB;
+    /* 0x310 */ s16 palswapTimeHoldB;
+    /* 0x312 */ s16 palswapTimeBtoA;
+    /* 0x314 */ s16 blendPalC;
+    /* 0x316 */ s16 blendPalD;
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
-    /* 0x324 */ struct EffectInstance* decorations[2];
-    /* 0x32C */ s8 decorationType[2];
-    /* 0x32E */ s8 changedDecoration[2];
-    /* 0x330 */ s8 decorationInitialised[2];
-    /* 0x332 */ s16 decorationUnk[2];
+    /* 0x324 */ struct EffectInstance* decorations[MAX_NPC_DECORATIONS];
+    /* 0x32C */ s8 decorationType[MAX_NPC_DECORATIONS];
+    /* 0x32E */ s8 changedDecoration[MAX_NPC_DECORATIONS];
+    /* 0x330 */ s8 decorationInitialized[MAX_NPC_DECORATIONS];
+    /* 0x332 */ s16 decorationGlowPhase[MAX_NPC_DECORATIONS];
     /* 0x336 */ char unk_336[10];
 } Npc; // size = 0x340
 
@@ -823,31 +827,31 @@ typedef struct Camera {
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
-    /* 0x494 */ f32 unk_494;
-    /* 0x498 */ f32 unk_498;
-    /* 0x49C */ f32 unk_49C;
-    /* 0x4A0 */ f32 savedTargetY;
+    /* 0x494 */ f32 yinterpGoal;
+    /* 0x498 */ f32 yinterpAlpha;
+    /* 0x49C */ f32 yinterpRate; // smaller is faster; not valid for values less than 1.0, unstable below 0.5
+    /* 0x4A0 */ f32 yinterpCur;
     /* 0x4A4 */ Vec3f prevTargetPos;
     /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ Vec3f prevPrevMovePos;
     /* 0x4C8 */ Vec3f prevMovePos;
-    /* 0x4D4 */ u16 prevPrevFollowFlags;
-    /* 0x4D6 */ u16 prevFollowFlags;
+    /* 0x4D4 */ u16 prevPrevFollowPlayer;
+    /* 0x4D6 */ u16 prevFollowPlayer;
     /* 0x4D8 */ CameraControlSettings controlSettings;
     /* 0x504 */ u16 followPlayer;
     /* 0x506 */ u16 panActive;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ f32 unk_510;
-    /* 0x514 */ f32 unk_514;
-    /* 0x518 */ f32 unk_518;
-    /* 0x51C */ s32 unk_51C;
+    /* 0x510 */ f32 targetLeadAmount;
+    /* 0x514 */ f32 leadInterpAlpha;
+    /* 0x518 */ f32 accumulatedStickLead;
+    /* 0x51C */ s32 increasingLeadInterp;
     /* 0x520 */ f32 unk_520;
-    /* 0x524 */ f32 unk_524;
-    /* 0x528 */ f32 unk_528;
+    /* 0x524 */ f32 leadUnkX;
+    /* 0x528 */ f32 leadUnkZ;
     /* 0x52C */ s32 unk_52C;
     /* 0x530 */ s32 unk_530;
-    /* 0x534 */ CameraControlSettings* aabbForZoneBelow;
+    /* 0x534 */ CameraControlSettings* leadControlSettings;
     /* 0x538 */ char unk_538[0x18];
     /* 0x550 */ f32 unk_550;
     /* 0x554 */ s16 unk_554;
@@ -864,7 +868,7 @@ typedef struct BattleStatus {
     /*       */ };
     /* 0x048 */ s8 curSubmenu;
     /* 0x049 */ s8 unk_49;
-    /* 0x04A */ s8 unk_4A;
+    /* 0x04A */ s8 curPartnerSubmenu;
     /* 0x04B */ s8 unk_4B;
     /* 0x04C */ s8 lastPlayerMenuSelection[16];
     /* 0x05C */ s8 lastPartnerMenuSelection[16];
@@ -898,7 +902,7 @@ typedef struct BattleStatus {
     /* 0x092 */ s8 reflectFlags;
     /* 0x093 */ s8 unk_93;
     /* 0x094 */ s8 unk_94;
-    /* 0x095 */ s8 unk_95;
+    /* 0x095 */ s8 waitForState;
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
@@ -929,8 +933,8 @@ typedef struct BattleStatus {
     /* 0x0CC */ Vec3f camLookatObjPos;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
-    /* 0x0E0 */ struct Actor* enemyActors[24];
-    /* 0x140 */ s16 enemyIDs[24];
+    /* 0x0E0 */ struct Actor* enemyActors[MAX_ENEMY_ACTORS];
+    /* 0x140 */ s16 enemyIDs[MAX_ENEMY_ACTORS];
     /* 0x170 */ s8 nextEnemyIndex; /* (during enemy turn) who should go next */
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 activeEnemyActorID; /* (during enemy turn) enemy currently using their move */
@@ -949,7 +953,7 @@ typedef struct BattleStatus {
     /* 0x194 */ u8 statusChance;
     /* 0x195 */ s8 statusDuration;
     /* 0x196 */ char unk_196;
-    /* 0x197 */ s8 targetHomeIndex; /* some sort of home index used for target list construction */
+    /* 0x197 */ s8 sampleTargetHomeIndex;
     /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
     /* 0x19A */ u8 curDamageSource;
@@ -1405,24 +1409,24 @@ typedef struct GameStatus {
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ s8 debugEnemyContact;
     /* 0x075 */ s8 debugQuizmo;
-    /* 0x076 */ s8 unk_76;
-    /* 0x077 */ char unk_77;
-    /* 0x078 */ s8 disableScripts;
+    /* 0x076 */ b8 debugUnused1;
+    /* 0x077 */ b8 debugUnused2;
+    /* 0x078 */ s8 debugScripts;
     /* 0x079 */ char unk_79;
-    /* 0x07A */ s8 musicEnabled;
+    /* 0x07A */ b8 musicEnabled;
     /* 0x07B */ char unk_7B;
-    /* 0x07C */ s8 unk_7C;
-    /* 0x07D */ s8 keepUsingPartnerOnMapChange;
+    /* 0x07C */ b8 healthBarsEnabled;
+    /* 0x07D */ b8 keepUsingPartnerOnMapChange;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
-    /* 0x081 */ s8 multiplayerEnabled;
-    /* 0x082 */ Vec2b unk_82;
+    /* 0x081 */ b8 multiplayerEnabled;
+    /* 0x082 */ Vec2b altViewportOffset;
     /* 0x084 */ s8 playerSpriteSet;
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
-    /* 0x08A */ s16 didAreaChange;
+    /* 0x08A */ b16 didAreaChange;
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
     /* 0x090 */ u16 unk_90;
@@ -1430,20 +1434,20 @@ typedef struct GameStatus {
     /* 0x094 */ f32 exitTangent;
     /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
-    /* 0x0A8 */ s8 creditsViewportMode;
+    /* 0x0A8 */ s8 introPart;
     /* 0x0A9 */ s8 unk_A9; // selected language?
     /* 0x0AA */ s8 demoBattleFlags;
     /* 0x0AB */ u8 soundOutputMode;
-    /* 0x0AC */ s8 introState;
-    /* 0x0AD */ s8 introCounter;
-    /* 0x0AE */ s8 bSkipIntro;
-    /* 0x0AF */ s8 unk_AF;
-    /* 0x0B0 */ s8 unk_B0;
+    /* 0x0AC */ s8 startupState; // used for various startup states like logos, title screen, intro, and demo
+    /* 0x0AD */ s8 logoTime;
+    /* 0x0AE */ b8 skipLogos;
+    /* 0x0AF */ s8 titleScreenTimer;
+    /* 0x0B0 */ s8 titleScreenDismissTime;
     /* 0x0B1 */ char unk_B1[0x5];
-    /* 0x0B6 */ s16 bootAlpha;
-    /* 0x0B8 */ s16 bootBlue;
-    /* 0x0BA */ s16 bootGreen;
-    /* 0x0BC */ s16 bootRed;
+    /* 0x0B6 */ s16 screenColorA;
+    /* 0x0B8 */ s16 screenColorR;
+    /* 0x0BA */ s16 screenColorG;
+    /* 0x0BC */ s16 screenColorB;
     /* 0x0BE */ char unk_BE[94];
     /* 0x11C */ Vec3f playerGroundTraceAngles;
     /* 0x128 */ Vec3f playerGroundTraceNormal;
@@ -1518,13 +1522,13 @@ typedef struct RenderTask {
 
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
-    /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
-    /* 0x04 */ Vec3s posA;
-    /* 0x0A */ Vec3s posB;
-    /* 0x10 */ s8 unk_10;
-    /* 0x11 */ s8 homeCol; /* from xpos --> 0-3 */
-    /* 0x12 */ s8 homeRow; /* from ypos --> 0-3 */
-    /* 0x13 */ s8 layer; /* from zpos? --> 0-1 */
+    /* 0x02 */ s16 partID;
+    /* 0x04 */ Vec3s truePos; // position where the cursor will be drawn
+    /* 0x0A */ Vec3s sortPos; // effective position used for sorting, includes priority-based x offsets
+    /* 0x10 */ s8 priorityOffset;
+    /* 0x11 */ s8 column; // from xpos --> 0-3
+    /* 0x12 */ s8 row; // from ypos --> 0-3
+    /* 0x13 */ s8 layer; // from zpos --> 0-1
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
@@ -1639,19 +1643,55 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
-// seems to be a union differing for each decoration
-typedef struct DecorationUnk {
-    /* 0x00 */ s16 unk00;
-    /* 0x02 */ s16 unk02;
-    /* 0x04 */ s16 unk04;
-    /* 0x06 */ s16 unk06;
-    /* 0x08 */ s16 unk08;
-    /* 0x0A */ s16 unk0A;
-    /* 0x0C */ s16 unk0C;
-    /* 0x0E */ s16 unk0E;
-} DecorationUnk; // size = 0x10
+typedef struct DecorFireTrail {
+    /* 0x00 */ s16 scale;
+} DecorFireTrail;
+
+typedef struct DecorGoldenFlames {
+    /* 0x00 */ s16 scaleX;
+    /* 0x02 */ s16 scaleY;
+    /* 0x04 */ s16 offsetX;
+} DecorGoldenFlames;
+
+typedef struct DecorRedFlames {
+    /* 0x00 */ s16 scaleX;
+    /* 0x02 */ s16 scaleY;
+    /* 0x04 */ s16 alpha;
+    /* 0x06 */ s16 offsetZ;
+    /* 0x08 */ s16 unused1;
+    /* 0x0A */ s16 unused2;
+    /* 0x0C */ s16 unused3;
+} DecorRedFlames;
+
+typedef struct DecorBowserAura {
+    /* 0x00 */ s16 scaleX;
+    /* 0x02 */ s16 scaleY;
+    /* 0x04 */ s16 alpha;
+    /* 0x06 */ s16 offsetZ;
+} DecorBowserAura;
+
+typedef struct DecorDataSparkles {
+    /* 0x00 */ s16 spawnInterval;
+} DecorDataSparkles;
+
+typedef struct DecorDataStars {
+    /* 0x00 */ s16 scalePct;
+    /* 0x02 */ s16 offsetY;
+} DecorDataStars;
+
+// data for any type of decoration can be stored here
+typedef union DecorationData {
+    s16 raw[8];
+    DecorFireTrail fireTrail;
+    DecorRedFlames redFlames;
+    DecorGoldenFlames goldenFlames;
+    DecorBowserAura bowserAura;
+    DecorDataSparkles sparkles;
+    DecorDataStars stars;
+} DecorationData; // size = 0x10
 
 #define MAX_ACTOR_DECORATIONS 2
+#define ACTOR_BLUR_FRAMES 16
 
 typedef struct DecorationTable {
     /* 0x000 */ PAL_BIN copiedPalettes[2][27][SPR_PAL_SIZE];
@@ -1674,35 +1714,35 @@ typedef struct DecorationTable {
     /* 0x74A */ s16 palswapTimeBtoA;
     /* 0x74C */ s16 palswapUnused1; // presumably palswapTimeHoldC for unimplemented triple cycling (A->B->C->A)
     /* 0x74E */ s16 palswapUnused2; // presumably palswapTimeCtoA  for unimplemented triple cycling (A->B->C->A)
-    /* 0x750 */ s8 unk_750;
-    /* 0x751 */ s8 unk_751;
-    /* 0x752 */ s8 unk_752;
+    /* 0x750 */ s8 glowState;
+    /* 0x751 */ b8 glowStateChanged;
+    /* 0x752 */ s8 glowUnk1;
     /* 0x753 */ char pad753[5];
-    /* 0x758 */ s16 unk758;
-    /* 0x75A */ s16 unk75A;
-    /* 0x75C */ s16 unk75C;
+    /* 0x758 */ s16 glowUnk2;
+    /* 0x75A */ s16 glowUnk3;
+    /* 0x75C */ s16 glowPhase;
     /* 0x75E */ char pad75E[6];
-    /* 0x764 */ s8 unk_764;
-    /* 0x765 */ s8 unk_765;
-    /* 0x766 */ s8 unk_766;
-    /* 0x767 */ s8 unk_767;
-    /* 0x768 */ u8 unk_768;
+    /* 0x764 */ s8 flashState;
+    /* 0x765 */ s8 flashStateChanged;
+    /* 0x766 */ s8 flashMode;
+    /* 0x767 */ s8 flashFramesLeft;
+    /* 0x768 */ u8 flashEnabled;
     /* 0x769 */ char unk_769[3];
-    /* 0x76C */ PAL_PTR unk_76C[16];
+    /* 0x76C */ PAL_PTR flashPalettes[16];
     /* 0x78C */ char unk_7AC[0x2C];
-    /* 0x7D8 */ s8 unk_7D8;
+    /* 0x7D8 */ s8 blurUnused;
     /* 0x7D9 */ s8 blurBufferPos;
     /* 0x7DA */ s8 blurDrawCount;
     /* 0x7DB */ s8 blurEnableCount;
-    /* 0x7DC */ s16 yaw[16];
-    /* 0x7FC */ s16 posX[16];
-    /* 0x81C */ s16 posY[16];
-    /* 0x83C */ s16 posZ[16];
-    /* 0x85C */ s8 rotPivotOffsetX[16];
-    /* 0x86C */ s8 rotPivotOffsetY[16];
-    /* 0x87C */ u8 rotX[16];
-    /* 0x88C */ u8 rotY[16];
-    /* 0x89C */ u8 rotZ[16];
+    /* 0x7DC */ s16 yaw[ACTOR_BLUR_FRAMES];
+    /* 0x7FC */ s16 posX[ACTOR_BLUR_FRAMES];
+    /* 0x81C */ s16 posY[ACTOR_BLUR_FRAMES];
+    /* 0x83C */ s16 posZ[ACTOR_BLUR_FRAMES];
+    /* 0x85C */ s8 rotPivotOffsetX[ACTOR_BLUR_FRAMES];
+    /* 0x86C */ s8 rotPivotOffsetY[ACTOR_BLUR_FRAMES];
+    /* 0x87C */ u8 rotX[ACTOR_BLUR_FRAMES];
+    /* 0x88C */ u8 rotY[ACTOR_BLUR_FRAMES];
+    /* 0x89C */ u8 rotZ[ACTOR_BLUR_FRAMES];
     /* 0x8AC */ s8 blurDisableDelay; // infinite when zero
     /* 0x8AD */ char unk_8AD[3];
     /* substruct for decorations? */
@@ -1712,7 +1752,7 @@ typedef struct DecorationTable {
     /* 0x8BC */ s8 state[MAX_ACTOR_DECORATIONS];
     /* 0x8BE */ s16 stateResetTimer[MAX_ACTOR_DECORATIONS];
     /* 0x8C2 */ char unk_8C0[4];
-    /* 0x8C6 */ DecorationUnk unk_8C6[MAX_ACTOR_DECORATIONS];
+    /* 0x8C6 */ DecorationData decorData[MAX_ACTOR_DECORATIONS];
 } DecorationTable; // size = 0x8E8
 
 typedef struct PlayerPathElement {
@@ -1799,7 +1839,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ Vec3f unk_30;
+    /* 0x30 */ Vec3f velStep;
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 vel;
@@ -1912,9 +1952,9 @@ typedef struct Actor {
     /* 0x224 */ s8 chillOutTurns;
     /* 0x225 */ char unk_225[3];
     /* 0x228 */ struct EffectInstance* icePillarEffect;
-    /* 0x22C */ struct SelectableTarget targetData[24];
+    /* 0x22C */ struct SelectableTarget targetData[MAX_ENEMY_ACTORS];
     /* 0x40C */ s8 targetListLength;
-    /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
+    /* 0x40D */ s8 targetIndexList[MAX_ENEMY_ACTORS]; /* into targetData */
     /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
     /* 0x426 */ s8 targetPartIndex;
     /* 0x427 */ char unk_427[1];
@@ -1981,7 +2021,7 @@ typedef struct PlayerStatus {
     /* 0x064 */ f32 overlapPushAmount;
     /* 0x068 */ f32 groundNormalPitch;
     /* 0x06C */ f32 maxJumpSpeed;
-    /* 0x070 */ f32 gravityIntegrator[4];
+    /* 0x070 */ f32 gravityIntegrator[4]; // derivatives of y; 0 = velocity, 1 = accel, etc
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 curYaw;
     /* 0x088 */ f32 overlapPushYaw;
@@ -2026,25 +2066,23 @@ typedef struct PlayerStatus {
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
-typedef struct SaveDataHeader {
-    /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */
-    /* 0x0010 */ s8 pad[0x20]; /* always zero */
-    /* 0x0030 */ s32 crc1;
-    /* 0x0034 */ s32 crc2;
-    /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ u32 saveCount;
-    /* 0x0040 */ s8 ignored[0x40];
-} SaveDataHeader;
+typedef struct SaveGlobals {
+    /* 0x00 */ char magicString[16]; /* "Mario Story 006" string */
+    /* 0x10 */ s8 pad[32]; /* always zero */
+    /* 0x30 */ s32 crc1;
+    /* 0x34 */ s32 crc2;
+    /* 0x38 */ s32 useMonoSound;
+    /* 0x3C */ u32 lastFileSelected;
+    /* 0x40 */ s8 reserved[64]; // unused
+} SaveGlobals; // size = 0x80
 
 typedef struct SaveMetadata {
     /* 0x00 */ s32 timePlayed;
     /* 0x04 */ u8 spiritsRescued;
-    /* 0x05 */ char unk_05[0x1];
+    /* 0x05 */ char unk_05[1];
     /* 0x06 */ s8 level;
     /* 0x07 */ unsigned char filename[8];
-    /* 0x0F */ char unk_0F[0x1];
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x0F */ char unk_0F[9];
 } SaveMetadata; // size = 0x18
 
 typedef struct SaveData {
@@ -2065,12 +2103,12 @@ typedef struct SaveData {
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
     /* 0x12E0 */ s8 debugEnemyContact;
-    /* 0x12E0 */ s8 unk_12E1;
-    /* 0x12E0 */ s8 unk_12E2;
-    /* 0x12E0 */ s8 musicEnabled;
+    /* 0x12E0 */ b8 debugUnused1;
+    /* 0x12E0 */ b8 debugUnused2;
+    /* 0x12E0 */ b8 musicEnabled;
     /* 0x12E4 */ char unk_12E4[0x2];
     /* 0x12E6 */ Vec3s savePos;
-    /* 0x12EC */ SaveMetadata unk_12EC;
+    /* 0x12EC */ SaveMetadata metadata;
     /* 0x1304 */ char unk_1304[0x7C];
 } SaveData; // size = 0x1380
 

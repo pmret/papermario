@@ -37,7 +37,7 @@ NUPiOverlaySegment D_8007798C = {
     .bssEnd = filemenu_BSS_END,
 };
 
-u8 D_800779B0 = 0;
+u8 IntroMessageIdx = 0;
 
 extern s32 D_80200000;
 extern ShapeFile gMapShapeData;
@@ -73,7 +73,7 @@ void state_init_file_select(void) {
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
-    set_cam_viewport(0, 12, 28, 296, 184);
+    set_cam_viewport(CAM_DEFAULT, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
     gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
@@ -116,16 +116,16 @@ void state_step_language_select(void) {
         case 1:
             D_800A0930 = 5;
             D_800A0931 = 2;
-            gOverrideFlags |= GLOBAL_OVERRIDES_8;
+            gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
             break;
         case 2:
             D_800A0930--;
             if (D_800A0930 == 0) {
                 nuGfxSetCfb(fsFrameBuffers, 2);
                 if (nuGfxCfb[2] == nuGfxCfb_ptr) {
-                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                 } else {
-                    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+                    gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                     set_windows_visible(WINDOW_GROUP_FILE_MENU);
                     D_800A0930 = 1;
                     D_800A0931 = 3;
@@ -156,11 +156,11 @@ void state_step_language_select(void) {
                     clear_item_entity_data();
                     clear_script_list();
                     clear_npcs();
-                    clear_entity_data(0);
+                    clear_entity_data(FALSE);
                     clear_trigger_data();
                     nuPiReadRomOverlay(&D_8007798C);
                     filemenu_init(1);
-                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                     set_screen_overlay_params_front(OVERLAY_NONE, 255.0f);
                 }
                 if (D_800A0930 >= 0) {
@@ -274,7 +274,7 @@ void state_step_exit_language_select(void) {
             break;
         case 2:
             if (D_800A0930 == 3) {
-                gOverrideFlags |= GLOBAL_OVERRIDES_8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
             }
 
             if (D_800A0930 >= 0) {
@@ -289,7 +289,7 @@ void state_step_exit_language_select(void) {
                     D_800A0930 = -1;
                     nuGfxSetCfb(fsFrameBuffers, ARRAY_COUNT(fsFrameBuffers));
                     filemenu_cleanup();
-                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
                     mapSettings = get_current_map_settings();
                     mapConfig = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                     gGameStatusPtr->isBattle = FALSE;

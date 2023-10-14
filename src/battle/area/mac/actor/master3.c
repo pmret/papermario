@@ -94,7 +94,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 28 },
@@ -209,7 +209,7 @@ EvtScript N(EVS_HandleEvent_Inner) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TheMaster_AscendedRun)
@@ -992,7 +992,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_200 | BS_FLAGS1_40)
+    EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
         EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
         EVT_IF_GT(LVar0, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WasHit, TRUE)

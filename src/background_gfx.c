@@ -305,7 +305,7 @@ void func_80027BAC(s32 arg0, s32 arg1) {
 //  * Draws the saved framebuffer to the current framebuffer while the pause screen is opened, fading it in over time.
 void gfx_draw_background(void) {
     Camera* camera;
-    s32 bgFlags;
+    s32 bgRenderState;
     s32 backgroundMinX;
     s32 backgroundMaxX;
     s32 backgroundMinY;
@@ -317,10 +317,10 @@ void gfx_draw_background(void) {
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     camera = &gCameras[gCurrentCameraID];
-    bgFlags = gGameStatusPtr->backgroundFlags & BACKGROUND_RENDER_STATE_MASK;
+    bgRenderState = gGameStatusPtr->backgroundFlags & BACKGROUND_RENDER_STATE_MASK;
 
-    switch (bgFlags) {
-        case BACKGROUND_RENDER_STATE_1:
+    switch (bgRenderState) {
+        case BACKGROUND_RENDER_STATE_BEGIN_PAUSED:
             // Save coverage to nunGfxCfb[1] using the VISCVG render mode
             gDPPipeSync(gMainGfxPos++);
             gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb[1]);
@@ -333,16 +333,16 @@ void gfx_draw_background(void) {
             gDPPipeSync(gMainGfxPos++);
             gDPSetDepthSource(gMainGfxPos++, G_ZS_PIXEL);
             gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
-            gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_2;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_FILTER_PAUSED;
             break;
-        case BACKGROUND_RENDER_STATE_2:
+        case BACKGROUND_RENDER_STATE_FILTER_PAUSED:
             // Save the framebuffer into the depth buffer and run a filter on it based on the saved coverage values
             gfx_transfer_frame_to_depth(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer); // applies filters to the framebuffer
             gPauseBackgroundFade = 0;
             gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
-            gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_3;
+            gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_SHOW_PAUSED;
             // fallthrough
-        case BACKGROUND_RENDER_STATE_3:
+        case BACKGROUND_RENDER_STATE_SHOW_PAUSED:
             // Draw the saved framebuffer to the background, fading in at a rate of 16 opacity per frame until reaching 128 opacity
             gPauseBackgroundFade += 16;
             if (gPauseBackgroundFade > 128) {
@@ -385,7 +385,7 @@ void gfx_draw_background(void) {
             break;
         default:
             // Draw the scene's background as normal
-            if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
+            if (gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME) {
                 gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
                 return;
             }

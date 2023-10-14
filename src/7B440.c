@@ -4,11 +4,11 @@ SHIFT_BSS s32 PeachDisguiseNpcIndex;
 SHIFT_BSS Entity* TweesterTouchingPartner;
 SHIFT_BSS Entity* TweesterTouchingPlayer;
 SHIFT_BSS s32 PrevPlayerDirection;
-SHIFT_BSS s32 D_8010C980;
-SHIFT_BSS f32 D_8010C938;
-SHIFT_BSS f32 D_8010C990;
+SHIFT_BSS s32 PlayerRunStateTime;
+SHIFT_BSS f32 PlayerNormalYaw;
+SHIFT_BSS f32 PlayerNormalPitch;
 SHIFT_BSS PlayerSpinState gPlayerSpinState;
-SHIFT_BSS s32 D_8010C9A0;
+SHIFT_BSS s32 PlayerYInterpUpdateDelay;
 
 void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -59,11 +59,11 @@ void reset_player_status(void) {
     InteractNotificationCallback = NULL;
     D_8010C92C = 0;
     PrevPlayerDirection = 0;
-    D_8010C980 = 0;
+    PlayerRunStateTime = 0;
     PrevPlayerCamRelativeYaw = 0;
     D_800F7B44 = 0;
-    D_8010C938 = 0;
-    D_8010C990 = 0.0f;
+    PlayerNormalYaw = 0;
+    PlayerNormalPitch = 0.0f;
     playerStatus->availableDisguiseType = 1;
     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
@@ -86,7 +86,7 @@ void reset_player_status(void) {
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        gGameStatusPtr->peachBakingIngredient = 0;
+        gGameStatusPtr->peachBakingIngredient = PEACH_BAKING_NONE;
     }
 
     // TODO required to match
@@ -131,35 +131,32 @@ void reset_player_status(void) {
     mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));
 }
 
-void get_packed_buttons(s32* arg0) {
+void get_packed_buttons(s32* out) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    *arg0 = (u16)playerStatus->curButtons | (playerStatus->pressedButtons << 16);
+    *out = (playerStatus->curButtons & 0xFFFF) | (playerStatus->pressedButtons << 16);
 }
 
-void player_input_to_move_vector(f32* angle, f32* magnitude) {
+void player_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 stickAxisX;
-    f32 stickAxisY;
-    f32 ang;
-    f32 mag;
-    f32 magMax = 70.0f;
+    f32 stickAxisX = playerStatus->stickAxis[0];
+    f32 stickAxisY = -playerStatus->stickAxis[1];
+    f32 maxRadius = 70.0f;
+    f32 magnitude;
+    f32 angle;
 
-    stickAxisX = playerStatus->stickAxis[0];
-    stickAxisY = -playerStatus->stickAxis[1];
-
-    mag = dist2D(0.0f, 0.0f, stickAxisX, stickAxisY);
-    if (mag >= magMax) {
-        mag = magMax;
+    magnitude = dist2D(0.0f, 0.0f, stickAxisX, stickAxisY);
+    if (magnitude >= maxRadius) {
+        magnitude = maxRadius;
     }
 
-    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].curYaw);
-    if (mag == 0.0f) {
-        ang = playerStatus->targetYaw;
+    angle = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].curYaw);
+    if (magnitude == 0.0f) {
+        angle = playerStatus->targetYaw;
     }
 
-    *angle = ang;
-    *magnitude = mag;
+    *outAngle = angle;
+    *outMagnitude = magnitude;
 }
 
 void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
@@ -184,45 +181,46 @@ void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
     *outMagnitude = magnitude;
 }
 
-void func_800E24F8(void) {
+void calculate_camera_yinterp_rate(void) {
     Shadow* shadow = get_shadow_by_index(gPlayerStatus.shadowID);
     f32 x = shadow->rot.x + 180.0;
     f32 z = shadow->rot.z + 180.0;
     Camera* camera = &gCameras[CAM_DEFAULT];
-    f32 temp;
+    f32 rate;
 
     if (x != 0.0f || z != 0.0f) {
         switch (gPlayerStatus.actionState) {
             case ACTION_STATE_JUMP:
             case ACTION_STATE_FALLING:
-                temp = 32.0f;
-                camera->unk_49C = temp;
+                rate = 32.0f;
+                camera->yinterpRate = rate;
                 break;
             case ACTION_STATE_WALK:
             case ACTION_STATE_RUN:
                 if (camera->targetScreenCoords.y < 130) {
-                    camera->unk_49C = 3.0f;
+                    camera->yinterpRate = 3.0f;
                     break;
                 }
-                temp = 3.0f;
-                if (D_8010C9A0++ > 10) {
-                    D_8010C9A0 = 10;
-                    camera->unk_49C -= 2.0f;
-                    if (camera->unk_49C < temp) {
-                        camera->unk_49C = temp;
-                    }
+                rate = 3.0f;
+                if (PlayerYInterpUpdateDelay++ <= 10) {
+                    return;
+                }
+                PlayerYInterpUpdateDelay = 10;
+                camera->yinterpRate -= 2.0f;
+                if (camera->yinterpRate < rate) {
+                    camera->yinterpRate = rate;
                 }
                 break;
             case ACTION_STATE_SLIDING:
-                temp = 3.0f;
-                camera->unk_49C = temp;
+                rate = 3.0f;
+                camera->yinterpRate = rate;
                 break;
             default:
-                temp = 3.0f;
-                D_8010C9A0 = 0;
-                camera->unk_49C -= 2.0f;
-                if (camera->unk_49C < temp) {
-                    camera->unk_49C = temp;
+                rate = 3.0f;
+                PlayerYInterpUpdateDelay = 0;
+                camera->yinterpRate -= 2.0f;
+                if (camera->yinterpRate < rate) {
+                    camera->yinterpRate = rate;
                 }
                 break;
         }
@@ -232,13 +230,13 @@ void func_800E24F8(void) {
             case ACTION_STATE_RUN:
             case ACTION_STATE_JUMP:
             case ACTION_STATE_SLIDING:
-                temp = 7.2f;
+                rate = 7.2f;
                 break;
             default:
-                temp = 24.0f;
+                rate = 24.0f;
                 break;
         }
 
-        camera->unk_49C = temp;
+        camera->yinterpRate = rate;
     }
 }

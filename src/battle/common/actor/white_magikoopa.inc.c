@@ -92,7 +92,7 @@ s32 N(StatusTable_Flying)[] = {
 
 ActorPartBlueprint N(GroundParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_GROUND,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
@@ -119,7 +119,7 @@ ActorPartBlueprint N(FlyingParts)[] = {
         .projectileTargetOffset = { -5, -12 },
     },
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_FLYING,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
@@ -400,10 +400,10 @@ EvtScript N(EVS_KnockDown) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_BROOM, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_PRIMARY_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_PRIMARY_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_BROOM, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -826,7 +826,7 @@ EvtScript N(EVS_Move_HealOne) = {
     // try to find a non-magikoopa actor in danger of being killed by the player
     EVT_SET(LV_LowestActor, 0)
     EVT_SET(LV_LowestHP, 9999)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -859,7 +859,7 @@ EvtScript N(EVS_Move_HealOne) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
         EVT_IF_NE(LV_LowestActor, 0)
@@ -868,7 +868,7 @@ EvtScript N(EVS_Move_HealOne) = {
     // try to find any actor in danger of being killed by the player
     EVT_SET(LV_LowestActor, 0)
     EVT_SET(LV_LowestHP, 9999)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -911,14 +911,14 @@ EvtScript N(EVS_Move_HealOne) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(1)
         EVT_END_IF
     EVT_IF_NE(LV_LowestActor, 0)
         EVT_GOTO(100)
     EVT_END_IF
     // try to find the actor with lowest HP%
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -942,7 +942,7 @@ EvtScript N(EVS_Move_HealOne) = {
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(2)
         EVT_END_IF
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVarA)
@@ -951,7 +951,7 @@ EvtScript N(EVS_Move_HealOne) = {
         EVT_SET(LV_LowestActor, ACTOR_SELF)
         EVT_GOTO(100)
     EVT_END_IF
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(3)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -966,7 +966,7 @@ EvtScript N(EVS_Move_HealOne) = {
             EVT_RETURN
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(3)
         EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_Flee))
@@ -1121,7 +1121,7 @@ EvtScript N(EVS_Move_HealAll) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_White_Anim01)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_SET(LFlag0, FALSE)
@@ -1148,7 +1148,7 @@ EvtScript N(EVS_Move_HealAll) = {
             EVT_END_THREAD
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(WaitForBuffDone)
@@ -1163,14 +1163,14 @@ EvtScript N(EVS_Move_HealAll) = {
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
+    EVT_CALL(CountTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(EVS_Flee))
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVarA, 0)
     EVT_SET(LVarB, 0)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_SET(LFlag0, FALSE)
@@ -1191,7 +1191,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_ADD(LVarB, 1)
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_MUL(LVarA, 100)

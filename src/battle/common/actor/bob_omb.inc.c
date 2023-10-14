@@ -107,7 +107,7 @@ s32 N(IgnitedStatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
@@ -175,9 +175,9 @@ EvtScript N(EVS_Ignite) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
+    EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, TRUE)
     EVT_CALL(SetActorPaletteSwapParams, ACTOR_SELF, PRT_MAIN, SPR_PAL_Bobomb, SPR_PAL_Bobomb_Burst, 0, 10, 0, 10, 0, 0)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     EVT_WAIT(3)
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_SELF, 0)
     EVT_RETURN
@@ -194,7 +194,7 @@ EvtScript N(EVS_Defuse) = {
     EVT_ADD(LVar2, 2)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_SELF, 0)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)
+    EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -203,7 +203,7 @@ EvtScript N(EVS_Cleanup) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Ignited, LVar0)
     EVT_IF_EQ(LVar0, TRUE)
         EVT_CALL(StopLoopingSoundAtActor, ACTOR_SELF, 0)
-        EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)
+        EVT_CALL(EnableActorPaletteEffects, ACTOR_SELF, PRT_MAIN, FALSE)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -211,7 +211,7 @@ EvtScript N(EVS_Cleanup) = {
 
 EvtScript N(EVS_Explode) = {
     EVT_EXEC_WAIT(N(EVS_Cleanup))
-    EVT_CALL(StartRumble, 11)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MAX)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(3.0))

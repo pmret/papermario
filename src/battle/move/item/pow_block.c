@@ -76,7 +76,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -30, 65, 20, 0, 0, 0)
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -40, 60, 20, 0, 0, 0)
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -40, 55, 20, 0, 0, 0)
-        EVT_CALL(StartRumble, 4)
+        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_HEAVY)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(6.0))
@@ -116,7 +116,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_POW | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, LVar3, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_LABEL(1)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -70, 60, 20, 0, 0, 0)

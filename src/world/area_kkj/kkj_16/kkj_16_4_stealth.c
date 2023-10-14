@@ -162,7 +162,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
         EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 4)
     EVT_END_THREAD
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Startle)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(30 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)

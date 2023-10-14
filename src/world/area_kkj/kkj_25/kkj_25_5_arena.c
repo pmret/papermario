@@ -60,7 +60,7 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
         EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_Land)
         EVT_WAIT(10)
         EVT_CALL(SetNpcAnimation, NPC_Bowser_01, ANIM_WorldBowser_RearUpLaugh)
-        EVT_CALL(PlaySound, SOUND_LRAW_03BC)
+        EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE)
         EVT_LOOP(0)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 1, EVT_FLOAT(2.0))
             EVT_WAIT(1)
@@ -68,12 +68,12 @@ EvtScript N(EVS_BowserActivatesSwitch) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_LRAW_03BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_LRAW_RUMBLE | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_Bowser_01, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_Bowser_01, 300, 0, 0, 20)
     EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_FLOOR_SWITCH_ACTIVATE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_20A0, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_LARGE_NPC_IMPACT, SOUND_SPACE_DEFAULT)
     EVT_SET(AF_KKJ_1A, TRUE)
     EVT_RETURN
     EVT_END
@@ -411,7 +411,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
         EVT_CALL(SetNpcDecoration, NPC_Bowser_01, 0, NPC_DECORATION_BOWSER_AURA)
     EVT_END_THREAD
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_0223, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_01, SOUND_KPA_BOWSER_POWER_UP, SOUND_SPACE_DEFAULT)
     EVT_SETF(LVar0, EVT_FLOAT(1.0))
     EVT_LOOP(50)
         EVT_ADDF(LVar0, EVT_FLOAT(0.01))
@@ -481,7 +481,7 @@ EvtScript N(EVS_ManageArenaEffects) = {
         EVT_IF_EQ(GF_KKJ25_Defeated_Kammy, FALSE)
             EVT_THREAD
                 EVT_WAIT(50)
-                EVT_CALL(PlaySound, SOUND_LRAW_022C)
+                EVT_CALL(PlaySound, SOUND_LRAW_KPA_ARENA_TURN_ON)
             EVT_END_THREAD
             EVT_CALL(MakeLerp, 0, 50, 120, EASING_QUADRATIC_IN)
             EVT_LOOP(0)
@@ -498,7 +498,7 @@ EvtScript N(EVS_ManageArenaEffects) = {
             EVT_END_LOOP
         EVT_ELSE
             EVT_IF_EQ(GF_KKJ25_Defeated_Bowser, FALSE)
-                EVT_CALL(PlaySound, SOUND_LRAW_022D)
+                EVT_CALL(PlaySound, SOUND_LRAW_KPA_ARENA_ACTIVE)
             EVT_END_IF
             EVT_SET(LVar0, 5)
         EVT_END_IF
@@ -611,7 +611,7 @@ EvtScript N(EVS_ManageArenaEffects) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LRAW_022D)
+    EVT_CALL(StopSound, SOUND_LRAW_KPA_ARENA_ACTIVE)
     EVT_RETURN
     EVT_END
 };

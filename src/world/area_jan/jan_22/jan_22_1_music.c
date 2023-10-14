@@ -15,7 +15,7 @@ EvtScript N(EVS_SetupMusic) = {
         EVT_END_THREAD
     EVT_ELSE
         EVT_SWITCH(GB_StoryProgress)
-            EVT_CASE_RANGE(STORY_CH5_RAFAEL_MOVED_ROOT, STORY_CH5_RAFAEL_WAITING_FOR_MARIO)
+            EVT_CASE_RANGE(STORY_CH5_RAPHAEL_MOVED_ROOT, STORY_CH5_RAPHAEL_WAITING_FOR_MARIO)
                 EVT_IF_NE(LVar0, jan_22_ENTRY_1)
                     EVT_CALL(SetMusicTrack, 0, SONG_RAPHAEL_RAVEN, 0, 8)
                     EVT_SET(AF_JAN_03, FALSE)

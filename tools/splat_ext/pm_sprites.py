@@ -644,7 +644,9 @@ class NpcSprite:
 
         for i, image in enumerate(self.images):
             name = self.image_names[i] if self.image_names else f"Raster{i:02X}"
-            image.write(path / (name + ".png"), self.palettes[image.palette_index])
+
+            (path / "rasters").mkdir(parents=True, exist_ok=True)
+            image.write(path / "rasters" / (name + ".png"), self.palettes[image.palette_index])
 
             if image.palette_index not in palette_to_raster:
                 palette_to_raster[image.palette_index] = []
@@ -668,7 +670,8 @@ class NpcSprite:
             else:
                 img = self.images[0]
 
-            img.write(path / (name + ".png"), palette)
+            (path / "palettes").mkdir(parents=True, exist_ok=True)
+            img.write(path / "palettes" / (name + ".png"), palette)
 
             ET.SubElement(
                 PaletteList,

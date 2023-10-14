@@ -70,7 +70,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
@@ -344,7 +344,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_LOOP
     EVT_CALL(N(DropBlock))
     EVT_CHILD_THREAD
-        EVT_CALL(StartRumble, 5)
+        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(3.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(6.0))

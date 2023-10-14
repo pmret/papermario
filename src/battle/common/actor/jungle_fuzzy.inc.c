@@ -60,7 +60,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint  N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
@@ -175,7 +175,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Fuzzy_Jungle_HurtShock)
-            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Fuzzy_Jungle_Run)
@@ -439,7 +439,7 @@ EvtScript N(EVS_Attack_Leech) = {
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x00007FFF)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 32767)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)
@@ -698,7 +698,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
     EVT_SET(LFlag2, FALSE)
     EVT_SET(LFlag3, FALSE)
     EVT_SET(LFlag4, FALSE)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -715,7 +715,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
                 EVT_SET(LFlag4, TRUE)
         EVT_END_SWITCH
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_SET(LVarA, -1)
@@ -765,7 +765,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
 
 EvtScript N(EVS_CountActiveSummoners) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -791,7 +791,7 @@ EvtScript N(EVS_CountActiveSummoners) = {
                 EVT_END_IF
         EVT_END_SWITCH
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_RETURN

@@ -177,7 +177,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_sprite_shading_data();
     reset_background_settings();
 
-    if (gGameStatusPtr->creditsViewportMode == -1) {
+    if (gGameStatusPtr->introPart == INTRO_PART_NONE) {
         func_80138188();
     }
 
@@ -188,7 +188,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     reset_battle_status();
     clear_encounter_status();
-    clear_entity_data(1);
+    clear_entity_data(TRUE);
     clear_effect_data();
     clear_player_status();
     player_reset_data();
@@ -221,10 +221,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
     gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
 
-    if (gGameStatusPtr->creditsViewportMode == -1) {
-        set_cam_viewport(0, 12, 20, 296, 200);
+    if (gGameStatusPtr->introPart == INTRO_PART_NONE) {
+        set_cam_viewport(CAM_DEFAULT, 12, 20, 296, 200);
     } else {
-        set_cam_viewport(0, 29, 28, 262, 162);
+        set_cam_viewport(CAM_DEFAULT, 29, 28, 262, 162);
     }
 
     initialize_status_bar();

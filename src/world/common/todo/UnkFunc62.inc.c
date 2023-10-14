@@ -59,9 +59,9 @@ API_CALLABLE(N(UnkFunc62)) {
             return ApiStatus_DONE2;
         }
 
-        state->unk_30.x = (state->goalPos.x - state->curPos.x) / state->moveTime;
-        state->unk_30.y = (state->goalPos.y - state->curPos.y) / state->moveTime;
-        state->unk_30.z = (state->goalPos.z - state->curPos.z) / state->moveTime;
+        state->velStep.x = (state->goalPos.x - state->curPos.x) / state->moveTime;
+        state->velStep.y = (state->goalPos.y - state->curPos.y) / state->moveTime;
+        state->velStep.z = (state->goalPos.z - state->curPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
         state->vel = 0.0f;
         state->speed += temp / state->moveTime;
@@ -103,7 +103,7 @@ API_CALLABLE(N(UnkFunc62)) {
             phi_f2 = 0.8;
             state->vel = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
-        set_animation(ACTOR_SELF, 1, state->animJumpRise);
+        set_actor_anim(ACTOR_SELF, 1, state->animJumpRise);
         sfx_play_sound(SOUND_JUMP_2081);
         script->functionTemp[0] = 1;
     }
@@ -111,13 +111,13 @@ API_CALLABLE(N(UnkFunc62)) {
     switch (script->functionTemp[0]) {
         case 1:
             if (state->vel > PI_S / 2) {
-                set_animation(ACTOR_SELF, 1, state->animJumpFall);
+                set_actor_anim(ACTOR_SELF, 1, state->animJumpFall);
             }
             oldActorX = actor->curPos.x;
             oldActorY = actor->curPos.y;
-            state->curPos.x += state->unk_30.x;
-            state->curPos.y = state->curPos.y + state->unk_30.y;
-            state->curPos.z = state->curPos.z + state->unk_30.z;
+            state->curPos.x += state->velStep.x;
+            state->curPos.y = state->curPos.y + state->velStep.y;
+            state->curPos.z = state->curPos.z + state->velStep.z;
             state->unk_18.x = actor->curPos.y;
             actor->curPos.x = state->curPos.x;
             actor->curPos.y = state->curPos.y + (state->bounceDivisor * sin_rad(state->vel));
@@ -149,7 +149,7 @@ API_CALLABLE(N(UnkFunc62)) {
                 actor->curPos.y = state->goalPos.y;
                 state->acceleration = 1.8f;
                 state->vel = -(state->unk_18.x - state->unk_18.y);
-                set_animation(ACTOR_SELF, 1, state->animJumpLand);
+                set_actor_anim(ACTOR_SELF, 1, state->animJumpLand);
                 return ApiStatus_DONE1;
             }
             break;
