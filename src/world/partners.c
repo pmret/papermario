@@ -115,6 +115,7 @@ extern HudScript HES_StatusSPIncrement7;
 
 extern EvtScript EVS_World_UseItem;
 
+#if VERSION_JP // TODO remove once segments are split
 extern Addr world_use_item_ROM_START;
 extern Addr world_use_item_ROM_END;
 extern Addr world_use_item_VRAM;
@@ -151,8 +152,7 @@ extern Addr world_partner_goombaria_VRAM;
 extern Addr world_partner_twink_ROM_START;
 extern Addr world_partner_twink_ROM_END;
 extern Addr world_partner_twink_VRAM;
-
-
+#endif
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
@@ -693,7 +693,7 @@ void _use_partner_ability(void) {
     }
 
     if (PartnerCommand >= PARTNER_CMD_INSTA_SWITCH) {
-#ifdef VERSION_JP
+#if VERSION_JP
         D_8010CFC4 = 0;
 #else
         if (PartnerCommand != PARTNER_CMD_USE_ABILITY) {

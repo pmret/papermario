@@ -388,7 +388,7 @@ void check_input_status_bar(void) {
             if (!(playerStatus->curButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
                 open_status_bar_long();
 
-#ifdef VERSION_JP
+#if VERSION_JP
                 sfx_play_sound(SOUND_LOWER_STATUS_BAR);
 #else
                 if (!is_picking_up_item()) {
@@ -398,7 +398,7 @@ void check_input_status_bar(void) {
             }
         } else if (!(playerStatus->curButtons & (Z_TRIG | R_TRIG)) && (pressedButtons & BUTTON_C_UP) && func_800E9860()) {
             close_status_bar();
-#ifdef VERSION_JP
+#if VERSION_JP
             sfx_play_sound(SOUND_RAISE_STATUS_BAR);
 #else
             if (!is_picking_up_item()) {
