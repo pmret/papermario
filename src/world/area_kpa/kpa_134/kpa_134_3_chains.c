@@ -49,7 +49,7 @@ s32 N(ChainAnimOffsets)[] = {
 };
 
 API_CALLABLE(N(CreateLowerChainShadow)) {
-    create_shadow_type(0, 50.0f, 115.0f, -34.0f);
+    create_shadow_type(SHADOW_VARYING_CIRCLE, 50.0f, 115.0f, -34.0f);
     return ApiStatus_DONE2;
 }
 
@@ -296,7 +296,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
 };
 
 API_CALLABLE(N(CreateUpperChainShadow)) {
-    create_shadow_type(0, 680.0f, 240.0f, -35.0f);
+    create_shadow_type(SHADOW_VARYING_CIRCLE, 680.0f, 240.0f, -35.0f);
     return ApiStatus_DONE2;
 }
 

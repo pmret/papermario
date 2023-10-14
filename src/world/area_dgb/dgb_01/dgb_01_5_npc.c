@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor3) = {
     EVT_CALL(SetNpcJumpscale, NPC_Tubba, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_Tubba, LVar0, LVar1, LVar2, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20A0, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_LARGE_NPC_IMPACT, SOUND_SPACE_DEFAULT)
     EVT_CALL(PlaySound, SOUND_LOOP_DGB_COLLAPSE)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(4.0))
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(2.0))

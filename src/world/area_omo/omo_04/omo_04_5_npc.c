@@ -18,8 +18,8 @@ NpcSettings N(NpcSettings_Goomba) = {
 #include "world/common/enemy/Clubba.inc.c"
 #include "world/common/enemy/Kammy_Flying.inc.c"
 
-#include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
+#include "world/common/DisableCameraLeadingPlayer.inc.c"
+#include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_NpcIdle_Goomba) = {
     EVT_LABEL(0)
@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(SetCamera0Flag1000))
+    EVT_CALL(N(DisableCameraLeadingPlayer))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
     EVT_IF_EQ(GB_OMO_PeachChoice1, 0)
@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcIdle_Goomba) = {
         EVT_CALL(SpeakToPlayer, NPC_Clubba, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH4_003B)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(N(UnsetCamera0Flag1000))
+        EVT_CALL(N(EnableCameraLeadingPlayer))
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_END_THREAD
     EVT_CALL(DisablePlayerInput, FALSE)

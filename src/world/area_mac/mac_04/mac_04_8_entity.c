@@ -119,7 +119,7 @@ EvtScript N(EVS_EnterToybox) = {
     EVT_WAIT(1)
     EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, -90, 10, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -174,7 +174,7 @@ EvtScript N(EVS_ExitToybox) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_01AA, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_omo_ent, SOUND_OMO_TOYBOX_LID, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_EXEC_GET_TID(N(EVS_FocusCameraOnPlayer), LVarA)
     EVT_CALL(PlaySoundAtPlayer, SOUND_TRANSPORTER_OUT, SOUND_SPACE_DEFAULT)
@@ -240,7 +240,7 @@ EvtScript N(EVS_ItemPrompt_StoreroomKey) = {
         EVT_CALL(CloseChoicePopup)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(PlaySoundAt, SOUND_0269, SOUND_SPACE_DEFAULT, 155, 48, -480)
+    EVT_CALL(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, 155, 48, -480)
     EVT_SET(LVar0, MV_StoreroomLockEntityID)
     EVT_CALL(N(RemovePadlock))
     EVT_WAIT(5)

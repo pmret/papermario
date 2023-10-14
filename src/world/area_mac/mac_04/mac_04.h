@@ -61,8 +61,8 @@ extern EvtScript N(EVS_MakeHiddenRoom);
 extern EvtScript N(EVS_SetupFoliage);
 extern EvtScript N(EVS_MakeEntities);
 
-extern EvtScript N(EVS_80248B08);
-extern EvtScript N(D_80248798_84B368);
+extern EvtScript N(EVS_OnEnterShop);
+extern EvtScript N(EVS_HiddenRoom_WaitForOuttaSight);
 extern EvtScript N(EVS_ExitToybox);
 extern EvtScript N(EVS_Toybox_SetupTrainPrompt);
 extern EvtScript N(D_8024697C_84954C);

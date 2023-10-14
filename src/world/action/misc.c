@@ -55,7 +55,7 @@ void action_update_state_23(void) {
         playerStatus->peakJumpTime = 0;
         playerStatus->curSpeed = 0.0f;
         playerStatus->pitch = 0.0f;
-        D_802B6770_E27C80 = D_8010C938;
+        D_802B6770_E27C80 = PlayerNormalYaw;
     }
 
     switch (playerStatus->actionSubstate) {
@@ -67,7 +67,7 @@ void action_update_state_23(void) {
             return;
     }
 
-    sin_cos_rad(DEG_TO_RAD(D_8010C990), &sinTheta, &cosTheta);
+    sin_cos_rad(DEG_TO_RAD(PlayerNormalPitch), &sinTheta, &cosTheta);
 
     miscTempVariable = 3.0f;
     miscTempVariable = sinTheta * miscTempVariable;
@@ -109,7 +109,7 @@ void action_update_state_23(void) {
         miscTempVariable = 60.0f;
     }
 
-    if (D_8010C990 < miscTempVariable) {
+    if (PlayerNormalPitch < miscTempVariable) {
         set_action_state(ACTION_STATE_FALLING);
         gravity_use_fall_parms();
     }
@@ -221,7 +221,7 @@ void action_update_talk(void) {
 
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
             suggest_player_anim_always_forward(ANIM_MarioW2_SpeakUp);
-        } else if (playerStatus->peachItemHeld == 0) {
+        } else if (playerStatus->peachItemHeld == PEACH_BAKING_NONE) {
             if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
                 suggest_player_anim_always_forward(ANIM_Peach2_RaiseArms);
             } else {
@@ -234,7 +234,7 @@ void action_update_talk(void) {
     if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
         if (playerStatus->curStateTime != 0) {
             playerStatus->curStateTime--;
-        } else if (playerStatus->peachItemHeld == 0) {
+        } else if (playerStatus->peachItemHeld == PEACH_BAKING_NONE) {
             if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
                 suggest_player_anim_always_forward(ANIM_Peach1_Idle);
             } else {

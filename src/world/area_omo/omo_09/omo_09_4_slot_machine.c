@@ -22,7 +22,7 @@ enum SlotMachineProgress {
 
 EvtScript N(EVS_SetCam_ViewReels) = {
     EVT_WAIT(8)
-    EVT_CALL(N(SetCamera0Flag1000))
+    EVT_CALL(N(DisableCameraLeadingPlayer))
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 535, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 535, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5))
@@ -720,7 +720,7 @@ EvtScript N(EVS_SlotMachine_MainUpdate) = {
                     EVT_SET(MV_ResetCamSpeed, EVT_FLOAT(2.0))
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(N(UnsetCamera0Flag1000))
+    EVT_CALL(N(EnableCameraLeadingPlayer))
     EVT_CALL(ResetCam, CAM_DEFAULT, MV_ResetCamSpeed)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_LOOP(0)
@@ -786,7 +786,7 @@ API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {
         script->functionTempPtr[0] = shadowIDs = heap_malloc(sizeof(*shadowIDs));
         for (i = 0; i < ARRAY_COUNT(N(SlotMachineBlocks)); i++) {
             model = get_model_from_list_index(get_model_list_index_from_tree_index(N(SlotMachineBlocks)[i]));
-            (*shadowIDs)[i] = create_shadow_type(1, model->center.x, model->center.y - 100.0f, model->center.z);
+            (*shadowIDs)[i] = create_shadow_type(SHADOW_VARYING_SQUARE, model->center.x, model->center.y - 100.0f, model->center.z);
         }
     }
 

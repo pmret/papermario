@@ -712,7 +712,7 @@ void func_801413F8(void) {
     gCameras[CAM_3].lookAt_obj_target.x = 160.0f;
     gCameras[CAM_3].lookAt_obj_target.y = -120.0f;
     gCameras[CAM_3].vfov = 1.0f;
-    gCameras[CAM_3].flags &= ~0x6;
+    gCameras[CAM_3].flags &= ~(CAMERA_FLAG_DISABLED | CAMERA_FLAG_LEAD_PLAYER);
 }
 
 s32 hud_element_create(HudScript* anim) {

@@ -2,7 +2,7 @@
 #include "entity.h"
 
 #define NAME_SUFFIX _Spring
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
 #define NAME_SUFFIX
 
 EvtScript N(EVS_TetherCamToPlayer) = {
@@ -22,7 +22,7 @@ EvtScript N(EVS_UseSpring_Exit) = {
     EVT_WAIT(1)
     EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
     EVT_IF_EQ(AF_OMO_04, FALSE)
-        EVT_CALL(N(UnsetCamera0MoveFlag1_Spring))
+        EVT_CALL(N(EnableCameraFollowPlayerY_Spring))
         EVT_THREAD
             EVT_WAIT(6)
             EVT_CALL(GotoMap, EVT_PTR("mac_04"), mac_04_ENTRY_2)

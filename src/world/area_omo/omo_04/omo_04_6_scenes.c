@@ -236,7 +236,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_END_THREAD
     EVT_WAIT(90 * DT)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
-        EVT_CALL(PlaySoundAtNpc, MV_AmbushID, SOUND_0263, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, MV_AmbushID, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShowEmote, MV_AmbushID, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
         EVT_WAIT(5 * DT)
     EVT_END_IF

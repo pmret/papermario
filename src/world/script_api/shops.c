@@ -616,7 +616,7 @@ API_CALLABLE(ShowShopOwnerDialog) {
             if (script->functionTemp[2] == 1) {
                 if (D_80286538->curOption == 0) {
                     add_coins(shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]));
-                    playerData->invItems[shop->selectedStoreItemSlot] = 0;
+                    playerData->invItems[shop->selectedStoreItemSlot] = ITEM_NONE;
                     if (get_item_count() == 0) {
                         script->functionTemp[1] = shop_owner_reset_speech(SHOP_MSG_SELL_THANKS);
                         script->functionTemp[0] = DIALOG_STATE_CLOSED_SUBMENU;
@@ -672,7 +672,7 @@ API_CALLABLE(ShowShopOwnerDialog) {
             shop_close_item_select_popup();
             if (shop->selectedStoreItemSlot >= 0) {
                 if (store_item(playerData->invItems[shop->selectedStoreItemSlot]) >= 0) {
-                    playerData->invItems[shop->selectedStoreItemSlot] = 0;
+                    playerData->invItems[shop->selectedStoreItemSlot] = ITEM_NONE;
                 }
 
                 if ((get_item_count() == 0) || (get_stored_empty_count() == 0)) {

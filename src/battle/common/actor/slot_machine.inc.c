@@ -91,7 +91,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
@@ -105,7 +105,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint N(slot_machine_stop) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_STOP,
     .level = ACTOR_LEVEL_SLOT_MACHINE_STOP,
     .maxHP = 99,
@@ -128,7 +128,7 @@ ActorBlueprint N(slot_machine_stop) = {
 };
 
 ActorBlueprint N(slot_machine_start) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_START,
     .level = ACTOR_LEVEL_SLOT_MACHINE_START,
     .maxHP = 99,

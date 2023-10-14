@@ -5,9 +5,9 @@ API_CALLABLE(N(CreatePlatformShadows)) {
     Model* model;
 
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_erb1));
-    script->array[0] = create_shadow_type(1, model->center.x, model->center.y - 100.0f, model->center.z);
+    script->array[0] = create_shadow_type(SHADOW_VARYING_SQUARE, model->center.x, model->center.y - 100.0f, model->center.z);
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_erb2));
-    script->array[1] = create_shadow_type(1, model->center.x, model->center.y - 100.0f, model->center.z);
+    script->array[1] = create_shadow_type(SHADOW_VARYING_SQUARE, model->center.x, model->center.y - 100.0f, model->center.z);
 
     return ApiStatus_DONE2;
 }

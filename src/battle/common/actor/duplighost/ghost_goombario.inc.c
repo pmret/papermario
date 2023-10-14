@@ -54,7 +54,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
@@ -393,7 +393,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBARIO_HEADBONK)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
         EVT_CASE_EQ(PARTNER_RANK_SUPER)
             EVT_THREAD
@@ -408,7 +408,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBARIO_HEADBONK)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
         EVT_CASE_EQ(PARTNER_RANK_ULTRA)
@@ -433,7 +433,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0281)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBARIO_HEADBONK)
             EVT_CALL(N(UnkFunc62), LVarA, 3)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
     EVT_END_SWITCH
@@ -534,7 +534,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_WAIT(12)
     EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
-    EVT_CALL(SetCamFlag80, CAM_TATTLE, FALSE)
+    EVT_CALL(SetCamNoDraw, CAM_TATTLE, FALSE)
     EVT_CALL(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
     EVT_CALL(SetCamViewport, CAM_TATTLE, 37, 95, 138, 99)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -547,7 +547,7 @@ EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(func_802CABE8, CAM_TATTLE, 0, LVar3, 100, 4)
     EVT_WAIT(2)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TATTLE_WINDOW_OPEN)
-    EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
+    EVT_CALL(SetCamNoDraw, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
     EVT_CALL(N(CloseTattleWindow), LVar5)

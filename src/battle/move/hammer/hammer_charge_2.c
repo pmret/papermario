@@ -86,23 +86,23 @@ EvtScript N(EVS_UseMove1_Impl) = {
             EVT_EXEC_WAIT(N(EVS_UseBasicHammer))
     EVT_END_SWITCH
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVar9, 16)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(StartRumble, 7)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MIN)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.3))
                     EVT_END_THREAD
                 EVT_CASE_EQ(1)
-                    EVT_CALL(StartRumble, 8)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.6))
                     EVT_END_THREAD
                 EVT_CASE_EQ(2)
-                    EVT_CALL(StartRumble, 9)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.9))
                     EVT_END_THREAD
@@ -111,17 +111,17 @@ EvtScript N(EVS_UseMove1_Impl) = {
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(StartRumble, 7)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MIN)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.3))
                     EVT_END_THREAD
                 EVT_CASE_EQ(1)
-                    EVT_CALL(StartRumble, 8)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.6))
                     EVT_END_THREAD
                 EVT_CASE_EQ(2)
-                    EVT_CALL(StartRumble, 9)
+                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
                     EVT_THREAD
                         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.9))
                     EVT_END_THREAD
@@ -134,7 +134,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LFlag0, FALSE)
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

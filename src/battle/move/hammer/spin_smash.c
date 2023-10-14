@@ -135,7 +135,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Swing)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_46)
-    EVT_CALL(StartRumble, 7)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MIN)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SPIN_SMASH_1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -145,7 +145,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(func_802A1000_737890)
@@ -257,7 +257,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Swing)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_46)
-    EVT_CALL(StartRumble, 8)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SPIN_SMASH_2)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -267,7 +267,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(func_802A1000_737890)
@@ -377,7 +377,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Swing)
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_46)
-    EVT_CALL(StartRumble, 9)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SPIN_SMASH_3)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -387,7 +387,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(func_802A1000_737890)

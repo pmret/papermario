@@ -304,8 +304,8 @@ void spr_appendGfx_component_flat(
 
         if (gGameStatusPtr->isBattle == 2) {
             gSPViewport(gMainGfxPos++, &SprPauseVp);
-            SprPauseVpAlt.vp.vtrans[0] = SprPauseVp.vp.vtrans[0] + gGameStatusPtr->unk_82.x;
-            SprPauseVpAlt.vp.vtrans[1] = SprPauseVp.vp.vtrans[1] + gGameStatusPtr->unk_82.y;
+            SprPauseVpAlt.vp.vtrans[0] = SprPauseVp.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
+            SprPauseVpAlt.vp.vtrans[1] = SprPauseVp.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
         } else {
             gSPViewport(gMainGfxPos++, &camera->vp);
         }

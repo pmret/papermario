@@ -297,7 +297,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0364)
         EVT_LOOP(7)
-            EVT_CALL(StartRumble, 2)
+            EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MIN)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.5))
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
@@ -427,7 +427,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_LABEL(1)
         EVT_WAIT(5)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(30)

@@ -13,18 +13,47 @@ extern Gfx D_09002428_37A3A8[];
 extern Gfx D_09002440_37A3C0[];
 extern Gfx D_09002458_37A3D8[];
 
-Gfx* D_E0076E90[] = { D_090023E0_37A360, D_090023E0_37A360, D_09002440_37A3C0, D_09002440_37A3C0 };
-Gfx* D_E0076EA0[] = { D_090023F8_37A378, D_090023F8_37A378, D_09002458_37A3D8, D_09002458_37A3D8 };
-Gfx* D_E0076EB0[] = { D_090023B0_37A330, D_090023B0_37A330, D_09002410_37A390, D_09002410_37A390 };
-Gfx* D_E0076EC0[] = { D_090023C8_37A348, D_090023C8_37A348, D_09002428_37A3A8, D_09002428_37A3A8 };
-Gfx* D_E0076ED0[] = { D_09002000_379F80, D_09002000_379F80, D_090020E8_37A068, D_090021D0_37A150 };
+Gfx* D_E0076E90[] = { 
+    [FX_AURA_CAPTURE]   D_090023E0_37A360,
+    [FX_AURA_RED]       D_090023E0_37A360,
+    [FX_AURA_BLUE]      D_09002440_37A3C0,
+    [FX_AURA_GOLD]      D_09002440_37A3C0
+};
+
+Gfx* D_E0076EA0[] = { 
+    [FX_AURA_CAPTURE]   D_090023F8_37A378,
+    [FX_AURA_RED]       D_090023F8_37A378,
+    [FX_AURA_BLUE]      D_09002458_37A3D8,
+    [FX_AURA_GOLD]      D_09002458_37A3D8
+};
+
+Gfx* D_E0076EB0[] = { 
+    [FX_AURA_CAPTURE]   D_090023B0_37A330,
+    [FX_AURA_RED]       D_090023B0_37A330,
+    [FX_AURA_BLUE]      D_09002410_37A390,
+    [FX_AURA_GOLD]      D_09002410_37A390
+};
+
+Gfx* D_E0076EC0[] = { 
+    [FX_AURA_CAPTURE]   D_090023C8_37A348,
+    [FX_AURA_RED]       D_090023C8_37A348,
+    [FX_AURA_BLUE]      D_09002428_37A3A8,
+    [FX_AURA_GOLD]      D_09002428_37A3A8
+};
+
+Gfx* D_E0076ED0[] = { 
+    [FX_AURA_CAPTURE]   D_09002000_379F80,
+    [FX_AURA_RED]       D_09002000_379F80,
+    [FX_AURA_BLUE]      D_090020E8_37A068,
+    [FX_AURA_GOLD]      D_090021D0_37A150
+};
 
 void aura_appendGfx(void* argEffect);
 void aura_init(EffectInstance* effect);
 void aura_update(EffectInstance* effect);
 void aura_render(EffectInstance* effect);
 
-void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance** outEffect) {
+void aura_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, EffectInstance** outEffect) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -55,14 +84,14 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
     part->unk_4C = zero;
 
     part->fadeTime = 100;
-    part->type = arg0;
+    part->type = type;
     part->lifeTime = 0;
     part->primA = 0;
-    part->posA.x = arg1;
-    part->posA.y = arg2;
-    part->posA.z = arg3;
+    part->posA.x = posX;
+    part->posA.y = posY;
+    part->posA.z = posZ;
 
-    switch (arg0) {
+    switch (type) {
         case 0:
             part->primR = 75;
             part->primG = 75;
@@ -71,9 +100,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->envG = 247;
             part->engB = 155;
             part->engA = 0;
-            part->scale.x = arg4 * 2.0;
-            part->scale.y = arg4 * 0.6;
-            part->unk_24 = arg4;
+            part->scale.x = scale * 2.0;
+            part->scale.y = scale * 0.6;
+            part->unk_24 = scale;
             part->unk_38 = -0.9f;
             part->unk_44 = 0.04f;
             part->unk_3C = 0.04f;
@@ -91,9 +120,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->envG = 0;
             part->engB = 0;
             part->engA = 0;
-            part->scale.x = arg4;
-            part->scale.y = arg4;
-            part->unk_24 = arg4;
+            part->scale.x = scale;
+            part->scale.y = scale;
+            part->unk_24 = scale;
             part->unk_38 = zero;
             part->unk_50 = zero;
             part->unk_44 = 0.04f;
@@ -111,9 +140,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->engB = 255;
             part->envG = 0;
             part->engA = 81;
-            part->scale.x = arg4;
-            part->scale.y = arg4;
-            part->unk_24 = arg4;
+            part->scale.x = scale;
+            part->scale.y = scale;
+            part->unk_24 = scale;
             part->unk_38 = zero;
             part->unk_50 = zero;
             part->unk_44 = 0.04f;
@@ -131,9 +160,9 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
             part->engB = 255;
             part->envG = 0;
             part->engA = 63;
-            part->scale.x = arg4;
-            part->scale.y = arg4;
-            part->unk_24 = arg4;
+            part->scale.x = scale;
+            part->scale.y = scale;
+            part->unk_24 = scale;
             part->unk_38 = 0.0f;
             part->unk_50 = 0.0f;
             part->unk_44 = 0.04f;
@@ -185,13 +214,13 @@ void aura_update(EffectInstance* effect) {
     fadeTime = data->fadeTime;
     lifeTime = data->lifeTime;
 
-    if (type < 2) {
+    if (type < FX_AURA_BLUE) {
         if (lifeTime <= 10) {
             data->primA += (128 - data->primA) * 0.5;
         }
     } else {
         if (lifeTime <= 10) {
-            data->primA = (lifeTime * 0xFF) / 10;
+            data->primA = (lifeTime * 255) / 10;
         }
     }
 
@@ -199,7 +228,7 @@ void aura_update(EffectInstance* effect) {
         data->primA *= 0.5;
     }
 
-    if (type == 0) {
+    if (type == FX_AURA_CAPTURE) {
         data->unk_38 += (data->unk_3C - data->unk_38) * 0.02;
         data->unk_44 += (data->unk_48 - data->unk_44) * 0.02;
         data->scale.x += (data->unk_24 - data->scale.x) * 0.04;
@@ -275,7 +304,7 @@ void aura_appendGfx(void* argEffect) {
     gSPDisplayList(gMainGfxPos++, D_E0076ED0[type]);
 
     guTranslateF(translateMtx, data->posB.x, data->posB.y, data->posB.z);
-    if (type == 2) {
+    if (type == FX_AURA_BLUE) {
         guRotateF(tempMtx, data->renderYaw, 0.0f, 1.0f, 0.0f);
     } else {
         guRotateF(tempMtx, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
@@ -283,7 +312,7 @@ void aura_appendGfx(void* argEffect) {
     guMtxCatF(tempMtx, translateMtx, transformMtx);
     guScaleF(tempMtx, data->scale.x, data->scale.y, 1.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
-    if (type == 0) {
+    if (type == FX_AURA_CAPTURE) {
         guTranslateF(tempMtx, (-(data->scale.x - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
         guMtxCatF(tempMtx, transformMtx, transformMtx);
     }
@@ -294,7 +323,7 @@ void aura_appendGfx(void* argEffect) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
     guTranslateF(translateMtx, data->posA.x, data->posA.y, data->posA.z);
-    if (type == 2) {
+    if (type == FX_AURA_BLUE) {
         guRotateF(tempMtx, data->renderYaw, 0.0f, 1.0f, 0.0f);
     } else {
         guRotateF(tempMtx, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
@@ -302,7 +331,7 @@ void aura_appendGfx(void* argEffect) {
     guMtxCatF(tempMtx, translateMtx, transformMtx);
     guScaleF(tempMtx, data->scale.x, data->scale.y, 1.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
-    if (type == 0) {
+    if (type == FX_AURA_CAPTURE) {
         guTranslateF(tempMtx, (-(data->scale.x - data->unk_24) / data->unk_24) * 10.0f, 0.0f, 0.0f);
         guMtxCatF(tempMtx, transformMtx, transformMtx);
     }

@@ -1041,11 +1041,11 @@ void filemenu_init(s32 arg0) {
         func_PAL_8002B574();
 
         if (menu->page == 0) {
-            fio_has_valid_backup();
-            if (D_800D95E8.saveCount >= 4) {
-                D_800D95E8.saveCount = 0;
+            fio_has_valid_globals();
+            if (gSaveGlobals.lastFileSelected >= 4) {
+                gSaveGlobals.lastFileSelected = 0;
             }
-            gGameStatusPtr->saveSlot = D_800D95E8.saveCount;
+            gGameStatusPtr->saveSlot = gSaveGlobals.lastFileSelected;
         }
 
         filemenu_set_selected(menu, (gGameStatusPtr->saveSlot & 1) * 2, gGameStatusPtr->saveSlot >> 1);
@@ -1056,7 +1056,7 @@ void filemenu_init(s32 arg0) {
                 (*panelIt)->fpInit((*panelIt));
             }
         }
-        update_window_hierarchy(23, 64);
+        update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
     } else {
         filemenu_currentMenu = 4;
         filemenu_set_selected(filemenu_menus[4], 0, gCurrentLanguage);
@@ -1069,7 +1069,7 @@ void filemenu_init(s32 arg0) {
                 }
             }
         }
-        update_window_hierarchy(23, 64);
+        update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
     }
 #else
     menu = filemenu_menus[0];
@@ -1086,17 +1086,17 @@ void filemenu_init(s32 arg0) {
             if (!fio_load_game(i)) {
                 gSaveSlotHasData[i] = FALSE;
             } else {
-                gSaveSlotMetadata[i] = gCurrentSaveFile.unk_12EC;
+                gSaveSlotMetadata[i] = gCurrentSaveFile.metadata;
                 gSaveSlotHasData[i] = TRUE;
             }
         }
 
         if (menu->page == 0) {
-            fio_has_valid_backup();
-            if (D_800D95E8.saveCount >= 4) {
-                D_800D95E8.saveCount = 0;
+            fio_has_valid_globals();
+            if (gSaveGlobals.lastFileSelected >= 4) {
+                gSaveGlobals.lastFileSelected = 0;
             }
-            gGameStatusPtr->saveSlot = D_800D95E8.saveCount;
+            gGameStatusPtr->saveSlot = gSaveGlobals.lastFileSelected;
         }
     }
 
@@ -1108,7 +1108,7 @@ void filemenu_init(s32 arg0) {
             (*panelIt)->fpInit((*panelIt));
         }
     }
-    update_window_hierarchy(23, 64);
+    update_window_hierarchy(WINDOW_ID_PAUSE_DECRIPTION, 64);
 #endif
 }
 

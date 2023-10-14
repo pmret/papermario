@@ -418,7 +418,7 @@ replace_funcs = {
     "ContinueSpeech": {1: "CustomAnim", 2: "CustomAnim", 4: "CustomMsg"},
     "CopyBuffs": {0: "ActorIDs", 1: "ActorIDs"},
     "CopyStatusEffects": {0: "ActorIDs", 1: "ActorIDs"},
-    "CountPlayerTargets": {0: "ActorIDs"},
+    "CountTargets": {0: "ActorIDs"},
     "DisablePlayerInput": {0: "Bool"},
     "DisablePlayerPhysics": {0: "Bool"},
     "DispatchDamagePlayerEvent": {1: "Events"},

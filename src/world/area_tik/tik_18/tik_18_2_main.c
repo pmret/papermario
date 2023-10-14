@@ -22,7 +22,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o45, COLLIDER_FLAGS_UPPER_MASK)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_LOOP_43)
+    EVT_CALL(PlaySound, SOUND_LOOP_TIK18_WATER)
     EVT_CALL(EnableTexPanning, MODEL_nagare, TRUE)
     EVT_THREAD
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)

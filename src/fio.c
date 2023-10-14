@@ -2,19 +2,27 @@
 #include "PR/os_flash.h"
 #include "gcc/string.h"
 
-SHIFT_BSS SaveData D_8009A6B0;
-SHIFT_BSS s32 logicalSaveInfo[4][2];
-SHIFT_BSS s32 physicalSaveInfo[6][2];
-SHIFT_BSS s32 nextAvailableSavePage;
-SHIFT_BSS SaveDataHeader D_800D95E8;
+typedef struct SaveInfo {
+    /* 0x08 */ s32 slot;
+    /* 0x04 */ s32 count;
+} SaveInfo; // size = 0x8
+
+#define GLOBALS_PAGE_1 6
+#define GLOBALS_PAGE_2 7
+
+SHIFT_BSS SaveData FetchSaveBuffer;
+SHIFT_BSS SaveInfo LogicalSaveInfo[4];  // 4 save slots presented to the player
+SHIFT_BSS SaveInfo PhysicalSaveInfo[6]; // 6 saves as represented on the EEPROM
+SHIFT_BSS s32 NextAvailablePhysicalSave;
+SHIFT_BSS SaveGlobals gSaveGlobals;
 SHIFT_BSS SaveData gCurrentSaveFile;
 
-char magicSaveString[] = "Mario Story 006";
+char MagicSaveString[] = "Mario Story 006";
 
 void fio_deserialize_state(void);
 void fio_serialize_state(void);
-s32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes);
-s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
+b32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes);
+b32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
 void fio_erase_flash(s32 pageNum);
 
 s32 get_spirits_rescued(void) {
@@ -40,57 +48,58 @@ s32 get_spirits_rescued(void) {
     return ret;
 }
 
-s32 fio_calc_header_checksum(void) {
+s32 fio_calc_globals_checksum(void) {
     u32 sum = 0;
-    s32* it = (s32*)&D_800D95E8;
+    s32* it = (s32*)&gSaveGlobals;
     u32 i;
 
-    for (i = 0; i < sizeof(D_800D95E8) / sizeof(*it); i++, it++) {
+    for (i = 0; i < sizeof(gSaveGlobals) / sizeof(*it); i++, it++) {
         sum += *it;
     }
     return sum;
 }
 
-s32 fio_validate_header_checksums(void) {
-    SaveDataHeader* header = &D_800D95E8;
+b32 fio_validate_globals_checksums(void) {
+    SaveGlobals* header = &gSaveGlobals;
 
-    if (strcmp(header->magicString, magicSaveString)) {
+    if (strcmp(header->magicString, MagicSaveString)) {
         return FALSE;
     }
     if (header->crc1 != ~header->crc2) {
         return FALSE;
     }
-    return fio_calc_header_checksum() == header->crc1;
+    return fio_calc_globals_checksum() == header->crc1;
 }
 
-s32 fio_has_valid_backup(void) {
-    fio_read_flash(6, &D_800D95E8, sizeof(D_800D95E8));
-
-    if (!fio_validate_header_checksums()) {
-        fio_read_flash(7, &D_800D95E8, sizeof(D_800D95E8));
-
-        if (!fio_validate_header_checksums()) {
-            bzero(&D_800D95E8, sizeof(D_800D95E8));
-            return FALSE;
-        }
+b32 fio_has_valid_globals(void) {
+    fio_read_flash(GLOBALS_PAGE_1, &gSaveGlobals, sizeof(gSaveGlobals));
+    if (fio_validate_globals_checksums()) {
+        return TRUE;
     }
-    return TRUE;
+
+    fio_read_flash(GLOBALS_PAGE_2, &gSaveGlobals, sizeof(gSaveGlobals));
+    if (fio_validate_globals_checksums()) {
+        return TRUE;
+    }
+
+    bzero(&gSaveGlobals, sizeof(gSaveGlobals));
+     return FALSE;
 }
 
-s32 fio_flush_backups(void) {
+b32 fio_flush_globals(void) {
     s32 checksum;
 
-    strcpy(D_800D95E8.magicString, magicSaveString);
-    D_800D95E8.crc1 = 0;
-    D_800D95E8.crc2 = -1;
-    checksum = fio_calc_header_checksum();
-    D_800D95E8.crc1 = checksum;
-    D_800D95E8.crc2 = ~checksum;
-    fio_erase_flash(6);
-    fio_write_flash(6, (s8*)&D_800D95E8, sizeof(D_800D95E8));
-    fio_erase_flash(7);
-    fio_write_flash(7, (s8*)&D_800D95E8, sizeof(D_800D95E8));
-    return 1;
+    strcpy(gSaveGlobals.magicString, MagicSaveString);
+    gSaveGlobals.crc1 = 0;
+    gSaveGlobals.crc2 = ~gSaveGlobals.crc1;
+    checksum = fio_calc_globals_checksum();
+    gSaveGlobals.crc1 = checksum;
+    gSaveGlobals.crc2 = ~checksum;
+    fio_erase_flash(GLOBALS_PAGE_1);
+    fio_write_flash(GLOBALS_PAGE_1, (s8*)&gSaveGlobals, sizeof(gSaveGlobals));
+    fio_erase_flash(GLOBALS_PAGE_2);
+    fio_write_flash(GLOBALS_PAGE_2, (s8*)&gSaveGlobals, sizeof(gSaveGlobals));
+    return TRUE;
 }
 
 s32 fio_calc_file_checksum(SaveData* saveData) {
@@ -104,60 +113,63 @@ s32 fio_calc_file_checksum(SaveData* saveData) {
     return sum;
 }
 
-s32 fio_validate_file_checksum(SaveData* saveData) {
-    if (!strcmp(saveData->magicString, magicSaveString) && saveData->crc1 == ~saveData->crc2) {
+b32 fio_validate_file_checksum(SaveData* saveData) {
+    if (!strcmp(saveData->magicString, MagicSaveString) && saveData->crc1 == ~saveData->crc2) {
         return fio_calc_file_checksum(saveData) == saveData->crc1;
     }
     return FALSE;
 }
 
-s32 fio_fetch_saved_file_info(void) {
-    SaveData* buffer = &D_8009A6B0; // temps required to match
-    SaveData* buffer2 = buffer;
-    s32 i, j, savePage;
+b32 fio_fetch_saved_file_info(void) {
+    SaveData* fetchBuf = &FetchSaveBuffer; // temps required to match
+    SaveData* validBuf = fetchBuf;
+    s32 i, j, minSaveCount;
 
-    for (i = 0; i < ARRAY_COUNT(logicalSaveInfo); i++) {
-        logicalSaveInfo[i][0] = -1;
-        logicalSaveInfo[i][1] = -1;
+    for (i = 0; i < ARRAY_COUNT(LogicalSaveInfo); i++) {
+        LogicalSaveInfo[i].slot = -1;
+        LogicalSaveInfo[i].count = -1;
     }
 
-    for (i = 0; i < ARRAY_COUNT(physicalSaveInfo); i++) {
-        fio_read_flash(i, buffer, sizeof(SaveData));
-        if (fio_validate_file_checksum(buffer)) {
-            physicalSaveInfo[i][0] = buffer2->saveSlot;
-            physicalSaveInfo[i][1] = buffer2->saveCount;
-            if (logicalSaveInfo[buffer2->saveSlot][1] < buffer2->saveCount) {
-                logicalSaveInfo[buffer2->saveSlot][0] = i;
-                logicalSaveInfo[buffer2->saveSlot][1] = buffer2->saveCount;
+    for (i = 0; i < ARRAY_COUNT(PhysicalSaveInfo); i++) {
+        fio_read_flash(i, fetchBuf, sizeof(SaveData));
+        if (fio_validate_file_checksum(fetchBuf)) {
+            PhysicalSaveInfo[i].slot = validBuf->saveSlot;
+            PhysicalSaveInfo[i].count = validBuf->saveCount;
+            // logical saves only track the most recent physical save for each slot
+            if (LogicalSaveInfo[validBuf->saveSlot].count < validBuf->saveCount) {
+                LogicalSaveInfo[validBuf->saveSlot].slot = i;
+                LogicalSaveInfo[validBuf->saveSlot].count = validBuf->saveCount;
             }
         }
     }
 
-    savePage = 0x7FFFFFFF;
-    for (j = 0; j < ARRAY_COUNT(physicalSaveInfo); j++) {
-        for (i = 0; i < ARRAY_COUNT(logicalSaveInfo); i++) {
-            if (j == logicalSaveInfo[i][0]) {
+    minSaveCount = 0x7FFFFFFF;
+    for (j = 0; j < ARRAY_COUNT(PhysicalSaveInfo); j++) {
+        // find a logical save for each physical save
+        for (i = 0; i < ARRAY_COUNT(LogicalSaveInfo); i++) {
+            if (j == LogicalSaveInfo[i].slot) {
                 break;
             }
         }
-
-        if (i == ARRAY_COUNT(logicalSaveInfo)) {
-            if (physicalSaveInfo[j][1] < savePage) {
-                savePage = physicalSaveInfo[j][1];
-                nextAvailableSavePage = j;
+        // condition holds only for physical saves not mapped to logical ones
+        if (i == ARRAY_COUNT(LogicalSaveInfo)) {
+            if (PhysicalSaveInfo[j].count < minSaveCount) {
+                // choose the least-recent unmapped physical save slot
+                minSaveCount = PhysicalSaveInfo[j].count;
+                NextAvailablePhysicalSave = j;
             }
         }
     }
     return TRUE;
 }
 
-s32 fio_load_game(s32 saveSlot) {
+b32 fio_load_game(s32 saveSlot) {
     gGameStatusPtr->saveSlot = saveSlot;
 
     fio_fetch_saved_file_info();
-    fio_read_flash(logicalSaveInfo[saveSlot][0], &gCurrentSaveFile, sizeof(SaveData));
+    fio_read_flash(LogicalSaveInfo[saveSlot].slot, &gCurrentSaveFile, sizeof(SaveData));
 
-    if (strcmp(gCurrentSaveFile.magicString, magicSaveString) == 0) {
+    if (strcmp(gCurrentSaveFile.magicString, MagicSaveString) == 0) {
         if (gGameStatusPtr->saveCount < gCurrentSaveFile.saveCount) {
             gGameStatusPtr->saveCount = gCurrentSaveFile.saveCount;
         }
@@ -174,19 +186,19 @@ void fio_save_game(s32 saveSlot) {
 
     fio_serialize_state();
 
-    strcpy(gCurrentSaveFile.magicString, magicSaveString);
+    strcpy(gCurrentSaveFile.magicString, MagicSaveString);
 
     gCurrentSaveFile.saveSlot = saveSlot;
     gGameStatusPtr->saveCount++;
     gCurrentSaveFile.saveCount = gGameStatusPtr->saveCount;
 
     gCurrentSaveFile.crc1 = 0;
-    gCurrentSaveFile.crc2 = -1;
+    gCurrentSaveFile.crc2 = ~gCurrentSaveFile.crc1;
     gCurrentSaveFile.crc1 = fio_calc_file_checksum(&gCurrentSaveFile);
     gCurrentSaveFile.crc2 = ~gCurrentSaveFile.crc1;
 
-    fio_erase_flash(nextAvailableSavePage);
-    fio_write_flash(nextAvailableSavePage, (s8*)&gCurrentSaveFile, sizeof(SaveData));
+    fio_erase_flash(NextAvailablePhysicalSave);
+    fio_write_flash(NextAvailablePhysicalSave, (s8*)&gCurrentSaveFile, sizeof(SaveData));
 }
 
 void fio_erase_game(s32 saveSlot) {
@@ -194,8 +206,8 @@ void fio_erase_game(s32 saveSlot) {
 
     fio_fetch_saved_file_info();
 
-    for (i = 0; i < 6; i++) {
-        if (physicalSaveInfo[i][0] == saveSlot) {
+    for (i = 0; i < ARRAY_COUNT(PhysicalSaveInfo); i++) {
+        if (PhysicalSaveInfo[i].slot == saveSlot) {
             fio_erase_flash(i);
         }
     }
@@ -220,13 +232,12 @@ void fio_deserialize_state(void) {
         }
     }
 
-
     gGameStatusPtr->debugEnemyContact = DEBUG_CONTACT_NONE;
-    gGameStatusPtr->unk_76 = 0;
-    gGameStatusPtr->unk_77 = 0;
+    gGameStatusPtr->debugUnused1 = FALSE;
+    gGameStatusPtr->debugUnused2 = FALSE;
     gGameStatusPtr->musicEnabled = TRUE;
 
-    gSaveSlotMetadata[gGameStatusPtr->saveSlot] = saveData->unk_12EC;
+    gSaveSlotMetadata[gGameStatusPtr->saveSlot] = saveData->metadata;
 }
 
 void func_8002B608(void) {
@@ -254,22 +265,22 @@ void fio_serialize_state(void) {
     }
 
     saveData->debugEnemyContact = gGameStatusPtr->debugEnemyContact;
-    saveData->unk_12E1 = gGameStatusPtr->unk_76;
-    saveData->unk_12E2 = gGameStatusPtr->unk_77;
+    saveData->debugUnused1 = gGameStatusPtr->debugUnused1;
+    saveData->debugUnused2 = gGameStatusPtr->debugUnused2;
     saveData->musicEnabled = gGameStatusPtr->musicEnabled;
 
     gSaveSlotMetadata[gGameStatusPtr->saveSlot].level = gPlayerData.level;
     gSaveSlotMetadata[gGameStatusPtr->saveSlot].spiritsRescued = get_spirits_rescued();
     gSaveSlotMetadata[gGameStatusPtr->saveSlot].timePlayed = gPlayerData.frameCounter;
 
-    saveData->unk_12EC = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
+    saveData->metadata = gSaveSlotMetadata[gGameStatusPtr->saveSlot];
 }
 
 void fio_init_flash(void) {
     osFlashInit();
 }
 
-s32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes) {
+b32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes) {
     OSIoMesg mb;
     OSMesgQueue mesgQueue;
     OSMesg mesg;
@@ -282,13 +293,13 @@ s32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes) {
 
     i = 0;
     while (numBytes != 0) {
-        if (numBytes > sizeof(SaveDataHeader)) {
-            amt = sizeof(SaveDataHeader);
+        if (numBytes > sizeof(SaveGlobals)) {
+            amt = sizeof(SaveGlobals);
         } else {
             amt = numBytes;
         }
 
-        osFlashReadArray(&mb, 0, pageNum * sizeof(SaveDataHeader) + i, buf, 1, &mesgQueue);
+        osFlashReadArray(&mb, 0, pageNum * sizeof(SaveGlobals) + i, buf, 1, &mesgQueue);
         osRecvMesg(&mesgQueue, NULL, 1);
         i++;
         numBytes -= amt;
@@ -297,7 +308,7 @@ s32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes) {
     return TRUE;
 }
 
-s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
+b32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
     OSIoMesg mb;
     OSMesgQueue mesgQueue;
     OSMesg mesg;
@@ -309,14 +320,14 @@ s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
 
     i = 0;
     while (numBytes != 0) {
-        if (numBytes > sizeof(SaveDataHeader)) {
-            amt = sizeof(SaveDataHeader);
+        if (numBytes > sizeof(SaveGlobals)) {
+            amt = sizeof(SaveGlobals);
         } else {
             amt = numBytes;
         }
 
         osFlashWriteBuffer(&mb, 0, readBuffer, &mesgQueue);
-        osFlashWriteArray((pageNum * sizeof(SaveDataHeader)) + i);
+        osFlashWriteArray((pageNum * sizeof(SaveGlobals)) + i);
         osRecvMesg(&mesgQueue, NULL, 1);
         i++;
         numBytes -= amt;
@@ -326,5 +337,5 @@ s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
 }
 
 void fio_erase_flash(s32 pageNum) {
-    osFlashSectorErase(pageNum * sizeof(SaveDataHeader));
+    osFlashSectorErase(pageNum * sizeof(SaveGlobals));
 }

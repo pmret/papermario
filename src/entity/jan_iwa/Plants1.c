@@ -139,12 +139,12 @@ void entity_SpinningFlower_init(Entity* entity) {
 }
 
 void func_802BB314_E2DC44(Entity* entity) {
-    sfx_play_sound_at_position(SOUND_LOOP_6A, SOUND_SPACE_DEFAULT, entity->pos.x, entity->pos.y, entity->pos.z);
+    sfx_play_sound_at_position(SOUND_LOOP_SPINNING_FLOWER, SOUND_SPACE_DEFAULT, entity->pos.x, entity->pos.y, entity->pos.z);
 }
 
 void func_802BB34C_E2DC7C(void) {
-    sfx_play_sound(SOUND_LRAW_0391 | SOUND_ID_TRIGGER_CHANGE_SOUND);
-    snd_stop_tracking_env_sound_pos(SOUND_LRAW_0391, TRUE);
+    sfx_play_sound(SOUND_LRAW_SPINNING_FLOWER | SOUND_ID_TRIGGER_CHANGE_SOUND);
+    snd_stop_tracking_env_sound_pos(SOUND_LRAW_SPINNING_FLOWER, TRUE);
 }
 
 void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
@@ -380,7 +380,7 @@ DmaEntry Entity_CymbalPlant_dma[] = { ENTITY_ROM(CymbalPlant_gfx), ENTITY_ROM(Cy
 DmaEntry Entity_PinkFlower_dma[] = { ENTITY_ROM(PinkFlower_gfx), ENTITY_ROM(PinkFlower_anim) };
 
 EntityBlueprint Entity_CymbalPlant = {
-    .flags = ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_CIRCULAR_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(CymbalPlantData),
     .renderCommandList = Entity_CymbalPlant_AnimationIdle,
     .modelAnimationNodes = Entity_CymbalPlant_Mesh,
@@ -393,7 +393,7 @@ EntityBlueprint Entity_CymbalPlant = {
 };
 
 EntityBlueprint Entity_PinkFlower = {
-    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
+    .flags = ENTITY_FLAG_SHOWS_INSPECT_PROMPT | ENTITY_FLAG_CIRCULAR_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE | ENTITY_FLAG_HAS_ANIMATED_MODEL,
     .typeDataSize = sizeof(PinkFlowerData),
     .renderCommandList = Entity_PinkFlower_AnimationIdle,
     .modelAnimationNodes = Entity_PinkFlower_Mesh,

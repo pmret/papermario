@@ -39,8 +39,8 @@ NpcSettings N(NpcSettings_ShyGuy_Wander_NoReaction) = {
 #include "world/common/enemy/Pokey.inc.c"
 #include "world/common/enemy/Kammy_Flying.inc.c"
 
-#include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
+#include "world/common/DisableCameraLeadingPlayer.inc.c"
+#include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_ShyGuy_CarryItem) = {
     EVT_SET(LVarA, LVar0) // npcID
@@ -104,7 +104,7 @@ EvtScript N(EVS_NpcIdle_Pokey) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(SetCamera0Flag1000))
+    EVT_CALL(N(DisableCameraLeadingPlayer))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
     EVT_IF_EQ(GB_OMO_PeachChoice3, 0)
@@ -113,7 +113,7 @@ EvtScript N(EVS_NpcIdle_Pokey) = {
         EVT_CALL(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH4_003F)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(N(UnsetCamera0Flag1000))
+        EVT_CALL(N(EnableCameraLeadingPlayer))
         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
     EVT_END_THREAD
     EVT_CALL(DisablePlayerInput, FALSE)

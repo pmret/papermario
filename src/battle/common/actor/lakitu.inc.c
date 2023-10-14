@@ -83,7 +83,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 35 },
@@ -513,7 +513,7 @@ EvtScript N(EVS_Move_SummonSpiny) = {
 };
 
 EvtScript N(EVS_GetAvailableColumn) = {
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -530,7 +530,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
                 EVT_SET(LFlag4, TRUE)
         EVT_END_SWITCH
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_IF_EQ(LFlag1, FALSE)
@@ -556,7 +556,7 @@ EvtScript N(EVS_GetAvailableColumn) = {
 
 EvtScript N(EVS_CountActiveSummoners) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
+    EVT_CALL(CreateHomeTargetList, TARGET_FLAG_2 | TARGET_FLAG_PRIMARY_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -572,7 +572,7 @@ EvtScript N(EVS_CountActiveSummoners) = {
                 EVT_END_IF
         EVT_END_SWITCH
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_RETURN

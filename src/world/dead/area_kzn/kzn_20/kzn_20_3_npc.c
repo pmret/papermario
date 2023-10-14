@@ -227,7 +227,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                 EVT_END_IF
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH5_010B)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                 EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
                 EVT_WAIT(15)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
@@ -447,7 +447,7 @@ EvtScript N(EVS_Scene_Misstar) = {
                 EVT_WAIT(15)
                 EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
                 EVT_CALL(NpcMoveTo, NPC_SELF, 145, -10, 0)
-                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_0262, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                 EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
                 EVT_WAIT(20)
                 EVT_CALL(SetNpcRotation, NPC_SELF, 0, -30, 0)

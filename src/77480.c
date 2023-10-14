@@ -223,8 +223,8 @@ s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
         gGameStatusPtr->playerGroundTraceNormal.x = hitNx;
         gGameStatusPtr->playerGroundTraceNormal.y = hitNy;
         gGameStatusPtr->playerGroundTraceNormal.z = hitNz;
-        D_8010C938 = get_player_normal_yaw();
-        D_8010C990 = get_player_normal_pitch();
+        PlayerNormalYaw = get_player_normal_yaw();
+        PlayerNormalPitch = get_player_normal_pitch();
         gGameStatusPtr->playerGroundTraceAngles.x = atan2(0.0f, 0.0f, hitNz * 100.0, hitNy * 100.0);
         gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
         gGameStatusPtr->playerGroundTraceAngles.z = atan2(0.0f, 0.0f, hitNx * 100.0, hitNy * 100.0);
@@ -600,6 +600,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     return ret;
 }
 
+// main function for player physics called from state step functions
 void update_player(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -640,7 +641,7 @@ void update_player(void) {
 
     if (playerStatus->flags & PS_FLAG_NO_STATIC_COLLISION) {
         phys_update_action_state();
-        if (!game_scripts_disabled()) {
+        if (!check_player_action_debug()) {
             collision_main_lateral();
         }
     } else if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
@@ -675,6 +676,7 @@ void update_player(void) {
     }
 
     update_player_shadow();
+
     check_for_interactables();
     check_for_conversation_prompt();
     check_for_pulse_stone();
@@ -777,7 +779,7 @@ void player_reset_data(void) {
     mem_clear(playerStatus, sizeof(PlayerStatus));
     playerStatus->flags = PS_FLAG_HAS_REFLECTION;
     reset_player_status();
-    playerStatus->shadowID = create_shadow_type(0, playerStatus->pos.x, playerStatus->pos.y,
+    playerStatus->shadowID = create_shadow_type(SHADOW_VARYING_CIRCLE, playerStatus->pos.x, playerStatus->pos.y,
                              playerStatus->pos.z);
     func_800E6B68();
     func_800E0B14();
@@ -840,8 +842,9 @@ s32 get_overriding_player_anim(s32 anim) {
             return -1;
         }
     } else if (playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) {
-        if ((playerStatus->peachItemHeld != 0)
-        && (anim == ANIM_Peach2_RaiseArms || anim == ANIM_Peach2_Talk || anim == ANIM_Peach2_LowerArms)) {
+        if (playerStatus->peachItemHeld != PEACH_BAKING_NONE
+            && (anim == ANIM_Peach2_RaiseArms || anim == ANIM_Peach2_Talk || anim == ANIM_Peach2_LowerArms)
+        ) {
             anim = ANIM_Peach3_PresentCompleteCake;
         }
     }
@@ -860,7 +863,7 @@ void suggest_player_anim_allow_backward(AnimID anim) {
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
         playerStatus->animNotifyValue = 0;
-        playerStatus->flags &= ~PS_FLAG_FACE_FORWARDS;
+        playerStatus->flags &= ~PS_FLAG_FACE_FORWARD;
     }
 }
 
@@ -869,7 +872,7 @@ void force_player_anim(AnimID anim) {
 
     playerStatus->anim = anim;
     playerStatus->animNotifyValue = 0;
-    playerStatus->flags &= ~PS_FLAG_FACE_FORWARDS;
+    playerStatus->flags &= ~PS_FLAG_FACE_FORWARD;
 }
 
 void suggest_player_anim_always_forward(AnimID anim) {
@@ -879,7 +882,7 @@ void suggest_player_anim_always_forward(AnimID anim) {
     if (newAnim != -1) {
         playerStatus->anim = newAnim;
         playerStatus->animNotifyValue = 0;
-        playerStatus->flags |= PS_FLAG_FACE_FORWARDS;
+        playerStatus->flags |= PS_FLAG_FACE_FORWARD;
     }
 }
 
@@ -980,10 +983,10 @@ void func_800E01DC(void) {
     }
 }
 
-s32 game_scripts_disabled(void) {
-    s32 ret = FALSE;
+b32 check_player_action_debug(void) {
+    b32 ret = FALSE;
 
-    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->curButtons[0] & BUTTON_R)) {
+    if (gGameStatusPtr->debugScripts != DEBUG_SCRIPTS_NONE && (gGameStatusPtr->curButtons[0] & BUTTON_R)) {
         if (gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
@@ -1380,7 +1383,7 @@ void player_update_sprite(void) {
         if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP && !(playerStatus->flags & PS_FLAG_ROTATION_LOCKED)) {
             playerStatus->spriteFacingAngle = angle + D_800F7B48;
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
+            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARD)
                 && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
                 && fabsf(get_clamped_angle_diff(cameraYaw, playerStatus->curYaw)) < 60.0f
             ) {
@@ -1390,7 +1393,7 @@ void player_update_sprite(void) {
             playerStatus->curYaw = playerStatus->targetYaw;
         } else {
             trueAnim = playerStatus->anim;
-            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARDS)
+            if (!(playerStatus->flags & PS_FLAG_FACE_FORWARD)
                 && (sprIndex == SPR_Mario1 || sprIndex == SPR_MarioW1 || sprIndex == SPR_Peach1)
                 && playerStatus->spriteFacingAngle < 350.0f && playerStatus->spriteFacingAngle > 190.0f
             ) {
@@ -1459,7 +1462,7 @@ s32 get_player_back_anim(s32 anim) {
 }
 
 void render_player(void) {
-    if (!gGameStatusPtr->disableScripts) {
+    if (gGameStatusPtr->debugScripts == DEBUG_SCRIPTS_NONE) {
         render_player_model();
     }
 }

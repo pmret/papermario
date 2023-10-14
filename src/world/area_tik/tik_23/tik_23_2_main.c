@@ -71,7 +71,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_WAIT(1)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_LOOP_48)
+    EVT_CALL(PlaySound, SOUND_LOOP_TIK23_WATER)
     EVT_EXEC_WAIT(N(EVS_SetupDrips))
     EVT_CALL(SetTexPanner, MODEL_nagare1, 0)
     EVT_CALL(SetTexPanner, MODEL_o97, 0)

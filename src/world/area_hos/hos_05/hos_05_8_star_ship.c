@@ -103,7 +103,7 @@ EvtScript N(EVS_Starship_Depart) = {
         EVT_WAIT(25)
         EVT_CALL(N(SwingCameraPitchUpward))
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_017D, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_STARSHIP_TAKEOFF_LONG, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar2, MV_Starship_PosY)
     EVT_CALL(MakeLerp, 0, 1000, 100, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
@@ -159,7 +159,7 @@ EvtScript N(EVS_EnterStarship) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtPlayer, SOUND_017F, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_STARSHIP_ARRIVE, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 750, -85, 90, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

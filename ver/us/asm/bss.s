@@ -192,16 +192,16 @@ dlabel D_8009A6A6
 dlabel D_8009A6A8
 .space 8
 
-dlabel D_8009A6B0
+dlabel FetchSaveBuffer
 .space 0x00001380
 
-dlabel logicalSaveInfo
+dlabel LogicalSaveInfo
 .space 0x00000020
 
-dlabel physicalSaveInfo
+dlabel PhysicalSaveInfo
 .space 0x00000030
 
-dlabel nextAvailableSavePage
+dlabel NextAvailablePhysicalSave
 .space 4
 
 dlabel D_8009BA84
@@ -310,13 +310,13 @@ dlabel gLogosImage1
 dlabel gLogosImage2
 .space 4
 
-dlabel D_800A0920
+dlabel StepPauseDelay
 .space 1
 
-dlabel D_800A0921
+dlabel StepPauseState
 .space 1
 
-dlabel D_800A0922
+dlabel StepPauseAlpha
 .space 2
 
 dlabel SavedReverbMode
@@ -355,28 +355,28 @@ dlabel gLoadedFromFileSelect
 dlabel D_800A094C
 .space 4
 
-dlabel D_800A0950
+dlabel IntroEnableDrawFrameDelay
 .space 4
 
-dlabel D_800A0954
+dlabel IntroOverlayAlpha
 .space 2
 
-dlabel D_800A0956
+dlabel IntroFrontFadeAlpha
 .space 2
 
-dlabel D_800A0958
+dlabel IntroOverlayDelta
 .space 2
 
-dlabel D_800A095A
+dlabel IntroFadeColorR
 .space 2
 
-dlabel D_800A095C
+dlabel IntroFadeColorG
 .space 2
 
-dlabel D_800A095E
+dlabel IntroFadeColorB
 .space 2
 
-dlabel D_800A0960
+dlabel IntroOverlayType
 .space 0x00000004
 
 dlabel D_800A0964
@@ -385,7 +385,7 @@ dlabel D_800A0964
 dlabel D_800A0968
 .space 8
 
-dlabel D_800A0970
+dlabel TitleScreen_AppearDelay
 .space 4
 
 dlabel TitleScreen_ImgList
@@ -403,7 +403,7 @@ dlabel TitleScreen_ImgList_PressStart
 dlabel D_800A0984
 .space 4
 
-dlabel D_800A0988
+dlabel TitleScreen_TimeLeft
 .space 4
 
 dlabel D_800A098C
@@ -869,7 +869,7 @@ dlabel nuAuHeap
 dlabel nuGfxTask
 .space 0x00000370
 
-dlabel D_800D95E8
+dlabel gSaveGlobals
 .space 0x00000038
 
 dlabel D_800D9620

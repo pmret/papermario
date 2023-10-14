@@ -4,8 +4,8 @@
 #include "world/common/enemy/JungleFuzzy_Wander.inc.c"
 #include "world/common/enemy/JungleFuzzy.inc.c"
 #include "world/common/npc/Kolorado.inc.c"
-#include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "world/common/todo/UnsetCamera0Flag1000.inc.c"
+#include "world/common/DisableCameraLeadingPlayer.inc.c"
+#include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_PlayerWatchKolorado) = {
     EVT_LOOP(0)
@@ -27,7 +27,7 @@ EvtScript N(EVS_Kolorado_RunToVillage) = {
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
     EVT_KILL_THREAD(LVar9)
-    EVT_CALL(N(UnsetCamera0Flag1000))
+    EVT_CALL(N(EnableCameraLeadingPlayer))
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
     EVT_CALL(SetSelfVar, 0, 3)
     EVT_RETURN
@@ -46,9 +46,9 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_END_LOOP
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_000D, 320, 60)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 25, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_0262, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PARTNER, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_PARTNER, EMOTE_EXCLAMATION, 0, 25, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(25 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -82,7 +82,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
                     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
                     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
                     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                    EVT_CALL(N(SetCamera0Flag1000))
+                    EVT_CALL(N(DisableCameraLeadingPlayer))
                     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
                     EVT_WAIT(10 * DT)
                     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH5_0011)
@@ -235,7 +235,7 @@ EvtScript N(EVS_NpcDefeat_JungleFuzzyBoss) = {
                 EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
                 EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
                 EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
-                EVT_CALL(N(SetCamera0Flag1000))
+                EVT_CALL(N(DisableCameraLeadingPlayer))
                 EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
                 EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
                 EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Run)

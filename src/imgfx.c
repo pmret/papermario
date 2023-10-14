@@ -523,7 +523,7 @@ void imgfx_update(u32 idx, ImgFXType type, s32 imgfxArg1, s32 imgfxArg2, s32 img
             if (flags != 0) {
                 state->flags |= flags;
             } else {
-                state->flags |= flags; // required to match
+                state->flags |= 0; // required to match
             }
             return;
         case IMGFX_UNK_1:
@@ -1619,8 +1619,8 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
             cam = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMainGfxPos++, &D_8014EE40);
-                D_8014EE50.vp.vtrans[0] = D_8014EE40.vp.vtrans[0] + gGameStatusPtr->unk_82.x;
-                D_8014EE50.vp.vtrans[1] = D_8014EE40.vp.vtrans[1] + gGameStatusPtr->unk_82.y;
+                D_8014EE50.vp.vtrans[0] = D_8014EE40.vp.vtrans[0] + gGameStatusPtr->altViewportOffset.x;
+                D_8014EE50.vp.vtrans[1] = D_8014EE40.vp.vtrans[1] + gGameStatusPtr->altViewportOffset.y;
             } else {
                 gSPViewport(gMainGfxPos++, &cam->vp);
             }

@@ -1,7 +1,7 @@
 #include "hos_01.h"
 #include "effects.h"
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
 
 #define NAME_SUFFIX _StarWay
 #include "world/common/todo/GetFloorCollider.inc.c"
@@ -120,7 +120,7 @@ EvtScript N(EVS_AscendStarBeam) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_THREAD
         EVT_LABEL(10)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))

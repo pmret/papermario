@@ -16,8 +16,8 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Init);
-extern EvtScript N(executeAction);
-extern EvtScript N(celebrate);
+extern EvtScript N(EVS_ExecuteAction);
+extern EvtScript N(EVS_Celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(electroDash);
@@ -72,7 +72,7 @@ API_CALLABLE(N(WattFXUpdate)) {
     x = partner->curPos.x + partner->headOffset.x;
     y = partner->curPos.y + partner->headOffset.y + partner->verticalRenderOffset + 12.0f;
     z = partner->curPos.z + partner->headOffset.z;
-    if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
+    if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_PARTNER_TURN_USED)) == BS_FLAGS2_PARTNER_TURN_USED) {
         y = NPC_DISPOSE_POS_Y;
     }
 
@@ -361,8 +361,8 @@ API_CALLABLE(N(ApplyTurboCharge)) {
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
     }
 
-    if (gBattleStatus.flags2 & BS_FLAGS2_2) {
-        gBattleStatus.flags2 |= BS_FLAGS2_100;
+    if (gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED) {
+        gBattleStatus.flags2 |= BS_FLAGS2_STORED_TURBO_CHARGE_TURN;
     }
 
     return ApiStatus_DONE2;
@@ -489,7 +489,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 10, 22 },
@@ -626,9 +626,9 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -638,7 +638,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_CALL(N(WattFXEnable))
     EVT_CALL(N(WattFXSetEffect), 1)
     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -681,7 +681,7 @@ EvtScript N(EVS_HandlePhase) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -757,7 +757,7 @@ EvtScript N(charge) = {
         EVT_CALL(N(SetBackgroundAlpha), LVar9)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
     EVT_RETURN
     EVT_END
 };
@@ -904,7 +904,7 @@ EvtScript N(electroDash) = {
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
     EVT_CALL(SetDamageSource, DMG_SRC_ELECTRO_DASH)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -5, 0, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
@@ -942,12 +942,12 @@ EvtScript N(electroDash) = {
             EVT_SET(LVarE, 1)
             EVT_SET(LVarF, 5)
     EVT_END_SWITCH
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_SHOCK_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_CALL(PartnerYieldTurn)
     EVT_SWITCH(LVar0)
@@ -997,7 +997,7 @@ EvtScript N(powerShock) = {
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     EVT_THREAD
         EVT_LOOP(75 * DT)
             EVT_ADD(LVar9, 3)
@@ -1006,7 +1006,7 @@ EvtScript N(powerShock) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(75 * DT)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028A)
     EVT_THREAD
         EVT_SETF(LVar0, EVT_FLOAT(1.0))
@@ -1057,7 +1057,7 @@ EvtScript N(powerShock) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActionQuality, LVarF)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
             EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
@@ -1091,7 +1091,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 1)
     EVT_CALL(SetActionHudPrepareTime, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
     EVT_WAIT(5)
@@ -1151,7 +1151,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GROW)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_CALL(N(ApplyTurboCharge))
     EVT_SET(LVarE, LVarF)
     EVT_IF_GT(LVarA, 0)
@@ -1167,7 +1167,7 @@ EvtScript N(8023AE8C) = {
         EVT_CALL(ShowVariableMessageBox, BTL_MSG_TURBO_CHARGE_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -1222,7 +1222,7 @@ EvtScript N(8023B450) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GROW)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_CALL(N(ApplyTurboCharge))
     EVT_SET(LVarE, LVarF)
     EVT_IF_GT(LVarA, 0)
@@ -1238,7 +1238,7 @@ EvtScript N(8023B450) = {
         EVT_CALL(ShowVariableMessageBox, BTL_MSG_TURBO_CHARGE_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
-    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_NO_INACTIVE_ANIM, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -1295,7 +1295,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(MoveBattleCamOver, 90 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(GetActionQuality, LVar1)
     EVT_WAIT(90 * DT)
@@ -1308,7 +1308,7 @@ EvtScript N(megaShock) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
     EVT_CALL(InitTargetIterator)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1347,7 +1347,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(N(MegaShockFX), LVar0, LVar1, LVar2, LVar3)
     EVT_LOOP(0)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(GetActionCommandResult, LVarF)
+        EVT_CALL(GetPartnerActionSuccess, LVarF)
         EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
         EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
             EVT_GOTO(11)
@@ -1359,7 +1359,7 @@ EvtScript N(megaShock) = {
         EVT_END_IF
         EVT_LABEL(11)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_EQ(LVar0, -1)
+        EVT_IF_EQ(LVar0, ITER_NO_MORE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(5)
@@ -1367,7 +1367,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(N(WattFXEnable))
     EVT_CALL(PartnerYieldTurn)
     EVT_WAIT(30)
-    EVT_CALL(GetActionCommandResult, LVar0)
+    EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
             EVT_EXEC_WAIT(N(returnHome2))

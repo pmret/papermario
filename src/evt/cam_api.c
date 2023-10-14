@@ -28,15 +28,15 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall) {
+ApiStatus SetCamNoDraw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
-        gCameras[id].flags |= CAMERA_FLAG_80;
+        gCameras[id].flags |= CAMERA_FLAG_NO_DRAW;
     } else {
-        gCameras[id].flags &= ~CAMERA_FLAG_80;
+        gCameras[id].flags &= ~CAMERA_FLAG_NO_DRAW;
     }
     return ApiStatus_DONE2;
 }

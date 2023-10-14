@@ -65,5 +65,5 @@ extern NpcGroupList N(PokeyAmbushNPCs);
 extern NpcGroupList N(KoopatrolAmbushNPCs);
 extern NpcGroupList N(DefaultNPCs);
 
-API_CALLABLE(N(SetCamera0Flag1000));
-API_CALLABLE(N(UnsetCamera0Flag1000));
+API_CALLABLE(N(DisableCameraLeadingPlayer));
+API_CALLABLE(N(EnableCameraLeadingPlayer));

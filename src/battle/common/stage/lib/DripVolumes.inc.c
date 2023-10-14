@@ -47,7 +47,7 @@ API_CALLABLE(N(CheckDripCollisionWithActors)) {
 
         actor = battleStatus->enemyActors[i];
 
-        if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
+        if (actor != NULL && !(actor->flags & ACTOR_FLAG_INVISIBLE)) {
             xDiff = actor->curPos.x - model->center.x;
             yDiff = actor->curPos.y + actor->size.y - 1.5f - model->center.y;
             zDiff = actor->curPos.z - model->center.z;

@@ -1,7 +1,7 @@
 #include "kpa_08.h"
 #include "entity.h"
 
-#include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
+#include "world/common/EnableCameraFollowPlayerY.inc.c"
 
 API_CALLABLE(N(ElevatePlayer)) {
     Bytecode* args = script->ptrReadPos;
@@ -20,10 +20,10 @@ EvtScript N(EVS_ActivateSwitch) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(AF_KPA08_PlatformRaised, TRUE)
-    EVT_CALL(N(UnsetCamera0MoveFlag1))
+    EVT_CALL(N(EnableCameraFollowPlayerY))
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_EF)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_0227, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_KPA_RAISE_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, -50, 0, 15, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -36,7 +36,7 @@ EvtScript N(EVS_ActivateSwitch) = {
             EVT_END_IF
         EVT_END_LOOP
         EVT_WAIT(80)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_0228, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o19, SOUND_KPA_LOWER_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, -50, 20, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -52,7 +52,7 @@ EvtScript N(EVS_ActivateSwitch) = {
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_EF)
         EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_0227, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_KPA_RAISE_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, -99, 0, 15, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -66,7 +66,7 @@ EvtScript N(EVS_ActivateSwitch) = {
         EVT_END_LOOP
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_WAIT(80)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_0228, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o90, SOUND_KPA_LOWER_STONE_PLATFORM, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, 0, -99, 15, EASING_COS_IN_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)

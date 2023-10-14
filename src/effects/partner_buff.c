@@ -70,9 +70,9 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
         part->unk_0C[i].stateTimer = 0;
     }
 
-    part->unk_02 = 0;
+    part->visible = FALSE;
     if (useRandomValues == 1) {
-        part->unk_02 = 1;
+        part->visible = TRUE;
     }
 
     return effect;
@@ -220,7 +220,7 @@ void func_E011A700(EffectInstance* effect) {
     f32 x, y;
     s32 i;
 
-    if (data->unk_02 != 0) {
+    if (data->visible) {
         gDPPipeSync(gMainGfxPos++);
         gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 

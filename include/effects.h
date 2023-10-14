@@ -992,6 +992,13 @@ typedef struct ShimmerWaveFXData {
     /* 0x68 */ f32 unk_68;
 } ShimmerWaveFXData; // size = 0x6C
 
+enum AuraFXTypes {
+    FX_AURA_CAPTURE     = 0, // star spirit being captured in the intro
+    FX_AURA_RED         = 1, // used by Kooper's Fire Shell
+    FX_AURA_BLUE        = 2, // used by Final Bowser
+    FX_AURA_GOLD        = 3, // used by The Master (final form)
+};
+
 typedef struct AuraFXData {
     /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f posA;
@@ -1533,18 +1540,20 @@ typedef struct SquirtFXData {
     /* 0x1D8 */ u8 unk_1D8[12];
 } SquirtFXData; // size = 0x1E4
 
+enum WaterBlockFXTypes {
+    FX_WATER_BLOCK_CREATE   = 0,
+    FX_WATER_BLOCK_DESTROY  = 1,
+};
+
 #define NUM_WATER_BLOCK_COMPONENTS 4
 
 typedef struct WaterBlockFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
+    /* 0x10 */ s32 timeLeft;
+    /* 0x14 */ s32 lifetime;
+    /* 0x18 */ Color4i color;
+    /* 0x28 */ s32 alpha;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
@@ -2317,7 +2326,7 @@ typedef struct BuffData {
 
 typedef struct PartnerBuffFXData {
     /* 0x00 */ s16 useRandomValues;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ s16 visible;
     /* 0x04 */ s32 timeLeft;
     /* 0x08 */ s32 lifeTime;
     /* 0x0C */ BuffData unk_0C[3];

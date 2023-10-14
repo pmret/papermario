@@ -13,7 +13,7 @@ API_CALLABLE(N(UpdateLogShadow)) {
 
         script->functionTemp[3] = *args++;
         script->functionTempPtr[1] = model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
-        script->functionTemp[2] = create_shadow_type(0, model->center.x, 0.0f, model->center.z);
+        script->functionTemp[2] = create_shadow_type(SHADOW_VARYING_CIRCLE, model->center.x, 0.0f, model->center.z);
         evt_set_variable(script, script->functionTemp[3], 0);
     }
 

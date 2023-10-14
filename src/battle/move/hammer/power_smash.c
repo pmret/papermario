@@ -34,7 +34,7 @@ EvtScript N(EVS_UseMove) = {
 };
 
 EvtScript N(EVS_802A3188) = {
-    EVT_CALL(StartRumble, 9)
+    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.5))
@@ -65,7 +65,7 @@ EvtScript N(UseMove_Impl) = {
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(DidActionSucceed, LVar0)
+    EVT_CALL(GetPlayerActionSuccess, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

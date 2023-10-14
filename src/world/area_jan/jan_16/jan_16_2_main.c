@@ -14,7 +14,7 @@ EvtScript N(EVS_BindExitTriggers) = {
 };
 
 EvtScript N(EVS_SpawnButterflies) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH5_RAFAEL_LEFT_NEST)
+    EVT_IF_NE(GB_StoryProgress, STORY_CH5_RAPHAEL_LEFT_NEST)
         EVT_PLAY_EFFECT(EFFECT_BUTTERFLIES, 5, -310, 10, 0)
         EVT_PLAY_EFFECT(EFFECT_BUTTERFLIES, 5, -210, 10, 240)
         EVT_PLAY_EFFECT(EFFECT_BUTTERFLIES, 5, 330, 10, 260)

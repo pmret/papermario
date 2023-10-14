@@ -8,10 +8,10 @@ extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(celebrate);
+extern EvtScript N(EVS_Celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
-extern EvtScript N(executeAction);
+extern EvtScript N(EVS_ExecuteAction);
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -71,7 +71,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_PART_FLAG_200000,
+    .flags = ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_GOOMBARIO,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(ActorParts)),
@@ -151,9 +151,9 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(executeAction))
+            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(celebrate))
+            EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(N(runAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -163,7 +163,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(celebrate) = {
+EvtScript N(EVS_Celebrate) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_Goompa_Walk)
@@ -191,7 +191,7 @@ EvtScript N(runAwayFail) = {
     EVT_END
 };
 
-EvtScript N(executeAction) = {
+EvtScript N(EVS_ExecuteAction) = {
     EVT_RETURN
     EVT_END
 };

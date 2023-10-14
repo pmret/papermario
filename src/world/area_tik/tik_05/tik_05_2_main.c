@@ -17,8 +17,8 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_LOOP_2D)
-    EVT_CALL(PlaySoundAtF, SOUND_LOOP_2E, SOUND_SPACE_WITH_DEPTH, -85, -20, 120)
+    EVT_CALL(PlaySound, SOUND_LOOP_TIK05_WATER)
+    EVT_CALL(PlaySoundAtF, SOUND_LOOP_TIK05_FLOW1, SOUND_SPACE_WITH_DEPTH, -85, -20, 120)
     EVT_EXEC(N(EVS_SetupDrips))
     EVT_CALL(EnableTexPanning, MODEL_nagare, TRUE)
     EVT_THREAD

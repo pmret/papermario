@@ -124,7 +124,7 @@ EvtScript N(EVS_Scene_TreasureChest) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAt, SOUND_01AF, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
+        EVT_CALL(PlaySoundAt, SOUND_JAN_CHEST_IMPACT, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
         EVT_THREAD
             EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -15, 0, 0, 10, 10)
             EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, 0, 0, 0, 0, 0)
@@ -140,7 +140,7 @@ EvtScript N(EVS_Scene_TreasureChest) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAt, SOUND_01AF, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
+        EVT_CALL(PlaySoundAt, SOUND_JAN_CHEST_IMPACT, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -10, 0, 15, 0, 0)
         EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -10, 0, 15, 0, 0)
         EVT_WAIT(60)

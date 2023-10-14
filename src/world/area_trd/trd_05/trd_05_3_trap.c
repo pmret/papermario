@@ -148,7 +148,7 @@ Vec3f N(UnusedPath)[] = {
 EvtScript N(EVS_PlayerFalling) = {
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_0175)
+        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_1)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 150, 45, EASING_COS_IN_OUT)
@@ -179,7 +179,7 @@ EvtScript N(EVS_PlayerFalling) = {
     EVT_SETF(LVar6, LVar3)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_0175)
+        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_1)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)
     EVT_LABEL(1)
@@ -207,7 +207,7 @@ EvtScript N(EVS_PartnerFalling) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_0176)
+        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_2)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, -135, 45, EASING_COS_IN_OUT)
@@ -236,7 +236,7 @@ EvtScript N(EVS_PartnerFalling) = {
     EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySound, SOUND_0176)
+        EVT_CALL(PlaySound, SOUND_PAPER_GLIDE_2)
     EVT_END_THREAD
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar4, LVar5, LVar6)
     EVT_CALL(MakeLerp, 0, 100, 30, EASING_QUADRATIC_IN)

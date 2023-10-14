@@ -57,12 +57,14 @@ BSS VirtualEntityList wWorldVirtualEntityList;
 BSS VirtualEntityList* gCurrentVirtualEntityListPtr;
 BSS s32 D_802DB7C4[3]; // unused
 
-// fa4c0_len_3bf0
+// audio_api
 BSS MusicEvent* MusicEventList;
 BSS s32 D_802DB7D4; // unused?
 BSS Evt* RunningMusicEvents[10];
 BSS s32 RunningMusicEventIDs[10];
 BSS s32 D_802DB828[2]; // unused?
+
+// item_api
 BSS PopupMenu D_802DB830;
 
 #if VERSION_PAL
@@ -576,47 +578,49 @@ Evt* restart_script(Evt* script) {
 }
 
 void update_scripts(void) {
-    if (gGameStatusPtr->disableScripts != TRUE) {
-        s32 i;
+    s32 i;
 
-        gIsUpdatingScripts = TRUE;
-        sort_scripts();
+    if (gGameStatusPtr->debugScripts == DEBUG_SCRIPTS_NO_UPDATE) {
+        return;
+    }
 
-        for (i = 0; i < gScriptListCount; i++) {
-            Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
+    gIsUpdatingScripts = TRUE;
+    sort_scripts();
 
-            if (script != NULL &&
-                script->id == gScriptIdList[i] &&
-                script->stateFlags != 0 &&
-                !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP)))
-            {
-                s32 stop = FALSE;
-                s32 status;
+    for (i = 0; i < gScriptListCount; i++) {
+        Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
 
-                script->frameCounter += script->timeScale;
+        if (script != NULL &&
+            script->id == gScriptIdList[i] &&
+            script->stateFlags != 0 &&
+            !(script->stateFlags & (EVT_FLAG_SUSPENDED | EVT_FLAG_BLOCKED_BY_CHILD | EVT_FLAG_SUSPENDED_IN_GROUP)))
+        {
+            s32 stop = FALSE;
+            s32 status;
 
-                do {
-                    if (script->frameCounter < 1.0) {
-                        // Continue to next script
-                        do {} while (0); // TODO required to match
-                        break;
-                    };
+            script->frameCounter += script->timeScale;
 
-                    script->frameCounter -= 1.0;
-                    status = evt_execute_next_command(script);
-                    if (status == EVT_CMD_RESULT_ERROR) {
-                        stop = TRUE;
-                        break;
-                    }
-                } while (status != EVT_CMD_RESULT_YIELD);
+            do {
+                if (script->frameCounter < 1.0) {
+                    // Continue to next script
+                    do {} while (0); // TODO required to match
+                    break;
+                };
 
-                if (stop) {
+                script->frameCounter -= 1.0;
+                status = evt_execute_next_command(script);
+                if (status == EVT_CMD_RESULT_ERROR) {
+                    stop = TRUE;
                     break;
                 }
+            } while (status != EVT_CMD_RESULT_YIELD);
+
+            if (stop) {
+                break;
             }
         }
-        gIsUpdatingScripts = FALSE;
     }
+    gIsUpdatingScripts = FALSE;
 }
 
 // Does nothing, is cursed

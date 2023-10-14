@@ -137,7 +137,7 @@ EvtScript N(EVS_Misstar_Escape) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(30)
     EVT_SET(AF_KZN_BossRoomFloorBroken, TRUE)
-    EVT_CALL(PlaySound, SOUND_LOOP_6B)
+    EVT_CALL(PlaySound, SOUND_LOOP_RUMBLE)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_IF_NE(AF_KZN_BossRoomFloorBroken, TRUE)

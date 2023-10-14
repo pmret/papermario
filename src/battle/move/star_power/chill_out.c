@@ -50,7 +50,7 @@ API_CALLABLE(N(CanChillOutHit)) {
         return ApiStatus_DONE2;
     }
 
-    if (target->flags & ACTOR_FLAG_2000) {
+    if (target->flags & ACTOR_FLAG_DAMAGE_IMMUNE) {
         return ApiStatus_DONE2;
     }
 
@@ -80,15 +80,15 @@ API_CALLABLE(N(InflictChillOutHit)) {
         return ApiStatus_DONE2;
     }
 
-    if (target->flags & ACTOR_FLAG_2000) {
+    if (target->flags & ACTOR_FLAG_DAMAGE_IMMUNE) {
         return ApiStatus_DONE2;
     }
 
-    if (targetPart->eventFlags & ACTOR_PART_FLAG_40000) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
         return ApiStatus_DONE2;
     }
 
-    if (targetPart->eventFlags & ACTOR_PART_FLAG_80000) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
         return ApiStatus_DONE2;
     }
 
@@ -160,7 +160,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_END_IF
         EVT_LABEL(11)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(10)
         EVT_END_IF
     EVT_LOOP(30)
@@ -183,7 +183,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_LABEL(1)
         EVT_WAIT(5)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, -1)
+        EVT_IF_NE(LVar0, ITER_NO_MORE)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_WAIT(5)

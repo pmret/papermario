@@ -52,7 +52,7 @@ EvtScript N(EVS_Scene_Starship) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
-        EVT_CALL(PlaySound, SOUND_0180)
+        EVT_CALL(PlaySound, SOUND_STARSHIP_NEAR_FLYBY)
         EVT_CALL(MakeLerp, 50, 10, 10, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)

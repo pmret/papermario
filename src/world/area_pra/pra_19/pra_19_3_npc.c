@@ -628,7 +628,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_CHANGE_PARTNER | PS_FLAG_NO_PARTNER_USAGE, TRUE)
     EVT_WAIT(60)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(35)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
@@ -670,7 +670,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
     EVT_THREAD
         EVT_WAIT(2)
         EVT_CALL(N(AwaitImposterHitPlayer))
-        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARDS, TRUE)
+        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARD, TRUE)
         EVT_CALL(MakeLerp, 0, 11 * 180, 30, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
@@ -681,7 +681,7 @@ EvtScript N(EVS_ManageImpostersScene) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARDS, FALSE)
+        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_ROTATION_LOCKED | PS_FLAG_FACE_FORWARD, FALSE)
     EVT_END_THREAD
     EVT_WAIT(60)
     EVT_CALL(InterpPlayerYaw, 270, 0)

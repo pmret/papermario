@@ -109,7 +109,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .projectileTargetOffset = { 0, 0 },
     },
     {
-        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_TARGET,
         .posOffset = { 0, 31, 0 },
         .targetOffset = { -14, 20 },
@@ -383,7 +383,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
                     EVT_RETURN
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-                    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_13, 90)
+                    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_REDUCE_DAMAGE, 90)
                     EVT_CALL(ShowActionHud, TRUE)
                     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
                     EVT_CALL(action_command_whirlwind_init, 1)
@@ -448,7 +448,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_13, 90)
+    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_REDUCE_DAMAGE, 90)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
     EVT_CALL(action_command_whirlwind_init, 1)
@@ -931,7 +931,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     EVT_CALL(N(StartRumbleWithParams), 180, 20)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
-    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_12, 90)
+    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_BREAK_FREE, 90)
     EVT_THREAD
         EVT_LOOP(90)
             EVT_CALL(SetMessageBoxDuration, 99)

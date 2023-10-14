@@ -27,7 +27,7 @@ dlabel wPartnerNpc
 dlabel TweesterTouchingPlayer
 .space 4
 
-dlabel D_8010C938
+dlabel PlayerNormalYaw
 .space 4
 
 dlabel ISpyNotificationCallback
@@ -42,7 +42,7 @@ dlabel gSpinHistoryBufferPos
 dlabel D_8010C948
 .space 4
 
-dlabel D_8010C94C
+dlabel NpcHitQueryBehindRightY
 .space 4
 
 dlabel D_8010C950
@@ -63,16 +63,16 @@ dlabel JumpedOnSwitchX
 dlabel D_8010C964
 .space 4
 
-dlabel D_8010C968
+dlabel NpcHitQueryBehindCollider
 .space 4
 
 dlabel PeachDisguiseNpcIndex
 .space 4
 
-dlabel D_8010C970
+dlabel NpcHitQueryAheadY
 .space 4
 
-dlabel D_8010C974
+dlabel NpcHitQueryBehindLeftY
 .space 4
 
 dlabel NpcHitQueryColliderID
@@ -81,7 +81,7 @@ dlabel NpcHitQueryColliderID
 dlabel JumpedOnSwitchZ
 .space 4
 
-dlabel D_8010C980
+dlabel PlayerRunStateTime
 .space 4
 
 dlabel D_8010C984
@@ -90,16 +90,16 @@ dlabel D_8010C984
 dlabel D_8010C988
 .space 4
 
-dlabel D_8010C98C
+dlabel NpcHitQueryAheadCollider
 .space 4
 
-dlabel D_8010C990
+dlabel PlayerNormalPitch
 .space 4
 
 dlabel D_8010C994
 .space 0x0000000c
 
-dlabel D_8010C9A0
+dlabel PlayerYInterpUpdateDelay
 .space 4
 
 dlabel D_8010C9A4

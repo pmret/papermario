@@ -401,7 +401,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_8 | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_DEFAULT_TARGET | ACTOR_PART_FLAG_IGNORE_BELOW_CHECK | ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 40 },
@@ -1816,7 +1816,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
     EVT_END_SWITCH
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_STONE)
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 180)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
         EVT_CALL(action_command_whirlwind_init, 0)
@@ -2980,14 +2980,14 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 180)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)
         EVT_CALL(SetupMashMeter, 1, 25, 0, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        EVT_CALL(action_command_stop_leech_start, 0, 0x7FFF, 3)
+        EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
         EVT_SET(LVarB, LVarA)
         EVT_DIV(LVarB, 2)
         EVT_WAIT(LVarB)

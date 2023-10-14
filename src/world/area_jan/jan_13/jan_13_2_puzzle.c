@@ -254,7 +254,7 @@ EvtScript N(EVS_ManageGeyserSounds) = {
 };
 
 EvtScript N(EVS_BoulderTremble) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o33, SOUND_0191, 0)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o33, SOUND_JAN_BOULDER_TREMBLE, 0)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.5))
     EVT_RETURN
     EVT_END
@@ -340,7 +340,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 EVT_WAIT(8)
             EVT_END_LOOP
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPlayer, SOUND_0262, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
                 EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 20, EMOTER_PLAYER, 0, 0, 0, 0)
                 EVT_CALL(GetModelCenter, MODEL_o33)
                 EVT_CALL(FacePlayerTowardPoint, LVar0, LVar2, 4)

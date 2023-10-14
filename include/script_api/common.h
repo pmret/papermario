@@ -91,7 +91,7 @@ ApiStatus SetRenderMode(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtModel(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtCollider(Evt* script, s32 isInitialCall);
 ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall);
-ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall);
+ApiStatus SetCamNoDraw(Evt* script, s32 isInitialCall);
 ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall);
 ApiStatus SetCamViewport(Evt* script, s32 isInitialCall);
 ApiStatus func_802CABE8(Evt* script, s32 isInitialCall);

@@ -139,7 +139,7 @@ s32 N(BoostedStatusTable)[] = {
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
-        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_PRIMARY_TARGET,
         .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -27, 108 },
@@ -203,7 +203,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 1, 150, 0, 0, 0)
     EVT_EXEC(N(EVS_AnimateImgFX))
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 150, 150, 0, 0)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_A)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_BOWSER_AURA)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))

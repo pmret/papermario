@@ -252,7 +252,7 @@ EvtScript N(EVS_Exit_Beanstalk) = {
         EVT_CALL(PlayerMoveTo, LVar9, LVarB, 8)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
         EVT_CALL(NpcJump0, NPC_PARTNER, LVarC, LVarD, LVarE, 5)
-        EVT_CALL(PlaySound, SOUND_019C)
+        EVT_CALL(PlaySound, SOUND_FLO_RIDE_BEANSTALK_UP_LOOP)
         EVT_CALL(SetMusicTrack, 0, SONG_MAGIC_BEANSTALK, 1, 8)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Walk)
@@ -352,7 +352,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o261, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o351, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(AF_FLO_RidingBeanstalk, FALSE)
-    EVT_CALL(StopSound, SOUND_019D)
+    EVT_CALL(StopSound, SOUND_FLO_RIDE_BEANSTALK_DOWN_LOOP)
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -361,7 +361,7 @@ EvtScript N(EVS_Enter_Beanstalk) = {
 };
 
 EvtScript N(EVS_Scene_BeanstalkGrowing) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o261, SOUND_019B, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtCollider, COLLIDER_o261, SOUND_FLO_BEANSTALK_START_GROWING, SOUND_SPACE_DEFAULT)
     EVT_SET(LVarF, 0)
     EVT_LOOP(100)
         EVT_ADD(LVarF, 1)

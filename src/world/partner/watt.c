@@ -303,7 +303,7 @@ API_CALLABLE(N(UseAbility)) {
                 npc->curAnim = ANIM_WorldWatt_Idle;
                 playerStatus->animFlags |= PA_FLAG_WATT_IN_HANDS;
                 N(update_player_carry_anim)();
-                npc_set_palswap_mode_A(npc, 1);
+                npc_set_palswap_mode_A(npc, NPC_PAL_ADJUST_WATT_IDLE);
                 script->functionTemp[1] = 2;
                 N(AbilityState) = SHINING_STATE_HOLDING;
             } else {
@@ -376,7 +376,7 @@ API_CALLABLE(N(UseAbility)) {
         partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
         N(AbilityState) = SHINING_STATE_BEGIN;
-        npc_set_palswap_mode_A(npc, 0);
+        npc_set_palswap_mode_A(npc, NPC_PAL_ADJUST_NONE);
         if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
             set_action_state(ACTION_STATE_IDLE);
         }

@@ -954,7 +954,7 @@ EvtScript N(EVS_Scene_KooperArrives) = {
     EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 0, MSG_CH1_00C9)
     EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_0263, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_QUESTION, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 50, EMOTER_PLAYER, 0, 0, 0, 0)
     EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Thinking)

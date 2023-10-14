@@ -1169,7 +1169,7 @@ API_CALLABLE(N(EnterMap)) {
             sfx_play_sound_at_npc(SOUND_FLIGHT, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             playerStatus->anim = ANIM_MarioW2_RideLaki;
             playerStatus->animNotifyValue = 0;
-            playerStatus->flags |= PS_FLAG_FACE_FORWARDS;
+            playerStatus->flags |= PS_FLAG_FACE_FORWARD;
             N(offset_player_from_camera)(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = TRUE;
             lakilester->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
