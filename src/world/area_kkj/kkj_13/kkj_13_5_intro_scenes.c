@@ -433,7 +433,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_CALL(SetNpcAnimation, NPC_Bowser_Body, ANIM_WorldBowser_Brandish)
     EVT_WAIT(10 * DT)
     EVT_CALL(FadeOutMusic, 0, 500)
-    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_2121, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Bowser_Body, SOUND_BOWSER_STAR_ROD_USE, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, 780, 95, 27, 1, 30)
     EVT_WAIT(40 * DT)
     EVT_THREAD
@@ -444,7 +444,7 @@ EvtScript N(EVS_Scene_BowserAttacks) = {
     EVT_ADD(LVar2, 5)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING, 4, LVar0, LVar1, LVar2, 0, 0)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPlayer, SOUND_0390, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtPlayer, SOUND_TOSS_PLAYER, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
         EVT_CALL(LoadPath, 30 * DT, EVT_PTR(N(PlayerThrownPath)), ARRAY_COUNT(N(PlayerThrownPath)), EASING_LINEAR)
         EVT_SET(LVar4, 0)

@@ -146,7 +146,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_END_LOOP
     EVT_SET(MF_KammyFlying, FALSE)
     EVT_KILL_THREAD(MV_FlightSoundsScriptID)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_032B, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_SKID, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim10)
         EVT_WAIT(1)

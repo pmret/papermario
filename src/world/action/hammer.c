@@ -91,7 +91,7 @@ void action_hammer_play_hit_fx(s32 hitID) {
 
     switch (is_ability_active(ABILITY_ATTACK_FX)) {
         case 1:
-            soundID = SOUND_0372;
+            soundID = SOUND_LIFE_SHROOM_CHIME;
             break;
         case 2:
             soundID = SOUND_PLANTS_BELL;

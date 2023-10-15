@@ -414,7 +414,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
         EVT_ADD(LVar2, 11)
         EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(InterpNpcYaw, NPC_SELF, LVar4, 0)
-        EVT_CALL(func_80045838, -1, SOUND_0328, SOUND_PARAM_MORE_QUIET)
+        EVT_CALL(func_80045838, -1, SOUND_BLASTER_FIRE, SOUND_PARAM_MORE_QUIET)
         EVT_SET(LVarA, LVar1)
         EVT_SUB(LVarA, 10)
         EVT_SET(LVarB, LVar2)

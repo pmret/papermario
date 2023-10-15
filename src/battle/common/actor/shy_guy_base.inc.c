@@ -459,7 +459,7 @@ EvtScript N(EVS_Attack_Vault) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SHYGUY_Anim10)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)

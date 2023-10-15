@@ -354,7 +354,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpMock)
     EVT_WAIT(25)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Swipe)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_SWIPE)
     EVT_WAIT(3)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -546,7 +546,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar0, 15)
         EVT_ADD(LVar1, 90)
         EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2123)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
             EVT_ADD(LVar2, 10)
             EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.05))
         EVT_END_THREAD
@@ -554,7 +554,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar0, 6)
         EVT_ADD(LVar1, 36)
         EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2123)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
             EVT_ADD(LVar2, 10)
             EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.02))
         EVT_END_THREAD
@@ -576,7 +576,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_SUB(LVar2, 3)
         EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarD, 0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2121)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
     EVT_WAIT(30)
     EVT_CALL(RemoveEffect, LVarF)
     EVT_CALL(RemoveEffect, LVarE)
@@ -599,7 +599,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar2, 12)
         EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 28, 32, 10, 60, 0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2125)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_ENCHANT)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(N(StarRodPowerUpEffect), LVar0, LVar1, LVar2, EVT_FLOAT(0.8))
@@ -617,7 +617,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar1, 16)
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 15, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2124)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_SHOCKWAVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)

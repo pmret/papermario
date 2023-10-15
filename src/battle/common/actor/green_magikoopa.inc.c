@@ -640,7 +640,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MAGIKOOPA_VANISH)
     EVT_THREAD
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Green_Anim02)
         EVT_SET(LVar0, 200)
@@ -671,7 +671,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
     EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_GROUND, 255)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_Green_Anim03)
     EVT_WAIT(11)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DC)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MAGIKOOPA_WAND_STRIKE)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -894,7 +894,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)

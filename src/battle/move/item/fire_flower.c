@@ -28,7 +28,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_FIRE_FLOWER)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(PlaySound, SOUND_0377)
+    EVT_CALL(PlaySound, SOUND_PLANT_FIRE_FLOWER)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_PlantFireFlower)
     EVT_THREAD
         EVT_WAIT(50)

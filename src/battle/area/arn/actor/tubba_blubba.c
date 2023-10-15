@@ -291,7 +291,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim15)
     EVT_WAIT(8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_SWIPE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim16)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim17)
@@ -306,7 +306,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
             EVT_CALL(StartRumble, BTL_RUMBLE_LONG)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(15.0))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -395,7 +395,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 23, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
             EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 0, LVar0, 0, LVar2, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim0D)
             EVT_THREAD
@@ -443,7 +443,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
     EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
         EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_BODY_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)

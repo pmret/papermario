@@ -1140,9 +1140,9 @@ EvtScript N(EVS_Attack_Swarm) = {
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
         EVT_CASE_LT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMALL_CROWD_WALK)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_CROWD_WALK)
     EVT_END_SWITCH
     EVT_SET(LVar0, PRT_MEMBER_01)
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim03)
@@ -1215,9 +1215,9 @@ EvtScript N(EVS_Attack_Swarm) = {
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
                 EVT_CASE_LT(5)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMALL_CROWD_WALK)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EC)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_CROWD_WALK)
             EVT_END_SWITCH
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -1274,9 +1274,9 @@ EvtScript N(EVS_Attack_Swarm) = {
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_ACTOR_STEP_A, SOUND_ACTOR_STEP_B)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
         EVT_CASE_LT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EB)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMALL_CROWD_WALK)
         EVT_CASE_DEFAULT
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_CROWD_WALK)
     EVT_END_SWITCH
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim04)
     EVT_EXEC_WAIT(N(EVS_MoveSquadHome))

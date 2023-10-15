@@ -928,7 +928,7 @@ API_CALLABLE(N(CleanupGame)) {
             get_screen_coords(CAM_DEFAULT, npc->pos.x, npc->pos.y, npc->pos.z, &screenX, &screenY, &screenZ);
             if (screenX - 1 < SCREEN_WIDTH - 1) {
                 fx_walking_dust(1, npc->pos.x, npc->pos.y, npc->pos.z, 0, 0);
-                sfx_play_sound(SOUND_0283);
+                sfx_play_sound(SOUND_KOOPER_SHELL_KICK);
             }
             npc->flags |= NPC_FLAG_INVISIBLE;
             disable_npc_shadow(npc);

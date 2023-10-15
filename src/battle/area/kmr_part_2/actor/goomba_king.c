@@ -414,9 +414,9 @@ EvtScript N(EVS_Attack_SpinSwipe) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaKing_Idle)
     EVT_WAIT(8)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20ED)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBA_KING_SPIN)
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20ED)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBA_KING_SPIN)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaKing_Kick)
     EVT_SET(LVar0, 0)

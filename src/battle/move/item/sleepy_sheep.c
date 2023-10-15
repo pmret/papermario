@@ -295,7 +295,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(SetBattleCamZoom, 169)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0364)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHEEP_STAMPEDE)
         EVT_LOOP(7)
             EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MIN)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))

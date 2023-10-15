@@ -305,7 +305,7 @@ EvtScript N(EVS_Attack_Bite) = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PIRANHA_BITE)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)

@@ -149,7 +149,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
         EVT_END_IF
     EVT_KILL_THREAD(MV_Unk_04)
     EVT_KILL_THREAD(MV_Unk_05)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_032B, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_SKID, SOUND_SPACE_DEFAULT)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim10)
         EVT_WAIT(1)

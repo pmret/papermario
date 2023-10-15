@@ -44,7 +44,7 @@ EvtScript N(EVS_Scene_ImposterAppears) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o47, COLLIDER_FLAG_IGNORE_SHELL)
     EVT_THREAD
         EVT_CALL(EnableModel, MODEL_m1_kabe, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_kabe, SOUND_039B, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_kabe, SOUND_SAM08_RAISE_FLOOR, 0)
         EVT_CALL(MakeLerp, -120, 0, 60 * DT, EASING_COS_IN_OUT)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)

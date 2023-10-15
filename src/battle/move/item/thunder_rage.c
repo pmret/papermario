@@ -50,7 +50,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(PlaySound, SOUND_0365)
+    EVT_CALL(PlaySound, SOUND_THUNDER_BOLT)
     EVT_WAIT(10)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

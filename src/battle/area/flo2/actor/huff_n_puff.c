@@ -1605,7 +1605,7 @@ EvtScript N(EVS_Move_HealOrSlam) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
@@ -1640,7 +1640,7 @@ EvtScript N(EVS_Move_HealOrSlam) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(RemoveEffect, LVar8)
-    EVT_CALL(StopSound, SOUND_03B0)
+    EVT_CALL(StopSound, SOUND_HUFF_N_PUFF_INHALE)
     EVT_CALL(StopSound, SOUND_BIG_POWER_UP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim18)
@@ -1715,7 +1715,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
                 EVT_GOTO(1)
             EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
@@ -1728,7 +1728,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
     EVT_CALL(SetBattleCamOffsetZ, 20)
     EVT_CALL(MoveBattleCamOver, 180)
     EVT_WAIT(90)
-    EVT_CALL(StopSound, SOUND_03B0)
+    EVT_CALL(StopSound, SOUND_HUFF_N_PUFF_INHALE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1E)
@@ -1736,7 +1736,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim21)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim22)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_WIND_LOOP)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -1802,7 +1802,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
                 EVT_WAIT(LVar0)
             EVT_END_LOOP
             EVT_WAIT(20)
-            EVT_CALL(StopSound, SOUND_035D)
+            EVT_CALL(StopSound, SOUND_HEAVY_WIND_LOOP)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -1955,7 +1955,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
         EVT_WAIT(110)
         EVT_SET(LVar1, 0)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_035D)
+    EVT_CALL(StopSound, SOUND_HEAVY_WIND_LOOP)
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -2237,7 +2237,7 @@ EvtScript N(EVS_Attack_DirectLightning) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_FIRE_LIGHTNING)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
@@ -2485,7 +2485,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E9)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_FALLING)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
@@ -2494,7 +2494,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar4, LVar3)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_CUBIC_IN)
     EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, LVar0, 0, LVar2, 0)
     EVT_THREAD

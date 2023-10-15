@@ -341,7 +341,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(HIT_RESULT_MISS)
-            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_BOMB, SOUND_02F9)
+            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_BOMB, SOUND_TOSS)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -358,7 +358,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_BOMB, SOUND_02F9)
+            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_BOMB, SOUND_TOSS)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -384,7 +384,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_BOMB, SOUND_02F9)
+    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_BOMB, SOUND_TOSS)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_BOMB, EVT_FLOAT(14.0))
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_BOMB, EVT_FLOAT(0.1))

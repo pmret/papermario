@@ -1289,7 +1289,7 @@ EvtScript EVS_PlayerDies = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)
     EVT_WAIT(15)
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0371)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_SPINNING)
     EVT_SET(LVar0, 0)
     EVT_LOOP(30)
         EVT_ADD(LVar0, 60)
@@ -1304,7 +1304,7 @@ EvtScript EVS_PlayerDies = {
     EVT_END_LOOP
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_03FB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_COLLAPSE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 1)
     EVT_LOOP(0)
@@ -1476,7 +1476,7 @@ EvtScript EVS_UseLifeShroom = {
         EVT_WAIT(15)
         EVT_CALL(GiveRefundCleanup)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0372)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LIFE_SHROOM_CHIME)
     EVT_ADD(LVar4, 15)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0))
     EVT_SET(LVar0, LVarF)
@@ -1491,7 +1491,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_START_RECOVERY)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0373)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_REVIVAL_MAGIC)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30)
     EVT_WAIT(40)
@@ -1520,7 +1520,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CHILD_THREAD
         EVT_CALL(LifeShroomRevealWorld)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0374)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_REVIVE)
     EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(ConsumeLifeShroom)

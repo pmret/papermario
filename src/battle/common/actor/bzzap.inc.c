@@ -490,7 +490,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
     EVT_WAIT(40)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bzzap_Anim01)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(PlaySound, SOUND_0358)
+    EVT_CALL(PlaySound, SOUND_MINI_BZZAP_BUZZ)
     EVT_SET(LVar0, PRT_SWARM_1)
     EVT_EXEC_GET_TID(N(EVS_SummonSwarmPart), LVarA)
     EVT_WAIT(11)
@@ -617,7 +617,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
             EVT_WAIT(30)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_WAIT(30)
-            EVT_CALL(StopSound, SOUND_0358)
+            EVT_CALL(StopSound, SOUND_MINI_BZZAP_BUZZ)
             EVT_CALL(YieldTurn)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -726,7 +726,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
             EVT_ADD(LVar2, 100)
             EVT_CALL(FlyPartTo, ACTOR_SELF, PRT_SWARM_5, LVar0, LVar1, LVar2, 0, 10, EASING_LINEAR)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_SWARM_5, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-            EVT_CALL(StopSound, SOUND_0358)
+            EVT_CALL(StopSound, SOUND_MINI_BZZAP_BUZZ)
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

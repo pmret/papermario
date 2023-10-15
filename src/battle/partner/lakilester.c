@@ -1731,7 +1731,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetBattleCamZoom, 430)
     EVT_CALL(MoveBattleCamOver, 150 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0288)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_HURRICANE_WIND)
     EVT_THREAD
         EVT_CALL(N(ProcessHurricane))
     EVT_END_THREAD

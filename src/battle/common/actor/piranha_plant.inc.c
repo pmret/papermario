@@ -328,7 +328,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_END_IF
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
+                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PIRANHA_BITE)
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim07)
             EVT_WAIT(10)
@@ -351,7 +351,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(2)
     EVT_THREAD
         EVT_WAIT(6)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PIRANHA_BITE)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim07)
     EVT_WAIT(10)

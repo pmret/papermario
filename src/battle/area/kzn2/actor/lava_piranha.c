@@ -1832,7 +1832,7 @@ EvtScript N(EVS_Death) = {
             EVT_END_LOOP
         EVT_END_THREAD
         EVT_WAIT(212)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaPiranha_Anim0F)
         EVT_CALL(SetAnimation, ACTOR_BUD_1, PRT_MAIN, ANIM_LavaBud_Anim0F)
         EVT_CALL(SetAnimation, ACTOR_BUD_2, PRT_MAIN, ANIM_LavaBud_Anim0F)

@@ -29,7 +29,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_SNOWMAN_DOLL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundDarken))
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0363)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_WINTERY_JINGLE)
     EVT_THREAD
         EVT_LOOP(45)
             EVT_CALL(RandInt, 300, LVar0)

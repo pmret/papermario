@@ -502,7 +502,7 @@ EvtScript N(EVS_Attack_Mallet) = {
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_THREAD
         EVT_WAIT(4)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0327)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MALLET_SWING)
     EVT_END_THREAD
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -586,7 +586,7 @@ EvtScript N(EVS_Attack_Mallet) = {
                 EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                 EVT_THREAD
                     EVT_WAIT(5)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DC)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_COMMAND_LOSS)
                     EVT_CALL(N(StartRumbleWithParams), 200, 10)
                 EVT_END_THREAD
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim09)

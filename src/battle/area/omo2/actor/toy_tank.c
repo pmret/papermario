@@ -764,7 +764,7 @@ EvtScript N(EVS_BeginWave_Tank) = {
 
 EvtScript N(EVS_Death) = {
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_TANK, SOUND_036F)
+    EVT_CALL(PlaySoundAtActor, ACTOR_TANK, SOUND_TOY_TANK_FALL_APART)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_FallApart))
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Tank_BulbGlowEffect, LVar0)
     EVT_IF_NE(LVar0, NULL)
@@ -782,7 +782,7 @@ EvtScript N(EVS_Death) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_GENERAL)
     EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(PlaySoundAtActor, ACTOR_TANK, SOUND_034E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_TANK, SOUND_TOY_TANK_EXPLODE)
     EVT_CALL(SetActorJumpGravity, ACTOR_GENERAL, EVT_FLOAT(0.6))
     EVT_CALL(SetActorDispOffset, ACTOR_GENERAL, 0, 0, 0)
     EVT_CALL(GetActorPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
@@ -794,7 +794,7 @@ EvtScript N(EVS_Death) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalPos, ACTOR_GENERAL, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_GENERAL, 50, FALSE, TRUE, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_GENERAL, SOUND_20E4)
+    EVT_CALL(PlaySoundAtActor, ACTOR_GENERAL, SOUND_ACTOR_COLLAPSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim10)
@@ -814,7 +814,7 @@ EvtScript N(EVS_Death) = {
     EVT_ADD(LVar0, 10)
     EVT_ADD(LVar1, 30)
     EVT_PLAY_EFFECT(EFFECT_STARS_ORBITING, 0, LVar0, LVar1, LVar2, 20, 4, LVarF, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_GENERAL, SOUND_20E5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_GENERAL, SOUND_KNOCKOUT_CHIRPING)
     EVT_CALL(DropStarPoints, ACTOR_GENERAL)
     EVT_WAIT(30)
     EVT_CALL(RemoveEffect, LVarF)

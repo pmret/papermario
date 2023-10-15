@@ -1591,7 +1591,7 @@ EvtScript N(EVS_Move_TryBoostAttack) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1704,7 +1704,7 @@ EvtScript N(EVS_Move_TryBoostDefense) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1935,7 +1935,7 @@ EvtScript N(EVS_Move_TryTransparent) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DB)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_VANISH)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)

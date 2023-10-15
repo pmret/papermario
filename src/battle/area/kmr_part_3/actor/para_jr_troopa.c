@@ -585,7 +585,7 @@ EvtScript N(EVS_JrTroopa_Death) = {
     EVT_CALL(SetBattleCamOffsetZ, 15)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_KNOCKOUT_CHIRPING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_JrTroopa_Defeated)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_FLYING, EVT_PTR(N(DefeatedAnims)))
     EVT_WAIT(60)

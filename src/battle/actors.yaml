@@ -541,8 +541,8 @@
     level: 19
     nameMsg: MSG_EnemyName_Bzzap
     tattleMsg: MSG_EnemyTattle_Bzzap
-    walkSound: [ SOUND_0357, SOUND_NONE ]
-    flySound: [ SOUND_0357, SOUND_NONE ]
+    walkSound: [ SOUND_BZZAP_BUZZ, SOUND_NONE ]
+    flySound: [ SOUND_BZZAP_BUZZ, SOUND_NONE ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -750,7 +750,7 @@
     level: 23
     nameMsg: MSG_EnemyName_AlbinoDino
     tattleMsg: MSG_EnemyTattle_AlbinoDino
-    walkSound: [ SOUND_030B, SOUND_02FD ]
+    walkSound: [ SOUND_ALBINO_DINO_STEP_A, SOUND_ALBINO_DINO_STEP_B ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1609,7 +1609,7 @@
     level: 49
     nameMsg: MSG_EnemyName_GoombaKing
     tattleMsg: MSG_EnemyTattle_GoombaKing
-    walkSound: [ SOUND_20EC, SOUND_20EC ]
+    walkSound: [ SOUND_HEAVY_NPC_FOOSTEP, SOUND_HEAVY_NPC_FOOSTEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_ACTOR_HURT
@@ -1688,7 +1688,7 @@
     level: 0
     nameMsg: MSG_EnemyName_FakeBowser
     tattleMsg: MSG_EnemyTattle_FakeBowser
-    walkSound: [ SOUND_03EA, SOUND_03EA ]
+    walkSound: [ SOUND_FAKE_BOWSER_STEP, SOUND_FAKE_BOWSER_STEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE
@@ -1875,7 +1875,7 @@
     level: 0
     nameMsg: MSG_EnemyName_GeneralGuy
     tattleMsg: MSG_EnemyTattle_GeneralGuy
-    walkSound: [ SOUND_037E, SOUND_037E ]
+    walkSound: [ SOUND_TOY_TANK_STEP, SOUND_TOY_TANK_STEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_ACTOR_HURT
@@ -1952,7 +1952,7 @@
     level: 42
     nameMsg: MSG_EnemyName_BigLanternGhost
     tattleMsg: MSG_EnemyTattle_BigLanternGhost
-    walkSound: [ SOUND_037D, SOUND_037D ]
+    walkSound: [ SOUND_LANTERN_GHOST_STEP, SOUND_LANTERN_GHOST_STEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE
@@ -2041,7 +2041,7 @@
     level: 55
     nameMsg: MSG_EnemyName_KentCKoopa
     tattleMsg: MSG_EnemyTattle_KentCKoopa
-    walkSound: [ SOUND_20EC, SOUND_20EC ]
+    walkSound: [ SOUND_HEAVY_NPC_FOOSTEP, SOUND_HEAVY_NPC_FOOSTEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE

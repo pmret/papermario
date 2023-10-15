@@ -404,7 +404,7 @@ HitResult calc_player_damage_enemy(void) {
 
             switch (attackFxType) {
                 case 1:
-                    sfx_play_sound_at_position(SOUND_0372, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_LIFE_SHROOM_CHIME, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 2:
                     sfx_play_sound_at_position(SOUND_PLANTS_BELL, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);

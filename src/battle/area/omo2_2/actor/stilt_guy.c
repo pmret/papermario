@@ -297,10 +297,10 @@ EvtScript N(EVS_Init) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_Order, LVar1)
         EVT_IF_EQ(LVar1, 0)
             EVT_SET(LVar0, 10)
-            EVT_CALL(PlaySound, SOUND_0305)
+            EVT_CALL(PlaySound, SOUND_LONG_FLUTTER_FALL_A)
         EVT_ELSE
             EVT_SET(LVar0, 50)
-            EVT_CALL(PlaySound, SOUND_0306)
+            EVT_CALL(PlaySound, SOUND_LONG_FLUTTER_FALL_B)
         EVT_END_IF
         EVT_SUB(LVar2, 13)
         EVT_CALL(SetPartPos, ACTOR_SELF, PRT_UNFOLD_4, LVar0, 200, LVar2)
@@ -1303,7 +1303,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim10)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)

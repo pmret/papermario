@@ -11,19 +11,19 @@
 
 #define NAMESPACE battle_partner_watt
 
-extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_TakeTurn);
-extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_ExecuteAction);
 extern EvtScript N(EVS_Celebrate);
-extern EvtScript N(runAway);
-extern EvtScript N(runAwayFail);
-extern EvtScript N(electroDash);
-extern EvtScript N(powerShock);
-extern EvtScript N(turboCharge);
-extern EvtScript N(megaShock);
+extern EvtScript N(EVS_RunAway);
+extern EvtScript N(EVS_RunAwayFail);
+extern EvtScript N(EVS_Attack_ElectroDash);
+extern EvtScript N(EVS_Attack_PowerShock);
+extern EvtScript N(EVS_Attack_MegaShock);
+extern EvtScript N(EVS_Move_TurboCharge);
 
 extern EffectInstance* N(radialShimmer);
 extern s32 D_8023B948_707438[];
@@ -41,8 +41,8 @@ static EffectInstance* sWattEffectData_effect1;
 static EffectInstance* sWattEffectData_effect2;
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
-    PRT_2               = 2,
+    PRT_MAIN        = 1,
+    PRT_2           = 2,
 };
 
 API_CALLABLE(N(WattFXUpdate)) {
@@ -630,9 +630,9 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(PHASE_CELEBRATE)
             EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(runAway))
+            EVT_EXEC_WAIT(N(EVS_RunAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(runAwayFail))
+            EVT_EXEC_WAIT(N(EVS_RunAwayFail))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -650,7 +650,7 @@ EvtScript N(EVS_Celebrate) = {
     EVT_END
 };
 
-EvtScript N(runAway) = {
+EvtScript N(EVS_RunAway) = {
     EVT_CALL(N(WattFXEnable))
     EVT_CALL(N(WattFXSetEffect), 1)
     EVT_SET_CONST(LVar0, PRT_MAIN)
@@ -660,7 +660,7 @@ EvtScript N(runAway) = {
     EVT_END
 };
 
-EvtScript N(runAwayFail) = {
+EvtScript N(EVS_RunAwayFail) = {
     EVT_CALL(N(WattFXEnable))
     EVT_CALL(N(WattFXSetEffect), 1)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
@@ -694,17 +694,17 @@ EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_ELECTRO_DASH1)
-            EVT_EXEC_WAIT(N(electroDash))
+            EVT_EXEC_WAIT(N(EVS_Attack_ElectroDash))
         EVT_CASE_EQ(MOVE_ELECTRO_DASH2)
-            EVT_EXEC_WAIT(N(electroDash))
+            EVT_EXEC_WAIT(N(EVS_Attack_ElectroDash))
         EVT_CASE_EQ(MOVE_ELECTRO_DASH3)
-            EVT_EXEC_WAIT(N(electroDash))
+            EVT_EXEC_WAIT(N(EVS_Attack_ElectroDash))
         EVT_CASE_EQ(MOVE_POWER_SHOCK)
-            EVT_EXEC_WAIT(N(powerShock))
+            EVT_EXEC_WAIT(N(EVS_Attack_PowerShock))
         EVT_CASE_EQ(MOVE_TURBO_CHARGE)
-            EVT_EXEC_WAIT(N(turboCharge))
+            EVT_EXEC_WAIT(N(EVS_Move_TurboCharge))
         EVT_CASE_EQ(MOVE_MEGA_SHOCK)
-            EVT_EXEC_WAIT(N(megaShock))
+            EVT_EXEC_WAIT(N(EVS_Attack_MegaShock))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -742,7 +742,7 @@ EvtScript N(dashToTarget) = {
 EvtScript N(charge) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
     EVT_CALL(N(WattFXDisable))
-    EVT_CALL(PlayLoopingSoundAtActor, ACTOR_PARTNER, 0, SOUND_0289)
+    EVT_CALL(PlayLoopingSoundAtActor, ACTOR_PARTNER, 0, SOUND_WATT_CHARGE)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 12)
     EVT_CALL(N(ElectroDashFX), LVar0, LVar1, LVar2)
@@ -762,7 +762,7 @@ EvtScript N(charge) = {
     EVT_END
 };
 
-EvtScript N(electroDash_wait) = {
+EvtScript N(EVS_ElectroDashDelay) = {
     EVT_LOOP(30)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -770,7 +770,7 @@ EvtScript N(electroDash_wait) = {
     EVT_END
 };
 
-EvtScript N(electroDash) = {
+EvtScript N(EVS_Attack_ElectroDash) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_BODY_SLAM)
     EVT_CALL(action_command_body_slam_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
@@ -821,7 +821,7 @@ EvtScript N(electroDash) = {
             EVT_GOTO(10)
         EVT_END_IF
         EVT_IF_EQ(LFlag0, FALSE)
-            EVT_EXEC_GET_TID(N(electroDash_wait), LVarA)
+            EVT_EXEC_GET_TID(N(EVS_ElectroDashDelay), LVarA)
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
                 EVT_IF_EQ(LVar0, 0)
@@ -882,7 +882,7 @@ EvtScript N(electroDash) = {
             EVT_GOTO(10)
         EVT_END_IF
         EVT_IF_EQ(LFlag0, FALSE)
-            EVT_EXEC_GET_TID(N(electroDash_wait), LVarA)
+            EVT_EXEC_GET_TID(N(EVS_ElectroDashDelay), LVarA)
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
                 EVT_IF_EQ(LVar0, 0)
@@ -964,7 +964,7 @@ EvtScript N(electroDash) = {
     EVT_END
 };
 
-EvtScript N(powerShock) = {
+EvtScript N(EVS_Attack_PowerShock) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_POWER_SHOCK)
     EVT_CALL(action_command_power_shock_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
@@ -1007,7 +1007,7 @@ EvtScript N(powerShock) = {
     EVT_END_THREAD
     EVT_WAIT(75 * DT)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, ACTOR_PAL_ADJUST_WATT_IDLE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028A)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_POWER_SHOCK)
     EVT_THREAD
         EVT_SETF(LVar0, EVT_FLOAT(1.0))
         EVT_LOOP(3)
@@ -1087,7 +1087,7 @@ EvtScript N(powerShock) = {
     EVT_END
 };
 
-EvtScript N(8023AE8C) = {
+EvtScript N(EVS_TurboCharge_HealthyPlayer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 1)
     EVT_CALL(SetActionHudPrepareTime, 0)
@@ -1128,7 +1128,7 @@ EvtScript N(8023AE8C) = {
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_TURBO_CHARGE)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 42)
     EVT_CALL(N(TurboChargeFX), LVar0, LVar1, LVar2)
@@ -1172,7 +1172,7 @@ EvtScript N(8023AE8C) = {
     EVT_END
 };
 
-EvtScript N(8023B450) = {
+EvtScript N(EVS_TurboCharge_ImmobilePlayer) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 1)
     EVT_CALL(SetActionHudPrepareTime, 0)
@@ -1211,7 +1211,7 @@ EvtScript N(8023B450) = {
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_TURBO_CHARGE)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 42)
     EVT_CALL(N(TurboChargeFX), LVar0, LVar1, LVar2)
@@ -1243,12 +1243,12 @@ EvtScript N(8023B450) = {
     EVT_END
 };
 
-EvtScript N(turboCharge) = {
+EvtScript N(EVS_Move_TurboCharge) = {
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-        EVT_EXEC_WAIT(N(8023B450))
+        EVT_EXEC_WAIT(N(EVS_TurboCharge_ImmobilePlayer))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(8023AE8C))
+        EVT_EXEC_WAIT(N(EVS_TurboCharge_HealthyPlayer))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -1256,7 +1256,7 @@ EvtScript N(turboCharge) = {
 
 s32 D_8023B948_707438[] = { 3, 3, 4, 7, 10, 13, 16, 16, 16, 16 };
 
-EvtScript N(megaShock) = {
+EvtScript N(EVS_Attack_MegaShock) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_MEGA_SHOCK)
     EVT_CALL(action_command_mega_shock_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
@@ -1313,7 +1313,7 @@ EvtScript N(megaShock) = {
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 12)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_028C)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_WATT_MEGA_CHARGE)
         EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 2, LVar0, LVar1, LVar2, 0, 0, 0)
         EVT_WAIT(10)
         EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2024)

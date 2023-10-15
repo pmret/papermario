@@ -390,7 +390,7 @@ EvtScript N(EVS_PopBalloons) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.5))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
         EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
         EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_FLYING, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_NO_TARGET)
         EVT_CALL(SetPartFlags, ACTOR_SELF, PRT_GROUND, ACTOR_PART_FLAG_NO_SHADOW | ACTOR_PART_FLAG_PRIMARY_TARGET)
@@ -988,7 +988,7 @@ EvtScript N(EVS_Attack_Vault) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_ShyGuy_Red_Anim10)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)

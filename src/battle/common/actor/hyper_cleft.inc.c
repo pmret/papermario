@@ -173,7 +173,7 @@ EvtScript N(EVS_Move_Charge) = {
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.5))
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02D9)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HYPER_CLEFT_LAND)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, LVar1, LVar2, 0, 0)
         EVT_THREAD
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
@@ -197,7 +197,7 @@ EvtScript N(EVS_Move_Charge) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02DA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HYPER_CLEFT_CHARGE)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 3, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

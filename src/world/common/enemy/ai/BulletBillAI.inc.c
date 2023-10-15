@@ -211,7 +211,7 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
             npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             bulletEnemy = get_enemy(enemy->AI_VAR_BLASTER_BULLET);
             bulletEnemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_PRE;
-            ai_enemy_play_sound(npc, SOUND_0328, SOUND_PARAM_MORE_QUIET);
+            ai_enemy_play_sound(npc, SOUND_BLASTER_FIRE, SOUND_PARAM_MORE_QUIET);
             npc->duration = 5;
             script->AI_TEMP_STATE = AI_STATE_BLASTER_COOLDOWN;
             // fallthrough

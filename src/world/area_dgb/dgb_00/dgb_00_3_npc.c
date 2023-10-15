@@ -552,7 +552,7 @@ EvtScript N(EVS_Scene_ThrownOutBySentinel) = {
     EVT_CALL(SetNpcPos, NPC_Sentinel, 175, 85, -33)
     EVT_CALL(SetNpcAnimation, NPC_Sentinel, ANIM_Sentinel_Anim09)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtNpc, NPC_Sentinel, SOUND_02F7, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Sentinel, SOUND_SENTINEL_PICKUP, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_Sentinel, ANIM_Sentinel_Anim02)
     EVT_CALL(SetNpcPos, NPC_Sentinel, 175, 70, -33)
     EVT_THREAD

@@ -174,7 +174,7 @@ void action_update_hit_lava(void) {
                 start_rumble(256, 50);
                 phys_adjust_cam_on_landing();
                 gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
-                sfx_play_sound_at_player(SOUND_03FB, SOUND_SPACE_DEFAULT);
+                sfx_play_sound_at_player(SOUND_PLAYER_COLLAPSE, SOUND_SPACE_DEFAULT);
                 suggest_player_anim_always_forward(ANIM_MarioW2_Thrown);
                 playerStatus->flags &= ~PS_FLAG_HIT_FIRE;
                 playerStatus->flags &= ~PS_FLAG_FLYING;

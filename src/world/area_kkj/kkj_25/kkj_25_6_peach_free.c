@@ -141,7 +141,7 @@ EvtScript N(EVS_Scene_PeachBreaksFree) = {
         EVT_SET(LVar4, 3)
         EVT_CALL(N(SpawnStarsOrbitingKammy1))
         EVT_SET(MV_OrbitingEffectAIdx, LVar0)
-        EVT_CALL(PlaySound, SOUND_20E5)
+        EVT_CALL(PlaySound, SOUND_KNOCKOUT_CHIRPING)
         EVT_WAIT(5)
         EVT_CALL(SetNpcAnimation, NPC_Kammy_02, ANIM_BattleKammy_Anim03)
     EVT_END_THREAD

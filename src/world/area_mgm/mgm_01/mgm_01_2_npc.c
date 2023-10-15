@@ -477,7 +477,7 @@ API_CALLABLE(N(DestroyBlockEntities)) {
         }
     }
 
-    sfx_play_sound_with_params(SOUND_0283, 0x50, 0, 0);
+    sfx_play_sound_with_params(SOUND_KOOPER_SHELL_KICK, 0x50, 0, 0);
 
     return ApiStatus_DONE2;
 }

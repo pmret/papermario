@@ -81,7 +81,7 @@ EvtScript N(EVS_NpcInteract_Rosie) = {
                     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_TakeOut)
                     EVT_WAIT(10)
                     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
-                    EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, 0x00000564)
+                    EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
                     EVT_WAIT(10)
                     EVT_SWITCH(GF_FLO10_LilyRequestedWaterStone)
                         EVT_CASE_EQ(0)
