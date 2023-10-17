@@ -103,7 +103,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
         EVT_END_LOOP
         EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
     EVT_CALL(NpcJump0, NPC_SELF, -35, 0, 25, 23)

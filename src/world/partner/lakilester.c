@@ -726,7 +726,7 @@ API_CALLABLE(N(UseAbility)) {
             N(AbilityState) = RIDE_STATE_MOUNT_2;
             break;
         case RIDE_STATE_MOUNT_2:
-            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             // fallthrough
         case RIDE_STATE_MOUNT_3:

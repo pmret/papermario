@@ -935,7 +935,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_ALT_SPIKY, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2020)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BODY_SLAM)
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_BodySlam)
@@ -981,7 +981,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
             EVT_SET(LVarE, 3)
             EVT_SET(LVarF, 5)
     EVT_END_SWITCH
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2020)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOMBETTE_BODY_SLAM)
     EVT_CALL(GetPartnerActionSuccess, LVar0)
     EVT_IF_GT(LVar0, 0)
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)

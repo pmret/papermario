@@ -425,7 +425,7 @@ dlabel msg_drawState
 dlabel D_8015DD78
 .space 8
 
-dlabel D_80155D80
+dlabel UnusedItemPhysicsScriptID
 .space 4
 
 dlabel ItemEntityAlternatingSpawn
@@ -434,13 +434,13 @@ dlabel ItemEntityAlternatingSpawn
 dlabel ItemEntityRenderGroup
 .space 4
 
-dlabel D_80155D8C
+dlabel CoinSparkleCenterX
 .space 2
 
-dlabel D_80155D8E
+dlabel CoinSparkleCenterY
 .space 2
 
-dlabel D_80155D90
+dlabel CoinSparkleCenterZ
 .space 2
 
 dlabel pad_ItemEntity
@@ -458,7 +458,7 @@ dlabel gCurrentItemEntities
 dlabel isPickingUpItem
 .space 2
 
-dlabel D_801565A6
+dlabel ItemSpawnWithinPlayerPickupDelay
 .space 2
 
 dlabel D_801565A8
@@ -467,7 +467,7 @@ dlabel D_801565A8
 dlabel D_801565AC
 .space 4
 
-dlabel D_801565B0
+dlabel ItemPickupMenu
 .space 0x00000330
 
 dlabel ItemPickupIconID
@@ -476,10 +476,10 @@ dlabel ItemPickupIconID
 dlabel ItemPickupStateDelay
 .space 4
 
-dlabel D_801568E8
+dlabel ThrowAwayMenuIdx
 .space 4
 
-dlabel D_801568EC
+dlabel ThrowAwayItemID
 .space 4
 
 dlabel ItemPickupGotOutline

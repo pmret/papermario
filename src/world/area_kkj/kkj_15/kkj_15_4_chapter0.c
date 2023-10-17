@@ -16,7 +16,7 @@ API_CALLABLE(N(SetLightSourcePos)) {
 
 EvtScript N(EVS_PlaySounds_KoopaBrosShowOff) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAt, SOUND_LENS_FLARE, SOUND_SPACE_DEFAULT, 100, 0, -40)
+        EVT_CALL(PlaySoundAt, SOUND_LARGE_LENS_FLARE, SOUND_SPACE_DEFAULT, 100, 0, -40)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAt, SOUND_KOOPA_BROS_TOWER_SPIN_3, SOUND_SPACE_DEFAULT, 100, 0, -40)
         EVT_WAIT(60)
@@ -240,7 +240,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(15)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_02, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_02, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -249,7 +249,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_01, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_01, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -258,7 +258,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_03, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
@@ -267,7 +267,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_04, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_04, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetNpcPos, NPC_KoopaBros_04, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)

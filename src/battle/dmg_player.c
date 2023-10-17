@@ -413,10 +413,10 @@ HitResult calc_player_damage_enemy(void) {
                     sfx_play_sound_at_position(SOUND_SLIDE_WHISTLE_OUT, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 4:
-                    sfx_play_sound_at_position(SOUND_2072, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_YOSHI, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 5:
-                    sfx_play_sound_at_position(SOUND_2073, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_HIT_WHACKA, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     break;
                 case 6:
                     sfx_play_sound_at_position(SOUND_FLOWERS_LAUGH, SOUND_SPACE_DEFAULT, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -1191,7 +1191,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         playerState->unk_28 = 180 / playerState->moveTime;
         playerState->unk_2C = playerState->goalPos.y;
         if (script->functionTemp[1] != 2) {
-            sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+            sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1861,7 +1861,7 @@ ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
             playerState->vel = vel2 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.8 * acc2) + acc2);
         }
         set_actor_anim(0, 0, playerState->animJumpRise);
-        sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+        sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
         script->functionTemp[0] = 1;
     }
 
@@ -2002,7 +2002,7 @@ ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
             playerState->vel = 0.0f;
             playerState->speed += temp / playerState->moveTime;
             set_actor_anim(ACTOR_PLAYER, 0, playerState->animJumpRise);
-            sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+            sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
             playerState->unk_24 = 90.0f;
             playerState->bounceDivisor = 45.0f;
             playerState->unk_28 = 360 / playerState->moveTime;
@@ -2106,7 +2106,7 @@ ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
             playerState->unk_24 = clamp_angle(playerState->unk_24);
             playerState->moveTime--;
             if (playerState->moveTime == 0) {
-                sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+                sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
                 set_actor_anim(ACTOR_PLAYER, 0, playerState->animJumpFall);
                 player->rotPivotOffset.y = 14;
                 player->rot.z -= 66.0f;
@@ -2246,7 +2246,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->velStep.z = (playerState->goalPos.z - playerState->curPos.z) / playerState->moveTime;
             playerState->speed += temp / playerState->moveTime;
             set_actor_anim(ACTOR_PLAYER, 0, playerState->animJumpFall);
-            sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+            sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
             sfx_play_sound_at_position(SOUND_TORNADO_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
             playerState->unk_18.x = 0.0f;
             playerState->unk_18.y = 0.0f;
@@ -2290,7 +2290,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->velStep.z = (playerState->goalPos.z - playerState->curPos.z) / playerState->moveTime;
             playerState->speed += temp / playerState->moveTime;
             set_actor_anim(ACTOR_PLAYER, 0, playerState->animJumpRise);
-            sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+            sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
             sfx_play_sound_at_position(SOUND_TORNADO_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
             playerState->unk_18.x = 0.0f;
             playerState->unk_18.y = 0.0f;
@@ -2345,7 +2345,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->velStep.z = (playerState->goalPos.z - playerState->curPos.z) / playerState->moveTime;
             playerState->speed += temp / playerState->moveTime;
             set_actor_anim(ACTOR_PLAYER, 0, playerState->animJumpRise);
-            sfx_play_sound_at_position(SOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
+            sfx_play_sound_at_position(SOUND_LONG_PLAYER_JUMP, SOUND_SPACE_DEFAULT, player->curPos.x, player->curPos.y, player->curPos.z);
             playerState->unk_24 = 90.0f;
             playerState->bounceDivisor = 45.0f;
             playerState->unk_28 = 360 / playerState->moveTime;

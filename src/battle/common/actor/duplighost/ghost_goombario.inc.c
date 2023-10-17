@@ -333,7 +333,7 @@ EvtScript N(EVS_Attack_Headbonk) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 5)
     EVT_CALL(SetJumpAnimations, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_NONE, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GOOMBARIO_JUMP)
     EVT_CALL(N(UnkFunc62), LVarA, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)

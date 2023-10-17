@@ -1199,14 +1199,14 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
             messageID = BattleMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += BattleMessage_TextOffsetsY[msgLinesIdx];
-            set_message_value(BattlePopupMessageVar, 0);
+            set_message_int_var(BattlePopupMessageVar, 0);
             draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case BTL_MSG_CANT_MOVE:
             messageID = BattleMessages[popup->messageIndex];
             msgLinesIdx = get_msg_lines(messageID) - 1;
             y += BattleMessage_TextOffsetsY[msgLinesIdx];
-            set_message_msg(bActorMessages[BattlePopupMessageVar], 0);
+            set_message_text_var(bActorMessages[BattlePopupMessageVar], 0);
             draw_msg(messageID, x, y, 255, MSG_PAL_0F, 0);
             break;
         case BTL_MSG_HAMMER_DISABLED_1:
@@ -1486,7 +1486,7 @@ void btl_show_message_popup(void* data) {
 
                 popup->needsInit = FALSE;
                 messageID = BattleMessages[popup->messageIndex];
-                set_message_value(BattlePopupMessageVar, 0);
+                set_message_int_var(BattlePopupMessageVar, 0);
                 msgWidth = get_msg_width(messageID, 0) + 31;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;
@@ -1502,7 +1502,7 @@ void btl_show_message_popup(void* data) {
 
                 popup->needsInit = FALSE;
                 messageID = BattleMessages[popup->messageIndex];
-                set_message_msg(bActorMessages[BattlePopupMessageVar], 0);
+                set_message_text_var(bActorMessages[BattlePopupMessageVar], 0);
                 msgWidth = get_msg_width(messageID, 0) + 31;
                 posX = 160 - (msgWidth / 2);
                 width = msgWidth;

@@ -364,7 +364,7 @@ EvtScript N(EVS_Scene_ActivateMachine) = {
     EVT_CALL(SetNpcAnimation, NPC_Kammy_01, ANIM_BattleKammy_Anim08)
     EVT_CALL(GetNpcPos, NPC_Kammy_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -30)
-    EVT_CALL(PlaySoundAt, SOUND_207A, SOUND_SPACE_DEFAULT, LVar0, 22, 0)
+    EVT_CALL(PlaySoundAt, SOUND_KAMMY_SUMMON_MAGIC, SOUND_SPACE_DEFAULT, LVar0, 22, 0)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, 22, 0, 1, 80)
     EVT_THREAD
         EVT_WAIT(80)

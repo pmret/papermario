@@ -137,7 +137,7 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -293,7 +293,7 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(EVS_MakeWhackaBump) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Idle)

@@ -287,7 +287,7 @@ EvtScript N(EVS_Attack_Lick) = {
     EVT_WAIT(10)
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EE)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GULPIT_LICK)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim04)
     EVT_WAIT(9)
@@ -346,7 +346,7 @@ EvtScript N(EVS_Attack_SpitRock) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EE)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GULPIT_LICK)
     EVT_CALL(GetActorVar, LVarA, AVAR_Rock_Type, LVar0)
     EVT_SET(LVarB, LVar0)
     EVT_SWITCH(LVarB)
@@ -369,7 +369,7 @@ EvtScript N(EVS_Attack_SpitRock) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim0A)
             EVT_SET(LVarA, 3)
     EVT_END_SWITCH
-    EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, SOUND_03D9, SOUND_NONE)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, SOUND_LIGHT_THROW, SOUND_NONE)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)

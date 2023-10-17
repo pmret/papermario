@@ -511,7 +511,7 @@ EvtScript N(EVS_Scene_HitFakeKooper) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetNpcAnimation, NPC_Kooper_02A, ANIM_WorldKooper_Hurt)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_20B8, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_GHOST_TRANSFORM, SOUND_SPACE_DEFAULT)
     EVT_LOOP(10)
         EVT_CALL(GetNpcPos, NPC_Kooper_02A, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 3)

@@ -62,7 +62,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_LOOP(3)
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
-        EVT_CALL(PlaySoundAt, SOUND_20F6, SOUND_SPACE_DEFAULT, 382, 0, 218)
+        EVT_CALL(PlaySoundAt, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT, 382, 0, 218)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
         EVT_WAIT(20)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
@@ -97,7 +97,7 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
     EVT_END_LOOP
     EVT_THREAD
         EVT_LOOP(3)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.3))
             EVT_WAIT(5)
         EVT_END_LOOP
@@ -131,14 +131,14 @@ EvtScript N(EVS_Scene_TubbaFallsAsleep) = {
             EVT_IF_EQ(LVar0, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.3))
             EVT_WAIT(9)
             EVT_CALL(GetSelfVar, 0, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(0.15))
             EVT_WAIT(12)
         EVT_END_LOOP

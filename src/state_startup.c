@@ -70,7 +70,7 @@ void state_step_startup(void) {
         gGameStatusPtr->unk_48[i] = 15;
     }
 
-    fio_has_valid_globals();
+    fio_load_globals();
 
     if (gSaveGlobals.useMonoSound == 0) {
         gGameStatusPtr->soundOutputMode = SOUND_OUT_STEREO;

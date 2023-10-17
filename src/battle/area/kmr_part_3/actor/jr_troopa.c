@@ -481,7 +481,7 @@ EvtScript N(EVS_HandlePhase) = {
                     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
                     EVT_EXEC_WAIT(N(EVS_Cam_FocusOnJrTroopa))
                     EVT_CALL(ActorSpeak, MSG_CH0_00B3, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B9)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JR_TROOPA_TRANSFORM)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_ChargeArmsUp)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_ADD(LVar1, 16)

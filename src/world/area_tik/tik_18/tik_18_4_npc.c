@@ -13,7 +13,7 @@ EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
         EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Sleep)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_03E1, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_AI_FOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
         EVT_LABEL(1)
             EVT_CALL(UpdateLerp)

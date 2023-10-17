@@ -239,15 +239,15 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
-
-            if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
-                npc->flags |= NPC_FLAG_HIDING;
+            if (npc != NULL && npc->flags != 0) {
+                if (npc->npcID != NPC_PARTNER && npc->npcID != CHUCK_QUIZMO_NPC_ID) {
+                    npc->flags |= NPC_FLAG_HIDING;
+                }
             }
         }
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
-
             if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
                 itemEntity->flags |= ITEM_ENTITY_FLAG_HIDING;
             }

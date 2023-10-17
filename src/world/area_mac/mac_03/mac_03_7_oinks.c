@@ -192,7 +192,7 @@ EvtScript N(EVS_TurnCrank) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_20A7, SOUND_SPACE_DEFAULT, 111, 89, -358)
+        EVT_CALL(PlaySoundAt, SOUND_TURN_MECHANISM, SOUND_SPACE_DEFAULT, 111, 89, -358)
         EVT_SET(LVar0, 0)
         EVT_LOOP(5)
             EVT_ADD(LVar0, 6)
@@ -231,7 +231,7 @@ EvtScript N(EVS_TurnCrank) = {
         EVT_CALL(ScaleModel, MODEL_boo, 1, LVar0, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAt, SOUND_20A8, SOUND_SPACE_DEFAULT, 134, 132, -399)
+    EVT_CALL(PlaySoundAt, SOUND_CAPSULE_OPEN, SOUND_SPACE_DEFAULT, 134, 132, -399)
     EVT_LOOP(5)
         EVT_SUBF(LVar0, EVT_FLOAT(0.08))
         EVT_CALL(ScaleModel, MODEL_boo, 1, LVar0, 1)

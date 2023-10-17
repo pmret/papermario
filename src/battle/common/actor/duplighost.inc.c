@@ -599,7 +599,7 @@ EvtScript N(EVS_CopyPartner) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GHOST_TRANSFORM)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim06)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)

@@ -887,7 +887,7 @@ EvtScript N(spinyFlip) = {
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_SET(LVarF, -1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_THROW_SPINY_A)
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(-1)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
@@ -1024,10 +1024,10 @@ EvtScript N(spinySurge) = {
                     EVT_BREAK_SWITCH
                 EVT_END_IF
                 EVT_IF_EQ(LFlag2, FALSE)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_THROW_SPINY_A)
                     EVT_SET(LFlag2, TRUE)
                 EVT_ELSE
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201C)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_THROW_SPINY_B)
                     EVT_SET(LFlag2, FALSE)
                 EVT_END_IF
                 EVT_CALL(N(ThrowSpinyFX))
@@ -1163,7 +1163,7 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(GetPartnerActionSuccess, LVarA)
     EVT_IF_GT(LVarA, 0)
         EVT_CALL(N(RemoveCloudNineFX))
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
         EVT_CALL(N(CloudNineFX))
         EVT_CALL(N(ApplyCloudNine))
         EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_SHOW_STATUS_ICONS, TRUE)
@@ -1277,7 +1277,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(GetPartnerActionSuccess, LVarA)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
         EVT_CALL(N(CloudNineFX))
         EVT_CALL(N(ApplyCloudNine))
     EVT_END_IF
@@ -1484,7 +1484,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = NPC_DISPOSE_POS_Z;
 
             if (script->functionTemp[2] != 0) {
-                sfx_play_sound_at_position(SOUND_201E, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
+                sfx_play_sound_at_position(SOUND_LAKILESTER_HURRICANE_INHALE, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
             }
             script->functionTemp[2] = 0;
 
@@ -1507,7 +1507,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             sHuffPuffBreathEffect->data.huffPuffBreath->speedX = 2.0f;
 
             if (script->functionTemp[2] == 0) {
-                sfx_play_sound_at_position(SOUND_201F, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
+                sfx_play_sound_at_position(SOUND_LAKILESTER_HURRICANE_EXHALE, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
             }
             script->functionTemp[2] = 1;
 

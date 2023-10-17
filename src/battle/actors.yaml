@@ -189,8 +189,8 @@
     level: 10
     nameMsg: MSG_EnemyName_Cleft
     tattleMsg: MSG_EnemyTattle_Cleft
-    walkSound: [ SOUND_20D0, SOUND_20D0 ]
-    flySound: [ SOUND_20D0, SOUND_20D0 ]
+    walkSound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
+    flySound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -211,8 +211,8 @@
     level: 9
     nameMsg: MSG_EnemyName_Bandit
     tattleMsg: MSG_EnemyTattle_Bandit
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
-    flySound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
+    flySound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -321,8 +321,8 @@
     level: 15
     nameMsg: MSG_EnemyName_HyperCleft
     tattleMsg: MSG_EnemyTattle_HyperCleft
-    walkSound: [ SOUND_20D0, SOUND_20D0 ]
-    flySound: [ SOUND_20D0, SOUND_20D0 ]
+    walkSound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
+    flySound: [ SOUND_CLEFT_STEP, SOUND_CLEFT_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -332,8 +332,8 @@
     level: 13
     nameMsg: MSG_EnemyName_Clubba
     tattleMsg: MSG_EnemyTattle_Clubba
-    walkSound: [ SOUND_20C4, SOUND_20C4 ]
-    flySound: [ SOUND_20C4, SOUND_20C4 ]
+    walkSound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    flySound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -377,7 +377,7 @@
     nameMsg: MSG_EnemyName_MediGuy
     tattleMsg: MSG_EnemyTattle_MediGuy
     walkSound: [ SOUND_NONE, SOUND_NONE ]
-    flySound: [ SOUND_SHYGUY_FLY, SOUND_NONE ]
+    flySound: [ SOUND_SHY_GUY_FLY, SOUND_NONE ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -431,8 +431,8 @@
     level: 16
     nameMsg: MSG_EnemyName_MBush
     tattleMsg: MSG_EnemyTattle_MBush
-    walkSound: [ SOUND_20C6, SOUND_20C6 ]
-    flySound: [ SOUND_20C6, SOUND_20C6 ]
+    walkSound: [ SOUND_MBUSH_STEP, SOUND_MBUSH_STEP ]
+    flySound: [ SOUND_MBUSH_STEP, SOUND_MBUSH_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -497,7 +497,7 @@
     level: 17
     nameMsg: MSG_EnemyName_PutridPiranha
     tattleMsg: MSG_EnemyTattle_PutridPiranha
-    walkSound: [ SOUND_03CE, SOUND_03CE ]
+    walkSound: [ SOUND_PIRANHA_STEP, SOUND_PIRANHA_STEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE
@@ -596,8 +596,8 @@
     level: 22
     nameMsg: MSG_EnemyName_Gulpit
     tattleMsg: MSG_EnemyTattle_Gulpit
-    walkSound: [ SOUND_20C4, SOUND_20C4 ]
-    flySound: [ SOUND_20C4, SOUND_20C4 ]
+    walkSound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    flySound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -618,8 +618,8 @@
     level: 23
     nameMsg: MSG_EnemyName_WhiteClubba
     tattleMsg: MSG_EnemyTattle_WhiteClubba
-    walkSound: [ SOUND_20C4, SOUND_20C4 ]
-    flySound: [ SOUND_20C4, SOUND_20C4 ]
+    walkSound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
+    flySound: [ SOUND_CLUBBA_STEP, SOUND_CLUBBA_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -629,7 +629,7 @@
     level: 22
     nameMsg: MSG_EnemyName_FrostPiranha
     tattleMsg: MSG_EnemyTattle_FrostPiranha
-    walkSound: [ SOUND_03CE, SOUND_03CE ]
+    walkSound: [ SOUND_PIRANHA_STEP, SOUND_PIRANHA_STEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_ACTOR_HURT
@@ -772,8 +772,8 @@
     level: 25
     nameMsg: MSG_EnemyName_BonyBeetle
     tattleMsg: MSG_EnemyTattle_BonyBeetle
-    walkSound: [ SOUND_20CD, SOUND_20CD ]
-    flySound: [ SOUND_20CD, SOUND_20CD ]
+    walkSound: [ SOUND_BONY_BEETLE_STEP, SOUND_BONY_BEETLE_STEP ]
+    flySound: [ SOUND_BONY_BEETLE_STEP, SOUND_BONY_BEETLE_STEP ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
     stepDelay: [ 30, 30 ]
@@ -1499,7 +1499,7 @@
     level: 41
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_NONE
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1510,7 +1510,7 @@
     level: 44
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa1
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1521,7 +1521,7 @@
     level: 52
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa2
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1532,7 +1532,7 @@
     level: 59
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa3
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1543,7 +1543,7 @@
     level: 65
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa4
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1554,7 +1554,7 @@
     level: 74
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa5
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1565,7 +1565,7 @@
     level: 74
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa5
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1576,7 +1576,7 @@
     level: 74
     nameMsg: MSG_EnemyName_JrTroopa
     tattleMsg: MSG_EnemyTattle_JrTroopa5
-    walkSound: [ SOUND_20C1, SOUND_20C1 ]
+    walkSound: [ SOUND_SMALL_NPC_STEP, SOUND_SMALL_NPC_STEP ]
     flySound: [ SOUND_ACTOR_FLIGHT, SOUND_ACTOR_FLIGHT ]
     jumpSound: SOUND_ACTOR_JUMP
     hurtSound: SOUND_ACTOR_HURT
@@ -1609,7 +1609,7 @@
     level: 49
     nameMsg: MSG_EnemyName_GoombaKing
     tattleMsg: MSG_EnemyTattle_GoombaKing
-    walkSound: [ SOUND_HEAVY_NPC_FOOSTEP, SOUND_HEAVY_NPC_FOOSTEP ]
+    walkSound: [ SOUND_HEAVY_NPC_STEP_A, SOUND_HEAVY_NPC_STEP_A ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_ACTOR_HURT
@@ -1766,7 +1766,7 @@
     nameMsg: MSG_EnemyName_Buzzar
     tattleMsg: MSG_EnemyTattle_Buzzar
     walkSound: [ SOUND_NONE, SOUND_NONE ]
-    flySound: [ SOUND_20EF, SOUND_20EF ]
+    flySound: [ SOUND_BUZZAR_FLAP, SOUND_BUZZAR_FLAP ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE
     stepDelay: [ -14, -14 ]
@@ -1798,7 +1798,7 @@
     level: 70
     nameMsg: MSG_EnemyName_TubbaBlubba
     tattleMsg: MSG_EnemyTattle_TubbaBlubba
-    walkSound: [ SOUND_20F6, SOUND_20F6 ]
+    walkSound: [ SOUND_HEAVY_NPC_STEP_C, SOUND_HEAVY_NPC_STEP_C ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE
@@ -1809,7 +1809,7 @@
     level: 0
     nameMsg: MSG_EnemyName_TubbaBlubba
     tattleMsg: MSG_EnemyTattle_TubbaBlubbaInvincible
-    walkSound: [ SOUND_20F6, SOUND_20F6 ]
+    walkSound: [ SOUND_HEAVY_NPC_STEP_C, SOUND_HEAVY_NPC_STEP_C ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE
@@ -1831,7 +1831,7 @@
     level: 0
     nameMsg: MSG_EnemyName_StiltGuy
     tattleMsg: MSG_EnemyTattle_StiltGuy
-    walkSound: [ SOUND_2066, SOUND_2066 ]
+    walkSound: [ SOUND_STILT_GUY_STEP, SOUND_STILT_GUY_STEP ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_ACTOR_HURT
@@ -2041,7 +2041,7 @@
     level: 55
     nameMsg: MSG_EnemyName_KentCKoopa
     tattleMsg: MSG_EnemyTattle_KentCKoopa
-    walkSound: [ SOUND_HEAVY_NPC_FOOSTEP, SOUND_HEAVY_NPC_FOOSTEP ]
+    walkSound: [ SOUND_HEAVY_NPC_STEP_A, SOUND_HEAVY_NPC_STEP_A ]
     flySound: [ SOUND_NONE, SOUND_NONE ]
     jumpSound: SOUND_NONE
     hurtSound: SOUND_NONE

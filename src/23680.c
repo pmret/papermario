@@ -716,7 +716,7 @@ void basic_ai_found_player_jump_init(Evt* script, MobileAISettings* npcAISetting
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    ai_enemy_play_sound(npc, SOUND_03E1, 0);
+    ai_enemy_play_sound(npc, SOUND_AI_FOUND_PLAYER_JUMP, 0);
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_JUMP];
     npc->jumpVel = 10.0f;
     npc->jumpScale = 2.5f;
@@ -814,7 +814,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (npc->moveSpeed > 8.0 && !(gGameStatusPtr->frameCounter % 5)) {
-        ai_enemy_play_sound(npc, SOUND_20C1, 0);
+        ai_enemy_play_sound(npc, SOUND_SMALL_NPC_STEP, 0);
     }
 
     if (npc->duration > 0) {

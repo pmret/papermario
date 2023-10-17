@@ -196,7 +196,7 @@ API_CALLABLE(N(SuperBlock_SwitchToPartner)) {
 }
 
 API_CALLABLE(N(SuperBlock_LoadCurrentPartnerName)) {
-    set_message_msg(gPartnerPopupProperties[gPlayerData.curPartner].nameMsg, 0);
+    set_message_text_var(gPartnerPopupProperties[gPlayerData.curPartner].nameMsg, 0);
     return ApiStatus_DONE2;
 }
 

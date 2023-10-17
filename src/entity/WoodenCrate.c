@@ -233,7 +233,7 @@ s32 entity_WoodenCrate_idle(Entity* entity) {
         entity_set_render_script(entity, &Entity_WoodenCrate_RenderShatteredScript);
         entity_start_script(entity);
         exec_entity_commandlist(entity);
-        sfx_play_sound(SOUND_20AE);
+        sfx_play_sound(SOUND_BREAK_CRATE);
     }
 }
 

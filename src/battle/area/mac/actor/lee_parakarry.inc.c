@@ -241,7 +241,7 @@ EvtScript N(EVS_Attack_SkyDive) = {
     EVT_WAIT(3)
     EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_01)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2004)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_PREDIVE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_FlyFast)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 10, 0)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 5, 0, EASING_LINEAR)
@@ -252,7 +252,7 @@ EvtScript N(EVS_Attack_SkyDive) = {
     EVT_END_THREAD
     EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 15, 0)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, -20, EASING_QUARTIC_OUT)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2005)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_DIVE)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleParakarry_Dive)

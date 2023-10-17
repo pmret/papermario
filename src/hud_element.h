@@ -476,7 +476,7 @@ void render_hud_elements_frontUI(void);
 
 void render_hud_element(HudElement* hudElement);
 
-void render_hud_elements_world(void);
+void render_transformed_hud_elements(void);
 
 void func_80143C48(s32 arg0, s32 arg1, s32 camID);
 void func_80144218(s32 arg0);

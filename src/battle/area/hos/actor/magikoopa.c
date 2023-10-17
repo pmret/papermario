@@ -840,7 +840,7 @@ EvtScript N(EVS_Move_HealOne) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
+        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_RECOVER_HEART)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_STAR_BOUNCE_A)
@@ -933,7 +933,7 @@ EvtScript N(EVS_Move_HealAll) = {
         EVT_IF_EQ(LFlag0, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
+                EVT_CALL(PlaySoundAtActor, LVar0, SOUND_RECOVER_HEART)
                 EVT_CALL(PlaySoundAtActor, LVar0, SOUND_HEART_BOUNCE)
                 EVT_WAIT(30)
                 EVT_CALL(PlaySoundAtActor, LVar0, SOUND_STAR_BOUNCE_A)

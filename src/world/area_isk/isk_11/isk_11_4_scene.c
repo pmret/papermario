@@ -111,7 +111,7 @@ EvtScript N(EVS_ManageSecretPassage) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_WAIT(10 * DT)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o2092, SOUND_LENS_FLARE, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o2092, SOUND_LARGE_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(N(SpawnLensFlare), -16, -438, 510, 240)
         EVT_CALL(N(SpawnLensFlare), 16, -438, 510, 240)
         EVT_WAIT(5 * DT)

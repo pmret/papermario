@@ -425,9 +425,9 @@ EvtScript N(EVS_Attack_FireBreath) = {
     EVT_CALL(N(SetBowserFireBreathScales), LVarF)
     EVT_THREAD
         EVT_CALL(N(StartRumbleWithParams), 50, 148)
-        EVT_CALL(PlaySound, SOUND_03BD)
+        EVT_CALL(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP)
         EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_03BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Weep)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -664,8 +664,8 @@ EvtScript N(EVS_PlayFootstepSounds) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar7)
     EVT_IF_NE(LVar7, ANIM_BattleBowser_Walk)
         EVT_IF_EQ(LVar3, ANIM_BattleBowser_Walk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F6)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
         EVT_END_IF
         EVT_SET(LVar3, LVar7)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -680,8 +680,8 @@ EvtScript N(EVS_PlayFootstepSounds) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
     EVT_SET(LVar3, LVar7)
     EVT_RETURN
     EVT_END

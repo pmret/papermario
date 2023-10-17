@@ -259,7 +259,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
@@ -277,7 +277,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
@@ -286,7 +286,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
-        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_20F3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_SMALL_LENS_FLARE, SOUND_SPACE_DEFAULT)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_ThumbsUp)
     EVT_END_THREAD
     EVT_WAIT(45)

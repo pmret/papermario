@@ -337,7 +337,7 @@ ApiStatus SetMessageText(Evt* script, s32 isInitialCall) {
     s32 msg = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
 
-    set_message_msg(msg, index);
+    set_message_text_var(msg, index);
     return ApiStatus_DONE2;
 }
 
@@ -346,6 +346,6 @@ ApiStatus SetMessageValue(Evt* script, s32 initialCall) {
     s32 value = evt_get_variable(script, *ptrReadPos++);
     s32 index = evt_get_variable(script, *ptrReadPos);
 
-    set_message_value(value, index);
+    set_message_int_var(value, index);
     return ApiStatus_DONE2;
 }

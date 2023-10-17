@@ -93,18 +93,18 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
     Evt* script;
     u8* suffix;
 
-    set_message_msg(itemName, 0);
-    set_message_value(coinCost, 1);
+    set_message_text_var(itemName, 0);
+    set_message_int_var(coinCost, 1);
 
     if (bpCost > 0) {
-        set_message_value(bpCost, 2);
+        set_message_int_var(bpCost, 2);
     } else {
         if (coinCost == 1) {
             suffix = MessageSingular;
         } else {
             suffix = MessagePlural;
         }
-        set_message_msg((s32) suffix, 2);
+        set_message_text_var((s32) suffix, 2);
     }
 
     script = start_script(&ShopBeginSpeech, EVT_PRIORITY_1, 0);
@@ -135,7 +135,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     u8* suffixMsg;
     Evt* script;
 
-    set_message_value(amount, 0);
+    set_message_int_var(amount, 0);
 
     if (amount == 1) {
         suffixMsg = MessageSingular;
@@ -143,7 +143,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
         suffixMsg = MessagePlural;
     }
 
-    set_message_msg((s32) suffixMsg, 1);
+    set_message_text_var((s32) suffixMsg, 1);
 
     script = start_script(&ShopContinueSpeech, EVT_PRIORITY_1, 0);
     script->varTable[0] = shopMsgID;

@@ -1041,7 +1041,7 @@ void filemenu_init(s32 arg0) {
         func_PAL_8002B574();
 
         if (menu->page == 0) {
-            fio_has_valid_globals();
+            fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
             }
@@ -1092,7 +1092,7 @@ void filemenu_init(s32 arg0) {
         }
 
         if (menu->page == 0) {
-            fio_has_valid_globals();
+            fio_load_globals();
             if (gSaveGlobals.lastFileSelected >= 4) {
                 gSaveGlobals.lastFileSelected = 0;
             }

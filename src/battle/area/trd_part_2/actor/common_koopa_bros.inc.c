@@ -668,7 +668,7 @@ EvtScript N(HandleCommand) = {
                     EVT_END_SWITCH
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOP_EXIT_SHELL)
                     EVT_WAIT(10)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F3)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMALL_LENS_FLARE)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_POINT)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -827,7 +827,7 @@ EvtScript N(HandleCommand) = {
                     EVT_WAIT(30)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOP_EXIT_SHELL)
                     EVT_WAIT(10)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F3)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMALL_LENS_FLARE)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_POINT)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

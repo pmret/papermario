@@ -479,7 +479,7 @@ API_CALLABLE(N(UseAbility)) {
             sushie->duration--;
             if (sushie->duration != 0) {
                 if (sushie->duration == 2) {
-                    sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
                 }
                 break;
@@ -654,7 +654,7 @@ API_CALLABLE(N(UseAbility)) {
                     sushie->duration = (2.0f * sushie->jumpVel) / 0.6f;
                     sushie->moveSpeed = dist / sushie->duration;
                     sushie->jumpVel += (sushie->moveToPos.y - playerStatus->pos.y) / sushie->duration;
-                    sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+                    sfx_play_sound_at_npc(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
                     enable_player_shadow();
                     playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;

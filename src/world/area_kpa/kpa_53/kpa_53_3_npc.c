@@ -71,7 +71,7 @@ EvtScript N(EVS_NpcAI_Duplighost_Caught) = {
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtNpc, NPC_Follower, SOUND_20B8, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Follower, SOUND_GHOST_TRANSFORM, SOUND_SPACE_DEFAULT)
     EVT_CALL(MakeLerp, 0, 1440, 20, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

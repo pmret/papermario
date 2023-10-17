@@ -518,7 +518,7 @@ glabel filemenu_yesno_handle_input
 /* 17453C 8024BB1C AC620040 */  sw         $v0, 0x40($v1)
 /* 174540 8024BB20 24020001 */  addiu      $v0, $zero, 0x1
 /* 174544 8024BB24 00441023 */  subu       $v0, $v0, $a0
-/* 174548 8024BB28 0C00AC15 */  jal        fio_flush_globals
+/* 174548 8024BB28 0C00AC15 */  jal        fio_save_globals
 /* 17454C 8024BB2C AC620038 */   sw        $v0, 0x38($v1)
 .Lfilemenu_8024BB30:
 /* 174550 8024BB30 0C00ACD3 */  jal        fio_load_game

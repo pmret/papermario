@@ -475,7 +475,7 @@ EvtScript N(EVS_Attack_Vault) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ShyGuy_Black_Anim10)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DISAPPOINTED)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LT(LVar0, 50)

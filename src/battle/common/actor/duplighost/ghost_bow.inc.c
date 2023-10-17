@@ -336,7 +336,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_SWITCH
     EVT_SET(LVar7, LVar8)
     EVT_LOOP(LVar7)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2019)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOW_SMACK)
         EVT_ADD(LVarA, 1)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
         EVT_IF_EQ(LFlag0, FALSE)

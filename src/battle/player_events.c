@@ -71,14 +71,21 @@ API_CALLABLE(ActivateDefend) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
+// (out) LVar0: skip playing lucky animation
+API_CALLABLE(TryPlayerLucky) {
     Actor* player = gBattleStatus.playerActor;
 
     show_action_rating(ACTION_RATING_LUCKY, player, player->curPos.x, player->curPos.y + 20.0f, player->curPos.z);
-    sfx_play_sound(SOUND_03FC);
+    sfx_play_sound(SOUND_LUCKY);
+    
     script->varTable[0] = FALSE;
-    if (player->debuff == STATUS_KEY_FEAR || player->debuff == STATUS_KEY_DIZZY || player->debuff == STATUS_KEY_PARALYZE ||
-        player->debuff == STATUS_KEY_SLEEP ||player->debuff == STATUS_KEY_FROZEN || player->debuff == STATUS_KEY_STOP) {
+    if (player->debuff == STATUS_KEY_FEAR
+        || player->debuff == STATUS_KEY_DIZZY
+        || player->debuff == STATUS_KEY_PARALYZE
+        || player->debuff == STATUS_KEY_SLEEP
+        || player->debuff == STATUS_KEY_FROZEN
+        || player->debuff == STATUS_KEY_STOP
+    ) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
@@ -408,7 +415,7 @@ API_CALLABLE(BattleMerleeUpdateFX) {
         BattleMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
-        sfx_play_sound(SOUND_2074);
+        sfx_play_sound(SOUND_MAGIC_ASCENDING);
     }
     merlee->pos.y = D_8029FB94 + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
 
@@ -961,8 +968,8 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_LUCKY)
-            EVT_CALL(DoesMarioStatusPreventHappyAnimation)
-            EVT_IF_EQ(LVar0, FALSE)
+            EVT_CALL(TryPlayerLucky)
+            EVT_IF_FALSE(LVar0)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_AdjustCap)
                 EVT_WAIT(30)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
@@ -1554,7 +1561,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_JUMP)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LONG_PLAYER_JUMP)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1613,7 +1620,7 @@ EvtScript EVS_MerleeAttackBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -1662,7 +1669,7 @@ EvtScript EVS_MerleeDefenseBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -1716,7 +1723,7 @@ EvtScript EVS_MerleeExpBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)

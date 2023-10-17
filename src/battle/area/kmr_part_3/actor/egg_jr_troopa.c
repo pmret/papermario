@@ -513,7 +513,7 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_WAIT(10)
                 EVT_CALL(ActorSpeak, MSG_CH1_0128, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_PointTalk, ANIM_JrTroopa_PointTapFoot)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_ChargeArmsUp)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B9)
+                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_JR_TROOPA_TRANSFORM)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 16)
                 EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, 1, 30, 0)

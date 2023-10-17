@@ -315,7 +315,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
         EVT_CALL(MoveBattleCamOver, 30)
     EVT_END_THREAD
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206A)
+    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_OPEN_HATCH)
     EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim0B)
     EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_OpenHatch))
@@ -353,7 +353,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -379,7 +379,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
             EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -406,7 +406,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
                 EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
                 EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-                EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+                EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
                 EVT_RETURN
             EVT_END_IF
         EVT_END_CASE_GROUP
@@ -414,7 +414,7 @@ EvtScript N(EVS_Attack_ThrowBomb) = {
     EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -433,7 +433,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
     EVT_CALL(SetBattleCamOffsetZ, 30)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(40)
-    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206A)
+    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_OPEN_HATCH)
     EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim0B)
     EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_OpenHatch))
@@ -468,7 +468,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
             EVT_CALL(GetModelCenter, MODEL_kyu3)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, 0, LVar5)
-            EVT_CALL(PlaySound, SOUND_2069)
+            EVT_CALL(PlaySound, SOUND_TANK_BULB_FIRE)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
             EVT_WAIT(12)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
@@ -477,7 +477,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
                 EVT_CALL(GetModelCenter, MODEL_kyu3)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-                EVT_CALL(PlaySound, SOUND_2069)
+                EVT_CALL(PlaySound, SOUND_TANK_BULB_FIRE)
                 EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
                 EVT_CALL(SetActorVar, ACTOR_TANK, AVAR_Tank_UsingBulbAttack, FALSE)
                 EVT_WAIT(12)
@@ -495,7 +495,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
             EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -504,7 +504,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
             EVT_CALL(GetModelCenter, MODEL_kyu3)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, 0, LVar5)
-            EVT_CALL(PlaySound, SOUND_2069)
+            EVT_CALL(PlaySound, SOUND_TANK_BULB_FIRE)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
             EVT_WAIT(12)
             EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -512,7 +512,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
             EVT_CALL(GetModelCenter, MODEL_kyu3)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, 0, LVar5)
-            EVT_CALL(PlaySound, SOUND_2069)
+            EVT_CALL(PlaySound, SOUND_TANK_BULB_FIRE)
             EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
             EVT_CALL(SetActorVar, ACTOR_TANK, AVAR_Tank_UsingBulbAttack, FALSE)
             EVT_WAIT(12)
@@ -524,7 +524,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
             EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
             EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+            EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -533,7 +533,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
     EVT_CALL(GetModelCenter, MODEL_kyu3)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-    EVT_CALL(PlaySound, SOUND_2069)
+    EVT_CALL(PlaySound, SOUND_TANK_BULB_FIRE)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
     EVT_WAIT(12)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -549,7 +549,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
                 EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
                 EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                 EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-                EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+                EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
                 EVT_RETURN
             EVT_END_IF
         EVT_END_CASE_GROUP
@@ -558,7 +558,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
     EVT_CALL(GetModelCenter, MODEL_kyu3)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-    EVT_CALL(PlaySound, SOUND_2069)
+    EVT_CALL(PlaySound, SOUND_TANK_BULB_FIRE)
     EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 18, 0)
     EVT_CALL(SetActorVar, ACTOR_TANK, AVAR_Tank_UsingBulbAttack, FALSE)
     EVT_WAIT(12)
@@ -572,7 +572,7 @@ EvtScript N(EVS_Attack_ShootLightning) = {
     EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     EVT_CALL(SetPartFlagBits, ACTOR_GENERAL, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_206B)
+    EVT_CALL(PlaySoundAtPart, ACTOR_GENERAL, PRT_MAIN, SOUND_TOY_TANK_CLOSE_HATCH)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

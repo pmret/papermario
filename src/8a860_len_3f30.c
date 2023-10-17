@@ -1357,7 +1357,7 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
                     } else {
                         msgPal = MSG_PAL_STANDARD;
                     }
-                    set_message_value(gPopupMenu->userIndex[t] + 1, 0);
+                    set_message_int_var(gPopupMenu->userIndex[t] + 1, 0);
                     draw_msg(MSG_Menus_00CD, x + 8, y, PopupMenu_Alpha, msgPal, DRAW_MSG_STYLE_MENU);
                     break;
                 case POPUP_MENU_READ_POSTCARD:

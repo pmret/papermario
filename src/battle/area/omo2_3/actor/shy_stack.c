@@ -403,7 +403,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.0))
             EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_GUY_4, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             EVT_CALL(FallPartTo, ACTOR_SELF, PRT_GUY_4, LVar0, 0, 0, 36)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_4, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_4, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_4, ANIM_ShyGuy_Red_Anim07)
         EVT_END_THREAD
         EVT_THREAD
@@ -417,7 +417,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_3, EVT_FLOAT(1.0))
             EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_GUY_3, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             EVT_CALL(FallPartTo, ACTOR_SELF, PRT_GUY_3, LVar0, 18, 0, 32)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_3, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_3, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim07)
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_GUY_3, 0, -3, 0)
@@ -442,7 +442,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_2, EVT_FLOAT(1.0))
             EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_GUY_2, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             EVT_CALL(FallPartTo, ACTOR_SELF, PRT_GUY_2, LVar0, 36, 0, 28)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_2, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_2, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim07)
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_3, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
@@ -475,7 +475,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_1, EVT_FLOAT(1.0))
             EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_GUY_1, ACTOR_SOUND_JUMP, SOUND_NONE, SOUND_NONE)
             EVT_CALL(FallPartTo, ACTOR_SELF, PRT_GUY_1, LVar0, 54, 0, 24)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_1, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_1, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim07)
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_3, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
@@ -538,7 +538,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim09)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_3, EVT_FLOAT(1.0))
             EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_GUY_3, 50, 18, 0, 20, TRUE)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_3, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_3, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_3, ANIM_ShyGuy_Red_Anim07)
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, PRT_GUY_3, 0, -3, 0)
@@ -565,7 +565,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim09)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_2, EVT_FLOAT(1.0))
             EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_GUY_2, 50, 36, 0, 20, TRUE)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_2, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_2, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_2, ANIM_ShyGuy_Red_Anim07)
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_3, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
@@ -612,7 +612,7 @@ EvtScript N(EVS_Init) = {
             EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_GUY_1, LVar0, LVar1, LVar2, 20, TRUE)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_GUY_1, EVT_FLOAT(0.3))
             EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_GUY_1, 50, 54, 0, 30, TRUE)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_1, SOUND_2064)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_GUY_1, SOUND_SHY_STACK_SQUISH)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY_1, ANIM_ShyGuy_Red_Anim07)
             EVT_CALL(SetAnimation, ACTOR_GENERAL, PRT_MAIN, ANIM_GeneralGuy_Anim04)
             EVT_CALL(SetPartScale, ACTOR_SELF, PRT_GUY_4, EVT_FLOAT(1.1), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
@@ -998,7 +998,7 @@ EvtScript N(EVS_SpinSmashHit_Top) = {
     EVT_END
 };
 
-EvtScript N(fall_apart) = {
+EvtScript N(EVS_DetachMember) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_DefeatedCount, LVarA)
     EVT_SWITCH(LVarA)
         EVT_CASE_EQ(0)
@@ -1054,7 +1054,7 @@ EvtScript N(fall_apart) = {
     EVT_END
 };
 
-EvtScript N(lower_actor_pos) = {
+EvtScript N(EVS_DropStack) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 18)
@@ -1095,7 +1095,7 @@ EvtScript N(lower_actor_pos) = {
         EVT_WAIT(1)
         EVT_SUB(LVar3, 2)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar3, LVar2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2064)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHY_STACK_SQUISH)
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -1110,11 +1110,11 @@ EvtScript N(EVS_SpinSmashHit_Stack) = {
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_KNOCKOFF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_KNOCKOFF, 0, 0, 0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_KNOCKOFF, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_EXEC_WAIT(N(fall_apart))
+    EVT_EXEC_WAIT(N(EVS_DetachMember))
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Anim_Hurt, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_EXEC_WAIT(N(lower_actor_pos))
+    EVT_EXEC_WAIT(N(EVS_DropStack))
     EVT_CALL(CreateCurrentPosTargetList, TARGET_FLAG_GROUND | TARGET_FLAG_PRIMARY_ONLY | TARGET_FLAG_ALLOW_TARGET_ONLY)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -1207,7 +1207,7 @@ EvtScript N(EVS_SpinSmashLaunch) = {
     EVT_CALL(N(PrintDebugValue), EVT_PTR("Z"), LVar2)
     EVT_CALL(SetPartPos, ACTOR_SELF, PRT_KNOCKOFF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_KNOCKOFF, 0, 0, 0)
-    EVT_EXEC_WAIT(N(fall_apart))
+    EVT_EXEC_WAIT(N(EVS_DetachMember))
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar1)
     EVT_SWITCH(LVar1)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
@@ -1219,7 +1219,7 @@ EvtScript N(EVS_SpinSmashLaunch) = {
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_KNOCKOFF, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_EXEC_WAIT(N(lower_actor_pos))
+    EVT_EXEC_WAIT(N(EVS_DropStack))
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(30)

@@ -1647,7 +1647,7 @@ EvtScript N(EVS_Move_HealOrSlam) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim19)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -2380,7 +2380,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetBattleCamOffsetZ, 5)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_REAR_UP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
@@ -2388,7 +2388,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1E)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1F)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
     EVT_SET(LVarF, 0)
@@ -2402,7 +2402,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
         EVT_ADD(LVarF, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
     EVT_LOOP(20)
         EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0)
         EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0)
@@ -2511,7 +2511,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
         EVT_SET(LVarF, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B7)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
         EVT_LOOP(20)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.5), 10, 0, 0)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.5), 10, 0, 0)
@@ -2522,7 +2522,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_ADD(LVarF, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B7)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
         EVT_LOOP(20)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0)

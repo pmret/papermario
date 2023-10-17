@@ -708,7 +708,7 @@ EvtScript N(EVS_PerformSummonDance) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 30, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GrooveGuy_Anim0A)
     EVT_WAIT(8)
     EVT_RETURN
@@ -775,7 +775,7 @@ EvtScript N(EVS_SummonGrooveGuy) = {
     EVT_END_THREAD
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(4.0))
     EVT_CALL(RunToGoal, LVarB, 0, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMALL_LENS_FLARE)
     EVT_CALL(SetAnimation, LVarB, PRT_MAIN, ANIM_GrooveGuy_Anim0A)
     EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
@@ -812,7 +812,7 @@ EvtScript N(EVS_SummonMediGuy) = {
     EVT_SET(LVar1, LVar4)
     EVT_SET(LVar2, LVar5)
     EVT_CALL(SetActorPos, LVarB, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorSounds, LVarB, ACTOR_SOUND_WALK, SOUND_SHYGUY_FLY, SOUND_NONE)
+    EVT_CALL(SetActorSounds, LVarB, ACTOR_SOUND_WALK, SOUND_SHY_GUY_FLY, SOUND_NONE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(4.0))

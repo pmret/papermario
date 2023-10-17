@@ -104,7 +104,7 @@ API_CALLABLE(N(UnkFunc62)) {
             state->vel = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
         set_actor_anim(ACTOR_SELF, 1, state->animJumpRise);
-        sfx_play_sound(SOUND_JUMP_2081);
+        sfx_play_sound(SOUND_QUICK_PLAYER_JUMP);
         script->functionTemp[0] = 1;
     }
 

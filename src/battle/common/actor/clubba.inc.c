@@ -244,7 +244,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim08)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
@@ -267,7 +267,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_SWITCH
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)

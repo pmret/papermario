@@ -57,7 +57,7 @@ void action_update_jump(void) {
                 sfx_play_sound_at_player(SOUND_JUMP_8BIT_MARIO, SOUND_SPACE_DEFAULT);
             }
             else {
-                sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT);
+                sfx_play_sound_at_player(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT);
             }
         }
     }

@@ -528,7 +528,7 @@ EvtScript N(EVS_Scene_MysterySolved) = {
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_WakeUp)
     EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_MayorPenguin, ANIM_MayorPenguin_Idle)
-    EVT_CALL(PlaySoundAtNpc, NPC_MayorPenguin, SOUND_032C, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_MayorPenguin, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcJumpscale, NPC_MayorPenguin, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_MayorPenguin, LVar0, 0, LVar2, 10 * DT)

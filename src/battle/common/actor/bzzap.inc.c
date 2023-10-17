@@ -358,7 +358,7 @@ EvtScript N(EVS_Attack_Sting) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20CA)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BZZAP_STING)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bzzap_Anim04)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
@@ -386,7 +386,7 @@ EvtScript N(EVS_Attack_Sting) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
     EVT_WAIT(5)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20CA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BZZAP_STING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bzzap_Anim04)
     EVT_WAIT(6)
     EVT_WAIT(2)
@@ -484,7 +484,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_SWARM_3, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_SWARM_4, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_SWARM_5, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20CC)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BZZAP_CALL_SWARM)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bzzap_Anim05)
     EVT_WAIT(40)
@@ -517,7 +517,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_1, SOUND_20CB)
+                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_1, SOUND_MINI_BZZAP_STING)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_1, ANIM_Bzzap_Anim04)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(AddGoalPos, ACTOR_SELF, -30, -20, 1)
@@ -536,7 +536,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
             EVT_END_THREAD
             EVT_WAIT(11)
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_2, SOUND_20CB)
+                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_2, SOUND_MINI_BZZAP_STING)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_2, ANIM_Bzzap_Anim04)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(AddGoalPos, ACTOR_SELF, -30, -20, 1)
@@ -555,7 +555,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
             EVT_END_THREAD
             EVT_WAIT(11)
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_3, SOUND_20CB)
+                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_3, SOUND_MINI_BZZAP_STING)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_3, ANIM_Bzzap_Anim04)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(AddGoalPos, ACTOR_SELF, -30, -20, 1)
@@ -574,7 +574,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
             EVT_END_THREAD
             EVT_WAIT(11)
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_4, SOUND_20CB)
+                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_4, SOUND_MINI_BZZAP_STING)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_4, ANIM_Bzzap_Anim04)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(AddGoalPos, ACTOR_SELF, -30, -20, 1)
@@ -593,7 +593,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
             EVT_END_THREAD
             EVT_WAIT(11)
             EVT_THREAD
-                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_5, SOUND_20CB)
+                EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_5, SOUND_MINI_BZZAP_STING)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_5, ANIM_Bzzap_Anim04)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(AddGoalPos, ACTOR_SELF, -30, -20, 1)
@@ -625,7 +625,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_1, SOUND_20CB)
+        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_1, SOUND_MINI_BZZAP_STING)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_1, ANIM_Bzzap_Anim04)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, -10, -10, 1)
@@ -645,7 +645,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
     EVT_END_THREAD
     EVT_WAIT(11)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_2, SOUND_20CB)
+        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_2, SOUND_MINI_BZZAP_STING)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_2, ANIM_Bzzap_Anim04)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, -10, -10, 1)
@@ -665,7 +665,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
     EVT_END_THREAD
     EVT_WAIT(11)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_3, SOUND_20CB)
+        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_3, SOUND_MINI_BZZAP_STING)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_3, ANIM_Bzzap_Anim04)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, -10, -10, 1)
@@ -685,7 +685,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
     EVT_END_THREAD
     EVT_WAIT(11)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_4, SOUND_20CB)
+        EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_4, SOUND_MINI_BZZAP_STING)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_4, ANIM_Bzzap_Anim04)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, -10, -10, 1)
@@ -705,7 +705,7 @@ EvtScript N(EVS_Attack_CallSwarm) = {
     EVT_END_THREAD
     EVT_WAIT(11)
     EVT_WAIT(1)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_5, SOUND_20CB)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_SWARM_5, SOUND_MINI_BZZAP_STING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SWARM_5, ANIM_Bzzap_Anim04)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -10, -10, 1)

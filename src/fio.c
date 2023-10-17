@@ -71,7 +71,7 @@ b32 fio_validate_globals_checksums(void) {
     return fio_calc_globals_checksum() == header->crc1;
 }
 
-b32 fio_has_valid_globals(void) {
+b32 fio_load_globals(void) {
     fio_read_flash(GLOBALS_PAGE_1, &gSaveGlobals, sizeof(gSaveGlobals));
     if (fio_validate_globals_checksums()) {
         return TRUE;
@@ -83,10 +83,10 @@ b32 fio_has_valid_globals(void) {
     }
 
     bzero(&gSaveGlobals, sizeof(gSaveGlobals));
-     return FALSE;
+    return FALSE;
 }
 
-b32 fio_flush_globals(void) {
+b32 fio_save_globals(void) {
     s32 checksum;
 
     strcpy(gSaveGlobals.magicString, MagicSaveString);

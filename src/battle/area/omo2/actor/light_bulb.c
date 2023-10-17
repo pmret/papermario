@@ -320,7 +320,7 @@ API_CALLABLE(N(SpawnShatterFX)) {
 }
 
 EvtScript N(EVS_Death) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_BULB, SOUND_BULB_SHATTER)
+    EVT_CALL(PlaySoundAtActor, ACTOR_BULB, SOUND_TANK_BULB_SHATTER)
     EVT_CALL(N(SpawnShatterFX))
     EVT_CALL(EnableModel, MODEL_kyu3, FALSE)
     EVT_CALL(EnableModel, MODEL_kyu1, FALSE)

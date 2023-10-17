@@ -558,7 +558,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_032C, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o907, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b1_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_01, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_01, EVT_FLOAT(1.0))
@@ -578,7 +578,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_032C, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o911, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b2_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_02, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_02, EVT_FLOAT(1.0))
@@ -598,7 +598,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_032C, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o915, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b3_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_03, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_03, EVT_FLOAT(1.0))
@@ -618,7 +618,7 @@ EvtScript N(EVS_BoxResult_ReleaseShyGuys) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_032C, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_o918, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetModelCenter, MODEL_b4_1)
         EVT_CALL(SetNpcPos, NPC_ShyGuy_04, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_04, EVT_FLOAT(1.0))

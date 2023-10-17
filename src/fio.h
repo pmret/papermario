@@ -3,8 +3,8 @@
 
 #include "common.h"
 
-b32 fio_has_valid_globals(void);
-b32 fio_flush_globals(void);
+b32 fio_load_globals(void);
+b32 fio_save_globals(void);
 b32 fio_load_game(s32 saveSlot);
 void fio_save_game(s32 saveSlot);
 void fio_erase_game(s32 saveSlot);

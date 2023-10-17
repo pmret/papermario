@@ -270,7 +270,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 anim = ANIM_MarioW3_8bit_Jump;
             }
             suggest_player_anim_allow_backward(anim);
-            sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT);
+            sfx_play_sound_at_player(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT);
         }
         script->functionTemp[0] = 1;
     }

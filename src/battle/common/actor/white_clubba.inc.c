@@ -246,7 +246,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim08)
             EVT_WAIT(20)
             EVT_IF_EQ(LVar0, HIT_RESULT_LUCKY)
@@ -285,7 +285,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_LABEL(40) // heavy club attack
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
@@ -298,7 +298,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_LABEL(50) // swift club attack
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
@@ -313,7 +313,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
@@ -328,7 +328,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)

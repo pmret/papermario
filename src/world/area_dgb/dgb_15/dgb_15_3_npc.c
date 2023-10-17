@@ -77,7 +77,7 @@ EvtScript N(EVS_PlayFootstepFX) = {
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
         EVT_IF_NE(LVar3, LVar6)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_PARAM_MUTE | SOUND_SPACE_FULL)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_MUTE | SOUND_SPACE_FULL)
             EVT_CALL(GetDist2D, LVarA, LVar0, LVar2, LVar3, LVar5)
             EVT_SWITCH(LVarA)
                 EVT_CASE_LT(200)

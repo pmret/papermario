@@ -284,7 +284,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim03)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03CA)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PETIT_PIRANHA_ASCEND)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 20)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -293,7 +293,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03CB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PETIT_PIRANHA_DIVE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

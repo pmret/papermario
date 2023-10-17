@@ -74,7 +74,7 @@
 #define spawn_surface_effects dead_spawn_surface_effects
 #define get_item_entity dead_get_item_entity
 #define gOverrideFlags dead_gOverrideFlags
-#define set_message_msg dead_set_message_msg
+#define set_message_text_var dead_set_message_text_var
 #define gPlayerData dead_gPlayerData
 #define gPartnerPopupProperties dead_gPartnerPopupProperties
 #define increment_status_bar_disabled dead_increment_status_bar_disabled

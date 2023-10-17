@@ -707,12 +707,12 @@ EvtScript N(EVS_Attack_ShellToss) = {
             EVT_WAIT(2)
             EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
         EVT_END_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_SPIN)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Koopatrol_Anim06)
         EVT_WAIT(10)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SHELL_TOSS)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 4, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -1082,7 +1082,7 @@ EvtScript N(EVS_Move_SummonBackup) = {
         EVT_WAIT(8)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 30, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Koopatrol_Anim16)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -1094,7 +1094,7 @@ EvtScript N(EVS_Move_SummonBackup) = {
     EVT_ADD(LVar1, 200)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(SetGoalToIndex, LVar0, LVarA)
-    EVT_CALL(PlaySoundAtActor, LVar0, SOUND_20D3)
+    EVT_CALL(PlaySoundAtActor, LVar0, SOUND_SHELL_TOSS)
     EVT_CALL(SetActorSounds, LVar0, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_CALL(SetAnimation, LVar0, 1, ANIM_Koopatrol_Anim06)
     EVT_CALL(SetActorSpeed, LVar0, EVT_FLOAT(6.0))

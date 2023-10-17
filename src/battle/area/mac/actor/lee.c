@@ -607,7 +607,7 @@ EvtScript N(EVS_Move_CopyPartner) = {
     EVT_WAIT(15)
     EVT_CALL(ActorSpeak, MSG_MAC_Gate_0027, ACTOR_SELF, PRT_MAIN, ANIM_Lee_Talk, ANIM_Lee_Walk)
     EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B8)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_GHOST_TRANSFORM)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Lee_RaisedArmsTalk)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)

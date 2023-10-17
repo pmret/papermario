@@ -348,7 +348,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_NONE)
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKooper_ShellSpinSlowest)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200C)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_KOOPER_SHELL_SPINUP)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 75)
@@ -393,7 +393,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_END_SWITCH
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200A)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_PARAKARRY_AIR_RAID_1)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)

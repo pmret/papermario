@@ -18,7 +18,7 @@ API_CALLABLE(N(UpgradeStarPowerCh3)) {
 
 EvtScript N(EVS_TubbaWalking) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_LOOP
     EVT_RETURN

@@ -66,7 +66,7 @@ EvtScript N(EVS_ManageRetroJar) = {
             EVT_CALL(SetMusicTrack, 0, SONG_CHAPTER_START, 1, 8)
             EVT_SET(MF_IsRetroMario, TRUE)
         EVT_ELSE
-            EVT_CALL(PlaySoundAtPlayer, SOUND_JUMP_2081, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
             EVT_CALL(Disable8bitMario, TRUE)
             EVT_EXEC(N(EVS_SetupMusic))
             EVT_SET(MF_IsRetroMario, FALSE)

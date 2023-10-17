@@ -655,7 +655,7 @@ EvtScript N(EVS_Move_SummonBackup) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 30, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SPEAR_GUY, ANIM_SpearGuy_Anim0E)
     EVT_WAIT(20)
     EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar0)
@@ -720,7 +720,7 @@ EvtScript N(EVS_Move_SummonBackup) = {
     EVT_CALL(SetActorSpeed, LVarB, EVT_FLOAT(4.0))
     EVT_CALL(RunToGoal, LVarB, 0, FALSE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
     EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 30, 0)
@@ -783,7 +783,7 @@ EvtScript N(EVS_BecomeShyGuy) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
     EVT_THREAD
         EVT_LOOP(10)
             EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_GRASS_SKIRT, LVar0, LVar1, LVar2)
@@ -1489,7 +1489,7 @@ EvtScript N(EVS_Attack_Vault) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ACTOR_COLLAPSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_SHY_GUY, ANIM_ShyGuy_Red_Anim10)
             EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DISAPPOINTED)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_SHY_GUY, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LT(LVar0, 50)

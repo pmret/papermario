@@ -1184,7 +1184,7 @@ EvtScript EVS_ForceNextTarget = {
 };
 
 EvtScript EVS_Enemy_FanSmack_Impl = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2022)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAN_SMACK_HIT)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
     EVT_DIVF(LVar3, EVT_FLOAT(40.0))
@@ -1213,7 +1213,7 @@ EvtScript EVS_Enemy_FanSmack_Impl = {
         EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
             EVT_WAIT(40)
             EVT_CALL(DismissEffect, LVarF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2023)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAN_SMACK_END)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
