@@ -160,7 +160,7 @@ s32 N(check_for_treadmill_overlaps)(void) {
     z = playerStatus->pos.z;
 
     add_vec2D_polar(&x, &z, playerStatus->colliderDiameter * 0.5f, clamp_angle(yaw + 180.0f));
-    return player_test_lateral_overlap(0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
+    return player_test_lateral_overlap(PLAYER_COLLISION_0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
 }
 
 API_CALLABLE(N(UseAbility)) {

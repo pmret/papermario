@@ -449,16 +449,16 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
         } else {
             ret = entityID | COLLISION_WITH_ENTITY_BIT;
         }
-    } else if (mode == 3) {
+    } else if (mode == PLAYER_COLLISION_3) {
         ret = test_ray_colliders(COLLIDER_FLAG_IGNORE_SHELL, startX, startY, startZ, dirX, dirY, dirZ,
             hitX, hitY, hitZ, hitDepth, hitNx, hitNy, hitNz);
     }
 
-    if (mode == 1 || mode == 3) {
+    if (mode == PLAYER_COLLISION_1 || mode == PLAYER_COLLISION_3) {
         return ret;
     }
 
-    if (mode == 4) {
+    if (mode == PLAYER_COLLISION_4) {
         ignoreFlags = COLLIDER_FLAG_DOCK_WALL;
     } else {
         ignoreFlags = COLLIDER_FLAG_IGNORE_PLAYER;
@@ -475,8 +475,8 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
         nAngleZ = 180.0f - atan2(0, 0, *hitNz * 100.0, *hitNy * 100.0);
         nAngleX = 180.0f - atan2(0, 0, *hitNx * 100.0, *hitNy * 100.0);
 
-        if (!(nAngleZ == 90.0f && nAngleX == 90.0f || fabs(nAngleZ) >= 30.0 || fabs(nAngleX) >= 30.0)) {
-            ret = -1;
+        if (!((nAngleZ == 90.0f && nAngleX == 90.0f) || fabs(nAngleZ) >= 30.0 || fabs(nAngleX) >= 30.0)) {
+            ret = NO_COLLIDER;
         }
     }
 
@@ -515,7 +515,7 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
     dx = radius * sinTheta;
     ret = NO_COLLIDER;
 
-    raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    raycastID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (raycastID >= 0 && hitDepth <= depth) {
         *hasClimbableStep = TRUE;
     }
@@ -524,7 +524,7 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
     hitDepth = depth;
     dz = radius * cosTheta;
 
-    raycastID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    raycastID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
 
     targetDx = 0.0f;
     targetDz = 0.0f;
@@ -583,7 +583,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     targetDx = length * sinTheta;
     targetDz = length * cosTheta;
 
-    hitID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
         depthDiff -= (length + radius);
         dx = depthDiff * sinTheta;
@@ -594,7 +594,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
         ret = hitID;
     } else {
         height = playerStatus->colliderHeight * 0.75;
-        hitID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+        hitID = player_raycast_general(PLAYER_COLLISION_0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
         if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
             depthDiff -= (length + radius);
             dx = depthDiff * sinTheta;

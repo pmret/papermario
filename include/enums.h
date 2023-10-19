@@ -4132,11 +4132,23 @@ enum BattleMessages {
 
 // states after INIT are different for each type of battle message
 enum BattleMessageStates {
+    // generic INIT state shared by all message types
     BTL_MSG_STATE_INIT                  = 0,
-    BTL_MSG_STATE_1                     = 1,
-    BTL_MSG_STATE_2                     = 2,
-    BTL_MSG_STATE_3                     = 3,
-    BTL_MSG_STATE_4                     = 4,
+    // states for popup messages like BTL_MSG_MERLEE_ATK_UP or BTL_MSG_ENEMY_ASLEEP
+    BTL_MSG_STATE_POPUP_PRE_DELAY       = 1,
+    BTL_MSG_STATE_POPUP_DELAY           = 2,
+    BTL_MSG_STATE_POPUP_POST_DELAY      = 3,
+    BTL_MSG_STATE_POPUP_DISPOSE         = 4,
+    // states for action tip messages
+    BTL_MSG_STATE_ACTION_TIP_DELAY      = 1,
+    BTL_MSG_STATE_ACTION_TIP_DISPOSE    = 2,
+    // states for error messages like BTL_MSG_NO_JUMP_TARGET or BTL_MSG_CANT_SELECT_NOW
+    BTL_MSG_STATE_ERROR_PRE_DELAY       = 1,
+    BTL_MSG_STATE_ERROR_DELAY           = 2,
+    BTL_MSG_STATE_ERROR_POST_DELAY      = 3,
+    BTL_MSG_STATE_ERROR_DISPOSE         = 4,
+    // states for command disable notifications like BTL_MSG_ITEMS_DISABLED
+    BTL_MSG_STATE_DISABLED_DELAY        = 1,
 };
 
 // BattleMenuState
@@ -4635,6 +4647,14 @@ enum ColliderFlagsModifyMode {
     MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
     MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
     MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
+};
+
+enum PlayerCollisionTests {
+    PLAYER_COLLISION_0          = 0,
+    PLAYER_COLLISION_1          = 1,
+    PLAYER_COLLISION_2          = 2,
+    PLAYER_COLLISION_3          = 3,
+    PLAYER_COLLISION_4          = 4,
 };
 
 enum CameraFlags {

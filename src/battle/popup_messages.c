@@ -178,10 +178,10 @@ BSS s16 HID_BattleMessage1;
 BSS s16 HID_BattleMessage2;
 BSS s16 HID_BattleMessage3;
 BSS s16 HID_BattleMessage4;
-BSS b16 D_8029F64A;
-BSS b16 D_8029F64C;
-BSS s16 D_8029F64E;
-BSS s16 D_8029F650;
+BSS b16 ActionCommandTipVisible;
+BSS b16 BattleMessage_BoxPosLocked;
+BSS s16 BattleMessage_CurBoxPosY;
+BSS s16 BattleMessage_CurBoxOffsetY;
 
 extern HudScript HES_AimReticle;
 extern HudScript HES_AimTarget;
@@ -342,7 +342,7 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
         battleStatus->unk_90 = 0;
         popup->updateFunc = btl_bonk_update;
         popup->renderWorldFunc = btl_bonk_render;
-        popup->unk_00 = 0;
+        popup->unk_00 = FALSE;
         popup->renderUIFunc = NULL;
         popup->messageIndex = 1;
         popup->active |= 0x10;
@@ -540,7 +540,7 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
     if (popup != NULL) {
         popup->updateFunc = btl_update_message_popup;
         popup->renderUIFunc = btl_show_message_popup;
-        popup->unk_00 = 0;
+        popup->unk_00 = FALSE;
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
@@ -549,10 +549,10 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
         popup->message = NULL;
         BattlePopupMessageVar = 0;
         bPopupMessage = popup;
-        D_8029F64A = FALSE;
-        D_8029F64C = FALSE;
-        D_8029F64E = 0;
-        D_8029F650 = 0;
+        ActionCommandTipVisible = FALSE;
+        BattleMessage_BoxPosLocked = FALSE;
+        BattleMessage_CurBoxPosY = 0;
+        BattleMessage_CurBoxOffsetY = 0;
     }
 }
 
@@ -563,7 +563,7 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
     if (popup != NULL) {
         popup->updateFunc = btl_update_message_popup;
         popup->renderUIFunc = btl_show_message_popup;
-        popup->unk_00 = 0;
+        popup->unk_00 = FALSE;
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
@@ -572,10 +572,10 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
         popup->message = NULL;
         BattlePopupMessageVar = varValue;
         bPopupMessage = popup;
-        D_8029F64A = FALSE;
-        D_8029F64C = FALSE;
-        D_8029F64E = 0;
-        D_8029F650 = 0;
+        ActionCommandTipVisible = FALSE;
+        BattleMessage_BoxPosLocked = FALSE;
+        BattleMessage_CurBoxPosY = 0;
+        BattleMessage_CurBoxOffsetY = 0;
     }
 }
 
@@ -586,17 +586,17 @@ s32 btl_is_popup_displayed(void) {
 void btl_set_popup_duration(s32 duration) {
     PopupMessage* popup = bPopupMessage;
 
-    if (D_8029F64A && popup != NULL) {
+    if (ActionCommandTipVisible && popup != NULL) {
         popup->duration = duration;
     }
 }
 
-void func_8024FAE8(void) {
-    D_8029F64C = TRUE;
+void btl_message_lock_box_pos(void) {
+    BattleMessage_BoxPosLocked = TRUE;
 }
 
-void func_8024FAFC(void) {
-    D_8029F64C = FALSE;
+void btl_message_unlock_box_pos(void) {
+    BattleMessage_BoxPosLocked = FALSE;
 }
 
 void close_action_command_instruction_popup(void) {
@@ -673,12 +673,12 @@ void btl_update_message_popup(void* data) {
                 default:
                     break;
                 case BTL_MSG_STATE_INIT:
-                    popup->showMsgState = BTL_MSG_STATE_1;
+                    popup->showMsgState = BTL_MSG_STATE_POPUP_PRE_DELAY;
                     break;
-                case BTL_MSG_STATE_1:
-                    popup->showMsgState = BTL_MSG_STATE_2;
+                case BTL_MSG_STATE_POPUP_PRE_DELAY:
+                    popup->showMsgState = BTL_MSG_STATE_POPUP_DELAY;
                     break;
-                case BTL_MSG_STATE_2:
+                case BTL_MSG_STATE_POPUP_DELAY:
                     if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
@@ -686,13 +686,13 @@ void btl_update_message_popup(void* data) {
                     if (popup->duration != 0) {
                         popup->duration--;
                     } else {
-                        popup->showMsgState = BTL_MSG_STATE_3;
+                        popup->showMsgState = BTL_MSG_STATE_POPUP_POST_DELAY;
                     }
                     break;
-                case BTL_MSG_STATE_3:
-                    popup->showMsgState = BTL_MSG_STATE_4;
+                case BTL_MSG_STATE_POPUP_POST_DELAY:
+                    popup->showMsgState = BTL_MSG_STATE_POPUP_DISPOSE;
                     break;
-                case BTL_MSG_STATE_4:
+                case BTL_MSG_STATE_POPUP_DISPOSE:
                     shouldDisposeWindow = TRUE;
                     break;
             }
@@ -720,9 +720,9 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
         case BTL_MSG_ACTION_TIP_NOT_USED_3:
             actionCommandMode = battleStatus->actionCommandMode;
-            D_8029F64A = TRUE;
+            ActionCommandTipVisible = TRUE;
             if (actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
-                D_8029F64A = FALSE;
+                ActionCommandTipVisible = FALSE;
                 shouldDisposeWindow = TRUE;
                 break;
             }
@@ -864,14 +864,14 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                     }
-                    popup->showMsgState = BTL_MSG_STATE_1;
+                    popup->showMsgState = BTL_MSG_STATE_ACTION_TIP_DELAY;
                     break;
-                case BTL_MSG_STATE_1: // show the message
+                case BTL_MSG_STATE_ACTION_TIP_DELAY:
                     if (gBattleStatus.flags1 & BS_FLAGS1_10000) {
                         gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         popup->duration = 0;
-                        popup->showMsgState = BTL_MSG_STATE_2;
+                        popup->showMsgState = BTL_MSG_STATE_ACTION_TIP_DISPOSE;
                         break;
                     }
                     
@@ -950,28 +950,28 @@ void btl_update_message_popup(void* data) {
                         if (popup->duration != -1) {
                             popup->duration = 30;
                         }
-                        popup->showMsgState = BTL_MSG_STATE_2;
+                        popup->showMsgState = BTL_MSG_STATE_ACTION_TIP_DISPOSE;
                         break;
                     }
                     break;
-                case BTL_MSG_STATE_2: // show message
+                case BTL_MSG_STATE_ACTION_TIP_DISPOSE:
                     if ((actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)
                         || (gBattleStatus.flags1 & BS_FLAGS1_10000)
                     ) {
                         s16* duration;
 
-                        if (D_8029F64E < 192) {
-                            if (!D_8029F64C) {
-                                D_8029F64E += 10;
-                                if (D_8029F64E > 192) {
-                                    D_8029F64E = 192;
+                        if (BattleMessage_CurBoxPosY < 192) {
+                            if (!BattleMessage_BoxPosLocked) {
+                                BattleMessage_CurBoxPosY += 10;
+                                if (BattleMessage_CurBoxPosY > 192) {
+                                    BattleMessage_CurBoxPosY = 192;
                                 }
                             } else {
                                 break;
                             }
                         }
 
-                        gWindows[WINDOW_ID_BATTLE_POPUP].pos.y = D_8029F64E + D_8029F650;
+                        gWindows[WINDOW_ID_BATTLE_POPUP].pos.y = BattleMessage_CurBoxPosY + BattleMessage_CurBoxOffsetY;
 
                         if (popup->duration == -1) {
                             break;
@@ -1019,7 +1019,7 @@ void btl_update_message_popup(void* data) {
                                 hud_element_free(HID_BattleMessage4);
                                 break;
                         }
-                        D_8029F64A = FALSE;
+                        ActionCommandTipVisible = FALSE;
                         shouldDisposeWindow = TRUE;
                     }
                     break;
@@ -1035,12 +1035,12 @@ void btl_update_message_popup(void* data) {
                 default:
                     break;
                 case BTL_MSG_STATE_INIT:
-                    popup->showMsgState = BTL_MSG_STATE_1;
+                    popup->showMsgState = BTL_MSG_STATE_ERROR_PRE_DELAY;
                     break;
-                case BTL_MSG_STATE_1:
-                    popup->showMsgState = BTL_MSG_STATE_2;
+                case BTL_MSG_STATE_ERROR_PRE_DELAY:
+                    popup->showMsgState = BTL_MSG_STATE_ERROR_DELAY;
                     break;
-                case BTL_MSG_STATE_2:
+                case BTL_MSG_STATE_ERROR_DELAY:
                     if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
@@ -1048,13 +1048,13 @@ void btl_update_message_popup(void* data) {
                     if (popup->duration != 0) {
                         popup->duration--;
                     } else {
-                        popup->showMsgState = BTL_MSG_STATE_3;
+                        popup->showMsgState = BTL_MSG_STATE_ERROR_POST_DELAY;
                     }
                     break;
-                case BTL_MSG_STATE_3:
-                    popup->showMsgState = BTL_MSG_STATE_4;
+                case BTL_MSG_STATE_ERROR_POST_DELAY:
+                    popup->showMsgState = BTL_MSG_STATE_ERROR_DISPOSE;
                     break;
-                case BTL_MSG_STATE_4:
+                case BTL_MSG_STATE_ERROR_DISPOSE:
                     shouldDisposeWindow = TRUE;
                     break;
             }
@@ -1105,9 +1105,9 @@ void btl_update_message_popup(void* data) {
                             hud_element_set_render_pos(HID_BattleMessage1, -100, -100);
                             break;
                     }
-                    popup->showMsgState = BTL_MSG_STATE_1;
+                    popup->showMsgState = BTL_MSG_STATE_DISABLED_DELAY;
                     break;
-                case BTL_MSG_STATE_1:
+                case BTL_MSG_STATE_DISABLED_DELAY:
                     if (popup->duration != 0) {
                         popup->duration--;
                         break;
@@ -1243,7 +1243,7 @@ void btl_message_popup_draw_content(void* data, s32 x, s32 y) {
         case BTL_MSG_ACTION_TIP_REDUCE_DAMAGE:
         case BTL_MSG_ACTION_TIP_NOT_USED_3:
             opacity = 255;
-            if (popup->showMsgState < BTL_MSG_STATE_2) {
+            if (popup->showMsgState < BTL_MSG_STATE_ACTION_TIP_DISPOSE) {
                 opacity = 160;
             }
             if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
@@ -1546,12 +1546,12 @@ void btl_show_message_popup(void* data) {
                 height = BattleMessage_BoxSizesY[numLines];
                 if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
                     posY = 120;
-                    D_8029F64C = TRUE;
+                    BattleMessage_BoxPosLocked = TRUE;
                 }
-                D_8029F64E = posY;
-                D_8029F650 = BattleMessage_BoxOffsetsY[numLines];
+                BattleMessage_CurBoxPosY = posY;
+                BattleMessage_CurBoxOffsetY = BattleMessage_BoxOffsetsY[numLines];
 
-                posY = D_8029F64E + D_8029F650;
+                posY = BattleMessage_CurBoxPosY + BattleMessage_CurBoxOffsetY;
                 set_window_properties(WINDOW_ID_BATTLE_POPUP, posX, posY, width, height, WINDOW_PRIORITY_0, btl_message_popup_draw_content, popup, -1);
                 if (popup->messageIndex == BTL_MSG_ACTION_TIP_UNUSED_3) {
                     set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW);
@@ -1606,13 +1606,13 @@ ApiStatus SetMessageBoxDuration(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80251434(Evt* script, s32 isInitialCall) {
-    func_8024FAE8();
+ApiStatus LockMessageBoxPosition(Evt* script, s32 isInitialCall) {
+    btl_message_lock_box_pos();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80251454(Evt* script, s32 isInitialCall) {
-    func_8024FAFC();
+ApiStatus UnlockMessageBoxPosition(Evt* script, s32 isInitialCall) {
+    btl_message_unlock_box_pos();
     return ApiStatus_DONE2;
 }
 

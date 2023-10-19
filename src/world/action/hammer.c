@@ -145,7 +145,7 @@ s32 func_802B62A4_E25174(void) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
-        ret = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        ret = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (ret >= 0) {
             HammerHit->hitPos.x = x;
             HammerHit->hitPos.y = y;
@@ -172,7 +172,7 @@ s32 func_802B62A4_E25174(void) {
             y = playerY;
             z = playerZ - (outCosTheta * i);
 
-            ret = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+            ret = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
             if (ret >= 0) {
                 HammerHit->hitPos.x = x;
                 HammerHit->hitPos.y = y;
@@ -323,7 +323,7 @@ void func_802B6820_E256F0(void) {
         x = playerX + (outSinTheta * i);
         y = playerY;
         z = playerZ - (outCosTheta * i);
-        result = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        result = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (HammerHit->unk_14 == 0) {
             collisionStatus->lastWallHammered = result;
             if (result >= 0) {
@@ -354,7 +354,7 @@ void func_802B6820_E256F0(void) {
             x = playerX + (outSinTheta * i);
             y = playerY;
             z = playerZ - (outCosTheta * i);
-            result = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+            result = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
             if (HammerHit->unk_14 == 0) {
                 collisionStatus->lastWallHammered = result;
                 if (result >= 0) {
