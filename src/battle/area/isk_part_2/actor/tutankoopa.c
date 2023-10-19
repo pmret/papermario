@@ -632,7 +632,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar9, ANIM_BuzzyBeetle_Anim05)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TOSS)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -669,7 +669,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar9, EVT_FLOAT(0.2))
     EVT_CALL(FlyPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 0, 30, EASING_LINEAR)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar8, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_THROW_SHELL, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar8, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_THROW_SHELL, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 55)
@@ -813,14 +813,14 @@ EvtScript N(EVS_DropDebris_Self) = {
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HittingSelf, TRUE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_DROP_DEBRIS_SELF, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_DROP_DEBRIS_SELF, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_DropDebris_Players) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -838,7 +838,7 @@ EvtScript N(EVS_DropDebris_Players) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarB, 0, 0, 1, BS_FLAGS1_10)
+            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarB, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
             EVT_SWITCH(LVarB)
                 EVT_CASE_EQ(HIT_RESULT_MISS)
                     EVT_RETURN
@@ -880,7 +880,7 @@ EvtScript N(EVS_DropDebris_Players) = {
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_DEBRIS_1, ANIM_Tutankoopa_RockShatter)
                     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PARTNER, BS_FLAGS1_SP_EVT_ACTIVE)
+                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PARTNER, BS_FLAGS1_TRIGGER_EVENTS)
                     EVT_WAIT(20)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_CALL(FreezeBattleState, FALSE)
@@ -920,7 +920,7 @@ EvtScript N(EVS_DropDebris_Players) = {
         EVT_CALL(FallPartTo, ACTOR_SELF, PRT_DEBRIS_2, LVar4, LVar5, LVar6, 20)
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_DEBRIS_1, ANIM_Tutankoopa_RockShatter)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PARTNER, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PARTNER, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_WAIT(20)
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
         EVT_CALL(FreezeBattleState, FALSE)
@@ -941,7 +941,7 @@ EvtScript N(EVS_DropDebris_Players) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_DEBRIS_1, ANIM_Tutankoopa_RockShatter)
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PLAYER, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DROP_DEBRIS_PLAYER, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_WAIT(19)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_DEBRIS_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_IF_EQ(LVar0, HIT_RESULT_10)

@@ -361,7 +361,7 @@ EvtScript N(EVS_HandleEvent_Ground) = {
 EvtScript N(EVS_KnockDownCheck) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -372,7 +372,7 @@ EvtScript N(EVS_KnockDownCheck) = {
             EVT_CASE_OR_EQ(MOVE_HEADBONK3)
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
-                EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+                EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
                 EVT_END_IF
             EVT_END_CASE_GROUP
@@ -596,7 +596,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
     EVT_PLAY_EFFECT(EFFECT_GATHER_MAGIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 30, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FLYING, ANIM_FlyingMagikoopa_White_Anim02)
     EVT_WAIT(30)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -650,7 +650,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
     EVT_CALL(N(ShrinkActor), LVar0, LVar1, LVar5, LVar3, LVar4, LVar5, 20)
     EVT_WAIT(18)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_MAGIC_BLAST, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_MAGIC_BLAST, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -703,7 +703,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GROUND, ANIM_Magikoopa_White_Anim03)
     EVT_WAIT(11)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MAGIKOOPA_WAND_STRIKE)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -737,7 +737,7 @@ EvtScript N(EVS_Attack_WandStrike) = {
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WAND_STRIKE, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WAND_STRIKE, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

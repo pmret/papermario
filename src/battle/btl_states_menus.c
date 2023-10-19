@@ -5036,7 +5036,7 @@ void btl_state_update_select_target(void) {
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             target = &actor->targetData[targetIndexList[actor->selectedTargetIndex]];
             actor->targetActorID = target->actorID;
-            actor->targetPartIndex = target->partID;
+            actor->targetPartID = target->partID;
 
             // free the HUD elements for the target pointers
             for (i = 0; i < targetListLength; i++) {

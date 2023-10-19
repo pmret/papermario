@@ -458,7 +458,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
         EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, EASING_LINEAR)
     EVT_END_IF
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -515,7 +515,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     EVT_IF_EQ(LFlag0, TRUE)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
@@ -560,7 +560,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
             EVT_WAIT(10)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_NICE_HIT)
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
@@ -835,7 +835,7 @@ EvtScript N(EVS_Flying_TakeTurn) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_NICE_HIT)
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
             EVT_IF_NE(LVar3, 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
@@ -914,7 +914,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -964,7 +964,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -40, EASING_LINEAR)
     EVT_IF_EQ(LFlag0, TRUE)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
@@ -1010,7 +1010,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_WAIT(10)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_NICE_HIT)
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
@@ -1140,7 +1140,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_NICE_HIT)
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
             EVT_IF_NE(LVar3, 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)

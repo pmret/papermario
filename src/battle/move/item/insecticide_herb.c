@@ -144,7 +144,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(N(func_802A123C_72A98C))
     EVT_CALL(DeleteVirtualEntity, LVarA)
     EVT_IF_EQ(LVar9, 0)
-        EVT_CALL(ItemDamageEnemy, LVar0, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(ItemDamageEnemy, LVar0, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_ELSE
         EVT_CALL(InitTargetIterator)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)

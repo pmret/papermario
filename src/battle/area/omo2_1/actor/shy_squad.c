@@ -1184,7 +1184,7 @@ EvtScript N(EVS_Attack_Swarm) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar7)
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -1230,7 +1230,7 @@ EvtScript N(EVS_Attack_Swarm) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_SWITCH
     EVT_SET(LVarE, 15)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
@@ -1239,9 +1239,9 @@ EvtScript N(EVS_Attack_Swarm) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LRAW_FIGHTING)
     EVT_LOOP(LVarD)
         EVT_IF_GT(LVarE, 1)
-            EVT_SET(LVar0, BS_FLAGS1_40)
+            EVT_SET(LVar0, BS_FLAGS1_NICE_HIT)
         EVT_ELSE
-            EVT_SET(LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_SET(LVar0, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_END_IF
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, LVar0)

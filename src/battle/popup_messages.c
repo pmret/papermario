@@ -319,7 +319,7 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
         var_f20 = 0.7f;
     }
 
-    if (battleStatus->flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
+    if (battleStatus->flags1 & (BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)) {
         baseScale *= 2.0;
     }
 

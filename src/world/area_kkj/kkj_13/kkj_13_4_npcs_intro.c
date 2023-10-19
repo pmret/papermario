@@ -18,7 +18,7 @@ EvtScript N(EVS_NpcIdle_BowserAwaitBattle) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_20000)
+    EVT_CALL(ModifyGlobalOverrideFlags, 1, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
     EVT_CALL(StartBossBattle, SONG_BOWSER_THEME)
     EVT_RETURN
     EVT_END

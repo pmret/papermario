@@ -186,7 +186,7 @@ dlabel D_8009A680
 dlabel D_8009A684
 .space 0x0000000c
 
-dlabel D_8009A690
+dlabel SoftResetDelay
 .space 4
 
 dlabel D_8009A694

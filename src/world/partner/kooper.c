@@ -73,7 +73,7 @@ s32 N(check_for_item_collision)(Npc* kooper) {
 void N(init)(Npc* kooper) {
     kooper->collisionHeight = 37;
     kooper->collisionDiameter = 24;
-    kooper->collisionChannel = COLLISION_CHANNEL_10000;
+    kooper->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     N(TriggeredBattle) = FALSE;
 }
 
@@ -368,7 +368,7 @@ API_CALLABLE(N(UseAbility)) {
             posZ = playerStatus->pos.z;
             testLength = hitLength = playerStatus->colliderHeight / 2;
 
-            if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
+            if ((npc_raycast_up(COLLIDER_FLAG_IGNORE_PLAYER, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
                 collisionStatus->curCeiling = NpcHitQueryColliderID;
                 playerStatus->pos.y = posY - playerStatus->colliderHeight;
                 N(vertical_hit_interactable_entity)(kooper);
@@ -415,7 +415,7 @@ API_CALLABLE(N(UseAbility)) {
                 posX = kooper->pos.x, \
                 posY = kooper->pos.y, \
                 posZ = kooper->pos.z, \
-                npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000, \
+                npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_SHELL, \
                     &posX, &posY, &posZ, kooper->moveSpeed, testAngle,  \
                     kooper->collisionHeight, kooper->collisionDiameter / 2) \
                 )
@@ -518,7 +518,7 @@ API_CALLABLE(N(UseAbility)) {
             posY = kooper->pos.y;
             posZ = kooper->pos.z;
 
-            npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
+            npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_SHELL,
                 &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw,
                 kooper->collisionHeight, ( kooper->collisionDiameter / 2));
 
@@ -576,7 +576,7 @@ API_CALLABLE(N(UseAbility)) {
             posY = kooper->pos.y;
             posZ = kooper->pos.z;
 
-            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
+            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_SHELL,
                 &posX, &posY, &posZ, kooper->moveSpeed, clamp_angle(kooper->yaw + 180.0f),
                 kooper->collisionHeight, kooper->collisionDiameter)
             ) {

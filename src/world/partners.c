@@ -1203,7 +1203,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
     wPartnerTetherDistance = 40.0f;
     partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
     func_800EA5B8(partner);
-    partner->collisionChannel = COLLISION_CHANNEL_10000;
+    partner->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     partner->jumpVel = 0.0f;
     partner->flags |= NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_PLAYER_COLLISION;
     partner->jumpScale = 1.8f;
@@ -1358,9 +1358,10 @@ void partner_walking_follow_player(Npc* partner) {
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             surfaceType = get_collider_flags(partner->curFloor);
-            if (surfaceType == SURFACE_TYPE_SPIKES ||
-                surfaceType == SURFACE_TYPE_LAVA ||
-                (partner->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) == (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
+            if (surfaceType == SURFACE_TYPE_SPIKES
+                || surfaceType == SURFACE_TYPE_LAVA
+                || ((partner->flags & NPC_FLAG_GROUNDED) && (partner->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD))
+            ) {
                 if (!func_800EA4B0(partner->curWall)) {
                     D_8010CFBC++;
                     if (D_8010CFBC >= 40) {
@@ -1779,7 +1780,7 @@ void partner_flying_enable(Npc* partner, s32 val) {
     wPartnerTetherDistance = 40.0f;
     partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
     func_800EA5B8(partner);
-    partner->collisionChannel = COLLISION_CHANNEL_10000;
+    partner->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     partner->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
     partner->flags &= ~NPC_FLAG_GRAVITY;
 }
@@ -1856,7 +1857,7 @@ void partner_flying_update_motion(Npc* partner) {
             y = partner->pos.y;
             z = partner->pos.z;
             hitDepth = 1000.0f;
-            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter) == 0) {
+            if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter) == 0) {
                 y = playerStatus->pos.y;
             }
 
@@ -2169,7 +2170,7 @@ void partner_flying_follow_player(Npc* partner) {
                             z = partner->pos.z;
                             distance = partner->collisionHeight + 1;
                             wPartnerMoveTime--;
-                            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) == 0) {
+                            if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) == 0) {
                                 if (partner->collisionHeight + 5 < fabs((partner->pos.y - playerStatus->pos.y))) {
                                     partner->pos.y += (playerStatus->pos.y - partner->pos.y) / 10.0f;
                                 }
@@ -2212,7 +2213,7 @@ void partner_flying_follow_player(Npc* partner) {
 }
 
 s32 partner_init_put_away(Npc* partner) {
-    partner->collisionChannel = COLLISION_CHANNEL_10000;
+    partner->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     wPartnerFollowState = 0;
     partner->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
     return wPartnerFollowState;
@@ -2286,7 +2287,7 @@ s32 partner_put_away(Npc* partner) {
 }
 
 s32 partner_init_get_out(Npc* npc) {
-    npc->collisionChannel = COLLISION_CHANNEL_10000;
+    npc->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     wPartnerFollowState = 0;
     npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
     return wPartnerFollowState;
@@ -2323,7 +2324,7 @@ s32 partner_get_out(Npc* partner) {
                 z = moveToZ;
                 add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
                 hitDepth = 1000.0f;
-                if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter)) {
+                if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter)) {
                     // @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
                     s32 surfaceType = get_collider_flags(NpcHitQueryColliderID);
 

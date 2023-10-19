@@ -548,7 +548,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
     EVT_WAIT(8)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_LARGE_ACTOR_JUMP, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -596,7 +596,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -682,7 +682,7 @@ EvtScript N(attackLightBeam) = {
         EVT_PLAY_EFFECT(EFFECT_RADIATING_ENERGY_ORB, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 30, 0)
     EVT_END_THREAD
     EVT_WAIT(5)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -690,7 +690,7 @@ EvtScript N(attackLightBeam) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(HIT_RESULT_MISS)
                 EVT_CASE_DEFAULT
@@ -698,20 +698,20 @@ EvtScript N(attackLightBeam) = {
                     EVT_IF_EQ(LVar0, 1)
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
                     EVT_END_IF
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_WAIT(2)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
             EVT_WAIT(2)
             EVT_CALL(ActorExists, ACTOR_PARTNER, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(40)

@@ -43,7 +43,7 @@ API_CALLABLE(N(UnkPhysicsFunc)) {
         // required to match, has to be r
         r = dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
 
-        channel = COLLISION_IGNORE_ENTITIES | COLLISION_CHANNEL_20000 | COLLISION_CHANNEL_10000 | COLLISION_CHANNEL_8000;
+        channel = COLLISION_IGNORE_ENTITIES | COLLIDER_FLAG_IGNORE_NPC | COLLIDER_FLAG_IGNORE_PLAYER | COLLIDER_FLAG_IGNORE_SHELL;
         if (npc_test_move_taller_with_slipping(channel, &x, &y, &z, r,
                     atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                     npc->collisionDiameter, npc->collisionHeight))

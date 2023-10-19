@@ -263,9 +263,9 @@ EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Twink_PowerLevel, LVarF)
     EVT_IF_GT(LVarF, 0)
-        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_ELSE
-        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 10)

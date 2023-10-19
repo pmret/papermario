@@ -221,7 +221,7 @@ s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
         }
     }
 
-    colliderID = test_ray_colliders(0x10000, *x, *y, *z, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    colliderID = test_ray_colliders(COLLIDER_FLAG_IGNORE_PLAYER, *x, *y, *z, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (colliderID >= 0) {
         ret = colliderID;
     }
@@ -338,7 +338,7 @@ s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
     sy2 = sy = *y;
     sz2 = sz = *z;
     hitDepth = *length;
-    hitID = test_ray_colliders(0x10000, sx, sy, sz, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    hitID = test_ray_colliders(COLLIDER_FLAG_IGNORE_PLAYER, sx, sy, sz, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (hitID >= 0 && *length > hitDepth) {
         *length = hitDepth;
         ret = hitID;
@@ -459,7 +459,7 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
     }
 
     if (mode == 4) {
-        ignoreFlags = COLLISION_CHANNEL_80000;
+        ignoreFlags = COLLIDER_FLAG_DOCK_WALL;
     } else {
         ignoreFlags = COLLIDER_FLAG_IGNORE_PLAYER;
     }
@@ -1096,7 +1096,7 @@ s32 has_valid_conversation_npc(void) {
     s32 cond;
 
     if (npc != NULL && !(npc->flags & NPC_FLAG_10000000)) {
-        cond = (playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC;
+        cond = !(playerStatus->flags & PS_FLAG_INPUT_DISABLED) && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC);
         ret = cond;
     }
     return ret;
@@ -1230,7 +1230,8 @@ void check_for_interactables(void) {
                         break;
                 }
             } else if (
-                ((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
+                (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED))
+                && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC)
                 && (npc != NULL)
                 && (npc->flags & NPC_FLAG_10000000)
             ) {

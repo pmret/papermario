@@ -615,7 +615,7 @@ EvtScript N(EVS_HandleEvent) = {
 EvtScript N(EVS_RegisterComboHit) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -626,7 +626,7 @@ EvtScript N(EVS_RegisterComboHit) = {
             EVT_CASE_OR_EQ(MOVE_HEADBONK3)
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
-                EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+                EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
                 EVT_END_IF
             EVT_END_CASE_GROUP
@@ -641,7 +641,7 @@ EvtScript N(EVS_RegisterHit) = {
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
         // jump attacks knock down stilts
         EVT_IF_FLAG(LVarF, DAMAGE_TYPE_JUMP)
-            EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+            EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
                 EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_KnockDownHit, TRUE)
             EVT_END_IF
         EVT_END_IF
@@ -684,7 +684,7 @@ EvtScript N(EVS_Attack_Leap) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_STILTS, ANIM_StiltGuy_Anim04)
     EVT_WAIT(8)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -738,7 +738,7 @@ EvtScript N(EVS_Attack_Leap) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_LEAP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_LEAP, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -887,7 +887,7 @@ EvtScript N(EVS_ShyGuy_SpinSmash) = {
         EVT_END_THREAD
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_GOTO(1)
     EVT_LABEL(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
@@ -1092,7 +1092,7 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
     EVT_SET(LVar1, 0)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -1151,7 +1151,7 @@ EvtScript N(EVS_ShyGuy_Attack_Tackle) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_GUY, ANIM_ShyGuy_Red_Anim05)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_TACKLE, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
@@ -1197,7 +1197,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
     EVT_SUB(LVar0, 40)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -1255,7 +1255,7 @@ EvtScript N(EVS_ShyGuy_Attack_Vault) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_VAULT, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_VAULT, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

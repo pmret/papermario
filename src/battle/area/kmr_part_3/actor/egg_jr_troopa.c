@@ -413,7 +413,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Jump)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -467,7 +467,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_THREAD
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_LEAP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_LEAP, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

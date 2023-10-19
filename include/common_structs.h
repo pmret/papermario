@@ -342,7 +342,7 @@ typedef struct PlayerData {
     /* 0x292 */ s8 starBeamLevel;
     /* 0x293 */ char unk_293;
     /* 0x294 */ u16 actionCommandAttempts;
-    /* 0x296 */ s16 actionCommandSuccesses;
+    /* 0x296 */ u16 actionCommandSuccesses;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ u16 playerFirstStrikes;
@@ -350,8 +350,8 @@ typedef struct PlayerData {
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
     /* 0x2A4 */ u16 battlesWon;
-    /* 0x2A6 */ s16 unk_2A6;
-    /* 0x2A8 */ s16 battlesFled;
+    /* 0x2A6 */ u16 fleeAttempts;
+    /* 0x2A8 */ u16 battlesFled;
     /* 0x2AA */ u16 trainingsDone;
     /* 0x2AC */ s32 walkingStepsTaken;
     /* 0x2B0 */ s32 runningStepsTaken;
@@ -979,8 +979,8 @@ typedef struct BattleStatus {
     /* 0x21C */ s32 stickX;
     /* 0x220 */ s32 stickY;
     /* 0x224 */ s32 inputBitmask;
-    /* 0x228 */ s32 dpadX; /* 0-360 */
-    /* 0x22C */ s32 dpadY; /* 0-60 */
+    /* 0x228 */ s32 stickAngle; /* 0-360 */
+    /* 0x22C */ s32 stickMagnitude; /* 0-60 */
     /* 0x230 */ s32 holdInputBuffer[64];
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ s8 holdInputBufferPos;
@@ -1956,7 +1956,7 @@ typedef struct Actor {
     /* 0x40C */ s8 targetListLength;
     /* 0x40D */ s8 targetIndexList[MAX_ENEMY_ACTORS]; /* into targetData */
     /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
-    /* 0x426 */ s8 targetPartIndex;
+    /* 0x426 */ s8 targetPartID;
     /* 0x427 */ char unk_427[1];
     /* 0x428 */ s16 targetActorID;
     /* 0x42A */ char unk_42A[2];

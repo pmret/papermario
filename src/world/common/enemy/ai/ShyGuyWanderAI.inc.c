@@ -52,7 +52,7 @@ void N(ShyGuyWanderAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->curAnim = *enemy->animList;
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         script->functionTemp[0] = 0;
     }
 }

@@ -1904,9 +1904,9 @@ enum EncounterOutcomes {
 };
 
 enum MerleeSpellType {
-    MERLEE_SPELL_0              = 0,
-    MERLEE_SPELL_1              = 1,
-    MERLEE_SPELL_2              = 2,
+    MERLEE_SPELL_NONE           = 0,
+    MERLEE_SPELL_ATK_BOOST      = 1,
+    MERLEE_SPELL_DEF_BOOST      = 2,
     MERLEE_SPELL_EXP_BOOST      = 3,
     MERLEE_SPELL_COIN_BOOST     = 4,
 };
@@ -1945,9 +1945,9 @@ enum SpeechFlags {
 typedef enum HitResult {
     HIT_RESULT_BACKFIRE             = -1,
     HIT_RESULT_HIT                  = 0,
-    HIT_RESULT_1                    = 1,    // KILL?
+    HIT_RESULT_NICE                 = 1,
     HIT_RESULT_NO_DAMAGE            = 2,
-    HIT_RESULT_3                    = 3,
+    HIT_RESULT_NICE_NO_DAMAGE       = 3,
     HIT_RESULT_LANDED_ON_SPIKE      = 4,
     HIT_RESULT_LUCKY                = 5,
     HIT_RESULT_MISS                 = 6,
@@ -2907,6 +2907,26 @@ enum EventSupressFlags {
     SUPPRESS_EVENT_FLAG_10000       = 0x10000,  // usage is a bug?
 };
 
+// combination used for hammer-based attacks
+#define SUPPRESS_EVENTS_HAMMER \
+      SUPPRESS_EVENT_SPIKY_TOP \
+    | SUPPRESS_EVENT_SHOCK_CONTACT \
+    | SUPPRESS_EVENT_BURN_CONTACT
+
+// combination used for mostly for kooper's attacks
+#define SUPPRESS_EVENTS_KOOPER_TEST \
+      SUPPRESS_EVENT_SPIKY_FRONT \
+    | SUPPRESS_EVENT_BURN_CONTACT
+
+// combination used for mostly for kooper's attacks
+#define SUPPRESS_EVENTS_KOOPER_DAMAGE \
+      SUPPRESS_EVENT_SPIKY_TOP \
+    | SUPPRESS_EVENT_EXPLODE_CONTACT \
+    | SUPPRESS_EVENT_SPIKY_FRONT \
+    | SUPPRESS_EVENT_SHOCK_CONTACT \
+    | SUPPRESS_EVENT_BURN_CONTACT \
+    | SUPPRESS_EVENT_ALT_SPIKY
+
 enum PartnerActions {
     PARTNER_ACTION_NONE             = 0, // generic state
     PARTNER_ACTION_USE              = 1, // generic state
@@ -3532,18 +3552,22 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_MENU_OPEN                     = 0x00000002,
     BS_FLAGS1_TATTLE_OPEN                   = 0x00000004,
     BS_FLAGS1_SHOW_PLAYER_DECORATIONS       = 0x00000008, // enables effects for Frozen, Water Block, and Cloud Nine to appear and follow the player
-    BS_FLAGS1_10                            = 0x00000010, // enable attack bonuses (power plus, etc)
-    BS_FLAGS1_SP_EVT_ACTIVE                 = 0x00000020, // enable special events (other than hit/death/immune?)
-    BS_FLAGS1_40                            = 0x00000040,
-    BS_FLAGS1_80                            = 0x00000080,
+    // Enables attack bonuses like Power Plus and Merlee ATK boost.
+    // Almost always used with TestTarget functions when not called with DAMAGE_TYPE_TRIGGER_LUCKY.
+    BS_FLAGS1_INCLUDE_POWER_UPS             = 0x00000010,
+    // Current hit may trigger special events on the target (other than hit/death/immune)
+    // These include FLIP_TRIGGER, FALL_TRIGGER, BURN_HIT, SPIN_SMASH_HIT, etc.
+    // This has no bearing on contact hazard events which affect the attacker like SPIKE_CONTACT or BURN_CONTACT.
+    BS_FLAGS1_TRIGGER_EVENTS                = 0x00000020,
+    BS_FLAGS1_NICE_HIT                      = 0x00000040,
+    BS_FLAGS1_NO_RATING                     = 0x00000080, // prevents 'Nice!' or 'Super!' messages from appearing
     BS_FLAGS1_EXECUTING_MOVE                = 0x00000100,
-    BS_FLAGS1_200                           = 0x00000200,
-    BS_FLAGS1_400                           = 0x00000400, // UNUSED
-    BS_FLAGS1_FORCE_HIT_IMMUNE              = 0x00000800,
+    BS_FLAGS1_SUPER_HIT                     = 0x00000200, // only works for partners and items, NOT player hits
+    BS_FLAGS1_FORCE_IMMUNE_HIT              = 0x00000800,
     BS_FLAGS1_AUTO_SUCCEED_ACTION           = 0x00001000,
     BS_FLAGS1_2000                          = 0x00002000,
     BS_FLAGS1_4000                          = 0x00004000,
-    BS_FLAGS1_8000                          = 0x00008000,
+    BS_FLAGS1_FREE_ACTION_COMMAND           = 0x00008000,
     BS_FLAGS1_10000                         = 0x00010000,
     BS_FLAGS1_DISABLE_CELEBRATION           = 0x00020000,
     BS_FLAGS1_BATTLE_FLED                   = 0x00040000, // used both when the player flees sucessfully or an enemy flees
@@ -3566,16 +3590,16 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_AWARDING_STAR_POINTS          = 0x00000001, // star points move to the center of the screen
     BS_FLAGS2_PLAYER_TURN_USED              = 0x00000002, // set after player has used their action for this turn
     BS_FLAGS2_PARTNER_TURN_USED             = 0x00000004, // set after partner has used their action for this turn
-    BS_FLAGS2_8                             = 0x00000008,
-    BS_FLAGS2_10                            = 0x00000010,
+    BS_FLAGS2_OVERRIDE_INACTIVE_PLAYER      = 0x00000008, // override inactive player animations and effects
+    BS_FLAGS2_OVERRIDE_INACTIVE_PARTNER     = 0x00000010, // override inactive partner animations and effects
     BS_FLAGS2_CANT_FLEE                     = 0x00000020,
     BS_FLAGS2_PEACH_BATTLE                  = 0x00000040,
     BS_FLAGS2_STORED_TURBO_CHARGE_TURN      = 0x00000100, // prevents turbo charge turns from decrementing on begin player turn
     BS_FLAGS2_DOING_JUMP_TUTORIAL           = 0x00000200,
-    BS_FLAGS2_400                           = 0x00000400,
+    BS_FLAGS2_FINAL_BOWSER_PART_1           = 0x00000400, // no other use for this flag, purpose unknown
     BS_FLAGS2_NO_TARGET_AVAILABLE           = 0x00001000,
     BS_FLAGS2_IGNORE_DARKNESS               = 0x00004000,
-    BS_FLAGS2_10000                         = 0x00010000,
+    BS_FLAGS2_HIDE_BUFF_COUNTERS            = 0x00010000, // hide turn counters for partner buffs (Cloud Nine, Water Block, etc)
     BS_FLAGS2_NO_PLAYER_PAL_ADJUST          = 0x00100000,
     BS_FLAGS2_IS_FIRST_STRIKE               = 0x01000000,
     BS_FLAGS2_DONT_STOP_MUSIC               = 0x02000000, // don't stop playing the current song when the battle ends
@@ -4242,25 +4266,25 @@ enum DebuffTypes {
 };
 
 enum GlobalOverrides {
-    GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
-    GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME                         = 0x00000008,
-    GLOBAL_OVERRIDES_10                                         = 0x00000010,
-    GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
-    GLOBAL_OVERRIDES_40                                         = 0x00000040,
-    GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION                    = 0x00000080,
-    GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
-    GLOBAL_OVERRIDES_200                                        = 0x00000200,
-    GLOBAL_OVERRIDES_400                                        = 0x00000400,
-    GLOBAL_OVERRIDES_800                                        = 0x00000800,
-    GLOBAL_OVERRIDES_1000                                       = 0x00001000,
-    GLOBAL_OVERRIDES_2000                                       = 0x00002000,
-    GLOBAL_OVERRIDES_4000                                       = 0x00004000,
-    GLOBAL_OVERRIDES_8000                                       = 0x00008000,
-    GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
-    GLOBAL_OVERRIDES_20000                                      = 0x00020000,
-    GLOBAL_OVERRIDES_DISABLE_MENUS                              = 0x00040000,
-    GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS              = 0x00100000,
-    GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS                         = 0x00200000,
+    GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD           = 0x00000002,
+    GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME             = 0x00000008,
+    GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI          = 0x00000010,
+    GLOBAL_OVERRIDES_SOFT_RESET                     = 0x00000020, // unused but functional
+    GLOBAL_OVERRIDES_40                             = 0x00000040,
+    GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION        = 0x00000080,
+    GLOBAL_OVERRIDES_DISABLE_BATTLES                = 0x00000100,
+    GLOBAL_OVERRIDES_200                            = 0x00000200,
+    GLOBAL_OVERRIDES_400                            = 0x00000400,
+    GLOBAL_OVERRIDES_800                            = 0x00000800,
+    GLOBAL_OVERRIDES_PREV_DISABLE_BATTLES           = 0x00001000,
+    GLOBAL_OVERRIDES_PREV_200                       = 0x00002000,
+    GLOBAL_OVERRIDES_PREV_400                       = 0x00004000,
+    GLOBAL_OVERRIDES_PREV_800                       = 0x00008000,
+    GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS          = 0x00010000,
+    GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE  = 0x00020000,
+    GLOBAL_OVERRIDES_DISABLE_MENUS                  = 0x00040000,
+    GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS         = 0x00100000,
+    GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS             = 0x00200000,
 };
 
 #define MODEL_FLAGS_MASK_FFF0  (\
@@ -4591,13 +4615,18 @@ typedef enum SurfaceInteractMode {
     SURFACE_INTERACT_LAND       = 2,
 } SurfaceInteractMode;
 
+// flags that can be set on colliders
+// passed into collision queries to selectively ignore certain types of objects or colliders
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK           = 0x7FFFFE00, // map data dumper needs this to be first
     COLLIDER_FLAGS_SURFACE_TYPE_MASK    = 0x000000FF,
     COLLIDER_FLAG_SAFE_FLOOR            = 0x00000100,
-    COLLIDER_FLAG_IGNORE_SHELL          = 0x00008000,
-    COLLIDER_FLAG_IGNORE_PLAYER         = 0x00010000,
-    COLLIDER_FLAG_80000                 = 0x00080000, // test version of DOCK walls?
+    COLLIDER_FLAG_IGNORE_SHELL          = 0x00008000, // colliders marked with this flag are not solid for shells
+    COLLIDER_FLAG_IGNORE_PLAYER         = 0x00010000, // colliders marked with this flag are not solid for player or partners
+    COLLIDER_FLAG_IGNORE_NPC            = 0x00020000, // colliders marked with this flag are not solid for npcs or item entities
+    COLLISION_IGNORE_ENTITIES           = 0x00040000, // used for collision queries, not set for colliders
+    COLLIDER_FLAG_DOCK_WALL             = 0x00080000,
+    COLLISION_ONLY_ENTITIES             = 0x00100000, // used for collision queries, not set for colliders
     COLLIDER_FLAG_HAS_MODEL_PARENT      = 0x80000000
 };
 
@@ -4606,15 +4635,6 @@ enum ColliderFlagsModifyMode {
     MODIFY_COLLIDER_FLAGS_CLEAR_BITS     = 1,
     MODIFY_COLLIDER_FLAGS_SET_VALUE      = 2,
     MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
-};
-
-enum CollisionChannels {
-    COLLISION_CHANNEL_8000          = 0x00008000,
-    COLLISION_CHANNEL_10000         = 0x00010000,
-    COLLISION_CHANNEL_20000         = 0x00020000,
-    COLLISION_IGNORE_ENTITIES       = 0x00040000,
-    COLLISION_CHANNEL_80000         = 0x00080000,
-    COLLISION_ONLY_ENTITIES         = 0x00100000,
 };
 
 enum CameraFlags {
@@ -4631,8 +4651,8 @@ enum CameraFlags {
 
 enum CameraMoveFlags {
     CAMERA_MOVE_IGNORE_PLAYER_Y     = 0x00000001,
-    CAMERA_MOVE_FLAG_2              = 0x00000002,
-    CAMERA_MOVE_FLAG_4              = 0x00000004,
+    CAMERA_MOVE_NO_INTERP_Y         = 0x00000002,
+    CAMERA_MOVE_ACCEL_INTERP_Y      = 0x00000004,
 };
 
 enum CameraUpdateType {

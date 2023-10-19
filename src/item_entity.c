@@ -643,7 +643,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             y = item->pos.y + 12.0f;
             z = item->pos.z;
             hitDepth = 1000.0f;
-            npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
+            npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &x, &y, &z, &hitDepth);
             shadow->pos.x = x;
             shadow->pos.y = y;
             shadow->pos.z = z;
@@ -748,7 +748,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     posY = item->pos.y + 12.0f;
     posZ = item->pos.z;
     depth = 1000.0f;
-    npc_raycast_down_sides(COLLISION_CHANNEL_20000, &posX, &posY, &posZ, &depth);
+    npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &posX, &posY, &posZ, &depth);
     shadow->pos.x = posX;
     shadow->pos.y = posY;
     shadow->pos.z = posZ;
@@ -877,7 +877,7 @@ void update_item_entities(void) {
                                 y = item->pos.y + 12.0f;
                                 z = item->pos.z;
                                 hitDepth = 1000.0f;
-                                npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
+                                npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &x, &y, &z, &hitDepth);
 
                                 shadow->pos.x = x;
                                 shadow->pos.y = y;
@@ -1081,7 +1081,7 @@ void draw_item_entities(void) {
 }
 
 void draw_ui_item_entities(void) {
-    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_4000 | GLOBAL_OVERRIDES_8000))) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_PREV_400 | GLOBAL_OVERRIDES_PREV_800))) {
         s32 i;
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
@@ -1810,9 +1810,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                 outDepth = temp + physData->verticalVel;
 
                 if (!physData->useSimplePhysics) {
-                    hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                    hit = npc_raycast_up(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth);
                 } else {
-                    hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                    hit = npc_raycast_up(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth);
                 }
 
                 if (hit && outDepth < temp) {
@@ -1832,9 +1832,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                 outZ = item->pos.z;
 
                 if (!physData->useSimplePhysics) {
-                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
+                    hit = npc_test_move_complex_with_slipping(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 } else {
-                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
+                    hit = npc_test_move_simple_with_slipping(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 }
 
                 if (hit) {
@@ -1863,9 +1863,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                     outZ = item->pos.z;
                     outDepth = -physData->verticalVel + 12.0f;
                     if (!physData->useSimplePhysics) {
-                        hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                        hit = npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth);
                     } else {
-                        hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
+                        hit = npc_raycast_down_around(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
                     }
                 } else {
                     outX = item->pos.x;

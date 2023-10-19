@@ -143,7 +143,7 @@ API_CALLABLE(N(start)) {
         battleStatus->actionQuality = 3;
     }
     actionCommandStatus->state = 10;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     return ApiStatus_DONE2;
 }
 

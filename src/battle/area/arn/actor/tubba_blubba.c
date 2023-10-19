@@ -308,7 +308,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
     EVT_END_IF
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -338,7 +338,7 @@ EvtScript N(EVS_Attack_SlamFist) = {
     EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
         EVT_CALL(SetDamageSource, DMG_SRC_TUBBA_SMASH)
     EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_FIST_POUND, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_FIST_POUND, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 200)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -378,7 +378,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleTubba_Anim0B)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_LARGE_ACTOR_JUMP, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -445,7 +445,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
         EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
     EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_BODY_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_BODY_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 200)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)

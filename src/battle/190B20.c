@@ -587,7 +587,7 @@ s32 func_80263064(Actor* actor, Actor* targetActor, b32 unused) {
         }
 
         actor->targetActorID = target->actorID = targetActor->actorID;
-        actor->targetPartIndex = target->partID = partData->index;
+        actor->targetPartID = target->partID = partData->index;
         target->truePos.x = x;
         target->truePos.y = y;
         target->truePos.z = z;
@@ -1000,7 +1000,7 @@ s32 count_power_plus(s32 damageType) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
         if (gMoveTable[moveID].category == MOVE_TYPE_ATTACK_UP && moveID == MOVE_POWER_PLUS) {
-            if (gBattleStatus.flags1 & BS_FLAGS1_10 || damageType & DAMAGE_TYPE_JUMP) {
+            if (gBattleStatus.flags1 & BS_FLAGS1_INCLUDE_POWER_UPS || damageType & DAMAGE_TYPE_JUMP) {
                 count++;
             }
         }
@@ -2685,7 +2685,7 @@ void clear_part_pal_adjustment(ActorPart* part) {
 }
 
 // TODO: improve match
-void func_80266E40(Actor* actor) {
+void clear_actor_static_pal_adjustments(Actor* actor) {
     ActorPart* part = actor->partsTable;
     s8 e = ACTOR_PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS;
     s8 f = ACTOR_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS;
@@ -2694,10 +2694,11 @@ void func_80266E40(Actor* actor) {
         DecorationTable* decorations = part->decorationTable;
 
         do {
-            if (!(part->flags & (ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_INVISIBLE)) &&
-                (part->idleAnimations != NULL) &&
-                !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS))
-            {
+            if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)
+                && !(part->flags & ACTOR_PART_FLAG_INVISIBLE)
+                && (part->idleAnimations != NULL)
+                && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)
+            ) {
                 if (decorations->paletteAdjustment != e && decorations->paletteAdjustment != f) {
                     decorations->paletteAdjustment = ACTOR_PAL_ADJUST_NONE;
                 }
@@ -2707,19 +2708,19 @@ void func_80266E40(Actor* actor) {
     }
 }
 
-void set_part_pal_effect(ActorPart* part, s32 palEffect) {
+void set_part_glow_pal(ActorPart* part, s32 glowState) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         DecorationTable* decorations = part->decorationTable;
 
-        if (decorations->glowState != palEffect) {
-            decorations->glowState = palEffect;
+        if (decorations->glowState != glowState) {
+            decorations->glowState = glowState;
             decorations->glowUnk1 = 0;
             decorations->glowStateChanged = TRUE;
         }
     }
 }
 
-void set_actor_pal_effect(Actor* actor, s32 palEffect) {
+void set_actor_glow_pal(Actor* actor, s32 glowState) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
@@ -2727,18 +2728,18 @@ void set_actor_pal_effect(Actor* actor, s32 palEffect) {
             && (part->idleAnimations != NULL)
             && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)
         ) {
-            set_part_pal_effect(part, palEffect);
+            set_part_glow_pal(part, glowState);
         }
     }
 }
 
-void clear_part_pal_effect(ActorPart* part) {
+void clear_part_glow_pal(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_NO_DECORATIONS)) {
         part->decorationTable->glowState = GLOW_PAL_OFF;
     }
 }
 
-void clear_actor_pal_effect(Actor* actor) {
+void clear_actor_glow_pal(Actor* actor) {
     ActorPart* part;
 
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {

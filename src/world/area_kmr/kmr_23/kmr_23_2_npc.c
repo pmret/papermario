@@ -389,14 +389,14 @@ API_CALLABLE(N(func_80240CA8_9086D8)) {
 API_CALLABLE(N(ShowMessagesInFrontOfCurtains)) {
     EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
     data->unk1E = TRUE;
-    gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS;
+    gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(ShowMessagesBehindCurtains)) {
     EndChapter* data = (EndChapter*) evt_get_variable(NULL, MV_EndChapterDataPtr);
     data->unk1E = FALSE;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS;
     return ApiStatus_DONE2;
 }
 

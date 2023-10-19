@@ -38,7 +38,7 @@ API_CALLABLE(N(SpawnChillOutFX)) {
 API_CALLABLE(N(CanChillOutHit)) {
     Actor* actor = get_actor(script->owner1.actorID);
     Actor* target = get_actor(actor->targetActorID);
-    ActorPart* part = get_actor_part(target, actor->targetPartIndex);
+    ActorPart* part = get_actor_part(target, actor->targetPartID);
 
     script->varTable[0] = FALSE;
 
@@ -69,7 +69,7 @@ API_CALLABLE(N(CanChillOutHit)) {
 API_CALLABLE(N(InflictChillOutHit)) {
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target = get_actor(enemy->targetActorID);
-    ActorPart* targetPart = get_actor_part(target, enemy->targetPartIndex);
+    ActorPart* targetPart = get_actor_part(target, enemy->targetPartID);
     f32 x, y, z;
 
     if (target->flags & ACTOR_FLAG_TARGET_ONLY) {
@@ -178,7 +178,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_IF_EQ(LVar0, TRUE)
             EVT_CALL(N(InflictChillOutHit))
         EVT_ELSE
-            EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_IMMUNE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
         EVT_END_IF
         EVT_LABEL(1)
         EVT_WAIT(5)

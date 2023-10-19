@@ -83,7 +83,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 18)
     EVT_CALL(GetItemPower, ITEM_PEBBLE, LVar3, LVar4)
     EVT_CALL(ApplyShrinkFromOwner, LVar3)
-    EVT_CALL(ItemDamageEnemy, LVar9, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, LVar3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar9, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, LVar3, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_ADD(LVar0, 60)
     EVT_ADD(LVar1, 0)
     EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 16)

@@ -77,7 +77,7 @@ void N(sync_player_position)(void) {
 void N(init)(Npc* lakilester) {
     lakilester->collisionHeight = 38;
     lakilester->collisionDiameter = 36;
-    lakilester->collisionChannel = COLLISION_CHANNEL_10000;
+    lakilester->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     N(PlayerBounceOffset) = 0;
     N(LockingPlayerInput) = FALSE;
     N(PlayerCollisionDisabled) = FALSE;
@@ -709,7 +709,7 @@ API_CALLABLE(N(UseAbility)) {
                 x = lakilester->moveToPos.x;
                 y = lakilester->moveToPos.y;
                 z = lakilester->moveToPos.z;
-                npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, lakilester->moveSpeed,
+                npc_test_move_simple_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, lakilester->moveSpeed,
                                                     yaw, lakilester->collisionHeight, lakilester->collisionDiameter);
                 lakilester->moveToPos.x = x;
                 lakilester->moveToPos.y = y;

@@ -337,7 +337,7 @@ s32 N(test_ray_to_wall_center)(s32 unused, f32* x, f32* y, f32* z, f32 length, f
     sin_cos_rad(DEG_TO_RAD(*yaw), &sinAngle, &cosAngle);
     cosAngle = -cosAngle;
     totalLength = radius + length;
-    hitResult = test_ray_colliders(COLLISION_CHANNEL_10000, *x, *y, *z, sinAngle, 0.0f, cosAngle,
+    hitResult = test_ray_colliders(COLLIDER_FLAG_IGNORE_PLAYER, *x, *y, *z, sinAngle, 0.0f, cosAngle,
         &hitX, &hitY, &hitZ, &totalLength, &hitNx, &hitNy, &hitNz);
 
     if (hitResult >= 0) {
@@ -451,7 +451,7 @@ API_CALLABLE(N(UseAbility)) {
             set_action_state(ACTION_STATE_RIDE);
             disable_player_static_collisions();
             disable_player_input();
-            sushie->collisionChannel = COLLISION_CHANNEL_80000;
+            sushie->collisionChannel = COLLIDER_FLAG_DOCK_WALL;
             sushie->moveToPos.x = playerStatus->pos.x;
             sushie->moveToPos.y = playerStatus->pos.y;
             sushie->moveToPos.z = playerStatus->pos.z;
@@ -484,7 +484,7 @@ API_CALLABLE(N(UseAbility)) {
                 }
                 break;
             }
-            sushie->collisionChannel = COLLISION_CHANNEL_10000;
+            sushie->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
             sushie->flags |= NPC_FLAG_FLYING;
             sushie->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(sushie);
@@ -742,7 +742,7 @@ EvtScript EVS_WorldSushie_UseAbility = {
 void N(init)(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionDiameter = 36;
-    sushie->collisionChannel = COLLISION_CHANNEL_10000;
+    sushie->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     N(IsRiding) = FALSE;
     N(DiveState) = DIVE_STATE_NONE;
     N(DiveTime) = 0;

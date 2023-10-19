@@ -156,7 +156,7 @@ API_CALLABLE(ActorSpeak) {
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0] = 0;
-        gOverrideFlags |= GLOBAL_OVERRIDES_10;
+        gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
         if (gSpeakingActorTalkAnim >= 0) {
             set_actor_anim_by_ref(actor, part, gSpeakingActorTalkAnim);
         }
@@ -196,7 +196,7 @@ API_CALLABLE(ActorSpeak) {
 
         if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_bar_disabled();
-            gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
             return ApiStatus_DONE1;
         }
     }
@@ -263,7 +263,7 @@ API_CALLABLE(EndActorSpeech) {
 
         if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_bar_disabled();
-            gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
             return ApiStatus_DONE1;
         }
     }

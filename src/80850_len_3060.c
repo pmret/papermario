@@ -63,7 +63,7 @@ void clear_player_data(void) {
     playerData->starPoints = 0;
     playerData->unk_11 = 0;
     playerData->unk_288 = 0;
-    playerData->merleeSpellType = MERLEE_SPELL_0;
+    playerData->merleeSpellType = MERLEE_SPELL_NONE;
     playerData->merleeCastsLeft = 0;
     playerData->merleeTurnCount = -1;
     playerData->maxStarPower = 0;
@@ -108,7 +108,7 @@ void clear_player_data(void) {
     playerData->powerBounces = 0;
     playerData->battlesCount = 0;
     playerData->battlesWon = 0;
-    playerData->unk_2A6 = 0;
+    playerData->fleeAttempts = 0;
     playerData->battlesFled = 0;
     playerData->trainingsDone = 0;
     playerData->walkingStepsTaken = 0;

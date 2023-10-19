@@ -419,7 +419,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_WAIT(2)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FALL_QUICK)
     EVT_END_THREAD
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -453,7 +453,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_IF_EQ(LVarF, 7)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 0, BS_FLAGS1_40)
+                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 0, BS_FLAGS1_NICE_HIT)
             EVT_END_IF
             EVT_ADD(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -568,7 +568,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_END_IF
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LEECH)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_NICE_HIT)
         EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MIN)
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
         EVT_IF_NE(LVar3, 0)

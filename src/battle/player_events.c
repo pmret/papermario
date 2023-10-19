@@ -169,7 +169,7 @@ API_CALLABLE(func_80260E38) {
 }
 
 API_CALLABLE(func_80260E5C) {
-    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
     gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;

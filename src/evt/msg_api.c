@@ -325,9 +325,9 @@ ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (evt_get_variable(script, *args++) == 0) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_10;
+        gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
     }
     return ApiStatus_DONE2;
 }

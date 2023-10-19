@@ -88,7 +88,7 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->thresholdLevel = rand_int(actionCommandStatus->unk_5A);
     actionCommandStatus->unk_5C = 0;
     actionCommandStatus->state = 10;
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
 
     return ApiStatus_DONE2;
 }

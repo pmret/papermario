@@ -655,14 +655,14 @@ void update_camera_zone_interp(Camera* camera) {
         camera->yinterpAlpha = 1.0f;
     }
 
-    if (camera->moveFlags & CAMERA_MOVE_FLAG_4) {
+    if (camera->moveFlags & CAMERA_MOVE_ACCEL_INTERP_Y) {
         camera->yinterpAlpha += 0.3;
         if (camera->yinterpAlpha >= 1.0) {
             camera->yinterpAlpha = 1.0f;
         }
     }
 
-    if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_NO_INTERP_Y)) {
         camera->yinterpCur += (camera->yinterpGoal - camera->yinterpCur) * camera->yinterpAlpha;
     }
 
@@ -904,7 +904,7 @@ void update_camera_zone_interp(Camera* camera) {
     cosAngle = cos_deg(gCurrentCamConfiguration.boomPitch + D_800A08DC);
     sinAngle = sin_deg(gCurrentCamConfiguration.boomPitch + D_800A08DC);
 
-    if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_NO_INTERP_Y)) {
         camera->lookAt_eye.y = gCurrentCamConfiguration.targetPos.y + (gCurrentCamConfiguration.boomLength * sinAngle);
     }
 
@@ -920,7 +920,7 @@ void update_camera_zone_interp(Camera* camera) {
     }
 
     temp_f8_2 = gCurrentCamConfiguration.targetPos.y - camera->lookAt_eye.y;
-    if (!(camera->moveFlags & CAMERA_MOVE_FLAG_2)) {
+    if (!(camera->moveFlags & CAMERA_MOVE_NO_INTERP_Y)) {
         camera->lookAt_obj.y = camera->lookAt_eye.y + ((dist * sinAngle) + (temp_f8_2 * cosAngle));
     }
     temp_f4_4 = (dist * cosAngle) - (temp_f8_2 * sinAngle);

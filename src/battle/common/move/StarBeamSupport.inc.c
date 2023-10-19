@@ -85,7 +85,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
         if (target == NULL) {
             return ApiStatus_DONE2;
         }
-        get_actor_part(target, player->targetPartIndex);
+        get_actor_part(target, player->targetPartID);
         targetPosX = target->curPos.x + target->headOffset.x;
         if (target->flags & ACTOR_FLAG_UPSIDE_DOWN) {
             targetPosY = target->curPos.y + target->headOffset.y - target->size.y;
@@ -349,7 +349,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             if (script->functionTemp[FT_DELAY] == 0) {
                 N(StarBeamStage) = 1;
                 if (!script->functionTemp[FT_IS_PEACH_BEAM] && player->targetListLength == 1) {
-                    if (get_actor_part(get_actor(player->targetActorID), player->targetPartIndex)->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
+                    if (get_actor_part(get_actor(player->targetActorID), player->targetPartID)->eventFlags & ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) {
                         script->functionTemp[FT_STATE] = PEACH_STAR_BEAM_IMMUNE;
                     } else {
                         script->functionTemp[FT_DELAY] = 15;

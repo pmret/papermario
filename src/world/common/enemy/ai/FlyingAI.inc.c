@@ -188,7 +188,7 @@ void N(FlyingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->curAnim = *enemy->animList;
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->functionTemp[0] = 3;
 }
 

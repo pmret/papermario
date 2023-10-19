@@ -341,7 +341,7 @@ EvtScript N(EVS_Attack_Leech) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
     EVT_WAIT(5)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -404,7 +404,7 @@ EvtScript N(EVS_Attack_Leech) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Jump)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_IF_EQ(LFlag0, TRUE)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar1)
@@ -431,7 +431,7 @@ EvtScript N(EVS_Attack_Leech) = {
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_WAIT(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_NICE_HIT)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -568,7 +568,7 @@ EvtScript N(EVS_Attack_Leech) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_40)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, DMG_LEECH, BS_FLAGS1_NICE_HIT)
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
             EVT_IF_NE(LVar3, 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)

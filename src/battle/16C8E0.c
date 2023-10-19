@@ -107,7 +107,7 @@ void tattle_cam_post_render(Camera*);
 void btl_draw_enemy_health_bars(void);
 void btl_update_starpoints_display(void);
 
-void get_dpad_input_radial(f32* angle, f32* magnitude) {
+void get_stick_input_radial(f32* angle, f32* magnitude) {
     BattleStatus* battleStatus = &gBattleStatus;
     f32 maxMagnitude = 60.0f;
     f32 stickX = battleStatus->stickX;
@@ -249,8 +249,8 @@ void btl_update(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* partner = battleStatus->partnerActor;
-    f32 dpadAngle;
-    f32 dpadMagnitude;
+    f32 outAngle;
+    f32 outMagnitude;
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
@@ -273,9 +273,9 @@ void btl_update(void) {
         }
     }
 
-    get_dpad_input_radial(&dpadAngle, &dpadMagnitude);
-    battleStatus->dpadX = dpadAngle;
-    battleStatus->dpadY = dpadMagnitude;
+    get_stick_input_radial(&outAngle, &outMagnitude);
+    battleStatus->stickAngle = outAngle;
+    battleStatus->stickMagnitude = outMagnitude;
     battleStatus->pushInputBuffer[battleStatus->inputBufferPos] = battleStatus->curButtonsPressed;
     battleStatus->holdInputBuffer[battleStatus->inputBufferPos] = battleStatus->curButtonsDown;
 
@@ -1124,7 +1124,7 @@ void btl_delete_actor(Actor* actor) {
     if (actor->takeTurnScript != NULL) {
         kill_script_by_ID(actor->takeTurnScriptID);
     }
-    set_actor_pal_effect(actor, GLOW_PAL_OFF);
+    set_actor_glow_pal(actor, GLOW_PAL_OFF);
 
     part = actor->partsTable;
 

@@ -52,7 +52,7 @@ API_CALLABLE(N(init)) {
     hud_element_set_render_depth(hudElement, 0);
     hud_element_set_flags(hudElement, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
 
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
 
     return ApiStatus_DONE2;
 }
@@ -73,7 +73,7 @@ API_CALLABLE(N(start)) {
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
 
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     func_8024FAFC();
     actionCommandStatus->state = 10;
 

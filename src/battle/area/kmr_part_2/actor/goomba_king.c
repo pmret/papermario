@@ -426,7 +426,7 @@ EvtScript N(EVS_Attack_SpinSwipe) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -458,7 +458,7 @@ EvtScript N(EVS_Attack_SpinSwipe) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, 0, 0, 0, DMG_SPIN, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, 0, 0, 0, DMG_SPIN, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -505,7 +505,7 @@ EvtScript N(EVS_Attack_GroundStomp) = {
         EVT_PLAY_EFFECT(EFFECT_DROP_LEAVES, 0, -15, 135, 0, 85, 0)
         EVT_PLAY_EFFECT(EFFECT_DROP_LEAVES, 0, 100, 103, 0, 70, 0)
     EVT_END_THREAD
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -641,7 +641,7 @@ EvtScript N(EVS_Attack_GroundStomp) = {
     EVT_WAIT(24)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, DMG_STOMP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, DMG_STOMP, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(HIT_RESULT_10)
             EVT_RETURN

@@ -582,7 +582,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 60)
                     EVT_WAIT(60)
                     EVT_THREAD
-                        EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, BS_FLAGS1_10)
+                        EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, BS_FLAGS1_INCLUDE_POWER_UPS)
                         EVT_SWITCH(LVar0)
                             EVT_CASE_EQ(HIT_RESULT_LUCKY)
                                 EVT_WAIT(20)
@@ -602,7 +602,7 @@ EvtScript N(HandleCommand) = {
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                         EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar1)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_TRIGGER_EVENTS)
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_KOOPA_LAUNCH_SHELL)
@@ -776,7 +776,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 30)
                     EVT_WAIT(30)
                     EVT_THREAD
-                        EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, BS_FLAGS1_10)
+                        EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, BS_FLAGS1_INCLUDE_POWER_UPS)
                         EVT_SWITCH(LVar0)
                             EVT_CASE_EQ(HIT_RESULT_LUCKY)
                                 EVT_WAIT(20)
@@ -794,7 +794,7 @@ EvtScript N(HandleCommand) = {
                         EVT_END_IF
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_KOOPA_LAUNCH_SHELL)

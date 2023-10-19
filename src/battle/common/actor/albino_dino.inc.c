@@ -272,7 +272,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_WAIT(20)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -317,7 +317,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     // invalid status field has 24% chance, but no status and doesn't have STATUS_FLAG_80000000 set
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

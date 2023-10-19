@@ -165,7 +165,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->renderYaw = 0.0f;
     npc->imgfxType = IMGFX_CLEAR;
     npc->imgfxFlags = 0;
-    npc->collisionChannel = COLLISION_CHANNEL_20000;
+    npc->collisionChannel = COLLIDER_FLAG_IGNORE_NPC;
     npc->isFacingAway = FALSE;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
@@ -775,7 +775,7 @@ f32 npc_get_render_yaw(Npc* npc) {
     f32 yaw;
     s32 direction;
 
-    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_8000 | GLOBAL_OVERRIDES_4000))) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_PREV_800 | GLOBAL_OVERRIDES_PREV_400))) {
         cameraYaw = camera->curYaw;
         camRelativeYaw = get_clamped_angle_diff(cameraYaw, npc->yaw);
 
@@ -2117,7 +2117,7 @@ s32 npc_get_collider_below(Npc* npc) {
     x = npc->pos.x;
     z = npc->pos.z;
 
-    if (npc_raycast_down_sides(COLLISION_CHANNEL_8000 | COLLISION_CHANNEL_10000 | COLLISION_CHANNEL_20000, &x, &y, &z, &yaw)) {
+    if (npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_SHELL | COLLIDER_FLAG_IGNORE_PLAYER | COLLIDER_FLAG_IGNORE_NPC, &x, &y, &z, &yaw)) {
         if (yaw <= 16.0f) {
             return NpcHitQueryColliderID;
         }
@@ -2209,7 +2209,7 @@ void npc_set_imgfx_params(Npc* npc, s32 imgfxType, s32 arg2, s32 arg3, s32 arg4,
 void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     PartnerStatus* temp = &gPartnerStatus;
 
-    if ((npc->flags & (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_INVISIBLE)) == NPC_FLAG_TOUCHES_GROUND) {
+    if (!(npc->flags & NPC_FLAG_INVISIBLE) && (npc->flags & NPC_FLAG_TOUCHES_GROUND)) {
         if (npc->moveSpeed != 0.0f) {
             s32 surfaceType = get_collider_flags((u16)npc->curFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {

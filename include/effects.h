@@ -2313,7 +2313,7 @@ typedef struct BreakingJunkFXData {
 enum {
     FX_BUFF_DATA_WATER_BLOCK    = 0,
     FX_BUFF_DATA_CLOUD_NINE     = 1,
-    FX_BUFF_DATA_TURBO_CHARGE   = 2
+    FX_BUFF_DATA_TURBO_CHARGE   = 2,
 };
 
 typedef struct BuffData {

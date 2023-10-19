@@ -380,7 +380,7 @@ void btl_popup_messages_update(void);
 void btl_popup_messages_draw_world_geometry(void);
 void func_80255FD8(void);
 
-void set_actor_pal_effect(Actor* actor, s32 arg1);
+void set_actor_glow_pal(Actor* actor, s32 arg1);
 
 void btl_set_popup_duration(s32 duration);
 void switch_to_partner(s32 arg0);
@@ -795,8 +795,8 @@ void basic_ai_loiter_init(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void PatrolAI_LoiterInit(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory);
 
 s32 func_80263230(Actor*, Actor*);
-void set_part_pal_effect(ActorPart*, s32);
-void func_80266E40(Actor*);
+void set_part_glow_pal(ActorPart*, s32);
+void clear_actor_static_pal_adjustments(Actor*);
 void set_actor_flash_mode(Actor* actor, s32 arg1);
 void remove_player_buffs(s32);
 s32 is_actor_health_bar_visible(Actor*);

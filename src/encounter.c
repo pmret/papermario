@@ -655,14 +655,15 @@ void update_encounters_neutral(void) {
                 }
             }
 
-            if (currentEncounter->battleTriggerCooldown != 0 ||
-                gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH ||
-                (playerStatus->flags & PS_FLAG_ARMS_RAISED) ||
-                (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
-                gPartnerStatus.actingPartner == PARTNER_BOW ||
-                (enemy->flags & ENEMY_FLAG_PASSIVE) ||
-                (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800)) ||
-                is_picking_up_item()) {
+            if (currentEncounter->battleTriggerCooldown != 0
+                || gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH
+                || (playerStatus->flags & PS_FLAG_ARMS_RAISED)
+                || (gOverrideFlags & GLOBAL_OVERRIDES_40)
+                || gPartnerStatus.actingPartner == PARTNER_BOW
+                || (enemy->flags & ENEMY_FLAG_PASSIVE)
+                || (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800))
+                || is_picking_up_item()
+            ) {
                 continue;
             }
             do {
@@ -732,11 +733,11 @@ void update_encounters_neutral(void) {
                     testY = npcY;
                     testZ = npcZ;
 
-                    if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+                    if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                         testX = playerX;
                         testY = playerY;
                         testZ = playerZ;
-                        if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                             break;
                         }
                     }
@@ -795,11 +796,11 @@ void update_encounters_neutral(void) {
                         testX = npcX;
                         testY = npcY;
                         testZ = npcZ;
-                        if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                             testX = playerX;
                             testY = playerY;
                             testZ = playerZ;
-                            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                                 break;
                             }
                         }
@@ -880,11 +881,11 @@ void update_encounters_neutral(void) {
             testX = npcX;
             testY = npcY;
             testZ = npcZ;
-            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                 testX = playerX;
                 testY = playerY;
                 testZ = playerZ;
-                if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                     continue;
                 }
             }
