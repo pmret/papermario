@@ -192,7 +192,7 @@ void btl_state_update_normal_start(void) {
     Battle* battle;
     Stage* stage;
     s32 size;
-    UiStatus* uiStatus;
+    StatusBar* statusBar;
     void* compressedAsset;
     ModelNode* rootModel;
     s32 texturesOffset;
@@ -314,7 +314,7 @@ void btl_state_update_normal_start(void) {
             BattleScreenFadeAmt = 255;
             battleStatus->inputBitmask = 0xFFFFF & ~(BUTTON_START | 0xC0);
             battleStatus->buffEffect = fx_partner_buff(0, 0.0f, 0.0f, 0.0f, 0.0f, 0);
-            func_800E9810();
+            setup_status_bar_for_battle();
             gCurrentCameraID = CAM_BATTLE;
             script = start_script(&EVS_OnBattleInit, EVT_PRIORITY_A, 0);
             battleStatus->camMovementScript = script;
@@ -322,7 +322,7 @@ void btl_state_update_normal_start(void) {
             gBattleSubState = BTL_SUBSTATE_NORMAL_START_CREATE_ENEMIES;
             break;
         case BTL_SUBSTATE_NORMAL_START_CREATE_ENEMIES:
-            uiStatus = &gUIStatus;
+            statusBar = &gStatusBar;
             if (does_script_exist(battleStatus->camMovementScriptID)) {
                 break;
             }
@@ -333,7 +333,7 @@ void btl_state_update_normal_start(void) {
                 battleStatus->controlScriptID = script->id;
             }
 
-            uiStatus->hidden = FALSE;
+            statusBar->hidden = FALSE;
             gBattleStatus.flags1 |= BS_FLAGS1_ACTORS_VISIBLE;
 
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
@@ -360,8 +360,8 @@ void btl_state_update_normal_start(void) {
                 actor->instigatorValue = 0;
                 if (i == 0) {
                     actor->instigatorValue = currentEncounter->instigatorValue;
-                    if (currentEncounter->dizzyAttackStatus == STATUS_KEY_DIZZY) {
-                        inflict_status_set_duration(actor, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
+                    if (currentEncounter->dizzyAttack.status == STATUS_KEY_DIZZY) {
+                        inflict_status_set_duration(actor, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY, currentEncounter->dizzyAttack.duration);
                     }
                 }
             }
@@ -375,8 +375,8 @@ void btl_state_update_normal_start(void) {
                         actor->instigatorValue = 0;
                         if (i == 0) {
                             actor->instigatorValue = 0;
-                            if (currentEncounter->dizzyAttackStatus == STATUS_KEY_DIZZY) {
-                                inflict_status_set_duration(actor, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
+                            if (currentEncounter->dizzyAttack.status == STATUS_KEY_DIZZY) {
+                                inflict_status_set_duration(actor, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY, currentEncounter->dizzyAttack.duration);
                             }
                         }
 
@@ -1668,9 +1668,9 @@ void btl_state_update_end_turn(void) {
 
         btl_set_player_idle_anims();
         gBattleStatus.flags1 &= ~BS_FLAGS1_PLAYER_DEFENDING;
-        playerData->specialBarsFilled += 32;
-        if (playerData->specialBarsFilled > playerData->maxStarPower * 256) {
-            playerData->specialBarsFilled = playerData->maxStarPower * 256;
+        playerData->starPower += SP_PER_SEG;
+        if (playerData->starPower > playerData->maxStarPower * SP_PER_BAR) {
+            playerData->starPower = playerData->maxStarPower * SP_PER_BAR;
         }
 
         for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
@@ -2277,7 +2277,7 @@ void btl_state_update_run_away(void) {
                 gBattleSubState = BTL_SUBSTATE_RUN_AWAY_EXEC_POST_FAILURE;
             } else {
                 currentEncounter->battleOutcome = OUTCOME_PLAYER_FLED;
-                if (is_ability_active(ABILITY_RUNAWAY_PAY) == 0) {
+                if (!is_ability_active(ABILITY_RUNAWAY_PAY)) {
                     gBattleSubState = BTL_SUBSTATE_RUN_AWAY_DONE;
                 } else {
                     status_bar_start_blinking_starpoints();
@@ -2577,13 +2577,13 @@ void btl_state_update_change_partner(void) {
             }
             gBattleStatus.flags2 &= ~BS_FLAGS2_OVERRIDE_INACTIVE_PARTNER;
             if (!(gBattleStatus.flags1 & BS_FLAGS1_PARTNER_ACTING)) {
-                if (player_team_is_ability_active(player, ABILITY_QUICK_CHANGE) != FALSE) {
+                if (player_team_is_ability_active(player, ABILITY_QUICK_CHANGE)) {
                     btl_set_state(BATTLE_STATE_PREPARE_MENU);
                 } else {
                     btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
                 }
             } else {
-                if (player_team_is_ability_active(player, ABILITY_QUICK_CHANGE) == FALSE) {
+                if (!player_team_is_ability_active(player, ABILITY_QUICK_CHANGE)) {
                     btl_set_state(BATTLE_STATE_END_PARTNER_TURN);
                 } else {
                     btl_set_state(BATTLE_STATE_PREPARE_MENU);

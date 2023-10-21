@@ -203,12 +203,12 @@ void setup_demo_player(void) {
         playerData->invItems[i] = ITEM_NONE;
     }
 
-    playerData->unk_288 = 0;
+    playerData->unused_288 = 0;
     playerData->merleeSpellType = MERLEE_SPELL_NONE;
     playerData->merleeCastsLeft = 0;
     playerData->merleeTurnCount = 0;
     playerData->maxStarPower = 0;
-    playerData->specialBarsFilled = 0;
+    playerData->starPower = 0;
     playerData->starBeamLevel = 0;
 }
 

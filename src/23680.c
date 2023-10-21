@@ -141,7 +141,7 @@ void spawn_drops(Enemy* enemy) {
         }
     }
 
-    if (is_ability_active(ABILITY_HEART_FINDER) != 0) {
+    if (is_ability_active(ABILITY_HEART_FINDER)) {
         dropCount += 1 + rand_int(2);
     }
     if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
@@ -195,7 +195,7 @@ void spawn_drops(Enemy* enemy) {
         }
     }
 
-    if (is_ability_active(ABILITY_FLOWER_FINDER) != 0) {
+    if (is_ability_active(ABILITY_FLOWER_FINDER)) {
         dropCount += 1 + rand_int(2);
     }
     if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
@@ -253,7 +253,7 @@ void spawn_drops(Enemy* enemy) {
     }
     dropCount = dropCount + encounter->coinsEarned;
 
-    if (is_ability_active(ABILITY_PAY_OFF) != 0) {
+    if (is_ability_active(ABILITY_PAY_OFF)) {
         dropCount += encounter->damageTaken / 2;
         encounter->damageTaken = 0;
     }
@@ -261,7 +261,7 @@ void spawn_drops(Enemy* enemy) {
         encounter->hasMerleeCoinBonus = FALSE;
         dropCount *= 3;
     }
-    if (is_ability_active(ABILITY_MONEY_MONEY) != 0) {
+    if (is_ability_active(ABILITY_MONEY_MONEY)) {
         dropCount *= 2;
     }
     if (dropCount > 20) {

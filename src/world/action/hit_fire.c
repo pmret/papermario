@@ -30,7 +30,7 @@ void action_update_hit_fire(void) {
         ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z);
         playerStatus->curSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
         subtract_hp(1);
-        open_status_bar_long();
+        open_status_bar_slowly();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 

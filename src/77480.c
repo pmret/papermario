@@ -56,7 +56,7 @@ void render_conversation_prompt(void);
 void clear_conversation_prompt(void);
 void check_for_interactables(void);
 void render_interact_prompt(void);
-void func_800E0B14(void);
+void clear_interact_prompt(void);
 void update_partner_timers(void);
 void player_update_sprite(void);
 s32 get_player_back_anim(s32 arg0);
@@ -792,8 +792,8 @@ void player_reset_data(void) {
     reset_player_status();
     playerStatus->shadowID = create_shadow_type(SHADOW_VARYING_CIRCLE, playerStatus->pos.x, playerStatus->pos.y,
                              playerStatus->pos.z);
-    func_800E6B68();
-    func_800E0B14();
+    clear_world_menus();
+    clear_interact_prompt();
     clear_conversation_prompt();
     clear_pulse_stone_icon();
     clear_ispy_icon();
@@ -909,7 +909,7 @@ void update_player_blink(void) {
 
     if (playerStatus->blinkTimer > 0) {
         playerStatus->blinkTimer--;
-        alpha = &playerStatus->alpha1;
+        alpha = &playerStatus->curAlpha;
         if (!(gGameStatusPtr->frameCounter & 1)) {
             if (outtaSight) {
                 phi_v1 = 192;
@@ -923,10 +923,10 @@ void update_player_blink(void) {
 
         if (!playerStatus->blinkTimer) {
             if (outtaSight) {
-                playerStatus->alpha1 = 128;
+                playerStatus->curAlpha = 128;
                 playerStatus->flags |= PS_FLAG_HAZARD_INVINCIBILITY;
             } else {
-                playerStatus->alpha1 = 255;
+                playerStatus->curAlpha = 255;
                 playerStatus->flags &= ~PS_FLAG_HAZARD_INVINCIBILITY;
             }
         } else {
@@ -1307,7 +1307,7 @@ void render_interact_prompt(void) {
     }
 }
 
-void func_800E0B14(void) {
+void clear_interact_prompt(void) {
     InteractNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAG_INTERACT_PROMPT_AVAILABLE;
 }
@@ -1492,8 +1492,8 @@ void render_player_model(void) {
         get_screen_coords(gCurrentCamID, playerStatus->pos.x, playerStatus->pos.y,
                           playerStatus->pos.z, &x, &y, &z);
         if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
-            if (playerStatus->alpha1 != playerStatus->alpha2) {
-                if (playerStatus->alpha1 < 254) {
+            if (playerStatus->curAlpha != playerStatus->prevAlpha) {
+                if (playerStatus->curAlpha < 254) {
                     if (!(playerStatus->animFlags & PA_FLAG_MAP_HAS_SWITCH)) {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
                     } else {
@@ -1501,7 +1501,7 @@ void render_player_model(void) {
                     }
 
                     playerStatus->renderMode = renderModeTemp;
-                    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
+                    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->curAlpha, 0);
 
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
@@ -1509,11 +1509,11 @@ void render_player_model(void) {
                 }
             }
 
-            playerStatus->alpha2 = playerStatus->alpha1;
+            playerStatus->prevAlpha = playerStatus->curAlpha;
 
         } else {
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-            playerStatus->alpha2 = 0;
+            playerStatus->prevAlpha = 0;
         }
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
@@ -1728,7 +1728,7 @@ void update_player_shadow(void) {
     }
 
     shadow->pos.y = y;
-    shadow->alpha = (f64)playerStatus->alpha1 / 2;
+    shadow->alpha = (f64)playerStatus->curAlpha / 2;
 
     if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)) {
         set_standard_shadow_scale(shadow, shadowScale);

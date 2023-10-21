@@ -38,7 +38,7 @@ void N(func_802400D0_BC7F30)(Npc* npc) {
         npc_set_imgfx_params(npc, IMGFX_CLEAR, 0, 0, 0, 0, npc->imgfxFlags);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        npc_set_imgfx_params(npc, IMGFX_SET_ALPHA, gPlayerStatusPtr->alpha1, 255, 0, 0, npc->imgfxFlags);
+        npc_set_imgfx_params(npc, IMGFX_SET_ALPHA, gPlayerStatusPtr->curAlpha, 255, 0, 0, npc->imgfxFlags);
         npc->imgfxArg1 = 255;
     }
 }

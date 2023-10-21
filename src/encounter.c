@@ -172,7 +172,7 @@ SHIFT_BSS s32 gEncounterState;
 SHIFT_BSS s32 gEncounterSubState;
 SHIFT_BSS EncounterStatus gCurrentEncounter;
 SHIFT_BSS s8 D_8009A63C;
-SHIFT_BSS s8 D_8009A654;
+SHIFT_BSS s8 HasPreBattleSongPushed;
 SHIFT_BSS s16 gFirstStrikeMessagePos;
 SHIFT_BSS s8 D_8009A670;
 SHIFT_BSS s32 D_8009A678;
@@ -185,7 +185,7 @@ SHIFT_BSS EffectInstance* WorldMerleeOrbEffect;
 SHIFT_BSS EffectInstance* WorldMerleeWaveEffect;
 
 void set_battle_formation(Battle*);
-void func_800E97E4(void);
+void setup_status_bar_for_world(void);
 void partner_handle_after_battle(void);
 s32 get_coin_drop_amount(Enemy* enemy);
 
@@ -1263,7 +1263,7 @@ void update_encounters_pre_battle(void) {
             currentEncounter->unk_94 = 1;
             currentEncounter->fadeOutAccel = 1;
             currentEncounter->unk_08 = -1;
-            D_8009A654 = FALSE;
+            HasPreBattleSongPushed = FALSE;
             D_80077C40 = 0;
             suspend_all_group(EVT_GROUP_10);
 
@@ -1355,7 +1355,7 @@ void update_encounters_pre_battle(void) {
                 bgm_set_battle_song(currentEncounter->songID, FIRST_STRIKE_NONE);
             }
             bgm_push_battle_song();
-            D_8009A654 = TRUE;
+            HasPreBattleSongPushed = TRUE;
             currentEncounter->battleStartCountdown = 10;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_LOAD_BATTLE;
         case ENCOUNTER_SUBSTATE_PRE_BATTLE_LOAD_BATTLE:
@@ -1379,15 +1379,15 @@ void update_encounters_pre_battle(void) {
                 }
 
                 partner_handle_before_battle();
-                currentEncounter->dizzyAttackStatus = 0;
-                currentEncounter->dizzyAttackDuration = 0;
+                currentEncounter->dizzyAttack.status = 0;
+                currentEncounter->dizzyAttack.duration = 0;
 
                 enemy = currentEncounter->curEnemy;
                 currentEncounter->instigatorValue = enemy->instigatorValue;
 
                 if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
-                    currentEncounter->dizzyAttackStatus = 4;
-                    currentEncounter->dizzyAttackDuration = 3;
+                    currentEncounter->dizzyAttack.status = 4;
+                    currentEncounter->dizzyAttack.duration = 3;
                 }
 
                 sfx_stop_sound(SOUND_SPIN);
@@ -1586,16 +1586,16 @@ void update_encounters_post_battle(void) {
             currentEncounter->unk_08 = 0;
             gPlayerStatus.blinkTimer = 0;
             currentEncounter->scriptedBattle = FALSE;
-            func_800E97E4();
-            currentEncounter->dizzyAttackStatus = 0;
-            currentEncounter->unk_A4 = 0;
-            currentEncounter->unk_A8 = 0;
-            currentEncounter->unk_AC = 0;
-            currentEncounter->dizzyAttackDuration = 0;
-            currentEncounter->unk_A6 = 0;
-            currentEncounter->unk_AA = 0;
-            currentEncounter->unk_AE = 0;
-            if (D_8009A654 == TRUE) {
+            setup_status_bar_for_world();
+            currentEncounter->dizzyAttack.status = 0;
+            currentEncounter->unusedAttack1.status = 0;
+            currentEncounter->unusedAttack2.status = 0;
+            currentEncounter->unusedAttack3.status = 0;
+            currentEncounter->dizzyAttack.duration = 0;
+            currentEncounter->unusedAttack1.duration = 0;
+            currentEncounter->unusedAttack2.duration = 0;
+            currentEncounter->unusedAttack3.duration = 0;
+            if (HasPreBattleSongPushed == TRUE) {
                 bgm_pop_battle_song();
             }
             currentEncounter->fadeOutAccel = 1;

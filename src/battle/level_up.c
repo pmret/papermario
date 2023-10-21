@@ -641,7 +641,7 @@ void btl_state_update_celebration(void) {
                 y = player->curPos.y + 25.0f;
                 z = player->curPos.z;
                 fx_recover(1, x, y, z, playerData->curFP);
-                playerData->specialBarsFilled = playerData->maxStarPower * 256;
+                playerData->starPower = playerData->maxStarPower * SP_PER_BAR;
             }
 
             if (CelebrateSubstateTime != 0) {

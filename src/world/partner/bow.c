@@ -282,7 +282,7 @@ API_CALLABLE(N(UseAbility)) {
                 bow->duration--;
                 if (bow->duration == 0) {
                     bow->yaw = playerStatus->targetYaw;
-                    npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
+                    npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->curAlpha, 0, 0, 0, 0);
                     suggest_player_anim_always_forward(ANIM_Mario1_Crouch);
                     sfx_play_sound_at_npc(SOUND_BOW_VANISH, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                     script->USE_STATE = OUTTA_SIGHT_VANISH;
@@ -294,17 +294,17 @@ API_CALLABLE(N(UseAbility)) {
 
         case OUTTA_SIGHT_VANISH:
             if (collisionStatus->curFloor >= 0) {
-                playerStatus->alpha1 -= 8;
-                if (playerStatus->alpha1 <= 128) {
-                    playerStatus->alpha1 = 128;
+                playerStatus->curAlpha -= 8;
+                if (playerStatus->curAlpha <= 128) {
+                    playerStatus->curAlpha = 128;
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
                     script->USE_STATE++; // OUTTA_SIGHT_IDLE
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                     bow->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 }
 
-                get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
-                npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
+                get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->curAlpha >> 1;
+                npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->curAlpha, 0, 0, 0, 0);
                 bow->pos.x = playerStatus->pos.x - N(OuttaSightPosX);
                 bow->pos.y = playerStatus->pos.y - N(OuttaSightPosY);
                 bow->pos.z = playerStatus->pos.z - N(OuttaSightPosZ);
@@ -367,10 +367,10 @@ void N(end_outta_sight_cleanup)(Npc* bow) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 actionState;
 
-    playerStatus->alpha1 = 255;
+    playerStatus->curAlpha = 255;
     npc_set_imgfx_params(bow, IMGFX_CLEAR, 0, 0, 0, 0, 0);
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 / 2;
+    get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->curAlpha / 2;
 
     if (N(LockingPlayerInput)) {
         enable_player_input();

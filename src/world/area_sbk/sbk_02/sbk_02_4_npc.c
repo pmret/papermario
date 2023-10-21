@@ -29,7 +29,7 @@ EvtScript N(EVS_NpcIdle_Mamar) = {
 };
 
 API_CALLABLE(N(UpgradeStarPowerCh2)) {
-    set_max_SP(2);
+    set_max_star_power(2);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
     sync_status_bar();

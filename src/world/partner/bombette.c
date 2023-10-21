@@ -200,7 +200,7 @@ s32 N(can_use_ability)(Npc* npc) {
     return TRUE;
 }
 
-s32 N(can_player_pause)(Npc* npc) {
+s32 N(can_open_menus)(Npc* npc) {
     return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 

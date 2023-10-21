@@ -95,16 +95,16 @@ void N(worker_reflect_player_wall)(void) {
         spr_update_player_sprite(PLAYER_SPRITE_AUX2, anim, 1.0f);
 
         if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
-            if (playerStatus->alpha1 != D_802D9D70) {
-                if (playerStatus->alpha1 < 254) {
+            if (playerStatus->curAlpha != D_802D9D70) {
+                if (playerStatus->curAlpha < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    set_player_imgfx_comp(PLAYER_SPRITE_AUX2, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
+                    set_player_imgfx_comp(PLAYER_SPRITE_AUX2, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->curAlpha, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
                     set_player_imgfx_comp(PLAYER_SPRITE_AUX2, -1, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
-            D_802D9D70 = playerStatus->alpha1;
+            D_802D9D70 = playerStatus->curAlpha;
         } else {
             renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
             D_802D9D70 = 0;
@@ -170,16 +170,16 @@ void N(worker_reflect_player_floor)(void) {
         spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation, 1.0f);
 
         if (!(playerStatus->flags & PS_FLAG_SPINNING)) {
-            if (playerStatus->alpha1 != D_802D9D71) {
-                if (playerStatus->alpha1 < 254) {
+            if (playerStatus->curAlpha != D_802D9D71) {
+                if (playerStatus->curAlpha < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    set_player_imgfx_comp(PLAYER_SPRITE_AUX1, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
+                    set_player_imgfx_comp(PLAYER_SPRITE_AUX1, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->curAlpha, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
                     set_player_imgfx_comp(PLAYER_SPRITE_AUX1, -1, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
-            D_802D9D71 = playerStatus->alpha1;
+            D_802D9D71 = playerStatus->curAlpha;
         } else {
             renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
             D_802D9D71 = 0;

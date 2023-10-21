@@ -25,7 +25,7 @@ enum {
 API_CALLABLE(N(UpgradeStarPowerCh5)) {
     PlayerData* playerData = &gPlayerData;
 
-    set_max_SP(5);
+    set_max_star_power(5);
     playerData->curHP = playerData->curMaxHP;
     playerData->curFP = playerData->curMaxFP;
     sync_status_bar();

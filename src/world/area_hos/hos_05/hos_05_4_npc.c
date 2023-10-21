@@ -6,7 +6,7 @@ API_CALLABLE(N(UnlockStarBeam)) {
     gPlayerData.starBeamLevel = 1;
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    gPlayerData.specialBarsFilled = gPlayerData.maxStarPower * 256;
+    gPlayerData.starPower = gPlayerData.maxStarPower * SP_PER_BAR;
     sync_status_bar();
     return ApiStatus_DONE2;
 }

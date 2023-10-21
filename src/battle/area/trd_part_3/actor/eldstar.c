@@ -179,7 +179,7 @@ API_CALLABLE(N(func_802181B4_4CF364)) {
 API_CALLABLE(N(AddStarPower)) {
     PlayerData* playerData = &gPlayerData;
 
-    playerData->specialBarsFilled += 32;
+    playerData->starPower += SP_PER_SEG;
 
     return ApiStatus_DONE2;
 }

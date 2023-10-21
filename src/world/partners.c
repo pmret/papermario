@@ -155,7 +155,7 @@ extern Addr world_partner_twink_VRAM;
 #endif
 
 s32 partner_is_idle(Npc* partner);
-s32 world_partner_can_player_pause_default(Npc* partner);
+s32 world_partner_can_open_menus_default(Npc* partner);
 void _use_partner_ability(void);
 void partner_flying_follow_player(Npc*);
 void partner_move_to_goal(Npc*, s32);
@@ -225,8 +225,8 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldGoombario_UseAbility,
         .putAway = &EVS_WorldGoombario_PutAway,
         .idle = ANIM_WorldGoombario_Idle,
-        .canUseAbility = world_goombario_can_pause,
-        .canPlayerPause = world_goombario_can_pause,
+        .canUseAbility = world_goombario_can_open_menus,
+        .canPlayerOpenMenus = world_goombario_can_open_menus,
         .preBattle = world_goombario_pre_battle,
     },
     [PARTNER_KOOPER] {
@@ -242,7 +242,7 @@ WorldPartner wPartners[] = {
         .idle = ANIM_WorldKooper_Idle,
         .testFirstStrike = world_kooper_test_first_strike,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
         .preBattle = world_kooper_pre_battle,
         .postBattle = world_kooper_post_battle,
     },
@@ -259,7 +259,7 @@ WorldPartner wPartners[] = {
         .idle = ANIM_WorldBombette_Idle,
         .testFirstStrike = world_bombette_test_first_strike,
         .canUseAbility = world_bombette_can_use_ability,
-        .canPlayerPause = world_bombette_can_player_pause,
+        .canPlayerOpenMenus = world_bombette_can_open_menus,
         .preBattle = world_bombette_pre_battle,
     },
     [PARTNER_PARAKARRY] {
@@ -273,7 +273,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldParakarry_UseAbility,
         .putAway = &EVS_WorldParakarry_PutAway,
         .idle = ANIM_WorldParakarry_Idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
         .preBattle = world_parakarry_pre_battle,
         .postBattle = world_parakarry_post_battle,
     },
@@ -300,7 +300,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldWatt_UseAbility,
         .putAway = &EVS_WorldWatt_PutAway,
         .idle = ANIM_WorldWatt_Idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
         .onEnterMap = &EVS_WorldWatt_EnterMap,
@@ -316,7 +316,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldSushie_UseAbility,
         .putAway = &EVS_WorldSushie_PutAway,
         .idle = ANIM_WorldSushie_Idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
         .onEnterMap = &EVS_WorldSushie_EnterMap,
@@ -332,7 +332,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldLakilester_UseAbility,
         .putAway = &EVS_WorldLakilester_PutAway,
         .idle = ANIM_WorldLakilester_Idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
         .onEnterMap = &EVS_WorldLakilester_EnterMap,
@@ -349,7 +349,7 @@ WorldPartner wPartners[] = {
         .putAway = &EVS_WorldBow_PutAway,
         .idle = ANIM_WorldBow_Idle,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_bow_pre_battle,
     },
     [PARTNER_GOOMBARIA] {
@@ -364,7 +364,7 @@ WorldPartner wPartners[] = {
         .putAway = &EVS_WorldGoombaria_PutAway,
         .idle = ANIM_Goombaria_Idle,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
     },
     [PARTNER_TWINK] {
         .dmaStart = &world_partner_twink_ROM_START,
@@ -378,7 +378,7 @@ WorldPartner wPartners[] = {
         .putAway = &EVS_WorldTwink_PutAway,
         .idle = ANIM_Twink_Idle,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
     },
 };
 
@@ -567,7 +567,7 @@ s32 partner_is_idle(Npc* partner) {
     return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
-s32 world_partner_can_player_pause_default(Npc* partner) {
+s32 world_partner_can_open_menus_default(Npc* partner) {
     return TRUE;
 }
 
@@ -1017,10 +1017,10 @@ s32 partner_use_ability(void) {
     return FALSE;
 }
 
-s32 partner_player_can_pause(void) {
+s32 partner_can_open_world_menus(void) {
     if (wPartner != NULL
-        && wPartner->canPlayerPause != NULL
-        && !wPartner->canPlayerPause(wPartnerNpc)
+        && wPartner->canPlayerOpenMenus != NULL
+        && !wPartner->canPlayerOpenMenus(wPartnerNpc)
     ) {
         return FALSE;
     }

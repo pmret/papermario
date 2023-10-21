@@ -538,7 +538,7 @@ void collision_main_lateral(void) {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
                     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
-                    if (playerStatus->alpha1 != 128) {
+                    if (playerStatus->curAlpha != 128) {
                         collision_check_player_intersecting_world(0, 0,
                             atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z));
                     }

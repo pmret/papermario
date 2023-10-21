@@ -3165,14 +3165,14 @@ enum PopupState {
     POPUP_STATE_MINUS_3                     = -3,
     POPUP_STATE_MINUS_4                     = -4,
     POPUP_STATE_MINUS_5                     = -5,
-    POPUP_STATE_MINUS_6                     = -6,
+    POPUP_STATE_CHOSE_SWAP                  = -6,
     POPUP_STATE_MINUS_7                     = -7,
     POPUP_STATE_MINUS_8                     = -8,
 };
 
 enum PopupResult {
-    POPUP_RESULT_MINUS_1    = -1,
-    POPUP_RESULT_MINUS_2    = -2,
+    POPUP_RESULT_INVALID    = -1,
+    POPUP_RESULT_SWAP_MENU  = -2,
     POPUP_RESULT_CHOOSING   = 0,
     POPUP_RESULT_CANCEL     = 255,
 };
@@ -4847,8 +4847,8 @@ enum ModelAnimatorFlags {
 };
 
 enum ShopFlags {
-    SHOP_FLAG_1                 = 0x00000001,
-    SHOP_FLAG_8                 = 0x00000008,
+    SHOP_FLAG_SHOWING_ITEM_INFO         = 0x1,
+    SHOP_FLAG_INTERACT_SCRIPT_RUNNING   = 0x8,
 };
 
 enum {

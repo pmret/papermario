@@ -19,17 +19,17 @@ API_CALLABLE(N(RestoreStarPowerFromPlayer)) {
 
     script->varTable[0] = RESTORE_NOT_FULL;
 
-    if (playerData->specialBarsFilled >= playerData->maxStarPower * 256) {
+    if (playerData->starPower >= playerData->maxStarPower * SP_PER_BAR) {
         script->varTable[0] = RESTORE_ALREADY_FULL;
         return ApiStatus_DONE2;
     }
 
-    deepFocusSP = is_ability_active(ABILITY_DEEP_FOCUS) * 64;
-    superFocusSP = is_ability_active(ABILITY_SUPER_FOCUS) * 128;
+    deepFocusSP = is_ability_active(ABILITY_DEEP_FOCUS) * SP_PER_SEG * 2;
+    superFocusSP = is_ability_active(ABILITY_SUPER_FOCUS) * SP_PER_SEG * 4;
 
-    add_SP(deepFocusSP + superFocusSP + 128);
+    add_star_power(deepFocusSP + superFocusSP + SP_PER_SEG * 4);
 
-    if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
+    if (playerData->starPower == playerData->maxStarPower * SP_PER_BAR) {
         script->varTable[0] = RESTORE_NOW_FULL;
     }
 
@@ -41,14 +41,14 @@ API_CALLABLE(N(RestoreStarPowerFromPartner)) {
 
     script->varTable[0] = RESTORE_NOT_FULL;
 
-    if (playerData->specialBarsFilled >= playerData->maxStarPower * 256) {
+    if (playerData->starPower >= playerData->maxStarPower * SP_PER_BAR) {
         script->varTable[0] = RESTORE_ALREADY_FULL;
         return ApiStatus_DONE2;
     }
 
-    add_SP(128);
+    add_star_power(SP_PER_SEG * 4);
 
-    if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
+    if (playerData->starPower == playerData->maxStarPower * SP_PER_BAR) {
         script->varTable[0] = RESTORE_NOW_FULL;
     }
 

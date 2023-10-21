@@ -109,7 +109,7 @@ dlabel nuGfxCfb_ptr
 dlabel gOverrideFlags
 .space 4
 
-dlabel D_8009A654
+dlabel HasPreBattleSongPushed
 .space 4
 
 dlabel nuGfxCfb

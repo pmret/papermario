@@ -80,7 +80,7 @@
 #define increment_status_bar_disabled dead_increment_status_bar_disabled
 #define decrement_status_bar_disabled dead_decrement_status_bar_disabled
 #define sync_status_bar dead_sync_status_bar
-#define set_max_SP dead_set_max_SP
+#define set_max_star_power dead_set_max_star_power
 #define get_current_map_settings dead_get_current_map_settings
 #define gGameStatusPtr dead_gGameStatusPtr
 #define guTranslateF dead_guTranslateF

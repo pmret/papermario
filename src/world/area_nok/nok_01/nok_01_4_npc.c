@@ -285,7 +285,7 @@ EvtScript N(EVS_NpcHit_MiscFuzzy2) = {
 };
 
 EvtScript N(EVS_NpcInteract_Koopa_ShopOwner) = {
-    EVT_EXEC_WAIT(ItemShopInteract)
+    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_RETURN
     EVT_END
 };

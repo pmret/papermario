@@ -133,7 +133,7 @@ EvtScript N(EVS_NpcInit_ToadHouseKeeper) = {
 };
 
 EvtScript N(EVS_NpcInteract_ShopOwner) = {
-    EVT_EXEC_WAIT(ItemShopInteract)
+    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_RETURN
     EVT_END
 };

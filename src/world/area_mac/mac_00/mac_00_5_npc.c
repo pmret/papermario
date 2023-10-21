@@ -143,7 +143,7 @@ EvtScript N(EVS_NpcInit_GardenShyGuy1) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toad_01) = {
-    EVT_EXEC_WAIT(ItemShopInteract)
+    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_RETURN
     EVT_END
 };

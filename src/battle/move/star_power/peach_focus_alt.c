@@ -11,16 +11,16 @@ API_CALLABLE(N(RestoreStarPower)) {
     PlayerData* playerData2 = &gPlayerData;
 
     if (is_ability_active(ABILITY_DEEP_FOCUS)) {
-        playerData->specialBarsFilled += 128;
+        playerData->starPower += SP_PER_SEG * 4;
     }
     if (is_ability_active(ABILITY_SUPER_FOCUS)) {
-        playerData->specialBarsFilled += 256;
+        playerData->starPower += SP_PER_BAR;
     }
 
-    playerData->specialBarsFilled += 128;
+    playerData->starPower += SP_PER_SEG * 4;
 
-    if (playerData2->specialBarsFilled >= playerData2->maxStarPower * 256) {
-        playerData2->specialBarsFilled = playerData2->maxStarPower * 256;
+    if (playerData2->starPower >= playerData2->maxStarPower * SP_PER_BAR) {
+        playerData2->starPower = playerData2->maxStarPower * SP_PER_BAR;
     }
 
     return ApiStatus_DONE2;

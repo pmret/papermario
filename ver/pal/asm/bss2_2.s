@@ -174,7 +174,7 @@ dlabel PopupNotDipping
 dlabel PopupDipMode
 .space 1
 
-dlabel D_8010D69A
+dlabel PopupMenu_WasStatusBarIgnoringChanges
 .space 2
 
 dlabel gPopupMenu
@@ -204,7 +204,7 @@ dlabel gSpinHistoryPosX
 dlabel gSpinHistoryPosZ
 .space 0x18
 
-dlabel gUIStatus
+dlabel gStatusBar
 .space 0x70
 
 dlabel gPlayerStatus

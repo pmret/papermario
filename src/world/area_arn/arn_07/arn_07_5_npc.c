@@ -9,7 +9,7 @@
 #include "world/common/npc/StarSpirit.inc.c"
 
 API_CALLABLE(N(UpgradeStarPowerCh3)) {
-    set_max_SP(3);
+    set_max_star_power(3);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
     sync_status_bar();

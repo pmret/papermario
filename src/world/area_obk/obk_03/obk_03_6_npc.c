@@ -30,7 +30,7 @@ EvtScript N(EVS_LetterReward_Igor) = {
 
 EvtScript N(EVS_NpcInteract_Igor) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
-        EVT_EXEC_WAIT(ItemShopInteract)
+        EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_005C)
     EVT_END_IF

@@ -18,7 +18,7 @@ typedef struct WorldPartner {
     /* 0x24 */ s32 idle;
     /* 0x28 */ PartnerTesHitFunc testFirstStrike;
     /* 0x2C */ PartnerBoolFunc canUseAbility;
-    /* 0x30 */ PartnerBoolFunc canPlayerPause;
+    /* 0x30 */ PartnerBoolFunc canPlayerOpenMenus;
     /* 0x34 */ PartnerFunc preBattle;
     /* 0x38 */ PartnerFunc postBattle;
     /* 0x3C */ EvtScript* onEnterMap;

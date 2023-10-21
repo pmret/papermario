@@ -371,6 +371,12 @@ typedef struct Encounter {
     /* 0x4A */ char unk_4C[2];
 } Encounter; // size = 0x4C
 
+typedef struct FieldStatus {
+    /* 0x00 */ s8 status;
+    /* 0x01 */ char pad_01;
+    /* 0x02 */ s16 duration;
+} FieldStatus;
+
 typedef struct EncounterStatus {
     /* 0x000 */ s32 flags;
     /* 0x004 */ s8 firstStrikeType; /* 0 = none, 1 = player, 2 = enemy */
@@ -396,7 +402,7 @@ typedef struct EncounterStatus {
     /* 0x01F */ u8 curEntryIndex;
     /* 0x020 */ s8 mapID;
     /* 0x021 */ s8 resetMapEncounterFlags;
-    /* 0x021 */ char unk_22[2];
+    /* 0x022 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;
     /* 0x028 */ Encounter* encounterList[24];
     /* 0x088 */ Encounter* curEncounter;
@@ -405,18 +411,10 @@ typedef struct EncounterStatus {
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 fadeOutAccel;
     /* 0x09C */ s32 battleStartCountdown;
-    /* 0x0A0 */ s8 dizzyAttackStatus;
-    /* 0x0A1 */ char unk_A1[0x1];
-    /* 0x0A2 */ s16 dizzyAttackDuration;
-    /* 0x0A4 */ s8 unk_A4;
-    /* 0x0A5 */ char unk_A5[0x1];
-    /* 0x0A6 */ s16 unk_A6;
-    /* 0x0A8 */ s8 unk_A8;
-    /* 0x0A9 */ char unk_A9[0x1];
-    /* 0x0AA */ s16 unk_AA;
-    /* 0x0AC */ s8 unk_AC;
-    /* 0x0AD */ char unk_AD[0x1];
-    /* 0x0AE */ s16 unk_AE;
+    /* 0x0A0 */ FieldStatus dizzyAttack;
+    /* 0x0A4 */ FieldStatus unusedAttack1;
+    /* 0x0A8 */ FieldStatus unusedAttack2;
+    /* 0x0AC */ FieldStatus unusedAttack3;
     /* 0x0B0 */ s32 defeatFlags[60][12];
     /* 0xFB0 */ s16 recentMaps[2];
     /* 0xFB4 */ char unk_FB4[4];

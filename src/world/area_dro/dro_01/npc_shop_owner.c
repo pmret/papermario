@@ -107,7 +107,7 @@ EvtScript N(EVS_NpcInteract_ShopOwner) = {
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
-    EVT_EXEC_WAIT(ItemShopInteract)
+    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_EXEC_WAIT(N(EVS_LetterPrompt_ShopOwner))
     EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
         EVT_RETURN
