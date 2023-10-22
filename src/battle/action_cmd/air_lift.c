@@ -77,7 +77,7 @@ API_CALLABLE(N(start)) {
     mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
     actionCommandStatus->unk_5C = 0;
 
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     actionCommandStatus->state = 10;
     battleStatus->unk_82 = mashMeterCutoff;
 

@@ -7,7 +7,7 @@
 void world_bombette_init(Npc*);
 s32 world_bombette_test_first_strike(Npc*, Npc*);
 s32 world_bombette_can_use_ability(Npc* npc);
-s32 world_bombette_can_player_pause(Npc* );
+s32 world_bombette_can_open_menus(Npc* );
 void world_bombette_pre_battle(Npc*);
 
 extern EvtScript EVS_WorldBombette_TakeOut;

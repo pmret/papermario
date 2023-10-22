@@ -29,7 +29,7 @@ EvtScript N(EVS_UseMove) = {
 };
 
 EvtScript N(EVS_UseMove_ImplA) = {
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
+    EVT_EXEC_WAIT(N(EVS_JumpSupport_InitCommand))
     EVT_CALL(GetActionCommandMode, LVar0)
     EVT_IF_EQ(LVar0, 2)
         EVT_CALL(SetActionCommandMode, 3)
@@ -51,10 +51,10 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -62,8 +62,8 @@ EvtScript N(EVS_UseMove_ImplA) = {
             EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CHILD_THREAD
@@ -83,7 +83,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_1, SOUND_NONE)
-    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
     EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -91,7 +91,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
 };
 
 EvtScript N(EVS_UseMove_ImplB) = {
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
+    EVT_EXEC_WAIT(N(EVS_JumpSupport_InitCommand))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
@@ -102,10 +102,10 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -113,8 +113,8 @@ EvtScript N(EVS_UseMove_ImplB) = {
             EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(GetActionResult, LVarF)
@@ -138,7 +138,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_2, SOUND_NONE)
-    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 2, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
     EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -146,7 +146,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
 };
 
 EvtScript N(EVS_UseMove_ImplC) = {
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
+    EVT_EXEC_WAIT(N(EVS_JumpSupport_InitCommand))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
@@ -157,10 +157,10 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -168,8 +168,8 @@ EvtScript N(EVS_UseMove_ImplC) = {
             EVT_EXEC_WAIT(N(EVS_JumpSupport_G))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(GetActionResult, LVarF)
@@ -191,7 +191,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_ACTOR_JUMPED_3, SOUND_NONE)
-    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 3, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT | BS_FLAGS1_NO_RATING)
     EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN

@@ -66,7 +66,7 @@ s32 N(get_trigger_tattle)(s32 tattleColliderID) {
         Trigger* trigger = get_trigger_by_id(i);
 
         if (trigger != NULL
-            && trigger->flags.flags & TRIGGER_WALL_PRESS_A
+            && trigger->flags & TRIGGER_WALL_PRESS_A
             && trigger->location.colliderID == tattleColliderID
         ) {
             return trigger->tattleMsg;
@@ -201,7 +201,7 @@ EvtScript EVS_WorldGoombario_Update = {
     EVT_END
 };
 
-s32 N(can_pause)(Npc* goombario) {
+s32 N(can_open_menus)(Npc* goombario) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 new_var;
 

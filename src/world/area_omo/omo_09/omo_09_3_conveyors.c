@@ -58,7 +58,7 @@ API_CALLABLE(N(AddConveyorPush)) {
 
     one = 1;
     if (partnerStatus->actingPartner == PARTNER_BOW) {
-        if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && playerStatus->alpha1 == 128) {
+        if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && playerStatus->curAlpha == 128) {
             x = playerStatus->pos.x;
             y = playerStatus->pos.y;
             z = playerStatus->pos.z;

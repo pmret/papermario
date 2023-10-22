@@ -109,7 +109,7 @@ dlabel nuGfxCfb_ptr
 dlabel gOverrideFlags
 .space 4
 
-dlabel D_8009A654
+dlabel HasPreBattleSongPushed
 .space 4
 
 dlabel nuGfxCfb
@@ -139,7 +139,7 @@ dlabel D_8009A678
 dlabel D_8009A680
 .space 0x00000010
 
-dlabel D_8009A690
+dlabel SoftResetDelay
 .space 0x00000010
 
 dlabel D_8009A6A0

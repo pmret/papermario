@@ -104,6 +104,9 @@
 
 #define MAX_STAR_PIECES 222
 
+#define SP_PER_BAR 256
+#define SP_PER_SEG 32
+
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 

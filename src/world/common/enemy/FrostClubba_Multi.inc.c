@@ -160,7 +160,7 @@ EvtScript N(EVS_NpcAI_FrostClubba_Hitbox) = {
     EVT_CALL(SetSelfVar, 2, 48)
     EVT_CALL(SetSelfVar, 3, 30)
     EVT_CALL(SetSelfVar, 4, 3)
-    EVT_CALL(SetSelfVar, 15, SOUND_20C5)
+    EVT_CALL(SetSelfVar, 15, SOUND_CLUBBA_SWING)
     EVT_CALL(N(MeleeHitbox_Main))
     EVT_RETURN
     EVT_END

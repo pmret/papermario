@@ -18,7 +18,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
     player->selectedTargetIndex = 0;
     selectableTarget = &player->targetData[player->targetIndexList[player->selectedTargetIndex]];
     player->targetActorID = selectableTarget->actorID;
-    player->targetPartIndex = selectableTarget->partID;
+    player->targetPartID = selectableTarget->partID;
 
     return ApiStatus_DONE2;
 }

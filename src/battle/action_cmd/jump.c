@@ -5,6 +5,14 @@
 
 extern s32 actionCmdTableJump[];
 
+enum {
+    AC_JUMP_STATE_0         = 0,
+    AC_JUMP_STATE_1         = 1,
+    AC_JUMP_STATE_10        = 10,
+    AC_JUMP_STATE_11        = 11,
+    AC_JUMP_STATE_CLEANUP   = 12,
+};
+
 API_CALLABLE(N(init)) {
     s32 hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -62,14 +70,14 @@ API_CALLABLE(N(start)) {
 
         hudElement = actionCommandStatus->hudElements[0];
         actionCommandStatus->hudPosX = 50;
-        battleStatus->flags1 &= ~BS_FLAGS1_8000;
+        battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
         battleStatus->flags1 &= ~BS_FLAGS1_2000;
         hud_element_set_render_pos(hudElement, actionCommandStatus->hudPosX, actionCommandStatus->hudPosY);
         if (actionCommandStatus->showHud) {
             hud_element_clear_flags(hudElement, HUD_ELEMENT_FLAG_DISABLED);
         }
 
-        actionCommandStatus->state = 10;
+        actionCommandStatus->state = AC_JUMP_STATE_10;
         func_80269118();
         btl_set_popup_duration(10);
         return ApiStatus_DONE2;
@@ -80,16 +88,16 @@ void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;
-    s32 temp_s0_3;
+    s32 successWindow;
 
     switch (actionCommandStatus->state) {
-        case 0:
+        case AC_JUMP_STATE_0:
             if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
-            actionCommandStatus->state = 1;
+            actionCommandStatus->state = AC_JUMP_STATE_1;
             break;
-        case 1:
+        case AC_JUMP_STATE_1:
             if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
@@ -114,28 +122,29 @@ void N(update)(void) {
                 }
             }
             break;
-        case 10:
+        case AC_JUMP_STATE_10:
             if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
 
-            temp_s0_3 = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
-            if (((actionCommandStatus->prepareTime - temp_s0_3) - 2) <= 0) {
+            successWindow = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
+            if (((actionCommandStatus->prepareTime - successWindow) - 2) <= 0) {
                 hud_element_set_script(actionCommandStatus->hudElements[0], &HES_AButtonDown);
             }
-            if ((battleStatus->curButtonsPressed & BUTTON_A) && (actionCommandStatus->autoSucceed == 0)) {
+            if ((battleStatus->curButtonsPressed & BUTTON_A) && !actionCommandStatus->autoSucceed) {
                 actionCommandStatus->wrongButtonPressed = TRUE;
                 battleStatus->actionResult = ACTION_RESULT_EARLY;
             }
-            if ((actionCommandStatus->prepareTime - temp_s0_3) > 0) {
+            if ((actionCommandStatus->prepareTime - successWindow) > 0) {
                 actionCommandStatus->prepareTime -= 1;
                 break;
             }
 
             actionCommandStatus->frameCounter = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
             battleStatus->actionSuccess = -1;
-            actionCommandStatus->state = 11;
-        case 11:
+            actionCommandStatus->state = AC_JUMP_STATE_11;
+            // fall through
+        case AC_JUMP_STATE_11:
             if (battleStatus->actionCommandMode == ACTION_COMMAND_MODE_TUTORIAL) {
                 btl_set_popup_duration(99);
             }
@@ -153,9 +162,9 @@ void N(update)(void) {
             }
 
             if (battleStatus->actionSuccess < 0) {
-                if (((battleStatus->curButtonsPressed & BUTTON_A)&&
+                if (((battleStatus->curButtonsPressed & BUTTON_A) &&
                     !actionCommandStatus->wrongButtonPressed) ||
-                    (actionCommandStatus->autoSucceed != 0)) {
+                    actionCommandStatus->autoSucceed) {
                     battleStatus->actionSuccess = 1;
                     battleStatus->actionResult = ACTION_RESULT_SUCCESS;
                     gBattleStatus.flags1 |= BS_FLAGS1_2000;
@@ -170,14 +179,14 @@ void N(update)(void) {
                     btl_set_popup_duration(0);
                 }
                 actionCommandStatus->frameCounter = 5;
-                actionCommandStatus->state = 12;
+                actionCommandStatus->state = AC_JUMP_STATE_CLEANUP;
                 break;
             }
-            actionCommandStatus->frameCounter -= 1;
+            actionCommandStatus->frameCounter--;
             break;
-        case 12:
+        case AC_JUMP_STATE_CLEANUP:
             if (actionCommandStatus->frameCounter != 0) {
-                actionCommandStatus->frameCounter -= 1;
+                actionCommandStatus->frameCounter--;
                 break;
             }
             action_command_free();

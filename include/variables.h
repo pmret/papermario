@@ -123,7 +123,7 @@ extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
 extern PartnerStatus gPartnerStatus;
-extern UiStatus gUIStatus;
+extern StatusBar gStatusBar;
 extern PlayerStatus gPlayerStatus;
 extern PlayerSpinState gPlayerSpinState;
 extern PlayerData gPlayerData;

@@ -467,13 +467,13 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FlipResistance, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(GetBattleFlags, LVarD)
-                EVT_IF_FLAG(LVarD, BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_IF_FLAG(LVarD, BS_FLAGS1_TRIGGER_EVENTS)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FlipResistance, 2)
                 EVT_END_IF
                 EVT_EXEC_WAIT(N(EVS_FlipOver))
             EVT_ELSE
                 EVT_CALL(GetBattleFlags, LVarD)
-                EVT_IF_FLAG(LVarD, BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_IF_FLAG(LVarD, BS_FLAGS1_TRIGGER_EVENTS)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FlipResistance, 2)
                     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
                     EVT_IF_GT(LVar0, 0)
@@ -631,15 +631,15 @@ EvtScript N(EVS_Attack_ShellToss) = {
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EVT_END_THREAD
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_NONE, SOUND_NONE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0370)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_KENT_C_SHELL_TOSS_LOOP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0A)
     EVT_WAIT(10)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 3, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarB, 0, 0, 3, BS_FLAGS1_10)
+            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarB, 0, 0, 3, BS_FLAGS1_INCLUDE_POWER_UPS)
             EVT_SWITCH(LVarB)
                 EVT_CASE_EQ(6)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -655,7 +655,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
                     EVT_CALL(SetGoalToHome, ACTOR_SELF)
                     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
                     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-                    EVT_CALL(StopSound, SOUND_0370)
+                    EVT_CALL(StopSound, SOUND_KENT_C_SHELL_TOSS_LOOP)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
                     EVT_WAIT(8)
                     EVT_CALL(YieldTurn)
@@ -721,7 +721,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
             EVT_IF_NOT_FLAG(LVarE, STATUS_FLAG_SHRINK)
                 EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
             EVT_END_IF
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, DMG_SHELL_TOSS_PLAYER, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, DMG_SHELL_TOSS_PLAYER, BS_FLAGS1_TRIGGER_EVENTS)
             EVT_SET(LVarA, 0)
             EVT_IF_NOT_FLAG(LVarE, STATUS_FLAG_SHRINK)
                 EVT_CALL(GetBattleFlags, LVar0)
@@ -743,7 +743,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(SetDamageSource, DMG_SRC_CRUSH_PARTNER)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, DMG_SHELL_TOSS_PARTNER, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, DMG_SHELL_TOSS_PARTNER, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CALL(GetBattleFlags, LVar0)
         EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -756,7 +756,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(StopSound, SOUND_0370)
+            EVT_CALL(StopSound, SOUND_KENT_C_SHELL_TOSS_LOOP)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
@@ -806,7 +806,7 @@ EvtScript N(EVS_Attack_ShellToss) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(StopSound, SOUND_0370)
+    EVT_CALL(StopSound, SOUND_KENT_C_SHELL_TOSS_LOOP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim0C)
     EVT_WAIT(8)
     EVT_CALL(YieldTurn)
@@ -842,7 +842,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
     EVT_WAIT(8)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -861,7 +861,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EVT_SET(LVar1, 0)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_A)
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                 EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -873,7 +873,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_A)
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                 EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -885,7 +885,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EVT_SUB(LVar0, 10)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_A)
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                 EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -941,7 +941,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
     EVT_IF_NOT_FLAG(LVarF, STATUS_FLAG_SHRINK)
         EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
     EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, DMG_HEAVY_STOMP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, DMG_HEAVY_STOMP, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -955,7 +955,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarE)
                     EVT_IF_NOT_FLAG(LVarE, STATUS_FLAG_SHRINK)
                         EVT_CALL(LandJump, ACTOR_SELF)
-                        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EC)
+                        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_A)
                     EVT_END_IF
                 EVT_END_IF
             EVT_END_IF
@@ -977,7 +977,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_A)
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                 EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -989,7 +989,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EC)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_A)
             EVT_THREAD
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                 EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
@@ -1004,7 +1004,7 @@ EvtScript N(EVS_Attack_HeavyStomp) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_EXEC_WAIT(N(EVS_KentC_GoHome))
-        EVT_CASE_EQ(HIT_RESULT_3)
+        EVT_CASE_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)

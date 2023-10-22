@@ -8,6 +8,7 @@
 #include "message_ids.h"
 #include "nu/nusys.h"
 #include "ld_addrs.h"
+#include "sprite.h"
 #include "sprite/player.h"
 
 #if VERSION_IQUE
@@ -21,7 +22,7 @@ extern SparkleScript SparkleScript_Coin;
 
 extern Gfx D_8014B870[];
 extern Gfx D_8014BBD8[];
-extern Lights1 D_8014C6C8;
+extern Lights1 ItemEntityLights;
 
 extern HudCacheEntry* gHudElementCacheTableRaster;
 extern HudCacheEntry* gHudElementCacheTablePalette;
@@ -30,23 +31,23 @@ extern u8* gHudElementCacheBuffer;
 extern s32* gHudElementCacheSize;
 
 SHIFT_BSS s32 ItemEntitiesCreated;
-SHIFT_BSS s32 D_80155D80;
+SHIFT_BSS s32 UnusedItemPhysicsScriptID;
 SHIFT_BSS s32 ItemEntityAlternatingSpawn;
 SHIFT_BSS s32 ItemEntityRenderGroup;
-SHIFT_BSS s16 D_80155D8C;
-SHIFT_BSS s16 D_80155D8E;
-SHIFT_BSS s16 D_80155D90;
+SHIFT_BSS s16 CoinSparkleCenterX;
+SHIFT_BSS s16 CoinSparkleCenterY;
+SHIFT_BSS s16 CoinSparkleCenterZ;
 SHIFT_BSS ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
 SHIFT_BSS ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 SHIFT_BSS ItemEntity** gCurrentItemEntities;
 SHIFT_BSS s16 isPickingUpItem;
-SHIFT_BSS s16 D_801565A6;
-SHIFT_BSS s16 D_801565A8; // some hack relating to kooper item pickups
-SHIFT_BSS PopupMenu D_801565B0;
+SHIFT_BSS s16 ItemSpawnWithinPlayerPickupDelay;
+SHIFT_BSS s16 D_801565A8;
+SHIFT_BSS PopupMenu ItemPickupMenu;
 SHIFT_BSS s32 ItemPickupIconID;
 SHIFT_BSS s32 ItemPickupStateDelay;
-SHIFT_BSS s32 D_801568E8;
-SHIFT_BSS s32 D_801568EC;
+SHIFT_BSS s32 ThrowAwayMenuIdx;
+SHIFT_BSS s32 ThrowAwayItemID;
 SHIFT_BSS EffectInstance* ItemPickupGotOutline;
 SHIFT_BSS MessagePrintState* GotItemTutorialPrinter;
 SHIFT_BSS b32 GotItemTutorialClosed;
@@ -112,7 +113,7 @@ Gfx D_8014C6A0[] = {
     gsSPEndDisplayList(),
 };
 
-Lights1 D_8014C6C8 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
+Lights1 ItemEntityLights = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
 s16 PickupHeaderWindowHeight[] = { 32, 40 };
 s16 PickupMessageWindowYOffsets[] = { 8, 4 };
@@ -172,9 +173,9 @@ void draw_coin_sparkles(ItemEntity* item) {
     Matrix4f spD8;
     ImgFXTexture ifxImg;
 
-    x = D_80155D8C;
-    y = D_80155D8E;
-    z = D_80155D90;
+    x = CoinSparkleCenterX;
+    y = CoinSparkleCenterY;
+    z = CoinSparkleCenterZ;
     angle = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
 
     guTranslateF(sp18, x, y, z);
@@ -188,7 +189,7 @@ void draw_coin_sparkles(ItemEntity* item) {
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
     gSPClearGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
     gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-    gSPSetLights1(gMainGfxPos++, D_8014C6C8);
+    gSPSetLights1(gMainGfxPos++, ItemEntityLights);
     gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
     gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
     gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
@@ -250,9 +251,9 @@ void clear_item_entity_data(void) {
     }
 
     ItemEntitiesCreated = 0;
-    D_80155D8C = 0;
-    D_80155D8E = 0;
-    D_80155D90 = 0;
+    CoinSparkleCenterX = 0;
+    CoinSparkleCenterY = 0;
+    CoinSparkleCenterZ = 0;
     ItemEntityAlternatingSpawn = 0;
 
     if (!gGameStatusPtr->isBattle) {
@@ -308,7 +309,7 @@ void item_entity_load(ItemEntity* item) {
                 palette = *pos++;
 
                 // 32x32 or 24x24 (divided by 2 because these are ci4 iamges)
-                size = (item->flags & ITEM_ENTITY_FLAG_40000) ? (32 * 32 / 2) : (24 * 24 / 2);
+                size = (item->flags & ITEM_ENTITY_FLAG_FULLSIZE) ? (32 * 32 / 2) : (24 * 24 / 2);
 
                 entry = gHudElementCacheTableRaster;
                 i = 0;
@@ -439,7 +440,9 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 
     itemID &= 0xFFFF;
 
-    item->flags = ITEM_ENTITY_FLAG_80 | ITEM_ENTITY_FLAG_10 | ITEM_ENTITY_FLAG_CAM2 | ITEM_ENTITY_FLAG_CAM1 | ITEM_ENTITY_FLAG_CAM0;
+    item->flags = (ITEM_ENTITY_FLAG_CAM0 | ITEM_ENTITY_FLAG_CAM1 | ITEM_ENTITY_FLAG_CAM2);
+    item->flags |= ITEM_ENTITY_FLAG_10;
+    item->flags |= ITEM_ENTITY_FLAG_JUST_SPAWNED;
     item->pickupMsgFlags = 0;
     item->boundVar = pickupFlagIndex;
     item->itemID = itemID;
@@ -452,18 +455,17 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     item->lastPos.x = -9999;
     item->lastPos.y = -9999;
     item->lastPos.z = -9999;
-    D_801565A6 = 30;
+    ItemSpawnWithinPlayerPickupDelay = 30;
 
     item->flags |= ITEM_ENTITY_RESIZABLE;
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        item->flags |= ITEM_ENTITY_FLAG_40000;
+        item->flags |= ITEM_ENTITY_FLAG_FULLSIZE;
         item->flags &= ~ITEM_ENTITY_RESIZABLE;
     }
 
     if (ItemEntityAlternatingSpawn != 0) {
-        item->flags |= ITEM_ENTITY_FLAG_20000;
+        item->flags |= ITEM_ENTITY_FLAG_ODD_SPAWN_PARITY;
     }
-
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
 
     switch (item->spawnType) {
@@ -475,7 +477,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             item->flags |= ITEM_ENTITY_FLAG_800000;
             break;
         case ITEM_SPAWN_MODE_INVISIBLE:
-            item->flags |= ITEM_ENTITY_FLAG_100000;
+            item->flags |= ITEM_ENTITY_FLAG_INVISIBLE;
             break;
         case ITEM_SPAWN_MODE_BATTLE_REWARD:
             item->flags |= ITEM_ENTITY_FLAG_800000;
@@ -495,12 +497,12 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
             item->flags |= ITEM_ENTITY_FLAG_800000;
-            item->flags |= ITEM_ENTITY_FLAG_800;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_INIT;
             item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE_NEVER_VANISH:
             item->flags |= ITEM_ENTITY_FLAG_800000;
-            item->flags |= ITEM_ENTITY_FLAG_800;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_INIT;
             item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
             item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
@@ -538,7 +540,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             break;
         case ITEM_SPAWN_MODE_FALL_SPAWN_ONCE:
             item->flags |= ITEM_ENTITY_FLAG_800000;
-            item->flags |= ITEM_ENTITY_FLAG_800;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_INIT;
             item->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
@@ -641,7 +643,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             y = item->pos.y + 12.0f;
             z = item->pos.z;
             hitDepth = 1000.0f;
-            npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
+            npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &x, &y, &z, &hitDepth);
             shadow->pos.x = x;
             shadow->pos.y = y;
             shadow->pos.z = z;
@@ -664,7 +666,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     }
 
     if (item->itemID == ITEM_STAR_PIECE) {
-        item->flags &= ~ITEM_ENTITY_FLAG_80;
+        item->flags &= ~ITEM_ENTITY_FLAG_JUST_SPAWNED;
     }
 
     return id;
@@ -703,7 +705,9 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
 
     itemID &= 0xFFFF;
     item->renderGroup = -1;
-    item->flags = (ITEM_ENTITY_FLAG_CAM0 | ITEM_ENTITY_FLAG_CAM1 | ITEM_ENTITY_FLAG_CAM2 | ITEM_ENTITY_FLAG_10 | ITEM_ENTITY_FLAG_2000000);
+    item->flags = (ITEM_ENTITY_FLAG_CAM0 | ITEM_ENTITY_FLAG_CAM1 | ITEM_ENTITY_FLAG_CAM2);
+    item->flags |= ITEM_ENTITY_FLAG_10;
+    item->flags |= ITEM_ENTITY_FLAG_2000000;
     if (category != ITEM_TYPE_CONSUMABLE) {
         item->flags |= ITEM_ENTITY_FLAG_4000000;
     }
@@ -728,10 +732,11 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     item->flags |= ITEM_ENTITY_RESIZABLE;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        item->flags = (item->flags | ITEM_ENTITY_FLAG_40000) & ~ITEM_ENTITY_RESIZABLE;
+        item->flags = (item->flags | ITEM_ENTITY_FLAG_FULLSIZE) & ~ITEM_ENTITY_RESIZABLE;
     }
+    
     if (ItemEntityAlternatingSpawn != 0) {
-        item->flags |= ITEM_ENTITY_FLAG_20000;
+        item->flags |= ITEM_ENTITY_FLAG_ODD_SPAWN_PARITY;
     }
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
 
@@ -743,7 +748,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     posY = item->pos.y + 12.0f;
     posZ = item->pos.z;
     depth = 1000.0f;
-    npc_raycast_down_sides(COLLISION_CHANNEL_20000, &posX, &posY, &posZ, &depth);
+    npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &posX, &posY, &posZ, &depth);
     shadow->pos.x = posX;
     shadow->pos.y = posY;
     shadow->pos.z = posZ;
@@ -822,9 +827,9 @@ void update_item_entities(void) {
                 if (item->itemID == ITEM_COIN) {
                     if (rand_int(100) > 90) {
                         sparkle_script_init(item, &SparkleScript_Coin);
-                        D_80155D8C = rand_int(16) - 8;
-                        D_80155D8E = rand_int(16) - 8;
-                        D_80155D90 = 5;
+                        CoinSparkleCenterX = rand_int(16) - 8;
+                        CoinSparkleCenterY = rand_int(16) - 8;
+                        CoinSparkleCenterZ = 5;
                     }
                     sparkle_script_update(item);
                 }
@@ -872,7 +877,7 @@ void update_item_entities(void) {
                                 y = item->pos.y + 12.0f;
                                 z = item->pos.z;
                                 hitDepth = 1000.0f;
-                                npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
+                                npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &x, &y, &z, &hitDepth);
 
                                 shadow->pos.x = x;
                                 shadow->pos.y = y;
@@ -915,7 +920,7 @@ void appendGfx_item_entity(void* data) {
         }
     }
 
-    if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
+    if (!(item->flags & ITEM_ENTITY_FLAG_FULLSIZE)) {
         yOffset = -2;
     } else {
         yOffset = -3;
@@ -963,7 +968,7 @@ void appendGfx_item_entity(void* data) {
         }
     }
 
-    if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
+    if (!(item->flags & ITEM_ENTITY_FLAG_FULLSIZE)) {
         gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
         if (gSpriteShadingProfile->flags != 0) {
             gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
@@ -1054,7 +1059,7 @@ void draw_item_entities(void) {
             && item->flags != 0
             && !(item->flags & ITEM_ENTITY_FLAG_HIDDEN)
             && (item->flags & (1 << gCurrentCamID))
-            && !(item->flags & ITEM_ENTITY_FLAG_100000)
+            && !(item->flags & ITEM_ENTITY_FLAG_INVISIBLE)
             && (item->renderGroup == -1 || ItemEntityRenderGroup == item->renderGroup))
         {
             if (!(item->flags & ITEM_ENTITY_FLAG_TRANSPARENT)) {
@@ -1076,7 +1081,7 @@ void draw_item_entities(void) {
 }
 
 void draw_ui_item_entities(void) {
-    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_4000 | GLOBAL_OVERRIDES_8000))) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_PREV_400 | GLOBAL_OVERRIDES_PREV_800))) {
         s32 i;
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
@@ -1123,8 +1128,8 @@ void render_item_entities(void) {
         if (item != NULL) {
             if ((item->flags != 0)) {
                 if (!(item->flags & ITEM_ENTITY_FLAG_HIDDEN)) {
-                    if ((item->flags & ITEM_ENTITY_FLAG_100000)) {
-                        if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
+                    if ((item->flags & ITEM_ENTITY_FLAG_INVISIBLE)) {
+                        if (!(item->flags & ITEM_ENTITY_FLAG_FULLSIZE)) {
                             offsetY = -4;
                         } else {
                             offsetY = 0;
@@ -1177,7 +1182,7 @@ void render_item_entities(void) {
                             }
                         }
 
-                        if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
+                        if (!(item->flags & ITEM_ENTITY_FLAG_FULLSIZE)) {
                             gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
                             if (gSpriteShadingProfile->flags != 0) {
                                 gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
@@ -1300,10 +1305,10 @@ void func_80133A94(s32 idx, s32 itemID) {
     item->itemID = itemID;
 
     item->flags |= ITEM_ENTITY_RESIZABLE;
-    item->flags &= ~ITEM_ENTITY_FLAG_40000;
+    item->flags &= ~ITEM_ENTITY_FLAG_FULLSIZE;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        item->flags |= ITEM_ENTITY_FLAG_40000;
+        item->flags |= ITEM_ENTITY_FLAG_FULLSIZE;
         item->flags &= ~ITEM_ENTITY_RESIZABLE;
     }
 
@@ -1316,22 +1321,22 @@ b32 test_item_player_collision(ItemEntity* item) {
     EncounterStatus* encounterStatus = &gCurrentEncounter;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 actionState = playerStatus->actionState;
-    f32 distThreshold;
+    f32 itemPickupRadius;
     f32 itemX, itemY, itemZ;
-    f32 tmpX, tmpZ;
+    f32 hammerX, hammerZ;
     f32 playerX, playerY, playerZ;
-    f32 colliderHeightHalf;
-    f32 colliderDiameterQuart;
+    f32 playerHalfHeight;
+    f32 playerHalfRadius;
     f32 spriteFacingAngle;
-    f32 playerY2;
-    f32 xDiff, zDiff;
+    f32 hammerY;
+    f32 dx, dz;
     f32 dist;
     f32 angle;
-    b32 cond;
+    b32 hitDetected;
     // below weird temps required to match
-    f32 fourteen;
-    f32 yTopThreshold;
-    f32 yBottomThreshold;
+    f32 hammerRadius;
+    f32 hammerHitboxHeight;
+    f32 itemHitboxHeight;
     f32 tmpFourteen;
     f32 tmpYTopThreshold;
 
@@ -1357,16 +1362,16 @@ b32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    fourteen = tmpFourteen;
+    hammerRadius = tmpFourteen;
     tmpYTopThreshold = 18.0f;
-    yBottomThreshold = 27.0f;
+    itemHitboxHeight = 27.0f;
 
-    cond = item->flags; // required to match
+    hitDetected = item->flags; // required to match
     if (item->flags & ITEM_ENTITY_FLAG_HIDDEN) {
         return FALSE;
     }
 
-    yTopThreshold = tmpYTopThreshold;
+    hammerHitboxHeight = tmpYTopThreshold;
     if (get_time_freeze_mode() != TIME_FREEZE_NORMAL) {
         return FALSE;
     }
@@ -1388,13 +1393,13 @@ b32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    cond = FALSE;
-    colliderHeightHalf = playerStatus->colliderHeight / 2;
+    hitDetected = FALSE;
     playerX = playerStatus->pos.x;
     playerY = playerStatus->pos.y;
     playerZ = playerStatus->pos.z;
+    playerHalfHeight = playerStatus->colliderHeight / 2;
+    playerHalfRadius = playerStatus->colliderDiameter / 4;
 
-    colliderDiameterQuart = playerStatus->colliderDiameter / 4;
     spriteFacingAngle = playerStatus->spriteFacingAngle;
     if (spriteFacingAngle < 180.0f) {
         spriteFacingAngle = clamp_angle(camera->curYaw - 90.0f);
@@ -1402,70 +1407,74 @@ b32 test_item_player_collision(ItemEntity* item) {
         spriteFacingAngle = clamp_angle(camera->curYaw + 90.0f);
     }
 
-    tmpX = playerX;
-    playerY2 = playerY;
-    tmpZ = playerZ;
+    hammerX = playerX;
+    hammerY = playerY;
+    hammerZ = playerZ;
     if (get_clamped_angle_diff(camera->curYaw, spriteFacingAngle) < 0.0f) {
         angle = clamp_angle(camera->curYaw - 90.0f);
-        if (playerStatus->trueAnimation & 0x01000000) {
+        if (playerStatus->trueAnimation & SPRITE_ID_BACK_FACING) {
             angle = clamp_angle(angle + 30.0f);
         }
     } else {
         angle = clamp_angle(camera->curYaw + 90.0f);
-        if (playerStatus->trueAnimation & 0x01000000) {
+        if (playerStatus->trueAnimation & SPRITE_ID_BACK_FACING) {
             angle = clamp_angle(angle - 30.0f);
         }
     }
 
-    add_vec2D_polar(&tmpX, &tmpZ, 24.0f, angle);
+    add_vec2D_polar(&hammerX, &hammerZ, 24.0f, angle);
 
     itemX = item->pos.x;
     itemY = item->pos.y;
     itemZ = item->pos.z;
 
+    // check for player collision
     do {
         do {
-            distThreshold = 13.5f;
+            itemPickupRadius = 13.5f;
         } while (0); // required to match
 
-        xDiff = itemX - playerX;
-        zDiff = itemZ - playerZ;
+        dx = itemX - playerX;
+        dz = itemZ - playerZ;
+        dist = sqrtf(SQ(dx) + SQ(dz));
 
-        dist = sqrtf(SQ(xDiff) + SQ(zDiff));
-        if (!(colliderDiameterQuart + distThreshold <= dist) &&
-            !(itemY + yBottomThreshold < playerY) &&
-            !(playerY + colliderHeightHalf < itemY))
+        if (!(playerHalfRadius + itemPickupRadius <= dist) // XZ distance is close enough
+            && !(itemY + itemHitboxHeight < playerY) // item is not below player
+            && !(playerY + playerHalfHeight < itemY)) // player is not below item
         {
-            cond = TRUE;
+            hitDetected = TRUE;
         }
     } while (0); // required to match
 
+    // check for hammer collision
     if (playerStatus->actionState == ACTION_STATE_HAMMER && (playerStatus->flags & PS_FLAG_HAMMER_CHECK)) {
-        xDiff = itemX - tmpX;
-        zDiff = itemZ - tmpZ;
-        dist = sqrtf(SQ(xDiff) + SQ(zDiff));
-        if (!(fourteen + distThreshold <= dist)
-            && !(itemY + yBottomThreshold < playerY2)
-            && !(playerY2 + yTopThreshold < itemY))
+        dx = itemX - hammerX;
+        dz = itemZ - hammerZ;
+        dist = sqrtf(SQ(dx) + SQ(dz));
+
+        if (!(hammerRadius + itemPickupRadius <= dist) // XZ distance is close enough
+            && !(itemY + itemHitboxHeight < hammerY) // item is not below hammer
+            && !(hammerY + hammerHitboxHeight < itemY)) // hammer is not below item
         {
-            cond = TRUE;
+            hitDetected = TRUE;
         }
     }
 
-    if (cond) {
-        if (item->flags & ITEM_ENTITY_FLAG_80) {
-            if (D_801565A6 != 0) {
-                D_801565A6--;
+    // if an item spawns inside the player, wait a bit before allowing pickup
+    if (hitDetected) {
+        if (item->flags & ITEM_ENTITY_FLAG_JUST_SPAWNED) {
+            if (ItemSpawnWithinPlayerPickupDelay != 0) {
+                ItemSpawnWithinPlayerPickupDelay--;
                 return FALSE;
-            } else {
-                item->flags &= ~ITEM_ENTITY_FLAG_80;
             }
+            item->flags &= ~ITEM_ENTITY_FLAG_JUST_SPAWNED;
         }
         return TRUE;
     }
 
-    if (item->flags & ITEM_ENTITY_FLAG_80) {
-        item->flags &= ~ITEM_ENTITY_FLAG_80;
+    // no hit detected, skip 'spawned within player' checks in the future
+    if (item->flags & ITEM_ENTITY_FLAG_JUST_SPAWNED) {
+        item->flags &= ~ITEM_ENTITY_FLAG_JUST_SPAWNED;
     }
     return FALSE;
 }
@@ -1736,7 +1745,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                 physData->useSimplePhysics = TRUE;
             }
 
-            if (item->flags & ITEM_ENTITY_FLAG_800) {
+            if (item->flags & ITEM_ENTITY_FLAG_SAVE_ON_INIT) {
                 set_global_flag(item->boundVar);
             }
             item->state = ITEM_PHYSICS_STATE_ALIVE;
@@ -1801,9 +1810,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                 outDepth = temp + physData->verticalVel;
 
                 if (!physData->useSimplePhysics) {
-                    hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                    hit = npc_raycast_up(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth);
                 } else {
-                    hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                    hit = npc_raycast_up(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth);
                 }
 
                 if (hit && outDepth < temp) {
@@ -1823,9 +1832,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                 outZ = item->pos.z;
 
                 if (!physData->useSimplePhysics) {
-                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
+                    hit = npc_test_move_complex_with_slipping(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 } else {
-                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
+                    hit = npc_test_move_simple_with_slipping(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 }
 
                 if (hit) {
@@ -1854,9 +1863,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                     outZ = item->pos.z;
                     outDepth = -physData->verticalVel + 12.0f;
                     if (!physData->useSimplePhysics) {
-                        hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                        hit = npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth);
                     } else {
-                        hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
+                        hit = npc_raycast_down_around(COLLIDER_FLAG_IGNORE_NPC, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
                     }
                 } else {
                     outX = item->pos.x;
@@ -2008,7 +2017,7 @@ void update_item_entity_collectable(ItemEntity* item) {
     // items in this unused state are managed by a script
     // when the script is done executing, destroy these items
     if (item->state == ITEM_PHYSICS_STATE_04) {
-        if (!does_script_exist(D_80155D80)) {
+        if (!does_script_exist(UnusedItemPhysicsScriptID)) {
             D_801565A8 = FALSE;
             remove_item_entity_by_reference(item);
             resume_all_group(EVT_GROUP_02);
@@ -2027,7 +2036,7 @@ void update_item_entity_collectable(ItemEntity* item) {
 void draw_ui_item_entity_collectable(ItemEntity* item) {
     if (item->state == ITEM_PHYSICS_STATE_ALIVE) {
         ItemEntityPhysicsData* physicsData = item->physicsData;
-        s32 flag = (item->flags & ITEM_ENTITY_FLAG_20000) > 0;
+        s32 flag = (item->flags & ITEM_ENTITY_FLAG_ODD_SPAWN_PARITY) > 0;
 
         if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
             if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
@@ -2073,7 +2082,7 @@ void draw_ui_item_entity_no_pickup(ItemEntity* item) {
 void update_item_entity_pickup(ItemEntity* item) {
     PlayerData* playerData = &gPlayerData;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PopupMenu* menu = &D_801565B0;
+    PopupMenu* menu = &ItemPickupMenu;
     ItemData* itemData;
     s32 numEntries;
     s32 msgID;
@@ -2389,8 +2398,8 @@ block_47: // TODO required to match
             break;
         case ITEM_PICKUP_STATE_AWAIT_THROW_AWAY:
             if (ItemPickupStateDelay == 0) {
-                D_801568E8 = menu->result;
-                if (D_801568E8 == 0) {
+                ThrowAwayMenuIdx = menu->result;
+                if (ThrowAwayMenuIdx == 0) {
                     break;
                 }
                 hide_popup_menu();
@@ -2398,23 +2407,23 @@ block_47: // TODO required to match
             ItemPickupStateDelay++;
             if (ItemPickupStateDelay >= 15) {
                 destroy_popup_menu();
-                if (D_801568E8 == 255) {
-                    D_801568E8 = 1;
+                if (ThrowAwayMenuIdx == 255) {
+                    ThrowAwayMenuIdx = 1;
                 }
-                D_801568EC = menu->userIndex[D_801568E8 - 1];
-                hud_element_set_script(ItemPickupIconID, menu->ptrIcon[D_801568E8 - 1]);
+                ThrowAwayItemID = menu->userIndex[ThrowAwayMenuIdx - 1];
+                hud_element_set_script(ItemPickupIconID, menu->ptrIcon[ThrowAwayMenuIdx - 1]);
 
                 get_item_entity(
                     make_item_entity_delayed(
-                        D_801568EC,
+                        ThrowAwayItemID,
                         playerStatus->pos.x,
                         playerStatus->pos.y + playerStatus->colliderHeight,
                         playerStatus->pos.z, 3, 0, 0
                     )
                 )->renderGroup = -1;
 
-                if (D_801568E8 >= 2) {
-                    playerData->invItems[D_801568E8 - 2] = ITEM_NONE;
+                if (ThrowAwayMenuIdx >= 2) {
+                    playerData->invItems[ThrowAwayMenuIdx - 2] = ITEM_NONE;
                     sort_items();
                     add_item(item->itemID);
                 }
@@ -2484,7 +2493,7 @@ void func_801363A0(ItemEntity* item) {
                     itemMsg = MSG_Menus_005C;
                 }
 
-                set_message_msg(itemData->nameMsg, 0);
+                set_message_text_var(itemData->nameMsg, 0);
 
                 if (!(gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
                     item->itemID != ITEM_STAR_PIECE &&
@@ -2513,7 +2522,7 @@ void func_801363A0(ItemEntity* item) {
                     itemMsg = MSG_Menus_005C;
                 }
 
-                set_message_msg(itemData->nameMsg, 0);
+                set_message_text_var(itemData->nameMsg, 0);
                 width = get_msg_width(itemMsg, 0) + 30;
                 posX = 160 - width / 2;
                 posY = 76;
@@ -2548,7 +2557,7 @@ void func_801363A0(ItemEntity* item) {
             }
             break;
         case ITEM_PICKUP_STATE_AWAIT_THROW_AWAY:
-            set_message_msg(itemData->nameMsg, 0);
+            set_message_text_var(itemData->nameMsg, 0);
             width = get_msg_width(MSG_Menus_005F, 0) + 54;
             posX = 160 - width / 2;
             set_window_properties(WINDOW_ID_12, 160 - width / 2, 76, width, 40, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
@@ -2572,7 +2581,7 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
                 } else {
                     itemMsg = MSG_Menus_005A;
                 }
-                set_message_msg(itemData->nameMsg, 0);
+                set_message_text_var(itemData->nameMsg, 0);
 
                 if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_1_COIN) {
                     itemMsg = MSG_Menus_005D;
@@ -2600,7 +2609,7 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
                     itemMsg = MSG_Menus_005C;
                 }
 
-                set_message_msg(itemData->nameMsg, 0);
+                set_message_text_var(itemData->nameMsg, 0);
             }
 
             offsetY = PickupMessageWindowYOffsets[get_msg_lines(itemMsg) - 1];
@@ -2622,7 +2631,7 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
             break;
         case ITEM_PICKUP_STATE_SHOW_THREW_AWAY:
         case ITEM_PICKUP_STATE_HIDE_THREW_AWAY:
-            set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
+            set_message_text_var(gItemTable[ThrowAwayItemID].nameMsg, 0);
             draw_msg(MSG_Menus_005F, posX + 40, posY + 4, 255, MSG_PAL_2F, 0);
             hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
             hud_element_draw_next(ItemPickupIconID);

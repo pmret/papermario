@@ -115,7 +115,7 @@ API_CALLABLE(LoadStarPowerScript) {
     PlayerData* playerData = &gPlayerData;
     s16 starPowerIdx;
 
-    playerData->specialBarsFilled -= gMoveTable[battleStatus->selectedMoveID].costFP * 256;
+    playerData->starPower -= gMoveTable[battleStatus->selectedMoveID].costFP * SP_PER_BAR;
     starPowerIdx = battleStatus->moveArgument;
     dma_copy((&StarPowersTable[starPowerIdx])->romStart,
              (&StarPowersTable[starPowerIdx])->romEnd,

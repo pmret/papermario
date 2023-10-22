@@ -163,7 +163,7 @@ EvtScript N(EVS_UsePower) = {
                 EVT_END_THREAD
             EVT_CASE_DEFAULT
                 EVT_IF_EQ(LFlag0, FALSE)
-                    EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
+                    EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_IMMUNE_HIT | BS_FLAGS1_TRIGGER_EVENTS)
                 EVT_END_IF
         EVT_END_SWITCH
         EVT_WAIT(5)

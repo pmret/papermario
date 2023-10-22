@@ -1007,7 +1007,9 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         } while (0); // required to match
 
         if (isPartner) {
-            if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_PARTNER_TURN_USED)) == BS_FLAGS2_PARTNER_TURN_USED) {
+            if (!(gBattleStatus.flags2 & (BS_FLAGS2_OVERRIDE_INACTIVE_PARTNER))
+                && (gBattleStatus.flags2 & BS_FLAGS2_PARTNER_TURN_USED)
+            ) {
                 do {
                     if (actor->koStatus == 0) {
                         part->curAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_INACTIVE);
@@ -1017,7 +1019,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
                 } while (0); // required to match
                 set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_PLAYER_DEBUFF);
                 palChanged = TRUE;
-                set_actor_pal_effect(actor, GLOW_PAL_OFF);
+                set_actor_glow_pal(actor, GLOW_PAL_OFF);
                 decorChanged = TRUE;
             }
             if (isPartner && (gPlayerData.curPartner == PARTNER_WATT)) {
@@ -1029,7 +1031,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
         }
         if (actor->isGlowing) {
             if (!decorChanged) {
-                set_actor_pal_effect(actor, GLOW_PAL_ON);
+                set_actor_glow_pal(actor, GLOW_PAL_ON);
             }
             decorChanged = TRUE;
         }
@@ -1061,7 +1063,7 @@ void appendGfx_npc_actor(b32 isPartner, s32 actorIndex) {
             set_actor_pal_adjustment(actor, ACTOR_PAL_ADJUST_NONE);
         }
         if (!decorChanged && !(part->flags & ACTOR_PART_FLAG_HAS_PAL_EFFECT)) {
-            set_actor_pal_effect(actor, GLOW_PAL_OFF);
+            set_actor_glow_pal(actor, GLOW_PAL_OFF);
         }
 
         // adjust idle animation for status
@@ -1552,7 +1554,7 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
 
-    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000)
+    if (!(gBattleStatus.flags2 & BS_FLAGS2_HIDE_BUFF_COUNTERS)
         && !(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN)
         && (player->flags & ACTOR_FLAG_SHOW_STATUS_ICONS)
     ) {
@@ -1628,12 +1630,13 @@ void appendGfx_player_actor(void* arg0) {
         lastAnim = playerParts->curAnimation;
     } while (0); // required to match
 
-    if (((((gBattleStatus.flags2 & (BS_FLAGS2_8 | BS_FLAGS2_PLAYER_TURN_USED)) == BS_FLAGS2_PLAYER_TURN_USED)
+    if ((((!(gBattleStatus.flags2 & BS_FLAGS2_OVERRIDE_INACTIVE_PLAYER)
+            && (gBattleStatus.flags2 & BS_FLAGS2_PLAYER_TURN_USED))
                 && (partner != NULL))
             || (battleStatus->outtaSightActive > 0))
         && !(player->flags & ACTOR_FLAG_NO_INACTIVE_ANIM)
-        && !((partner != NULL) && (partner->flags & ACTOR_FLAG_NO_ATTACK)))
-    {
+        && !((partner != NULL) && (partner->flags & ACTOR_FLAG_NO_ATTACK))
+    ) {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_NO_PLAYER_PAL_ADJUST)) {
             if ((player->debuff != STATUS_KEY_FEAR)
                 && (player->debuff != STATUS_KEY_PARALYZE)
@@ -1665,7 +1668,7 @@ void appendGfx_player_actor(void* arg0) {
             }
             palChanged = TRUE;
 
-            set_actor_pal_effect(player, GLOW_PAL_OFF);
+            set_actor_glow_pal(player, GLOW_PAL_OFF);
             decorChanged = TRUE;
         }
     }
@@ -1678,7 +1681,7 @@ void appendGfx_player_actor(void* arg0) {
         if (!palChanged) {
             set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_NONE);
         }
-        set_actor_pal_effect(player, GLOW_PAL_OFF);
+        set_actor_glow_pal(player, GLOW_PAL_OFF);
         palChanged = TRUE;
         enable_status_debuff(player->hudElementDataIndex);
         decorChanged = TRUE;
@@ -1722,7 +1725,7 @@ void appendGfx_player_actor(void* arg0) {
     }
     if (battleStatus->turboChargeTurnsLeft != 0) {
         if (!decorChanged) {
-            set_actor_pal_effect(player, GLOW_PAL_ON);
+            set_actor_glow_pal(player, GLOW_PAL_ON);
         }
         decorChanged = TRUE;
     }
@@ -1736,7 +1739,7 @@ void appendGfx_player_actor(void* arg0) {
         set_actor_pal_adjustment(player, ACTOR_PAL_ADJUST_NONE);
     }
     if (!decorChanged) {
-        set_actor_pal_effect(player, GLOW_PAL_OFF);
+        set_actor_glow_pal(player, GLOW_PAL_OFF);
     }
     if (player->flags & ACTOR_FLAG_USING_IDLE_ANIM) {
         if (battleStatus->hustleTurns != 0) {

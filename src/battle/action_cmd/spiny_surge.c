@@ -79,7 +79,7 @@ API_CALLABLE(N(start)) {
     actionCommandStatus->barFillWidth = 0;
     battleStatus->actionSuccess = 0;
     actionCommandStatus->state = 10;
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
 
     func_80269118();
 

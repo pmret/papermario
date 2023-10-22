@@ -40,7 +40,7 @@ EvtScript N(EVS_NpcAI_PutridPiranha_Hitbox) = {
     EVT_CALL(SetSelfVar, 0, 14)
     EVT_CALL(SetSelfVar, 1, 28)
     EVT_CALL(SetSelfVar, 4, 3)
-    EVT_CALL(SetSelfVar, 15, SOUND_20DE)
+    EVT_CALL(SetSelfVar, 15, SOUND_PIRANHA_BITE)
     EVT_CALL(N(MeleeHitbox_Main))
     EVT_RETURN
     EVT_END

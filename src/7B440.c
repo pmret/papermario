@@ -67,8 +67,8 @@ void reset_player_status(void) {
     playerStatus->availableDisguiseType = 1;
     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
-    playerStatus->alpha1 = 255;
-    playerStatus->alpha2 = 255;
+    playerStatus->curAlpha = 255;
+    playerStatus->prevAlpha = 255;
     gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
     gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DEPRESSED;
 

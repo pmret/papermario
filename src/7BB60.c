@@ -538,7 +538,7 @@ void collision_main_lateral(void) {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
                     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
-                    if (playerStatus->alpha1 != 128) {
+                    if (playerStatus->curAlpha != 128) {
                         collision_check_player_intersecting_world(0, 0,
                             atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z));
                     }
@@ -710,12 +710,12 @@ void collision_main_lateral(void) {
                     test1Y = playerY;
                     test1Z = playerZ;
                     yaw = clamp_angle(yaw2 - 35.0);
-                    test1 = player_test_lateral_overlap(0, playerStatus, &test1X, &test1Y, &test1Z, 0.0f, yaw);
+                    test1 = player_test_lateral_overlap(PLAYER_COLLISION_0, playerStatus, &test1X, &test1Y, &test1Z, 0.0f, yaw);
                     test2X = playerX;
                     test2Z = playerY;
                     test2Y = playerZ;
                     yaw = clamp_angle(yaw2 + 35.0);
-                    test2 = player_test_lateral_overlap(0, playerStatus, &test2X, &test2Z, &test2Y, 0.0f, yaw);
+                    test2 = player_test_lateral_overlap(PLAYER_COLLISION_0, playerStatus, &test2X, &test2Z, &test2Y, 0.0f, yaw);
 
                     if (test1 < 0) {
                         if (test2 < 0) {
@@ -823,7 +823,7 @@ void collision_check_player_overlaps(void) {
         f32 y = playerStatus->pos.y;
         f32 z = playerStatus->pos.z;
 
-        player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, overlapPush, playerStatus->overlapPushYaw);
+        player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, overlapPush, playerStatus->overlapPushYaw);
 
         overlapPush -= playerStatus->runSpeed / 10.0f;
         playerStatus->pos.x = x;
@@ -1014,7 +1014,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.75f);
     x = playerStatus->pos.x;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
@@ -1022,7 +1022,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.75f);
     x = playerStatus->pos.x;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
@@ -1030,7 +1030,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
@@ -1038,7 +1038,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
@@ -1046,7 +1046,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
     temp_f0 = clamp_angle(playerStatus->targetYaw - 90.0);
@@ -1054,7 +1054,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 
@@ -1062,7 +1062,7 @@ void collision_lava_reset_check_additional_overlaps(void) {
     x = playerStatus->pos.x;
     y = playerStatus->pos.y;
     z = playerStatus->pos.z;
-    player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
+    player_test_lateral_overlap(PLAYER_COLLISION_0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
     playerStatus->pos.x = x;
     playerStatus->pos.z = z;
 }

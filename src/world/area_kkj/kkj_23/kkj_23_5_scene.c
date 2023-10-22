@@ -164,7 +164,7 @@ EvtScript N(EVS_RemoveDisguise) = {
         EVT_ADD(LVar1, 4)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtPlayer, SOUND_2049, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtPlayer, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
     EVT_CALL(N(ForceDisguiseLoss))
     EVT_LOOP(10)
         EVT_CALL(InterpPlayerYaw, LVar0, 0)
@@ -289,7 +289,7 @@ EvtScript N(EVS_Scene_KammyUnmasksPeach) = {
     EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 5)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim05)
     EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim05, ANIM_WorldKammy_Anim05, 5, MSG_Peach_0154)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_207A, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_KAMMY_SUMMON_MAGIC, SOUND_SPACE_DEFAULT)
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -20)
     EVT_ADD(LVar1, 40)

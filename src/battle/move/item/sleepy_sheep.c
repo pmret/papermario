@@ -295,7 +295,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(SetBattleCamZoom, 169)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0364)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_SHEEP_STAMPEDE)
         EVT_LOOP(7)
             EVT_CALL(StartRumble, BTL_RUMBLE_HIT_MIN)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
@@ -423,7 +423,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_END_IF
         EVT_CALL(GetItemPower, ITEM_SLEEPY_SHEEP, LVar0, LVar1)
         EVT_CALL(MakeStatusField, LVar0, STATUS_FLAG_SLEEP, 100, LVar0)
-        EVT_CALL(ItemAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, LVar0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(ItemAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, LVar0, 0, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_LABEL(1)
         EVT_WAIT(5)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)

@@ -1,24 +1,36 @@
 #include "common.h"
 #include "effects_internal.h"
 
+enum MiniHeartState {
+    HEART_STATE_INIT        = 0,
+    HEART_STATE_APPEAR      = 1,
+    HEART_STATE_SWARM       = 2,
+    HEART_STATE_MISS        = 20,
+    HEART_STATE_WAIT        = 3,
+    HEART_STATE_SQUEEZE     = 4,
+    HEART_STATE_DISPERSE    = 5,
+    HEART_STATE_VANISH      = 6,
+    HEART_STATE_DONE        = 7,
+};
+
 extern Gfx D_09000400_3D2980[];
 extern Gfx D_09000518_3D2A98[];
 
-u8 D_E00CCDD0[] = { 94, 92, 100, 105, 107, 105, 100 };
+u8 AnimScalePct[] = { 94, 92, 100, 105, 107, 105, 100 };
 
-u8 D_E00CCDD8[] = { 20, 40, 58, 73, 85, 92, 97, 100 };
+u8 AppearScalePct[] = { 20, 40, 58, 73, 85, 92, 97, 100 };
 
-u8 D_E00CCDE0[] = {
+u8 SwarmInterpPct[] = {
      0,  2,  5,  9,  14, 20, 27, 35, 44, 54,
     64, 74, 84, 94, 100
 };
 
-u8 D_E00CCDF0[] = {
+u8 MissInterpPct[] = {
       0,  10,  20,  30,  40,  50,  60,  70,  80,  90,
     100, 109, 117, 124, 130, 135, 139, 142, 144, 145
 };
 
-u8 D_E00CCE04[] = {
+u8 SqueezeInterpPct[] = {
     100, 100, 100, 100, 100, 100, 100, 100, 101, 102,
     102, 103, 103, 104, 104, 104, 107, 107, 110, 110,
     118, 118, 126, 126, 134, 142, 145, 145, 145, 142,
@@ -28,10 +40,12 @@ u8 D_E00CCE04[] = {
     134, 126, 126, 118, 118, 110, 110, 105, 105, 105
 };
 
-s8 D_E00CCE4C[] = {
-    -5, -5, -5, -4, -4, -4, -3, -3, -2, -2,
-    -1, -1,  0,  0,  1,  2,  2,  3,  3,  4,
-     4,  4,  5,  5,  5
+s8 HeartOffsetY[TUBBA_MINI_HEART_COUNT] = {
+    -5, -5, -5, -4, -4,
+    -4, -3, -3, -2, -2,
+    -1, -1,  0,  0,  1,
+     2,  2,  3,  3,  4,
+     4,  4,  5,  5,  5,
 };
 
 void tubba_heart_attack_init(EffectInstance* effect);
@@ -40,12 +54,12 @@ void tubba_heart_attack_render(EffectInstance* effect);
 void tubba_heart_attack_appendGfx(void* effect);
 
 EffectInstance* tubba_heart_attack_main(
-    s32 arg0,
+    s32 type,
     f32 arg1,
     f32 arg2,
     f32 arg3,
     f32 arg4,
-    s32 arg5
+    s32 duration
 ) {
     EffectBlueprint bp;
     EffectInstance* effect;
@@ -65,38 +79,38 @@ EffectInstance* tubba_heart_attack_main(
     data = effect->data.tubbaHeartAttack = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.tubbaHeartAttack != NULL);
 
-    data->unk_00 = arg0;
-    data->unk_14 = 0;
-    if (arg5 <= 0) {
-        data->unk_10 = 1000;
+    data->type = type;
+    data->lifetime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = duration;
     }
-    data->unk_24 = 255;
-    data->unk_04 = arg1;
-    data->unk_08 = arg2;
-    data->unk_0C = arg3;
-    data->unk_28 = arg4;
-    data->unk_18 = 70;
-    data->unk_1C = 180;
-    data->unk_20 = 120;
+    data->primA = 255;
+    data->centerX = arg1;
+    data->centerY = arg2;
+    data->centerZ = arg3;
+    data->overallScale = arg4;
+    data->primR = 70;
+    data->primG = 180;
+    data->primB = 120;
 
-    for (i = 0; i < 25; i++) {
-        f32 sin = sin_deg(i * 1080 / 25);
-        f32 cos = cos_deg(i * 1080 / 25);
+    for (i = 0; i < TUBBA_MINI_HEART_COUNT; i++) {
+        f32 sin = sin_deg(i * 1080 / TUBBA_MINI_HEART_COUNT);
+        f32 cos = cos_deg(i * 1080 / TUBBA_MINI_HEART_COUNT);
 
-        data->unk_478[i] = rand_int(359) - 180;
-        data->unk_284[i] = sin * 15.0f;
-        data->unk_2E8[i] = D_E00CCE4C[i] + 10;
-        data->unk_34C[i] = cos * 15.0f;
-        data->unk_158[i] = sin * 120.0f;
-        data->unk_1BC[i] = D_E00CCE4C[i] * 8 + 40;
-        data->unk_220[i] = cos * 120.0f;
-        data->unk_66C[i] = i * 2 + 1;
-        data->unk_5A4[i] = 0;
-        data->unk_6D0[i] = 0;
-        data->unk_734[i] = 0;
-        data->unk_4DC[i] = 0;
+        data->rotZ[i] = rand_int(359) - 180;
+        data->finalX[i] = sin * 15.0f;
+        data->finalY[i] = HeartOffsetY[i] + 10;
+        data->finalZ[i] = cos * 15.0f;
+        data->initialX[i] = sin * 120.0f;
+        data->initialY[i] = HeartOffsetY[i] * 8 + 40;
+        data->initialZ[i] = cos * 120.0f;
+        data->appearDelay[i] = i * 2 + 1;
+        data->shrinkVelY[i] = 0;
+        data->state[i] = HEART_STATE_INIT;
+        data->stateTime[i] = 0;
+        data->rotXY[i] = 0;
     }
 
     return effect;
@@ -110,171 +124,164 @@ EFFECT_DEF_FLOATING_CLOUD_PUFF(floating_cloud_puff_main);
 void tubba_heart_attack_update(EffectInstance* effect) {
     TubbaHeartAttackFXData* data = effect->data.tubbaHeartAttack;
     EffectInstance* puffEffect;
-    s32 unk_00 = data->unk_00;
-    s32 unk_14;
+    s32 type = data->type;
+    s32 time;
     f32 factor;
     f32 angle;
     f32 sin;
     f32 cos;
-    Matrix4f sp18;
-    Matrix4f sp58;
+    Matrix4f mtx;
+    Matrix4f tempMtx;
     s32 i;
     s32 j;
 
     if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
         effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
-        data->unk_10 = 64;
+        data->timeLeft = 64;
     }
 
-    if (data->unk_10 < 1000) {
-        data->unk_10--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_14++;
+    data->lifetime++;
 
-    if (data->unk_10 < 0) {
+    if (data->timeLeft < 0) {
         remove_effect(effect);
         return;
     }
 
-    unk_14 = data->unk_14;
+    time = data->lifetime;
 
-    for (i = 0; i < 25; i++) {
-        f32 unk_158 = data->unk_158[i];
-        f32 unk_1BC = data->unk_1BC[i];
-        f32 unk_220 = data->unk_220[i];
+    for (i = 0; i < TUBBA_MINI_HEART_COUNT; i++) {
+        f32 x = data->initialX[i];
+        f32 y = data->initialY[i];
+        f32 z = data->initialZ[i];
 
-        data->unk_414[i] = D_E00CCDD0[unk_14 % ARRAY_COUNT(D_E00CCDD0)] * 0.01f;
-        data->unk_3B0[i] = 2.0f - data->unk_414[i];
+        data->scaleY[i] = AnimScalePct[time % ARRAY_COUNT(AnimScalePct)] * 0.01f;
+        data->scaleX[i] = 2.0f - data->scaleY[i];
 
-        switch (data->unk_6D0[i]) {
-            case 0:
-                data->unk_2C[i] = unk_158;
-                data->unk_90[i] = unk_1BC;
-                data->unk_F4[i] = unk_220;
-                data->unk_4DC[i] += 0.0f;
+        switch (data->state[i]) {
+            case HEART_STATE_INIT:
+                data->posX[i] = x;
+                data->posY[i] = y;
+                data->posZ[i] = z;
+                data->rotXY[i] += 0.0f;
 
-                if (data->unk_66C[i] != 0) {
-                    data->unk_66C[i]--;
-                } else {
-                    data->unk_6D0[i] = 1;
-                    data->unk_3B0[i] = data->unk_414[i] = D_E00CCDD8[data->unk_734[i]] * 0.01;
-                    data->unk_734[i]++;
+                if (data->appearDelay[i] != 0) {
+                    data->appearDelay[i]--;
+                    break;
                 }
 
+                data->state[i] = HEART_STATE_APPEAR;
+                data->scaleX[i] = data->scaleY[i] = AppearScalePct[data->stateTime[i]] * 0.01;
+                data->stateTime[i]++;
                 break;
-            case 1:
-                data->unk_3B0[i] = data->unk_414[i] = D_E00CCDD8[data->unk_734[i]] * 0.01;
-                data->unk_4DC[i] += 0.0f;
+            case HEART_STATE_APPEAR:
+                data->scaleX[i] = data->scaleY[i] = AppearScalePct[data->stateTime[i]] * 0.01;
+                data->rotXY[i] += 0.0f;
 
-                data->unk_734[i]++;
-                if (data->unk_734[i] >= ARRAY_COUNT(D_E00CCDD8)) {
-                    if (unk_00 == 0) {
-                        data->unk_6D0[i] = 2;
+                data->stateTime[i]++;
+                if (data->stateTime[i] >= ARRAY_COUNT(AppearScalePct)) {
+                    if (type == FX_HEART_SWARM_HIT) {
+                        data->state[i] = HEART_STATE_SWARM;
                     } else {
-                        data->unk_6D0[i] = 20;
+                        data->state[i] = HEART_STATE_MISS;
                     }
-                    data->unk_734[i] = 0;
+                    data->stateTime[i] = 0;
                 }
-
                 break;
-            case 20:
-                data->unk_4DC[i] += 0.0f;
+            case HEART_STATE_MISS:
+                data->rotXY[i] += 0.0f;
 
-                factor = D_E00CCDF0[data->unk_734[i]] * 0.01;
+                factor = MissInterpPct[data->stateTime[i]] * 0.01;
 
-                data->unk_3B0[i] = data->unk_414[i] = 1.0f;
-                data->unk_2C[i] = unk_158 + (data->unk_284[i] - unk_158) * factor;
-                data->unk_90[i] = unk_1BC + (data->unk_2E8[i] - unk_1BC) * factor;
-                data->unk_F4[i] = unk_220 + (data->unk_34C[i] - unk_220) * factor;
+                data->scaleX[i] = data->scaleY[i] = 1.0f;
+                data->posX[i] = x + (data->finalX[i] - x) * factor;
+                data->posY[i] = y + (data->finalY[i] - y) * factor;
+                data->posZ[i] = z + (data->finalZ[i] - z) * factor;
 
-                data->unk_734[i]++;
-                if (data->unk_734[i] >= ARRAY_COUNT(D_E00CCDF0)) {
-                    data->unk_6D0[i] = 5;
-                    data->unk_734[i] = 0;
-                    data->unk_540[i] = data->unk_284[i] * 0.5;
-                    data->unk_5A4[i] = data->unk_2E8[i] * 0.5;
-                    data->unk_608[i] = data->unk_34C[i] * 0.5;
+                data->stateTime[i]++;
+                if (data->stateTime[i] >= ARRAY_COUNT(MissInterpPct)) {
+                    data->state[i] = HEART_STATE_DISPERSE;
+                    data->stateTime[i] = 0;
+                    data->shrinkVelX[i] = data->finalX[i] * 0.5;
+                    data->shrinkVelY[i] = data->finalY[i] * 0.5;
+                    data->shrinkVelZ[i] = data->finalZ[i] * 0.5;
                 }
-
                 break;
-            case 2:
-                data->unk_4DC[i] += 0.0f;
+            case HEART_STATE_SWARM:
+                data->rotXY[i] += 0.0f;
 
-                factor = D_E00CCDE0[data->unk_734[i]] * 0.01;
+                factor = SwarmInterpPct[data->stateTime[i]] * 0.01;
 
-                data->unk_414[i] = 1.0f;
-                data->unk_3B0[i] = 1.0f;
-                data->unk_2C[i] = unk_158 + (data->unk_284[i] - unk_158) * factor;
-                data->unk_90[i] = unk_1BC + (data->unk_2E8[i] - unk_1BC) * factor;
-                data->unk_F4[i] = unk_220 + (data->unk_34C[i] - unk_220) * factor;
+                data->scaleY[i] = 1.0f;
+                data->scaleX[i] = 1.0f;
+                data->posX[i] = x + (data->finalX[i] - x) * factor;
+                data->posY[i] = y + (data->finalY[i] - y) * factor;
+                data->posZ[i] = z + (data->finalZ[i] - z) * factor;
 
-                data->unk_734[i]++;
-                if (data->unk_734[i] >= ARRAY_COUNT(D_E00CCDE0)) {
-                    data->unk_6D0[i] = 3;
-                    data->unk_734[i] = 0;
+                data->stateTime[i]++;
+                if (data->stateTime[i] >= ARRAY_COUNT(SwarmInterpPct)) {
+                    data->state[i] = HEART_STATE_WAIT;
+                    data->stateTime[i] = 0;
                 }
-
                 break;
-            case 3:
+            case HEART_STATE_WAIT:
                 if (i == 24) {
-                    for (j = 0; j < ARRAY_COUNT(data->unk_6D0); j++) {
-                        data->unk_6D0[j] = 4;
+                    for (j = 0; j < ARRAY_COUNT(data->state); j++) {
+                        data->state[j] = HEART_STATE_SQUEEZE;
                     }
                 }
-
                 break;
-            case 4:
-                factor = D_E00CCE04[data->unk_734[i]] * 0.01;
-                angle = i * 1080 / 25 + (1.0f - factor) * 1080.0f * 0.5 * cos_deg(i * 180 / 25);
+            case HEART_STATE_SQUEEZE:
+                factor = SqueezeInterpPct[data->stateTime[i]] * 0.01;
+                angle = i * 1080 / TUBBA_MINI_HEART_COUNT + (1.0f - factor) * 1080.0f * 0.5 * cos_deg(i * 180 / TUBBA_MINI_HEART_COUNT);
                 sin = sin_deg(angle);
                 cos = cos_deg(angle);
 
-                data->unk_2C[i] = ((15.0f / factor) / factor) * sin;
-                data->unk_90[i] = D_E00CCE4C[i] + 10;
-                data->unk_F4[i] = ((15.0f / factor) / factor) * cos;
+                data->posX[i] = ((15.0f / factor) / factor) * sin;
+                data->posY[i] = HeartOffsetY[i] + 10;
+                data->posZ[i] = ((15.0f / factor) / factor) * cos;
 
-                data->unk_734[i]++;
-                if (data->unk_734[i] >= ARRAY_COUNT(D_E00CCE04)) {
-                    data->unk_6D0[i] = 5;
-                    data->unk_734[i] = 0;
-                    data->unk_540[i] = data->unk_284[i] * 0.5;
-                    data->unk_5A4[i] = data->unk_2E8[i] * 0.5;
-                    data->unk_608[i] = data->unk_34C[i] * 0.5;
+                data->stateTime[i]++;
+                if (data->stateTime[i] >= ARRAY_COUNT(SqueezeInterpPct)) {
+                    data->state[i] = HEART_STATE_DISPERSE;
+                    data->stateTime[i] = 0;
+                    data->shrinkVelX[i] = data->finalX[i] * 0.5;
+                    data->shrinkVelY[i] = data->finalY[i] * 0.5;
+                    data->shrinkVelZ[i] = data->finalZ[i] * 0.5;
+                }
+                break;
+            case HEART_STATE_DISPERSE:
+                data->posX[i] += data->shrinkVelX[i];
+                data->posY[i] += data->shrinkVelY[i];
+                data->posZ[i] += data->shrinkVelZ[i];
+                data->shrinkVelX[i] *= 0.99;
+                data->shrinkVelY[i] *= 0.99;
+                data->shrinkVelZ[i] *= 0.99;
+                data->shrinkVelY[i] += -0.1;
+
+                data->stateTime[i]++;
+                if (data->stateTime[i] >= 17) {
+                    data->stateTime[i] = 0;
+                    data->state[i] = HEART_STATE_VANISH;
                 }
 
+                data->rotZ[i] *= 0.9;
                 break;
-            case 5:
-                data->unk_2C[i] += data->unk_540[i];
-                data->unk_90[i] += data->unk_5A4[i];
-                data->unk_F4[i] += data->unk_608[i];
-                data->unk_540[i] *= 0.99;
-                data->unk_5A4[i] *= 0.99;
-                data->unk_608[i] *= 0.99;
-                data->unk_5A4[i] += -0.1;
-
-                data->unk_734[i]++;
-                if (data->unk_734[i] >= 17) {
-                    data->unk_734[i] = 0;
-                    data->unk_6D0[i] = 6;
-                }
-
-                data->unk_478[i] *= 0.9;
-
-                break;
-            case 6:
+            case HEART_STATE_VANISH:
                 load_effect(EFFECT_FLOATING_CLOUD_PUFF);
-                guRotateF(sp18, data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
-                guTranslateF(sp58, data->unk_2C[i], data->unk_90[i], data->unk_F4[i]);
-                guMtxCatF(sp58, sp18, sp18);
+                guRotateF(mtx, data->rotXY[i], 0.0f, 1.0f, 0.0f);
+                guTranslateF(tempMtx, data->posX[i], data->posY[i], data->posZ[i]);
+                guMtxCatF(tempMtx, mtx, mtx);
 
-                puffEffect = floating_cloud_puff_main(0, data->unk_04 + sp18[3][0], data->unk_08 + sp18[3][1], data->unk_0C + sp18[3][2], 1.0f, 16);
+                puffEffect = floating_cloud_puff_main(0, data->centerX + mtx[3][0], data->centerY + mtx[3][1], data->centerZ + mtx[3][2], 1.0f, 16);
                 puffEffect->data.floatingCloudPuff->unk_28 = 100;
                 puffEffect->data.floatingCloudPuff->unk_2C = 0;
                 puffEffect->data.floatingCloudPuff->unk_30 = 0;
 
-                data->unk_6D0[i] = 7;
-
+                data->state[i] = HEART_STATE_DONE;
                 break;
         }
     }
@@ -299,7 +306,7 @@ void func_E00CC9C8(void) {
 void tubba_heart_attack_appendGfx(void* effect) {
     TubbaHeartAttackFXData* data = ((EffectInstance*)effect)->data.tubbaHeartAttack;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 unk_24 = data->unk_24;
+    s32 alpha = data->primA;
     Matrix4f sp18;
     Matrix4f sp58;
     s32 i;
@@ -307,26 +314,26 @@ void tubba_heart_attack_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);
+    guTranslateF(sp18, data->centerX, data->centerY, data->centerZ);
+    guScaleF(sp58, data->overallScale, data->overallScale, data->overallScale);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, alpha);
     gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 0);
     gSPDisplayList(gMainGfxPos++, D_09000400_3D2980);
 
-    for (i = 0; i < 25; i++) {
-        if (data->unk_6D0[i] != 0 && data->unk_6D0[i] != 7) {
-            guRotateF(sp18, data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
-            guTranslateF(sp58, data->unk_2C[i], data->unk_90[i], data->unk_F4[i]);
+    for (i = 0; i < TUBBA_MINI_HEART_COUNT; i++) {
+        if (data->state[i] != HEART_STATE_INIT && data->state[i] != HEART_STATE_DONE) {
+            guRotateF(sp18, data->rotXY[i], 0.0f, 1.0f, 0.0f);
+            guTranslateF(sp58, data->posX[i], data->posY[i], data->posZ[i]);
             guMtxCatF(sp58, sp18, sp18);
-            guRotateF(sp58, -data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
+            guRotateF(sp58, -data->rotXY[i], 0.0f, 1.0f, 0.0f);
             guMtxCatF(sp58, sp18, sp18);
-            guRotateF(sp58, data->unk_478[i], 0.0f, 0.0f, 1.0f);
+            guRotateF(sp58, data->rotZ[i], 0.0f, 0.0f, 1.0f);
             guMtxCatF(sp58, sp18, sp18);
-            guScaleF(sp58, data->unk_3B0[i], data->unk_414[i], 1.0f);
+            guScaleF(sp58, data->scaleX[i], data->scaleY[i], 1.0f);
             guMtxCatF(sp58, sp18, sp18);
             guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 

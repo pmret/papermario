@@ -54,7 +54,7 @@ void action_update_land(void) {
 
         collisionStatus->lastTouchedFloor = -1;
         playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_SPIN;
-        camera->moveFlags &= ~CAMERA_MOVE_FLAG_4;
+        camera->moveFlags &= ~CAMERA_MOVE_ACCEL_INTERP_Y;
     }
     playerStatus->actionSubstate++; // SUBSTATE_DONE
     playerStatus->curSpeed *= 0.6f;

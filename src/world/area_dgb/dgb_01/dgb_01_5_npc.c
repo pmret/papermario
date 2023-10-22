@@ -152,10 +152,10 @@ EvtScript N(EVS_NpcIdle_Tubba_Floor1) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_LOOP(0)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_PARAM_QUIET)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_QUIET)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
             EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20F6, SOUND_PARAM_QUIET)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_QUIET)
             EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(1.0))
             EVT_WAIT(8)
         EVT_END_LOOP

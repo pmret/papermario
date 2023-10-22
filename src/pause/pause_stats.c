@@ -308,9 +308,9 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     // get number of full power increments
     playerData = &gPlayerData;
-    powFullBars = playerData->specialBarsFilled / 256;
-    powIncrements = playerData->specialBarsFilled % 256; // get remainder in unfilled bar
-    powIncrements /= 32; // subdivide unfilled bar into 8 segments (8 = 256/32)
+    powFullBars = playerData->starPower / SP_PER_BAR;
+    powIncrements = playerData->starPower % SP_PER_BAR; // get remainder in unfilled bar
+    powIncrements /= SP_PER_SEG; // subdivide unfilled bar into 8 segments (8 = 256/32)
     powIncrements += powFullBars * 8; // add 8 increments per full bar
 
     // draw filled bars

@@ -7,7 +7,7 @@ API_CALLABLE(N(UnkFunc46)) {
     f32 var3 = 0.0f;
     f32 var4 = 2000.0f;
 
-    if (npc_raycast_down_sides(COLLISION_CHANNEL_10000, &var1, &var2, &var3, &var4)) {
+    if (npc_raycast_down_sides(COLLIDER_FLAG_IGNORE_PLAYER, &var1, &var2, &var3, &var4)) {
         script->varTable[0] = var1;
         script->varTable[2] = var2 + 55.0f;
     }

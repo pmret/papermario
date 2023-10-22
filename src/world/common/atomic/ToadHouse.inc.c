@@ -65,7 +65,7 @@ API_CALLABLE(N(ToadHouse_DoesPlayerNeedSleep)) {
     if (playerData->curMaxFP != playerData->curFP) {
         return ApiStatus_DONE2;
     }
-    if (playerData->specialBarsFilled != playerData->maxStarPower * 256) {
+    if (playerData->starPower != playerData->maxStarPower * SP_PER_BAR) {
         return ApiStatus_DONE2;
     }
     script->varTable[1] = TRUE;

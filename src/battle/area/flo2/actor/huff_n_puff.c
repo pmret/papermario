@@ -612,7 +612,7 @@ EvtScript N(EVS_TrySpawningRuffPuff) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+    EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
         EVT_IF_GT(LVar9, 8)
             EVT_SET(LVar9, 8)
         EVT_END_IF
@@ -647,7 +647,7 @@ EvtScript N(EVS_TrySpawningRuffPuff) = {
     EVT_EXEC_WAIT(N(EVS_UpdateSize))
     EVT_SET(LVarA, 0)
     EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+    EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
         EVT_SET(LVar0, LVar9)
         EVT_IF_GT(LVar0, 1)
             EVT_SET(LVarA, LVar0)
@@ -1388,7 +1388,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -1456,15 +1456,15 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EVT_DIV(LVar0, LVar1)
     EVT_SWITCH(LVar0)
         EVT_CASE_LE(20)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_LE(40)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_LE(60)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_LE(80)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_DEFAULT
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1605,7 +1605,7 @@ EvtScript N(EVS_Move_HealOrSlam) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
@@ -1640,14 +1640,14 @@ EvtScript N(EVS_Move_HealOrSlam) = {
             EVT_GOTO(0)
         EVT_END_IF
     EVT_CALL(RemoveEffect, LVar8)
-    EVT_CALL(StopSound, SOUND_03B0)
+    EVT_CALL(StopSound, SOUND_HUFF_N_PUFF_INHALE)
     EVT_CALL(StopSound, SOUND_BIG_POWER_UP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim18)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim19)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_206D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1715,7 +1715,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
                 EVT_GOTO(1)
             EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
     EVT_THREAD
         EVT_WAIT(15)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
@@ -1728,7 +1728,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
     EVT_CALL(SetBattleCamOffsetZ, 20)
     EVT_CALL(MoveBattleCamOver, 180)
     EVT_WAIT(90)
-    EVT_CALL(StopSound, SOUND_03B0)
+    EVT_CALL(StopSound, SOUND_HUFF_N_PUFF_INHALE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1E)
@@ -1736,10 +1736,10 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim21)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim22)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_WIND_LOOP)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SET(LVarA, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -1802,7 +1802,7 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
                 EVT_WAIT(LVar0)
             EVT_END_LOOP
             EVT_WAIT(20)
-            EVT_CALL(StopSound, SOUND_035D)
+            EVT_CALL(StopSound, SOUND_HEAVY_WIND_LOOP)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -1955,23 +1955,23 @@ EvtScript N(EVS_Move_HurricaneBreath) = {
         EVT_WAIT(110)
         EVT_SET(LVar1, 0)
     EVT_END_IF
-    EVT_CALL(StopSound, SOUND_035D)
+    EVT_CALL(StopSound, SOUND_HEAVY_WIND_LOOP)
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_6, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_6, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_EQ(1)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_5, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_5, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_EQ(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_4, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_4, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_EQ(3)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_3, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_3, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_EQ(4)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_2, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_2, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_CASE_DEFAULT
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_1, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_1, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -2095,7 +2095,7 @@ EvtScript N(EVS_Attack_GroundLightning) = {
         EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar3, 1, LVar2, LVar4, 1, LVar5, EVT_FLOAT(4.0), 30, 0)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -2113,7 +2113,7 @@ EvtScript N(EVS_Attack_GroundLightning) = {
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_GROUND_LIGHTNING, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_GROUND_LIGHTNING, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -2237,8 +2237,8 @@ EvtScript N(EVS_Attack_DirectLightning) = {
             EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035B)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_FIRE_LIGHTNING)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -2351,7 +2351,7 @@ EvtScript N(EVS_Attack_DirectLightning) = {
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DIRECT_LIGHTNING, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DIRECT_LIGHTNING, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -2380,7 +2380,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetBattleCamOffsetZ, 5)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_03B3)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_REAR_UP)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
@@ -2388,7 +2388,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1E)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1F)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
     EVT_SET(LVarF, 0)
@@ -2402,7 +2402,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
         EVT_ADD(LVarF, 1)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
     EVT_LOOP(20)
         EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0)
         EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0)
@@ -2485,7 +2485,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
     EVT_THREAD
         EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E9)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_FALLING)
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
@@ -2494,7 +2494,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar4, LVar3)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_CUBIC_IN)
     EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, LVar0, 0, LVar2, 0)
     EVT_THREAD
@@ -2511,7 +2511,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
         EVT_SET(LVarF, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B7)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
         EVT_LOOP(20)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.5), 10, 0, 0)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.5), 10, 0, 0)
@@ -2522,7 +2522,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
             EVT_ADD(LVarF, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B7)
+        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
         EVT_LOOP(20)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0)
             EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0)
@@ -2597,7 +2597,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     // have each Tuff Puff oscillate after slamming into the ground
     FOR_CHILDREN_ORDERED(HNP_IMPACT_JIGGLE)
 
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SET(LVarA, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -2653,7 +2653,7 @@ EvtScript N(EVS_Attack_GroupSlam) = {
     EVT_WAIT(2)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarA, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarA, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -2868,7 +2868,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
     // have each Tuff Puff squeeze the player
     FOR_CHILDREN_ORDERED(HNP_SQUEEZE_PLAYER)
 
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -2971,7 +2971,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                 EVT_WAIT(2)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 1, BS_FLAGS1_40)
+                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 1, BS_FLAGS1_NICE_HIT)
                 EVT_ADD(LVar3, 1)
             EVT_END_IF
             EVT_IF_GT(LVar3, 1)
@@ -3001,7 +3001,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
                 EVT_WAIT(2)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
+                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_NICE_HIT)
                 EVT_ADD(LVarD, 1)
             EVT_END_IF
             EVT_CALL(GetActionSuccessCopy, LVar0)
@@ -3030,7 +3030,7 @@ EvtScript N(EVS_Attack_TuffPuffSwarm) = {
     EVT_END_IF
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)

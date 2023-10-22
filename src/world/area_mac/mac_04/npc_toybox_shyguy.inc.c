@@ -102,7 +102,7 @@ EvtScript N(EVS_SuspiciousGuy_RevealSecretRoom) = {
 };
 
 EvtScript N(EVS_SuspiciousGuy_RunAway) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_203E, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
     EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_ShyGuy_01, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_WAIT(20 * DT)

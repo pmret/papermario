@@ -109,7 +109,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Idle)
     EVT_THREAD
         EVT_WAIT(59)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_03EF, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_BOWSER_CHARGE_LIGHTNING, SOUND_SPACE_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(SetNpcImgFXParams, NPC_Tutankoopa_01, IMGFX_SET_ALPHA, 255, 0, 0, 0)
     EVT_CALL(SetNpcImgFXFlags, NPC_Tutankoopa_01, IMGFX_FLAG_800)
@@ -158,7 +158,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Hurt)
     EVT_CALL(SetNpcJumpscale, NPC_Tutankoopa_01, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_20E3, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_ACTOR_WITHER, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 442, -910, 393, 30 * DT)
     EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_ACTOR_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 416, -910, 420, 20 * DT)

@@ -3,7 +3,7 @@
 API_CALLABLE(N(UpgradeStarPowerCh4)) {
     PlayerData* playerData = &gPlayerData;
 
-    set_max_SP(4);
+    set_max_star_power(4);
     playerData->curHP = playerData->curMaxHP;
     playerData->curFP = playerData->curMaxFP;
     sync_status_bar();

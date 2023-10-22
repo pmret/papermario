@@ -865,9 +865,9 @@ API_CALLABLE(N(UpdateRecords)) {
         playerData->smashGameRecord = data->curScore;
     }
 
-    set_message_value(seconds, 0);
-    set_message_value(deciseconds, 1);
-    set_message_value(data->curScore, 2);
+    set_message_int_var(seconds, 0);
+    set_message_int_var(deciseconds, 1);
+    set_message_int_var(data->curScore, 2);
 
     outScore = data->curScore;
     if (data->curScore == 0 && data->found == NUM_PANELS) {
@@ -928,7 +928,7 @@ API_CALLABLE(N(CleanupGame)) {
             get_screen_coords(CAM_DEFAULT, npc->pos.x, npc->pos.y, npc->pos.z, &screenX, &screenY, &screenZ);
             if (screenX - 1 < SCREEN_WIDTH - 1) {
                 fx_walking_dust(1, npc->pos.x, npc->pos.y, npc->pos.z, 0, 0);
-                sfx_play_sound(SOUND_0283);
+                sfx_play_sound(SOUND_KOOPER_SHELL_KICK);
             }
             npc->flags |= NPC_FLAG_INVISIBLE;
             disable_npc_shadow(npc);
@@ -1850,13 +1850,13 @@ EvtScript N(EVS_NpcInit_Bobomb) = {
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(NPC_Bobomb_01)
-            EVT_CALL(SetSelfVar, 8, SOUND_032C)
+            EVT_CALL(SetSelfVar, 8, SOUND_NPC_JUMP)
         EVT_CASE_EQ(NPC_Bobomb_02)
-            EVT_CALL(SetSelfVar, 8, SOUND_032D)
+            EVT_CALL(SetSelfVar, 8, SOUND_LOWER_NPC_JUMP)
         EVT_CASE_EQ(NPC_Bobomb_03)
-            EVT_CALL(SetSelfVar, 8, SOUND_032C)
+            EVT_CALL(SetSelfVar, 8, SOUND_NPC_JUMP)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetSelfVar, 8, SOUND_032D)
+            EVT_CALL(SetSelfVar, 8, SOUND_LOWER_NPC_JUMP)
     EVT_END_SWITCH
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 50)

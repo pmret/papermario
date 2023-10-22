@@ -71,14 +71,21 @@ API_CALLABLE(ActivateDefend) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
+// (out) LVar0: skip playing lucky animation
+API_CALLABLE(TryPlayerLucky) {
     Actor* player = gBattleStatus.playerActor;
 
     show_action_rating(ACTION_RATING_LUCKY, player, player->curPos.x, player->curPos.y + 20.0f, player->curPos.z);
-    sfx_play_sound(SOUND_03FC);
+    sfx_play_sound(SOUND_LUCKY);
+    
     script->varTable[0] = FALSE;
-    if (player->debuff == STATUS_KEY_FEAR || player->debuff == STATUS_KEY_DIZZY || player->debuff == STATUS_KEY_PARALYZE ||
-        player->debuff == STATUS_KEY_SLEEP ||player->debuff == STATUS_KEY_FROZEN || player->debuff == STATUS_KEY_STOP) {
+    if (player->debuff == STATUS_KEY_FEAR
+        || player->debuff == STATUS_KEY_DIZZY
+        || player->debuff == STATUS_KEY_PARALYZE
+        || player->debuff == STATUS_KEY_SLEEP
+        || player->debuff == STATUS_KEY_FROZEN
+        || player->debuff == STATUS_KEY_STOP
+    ) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
@@ -162,7 +169,7 @@ API_CALLABLE(func_80260E38) {
 }
 
 API_CALLABLE(func_80260E5C) {
-    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
     gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     return ApiStatus_DONE2;
@@ -408,7 +415,7 @@ API_CALLABLE(BattleMerleeUpdateFX) {
         BattleMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
-        sfx_play_sound(SOUND_2074);
+        sfx_play_sound(SOUND_MAGIC_ASCENDING);
     }
     merlee->pos.y = D_8029FB94 + (sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f);
 
@@ -961,8 +968,8 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_LUCKY)
-            EVT_CALL(DoesMarioStatusPreventHappyAnimation)
-            EVT_IF_EQ(LVar0, FALSE)
+            EVT_CALL(TryPlayerLucky)
+            EVT_IF_FALSE(LVar0)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_AdjustCap)
                 EVT_WAIT(30)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
@@ -1289,7 +1296,7 @@ EvtScript EVS_PlayerDies = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_24)
     EVT_WAIT(15)
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_ENABLE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0371)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_SPINNING)
     EVT_SET(LVar0, 0)
     EVT_LOOP(30)
         EVT_ADD(LVar0, 60)
@@ -1304,7 +1311,7 @@ EvtScript EVS_PlayerDies = {
     EVT_END_LOOP
     EVT_CALL(EnablePlayerBlur, ACTOR_BLUR_DISABLE)
     EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_03FB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_COLLAPSE)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 1)
     EVT_LOOP(0)
@@ -1476,7 +1483,7 @@ EvtScript EVS_UseLifeShroom = {
         EVT_WAIT(15)
         EVT_CALL(GiveRefundCleanup)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0372)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LIFE_SHROOM_CHIME)
     EVT_ADD(LVar4, 15)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0))
     EVT_SET(LVar0, LVarF)
@@ -1491,7 +1498,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_START_RECOVERY)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20)
     EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0373)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_REVIVAL_MAGIC)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30)
     EVT_WAIT(40)
@@ -1520,7 +1527,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CHILD_THREAD
         EVT_CALL(LifeShroomRevealWorld)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0374)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_REVIVE)
     EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(ConsumeLifeShroom)
@@ -1554,7 +1561,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_PLAYER_JUMP)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_LONG_PLAYER_JUMP)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1613,7 +1620,7 @@ EvtScript EVS_MerleeAttackBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -1662,7 +1669,7 @@ EvtScript EVS_MerleeDefenseBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -1716,7 +1723,7 @@ EvtScript EVS_MerleeExpBonus = {
         EVT_CALL(BattleFadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2075)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayBattleMerleeOrbFX, LVar0, LVar1, LVar2)

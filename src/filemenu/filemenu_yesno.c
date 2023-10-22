@@ -360,7 +360,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
                         {
                             gSaveGlobals.useMonoSound = 1 - gGameStatusPtr->soundOutputMode;
                             gSaveGlobals.lastFileSelected = slot3;
-                            fio_flush_globals();
+                            fio_save_globals();
                         }
                         fio_load_game(slot3);
                         set_game_mode(GAME_MODE_END_FILE_SELECT);

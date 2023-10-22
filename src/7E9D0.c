@@ -163,9 +163,9 @@ s32 phys_adjust_cam_on_landing(void) {
             gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_IGNORE_PLAYER_Y;
         }
     } else if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && partnerStatus->actingPartner == PARTNER_PARAKARRY) {
-        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAG_2;
+        gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_NO_INTERP_Y;
     } else {
-        gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
+        gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_NO_INTERP_Y;
     }
 
     return ret;
@@ -233,7 +233,7 @@ void phys_update_action_state(void) {
     if (playerStatus->camResetDelay != 0) {
         playerStatus->camResetDelay--;
         if (playerStatus->camResetDelay == 0) {
-            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAG_4;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_ACCEL_INTERP_Y;
         }
     }
 
@@ -676,7 +676,7 @@ s32 peach_disguise_check_overlaps(void) {
         f32 x = playerStatus->pos.x + (dx * radius);
         f32 y = playerStatus->pos.y + 4.0f;
         f32 z = playerStatus->pos.z - (dy * radius);
-        hitID = player_test_lateral_overlap(3, playerStatus, &x, &y, &z, 4.0f, yaw);
+        hitID = player_test_lateral_overlap(PLAYER_COLLISION_3, playerStatus, &x, &y, &z, 4.0f, yaw);
         if (hitID >= 0) {
             break;
         }

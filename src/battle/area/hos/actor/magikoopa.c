@@ -272,7 +272,7 @@ EvtScript N(EVS_Idle) = {
 EvtScript N(EVS_KnockDownCheck) = {
     EVT_CALL(GetBattleFlags, LVar0)
     EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_PARTNER_ACTING)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+        EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
             EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
         EVT_END_IF
     EVT_ELSE
@@ -283,7 +283,7 @@ EvtScript N(EVS_KnockDownCheck) = {
             EVT_CASE_OR_EQ(MOVE_HEADBONK3)
             EVT_CASE_OR_EQ(MOVE_MULTIBONK)
                 EVT_CALL(GetBattleFlags, LVar0)
-                EVT_IF_FLAG(LVar0, BS_FLAGS1_40 | BS_FLAGS1_200)
+                EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ShouldKnockDown, TRUE)
                 EVT_END_IF
             EVT_END_CASE_GROUP
@@ -840,7 +840,7 @@ EvtScript N(EVS_Move_HealOne) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_206D)
+        EVT_CALL(PlaySoundAtActor, LVarB, SOUND_RECOVER_HEART)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_HEART_BOUNCE)
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_STAR_BOUNCE_A)
@@ -933,7 +933,7 @@ EvtScript N(EVS_Move_HealAll) = {
         EVT_IF_EQ(LFlag0, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
+                EVT_CALL(PlaySoundAtActor, LVar0, SOUND_RECOVER_HEART)
                 EVT_CALL(PlaySoundAtActor, LVar0, SOUND_HEART_BOUNCE)
                 EVT_WAIT(30)
                 EVT_CALL(PlaySoundAtActor, LVar0, SOUND_STAR_BOUNCE_A)
@@ -1027,7 +1027,7 @@ EvtScript N(EVS_Attack_MagicBlast) = {
         EVT_PLAY_EFFECT(EFFECT_GATHER_MAGIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 30, 0)
     EVT_END_IF
     EVT_WAIT(30)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar9, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar9, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar9)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -1155,10 +1155,10 @@ EvtScript N(EVS_Attack_MagicBlast) = {
     EVT_WAIT(18)
     EVT_IF_EQ(LFlag0, TRUE)
         EVT_WAIT(2)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_ELSE
         EVT_WAIT(2)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_MAGIC_BLAST, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_MAGIC_BLAST, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1591,7 +1591,7 @@ EvtScript N(EVS_Move_TryBoostAttack) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1704,7 +1704,7 @@ EvtScript N(EVS_Move_TryBoostDefense) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DD)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_POWER_UP)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)
@@ -1935,7 +1935,7 @@ EvtScript N(EVS_Move_TryTransparent) = {
     EVT_WAIT(5)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_02DB)
+        EVT_CALL(PlaySoundAtActor, LVar8, SOUND_MAGIKOOPA_VANISH)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(FreezeBattleState, TRUE)

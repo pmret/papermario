@@ -395,10 +395,10 @@ segments:
     - [auto, c, npc_collision]
     - [auto, c, 77480]
     - [auto, c, 7B440]
-    - [auto, c, 7bb60_len_41b0]
+    - [auto, c, 7BB60]
     - [auto, c, 7E9D0]
-    - [auto, c, 7fd10_len_b40]
-    - [auto, c, 80850_len_3060]
+    - [auto, c, world/menus]
+    - [auto, c, inventory]
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, hasm, bss2_2]

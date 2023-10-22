@@ -73,7 +73,7 @@ s32 N(check_for_item_collision)(Npc* kooper) {
 void N(init)(Npc* kooper) {
     kooper->collisionHeight = 37;
     kooper->collisionDiameter = 24;
-    kooper->collisionChannel = COLLISION_CHANNEL_10000;
+    kooper->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     N(TriggeredBattle) = FALSE;
 }
 
@@ -341,7 +341,7 @@ API_CALLABLE(N(UseAbility)) {
 
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             N(ShellTossKickFalling) = FALSE;
-            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             script->USE_STATE = SHELL_TOSS_STATE_JUMP;
             // fallthrough
 
@@ -368,7 +368,7 @@ API_CALLABLE(N(UseAbility)) {
             posZ = playerStatus->pos.z;
             testLength = hitLength = playerStatus->colliderHeight / 2;
 
-            if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
+            if ((npc_raycast_up(COLLIDER_FLAG_IGNORE_PLAYER, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
                 collisionStatus->curCeiling = NpcHitQueryColliderID;
                 playerStatus->pos.y = posY - playerStatus->colliderHeight;
                 N(vertical_hit_interactable_entity)(kooper);
@@ -396,8 +396,8 @@ API_CALLABLE(N(UseAbility)) {
                 script->USE_STATE = SHELL_TOSS_STATE_KICK;
                 N(ShellTossKickFalling) = FALSE;
                 gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-                sfx_play_sound_at_npc(SOUND_0283, SOUND_SPACE_DEFAULT, NPC_PARTNER);
-                sfx_play_sound_at_npc(SOUND_0284, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_KOOPER_SHELL_KICK, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_KOOPER_SHELL_SWIRL, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             }
             break;
 
@@ -415,7 +415,7 @@ API_CALLABLE(N(UseAbility)) {
                 posX = kooper->pos.x, \
                 posY = kooper->pos.y, \
                 posZ = kooper->pos.z, \
-                npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000, \
+                npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_SHELL, \
                     &posX, &posY, &posZ, kooper->moveSpeed, testAngle,  \
                     kooper->collisionHeight, kooper->collisionDiameter / 2) \
                 )
@@ -481,7 +481,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (N(check_for_item_collision)(kooper)) {
-                sfx_play_sound_at_npc(SOUND_0286, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_KOOPER_PICKUP, SOUND_SPACE_DEFAULT, NPC_PARTNER);
                 fx_damage_stars(FX_DAMAGE_STARS_3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                     sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
                 sfx_play_sound_at_npc(SOUND_NONE, SOUND_SPACE_DEFAULT, NPC_PARTNER);
@@ -518,7 +518,7 @@ API_CALLABLE(N(UseAbility)) {
             posY = kooper->pos.y;
             posZ = kooper->pos.z;
 
-            npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
+            npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_SHELL,
                 &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw,
                 kooper->collisionHeight, ( kooper->collisionDiameter / 2));
 
@@ -576,7 +576,7 @@ API_CALLABLE(N(UseAbility)) {
             posY = kooper->pos.y;
             posZ = kooper->pos.z;
 
-            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
+            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_SHELL,
                 &posX, &posY, &posZ, kooper->moveSpeed, clamp_angle(kooper->yaw + 180.0f),
                 kooper->collisionHeight, kooper->collisionDiameter)
             ) {
@@ -629,7 +629,7 @@ API_CALLABLE(N(UseAbility)) {
         kooper->jumpVel = 0.0f;
         kooper->collisionHeight = 24;
         kooper->curAnim = ANIM_WorldKooper_Walk;
-        sfx_stop_sound(SOUND_0284);
+        sfx_stop_sound(SOUND_KOOPER_SHELL_SWIRL);
         disable_npc_blur(kooper);
 
         if (N(HasItem)) {
@@ -750,7 +750,7 @@ void N(pre_battle)(Npc* kooper) {
         kooper->flags &= ~NPC_FLAG_JUMPING;
         kooper->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
 
-        sfx_stop_sound(SOUND_0284);
+        sfx_stop_sound(SOUND_KOOPER_SHELL_SWIRL);
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(kooper);
         disable_npc_blur(kooper);

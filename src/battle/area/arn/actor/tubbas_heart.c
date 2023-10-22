@@ -326,7 +326,7 @@ EvtScript N(EVS_ReturnHome) = {
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_IF_NE(LVar0, HIT_RESULT_MISS)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Flags, LVar0)
         EVT_IF_NOT_FLAG(LVar0, AVAL_Flag_TauntBow)
@@ -431,7 +431,7 @@ EvtScript N(EVS_Attack_Leap) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim16)
     EVT_WAIT(5)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TubbasHeart_Anim15)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -468,7 +468,7 @@ EvtScript N(EVS_Attack_Leap) = {
     EVT_END_SWITCH
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_LEAP, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_LEAP, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SET(LVarF, LVar0)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -525,7 +525,7 @@ EvtScript N(EVS_Move_Charge) = {
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_GATHER_MAGIC, 1, LVar0, LVar1, LVar2, LVar3, 60, 0)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 6, LVar0, LVar1, LVar2, LVar3, 60, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F7)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_TUBBAS_HEART_CHARGE)
     EVT_WAIT(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -589,15 +589,15 @@ EvtScript N(EVS_Attack_DarkSwarm) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChargedEffectID, 0)
         EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefaultAnims)))
     EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_20F9)
+    EVT_CALL(PlaySound, SOUND_TUBBAS_HEART_SWARM_ATTACK)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 5)
-            EVT_PLAY_EFFECT(EFFECT_TUBBA_HEART_ATTACK, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0)
+            EVT_PLAY_EFFECT(EFFECT_TUBBA_HEART_ATTACK, FX_HEART_SWARM_MISS, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0)
             EVT_WAIT(145)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -608,10 +608,10 @@ EvtScript N(EVS_Attack_DarkSwarm) = {
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 5)
-    EVT_PLAY_EFFECT(EFFECT_TUBBA_HEART_ATTACK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0)
+    EVT_PLAY_EFFECT(EFFECT_TUBBA_HEART_ATTACK, FX_HEART_SWARM_HIT, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 200, 0)
     EVT_THREAD
         EVT_WAIT(160)
-        EVT_CALL(PlaySound, SOUND_20FC)
+        EVT_CALL(PlaySound, SOUND_TUBBAS_HEART_SWARM_VANISH)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
@@ -630,11 +630,11 @@ EvtScript N(EVS_Attack_DarkSwarm) = {
     EVT_WAIT(22)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_20FB)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_TUBBAS_HEART_SWARM_DISPERSE)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_SWARM, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_SWARM, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_RETURN
     EVT_END
 };

@@ -224,25 +224,25 @@ void update_merlee_message(void* data) {
 
     switch (popup->showMsgState) {
         case BTL_MSG_STATE_INIT:
-            popup->showMsgState = BTL_MSG_STATE_1;
+            popup->showMsgState = BTL_MSG_STATE_POPUP_PRE_DELAY;
             break;
-        case BTL_MSG_STATE_1:
-            popup->showMsgState = BTL_MSG_STATE_2;
+        case BTL_MSG_STATE_POPUP_PRE_DELAY:
+            popup->showMsgState = BTL_MSG_STATE_POPUP_DELAY;
             break;
-        case BTL_MSG_STATE_2:
+        case BTL_MSG_STATE_POPUP_DELAY:
             if (gGameStatusPtr->pressedButtons[0] & (BUTTON_A | BUTTON_B)) {
                 popup->duration = 0;
             }
             if (popup->duration != 0) {
                 popup->duration--;
             } else {
-                popup->showMsgState = BTL_MSG_STATE_3;
+                popup->showMsgState = BTL_MSG_STATE_POPUP_POST_DELAY;
             }
             break;
-        case BTL_MSG_STATE_3:
-            popup->showMsgState = BTL_MSG_STATE_4;
+        case BTL_MSG_STATE_POPUP_POST_DELAY:
+            popup->showMsgState = BTL_MSG_STATE_POPUP_DISPOSE;
             break;
-        case BTL_MSG_STATE_4:
+        case BTL_MSG_STATE_POPUP_DISPOSE:
             closeMessage = TRUE;
             break;
     }

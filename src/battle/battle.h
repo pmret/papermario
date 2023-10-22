@@ -97,9 +97,9 @@ enum BattleVars {
 
 // document special actor vars referenced from other actors
 enum CommonActorVars {
-    AVAR_DryBones_Collapsed     = 8,
-    AVAR_SpearGuy_Generation    = 1,
-    AVAR_JungleFuzzy_Generation = 0,
+    AVAR_DryBones_Collapsed             = 8,
+    AVAR_SpearGuy_Generation            = 1,
+    AVAR_JungleFuzzy_Generation         = 0,
 };
 
 extern s32 bActorNames[];

@@ -593,7 +593,7 @@ enum SoundIDs {
     SOUND_LRAW_TROMP_ROLL                       = 0x00000052,
     SOUND_ISK_DRAINING_SAND                     = 0x00000053, // #looping
     SOUND_ISK_FLIP_STAIRS                       = 0x00000054,
-    SOUND_LENS_FLARE                            = 0x00000055,
+    SOUND_LARGE_LENS_FLARE                      = 0x00000055,
     SOUND_LRAW_ISK_LOWER_STAIRS                 = 0x00000056,
     SOUND_ISK_STAIR_DROP_THUD                   = 0x00000057,
     SOUND_ISK_STAIRS_EMERGE_RUMBLE              = 0x00000058,
@@ -727,8 +727,7 @@ enum SoundIDs {
     SOUND_ACTOR_HURT                            = 0x0000010F,
     SOUND_HIT_RATTLE                            = 0x00000110,
     SOUND_HEART_BLOCK                           = 0x00000131,
-    SOUND_0132                                  = 0x00000132, // #unused
-    SOUND_0133                                  = 0x00000133, // #unused
+    SOUND_UNUSED_HEAL_BLOCK                     = 0x00000133, // #unused
     SOUND_ASCENDING_CHIMES                      = 0x00000134, // #unused
     SOUND_DESCENDING_CHIMES                     = 0x00000135, // #unused
     SOUND_STAR_CARD_APPEARS                     = 0x00000137,
@@ -753,13 +752,13 @@ enum SoundIDs {
     SOUND_SEARCH_BUSH                           = 0x00000153,
     SOUND_PLAYER_CHARGE                         = 0x00000156,
     SOUND_BLOCK_SHATTER                         = 0x00000158,
-    SOUND_0159                                  = 0x00000159, // #unused
+    SOUND_SMALL_BOING                           = 0x00000159, // #spring #boing #unused
     SOUND_ACTOR_JUMPED_1                        = 0x0000015A, // #unused
     SOUND_ACTOR_JUMPED_2                        = 0x0000015B, // #unused
     SOUND_ACTOR_JUMPED_3                        = 0x0000015C, // #unused
     SOUND_PLAYER_RUN_IN_PLACE                   = 0x0000015D,
     SOUND_PLAYER_RUN_AWAY                       = 0x0000015E,
-    SOUND_PLAYER_JUMP                           = 0x00000160,
+    SOUND_LONG_PLAYER_JUMP                      = 0x00000160,
     SOUND_PLAYER_LONG_FALL                      = 0x00000161,
     SOUND_TRIP                                  = 0x00000162,
     SOUND_ENTER_PIPE                            = 0x00000163,
@@ -972,18 +971,19 @@ enum SoundIDs {
     SOUND_LRAW_WATER_FLOWING_4                  = 0x00000276, // #water #flowing
     SOUND_GOOMBARIO_HEADBONK                    = 0x00000281, // #descending #falling
     SOUND_TATTLE_WINDOW_OPEN                    = 0x00000282,
-    SOUND_0283                                    = 0x00000283,
-    SOUND_0284                                    = 0x00000284,
-    SOUND_0286                                    = 0x00000286,
+    SOUND_KOOPER_SHELL_KICK                     = 0x00000283,
+    SOUND_KOOPER_SHELL_SWIRL                    = 0x00000284,
+    SOUND_KOOPER_PICKUP                         = 0x00000286,
     SOUND_LRAW_BOMBETTE_FUSE                    = 0x00000287,
-    SOUND_0288                                    = 0x00000288,
-    SOUND_0289                                    = 0x00000289,
-    SOUND_028A                                    = 0x0000028A,
-    SOUND_028B                                    = 0x0000028B,
-    SOUND_028C                                    = 0x0000028C,
-    SOUND_028E                                    = 0x0000028E,
-    SOUND_028F                                    = 0x0000028F,
-    SOUND_0290                                    = 0x00000290,
+    SOUND_LAKILESTER_HURRICANE_WIND             = 0x00000288,
+    SOUND_WATT_CHARGE                           = 0x00000289,
+    SOUND_WATT_POWER_SHOCK                      = 0x0000028A,
+    SOUND_WATT_TURBO_CHARGE                     = 0x0000028B,
+    SOUND_WATT_MEGA_DISCHARGE                   = 0x0000028C,
+    SOUND_WATT_WHOOSH_SHOCK                     = 0x0000028D, // #unused
+    SOUND_ROARING_FIRE                          = 0x0000028E,
+    SOUND_FIRE_SHELL_LAUNCH                     = 0x0000028F,
+    SOUND_DIZZY_SHELL_LAUNCH                    = 0x00000290,
     SOUND_BOW_SPOOK                             = 0x00000291,
     SOUND_BOOTLER_SPOOK                         = 0x00000292,
     SOUND_BOOTLER_HIDE                          = 0x00000293,
@@ -1007,8 +1007,8 @@ enum SoundIDs {
     SOUND_TWINK_FLY_B                           = 0x000002AA,
     SOUND_PARAGOOMBA_DIVE                       = 0x000002C1,
     SOUND_HURT_PLANT_BITE                       = 0x000002C4,
-    SOUND_LAKILESTER_SUMMON_SPINY               = 0x000002C5,
-    SOUND_LAKILESTER_THROW_SPINY                = 0x000002C6,
+    SOUND_SPIKE_SUMMON_SPINY                    = 0x000002C5,
+    SOUND_SPIKE_THROW_SPINY                     = 0x000002C6,
     SOUND_SPINY_SPIN_UP                         = 0x000002C7,
     SOUND_BULLET_BILL_FIRE                      = 0x000002C8,
     SOUND_BULLET_BILL_MOTION                    = 0x000002C9,
@@ -1027,14 +1027,14 @@ enum SoundIDs {
     SOUND_DAYZEE_STEP                           = 0x000002D6,
     SOUND_DAYZEE_SONG                           = 0x000002D7,
     SOUND_POWER_UP                              = 0x000002D8,
-    SOUND_02D9                                    = 0x000002D9,
-    SOUND_02DA                                    = 0x000002DA,
-    SOUND_02DB                                    = 0x000002DB,
-    SOUND_02DC                                    = 0x000002DC,
-    SOUND_02DD                                    = 0x000002DD,
-    SOUND_02DE                                    = 0x000002DE,
-    SOUND_02DF                                    = 0x000002DF,
-    SOUND_02E0                                    = 0x000002E0,
+    SOUND_HYPER_CLEFT_LAND                      = 0x000002D9,
+    SOUND_HYPER_CLEFT_CHARGE                    = 0x000002DA,
+    SOUND_MAGIKOOPA_VANISH                      = 0x000002DB,
+    SOUND_MAGIKOOPA_WAND_STRIKE                 = 0x000002DC,
+    SOUND_MAGIKOOPA_POWER_UP                    = 0x000002DD,
+    SOUND_SUMMON_CRYSTAL_BITS                   = 0x000002DE, // #windy #chimes
+    SOUND_SUMMON_CRYSTAL_CLONES                 = 0x000002DF,
+    SOUND_CRYSTAL_KING_ICE_BOLT                 = 0x000002E0,
     SOUND_SKY_GUY_BALLOON_POP                   = 0x000002E1,
     SOUND_GROOVE_GUY_TWIRL                      = 0x000002E2,
     SOUND_GROOVE_GUY_LEAP                       = 0x000002E3,
@@ -1057,24 +1057,24 @@ enum SoundIDs {
     SOUND_AI_ALERT_A                            = 0x000002F4,
     SOUND_AI_ALERT_B                            = 0x000002F5,
     SOUND_TWEESTER_LAUNCH                       = 0x000002F6,
-    SOUND_02F7                                    = 0x000002F7,
-    SOUND_02F8                                    = 0x000002F8,
-    SOUND_02F9                                    = 0x000002F9,
-    SOUND_02FA                                    = 0x000002FA,
-    SOUND_02FB                                    = 0x000002FB,
-    SOUND_02FC                                    = 0x000002FC,
-    SOUND_02FD                                    = 0x000002FD,
+    SOUND_SENTINEL_PICKUP                       = 0x000002F7,
+    SOUND_GATHER_SMALL                          = 0x000002F8,
+    SOUND_TOSS                                  = 0x000002F9,
+    SOUND_SPEAR_GUY_DANCE_1                     = 0x000002FA,
+    SOUND_SPEAR_GUY_DANCE_2                     = 0x000002FB,
+    SOUND_SPEAR_GUY_RIP_SKIRT                   = 0x000002FC,
+    SOUND_ALBINO_DINO_STEP_B                    = 0x000002FD,
     SOUND_CLOSE_SHELL                           = 0x000002FF,
-    SOUND_JR_TROOPA_TRANSFORM                   = 0x00000300,
+    SOUND_JR_TROOPA_NEW_POWER                   = 0x00000300,
     SOUND_FALL_QUICK                            = 0x00000301,
     SOUND_FALL_LONG                             = 0x00000302,
     SOUND_LARGE_FALL_QUICK                      = 0x00000303,
     SOUND_LARGE_FALL_LONG                       = 0x00000304, // unused
-    SOUND_0305                                    = 0x00000305,
-    SOUND_0306                                    = 0x00000306,
-    SOUND_0309                                    = 0x00000309,
-    SOUND_030A                                    = 0x0000030A,
-    SOUND_030B                                    = 0x0000030B,
+    SOUND_LONG_FLUTTER_FALL_A                   = 0x00000305,
+    SOUND_LONG_FLUTTER_FALL_B                   = 0x00000306,
+    SOUND_SPEAR_STAB                            = 0x00000309,
+    SOUND_SPEAR_THROW                           = 0x0000030A, // #whoosh
+    SOUND_ALBINO_DINO_STEP_A                    = 0x0000030B,
     SOUND_SHY_GUY_SCREAMS1                      = 0x0000030C,
     SOUND_SHY_GUY_SCREAMS2                      = 0x0000030D,
     SOUND_SHY_GUY_SCREAMS3                      = 0x0000030E,
@@ -1096,11 +1096,12 @@ enum SoundIDs {
     SOUND_BURROW_SURFACE                        = 0x00000321,
     SOUND_BURROW_DIG                            = 0x00000322,
     SOUND_MOLE_POP                              = 0x00000323,
-    SOUND_0327                                    = 0x00000327,
-    SOUND_0328                                    = 0x00000328,
-    SOUND_032B                                    = 0x0000032B,
-    SOUND_032C                                    = 0x0000032C,
-    SOUND_032D                                    = 0x0000032D,
+    SOUND_MALLET_SWING                          = 0x00000327,
+    SOUND_BLASTER_FIRE                          = 0x00000328,
+    SOUND_CREEPY_LAUGH                          = 0x00000329, // #unused
+    SOUND_SKID                                  = 0x0000032B,
+    SOUND_NPC_JUMP                              = 0x0000032C,
+    SOUND_LOWER_NPC_JUMP                        = 0x0000032D,
     SOUND_LRAW_SENTINEL_ALARM                   = 0x0000032E,
     SOUND_SNORE_INHALE_A                        = 0x0000032F,
     SOUND_SNORE_INHALE_B                        = 0x00000330,
@@ -1127,77 +1128,80 @@ enum SoundIDs {
     SOUND_POKEY_LEAN_BACK                       = 0x00000345,
     SOUND_POKEY_EMERGE_FROM_GROUND              = 0x00000346,
     SOUND_LRAW_CHEERING                         = 0x00000349,
-    SOUND_034A                                    = 0x0000034A,
-    SOUND_034E                                    = 0x0000034E,
+    SOUND_SHORT_CLAP                            = 0x0000034A,
+    SOUND_MULTI_CLAP                            = 0x0000034B, // #unused
+    SOUND_TOY_TANK_EXPLODE                      = 0x0000034E, // #explosion
+    SOUND_SLOT_REELS                            = 0x00000350, // #unused
     SOUND_ACTOR_FLIGHT                          = 0x00000351,
-    SOUND_0353                                    = 0x00000353,
-    SOUND_0354                                    = 0x00000354,
-    SOUND_0355                                    = 0x00000355,
-    SOUND_0356                                    = 0x00000356,
-    SOUND_0357                                    = 0x00000357,
-    SOUND_0358                                    = 0x00000358,
+    SOUND_KOOPA_BROS_SPINUP                     = 0x00000353,
+    SOUND_KOOPA_BROS_TOWER_SPIN_1               = 0x00000354,
+    SOUND_KOOPA_BROS_TOWER_SPIN_2               = 0x00000355,
+    SOUND_KOOPA_BROS_TOWER_SPIN_3               = 0x00000356,
+    SOUND_BZZAP_BUZZ                            = 0x00000357, // #looping
+    SOUND_MINI_BZZAP_BUZZ                       = 0x00000358,
     SOUND_EMBER_FLY                             = 0x00000359, // #looping
-    SOUND_035B                                    = 0x0000035B,
-    SOUND_CHARGE_LIGHTNING                      = 0x0000035C,
-    SOUND_035D                                    = 0x0000035D,
-    SOUND_035E                                    = 0x0000035E,
-    SOUND_035F                                    = 0x0000035F,
-    SOUND_0361                                    = 0x00000361,
-    SOUND_0362                                    = 0x00000362,
-    SOUND_0363                                    = 0x00000363,
-    SOUND_0364                                    = 0x00000364,
-    SOUND_0365                                    = 0x00000365,
+    SOUND_HUFF_N_PUFF_FIRE_LIGHTNING            = 0x0000035B, // #electric #boom #echoing
+    SOUND_CHARGE_LIGHTNING                      = 0x0000035C, // #electric #ascending
+    SOUND_HEAVY_WIND_LOOP                       = 0x0000035D, // #looping #windy
+    SOUND_HEAVY_NPC_SWIPE                       = 0x0000035E,
+    SOUND_BABY_BLOOPER_MOVE                     = 0x0000035F,
+    SOUND_PUT_ON_CAP                            = 0x00000361,
+    SOUND_BECOME_STONE                          = 0x00000362,
+    SOUND_WINTERY_JINGLE                        = 0x00000363,
+    SOUND_SHEEP_STAMPEDE                        = 0x00000364,
+    SOUND_THUNDER_BOLT                          = 0x00000365,
     SOUND_LIGHTNING_STRIKE                      = 0x00000366,
-    SOUND_0367                                    = 0x00000367,
-    SOUND_0368                                    = 0x00000368,
-    SOUND_0369                                    = 0x00000369,
-    SOUND_036B                                    = 0x0000036B,
+    SOUND_FRIGHT_JAR                            = 0x00000367,
+    SOUND_MYSTERY_REEL                          = 0x00000368,
+    SOUND_HUSTLE_WHISTLE                        = 0x00000369,
+    SOUND_SMALL_GLASS_BREAK                     = 0x00000369, // #unused
+    SOUND_CRYSTAL_KING_DISAPPEAR                = 0x0000036B,
     SOUND_LRAW_SHY_GUY_CROWD_1                  = 0x0000036C,
     SOUND_LRAW_SHY_GUY_CROWD_2                  = 0x0000036D,
-    SOUND_036E                                    = 0x0000036E,
-    SOUND_036F                                    = 0x0000036F,
-    SOUND_0370                                    = 0x00000370,
-    SOUND_0371                                    = 0x00000371,
-    SOUND_0372                                    = 0x00000372,
-    SOUND_0373                                    = 0x00000373,
-    SOUND_0374                                    = 0x00000374,
-    SOUND_0375                                    = 0x00000375,
-    SOUND_0376                                    = 0x00000376,
-    SOUND_0377                                    = 0x00000377,
-    SOUND_0378                                    = 0x00000378,
-    SOUND_0379                                    = 0x00000379,
+    SOUND_MONSTAR_STAR_STORM                    = 0x0000036E,
+    SOUND_TOY_TANK_FALL_APART                   = 0x0000036F,
+    SOUND_KENT_C_SHELL_TOSS_LOOP                = 0x00000370, // #looping
+    SOUND_PLAYER_SPINNING                       = 0x00000371,
+    SOUND_LIFE_SHROOM_CHIME                     = 0x00000372,
+    SOUND_REVIVAL_MAGIC                         = 0x00000373, // #magic #chimes
+    SOUND_PLAYER_REVIVE                         = 0x00000374,
+    SOUND_REPEL_GEL_APPLY                       = 0x00000375,
+    SOUND_REPEL_GEL_VANISH                      = 0x00000376,
+    SOUND_PLANT_FIRE_FLOWER                     = 0x00000377,
+    SOUND_RECOVERY_SHMMER                       = 0x00000378,
+    SOUND_VOLT_SHROOM_APPLY                     = 0x00000379,
     SOUND_HIT_PLAYER_SHOCK                      = 0x0000037A,
     SOUND_HIT_SHOCK                             = 0x0000037B,
-    SOUND_037C                                    = 0x0000037C,
-    SOUND_037D                                    = 0x0000037D,
-    SOUND_037E                                    = 0x0000037E,
-    SOUND_SHYGUY_FLY                            = 0x00000380,
-    SOUND_0381                                    = 0x00000381,
-    SOUND_0382                                    = 0x00000382,
-    SOUND_0383                                    = 0x00000383,
-    SOUND_0384                                    = 0x00000384,
-    SOUND_0385                                    = 0x00000385,
-    SOUND_0386                                    = 0x00000386,
-    SOUND_0387                                    = 0x00000387,
+    SOUND_KOOPA_LAUNCH_SHELL                    = 0x0000037C,
+    SOUND_LANTERN_GHOST_STEP                    = 0x0000037D,
+    SOUND_TOY_TANK_STEP                         = 0x0000037E,
+    SOUND_SHY_GUY_FLY                           = 0x00000380,
+    SOUND_GOURMET_GUY_SHOCK_1                   = 0x00000381,
+    SOUND_GOURMET_GUY_SHOCK_2                   = 0x00000382,
+    SOUND_GOURMET_GUY_SHOCK_3                   = 0x00000383,
+    SOUND_GOURMET_GUY_RUN                       = 0x00000384,
+    SOUND_GOURMET_GUY_LAUNCH                    = 0x00000385,
+    SOUND_BIG_DRUM_A                            = 0x00000386,
+    SOUND_BIG_DRUM_B                            = 0x00000387,
     SOUND_LRAW_OMO_SLOT_MACHINE                 = 0x00000388,
-    SOUND_0389                                    = 0x00000389,
-    SOUND_038A                                    = 0x0000038A,
-    SOUND_038B                                    = 0x0000038B,
-    SOUND_038C                                    = 0x0000038C,
-    SOUND_038D                                    = 0x0000038D,
-    SOUND_038E                                    = 0x0000038E,
-    SOUND_0390                                    = 0x00000390,
-    SOUND_LRAW_SPINNING_FLOWER                               = 0x00000391,
-    SOUND_0392                                    = 0x00000392,
+    SOUND_SAM_POND_CRACK_1                      = 0x00000389,
+    SOUND_SAM_POND_CRACK_2                      = 0x0000038A,
+    SOUND_SAM_POND_SHATTER                      = 0x0000038B,
+    SOUND_SAM_SNOWMAN_JUMP                      = 0x0000038C,
+    SOUND_SAM_SNOWMEN_RAISE_WALL                = 0x0000038D,
+    SOUND_SAM_SNOWMEN_OPEN_PASSAGE              = 0x0000038E,
+    SOUND_TOSS_PLAYER                           = 0x00000390,
+    SOUND_LRAW_SPINNING_FLOWER                  = 0x00000391,
+    SOUND_MUNCHLESIA_CHEW                       = 0x00000392,
     SOUND_MUNCHLESIA_SPIT                       = 0x00000393,
     SOUND_OVEN_TIMER_TICKING                    = 0x00000394, // #looping
     SOUND_GENERAL_WHISTLE                       = 0x00000395,
-    SOUND_0396                                    = 0x00000396,
-    SOUND_0397                                    = 0x00000397,
-    SOUND_0398                                    = 0x00000398,
-    SOUND_0399                                    = 0x00000399,
-    SOUND_039A                                    = 0x0000039A,
-    SOUND_039B                                    = 0x0000039B,
+    SOUND_ICE_SHATTER                           = 0x00000396,
+    SOUND_PENGUIN_WHISTLE                       = 0x00000397, // identical to SOUND_GENERAL_WHISTLE
+    SOUND_DRAG_PLAYER                           = 0x00000398, // #looping #windy #scraping
+    SOUND_SAM07_RAISE_FLOOR                     = 0x00000399, // #ascending
+    SOUND_SAM07_LOWER_FLOOR                     = 0x0000039A, // #descending
+    SOUND_SAM08_RAISE_FLOOR                     = 0x0000039B, // #ascending
     SOUND_SAM_STAIRS_ACTIVATE                   = 0x0000039C,
     SOUND_SAM_STAIRS_LOUD_THUD                  = 0x0000039D,
     SOUND_LRAW_SAM_STAIRS_RISE                  = 0x0000039E,
@@ -1215,36 +1219,38 @@ enum SoundIDs {
     SOUND_LANTERN_GHOST_DARKEN_4                = 0x000003AA,
     SOUND_PIRANHA_BREATH                        = 0x000003AB,
     SOUND_GOOMBA_BROS_STEP                      = 0x000003AC,
-    SOUND_LRAW_FIGHTING                               = 0x000003AD,
-    SOUND_03AE                                    = 0x000003AE,
-    SOUND_03AF                                    = 0x000003AF,
-    SOUND_03B0                                    = 0x000003B0,
-    SOUND_03B1                                    = 0x000003B1,
-    SOUND_03B2                                    = 0x000003B2,
-    SOUND_03B3                                    = 0x000003B3,
+    SOUND_LRAW_FIGHTING                         = 0x000003AD,
+    SOUND_TANK_BULB_SHATTER                     = 0x000003AE,
+    SOUND_CRYSTAL_KING_INHALE                   = 0x000003AF,
+    SOUND_HUFF_N_PUFF_INHALE                    = 0x000003B0, // #looping
+    SOUND_PIRANHA_SPIN                          = 0x000003B1,
+    SOUND_PIRANHA_CHOMP                         = 0x000003B2,
+    SOUND_HUFF_N_PUFF_REAR_UP                   = 0x000003B3,
     SOUND_ACTOR_STEP_B                          = 0x000003B4,
     SOUND_FAKE_BOWSER_BLAST                     = 0x000003B5, // large blasting sound when the fake bowser robot is destroyed
     SOUND_SHY_GUY_STEP_A                        = 0x000003B6,
     SOUND_SHY_GUY_STEP_B                        = 0x000003B7,
-    SOUND_03B9                                    = 0x000003B9,
-    SOUND_03BB                                    = 0x000003BB,
-    SOUND_LRAW_RUMBLE                               = 0x000003BC,
-    SOUND_03BD                                    = 0x000003BD,
-    SOUND_03BE                                    = 0x000003BE,
-    SOUND_03C0                                    = 0x000003C0,
-    SOUND_03C1                                    = 0x000003C1,
-    SOUND_03C3                                    = 0x000003C3,
-    SOUND_03C4                                    = 0x000003C4,
-    SOUND_03C5                                    = 0x000003C5,
-    SOUND_03C6                                    = 0x000003C6,
-    SOUND_03C7                                    = 0x000003C7,
-    SOUND_03C8                                    = 0x000003C8,
-    SOUND_03C9                                    = 0x000003C9,
-    SOUND_03CA                                    = 0x000003CA,
-    SOUND_03CB                                    = 0x000003CB,
-    SOUND_03CC                                    = 0x000003CC,
-    SOUND_03CD                                    = 0x000003CD,
-    SOUND_03CE                                    = 0x000003CE,
+    SOUND_MASTER_LEAP                           = 0x000003B9,
+    SOUND_BUBBLE_DOWN                           = 0x000003BA, // #unused #descending
+    SOUND_LAVA_PIRANHA_RECOVER                  = 0x000003BB,
+    SOUND_LRAW_RUMBLE                           = 0x000003BC,
+    SOUND_BOWSER_FIRE_BREATH_LOOP               = 0x000003BD, // #looping #wind #rumble
+    SOUND_FAKE_BOWSER_LONG_WALK                 = 0x000003BE, // #rattle
+    SOUND_HUFF_N_PUFF_EMERGE                    = 0x000003C0,
+    SOUND_LAVA_PIRANHA_INHALE                   = 0x000003C1,
+    SOUND_LAVA_PIRANHA_SHRIVEL                  = 0x000003C2, // #unused
+    SOUND_LAVA_PIRANHA_SPIT_FIRE                = 0x000003C3,
+    SOUND_LAVA_PIRANHA_FIRE_BREATH              = 0x000003C4,
+    SOUND_LAVA_PIRANHA_EMERGE                   = 0x000003C5,
+    SOUND_LAVA_PIRANHA_DEFEAT                   = 0x000003C6,
+    SOUND_LAVA_BUD_WITHER                       = 0x000003C7,
+    SOUND_LAVA_PIRANHA_WITHER                   = 0x000003C8,
+    SOUND_LAVA_BUD_SPIT_PETIT                   = 0x000003C9,
+    SOUND_PETIT_PIRANHA_ASCEND                  = 0x000003CA,
+    SOUND_PETIT_PIRANHA_DIVE                    = 0x000003CB,
+    SOUND_LAVA_PIRANHA_WRITHE                   = 0x000003CC,
+    SOUND_LAVA_PIRANHA_COLLAPSE                 = 0x000003CD,
+    SOUND_PIRANHA_STEP                          = 0x000003CE,
     SOUND_LANTERN_GHOST_INHALE                  = 0x000003CF,
     SOUND_LANTERN_GHOST_BLOW                    = 0x000003D0,
     SOUND_HUFF_N_PUFF_FLY                       = 0x000003D1,
@@ -1253,13 +1259,13 @@ enum SoundIDs {
     SOUND_OPEN_SHELL                            = 0x000003D4,
     SOUND_RUFF_PUFF_FLY_A                       = 0x000003D5,
     SOUND_RUFF_PUFF_FLY_B                       = 0x000003D6,
-    SOUND_03D9                                    = 0x000003D9,
+    SOUND_LIGHT_THROW                           = 0x000003D9,
     SOUND_SQUEEZE                               = 0x000003DB,
-    SOUND_03DC                                    = 0x000003DC,
-    SOUND_03DD                                    = 0x000003DD,
-    SOUND_03DE                                    = 0x000003DE,
-    SOUND_03E0                                    = 0x000003E0,
-    SOUND_03E1                                    = 0x000003E1,
+    SOUND_BLOOPER_MOVE                          = 0x000003DC,
+    SOUND_BLOOPER_FALL                          = 0x000003DD,
+    SOUND_BLOOPER_SQUIRT                        = 0x000003DE,
+    SOUND_LEECH                                 = 0x000003E0,
+    SOUND_AI_FOUND_PLAYER_JUMP                  = 0x000003E1,
     SOUND_ACTOR_JUMP                            = 0x000003E2,
     SOUND_ACTOR_TRIP                            = 0x000003E3,
     SOUND_ACTOR_TWITCH                          = 0x000003E4,
@@ -1267,13 +1273,13 @@ enum SoundIDs {
     SOUND_BIG_POWER_UP                          = 0x000003E6,
     SOUND_LARGE_ACTOR_JUMP                      = 0x000003E7,
     SOUND_MOLE_THROW                            = 0x000003E8,
-    SOUND_03E9                                    = 0x000003E9,
-    SOUND_03EA                                    = 0x000003EA,
-    SOUND_03EB                                    = 0x000003EB,
-    SOUND_03EC                                    = 0x000003EC,
-    SOUND_03ED                                    = 0x000003ED,
-    SOUND_03EE                                    = 0x000003EE,
-    SOUND_03EF                                    = 0x000003EF,
+    SOUND_KOOPA_BROS_LAND                       = 0x000003E9,
+    SOUND_FAKE_BOWSER_STEP                      = 0x000003EA,
+    SOUND_SMALL_CROWD_WALK                      = 0x000003EB,
+    SOUND_LARGE_CROWD_WALK                      = 0x000003EC,
+    SOUND_MASTER_SMACK                          = 0x000003ED, // #electric #impact
+    SOUND_MASTER_PUNCH                          = 0x000003EE,
+    SOUND_BOWSER_CHARGE_LIGHTNING               = 0x000003EF,
     SOUND_DANGER                                = 0x000003F1,
     SOUND_PERIL                                 = 0x000003F2,
     SOUND_DING                                  = 0x000003F3,
@@ -1282,17 +1288,17 @@ enum SoundIDs {
     SOUND_DRIP                                  = 0x000003F6,
     STONE_STONE_CHOMP_STEP                      = 0x000003F9,
     SOUND_THROW                                 = 0x000003FA,
-    SOUND_03FB                                    = 0x000003FB,
-    SOUND_03FC                                    = 0x000003FC,
-    SOUND_2003                                    = 0x00002003,
-    SOUND_2004                                    = 0x00002004,
-    SOUND_2005                                    = 0x00002005,
-    SOUND_2006                                    = 0x00002006,
-    SOUND_2009                                    = 0x00002009,
-    SOUND_200A                                    = 0x0000200A,
-    SOUND_200B                                    = 0x0000200B,
-    SOUND_200C                                    = 0x0000200C,
-    SOUND_200D                                    = 0x0000200D,
+    SOUND_PLAYER_COLLAPSE                       = 0x000003FB,
+    SOUND_LUCKY                                 = 0x000003FC,
+    SOUND_GOOMBARIO_GATHERING                   = 0x00002003,
+    SOUND_PARAKARRY_PREDIVE                     = 0x00002004,
+    SOUND_PARAKARRY_DIVE                        = 0x00002005,
+    SOUND_PARAKARRY_SHELL_SHOT                  = 0x00002006,
+    SOUND_PARAKARRY_FLAP                        = 0x00002009,
+    SOUND_PARAKARRY_AIR_RAID_1                  = 0x0000200A, // #whoosh
+    SOUND_PARAKARRY_AIR_RAID_2                  = 0x0000200B, // #whoosh #echoing
+    SOUND_KOOPER_SHELL_SPINUP                   = 0x0000200C,
+    SOUND_GOOMBARIO_JUMP                        = 0x0000200D,
     SOUND_BOW_VANISH                            = 0x0000200E,
     SOUND_BOW_APPEAR                            = 0x0000200F,
     SOUND_EGG_MISSILE_BLAST                     = 0x00002010,
@@ -1304,25 +1310,25 @@ enum SoundIDs {
     SOUND_BOMBETTE_BLAST_LV1                    = 0x00002016,
     SOUND_BOMBETTE_BLAST_LV2                    = 0x00002017,
     SOUND_BOMBETTE_BLAST_LV3                    = 0x00002018,
-    SOUND_2019                                    = 0x00002019,
-    SOUND_201A                                    = 0x0000201A,
-    SOUND_201B                                    = 0x0000201B,
-    SOUND_201C                                    = 0x0000201C,
-    SOUND_201D                                    = 0x0000201D,
-    SOUND_201E                                    = 0x0000201E,
-    SOUND_201F                                    = 0x0000201F,
-    SOUND_2020                                    = 0x00002020,
-    SOUND_2021                                    = 0x00002021,
-    SOUND_2022                                    = 0x00002022,
-    SOUND_2023                                    = 0x00002023,
-    SOUND_2024                                    = 0x00002024,
+    SOUND_BOW_SMACK                             = 0x00002019,
+    SOUND_BOW_FAN_SMACK                         = 0x0000201A,
+    SOUND_LAKILESTER_THROW_SPINY_A              = 0x0000201B,
+    SOUND_LAKILESTER_THROW_SPINY_B              = 0x0000201C,
+    SOUND_LAKILESTER_MAKE_CLOUD_NINE            = 0x0000201D,
+    SOUND_LAKILESTER_HURRICANE_INHALE           = 0x0000201E,
+    SOUND_LAKILESTER_HURRICANE_EXHALE           = 0x0000201F,
+    SOUND_BOMBETTE_BODY_SLAM                    = 0x00002020,
+    SOUND_SHELL_SPIN                            = 0x00002021,
+    SOUND_FAN_SMACK_HIT                         = 0x00002022, // #windy
+    SOUND_FAN_SMACK_END                         = 0x00002023, // #windy
+    SOUND_WATT_MEGA_CHARGE_WAVE                 = 0x00002024,
     SOUND_DIZZY_SHELL                           = 0x00002026,
     SOUND_SHUFFLE_CARD_A                        = 0x0000202A,
     SOUND_SHUFFLE_CARD_B                        = 0x0000202B,
     SOUND_FIRE_FLOWER_A                         = 0x0000202C,
     SOUND_FIRE_FLOWER_B                         = 0x0000202D,
     SOUND_SNOWMAN_DOLL_JUMP                     = 0x0000202E,
-    SOUND_202F                                    = 0x0000202F, // unused
+    SOUND_NOISE_RUSH                            = 0x0000202F, // unused
     SOUND_POW_BLOCK                             = 0x00002030,
     SOUND_INFLICT_SLEEP                         = 0x00002031,
     SOUND_INFLICT_STATUS                        = 0x00002032,
@@ -1333,12 +1339,12 @@ enum SoundIDs {
     SOUND_WHALE_CLOSE_MOUTH                     = 0x00002037,
     SOUND_TUBBA_SNORE_INHALE                    = 0x00002038,
     SOUND_TUBBA_SNORE_EXHALE                    = 0x00002039,
-    SOUND_KPA_BRIDGE_COLLAPSE_A              = 0x0000203A,
-    SOUND_KPA_BRIDGE_COLLAPSE_B              = 0x0000203B,
-    SOUND_203C                                    = 0x0000203C,
-    SOUND_203D                                    = 0x0000203D,
-    SOUND_203E                                    = 0x0000203E,
-    SOUND_203F                                    = 0x0000203F,
+    SOUND_KPA_BRIDGE_COLLAPSE_A                 = 0x0000203A,
+    SOUND_KPA_BRIDGE_COLLAPSE_B                 = 0x0000203B,
+    SOUND_KPA_ARENA_EXPLODING                   = 0x0000203C,
+    SOUND_OBK_STAIRS_DROP                       = 0x0000203D,
+    SOUND_SHY_GUY_OUCH                          = 0x0000203E,
+    SOUND_SHY_GUY_RUN_AWAY                      = 0x0000203F,
     SOUND_KPA_FLIP_BRIDGE_PANEL                 = 0x00002040,
     SOUND_STAR_SPIRIT_APPEAR_A                  = 0x00002041,
     SOUND_STAR_SPIRIT_APPEAR_B                  = 0x00002042,
@@ -1347,10 +1353,10 @@ enum SoundIDs {
     SOUND_STAR_SPIRIT_DEPART_1                  = 0x00002045,
     SOUND_STAR_SPIRIT_DEPART_2                  = 0x00002046,
     SOUND_STAR_SPIRIT_DEPART_3                  = 0x00002047,
-    SOUND_2049                                    = 0x00002049,
+    SOUND_DARK_TOAD_DISPEL                      = 0x00002049,
     SOUND_OPEN_MAGIC_CHEST                      = 0x0000204A,
     SOUND_CLOSE_MAGIC_CHEST                     = 0x0000204B,
-    SOUND_204C                                    = 0x0000204C, // unused
+    SOUND_QUICK_HINGE                           = 0x0000204C, // unused
     SOUND_FLO_MOVE_PILLAR                       = 0x0000204D,
     SOUND_WISH_ASCENDING                        = 0x00002051,
     SOUND_UP_AND_AWAY_SEND_AWAY                 = 0x00002052,
@@ -1368,32 +1374,33 @@ enum SoundIDs {
     SOUND_CHAIN_CHOMP_BITE                      = 0x00002061,
     SOUND_CHAIN_CHOMP_THUD                      = 0x00002062,
     SOUND_CHAIN_RATTLE                          = 0x00002063,
-    SOUND_2064                                    = 0x00002064,
-    SOUND_2065                                    = 0x00002065,
-    SOUND_2066                                    = 0x00002066,
-    SOUND_2067                                    = 0x00002067,
-    SOUND_2069                                    = 0x00002069,
-    SOUND_206A                                    = 0x0000206A,
-    SOUND_206B                                    = 0x0000206B,
-    SOUND_206D                                    = 0x0000206D,
-    SOUND_206E                                    = 0x0000206E,
-    SOUND_206F                                    = 0x0000206F,
-    SOUND_2070                                    = 0x00002070,
+    SOUND_SHY_STACK_SQUISH                      = 0x00002064,
+    SOUND_STILT_GUY_UNFOLD                      = 0x00002065,
+    SOUND_STILT_GUY_STEP                        = 0x00002066,
+    SOUND_STILTS_FALL                           = 0x00002067, // #woody
+    SOUND_TANK_BULB_FIRE                        = 0x00002069, // #electric
+    SOUND_TOY_TANK_OPEN_HATCH                   = 0x0000206A,
+    SOUND_TOY_TANK_CLOSE_HATCH                  = 0x0000206B,
+    SOUND_WOODEN_BLOCK                          = 0x0000206C, // #unused
+    SOUND_RECOVER_HEART                         = 0x0000206D, // #magic
+    SOUND_FUZZY_RUMBLE                          = 0x0000206E,
+    SOUND_FUZZY_SHAKE                           = 0x0000206F,
+    SOUND_FUZZY_DIVIDE                          = 0x00002070,
     SOUND_UP_AND_AWAY_CAPTURE                   = 0x00002071,
-    SOUND_2072                                    = 0x00002072,
-    SOUND_2073                                    = 0x00002073,
-    SOUND_2074                                    = 0x00002074,
-    SOUND_2075                                    = 0x00002075,
+    SOUND_YOSHI                                 = 0x00002072,
+    SOUND_HIT_WHACKA                            = 0x00002073,
+    SOUND_MAGIC_ASCENDING                       = 0x00002074, // #magic #ascending
+    SOUND_MAGIC_DESCENDING                      = 0x00002075, // #magic #descending
     SOUND_BOMB_BLAST                            = 0x00002076,
     SOUND_BULLET_BILL_EXPLODE_A                 = 0x00002078,
     SOUND_BULLET_BILL_EXPLODE_B                 = 0x00002079,
-    SOUND_207A                                    = 0x0000207A,
-    SOUND_207B                                    = 0x0000207B,
-    SOUND_207C                                    = 0x0000207C,
-    SOUND_207D                                    = 0x0000207D,
-    SOUND_207E                                    = 0x0000207E,
-    SOUND_207F                                    = 0x0000207F,
-    SOUND_JUMP_2081                             = 0x00002081,
+    SOUND_KAMMY_SUMMON_MAGIC                    = 0x0000207A,
+    SOUND_KAMMY_SUMMON_BLOCK                    = 0x0000207B,
+    SOUND_KAMMY_RAISE_OBJECT                    = 0x0000207C,
+    SOUND_KAMMY_LOWER_OBJECT                    = 0x0000207D,
+    SOUND_TWINK_ATTACK                          = 0x0000207E,
+    SOUND_TWINK_FLY_A                           = 0x0000207F,
+    SOUND_QUICK_PLAYER_JUMP                     = 0x00002081,
     SOUND_JUMP_8BIT_MARIO                       = 0x00002082,
     SOUND_STAR_BOX_LAUNCHER                     = 0x00002085,
     SOUND_SPRING                                = 0x00002086,
@@ -1425,85 +1432,87 @@ enum SoundIDs {
     SOUND_IWA_SLIDE_GATE                        = 0x000020A2,
     SOUND_CREAKY_WINDOW_OPEN                    = 0x000020A3,
     SOUND_CREAKY_WINDOW_CLOSE                   = 0x000020A4,
-    SOUND_20A5                                    = 0x000020A5,
-    SOUND_20A6                                    = 0x000020A6,
-    SOUND_20A7                                    = 0x000020A7,
-    SOUND_20A8                                    = 0x000020A8,
-    SOUND_20AB                                    = 0x000020AB,
-    SOUND_20AC                                    = 0x000020AC,
-    SOUND_20AD                                    = 0x000020AD,
-    SOUND_20AE                                    = 0x000020AE,
-    SOUND_20B1                                    = 0x000020B1,
-    SOUND_20B2                                    = 0x000020B2,
-    SOUND_20B3                                    = 0x000020B3,
-    SOUND_20B4                                    = 0x000020B4,
-    SOUND_20B6                                    = 0x000020B6,
-    SOUND_20B7                                    = 0x000020B7,
-    SOUND_20B8                                    = 0x000020B8,
-    SOUND_20B9                                    = 0x000020B9,
+    SOUND_TRAIN_DOOR_OPEN                       = 0x000020A5,
+    SOUND_TRAIN_DOOR_CLOSE                      = 0x000020A6,
+    SOUND_TURN_MECHANISM                        = 0x000020A7,
+    SOUND_CAPSULE_OPEN                          = 0x000020A8,
+    SOUND_FLIP_PANEL                            = 0x000020AB,
+    SOUND_CLOSE_PANEL                           = 0x000020AC,
+    SOUND_WATER_SPLASH                          = 0x000020AD,
+    SOUND_BREAK_CRATE                           = 0x000020AE, // #boing
+    SOUND_HOLLOW_RISING                         = 0x000020AF, // #unused
+    SOUND_HOLLOW_FALLING                        = 0x000020B0, // #unused
+    SOUND_PIRANHA_SPIN_1                        = 0x000020B1,
+    SOUND_PIRANHA_SPIN_2                        = 0x000020B2,
+    SOUND_PIRANHA_TENSE                         = 0x000020B3,
+    SOUND_HEAVY_NPC_STEP_B                      = 0x000020B4,
+    SOUND_HUFF_N_PUFF_JIGGLE                    = 0x000020B6,
+    SOUND_HUFF_N_PUFF_WOBBLE                    = 0x000020B7,
+    SOUND_GHOST_TRANSFORM                       = 0x000020B8,
+    SOUND_JR_TROOPA_TRANSFORM                   = 0x000020B9,
     SOUND_ACTOR_STEP_A                          = 0x000020BA,
-    SOUND_20BB                                    = 0x000020BB,
-    SOUND_20BC                                    = 0x000020BC,
+    SOUND_MASTER_FLUTTER                        = 0x000020BB,
+    SOUND_MASTER_KICK                           = 0x000020BC,
     SOUND_MASTER_STANCE_CHANGE                  = 0x000020BD,
-    SOUND_20BE                                    = 0x000020BE,
-    SOUND_20BF                                    = 0x000020BF,
-    SOUND_20C1                                    = 0x000020C1,
-    SOUND_20C2                                    = 0x000020C2,
-    SOUND_20C3                                    = 0x000020C3,
-    SOUND_20C4                                    = 0x000020C4,
-    SOUND_20C5                                    = 0x000020C5,
-    SOUND_20C6                                    = 0x000020C6,
+    SOUND_MASTER_FLIP                           = 0x000020BE,
+    SOUND_LAVA_BUD_RECOVER                      = 0x000020BF,
+    SOUND_SMALL_NPC_STEP                        = 0x000020C1,
+    SOUND_BANDIT_STEAL                          = 0x000020C2,
+    SOUND_DISAPPOINTED                          = 0x000020C3,
+    SOUND_CLUBBA_STEP                           = 0x000020C4,
+    SOUND_CLUBBA_SWING                          = 0x000020C5,
+    SOUND_MBUSH_STEP                            = 0x000020C6,
     SOUND_TUBBA_HEART_JUMP                      = 0x000020C8,
-    SOUND_20C9                                    = 0x000020C9,
-    SOUND_20CA                                    = 0x000020CA,
-    SOUND_20CB                                    = 0x000020CB,
-    SOUND_20CC                                    = 0x000020CC,
-    SOUND_20CD                                    = 0x000020CD,
-    SOUND_20CE                                    = 0x000020CE,
-    SOUND_20CF                                    = 0x000020CF,
-    SOUND_20D0                                    = 0x000020D0,
-    SOUND_20D1                                    = 0x000020D1,
-    SOUND_20D2                                    = 0x000020D2,
-    SOUND_20D3                                    = 0x000020D3,
+    SOUND_MBUSH_LEAP                            = 0x000020C9,
+    SOUND_BZZAP_STING                           = 0x000020CA,
+    SOUND_MINI_BZZAP_STING                      = 0x000020CB,
+    SOUND_BZZAP_CALL_SWARM                      = 0x000020CC,
+    SOUND_BONY_BEETLE_STEP                      = 0x000020CD,
+    SOUND_BONY_BEETLE_EXTEND_SPIKES             = 0x000020CE,
+    SOUND_BONY_BEETLE_RETRACT_SPIKES            = 0x000020CF,
+    SOUND_CLEFT_STEP                            = 0x000020D0,
+    SOUND_CLEFT_TACKLE                          = 0x000020D1,
+    SOUND_LAKITU_THROW_SPINY                    = 0x000020D2,
+    SOUND_SHELL_TOSS                            = 0x000020D3,
     SOUND_SPELL_CAST1                           = 0x000020D4,
     SOUND_SPELL_CAST2                           = 0x000020D5,
     SOUND_SPELL_CAST3                           = 0x000020D6,
     SOUND_SPELL_CAST4                           = 0x000020D7,
     SOUND_SPELL_CAST5                           = 0x000020D8, // unused
     SOUND_FUZZIPEDE_MOTION                      = 0x000020D9,
-    SOUND_20DA                                    = 0x000020DA,
-    SOUND_20DB                                    = 0x000020DB,
-    SOUND_20DC                                    = 0x000020DC,
+    SOUND_FUZZIPEDE_LEAP                        = 0x000020DA, // #boing #spring #bounce
+    SOUND_FUZZIPEDE_STRIKE                      = 0x000020DB, // #boing #spring
+    SOUND_COMMAND_LOSS                          = 0x000020DC,
     SOUND_GOOMBA_STEP                           = 0x000020DD,
-    SOUND_20DE                                    = 0x000020DE,
+    SOUND_PIRANHA_BITE                          = 0x000020DE,
     SOUND_PARAGOOMBA_FLY                        = 0x000020DF,
     SOUND_PARAGOOMBA_PREDIVE                    = 0x000020E0,
-    SOUND_20E1                                    = 0x000020E1,
-    SOUND_20E2                                    = 0x000020E2,
-    SOUND_20E3                                    = 0x000020E3,
-    SOUND_20E4                                    = 0x000020E4,
-    SOUND_20E5                                    = 0x000020E5,
-    SOUND_20E6                                    = 0x000020E6,
-    SOUND_LEVITATE                              = 0x000020E7,
+    SOUND_TUTANKOOPA_MAGIC                      = 0x000020E1,
+    SOUND_JR_TOOPA_JUMP                         = 0x000020E2,
+    SOUND_ACTOR_WITHER                          = 0x000020E3,
+    SOUND_ACTOR_COLLAPSE                        = 0x000020E4,
+    SOUND_KNOCKOUT_CHIRPING                     = 0x000020E5, // #bird #chirping
+    SOUND_TUTANKOOPA_LEVITATE                   = 0x000020E6,
+    SOUND_SPOOKY_LEVITATE                       = 0x000020E7,
     SOUND_ILLUSION_DISSOLVE                     = 0x000020E8,
-    SOUND_20E9                                    = 0x000020E9,
-    SOUND_20EA                                    = 0x000020EA,
-    SOUND_20EB                                    = 0x000020EB,
-    SOUND_20EC                                    = 0x000020EC,
-    SOUND_20ED                                    = 0x000020ED,
-    SOUND_20EE                                    = 0x000020EE,
-    SOUND_20EF                                    = 0x000020EF,
-    SOUND_20F0                                    = 0x000020F0,
-    SOUND_20F1                                    = 0x000020F1,
-    SOUND_20F2                                    = 0x000020F2,
-    SOUND_20F3                                    = 0x000020F3,
-    SOUND_20F4                                    = 0x000020F4,
-    SOUND_20F5                                    = 0x000020F5,
-    SOUND_20F6                                    = 0x000020F6,
-    SOUND_20F7                                    = 0x000020F7,
-    SOUND_20F9                                    = 0x000020F9,
-    SOUND_20FB                                    = 0x000020FB,
-    SOUND_20FC                                    = 0x000020FC,
+    SOUND_HEAVY_NPC_FALLING                     = 0x000020E9, // #falling
+    SOUND_HEAVY_NPC_LANDING                     = 0x000020EA, // #echoing #thud #impact
+    SOUND_TUTANKOOPA_DEBRIS_FALL                = 0x000020EB, // #falling
+    SOUND_HEAVY_NPC_STEP_A                      = 0x000020EC,
+    SOUND_GOOMBA_KING_SPIN                      = 0x000020ED,
+    SOUND_GULPIT_LICK                           = 0x000020EE,
+    SOUND_BUZZAR_FLAP                           = 0x000020EF,
+    SOUND_BUZZAR_WHIRLWIND                      = 0x000020F0, // #windy
+    SOUND_BUZZAR_WINDUP                         = 0x000020F1,
+    SOUND_BUZZAR_DIVE                           = 0x000020F2,
+    SOUND_SMALL_LENS_FLARE                      = 0x000020F3,
+    SOUND_BUZZAR_THROW                          = 0x000020F4,
+    SOUND_BUZZAR_GRAB                           = 0x000020F5,
+    SOUND_HEAVY_NPC_STEP_C                      = 0x000020F6,
+    SOUND_TUBBAS_HEART_CHARGE                   = 0x000020F7,
+    SOUND_TUBBAS_HEART_SWARM_ATTACK             = 0x000020F9,
+    SOUND_TUBBAS_HEART_SWARM_DISPERSE           = 0x000020FB,
+    SOUND_TUBBAS_HEART_SWARM_VANISH             = 0x000020FC,
     SOUND_FAKE_BOWSER_SWING                     = 0x000020FD,
     SOUND_FAKE_BOWSER_STRIKE                    = 0x000020FE,
     SOUND_FILE_MENU_MOVE_CURSOR                 = 0x00002101,
@@ -1533,11 +1542,11 @@ enum SoundIDs {
     SOUND_SPIN_SMASH_1                          = 0x0000211E,
     SOUND_SPIN_SMASH_2                          = 0x0000211F,
     SOUND_SPIN_SMASH_3                          = 0x00002120,
-    SOUND_2121                                    = 0x00002121,
-    SOUND_2122                                    = 0x00002122,
-    SOUND_2123                                    = 0x00002123,
-    SOUND_2124                                    = 0x00002124,
-    SOUND_2125                                    = 0x00002125,
+    SOUND_BOWSER_STAR_ROD_USE                   = 0x00002121,
+    SOUND_BOWSER_STAR_ROD_DRAIN_WAVE            = 0x00002122,
+    SOUND_BOWSER_STAR_ROD_GATHER                = 0x00002123,
+    SOUND_BOWSER_STAR_ROD_SHOCKWAVE             = 0x00002124,
+    SOUND_BOWSER_STAR_ROD_ENCHANT               = 0x00002125,
     SOUND_BOWSER_CAST_RECOVER                   = 0x00002126,
     SOUND_BOWSER_LIGHTNING                      = 0x00002127,
     SOUND_BOWSER_POWER_DOWN                     = 0x00002128,
@@ -1895,9 +1904,9 @@ enum EncounterOutcomes {
 };
 
 enum MerleeSpellType {
-    MERLEE_SPELL_0              = 0,
-    MERLEE_SPELL_1              = 1,
-    MERLEE_SPELL_2              = 2,
+    MERLEE_SPELL_NONE           = 0,
+    MERLEE_SPELL_ATK_BOOST      = 1,
+    MERLEE_SPELL_DEF_BOOST      = 2,
     MERLEE_SPELL_EXP_BOOST      = 3,
     MERLEE_SPELL_COIN_BOOST     = 4,
 };
@@ -1936,9 +1945,9 @@ enum SpeechFlags {
 typedef enum HitResult {
     HIT_RESULT_BACKFIRE             = -1,
     HIT_RESULT_HIT                  = 0,
-    HIT_RESULT_1                    = 1,    // KILL?
+    HIT_RESULT_NICE                 = 1,
     HIT_RESULT_NO_DAMAGE            = 2,
-    HIT_RESULT_3                    = 3,
+    HIT_RESULT_NICE_NO_DAMAGE       = 3,
     HIT_RESULT_LANDED_ON_SPIKE      = 4,
     HIT_RESULT_LUCKY                = 5,
     HIT_RESULT_MISS                 = 6,
@@ -2688,20 +2697,20 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_CAM3                       = 0x00000008,
     ITEM_ENTITY_FLAG_10                         = 0x00000010,
     ITEM_ENTITY_FLAG_HIDDEN                     = 0x00000040, // do not render; player cant pickup
-    ITEM_ENTITY_FLAG_80                         = 0x00000080,
+    ITEM_ENTITY_FLAG_JUST_SPAWNED               = 0x00000080,
     ITEM_ENTITY_FLAG_AUTO_COLLECT               = 0x00000100,
     ITEM_ENTITY_FLAG_NEVER_VANISH               = 0x00000200,
     ITEM_ENTITY_FLAG_SAVE_ON_TOUCH              = 0x00000400, // sets bound game flag when the item is touched
-    ITEM_ENTITY_FLAG_800                        = 0x00000800,
+    ITEM_ENTITY_FLAG_SAVE_ON_INIT               = 0x00000800,
     ITEM_ENTITY_FLAG_1000                       = 0x00001000,
     ITEM_ENTITY_FLAG_NO_GRAVITY                 = 0x00002000,
     ITEM_ENTITY_RESIZABLE                       = 0x00004000,
     ITEM_ENTITY_FLAG_8000                       = 0x00008000,
     ITEM_ENTITY_FLAG_TOSS_LOWER                 = 0x00010000,
-    ITEM_ENTITY_FLAG_20000                      = 0x00020000,
-    ITEM_ENTITY_FLAG_40000                      = 0x00040000,
+    ITEM_ENTITY_FLAG_ODD_SPAWN_PARITY           = 0x00020000, // every other item entity spawned will have this set
+    ITEM_ENTITY_FLAG_FULLSIZE                   = 0x00040000,
     ITEM_ENTITY_FLAG_TRANSPARENT                = 0x00080000,
-    ITEM_ENTITY_FLAG_100000                     = 0x00100000,
+    ITEM_ENTITY_FLAG_INVISIBLE                  = 0x00100000, // spawned with ITEM_SPAWN_MODE_INVISIBLE
     ITEM_ENTITY_FLAG_CANT_COLLECT               = 0x00200000,
     ITEM_ENTITY_FLAG_400000                     = 0x00400000,
     ITEM_ENTITY_FLAG_800000                     = 0x00800000,
@@ -2897,6 +2906,26 @@ enum EventSupressFlags {
     SUPPRESS_EVENT_ALL              = 0xFFFF,
     SUPPRESS_EVENT_FLAG_10000       = 0x10000,  // usage is a bug?
 };
+
+// combination used for hammer-based attacks
+#define SUPPRESS_EVENTS_HAMMER \
+      SUPPRESS_EVENT_SPIKY_TOP \
+    | SUPPRESS_EVENT_SHOCK_CONTACT \
+    | SUPPRESS_EVENT_BURN_CONTACT
+
+// combination used for mostly for kooper's attacks
+#define SUPPRESS_EVENTS_KOOPER_TEST \
+      SUPPRESS_EVENT_SPIKY_FRONT \
+    | SUPPRESS_EVENT_BURN_CONTACT
+
+// combination used for mostly for kooper's attacks
+#define SUPPRESS_EVENTS_KOOPER_DAMAGE \
+      SUPPRESS_EVENT_SPIKY_TOP \
+    | SUPPRESS_EVENT_EXPLODE_CONTACT \
+    | SUPPRESS_EVENT_SPIKY_FRONT \
+    | SUPPRESS_EVENT_SHOCK_CONTACT \
+    | SUPPRESS_EVENT_BURN_CONTACT \
+    | SUPPRESS_EVENT_ALT_SPIKY
 
 enum PartnerActions {
     PARTNER_ACTION_NONE             = 0, // generic state
@@ -3136,14 +3165,14 @@ enum PopupState {
     POPUP_STATE_MINUS_3                     = -3,
     POPUP_STATE_MINUS_4                     = -4,
     POPUP_STATE_MINUS_5                     = -5,
-    POPUP_STATE_MINUS_6                     = -6,
+    POPUP_STATE_CHOSE_SWAP                  = -6,
     POPUP_STATE_MINUS_7                     = -7,
     POPUP_STATE_MINUS_8                     = -8,
 };
 
 enum PopupResult {
-    POPUP_RESULT_MINUS_1    = -1,
-    POPUP_RESULT_MINUS_2    = -2,
+    POPUP_RESULT_INVALID    = -1,
+    POPUP_RESULT_SWAP_MENU  = -2,
     POPUP_RESULT_CHOOSING   = 0,
     POPUP_RESULT_CANCEL     = 255,
 };
@@ -3523,18 +3552,22 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_MENU_OPEN                     = 0x00000002,
     BS_FLAGS1_TATTLE_OPEN                   = 0x00000004,
     BS_FLAGS1_SHOW_PLAYER_DECORATIONS       = 0x00000008, // enables effects for Frozen, Water Block, and Cloud Nine to appear and follow the player
-    BS_FLAGS1_10                            = 0x00000010, // enable attack bonuses (power plus, etc)
-    BS_FLAGS1_SP_EVT_ACTIVE                 = 0x00000020, // enable special events (other than hit/death/immune?)
-    BS_FLAGS1_40                            = 0x00000040,
-    BS_FLAGS1_80                            = 0x00000080,
+    // Enables attack bonuses like Power Plus and Merlee ATK boost.
+    // Almost always used with TestTarget functions when not called with DAMAGE_TYPE_TRIGGER_LUCKY.
+    BS_FLAGS1_INCLUDE_POWER_UPS             = 0x00000010,
+    // Current hit may trigger special events on the target (other than hit/death/immune)
+    // These include FLIP_TRIGGER, FALL_TRIGGER, BURN_HIT, SPIN_SMASH_HIT, etc.
+    // This has no bearing on contact hazard events which affect the attacker like SPIKE_CONTACT or BURN_CONTACT.
+    BS_FLAGS1_TRIGGER_EVENTS                = 0x00000020,
+    BS_FLAGS1_NICE_HIT                      = 0x00000040,
+    BS_FLAGS1_NO_RATING                     = 0x00000080, // prevents 'Nice!' or 'Super!' messages from appearing
     BS_FLAGS1_EXECUTING_MOVE                = 0x00000100,
-    BS_FLAGS1_200                           = 0x00000200,
-    BS_FLAGS1_400                           = 0x00000400, // UNUSED
-    BS_FLAGS1_FORCE_HIT_IMMUNE              = 0x00000800,
+    BS_FLAGS1_SUPER_HIT                     = 0x00000200, // only works for partners and items, NOT player hits
+    BS_FLAGS1_FORCE_IMMUNE_HIT              = 0x00000800,
     BS_FLAGS1_AUTO_SUCCEED_ACTION           = 0x00001000,
     BS_FLAGS1_2000                          = 0x00002000,
     BS_FLAGS1_4000                          = 0x00004000,
-    BS_FLAGS1_8000                          = 0x00008000,
+    BS_FLAGS1_FREE_ACTION_COMMAND           = 0x00008000,
     BS_FLAGS1_10000                         = 0x00010000,
     BS_FLAGS1_DISABLE_CELEBRATION           = 0x00020000,
     BS_FLAGS1_BATTLE_FLED                   = 0x00040000, // used both when the player flees sucessfully or an enemy flees
@@ -3557,16 +3590,16 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_AWARDING_STAR_POINTS          = 0x00000001, // star points move to the center of the screen
     BS_FLAGS2_PLAYER_TURN_USED              = 0x00000002, // set after player has used their action for this turn
     BS_FLAGS2_PARTNER_TURN_USED             = 0x00000004, // set after partner has used their action for this turn
-    BS_FLAGS2_8                             = 0x00000008,
-    BS_FLAGS2_10                            = 0x00000010,
+    BS_FLAGS2_OVERRIDE_INACTIVE_PLAYER      = 0x00000008, // override inactive player animations and effects
+    BS_FLAGS2_OVERRIDE_INACTIVE_PARTNER     = 0x00000010, // override inactive partner animations and effects
     BS_FLAGS2_CANT_FLEE                     = 0x00000020,
     BS_FLAGS2_PEACH_BATTLE                  = 0x00000040,
     BS_FLAGS2_STORED_TURBO_CHARGE_TURN      = 0x00000100, // prevents turbo charge turns from decrementing on begin player turn
     BS_FLAGS2_DOING_JUMP_TUTORIAL           = 0x00000200,
-    BS_FLAGS2_400                           = 0x00000400,
+    BS_FLAGS2_FINAL_BOWSER_PART_1           = 0x00000400, // no other use for this flag, purpose unknown
     BS_FLAGS2_NO_TARGET_AVAILABLE           = 0x00001000,
     BS_FLAGS2_IGNORE_DARKNESS               = 0x00004000,
-    BS_FLAGS2_10000                         = 0x00010000,
+    BS_FLAGS2_HIDE_BUFF_COUNTERS            = 0x00010000, // hide turn counters for partner buffs (Cloud Nine, Water Block, etc)
     BS_FLAGS2_NO_PLAYER_PAL_ADJUST          = 0x00100000,
     BS_FLAGS2_IS_FIRST_STRIKE               = 0x01000000,
     BS_FLAGS2_DONT_STOP_MUSIC               = 0x02000000, // don't stop playing the current song when the battle ends
@@ -4099,11 +4132,23 @@ enum BattleMessages {
 
 // states after INIT are different for each type of battle message
 enum BattleMessageStates {
+    // generic INIT state shared by all message types
     BTL_MSG_STATE_INIT                  = 0,
-    BTL_MSG_STATE_1                     = 1,
-    BTL_MSG_STATE_2                     = 2,
-    BTL_MSG_STATE_3                     = 3,
-    BTL_MSG_STATE_4                     = 4,
+    // states for popup messages like BTL_MSG_MERLEE_ATK_UP or BTL_MSG_ENEMY_ASLEEP
+    BTL_MSG_STATE_POPUP_PRE_DELAY       = 1,
+    BTL_MSG_STATE_POPUP_DELAY           = 2,
+    BTL_MSG_STATE_POPUP_POST_DELAY      = 3,
+    BTL_MSG_STATE_POPUP_DISPOSE         = 4,
+    // states for action tip messages
+    BTL_MSG_STATE_ACTION_TIP_DELAY      = 1,
+    BTL_MSG_STATE_ACTION_TIP_DISPOSE    = 2,
+    // states for error messages like BTL_MSG_NO_JUMP_TARGET or BTL_MSG_CANT_SELECT_NOW
+    BTL_MSG_STATE_ERROR_PRE_DELAY       = 1,
+    BTL_MSG_STATE_ERROR_DELAY           = 2,
+    BTL_MSG_STATE_ERROR_POST_DELAY      = 3,
+    BTL_MSG_STATE_ERROR_DISPOSE         = 4,
+    // states for command disable notifications like BTL_MSG_ITEMS_DISABLED
+    BTL_MSG_STATE_DISABLED_DELAY        = 1,
 };
 
 // BattleMenuState
@@ -4233,25 +4278,25 @@ enum DebuffTypes {
 };
 
 enum GlobalOverrides {
-    GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
-    GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME                         = 0x00000008,
-    GLOBAL_OVERRIDES_10                                         = 0x00000010,
-    GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
-    GLOBAL_OVERRIDES_40                                         = 0x00000040,
-    GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION                    = 0x00000080,
-    GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
-    GLOBAL_OVERRIDES_200                                        = 0x00000200,
-    GLOBAL_OVERRIDES_400                                        = 0x00000400,
-    GLOBAL_OVERRIDES_800                                        = 0x00000800,
-    GLOBAL_OVERRIDES_1000                                       = 0x00001000,
-    GLOBAL_OVERRIDES_2000                                       = 0x00002000,
-    GLOBAL_OVERRIDES_4000                                       = 0x00004000,
-    GLOBAL_OVERRIDES_8000                                       = 0x00008000,
-    GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
-    GLOBAL_OVERRIDES_20000                                      = 0x00020000,
-    GLOBAL_OVERRIDES_DISABLE_MENUS                              = 0x00040000,
-    GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS              = 0x00100000,
-    GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS                         = 0x00200000,
+    GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD           = 0x00000002,
+    GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME             = 0x00000008,
+    GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI          = 0x00000010,
+    GLOBAL_OVERRIDES_SOFT_RESET                     = 0x00000020, // unused but functional
+    GLOBAL_OVERRIDES_40                             = 0x00000040,
+    GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION        = 0x00000080,
+    GLOBAL_OVERRIDES_DISABLE_BATTLES                = 0x00000100,
+    GLOBAL_OVERRIDES_200                            = 0x00000200,
+    GLOBAL_OVERRIDES_400                            = 0x00000400,
+    GLOBAL_OVERRIDES_800                            = 0x00000800,
+    GLOBAL_OVERRIDES_PREV_DISABLE_BATTLES           = 0x00001000,
+    GLOBAL_OVERRIDES_PREV_200                       = 0x00002000,
+    GLOBAL_OVERRIDES_PREV_400                       = 0x00004000,
+    GLOBAL_OVERRIDES_PREV_800                       = 0x00008000,
+    GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS          = 0x00010000,
+    GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE  = 0x00020000,
+    GLOBAL_OVERRIDES_DISABLE_MENUS                  = 0x00040000,
+    GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS         = 0x00100000,
+    GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS             = 0x00200000,
 };
 
 #define MODEL_FLAGS_MASK_FFF0  (\
@@ -4582,13 +4627,18 @@ typedef enum SurfaceInteractMode {
     SURFACE_INTERACT_LAND       = 2,
 } SurfaceInteractMode;
 
+// flags that can be set on colliders
+// passed into collision queries to selectively ignore certain types of objects or colliders
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK           = 0x7FFFFE00, // map data dumper needs this to be first
     COLLIDER_FLAGS_SURFACE_TYPE_MASK    = 0x000000FF,
     COLLIDER_FLAG_SAFE_FLOOR            = 0x00000100,
-    COLLIDER_FLAG_IGNORE_SHELL          = 0x00008000,
-    COLLIDER_FLAG_IGNORE_PLAYER         = 0x00010000,
-    COLLIDER_FLAG_80000                 = 0x00080000, // test version of DOCK walls?
+    COLLIDER_FLAG_IGNORE_SHELL          = 0x00008000, // colliders marked with this flag are not solid for shells
+    COLLIDER_FLAG_IGNORE_PLAYER         = 0x00010000, // colliders marked with this flag are not solid for player or partners
+    COLLIDER_FLAG_IGNORE_NPC            = 0x00020000, // colliders marked with this flag are not solid for npcs or item entities
+    COLLISION_IGNORE_ENTITIES           = 0x00040000, // used for collision queries, not set for colliders
+    COLLIDER_FLAG_DOCK_WALL             = 0x00080000,
+    COLLISION_ONLY_ENTITIES             = 0x00100000, // used for collision queries, not set for colliders
     COLLIDER_FLAG_HAS_MODEL_PARENT      = 0x80000000
 };
 
@@ -4599,13 +4649,12 @@ enum ColliderFlagsModifyMode {
     MODIFY_COLLIDER_FLAGS_SET_SURFACE    = 3,
 };
 
-enum CollisionChannels {
-    COLLISION_CHANNEL_8000          = 0x00008000,
-    COLLISION_CHANNEL_10000         = 0x00010000,
-    COLLISION_CHANNEL_20000         = 0x00020000,
-    COLLISION_IGNORE_ENTITIES       = 0x00040000,
-    COLLISION_CHANNEL_80000         = 0x00080000,
-    COLLISION_ONLY_ENTITIES         = 0x00100000,
+enum PlayerCollisionTests {
+    PLAYER_COLLISION_0          = 0,
+    PLAYER_COLLISION_1          = 1,
+    PLAYER_COLLISION_2          = 2,
+    PLAYER_COLLISION_3          = 3,
+    PLAYER_COLLISION_4          = 4,
 };
 
 enum CameraFlags {
@@ -4622,8 +4671,8 @@ enum CameraFlags {
 
 enum CameraMoveFlags {
     CAMERA_MOVE_IGNORE_PLAYER_Y     = 0x00000001,
-    CAMERA_MOVE_FLAG_2              = 0x00000002,
-    CAMERA_MOVE_FLAG_4              = 0x00000004,
+    CAMERA_MOVE_NO_INTERP_Y         = 0x00000002,
+    CAMERA_MOVE_ACCEL_INTERP_Y      = 0x00000004,
 };
 
 enum CameraUpdateType {
@@ -4798,8 +4847,8 @@ enum ModelAnimatorFlags {
 };
 
 enum ShopFlags {
-    SHOP_FLAG_1                 = 0x00000001,
-    SHOP_FLAG_8                 = 0x00000008,
+    SHOP_FLAG_SHOWING_ITEM_INFO         = 0x1,
+    SHOP_FLAG_INTERACT_SCRIPT_RUNNING   = 0x8,
 };
 
 enum {

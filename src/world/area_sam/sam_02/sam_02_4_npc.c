@@ -22,11 +22,11 @@
 EvtScript N(EVS_NpcInteract_Penguin_ShopOwner) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_EXEC_WAIT(ItemShopInteract)
+            EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_006A)
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_EXEC_WAIT(ItemShopInteract)
+            EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

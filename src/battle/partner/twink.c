@@ -12,29 +12,26 @@ extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_ExecuteAction);
 extern EvtScript N(EVS_Celebrate);
-extern EvtScript N(runAway);
-extern EvtScript N(runAwayFail);
+extern EvtScript N(EVS_RunAway);
+extern EvtScript N(EVS_RunAwayFail);
 
 enum N(ActorPartIDs) {
-    PRT_MAIN            = 1,
+    PRT_MAIN        = 1,
 };
 
 enum N(ActorVars) {
-    AVAR_Unk_0      = 0,
-    AVAR_Unk_1      = 1,
+    AVAR_Twink_PowerLevel   = 0,
+    AVAR_Twink_DefensePtr   = 1,
+    AVAR_Kammy_Speaking     = 1,
 };
 
-enum N(ActorParams) {
-    DMG_UNK         = 0,
-};
-
-API_CALLABLE(func_80238000_714CF0) {
+API_CALLABLE(N(IsPeachBattle)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE) {
-        script->varTable[0] = 1;
+        script->varTable[0] = TRUE;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0] = FALSE;
     }
 
     return ApiStatus_DONE2;
@@ -119,32 +116,32 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(func_80238000_714CF0)
-    EVT_IF_NE(LVar0, 1)
+    EVT_CALL(N(IsPeachBattle))
+    EVT_IF_NE(LVar0, TRUE)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_ATTACK, TRUE)
     EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, EVT_PTR(N(DefenseTable)))
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Twink_PowerLevel, 0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Twink_DefensePtr, EVT_PTR(N(DefenseTable)))
     EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SPARKLES)
     EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-s32 D_802382F8_714FE8 = 0;
+s32 N(BobPhase) = 0;
 
-API_CALLABLE(func_80238028_714D18) {
+API_CALLABLE(N(AddFlightBobbing)) {
     Actor* actor = get_actor(script->owner1.actorID);
 
-    D_802382F8_714FE8 += 18;
-    D_802382F8_714FE8 = clamp_angle(D_802382F8_714FE8);
-    actor->verticalRenderOffset = 2.0f * sin_rad(DEG_TO_RAD(D_802382F8_714FE8));
+    N(BobPhase) += 18;
+    N(BobPhase) = clamp_angle(N(BobPhase));
+    actor->verticalRenderOffset = 2.0f * sin_rad(DEG_TO_RAD(N(BobPhase)));
     return ApiStatus_DONE2;
 }
 
 EvtScript N(EVS_Idle) = {
     EVT_LOOP(0)
-        EVT_CALL(func_80238028_714D18)
+        EVT_CALL(N(AddFlightBobbing))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -188,9 +185,9 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(PHASE_CELEBRATE)
             EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(runAway))
+            EVT_EXEC_WAIT(N(EVS_RunAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(runAwayFail))
+            EVT_EXEC_WAIT(N(EVS_RunAwayFail))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -205,7 +202,7 @@ EvtScript N(EVS_Celebrate) = {
     EVT_END
 };
 
-EvtScript N(runAway) = {
+EvtScript N(EVS_RunAway) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Twink_Angry)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
@@ -213,7 +210,7 @@ EvtScript N(runAway) = {
     EVT_END
 };
 
-EvtScript N(runAwayFail) = {
+EvtScript N(EVS_RunAwayFail) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
@@ -234,7 +231,7 @@ EvtScript N(EVS_HandlePhase) = {
 EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_TWINK_FLY_B)
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_TWINK_FLY_A, SOUND_TWINK_FLY_B)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(InitTargetIterator)
@@ -255,20 +252,20 @@ EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -40, 15, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, -20, EASING_QUARTIC_OUT)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Twink_PowerLevel, LVarF)
     EVT_IF_GT(LVarF, 1)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_207E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_TWINK_ATTACK)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Unk_0, LVarF)
+    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Twink_PowerLevel, LVarF)
     EVT_IF_GT(LVarF, 0)
-        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_ELSE
-        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+        EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 10)
@@ -279,12 +276,12 @@ EvtScript N(EVS_ExecuteAction) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_LOOP(0)
         EVT_WAIT(1)
-        EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Unk_1, LVar0)
+        EVT_CALL(GetActorVar, ACTOR_ENEMY0, AVAR_Kammy_Speaking, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_207F, SOUND_TWINK_FLY_B)
+    EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_FLY, SOUND_TWINK_FLY_A, SOUND_TWINK_FLY_B)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Twink_Angry)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))

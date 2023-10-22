@@ -1540,7 +1540,7 @@ void set_message_images(MessageImageData* images) {
     *gMsgVarImages = images;
 }
 
-void set_message_msg(s32 msgID, s32 index) {
+void set_message_text_var(s32 msgID, s32 index) {
     u8* mallocSpace = NULL;
     s32 i;
     u8* msgVars;
@@ -1570,7 +1570,7 @@ void set_message_msg(s32 msgID, s32 index) {
     }
 }
 
-void set_message_value(s32 value, s32 index) {
+void set_message_int_var(s32 value, s32 index) {
     s8 strBuffer[ARRAY_COUNT(gMessageMsgVars[index])];
     s8* bufferIt;
     s32 i;

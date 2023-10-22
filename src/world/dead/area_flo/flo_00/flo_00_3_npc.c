@@ -12,7 +12,7 @@ NpcSettings N(NpcSettings_Dummy) = {
 #include "world/common/npc/StarSpirit.inc.c"
 
 API_CALLABLE(N(UpgradeStarPowerCh6)) {
-    set_max_SP(6);
+    set_max_star_power(6);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
     sync_status_bar();

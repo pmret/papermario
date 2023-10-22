@@ -287,7 +287,7 @@ void action_command_init_status(void) {
 void action_command_update(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_8000) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_FREE_ACTION_COMMAND) {
         action_command_free();
     }
 
@@ -522,7 +522,7 @@ void action_command_free(void) {
 
     actionCommandStatus->actionCommandID = ACTION_COMMAND_NONE;
     gBattleStatus.flags1 &= ~BS_FLAGS1_2000;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_8000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     gBattleStatus.flags1 &= ~BS_FLAGS1_4000;
     close_action_command_instruction_popup();
     btl_set_popup_duration(0);

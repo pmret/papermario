@@ -427,7 +427,7 @@ EvtScript N(EVS_Scene_SettingOff) = {
     EVT_WAIT(10 * DT)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Scene_Luigi, ANIM_Luigi_Jump)
-        EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_JUMP_2081, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Scene_Luigi, SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
         EVT_WAIT(7 * DT)
         EVT_WAIT(7 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Scene_Luigi, ANIM_Luigi_Idle)

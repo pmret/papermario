@@ -93,10 +93,10 @@ API_CALLABLE(N(TryEnchantPlayer)) {
         playerData->merleeTurnCount = rand_int(2) + 1;
         switch (rand_int(3)) {
             case 0:
-                playerData->merleeSpellType = MERLEE_SPELL_1;
+                playerData->merleeSpellType = MERLEE_SPELL_ATK_BOOST;
                 break;
             case 1:
-                playerData->merleeSpellType = MERLEE_SPELL_2;
+                playerData->merleeSpellType = MERLEE_SPELL_DEF_BOOST;
                 break;
             case 2:
                 playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;

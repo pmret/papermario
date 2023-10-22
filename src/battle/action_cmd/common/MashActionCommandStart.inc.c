@@ -22,7 +22,7 @@ API_CALLABLE(N(start)) {
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_NONE;
     mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[(actionCommandStatus->mashMeterIntervals - 1)];
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     actionCommandStatus->state = 10;
     battleStatus->unk_82 = mashMeterCutoff;
     func_80269118();

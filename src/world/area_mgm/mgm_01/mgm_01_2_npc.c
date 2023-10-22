@@ -384,7 +384,7 @@ API_CALLABLE(N(UpdateRecords)) {
     if (player->jumpGameRecord < data->curScore) {
         player->jumpGameRecord = data->curScore;
     }
-    set_message_value(data->curScore, 0);
+    set_message_int_var(data->curScore, 0);
 
     return ApiStatus_DONE2;
 }
@@ -477,7 +477,7 @@ API_CALLABLE(N(DestroyBlockEntities)) {
         }
     }
 
-    sfx_play_sound_with_params(SOUND_0283, 0x50, 0, 0);
+    sfx_play_sound_with_params(SOUND_KOOPER_SHELL_KICK, 0x50, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -660,11 +660,11 @@ API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
 
-    set_message_value(remaining, 0);
+    set_message_int_var(remaining, 0);
 #if VERSION_PAL
     evt_set_variable(script, LVarD, remaining);
 #else
-    set_message_msg((remaining == 1) ? (s32)&MessageSingular : (s32)&MessagePlural, 1);
+    set_message_text_var((remaining == 1) ? (s32)&MessageSingular : (s32)&MessagePlural, 1);
 #endif
 
     return ApiStatus_DONE2;
@@ -814,7 +814,7 @@ EvtScript N(EVS_ManageMinigame) = {
                 EVT_CASE_EQ(8)
                     EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0037)
                     EVT_CALL(N(DoubleScore))
-                    EVT_CALL(PlaySoundWithVolume, SOUND_03FC, 0)
+                    EVT_CALL(PlaySoundWithVolume, SOUND_LUCKY, 0)
                     EVT_WAIT(30)
                     EVT_CALL(N(UpdateRecords))
                     EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0038)

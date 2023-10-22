@@ -87,7 +87,7 @@ void state_init_file_select(void) {
     gCameras[CAM_DEFAULT].auxPitch = 0;
     gCameras[CAM_DEFAULT].lookAt_dist = 100;
     gCameras[CAM_DEFAULT].auxBoomPitch = 0;
-    gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
+    gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
 }
 
 void state_step_language_select(void) {
@@ -236,7 +236,7 @@ void state_init_exit_file_select(void) {
         set_map_transition_effect(TRANSITION_SLOW_FADE_TO_WHITE);
     } else {
         set_map_transition_effect(TRANSITION_ENTER_WORLD);
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
         bgm_set_song(0, -1, 0, 1000, 8);
     }
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
@@ -410,7 +410,7 @@ void state_step_exit_file_select(void) {
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             if (temp_s0 == 0) {
                 set_game_mode(GAME_MODE_TITLE_SCREEN);
-                gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS;
             } else {
                 D_800A0930 = 10;
                 D_800A0931 = 4;

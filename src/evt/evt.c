@@ -1129,7 +1129,7 @@ s32 evt_trigger_on_activate_lock(Trigger* trigger) {
 
     if (!does_script_exist(trigger->runningScriptID)) {
         trigger->runningScript = NULL;
-        trigger->flags.flags &= ~TRIGGER_ACTIVATED;
+        trigger->flags &= ~TRIGGER_ACTIVATED;
     }
 }
 

@@ -141,7 +141,7 @@ void spawn_drops(Enemy* enemy) {
         }
     }
 
-    if (is_ability_active(ABILITY_HEART_FINDER) != 0) {
+    if (is_ability_active(ABILITY_HEART_FINDER)) {
         dropCount += 1 + rand_int(2);
     }
     if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
@@ -195,7 +195,7 @@ void spawn_drops(Enemy* enemy) {
         }
     }
 
-    if (is_ability_active(ABILITY_FLOWER_FINDER) != 0) {
+    if (is_ability_active(ABILITY_FLOWER_FINDER)) {
         dropCount += 1 + rand_int(2);
     }
     if (enemy->flags & ENEMY_FLAG_NO_DROPS) {
@@ -253,7 +253,7 @@ void spawn_drops(Enemy* enemy) {
     }
     dropCount = dropCount + encounter->coinsEarned;
 
-    if (is_ability_active(ABILITY_PAY_OFF) != 0) {
+    if (is_ability_active(ABILITY_PAY_OFF)) {
         dropCount += encounter->damageTaken / 2;
         encounter->damageTaken = 0;
     }
@@ -261,7 +261,7 @@ void spawn_drops(Enemy* enemy) {
         encounter->hasMerleeCoinBonus = FALSE;
         dropCount *= 3;
     }
-    if (is_ability_active(ABILITY_MONEY_MONEY) != 0) {
+    if (is_ability_active(ABILITY_MONEY_MONEY)) {
         dropCount *= 2;
     }
     if (dropCount > 20) {
@@ -458,7 +458,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         y = npc->pos.y + npc->collisionHeight * 0.5;
         z = npc->pos.z;
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
-        if (npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000 | COLLISION_IGNORE_ENTITIES,
+        if (npc_test_move_simple_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER | COLLISION_IGNORE_ENTITIES,
                 &x, &y, &z,
                 dist, atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                 0.1f, 0.1f)) {
@@ -716,7 +716,7 @@ void basic_ai_found_player_jump_init(Evt* script, MobileAISettings* npcAISetting
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    ai_enemy_play_sound(npc, SOUND_03E1, 0);
+    ai_enemy_play_sound(npc, SOUND_AI_FOUND_PLAYER_JUMP, 0);
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_JUMP];
     npc->jumpVel = 10.0f;
     npc->jumpScale = 2.5f;
@@ -814,7 +814,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (npc->moveSpeed > 8.0 && !(gGameStatusPtr->frameCounter % 5)) {
-        ai_enemy_play_sound(npc, SOUND_20C1, 0);
+        ai_enemy_play_sound(npc, SOUND_SMALL_NPC_STEP, 0);
     }
 
     if (npc->duration > 0) {

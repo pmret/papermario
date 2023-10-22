@@ -155,7 +155,7 @@ extern Addr world_partner_twink_VRAM;
 #endif
 
 s32 partner_is_idle(Npc* partner);
-s32 world_partner_can_player_pause_default(Npc* partner);
+s32 world_partner_can_open_menus_default(Npc* partner);
 void _use_partner_ability(void);
 void partner_flying_follow_player(Npc*);
 void partner_move_to_goal(Npc*, s32);
@@ -225,8 +225,8 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldGoombario_UseAbility,
         .putAway = &EVS_WorldGoombario_PutAway,
         .idle = ANIM_WorldGoombario_Idle,
-        .canUseAbility = world_goombario_can_pause,
-        .canPlayerPause = world_goombario_can_pause,
+        .canUseAbility = world_goombario_can_open_menus,
+        .canPlayerOpenMenus = world_goombario_can_open_menus,
         .preBattle = world_goombario_pre_battle,
     },
     [PARTNER_KOOPER] {
@@ -242,7 +242,7 @@ WorldPartner wPartners[] = {
         .idle = ANIM_WorldKooper_Idle,
         .testFirstStrike = world_kooper_test_first_strike,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
         .preBattle = world_kooper_pre_battle,
         .postBattle = world_kooper_post_battle,
     },
@@ -259,7 +259,7 @@ WorldPartner wPartners[] = {
         .idle = ANIM_WorldBombette_Idle,
         .testFirstStrike = world_bombette_test_first_strike,
         .canUseAbility = world_bombette_can_use_ability,
-        .canPlayerPause = world_bombette_can_player_pause,
+        .canPlayerOpenMenus = world_bombette_can_open_menus,
         .preBattle = world_bombette_pre_battle,
     },
     [PARTNER_PARAKARRY] {
@@ -273,7 +273,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldParakarry_UseAbility,
         .putAway = &EVS_WorldParakarry_PutAway,
         .idle = ANIM_WorldParakarry_Idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
         .preBattle = world_parakarry_pre_battle,
         .postBattle = world_parakarry_post_battle,
     },
@@ -300,7 +300,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldWatt_UseAbility,
         .putAway = &EVS_WorldWatt_PutAway,
         .idle = ANIM_WorldWatt_Idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
         .onEnterMap = &EVS_WorldWatt_EnterMap,
@@ -316,7 +316,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldSushie_UseAbility,
         .putAway = &EVS_WorldSushie_PutAway,
         .idle = ANIM_WorldSushie_Idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
         .onEnterMap = &EVS_WorldSushie_EnterMap,
@@ -332,7 +332,7 @@ WorldPartner wPartners[] = {
         .useAbility = &EVS_WorldLakilester_UseAbility,
         .putAway = &EVS_WorldLakilester_PutAway,
         .idle = ANIM_WorldLakilester_Idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
         .onEnterMap = &EVS_WorldLakilester_EnterMap,
@@ -349,7 +349,7 @@ WorldPartner wPartners[] = {
         .putAway = &EVS_WorldBow_PutAway,
         .idle = ANIM_WorldBow_Idle,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = world_partner_can_player_pause_default,
+        .canPlayerOpenMenus = world_partner_can_open_menus_default,
         .preBattle = world_bow_pre_battle,
     },
     [PARTNER_GOOMBARIA] {
@@ -364,7 +364,7 @@ WorldPartner wPartners[] = {
         .putAway = &EVS_WorldGoombaria_PutAway,
         .idle = ANIM_Goombaria_Idle,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
     },
     [PARTNER_TWINK] {
         .dmaStart = &world_partner_twink_ROM_START,
@@ -378,7 +378,7 @@ WorldPartner wPartners[] = {
         .putAway = &EVS_WorldTwink_PutAway,
         .idle = ANIM_Twink_Idle,
         .canUseAbility = partner_is_idle,
-        .canPlayerPause = partner_is_idle,
+        .canPlayerOpenMenus = partner_is_idle,
     },
 };
 
@@ -567,7 +567,7 @@ s32 partner_is_idle(Npc* partner) {
     return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
-s32 world_partner_can_player_pause_default(Npc* partner) {
+s32 world_partner_can_open_menus_default(Npc* partner) {
     return TRUE;
 }
 
@@ -1017,10 +1017,10 @@ s32 partner_use_ability(void) {
     return FALSE;
 }
 
-s32 partner_player_can_pause(void) {
+s32 partner_can_open_world_menus(void) {
     if (wPartner != NULL
-        && wPartner->canPlayerPause != NULL
-        && !wPartner->canPlayerPause(wPartnerNpc)
+        && wPartner->canPlayerOpenMenus != NULL
+        && !wPartner->canPlayerOpenMenus(wPartnerNpc)
     ) {
         return FALSE;
     }
@@ -1203,7 +1203,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
     wPartnerTetherDistance = 40.0f;
     partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
     func_800EA5B8(partner);
-    partner->collisionChannel = COLLISION_CHANNEL_10000;
+    partner->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     partner->jumpVel = 0.0f;
     partner->flags |= NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_PLAYER_COLLISION;
     partner->jumpScale = 1.8f;
@@ -1358,9 +1358,10 @@ void partner_walking_follow_player(Npc* partner) {
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             surfaceType = get_collider_flags(partner->curFloor);
-            if (surfaceType == SURFACE_TYPE_SPIKES ||
-                surfaceType == SURFACE_TYPE_LAVA ||
-                (partner->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) == (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
+            if (surfaceType == SURFACE_TYPE_SPIKES
+                || surfaceType == SURFACE_TYPE_LAVA
+                || ((partner->flags & NPC_FLAG_GROUNDED) && (partner->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD))
+            ) {
                 if (!func_800EA4B0(partner->curWall)) {
                     D_8010CFBC++;
                     if (D_8010CFBC >= 40) {
@@ -1779,7 +1780,7 @@ void partner_flying_enable(Npc* partner, s32 val) {
     wPartnerTetherDistance = 40.0f;
     partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
     func_800EA5B8(partner);
-    partner->collisionChannel = COLLISION_CHANNEL_10000;
+    partner->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     partner->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
     partner->flags &= ~NPC_FLAG_GRAVITY;
 }
@@ -1856,7 +1857,7 @@ void partner_flying_update_motion(Npc* partner) {
             y = partner->pos.y;
             z = partner->pos.z;
             hitDepth = 1000.0f;
-            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter) == 0) {
+            if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter) == 0) {
                 y = playerStatus->pos.y;
             }
 
@@ -2169,7 +2170,7 @@ void partner_flying_follow_player(Npc* partner) {
                             z = partner->pos.z;
                             distance = partner->collisionHeight + 1;
                             wPartnerMoveTime--;
-                            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) == 0) {
+                            if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) == 0) {
                                 if (partner->collisionHeight + 5 < fabs((partner->pos.y - playerStatus->pos.y))) {
                                     partner->pos.y += (playerStatus->pos.y - partner->pos.y) / 10.0f;
                                 }
@@ -2212,7 +2213,7 @@ void partner_flying_follow_player(Npc* partner) {
 }
 
 s32 partner_init_put_away(Npc* partner) {
-    partner->collisionChannel = COLLISION_CHANNEL_10000;
+    partner->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     wPartnerFollowState = 0;
     partner->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
     return wPartnerFollowState;
@@ -2286,7 +2287,7 @@ s32 partner_put_away(Npc* partner) {
 }
 
 s32 partner_init_get_out(Npc* npc) {
-    npc->collisionChannel = COLLISION_CHANNEL_10000;
+    npc->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     wPartnerFollowState = 0;
     npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
     return wPartnerFollowState;
@@ -2323,7 +2324,7 @@ s32 partner_get_out(Npc* partner) {
                 z = moveToZ;
                 add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
                 hitDepth = 1000.0f;
-                if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter)) {
+                if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter)) {
                     // @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
                     s32 surfaceType = get_collider_flags(NpcHitQueryColliderID);
 

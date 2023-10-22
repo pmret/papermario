@@ -1184,7 +1184,7 @@ EvtScript EVS_ForceNextTarget = {
 };
 
 EvtScript EVS_Enemy_FanSmack_Impl = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2022)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAN_SMACK_HIT)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
     EVT_DIVF(LVar3, EVT_FLOAT(40.0))
@@ -1213,7 +1213,7 @@ EvtScript EVS_Enemy_FanSmack_Impl = {
         EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
             EVT_WAIT(40)
             EVT_CALL(DismissEffect, LVarF)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2023)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_FAN_SMACK_END)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -1842,7 +1842,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
                 EVT_GOTO(1)
             EVT_END_CASE_GROUP
         EVT_END_SWITCH
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_TRIGGER_EVENTS)
         EVT_GOTO(1)
     // done
     EVT_LABEL(10)

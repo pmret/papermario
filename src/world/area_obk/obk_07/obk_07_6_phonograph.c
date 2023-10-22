@@ -327,7 +327,7 @@ API_CALLABLE(N(CreatePhonographHudData)) {
     s32 id;
     s32 i;
 
-    gOverrideFlags |= GLOBAL_OVERRIDES_10;
+    gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
     data->hudWorker = create_worker_frontUI(N(worker_update_phonograph_hud), N(worker_draw_phonograph_hud));
     data->state = PHONOGRAPH_HUD_STATE_INIT;
     data->fillValue = 0;
@@ -389,7 +389,7 @@ API_CALLABLE(N(DestroyPhonographHudData)) {
     PhonographData* data = N(GetPhonographData)();
 
     data->state = PHONOGRAPH_HUD_STATE_DESTROYED;
-    gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
     hud_element_free(data->hudElemAButton);
     hud_element_free(data->hudElemBlueMeter);
     hud_element_free(data->hudElemOK);

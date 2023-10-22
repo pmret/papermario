@@ -851,14 +851,14 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     enemy->aiFlags |= ENEMY_AI_FLAG_SUSPEND;
 
     if (!skipReaction) {
-        EffectInstance* unk;
+        EffectInstance* emoteEffect;
 
         if (!(enemy->aiFlags & ENEMY_AI_FLAG_10)) {
-            npc->curAnim = *enemy->animList;
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         }
 
         if (!(enemy->aiFlags & ENEMY_AI_FLAG_8)) {
-            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &unk);
+            fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 0.0f, -20.0f, 40, &emoteEffect);
         }
 
         if ((npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_FLYING)) == (NPC_FLAG_JUMPING | NPC_FLAG_FLYING)) {

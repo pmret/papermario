@@ -1,6 +1,6 @@
 #include "mim_11.h"
 
-void increment_max_SP(void);
+void increment_max_star_power(void);
 
 NpcSettings N(NpcSettings_Bootler) = {
     .height = 24,
@@ -27,7 +27,7 @@ NpcSettings N(NpcSettings_Unused2) = {
 };
 
 API_CALLABLE(N(IncreaseMaxSP)) {
-    increment_max_SP();
+    increment_max_star_power();
     return ApiStatus_DONE2;
 }
 

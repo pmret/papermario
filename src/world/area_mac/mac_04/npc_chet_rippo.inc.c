@@ -89,7 +89,7 @@ API_CALLABLE(N(SetStatusBarRespondToChanges)) {
 
 API_CALLABLE(N(ForceStatusBarToAppear)) {
     status_bar_respond_to_changes();
-    open_status_bar_long();
+    open_status_bar_slowly();
     return ApiStatus_DONE2;
 }
 

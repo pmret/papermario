@@ -42,7 +42,7 @@ EvtScript EVS_MerleeDropCoins = {
         EVT_CALL(FadeOutMerlee)
         EVT_CALL(DeleteNpc, NPC_BTL_MERLEE)
     EVT_END_THREAD
-    EVT_CALL(PlaySound, SOUND_2075)
+    EVT_CALL(PlaySound, SOUND_MAGIC_DESCENDING)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(PlayMerleeGatherFX, LVar0, LVar1, LVar2)
     EVT_CALL(PlayMerleeOrbFX, LVar0, LVar1, LVar2)
@@ -172,7 +172,7 @@ SHIFT_BSS s32 gEncounterState;
 SHIFT_BSS s32 gEncounterSubState;
 SHIFT_BSS EncounterStatus gCurrentEncounter;
 SHIFT_BSS s8 D_8009A63C;
-SHIFT_BSS s8 D_8009A654;
+SHIFT_BSS s8 HasPreBattleSongPushed;
 SHIFT_BSS s16 gFirstStrikeMessagePos;
 SHIFT_BSS s8 D_8009A670;
 SHIFT_BSS s32 D_8009A678;
@@ -185,7 +185,7 @@ SHIFT_BSS EffectInstance* WorldMerleeOrbEffect;
 SHIFT_BSS EffectInstance* WorldMerleeWaveEffect;
 
 void set_battle_formation(Battle*);
-void func_800E97E4(void);
+void setup_status_bar_for_world(void);
 void partner_handle_after_battle(void);
 s32 get_coin_drop_amount(Enemy* enemy);
 
@@ -316,7 +316,7 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
         WorldMerleeWaveEffect = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_800A0BB8 = 0;
         D_800A0BA0 = 12;
-        sfx_play_sound(SOUND_2074);
+        sfx_play_sound(SOUND_MAGIC_ASCENDING);
     }
 
     merlee->pos.y = D_800A0BA4 + sin_rad(DEG_TO_RAD(script->functionTemp[1])) * 3.0f;
@@ -655,14 +655,15 @@ void update_encounters_neutral(void) {
                 }
             }
 
-            if (currentEncounter->battleTriggerCooldown != 0 ||
-                gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH ||
-                (playerStatus->flags & PS_FLAG_ARMS_RAISED) ||
-                (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
-                gPartnerStatus.actingPartner == PARTNER_BOW ||
-                (enemy->flags & ENEMY_FLAG_PASSIVE) ||
-                (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800)) ||
-                is_picking_up_item()) {
+            if (currentEncounter->battleTriggerCooldown != 0
+                || gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH
+                || (playerStatus->flags & PS_FLAG_ARMS_RAISED)
+                || (gOverrideFlags & GLOBAL_OVERRIDES_40)
+                || gPartnerStatus.actingPartner == PARTNER_BOW
+                || (enemy->flags & ENEMY_FLAG_PASSIVE)
+                || (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800))
+                || is_picking_up_item()
+            ) {
                 continue;
             }
             do {
@@ -732,11 +733,11 @@ void update_encounters_neutral(void) {
                     testY = npcY;
                     testZ = npcZ;
 
-                    if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+                    if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                         testX = playerX;
                         testY = playerY;
                         testZ = playerZ;
-                        if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                             break;
                         }
                     }
@@ -795,11 +796,11 @@ void update_encounters_neutral(void) {
                         testX = npcX;
                         testY = npcY;
                         testZ = npcZ;
-                        if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+                        if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                             testX = playerX;
                             testY = playerY;
                             testZ = playerZ;
-                            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                                 break;
                             }
                         }
@@ -880,11 +881,11 @@ void update_encounters_neutral(void) {
             testX = npcX;
             testY = npcY;
             testZ = npcZ;
-            if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
+            if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(npcX, npcZ, playerX, playerZ), colHeight, colRadius * 2.0f)) {
                 testX = playerX;
                 testY = playerY;
                 testZ = playerZ;
-                if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_10000, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
+                if (npc_test_move_taller_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &testX, &testY, &testZ, distance, atan2(playerX, playerZ, npcX, npcZ), colHeight, colRadius * 2.0f)) {
                     continue;
                 }
             }
@@ -1262,7 +1263,7 @@ void update_encounters_pre_battle(void) {
             currentEncounter->unk_94 = 1;
             currentEncounter->fadeOutAccel = 1;
             currentEncounter->unk_08 = -1;
-            D_8009A654 = FALSE;
+            HasPreBattleSongPushed = FALSE;
             D_80077C40 = 0;
             suspend_all_group(EVT_GROUP_10);
 
@@ -1354,7 +1355,7 @@ void update_encounters_pre_battle(void) {
                 bgm_set_battle_song(currentEncounter->songID, FIRST_STRIKE_NONE);
             }
             bgm_push_battle_song();
-            D_8009A654 = TRUE;
+            HasPreBattleSongPushed = TRUE;
             currentEncounter->battleStartCountdown = 10;
             gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_LOAD_BATTLE;
         case ENCOUNTER_SUBSTATE_PRE_BATTLE_LOAD_BATTLE:
@@ -1378,15 +1379,15 @@ void update_encounters_pre_battle(void) {
                 }
 
                 partner_handle_before_battle();
-                currentEncounter->dizzyAttackStatus = 0;
-                currentEncounter->dizzyAttackDuration = 0;
+                currentEncounter->dizzyAttack.status = 0;
+                currentEncounter->dizzyAttack.duration = 0;
 
                 enemy = currentEncounter->curEnemy;
                 currentEncounter->instigatorValue = enemy->instigatorValue;
 
                 if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == ENCOUNTER_TRIGGER_SPIN) {
-                    currentEncounter->dizzyAttackStatus = 4;
-                    currentEncounter->dizzyAttackDuration = 3;
+                    currentEncounter->dizzyAttack.status = 4;
+                    currentEncounter->dizzyAttack.duration = 3;
                 }
 
                 sfx_stop_sound(SOUND_SPIN);
@@ -1585,16 +1586,16 @@ void update_encounters_post_battle(void) {
             currentEncounter->unk_08 = 0;
             gPlayerStatus.blinkTimer = 0;
             currentEncounter->scriptedBattle = FALSE;
-            func_800E97E4();
-            currentEncounter->dizzyAttackStatus = 0;
-            currentEncounter->unk_A4 = 0;
-            currentEncounter->unk_A8 = 0;
-            currentEncounter->unk_AC = 0;
-            currentEncounter->dizzyAttackDuration = 0;
-            currentEncounter->unk_A6 = 0;
-            currentEncounter->unk_AA = 0;
-            currentEncounter->unk_AE = 0;
-            if (D_8009A654 == TRUE) {
+            setup_status_bar_for_world();
+            currentEncounter->dizzyAttack.status = 0;
+            currentEncounter->unusedAttack1.status = 0;
+            currentEncounter->unusedAttack2.status = 0;
+            currentEncounter->unusedAttack3.status = 0;
+            currentEncounter->dizzyAttack.duration = 0;
+            currentEncounter->unusedAttack1.duration = 0;
+            currentEncounter->unusedAttack2.duration = 0;
+            currentEncounter->unusedAttack3.duration = 0;
+            if (HasPreBattleSongPushed == TRUE) {
                 bgm_pop_battle_song();
             }
             currentEncounter->fadeOutAccel = 1;

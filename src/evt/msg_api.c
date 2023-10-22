@@ -325,9 +325,9 @@ ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (evt_get_variable(script, *args++) == 0) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_10;
+        gOverrideFlags |= GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI;
     }
     return ApiStatus_DONE2;
 }
@@ -337,7 +337,7 @@ ApiStatus SetMessageText(Evt* script, s32 isInitialCall) {
     s32 msg = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
 
-    set_message_msg(msg, index);
+    set_message_text_var(msg, index);
     return ApiStatus_DONE2;
 }
 
@@ -346,6 +346,6 @@ ApiStatus SetMessageValue(Evt* script, s32 initialCall) {
     s32 value = evt_get_variable(script, *ptrReadPos++);
     s32 index = evt_get_variable(script, *ptrReadPos);
 
-    set_message_value(value, index);
+    set_message_int_var(value, index);
     return ApiStatus_DONE2;
 }

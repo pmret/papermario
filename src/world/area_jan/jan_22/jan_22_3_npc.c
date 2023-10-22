@@ -25,7 +25,7 @@ enum {
 API_CALLABLE(N(UpgradeStarPowerCh5)) {
     PlayerData* playerData = &gPlayerData;
 
-    set_max_SP(5);
+    set_max_star_power(5);
     playerData->curHP = playerData->curMaxHP;
     playerData->curFP = playerData->curMaxFP;
     sync_status_bar();
@@ -865,7 +865,7 @@ EvtScript N(EVS_NpcIdle_Kolorado_After) = {
             EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
             EVT_CALL(NpcMoveTo, NPC_SELF, 190, 60, 0)
             EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.5))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
             EVT_CALL(NpcJump0, NPC_SELF, 200, 0, 0, 20 * DT)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
             EVT_CALL(SetSelfVar, 0, 21)

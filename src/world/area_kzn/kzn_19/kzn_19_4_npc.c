@@ -303,7 +303,7 @@ EvtScript N(EVS_NpcIdle_LavaPiranha) = {
         EVT_CALL(PlayerMoveTo, 200, -30, 0)
         EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAt, SOUND_03C5, SOUND_SPACE_DEFAULT, 330, 25, -50)
+    EVT_CALL(PlaySoundAt, SOUND_LAVA_PIRANHA_EMERGE, SOUND_SPACE_DEFAULT, 330, 25, -50)
     EVT_EXEC(N(EVS_PlayVinesAnim_Emerge))
     EVT_WAIT(59)
     EVT_THREAD
@@ -558,7 +558,7 @@ EvtScript N(EVS_NpcDefeat_LavaPiranha) = {
             EVT_CALL(EnableGroup, MODEL_mae, FALSE)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ato, COLLIDER_FLAGS_UPPER_MASK)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mae, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(PlaySoundAt, SOUND_03C6, SOUND_SPACE_DEFAULT, 330, 25, -50)
+            EVT_CALL(PlaySoundAt, SOUND_LAVA_PIRANHA_DEFEAT, SOUND_SPACE_DEFAULT, 330, 25, -50)
             EVT_EXEC(N(EVS_PlayVinesAnim_Defeat))
             EVT_WAIT(1)
             EVT_CALL(SetNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_LavaPiranha)))

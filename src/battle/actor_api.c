@@ -363,7 +363,7 @@ ApiStatus SetGoalToTarget(Evt* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
 
-    set_goal_pos_to_part(&actor->state, actor->targetActorID, actor->targetPartIndex);
+    set_goal_pos_to_part(&actor->state, actor->targetActorID, actor->targetPartID);
 
     return ApiStatus_DONE2;
 }
@@ -379,7 +379,7 @@ ApiStatus SetPartGoalToTarget(Evt* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
 
-    set_part_goal_to_actor_part(get_actor_part(actor, partID)->movement, actor->targetActorID, actor->targetPartIndex);
+    set_part_goal_to_actor_part(get_actor_part(actor, partID)->movement, actor->targetActorID, actor->targetPartID);
 
     return ApiStatus_DONE2;
 }
@@ -2365,7 +2365,7 @@ ApiStatus InitTargetIterator(Evt* script, s32 isInitialCall) {
     SelectableTarget* selectableTarget = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
 
     actor->targetActorID = selectableTarget->actorID;
-    actor->targetPartIndex = selectableTarget->partID;
+    actor->targetPartID = selectableTarget->partID;
 
     return ApiStatus_DONE2;
 }
@@ -2375,7 +2375,7 @@ ApiStatus SetOwnerTarget(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.enemyID);
     s16 actorID = evt_get_variable(script, *args++);
 
-    actor->targetPartIndex = evt_get_variable(script, *args++);
+    actor->targetPartID = evt_get_variable(script, *args++);
     actor->targetActorID = actorID;
 
     return ApiStatus_DONE2;
@@ -2395,7 +2395,7 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
         actor->selectedTargetIndex = 0;
         target = &actor->targetData[actor->targetIndexList[0]];
         actor->targetActorID = target->actorID;
-        actor->targetPartIndex = target->partID;
+        actor->targetPartID = target->partID;
         return ApiStatus_DONE2;
     }
 
@@ -2403,7 +2403,7 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
         actor->selectedTargetIndex = actor->targetListLength - 1;
         target = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
         actor->targetActorID = target->actorID;
-        actor->targetPartIndex = target->partID;
+        actor->targetPartID = target->partID;
         return ApiStatus_DONE2;
     }
 
@@ -2430,7 +2430,7 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
     actor->selectedTargetIndex = curIdx;
     target = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
     actor->targetActorID = target->actorID;
-    actor->targetPartIndex = target->partID;
+    actor->targetPartID = target->partID;
     evt_set_variable(script, temp, retVal);
 
     return ApiStatus_DONE2;
@@ -2497,7 +2497,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
 
                 if (target->column == column && target->layer == layer && target->row < row) {
                     actor->targetActorID = target->actorID;
-                    actor->targetPartIndex = target->partID;
+                    actor->targetPartID = target->partID;
                     outVal = 0;
                 }
             }
@@ -2508,7 +2508,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
 
                 if (target->column == column && target->layer == layer && target->row < row) {
                     actor->targetActorID = target->actorID;
-                    actor->targetPartIndex = target->partID;
+                    actor->targetPartID = target->partID;
                     outVal = 0;
                 }
             }
@@ -2519,7 +2519,7 @@ s32 func_8026E558(Evt* script, s32 isInitialCall) {
 
                 if (target->column == column && target->layer == layer && target->row < row) {
                     actor->targetActorID = target->actorID;
-                    actor->targetPartIndex = target->partID;
+                    actor->targetPartID = target->partID;
                     outVal = 0;
                 }
             }
@@ -2543,7 +2543,7 @@ ApiStatus GetOwnerTarget(Evt* script, s32 isInitialCall) {
     s32 partID = *args++;
 
     evt_set_variable(script, actorID, actor->targetActorID);
-    evt_set_variable(script, partID, actor->targetPartIndex);
+    evt_set_variable(script, partID, actor->targetPartID);
 
     return ApiStatus_DONE2;
 }
@@ -2700,7 +2700,7 @@ ApiStatus func_8026EDE4(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
 
-    set_part_pal_effect(actorPart, temp_s3);
+    set_part_glow_pal(actorPart, temp_s3);
 
     return ApiStatus_DONE2;
 }
@@ -2779,7 +2779,7 @@ ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
     if (!useIdle) {
         actor->flags &= ~ACTOR_FLAG_USING_IDLE_ANIM;
         actor->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
-        func_80266E40(actor);
+        clear_actor_static_pal_adjustments(actor);
     } else {
         actor->flags |= ACTOR_FLAG_USING_IDLE_ANIM;
     }
@@ -2801,7 +2801,7 @@ ApiStatus func_8026F1A0(Evt* script, s32 isInitialCall) {
 
     if (temp_s0_3 == 0) {
         actor->flags &= ~ACTOR_FLAG_SHOW_STATUS_ICONS;
-        func_80266E40(actor);
+        clear_actor_static_pal_adjustments(actor);
     }
 
     return ApiStatus_DONE2;

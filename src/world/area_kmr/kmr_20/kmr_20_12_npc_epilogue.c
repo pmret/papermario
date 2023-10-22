@@ -234,7 +234,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
         EVT_CALL(NpcJump0, NPC_Luigi_1, 180, 30, -20, 10)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)
-    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_JUMP_2081, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Fall)
     EVT_WAIT(5)
@@ -312,7 +312,7 @@ EvtScript N(EVS_Scene_EpilogueGetLetter) = {
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Jump)
-        EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_JUMP_2081, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Luigi_1, SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
         EVT_WAIT(7)
         EVT_WAIT(7)
         EVT_CALL(SetNpcAnimation, NPC_Luigi_1, ANIM_Luigi_Idle)

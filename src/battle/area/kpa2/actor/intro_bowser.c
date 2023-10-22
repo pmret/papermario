@@ -354,7 +354,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_RearUpMock)
     EVT_WAIT(25)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Swipe)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_035E)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_SWIPE)
     EVT_WAIT(3)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -362,11 +362,11 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     EVT_IF_LT(LVar1, 3)
         EVT_SET(LVar0, DMG_CLAW_SWIPE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_ELSE
         EVT_SET(LVar0, DMG_MEGA_CLAW_SWIPE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
@@ -425,9 +425,9 @@ EvtScript N(EVS_Attack_FireBreath) = {
     EVT_CALL(N(SetBowserFireBreathScales), LVarF)
     EVT_THREAD
         EVT_CALL(N(StartRumbleWithParams), 50, 148)
-        EVT_CALL(PlaySound, SOUND_03BD)
+        EVT_CALL(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP)
         EVT_WAIT(70)
-        EVT_CALL(PlaySound, SOUND_03BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        EVT_CALL(PlaySound, SOUND_BOWSER_FIRE_BREATH_LOOP | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Weep)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -437,7 +437,7 @@ EvtScript N(EVS_Attack_FireBreath) = {
     EVT_WAIT(30)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, DMG_FIRE_BREATH, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_FIRE, SUPPRESS_EVENT_ALL, 0, DMG_FIRE_BREATH, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -546,7 +546,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar0, 15)
         EVT_ADD(LVar1, 90)
         EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2123)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
             EVT_ADD(LVar2, 10)
             EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.05))
         EVT_END_THREAD
@@ -554,7 +554,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar0, 6)
         EVT_ADD(LVar1, 36)
         EVT_THREAD
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2123)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_GATHER)
             EVT_ADD(LVar2, 10)
             EVT_CALL(N(StarRodAppearEffect), LVar0, LVar1, LVar2, EVT_FLOAT(2.5), EVT_FLOAT(0.02))
         EVT_END_THREAD
@@ -576,7 +576,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_SUB(LVar2, 3)
         EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 36, LVar2, EVT_FLOAT(0.4), LVarD, 0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2121)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_USE)
     EVT_WAIT(30)
     EVT_CALL(RemoveEffect, LVarF)
     EVT_CALL(RemoveEffect, LVarE)
@@ -599,7 +599,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar2, 12)
         EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 3, LVar0, LVar1, LVar2, 28, 32, 10, 60, 0)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2125)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_ENCHANT)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(N(StarRodPowerUpEffect), LVar0, LVar1, LVar2, EVT_FLOAT(0.8))
@@ -617,7 +617,7 @@ EvtScript N(EVS_StarRodCast) = {
         EVT_ADD(LVar1, 16)
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 15, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2124)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOWSER_STAR_ROD_SHOCKWAVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)
@@ -664,8 +664,8 @@ EvtScript N(EVS_PlayFootstepSounds) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar7)
     EVT_IF_NE(LVar7, ANIM_BattleBowser_Walk)
         EVT_IF_EQ(LVar3, ANIM_BattleBowser_Walk)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F6)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
         EVT_END_IF
         EVT_SET(LVar3, LVar7)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -680,8 +680,8 @@ EvtScript N(EVS_PlayFootstepSounds) = {
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B4)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F6)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_STEP_C)
     EVT_SET(LVar3, LVar7)
     EVT_RETURN
     EVT_END

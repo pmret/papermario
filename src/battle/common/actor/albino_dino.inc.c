@@ -264,15 +264,15 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_EXEC_GET_TID(N(EVS_AddWalkQuakeFX), LVar9)
     EVT_THREAD
         EVT_LOOP(3)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_030B)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_A)
             EVT_WAIT(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02FD)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_WAIT(20)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
@@ -317,7 +317,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     // invalid status field has 24% chance, but no status and doesn't have STATUS_FLAG_80000000 set
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, DMG_TACKLE, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -327,7 +327,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_02FD)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_ALBINO_DINO_STEP_B)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
             EVT_WAIT(10)

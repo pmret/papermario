@@ -6,7 +6,7 @@ SHIFT_BSS TriggerList bTriggerList;
 SHIFT_BSS TriggerList* gCurrentTriggerListPtr;
 
 void default_trigger_on_activate(Trigger* self) {
-    self->flags.flags |= TRIGGER_ACTIVATED;
+    self->flags |= TRIGGER_ACTIVATED;
 }
 
 void clear_trigger_data(void) {
@@ -70,7 +70,7 @@ Trigger* create_trigger(TriggerBlueprint* bp) {
 
     ASSERT(trigger != NULL);
 
-    trigger->flags.flags = bp->flags | TRIGGER_ACTIVE;
+    trigger->flags = bp->flags | TRIGGER_ACTIVE;
     trigger->varIndex = bp->varIndex;
     trigger->location.colliderID = bp->colliderID;
     trigger->itemList = bp->itemList;
@@ -99,16 +99,16 @@ void update_triggers(void) {
             continue;
         }
 
-        if (!(listTrigger->flags.flags & TRIGGER_ACTIVE)) {
+        if (!(listTrigger->flags & TRIGGER_ACTIVE)) {
             continue;
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FORCE_ACTIVATE) {
-            listTrigger->flags.flags |= TRIGGER_ACTIVATED;
+        if (listTrigger->flags & TRIGGER_FORCE_ACTIVATE) {
+            listTrigger->flags |= TRIGGER_ACTIVATED;
             continue;
         }
 
-        if (listTrigger->flags.flags & TRIGGER_WALL_PUSH) {
+        if (listTrigger->flags & TRIGGER_WALL_PUSH) {
             if (listTrigger->location.colliderID == collisionStatus->curWall) {
                 func_800E06C0(1);
             }
@@ -119,19 +119,19 @@ void update_triggers(void) {
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLOOR_TOUCH) {
+        if (listTrigger->flags & TRIGGER_FLOOR_TOUCH) {
             if (listTrigger->location.colliderID != collisionStatus->curFloor) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLOOR_ABOVE) {
+        if (listTrigger->flags & TRIGGER_FLOOR_ABOVE) {
             if (listTrigger->location.colliderID != collisionStatus->floorBelow) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_WALL_PRESS_A) {
+        if (listTrigger->flags & TRIGGER_WALL_PRESS_A) {
             if (listTrigger->location.colliderID == collisionStatus->curWall) {
                 collisionStatus->touchingWallTrigger = 1;
             }
@@ -140,56 +140,56 @@ void update_triggers(void) {
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_WALL_TOUCH) {
+        if (listTrigger->flags & TRIGGER_WALL_TOUCH) {
             if (listTrigger->location.colliderID != collisionStatus->curWall) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLOOR_JUMP) {
+        if (listTrigger->flags & TRIGGER_FLOOR_JUMP) {
             if (listTrigger->location.colliderID != collisionStatus->lastTouchedFloor) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
+        if (listTrigger->flags & TRIGGER_FLOOR_PRESS_A) {
             if ((listTrigger->location.colliderID != collisionStatus->curFloor) ||
                 !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PS_FLAG_INPUT_DISABLED)) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_WALL_HAMMER) {
+        if (listTrigger->flags & TRIGGER_WALL_HAMMER) {
             if (listTrigger->location.colliderID != collisionStatus->lastWallHammered) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_CEILING_TOUCH) {
+        if (listTrigger->flags & TRIGGER_CEILING_TOUCH) {
             if (listTrigger->location.colliderID != collisionStatus->curCeiling) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLAG_2000) {
+        if (listTrigger->flags & TRIGGER_FLAG_2000) {
             if (listTrigger->location.colliderID != collisionStatus->unk_0C) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLAG_4000) {
+        if (listTrigger->flags & TRIGGER_FLAG_4000) {
             if (listTrigger->location.colliderID != collisionStatus->unk_0E) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_FLAG_8000) {
+        if (listTrigger->flags & TRIGGER_FLAG_8000) {
             if (listTrigger->location.colliderID != collisionStatus->unk_10) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_POINT_BOMB) {
+        if (listTrigger->flags & TRIGGER_POINT_BOMB) {
             Vec4f* triggerPos;
             f32 dist;
 
@@ -207,15 +207,15 @@ void update_triggers(void) {
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_GAME_FLAG_SET && get_global_flag(listTrigger->varIndex) == 0) {
+        if (listTrigger->flags & TRIGGER_GAME_FLAG_SET && get_global_flag(listTrigger->varIndex) == 0) {
             continue;
         }
 
-        if (listTrigger->flags.flags & TRIGGER_AREA_FLAG_SET && get_area_flag(listTrigger->varIndex) == 0) {
+        if (listTrigger->flags & TRIGGER_AREA_FLAG_SET && get_area_flag(listTrigger->varIndex) == 0) {
             continue;
         }
 
-        listTrigger->flags.flags |= TRIGGER_ACTIVATED;
+        listTrigger->flags |= TRIGGER_ACTIVATED;
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
@@ -225,10 +225,10 @@ void update_triggers(void) {
             continue;
         }
 
-        if (listTrigger->flags.flags & TRIGGER_ACTIVE) {
-            if (listTrigger->flags.flags & TRIGGER_ACTIVATED) {
+        if (listTrigger->flags & TRIGGER_ACTIVE) {
+            if (listTrigger->flags & TRIGGER_ACTIVATED) {
                 if (listTrigger->onActivateFunc(listTrigger) == 0) {
-                    listTrigger->flags.flags &= ~TRIGGER_ACTIVATED;
+                    listTrigger->flags &= ~TRIGGER_ACTIVATED;
                 }
             }
         }
@@ -260,8 +260,8 @@ s32 is_another_trigger_bound(Trigger* trigger, EvtScript* script) {
             continue;
         }
 
-        if (listTrigger->flags.flags & TRIGGER_ACTIVE) {
-            if (listTrigger->flags.flags & TRIGGER_ACTIVATED) {
+        if (listTrigger->flags & TRIGGER_ACTIVE) {
+            if (listTrigger->flags & TRIGGER_ACTIVATED) {
                 if (listTrigger->onTriggerEvt == script) {
                     return TRUE;
                 }
@@ -290,7 +290,7 @@ s32 should_collider_allow_interact(s32 colliderID) {
         if (trigger != NULL
             && trigger->hasPlayerInteractPrompt != 0
             && trigger->location.colliderID == colliderID
-            &&  trigger->flags.flags & TRIGGER_WALL_PRESS_A
+            &&  trigger->flags & TRIGGER_WALL_PRESS_A
         ) {
             return TRUE;
         }

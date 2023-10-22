@@ -157,7 +157,7 @@ EvtScript N(EVS_E8CA04) = {
 
 EvtScript N(EVS_Main) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_20000)
+    EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)
     EVT_SETUP_CAMERA_NO_LEAD()
     EVT_THREAD
         EVT_CALL(GetCurrentPartnerID, LVar0)

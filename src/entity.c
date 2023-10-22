@@ -1666,7 +1666,7 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
         hitID = entityID | COLLISION_WITH_ENTITY_BIT;
     }
 
-    colliderID = test_ray_colliders(0x10000, *x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx,
+    colliderID = test_ray_colliders(COLLIDER_FLAG_IGNORE_PLAYER, *x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx,
                                     &hitNy, &hitNz);
     if (colliderID >= 0) {
         hitID = colliderID;

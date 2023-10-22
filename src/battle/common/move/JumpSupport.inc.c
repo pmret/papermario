@@ -48,7 +48,7 @@ EvtScript N(EVS_CheckForAPress) = {
     EVT_END
 };
 
-EvtScript N(EVS_JumpSupport_A) = {
+EvtScript N(EVS_JumpSupport_Approach) = {
     EVT_CALL(SetGoalToFirstTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 40)
@@ -305,10 +305,11 @@ EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_END
 };
 
-EvtScript N(EVS_JumpSupport_K) = {
+// load the action command
+EvtScript N(EVS_JumpSupport_InitCommand) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_A))
+    EVT_EXEC_WAIT(N(EVS_JumpSupport_Approach))
     EVT_EXEC_WAIT(N(EVS_JumpSupport_B))
     EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
@@ -322,7 +323,7 @@ EvtScript N(EVS_JumpSupport_K) = {
 EvtScript N(EVS_JumpSupport_L) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_A))
+    EVT_EXEC_WAIT(N(EVS_JumpSupport_Approach))
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_C))
     EVT_SET(LVarB, LVarA)
@@ -348,7 +349,7 @@ EvtScript N(EVS_JumpSupport_L) = {
 EvtScript N(EVS_JumpSupport_M) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
-    EVT_EXEC_WAIT(N(EVS_JumpSupport_A))
+    EVT_EXEC_WAIT(N(EVS_JumpSupport_Approach))
     EVT_EXEC_WAIT(N(EVS_JumpSupport_D))
     EVT_CALL(SetActionDifficultyTable, EVT_PTR(N(D_802A10F0)))
     EVT_SET(LVarB, LVarA)

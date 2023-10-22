@@ -317,32 +317,32 @@ typedef struct PlayerData {
     /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
     /* 0x00A */ b8 hasActionCommands;
-    /* 0x00B */ char unk_0B;
+    /* 0x00B */ char pad_00B;
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
     /* 0x00F */ u8 starPieces;
     /* 0x010 */ s8 starPoints;
-    /* 0x011 */ char unk_11;
+    /* 0x011 */ s8 unused_011;
     /* 0x012 */ s8 curPartner;
-    /* 0x013 */ char unk_13;
+    /* 0x013 */ char pad_013;
     /* 0x014 */ struct PartnerData partners[12];
     /* 0x074 */ s16 keyItems[32];
     /* 0x0B4 */ s16 badges[128];
     /* 0x1B4 */ s16 invItems[10];
     /* 0x1C8 */ s16 storedItems[32];
     /* 0x208 */ s16 equippedBadges[64];
-    /* 0x288 */ s8 unk_288;
+    /* 0x288 */ s8 unused_288;
     /* 0x289 */ s8 merleeSpellType;
     /* 0x28A */ s8 merleeCastsLeft;
-    /* 0x28B */ char unk_28B;
+    /* 0x28B */ char pad_28B;
     /* 0x28C */ s16 merleeTurnCount;
     /* 0x28E */ s8 maxStarPower;
-    /* 0x28F */ char unk_28F;
-    /* 0x290 */ s16 specialBarsFilled;
+    /* 0x28F */ char pad_28F;
+    /* 0x290 */ s16 starPower;
     /* 0x292 */ s8 starBeamLevel;
-    /* 0x293 */ char unk_293;
+    /* 0x293 */ char pad_293;
     /* 0x294 */ u16 actionCommandAttempts;
-    /* 0x296 */ s16 actionCommandSuccesses;
+    /* 0x296 */ u16 actionCommandSuccesses;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ u16 playerFirstStrikes;
@@ -350,14 +350,14 @@ typedef struct PlayerData {
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
     /* 0x2A4 */ u16 battlesWon;
-    /* 0x2A6 */ s16 unk_2A6;
-    /* 0x2A8 */ s16 battlesFled;
+    /* 0x2A6 */ u16 fleeAttempts;
+    /* 0x2A8 */ u16 battlesFled;
     /* 0x2AA */ u16 trainingsDone;
     /* 0x2AC */ s32 walkingStepsTaken;
     /* 0x2B0 */ s32 runningStepsTaken;
     /* 0x2B4 */ u32 totalCoinsEarned;
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
-    /* 0x2BA */ char unk_2BA[2];
+    /* 0x2BA */ char pad_2BA[2];
     /* 0x2BC */ u32 frameCounter; /* increases by 2 per frame */
     /* 0x2C0 */ u16 quizzesAnswered;
     /* 0x2C2 */ u16 quizzesCorrect;
@@ -372,27 +372,17 @@ typedef struct PlayerData {
     /* 0x336 */ u16 smashGamePlays;
     /* 0x338 */ u32 smashGameTotal; /* all-time winnings, max = 99999 */
     /* 0x33C */ u16 smashGameRecord;
-    /* 0x33E */ char unk_33E[2];
-    /* 0x340 */ char unk_340[0xE0];
-    /* 0x420 */ s32 starPoints2;
-    /* 0x424 */ char unk_464[4];
+    /* 0x33E */ char pad_33E[2];
+    /* 0x340 */ char reserved[0xE8]; // unused
 } PlayerData; // size = 0x428
 
-typedef union {
-    struct {
-        /* 0x0 */ s16 genericFlagIndex;
-        /* 0x2 */ char unk_2;
-    } bytes;
-    s32 flags;
-} TriggerFlags;
-
 typedef struct Trigger {
-    /* 0x00 */ TriggerFlags flags;
+    /* 0x00 */ s32 flags;
     /* 0x04 */ s32 varIndex;
     /* 0x08 */ union {
-        s32 colliderID;
-        Vec4f* pos;
-    } location;
+    /*      */     s32 colliderID;
+    /*      */     Vec4f* pos;
+    /*      */ } location;
     /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
     /* 0x10 */ EvtScript* onTriggerEvt;
     /* 0x14 */ struct Evt* runningScript;
@@ -660,32 +650,34 @@ typedef struct MusicProximityTrigger {
     /* 0x14 */ s32 manualActivationFlag;
 } MusicProximityTrigger; // size = 0x18
 
-typedef struct UiStatus {
-    /* 0x00 */ s32 hpIconIndices[2];
-    /* 0x08 */ s32 fpIconIndices[2];
-    /* 0x10 */ s32 coinIconIndex;
-    /* 0x14 */ s32 coinSparkleIconIndex;
-    /* 0x18 */ s32 starpointsIconIndex;
-    /* 0x1C */ s32 starpointsShineIconIndex;
-    /* 0x20 */ s32 iconIndex8;
-    /* 0x24 */ s32 iconIndex9;
-    /* 0x28 */ s32 iconIndexA;
-    /* 0x2C */ s32 iconIndexB;
-    /* 0x30 */ s32 starIconIndex;
-    /* 0x34 */ s16 drawPosX; /* overall x-offset for whole UI */
-    /* 0x36 */ s16 drawPosY; /* modulated as it appears, goes away */
+typedef struct StatusBar {
+    /* 0x00 */ s32 hpIconHIDs[2];
+    /* 0x08 */ s32 fpIconHIDs[2];
+    /* 0x10 */ s32 coinIconHID;
+    /* 0x14 */ s32 coinSparkleHID;
+    /* 0x18 */ s32 spIconHID;
+    /* 0x1C */ s32 spShineHID;
+    /* 0x20 */ s32 hpTimesHID;
+    /* 0x24 */ s32 fpTimesHID;
+    /* 0x28 */ s32 spTimesHID;
+    /* 0x2C */ s32 coinTimesHID;
+    /* 0x30 */ s32 starIconHID;
+    /* 0x34 */ s16 drawPosX; // base position of the whole bar
+    /* 0x36 */ s16 drawPosY; // base position of the whole bar, animated when it appears
     /* 0x38 */ s16 showTimer;
-    /* 0x3A */ s8 hidden;
-    /* 0x3B */ s8 unk_3B[2];
+    /* 0x3A */ b8 hidden;
+    /* 0x3B */ b8 unk_3B;
+    /* 0x3C */ b8 unk_3C;
     /* 0x3D */ s8 displayHP;
     /* 0x3E */ s8 displayFP;
     /* 0x3F */ char unk_3F;
     /* 0x40 */ s16 displayCoins;
     /* 0x42 */ s16 displayStarpoints;
     /* 0x44 */ s8 ignoreChanges; /* set != 0 to prevent automatic opening from HP/FP changes */
-    /* 0x45 */ s8 unk_45[2];
+    /* 0x45 */ s8 openInputDisabled;
+    /* 0x45 */ s8 alwaysShown; // when set, the status bar will always be shown. used while browsing a shop.
     /* 0x47 */ s8 disabled; /* set != 0 for menu to be disabled completely */
-    /* 0x48 */ s16 displaySP;
+    /* 0x48 */ s16 displayStarPower;
     /* 0x4A */ s8 hpBlinking; /* bool */
     /* 0x4B */ s8 hpBlinkCounter;
     /* 0x4C */ s8 hpBlinkTimer; /* until stop */
@@ -704,12 +696,15 @@ typedef struct UiStatus {
     /* 0x59 */ s8 unk_59;
     /* 0x5A */ s8 spBarsToBlink; /* how many sp bars to blink */
     /* 0x5B */ char unk_5B;
-    /* 0x5C */ s32 iconIndex10;
-    /* 0x60 */ s32 iconIndex11;
+    /* 0x5C */ s32 coinCountTimesHID;
+    /* 0x60 */ s32 coinCountIconHID;
     /* 0x64 */ s32 iconIndex12;
     /* 0x68 */ s32 iconIndex13;
-    /* 0x6C */ s8 unk_6C[4];
-} UiStatus; // size = 0x70
+    /* 0x6C */ s8 coinCounterHideTime;
+    /* 0x6D */ s8 unk_6D;
+    /* 0x6E */ s8 unk_6E;
+    /* 0x6F */ char unk_6F;
+} StatusBar; // size = 0x70
 
 typedef struct CameraInitData {
     /* 0x00 */ s16 flags;
@@ -979,8 +974,8 @@ typedef struct BattleStatus {
     /* 0x21C */ s32 stickX;
     /* 0x220 */ s32 stickY;
     /* 0x224 */ s32 inputBitmask;
-    /* 0x228 */ s32 dpadX; /* 0-360 */
-    /* 0x22C */ s32 dpadY; /* 0-60 */
+    /* 0x228 */ s32 stickAngle; /* 0-360 */
+    /* 0x22C */ s32 stickMagnitude; /* 0-60 */
     /* 0x230 */ s32 holdInputBuffer[64];
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ s8 holdInputBufferPos;
@@ -1956,7 +1951,7 @@ typedef struct Actor {
     /* 0x40C */ s8 targetListLength;
     /* 0x40D */ s8 targetIndexList[MAX_ENEMY_ACTORS]; /* into targetData */
     /* 0x425 */ s8 selectedTargetIndex; /* into target index list */
-    /* 0x426 */ s8 targetPartIndex;
+    /* 0x426 */ s8 targetPartID;
     /* 0x427 */ char unk_427[1];
     /* 0x428 */ s16 targetActorID;
     /* 0x42A */ char unk_42A[2];
@@ -2000,8 +1995,8 @@ typedef struct PlayerStatus {
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ s8 availableDisguiseType; ///< set in main map scripts
-    /* 0x00E */ u8 alpha1;
-    /* 0x00F */ u8 alpha2;
+    /* 0x00E */ u8 curAlpha;
+    /* 0x00F */ u8 prevAlpha;
     /* 0x010 */ s16 blinkTimer;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;

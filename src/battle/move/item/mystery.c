@@ -241,7 +241,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_WAIT(220)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DING)
     EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_0368)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MYSTERY_REEL)
     EVT_CALL(N(func_802A13E4_72C994))
     EVT_WAIT(2)
     EVT_IF_NE(LVar0, 133)
@@ -276,7 +276,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(N(func_802A188C_72CE3C), LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SP_EVT_ACTIVE, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TRIGGER_EVENTS, TRUE)
     EVT_CALL(DispatchDamagePlayerEvent, 1, EVENT_HIT)
     EVT_RETURN
     EVT_END

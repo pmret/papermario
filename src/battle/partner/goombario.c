@@ -9,26 +9,26 @@
 
 extern s32 bActorTattles[];
 
-static EffectInstance* N(tattleEffect);
+static EffectInstance* N(TattleWindowEffect);
 static b32 N(isCharged);
+extern s32 N(MultibonkChance);
 
-extern s32 N(powerBounceChance);
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_Celebrate);
+extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_HandleEvent);
+extern EvtScript N(EVS_HandlePhase);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_ExecuteAction);
-extern EvtScript N(EVS_FirstStrike);
-extern EvtScript N(EVS_RunAway);
-extern EvtScript N(EVS_RunAwayFail);
 extern EvtScript N(EVS_Attack_Headbonk1);
 extern EvtScript N(EVS_Attack_Headbonk2);
 extern EvtScript N(EVS_Attack_Headbonk3);
-extern EvtScript N(EVS_Move_Multibonk);
 extern EvtScript N(EVS_Move_Tattle);
 extern EvtScript N(EVS_Move_Charge);
-extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(EVS_Idle);
-extern EvtScript N(EVS_HandlePhase);
-extern EvtScript N(EVS_TakeTurn);
+extern EvtScript N(EVS_Move_Multibonk);
+extern EvtScript N(EVS_FirstStrike);
+extern EvtScript N(EVS_RunAway);
+extern EvtScript N(EVS_RunAwayFail);
+extern EvtScript N(EVS_Celebrate);
 
 enum N(ActorPartIDs) {
     PRT_MAIN        = 1,
@@ -61,13 +61,15 @@ API_CALLABLE(N(GetReturnMoveTime)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(AdjustPowerBounceChance)) {
+API_CALLABLE(N(AdjustMultibonkChance)) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
     script->varTable[0] = 99;
-    N(powerBounceChance) *= targetActor->actorBlueprint->powerBounceChance;
-    N(powerBounceChance) /= 100;
-    if (N(powerBounceChance) < rand_int(100)) {
+
+    // @bug this value is not reset between Multibonk uses
+    N(MultibonkChance) *= targetActor->actorBlueprint->powerBounceChance;
+    N(MultibonkChance) /= 100;
+    if (N(MultibonkChance) < rand_int(100)) {
         script->varTable[0] = 0;
     }
 
@@ -338,13 +340,13 @@ API_CALLABLE(N(GetTattleCamPos)) {
 }
 
 API_CALLABLE(N(OpenTattleWindow)) {
-    N(tattleEffect) = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
+    N(TattleWindowEffect) = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
 
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(CloseTattleWindow)) {
-    EffectInstance* effect = N(tattleEffect);
+    EffectInstance* effect = N(TattleWindowEffect);
 
     effect->data.tattleWindow->pos.y = 144.0f;
     effect->flags |= FX_INSTANCE_FLAG_DISMISS;
@@ -940,9 +942,9 @@ EvtScript N(EVS_Attack_Headbonk1) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GOOMBARIO_JUMP)
     EVT_CALL(N(JumpOnTarget), LVarA, 0)
-    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
         EVT_CALL(N(OnMissHeadbonk))
@@ -967,11 +969,11 @@ EvtScript N(EVS_Attack_Headbonk1) = {
         EVT_CASE_GT(0)
             EVT_CALL(N(GetChargeAmount))
             EVT_ADD(LVar0, 1)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_40 | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_INCLUDE_POWER_UPS)
         EVT_CASE_DEFAULT
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 1)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_SWITCH(LVar0)
@@ -980,8 +982,8 @@ EvtScript N(EVS_Attack_Headbonk1) = {
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
@@ -1020,7 +1022,7 @@ EvtScript N(EVS_Attack_Headbonk1) = {
     EVT_WAIT(1)
     EVT_CALL(N(StopChargeAndGet))
     EVT_ADD(LVar0, 1)
-    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(returnHome2))
@@ -1045,9 +1047,9 @@ EvtScript N(EVS_Attack_Headbonk2) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GOOMBARIO_JUMP)
     EVT_CALL(N(JumpOnTarget), LVarA, 0)
-    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
         EVT_CALL(N(OnMissHeadbonk))
@@ -1072,11 +1074,11 @@ EvtScript N(EVS_Attack_Headbonk2) = {
         EVT_CASE_GT(0)
             EVT_CALL(N(GetChargeAmount))
             EVT_ADD(LVar0, 2)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_40 | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_INCLUDE_POWER_UPS)
         EVT_CASE_DEFAULT
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 2)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_SWITCH(LVar0)
@@ -1085,8 +1087,8 @@ EvtScript N(EVS_Attack_Headbonk2) = {
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
@@ -1127,7 +1129,7 @@ EvtScript N(EVS_Attack_Headbonk2) = {
     EVT_WAIT(1)
     EVT_CALL(N(StopChargeAndGet))
     EVT_ADD(LVar0, 2)
-    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(returnHome2))
@@ -1152,9 +1154,9 @@ EvtScript N(EVS_Attack_Headbonk3) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GOOMBARIO_JUMP)
     EVT_CALL(N(JumpOnTarget), LVarA, 0)
-    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
         EVT_CALL(N(OnMissHeadbonk))
@@ -1179,11 +1181,11 @@ EvtScript N(EVS_Attack_Headbonk3) = {
         EVT_CASE_GT(0)
             EVT_CALL(N(GetChargeAmount))
             EVT_ADD(LVar0, 3)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_40 | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_INCLUDE_POWER_UPS)
         EVT_CASE_DEFAULT
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 3)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_SWITCH(LVar0)
@@ -1192,8 +1194,8 @@ EvtScript N(EVS_Attack_Headbonk3) = {
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
@@ -1243,7 +1245,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
     EVT_WAIT(1)
     EVT_CALL(N(StopChargeAndGet))
     EVT_ADD(LVar0, 3)
-    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_CALL(SetActionResult, LVarF)
     EVT_EXEC_WAIT(N(returnHome2))
@@ -1253,7 +1255,7 @@ EvtScript N(EVS_Attack_Headbonk3) = {
 
 s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
-s32 N(powerBounceChance) = 200;
+s32 N(MultibonkChance) = 200;
 
 EvtScript N(EVS_Move_Multibonk) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
@@ -1272,9 +1274,9 @@ EvtScript N(EVS_Move_Multibonk) = {
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200D)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GOOMBARIO_JUMP)
     EVT_CALL(N(JumpOnTarget), LVarA, 0)
-    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
         EVT_CALL(N(OnMissHeadbonk))
@@ -1299,11 +1301,11 @@ EvtScript N(EVS_Move_Multibonk) = {
         EVT_CASE_GT(0)
             EVT_CALL(N(GetChargeAmount))
             EVT_ADD(LVar0, 3)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, BS_FLAGS1_40 | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_INCLUDE_POWER_UPS)
         EVT_CASE_DEFAULT
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 3)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
     EVT_SWITCH(LVar0)
@@ -1312,8 +1314,8 @@ EvtScript N(EVS_Move_Multibonk) = {
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_THREAD
@@ -1375,7 +1377,7 @@ EvtScript N(EVS_Move_Multibonk) = {
     EVT_CALL(N(JumpOnTarget), LVarA, 3)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_RESET)
     EVT_SUB(LVarD, 1)
-    EVT_CALL(N(AdjustPowerBounceChance))
+    EVT_CALL(N(AdjustMultibonkChance))
     EVT_IF_GE(LVarF, LVar0)
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
@@ -1393,16 +1395,16 @@ EvtScript N(EVS_Move_Multibonk) = {
             EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(N(GetChargeAmount))
                 EVT_ADD(LVar0, 3)
-                EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_40)
+                EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_NICE_HIT)
             EVT_ELSE
                 EVT_CALL(N(StopChargeAndGet))
                 EVT_ADD(LVar0, 3)
-                EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_TRIGGER_EVENTS)
             EVT_END_IF
         EVT_CASE_DEFAULT
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 3)
-            EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_TRIGGER_EVENTS)
             EVT_SET(LFlag0, FALSE)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NONE)
@@ -1413,8 +1415,8 @@ EvtScript N(EVS_Move_Multibonk) = {
             EVT_EXEC_WAIT(N(EVS_ReturnHome))
             EVT_RETURN
         EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
             EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(returnHome2))
                 EVT_RETURN
@@ -1490,7 +1492,7 @@ EvtScript N(EVS_Move_Charge) = {
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 15)
         EVT_ADD(LVar2, -5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2003)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_GOOMBARIO_GATHERING)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 9, LVar0, LVar1, LVar2, EVT_FLOAT(2.0), 20, 0)
     EVT_END_THREAD
     EVT_WAIT(30)

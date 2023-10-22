@@ -128,7 +128,7 @@ EvtScript N(EVS_NpcInteract_SpikedGoomba) = {
             EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_SpikedGoomba_Walk, ANIM_SpikedGoomba_Idle, 0, MSG_CH8_0050)
         EVT_END_IF
     EVT_ELSE
-        EVT_EXEC_WAIT(ItemShopInteract)
+        EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_END_IF
     EVT_RETURN
     EVT_END

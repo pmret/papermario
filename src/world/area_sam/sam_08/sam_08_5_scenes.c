@@ -44,7 +44,7 @@ EvtScript N(EVS_Scene_ImposterAppears) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o47, COLLIDER_FLAG_IGNORE_SHELL)
     EVT_THREAD
         EVT_CALL(EnableModel, MODEL_m1_kabe, TRUE)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_kabe, SOUND_039B, 0)
+        EVT_CALL(PlaySoundAtCollider, COLLIDER_m1_kabe, SOUND_SAM08_RAISE_FLOOR, 0)
         EVT_CALL(MakeLerp, -120, 0, 60 * DT, EASING_COS_IN_OUT)
         EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -511,7 +511,7 @@ EvtScript N(EVS_Scene_HitFakeKooper) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(SetNpcAnimation, NPC_Kooper_02A, ANIM_WorldKooper_Hurt)
     EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_20B8, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_Kooper_02A, SOUND_GHOST_TRANSFORM, SOUND_SPACE_DEFAULT)
     EVT_LOOP(10)
         EVT_CALL(GetNpcPos, NPC_Kooper_02A, LVar0, LVar1, LVar2)
         EVT_ADD(LVar2, 3)

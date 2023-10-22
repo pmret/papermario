@@ -242,11 +242,11 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim01)
         EVT_WAIT(10)
     EVT_END_IF
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim08)
             EVT_WAIT(20)
             EVT_IF_EQ(LVar0, HIT_RESULT_LUCKY)
@@ -285,12 +285,12 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_LABEL(40) // heavy club attack
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HEAVY_STRIKE, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_HEAVY_STRIKE, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
@@ -298,12 +298,12 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_LABEL(50) // swift club attack
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_QUICK_STRIKE, BS_FLAGS1_10)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_QUICK_STRIKE, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
@@ -313,12 +313,12 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_QUICK_STRIKE, BS_FLAGS1_40)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_QUICK_STRIKE, BS_FLAGS1_NICE_HIT)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD
@@ -328,12 +328,12 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim09)
     EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
+    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLUBBA_SWING)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Frost_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_QUICK_STRIKE, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_QUICK_STRIKE, BS_FLAGS1_TRIGGER_EVENTS)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.5))
     EVT_END_THREAD

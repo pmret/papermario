@@ -200,7 +200,7 @@ hud_element_create = 0x80146554;
 update_hud_elements = 0x801466C0;
 render_hud_elements_backUI = 0x801472C0;
 render_hud_elements_frontUI = 0x801477CC;
-render_hud_elements_world = 0x80148764;
+render_transformed_hud_elements = 0x80148764;
 hud_element_draw_next = 0x80149874;
 hud_element_set_script = 0x801498AC;
 get_hud_element = 0x80149984;
@@ -1212,7 +1212,7 @@ EVS_WorldGoombario_TakeOut = 0x802BDD6C;
 EVS_WorldGoombario_Update = 0x802BDD8C;
 EVS_WorldGoombario_UseAbility = 0x802BDDA8;
 EVS_WorldGoombario_PutAway = 0x802BDE60;
-world_goombario_can_pause = 0x802BD5A8;
+world_goombario_can_open_menus = 0x802BD5A8;
 world_goombario_pre_battle = 0x802BDBC0;
 
 world_partner_kooper_ROM_START = 0x323530;
@@ -1237,7 +1237,7 @@ EVS_WorldBombette_UseAbility = 0x802BE8BC;
 EVS_WorldBombette_PutAway = 0x802BE8D8;
 world_bombette_test_first_strike = 0x802BE520;
 world_bombette_can_use_ability = 0x802BD720;
-world_bombette_can_player_pause = 0x802BD748;
+world_bombette_can_open_menus = 0x802BD748;
 world_bombette_pre_battle = 0x802BE6E8;
 
 world_partner_parakarry_ROM_START = 0x321a80;

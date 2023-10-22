@@ -87,12 +87,12 @@ SHIFT_BSS s8 D_8010D693;
 SHIFT_BSS s32 gPopupWorker;
 SHIFT_BSS s8 PopupNotDipping;
 SHIFT_BSS s8 PopupDipMode;
-SHIFT_BSS s8 D_8010D69A;
+SHIFT_BSS s8 PopupMenu_WasStatusBarIgnoringChanges;
 SHIFT_BSS PopupMenu* gPopupMenu;
 SHIFT_BSS MessagePrintState* D_8010D6A0;
 SHIFT_BSS s32 D_8010D6A4;
 
-s8 func_800E98D4(void);
+s8 status_bar_is_ignoring_changes(void);
 
 enum PopupTypes {
     POPUP_TYPE_USE_ITEM,
@@ -214,7 +214,7 @@ void destroy_popup_menu(void) {
          gPopupMenu->popupType == POPUP_TYPE_UPGRADE_PARTNER ||
          gPopupMenu->popupType == POPUP_TYPE_USE_KEY
         ) && !gGameStatusPtr->isBattle) {
-        if (D_8010D69A == 0) {
+        if (!PopupMenu_WasStatusBarIgnoringChanges) {
             status_bar_respond_to_changes();
         }
         close_status_bar();
@@ -929,7 +929,7 @@ s32 popup_menu_update(void) {
 
                     if (PopupNotBattle && (gGameStatusPtr->pressedButtons[0] & buttons)) {
                         sfx_play_sound(SOUND_MENU_BACK);
-                        gPopupState = POPUP_STATE_MINUS_6;
+                        gPopupState = POPUP_STATE_CHOSE_SWAP;
                         break;
                     }
                 }
@@ -998,8 +998,8 @@ s32 popup_menu_update(void) {
             gPopupState = POPUP_STATE_MINUS_5;
             gPopupMenu->result = POPUP_RESULT_CANCEL;
             return 255;
-        case POPUP_STATE_MINUS_6:
-            gPopupMenu->result = POPUP_RESULT_MINUS_2;
+        case POPUP_STATE_CHOSE_SWAP:
+            gPopupMenu->result = POPUP_RESULT_SWAP_MENU;
             return 255;
         case POPUP_STATE_MINUS_7:
         case POPUP_STATE_MINUS_5:
@@ -1023,7 +1023,7 @@ s32 popup_menu_update(void) {
             break;
         case POPUP_STATE_ALREADY_HAVE_PARTNER_BEGIN:
             gPopupState = POPUP_STATE_ALREADY_HAVE_PARTNER_SHOW;
-            gPopupMenu->result = POPUP_RESULT_MINUS_1;
+            gPopupMenu->result = POPUP_RESULT_INVALID;
             return 0;
         case POPUP_STATE_ALREADY_HAVE_PARTNER_SHOW:
             set_window_update(WINDOW_ID_14, WINDOW_UPDATE_HIDE);
@@ -1225,7 +1225,7 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
         case POPUP_STATE_10:
         case POPUP_STATE_CHOSE_WORLD:
         case POPUP_STATE_CHOSE_BATTLE:
-        case POPUP_STATE_MINUS_6:
+        case POPUP_STATE_CHOSE_SWAP:
         case POPUP_STATE_MINUS_7:
         case POPUP_STATE_MINUS_8:
         case POPUP_STATE_CHOOSING:
@@ -1357,7 +1357,7 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
                     } else {
                         msgPal = MSG_PAL_STANDARD;
                     }
-                    set_message_value(gPopupMenu->userIndex[t] + 1, 0);
+                    set_message_int_var(gPopupMenu->userIndex[t] + 1, 0);
                     draw_msg(MSG_Menus_00CD, x + 8, y, PopupMenu_Alpha, msgPal, DRAW_MSG_STYLE_MENU);
                     break;
                 case POPUP_MENU_READ_POSTCARD:
@@ -1853,9 +1853,9 @@ void create_standard_popup_menu(PopupMenu* popup) {
     s32 initialPos;
     s32 numEntries;
 
-    D_8010D69A = func_800E98D4();
+    PopupMenu_WasStatusBarIgnoringChanges = status_bar_is_ignoring_changes();
     status_bar_ignore_changes();
-    open_status_bar_short();
+    open_status_bar_quickly();
     gPopupMenu = popup;
     popup->result = POPUP_RESULT_CHOOSING;
     popup->dipMode = 0;
@@ -1908,7 +1908,7 @@ void create_shop_popup_menu(PopupMenu* popup) {
     popup->result = POPUP_RESULT_CHOOSING;
     popup->dipMode = 0;
     popup->titleNumber = 0;
-    D_8010D69A = func_800E98D4();
+    PopupMenu_WasStatusBarIgnoringChanges = status_bar_is_ignoring_changes();
     PopupDipMode = 0;
     PopupNotDipping = TRUE;
     if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {
@@ -1952,7 +1952,7 @@ void create_battle_popup_menu(PopupMenu* popup) {
 
     popup->result = POPUP_RESULT_CHOOSING;
     D_8010D693 = popup->titleNumber;
-    D_8010D69A = func_800E98D4();
+    PopupMenu_WasStatusBarIgnoringChanges = status_bar_is_ignoring_changes();
     PopupDipMode = 0;
     PopupNotDipping = TRUE;
     if (gPopupMenu->popupType >= POPUP_MENU_DOUBLE_DIP) {

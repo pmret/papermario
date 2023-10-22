@@ -31,7 +31,7 @@ Vec3f N(Path_JumpOut)[] = {
 
 EvtScript N(EVS_PlayRumbleSounds) = {
     EVT_LABEL(0)
-        EVT_CALL(PlaySound, SOUND_20B6)
+        EVT_CALL(PlaySound, SOUND_HUFF_N_PUFF_JIGGLE)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(1.0))
         EVT_WAIT(15)
         EVT_GOTO(0)
@@ -40,7 +40,7 @@ EvtScript N(EVS_PlayRumbleSounds) = {
 };
 
 EvtScript N(EVS_HuffNPuff_JumpOut) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_03C0, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_EMERGE, SOUND_SPACE_DEFAULT)
     EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, 650, 104, 0)
     EVT_WAIT(15)
     EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_02, EVT_FLOAT(0.0))
@@ -316,7 +316,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
     EVT_CHILD_THREAD
         EVT_USE_BUF(EVT_PTR(N(BeginAnimScaleX)))
         EVT_LOOP(ARRAY_COUNT(N(BeginAnimScaleX)))
-            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_JIGGLE, SOUND_SPACE_DEFAULT)
             EVT_BUF_READ3(LVar6, LVar7, LVar8)
             EVT_CALL(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
             EVT_LOOP(0)
@@ -333,7 +333,7 @@ EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
         EVT_LOOP(0)
             EVT_USE_BUF(EVT_PTR(N(LoopAnimScaleX)))
             EVT_LOOP(ARRAY_COUNT(N(LoopAnimScaleX)))
-                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_20B6, SOUND_SPACE_DEFAULT)
+                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_JIGGLE, SOUND_SPACE_DEFAULT)
                 EVT_BUF_READ2(LVar6, LVar7)
                 EVT_CALL(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
                 EVT_LOOP(0)

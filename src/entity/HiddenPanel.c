@@ -118,7 +118,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
 
     switch (data->state) {
         case 0:
-            sfx_play_sound(SOUND_20AB);
+            sfx_play_sound(SOUND_FLIP_PANEL);
             data->state = 1;
             data->unk_02 = TRUE;
             data->riseInterpPhase = 90.0f;
@@ -199,7 +199,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 rotAngle = 0.0f;
                 data->timer = 10;
                 exec_ShakeCamX(CAM_DEFAULT, CAM_SHAKE_DECAYING_VERTICAL, 1, 0.2f);
-                sfx_play_sound(SOUND_20AC);
+                sfx_play_sound(SOUND_CLOSE_PANEL);
             }
             break;
         case 4:

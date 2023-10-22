@@ -397,8 +397,8 @@ void bgm_pop_battle_song(void) {
     MusicSettings* musicSetting = gMusicSettings;
 
     if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
-        if (gOverrideFlags & GLOBAL_OVERRIDES_20000) {
-            gOverrideFlags &= ~GLOBAL_OVERRIDES_20000;
+        if (gOverrideFlags & GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE) {
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE;
         } else {
             musicSetting->flags |= MUSIC_SETTINGS_FLAG_8;
             _bgm_set_song(0, musicSetting->savedSongID, musicSetting->savedVariation, 0, 8);
@@ -410,13 +410,15 @@ void bgm_pop_battle_song(void) {
 void bgm_push_battle_song(void) {
     MusicSettings* musicSetting = gMusicSettings;
 
-    if (gGameStatusPtr->demoState == DEMO_STATE_NONE && !(gOverrideFlags & GLOBAL_OVERRIDES_20000)) {
-        snd_ambient_pause(0, 250);
-        musicSetting->savedSongID = musicSetting->songID;
-        musicSetting->savedVariation = musicSetting->variation;
-        musicSetting->savedSongName = musicSetting->songName;
-        musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
-        bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, 8);
+    if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
+        if (!(gOverrideFlags & GLOBAL_OVERRIDES_DONT_RESUME_SONG_AFTER_BATTLE)) {
+            snd_ambient_pause(0, 250);
+            musicSetting->savedSongID = musicSetting->songID;
+            musicSetting->savedVariation = musicSetting->variation;
+            musicSetting->savedSongName = musicSetting->songName;
+            musicSetting->flags |= MUSIC_SETTINGS_FLAG_4;
+            bgm_set_song(0, musicSetting->battleSongID, musicSetting->battleVariation, 500, 8);
+        }
     }
 }
 

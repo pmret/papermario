@@ -9,7 +9,7 @@
 SHIFT_BSS s32 gOverrideFlags;
 SHIFT_BSS s32 timeFreezeMode;
 SHIFT_BSS u16** nuGfxCfb;
-SHIFT_BSS s16 D_8009A690;
+SHIFT_BSS s16 SoftResetDelay;
 SHIFT_BSS DisplayContext D_80164000[2];
 
 s8 gGameStepDelayAmount = 1;
@@ -27,8 +27,8 @@ GameStatus gGameStatus = {
 };
 
 GameStatus* gGameStatusPtr = &gGameStatus;
-s16 D_800741A0 = 0;
-s16 D_800741A2 = 0;
+s16 SoftResetOverlayAlpha = 0;
+s16 SoftResetState = 0;
 s32 D_800741A4 = 0;
 
 Mtx MasterIdentityMtx = RDP_MATRIX(
@@ -94,59 +94,59 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL) {
-        switch (D_800741A2) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_SOFT_RESET) {
+        switch (SoftResetState) {
             case 0:
                 gOverrideFlags |= GLOBAL_OVERRIDES_200;
                 disable_player_input();
 
-                if (D_800741A0 == 255) {
-                    D_800741A2 = 1;
-                    D_8009A690 = 3;
+                if (SoftResetOverlayAlpha == 255) {
+                    SoftResetState = 1;
+                    SoftResetDelay = 3;
                 } else {
-                    D_800741A0 += 10;
-                    if (D_800741A0 > 255) {
-                        D_800741A0 = 255;
+                    SoftResetOverlayAlpha += 10;
+                    if (SoftResetOverlayAlpha > 255) {
+                        SoftResetOverlayAlpha = 255;
                     }
                 }
                 break;
             case 1:
                 gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
-                D_8009A690--;
-                if (D_8009A690 == 0) {
+                SoftResetDelay--;
+                if (SoftResetDelay == 0) {
                     sfx_stop_env_sounds();
                     set_game_mode(GAME_MODE_STARTUP);
-                    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_SOFT_RESET;
                 }
                 break;
         }
     } else {
-        D_800741A0 = 0;
-        D_800741A2 = 0;
+        SoftResetOverlayAlpha = 0;
+        SoftResetState = 0;
     }
 
     if (gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_BATTLES) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_1000;
+        gOverrideFlags |= GLOBAL_OVERRIDES_PREV_DISABLE_BATTLES;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_1000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_PREV_DISABLE_BATTLES;
     }
 
     if (gOverrideFlags & GLOBAL_OVERRIDES_200) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_2000;
+        gOverrideFlags |= GLOBAL_OVERRIDES_PREV_200;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_2000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_PREV_200;
     }
 
     if (gOverrideFlags & GLOBAL_OVERRIDES_400) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_4000;
+        gOverrideFlags |= GLOBAL_OVERRIDES_PREV_400;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_4000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_PREV_400;
     }
 
     if (gOverrideFlags & GLOBAL_OVERRIDES_800) {
-        gOverrideFlags |= GLOBAL_OVERRIDES_8000;
+        gOverrideFlags |= GLOBAL_OVERRIDES_PREV_800;
     } else {
-        gOverrideFlags &= ~GLOBAL_OVERRIDES_8000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_PREV_800;
     }
 
     // Unused rand_int used to advance the global random seed each visual frame
@@ -196,7 +196,7 @@ void gfx_draw_frame(void) {
     render_effects_UI();
     state_render_backUI();
 
-    if (!(gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS)) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS)) {
         render_window_root();
     }
 
@@ -204,7 +204,9 @@ void gfx_draw_frame(void) {
         render_frame(TRUE);
     }
 
-    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10))) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS)
+        && !(gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI)
+    ) {
         render_messages();
     }
 
@@ -212,26 +214,29 @@ void gfx_draw_frame(void) {
     render_hud_elements_frontUI();
     render_screen_overlay_frontUI();
 
-    if ((gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10)) == GLOBAL_OVERRIDES_10) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS)
+        && (gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_OVER_FRONTUI)
+    ) {
         render_messages();
     }
 
     render_curtains();
 
-    if (gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_OVER_CURTAINS) {
         render_messages();
     }
-    if (gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS) {
+
+    if (gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_OVER_CURTAINS) {
         render_window_root();
     }
 
     state_render_frontUI();
 
-    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL) {
-        switch (D_800741A2) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_SOFT_RESET) {
+        switch (SoftResetState) {
             case 0:
             case 1:
-                _render_transition_stencil(7, D_800741A0, NULL);
+                _render_transition_stencil(OVERLAY_SCREEN_MARIO, SoftResetOverlayAlpha, NULL);
                 break;
         }
     }

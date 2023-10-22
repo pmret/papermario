@@ -30,7 +30,7 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
         EVT_WAIT(1)
         EVT_IF_LE(LVar1, 30)
             EVT_CALL(SetPlayerPos, LVar0, 30, LVar2)
-            EVT_CALL(PlaySoundAtPlayer, SOUND_03FB, SOUND_SPACE_DEFAULT)
+            EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_COLLAPSE, SOUND_SPACE_DEFAULT)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP

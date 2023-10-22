@@ -23,7 +23,7 @@ EvtScript N(EVS_NpcAI_ShyGuy_03) = {
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_ShyGuy_02, ANIM_ShyGuy_Red_Anim03)
     EVT_CALL(SetNpcJumpscale, NPC_ShyGuy_02, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_02, SOUND_032C, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_02, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(NpcJump0, NPC_ShyGuy_02, 400, 20, -300, 20)
     EVT_CALL(NpcFacePlayer, NPC_ShyGuy_02, 0)
     EVT_WAIT(10)
@@ -37,7 +37,7 @@ EvtScript N(EVS_NpcAI_ShyGuy_03) = {
         EVT_CALL(PlayerMoveTo, 410, -340, 0)
     EVT_END_THREAD
     EVT_SET(LVar0, 22)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_203F, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
     EVT_EXEC_GET_TID(N(EVS_ShyGuy_PlayRunningSounds), LVarA)
     EVT_CALL(SetNpcSpeed, NPC_ShyGuy_02, EVT_FLOAT(8.0))
     EVT_CALL(NpcMoveTo, NPC_ShyGuy_02, 170, -140, 0)
@@ -89,7 +89,7 @@ EvtScript N(EVS_NpcHit_ShyGuy_03) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_203E, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
     EVT_SET(GF_MAC00_ShyGuyChasedFromShop, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetEnemyFlagBits, NPC_ShyGuy_02, ENEMY_FLAG_CANT_INTERACT, 1)
@@ -143,7 +143,7 @@ EvtScript N(EVS_NpcInit_GardenShyGuy1) = {
 };
 
 EvtScript N(EVS_NpcInteract_Toad_01) = {
-    EVT_EXEC_WAIT(ItemShopInteract)
+    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_RETURN
     EVT_END
 };

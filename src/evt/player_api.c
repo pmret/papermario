@@ -46,7 +46,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
         disable_player_input();
         partner_disable_input();
         close_status_bar();
-        func_800E984C();
+        disable_status_bar_input();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
             playerStatus->animFlags |= PA_FLAG_INTERRUPT_SPIN;
         }
@@ -56,7 +56,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
         partner_enable_input();
         func_800E01DC();
         gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-        func_800E983C();
+        enable_status_bar_input();
     }
     return ApiStatus_DONE2;
 }
@@ -270,7 +270,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 anim = ANIM_MarioW3_8bit_Jump;
             }
             suggest_player_anim_allow_backward(anim);
-            sfx_play_sound_at_player(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT);
+            sfx_play_sound_at_player(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT);
         }
         script->functionTemp[0] = 1;
     }
@@ -492,7 +492,7 @@ ApiStatus FullyRestoreHPandFP(Evt* script, s32 isInitialCall) {
 ApiStatus FullyRestoreSP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    playerData->specialBarsFilled = playerData->maxStarPower * 256;
+    playerData->starPower = playerData->maxStarPower * SP_PER_BAR;
     return ApiStatus_DONE2;
 }
 

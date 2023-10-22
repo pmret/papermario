@@ -236,7 +236,7 @@ API_CALLABLE(N(start)) {
     battleStatus->actionSuccess = 0;
     battleStatus->actionResult = ACTION_RESULT_FAIL;
     actionCommandStatus->state = 10;
-    battleStatus->flags1 &= ~BS_FLAGS1_8000;
+    battleStatus->flags1 &= ~BS_FLAGS1_FREE_ACTION_COMMAND;
     func_80269118();
     return ApiStatus_DONE2;
 }
@@ -394,7 +394,7 @@ void N(update)(void) {
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !actionCommandStatus->wrongButtonPressed) ||
-                        (actionCommandStatus->autoSucceed != 0)) {
+                        actionCommandStatus->autoSucceed) {
                         actionCommandStatus->unk_5C = 1;
                         battleStatus->actionQuality++;
                         break;
@@ -469,7 +469,7 @@ void N(update)(void) {
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !actionCommandStatus->wrongButtonPressed) ||
-                        (actionCommandStatus->autoSucceed != 0)) {
+                        actionCommandStatus->autoSucceed) {
                         actionCommandStatus->unk_5C = 1;
                         battleStatus->actionQuality++;
                         break;
@@ -543,7 +543,7 @@ void N(update)(void) {
                     }
 
                     if (((battleStatus->pushInputBuffer[pos] & BUTTON_A) && !actionCommandStatus->wrongButtonPressed) ||
-                        (actionCommandStatus->autoSucceed != 0)) {
+                        actionCommandStatus->autoSucceed) {
                         actionCommandStatus->unk_5C = 1;
                         battleStatus->actionQuality++;
                         break;

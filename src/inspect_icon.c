@@ -113,8 +113,8 @@ s32 should_continue_inspect(void) {
                     curInteraction = NO_COLLIDER;
                     break;
             }
-        } else if (
-            ((playerStatus->flags & (PS_FLAG_HAS_CONVERSATION_NPC | PS_FLAG_INPUT_DISABLED)) == PS_FLAG_HAS_CONVERSATION_NPC)
+        } else if (!(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
+            && (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC)
             && (npc != NULL)
             && (npc->flags & NPC_FLAG_10000000)
         ) {

@@ -44,10 +44,10 @@ void action_update_hit_lava(void) {
         playerStatus->curSpeed = 0.0f;
         LaunchVelocity = 0.0f;
 
-        gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_IGNORE_PLAYER_Y | CAMERA_MOVE_FLAG_2);
+        gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_IGNORE_PLAYER_Y | CAMERA_MOVE_NO_INTERP_Y);
         LaunchInterpPhase = 90.0f;
         subtract_hp(1);
-        open_status_bar_long();
+        open_status_bar_slowly();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         sfx_play_sound_at_player(SOUND_TOUCH_LAVA, SOUND_SPACE_DEFAULT);
     }
@@ -173,8 +173,8 @@ void action_update_hit_lava(void) {
                 exec_ShakeCamX(0, 2, 1, 0.8f);
                 start_rumble(256, 50);
                 phys_adjust_cam_on_landing();
-                gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
-                sfx_play_sound_at_player(SOUND_03FB, SOUND_SPACE_DEFAULT);
+                gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_NO_INTERP_Y;
+                sfx_play_sound_at_player(SOUND_PLAYER_COLLAPSE, SOUND_SPACE_DEFAULT);
                 suggest_player_anim_always_forward(ANIM_MarioW2_Thrown);
                 playerStatus->flags &= ~PS_FLAG_HIT_FIRE;
                 playerStatus->flags &= ~PS_FLAG_FLYING;

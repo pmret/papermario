@@ -198,7 +198,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_01, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B1, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_PIRANHA_SPIN_1, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim01)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim04)
@@ -208,7 +208,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_20B1, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_02, SOUND_PIRANHA_SPIN_1, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim01)
     EVT_WAIT(5)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim04)
@@ -220,7 +220,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_PIRANHA_SPIN_2, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
         EVT_ADD(LVar0, 30)
@@ -228,7 +228,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_PIRANHA_SPIN_2, SOUND_SPACE_DEFAULT)
     EVT_SET(LVar0, 0)
     EVT_LOOP(12)
         EVT_ADD(LVar0, 30)
@@ -236,17 +236,17 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
         EVT_CALL(SetNpcRotation, NPC_PutridPiranha_02, 0, LVar0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B2, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_PIRANHA_SPIN_2, SOUND_SPACE_DEFAULT)
     EVT_LOOP(3)
         EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_20B3, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_PIRANHA_TENSE, SOUND_SPACE_DEFAULT)
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim05)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim05)
     EVT_WAIT(20)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_01, ANIM_LargePiranha_Putrid_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_PutridPiranha_02, ANIM_LargePiranha_Putrid_Anim06)
-    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_03B2, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_PutridPiranha_01, SOUND_PIRANHA_CHOMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
     EVT_RETURN

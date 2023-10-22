@@ -209,7 +209,7 @@ void state_step_unpause(void) {
                     status_bar_respond_to_changes();
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                     StepPauseState = 3;
-                    gPlayerStatus.alpha2 = gPlayerStatus.alpha1 - 1;
+                    gPlayerStatus.prevAlpha = gPlayerStatus.curAlpha - 1;
                     D_802D9D71 = D_802D9D70 + 1;
 
                     update_encounters();

@@ -2550,7 +2550,7 @@ void btl_state_update_player_menu(void) {
                         if (playerActor->targetListLength == 0) {
                             battleStatus->submenuStatus[entryIdx] = -2;
                         }
-                        if (playerData->specialBarsFilled / 256 < moveData->costFP) {
+                        if (playerData->starPower / SP_PER_BAR < moveData->costFP) {
                             battleStatus->submenuStatus[entryIdx] = 0;
                         }
                         if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
@@ -2572,7 +2572,7 @@ void btl_state_update_player_menu(void) {
                             if (playerActor->targetListLength == 0) {
                                 battleStatus->submenuStatus[entryIdx] = -2;
                             }
-                            if (playerData->specialBarsFilled / 256 < moveData->costFP) {
+                            if (playerData->starPower / SP_PER_BAR < moveData->costFP) {
                                 battleStatus->submenuStatus[entryIdx] = 0;
                             }
                             if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
@@ -2595,7 +2595,7 @@ void btl_state_update_player_menu(void) {
                                 if (playerActor->targetListLength == 0) {
                                     battleStatus->submenuStatus[entryIdx] = -2;
                                 }
-                                if (playerData->specialBarsFilled / 256 < moveData->costFP) {
+                                if (playerData->starPower / SP_PER_BAR < moveData->costFP) {
                                     battleStatus->submenuStatus[entryIdx] = 0;
                                 }
                                 if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
@@ -3494,7 +3494,7 @@ void btl_state_update_player_menu(void) {
             gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2;
             break;
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2:
-            if (popup->result == POPUP_RESULT_MINUS_1) {
+            if (popup->result == POPUP_RESULT_INVALID) {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_7;
             } else if (popup->result != POPUP_RESULT_CHOOSING) {
                 if (popup->result == POPUP_RESULT_CANCEL) {
@@ -3553,7 +3553,7 @@ void btl_state_update_player_menu(void) {
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_7:
             set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
             set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-            if (popup->result != POPUP_RESULT_MINUS_1) {
+            if (popup->result != POPUP_RESULT_INVALID) {
                 set_window_update(WINDOW_ID_6, WINDOW_UPDATE_9);
                 set_window_update(WINDOW_ID_7, WINDOW_UPDATE_9);
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_2;
@@ -4084,7 +4084,7 @@ void btl_state_update_partner_menu(void) {
         gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2;
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2:
-        if (popupMenu->result == POPUP_RESULT_MINUS_1) {
+        if (popupMenu->result == POPUP_RESULT_INVALID) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_7;
         } else if (popupMenu->result != POPUP_RESULT_CHOOSING) {
             if (popupMenu->result == POPUP_RESULT_CANCEL) {
@@ -4135,7 +4135,7 @@ void btl_state_update_partner_menu(void) {
         btl_main_menu_destroy();
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_7:
-        if (popupMenu->result != POPUP_RESULT_MINUS_1) {
+        if (popupMenu->result != POPUP_RESULT_INVALID) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_2;
         }
         break;
@@ -4361,7 +4361,7 @@ void btl_state_update_partner_menu(void) {
         gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2;
         break;
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2:
-        if (popupMenu->result == POPUP_RESULT_MINUS_1) {
+        if (popupMenu->result == POPUP_RESULT_INVALID) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_7;
         } else if (popupMenu->result != POPUP_RESULT_CHOOSING) {
             if (popupMenu->result == POPUP_RESULT_CANCEL) {
@@ -4420,7 +4420,7 @@ void btl_state_update_partner_menu(void) {
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_7:
         set_window_update(WINDOW_ID_6, WINDOW_UPDATE_HIDE);
         set_window_update(WINDOW_ID_7, WINDOW_UPDATE_HIDE);
-        if (popupMenu->result != POPUP_RESULT_MINUS_1) {
+        if (popupMenu->result != POPUP_RESULT_INVALID) {
             set_window_update(WINDOW_ID_6, WINDOW_UPDATE_9);
             set_window_update(WINDOW_ID_7, WINDOW_UPDATE_9);
             gBattleSubState = BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_2;
@@ -5036,7 +5036,7 @@ void btl_state_update_select_target(void) {
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             target = &actor->targetData[targetIndexList[actor->selectedTargetIndex]];
             actor->targetActorID = target->actorID;
-            actor->targetPartIndex = target->partID;
+            actor->targetPartID = target->partID;
 
             // free the HUD elements for the target pointers
             for (i = 0; i < targetListLength; i++) {

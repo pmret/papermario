@@ -213,7 +213,7 @@ EvtScript N(EVS_NpcInit_Toad) = {
 };
 
 EvtScript N(EVS_NpcInteract_Yoshi_01) = {
-    EVT_EXEC_WAIT(ItemShopInteract)
+    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
     EVT_RETURN
     EVT_END
 };

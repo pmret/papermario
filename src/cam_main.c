@@ -208,14 +208,14 @@ void render_frame(s32 isSecondPass) {
                 render_workers_world();
                 render_effects_world();
                 execute_render_tasks();
-                render_hud_elements_world();
+                render_transformed_hud_elements();
             } else {
                 guOrthoF(camera->perspectiveMatrix, 0.0f, SCREEN_WIDTH, -SCREEN_HEIGHT, 0.0f, -1000.0f, 1000.0f,
                             1.0f);
                 guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH |
                             G_MTX_LOAD | G_MTX_PROJECTION);
-                render_hud_elements_world();
+                render_transformed_hud_elements();
                 render_item_entities();
             }
         } else {

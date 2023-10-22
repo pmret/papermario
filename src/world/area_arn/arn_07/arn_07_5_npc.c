@@ -9,7 +9,7 @@
 #include "world/common/npc/StarSpirit.inc.c"
 
 API_CALLABLE(N(UpgradeStarPowerCh3)) {
-    set_max_SP(3);
+    set_max_star_power(3);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
     sync_status_bar();
@@ -18,7 +18,7 @@ API_CALLABLE(N(UpgradeStarPowerCh3)) {
 
 EvtScript N(EVS_TubbaWalking) = {
     EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_20F6, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_Tubba, SOUND_HEAVY_NPC_STEP_C, SOUND_SPACE_DEFAULT)
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 3, EVT_FLOAT(0.8))
     EVT_END_LOOP
     EVT_RETURN

@@ -77,7 +77,7 @@ void N(sync_player_position)(void) {
 void N(init)(Npc* lakilester) {
     lakilester->collisionHeight = 38;
     lakilester->collisionDiameter = 36;
-    lakilester->collisionChannel = COLLISION_CHANNEL_10000;
+    lakilester->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
     N(PlayerBounceOffset) = 0;
     N(LockingPlayerInput) = FALSE;
     N(PlayerCollisionDisabled) = FALSE;
@@ -709,7 +709,7 @@ API_CALLABLE(N(UseAbility)) {
                 x = lakilester->moveToPos.x;
                 y = lakilester->moveToPos.y;
                 z = lakilester->moveToPos.z;
-                npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, lakilester->moveSpeed,
+                npc_test_move_simple_with_slipping(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, lakilester->moveSpeed,
                                                     yaw, lakilester->collisionHeight, lakilester->collisionDiameter);
                 lakilester->moveToPos.x = x;
                 lakilester->moveToPos.y = y;
@@ -726,7 +726,7 @@ API_CALLABLE(N(UseAbility)) {
             N(AbilityState) = RIDE_STATE_MOUNT_2;
             break;
         case RIDE_STATE_MOUNT_2:
-            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_DEFAULT, NPC_PARTNER);
+            sfx_play_sound_at_npc(SOUND_QUICK_PLAYER_JUMP, SOUND_SPACE_DEFAULT, NPC_PARTNER);
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             // fallthrough
         case RIDE_STATE_MOUNT_3:

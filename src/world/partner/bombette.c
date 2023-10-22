@@ -200,7 +200,7 @@ s32 N(can_use_ability)(Npc* npc) {
     return TRUE;
 }
 
-s32 N(can_player_pause)(Npc* npc) {
+s32 N(can_open_menus)(Npc* npc) {
     return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
@@ -345,7 +345,7 @@ API_CALLABLE(N(UseAbility)) {
             y = npc->pos.y + 14.0f;
             z = npc->pos.z;
             hitDepth = 16.0f;
-            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionDiameter)) {
+            if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionDiameter)) {
                 s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                     if (playerStatus->actionState == ACTION_STATE_IDLE) {

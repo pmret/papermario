@@ -62,7 +62,7 @@ void npc_follow_init(Npc* npc, s32 targetNpcID, FollowAnims* anims, f32 walkSpee
     npc->jumpVel = 0.0f;
     npc->flags |= NPC_FLAG_GRAVITY;
     npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
-    npc->collisionChannel = COLLISION_CHANNEL_10000;
+    npc->collisionChannel = COLLIDER_FLAG_IGNORE_PLAYER;
 }
 
 void npc_update_npc_tracking(Npc* npc) {

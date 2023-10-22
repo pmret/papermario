@@ -18,12 +18,12 @@ extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_ExecuteAction);
 extern EvtScript N(EVS_Celebrate);
-extern EvtScript N(runAway);
-extern EvtScript N(runAwayFail);
-extern EvtScript N(spinyFlip);
-extern EvtScript N(spinySurge);
-extern EvtScript N(cloudNine);
-extern EvtScript N(hurricane);
+extern EvtScript N(EVS_RunAway);
+extern EvtScript N(EVS_RunAwayFail);
+extern EvtScript N(EVS_Move_SpinyFlip);
+extern EvtScript N(EVS_Move_SpinySurge);
+extern EvtScript N(EVS_Move_CloudNine);
+extern EvtScript N(EVS_Move_Hurricane);
 
 extern HudScript HES_AimBlinkA;
 extern HudScript HES_AimReticle;
@@ -33,23 +33,23 @@ extern HudScript HES_StickTapRight;
 static s32 sSavedHurricaneIntensity;
 static s32 sBreathSizeIncrease;
 static s32 sMaxPower;
-static s32 hudAimReticle;
-static s32 hudAimTarget;
-static s32 sTargetMarkRotation;
+static s32 HID_AimReticle;
+static s32 HID_AimTarget;
+static s32 TargetMarkRotation;
 static s32 D_8023D294;
-static s32 sAimingTimer;
+static s32 AimingTime;
 static s32 D_8023D29C;
 static f32 D_8023D2A0;
 static f32 D_8023D2A4;
 static f32 D_8023D2A8;
 static f32 D_8023D2AC;
 static f32 D_8023D2B0;
-static f32 sAimMoveAngle;
+static f32 AimMoveAngle;
 static s32 hudAim[1];
-static s32 hudStick;
-static s32 hudStickPosX;
-static s32 hudStickPosY;
-static s32 sSpinyFlipStarted;
+static s32 HID_AnalogStick;
+static s32 HudStickPosX;
+static s32 HudStickPosY;
+static b32 SpinyFlipTargetingDone;
 static s32 D_8023D2CC;
 static s32 sTargetStates[24];
 static s32 sNumEnemiesBeingBlown;
@@ -84,20 +84,6 @@ typedef struct HurricaneState {
     /* 0x72 */ s16 totalPower;
     /* 0x74 */ char unk_74[0x10];
 } HurricaneState;
-
-API_CALLABLE(N(SpinyFlipUpdatePopup)) {
-    if (isInitialCall) {
-        sSpinyFlipStarted = 0;
-    }
-
-    if (sSpinyFlipStarted == 0) {
-        btl_set_popup_duration(99);
-        return ApiStatus_BLOCK;
-    }
-
-    return ApiStatus_DONE2;
-}
-
 
 s32 N(DefaultAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Walk,
@@ -280,9 +266,9 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_EQ(PHASE_CELEBRATE)
             EVT_EXEC_WAIT(N(EVS_Celebrate))
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(runAway))
+            EVT_EXEC_WAIT(N(EVS_RunAway))
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(runAwayFail))
+            EVT_EXEC_WAIT(N(EVS_RunAwayFail))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -291,22 +277,22 @@ EvtScript N(EVS_TakeTurn) = {
 EvtScript N(EVS_Celebrate) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Celebrate)
-    EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_Walk)
-    EVT_SET_CONST(LVar3,  ANIM_BattleLakilester_Walk)
+    EVT_SET_CONST(LVar2, ANIM_BattleLakilester_Walk)
+    EVT_SET_CONST(LVar3, ANIM_BattleLakilester_Walk)
     EVT_EXEC_WAIT(EVS_Partner_Celebrate)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(runAway) = {
+EvtScript N(EVS_RunAway) = {
     EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Run)
+    EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Run)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(runAwayFail) = {
+EvtScript N(EVS_RunAwayFail) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
@@ -337,20 +323,20 @@ EvtScript N(EVS_ExecuteAction) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_SPINY_FLIP1)
             EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-            EVT_EXEC_WAIT(N(spinyFlip))
+            EVT_EXEC_WAIT(N(EVS_Move_SpinyFlip))
         EVT_CASE_EQ(MOVE_SPINY_FLIP2)
             EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-            EVT_EXEC_WAIT(N(spinyFlip))
+            EVT_EXEC_WAIT(N(EVS_Move_SpinyFlip))
         EVT_CASE_EQ(MOVE_SPINY_FLIP3)
             EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-            EVT_EXEC_WAIT(N(spinyFlip))
+            EVT_EXEC_WAIT(N(EVS_Move_SpinyFlip))
         EVT_CASE_EQ(MOVE_SPINY_SURGE)
-            EVT_EXEC_WAIT(N(spinySurge))
+            EVT_EXEC_WAIT(N(EVS_Move_SpinySurge))
         EVT_CASE_EQ(MOVE_CLOUD_NINE)
             EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-            EVT_EXEC_WAIT(N(cloudNine))
+            EVT_EXEC_WAIT(N(EVS_Move_CloudNine))
         EVT_CASE_EQ(MOVE_HURRICANE)
-            EVT_EXEC_WAIT(N(hurricane))
+            EVT_EXEC_WAIT(N(EVS_Move_Hurricane))
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -378,7 +364,22 @@ EvtScript N(EVS_ReturnHome) = {
     EVT_END
 };
 
-HudScript* N(aimHudScripts)[] = { &HES_AimBlinkA };
+HudScript* N(AimDotHudScripts)[] = {
+    &HES_AimBlinkA
+};
+
+API_CALLABLE(N(SpinyFlipUpdatePopup)) {
+    if (isInitialCall) {
+        SpinyFlipTargetingDone = FALSE;
+    }
+
+    if (!SpinyFlipTargetingDone) {
+        btl_set_popup_duration(99);
+        return ApiStatus_BLOCK;
+    } else {
+        return ApiStatus_DONE2;
+    }
+}
 
 API_CALLABLE(N(SpinyFlipActionCommand)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -389,8 +390,8 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     ActorState* playerState;
     ActorState* partnerState;
     f32 speed;
-    f32 dpadAngle;
-    s32 dpadAmplitude;
+    f32 stickAngle;
+    s32 stickMagnitude;
     s32 id;
     s32 i;
 
@@ -409,27 +410,33 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     s32 temp_v1_2;
     s32* var_s0;
 
+    enum SpinyFlipState {
+        SPINY_FLIP_INIT     = 0,
+        SPINY_FLIP_DELAY    = 1, // give player time to start aiming
+        SPINY_FLIP_AIMING   = 2, // player is aiming
+    };
+
     partnerState = &partner->state;
     playerState = &battleStatus->playerActor->state;
 
     if (isInitialCall) {
-        script->functionTemp[0] = 0;
+        script->functionTemp[0] = SPINY_FLIP_INIT;
     }
 
     switch (script->functionTemp[0]) {
-        case 0:
-            hudAimReticle = hud_element_create(&HES_AimReticle);
-            hud_element_set_render_depth(hudAimReticle, 10);
-            hudAimTarget = hud_element_create(&HES_AimTarget);
-            hud_element_set_render_depth(hudAimTarget, 10);
-            hud_element_create_transform_A(hudAimTarget);
-            hudStickPosX = -48;
-            hudStickPosY = 70;
-            hudStick = id = hud_element_create(&HES_StickNeutral);
-            hud_element_set_render_pos(id, hudStickPosX, hudStickPosY);
+        case SPINY_FLIP_INIT:
+            HID_AimReticle = hud_element_create(&HES_AimReticle);
+            hud_element_set_render_depth(HID_AimReticle, 10);
+            HID_AimTarget = hud_element_create(&HES_AimTarget);
+            hud_element_set_render_depth(HID_AimTarget, 10);
+            hud_element_create_transform_A(HID_AimTarget);
+            HudStickPosX = -48;
+            HudStickPosY = 70;
+            HID_AnalogStick = id = hud_element_create(&HES_StickNeutral);
+            hud_element_set_render_pos(id, HudStickPosX, HudStickPosY);
             hud_element_set_render_depth(id, 0);
-            for (i = 0; i < ARRAY_COUNT(N(aimHudScripts)); i++) {
-                hudAim[i] = idAim = hud_element_create(N(aimHudScripts)[i]);
+            for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
+                hudAim[i] = idAim = hud_element_create(N(AimDotHudScripts)[i]);
                 hud_element_set_render_depth(idAim, 10);
             }
             partnerState->curPos.x = partner->curPos.x + 33.0f;
@@ -438,9 +445,9 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             partnerState->unk_18.x = partner->curPos.x + 33.0f;
             partnerState->unk_18.y = partner->curPos.y + 34.0f;
             partnerState->unk_18.z = partner->curPos.z + 15.0f;
-            set_goal_pos_to_part(partnerState, partner->targetActorID, partner->targetPartIndex);
+            set_goal_pos_to_part(partnerState, partner->targetActorID, partner->targetPartID);
             target = get_actor(partner->targetActorID);
-            part = get_actor_part(target, partner->targetPartIndex);
+            part = get_actor_part(target, partner->targetPartID);
             partnerState->goalPos.x += part->projectileTargetOffset.x;
             partnerState->goalPos.y += part->projectileTargetOffset.y;
             partnerState->goalPos.z = partnerState->goalPos.z; // required to match
@@ -451,47 +458,47 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             partnerState->speed = 0.0f;
             partnerState->velStep.x = 0.0f;
             partnerState->velStep.y = 0.0f;
-            sTargetMarkRotation = 0;
+            TargetMarkRotation = 0;
             D_8023D294 = 0;
-            sAimingTimer = 30;
+            AimingTime = 30;
             D_8023D2A0 = 0.0f;
             D_8023D2A4 = 0.0f;
             D_8023D2A8 = 0.0f;
             D_8023D2AC = 0.0f;
             D_8023D29C = 0;
             D_8023D2B0 = 3.0f;
-            sAimMoveAngle = -1.0f;
+            AimMoveAngle = -1.0f;
             partnerState->unk_24 = ((part->size.y + part->size.x) / 2) / 24.0;
-            hud_element_set_scale(hudAimTarget, partnerState->unk_24 * target->scalingFactor);
-            sSpinyFlipStarted = 1;
-            script->functionTemp[0] = 1;
+            hud_element_set_scale(HID_AimTarget, partnerState->unk_24 * target->scalingFactor);
+            SpinyFlipTargetingDone = TRUE;
+            script->functionTemp[0] = SPINY_FLIP_DELAY;
             break;
-        case 1:
+        case SPINY_FLIP_DELAY:
             if (battleStatus->stickX != 0 || battleStatus->stickY != 0) {
-                sAimingTimer = 0;
+                AimingTime = 0;
             }
-            if (sAimingTimer != 0) {
-                sAimingTimer--;
+            if (AimingTime != 0) {
+                AimingTime--;
             } else {
-                sAimingTimer = (s32)(80 * DT);
-                hud_element_set_script(hudStick, &HES_StickTapRight);
+                AimingTime = (s32)(80 * DT);
+                hud_element_set_script(HID_AnalogStick, &HES_StickTapRight);
                 sfx_play_sound_at_position(SOUND_AIM_SPINY_FLIP, SOUND_SPACE_DEFAULT, 0.0f, 0.0f, 0.0f);
-                script->functionTemp[0] = 2;
+                script->functionTemp[0] = SPINY_FLIP_AIMING;
             }
             break;
-        case 2:
-            dpadAmplitude = battleStatus->dpadY;
-            if (dpadAmplitude > 80) {
-                dpadAmplitude = 80;
+        case SPINY_FLIP_AIMING:
+            stickMagnitude = battleStatus->stickMagnitude;
+            if (stickMagnitude > 80) {
+                stickMagnitude = 80;
             }
-            dpadAngle = battleStatus->dpadX;
-            if (dpadAmplitude < 35) {
-                f32 temp = dpadAmplitude;
-                dpadAmplitude = temp * sin_rad(DEG_TO_RAD(dpadAmplitude * 2));
+            stickAngle = battleStatus->stickAngle;
+            if (stickMagnitude < 35) {
+                f32 temp = stickMagnitude;
+                stickMagnitude = temp * sin_rad(DEG_TO_RAD(stickMagnitude * 2));
             }
             temp_f8 = D_8023D2A0;
             temp_f2 = temp_f8 + D_8023D2A4 + D_8023D2A8;
-            D_8023D2A0 = dpadAmplitude;
+            D_8023D2A0 = stickMagnitude;
             D_8023D2A8 = D_8023D2A4;
             temp_f10 = D_8023D2A0 - (temp_f2 / 3.0f);
             D_8023D2A4 = temp_f8;
@@ -502,23 +509,23 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                 } else {
                     partner->state.speed += (D_8023D2AC / 8.5) / 2.0;
                 }
-                sAimMoveAngle = dpadAngle;
+                AimMoveAngle = stickAngle;
             } else {
                 D_8023D2AC = temp_f10;
             }
-            if (!(dpadAmplitude < 31)) {
-                sAimMoveAngle = dpadAngle;
+            if (!(stickMagnitude < 31)) {
+                AimMoveAngle = stickAngle;
             }
             if (partnerState->speed > 6.7) {
-                partnerState->speed = 6.7f;
+                partnerState->speed = 6.7;
             }
-            partnerState->speed = partnerState->speed - (f32) ((2.0 * (40 - dpadAmplitude)) / 40.0);
+            partnerState->speed -= (f32) ((2.0 * (40 - stickMagnitude)) / 40.0);
             if (partnerState->speed <= 0.0f) {
                 partnerState->speed = 0.0f;
                 D_8023D2AC = 0.0f;
             }
-            if (sAimMoveAngle >= 0.0f) {
-                theta = DEG_TO_RAD(sAimMoveAngle);
+            if (AimMoveAngle >= 0.0f) {
+                theta = DEG_TO_RAD(AimMoveAngle);
                 sinTheta = sin_rad(theta);
                 cosTheta = cos_rad(theta);
                 speed = partnerState->speed;
@@ -538,16 +545,16 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
                 partnerState->curPos.y = 0.0f;
             }
             if (battleStatus->curButtonsPressed & BUTTON_A) {
-                sAimingTimer = 0;
+                AimingTime = 0;
             }
-            if (sAimingTimer == 60) {
+            if (AimingTime == 60) {
                 set_actor_anim(ACTOR_PARTNER, 0,  ANIM_BattleLakilester_HoldSpiny);
             }
-            if (sAimingTimer == 30) {
+            if (AimingTime == 30) {
                 set_actor_anim(ACTOR_PARTNER, 0, ANIM_BattleLakilester_StrainHoldSpiny);
             }
-            if (sAimingTimer != 0) {
-                sAimingTimer--;
+            if (AimingTime != 0) {
+                AimingTime--;
                 break;
             }
             script->varTable[14] = 0;
@@ -559,10 +566,10 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             if (partnerState->dist <= 12.0) {
                 script->varTable[15] = 1;
             }
-            hud_element_free(hudAimTarget);
-            hud_element_free(hudAimReticle);
-            hud_element_free(hudStick);
-            for (i = 0; i < ARRAY_COUNT(N(aimHudScripts)); i++) {
+            hud_element_free(HID_AimTarget);
+            hud_element_free(HID_AimReticle);
+            hud_element_free(HID_AnalogStick);
+            for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
                 id = hudAim[i];
                 hud_element_free(id);
             }
@@ -574,34 +581,36 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
     get_screen_coords(gCurrentCameraID,
                       partnerState->goalPos.x, partnerState->goalPos.y, partnerState->goalPos.z,
                       &screenX, &screenY, &screenZ);
-    id = hudAimTarget;
+    id = HID_AimTarget;
     hud_element_set_render_pos(id, screenX, screenY);
-    hud_element_set_transform_rotation(id, 0.0f, 0.0f, sTargetMarkRotation);
-    sTargetMarkRotation -= 10;
-    sTargetMarkRotation = clamp_angle(sTargetMarkRotation);
+    hud_element_set_transform_rotation(id, 0.0f, 0.0f, TargetMarkRotation);
+    TargetMarkRotation -= 10;
+    TargetMarkRotation = clamp_angle(TargetMarkRotation);
     get_screen_coords(gCurrentCameraID,
                       partnerState->curPos.x, partnerState->curPos.y, partnerState->curPos.z,
                       &screenX, &screenY, &screenZ);
-    hud_element_set_render_pos(hudAimReticle, screenX, screenY);
+    hud_element_set_render_pos(HID_AimReticle, screenX, screenY);
 
+    // show analog stick hud element
     switch (script->functionTemp[0]) {
-        case 1:
-        case 2:
-            hudStickPosX += 20;
-            if (hudStickPosX > 50) {
-                hudStickPosX = 50;
+        case SPINY_FLIP_DELAY:
+        case SPINY_FLIP_AIMING:
+            HudStickPosX += 20;
+            if (HudStickPosX > 50) {
+                HudStickPosX = 50;
             }
-            hud_element_set_render_pos(hudStick, hudStickPosX, hudStickPosY);
+            hud_element_set_render_pos(HID_AnalogStick, HudStickPosX, HudStickPosY);
             break;
     }
 
+    // show aim dot hud element in center of 
     switch (script->functionTemp[0]) {
-        case 1:
-        case 2:
+        case SPINY_FLIP_DELAY:
+        case SPINY_FLIP_AIMING:
             playerState->curPos.x = partnerState->curPos.x;
             playerState->curPos.y = partnerState->curPos.y;
             playerState->curPos.z = partnerState->curPos.z;
-            for (i = 0; i < ARRAY_COUNT(N(aimHudScripts)); i++) {
+            for (i = 0; i < ARRAY_COUNT(N(AimDotHudScripts)); i++) {
                 get_screen_coords(gCurrentCameraID, playerState->curPos.x, playerState->curPos.y, playerState->curPos.z, &screenX, &screenY, &screenZ);
                 id = hudAim[i];
                 hud_element_set_render_pos(id, screenX, screenY);
@@ -633,14 +642,14 @@ API_CALLABLE(N(GetSpinySurgeDamage)) {
     s32 damage = 0;
 
     switch (partnerLevel) {
-        case 0:
+        case PARTNER_RANK_NORMAL:
             if (actionCommandResult <= 99) {
                 damage = 1;
             } else {
                 damage = 2;
             }
             break;
-        case 1:
+        case PARTNER_RANK_SUPER:
             if (actionCommandResult <= 70) {
                 damage = 1;
             } else if (actionCommandResult <= 99) {
@@ -649,7 +658,7 @@ API_CALLABLE(N(GetSpinySurgeDamage)) {
                 damage = 3;
             }
             break;
-        case 2:
+        case PARTNER_RANK_ULTRA:
             if (actionCommandResult <= 40) {
                 damage = 1;
             } else if (actionCommandResult <= 70) {
@@ -685,7 +694,7 @@ API_CALLABLE(N(RemoveCloudNineFX)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(CloudNineFX)) {
+API_CALLABLE(N(SpawnCloudNineFX)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->playerActor;
 
@@ -824,7 +833,7 @@ API_CALLABLE(N(CanTargetBeBlown)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(spinyFlip) = {
+EvtScript N(EVS_Move_SpinyFlip) = {
     EVT_THREAD
         EVT_CALL(N(SpinyFlipUpdatePopup))
     EVT_END_THREAD
@@ -883,11 +892,11 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(SetActorVar, ACTOR_PARTNER, AVAR_Unk_0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpiny)
     EVT_WAIT(3)
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
+    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_SET(LVarF, -1)
     EVT_END_IF
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_THROW_SPINY_A)
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(-1)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
@@ -929,7 +938,7 @@ EvtScript N(spinyFlip) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarE, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
         EVT_CASE_DEFAULT
             EVT_SET(LVar0, HIT_RESULT_NO_DAMAGE)
     EVT_END_SWITCH
@@ -941,8 +950,8 @@ EvtScript N(spinyFlip) = {
     EVT_END_SWITCH
     EVT_WAIT(15)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -954,7 +963,7 @@ EvtScript N(spinyFlip) = {
     EVT_END
 };
 
-EvtScript N(spinySurge) = {
+EvtScript N(EVS_Move_SpinySurge) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SPINY_SURGE)
     EVT_CALL(action_command_spiny_surge_init)
     EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
@@ -1024,10 +1033,10 @@ EvtScript N(spinySurge) = {
                     EVT_BREAK_SWITCH
                 EVT_END_IF
                 EVT_IF_EQ(LFlag2, FALSE)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_THROW_SPINY_A)
                     EVT_SET(LFlag2, TRUE)
                 EVT_ELSE
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201C)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_THROW_SPINY_B)
                     EVT_SET(LFlag2, FALSE)
                 EVT_END_IF
                 EVT_CALL(N(ThrowSpinyFX))
@@ -1066,7 +1075,7 @@ EvtScript N(spinySurge) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
         EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_10)
+        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
         EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
             EVT_GOTO(12)
         EVT_END_IF
@@ -1074,9 +1083,9 @@ EvtScript N(spinySurge) = {
         EVT_CALL(N(GetSpinySurgeDamage))
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(0)
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
             EVT_CASE_DEFAULT
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
         EVT_END_SWITCH
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(0)
@@ -1093,8 +1102,8 @@ EvtScript N(spinySurge) = {
     EVT_WAIT(30)
     EVT_LABEL(13)
     EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_1)
-        EVT_CASE_OR_EQ(HIT_RESULT_3)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
+        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -1163,8 +1172,8 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(GetPartnerActionSuccess, LVarA)
     EVT_IF_GT(LVarA, 0)
         EVT_CALL(N(RemoveCloudNineFX))
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
-        EVT_CALL(N(CloudNineFX))
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
+        EVT_CALL(N(SpawnCloudNineFX))
         EVT_CALL(N(ApplyCloudNine))
         EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_SHOW_STATUS_ICONS, TRUE)
     EVT_END_IF
@@ -1277,8 +1286,8 @@ EvtScript N(cloudNine_immobile) = {
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(GetPartnerActionSuccess, LVarA)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201D)
-        EVT_CALL(N(CloudNineFX))
+        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_MAKE_CLOUD_NINE)
+        EVT_CALL(N(SpawnCloudNineFX))
         EVT_CALL(N(ApplyCloudNine))
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1333,7 +1342,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_END
 };
 
-EvtScript N(cloudNine) = {
+EvtScript N(EVS_Move_CloudNine) = {
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_EXEC_WAIT(N(cloudNine_immobile))
@@ -1484,7 +1493,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             sHuffPuffBreathEffect->data.huffPuffBreath->pos.z = NPC_DISPOSE_POS_Z;
 
             if (script->functionTemp[2] != 0) {
-                sfx_play_sound_at_position(SOUND_201E, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
+                sfx_play_sound_at_position(SOUND_LAKILESTER_HURRICANE_INHALE, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
             }
             script->functionTemp[2] = 0;
 
@@ -1507,7 +1516,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             sHuffPuffBreathEffect->data.huffPuffBreath->speedX = 2.0f;
 
             if (script->functionTemp[2] == 0) {
-                sfx_play_sound_at_position(SOUND_201F, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
+                sfx_play_sound_at_position(SOUND_LAKILESTER_HURRICANE_EXHALE, SOUND_SPACE_DEFAULT, partner->curPos.x, partner->curPos.y, partner->curPos.z);
             }
             script->functionTemp[2] = 1;
 
@@ -1703,7 +1712,7 @@ API_CALLABLE(N(IsHurricaneActive)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(hurricane) = {
+EvtScript N(EVS_Move_Hurricane) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_HURRICANE)
     EVT_CALL(action_command_hurricane_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
@@ -1731,7 +1740,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetBattleCamZoom, 430)
     EVT_CALL(MoveBattleCamOver, 150 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0288)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_LAKILESTER_HURRICANE_WIND)
     EVT_THREAD
         EVT_CALL(N(ProcessHurricane))
     EVT_END_THREAD
@@ -1768,7 +1777,7 @@ EvtScript N(hurricane) = {
         EVT_END_THREAD
     EVT_ELSE
         EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(PartnerDamageEnemy, LVar2, DAMAGE_TYPE_NO_CONTACT, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_FORCE_HIT_IMMUNE)
+            EVT_CALL(PartnerDamageEnemy, LVar2, DAMAGE_TYPE_NO_CONTACT, 0, 0, 0, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_FORCE_IMMUNE_HIT)
         EVT_END_IF
     EVT_END_IF
     EVT_LABEL(11)

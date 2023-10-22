@@ -9,7 +9,7 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 API_CALLABLE(N(UpgradeStarPowerCh7)) {
-    set_max_SP(7);
+    set_max_star_power(7);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
     sync_status_bar();

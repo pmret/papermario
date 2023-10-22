@@ -50,7 +50,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
     EVT_SET(LVar0, EVT_PTR(N(SearchBush_Scene)))
     EVT_EXEC(N(EVS_SearchBush))
     EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_032C, SOUND_SPACE_DEFAULT)
+    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
     EVT_CALL(NpcJump0, NPC_SELF, -230, 0, -157, 15 * DT)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
@@ -87,7 +87,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa_01) = {
     EVT_WAIT(15 * DT)
     EVT_THREAD
         EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20AD, SOUND_SPACE_DEFAULT)
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_WATER_SPLASH, SOUND_SPACE_DEFAULT)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_SUB(LVar0, 5)
         EVT_PLAY_EFFECT(EFFECT_WATER_SPLASH, 2, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30)

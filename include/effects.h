@@ -1799,37 +1799,44 @@ typedef struct Effect65FXData {
     /* 0x2AC */ f32 pathLength[30];
 } Effect65FXData; // size = 0x324
 
+#define TUBBA_MINI_HEART_COUNT 25
+
+enum HeartSwarmFXTypes {
+    FX_HEART_SWARM_HIT      = 0,
+    FX_HEART_SWARM_MISS     = 1,
+};
+
 typedef struct TubbaHeartAttackFXData {
-    /* 0x000 */ s32 unk_00;
-    /* 0x004 */ f32 unk_04;
-    /* 0x008 */ f32 unk_08;
-    /* 0x00C */ f32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ s32 unk_14;
-    /* 0x018 */ s32 unk_18;
-    /* 0x01C */ s32 unk_1C;
-    /* 0x020 */ s32 unk_20;
-    /* 0x024 */ s32 unk_24;
-    /* 0x028 */ f32 unk_28;
-    /* 0x02C */ f32 unk_2C[25];
-    /* 0x090 */ f32 unk_90[25];
-    /* 0x0F4 */ f32 unk_F4[25];
-    /* 0x158 */ f32 unk_158[25];
-    /* 0x1BC */ f32 unk_1BC[25];
-    /* 0x220 */ f32 unk_220[25];
-    /* 0x284 */ f32 unk_284[25];
-    /* 0x2E8 */ f32 unk_2E8[25];
-    /* 0x34C */ f32 unk_34C[25];
-    /* 0x3B0 */ f32 unk_3B0[25];
-    /* 0x414 */ f32 unk_414[25];
-    /* 0x478 */ f32 unk_478[25];
-    /* 0x4DC */ f32 unk_4DC[25];
-    /* 0x540 */ f32 unk_540[25];
-    /* 0x5A4 */ f32 unk_5A4[25];
-    /* 0x608 */ f32 unk_608[25];
-    /* 0x66C */ s32 unk_66C[25];
-    /* 0x6D0 */ s32 unk_6D0[25];
-    /* 0x734 */ s32 unk_734[25];
+    /* 0x000 */ s32 type;
+    /* 0x004 */ f32 centerX;
+    /* 0x008 */ f32 centerY;
+    /* 0x00C */ f32 centerZ;
+    /* 0x010 */ s32 timeLeft;
+    /* 0x014 */ s32 lifetime;
+    /* 0x018 */ s32 primR;
+    /* 0x01C */ s32 primG;
+    /* 0x020 */ s32 primB;
+    /* 0x024 */ s32 primA;
+    /* 0x028 */ f32 overallScale;
+    /* 0x02C */ f32 posX[TUBBA_MINI_HEART_COUNT];
+    /* 0x090 */ f32 posY[TUBBA_MINI_HEART_COUNT];
+    /* 0x0F4 */ f32 posZ[TUBBA_MINI_HEART_COUNT];
+    /* 0x158 */ f32 initialX[TUBBA_MINI_HEART_COUNT];
+    /* 0x1BC */ f32 initialY[TUBBA_MINI_HEART_COUNT];
+    /* 0x220 */ f32 initialZ[TUBBA_MINI_HEART_COUNT];
+    /* 0x284 */ f32 finalX[TUBBA_MINI_HEART_COUNT];
+    /* 0x2E8 */ f32 finalY[TUBBA_MINI_HEART_COUNT];
+    /* 0x34C */ f32 finalZ[TUBBA_MINI_HEART_COUNT];
+    /* 0x3B0 */ f32 scaleX[TUBBA_MINI_HEART_COUNT];
+    /* 0x414 */ f32 scaleY[TUBBA_MINI_HEART_COUNT];
+    /* 0x478 */ f32 rotZ[TUBBA_MINI_HEART_COUNT];
+    /* 0x4DC */ f32 rotXY[TUBBA_MINI_HEART_COUNT];
+    /* 0x540 */ f32 shrinkVelX[TUBBA_MINI_HEART_COUNT];
+    /* 0x5A4 */ f32 shrinkVelY[TUBBA_MINI_HEART_COUNT];
+    /* 0x608 */ f32 shrinkVelZ[TUBBA_MINI_HEART_COUNT];
+    /* 0x66C */ s32 appearDelay[TUBBA_MINI_HEART_COUNT];
+    /* 0x6D0 */ s32 state[TUBBA_MINI_HEART_COUNT];
+    /* 0x734 */ s32 stateTime[TUBBA_MINI_HEART_COUNT];
 } TubbaHeartAttackFXData; // size = 0x798
 
 #define MAX_WHIRLWIND_SEGMENTS 8
@@ -2313,7 +2320,7 @@ typedef struct BreakingJunkFXData {
 enum {
     FX_BUFF_DATA_WATER_BLOCK    = 0,
     FX_BUFF_DATA_CLOUD_NINE     = 1,
-    FX_BUFF_DATA_TURBO_CHARGE   = 2
+    FX_BUFF_DATA_TURBO_CHARGE   = 2,
 };
 
 typedef struct BuffData {
