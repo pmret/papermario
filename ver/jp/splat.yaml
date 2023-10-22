@@ -3265,6 +3265,11 @@ segments:
 
   - [ 0xE28FA0, bin ]
 
+  - start: 0xFC0000
+    type: pm_sbn
+    name: audio
+  - [ 0x1A01AF0, bin ]
+
   - start: 0x1A40000
     align: 8
     type: pm_sprites
