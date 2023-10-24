@@ -31,12 +31,12 @@ def align(misaligned: int):
     return (misaligned + 0xF) & (~0xF)
 
 
-
 def convert_fstring_to_proper_endianness(le: bool, fstring: str) -> str:
     if le:
-        return fstring.replace(">","<")
+        return fstring.replace(">", "<")
     else:
         return fstring
+
 
 class SBN:
     files: List["SBNFile"]
