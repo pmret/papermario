@@ -25,6 +25,7 @@ options:
   undefined_syms_auto_path: ver/ique/undefined_syms_auto.txt
   symbol_name_format: IQUE_$VRAM
   symbol_name_format_no_rom: IQUE_$VRAM_$SEG
+  ld_use_follows: False
 asset_stack:
   - ique
 segments:
@@ -394,10 +395,10 @@ segments:
     - [0x74570, c, npc_collision]
     - [0x76040, c, 77480]
     - [0x7A000, c, 7B440]
-    - [0x7A720, c, 7bb60_len_41b0]
+    - [0x7A720, c, 7BB60]
     - [0x7D590, c, 7E9D0]
-    - [0x7E8D0, c, 7fd10_len_b40]
-    - [0x7F410, c, 80850_len_3060]
+    - [0x7E8D0, c, world/menus]
+    - [0x7F410, c, inventory]
     - [0x82470, c, world/actions]
     - [0x82470, c, world/partners]
     - [0x87D70, hasm, bss2_2]
@@ -792,6 +793,7 @@ segments:
       - [0x9C620, rgba32,  ui/stat_flower, 16, 16]
       - [0x9CA20]
     - [0xA14F0, .data, 891b0_len_fb0]
+    - [auto, .data, 8a160_len_700]
     - start: 0xA1520
       type: .data
       name: 8a160_len_700
@@ -1029,19 +1031,101 @@ segments:
 
   - [0x262230, bin]
 
-  # TODO: split these
-  - { start: 0x35FA70, type: bin, vram: 0x802BD100, name: world_partner_goombario }
-  - { start: 0x3608A0, type: bin, vram: 0x802BD100, name: world_partner_bombette }
-  - { start: 0x3620C0, type: bin, vram: 0x802BD100, name: world_partner_parakarry }
-  - { start: 0x363B70, type: bin, vram: 0x802BD100, name: world_partner_kooper }
-  - { start: 0x3656C0, type: bin, vram: 0x802BD100, name: world_partner_watt }
-  - { start: 0x3668C0, type: bin, vram: 0x802BD100, name: world_partner_sushie }
-  - { start: 0x3696A0, type: bin, vram: 0x802BD100, name: world_partner_lakilester }
-  - { start: 0x36C4A0, type: bin, vram: 0x802BD100, name: world_partner_bow }
-  - { start: 0x36D460, type: bin, vram: 0x802BD100, name: world_partner_goompa }
-  - { start: 0x36D960, type: bin, vram: 0x802BD100, name: world_partner_goombaria }
-  - { start: 0x36DAC0, type: bin, vram: 0x802BD100, name: world_partner_twink }
-  - { start: 0x36DC20, type: bin, vram: 0x802C0000, name: world_use_item }
+  - type: code
+    dir: world/partner
+    name: world_partner_goombario
+    start: 0x35FA70
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, goombario]
+  - type: code
+    dir: world/partner
+    name: world_partner_bombette
+    start: 0x3608A0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, bombette]
+  - type: code
+    dir: world/partner
+    name: world_partner_parakarry
+    start: 0x3620C0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, parakarry]
+  - type: code
+    dir: world/partner
+    name: world_partner_kooper
+    start: 0x363B70
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, kooper]
+  - type: code
+    dir: world/partner
+    name: world_partner_watt
+    start: 0x3656C0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, watt]
+  - type: code
+    dir: world/partner
+    name: world_partner_sushie
+    start: 0x3668C0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, sushie]
+  - type: code
+    dir: world/partner
+    name: world_partner_lakilester
+    start: 0x3696A0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, lakilester]
+  - type: code
+    dir: world/partner
+    name: world_partner_bow
+    start: 0x36C4A0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, bow]
+  - type: code
+    dir: world/partner
+    name: world_partner_goompa
+    start: 0x36D460
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, goompa]
+  - type: code
+    dir: world/partner
+    name: world_partner_goombaria
+    start: 0x36D960
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, goombaria]
+  - type: code
+    dir: world/partner
+    name: world_partner_twink
+    start: 0x36DAC0
+    vram: 0x802BD100
+    vram_of_symbol: entity_data_vram_end
+    subsegments:
+    - [auto, c, twink]
+  - type: code
+    start: 0x36DC20
+    name: world_use_item
+    vram: 0x802C0000
+    vram_of_symbol: world_partner_vram_end
+    subsegments:
+    - [auto, c, world_use_item]
 
   ###############
   ### Effects ###
@@ -2094,6 +2178,13 @@ segments:
     subsegments:
       - [0x8298b0, bin]
       - [0x82fdd0]
+  - name: texture_memory
+    type: code
+    start: 0x82FDD0
+    vram: 0x8028E000
+    vram_of_symbol: world_battle_vram_end
+    subsegments:
+    - [auto, c, texture_memory]
 
 ############
 ### Maps ###
@@ -3805,34 +3896,234 @@ segments:
     start: 0xE66F40
     vram: 0x80240000
     subsegments:
-    - [0xE66F40, c, gv_01_0_header]
-    - [0xE66F40, c, gv_01_1_main]
-    - [0xE68B50]
-
-  # TODO: split these
-  - [ 0xE68B50, bin, inspect_icon ]
-  - [ 0xE698F0, bin, speech_bubble ]
-  - [ 0xE6A2B0, bin, pulse_stone ]
-  - [ 0xE6AFF0, bin, i_spy ]
-  - [ 0xE6BCA0, bin, world_action_idle ]
-  - [ 0xE6C120, bin, world_action_walk ]
-  - [ 0xE6CA80, bin, world_action_jump ]
-  - [ 0xE6D010, bin, world_action_step_up ]
-  - [ 0xE6D360, bin, world_action_land ]
-  - [ 0xE6D910, bin, world_action_hammer ]
-  - [ 0xE6E7A0, bin, world_action_spin ]
-  - [ 0xE6F150, bin, world_action_tornado_jump ]
-  - [ 0xE6F820, bin, world_action_spin_jump ]
-  - [ 0xE6FF50, bin, world_action_slide ]
-  - [ 0xE706D0, bin, world_action_hit_fire ]
-  - [ 0xE70980, bin, world_action_hit_lava ]
-  - [ 0xE71230, bin, world_action_knockback ]
-  - [ 0xE71470, bin, world_action_misc ]
-  - [ 0xE71BE0, bin, world_action_use_munchlesia ]
-  - [ 0xE71EB0, bin, world_action_use_spinning_flower ]
-  - [ 0xE72D80, bin, world_action_use_tweester ]
-  - [ 0xE730F0, bin, world_action_sneaky_parasol ]
-  - [ 0xE73F70, bin ]
+    - [auto, c, gv_01_0_header]
+    - [auto, c, gv_01_1_main]
+  - name: heaps2
+    type: code
+    start: 0xE68B50
+    vram: 0x80267FF0
+    vram_of_symbol: map_vram_end
+    subsegments:
+    - [auto, c, heaps2]
+  - type: code
+    start: 0xE68B50
+    name: inspect_icon
+    vram: 0x802B7000
+    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, inspect_icon]
+    - start: 0xE69570
+      type: .data
+      name: inspect_icon
+      subsegments:
+      - [0xE69570, ci4, inspect_icon, 32, 32]
+      - [0xE69770, palette, inspect_icon]
+      - [0xE69790, gfx, inspect_icon]
+      - [0xE69808]
+    - [0xE69810]
+  - type: code
+    start: 0xE698F0
+    name: speech_bubble
+    vram: 0x802B7000
+    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, speech_bubble]
+    - start: 0xE6A000
+      type: .data
+      name: speech_bubble
+      subsegments:
+      - [0xE6A000, ci4, speech_bubble, 32, 32]
+      - [0xE6A200, palette, speech_bubble]
+      - [0xE6A220, gfx, speech_bubble]
+      - [0xE6A298]
+    - [0xE6A2A0]
+  - type: code
+    start: 0xE6A2B0
+    name: pulse_stone
+    vram: 0x802B7000
+    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, pulse_stone]
+    - start: 0xE6A8F0
+      type: .data
+      name: pulse_stone
+      subsegments:
+      - [0xE6A8F0, ci4, pulse_stone_icon, 56, 56]
+      - [0xE6AF10, palette, pulse_stone_icon]
+      - [0xE6AF30, palette, pulse_stone_icon.flash]
+      - [0xE6AF50, gfx, pulse_stone_icon]
+      - [0xE6AFC8]
+    - [0xE6AFD0]
+  - type: code
+    start: 0xE6AFF0
+    name: i_spy
+    vram: 0x802B7000
+    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, i_spy]
+    - start: 0xE6B570
+      type: .data
+      name: i_spy
+      subsegments:
+      - [0xE6B570, ci4, ispy_icon, 56, 56]
+      - [0xE6BB90, palette, ispy_icon]
+      - [0xE6BBB0, palette, ispy_icon.2]
+      - [0xE6BBD0, palette, ispy_icon.3]
+      - [0xE6BBF0, gfx, ispy_icon]
+      - [0xE6BC68]
+    - [0xE6BC70]
+  - type: code
+    name: model_clear_render_tasks
+    start: 0xE6BCA0
+    vram: 0x802B7E00
+    vram_of_symbol: world_misc_vram_end
+    subsegments:
+    - [auto, c, model_clear_render_tasks]
+  - type: code
+    name: world_action_idle
+    dir: world/action
+    start: 0xE6BCA0
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, idle]
+  - type: code
+    name: world_action_walk
+    dir: world/action
+    start: 0xE6C120
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, walk]
+  - type: code
+    name: world_action_jump
+    dir: world/action
+    start: 0xE6CA80
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, jump]
+  - type: code
+    name: world_action_step_up
+    dir: world/action
+    start: 0xE6D010
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, step_up]
+  - type: code
+    name: world_action_land
+    dir: world/action
+    start: 0xE6D360
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, land]
+  - type: code
+    name: world_action_hammer
+    dir: world/action
+    start: 0xE6D910
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hammer]
+  - type: code
+    name: world_action_spin
+    dir: world/action
+    start: 0xE6E7A0
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, spin]
+  - type: code
+    name: world_action_tornado_jump
+    dir: world/action
+    start: 0xE6F150
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, tornado_jump]
+  - type: code
+    name: world_action_spin_jump
+    dir: world/action
+    start: 0xE6F820
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, spin_jump]
+  - type: code
+    name: world_action_slide
+    dir: world/action
+    start: 0xE6FF50
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, slide]
+  - type: code
+    name: world_action_hit_fire
+    dir: world/action
+    start: 0xE706D0
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hit_fire]
+  - type: code
+    name: world_action_hit_lava
+    dir: world/action
+    start: 0xE70980
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hit_lava]
+  - type: code
+    name: world_action_knockback
+    dir: world/action
+    start: 0xE71230
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, knockback]
+  - type: code
+    name: world_action_misc
+    dir: world/action
+    start: 0xE71470
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, misc]
+  - type: code
+    name: world_action_use_munchlesia
+    dir: world/action
+    start: 0xE71BE0
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_munchlesia]
+  - type: code
+    name: world_action_use_spinning_flower
+    dir: world/action
+    start: 0xE71EB0
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_spinning_flower]
+  - type: code
+    name: world_action_use_tweester
+    dir: world/action
+    start: 0xE72D80
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_tweester]
+  - type: code
+    name: world_action_sneaky_parasol
+    dir: world/action
+    start: 0xE730F0
+    vram: 0x802B6000
+    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, sneaky_parasol]
+  - [0xE73F70, bin]
 
   - start: 0x1943000
     align: 8
