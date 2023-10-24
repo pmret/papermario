@@ -31,6 +31,13 @@ def align(misaligned: int):
     return (misaligned + 0xF) & (~0xF)
 
 
+
+def convert_fstring_to_proper_endianness(le: bool, fstring: str) -> str:
+    if le:
+        return fstring.replace(">","<")
+    else:
+        return fstring
+
 class SBN:
     files: List["SBNFile"]
     unknown_data: bytes
@@ -71,7 +78,9 @@ class SBN:
 
         return len(data)
 
-    def encode(self) -> bytes:
+    def encode(self, is_le: bool = false) -> bytes:
+        convert_fstring = functools.partial(convert_fstring_to_proper_endianness, is_le)
+
         num_bytes = 0
         num_bytes += 0x40  # header
 
@@ -121,7 +130,7 @@ class SBN:
             INIToffset=init_header_offset,
         )
 
-        struct.pack_into(SBNHeader.fstring, data, 0, *header)
+        struct.pack_into(convert_fstring(SBNHeader.fstring), data, 0, *header)
 
         # unknown data
         for offset, byte in enumerate(self.unknown_data):
@@ -149,7 +158,7 @@ class SBN:
             entry = SBNFileEntry(offset=current_file_offset, fmt=format, size=file.fakesize)
 
             struct.pack_into(
-                SBNFileEntry.fstring,
+                convert_fstring(SBNFileEntry.fstring),
                 data,
                 entries_offset + index * SBNFileEntry.length,
                 *entry,
@@ -171,29 +180,29 @@ class SBN:
             shortsSize=mseq_end - mseq_offset,
         )
 
-        struct.pack_into(INITHeader.fstring, data, init_header_offset, *initHeader)
+        struct.pack_into(convert_fstring(INITHeader.fstring), data, init_header_offset, *initHeader)
 
         current_bank_offset = bank_entry_offset
         for bank in self.init.bk_entries:
-            struct.pack_into(BufferEntry.fstring, data, current_bank_offset, *bank)
+            struct.pack_into(convert_fstring(BufferEntry.fstring), data, current_bank_offset, *bank)
             current_bank_offset += BufferEntry.length
 
         sentinel = BufferEntry(0xFFFF, 0x00, 0x00)
-        struct.pack_into(BufferEntry.fstring, data, current_bank_offset, *sentinel)
+        struct.pack_into(convert_fstring(BufferEntry.fstring), data, current_bank_offset, *sentinel)
 
         current_song_offset = song_entry_offset
         for song in self.init.song_entries:
-            struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *song)
+            struct.pack_into(convert_fstring(InitSongEntry.fstring), data, current_song_offset, *song)
             current_song_offset += InitSongEntry.length
 
         sentinel2 = InitSongEntry(0xFFFF, 0x00, 0x00, 0x00)
-        struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *sentinel2)
+        struct.pack_into(convert_fstring(InitSongEntry.fstring), data, current_song_offset, *sentinel2)
 
         current_mseq_offset = mseq_offset
         for mseq in self.init.mseq_entries:
-            struct.pack_into(">H", data, current_mseq_offset, mseq)
+            struct.pack_into(convert_fstring(">H"), data, current_mseq_offset, mseq)
             current_mseq_offset += 2
-        struct.pack_into(">H", data, current_mseq_offset, 0xFFFF)
+        struct.pack_into(convert_fstring(">H"), data, current_mseq_offset, 0xFFFF)
 
         return bytes(data)
 
