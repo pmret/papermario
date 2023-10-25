@@ -789,7 +789,6 @@ resolve_npc = 0x802cdac0;
 resume_all_group = 0x802c4648;
 resume_all_script = 0x802c448c;
 SetNpcYaw = 0x802cea84;
-AuHeapBase = 0x801aa000;
 func_802C3EE4 = 0x802c3ee4;
 get_script_by_id = 0x802c47a8;
 kill_script = 0x802c3f3c;
@@ -797,8 +796,6 @@ kill_script_by_ID = 0x802c40ac;
 
 
 
-D_801A6000 = 0x801a6000;
-D_80197000 = 0x80197000;
 
 D_A4040010 = 0xA4040010;
 D_A4300000 = 0xA4300000;
@@ -813,12 +810,10 @@ D_A4600048 = 0xA4600048;
 D_A4800018 = 0xA4800018;
 
 
-D_80200000 = 0x80200000;
 
 gFrameBuf0 = 0x8038f800;
 gFrameBuf1 = 0x803b5000;
 gFrameBuf2 = 0x803da800;
-gMapShapeData = 0x80210000;
 
 
 rspbootTextStart = rspboot_bin;
@@ -961,7 +956,6 @@ charset_postcard_png = 0x00054fa8;
 ui_msg_star_silhouette_png = 0x802ed8d0;
 ui_msg_rewind_arrow_png = 0x802ed550;
 ui_msg_rewind_arrow_pal = 0x802ed670;
-BattleEntityHeapBottom = 0x801A7000;
 entity_jan_iwa_ROM_START = 0x00e76170;
 entity_sbk_omo_ROM_START = 0x00e78190;
 entity_jan_iwa_ROM_END = 0x00e78190;
@@ -1042,3 +1036,5 @@ RemoveItemEntity = 0x802D6FCC;
 ShowRecoveryShimmer = 0x802D75D8;
 ShowStartRecoveryShimmer = 0x802D7520;
 SpeakToPlayer = 0x802D02B0;
+
+sprite_shading_profiles_data_ROM_START = (sprite_shading_profiles_ROM_START + 0x1d0);

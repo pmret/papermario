@@ -39,21 +39,21 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subsegments:
-    - [0x1000, hasm, bss]
-    - [0x1000, hasm, entry_point]
-    - [0x1060, c, main_pre]
-    - [0x1060, c, main]
-    - [0x1810, c, main_loop]
-    - [0x1B40, c, background_gfx]
-    - [0x38C0, c, input]
-    - [0x3FB0, c, rumble]
-    - [0x40C0, c, 43F0]
-    - [0x5CD0, c, heap]
-    - [0x5F10, c, fio]
-    - [0x6B10, c, curtains]
-    - [0x7010, c, crash_screen]
-    - [0x7B10, c, os/nusys/nugfxtaskmgr, -fforce-addr]
-    - [0x7EB0, c, cam_main]
+    - [auto, hasm, bss]
+    - [auto, hasm, entry_point]
+    - [auto, c, main_pre]
+    - [auto, c, main]
+    - [auto, c, main_loop]
+    - [auto, c, background_gfx]
+    - [auto, c, input]
+    - [auto, c, rumble]
+    - [auto, c, 43F0]
+    - [auto, c, heap]
+    - [auto, c, fio]
+    - [auto, c, curtains]
+    - [auto, c, crash_screen]
+    - [auto, c, os/nusys/nugfxtaskmgr, -fforce-addr]
+    - [auto, c, cam_main]
     - [auto, c, cam_mode_2]
     - [auto, c, cam_mode_1]
     - [auto, c, cam_mode_0]
@@ -62,248 +62,247 @@ segments:
     - [auto, c, cam_mode_5]
     - [auto, c, cam_mode_zone_interp]
     - [auto, c, cam_math]
-    - [0xDFA0, c, game_modes]
-    - [0xDFF0, c, state_startup]
-    - [0xE280, c, startup_screen_fading]
-    - [0xE380, c, state_battle]
-    - [0xE920, c, state_logos]
-    - [0xF3F0, c, state_pause]
-    - [0xFAB0, c, state_file_select]
-    - [0x107E0, c, state_world]
-    - [0x108A0, c, 111f0_len_860]
-    - [0x11100, c, state_intro]
-    - [0x118A0, c, state_title_screen]
-    - [0x12B30, c, state_demo]
-    - [0x12F20, c, npc]
-    - [0x198A0, c, encounter]
-    - [0x1EC30, c, encounter_api]
-    - [0x20570, c, status_icons]
-    - [0x22D30, c, 23680]
-    - [0x251A0, c, 25AF0]
-    - [0x255B0, c, audio/25f00_len_940]
-    - [0x25F00, c, audio/sfx_player]
-    - [0x27FD0, c, audio/28910_len_5090]
-    - [0x2B650, c, audio/2BF90]
-    - [0x2D060, c, audio/2d9a0_len_890]
-    - [0x2D8F0, c, audio/2e230_len_2190]
-    - [0x2FA80, c, audio/303c0_len_3e10]
-    - [0x2FB10, c, audio/30450]
-    - [0x30D10, c, audio/31650]
-    - [0x32B10, c, audio/33450]
-    - [0x33890, c, audio/tables]
-    - [0x33890, c, audio/reverb]
-    - [0x34740, c, 5B320]
-    - [0x34740, c, effects]
-    - [0x35180, c, world/world]
-    - [0x35950, c, collision]
-    - [0x385B0, c, 38F00]
-    - [0x388C0, c, 39210_len_aa0]
-    - [0x39360, c, os/nusys/nuboot]
-    - [0x39460, c, os/nusys/nusched]
-    - [0x39D00, c, os/nusys/nugfxfuncset]
-    - [0x39D40, c, os/nusys/nugfxprenmifuncset]
-    - [0x39D80, c, os/nusys/nugfxtaskallendwait]
-    - [0x39DA0, c, os/nusys/nugfxsetcfb]
-    - [0x39EB0, c, os/nusys/nugfxdisplayoff]
-    - [0x39EE0, c, os/nusys/nugfxdisplayon]
-    - [0x39F00, c, os/nusys/nupiinit]
-    - [0x39F40, c, os/nusys/nupireadrom]
-    - [0x3A010, c, os/nusys/nugfxinit]
-    - [0x3A0C0, c, os/nusys/nucontinit]
-    - [0x3A100, c, os/nusys/nucontdataget]
-    - [0x3A160, c, os/nusys/nucontpakmgr]
-    - [0x3A3D0, c, os/nusys/nucontrmbmgr]
-    - [0x3A940, c, os/nusys/nucontrmbstart]
-    - [0x3A9A0, c, os/nusys/nucontrmbcheck]
-    - [0x3AA40, c, os/nusys/nucontrmbmodeset]
-    - [0x3AB50, c, os/nusys/nucontrmbforcestop]
-    - [0x3AB70, c, os/nusys/nucontrmbforcestopend]
-    - [0x3AB90, c, os/nusys/nupireadromoverlay]
-    - [0x3ACA0, c, os/nusys/nugfxthread]
-    - [0x3ADC0, c, os/nusys/nugfxswapcfbfuncset]
-    - [0x3AE00, c, os/nusys/nugfxswapcfb]
-    - [0x3AE20, c, os/nusys/nugfxretracewait]
-    - [0x3AEA0, c, os/nusys/nusimgr]
-    - [0x3B1C0, c, os/nusys/nusicallbackadd]
-    - [0x3B260, c, os/nusys/nusicallbackremove]
-    - [0x3B2E0, c, os/nusys/nucontmgr]
-    - [0x3B690, c, os/nusys/nucontdatalock]
-    - [0x3B6F0, c, os/nusys/nucontqueryread]
-
-    - [0x3B710, c, os/aigetlength, egcs -O2 -mips2]
-    - [0x3B720, c, os/aigetstatus, egcs -O2 -mips2]
-    - [0x3B730, c, os/aisetfrequency, egcs -O2 -mips2]
-    - [0x3B830, c, os/aisetnextbuf, egcs -O2 -mips2]
-    - [0x3B8D0, hasm, os/osInvalDCache]
-    - [0x3B980, hasm, os/osInvalICache]
-    - [0x3BA00, hasm, os/osWritebackDCache]
-    - [0x3BA80, hasm, os/osWritebackDCacheAll]
-    - [0x3BAB0, c, os/contquery, egcs -O2 -mips2]
-    - [0x3BB60, c, os/contreaddata, egcs -O2 -mips2]
-    - [0x3BDE0, c, os/controller, egcs -O2 -mips2]
-    - [0x3C1B0, c, os/virtualtophysical, egcs -O0 -mips2]
-    - [0x3C280, c, os/sqrtf, -ffast-math]
-    - [0x3C290, c, os/coss, egcs -O2 -mips2]
-    - [0x3C2B0, c, os/frustum, egcs -O2 -mips2]
-    - [0x3C420, c, os/guLookAt, egcs -O2 -mips2]
-    - [0x3C750, c, os/lookathil, egcs -O2 -mips2]
-    - [0x3D020, c, os/lookatref, egcs -O2 -mips2]
-    - [0x3D4F0, c, os/guOrtho, egcs -O2 -mips2]
-    - [0x3D660, c, os/perspective, egcs -O2 -mips2]
-    - [0x3D860, c, os/position, egcs -O2 -mips2]
-    - [0x3DA40, c, os/rotateRPY, egcs -O2 -mips2]
-    - [0x3DBC0, c, os/sins, egcs -O2 -mips2]
-    - [0x3DC10, hasm, os/bcopy]
-    - [0x3DF30, hasm, os/bzero]
-    - [0x3DFD0, c, os/string, egcs -O2 -mips2]
-    - [0x3E050, c, os/xprintf, egcs -O2 -mips2]
-    - [0x3EA30, c, os/sprintf, egcs -O2 -mips2]
-    - [0x3EAC0, c, os/createmesgqueue, egcs -O0 -mips2]
-    - [0x3EB30, c, os/recvmesg, egcs -O0 -mips2]
-    - [0x3ECA0, c, os/sendmesg, egcs -O0 -mips2]
-    - [0x3EE10, c, os/seteventmesg, egcs -O0 -mips2]
-    - [0x3EEE0, c, os/_getcount, egcs -O0 -mips3 -mgp64 -mfp64]
-    - [0x3EFE0, c, os/sptask, egcs -O2 -mips2]
-    - [0x3F1F0, c, os/sptaskyield, egcs -O2 -mips2]
-    - [0x3F210, c, os/sptaskyielded, egcs -O2 -mips2]
-    - [0x3F260, c, os/sirawdma, egcs -O2 -mips2]
-    - [0x3F340, c, os/siacs, egcs -O2 -mips2]
-    - [0x3F400, c, os/createthread, egcs -O0 -mips2]
-    - [0x3F570, c, os/setthreadpri, egcs -O0 -mips2]
-    - [0x3F680, c, os/startthread, egcs -O0 -mips2]
-    - [0x3F810, c, os/stopthread, egcs -O0 -mips2]
-    - [0x3F900, c, os/thread, egcs -O0 -mips2]
-    - [0x3F960, c, os/getactivequeue, egcs -O0 -mips2]
-    - [0x3F990, c, os/gettime, egcs -O0 -mips2]
-    - [0x3FA40, c, os/settime, egcs -O0 -mips2]
-    - [0x3FA80, c, os/settimer, egcs -O0 -mips2]
-    - [0x3FC40, c, os/timerintr, egcs -O0 -mips2]
-    - [0x40160, hasm, os/maptlb]
-    - [0x40220, hasm, os/probetlb]
-    - [0x402E0, hasm, os/unmaptlb]
-    - [0x40320, hasm, os/unmaptlball]
-    - [0x40370, c, os/vigetcurrframebuf, egcs -O2 -mips2]
-    - [0x403B0, c, os/vigetnextframebuf, egcs -O2 -mips2]
-    - [0x403F0, c, os/vigetmode, egcs -O2 -mips2]
-    - [0x40430, c, os/vimgr, egcs -O2 -mips2]
-    - [0x40730, c, os/vitbl, egcs -O2 -mips2]
-    - [0x40730, c, os/vimodentsclan1, egcs -O2 -mips2]
-    - [0x40730, c, os/vimodempallan1, egcs -O2 -mips2]
-    - [0x40730, c, os/visetevent, egcs -O2 -mips2]
-    - [0x40790, c, os/visetmode, egcs -O2 -mips2]
-    - [0x40810, c, os/visetspecial, egcs -O2 -mips2]
-    - [0x40990, c, os/visetyscale, egcs -O2 -mips2]
-    - [0x409E0, c, os/viswapbuf, egcs -O2 -mips2]
-    - [0x40A30, c, os/viswapcontext, egcs -O2 -mips2]
-    - [0x40D40, c, os/viblack, egcs -O2 -mips2]
-    - [0x40DA0, c, os/virepeatline, egcs -O2 -mips2]
-    - [0x40E00, hasm, os/guMtxIdent]
-    - [0x40E60, hasm, os/guMtxIdentF]
-    - [0x40EC0, hasm, os/guMtxF2L]
-    - [0x40F40, hasm, os/guMtxL2F]
-    - [0x40FC0, hasm, os/guMtxCatF]
-    - [0x410C0, hasm, os/guScale]
-    - [0x41160, hasm, os/guScaleF]
-    - [0x411C0, hasm, os/guTranslate]
-    - [0x412A0, hasm, os/guTranslateF]
-    - [0x412F0, c, os/guMtxCat, egcs -O2 -mips2]
-    - [0x41370, c, os/guMtxXFML, egcs -O2 -mips2]
-    - [0x41400, c, os/guMtxXFMF, egcs -O2 -mips2]
-    - [0x414A0, c, os/guRotate, egcs -O2 -mips2]
-    - [0x41630, hasm, os/exceptasm]
-    - [0x42100, hasm, os/interrupt]
-    - [0x42190, hasm, os/setintmask]
-    - [0x42240, c, os/pimgr, egcs -O2 -mips2]
-    - [0x423C0, c, os/epirawdma, egcs -O2 -mips2]
-    - [0x42780, c, os/epiwrite, egcs -O2 -mips2]
-    - [0x427E0, c, os/epiread, egcs -O2 -mips2]
-    - [0x42840, c, os/epidma, egcs -O2 -mips2]
-    - [0x428E0, c, os/epilinkhandle, egcs -O2 -mips2]
-    - [0x42930, c, os/cartrominit, egcs -O2 -mips2]
-    - [0x42A90, c, os/devmgr, egcs -O2 -mips2]
-    - [0x42F30, c, os/piacs, egcs -O2 -mips2]
-    - [0x42FF0, c, os/flashinit, egcs -O2 -mips2]
-    - [0x430A0, c, os/flashsectorerase, egcs -O2 -mips2]
-    - [0x430F0, c, os/flashwritebuffer, egcs -O2 -mips2]
-    - [0x43150, c, os/flashwritearray, egcs -O2 -mips2]
-    - [0x431B0, c, os/flashreadarray, egcs -O2 -mips2]
-    - [0x43240, hasm, os/skapi]
-    - [0x43490, c, os/strcmp, egcs -O2 -mips2]
-    - [0x434E0, c, os/common, egcs -O2 -mips2]
-    - [0x435C0, c, os/motor, egcs -O2 -mips2]
-    - [0x435D0, c, os/pfsallocatefile, egcs -O2 -mips2]
-    - [0x43A00, c, os/pfsdeletefile, egcs -O2 -mips2]
-    - [0x43C00, c, os/pfsreadwritefile, egcs -O2 -mips2]
-    - [0x43FD0, c, os/pfsfilestate, egcs -O2 -mips2]
-    - [0x44170, c, os/pfssearchfile, egcs -O2 -mips2]
-    - [0x44310, c, os/pfsfreeblocks, egcs -O2 -mips2]
-    - [0x44410, c, os/pfsnumfiles, egcs -O2 -mips2]
-    - [0x44510, c, os/pfsinitpak, egcs -O2 -mips2]
-    - [0x44800, c, os/pfsrepairid, egcs -O2 -mips2]
-    - [0x44860, c, os/pfsgetstatus, egcs -O2 -mips2]
-    - [0x449A0, c, os/pfsselectbank, egcs -O2 -mips2]
-    - [0x44A10, c, os/contpfs, egcs -O2 -mips2]
-    - [0x45360, c, os/contramread, egcs -O2 -mips2]
-    - [0x45420, c, os/contramwrite, egcs -O2 -mips2]
-    - [0x45510, hasm, os/parameters]
-    - [0x45580, c, os/afterprenmi, egcs -O0 -mips2]
-    - [0x455C0, c, os/initialize, egcs -O0 -mips2]
-    - [0x45B40, c, os/ai, egcs -O2 -mips2]
-    - [0x45B70, hasm, os/bcmp]
-    - [0x45C80, c, os/xlitob, egcs -O2 -mips2]
-    - [0x45EB0, c, os/xldtob, egcs -O2 -mips2]
-    - [0x468B0, c, os/jammesg, egcs -O0 -mips2]
-    - [0x46A30, hasm, os/getcause]
-    - [0x46A40, hasm, os/getsr]
-    - [0x46A50, hasm, os/setfpccsr]
-    - [0x46A60, hasm, os/setsr]
-    - [0x46A70, hasm, os/setwatchlo]
-    - [0x46A80, c, os/_setcompare, egcs -O0 -mips3 -mgp64 -mfp64]
-    - [0x46B30, c, os/sp, egcs -O2 -mips2]
-    - [0x46B60, c, os/spgetstat, egcs -O2 -mips2]
-    - [0x46B70, c, os/spsetstat, egcs -O2 -mips2]
-    - [0x46B80, c, os/spsetpc, egcs -O2 -mips2]
-    - [0x46BB0, c, os/sprawdma, egcs -O2 -mips2]
-    - [0x46C40, c, os/sirawread, egcs -O2 -mips2]
-    - [0x46C90, c, os/sirawwrite, egcs -O2 -mips2]
-    - [0x46CE0, c, os/destroythread, egcs -O0 -mips2]
-    - [0x46E10, c, os/getthreadpri, egcs -O0 -mips2]
-    - [0x46E60, c, os/yieldthread, egcs -O0 -mips2]
-    - [0x46EC0, hasm, os/maptlbrdb]
-    - [0x46F20, c, os/vi, egcs -O2 -mips2]
-    - [0x47020, c, os/vigetcurrcontext, egcs -O2 -mips2]
-    - [0x47040, c, os/vimodepallan1, egcs -O2 -mips2]
-    - [0x47040, hasm, os/padding]
-    - [0x47040, hasm, os/guNormalize]
-    - [0x470A0, c, os/setglobalintmask, egcs -O0 -mips2]
-    - [0x47100, c, os/resetglobalintmask, egcs -O0 -mips2]
-    - [0x47170, c, os/pirawdma, egcs -O2 -mips2]
-    - [0x47250, c, os/pigetcmdq, egcs -O2 -mips2]
-    - [0x47280, c, os/epirawread, egcs -O2 -mips2]
-    - [0x47400, c, os/epirawwrite, egcs -O2 -mips2]
-    - [0x47580, c, os/pfschecker, egcs -O2 -mips2]
-    - [0x47CA0, c, os/pfsisplug, egcs -O2 -mips2]
-    - [0x48020, c, os/ldiv, egcs -O2 -mips2]
-    - [0x481E0, c, os/si, egcs -O2 -mips2]
-
-    - [0x48210, c, gcc/divdi3, -g2]
-    - [0x487D0, c, gcc/moddi3, -g2]
-    - [0x48D20, c, gcc/udivdi3, -g2]
-    - [0x49280, c, gcc/umoddi3, -g2]
-    - [0x49750, c, os/strcpy, gcc_272 -O1]
-    - [0x49780, hasm, os/decode_yay0]
+    - [auto, c, game_modes]
+    - [auto, c, state_startup]
+    - [auto, c, startup_screen_fading]
+    - [auto, c, state_battle]
+    - [auto, c, state_logos]
+    - [auto, c, state_pause]
+    - [auto, c, state_file_select]
+    - [auto, c, state_world]
+    - [auto, c, 111f0_len_860]
+    - [auto, c, state_intro]
+    - [auto, c, state_title_screen]
+    - [auto, c, state_demo]
+    - [auto, c, npc]
+    - [auto, c, encounter]
+    - [auto, c, encounter_api]
+    - [auto, c, status_icons]
+    - [auto, c, 23680]
+    - [auto, c, 25AF0]
+    - [auto, c, audio/25f00_len_940]
+    - [auto, c, audio/sfx_player]
+    - [auto, c, audio/28910_len_5090]
+    - [auto, c, audio/2BF90]
+    - [auto, c, audio/2d9a0_len_890]
+    - [auto, c, audio/2e230_len_2190]
+    - [auto, c, audio/303c0_len_3e10]
+    - [auto, c, audio/30450]
+    - [auto, c, audio/31650]
+    - [auto, c, audio/33450]
+    - [auto, c, audio/tables]
+    - [auto, c, audio/reverb]
+    - [auto, c, 5B320]
+    - [auto, c, effects]
+    - [auto, c, world/world]
+    - [auto, c, collision]
+    - [auto, c, 38F00]
+    - [auto, c, 39210_len_aa0]
+    - [auto, c, os/nusys/nuboot]
+    - [auto, c, os/nusys/nusched]
+    - [auto, c, os/nusys/nugfxfuncset]
+    - [auto, c, os/nusys/nugfxprenmifuncset]
+    - [auto, c, os/nusys/nugfxtaskallendwait]
+    - [auto, c, os/nusys/nugfxsetcfb]
+    - [auto, c, os/nusys/nugfxdisplayoff]
+    - [auto, c, os/nusys/nugfxdisplayon]
+    - [auto, c, os/nusys/nupiinit]
+    - [auto, c, os/nusys/nupireadrom]
+    - [auto, c, os/nusys/nugfxinit]
+    - [auto, c, os/nusys/nucontinit]
+    - [auto, c, os/nusys/nucontdataget]
+    - [auto, c, os/nusys/nucontpakmgr]
+    - [auto, c, os/nusys/nucontrmbmgr]
+    - [auto, c, os/nusys/nucontrmbstart]
+    - [auto, c, os/nusys/nucontrmbcheck]
+    - [auto, c, os/nusys/nucontrmbmodeset]
+    - [auto, c, os/nusys/nucontrmbforcestop]
+    - [auto, c, os/nusys/nucontrmbforcestopend]
+    - [auto, c, os/nusys/nupireadromoverlay]
+    - [auto, c, os/nusys/nugfxthread]
+    - [auto, c, os/nusys/nugfxswapcfbfuncset]
+    - [auto, c, os/nusys/nugfxswapcfb]
+    - [auto, c, os/nusys/nugfxretracewait]
+    - [auto, c, os/nusys/nusimgr]
+    - [auto, c, os/nusys/nusicallbackadd]
+    - [auto, c, os/nusys/nusicallbackremove]
+    - [auto, c, os/nusys/nucontmgr]
+    - [auto, c, os/nusys/nucontdatalock]
+    - [auto, c, os/nusys/nucontqueryread]
+    - [auto, c, os/aigetlength, egcs -O2 -mips2]
+    - [auto, c, os/aigetstatus, egcs -O2 -mips2]
+    - [auto, c, os/aisetfrequency, egcs -O2 -mips2]
+    - [auto, c, os/aisetnextbuf, egcs -O2 -mips2]
+    - [auto, hasm, os/osInvalDCache]
+    - [auto, hasm, os/osInvalICache]
+    - [auto, hasm, os/osWritebackDCache]
+    - [auto, hasm, os/osWritebackDCacheAll]
+    - [auto, c, os/contquery, egcs -O2 -mips2]
+    - [auto, c, os/contreaddata, egcs -O2 -mips2]
+    - [auto, c, os/controller, egcs -O2 -mips2]
+    - [auto, c, os/virtualtophysical, egcs -O0 -mips2]
+    - [auto, c, os/sqrtf, -ffast-math]
+    - [auto, c, os/coss, egcs -O2 -mips2]
+    - [auto, c, os/frustum, egcs -O2 -mips2]
+    - [auto, c, os/guLookAt, egcs -O2 -mips2]
+    - [auto, c, os/lookathil, egcs -O2 -mips2]
+    - [auto, c, os/lookatref, egcs -O2 -mips2]
+    - [auto, c, os/guOrtho, egcs -O2 -mips2]
+    - [auto, c, os/perspective, egcs -O2 -mips2]
+    - [auto, c, os/position, egcs -O2 -mips2]
+    - [auto, c, os/rotateRPY, egcs -O2 -mips2]
+    - [auto, c, os/sins, egcs -O2 -mips2]
+    - [auto, hasm, os/bcopy]
+    - [auto, hasm, os/bzero]
+    - [auto, c, os/string, egcs -O2 -mips2]
+    - [auto, c, os/xprintf, egcs -O2 -mips2]
+    - [auto, c, os/sprintf, egcs -O2 -mips2]
+    - [auto, c, os/createmesgqueue, egcs -O0 -mips2]
+    - [auto, c, os/recvmesg, egcs -O0 -mips2]
+    - [auto, c, os/sendmesg, egcs -O0 -mips2]
+    - [auto, c, os/seteventmesg, egcs -O0 -mips2]
+    - [auto, c, os/_getcount, egcs -O0 -mips3 -mgp64 -mfp64]
+    - [auto, c, os/sptask, egcs -O2 -mips2]
+    - [auto, c, os/sptaskyield, egcs -O2 -mips2]
+    - [auto, c, os/sptaskyielded, egcs -O2 -mips2]
+    - [auto, c, os/sirawdma, egcs -O2 -mips2]
+    - [auto, c, os/siacs, egcs -O2 -mips2]
+    - [auto, c, os/createthread, egcs -O0 -mips2]
+    - [auto, c, os/setthreadpri, egcs -O0 -mips2]
+    - [auto, c, os/startthread, egcs -O0 -mips2]
+    - [auto, c, os/stopthread, egcs -O0 -mips2]
+    - [auto, c, os/thread, egcs -O0 -mips2]
+    - [auto, c, os/getactivequeue, egcs -O0 -mips2]
+    - [auto, c, os/gettime, egcs -O0 -mips2]
+    - [auto, c, os/settime, egcs -O0 -mips2]
+    - [auto, c, os/settimer, egcs -O0 -mips2]
+    - [auto, c, os/timerintr, egcs -O0 -mips2]
+    - [auto, hasm, os/maptlb]
+    - [auto, hasm, os/probetlb]
+    - [auto, hasm, os/unmaptlb]
+    - [auto, hasm, os/unmaptlball]
+    - [auto, c, os/vigetcurrframebuf, egcs -O2 -mips2]
+    - [auto, c, os/vigetnextframebuf, egcs -O2 -mips2]
+    - [auto, c, os/vigetmode, egcs -O2 -mips2]
+    - [auto, c, os/vimgr, egcs -O2 -mips2]
+    - [auto, c, os/vitbl, egcs -O2 -mips2]
+    - [auto, c, os/vimodentsclan1, egcs -O2 -mips2]
+    - [auto, c, os/vimodempallan1, egcs -O2 -mips2]
+    - [auto, c, os/visetevent, egcs -O2 -mips2]
+    - [auto, c, os/visetmode, egcs -O2 -mips2]
+    - [auto, c, os/visetspecial, egcs -O2 -mips2]
+    - [auto, c, os/visetyscale, egcs -O2 -mips2]
+    - [auto, c, os/viswapbuf, egcs -O2 -mips2]
+    - [auto, c, os/viswapcontext, egcs -O2 -mips2]
+    - [auto, c, os/viblack, egcs -O2 -mips2]
+    - [auto, c, os/virepeatline, egcs -O2 -mips2]
+    - [auto, hasm, os/guMtxIdent]
+    - [auto, hasm, os/guMtxIdentF]
+    - [auto, hasm, os/guMtxF2L]
+    - [auto, hasm, os/guMtxL2F]
+    - [auto, hasm, os/guMtxCatF]
+    - [auto, hasm, os/guScale]
+    - [auto, hasm, os/guScaleF]
+    - [auto, hasm, os/guTranslate]
+    - [auto, hasm, os/guTranslateF]
+    - [auto, c, os/guMtxCat, egcs -O2 -mips2]
+    - [auto, c, os/guMtxXFML, egcs -O2 -mips2]
+    - [auto, c, os/guMtxXFMF, egcs -O2 -mips2]
+    - [auto, c, os/guRotate, egcs -O2 -mips2]
+    - [auto, hasm, os/exceptasm]
+    - [auto, hasm, os/interrupt]
+    - [auto, hasm, os/setintmask]
+    - [auto, c, os/pimgr, egcs -O2 -mips2]
+    - [auto, c, os/epirawdma, egcs -O2 -mips2]
+    - [auto, c, os/epiwrite, egcs -O2 -mips2]
+    - [auto, c, os/epiread, egcs -O2 -mips2]
+    - [auto, c, os/epidma, egcs -O2 -mips2]
+    - [auto, c, os/epilinkhandle, egcs -O2 -mips2]
+    - [auto, c, os/cartrominit, egcs -O2 -mips2]
+    - [auto, c, os/devmgr, egcs -O2 -mips2]
+    - [auto, c, os/piacs, egcs -O2 -mips2]
+    - [auto, c, os/flashinit, egcs -O2 -mips2]
+    - [auto, c, os/flashsectorerase, egcs -O2 -mips2]
+    - [auto, c, os/flashwritebuffer, egcs -O2 -mips2]
+    - [auto, c, os/flashwritearray, egcs -O2 -mips2]
+    - [auto, c, os/flashreadarray, egcs -O2 -mips2]
+    - [auto, hasm, os/skapi]
+    - [auto, c, os/strcmp, egcs -O2 -mips2]
+    - [auto, c, os/common, egcs -O2 -mips2]
+    - [auto, c, os/motor, egcs -O2 -mips2]
+    - [auto, c, os/pfsallocatefile, egcs -O2 -mips2]
+    - [auto, c, os/pfsdeletefile, egcs -O2 -mips2]
+    - [auto, c, os/pfsreadwritefile, egcs -O2 -mips2]
+    - [auto, c, os/pfsfilestate, egcs -O2 -mips2]
+    - [auto, c, os/pfssearchfile, egcs -O2 -mips2]
+    - [auto, c, os/pfsfreeblocks, egcs -O2 -mips2]
+    - [auto, c, os/pfsnumfiles, egcs -O2 -mips2]
+    - [auto, c, os/pfsinitpak, egcs -O2 -mips2]
+    - [auto, c, os/pfsrepairid, egcs -O2 -mips2]
+    - [auto, c, os/pfsgetstatus, egcs -O2 -mips2]
+    - [auto, c, os/pfsselectbank, egcs -O2 -mips2]
+    - [auto, c, os/contpfs, egcs -O2 -mips2]
+    - [auto, c, os/contramread, egcs -O2 -mips2]
+    - [auto, c, os/contramwrite, egcs -O2 -mips2]
+    - [auto, hasm, os/parameters]
+    - [auto, c, os/afterprenmi, egcs -O0 -mips2]
+    - [auto, c, os/initialize, egcs -O0 -mips2]
+    - [auto, c, os/ai, egcs -O2 -mips2]
+    - [auto, hasm, os/bcmp]
+    - [auto, c, os/xlitob, egcs -O2 -mips2]
+    - [auto, c, os/xldtob, egcs -O2 -mips2]
+    - [auto, c, os/jammesg, egcs -O0 -mips2]
+    - [auto, hasm, os/getcause]
+    - [auto, hasm, os/getsr]
+    - [auto, hasm, os/setfpccsr]
+    - [auto, hasm, os/setsr]
+    - [auto, hasm, os/setwatchlo]
+    - [auto, c, os/_setcompare, egcs -O0 -mips3 -mgp64 -mfp64]
+    - [auto, c, os/sp, egcs -O2 -mips2]
+    - [auto, c, os/spgetstat, egcs -O2 -mips2]
+    - [auto, c, os/spsetstat, egcs -O2 -mips2]
+    - [auto, c, os/spsetpc, egcs -O2 -mips2]
+    - [auto, c, os/sprawdma, egcs -O2 -mips2]
+    - [auto, c, os/sirawread, egcs -O2 -mips2]
+    - [auto, c, os/sirawwrite, egcs -O2 -mips2]
+    - [auto, c, os/destroythread, egcs -O0 -mips2]
+    - [auto, c, os/getthreadpri, egcs -O0 -mips2]
+    - [auto, c, os/yieldthread, egcs -O0 -mips2]
+    - [auto, hasm, os/maptlbrdb]
+    - [auto, c, os/vi, egcs -O2 -mips2]
+    - [auto, c, os/vigetcurrcontext, egcs -O2 -mips2]
+    - [auto, c, os/vimodepallan1, egcs -O2 -mips2]
+    - [auto, hasm, os/padding]
+    - [auto, hasm, os/guNormalize]
+    - [auto, c, os/setglobalintmask, egcs -O0 -mips2]
+    - [auto, c, os/resetglobalintmask, egcs -O0 -mips2]
+    - [auto, c, os/pirawdma, egcs -O2 -mips2]
+    - [auto, c, os/pigetcmdq, egcs -O2 -mips2]
+    - [auto, c, os/epirawread, egcs -O2 -mips2]
+    - [auto, c, os/epirawwrite, egcs -O2 -mips2]
+    - [auto, c, os/pfschecker, egcs -O2 -mips2]
+    - [auto, c, os/pfsisplug, egcs -O2 -mips2]
+    - [auto, c, os/ldiv, egcs -O2 -mips2]
+    - [auto, c, os/si, egcs -O2 -mips2]
+    - [auto, c, gcc/divdi3, -g2]
+    - [auto, c, gcc/moddi3, -g2]
+    - [auto, c, gcc/udivdi3, -g2]
+    - [auto, c, gcc/umoddi3, -g2]
+    - [auto, c, os/strcpy, gcc_272 -O1]
+    - [auto, hasm, os/decode_yay0]
     - [0x49830, pm_effect_loads, effect_loads]
-    - [0x4CAD0, c, battle/battle]
+    - [auto, c, battle/battle]
     - [0x4D140, bin, rspboot]
     - [0x4D210, bin, n_aspMain_text]
-    - [0x4DE70, .data, main_pre]
-    - [0x4E080, .data, main]
-    - [0x4E090, .data, main_loop]
+    - [0x4DE70]
+    - [auto, .data, main_pre]
+    - [auto, .data, main]
+    - [auto, .data, main_loop]
     - [auto, .data, background_gfx]
-    - [0x4E2D0, .data, rumble]
-    - [0x4E2E0, .data, 43F0]
-    - [0x4E640, .data, fio]
-    - [0x4E650, .data, curtains]
+    - [auto, .data, rumble]
+    - [auto, .data, 43F0]
+    - [auto, .data, fio]
+    - [auto, .data, curtains]
     - start: 0x4E650
       type: .data
       name: curtains
@@ -325,62 +324,62 @@ segments:
         - [0x4FED0]
         - [0x501B0, ia8, ui/no_controller, 128, 32]
         - [0x511B0]
-    - [0x51280, .data, crash_screen]
-    - [0x51460, .data, os/nusys/nugfxtaskmgr]
-    - [0x51470, .data, cam_math]
-    - [0x51480, .data, game_modes]
-    - [0x51900, .data, state_battle]
-    - [0x51920, .data, state_logos]
-    - [0x519B0, .data, state_pause]
-    - [0x519E0, .data, state_file_select]
-    - [0x51A20, .data, state_title_screen]
-    - [0x51B40, .data, state_demo]
-    - [0x51C50, .data, npc]
-    - [0x51CA0, .data, encounter]
-    - [0x521C0, .data, status_icons]
-    - [0x521D0, .data, audio/25f00_len_940]
-    - [0x521F0, .data, audio/sfx_player]
-    - [0x52E10, .data, audio/30450]
-    - [0x52EB0, .data, audio/31650]
-    - [0x52EC0, .data, audio/33450]
-    - [0x52FC0, .data, audio/tables]
-    - [0x59040, .data, audio/reverb]
-    - [0x59270, .data, effects]
-    - [0x59F80, .data, 5B320]
-    - [0x69FC0, .data, world/world]
-    - [0x6D720, .data, 38F00]
-    - [0x6DBE0, .data, os/nusys/nusched]
-    - [0x6DC00, .data, os/nusys/nugfxinit]
-    - [0x6DD00, .data, os/nusys/nucontpakmgr]
-    - [0x6DD40, .data, os/nusys/nucontrmbmgr]
-    - [0x6DD70, .data, os/nusys/nugfxfuncset]
-    - [0x6DD80, .data, os/nusys/nusimgr]
-    - [0x6DD90, .data, os/nusys/nucontmgr]
-    - [0x6DDC0, .data, os/aisetnextbuf]
-    - [0x6DDD0, .data, os/controller]
-    - [0x6DDE0, .data, os/position]
-    - [0x6DDF0, .data, os/rotateRPY]
-    - [0x6DE00, .data, os/sins]
-    - [0x6E600, .data, os/xprintf]
-    - [0x6E650, .data, os/seteventmesg]
-    - [0x6E660, .data, os/siacs]
-    - [0x6E670, .data, os/thread]
-    - [0x6E690, .data, os/timerintr]
-    - [0x6E6A0, .data, os/vimgr]
-    - [0x6E6C0, .data, os/vitbl]
-    - [0x6F840, .data, os/vimodentsclan1]
-    - [0x6F890, .data, os/vimodempallan1]
-    - [0x6F8E0, .data, os/guRotate]
-    - [0x6F8F0, .data, os/exceptasm]
-    - [0x6F920, .data, os/pimgr]
-    - [0x6F950, .data, os/cartrominit]
-    - [0x6F960, .data, os/piacs]
-    - [0x6F970, .data, os/contpfs]
-    - [0x6F980, .data, os/initialize]
-    - [0x6F9C0, .data, os/xlitob]
-    - [0x6F9F0, .data, os/vi]
-    - [0x6FA60, .data, os/vimodepallan1]
-    - [0x6FAB0, .data, battle/battle]
+    - [auto, .data, crash_screen]
+    - [auto, .data, os/nusys/nugfxtaskmgr]
+    - [auto, .data, cam_math]
+    - [auto, .data, game_modes]
+    - [auto, .data, state_battle]
+    - [auto, .data, state_logos]
+    - [auto, .data, state_pause]
+    - [auto, .data, state_file_select]
+    - [auto, .data, state_title_screen]
+    - [auto, .data, state_demo]
+    - [auto, .data, npc]
+    - [auto, .data, encounter]
+    - [auto, .data, status_icons]
+    - [auto, .data, audio/25f00_len_940]
+    - [auto, .data, audio/sfx_player]
+    - [auto, .data, audio/30450]
+    - [auto, .data, audio/31650]
+    - [auto, .data, audio/33450]
+    - [auto, .data, audio/tables]
+    - [auto, .data, audio/reverb]
+    - [auto, .data, effects]
+    - [auto, .data, 5B320]
+    - [auto, .data, world/world]
+    - [auto, .data, 38F00]
+    - [auto, .data, os/nusys/nusched]
+    - [auto, .data, os/nusys/nugfxinit]
+    - [auto, .data, os/nusys/nucontpakmgr]
+    - [auto, .data, os/nusys/nucontrmbmgr]
+    - [auto, .data, os/nusys/nugfxfuncset]
+    - [auto, .data, os/nusys/nusimgr]
+    - [auto, .data, os/nusys/nucontmgr]
+    - [auto, .data, os/aisetnextbuf]
+    - [auto, .data, os/controller]
+    - [auto, .data, os/position]
+    - [auto, .data, os/rotateRPY]
+    - [auto, .data, os/sins]
+    - [auto, .data, os/xprintf]
+    - [auto, .data, os/seteventmesg]
+    - [auto, .data, os/siacs]
+    - [auto, .data, os/thread]
+    - [auto, .data, os/timerintr]
+    - [auto, .data, os/vimgr]
+    - [auto, .data, os/vitbl]
+    - [auto, .data, os/vimodentsclan1]
+    - [auto, .data, os/vimodempallan1]
+    - [auto, .data, os/guRotate]
+    - [auto, .data, os/exceptasm]
+    - [auto, .data, os/pimgr]
+    - [auto, .data, os/cartrominit]
+    - [auto, .data, os/piacs]
+    - [auto, .data, os/contpfs]
+    - [auto, .data, os/initialize]
+    - [auto, .data, os/xlitob]
+    - [auto, .data, os/vi]
+    - [auto, .data, os/vimodepallan1]
+    - [auto, .data, battle/battle]
     - [0x700B0, bin, gspF3DEX2kawase_fifo_text]
     - [0x716E0, bin, gspF3DEX2kawase_fifo_data]
     - [0x71B00, bin, n_aspMain_data]
@@ -390,25 +389,27 @@ segments:
     type: code
     start: 0x74570
     vram: 0x800da8e0
+    vram_of_symbol: overlays_start
+    #follows_vram: main
     subsegments:
-    - [0x74570, hasm, bss2]
-    - [0x74570, c, npc_collision]
-    - [0x76040, c, 77480]
-    - [0x7A000, c, 7B440]
-    - [0x7A720, c, 7BB60]
-    - [0x7D590, c, 7E9D0]
-    - [0x7E8D0, c, world/menus]
-    - [0x7F410, c, inventory]
-    - [0x82470, c, world/actions]
-    - [0x82470, c, world/partners]
-    - [0x87D70, hasm, bss2_2]
-    - [0x87D70, c, 891b0_len_fb0]
-    - [0x88D20, c, 8a160_len_700]
-    - [0x89420, c, 8a860_len_3f30]
-    - [0x8D350, c, draw_box]
-    - [0x8FBA0, .data, npc_collision]
-    - [0x8FBB0, .data, world/actions]
-    - [0x8FF70, .data, world/partners]
+    - [auto, hasm, bss2]
+    - [auto, c, npc_collision]
+    - [auto, c, 77480]
+    - [auto, c, 7B440]
+    - [auto, c, 7BB60]
+    - [auto, c, 7E9D0]
+    - [auto, c, world/menus]
+    - [auto, c, inventory]
+    - [auto, c, world/actions]
+    - [auto, c, world/partners]
+    - [auto, hasm, bss2_2]
+    - [auto, c, 891b0_len_fb0]
+    - [auto, c, 8a160_len_700]
+    - [auto, c, 8a860_len_3f30]
+    - [auto, c, draw_box]
+    - [auto, .data, npc_collision]
+    - [auto, .data, world/actions]
+    - [auto, .data, world/partners]
     - start: 0x90570
       type: .data
       name: global_hud_scripts
@@ -792,7 +793,7 @@ segments:
       - [0x9C618]
       - [0x9C620, rgba32,  ui/stat_flower, 16, 16]
       - [0x9CA20]
-    - [0xA14F0, .data, 891b0_len_fb0]
+    - [auto, .data, 891b0_len_fb0]
     - [auto, .data, 8a160_len_700]
     - start: 0xA1520
       type: .data
@@ -804,7 +805,7 @@ segments:
       - [0xA1780, gfx, A2BC0]
       - [0xA1848, gfx, A2C88]
       - [0xA1870]
-    - [0xA1900, .data, 8a860_len_3f30]
+    - [auto, .data, 8a860_len_3f30]
     - start: 0xA1950
       type: .data
       name: draw_box
@@ -830,36 +831,37 @@ segments:
     type: code
     start: 0xa4990
     vram: 0x8010dab0
+    follows_vram: engine1
     subsegments:
-    - [0xA4990, hasm, bss3]
-    - [0xA4990, c, entity]
+    - [auto, hasm, bss3]
+    - [auto, c, entity]
     - [auto, c, game_states]
     - [auto, c, model]
-    - [0xB3140, c, animator]
-    - [0xB5E70, c, entity_model]
-    - [0xB8370, c, worker]
-    - [0xB8920, c, msg]
-    - [0xC4010, c, draw_img_util]
+    - [auto, c, animator]
+    - [auto, c, entity_model]
+    - [auto, c, worker]
+    - [auto, c, msg]
+    - [auto, c, draw_img_util]
     - [auto, c, item_entity]
-    - [0xCC0F0, c, screen_overlays]
-    - [0xCDDB0, c, screen_render_util]
-    - [0xCF9E0, c, imgfx]
-    - [0xD49C0, c, hud_element]
-    - [0xDA990, c, vars_access]
-    - [0xDACE0, c, trigger]
-    - [0xDB3E0, c, background]
-    - [0xDC8A0, c, audio/ambience]
-    - [0xDCA60, c, windows]
-    - [0xDD6B0, c, sprite_shading]
-    - [0xDE8C0, c, audio/sfx]
-    - [0xDFAA0, c, audio/e0b30_len_b80]
-    - [0xE0620, .data, entity]
+    - [auto, c, screen_overlays]
+    - [auto, c, screen_render_util]
+    - [auto, c, imgfx]
+    - [auto, c, hud_element]
+    - [auto, c, vars_access]
+    - [auto, c, trigger]
+    - [auto, c, background]
+    - [auto, c, audio/ambience]
+    - [auto, c, windows]
+    - [auto, c, sprite_shading]
+    - [auto, c, audio/sfx]
+    - [auto, c, audio/e0b30_len_b80]
+    - [auto, .data, entity]
     - [auto, .data, game_states]
     - [auto, .data, model]
-    - [0xE18C0, .data, animator]
-    - [0xE18D0, .data, entity_model]
-    - [0xE18F0, .data, msg]
-    - [0xE1C10, .data, draw_img_util]
+    - [auto, .data, animator]
+    - [auto, .data, entity_model]
+    - [auto, .data, msg]
+    - [auto, .data, draw_img_util]
     - [auto, .data, item_entity]
     - start: 0xE1D60
       type: .data
@@ -874,41 +876,99 @@ segments:
       - [0xE3C10]
       - [0xE3DE0, vtx, vtx/stencil2]
       - [0xE3F60]
-    - [0xE4400, .data, screen_render_util]
-    - [0xE4480, .data, imgfx]
-    - [0xE4630, .data, hud_element]
-    - [0xE4790, .data, background]
-    - [0xE47B0, .data, audio/ambience]
-    - [0xE47C0, .data, windows]
-    - [0xE4940, .data, audio/sfx]
-    - [0xE4D60, .data, audio/e0b30_len_b80]
+    - [auto, .data, screen_render_util]
+    - [auto, .data, imgfx]
+    - [auto, .data, hud_element]
+    - [auto, .data, background]
+    - [auto, .data, audio/ambience]
+    - [auto, .data, windows]
+    - [auto, .data, audio/sfx]
+    - [auto, .data, audio/e0b30_len_b80]
     - [0xE4DB0]
+  - name: heaps
+    type: code
+    start: 0xE6920
+    vram: 0x80197000
+    subalign: 0x1000
+    follows_vram: engine2
+    subsegments:
+    - [auto, c, heaps]
   - name: evt
     dir: evt
     type: code
-    start: 0xe6920
-    vram: 0x802c3000
+    start: 0xE6920
+    vram: 0x802C3000
+    follows_vram: world_use_item
     subsegments:
-      - [0xe6920, bin]
-      - [0xfdda0]
-
+    - [auto, c, script_list]
+    - [auto, c, evt]
+    - [auto, c, map_api]
+    - [auto, c, cam_api]
+    - [auto, c, model_api]
+    - [auto, c, npc_api]
+    - [auto, c, msg_api]
+    - [auto, c, player_api]
+    - [auto, c, virtual_entity]
+    - [auto, c, f8f60_len_1560]
+    - [auto, c, audio_api]
+    - [auto, c, item_api]
+    - [auto, c, fx_api]
+    - [auto, c, demo_api]
   - name: engine4
-    dir: engine4
     type: code
-    start: 0xfdda0
-    vram: 0x802dbd40
+    start: 0xFDDA0
+    vram: 0x802DBD40
+    follows_vram: evt
     subsegments:
-      - [0xfdda0, bin]
-      - [0x101580]
-
+    - [auto, c, sprite]
+    - [auto, c, 101b90_len_8f0]
   - name: entity
     type: code
     start: 0x101580
-    vram: 0x802e0d90
+    vram: 0x802E0D90
+    follows_vram: engine4
     subsegments:
-      - [0x101580, bin]
-      - [0x10bb80]
-
+    - [auto, c, entity/Shadow]
+    - [auto, c, entity/SaveBlock]
+    - [auto, c, entity/Switch]
+    - [auto, c, entity/ShatteringBlock_common]
+    - [auto, c, entity/ShatteringBlock]
+    - [auto, c, entity/Block]
+    - [auto, c, entity/ItemBlock]
+    - [auto, c, entity/HeartBlock]
+    - [auto, c, entity/SuperBlock]
+    - [auto, c, entity/SimpleSpring]
+    - [auto, c, entity/HiddenPanel]
+    - [auto, c, entity/Chest]
+    - [auto, c, entity/WoodenCrate]
+    - [auto, c, entity/BlueWarpPipe]
+    - [auto, c, entity/Signpost]
+    - start: 0x109960
+      type: .data
+      name: entity/Shadow
+      subsegments:
+      - [0x109960, i4, entity/shadow/square, 16, 16]
+      - [0x1099E0, i4, entity/shadow/circle, 16, 16]
+      - [0x109A60, vtx, entity/vtx/shadow1]
+      - [0x109AA0, vtx, entity/vtx/shadow2]
+      - [0x109AE0, i4, entity/shadow/square_big, 32, 32]
+      - [0x109CE0, i4, entity/shadow/circle_big, 32, 32]
+      - [0x109EE0]
+    - [auto, .data, entity/SaveBlock]
+    - [auto, .data, entity/Switch]
+    - [auto, .data, entity/ShatteringBlock_common]
+    - [auto, .data, entity/ShatteringBlock]
+    - [auto, .data, entity/Block]
+    - [auto, .data, entity/ItemBlock]
+    - [auto, .data, entity/HeartBlock]
+    - [auto, .data, entity/SuperBlock]
+    - [auto, .data, entity/SimpleSpring]
+    - [auto, .data, entity/HiddenPanel]
+    - [auto, .data, entity/Chest]
+    - [auto, .data, entity/WoodenCrate]
+    - [auto, .data, entity/BlueWarpPipe]
+    - [auto, .data, entity/Signpost]
+    - [0x10B7F0]
   - name: font_width
     type: code
     start: 0x10bb80
@@ -1030,6 +1090,8 @@ segments:
       - [0x262230]
 
   - [0x262230, bin]
+  - [0x35EC00, pm_sprite_shading_profiles, sprite_shading_profiles]
+  - [0x35FA70, bin]
 
   - type: code
     dir: world/partner
@@ -4123,12 +4185,1176 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, sneaky_parasol]
-  - [0xE73F70, bin]
+  - type: code
+    dir: entity/default
+    start: 0xE73F70
+    vram: 0x802BAE00
+    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Padlock]
+    - [auto, c, BoardedFloor]
+    - [auto, c, BombableRock]
+  - type: code
+    dir: entity/jan_iwa
+    start: 0xE76170
+    vram: 0x802BAE00
+    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Plants1]
+    - [auto, c, Plants2]
+    - [auto, c, ArrowSign]
+  - type: code
+    dir: entity/sbk_omo
+    start: 0xE78190
+    vram: 0x802BAE00
+    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Tweester]
+    - [auto, c, StarBoxLauncher]
+  - name: entity_model_Hammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE79F70
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Hammer1Block]
+    - start: 0xE79F70
+      type: .data
+      name: Hammer1Block
+      subsegments:
+      - [0xE79F70, vtx, Hammer1Block]
+      - [0xE7A1F0, ci4, Hammer1Block_face, 16, 32]
+      - [0xE7A2F0, palette, Hammer1Block_face]
+      - [0xE7A310]
+  - name: entity_model_Hammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE7A470
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Hammer2Block]
+    - start: 0xE7A470
+      type: .data
+      name: Hammer2Block
+      subsegments:
+      - [0xE7A470, vtx, Hammer2Block]
+      - [0xE7A6F0, ci4, Hammer2Block_face, 16, 32]
+      - [0xE7A7F0, palette, Hammer2Block_face]
+      - [0xE7A810]
+  - name: entity_model_Hammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE7A970
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Hammer3Block]
+    - start: 0xE7A970
+      type: .data
+      name: Hammer3Block
+      subsegments:
+      - [0xE7A970, vtx, Hammer3Block]
+      - [0xE7ABF0, ci4, Hammer3Block_face, 16, 32]
+      - [0xE7ACF0, palette, Hammer3Block_face]
+      - [0xE7AD10]
+  - name: entity_model_ShatteringHammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE7AE60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringHammer1Block]
+    - start: 0xE7AE60
+      type: .data
+      name: ShatteringHammer1Block
+      subsegments:
+      - [0xE7AE60, vtx, ShatteringHammer1Block]
+      - [0xE7BEC0, ci8, ShatteringHammer1Block_texture, 16, 32]
+      - [0xE7C0C0, palette, ShatteringHammer1Block_texture]
+      - [0xE7C2C0]
+  - name: entity_model_ShatteringHammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE7E0B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringHammer2Block]
+    - start: 0xE7E0B0
+      type: .data
+      name: ShatteringHammer2Block
+      subsegments:
+      - [0xE7E0B0, vtx, ShatteringHammer2Block]
+      - [0xE7F110, rgba16, ShatteringHammer2Block_texture, 16, 32]
+      - [0xE7F510]
+  - name: entity_model_ShatteringHammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE812D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringHammer3Block]
+    - start: 0xE812D0
+      type: .data
+      name: ShatteringHammer3Block
+      subsegments:
+      - [0xE812D0, vtx, ShatteringHammer3Block]
+      - [0xE82320, ci4, ShatteringHammer3Block_texture, 16, 32]
+      - [0xE82420, palette, ShatteringHammer3Block_texture]
+      - [0xE82440]
+  - name: entity_model_YellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE842B0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, YellowBlock]
+    - start: 0xE842B0
+      type: .data
+      name: YellowBlock
+      subsegments:
+      - [0xE842B0, vtx, YellowBlock]
+      - [0xE84430, rgba16, YellowBlock_face, 32, 32]
+      - [0xE84C30]
+  - name: entity_model_RedBlock
+    dir: entity/model
+    type: code
+    start: 0xE84D60
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, RedBlock]
+    - start: 0xE84D60
+      type: .data
+      name: RedBlock
+      subsegments:
+      - [0xE84D60, vtx, RedBlock]
+      - [0xE84EE0, rgba16, RedBlock_face, 32, 32]
+      - [0xE856E0]
+  - name: entity_model_UnusedBlock
+    dir: entity/model
+    type: code
+    start: 0xE85810
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UnusedBlock]
+    - start: 0xE85810
+      type: .data
+      name: UnusedBlock
+      subsegments:
+      - [0xE85810, vtx, UnusedBlock]
+      - [0xE85BD0, rgba16, UnusedBlock_img1, 16, 32]
+      - [0xE85FD0]
+      - [0xE86058, ci4, UnusedBlock_img2, 16, 32]
+      - [0xE86158, palette, UnusedBlock_img2]
+      - [0xE86178]
+  - name: entity_model_PushBlock
+    dir: entity/model
+    type: code
+    start: 0xE864A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PushBlock]
+    - start: 0xE864A0
+      type: .data
+      name: PushBlock
+      subsegments:
+      - [0xE864A0, vtx, PushBlock]
+      - [0xE865C0, ci4, PushBlock_face, 16, 16]
+      - [0xE86640, palette, PushBlock_face]
+      - [0xE86660]
+  - name: entity_model_BrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE867F0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BrickBlock]
+    - start: 0xE867F0
+      type: .data
+      name: BrickBlock
+      subsegments:
+      - [0xE867F0, vtx, BrickBlock]
+      - [0xE86930, ci4, BrickBlock_face, 32, 32]
+      - [0xE86B30, palette, BrickBlock_face]
+      - [0xE86B50]
+  - name: entity_model_ShatteringBrickBlock
+    dir: entity/model
+    type: code
+    start: 0xE86CA0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ShatteringBrickBlock]
+    - start: 0xE86CA0
+      type: .data
+      name: ShatteringBrickBlock
+      subsegments:
+      - [0xE86CA0, vtx, ShatteringBrickBlock]
+      - [0xE88740, rgba16, ShatteringBrickBlock_texture, 32, 32]
+      - [0xE88F40]
+  - name: entity_model_InertYellowBlock
+    dir: entity/model
+    type: code
+    start: 0xE8AC80
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, InertYellowBlock]
+    - start: 0xE8AC80
+      type: .data
+      name: InertYellowBlock
+      subsegments:
+      - [0xE8AC80, vtx, InertYellowBlock_1]
+      - [0xE8AD80, vtx, InertYellowBlock_2]
+      - [0xE8AE00, ci4, InertYellowBlock_face, 32, 32]
+      - [0xE8B000, palette, InertYellowBlock_face]
+      - [0xE8B020]
+  - name: entity_model_InertRedBlock
+    dir: entity/model
+    type: code
+    start: 0xE8B180
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, InertRedBlock]
+    - start: 0xE8B180
+      type: .data
+      name: InertRedBlock
+      subsegments:
+      - [0xE8B180, vtx, InertRedBlock_1]
+      - [0xE8B280, vtx, InertRedBlock_2]
+      - [0xE8B300, rgba16, InertRedBlock_face, 32, 32]
+      - [0xE8BB00]
+  - name: entity_model_HeartBlock
+    dir: entity/model
+    type: code
+    start: 0xE8BC30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HeartBlock]
+    - start: 0xE8BC30
+      type: .data
+      name: HeartBlock
+      subsegments:
+      - [0xE8BC30, vtx, HeartBlock]
+      - [0xE8BFF0, rgba16, HeartBlock_face, 16, 32]
+      - [0xE8C3F0]
+  - name: entity_model_PowBlock
+    dir: entity/model
+    type: code
+    start: 0xE8C560
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PowBlock]
+    - start: 0xE8C560
+      type: .data
+      name: PowBlock
+      subsegments:
+      - [0xE8C560, vtx, PowBlock]
+      - [0xE8C660, ci8, PowBlock_face, 64, 32]
+      - [0xE8CE60, palette, PowBlock_face]
+      - [0xE8D060]
+  - name: entity_model_SuperBlock
+    dir: entity/model
+    type: code
+    start: 0xE8D240
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SuperBlock]
+    - start: 0xE8D240
+      type: .data
+      name: SuperBlock
+      subsegments:
+      - [0xE8D240, vtx, SuperBlock]
+      - [0xE8D6C0, ci4, SuperBlock_tex, 16, 32]
+      - [0xE8D7C0, palette, SuperBlock_tex]
+      - [0xE8D7E0]
+  - name: entity_model_UltraBlock
+    dir: entity/model
+    type: code
+    start: 0xE8DB50
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UltraBlock]
+    - start: 0xE8DB50
+      type: .data
+      name: UltraBlock
+      subsegments:
+      - [0xE8DB50, vtx, UltraBlock]
+      - [0xE8DFD0, ci4, UltraBlock_tex, 16, 32]
+      - [0xE8E0D0, palette, UltraBlock_tex]
+      - [0xE8E0F0]
+  - name: entity_model_HitYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE8E430
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HitYellowBlock_gfx]
+    - start: 0xE8E430
+      type: .data
+      name: HitYellowBlock_gfx
+      subsegments:
+      - [0xE8E430, vtx, HitYellowBlock_1]
+      - [0xE8E590, vtx, HitYellowBlock_2]
+      - [0xE8E6F0]
+      - [0xE8E850, rgba16, HitYellowBlock_face1, 32, 32]
+      - [0xE8F050, rgba16, HitYellowBlock_face2, 32, 32]
+  - name: entity_model_HitYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE8F850
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitYellowBlock_anim]
+  - name: entity_model_HitFloatingYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE8FAF0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_gfx]
+    - start: 0xE8FAF0
+      type: .data
+      name: HitFloatingYellowBlock_gfx
+      subsegments:
+      - [0xE8FAF0, vtx, HitFloatingYellowBlock_1]
+      - [0xE8FC50, vtx, HitFloatingYellowBlock_2]
+      - [0xE8FDD0]
+      - [0xE8FF30, rgba16, HitFloatingYellowBlock_face1, 32, 32]
+      - [0xE90730, rgba16, HitFloatingYellowBlock_face2, 32, 32]
+  - name: entity_model_HitFloatingYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE90F30
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_anim]
+  - name: entity_model_HitRedBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xE911C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HitRedBlock_gfx]
+    - start: 0xE911C0
+      type: .data
+      name: HitRedBlock_gfx
+      subsegments:
+      - [0xE911C0, vtx, HitRedBlock_1]
+      - [0xE91320, vtx, HitRedBlock_2]
+      - [0xE91480]
+      - [0xE91620, rgba16, HitRedBlock_face1, 32, 32]
+      - [0xE91E20, rgba16, HitRedBlock_face2, 32, 32]
+  - name: entity_model_HitRedBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xE92620
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitRedBlock_anim]
+  - name: entity_model_HeartBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE92880
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, HeartBlockContent]
+    - start: 0xE92880
+      type: .data
+      name: HeartBlockContent
+      subsegments:
+      - [0xE92880]
+      #- [0xE92880, ci4, HeartBlockContent_img1, 32, 32]
+      #- [0xE92A80, ci4, HeartBlockContent_img2, 32, 32]
+      #- [0xE92C80, ci4, HeartBlockContent_img3, 32, 32]
+      #- [0xE92E80, palette, HeartBlockContent_pal] # this palette is common for all images above
+      #- [0xE92EA0]
+  - name: entity_model_SuperBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE930E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SuperBlockContent]
+    - start: 0xE930E0
+      type: .data
+      name: SuperBlockContent
+      subsegments:
+      - [0xE930E0, ci4, SuperBlockContent, 32, 32]
+      - [0xE932E0, palette, SuperBlockContent]
+      - [0xE93300, palette, SuperBlockContent.pal2]
+      - [0xE93320, palette, SuperBlockContent.pal3]
+      - [0xE93340, palette, SuperBlockContent.pal4]
+      - [0xE93360]
+  - name: entity_model_UltraBlockContent
+    dir: entity/model
+    type: code
+    start: 0xE934C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UltraBlockContent]
+    - start: 0xE934C0
+      type: .data
+      name: UltraBlockContent
+      subsegments:
+      - [0xE934C0]
+      #- [0xE934C0, ci4, UltraBlockContent_img1, 32, 32]
+      #- [0xE936C0, ci4, UltraBlockContent_img2, 32, 32]
+      #- [0xE938C0, ci4, UltraBlockContent_img3, 32, 32]
+      #- [0xE93AC0, palette, UltraBlockContent_pal] # this palette is common for all images above
+      #- [0xE93AE0]
+  - name: entity_model_SaveBlock
+    dir: entity/model
+    type: code
+    start: 0xE93D20
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SaveBlock]
+    - start: 0xE93D20
+      type: .data
+      name: SaveBlock
+      subsegments:
+      - [0xE93D20, vtx, SaveBlock_1]
+      - [0xE94090, vtx, SaveBlock_2]
+      - [0xE943E0, vtx, SaveBlock_3]
+      - [0xE94620, rgba16, SaveBlock_star, 32, 32]
+      - [0xE94E20]
+      - [0xE94E90, rgba32, SaveBlock_face, 32, 32]
+      - [0xE95E90]
+      - [0xE95F08, rgba16, SaveBlock_letterS, 64, 32]
+      - [0xE96F08]
+  - name: entity_model_BoardedFloor
+    dir: entity/model
+    type: code
+    start: 0xE97230
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BoardedFloor]
+    - start: 0xE97230
+      type: .data
+      name: BoardedFloor
+      subsegments:
+      - [0xE97230, vtx, BoardedFloor_1]
+      - [0xE97410, vtx, BoardedFloor_2]
+      - [0xE975F0, vtx, BoardedFloor_3]
+      - [0xE977D0, vtx, BoardedFloor_4]
+      - [0xE979B0, vtx, BoardedFloor_5]
+      - [0xE97B30, vtx, BoardedFloor_6]
+      - [0xE97CB0, vtx, BoardedFloor_7]
+      - [0xE97EB0, vtx, BoardedFloor_8]
+      - [0xE980B0, vtx, BoardedFloor_9]
+      - [0xE98230, vtx, BoardedFloor_A]
+      - [0xE983B0, vtx, BoardedFloor_B]
+      - [0xE984B0, vtx, BoardedFloor_C]
+      - [0xE98630, rgba16, BoardedFloor, 64, 32]
+      - [0xE99630]
+  - name: entity_model_WoodenCrate
+    dir: entity/model
+    type: code
+    start: 0xE9A080
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, WoodenCrate]
+    - start: 0xE9A080
+      type: .data
+      name: WoodenCrate
+      subsegments:
+      - [0xE9A080, vtx, WoodenCrate]
+      - [0xE9B5E0, ci4, WoodenCrate_img1, 64, 64]
+      - [0xE9BDE0, palette, WoodenCrate_img1]
+      - [0xE9BE00]
+      - [0xE9BEA8, ci4, WoodenCrate_img2, 64, 64]
+      - [0xE9C6A8, palette, WoodenCrate_img2]
+      - [0xE9C6C8]
+  - name: entity_model_StarBoxLauncher
+    dir: entity/model
+    type: code
+    start: 0xE9E480
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, StarBoxLauncher]
+    - start: 0xE9E480
+      type: .data
+      name: StarBoxLauncher
+      subsegments:
+      - [0xE9E480, vtx, StarBoxLauncher_1]
+      - [0xE9E570, vtx, StarBoxLauncher_2]
+      - [0xE9E690, vtx, StarBoxLauncher_3]
+      - [0xE9E6D0, vtx, StarBoxLauncher_4]
+      - [0xE9E710, rgba16, StarBoxLauncher_link, 16, 16]
+      - [0xE9E910]
+      - [0xE9E988, ci4, StarBoxLauncher_face, 128, 32]
+      - [0xE9F188, palette, StarBoxLauncher_face]
+      - [0xE9F1A8]
+      - [0xE9F250, ci4, StarBoxLauncher_box, 16, 32]
+      - [0xE9F350, palette, StarBoxLauncher_box]
+      - [0xE9F370]
+  - name: entity_model_HiddenPanel
+    dir: entity/model
+    type: code
+    start: 0xE9F5E0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HiddenPanel]
+  - name: entity_model_Tweester
+    dir: entity/model
+    type: code
+    start: 0xE9F8A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Tweester]
+    - start: 0xE9F8A0
+      type: .data
+      name: Tweester
+      subsegments:
+      - [0xE9F8A0, vtx, Tweester_1]
+      - [0xE9FCB0, vtx, Tweester_2]
+      - [0xEA00C0, vtx, Tweester_3]
+      - [0xEA0100, vtx, Tweester_4]
+      - [0xEA0490, i8, Tweester_img1, 32, 32]
+      - [0xEA0890, i8, Tweester_img2, 32, 32]
+      - [0xEA0C90]
+      - [0xEA0D40, ci4, Tweester_img3, 64, 32]
+      - [0xEA1140, palette, Tweester_img3]
+      - [0xEA1160]
+  - name: entity_model_BlueWarpPipe
+    dir: entity/model
+    type: code
+    start: 0xEA1710
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BlueWarpPipe]
+    - start: 0xEA1710
+      type: .data
+      name: BlueWarpPipe
+      subsegments:
+      - [0xEA1710, vtx, BlueWarpPipe_1]
+      - [0xEA1770, vtx, BlueWarpPipe_2]
+      - [0xEA19F0, vtx, BlueWarpPipe_3]
+      - [0xEA1A30, ci4, BlueWarpPipe_texBase, 16, 16]
+      - [0xEA1AB0, palette, BlueWarpPipe_texBase]
+      - [0xEA1AD0]
+      - [0xEA1B80, ci4, BlueWarpPipe_texPipe, 32, 16]
+      - [0xEA1C80, palette, BlueWarpPipe_texPipe]
+      - [0xEA1CA0]
+  - name: entity_model_Signpost
+    dir: entity/model
+    type: code
+    start: 0xEA1EC0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Signpost]
+    - start: 0xEA1EC0
+      type: .data
+      name: Signpost
+      subsegments:
+      - [0xEA1EC0, vtx, Signpost_1]
+      - [0xEA1FE0, vtx, Signpost_2]
+      - [0xEA2440, ci4, Signpost, 32, 32]
+      - [0xEA2640, palette, Signpost]
+      - [0xEA2660]
+  - name: entity_model_ArrowSign
+    dir: entity/model
+    type: code
+    start: 0xEA2940
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ArrowSign]
+    - start: 0xEA2940
+      type: .data
+      name: ArrowSign
+      subsegments:
+      - [0xEA2940]
+      - [0xEA29C0, ci8, ArrowSign, 64, 32]
+      - [0xEA31C0, palette, ArrowSign]
+      - [0xEA33C0]
+  - name: entity_model_Padlock
+    dir: entity/model
+    type: code
+    start: 0xEA3590
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Padlock]
+    - start: 0xEA3590
+      type: .data
+      name: Padlock
+      subsegments:
+      - [0xEA3590, vtx, Padlock_1]
+      - [0xEA3B50, vtx, Padlock_2]
+      - [0xEA3BB0, vtx, Padlock_3]
+      - [0xEA3BF0, vtx, Padlock_4]
+      - [0xEA3C90, ci8, Padlock_face, 32, 32]
+      - [0xEA4090, palette, Padlock_face]
+      - [0xEA4290]
+      - [0xEA4338, ci8, Padlock_keyhole, 32, 64]
+      - [0xEA4B38, palette, Padlock_keyhole]
+      - [0xEA4D38]
+      - [0xEA4DE0, ci8, Padlock_body, 32, 32]
+      - [0xEA51E0, palette, Padlock_body]
+      - [0xEA53E0]
+  - name: entity_model_PadlockRedFrame
+    dir: entity/model
+    type: code
+    start: 0xEA57C0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PadlockRedFrame]
+    - start: 0xEA57C0
+      type: .data
+      name: PadlockRedFrame
+      subsegments:
+      - [0xEA57C0, vtx, PadlockRedFrame_1]
+      - [0xEA59C0, vtx, PadlockRedFrame_2]
+      - [0xEA5A00, vtx, PadlockRedFrame_3]
+      - [0xEA5A40, vtx, PadlockRedFrame_4]
+      - [0xEA5D00, ci8, PadlockRedFrame_keyhole, 32, 64]
+      - [0xEA6500, palette, PadlockRedFrame_keyhole]
+      - [0xEA6700]
+      - [0xEA67A8, ci8, PadlockRedFrame_face, 32, 32]
+      - [0xEA6BA8, palette, PadlockRedFrame_face]
+      - [0xEA6DA8]
+  - name: entity_model_PadlockRedFace
+    dir: entity/model
+    type: code
+    start: 0xEA7170
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PadlockRedFace]
+    - start: 0xEA7170
+      type: .data
+      name: PadlockRedFace
+      subsegments:
+      - [0xEA7170, vtx, PadlockRedFace_1]
+      - [0xEA7730, vtx, PadlockRedFace_2]
+      - [0xEA7790, vtx, PadlockRedFace_3]
+      - [0xEA77D0, vtx, PadlockRedFace_4]
+      - [0xEA7870, i4, PadlockRedFace_face, 32, 32]
+      - [0xEA7A70]
+      - [0xEA7AE8, ci8, PadlockRedFace_keyhole, 32, 64]
+      - [0xEA82E8, palette, PadlockRedFace_keyhole]
+      - [0xEA84E8]
+      - [0xEA8590, ci8, PadlockRedFace_body, 32, 32]
+      - [0xEA8990, palette, PadlockRedFace_body]
+      - [0xEA8B90]
+  - name: entity_model_PadlockBlueFace
+    dir: entity/model
+    type: code
+    start: 0xEA8F90
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PadlockBlueFace]
+    - start: 0xEA8F90
+      type: .data
+      name: PadlockBlueFace
+      subsegments:
+      - [0xEA8F90, vtx, PadlockBlueFace_1]
+      - [0xEA9550, vtx, PadlockBlueFace_2]
+      - [0xEA95B0, vtx, PadlockBlueFace_3]
+      - [0xEA95F0, vtx, PadlockBlueFace_4]
+      - [0xEA9690, i4, PadlockBlueFace_face, 32, 32]
+      - [0xEA9890]
+      - [0xEA9908, ci8, PadlockBlueFace_keyhole, 32, 64]
+      - [0xEAA108, palette, PadlockBlueFace_keyhole]
+      - [0xEAA308]
+      - [0xEAA3B0, ci8, PadlockBlueFace_body, 32, 32]
+      - [0xEAA7B0, palette, PadlockBlueFace_body]
+      - [0xEAA9B0]
+  - name: entity_model_GreenStompSwitch
+    dir: entity/model
+    type: code
+    start: 0xEAADB0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, GreenStompSwitch]
+    - start: 0xEAADB0
+      type: .data
+      name: GreenStompSwitch
+      subsegments:
+      - [0xEAADB0, vtx, GreenStompSwitch_1]
+      - [0xEAAE30, vtx, GreenStompSwitch_2]
+      - [0xEAB030, ci4, GreenStompSwitch_tex, 16, 16]
+      - [0xEAB0B0, palette, GreenStompSwitch_tex]
+      - [0xEAB0D0]
+      - [0xEAB188, ci4, GreenStompSwitch_exclamationMark, 16, 32]
+      - [0xEAB288, palette, GreenStompSwitch_exclamationMark]
+      - [0xEAB2A8]
+  - name: entity_model_RedSwitch
+    dir: entity/model
+    type: code
+    start: 0xEAB500
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, RedSwitch]
+    - start: 0xEAB500
+      type: .data
+      name: RedSwitch
+      subsegments:
+      - [0xEAB500, vtx, RedSwitch_1]
+      - [0xEAB890, vtx, RedSwitch_2]
+      - [0xEAB8D0, vtx, RedSwitch_3]
+      - [0xEABAD0, ci8, RedSwitch_tex, 16, 16]
+      - [0xEABBD0, palette, RedSwitch_tex]
+      - [0xEABDD0]
+      - [0xEABE78, ia4, RedSwitch_exclamationMark, 16, 32]
+      - [0xEABF78]
+  - name: entity_model_BlueSwitch
+    dir: entity/model
+    type: code
+    start: 0xEAC400
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BlueSwitch]
+    - start: 0xEAC400
+      type: .data
+      name: BlueSwitch
+      subsegments:
+      - [0xEAC400, vtx, BlueSwitch_1]
+      - [0xEAC700, vtx, BlueSwitch_2]
+      - [0xEAC790, vtx, BlueSwitch_3]
+      - [0xEAC7D0, vtx, BlueSwitch_4]
+      - [0xEAC9D0, ci8, BlueSwitch_tex, 16, 16]
+      - [0xEACAD0, palette, BlueSwitch_tex]
+      - [0xEACCD0]
+      - [0xEACD78, ia4, BlueSwitch_exclamationMark, 16, 32]
+      - [0xEACE78]
+  - name: entity_model_Chest
+    dir: entity/model
+    type: code
+    start: 0xEAD310
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, Chest]
+    - start: 0xEAD310
+      type: .data
+      name: Chest
+      subsegments:
+      - [0xEAD310, vtx, Chest_1]
+      - [0xEAD4A0, vtx, Chest_2]
+      - [0xEAD520, vtx, Chest_3]
+      - [0xEAD6A0, vtx, Chest_4]
+      - [0xEAD720, rgba16, Chest_tex1, 16, 32]
+      - [0xEADB20]
+      - [0xEADBA8, ci4, Chest_tex2, 16, 32]
+      - [0xEADCA8, palette, Chest_tex2]
+      - [0xEADCC8]
+      - [0xEADD80, ci4, Chest_lock, 16, 32]
+      - [0xEADE80, palette, Chest_lock]
+      - [0xEADEA0]
+  - name: entity_model_ScriptSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xEAE1E0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, ScriptSpring_gfx]
+    - start: 0xEAE1E0
+      type: .data
+      name: ScriptSpring_gfx
+      subsegments:
+      - [0xEAE1E0, vtx, ScriptSpring_1]
+      - [0xEAE460, vtx, ScriptSpring_2]
+      - [0xEAE4E0, vtx, ScriptSpring_3]
+      - [0xEAE560, vtx, ScriptSpring_4]
+      - [0xEAE5E0, vtx, ScriptSpring_5]
+      - [0xEAE860, vtx, ScriptSpring_6]
+      - [0xEAE9C0, vtx, ScriptSpring_7]
+      - [0xEAEA40, ci8, ScriptSpring_tex1, 16, 16]
+      - [0xEAEB40, palette, ScriptSpring_tex1]
+      - [0xEAED40]
+      - [0xEAEDE8, ci8, ScriptSpring_tex2, 16, 16]
+      - [0xEAEEE8, palette, ScriptSpring_tex2]
+      - [0xEAF0E8]
+      - [0xEAF190, ci8, ScriptSpring_star, 32, 32]
+      - [0xEAF590, palette, ScriptSpring_star]
+      - [0xEAF790]
+  - name: entity_model_ScriptSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xEAFB60
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, ScriptSpring_anim]
+  - name: entity_model_SimpleSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB0FC0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SimpleSpring_gfx]
+    - start: 0xEB0FC0
+      type: .data
+      name: SimpleSpring_gfx
+      subsegments:
+      - [0xEB0FC0, vtx, SimpleSpring_1]
+      - [0xEB1240, vtx, SimpleSpring_2]
+      - [0xEB12C0, vtx, SimpleSpring_3]
+      - [0xEB1340, vtx, SimpleSpring_4]
+      - [0xEB15C0, vtx, SimpleSpring_5]
+      - [0xEB1720, vtx, SimpleSpring_6]
+      - [0xEB17A0, ci8, SimpleSpring_tex1, 16, 16]
+      - [0xEB18A0, palette, SimpleSpring_tex1]
+      - [0xEB1AA0]
+      - [0xEB1B48, rgba16, SimpleSpring_tex2, 16, 16]
+      - [0xEB1D48]
+      - [0xEB1DC0, ci8, SimpleSpring_star, 32, 32]
+      - [0xEB21C0, palette, SimpleSpring_star]
+      - [0xEB23C0]
+  - name: entity_model_SimpleSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xEB2790
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, SimpleSpring_anim]
+  - name: entity_model_BellbellPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB3BF0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BellbellPlant_gfx]
+    - start: 0xEB3BF0
+      type: .data
+      name: BellbellPlant_gfx
+      subsegments:
+      - [0xEB3BF0, vtx, BellbellPlant_1]
+      - [0xEB3F80, vtx, BellbellPlant_2]
+      - [0xEB4230, vtx, BellbellPlant_3]
+      - [0xEB4310, vtx, BellbellPlant_4]
+      - [0xEB4600, vtx, BellbellPlant_5]
+      - [0xEB46E0]
+      - [0xEB4C80, rgba16, BellbellPlant, 16, 16]
+  - name: entity_model_BellbellPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xEB4E80
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, BellbellPlant_anim]
+  - name: entity_model_TrumpetPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB5DD0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, TrumpetPlant_gfx]
+    - start: 0xEB5DD0
+      type: .data
+      name: TrumpetPlant_gfx
+      subsegments:
+      - [0xEB5DD0, vtx, TrumpetPlant_1]
+      - [0xEB6010, vtx, TrumpetPlant_2]
+      - [0xEB6780]
+      - [0xEB6B10, rgba16, TrumpetPlant, 16, 16]
+  - name: entity_model_TrumpetPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xEB6D10
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, TrumpetPlant_anim]
+  - name: entity_model_MunchlesiaReset_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB70A0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaReset_gfx]
+    - start: 0xEB70A0
+      type: .data
+      name: MunchlesiaReset_gfx
+      subsegments:
+      - [0xEB70A0, vtx, MunchlesiaReset]
+      - [0xEB8990]
+      - [0xEBCF88, rgba16, MunchlesiaReset, 16, 16]
+  - name: entity_model_MunchlesiaReset_anim
+    dir: entity/model
+    type: code
+    start: 0xEBD190
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset_anim]
+  - name: entity_model_MunchlesiaGrab_gfx
+    dir: entity/model
+    type: code
+    start: 0xEBD610
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaGrab_gfx]
+    - start: 0xEBD610
+      type: .data
+      name: MunchlesiaGrab_gfx
+      subsegments:
+      - [0xEBD610, vtx, MunchlesiaGrab]
+      - [0xEBEF00]
+      - [0xEC34F8, rgba16, MunchlesiaGrab, 16, 16]
+  - name: entity_model_MunchlesiaGrab_anim
+    dir: entity/model
+    type: code
+    start: 0xEC3700
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaGrab_anim]
+  - name: entity_model_MunchlesiaEnvelop_gfx
+    dir: entity/model
+    type: code
+    start: 0xEC3B20
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_gfx]
+    - start: 0xEC3B20
+      type: .data
+      name: MunchlesiaEnvelop_gfx
+      subsegments:
+      - [0xEC3B20, vtx, MunchlesiaEnvelop]
+      - [0xEC5410]
+      - [0xEC9A08, rgba16, MunchlesiaEnvelop, 16, 16]
+  - name: entity_model_MunchlesiaEnvelop_anim
+    dir: entity/model
+    type: code
+    start: 0xEC9C10
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_anim]
+  - name: entity_model_MunchlesiaBeginChew_gfx
+    dir: entity/model
+    type: code
+    start: 0xECA030
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_gfx]
+    - start: 0xECA030
+      type: .data
+      name: MunchlesiaBeginChew_gfx
+      subsegments:
+      - [0xECA030, vtx, MunchlesiaBeginChew]
+      - [0xECB920]
+      - [0xED0870, rgba16, MunchlesiaBeginChew, 16, 16]
+  - name: entity_model_MunchlesiaBeginChew_anim
+    dir: entity/model
+    type: code
+    start: 0xED0A70
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_anim]
+  - name: entity_model_MunchlesiaChewing_gfx
+    dir: entity/model
+    type: code
+    start: 0xED0EE0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaChewing_gfx]
+    - start: 0xED0EE0
+      type: .data
+      name: MunchlesiaChewing_gfx
+      subsegments:
+      - [0xED0EE0, vtx, MunchlesiaChewing]
+      - [0xED27D0]
+      - [0xED2C50, rgba16, MunchlesiaChewing, 16, 16]
+  - name: entity_model_MunchlesiaChewing_anim
+    dir: entity/model
+    type: code
+    start: 0xED2E50
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaChewing_anim]
+  - name: entity_model_MunchlesiaSpitOut_gfx
+    dir: entity/model
+    type: code
+    start: 0xED3420
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_gfx]
+    - start: 0xED3420
+      type: .data
+      name: MunchlesiaSpitOut_gfx
+      subsegments:
+      - [0xED3420, vtx, MunchlesiaSpitOut]
+      - [0xED4D10]
+      - [0xED9C60, rgba16, MunchlesiaSpitOut, 16, 16]
+  - name: entity_model_MunchlesiaSpitOut_anim
+    dir: entity/model
+    type: code
+    start: 0xED9E60
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_anim]
+  - name: entity_model_MunchlesiaReset1_gfx
+    dir: entity/model
+    type: code
+    start: 0xEDA2D0
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, MunchlesiaReset1_gfx]
+    - start: 0xEDA2D0
+      type: .data
+      name: MunchlesiaReset1_gfx
+      subsegments:
+      - [0xEDA2D0, vtx, MunchlesiaReset1]
+      - [0xEDBBC0]
+      - [0xEE0B10, rgba16, MunchlesiaReset1, 16, 16]
+  - name: entity_model_MunchlesiaReset1_anim
+    dir: entity/model
+    type: code
+    start: 0xEE0D10
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset1_anim]
+  - name: entity_model_CymbalPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xEE1180
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, CymbalPlant_anim]
+  - name: entity_model_CymbalPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xEE1D30
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, CymbalPlant_gfx]
+    - start: 0xEE1D30
+      type: .data
+      name: CymbalPlant_gfx
+      subsegments:
+      - [0xEE1D30, ci4, CymbalPlant, 64, 64]
+      - [0xEE2530, palette, CymbalPlant]
+      - [0xEE2550]
+      - [0xEE25F8, vtx, CymbalPlant_1]
+      - [0xEE2698, vtx, CymbalPlant_2]
+      - [0xEE26F8, vtx, CymbalPlant_3]
+      - [0xEE2798, vtx, CymbalPlant_4]
+      - [0xEE28E8, vtx, CymbalPlant_5]
+      - [0xEE2A58, vtx, CymbalPlant_6]
+      - [0xEE2AE8, vtx, CymbalPlant_7]
+      - [0xEE2C58, vtx, CymbalPlant_8]
+      - [0xEE2DA8]
+  - name: entity_model_PinkFlower_anim
+    dir: entity/model
+    type: code
+    start: 0xEE33D0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, PinkFlower_anim]
+  - name: entity_model_PinkFlower_gfx
+    dir: entity/model
+    type: code
+    start: 0xEE3F40
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, PinkFlower_gfx]
+    - start: 0xEE3F40
+      type: .data
+      name: PinkFlower_gfx
+      subsegments:
+      - [0xEE3F40, vtx, PinkFlower_1]
+      - [0xEE3F80, vtx, PinkFlower_2]
+      - [0xEE41D0, vtx, PinkFlower_3]
+      - [0xEE42F0, vtx, PinkFlower_4]
+      - [0xEE43F0, vtx, PinkFlower_5]
+      - [0xEE44F0, ia16, PinkFlower_light, 16, 16]
+      - [0xEE46F0]
+      - [0xEE4760, rgba16, PinkFlower_tex, 16, 64]
+      - [0xEE4F60]
+  - name: entity_model_SpinningFlower
+    dir: entity/model
+    type: code
+    start: 0xEE5340
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, SpinningFlower]
+    - start: 0xEE5340
+      type: .data
+      name: SpinningFlower
+      subsegments:
+      - [0xEE5340, vtx, SpinningFlower_1]
+      - [0xEE5390, vtx, SpinningFlower_2]
+      - [0xEE53E0, vtx, SpinningFlower_3]
+      - [0xEE5460, vtx, SpinningFlower_4]
+      - [0xEE54C0, ia4, SpinningFlower_img1, 16, 32]
+      - [0xEE55C0]
+      - [0xEE5638, rgba16, SpinningFlower_petal, 32, 32]
+      - [0xEE5E38]
+  - name: entity_model_BombableRock
+    dir: entity/model
+    type: code
+    start: 0xEE6090
+    vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, BombableRock]
+    - start: 0xEE6090
+      type: .data
+      name: BombableRock
+      subsegments:
+      - [0xEE6090, vtx, BombableRock_1]
+      - [0xEE6410, vtx, BombableRock_2]
+      - [0xEE6530, vtx, BombableRock_3]
+      - [0xEE6690, vtx, BombableRock_4]
+      - [0xEE67B0, vtx, BombableRock_5]
+      - [0xEE68D0, ci4, BombableRock, 64, 64]
+      - [0xEE70D0, palette, BombableRock]
+      - [0xEE70F0]
 
-  - start: 0x1943000
-    align: 8
-    type: pm_sprites
-    name: sprites
+#################
+### Dead maps ###
+#################
+  - [0xEE7710, bin]
+
+  - [0xF00000, pm_sbn, audio]
+  - [0x1942C40, bin]
+  - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
   - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
 
   - [0x2800000]
