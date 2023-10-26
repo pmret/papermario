@@ -326,7 +326,7 @@ s32 load_effect(s32 effectIndex) {
     // Copy the effect into the newly mapped space
     dma_copy(effectEntry->dmaStart, effectEntry->dmaEnd, effectEntry->dmaDest);
 
-    // If there's extra data the effect normally loads, allocate space and copy into the new space
+    // If there's graphics data for the effect, allocate space and copy into the new space
     if (effectEntry->graphicsDmaStart != NULL) {
         void* effectDataBuf = general_heap_malloc(effectEntry->graphicsDmaEnd - effectEntry->graphicsDmaStart);
         effectGraphics->data = effectDataBuf;

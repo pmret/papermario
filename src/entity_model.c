@@ -418,8 +418,8 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
     f32 x, y, z, w;
     f32 inX, inY, inZ;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
-        modelIdx &= ~0x800;
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+        modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
         if (model != NULL) {
@@ -456,8 +456,8 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
     f32 x, y, z, w;
     f32 inX, inY, inZ;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
-        modelIdx &= ~0x800;
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+        modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
         if (model != NULL) {
@@ -491,8 +491,8 @@ void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
-        modelIdx &= ~0x800;
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+        modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
         if (model != NULL) {
@@ -521,8 +521,8 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vec3s* verte
     RenderTask rt;
     RenderTask* rtPtr = &rt;
 
-    if ((!gGameStatusPtr->isBattle) || (modelIdx & 0x800)) {
-        modelIdx &= ~0x800;
+    if ((!gGameStatusPtr->isBattle) || (modelIdx & BATTLE_ENTITY_ID_BIT)) {
+        modelIdx &= ~BATTLE_ENTITY_ID_BIT;
         model = (*gCurrentEntityModelList)[modelIdx];
 
         if (model != NULL) {
@@ -548,7 +548,7 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vec3s* verte
 }
 
 void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
-    EntityModel* model = (*gCurrentEntityModelList)[modelIdx & ~0x800];
+    EntityModel* model = (*gCurrentEntityModelList)[modelIdx & ~BATTLE_ENTITY_ID_BIT];
     Matrix4f mtx;
     Matrix4f mtx2;
     ImgFXTexture ifxImg;
@@ -578,11 +578,11 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (!(model->flags & ENTITY_MODEL_FLAG_USE_IMAGE)) {
-        s32 cond = FALSE;
+        s32 useFog = FALSE;
         if (entity_fog_enabled && !(model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
-            cond = TRUE;
+            useFog = TRUE;
         }
-        switch (cond) {
+        switch (useFog) {
             case FALSE:
                 switch (model->renderMode) {
                     case RENDER_MODE_SURFACE_OPA:

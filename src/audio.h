@@ -612,7 +612,7 @@ typedef struct SoundPlayer {
     /* 0x85 */ u8 triggers;
     /* 0x86 */ char unk_86[0x2];
     /* 0x88 */ s8* loopStartPos;
-    /* 0x8C */ u8 loopIterCount;
+    /* 0x8C */ u8 loopIterCount; // loopIterCount = 0 for infinite loop
     /* 0x8D */ char unk_8D;
     /* 0x8E */ u16 delay;
     /* 0x90 */ u16 playLength;
@@ -783,28 +783,25 @@ typedef struct BGMInstrumentInfo {
     /* 0x07 */ char pad_7[1];
 } BGMInstrumentInfo; // size = 0x8
 
+typedef struct AUFileMetadata {
+    /* 0x00 */ s32 signature;   // file type identifer: 'SBN ', 'SEF ', etc
+    /* 0x04 */ s32 size;        // full file size, including header and data
+} AUFileMetadata;
+
 typedef struct SBNHeader {
-    /* 0x00 */ s32 signature; // 'SBN '
-    /* 0x04 */ s32 size;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 tableOffset; // = 0x40
-    /* 0x14 */ s32 numEntries;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x00 */ AUFileMetadata mdata; // uses identifer 'SBN '
+    /* 0x08 */ char unused_08[8];
+    /* 0x10 */ s32 tableOffset; // offset in the SBN file of the file table (== sizeof(SBNHeader))
+    /* 0x14 */ s32 numEntries;  // number of entries in the SBN file table
+    /* 0x18 */ s32 fileSize;    // full size of the SBN file (unread)
+    /* 0x1C */ s32 versionOffset;
+    /* 0x20 */ char unused_04[4];
     /* 0x24 */ s32 INIToffset;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ s32 unk_3C;
+    /* 0x28 */ char reserved[24];
 } SBNHeader; // size = 0x40
 
 typedef struct SEFHeader {
-    /* 0x00 */ s32 signature; // 'SEF '
-    /* 0x04 */ s32 size;
+    /* 0x00 */ AUFileMetadata mdata; // uses identifer 'SEF '
     /* 0x08 */ s32 unk8;
     /* 0x0C */ s8 unkC; // 0
     /* 0x0D */ s8 unkD; // 0
@@ -815,8 +812,7 @@ typedef struct SEFHeader {
 } SEFHeader; // size = 0x22
 
 typedef struct INITHeader {
-    /* 0x00 */ s32 signature; // 'INIT'
-    /* 0x04 */ s32 size;
+    /* 0x00 */ AUFileMetadata mdata; // uses identifer 'INIT'
     /* 0x08 */ u16 entriesOffset;
     /* 0x0A */ u16 entriesSize;
     /* 0x0C */ u16 tblOffset;
@@ -827,8 +823,7 @@ typedef struct INITHeader {
 } INITHeader; // size = 0x20
 
 typedef struct PERHeader {
-    /* 0x00 */ s32 signature; // 'PER ' or 'PRG '
-    /* 0x04 */ s32 size; // including this header
+    /* 0x00 */ AUFileMetadata mdata; // uses identifer 'PER ' or 'PRG '
     /* 0x08 */ char unk_08[8];
 } PERHeader; // size = 0x10
 

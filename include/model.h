@@ -35,6 +35,19 @@ typedef struct ModelNodeProperty {
     /* 0x8 */ ModelNodePropertyData data;
 } ModelNodeProperty; // size = 0xC;
 
+typedef struct ModelGroupData {
+    /* 0x00 */ Mtx* transformMatrix;
+    /* 0x04 */ Lightsn* lightingGroup;
+    /* 0x08 */ s32 numLights;
+    /* 0x0C */ s32 numChildren;
+    /* 0x10 */ struct ModelNode** childList;
+} ModelGroupData; // size = 0x14
+
+typedef struct ModelDisplayData {
+    /* 0x0 */ Gfx* displayList;
+    /* 0x4 */ char unk_04[0x4];
+} ModelDisplayData; // size = 0x8
+
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
     /* 0x04 */ ModelDisplayData* displayData;

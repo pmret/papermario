@@ -1162,7 +1162,7 @@ void update_coin_counter(void) {
 
     if (statusBar->unk_6D != 0) {
         statusBar->unk_6D--;
-        if ((statusBar->unk_6D == 0) && (statusBar->iconIndex12 >= 0)) {
+        if ((statusBar->unk_6D == 0) && (statusBar->iconIndex12 > -1)) {
             hud_element_free(statusBar->iconIndex12);
             hud_element_free(statusBar->iconIndex13);
             statusBar->iconIndex12 = -1;
