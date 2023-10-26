@@ -3,21 +3,8 @@
 #include "message_ids.h"
 #include "sprite.h"
 
-#if !VERSION_IQUE
-// TODO: remove if assets are dumped in iQue release
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
-#endif
-
-#if VERSION_IQUE
-// TODO: remove if section is split in iQue release
-extern Addr charset_ROM_START;
-extern Addr charset_standard_OFFSET;
-extern Addr charset_standard_pal_OFFSET;
-extern Addr charset_title_OFFSET;
-extern Addr charset_credits_pal_OFFSET;
-extern Addr charset_subtitle_OFFSET;
-#endif
 
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,

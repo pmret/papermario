@@ -78,7 +78,9 @@ unsigned char ui_msg_palettes[16][32] = {
 BSS IMG_BIN MsgCharImgTitle[0xF60];
 BSS IMG_BIN MsgCharImgNormal[0x5100];
 BSS IMG_BIN MsgCharImgSubtitle[0xB88];
-BSS char MSG_unused[8];
+#if !VERSION_IQUE
+BSS static char padding[8];
+#endif
 BSS PAL_BIN D_802F4560[80][8];
 
 MATCHING_BSS(0x6DA0);

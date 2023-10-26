@@ -117,6 +117,57 @@ u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_UPPER_I_UMLAUT]         8,
     [MSG_CHAR_UPPER_N_TILDE]          9,
     [MSG_CHAR_UPPER_O_GRAVE]          9,
+#if VERSION_IQUE
+    [MSG_CHAR_UPPER_O_ACUTE]         18,
+    [MSG_CHAR_UPPER_O_CIRCUMFLEX]    18,
+    [MSG_CHAR_UPPER_O_UMLAUT]        18,
+    [MSG_CHAR_UPPER_U_GRAVE]         18,
+    [MSG_CHAR_UPPER_U_ACUTE]         18,
+    [MSG_CHAR_UPPER_U_CIRCUMFLEX]    18,
+    [MSG_CHAR_UPPER_U_UMLAUT]        18,
+    [MSG_CHAR_SHARP_S]               18,
+    [MSG_CHAR_LOWER_A_GRAVE]         18,
+    [MSG_CHAR_LOWER_A_ACUTE]         18,
+    [MSG_CHAR_LOWER_A_CIRCUMFLEX]    18,
+    [MSG_CHAR_LOWER_A_UMLAUT]        18,
+    [MSG_CHAR_LOWER_C_CEDILLA]       18,
+    [MSG_CHAR_LOWER_E_GRAVE]         18,
+    [MSG_CHAR_LOWER_E_ACUTE]         18,
+    [MSG_CHAR_LOWER_E_CIRCUMFLEX]    18,
+    [MSG_CHAR_LOWER_E_UMLAUT]        18,
+    [MSG_CHAR_LOWER_I_GRAVE]         18,
+    [MSG_CHAR_LOWER_I_ACUTE]         18,
+    [MSG_CHAR_LOWER_I_CIRCUMFLEX]    18,
+    [MSG_CHAR_LOWER_I_UMLAUT]        18,
+    [MSG_CHAR_LOWER_N_TILDE]         18,
+    [MSG_CHAR_LOWER_O_GRAVE]         18,
+    [MSG_CHAR_LOWER_O_ACUTE]         18,
+    [MSG_CHAR_LOWER_O_CIRCUMFLEX]    18,
+    [MSG_CHAR_LOWER_O_UMLAUT]        18,
+    [MSG_CHAR_LOWER_U_GRAVE]         18,
+    [MSG_CHAR_LOWER_U_ACUTE]         18,
+    [MSG_CHAR_LOWER_U_CIRCUMFLEX]    18,
+    [MSG_CHAR_LOWER_U_UMLAUT]        18,
+    [MSG_CHAR_INVERTED_EXCLAMTION]   18,
+    [MSG_CHAR_INVERTED_QUESTION]     18,
+    [MSG_CHAR_FEM_ORDINAL]           18,
+    [MSG_CHAR_HEART]                 18,
+    [MSG_CHAR_STAR]                  18,
+    [MSG_CHAR_UP]                    18,
+    [MSG_CHAR_DOWN]                  18,
+    [MSG_CHAR_LEFT]                  18,
+    [MSG_CHAR_RIGHT]                 18,
+    [MSG_CHAR_CIRCLE]                18,
+    [MSG_CHAR_CROSS]                 18,
+    [MSG_CHAR_BUTTON_A]              18,
+    [MSG_CHAR_BUTTON_B]              18,
+    [MSG_CHAR_BUTTON_L]              18,
+    [MSG_CHAR_BUTTON_R]              18,
+    [MSG_CHAR_BUTTON_Z]              18,
+    [MSG_CHAR_BUTTON_C_UP]           18,
+    [MSG_CHAR_BUTTON_C_DOWN]         18,
+    [MSG_CHAR_BUTTON_C_LEFT]         18,
+#else
     [MSG_CHAR_UPPER_O_ACUTE]          9,
     [MSG_CHAR_UPPER_O_CIRCUMFLEX]     9,
     [MSG_CHAR_UPPER_O_UMLAUT]         9,
@@ -166,6 +217,7 @@ u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_BUTTON_C_UP]           13,
     [MSG_CHAR_BUTTON_C_DOWN]         13,
     [MSG_CHAR_BUTTON_C_LEFT]         13,
+#endif
     [MSG_CHAR_BUTTON_C_RIGHT]        13,
     [MSG_CHAR_BUTTON_START]          16,
     [MSG_CHAR_DOUBLE_QUOTE_OPEN]      9,
@@ -310,15 +362,27 @@ MessageCharset* MsgCharsets[] = {
 };
 
 s32 MsgLetterRasterOffsets[] = {
+#if VERSION_IQUE
+    0x00056E90, 0x00058A90, 0x0005A690, 0x0005C290,
+    0x0005DE90, 0x0005FA90, 0x00061690, 0x00063290,
+    0x00064E90, 0x00066A90, 0x00068690, 0x0006A290,
+#else
     0x0000D178, 0x0000ED78, 0x00010978, 0x00012578,
     0x00014178, 0x00015D78, 0x00017978, 0x00019578,
     0x0001B178, 0x0001CD78, 0x0001E978, 0x00020578,
+#endif
 };
 
 s32 MsgLetterPaletteOffsets[] = {
+#if VERSION_IQUE
+    0x00058890, 0x0005A490, 0x0005C090, 0x0005DC90,
+    0x0005F890, 0x00061490, 0x00063090, 0x00064C90,
+    0x00066890, 0x00068490, 0x0006A090, 0x0006BC90,
+#else
     0x0000EB78, 0x00010778, 0x00012378, 0x00013F78,
     0x00015B78, 0x00017778, 0x00019378, 0x0001AF78,
     0x0001CB78, 0x0001E778, 0x00020378, 0x00021F78,
+#endif
 };
 
 MsgVoice MsgVoices[] = {
