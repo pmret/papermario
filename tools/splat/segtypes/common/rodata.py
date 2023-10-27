@@ -13,6 +13,10 @@ class CommonSegRodata(CommonSegData):
         return ".rodata"
 
     @staticmethod
+    def is_data() -> bool:
+        return False
+
+    @staticmethod
     def is_rodata() -> bool:
         return True
 

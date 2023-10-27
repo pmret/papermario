@@ -12,7 +12,6 @@ options:
   undefined_funcs_auto_path: split/undefined_funcs_auto.txt
   undefined_syms_auto_path:  split/undefined_syms_auto.txt
   asset_path: split/assets
-  asm_generated_by: False
   compiler: GCC
 segments:
   - name: header

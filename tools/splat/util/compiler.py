@@ -6,6 +6,7 @@ from typing import Optional
 class Compiler:
     name: str
     asm_function_macro: str = "glabel"
+    asm_function_alt_macro: str = "glabel"
     asm_jtbl_label_macro: str = "glabel"
     asm_data_macro: str = "glabel"
     asm_end_label: str = ""

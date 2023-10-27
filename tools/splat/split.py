@@ -5,21 +5,27 @@ import hashlib
 import importlib
 import pickle
 from typing import Any, Dict, List, Optional, Set, Tuple, Union
+from pathlib import Path
 from disassembler import disassembler_instance
-import tqdm
+from util import progress_bar
+
+# This unused import makes the yaml library faster. don't remove
+import pylibyaml  # pyright: ignore
 import yaml
+
 from colorama import Fore, Style
 from intervaltree import Interval, IntervalTree
+import sys
 
 from segtypes.linker_entry import (
     LinkerWriter,
     get_segment_vram_end_symbol_name,
-    to_cname,
+    segment_cname,
 )
 from segtypes.segment import Segment
 from util import log, options, palettes, symbols, relocs
 
-VERSION = "0.16.1"
+VERSION = "0.18.1"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -34,6 +40,14 @@ parser.add_argument(
     "--skip-version-check",
     action="store_true",
     help="Skips the disassembler's version check",
+)
+parser.add_argument(
+    "--stdout-only", help="Print all output to stdout", action="store_true"
+)
+parser.add_argument(
+    "--disassemble-all",
+    help="Disasemble matched functions and migrated data",
+    action="store_true",
 )
 
 linker_writer: LinkerWriter
@@ -209,8 +223,19 @@ def brief_seg_name(seg: Segment, limit: int, ellipsis="…") -> str:
     return s
 
 
-def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
+def main(
+    config_path,
+    modes,
+    verbose,
+    use_cache=True,
+    skip_version_check=False,
+    stdout_only=False,
+    disassemble_all=False,
+):
     global config
+
+    if stdout_only:
+        progress_bar.out_file = sys.stdout
 
     # Load config
     config = {}
@@ -219,7 +244,7 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
             additional_config = yaml.load(f.read(), Loader=yaml.SafeLoader)
         config = merge_configs(config, additional_config)
 
-    options.initialize(config, config_path, modes, verbose)
+    options.initialize(config, config_path, modes, verbose, disassemble_all)
 
     disassembler_instance.create_disassembler_instance(options.opts.platform)
     disassembler_instance.get_instance().check_version(skip_version_check, VERSION)
@@ -289,7 +314,7 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
         palettes.initialize(all_segments)
 
     # Scan
-    scan_bar = tqdm.tqdm(all_segments, total=len(all_segments))
+    scan_bar = progress_bar.get_progress_bar(all_segments)
     for segment in scan_bar:
         assert isinstance(segment, Segment)
         scan_bar.set_description(f"Scanning {brief_seg_name(segment, 20)}")
@@ -319,10 +344,7 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     symbols.mark_c_funcs_as_defined()
 
     # Split
-    split_bar = tqdm.tqdm(
-        all_segments,
-        total=len(all_segments),
-    )
+    split_bar = progress_bar.get_progress_bar(all_segments)
     for segment in split_bar:
         split_bar.set_description(f"Splitting {brief_seg_name(segment, 20)}")
 
@@ -376,23 +398,66 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
 
         global linker_writer
         linker_writer = LinkerWriter()
-        linker_bar = tqdm.tqdm(
-            all_segments,
-            total=len(all_segments),
-        )
+        linker_bar = progress_bar.get_progress_bar(all_segments)
+
+        partial_linking = options.opts.ld_partial_linking
+        partial_scripts_path = options.opts.ld_partial_scripts_path
+        segments_path = options.opts.ld_partial_build_segments_path
+        if partial_linking:
+            if partial_scripts_path is None:
+                log.error(
+                    "Partial linking is enabled but `ld_partial_scripts_path` has not been set"
+                )
+            if options.opts.ld_partial_build_segments_path is None:
+                log.error(
+                    "Partial linking is enabled but `ld_partial_build_segments_path` has not been set"
+                )
 
         for segment in linker_bar:
             linker_bar.set_description(f"Linker script {brief_seg_name(segment, 20)}")
-            linker_writer.add(segment, max_vram_end_insertion_points.get(segment, []))
-        linker_writer.save_linker_script()
+            max_vram_syms = max_vram_end_insertion_points.get(segment, [])
+
+            if options.opts.ld_partial_linking:
+                linker_writer.add_referenced_partial_segment(segment, max_vram_syms)
+
+                # Create linker script for segment
+                sub_linker_writer = LinkerWriter(is_partial=True)
+                sub_linker_writer.add_partial_segment(segment)
+
+                assert partial_scripts_path is not None
+                assert segments_path is not None
+
+                seg_name = segment_cname(segment)
+
+                sub_linker_writer.save_linker_script(
+                    partial_scripts_path / f"{seg_name}.ld"
+                )
+                if options.opts.ld_dependencies:
+                    sub_linker_writer.save_dependencies_file(
+                        partial_scripts_path / f"{seg_name}.d",
+                        segments_path / f"{seg_name}.o",
+                    )
+            else:
+                linker_writer.add(segment, max_vram_syms)
+
+        linker_writer.save_linker_script(options.opts.ld_script_path)
         linker_writer.save_symbol_header()
+        if options.opts.ld_dependencies:
+            elf_path = options.opts.elf_path
+            if elf_path is None:
+                log.error(
+                    "Generation of dependency file for linker script requested but `elf_path` was not provided in the yaml options"
+                )
+            linker_writer.save_dependencies_file(
+                options.opts.ld_script_path.with_suffix(".d"), elf_path
+            )
 
         # write elf_sections.txt - this only lists the generated sections in the elf, not subsections
         # that the elf combines into one section
         if options.opts.elf_section_list_path:
             section_list = ""
             for segment in all_segments:
-                section_list += "." + to_cname(segment.name) + "\n"
+                section_list += "." + segment_cname(segment) + "\n"
             with open(options.opts.elf_section_list_path, "w", newline="\n") as f:
                 f.write(section_list)
 
@@ -448,8 +513,6 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
             pickle.dump(cache, f4)
 
     if options.opts.dump_symbols and options.opts.is_mode_active("code"):
-        from pathlib import Path
-
         splat_hidden_folder = Path(".splat/")
         splat_hidden_folder.mkdir(exist_ok=True)
 
@@ -477,4 +540,12 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    main(args.config, args.modes, args.verbose, args.use_cache, args.skip_version_check)
+    main(
+        args.config,
+        args.modes,
+        args.verbose,
+        args.use_cache,
+        args.skip_version_check,
+        args.stdout_only,
+        args.disassemble_all,
+    )

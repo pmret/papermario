@@ -7,6 +7,10 @@ from segtypes.common.segment import CommonSegment
 
 
 class CommonSegBin(CommonSegment):
+    @staticmethod
+    def is_data() -> bool:
+        return True
+
     def out_path(self) -> Optional[Path]:
         return options.opts.asset_path / self.dir / f"{self.name}.bin"
 

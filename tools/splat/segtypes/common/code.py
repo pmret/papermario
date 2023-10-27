@@ -7,9 +7,7 @@ from util.range import Range
 from util.symbols import Symbol
 
 from segtypes.common.group import CommonSegGroup
-from segtypes.segment import Segment
-
-CODE_TYPES = ["c", "asm", "hasm"]
+from segtypes.segment import Segment, parse_segment_align
 
 
 def dotless_type(type: str) -> str:
@@ -44,7 +42,10 @@ class CommonSegCode(CommonSegGroup):
         self.jtbl_glabels_to_add: Set[int] = set()
         self.jumptables: Dict[int, Tuple[int, int]] = {}
         self.rodata_syms: Dict[int, List[Symbol]] = {}
-        self.align = 0x10
+
+        self.align = parse_segment_align(yaml)
+        if self.align is None:
+            self.align = 0x10
 
     @property
     def needs_symbols(self) -> bool:
@@ -160,6 +161,7 @@ class CommonSegCode(CommonSegGroup):
         base_segments: OrderedDict[str, Segment] = OrderedDict()
         ret = []
         prev_start: Optional[int] = -1
+        prev_vram: Optional[int] = -1
         inserts: OrderedDict[
             str, int
         ] = (
@@ -197,14 +199,16 @@ class CommonSegCode(CommonSegGroup):
                 else:
                     if cur_section != typ:
                         # We're changing sections
-                        if found_sections[cur_section].has_end():
-                            log.error(
-                                f"Section {cur_section} end encountered but was already ended earlier!"
-                            )
-                        if found_sections[typ].has_start():
-                            log.error(
-                                f"Section {typ} start encounted but has already started earlier!"
-                            )
+
+                        if options.opts.check_consecutive_segment_types:
+                            if found_sections[cur_section].has_end():
+                                log.error(
+                                    f"Section {cur_section} end encountered but was already ended earlier!"
+                                )
+                            if found_sections[typ].has_start():
+                                log.error(
+                                    f"Section {typ} start encounted but has already started earlier!"
+                                )
 
                         # End the current section
                         found_sections[cur_section].end = i
@@ -269,7 +273,7 @@ class CommonSegCode(CommonSegGroup):
 
             if start is not None and prev_start is not None and start < prev_start:
                 log.error(
-                    f"Error: Group segment {self.name} contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})"
+                    f"Error: Group segment '{self.name}' contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})"
                 )
 
             vram = None
@@ -287,6 +291,16 @@ class CommonSegCode(CommonSegGroup):
                 segment_class, subsegment_yaml, start, end, vram
             )
 
+            if (
+                segment.vram_start is not None
+                and prev_vram is not None
+                and segment.vram_start < prev_vram
+            ):
+                log.error(
+                    f"Error: Group segment '{self.name}' contains subsegments which are out of ascending vram order (0x{prev_vram:X} followed by 0x{segment.vram_start:X}).\n"
+                    + f"Detected when processing file '{segment.name}' of type '{segment.type}'"
+                )
+
             segment.sibling = base_segments.get(segment.name, None)
 
             if segment.sibling is not None:
@@ -298,6 +312,16 @@ class CommonSegCode(CommonSegGroup):
                 else:
                     if segment.is_text() and segment.sibling.is_rodata():
                         segment.rodata_sibling = segment.sibling
+                        segment.sibling.sibling = segment
+
+                if self.section_order.index(".text") < self.section_order.index(
+                    ".data"
+                ):
+                    if segment.is_data():
+                        segment.sibling.data_sibling = segment
+                else:
+                    if segment.is_text() and segment.sibling.is_data():
+                        segment.data_sibling = segment.sibling
                         segment.sibling.sibling = segment
 
             segment.parent = self
@@ -324,6 +348,7 @@ class CommonSegCode(CommonSegGroup):
                     base_segments[segment.name] = segment
 
             prev_start = start
+            prev_vram = segment.vram_start
             if end is not None:
                 last_rom_end = end
 
@@ -385,10 +410,10 @@ class CommonSegCode(CommonSegGroup):
     def scan(self, rom_bytes):
         # Always scan code first
         for sub in self.subsegments:
-            if sub.type in CODE_TYPES and sub.should_scan():
+            if sub.is_text() and sub.should_scan():
                 sub.scan(rom_bytes)
 
         # Scan everyone else
         for sub in self.subsegments:
-            if sub.type not in CODE_TYPES and sub.should_scan():
+            if not sub.is_text() and sub.should_scan():
                 sub.scan(rom_bytes)

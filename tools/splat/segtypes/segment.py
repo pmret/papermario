@@ -177,6 +177,18 @@ class Segment:
         else:
             return False
 
+    @staticmethod
+    def parse_linker_section_order(yaml: Union[dict, list]) -> Optional[str]:
+        if isinstance(yaml, dict) and "linker_section_order" in yaml:
+            return str(yaml["linker_section_order"])
+        return None
+
+    @staticmethod
+    def parse_linker_section(yaml: Union[dict, list]) -> Optional[str]:
+        if isinstance(yaml, dict) and "linker_section" in yaml:
+            return str(yaml["linker_section"])
+        return None
+
     def __init__(
         self,
         rom_start: Optional[int],
@@ -198,6 +210,9 @@ class Segment:
         self.exclusive_ram_id: Optional[str] = None
         self.given_dir: Path = Path()
 
+        # Default to global options.
+        self.given_find_file_boundaries: Optional[bool] = None
+
         # Symbols known to be in this segment
         self.given_seg_symbols: Dict[int, List[Symbol]] = {}
 
@@ -216,6 +231,7 @@ class Segment:
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
+        self.data_sibling: Optional[Segment] = None
         self.rodata_sibling: Optional[Segment] = None
         self.file_path: Optional[Path] = None
 
@@ -235,6 +251,9 @@ class Segment:
 
         # For segments which are not in the usual VRAM segment space, like N64's IPL3 which lives in 0xA4...
         self.special_vram_segment: bool = False
+
+        self.linker_section_order: Optional[str] = self.parse_linker_section_order(yaml)
+        self.linker_section: Optional[str] = self.parse_linker_section(yaml)
 
         if self.rom_start is not None and self.rom_end is not None:
             if self.rom_start > self.rom_end:
@@ -267,11 +286,14 @@ class Segment:
         )
         ret.given_section_order = parse_segment_section_order(yaml)
         ret.given_subalign = parse_segment_subalign(yaml)
+
         if isinstance(yaml, dict):
             ret.extract = bool(yaml.get("extract", ret.extract))
             ret.exclusive_ram_id = yaml.get("exclusive_ram_id")
             ret.given_dir = Path(yaml.get("dir", ""))
             ret.has_linker_entry = bool(yaml.get("linker_entry", True))
+            ret.given_find_file_boundaries = yaml.get("find_file_boundaries", None)
+
         ret.given_symbol_name_format = Segment.parse_segment_symbol_name_format(yaml)
         ret.given_symbol_name_format_no_rom = (
             Segment.parse_segment_symbol_name_format_no_rom(yaml)
@@ -292,6 +314,11 @@ class Segment:
     # For executable segments (.text); like c, asm or hasm
     @staticmethod
     def is_text() -> bool:
+        return False
+
+    # For read-write segments (.data); like data
+    @staticmethod
+    def is_data() -> bool:
         return False
 
     # For readonly segments (.rodata); like rodata or rdata
@@ -318,6 +345,18 @@ class Segment:
             return self.parent.dir / self.given_dir
         else:
             return self.given_dir
+
+    @property
+    def show_file_boundaries(self) -> bool:
+        # If the segment has explicitly set `find_file_boundaries`, use it.
+        if self.given_find_file_boundaries is not None:
+            return self.given_find_file_boundaries
+
+        # If the segment has no parent, use options as default.
+        if not self.parent:
+            return options.opts.find_file_boundaries
+
+        return self.parent.show_file_boundaries
 
     @property
     def symbol_name_format(self) -> str:
@@ -428,6 +467,42 @@ class Segment:
     def get_linker_section(self) -> str:
         return ".data"
 
+    def get_linker_section_order(self) -> str:
+        """
+        Used to override the linking _order_ of a specific section
+
+        Useful for files that may have non-conventional orderings (like putting .data with the other .rodata sections)
+        """
+        if self.linker_section_order is not None:
+            return self.linker_section_order
+        return self.get_linker_section()
+
+    def get_linker_section_linksection(self) -> str:
+        """
+        The actual section that will be used when linking
+        """
+        if self.linker_section is not None:
+            return self.linker_section
+        return self.get_linker_section()
+
+    def get_section_flags(self) -> Optional[str]:
+        """
+        Allows specifying flags for a section.
+
+        This can be useful when creating a custom section, since sections not recognized by the linker will not be linked properly.
+
+        GNU as docs about the section directive and flags: https://sourceware.org/binutils/docs/as/Section.html#ELF-Version
+
+        Example:
+
+        ```
+        def get_section_flags(self) -> Optional[str]:
+            # Tells the linker to allocate this section
+            return "a"
+        ```
+        """
+        return None
+
     def out_path(self) -> Optional[Path]:
         return None
 
@@ -448,7 +523,16 @@ class Segment:
         path = self.out_path()
 
         if path:
-            return [LinkerEntry(self, [path], path, self.get_linker_section())]
+            return [
+                LinkerEntry(
+                    self,
+                    [path],
+                    path,
+                    self.get_linker_section_order(),
+                    self.get_linker_section_linksection(),
+                    self.is_noload(),
+                )
+            ]
         else:
             return []
 
@@ -502,6 +586,27 @@ class Segment:
             pass
         if len(items) == 0:
             return None
+        return items[0]
+
+    def retrieve_sym_type(
+        self, syms: Dict[int, List[Symbol]], addr: int, type: str
+    ) -> Optional[symbols.Symbol]:
+        if addr not in syms:
+            return None
+
+        items = syms[addr]
+
+        items = [
+            i
+            for i in items
+            if i.segment is None
+            or Segment.visible_ram(self, i.segment)
+            and (type == i.type)
+        ]
+
+        if len(items) == 0:
+            return None
+
         return items[0]
 
     def get_symbol(

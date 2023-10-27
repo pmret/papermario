@@ -1,0 +1,54 @@
+# Based on script from https://github.com/orgs/community/discussions/25929
+
+name: Publish docs to Wiki
+
+# Trigger this action only if there are changes pushed to the docs/** directory under the main branch
+on:
+  push:
+    paths:
+      - docs/** # This includes all sub folders
+    branches:
+      - main # This can be changed to any branch of your preference
+
+jobs:
+  publish_docs_to_wiki:
+    name: Publish docs to Wiki
+    runs-on: ubuntu-latest
+    steps:
+    # Clone the wiki repository
+    - name: Checkout Wiki repository
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}.wiki
+        path: wiki_repo
+
+    # Clone the main repository
+    - name: Checkout main repository
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ github.event.repository.owner.name }}/${{ github.event.repository.name }}
+        path: splat_repo
+
+    - name: Get the new Wiki files
+      run: |
+        cd wiki_repo
+        rm *.md
+        cp ../splat_repo/docs/* .
+
+    # `git log -1 --pretty=%aN` prints the current commit's author name
+    # `git log -1 --pretty=%aE` prints the current commit's author mail
+    - name: Stage new files
+      run: |
+        cd wiki_repo
+        git config user.name $(git log -1 --pretty=%aN)
+        git config user.email $(git log -1 --pretty=%aE)
+        git add .
+
+    # `git diff-index --quiet HEAD` returns non-zero if there are any changes.
+    # This allows to avoid making a commit/push if there are no changes to the Wiki files
+
+    # `git log -1 --pretty=%B` prints the current commit's message
+    - name: Push new files to the Wiki
+      run: |
+        cd wiki_repo
+        git diff-index --quiet HEAD || (git commit -m "$(git log -1 --pretty=%B)" && git push)

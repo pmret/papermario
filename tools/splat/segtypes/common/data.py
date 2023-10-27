@@ -10,6 +10,17 @@ from disassembler_section import make_data_section
 
 
 class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
+    @staticmethod
+    def is_data() -> bool:
+        return True
+
+    def asm_out_path(self) -> Path:
+        typ = self.type
+        if typ.startswith("."):
+            typ = typ[1:]
+
+        return options.opts.data_path / self.dir / f"{self.name}.{typ}.s"
+
     def out_path(self) -> Optional[Path]:
         if self.type.startswith("."):
             if self.sibling:
@@ -20,7 +31,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 return options.opts.src_path / self.dir / f"{self.name}.c"
         else:
             # ASM
-            return options.opts.data_path / self.dir / f"{self.name}.{self.type}.s"
+            return self.asm_out_path()
 
     def scan(self, rom_bytes: bytes):
         CommonSegGroup.scan(self, rom_bytes)
@@ -31,26 +42,31 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def split(self, rom_bytes: bytes):
         super().split(rom_bytes)
 
-        if (
-            not self.type.startswith(".")
-            and self.spim_section
-            and self.should_self_split()
-        ):
-            path = self.out_path()
+        if self.type.startswith(".") and not options.opts.disassemble_all:
+            return
 
-            if path:
-                path.parent.mkdir(parents=True, exist_ok=True)
+        if self.spim_section is None or not self.should_self_split():
+            return
 
-                self.print_file_boundaries()
+        path = self.asm_out_path()
 
-                with open(path, "w", newline="\n") as f:
-                    f.write('.include "macro.inc"\n\n')
-                    preamble = options.opts.generated_s_preamble
-                    if preamble:
-                        f.write(preamble + "\n")
-                    f.write(f".section {self.get_linker_section()}\n\n")
+        path.parent.mkdir(parents=True, exist_ok=True)
 
-                    f.write(self.spim_section.disassemble())
+        self.print_file_boundaries()
+
+        with path.open("w", newline="\n") as f:
+            f.write('.include "macro.inc"\n\n')
+            preamble = options.opts.generated_s_preamble
+            if preamble:
+                f.write(preamble + "\n")
+
+            f.write(f".section {self.get_linker_section()}")
+            section_flags = self.get_section_flags()
+            if section_flags:
+                f.write(f', "{section_flags}"')
+            f.write("\n\n")
+
+            f.write(self.spim_section.disassemble())
 
     def should_self_split(self) -> bool:
         return options.opts.is_mode_active("data")

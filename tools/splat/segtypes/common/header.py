@@ -6,6 +6,10 @@ from segtypes.common.segment import CommonSegment
 
 
 class CommonSegHeader(CommonSegment):
+    @staticmethod
+    def is_data() -> bool:
+        return True
+
     def should_split(self):
         return self.extract and options.opts.is_mode_active("code")
 
