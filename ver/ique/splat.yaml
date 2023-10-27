@@ -2388,199 +2388,1895 @@ segments:
   - name: effect_gfx_effect_86
     type: bin
     start: 0x45DAB0
-  - [0x45E7E0, bin]
 
+#######################
+### Action Commands ###
+#######################
+  - type: code
+    start: 0x45E7E0
+    name: btl_states_menus
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, battle/btl_states_menus]
+  - type: code
+    start: 0x46A440
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_jump
+    subsegments:
+    - [auto, c, jump]
+  - type: code
+    start: 0x46AA50
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_hammer
+    subsegments:
+    - [auto, c, hammer]
+  - type: code
+    start: 0x46B520
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_flee
+    subsegments:
+    - [auto, c, flee]
+  - type: code
+    start: 0x46BE40
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_break_free
+    subsegments:
+    - [auto, c, break_free]
+  - type: code
+    start: 0x46C6C0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_whirlwind
+    subsegments:
+    - [auto, c, whirlwind]
+    - start: 0x46CFA0
+      type: .data
+      name: whirlwind
+      subsegments:
+      - [0x46CFA0, ci4, whirlwind_1, 24, 24]
+      - [0x46D0C0, palette, whirlwind_1]
+      - [0x46D0E0, ci4, whirlwind_2, 24, 24]
+      - [0x46D200, palette, whirlwind_2]
+      - [0x46D220, ci4, whirlwind_3, 24, 24]
+      - [0x46D340, palette, whirlwind_3]
+      - [0x46D360, ci4, whirlwind_4, 24, 24]
+      - [0x46D480, palette, whirlwind_4]
+      - [0x46D4A0, ci4, whirlwind_5, 24, 24]
+      - [0x46D5C0, palette, whirlwind_5]
+      - [0x46D5E0, ci4, whirlwind_6, 24, 24]
+      - [0x46D700, palette, whirlwind_6]
+      - [0x46D720, ci4, whirlwind_7, 24, 24]
+      - [0x46D840, palette, whirlwind_7]
+      - [0x46D860, ci4, whirlwind_bubble, 56, 48]
+      - [0x46DDA0, palette, whirlwind_bubble]
+      - [0x46DDC0]
+    - [0x46DFA0]
+  - type: code
+    start: 0x46DFE0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_stop_leech
+    subsegments:
+    - [auto, c, stop_leech]
+  - type: code
+    start: 0x46E5A0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_07
+    subsegments:
+    - [auto, c, "07"]
+  - type: code
+    start: 0x46EBC0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_dizzy_shell
+    subsegments:
+    - [auto, c, dizzy_shell]
+  - type: code
+    start: 0x46F420
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_fire_shell
+    subsegments:
+    - [auto, c, fire_shell]
+  - type: code
+    start: 0x46FE00
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_0A
+    subsegments:
+    - [auto, c, 0A]
+  - type: code
+    start: 0x4704C0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_bomb
+    subsegments:
+    - [auto, c, bomb]
+  - type: code
+    start: 0x470D30
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_body_slam
+    subsegments:
+    - [auto, c, body_slam]
+  - type: code
+    start: 0x4714C0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_air_lift
+    subsegments:
+    - [auto, c, air_lift]
+  - type: code
+    start: 0x471D70
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_air_raid
+    subsegments:
+    - [auto, c, air_raid]
+  - type: code
+    start: 0x472770
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_squirt
+    subsegments:
+    - [auto, c, squirt]
+  - type: code
+    start: 0x472F40
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_water_block
+    subsegments:
+    - [auto, c, water_block]
+    - start: 0x4740A0
+      type: .data
+      name: water_block
+      subsegments:
+      - [0x4740A0, ci4, water_block_1, 24, 24]
+      - [0x4741C0, palette, water_block_1]
+      - [0x4741E0, ci4, water_block_2, 24, 24]
+      - [0x474300, palette, water_block_2]
+      - [0x474320, ci4, water_block_3, 24, 24]
+      - [0x474440, palette, water_block_3]
+      - [0x474460, ci4, water_block_0, 24, 24]
+      - [0x474580, palette, water_block_0]
+      - [0x4745A0, ci4, water_block_block, 32, 32]
+      - [0x4747A0, palette, water_block_block]
+      - [0x4747C0, ci4, water_block_circle, 40, 40]
+      - [0x474AE0, palette, water_block_circle]
+      - [0x474B00, ci4, water_block_cloud, 40, 40]
+      - [0x474E20, palette, water_block_cloud]
+      - [0x474E40, ci4, water_block_4, 24, 24]
+      - [0x474F60, palette, water_block_4]
+      - [0x474F80]
+    - [0x475140]
+  - type: code
+    start: 0x475140
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_tidal_wave
+    subsegments:
+    - [auto, c, tidal_wave]
+  - type: code
+    start: 0x475960
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_power_shock
+    subsegments:
+    - [auto, c, power_shock]
+  - type: code
+    start: 0x476460
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_mega_shock
+    subsegments:
+    - [auto, c, mega_shock]
+  - type: code
+    start: 0x476DF0
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_smack
+    subsegments:
+    - [auto, c, smack]
+  - type: code
+    start: 0x477870
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_spiny_surge
+    subsegments:
+    - [auto, c, spiny_surge]
+  - type: code
+    start: 0x478130
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_hurricane
+    subsegments:
+    - [auto, c, hurricane]
+  - type: code
+    start: 0x478A70
+    vram: 0x802A9000
+    vram_of_symbol: battle_move_end
+    dir: battle/action_cmd
+    name: action_cmd_spook
+    subsegments:
+    - [auto, c, spook]
 
-  ####################
-  ### Battle Areas ###
-  ####################
-  - name: battle_area_kmr_part_1
-    type: bin
+####################
+### Battle Areas ###
+####################
+  - dir: battle/area/kmr_part_1
+    type: code
     start: 0x4793F0
     vram: 0x80218000
-  - name: battle_area_kmr_part_2
-    type: bin
+    follows_vram: heaps
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/spiked_goomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05]
+    - [auto, c, stage/kmr_06]
+  - dir: battle/area/kmr_part_2
+    type: code
     start: 0x4824E0
     vram: 0x80218000
-  - name: battle_area_kmr_part_3
-    type: bin
+    follows_vram: heaps
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/blue_goomba_1]
+    - [auto, c, actor/red_goomba_1]
+    - [auto, c, actor/blue_goomba_2]
+    - [auto, c, actor/red_goomba_2]
+    - [auto, c, actor/goomba_king]
+    - [auto, c, actor/goomnut_tree]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05]
+    - [auto, c, stage/kmr_06]
+  - dir: battle/area/kmr_part_3
+    type: code
     start: 0x48FE90
     vram: 0x80218000
-  - name: battle_area_mac
-    type: bin
+    follows_vram: heaps
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/tutorial_spiked_goomba]
+    - [auto, c, actor/tutorial_paragoomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, actor/jr_troopa]
+    - [auto, c, actor/egg_jr_troopa]
+    - [auto, c, actor/para_jr_troopa]
+    - [auto, c, actor/spiked_para_jr_troopa]
+    - [auto, c, actor/mage_jr_troopa]
+    - [auto, c, actor/final_jr_troopa]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05b]
+    - [auto, c, stage/kmr_06]
+    - [auto, c, stage/nok_01]
+    - [auto, c, stage/mim_01]
+    - [auto, c, stage/sam_01]
+    - [auto, c, stage/mac_01]
+    - [auto, c, stage/kpa_13]
+  - dir: battle/area/mac
+    type: code
     start: 0x4ACEE0
     vram: 0x80218000
-  - name: battle_area_hos
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/chan]
+    - [auto, c, actor/lee]
+    - [auto, c, actor/master1]
+    - [auto, c, actor/master2]
+    - [auto, c, actor/master3]
+    - [auto, c, stage/mac_01]
+    - [auto, c, stage/mac_02]
+    - [auto, c, area]
+  - dir: battle/area/hos
+    type: code
     start: 0x4C7B00
     vram: 0x80218000
-  - name: battle_area_nok
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/goombario_tutor]
+    - [auto, c, actor/ember]
+    - [auto, c, actor/magikoopa]
+    - [auto, c, stage/hos_01]
+    - [auto, c, stage/hos_00]
+    - [auto, c, stage/hos_02]
+    - [auto, c, area]
+  - dir: battle/area/nok
+    type: code
     start: 0x4D5BF0
     vram: 0x80218000
-  - name: battle_area_trd_part_1
-    type: bin
+    follows_vram: heaps
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, actor/spiked_goomba]
+    - [auto, c, actor/koopa_troopa]
+    - [auto, c, actor/fuzzy]
+    - [auto, c, actor/paratroopa]
+    - [auto, c, actor/kent_c_koopa]
+    - [auto, c, stage/nok_01]
+    - [auto, c, stage/nok_02]
+    - [auto, c, stage/nok_03]
+    - [auto, c, stage/nok_04]
+  - dir: battle/area/trd_part_1
+    type: code
     start: 0x4E9AF0
     vram: 0x80218000
-  - name: battle_area_trd_part_2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/bullet_bill]
+    - [auto, c, actor/bill_blaster]
+    - [auto, c, actor/bob_omb]
+    - [auto, c, actor/koopa_troopa]
+    - [auto, c, actor/paratroopa]
+    - [auto, c, stage/trd_01]
+    - [auto, c, stage/trd_02]
+    - [auto, c, stage/trd_02b]
+    - [auto, c, stage/trd_03]
+    - [auto, c, stage/trd_04]
+    - [auto, c, stage/trd_05]
+    - [auto, c, stage/trd_00]
+    - [auto, c, stage/trd_02c]
+    - [auto, c, stage/trd_02d]
+    - [auto, c, stage/trd_05b]
+    - [auto, c, stage/trd_05c]
+    - [auto, c, stage/trd_05d]
+    - [auto, c, stage/trd_05e]
+    - [auto, c, stage/trd_05f]
+  - dir: battle/area/trd_part_2
+    type: code
     start: 0x4F9C40
     vram: 0x80218000
-  - name: battle_area_trd_part_3
-    type: bin
+    follows_vram: heaps
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/fake_bowser]
+    - [auto, c, actor/koopa_bros_green]
+    - [auto, c, actor/koopa_bros_red]
+    - [auto, c, actor/koopa_bros_black]
+    - [auto, c, actor/koopa_bros_yellow]
+    - [auto, c, stage/trd_00]
+    - [auto, c, stage/trd_01]
+    - [auto, c, stage/trd_02]
+    - [auto, c, stage/trd_02b]
+    - [auto, c, stage/trd_03]
+    - [auto, c, stage/trd_04]
+    - [auto, c, stage/trd_05]
+    - [auto, c, stage/trd_05b]
+    - [auto, c, stage/trd_05c]
+    - [auto, c, stage/trd_05d]
+    - [auto, c, stage/trd_05e]
+    - [auto, c, stage/trd_05f]
+  - dir: battle/area/trd_part_3
+    type: code
     start: 0x517C00
     vram: 0x80218000
-  - name: battle_area_iwa
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/eldstar]
+    - [auto, c, stage/nok_01]
+  - dir: battle/area/iwa
+    type: code
     start: 0x518C40
     vram: 0x80218000
-  - name: battle_area_sbk
-    type: bin
+    follows_vram: heaps
+    subalign: 4
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/cleft]
+    - [auto, c, actor/monty_mole]
+    - [auto, c, actor/buzzar]
+    - [auto, c, actor/whacka]
+    - [auto, c, stage/iwa_01]
+    - [auto, c, stage/iwa_01b]
+    - [auto, c, stage/iwa_02]
+  - dir: battle/area/sbk
+    type: code
     start: 0x523030
     vram: 0x80218000
-  - name: battle_area_isk_part_1
-    type: bin
+    follows_vram: heaps
+    subalign: 16 # BSS alignment hack
+    subsegments:
+    - [auto, c, actor/pokey]
+    - [auto, c, actor/bandit]
+    - [auto, c, stage/sbk_02]
+    - [auto, c, area]
+  - dir: battle/area/isk_part_1
+    type: code
     start: 0x52B190
     vram: 0x80218000
-  - name: battle_area_isk_part_2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/pokey_mummy]
+    - [auto, c, actor/swooper]
+    - [auto, c, actor/buzzy_beetle]
+    - [auto, c, actor/stone_chomp]
+    - [auto, c, stage/isk_00]
+    - [auto, c, stage/isk_01]
+    - [auto, c, stage/isk_02]
+    - [auto, c, stage/isk_03]
+    - [auto, c, stage/isk_04]
+    - [auto, c, stage/isk_05]
+    - [auto, c, stage/isk_06]
+    - [auto, c, stage/isk_07]
+    - [auto, c, stage/isk_07]
+    - [auto, c, stage/isk_03b]
+    - [auto, c, stage/isk_02b]
+    - [auto, c, stage/isk_02c]
+    - [auto, c, stage/isk_06b]
+    - [auto, c, stage/isk_08]
+    - [auto, c, area]
+  - dir: battle/area/isk_part_2
+    type: code
     start: 0x537EF0
     vram: 0x80218000
-  - name: battle_area_mim
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/chain_chomp]
+    - [auto, c, actor/tutankoopa]
+    - [auto, c, stage/isk_00]
+    - [auto, c, stage/isk_01]
+    - [auto, c, stage/isk_02]
+    - [auto, c, stage/isk_02b]
+    - [auto, c, stage/isk_02c]
+    - [auto, c, stage/isk_03]
+    - [auto, c, stage/isk_03b]
+    - [auto, c, stage/isk_04]
+    - [auto, c, stage/isk_05]
+    - [auto, c, stage/isk_06]
+    - [auto, c, stage/isk_06b]
+    - [auto, c, stage/isk_07]
+    - [auto, c, area]
+  - dir: battle/area/mim
+    type: code
     start: 0x540630
     vram: 0x80218000
-  - name: battle_area_arn
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/forest_fuzzy]
+    - [auto, c, actor/bzzap]
+    - [auto, c, actor/piranha_plant]
+    - [auto, c, stage/mim_01]
+    - [auto, c, area]
+  - dir: battle/area/arn
+    type: code
     start: 0x5474A0
     vram: 0x80218000
-  - name: battle_area_dgb
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/hyper_goomba]
+    - [auto, c, actor/hyper_paragoomba]
+    - [auto, c, actor/hyper_cleft]
+    - [auto, c, actor/tubbas_heart]
+    - [auto, c, actor/tubba_blubba]
+    - [auto, c, stage/arn_01]
+    - [auto, c, stage/arn_02]
+    - [auto, c, stage/arn_03]
+    - [auto, c, stage/arn_04]
+    - [auto, c, stage/arn_05]
+    - [auto, c, stage/arn_06]
+    - [auto, c, area]
+  - dir: battle/area/dgb
+    type: code
     start: 0x557A70
     vram: 0x80218000
-  - name: battle_area_omo
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/clubba]
+    - [auto, c, actor/tubba_blubba]
+    - [auto, c, stage/dgb_01]
+    - [auto, c, stage/dgb_02]
+    - [auto, c, stage/dgb_03]
+    - [auto, c, stage/dgb_04]
+    - [auto, c, stage/dgb_05]
+    - [auto, c, area]
+  - dir: battle/area/omo
+    type: code
     start: 0x55B020
     vram: 0x80218000
-  - name: battle_area_omo2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/red_shy_guy]
+    - [auto, c, actor/blue_shy_guy]
+    - [auto, c, actor/yellow_shy_guy]
+    - [auto, c, actor/pink_shy_guy]
+    - [auto, c, actor/green_shy_guy]
+    - [auto, c, actor/anti_guy]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/groove_guy]
+    - [auto, c, actor/spy_guy]
+    - [auto, c, actor/sky_guy]
+    - [auto, c, actor/pyro_guy]
+    - [auto, c, stage/omo_01]
+    - [auto, c, stage/omo_02]
+    - [auto, c, stage/omo_03]
+    - [auto, c, stage/omo_03b]
+    - [auto, c, stage/omo_04]
+    - [auto, c, stage/omo_05]
+    - [auto, c, stage/omo_05b]
+    - [auto, c, stage/omo_06]
+    - [auto, c, stage/omo_07]
+    - [auto, c, area]
+  - dir: battle/area/omo2
+    type: code
     start: 0x5740F0
     vram: 0x80218000
-  - name: battle_area_omo2_1
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/general_guy]
+    - [auto, c, actor/toy_tank]
+    - [auto, c, actor/light_bulb]
+    - [auto, c, stage/omo_07]
+    - [auto, c, area]
+  - dir: battle/area/omo2_1
+    type: code
     start: 0x58BFC0
     vram: 0x80231000
-  - name: battle_area_omo2_2
-    type: bin
+    vram_of_symbol: Vine1Base
+    subsegments:
+    - [auto, c, actor/shy_squad]
+  - dir: battle/area/omo2_2
+    type: code
     start: 0x590E30
     vram: 0x80231000
-  - name: battle_area_omo2_3
-    type: bin
+    vram_of_symbol: Vine1Base
+    subsegments:
+    - [auto, c, actor/stilt_guy]
+  - dir: battle/area/omo2_3
+    type: code
     start: 0x5956C0
     vram: 0x80231000
-  - name: battle_area_omo2_4
-    type: bin
+    vram_of_symbol: Vine1Base
+    subsegments:
+    - [auto, c, actor/shy_stack]
+  - dir: battle/area/omo2_4
+    type: code
     start: 0x59AE90
     vram: 0x80231000
-  - name: battle_area_omo2_5
-    type: bin
+    vram_of_symbol: Vine1Base
+    subsegments:
+    - [auto, c, actor/signal_guy]
+  - dir: battle/area/omo2_5
+    type: code
     start: 0x59B600
     vram: 0x80231000
-  - name: battle_area_omo2_6
-    type: bin
+    vram_of_symbol: Vine1Base
+    subsegments:
+    - [auto, c, actor/shy_squad_redux]
+  - dir: battle/area/omo2_6
+    type: code
     start: 0x59F6E0
     vram: 0x80231000
-  - name: battle_area_omo3
-    type: bin
+    vram_of_symbol: Vine1Base
+    subsegments:
+    - [auto, c, actor/shy_squad_stub]
+  - dir: battle/area/omo3
+    type: code
     start: 0x59FE30
     vram: 0x80218000
-  - name: battle_area_kgr
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/big_lantern_ghost]
+    - [auto, c, stage/omo_01]
+    - [auto, c, stage/omo_02]
+    - [auto, c, stage/omo_03]
+    - [auto, c, stage/omo_03b]
+    - [auto, c, stage/omo_04]
+    - [auto, c, stage/omo_05]
+    - [auto, c, stage/omo_05b]
+    - [auto, c, stage/omo_06]
+    - [auto, c, stage/omo_07]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/clubba]
+    - [auto, c, actor/fuzzy]
+    - [auto, c, actor/hammer_bro]
+    - [auto, c, actor/pokey]
+    - [auto, c, actor/koopatrol]
+    - [auto, c, actor/red_shy_guy]
+    - [auto, c, area]
+  - dir: battle/area/kgr
+    type: code
     start: 0x5B6CF0
     vram: 0x80218000
-  - name: battle_area_jan
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/fuzzipede]
+    - [auto, c, stage/kgr_01]
+    - [auto, c, area]
+  - dir: battle/area/jan
+    type: code
     start: 0x5BC370
     vram: 0x80218000
-  - name: battle_area_jan2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/spear_guy]
+    - [auto, c, actor/hurt_plant]
+    - [auto, c, actor/jungle_fuzzy]
+    - [auto, c, actor/m_bush]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/spike_top]
+    - [auto, c, stage/jan_00]
+    - [auto, c, stage/jan_01]
+    - [auto, c, stage/jan_01b]
+    - [auto, c, stage/jan_02]
+    - [auto, c, stage/jan_03]
+    - [auto, c, stage/jan_03b]
+    - [auto, c, stage/jan_04]
+    - [auto, c, stage/jan_04b]
+    - [auto, c, area]
+  - dir: battle/area/jan2
+    type: code
     start: 0x5CD390
     vram: 0x80218000
-  - name: battle_area_kzn
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/putrid_piranha]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, stage/jan_00]
+    - [auto, c, stage/jan_01]
+    - [auto, c, stage/jan_01b]
+    - [auto, c, stage/jan_02]
+    - [auto, c, stage/jan_03]
+    - [auto, c, stage/jan_03b]
+    - [auto, c, stage/jan_04]
+    - [auto, c, stage/jan_04b]
+    - [auto, c, area]
+  - dir: battle/area/kzn
+    type: code
     start: 0x5D4D40
     vram: 0x80218000
-  - name: battle_area_kzn2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/lava_bubble]
+    - [auto, c, actor/putrid_piranha]
+    - [auto, c, actor/spike_top]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, stage/kzn_01]
+    - [auto, c, stage/kzn_01b]
+    - [auto, c, stage/kzn_02]
+    - [auto, c, stage/kzn_04]
+    - [auto, c, stage/kzn_04b]
+    - [auto, c, stage/kzn_04c]
+    - [auto, c, stage/kzn_05]
+    - [auto, c, area]
+  - dir: battle/area/kzn2
+    type: code
     start: 0x5E7130
     vram: 0x80218000
-  - name: battle_area_flo
-    type: bin
+    follows_vram: heaps
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, anim/unused_gfx]
+    - [auto, c, anim/lava_piranha_anim]
+    - [auto, c, actor/lava_piranha]
+    - [auto, c, actor/petit_piranha]
+    - [auto, c, actor/lava_bud]
+    - [auto, c, actor/petit_piranha_bomb]
+    - [auto, c, stage/kzn_01]
+    - [auto, c, stage/kzn_01b]
+    - [auto, c, stage/kzn_02]
+    - [auto, c, stage/kzn_04]
+    - [auto, c, stage/kzn_04b]
+    - [auto, c, stage/kzn_04c]
+    - [auto, c, stage/kzn_05]
+    - [auto, c, area]
+    - start: 0x5E7F80
+      type: .data
+      name: anim/unused_gfx
+      subsegments:
+      - [0x5E7F80, vtx, vtx1]
+      - [0x5E8100, vtx, vtx2]
+      - [0x5E8220, vtx, vtx3]
+      - [0x5E8380, vtx, vtx4]
+      - [0x5E8480, vtx, vtx5]
+      - [0x5E85E0, vtx, vtx6]
+      - [0x5E8780, vtx, vtx7]
+      - [0x5E8900, vtx, vtx8]
+      - [0x5E8A80, vtx, vtx9]
+      - [0x5E8BE0, vtx, vtx10]
+      - [0x5E8D00, vtx, vtx11]
+      - [0x5E8D30, vtx, vtx12]
+      - [0x5E8D60, vtx, vtx13]
+      - [0x5E8D90, vtx, vtx14]
+      - [0x5E8DC0, vtx, vtx15]
+      - [0x5E8DF0, vtx, vtx16]
+      - [0x5E8E20, vtx, vtx17]
+      - [0x5E8E50, vtx, vtx18]
+      - [0x5E8E80, gfx, gfx1]
+      - [0x5E8F50, gfx, gfx2]
+      - [0x5E8F90, gfx, gfx3]
+      - [0x5E8FE0, gfx, gfx4]
+      - [0x5E9030, gfx, gfx5]
+      - [0x5E9080, gfx, gfx6]
+      - [0x5E90E0, gfx, gfx7]
+      - [0x5E9130, gfx, gfx8]
+      - [0x5E9170, gfx, gfx9]
+      - [0x5E91C0, gfx, gfx10]
+      - [0x5E9200, gfx, gfx11]
+      - [0x5E9250]
+    - [auto, .data, anim/lava_piranha_anim]
+    - start: 0x5EB8D0
+      type: .data
+      name: actor/lava_piranha
+      subsegments:
+      - [0x5EB8D0]
+      - [0x5EBA70, ci4, lava_piranha_vine, 64, 32]
+      - [0x5EBE70, palette, lava_piranha_vine]
+      - [0x5EC070, gfx, lava_piranha_vine]
+      - [0x5EC148]
+    - [auto, .data, actor/petit_piranha]
+    - [auto, .data, actor/lava_bud]
+    - [auto, .data, actor/petit_piranha_bomb]
+    - [auto, .data, stage/kzn_01]
+    - [auto, .data, stage/kzn_01b]
+    - [auto, .data, stage/kzn_02]
+    - [auto, .data, stage/kzn_04]
+    - [auto, .data, stage/kzn_04b]
+    - [auto, .data, stage/kzn_04c]
+    - [auto, .data, stage/kzn_05]
+    - [auto, .data, area]
+    - [0x5F9C90]
+  - dir: battle/area/flo
+    type: code
     start: 0x5F9F00
     vram: 0x80218000
-  - name: battle_area_flo2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/lakitu]
+    - [auto, c, actor/spiny]
+    - [auto, c, actor/crazee_dayzee]
+    - [auto, c, actor/bzzap]
+    - [auto, c, actor/amazy_dayzee]
+    - [auto, c, actor/ruff_puff]
+    - [auto, c, actor/medi_guy]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/green_magikoopa]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, actor/yellow_magikoopa]
+    - [auto, c, stage/flo_01]
+    - [auto, c, stage/flo_01b]
+    - [auto, c, stage/flo_01c]
+    - [auto, c, stage/flo_02]
+    - [auto, c, stage/flo_02b]
+    - [auto, c, stage/flo_02c]
+    - [auto, c, stage/flo_03]
+    - [auto, c, stage/flo_04]
+    - [auto, c, stage/flo_05]
+    - [auto, c, stage/flo_06]
+    - [auto, c, area]
+  - dir: battle/area/flo2
+    type: code
     start: 0x6170E0
     vram: 0x80218000
-  - name: battle_area_tik
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/huff_n_puff]
+    - [auto, c, actor/tuff_puff]
+    - [auto, c, actor/monty_mole_boss]
+    - [auto, c, actor/spike]
+    - [auto, c, stage/flo_01]
+    - [auto, c, stage/flo_01b]
+    - [auto, c, stage/flo_01c]
+    - [auto, c, stage/flo_02]
+    - [auto, c, stage/flo_02b]
+    - [auto, c, stage/flo_02c]
+    - [auto, c, stage/flo_03]
+    - [auto, c, stage/flo_04]
+    - [auto, c, stage/flo_05]
+    - [auto, c, stage/flo_06]
+    - [auto, c, area]
+  - dir: battle/area/tik
+    type: code
     start: 0x634EE0
     vram: 0x80218000
-  - name: battle_area_tik2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/dark_koopa]
+    - [auto, c, actor/dark_paratroopa]
+    - [auto, c, actor/gloomba]
+    - [auto, c, actor/spiked_gloomba]
+    - [auto, c, actor/paragloomba]
+    - [auto, c, actor/buzzy_beetle]
+    - [auto, c, actor/spike_top]
+    - [auto, c, actor/spiny]
+    - [auto, c, stage/tik_01]
+    - [auto, c, stage/tik_02]
+    - [auto, c, stage/tik_03]
+    - [auto, c, stage/tik_04]
+    - [auto, c, stage/tik_05]
+    - [auto, c, area]
+  - dir: battle/area/tik2
+    type: code
     start: 0x651500
     vram: 0x80218000
-  - name: battle_area_tik3
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/blooper]
+    - [auto, c, actor/electro_blooper]
+    - [auto, c, actor/super_blooper]
+    - [auto, c, actor/blooper_baby]
+    - [auto, c, stage/tik_01]
+    - [auto, c, stage/tik_02]
+    - [auto, c, stage/tik_03]
+    - [auto, c, stage/tik_04]
+    - [auto, c, stage/tik_05]
+    - [auto, c, area]
+  - dir: battle/area/tik3
+    type: code
     start: 0x661140
     vram: 0x80218000
-  - name: battle_area_sam
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/swooper]
+    - [auto, c, actor/swoopula]
+    - [auto, c, stage/tik_01]
+    - [auto, c, stage/tik_02]
+    - [auto, c, stage/tik_03]
+    - [auto, c, stage/tik_04]
+    - [auto, c, stage/tik_05]
+    - [auto, c, area]
+  - dir: battle/area/sam
+    type: code
     start: 0x66C5F0
     vram: 0x80218000
-  - name: battle_area_sam2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/duplighost]
+    - [auto, c, actor/gulpit]
+    - [auto, c, actor/gulpit_rocks]
+    - [auto, c, actor/white_clubba]
+    - [auto, c, actor/frost_piranha]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, stage/sam_01]
+    - [auto, c, stage/sam_02]
+    - [auto, c, stage/sam_02b]
+    - [auto, c, stage/sam_02c]
+    - [auto, c, stage/sam_02d]
+    - [auto, c, stage/sam_03]
+    - [auto, c, area]
+  - dir: battle/area/sam2
+    type: code
     start: 0x685C30
     vram: 0x80218000
-  - name: battle_area_pra
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/monstar]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, stage/sam_01]
+    - [auto, c, stage/sam_02]
+    - [auto, c, stage/sam_02b]
+    - [auto, c, stage/sam_02c]
+    - [auto, c, stage/sam_02d]
+    - [auto, c, stage/sam_03]
+    - [auto, c, area]
+    - [auto, c, dlist]
+    - start: 0x687A90
+      type: .data
+      name: actor/monstar
+      subsegments:
+      - [0x687A90]
+      - [0x687CC8, ci4, actor/img, 32, 32]
+      - [0x687EC8, palette, actor/img]
+      - [0x687EE8]
+    - [auto, .data, actor/paragoomba]
+    - [auto, .data, actor/gray_magikoopa]
+    - [auto, .data, stage/sam_01]
+    - [auto, .data, stage/sam_02]
+    - [auto, .data, stage/sam_02b]
+    - [auto, .data, stage/sam_02c]
+    - [auto, .data, stage/sam_02d]
+    - [auto, .data, stage/sam_03]
+    - [auto, .data, area]
+    - [auto, .data, dlist]
+    - start: 0x6912B0
+      type: .data
+      name: vtx
+      subsegments:
+      - [0x6912B0, vtx, monstar_bubbles]
+    - [0x6916D0]
+  - dir: battle/area/pra
+    type: code
     start: 0x691860
     vram: 0x80218000
-  - name: battle_area_pra2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/swoopula]
+    - [auto, c, actor/albino_dino]
+    - [auto, c, actor/white_clubba]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/green_magikoopa]
+    - [auto, c, actor/yellow_magikoopa]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, actor/white_magikoopa]
+    - [auto, c, stage/pra_01]
+    - [auto, c, stage/pra_02]
+    - [auto, c, stage/pra_03]
+    - [auto, c, stage/pra_03b]
+    - [auto, c, stage/pra_03c]
+    - [auto, c, stage/pra_04]
+    - [auto, c, area]
+  - dir: battle/area/pra2
+    type: code
     start: 0x6A91A0
     vram: 0x80218000
-  - name: battle_area_pra3
-    type: bin
+    follows_vram: heaps
+    subalign: 16 # BSS alignment hack
+    subsegments:
+    - [auto, c, actor/crystal_king]
+    - [auto, c, actor/crystal_bit]
+    - [auto, c, stage/sam_04]
+    - [auto, c, area]
+  - dir: battle/area/pra3
+    type: code
     start: 0x6B27D0
     vram: 0x80218000
-  - name: battle_area_kpa
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/duplighost]
+    - [auto, c, actor/swoopula]
+    - [auto, c, actor/white_clubba]
+    - [auto, c, actor/red_magikoopa]
+    - [auto, c, actor/gray_magikoopa]
+    - [auto, c, stage/pra_01]
+    - [auto, c, stage/pra_02]
+    - [auto, c, stage/pra_03]
+    - [auto, c, stage/pra_03b]
+    - [auto, c, stage/pra_03c]
+    - [auto, c, stage/pra_04]
+    - [auto, c, area]
+  - dir: battle/area/kpa
+    type: code
     start: 0x6CD480
     vram: 0x80218000
-  - name: battle_area_kpa2
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/bony_beetle]
+    - [auto, c, actor/dry_bones]
+    - [auto, c, actor/hammer_bro]
+    - [auto, c, actor/koopatrol]
+    - [auto, c, actor/magikoopa]
+    - [auto, c, actor/ember]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, stage/kpa_01b]
+    - [auto, c, stage/kpa_02]
+    - [auto, c, stage/kpa_03]
+    - [auto, c, stage/kpa_04]
+    - [auto, c, stage/kpa_04b]
+    - [auto, c, stage/kpa_04c]
+    - [auto, c, stage/kpa_05]
+    - [auto, c, stage/kpa_07]
+    - [auto, c, stage/kpa_08]
+    - [auto, c, stage/kpa_09]
+    - [auto, c, stage/kpa_11]
+    - [auto, c, stage/kpa_13]
+    - [auto, c, stage/kpa_14]
+    - [auto, c, area]
+  - dir: battle/area/kpa2
+    type: code
     start: 0x6E7C50
     vram: 0x80218000
-  - name: battle_area_kpa3
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/unused_bowser]
+    - [auto, c, actor/intro_bowser]
+    - [auto, c, actor/hallway_bowser]
+    - [auto, c, actor/final_bowser_1]
+    - [auto, c, actor/final_bowser_2]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, stage/kkj_01]
+    - [auto, c, stage/kkj_02]
+    - [auto, c, area]
+  - dir: battle/area/kpa3
+    type: code
     start: 0x7045E0
     vram: 0x80218000
-  - name: battle_area_kpa4
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/anti_guy]
+    - [auto, c, actor/duplighost]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, area]
+  - dir: battle/area/kpa4
+    type: code
     start: 0x714AC0
     vram: 0x80218000
-  - name: battle_area_kkj
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/bombshell_blaster]
+    - [auto, c, actor/bombshell_bill]
+    - [auto, c, actor/koopatrol]
+    - [auto, c, actor/magikoopa]
+    - [auto, c, stage/kpa_01]
+    - [auto, c, stage/kpa_01b]
+    - [auto, c, stage/kpa_02]
+    - [auto, c, stage/kpa_03]
+    - [auto, c, stage/kpa_04]
+    - [auto, c, stage/kpa_04b]
+    - [auto, c, stage/kpa_04c]
+    - [auto, c, stage/kpa_05]
+    - [auto, c, stage/kpa_07]
+    - [auto, c, stage/kpa_08]
+    - [auto, c, stage/kpa_09]
+    - [auto, c, stage/kpa_11]
+    - [auto, c, stage/kpa_13]
+    - [auto, c, stage/kpa_14]
+    - [auto, c, area]
+  - dir: battle/area/kkj
+    type: code
     start: 0x7247F0
     vram: 0x80218000
-  - name: battle_area_dig
-    type: bin
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, area]
+    - [auto, c, actor/kammy_koopa]
+    - [auto, c, stage/kpa_05]
+  - dir: battle/area/dig
+    type: code
     start: 0x726810
     vram: 0x80218000
+    follows_vram: heaps
+    subsegments:
+    - [auto, c, actor/koopa_troopa]
+    - [auto, c, actor/fuzzy]
+    - [auto, c, actor/pokey]
+    - [auto, c, actor/bandit]
+    - [auto, c, actor/red_shy_guy]
+    - [auto, c, actor/tubba_blubba]
+    - [auto, c, actor/monty_mole]
+    - [auto, c, actor/whacka]
+    - [auto, c, stage/dig_01]
+    - [auto, c, stage/dig_02]
+    - [auto, c, stage/dig_03]
+    - [auto, c, stage/dig_04]
+    - [auto, c, stage/dig_05]
+    - [auto, c, area]
+    - [auto, c, script/dig_01]
+    - [auto, c, script/dig_02]
+    - [auto, c, script/dig_03]
+    - [auto, c, script/dig_04]
+    - [auto, c, script/dig_05]
 
-  - [0x739580, bin]
+#######################
+### Battle Partners ###
+#######################
+  - name: battle_partner_goompa
+    dir: battle/partner
+    type: code
+    start: 0x739580
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, goompa]
+  - name: battle_partner_goombario
+    dir: battle/partner
+    type: code
+    start: 0x739B30
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, goombario]
+  - name: battle_partner_kooper
+    dir: battle/partner
+    type: code
+    start: 0x73E8D0
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, kooper]
+  - name: battle_partner_bombette
+    dir: battle/partner
+    type: code
+    start: 0x743760
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, bombette]
+  - name: battle_partner_parakarry
+    dir: battle/partner
+    type: code
+    start: 0x7487D0
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, parakarry]
+  - name: battle_partner_watt
+    dir: battle/partner
+    type: code
+    start: 0x74C540
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, watt]
+  - name: battle_partner_sushie
+    dir: battle/partner
+    type: code
+    start: 0x7506F0
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, sushie]
+  - name: battle_partner_lakilester
+    dir: battle/partner
+    type: code
+    start: 0x754760
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, lakilester]
+  - name: battle_partner_bow
+    dir: battle/partner
+    type: code
+    start: 0x759940
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, bow]
+  - name: battle_partner_twink
+    dir: battle/partner
+    type: code
+    start: 0x75D740
+    vram: 0x80238000
+    vram_of_symbol: battle_partner_vram_start
+    subsegments:
+    - [auto, c, twink]
 
+####################
+### Battle Items ###
+####################
+  - name: mushroom
+    dir: battle/move/item
+    type: code
+    start: 0x75E2A0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, mushroom]
+  - name: fire_flower
+    dir: battle/move/item
+    type: code
+    start: 0x75F6B0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, fire_flower]
+  - name: dusty_hammer
+    dir: battle/move/item
+    type: code
+    start: 0x760420
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, dusty_hammer]
+    - start: 0x760660
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x760C20, ci4, dusty_hammer, 32, 32]
+      - [0x760E20, palette, dusty_hammer]
+      - [0x760E40]
+  - name: pow_block
+    dir: battle/move/item
+    type: code
+    start: 0x7612A0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, pow_block]
+  - name: pebble
+    dir: battle/move/item
+    type: code
+    start: 0x7623C0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, pebble]
+    - start: 0x762600
+      type: .data
+      name: pebble
+      subsegments:
+      - [0x762BC0, ci4, pebble, 32, 32]
+      - [0x762DC0, palette, pebble]
+      - [0x762DE0]
+  - name: volt_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x763240
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, volt_shroom]
+  - name: thunder_rage
+    dir: battle/move/item
+    type: code
+    start: 0x763BF0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, thunder_rage]
+  - name: snowman_doll
+    dir: battle/move/item
+    type: code
+    start: 0x764880
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, snowman_doll]
+  - name: dried_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x765730
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, dried_shroom]
+  - name: shooting_star
+    dir: battle/move/item
+    type: code
+    start: 0x7661C0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, shooting_star]
+  - name: sleepy_sheep
+    dir: battle/move/item
+    type: code
+    start: 0x7670A0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, sleepy_sheep]
+    - start: 0x767A10
+      type: .data
+      name: sleepy_sheep
+      subsegments:
+      - [0x767A10]
+      - [0x767FD0, ci4, sleepy_sheep1, 56, 48]
+      - [0x768510, palette, sleepy_sheep1]
+      - [0x768530, ci4, sleepy_sheep2, 56, 48]
+      - [0x768A70, palette, sleepy_sheep2]
+      - [0x768A90, ci4, sleepy_sheep3, 56, 48]
+      - [0x768FD0, palette, sleepy_sheep3]
+      - [0x768FF0]
+  - name: stone_cap
+    dir: battle/move/item
+    type: code
+    start: 0x769FF0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, stone_cap]
+  - name: tasty_tonic
+    dir: battle/move/item
+    type: code
+    start: 0x76AA50
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, tasty_tonic]
+  - name: thunder_bolt
+    dir: battle/move/item
+    type: code
+    start: 0x76B590
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, thunder_bolt]
+  - name: ultra_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x76C1D0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, ultra_shroom]
+  - name: unknown_item
+    dir: battle/move/item
+    type: code
+    start: 0x76CC90
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, unknown_item]
+  - name: super_soda
+    dir: battle/move/item
+    type: code
+    start: 0x76D730
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, super_soda]
+  - name: hustle_drink
+    dir: battle/move/item
+    type: code
+    start: 0x76E9B0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, hustle_drink]
+  - name: stop_watch
+    dir: battle/move/item
+    type: code
+    start: 0x76F820
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, stop_watch]
+  - name: dizzy_dial
+    dir: battle/move/item
+    type: code
+    start: 0x770360
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, dizzy_dial]
+  - name: please_come_back
+    dir: battle/move/item
+    type: code
+    start: 0x771030
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, please_come_back]
+  - name: egg_missile
+    dir: battle/move/item
+    type: code
+    start: 0x771910
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, egg_missile]
+    - start: 0x771C20
+      type: .data
+      name: egg_missile
+      subsegments:
+      - [0x771C20]
+      - [0x7721E0, ci4, egg_missile1, 32, 32]
+      - [0x7723E0, palette, egg_missile1]
+      - [0x772400, ci4, egg_missile2, 32, 32]
+      - [0x772600, palette, egg_missile2]
+      - [0x772620, ci4, egg_missile3, 32, 32]
+      - [0x772820, palette, egg_missile3]
+      - [0x772840, ci4, egg_missile4, 32, 32]
+      - [0x772A40, palette, egg_missile4]
+      - [0x772A60]
+  - name: insecticide_herb
+    dir: battle/move/item
+    type: code
+    start: 0x7731A0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, insecticide_herb]
+    - start: 0x7735C0
+      type: .data
+      name: insecticide_herb
+      subsegments:
+      - [0x7735C0]
+      - [0x773B80, ci4, insecticide_herb, 32, 32]
+      - [0x773D80, palette, insecticide_herb]
+      - [0x773DA0]
+  - name: fright_jar
+    dir: battle/move/item
+    type: code
+    start: 0x774360
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, fright_jar]
+  - name: mystery
+    dir: battle/move/item
+    type: code
+    start: 0x775000
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, mystery]
+    - start: 0x775950
+      type: .data
+      name: mystery
+      subsegments:
+      - [0x775950]
+      - [0x775F10, ci4, mystery, 32, 32]
+      - [0x776110, palette, mystery]
+      - [0x776130]
+  - name: repel_gel
+    dir: battle/move/item
+    type: code
+    start: 0x7765C0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, repel_gel]
+  - name: life_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x776F80
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, life_shroom]
+  - name: coconut
+    dir: battle/move/item
+    type: code
+    start: 0x778170
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, coconut]
+    - start: 0x7783B0
+      type: .data
+      name: coconut
+      subsegments:
+      - [0x7783B0]
+      - [0x778970, ci4, coconut, 32, 32]
+      - [0x778B70, palette, coconut]
+      - [0x778B90]
+  - name: electro_pop
+    dir: battle/move/item
+    type: code
+    start: 0x778FF0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, electro_pop]
+  - name: strange_cake
+    dir: battle/move/item
+    type: code
+    start: 0x779D50
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, strange_cake]
+    - start: 0x77A8F0
+      type: .data
+      name: strange_cake
+      subsegments:
+      - [0x77A8F0]
+      - [0x77AEC0, ci4, strange_cake1, 32, 32]
+      - [0x77B0C0, palette, strange_cake1]
+      - [0x77B0E0, ci4, strange_cake2, 32, 32]
+      - [0x77B2E0, palette, strange_cake2]
+      - [0x77B300, ci4, strange_cake3, 32, 32]
+      - [0x77B500, palette, strange_cake3]
+      - [0x77B520]
+  - name: food
+    dir: battle/move/item
+    type: code
+    start: 0x77BB20
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, food]
+
+####################
+### Battle Moves ###
+####################
+  - name: battle_move_hammer_attack
+    dir: battle/move/hammer
+    type: code
+    start: 0x77CFF0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, attack]
+  - name: battle_move_spin_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7802E0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, spin_smash]
+  - name: battle_move_quake_hammer
+    dir: battle/move/hammer
+    type: code
+    start: 0x783920
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, quake_hammer]
+  - name: battle_move_jump_attack
+    dir: battle/move/jump
+    type: code
+    start: 0x7862B0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, attack]
+  - name: battle_move_multibounce
+    dir: battle/move/jump
+    type: code
+    start: 0x789710
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, multibounce]
+  - name: battle_move_power_bounce
+    dir: battle/move/jump
+    type: code
+    start: 0x78C840
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, power_bounce]
+  - name: battle_move_sleep_stomp
+    dir: battle/move/jump
+    type: code
+    start: 0x78F860
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, sleep_stomp]
+  - name: battle_move_dizzy_stomp
+    dir: battle/move/jump
+    type: code
+    start: 0x791820
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, dizzy_stomp]
+  - name: battle_move_d_down_pound
+    dir: battle/move/hammer
+    type: code
+    start: 0x7937E0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, d_down_pound]
+  - name: battle_move_jump_charge_0
+    dir: battle/move/jump
+    type: code
+    start: 0x795FC0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, jump_charge_0]
+  - name: battle_move_hammer_charge_0
+    dir: battle/move/hammer
+    type: code
+    start: 0x797B80
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, hammer_charge_0]
+  - name: battle_move_hammer_throw
+    dir: battle/move/hammer
+    type: code
+    start: 0x79AEA0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, hammer_throw]
+    - start: 0x79AF50
+      type: .data
+      name: hammer_throw
+      subsegments:
+      - [0x79AF50]
+      - [0x79CEE8, ci4, dusty_hammer, 32, 32]
+      - [0x79D0E8, palette, dusty_hammer]
+      - [0x79D108, ci4, basic_hammer, 32, 32]
+      - [0x79D308, palette, basic_hammer]
+      - [0x79D328, ci4, super_hammer, 32, 32]
+      - [0x79D528, palette, super_hammer]
+      - [0x79D548, ci4, ultra_hammer, 32, 32]
+      - [0x79D748, palette, ultra_hammer]
+      - [0x79D768, vtx, hammer_throw]
+      - [0x79D7A8, gfx, dusty_hammer]
+      - [0x79D898, gfx, basic_hammer]
+      - [0x79D988, gfx, super_hammer]
+      - [0x79DA78, gfx, ultra_hammer]
+      - [0x79DB68]
+  - name: battle_move_mega_quake
+    dir: battle/move/hammer
+    type: code
+    start: 0x79F1D0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, mega_quake]
+  - name: battle_move_hammer_charge_1
+    dir: battle/move/hammer
+    type: code
+    start: 0x7A2000
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, hammer_charge_1]
+  - name: battle_move_jump_charge_1
+    dir: battle/move/jump
+    type: code
+    start: 0x7A53D0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, jump_charge_1]
+  - name: battle_move_hammer_charge_2
+    dir: battle/move/hammer
+    type: code
+    start: 0x7A7020
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, hammer_charge_2]
+  - name: battle_move_jump_charge_2
+    dir: battle/move/jump
+    type: code
+    start: 0x7AA370
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, jump_charge_2]
+  - name: battle_move_auto_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7ABF90
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, auto_smash]
+  - name: battle_move_auto_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7AE670
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, auto_jump]
+  - name: battle_move_power_quake
+    dir: battle/move/hammer
+    type: code
+    start: 0x7B06E0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, power_quake]
+  - name: battle_move_auto_multibounce
+    dir: battle/move/jump
+    type: code
+    start: 0x7B3280
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, auto_multibounce]
+  - name: battle_move_power_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7B61B0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, power_jump]
+  - name: battle_move_super_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7B7D80
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, super_jump]
+  - name: battle_move_mega_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7B9980
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, mega_jump]
+  - name: battle_move_power_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7BB5F0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, power_smash]
+  - name: battle_move_super_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7BDB50
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, super_smash]
+  - name: battle_move_mega_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7C00E0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, mega_smash]
+  - name: battle_move_demo_power_bounce
+    dir: battle/move/jump
+    type: code
+    start: 0x7C26E0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, demo_power_bounce]
+  - name: battle_move_shrink_smash
+    dir: battle/move/hammer
+    type: code
+    start: 0x7C55D0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, shrink_smash]
+  - name: battle_move_shell_crack
+    dir: battle/move/hammer
+    type: code
+    start: 0x7C7C90
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, shell_crack]
+  - name: battle_move_d_down_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7CA370
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, d_down_jump]
+  - name: battle_move_shrink_stomp
+    dir: battle/move/jump
+    type: code
+    start: 0x7CC5F0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, shrink_stomp]
+  - name: battle_move_earthquake_jump
+    dir: battle/move/jump
+    type: code
+    start: 0x7CE570
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, earthquake_jump]
+  - name: battle_move_focus
+    dir: battle/move/star_power
+    type: code
+    start: 0x7D28B0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, focus]
+  - name: battle_move_refresh
+    dir: battle/move/star_power
+    type: code
+    start: 0x7D4050
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, refresh]
+  - name: battle_move_lullaby
+    dir: battle/move/star_power
+    type: code
+    start: 0x7D5BA0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, lullaby]
+  - name: battle_move_star_storm
+    dir: battle/move/star_power
+    type: code
+    start: 0x7D7220
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, star_storm]
+  - name: battle_move_chill_out
+    dir: battle/move/star_power
+    type: code
+    start: 0x7D8B20
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, chill_out]
+  - name: battle_move_smooch
+    dir: battle/move/star_power
+    type: code
+    start: 0x7DA7E0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, smooch]
+  - name: battle_move_time_out
+    dir: battle/move/star_power
+    type: code
+    start: 0x7DC770
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, time_out]
+  - name: battle_move_up_and_away
+    dir: battle/move/star_power
+    type: code
+    start: 0x7DDD30
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, up_and_away]
+  - name: battle_move_star_beam
+    dir: battle/move/star_power
+    type: code
+    start: 0x7DFA10
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, star_beam]
+  - name: battle_move_peach_beam
+    dir: battle/move/star_power
+    type: code
+    start: 0x7E2200
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, peach_beam]
+  - name: battle_move_peach_focus
+    dir: battle/move/star_power
+    type: code
+    start: 0x7E49F0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, peach_focus]
+  - name: battle_move_peach_focus_alt
+    dir: battle/move/star_power
+    type: code
+    start: 0x7E62F0
+    vram: 0x802A1000
+    follows_vram: battle_code
+    subsegments:
+    - [auto, c, peach_focus_alt]
   - type: code
     name: level_up
     start: 0x7E7990
@@ -10220,9 +11916,6 @@ segments:
       - [0xEE70D0, palette, BombableRock]
       - [0xEE70F0]
 
-#################
-### Dead maps ###
-#################
   - [0xEE7710, bin]
 
   - [0xF00000, pm_sbn, audio]

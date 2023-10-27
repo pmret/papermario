@@ -311,7 +311,9 @@ BSS s8 D_802AD004;
 BSS s16 D_802AD006;
 BSS s16 BattleMenuAlpha;
 BSS s16 D_802AD00A;
+#if !VERSION_IQUE
 BSS s16 D_802AD00C; // unused?
+#endif
 BSS s32 D_802AD010[6];
 BSS s32 D_802AD028[6];
 BSS s32 D_802AD040;
@@ -330,13 +332,17 @@ BSS s8 BattleMenu_MaxIdx;
 BSS s8 BattleMenu_HomePos;
 BSS f32 BattleMenu_WheelAngle;
 BSS f32 D_802AD070;
+#if !VERSION_IQUE
 BSS s32 D_802AD074; // unused?
+#endif
 BSS HudScript* BattleMenu_HudScripts[6];
 BSS s32 BattleMenu_TitleMessages[6];
 BSS s32 D_802AD0A8;
 BSS s32 BattleMenu_NumOptions;
 BSS s32 D_802AD0B0;
+#if !VERSION_IQUE
 BSS s32 D_802AD0B4; // unused?
+#endif
 BSS s32 battle_menu_submenuIDs[6];
 BSS s32 BattleMenu_OptionEnabled[6];
 BSS s32 battle_menu_isMessageDisabled[6];
@@ -357,17 +363,25 @@ BSS s16 BattleMenu_Moves_TextAlpha;
 BSS HudElemID BattleMenu_Moves_CursorID;
 BSS HudElemID BattleMenu_Moves_UpArrowID;
 BSS HudElemID BattleMenu_Moves_DownArrowID;
+#if !VERSION_IQUE
 BSS s32 D_802AD124; // unused?
+#endif
 BSS HudElemID BattleMenu_Moves_OptionIDs[24];
 BSS HudElemID BattleMenu_Moves_TitleID;
+#if !VERSION_IQUE
 BSS s32 D_802AD18C; // unused?
+#endif
 BSS HudElemID BattleMenu_Moves_OptionCostUnitIDs[24];
 BSS s16 BattleMenu_Moves_PosX;
 BSS s16 BattleMenu_Moves_PosY;
+#if !VERSION_IQUE
 BSS s32 D_802AD1F4; // unused?
+#endif
 BSS s32 BattleMenu_Moves_OptionIndexMap[24];
 BSS s32 D_802AD258;
+#if !VERSION_IQUE
 BSS s32 D_802AD25C; // unused?
+#endif
 BSS HudScript* battle_menu_moveOptionIconScripts[24];
 BSS s32 battle_menu_moveOptionNames[24];
 BSS s32 battle_menu_moveOptionDisplayCosts[24];
@@ -377,7 +391,9 @@ BSS s32 battle_menu_moveOptionBPCosts[24];
 BSS s32 BattleMenu_UsingSpiritsSubmenu;
 BSS s32 BattleMenu_Moves_OptionCount;
 BSS s32 D_802AD4A8;
+#if !VERSION_IQUE
 BSS s32 D_802AD4AC; // unused?
+#endif
 BSS s32 BattleMenu_Moves_OptionIndices[24];
 BSS s32 BattleMenu_Moves_OptionEnabled[24];
 BSS s32 BattleMenu_Moves_OptionDescMessages[24];
@@ -401,18 +417,27 @@ BSS s32 D_802AD618;
 BSS HudElemID GreenArrowUpID;
 BSS HudElemID GreenArrowDownID;
 BSS s32 D_802AD624;
+
+#if VERSION_IQUE
+#define ARRCNT 5
+#else
+#define ARRCNT 6
+#endif
+
 BSS s32 D_802AD628[5];
 BSS s16 D_802AD63C;
 BSS s16 D_802AD63E;
-BSS HudScript* D_802AD640[6];
+BSS HudScript* D_802AD640[ARRCNT];
 BSS s32 D_802AD658[5]; // msg IDs
 BSS s32 D_802AD66C;
 BSS s32 StratsMenuLastPos;
 
+#if !VERSION_IQUE
 BSS s32 D_802AD674; // unused?
-BSS s32 D_802AD678[6];
-BSS s32 D_802AD690[6]; // strats options enabled
-BSS s32 D_802AD6A8[6];
+#endif
+BSS s32 D_802AD678[ARRCNT];
+BSS s32 D_802AD690[ARRCNT]; // strats options enabled
+BSS s32 D_802AD6A8[ARRCNT];
 BSS s32 D_802AD6C0[5];
 BSS s32 D_802AD6D4;
 
@@ -1423,6 +1448,16 @@ s32 btl_submenu_moves_update(void) {
     return 0;
 }
 
+#if VERSION_IQUE
+#define Y_VAR1 2
+#define X_VAR1 104
+#define X_VAR2 89
+#else
+#define Y_VAR1 0
+#define X_VAR1 108
+#define X_VAR2 93
+#endif
+
 void func_802A3C98(void* data, s32 x, s32 y) {
     s32 var_t0;
     s32 temp_f6;
@@ -1480,7 +1515,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                     if (battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[idx]] >= 0) {
                         draw_msg(
                             battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[idx]],
-                            xPos, yPos, BattleMenu_Moves_TextAlpha, palette, 1
+                            xPos, yPos - Y_VAR1, BattleMenu_Moves_TextAlpha, palette, 1
                         );
                     }
 
@@ -1541,7 +1576,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
 
                         if (!BattleMenu_UsingSpiritsSubmenu) {
                             draw_number(
-                                num, xPos + 108, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
+                                num, xPos + X_VAR1, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
                                 DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT
                             );
                             if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
@@ -1551,7 +1586,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                             hud_element_set_render_pos(id, xPos + 116, yRenderPos);
                         } else {
                             draw_number(
-                                num, xPos + 93, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
+                                num, xPos + X_VAR2, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
                                 DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT
                             );
                             if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
@@ -1985,6 +2020,12 @@ s32 btl_update_strats_menu(void) {
     return 0;
 }
 
+#if VERSION_IQUE
+#define Y_VAR2 3
+#else
+#define Y_VAR2 0
+#endif
+
 void btl_menu_strats_draw_content(void* data, s32 x, s32 y) {
     s32 var_t0;
     s32 temp_f6;
@@ -2029,7 +2070,7 @@ void btl_menu_strats_draw_content(void* data, s32 x, s32 y) {
                 if (D_802AD690[idx] == 0) {
                     palette = MSG_PAL_0B;
                 }
-                draw_msg(D_802AD658[idx], xPos, yPos, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
+                draw_msg(D_802AD658[idx], xPos, yPos - Y_VAR2, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
                 yPos += 13;
             }
 
@@ -2463,11 +2504,11 @@ void btl_state_update_player_menu(void) {
                 D_802ACC60--;
                 break;
             }
-            
+
             if (submenuResult == 0) {
                 break;
             }
-            
+
             set_actor_anim(ACTOR_PLAYER, 0, ANIM_Mario1_Walk);
             battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->curSubmenu = battle_menu_submenuIDs[submenuResult - 1];
             for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
