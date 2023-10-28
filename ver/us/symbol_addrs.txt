@@ -26288,14 +26288,9 @@ sPartYaws = 0xE00027D8; //
 sDlists = 0xE0002800; //
 sDlists2 = 0xE000CC24; //
 
-//battle_partner_vram_start = 0x80238000; // appears_after_overlays_addr:0x80218000
-//battle_code_vram_start = 0x8023E000; // appears_after_overlays_addr:0x80238000
-//world_model_data_vram_end = 0x80240000; // appears_after_overlays_addr:0x80234000
 //map_vram_end = 0x80267FF0; // appears_after_overlays_addr:0x80240000
 ////world_action_vram_end = 0x802B7000; // appears_after_overlays_addr:0x802B6000
-//world_misc_vram_end = 0x802B7E00; // appears_after_overlays_addr:0x802B7000
 ////entity_data_vram_end = 0x802BD100; // appears_after_overlays_addr:0x802BAE00
-//world_partner_vram_end = 0x802C3000; // appears_after_overlays_addr:0x802BD100
 
 battle_move_hammer_throw_dusty_hammer_png = 0x802A3048; // rom:0x754498
 battle_move_hammer_throw_dusty_hammer_pal = 0x802A3248; // rom:0x754698

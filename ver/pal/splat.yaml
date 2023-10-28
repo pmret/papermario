@@ -754,7 +754,7 @@ segments:
     - [0x132C28, palette, letter_content_12]
     - [0x132E28, bin] # length 0x18, non zero
 
-  - name: ui_images
+  - name: ui_images_filemenu_pause
     type: code
     start: 0x132E40
     vram: 0x8023E000
@@ -12240,7 +12240,6 @@ segments:
     name: model_clear_render_tasks
     start: 0xE90270
     vram: 0x802B7E00
-#    vram_of_symbol: world_misc_vram_end
     subsegments:
     - [auto, c, model_clear_render_tasks]
   - type: code
@@ -12248,7 +12247,6 @@ segments:
     dir: world/action
     start: 0xE90270
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, idle]
   - type: code
@@ -12256,7 +12254,6 @@ segments:
     dir: world/action
     start: 0xE906F0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, walk]
   - type: code
@@ -12264,7 +12261,6 @@ segments:
     dir: world/action
     start: 0xE91050
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, jump]
   - type: code
@@ -12272,7 +12268,6 @@ segments:
     dir: world/action
     start: 0xE915E0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, step_up]
   - type: code
@@ -12280,7 +12275,6 @@ segments:
     dir: world/action
     start: 0xE91930
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, land]
   - type: code
@@ -12288,7 +12282,6 @@ segments:
     dir: world/action
     start: 0xE91EE0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, hammer]
   - type: code
@@ -12296,7 +12289,6 @@ segments:
     dir: world/action
     start: 0xE92D70
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, spin]
   - type: code
@@ -12304,7 +12296,6 @@ segments:
     dir: world/action
     start: 0xE93720
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, tornado_jump]
   - type: code
@@ -12312,7 +12303,6 @@ segments:
     dir: world/action
     start: 0xE93DF0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, spin_jump]
   - type: code
@@ -12320,7 +12310,6 @@ segments:
     dir: world/action
     start: 0xE94520
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, slide]
   - type: code
@@ -12328,7 +12317,6 @@ segments:
     dir: world/action
     start: 0xE94CA0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, hit_fire]
   - type: code
@@ -12336,7 +12324,6 @@ segments:
     dir: world/action
     start: 0xE94F50
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, hit_lava]
   - type: code
@@ -12344,7 +12331,6 @@ segments:
     dir: world/action
     start: 0xE95800
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, knockback]
   - type: code
@@ -12352,7 +12338,6 @@ segments:
     dir: world/action
     start: 0xE95A40
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, misc]
   - type: code
@@ -12360,7 +12345,6 @@ segments:
     dir: world/action
     start: 0xE961B0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, use_munchlesia]
   - type: code
@@ -12368,7 +12352,6 @@ segments:
     dir: world/action
     start: 0xE96480
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, use_spinning_flower]
   - type: code
@@ -12376,7 +12359,6 @@ segments:
     dir: world/action
     start: 0xE97350
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, use_tweester]
   - type: code
@@ -12384,14 +12366,12 @@ segments:
     dir: world/action
     start: 0xE976C0
     vram: 0x802B6000
-#    follows_vram: texture_memory
     subsegments:
     - [auto, c, sneaky_parasol]
   - type: code
     dir: entity/default
     start: 0xE98540
     vram: 0x802BAE00
-#    follows_vram: model_clear_render_tasks
     subsegments:
     - [auto, c, Padlock]
     - [auto, c, BoardedFloor]
@@ -12400,7 +12380,6 @@ segments:
     dir: entity/jan_iwa
     start: 0xE9A740
     vram: 0x802BAE00
-#    follows_vram: model_clear_render_tasks
     subsegments:
     - [auto, c, Plants1]
     - [auto, c, Plants2]
@@ -12409,7 +12388,6 @@ segments:
     dir: entity/sbk_omo
     start: 0xE9C760
     vram: 0x802BAE00
-#    follows_vram: model_clear_render_tasks
     subsegments:
     - [auto, c, Tweester]
     - [auto, c, StarBoxLauncher]
