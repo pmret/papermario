@@ -385,6 +385,8 @@ class Configure:
             modes.extend(
                 [
                     "bin",
+                    "rodatabin",
+                    "textbin",
                     "yay0",
                     "img",
                     "vtx",
@@ -501,11 +503,13 @@ class Configure:
         c_maps: bool = False,
     ):
         import segtypes
-        import segtypes.common.c
+        import segtypes.common.asm
         import segtypes.common.bin
+        import segtypes.common.c
         import segtypes.common.data
         import segtypes.common.group
-        import segtypes.common.asm
+        import segtypes.common.rodatabin
+        import segtypes.common.textbin
         import segtypes.n64.header
         import segtypes.n64.img
         import segtypes.n64.palette
@@ -801,7 +805,7 @@ class Configure:
                                 "pal_inc_c",
                                 vars,
                             )
-            elif isinstance(seg, segtypes.common.bin.CommonSegBin):
+            elif isinstance(seg, segtypes.common.bin.CommonSegBin) or isinstance(seg, segtypes.common.textbin.CommonSegTextbin) or isinstance(seg, segtypes.common.rodatabin.CommonSegRodatabin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("")  # remove .o

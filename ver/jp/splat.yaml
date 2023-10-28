@@ -26,6 +26,7 @@ options:
   undefined_syms_auto_path: ver/jp/undefined_syms_auto.txt
   symbol_name_format: JP_$VRAM
   symbol_name_format_no_rom: JP_$VRAM_$SEG
+  ld_legacy_generation: True
 asset_stack:
   - jp
 segments:
@@ -469,16 +470,16 @@ segments:
     - [auto, .rodata, inventory]
     - [auto, .rodata, world/partners]
     - [auto, .rodata, 891b0_len_fb0]
-    - [0xA5910, bin]
-    - [0xa5f90]
+    - [0xA5910, bin, A5910]
+    - [0xA5F90]
 
   - name: engine4
     dir: engine4
     type: code
-    start: 0xa5f90
+    start: 0xA5F90
     vram: 0x8010f890
     subsegments:
-      - [0xa5f90, bin]
+      - [0xA5F90, bin]
       - [0xa9770]
 
   - name: engine2

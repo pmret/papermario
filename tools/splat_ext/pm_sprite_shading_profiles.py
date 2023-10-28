@@ -219,5 +219,6 @@ class N64SegPm_sprite_shading_profiles(N64Segment):
                 [self.OUT_DIR / f"{self.name}.json"],
                 options.opts.asset_path / self.dir / f"{self.name}.bin",
                 self.get_linker_section(),
+                self.get_linker_section(),
             )
         ]

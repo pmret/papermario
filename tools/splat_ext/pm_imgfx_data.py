@@ -122,5 +122,6 @@ class N64SegPm_imgfx_data(N64Segment):
                 [self.OUT_DIR / f"{name}.json" for name, _ in self.yaml.get("animations")],
                 options.opts.asset_path / "imgfx" / f"{self.name}.c",
                 self.get_linker_section(),
+                self.get_linker_section(),
             )
         ]

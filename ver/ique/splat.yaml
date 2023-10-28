@@ -1,4 +1,5 @@
 name: Paper Mario (iQue)
+sha1: 5c724685085eba796537573dd6f84aaddedc8582
 options:
   basename: papermario
   find_file_boundaries: True
