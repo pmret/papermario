@@ -684,7 +684,7 @@ extern s32 MsgLetterRasterOffsets[];
 extern s32 MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
-#if VERSION_IQUE || VERSION_PAL
+#if VERSION_PAL
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 #else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
@@ -939,6 +939,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->lineCount = 0;
                         break;
+#if !VERSION_IQUE
                     case MSG_READ_FUNC_SIZE:
                         *printBuf++ = MSG_CHAR_PRINT_FUNCTION;
                         *printBuf++ = MSG_PRINT_FUNC_SIZE;
@@ -951,6 +952,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = MSG_PRINT_FUNC_SIZE_RESET;
                         printer->sizeScale = 1.0f;
                         break;
+#endif
                     case MSG_READ_FUNC_SPEED:
                         printer->printDelayTime = *srcBuf++;
                         printer->charsPerChunk = *srcBuf++;
@@ -1290,6 +1292,13 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
             default:
                 *printBuf++ = c;
                 arg1--;
+#if VERSION_IQUE
+                if (c >= 0x5F && c <= 0x8F) {
+                    *printBuf++ = nextArg;
+                    srcBuf++;
+                    arg1--;
+                }
+#endif
                 if (printer->fontVariant == 0 && c == MSG_CHAR_UNK_C3) {
                     printer->stateFlags &= ~MSG_STATE_FLAG_SPEAKING;
                 } else {

@@ -4,11 +4,6 @@
 
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 
-#if VERSION_IQUE
-// TODO: remove when charset segment is split for iQue
-extern Addr charset_standard_OFFSET;
-#endif
-
 extern MessageCharset* MsgCharsets[5];
 extern PAL_BIN D_802F4560[80][8];
 extern u8 filemenu_glyphBuffer[20][0x80];

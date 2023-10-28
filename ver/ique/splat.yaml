@@ -32,8 +32,7 @@ segments:
   - name: header
     type: header
     start: 0
-  - [0x40, bin]
-  - [0xB70, bin, rspboot_font]
+  - [0x40, bin] # empty space
   - name: main
     type: code
     start: 0x1000
@@ -1074,9 +1073,7 @@ segments:
     - [0x15D620, pm_charset,          title,    12, 15, 0x29]
     - [0x15E580, linker_offset,       subtitle]
     - [0x15E580, pm_charset,          subtitle, 12, 12, 0x29]
-    # this should be a padding section as it doesn't contain non-zero elements
-    # TODO: is there any way to eliminate this?
-    - [0x15F108, bin]
+    - [0x15F108, bin] # padding
     - [0x15F120, linker_offset,       credits_pal]
     - [0x15F120, pm_charset_palettes, subtitle,         1]
     - [0x15F130, pm_charset_palettes, title,            1]

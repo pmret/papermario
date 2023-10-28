@@ -3,11 +3,6 @@
 #include "sprite.h"
 #include "imgfx.h"
 
-#if VERSION_IQUE || VERSION_PAL
-// TODO: remove if section is split in iQue release
-extern Addr imgfx_data_ROM_START;
-#endif
-
 typedef union ImgFXIntVars {
     s32 raw[2][4];
     struct {
