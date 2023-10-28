@@ -38,7 +38,6 @@ segments:
     type: code
     start: 0x71D80
     vram: 0x800D8C70
-    # vram_of_symbol: overlays_start # TODO once this symbol is implemented
     subsegments:
     - [auto, hasm, bss2]
     - [auto, c, npc_collision]
@@ -549,7 +548,6 @@ segments:
     type: code
     start: 0xA4520
     vram: 0x8010E1D0
-    follows_vram: engine1
     subsegments:
     - [auto, hasm, bss3]
     - [auto, c, entity]
@@ -608,7 +606,6 @@ segments:
     dir: evt
     start: 0xE61D0
     vram: 0x802C6000
-    # follows_vram: world_use_item # TODO this causes the vram to be wrong
     subsegments:
     - [auto, c, script_list]
     - [auto, c, evt]
@@ -629,7 +626,6 @@ segments:
     type: code
     start: 0x100910
     vram: 0x802E2020
-    follows_vram: evt
     subsegments:
     - [auto, c, sprite]
     - [auto, c, 101b90_len_8f0]
@@ -637,7 +633,6 @@ segments:
     type: code
     start: 0x1040F0
     vram: 0x802E7070
-    follows_vram: engine4
     subsegments:
       - [auto, c, entity/Shadow]
       - [auto, c, entity/SaveBlock]
@@ -12188,7 +12183,6 @@ segments:
     start: 0xE8DEC0
     name: speech_bubble
     vram: 0x802B7000
-    #    vram_of_symbol: world_action_vram_end
     subsegments:
     - [auto, c, speech_bubble]
     - start: 0xE8E5D0
@@ -12204,7 +12198,6 @@ segments:
     start: 0xE8E880
     name: pulse_stone
     vram: 0x802B7000
-    #    vram_of_symbol: world_action_vram_end
     subsegments:
     - [auto, c, pulse_stone]
     - start: 0xE8EEC0
@@ -12221,7 +12214,6 @@ segments:
     start: 0xE8F5C0
     name: i_spy
     vram: 0x802B7000
-    #    vram_of_symbol: world_action_vram_end
     subsegments:
     - [auto, c, i_spy]
     - start: 0xE8FB40

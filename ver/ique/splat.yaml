@@ -555,7 +555,6 @@ segments:
     dir: filemenu
     start: 0x1AC100
     vram: 0x80242ba0
-    follows_vram: ui_images_filemenu_pause
     subsegments:
       - [0x1AC100, c, filemenu_common]
       - [0x1AE190, c, filemenu_main]

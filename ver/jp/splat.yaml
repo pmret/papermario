@@ -441,7 +441,6 @@ segments:
     type: code
     start: 0x75990
     vram: 0x800dc4e0
-    # vram_of_symbol: overlays_start # TODO once this symbol is implemented
     subsegments:
     - [auto, hasm, bss2]
     - [auto, c, npc_collision]

@@ -25,39 +25,57 @@ options:
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
   ld_wildcard_sections: True
-  ld_use_follows: False
+  ld_use_symbolic_vram_addresses: False
 vram_classes:
-  - { name: heaps, vram: 0x80197000 }
+  # Main
+  - { name: main, vram: 0x80025C00 }
+  - { name: engine1, vram: 0x800DC500, vram_symbol: overlays_start } # hard-coded in undefined_syms since BG data / map data doesn't shift currently, should be follows_classes: [main]
+  - { name: engine2, vram: 0x8010F6D0, follows_classes: [engine1] }
+  - { name: heaps, vram: 0x80197000, follows_classes: [engine2] }
 
+  # Battle
   - { name: battle_area, vram: 0x80218000, follows_classes: [heaps] }
   - { name: battle_area2, vram: 0x80231000, vram_symbol: Vine1Base } # ???
   - { name: battle_partner, vram: 0x80238000, follows_classes: [battle_area] }
+
   - { name: battle_code, vram: 0x8023E000, follows_classes: [battle_partner] }
   - { name: battle_move, vram: 0x802A1000, follows_classes: [battle_code] }
   - { name: action_cmd, vram: 0x802A9000, vram_symbol: battle_move_end } # currently this symbol is wired into undefined_syms. ideally it isn't and this is just follows_classes: [battle_move]
 
+  # File menu / Pause menu
   # seems wrong, but this follows the battle partner overlay as the battle_code class does
   - { name: ui_images_filemenu_pause, vram: 0x8023E000, follows_classes: [battle_partner] }
+  - { name: pause, vram: 0x80242BA0, follows_classes: [ui_images_filemenu_pause] }
+  - { name: filemenu, vram: 0x80242BA0, follows_classes: [ui_images_filemenu_pause] }
 
   - { name: world_model_anim, vram: 0x80234000, vram_symbol: Vine0Base } # ???
   - { name: map, vram: 0x80240000, follows_classes: [world_model_anim] }
-  - { name: texture_memory, vram: 0x8028E000, vram_symbol: world_battle_vram_end } # currently this symbol is wired into undefined_syms. ideally it isn't and this is just follows_classes: [???]
+  - { name: heaps2, vram: 0x80267FF0, follows_classes: [map] }
+  - { name: world_script_api, vram: 0x80280000, follows_classes: [heaps2] }
+
+  # Totally linear past this point
+  - { name: texture_memory, vram: 0x8028E000, vram_symbol: world_battle_vram_end } # currently this symbol is wired into undefined_syms. ideally it isn't and this is just follows_classes: [battle_code, world_script_api]
   - { name: world_action, vram: 0x802B6000, follows_classes: [texture_memory] }
   - { name: indicator_icon, vram: 0x802B7000, vram_symbol: world_action_vram_end } # should be follows_classes: [world_action] but multilink calc is necessary
   - { name: model_clear_render_tasks, vram: 0x802B7E00, follows_classes: [indicator_icon] }
   - { name: area_entities, vram: 0x802BAE00, follows_classes: [model_clear_render_tasks] }
   - { name: world_partner, vram: 0x802BD100, vram_symbol: entity_data_vram_end } # should be follows_classes: [area_entities] but multilink calc is necessary
   - { name: world_use_item, vram: 0x802C0000, follows_classes: [world_partner] }
+  - { name: evt, vram: 0x802C3000, follows_classes: [world_use_item] }
+  - { name: engine4, vram: 0x802DBD40, follows_classes: [evt] }
+  - { name: entity, vram: 0x802E0D90, follows_classes: [engine4] }
+  - { name: font_width, vram: 0x802EB3D0, follows_classes: [entity] }
+  - { name: heaps3, vram: 0x802FB800, follows_classes: [font_width] }
 
+  # Segments / misc
   - [effect_gfx, 0x09000000]
   - [entity_model, 0x0A000000]
   - [entity_model_anim, 0x00000000]
+  - { name: dgb_01_smash_bridges, vram: 0x80200000, vram_symbol: D_80200000 }
 asset_stack:
   - us
 segments:
-  - name: header
-    type: header
-    start: 0x0
+  - { name: header, type: header, start: 0x0000 }
   - name: boot
     type: code
     start: 0x0040
@@ -68,7 +86,7 @@ segments:
   - name: main
     type: code
     start: 0x1000
-    vram: 0x80025C00
+    vram: main
     subsegments:
     - [auto, hasm, bss]
     - [auto, hasm, entry_point]
@@ -413,9 +431,7 @@ segments:
   - name: engine1
     type: code
     start: 0x759B0
-    vram: 0x800DC500
-    vram_of_symbol: overlays_start
-    #follows_vram: main
+    vram: engine1
     subsegments:
     - [auto, hasm, bss2]
     - [auto, c, npc_collision]
@@ -854,8 +870,7 @@ segments:
   - name: engine2
     type: code
     start: 0xA5DD0
-    vram: 0x8010F6D0
-    follows_vram: engine1
+    vram: engine2
     subsegments:
     - [auto, hasm, bss3]
     - [auto, c, entity]
@@ -914,15 +929,13 @@ segments:
     start: 0xE79B0
     vram: heaps
     subalign: 0x1000
-    follows_vram: engine2
     subsegments:
     - [auto, c, heaps]
   - name: evt
     type: code
     dir: evt
     start: 0xE79B0
-    vram: 0x802C3000
-    follows_vram: world_use_item
+    vram: evt
     subsegments:
     - [auto, c, script_list]
     - [auto, c, evt]
@@ -941,16 +954,14 @@ segments:
   - name: engine4
     type: code
     start: 0xFEE30
-    vram: 0x802DBD40
-    follows_vram: evt
+    vram: engine4
     subsegments:
     - [auto, c, sprite]
     - [auto, c, 101b90_len_8f0]
   - name: entity
     type: code
     start: 0x102610
-    vram: 0x802E0D90
-    follows_vram: engine4
+    vram: entity
     subsegments:
     - [auto, c, entity/Shadow]
     - [auto, c, entity/SaveBlock]
@@ -995,9 +1006,8 @@ segments:
     - [0x10C880]
   - type: code
     name: font_width
-    follows_vram: entity
     start: 0x10CC10
-    vram: 0x802EB3D0
+    vram: font_width
     subsegments:
     - [auto, c, msg_data]
     - [auto, c, msg_img]
@@ -1081,8 +1091,7 @@ segments:
   - type: code
     name: heaps3
     start: 0x10F1B0
-    vram: 0x802FB800
-    follows_vram: font_width
+    vram: heaps3
     subsegments:
     - [auto, c, heaps3]
   - type: group
@@ -1315,8 +1324,7 @@ segments:
   - type: code
     dir: pause
     start: 0x135EE0
-    vram: 0x80242BA0
-    follows_vram: ui_images_filemenu_pause
+    vram: pause
     subsegments:
     - [auto, c, pause_main]
     - [auto, c, pause_tabs]
@@ -1374,8 +1382,7 @@ segments:
   - type: code
     dir: filemenu
     start: 0x163400
-    vram: 0x80242BA0
-    follows_vram: ui_images_filemenu_pause
+    vram: filemenu
     subsegments:
     - [auto, c, filemenu_common]
     - [auto, c, filemenu_main]
@@ -1668,7 +1675,6 @@ segments:
     start: 0x316A70
     vram: 0x80200080
     name: load_engine_data_obfuscated
-    follows_vram: create_audio_system_obfuscated
     subsegments:
     - [auto, c, load_engine_data_obfuscated]
   - type: code
@@ -8039,8 +8045,7 @@ segments:
     dir: world/script_api
     type: code
     start: 0x7E0E80
-    vram: 0x80280000
-    follows_vram: heaps2
+    vram: world_script_api
     subsegments:
     - [auto, c, shops]
     - [auto, c, rooms]
@@ -11540,8 +11545,7 @@ segments:
     type: code
     dir: world/area_dgb
     start: 0xC20F40
-    vram: 0x80200000
-    vram_of_symbol: D_80200000
+    vram: dgb_01_smash_bridges
     subsegments:
     - [auto, c, dgb_01_smash_bridges]
     - start: 0xC20F40
@@ -13357,8 +13361,7 @@ segments:
   - name: heaps2
     type: code
     start: 0xE20110
-    vram: 0x80267FF0
-    vram_of_symbol: map_vram_end
+    vram: heaps2
     subsegments:
     - [auto, c, heaps2]
   - type: code

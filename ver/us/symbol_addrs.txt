@@ -26288,7 +26288,6 @@ sPartYaws = 0xE00027D8; //
 sDlists = 0xE0002800; //
 sDlists2 = 0xE000CC24; //
 
-//map_vram_end = 0x80267FF0; // appears_after_overlays_addr:0x80240000
 ////world_action_vram_end = 0x802B7000; // appears_after_overlays_addr:0x802B6000
 ////entity_data_vram_end = 0x802BD100; // appears_after_overlays_addr:0x802BAE00
 
