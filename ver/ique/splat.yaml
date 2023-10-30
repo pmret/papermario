@@ -32,7 +32,8 @@ segments:
   - name: header
     type: header
     start: 0
-  - [0x40, bin] # empty space
+  - [0x40, bin]
+  - [0xB70, bin, rspboot_font]
   - name: main
     type: code
     start: 0x1000
@@ -967,7 +968,6 @@ segments:
     - [auto, .data, entity/WoodenCrate]
     - [auto, .data, entity/BlueWarpPipe]
     - [auto, .data, entity/Signpost]
-    - [0x10B7F0]
   - name: font_width
     type: code
     follows_vram: entity
@@ -15310,12 +15310,13 @@ segments:
       - [0xEE68D0, ci4, BombableRock, 64, 64]
       - [0xEE70D0, palette, BombableRock]
       - [0xEE70F0]
-
-  - [0xEE7710, bin]
-
+  - [0xEE7710, bin] # zero fill
   - [0xF00000, pm_sbn, audio]
-  - [0x1942C40, bin]
+  - [0x1942C40, bin] # zero fill
   - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
-  - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
-
+  - [0x1B82208, bin] # still zero fill
+  - [0x1B83000, bin, msg] # pm_msg (todo)
+  - [0x1E40000, bin, mapfs]
+  - { type: bin, start: 0x27FEE1E, subalign: 2 } # zero fill
+  - [0x27FFFC0, bin] # ?
   - [0x2800000]

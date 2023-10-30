@@ -3743,7 +3743,6 @@ D_09000D08_415D68 = 0x09000D08; // rom:0x45E7B8
 D_09000000_398BC0 = 0x09000000; // rom:0x3E1610
 D_09003F80_3FE430 = 0x09003F80; // rom:0x446E80
 
-// battle_code?
 ActorSpeak = 0x80252EF0;
 AddBattleCamZoom = 0x8024ECAC;
 btl_cam_use_preset = 0x8024E40C;
