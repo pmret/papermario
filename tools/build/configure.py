@@ -89,12 +89,17 @@ def write_ninja_rules(
     ld_args = f"-T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out"
 
     if shift:
-        # For the shiftable build, we link twice to resolve some addresses that gnu ld can't figure out all in one go.
+        # # For the shiftable build, we link twice to resolve some addresses that gnu ld can't figure out all in one go.
+        # ninja.rule(
+        #     "ld",
+        #     description="link($version) $out",
+        #     command=f"{cross}ld $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
+        #               {cross}ld $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
+        # )
         ninja.rule(
             "ld",
             description="link($version) $out",
-            command=f"{cross}ld $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
-                      {cross}ld $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
+            command=f"{cross}ld {ld_args}",
         )
     else:
         ninja.rule(

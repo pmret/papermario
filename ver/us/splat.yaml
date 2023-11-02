@@ -29,7 +29,8 @@ options:
 vram_classes:
   # Main
   - { name: main, vram: 0x80025C00 }
-  - { name: engine1, vram: 0x800DC500, vram_symbol: overlays_start } # hard-coded in undefined_syms since BG data / map data doesn't shift currently, should be follows_classes: [main]
+  # hard-coded in undefined_syms since BG data / map data doesn't shift currently, should be follows_classes: [main]
+  - { name: engine1, vram: 0x800DC500, vram_symbol: overlays_start }
   - { name: engine2, vram: 0x8010F6D0, follows_classes: [engine1] }
   - { name: heaps, vram: 0x80197000, follows_classes: [engine2] }
 
@@ -37,10 +38,9 @@ vram_classes:
   - { name: battle_area, vram: 0x80218000, follows_classes: [heaps] }
   - { name: battle_area2, vram: 0x80231000, vram_symbol: Vine1Base } # ???
   - { name: battle_partner, vram: 0x80238000, follows_classes: [battle_area] }
-
   - { name: battle_code, vram: 0x8023E000, follows_classes: [battle_partner] }
   - { name: battle_move, vram: 0x802A1000, follows_classes: [battle_code] }
-  - { name: action_cmd, vram: 0x802A9000, vram_symbol: battle_move_end } # currently this symbol is wired into undefined_syms. ideally it isn't and this is just follows_classes: [battle_move]
+  - { name: action_cmd, vram: 0x802A9000, follows_classes: [battle_move] } # vram_symbol: battle_move_end
 
   # File menu / Pause menu
   # seems wrong, but this follows the battle partner overlay as the battle_code class does
@@ -48,18 +48,19 @@ vram_classes:
   - { name: pause, vram: 0x80242BA0, follows_classes: [ui_images_filemenu_pause] }
   - { name: filemenu, vram: 0x80242BA0, follows_classes: [ui_images_filemenu_pause] }
 
+  # World
   - { name: world_model_anim, vram: 0x80234000, vram_symbol: Vine0Base } # ???
   - { name: map, vram: 0x80240000, follows_classes: [world_model_anim] }
   - { name: heaps2, vram: 0x80267FF0, follows_classes: [map] }
   - { name: world_script_api, vram: 0x80280000, follows_classes: [heaps2] }
 
   # Totally linear past this point
-  - { name: texture_memory, vram: 0x8028E000, vram_symbol: world_battle_vram_end } # currently this symbol is wired into undefined_syms. ideally it isn't and this is just follows_classes: [battle_code, world_script_api]
+  - { name: texture_memory, vram: 0x8028E000, follows_classes: [battle_code, world_script_api] } # vram_symbol: world_battle_vram_end
   - { name: world_action, vram: 0x802B6000, follows_classes: [texture_memory] }
-  - { name: indicator_icon, vram: 0x802B7000, vram_symbol: world_action_vram_end } # should be follows_classes: [world_action] but multilink calc is necessary
+  - { name: indicator_icon, vram: 0x802B7000, follows_classes: [world_action] } # vram_symbol: world_action_vram_end
   - { name: model_clear_render_tasks, vram: 0x802B7E00, follows_classes: [indicator_icon] }
   - { name: area_entities, vram: 0x802BAE00, follows_classes: [model_clear_render_tasks] }
-  - { name: world_partner, vram: 0x802BD100, vram_symbol: entity_data_vram_end } # should be follows_classes: [area_entities] but multilink calc is necessary
+  - { name: world_partner, vram: 0x802BD100, follows_classes: [area_entities] } # vram_symbol: entity_data_vram_end
   - { name: world_use_item, vram: 0x802C0000, follows_classes: [world_partner] }
   - { name: evt, vram: 0x802C3000, follows_classes: [world_use_item] }
   - { name: engine4, vram: 0x802DBD40, follows_classes: [evt] }
@@ -86,7 +87,7 @@ segments:
   - name: main
     type: code
     start: 0x1000
-    vram: main
+    vram_class: main
     subsegments:
     - [auto, hasm, bss]
     - [auto, hasm, entry_point]
@@ -431,7 +432,7 @@ segments:
   - name: engine1
     type: code
     start: 0x759B0
-    vram: engine1
+    vram_class: engine1
     subsegments:
     - [auto, hasm, bss2]
     - [auto, c, npc_collision]
@@ -870,7 +871,7 @@ segments:
   - name: engine2
     type: code
     start: 0xA5DD0
-    vram: engine2
+    vram_class: engine2
     subsegments:
     - [auto, hasm, bss3]
     - [auto, c, entity]
@@ -927,7 +928,7 @@ segments:
   - name: heaps
     type: code
     start: 0xE79B0
-    vram: heaps
+    vram_class: heaps
     subalign: 0x1000
     subsegments:
     - [auto, c, heaps]
@@ -935,7 +936,7 @@ segments:
     type: code
     dir: evt
     start: 0xE79B0
-    vram: evt
+    vram_class: evt
     subsegments:
     - [auto, c, script_list]
     - [auto, c, evt]
@@ -954,14 +955,14 @@ segments:
   - name: engine4
     type: code
     start: 0xFEE30
-    vram: engine4
+    vram_class: engine4
     subsegments:
     - [auto, c, sprite]
     - [auto, c, 101b90_len_8f0]
   - name: entity
     type: code
     start: 0x102610
-    vram: entity
+    vram_class: entity
     subsegments:
     - [auto, c, entity/Shadow]
     - [auto, c, entity/SaveBlock]
@@ -1007,7 +1008,7 @@ segments:
   - type: code
     name: font_width
     start: 0x10CC10
-    vram: font_width
+    vram_class: font_width
     subsegments:
     - [auto, c, msg_data]
     - [auto, c, msg_img]
@@ -1091,7 +1092,7 @@ segments:
   - type: code
     name: heaps3
     start: 0x10F1B0
-    vram: heaps3
+    vram_class: heaps3
     subsegments:
     - [auto, c, heaps3]
   - type: group
@@ -1168,7 +1169,7 @@ segments:
   - name: ui_images_filemenu_pause
     type: code
     start: 0x131340
-    vram: ui_images_filemenu_pause
+    vram_class: ui_images_filemenu_pause
     subsegments:
     - [auto, ci4, ui/pause/unused_badge_points, 24, 24]
     - [auto, palette, ui/pause/unused_badge_points]
@@ -1324,7 +1325,7 @@ segments:
   - type: code
     dir: pause
     start: 0x135EE0
-    vram: pause
+    vram_class: pause
     subsegments:
     - [auto, c, pause_main]
     - [auto, c, pause_tabs]
@@ -1382,7 +1383,7 @@ segments:
   - type: code
     dir: filemenu
     start: 0x163400
-    vram: filemenu
+    vram_class: filemenu
     subsegments:
     - [auto, c, filemenu_common]
     - [auto, c, filemenu_main]
@@ -1409,7 +1410,7 @@ segments:
   - type: code
     start: 0x16C8E0
     name: battle_code
-    vram: battle_code
+    vram_class: battle_code
     subsegments:
     - [auto, c, battle/16C8E0]
     - [auto, c, battle/btl_states_actions]
@@ -1699,83 +1700,83 @@ segments:
     dir: world/partner
     name: world_partner_goombario
     start: 0x317020
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, goombario]
   - type: code
     dir: world/partner
     name: world_partner_bombette
     start: 0x317E50
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, bombette]
   - type: code
     dir: world/partner
     name: world_partner_parakarry
     start: 0x319670
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, parakarry]
   - type: code
     dir: world/partner
     name: world_partner_kooper
     start: 0x31B120
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, kooper]
   - type: code
     dir: world/partner
     name: world_partner_watt
     start: 0x31CC70
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, watt]
   - type: code
     dir: world/partner
     name: world_partner_sushie
     start: 0x31DE70
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, sushie]
   - type: code
     dir: world/partner
     name: world_partner_lakilester
     start: 0x320C50
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, lakilester]
   - type: code
     dir: world/partner
     name: world_partner_bow
     start: 0x323A50
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, bow]
   - type: code
     dir: world/partner
     name: world_partner_goompa
     start: 0x324A10
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, goompa]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
     start: 0x324F10
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, goombaria]
   - type: code
     dir: world/partner
     name: world_partner_twink
     start: 0x325070
-    vram: world_partner
+    vram_class: world_partner
     subsegments:
     - [auto, c, twink]
   - type: code
     start: 0x3251D0
     name: world_use_item
-    vram: world_use_item
+    vram_class: world_use_item
     subsegments:
     - [auto, c, world_use_item]
 
@@ -1793,7 +1794,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x326410
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, big_smoke_puff]
@@ -1843,7 +1844,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x328EA0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, landing_dust]
@@ -1903,7 +1904,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x32CEC0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, flower_splash_trail]
@@ -1948,7 +1949,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x32EC50
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, cloud_puff_trail]
@@ -1980,7 +1981,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x32FB50
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, footprint]
@@ -2003,7 +2004,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x330460
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, floating_flower]
@@ -2030,7 +2031,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x330F00
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, snowflake]
@@ -2057,7 +2058,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3326A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, star]
@@ -2086,7 +2087,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x334C70
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, emote]
@@ -2126,7 +2127,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x337FC0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, sparkles]
@@ -2164,7 +2165,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x339F60
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, shape_spell]
@@ -2194,7 +2195,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x33BBD0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, gather_energy_pink]
@@ -2223,7 +2224,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x33D610
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, drop_leaves]
@@ -2251,7 +2252,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x33F000
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, dust]
@@ -2281,7 +2282,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x340880
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, shattering_stones]
@@ -2328,7 +2329,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x343040
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, damage_stars]
@@ -2356,7 +2357,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x343F70
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, explosion]
@@ -2387,7 +2388,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3451E0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, lens_flare]
@@ -2410,7 +2411,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x345B40
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, got_item_outline]
@@ -2444,7 +2445,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x34E770
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, spiky_white_aura]
@@ -2475,7 +2476,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x350220
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, damage_indicator]
@@ -2538,7 +2539,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x352CE0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, purple_ring]
@@ -2565,7 +2566,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x353BB0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, flame]
@@ -2607,7 +2608,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x356530
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, rising_bubble]
@@ -2638,7 +2639,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3573A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ring_blast]
@@ -2662,7 +2663,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3593B0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, shockwave]
@@ -2689,7 +2690,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x35A5E0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, music_note]
@@ -2738,7 +2739,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x35C550
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, sweat]
@@ -2765,7 +2766,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x35D510
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, sleep_bubble]
@@ -2798,7 +2799,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x35F0E0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, falling_leaves]
@@ -2822,7 +2823,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x360A30
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, stars_spread]
@@ -2845,7 +2846,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x361670
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, steam_burst]
@@ -2868,7 +2869,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x362C50
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, stars_orbiting]
@@ -2891,7 +2892,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3638C0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, big_snowflakes]
@@ -2918,7 +2919,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x364C00
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, debuff]
@@ -2942,7 +2943,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3659B0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, green_impact]
@@ -2966,7 +2967,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x366D60
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, radial_shimmer]
@@ -3007,7 +3008,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x36AEE0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ending_decals]
@@ -3041,7 +3042,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x36DF90
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, light_rays]
@@ -3067,7 +3068,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x36ED60
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, lightning]
@@ -3125,7 +3126,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3733E0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, fire_breath]
@@ -3162,7 +3163,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x375510
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, energy_shockwave]
@@ -3195,7 +3196,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x377F80
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, aura]
@@ -3238,7 +3239,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x37ADD0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, bulb_glow]
@@ -3266,7 +3267,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x37D180
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, effect_3D]
@@ -3290,7 +3291,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x37D9D0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, blast]
@@ -3341,7 +3342,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3803A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, fire_flower]
@@ -3378,7 +3379,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x381E00
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, recover]
@@ -3444,7 +3445,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3863B0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, disable_x]
@@ -3506,7 +3507,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x38A350
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, firework]
@@ -3537,7 +3538,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x38BBA0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, confetti]
@@ -3565,7 +3566,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x38D070
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, snowfall]
@@ -3594,7 +3595,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x38E990
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, effect_46]
@@ -3617,7 +3618,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x38F710
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, gather_magic]
@@ -3643,7 +3644,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3903D0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, attack_result_text]
@@ -3686,7 +3687,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x392440
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, small_gold_sparkle]
@@ -3718,7 +3719,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3930A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, flashing_box_shockwave]
@@ -3751,7 +3752,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x394670
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, balloon]
@@ -3787,7 +3788,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3960F0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, floating_rock]
@@ -3814,7 +3815,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x397040
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, chomp_drop]
@@ -3839,7 +3840,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x398BC0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, quizmo_stage]
@@ -3935,7 +3936,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3A0D60
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, radiating_energy_orb]
@@ -3968,7 +3969,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3A2440
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, quizmo_answer]
@@ -3991,7 +3992,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3A33D0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, motion_blur_flame]
@@ -4016,7 +4017,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3A4320
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, energy_orb_wave]
@@ -4044,7 +4045,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3A5BE0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, merlin_house_stars]
@@ -4074,7 +4075,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3A77A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, quizmo_audience]
@@ -4134,7 +4135,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3AB030
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, butterflies]
@@ -4190,7 +4191,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3AF700
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, stat_change]
@@ -4247,7 +4248,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B2D90
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, snaking_static]
@@ -4271,7 +4272,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B46A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, thunderbolt_ring]
@@ -4293,7 +4294,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B5340
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, squirt]
@@ -4318,7 +4319,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B6BF0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, water_block]
@@ -4347,7 +4348,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B78D0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, waterfall]
@@ -4369,7 +4370,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B8860
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, water_fountain]
@@ -4395,7 +4396,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3B9A70
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, underwater]
@@ -4428,7 +4429,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3BAEA0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, lightning_bolt]
@@ -4450,7 +4451,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3BCA90
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, water_splash]
@@ -4478,7 +4479,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3BD9A0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, snowman_doll]
@@ -4604,7 +4605,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3C1BA0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, fright_jar]
@@ -4634,7 +4635,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3CB890
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, stop_watch]
@@ -4659,7 +4660,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3CD6E0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, effect_63]
@@ -4698,7 +4699,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3CFAF0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, throw_spiny]
@@ -4727,7 +4728,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D11E0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, effect_65]
@@ -4749,7 +4750,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D2580
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, tubba_heart_attack]
@@ -4775,7 +4776,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D3930
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, whirlwind]
@@ -4804,7 +4805,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D4E90
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, floating_cloud_puff]
@@ -4828,7 +4829,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D5F30
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, energy_in_out]
@@ -4882,7 +4883,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D7040
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, tattle_window]
@@ -4902,7 +4903,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D7770
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, shiny_flare]
@@ -4925,7 +4926,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D80C0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, huff_puff_breath]
@@ -4953,7 +4954,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3D9100
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, cold_breath]
@@ -4986,7 +4987,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3DBF40
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, embers]
@@ -5010,7 +5011,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3DCD50
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, hieroglyphs]
@@ -5033,7 +5034,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3DEE60
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, misc_particles]
@@ -5070,7 +5071,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3E12D0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, static_status]
@@ -5095,7 +5096,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3E1CD0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, moving_cloud]
@@ -5119,7 +5120,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3E2960
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, effect_75]
@@ -5154,7 +5155,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3E5350
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, firework_rocket]
@@ -5177,7 +5178,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3E5F30
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, peach_star_beam]
@@ -5251,7 +5252,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3EBE60
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, chapter_change]
@@ -5305,7 +5306,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3F8CC0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ice_shard]
@@ -5330,7 +5331,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3FA4B0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, spirit_card]
@@ -5400,7 +5401,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x3FF250
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, lil_oink]
@@ -5531,7 +5532,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x403BF0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, breaking_junk]
@@ -5564,7 +5565,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x404F40
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, partner_buff]
@@ -5606,7 +5607,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x407080
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, quizmo_assistant]
@@ -5647,7 +5648,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x40A1C0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ice_pillar]
@@ -5681,7 +5682,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x40BBA0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, sun]
@@ -5722,7 +5723,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x40D290
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, star_spirits_energy]
@@ -5774,7 +5775,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x413FA0
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, star_outline]
@@ -5799,7 +5800,7 @@ segments:
     dir: effects/gfx
     type: code
     start: 0x415060
-    vram: effect_gfx
+    vram_class: effect_gfx
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, effect_86]
@@ -5841,40 +5842,40 @@ segments:
   - type: code
     start: 0x415D90
     name: btl_states_menus
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, battle/btl_states_menus]
   - type: code
     start: 0x4219F0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_jump
     subsegments:
     - [auto, c, jump]
   - type: code
     start: 0x422000
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_hammer
     subsegments:
     - [auto, c, hammer]
   - type: code
     start: 0x422AD0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_flee
     subsegments:
     - [auto, c, flee]
   - type: code
     start: 0x4233F0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_break_free
     subsegments:
     - [auto, c, break_free]
   - type: code
     start: 0x423C70
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_whirlwind
     subsegments:
@@ -5903,77 +5904,77 @@ segments:
     - [0x425550]
   - type: code
     start: 0x425590
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_stop_leech
     subsegments:
     - [auto, c, stop_leech]
   - type: code
     start: 0x425B50
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_07
     subsegments:
     - [auto, c, "07"]
   - type: code
     start: 0x426170
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_dizzy_shell
     subsegments:
     - [auto, c, dizzy_shell]
   - type: code
     start: 0x4269D0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_fire_shell
     subsegments:
     - [auto, c, fire_shell]
   - type: code
     start: 0x4273B0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_0A
     subsegments:
     - [auto, c, 0A]
   - type: code
     start: 0x427A70
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_bomb
     subsegments:
     - [auto, c, bomb]
   - type: code
     start: 0x4282E0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_body_slam
     subsegments:
     - [auto, c, body_slam]
   - type: code
     start: 0x428A70
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_air_lift
     subsegments:
     - [auto, c, air_lift]
   - type: code
     start: 0x429320
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_air_raid
     subsegments:
     - [auto, c, air_raid]
   - type: code
     start: 0x429D20
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_squirt
     subsegments:
     - [auto, c, squirt]
   - type: code
     start: 0x42A4F0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_water_block
     subsegments:
@@ -6002,49 +6003,49 @@ segments:
     - [0x42C6F0]
   - type: code
     start: 0x42C6F0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_tidal_wave
     subsegments:
     - [auto, c, tidal_wave]
   - type: code
     start: 0x42CF10
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_power_shock
     subsegments:
     - [auto, c, power_shock]
   - type: code
     start: 0x42DA10
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_mega_shock
     subsegments:
     - [auto, c, mega_shock]
   - type: code
     start: 0x42E3A0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_smack
     subsegments:
     - [auto, c, smack]
   - type: code
     start: 0x42EE20
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_spiny_surge
     subsegments:
     - [auto, c, spiny_surge]
   - type: code
     start: 0x42F6E0
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_hurricane
     subsegments:
     - [auto, c, hurricane]
   - type: code
     start: 0x430020
-    vram: action_cmd
+    vram_class: action_cmd
     dir: battle/action_cmd
     name: action_cmd_spook
     subsegments:
@@ -6056,7 +6057,7 @@ segments:
   - dir: battle/area/kmr_part_1
     type: code
     start: 0x4309A0
-    vram: battle_area
+    vram_class: battle_area
     subalign: 4
     subsegments:
     - [auto, c, area]
@@ -6071,7 +6072,7 @@ segments:
   - dir: battle/area/kmr_part_2
     type: code
     start: 0x439A90
-    vram: battle_area
+    vram_class: battle_area
     subalign: 4
     subsegments:
     - [auto, c, area]
@@ -6089,7 +6090,7 @@ segments:
   - dir: battle/area/kmr_part_3
     type: code
     start: 0x447440
-    vram: battle_area
+    vram_class: battle_area
     subalign: 4
     subsegments:
     - [auto, c, area]
@@ -6115,7 +6116,7 @@ segments:
   - dir: battle/area/mac
     type: code
     start: 0x464490
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/chan]
     - [auto, c, actor/lee]
@@ -6128,7 +6129,7 @@ segments:
   - dir: battle/area/hos
     type: code
     start: 0x47F0B0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/goombario_tutor]
     - [auto, c, actor/ember]
@@ -6140,7 +6141,7 @@ segments:
   - dir: battle/area/nok
     type: code
     start: 0x48D1A0
-    vram: battle_area
+    vram_class: battle_area
     subalign: 4
     subsegments:
     - [auto, c, area]
@@ -6158,7 +6159,7 @@ segments:
   - dir: battle/area/trd_part_1
     type: code
     start: 0x4A10A0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, area]
     - [auto, c, actor/bullet_bill]
@@ -6183,7 +6184,7 @@ segments:
   - dir: battle/area/trd_part_2
     type: code
     start: 0x4B11F0
-    vram: battle_area
+    vram_class: battle_area
     subalign: 4
     subsegments:
     - [auto, c, area]
@@ -6207,7 +6208,7 @@ segments:
   - dir: battle/area/trd_part_3
     type: code
     start: 0x4CF1B0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, area]
     - [auto, c, actor/eldstar]
@@ -6215,7 +6216,7 @@ segments:
   - dir: battle/area/iwa
     type: code
     start: 0x4D01F0
-    vram: battle_area
+    vram_class: battle_area
     subalign: 4
     subsegments:
     - [auto, c, area]
@@ -6229,7 +6230,7 @@ segments:
   - dir: battle/area/sbk
     type: code
     start: 0x4DA5E0
-    vram: battle_area
+    vram_class: battle_area
     subalign: 16 # BSS alignment hack
     subsegments:
     - [auto, c, actor/pokey]
@@ -6239,7 +6240,7 @@ segments:
   - dir: battle/area/isk_part_1
     type: code
     start: 0x4E2740
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/pokey_mummy]
     - [auto, c, actor/swooper]
@@ -6263,7 +6264,7 @@ segments:
   - dir: battle/area/isk_part_2
     type: code
     start: 0x4EF4A0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/chain_chomp]
     - [auto, c, actor/tutankoopa]
@@ -6283,7 +6284,7 @@ segments:
   - dir: battle/area/mim
     type: code
     start: 0x4F7BE0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/forest_fuzzy]
     - [auto, c, actor/bzzap]
@@ -6293,7 +6294,7 @@ segments:
   - dir: battle/area/arn
     type: code
     start: 0x4FEA50
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/hyper_goomba]
     - [auto, c, actor/hyper_paragoomba]
@@ -6310,7 +6311,7 @@ segments:
   - dir: battle/area/dgb
     type: code
     start: 0x50F020
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/clubba]
     - [auto, c, actor/tubba_blubba]
@@ -6323,7 +6324,7 @@ segments:
   - dir: battle/area/omo
     type: code
     start: 0x5125D0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/red_shy_guy]
     - [auto, c, actor/blue_shy_guy]
@@ -6349,7 +6350,7 @@ segments:
   - dir: battle/area/omo2
     type: code
     start: 0x52B6A0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/general_guy]
     - [auto, c, actor/toy_tank]
@@ -6359,43 +6360,43 @@ segments:
   - dir: battle/area/omo2_1
     type: code
     start: 0x543570
-    vram: battle_area2
+    vram_class: battle_area2
     subsegments:
     - [auto, c, actor/shy_squad]
   - dir: battle/area/omo2_2
     type: code
     start: 0x5483E0
-    vram: battle_area2
+    vram_class: battle_area2
     subsegments:
     - [auto, c, actor/stilt_guy]
   - dir: battle/area/omo2_3
     type: code
     start: 0x54CC70
-    vram: battle_area2
+    vram_class: battle_area2
     subsegments:
     - [auto, c, actor/shy_stack]
   - dir: battle/area/omo2_4
     type: code
     start: 0x552440
-    vram: battle_area2
+    vram_class: battle_area2
     subsegments:
     - [auto, c, actor/signal_guy]
   - dir: battle/area/omo2_5
     type: code
     start: 0x552BB0
-    vram: battle_area2
+    vram_class: battle_area2
     subsegments:
     - [auto, c, actor/shy_squad_redux]
   - dir: battle/area/omo2_6
     type: code
     start: 0x556C90
-    vram: battle_area2
+    vram_class: battle_area2
     subsegments:
     - [auto, c, actor/shy_squad_stub]
   - dir: battle/area/omo3
     type: code
     start: 0x5573E0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/big_lantern_ghost]
     - [auto, c, stage/omo_01]
@@ -6418,7 +6419,7 @@ segments:
   - dir: battle/area/kgr
     type: code
     start: 0x56E2A0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/fuzzipede]
     - [auto, c, stage/kgr_01]
@@ -6426,7 +6427,7 @@ segments:
   - dir: battle/area/jan
     type: code
     start: 0x573920
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/spear_guy]
     - [auto, c, actor/hurt_plant]
@@ -6446,7 +6447,7 @@ segments:
   - dir: battle/area/jan2
     type: code
     start: 0x584940
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/putrid_piranha]
     - [auto, c, actor/white_magikoopa]
@@ -6462,7 +6463,7 @@ segments:
   - dir: battle/area/kzn
     type: code
     start: 0x58C2F0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/lava_bubble]
     - [auto, c, actor/putrid_piranha]
@@ -6481,7 +6482,7 @@ segments:
   - dir: battle/area/kzn2
     type: code
     start: 0x59E6E0
-    vram: battle_area
+    vram_class: battle_area
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, anim/unused_gfx]
@@ -6557,7 +6558,7 @@ segments:
   - dir: battle/area/flo
     type: code
     start: 0x5B14B0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/lakitu]
     - [auto, c, actor/spiny]
@@ -6584,7 +6585,7 @@ segments:
   - dir: battle/area/flo2
     type: code
     start: 0x5CE690
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/huff_n_puff]
     - [auto, c, actor/tuff_puff]
@@ -6604,7 +6605,7 @@ segments:
   - dir: battle/area/tik
     type: code
     start: 0x5EC490
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/dark_koopa]
     - [auto, c, actor/dark_paratroopa]
@@ -6623,7 +6624,7 @@ segments:
   - dir: battle/area/tik2
     type: code
     start: 0x608AB0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/blooper]
     - [auto, c, actor/electro_blooper]
@@ -6638,7 +6639,7 @@ segments:
   - dir: battle/area/tik3
     type: code
     start: 0x6186F0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/swooper]
     - [auto, c, actor/swoopula]
@@ -6651,7 +6652,7 @@ segments:
   - dir: battle/area/sam
     type: code
     start: 0x623BA0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/duplighost]
     - [auto, c, actor/gulpit]
@@ -6669,7 +6670,7 @@ segments:
   - dir: battle/area/sam2
     type: code
     start: 0x63D1E0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/monstar]
     - [auto, c, actor/paragoomba]
@@ -6709,7 +6710,7 @@ segments:
   - dir: battle/area/pra
     type: code
     start: 0x648E10
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/swoopula]
     - [auto, c, actor/albino_dino]
@@ -6729,7 +6730,7 @@ segments:
   - dir: battle/area/pra2
     type: code
     start: 0x660750
-    vram: battle_area
+    vram_class: battle_area
     subalign: 16 # BSS alignment hack
     subsegments:
     - [auto, c, actor/crystal_king]
@@ -6739,7 +6740,7 @@ segments:
   - dir: battle/area/pra3
     type: code
     start: 0x669D80
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/duplighost]
     - [auto, c, actor/swoopula]
@@ -6756,7 +6757,7 @@ segments:
   - dir: battle/area/kpa
     type: code
     start: 0x684A30
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/bony_beetle]
     - [auto, c, actor/dry_bones]
@@ -6782,7 +6783,7 @@ segments:
   - dir: battle/area/kpa2
     type: code
     start: 0x69F200
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/unused_bowser]
     - [auto, c, actor/intro_bowser]
@@ -6796,7 +6797,7 @@ segments:
   - dir: battle/area/kpa3
     type: code
     start: 0x6BBB90
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/anti_guy]
     - [auto, c, actor/duplighost]
@@ -6805,7 +6806,7 @@ segments:
   - dir: battle/area/kpa4
     type: code
     start: 0x6CC070
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/bombshell_blaster]
     - [auto, c, actor/bombshell_bill]
@@ -6829,7 +6830,7 @@ segments:
   - dir: battle/area/kkj
     type: code
     start: 0x6DBDA0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, area]
     - [auto, c, actor/kammy_koopa]
@@ -6837,7 +6838,7 @@ segments:
   - dir: battle/area/dig
     type: code
     start: 0x6DDDC0
-    vram: battle_area
+    vram_class: battle_area
     subsegments:
     - [auto, c, actor/koopa_troopa]
     - [auto, c, actor/fuzzy]
@@ -6866,70 +6867,70 @@ segments:
     dir: battle/partner
     type: code
     start: 0x6F0B30
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, goompa]
   - name: battle_partner_goombario
     dir: battle/partner
     type: code
     start: 0x6F10E0
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, goombario]
   - name: battle_partner_kooper
     dir: battle/partner
     type: code
     start: 0x6F5E80
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, kooper]
   - name: battle_partner_bombette
     dir: battle/partner
     type: code
     start: 0x6FAD10
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, bombette]
   - name: battle_partner_parakarry
     dir: battle/partner
     type: code
     start: 0x6FFD80
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, parakarry]
   - name: battle_partner_watt
     dir: battle/partner
     type: code
     start: 0x703AF0
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, watt]
   - name: battle_partner_sushie
     dir: battle/partner
     type: code
     start: 0x707CA0
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, sushie]
   - name: battle_partner_lakilester
     dir: battle/partner
     type: code
     start: 0x70BD10
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, lakilester]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
     start: 0x710EF0
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, bow]
   - name: battle_partner_twink
     dir: battle/partner
     type: code
     start: 0x714CF0
-    vram: battle_partner
+    vram_class: battle_partner
     subsegments:
     - [auto, c, twink]
 
@@ -6940,21 +6941,21 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x715850
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, mushroom]
   - name: fire_flower
     dir: battle/move/item
     type: code
     start: 0x716C60
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, fire_flower]
   - name: dusty_hammer
     dir: battle/move/item
     type: code
     start: 0x7179D0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, dusty_hammer]
     - start: 0x717C10
@@ -6968,14 +6969,14 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x718850
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, pow_block]
   - name: pebble
     dir: battle/move/item
     type: code
     start: 0x719970
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, pebble]
     - start: 0x719BB0
@@ -6989,42 +6990,42 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x71A7F0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, volt_shroom]
   - name: thunder_rage
     dir: battle/move/item
     type: code
     start: 0x71B1A0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, thunder_rage]
   - name: snowman_doll
     dir: battle/move/item
     type: code
     start: 0x71BE30
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, snowman_doll]
   - name: dried_shroom
     dir: battle/move/item
     type: code
     start: 0x71CCE0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, dried_shroom]
   - name: shooting_star
     dir: battle/move/item
     type: code
     start: 0x71D770
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, shooting_star]
   - name: sleepy_sheep
     dir: battle/move/item
     type: code
     start: 0x71E650
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, sleepy_sheep]
     - start: 0x71EFC0
@@ -7043,77 +7044,77 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x7215A0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, stone_cap]
   - name: tasty_tonic
     dir: battle/move/item
     type: code
     start: 0x722000
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, tasty_tonic]
   - name: thunder_bolt
     dir: battle/move/item
     type: code
     start: 0x722B40
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, thunder_bolt]
   - name: ultra_shroom
     dir: battle/move/item
     type: code
     start: 0x723780
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, ultra_shroom]
   - name: unknown_item
     dir: battle/move/item
     type: code
     start: 0x724240
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, unknown_item]
   - name: super_soda
     dir: battle/move/item
     type: code
     start: 0x724CE0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, super_soda]
   - name: hustle_drink
     dir: battle/move/item
     type: code
     start: 0x725F60
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, hustle_drink]
   - name: stop_watch
     dir: battle/move/item
     type: code
     start: 0x726DD0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, stop_watch]
   - name: dizzy_dial
     dir: battle/move/item
     type: code
     start: 0x727910
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, dizzy_dial]
   - name: please_come_back
     dir: battle/move/item
     type: code
     start: 0x7285E0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, please_come_back]
   - name: egg_missile
     dir: battle/move/item
     type: code
     start: 0x728EC0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, egg_missile]
     - start: 0x7291D0
@@ -7134,7 +7135,7 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x72A750
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, insecticide_herb]
     - start: 0x72AB70
@@ -7149,14 +7150,14 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x72B910
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, fright_jar]
   - name: mystery
     dir: battle/move/item
     type: code
     start: 0x72C5B0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, mystery]
     - start: 0x72CF00
@@ -7171,21 +7172,21 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x72DB70
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, repel_gel]
   - name: life_shroom
     dir: battle/move/item
     type: code
     start: 0x72E530
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, life_shroom]
   - name: coconut
     dir: battle/move/item
     type: code
     start: 0x72F720
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, coconut]
     - start: 0x72F960
@@ -7200,14 +7201,14 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x7305A0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, electro_pop]
   - name: strange_cake
     dir: battle/move/item
     type: code
     start: 0x731300
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, strange_cake]
     - start: 0x731EA0
@@ -7226,7 +7227,7 @@ segments:
     dir: battle/move/item
     type: code
     start: 0x7330D0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, food]
 
@@ -7237,84 +7238,84 @@ segments:
     dir: battle/move/hammer
     type: code
     start: 0x7345A0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, attack]
   - name: battle_move_spin_smash
     dir: battle/move/hammer
     type: code
     start: 0x737890
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, spin_smash]
   - name: battle_move_quake_hammer
     dir: battle/move/hammer
     type: code
     start: 0x73AED0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, quake_hammer]
   - name: battle_move_jump_attack
     dir: battle/move/jump
     type: code
     start: 0x73D860
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, attack]
   - name: battle_move_multibounce
     dir: battle/move/jump
     type: code
     start: 0x740CC0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, multibounce]
   - name: battle_move_power_bounce
     dir: battle/move/jump
     type: code
     start: 0x743DF0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, power_bounce]
   - name: battle_move_sleep_stomp
     dir: battle/move/jump
     type: code
     start: 0x746E10
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, sleep_stomp]
   - name: battle_move_dizzy_stomp
     dir: battle/move/jump
     type: code
     start: 0x748DD0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, dizzy_stomp]
   - name: battle_move_d_down_pound
     dir: battle/move/hammer
     type: code
     start: 0x74AD90
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, d_down_pound]
   - name: battle_move_jump_charge_0
     dir: battle/move/jump
     type: code
     start: 0x74D570
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, jump_charge_0]
   - name: battle_move_hammer_charge_0
     dir: battle/move/hammer
     type: code
     start: 0x74F130
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, hammer_charge_0]
   - name: battle_move_hammer_throw
     dir: battle/move/hammer
     type: code
     start: 0x752450
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, hammer_throw]
     - start: 0x752500
@@ -7340,237 +7341,237 @@ segments:
     dir: battle/move/hammer
     type: code
     start: 0x756780
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, mega_quake]
   - name: battle_move_hammer_charge_1
     dir: battle/move/hammer
     type: code
     start: 0x7595B0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, hammer_charge_1]
   - name: battle_move_jump_charge_1
     dir: battle/move/jump
     type: code
     start: 0x75C980
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, jump_charge_1]
   - name: battle_move_hammer_charge_2
     dir: battle/move/hammer
     type: code
     start: 0x75E5D0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, hammer_charge_2]
   - name: battle_move_jump_charge_2
     dir: battle/move/jump
     type: code
     start: 0x761920
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, jump_charge_2]
   - name: battle_move_auto_smash
     dir: battle/move/hammer
     type: code
     start: 0x763540
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, auto_smash]
   - name: battle_move_auto_jump
     dir: battle/move/jump
     type: code
     start: 0x765C20
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, auto_jump]
   - name: battle_move_power_quake
     dir: battle/move/hammer
     type: code
     start: 0x767C90
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, power_quake]
   - name: battle_move_auto_multibounce
     dir: battle/move/jump
     type: code
     start: 0x76A830
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, auto_multibounce]
   - name: battle_move_power_jump
     dir: battle/move/jump
     type: code
     start: 0x76D760
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, power_jump]
   - name: battle_move_super_jump
     dir: battle/move/jump
     type: code
     start: 0x76F330
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, super_jump]
   - name: battle_move_mega_jump
     dir: battle/move/jump
     type: code
     start: 0x770F30
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, mega_jump]
   - name: battle_move_power_smash
     dir: battle/move/hammer
     type: code
     start: 0x772BA0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, power_smash]
   - name: battle_move_super_smash
     dir: battle/move/hammer
     type: code
     start: 0x775100
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, super_smash]
   - name: battle_move_mega_smash
     dir: battle/move/hammer
     type: code
     start: 0x777690
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, mega_smash]
   - name: battle_move_demo_power_bounce
     dir: battle/move/jump
     type: code
     start: 0x779C90
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, demo_power_bounce]
   - name: battle_move_shrink_smash
     dir: battle/move/hammer
     type: code
     start: 0x77CB80
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, shrink_smash]
   - name: battle_move_shell_crack
     dir: battle/move/hammer
     type: code
     start: 0x77F240
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, shell_crack]
   - name: battle_move_d_down_jump
     dir: battle/move/jump
     type: code
     start: 0x781920
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, d_down_jump]
   - name: battle_move_shrink_stomp
     dir: battle/move/jump
     type: code
     start: 0x783BA0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, shrink_stomp]
   - name: battle_move_earthquake_jump
     dir: battle/move/jump
     type: code
     start: 0x785B20
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, earthquake_jump]
   - name: battle_move_focus
     dir: battle/move/star_power
     type: code
     start: 0x789E60
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, focus]
   - name: battle_move_refresh
     dir: battle/move/star_power
     type: code
     start: 0x78B600
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, refresh]
   - name: battle_move_lullaby
     dir: battle/move/star_power
     type: code
     start: 0x78D150
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, lullaby]
   - name: battle_move_star_storm
     dir: battle/move/star_power
     type: code
     start: 0x78E7D0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, star_storm]
   - name: battle_move_chill_out
     dir: battle/move/star_power
     type: code
     start: 0x7900D0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, chill_out]
   - name: battle_move_smooch
     dir: battle/move/star_power
     type: code
     start: 0x791D90
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, smooch]
   - name: battle_move_time_out
     dir: battle/move/star_power
     type: code
     start: 0x793D20
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, time_out]
   - name: battle_move_up_and_away
     dir: battle/move/star_power
     type: code
     start: 0x7952E0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, up_and_away]
   - name: battle_move_star_beam
     dir: battle/move/star_power
     type: code
     start: 0x796FC0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, star_beam]
   - name: battle_move_peach_beam
     dir: battle/move/star_power
     type: code
     start: 0x7997B0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, peach_beam]
   - name: battle_move_peach_focus
     dir: battle/move/star_power
     type: code
     start: 0x79BFA0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, peach_focus]
   - name: battle_move_peach_focus_alt
     dir: battle/move/star_power
     type: code
     start: 0x79D8A0
-    vram: battle_move
+    vram_class: battle_move
     subsegments:
     - [auto, c, peach_focus_alt]
   - type: code
     name: level_up
     start: 0x79EF40
-    vram: battle_move
+    vram_class: battle_move
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, level_up]
@@ -7704,7 +7705,7 @@ segments:
   - type: code
     name: starpoint
     start: 0x7A89A0
-    vram: battle_move
+    vram_class: battle_move
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, starpoint]
@@ -7786,266 +7787,266 @@ segments:
     dir: world/model_anim/kzn
     type: code
     start: 0x7B5960
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "01"]
   - name: world_model_anim_kzn_00
     dir: world/model_anim/kzn
     type: code
     start: 0x7B6690
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "00"]
   - name: world_model_anim_kzn_04
     dir: world/model_anim/kzn
     type: code
     start: 0x7B70E0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "04"]
   - name: world_model_anim_kzn_05
     dir: world/model_anim/kzn
     type: code
     start: 0x7B8030
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "05"]
   - name: world_model_anim_kzn_06
     dir: world/model_anim/kzn
     type: code
     start: 0x7B8D30
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "06"]
   - name: world_model_anim_kzn_07
     dir: world/model_anim/kzn
     type: code
     start: 0x7B97E0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "07"]
   - name: world_model_anim_kzn_08
     dir: world/model_anim/kzn
     type: code
     start: 0x7BA280
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "08"]
   - name: world_model_anim_kzn_09
     dir: world/model_anim/kzn
     type: code
     start: 0x7BB050
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "09"]
   - name: world_model_anim_kzn_0A
     dir: world/model_anim/kzn
     type: code
     start: 0x7BBD80
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "0A"]
   - name: world_model_anim_kzn_0B
     dir: world/model_anim/kzn
     type: code
     start: 0x7BEDD0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "0B"]
   - name: world_model_anim_kzn_0C
     dir: world/model_anim/kzn
     type: code
     start: 0x7C16C0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "0C"]
   - name: world_model_anim_kzn_0D
     dir: world/model_anim/kzn
     type: code
     start: 0x7C3A00
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "0D"]
   - name: world_model_anim_kzn_0E
     dir: world/model_anim/kzn
     type: code
     start: 0x7C44D0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "0E"]
   - name: world_model_anim_kzn_02
     dir: world/model_anim/kzn
     type: code
     start: 0x7C4F50
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "02"]
   - name: world_model_anim_kzn_03
     dir: world/model_anim/kzn
     type: code
     start: 0x7C7410
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "03"]
   - name: world_model_anim_kzn_0F
     dir: world/model_anim/kzn
     type: code
     start: 0x7C7E50
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "0F"]
   - name: world_model_anim_kzn_10
     dir: world/model_anim/kzn
     type: code
     start: 0x7CA850
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "10"]
   - name: world_model_anim_kzn_11
     dir: world/model_anim/kzn
     type: code
     start: 0x7CD5F0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "11"]
   - name: world_model_anim_kzn_12
     dir: world/model_anim/kzn
     type: code
     start: 0x7CDB30
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "12"]
   - name: world_model_anim_kzn_13
     dir: world/model_anim/kzn
     type: code
     start: 0x7CEFF0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "13"]
   - name: world_model_anim_kzn_14
     dir: world/model_anim/kzn
     type: code
     start: 0x7CFCC0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "14"]
   - name: world_model_anim_kzn_15
     dir: world/model_anim/kzn
     type: code
     start: 0x7D0860
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "15"]
   - name: world_model_anim_kzn_16
     dir: world/model_anim/kzn
     type: code
     start: 0x7D14E0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "16"]
   - name: world_model_anim_kzn_17
     dir: world/model_anim/kzn
     type: code
     start: 0x7D2080
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "17"]
   - name: world_model_anim_kzn_18
     dir: world/model_anim/kzn
     type: code
     start: 0x7D2960
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "18"]
   - name: world_model_anim_kzn_19
     dir: world/model_anim/kzn
     type: code
     start: 0x7D3260
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "19"]
   - name: world_model_anim_kzn_1A
     dir: world/model_anim/kzn
     type: code
     start: 0x7D5570
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "1A"]
   - name: world_model_anim_kzn_1B
     dir: world/model_anim/kzn
     type: code
     start: 0x7D6F80
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "1B"]
   - name: world_model_anim_kzn_1C
     dir: world/model_anim/kzn
     type: code
     start: 0x7D76B0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "1C"]
   - name: world_model_anim_kzn_1D
     dir: world/model_anim/kzn
     type: code
     start: 0x7D8FF0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "1D"]
   - name: world_model_anim_kzn_1E
     dir: world/model_anim/kzn
     type: code
     start: 0x7D96E0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "1E"]
   - name: world_model_anim_kzn_1F
     dir: world/model_anim/kzn
     type: code
     start: 0x7D98E0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "1F"]
   - name: world_model_anim_kzn_20
     dir: world/model_anim/kzn
     type: code
     start: 0x7DA140
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "20"]
   - name: world_model_anim_kzn_21
     dir: world/model_anim/kzn
     type: code
     start: 0x7DC180
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "21"]
   - name: world_model_anim_kzn_22
     dir: world/model_anim/kzn
     type: code
     start: 0x7DE970
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "22"]
   - name: world_model_anim_kzn_23
     dir: world/model_anim/kzn
     type: code
     start: 0x7DF2B0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "23"]
   - name: world_model_anim_kzn_24
     dir: world/model_anim/kzn
     type: code
     start: 0x7E03B0
-    vram: world_model_anim
+    vram_class: world_model_anim
     subsegments:
     - [auto, c, "24"]
   - name: world_script_api
     dir: world/script_api
     type: code
     start: 0x7E0E80
-    vram: world_script_api
+    vram_class: world_script_api
     subsegments:
     - [auto, c, shops]
     - [auto, c, rooms]
@@ -8054,7 +8055,7 @@ segments:
   - name: texture_memory
     type: code
     start: 0x7E73A0
-    vram: texture_memory
+    vram_class: texture_memory
     subsegments:
     - [auto, c, texture_memory]
 
@@ -8066,7 +8067,7 @@ segments:
     dir: world/area_mac/machi
     type: code
     start: 0x7E73A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, machi_0_header]
     - [auto, c, machi_1_tables]
@@ -8080,7 +8081,7 @@ segments:
     dir: world/area_mac/mac_00
     type: code
     start: 0x7EAD10
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_00_0_header]
     - [auto, c, mac_00_1_music]
@@ -8101,7 +8102,7 @@ segments:
     dir: world/area_mac/mac_01
     type: code
     start: 0x800880
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_01_0_header]
     - [auto, c, mac_01_1_music]
@@ -8144,7 +8145,7 @@ segments:
     dir: world/area_mac/mac_02
     type: code
     start: 0x8232C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_02_0_header]
     - [auto, c, mac_02_1_music]
@@ -8158,7 +8159,7 @@ segments:
     dir: world/area_mac/mac_03
     type: code
     start: 0x831800
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_03_0_header]
     - [auto, c, mac_03_1_music]
@@ -8173,7 +8174,7 @@ segments:
     dir: world/area_mac/mac_04
     type: code
     start: 0x842BD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_04_0_header]
     - [auto, c, mac_04_1_music]
@@ -8189,7 +8190,7 @@ segments:
     dir: world/area_mac/mac_05
     type: code
     start: 0x852170
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_05_0_header]
     - [auto, c, mac_05_1_music]
@@ -8203,7 +8204,7 @@ segments:
     dir: world/area_mac/mac_06
     type: code
     start: 0x864B40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mac_06_0_header]
     - [auto, c, mac_06_1_main]
@@ -8213,7 +8214,7 @@ segments:
     dir: world/area_tik/tik_01
     type: code
     start: 0x8694B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_01_0_header]
     - [auto, c, tik_01_1_music]
@@ -8225,7 +8226,7 @@ segments:
     dir: world/area_tik/tik_02
     type: code
     start: 0x86C740
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_02_0_header]
     - [auto, c, tik_02_1_music]
@@ -8237,7 +8238,7 @@ segments:
     dir: world/area_tik/tik_03
     type: code
     start: 0x86EB00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_03_0_header]
     - [auto, c, tik_03_1_music]
@@ -8250,7 +8251,7 @@ segments:
     dir: world/area_tik/tik_04
     type: code
     start: 0x871A30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_04_0_header]
     - [auto, c, tik_04_1_music]
@@ -8262,7 +8263,7 @@ segments:
     dir: world/area_tik/tik_05
     type: code
     start: 0x874DC0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_05_0_header]
     - [auto, c, tik_05_1_music]
@@ -8274,7 +8275,7 @@ segments:
     dir: world/area_tik/tik_06
     type: code
     start: 0x876EE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_06_0_header]
     - [auto, c, tik_06_1_music]
@@ -8285,7 +8286,7 @@ segments:
     dir: world/area_tik/tik_07
     type: code
     start: 0x879BE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_07_0_header]
     - [auto, c, tik_07_1_music]
@@ -8298,7 +8299,7 @@ segments:
     dir: world/area_tik/tik_08
     type: code
     start: 0x87EDF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_08_0_header]
     - [auto, c, tik_08_1_music]
@@ -8310,7 +8311,7 @@ segments:
     dir: world/area_tik/tik_09
     type: code
     start: 0x8821C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_09_0_header]
     - [auto, c, tik_09_1_music]
@@ -8322,7 +8323,7 @@ segments:
     dir: world/area_tik/tik_10
     type: code
     start: 0x8863C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_10_0_header]
     - [auto, c, tik_10_1_music]
@@ -8333,7 +8334,7 @@ segments:
     dir: world/area_tik/tik_12
     type: code
     start: 0x888BD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_12_0_header]
     - [auto, c, tik_12_1_music]
@@ -8345,7 +8346,7 @@ segments:
     dir: world/area_tik/tik_14
     type: code
     start: 0x88D600
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_14_0_header]
     - [auto, c, tik_14_1_music]
@@ -8356,7 +8357,7 @@ segments:
     dir: world/area_tik/tik_15
     type: code
     start: 0x88FBA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_15_0_header]
     - [auto, c, tik_15_1_music]
@@ -8368,7 +8369,7 @@ segments:
     dir: world/area_tik/tik_17
     type: code
     start: 0x892A20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_17_0_header]
     - [auto, c, tik_17_1_music]
@@ -8378,7 +8379,7 @@ segments:
     dir: world/area_tik/tik_18
     type: code
     start: 0x8956E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_18_0_header]
     - [auto, c, tik_18_1_music]
@@ -8390,7 +8391,7 @@ segments:
     dir: world/area_tik/tik_19
     type: code
     start: 0x8975E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_19_0_header]
     - [auto, c, tik_19_1_music]
@@ -8400,7 +8401,7 @@ segments:
     dir: world/area_tik/tik_20
     type: code
     start: 0x89A350
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_20_0_header]
     - [auto, c, tik_20_1_music]
@@ -8411,7 +8412,7 @@ segments:
     dir: world/area_tik/tik_21
     type: code
     start: 0x89D7A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_21_0_header]
     - [auto, c, tik_21_1_music]
@@ -8421,7 +8422,7 @@ segments:
     dir: world/area_tik/tik_22
     type: code
     start: 0x89FEC0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_22_0_header]
     - [auto, c, tik_22_1_music]
@@ -8430,7 +8431,7 @@ segments:
     dir: world/area_tik/tik_23
     type: code
     start: 0x8A23D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_23_0_header]
     - [auto, c, tik_23_1_music]
@@ -8441,7 +8442,7 @@ segments:
     dir: world/area_tik/tik_24
     type: code
     start: 0x8A5A80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_24_0_header]
     - [auto, c, tik_24_1_music]
@@ -8453,7 +8454,7 @@ segments:
     dir: world/area_tik/tik_25
     type: code
     start: 0x8A7F80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tik_25_0_header]
     - [auto, c, tik_25_1_music]
@@ -8463,7 +8464,7 @@ segments:
     dir: world/area_kgr/kgr_01
     type: code
     start: 0x8A9A10
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kgr_01_1_main]
     - [auto, c, kgr_01_2_wiggle]
@@ -8472,7 +8473,7 @@ segments:
     dir: world/area_kgr/kgr_02
     type: code
     start: 0x8AA450
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kgr_02_1_main]
     - [auto, c, kgr_02_2_unused]
@@ -8482,7 +8483,7 @@ segments:
     dir: world/area_kmr/kmr_00
     type: code
     start: 0x8ABF90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_00_0_header]
     - [auto, c, kmr_00_1_music]
@@ -8494,7 +8495,7 @@ segments:
     dir: world/area_kmr/kmr_02
     type: code
     start: 0x8B0070
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_02_0_header]
     - [auto, c, kmr_02_1_music]
@@ -8526,7 +8527,7 @@ segments:
     dir: world/area_kmr/kmr_03
     type: code
     start: 0x8C7F90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_03_0_header]
     - [auto, c, kmr_03_1_music]
@@ -8539,7 +8540,7 @@ segments:
     dir: world/area_kmr/kmr_04
     type: code
     start: 0x8CA900
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_04_0_header]
     - [auto, c, kmr_04_1_music]
@@ -8563,7 +8564,7 @@ segments:
     dir: world/area_kmr/kmr_05
     type: code
     start: 0x8CE070
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_05_0_header]
     - [auto, c, kmr_05_1_music]
@@ -8575,7 +8576,7 @@ segments:
     dir: world/area_kmr/kmr_06
     type: code
     start: 0x8D1510
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_06_0_header]
     - [auto, c, kmr_06_1_music]
@@ -8587,7 +8588,7 @@ segments:
     dir: world/area_kmr/kmr_07
     type: code
     start: 0x8D3DC0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_07_0_header]
     - [auto, c, kmr_07_1_music]
@@ -8598,7 +8599,7 @@ segments:
     dir: world/area_kmr/kmr_09
     type: code
     start: 0x8D5E00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_09_0_header]
     - [auto, c, kmr_09_1_music]
@@ -8609,7 +8610,7 @@ segments:
     dir: world/area_kmr/kmr_10
     type: code
     start: 0x8D84D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_10_0_header]
     - [auto, c, kmr_10_1_music]
@@ -8621,7 +8622,7 @@ segments:
     dir: world/area_kmr/kmr_11
     type: code
     start: 0x8DA100
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_11_0_header]
     - [auto, c, kmr_11_1_music]
@@ -8639,7 +8640,7 @@ segments:
     dir: world/area_kmr/kmr_12
     type: code
     start: 0x8EB360
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_12_0_header]
     - [auto, c, kmr_12_1_music]
@@ -8650,7 +8651,7 @@ segments:
     dir: world/area_kmr/kmr_20
     type: code
     start: 0x8EBE20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_20_0_header]
     - [auto, c, kmr_20_1_music]
@@ -8689,7 +8690,7 @@ segments:
     dir: world/area_kmr/kmr_21
     type: code
     start: 0x8FEE80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_21_0_header]
     - [auto, c, kmr_21_1_main]
@@ -8697,7 +8698,7 @@ segments:
     dir: world/area_kmr/kmr_22
     type: code
     start: 0x8FF670
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_22_0_header]
     - [auto, c, kmr_22_1_main]
@@ -8717,7 +8718,7 @@ segments:
     dir: world/area_kmr/kmr_23
     type: code
     start: 0x907A30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_23_0_header]
     - [auto, c, kmr_23_1_main]
@@ -8738,7 +8739,7 @@ segments:
     dir: world/area_kmr/kmr_24
     type: code
     start: 0x90B240
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_24_0_header]
     - [auto, c, kmr_24_1_main]
@@ -8746,7 +8747,7 @@ segments:
     dir: world/area_kmr/kmr_30
     type: code
     start: 0x90B6D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kmr_30_0_header]
     - [auto, c, kmr_30_1_main]
@@ -8756,7 +8757,7 @@ segments:
     dir: world/area_iwa/iwa_00
     type: code
     start: 0x90CC40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_00_0_header]
     - [auto, c, iwa_00_1_main]
@@ -8767,7 +8768,7 @@ segments:
     dir: world/area_iwa/iwa_01
     type: code
     start: 0x90F6B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_01_0_header]
     - [auto, c, iwa_01_1_main]
@@ -8792,7 +8793,7 @@ segments:
     dir: world/area_iwa/iwa_02
     type: code
     start: 0x915D70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_02_0_header]
     - [auto, c, iwa_02_1_main]
@@ -8802,7 +8803,7 @@ segments:
     dir: world/area_iwa/iwa_03
     type: code
     start: 0x918BB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_03_0_header]
     - [auto, c, iwa_03_1_main]
@@ -8813,7 +8814,7 @@ segments:
     dir: world/area_iwa/iwa_04
     type: code
     start: 0x91B8E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_04_0_header]
     - [auto, c, iwa_04_1_music]
@@ -8824,7 +8825,7 @@ segments:
     dir: world/area_iwa/iwa_10
     type: code
     start: 0x91E570
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_10_0_header]
     - [auto, c, iwa_10_1_music]
@@ -8839,7 +8840,7 @@ segments:
     dir: world/area_iwa/iwa_11
     type: code
     start: 0x9269F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, iwa_11_0_header]
     - [auto, c, iwa_11_1_music]
@@ -8851,7 +8852,7 @@ segments:
     dir: world/area_sbk/sbk_00
     type: code
     start: 0x929270
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_00_0_header]
     - [auto, c, sbk_00_1_main]
@@ -8861,7 +8862,7 @@ segments:
     dir: world/area_sbk/sbk_01
     type: code
     start: 0x929A90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_01_1_main]
     - [auto, c, sbk_01_2_npc]
@@ -8869,7 +8870,7 @@ segments:
     dir: world/area_sbk/sbk_02
     type: code
     start: 0x92A2B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_02_0_header]
     - [auto, c, sbk_02_1_music]
@@ -8881,7 +8882,7 @@ segments:
     dir: world/area_sbk/sbk_03
     type: code
     start: 0x92F8B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_03_1_main]
     - [auto, c, sbk_03_2_npc]
@@ -8889,7 +8890,7 @@ segments:
     dir: world/area_sbk/sbk_04
     type: code
     start: 0x9304D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_04_1_main]
     - [auto, c, sbk_04_2_npc]
@@ -8897,7 +8898,7 @@ segments:
     dir: world/area_sbk/sbk_05
     type: code
     start: 0x930CF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_05_1_main]
     - [auto, c, sbk_05_2_entity]
@@ -8906,7 +8907,7 @@ segments:
     dir: world/area_sbk/sbk_06
     type: code
     start: 0x9325C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_06_1_main]
     - [auto, c, sbk_06_2_npc]
@@ -8916,7 +8917,7 @@ segments:
     dir: world/area_sbk/sbk_10
     type: code
     start: 0x933C80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_10_1_main]
     - [auto, c, sbk_10_2_entity]
@@ -8924,7 +8925,7 @@ segments:
     dir: world/area_sbk/sbk_11
     type: code
     start: 0x934040
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_11_1_main]
     - [auto, c, sbk_11_2_npc]
@@ -8932,7 +8933,7 @@ segments:
     dir: world/area_sbk/sbk_12
     type: code
     start: 0x934D40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_12_1_main]
     - [auto, c, sbk_12_2_npc]
@@ -8940,7 +8941,7 @@ segments:
     dir: world/area_sbk/sbk_13
     type: code
     start: 0x9357E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_13_1_main]
     - [auto, c, sbk_13_2_npc]
@@ -8948,7 +8949,7 @@ segments:
     dir: world/area_sbk/sbk_14
     type: code
     start: 0x9366E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_14_1_main]
     - [auto, c, sbk_14_2_entity]
@@ -8956,7 +8957,7 @@ segments:
     dir: world/area_sbk/sbk_15
     type: code
     start: 0x936CD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_15_1_main]
     - [auto, c, sbk_15_2_npc]
@@ -8964,7 +8965,7 @@ segments:
     dir: world/area_sbk/sbk_16
     type: code
     start: 0x937570
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_16_1_main]
     - [auto, c, sbk_16_2_foliage]
@@ -8972,7 +8973,7 @@ segments:
     dir: world/area_sbk/sbk_20
     type: code
     start: 0x938590
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_20_1_main]
     - [auto, c, sbk_20_2_entity]
@@ -8981,14 +8982,14 @@ segments:
     dir: world/area_sbk/sbk_21
     type: code
     start: 0x939560
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_21_1_main]
   - name: sbk_22
     dir: world/area_sbk/sbk_22
     type: code
     start: 0x939930
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_22_1_main]
     - [auto, c, sbk_22_2_npc]
@@ -8997,7 +8998,7 @@ segments:
     dir: world/area_sbk/sbk_23
     type: code
     start: 0x93A760
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_23_1_main]
     - [auto, c, sbk_23_2_entity]
@@ -9005,7 +9006,7 @@ segments:
     dir: world/area_sbk/sbk_24
     type: code
     start: 0x93AC30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_24_1_main]
     - [auto, c, sbk_24_2_npc]
@@ -9015,7 +9016,7 @@ segments:
     dir: world/area_sbk/sbk_25
     type: code
     start: 0x93C280
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_25_1_main]
     - [auto, c, sbk_25_2_npc]
@@ -9025,7 +9026,7 @@ segments:
     dir: world/area_sbk/sbk_26
     type: code
     start: 0x93DCD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_26_1_main]
     - [auto, c, sbk_26_2_npc]
@@ -9034,7 +9035,7 @@ segments:
     dir: world/area_sbk/sbk_30
     type: code
     start: 0x93F5B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_30_0_header]
     - [auto, c, sbk_30_1_music]
@@ -9045,7 +9046,7 @@ segments:
     dir: world/area_sbk/sbk_31
     type: code
     start: 0x944000
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_31_1_main]
     - [auto, c, sbk_31_2_npc]
@@ -9053,7 +9054,7 @@ segments:
     dir: world/area_sbk/sbk_32
     type: code
     start: 0x944A60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_32_1_main]
     - [auto, c, sbk_32_2_npc]
@@ -9061,7 +9062,7 @@ segments:
     dir: world/area_sbk/sbk_33
     type: code
     start: 0x9459D0
-    vram: map
+    vram_class: map
     subsegments: # unusual organization
     - [auto, c, sbk_33_0_header]
     - [auto, c, sbk_33_1_entity]
@@ -9070,7 +9071,7 @@ segments:
     dir: world/area_sbk/sbk_34
     type: code
     start: 0x945ED0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_34_1_main]
     - [auto, c, sbk_34_2_npc]
@@ -9079,7 +9080,7 @@ segments:
     dir: world/area_sbk/sbk_35
     type: code
     start: 0x9486B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_35_1_main]
     - [auto, c, sbk_35_2_npc]
@@ -9088,7 +9089,7 @@ segments:
     dir: world/area_sbk/sbk_36
     type: code
     start: 0x949E60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_36_1_main]
     - [auto, c, sbk_36_2_foliage]
@@ -9097,7 +9098,7 @@ segments:
     dir: world/area_sbk/sbk_40
     type: code
     start: 0x94B3A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_40_1_main]
     - [auto, c, sbk_40_2_npc]
@@ -9106,7 +9107,7 @@ segments:
     dir: world/area_sbk/sbk_41
     type: code
     start: 0x94C040
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_41_1_main]
     - [auto, c, sbk_41_2_entity]
@@ -9114,7 +9115,7 @@ segments:
     dir: world/area_sbk/sbk_42
     type: code
     start: 0x94C510
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_42_1_main]
     - [auto, c, sbk_42_2_npc]
@@ -9122,7 +9123,7 @@ segments:
     dir: world/area_sbk/sbk_43
     type: code
     start: 0x94D170
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_43_1_main]
     - [auto, c, sbk_43_2_entity]
@@ -9130,7 +9131,7 @@ segments:
     dir: world/area_sbk/sbk_44
     type: code
     start: 0x94D5A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_44_1_main]
     - [auto, c, sbk_44_2_npc]
@@ -9138,7 +9139,7 @@ segments:
     dir: world/area_sbk/sbk_45
     type: code
     start: 0x94E4A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_45_1_main]
     - [auto, c, sbk_45_2_entity]
@@ -9146,7 +9147,7 @@ segments:
     dir: world/area_sbk/sbk_46
     type: code
     start: 0x94E9A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_46_1_main]
     - [auto, c, sbk_46_2_npc]
@@ -9156,14 +9157,14 @@ segments:
     dir: world/area_sbk/sbk_50
     type: code
     start: 0x950610
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_50_1_main]
   - name: sbk_51
     dir: world/area_sbk/sbk_51
     type: code
     start: 0x950970
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_51_1_main]
     - [auto, c, sbk_51_2_npc]
@@ -9171,7 +9172,7 @@ segments:
     dir: world/area_sbk/sbk_52
     type: code
     start: 0x951670
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_52_1_main]
     - [auto, c, sbk_52_2_entity]
@@ -9179,7 +9180,7 @@ segments:
     dir: world/area_sbk/sbk_53
     type: code
     start: 0x951AE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_53_1_main]
     - [auto, c, sbk_53_2_npc]
@@ -9187,7 +9188,7 @@ segments:
     dir: world/area_sbk/sbk_54
     type: code
     start: 0x952580
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_54_1_main]
     - [auto, c, sbk_54_2_entity]
@@ -9195,7 +9196,7 @@ segments:
     dir: world/area_sbk/sbk_55
     type: code
     start: 0x952A50
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_55_1_main]
     - [auto, c, sbk_55_2_npc]
@@ -9205,7 +9206,7 @@ segments:
     dir: world/area_sbk/sbk_56
     type: code
     start: 0x953FC0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_56_1_main]
     - [auto, c, sbk_56_2_entity]
@@ -9214,7 +9215,7 @@ segments:
     dir: world/area_sbk/sbk_60
     type: code
     start: 0x9569F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_60_1_main]
     - [auto, c, sbk_60_2_npc]
@@ -9222,7 +9223,7 @@ segments:
     dir: world/area_sbk/sbk_61
     type: code
     start: 0x956F90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_61_1_main]
     - [auto, c, sbk_61_2_entity]
@@ -9230,7 +9231,7 @@ segments:
     dir: world/area_sbk/sbk_62
     type: code
     start: 0x957350
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_62_1_main]
     - [auto, c, sbk_62_2_npc]
@@ -9238,7 +9239,7 @@ segments:
     dir: world/area_sbk/sbk_63
     type: code
     start: 0x957D70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_63_1_main]
     - [auto, c, sbk_63_2_npc]
@@ -9246,7 +9247,7 @@ segments:
     dir: world/area_sbk/sbk_64
     type: code
     start: 0x958590
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_64_1_main]
     - [auto, c, sbk_64_2_entity]
@@ -9254,14 +9255,14 @@ segments:
     dir: world/area_sbk/sbk_65
     type: code
     start: 0x958950
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_65_1_main]
   - name: sbk_66
     dir: world/area_sbk/sbk_66
     type: code
     start: 0x958CB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_66_1_main]
     - [auto, c, sbk_66_2_npc]
@@ -9271,7 +9272,7 @@ segments:
     dir: world/area_sbk/sbk_99
     type: code
     start: 0x95AEB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sbk_99_1_main]
     - [auto, c, sbk_99_2_entity]
@@ -9279,7 +9280,7 @@ segments:
     dir: world/area_dro/dro_01
     type: code
     start: 0x95B200
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dro_01_0_header]
     - [auto, c, dro_01_1_music]
@@ -9293,7 +9294,7 @@ segments:
     dir: world/area_dro/dro_02
     type: code
     start: 0x9691C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dro_02_0_header]
     - [auto, c, dro_02_1_music]
@@ -9326,7 +9327,7 @@ segments:
     dir: world/area_isk/isk_01
     type: code
     start: 0x978140
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_01_0_header]
     - [auto, c, isk_01_1_music]
@@ -9337,7 +9338,7 @@ segments:
     dir: world/area_isk/isk_02
     type: code
     start: 0x978710
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_02_0_header]
     - [auto, c, isk_02_1_main]
@@ -9349,7 +9350,7 @@ segments:
     dir: world/area_isk/isk_03
     type: code
     start: 0x979E50
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_03_0_header]
     - [auto, c, isk_03_1_main]
@@ -9360,7 +9361,7 @@ segments:
     dir: world/area_isk/isk_04
     type: code
     start: 0x97B630
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_04_0_header]
     - [auto, c, isk_04_1_music]
@@ -9373,7 +9374,7 @@ segments:
     dir: world/area_isk/isk_05
     type: code
     start: 0x97DAD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_05_0_header]
     - [auto, c, isk_05_1_main]
@@ -9383,7 +9384,7 @@ segments:
     dir: world/area_isk/isk_06
     type: code
     start: 0x980A20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_06_0_header]
     - [auto, c, isk_06_1_main]
@@ -9394,7 +9395,7 @@ segments:
     dir: world/area_isk/isk_07
     type: code
     start: 0x982440
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_07_0_header]
     - [auto, c, isk_07_1_main]
@@ -9408,7 +9409,7 @@ segments:
     dir: world/area_isk/isk_08
     type: code
     start: 0x984E30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_08_0_header]
     - [auto, c, isk_08_1_main]
@@ -9418,7 +9419,7 @@ segments:
     dir: world/area_isk/isk_09
     type: code
     start: 0x9864E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_09_0_header]
     - [auto, c, isk_09_1_music]
@@ -9430,7 +9431,7 @@ segments:
     dir: world/area_isk/isk_10
     type: code
     start: 0x988B60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_10_0_header]
     - [auto, c, isk_10_1_main]
@@ -9440,7 +9441,7 @@ segments:
     dir: world/area_isk/isk_11
     type: code
     start: 0x98AA10
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_11_0_header]
     - [auto, c, isk_11_1_music]
@@ -9453,7 +9454,7 @@ segments:
     dir: world/area_isk/isk_12
     type: code
     start: 0x98D640
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_12_0_header]
     - [auto, c, isk_12_1_main]
@@ -9464,7 +9465,7 @@ segments:
     dir: world/area_isk/isk_13
     type: code
     start: 0x98F7E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_13_0_header]
     - [auto, c, isk_13_1_main]
@@ -9474,7 +9475,7 @@ segments:
     dir: world/area_isk/isk_14
     type: code
     start: 0x992730
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_14_0_header]
     - [auto, c, isk_14_1_main]
@@ -9484,7 +9485,7 @@ segments:
     dir: world/area_isk/isk_16
     type: code
     start: 0x9951F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_16_0_header]
     - [auto, c, isk_16_1_main]
@@ -9495,7 +9496,7 @@ segments:
     dir: world/area_isk/isk_18
     type: code
     start: 0x997F70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_18_0_header]
     - [auto, c, isk_18_1_main]
@@ -9505,7 +9506,7 @@ segments:
     dir: world/area_isk/isk_19
     type: code
     start: 0x999740
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, isk_19_0_header]
     - [auto, c, isk_19_1_music]
@@ -9515,7 +9516,7 @@ segments:
     dir: world/area_trd/trd_00
     type: code
     start: 0x999C70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_00_0_header]
     - [auto, c, trd_00_1_main]
@@ -9525,7 +9526,7 @@ segments:
     dir: world/area_trd/trd_01
     type: code
     start: 0x99C990
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_01_0_header]
     - [auto, c, trd_01_1_main]
@@ -9535,7 +9536,7 @@ segments:
     dir: world/area_trd/trd_02
     type: code
     start: 0x9A0FE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_02_0_header]
     - [auto, c, trd_02_1_main]
@@ -9545,7 +9546,7 @@ segments:
     dir: world/area_trd/trd_03
     type: code
     start: 0x9A4650
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_03_0_header]
     - [auto, c, trd_03_1_main]
@@ -9556,7 +9557,7 @@ segments:
     dir: world/area_trd/trd_04
     type: code
     start: 0x9A83F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_04_0_header]
     - [auto, c, trd_04_1_main]
@@ -9566,7 +9567,7 @@ segments:
     dir: world/area_trd/trd_05
     type: code
     start: 0x9AE700
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_05_0_header]
     - [auto, c, trd_05_1_main]
@@ -9577,7 +9578,7 @@ segments:
     dir: world/area_trd/trd_06
     type: code
     start: 0x9B1790
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_06_0_header]
     - [auto, c, trd_06_1_main]
@@ -9589,7 +9590,7 @@ segments:
     dir: world/area_trd/trd_07
     type: code
     start: 0x9B6980
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_07_0_header]
     - [auto, c, trd_07_1_main]
@@ -9599,7 +9600,7 @@ segments:
     dir: world/area_trd/trd_08
     type: code
     start: 0x9BB2A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_08_0_header]
     - [auto, c, trd_08_1_main]
@@ -9609,7 +9610,7 @@ segments:
     dir: world/area_trd/trd_09
     type: code
     start: 0x9BD660
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_09_0_header]
     - [auto, c, trd_09_1_main]
@@ -9620,7 +9621,7 @@ segments:
     dir: world/area_trd/trd_10
     type: code
     start: 0x9C2910
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, trd_10_0_header]
     - [auto, c, trd_10_1_main]
@@ -9630,7 +9631,7 @@ segments:
     dir: world/area_nok/nok_01
     type: code
     start: 0x9C53E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_01_0_header]
     - [auto, c, nok_01_1_music]
@@ -9645,7 +9646,7 @@ segments:
     dir: world/area_nok/nok_02
     type: code
     start: 0x9D7020
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_02_0_header]
     - [auto, c, nok_02_1_music]
@@ -9662,7 +9663,7 @@ segments:
     dir: world/area_nok/nok_03
     type: code
     start: 0x9EB7F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_03_0_header]
     - [auto, c, nok_03_1_music]
@@ -9673,7 +9674,7 @@ segments:
     dir: world/area_nok/nok_04
     type: code
     start: 0x9EDBF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_04_0_header]
     - [auto, c, nok_04_1_music]
@@ -9685,7 +9686,7 @@ segments:
     dir: world/area_nok/nok_11
     type: code
     start: 0x9F4A40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_11_0_header]
     - [auto, c, nok_11_1_music]
@@ -9696,7 +9697,7 @@ segments:
     dir: world/area_nok/nok_12
     type: code
     start: 0x9FA7F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_12_0_header]
     - [auto, c, nok_12_1_music]
@@ -9710,7 +9711,7 @@ segments:
     dir: world/area_nok/nok_13
     type: code
     start: 0xA00600
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_13_0_header]
     - [auto, c, nok_13_1_music]
@@ -9722,7 +9723,7 @@ segments:
     dir: world/area_nok/nok_14
     type: code
     start: 0xA02840
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_14_0_header]
     - [auto, c, nok_14_1_music]
@@ -9734,7 +9735,7 @@ segments:
     dir: world/area_nok/nok_15
     type: code
     start: 0xA06F00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, nok_15_0_header]
     - [auto, c, nok_15_1_music]
@@ -9746,7 +9747,7 @@ segments:
     dir: world/area_hos/hos_00
     type: code
     start: 0xA0BCF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_00_0_header]
     - [auto, c, hos_00_1_music]
@@ -9760,7 +9761,7 @@ segments:
     dir: world/area_hos/hos_01
     type: code
     start: 0xA10880
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_01_0_header]
     - [auto, c, hos_01_1_music]
@@ -9773,7 +9774,7 @@ segments:
     dir: world/area_hos/hos_02
     type: code
     start: 0xA16220
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_02_0_header]
     - [auto, c, hos_02_1_music]
@@ -9786,7 +9787,7 @@ segments:
     dir: world/area_hos/hos_03
     type: code
     start: 0xA1B100
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_03_0_header]
     - [auto, c, hos_03_1_music]
@@ -9801,7 +9802,7 @@ segments:
     dir: world/area_hos/hos_04
     type: code
     start: 0xA26ED0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_04_0_header]
     - [auto, c, hos_04_1_music]
@@ -9815,7 +9816,7 @@ segments:
     dir: world/area_hos/hos_05
     type: code
     start: 0xA2A240
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_05_0_header]
     - [auto, c, hos_05_1_music]
@@ -9830,7 +9831,7 @@ segments:
     dir: world/area_hos/hos_06
     type: code
     start: 0xA394E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_06_0_header]
     - [auto, c, hos_06_1_entity]
@@ -9843,7 +9844,7 @@ segments:
     dir: world/area_hos/hos_10
     type: code
     start: 0xA3F740
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_10_0_header]
     - [auto, c, hos_10_1_music]
@@ -9857,7 +9858,7 @@ segments:
     dir: world/area_hos/hos_20
     type: code
     start: 0xA45930
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, hos_20_0_header]
     - [auto, c, hos_20_1_main]
@@ -9866,7 +9867,7 @@ segments:
     dir: world/area_kpa/kpa_01
     type: code
     start: 0xA46F60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_01_0_header]
     - [auto, c, kpa_01_1_music]
@@ -9877,7 +9878,7 @@ segments:
     dir: world/area_kpa/kpa_03
     type: code
     start: 0xA485C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_03_0_header]
     - [auto, c, kpa_03_1_music]
@@ -9888,7 +9889,7 @@ segments:
     dir: world/area_kpa/kpa_04
     type: code
     start: 0xA4BF60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_04_0_header]
     - [auto, c, kpa_04_1_music]
@@ -9898,7 +9899,7 @@ segments:
     dir: world/area_kpa/kpa_08
     type: code
     start: 0xA4CA20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_08_0_header]
     - [auto, c, kpa_08_1_music]
@@ -9909,7 +9910,7 @@ segments:
     dir: world/area_kpa/kpa_09
     type: code
     start: 0xA4F000
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_09_0_header]
     - [auto, c, kpa_09_1_music]
@@ -9920,7 +9921,7 @@ segments:
     dir: world/area_kpa/kpa_10
     type: code
     start: 0xA51980
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_10_0_header]
     - [auto, c, kpa_10_1_music]
@@ -9931,7 +9932,7 @@ segments:
     dir: world/area_kpa/kpa_11
     type: code
     start: 0xA528C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_11_0_header]
     - [auto, c, kpa_11_1_music]
@@ -9942,7 +9943,7 @@ segments:
     dir: world/area_kpa/kpa_12
     type: code
     start: 0xA54950
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_12_0_header]
     - [auto, c, kpa_12_1_music]
@@ -9952,7 +9953,7 @@ segments:
     dir: world/area_kpa/kpa_13
     type: code
     start: 0xA55F20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_13_0_header]
     - [auto, c, kpa_13_1_music]
@@ -9963,7 +9964,7 @@ segments:
     dir: world/area_kpa/kpa_14
     type: code
     start: 0xA574B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_14_0_header]
     - [auto, c, kpa_14_1_music]
@@ -9974,7 +9975,7 @@ segments:
     dir: world/area_kpa/kpa_15
     type: code
     start: 0xA59390
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_15_0_header]
     - [auto, c, kpa_15_1_music]
@@ -9984,7 +9985,7 @@ segments:
     dir: world/area_kpa/kpa_16
     type: code
     start: 0xA5A030
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_16_0_header]
     - [auto, c, kpa_16_1_music]
@@ -9995,7 +9996,7 @@ segments:
     dir: world/area_kpa/kpa_17
     type: code
     start: 0xA5CA20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_17_0_header]
     - [auto, c, kpa_17_1_music]
@@ -10006,7 +10007,7 @@ segments:
     dir: world/area_kpa/kpa_32
     type: code
     start: 0xA5E0C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_32_0_header]
     - [auto, c, kpa_32_1_music]
@@ -10016,7 +10017,7 @@ segments:
     dir: world/area_kpa/kpa_33
     type: code
     start: 0xA5F080
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_33_0_header]
     - [auto, c, kpa_33_1_music]
@@ -10026,7 +10027,7 @@ segments:
     dir: world/area_kpa/kpa_40
     type: code
     start: 0xA60040
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_40_0_header]
     - [auto, c, kpa_40_1_music]
@@ -10035,7 +10036,7 @@ segments:
     dir: world/area_kpa/kpa_41
     type: code
     start: 0xA60470
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_41_0_header]
     - [auto, c, kpa_41_1_music]
@@ -10044,7 +10045,7 @@ segments:
     dir: world/area_kpa/kpa_50
     type: code
     start: 0xA609D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_50_0_header]
     - [auto, c, kpa_50_1_music]
@@ -10054,7 +10055,7 @@ segments:
     dir: world/area_kpa/kpa_51
     type: code
     start: 0xA64090
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_51_0_header]
     - [auto, c, kpa_51_1_music]
@@ -10064,7 +10065,7 @@ segments:
     dir: world/area_kpa/kpa_52
     type: code
     start: 0xA67100
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_52_0_header]
     - [auto, c, kpa_52_1_music]
@@ -10075,7 +10076,7 @@ segments:
     dir: world/area_kpa/kpa_53
     type: code
     start: 0xA6ACA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_53_0_header]
     - [auto, c, kpa_53_1_music]
@@ -10086,7 +10087,7 @@ segments:
     dir: world/area_kpa/kpa_60
     type: code
     start: 0xA6CB00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_60_0_header]
     - [auto, c, kpa_60_1_music]
@@ -10097,7 +10098,7 @@ segments:
     dir: world/area_kpa/kpa_61
     type: code
     start: 0xA6E3E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_61_0_header]
     - [auto, c, kpa_61_1_music]
@@ -10108,7 +10109,7 @@ segments:
     dir: world/area_kpa/kpa_62
     type: code
     start: 0xA72220
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_62_0_header]
     - [auto, c, kpa_62_1_music]
@@ -10118,7 +10119,7 @@ segments:
     dir: world/area_kpa/kpa_63
     type: code
     start: 0xA735B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_63_0_header]
     - [auto, c, kpa_63_1_music]
@@ -10129,7 +10130,7 @@ segments:
     dir: world/area_kpa/kpa_70
     type: code
     start: 0xA74870
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_70_0_header]
     - [auto, c, kpa_70_1_music]
@@ -10141,7 +10142,7 @@ segments:
     dir: world/area_kpa/kpa_81
     type: code
     start: 0xA784C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_81_0_header]
     - [auto, c, kpa_81_1_music]
@@ -10151,7 +10152,7 @@ segments:
     dir: world/area_kpa/kpa_82
     type: code
     start: 0xA7A500
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_82_0_header]
     - [auto, c, kpa_82_1_music]
@@ -10161,7 +10162,7 @@ segments:
     dir: world/area_kpa/kpa_83
     type: code
     start: 0xA83490
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_83_0_header]
     - [auto, c, kpa_83_1_music]
@@ -10171,7 +10172,7 @@ segments:
     dir: world/area_kpa/kpa_90
     type: code
     start: 0xA867B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_90_0_header]
     - [auto, c, kpa_90_1_music]
@@ -10180,7 +10181,7 @@ segments:
     dir: world/area_kpa/kpa_91
     type: code
     start: 0xA86A50
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_91_0_header]
     - [auto, c, kpa_91_1_music]
@@ -10191,7 +10192,7 @@ segments:
     dir: world/area_kpa/kpa_94
     type: code
     start: 0xA8C7C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_94_0_header]
     - [auto, c, kpa_94_1_music]
@@ -10200,7 +10201,7 @@ segments:
     dir: world/area_kpa/kpa_95
     type: code
     start: 0xA8CA80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_95_0_header]
     - [auto, c, kpa_95_1_music]
@@ -10211,7 +10212,7 @@ segments:
     dir: world/area_kpa/kpa_96
     type: code
     start: 0xA927C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_96_0_header]
     - [auto, c, kpa_96_1_music]
@@ -10221,7 +10222,7 @@ segments:
     dir: world/area_kpa/kpa_100
     type: code
     start: 0xA93160
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_100_0_header]
     - [auto, c, kpa_100_1_music]
@@ -10231,7 +10232,7 @@ segments:
     dir: world/area_kpa/kpa_101
     type: code
     start: 0xA93440
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_101_0_header]
     - [auto, c, kpa_101_1_music]
@@ -10241,7 +10242,7 @@ segments:
     dir: world/area_kpa/kpa_102
     type: code
     start: 0xA93740
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_102_0_header]
     - [auto, c, kpa_102_1_music]
@@ -10251,7 +10252,7 @@ segments:
     dir: world/area_kpa/kpa_111
     type: code
     start: 0xA99590
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_111_0_header]
     - [auto, c, kpa_111_1_music]
@@ -10263,7 +10264,7 @@ segments:
     dir: world/area_kpa/kpa_112
     type: code
     start: 0xA9C990
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_112_0_header]
     - [auto, c, kpa_112_1_music]
@@ -10272,7 +10273,7 @@ segments:
     dir: world/area_kpa/kpa_113
     type: code
     start: 0xA9CC30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_113_0_header]
     - [auto, c, kpa_113_1_music]
@@ -10284,7 +10285,7 @@ segments:
     dir: world/area_kpa/kpa_114
     type: code
     start: 0xA9E980
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_114_0_header]
     - [auto, c, kpa_114_1_music]
@@ -10294,7 +10295,7 @@ segments:
     dir: world/area_kpa/kpa_115
     type: code
     start: 0xA9ED40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_115_0_header]
     - [auto, c, kpa_115_1_music]
@@ -10305,7 +10306,7 @@ segments:
     dir: world/area_kpa/kpa_116
     type: code
     start: 0xAA1EE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_116_0_header]
     - [auto, c, kpa_116_1_music]
@@ -10314,7 +10315,7 @@ segments:
     dir: world/area_kpa/kpa_117
     type: code
     start: 0xAA2180
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_117_0_header]
     - [auto, c, kpa_117_1_music]
@@ -10323,7 +10324,7 @@ segments:
     dir: world/area_kpa/kpa_118
     type: code
     start: 0xAA23C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_118_0_header]
     - [auto, c, kpa_118_1_music]
@@ -10332,7 +10333,7 @@ segments:
     dir: world/area_kpa/kpa_119
     type: code
     start: 0xAA2660
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_119_0_header]
     - [auto, c, kpa_119_1_music]
@@ -10342,7 +10343,7 @@ segments:
     dir: world/area_kpa/kpa_121
     type: code
     start: 0xAA28F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_121_0_header]
     - [auto, c, kpa_121_1_music]
@@ -10351,7 +10352,7 @@ segments:
     dir: world/area_kpa/kpa_130
     type: code
     start: 0xAA2D20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_130_0_header]
     - [auto, c, kpa_130_1_music]
@@ -10361,7 +10362,7 @@ segments:
     dir: world/area_kpa/kpa_133
     type: code
     start: 0xAA7480
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_133_0_header]
     - [auto, c, kpa_133_1_music]
@@ -10374,7 +10375,7 @@ segments:
     dir: world/area_kpa/kpa_134
     type: code
     start: 0xAA8FA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kpa_134_0_header]
     - [auto, c, kpa_134_1_music]
@@ -10387,7 +10388,7 @@ segments:
     dir: world/area_osr/osr_00
     type: code
     start: 0xAAC830
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, osr_00_0_header]
     - [auto, c, osr_00_1_music]
@@ -10399,7 +10400,7 @@ segments:
     dir: world/area_osr/osr_01
     type: code
     start: 0xAAFFF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, osr_01_0_header]
     - [auto, c, osr_01_1_music]
@@ -10409,7 +10410,7 @@ segments:
     dir: world/area_osr/osr_02
     type: code
     start: 0xAB2170
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, osr_02_0_header]
     - [auto, c, osr_02_1_main]
@@ -10420,7 +10421,7 @@ segments:
     dir: world/area_osr/osr_03
     type: code
     start: 0xAB6290
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, osr_03_0_header]
     - [auto, c, osr_03_1_main]
@@ -10433,7 +10434,7 @@ segments:
     dir: world/area_osr/osr_04
     type: code
     start: 0xAB92B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, osr_04_0_header]
     - [auto, c, osr_04_1_main]
@@ -10442,7 +10443,7 @@ segments:
     dir: world/area_kkj/kkj_00
     type: code
     start: 0xABB290
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_00_0_header]
     - [auto, c, kkj_00_1_music]
@@ -10455,7 +10456,7 @@ segments:
     dir: world/area_kkj/kkj_01
     type: code
     start: 0xAC5170
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_01_0_header]
     - [auto, c, kkj_01_1_music]
@@ -10465,7 +10466,7 @@ segments:
     dir: world/area_kkj/kkj_02
     type: code
     start: 0xAC8D20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_02_0_header]
     - [auto, c, kkj_02_1_music]
@@ -10475,7 +10476,7 @@ segments:
     dir: world/area_kkj/kkj_03
     type: code
     start: 0xAC9710
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_03_0_header]
     - [auto, c, kkj_03_1_music]
@@ -10486,7 +10487,7 @@ segments:
     dir: world/area_kkj/kkj_10
     type: code
     start: 0xACAB20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_10_0_header]
     - [auto, c, kkj_10_1_main]
@@ -10497,7 +10498,7 @@ segments:
     dir: world/area_kkj/kkj_11
     type: code
     start: 0xACE140
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_11_0_header]
     - [auto, c, kkj_11_1_main]
@@ -10510,7 +10511,7 @@ segments:
     dir: world/area_kkj/kkj_12
     type: code
     start: 0xAD4090
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_12_0_header]
     - [auto, c, kkj_12_1_main]
@@ -10519,7 +10520,7 @@ segments:
     dir: world/area_kkj/kkj_13
     type: code
     start: 0xAD5ED0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_13_0_header]
     - [auto, c, kkj_13_1_music]
@@ -10531,7 +10532,7 @@ segments:
     dir: world/area_kkj/kkj_14
     type: code
     start: 0xADAEA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_14_0_header]
     - [auto, c, kkj_14_1_music]
@@ -10553,7 +10554,7 @@ segments:
     dir: world/area_kkj/kkj_15
     type: code
     start: 0xAE5590
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_15_0_header]
     - [auto, c, kkj_15_1_music]
@@ -10570,7 +10571,7 @@ segments:
     dir: world/area_kkj/kkj_16
     type: code
     start: 0xAED410
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_16_0_header]
     - [auto, c, kkj_16_1_main]
@@ -10582,7 +10583,7 @@ segments:
     dir: world/area_kkj/kkj_17
     type: code
     start: 0xAF1C60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_17_0_header]
     - [auto, c, kkj_17_1_main]
@@ -10592,7 +10593,7 @@ segments:
     dir: world/area_kkj/kkj_18
     type: code
     start: 0xAF2CA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_18_0_header]
     - [auto, c, kkj_18_1_music]
@@ -10603,7 +10604,7 @@ segments:
     dir: world/area_kkj/kkj_19
     type: code
     start: 0xAF7950
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_19_0_header]
     - [auto, c, kkj_19_1_music]
@@ -10615,7 +10616,7 @@ segments:
     dir: world/area_kkj/kkj_20
     type: code
     start: 0xAFDB40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_20_0_header]
     - [auto, c, kkj_20_1_music]
@@ -10626,7 +10627,7 @@ segments:
     dir: world/area_kkj/kkj_21
     type: code
     start: 0xB022A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_21_0_header]
     - [auto, c, kkj_21_1_main]
@@ -10634,7 +10635,7 @@ segments:
     dir: world/area_kkj/kkj_22
     type: code
     start: 0xB024F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_22_0_header]
     - [auto, c, kkj_22_1_music]
@@ -10643,7 +10644,7 @@ segments:
     dir: world/area_kkj/kkj_23
     type: code
     start: 0xB02880
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_23_0_header]
     - [auto, c, kkj_23_1_music]
@@ -10655,7 +10656,7 @@ segments:
     dir: world/area_kkj/kkj_24
     type: code
     start: 0xB06570
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_24_0_header]
     - [auto, c, kkj_24_1_music]
@@ -10665,7 +10666,7 @@ segments:
     dir: world/area_kkj/kkj_25
     type: code
     start: 0xB06A00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_25_0_header]
     - [auto, c, kkj_25_1_main]
@@ -10681,7 +10682,7 @@ segments:
     dir: world/area_kkj/kkj_26
     type: code
     start: 0xB13120
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_26_0_header]
     - [auto, c, kkj_26_1_main]
@@ -10691,7 +10692,7 @@ segments:
     dir: world/area_kkj/kkj_27
     type: code
     start: 0xB13D70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_27_0_header]
     - [auto, c, kkj_27_1_music]
@@ -10701,7 +10702,7 @@ segments:
     dir: world/area_kkj/kkj_28
     type: code
     start: 0xB14EA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_28_0_header]
     - [auto, c, kkj_28_1_main]
@@ -10709,7 +10710,7 @@ segments:
     dir: world/area_kkj/kkj_29
     type: code
     start: 0xB150B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kkj_29_0_header]
     - [auto, c, kkj_29_1_main]
@@ -10719,7 +10720,7 @@ segments:
     dir: world/area_tst/tst_01
     type: code
     start: 0xB1A900
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_01_1_main]
     - [auto, c, tst_01_2_entity]
@@ -10727,7 +10728,7 @@ segments:
     dir: world/area_tst/tst_02
     type: code
     start: 0xB1AC30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_02_1_main]
     - [auto, c, tst_02_2_entity]
@@ -10735,7 +10736,7 @@ segments:
     dir: world/area_tst/tst_03
     type: code
     start: 0xB1AF80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_03_1_main]
     - [auto, c, tst_03_2_entity]
@@ -10743,7 +10744,7 @@ segments:
     dir: world/area_tst/tst_04
     type: code
     start: 0xB1B570
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_04_1_main]
     - [auto, c, tst_04_2_entity]
@@ -10753,14 +10754,14 @@ segments:
     dir: world/area_tst/tst_10
     type: code
     start: 0xB1C540
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_10_1_main]
   - name: tst_11
     dir: world/area_tst/tst_11
     type: code
     start: 0xB1CA50
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_11_1_main]
     - [auto, c, tst_11_2_extra]
@@ -10768,14 +10769,14 @@ segments:
     dir: world/area_tst/tst_12
     type: code
     start: 0xB1D2F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_12_1_main]
   - name: tst_13
     dir: world/area_tst/tst_13
     type: code
     start: 0xB1D760
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_13_1_main]
     - start: 0xB1DB20
@@ -10790,14 +10791,14 @@ segments:
     dir: world/area_tst/tst_20
     type: code
     start: 0xB20470
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, tst_20_1_main]
   - name: jan_00
     dir: world/area_jan/jan_00
     type: code
     start: 0xB20540
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_00_0_header]
     - [auto, c, jan_00_1_main]
@@ -10809,7 +10810,7 @@ segments:
     dir: world/area_jan/jan_01
     type: code
     start: 0xB28030
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_01_0_header]
     - [auto, c, jan_01_1_music]
@@ -10821,7 +10822,7 @@ segments:
     dir: world/area_jan/jan_02
     type: code
     start: 0xB2C470
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_02_0_header]
     - [auto, c, jan_02_1_music]
@@ -10833,7 +10834,7 @@ segments:
     dir: world/area_jan/jan_03
     type: code
     start: 0xB34BD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_03_0_header]
     - [auto, c, jan_03_1_music]
@@ -10847,7 +10848,7 @@ segments:
     dir: world/area_jan/jan_04
     type: code
     start: 0xB44770
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_04_0_header]
     - [auto, c, jan_04_1_music]
@@ -10864,7 +10865,7 @@ segments:
     dir: world/area_jan/jan_05
     type: code
     start: 0xB4AA70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_05_0_header]
     - [auto, c, jan_05_1_music]
@@ -10878,7 +10879,7 @@ segments:
     dir: world/area_jan/jan_06
     type: code
     start: 0xB52830
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_06_0_header]
     - [auto, c, jan_06_1_main]
@@ -10892,7 +10893,7 @@ segments:
     dir: world/area_jan/jan_07
     type: code
     start: 0xB59870
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_07_0_header]
     - [auto, c, jan_07_1_music]
@@ -10904,7 +10905,7 @@ segments:
     dir: world/area_jan/jan_08
     type: code
     start: 0xB5E2B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_08_0_header]
     - [auto, c, jan_08_1_music]
@@ -10917,7 +10918,7 @@ segments:
     dir: world/area_jan/jan_09
     type: code
     start: 0xB65AB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_09_0_header]
     - [auto, c, jan_09_1_main]
@@ -10929,7 +10930,7 @@ segments:
     dir: world/area_jan/jan_10
     type: code
     start: 0xB6C390
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_10_0_header]
     - [auto, c, jan_10_1_music]
@@ -10943,7 +10944,7 @@ segments:
     dir: world/area_jan/jan_11
     type: code
     start: 0xB70860
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_11_0_header]
     - [auto, c, jan_11_1_music]
@@ -10953,7 +10954,7 @@ segments:
     dir: world/area_jan/jan_12
     type: code
     start: 0xB730B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_12_0_header]
     - [auto, c, jan_12_1_main]
@@ -10965,7 +10966,7 @@ segments:
     dir: world/area_jan/jan_13
     type: code
     start: 0xB767B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_13_0_header]
     - [auto, c, jan_13_1_main]
@@ -10976,7 +10977,7 @@ segments:
     dir: world/area_jan/jan_14
     type: code
     start: 0xB7A050
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_14_0_header]
     - [auto, c, jan_14_1_main]
@@ -10987,7 +10988,7 @@ segments:
     dir: world/area_jan/jan_15
     type: code
     start: 0xB7D920
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_15_0_header]
     - [auto, c, jan_15_1_main]
@@ -10998,7 +10999,7 @@ segments:
     dir: world/area_jan/jan_16
     type: code
     start: 0xB80000
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_16_0_header]
     - [auto, c, jan_16_1_music]
@@ -11010,7 +11011,7 @@ segments:
     dir: world/area_jan/jan_17
     type: code
     start: 0xB837C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_17_0_header]
     - [auto, c, jan_17_1_music]
@@ -11020,7 +11021,7 @@ segments:
     dir: world/area_jan/jan_18
     type: code
     start: 0xB83B90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_18_0_header]
     - [auto, c, jan_18_1_music]
@@ -11030,7 +11031,7 @@ segments:
     dir: world/area_jan/jan_19
     type: code
     start: 0xB83E60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_19_0_header]
     - [auto, c, jan_19_1_music]
@@ -11040,7 +11041,7 @@ segments:
     dir: world/area_jan/jan_22
     type: code
     start: 0xB84180
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_22_0_header]
     - [auto, c, jan_22_1_music]
@@ -11054,7 +11055,7 @@ segments:
     dir: world/area_jan/jan_23
     type: code
     start: 0xB8FCD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, jan_23_0_header]
     - [auto, c, jan_23_1_music]
@@ -11064,7 +11065,7 @@ segments:
     dir: world/area_mim/mim_01
     type: code
     start: 0xB93440
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_01_0_header]
     - [auto, c, mim_01_1_music]
@@ -11077,7 +11078,7 @@ segments:
     dir: world/area_mim/mim_02
     type: code
     start: 0xB97C00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_02_0_header]
     - [auto, c, mim_02_1_music]
@@ -11089,7 +11090,7 @@ segments:
     dir: world/area_mim/mim_03
     type: code
     start: 0xB9B480
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_03_0_header]
     - [auto, c, mim_03_1_music]
@@ -11102,7 +11103,7 @@ segments:
     dir: world/area_mim/mim_04
     type: code
     start: 0xB9D960
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_04_0_header]
     - [auto, c, mim_04_1_music]
@@ -11115,7 +11116,7 @@ segments:
     dir: world/area_mim/mim_05
     type: code
     start: 0xBA0730
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_05_0_header]
     - [auto, c, mim_05_1_music]
@@ -11128,7 +11129,7 @@ segments:
     dir: world/area_mim/mim_06
     type: code
     start: 0xBA4780
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_06_0_header]
     - [auto, c, mim_06_1_music]
@@ -11141,7 +11142,7 @@ segments:
     dir: world/area_mim/mim_07
     type: code
     start: 0xBAA140
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_07_0_header]
     - [auto, c, mim_07_1_music]
@@ -11154,7 +11155,7 @@ segments:
     dir: world/area_mim/mim_08
     type: code
     start: 0xBAD940
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_08_0_header]
     - [auto, c, mim_08_1_music]
@@ -11166,7 +11167,7 @@ segments:
     dir: world/area_mim/mim_09
     type: code
     start: 0xBB2E00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_09_0_header]
     - [auto, c, mim_09_1_music]
@@ -11179,7 +11180,7 @@ segments:
     dir: world/area_mim/mim_10
     type: code
     start: 0xBB59E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_10_0_header]
     - [auto, c, mim_10_1_music]
@@ -11190,7 +11191,7 @@ segments:
     dir: world/area_mim/mim_11
     type: code
     start: 0xBB7070
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_11_0_header]
     - [auto, c, mim_11_1_music]
@@ -11203,7 +11204,7 @@ segments:
     dir: world/area_mim/mim_12
     type: code
     start: 0xBBB380
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mim_12_0_header]
     - [auto, c, mim_12_1_music]
@@ -11215,7 +11216,7 @@ segments:
     dir: world/area_obk/obk_01
     type: code
     start: 0xBBD1A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_01_0_header]
     - [auto, c, obk_01_1_music]
@@ -11229,7 +11230,7 @@ segments:
     dir: world/area_obk/obk_02
     type: code
     start: 0xBC2A90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_02_0_header]
     - [auto, c, obk_02_1_music]
@@ -11242,7 +11243,7 @@ segments:
     dir: world/area_obk/obk_03
     type: code
     start: 0xBC4280
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_03_0_header]
     - [auto, c, obk_03_1_music]
@@ -11256,7 +11257,7 @@ segments:
     dir: world/area_obk/obk_04
     type: code
     start: 0xBC7E60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_04_0_header]
     - [auto, c, obk_04_1_music]
@@ -11269,7 +11270,7 @@ segments:
     dir: world/area_obk/obk_05
     type: code
     start: 0xBCD060
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_05_0_header]
     - [auto, c, obk_05_1_music]
@@ -11282,7 +11283,7 @@ segments:
     dir: world/area_obk/obk_06
     type: code
     start: 0xBCE690
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_06_0_header]
     - [auto, c, obk_06_1_music]
@@ -11293,7 +11294,7 @@ segments:
     dir: world/area_obk/obk_07
     type: code
     start: 0xBCEBF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_07_0_header]
     - [auto, c, obk_07_1_music]
@@ -11306,7 +11307,7 @@ segments:
     dir: world/area_obk/obk_08
     type: code
     start: 0xBD3870
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_08_0_header]
     - [auto, c, obk_08_1_music]
@@ -11319,7 +11320,7 @@ segments:
     dir: world/area_obk/obk_09
     type: code
     start: 0xBDA7B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, obk_09_0_header]
     - [auto, c, obk_09_1_music]
@@ -11332,7 +11333,7 @@ segments:
     dir: world/area_arn/arn_02
     type: code
     start: 0xBDD1B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_02_0_header]
     - [auto, c, arn_02_1_music]
@@ -11343,7 +11344,7 @@ segments:
     dir: world/area_arn/arn_03
     type: code
     start: 0xBDED90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_03_0_header]
     - [auto, c, arn_03_1_music]
@@ -11354,7 +11355,7 @@ segments:
     dir: world/area_arn/arn_04
     type: code
     start: 0xBE37B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_04_0_header]
     - [auto, c, arn_04_1_music]
@@ -11365,7 +11366,7 @@ segments:
     dir: world/area_arn/arn_05
     type: code
     start: 0xBE7BE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_05_0_header]
     - [auto, c, arn_05_1_music]
@@ -11376,7 +11377,7 @@ segments:
     dir: world/area_arn/arn_07
     type: code
     start: 0xBECDF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_07_0_header]
     - [auto, c, arn_07_1_music]
@@ -11388,7 +11389,7 @@ segments:
     dir: world/area_arn/arn_08
     type: code
     start: 0xBF47A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_08_0_header]
     - [auto, c, arn_08_1_music]
@@ -11402,7 +11403,7 @@ segments:
     dir: world/area_arn/arn_09
     type: code
     start: 0xBF6060
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_09_0_header]
     - [auto, c, arn_09_1_music]
@@ -11414,7 +11415,7 @@ segments:
     dir: world/area_arn/arn_10
     type: code
     start: 0xBF6A00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_10_0_header]
     - [auto, c, arn_10_1_music]
@@ -11425,7 +11426,7 @@ segments:
     dir: world/area_arn/arn_11
     type: code
     start: 0xBF7680
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_11_0_header]
     - [auto, c, arn_11_1_music]
@@ -11435,7 +11436,7 @@ segments:
     dir: world/area_arn/arn_12
     type: code
     start: 0xBF8790
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_12_0_header]
     - [auto, c, arn_12_1_music]
@@ -11446,7 +11447,7 @@ segments:
     dir: world/area_arn/arn_13
     type: code
     start: 0xBF9410
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, arn_13_0_header]
     - [auto, c, arn_13_1_music]
@@ -11457,7 +11458,7 @@ segments:
     dir: world/area_dgb/dgb_00
     type: code
     start: 0xBFA0A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_00_0_header]
     - [auto, c, dgb_00_1_music]
@@ -11468,7 +11469,7 @@ segments:
     dir: world/area_dgb/dgb_01
     type: code
     start: 0xBFD880
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_01_0_header]
     - [auto, c, dgb_01_1_music]
@@ -11545,7 +11546,7 @@ segments:
     type: code
     dir: world/area_dgb
     start: 0xC20F40
-    vram: dgb_01_smash_bridges
+    vram_class: dgb_01_smash_bridges
     subsegments:
     - [auto, c, dgb_01_smash_bridges]
     - start: 0xC20F40
@@ -11846,7 +11847,7 @@ segments:
     dir: world/area_dgb/dgb_02
     type: code
     start: 0xC2EBA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_02_0_header]
     - [auto, c, dgb_02_1_music]
@@ -11856,7 +11857,7 @@ segments:
     dir: world/area_dgb/dgb_03
     type: code
     start: 0xC314E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_03_0_header]
     - [auto, c, dgb_03_1_music]
@@ -11868,7 +11869,7 @@ segments:
     dir: world/area_dgb/dgb_04
     type: code
     start: 0xC36530
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_04_0_header]
     - [auto, c, dgb_04_1_music]
@@ -11879,7 +11880,7 @@ segments:
     dir: world/area_dgb/dgb_05
     type: code
     start: 0xC3AA10
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_05_0_header]
     - [auto, c, dgb_05_1_music]
@@ -11891,7 +11892,7 @@ segments:
     dir: world/area_dgb/dgb_06
     type: code
     start: 0xC3D080
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_06_0_header]
     - [auto, c, dgb_06_1_music]
@@ -11902,7 +11903,7 @@ segments:
     dir: world/area_dgb/dgb_07
     type: code
     start: 0xC3DBF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_07_0_header]
     - [auto, c, dgb_07_1_music]
@@ -11913,7 +11914,7 @@ segments:
     dir: world/area_dgb/dgb_08
     type: code
     start: 0xC3FDB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_08_0_header]
     - [auto, c, dgb_08_1_music]
@@ -11924,7 +11925,7 @@ segments:
     dir: world/area_dgb/dgb_09
     type: code
     start: 0xC46BE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_09_0_header]
     - [auto, c, dgb_09_1_music]
@@ -11935,7 +11936,7 @@ segments:
     dir: world/area_dgb/dgb_10
     type: code
     start: 0xC4C390
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_10_0_header]
     - [auto, c, dgb_10_1_music]
@@ -11946,7 +11947,7 @@ segments:
     dir: world/area_dgb/dgb_11
     type: code
     start: 0xC4D3E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_11_0_header]
     - [auto, c, dgb_11_1_music]
@@ -11956,7 +11957,7 @@ segments:
     dir: world/area_dgb/dgb_12
     type: code
     start: 0xC4DEF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_12_0_header]
     - [auto, c, dgb_12_1_music]
@@ -11967,7 +11968,7 @@ segments:
     dir: world/area_dgb/dgb_13
     type: code
     start: 0xC4E960
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_13_0_header]
     - [auto, c, dgb_13_1_music]
@@ -11978,7 +11979,7 @@ segments:
     dir: world/area_dgb/dgb_14
     type: code
     start: 0xC4F030
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_14_0_header]
     - [auto, c, dgb_14_1_music]
@@ -11988,7 +11989,7 @@ segments:
     dir: world/area_dgb/dgb_15
     type: code
     start: 0xC4F510
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_15_0_header]
     - [auto, c, dgb_15_1_music]
@@ -11999,7 +12000,7 @@ segments:
     dir: world/area_dgb/dgb_16
     type: code
     start: 0xC52540
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_16_0_header]
     - [auto, c, dgb_16_1_music]
@@ -12010,7 +12011,7 @@ segments:
     dir: world/area_dgb/dgb_17
     type: code
     start: 0xC55A60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_17_0_header]
     - [auto, c, dgb_17_1_music]
@@ -12020,7 +12021,7 @@ segments:
     dir: world/area_dgb/dgb_18
     type: code
     start: 0xC55F40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, dgb_18_0_header]
     - [auto, c, dgb_18_1_music]
@@ -12031,7 +12032,7 @@ segments:
     dir: world/area_kzn/kzn_01
     type: code
     start: 0xC599D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_01_0_header]
     - [auto, c, kzn_01_1_main]
@@ -12040,7 +12041,7 @@ segments:
     dir: world/area_kzn/kzn_02
     type: code
     start: 0xC5A740
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_02_0_header]
     - [auto, c, kzn_02_1_main]
@@ -12051,7 +12052,7 @@ segments:
     dir: world/area_kzn/kzn_03
     type: code
     start: 0xC60D10
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_03_0_header]
     - [auto, c, kzn_03_1_main]
@@ -12062,7 +12063,7 @@ segments:
     dir: world/area_kzn/kzn_04
     type: code
     start: 0xC68130
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_04_0_header]
     - [auto, c, kzn_04_1_main]
@@ -12072,7 +12073,7 @@ segments:
     dir: world/area_kzn/kzn_05
     type: code
     start: 0xC6C0D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_05_0_header]
     - [auto, c, kzn_05_1_main]
@@ -12080,7 +12081,7 @@ segments:
     dir: world/area_kzn/kzn_06
     type: code
     start: 0xC6C920
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_06_0_header]
     - [auto, c, kzn_06_1_main]
@@ -12090,7 +12091,7 @@ segments:
     dir: world/area_kzn/kzn_07
     type: code
     start: 0xC6E330
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_07_0_header]
     - [auto, c, kzn_07_1_music]
@@ -12101,7 +12102,7 @@ segments:
     dir: world/area_kzn/kzn_08
     type: code
     start: 0xC71480
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_08_0_header]
     - [auto, c, kzn_08_1_main]
@@ -12112,7 +12113,7 @@ segments:
     dir: world/area_kzn/kzn_09
     type: code
     start: 0xC76CE0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_09_0_header]
     - [auto, c, kzn_09_1_main]
@@ -12123,7 +12124,7 @@ segments:
     dir: world/area_kzn/kzn_10
     type: code
     start: 0xC7E180
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_10_0_header]
     - [auto, c, kzn_10_1_main]
@@ -12132,7 +12133,7 @@ segments:
     dir: world/area_kzn/kzn_11
     type: code
     start: 0xC801A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_11_0_header]
     - [auto, c, kzn_11_1_main]
@@ -12142,7 +12143,7 @@ segments:
     dir: world/area_kzn/kzn_17
     type: code
     start: 0xC85AB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_17_0_header]
     - [auto, c, kzn_17_1_main]
@@ -12153,7 +12154,7 @@ segments:
     dir: world/area_kzn/kzn_18
     type: code
     start: 0xC8C0A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_18_0_header]
     - [auto, c, kzn_18_1_main]
@@ -12163,7 +12164,7 @@ segments:
     dir: world/area_kzn/kzn_19
     type: code
     start: 0xC8DBB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_19_0_header]
     - [auto, c, kzn_19_1_music]
@@ -12191,7 +12192,7 @@ segments:
     dir: world/area_kzn/kzn_20
     type: code
     start: 0xC95F30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_20_0_header]
     - [auto, c, kzn_20_1_music]
@@ -12201,7 +12202,7 @@ segments:
     dir: world/area_kzn/kzn_22
     type: code
     start: 0xC9A200
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_22_0_header]
     - [auto, c, kzn_22_1_music]
@@ -12212,7 +12213,7 @@ segments:
     dir: world/area_kzn/kzn_23
     type: code
     start: 0xC9C300
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, kzn_23_0_header]
     - [auto, c, kzn_23_1_music]
@@ -12222,7 +12223,7 @@ segments:
     dir: world/area_flo/flo_00
     type: code
     start: 0xC9DF20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_00_0_header]
     - [auto, c, flo_00_1_music]
@@ -12235,7 +12236,7 @@ segments:
     dir: world/area_flo/flo_03
     type: code
     start: 0xCA72A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_03_0_header]
     - [auto, c, flo_03_1_music]
@@ -12247,7 +12248,7 @@ segments:
     dir: world/area_flo/flo_07
     type: code
     start: 0xCAC1F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_07_0_header]
     - [auto, c, flo_07_1_music]
@@ -12257,7 +12258,7 @@ segments:
     dir: world/area_flo/flo_08
     type: code
     start: 0xCAED40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_08_0_header]
     - [auto, c, flo_08_1_music]
@@ -12270,7 +12271,7 @@ segments:
     dir: world/area_flo/flo_09
     type: code
     start: 0xCB5000
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_09_0_header]
     - [auto, c, flo_09_1_music]
@@ -12282,7 +12283,7 @@ segments:
     dir: world/area_flo/flo_10
     type: code
     start: 0xCB9200
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_10_0_header]
     - [auto, c, flo_10_1_music]
@@ -12296,7 +12297,7 @@ segments:
     dir: world/area_flo/flo_11
     type: code
     start: 0xCBDCD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_11_0_header]
     - [auto, c, flo_11_1_music]
@@ -12307,7 +12308,7 @@ segments:
     dir: world/area_flo/flo_12
     type: code
     start: 0xCC0E30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_12_0_header]
     - [auto, c, flo_12_1_music]
@@ -12317,7 +12318,7 @@ segments:
     dir: world/area_flo/flo_13
     type: code
     start: 0xCC3810
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_13_0_header]
     - [auto, c, flo_13_1_music]
@@ -12329,7 +12330,7 @@ segments:
     dir: world/area_flo/flo_14
     type: code
     start: 0xCCB310
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_14_0_header]
     - [auto, c, flo_14_1_music]
@@ -12342,7 +12343,7 @@ segments:
     dir: world/area_flo/flo_15
     type: code
     start: 0xCD06C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_15_0_header]
     - [auto, c, flo_15_1_music]
@@ -12354,7 +12355,7 @@ segments:
     dir: world/area_flo/flo_16
     type: code
     start: 0xCD1E30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_16_0_header]
     - [auto, c, flo_16_1_music]
@@ -12367,7 +12368,7 @@ segments:
     dir: world/area_flo/flo_17
     type: code
     start: 0xCD72E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_17_0_header]
     - [auto, c, flo_17_1_music]
@@ -12379,7 +12380,7 @@ segments:
     dir: world/area_flo/flo_18
     type: code
     start: 0xCDC6A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_18_0_header]
     - [auto, c, flo_18_1_music]
@@ -12391,7 +12392,7 @@ segments:
     dir: world/area_flo/flo_19
     type: code
     start: 0xCE36F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_19_0_header]
     - [auto, c, flo_19_1_music]
@@ -12403,7 +12404,7 @@ segments:
     dir: world/area_flo/flo_21
     type: code
     start: 0xCE6700
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_21_0_header]
     - [auto, c, flo_21_1_music]
@@ -12414,7 +12415,7 @@ segments:
     dir: world/area_flo/flo_22
     type: code
     start: 0xCEC240
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_22_0_header]
     - [auto, c, flo_22_1_music]
@@ -12426,7 +12427,7 @@ segments:
     dir: world/area_flo/flo_23
     type: code
     start: 0xCEE260
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_23_0_header]
     - [auto, c, flo_23_1_music]
@@ -12437,7 +12438,7 @@ segments:
     dir: world/area_flo/flo_24
     type: code
     start: 0xCF0940
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_24_0_header]
     - [auto, c, flo_24_1_music]
@@ -12449,7 +12450,7 @@ segments:
     dir: world/area_flo/flo_25
     type: code
     start: 0xCF2BD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, flo_25_0_header]
     - [auto, c, flo_25_1_music]
@@ -12462,7 +12463,7 @@ segments:
     dir: world/area_sam/sam_01
     type: code
     start: 0xCF7B70
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_01_0_header]
     - [auto, c, sam_01_1_music]
@@ -12475,7 +12476,7 @@ segments:
     dir: world/area_sam/sam_02
     type: code
     start: 0xD05730
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_02_0_header]
     - [auto, c, sam_02_1_music]
@@ -12488,7 +12489,7 @@ segments:
     dir: world/area_sam/sam_03
     type: code
     start: 0xD110C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_03_0_header]
     - [auto, c, sam_03_1_music]
@@ -12499,7 +12500,7 @@ segments:
     dir: world/area_sam/sam_04
     type: code
     start: 0xD135D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_04_0_header]
     - [auto, c, sam_04_1_music]
@@ -12511,7 +12512,7 @@ segments:
     dir: world/area_sam/sam_05
     type: code
     start: 0xD187E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_05_0_header]
     - [auto, c, sam_05_1_music]
@@ -12552,7 +12553,7 @@ segments:
     dir: world/area_sam/sam_06
     type: code
     start: 0xD1FE90
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_06_0_header]
     - [auto, c, sam_06_1_music]
@@ -12564,7 +12565,7 @@ segments:
     dir: world/area_sam/sam_07
     type: code
     start: 0xD2BD30
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_07_0_header]
     - [auto, c, sam_07_1_music]
@@ -12576,7 +12577,7 @@ segments:
     dir: world/area_sam/sam_08
     type: code
     start: 0xD2FC80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_08_0_header]
     - [auto, c, sam_08_1_music]
@@ -12588,7 +12589,7 @@ segments:
     dir: world/area_sam/sam_09
     type: code
     start: 0xD362F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_09_0_header]
     - [auto, c, sam_09_1_music]
@@ -12599,7 +12600,7 @@ segments:
     dir: world/area_sam/sam_10
     type: code
     start: 0xD37800
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_10_0_header]
     - [auto, c, sam_10_1_music]
@@ -12611,7 +12612,7 @@ segments:
     dir: world/area_sam/sam_11
     type: code
     start: 0xD3A5D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_11_0_header]
     - [auto, c, sam_11_1_music]
@@ -12627,7 +12628,7 @@ segments:
     dir: world/area_sam/sam_12
     type: code
     start: 0xD4BA20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, sam_12_0_header]
     - [auto, c, sam_12_1_music]
@@ -12639,7 +12640,7 @@ segments:
     dir: world/area_pra/pra_01
     type: code
     start: 0xD4D040
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_01_0_header]
     - [auto, c, pra_01_1_music]
@@ -12650,7 +12651,7 @@ segments:
     dir: world/area_pra/pra_02
     type: code
     start: 0xD4FFF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_02_0_header]
     - [auto, c, pra_02_1_music]
@@ -12661,7 +12662,7 @@ segments:
     dir: world/area_pra/pra_03
     type: code
     start: 0xD53CB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_03_0_header]
     - [auto, c, pra_03_1_music]
@@ -12671,7 +12672,7 @@ segments:
     dir: world/area_pra/pra_04
     type: code
     start: 0xD54690
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_04_0_header]
     - [auto, c, pra_04_1_music]
@@ -12682,7 +12683,7 @@ segments:
     dir: world/area_pra/pra_05
     type: code
     start: 0xD55BB0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_05_0_header]
     - [auto, c, pra_05_1_music]
@@ -12692,7 +12693,7 @@ segments:
     dir: world/area_pra/pra_06
     type: code
     start: 0xD57430
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_06_0_header]
     - [auto, c, pra_06_1_music]
@@ -12702,7 +12703,7 @@ segments:
     dir: world/area_pra/pra_09
     type: code
     start: 0xD58890
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_09_0_header]
     - [auto, c, pra_09_1_music]
@@ -12712,7 +12713,7 @@ segments:
     dir: world/area_pra/pra_10
     type: code
     start: 0xD5F2B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_10_0_header]
     - [auto, c, pra_10_1_music]
@@ -12722,7 +12723,7 @@ segments:
     dir: world/area_pra/pra_11
     type: code
     start: 0xD61500
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_11_0_header]
     - [auto, c, pra_11_1_music]
@@ -12732,7 +12733,7 @@ segments:
     dir: world/area_pra/pra_12
     type: code
     start: 0xD62D10
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_12_0_header]
     - [auto, c, pra_12_1_music]
@@ -12742,7 +12743,7 @@ segments:
     dir: world/area_pra/pra_13
     type: code
     start: 0xD645E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_13_0_header]
     - [auto, c, pra_13_1_music]
@@ -12752,7 +12753,7 @@ segments:
     dir: world/area_pra/pra_14
     type: code
     start: 0xD67D00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_14_0_header]
     - [auto, c, pra_14_1_music]
@@ -12762,7 +12763,7 @@ segments:
     dir: world/area_pra/pra_15
     type: code
     start: 0xD69810
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_15_0_header]
     - [auto, c, pra_15_1_music]
@@ -12772,7 +12773,7 @@ segments:
     dir: world/area_pra/pra_16
     type: code
     start: 0xD69B20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_16_0_header]
     - [auto, c, pra_16_1_music]
@@ -12781,7 +12782,7 @@ segments:
     dir: world/area_pra/pra_18
     type: code
     start: 0xD6B620
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_18_0_header]
     - [auto, c, pra_18_1_music]
@@ -12791,7 +12792,7 @@ segments:
     dir: world/area_pra/pra_19
     type: code
     start: 0xD6E9B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_19_0_header]
     - [auto, c, pra_19_1_music]
@@ -12801,7 +12802,7 @@ segments:
     dir: world/area_pra/pra_20
     type: code
     start: 0xD763A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_20_0_header]
     - [auto, c, pra_20_1_music]
@@ -12810,7 +12811,7 @@ segments:
     dir: world/area_pra/pra_21
     type: code
     start: 0xD77F20
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_21_0_header]
     - [auto, c, pra_21_1_music]
@@ -12820,7 +12821,7 @@ segments:
     dir: world/area_pra/pra_22
     type: code
     start: 0xD78880
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_22_0_header]
     - [auto, c, pra_22_1_music]
@@ -12830,7 +12831,7 @@ segments:
     dir: world/area_pra/pra_27
     type: code
     start: 0xD799F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_27_0_header]
     - [auto, c, pra_27_1_music]
@@ -12840,7 +12841,7 @@ segments:
     dir: world/area_pra/pra_28
     type: code
     start: 0xD7B2A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_28_0_header]
     - [auto, c, pra_28_1_music]
@@ -12850,7 +12851,7 @@ segments:
     dir: world/area_pra/pra_29
     type: code
     start: 0xD7CB50
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_29_0_header]
     - [auto, c, pra_29_1_music]
@@ -12861,7 +12862,7 @@ segments:
     dir: world/area_pra/pra_31
     type: code
     start: 0xD7ED60
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_31_0_header]
     - [auto, c, pra_31_1_music]
@@ -12956,7 +12957,7 @@ segments:
     dir: world/area_pra/pra_32
     type: code
     start: 0xD86A00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_32_0_header]
     - [auto, c, pra_32_1_music]
@@ -12966,7 +12967,7 @@ segments:
     dir: world/area_pra/pra_33
     type: code
     start: 0xD896E0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_33_0_header]
     - [auto, c, pra_33_1_music]
@@ -12976,7 +12977,7 @@ segments:
     dir: world/area_pra/pra_34
     type: code
     start: 0xD8B3B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_34_0_header]
     - [auto, c, pra_34_1_music]
@@ -12986,7 +12987,7 @@ segments:
     dir: world/area_pra/pra_35
     type: code
     start: 0xD8D250
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_35_0_header]
     - [auto, c, pra_35_1_music]
@@ -12997,7 +12998,7 @@ segments:
     dir: world/area_pra/pra_36
     type: code
     start: 0xD91700
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_36_0_header]
     - [auto, c, pra_36_1_music]
@@ -13007,7 +13008,7 @@ segments:
     dir: world/area_pra/pra_37
     type: code
     start: 0xD92F40
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_37_0_header]
     - [auto, c, pra_37_1_music]
@@ -13017,7 +13018,7 @@ segments:
     dir: world/area_pra/pra_38
     type: code
     start: 0xD955F0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_38_0_header]
     - [auto, c, pra_38_1_music]
@@ -13027,7 +13028,7 @@ segments:
     dir: world/area_pra/pra_39
     type: code
     start: 0xD97890
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_39_0_header]
     - [auto, c, pra_39_1_music]
@@ -13037,7 +13038,7 @@ segments:
     dir: world/area_pra/pra_40
     type: code
     start: 0xD999B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, pra_40_0_header]
     - [auto, c, pra_40_1_music]
@@ -13047,7 +13048,7 @@ segments:
     dir: world/area_omo/omo_01
     type: code
     start: 0xD9AEF0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_01_0_header]
     - [auto, c, omo_01_1_music]
@@ -13059,7 +13060,7 @@ segments:
     dir: world/area_omo/omo_02
     type: code
     start: 0xD9D4D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_02_0_header]
     - [auto, c, omo_02_1_music]
@@ -13072,7 +13073,7 @@ segments:
     dir: world/area_omo/omo_03
     type: code
     start: 0xDA5240
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_03_0_header]
     - [auto, c, omo_03_1_music]
@@ -13087,7 +13088,7 @@ segments:
     dir: world/area_omo/omo_04
     type: code
     start: 0xDAD400
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_04_0_header]
     - [auto, c, omo_04_1_music]
@@ -13100,7 +13101,7 @@ segments:
     dir: world/area_omo/omo_05
     type: code
     start: 0xDB22C0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_05_0_header]
     - [auto, c, omo_05_1_music]
@@ -13112,7 +13113,7 @@ segments:
     dir: world/area_omo/omo_06
     type: code
     start: 0xDB7910
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_06_0_header]
     - [auto, c, omo_06_1_music]
@@ -13125,7 +13126,7 @@ segments:
     dir: world/area_omo/omo_07
     type: code
     start: 0xDBD2B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_07_0_header]
     - [auto, c, omo_07_1_music]
@@ -13138,7 +13139,7 @@ segments:
     dir: world/area_omo/omo_08
     type: code
     start: 0xDC43D0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_08_0_header]
     - [auto, c, omo_08_1_music]
@@ -13151,7 +13152,7 @@ segments:
     dir: world/area_omo/omo_09
     type: code
     start: 0xDCCCD0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_09_0_header]
     - [auto, c, omo_09_1_music]
@@ -13166,7 +13167,7 @@ segments:
     dir: world/area_omo/omo_10
     type: code
     start: 0xDD79B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_10_0_header]
     - [auto, c, omo_10_1_music]
@@ -13179,7 +13180,7 @@ segments:
     dir: world/area_omo/omo_11
     type: code
     start: 0xDDC830
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_11_0_header]
     - [auto, c, omo_11_1_music]
@@ -13191,7 +13192,7 @@ segments:
     dir: world/area_omo/omo_12
     type: code
     start: 0xDDF310
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_12_0_header]
     - [auto, c, omo_12_1_music]
@@ -13202,7 +13203,7 @@ segments:
     dir: world/area_omo/omo_13
     type: code
     start: 0xDE2490
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_13_0_header]
     - [auto, c, omo_13_1_music]
@@ -13214,7 +13215,7 @@ segments:
     dir: world/area_omo/omo_14
     type: code
     start: 0xDE56B0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_14_0_header]
     - [auto, c, omo_14_1_music]
@@ -13224,7 +13225,7 @@ segments:
     dir: world/area_omo/omo_15
     type: code
     start: 0xDE8770
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_15_0_header]
     - [auto, c, omo_15_1_music]
@@ -13234,7 +13235,7 @@ segments:
     dir: world/area_omo/omo_16
     type: code
     start: 0xDEBED0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_16_0_header]
     - [auto, c, omo_16_1_main]
@@ -13244,7 +13245,7 @@ segments:
     dir: world/area_omo/omo_17
     type: code
     start: 0xDEEEA0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, omo_17_0_header]
     - [auto, c, omo_17_1_main]
@@ -13256,7 +13257,7 @@ segments:
     dir: world/area_end/end_00
     type: code
     start: 0xDF6A00
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, end_00_0_header]
     - [auto, c, end_00_1_main]
@@ -13274,7 +13275,7 @@ segments:
     dir: world/area_end/end_01
     type: code
     start: 0xE05360
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, end_01_0_header]
     - [auto, c, end_01_1_main]
@@ -13288,7 +13289,7 @@ segments:
     dir: world/area_mgm/mgm_00
     type: code
     start: 0xE0E7A0
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mgm_00_0_header]
     - [auto, c, mgm_00_1_main]
@@ -13298,7 +13299,7 @@ segments:
     dir: world/area_mgm/mgm_01
     type: code
     start: 0xE12760
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mgm_01_0_header]
     - [auto, c, mgm_01_1_main]
@@ -13326,7 +13327,7 @@ segments:
     dir: world/area_mgm/mgm_02
     type: code
     start: 0xE15D80
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mgm_02_0_header]
     - [auto, c, mgm_02_1_main]
@@ -13346,7 +13347,7 @@ segments:
     dir: world/area_mgm/mgm_03
     type: code
     start: 0xE1E380
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, mgm_03_0_header]
     - [auto, c, mgm_03_1_main]
@@ -13354,20 +13355,20 @@ segments:
     dir: world/area_gv/gv_01
     type: code
     start: 0xE1E460
-    vram: map
+    vram_class: map
     subsegments:
     - [auto, c, gv_01_0_header]
     - [auto, c, gv_01_1_main]
   - name: heaps2
     type: code
     start: 0xE20110
-    vram: heaps2
+    vram_class: heaps2
     subsegments:
     - [auto, c, heaps2]
   - type: code
     start: 0xE20110
     name: inspect_icon
-    vram: indicator_icon
+    vram_class: indicator_icon
     subsegments:
     - [auto, c, inspect_icon]
     - start: 0xE20B30
@@ -13382,7 +13383,7 @@ segments:
   - type: code
     start: 0xE20EB0
     name: speech_bubble
-    vram: indicator_icon
+    vram_class: indicator_icon
     subsegments:
     - [auto, c, speech_bubble]
     - start: 0xE215C0
@@ -13397,7 +13398,7 @@ segments:
   - type: code
     start: 0xE21870
     name: pulse_stone
-    vram: indicator_icon
+    vram_class: indicator_icon
     subsegments:
     - [auto, c, pulse_stone]
     - start: 0xE21EB0
@@ -13413,7 +13414,7 @@ segments:
   - type: code
     start: 0xE225B0
     name: i_spy
-    vram: indicator_icon
+    vram_class: indicator_icon
     subsegments:
     - [auto, c, i_spy]
     - start: 0xE22B30
@@ -13430,139 +13431,139 @@ segments:
   - type: code
     name: model_clear_render_tasks
     start: 0xE23260
-    vram: model_clear_render_tasks
+    vram_class: model_clear_render_tasks
     subsegments:
     - [auto, c, model_clear_render_tasks]
   - type: code
     name: world_action_idle
     dir: world/action
     start: 0xE23260
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, idle]
   - type: code
     name: world_action_walk
     dir: world/action
     start: 0xE236E0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, walk]
   - type: code
     name: world_action_jump
     dir: world/action
     start: 0xE24040
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, jump]
   - type: code
     name: world_action_step_up
     dir: world/action
     start: 0xE245D0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, step_up]
   - type: code
     name: world_action_land
     dir: world/action
     start: 0xE24920
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, land]
   - type: code
     name: world_action_hammer
     dir: world/action
     start: 0xE24ED0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, hammer]
   - type: code
     name: world_action_spin
     dir: world/action
     start: 0xE25D60
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, spin]
   - type: code
     name: world_action_tornado_jump
     dir: world/action
     start: 0xE26710
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, tornado_jump]
   - type: code
     name: world_action_spin_jump
     dir: world/action
     start: 0xE26DE0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, spin_jump]
   - type: code
     name: world_action_slide
     dir: world/action
     start: 0xE27510
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, slide]
   - type: code
     name: world_action_hit_fire
     dir: world/action
     start: 0xE27C90
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, hit_fire]
   - type: code
     name: world_action_hit_lava
     dir: world/action
     start: 0xE27F40
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, hit_lava]
   - type: code
     name: world_action_knockback
     dir: world/action
     start: 0xE287F0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, knockback]
   - type: code
     name: world_action_misc
     dir: world/action
     start: 0xE28A30
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, misc]
   - type: code
     name: world_action_use_munchlesia
     dir: world/action
     start: 0xE291A0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, use_munchlesia]
   - type: code
     name: world_action_use_spinning_flower
     dir: world/action
     start: 0xE29470
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, use_spinning_flower]
   - type: code
     name: world_action_use_tweester
     dir: world/action
     start: 0xE2A340
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, use_tweester]
   - type: code
     name: world_action_sneaky_parasol
     dir: world/action
     start: 0xE2A6B0
-    vram: world_action
+    vram_class: world_action
     subsegments:
     - [auto, c, sneaky_parasol]
   - type: code
     dir: entity/default
     start: 0xE2B530
-    vram: area_entities
+    vram_class: area_entities
     subsegments:
     - [auto, c, Padlock]
     - [auto, c, BoardedFloor]
@@ -13570,7 +13571,7 @@ segments:
   - type: code
     dir: entity/jan_iwa
     start: 0xE2D730
-    vram: area_entities
+    vram_class: area_entities
     subsegments:
     - [auto, c, Plants1]
     - [auto, c, Plants2]
@@ -13578,7 +13579,7 @@ segments:
   - type: code
     dir: entity/sbk_omo
     start: 0xE2F750
-    vram: area_entities
+    vram_class: area_entities
     subsegments:
     - [auto, c, Tweester]
     - [auto, c, StarBoxLauncher]
@@ -13586,7 +13587,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE31530
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Hammer1Block]
@@ -13602,7 +13603,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE31A30
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Hammer2Block]
@@ -13618,7 +13619,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE31F30
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Hammer3Block]
@@ -13634,7 +13635,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE32420
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ShatteringHammer1Block]
@@ -13650,7 +13651,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE35670
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ShatteringHammer2Block]
@@ -13665,7 +13666,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE38890
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ShatteringHammer3Block]
@@ -13681,7 +13682,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE3B870
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, YellowBlock]
@@ -13696,7 +13697,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE3C320
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, RedBlock]
@@ -13711,7 +13712,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE3CDD0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, UnusedBlock]
@@ -13729,7 +13730,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE3DA60
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, PushBlock]
@@ -13745,7 +13746,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE3DDB0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, BrickBlock]
@@ -13761,7 +13762,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE3E260
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ShatteringBrickBlock]
@@ -13776,7 +13777,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE42240
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, InertYellowBlock]
@@ -13793,7 +13794,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE42740
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, InertRedBlock]
@@ -13809,7 +13810,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE431F0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, HeartBlock]
@@ -13824,7 +13825,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE43B20
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, PowBlock]
@@ -13840,7 +13841,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE44800
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, SuperBlock]
@@ -13856,7 +13857,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE45110
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, UltraBlock]
@@ -13872,7 +13873,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE459F0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, HitYellowBlock_gfx]
@@ -13889,14 +13890,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE46E10
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, HitYellowBlock_anim]
   - name: entity_model_HitFloatingYellowBlock_gfx
     dir: entity/model
     type: code
     start: 0xE470B0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, HitFloatingYellowBlock_gfx]
@@ -13913,14 +13914,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE484F0
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, HitFloatingYellowBlock_anim]
   - name: entity_model_HitRedBlock_gfx
     dir: entity/model
     type: code
     start: 0xE48780
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, HitRedBlock_gfx]
@@ -13937,14 +13938,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE49BE0
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, HitRedBlock_anim]
   - name: entity_model_HeartBlockContent
     dir: entity/model
     type: code
     start: 0xE49E40
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, HeartBlockContent]
@@ -13962,7 +13963,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE4A6A0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, SuperBlockContent]
@@ -13980,7 +13981,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE4AA80
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, UltraBlockContent]
@@ -13998,7 +13999,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE4B2E0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, SaveBlock]
@@ -14019,7 +14020,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE4E7F0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, BoardedFloor]
@@ -14045,7 +14046,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE51640
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, WoodenCrate]
@@ -14064,7 +14065,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE55A40
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, StarBoxLauncher]
@@ -14088,14 +14089,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE56BA0
-    vram: entity_model
+    vram_class: entity_model
     subsegments:
     - [auto, c, HiddenPanel]
   - name: entity_model_Tweester
     dir: entity/model
     type: code
     start: 0xE56E60
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Tweester]
@@ -14117,7 +14118,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE58CD0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, BlueWarpPipe]
@@ -14138,7 +14139,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE59480
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Signpost]
@@ -14155,7 +14156,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE59F00
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ArrowSign]
@@ -14171,7 +14172,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE5AB50
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Padlock]
@@ -14196,7 +14197,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE5CD80
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, PadlockRedFrame]
@@ -14218,7 +14219,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE5E730
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, PadlockRedFace]
@@ -14242,7 +14243,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE60550
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, PadlockBlueFace]
@@ -14266,7 +14267,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE62370
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, GreenStompSwitch]
@@ -14286,7 +14287,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE62AC0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, RedSwitch]
@@ -14306,7 +14307,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE639C0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, BlueSwitch]
@@ -14327,7 +14328,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE648D0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, Chest]
@@ -14351,7 +14352,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE657A0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, ScriptSpring_gfx]
@@ -14379,14 +14380,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE67120
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, ScriptSpring_anim]
   - name: entity_model_SimpleSpring_gfx
     dir: entity/model
     type: code
     start: 0xE68580
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, SimpleSpring_gfx]
@@ -14412,14 +14413,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE69D50
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, SimpleSpring_anim]
   - name: entity_model_BellbellPlant_gfx
     dir: entity/model
     type: code
     start: 0xE6B1B0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, BellbellPlant_gfx]
@@ -14438,14 +14439,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE6C440
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, BellbellPlant_anim]
   - name: entity_model_TrumpetPlant_gfx
     dir: entity/model
     type: code
     start: 0xE6D390
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, TrumpetPlant_gfx]
@@ -14461,14 +14462,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE6E2D0
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, TrumpetPlant_anim]
   - name: entity_model_MunchlesiaReset_gfx
     dir: entity/model
     type: code
     start: 0xE6E660
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaReset_gfx]
@@ -14483,14 +14484,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE74750
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaReset_anim]
   - name: entity_model_MunchlesiaGrab_gfx
     dir: entity/model
     type: code
     start: 0xE74BD0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaGrab_gfx]
@@ -14505,14 +14506,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE7ACC0
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaGrab_anim]
   - name: entity_model_MunchlesiaEnvelop_gfx
     dir: entity/model
     type: code
     start: 0xE7B0E0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaEnvelop_gfx]
@@ -14527,14 +14528,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE811D0
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaEnvelop_anim]
   - name: entity_model_MunchlesiaBeginChew_gfx
     dir: entity/model
     type: code
     start: 0xE815F0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaBeginChew_gfx]
@@ -14549,14 +14550,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE88030
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaBeginChew_anim]
   - name: entity_model_MunchlesiaChewing_gfx
     dir: entity/model
     type: code
     start: 0xE884A0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaChewing_gfx]
@@ -14571,14 +14572,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE8A410
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaChewing_anim]
   - name: entity_model_MunchlesiaSpitOut_gfx
     dir: entity/model
     type: code
     start: 0xE8A9E0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaSpitOut_gfx]
@@ -14593,14 +14594,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE91420
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaSpitOut_anim]
   - name: entity_model_MunchlesiaReset1_gfx
     dir: entity/model
     type: code
     start: 0xE91890
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, MunchlesiaReset1_gfx]
@@ -14615,21 +14616,21 @@ segments:
     dir: entity/model
     type: code
     start: 0xE982D0
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, MunchlesiaReset1_anim]
   - name: entity_model_CymbalPlant_anim
     dir: entity/model
     type: code
     start: 0xE98740
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, CymbalPlant_anim]
   - name: entity_model_CymbalPlant_gfx
     dir: entity/model
     type: code
     start: 0xE992F0
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, CymbalPlant_gfx]
@@ -14653,14 +14654,14 @@ segments:
     dir: entity/model
     type: code
     start: 0xE9A990
-    vram: entity_model_anim
+    vram_class: entity_model_anim
     subsegments:
     - [auto, c, PinkFlower_anim]
   - name: entity_model_PinkFlower_gfx
     dir: entity/model
     type: code
     start: 0xE9B500
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, PinkFlower_gfx]
@@ -14681,7 +14682,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE9C900
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, SpinningFlower]
@@ -14701,7 +14702,7 @@ segments:
     dir: entity/model
     type: code
     start: 0xE9D650
-    vram: entity_model
+    vram_class: entity_model
     symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, BombableRock]
@@ -14726,7 +14727,7 @@ segments:
   #  dir: world/dead/area_kzn/kzn_11
   #  type: code
   #  start: 0xE9AFF0
-  #  vram: map
+  #  vram_class: map
   #  subsegments:
   #  - [auto, c, kzn_11_0_header]
   #  - [auto, c, kzn_11_1_main]
@@ -14737,7 +14738,7 @@ segments:
     dir: world/dead/area_kzn/kzn_17
     type: code
     start: 0xEA0900
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, kzn_17_0_header]
@@ -14749,7 +14750,7 @@ segments:
     dir: world/dead/area_kzn/kzn_18
     type: code
     start: 0xEA6FD0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, kzn_18_0_header]
@@ -14760,7 +14761,7 @@ segments:
     dir: world/dead/area_kzn/kzn_19
     type: code
     start: 0xEA8AE0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, kzn_19_0_header]
@@ -14774,7 +14775,7 @@ segments:
     dir: world/dead/area_kzn/kzn_20
     type: code
     start: 0xEB0E60
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, kzn_20_0_header]
@@ -14785,7 +14786,7 @@ segments:
     dir: world/dead/area_kzn/kzn_22
     type: code
     start: 0xEB5130
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, kzn_22_0_header]
@@ -14797,7 +14798,7 @@ segments:
     dir: world/dead/area_kzn/kzn_23
     type: code
     start: 0xEB7230
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, kzn_23_0_header]
@@ -14808,7 +14809,7 @@ segments:
     dir: world/dead/area_flo/flo_00
     type: code
     start: 0xEB8E50
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_00_0_header]
@@ -14822,7 +14823,7 @@ segments:
     dir: world/dead/area_flo/flo_03
     type: code
     start: 0xEC2200
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_03_0_header]
@@ -14835,7 +14836,7 @@ segments:
     dir: world/dead/area_flo/flo_07
     type: code
     start: 0xEC71B0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_07_0_header]
@@ -14846,7 +14847,7 @@ segments:
     dir: world/dead/area_flo/flo_08
     type: code
     start: 0xEC9D00
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_08_0_header]
@@ -14860,7 +14861,7 @@ segments:
     dir: world/dead/area_flo/flo_09
     type: code
     start: 0xECFFF0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_09_0_header]
@@ -14873,7 +14874,7 @@ segments:
     dir: world/dead/area_flo/flo_10
     type: code
     start: 0xED4220
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_10_0_header]
@@ -14888,7 +14889,7 @@ segments:
     dir: world/dead/area_flo/flo_11
     type: code
     start: 0xED8E20
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_11_0_header]
@@ -14900,7 +14901,7 @@ segments:
     dir: world/dead/area_flo/flo_12
     type: code
     start: 0xEDBFE0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_12_0_header]
@@ -14911,7 +14912,7 @@ segments:
     dir: world/dead/area_flo/flo_13
     type: code
     start: 0xEDE9C0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_13_0_header]
@@ -14924,7 +14925,7 @@ segments:
     dir: world/dead/area_flo/flo_14
     type: code
     start: 0xEE65B0
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_14_0_header]
@@ -14938,7 +14939,7 @@ segments:
     dir: world/dead/area_flo/flo_15
     type: code
     start: 0xEEB990
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_15_0_header]
@@ -14951,7 +14952,7 @@ segments:
     dir: world/dead/area_flo/flo_16
     type: code
     start: 0xEED100
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_16_0_header]
@@ -14965,7 +14966,7 @@ segments:
     dir: world/dead/area_flo/flo_17
     type: code
     start: 0xEF2610
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_17_0_header]
@@ -14978,7 +14979,7 @@ segments:
     dir: world/dead/area_flo/flo_18
     type: code
     start: 0xEF7A80
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_18_0_header]
@@ -14991,7 +14992,7 @@ segments:
     dir: world/dead/area_flo/flo_19
     type: code
     start: 0xEFEB00
-    vram: map
+    vram_class: map
     dead_code: True
     subsegments:
     - [auto, c, flo_19_0_header]
