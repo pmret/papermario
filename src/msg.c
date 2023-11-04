@@ -91,6 +91,9 @@ SHIFT_BSS MessageDrawState* msg_drawState;
 SHIFT_BSS IMG_BIN D_80159B50[0x200];
 SHIFT_BSS PAL_BIN D_8015C7E0[0x10];
 SHIFT_BSS MessagePrintState gMessagePrinters[3];
+#if VERSION_IQUE
+SHIFT_BSS IMG_BIN D_801544A0[120][128];
+#endif
 
 extern s16 MsgStyleVerticalLineOffsets[];
 
@@ -3689,26 +3692,47 @@ void msg_reset_gfx_state(void) {
     gSPDisplayList(gMainGfxPos++, D_8014C500);
 }
 
-#if VERSION_IQUE
+#if VERSION_IQUE && !defined(NON_MATCHING)
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 #else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
-    MessageCharset* messageCharset = MsgCharsets[drawState->font];
-    s32 fontVariant = drawState->fontVariant;
+    MessageCharset* messageCharset;
+    s32 fontVariant;
 
-    s32 clipUly = drawState->clipY[0];
-    s32 clipLry = drawState->clipY[1];
-    s32 clipUlx = drawState->clipX[0];
-    s32 clipLrx = drawState->clipX[1];
+    s32 clipUly;
+    s32 clipLry;
+    s32 clipUlx;
+    s32 clipLrx;
 
-    s32 rightPosX = posX + (s32)(drawState->charScale.x * messageCharset->texSize.x);
-    s32 rightPosY = posY + (s32)(drawState->charScale.y * messageCharset->texSize.y);
+    s32 rightPosX;
+    s32 rightPosY;
 
     f32 clipOffset;
     s32 texOffsetX;
     s32 texOffsetY;
     s32 ulx, uly, lrx, lry;
     s32 dsdx, dtdy;
+
+#if VERSION_IQUE
+    if (charIndex == 0x33F) {
+        load_font_data(charset_standard_OFFSET + 0x19F80, 0x80, D_801544A0);
+    } else if (charIndex == 0x340) {
+        load_font_data(charset_standard_OFFSET + 0x1A000, 0x80, D_801544A0[1]);
+    } else if (charIndex >= 0xA6) {
+        load_font_data(charset_standard_OFFSET + charIndex, 0x80, D_801544A0[D_8014AD24]);
+    }
+#endif
+
+    messageCharset = MsgCharsets[drawState->font];
+    fontVariant = drawState->fontVariant;
+
+    clipUly = drawState->clipY[0];
+    clipLry = drawState->clipY[1];
+    clipUlx = drawState->clipX[0];
+    clipLrx = drawState->clipX[1];
+
+    rightPosX = posX + (s32)(drawState->charScale.x * messageCharset->texSize.x);
+    rightPosY = posY + (s32)(drawState->charScale.y * messageCharset->texSize.y);
 
     if (posX >= clipLrx || posY >= clipLry || rightPosX <= clipUlx || rightPosY <= clipUly) {
         return;
@@ -3756,17 +3780,56 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     }
 
     if (messageCharset->texSize.x >= 16 && messageCharset->texSize.x % 16 == 0) {
-        gDPLoadTextureBlock_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
-                               messageCharset->texSize.x, messageCharset->texSize.y, 0,
-                               G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        if (charIndex == 0x33f || charIndex == 0x340) {
+            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[charIndex - 0x33f], G_IM_FMT_CI,
+                                   messageCharset->texSize.x, messageCharset->texSize.y, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (charIndex >= 0xA6) {
+            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[D_8014AD24], G_IM_FMT_CI,
+                                   messageCharset->texSize.x, messageCharset->texSize.y, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else {
+#endif
+            gDPLoadTextureBlock_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
+                                   messageCharset->texSize.x, messageCharset->texSize.y, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        }
+#endif
     } else {
-        gDPLoadTextureTile_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
-                              messageCharset->texSize.x, messageCharset->texSize.y,
-                              0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
-                              G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        if (charIndex == 0x33f || charIndex == 0x340) {
+            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[charIndex - 0x33f], G_IM_FMT_CI,
+                                  messageCharset->texSize.x, messageCharset->texSize.y,
+                                  0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
+                                  G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (charIndex >= 0xA6) {
+            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[D_8014AD24], G_IM_FMT_CI,
+                                  messageCharset->texSize.x, messageCharset->texSize.y,
+                                  0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
+                                  G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else {
+#endif
+            gDPLoadTextureTile_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
+                                  messageCharset->texSize.x, messageCharset->texSize.y,
+                                  0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
+                                  G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        }
+#endif
     }
     gSPTextureRectangle(gMainGfxPos++, ulx * 4, uly * 4, lrx * 4, lry * 4, G_TX_RENDERTILE, texOffsetX, texOffsetY,
                         dsdx, dtdy);
+
+#if VERSION_IQUE
+    if (charIndex >= 0xA6) {
+        D_8014AD24 = (D_8014AD24 + 1) % 120;
+        if (D_8014AD24 == 0) {
+            D_8014AD24 = 2;
+        }
+    }
+#endif
 }
 #endif
 

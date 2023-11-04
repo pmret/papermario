@@ -118,9 +118,3 @@ D_B0000010 = 0xB0000010;
 
 rspbootTextStart = rspboot_bin;
 rspbootTextEnd = rspboot_bin + 0xd0;
-
-// nonmatchings
-D_8013A520 = 0x8013a520;
-D_19F80 = 0x00019f80;
-D_1A000 = 0x0001a000;
-D_80154520 = 0x80154520;
