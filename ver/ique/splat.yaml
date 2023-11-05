@@ -25,6 +25,7 @@ options:
   undefined_syms_auto_path: ver/ique/undefined_syms_auto.txt
   symbol_name_format: IQUE_$VRAM
   symbol_name_format_no_rom: IQUE_$VRAM_$SEG
+  ld_wildcard_sections: True
   ld_use_follows: False
 asset_stack:
   - ique
@@ -15316,7 +15317,7 @@ segments:
   - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
   - [0x1B82208, bin] # still zero fill
   - [0x1B83000, bin, msg] # pm_msg (todo)
-  - [0x1E40000, bin, mapfs]
+  - [0x1E40000, bin, mapfs] # pm_map_data (todo)
   - { type: bin, start: 0x27FEE1E, subalign: 2 } # zero fill
   - [0x27FFFC0, bin] # ?
   - [0x2800000]
