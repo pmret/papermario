@@ -31,11 +31,11 @@ vram_classes:
   - { name: main, vram: 0x80025C00 }
   # hard-coded in undefined_syms since BG data / map data doesn't shift currently, should be follows_classes: [main]
   - { name: engine1, vram: 0x800DC500, vram_symbol: overlays_start }
-  - { name: engine2, vram: 0x8010F6D0, follows_classes: [engine1] }
-  - { name: heaps, vram: 0x80197000, follows_classes: [engine2] }
+  - { name: engine2, vram: 0x8010F6D0, vram_symbol: engine1_VRAM_END } # follows_classes: [engine1] }
+  - { name: heaps, vram: 0x80197000, vram_symbol: engine2_VRAM_END } # follows_classes: [engine2] }
 
   # Battle
-  - { name: battle_area, vram: 0x80218000, follows_classes: [heaps] }
+  - { name: battle_area, vram: 0x80218000, vram_symbol: heaps_VRAM_END } # follows_classes: [heaps] }
   - { name: battle_area2, vram: 0x80231000, vram_symbol: Vine1Base } # ???
   - { name: battle_partner, vram: 0x80238000, follows_classes: [battle_area] }
   - { name: battle_code, vram: 0x8023E000, follows_classes: [battle_partner] }
@@ -59,14 +59,14 @@ vram_classes:
   - { name: world_action, vram: 0x802B6000, follows_classes: [texture_memory] }
   - { name: indicator_icon, vram: 0x802B7000, follows_classes: [world_action] } # vram_symbol: world_action_vram_end
   - { name: model_clear_render_tasks, vram: 0x802B7E00, follows_classes: [indicator_icon] }
-  - { name: area_entities, vram: 0x802BAE00, follows_classes: [model_clear_render_tasks] }
+  - { name: area_entities, vram: 0x802BAE00, vram_symbol: model_clear_render_tasks_VRAM_END } # follows_classes: [model_clear_render_tasks] }
   - { name: world_partner, vram: 0x802BD100, follows_classes: [area_entities] } # vram_symbol: entity_data_vram_end
   - { name: world_use_item, vram: 0x802C0000, follows_classes: [world_partner] }
-  - { name: evt, vram: 0x802C3000, follows_classes: [world_use_item] }
-  - { name: engine4, vram: 0x802DBD40, follows_classes: [evt] }
-  - { name: entity, vram: 0x802E0D90, follows_classes: [engine4] }
-  - { name: font_width, vram: 0x802EB3D0, follows_classes: [entity] }
-  - { name: heaps3, vram: 0x802FB800, follows_classes: [font_width] }
+  - { name: evt, vram: 0x802C3000, vram_symbol: world_use_item_VRAM_END } # follows_classes: [world_use_item] }
+  - { name: engine4, vram: 0x802DBD40, vram_symbol: evt_VRAM_END } # follows_classes: [evt] }
+  - { name: entity, vram: 0x802E0D90, vram_symbol: engine4_VRAM_END } # follows_classes: [engine4] }
+  - { name: font_width, vram: 0x802EB3D0, vram_symbol: entity_VRAM_END } # follows_classes: [entity] }
+  - { name: heaps3, vram: 0x802FB800, vram_symbol: font_width_VRAM_END } # follows_classes: [font_width] }
 
   # Segments / misc
   - [effect_gfx, 0x09000000]
@@ -1676,6 +1676,7 @@ segments:
     start: 0x316A70
     vram: 0x80200080
     name: load_engine_data_obfuscated
+    follows_vram: create_audio_system_obfuscated
     subsegments:
     - [auto, c, load_engine_data_obfuscated]
   - type: code
