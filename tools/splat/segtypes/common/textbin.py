@@ -106,13 +106,9 @@ class CommonSegTextbin(CommonSegment):
                 self.rodata_sibling.write_asm_contents(rom_bytes, f)
 
     def should_scan(self) -> bool:
-        return (
-            options.opts.is_mode_active("code")
-            and self.rom_start is not None
-            and self.rom_end is not None
-        )
+        return self.rom_start is not None and self.rom_end is not None
 
     def should_split(self) -> bool:
         return (
-            self.extract and options.opts.is_mode_active("code") and self.should_scan()
+            self.extract and self.should_scan()
         )  # only split if the segment was scanned first

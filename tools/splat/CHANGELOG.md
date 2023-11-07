@@ -1,5 +1,30 @@
 # splat Release Notes
 
+### 0.19.0: vram_classes
+
+* New top-level yaml feature: `vram_classes`. This allows you to make common definitions for vram locations that can be applied to multiple segments. Please see the [documentation](docs/VramClasses.md) for more details!
+  * Renamed `ld_use_follows` to `ld_use_symbolic_vram_addresses` to more accurately describe what it's doing
+  * Renamed `vram_of_symbol` segment option to `vram_symbol` to provide consistency between the segment-level option and the vram class field.
+  * Removed `appears_after_overlays_addr` symbol_addrs option in favor of specifying this behavior with `vram_classes`
+* Removed `dead` symbol_addrs option
+* A warning is now emitted when the `sha1` top-level yaml option is not provided. Adding this is highly recommended, as it prevents errors using splat in which the wrong binary is provided.
+
+### 0.18.3
+
+* splat now will emit a `FILL(0)` statement on each segment of a linker script by default, to customize this behavior use the `ld_fill_value` yaml option or the per-segment `ld_fill_value` option.
+* New yaml option: `ld_fill_value`
+  * Allows to specify the value of the `FILL` statement generated on every segment of the linker script.
+  * It must be either an integer, which will be used as the parameter for the `FILL` statement, or `null`, which tells splat to not emit `FILL` statements.
+  * This behavior can be customized per segment too.
+* New per segment option: `ld_fill_value`
+  * Allows to specify the value of the `FILL` statement generated for this specific top-level segment of the linker script, ignoring the global configuration.
+  * If not set, then the global configuration is used.
+
+### 0.18.2
+
+* Fix rodata migration for `.rdata` sections (and other rodata sections that don't use the name `.rodata`)
+* `spimdisasm` 1.18.0 or above is now required.
+
 ### 0.18.1
 
 * New yaml options: `check_consecutive_segment_types`

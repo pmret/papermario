@@ -362,10 +362,10 @@ Determines the list of section labels that are to be added to the linker script
 
 Determines whether to add wildcards for section linking in the linker script (.rodata* for example)
 
-### ld_use_follows
+### ld_use_symbolic_vram_addreses
 
-Determines whether to use "follows" settings to determine locations of overlays in the linker script.
-If disabled, this effectively ignores "follows" directives in the yaml.
+Determines whether to use `follows_vram` (segment option) and `vram_symbol` / `follows_classes` (vram_class options) to calculate vram addresses in the linker script.
+Enabled by default. If disabled, this uses the plain integer values for vram addresses defined in the yaml.
 
 ### ld_partial_linking
 
@@ -403,6 +403,17 @@ Possible values:
 ### ld_rom_start
 
 Specifies the starting offset for rom address symbols in the linker script.
+
+
+### ld_fill_value
+
+Allows to specify the value of the `FILL` statement generated on every segment of the linker script.
+
+It must be either an integer, which will be used as the parameter for the `FILL` statement, or `null`, which tells splat to not emit `FILL` statements.
+
+This behavior can be customized per segment too. See [ld_fill_value](Segments.md#ld_fill_value) on the Segments section.
+
+Defaults to 0.
 
 
 ## C file options

@@ -6,6 +6,7 @@ SECTIONS
     header_VRAM = ADDR(.header);
     .header : AT(header_ROM_START) SUBALIGN(16)
     {
+        FILL(0x00000000);
         header_DATA_START = .;
         header_s = .;
         build/split/asm/header.s.o(.data);
@@ -20,6 +21,7 @@ SECTIONS
     dummy_ipl3_VRAM = ADDR(.dummy_ipl3);
     .dummy_ipl3 0xA4000040 : AT(dummy_ipl3_ROM_START) SUBALIGN(16)
     {
+        FILL(0x00000000);
         dummy_ipl3_DATA_START = .;
         dummy_ipl3_bin = .;
         build/split/assets/dummy_ipl3.bin.o(.data);
@@ -35,6 +37,7 @@ SECTIONS
     boot_VRAM = ADDR(.boot);
     .boot 0x80000400 : AT(boot_ROM_START) SUBALIGN(16)
     {
+        FILL(0x00000000);
         boot_TEXT_START = .;
         build/split/src/main.c.o(.text);
         build/split/asm/handwritten.s.o(.text);
@@ -53,6 +56,7 @@ SECTIONS
     boot_bss_VRAM = ADDR(.boot_bss);
     .boot_bss (NOLOAD) : SUBALIGN(16)
     {
+        FILL(0x00000000);
         boot_BSS_START = .;
         build/split/asm/data/main.bss.s.o(.bss);
         boot_BSS_END = .;

@@ -300,3 +300,13 @@ Useful for sections with special names, like an executable section named `.start
 - [0x1070, rdata, libc]
 - [0x10A0, rdata, main_030]
 ```
+
+### `ld_fill_value`
+
+Allows to specify the value of the `FILL` statement generated for this specific top-level segment of the linker script, ignoring the global configuration.
+
+It must be either an integer, which will be used as the parameter for the `FILL` statement, or `null`, which tells splat to not emit a `FILL` statement for this segment.
+
+If not set, then the global configuration is used. See [ld_fill_value](Configuration.md#ld_fill_value) on the Configuration section.
+
+Defaults to the value of the global option.

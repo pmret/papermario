@@ -7,7 +7,7 @@ import pickle
 from typing import Any, Dict, List, Optional, Set, Tuple, Union
 from pathlib import Path
 from disassembler import disassembler_instance
-from util import progress_bar
+from util import progress_bar, vram_classes
 
 # This unused import makes the yaml library faster. don't remove
 import pylibyaml  # pyright: ignore
@@ -20,12 +20,11 @@ import sys
 from segtypes.linker_entry import (
     LinkerWriter,
     get_segment_vram_end_symbol_name,
-    segment_cname,
 )
 from segtypes.segment import Segment
 from util import log, options, palettes, symbols, relocs
 
-VERSION = "0.18.1"
+VERSION = "0.19.0"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -133,7 +132,7 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
                 log.error(
                     f"segment '{segment.given_follows_vram}', the 'follows_vram' value for segment '{segment.name}', does not exist"
                 )
-            segment.vram_of_symbol = get_segment_vram_end_symbol_name(
+            segment.given_vram_symbol = get_segment_vram_end_symbol_name(
                 segments_by_name[segment.given_follows_vram]
             )
 
@@ -223,6 +222,32 @@ def brief_seg_name(seg: Segment, limit: int, ellipsis="…") -> str:
     return s
 
 
+# Return a mapping of vram classes to segments that need to be part of their vram symbol's calculation
+def calc_segment_dependences(
+    all_segments: List[Segment],
+) -> Dict[vram_classes.VramClass, List[Segment]]:
+    # Map vram class names to segments that have that vram class
+    vram_class_to_segments: Dict[str, List[Segment]] = {}
+    for seg in all_segments:
+        if seg.vram_class is not None:
+            if seg.vram_class.name not in vram_class_to_segments:
+                vram_class_to_segments[seg.vram_class.name] = []
+            vram_class_to_segments[seg.vram_class.name].append(seg)
+
+    # Map vram class names to segments that the vram class follows
+    vram_class_to_follows_segments: Dict[vram_classes.VramClass, List[Segment]] = {}
+    for vram_class in vram_classes._vram_classes.values():
+        if vram_class.follows_classes:
+            vram_class_to_follows_segments[vram_class] = []
+
+            for follows_class in vram_class.follows_classes:
+                if follows_class in vram_class_to_segments:
+                    vram_class_to_follows_segments[
+                        vram_class
+                    ] += vram_class_to_segments[follows_class]
+    return vram_class_to_follows_segments
+
+
 def main(
     config_path,
     modes,
@@ -244,6 +269,8 @@ def main(
             additional_config = yaml.load(f.read(), Loader=yaml.SafeLoader)
         config = merge_configs(config, additional_config)
 
+    vram_classes.initialize(config.get("vram_classes"))
+
     options.initialize(config, config_path, modes, verbose, disassemble_all)
 
     disassembler_instance.create_disassembler_instance(options.opts.platform)
@@ -257,6 +284,8 @@ def main(
         e_sha1 = config["sha1"].lower()
         if e_sha1 != sha1:
             log.error(f"sha1 mismatch: expected {e_sha1}, was {sha1}")
+    else:
+        log.write("Warning: no sha1 in config")
 
     # Create main output dir
     options.opts.base_path.mkdir(parents=True, exist_ok=True)
@@ -371,30 +400,24 @@ def main(
     if (
         options.opts.is_mode_active("ld") and options.opts.platform != "gc"
     ):  # TODO move this to platform initialization when it gets implemented
-        # Calculate list of segments for which we need to find the largest, so we can safely place the symbol after it
-        max_vram_end_syms: Dict[str, List[Segment]] = {}
-        for sym in symbols.appears_after_overlays_syms:
-            max_vram_end_syms[sym.name] = [
-                seg
-                for seg in all_segments
-                if isinstance(seg.vram_start, int)
-                and seg.vram_start == sym.appears_after_overlays_addr
-            ]
-        max_vram_end_sym_names: Set[str] = set(max_vram_end_syms.keys())
+        vram_class_dependencies = calc_segment_dependences(all_segments)
+        vram_classes_to_search = set(vram_class_dependencies.keys())
 
         max_vram_end_insertion_points: Dict[
             Segment, List[Tuple[str, List[Segment]]]
         ] = {}
-        # Find the last segment whose vram_of_symbol is one of the max_vram_end_syms
-        for segment in reversed(all_segments):
-            vram_of_sym = segment.vram_of_symbol
-            if vram_of_sym is not None and vram_of_sym in max_vram_end_sym_names:
-                if segment not in max_vram_end_insertion_points:
-                    max_vram_end_insertion_points[segment] = []
-                max_vram_end_insertion_points[segment].append(
-                    (vram_of_sym, max_vram_end_syms[vram_of_sym])
+        for seg in reversed(all_segments):
+            if seg.vram_class in vram_classes_to_search:
+                assert seg.vram_class.vram_symbol is not None
+                if seg not in max_vram_end_insertion_points:
+                    max_vram_end_insertion_points[seg] = []
+                max_vram_end_insertion_points[seg].append(
+                    (
+                        seg.vram_class.vram_symbol,
+                        vram_class_dependencies[seg.vram_class],
+                    )
                 )
-                max_vram_end_sym_names.remove(vram_of_sym)
+                vram_classes_to_search.remove(seg.vram_class)
 
         global linker_writer
         linker_writer = LinkerWriter()
@@ -414,6 +437,7 @@ def main(
                 )
 
         for segment in linker_bar:
+            assert isinstance(segment, Segment)
             linker_bar.set_description(f"Linker script {brief_seg_name(segment, 20)}")
             max_vram_syms = max_vram_end_insertion_points.get(segment, [])
 
@@ -427,7 +451,7 @@ def main(
                 assert partial_scripts_path is not None
                 assert segments_path is not None
 
-                seg_name = segment_cname(segment)
+                seg_name = segment.get_cname()
 
                 sub_linker_writer.save_linker_script(
                     partial_scripts_path / f"{seg_name}.ld"
@@ -457,7 +481,7 @@ def main(
         if options.opts.elf_section_list_path:
             section_list = ""
             for segment in all_segments:
-                section_list += "." + segment_cname(segment) + "\n"
+                section_list += "." + segment.get_cname() + "\n"
             with open(options.opts.elf_section_list_path, "w", newline="\n") as f:
                 f.write(section_list)
 
@@ -466,7 +490,7 @@ def main(
         to_write = [
             s
             for s in symbols.all_symbols
-            if s.referenced and not s.defined and not s.dead and s.type == "func"
+            if s.referenced and not s.defined and s.type == "func"
         ]
         to_write.sort(key=lambda x: x.vram_start)
 
@@ -481,7 +505,6 @@ def main(
             for s in symbols.all_symbols
             if s.referenced
             and not s.defined
-            and not s.dead
             and s.type not in {"func", "label", "jtbl_label"}
         ]
         to_write.sort(key=lambda x: x.vram_start)
@@ -518,7 +541,7 @@ def main(
 
         with open(splat_hidden_folder / "splat_symbols.csv", "w") as f:
             f.write(
-                "vram_start,given_name,name,type,given_size,size,rom,defined,user_declared,referenced,dead,extract\n"
+                "vram_start,given_name,name,type,given_size,size,rom,defined,user_declared,referenced,extract\n"
             )
             for s in sorted(symbols.all_symbols, key=lambda x: x.vram_start):
                 f.write(f"{s.vram_start:X},{s.given_name},{s.name},{s.type},")
@@ -531,9 +554,7 @@ def main(
                     f.write(f"0x{s.rom:X},")
                 else:
                     f.write("None,")
-                f.write(
-                    f"{s.defined},{s.user_declared},{s.referenced},{s.dead},{s.extract}\n"
-                )
+                f.write(f"{s.defined},{s.user_declared},{s.referenced},{s.extract}\n")
 
         symbols.spim_context.saveContextToFile(splat_hidden_folder / "spim_context.csv")
 

@@ -83,14 +83,6 @@ Emits a symbol after the end of the data of the current symbol. Useful to refere
 rspbootTextStart = 0x80084690; // name_end:rspbootTextEnd
 ```
 
-### `appears_after_overlays_addr`
-
-TBD
-
-### `dead`
-
-TBD
-
 ### `defined`
 
 Forces the symbol to be defined - i.e. prevent it from appearing in `undefined_syms_auto.txt` should splat not encounter the symbol during the symbol detection phase.
