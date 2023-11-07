@@ -96,11 +96,6 @@ def write_ninja_rules(
             command=f"{cross}ld $$(tools/build/ld/multilink_calc.py $version hardcode) {ld_args} && \
                       {cross}ld $$(tools/build/ld/multilink_calc.py $version calc) {ld_args}",
         )
-        # ninja.rule(
-        #     "ld",
-        #     description="link($version) $out",
-        #     command=f"{cross}ld {ld_args}",
-        # )
     else:
         ninja.rule(
             "ld",
