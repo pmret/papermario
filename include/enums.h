@@ -3297,7 +3297,7 @@ enum RenderMode {
     RENDER_MODE_25_UNUSED                        = 0x00000025,
     RENDER_MODE_INTERSECTING_XLU                 = 0x00000026,
     RENDER_MODE_27_UNUSED                        = 0x00000027,
-    RENDER_MODE_PASS_THROUGH                     = 0x00000028,
+    RENDER_MODE_PASS_THROUGH                     = 0x00000028, // no render mode is set, only geometry modes are initialized
     RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD           = 0x00000029,
     RENDER_MODE_SURFACE_OPA_NO_ZB_BEHIND         = 0x0000002A,
     RENDER_MODE_ALPHATEST_NO_ZB_BEHIND           = 0x0000002B,

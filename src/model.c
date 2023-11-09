@@ -1258,9 +1258,9 @@ MATCHING_BSS(0x3A0);
 
 enum {
     TILE_MODE_STRIDE    = 3,
-    TILE_MODE_1A        = 1,
-    TILE_MODE_2A        = 2, // render modes all have G_RM_PASS for first cycle
-    TILE_MODE_3A        = 3, // render modes all have G_RM_FOG_SHADE_A for first cycle
+    TILE_MODE_1A        = 1, // render modes are single-cycle
+    TILE_MODE_2A        = 2, // render modes are two-cycle, starting with G_RM_PASS
+    TILE_MODE_3A        = 3, // render modes are two-cycle, starting with G_RM_FOG_SHADE_A
     TILE_MODE_1B        = 4,
     TILE_MODE_2B        = 5,
     TILE_MODE_3B        = 6,
@@ -1522,6 +1522,9 @@ void appendGfx_model(void* data) {
             break;
         case TILE_MODE_2A:
             switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_10;
+                    break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_11;
                     break;
@@ -1575,9 +1578,6 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3A;
                     break;
-                case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = RENDER_MODE_IDX_10;
-                    break;
                 default:
                     renderModeIdx = RENDER_MODE_IDX_10;
                     break;
@@ -1585,8 +1585,10 @@ void appendGfx_model(void* data) {
             gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             break;
         case TILE_MODE_3A:
-            temp = RENDER_MODE_IDX_25; // required to match
             switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_1F;
+                    break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_20;
                     break;
@@ -1600,7 +1602,7 @@ void appendGfx_model(void* data) {
                     renderModeIdx = RENDER_MODE_IDX_23;
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    renderModeIdx = temp;
+                    renderModeIdx = RENDER_MODE_IDX_25;
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
                     renderModeIdx = RENDER_MODE_IDX_26;
@@ -1639,9 +1641,6 @@ void appendGfx_model(void* data) {
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3C;
-                    break;
-                case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
                 default:
                     renderModeIdx = RENDER_MODE_IDX_1F;
@@ -1731,6 +1730,9 @@ void appendGfx_model(void* data) {
             break;
         case TILE_MODE_3B:
             switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_1F;
+                    break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_20;
                     break;
@@ -1784,9 +1786,6 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
-                case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = RENDER_MODE_IDX_1F;
-                    break;
                 default:
                     renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
@@ -1806,6 +1805,9 @@ void appendGfx_model(void* data) {
         case TILE_MODE_1C:
         case TILE_MODE_2C:
             switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_1F;
+                    break;
                 case RENDER_MODE_DECAL_OPA:
                     renderModeIdx = RENDER_MODE_IDX_21;
                     break;
@@ -1821,7 +1823,6 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
-                case RENDER_MODE_SURFACE_OPA:
                 default:
                     renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
