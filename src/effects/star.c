@@ -192,7 +192,7 @@ void star_render(EffectInstance* effect) {
     renderTask.appendGfx = star_appendGfx;
     renderTask.dist = 0;
     if (data->type != FX_STAR_BACKGROUND) {
-        renderModeTemp = RENDER_MODE_2D;
+        renderModeTemp = RENDER_MODE_CLOUD_NO_ZCMP;
     } else {
         renderModeTemp = RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0;
     }

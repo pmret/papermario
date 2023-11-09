@@ -67,7 +67,7 @@ dlabel D_8009A5EC
 dlabel nuGfxCfbCounter
 .space 4
 
-dlabel mdl_currentModelTreeNodeInfo
+dlabel gCurrentModelTreeNodeInfo
 .space 4
 
 dlabel nuGfxDisplay

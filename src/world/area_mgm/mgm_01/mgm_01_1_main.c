@@ -67,7 +67,7 @@ EvtScript N(D_8024189C_E13FFC) = {
 EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_ARN_09)
     EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(SetRenderMode, MODEL_o36, RENDER_MODE_SURFXLU_ZB_ZUPD)
+    EVT_CALL(SetRenderMode, MODEL_o36, RENDER_MODE_SURFACE_XLU_ZB_ZUPD)
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC(N(EVS_UpdateSpotlight))

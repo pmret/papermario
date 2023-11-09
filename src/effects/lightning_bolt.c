@@ -161,7 +161,7 @@ void lightning_bolt_render(EffectInstance *effect) {
         renderTask.dist = 10;
     }
 
-    renderTaskPointer->renderMode = RENDER_MODE_2D;
+    renderTaskPointer->renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
     retTask = queue_render_task(renderTaskPointer);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }

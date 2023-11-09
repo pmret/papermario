@@ -68,7 +68,7 @@ Gfx BtlBonkModelGfx[] = {
     gsSPEndDisplayList(),
 };
 
-EntityModelScript EMS_BonkIcon = STANDARD_ENTITY_MODEL_SCRIPT(BtlBonkModelGfx, RENDER_MODE_2D);
+EntityModelScript EMS_BonkIcon = STANDARD_ENTITY_MODEL_SCRIPT(BtlBonkModelGfx, RENDER_MODE_CLOUD_NO_ZCMP);
 
 Vtx BtlStarModelVtx[] = {
     {{{ -16, -16, 0 }, 0, {    0, 1024 }, { 0, 0, 0, 255 }}},

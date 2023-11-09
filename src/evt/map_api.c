@@ -5,7 +5,7 @@
 
 extern LavaReset* gLavaResetList;
 extern s32 LastSafeFloor;
-extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
+extern ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 
 ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -293,17 +293,17 @@ void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
 
     firstChild = -1;
     parentModelID = evt_get_variable(script, *script->ptrReadPos);
-    modelIndex = (*mdl_currentModelTreeNodeInfo)[parentModelID].modelIndex;
+    modelIndex = (*gCurrentModelTreeNodeInfo)[parentModelID].modelIndex;
     lastChild = -1;
 
     if (modelIndex < 0xFF) {
         firstChild = lastChild = modelIndex;
     } else {
-        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[parentModelID].treeDepth;
+        s32 treeDepth = (*gCurrentModelTreeNodeInfo)[parentModelID].treeDepth;
 
         // check all models with a lowerID in the tree
         for (i = parentModelID - 1; i >= 0; i--) {
-            childModelInfo = &(*mdl_currentModelTreeNodeInfo)[i];
+            childModelInfo = &(*gCurrentModelTreeNodeInfo)[i];
 
             if (treeDepth < childModelInfo->treeDepth) {
                 s32 childModelIndex = childModelInfo->modelIndex;

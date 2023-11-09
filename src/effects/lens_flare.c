@@ -100,7 +100,7 @@ void lens_flare_render(EffectInstance* effect) {
     renderTask.appendGfx = lens_flare_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.dist = 20;
-    renderTask.renderMode = RENDER_MODE_2D;
+    renderTask.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
 
     retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;

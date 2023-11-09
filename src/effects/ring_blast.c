@@ -77,7 +77,7 @@ void ring_blast_render(EffectInstance* effect) {
     renderTask.appendGfx = ring_blast_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.dist = 0;
-    renderTask.renderMode = RENDER_MODE_28;
+    renderTask.renderMode = RENDER_MODE_PASS_THROUGH;
 
     retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;

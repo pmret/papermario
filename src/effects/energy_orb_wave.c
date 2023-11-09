@@ -211,7 +211,7 @@ void energy_orb_wave_render(EffectInstance* effect) {
     renderTask.appendGfx = energy_orb_wave_appendGfx;
     renderTask.dist = 10;
     renderTask.appendGfxArg = effect;
-    renderTask.renderMode = RENDER_MODE_2D;
+    renderTask.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
     if (effect82->unk_00 >= 3) {
         queue_render_task(renderTaskPointer);
         return;

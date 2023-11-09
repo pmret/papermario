@@ -104,7 +104,7 @@ void floating_cloud_puff_render(EffectInstance* effect) {
     renderTask.appendGfx = floating_cloud_puff_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.dist = 10;
-    renderTask.renderMode = RENDER_MODE_2D;
+    renderTask.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
 
     retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;

@@ -218,10 +218,10 @@ dlabel bModelTreeRoot
 dlabel D_8015221C
 .space 4
 
-dlabel D_80152220
+dlabel wModelTreeNodeInfo
 .space 0x00000800
 
-dlabel D_80152A20
+dlabel bModelTreeNodeInfo
 .space 0x00000800
 
 dlabel wBackgroundFogMode

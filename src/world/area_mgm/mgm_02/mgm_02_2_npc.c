@@ -194,7 +194,7 @@ void N(appendGfx_score_display)(void* renderData) {
 void N(worker_draw_score)(void) {
     RenderTask task;
 
-    task.renderMode = RENDER_MODE_2D;
+    task.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
     task.appendGfxArg = 0;
     task.appendGfx = &N(appendGfx_score_display);
     task.dist = 0;
