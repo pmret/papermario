@@ -49,7 +49,7 @@ s32 N(EntityTattles)[] = {
     ENTITY_TYPE_CHEST,                MSG_EntityTattle_Chest,
     ENTITY_TYPE_WOODEN_CRATE,         MSG_EntityTattle_WoodenCrate_CantBreak,
     ENTITY_TYPE_BOARDED_FLOOR,        MSG_EntityTattle_BoardedFloor_CantBreak,
-    ENTITY_TYPE_STAR_BOX_LAUNCHER,     MSG_EntityTattle_JackInTheBox_SpinJump,
+    ENTITY_TYPE_STAR_BOX_LAUNCHER,    MSG_EntityTattle_JackInTheBox_SpinJump,
     ENTITY_TYPE_BELLBELL_PLANT,       MSG_EntityTattle_BellbellPlant,
     ENTITY_TYPE_TRUMPET_PLANT,        MSG_EntityTattle_TrumpetPlant,
     ENTITY_TYPE_CYMBAL_PLANT,         MSG_EntityTattle_CymbalBush,

@@ -149,7 +149,7 @@ Gfx* ModelRenderModes[] = {
 	[RENDER_MODE_IDX_3C] Gfx_RM3_CLOUD_NO_ZB,
 };
 
-Gfx ModelCombineModesA[21][5] = {
+Gfx ModelCombineModesStandard[21][5] = {
     {
         gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
@@ -297,7 +297,7 @@ Gfx ModelCombineModesA[21][5] = {
     },
 };
 
-Gfx ModelCombineModesB[21][5] = {
+Gfx ModelCombineModesAlphaTest[21][5] = {
     {
         gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
@@ -1261,7 +1261,7 @@ enum {
     TILE_MODE_1A        = 1, // render modes are single-cycle
     TILE_MODE_2A        = 2, // render modes are two-cycle, starting with G_RM_PASS
     TILE_MODE_3A        = 3, // render modes are two-cycle, starting with G_RM_FOG_SHADE_A
-    TILE_MODE_1B        = 4,
+    TILE_MODE_1B        = 4, // render modes use Gfx_RM2_SURFACE_OPA, but overwrite
     TILE_MODE_2B        = 5,
     TILE_MODE_3B        = 6,
     TILE_MODE_1C        = 10,
@@ -1445,9 +1445,9 @@ void appendGfx_model(void* data) {
         }
 
         if (renderMode != RENDER_MODE_ALPHATEST && renderMode != RENDER_MODE_ALPHATEST_ONESIDED) {
-            *(*gfxPos) = ModelCombineModesA[combineType][combineSubType];
+            *(*gfxPos) = ModelCombineModesStandard[combineType][combineSubType];
         } else {
-            *(*gfxPos) = ModelCombineModesB[combineType][combineSubType];
+            *(*gfxPos) = ModelCombineModesAlphaTest[combineType][combineSubType];
         }
         (*gfxPos)++;
     }
@@ -1661,61 +1661,61 @@ void appendGfx_model(void* data) {
             gSPDisplayList((*gfxPos)++, ModelRenderModes[RENDER_MODE_IDX_10]);
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_OPA_SURF2);
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_DECAL2);
                     break;
                 case RENDER_MODE_DECAL_OPA_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_OPA_DECAL2);
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_INTER2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_INTER2);
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_TEX_EDGE2);
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_TEX_EDGE2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER2:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_DECAL2);
                     break;
                 case RENDER_MODE_DECAL_XLU_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_DECAL2);
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_INTER2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_INTER2);
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_OPA_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_OPA_SURF2);
                     break;
                 case RENDER_MODE_ALPHATEST_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_TEX_EDGE2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_TEX_EDGE2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_XLU_SURF2);
                     break;
                 case RENDER_MODE_CLOUD:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_CLD_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_CLD_SURF2);
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_CLD_SURF2);
                     break;
             }
             gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
@@ -3055,7 +3055,7 @@ void make_texture_gfx(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_P
         renderType = header->extraTiles * 3 + 1 + header->colorCombineSubType;
     }
 
-    **gfxPos = ModelCombineModesA[renderType][0];
+    **gfxPos = ModelCombineModesStandard[renderType][0];
     (*gfxPos)++;
 
     switch (extraTileType) {
