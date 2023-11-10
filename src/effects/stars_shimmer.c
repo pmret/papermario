@@ -274,7 +274,7 @@ void stars_shimmer_render(EffectInstance* effect) {
     renderTask.appendGfx = stars_shimmer_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.dist = 0;
-    renderTask.renderMode = RENDER_MODE_2D;
+    renderTask.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
 
     retTask = queue_render_task(&renderTask);
 }
@@ -282,14 +282,14 @@ void stars_shimmer_render(EffectInstance* effect) {
 void stars_shimmer_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98;
     StarsShimmerFXData* data = ((EffectInstance*)effect)->data.starsShimmer;
-    s32 type;
+    s32 state;
     s32 temp_s4;
     s32 unk_28;
     f32 rf, gf, bf;
     s32 r, g, b;
     s32 i;
 
-    type = data->state;
+    state = data->state;
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
@@ -300,7 +300,7 @@ void stars_shimmer_appendGfx(void* effect) {
     guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
 
-    switch (type) {
+    switch (state) {
         case 0:
         case 1:
         case 2:

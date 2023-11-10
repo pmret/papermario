@@ -1048,19 +1048,6 @@ typedef struct CollisionData {
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
-typedef struct ModelGroupData {
-    /* 0x00 */ Mtx* transformMatrix;
-    /* 0x04 */ Lightsn* lightingGroup;
-    /* 0x08 */ s32 numLights;
-    /* 0x0C */ s32 numChildren;
-    /* 0x10 */ struct ModelNode** childList;
-} ModelGroupData; // size = 0x14
-
-typedef struct ModelDisplayData {
-    /* 0x0 */ Gfx* displayList;
-    /* 0x4 */ char unk_04[0x4];
-} ModelDisplayData; // size = 0x8
-
 typedef struct AnimatorNode {
     /* 0x00 */ Gfx* displayList;
     /* 0x04 */ struct AnimatorNode* children[32];

@@ -276,6 +276,8 @@
 
 #define PACK_PAL_RGBA(r, g, b, a) (((r) << 11) | ((g) << 6) | ((b) << 1) | (a));
 
+#define PM_RM_TILEMODE_B    GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA)
+
 #define PM_CC_01        0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
 #define PM_CC_02        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
 #define PM_CC_03        TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0
@@ -301,6 +303,12 @@
 
 #define PM_CC_16        COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED
 #define PM_CC_17        COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED
+
+#define PM_CC_18        COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED
+#define PM_CC_19        COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED
+#define PM_CC_1A        COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED
+
+#define PM_CC_ALT_TRILERP   TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0
 
 // custom cycle1 modes for window styles
 #define PM_CC_WINDOW_2              PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, TEXEL1

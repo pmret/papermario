@@ -20,8 +20,8 @@ extern Addr icon_ROM_START;
 
 extern SparkleScript SparkleScript_Coin;
 
-extern Gfx D_8014B870[];
-extern Gfx D_8014BBD8[];
+extern Gfx Gfx_RM1_ALPHATEST[];
+extern Gfx Gfx_RM2_ALPHATEST[];
 extern Lights1 ItemEntityLights;
 
 extern HudCacheEntry* gHudElementCacheTableRaster;
@@ -946,9 +946,9 @@ void appendGfx_item_entity(void* data) {
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (gSpriteShadingProfile->flags != 0) {
-        gSPDisplayList(gMainGfxPos++, D_8014BBD8);
+        gSPDisplayList(gMainGfxPos++, Gfx_RM2_ALPHATEST);
     } else {
-        gSPDisplayList(gMainGfxPos++, D_8014B870);
+        gSPDisplayList(gMainGfxPos++, Gfx_RM1_ALPHATEST);
     }
     gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
     gSPDisplayList(gMainGfxPos++, D_8014C620);
@@ -1153,9 +1153,9 @@ void render_item_entities(void) {
                         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
                         if (gSpriteShadingProfile->flags != 0) {
-                            gSPDisplayList(gMainGfxPos++, D_8014BBD8);
+                            gSPDisplayList(gMainGfxPos++, Gfx_RM2_ALPHATEST);
                         } else {
-                            gSPDisplayList(gMainGfxPos++, D_8014B870);
+                            gSPDisplayList(gMainGfxPos++, Gfx_RM1_ALPHATEST);
                         }
                         gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                         gSPDisplayList(gMainGfxPos++, D_8014C620);

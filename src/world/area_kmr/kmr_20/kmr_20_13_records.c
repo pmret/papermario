@@ -182,7 +182,7 @@ void N(appendGfx_records)(void* data) {
 void N(worker_draw_game_records)(void) {
     RenderTask rt;
 
-    rt.renderMode = RENDER_MODE_2D;
+    rt.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
     rt.appendGfxArg = NULL;
     rt.appendGfx = N(appendGfx_records);
     rt.dist = 0;

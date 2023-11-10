@@ -111,7 +111,7 @@ void snowflake_render(EffectInstance* effect) {
     renderTaskPtr->appendGfx = &snowflake_appendGfx;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->dist = 0;
-    renderTaskPtr->renderMode = RENDER_MODE_2D;
+    renderTaskPtr->renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
 
     retTask = queue_render_task(renderTaskPtr);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;

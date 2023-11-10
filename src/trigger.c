@@ -290,7 +290,7 @@ s32 should_collider_allow_interact(s32 colliderID) {
         if (trigger != NULL
             && trigger->hasPlayerInteractPrompt != 0
             && trigger->location.colliderID == colliderID
-            &&  trigger->flags & TRIGGER_WALL_PRESS_A
+            && trigger->flags & TRIGGER_WALL_PRESS_A
         ) {
             return TRUE;
         }

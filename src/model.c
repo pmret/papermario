@@ -11,7 +11,7 @@
 
 SHIFT_BSS u8* gBackgroundFogModePtr;
 SHIFT_BSS ModelList* gCurrentModels;
-SHIFT_BSS ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
+SHIFT_BSS ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 
 extern Addr MapTextureMemory;
 
@@ -22,135 +22,134 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
-extern Gfx D_8014B7F8[];
-extern Gfx D_8014B820[];
-extern Gfx D_8014B848[];
-extern Gfx D_8014B870[];
-extern Gfx D_8014B898[];
-extern Gfx D_8014B8C0[];
-extern Gfx D_8014B8E8[];
-extern Gfx D_8014B910[];
-extern Gfx D_8014B938[];
-extern Gfx D_8014B960[];
-extern Gfx D_8014B988[];
-extern Gfx D_8014B9B0[];
-extern Gfx D_8014B9D8[];
-extern Gfx D_8014BA00[];
-extern Gfx D_8014BA20[];
-extern Gfx D_8014BA48[];
-extern Gfx D_8014BA70[];
-extern Gfx D_8014BA98[];
-extern Gfx D_8014BAC0[];
-extern Gfx D_8014BAE8[];
-extern Gfx D_8014BB10[];
-extern Gfx D_8014BB38[];
-extern Gfx D_8014BB60[];
-extern Gfx D_8014BB88[];
-extern Gfx D_8014BBB0[];
-extern Gfx D_8014BBD8[];
-extern Gfx D_8014BC00[];
-extern Gfx D_8014BC28[];
-extern Gfx D_8014BC50[];
-extern Gfx D_8014BC78[];
-extern Gfx D_8014BCA0[];
-extern Gfx D_8014BCC8[];
-extern Gfx D_8014BCF8[];
-extern Gfx D_8014BD18[];
-extern Gfx D_8014BD40[];
-extern Gfx D_8014BD68[];
-extern Gfx D_8014BD88[];
-extern Gfx D_8014BDB0[];
-extern Gfx D_8014BDD8[];
-extern Gfx D_8014BE00[];
-extern Gfx D_8014BE28[];
-extern Gfx D_8014BE50[];
-extern Gfx D_8014BE78[];
-extern Gfx D_8014BEA0[];
-extern Gfx D_8014BEC8[];
-extern Gfx D_8014BEF0[];
-extern Gfx D_8014BF18[];
-extern Gfx D_8014BF40[];
-extern Gfx D_8014BF68[];
-extern Gfx D_8014BF90[];
-extern Gfx D_8014BFB8[];
-extern Gfx D_8014BFE0[];
-extern Gfx D_8014C008[];
-extern Gfx D_8014C028[];
-extern Gfx D_8014C050[];
-extern Gfx D_8014C078[];
-extern Gfx D_8014C098[];
-extern Gfx D_8014C0C0[];
-extern Gfx D_8014C0E8[];
-extern Gfx D_8014C110[];
-extern Gfx D_8014C138[];
-extern Gfx D_8014C160[];
+extern Gfx Gfx_RM1_SURFACE_OPA[];
+extern Gfx Gfx_RM1_DECAL_OPA[];
+extern Gfx Gfx_RM1_INTERSECTING_OPA[];
+extern Gfx Gfx_RM1_ALPHATEST[];
+extern Gfx Gfx_RM1_SURFACE_XLU[];
+extern Gfx Gfx_RM1_DECAL_XLU[];
+extern Gfx Gfx_RM1_INTERSECTING_XLU[];
+extern Gfx Gfx_RM1_SURFACE_OPA_NO_AA[];
+extern Gfx Gfx_RM1_DECAL_OPA_NO_AA[];
+extern Gfx Gfx_RM1_INTERSECTING_OPA_NO_AA[];
+extern Gfx Gfx_RM1_ALPHATEST_ONESIDED[];
+extern Gfx Gfx_RM1_SURFACE_XLU_NO_AA[];
+extern Gfx Gfx_RM1_DECAL_XLU_NO_AA[];
+extern Gfx Gfx_RM1_PASS_THROUGH[];
+extern Gfx Gfx_RM1_SURFACE_XLU_AA_ZB_ZUPD[];
+extern Gfx Gfx_RM1_SURFACE_OPA_NO_ZB[];
+extern Gfx Gfx_RM1_ALPHATEST_NO_ZB[];
+extern Gfx Gfx_RM1_SURFACE_XLU_NO_ZB[];
+extern Gfx Gfx_RM1_SURFACE_XLU_ZB_ZUPD[];
+extern Gfx Gfx_RM1_CLOUD_NO_ZCMP[];
+extern Gfx Gfx_RM1_CLOUD[];
+extern Gfx Gfx_RM1_CLOUD_NO_ZB[];
+extern Gfx Gfx_RM2_SURFACE_OPA[];
+extern Gfx Gfx_RM2_DECAL_OPA[];
+extern Gfx Gfx_RM2_INTERSECTING_OPA[];
+extern Gfx Gfx_RM2_ALPHATEST[];
+extern Gfx Gfx_RM2_SURFACE_XLU[];
+extern Gfx Gfx_RM2_DECAL_XLU[];
+extern Gfx Gfx_RM2_INTERSECTING_XLU[];
+extern Gfx Gfx_RM2_SURFACE_OPA_NO_AA[];
+extern Gfx Gfx_RM2_DECAL_OPA_NO_AA[];
+extern Gfx Gfx_RM2_INTERSECTING_OPA_NO_AA[];
+extern Gfx Gfx_RM2_ALPHATEST_ONESIDED[];
+extern Gfx Gfx_RM2_SURFACE_XLU_NO_AA[];
+extern Gfx Gfx_RM2_DECAL_XLU_NO_AA[];
+extern Gfx Gfx_RM2_PASS_THROUGH[];
+extern Gfx Gfx_RM2_SURFACE_XLU_AA_ZB_ZUPD[];
+extern Gfx Gfx_RM2_SURFACE_OPA_NO_ZB[];
+extern Gfx Gfx_RM2_ALPHATEST_NO_ZB[];
+extern Gfx Gfx_RM2_SURFACE_XLU_NO_ZB[];
+extern Gfx Gfx_RM2_CLOUD[];
+extern Gfx Gfx_RM2_CLOUD_NO_ZB[];
+extern Gfx Gfx_RM3_SURFACE_OPA[];
+extern Gfx Gfx_RM3_DECAL_OPA[];
+extern Gfx Gfx_RM3_INTERSECTING_OPA[];
+extern Gfx Gfx_RM3_ALPHATEST[];
+extern Gfx Gfx_RM3_SURFACE_XLU[];
+extern Gfx Gfx_RM3_DECAL_XLU[];
+extern Gfx Gfx_RM3_INTERSECTING_XLU[];
+extern Gfx Gfx_RM3_SURFACE_OPA_NO_AA[];
+extern Gfx Gfx_RM3_DECAL_OPA_NO_AA[];
+extern Gfx Gfx_RM3_INTERSECTING_OPA_NO_AA[];
+extern Gfx Gfx_RM3_ALPHATEST_ONESIDED[];
+extern Gfx Gfx_RM3_SURFACE_XLU_NO_AA[];
+extern Gfx Gfx_RM3_DECAL_XLU_NO_AA[];
+extern Gfx Gfx_RM3_PASS_THROUGH[];
+extern Gfx Gfx_RM3_SURFACE_XLU_AA_ZB_ZUPD[];
+extern Gfx Gfx_RM3_SURFACE_OPA_NO_ZB[];
+extern Gfx Gfx_RM3_ALPHATEST_NO_ZB[];
+extern Gfx Gfx_RM3_SURFACE_XLU_NO_ZB[];
+extern Gfx Gfx_RM3_CLOUD[];
+extern Gfx Gfx_RM3_CLOUD_NO_ZB[];
 
 Gfx* ModelRenderModes[] = {
-	[RENDER_MODE_IDX_00] D_8014B7F8,
-	[RENDER_MODE_IDX_01] D_8014B910,
-	[RENDER_MODE_IDX_02] D_8014B820,
-	[RENDER_MODE_IDX_03] D_8014B938,
-	[RENDER_MODE_IDX_04] D_8014B848,
-	[RENDER_MODE_IDX_05] D_8014B960,
-	[RENDER_MODE_IDX_06] D_8014B870,
-	[RENDER_MODE_IDX_07] D_8014B988,
-	[RENDER_MODE_IDX_08] D_8014B898,
-	[RENDER_MODE_IDX_09] D_8014BA20,
-	[RENDER_MODE_IDX_0A] D_8014B9B0,
-	[RENDER_MODE_IDX_0B] D_8014BAC0,
-	[RENDER_MODE_IDX_0C] D_8014B8C0,
-	[RENDER_MODE_IDX_0D] D_8014B9D8,
-	[RENDER_MODE_IDX_0E] D_8014B8E8,
-	[RENDER_MODE_IDX_0F] D_8014BA00,
-	[RENDER_MODE_IDX_10] D_8014BB60,
-	[RENDER_MODE_IDX_11] D_8014BC78,
-	[RENDER_MODE_IDX_12] D_8014BB88,
-	[RENDER_MODE_IDX_13] D_8014BCA0,
-	[RENDER_MODE_IDX_14] D_8014BBB0,
-	[RENDER_MODE_IDX_15] D_8014BCC8,
-	[RENDER_MODE_IDX_16] D_8014BBD8,
-	[RENDER_MODE_IDX_17] D_8014BCF8,
-	[RENDER_MODE_IDX_18] D_8014BC00,
-	[RENDER_MODE_IDX_19] D_8014BD88,
-	[RENDER_MODE_IDX_1A] D_8014BD18,
-	[RENDER_MODE_IDX_1B] D_8014BC28,
-	[RENDER_MODE_IDX_1C] D_8014BD40,
-	[RENDER_MODE_IDX_1D] D_8014BC50,
-	[RENDER_MODE_IDX_1E] D_8014BD68,
-	[RENDER_MODE_IDX_1F] D_8014BE78,
-	[RENDER_MODE_IDX_20] D_8014BF90,
-	[RENDER_MODE_IDX_21] D_8014BEA0,
-	[RENDER_MODE_IDX_22] D_8014BFB8,
-	[RENDER_MODE_IDX_23] D_8014BEC8,
-	[RENDER_MODE_IDX_24] D_8014BFE0,
-	[RENDER_MODE_IDX_25] D_8014BEF0,
-	[RENDER_MODE_IDX_26] D_8014C008,
-	[RENDER_MODE_IDX_27] D_8014BF18,
-	[RENDER_MODE_IDX_28] D_8014C098,
-	[RENDER_MODE_IDX_29] D_8014C028,
-	[RENDER_MODE_IDX_2A] D_8014BF40,
-	[RENDER_MODE_IDX_2B] D_8014C050,
-	[RENDER_MODE_IDX_2C] D_8014BF68,
-	[RENDER_MODE_IDX_2D] D_8014C078,
-	[RENDER_MODE_IDX_2E] D_8014BA48,
-	[RENDER_MODE_IDX_2F] D_8014BA70,
-	[RENDER_MODE_IDX_30] D_8014BA98,
-	[RENDER_MODE_IDX_31] D_8014BDB0,
-	[RENDER_MODE_IDX_32] D_8014BDD8,
-	[RENDER_MODE_IDX_33] D_8014BE00,
-	[RENDER_MODE_IDX_34] D_8014C0C0,
-	[RENDER_MODE_IDX_35] D_8014C0E8,
-	[RENDER_MODE_IDX_36] D_8014C110,
-	[RENDER_MODE_IDX_37] D_8014BB10,
-	[RENDER_MODE_IDX_38] D_8014BB38,
-	[RENDER_MODE_IDX_39] D_8014BE28,
-	[RENDER_MODE_IDX_3A] D_8014BE50,
-	[RENDER_MODE_IDX_3B] D_8014C138,
-	[RENDER_MODE_IDX_3C] D_8014C160,
-	[RENDER_MODE_IDX_3D] NULL
+	[RENDER_MODE_IDX_00] Gfx_RM1_SURFACE_OPA,
+	[RENDER_MODE_IDX_01] Gfx_RM1_SURFACE_OPA_NO_AA,
+	[RENDER_MODE_IDX_02] Gfx_RM1_DECAL_OPA,
+	[RENDER_MODE_IDX_03] Gfx_RM1_DECAL_OPA_NO_AA,
+	[RENDER_MODE_IDX_04] Gfx_RM1_INTERSECTING_OPA,
+	[RENDER_MODE_IDX_05] Gfx_RM1_INTERSECTING_OPA_NO_AA,
+	[RENDER_MODE_IDX_06] Gfx_RM1_ALPHATEST,
+	[RENDER_MODE_IDX_07] Gfx_RM1_ALPHATEST_ONESIDED,
+	[RENDER_MODE_IDX_08] Gfx_RM1_SURFACE_XLU,
+	[RENDER_MODE_IDX_09] Gfx_RM1_SURFACE_XLU_AA_ZB_ZUPD,
+	[RENDER_MODE_IDX_0A] Gfx_RM1_SURFACE_XLU_NO_AA,
+	[RENDER_MODE_IDX_0B] Gfx_RM1_SURFACE_XLU_ZB_ZUPD,
+	[RENDER_MODE_IDX_0C] Gfx_RM1_DECAL_XLU,
+	[RENDER_MODE_IDX_0D] Gfx_RM1_DECAL_XLU_NO_AA,
+	[RENDER_MODE_IDX_0E] Gfx_RM1_INTERSECTING_XLU,
+	[RENDER_MODE_IDX_0F] Gfx_RM1_PASS_THROUGH,
+	[RENDER_MODE_IDX_10] Gfx_RM2_SURFACE_OPA,
+	[RENDER_MODE_IDX_11] Gfx_RM2_SURFACE_OPA_NO_AA,
+	[RENDER_MODE_IDX_12] Gfx_RM2_DECAL_OPA,
+	[RENDER_MODE_IDX_13] Gfx_RM2_DECAL_OPA_NO_AA,
+	[RENDER_MODE_IDX_14] Gfx_RM2_INTERSECTING_OPA,
+	[RENDER_MODE_IDX_15] Gfx_RM2_INTERSECTING_OPA_NO_AA,
+	[RENDER_MODE_IDX_16] Gfx_RM2_ALPHATEST,
+	[RENDER_MODE_IDX_17] Gfx_RM2_ALPHATEST_ONESIDED,
+	[RENDER_MODE_IDX_18] Gfx_RM2_SURFACE_XLU,
+	[RENDER_MODE_IDX_19] Gfx_RM2_SURFACE_XLU_AA_ZB_ZUPD,
+	[RENDER_MODE_IDX_1A] Gfx_RM2_SURFACE_XLU_NO_AA,
+	[RENDER_MODE_IDX_1B] Gfx_RM2_DECAL_XLU,
+	[RENDER_MODE_IDX_1C] Gfx_RM2_DECAL_XLU_NO_AA,
+	[RENDER_MODE_IDX_1D] Gfx_RM2_INTERSECTING_XLU,
+	[RENDER_MODE_IDX_1E] Gfx_RM2_PASS_THROUGH,
+	[RENDER_MODE_IDX_1F] Gfx_RM3_SURFACE_OPA,
+	[RENDER_MODE_IDX_20] Gfx_RM3_SURFACE_OPA_NO_AA,
+	[RENDER_MODE_IDX_21] Gfx_RM3_DECAL_OPA,
+	[RENDER_MODE_IDX_22] Gfx_RM3_DECAL_OPA_NO_AA,
+	[RENDER_MODE_IDX_23] Gfx_RM3_INTERSECTING_OPA,
+	[RENDER_MODE_IDX_24] Gfx_RM3_INTERSECTING_OPA_NO_AA,
+	[RENDER_MODE_IDX_25] Gfx_RM3_ALPHATEST,
+	[RENDER_MODE_IDX_26] Gfx_RM3_ALPHATEST_ONESIDED,
+	[RENDER_MODE_IDX_27] Gfx_RM3_SURFACE_XLU,
+	[RENDER_MODE_IDX_28] Gfx_RM3_SURFACE_XLU_AA_ZB_ZUPD,
+	[RENDER_MODE_IDX_29] Gfx_RM3_SURFACE_XLU_NO_AA,
+	[RENDER_MODE_IDX_2A] Gfx_RM3_DECAL_XLU,
+	[RENDER_MODE_IDX_2B] Gfx_RM3_DECAL_XLU_NO_AA,
+	[RENDER_MODE_IDX_2C] Gfx_RM3_INTERSECTING_XLU,
+	[RENDER_MODE_IDX_2D] Gfx_RM3_PASS_THROUGH,
+	[RENDER_MODE_IDX_2E] Gfx_RM1_SURFACE_OPA_NO_ZB,
+	[RENDER_MODE_IDX_2F] Gfx_RM1_ALPHATEST_NO_ZB,
+	[RENDER_MODE_IDX_30] Gfx_RM1_SURFACE_XLU_NO_ZB,
+	[RENDER_MODE_IDX_31] Gfx_RM2_SURFACE_OPA_NO_ZB,
+	[RENDER_MODE_IDX_32] Gfx_RM2_ALPHATEST_NO_ZB,
+	[RENDER_MODE_IDX_33] Gfx_RM2_SURFACE_XLU_NO_ZB,
+	[RENDER_MODE_IDX_34] Gfx_RM3_SURFACE_OPA_NO_ZB,
+	[RENDER_MODE_IDX_35] Gfx_RM3_ALPHATEST_NO_ZB,
+	[RENDER_MODE_IDX_36] Gfx_RM3_SURFACE_XLU_NO_ZB,
+	[RENDER_MODE_IDX_37] Gfx_RM1_CLOUD,
+	[RENDER_MODE_IDX_38] Gfx_RM1_CLOUD_NO_ZB,
+	[RENDER_MODE_IDX_39] Gfx_RM2_CLOUD,
+	[RENDER_MODE_IDX_3A] Gfx_RM2_CLOUD_NO_ZB,
+	[RENDER_MODE_IDX_3B] Gfx_RM3_CLOUD,
+	[RENDER_MODE_IDX_3C] Gfx_RM3_CLOUD_NO_ZB,
 };
 
-Gfx ModelCombineModesA[21][5] = {
+Gfx ModelCombineModesStandard[21][5] = {
     {
         gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
@@ -179,28 +178,28 @@ Gfx ModelCombineModesA[21][5] = {
     },
     {
         gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_18),
         gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_19),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_1A),
     },
     {
         gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_18),
         gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_19),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_1A),
     },
     {
         gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_18),
         gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
-        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_19),
+        gsDPSetCombineMode(PM_CC_ALT_TRILERP, PM_CC_1A),
     },
     {
         gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
-        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
         gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
         gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
         gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
@@ -298,7 +297,7 @@ Gfx ModelCombineModesA[21][5] = {
     },
 };
 
-Gfx ModelCombineModesB[21][5] = {
+Gfx ModelCombineModesAlphaTest[21][5] = {
     {
         gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
@@ -522,10 +521,12 @@ DepthFloatFactors depthFloatLookupTable[] = {
 
 s32 gLastRenderTaskCount = 0;
 
-// padding?
-s32 D_8014B7F4 = 0;
+// ----------------------------------------------------------------------------
+// TILE_MODE_1A, basic AA variants
 
-Gfx D_8014B7F8[] = {
+// RENDER_MODE_IDX_00: RENDER_MODE_SURFACE_OPA, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_SURFACE_OPA[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
@@ -534,7 +535,9 @@ Gfx D_8014B7F8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B820[] = {
+// RENDER_MODE_IDX_02: RENDER_MODE_DECAL_OPA, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_DECAL_OPA[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_DECAL, G_RM_AA_ZB_OPA_DECAL2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
@@ -543,7 +546,9 @@ Gfx D_8014B820[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B848[] = {
+// RENDER_MODE_IDX_04: RENDER_MODE_INTERSECTING_OPA, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_INTERSECTING_OPA[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_INTER, G_RM_AA_ZB_OPA_INTER2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
@@ -552,7 +557,9 @@ Gfx D_8014B848[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B870[] = {
+// RENDER_MODE_IDX_06: RENDER_MODE_ALPHATEST, TILE_MODE_1A
+// used by entity models and item entities
+Gfx Gfx_RM1_ALPHATEST[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -560,7 +567,9 @@ Gfx D_8014B870[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B898[] = {
+// RENDER_MODE_IDX_08: RENDER_MODE_SURFACE_XLU, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_SURFACE_XLU[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -568,7 +577,9 @@ Gfx D_8014B898[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B8C0[] = {
+// RENDER_MODE_IDX_0C: RENDER_MODE_DECAL_XLU, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_DECAL_XLU[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -576,7 +587,9 @@ Gfx D_8014B8C0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B8E8[] = {
+// RENDER_MODE_IDX_0E: RENDER_MODE_INTERSECTING_XLU, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_INTERSECTING_XLU[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_XLU_INTER, G_RM_AA_ZB_XLU_INTER2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -584,7 +597,11 @@ Gfx D_8014B8E8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B910[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_1A, basic NO_AA variants
+
+// RENDER_MODE_IDX_01: RENDER_MODE_SURFACE_OPA_NO_AA, TILE_MODE_1A
+Gfx Gfx_RM1_SURFACE_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_ZB_OPA_SURF, G_RM_ZB_OPA_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -592,7 +609,8 @@ Gfx D_8014B910[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B938[] = {
+// RENDER_MODE_IDX_03: RENDER_MODE_DECAL_OPA_NO_AA, TILE_MODE_1A
+Gfx Gfx_RM1_DECAL_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_ZB_OPA_DECAL, G_RM_ZB_OPA_DECAL2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -600,7 +618,8 @@ Gfx D_8014B938[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B960[] = {
+// RENDER_MODE_IDX_05: unused
+Gfx Gfx_RM1_INTERSECTING_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_INTER, G_RM_AA_ZB_OPA_INTER2),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
@@ -608,7 +627,9 @@ Gfx D_8014B960[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B988[] = {
+// RENDER_MODE_IDX_07: RENDER_MODE_ALPHATEST_ONESIDED, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_ALPHATEST_ONESIDED[] = {
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -616,7 +637,9 @@ Gfx D_8014B988[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B9B0[] = {
+// RENDER_MODE_IDX_0A: RENDER_MODE_SURFACE_XLU_NO_AA, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_SURFACE_XLU_NO_AA[] = {
     gsDPSetRenderMode(G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -624,7 +647,9 @@ Gfx D_8014B9B0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014B9D8[] = {
+// RENDER_MODE_IDX_0D: RENDER_MODE_DECAL_XLU_NO_AA, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_DECAL_XLU_NO_AA[] = {
     gsDPSetRenderMode(G_RM_ZB_OVL_SURF, G_RM_ZB_OVL_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -632,14 +657,20 @@ Gfx D_8014B9D8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BA00[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_1A, special modes
+
+// RENDER_MODE_IDX_0F: unused
+// used by entity models for RENDER_MODE_PASS_THROUGH
+Gfx Gfx_RM1_PASS_THROUGH[] = {
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BA20[] = {
+// RENDER_MODE_IDX_09: RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD, TILE_MODE_1A
+Gfx Gfx_RM1_SURFACE_XLU_AA_ZB_ZUPD[] = {
     gsDPSetRenderMode(AA_EN | Z_CMP | Z_UPD | IM_RD | CLR_ON_CVG | CVG_DST_WRAP | ZMODE_XLU | FORCE_BL |
                       GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), AA_EN | Z_CMP | Z_UPD | IM_RD |
                       CLR_ON_CVG | CVG_DST_WRAP | ZMODE_XLU | FORCE_BL |
@@ -650,7 +681,9 @@ Gfx D_8014BA20[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BA48[] = {
+// RENDER_MODE_IDX_2E: RENDER_MODE_SURFACE_OPA_NO_ZB, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_SURFACE_OPA_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_AA_OPA_SURF, G_RM_AA_OPA_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -658,7 +691,9 @@ Gfx D_8014BA48[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BA70[] = {
+// RENDER_MODE_IDX_2F: RENDER_MODE_ALPHATEST_NO_ZB, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_ALPHATEST_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -666,7 +701,9 @@ Gfx D_8014BA70[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BA98[] = {
+// RENDER_MODE_IDX_30: RENDER_MODE_SURFACE_XLU_NO_ZB, TILE_MODE_1A
+// used by entity models
+Gfx Gfx_RM1_SURFACE_XLU_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -674,10 +711,12 @@ Gfx D_8014BA98[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BAC0[] = {
-    gsDPSetRenderMode(AA_EN | Z_CMP | Z_UPD | IM_RD | CLR_ON_CVG | CVG_DST_WRAP | ZMODE_XLU | FORCE_BL |
-                      GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), AA_EN | Z_CMP | Z_UPD | IM_RD |
-                      CLR_ON_CVG | CVG_DST_WRAP | ZMODE_XLU | FORCE_BL |
+// RENDER_MODE_IDX_0B: RENDER_MODE_SURFACE_XLU_ZB_ZUPD, TILE_MODE_1A
+// custom render mode similar to RM_AA_XLU_SURF, using ZMODE_XLU instead of ZMODE_OPA and setting Z_CMP | Z_UPD
+Gfx Gfx_RM1_SURFACE_XLU_ZB_ZUPD[] = {
+    gsDPSetRenderMode(AA_EN | IM_RD | CVG_DST_WRAP | CLR_ON_CVG | FORCE_BL | Z_CMP | Z_UPD |
+                      GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
+                      AA_EN | IM_RD | CVG_DST_WRAP | CLR_ON_CVG | FORCE_BL | Z_CMP | Z_UPD  | ZMODE_XLU |
                       GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA)),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -685,17 +724,22 @@ Gfx D_8014BAC0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BAE8[] = {
+// no corresponding RENDER_MODE_IDX
+// used by entity models for RENDER_MODE_CLOUD_NO_ZCMP
+// custom render mode is identical to RM_ZB_CLD_SURF, except leaving out Z_CMP
+Gfx Gfx_RM1_CLOUD_NO_ZCMP[] = {
     gsDPSetRenderMode(IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL |
-                      GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), IM_RD | CVG_DST_SAVE | ZMODE_XLU |
-                      FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA)),
+                      GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
+                      IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL |
+                      GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA)),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BB10[] = {
+// RENDER_MODE_IDX_37: RENDER_MODE_CLOUD, TILE_MODE_1A
+Gfx Gfx_RM1_CLOUD[] = {
     gsDPSetRenderMode(G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -703,7 +747,8 @@ Gfx D_8014BB10[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BB38[] = {
+// RENDER_MODE_IDX_38: RENDER_MODE_CLOUD_NO_ZB, TILE_MODE_1A
+Gfx Gfx_RM1_CLOUD_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -711,7 +756,11 @@ Gfx D_8014BB38[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BB60[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_2A, basic AA variants
+
+// RENDER_MODE_IDX_10: RENDER_MODE_SURFACE_OPA, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_OPA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -719,7 +768,8 @@ Gfx D_8014BB60[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BB88[] = {
+// RENDER_MODE_IDX_12: RENDER_MODE_DECAL_OPA, TILE_MODE_2A
+Gfx Gfx_RM2_DECAL_OPA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -727,7 +777,8 @@ Gfx D_8014BB88[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BBB0[] = {
+// RENDER_MODE_IDX_14: RENDER_MODE_INTERSECTING_OPA, TILE_MODE_2A
+Gfx Gfx_RM2_INTERSECTING_OPA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_INTER2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -735,7 +786,9 @@ Gfx D_8014BBB0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BBD8[] = {
+// RENDER_MODE_IDX_16: RENDER_MODE_ALPHATEST, TILE_MODE_2A
+// used by entity models, item entities with shading
+Gfx Gfx_RM2_ALPHATEST[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -743,7 +796,8 @@ Gfx D_8014BBD8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BC00[] = {
+// RENDER_MODE_IDX_18: RENDER_MODE_SURFACE_XLU, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_XLU[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -751,7 +805,8 @@ Gfx D_8014BC00[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BC28[] = {
+// RENDER_MODE_IDX_1B: RENDER_MODE_DECAL_XLU, TILE_MODE_2A
+Gfx Gfx_RM2_DECAL_XLU[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -759,7 +814,8 @@ Gfx D_8014BC28[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BC50[] = {
+// RENDER_MODE_IDX_1D: RENDER_MODE_INTERSECTING_XLU, TILE_MODE_2A
+Gfx Gfx_RM2_INTERSECTING_XLU[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_INTER2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -767,7 +823,11 @@ Gfx D_8014BC50[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BC78[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_2A, basic NO_AA variants
+
+// RENDER_MODE_IDX_11: RENDER_MODE_SURFACE_OPA_NO_AA, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_OPA_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -775,7 +835,8 @@ Gfx D_8014BC78[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BCA0[] = {
+// RENDER_MODE_IDX_13: RENDER_MODE_DECAL_OPA_NO_AA, TILE_MODE_2A
+Gfx Gfx_RM2_DECAL_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_OPA_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -783,7 +844,8 @@ Gfx D_8014BCA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BCC8[] = {
+// RENDER_MODE_IDX_15: unused
+Gfx Gfx_RM2_INTERSECTING_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_INTER2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -792,14 +854,16 @@ Gfx D_8014BCC8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BCF8[] = {
+// RENDER_MODE_IDX_17: RENDER_MODE_ALPHATEST_ONESIDED, TILE_MODE_2A
+Gfx Gfx_RM2_ALPHATEST_ONESIDED[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BD18[] = {
+// RENDER_MODE_IDX_1A: RENDER_MODE_SURFACE_XLU_NO_AA, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_XLU_NO_AA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -807,7 +871,8 @@ Gfx D_8014BD18[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BD40[] = {
+// RENDER_MODE_IDX_1C: RENDER_MODE_DECAL_XLU_NO_AA, TILE_MODE_2A
+Gfx Gfx_RM2_DECAL_XLU_NO_AA[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_XLU_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -815,14 +880,19 @@ Gfx D_8014BD40[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BD68[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_2A, special modes
+
+// RENDER_MODE_IDX_1E: unused
+Gfx Gfx_RM2_PASS_THROUGH[] = {
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BD88[] = {
+// RENDER_MODE_IDX_19: RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_XLU_AA_ZB_ZUPD[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -830,7 +900,8 @@ Gfx D_8014BD88[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BDB0[] = {
+// RENDER_MODE_IDX_31: RENDER_MODE_SURFACE_OPA_NO_ZB, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_OPA_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_OPA_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -838,7 +909,8 @@ Gfx D_8014BDB0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BDD8[] = {
+// RENDER_MODE_IDX_32: RENDER_MODE_ALPHATEST_NO_ZB, TILE_MODE_2A
+Gfx Gfx_RM2_ALPHATEST_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -846,7 +918,8 @@ Gfx D_8014BDD8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BE00[] = {
+// RENDER_MODE_IDX_33: RENDER_MODE_SURFACE_XLU_NO_ZB, TILE_MODE_2A
+Gfx Gfx_RM2_SURFACE_XLU_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_AA_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -854,7 +927,8 @@ Gfx D_8014BE00[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BE28[] = {
+// RENDER_MODE_IDX_39: RENDER_MODE_CLOUD, TILE_MODE_2A
+Gfx Gfx_RM2_CLOUD[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_CLD_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -862,7 +936,8 @@ Gfx D_8014BE28[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BE50[] = {
+// RENDER_MODE_IDX_3A: RENDER_MODE_CLOUD_NO_ZB, TILE_MODE_2A
+Gfx Gfx_RM2_CLOUD_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_PASS, G_RM_CLD_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -870,7 +945,12 @@ Gfx D_8014BE50[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BE78[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_3A+, basic AA variants
+
+// RENDER_MODE_IDX_1F: RENDER_MODE_SURFACE_OPA, TILE_MODE_3A / TILE_MODE_3B / TILE_MODE_1B / TILE_MODE_1C
+// used by entity models
+Gfx Gfx_RM3_SURFACE_OPA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -878,7 +958,9 @@ Gfx D_8014BE78[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BEA0[] = {
+// RENDER_MODE_IDX_21: RENDER_MODE_DECAL_OPA, TILE_MODE_3A / TILE_MODE_3B / TILE_MODE_1B / TILE_MODE_1C
+// used by entity models
+Gfx Gfx_RM3_DECAL_OPA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -886,7 +968,9 @@ Gfx D_8014BEA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BEC8[] = {
+// RENDER_MODE_IDX_23: RENDER_MODE_INTERSECTING_OPA, TILE_MODE_3A / TILE_MODE_3B / TILE_MODE_1B / TILE_MODE_1C
+// used by entity models
+Gfx Gfx_RM3_INTERSECTING_OPA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_INTER2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -894,7 +978,9 @@ Gfx D_8014BEC8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BEF0[] = {
+// RENDER_MODE_IDX_25: RENDER_MODE_ALPHATEST, TILE_MODE_3A / TILE_MODE_3B / TILE_MODE_1B / TILE_MODE_1C
+// used by entity models
+Gfx Gfx_RM3_ALPHATEST[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -902,7 +988,9 @@ Gfx D_8014BEF0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BF18[] = {
+// RENDER_MODE_IDX_27: RENDER_MODE_SURFACE_XLU, TILE_MODE_3A / TILE_MODE_3B
+// used by entity models
+Gfx Gfx_RM3_SURFACE_XLU[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -910,7 +998,9 @@ Gfx D_8014BF18[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BF40[] = {
+// RENDER_MODE_IDX_2A: RENDER_MODE_DECAL_XLU, TILE_MODE_3A / TILE_MODE_3B
+// used by entity models
+Gfx Gfx_RM3_DECAL_XLU[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -918,7 +1008,9 @@ Gfx D_8014BF40[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BF68[] = {
+// RENDER_MODE_IDX_2C: RENDER_MODE_INTERSECTING_XLU, TILE_MODE_3A / TILE_MODE_3B
+// used by entity models
+Gfx Gfx_RM3_INTERSECTING_XLU[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_INTER2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -926,7 +1018,11 @@ Gfx D_8014BF68[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BF90[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_3A+, basic NO_AA variants
+
+//RENDER_MODE_IDX_20: RENDER_MODE_SURFACE_OPA_NO_AA, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_SURFACE_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_ZB_OPA_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -934,7 +1030,8 @@ Gfx D_8014BF90[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BFB8[] = {
+// RENDER_MODE_IDX_22: RENDER_MODE_DECAL_OPA_NO_AA, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_DECAL_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_ZB_OPA_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -942,7 +1039,8 @@ Gfx D_8014BFB8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014BFE0[] = {
+// RENDER_MODE_IDX_24: unused
+Gfx Gfx_RM3_INTERSECTING_OPA_NO_AA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_INTER2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -950,14 +1048,16 @@ Gfx D_8014BFE0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C008[] = {
+// RENDER_MODE_IDX_26: RENDER_MODE_ALPHATEST_ONESIDED, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_ALPHATEST_ONESIDED[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C028[] = {
+// RENDER_MODE_IDX_29: RENDER_MODE_SURFACE_XLU_NO_AA, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_SURFACE_XLU_NO_AA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -965,7 +1065,8 @@ Gfx D_8014C028[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C050[] = {
+// RENDER_MODE_IDX_2B: RENDER_MODE_DECAL_XLU_NO_AA, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_DECAL_XLU_NO_AA[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_ZB_XLU_DECAL2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -973,14 +1074,19 @@ Gfx D_8014C050[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C078[] = {
+// ----------------------------------------------------------------------------
+// TILE_MODE_3A+, special modes
+
+// RENDER_MODE_IDX_2D: unused
+Gfx Gfx_RM3_PASS_THROUGH[] = {
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_FOG | G_LIGHTING | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C098[] = {
+// RENDER_MODE_IDX_28: RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_SURFACE_XLU_AA_ZB_ZUPD[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -988,7 +1094,8 @@ Gfx D_8014C098[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C0C0[] = {
+// RENDER_MODE_IDX_34: RENDER_MODE_SURFACE_OPA_NO_ZB, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_SURFACE_OPA_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_OPA_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -996,7 +1103,8 @@ Gfx D_8014C0C0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C0E8[] = {
+// RENDER_MODE_IDX_35: RENDER_MODE_ALPHATEST_NO_ZB, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_ALPHATEST_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_TEX_EDGE2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -1004,7 +1112,8 @@ Gfx D_8014C0E8[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C110[] = {
+// RENDER_MODE_IDX_36: RENDER_MODE_SURFACE_XLU_NO_ZB, TILE_MODE_3A / TILE_MODE_3B
+Gfx Gfx_RM3_SURFACE_XLU_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_XLU_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -1012,7 +1121,8 @@ Gfx D_8014C110[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C138[] = {
+// RENDER_MODE_IDX_3B: RENDER_MODE_CLOUD, TILE_MODE_3A / TILE_MODE_3B / TILE_MODE_1B / TILE_MODE_1C
+Gfx Gfx_RM3_CLOUD[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_ZB_CLD_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -1020,7 +1130,8 @@ Gfx D_8014C138[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8014C160[] = {
+// RENDER_MODE_IDX_3C: RENDER_MODE_CLOUD_NO_ZB, TILE_MODE_3A / TILE_MODE_3B / TILE_MODE_1B / TILE_MODE_1C
+Gfx Gfx_RM3_CLOUD_NO_ZB[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_CLD_SURF2),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsSPClearGeometryMode(G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH),
@@ -1028,58 +1139,58 @@ Gfx D_8014C160[] = {
     gsSPEndDisplayList(),
 };
 
-s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
+s32 RenderTaskBasePriorities[] = {
     [RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0]   = -100000,
     [RENDER_MODE_SURFACE_OPA]               = 1000000,
-    [RENDER_MODE_2]                         = 1000000,
+    [RENDER_MODE_02_UNUSED]                 = 1000000,
     [RENDER_MODE_SURFACE_OPA_NO_AA]         = 1000000,
     [RENDER_MODE_SURFACE_OPA_NO_ZB]         =       0,
     [RENDER_MODE_DECAL_OPA]                 = 1000000,
-    [RENDER_MODE_6]                         = 1000000,
+    [RENDER_MODE_06_UNUSED]                 = 1000000,
     [RENDER_MODE_DECAL_OPA_NO_AA]           = 1000000,
-    [RENDER_MODE_8]                         =       0,
+    [RENDER_MODE_08_UNUSED]                 =       0,
     [RENDER_MODE_INTERSECTING_OPA]          = 1000000,
-    [RENDER_MODE_A]                         = 1000000,
-    [RENDER_MODE_B]                         = 1000000,
-    [RENDER_MODE_C]                         =       0,
+    [RENDER_MODE_0A_UNUSED]                 = 1000000,
+    [RENDER_MODE_0B_UNUSED]                 = 1000000,
+    [RENDER_MODE_0C_UNUSED]                 =       0,
     [RENDER_MODE_ALPHATEST]                 = 1000000,
-    [RENDER_MODE_E]                         = 1000000,
+    [RENDER_MODE_0E_UNUSED]                 = 1000000,
     [RENDER_MODE_ALPHATEST_ONESIDED]        = 1000000,
     [RENDER_MODE_ALPHATEST_NO_ZB]           =       0,
     [RENDER_MODE_SURFACE_XLU_LAYER1]        = 8000000,
-    [RENDER_MODE_12]                        = 8000000,
+    [RENDER_MODE_12_UNUSED]                 = 8000000,
     [RENDER_MODE_SURFACE_XLU_NO_AA]         = 8000000,
     [RENDER_MODE_SURFACE_XLU_NO_ZB]         =       0,
-    [RENDER_MODE_SURFXLU_ZB_ZUPD]           = 8000000,
+    [RENDER_MODE_SURFACE_XLU_ZB_ZUPD]       = 8000000,
     [RENDER_MODE_SURFACE_XLU_LAYER2]        = 7500000,
-    [RENDER_MODE_17]                        = 7500000,
-    [RENDER_MODE_18]                        = 7500000,
-    [RENDER_MODE_19]                        =       0,
+    [RENDER_MODE_17_UNUSED]                 = 7500000,
+    [RENDER_MODE_18_UNUSED]                 = 7500000,
+    [RENDER_MODE_19_UNUSED]                 =       0,
     [RENDER_MODE_DECAL_XLU]                 = 7000000,
-    [RENDER_MODE_1B]                        = 7000000,
-    [RENDER_MODE_DECAL_XLU_NOAA]            = 7000000,
-    [RENDER_MODE_1D]                        = 7000000,
-    [RENDER_MODE_1E]                        = 6500000,
-    [RENDER_MODE_1F]                        = 6500000,
+    [RENDER_MODE_1B_UNUSED]                 = 7000000,
+    [RENDER_MODE_DECAL_XLU_NO_AA]           = 7000000,
+    [RENDER_MODE_1D_UNUSED]                 = 7000000,
+    [RENDER_MODE_DECAL_XLU_AHEAD]           = 6500000,
+    [RENDER_MODE_1F_UNUSED]                 = 6500000,
     [RENDER_MODE_SHADOW]                    = 6500000,
-    [RENDER_MODE_21]                        =       0,
+    [RENDER_MODE_21_UNUSED]                 =       0,
     [RENDER_MODE_SURFACE_XLU_LAYER3]        = 6000000,
-    [RENDER_MODE_23]                        = 6000000,
-    [RENDER_MODE_24]                        = 6000000,
-    [RENDER_MODE_25]                        =       0,
+    [RENDER_MODE_23_UNUSED]                 = 6000000,
+    [RENDER_MODE_24_UNUSED]                 = 6000000,
+    [RENDER_MODE_25_UNUSED]                 =       0,
     [RENDER_MODE_INTERSECTING_XLU]          = 5500000,
-    [RENDER_MODE_27]                        = 5500000,
-    [RENDER_MODE_28]                        = 5500000,
-    [RENDER_MODE_SURFXLU_AA_ZB_ZUPD]        = 8000000,
-    [RENDER_MODE_2A]                        = 4000000,
-    [RENDER_MODE_2B]                        = 4250000,
-    [RENDER_MODE_2C]                        = 4500000,
-    [RENDER_MODE_2D]                        = 4500000,
+    [RENDER_MODE_27_UNUSED]                 = 5500000,
+    [RENDER_MODE_PASS_THROUGH]              = 5500000,
+    [RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD]    = 8000000,
+    [RENDER_MODE_SURFACE_OPA_NO_ZB_BEHIND]  = 4000000,
+    [RENDER_MODE_ALPHATEST_NO_ZB_BEHIND]    = 4250000,
+    [RENDER_MODE_SURFACE_XLU_NO_ZB_BEHIND]  = 4500000,
+    [RENDER_MODE_CLOUD_NO_ZCMP]             = 4500000,
     [RENDER_MODE_CLOUD]                     = 8000000,
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-b8 D_8014C248 = FALSE;
+b8 D_8014C248 = FALSE; // possibly a 'warm-up done' flag for boot. never read.
 
 SHIFT_BSS ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 SHIFT_BSS ModelNode** gCurrentModelTreeRoot;
@@ -1105,8 +1216,8 @@ SHIFT_BSS ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
 
 SHIFT_BSS ModelNode* wModelTreeRoot;
 SHIFT_BSS ModelNode* bModelTreeRoot;
-SHIFT_BSS ModelTreeInfoList D_80152220;
-SHIFT_BSS ModelTreeInfoList D_80152A20;
+SHIFT_BSS ModelTreeInfoList wModelTreeNodeInfo;
+SHIFT_BSS ModelTreeInfoList bModelTreeNodeInfo;
 
 SHIFT_BSS s8 wBackgroundFogMode;
 SHIFT_BSS s8 bBackgroundFogMode;
@@ -1144,6 +1255,18 @@ s32 is_identity_fixed_mtx(Mtx* mtx);
 void build_custom_gfx(void);
 
 MATCHING_BSS(0x3A0);
+
+enum {
+    TILE_MODE_STRIDE    = 3,
+    TILE_MODE_1A        = 1, // render modes are single-cycle
+    TILE_MODE_2A        = 2, // render modes are two-cycle, starting with G_RM_PASS
+    TILE_MODE_3A        = 3, // render modes are two-cycle, starting with G_RM_FOG_SHADE_A
+    TILE_MODE_1B        = 4, // render modes use Gfx_RM2_SURFACE_OPA, but overwrite
+    TILE_MODE_2B        = 5,
+    TILE_MODE_3B        = 6,
+    TILE_MODE_1C        = 10,
+    TILE_MODE_2C        = 11,
+};
 
 void appendGfx_model(void* data) {
     Model* model = data;
@@ -1187,32 +1310,36 @@ void appendGfx_model(void* data) {
 
     renderMode = model->renderMode;
     combineSubType = 0;
+    
     if (textureHeader != NULL) {
         switch (extraTileType) {
             case EXTRA_TILE_NONE:
-                texturingMode = 1;
+                texturingMode = TILE_MODE_1A;
                 break;
             case EXTRA_TILE_MIPMAPS:
             case EXTRA_TILE_AUX_SAME_AS_MAIN:
             case EXTRA_TILE_AUX_INDEPENDENT:
-                texturingMode = 2;
+                texturingMode = TILE_MODE_2A;
                 break;
             default:
-                texturingMode = 1;
+                texturingMode = TILE_MODE_1A;
                 break;
         }
     } else {
-        texturingMode = 1;
+        texturingMode = TILE_MODE_1A;
     }
-    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_40)) {
-        texturingMode = 3;
-        combineSubType = 1;
+    
+    if (textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) {
+        if (gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_40)) {
+            texturingMode = TILE_MODE_3A;
+            combineSubType = 1;
+        }
     }
 
     // fog mode
     switch ((u32)(model->customGfxIndex >> 4)) {
         case FOG_MODE_1:
-            texturingMode += 3;
+            texturingMode += TILE_MODE_STRIDE;
             combineSubType = 2;
             break;
         case FOG_MODE_2:
@@ -1225,12 +1352,12 @@ void appendGfx_model(void* data) {
                                             mdl_renderModelFogColorG,
                                             mdl_renderModelFogColorB, 0);
                 gSPFogPosition((*gfxPos)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
-                texturingMode += 9;
+                texturingMode += TILE_MODE_STRIDE * 3;
                 combineSubType = 3;
             }
             break;
         case FOG_MODE_3:
-            texturingMode = 2;
+            texturingMode = TILE_MODE_2A;
             combineSubType = 4;
             gDPSetPrimColor((*gfxPos)++, 0, 0, gRenderModelPrimR,
                                                gRenderModelPrimG,
@@ -1244,32 +1371,32 @@ void appendGfx_model(void* data) {
     gDPPipeSync((*gfxPos)++);
 
     if (model->groupData != NULL) {
-        Lightsn* lightningGroup = model->groupData->lightingGroup;
+        Lightsn* lights = model->groupData->lightingGroup;
         if (model->groupData->lightingGroup != NULL) {
             switch (model->groupData->numLights) {
                 case 0:
-                    gSPSetLights0((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights0((*gfxPos)++, lights[0]);
                     break;
                 case 1:
-                    gSPSetLights1((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights1((*gfxPos)++, lights[0]);
                     break;
                 case 2:
-                    gSPSetLights2((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights2((*gfxPos)++, lights[0]);
                     break;
                 case 3:
-                    gSPSetLights3((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights3((*gfxPos)++, lights[0]);
                     break;
                 case 4:
-                    gSPSetLights4((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights4((*gfxPos)++, lights[0]);
                     break;
                 case 5:
-                    gSPSetLights5((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights5((*gfxPos)++, lights[0]);
                     break;
                 case 6:
-                    gSPSetLights6((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights6((*gfxPos)++, lights[0]);
                     break;
                 case 7:
-                    gSPSetLights7((*gfxPos)++, lightningGroup[0]);
+                    gSPSetLights7((*gfxPos)++, lights[0]);
                     break;
             }
         }
@@ -1306,27 +1433,27 @@ void appendGfx_model(void* data) {
     }
 
     if (combineSubType != 0 || renderMode == RENDER_MODE_ALPHATEST || renderMode == RENDER_MODE_ALPHATEST_ONESIDED) {
-        u32 v1 = 0;
+        u32 combineType = 0;
 
         if (textureHeader != NULL) {
             u32 colorCombineType = textureHeader->colorCombineType;
             if (colorCombineType >= 3) {
-                v1 = colorCombineType + 10;
+                combineType = colorCombineType + 10;
             } else {
-                v1 = extraTileType * 3 + 1 + textureHeader->colorCombineSubType;
+                combineType = extraTileType * 3 + 1 + textureHeader->colorCombineSubType;
             }
         }
 
         if (renderMode != RENDER_MODE_ALPHATEST && renderMode != RENDER_MODE_ALPHATEST_ONESIDED) {
-            *(*gfxPos) = ModelCombineModesA[v1][combineSubType];
+            *(*gfxPos) = ModelCombineModesStandard[combineType][combineSubType];
         } else {
-            *(*gfxPos) = ModelCombineModesB[v1][combineSubType];
+            *(*gfxPos) = ModelCombineModesAlphaTest[combineType][combineSubType];
         }
         (*gfxPos)++;
     }
 
     switch (texturingMode) {
-        case 1:
+        case TILE_MODE_1A:
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
                     renderModeIdx = RENDER_MODE_IDX_00;
@@ -1349,7 +1476,7 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_ALPHATEST_ONESIDED:
                     renderModeIdx = RENDER_MODE_IDX_07;
                     break;
-                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                case RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD:
                     renderModeIdx = RENDER_MODE_IDX_09;
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
@@ -1360,13 +1487,13 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_0A;
                     break;
-                case RENDER_MODE_SURFXLU_ZB_ZUPD:
+                case RENDER_MODE_SURFACE_XLU_ZB_ZUPD:
                     renderModeIdx = RENDER_MODE_IDX_0B;
                     break;
                 case RENDER_MODE_DECAL_XLU:
                     renderModeIdx = RENDER_MODE_IDX_0C;
                     break;
-                case RENDER_MODE_DECAL_XLU_NOAA:
+                case RENDER_MODE_DECAL_XLU_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_0D;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
@@ -1393,8 +1520,11 @@ void appendGfx_model(void* data) {
             }
             gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             break;
-        case 2:
+        case TILE_MODE_2A:
             switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_10;
+                    break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_11;
                     break;
@@ -1418,7 +1548,7 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
                     renderModeIdx = RENDER_MODE_IDX_18;
                     break;
-                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                case RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD:
                     renderModeIdx = RENDER_MODE_IDX_19;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
@@ -1427,7 +1557,7 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_DECAL_XLU:
                     renderModeIdx = RENDER_MODE_IDX_1B;
                     break;
-                case RENDER_MODE_DECAL_XLU_NOAA:
+                case RENDER_MODE_DECAL_XLU_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_1C;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
@@ -1448,162 +1578,17 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3A;
                     break;
-                case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = RENDER_MODE_IDX_10;
-                    break;
                 default:
                     renderModeIdx = RENDER_MODE_IDX_10;
                     break;
             }
             gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             break;
-        case 3:
-            temp = RENDER_MODE_IDX_25; // required to match
+        case TILE_MODE_3A:
             switch (renderMode) {
-                case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    renderModeIdx = RENDER_MODE_IDX_20;
-                    break;
-                case RENDER_MODE_DECAL_OPA:
-                    renderModeIdx = RENDER_MODE_IDX_21;
-                    break;
-                case RENDER_MODE_DECAL_OPA_NO_AA:
-                    renderModeIdx = RENDER_MODE_IDX_22;
-                    break;
-                case RENDER_MODE_INTERSECTING_OPA:
-                    renderModeIdx = RENDER_MODE_IDX_23;
-                    break;
-                case RENDER_MODE_ALPHATEST:
-                    renderModeIdx = temp;
-                    break;
-                case RENDER_MODE_ALPHATEST_ONESIDED:
-                    renderModeIdx = RENDER_MODE_IDX_26;
-                    break;
-                case RENDER_MODE_SURFACE_XLU_LAYER1:
-                case RENDER_MODE_SURFACE_XLU_LAYER2:
-                case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    renderModeIdx = RENDER_MODE_IDX_27;
-                    break;
-                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
-                    renderModeIdx = RENDER_MODE_IDX_28;
-                    break;
-                case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    renderModeIdx = RENDER_MODE_IDX_29;
-                    break;
-                case RENDER_MODE_DECAL_XLU:
-                    renderModeIdx = RENDER_MODE_IDX_2A;
-                    break;
-                case RENDER_MODE_DECAL_XLU_NOAA:
-                    renderModeIdx = RENDER_MODE_IDX_2B;
-                    break;
-                case RENDER_MODE_INTERSECTING_XLU:
-                    renderModeIdx = RENDER_MODE_IDX_2C;
-                    break;
-                case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    renderModeIdx = RENDER_MODE_IDX_34;
-                    break;
-                case RENDER_MODE_ALPHATEST_NO_ZB:
-                    renderModeIdx = RENDER_MODE_IDX_35;
-                    break;
-                case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    renderModeIdx = RENDER_MODE_IDX_36;
-                    break;
-                case RENDER_MODE_CLOUD:
-                    renderModeIdx = RENDER_MODE_IDX_3B;
-                    break;
-                case RENDER_MODE_CLOUD_NO_ZB:
-                    renderModeIdx = RENDER_MODE_IDX_3C;
-                    break;
                 case RENDER_MODE_SURFACE_OPA:
                     renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
-                default:
-                    renderModeIdx = RENDER_MODE_IDX_1F;
-                    break;
-            }
-            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
-            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
-                                            gCurrentFogSettings->color.g,
-                                            gCurrentFogSettings->color.b,
-                                            gCurrentFogSettings->color.a);
-            gSPFogPosition((*gfxPos)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
-            break;
-        case 4:
-        case 5:
-            if (mdl_bgMultiplyColorA == 255) {
-                return;
-            }
-            gSPDisplayList((*gfxPos)++, ModelRenderModes[RENDER_MODE_IDX_10]);
-            switch (renderMode) {
-                case RENDER_MODE_SURFACE_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
-                    break;
-                case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_SURF2);
-                    break;
-                case RENDER_MODE_DECAL_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_DECAL2);
-                    break;
-                case RENDER_MODE_DECAL_OPA_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_DECAL2);
-                    break;
-                case RENDER_MODE_INTERSECTING_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_INTER2);
-                    break;
-                case RENDER_MODE_ALPHATEST:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
-                    break;
-                case RENDER_MODE_ALPHATEST_ONESIDED:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
-                    break;
-                case RENDER_MODE_SURFACE_XLU_LAYER1:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
-                    break;
-                case RENDER_MODE_SURFACE_XLU_LAYER2:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
-                    break;
-                case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
-                    break;
-                case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_XLU_SURF2);
-                    break;
-                case RENDER_MODE_DECAL_XLU:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
-                    break;
-                case RENDER_MODE_DECAL_XLU_NOAA:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
-                    break;
-                case RENDER_MODE_INTERSECTING_XLU:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_INTER2);
-                    break;
-                case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_OPA_SURF2);
-                    break;
-                case RENDER_MODE_ALPHATEST_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_TEX_EDGE2);
-                    break;
-                case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_XLU_SURF2);
-                    break;
-                case RENDER_MODE_CLOUD:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_CLD_SURF2);
-                    break;
-                case RENDER_MODE_CLOUD_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
-                    break;
-            }
-            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
-                                            gCurrentFogSettings->color.g,
-                                            gCurrentFogSettings->color.b,
-                                            mdl_bgMultiplyColorA);
-            gDPSetBlendColor((*gfxPos)++, mdl_bgMultiplyColorR,
-                                              mdl_bgMultiplyColorG,
-                                              mdl_bgMultiplyColorB,
-                                              255);
-            gSPFogPosition((*gfxPos)++, 970, 1000);
-            break;
-        case 6:
-            switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_20;
                     break;
@@ -1627,7 +1612,7 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
                     renderModeIdx = RENDER_MODE_IDX_27;
                     break;
-                case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
+                case RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD:
                     renderModeIdx = RENDER_MODE_IDX_28;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
@@ -1636,7 +1621,7 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_DECAL_XLU:
                     renderModeIdx = RENDER_MODE_IDX_2A;
                     break;
-                case RENDER_MODE_DECAL_XLU_NOAA:
+                case RENDER_MODE_DECAL_XLU_NO_AA:
                     renderModeIdx = RENDER_MODE_IDX_2B;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
@@ -1657,8 +1642,149 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
+                default:
+                    renderModeIdx = RENDER_MODE_IDX_1F;
+                    break;
+            }
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
+                                            gCurrentFogSettings->color.g,
+                                            gCurrentFogSettings->color.b,
+                                            gCurrentFogSettings->color.a);
+            gSPFogPosition((*gfxPos)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
+            break;
+        case TILE_MODE_1B:
+        case TILE_MODE_2B:
+            if (mdl_bgMultiplyColorA == 255) {
+                return;
+            }
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[RENDER_MODE_IDX_10]);
+            switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_OPA_SURF2);
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_DECAL2);
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_OPA_DECAL2);
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_INTER2);
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_TEX_EDGE2);
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_TEX_EDGE2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_XLU_SURF2);
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_DECAL2);
+                    break;
+                case RENDER_MODE_DECAL_XLU_NO_AA:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_DECAL2);
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_INTER2);
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_OPA_SURF2);
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_TEX_EDGE2);
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_XLU_SURF2);
+                    break;
+                case RENDER_MODE_CLOUD:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_CLD_SURF2);
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_CLD_SURF2);
+                    break;
+            }
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
+                                            gCurrentFogSettings->color.g,
+                                            gCurrentFogSettings->color.b,
+                                            mdl_bgMultiplyColorA);
+            gDPSetBlendColor((*gfxPos)++, mdl_bgMultiplyColorR,
+                                              mdl_bgMultiplyColorG,
+                                              mdl_bgMultiplyColorB,
+                                              255);
+            gSPFogPosition((*gfxPos)++, 970, 1000);
+            break;
+        case TILE_MODE_3B:
+            switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
                     renderModeIdx = RENDER_MODE_IDX_1F;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_AA:
+                    renderModeIdx = RENDER_MODE_IDX_20;
+                    break;
+                case RENDER_MODE_DECAL_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_21;
+                    break;
+                case RENDER_MODE_DECAL_OPA_NO_AA:
+                    renderModeIdx = RENDER_MODE_IDX_22;
+                    break;
+                case RENDER_MODE_INTERSECTING_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_23;
+                    break;
+                case RENDER_MODE_ALPHATEST:
+                    renderModeIdx = RENDER_MODE_IDX_25;
+                    break;
+                case RENDER_MODE_ALPHATEST_ONESIDED:
+                    renderModeIdx = RENDER_MODE_IDX_26;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_LAYER1:
+                case RENDER_MODE_SURFACE_XLU_LAYER2:
+                case RENDER_MODE_SURFACE_XLU_LAYER3:
+                    renderModeIdx = RENDER_MODE_IDX_27;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD:
+                    renderModeIdx = RENDER_MODE_IDX_28;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_AA:
+                    renderModeIdx = RENDER_MODE_IDX_29;
+                    break;
+                case RENDER_MODE_DECAL_XLU:
+                    renderModeIdx = RENDER_MODE_IDX_2A;
+                    break;
+                case RENDER_MODE_DECAL_XLU_NO_AA:
+                    renderModeIdx = RENDER_MODE_IDX_2B;
+                    break;
+                case RENDER_MODE_INTERSECTING_XLU:
+                    renderModeIdx = RENDER_MODE_IDX_2C;
+                    break;
+                case RENDER_MODE_SURFACE_OPA_NO_ZB:
+                    renderModeIdx = RENDER_MODE_IDX_34;
+                    break;
+                case RENDER_MODE_ALPHATEST_NO_ZB:
+                    renderModeIdx = RENDER_MODE_IDX_35;
+                    break;
+                case RENDER_MODE_SURFACE_XLU_NO_ZB:
+                    renderModeIdx = RENDER_MODE_IDX_36;
+                    break;
+                case RENDER_MODE_CLOUD:
+                    renderModeIdx = RENDER_MODE_IDX_3B;
+                    break;
+                case RENDER_MODE_CLOUD_NO_ZB:
+                    renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
                 default:
                     renderModeIdx = RENDER_MODE_IDX_1F;
@@ -1676,9 +1802,12 @@ void appendGfx_model(void* data) {
             gDPSetFogColor(gMainGfxPos++, fogR, fogG, fogB, gCurrentFogSettings->color.a);
             gSPFogPosition((*gfxPos)++, fogMin, fogMax);
             break;
-        case 10:
-        case 11:
+        case TILE_MODE_1C:
+        case TILE_MODE_2C:
             switch (renderMode) {
+                case RENDER_MODE_SURFACE_OPA:
+                    renderModeIdx = RENDER_MODE_IDX_1F;
+                    break;
                 case RENDER_MODE_DECAL_OPA:
                     renderModeIdx = RENDER_MODE_IDX_21;
                     break;
@@ -1694,7 +1823,6 @@ void appendGfx_model(void* data) {
                 case RENDER_MODE_CLOUD_NO_ZB:
                     renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
-                case RENDER_MODE_SURFACE_OPA:
                 default:
                     renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
@@ -1836,7 +1964,7 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
     s32 mainSize;
 
     if (textureName == NULL) {
-        (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
+        (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
         return;
     }
 
@@ -1933,17 +2061,17 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
 
     if (romOffset >= startOffset + 0x40000) {
         // did not find the texture with `textureName`
-        (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
+        (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
         return;
     }
 
-    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = textureIdx + 1;
-    textureHandle = &mdl_textureHandles[(*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID];
+    (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID = textureIdx + 1;
+    textureHandle = &mdl_textureHandles[(*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID];
     romOffset += sizeof(*header);
 
     if (textureHandle->gfx == NULL) {
         load_texture_impl(romOffset, textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
-        load_texture_variants(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID, startOffset, size);
+        load_texture_variants(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID, startOffset, size);
     }
 }
 
@@ -2146,7 +2274,7 @@ void clear_model_data(void) {
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &wModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
-        mdl_currentModelTreeNodeInfo = &D_80152220;
+        gCurrentModelTreeNodeInfo = &wModelTreeNodeInfo;
         gBackgroundFogModePtr = &wBackgroundFogMode;
         mdl_bgMultiplyColorA = 0;
         mdl_bgMultiplyColorR = 0;
@@ -2160,7 +2288,7 @@ void clear_model_data(void) {
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &bModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
-        mdl_currentModelTreeNodeInfo = &D_80152A20;
+        gCurrentModelTreeNodeInfo = &bModelTreeNodeInfo;
         gBackgroundFogModePtr = &bBackgroundFogMode;
         gCurrentFogSettings = &bFogSettings;
     }
@@ -2180,10 +2308,10 @@ void clear_model_data(void) {
 
     *gCurrentModelTreeRoot = NULL;
 
-    for (i = 0; i < ARRAY_COUNT(*mdl_currentModelTreeNodeInfo); i++) {
-        (*mdl_currentModelTreeNodeInfo)[i].modelIndex = -1;
-        (*mdl_currentModelTreeNodeInfo)[i].treeDepth = 0;
-        (*mdl_currentModelTreeNodeInfo)[i].textureID = 0;
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModelTreeNodeInfo); i++) {
+        (*gCurrentModelTreeNodeInfo)[i].modelIndex = -1;
+        (*gCurrentModelTreeNodeInfo)[i].treeDepth = 0;
+        (*gCurrentModelTreeNodeInfo)[i].textureID = 0;
     }
 
     *gBackgroundFogModePtr = FOG_MODE_0;
@@ -2211,7 +2339,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &wModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
-        mdl_currentModelTreeNodeInfo = &D_80152220;
+        gCurrentModelTreeNodeInfo = &wModelTreeNodeInfo;
         gBackgroundFogModePtr = &wBackgroundFogMode;
         gCurrentFogSettings = &wFogSettings;
     } else {
@@ -2221,7 +2349,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &bModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
-        mdl_currentModelTreeNodeInfo = &D_80152A20;
+        gCurrentModelTreeNodeInfo = &bModelTreeNodeInfo;
         gBackgroundFogModePtr = &bBackgroundFogMode;
         gCurrentFogSettings = &bFogSettings;
     }
@@ -2313,7 +2441,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
         model->renderMode = RENDER_MODE_SURFACE_OPA;
     }
 
-    model->textureID = (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
+    model->textureID = (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
     model->textureVariation = 0;
 
     if (!is_identity_fixed_mtx(bp->mtx)) {
@@ -2358,7 +2486,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     if (model->bakedMtx == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
         model->flags |= MODEL_FLAG_DO_BOUNDS_CULLING;
     }
-    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
+    (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
 
 // Mysterious no-op
@@ -2714,11 +2842,11 @@ void render_models(void) {
 
 void appendGfx_model_group(void* data) {
     Model* model = data;
-    s32 modelTreeDepth = (*mdl_currentModelTreeNodeInfo)[model->modelID].treeDepth;
+    s32 modelTreeDepth = (*gCurrentModelTreeNodeInfo)[model->modelID].treeDepth;
     s32 i;
 
     for (i = model->modelID - 1; i >= 0; i--) {
-        if (modelTreeDepth >= (*mdl_currentModelTreeNodeInfo)[i].treeDepth) {
+        if (modelTreeDepth >= (*gCurrentModelTreeNodeInfo)[i].treeDepth) {
             break;
         }
     }
@@ -2760,7 +2888,7 @@ void func_80117D00(Model* model) {
                         newModel.renderMode = 0;
                     }
 
-                    newModel.textureID = (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
+                    newModel.textureID = (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
                     newModel.textureVariation = 0;
                     func_80117D00(&newModel);
                 }
@@ -2927,7 +3055,7 @@ void make_texture_gfx(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_P
         renderType = header->extraTiles * 3 + 1 + header->colorCombineSubType;
     }
 
-    **gfxPos = ModelCombineModesA[renderType][0];
+    **gfxPos = ModelCombineModesStandard[renderType][0];
     (*gfxPos)++;
 
     switch (extraTileType) {
@@ -3148,8 +3276,8 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
                                       treeDepth + 1);
             }
 
-            (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = -1;
-            (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
+            (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = -1;
+            (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
             mdl_treeIterPos += 1;
             return;
         }
@@ -3165,14 +3293,14 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
         s32 childCount = mdl_get_child_count(model);
 
         for (i = mdl_treeIterPos; i < mdl_treeIterPos + childCount; i++) {
-            (*mdl_currentModelTreeNodeInfo)[i].modelIndex = -1;
-            (*mdl_currentModelTreeNodeInfo)[i].treeDepth = treeDepth + 1;
+            (*gCurrentModelTreeNodeInfo)[i].modelIndex = -1;
+            (*gCurrentModelTreeNodeInfo)[i].treeDepth = treeDepth + 1;
         }
         mdl_treeIterPos += childCount;
     }
 
     mdl_create_model(modelBPptr, 4);
-    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
+    (*gCurrentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
     mdl_treeIterPos += 1;
 }
 
@@ -3180,7 +3308,7 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex) {
     s32 i;
 
     if (treeIndex < MAX_MODELS) {
-        u8 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+        u8 modelIndex = (*gCurrentModelTreeNodeInfo)[treeIndex].modelIndex;
 
         if (modelIndex != (u8)-1) {
             return modelIndex;
@@ -3419,20 +3547,20 @@ void clone_model(u16 srcModelID, u16 newModelID) {
 void set_model_group_visibility(u16 treeIndex, s32 flags, s32 mode) {
     s32 maxGroupIndex = -1;
     s32 minGroupIndex;
-    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 modelIndex = (*gCurrentModelTreeNodeInfo)[treeIndex].modelIndex;
     s32 siblingIndex;
     s32 i;
 
     if (modelIndex < MAX_MODELS - 1) {
         minGroupIndex = maxGroupIndex = modelIndex;
     } else {
-        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
+        s32 treeDepth = (*gCurrentModelTreeNodeInfo)[treeIndex].treeDepth;
         for (i = treeIndex - 1; i >= 0; i--) {
-            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+            if ((*gCurrentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
                 break;
             }
 
-            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+            siblingIndex = (*gCurrentModelTreeNodeInfo)[i].modelIndex;
 
             if (siblingIndex < MAX_MODELS - 1) {
                 if (maxGroupIndex == -1) {
@@ -3478,20 +3606,20 @@ void func_8011B950(u16 modelID, s32 customGfxIndex, s32 fogType, s32 arg3) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
-    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[modelID].modelIndex;
+    s32 modelIndex = (*gCurrentModelTreeNodeInfo)[modelID].modelIndex;
     s32 siblingIndex;
     s32 maskLow, maskHigh, packedFogType;
 
     if (modelIndex < MAX_MODELS - 1) {
         minGroupIndex = maxGroupIndex = modelIndex;
     } else {
-        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[modelID].treeDepth;
+        s32 treeDepth = (*gCurrentModelTreeNodeInfo)[modelID].treeDepth;
         for (i = modelID - 1; i >= 0; i--) {
-            if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
+            if ((*gCurrentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
                 break;
             }
 
-            siblingIndex = (*mdl_currentModelTreeNodeInfo)[i].modelIndex;
+            siblingIndex = (*gCurrentModelTreeNodeInfo)[i].modelIndex;
 
             if (siblingIndex < MAX_MODELS - 1) {
                 if (maxGroupIndex == -1) {
@@ -4343,13 +4471,13 @@ RenderTask* queue_render_task(RenderTask* task) {
     ret = &ret[mdl_renderTaskCount++];
 
     ret->renderMode = RENDER_TASK_FLAG_ENABLED;
-    if (task->renderMode == RENDER_MODE_2D) {
+    if (task->renderMode == RENDER_MODE_CLOUD_NO_ZCMP) {
         ret->renderMode |= RENDER_TASK_FLAG_20;
     }
 
     ret->appendGfxArg = task->appendGfxArg;
     ret->appendGfx = task->appendGfx;
-    ret->dist = mdl_renderTaskBasePriorities[task->renderMode] - task->dist;
+    ret->dist = RenderTaskBasePriorities[task->renderMode] - task->dist;
 
     return ret;
 }

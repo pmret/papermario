@@ -798,7 +798,7 @@ void au_load_PER(AuGlobals* globals, s32 romAddr) {
     void* end;
 
     au_read_rom(romAddr, &header, sizeof(header));
-    size = header.size - sizeof(header);
+    size = header.mdata.size - sizeof(header);
     au_read_rom(romAddr + sizeof(header), globals->dataPER, size);
     numItems = size / sizeof(PEREntry);
     numItemsLeft = 6 - numItems;
@@ -819,7 +819,7 @@ void au_load_PRG(AuGlobals* arg0, s32 romAddr) {
 
     au_read_rom(romAddr, &header, sizeof(header));
     dataRomAddr = romAddr + sizeof(header);
-    size = header.size - sizeof(header);
+    size = header.mdata.size - sizeof(header);
     if (size > 0x200) {
         size = 0x200;
     }

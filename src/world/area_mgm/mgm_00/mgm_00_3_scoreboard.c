@@ -150,7 +150,7 @@ void N(animate_and_draw_record)(void* renderData) {
 void N(work_draw_record)(void) {
     RenderTask task;
 
-    task.renderMode = RENDER_MODE_2D;
+    task.renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
     task.appendGfxArg = 0;
     task.appendGfx = &N(animate_and_draw_record);
     task.dist = 0;

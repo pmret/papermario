@@ -122,7 +122,7 @@ void ending_decals_render(EffectInstance* effect) {
     if (data->type == 0) {
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
     } else {
-        renderTaskPtr->renderMode = RENDER_MODE_2D;
+        renderTaskPtr->renderMode = RENDER_MODE_CLOUD_NO_ZCMP;
     }
 
     retTask = queue_render_task(renderTaskPtr);

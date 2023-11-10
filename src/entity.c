@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "entity.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #if VERSION_IQUE
 // TODO: remove if sections are split in iQue release
@@ -1301,7 +1302,7 @@ s32 create_entity(EntityBlueprint* bp, ...) {
         case ENTITY_TYPE_RED_SWITCH:
         case ENTITY_TYPE_SIMPLE_SPRING:
         case ENTITY_TYPE_SCRIPT_SPRING:
-        case ENTITY_TYPE_STAR_BOX_LAUCHER:
+        case ENTITY_TYPE_STAR_BOX_LAUNCHER:
             entity->flags |= ENTITY_FLAG_4000;
             break;
     }
@@ -1722,11 +1723,10 @@ void set_peach_shadow_scale(Shadow* shadow, f32 scale) {
 
     if (!gGameStatusPtr->isBattle) {
         switch (playerStatus->anim) {
-            //TODO raw player anims
-            case 0xC0018:
-            case 0xC0019:
-            case 0xC001A:
-            case 0xD0008:
+            case ANIM_Peach2_Carried:
+            case ANIM_Peach2_Thrown:
+            case ANIM_Peach2_Land:
+            case ANIM_Peach3_TiedSideways:
                 shadow->scale.x = 0.26f - (scale / 2600.0f);
                 if (shadow->scale.x < 0.01) {
                     shadow->scale.x = 0.01f;

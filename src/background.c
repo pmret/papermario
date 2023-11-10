@@ -192,7 +192,7 @@ void appendGfx_background_texture(void) {
         scrollValue += gGameStatusPtr->backgroundMaxX * 32;
     }
 
-    bgXOffset =gGameStatusPtr->backgroundXOffset = ((s32)scrollValue) % gGameStatusPtr->backgroundMaxX;
+    bgXOffset = gGameStatusPtr->backgroundXOffset = ((s32)scrollValue) % gGameStatusPtr->backgroundMaxX;
     bgMaxX = gGameStatusPtr->backgroundMaxX;
     bgMaxY = gGameStatusPtr->backgroundMaxY;
     bgMinX = gGameStatusPtr->backgroundMinX;

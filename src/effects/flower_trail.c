@@ -148,7 +148,7 @@ void flower_trail_render(EffectInstance* effect) {
     renderTask.appendGfx = flower_trail_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.dist = 0;
-    renderTask.renderMode = RENDER_MODE_28;
+    renderTask.renderMode = RENDER_MODE_PASS_THROUGH;
 
     queuedTaskPtr = queue_render_task(&renderTask);
     queuedTaskPtr->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;

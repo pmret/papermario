@@ -29,20 +29,20 @@ SHIFT_BSS Matrix4f gAnimTranslateMtx;
 SHIFT_BSS Matrix4f gAnimRotScaleMtx;
 SHIFT_BSS StaticAnimatorNode** gAnimTreeRoot;
 
-extern Gfx D_8014B7F8[];
-extern Gfx D_8014B820[];
-extern Gfx D_8014B848[];
-extern Gfx D_8014B870[];
-extern Gfx D_8014B898[];
-extern Gfx D_8014B8C0[];
-extern Gfx D_8014B8E8[];
-extern Gfx D_8014BE78[];
-extern Gfx D_8014BEA0[];
-extern Gfx D_8014BEC8[];
-extern Gfx D_8014BEF0[];
-extern Gfx D_8014BF18[];
-extern Gfx D_8014BF40[];
-extern Gfx D_8014BF68[];
+extern Gfx Gfx_RM1_SURFACE_OPA[];
+extern Gfx Gfx_RM1_DECAL_OPA[];
+extern Gfx Gfx_RM1_INTERSECTING_OPA[];
+extern Gfx Gfx_RM1_ALPHATEST[];
+extern Gfx Gfx_RM1_SURFACE_XLU[];
+extern Gfx Gfx_RM1_DECAL_XLU[];
+extern Gfx Gfx_RM1_INTERSECTING_XLU[];
+extern Gfx Gfx_RM3_SURFACE_OPA[];
+extern Gfx Gfx_RM3_DECAL_OPA[];
+extern Gfx Gfx_RM3_INTERSECTING_OPA[];
+extern Gfx Gfx_RM3_ALPHATEST[];
+extern Gfx Gfx_RM3_SURFACE_XLU[];
+extern Gfx Gfx_RM3_DECAL_XLU[];
+extern Gfx Gfx_RM3_INTERSECTING_XLU[];
 
 AnimScript gAnimScriptDefault = {
     as_Wait(60)
@@ -786,50 +786,50 @@ void appendGfx_animator(ModelAnimator* animator) {
         case FALSE:
             switch (animator->renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
-                    gSPDisplayList(gMainGfxPos++, D_8014B7F8);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_SURFACE_OPA);
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    gSPDisplayList(gMainGfxPos++, D_8014B820);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_DECAL_OPA);
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    gSPDisplayList(gMainGfxPos++, D_8014B848);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_INTERSECTING_OPA);
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    gSPDisplayList(gMainGfxPos++, D_8014B870);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_ALPHATEST);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
-                    gSPDisplayList(gMainGfxPos++, D_8014B898);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_SURFACE_XLU);
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    gSPDisplayList(gMainGfxPos++, D_8014B8C0);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_DECAL_XLU);
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    gSPDisplayList(gMainGfxPos++, D_8014B8E8);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM1_INTERSECTING_XLU);
                     break;
             }
             break;
         case TRUE:
             switch (animator->renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
-                    gSPDisplayList(gMainGfxPos++, D_8014BE78);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_SURFACE_OPA);
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    gSPDisplayList(gMainGfxPos++, D_8014BEA0);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_DECAL_OPA);
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    gSPDisplayList(gMainGfxPos++, D_8014BEC8);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_INTERSECTING_OPA);
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    gSPDisplayList(gMainGfxPos++, D_8014BEF0);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_ALPHATEST);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
-                    gSPDisplayList(gMainGfxPos++, D_8014BF18);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_SURFACE_XLU);
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    gSPDisplayList(gMainGfxPos++, D_8014BF40);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_DECAL_XLU);
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    gSPDisplayList(gMainGfxPos++, D_8014BF68);
+                    gSPDisplayList(gMainGfxPos++, Gfx_RM3_INTERSECTING_XLU);
                     break;
             }
 
