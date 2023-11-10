@@ -119,5 +119,6 @@ class N64SegPm_icons(N64Segment):
                 [options.opts.asset_path / "icon" / "Icons.xml"],
                 options.opts.asset_path / "icons.bin",
                 self.get_linker_section(),
+                self.get_linker_section(),
             )
         ]

@@ -6,6 +6,7 @@ from util import log, options
 from util.color import unpack_color
 
 from segtypes.n64.segment import N64Segment
+from util.symbols import to_cname
 
 if TYPE_CHECKING:
     from segtypes.n64.ci import N64SegCi as Raster
@@ -60,6 +61,9 @@ class N64SegPalette(N64Segment):
                         f"Error: {self.name} (0x{actual_len:X} bytes) is not a valid palette size ({', '.join(hex(s) for s in VALID_SIZES)})\n{hint_msg}"
                     )
 
+    def get_cname(self) -> str:
+        return super().get_cname() + "_pal"
+
     def split(self, rom_bytes):
         if self.raster is None:
             # TODO: output with no raster
@@ -94,7 +98,9 @@ class N64SegPalette(N64Segment):
                 self,
                 [options.opts.asset_path / self.dir / f"{self.name}.png"],
                 options.opts.asset_path / self.dir / f"{self.name}.pal",
-                self.get_linker_section(),
+                self.get_linker_section_order(),
+                self.get_linker_section_linksection(),
+                self.is_noload(),
             )
         ]
 

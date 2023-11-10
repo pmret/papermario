@@ -50,4 +50,13 @@ class CommonSegLib(N64Segment):
 
         object_path = Path(f"{path}.a:{self.object}.o")
 
-        return [LinkerEntry(self, [path], object_path, self.get_linker_section())]
+        return [
+            LinkerEntry(
+                self,
+                [path],
+                object_path,
+                self.get_linker_section_order(),
+                self.get_linker_section_linksection(),
+                self.is_noload(),
+            )
+        ]

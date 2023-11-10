@@ -1,4 +1,5 @@
 name: Paper Mario (iQue)
+sha1: 5c724685085eba796537573dd6f84aaddedc8582
 options:
   basename: papermario
   find_file_boundaries: True
@@ -486,7 +487,7 @@ segments:
 
   - [0x10e120, bin]
 
-  - name: ui_images
+  - name: ui_images_filemenu_pause
     type: bin
     start: 0x0000000000179fc0
     vram: 0x8023E000
@@ -554,7 +555,6 @@ segments:
     dir: filemenu
     start: 0x1AC100
     vram: 0x80242ba0
-    follows_vram: ui_images
     subsegments:
       - [0x1AC100, c, filemenu_common]
       - [0x1AE190, c, filemenu_main]

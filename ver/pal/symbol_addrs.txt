@@ -2173,7 +2173,6 @@ pra_31_unk_08_mtx = 0x802479C0; // rom:0xDF2710
 pra_31_unk_06_mtx = 0x80247A00; // rom:0xDF2750
 pra_31_unk_04_mtx = 0x80247A40; // rom:0xDF2790
 pra_31_unk_02_mtx = 0x80247A80; // rom:0xDF27D0
-pra_31_stairs_vtx = 0x80247AC0; // rom:0xDF2810
 pra_31_stairs_vtx = 0x80247AC0; // rom:0xDF2810 size:0x1D0
 mgm_01_panel_1_coin_img = 0x80242D20; // rom:0xE81EB0
 mgm_01_panel_1_coin_pal = 0x80242F20; // rom:0xE820B0

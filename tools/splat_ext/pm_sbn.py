@@ -562,6 +562,7 @@ if splat_loaded:
                     [dir],
                     out,
                     ".data",
+                    ".data",
                 ),
             ]
 

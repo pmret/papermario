@@ -67,6 +67,6 @@ glabel {name}
         ret = []
 
         for shim in self.shims:
-            ret.append(LinkerEntry(self, [self.shim_path(shim)], self.shim_path(shim), ".text"))
+            ret.append(LinkerEntry(self, [self.shim_path(shim)], self.shim_path(shim), ".text", ".text"))
 
         return ret

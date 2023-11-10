@@ -131,6 +131,7 @@ glabel fx_{name}
                     [self.effect_s_path(effect.name)],
                     self.effect_s_path(effect.name),
                     ".text",
+                    ".text",
                 )
             )
 

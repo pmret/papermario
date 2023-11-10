@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+
 mkdir -p build
 echo "Building..."
 export PATH=/gcc-2.7.2:$PATH

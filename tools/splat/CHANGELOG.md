@@ -1,6 +1,132 @@
 # splat Release Notes
 
+### 0.19.0: vram_classes
+
+* New top-level yaml feature: `vram_classes`. This allows you to make common definitions for vram locations that can be applied to multiple segments. Please see the [documentation](docs/VramClasses.md) for more details!
+  * Renamed `ld_use_follows` to `ld_use_symbolic_vram_addresses` to more accurately describe what it's doing
+  * Renamed `vram_of_symbol` segment option to `vram_symbol` to provide consistency between the segment-level option and the vram class field.
+  * Removed `appears_after_overlays_addr` symbol_addrs option in favor of specifying this behavior with `vram_classes`
+* Removed `dead` symbol_addrs option
+* A warning is now emitted when the `sha1` top-level yaml option is not provided. Adding this is highly recommended, as it prevents errors using splat in which the wrong binary is provided.
+
+### 0.18.3
+
+* splat now will emit a `FILL(0)` statement on each segment of a linker script by default, to customize this behavior use the `ld_fill_value` yaml option or the per-segment `ld_fill_value` option.
+* New yaml option: `ld_fill_value`
+  * Allows to specify the value of the `FILL` statement generated on every segment of the linker script.
+  * It must be either an integer, which will be used as the parameter for the `FILL` statement, or `null`, which tells splat to not emit `FILL` statements.
+  * This behavior can be customized per segment too.
+* New per segment option: `ld_fill_value`
+  * Allows to specify the value of the `FILL` statement generated for this specific top-level segment of the linker script, ignoring the global configuration.
+  * If not set, then the global configuration is used.
+
+### 0.18.2
+
+* Fix rodata migration for `.rdata` sections (and other rodata sections that don't use the name `.rodata`)
+* `spimdisasm` 1.18.0 or above is now required.
+
+### 0.18.1
+
+* New yaml options: `check_consecutive_segment_types`
+  * Allows to turn off checking for segment types not being in a consecutive order
+* New option for segments: `linker_section_order` and `linker_section`
+  * `linker_section_order`: Allows overriding the section order used for linker script generation. Useful when a section of a file is not between the other sections of the same type in the ROM, for example a file having its data section between other files's rodata.
+  * `linker_section`: Allows to override the `.section` directive that will be used when generating the disassembly of the corresponding section, without needing to write an extension segment. This also affects the section name that will be used during link time. Useful for sections with special names, like an executable section named `.start`
+
+### 0.18.0
+
+* `symbol_addrs` parsing checks:
+  * Enforce lines contain a single `;`
+  * Enforce no duplicates (same vram, same rom)
+
+### 0.17.3
+
+* Move wiki to the `docs` folder
+* Added the ability to specify `find_file_boundaries` on a per segment basis
+* Fix `cpp` segment not symbolizing rodata symbols properly
+
+### 0.17.2
+
+* Added more support for PS2 elf files
+
+### 0.17.1
+
+* New yaml options: `ld_sections_allowlist` and `ld_sections_denylist`
+  * `ld_sections_allowlist`: A list of sections to preserve during link time. It can be useful to preserve debugging sections.
+  * `ld_sections_denylist`: A list of sections to discard during link time. It can be useful to avoid using the wildcard discard. Note that this option does not turn off `ld_discard_section`.
+
+### 0.17.0
+
+* BREAKING: Linker script generation now imposes the specified `section_order`, which may not completely reflect the yaml order.
+  * In case this new linker script generation can't be properly adapted to a repo, the old generation can be reenabled by using the `ld_legacy_generation` flag as a temporary solution. Keep in mind this option may be removed in the future.
+* New yaml options related to linker script generation: `ld_partial_linking`, `ld_partial_scripts_path`, `ld_partial_build_segments_path`, `elf_path`, `ld_dependencies`
+  * `ld_partial_linking`: Changes how the linker script is generated, allowing partially linking each segment. This allows for faster linking times when making changes to files at the cost of a slower build time from a clean build and loosing filepaths in the mapfile. This is also known as "incremental linking". This option requires both `ld_partial_scripts_path` and `ld_partial_build_segments_path`.
+  * `ld_partial_scripts_path`: Folder were each intermediary linker script will be written to.
+  * `ld_partial_build_segments_path`: Folder where the built partially linked segments will be placed by the build system.
+  * `elf_path`: Path to the final elf target.
+  * `ld_dependencies`: Generate a dependency file for every linker script generated, including the main linker script and the ones for partial linking. Dependency files will have the same path and name as the corresponding linker script, but changing the extension to `.d`. Requires `elf_path` to be set.
+* New misc yaml options: `asm_function_alt_macro` and `ique_symbols`
+  * `asm_function_alt_macro`: Allows to use a different label on symbols that are in the middle of functions (that are not branch targets of any kind) than the one used for the label for functions, allowing for alternative function entrypoints.
+  * `ique_symbols` Automatically fills libultra symbols that are exclusive for iQue. This option is ignored if platform is not N64.
+* New "incbin" segments: `textbin`, `databin` and `rodatabin`
+  * Allows to specify binary blobs to be linked in a specific section instead of the data default.
+  * If a `textbin` section has a corresponding `databin` and/or `rodatabin` section with the same name then those will be included in the same generated assembly file.
+  * If a known symbol matches the vram of a incbin section then it will be emitted properly, allowing for better integration with the rest of splat's symbol system.
+* `spimdisasm` 1.17.0 or above is now required.
+
+### 0.16.10
+
+* Produce an error if subsegments do not have an ascending vram order.
+  * This can happen because bss subsegments need their vram to be specified explicitly.
+
+### 0.16.9
+
+* Add command line argument `--disassemble-all`, which has the same effect as the `disassemble_all` yaml option so will disamble already matched functions as well as migrated data.
+  * Note: the command line argument takes precedence over the yaml, so will take effect even if the yaml option is set to false.
+
+### 0.16.8
+
+* Avoid ignoring the `align` defined in a segment for `code` segments
+
+### 0.16.7
+
+* Use `pylibyaml` to speed-up yaml parsing
+
+### 0.16.6
+
+* Add option `ld_rom_start`.
+  * Allows offsetting rom address linker symbols by some arbitrary value.
+    * Useful for SN64 games which often have rom addresses offset by 0xB0000000.
+  * Defaults to 0.
+
+### 0.16.5
+
+* Add option `segment_symbols_style`.
+  * Allows changing the style of the generated segment symbols in the linker script.
+  * Possible values:
+    * `splat`: The current style for segment symbols.
+    * `makerom`: Style that aims to be compatible with makerom generated symbols.
+  * Defaults to `splat`.
+
+### 0.16.4
+
+* Add `get_section_flags` method to the `Segment` class.
+  * Useful for providing linker section flags when creating a custom section when making splat extensions.
+  * This may be necessary for some custom section types, because sections unrecognized by the linker will not link its data properly.
+  * More info about section flags: <https://sourceware.org/binutils/docs/as/Section.html#ELF-Version>
+
+### 0.16.3
+
+* Add `--stdout-only` flag. Redirects the progress bar output to `stdout` instead of `stderr`.
+* Add a check to prevent relocs with duplicated rom addresses.
+* Check empty functions only have 2 instructions before autodecompiling them.
+
+### 0.16.2
+
+* Add option `disassemble_all`. If enabled then already matched functions and migrated data will be disassembled to files anyways.
+
 ### 0.16.1
+
 * Various changes so that series of image and palette subsegments can have `auto` rom addresses (as long as the first can find its rom address from the parent segment or its own definition)
 
 ### 0.16.0
@@ -429,10 +555,10 @@ Internally, there's a new Symbol class which stores information about a symbol a
 
 ## 0.5 The Rename Update
 * n64splat name changed to splat
-  * Some refactoring was done to support other platforms besides n64 in the future 
+  * Some refactoring was done to support other platforms besides n64 in the future
     * New `platform` option, which defaults to `n64`
   * This will cause breaking changes in custom segments, so please refer to one of the changes in one of the n64 base segments for details
-* Support for custom artifact paths 
+* Support for custom artifact paths
   * New `undefined_syms_auto_path` option
   * New `undefined_funcs_auto_path` option
   * New `cache_path` option

@@ -1,2 +1,2 @@
 options:
-  ld_use_follows: True
+  ld_use_symbolic_vram_addresses: True

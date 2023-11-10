@@ -56,5 +56,6 @@ class N64SegPm_charset_palettes(N64Segment):
                 [fs_dir / f"{i:02X}.png" for i in range(self.yaml[3])],
                 fs_dir.with_suffix(".dat"),
                 ".data",
+                ".data",
             ),
         ]

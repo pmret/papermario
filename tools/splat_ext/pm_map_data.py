@@ -211,5 +211,6 @@ class N64SegPm_map_data(N64Segment):
                 [fs_dir / add_file_ext(name, linker=True) for name in self.files],
                 fs_dir.with_suffix(".dat"),
                 ".data",
+                ".data",
             ),
         ]

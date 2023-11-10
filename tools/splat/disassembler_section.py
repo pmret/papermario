@@ -1,12 +1,9 @@
-import spimdisasm
-from util import symbols
-from typing import Optional, Set, Tuple
-from segtypes.segment import Segment
-from util import log, options, symbols
-
-
 from abc import ABC, abstractmethod
-from typing import Callable
+from typing import Optional
+
+import spimdisasm
+
+from util import options, symbols
 
 
 class DisassemblerSection(ABC):

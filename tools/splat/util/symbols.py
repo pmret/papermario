@@ -3,7 +3,7 @@ import re
 from typing import Dict, List, Optional, Set, TYPE_CHECKING
 
 import spimdisasm
-import tqdm
+
 from intervaltree import IntervalTree
 from disassembler import disassembler_instance
 from pathlib import Path
@@ -12,14 +12,13 @@ from pathlib import Path
 if TYPE_CHECKING:
     from segtypes.segment import Segment
 
-from util import log, options
+from util import log, options, progress_bar
 
 all_symbols: List["Symbol"] = []
 all_symbols_dict: Dict[int, List["Symbol"]] = {}
 all_symbols_ranges = IntervalTree()
 ignored_addresses: Set[int] = set()
 to_mark_as_defined: Set[str] = set()
-appears_after_overlays_syms: List["Symbol"] = []
 
 # Initialize a spimdisasm context, used to store symbols and functions
 spim_context = spimdisasm.common.Context()
@@ -87,9 +86,11 @@ def handle_sym_addrs(
                 return segment
         return None
 
-    for line_num, line in enumerate(
-        tqdm.tqdm(sym_addrs_lines, desc=f"Loading symbols ({path.stem})")
-    ):
+    seen_symbols: Dict[str, "Symbol"] = dict()
+    prog_bar = progress_bar.get_progress_bar(sym_addrs_lines)
+    prog_bar.set_description(f"Loading symbols ({path.stem})")
+    line: str
+    for line_num, line in enumerate(prog_bar):
         line = line.strip()
         if not line == "" and not line.startswith("//"):
             comment_loc = line.find("//")
@@ -101,13 +102,14 @@ def handle_sym_addrs(
                 line_main = line[:comment_loc].strip()
 
             try:
+                assert line.count(";") == 1, "Line must contain a single semi-colon"
                 line_split = line_main.split("=")
                 name = line_split[0].strip()
                 addr = int(line_split[1].strip()[:-1], 0)
             except:
                 log.parsing_error_preamble(path, line_num, line)
-                log.write("Line should be of the form")
-                log.write("<function_name> = <address> // attr0:val0 attr1:val1 [...]")
+                log.write("Line must be of the form")
+                log.write("<function_name> = <address>; // attr0:val0 attr1:val1 [...]")
                 log.write("with <address> in hex preceded by 0x, or dec")
                 log.write("")
                 raise
@@ -179,10 +181,6 @@ def handle_sym_addrs(
                             if attr_name == "name_end":
                                 sym.given_name_end = attr_val
                                 continue
-                            if attr_name == "appears_after_overlays_addr":
-                                sym.appears_after_overlays_addr = int(attr_val, 0)
-                                appears_after_overlays_syms.append(sym)
-                                continue
                         except:
                             log.parsing_error_preamble(path, line_num, line)
                             log.write(
@@ -207,9 +205,6 @@ def handle_sym_addrs(
                             log.write([*TRUEY_VALS, *FALSEY_VALS])
                             log.error("")
                         else:
-                            if attr_name == "dead":
-                                sym.dead = tf_val
-                                continue
                             if attr_name == "defined":
                                 sym.defined = tf_val
                                 continue
@@ -249,6 +244,29 @@ def handle_sym_addrs(
                 sym.segment.add_symbol(sym)
 
             sym.user_declared = True
+
+            if sym.name in seen_symbols:
+                log.parsing_error_preamble(path, line_num, line)
+                log.error(
+                    f"Duplicate symbol detected! {sym.name} has already been defined at 0x{seen_symbols[sym.name].vram_start:X}"
+                )
+
+            if addr in all_symbols_dict:
+                items = all_symbols_dict[addr]
+                for item in items:
+                    if (
+                        sym.rom == item.rom
+                        or None in (sym.rom, item.rom)
+                        or sym.segment == item.segment
+                        or None in (sym.segment, item.rom)
+                    ):
+                        log.parsing_error_preamble(path, line_num, line)
+                        log.error(
+                            f"Duplicate symbol detected! {sym.name} clashes with {item.name} defined at 0x{addr:X}"
+                        )
+
+            seen_symbols[sym.name] = sym
+
             add_symbol(sym)
 
 
@@ -543,7 +561,6 @@ class Symbol:
 
     defined: bool = False
     referenced: bool = False
-    dead: bool = False
     extract: bool = True
     user_declared: bool = False
 
@@ -557,8 +574,6 @@ class Symbol:
 
     _generated_default_name: Optional[str] = None
     _last_type: Optional[str] = None
-
-    appears_after_overlays_addr: Optional[int] = None
 
     def __str__(self):
         return self.name
@@ -659,10 +674,8 @@ def reset_symbols():
     global all_symbols_ranges
     global ignored_addresses
     global to_mark_as_defined
-    global appears_after_overlays_syms
     all_symbols = []
     all_symbols_dict = {}
     all_symbols_ranges = IntervalTree()
     ignored_addresses = set()
     to_mark_as_defined = set()
-    appears_after_overlays_syms = []

@@ -5,7 +5,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Set, Type, TYPE_CHECKING, Union
 
 from intervaltree import Interval, IntervalTree
+from util import vram_classes
 
+from util.vram_classes import VramClass
 from util import log, options, symbols
 from util.symbols import Symbol, to_cname
 
@@ -19,6 +21,25 @@ def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
         return int(segment["vram"])
     else:
         return None
+
+
+def parse_segment_vram_symbol(segment: Union[dict, list]) -> Optional[str]:
+    if isinstance(segment, dict) and "vram_symbol" in segment:
+        return str(segment["vram_symbol"])
+    else:
+        return None
+
+
+def parse_segment_vram_class(segment: Union[dict, list]) -> Optional[VramClass]:
+    if isinstance(segment, dict) and "vram_class" in segment:
+        return vram_classes.resolve(segment["vram_class"])
+    return None
+
+
+def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
+    if isinstance(segment, dict):
+        return segment.get("follows_vram", None)
+    return None
 
 
 def parse_segment_align(segment: Union[dict, list]) -> Optional[int]:
@@ -42,18 +63,6 @@ def parse_segment_section_order(segment: Union[dict, list]) -> List[str]:
     if isinstance(segment, dict):
         return segment.get("section_order", default)
     return default
-
-
-def parse_segment_follows_vram(segment: Union[dict, list]) -> Optional[str]:
-    if isinstance(segment, dict):
-        return segment.get("follows_vram", None)
-    return None
-
-
-def parse_segment_vram_of_symbol(segment: Union[dict, list]) -> Optional[str]:
-    if isinstance(segment, dict):
-        return segment.get("vram_of_symbol", segment.get("follows_vram_symbol", None))
-    return None
 
 
 class Segment:
@@ -177,6 +186,26 @@ class Segment:
         else:
             return False
 
+    @staticmethod
+    def parse_linker_section_order(yaml: Union[dict, list]) -> Optional[str]:
+        if isinstance(yaml, dict) and "linker_section_order" in yaml:
+            return str(yaml["linker_section_order"])
+        return None
+
+    @staticmethod
+    def parse_linker_section(yaml: Union[dict, list]) -> Optional[str]:
+        if isinstance(yaml, dict) and "linker_section" in yaml:
+            return str(yaml["linker_section"])
+        return None
+
+    @staticmethod
+    def parse_ld_fill_value(
+        yaml: Union[dict, list], default: Optional[int]
+    ) -> Optional[int]:
+        if isinstance(yaml, dict) and "ld_fill_value" in yaml:
+            return yaml["ld_fill_value"]
+        return default
+
     def __init__(
         self,
         rom_start: Optional[int],
@@ -198,6 +227,9 @@ class Segment:
         self.exclusive_ram_id: Optional[str] = None
         self.given_dir: Path = Path()
 
+        # Default to global options.
+        self.given_find_file_boundaries: Optional[bool] = None
+
         # Symbols known to be in this segment
         self.given_seg_symbols: Dict[int, List[Symbol]] = {}
 
@@ -206,8 +238,10 @@ class Segment:
         self.symbol_ranges_rom: IntervalTree = IntervalTree()
 
         self.given_section_order: List[str] = options.opts.section_order
+
+        self.vram_class: Optional[VramClass] = None
         self.given_follows_vram: Optional[str] = None
-        self.vram_of_symbol: Optional[str] = None
+        self.given_vram_symbol: Optional[str] = None
 
         self.given_symbol_name_format: str = options.opts.symbol_name_format
         self.given_symbol_name_format_no_rom: str = (
@@ -216,6 +250,7 @@ class Segment:
 
         self.parent: Optional[Segment] = None
         self.sibling: Optional[Segment] = None
+        self.data_sibling: Optional[Segment] = None
         self.rodata_sibling: Optional[Segment] = None
         self.file_path: Optional[Path] = None
 
@@ -236,6 +271,14 @@ class Segment:
         # For segments which are not in the usual VRAM segment space, like N64's IPL3 which lives in 0xA4...
         self.special_vram_segment: bool = False
 
+        self.linker_section_order: Optional[str] = self.parse_linker_section_order(yaml)
+        self.linker_section: Optional[str] = self.parse_linker_section(yaml)
+
+        # If not defined on the segment then default to the global option
+        self.ld_fill_value: Optional[int] = self.parse_ld_fill_value(
+            yaml, options.opts.ld_fill_value
+        )
+
         if self.rom_start is not None and self.rom_end is not None:
             if self.rom_start > self.rom_end:
                 log.error(
@@ -252,7 +295,15 @@ class Segment:
     ):
         type = Segment.parse_segment_type(yaml)
         name = Segment.parse_segment_name(cls, rom_start, yaml)
-        vram_start = vram if vram is not None else parse_segment_vram(yaml)
+
+        vram_class = parse_segment_vram_class(yaml)
+
+        if vram is not None:
+            vram_start = vram
+        elif vram_class:
+            vram_start = vram_class.vram
+        else:
+            vram_start = parse_segment_vram(yaml)
 
         args: List[str] = [] if isinstance(yaml, dict) else yaml[3:]
 
@@ -267,11 +318,14 @@ class Segment:
         )
         ret.given_section_order = parse_segment_section_order(yaml)
         ret.given_subalign = parse_segment_subalign(yaml)
+
         if isinstance(yaml, dict):
             ret.extract = bool(yaml.get("extract", ret.extract))
             ret.exclusive_ram_id = yaml.get("exclusive_ram_id")
             ret.given_dir = Path(yaml.get("dir", ""))
             ret.has_linker_entry = bool(yaml.get("linker_entry", True))
+            ret.given_find_file_boundaries = yaml.get("find_file_boundaries", None)
+
         ret.given_symbol_name_format = Segment.parse_segment_symbol_name_format(yaml)
         ret.given_symbol_name_format_no_rom = (
             Segment.parse_segment_symbol_name_format_no_rom(yaml)
@@ -279,11 +333,20 @@ class Segment:
         ret.file_path = Segment.parse_segment_file_path(yaml)
 
         ret.bss_contains_common = Segment.parse_segment_bss_contains_common(yaml)
-        if not ret.given_follows_vram:
-            ret.given_follows_vram = parse_segment_follows_vram(yaml)
 
-        if not ret.vram_of_symbol:
-            ret.vram_of_symbol = parse_segment_vram_of_symbol(yaml)
+        ret.given_follows_vram = parse_segment_follows_vram(yaml)
+        ret.given_vram_symbol = parse_segment_vram_symbol(yaml)
+
+        if vram_class:
+            ret.vram_class = vram_class
+            if ret.given_follows_vram:
+                log.error(
+                    f"Error: segment {ret.name} has both a vram class and a follows_vram property"
+                )
+            if ret.given_vram_symbol:
+                log.error(
+                    f"Error: segment {ret.name} has both a vram class and a vram_symbol property"
+                )
 
         if not ret.align:
             ret.align = parse_segment_align(yaml)
@@ -292,6 +355,11 @@ class Segment:
     # For executable segments (.text); like c, asm or hasm
     @staticmethod
     def is_text() -> bool:
+        return False
+
+    # For read-write segments (.data); like data
+    @staticmethod
+    def is_data() -> bool:
         return False
 
     # For readonly segments (.rodata); like rodata or rdata
@@ -320,6 +388,18 @@ class Segment:
             return self.given_dir
 
     @property
+    def show_file_boundaries(self) -> bool:
+        # If the segment has explicitly set `find_file_boundaries`, use it.
+        if self.given_find_file_boundaries is not None:
+            return self.given_find_file_boundaries
+
+        # If the segment has no parent, use options as default.
+        if not self.parent:
+            return options.opts.find_file_boundaries
+
+        return self.parent.show_file_boundaries
+
+    @property
     def symbol_name_format(self) -> str:
         return self.given_symbol_name_format
 
@@ -333,6 +413,15 @@ class Segment:
             return self.parent.subalign
         else:
             return self.given_subalign
+
+    @property
+    def vram_symbol(self) -> Optional[str]:
+        if self.vram_class and self.vram_class.vram_symbol:
+            return self.vram_class.vram_symbol
+        elif self.given_vram_symbol:
+            return self.given_vram_symbol
+        else:
+            return None
 
     def get_exclusive_ram_id(self) -> Optional[str]:
         if self.parent:
@@ -383,6 +472,13 @@ class Segment:
             self.section_order.index(".rodata") - self.section_order.index(".data") == 1
         )
 
+    def get_cname(self) -> str:
+        name = self.name
+        if self.parent:
+            name = self.parent.name + "_" + name
+
+        return to_cname(name)
+
     def contains_vram(self, vram: int) -> bool:
         if self.vram_start is not None and self.vram_end is not None:
             return vram >= self.vram_start and vram < self.vram_end
@@ -428,6 +524,42 @@ class Segment:
     def get_linker_section(self) -> str:
         return ".data"
 
+    def get_linker_section_order(self) -> str:
+        """
+        Used to override the linking _order_ of a specific section
+
+        Useful for files that may have non-conventional orderings (like putting .data with the other .rodata sections)
+        """
+        if self.linker_section_order is not None:
+            return self.linker_section_order
+        return self.get_linker_section()
+
+    def get_linker_section_linksection(self) -> str:
+        """
+        The actual section that will be used when linking
+        """
+        if self.linker_section is not None:
+            return self.linker_section
+        return self.get_linker_section()
+
+    def get_section_flags(self) -> Optional[str]:
+        """
+        Allows specifying flags for a section.
+
+        This can be useful when creating a custom section, since sections not recognized by the linker will not be linked properly.
+
+        GNU as docs about the section directive and flags: https://sourceware.org/binutils/docs/as/Section.html#ELF-Version
+
+        Example:
+
+        ```
+        def get_section_flags(self) -> Optional[str]:
+            # Tells the linker to allocate this section
+            return "a"
+        ```
+        """
+        return None
+
     def out_path(self) -> Optional[Path]:
         return None
 
@@ -448,7 +580,16 @@ class Segment:
         path = self.out_path()
 
         if path:
-            return [LinkerEntry(self, [path], path, self.get_linker_section())]
+            return [
+                LinkerEntry(
+                    self,
+                    [path],
+                    path,
+                    self.get_linker_section_order(),
+                    self.get_linker_section_linksection(),
+                    self.is_noload(),
+                )
+            ]
         else:
             return []
 
@@ -504,6 +645,27 @@ class Segment:
             return None
         return items[0]
 
+    def retrieve_sym_type(
+        self, syms: Dict[int, List[Symbol]], addr: int, type: str
+    ) -> Optional[symbols.Symbol]:
+        if addr not in syms:
+            return None
+
+        items = syms[addr]
+
+        items = [
+            i
+            for i in items
+            if i.segment is None
+            or Segment.visible_ram(self, i.segment)
+            and (type == i.type)
+        ]
+
+        if len(items) == 0:
+            return None
+
+        return items[0]
+
     def get_symbol(
         self,
         addr: int,
@@ -514,7 +676,6 @@ class Segment:
         reference: bool = False,
         search_ranges: bool = False,
         local_only: bool = False,
-        dead: bool = True,
     ) -> Optional[Symbol]:
         ret: Optional[Symbol] = None
         rom: Optional[int] = None
@@ -544,10 +705,6 @@ class Segment:
                 cands = symbols.all_symbols_ranges[addr]
                 if cands:
                     ret = cands.pop().data
-
-        # Reject dead symbols unless we allow them
-        if not dead and ret and ret.dead:
-            ret = None
 
         # Create the symbol if it doesn't exist
         if not ret and create:
@@ -584,7 +741,6 @@ class Segment:
         reference: bool = False,
         search_ranges: bool = False,
         local_only: bool = False,
-        dead: bool = True,
     ) -> Symbol:
         ret = self.get_symbol(
             addr,
@@ -595,7 +751,6 @@ class Segment:
             reference=reference,
             search_ranges=search_ranges,
             local_only=local_only,
-            dead=dead,
         )
         assert ret is not None
 

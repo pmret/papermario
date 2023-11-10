@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # docker build container
 docker build --tag splat-build:latest . && \
 # get compilers and tools

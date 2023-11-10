@@ -7,4 +7,8 @@ class N64SegLinker_offset(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        return [LinkerEntry(self, [], Path(self.name), "linker_offset")]
+        return [
+            LinkerEntry(
+                self, [], Path(self.name), "linker_offset", "linker_offset", False
+            )
+        ]

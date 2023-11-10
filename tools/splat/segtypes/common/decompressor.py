@@ -43,6 +43,8 @@ class CommonSegDecompressor(N64Segment):
                 options.opts.asset_path
                 / self.dir
                 / f"{self.name}.{self.compression_type}",
-                self.get_linker_section(),
+                self.get_linker_section_order(),
+                self.get_linker_section_linksection(),
+                self.is_noload(),
             )
         ]

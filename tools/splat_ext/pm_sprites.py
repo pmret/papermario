@@ -838,7 +838,7 @@ class N64SegPm_sprites(N64Segment):
         # for NPC
         src_paths += [options.opts.asset_path / "sprite" / "npc" / sprite_name for sprite_name in self.npc_cfg]
 
-        return [LinkerEntry(self, src_paths, self.out_path(), self.get_linker_section())]
+        return [LinkerEntry(self, src_paths, self.out_path(), self.get_linker_section(), self.get_linker_section())]
 
     def cache(self):
         return (self.yaml, self.rom_end, self.player_cfg, self.npc_cfg)

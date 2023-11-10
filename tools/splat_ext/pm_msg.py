@@ -480,7 +480,7 @@ class N64SegPm_msg(N64Segment):
         base_path = options.opts.asset_path / f"{self.name}"
         out_paths = [base_path / Path(f + ".msg") for f in self.files]
 
-        return [LinkerEntry(self, out_paths, base_path, ".data")]
+        return [LinkerEntry(self, out_paths, base_path, ".data", ".data")]
 
     @staticmethod
     def get_default_name(addr):

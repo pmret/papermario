@@ -148,7 +148,7 @@ class CommonSegCodeSubsegment(Segment):
                         self.parent.check_rodata_sym(func_spim.vram, sym)
 
     def print_file_boundaries(self):
-        if not options.opts.find_file_boundaries or not self.spim_section:
+        if not self.show_file_boundaries or not self.spim_section:
             return
 
         assert isinstance(self.rom_start, int)

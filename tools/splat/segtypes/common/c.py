@@ -1,7 +1,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Optional, Set, List, Tuple
+from typing import Optional, Set, List
 
 import spimdisasm
 
@@ -10,27 +10,30 @@ from util.compiler import GCC, SN64, IDO
 from util.symbols import Symbol
 
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
-from segtypes.common.group import CommonSegGroup
 from segtypes.common.rodata import CommonSegRodata
 
 
+STRIP_C_COMMENTS_RE = re.compile(
+    r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
+    re.DOTALL | re.MULTILINE,
+)
+
+C_FUNC_RE = re.compile(
+    r"^(?:static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+?{", re.MULTILINE
+)
+
+C_GLOBAL_ASM_IDO_RE = re.compile(r"GLOBAL_ASM\(\"(\w+\/)*(\w+)\.s\"\)", re.MULTILINE)
+
+
 class CommonSegC(CommonSegCodeSubsegment):
-    defined_funcs: Set[str] = set()
-    global_asm_funcs: Set[str] = set()
-    global_asm_rodata_syms: Set[str] = set()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-    STRIP_C_COMMENTS_RE = re.compile(
-        r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-        re.DOTALL | re.MULTILINE,
-    )
+        self.defined_funcs: Set[str] = set()
+        self.global_asm_funcs: Set[str] = set()
+        self.global_asm_rodata_syms: Set[str] = set()
 
-    C_FUNC_RE = re.compile(
-        r"^(?:static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+?{", re.MULTILINE
-    )
-
-    C_GLOBAL_ASM_IDO_RE = re.compile(
-        r"GLOBAL_ASM\(\"(\w+\/)*(\w+)\.s\"\)", re.MULTILINE
-    )
+        self.file_extension = "c"
 
     @staticmethod
     def strip_c_comments(text):
@@ -41,14 +44,14 @@ class CommonSegC(CommonSegCodeSubsegment):
             else:
                 return s
 
-        return re.sub(CommonSegC.STRIP_C_COMMENTS_RE, replacer, text)
+        return re.sub(STRIP_C_COMMENTS_RE, replacer, text)
 
     @staticmethod
     def get_funcs_defined_in_c(c_file: Path) -> Set[str]:
         with open(c_file, "r") as f:
             text = CommonSegC.strip_c_comments(f.read())
 
-        return set(m.group(1) for m in CommonSegC.C_FUNC_RE.finditer(text))
+        return set(m.group(1) for m in C_FUNC_RE.finditer(text))
 
     @staticmethod
     def find_all_instances(string: str, sub: str):
@@ -104,9 +107,7 @@ class CommonSegC(CommonSegCodeSubsegment):
         if options.opts.compiler in [GCC, SN64]:
             return set(CommonSegC.find_include_asm(text))
         else:
-            return set(
-                m.group(2) for m in CommonSegC.C_GLOBAL_ASM_IDO_RE.finditer(text)
-            )
+            return set(m.group(2) for m in C_GLOBAL_ASM_IDO_RE.finditer(text))
 
     @staticmethod
     def get_global_asm_rodata_syms(c_file: Path) -> Set[str]:
@@ -115,16 +116,14 @@ class CommonSegC(CommonSegCodeSubsegment):
         if options.opts.compiler in [GCC, SN64]:
             return set(CommonSegC.find_include_rodata(text))
         else:
-            return set(
-                m.group(2) for m in CommonSegC.C_GLOBAL_ASM_IDO_RE.finditer(text)
-            )
+            return set(m.group(2) for m in C_GLOBAL_ASM_IDO_RE.finditer(text))
 
     @staticmethod
     def is_text() -> bool:
         return True
 
     def out_path(self) -> Optional[Path]:
-        return options.opts.src_path / self.dir / f"{self.name}.c"
+        return options.opts.src_path / self.dir / f"{self.name}.{self.file_extension}"
 
     def scan(self, rom_bytes: bytes):
         if (
@@ -156,6 +155,7 @@ class CommonSegC(CommonSegCodeSubsegment):
                 self.spim_section.get_section(), spimdisasm.mips.sections.SectionText
             ), f"{self.name}, rom_start:{self.rom_start}, rom_end:{self.rom_end}"
 
+            rodata_section_type = ""
             rodata_spim_segment: Optional[spimdisasm.mips.sections.SectionRodata] = None
             if (
                 options.opts.migrate_rodata_to_functions
@@ -164,6 +164,9 @@ class CommonSegC(CommonSegCodeSubsegment):
                 assert isinstance(
                     self.rodata_sibling, CommonSegRodata
                 ), self.rodata_sibling.type
+                rodata_section_type = (
+                    self.rodata_sibling.get_linker_section_linksection()
+                )
                 if self.rodata_sibling.spim_section is not None:
                     assert isinstance(
                         self.rodata_sibling.spim_section.get_section(),
@@ -193,10 +196,13 @@ class CommonSegC(CommonSegCodeSubsegment):
 
             # Produce the asm files for functions
             for entry in symbols_entries:
+                entry.sectionText = self.get_linker_section_linksection()
+                entry.sectionRodata = rodata_section_type
                 if entry.function is not None:
                     if (
                         entry.function.getName() in self.global_asm_funcs
                         or is_new_c_file
+                        or options.opts.disassemble_all
                     ):
                         func_sym = self.get_symbol(
                             entry.function.vram,
@@ -212,6 +218,7 @@ class CommonSegC(CommonSegCodeSubsegment):
                         if (
                             spim_rodata_sym.getName() in self.global_asm_rodata_syms
                             or is_new_c_file
+                            or options.opts.disassemble_all
                         ):
                             rodata_sym = self.get_symbol(
                                 spim_rodata_sym.vram, in_segment=True, local_only=True
@@ -340,6 +347,7 @@ class CommonSegC(CommonSegCodeSubsegment):
         # Terrible hack to "auto-decompile" empty functions
         if (
             options.opts.auto_decompile_empty_functions
+            and len(func.instructions) == 2
             and func.instructions[0].isReturn()
             and func.instructions[1].isNop()
         ):
@@ -402,7 +410,10 @@ class CommonSegC(CommonSegCodeSubsegment):
         dep_path = build_path / c_path.with_suffix(".asmproc.d")
         dep_path.parent.mkdir(parents=True, exist_ok=True)
         with dep_path.open("w") as f:
-            o_path = build_path / c_path.with_suffix(".o")
+            if options.opts.use_o_as_suffix:
+                o_path = build_path / c_path.with_suffix(".o")
+            else:
+                o_path = build_path / c_path.with_suffix(c_path.suffix + ".o")
             f.write(f"{o_path}:")
             depend_list = []
             for entry in symbols_entries:
