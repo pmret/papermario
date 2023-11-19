@@ -419,15 +419,15 @@ BSS HudElemID GreenArrowDownID;
 BSS s32 D_802AD624;
 
 #if VERSION_IQUE
-#define ARRCNT 5
+#define TABMAX 5
 #else
-#define ARRCNT 6
+#define TABMAX 6
 #endif
 
 BSS s32 D_802AD628[5];
 BSS s16 D_802AD63C;
 BSS s16 D_802AD63E;
-BSS HudScript* D_802AD640[ARRCNT];
+BSS HudScript* D_802AD640[TABMAX];
 BSS s32 D_802AD658[5]; // msg IDs
 BSS s32 D_802AD66C;
 BSS s32 StratsMenuLastPos;
@@ -435,9 +435,9 @@ BSS s32 StratsMenuLastPos;
 #if !VERSION_IQUE
 BSS s32 D_802AD674; // unused?
 #endif
-BSS s32 D_802AD678[ARRCNT];
-BSS s32 D_802AD690[ARRCNT]; // strats options enabled
-BSS s32 D_802AD6A8[ARRCNT];
+BSS s32 D_802AD678[TABMAX];
+BSS s32 D_802AD690[TABMAX]; // strats options enabled
+BSS s32 D_802AD6A8[TABMAX];
 BSS s32 D_802AD6C0[5];
 BSS s32 D_802AD6D4;
 
