@@ -102,6 +102,7 @@ class N64SegPm_map_data(N64Segment):
         data = rom_bytes[self.rom_start : self.rom_end]
 
         asset_idx = 0
+        asset_entries = {}
         while True:
             asset_data = data[0x20 + asset_idx * 0x1C :]
 
@@ -109,6 +110,7 @@ class N64SegPm_map_data(N64Segment):
             offset = int.from_bytes(asset_data[0x10:0x14], byteorder="big")
             size = int.from_bytes(asset_data[0x14:0x18], byteorder="big")
             decompressed_size = int.from_bytes(asset_data[0x18:0x1C], byteorder="big")
+            asset_entries[name] = (offset, size, decompressed_size)
 
             is_compressed = size != decompressed_size
 
@@ -147,6 +149,21 @@ class N64SegPm_map_data(N64Segment):
                     w = 128
                     h = 32
                     img = n64img.image.IA8(data=bytes[0x1210 : 0x1210 + w * h], width=w, height=h)
+                    img.write(fs_dir / "title/press_start.png")
+                elif "ver/ique" in str(options.opts.target_path):
+                    w = 200
+                    h = 112
+                    img = n64img.image.RGBA32(data=bytes[0x2090 : 0x2090 + w * h * 4], width=w, height=h)
+                    img.write(fs_dir / "title/logotype.png")
+
+                    w = 144
+                    h = 40
+                    img = n64img.image.IA8(data=bytes[0xA10 : 0xA10 + w * h], width=w, height=h)
+                    img.write(fs_dir / "title/copyright.png")
+
+                    w = 128
+                    h = 20
+                    img = n64img.image.IA8(data=bytes[0x10 : 0x10 + w * h], width=w, height=h)
                     img.write(fs_dir / "title/press_start.png")
                 else:
                     w = 272

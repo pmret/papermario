@@ -4,51 +4,37 @@ from sys import argv
 
 if __name__ == "__main__":
     argv.pop(0)  # python3
+    version = argv.pop(0)
+    out = argv.pop(0)
+    imgs = argv
 
-    if len(argv) > 4:
-        out, img1, img2, img3, img2_pal = argv
+    imgs_bytes = []
+    for img in imgs:
+        with open(img, "rb") as f:
+            imgs_bytes.append(f.read())
+
+    if version == "jp":
+        # copyright, copyright pal, press start, logo
+        write_order = (1, 3, 2, 0)
+    elif version == "ique":
+        # press start, copyright, logo
+        write_order = (2, 1, 0)
     else:
-        out, img1, img2, img3 = argv
-        img2_pal = None
-
-    with open(img1, "rb") as f:
-        img1 = f.read()
-
-    with open(img2, "rb") as f:
-        img2 = f.read()
-
-    with open(img3, "rb") as f:
-        img3 = f.read()
-
-    if img2_pal:
-        with open(img2_pal, "rb") as f:
-            img2_pal = f.read()
+        # copyright, press start, logo
+        write_order = (1, 2, 0)
 
     with open(out, "wb") as f:
         f.seek(0x10)
 
-        pos2 = f.tell()
-        f.write(img2)
+        imgs_pos = [0] * len(imgs)
+        for i in write_order:
+            imgs_pos[i] = f.tell()
+            f.write(imgs_bytes[i])
 
-        if img2_pal:
-            pos2_pal = f.tell()
-            f.write(img2_pal)
-        else:
-            pos2_pal = None
-
-        pos3 = f.tell()
-        f.write(img3)
-
-        pos1 = f.tell()
-        f.write(img1)
-
-        if img2_pal:
+        if version == "jp":
             # jp padding?
             f.write(b"\x00" * 0x10)
 
         f.seek(0)
-        f.write(pos1.to_bytes(4, byteorder="big"))
-        f.write(pos2.to_bytes(4, byteorder="big"))
-        f.write(pos3.to_bytes(4, byteorder="big"))
-        if pos2_pal:
-            f.write(pos2_pal.to_bytes(4, byteorder="big"))
+        for pos in imgs_pos:
+            f.write(pos.to_bytes(4, byteorder="big"))
