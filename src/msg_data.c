@@ -117,6 +117,9 @@ u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_UPPER_I_UMLAUT]         8,
     [MSG_CHAR_UPPER_N_TILDE]          9,
     [MSG_CHAR_UPPER_O_GRAVE]          9,
+#if VERSION_IQUE
+    [MSG_CHAR_UPPER_O_ACUTE ... MSG_CHAR_BUTTON_C_LEFT] = 18,
+#else
     [MSG_CHAR_UPPER_O_ACUTE]          9,
     [MSG_CHAR_UPPER_O_CIRCUMFLEX]     9,
     [MSG_CHAR_UPPER_O_UMLAUT]         9,
@@ -166,6 +169,7 @@ u8 MsgCharWidthNormal[] = {
     [MSG_CHAR_BUTTON_C_UP]           13,
     [MSG_CHAR_BUTTON_C_DOWN]         13,
     [MSG_CHAR_BUTTON_C_LEFT]         13,
+#endif
     [MSG_CHAR_BUTTON_C_RIGHT]        13,
     [MSG_CHAR_BUTTON_START]          16,
     [MSG_CHAR_DOUBLE_QUOTE_OPEN]      9,
@@ -309,16 +313,32 @@ MessageCharset* MsgCharsets[] = {
     NULL
 };
 
-s32 MsgLetterRasterOffsets[] = {
-    0x0000D178, 0x0000ED78, 0x00010978, 0x00012578,
-    0x00014178, 0x00015D78, 0x00017978, 0x00019578,
-    0x0001B178, 0x0001CD78, 0x0001E978, 0x00020578,
+u8 *MsgLetterRasterOffsets[] = {
+    charset_letter_content_1_OFFSET,
+    charset_letter_content_2_OFFSET,
+    charset_letter_content_3_OFFSET,
+    charset_letter_content_4_OFFSET,
+    charset_letter_content_5_OFFSET,
+    charset_letter_content_6_OFFSET,
+    charset_letter_content_7_OFFSET,
+    charset_letter_content_8_OFFSET,
+    charset_letter_content_9_OFFSET,
+    charset_letter_content_10_OFFSET,
+    charset_letter_content_11_OFFSET,
+    charset_letter_content_12_OFFSET,
 };
 
+// TODO: palette offsets
 s32 MsgLetterPaletteOffsets[] = {
+#if VERSION_IQUE
+    0x00058890, 0x0005A490, 0x0005C090, 0x0005DC90,
+    0x0005F890, 0x00061490, 0x00063090, 0x00064C90,
+    0x00066890, 0x00068490, 0x0006A090, 0x0006BC90,
+#else
     0x0000EB78, 0x00010778, 0x00012378, 0x00013F78,
     0x00015B78, 0x00017778, 0x00019378, 0x0001AF78,
     0x0001CB78, 0x0001E778, 0x00020378, 0x00021F78,
+#endif
 };
 
 MsgVoice MsgVoices[] = {

@@ -59,9 +59,15 @@ UnkStruct D_E010E7FC[] = {
 };
 
 UnkStruct D_E010E838[] = {
+#if VERSION_IQUE
+    { D_0900C240_3F80A0,  70,  0, 104, 20 },
+    { D_0900C328_3F8188,  70, 20, 104, 20 },
+    { D_0900C370_3F81D0, 172,  0,  16, 40 },
+#else
     { D_0900C240_3F80A0,   0,  0, 104, 20 },
     { D_0900C328_3F8188,   0, 20, 104, 20 },
     { D_0900C370_3F81D0, 232,  0,  16, 40 },
+#endif
     {              NULL,   0,  0,   0,  0 }
 };
 
@@ -82,23 +88,31 @@ UnkStruct D_E010E838_c[] = {
 };
 #endif
 
+#if VERSION_IQUE
+#define X_VAR 48
+#define Y_VAR -13
+#else
+#define X_VAR 128
+#define Y_VAR -33
+#endif
+
 UnkStruct D_E010E868[] = {
-    { D_0900BE40_3F7CA0, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900BE88_3F7CE8, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900BED0_3F7D30, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900BF18_3F7D78, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900BF60_3F7DC0, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900BFA8_3F7E08, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900BFF0_3F7E50, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 },
-    { D_0900C038_3F7E98, 128, -33, 64, 64 },
-    {              NULL,   0,   0,  0,  0 }
+    { D_0900BE40_3F7CA0, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900BE88_3F7CE8, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900BED0_3F7D30, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900BF18_3F7D78, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900BF60_3F7DC0, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900BFA8_3F7E08, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900BFF0_3F7E50, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 },
+    { D_0900C038_3F7E98, X_VAR, Y_VAR, 64, 64 },
+    {              NULL,     0,     0,  0,  0 }
 };
 
 void chapter_change_init(EffectInstance* effect);

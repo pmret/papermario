@@ -34,7 +34,11 @@ Gfx D_802A76E8_7A5628[] = {
     gsSPDisplayList(D_802A4508_7A2448),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
+#if VERSION_IQUE
+    gsSPVertex(&D_802A1218_79F158[0], 8, 0),
+#else
     gsSPVertex(&D_802A1398_79F2D8[0], 8, 0),
+#endif
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
@@ -90,7 +94,11 @@ Gfx D_802A7888_7A57C8[] = {
     gsSPDisplayList(D_802A65F8_7A4538),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
+#if VERSION_IQUE
+    gsSPVertex(&D_802A1098_79EFD8[0], 8, 0),
+#else
     gsSPVertex(&D_802A1198_79F0D8[0], 8, 0),
+#endif
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
@@ -140,13 +148,17 @@ Gfx D_802A79C0_7A5900[] = {
 
 Gfx D_802A7A28_7A5968[] = {
     gsSPSetLights1(level_up_lights),
+#if !VERSION_IQUE
     gsSPDisplayList(D_802A79C0_7A5900),
     gsSPDisplayList(D_802A7958_7A5898),
+#endif
     gsSPDisplayList(D_802A78F0_7A5830),
     gsSPDisplayList(D_802A7888_7A57C8),
+#if !VERSION_IQUE
     gsSPDisplayList(D_802A7820_7A5760),
     gsSPDisplayList(D_802A77B8_7A56F8),
     gsSPDisplayList(D_802A7750_7A5690),
+#endif
     gsSPDisplayList(D_802A76E8_7A5628),
     gsSPEndDisplayList(),
 };
