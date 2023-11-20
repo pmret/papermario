@@ -3714,9 +3714,9 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     s32 dsdx, dtdy;
 
 #if VERSION_IQUE
-    if (charIndex == MSG_CHAR_ZH_CHAPTER) {
+    if (charIndex == MSG_CHAR_ZH_RANK) {
         load_font_data(charset_standard_OFFSET + 0x19F80, sizeof(D_801544A0[0]), D_801544A0[0]);
-    } else if (charIndex == MSG_CHAR_ZH_RANK) {
+    } else if (charIndex == MSG_CHAR_ZH_CHAPTER) {
         load_font_data(charset_standard_OFFSET + 0x1A000, sizeof(D_801544A0[0]), D_801544A0[1]);
     } else if (charIndex >= MSG_CHAR_ZH_START) {
         load_font_data(charset_standard_OFFSET + charIndex, sizeof(D_801544A0[0]), D_801544A0[D_8014AD24]);
@@ -3781,8 +3781,8 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
 
     if (messageCharset->texSize.x >= 16 && messageCharset->texSize.x % 16 == 0) {
 #if VERSION_IQUE
-        if (charIndex == MSG_CHAR_ZH_CHAPTER || charIndex == MSG_CHAR_ZH_RANK) {
-            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[charIndex - MSG_CHAR_ZH_CHAPTER], G_IM_FMT_CI,
+        if (charIndex == MSG_CHAR_ZH_RANK || charIndex == MSG_CHAR_ZH_CHAPTER) {
+            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[charIndex - MSG_CHAR_ZH_RANK], G_IM_FMT_CI,
                                    messageCharset->texSize.x, messageCharset->texSize.y, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         } else if (charIndex >= MSG_CHAR_ZH_START) {
@@ -3799,8 +3799,8 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
 #endif
     } else {
 #if VERSION_IQUE
-        if (charIndex == MSG_CHAR_ZH_CHAPTER || charIndex == MSG_CHAR_ZH_RANK) {
-            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[charIndex - MSG_CHAR_ZH_CHAPTER], G_IM_FMT_CI,
+        if (charIndex == MSG_CHAR_ZH_RANK || charIndex == MSG_CHAR_ZH_CHAPTER) {
+            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[charIndex - MSG_CHAR_ZH_RANK], G_IM_FMT_CI,
                                   messageCharset->texSize.x, messageCharset->texSize.y,
                                   0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);

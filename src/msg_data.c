@@ -313,7 +313,7 @@ MessageCharset* MsgCharsets[] = {
     NULL
 };
 
-Addr MsgLetterRasterOffsets[] = {
+u8 *MsgLetterRasterOffsets[] = {
     charset_letter_content_1_OFFSET,
     charset_letter_content_2_OFFSET,
     charset_letter_content_3_OFFSET,
@@ -328,6 +328,7 @@ Addr MsgLetterRasterOffsets[] = {
     charset_letter_content_12_OFFSET,
 };
 
+// TODO: palette offsets
 s32 MsgLetterPaletteOffsets[] = {
 #if VERSION_IQUE
     0x00058890, 0x0005A490, 0x0005C090, 0x0005DC90,

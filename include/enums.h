@@ -5596,8 +5596,8 @@ enum MsgChars {
     MSG_CHAR_MULTIBYTE_FIRST        = 0x5F,
     MSG_CHAR_MULTIBYTE_LAST         = 0x8F,
     MSG_CHAR_ZH_START               = 0xA6,
-    MSG_CHAR_ZH_CHAPTER             = 0x33F, // 章
-    MSG_CHAR_ZH_RANK                = 0x340, // 勋
+    MSG_CHAR_ZH_RANK                = 0x33F, // 勋
+    MSG_CHAR_ZH_CHAPTER             = 0x340, // 章
 #endif
 
     MSG_CHAR_UNK_C3                 = 0xC3,
