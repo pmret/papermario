@@ -4,7 +4,7 @@
 #include "../common/RestoreFromPeachState.inc.c"
 
 API_CALLABLE(N(EnableParasol)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_HAS_PARASOL;
+    gGameStatusPtr->peachFlags |= PEACH_FLAG_HAS_PARASOL;
     return ApiStatus_DONE2;
 }
 

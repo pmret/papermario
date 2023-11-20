@@ -5,7 +5,7 @@
 extern s32 N(SpotlightsAlpha);
 
 API_CALLABLE(N(SetWorldDark)) {
-    func_8011B950(MODEL_Root, CUSTOM_GFX_NONE, FOG_MODE_1, 0);
+    func_8011B950(MODEL_Root, CUSTOM_GFX_NONE, FOG_MODE_1, FALSE);
     set_background_color_blend(0, 0, 0, 255);
     return ApiStatus_DONE2;
 }
@@ -23,7 +23,7 @@ API_CALLABLE(N(FadeInWorld)) {
     set_background_color_blend(0, 0, 0, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 0) {
-        func_8011B950(MODEL_Root, CUSTOM_GFX_NONE, FOG_MODE_0, 0);
+        func_8011B950(MODEL_Root, CUSTOM_GFX_NONE, FOG_MODE_0, FALSE);
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -111,7 +111,7 @@ API_CALLABLE(N(SetSpotlightsAlpha)) {
 }
 
 void N(gfx_build_set_spotlight_alpha)(void) {
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_3F, PM_CC_3F);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(SpotlightsAlpha));
 }
 

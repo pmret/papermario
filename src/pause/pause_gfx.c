@@ -232,7 +232,7 @@ Gfx PauseGfxPathPoints[] = {
     gsDPSetTextureFilter(G_TF_POINT),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
-    gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0),
+    gsDPSetCombineMode(PM_CC_2F, PM_CC_2F),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile(pause_map_location_png, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, 0, 15, 15, 0, G_TX_CLAMP, G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetTextureLUT(G_TT_NONE),

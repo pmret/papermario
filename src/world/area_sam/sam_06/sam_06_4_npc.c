@@ -286,7 +286,7 @@ API_CALLABLE(N(func_80242538_D223C8)) {
 
     if (isInitialCall) {
         if (script->varTable[0] == 0) {
-            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_1, TRUE);
         }
         script->functionTemp[0] = 0;
     }
@@ -309,7 +309,7 @@ API_CALLABLE(N(func_80242538_D223C8)) {
 
     if (script->functionTemp[0] >= 255) {
         if (script->varTable[0] == 3) {
-            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_0, 1);
+            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_0, TRUE);
         }
         return ApiStatus_DONE2;
     }

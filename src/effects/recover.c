@@ -196,7 +196,7 @@ void func_E0080448(EffectInstance* effect) {
                 gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
             } else {
                 gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-                gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_49, PM_CC_49);
             }
 
             gSPDisplayList(gMainGfxPos++, (type == 0 || type == 2) ?

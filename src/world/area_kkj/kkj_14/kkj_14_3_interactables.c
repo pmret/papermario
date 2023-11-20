@@ -212,7 +212,7 @@ API_CALLABLE(N(SetFireplaceAlpha)) {
 void N(setup_gfx_fireplace)(void) {
     gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
     gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, COMBINED, 0, 0, 0, PRIMITIVE);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_INTERFERENCE, PM_CC_3E);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(FireplaceAlpha));
 }
 

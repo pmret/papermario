@@ -575,7 +575,7 @@ void update_status_bar(void) {
 
     if (gGameStatusPtr->introPart >= INTRO_PART_0
         || gGameStatusPtr->demoState != DEMO_STATE_NONE
-        || (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)
+        || (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH)
         || evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE
     ) {
         return;
@@ -1583,7 +1583,7 @@ s32 is_ability_active(s32 ability) {
         attackFXArray[i] = 0;
     }
 
-    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
+    if (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH) {
         return 0;
     }
 

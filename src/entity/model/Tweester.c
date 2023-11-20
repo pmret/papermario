@@ -10,7 +10,7 @@
 Gfx Entity_Tweester_LoadTextures[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),
     gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b, 32, D_0A000BF0_E57A50),

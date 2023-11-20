@@ -13,7 +13,7 @@ API_CALLABLE(N(SetNightFogParams)) {
     s32 fogStart = evt_get_variable(script, *args++);
     s32 fogEnd = evt_get_variable(script, *args++);
 
-    set_model_fog_color_parameters(primR, primG, primB, primA, fogR, fogG, fogB, fogStart, fogEnd);
+    mdl_set_fog2_color_parameters(primR, primG, primB, primA, fogR, fogG, fogB, fogStart, fogEnd);
     return ApiStatus_DONE2;
 }
 

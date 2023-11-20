@@ -997,8 +997,8 @@ typedef struct TextureHeader {
     /* 0x26 */ u16 mainH;
     /* 0x28 */ u8 isVariant;
     /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
-    /* 0x2A */ u8 colorCombineType : 6;
-    /* 0x2A */ u8 colorCombineSubType : 2;
+    /* 0x2A */ u8 auxCombineType : 6;
+    /* 0x2A */ u8 auxCombineSubType : 2;
     /* 0x2B */ u8 auxFmt : 4;
     /* 0x2B */ u8 mainFmt : 4;
     /* 0x2C */ u8 auxBitDepth : 4;
@@ -1399,9 +1399,9 @@ typedef struct GameStatus {
     /* 0x07B */ char unk_7B;
     /* 0x07C */ b8 healthBarsEnabled;
     /* 0x07D */ b8 keepUsingPartnerOnMapChange;
-    /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
-    /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ u8 peachBakingIngredient; ///< @see enum PeachBakingItems
+    /* 0x07E */ u8 peachFlags; // see PeachFlags enum
+    /* 0x07F */ s8 peachDisguise; // see PeachDisguises enum
+    /* 0x080 */ u8 peachBakingIngredient; ///< @see PeachBakingItems enum
     /* 0x081 */ b8 multiplayerEnabled;
     /* 0x082 */ Vec2b altViewportOffset;
     /* 0x084 */ s8 playerSpriteSet;

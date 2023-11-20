@@ -8,7 +8,7 @@
 #define NAME_SUFFIX
 
 API_CALLABLE(N(func_80241C9C_8EDABC)) {
-    func_8011B950(MODEL_g62, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+    func_8011B950(MODEL_g62, CUSTOM_GFX_NONE, FOG_MODE_1, TRUE);
     set_background_color_blend(0, 0, 0, 255);
 
     gCameras[CAM_DEFAULT].bgColor[0] = 0;

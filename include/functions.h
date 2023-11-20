@@ -1014,7 +1014,7 @@ void status_bar_start_blinking_sp_bars(s32 numBarsToBlink);
 void status_bar_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits);
 void status_bar_draw_stat(s32 id, s32 x, s32 y, s32, s32);
 void set_background_size(s16, s16, s16, s16);
-void read_background_size(BackgroundHeader*);
+void set_background(BackgroundHeader*);
 void set_max_star_power(s8);
 void sync_status_bar(void);
 void create_cameras_a(void);
@@ -1080,7 +1080,7 @@ void partner_kill_ability_script(void);
 void func_800EF3D4(s32);
 
 void mdl_update_transform_matrices(void);
-void func_8011B950(u16, s32, s32, s32);
+void func_8011B950(u16, s32, s32, b32);
 
 void backup_map_collision_data(void);
 void reset_status_bar(void);

@@ -158,7 +158,7 @@ void appendGfx_darkness_stencil(b32 isWorld, s32 posX, s32 posY, f32 alpha, f32 
     gSPDisplayList(gMainGfxPos++, Gfx_DarknessStencilQuad);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMainGfxPos++);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, 0, 0, PRIMITIVE, TEXEL0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_56, PM_CC_56);
 
     for (i = 0; i < 2; i++) {
         f32 f20;
@@ -218,9 +218,9 @@ void appendGfx_darkness_stencil(b32 isWorld, s32 posX, s32 posY, f32 alpha, f32 
     gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
 
     if (alpha != 255.0f || isWorld == 1) {
-        gDPSetCombineLERP(gMainGfxPos++, 1, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, ENVIRONMENT, PRIMITIVE, 1, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, ENVIRONMENT, PRIMITIVE);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_57, PM_CC_57);
     } else {
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, 1, 0, ENVIRONMENT, PRIMITIVE, 0, 0, 0, 0, 1, 0, ENVIRONMENT, PRIMITIVE);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_58, PM_CC_58);
     }
     alpha *= 0.5f;
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha * 0.5f * progress / 255.0f);
@@ -269,7 +269,7 @@ void appendGfx_screen_transition_stencil(s32 arg0, s32 arg1, f32 progress, s32 p
 
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
     if (progress == 255.0f) {
-        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_PRIM_FULL_ALPHA, PM_CC_PRIM_FULL_ALPHA);
     }
     gDPSetPrimColor(gMainGfxPos++, 0, 0, primR, primG, primB, primA);
     texScale = (255.0f - progress) * 10.5f / 255.0f + 0.09; // range from

@@ -24,7 +24,7 @@ API_CALLABLE(N(AdjustFog)) {
         for (i = 0; i < iterList->count; i++) {
             s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_3);
+            set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, FOG_MODE_3);
             if (mode) {
                 mdl->flags &= ~MODEL_FLAG_HIDDEN;
             }
@@ -45,7 +45,7 @@ API_CALLABLE(N(AdjustFog)) {
         for (i = 0; i < iterList->count; i++) {
             s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_0);
+            set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, FOG_MODE_0);
             if (!mode) {
                 mdl->flags |= MODEL_FLAG_HIDDEN;
             }

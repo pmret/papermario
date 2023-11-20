@@ -963,7 +963,7 @@ void appendGfx_item_entity(void* data) {
                              GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
                              AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
                              GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
-            gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_2F, PM_CC_32);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, alpha);
         }
     }
@@ -1176,7 +1176,7 @@ void render_item_entities(void) {
                                 } else {
                                     gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
                                                                     AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
-                                    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+                                    gDPSetCombineMode(gMainGfxPos++, PM_CC_2F, PM_CC_32);
                                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, alpha);
                                 }
                             }

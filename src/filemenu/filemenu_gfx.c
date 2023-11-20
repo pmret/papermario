@@ -15,7 +15,7 @@ Gfx filemenu_dl_copyarrow[] = {
     gsDPSetTextureFilter(G_TF_BILERP),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetRenderMode(G_RM_PASS, G_RM_CLD_SURF2),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, ENVIRONMENT, PRIMITIVE, COMBINED, PRIMITIVE, COMBINED, 0, PRIMITIVE, 0),
+    gsDPSetCombineMode(G_CC_DECALRGBA, PM_CC_33),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile_4b(D_8024A200, G_IM_FMT_IA, 64, 16, 0, 0, 63, 15, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_WRAP, 6, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH | G_CLIPPING | 0x0040F9FA),

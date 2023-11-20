@@ -1364,7 +1364,7 @@ API_CALLABLE(N(func_8024295C_8B29CC)) {
 NOP_UNFIX
 
 API_CALLABLE(N(func_80242BA8_8B2C18)) {
-    *gBackgroundFogModePtr = 1;
+    *gBackgroundFogModePtr = FOG_MODE_1;
     return ApiStatus_DONE2;
 }
 
@@ -1384,11 +1384,11 @@ API_CALLABLE(N(func_80242BC0_8B2C30)) {
     newEnvB = evt_get_variable(script, *args++);
     duration = evt_get_variable(script, *args++);
     if (isInitialCall) {
-        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        mdl_get_fog3_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
         script->functionTemp[0] = 0;
     }
     if (duration > 0) {
-        set_model_env_color_parameters(
+        mdl_set_fog3_color_parameters(
             oldPrimR + ((newPrimR - oldPrimR) * script->functionTemp[0]) / duration,
             oldPrimG + ((newPrimG - oldPrimG) * script->functionTemp[0]) / duration,
             oldPrimB + ((newPrimB - oldPrimB) * script->functionTemp[0]) / duration,
@@ -1400,7 +1400,7 @@ API_CALLABLE(N(func_80242BC0_8B2C30)) {
             return 2;
         }
     } else {
-        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        mdl_set_fog3_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
         return 2;
     }
     return 0;
@@ -1412,7 +1412,7 @@ API_CALLABLE(N(func_80242F08_8B2F78)) {
 }
 
 API_CALLABLE(N(func_80242F28_8B2F98)) {
-    func_8011B950(MODEL_kinopi, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+    func_8011B950(MODEL_kinopi, CUSTOM_GFX_NONE, FOG_MODE_1, TRUE);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;

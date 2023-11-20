@@ -1,7 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
-#define MAX_POINTS (30)
+#define MAX_POINTS      30
+#define VTX_BUF_SIZE    2 * MAX_POINTS * sizeof(Vtx) / sizeof(Gfx)
 
 void effect_65_init(EffectInstance* effect);
 void effect_65_update(EffectInstance* effect);
@@ -256,17 +257,20 @@ void effect_65_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E00CACB0[variation]);
 
     if (variation >= 2) {
-        gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_4E, PM_CC_4F);
     }
 
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, primAlpha);
     gDPSetEnvColor(gMainGfxPos++, data->envR, data->envG, data->envB, 0);
-    gSPBranchList(gMainGfxPos, gMainGfxPos + 0x79);
+    gSPBranchList(gMainGfxPos, gMainGfxPos + 1 + VTX_BUF_SIZE);
+    gMainGfxPos++;
 
-    vtxBuffer = (Vtx_t*) (gMainGfxPos + 1);
+    // reserve space in the display list for the vertices
+    vtxBuffer = (Vtx_t*)gMainGfxPos;
+    gMainGfxPos += VTX_BUF_SIZE;
+    
     firstPointIdx = -1;
     baseTexOffset = (lifeTime & 0x3F) << 5;
-    gMainGfxPos += 0x79;
 
     numPoints = 0;
     for (i = 0; i < MAX_POINTS; i++) {
@@ -381,6 +385,7 @@ void effect_65_appendGfx(void* effect) {
             phase += 180;
         }
 
+        // gSPBranchList jumps to here (after the vertex array)
         for (i = firstPointIdx; i < MAX_POINTS - 1; i++) {
             gSPVertex(gMainGfxPos++, &vtxBuffer[i * 2], 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);

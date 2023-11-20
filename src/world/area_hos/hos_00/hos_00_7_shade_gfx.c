@@ -10,7 +10,7 @@ void N(setup_gfx_background_shade)(void) {
         alpha = 216;
     }
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, SHADE, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, SHADE, SHADE, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_HOS_BG_SHADE, PM_CC_HOS_BG_SHADE);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
 }
 

@@ -29,7 +29,7 @@ EffectInstance* merlin_house_stars_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) 
 
     data->unk_04 = 100;
     data->unk_00 = arg0;
-    data->unk_18 = 255;
+    data->alpha = 255;
     data->unk_0C = arg1;
     data->unk_10 = arg2;
     data->unk_14 = arg3;
@@ -75,11 +75,11 @@ void merlin_house_stars_update(EffectInstance* effect) {
     unk_04 = data->unk_04;
 
     if (data->unk_08 < 17) {
-        data->unk_18 = data->unk_08 * 16 - 1;
+        data->alpha = data->unk_08 * 16 - 1;
     }
 
     if (unk_04 < 16) {
-        data->unk_18 = unk_04 * 16;
+        data->alpha = unk_04 * 16;
     }
 
     if (data->unk_1C < 0.0f) {
@@ -126,9 +126,12 @@ void merlin_house_stars_render(EffectInstance* effect) {
 void func_E00A639C(void) {
 }
 
+#define PM_CC1_MERLIN_STARS     0, 0, 0, 1, TEXEL1, 0, PRIMITIVE, TEXEL0
+#define PM_CC2_MERLIN_STARS     0, 0, 0, COMBINED, COMBINED, 0, ENVIRONMENT, 0
+
 void merlin_house_stars_appendGfx(void* effect) {
     MerlinHouseStarsFXData* data = ((EffectInstance*)effect)->data.merlinHouseStars;
-    s32 unk_18 = data->unk_18;
+    s32 envAlpha = data->alpha;
     Matrix4f sp10;
     Matrix4f sp50;
     s32 uls;
@@ -144,8 +147,8 @@ void merlin_house_stars_appendGfx(void* effect) {
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 127);
-    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, unk_18);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 1, TEXEL1, 0, PRIMITIVE, TEXEL0, 0, 0, 0, COMBINED, COMBINED, 0, ENVIRONMENT, 0);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, envAlpha);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC1_MERLIN_STARS, PM_CC2_MERLIN_STARS);
     gSPDisplayList(gMainGfxPos++, D_09001000_3A6BE0);
 
     uls = data->unk_1C * 4.0f;

@@ -22,14 +22,14 @@ AnimID N(ExtraAnims_Koopatrol)[] = {
 
 #include "../common/Searchlights.inc.c"
 #include "world/common/todo/GetPeachDisguise.inc.c"
-#include "../common/SetPeachFlag8.inc.c"
+#include "../common/PreventNextPeachDisguise.inc.c"
 #include "../common/ApproachPlayer100Units.inc.c"
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(N(SetPeachFlag8))
+    EVT_CALL(N(PreventNextPeachDisguise))
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
     EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(NpcFacePlayer, NPC_SELF, 5)

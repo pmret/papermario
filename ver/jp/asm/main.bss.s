@@ -136,7 +136,7 @@ dlabel gDisplayContext
 dlabel D_8009A678
 .space 8
 
-dlabel D_8009A680
+dlabel ResetFrameBufferArray
 .space 0x00000010
 
 dlabel SoftResetDelay

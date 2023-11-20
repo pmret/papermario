@@ -177,7 +177,7 @@ void snowfall_appendGfx(void* effect) {
         bgAlpha = 255;
         unk_2C = data->unk_2C;
         dlist = D_E008AA50[data->unk_04];
-        if (*gBackgroundFogModePtr == 1) {
+        if (*gBackgroundFogModePtr == FOG_MODE_1) {
             get_background_color_blend(&bgRGB, &bgRGB, &bgRGB, &bgAlpha);
             unk_28 = 255 - bgAlpha;
         }

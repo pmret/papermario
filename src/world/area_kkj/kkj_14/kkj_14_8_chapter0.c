@@ -2,12 +2,12 @@
 #include "sprite/player.h"
 
 API_CALLABLE(N(SetPeachDepressed)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_DEPRESSED;
+    gGameStatusPtr->peachFlags |= PEACH_FLAG_DEPRESSED;
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(ClearPeachDepressed)) {
-    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DEPRESSED;
+    gGameStatusPtr->peachFlags &= ~PEACH_FLAG_DEPRESSED;
     return ApiStatus_DONE2;
 }
 

@@ -3,7 +3,7 @@
 s32 set_background_color_blend(s32, s32, s32, s32);
 
 API_CALLABLE(N(InitEntryFromToybox)) {
-    func_8011B950(MODEL_heiho_house, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+    func_8011B950(MODEL_heiho_house, CUSTOM_GFX_NONE, FOG_MODE_1, TRUE);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;

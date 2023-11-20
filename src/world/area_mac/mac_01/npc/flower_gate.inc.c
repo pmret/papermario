@@ -197,7 +197,7 @@ API_CALLABLE(N(SetFlowerGateGlowAlpha)) {
 }
 
 void N(gfx_build_flower_gate_glow)(void) {
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_FLOWER_GATE_GLOW, PM_CC_FLOWER_GATE_GLOW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(FlowerGatePrimAlpha));
 }
 

@@ -78,7 +78,7 @@ void action_update_step_up(void) {
 
 void func_802B6198_E24768(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
-        if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
+        if (!(gGameStatusPtr->peachFlags & PEACH_FLAG_DEPRESSED)) {
             suggest_player_anim_allow_backward(StepUpPeachAnims[gGameStatusPtr->peachBakingIngredient]);
         } else {
             suggest_player_anim_allow_backward(ANIM_Peach3_WalkSad);

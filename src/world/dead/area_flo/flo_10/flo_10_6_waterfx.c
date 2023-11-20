@@ -308,7 +308,7 @@ void N(UnkModelFunc001)(void) {
         }
         gDPSetColorImage(new_var, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
 
-        gDPSetCombineMode(gMainGfxPos++, PM_CC_09, PM_CC_09);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_PRIM_NO_ALPHA, PM_CC_PRIM_NO_ALPHA);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMainGfxPos++);
 

@@ -13,7 +13,7 @@ API_CALLABLE(N(func_80240000_8ABF90)) {
 
     args = script->ptrReadPos;
     if (isInitialCall) {
-        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        mdl_get_fog3_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
         newPrimR = evt_get_variable(script, *args++);
         newPrimG = evt_get_variable(script, *args++);
         newPrimB = evt_get_variable(script, *args++);
@@ -26,7 +26,7 @@ API_CALLABLE(N(func_80240000_8ABF90)) {
 
     if (duration > 0) {
         time++;
-        set_model_env_color_parameters(
+        mdl_set_fog3_color_parameters(
             (oldPrimR + ((newPrimR - oldPrimR) * time) / duration),
             (oldPrimG + ((newPrimG - oldPrimG) * time) / duration),
             (oldPrimB + ((newPrimB - oldPrimB) * time) / duration),
@@ -37,7 +37,7 @@ API_CALLABLE(N(func_80240000_8ABF90)) {
             return ApiStatus_DONE2;
         }
     } else {
-        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        mdl_set_fog3_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

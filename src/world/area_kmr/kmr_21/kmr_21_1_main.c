@@ -19,7 +19,7 @@ Gfx N(Gfx_TexSetup_TitleImage)[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL1, 0, PRIMITIVE, 0),
+    gsDPSetCombineMode(PM_CC_2E, PM_CC_2E),
     gsDPSetTextureFilter(G_TF_POINT),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetTexturePersp(G_TP_NONE),

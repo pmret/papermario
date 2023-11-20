@@ -217,10 +217,10 @@ void damage_indicator_render_impl(EffectInstance* effect) {
 
     if (part->alpha == 255) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
-        gDPSetCombineLERP(gMainGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_DAMAGE_INDICATOR, PM_CC_DAMAGE_INDICATOR);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMainGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_DAMAGE_INDICATOR, PM_CC_DAMAGE_INDICATOR);
     }
 
     for(i = 1; i < effect->numParts; i++, part--) {

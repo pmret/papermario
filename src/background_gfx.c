@@ -363,7 +363,7 @@ void gfx_draw_background(void) {
             // @bug In 1-cycle mode, the two combiner cycles should be identical. Using Texel1 here in the second cycle,
             // which is the actual cycle of the combiner used on hardware in 1-cycle mode, actually samples the next
             // pixel's texel value instead of the current pixel's. This results in a one-pixel offset.
-            gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE, TEXEL1, PRIMITIVE_ALPHA, TEXEL1, 0, 0, 0, 1);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_43, PM_CC_44);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, gPauseBackgroundFade);
             gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
 

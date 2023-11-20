@@ -69,17 +69,17 @@ void reset_player_status(void) {
 
     playerStatus->curAlpha = 255;
     playerStatus->prevAlpha = 255;
-    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
-    gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_DEPRESSED;
+    gGameStatusPtr->peachFlags &= ~PEACH_FLAG_BLOCK_NEXT_DISGUISE;
+    gGameStatusPtr->peachFlags &= ~PEACH_FLAG_DEPRESSED;
 
     one = 1.0f;
 
-    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
+    if (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH) {
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
         playerStatus->animFlags |= PA_FLAG_USING_PEACH_PHYSICS;
 
-        if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DISGUISED) {
+        if (gGameStatusPtr->peachFlags & PEACH_FLAG_DISGUISED) {
             D_8010C92C = 2;
             playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }

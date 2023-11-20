@@ -14,7 +14,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     s32 temp_a2;
 
     if (isInitialCall) {
-        func_8011B950(script->varTable[1], CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+        func_8011B950(script->varTable[1], CUSTOM_GFX_NONE, FOG_MODE_1, TRUE);
         script->functionTemp[0] = 0;
         get_background_color_blend(&r, &g, &b, &a);
         if ((script->varTable[0] == 0 && a == 255) || (script->varTable[0] == 1 && a == 0)) {
@@ -41,7 +41,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     gCameras[CAM_DEFAULT].bgColor[2] = b;
     if (script->functionTemp[0] >= 255) {
         if (script->varTable[0] == 1) {
-            func_8011B950(script->varTable[1], CUSTOM_GFX_NONE, FOG_MODE_0, 1);
+            func_8011B950(script->varTable[1], CUSTOM_GFX_NONE, FOG_MODE_0, TRUE);
         }
 
         return ApiStatus_DONE2;

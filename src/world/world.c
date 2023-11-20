@@ -210,7 +210,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     if (mapSettings->background != NULL) {
-        read_background_size(mapSettings->background);
+        set_background(mapSettings->background);
     } else {
         set_background_size(296, 200, 12, 20);
     }

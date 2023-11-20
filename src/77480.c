@@ -1730,7 +1730,7 @@ void update_player_shadow(void) {
     shadow->pos.y = y;
     shadow->alpha = (f64)playerStatus->curAlpha / 2;
 
-    if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)) {
+    if (!(gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH)) {
         set_standard_shadow_scale(shadow, shadowScale);
     } else {
         set_peach_shadow_scale(shadow, shadowScale);

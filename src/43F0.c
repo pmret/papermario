@@ -784,7 +784,7 @@ void appendGfx_startup_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 
 
     if (a == 255) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_PRIM_FULL_ALPHA, PM_CC_PRIM_FULL_ALPHA);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);

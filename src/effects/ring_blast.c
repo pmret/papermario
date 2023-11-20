@@ -119,9 +119,9 @@ void ring_blast_appendGfx(void* effect) {
         gDPSetEnvColor(gMainGfxPos++, var_f4 * 255.0f, var_f4 * 53.0f, var_f4 * 24.0f, envAlpha);
         gDPSetKeyR(gMainGfxPos++, var_f4 * 211.0f, 0, 0);
         gDPSetKeyGB(gMainGfxPos++, var_f4 * 255.0f, 0, 0, var_f4 * 216.0f, 0, 0);
-        gDPSetCombineLERP(gMainGfxPos++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, PRIMITIVE, CENTER, COMBINED, ENVIRONMENT, 0, 0, 0, COMBINED);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_4A, PM_CC_4B);
     } else {
-        gDPSetCombineLERP(gMainGfxPos++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, 1, COMBINED, PRIMITIVE, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_4A, PM_CC_4C);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 40, 127);
         gDPSetEnvColor(gMainGfxPos++, 255, 255, 139, envAlpha);
     }

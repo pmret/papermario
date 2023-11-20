@@ -142,9 +142,9 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_SetupBushes))
     EVT_EXEC(N(EVS_SpawnButterflies))
-    EVT_CALL(N(UnkFunc27), 0, -1, 3)
-    EVT_CALL(N(UnkFunc27), 2, 0, 3)
-    EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 0, 0, 25, 0, 0, 0)
+    EVT_CALL(N(UnkFunc27), FUNC27_MODE_0, -1, 3)
+    EVT_CALL(N(UnkFunc27), FUNC27_MODE_2, NULL, 3)
+    EVT_CALL(N(UnkFunc26), FOG_MODE_3, 255, 255, 255, 0, 0, 25, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

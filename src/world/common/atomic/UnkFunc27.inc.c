@@ -2,6 +2,12 @@
 #include "npc.h"
 #include "model.h"
 
+enum {
+    FUNC27_MODE_0   = 0,
+    FUNC27_MODE_1   = 1,
+    FUNC27_MODE_2   = 2,
+};
+
 API_CALLABLE(N(UnkFunc27)) {
     Bytecode* args = script->ptrReadPos;
     s32 mode = evt_get_variable(script, *args++);
@@ -17,29 +23,29 @@ API_CALLABLE(N(UnkFunc27)) {
     }
 
     switch (mode) {
-        case 0:
+        case FUNC27_MODE_0:
             while (TRUE) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
                 listIndex = get_model_list_index_from_tree_index(*modelIDList);
                 mdl = get_model_from_list_index(listIndex);
-                set_mdl_custom_gfx_set(mdl, -1, fogType);
+                set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, fogType);
                 modelIDList++;
             };
             break;
 
-        case 1:
+        case FUNC27_MODE_1:
             while (TRUE) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                func_8011B950(*modelIDList, CUSTOM_GFX_NONE, fogType, 0);
+                func_8011B950(*modelIDList, CUSTOM_GFX_NONE, fogType, FALSE);
                 modelIDList++;
             };
             break;
 
-        case 2:
+        case FUNC27_MODE_2:
             *gBackgroundFogModePtr = fogType;
             break;
 
@@ -49,26 +55,26 @@ API_CALLABLE(N(UnkFunc27)) {
 
 API_CALLABLE(N(UnkFunc26)) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = evt_get_variable(script, *args++);
-    s32 var2 = evt_get_variable(script, *args++);
-    s32 var3 = evt_get_variable(script, *args++);
-    s32 var4 = evt_get_variable(script, *args++);
-    s32 var5 = evt_get_variable(script, *args++);
-    s32 var6 = evt_get_variable(script, *args++);
-    s32 var7 = evt_get_variable(script, *args++);
-    s32 var8 = evt_get_variable(script, *args++);
-    s32 var9 = evt_get_variable(script, *args++);
-    s32 var10 = evt_get_variable(script, *args++);
+    s32 fogMode = evt_get_variable(script, *args++);
+    s32 arg0 = evt_get_variable(script, *args++);
+    s32 arg1 = evt_get_variable(script, *args++);
+    s32 arg2 = evt_get_variable(script, *args++);
+    s32 arg3 = evt_get_variable(script, *args++);
+    s32 arg4 = evt_get_variable(script, *args++);
+    s32 arg5 = evt_get_variable(script, *args++);
+    s32 arg6 = evt_get_variable(script, *args++);
+    s32 arg7 = evt_get_variable(script, *args++);
+    s32 arg8 = evt_get_variable(script, *args++);
 
-    switch (var1) {
-        case 1:
-            set_background_color_blend(var2, var3, var4, var5);
+    switch (fogMode) {
+        case FOG_MODE_1:
+            set_background_color_blend(arg0, arg1, arg2, arg3);
             break;
-        case 2:
-            set_model_fog_color_parameters(var2, var3, var4, var5, var6, var7, var8, var9, var10);
+        case FOG_MODE_2:
+            mdl_set_fog2_color_parameters(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
             break;
-        case 3:
-            set_model_env_color_parameters(var2, var3, var4, var5, var6, var7);
+        case FOG_MODE_3:
+            mdl_set_fog3_color_parameters(arg0, arg1, arg2, arg3, arg4, arg5);
             break;
     }
 
