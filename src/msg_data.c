@@ -313,7 +313,7 @@ MessageCharset* MsgCharsets[] = {
     NULL
 };
 
-s32 MsgLetterRasterOffsets[] = {
+Addr MsgLetterRasterOffsets[] = {
     charset_letter_content_1_OFFSET,
     charset_letter_content_2_OFFSET,
     charset_letter_content_3_OFFSET,
