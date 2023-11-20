@@ -1296,7 +1296,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 *printBuf++ = c;
                 arg1--;
 #if VERSION_IQUE
-                if (c >= 0x5F && c <= 0x8F) {
+                if (c >= MSG_CHAR_MULTIBYTE_FIRST && c <= MSG_CHAR_MULTIBYTE_LAST) {
                     *printBuf++ = nextArg;
                     srcBuf++;
                     arg1--;
@@ -3714,12 +3714,12 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     s32 dsdx, dtdy;
 
 #if VERSION_IQUE
-    if (charIndex == 0x33F) {
-        load_font_data(charset_standard_OFFSET + 0x19F80, 0x80, D_801544A0);
-    } else if (charIndex == 0x340) {
-        load_font_data(charset_standard_OFFSET + 0x1A000, 0x80, D_801544A0[1]);
-    } else if (charIndex >= 0xA6) {
-        load_font_data(charset_standard_OFFSET + charIndex, 0x80, D_801544A0[D_8014AD24]);
+    if (charIndex == MSG_CHAR_ZH_CHAPTER) {
+        load_font_data(charset_standard_OFFSET + 0x19F80, sizeof(D_801544A0[0]), D_801544A0[0]);
+    } else if (charIndex == MSG_CHAR_ZH_RANK) {
+        load_font_data(charset_standard_OFFSET + 0x1A000, sizeof(D_801544A0[0]), D_801544A0[1]);
+    } else if (charIndex >= MSG_CHAR_ZH_START) {
+        load_font_data(charset_standard_OFFSET + charIndex, sizeof(D_801544A0[0]), D_801544A0[D_8014AD24]);
     }
 #endif
 
@@ -3781,11 +3781,11 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
 
     if (messageCharset->texSize.x >= 16 && messageCharset->texSize.x % 16 == 0) {
 #if VERSION_IQUE
-        if (charIndex == 0x33f || charIndex == 0x340) {
-            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[charIndex - 0x33f], G_IM_FMT_CI,
+        if (charIndex == MSG_CHAR_ZH_CHAPTER || charIndex == MSG_CHAR_ZH_RANK) {
+            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[charIndex - MSG_CHAR_ZH_CHAPTER], G_IM_FMT_CI,
                                    messageCharset->texSize.x, messageCharset->texSize.y, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-        } else if (charIndex >= 0xA6) {
+        } else if (charIndex >= MSG_CHAR_ZH_START) {
             gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[D_8014AD24], G_IM_FMT_CI,
                                    messageCharset->texSize.x, messageCharset->texSize.y, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -3799,12 +3799,12 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
 #endif
     } else {
 #if VERSION_IQUE
-        if (charIndex == 0x33f || charIndex == 0x340) {
-            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[charIndex - 0x33f], G_IM_FMT_CI,
+        if (charIndex == MSG_CHAR_ZH_CHAPTER || charIndex == MSG_CHAR_ZH_RANK) {
+            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[charIndex - MSG_CHAR_ZH_CHAPTER], G_IM_FMT_CI,
                                   messageCharset->texSize.x, messageCharset->texSize.y,
                                   0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-        } else if (charIndex >= 0xA6) {
+        } else if (charIndex >= MSG_CHAR_ZH_START) {
             gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[D_8014AD24], G_IM_FMT_CI,
                                   messageCharset->texSize.x, messageCharset->texSize.y,
                                   0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
@@ -3823,7 +3823,7 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
                         dsdx, dtdy);
 
 #if VERSION_IQUE
-    if (charIndex >= 0xA6) {
+    if (charIndex >= MSG_CHAR_ZH_START) {
         D_8014AD24 = (D_8014AD24 + 1) % 120;
         if (D_8014AD24 == 0) {
             D_8014AD24 = 2;
