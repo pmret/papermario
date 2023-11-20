@@ -2414,7 +2414,7 @@ enum DoorSounds {
     DOOR_SOUNDS_UNUSED              = 6,
 };
 
-#if VERSION_US || VERSION_PAL
+#if VERSION_US || VERSION_PAL || VERSION_IQUE
 #include "sprite/sprite_shading_profiles.h"
 #endif
 
@@ -5595,6 +5595,9 @@ enum MsgChars {
     // All US characters are in the rom, but their range is used for multibyte characters
     MSG_CHAR_MULTIBYTE_FIRST        = 0x5F,
     MSG_CHAR_MULTIBYTE_LAST         = 0x8F,
+    MSG_CHAR_ZH_START               = 0xA6,
+    MSG_CHAR_ZH_RANK                = 0x33F, // 勋
+    MSG_CHAR_ZH_CHAPTER             = 0x340, // 章
 #endif
 
     MSG_CHAR_UNK_C3                 = 0xC3,

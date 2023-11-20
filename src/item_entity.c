@@ -11,11 +11,6 @@
 #include "sprite.h"
 #include "sprite/player.h"
 
-#if VERSION_IQUE
-// TODO: remove if section is split in iQue release
-extern Addr icon_ROM_START;
-#endif
-
 #define MAX_ITEM_ENTITIES 256
 
 extern SparkleScript SparkleScript_Coin;
@@ -734,7 +729,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
         item->flags = (item->flags | ITEM_ENTITY_FLAG_FULLSIZE) & ~ITEM_ENTITY_RESIZABLE;
     }
-    
+
     if (ItemEntityAlternatingSpawn != 0) {
         item->flags |= ITEM_ENTITY_FLAG_ODD_SPAWN_PARITY;
     }

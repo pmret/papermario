@@ -3,11 +3,6 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
-#if VERSION_IQUE
-// TODO: remove if section is split in iQue release
-extern Addr icon_ROM_START;
-#endif
-
 #define MAX_HUD_CACHE_ENTRIES 192
 
 typedef struct HudElementSize {
@@ -1837,7 +1832,7 @@ void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
         if (elem->flags & HUD_ELEMENT_FLAG_FRONTUI || elem->drawSizePreset < 0 || !(elem->flags & HUD_ELEMENT_FLAG_80)) {
             return;
         }
-        
+
         render_hud_element(elem);
     }
 }

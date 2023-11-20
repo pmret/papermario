@@ -3,21 +3,8 @@
 #include "message_ids.h"
 #include "sprite.h"
 
-#if !VERSION_IQUE
-// TODO: remove if assets are dumped in iQue release
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
-#endif
-
-#if VERSION_IQUE
-// TODO: remove if section is split in iQue release
-extern Addr charset_ROM_START;
-extern Addr charset_standard_OFFSET;
-extern Addr charset_standard_pal_OFFSET;
-extern Addr charset_title_OFFSET;
-extern Addr charset_credits_pal_OFFSET;
-extern Addr charset_subtitle_OFFSET;
-#endif
 
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,
@@ -104,6 +91,9 @@ SHIFT_BSS MessageDrawState* msg_drawState;
 SHIFT_BSS IMG_BIN D_80159B50[0x200];
 SHIFT_BSS PAL_BIN D_8015C7E0[0x10];
 SHIFT_BSS MessagePrintState gMessagePrinters[3];
+#if VERSION_IQUE
+SHIFT_BSS IMG_BIN D_801544A0[120][128];
+#endif
 
 extern s16 MsgStyleVerticalLineOffsets[];
 
@@ -697,7 +687,7 @@ extern s32 MsgLetterRasterOffsets[];
 extern s32 MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
-#if VERSION_IQUE || VERSION_PAL
+#if VERSION_PAL
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 #else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
@@ -952,6 +942,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->lineCount = 0;
                         break;
+#if !VERSION_IQUE
                     case MSG_READ_FUNC_SIZE:
                         *printBuf++ = MSG_CHAR_PRINT_FUNCTION;
                         *printBuf++ = MSG_PRINT_FUNC_SIZE;
@@ -964,6 +955,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = MSG_PRINT_FUNC_SIZE_RESET;
                         printer->sizeScale = 1.0f;
                         break;
+#endif
                     case MSG_READ_FUNC_SPEED:
                         printer->printDelayTime = *srcBuf++;
                         printer->charsPerChunk = *srcBuf++;
@@ -1303,6 +1295,13 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
             default:
                 *printBuf++ = c;
                 arg1--;
+#if VERSION_IQUE
+                if (c >= MSG_CHAR_MULTIBYTE_FIRST && c <= MSG_CHAR_MULTIBYTE_LAST) {
+                    *printBuf++ = nextArg;
+                    srcBuf++;
+                    arg1--;
+                }
+#endif
                 if (printer->fontVariant == 0 && c == MSG_CHAR_UNK_C3) {
                     printer->stateFlags &= ~MSG_STATE_FLAG_SPEAKING;
                 } else {
@@ -3693,26 +3692,47 @@ void msg_reset_gfx_state(void) {
     gSPDisplayList(gMainGfxPos++, D_8014C500);
 }
 
-#if VERSION_IQUE
+#if VERSION_IQUE && !defined(NON_MATCHING)
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 #else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
-    MessageCharset* messageCharset = MsgCharsets[drawState->font];
-    s32 fontVariant = drawState->fontVariant;
+    MessageCharset* messageCharset;
+    s32 fontVariant;
 
-    s32 clipUly = drawState->clipY[0];
-    s32 clipLry = drawState->clipY[1];
-    s32 clipUlx = drawState->clipX[0];
-    s32 clipLrx = drawState->clipX[1];
+    s32 clipUly;
+    s32 clipLry;
+    s32 clipUlx;
+    s32 clipLrx;
 
-    s32 rightPosX = posX + (s32)(drawState->charScale.x * messageCharset->texSize.x);
-    s32 rightPosY = posY + (s32)(drawState->charScale.y * messageCharset->texSize.y);
+    s32 rightPosX;
+    s32 rightPosY;
 
     f32 clipOffset;
     s32 texOffsetX;
     s32 texOffsetY;
     s32 ulx, uly, lrx, lry;
     s32 dsdx, dtdy;
+
+#if VERSION_IQUE
+    if (charIndex == MSG_CHAR_ZH_RANK) {
+        load_font_data(charset_standard_OFFSET + 0x19F80, sizeof(D_801544A0[0]), D_801544A0[0]);
+    } else if (charIndex == MSG_CHAR_ZH_CHAPTER) {
+        load_font_data(charset_standard_OFFSET + 0x1A000, sizeof(D_801544A0[0]), D_801544A0[1]);
+    } else if (charIndex >= MSG_CHAR_ZH_START) {
+        load_font_data(charset_standard_OFFSET + charIndex, sizeof(D_801544A0[0]), D_801544A0[D_8014AD24]);
+    }
+#endif
+
+    messageCharset = MsgCharsets[drawState->font];
+    fontVariant = drawState->fontVariant;
+
+    clipUly = drawState->clipY[0];
+    clipLry = drawState->clipY[1];
+    clipUlx = drawState->clipX[0];
+    clipLrx = drawState->clipX[1];
+
+    rightPosX = posX + (s32)(drawState->charScale.x * messageCharset->texSize.x);
+    rightPosY = posY + (s32)(drawState->charScale.y * messageCharset->texSize.y);
 
     if (posX >= clipLrx || posY >= clipLry || rightPosX <= clipUlx || rightPosY <= clipUly) {
         return;
@@ -3760,17 +3780,56 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     }
 
     if (messageCharset->texSize.x >= 16 && messageCharset->texSize.x % 16 == 0) {
-        gDPLoadTextureBlock_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
-                               messageCharset->texSize.x, messageCharset->texSize.y, 0,
-                               G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        if (charIndex == MSG_CHAR_ZH_RANK || charIndex == MSG_CHAR_ZH_CHAPTER) {
+            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[charIndex - MSG_CHAR_ZH_RANK], G_IM_FMT_CI,
+                                   messageCharset->texSize.x, messageCharset->texSize.y, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (charIndex >= MSG_CHAR_ZH_START) {
+            gDPLoadTextureBlock_4b(gMainGfxPos++, D_801544A0[D_8014AD24], G_IM_FMT_CI,
+                                   messageCharset->texSize.x, messageCharset->texSize.y, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else {
+#endif
+            gDPLoadTextureBlock_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
+                                   messageCharset->texSize.x, messageCharset->texSize.y, 0,
+                                   G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        }
+#endif
     } else {
-        gDPLoadTextureTile_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
-                              messageCharset->texSize.x, messageCharset->texSize.y,
-                              0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
-                              G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        if (charIndex == MSG_CHAR_ZH_RANK || charIndex == MSG_CHAR_ZH_CHAPTER) {
+            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[charIndex - MSG_CHAR_ZH_RANK], G_IM_FMT_CI,
+                                  messageCharset->texSize.x, messageCharset->texSize.y,
+                                  0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
+                                  G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else if (charIndex >= MSG_CHAR_ZH_START) {
+            gDPLoadTextureTile_4b(gMainGfxPos++,  D_801544A0[D_8014AD24], G_IM_FMT_CI,
+                                  messageCharset->texSize.x, messageCharset->texSize.y,
+                                  0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
+                                  G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        } else {
+#endif
+            gDPLoadTextureTile_4b(gMainGfxPos++, messageCharset->rasters[fontVariant].raster + messageCharset->charRasterSize * charIndex, G_IM_FMT_CI,
+                                  messageCharset->texSize.x, messageCharset->texSize.y,
+                                  0, 0, messageCharset->texSize.x - 1, messageCharset->texSize.y - 1, 0,
+                                  G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+#if VERSION_IQUE
+        }
+#endif
     }
     gSPTextureRectangle(gMainGfxPos++, ulx * 4, uly * 4, lrx * 4, lry * 4, G_TX_RENDERTILE, texOffsetX, texOffsetY,
                         dsdx, dtdy);
+
+#if VERSION_IQUE
+    if (charIndex >= MSG_CHAR_ZH_START) {
+        D_8014AD24 = (D_8014AD24 + 1) % 120;
+        if (D_8014AD24 == 0) {
+            D_8014AD24 = 2;
+        }
+    }
+#endif
 }
 #endif
 

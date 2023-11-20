@@ -4,16 +4,6 @@
 #include "model.h"
 #include "sprite/player.h"
 
-#if VERSION_IQUE
-// TODO: remove if sections are split in iQue release
-extern Addr entity_jan_iwa_ROM_START;
-extern Addr entity_jan_iwa_ROM_END;
-extern Addr entity_default_ROM_START;
-extern Addr entity_default_ROM_END;
-extern Addr entity_sbk_omo_ROM_START;
-extern Addr entity_sbk_omo_ROM_END;
-#endif
-
 #ifdef SHIFT
 extern Addr WorldEntityHeapBottom;
 extern Addr WorldEntityHeapBase;
