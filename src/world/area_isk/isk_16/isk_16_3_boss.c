@@ -64,7 +64,11 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_WAIT(30 * DT)
     EVT_SET(LVar0, 255)
     EVT_LOOP(60 * DT)
-        EVT_ADD(LVar0, -4 * DT)
+#if VERSION_PAL
+        EVT_ADD(LVar0, -5)
+#else
+        EVT_ADD(LVar0, -4)
+#endif
         EVT_CALL(N(SetModelTintParams), ENV_TINT_SHROUD, 0, 0, 0, LVar0, 0, 0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
