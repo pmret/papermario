@@ -404,7 +404,7 @@ void btl_bonk_update(void* data) {
             if (message->unk_24 != 0) {
                 message->unk_24--;
                 if (message->unk_24 == 0) {
-                    clear_entity_model_flags(modelIdx, MODEL_FLAG_20);
+                    clear_entity_model_flags(modelIdx, ENTITY_MODEL_FLAG_HIDDEN);
                 }
                 exec_entity_model_commandlist(modelIdx);
                 break;

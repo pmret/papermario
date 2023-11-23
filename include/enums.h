@@ -4313,7 +4313,7 @@ enum GlobalOverrides {
 #define MODEL_FLAGS_MASK_FFF0  (\
       MODEL_FLAG_USES_CUSTOM_GFX \
     | MODEL_FLAG_20 \
-    | MODEL_FLAG_40 \
+    | MODEL_FLAG_IGNORE_FOG \
     | MODEL_FLAG_HAS_LOCAL_VERTEX_COPY \
     | MODEL_FLAG_USE_CAMERA_UNK_MATRIX \
     | MODEL_FLAG_DO_BOUNDS_CULLING \
@@ -4321,8 +4321,8 @@ enum GlobalOverrides {
     | MODEL_FLAG_HAS_TEX_PANNER \
     | MODEL_FLAG_MATRIX_DIRTY \
     | MODEL_FLAG_IGNORE_MATRIX \
-    | MODEL_FLAG_4000 \
-    | MODEL_FLAG_8000)
+    | MODEL_FLAG_UNUSED_4000 \
+    | MODEL_FLAG_UNUSED_8000)
 
 enum ModelFlags {
     MODEL_FLAG_VALID                    = 0x0001,
@@ -4331,7 +4331,7 @@ enum ModelFlags {
     MODEL_FLAG_TRANSFORM_GROUP_MEMBER   = 0x0008,
     MODEL_FLAG_USES_CUSTOM_GFX          = 0x0010,
     MODEL_FLAG_20                       = 0x0020,
-    MODEL_FLAG_40                       = 0x0040,
+    MODEL_FLAG_IGNORE_FOG               = 0x0040,
     MODEL_FLAG_HAS_LOCAL_VERTEX_COPY    = 0x0080,
     MODEL_FLAG_USE_CAMERA_UNK_MATRIX    = 0x0100,
     MODEL_FLAG_DO_BOUNDS_CULLING        = 0x0200,
@@ -4339,8 +4339,8 @@ enum ModelFlags {
     MODEL_FLAG_HAS_TEX_PANNER           = 0x0800,
     MODEL_FLAG_MATRIX_DIRTY             = 0x1000, // transform matrix changed and combined matrix needs to be recalculated
     MODEL_FLAG_IGNORE_MATRIX            = 0x2000, // set until dirty combined matrix has been recalculated
-    MODEL_FLAG_4000                     = 0x4000,
-    MODEL_FLAG_8000                     = 0x8000,
+    MODEL_FLAG_UNUSED_4000              = 0x4000,
+    MODEL_FLAG_UNUSED_8000              = 0x8000,
 };
 
 enum ModelGroupVisibility {

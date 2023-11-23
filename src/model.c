@@ -1420,7 +1420,7 @@ void appendGfx_model(void* data) {
     }
     
     if (textureHeader != NULL || renderMode <= RENDER_MODES_LAST_OPAQUE) {
-        if (gFogSettings->enabled && !(flags & MODEL_FLAG_40)) {
+        if (gFogSettings->enabled && !(flags & MODEL_FLAG_IGNORE_FOG)) {
             renderClass = RENDER_CLASS_FOG;
             tintCombineType = TINT_COMBINE_FOG;
         }
@@ -1513,7 +1513,7 @@ void appendGfx_model(void* data) {
         gDPSetAlphaDither((*gfxPos)++, G_AD_PATTERN);
     }
 
-    // setup combine modes for main/aux texture blending when fog is enabled
+    // setup combine modes for main/aux texture blending when fog or tint is enabled
     if (tintCombineType != TINT_COMBINE_NONE
         || renderMode == RENDER_MODE_ALPHATEST
         || renderMode == RENDER_MODE_ALPHATEST_ONESIDED
