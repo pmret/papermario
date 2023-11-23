@@ -113,7 +113,7 @@ extern s32 ResetGameState;
 extern u16* ResetSavedFrameImg;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
-extern IMG_BIN D_80073E10[];
+extern IMG_BIN ResetTilesImg[];
 
 #ifdef SHIFT
 #define shim_create_audio_system_obfuscated create_audio_system
@@ -231,7 +231,7 @@ void appendGfx_reset_tile_pattern(void) {
     gDPSetCombineMode(gMainGfxPos++, PM_CC_RESET_TILES, PM_CC_RESET_TILES);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_THRESHOLD);
     gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, 127);
-    gDPLoadTextureTile_4b(gMainGfxPos++, D_80073E10, G_IM_FMT_I, 128, 8, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureTile_4b(gMainGfxPos++, ResetTilesImg, G_IM_FMT_I, 128, 8, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     for (i = 0; i < 20; i++) {
