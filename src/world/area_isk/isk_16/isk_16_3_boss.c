@@ -1,14 +1,14 @@
 #include "isk_16.h"
 #include "sprite/player.h"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(N(UnkFunc27), FUNC27_MODE_0, -1, FOG_MODE_1)
-    EVT_CALL(N(UnkFunc27), FUNC27_MODE_2, NULL, FOG_MODE_1)
-    EVT_CALL(N(UnkFunc26), FOG_MODE_1, 0, 0, 0, 255, 0, 0, 0, 0, 0)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, -1, ENV_TINT_SHROUD)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_SHROUD)
+    EVT_CALL(N(SetModelTintParams), ENV_TINT_SHROUD, 0, 0, 0, 255, 0, 0, 0, 0, 0)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 410, -910, 410)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 336, -910, 467)
@@ -65,10 +65,10 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_SET(LVar0, 255)
     EVT_LOOP(60 * DT)
         EVT_ADD(LVar0, -4 * DT)
-        EVT_CALL(N(UnkFunc26), FOG_MODE_1, 0, 0, 0, LVar0, 0, 0, 0, 0, 0)
+        EVT_CALL(N(SetModelTintParams), ENV_TINT_SHROUD, 0, 0, 0, LVar0, 0, 0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(N(UnkFunc26), FOG_MODE_1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(N(SetModelTintParams), ENV_TINT_SHROUD, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(530.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)

@@ -625,9 +625,9 @@ void btl_state_update_celebration(void) {
             LevelUpScriptID = LevelUpScriptPtr->id;
             CelebrateSubstateTime = 25;
             gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CREATE_HUD;
-            mdl_set_all_fog_mode(FOG_MODE_1);
-            *gBackgroundFogModePtr = FOG_MODE_1;
-            set_background_color_blend(0, 0, 0, 0);
+            mdl_set_all_tint_type(ENV_TINT_SHROUD);
+            *gBackgroundTintModePtr = ENV_TINT_SHROUD;
+            mdl_set_shroud_tint_params(0, 0, 0, 0);
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_CREATE_HUD:
             if (CelebrateSubstateTime == 18) {
@@ -647,7 +647,7 @@ void btl_state_update_celebration(void) {
             if (CelebrateSubstateTime != 0) {
                 CelebrateSubstateTime--;
                 if (CelebrateSubstateTime < 10) {
-                    set_background_color_blend(0, 0, 0, ((10 - CelebrateSubstateTime) * 16) & 0xF0);
+                    mdl_set_shroud_tint_params(0, 0, 0, ((10 - CelebrateSubstateTime) * 16) & 0xF0);
                 }
             } else {
                 id = hud_element_create(&HES_level_up_heart);
@@ -1115,7 +1115,7 @@ void btl_state_update_celebration(void) {
             }
 
             hud_element_free(LevelUpSelectTextID);
-            set_background_color_blend(0, 0, 0, 0);
+            mdl_set_shroud_tint_params(0, 0, 0, 0);
             btl_set_state(BATTLE_STATE_END_BATTLE);
             gBattleSubState = BTL_SUBSTATE_END_BATTLE_EXEC_STAGE_SCRIPT;
             break;

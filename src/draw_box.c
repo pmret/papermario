@@ -436,7 +436,7 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
         gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
         gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, 0);
         gDPSetFogColor(gMainGfxPos++, 0, 0, 0, darkening);
-        gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_XLU_SURF2);
+        gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_XLU_SURF2);
         if (!(flags & DRAW_FLAG_NO_CLIP)) {
             gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         }

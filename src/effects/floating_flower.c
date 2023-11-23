@@ -157,8 +157,8 @@ void floating_flower_appendGfx(void* effect) {
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    if (*gBackgroundFogModePtr == FOG_MODE_1) {
-        get_background_color_blend(&rgb, &rgb, &rgb, &a);
+    if (*gBackgroundTintModePtr == ENV_TINT_SHROUD) {
+        mdl_get_shroud_tint_params(&rgb, &rgb, &rgb, &a);
         alpha -= a;
     }
 

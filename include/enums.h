@@ -3280,6 +3280,7 @@ enum RenderMode {
     RENDER_MODE_0E_UNUSED                        = 0x0E,
     RENDER_MODE_ALPHATEST_ONESIDED               = 0x0F,
     RENDER_MODE_ALPHATEST_NO_ZB                  = 0x10,
+    RENDER_MODES_LAST_OPAQUE                     = RENDER_MODE_ALPHATEST_NO_ZB,
     // translucent render modes
     RENDER_MODE_SURFACE_XLU_LAYER1               = 0x11,
     RENDER_MODE_12_UNUSED                        = 0x12,
@@ -4347,6 +4348,20 @@ enum ModelGroupVisibility {
     MODEL_GROUP_VISIBLE         = 1,
     MODEL_GROUP_OTHERS_HIDDEN   = 2,
     MODEL_GROUP_OTHERS_VISIBLE  = 3,
+};
+
+enum TintMode {
+    ENV_TINT_UNCHANGED  = -1,
+    // no additional tint is applied (model is still be affected by world fog)
+    ENV_TINT_NONE       = 0,
+    // additional fog which 'shrouds' the world during certain scenes
+    ENV_TINT_SHROUD     = 1,
+    // adds depth-based tint using fog, overriding the world fog for affected models
+    ENV_TINT_DEPTH      = 2,
+    // this mode remaps each color channel range from [0, 255] -> [min, max],
+    // setting a new white point and black point for the scene.
+    // the new max values are stored in PRIMITIVE and the new min values in ENV
+    ENV_TINT_REMAP      = 3,
 };
 
 enum TexPanner {
@@ -5859,14 +5874,6 @@ enum BackgroundFlags {
     BACKGROUND_RENDER_STATE_FILTER_PAUSED   = 0x20,
     BACKGROUND_RENDER_STATE_SHOW_PAUSED     = 0x30,
     BACKGROUND_RENDER_STATE_MASK            = 0xF0,
-};
-
-enum FogMode {
-    FOG_MODE_UNCHANGED = -1,
-    FOG_MODE_0 = 0,
-    FOG_MODE_1 = 1,
-    FOG_MODE_2 = 2, // prim and fog colors are set
-    FOG_MODE_3 = 3, // prim and env colors are set
 };
 
 enum EncounterStates {

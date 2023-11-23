@@ -69,7 +69,7 @@ enum N(AnimState) {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 s32 N(BowserDefense)[] = {
     ELEMENT_NORMAL,   1,
@@ -1409,13 +1409,13 @@ EvtScript N(EVS_FakeBowser_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
-                EVT_CALL(N(UnkFunc27), FUNC27_MODE_0, EVT_PTR(N(BowserModels)), FOG_MODE_3)
-                EVT_CALL(N(UnkFunc26), FOG_MODE_3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_REMAP)
+                EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 35, 35, 35, 0, 0, 0, 0, 0, 0)
             EVT_END_IF
             EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
             EVT_WAIT(20)
             EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
-                EVT_CALL(N(UnkFunc27), FUNC27_MODE_0, EVT_PTR(N(BowserModels)), FOG_MODE_0)
+                EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_NONE)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
                 EVT_DIVF(LVar3, EVT_FLOAT(2.0))
@@ -1443,12 +1443,12 @@ EvtScript N(EVS_FakeBowser_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_CALL(N(UnkFunc27), FUNC27_MODE_0, EVT_PTR(N(BowserModels)), FOG_MODE_3)
-            EVT_CALL(N(UnkFunc26), FOG_MODE_3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_REMAP)
+            EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 35, 35, 35, 0, 0, 0, 0, 0, 0)
             EVT_SET(ArrayVar(0), ANIM_BEGIN_HURT)
             EVT_WAIT(20)
             EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
-            EVT_CALL(N(UnkFunc27), FUNC27_MODE_0, EVT_PTR(N(BowserModels)), FOG_MODE_0)
+            EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(BowserModels)), ENV_TINT_NONE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
             EVT_DIVF(LVar3, EVT_FLOAT(2.0))

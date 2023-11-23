@@ -3,59 +3,59 @@
 #include "model.h"
 
 enum {
-    FUNC27_MODE_0   = 0,
-    FUNC27_MODE_1   = 1,
-    FUNC27_MODE_2   = 2,
+    APPLY_TINT_MODELS   = 0,
+    APPLY_TINT_GROUPS   = 1,
+    APPLY_TINT_BG       = 2,
 };
 
-API_CALLABLE(N(UnkFunc27)) {
+API_CALLABLE(N(SetModelTintMode)) {
     Bytecode* args = script->ptrReadPos;
     s32 mode = evt_get_variable(script, *args++);
     s32 testS0 = evt_get_variable(script, *args++);
-    s32 fogType = evt_get_variable(script, *args++);
+    s32 tintType = evt_get_variable(script, *args++);
     s32* modelIDList = (s32*) testS0;
     s32 listIndex;
     Model* mdl;
 
     if (modelIDList == PTR_LIST_END) {
-        mdl_set_all_fog_mode(fogType);
+        mdl_set_all_tint_type(tintType);
         return ApiStatus_DONE2;
     }
 
     switch (mode) {
-        case FUNC27_MODE_0:
+        case APPLY_TINT_MODELS:
             while (TRUE) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
                 listIndex = get_model_list_index_from_tree_index(*modelIDList);
                 mdl = get_model_from_list_index(listIndex);
-                set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, fogType);
+                set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, tintType);
                 modelIDList++;
             };
             break;
 
-        case FUNC27_MODE_1:
+        case APPLY_TINT_GROUPS:
             while (TRUE) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                func_8011B950(*modelIDList, CUSTOM_GFX_NONE, fogType, FALSE);
+                mdl_group_set_custom_gfx(*modelIDList, CUSTOM_GFX_NONE, tintType, FALSE);
                 modelIDList++;
             };
             break;
 
-        case FUNC27_MODE_2:
-            *gBackgroundFogModePtr = fogType;
+        case APPLY_TINT_BG:
+            *gBackgroundTintModePtr = tintType;
             break;
 
     }
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(UnkFunc26)) {
+API_CALLABLE(N(SetModelTintParams)) {
     Bytecode* args = script->ptrReadPos;
-    s32 fogMode = evt_get_variable(script, *args++);
+    s32 tintType = evt_get_variable(script, *args++);
     s32 arg0 = evt_get_variable(script, *args++);
     s32 arg1 = evt_get_variable(script, *args++);
     s32 arg2 = evt_get_variable(script, *args++);
@@ -66,15 +66,15 @@ API_CALLABLE(N(UnkFunc26)) {
     s32 arg7 = evt_get_variable(script, *args++);
     s32 arg8 = evt_get_variable(script, *args++);
 
-    switch (fogMode) {
-        case FOG_MODE_1:
-            set_background_color_blend(arg0, arg1, arg2, arg3);
+    switch (tintType) {
+        case ENV_TINT_SHROUD:
+            mdl_set_shroud_tint_params(arg0, arg1, arg2, arg3);
             break;
-        case FOG_MODE_2:
-            mdl_set_fog2_color_parameters(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+        case ENV_TINT_DEPTH:
+            mdl_set_depth_tint_params(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
             break;
-        case FOG_MODE_3:
-            mdl_set_fog3_color_parameters(arg0, arg1, arg2, arg3, arg4, arg5);
+        case ENV_TINT_REMAP:
+            mdl_set_remap_tint_params(arg0, arg1, arg2, arg3, arg4, arg5);
             break;
     }
 

@@ -910,7 +910,7 @@ void appendGfx_item_entity(void* data) {
         if (item->flags & ITEM_ENTITY_FLAG_HIDING) {
             u8 r, g, b, a;
 
-            get_background_color_blend(&r, &g, &b, &a);
+            mdl_get_shroud_tint_params(&r, &g, &b, &a);
             alpha = (alpha * (255 - a)) / 255;
         }
     }
@@ -1161,7 +1161,7 @@ void render_item_entities(void) {
                                 alpha = item->alpha * alpha / 255;
                             }
                             if (item->flags & ITEM_ENTITY_FLAG_HIDING) {
-                                get_background_color_blend(&r1, &g1, &b1, &a1);
+                                mdl_get_shroud_tint_params(&r1, &g1, &b1, &a1);
                                 alpha = alpha * (255 - a1) / 255;
                             }
                             if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_HIDING)) {

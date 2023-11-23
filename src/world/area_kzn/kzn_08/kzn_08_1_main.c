@@ -101,31 +101,32 @@ LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = -1 }
 };
 
-EvtScript N(EVS_80244790) = {
+// unused
+EvtScript N(EVS_AnimateLavaScale) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(MakeLerp, 1, 100, 200, EASING_LINEAR)
     EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-    EVT_CALL(ScaleModel, MODEL_yougan1, LVar0, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-    EVT_MULF(LVar0, EVT_FLOAT(-5.0))
-    EVT_ADDF(LVar0, EVT_FLOAT(100.0))
-    EVT_SET(MV_GlowIntensity, LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
+        EVT_CALL(ScaleModel, MODEL_yougan1, LVar0, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_MULF(LVar0, EVT_FLOAT(-5.0))
+        EVT_ADDF(LVar0, EVT_FLOAT(100.0))
+        EVT_SET(MV_GlowIntensity, LVar0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(0)
+        EVT_END_IF
     EVT_CALL(MakeLerp, 0, 35, 100, EASING_LINEAR)
     EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateModel, MODEL_yougan, 0, LVar0, 0)
-    EVT_MULF(LVar0, EVT_FLOAT(-1.25))
-    EVT_ADDF(LVar0, EVT_FLOAT(50.0))
-    EVT_SET(MV_GlowIntensity, LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, MODEL_yougan, 0, LVar0, 0)
+        EVT_MULF(LVar0, EVT_FLOAT(-1.25))
+        EVT_ADDF(LVar0, EVT_FLOAT(50.0))
+        EVT_SET(MV_GlowIntensity, LVar0)
+        EVT_WAIT(1)
+        EVT_IF_EQ(LVar1, 1)
+            EVT_GOTO(10)
+        EVT_END_IF
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS,  COLLIDER_yougan_atari, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_yougan_atari, SURFACE_TYPE_LAVA)
     EVT_THREAD

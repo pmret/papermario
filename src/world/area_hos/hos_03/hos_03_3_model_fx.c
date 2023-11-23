@@ -154,7 +154,7 @@ EvtScript N(EVS_SetupAurora) = {
     EVT_CALL(SetTexPanner, MODEL_o160, TEX_PANNER_7)
     EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o76, TRUE)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(build_gfx_aurora)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     EVT_RETURN
     EVT_END
 };

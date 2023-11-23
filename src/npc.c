@@ -990,7 +990,7 @@ void render_npcs(void) {
 
                 if (npc->flags & NPC_FLAG_HIDING) {
                     u8 r, g, b, a;
-                    get_background_color_blend(&r, &g, &b, &a);
+                    mdl_get_shroud_tint_params(&r, &g, &b, &a);
                     npc->hideAlpha = 255 - a;
                 } else {
                     npc->hideAlpha = 255;

@@ -188,9 +188,9 @@ typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 extern ModelList* gCurrentModels;
 
-void mdl_set_fog2_color_parameters(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd);
-void mdl_set_fog3_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
-void mdl_get_fog3_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
+void mdl_set_depth_tint_params(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd);
+void mdl_set_remap_tint_params(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
+void mdl_get_remap_tint_params(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 void init_model_data(void);
 void update_model_animator(s32);
@@ -221,6 +221,6 @@ void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, 
 void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32);
 void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSkip);
 
-void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
+void mdl_set_shroud_tint_params(u8 r, u8 g, u8 b, u8 a);
 
 #endif

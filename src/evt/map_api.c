@@ -215,7 +215,7 @@ ApiStatus SetGroupVisibility(Evt* script, s32 isInitialCall) {
     Bytecode groupModelID = evt_get_variable(script, *args++);
     Bytecode enabled = evt_get_variable(script, *args++);
 
-    set_model_group_visibility(groupModelID, MODEL_FLAG_HIDDEN, enabled);
+    mdl_group_set_visibility(groupModelID, MODEL_FLAG_HIDDEN, enabled);
     return ApiStatus_DONE2;
 }
 

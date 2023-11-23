@@ -55,7 +55,7 @@ dlabel gCurrentCustomModelGfxPtr
 dlabel gLastCreatedEntityIndex
 .space 4
 
-dlabel gBackgroundFogModePtr
+dlabel gBackgroundTintModePtr
 .space 4
 
 dlabel gMsgVarImages
@@ -222,10 +222,10 @@ dlabel wModelTreeNodeInfo
 dlabel bModelTreeNodeInfo
 .space 0x00000800
 
-dlabel wBackgroundFogMode
+dlabel wBackgroundTintMode
 .space 1
 
-dlabel bBackgroundFogMode
+dlabel bBackgroundTintMode
 .space 1
 
 dlabel D_80153222
@@ -234,7 +234,7 @@ dlabel D_80153222
 dlabel D_80153223
 .space 1
 
-dlabel mdl_treeIterPos
+dlabel TreeIterPos
 .space 4
 
 dlabel wFogSettings
@@ -243,7 +243,7 @@ dlabel wFogSettings
 dlabel bFogSettings
 .space 0x0000001c
 
-dlabel gCurrentFogSettings
+dlabel gFogSettings
 .space 4
 
 dlabel texPannerMainU
@@ -279,16 +279,16 @@ dlabel mtg_MaxChild
 dlabel D_80153378
 .space 8
 
-dlabel depthCopyBuffer
+dlabel DepthCopyBuffer
 .space 0x00000020
 
-dlabel mdl_renderTaskLists
+dlabel RenderTaskLists
 .space 0x0000000c
 
-dlabel mdl_renderTaskQueueIdx
+dlabel RenderTaskListIdx
 .space 4
 
-dlabel mdl_renderTaskCount
+dlabel RenderTaskCount
 .space 0x00000010
 
 dlabel D_801533C0
@@ -664,7 +664,7 @@ dlabel gCurrentHiddenPanels
 
 .space 8
 
-dlabel mdl_textureHandles
+dlabel TextureHandles
 .space 0x00002200
 
 dlabel ScreenOverlays

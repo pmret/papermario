@@ -82,7 +82,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o685, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o685, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kkj_12_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilit1, 1, 0)

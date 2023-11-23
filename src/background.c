@@ -96,18 +96,18 @@ void appendGfx_background_texture(void) {
         fogA = gGameStatusPtr->backgroundDarkness;
     }
 
-    switch (*gBackgroundFogModePtr) {
-        case FOG_MODE_0:
-        case FOG_MODE_1:
-            get_background_color_blend(&r1, &g1, &b1, &a1);
+    switch (*gBackgroundTintModePtr) {
+        case ENV_TINT_NONE:
+        case ENV_TINT_SHROUD:
+            mdl_get_shroud_tint_params(&r1, &g1, &b1, &a1);
             if (a1 != 0) {
                 flags |= BG_BLEND_SHOULD_LERP;
             }
             break;
-        case FOG_MODE_2:
-        case FOG_MODE_3:
+        case ENV_TINT_DEPTH:
+        case ENV_TINT_REMAP:
         default:
-            mdl_get_fog3_color_parameters(&r1, &g1, &b1, &r2, &g2, &b2);
+            mdl_get_remap_tint_params(&r1, &g1, &b1, &r2, &g2, &b2);
             if (!(r1 == 255 && g1 == 255 && b1 == 255 && r2 == 0 && g2 == 0 && b2 == 0)) {
                 flags |= BG_BLEND_SHOULD_BLEND;
             }
@@ -141,9 +141,9 @@ void appendGfx_background_texture(void) {
     }
 
     if (gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_FOG) {
-        switch (*gBackgroundFogModePtr) {
-            case FOG_MODE_0:
-            case FOG_MODE_1:
+        switch (*gBackgroundTintModePtr) {
+            case ENV_TINT_NONE:
+            case ENV_TINT_SHROUD:
                 if (fogA == 255) {
                     for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                         gBackgroundPalette[i] = 1;
@@ -160,11 +160,10 @@ void appendGfx_background_texture(void) {
                     }
                 }
                 break;
-            case FOG_MODE_2:
-            case FOG_MODE_3:
+            case ENV_TINT_DEPTH:
+            case ENV_TINT_REMAP:
             default:
-                // in these modes, the background color is modulated channel-wise by r1/g1/b1 and blended with env
-                // to prevent oversaturating channel x, users should ensure x2 + x1 <= 255
+                // the background color channels are remapped from [0,255] -> [min,max]
                 for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                     // NOTE: values after UNPACK range from [0,31], so we need to shift other colors into that range
                     u16 palColor = gGameStatusPtr->backgroundPalette[i];

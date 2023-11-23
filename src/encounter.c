@@ -242,13 +242,13 @@ ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
 
 ApiStatus FadeBackgroundDarken(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(FOG_MODE_1);
-        *gBackgroundFogModePtr = FOG_MODE_1;
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_all_tint_type(ENV_TINT_SHROUD);
+        *gBackgroundTintModePtr = ENV_TINT_SHROUD;
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
+    mdl_set_shroud_tint_params(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
@@ -263,11 +263,11 @@ ApiStatus FadeBackgroundLighten(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 254);
+    mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 10) & 254);
     script->functionTemp[0] -= 5;
 
     if (script->functionTemp[0] == 0) {
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

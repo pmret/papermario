@@ -737,7 +737,7 @@ void tattle_cam_pre_render(Camera* camera) {
         fogEnabled = TRUE;
         get_world_fog_color(&fogR, &fogG, &fogB, &fogA);
         fogA = gGameStatusPtr->backgroundDarkness;
-        get_background_color_blend(&r1, &g1, &b1, &a1);
+        mdl_get_shroud_tint_params(&r1, &g1, &b1, &a1);
         if (fogA == 255) {
             for (i = 0; i < ARRAY_COUNT(gTattleBgPalette); i++) {
                 gTattleBgPalette[i] = 1;

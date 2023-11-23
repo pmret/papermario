@@ -228,13 +228,13 @@ API_CALLABLE(GiveRefundCleanup) {
 
 API_CALLABLE(LifeShroomShroudWorld) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(FOG_MODE_1);
-        *gBackgroundFogModePtr = FOG_MODE_1;
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_all_tint_type(ENV_TINT_SHROUD);
+        *gBackgroundTintModePtr = ENV_TINT_SHROUD;
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         script->functionTemp[0] = 20;
     }
 
-    set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
+    mdl_set_shroud_tint_params(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
     script->functionTemp[0] -= 1;
 
@@ -251,11 +251,11 @@ API_CALLABLE(LifeShroomRevealWorld) {
         btl_cam_unfreeze();
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 12) & 0xFC);
+    mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 12) & 0xFC);
 
     script->functionTemp[0] -= 1;
     if (script->functionTemp[0] == 0) {
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
     
@@ -343,13 +343,13 @@ API_CALLABLE(PlayBattleMerleeOrbFX) {
 
 API_CALLABLE(BattleMerleeFadeStageToBlack) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(FOG_MODE_1);
-        *gBackgroundFogModePtr = FOG_MODE_1;
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_all_tint_type(ENV_TINT_SHROUD);
+        *gBackgroundTintModePtr = ENV_TINT_SHROUD;
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
+    mdl_set_shroud_tint_params(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
@@ -364,11 +364,11 @@ API_CALLABLE(BattleMerleeFadeStageFromBlack) {
         script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 0xFF);
+    mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 10) & 0xFF);
 
     script->functionTemp[0] -= 5;
     if (script->functionTemp[0] == 0) {
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
 
