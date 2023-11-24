@@ -53,7 +53,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                     ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
-                    script->AI_TEMP_STATE = 12;
+                    script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
                     return;
                 }
             } while (0); // required to match
@@ -95,15 +95,15 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
             npc->jumpVel = 0.0f;
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_JUMPING;
-            script->AI_TEMP_STATE = 2;
+            script->AI_TEMP_STATE = AI_STATE_LOITER_INIT;
             script->functionTemp[1] = (rand_int(1000) % 3) + 2;
 
             if (aiSettings->unk_AI_2C <= 0) {
-                script->AI_TEMP_STATE = 0;
+                script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
             } else if (aiSettings->moveTime <= 0) {
-                script->AI_TEMP_STATE = 0;
+                script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
             } else if (script->functionTemp[1] == 0) {
-                script->AI_TEMP_STATE = 0;
+                script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
             }
             return;
         }
@@ -119,7 +119,7 @@ void N(HoppingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
     npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-    script->AI_TEMP_STATE = 3;
+    script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
 void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -131,7 +131,7 @@ void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_AI_ALERT_A, SOUND_PARAM_MORE_QUIET);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
-        script->AI_TEMP_STATE = 12;
+        script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration <= 0) {
@@ -140,7 +140,7 @@ void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 npc->duration = (rand_int(1000) % 11) + 5;
             } else {
-                script->AI_TEMP_STATE = 0;
+                script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
             }
         }
     }
@@ -155,7 +155,7 @@ void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     enemy->jumpScale = 1.5f;
     enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     enemy->moveSpeed = aiSettings->chaseSpeed;
-    script->AI_TEMP_STATE = 13;
+    script->AI_TEMP_STATE = AI_STATE_CHASE;
     ai_enemy_play_sound(enemy, SOUND_SEQ_FUZZY_HOP, 0);
 }
 
@@ -195,12 +195,12 @@ void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_JUMPING;
             fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
-            script->functionTemp[0] = 12;
+            script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
 
             if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
                 fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                 npc->duration = 25;
-                script->functionTemp[0] = 14;
+                script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
             }
             return;
         }
@@ -214,7 +214,7 @@ void N(HoppingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration--;
     if (npc->duration <= 0) {
-        script->AI_TEMP_STATE = 0;
+        script->AI_TEMP_STATE = AI_STATE_HOP_INIT;
     }
 }
 
