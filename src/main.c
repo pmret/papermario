@@ -115,7 +115,7 @@ extern s16 D_80073E08;
 extern s16 D_80073E0A;
 extern IMG_BIN ResetTilesImg[];
 
-#ifdef SHIFT
+#if defined(SHIFT) || VERSION_IQUE
 #define shim_create_audio_system_obfuscated create_audio_system
 #define shim_load_engine_data_obfuscated load_engine_data
 #endif
@@ -154,14 +154,11 @@ void boot_main(void* data) {
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
 
-#if VERSION_IQUE
-    create_audio_system();
-    load_engine_data();
-#else
+#if !VERSION_IQUE
     load_obfuscation_shims();
+#endif
     shim_create_audio_system_obfuscated();
     shim_load_engine_data_obfuscated();
-#endif
 
     nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);
