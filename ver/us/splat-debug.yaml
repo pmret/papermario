@@ -1,4 +1,3 @@
 options:
   ld_discard_section: False
-  create_elf_section_list_auto: True
-  elf_section_list_path: ver/us/build/elf_sections.txt
+  ld_sections_denylist: [ .eh_frame, .MIPS.abiflags ]
