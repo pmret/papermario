@@ -55,7 +55,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o207, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o207, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
     EVT_CALL(SetTexPanner, MODEL_o209, 0)
     EVT_THREAD
@@ -65,7 +65,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o209, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o209, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
     EVT_RETURN

@@ -177,8 +177,8 @@ void snowfall_appendGfx(void* effect) {
         bgAlpha = 255;
         unk_2C = data->unk_2C;
         dlist = D_E008AA50[data->unk_04];
-        if (*gBackgroundFogModePtr == 1) {
-            get_background_color_blend(&bgRGB, &bgRGB, &bgRGB, &bgAlpha);
+        if (*gBackgroundTintModePtr == ENV_TINT_SHROUD) {
+            mdl_get_shroud_tint_params(&bgRGB, &bgRGB, &bgRGB, &bgAlpha);
             unk_28 = 255 - bgAlpha;
         }
 

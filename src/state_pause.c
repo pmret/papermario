@@ -197,7 +197,7 @@ void state_step_unpause(void) {
 
                     load_map_bg(mapConfig->bgName);
                     if (mapSettings->background != NULL) {
-                        read_background_size(mapSettings->background);
+                        set_background(mapSettings->background);
                     } else {
                         set_background_size(296, 200, 12, 20);
                     }

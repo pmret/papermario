@@ -37,7 +37,7 @@ void reset_background_settings(void) {
     gGameStatusPtr->backgroundFlags &= BACKGROUND_RENDER_STATE_MASK;
 }
 
-void read_background_size(BackgroundHeader* bg) {
+void set_background(BackgroundHeader* bg) {
     gGameStatusPtr->backgroundMaxX = bg->width;
     gGameStatusPtr->backgroundMaxY = bg->height;
     gGameStatusPtr->backgroundMinX = bg->startX;
@@ -83,66 +83,75 @@ void appendGfx_background_texture(void) {
 
     u8* newvar;
 
+    enum {
+        BG_BLEND_NONE           = 0,
+        BG_BLEND_HAS_FOG        = 1,
+        BG_BLEND_SHOULD_LERP    = 2,
+        BG_BLEND_SHOULD_BLEND   = 4,
+    };
+
     if (is_world_fog_enabled()) {
         get_world_fog_color(&fogR, &fogG, &fogB, &fogA);
-        flags = 1;
+        flags = BG_BLEND_HAS_FOG;
         fogA = gGameStatusPtr->backgroundDarkness;
     }
 
-    switch (*gBackgroundFogModePtr) {
-        case FOG_MODE_0:
-        case FOG_MODE_1:
-            get_background_color_blend(&r1, &g1, &b1, &a1);
+    switch (*gBackgroundTintModePtr) {
+        case ENV_TINT_NONE:
+        case ENV_TINT_SHROUD:
+            mdl_get_shroud_tint_params(&r1, &g1, &b1, &a1);
             if (a1 != 0) {
-                flags |= 2;
+                flags |= BG_BLEND_SHOULD_LERP;
             }
             break;
-        case FOG_MODE_2:
-        case FOG_MODE_3:
+        case ENV_TINT_DEPTH:
+        case ENV_TINT_REMAP:
         default:
-            get_model_env_color_parameters(&r1, &g1, &b1, &r2, &g2, &b2);
+            mdl_get_remap_tint_params(&r1, &g1, &b1, &r2, &g2, &b2);
             if (!(r1 == 255 && g1 == 255 && b1 == 255 && r2 == 0 && g2 == 0 && b2 == 0)) {
-                flags |= 4;
+                flags |= BG_BLEND_SHOULD_BLEND;
             }
             break;
     }
 
     switch (flags) {
-        case 0:
+        case BG_BLEND_NONE:
             gGameStatusPtr->backgroundFlags &= ~BACKGROUND_FLAG_FOG;
             break;
-        case 1:
+        case BG_BLEND_HAS_FOG:
             gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             break;
-        case 2:
+        case BG_BLEND_SHOULD_LERP:
             gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             fogR = r1;
             fogG = g1;
             fogB = b1;
             fogA = a1;
             break;
-        case 3:
+        case BG_BLEND_HAS_FOG | BG_BLEND_SHOULD_LERP:
             gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             fogR = (fogR * (255 - a1) + r1 * a1) / 255;
             fogG = (fogG * (255 - a1) + g1 * a1) / 255;
             fogB = (fogB * (255 - a1) + b1 * a1) / 255;
             fogA = (fogA * (255 - a1) + a1 * a1) / 255;
             break;
-        case 4:
+        case BG_BLEND_SHOULD_BLEND:
             gGameStatusPtr->backgroundFlags |= BACKGROUND_FLAG_FOG;
             break;
     }
 
     if (gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_FOG) {
-        switch (*gBackgroundFogModePtr) {
-            case FOG_MODE_0:
-            case FOG_MODE_1:
+        switch (*gBackgroundTintModePtr) {
+            case ENV_TINT_NONE:
+            case ENV_TINT_SHROUD:
                 if (fogA == 255) {
                     for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
                         gBackgroundPalette[i] = 1;
                     }
                 } else {
+                    // lerp from background palette color to fog color based on fog alpha
                     for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
+                        // NOTE: values after UNPACK range from [0,31], so we need to shift fog color into that range
                         u16 palColor = gGameStatusPtr->backgroundPalette[i];
                         blendedB = blend_background_channel(UNPACK_PAL_B(palColor), fogB >> 3, fogA);
                         blendedG = blend_background_channel(UNPACK_PAL_G(palColor), fogG >> 3, fogA);
@@ -151,14 +160,16 @@ void appendGfx_background_texture(void) {
                     }
                 }
                 break;
-            case FOG_MODE_2:
-            case FOG_MODE_3:
+            case ENV_TINT_DEPTH:
+            case ENV_TINT_REMAP:
             default:
+                // the background color channels are remapped from [0,255] -> [min,max]
                 for (i = 0; i < ARRAY_COUNT(gBackgroundPalette); i++) {
+                    // NOTE: values after UNPACK range from [0,31], so we need to shift other colors into that range
                     u16 palColor = gGameStatusPtr->backgroundPalette[i];
-                    blendedB = (b2 >> 3) +  ((UNPACK_PAL_B(palColor) * b1) >> 8);
-                    blendedG = (g2 >> 3) +  ((UNPACK_PAL_G(palColor) * g1) >> 8);
-                    blendedR = (r2 >> 3) +  ((UNPACK_PAL_R(palColor) * r1) >> 8);
+                    blendedB = (b2 >> 3) + ((UNPACK_PAL_B(palColor) * b1 >> 3) >> 5);
+                    blendedG = (g2 >> 3) + ((UNPACK_PAL_G(palColor) * g1 >> 3) >> 5);
+                    blendedR = (r2 >> 3) + ((UNPACK_PAL_R(palColor) * r1 >> 3) >> 5);
 
                     if (blendedB > 0x1F) {
                         blendedB = 0x1F;
@@ -295,9 +306,6 @@ void appendGfx_background_texture(void) {
     }
 }
 
-// TODO figure out why it is needed
-static const f32 rodata_padding[] = { 0.0f, 0.0f };
-
 void enable_background_wave(void) {
     gBackroundWaveEnabled = TRUE;
 }
@@ -305,3 +313,6 @@ void enable_background_wave(void) {
 void disable_background_wave(void) {
     gBackroundWaveEnabled = FALSE;
 }
+
+// TODO figure out why it is needed
+static const f32 rodata_padding[] = { 0.0f, 0.0f };

@@ -200,7 +200,7 @@ void action_update_run(void) {
 
 void func_802B6550_E23C30(void) {
     if (!(gPlayerStatus.animFlags & PA_FLAG_INVISIBLE)) {
-        if (!(gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
+        if (!(gGameStatusPtr->peachFlags & PEACH_FLAG_DEPRESSED)) {
             suggest_player_anim_allow_backward(WalkPeachAnims[gGameStatusPtr->peachBakingIngredient]);
             return;
         }
@@ -263,7 +263,7 @@ static void action_update_run_peach(void) {
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
             gameStatus = gGameStatusPtr;
-            if (!(gameStatus->peachFlags & PEACH_STATUS_FLAG_DEPRESSED)) {
+            if (!(gameStatus->peachFlags & PEACH_FLAG_DEPRESSED)) {
                 if (!gameStatus->peachBakingIngredient) {
                     suggest_player_anim_allow_backward(ANIM_Peach1_Run);
                 } else {

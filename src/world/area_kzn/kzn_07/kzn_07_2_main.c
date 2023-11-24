@@ -67,7 +67,7 @@ EvtScript N(EVS_Main) = {
     EVT_WAIT(1)
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_0, 0)
+        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_0, NULL)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(N(LavaModelIDs)))

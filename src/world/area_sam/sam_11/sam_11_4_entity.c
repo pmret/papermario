@@ -14,9 +14,9 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     s32 temp_a2;
 
     if (isInitialCall) {
-        func_8011B950(script->varTable[1], CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+        mdl_group_set_custom_gfx(script->varTable[1], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
         script->functionTemp[0] = 0;
-        get_background_color_blend(&r, &g, &b, &a);
+        mdl_get_shroud_tint_params(&r, &g, &b, &a);
         if ((script->varTable[0] == 0 && a == 255) || (script->varTable[0] == 1 && a == 0)) {
             return ApiStatus_DONE2;
         }
@@ -32,7 +32,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
         alpha = ~script->functionTemp[0];
     }
     a = alpha;
-    set_background_color_blend(0, 0, 0, a);
+    mdl_set_shroud_tint_params(0, 0, 0, a);
     r = (N(TargetBackgroundColR) * (255 - a)) / 255;
     g = (N(TargetBackgroundColG) * (255 - a)) / 255;
     b = (N(TargetBackgroundColB) * (255 - a)) / 255;
@@ -41,7 +41,7 @@ API_CALLABLE(N(UpdateHouseShowHide)) {
     gCameras[CAM_DEFAULT].bgColor[2] = b;
     if (script->functionTemp[0] >= 255) {
         if (script->varTable[0] == 1) {
-            func_8011B950(script->varTable[1], CUSTOM_GFX_NONE, FOG_MODE_0, 1);
+            mdl_group_set_custom_gfx(script->varTable[1], CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
         }
 
         return ApiStatus_DONE2;

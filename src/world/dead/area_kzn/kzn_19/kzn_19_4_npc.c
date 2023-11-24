@@ -49,7 +49,7 @@ Gfx N(lava_piranha_vine_gfx)[] = {
     gsDPSetTextureFilter(G_TF_BILERP),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetRenderMode(AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)),
-    gsDPSetCombineLERP(PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0),
+    gsDPSetCombineMode(PM_CC_2D, PM_CC_2D),
     gsDPSetPrimColor(0, 0, 0xFF, 0xA0, 0xA0, 0x00),
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, N(lava_piranha_vine_pal)),

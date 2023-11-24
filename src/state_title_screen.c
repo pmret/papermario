@@ -184,7 +184,7 @@ void state_init_title_screen(void) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_DISABLE_DRAW_FRAME;
     game_mode_set_fpDrawAuxUI(0, appendGfx_title_screen);
     load_map_bg("title_bg");
-    read_background_size(&gBackgroundImage);
+    set_background(&gBackgroundImage);
     bgm_set_song(0, SONG_MAIN_THEME, 0, 500, 8);
     TitleScreen_TimeLeft = 480;
 }

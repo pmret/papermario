@@ -193,7 +193,7 @@ void radiating_energy_orb_appendGfx(void* effect) {
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 0, 255, (part->unk_14 * unk_14) >> 9);
             gDPSetEnvColor(gMainGfxPos++, 255, 128, 255, 0);
-            gDPSetCombineLERP(gMainGfxPos++, ENVIRONMENT, PRIMITIVE, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, ENVIRONMENT, PRIMITIVE, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_4D, PM_CC_4D);
 
             guRotateF(sp18, part->unk_20 + 14.0f, 0.0f, 0.0f, 1.0f);
             guRotateF(sp58, (i * 10) % 45 + unk_1C, 0.0f, 1.0f, 0.0f);

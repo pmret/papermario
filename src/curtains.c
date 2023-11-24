@@ -61,7 +61,7 @@ Gfx TheaterWallShadowsGfx[] = {
 Gfx TheaterCurtainGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_XLU_SURF2),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC_16),
     gsSPDisplayList(D_80075730),
     gsSPVertex(theater_curtain_vtx, 31, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -80,7 +80,7 @@ Gfx TheaterCurtainGfx[] = {
 Gfx TheaterInsetShadowsGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_XLU_SURF2),
-    gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(G_CC_SHADE, PM_CC_16),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPVertex(theater_left_inset_shadow_vtx, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),

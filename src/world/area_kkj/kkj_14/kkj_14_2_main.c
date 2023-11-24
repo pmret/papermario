@@ -4,7 +4,7 @@
 #include "../common/RestoreFromPeachState.inc.c"
 
 API_CALLABLE(N(EnableParasol)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_HAS_PARASOL;
+    gGameStatusPtr->peachFlags |= PEACH_FLAG_HAS_PARASOL;
     return ApiStatus_DONE2;
 }
 
@@ -224,7 +224,7 @@ EvtScript N(EVS_Main) = {
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
         EVT_EXEC(N(EVS_UpdateTexturePan))
     EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o154, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o154, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
     EVT_RETURN
     EVT_END

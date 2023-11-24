@@ -520,11 +520,11 @@ API_CALLABLE(N(unkStarBeamBgFunc)) {
         script->functionTemp[0] = 230;
     }
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
+    mdl_set_shroud_tint_params(0, 0, 0, script->functionTemp[0]);
 
     script->functionTemp[0] -= 5;
     if (script->functionTemp[0] <= 200) {
-        set_background_color_blend(0, 0, 0, 200);
+        mdl_set_shroud_tint_params(0, 0, 0, 200);
         return ApiStatus_DONE2;
     }
 

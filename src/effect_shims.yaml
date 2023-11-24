@@ -36,5 +36,5 @@
 - shim_draw_box
 - shim_draw_msg
 - shim_get_msg_width
-- shim_get_background_color_blend
+- shim_mdl_get_shroud_tint_params
 - shim_sfx_play_sound_at_position

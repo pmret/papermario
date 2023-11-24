@@ -42,13 +42,13 @@ API_CALLABLE(N(SpawnDamageStarsFX)) {
 
 API_CALLABLE(N(CustomFadeBackgroundDarken)) {
     if (isInitialCall) {
-        mdl_set_all_fog_mode(FOG_MODE_1);
-        *gBackgroundFogModePtr = FOG_MODE_1;
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_all_tint_type(ENV_TINT_SHROUD);
+        *gBackgroundTintModePtr = ENV_TINT_SHROUD;
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         script->functionTemp[0] = 10;
     }
 
-    set_background_color_blend(0, 0, 0, ((10 - script->functionTemp[0]) * 16) & 240);
+    mdl_set_shroud_tint_params(0, 0, 0, ((10 - script->functionTemp[0]) * 16) & 240);
     script->functionTemp[0]--;
 
     if (script->functionTemp[0] == 0) {
@@ -62,11 +62,11 @@ API_CALLABLE(N(CustomFadeBackgroundLighten)) {
     if (isInitialCall) {
         script->functionTemp[0] = 10;
     }
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 16) & 240);
+    mdl_set_shroud_tint_params(0, 0, 0, (script->functionTemp[0] * 16) & 240);
 
     script->functionTemp[0]--;
     if (script->functionTemp[0] == 0) {
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

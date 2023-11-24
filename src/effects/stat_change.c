@@ -255,7 +255,7 @@ void func_E00AC2A4(EffectInstance* effect) {
             gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
         } else {
             gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_49, PM_CC_49);
         }
 
         guTranslateF(sp20, 0.0f, data->unk_40, 0.0f);

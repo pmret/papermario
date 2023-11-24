@@ -26,7 +26,7 @@ API_CALLABLE(N(SetSpillLightAmount)) {
 
 void N(setup_gfx_spill_light)(void) {
     if (N(SpillLightAmount) > 0) {
-        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_KKJ_SPILL_LIGHT, PM_CC_KKJ_SPILL_LIGHT);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(SpillLightAmount));
     }
 }
@@ -128,9 +128,9 @@ EvtScript N(EVS_SetupRotatingWall) = {
     EVT_CALL(EnableModel, MODEL_o182, FALSE)
     EVT_CALL(EnableModel, MODEL_o184, FALSE)
     EVT_CALL(EnableModel, MODEL_o186, FALSE)
-    EVT_CALL(SetModelCustomGfx, MODEL_o182, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
-    EVT_CALL(SetModelCustomGfx, MODEL_o184, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
-    EVT_CALL(SetModelCustomGfx, MODEL_o186, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o182, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o184, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o186, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(setup_gfx_spill_light)), NULL)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseRotatingWall_FirstTime)), TRIGGER_WALL_PRESS_A, COLLIDER_o193, 1, 0)

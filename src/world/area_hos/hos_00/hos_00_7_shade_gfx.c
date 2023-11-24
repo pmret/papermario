@@ -10,12 +10,12 @@ void N(setup_gfx_background_shade)(void) {
         alpha = 216;
     }
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, SHADE, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, SHADE, SHADE, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_HOS_BG_SHADE, PM_CC_HOS_BG_SHADE);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
 }
 
 EvtScript N(EVS_SetupBackgroundShade) = {
-    EVT_CALL(SetModelCustomGfx, MODEL_g107, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_g107, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(setup_gfx_background_shade)), NULL)
     EVT_RETURN
     EVT_END

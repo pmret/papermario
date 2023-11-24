@@ -13,12 +13,12 @@ API_CALLABLE(N(SetNightFogParams)) {
     s32 fogStart = evt_get_variable(script, *args++);
     s32 fogEnd = evt_get_variable(script, *args++);
 
-    set_model_fog_color_parameters(primR, primG, primB, primA, fogR, fogG, fogB, fogStart, fogEnd);
+    mdl_set_depth_tint_params(primR, primG, primB, primA, fogR, fogG, fogB, fogStart, fogEnd);
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetNightFogMode)) {
-    mdl_set_all_fog_mode(FOG_MODE_3);
+API_CALLABLE(N(SetNightTintMode)) {
+    mdl_set_all_tint_type(ENV_TINT_REMAP);
     return ApiStatus_DONE2;
 }
 
@@ -51,7 +51,7 @@ EvtScript N(EVS_EnterMap) = {
                 EVT_SET(MF_MusicMixTrigger, TRUE)
             EVT_END_THREAD
         EVT_CASE_EQ(mac_04_ENTRY_4)
-            EVT_CALL(N(SetNightFogMode))
+            EVT_CALL(N(SetNightTintMode))
             EVT_CALL(N(SetNightFogParams), 0, 0, 0, 0, 0, 0, 0, 950, 1000)
             EVT_EXEC(N(EVS_Scene_WishingToadKid))
         EVT_CASE_EQ(mac_04_ENTRY_5)

@@ -323,7 +323,7 @@ void state_step_exit_language_select(void) {
 
                     bgHeader = mapSettings->background;
                     if (bgHeader != NULL) {
-                        read_background_size(bgHeader);
+                        set_background(bgHeader);
                     } else {
                         set_background_size(296, 200, 12, 20);
                     }

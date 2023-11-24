@@ -384,7 +384,7 @@ void appendGfx_shading_palette(
     }
 
     gDPSetPrimColor(gMainGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, COMBINED, TEXEL0, COMBINED_ALPHA, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_53, PM_CC_54);
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, SpriteShadingPalette);
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, 16, 1);
 
@@ -396,7 +396,7 @@ void appendGfx_shading_palette(
 
     gDPSetPrimColor(gMainGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
     gDPSetEnvColor(gMainGfxPos++, highlightR, highlightG, highlightB, 0);
-    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, 1, PRIMITIVE, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, 1);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_55, PM_CC_55);
     gSPTextureRectangle(gMainGfxPos++, 0, 0, 16 << 2, 1 << 2, 2, 0, 0, 4 << 10, 1 << 10);
     gDPPipeSync(gMainGfxPos++);
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
@@ -419,9 +419,9 @@ void appendGfx_shading_palette(
     gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
 
     if (alpha == 255) {
-        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, TEXEL1, SHADE, ENVIRONMENT, COMBINED, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_50, PM_CC_52);
     } else {
-        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, PRIMITIVE, 0, TEXEL1, 0, SHADE, ENVIRONMENT, COMBINED, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_51, PM_CC_52);
     }
 
     offsetX = offsetXComp * facingDir;

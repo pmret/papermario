@@ -208,7 +208,7 @@ void check_input_open_menus(void) {
     popup = &WorldPopupMenu;
 
     if (gGameStatusPtr->debugScripts != DEBUG_SCRIPTS_NONE
-        || (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)
+        || (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH)
         || evt_get_variable(NULL, GB_StoryProgress) == STORY_INTRO
     ) {
         return;

@@ -323,7 +323,7 @@ void func_8010FE44(void* arg0) {
 void entity_model_set_shadow_color(void* data) {
     s32 alpha = (s32)data;
 
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC1_SHADOW, PM_CC2_SHADOW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
 }
 

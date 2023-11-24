@@ -15,12 +15,12 @@ API_CALLABLE(N(ManageBigPalmTreeVisibility)) {
 
     if (N(PrevPalmTreeVisibility) != 0) {
         if (currentFloor == COLLIDER_o327 || currentFloor == COLLIDER_o330) {
-            set_model_group_visibility(MODEL_g70, MODEL_FLAG_HIDDEN, MODEL_GROUP_HIDDEN);
+            mdl_group_set_visibility(MODEL_g70, MODEL_FLAG_HIDDEN, MODEL_GROUP_HIDDEN);
             N(PrevPalmTreeVisibility) = FALSE;
         }
     } else {
         if (currentFloor == COLLIDER_o319 || currentFloor == COLLIDER_o316) {
-            set_model_group_visibility(MODEL_g70, MODEL_FLAG_HIDDEN, MODEL_GROUP_VISIBLE);
+            mdl_group_set_visibility(MODEL_g70, MODEL_FLAG_HIDDEN, MODEL_GROUP_VISIBLE);
             N(PrevPalmTreeVisibility) = TRUE;
         }
     }

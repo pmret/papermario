@@ -33,14 +33,14 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
             for (i = 0; i < modelIDs->count; i++, idList++) {
                 s32 treeIndex = get_model_list_index_from_tree_index(*idList);
                 Model* mdl = get_model_from_list_index(treeIndex);
-                set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_2);
+                set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, ENV_TINT_DEPTH);
             }
         } else {
             // list is NULL -> apply effect to ALL models
             Model** models = (Model**) gCurrentModels;
             for (i = 0; i < MAX_MODELS; i++, models++) {
                 if (*models != NULL) {
-                    set_mdl_custom_gfx_set(*models, -1, FOG_MODE_2);
+                    set_mdl_custom_gfx_set(*models, CUSTOM_GFX_NONE, ENV_TINT_DEPTH);
                 }
             }
         }
@@ -64,15 +64,15 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
             if (baseAlpha < 0.0f) {
                 baseAlpha = 0.0f;
             }
-            fogStart = 970;
             baseAlpha *= 0.2 * evt_get_float_variable(NULL, MV_GlowIntensity);
+            fogStart = 970;
             break;
         case LAVA_GLOW_MODE_2:
             baseAlpha = 100.0f;
             fogStart = 995 - evt_get_variable(NULL, MV_GlowIntensity);
             break;
         case LAVA_GLOW_MODE_END:
-            return 0;
+            return ApiStatus_BLOCK;
         default:
             baseAlpha = 100.0f;
             fogStart = 970;
@@ -83,7 +83,7 @@ API_CALLABLE(N(ApplyLavaGlowLighting)) {
     fastOsc = sin_deg(N(LavaGlowLightTime) * 8.0f);
     primA = baseAlpha + baseAlpha * (slowOsc * 0.5 + fastOsc * 0.5);
 
-    set_model_fog_color_parameters(60, 50, 30, primA, 20, 20, 20, fogStart, 1000);
+    mdl_set_depth_tint_params(60, 50, 30, primA, 20, 20, 20, fogStart, 1000);
     return ApiStatus_BLOCK;
 }
 
@@ -98,14 +98,14 @@ API_CALLABLE(N(ClearLavaGlowLighting)) {
         for (i = 0; i < modelIDs->count; i++, idList++) {
             s32 treeIndex = get_model_list_index_from_tree_index(*idList);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_0);
+            set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, ENV_TINT_NONE);
         }
     } else {
         // list is NULL -> clear effect from ALL models
         Model** models = (Model**) gCurrentModels;
         for (i = 0; i < MAX_MODELS; i++, models++) {
             if (*models != NULL) {
-                set_mdl_custom_gfx_set(*models, -1, FOG_MODE_0);
+                set_mdl_custom_gfx_set(*models, CUSTOM_GFX_NONE, ENV_TINT_NONE);
             }
         }
     }

@@ -230,7 +230,7 @@ void N(UnkModelFunc001)(void) {
         gDPSetRenderMode(gMainGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                          Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
         gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
-        gDPSetCombineMode(gMainGfxPos++, PM_CC_09, PM_CC_09);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_PRIM_NO_ALPHA, PM_CC_PRIM_NO_ALPHA);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMainGfxPos++);
 

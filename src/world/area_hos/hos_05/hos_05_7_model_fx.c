@@ -7,7 +7,7 @@ extern u16 StarShrineLightBeamAlpha;
 MAP_RODATA_PAD(1,unk);
 
 #define NAME_SUFFIX _Starship
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 #include "world/common/atomic/TexturePan.inc.c"
 
 API_CALLABLE(N(SetWorldColorParams)) {
@@ -20,7 +20,7 @@ API_CALLABLE(N(SetWorldColorParams)) {
 
     args = script->ptrReadPos;
     if (isInitialCall) {
-        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        mdl_get_remap_tint_params(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
         newPrimR = evt_get_variable(script, *args++);
         newPrimG = evt_get_variable(script, *args++);
         newPrimB = evt_get_variable(script, *args++);
@@ -33,7 +33,7 @@ API_CALLABLE(N(SetWorldColorParams)) {
 
     if (duration > 0) {
         time++;
-        set_model_env_color_parameters(
+        mdl_set_remap_tint_params(
             oldPrimR + ((newPrimR - oldPrimR) * time) / duration,
             oldPrimG + ((newPrimG - oldPrimG) * time) / duration,
             oldPrimB + ((newPrimB - oldPrimB) * time) / duration,
@@ -44,7 +44,7 @@ API_CALLABLE(N(SetWorldColorParams)) {
             return ApiStatus_DONE2;
         }
     } else {
-        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        mdl_set_remap_tint_params(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -165,7 +165,7 @@ EvtScript N(EVS_SetupLightBeam) = {
     EVT_IF_LT(GB_StoryProgress, STORY_CH8_STAR_SHIP_ACTIVATED)
         EVT_CALL(EnableModel, MODEL_o8, FALSE)
     EVT_ELSE
-        EVT_CALL(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+        EVT_CALL(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
         EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_light_beam)), NULL)
         EVT_CALL(EnableModel, MODEL_o8, TRUE)
         EVT_CALL(N(SetLightBeamAlpha), 127)
@@ -183,8 +183,8 @@ EvtScript N(EVS_SetupLightBeam) = {
 EvtScript N(EVS_Starship_Summon) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_THREAD
-        EVT_CALL(N(UnkFunc27_Starship), 2, NULL, FOG_MODE_3)
-        EVT_CALL(N(UnkFunc27_Starship), 1, EVT_PTR(N(MostSolidGeometry)), FOG_MODE_3)
+        EVT_CALL(N(SetModelTintMode_Starship), 2, NULL, ENV_TINT_REMAP)
+        EVT_CALL(N(SetModelTintMode_Starship), 1, EVT_PTR(N(MostSolidGeometry)), ENV_TINT_REMAP)
         EVT_CALL(N(SetWorldColorParams_Starship), 255, 255, 255, 0, 0, 0, 0)
         EVT_WAIT(1)
         EVT_CALL(N(SetWorldColorParams_Starship), 102, 102, 102, 0, 0, 0, 60)
@@ -204,7 +204,7 @@ EvtScript N(EVS_Starship_Summon) = {
     EVT_CALL(PlaySoundAt, SOUND_STARSHIP_APPEARS, SOUND_SPACE_DEFAULT, 0, 250, 0)
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, 0, 250, 0, 10, LVar9)
     EVT_WAIT(20)
-    EVT_CALL(SetModelCustomGfx, MODEL_o646, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o646, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(setup_gfx_starship_shimmer)), NULL)
     EVT_CALL(EnableGroup, MODEL_g279, TRUE)
     EVT_THREAD
@@ -219,7 +219,7 @@ EvtScript N(EVS_Starship_Summon) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(60)
-    EVT_CALL(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, FOG_MODE_UNCHANGED)
+    EVT_CALL(SetModelCustomGfx, MODEL_o8, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
     EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_light_beam)), NULL)
     EVT_CALL(EnableModel, MODEL_o8, TRUE)
     EVT_CALL(MakeLerp, 0, 127, 60, EASING_COS_IN_OUT)

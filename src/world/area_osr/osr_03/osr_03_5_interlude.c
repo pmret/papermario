@@ -2,7 +2,7 @@
 #include "effects.h"
 
 API_CALLABLE(N(SetPlayerAsPeach)) {
-    gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
+    gGameStatusPtr->peachFlags |= PEACH_FLAG_IS_PEACH;
     script->varTable[0] = gPlayerData.curPartner;
     gPlayerData.curPartner = PARTNER_TWINK;
     return ApiStatus_DONE2;

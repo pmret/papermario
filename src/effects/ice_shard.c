@@ -172,7 +172,7 @@ void ice_shard_appendGfx(void* effect) {
 
     if (type % 2 == 1 && (s32) (data->animFrame * 4.0f) == 3) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, alpha * envAlpha / 255);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, SHADE, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_3C, PM_CC_3C);
         gSPDisplayList(gMainGfxPos++, D_09001168_3F9E28);
     }
 

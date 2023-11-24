@@ -346,7 +346,7 @@ void appendGfx_entity_model(EntityModel* model) {
             if (!entity_fog_enabled || (model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
                 gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
             } else {
-                gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_42, PM_CC_18);
             }
         }
         if (model->vertexArray != NULL) {
@@ -660,7 +660,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         if (!entity_fog_enabled || (model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
             gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
         } else {
-            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_42, PM_CC_18);
         }
         if (model->vertexArray != NULL) {
             gSPSegment(gMainGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));

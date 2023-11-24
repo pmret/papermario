@@ -337,8 +337,12 @@ segments:
     - [0x4AC90, pm_effect_loads, effect_loads]
     - [auto, c, battle/battle]
     - [0x4E5A0, bin, n_aspMain_text]
-    - [0x4F200]
-    - [auto, .data, main_pre]
+    - start: 0x4F200
+      type: .data
+      name: main_pre
+      subsegments:
+      - [0x4F200]
+      - [0x4F210, i4, reset_tiles, 128, 8]
     - [auto, .data, main]
     - [auto, .data, main_loop]
     - [auto, .data, background_gfx]

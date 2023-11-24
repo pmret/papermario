@@ -4,7 +4,7 @@
 #include "../common/Searchlights.inc.c"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
-#include "../common/SetPeachFlag8.inc.c"
+#include "../common/PreventNextPeachDisguise.inc.c"
 #include "../common/ApproachPlayer50Units.inc.c"
 
 #include "world/common/enemy/Kammy.inc.c"
@@ -44,7 +44,7 @@ EvtScript N(EVS_NpcInteract_Koopatrol_01) = {
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(SetPeachFlag8))
+    EVT_CALL(N(PreventNextPeachDisguise))
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)

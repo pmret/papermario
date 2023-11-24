@@ -161,11 +161,11 @@ typedef enum GroupTypes {
 } GroupTypes;
 
 typedef enum ExtraTileTypes {
-    EXTRA_TILE_NONE                 = 0,
-    EXTRA_TILE_MIPMAPS              = 1,
-    EXTRA_TILE_AUX_SAME_AS_MAIN     = 2,
-    EXTRA_TILE_AUX_INDEPENDENT      = 3,
-    EXTRA_TILE_4                    = 4,
+    EXTRA_TILE_NONE                 = 0, // texture contains only a single tile
+    EXTRA_TILE_MIPMAPS              = 1, // texture contais mipmaps
+    EXTRA_TILE_AUX_SAME_AS_MAIN     = 2, // texture contains main and aux images with identical fmt and size
+    EXTRA_TILE_AUX_INDEPENDENT      = 3, // texture contains main and aux images with independent fmt and size
+    EXTRA_TILE_4                    = 4, // only use-case may be a mistake? unused and mostly unimplemented
 } ExtraTileTypes;
 
 #define SHAPE_SIZE_LIMIT 0x8000
@@ -181,16 +181,16 @@ typedef struct ShapeFileHeader {
 
 typedef struct ShapeFile {
     /* 0x00 */ ShapeFileHeader header;
-    /* 0x20 */ u8 data[SHAPE_SIZE_LIMIT - 0x20];
+    /* 0x20 */ u8 data[SHAPE_SIZE_LIMIT - sizeof(ShapeFileHeader)];
 } ShapeFile; // size = variable
 
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 extern ModelList* gCurrentModels;
 
-void set_model_fog_color_parameters(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd);
-void set_model_env_color_parameters(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
-void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
+void mdl_set_depth_tint_params(u8 primR, u8 primG, u8 primB, u8 primA, u8 fogR, u8 fogG, u8 fogB, s32 fogStart, s32 fogEnd);
+void mdl_set_remap_tint_params(u8 primR, u8 primG, u8 primB, u8 envR, u8 envG, u8 envB);
+void mdl_get_remap_tint_params(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB);
 
 void init_model_data(void);
 void update_model_animator(s32);
@@ -221,6 +221,6 @@ void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, 
 void mdl_make_local_vertex_copy(s32 arg0, u16 treeIdx, s32);
 void play_model_animation_starting_from(s32 index, s16* animPos, s32 framesToSkip);
 
-void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
+void mdl_set_shroud_tint_params(u8 r, u8 g, u8 b, u8 a);
 
 #endif

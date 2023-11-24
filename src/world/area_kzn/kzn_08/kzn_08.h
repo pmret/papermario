@@ -29,4 +29,4 @@ extern API_CALLABLE(N(ApplyLavaGlowLighting));
 extern API_CALLABLE(N(ClearLavaGlowLighting));
 
 void disable_world_fog(void);
-void get_model_fog_color_parameters(u8*, u8*, u8*, u8*, u8*, u8*, u8*, s32*, s32*);
+void mdl_get_depth_tint_params(u8*, u8*, u8*, u8*, u8*, u8*, u8*, s32*, s32*);

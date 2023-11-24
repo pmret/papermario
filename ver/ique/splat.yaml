@@ -295,8 +295,12 @@ segments:
     - [auto, c, battle/battle]
     - [0x4D140, bin, rspboot]
     - [0x4D210, bin, n_aspMain_text]
-    - [0x4DE70]
-    - [auto, .data, main_pre]
+    - start: 0x4DE70
+      type: .data
+      name: main_pre
+      subsegments:
+      - [0x4DE70]
+      - [0x4DE80, i4, reset_tiles, 128, 8]
     - [auto, .data, main]
     - [auto, .data, main_loop]
     - [auto, .data, background_gfx]

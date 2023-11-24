@@ -499,9 +499,9 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
                 case 1:
                     if (!dropShadow) {
                         if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                            gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+                            gDPSetCombineMode(gMainGfxPos++, PM_CC_2F, PM_CC_32);
                         } else {
-                            gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+                            gDPSetCombineMode(gMainGfxPos++, PM_CC_2F, PM_CC_32);
                         }
 
                         if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
@@ -545,7 +545,7 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
                     }
                     break;
                 case 2:
-                    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_47, PM_CC_47);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
 
                     if (!flipX && !flipY) {
@@ -1579,7 +1579,7 @@ void render_hud_element(HudElement* hudElement) {
             vtx[3].v.tc[1] = 0;
 
             gDPPipeSync(gMainGfxPos++);
-            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_47, PM_CC_47);
             gDPSetPrimColor(gMainGfxPos++, 0, 0,
                             hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
 

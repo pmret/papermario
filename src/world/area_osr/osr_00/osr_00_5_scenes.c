@@ -4,7 +4,7 @@
 
 #include "sprite/npc/Luigi.h"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 API_CALLABLE(N(func_80240678_AACEA8)) {
     Bytecode* args = script->ptrReadPos;
@@ -14,7 +14,7 @@ API_CALLABLE(N(func_80240678_AACEA8)) {
     s32 envR = *args++;
     s32 envG = *args++;
     s32 envB = *args++;
-    set_model_env_color_parameters(primR, primG, primB, envR, envG, envB);
+    mdl_set_remap_tint_params(primR, primG, primB, envR, envG, envB);
     return ApiStatus_DONE2;
 }
 
@@ -50,8 +50,8 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 775)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, 20, -19)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
     EVT_CALL(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
     EVT_CALL(N(func_802406E0_AACF10))
     EVT_WAIT(15 * DT)

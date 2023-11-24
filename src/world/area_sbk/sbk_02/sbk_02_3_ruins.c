@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "model.h"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 API_CALLABLE(N(HideSun)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, MV_Unk_00);
@@ -23,7 +23,7 @@ API_CALLABLE(N(InterpWorldEnvColor)) {
     s32 blendEnvR, blendEnvG, blendEnvB;
 
     if (isInitialCall) {
-        get_model_env_color_parameters(&savedPrimR, &savedPrimG, &savedPrimB, &savedEnvR, &savedEnvG, &savedEnvB);
+        mdl_get_remap_tint_params(&savedPrimR, &savedPrimG, &savedPrimB, &savedEnvR, &savedEnvG, &savedEnvB);
         targetPrimR = evt_get_variable(script, *args++);
         targetPrimG = evt_get_variable(script, *args++);
         targetPrimB = evt_get_variable(script, *args++);
@@ -43,12 +43,12 @@ API_CALLABLE(N(InterpWorldEnvColor)) {
         blendEnvG = savedEnvG + ((targetEnvG - savedEnvG) * elapsed) / duration;
         blendEnvB = savedEnvB + ((targetEnvB - savedEnvB) * elapsed) / duration;
 
-        set_model_env_color_parameters(blendPrimR, blendPrimG, blendPrimB, blendEnvR, blendEnvG, blendEnvB);
+        mdl_set_remap_tint_params(blendPrimR, blendPrimG, blendPrimB, blendEnvR, blendEnvG, blendEnvB);
         if (elapsed >= duration) {
             return ApiStatus_DONE2;
         }
     } else {
-        set_model_env_color_parameters(targetPrimR, targetPrimG, targetPrimB, targetEnvR, targetEnvG, targetEnvB);
+        mdl_set_remap_tint_params(targetPrimR, targetPrimG, targetPrimB, targetEnvR, targetEnvG, targetEnvB);
         return ApiStatus_DONE2;
     }
 
@@ -85,18 +85,18 @@ EvtScript N(EVS_Pedestal_Sink) = {
 };
 
 s32 N(ModelList_Solid)[] = {
-    MODEL_ruins, MODEL_step, 0x0000FFFF
+    MODEL_ruins, MODEL_step, 0xFFFF
 };
 
 s32 N(ModelList_Translucent)[] = {
-    MODEL_upper_light, MODEL_o225, 0x0000FFFF
+    MODEL_upper_light, MODEL_o225, 0xFFFF
 };
 
 EvtScript N(EVS_DarkenEnvironment) = {
-    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc27), 1, EVT_PTR(N(ModelList_Solid)), FOG_MODE_0)
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ModelList_Translucent)), FOG_MODE_0)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, EVT_PTR(N(ModelList_Solid)), ENV_TINT_NONE)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(ModelList_Translucent)), ENV_TINT_NONE)
     EVT_CALL(N(InterpWorldEnvColor), 255, 255, 255, 0, 0, 0, 0)
     EVT_WAIT(1)
     EVT_CALL(N(InterpWorldEnvColor), 44, 32, 177, 0, 0, 0, 60)
@@ -695,10 +695,10 @@ EvtScript N(EVS_Ruins_Arise_Continued) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(500.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc27), 1, EVT_PTR(N(ModelList_Solid)), FOG_MODE_0)
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ModelList_Translucent)), FOG_MODE_0)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, EVT_PTR(N(ModelList_Solid)), ENV_TINT_NONE)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(ModelList_Translucent)), ENV_TINT_NONE)
     EVT_CALL(N(InterpWorldEnvColor), 44, 32, 177, 0, 0, 0, 0)
     EVT_EXEC(N(EVS_Ruins_FinishRising))
     EVT_EXEC(N(EVS_Steps_FinishRising))

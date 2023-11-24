@@ -11,7 +11,7 @@ void virtual_entity_appendGfx_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u1
     gDPPipeSync(gMainGfxPos++);
 
     if (a == 0xFF) {
-        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_PRIM_FULL_ALPHA, PM_CC_PRIM_FULL_ALPHA);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);

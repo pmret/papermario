@@ -187,7 +187,7 @@ void underwater_appendGfx(void* effect) {
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->waterColor.r, data->waterColor.g, data->waterColor.b, alpha >> 1);
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_48, PM_CC_48);
     gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
     gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
     gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);

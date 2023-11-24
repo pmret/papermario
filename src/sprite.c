@@ -294,7 +294,7 @@ void spr_appendGfx_component_flat(
 
             gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_3D, PM_CC_3D);
             gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
         }
     }
@@ -782,7 +782,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
 
     spr_playerMaxComponents = 0;
 
-    if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
+    if (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH) {
         playerSpriteSet = PLAYER_SPRITES_PEACH_WORLD;
     }
 

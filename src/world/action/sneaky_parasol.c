@@ -48,17 +48,17 @@ Npc* parasol_get_npc(void) {
     Npc* ret = NULL;
     do {                // TODO fix this do...while
         if (playerStatus->availableDisguiseType != PEACH_DISGUISE_NONE) {
-            if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_8) {
-                gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
+            if (gGameStatusPtr->peachFlags & PEACH_FLAG_BLOCK_NEXT_DISGUISE) {
+                gGameStatusPtr->peachFlags &= ~PEACH_FLAG_BLOCK_NEXT_DISGUISE;
             } else {
                 ret = npc_find_closest(playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 100.0f);
                 if (ret != 0) {
                     if (fabs(ret->pos.y - playerStatus->pos.y) - 1.0 > 0.0) {
-                        ret = 0;
+                        ret = NULL;
                     } else {
                         angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, ret->pos.x, ret->pos.z));
                         if (fabs(angle - func_800E5348()) > 30.0) {
-                            ret = 0;
+                            ret = NULL;
                         }
                     }
                 }
@@ -189,7 +189,7 @@ void action_update_parasol(void) {
         case SUBSTATE_DISGUISE_MAKE_NPC:
             gameStatus = gGameStatusPtr;
             playerStatus->animFlags |= PA_FLAG_INVISIBLE;
-            gameStatus->peachFlags |= PEACH_STATUS_FLAG_DISGUISED;
+            gameStatus->peachFlags |= PEACH_FLAG_DISGUISED;
             playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_SPIN_DOWN
         case SUBSTATE_DISGUISE_SPIN_DOWN:
             if (--playerStatus->curStateTime == 0) {
@@ -265,7 +265,7 @@ void action_update_parasol(void) {
                     playerStatus->actionSubstate++; // SUBSTATE_SPIN_DOWN
                     gameStatus2 = gGameStatusPtr;
                     playerStatus->animFlags &= ~PA_FLAG_INVISIBLE;
-                    gameStatus2->peachFlags &= ~PEACH_STATUS_FLAG_DISGUISED;
+                    gameStatus2->peachFlags &= ~PEACH_FLAG_DISGUISED;
                     playerStatus->peachDisguise = 0;
                     free_npc_by_index(PeachDisguiseNpcIndex);
                     playerStatus->colliderHeight = 55;

@@ -1,6 +1,6 @@
 #include "dro_02.h"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_ExitWalk_dro_01_1) = EVT_EXIT_WALK(60, dro_02_ENTRY_0, "dro_01", dro_01_ENTRY_1);
 
@@ -26,9 +26,9 @@ EvtScript N(EVS_EnterScene) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(13.0), EVT_FLOAT(-10.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(UnkFunc27), 2, 0, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
-    EVT_CALL(N(UnkFunc26), 3, 44, 32, 177, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 44, 32, 177, 0, 0, 0, 0, 0, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 300, EVT_FLOAT(0.2))

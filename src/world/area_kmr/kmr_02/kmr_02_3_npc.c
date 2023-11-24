@@ -1339,12 +1339,12 @@ API_CALLABLE(N(func_8024295C_8B29CC)) {
     s32 duration = evt_get_variable(script, *args++);
 
     if (isInitialCall) {
-        get_background_color_blend(&N(savedColR), &N(savedColG), &N(savedColB), &N(savedColA));
+        mdl_get_shroud_tint_params(&N(savedColR), &N(savedColG), &N(savedColB), &N(savedColA));
         script->functionTemp[0] = 0;
     }
 
     if (duration > 0) {
-        set_background_color_blend(
+        mdl_set_shroud_tint_params(
             N(savedColR) + (((targetColR - N(savedColR)) * script->functionTemp[0]) / duration),
             N(savedColG) + (((targetColG - N(savedColG)) * script->functionTemp[0]) / duration),
             N(savedColB) + (((targetColB - N(savedColB)) * script->functionTemp[0]) / duration),
@@ -1356,7 +1356,7 @@ API_CALLABLE(N(func_8024295C_8B29CC)) {
             return ApiStatus_DONE2;
         }
     } else {
-        set_background_color_blend(targetColR, targetColG, targetColB, targetColA);
+        mdl_set_shroud_tint_params(targetColR, targetColG, targetColB, targetColA);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -1364,7 +1364,7 @@ API_CALLABLE(N(func_8024295C_8B29CC)) {
 NOP_UNFIX
 
 API_CALLABLE(N(func_80242BA8_8B2C18)) {
-    *gBackgroundFogModePtr = 1;
+    *gBackgroundTintModePtr = ENV_TINT_SHROUD;
     return ApiStatus_DONE2;
 }
 
@@ -1384,11 +1384,11 @@ API_CALLABLE(N(func_80242BC0_8B2C30)) {
     newEnvB = evt_get_variable(script, *args++);
     duration = evt_get_variable(script, *args++);
     if (isInitialCall) {
-        get_model_env_color_parameters(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
+        mdl_get_remap_tint_params(&oldPrimR, &oldPrimG, &oldPrimB, &oldEnvR, &oldEnvG, &oldEnvB);
         script->functionTemp[0] = 0;
     }
     if (duration > 0) {
-        set_model_env_color_parameters(
+        mdl_set_remap_tint_params(
             oldPrimR + ((newPrimR - oldPrimR) * script->functionTemp[0]) / duration,
             oldPrimG + ((newPrimG - oldPrimG) * script->functionTemp[0]) / duration,
             oldPrimB + ((newPrimB - oldPrimB) * script->functionTemp[0]) / duration,
@@ -1400,20 +1400,20 @@ API_CALLABLE(N(func_80242BC0_8B2C30)) {
             return 2;
         }
     } else {
-        set_model_env_color_parameters(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
+        mdl_set_remap_tint_params(newPrimR, newPrimG, newPrimB, newEnvR, newEnvG, newEnvB);
         return 2;
     }
     return 0;
 }
 
 API_CALLABLE(N(func_80242F08_8B2F78)) {
-    mdl_set_all_fog_mode(FOG_MODE_3);
+    mdl_set_all_tint_type(ENV_TINT_REMAP);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(func_80242F28_8B2F98)) {
-    func_8011B950(MODEL_kinopi, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
-    set_background_color_blend(0, 0, 0, 255);
+    mdl_group_set_custom_gfx(MODEL_kinopi, CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
+    mdl_set_shroud_tint_params(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;

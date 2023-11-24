@@ -36,5 +36,7 @@ D_B0000000 = 0xB0000000;
 D_B0000008 = 0xB0000008;
 D_B0000010 = 0xB0000010;
 
+ResetTilesImg = 0x80072A80;
+
 rspbootTextStart = rspboot_bin;
 rspbootTextEnd = rspboot_bin + 0xd0;

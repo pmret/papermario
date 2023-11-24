@@ -257,7 +257,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
 
     if (isInitialCall) {
         if (script->varTable[0] == ROOM_VISIBILITY_SHOW) {
-            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
         }
         script->functionTemp[1] = 0;
     }
@@ -270,7 +270,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     } else {
         alpha = 255 - script->functionTemp[1];
     }
-    set_background_color_blend(0, 0, 0, alpha);
+    mdl_set_shroud_tint_params(0, 0, 0, alpha);
     r = door->bgColor[0] * (255 - alpha) / 255;
     g = door->bgColor[1] * (255 - alpha) / 255;
     b = door->bgColor[2] * (255 - alpha) / 255;
@@ -281,7 +281,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     if (script->functionTemp[1] >= 255) {
         if (script->varTable[0] == ROOM_VISIBILITY_HIDE) {
             // ROOM_DATA_MODEL_ID
-            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_0, 1);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
         }
         return ApiStatus_DONE2;
     } else {

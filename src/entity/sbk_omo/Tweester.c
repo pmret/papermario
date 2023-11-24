@@ -82,7 +82,7 @@ void entity_Tweester_setupGfx(s32 entityIndex) {
     gDPPipeSync(gMainGfxPos++);
     gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
     gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2);
     gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
     gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
     gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_I, G_IM_SIZ_8b, 32, D_0A000BF0_E57A50);

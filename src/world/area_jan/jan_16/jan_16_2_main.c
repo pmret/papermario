@@ -120,7 +120,7 @@ EvtScript N(EVS_EnterFalling) = {
     EVT_END
 };
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_JADE_JUNGLE)
@@ -142,9 +142,9 @@ EvtScript N(EVS_Main) = {
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
     EVT_EXEC(N(EVS_SetupBushes))
     EVT_EXEC(N(EVS_SpawnButterflies))
-    EVT_CALL(N(UnkFunc27), 0, -1, 3)
-    EVT_CALL(N(UnkFunc27), 2, 0, 3)
-    EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 0, 0, 25, 0, 0, 0)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, -1, 3)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, 3)
+    EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 255, 255, 255, 0, 0, 25, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

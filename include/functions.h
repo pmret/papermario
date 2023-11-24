@@ -444,7 +444,7 @@ void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 s32 is_block_on_ground(Entity* block);
 void set_actor_anim(s32 actorID, s32 partID, AnimID animID);
 void set_actor_anim_rate(s32 actorID, s32 partID, f32 rate);
-void set_model_group_visibility(u16, s32, s32);
+void mdl_group_set_visibility(u16, s32, s32);
 void init_enter_world_shared(void);
 s16 update_enter_map_screen_overlay(s16* progress);
 s16 update_exit_map_screen_overlay(s16* progress);
@@ -820,7 +820,7 @@ void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z
 void* mdl_get_next_texture_address(s32);
 s32 cancel_current_message(void);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
-void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
+void mdl_get_shroud_tint_params(u8* r, u8* g, u8* b, u8* a);
 
 s32 entity_base_block_idle(Entity* entity);
 void add_star_power(s32 amt);
@@ -882,7 +882,7 @@ void btl_cam_use_preset_immediately(s32);
 s32 inflict_status(Actor*, s32, s32);
 s32 try_inflict_status(Actor*, s32, s32);
 s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurationKey, s32 duration);
-void mdl_set_all_fog_mode(s32);
+void mdl_set_all_tint_type(s32);
 void load_model_animator_tree(s32, StaticAnimatorNode**);
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration);
@@ -1014,7 +1014,7 @@ void status_bar_start_blinking_sp_bars(s32 numBarsToBlink);
 void status_bar_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits);
 void status_bar_draw_stat(s32 id, s32 x, s32 y, s32, s32);
 void set_background_size(s16, s16, s16, s16);
-void read_background_size(BackgroundHeader*);
+void set_background(BackgroundHeader*);
 void set_max_star_power(s8);
 void sync_status_bar(void);
 void create_cameras_a(void);
@@ -1080,7 +1080,7 @@ void partner_kill_ability_script(void);
 void func_800EF3D4(s32);
 
 void mdl_update_transform_matrices(void);
-void func_8011B950(u16, s32, s32, s32);
+void mdl_group_set_custom_gfx(u16, s32, s32, b32);
 
 void backup_map_collision_data(void);
 void reset_status_bar(void);

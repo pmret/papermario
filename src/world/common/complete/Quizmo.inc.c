@@ -233,9 +233,9 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
     if (isInitialCall) {
         s32 i;
 
-        mdl_set_all_fog_mode(FOG_MODE_1);
-        *gBackgroundFogModePtr = FOG_MODE_1;
-        set_background_color_blend(0, 0, 0, 0);
+        mdl_set_all_tint_type(ENV_TINT_SHROUD);
+        *gBackgroundTintModePtr = ENV_TINT_SHROUD;
+        mdl_set_shroud_tint_params(0, 0, 0, 0);
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);
@@ -261,7 +261,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
         script->functionTemp[0] = 255;
     }
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
+    mdl_set_shroud_tint_params(0, 0, 0, script->functionTemp[0]);
 
     if (script->functionTemp[0] == 255) {
         return ApiStatus_DONE2;
@@ -274,7 +274,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
     s32 i;
 
     if (isInitialCall) {
-        set_background_color_blend(0, 0, 0, 255);
+        mdl_set_shroud_tint_params(0, 0, 0, 255);
         script->functionTemp[0] = 255;
         script->functionTemp[1] = 0;
     }
@@ -284,12 +284,12 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
         script->functionTemp[0] = 0;
     }
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
+    mdl_set_shroud_tint_params(0, 0, 0, script->functionTemp[0]);
     if (script->functionTemp[0] == 0 && script->functionTemp[1] == 0) {
         script->functionTemp[1] = 1;
     } else if (script->functionTemp[1] == 1) {
-        mdl_set_all_fog_mode(FOG_MODE_0);
-        *gBackgroundFogModePtr = FOG_MODE_0;
+        mdl_set_all_tint_type(ENV_TINT_NONE);
+        *gBackgroundTintModePtr = ENV_TINT_NONE;
 
         for (i = 0; i < MAX_NPCS; i++) {
             Npc* npc = get_npc_by_index(i);

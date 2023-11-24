@@ -236,7 +236,7 @@ void btl_state_update_normal_start(void) {
 
             if (stage->bg != NULL) {
                 load_map_bg(stage->bg);
-                read_background_size(&gBackgroundImage);
+                set_background(&gBackgroundImage);
             }
 
             if (gGameStatusPtr->demoBattleFlags & DEMO_BTL_FLAG_ENABLED) {

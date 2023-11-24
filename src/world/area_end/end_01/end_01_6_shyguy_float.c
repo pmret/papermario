@@ -1,6 +1,6 @@
 #include "end_01.h"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 EvtScript N(EVS_TexPan_ShyGuyFloat_Sides) = {
     EVT_CALL(EnableTexPanning, MODEL_omo1, TRUE)
@@ -32,7 +32,7 @@ EvtScript N(EVS_TexPan_ShyGuyFloat_Top) = {
 
 s32 N(ShyGuyFloat_InteriorModels)[] = {
     MODEL_omo7, MODEL_omo9, MODEL_omo10, MODEL_omo11,
-    MODEL_omo12, MODEL_omo13, MODEL_omo14, 0x0000FFFF
+    MODEL_omo12, MODEL_omo13, MODEL_omo14, 0xFFFF
 };
 
 EvtScript N(EVS_ShyGuyFloat_Open) = {
@@ -58,10 +58,10 @@ EvtScript N(EVS_ShyGuyFloat_Open) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(ShyGuyFloat_InteriorModels)), FOG_MODE_3)
-    EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 120, 120, 80, 0, 0, 0)
+    EVT_CALL(N(SetModelTintMode), APPLY_TINT_MODELS, EVT_PTR(N(ShyGuyFloat_InteriorModels)), ENV_TINT_REMAP)
+    EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 255, 255, 255, 120, 120, 80, 0, 0, 0)
     EVT_WAIT(30)
-    EVT_CALL(N(UnkFunc26), 3, 255, 255, 255, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(N(SetModelTintParams), ENV_TINT_REMAP, 255, 255, 255, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

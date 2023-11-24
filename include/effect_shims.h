@@ -35,7 +35,7 @@ void shim_draw_box(
 );
 void shim_draw_msg(s32, s32, s32, s32, s32, s32);
 s32 shim_get_msg_width(s32, u16);
-void shim_get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
+void shim_mdl_get_shroud_tint_params(u8* r, u8* g, u8* b, u8* a);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 
 #define guRotateF shim_guRotateF
@@ -68,7 +68,7 @@ void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY
 #define draw_box shim_draw_box
 #define draw_msg shim_draw_msg
 #define get_msg_width shim_get_msg_width
-#define get_background_color_blend shim_get_background_color_blend
+#define mdl_get_shroud_tint_params shim_mdl_get_shroud_tint_params
 #define sfx_play_sound_at_position shim_sfx_play_sound_at_position
 
 #endif

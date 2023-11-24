@@ -24,7 +24,7 @@ API_CALLABLE(N(AdjustFog)) {
         for (i = 0; i < iterList->count; i++) {
             s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_3);
+            set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, ENV_TINT_REMAP);
             if (mode) {
                 mdl->flags &= ~MODEL_FLAG_HIDDEN;
             }
@@ -33,10 +33,10 @@ API_CALLABLE(N(AdjustFog)) {
     }
 
     if (mode) {
-        set_background_color_blend(colR, colG, colB,
+        mdl_set_shroud_tint_params(colR, colG, colB,
             (script->functionTemp[0] * 255) / duration);
     } else {
-        set_background_color_blend(colR, colG, colB,
+        mdl_set_shroud_tint_params(colR, colG, colB,
             255 - ((script->functionTemp[0] * 255) / duration));
     }
 
@@ -45,7 +45,7 @@ API_CALLABLE(N(AdjustFog)) {
         for (i = 0; i < iterList->count; i++) {
             s32 treeIndex = get_model_list_index_from_tree_index(iterList->list[i]);
             Model* mdl = get_model_from_list_index(treeIndex);
-            set_mdl_custom_gfx_set(mdl, -1, FOG_MODE_0);
+            set_mdl_custom_gfx_set(mdl, CUSTOM_GFX_NONE, ENV_TINT_NONE);
             if (!mode) {
                 mdl->flags |= MODEL_FLAG_HIDDEN;
             }
@@ -180,7 +180,7 @@ EvtScript N(EVS_SetupLavaPuzzle) = {
     EVT_END_IF
     EVT_THREAD
         EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, 0)
+        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, NULL)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(N(LavaModels)))

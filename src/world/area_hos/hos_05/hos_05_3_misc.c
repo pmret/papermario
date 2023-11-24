@@ -1,6 +1,6 @@
 #include "hos_05.h"
 
-#include "world/common/atomic/UnkFunc27.inc.c"
+#include "world/common/atomic/ApplyTint.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

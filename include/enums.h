@@ -2487,12 +2487,12 @@ enum LandOnSwitchSubstate {
     LANDING_ON_SWITCH_SUBSTATE_2    = 2,
 };
 
-enum PeachStatusFlags {
-    PEACH_STATUS_FLAG_IS_PEACH          = 0x01,
-    PEACH_STATUS_FLAG_DISGUISED         = 0x02,
-    PEACH_STATUS_FLAG_HAS_PARASOL       = 0x04,
-    PEACH_STATUS_FLAG_8                 = 0x08,
-    PEACH_STATUS_FLAG_DEPRESSED         = 0x10
+enum PeachFlags {
+    PEACH_FLAG_IS_PEACH             = 0x01,
+    PEACH_FLAG_DISGUISED            = 0x02,
+    PEACH_FLAG_HAS_PARASOL          = 0x04,
+    PEACH_FLAG_BLOCK_NEXT_DISGUISE  = 0x08, // next attempt to copy an NPC with parasol will fail
+    PEACH_FLAG_DEPRESSED            = 0x10
 };
 
 enum PeachBakingItems {
@@ -3192,6 +3192,7 @@ enum WindowPriority {
 };
 
 enum RenderModeIndex {
+    // RM1 modes
     RENDER_MODE_IDX_00 = 0x00,
     RENDER_MODE_IDX_01 = 0x01,
     RENDER_MODE_IDX_02 = 0x02,
@@ -3208,6 +3209,7 @@ enum RenderModeIndex {
     RENDER_MODE_IDX_0D = 0x0D,
     RENDER_MODE_IDX_0E = 0x0E,
     RENDER_MODE_IDX_0F = 0x0F,
+    // RM2 modes
     RENDER_MODE_IDX_10 = 0x10,
     RENDER_MODE_IDX_11 = 0x11,
     RENDER_MODE_IDX_12 = 0x12,
@@ -3223,6 +3225,7 @@ enum RenderModeIndex {
     RENDER_MODE_IDX_1C = 0x1C,
     RENDER_MODE_IDX_1D = 0x1D,
     RENDER_MODE_IDX_1E = 0x1E,
+    // RM3 modes
     RENDER_MODE_IDX_1F = 0x1F,
     RENDER_MODE_IDX_20 = 0x20,
     RENDER_MODE_IDX_21 = 0x21,
@@ -3247,6 +3250,7 @@ enum RenderModeIndex {
     RENDER_MODE_IDX_34 = 0x34,
     RENDER_MODE_IDX_35 = 0x35,
     RENDER_MODE_IDX_36 = 0x36,
+    // cloud render modes
     RENDER_MODE_IDX_37 = 0x37,
     RENDER_MODE_IDX_38 = 0x38,
     RENDER_MODE_IDX_39 = 0x39,
@@ -3255,56 +3259,61 @@ enum RenderModeIndex {
     RENDER_MODE_IDX_3C = 0x3C,
 };
 
-/// not really
+// predefined configurations for RDP geometry and render modes
+// though these are called "render modes", they do not strictly correspond to the RDP render modes (as supplied to gDPSetRenderMode)
 enum RenderMode {
-    RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0          = 0x00000000,
-    RENDER_MODE_SURFACE_OPA                      = 0x00000001,
-    RENDER_MODE_02_UNUSED                        = 0x00000002,
-    RENDER_MODE_SURFACE_OPA_NO_AA                = 0x00000003,
-    RENDER_MODE_SURFACE_OPA_NO_ZB                = 0x00000004,
-    RENDER_MODE_DECAL_OPA                        = 0x00000005,
-    RENDER_MODE_06_UNUSED                        = 0x00000006,
-    RENDER_MODE_DECAL_OPA_NO_AA                  = 0x00000007,
-    RENDER_MODE_08_UNUSED                        = 0x00000008,
-    RENDER_MODE_INTERSECTING_OPA                 = 0x00000009,
-    RENDER_MODE_0A_UNUSED                        = 0x0000000A,
-    RENDER_MODE_0B_UNUSED                        = 0x0000000B,
-    RENDER_MODE_0C_UNUSED                        = 0x0000000C,
-    RENDER_MODE_ALPHATEST                        = 0x0000000D,
-    RENDER_MODE_0E_UNUSED                        = 0x0000000E,
-    RENDER_MODE_ALPHATEST_ONESIDED               = 0x0000000F,
-    RENDER_MODE_ALPHATEST_NO_ZB                  = 0x00000010,
-    RENDER_MODE_SURFACE_XLU_LAYER1               = 0x00000011,
-    RENDER_MODE_12_UNUSED                        = 0x00000012,
-    RENDER_MODE_SURFACE_XLU_NO_AA                = 0x00000013,
-    RENDER_MODE_SURFACE_XLU_NO_ZB                = 0x00000014,
-    RENDER_MODE_SURFACE_XLU_ZB_ZUPD              = 0x00000015,
-    RENDER_MODE_SURFACE_XLU_LAYER2               = 0x00000016,
-    RENDER_MODE_17_UNUSED                        = 0x00000017,
-    RENDER_MODE_18_UNUSED                        = 0x00000018,
-    RENDER_MODE_19_UNUSED                        = 0x00000019,
-    RENDER_MODE_DECAL_XLU                        = 0x0000001A,
-    RENDER_MODE_1B_UNUSED                        = 0x0000001B,
-    RENDER_MODE_DECAL_XLU_NO_AA                  = 0x0000001C,
-    RENDER_MODE_1D_UNUSED                        = 0x0000001D,
-    RENDER_MODE_DECAL_XLU_AHEAD                  = 0x0000001E, // special case RENDER_MODE_DECAL_XLU for rendering in front of others
-    RENDER_MODE_1F_UNUSED                        = 0x0000001F,
-    RENDER_MODE_SHADOW                           = 0x00000020,
-    RENDER_MODE_21_UNUSED                        = 0x00000021,
-    RENDER_MODE_SURFACE_XLU_LAYER3               = 0x00000022,
-    RENDER_MODE_23_UNUSED                        = 0x00000023,
-    RENDER_MODE_24_UNUSED                        = 0x00000024,
-    RENDER_MODE_25_UNUSED                        = 0x00000025,
-    RENDER_MODE_INTERSECTING_XLU                 = 0x00000026,
-    RENDER_MODE_27_UNUSED                        = 0x00000027,
-    RENDER_MODE_PASS_THROUGH                     = 0x00000028, // no render mode is set, only geometry modes are initialized
-    RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD           = 0x00000029,
-    RENDER_MODE_SURFACE_OPA_NO_ZB_BEHIND         = 0x0000002A,
-    RENDER_MODE_ALPHATEST_NO_ZB_BEHIND           = 0x0000002B,
-    RENDER_MODE_SURFACE_XLU_NO_ZB_BEHIND         = 0x0000002C,
-    RENDER_MODE_CLOUD_NO_ZCMP                    = 0x0000002D,
-    RENDER_MODE_CLOUD                            = 0x0000002E,
-    RENDER_MODE_CLOUD_NO_ZB                      = 0x0000002F,
+    // opaque render modes
+    RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0          = 0x00,
+    RENDER_MODE_SURFACE_OPA                      = 0x01,
+    RENDER_MODE_02_UNUSED                        = 0x02,
+    RENDER_MODE_SURFACE_OPA_NO_AA                = 0x03,
+    RENDER_MODE_SURFACE_OPA_NO_ZB                = 0x04,
+    RENDER_MODE_DECAL_OPA                        = 0x05,
+    RENDER_MODE_06_UNUSED                        = 0x06,
+    RENDER_MODE_DECAL_OPA_NO_AA                  = 0x07,
+    RENDER_MODE_08_UNUSED                        = 0x08,
+    RENDER_MODE_INTERSECTING_OPA                 = 0x09,
+    RENDER_MODE_0A_UNUSED                        = 0x0A,
+    RENDER_MODE_0B_UNUSED                        = 0x0B,
+    RENDER_MODE_0C_UNUSED                        = 0x0C,
+    RENDER_MODE_ALPHATEST                        = 0x0D,
+    RENDER_MODE_0E_UNUSED                        = 0x0E,
+    RENDER_MODE_ALPHATEST_ONESIDED               = 0x0F,
+    RENDER_MODE_ALPHATEST_NO_ZB                  = 0x10,
+    RENDER_MODES_LAST_OPAQUE                     = RENDER_MODE_ALPHATEST_NO_ZB,
+    // translucent render modes
+    RENDER_MODE_SURFACE_XLU_LAYER1               = 0x11,
+    RENDER_MODE_12_UNUSED                        = 0x12,
+    RENDER_MODE_SURFACE_XLU_NO_AA                = 0x13,
+    RENDER_MODE_SURFACE_XLU_NO_ZB                = 0x14,
+    RENDER_MODE_SURFACE_XLU_ZB_ZUPD              = 0x15,
+    RENDER_MODE_SURFACE_XLU_LAYER2               = 0x16,
+    RENDER_MODE_17_UNUSED                        = 0x17,
+    RENDER_MODE_18_UNUSED                        = 0x18,
+    RENDER_MODE_19_UNUSED                        = 0x19,
+    RENDER_MODE_DECAL_XLU                        = 0x1A,
+    RENDER_MODE_1B_UNUSED                        = 0x1B,
+    RENDER_MODE_DECAL_XLU_NO_AA                  = 0x1C,
+    RENDER_MODE_1D_UNUSED                        = 0x1D,
+    RENDER_MODE_DECAL_XLU_AHEAD                  = 0x1E, // special case RENDER_MODE_DECAL_XLU for rendering in front of others
+    RENDER_MODE_1F_UNUSED                        = 0x1F,
+    RENDER_MODE_SHADOW                           = 0x20,
+    RENDER_MODE_21_UNUSED                        = 0x21,
+    RENDER_MODE_SURFACE_XLU_LAYER3               = 0x22,
+    RENDER_MODE_23_UNUSED                        = 0x23,
+    RENDER_MODE_24_UNUSED                        = 0x24,
+    RENDER_MODE_25_UNUSED                        = 0x25,
+    RENDER_MODE_INTERSECTING_XLU                 = 0x26,
+    RENDER_MODE_27_UNUSED                        = 0x27,
+    // unusual render modes
+    RENDER_MODE_PASS_THROUGH                     = 0x28, // no render mode is set, only geometry modes are initialized
+    RENDER_MODE_SURFACE_XLU_AA_ZB_ZUPD           = 0x29,
+    RENDER_MODE_SURFACE_OPA_NO_ZB_BEHIND         = 0x2A,
+    RENDER_MODE_ALPHATEST_NO_ZB_BEHIND           = 0x2B,
+    RENDER_MODE_SURFACE_XLU_NO_ZB_BEHIND         = 0x2C,
+    RENDER_MODE_CLOUD_NO_ZCMP                    = 0x2D,
+    RENDER_MODE_CLOUD                            = 0x2E,
+    RENDER_MODE_CLOUD_NO_ZB                      = 0x2F,
 };
 
 enum RenderTaskFlags {
@@ -4304,7 +4313,7 @@ enum GlobalOverrides {
 #define MODEL_FLAGS_MASK_FFF0  (\
       MODEL_FLAG_USES_CUSTOM_GFX \
     | MODEL_FLAG_20 \
-    | MODEL_FLAG_40 \
+    | MODEL_FLAG_IGNORE_FOG \
     | MODEL_FLAG_HAS_LOCAL_VERTEX_COPY \
     | MODEL_FLAG_USE_CAMERA_UNK_MATRIX \
     | MODEL_FLAG_DO_BOUNDS_CULLING \
@@ -4312,8 +4321,8 @@ enum GlobalOverrides {
     | MODEL_FLAG_HAS_TEX_PANNER \
     | MODEL_FLAG_MATRIX_DIRTY \
     | MODEL_FLAG_IGNORE_MATRIX \
-    | MODEL_FLAG_4000 \
-    | MODEL_FLAG_8000)
+    | MODEL_FLAG_UNUSED_4000 \
+    | MODEL_FLAG_UNUSED_8000)
 
 enum ModelFlags {
     MODEL_FLAG_VALID                    = 0x0001,
@@ -4322,7 +4331,7 @@ enum ModelFlags {
     MODEL_FLAG_TRANSFORM_GROUP_MEMBER   = 0x0008,
     MODEL_FLAG_USES_CUSTOM_GFX          = 0x0010,
     MODEL_FLAG_20                       = 0x0020,
-    MODEL_FLAG_40                       = 0x0040,
+    MODEL_FLAG_IGNORE_FOG               = 0x0040,
     MODEL_FLAG_HAS_LOCAL_VERTEX_COPY    = 0x0080,
     MODEL_FLAG_USE_CAMERA_UNK_MATRIX    = 0x0100,
     MODEL_FLAG_DO_BOUNDS_CULLING        = 0x0200,
@@ -4330,8 +4339,8 @@ enum ModelFlags {
     MODEL_FLAG_HAS_TEX_PANNER           = 0x0800,
     MODEL_FLAG_MATRIX_DIRTY             = 0x1000, // transform matrix changed and combined matrix needs to be recalculated
     MODEL_FLAG_IGNORE_MATRIX            = 0x2000, // set until dirty combined matrix has been recalculated
-    MODEL_FLAG_4000                     = 0x4000,
-    MODEL_FLAG_8000                     = 0x8000,
+    MODEL_FLAG_UNUSED_4000              = 0x4000,
+    MODEL_FLAG_UNUSED_8000              = 0x8000,
 };
 
 enum ModelGroupVisibility {
@@ -4339,6 +4348,20 @@ enum ModelGroupVisibility {
     MODEL_GROUP_VISIBLE         = 1,
     MODEL_GROUP_OTHERS_HIDDEN   = 2,
     MODEL_GROUP_OTHERS_VISIBLE  = 3,
+};
+
+enum TintMode {
+    ENV_TINT_UNCHANGED  = -1,
+    // no additional tint is applied (model is still be affected by world fog)
+    ENV_TINT_NONE       = 0,
+    // additional fog which 'shrouds' the world during certain scenes
+    ENV_TINT_SHROUD     = 1,
+    // adds depth-based tint using fog, overriding the world fog for affected models
+    ENV_TINT_DEPTH      = 2,
+    // this mode remaps each color channel range from [0, 255] -> [min, max],
+    // setting a new white point and black point for the scene.
+    // the new max values are stored in PRIMITIVE and the new min values in ENV
+    ENV_TINT_REMAP      = 3,
 };
 
 enum TexPanner {
@@ -5851,14 +5874,6 @@ enum BackgroundFlags {
     BACKGROUND_RENDER_STATE_FILTER_PAUSED   = 0x20,
     BACKGROUND_RENDER_STATE_SHOW_PAUSED     = 0x30,
     BACKGROUND_RENDER_STATE_MASK            = 0xF0,
-};
-
-enum FogModes {
-    FOG_MODE_UNCHANGED = -1,
-    FOG_MODE_0 = 0,
-    FOG_MODE_1 = 1,
-    FOG_MODE_2 = 2,
-    FOG_MODE_3 = 3,
 };
 
 enum EncounterStates {

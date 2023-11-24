@@ -286,7 +286,7 @@ API_CALLABLE(N(func_80242538_D223C8)) {
 
     if (isInitialCall) {
         if (script->varTable[0] == 0) {
-            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_1, 1);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_SHROUD, TRUE);
         }
         script->functionTemp[0] = 0;
     }
@@ -302,14 +302,14 @@ API_CALLABLE(N(func_80242538_D223C8)) {
         alpha = 255 - script->functionTemp[0];
     }
 
-    set_background_color_blend(0, 0, 0, alpha);
+    mdl_set_shroud_tint_params(0, 0, 0, alpha);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;
     gCameras[CAM_DEFAULT].bgColor[2] = 0;
 
     if (script->functionTemp[0] >= 255) {
         if (script->varTable[0] == 3) {
-            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_0, 1);
+            mdl_group_set_custom_gfx(script->varTable[15], CUSTOM_GFX_NONE, ENV_TINT_NONE, TRUE);
         }
         return ApiStatus_DONE2;
     }

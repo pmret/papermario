@@ -10,7 +10,7 @@ void* effectFuncs[] = {
     cos_deg, atan2, npc_raycast_down_sides, load_effect, sqrtf, mdl_draw_hidden_panel_surface, is_point_visible,
     guPerspectiveF, guMtxIdentF, transform_point, guLookAtHiliteF, set_screen_overlay_params_back,
     set_screen_overlay_center, set_screen_overlay_center_worldpos, mdl_get_next_texture_address, guPositionF, guOrthoF,
-    guFrustumF, draw_prev_frame_buffer_at_screen_pos, draw_box, draw_msg, get_msg_width, get_background_color_blend, sfx_play_sound_at_position
+    guFrustumF, draw_prev_frame_buffer_at_screen_pos, draw_box, draw_msg, get_msg_width, mdl_get_shroud_tint_params, sfx_play_sound_at_position
 };
 
 s32 SimpleRandLUT[128] = {

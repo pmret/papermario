@@ -212,7 +212,7 @@ API_CALLABLE(N(SetFireplaceAlpha)) {
 void N(setup_gfx_fireplace)(void) {
     gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
     gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, COMBINED, 0, 0, 0, PRIMITIVE);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_INTERFERENCE, PM_CC_3E);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(FireplaceAlpha));
 }
 
@@ -401,7 +401,7 @@ EvtScript N(EVS_SetupInteractables) = {
     EVT_IF_EQ(GF_KKJ14_OpenedPassage, FALSE)
         EVT_CALL(EnableGroup, MODEL_g27, FALSE)
         EVT_EXEC(N(EVS_TexPan_Fireplace))
-        EVT_CALL(SetModelCustomGfx, MODEL_o157, CUSTOM_GFX_1, FOG_MODE_UNCHANGED)
+        EVT_CALL(SetModelCustomGfx, MODEL_o157, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
         EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(setup_gfx_fireplace)), NULL)
         EVT_SWITCH(GB_StoryProgress)
             EVT_CASE_LT(STORY_CH0_WAKE_UP)

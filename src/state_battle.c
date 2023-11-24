@@ -72,9 +72,9 @@ void state_step_battle(void) {
         currentBattleSelection = UNPACK_BTL_AREA(gCurrentBattleID);
         currentBattleIndex = UNPACK_BTL_INDEX(gCurrentBattleID);
 
-        if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH ||
+        if (gGameStatusPtr->peachFlags & PEACH_FLAG_IS_PEACH ||
             (currentBattleSelection == BTL_AREA_KKJ && currentBattleIndex == 0)) {
-            gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_IS_PEACH;
+            gGameStatusPtr->peachFlags |= PEACH_FLAG_IS_PEACH;
             spr_init_sprites(PLAYER_SPRITES_PEACH_BATTLE);
         } else {
             spr_init_sprites(PLAYER_SPRITES_MARIO_BATTLE);
@@ -152,7 +152,7 @@ void state_step_end_battle(void) {
             func_8005AF84();
             func_8002ACDC();
             sfx_clear_env_sounds(1);
-            gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_IS_PEACH;
+            gGameStatusPtr->peachFlags &= ~PEACH_FLAG_IS_PEACH;
             battle_heap_create();
             spr_init_sprites(gGameStatusPtr->playerSpriteSet);
             init_model_data();
@@ -190,7 +190,7 @@ void state_step_end_battle(void) {
 
                 load_map_bg(mapConfig->bgName);
                 if (mapSettings->background != NULL) {
-                    read_background_size(mapSettings->background);
+                    set_background(mapSettings->background);
                 } else {
                     set_background_size(296, 200, 12, 20);
                 }

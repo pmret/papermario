@@ -180,7 +180,7 @@ dlabel D_8009A67C
 
 .space 8
 
-dlabel D_8009A680
+dlabel ResetFrameBufferArray
 .space 4
 
 dlabel D_8009A684
