@@ -1026,6 +1026,8 @@
 - [title_bg, bg]
 - name: title_data
   type: tex_title
+  dump_raw: true
+  dump_raw_size: 0xCA26
   textures:
   - [0x10,   ia8,    press_start, 128, 20]
   - [0xA10,  ia8,    copyright,   144, 40]

@@ -153,7 +153,6 @@ class N64SegPm_map_data(N64Segment):
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
             elif file_entry["type"] == "tex_title":
-
                 for tex in file_entry["textures"]:
                     pos = tex[0]
                     imgtype = tex[1]
@@ -191,11 +190,11 @@ class N64SegPm_map_data(N64Segment):
                     img.write(fs_dir / "title" / f"{outname}.png")
 
             elif file_entry["type"] == "bg":
-
                 for i in range(file_entry.get("pal_count", 1)):
                     header_offset = i * 0x10
-                    raster_offset, palette_offset, draw_pos, width, height = \
-                        struct.unpack(">IIIHH", bytes[header_offset : header_offset + 0x10])
+                    raster_offset, palette_offset, draw_pos, width, height = struct.unpack(
+                        ">IIIHH", bytes[header_offset : header_offset + 0x10]
+                    )
 
                     raster_offset -= 0x80200000
                     palette_offset -= 0x80200000
@@ -221,6 +220,10 @@ class N64SegPm_map_data(N64Segment):
                 with open(path, "wb") as f:
                     f.write(bytes)
 
+            if file_entry.get("dump_raw", False):
+                with open(fs_dir / f"{name}.raw.dat", "wb") as f:
+                    f.write(rom_bytes[bytes_start : bytes_start + file_entry["dump_raw_size"]])
+
             asset_idx += 1
 
     def get_linker_entries(self):
@@ -228,10 +231,16 @@ class N64SegPm_map_data(N64Segment):
 
         fs_dir = options.opts.asset_path / self.dir / self.name
 
+        src_paths = []
+        for name, file in self.files.items():
+            src_paths.append(fs_dir / add_file_ext(file, linker=True))
+            if file.get("dump_raw", False):
+                src_paths.append(fs_dir / f"{name}.raw.dat")
+
         return [
             LinkerEntry(
                 self,
-                [fs_dir / add_file_ext(file, linker=True) for name, file in self.files.items()],
+                src_paths,
                 fs_dir.with_suffix(".dat"),
                 ".data",
                 ".data",

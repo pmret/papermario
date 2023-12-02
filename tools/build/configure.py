@@ -944,6 +944,9 @@ class Configure:
                                 "img_flags": "",
                             },
                         )
+                    elif path.suffixes[-2:] == [".raw", ".dat"]:
+                        compress = False
+                        bin_path = path
                     elif name == "title_data":
                         compress = True
 
