@@ -1,5 +1,6 @@
 from math import ceil
 import os, sys
+import struct
 from pathlib import Path
 
 import crunch64
@@ -48,21 +49,22 @@ def parse_palette(data):
     return palette
 
 
-def add_file_ext(name: str, linker: bool = False) -> str:
-    if name.startswith("party_"):
-        return "party/" + name + ".png"
-    elif name.endswith("_hit"):
-        return "geom/" + name + ".bin"
-    elif name.endswith("_shape"):
+def add_file_ext(file: dict, linker: bool = False) -> str:
+    if file["type"] == "party":
+        return "party/" + file["name"] + ".png"
+    elif file["type"] == "geom_hit":
+        return "geom/" + file["name"] + ".bin"
+    elif file["type"] == "geom_shape":
+        name = file["name"]
         if linker:
             name += "_built"
         return "geom/" + name + ".bin"
-    elif name.endswith("_tex"):
-        return "tex/" + name + ".bin"
-    elif name.endswith("_bg"):
-        return "bg/" + name + ".png"
+    elif file["type"] == "tex_archive":
+        return "tex/" + file["name"] + ".bin"
+    elif file["type"] == "bg":
+        return "bg/" + file["name"] + ".png"
     else:
-        return name + ".bin"
+        return file["name"] + ".bin"
 
 
 class N64SegPm_map_data(N64Segment):
@@ -86,8 +88,23 @@ class N64SegPm_map_data(N64Segment):
             yaml=yaml,
         )
 
-        with open(script_dir / "map_data.yaml") as f:
-            self.files = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+        if "ver/ique" in str(options.opts.target_path):
+            cfg_name = "mapfs_ique.yaml"
+        elif "ver/jp" in str(options.opts.target_path):
+            cfg_name = "mapfs_jp.yaml"
+        else:
+            cfg_name = "mapfs.yaml"
+
+        self.files = {}
+        with open(script_dir / cfg_name) as f:
+            mapfs_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+            for file in mapfs_cfg:
+                if isinstance(file, list):
+                    name = file[0]
+                    typ = file[1]
+                    self.files[name] = {"name": name, "type": typ}
+                else:
+                    self.files[file["name"]] = file.copy()
 
     def split(self, rom_bytes):
         assert isinstance(self.rom_start, int)
@@ -102,7 +119,6 @@ class N64SegPm_map_data(N64Segment):
         data = rom_bytes[self.rom_start : self.rom_end]
 
         asset_idx = 0
-        asset_entries = {}
         while True:
             asset_data = data[0x20 + asset_idx * 0x1C :]
 
@@ -110,17 +126,19 @@ class N64SegPm_map_data(N64Segment):
             offset = int.from_bytes(asset_data[0x10:0x14], byteorder="big")
             size = int.from_bytes(asset_data[0x14:0x18], byteorder="big")
             decompressed_size = int.from_bytes(asset_data[0x18:0x1C], byteorder="big")
-            asset_entries[name] = (offset, size, decompressed_size)
 
             is_compressed = size != decompressed_size
+
+            if name == "end_data":
+                break
+
+            assert self.files.get(name) is not None
+            file_entry = self.files[name]
 
             if offset == 0:
                 path = None
             else:
-                path = fs_dir / add_file_ext(name)
-
-            if name == "end_data":
-                break
+                path = fs_dir / add_file_ext(file_entry)
 
             bytes_start = self.rom_start + 0x20 + offset
             bytes = rom_bytes[bytes_start : bytes_start + size]
@@ -128,71 +146,66 @@ class N64SegPm_map_data(N64Segment):
             if is_compressed:
                 bytes = crunch64.yay0.decompress(bytes)
 
-            if name.startswith("party_"):
+            if file_entry["type"] == "party":
                 assert path is not None
                 with open(path, "wb") as f:
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
-            elif name == "title_data":
-                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(options.opts.target_path):
-                    w = 200
-                    h = 112
-                    img = n64img.image.RGBA32(data=bytes[0x2210 : 0x2210 + w * h * 4], width=w, height=h)
-                    img.write(fs_dir / "title/logotype.png")
+            elif file_entry["type"] == "tex_title":
 
-                    w = 144
-                    h = 32
-                    img = n64img.image.IA8(data=bytes[0x10 : 0x10 + w * h], width=w, height=h)
-                    img.write(fs_dir / "title/copyright.png")
+                for tex in file_entry["textures"]:
+                    pos = tex[0]
+                    imgtype = tex[1]
+                    outname = tex[2]
 
-                    w = 128
-                    h = 32
-                    img = n64img.image.IA8(data=bytes[0x1210 : 0x1210 + w * h], width=w, height=h)
-                    img.write(fs_dir / "title/press_start.png")
-                elif "ver/ique" in str(options.opts.target_path):
-                    w = 200
-                    h = 112
-                    img = n64img.image.RGBA32(data=bytes[0x2090 : 0x2090 + w * h * 4], width=w, height=h)
-                    img.write(fs_dir / "title/logotype.png")
+                    if imgtype == "pal":
+                        continue
 
-                    w = 144
-                    h = 40
-                    img = n64img.image.IA8(data=bytes[0xA10 : 0xA10 + w * h], width=w, height=h)
-                    img.write(fs_dir / "title/copyright.png")
+                    w = tex[3]
+                    h = tex[4]
 
-                    w = 128
-                    h = 20
-                    img = n64img.image.IA8(data=bytes[0x10 : 0x10 + w * h], width=w, height=h)
-                    img.write(fs_dir / "title/press_start.png")
-                else:
-                    w = 272
-                    h = 88
-                    img = n64img.image.RGBA32(data=bytes[0x1830 : 0x1830 + w * h * 4], width=w, height=h)
-                    img.write(fs_dir / "title/logotype.png")
+                    if imgtype == "ia4":
+                        img = n64img.image.IA4(data=bytes[pos : pos + w * h // 2], width=w, height=h)
+                    elif imgtype == "ia8":
+                        img = n64img.image.IA8(data=bytes[pos : pos + w * h], width=w, height=h)
+                    elif imgtype == "ia16":
+                        img = n64img.image.IA16(data=bytes[pos : pos + w * h * 2], width=w, height=h)
+                    elif imgtype == "rgba16":
+                        img = n64img.image.RGBA16(data=bytes[pos : pos + w * h * 2], width=w, height=h)
+                    elif imgtype == "rgba32":
+                        img = n64img.image.RGBA32(data=bytes[pos : pos + w * h * 4], width=w, height=h)
+                    elif imgtype in ("ci4", "ci8"):
+                        palette = next(filter(lambda x: x[1] == "pal" and x[2] == outname, file_entry["textures"]))
+                        pal_pos = palette[0]
 
-                    w = 128
-                    h = 32
-                    img = n64img.image.CI4(data=bytes[0x10 : 0x10 + (w * h // 2)], width=w, height=h)
-                    img.palette = parse_palette(bytes[0x810:0x830])
-                    img.write(fs_dir / "title/copyright.png")
+                        if imgtype == "ci4":
+                            img = n64img.image.CI4(data=bytes[pos : pos + w * h // 2], width=w, height=h)
+                            img.palette = parse_palette(bytes[pal_pos : pal_pos + 0x20])
+                        elif imgtype == "ci8":
+                            img = n64img.image.CI8(data=bytes[pos : pos + w * h], width=w, height=h)
+                            img.palette = parse_palette(bytes[pal_pos : pal_pos + 0x200])
+                    else:
+                        raise Exception(f"Invalid image type {imgtype}")
 
-                    w = 128
-                    h = 32
-                    img = n64img.image.IA8(data=bytes[0x830 : 0x830 + w * h], width=w, height=h)
-                    img.write(fs_dir / "title/press_start.png")
-            elif name.endswith("_bg"):
+                    img.write(fs_dir / "title" / f"{outname}.png")
 
-                def write_bg_png(bytes, path, header_offset=0):
-                    header = bytes[header_offset : header_offset + 0x10]
+            elif file_entry["type"] == "bg":
 
-                    raster_offset = int.from_bytes(header[0:4], byteorder="big") - 0x80200000
-                    palette_offset = int.from_bytes(header[4:8], byteorder="big") - 0x80200000
-                    assert int.from_bytes(header[8:12], byteorder="big") == 0x000C0014  # draw pos
-                    width = int.from_bytes(header[12:14], byteorder="big")
-                    height = int.from_bytes(header[14:16], byteorder="big")
+                for i in range(file_entry.get("pal_count", 1)):
+                    header_offset = i * 0x10
+                    raster_offset, palette_offset, draw_pos, width, height = \
+                        struct.unpack(">IIIHH", bytes[header_offset : header_offset + 0x10])
 
-                    with open(path, "wb") as f:
+                    raster_offset -= 0x80200000
+                    palette_offset -= 0x80200000
+                    assert draw_pos == 0x000C0014
+
+                    outname = name
+                    if i >= 1:
+                        outname += f".{i}"
+
+                    with open(fs_dir / "bg" / f"{outname}.png", "wb") as f:
                         # CI-8
                         w = png.Writer(
                             width,
@@ -201,12 +214,7 @@ class N64SegPm_map_data(N64Segment):
                         )
                         w.write_array(f, bytes[raster_offset:])
 
-                write_bg_png(bytes, fs_dir / "bg" / f"{name}.png")
-
-                # sbk_bg has an alternative palette
-                if name == "sbk_bg":
-                    write_bg_png(bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10)
-            elif name.endswith("_tex"):
+            elif file_entry["type"] == "tex_archive":
                 TexArchive.extract(bytes, fs_dir / "tex" / name)
             else:
                 assert path is not None
@@ -223,7 +231,7 @@ class N64SegPm_map_data(N64Segment):
         return [
             LinkerEntry(
                 self,
-                [fs_dir / add_file_ext(name, linker=True) for name in self.files],
+                [fs_dir / add_file_ext(file, linker=True) for name, file in self.files.items()],
                 fs_dir.with_suffix(".dat"),
                 ".data",
                 ".data",
