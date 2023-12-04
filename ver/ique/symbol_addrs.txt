@@ -4733,3 +4733,5 @@ ui_battle_projector_reel_png = 0x80290C38; // rom:0x2085D8
 ui_battle_swap_background_png = 0x80291C40; // rom:0x2095E0
 ui_battle_cursor_hand_png = 0x802838C0; // rom:0x1FB260
 ui_battle_cursor_hand_pal = 0x80283AC0; // rom:0x1FB460
+ResetTilesImg = 0x80072A80; // rom:0x4DE80
+
