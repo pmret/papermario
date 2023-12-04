@@ -34,6 +34,8 @@ pipeline {
                 }
             }
             steps {
+                sh 'cat build_log.txt'
+                sh 'cat build_log.txt | grep warning | sort'
                 script {
                     if (env.CHANGE_ID) {
                         def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
