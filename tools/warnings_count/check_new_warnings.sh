@@ -22,7 +22,7 @@ then
     ninja | grep warning | sort > tools/warnings_count/warnings_new.txt
 else
     touch tools/warnings_count/warnings_new.txt
-    cat build_log.txt | grep warning || [[ $? == 1 ]] | sort > tools/warnings_count/warnings_new.txt
+    cat build_log.txt | grep warning | sort > tools/warnings_count/warnings_new.txt
 fi
 
 curl -L https://papermar.io/reports/warnings.txt > tools/warnings_count/warnings.txt
