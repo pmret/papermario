@@ -61,7 +61,7 @@
     },
     "[python]": {
         "editor.formatOnType": true,
-        "editor.wordBasedSuggestions": false,
+        "editor.wordBasedSuggestions": "off",
         "editor.formatOnSave": true,
         "editor.formatOnSaveMode": "modifications",
         "editor.defaultFormatter": "ms-python.black-formatter",
