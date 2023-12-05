@@ -155,6 +155,22 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "cc_sjisesc",
+        description="gcc $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {ICONV} | tools/sjis-escape.py | {ccache}{cc} {cflags} $cflags - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule(
+        "cc_modern_sjisesc",
+        description="gcc $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | tools/sjis-escape.py | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule(
         "cc_ido",
         description="ido $in",
         command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {extra_cppflags} $cppflags -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
@@ -689,6 +705,10 @@ class Configure:
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":
                     encoding = "EUC-JP"
+
+                # use tools/sjis-escape.py for src/battle/area/tik2/area.c
+                if version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
+                    task += "_sjisesc"
 
                 # Dead cod
                 if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
