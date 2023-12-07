@@ -34,12 +34,8 @@ obfuscation_shims_ROM_START = 0x31F340;
 battle_heap_create_obfuscated_ROM_END = 0x31F340;
 obfuscation_shims_ROM_END = 0x31F430;
 obfuscated_obfuscation_shims_VRAM = 0x7599F6D8;
-
-osViModeNtscLan1 = 0x80095800;
-
 osMemSize = 0x80000318;
 osTvType = 0x80000300;
-osMemSize = 0x80000318;
 osRomBase = 0x80000308;
 osResetType = 0x8000030C;
 osAppNMIBuffer = 0x8000031C;
@@ -48,7 +44,6 @@ osAppNMIBuffer = 0x8000031C;
 
 __osGetSR = 0x8006C650;
 __osHwIntTable = 0x800958A0;
-D_80074010 = 0x80073FF0;
 
 // main.bss
 
@@ -1189,7 +1184,6 @@ HES_StatusSPIncrement4 = 0x801084A0;
 HES_StatusSPIncrement5 = 0x801084C8;
 HES_StatusSPIncrement6 = 0x801084F0;
 HES_StatusSPIncrement7 = 0x80108518;
-HES_StatusSPIncrement8 = 0x80108540;
 
 HES_StatusStar1 = 0x80108568;
 HES_StatusStar2 = 0x80108590;
@@ -1324,4 +1318,3 @@ EVS_WorldTwink_Update = 0x802BD20C;
 EVS_WorldTwink_UseAbility = 0x802BD228;
 EVS_WorldTwink_PutAway = 0x802BD244;
 
-D_80109610_JP = 0x80109610;
