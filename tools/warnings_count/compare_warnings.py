@@ -59,17 +59,15 @@ def main():
             print("\tNew warnings: " + str(num_new_warnings))
             print()
 
-        with open(args.newwarnings) as new:
-            new = new.readlines()
-            for newLine in new:
-                if "warning: previous declaration of" in newLine:
-                    continue
+        for newLine in new_warnings:
+            if "warning: previous declaration of" in newLine:
+                continue
 
-                if newLine not in current_warnings:
-                    if stderr:
-                        print(newLine.strip(), file=sys.stderr)
-                    else:
-                        print("- " + newLine.strip())
+            if newLine not in current_warnings:
+                if stderr:
+                    print(newLine.strip(), file=sys.stderr)
+                else:
+                    print("- " + newLine.strip())
     elif num_new_warnings < num_current_warnings:
         delta = num_current_warnings - num_new_warnings
 
