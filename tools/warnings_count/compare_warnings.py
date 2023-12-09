@@ -1,33 +1,48 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
+from pathlib import Path
 import sys
 
+import requests
 
-def countFileLines(filename: str) -> int:
-    with open(filename) as f:
-        return len(f.readlines())
+script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
+root_dir = script_dir / "../.."
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "currentwarnings",
-        help="Name of file which contains the current warnings of the repo.",
-    )
-    parser.add_argument(
-        "newwarnings",
-        help="Name of file which contains the *new* warnings of the repo.",
-    )
     parser.add_argument("--pr-message", action="store_true")
     args = parser.parse_args()
 
-    currentLines = countFileLines(args.currentwarnings)
-    newLines = countFileLines(args.newwarnings)
-    if newLines > currentLines:
+    # Download the latest warnings.txt
+    response = requests.get("https://papermar.io/reports/warnings.txt")
+    current_warnings = response.content.decode("utf-8").strip().split("\n")
+
+    # Write the current warnings to a file
+    with open(script_dir / "warnings.txt", "w") as f:
+        for line in current_warnings:
+            f.write(line + "\n")
+
+    # Get the new warnings from the build log
+    if not (root_dir / "build_log.txt").exists():
+        print("build_log.txt not found. Exiting.")
+        sys.exit(1)
+
+    with open(root_dir / "build_log.txt") as f:
+        new_warnings = [line for line in f.readlines() if "warning" in line]
+
+    # Write the new warnings to a file
+    with open(script_dir / "warnings_new.txt", "w") as f:
+        f.writelines(new_warnings)
+
+    num_current_warnings = len(current_warnings)
+    num_new_warnings = len(new_warnings)
+    if num_new_warnings > num_current_warnings:
         stderr = False
         if args.pr_message:
-            delta = newLines - currentLines
+            delta = num_new_warnings - num_current_warnings
 
             if delta == 1:
                 print(f"⚠️ This PR introduces a warning:")
@@ -40,25 +55,21 @@ def main():
         else:
             print()
             print("There are more warnings now. Go fix them!")
-            print("\tCurrent warnings: " + str(currentLines))
-            print("\tNew warnings: " + str(newLines))
+            print("\tCurrent warnings: " + str(num_current_warnings))
+            print("\tNew warnings: " + str(num_new_warnings))
             print()
 
-        with open(args.newwarnings) as new:
-            new = new.readlines()
-            with open(args.currentwarnings) as current:
-                current = current.readlines()
-                for newLine in new:
-                    if "warning: previous declaration of" in newLine:
-                        continue
+        for newLine in new_warnings:
+            if "warning: previous declaration of" in newLine:
+                continue
 
-                    if newLine not in current:
-                        if stderr:
-                            print(newLine.strip(), file=sys.stderr)
-                        else:
-                            print("- " + newLine.strip())
-    elif newLines < currentLines:
-        delta = currentLines - newLines
+            if newLine not in current_warnings:
+                if stderr:
+                    print(newLine.strip(), file=sys.stderr)
+                else:
+                    print("- " + newLine.strip())
+    elif num_new_warnings < num_current_warnings:
+        delta = num_current_warnings - num_new_warnings
 
         if args.pr_message:
             print(f"✅ This PR fixes {delta} warnings!")

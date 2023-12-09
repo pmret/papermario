@@ -24,12 +24,10 @@ Formation A(Formation_02) = {
     ACTOR_BY_POS(A(super_blooper), A(BlooperPos), 10),
 };
 
-// ソ is encoded as 0x83 0x5C, so it needs another backslash to be interpreted as valid escape sequence
-// TODO modify iconv instead of strings in this file
 BattleList A(Formations) = {
-    BATTLE(A(Formation_00), A(tik_01), "ゲッソ\ー"),
-    BATTLE(A(Formation_01), A(tik_01), "ビリビリゲッソ\ー"),
-    BATTLE(A(Formation_02), A(tik_01), "ビッグゲッソ\ー　チビゲッソ\ー"),
+    BATTLE(A(Formation_00), A(tik_01), "ゲッソー"),
+    BATTLE(A(Formation_01), A(tik_01), "ビリビリゲッソー"),
+    BATTLE(A(Formation_02), A(tik_01), "ビッグゲッソー　チビゲッソー"),
     {},
 };
 

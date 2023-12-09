@@ -62,8 +62,6 @@ def write_ninja_rules(
     cc_egcs = f"{cc_egcs_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
 
-    ICONV = "iconv --from UTF-8 --to $encoding"
-
     CPPFLAGS_COMMON = (
         "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
         "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
@@ -141,7 +139,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | $iconv | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -149,7 +147,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc_modern",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | $iconv | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -175,7 +173,7 @@ def write_ninja_rules(
     ninja.rule(
         "cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cxx} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | $iconv | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -690,6 +688,12 @@ class Configure:
                 if version == "ique":
                     encoding = "EUC-JP"
 
+                iconv = f"iconv --from UTF-8 --to {encoding}"
+
+                # use tools/sjis-escape.py for src/battle/area/tik2/area.c
+                if version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
+                    iconv += " | tools/sjis-escape.py"
+
                 # Dead cod
                 if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
                     obj_path = str(entry.object_path)
@@ -701,7 +705,7 @@ class Configure:
                         variables={
                             "cflags": cflags,
                             "cppflags": f"-DVERSION_{self.version.upper()}",
-                            "encoding": encoding,
+                            "iconv": iconv,
                         },
                     )
                     build(
@@ -724,7 +728,7 @@ class Configure:
                         variables={
                             "cflags": cflags,
                             "cppflags": f"-DVERSION_{self.version.upper()}",
-                            "encoding": encoding,
+                            "iconv": iconv,
                         },
                     )
 
@@ -1077,7 +1081,7 @@ class Configure:
                                 variables={
                                     "cflags": "",
                                     "cppflags": f"-DVERSION_{self.version.upper()}",
-                                    "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                                    "iconv": "iconv --from UTF-8 --to CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                                 },
                             )
                             build(elf_path, [o_path], "shape_ld")
@@ -1176,7 +1180,7 @@ class Configure:
                     variables={
                         "cflags": "",
                         "cppflags": f"-DVERSION_{self.version.upper()}",
-                        "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                        "iconv": "iconv --from UTF-8 --to CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                     },
                 )
             else:
