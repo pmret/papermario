@@ -834,13 +834,12 @@ segments:
     - [0xA5250]
 
   - name: engine4
-    dir: engine4
     type: code
     start: 0xA5F90
     vram: 0x8010f890
     subsegments:
-      - [0xA5F90, bin]
-      - [0xa9770]
+    - [auto, c, sprite]
+    - [auto, c, 101b90_len_8f0]
 
   - name: engine2
     dir: engine2
