@@ -1201,7 +1201,9 @@ typedef struct MessagePrintState {
     /* 0x486 */ u8 curLine;
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ u16 lineEndPos[4];
-    /* 0x490 */ char unk_490[0x38];
+    /* 0x490 */ char unk_490[0x18];
+    /* 0x4A8 */ u8 unk4A8; // curOption in JP?
+    /* 0x4A9 */ char unk_4A9[0x1F];
     /* 0x4C8 */ u16 unk_4C8;
     /* 0x4CA */ s16 unk_4CA;
     /* 0x4CC */ u16 unk_4CC;
