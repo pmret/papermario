@@ -14725,7 +14725,7 @@ segments:
 #################
 ### Dead maps ###
 #################
-  - [0xE9ECD0, bin] # tail of dead kzn_11
+  - [0xE9ECD0, bin, dead_kzn_11_end] # tail of dead kzn_11
   #- name: dead_kzn_11
   #  dir: world/dead/area_kzn/kzn_11
   #  type: code
@@ -15006,9 +15006,10 @@ segments:
     - [auto, c, flo_19_5_beanstalk]
 
   - [0xF00000, pm_sbn, audio]
-  - [0x1942C40, bin]
+  - [0x1942C40, bin, copy_1942C40] # copy of 0x1642C40 - 0x1643000
   - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
-  - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
+  - [0x1B82208, bin, pad_1B82208] # zeros
+  - [0x1B8220C, bin, copy_1B8220C] # copy of 0x188220C - 0x1883000
   - start: 0x1B83000
     type: pm_msg
     files:
@@ -15059,8 +15060,8 @@ segments:
       - 2C_QuizQuestions
       - 2D_QuizChoices
       - 2E_Credits
-  - [0x1C84D30, bin] # junk(?)
-  - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
+  - [0x1C84D30, bin, unk_1C84D30] # junk(?)
+  - [0x1E00000, bin, copy_1E00000] # copy of 0x1943000 - 0x1983000
   - [0x1E40000, pm_map_data, mapfs]
-  - { type: bin, start: 0x27FEE22, subalign: 2 }
+  - { name: copy_27FEE22, type: bin, start: 0x27FEE22, subalign: 2 } # copy of 0x232EE22 - 0x2330000
   - [0x2800000]
