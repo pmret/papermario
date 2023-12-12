@@ -856,8 +856,20 @@ segments:
     start: 0xeb1a0
     vram: 0x802c3000
     subsegments:
-      - [0xeb1a0, bin]
-      - [0x102620]
+    - [auto, c, script_list]
+    - [auto, c, evt]
+    - [auto, c, map_api]
+    - [auto, c, cam_api]
+    - [auto, c, model_api]
+    - [auto, c, npc_api]
+    - [auto, c, msg_api]
+    - [auto, c, player_api]
+    - [auto, c, virtual_entity]
+    - [auto, c, f8f60_len_1560]
+    - [auto, c, audio_api]
+    - [auto, c, item_api]
+    - [auto, c, fx_api]
+    - [auto, c, demo_api]
 
   - name: entity
     type: code

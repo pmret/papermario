@@ -1304,12 +1304,7 @@ s32 popup_menu_update(void) {
         case POPUP_STATE_CANCEL_DIP_AWAIT_CHOICE:
             if (D_8010D6A4 == 1) {
                 set_window_update(WINDOW_ID_21, WINDOW_UPDATE_HIDE);
-#if VERSION_JP
-                switch (D_8010D6A0->unk4A8) // duplicate of curOption?
-#else
-                switch (D_8010D6A0->curOption)
-#endif
-                {
+                switch (D_8010D6A0->curOption) {
                     case 0:
                         gPopupState = POPUP_STATE_CANCEL_DIP_ACCEPT;
                         break;

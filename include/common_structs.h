@@ -1168,6 +1168,22 @@ typedef struct ItemEntity {
     /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
 
+#if VERSION_JP // mergetodo
+typedef struct MessagePrintState {
+    /* 0x000 */ char unk_00[0x4A8];
+    /* 0x4A8 */ u8 curOption;
+    /* 0x4A9 */ s8 madeChoice;
+    /* 0x4AA */ u8 cancelOption;
+    /* 0x4AB */ char unk_4EB[0x1];
+    /* 0x4AC */ u8 targetOption;
+    /* 0x4AD */ u8 scrollingTime;
+    /* 0x4AE */ u8 selectedOption;
+    /* 0x4AF */ char unk_4EF[0x9];
+    /* 0x4B8 */ u8 windowState;
+    /* 0x4B9 */ char unk_4F9[0x3];
+    /* 0x4BC */ s32 stateFlags;
+} MessagePrintState;
+#else
 typedef struct MessagePrintState {
     /* 0x000 */ u8* srcBuffer;
     /* 0x004 */ u16 printBufferPos;
@@ -1201,9 +1217,7 @@ typedef struct MessagePrintState {
     /* 0x486 */ u8 curLine;
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ u16 lineEndPos[4];
-    /* 0x490 */ char unk_490[0x18];
-    /* 0x4A8 */ u8 unk4A8; // curOption in JP?
-    /* 0x4A9 */ char unk_4A9[0x1F];
+    /* 0x490 */ char unk_490[0x38];
     /* 0x4C8 */ u16 unk_4C8;
     /* 0x4CA */ s16 unk_4CA;
     /* 0x4CC */ u16 unk_4CC;
@@ -1262,6 +1276,7 @@ typedef struct MessagePrintState {
     /* 0x550 */ PAL_PTR letterContentPal;
     /* 0x554 */ char unk_554[0x4];
 } MessagePrintState; // size = 0x558
+#endif
 
 typedef struct MessageDrawState {
     /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped
