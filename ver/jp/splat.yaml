@@ -876,8 +876,46 @@ segments:
     start: 0x102620
     vram: 0x802dbd40
     subsegments:
-      - [0x102620, bin]
-      - [0x10cc20]
+    - [auto, c, entity/Shadow]
+    - [auto, c, entity/SaveBlock]
+    - [auto, c, entity/Switch]
+    - [auto, c, entity/ShatteringBlock_common]
+    - [auto, c, entity/ShatteringBlock]
+    - [auto, c, entity/Block]
+    - [auto, c, entity/ItemBlock]
+    - [auto, c, entity/HeartBlock]
+    - [auto, c, entity/SuperBlock]
+    - [auto, c, entity/SimpleSpring]
+    - [auto, c, entity/HiddenPanel]
+    - [auto, c, entity/Chest]
+    - [auto, c, entity/WoodenCrate]
+    - [auto, c, entity/BlueWarpPipe]
+    - [auto, c, entity/Signpost]
+    - start: 0x10AA00
+      type: .data
+      name: entity/Shadow
+      subsegments:
+      - [0x10AA00, i4, entity/shadow/square, 16, 16]
+      - [0x10AA80, i4, entity/shadow/circle, 16, 16]
+      - [0x10AB00, vtx, entity/vtx/shadow1]
+      - [0x10AB40, vtx, entity/vtx/shadow2]
+      - [0x10AB80, i4, entity/shadow/square_big, 32, 32]
+      - [0x10AD80, i4, entity/shadow/circle_big, 32, 32]
+      - [0x10AF80]
+    - [auto, .data, entity/SaveBlock]
+    - [auto, .data, entity/Switch]
+    - [auto, .data, entity/ShatteringBlock_common]
+    - [auto, .data, entity/ShatteringBlock]
+    - [auto, .data, entity/Block]
+    - [auto, .data, entity/ItemBlock]
+    - [auto, .data, entity/HeartBlock]
+    - [auto, .data, entity/SuperBlock]
+    - [auto, .data, entity/SimpleSpring]
+    - [auto, .data, entity/HiddenPanel]
+    - [auto, .data, entity/Chest]
+    - [auto, .data, entity/WoodenCrate]
+    - [auto, .data, entity/BlueWarpPipe]
+    - [auto, .data, entity/Signpost]
 
   - name: font_width
     type: code

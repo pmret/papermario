@@ -4,6 +4,13 @@
 #include "ld_addrs.h"
 #include "entity.h"
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr entity_model_HeartBlockContent_ROM_END;
+extern Addr entity_model_HeartBlockContent_ROM_START;
+extern Addr entity_model_HeartBlock_ROM_END;
+extern Addr entity_model_HeartBlock_ROM_START;
+#endif
+
 extern EntityModelScript Entity_HeartBlockContent_RenderScriptIdle;
 extern EntityModelScript Entity_HeartBlockContent_RenderScriptAfterHit;
 extern EntityModelScript Entity_HeartBlockContent_RenderScriptHit;

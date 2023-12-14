@@ -5,6 +5,11 @@
 #include "entity.h"
 #include "sprite/player.h"
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr entity_model_BlueWarpPipe_ROM_END;
+extern Addr entity_model_BlueWarpPipe_ROM_START;
+#endif
+
 extern Gfx Entity_BlueWarpPipe_RenderPipe[];
 extern Gfx Entity_BlueWarpPipe_RenderBase[];
 

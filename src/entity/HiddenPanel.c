@@ -2,6 +2,11 @@
 #include "ld_addrs.h"
 #include "entity.h"
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr entity_model_HiddenPanel_ROM_END;
+extern Addr entity_model_HiddenPanel_ROM_START;
+#endif
+
 s32 entity_HiddenPanel_is_item_on_top(Entity*);
 void entity_HiddenPanel_flip_over(Entity*);
 

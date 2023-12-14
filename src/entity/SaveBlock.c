@@ -4,6 +4,11 @@
 #include "entity.h"
 #include "message_ids.h"
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr entity_model_SaveBlock_ROM_END;
+extern Addr entity_model_SaveBlock_ROM_START;
+#endif
+
 extern Mtx Entity_SaveBlock_Mtx;
 extern Gfx Entity_SaveBlock_RenderContent[];
 extern Gfx Entity_SaveBlock_RenderBlock[];
