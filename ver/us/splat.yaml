@@ -888,6 +888,7 @@ segments:
     - [auto, c, entity_model]
     - [auto, c, worker]
     - [auto, c, msg]
+    - [auto, c, msg_draw]
     - [auto, c, draw_img_util]
     - [auto, c, item_entity]
     - [auto, c, screen_overlays]
@@ -908,6 +909,7 @@ segments:
     - [auto, .data, animator]
     - [auto, .data, entity_model]
     - [auto, .data, msg]
+    - [auto, .data, msg_draw]
     - [auto, .data, draw_img_util]
     - [auto, .data, item_entity]
     - start: 0xE2DF0
