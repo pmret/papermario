@@ -3,8 +3,32 @@
 #include "message_ids.h"
 #include "sprite.h"
 
+#if !VERSION_JP // TODO remove when charset data is split
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
+#endif
+
+#if VERSION_JP // TODO remove when charset data is split
+extern Addr charset_ROM_START;
+extern Addr charset_standard_pal_OFFSET;
+extern Addr charset_credits_pal_OFFSET;
+extern Addr charset_standard_OFFSET;
+extern Addr charset_title_OFFSET;
+extern Addr charset_subtitle_OFFSET;
+extern Addr charset_JP_5710_OFFSET;
+extern Addr charset_JP_62E0_OFFSET;
+extern Addr charset_JP_97D0_OFFSET;
+extern Addr charset_JP_9C30_OFFSET;
+extern Addr charset_JP_D470_OFFSET;
+extern Addr charset_postcard_pal_OFFSET;
+extern Addr charset_postcard_OFFSET;
+extern Addr msg_ROM_START;
+
+#define charset_postcard_png_width 150
+#define charset_postcard_png_height 105
+#define charset_letter_content_1_png_width 70
+#define charset_letter_content_1_png_height 95
+#endif
 
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,
@@ -16,6 +40,8 @@ enum RewindArrowStates {
 
 #ifdef SHIFT
 #define MSG_ROM_START (s32)msg_ROM_START
+#elif VERSION_JP
+#define MSG_ROM_START 0x1D40000
 #else
 #define MSG_ROM_START 0x1B83000
 #endif
@@ -30,6 +56,7 @@ typedef MessageImageData* MessageImageDataList[1];
 
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
 
+#if !VERSION_JP
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
 
 #if VERSION_PAL
@@ -37,6 +64,7 @@ u8 MessagePlural_de[] = { MSG_CHAR_LOWER_N, MSG_CHAR_READ_END };
 #endif
 
 u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
+#endif
 
 #if VERSION_PAL
 s32 gCurrentLanguage = 0;
@@ -128,11 +156,40 @@ extern MessageCharset* MsgCharsets[5];
 extern IMG_BIN MsgCharImgSubtitle[];
 extern PAL_BIN D_802F4560[80][8];
 
+#if VERSION_JP
+// TODO rename these into something we can understand
+// in the meantime split font_width to find out where they belong...
+extern IMG_BIN D_JP_802EB928[];
+extern IMG_BIN D_JP_802F0FA0[];
+extern IMG_BIN MsgCharImgJP_5710[];
+extern IMG_BIN MsgCharImgJP_9C30[];
+extern IMG_BIN MsgCharImgJP_D470[];
+#endif
+
 extern s32 gMessageBoxFrameParts[2][16];
 
 extern IMG_BIN ui_point_right_png[];
 extern PAL_BIN ui_point_right_pal[];
 
+#if VERSION_JP
+MessageNumber gMsgNumbers[] = {
+    {
+        .rasters = &D_JP_802F0FA0[0x800], // huh?
+        .texSize = 112,
+        .texWidth = 16,
+        .texHeight = 14,
+        .digitWidth = {11, 8, 11, 11, 11, 11, 11, 11, 11, 11},
+        .fixedWidth = 11
+    }, {
+        .rasters = &D_JP_802EB928[0x800], // what?
+        .texSize = 72,
+        .texWidth = 12,
+        .texHeight = 12,
+        .digitWidth = {9, 8, 9, 9, 9, 9, 9, 9, 9, 9},
+        .fixedWidth = 9
+    }
+};
+#else
 MessageNumber gMsgNumbers[] = {
     {
         .rasters = &MsgCharImgNormal[0x800],
@@ -150,6 +207,7 @@ MessageNumber gMsgNumbers[] = {
         .fixedWidth = 9
     }
 };
+#endif
 
 Gfx gMsgDlistInitDrawNumber[] = {
     gsDPPipeSync(),
@@ -223,7 +281,16 @@ void load_font_data(Addr offset, u16 size, void* dest) {
 void load_font(s32 font) {
     if (font != D_80155C98) {
         if (font == 0) {
+#if VERSION_JP
+            load_font_data(charset_standard_OFFSET, 0x5710, MsgCharImgNormal);
+            load_font_data(charset_JP_5710_OFFSET, 0xBD0, MsgCharImgJP_5710);
+            load_font_data(charset_JP_62E0_OFFSET, 0x34F0, MsgCharImgTitle); // huh
+            load_font_data(charset_JP_97D0_OFFSET, 0x460, MsgCharImgSubtitle); // what
+            load_font_data(charset_JP_9C30_OFFSET, 0x37F8, MsgCharImgJP_9C30);
+            load_font_data(charset_JP_D470_OFFSET, 0x798, MsgCharImgJP_D470);
+#else
             load_font_data(charset_standard_OFFSET, 0x5100, MsgCharImgNormal);
+#endif
             load_font_data(charset_standard_pal_OFFSET, 0x500, D_802F4560);
         } else if (font == 1) {
             load_font_data(charset_title_OFFSET, 0xF60, MsgCharImgTitle);
@@ -625,7 +692,7 @@ extern s32 MsgLetterRasterOffsets[];
 extern s32 MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
-#if VERSION_PAL
+#if VERSION_PAL || VERSION_JP
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 #else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
@@ -695,7 +762,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     printer->lineEndPos[printer->curLine] = printer->curLinePos;
                     printer->curLine++;
                     *printBuf++ = MSG_CHAR_PRINT_NEXT;
-                    printer->nextLinePos = printer->curLinePos + (MsgCharsets[printer->font]->newLineY + MsgStyleVerticalLineOffsets[printer->style]) * printer->lineCount;
+                    printer->nextLinePos = printer->curLinePos + (MsgCharsets[printer->font]->newLineY
+#if !VERSION_JP
+                        + MsgStyleVerticalLineOffsets[printer->style]
+#endif
+                        ) * printer->lineCount;
                     printer->windowState = MSG_WINDOW_STATE_SCROLLING;
                     printer->delayFlags |= MSG_DELAY_FLAG_1;
                 }
@@ -738,10 +809,18 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     case MSG_STYLE_NARRATE:
                     case MSG_STYLE_F:
                         if (!s8) {
+#if VERSION_JP
+                            printer->windowBasePos.x = 40;
+#else
                             printer->windowBasePos.x = 20;
+#endif
                             printer->windowBasePos.y = 28;
                             printer->windowSize.y = 58;
+#if VERSION_JP
+                            printer->windowSize.x = 240;
+#else
                             printer->windowSize.x = 280;
+#endif
                             printer->windowState = MSG_WINDOW_STATE_OPENING;
                             printer->stateFlags |= MSG_STATE_FLAG_800;
                             printer->delayFlags |= MSG_DELAY_FLAG_1;
@@ -793,7 +872,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     case MSG_STYLE_POPUP:
                     case MSG_STYLE_B:
                         printer->windowSize.x = printer->msgWidth + 32;
+#if VERSION_JP
+                        printer->windowSize.y = 32;
+#else
                         printer->windowSize.y = 40;
+#endif
                         printer->stateFlags |= MSG_STATE_FLAG_8000;
                         do {
                             if (!s8) {
@@ -875,7 +958,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->curLine++;
                         *printBuf++ = MSG_CHAR_PRINT_NEXT;
                         arg = *srcBuf++;
-                        printer->nextLinePos = printer->curLinePos + (MsgCharsets[printer->font]->newLineY + MsgStyleVerticalLineOffsets[printer->style]) * arg;
+                        printer->nextLinePos = printer->curLinePos + (MsgCharsets[printer->font]->newLineY
+#if !VERSION_JP
+                            + MsgStyleVerticalLineOffsets[printer->style]
+#endif
+                            ) * arg;
                         printer->windowState = MSG_WINDOW_STATE_SCROLLING;
                         printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->lineCount = 0;
@@ -1143,9 +1230,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                                         temp = argQ - MSG_CHAR_READ_VARIANT0 + 0x200;
                                         printer->fontVariant = temp;
                                         break;
+#if !VERSION_JP
                                     case MSG_CHAR_READ_SPACE:
                                         sp10[0] = MSG_CHAR_PRINT_SPACE;
                                         break;
+#endif
                                     case MSG_CHAR_READ_FUNCTION:
                                         sp10[0] = MSG_CHAR_PRINT_FUNCTION;
                                         switch (gMessageMsgVars[arg][printer->varBufferReadPos++]) {
@@ -1520,7 +1609,11 @@ void set_message_int_var(s32 value, s32 index) {
         if (thisChar == 0) {
             break;
         }
+#if VERSION_JP
+        gMessageMsgVars[index][i] = thisChar + 0x77; // TODO
+#else
         gMessageMsgVars[index][i] = thisChar - '0' + MSG_CHAR_DIGIT_0;
+#endif
     }
     gMessageMsgVars[index][i] = MSG_CHAR_READ_END;
 }
@@ -1528,6 +1621,12 @@ void set_message_int_var(s32 value, s32 index) {
 void close_message(MessagePrintState* msgPrintState) {
     msgPrintState->stateFlags &= ~MSG_STATE_FLAG_40;
 }
+
+#if VERSION_JP
+#define CHAR_SPACE_MULTIPLIER 0.7
+#else
+#define CHAR_SPACE_MULTIPLIER 0.6
+#endif
 
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags) {
     f32 charWidth;
@@ -1564,7 +1663,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
     }
 
     if (character == MSG_CHAR_READ_SPACE) {
-        return charWidth * msgScale * 0.6;
+        return charWidth * msgScale * CHAR_SPACE_MULTIPLIER;
     }
     if (character == MSG_CHAR_READ_FULL_SPACE) {
         f64 retWidth = charWidth * msgScale;
@@ -1607,7 +1706,7 @@ s32 msg_get_draw_char_width(s32 character, s32 charset, s32 variation, f32 msgSc
     }
 
     if (character == MSG_CHAR_PRINT_SPACE) {
-        return baseWidth * msgScale * 0.6;
+        return baseWidth * msgScale * CHAR_SPACE_MULTIPLIER;
     }
     if (character == MSG_CHAR_PRINT_FULL_SPACE) {
         f64 charWidth = baseWidth * msgScale;
@@ -1922,7 +2021,9 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     }
 }
 
+#if !VERSION_JP
 static const f32 padding = 0.0f;
+#endif
 
 s32 get_msg_width(s32 msgID, u16 charset) {
     s32 width;
@@ -1931,12 +2032,14 @@ s32 get_msg_width(s32 msgID, u16 charset) {
     return width;
 }
 
+#if !VERSION_JP
 s32 get_msg_lines(s32 msgID) {
     s32 numLines;
 
     get_msg_properties(msgID, NULL, NULL, NULL, &numLines, NULL, NULL, 0);
     return numLines;
 }
+#endif
 
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style) {
     MessagePrintState stackPrinter;
@@ -2184,7 +2287,9 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
     IMG_PTR raster = gMsgNumbers[charset].rasters;
     s32 texSize = gMsgNumbers[charset].texSize;
 
+#if !VERSION_JP
     y -= 2;
+#endif
     if (y < 0 || y > 240) {
         return;
     }

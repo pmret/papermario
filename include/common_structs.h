@@ -1168,22 +1168,12 @@ typedef struct ItemEntity {
     /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
 
-#if VERSION_JP // mergetodo
-typedef struct MessagePrintState {
-    /* 0x000 */ char unk_00[0x4A8];
-    /* 0x4A8 */ u8 curOption;
-    /* 0x4A9 */ s8 madeChoice;
-    /* 0x4AA */ u8 cancelOption;
-    /* 0x4AB */ char unk_4EB[0x1];
-    /* 0x4AC */ u8 targetOption;
-    /* 0x4AD */ u8 scrollingTime;
-    /* 0x4AE */ u8 selectedOption;
-    /* 0x4AF */ char unk_4EF[0x9];
-    /* 0x4B8 */ u8 windowState;
-    /* 0x4B9 */ char unk_4F9[0x3];
-    /* 0x4BC */ s32 stateFlags;
-} MessagePrintState;
+#if VERSION_JP
+#define MESSAGEPRINTSTATE_BUFFER_SIZE 1024
 #else
+#define MESSAGEPRINTSTATE_BUFFER_SIZE 1088  // slightly larger than source buffer
+#endif
+
 typedef struct MessagePrintState {
     /* 0x000 */ u8* srcBuffer;
     /* 0x004 */ u16 printBufferPos;
@@ -1191,7 +1181,7 @@ typedef struct MessagePrintState {
     /* 0x008 */ s32 msgID;
     /* 0x00C */ u16 srcBufferPos;
     /* 0x00E */ u16 curPrintDelay;
-    /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
+    /* 0x010 */ u8 printBuffer[MESSAGEPRINTSTATE_BUFFER_SIZE];
     /* 0x450 */ s16 printBufferSize;
     /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
@@ -1274,9 +1264,10 @@ typedef struct MessagePrintState {
     /* 0x548 */ PAL_PTR letterBackgroundPal;
     /* 0x54C */ IMG_PTR letterContentImg;
     /* 0x550 */ PAL_PTR letterContentPal;
+#if !VERSION_JP
     /* 0x554 */ char unk_554[0x4];
-} MessagePrintState; // size = 0x558
 #endif
+} MessagePrintState; // size = 0x558, JP size = 0x514
 
 typedef struct MessageDrawState {
     /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped

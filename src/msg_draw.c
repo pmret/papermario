@@ -3,8 +3,20 @@
 #include "message_ids.h"
 #include "sprite.h"
 
+#if !VERSION_JP // TODO remove when charset data is split
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
+#endif
+
+#if VERSION_JP // TODO remove when charset data is split
+extern Addr charset_postcard_pal_OFFSET;
+extern Addr charset_postcard_OFFSET;
+
+#define charset_postcard_png_width 150
+#define charset_postcard_png_height 105
+#define charset_letter_content_1_png_width 70
+#define charset_letter_content_1_png_height 95
+#endif
 
 extern IMG_BIN ui_msg_bubble_left_png[];
 extern IMG_BIN ui_msg_bubble_mid_png[];
@@ -192,8 +204,8 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
-#if VERSION_IQUE || VERSION_PAL
-INCLUDE_ASM(s32, "msg", appendGfx_message);
+#if VERSION_IQUE || VERSION_PAL || VERSION_JP
+INCLUDE_ASM(s32, "msg_draw", appendGfx_message);
 #else
 void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 additionalOffsetX, u16 additionalOffsetY,
                        u16 flag, u8 alpha) {
