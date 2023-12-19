@@ -3,32 +3,8 @@
 #include "message_ids.h"
 #include "sprite.h"
 
-#if !VERSION_JP // TODO remove when charset data is split
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
-#endif
-
-#if VERSION_JP // TODO remove when charset data is split
-extern Addr charset_ROM_START;
-extern Addr charset_standard_pal_OFFSET;
-extern Addr charset_credits_pal_OFFSET;
-extern Addr charset_standard_OFFSET;
-extern Addr charset_title_OFFSET;
-extern Addr charset_subtitle_OFFSET;
-extern Addr charset_JP_5710_OFFSET;
-extern Addr charset_JP_62E0_OFFSET;
-extern Addr charset_JP_97D0_OFFSET;
-extern Addr charset_JP_9C30_OFFSET;
-extern Addr charset_JP_D470_OFFSET;
-extern Addr charset_postcard_pal_OFFSET;
-extern Addr charset_postcard_OFFSET;
-extern Addr msg_ROM_START;
-
-#define charset_postcard_png_width 150
-#define charset_postcard_png_height 105
-#define charset_letter_content_1_png_width 70
-#define charset_letter_content_1_png_height 95
-#endif
 
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,
@@ -157,13 +133,10 @@ extern IMG_BIN MsgCharImgSubtitle[];
 extern PAL_BIN D_802F4560[80][8];
 
 #if VERSION_JP
-// TODO rename these into something we can understand
-// in the meantime split font_width to find out where they belong...
-extern IMG_BIN D_JP_802EB928[];
-extern IMG_BIN D_JP_802F0FA0[];
-extern IMG_BIN MsgCharImgJP_5710[];
-extern IMG_BIN MsgCharImgJP_9C30[];
-extern IMG_BIN MsgCharImgJP_D470[];
+extern IMG_BIN MsgCharImgKana[];
+extern IMG_BIN MsgCharImgLatin[];
+extern IMG_BIN MsgCharImgMenuKana[];
+extern IMG_BIN MsgCharImgMenuLatin[];
 #endif
 
 extern s32 gMessageBoxFrameParts[2][16];
@@ -171,26 +144,24 @@ extern s32 gMessageBoxFrameParts[2][16];
 extern IMG_BIN ui_point_right_png[];
 extern PAL_BIN ui_point_right_pal[];
 
-#if VERSION_JP
 MessageNumber gMsgNumbers[] = {
+#if VERSION_JP
     {
-        .rasters = &D_JP_802F0FA0[0x800], // huh?
+        .rasters = &MsgCharImgKana[0x4910],
         .texSize = 112,
         .texWidth = 16,
         .texHeight = 14,
         .digitWidth = {11, 8, 11, 11, 11, 11, 11, 11, 11, 11},
         .fixedWidth = 11
     }, {
-        .rasters = &D_JP_802EB928[0x800], // what?
+        .rasters = &MsgCharImgMenuKana[0x2EF8],
         .texSize = 72,
         .texWidth = 12,
         .texHeight = 12,
         .digitWidth = {9, 8, 9, 9, 9, 9, 9, 9, 9, 9},
         .fixedWidth = 9
     }
-};
 #else
-MessageNumber gMsgNumbers[] = {
     {
         .rasters = &MsgCharImgNormal[0x800],
         .texSize = 128,
@@ -206,8 +177,8 @@ MessageNumber gMsgNumbers[] = {
         .digitWidth = {9, 8, 9, 9, 9, 9, 9, 9, 9, 9},
         .fixedWidth = 9
     }
-};
 #endif
+};
 
 Gfx gMsgDlistInitDrawNumber[] = {
     gsDPPipeSync(),
@@ -282,12 +253,12 @@ void load_font(s32 font) {
     if (font != D_80155C98) {
         if (font == 0) {
 #if VERSION_JP
-            load_font_data(charset_standard_OFFSET, 0x5710, MsgCharImgNormal);
-            load_font_data(charset_JP_5710_OFFSET, 0xBD0, MsgCharImgJP_5710);
-            load_font_data(charset_JP_62E0_OFFSET, 0x34F0, MsgCharImgTitle); // huh
-            load_font_data(charset_JP_97D0_OFFSET, 0x460, MsgCharImgSubtitle); // what
-            load_font_data(charset_JP_9C30_OFFSET, 0x37F8, MsgCharImgJP_9C30);
-            load_font_data(charset_JP_D470_OFFSET, 0x798, MsgCharImgJP_D470);
+            load_font_data(charset_kana_OFFSET, 0x5710, MsgCharImgKana);
+            load_font_data(charset_latin_OFFSET, 0xBD0, MsgCharImgLatin);
+            load_font_data(charset_kanji_OFFSET, 0x34F0, MsgCharImgTitle); // huh
+            load_font_data(charset_buttons_OFFSET, 0x460, MsgCharImgSubtitle); // what
+            load_font_data(charset_menu_kana_OFFSET, 0x37F8, MsgCharImgMenuKana);
+            load_font_data(charset_menu_latin_OFFSET, 0x798, MsgCharImgMenuLatin);
 #else
             load_font_data(charset_standard_OFFSET, 0x5100, MsgCharImgNormal);
 #endif
@@ -1609,11 +1580,7 @@ void set_message_int_var(s32 value, s32 index) {
         if (thisChar == 0) {
             break;
         }
-#if VERSION_JP
-        gMessageMsgVars[index][i] = thisChar + 0x77; // TODO
-#else
         gMessageMsgVars[index][i] = thisChar - '0' + MSG_CHAR_DIGIT_0;
-#endif
     }
     gMessageMsgVars[index][i] = MSG_CHAR_READ_END;
 }

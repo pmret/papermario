@@ -50,7 +50,7 @@ SHIFT_BSS MessagePrintState* GotItemTutorialPrinter;
 SHIFT_BSS b32 GotItemTutorialClosed;
 
 #if VERSION_JP
-extern s32 D_8015B864; // TODO find out what is this
+extern s32 D_8015B864;
 #endif
 
 void item_entity_update(ItemEntity*);
