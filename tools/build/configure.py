@@ -259,7 +259,7 @@ def write_ninja_rules(
     ninja.rule(
         "msg",
         description="msg $in",
-        command=f"$python {BUILD_TOOLS}/msg/parse_compile.py $in $out",
+        command=f"$python {BUILD_TOOLS}/msg/parse_compile.py $version $in $out",
     )
 
     ninja.rule(

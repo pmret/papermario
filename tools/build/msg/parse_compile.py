@@ -116,7 +116,7 @@ def color_to_code(color, style):
     ).get(color)
 
 
-CHARSET = {
+CHARSET_STANDARD = {
     # "𝅘𝅥𝅮": 0x00,
     "!": 0x01,
     '"': 0x02,
@@ -274,6 +274,7 @@ CHARSET = {
     "‘": 0xA4,
     "’": 0xA5,
     " ": 0xF7,
+    "　": 0xF7,
     # "Ⓐ": [0xFF, 0x24, 0xFF, 0x05, 0x10, 0x98, 0xFF, 0x25],
     # "Ⓑ": [0xFF, 0x24, 0xFF, 0x05, 0x11, 0x99, 0xFF, 0x25],
     # "Ⓢ": [0xFF, 0x24, 0xFF, 0x05, 0x12, 0xA1, 0xFF, 0x25],
@@ -329,7 +330,453 @@ CHARSET_CREDITS = {
     "©": 0x27,
     "&": 0x28,
     " ": 0xF7,
+    "　": 0xF8,
 }
+
+CHARSET_KANA = {
+    "あ": 0x00,
+    "い": 0x01,
+    "う": 0x02,
+    "え": 0x03,
+    "お": 0x04,
+    "か": 0x05,
+    "き": 0x06,
+    "く": 0x07,
+    "け": 0x08,
+    "こ": 0x09,
+    "さ": 0x0A,
+    "し": 0x0B,
+    "す": 0x0C,
+    "せ": 0x0D,
+    "そ": 0x0E,
+    "た": 0x0F,
+    "ち": 0x10,
+    "つ": 0x11,
+    "て": 0x12,
+    "と": 0x13,
+    "な": 0x14,
+    "に": 0x15,
+    "ぬ": 0x16,
+    "ね": 0x17,
+    "の": 0x18,
+    "は": 0x19,
+    "ひ": 0x1A,
+    "ふ": 0x1B,
+    "へ": 0x1C,
+    "ほ": 0x1D,
+    "ま": 0x1E,
+    "み": 0x1F,
+    "む": 0x20,
+    "め": 0x21,
+    "も": 0x22,
+    "や": 0x23,
+    "ゆ": 0x24,
+    "よ": 0x25,
+    "ら": 0x26,
+    "り": 0x27,
+    "る": 0x28,
+    "れ": 0x29,
+    "ろ": 0x2A,
+    "わ": 0x2B,
+    "を": 0x2C,
+    "ん": 0x2D,
+    "ゔ": 0x2E,
+    "が": 0x2F,
+    "ぎ": 0x30,
+    "ぐ": 0x31,
+    "げ": 0x32,
+    "ご": 0x33,
+    "ざ": 0x34,
+    "じ": 0x35,
+    "ず": 0x36,
+    "ぜ": 0x37,
+    "ぞ": 0x38,
+    "だ": 0x39,
+    "ぢ": 0x3A,
+    "づ": 0x3B,
+    "で": 0x3C,
+    "ど": 0x3D,
+    "ば": 0x3E,
+    "び": 0x3F,
+    "ぶ": 0x40,
+    "べ": 0x41,
+    "ぼ": 0x42,
+    "ぱ": 0x43,
+    "ぴ": 0x44,
+    "ぷ": 0x45,
+    "ぺ": 0x46,
+    "ぽ": 0x47,
+    "ぁ": 0x48,
+    "ぃ": 0x49,
+    "ぅ": 0x4A,
+    "ぇ": 0x4B,
+    "ぉ": 0x4C,
+    "っ": 0x4D,
+    "ゃ": 0x4E,
+    "ゅ": 0x4F,
+    "ょ": 0x50,
+    "ア": 0x51,
+    "イ": 0x52,
+    "ウ": 0x53,
+    "エ": 0x54,
+    "オ": 0x55,
+    "カ": 0x56,
+    "キ": 0x57,
+    "ク": 0x58,
+    "ケ": 0x59,
+    "コ": 0x5A,
+    "サ": 0x5B,
+    "シ": 0x5C,
+    "ス": 0x5D,
+    "セ": 0x5E,
+    "ソ": 0x5F,
+    "タ": 0x60,
+    "チ": 0x61,
+    "ツ": 0x62,
+    "テ": 0x63,
+    "ト": 0x64,
+    "ナ": 0x65,
+    "ニ": 0x66,
+    "ヌ": 0x67,
+    "ネ": 0x68,
+    "ノ": 0x69,
+    "ハ": 0x6A,
+    "ヒ": 0x6B,
+    "フ": 0x6C,
+    "ヘ": 0x6D,
+    "ホ": 0x6E,
+    "マ": 0x6F,
+    "ミ": 0x70,
+    "ム": 0x71,
+    "メ": 0x72,
+    "モ": 0x73,
+    "ヤ": 0x74,
+    "ユ": 0x75,
+    "ヨ": 0x76,
+    "ラ": 0x77,
+    "リ": 0x78,
+    "ル": 0x79,
+    "レ": 0x7A,
+    "ロ": 0x7B,
+    "ワ": 0x7C,
+    "ヲ": 0x7D,
+    "ン": 0x7E,
+    "ヴ": 0x7F,
+    "ガ": 0x80,
+    "ギ": 0x81,
+    "グ": 0x82,
+    "ゲ": 0x83,
+    "ゴ": 0x84,
+    "ザ": 0x85,
+    "ジ": 0x86,
+    "ズ": 0x87,
+    "ゼ": 0x88,
+    "ゾ": 0x89,
+    "ダ": 0x8A,
+    "ヂ": 0x8B,
+    "ヅ": 0x8C,
+    "デ": 0x8D,
+    "ド": 0x8E,
+    "バ": 0x8F,
+    "ビ": 0x90,
+    "ブ": 0x91,
+    "ベ": 0x92,
+    "ボ": 0x93,
+    "パ": 0x94,
+    "ピ": 0x95,
+    "プ": 0x96,
+    "ペ": 0x97,
+    "ポ": 0x98,
+    "ァ": 0x99,
+    "ィ": 0x9A,
+    "ゥ": 0x9B,
+    "ェ": 0x9C,
+    "ォ": 0x9D,
+    "ッ": 0x9E,
+    "ャ": 0x9F,
+    "ュ": 0xA0,
+    "ョ": 0xA1,
+    "ー": 0xA2,
+    "～": 0xA3,
+    "~": 0xA3,
+    # "―": 0xA4,
+    # "―": 0xA5,
+    # "―": 0xA6,
+    "０": 0xA7,
+    "0": 0xA7,
+    "１": 0xA8,
+    "1": 0xA8,
+    "２": 0xA9,
+    "2": 0xA9,
+    "３": 0xAA,
+    "3": 0xAA,
+    "４": 0xAB,
+    "4": 0xAB,
+    "５": 0xAC,
+    "5": 0xAC,
+    "６": 0xAD,
+    "6": 0xAD,
+    "７": 0xAE,
+    "7": 0xAE,
+    "８": 0xAF,
+    "8": 0xAF,
+    "９": 0xB0,
+    "9": 0xB0,
+    "[up]": 0xB1,
+    "[down]": 0xB2,
+    "[left]": 0xB3,
+    "[right]": 0xB4,
+    "！": 0xB5,
+    "!": 0xB5,
+    "？": 0xB6,
+    "?": 0xB6,
+    "＋": 0xB7,
+    "+": 0xB7,
+    "－": 0xB8,
+    "／": 0xB9,
+    "/": 0xB9,
+    "．": 0xBA,
+    ".": 0xBA,
+    "＆": 0xBB,
+    "&": 0xBB,
+    "＃": 0xBC,
+    "#": 0xBC,
+    "[heart]": 0xBD,
+    "[star]": 0xBE,
+    "（": 0xBF,
+    "(": 0xBF,
+    "）": 0xC0,
+    ")": 0xC0,
+    "『": 0xC1,
+    "』": 0xC2,
+    "・": 0xC3,
+    "[hiragana smalln]": 0xC4,
+    "[katakana smalln]": 0xC5,
+    "星": 0xC6,
+    # 0xC7 is unused
+    " ": 0xF7,
+    "　": 0xF8,
+}
+
+CHARSET_LATIN = {
+    "A": 0x00,
+    "Ａ": 0x00,
+    "B": 0x01,
+    "Ｂ": 0x01,
+    "C": 0x02,
+    "Ｃ": 0x02,
+    "D": 0x03,
+    "Ｄ": 0x03,
+    "E": 0x04,
+    "Ｅ": 0x04,
+    "F": 0x05,
+    "Ｆ": 0x05,
+    "G": 0x06,
+    "Ｇ": 0x06,
+    "H": 0x07,
+    "Ｈ": 0x07,
+    "I": 0x08,
+    "Ｉ": 0x08,
+    "J": 0x09,
+    "Ｊ": 0x09,
+    "K": 0x0A,
+    "Ｋ": 0x0A,
+    "L": 0x0B,
+    "Ｌ": 0x0B,
+    "M": 0x0C,
+    "Ｍ": 0x0C,
+    "N": 0x0D,
+    "Ｎ": 0x0D,
+    "O": 0x0E,
+    "Ｏ": 0x0E,
+    "P": 0x0F,
+    "Ｐ": 0x0F,
+    "Q": 0x10,
+    "Ｑ": 0x10,
+    "R": 0x11,
+    "Ｒ": 0x11,
+    "S": 0x12,
+    "Ｓ": 0x12,
+    "T": 0x13,
+    "Ｔ": 0x13,
+    "U": 0x14,
+    "Ｕ": 0x14,
+    "V": 0x15,
+    "Ｖ": 0x15,
+    "W": 0x16,
+    "Ｗ": 0x16,
+    "X": 0x17,
+    "Ｘ": 0x17,
+    "Y": 0x18,
+    "Ｙ": 0x18,
+    "Z": 0x19,
+    "Ｚ": 0x19,
+    "z": 0x1A,
+    "ｚ": 0x1A,
+    " ": 0xF7,
+    "　": 0xF8,
+}
+
+CHARSET_KANJI = {
+    "上": 0x00,
+    "下": 0x01,
+    "左": 0x02,
+    "右": 0x03,
+    "中": 0x04,
+    "東": 0x05,
+    "西": 0x06,
+    "南": 0x07,
+    "北": 0x08,
+    "一": 0x09,
+    "二": 0x0A,
+    "三": 0x0B,
+    "名": 0x0C,
+    "国": 0x0D,
+    "城": 0x0E,
+    "姫": 0x0F,
+    "大": 0x10,
+    "王": 0x11,
+    "花": 0x12,
+    "世": 0x13,
+    "界": 0x14,
+    "草": 0x15,
+    "気": 0x16,
+    "間": 0x17,
+    "門": 0x18,
+    "家": 0x19,
+    "地": 0x1A,
+    "岩": 0x1B,
+    "駅": 0x1C,
+    "山": 0x1D,
+    "海": 0x1E,
+    "火": 0x1F,
+    "水": 0x20,
+    "氷": 0x21,
+    "日": 0x22,
+    "根": 0x23,
+    "雲": 0x24,
+    "口": 0x25,
+    "原": 0x26,
+    "前": 0x27,
+    "店": 0x28,
+    "天": 0x29,
+    "森": 0x2A,
+    "木": 0x2B,
+    "力": 0x2C,
+    "空": 0x2D,
+    "人": 0x2E,
+    "島": 0x2F,
+    "出": 0x30,
+    "入": 0x31,
+    "本": 0x32,
+    "石": 0x33,
+    "村": 0x34,
+    "休": 0x35,
+    "先": 0x36,
+    "見": 0x37,
+    "近": 0x38,
+    "方": 0x39,
+    "法": 0x3A,
+    "手": 0x3B,
+    "紙": 0x3C,
+    "引": 0x3D,
+    "場": 0x3E,
+    "所": 0x3F,
+    "使": 0x40,
+    "回": 0x41,
+    "道": 0x42,
+    "物": 0x43,
+    "弟": 0x44,
+    "子": 0x45,
+    "汽": 0x46,
+    "車": 0x47,
+    "何": 0x48,
+    "黒": 0x49,
+    "分": 0x4A,
+    "時": 0x4B,
+    "屋": 0x4C,
+    "音": 0x4D,
+    "目": 0x4E,
+    "行": 0x4F,
+    "絵": 0x50,
+    "月": 0x51,
+    "野": 0x52,
+    "外": 0x53,
+    "図": 0x54,
+    "部": 0x55,
+    "小": 0x56,
+    "風": 0x57,
+    "魔": 0x58,
+    "元": 0x59,
+    "太": 0x5A,
+    "陽": 0x5B,
+    "実": 0x5C,
+    "赤": 0x5D,
+    "雪": 0x5E,
+    "谷": 0x5F,
+    "通": 0x60,
+    "[circle]": 0x61,
+    "[cross]": 0x62,
+    "長": 0x63,
+    "話": 0x64,
+    "色": 0x65,
+    "光": 0x66,
+    "合": 0x67,
+    "青": 0x68,
+    "黄": 0x69,
+    "[note]": 0x6A,
+    "当": 0x6B,
+    "数": 0x6C,
+    "兄": 0x6D,
+    "用": 0x6E,
+    "心": 0x6F,
+    "今": 0x70,
+    "正": 0x71,
+    "直": 0x72,
+    "全": 0x73,
+    "体": 0x74,
+    "夜": 0x75,
+    "面": 0x76,
+    "虫": 0x77,
+    "ｘ": 0x78,
+    "x": 0x78,
+    " ": 0xF7,
+    "　": 0xF8,
+}
+
+CHARSET_BUTTONS = {
+    "[~a]": 0x00,
+    "[~b]": 0x01,
+    "[~start]": 0x02,
+    "[~c-up]": 0x03,
+    "[~c-down]": 0x04,
+    "[~c-left]": 0x05,
+    "[~c-right]": 0x06,
+    "[~z]": 0x07,
+    "[~l]": 0x08,
+    "[~r]": 0x09,
+}
+
+
+def check_if_correct_charset(char, cur_charset, filename, lineno):
+    warn_msg = f"{filename}:{lineno}: Warning: character '{char}' is present but is completely in a wrong charset currently set. Add {{}} before the character to silence this warning."
+
+    if char == " " or char == "　":
+        return -1, cur_charset
+    elif char in CHARSET_KANA and cur_charset is not CHARSET_KANA:
+        print(warn_msg.format("[Charset Kana]"))
+        return 0, CHARSET_KANA
+    elif char in CHARSET_LATIN and cur_charset is not CHARSET_LATIN:
+        print(warn_msg.format("[Charset Latin]"))
+        return 1, CHARSET_LATIN
+    elif char in CHARSET_KANJI and cur_charset is not CHARSET_KANJI:
+        print(warn_msg.format("[Charset Kanji]"))
+        return 2, CHARSET_KANJI
+    elif char in CHARSET_BUTTONS and cur_charset is not CHARSET_BUTTONS:
+        print(warn_msg.format("[Charset Buttons]"))
+        return 3, CHARSET_BUTTONS
+
+    return -1, cur_charset
 
 
 def strip_c_comments(text):
@@ -349,11 +796,12 @@ def strip_c_comments(text):
 
 if __name__ == "__main__":
     if len(argv) < 3:
-        print("usage: parse_compile.py [in.msg] [out.msgpack] [--c]")
+        print("usage: parse_compile.py [version] [in.msg] [out.msgpack] [--c]")
         exit(1)
 
-    filename = argv[1]
-    outfile = argv[2]
+    version = argv[1]
+    filename = argv[2]
+    outfile = argv[3]
     is_output_format_c = "--c" in argv
 
     messages = []
@@ -366,7 +814,10 @@ if __name__ == "__main__":
         directive = ""
         indent_level = 0
 
-        charset = CHARSET
+        if version == "jp":
+            charset = CHARSET_KANA
+        else:
+            charset = CHARSET_STANDARD
         font_stack = [0]
         sound_stack = [0]
         color_stack = [0x0A]
@@ -432,6 +883,11 @@ if __name__ == "__main__":
 
                     message = Message(name, section, index)
                 messages.append(message)
+
+                if version == "jp":
+                    charset = CHARSET_KANA
+                else:
+                    charset = CHARSET_STANDARD
 
                 while source[0] != "{":
                     source = source[1:]
@@ -557,6 +1013,8 @@ if __name__ == "__main__":
                                 message.bytes += [0x09, index]
                             elif style == "popup":
                                 message.bytes += [0x0A]
+                            elif style == "popup2":
+                                message.bytes += [0x0B]
                             elif style == "upgrade":
                                 pos = named_args.get("pos")
 
@@ -592,6 +1050,8 @@ if __name__ == "__main__":
                             font = 0
                         elif font == "menu":
                             font = 1
+                        elif font == "menu2":
+                            font = 2
                         elif font == "title":
                             font = 3
                         elif font == "subtitle":
@@ -607,7 +1067,10 @@ if __name__ == "__main__":
                         if font == 3 or font == 4:
                             charset = CHARSET_CREDITS
                         else:
-                            charset = CHARSET
+                            if version == "jp":
+                                charset = CHARSET_KANA
+                            else:
+                                charset = CHARSET_STANDARD
                     # elif command == "/font":
                     #     font_stack.pop()
                     #     message.bytes += [0xFF, 0x00, font_stack[0]]
@@ -616,6 +1079,41 @@ if __name__ == "__main__":
                     #         charset = CHARSET_CREDITS
                     #     else:
                     #         charset = CHARSET
+                    elif command == "charset":
+                        if version != "jp":
+                            print(f"{filename}:{lineno}: charset command is only supported in the JP version")
+                            exit(1)
+
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: charset command requires 1 parameter")
+                            exit(1)
+
+                        arg_charset = args[0]
+
+                        if arg_charset == "kana":
+                            arg_charset = 0
+                        elif arg_charset == "latin":
+                            arg_charset = 1
+                        elif arg_charset == "kanji":
+                            arg_charset = 2
+                        elif arg_charset == "buttons":
+                            arg_charset = 3
+
+                        if type(arg_charset) is not int:
+                            print(f"{filename}:{lineno}: unknown charset '{arg_charset}'")
+                            exit(1)
+
+                        message.bytes += [0xF3 + arg_charset]
+
+                        if arg_charset == 0:
+                            charset = CHARSET_KANA
+                        elif arg_charset == 1:
+                            charset = CHARSET_LATIN
+                        elif arg_charset == 2:
+                            charset = CHARSET_KANJI
+                        elif arg_charset == 3:
+                            charset = CHARSET_BUTTONS
+
                     elif command == "inputoff":
                         message.bytes += [0xFF, 0x07]
                     elif command == "inputon":
@@ -686,7 +1184,13 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x11, *args]
                     elif command == "right":
                         if len(args) == 0:
-                            message.bytes += [0x95]
+                            if version == "jp":
+                                charset_byte, charset = check_if_correct_charset("[right]", charset, filename, lineno)
+                                if charset_byte != -1:
+                                    message.bytes += [0xF3 + charset_byte]
+                                message.bytes += [0xB4]
+                            else:
+                                message.bytes += [0x95]
                         else:
                             if len(args) != 1:
                                 print(f"{filename}:{lineno}: {command} command requires 1 parameter")
@@ -695,7 +1199,13 @@ if __name__ == "__main__":
                             message.bytes += [0xFF, 0x12, args[0]]
                     elif command == "down":
                         if len(args) == 0:
-                            message.bytes += [0x93]
+                            if version == "jp":
+                                charset_byte, charset = check_if_correct_charset("[down]", charset, filename, lineno)
+                                if charset_byte != -1:
+                                    message.bytes += [0xF3 + charset_byte]
+                                message.bytes += [0xB2]
+                            else:
+                                message.bytes += [0x93]
                         else:
                             if len(args) != 1:
                                 print(f"{filename}:{lineno}: {command} command requires 1 parameter")
@@ -704,7 +1214,13 @@ if __name__ == "__main__":
                             message.bytes += [0xFF, 0x13, args[0]]
                     elif command == "up":
                         if len(args) == 0:
-                            message.bytes += [0x92]
+                            if version == "jp":
+                                charset_byte, charset = check_if_correct_charset("[up]", charset, filename, lineno)
+                                if charset_byte != -1:
+                                    message.bytes += [0xF3 + charset_byte]
+                                message.bytes += [0xB1]
+                            else:
+                                message.bytes += [0x92]
                         else:
                             if len(args) != 1:
                                 print(f"{filename}:{lineno}: {command} command requires 1 parameter")
@@ -1015,189 +1531,453 @@ if __name__ == "__main__":
                     elif command == "a":
                         color_code = color_to_code("blue", "button")
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x98,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x00,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x98,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "b":
                         color_code = color_to_code(
                             named_args.get("color", "green"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x99,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x01,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x99,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "l":
                         color_code = color_to_code(
                             named_args.get("color", "gray"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x9A,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x08,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x9A,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "r":
                         color_code = color_to_code(
                             named_args.get("color", "gray"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x9B,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x09,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x9B,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "z":
                         color_code = color_to_code("grey", "button")
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x9C,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x07,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x9C,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "c-up":
                         color_code = color_to_code(
                             named_args.get("color", "yellow"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x9D,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x03,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x9D,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "c-down":
                         color_code = color_to_code(
                             named_args.get("color", "yellow"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x9E,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x04,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x9E,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "c-left":
                         color_code = color_to_code(
                             named_args.get("color", "yellow"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0x9F,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x05,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0x9F,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "c-right":
                         color_code = color_to_code(
                             named_args.get("color", "yellow"),
                             named_args.get("ctx", "button"),
                         )
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0xA0,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x06,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xA0,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "start":
                         color_code = color_to_code(
                             named_args.get("color", "red"),
                             named_args.get("ctx", "button"),
                         )  #
                         assert color_code is not None
-                        message.bytes += [
-                            0xFF,
-                            0x24,
-                            0xFF,
-                            0x05,
-                            color_code,
-                            0xA1,
-                            0xFF,
-                            0x25,
-                        ]
+                        if version == "jp":
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xF6,
+                                0x02,
+                                0xFF,
+                                0x25,
+                            ]
+                        else:
+                            message.bytes += [
+                                0xFF,
+                                0x24,
+                                0xFF,
+                                0x05,
+                                color_code,
+                                0xA1,
+                                0xFF,
+                                0x25,
+                            ]
                     elif command == "~a":
-                        message.bytes += [0x98]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~a]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x00]
+                        else:
+                            message.bytes += [0x98]
                     elif command == "~b":
-                        message.bytes += [0x99]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~b]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x01]
+                        else:
+                            message.bytes += [0x99]
                     elif command == "~l":
-                        message.bytes += [0x9A]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~l]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x08]
+                        else:
+                            message.bytes += [0x9A]
                     elif command == "~r":
-                        message.bytes += [0x9B]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~r]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x09]
+                        else:
+                            message.bytes += [0x9B]
                     elif command == "~z":
-                        message.bytes += [0x9C]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~z]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x07]
+                        else:
+                            message.bytes += [0x9C]
                     elif command == "~c-up":
-                        message.bytes += [0x9D]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~c-up]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x03]
+                        else:
+                            message.bytes += [0x9D]
                     elif command == "~c-down":
-                        message.bytes += [0x9E]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~c-down]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x04]
+                        else:
+                            message.bytes += [0x9E]
                     elif command == "~c-left":
-                        message.bytes += [0x9F]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~c-left]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x05]
+                        else:
+                            message.bytes += [0x9F]
                     elif command == "~c-right":
-                        message.bytes += [0xA0]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~c-right]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x06]
+                        else:
+                            message.bytes += [0xA0]
                     elif command == "~start":
-                        message.bytes += [0xA1]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[~start]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x02]
+                        else:
+                            message.bytes += [0xA1]
                     elif command == "note":
-                        message.bytes += [0x00]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[note]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x6A]
+                        else:
+                            message.bytes += [0x00]
                     elif command == "heart":
-                        message.bytes += [0x90]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[heart]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0xBD]
+                        else:
+                            message.bytes += [0x90]
                     elif command == "star":
-                        message.bytes += [0x91]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[star]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0xBE]
+                        else:
+                            message.bytes += [0x91]
                     elif command == "left":
-                        message.bytes += [0x94]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[left]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0xB3]
+                        else:
+                            message.bytes += [0x94]
                     elif command == "circle":
-                        message.bytes += [0x96]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[circle]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x61]
+                        else:
+                            message.bytes += [0x96]
                     elif command == "cross":
-                        message.bytes += [0x97]
+                        if version == "jp":
+                            charset_byte, charset = check_if_correct_charset("[cross]", charset, filename, lineno)
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0x62]
+                        else:
+                            message.bytes += [0x97]
+                    elif command == "katakana":
+                        if version != "jp":
+                            print(f"{filename}:{lineno}: Command katakana is only supported in the JP version")
+                            exit(1)
+
+                        kana_char = args[0]
+
+                        if kana_char == "smalln":
+                            charset_byte, charset = check_if_correct_charset(
+                                "[katakana smalln]", charset, filename, lineno
+                            )
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0xC5]
+                        else:
+                            print(f"{filename}:{lineno}: Invalid or unimplemented katakana character name {kana_char}")
+                            exit(1)
+                    elif command == "hiragana":
+                        if version != "jp":
+                            print(f"{filename}:{lineno}: Command hiragana is only supported in the JP version")
+                            exit(1)
+
+                        kana_char = args[0]
+
+                        if kana_char == "smalln":
+                            charset_byte, charset = check_if_correct_charset(
+                                "[hiragana smalln]", charset, filename, lineno
+                            )
+                            if charset_byte != -1:
+                                message.bytes += [0xF3 + charset_byte]
+                            message.bytes += [0xC4]
+                        else:
+                            print(f"{filename}:{lineno}: Invalid or unimplemented hiragana character name {kana_char}")
+                            exit(1)
+                    elif command == "fullspace":
+                        message.bytes += [0xF8]
+                    elif command == "halfspace":
+                        message.bytes += [0xF9]
                     elif command == "savepos":
                         message.bytes += [0xFF, 0x22]
                     elif command == "restorepos":
@@ -1255,7 +2035,19 @@ if __name__ == "__main__":
                     if source[0] == "\\":
                         source = source[1:]
 
-                    if source[0] in charset:
+                    if version == "jp" and charset is not CHARSET_CREDITS:
+                        charset_byte, charset = check_if_correct_charset(source[0], charset, filename, lineno)
+                        if charset_byte != -1:
+                            message.bytes += [0xF3 + charset_byte]
+                        elif (
+                            source[0] not in CHARSET_KANA
+                            and source[0] not in CHARSET_LATIN
+                            and source[0] not in CHARSET_KANJI
+                            and source[0] not in CHARSET_BUTTONS
+                        ):
+                            print(f"{filename}:{lineno}: unsupported character '{source[0]}' for current font")
+                            exit(1)
+
                         data = charset[source[0]]
 
                         if type(data) is int:
@@ -1265,8 +2057,18 @@ if __name__ == "__main__":
 
                         source = source[1:]
                     else:
-                        print(f"{filename}:{lineno}: unsupported character '{source[0]}' for current font")
-                        exit(1)
+                        if source[0] in charset:
+                            data = charset[source[0]]
+
+                            if type(data) is int:
+                                message.bytes.append(data)
+                            else:
+                                message.bytes += data
+
+                            source = source[1:]
+                        else:
+                            print(f"{filename}:{lineno}: unsupported character '{source[0]}' for current font")
+                            exit(1)
 
         if message != None:
             print(f"{filename}: missing [end]")
