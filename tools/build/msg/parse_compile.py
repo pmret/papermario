@@ -759,7 +759,7 @@ CHARSET_BUTTONS = {
 
 
 def check_if_correct_charset(char, cur_charset, filename, lineno):
-    warn_msg = f"{filename}:{lineno}: Warning: character '{char}' is present but current charset set is . Add {{}} before the character to silence this warning."
+    warn_msg = f"{filename}:{lineno}: Warning: character '{char}' is present but is completely in a wrong charset currently set. Add {{}} before the character to silence this warning."
 
     if char == " " or char == "　":
         return -1, cur_charset
