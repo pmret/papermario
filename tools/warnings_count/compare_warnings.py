@@ -19,6 +19,7 @@ def main():
     # Download the latest warnings.txt
     response = requests.get("https://papermar.io/reports/warnings.txt")
     current_warnings = response.content.decode("utf-8").strip().split("\n")
+    current_warnings = [line for line in current_warnings if line]
 
     # Write the current warnings to a file
     with open(script_dir / "warnings.txt", "w") as f:
