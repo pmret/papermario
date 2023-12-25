@@ -5777,7 +5777,7 @@ enum MsgChars {
     MSG_CHAR_KANJI_5F               = 0x5F,
     MSG_CHAR_KANJI_60               = 0x60,
     MSG_CHAR_CIRCLE                 = 0x61,
-    MSG_CHAR_TIMES                  = 0x62,
+    MSG_CHAR_CROSS                  = 0x62,
     MSG_CHAR_KANJI_63               = 0x63,
     MSG_CHAR_KANJI_64               = 0x64,
     MSG_CHAR_KANJI_65               = 0x65,

@@ -56,7 +56,7 @@ def get_palette_idx(charset_name, char_id):
         elif char_id == 0x08:
             pal_id = 0x14
         elif char_id == 0x09:
-            pal_id = 0x15
+            pal_id = 0x14
     return pal_id
 
 

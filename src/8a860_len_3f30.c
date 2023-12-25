@@ -1837,7 +1837,7 @@ void popup_menu_draw_title_contents(
             break;
 #if VERSION_JP
         case POPUP_MENU_UPGRADE_PARTNER:
-            draw_msg(MSG_Menus_JP_004D, baseX + 20, baseY + 2, PopupMenu_Alpha, MSG_PAL_34, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_Menus_PartyMember, baseX + 20, baseY + 2, PopupMenu_Alpha, MSG_PAL_34, DRAW_MSG_STYLE_MENU);
             break;
 #endif
         case POPUP_MENU_READ_LETTER:
