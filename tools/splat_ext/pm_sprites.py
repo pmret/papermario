@@ -7,14 +7,14 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
+import crunch64
 
 import png  # type: ignore
 import yaml as yaml_loader
 from n64img.image import CI4
-from segtypes.n64.segment import N64Segment
-from util import options
-from util.color import unpack_color
-from util.n64.Yay0decompress import Yay0Decompressor
+from splat.segtypes.n64.segment import N64Segment
+from splat.util import options
+from splat.util.color import unpack_color
 
 sys.path.insert(0, str(Path(__file__).parent))
 from sprite_common import AnimComponent, iter_in_groups, read_offset_list
@@ -302,7 +302,7 @@ def extract_sprites(yay0_data: bytes, raster_sets: List[PlayerSpriteRasterSet]) 
 
     ret: List[PlayerSprite] = []
     for i, yay0_piece in enumerate(yay0_sprite_data):
-        sprite_data = Yay0Decompressor.decompress(yay0_piece, "big")
+        sprite_data = crunch64.yay0.decompress(yay0_piece)
 
         sprite = PlayerSprite.from_bytes(sprite_data, raster_sets[i])
         ret.append(sprite)
@@ -805,7 +805,7 @@ class N64SegPm_sprites(N64Segment):
             start = int.from_bytes(data[i * 4 : (i + 1) * 4], byteorder="big")
             end = int.from_bytes(data[(i + 1) * 4 : (i + 2) * 4], byteorder="big")
 
-            sprite_data = Yay0Decompressor.decompress(data[start:end], "big")
+            sprite_data = crunch64.yay0.decompress(data[start:end])
             sprite = NpcSprite.from_bytes(sprite_data)
 
             sprite.image_names = self.npc_cfg[sprite_name].get("frames", [])
@@ -831,7 +831,7 @@ class N64SegPm_sprites(N64Segment):
         self.split_npc(npc_yay0_data)
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         src_paths = [options.opts.asset_path / "sprite"]
 

@@ -1,16 +1,14 @@
 from math import ceil
 import os, sys
 from pathlib import Path
-from segtypes.n64.segment import N64Segment
-from util.n64.Yay0decompress import Yay0Decompressor
-from segtypes.n64.palette import iter_in_groups
-from util import options
+
+import crunch64
+from splat.segtypes.n64.segment import N64Segment
+from common import iter_in_groups
+from splat.util import options
 import png  # type: ignore
 import yaml as yaml_loader
 import n64img.image
-
-SPLAT_EXT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(str(Path(SPLAT_EXT_DIR)))
 from tex_archives import TexArchive
 
 script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -126,7 +124,7 @@ class N64SegPm_map_data(N64Segment):
             bytes = rom_bytes[bytes_start : bytes_start + size]
 
             if is_compressed:
-                bytes = Yay0Decompressor.decompress_python(bytes)
+                bytes = crunch64.yay0.decompress(bytes)
 
             if name.startswith("party_"):
                 assert path is not None
@@ -201,7 +199,7 @@ class N64SegPm_map_data(N64Segment):
             asset_idx += 1
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         fs_dir = options.opts.asset_path / self.dir / self.name
 

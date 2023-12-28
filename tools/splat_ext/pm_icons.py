@@ -1,11 +1,11 @@
 import os
 import re
 from pathlib import Path
-from segtypes.n64.segment import N64Segment
+from splat.segtypes.n64.segment import N64Segment
 import n64img.image
-from util.color import unpack_color
+from splat.util.color import unpack_color
 from common import iter_in_groups
-from util import options
+from splat.util import options
 import yaml as yaml_loader
 import xml.etree.ElementTree as ET
 
@@ -111,7 +111,7 @@ class N64SegPm_icons(N64Segment):
             pretty_print_xml(xml, self.out_dir / "Icons.xml")
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         return [
             LinkerEntry(

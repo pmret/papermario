@@ -36,8 +36,8 @@
         "./tools",
         "./tools/build",
         "./tools/build/sprite",
-        "./tools/splat",
-        "./tools/build/imgfx"
+        "./tools/build/imgfx",
+        "./tools/splat/src"
     ],
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts

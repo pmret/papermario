@@ -6,7 +6,7 @@ from pathlib import Path
 
 import png
 import n64img.image
-from segtypes.n64.palette import iter_in_groups
+from common import iter_in_groups
 
 from sys import path
 

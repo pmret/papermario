@@ -12,3 +12,5 @@ intervaltree
 rabbitizer
 n64img
 python-githooks
+crunch64
+splat>=0.20.0
