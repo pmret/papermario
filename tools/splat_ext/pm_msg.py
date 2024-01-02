@@ -1,7 +1,7 @@
 import shutil
-from segtypes.n64.segment import N64Segment
+from splat.segtypes.n64.segment import N64Segment
 from pathlib import Path
-from util import options
+from splat.util import options
 import re
 
 import pylibyaml
@@ -894,7 +894,7 @@ class N64SegPm_msg(N64Segment):
                     self.f.write("\n}\n")
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         base_path = options.opts.asset_path / f"{self.name}"
         out_paths = [base_path / Path(f + ".msg") for f in self.files]

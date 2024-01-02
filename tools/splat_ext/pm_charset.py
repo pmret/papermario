@@ -1,5 +1,5 @@
-from segtypes.n64.segment import N64Segment
-from util import options
+from splat.segtypes.n64.segment import N64Segment
+from splat.util import options
 import png  # type: ignore
 
 
@@ -78,7 +78,7 @@ class N64SegPm_charset(N64Segment):
                 w.write_array(f, raster)
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         # start, type, name, WIDTH, HEIGHT
         self.width = self.yaml[3]

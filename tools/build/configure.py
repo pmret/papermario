@@ -376,7 +376,7 @@ class Configure:
         self.linker_entries = None
 
     def split(self, assets: bool, code: bool, shift: bool, debug: bool):
-        import split
+        import splat.scripts.split as split
 
         modes = ["ld"]
         if assets:
@@ -500,19 +500,6 @@ class Configure:
         modern_gcc: bool,
         c_maps: bool = False,
     ):
-        import segtypes
-        import segtypes.common.asm
-        import segtypes.common.bin
-        import segtypes.common.c
-        import segtypes.common.data
-        import segtypes.common.group
-        import segtypes.common.rodatabin
-        import segtypes.common.textbin
-        import segtypes.n64.header
-        import segtypes.n64.img
-        import segtypes.n64.palette
-        import segtypes.n64.yay0
-
         assert self.linker_entries is not None
 
         built_objects = set()
@@ -632,6 +619,8 @@ class Configure:
             "actor_types",
         )
 
+        import splat
+
         # Build objects
         for entry in self.linker_entries:
             seg = entry.segment
@@ -641,16 +630,16 @@ class Configure:
 
             assert entry.object_path is not None
 
-            if isinstance(seg, segtypes.n64.header.N64SegHeader):
+            if isinstance(seg, splat.segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.common.asm.CommonSegAsm) or (
-                isinstance(seg, segtypes.common.data.CommonSegData) and not seg.type[0] == "."
+            elif isinstance(seg, splat.segtypes.common.asm.CommonSegAsm) or (
+                isinstance(seg, splat.segtypes.common.data.CommonSegData) and not seg.type[0] == "."
             ):
                 build(entry.object_path, entry.src_paths, "as")
             elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.common.c.CommonSegC) or (
-                isinstance(seg, segtypes.common.data.CommonSegData) and seg.type[0] == "."
+            elif isinstance(seg, splat.segtypes.common.c.CommonSegC) or (
+                isinstance(seg, splat.segtypes.common.data.CommonSegData) and seg.type[0] == "."
             ):
                 cflags = None
                 if isinstance(seg.yaml, dict):
@@ -733,9 +722,9 @@ class Configure:
                     )
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
-                if isinstance(seg, segtypes.common.group.CommonSegGroup):
+                if isinstance(seg, splat.segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
-                        if isinstance(seg, segtypes.n64.img.N64SegImg):
+                        if isinstance(seg, splat.segtypes.n64.img.N64SegImg):
                             flags = ""
                             if seg.n64img.flip_h:
                                 flags += "--flip-x "
@@ -780,7 +769,7 @@ class Configure:
                                 "bin_inc_c",
                                 vars,
                             )
-                        elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
+                        elif isinstance(seg, splat.segtypes.n64.palette.N64SegPalette):
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
                             bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
@@ -810,16 +799,16 @@ class Configure:
                                 vars,
                             )
             elif (
-                isinstance(seg, segtypes.common.bin.CommonSegBin)
-                or isinstance(seg, segtypes.common.textbin.CommonSegTextbin)
-                or isinstance(seg, segtypes.common.rodatabin.CommonSegRodatabin)
+                isinstance(seg, splat.segtypes.common.bin.CommonSegBin)
+                or isinstance(seg, splat.segtypes.common.textbin.CommonSegTextbin)
+                or isinstance(seg, splat.segtypes.common.rodatabin.CommonSegRodatabin)
             ):
                 build(entry.object_path, entry.src_paths, "bin")
-            elif isinstance(seg, segtypes.n64.yay0.N64SegYay0):
+            elif isinstance(seg, splat.segtypes.n64.yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("")  # remove .o
                 build(compressed_path, entry.src_paths, "yay0")
                 build(entry.object_path, [compressed_path], "bin")
-            elif isinstance(seg, segtypes.n64.img.N64SegImg):
+            elif isinstance(seg, splat.segtypes.n64.img.N64SegImg):
                 flags = ""
                 if seg.n64img.flip_h:
                     flags += "--flip-x "
@@ -845,7 +834,7 @@ class Configure:
                 # )
                 # vars = {"c_name": c_sym.name}
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
-            elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
+            elif isinstance(seg, splat.segtypes.n64.palette.N64SegPalette):
                 bin_path = entry.object_path.with_suffix(".bin")
 
                 build(
@@ -1382,7 +1371,7 @@ if __name__ == "__main__":
     extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes -Wno-redundant-decls"
 
     # add splat to python import path
-    sys.path.insert(0, str((ROOT / args.splat).resolve()))
+    sys.path.insert(0, str((ROOT / args.splat / "src").resolve()))
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
