@@ -73,7 +73,8 @@ def read_symbol_addrs():
 
     with open(symbol_addrs_path, "r") as f:
         for line in f.readlines():
-            unique_lines.add(line)
+            if line != "\n":
+                unique_lines.add(line)
 
         for line in unique_lines:
             if "_ROM_START" in line or "_ROM_END" in line:
@@ -154,7 +155,10 @@ def read_elf():
             if name in map_symbols:
                 rom = map_symbols[name][0]
             elif re.match(".*_[0-9A-F]{8}_[0-9A-F]{6}", name):
-                rom = int(name.split("_")[-1], 16)
+                try:
+                    rom = int(name.split("_")[-1], 16)
+                except ValueError:
+                    pass
 
             elf_symbols.append((name, addr, type, rom))
 
