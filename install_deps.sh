@@ -20,7 +20,7 @@ if [[ "$uname" == "Darwin" ]]; then
     fi
 
     # Install packages
-    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils || exit 1
+    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils nanaian/brew/mips-linux-gnu-gcc || exit 1
     python3 -m pip install -U -r requirements.txt || exit 1
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
