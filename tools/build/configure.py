@@ -672,6 +672,9 @@ class Configure:
                 elif "egcs" in cflags:
                     task = "cc_egcs"
                     cflags = cflags.replace("egcs", "")
+                elif "gcc_modern" in cflags:
+                    task = "cc_modern"
+                    cflags = cflags.replace("gcc_modern", "")
 
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":
