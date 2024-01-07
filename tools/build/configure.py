@@ -24,7 +24,7 @@ YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 PIGMENT = "pigment64"
-PIGMENT_REQ_VERSION = "0.3.0"
+PIGMENT_REQ_VERSION = "0.4.0"
 
 
 def exec_shell(command: List[str]) -> str:
