@@ -2633,7 +2633,7 @@ enum EntityFlags {
     ENTITY_FLAG_PARTNER_COLLISION                           = 0x00020000,
     ENTITY_FLAG_DRAW_IF_CLOSE_HIDE_MODE2                    = 0x00040000,
     ENTITY_FLAG_IGNORE_DISTANCE_CULLING                     = 0x00080000,
-    ENTITY_FLAG_100000                                      = 0x00100000,
+    ENTITY_FLAG_USED                                        = 0x00100000,
     ENTITY_FLAG_200000                                      = 0x00200000,
     ENTITY_FLAG_SHADOW_POS_DIRTY                            = 0x00400000,
     ENTITY_FLAG_DARK_SHADOW                                 = 0x00800000,
@@ -5044,13 +5044,6 @@ enum ModelTransformGroupFlags {
 };
 
 enum NpcDropFlags {
-    NPC_DROP_FLAG_1                 = 0x01,
-    NPC_DROP_FLAG_2                 = 0x02,
-    NPC_DROP_FLAG_4                 = 0x04,
-    NPC_DROP_FLAG_8                 = 0x08,
-    NPC_DROP_FLAG_10                = 0x10,
-    NPC_DROP_FLAG_20                = 0x20,
-    NPC_DROP_FLAG_40                = 0x40,
     NPC_DROP_FLAG_80                = 0x80,
 };
 
@@ -5166,6 +5159,11 @@ enum SpriteCompImgFXFlags {
     SPR_IMGFX_FLAG_40000000             = 0x40000000,
     SPR_IMGFX_FLAG_80000000             = 0x80000000,
     SPR_IMGFX_FLAG_ALL                  = 0xF0000000,
+};
+
+enum SpriteShadingFlags {
+    SPR_SHADING_FLAG_ENABLED            = 1,
+    SPR_SHADING_FLAG_SET_VIEWPORT       = 2, // never set
 };
 
 enum MoveType {

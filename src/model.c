@@ -26,10 +26,11 @@ enum {
 };
 
 // supported values for auxCombineSubType
+// different subtypes are only supported for textures with EXTRA_TILE_NONE
 enum {
-    AUX_COMBINE_SUB_0           = 0,
-    AUX_COMBINE_SUB_1           = 1,
-    AUX_COMBINE_SUB_2           = 2,
+    AUX_COMBINE_SUB_0           = 0, // multiply TEX * SHADE for color, use TEX for alpha
+    AUX_COMBINE_SUB_1           = 1, // lerp from TEX to SHADE based on TEX alpha
+    AUX_COMBINE_SUB_2           = 2, // TEX only, shade is ignored
     AUX_COMBINE_SUB_COUNT       = 3,
 };
 
@@ -238,8 +239,8 @@ Gfx SolidCombineModes[][5] = {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_NOTEX_TINT_FOG, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_NOTEX_TINT_REMAP, G_CC_PASS2),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_TINT_DEPTH_NOTEX, G_CC_PASS2),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_TINT_REMAP_NOTEX, G_CC_PASS2),
     },
 
     [TEX_COMBINE_MAIN_ONLY_0] {
@@ -247,90 +248,93 @@ Gfx SolidCombineModes[][5] = {
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC_20),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MAIN_ONLY_1] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_BLENDRGBA),
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_BLENDRGBDECALA, PM_CC_21),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_BLENDRGBA, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_BLENDRGBDECALA, PM_CC_TINT_DEPTH_NO_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_BLENDRGBA, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MAIN_ONLY_2] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_1A, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_DECALRGBA, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_DECALRGBA, PM_CC_TINT_REMAP_NO_SHADE),
     },
 
     // blend LODs in first cycle, tint in second cycle
+    // all three sub-types are identical
     [TEX_COMBINE_MIPMAPS_0] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_19),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_DEPTH_MIPMAPS),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MIPMAPS_1] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_19),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_DEPTH_MIPMAPS),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MIPMAPS_2] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_19),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_DEPTH_MIPMAPS),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_REMAP_NO_SHADE),
     },
 
     // blend main/aux textures in first cycle, tint in second cycle
+    // all three sub-types are identical
     [TEX_COMBINE_AUX_SHARED_0] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
     [TEX_COMBINE_AUX_SHARED_1] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
     [TEX_COMBINE_AUX_SHARED_2] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
 
     // blend main/aux textures in first cycle, tint in second cycle
+    // all three sub-types are identical
     [TEX_COMBINE_AUX_IND_0] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
     [TEX_COMBINE_AUX_IND_1] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
     [TEX_COMBINE_AUX_IND_2] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, G_CC_MODULATEIA2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
     
     // shaded color multiplied main/aux textures for alpha
@@ -347,7 +351,7 @@ Gfx SolidCombineModes[][5] = {
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(PM_CC_22, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_22, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_22, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_22, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_22, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_5] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC1_24, PM_CC2_24),
@@ -361,7 +365,7 @@ Gfx SolidCombineModes[][5] = {
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(PM_CC_23, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_23, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_23, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_23, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_23, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_7] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC1_29, PM_CC2_29),
@@ -398,8 +402,8 @@ Gfx AlphaTestCombineModes[][5] = {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_NOTEX_TINT_FOG, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_NOTEX_TINT_REMAP, G_CC_PASS2),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_TINT_DEPTH_NOTEX, G_CC_PASS2),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_TINT_REMAP_NOTEX, G_CC_PASS2),
     },
 
     [TEX_COMBINE_MAIN_ONLY_0] {
@@ -407,90 +411,90 @@ Gfx AlphaTestCombineModes[][5] = {
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC_20),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MAIN_ONLY_1] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_BLENDRGBA),
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_BLENDRGBDECALA, PM_CC_21),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_BLENDRGBA, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_BLENDRGBDECALA, PM_CC_TINT_DEPTH_NO_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_BLENDRGBA, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MAIN_ONLY_2] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_1A, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_DECALRGBA, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_DECALRGBA, PM_CC_TINT_REMAP_NO_SHADE),
     },
 
    // blend LODs in first cycle, tint in second cycle
     [TEX_COMBINE_MIPMAPS_0] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEI2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEI2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_19),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_DEPTH_MIPMAPS),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MIPMAPS_1] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_19),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_DEPTH_MIPMAPS),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_MIPMAPS_2] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC_18),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_TRILERP, PM_CC2_MULTIPLY_SHADE),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_19),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_17),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_DEPTH_MIPMAPS),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(G_CC_TRILERP, PM_CC_TINT_REMAP_NO_SHADE),
     },
 
     // blend main/aux textures in first cycle, tint in second cycle
     [TEX_COMBINE_AUX_SHARED_0] {
-        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_1B),
+        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_SHADE_ALPHA),
     },
     [TEX_COMBINE_AUX_SHARED_1] {
-        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_17),
+        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_AUX_SHARED_2] {
-        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_17),
+        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_NO_SHADE),
     },
 
     // blend main/aux textures in first cycle, tint in second cycle
     [TEX_COMBINE_AUX_IND_0] {
-        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_17),
+        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_AUX_IND_1] {
-        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_17),
+        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_AUX_IND_2] {
-        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_18),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_17),
+        [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_FOG]      gsDPSetCombineMode(G_CC_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC2_MULTIPLY_SHADE),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_ALT_INTERFERENCE, PM_CC_TINT_REMAP_NO_SHADE),
     },
 
     [TEX_COMBINE_3] {
@@ -505,7 +509,7 @@ Gfx AlphaTestCombineModes[][5] = {
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(PM_CC_22, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_22, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_22, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_22, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_22, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_5] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC1_24, PM_CC2_24),
@@ -519,7 +523,7 @@ Gfx AlphaTestCombineModes[][5] = {
         [TINT_COMBINE_FOG]      gsDPSetCombineMode(PM_CC_23, G_CC_PASS2),
         [TINT_COMBINE_SHROUD]   gsDPSetCombineMode(PM_CC_23, G_CC_PASS2),
         [TINT_COMBINE_DEPTH]    gsDPSetCombineMode(PM_CC_23, G_CC_PASS2),
-        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_23, PM_CC_17),
+        [TINT_COMBINE_REMAP]    gsDPSetCombineMode(PM_CC_23, PM_CC_TINT_REMAP_NO_SHADE),
     },
     [TEX_COMBINE_7] {
         [TINT_COMBINE_NONE]     gsDPSetCombineMode(PM_CC1_29, PM_CC2_29),
@@ -1752,61 +1756,61 @@ void appendGfx_model(void* data) {
             gSPDisplayList((*gfxPos)++, ModelRenderModes[RENDER_MODE_IDX_10]);
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_OPA_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_OPA_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_ZB_OPA_SURF2);
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_OPA_DECAL2);
                     break;
                 case RENDER_MODE_DECAL_OPA_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_OPA_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_ZB_OPA_DECAL2);
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_OPA_INTER2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_OPA_INTER2);
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_TEX_EDGE2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_TEX_EDGE2);
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_TEX_EDGE2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_TEX_EDGE2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER2:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_ZB_XLU_SURF2);
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_XLU_DECAL2);
                     break;
                 case RENDER_MODE_DECAL_XLU_NO_AA:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_DECAL2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_XLU_DECAL2);
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_ZB_XLU_INTER2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_ZB_XLU_INTER2);
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_OPA_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_OPA_SURF2);
                     break;
                 case RENDER_MODE_ALPHATEST_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_TEX_EDGE2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_TEX_EDGE2);
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_AA_XLU_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_AA_XLU_SURF2);
                     break;
                 case RENDER_MODE_CLOUD:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_ZB_CLD_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_ZB_CLD_SURF2);
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    gDPSetRenderMode(gMainGfxPos++, PM_RM_TILEMODE_B, G_RM_CLD_SURF2);
+                    gDPSetRenderMode(gMainGfxPos++, PM_RM_SHROUD, G_RM_CLD_SURF2);
                     break;
             }
             gDPSetFogColor((*gfxPos)++, gFogSettings->color.r, gFogSettings->color.g, gFogSettings->color.b, ShroudTintAmt);

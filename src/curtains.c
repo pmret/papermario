@@ -50,7 +50,7 @@ Gfx D_800758A0[] = {
 Gfx TheaterWallShadowsGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_CLD_SURF2),
-    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC2_MULTIPLY_PRIM),
     gsSPDisplayList(D_80075730),
     gsSPVertex(theater_wall_shadows_vtx, 8, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -61,7 +61,7 @@ Gfx TheaterWallShadowsGfx[] = {
 Gfx TheaterCurtainGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_XLU_SURF2),
-    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC_16),
+    gsDPSetCombineMode(G_CC_MODULATEIDECALA, PM_CC2_MULTIPLY_PRIM),
     gsSPDisplayList(D_80075730),
     gsSPVertex(theater_curtain_vtx, 31, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -80,7 +80,7 @@ Gfx TheaterCurtainGfx[] = {
 Gfx TheaterInsetShadowsGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_XLU_SURF2),
-    gsDPSetCombineMode(G_CC_SHADE, PM_CC_16),
+    gsDPSetCombineMode(G_CC_SHADE, PM_CC2_MULTIPLY_PRIM),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPVertex(theater_left_inset_shadow_vtx, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -93,7 +93,7 @@ Gfx TheaterFloorGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(CVG_DST_FULL | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_FULL | ZMODE_OPA | FORCE_BL |
                       GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1)),
-    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC2_MULTIPLY_PRIM),
     gsSPDisplayList(D_800746E0),
     gsSPVertex(theater_floor_vtx, 25, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -115,7 +115,7 @@ Gfx TheaterRightWallGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(CVG_DST_FULL | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_FULL | ZMODE_OPA | FORCE_BL |
                       GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1)),
-    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC2_MULTIPLY_PRIM),
     gsSPDisplayList(D_800758A0),
     gsSPVertex(theater_right_wall_vtx, 6, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -127,7 +127,7 @@ Gfx TheaterLeftWallGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(CVG_DST_FULL | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_FULL | ZMODE_OPA | FORCE_BL |
                       GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1)),
-    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC2_MULTIPLY_PRIM),
     gsSPDisplayList(D_800758A0),
     gsSPVertex(theater_left_wall_vtx, 6, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),

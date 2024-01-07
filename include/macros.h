@@ -276,7 +276,7 @@
 
 #define PACK_PAL_RGBA(r, g, b, a) (((r) << 11) | ((g) << 6) | ((b) << 1) | (a));
 
-#define PM_RM_TILEMODE_B    GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA)
+#define PM_RM_SHROUD    GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA)
 
 #define PM_CC_01        0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
 #define PM_CC_02        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
@@ -288,47 +288,83 @@
 #define PM_CC_PRIM_FULL_ALPHA       0, 0, 0, PRIMITIVE, 0, 0, 0, 1
 #define PM_CC_PRIM_NO_ALPHA         0, 0, 0, PRIMITIVE, 0, 0, 0, 0
 #define PM_CC_0A        0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0
+
 #define PM_CC_0B        0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0
-#define PM_CC_0C        0, 0, 0, 0, 0, 0, 0, COMBINED
 #define PM_CC_0D        0, 0, 0, 0, SHADE, 0, TEXEL1, 0
+#define PM_CC_0C        0, 0, 0, 0, 0, 0, 0, COMBINED
+
 #define PM_CC_0E        0, 0, 0, TEXEL0, 0, 0, 0, 0
 #define PM_CC_0F        0, 0, 0, TEXEL0, 0, 0, 0, 1
 #define PM_CC_10        0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE
 #define PM_CC_11        0, 0, 0, TEXEL0, SHADE, 0, TEXEL0, 0
 #define PM_CC_12        0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0
-#define PM_CC_13        TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL1
+
+#define PM_CC_MSG_UP_ARROW \
+    TEXEL0, 0, PRIMITIVE, 0, \
+    0, 0, 0, TEXEL1
 
 #define PM_CC_14        PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0
 #define PM_CC_15        PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1
 
-#define PM_CC_16        COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED
+// multiply the combined color from cycle1 with PRIMITIVE color; PRIMITIVE alpha is ignored
+#define PM_CC2_MULTIPLY_PRIM    COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED
 
-// (COMB * PRIM) + ENV
-#define PM_CC_17        COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED
-
-#define PM_CC_18        COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED
-#define PM_CC_19        COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED
-#define PM_CC_1B        COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0
+// multiply the combined color from cycle1 with SHADE color; SHADE alpha is ignored
+#define PM_CC2_MULTIPLY_SHADE   COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED
 
 #define PM_CC_NOISE     NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1
 
 #define PM_CC_1A        TEXEL0, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, TEXEL0
 
 // implements ENV_TINT_DEPTH for untextured models
-// applies just the base color; depth-based fog color will be added during RPD blend step
+// applies just the base color; depth-based fog color will be added during RDP blend step
 // color = SHADE * PRIM_ALPHA + PRIM
 // alpha = SHADE
-#define PM_CC_NOTEX_TINT_FOG \
-    SHADE, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, SHADE
+#define PM_CC_TINT_DEPTH_NOTEX \
+    SHADE, 0, PRIMITIVE_ALPHA, PRIMITIVE, \
+    0, 0, 0, SHADE
+
+// implements ENV_TINT_DEPTH for single-textured or mipmaped models
+// applies just the base color; depth-based fog color will be added during RDP blend step
+// color = COMB * PRIM_ALPHA + PRIM
+// alpha = COMB
+#define PM_CC_TINT_DEPTH_NO_SHADE \
+    COMBINED, 0, PRIMITIVE_ALPHA, PRIMITIVE, \
+    0, 0, 0, COMBINED
+
+// color = (COMB - PRIM) * PRIM_ALPHA + COMB
+// alpha = COMB
+#define PM_CC_20 \
+    COMBINED, PRIMITIVE, PRIMITIVE_ALPHA, COMBINED, \
+    0, 0, 0, COMBINED
+
+#define PM_CC_TINT_DEPTH_MIPMAPS \
+    COMBINED, 0, SHADE, PRIMITIVE, \
+    0, 0, 0, COMBINED
 
 // implements ENV_TINT_REMAP for untextured models
 // color = SHADE * PRIM + ENV
 // alpha = SHADE
-#define PM_CC_NOTEX_TINT_REMAP \
-    SHADE, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, SHADE
+#define PM_CC_TINT_REMAP_NOTEX \
+    SHADE, 0, PRIMITIVE, ENVIRONMENT, \
+    0, 0, 0, SHADE
 
-#define PM_CC_20        COMBINED, PRIMITIVE, PRIMITIVE_ALPHA, COMBINED, 0, 0, 0, COMBINED
-#define PM_CC_21        COMBINED, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, COMBINED
+// implements ENV_TINT_REMAP for single-textured or mipmaped models
+// NOTE: SHADE color is not used
+// color = COMB * PRIM + ENV
+// alpha = COMB
+#define PM_CC_TINT_REMAP_NO_SHADE \
+    COMBINED, 0, PRIMITIVE, ENVIRONMENT, \
+    0, 0, 0, COMBINED
+
+// implements ENV_TINT_REMAP for multi-textured models
+// only SHADE alpha is used
+// color = COMB * PRIM + ENV
+// alpha = COMB * SHADE
+#define PM_CC_TINT_REMAP_SHADE_ALPHA \
+    COMBINED, 0, PRIMITIVE, ENVIRONMENT, \
+    COMBINED, 0, SHADE, 0
+
 #define PM_CC_22        TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0
 #define PM_CC_23        1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0
 #define PM_CC1_24       1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0
@@ -340,7 +376,10 @@
 #define PM_CC1_29        TEXEL0, SHADE,    TEXEL0,       TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1
 #define PM_CC2_29        TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0
 
-#define	PM_CC_ALT_INTERFERENCE  TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0
+// same as G_CC_INTERFERENCE, except the roles of TEXEL0 and TEXEL1 are swapped
+#define	PM_CC_ALT_INTERFERENCE  \
+    TEXEL1, 0, TEXEL0, 0, \
+    TEXEL1, 0, TEXEL0, 0
 
 #define PM_CC_2B    PRIMITIVE, 0, TEXEL1, 0, 0, 0, 0, TEXEL1
 #define PM_CC_2C    PRIMITIVE, 0, TEXEL1, 0, TEXEL1, 0, PRIMITIVE, 0
@@ -361,13 +400,14 @@
 #define PM_CC_39    TEXEL1, K4, COMBINED_ALPHA, COMBINED, 0, 0, 0, 1
 
 #define PM_CC_3A    0, 0, 0, PRIMITIVE, 1, TEXEL0, PRIMITIVE, TEXEL0
-#define PM_CC_3B    0, 0, 0, SHADE, 1, 0, PRIMITIVE, 0
+
+#define PM_CC_SCREEN_OVERLAY \
+    0, 0, 0, SHADE, \
+    1, 0, PRIMITIVE, 0
 
 #define PM_CC_3C    0, 0, 0, PRIMITIVE, SHADE, 0, PRIMITIVE, 0
 
 #define PM_CC_3D    SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
-
-#define PM_CC_3E    0, 0, 0, COMBINED, 0, 0, 0, PRIMITIVE
 
 #define PM_CC_3F    TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0
 
@@ -385,6 +425,10 @@
 // color = TEXEL0 * SHADE
 // alpha = PRIM
 #define PM_CC_KKJ_SPILL_LIGHT   TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE
+
+// color = pass from cycle1
+// alpha = PRIM
+#define PM_CC_KKJ14_FIRE    0, 0, 0, COMBINED, 0, 0, 0, PRIMITIVE
 
 // color = SHADE + PRIM
 // alpha = PRIMITIVE * TEXEL0

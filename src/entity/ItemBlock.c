@@ -60,12 +60,12 @@ void entity_ItemBlock_spawn_item(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
     s32 angle;
 
-    if (data->item == 0 || (entity->flags & ENTITY_FLAG_100000)) {
+    if (data->item == ITEM_NONE || (entity->flags & ENTITY_FLAG_USED)) {
         return;
     }
 
     angle = player_get_camera_facing_angle();
-    entity->flags |= ENTITY_FLAG_100000;
+    entity->flags |= ENTITY_FLAG_USED;
 
     if (data->item == ITEM_COIN) {
         make_item_entity(ITEM_COIN, entity->pos.x, entity->pos.y + 28.0, entity->pos.z,

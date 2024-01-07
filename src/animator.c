@@ -874,7 +874,7 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     if (!gAnimModelFogEnabled) {
         gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
-        gDPSetCombineMode(gMainGfxPos++, PM_CC_42, PM_CC_18);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_42, PM_CC2_MULTIPLY_SHADE);
     }
     gDPPipeSync(gMainGfxPos++);
 

@@ -92,7 +92,7 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
         script->varTable[4] = shadingProfile->ambientColor.g;
         script->varTable[5] = shadingProfile->ambientColor.b;
         script->varTable[6] = 0;
-        gSpriteShadingProfile->flags |= 1;
+        gSpriteShadingProfile->flags |= SPR_SHADING_FLAG_ENABLED;
     }
 
     script->varTable[6]++;
@@ -102,7 +102,7 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
 
     if (script->varTable[6] == 20) {
         if (script->varTable[0] == 255) {
-            gSpriteShadingProfile->flags &= ~1;
+            gSpriteShadingProfile->flags &= ~SPR_SHADING_FLAG_ENABLED;
         }
         return ApiStatus_DONE2;
     }

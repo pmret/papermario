@@ -1,6 +1,8 @@
 #include "sprite.h"
 #include "sprite/player.h"
 
+#define MAX_SPRITE_ID 0xEA // todo generate this
+
 extern HeapNode heap_generalHead;
 extern HeapNode heap_spriteHead;
 
@@ -17,8 +19,8 @@ BSS s32 spr_playerMaxComponents;
 BSS s32 D_802DF584; // unused?
 BSS PlayerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 BSS s32 D_802DF5AC; // unused?
-BSS SpriteAnimData* NpcSpriteData[234];
-BSS u8 NpcSpriteInstanceCount[234];
+BSS SpriteAnimData* NpcSpriteData[MAX_SPRITE_ID];
+BSS u8 NpcSpriteInstanceCount[MAX_SPRITE_ID];
 BSS s32 D_802DFA44; // unused?
 BSS SpriteInstance SpriteInstances[51];
 BSS Quad* D_802DFE44;
@@ -230,14 +232,14 @@ void spr_appendGfx_component_flat(
     s32 alpha
 ) {
     gDPLoadTLUT_pal16(gMainGfxPos++, 0, palette);
-    if (gSpriteShadingProfile->flags & 1) {
+    if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_ENABLED) {
         gDPScrollMultiTile2_4b(gMainGfxPos++, raster, G_IM_FMT_CI, width, height,
                               0, 0, width - 1, height - 1, 0,
                               G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                               256, 256);
         gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
         gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 63 << 2, 0);
-        if (gSpriteShadingProfile->flags & 2) {
+        if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
             Camera* camera = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
@@ -264,7 +266,7 @@ void spr_appendGfx_component_flat(
         gDPScrollTextureBlock_4b(gMainGfxPos++, raster, G_IM_FMT_CI, width, height, 0,
                                  G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                                  256, 256);
-        if (gSpriteShadingProfile->flags & 2) {
+        if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
             Camera* camera =  &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMainGfxPos++, &SprPauseVpAlt);
@@ -299,7 +301,7 @@ void spr_appendGfx_component_flat(
         }
     }
 
-    if (gSpriteShadingProfile->flags & 2) {
+    if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_SET_VIEWPORT) {
         Camera* camera =  &gCameras[gCurrentCamID];
 
         if (gGameStatusPtr->isBattle == 2) {
@@ -356,7 +358,7 @@ void spr_appendGfx_component(
     gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    if (gSpriteShadingProfile->flags & 1) {
+    if (gSpriteShadingProfile->flags & SPR_SHADING_FLAG_ENABLED) {
         if ((u8) opacity == 255) {
             gSPDisplayList(gMainGfxPos++, D_802DF460);
         } else {

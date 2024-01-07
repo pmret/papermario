@@ -1046,7 +1046,7 @@ void partner_reset_data(void) {
     wCurrentPartnerId = currentPartner;
 
     if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
-        gPartnerStatus.partnerActionState = 1;
+        gPartnerStatus.partnerActionState = PARTNER_ACTION_USE;
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     }
 

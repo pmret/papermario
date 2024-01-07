@@ -212,7 +212,7 @@ API_CALLABLE(N(SetFireplaceAlpha)) {
 void N(setup_gfx_fireplace)(void) {
     gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
     gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
-    gDPSetCombineMode(gMainGfxPos++, G_CC_INTERFERENCE, PM_CC_3E);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_INTERFERENCE, PM_CC_KKJ14_FIRE);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(FireplaceAlpha));
 }
 

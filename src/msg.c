@@ -72,7 +72,7 @@ Gfx D_8014C2D8[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetRenderMode(IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | G_RM_PASS, IM_RD | CVG_DST_SAVE | ZMODE_XLU |
                       FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA)),
-    gsDPSetCombineMode(PM_CC_13, G_CC_PASS2),
+    gsDPSetCombineMode(PM_CC_MSG_UP_ARROW, G_CC_PASS2),
     gsSPEndDisplayList(),
 };
 

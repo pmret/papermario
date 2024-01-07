@@ -66,15 +66,15 @@ s32 SetSpriteShading(Evt* script, s32 isInitialCall) {
         source->falloff = *(f32*)&falloff;
         source->unk_14 = gSpriteShadingData[6 + 16 * i + 14];
     }
-    gSpriteShadingProfile->flags |= 1;
+    gSpriteShadingProfile->flags |= SPR_SHADING_FLAG_ENABLED;
     return ApiStatus_DONE2;
 }
 
 ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
-        gSpriteShadingProfile->flags |= 1;
+        gSpriteShadingProfile->flags |= SPR_SHADING_FLAG_ENABLED;
     } else {
-        gSpriteShadingProfile->flags &= ~1;
+        gSpriteShadingProfile->flags &= ~SPR_SHADING_FLAG_ENABLED;
     }
     return ApiStatus_DONE2;
 }
