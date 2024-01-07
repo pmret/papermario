@@ -1,5 +1,6 @@
 #include "common.h"
 #include "include_asset.h"
+#include "include_asset.h"
 
 #include "entity/model/SaveBlock_1.vtx.inc.c"
 #include "entity/model/SaveBlock_2.vtx.inc.c"
@@ -34,7 +35,7 @@ Gfx Entity_SaveBlock_LoadTextureFace[] = {
 
 INCLUDE_IMG("entity/model/SaveBlock_letterS.png.bin", D_0A0021E8_E4D4C8);
 #if VERSION_PAL
-#include "entity/model/SaveBlock_letterG.png.inc.c"
+INCLUDE_IMG("entity/model/SaveBlock_letterG.png.bin", D_PAL_0A002170_EBA460);
 #endif
 
 Gfx Entity_SaveBlock_LoadTextureLetterS[] = {

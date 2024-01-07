@@ -2,6 +2,7 @@
 #include "hud_element.h"
 #include "sparkle_script.h"
 #include "include_asset.h"
+#include "include_asset.h"
 
 INCLUDE_IMG("ui/input/a_button_unpressed.png.bin", ui_input_a_button_unpressed_png);
 INCLUDE_PAL("ui/input/a_button_unpressed.pal.bin", ui_input_a_button_unpressed_pal);
@@ -154,59 +155,59 @@ INCLUDE_PAL("ui/pow_cost.reduced_twice.pal.bin", ui_pow_cost_reduced_twice_pal);
 INCLUDE_PAL("ui/pow_cost.notenough.pal.bin", ui_pow_cost_notenough_pal);
 
 #if VERSION_PAL
-#include "de/ui/fp_cost.png.inc.c"
-#include "de/ui/fp_cost.pal.inc.c"
+INCLUDE_IMG("de/ui/fp_cost.png.bin", ui_fp_cost_de_png);
+INCLUDE_PAL("de/ui/fp_cost.pal.bin", ui_fp_cost_de_pal);
 #define ui_fp_cost_de_reduced_png ui_fp_cost_de_png
-#include "de/ui/fp_cost.reduced.pal.inc.c"
+INCLUDE_PAL("de/ui/fp_cost.reduced.pal.bin", ui_fp_cost_de_reduced_pal);
 #define ui_fp_cost_de_reduced_twice_png ui_fp_cost_de_png
-#include "de/ui/fp_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("de/ui/fp_cost.reduced_twice.pal.bin", ui_fp_cost_de_reduced_twice_pal);
 #define ui_fp_cost_de_notenough_png ui_fp_cost_de_png
-#include "de/ui/fp_cost.notenough.pal.inc.c"
+INCLUDE_PAL("de/ui/fp_cost.notenough.pal.bin", ui_fp_cost_de_notenough_pal);
 
-#include "de/ui/pow_cost.png.inc.c"
-#include "de/ui/pow_cost.pal.inc.c"
+INCLUDE_IMG("de/ui/pow_cost.png.bin", ui_pow_cost_de_png);
+INCLUDE_PAL("de/ui/pow_cost.pal.bin", ui_pow_cost_de_pal);
 #define ui_pow_cost_de_reduced_png ui_pow_cost_de_png
-#include "de/ui/pow_cost.reduced.pal.inc.c"
+INCLUDE_PAL("de/ui/pow_cost.reduced.pal.bin", ui_pow_cost_de_reduced_pal);
 #define ui_pow_cost_de_reduced_twice_png ui_pow_cost_de_png
-#include "de/ui/pow_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("de/ui/pow_cost.reduced_twice.pal.bin", ui_pow_cost_de_reduced_twice_pal);
 #define ui_pow_cost_de_notenough_png ui_pow_cost_de_png
-#include "de/ui/pow_cost.notenough.pal.inc.c"
+INCLUDE_PAL("de/ui/pow_cost.notenough.pal.bin", ui_pow_cost_de_notenough_pal);
 
-#include "fr/ui/fp_cost.png.inc.c"
-#include "fr/ui/fp_cost.pal.inc.c"
+INCLUDE_IMG("fr/ui/fp_cost.png.bin", ui_fp_cost_fr_png);
+INCLUDE_PAL("fr/ui/fp_cost.pal.bin", ui_fp_cost_fr_pal);
 #define ui_fp_cost_fr_reduced_png ui_fp_cost_fr_png
-#include "fr/ui/fp_cost.reduced.pal.inc.c"
+INCLUDE_PAL("fr/ui/fp_cost.reduced.pal.bin", ui_fp_cost_fr_reduced_pal);
 #define ui_fp_cost_fr_reduced_twice_png ui_fp_cost_fr_png
-#include "fr/ui/fp_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("fr/ui/fp_cost.reduced_twice.pal.bin", ui_fp_cost_fr_reduced_twice_pal);
 #define ui_fp_cost_fr_notenough_png ui_fp_cost_fr_png
-#include "fr/ui/fp_cost.notenough.pal.inc.c"
+INCLUDE_PAL("fr/ui/fp_cost.notenough.pal.bin", ui_fp_cost_fr_notenough_pal);
 
-#include "fr/ui/pow_cost.png.inc.c"
-#include "fr/ui/pow_cost.pal.inc.c"
+INCLUDE_IMG("fr/ui/pow_cost.png.bin", ui_pow_cost_fr_png);
+INCLUDE_PAL("fr/ui/pow_cost.pal.bin", ui_pow_cost_fr_pal);
 #define ui_pow_cost_fr_reduced_png ui_pow_cost_fr_png
-#include "fr/ui/pow_cost.reduced.pal.inc.c"
+INCLUDE_PAL("fr/ui/pow_cost.reduced.pal.bin", ui_pow_cost_fr_reduced_pal);
 #define ui_pow_cost_fr_reduced_twice_png ui_pow_cost_fr_png
-#include "fr/ui/pow_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("fr/ui/pow_cost.reduced_twice.pal.bin", ui_pow_cost_fr_reduced_twice_pal);
 #define ui_pow_cost_fr_notenough_png ui_pow_cost_fr_png
-#include "fr/ui/pow_cost.notenough.pal.inc.c"
+INCLUDE_PAL("fr/ui/pow_cost.notenough.pal.bin", ui_pow_cost_fr_notenough_pal);
 
-#include "es/ui/fp_cost.png.inc.c"
-#include "es/ui/fp_cost.pal.inc.c"
+INCLUDE_IMG("es/ui/fp_cost.png.bin", ui_fp_cost_es_png);
+INCLUDE_PAL("es/ui/fp_cost.pal.bin", ui_fp_cost_es_pal);
 #define ui_fp_cost_es_reduced_png ui_fp_cost_es_png
-#include "es/ui/fp_cost.reduced.pal.inc.c"
+INCLUDE_PAL("es/ui/fp_cost.reduced.pal.bin", ui_fp_cost_es_reduced_pal);
 #define ui_fp_cost_es_reduced_twice_png ui_fp_cost_es_png
-#include "es/ui/fp_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("es/ui/fp_cost.reduced_twice.pal.bin", ui_fp_cost_es_reduced_twice_pal);
 #define ui_fp_cost_es_notenough_png ui_fp_cost_es_png
-#include "es/ui/fp_cost.notenough.pal.inc.c"
+INCLUDE_PAL("es/ui/fp_cost.notenough.pal.bin", ui_fp_cost_es_notenough_pal);
 
-#include "es/ui/pow_cost.png.inc.c"
-#include "es/ui/pow_cost.pal.inc.c"
+INCLUDE_IMG("es/ui/pow_cost.png.bin", ui_pow_cost_es_png);
+INCLUDE_PAL("es/ui/pow_cost.pal.bin", ui_pow_cost_es_pal);
 #define ui_pow_cost_es_reduced_png ui_pow_cost_es_png
-#include "es/ui/pow_cost.reduced.pal.inc.c"
+INCLUDE_PAL("es/ui/pow_cost.reduced.pal.bin", ui_pow_cost_es_reduced_pal);
 #define ui_pow_cost_es_reduced_twice_png ui_pow_cost_es_png
-#include "es/ui/pow_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("es/ui/pow_cost.reduced_twice.pal.bin", ui_pow_cost_es_reduced_twice_pal);
 #define ui_pow_cost_es_notenough_png ui_pow_cost_es_png
-#include "es/ui/pow_cost.notenough.pal.inc.c"
+INCLUDE_PAL("es/ui/pow_cost.notenough.pal.bin", ui_pow_cost_es_notenough_pal);
 #endif
 
 INCLUDE_IMG("ui/green_arrow_down.png.bin", ui_green_arrow_down_png);
@@ -387,23 +388,23 @@ INCLUDE_IMG("ui/status/text_fp.png.bin", ui_status_text_fp_png);
 INCLUDE_PAL("ui/status/text_fp.pal.bin", ui_status_text_fp_pal);
 
 #if VERSION_PAL
-#include "de/ui/status/text_hp.png.inc.c"
-#include "de/ui/status/text_hp.pal.inc.c"
+INCLUDE_IMG("de/ui/status/text_hp.png.bin", ui_status_text_hp_de_png);
+INCLUDE_PAL("de/ui/status/text_hp.pal.bin", ui_status_text_hp_de_pal);
 
-#include "de/ui/status/text_fp.png.inc.c"
-#include "de/ui/status/text_fp.pal.inc.c"
+INCLUDE_IMG("de/ui/status/text_fp.png.bin", ui_status_text_fp_de_png);
+INCLUDE_PAL("de/ui/status/text_fp.pal.bin", ui_status_text_fp_de_pal);
 
-#include "fr/ui/status/text_hp.png.inc.c"
-#include "fr/ui/status/text_hp.pal.inc.c"
+INCLUDE_IMG("fr/ui/status/text_hp.png.bin", ui_status_text_hp_fr_png);
+INCLUDE_PAL("fr/ui/status/text_hp.pal.bin", ui_status_text_hp_fr_pal);
 
-#include "fr/ui/status/text_fp.png.inc.c"
-#include "fr/ui/status/text_fp.pal.inc.c"
+INCLUDE_IMG("fr/ui/status/text_fp.png.bin", ui_status_text_fp_fr_png);
+INCLUDE_PAL("fr/ui/status/text_fp.pal.bin", ui_status_text_fp_fr_pal);
 
-#include "es/ui/status/text_hp.png.inc.c"
-#include "es/ui/status/text_hp.pal.inc.c"
+INCLUDE_IMG("es/ui/status/text_hp.png.bin", ui_status_text_hp_es_png);
+INCLUDE_PAL("es/ui/status/text_hp.pal.bin", ui_status_text_hp_es_pal);
 
-#include "es/ui/status/text_fp.png.inc.c"
-#include "es/ui/status/text_fp.pal.inc.c"
+INCLUDE_IMG("es/ui/status/text_fp.png.bin", ui_status_text_fp_es_png);
+INCLUDE_PAL("es/ui/status/text_fp.pal.bin", ui_status_text_fp_es_pal);
 #endif
 
 INCLUDE_IMG("ui/status/pow_unit_1.png.bin", ui_status_pow_unit_1_png);
@@ -641,50 +642,50 @@ INCLUDE_IMG("ui/battle/status/hp_drain.png.bin", ui_battle_status_hp_drain_png);
 INCLUDE_PAL("ui/battle/status/hp_drain.pal.bin", ui_battle_status_hp_drain_pal);
 
 #if VERSION_PAL
-#include "de/ui/battle/status/peril.png.inc.c"
-#include "de/ui/battle/status/peril.pal.inc.c"
+INCLUDE_IMG("de/ui/battle/status/peril.png.bin", ui_battle_status_peril_de_png);
+INCLUDE_PAL("de/ui/battle/status/peril.pal.bin", ui_battle_status_peril_de_pal);
 
-#include "de/ui/battle/status/danger.png.inc.c"
-#include "de/ui/battle/status/danger.pal.inc.c"
+INCLUDE_IMG("de/ui/battle/status/danger.png.bin", ui_battle_status_danger_de_png);
+INCLUDE_PAL("de/ui/battle/status/danger.pal.bin", ui_battle_status_danger_de_pal);
 
-#include "de/ui/battle/status/refund.png.inc.c"
-#include "de/ui/battle/status/refund.pal.inc.c"
+INCLUDE_IMG("de/ui/battle/status/refund.png.bin", ui_battle_status_refund_de_png);
+INCLUDE_PAL("de/ui/battle/status/refund.pal.bin", ui_battle_status_refund_de_pal);
 
-#include "de/ui/battle/status/happy.png.inc.c"
-#include "de/ui/battle/status/happy.pal.inc.c"
+INCLUDE_IMG("de/ui/battle/status/happy.png.bin", ui_battle_status_happy_de_png);
+INCLUDE_PAL("de/ui/battle/status/happy.pal.bin", ui_battle_status_happy_de_pal);
 
-#include "de/ui/battle/status/hp_drain.png.inc.c"
-#include "de/ui/battle/status/hp_drain.pal.inc.c"
+INCLUDE_IMG("de/ui/battle/status/hp_drain.png.bin", ui_battle_status_hp_drain_de_png);
+INCLUDE_PAL("de/ui/battle/status/hp_drain.pal.bin", ui_battle_status_hp_drain_de_pal);
 
-#include "fr/ui/battle/status/peril.png.inc.c"
-#include "fr/ui/battle/status/peril.pal.inc.c"
+INCLUDE_IMG("fr/ui/battle/status/peril.png.bin", ui_battle_status_peril_fr_png);
+INCLUDE_PAL("fr/ui/battle/status/peril.pal.bin", ui_battle_status_peril_fr_pal);
 
-#include "fr/ui/battle/status/danger.png.inc.c"
-#include "fr/ui/battle/status/danger.pal.inc.c"
+INCLUDE_IMG("fr/ui/battle/status/danger.png.bin", ui_battle_status_danger_fr_png);
+INCLUDE_PAL("fr/ui/battle/status/danger.pal.bin", ui_battle_status_danger_fr_pal);
 
-#include "fr/ui/battle/status/refund.png.inc.c"
-#include "fr/ui/battle/status/refund.pal.inc.c"
+INCLUDE_IMG("fr/ui/battle/status/refund.png.bin", ui_battle_status_refund_fr_png);
+INCLUDE_PAL("fr/ui/battle/status/refund.pal.bin", ui_battle_status_refund_fr_pal);
 
-#include "fr/ui/battle/status/happy.png.inc.c"
-#include "fr/ui/battle/status/happy.pal.inc.c"
+INCLUDE_IMG("fr/ui/battle/status/happy.png.bin", ui_battle_status_happy_fr_png);
+INCLUDE_PAL("fr/ui/battle/status/happy.pal.bin", ui_battle_status_happy_fr_pal);
 
-#include "fr/ui/battle/status/hp_drain.png.inc.c"
-#include "fr/ui/battle/status/hp_drain.pal.inc.c"
+INCLUDE_IMG("fr/ui/battle/status/hp_drain.png.bin", ui_battle_status_hp_drain_fr_png);
+INCLUDE_PAL("fr/ui/battle/status/hp_drain.pal.bin", ui_battle_status_hp_drain_fr_pal);
 
-#include "es/ui/battle/status/peril.png.inc.c"
-#include "es/ui/battle/status/peril.pal.inc.c"
+INCLUDE_IMG("es/ui/battle/status/peril.png.bin", ui_battle_status_peril_es_png);
+INCLUDE_PAL("es/ui/battle/status/peril.pal.bin", ui_battle_status_peril_es_pal);
 
-#include "es/ui/battle/status/danger.png.inc.c"
-#include "es/ui/battle/status/danger.pal.inc.c"
+INCLUDE_IMG("es/ui/battle/status/danger.png.bin", ui_battle_status_danger_es_png);
+INCLUDE_PAL("es/ui/battle/status/danger.pal.bin", ui_battle_status_danger_es_pal);
 
-#include "es/ui/battle/status/refund.png.inc.c"
-#include "es/ui/battle/status/refund.pal.inc.c"
+INCLUDE_IMG("es/ui/battle/status/refund.png.bin", ui_battle_status_refund_es_png);
+INCLUDE_PAL("es/ui/battle/status/refund.pal.bin", ui_battle_status_refund_es_pal);
 
-#include "es/ui/battle/status/happy.png.inc.c"
-#include "es/ui/battle/status/happy.pal.inc.c"
+INCLUDE_IMG("es/ui/battle/status/happy.png.bin", ui_battle_status_happy_es_png);
+INCLUDE_PAL("es/ui/battle/status/happy.pal.bin", ui_battle_status_happy_es_pal);
 
-#include "es/ui/battle/status/hp_drain.png.inc.c"
-#include "es/ui/battle/status/hp_drain.pal.inc.c"
+INCLUDE_IMG("es/ui/battle/status/hp_drain.png.bin", ui_battle_status_hp_drain_es_png);
+INCLUDE_PAL("es/ui/battle/status/hp_drain.pal.bin", ui_battle_status_hp_drain_es_pal);
 #endif
 
 INCLUDE_IMG("ui/move_basic.png.bin", ui_move_basic_png);
