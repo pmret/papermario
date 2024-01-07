@@ -1,31 +1,32 @@
 #include "common.h"
 #include "battle/action_cmd.h"
+#include "include_asset.h"
 
 #define NAMESPACE action_command_water_block
 
-#include "battle/action_cmd/water_block_1.png.inc.c"
-#include "battle/action_cmd/water_block_1.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_1.png", battle_action_cmd_water_block_1_png);
+INCLUDE_PAL("battle/action_cmd/water_block_1.pal", battle_action_cmd_water_block_1_pal);
 
-#include "battle/action_cmd/water_block_2.png.inc.c"
-#include "battle/action_cmd/water_block_2.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_2.png", battle_action_cmd_water_block_2_png);
+INCLUDE_PAL("battle/action_cmd/water_block_2.pal", battle_action_cmd_water_block_2_pal);
 
-#include "battle/action_cmd/water_block_3.png.inc.c"
-#include "battle/action_cmd/water_block_3.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_3.png", battle_action_cmd_water_block_3_png);
+INCLUDE_PAL("battle/action_cmd/water_block_3.pal", battle_action_cmd_water_block_3_pal);
 
-#include "battle/action_cmd/water_block_0.png.inc.c"
-#include "battle/action_cmd/water_block_0.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_0.png", battle_action_cmd_water_block_0_png);
+INCLUDE_PAL("battle/action_cmd/water_block_0.pal", battle_action_cmd_water_block_0_pal);
 
-#include "battle/action_cmd/water_block_block.png.inc.c"
-#include "battle/action_cmd/water_block_block.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_block.png", battle_action_cmd_water_block_block_png);
+INCLUDE_PAL("battle/action_cmd/water_block_block.pal", battle_action_cmd_water_block_block_pal);
 
-#include "battle/action_cmd/water_block_circle.png.inc.c"
-#include "battle/action_cmd/water_block_circle.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_circle.png", battle_action_cmd_water_block_circle_png);
+INCLUDE_PAL("battle/action_cmd/water_block_circle.pal", battle_action_cmd_water_block_circle_pal);
 
-#include "battle/action_cmd/water_block_cloud.png.inc.c"
-#include "battle/action_cmd/water_block_cloud.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_cloud.png", battle_action_cmd_water_block_cloud_png);
+INCLUDE_PAL("battle/action_cmd/water_block_cloud.pal", battle_action_cmd_water_block_cloud_pal);
 
-#include "battle/action_cmd/water_block_4.png.inc.c"
-#include "battle/action_cmd/water_block_4.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/water_block_4.png", battle_action_cmd_water_block_4_png);
+INCLUDE_PAL("battle/action_cmd/water_block_4.pal", battle_action_cmd_water_block_4_pal);
 
 HudScript HES_WaterBlock1 = {
     HUD_ELEMENT_OP_SetVisible,

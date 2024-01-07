@@ -1,10 +1,11 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/GreenStompSwitch_1.vtx.inc.c"
 #include "entity/model/GreenStompSwitch_2.vtx.inc.c"
 
-#include "entity/model/GreenStompSwitch_tex.png.inc.c"
-#include "entity/model/GreenStompSwitch_tex.pal.inc.c"
+INCLUDE_IMG("entity/model/GreenStompSwitch_tex.png", D_0A000280_E625F0);
+INCLUDE_PAL("entity/model/GreenStompSwitch_tex.pal", D_0A000300_E62670);
 Gfx Entity_GreenStompSwitch_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
@@ -20,8 +21,8 @@ Gfx Entity_GreenStompSwitch_LoadTexture[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/GreenStompSwitch_exclamationMark.png.inc.c"
-#include "entity/model/GreenStompSwitch_exclamationMark.pal.inc.c"
+INCLUDE_IMG("entity/model/GreenStompSwitch_exclamationMark.png", D_0A0003D8_E62748);
+INCLUDE_PAL("entity/model/GreenStompSwitch_exclamationMark.pal", D_0A0004D8_E62848);
 Gfx Entity_GreenStompSwitch_LoadExclMark[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

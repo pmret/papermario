@@ -1,10 +1,12 @@
 #include "common.h"
+#include "include_asset.h"
+#include "include_asset.h"
 
 #include "entity/model/SaveBlock_1.vtx.inc.c"
 #include "entity/model/SaveBlock_2.vtx.inc.c"
 #include "entity/model/SaveBlock_3.vtx.inc.c"
 
-#include "entity/model/SaveBlock_star.png.inc.c"
+INCLUDE_IMG("entity/model/SaveBlock_star.png", D_0A000900_E4BBE0);
 Gfx Entity_SaveBlock_LoadTextureStar[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -17,7 +19,7 @@ Gfx Entity_SaveBlock_LoadTextureStar[] = {
 };
 
 #if !VERSION_PAL
-#include "entity/model/SaveBlock_face.png.inc.c"
+INCLUDE_IMG("entity/model/SaveBlock_face.png", D_0A001170_E4C450);
 Gfx Entity_SaveBlock_LoadTextureFace[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -31,9 +33,9 @@ Gfx Entity_SaveBlock_LoadTextureFace[] = {
 };
 #endif
 
-#include "entity/model/SaveBlock_letterS.png.inc.c"
+INCLUDE_IMG("entity/model/SaveBlock_letterS.png", D_0A0021E8_E4D4C8);
 #if VERSION_PAL
-#include "entity/model/SaveBlock_letterG.png.inc.c"
+INCLUDE_IMG("entity/model/SaveBlock_letterG.png", D_PAL_0A002170_EBA460);
 #endif
 
 Gfx Entity_SaveBlock_LoadTextureLetterS[] = {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 extern unsigned char D_0A001090_E6C240[];
 
@@ -173,4 +174,4 @@ Gfx Entity_BellbellPlant_RenderNode1[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/BellbellPlant.png.inc.c"
+INCLUDE_IMG("entity/model/BellbellPlant.png", D_0A001090_E6C240);

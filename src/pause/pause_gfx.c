@@ -1,5 +1,6 @@
 #include "pause_common.h"
 #include "message_ids.h"
+#include "include_asset.h"
 
 #include "pause/image_143BF0.png.h"
 #include "pause/image_143FF0.png.h"
@@ -20,37 +21,37 @@
 #include "pause/prompt_check_abilities.png.h"
 #include "pause/stats_bar.png.h"
 
-#include "pause/image_1439F0.png.inc.c"
-#include "pause/image_143BF0.png.inc.c"
-#include "pause/image_143FF0.png.inc.c"
-#include "pause/world_map.png.inc.c"
-#include "pause/world_map.pal.inc.c"
-#include "pause/spirits_bg.png.inc.c"
-#include "pause/spirits_bg.pal.inc.c"
-#include "pause/orbs.png.inc.c"
-#include "pause/map_location.png.inc.c"
-#include "pause/map_path_marker.png.inc.c"
-#include "pause/map_arrows.png.inc.c"
+INCLUDE_IMG("pause/image_1439F0.png", pause_image_1439F0_png);
+INCLUDE_IMG("pause/image_143BF0.png", pause_image_143BF0_png);
+INCLUDE_IMG("pause/image_143FF0.png", pause_image_143FF0_png);
+INCLUDE_IMG("pause/world_map.png", pause_world_map_png);
+INCLUDE_PAL("pause/world_map.pal", pause_world_map_pal);
+INCLUDE_IMG("pause/spirits_bg.png", pause_spirits_bg_png);
+INCLUDE_PAL("pause/spirits_bg.pal", pause_spirits_bg_pal);
+INCLUDE_IMG("pause/orbs.png", pause_orbs_png);
+INCLUDE_IMG("pause/map_location.png", pause_map_location_png);
+INCLUDE_IMG("pause/map_path_marker.png", pause_map_path_marker_png);
+INCLUDE_IMG("pause/map_arrows.png", pause_arrows_png);
 #if !VERSION_PAL
-#include "pause/banner_hp.png.inc.c"
-#include "pause/banner_hp.pal.inc.c"
-#include "pause/banner_fp.png.inc.c"
-#include "pause/banner_fp.pal.inc.c"
-#include "pause/banner_bp.png.inc.c"
-#include "pause/banner_bp.pal.inc.c"
-#include "pause/banner_boots.png.inc.c"
-#include "pause/banner_boots.pal.inc.c"
-#include "pause/banner_hammer.png.inc.c"
-#include "pause/banner_hammer.pal.inc.c"
-#include "pause/banner_star_energy.png.inc.c"
-#include "pause/banner_star_energy.pal.inc.c"
-#include "pause/available.png.inc.c"
-#include "pause/available.pal.inc.c"
-#include "pause/prompt_check_abilities.png.inc.c"
-#include "pause/prompt_check_abilities.pal.inc.c"
+INCLUDE_IMG("pause/banner_hp.png", pause_banner_hp_png);
+INCLUDE_PAL("pause/banner_hp.pal", pause_banner_hp_pal);
+INCLUDE_IMG("pause/banner_fp.png", pause_banner_fp_png);
+INCLUDE_PAL("pause/banner_fp.pal", pause_banner_fp_pal);
+INCLUDE_IMG("pause/banner_bp.png", pause_banner_bp_png);
+INCLUDE_PAL("pause/banner_bp.pal", pause_banner_bp_pal);
+INCLUDE_IMG("pause/banner_boots.png", pause_banner_boots_png);
+INCLUDE_PAL("pause/banner_boots.pal", pause_banner_boots_pal);
+INCLUDE_IMG("pause/banner_hammer.png", pause_banner_hammer_png);
+INCLUDE_PAL("pause/banner_hammer.pal", pause_banner_hammer_pal);
+INCLUDE_IMG("pause/banner_star_energy.png", pause_banner_star_energy_png);
+INCLUDE_PAL("pause/banner_star_energy.pal", pause_banner_star_energy_pal);
+INCLUDE_IMG("pause/available.png", pause_available_png);
+INCLUDE_PAL("pause/available.pal", pause_available_pal);
+INCLUDE_IMG("pause/prompt_check_abilities.png", pause_prompt_check_abilities_png);
+INCLUDE_PAL("pause/prompt_check_abilities.pal", pause_prompt_check_abilities_pal);
 #endif
-#include "pause/stats_bar.png.inc.c"
-#include "pause/stats_bar.pal.inc.c"
+INCLUDE_IMG("pause/stats_bar.png", pause_stats_bar_png);
+INCLUDE_PAL("pause/stats_bar.pal", pause_stats_bar_pal);
 
 #if VERSION_PAL
 extern u8 pause_prompt_check_abilities_png[];

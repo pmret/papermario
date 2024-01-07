@@ -1,4 +1,6 @@
 #include "end_00.h"
+#include "include_asset.h"
+#include "include_asset.h"
 
 #include "../common/Credits.inc.c"
 

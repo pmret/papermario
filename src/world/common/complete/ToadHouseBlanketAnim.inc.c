@@ -1,4 +1,5 @@
 #include "animation_script.h"
+#include "include_asset.h"
 
 extern Gfx N(toad_house_blanket_gfx)[];
 extern Vtx N(toad_house_blanket_vtx)[];
@@ -130,7 +131,7 @@ StaticAnimatorNode* N(D_80248D8C_971F4C)[] = {
 
 #include "world/toad_house/blanket.vtx.inc.c"
 #include "world/toad_house/blanket.gfx.inc.c"
-#include "world/toad_house/blanket.png.inc.c"
+INCLUDE_IMG("world/toad_house/blanket.png", N(toad_house_blanket_img));
 
 AnimScript N(ANS_ToadHouseBlanket) = {
         as_DisableMirroring

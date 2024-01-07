@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #define NAMESPACE battle_item_coconut
 
@@ -12,8 +13,8 @@
 static s32 _pad = 0;
 
 #include "battle/move/item/coconut.png.h"
-#include "battle/move/item/coconut.png.inc.c"
-#include "battle/move/item/coconut.pal.inc.c"
+INCLUDE_IMG("battle/move/item/coconut.png", battle_item_coconut_png);
+INCLUDE_PAL("battle/move/item/coconut.pal", battle_item_coconut_pal);
 
 /// 32x32 square.
 Vtx N(model)[] = {

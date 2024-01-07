@@ -1,9 +1,10 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/Hammer1Block.vtx.inc.c"
 
-#include "entity/model/Hammer1Block_face.png.inc.c"
-#include "entity/model/Hammer1Block_face.pal.inc.c"
+INCLUDE_IMG("entity/model/Hammer1Block_face.png", D_0A000280_E317B0);
+INCLUDE_PAL("entity/model/Hammer1Block_face.pal", D_0A000380_E318B0);
 Gfx Entity_Hammer1Block_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000380_E318B0),

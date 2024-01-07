@@ -1,9 +1,10 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/WoodenCrate.vtx.inc.c"
 
-#include "entity/model/WoodenCrate_img1.png.inc.c"
-#include "entity/model/WoodenCrate_img1.pal.inc.c"
+INCLUDE_IMG("entity/model/WoodenCrate_img1.png", D_0A001560_E52BA0);
+INCLUDE_PAL("entity/model/WoodenCrate_img1.pal", D_0A001D60_E533A0);
 Gfx Entity_WoodenCrate_LoadTexture1[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A001D60_E533A0),
@@ -17,8 +18,8 @@ Gfx Entity_WoodenCrate_LoadTexture1[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/WoodenCrate_img2.png.inc.c"
-#include "entity/model/WoodenCrate_img2.pal.inc.c"
+INCLUDE_IMG("entity/model/WoodenCrate_img2.png", D_0A001E28_E53468);
+INCLUDE_PAL("entity/model/WoodenCrate_img2.pal", D_0A002628_E53C68);
 Gfx Entity_WoodenCrate_LoadTexture2[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A002628_E53C68),

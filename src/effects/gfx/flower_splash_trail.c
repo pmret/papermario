@@ -1,9 +1,11 @@
-#include "common.h"
 
-#include "effects/gfx/D_09000000_32CEC0.png.inc.c"
-#include "effects/gfx/D_09000000_32CEC0.pal.inc.c"
-#include "effects/gfx/D_09000000_32CEC0.yellow.pal.inc.c"
-#include "effects/gfx/D_090000C0_32CF80.png.inc.c"
+#include "common.h"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_32CEC0.png", D_09000000_32CEC0);
+INCLUDE_PAL("effects/gfx/D_09000000_32CEC0.pal", D_09000080_32CF40);
+INCLUDE_PAL("effects/gfx/D_09000000_32CEC0.yellow.pal", D_090000A0_32CF60);
+INCLUDE_IMG("effects/gfx/D_090000C0_32CF80.png", D_090000C0_32CF80);
 
 #include "effects/gfx/D_090008C0_32D780.vtx.inc.c"
 #include "effects/gfx/D_09000A30_32D8F0.vtx.inc.c"

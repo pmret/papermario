@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "sprite/npc/Monstar.h"
 #include "battle/area/sam2/actor/img.png.h"
+#include "include_asset.h"
 
 #define NAMESPACE A(monstar)
 
@@ -143,8 +144,8 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-#include "battle/area/sam2/actor/img.png.inc.c"
-#include "battle/area/sam2/actor/img.pal.inc.c"
+INCLUDE_IMG("battle/area/sam2/actor/img.png", battle_area_sam2_actor_img_png);
+INCLUDE_PAL("battle/area/sam2/actor/img.pal", battle_area_sam2_actor_img_pal);
 
 ImgFXOverlayTexture N(MonstarDetailTexture) = {
     .raster = battle_area_sam2_actor_img_png,

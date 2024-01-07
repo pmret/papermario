@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 extern unsigned char D_0A006840_E91220[];
 
@@ -3340,4 +3341,4 @@ Gfx Entity_MunchlesiaSpitOut_Render[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/MunchlesiaSpitOut.png.inc.c"
+INCLUDE_IMG("entity/model/MunchlesiaSpitOut.png", D_0A006840_E91220);

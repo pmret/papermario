@@ -1,10 +1,12 @@
-#include "effects/gfx/D_09000000_40D290.png.inc.c"
-#include "effects/gfx/D_09000200_40D490.png.inc.c"
-#include "effects/gfx/D_09001200_40E490.png.inc.c"
-#include "effects/gfx/D_09002200_40F490.png.inc.c"
-#include "effects/gfx/D_09003200_410490.png.inc.c"
-#include "effects/gfx/D_09004200_411490.png.inc.c"
-#include "effects/gfx/D_09004A00_411C90.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_40D290.png", D_09000000_40D290);
+INCLUDE_IMG("effects/gfx/D_09000200_40D490.png", D_09000200_40D490);
+INCLUDE_IMG("effects/gfx/D_09001200_40E490.png", D_09001200_40E490);
+INCLUDE_IMG("effects/gfx/D_09002200_40F490.png", D_09002200_40F490);
+INCLUDE_IMG("effects/gfx/D_09003200_410490.png", D_09003200_410490);
+INCLUDE_IMG("effects/gfx/D_09004200_411490.png", D_09004200_411490);
+INCLUDE_IMG("effects/gfx/D_09004A00_411C90.png", D_09004A00_411C90);
 
 #include "effects/gfx/D_09004E00_412090.gfx.inc.c"
 

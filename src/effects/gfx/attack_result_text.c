@@ -1,9 +1,11 @@
-#include "effects/gfx/battle/lucky.png.inc.c"
-#include "effects/gfx/battle/miss.png.inc.c"
-#include "effects/gfx/battle/good.png.inc.c"
-#include "effects/gfx/battle/nice.png.inc.c"
-#include "effects/gfx/battle/super.png.inc.c"
-#include "effects/gfx/D_09001400_3917D0.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/battle/lucky.png", D_09000000_3903D0);
+INCLUDE_IMG("effects/gfx/battle/miss.png", D_09000400_3907D0);
+INCLUDE_IMG("effects/gfx/battle/good.png", D_09000800_390BD0);
+INCLUDE_IMG("effects/gfx/battle/nice.png", D_09000C00_390FD0);
+INCLUDE_IMG("effects/gfx/battle/super.png", D_09001000_3913D0);
+INCLUDE_IMG("effects/gfx/D_09001400_3917D0.png", D_09001400_3917D0);
 
 #include "effects/gfx/D_09001500_3918D0.gfx.inc.c"
 #include "effects/gfx/D_090015A8_391978.gfx.inc.c"

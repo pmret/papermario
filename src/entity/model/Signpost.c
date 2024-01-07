@@ -1,10 +1,11 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/Signpost_1.vtx.inc.c"
 #include "entity/model/Signpost_2.vtx.inc.c"
 
-#include "entity/model/Signpost.png.inc.c"
-#include "entity/model/Signpost.pal.inc.c"
+INCLUDE_IMG("entity/model/Signpost.png", D_0A000580_E59A00);
+INCLUDE_PAL("entity/model/Signpost.pal", D_0A000780_E59C00);
 Gfx Entity_Signpost_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

@@ -1,9 +1,11 @@
 #include "common.h"
 
-#include "effects/gfx/D_09000000_403BF0.png.inc.c"
-#include "effects/gfx/D_09000100_403CF0.png.inc.c"
-#include "effects/gfx/D_09000200_403DF0.png.inc.c"
-#include "effects/gfx/D_09000300_403EF0.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_403BF0.png", D_09000000_403BF0);
+INCLUDE_IMG("effects/gfx/D_09000100_403CF0.png", D_09000100_403CF0);
+INCLUDE_IMG("effects/gfx/D_09000200_403DF0.png", D_09000200_403DF0);
+INCLUDE_IMG("effects/gfx/D_09000300_403EF0.png", D_09000300_403EF0);
 
 #include "effects/gfx/D_09000400_403FF0.gfx.inc.c"
 #include "effects/gfx/D_090004A8_404098.vtx.inc.c"

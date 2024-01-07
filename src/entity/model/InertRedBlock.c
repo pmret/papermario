@@ -1,9 +1,10 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/InertRedBlock_1.vtx.inc.c"
 #include "entity/model/InertRedBlock_2.vtx.inc.c"
 
-#include "entity/model/InertRedBlock_face.png.inc.c"
+INCLUDE_IMG("entity/model/InertRedBlock_face.png", D_0A000180_E428C0);
 Gfx Entity_InertRedBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

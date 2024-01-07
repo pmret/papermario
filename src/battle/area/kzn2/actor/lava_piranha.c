@@ -9,6 +9,7 @@
 #include "ld_addrs.h"
 #include "boss_common.h"
 #include "mapfs/kzn_bt05_shape.h"
+#include "include_asset.h"
 
 #define NAMESPACE A(lava_piranha)
 
@@ -104,8 +105,8 @@ EntityModelScript N(ModelScript4) = {
     ems_End
 };
 
-#include "battle/area/kzn2/lava_piranha_vine.png.inc.c"
-#include "battle/area/kzn2/lava_piranha_vine.pal.inc.c"
+INCLUDE_IMG("battle/area/kzn2/lava_piranha_vine.png", D_8021C940_5A3020);
+INCLUDE_PAL("battle/area/kzn2/lava_piranha_vine.pal", D_8021CD40_5A3420);
 #include "battle/area/kzn2/lava_piranha_vine.gfx.inc.c"
 
 extern EvtScript N(EVS_Init);

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "entity.h"
+#include "include_asset.h"
 
 void entity_Shadow_init(Shadow* shadow) {
     shadow->scale.x = 0.1f;
@@ -16,12 +17,12 @@ s32 entity_can_collide_with_jumping_player(Entity* entity) {
     return FALSE;
 }
 
-#include "entity/shadow/square.png.inc.c"
-#include "entity/shadow/circle.png.inc.c"
+INCLUDE_IMG("entity/shadow/square.png", D_802E9170);
+INCLUDE_IMG("entity/shadow/circle.png", D_802E91F0);
 #include "entity/vtx/shadow1.vtx.inc.c"
 #include "entity/vtx/shadow2.vtx.inc.c"
-#include "entity/shadow/square_big.png.inc.c"
-#include "entity/shadow/circle_big.png.inc.c"
+INCLUDE_IMG("entity/shadow/square_big.png", D_802E92F0);
+INCLUDE_IMG("entity/shadow/circle_big.png", D_802E94F0);
 
 Gfx Entity_Shadow_GfxCommon[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

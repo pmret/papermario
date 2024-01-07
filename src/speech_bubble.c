@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 #define NAMESPACE speech_bubble
 
@@ -10,8 +11,8 @@ enum {
 };
 
 #include "speech_bubble.png.h"
-#include "speech_bubble.png.inc.c"
-#include "speech_bubble.pal.inc.c"
+INCLUDE_IMG("speech_bubble.png", speech_bubble_img);
+INCLUDE_PAL("speech_bubble.pal", speech_bubble_pal);
 #include "speech_bubble.gfx.inc.c"
 
 BSS SpeechBubbleData SpeechBubble;

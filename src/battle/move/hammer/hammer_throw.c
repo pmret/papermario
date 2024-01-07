@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "entity.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #define NAMESPACE battle_move_hammer_throw
 
@@ -9,17 +10,17 @@
 
 static s32 pad_images = 0;
 
-#include "battle/move/hammer/dusty_hammer.png.inc.c"
-#include "battle/move/hammer/dusty_hammer.pal.inc.c"
+INCLUDE_IMG("battle/move/hammer/dusty_hammer.png", battle_move_hammer_throw_dusty_hammer_png);
+INCLUDE_PAL("battle/move/hammer/dusty_hammer.pal", battle_move_hammer_throw_dusty_hammer_pal);
 
-#include "battle/move/hammer/basic_hammer.png.inc.c"
-#include "battle/move/hammer/basic_hammer.pal.inc.c"
+INCLUDE_IMG("battle/move/hammer/basic_hammer.png", battle_move_hammer_throw_basic_hammer_png);
+INCLUDE_PAL("battle/move/hammer/basic_hammer.pal", battle_move_hammer_throw_basic_hammer_pal);
 
-#include "battle/move/hammer/super_hammer.png.inc.c"
-#include "battle/move/hammer/super_hammer.pal.inc.c"
+INCLUDE_IMG("battle/move/hammer/super_hammer.png", battle_move_hammer_throw_super_hammer_png);
+INCLUDE_PAL("battle/move/hammer/super_hammer.pal", battle_move_hammer_throw_super_hammer_pal);
 
-#include "battle/move/hammer/ultra_hammer.png.inc.c"
-#include "battle/move/hammer/ultra_hammer.pal.inc.c"
+INCLUDE_IMG("battle/move/hammer/ultra_hammer.png", battle_move_hammer_throw_ultra_hammer_png);
+INCLUDE_PAL("battle/move/hammer/ultra_hammer.pal", battle_move_hammer_throw_ultra_hammer_pal);
 
 #include "battle/move/hammer/hammer_throw.vtx.inc.c"
 

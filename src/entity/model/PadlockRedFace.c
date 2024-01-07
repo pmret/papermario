@@ -1,11 +1,12 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/PadlockRedFace_1.vtx.inc.c"
 #include "entity/model/PadlockRedFace_2.vtx.inc.c"
 #include "entity/model/PadlockRedFace_3.vtx.inc.c"
 #include "entity/model/PadlockRedFace_4.vtx.inc.c"
 
-#include "entity/model/PadlockRedFace_face.png.inc.c"
+INCLUDE_IMG("entity/model/PadlockRedFace_face.png", D_0A000700_E5EE30);
 Gfx Entity_PadlockRedFace_LoadTextureFace[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -18,8 +19,8 @@ Gfx Entity_PadlockRedFace_LoadTextureFace[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/PadlockRedFace_keyhole.png.inc.c"
-#include "entity/model/PadlockRedFace_keyhole.pal.inc.c"
+INCLUDE_IMG("entity/model/PadlockRedFace_keyhole.png", D_0A000978_E5F0A8);
+INCLUDE_PAL("entity/model/PadlockRedFace_keyhole.pal", D_0A001178_E5F8A8);
 Gfx Entity_PadlockRedFace_LoadTextureKeyhole[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A001178_E5F8A8),
@@ -33,8 +34,8 @@ Gfx Entity_PadlockRedFace_LoadTextureKeyhole[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/PadlockRedFace_body.png.inc.c"
-#include "entity/model/PadlockRedFace_body.pal.inc.c"
+INCLUDE_IMG("entity/model/PadlockRedFace_body.png", D_0A001420_E5FB50);
+INCLUDE_PAL("entity/model/PadlockRedFace_body.pal", D_0A001820_E5FF50);
 Gfx Entity_PadlockRedFace_LoadTextureBody[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A001820_E5FF50),
