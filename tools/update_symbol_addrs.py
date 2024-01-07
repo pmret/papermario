@@ -5,6 +5,7 @@ import re
 import subprocess
 import sys
 import tqdm
+from mapfile_parser import MapFile, Symbol
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
@@ -38,34 +39,13 @@ def read_ignores():
 
 
 def scan_map():
-    ram_offset = None
-    cur_file = "<no file>"
-    prev_line = ""
-    with open(map_path) as f:
-        for line in f:
-            if "load address" in line:
-                ram = int(line[16 : 16 + 18], 0)
-                rom = int(line[59 : 59 + 18], 0)
-                ram_offset = ram - rom
-                continue
+    mapfile = MapFile()
+    mapfile.readMapFile(map_path)
 
-            prev_line = line
-
-            if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
-                continue
-
-            ram = int(line[16 : 16 + 18], 0)
-            rom = ram - ram_offset
-            sym = line.split()[-1]
-
-            if "0x" in sym:
-                ram_offset = None
-                continue
-            elif "/" in sym:
-                cur_file = sym
-                continue
-
-            map_symbols[sym] = (rom, cur_file, ram)
+    for segment in mapfile._segmentsList:
+        for file in segment._filesList:
+            for symbol in file._symbols:
+                map_symbols[symbol.name] = (symbol.vrom, file.getName(), symbol.vram)
 
 
 def read_symbol_addrs():
@@ -219,7 +199,7 @@ def write_new_symbol_addrs():
     with open(symbol_addrs_path, "w", newline="\n") as f:
         for symbol in sorted(symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
             line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
-            if symbol[2] and len(symbol[2]) > 0:
+            if symbol[2] and len(symbol[2]) > 0 and symbol[2] != "data":
                 line += f" type:{symbol[2]}"
             if symbol[3] >= 0:
                 line += f" rom:0x{symbol[3]:X}"
@@ -229,7 +209,7 @@ def write_new_symbol_addrs():
             f.write(line + "\n")
         for symbol in sorted(dead_symbols, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
             line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
-            if symbol[2] and len(symbol[2]) > 0:
+            if symbol[2] and len(symbol[2]) > 0 and symbol[2] != "data":
                 line += f" type:{symbol[2]}"
             if symbol[3] >= 0:
                 line += f" rom:0x{symbol[3]:X}"
