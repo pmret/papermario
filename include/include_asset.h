@@ -3,7 +3,7 @@
 #define ASTRINGIFY_(x) #x
 #define ASTRINGIFY(x) ASTRINGIFY_(x)
 
-#define INCLUDE_IMG(FILENAME, SYMBOLNAME) \
+#define _INCLUDE_IMG(FILENAME, SYMBOLNAME) \
     extern unsigned char SYMBOLNAME[]; \
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
@@ -13,6 +13,10 @@
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME "\"\n" \
     )
+
+// two macros are needed for N() usage
+#define INCLUDE_IMG(FILENAME, SYMBOLNAME) \
+    _INCLUDE_IMG(FILENAME, SYMBOLNAME)
 
 #define INCLUDE_PAL(FILENAME, SYMBOLNAME) \
     extern unsigned short SYMBOLNAME[]; \

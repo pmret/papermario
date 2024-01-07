@@ -221,18 +221,6 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "bin_inc_c",
-        description="bin_inc_c $out",
-        command=f'$python {BUILD_TOOLS}/bin_inc_c.py $in $out "$c_name"',
-    )
-
-    ninja.rule(
-        "pal_inc_c",
-        description="pal_inc_c $out",
-        command=f'$python {BUILD_TOOLS}/pal_inc_c.py $in $out "$c_name"',
-    )
-
-    ninja.rule(
         "yay0",
         description="yay0 $in",
         command=f"{BUILD_TOOLS}/yay0/Yay0compress $in $out",
@@ -504,6 +492,7 @@ class Configure:
 
         built_objects = set()
         generated_code = []
+        inc_img_bins = []
 
         def build(
             object_paths: Union[Path, List[Path]],
@@ -524,6 +513,8 @@ class Configure:
                     built_objects.add(str(object_path))
                 elif object_path.suffix.endswith(".h") or object_path.suffix.endswith(".c"):
                     generated_code.append(str(object_path))
+                elif object_path.name.endswith(".png.bin") or object_path.name.endswith(".pal.bin"):
+                    inc_img_bins.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
                 if not str(object_path) in skip_outputs:
@@ -543,6 +534,7 @@ class Configure:
                     implicit.append(YAY0_COMPRESS_TOOL)
                 elif task in ["cc", "cxx", "cc_modern"]:
                     order_only.append("generated_code_" + self.version)
+                    order_only.append("inc_img_bins_" + self.version)
 
                 inputs = self.resolve_src_paths(src_paths)
                 for dir in asset_deps:
@@ -724,7 +716,7 @@ class Configure:
                         },
                     )
 
-                # images embedded inside data aren't linked, but they do need to be built into .inc.c files
+                # images embedded inside data aren't linked, but they do need to be built into .bin files
                 if isinstance(seg, splat.segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
                         if isinstance(seg, splat.segtypes.n64.img.N64SegImg):
@@ -766,12 +758,6 @@ class Configure:
                                 "img_header",
                                 vars,
                             )
-                            build(
-                                inc_dir / (seg.name + ".png.inc.c"),
-                                [bin_path],
-                                "bin_inc_c",
-                                vars,
-                            )
                         elif isinstance(seg, splat.segtypes.n64.palette.N64SegPalette):
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
@@ -793,13 +779,6 @@ class Configure:
                                 in_segment=True,
                                 type="data",
                                 define=True,
-                            )
-                            vars = {"c_name": c_sym.name}
-                            build(
-                                inc_dir / (seg.name + ".pal.inc.c"),
-                                [bin_path],
-                                "pal_inc_c",
-                                vars,
                             )
             elif (
                 isinstance(seg, splat.segtypes.common.bin.CommonSegBin)
@@ -1221,6 +1200,7 @@ class Configure:
             )
 
         ninja.build("generated_code_" + self.version, "phony", generated_code)
+        ninja.build("inc_img_bins_" + self.version, "phony", inc_img_bins)
 
     def make_current(self, ninja: ninja_syntax.Writer):
         current = Path("ver/current")
