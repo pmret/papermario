@@ -1,20 +1,21 @@
 #include "mgm_01.h"
+#include "include_asset.h"
 
 #include "world/area_mgm/mgm_01/panel_1_coin.png.h"
-#include "world/area_mgm/mgm_01/panel_1_coin.png.inc.c"
-#include "world/area_mgm/mgm_01/panel_1_coin.pal.inc.c"
+INCLUDE_IMG("world/area_mgm/mgm_01/panel_1_coin.png.bin", mgm_01_panel_1_coin_img);
+INCLUDE_PAL("world/area_mgm/mgm_01/panel_1_coin.pal.bin", mgm_01_panel_1_coin_pal);
 
 #include "world/area_mgm/mgm_01/panel_5_coins.png.h"
-#include "world/area_mgm/mgm_01/panel_5_coins.png.inc.c"
-#include "world/area_mgm/mgm_01/panel_5_coins.pal.inc.c"
+INCLUDE_IMG("world/area_mgm/mgm_01/panel_5_coins.png.bin", mgm_01_panel_5_coins_img);
+INCLUDE_PAL("world/area_mgm/mgm_01/panel_5_coins.pal.bin", mgm_01_panel_5_coins_pal);
 
 #include "world/area_mgm/mgm_01/panel_times_5.png.h"
-#include "world/area_mgm/mgm_01/panel_times_5.png.inc.c"
-#include "world/area_mgm/mgm_01/panel_times_5.pal.inc.c"
+INCLUDE_IMG("world/area_mgm/mgm_01/panel_times_5.png.bin", mgm_01_panel_times_5_img);
+INCLUDE_PAL("world/area_mgm/mgm_01/panel_times_5.pal.bin", mgm_01_panel_times_5_pal);
 
 #include "world/area_mgm/mgm_01/panel_bowser.png.h"
-#include "world/area_mgm/mgm_01/panel_bowser.png.inc.c"
-#include "world/area_mgm/mgm_01/panel_bowser.pal.inc.c"
+INCLUDE_IMG("world/area_mgm/mgm_01/panel_bowser.png.bin", mgm_01_panel_bowser_img);
+INCLUDE_PAL("world/area_mgm/mgm_01/panel_bowser.pal.bin", mgm_01_panel_bowser_pal);
 
 MessageImageData N(MsgImgs_Panels)[] = {
     {

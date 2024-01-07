@@ -1,5 +1,7 @@
-#include "effects/gfx/D_09000000_3D9100.png.inc.c"
-#include "effects/gfx/D_09001000_3DA100.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_3D9100.png.bin", D_09000000_3D9100);
+INCLUDE_IMG("effects/gfx/D_09001000_3DA100.png.bin", D_09001000_3DA100);
 
 #include "effects/gfx/D_09002000_3DB100.gfx.inc.c"
 

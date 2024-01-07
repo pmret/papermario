@@ -1,23 +1,28 @@
 #ifndef _H_INCLUDE_ASSET
 
+#define ASTRINGIFY_(x) #x
+#define ASTRINGIFY(x) ASTRINGIFY_(x)
+
 #define INCLUDE_IMG(FILENAME, SYMBOLNAME) \
-    extern u8 SYMBOLNAME[]; \
+    extern unsigned char SYMBOLNAME[]; \
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         ".data\n" \
+        ".align 2\n" \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
-        ".incbin \"ver/"STRINGIFY(VERSION)"/build/" FILENAME "\"\n" \
+        ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME "\"\n" \
     )
 
 #define INCLUDE_PAL(FILENAME, SYMBOLNAME) \
-    extern u16 SYMBOLNAME[]; \
+    extern unsigned short SYMBOLNAME[]; \
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
         ".data\n" \
+        ".align 2\n" \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
-        ".incbin \"ver/"STRINGIFY(VERSION)"/build/" FILENAME "\"\n" \
+        ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME "\"\n" \
     )
 
 #endif // _H_INCLUDE_ASSET

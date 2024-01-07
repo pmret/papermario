@@ -1,156 +1,157 @@
 #include "common.h"
 #include "hud_element.h"
 #include "sparkle_script.h"
+#include "include_asset.h"
 
-#include "ui/input/a_button_unpressed.png.inc.c"
-#include "ui/input/a_button_unpressed.pal.inc.c"
+INCLUDE_IMG("ui/input/a_button_unpressed.png.bin", ui_input_a_button_unpressed_png);
+INCLUDE_PAL("ui/input/a_button_unpressed.pal.bin", ui_input_a_button_unpressed_pal);
 
-#include "ui/input/a_button_pressed.png.inc.c"
-#include "ui/input/a_button_pressed.pal.inc.c"
+INCLUDE_IMG("ui/input/a_button_pressed.png.bin", ui_input_a_button_pressed_png);
+INCLUDE_PAL("ui/input/a_button_pressed.pal.bin", ui_input_a_button_pressed_pal);
 
-#include "ui/input/analog_stick.png.inc.c"
-#include "ui/input/analog_stick.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick.png.bin", ui_input_analog_stick_png);
+INCLUDE_PAL("ui/input/analog_stick.pal.bin", ui_input_analog_stick_pal);
 
-#include "ui/input/analog_stick_left.png.inc.c"
-#include "ui/input/analog_stick_left.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick_left.png.bin", ui_input_analog_stick_left_png);
+INCLUDE_PAL("ui/input/analog_stick_left.pal.bin", ui_input_analog_stick_left_pal);
 
-#include "ui/input/analog_stick2.png.inc.c"
-#include "ui/input/analog_stick2.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick2.png.bin", ui_input_analog_stick2_png);
+INCLUDE_PAL("ui/input/analog_stick2.pal.bin", ui_input_analog_stick2_pal);
 
-#include "ui/input/analog_stick_right.png.inc.c"
-#include "ui/input/analog_stick_right.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick_right.png.bin", ui_input_analog_stick_right_png);
+INCLUDE_PAL("ui/input/analog_stick_right.pal.bin", ui_input_analog_stick_right_pal);
 
-#include "ui/input/analog_stick3.png.inc.c"
-#include "ui/input/analog_stick3.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick3.png.bin", ui_input_analog_stick3_png);
+INCLUDE_PAL("ui/input/analog_stick3.pal.bin", ui_input_analog_stick3_pal);
 
-#include "ui/input/analog_stick_down.png.inc.c"
-#include "ui/input/analog_stick_down.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick_down.png.bin", ui_input_analog_stick_down_png);
+INCLUDE_PAL("ui/input/analog_stick_down.pal.bin", ui_input_analog_stick_down_pal);
 
-#include "ui/input/analog_stick_up.png.inc.c"
-#include "ui/input/analog_stick_up.pal.inc.c"
+INCLUDE_IMG("ui/input/analog_stick_up.png.bin", ui_input_analog_stick_up_png);
+INCLUDE_PAL("ui/input/analog_stick_up.pal.bin", ui_input_analog_stick_up_pal);
 
-#include "ui/unk_bar.png.inc.c"
-#include "ui/unk_bar.pal.inc.c"
+INCLUDE_IMG("ui/unk_bar.png.bin", ui_unk_bar_png);
+INCLUDE_PAL("ui/unk_bar.pal.bin", ui_unk_bar_pal);
 
-#include "ui/ok.png.inc.c"
-#include "ui/ok.pal.inc.c"
+INCLUDE_IMG("ui/ok.png.bin", ui_ok_png);
+INCLUDE_PAL("ui/ok.pal.bin", ui_ok_pal);
 
-#include "ui/input/start_button.png.inc.c"
-#include "ui/input/start_button.pal.inc.c"
+INCLUDE_IMG("ui/input/start_button.png.bin", ui_input_start_button_png);
+INCLUDE_PAL("ui/input/start_button.pal.bin", ui_input_start_button_pal);
 
-#include "ui/input/start_button2.png.inc.c"
-#include "ui/input/start_button2.pal.inc.c"
+INCLUDE_IMG("ui/input/start_button2.png.bin", ui_input_start_button2_png);
+INCLUDE_PAL("ui/input/start_button2.pal.bin", ui_input_start_button2_pal);
 
-#include "ui/input/start_text.png.inc.c"
-#include "ui/input/start_text.pal.inc.c"
+INCLUDE_IMG("ui/input/start_text.png.bin", ui_input_start_text_png);
+INCLUDE_PAL("ui/input/start_text.pal.bin", ui_input_start_text_pal);
 
-#include "ui/hammer.png.inc.c"
-#include "ui/hammer.pal.inc.c"
+INCLUDE_IMG("ui/hammer.png.bin", ui_hammer_png);
+INCLUDE_PAL("ui/hammer.pal.bin", ui_hammer_pal);
 #define ui_hammer_disabled_png ui_hammer_png
-#include "ui/hammer.disabled.pal.inc.c"
+INCLUDE_PAL("ui/hammer.disabled.pal.bin", ui_hammer_disabled_pal);
 
-#include "ui/super_hammer.png.inc.c"
-#include "ui/super_hammer.pal.inc.c"
+INCLUDE_IMG("ui/super_hammer.png.bin", ui_super_hammer_png);
+INCLUDE_PAL("ui/super_hammer.pal.bin", ui_super_hammer_pal);
 #define ui_super_hammer_disabled_png ui_super_hammer_png
-#include "ui/super_hammer.disabled.pal.inc.c"
+INCLUDE_PAL("ui/super_hammer.disabled.pal.bin", ui_super_hammer_disabled_pal);
 
-#include "ui/ultra_hammer.png.inc.c"
-#include "ui/ultra_hammer.pal.inc.c"
+INCLUDE_IMG("ui/ultra_hammer.png.bin", ui_ultra_hammer_png);
+INCLUDE_PAL("ui/ultra_hammer.pal.bin", ui_ultra_hammer_pal);
 #define ui_ultra_hammer_disabled_png ui_ultra_hammer_png
-#include "ui/ultra_hammer.disabled.pal.inc.c"
+INCLUDE_PAL("ui/ultra_hammer.disabled.pal.bin", ui_ultra_hammer_disabled_pal);
 
-#include "ui/boots.png.inc.c"
-#include "ui/boots.pal.inc.c"
+INCLUDE_IMG("ui/boots.png.bin", ui_boots_png);
+INCLUDE_PAL("ui/boots.pal.bin", ui_boots_pal);
 #define ui_boots_disabled_png ui_boots_png
-#include "ui/boots.disabled.pal.inc.c"
+INCLUDE_PAL("ui/boots.disabled.pal.bin", ui_boots_disabled_pal);
 
-#include "ui/super_boots.png.inc.c"
-#include "ui/super_boots.pal.inc.c"
+INCLUDE_IMG("ui/super_boots.png.bin", ui_super_boots_png);
+INCLUDE_PAL("ui/super_boots.pal.bin", ui_super_boots_pal);
 #define ui_super_boots_disabled_png ui_super_boots_png
-#include "ui/super_boots.disabled.pal.inc.c"
+INCLUDE_PAL("ui/super_boots.disabled.pal.bin", ui_super_boots_disabled_pal);
 
-#include "ui/ultra_boots.png.inc.c"
-#include "ui/ultra_boots.pal.inc.c"
+INCLUDE_IMG("ui/ultra_boots.png.bin", ui_ultra_boots_png);
+INCLUDE_PAL("ui/ultra_boots.pal.bin", ui_ultra_boots_pal);
 #define ui_ultra_boots_disabled_png ui_ultra_boots_png
-#include "ui/ultra_boots.disabled.pal.inc.c"
+INCLUDE_PAL("ui/ultra_boots.disabled.pal.bin", ui_ultra_boots_disabled_pal);
 
-#include "ui/item.png.inc.c"
-#include "ui/item.pal.inc.c"
+INCLUDE_IMG("ui/item.png.bin", ui_item_png);
+INCLUDE_PAL("ui/item.pal.bin", ui_item_pal);
 #define ui_item_disabled_png ui_item_png
-#include "ui/item.disabled.pal.inc.c"
+INCLUDE_PAL("ui/item.disabled.pal.bin", ui_item_disabled_pal);
 
-#include "ui/star_spirit.png.inc.c"
-#include "ui/star_spirit.pal.inc.c"
+INCLUDE_IMG("ui/star_spirit.png.bin", ui_star_spirit_png);
+INCLUDE_PAL("ui/star_spirit.pal.bin", ui_star_spirit_pal);
 #define ui_star_spirit_disabled_png ui_star_spirit_png
-#include "ui/star_spirit.disabled.pal.inc.c"
+INCLUDE_PAL("ui/star_spirit.disabled.pal.bin", ui_star_spirit_disabled_pal);
 
-#include "ui/arrow_left.png.inc.c"
-#include "ui/arrow_left.pal.inc.c"
+INCLUDE_IMG("ui/arrow_left.png.bin", ui_arrow_left_png);
+INCLUDE_PAL("ui/arrow_left.pal.bin", ui_arrow_left_pal);
 
-#include "ui/arrow_right.png.inc.c"
-#include "ui/arrow_right.pal.inc.c"
+INCLUDE_IMG("ui/arrow_right.png.bin", ui_arrow_right_png);
+INCLUDE_PAL("ui/arrow_right.pal.bin", ui_arrow_right_pal);
 
-#include "ui/point_right.png.inc.c"
-#include "ui/point_right.pal.inc.c"
+INCLUDE_IMG("ui/point_right.png.bin", ui_point_right_png);
+INCLUDE_PAL("ui/point_right.pal.bin", ui_point_right_pal);
 
-#include "ui/pip.png.inc.c"
-#include "ui/pip.pal.inc.c"
+INCLUDE_IMG("ui/pip.png.bin", ui_pip_png);
+INCLUDE_PAL("ui/pip.pal.bin", ui_pip_pal);
 
-#include "ui/pip2.png.inc.c"
-#include "ui/pip2.pal.inc.c"
+INCLUDE_IMG("ui/pip2.png.bin", ui_pip2_png);
+INCLUDE_PAL("ui/pip2.pal.bin", ui_pip2_pal);
 
-#include "ui/coin_sparkle_0.png.inc.c"
-#include "ui/coin_sparkle_0.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_0.png.bin", ui_coin_sparkle_0_png);
+INCLUDE_PAL("ui/coin_sparkle_0.pal.bin", ui_coin_sparkle_0_pal);
 
-#include "ui/coin_sparkle_1.png.inc.c"
-#include "ui/coin_sparkle_1.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_1.png.bin", ui_coin_sparkle_1_png);
+INCLUDE_PAL("ui/coin_sparkle_1.pal.bin", ui_coin_sparkle_1_pal);
 
-#include "ui/coin_sparkle_2.png.inc.c"
-#include "ui/coin_sparkle_2.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_2.png.bin", ui_coin_sparkle_2_png);
+INCLUDE_PAL("ui/coin_sparkle_2.pal.bin", ui_coin_sparkle_2_pal);
 
-#include "ui/coin_sparkle_3.png.inc.c"
-#include "ui/coin_sparkle_3.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_3.png.bin", ui_coin_sparkle_3_png);
+INCLUDE_PAL("ui/coin_sparkle_3.pal.bin", ui_coin_sparkle_3_pal);
 
-#include "ui/coin_sparkle_4.png.inc.c"
-#include "ui/coin_sparkle_4.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_4.png.bin", ui_coin_sparkle_4_png);
+INCLUDE_PAL("ui/coin_sparkle_4.pal.bin", ui_coin_sparkle_4_pal);
 
-#include "ui/coin_sparkle_5.png.inc.c"
-#include "ui/coin_sparkle_5.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_5.png.bin", ui_coin_sparkle_5_png);
+INCLUDE_PAL("ui/coin_sparkle_5.pal.bin", ui_coin_sparkle_5_pal);
 
-#include "ui/coin_sparkle_none.png.inc.c"
-#include "ui/coin_sparkle_none.pal.inc.c"
+INCLUDE_IMG("ui/coin_sparkle_none.png.bin", ui_coin_sparkle_none_png);
+INCLUDE_PAL("ui/coin_sparkle_none.pal.bin", ui_coin_sparkle_none_pal);
 
-#include "ui/status/star_point_shine.png.inc.c"
+INCLUDE_IMG("ui/status/star_point_shine.png.bin", ui_status_star_point_shine_png);
 
-#include "ui/status/star_piece_0.png.inc.c"
-#include "ui/status/star_piece_0.pal.inc.c"
+INCLUDE_IMG("ui/status/star_piece_0.png.bin", ui_status_star_piece_0_png);
+INCLUDE_PAL("ui/status/star_piece_0.pal.bin", ui_status_star_piece_0_pal);
 
-#include "ui/status/star_piece_1.png.inc.c"
-#include "ui/status/star_piece_1.pal.inc.c"
+INCLUDE_IMG("ui/status/star_piece_1.png.bin", ui_status_star_piece_1_png);
+INCLUDE_PAL("ui/status/star_piece_1.pal.bin", ui_status_star_piece_1_pal);
 
-#include "ui/status/star_piece_2.png.inc.c"
-#include "ui/status/star_piece_2.pal.inc.c"
+INCLUDE_IMG("ui/status/star_piece_2.png.bin", ui_status_star_piece_2_png);
+INCLUDE_PAL("ui/status/star_piece_2.pal.bin", ui_status_star_piece_2_pal);
 
-#include "ui/menu_times.png.inc.c"
-#include "ui/menu_times.pal.inc.c"
+INCLUDE_IMG("ui/menu_times.png.bin", ui_menu_times_png);
+INCLUDE_PAL("ui/menu_times.pal.bin", ui_menu_times_pal);
 
-#include "ui/fp_cost.png.inc.c"
-#include "ui/fp_cost.pal.inc.c"
+INCLUDE_IMG("ui/fp_cost.png.bin", ui_fp_cost_png);
+INCLUDE_PAL("ui/fp_cost.pal.bin", ui_fp_cost_pal);
 #define ui_fp_cost_reduced_png ui_fp_cost_png
-#include "ui/fp_cost.reduced.pal.inc.c"
+INCLUDE_PAL("ui/fp_cost.reduced.pal.bin", ui_fp_cost_reduced_pal);
 #define ui_fp_cost_reduced_twice_png ui_fp_cost_png
-#include "ui/fp_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("ui/fp_cost.reduced_twice.pal.bin", ui_fp_cost_reduced_twice_pal);
 #define ui_fp_cost_notenough_png ui_fp_cost_png
-#include "ui/fp_cost.notenough.pal.inc.c"
+INCLUDE_PAL("ui/fp_cost.notenough.pal.bin", ui_fp_cost_notenough_pal);
 
-#include "ui/pow_cost.png.inc.c"
-#include "ui/pow_cost.pal.inc.c"
+INCLUDE_IMG("ui/pow_cost.png.bin", ui_pow_cost_png);
+INCLUDE_PAL("ui/pow_cost.pal.bin", ui_pow_cost_pal);
 #define ui_pow_cost_reduced_png ui_pow_cost_png
-#include "ui/pow_cost.reduced.pal.inc.c"
+INCLUDE_PAL("ui/pow_cost.reduced.pal.bin", ui_pow_cost_reduced_pal);
 #define ui_pow_cost_reduced_twice_png ui_pow_cost_png
-#include "ui/pow_cost.reduced_twice.pal.inc.c"
+INCLUDE_PAL("ui/pow_cost.reduced_twice.pal.bin", ui_pow_cost_reduced_twice_pal);
 #define ui_pow_cost_notenough_png ui_pow_cost_png
-#include "ui/pow_cost.notenough.pal.inc.c"
+INCLUDE_PAL("ui/pow_cost.notenough.pal.bin", ui_pow_cost_notenough_pal);
 
 #if VERSION_PAL
 #include "de/ui/fp_cost.png.inc.c"
@@ -208,182 +209,182 @@
 #include "es/ui/pow_cost.notenough.pal.inc.c"
 #endif
 
-#include "ui/green_arrow_down.png.inc.c"
-#include "ui/green_arrow_down.pal.inc.c"
+INCLUDE_IMG("ui/green_arrow_down.png.bin", ui_green_arrow_down_png);
+INCLUDE_PAL("ui/green_arrow_down.pal.bin", ui_green_arrow_down_pal);
 
-#include "ui/green_arrow_up.png.inc.c"
-#include "ui/green_arrow_up.pal.inc.c"
+INCLUDE_IMG("ui/green_arrow_up.png.bin", ui_green_arrow_up_png);
+INCLUDE_PAL("ui/green_arrow_up.pal.bin", ui_green_arrow_up_pal);
 
-#include "ui/kaime.png.inc.c"
-#include "ui/kaime.pal.inc.c"
+INCLUDE_IMG("ui/kaime.png.bin", ui_kaime_png);
+INCLUDE_PAL("ui/kaime.pal.bin", ui_kaime_pal);
 
-#include "ui/unused_1.png.inc.c"
-#include "ui/unused_1.pal.inc.c"
+INCLUDE_IMG("ui/unused_1.png.bin", ui_unused_1_png);
+INCLUDE_PAL("ui/unused_1.pal.bin", ui_unused_1_pal);
 
-#include "ui/unused_2.png.inc.c"
-#include "ui/unused_2.pal.inc.c"
+INCLUDE_IMG("ui/unused_2.png.bin", ui_unused_2_png);
+INCLUDE_PAL("ui/unused_2.pal.bin", ui_unused_2_pal);
 
-#include "ui/unused_3.png.inc.c"
-#include "ui/unused_3.pal.inc.c"
+INCLUDE_IMG("ui/unused_3.png.bin", ui_unused_3_png);
+INCLUDE_PAL("ui/unused_3.pal.bin", ui_unused_3_pal);
 
-#include "ui/red_bar1.png.inc.c"
-#include "ui/red_bar1.pal.inc.c"
+INCLUDE_IMG("ui/red_bar1.png.bin", ui_red_bar1_png);
+INCLUDE_PAL("ui/red_bar1.pal.bin", ui_red_bar1_pal);
 
-#include "ui/empty_bar.png.inc.c"
-#include "ui/empty_bar.pal.inc.c"
+INCLUDE_IMG("ui/empty_bar.png.bin", ui_empty_bar_png);
+INCLUDE_PAL("ui/empty_bar.pal.bin", ui_empty_bar_pal);
 
-#include "ui/red_bar2.png.inc.c"
-#include "ui/red_bar2.pal.inc.c"
+INCLUDE_IMG("ui/red_bar2.png.bin", ui_red_bar2_png);
+INCLUDE_PAL("ui/red_bar2.pal.bin", ui_red_bar2_pal);
 
-#include "ui/eldstar.png.inc.c"
-#include "ui/eldstar.pal.inc.c"
+INCLUDE_IMG("ui/eldstar.png.bin", ui_eldstar_png);
+INCLUDE_PAL("ui/eldstar.pal.bin", ui_eldstar_pal);
 #define ui_eldstar_disabled_png ui_eldstar_png
-#include "ui/eldstar.disabled.pal.inc.c"
+INCLUDE_PAL("ui/eldstar.disabled.pal.bin", ui_eldstar_disabled_pal);
 
-#include "ui/mamar.png.inc.c"
-#include "ui/mamar.pal.inc.c"
+INCLUDE_IMG("ui/mamar.png.bin", ui_mamar_png);
+INCLUDE_PAL("ui/mamar.pal.bin", ui_mamar_pal);
 #define ui_mamar_disabled_png ui_mamar_png
-#include "ui/mamar.disabled.pal.inc.c"
+INCLUDE_PAL("ui/mamar.disabled.pal.bin", ui_mamar_disabled_pal);
 
-#include "ui/skolar.png.inc.c"
-#include "ui/skolar.pal.inc.c"
+INCLUDE_IMG("ui/skolar.png.bin", ui_skolar_png);
+INCLUDE_PAL("ui/skolar.pal.bin", ui_skolar_pal);
 #define ui_skolar_disabled_png ui_skolar_png
-#include "ui/skolar.disabled.pal.inc.c"
+INCLUDE_PAL("ui/skolar.disabled.pal.bin", ui_skolar_disabled_pal);
 
-#include "ui/muskular.png.inc.c"
-#include "ui/muskular.pal.inc.c"
+INCLUDE_IMG("ui/muskular.png.bin", ui_muskular_png);
+INCLUDE_PAL("ui/muskular.pal.bin", ui_muskular_pal);
 #define ui_muskular_disabled_png ui_muskular_png
-#include "ui/muskular.disabled.pal.inc.c"
+INCLUDE_PAL("ui/muskular.disabled.pal.bin", ui_muskular_disabled_pal);
 
-#include "ui/misstar.png.inc.c"
-#include "ui/misstar.pal.inc.c"
+INCLUDE_IMG("ui/misstar.png.bin", ui_misstar_png);
+INCLUDE_PAL("ui/misstar.pal.bin", ui_misstar_pal);
 #define ui_misstar_disabled_png ui_misstar_png
-#include "ui/misstar.disabled.pal.inc.c"
+INCLUDE_PAL("ui/misstar.disabled.pal.bin", ui_misstar_disabled_pal);
 
-#include "ui/klevar.png.inc.c"
-#include "ui/klevar.pal.inc.c"
+INCLUDE_IMG("ui/klevar.png.bin", ui_klevar_png);
+INCLUDE_PAL("ui/klevar.pal.bin", ui_klevar_pal);
 #define ui_klevar_disabled_png ui_klevar_png
-#include "ui/klevar.disabled.pal.inc.c"
+INCLUDE_PAL("ui/klevar.disabled.pal.bin", ui_klevar_disabled_pal);
 
-#include "ui/kalmar.png.inc.c"
-#include "ui/kalmar.pal.inc.c"
+INCLUDE_IMG("ui/kalmar.png.bin", ui_kalmar_png);
+INCLUDE_PAL("ui/kalmar.pal.bin", ui_kalmar_pal);
 #define ui_kalmar_disabled_png ui_kalmar_png
-#include "ui/kalmar.disabled.pal.inc.c"
+INCLUDE_PAL("ui/kalmar.disabled.pal.bin", ui_kalmar_disabled_pal);
 
-#include "ui/star_beam.png.inc.c"
-#include "ui/star_beam.pal.inc.c"
+INCLUDE_IMG("ui/star_beam.png.bin", ui_star_beam_png);
+INCLUDE_PAL("ui/star_beam.pal.bin", ui_star_beam_pal);
 #define ui_star_beam_disabled_png ui_star_beam_png
-#include "ui/star_beam.disabled.pal.inc.c"
+INCLUDE_PAL("ui/star_beam.disabled.pal.bin", ui_star_beam_disabled_pal);
 
-#include "ui/peach_beam.png.inc.c"
-#include "ui/peach_beam.pal.inc.c"
+INCLUDE_IMG("ui/peach_beam.png.bin", ui_peach_beam_png);
+INCLUDE_PAL("ui/peach_beam.pal.bin", ui_peach_beam_pal);
 #define ui_peach_beam_disabled_png ui_peach_beam_png
-#include "ui/peach_beam.disabled.pal.inc.c"
+INCLUDE_PAL("ui/peach_beam.disabled.pal.bin", ui_peach_beam_disabled_pal);
 
-#include "ui/mario_head.png.inc.c"
-#include "ui/mario_head.pal.inc.c"
+INCLUDE_IMG("ui/mario_head.png.bin", ui_mario_head_png);
+INCLUDE_PAL("ui/mario_head.pal.bin", ui_mario_head_pal);
 
-#include "ui/partner0.png.inc.c"
-#include "ui/partner0.pal.inc.c"
+INCLUDE_IMG("ui/partner0.png.bin", ui_partner0_png);
+INCLUDE_PAL("ui/partner0.pal.bin", ui_partner0_pal);
 #define ui_partner0_disabled_png ui_partner0_png
-#include "ui/partner0.disabled.pal.inc.c"
+INCLUDE_PAL("ui/partner0.disabled.pal.bin", ui_partner0_disabled_pal);
 
-#include "ui/goombario.png.inc.c"
-#include "ui/goombario.pal.inc.c"
+INCLUDE_IMG("ui/goombario.png.bin", ui_goombario_png);
+INCLUDE_PAL("ui/goombario.pal.bin", ui_goombario_pal);
 #define ui_goombario_disabled_png ui_goombario_png
-#include "ui/goombario.disabled.pal.inc.c"
+INCLUDE_PAL("ui/goombario.disabled.pal.bin", ui_goombario_disabled_pal);
 
-#include "ui/kooper.png.inc.c"
-#include "ui/kooper.pal.inc.c"
+INCLUDE_IMG("ui/kooper.png.bin", ui_kooper_png);
+INCLUDE_PAL("ui/kooper.pal.bin", ui_kooper_pal);
 #define ui_kooper_disabled_png ui_kooper_png
-#include "ui/kooper.disabled.pal.inc.c"
+INCLUDE_PAL("ui/kooper.disabled.pal.bin", ui_kooper_disabled_pal);
 
-#include "ui/bombette.png.inc.c"
-#include "ui/bombette.pal.inc.c"
+INCLUDE_IMG("ui/bombette.png.bin", ui_bombette_png);
+INCLUDE_PAL("ui/bombette.pal.bin", ui_bombette_pal);
 #define ui_bombette_disabled_png ui_bombette_png
-#include "ui/bombette.disabled.pal.inc.c"
+INCLUDE_PAL("ui/bombette.disabled.pal.bin", ui_bombette_disabled_pal);
 
-#include "ui/parakarry.png.inc.c"
-#include "ui/parakarry.pal.inc.c"
+INCLUDE_IMG("ui/parakarry.png.bin", ui_parakarry_png);
+INCLUDE_PAL("ui/parakarry.pal.bin", ui_parakarry_pal);
 #define ui_parakarry_disabled_png ui_parakarry_png
-#include "ui/parakarry.disabled.pal.inc.c"
+INCLUDE_PAL("ui/parakarry.disabled.pal.bin", ui_parakarry_disabled_pal);
 
-#include "ui/bow.png.inc.c"
-#include "ui/bow.pal.inc.c"
+INCLUDE_IMG("ui/bow.png.bin", ui_bow_png);
+INCLUDE_PAL("ui/bow.pal.bin", ui_bow_pal);
 #define ui_bow_disabled_png ui_bow_png
-#include "ui/bow.disabled.pal.inc.c"
+INCLUDE_PAL("ui/bow.disabled.pal.bin", ui_bow_disabled_pal);
 
-#include "ui/watt.png.inc.c"
-#include "ui/watt.pal.inc.c"
+INCLUDE_IMG("ui/watt.png.bin", ui_watt_png);
+INCLUDE_PAL("ui/watt.pal.bin", ui_watt_pal);
 #define ui_watt_disabled_png ui_watt_png
-#include "ui/watt.disabled.pal.inc.c"
+INCLUDE_PAL("ui/watt.disabled.pal.bin", ui_watt_disabled_pal);
 
-#include "ui/sushie.png.inc.c"
-#include "ui/sushie.pal.inc.c"
+INCLUDE_IMG("ui/sushie.png.bin", ui_sushie_png);
+INCLUDE_PAL("ui/sushie.pal.bin", ui_sushie_pal);
 #define ui_sushie_disabled_png ui_sushie_png
-#include "ui/sushie.disabled.pal.inc.c"
+INCLUDE_PAL("ui/sushie.disabled.pal.bin", ui_sushie_disabled_pal);
 
-#include "ui/lakilester.png.inc.c"
-#include "ui/lakilester.pal.inc.c"
+INCLUDE_IMG("ui/lakilester.png.bin", ui_lakilester_png);
+INCLUDE_PAL("ui/lakilester.pal.bin", ui_lakilester_pal);
 #define ui_lakilester_disabled_png ui_lakilester_png
-#include "ui/lakilester.disabled.pal.inc.c"
+INCLUDE_PAL("ui/lakilester.disabled.pal.bin", ui_lakilester_disabled_pal);
 
-#include "ui/partner9.png.inc.c"
-#include "ui/partner9.pal.inc.c"
+INCLUDE_IMG("ui/partner9.png.bin", ui_partner9_png);
+INCLUDE_PAL("ui/partner9.pal.bin", ui_partner9_pal);
 #define ui_partner9_disabled_png ui_partner9_png
-#include "ui/partner9.disabled.pal.inc.c"
+INCLUDE_PAL("ui/partner9.disabled.pal.bin", ui_partner9_disabled_pal);
 
-#include "ui/partner10.png.inc.c"
-#include "ui/partner10.pal.inc.c"
+INCLUDE_IMG("ui/partner10.png.bin", ui_partner10_png);
+INCLUDE_PAL("ui/partner10.pal.bin", ui_partner10_pal);
 #define ui_partner10_disabled_png ui_partner10_png
-#include "ui/partner10.disabled.pal.inc.c"
+INCLUDE_PAL("ui/partner10.disabled.pal.bin", ui_partner10_disabled_pal);
 
-#include "ui/partner11.png.inc.c"
-#include "ui/partner11.pal.inc.c"
+INCLUDE_IMG("ui/partner11.png.bin", ui_partner11_png);
+INCLUDE_PAL("ui/partner11.pal.bin", ui_partner11_pal);
 #define ui_partner11_disabled_png ui_partner11_png
-#include "ui/partner11.disabled.pal.inc.c"
+INCLUDE_PAL("ui/partner11.disabled.pal.bin", ui_partner11_disabled_pal);
 
-#include "ui/status/text_times.png.inc.c"
-#include "ui/status/text_times.pal.inc.c"
+INCLUDE_IMG("ui/status/text_times.png.bin", ui_status_text_times_png);
+INCLUDE_PAL("ui/status/text_times.pal.bin", ui_status_text_times_pal);
 
-#include "ui/status/text_slash.png.inc.c"
-#include "ui/status/text_slash.pal.inc.c"
+INCLUDE_IMG("ui/status/text_slash.png.bin", ui_status_text_slash_png);
+INCLUDE_PAL("ui/status/text_slash.pal.bin", ui_status_text_slash_pal);
 
-#include "ui/status/text_0.png.inc.c"
-#include "ui/status/text_0.pal.inc.c"
+INCLUDE_IMG("ui/status/text_0.png.bin", ui_status_text_0_png);
+INCLUDE_PAL("ui/status/text_0.pal.bin", ui_status_text_0_pal);
 
-#include "ui/status/text_1.png.inc.c"
-#include "ui/status/text_1.pal.inc.c"
+INCLUDE_IMG("ui/status/text_1.png.bin", ui_status_text_1_png);
+INCLUDE_PAL("ui/status/text_1.pal.bin", ui_status_text_1_pal);
 
-#include "ui/status/text_2.png.inc.c"
-#include "ui/status/text_2.pal.inc.c"
+INCLUDE_IMG("ui/status/text_2.png.bin", ui_status_text_2_png);
+INCLUDE_PAL("ui/status/text_2.pal.bin", ui_status_text_2_pal);
 
-#include "ui/status/text_3.png.inc.c"
-#include "ui/status/text_3.pal.inc.c"
+INCLUDE_IMG("ui/status/text_3.png.bin", ui_status_text_3_png);
+INCLUDE_PAL("ui/status/text_3.pal.bin", ui_status_text_3_pal);
 
-#include "ui/status/text_4.png.inc.c"
-#include "ui/status/text_4.pal.inc.c"
+INCLUDE_IMG("ui/status/text_4.png.bin", ui_status_text_4_png);
+INCLUDE_PAL("ui/status/text_4.pal.bin", ui_status_text_4_pal);
 
-#include "ui/status/text_5.png.inc.c"
-#include "ui/status/text_5.pal.inc.c"
+INCLUDE_IMG("ui/status/text_5.png.bin", ui_status_text_5_png);
+INCLUDE_PAL("ui/status/text_5.pal.bin", ui_status_text_5_pal);
 
-#include "ui/status/text_6.png.inc.c"
-#include "ui/status/text_6.pal.inc.c"
+INCLUDE_IMG("ui/status/text_6.png.bin", ui_status_text_6_png);
+INCLUDE_PAL("ui/status/text_6.pal.bin", ui_status_text_6_pal);
 
-#include "ui/status/text_7.png.inc.c"
-#include "ui/status/text_7.pal.inc.c"
+INCLUDE_IMG("ui/status/text_7.png.bin", ui_status_text_7_png);
+INCLUDE_PAL("ui/status/text_7.pal.bin", ui_status_text_7_pal);
 
-#include "ui/status/text_8.png.inc.c"
-#include "ui/status/text_8.pal.inc.c"
+INCLUDE_IMG("ui/status/text_8.png.bin", ui_status_text_8_png);
+INCLUDE_PAL("ui/status/text_8.pal.bin", ui_status_text_8_pal);
 
-#include "ui/status/text_9.png.inc.c"
-#include "ui/status/text_9.pal.inc.c"
+INCLUDE_IMG("ui/status/text_9.png.bin", ui_status_text_9_png);
+INCLUDE_PAL("ui/status/text_9.pal.bin", ui_status_text_9_pal);
 
-#include "ui/status/text_hp.png.inc.c"
-#include "ui/status/text_hp.pal.inc.c"
+INCLUDE_IMG("ui/status/text_hp.png.bin", ui_status_text_hp_png);
+INCLUDE_PAL("ui/status/text_hp.pal.bin", ui_status_text_hp_pal);
 
-#include "ui/status/text_fp.png.inc.c"
-#include "ui/status/text_fp.pal.inc.c"
+INCLUDE_IMG("ui/status/text_fp.png.bin", ui_status_text_fp_png);
+INCLUDE_PAL("ui/status/text_fp.pal.bin", ui_status_text_fp_pal);
 
 #if VERSION_PAL
 #include "de/ui/status/text_hp.png.inc.c"
@@ -405,239 +406,239 @@
 #include "es/ui/status/text_fp.pal.inc.c"
 #endif
 
-#include "ui/status/pow_unit_1.png.inc.c"
-#include "ui/status/pow_unit_1.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_1.png.bin", ui_status_pow_unit_1_png);
+INCLUDE_PAL("ui/status/pow_unit_1.pal.bin", ui_status_pow_unit_1_pal);
 
-#include "ui/status/pow_unit_2.png.inc.c"
-#include "ui/status/pow_unit_2.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_2.png.bin", ui_status_pow_unit_2_png);
+INCLUDE_PAL("ui/status/pow_unit_2.pal.bin", ui_status_pow_unit_2_pal);
 
-#include "ui/status/pow_unit_3.png.inc.c"
-#include "ui/status/pow_unit_3.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_3.png.bin", ui_status_pow_unit_3_png);
+INCLUDE_PAL("ui/status/pow_unit_3.pal.bin", ui_status_pow_unit_3_pal);
 
-#include "ui/status/pow_unit_4.png.inc.c"
-#include "ui/status/pow_unit_4.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_4.png.bin", ui_status_pow_unit_4_png);
+INCLUDE_PAL("ui/status/pow_unit_4.pal.bin", ui_status_pow_unit_4_pal);
 
-#include "ui/status/pow_unit_5.png.inc.c"
-#include "ui/status/pow_unit_5.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_5.png.bin", ui_status_pow_unit_5_png);
+INCLUDE_PAL("ui/status/pow_unit_5.pal.bin", ui_status_pow_unit_5_pal);
 
-#include "ui/status/pow_unit_6.png.inc.c"
-#include "ui/status/pow_unit_6.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_6.png.bin", ui_status_pow_unit_6_png);
+INCLUDE_PAL("ui/status/pow_unit_6.pal.bin", ui_status_pow_unit_6_pal);
 
-#include "ui/status/pow_unit_7.png.inc.c"
-#include "ui/status/pow_unit_7.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_7.png.bin", ui_status_pow_unit_7_png);
+INCLUDE_PAL("ui/status/pow_unit_7.pal.bin", ui_status_pow_unit_7_pal);
 
-#include "ui/status/pow_unit_empty.png.inc.c"
-#include "ui/status/pow_unit_empty.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_unit_empty.png.bin", ui_status_pow_unit_empty_png);
+INCLUDE_PAL("ui/status/pow_unit_empty.pal.bin", ui_status_pow_unit_empty_pal);
 
-#include "ui/status/pow_star_1.png.inc.c"
-#include "ui/status/pow_star_1.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_1.png.bin", ui_status_pow_star_1_png);
+INCLUDE_PAL("ui/status/pow_star_1.pal.bin", ui_status_pow_star_1_pal);
 
-#include "ui/status/pow_star_2.png.inc.c"
-#include "ui/status/pow_star_2.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_2.png.bin", ui_status_pow_star_2_png);
+INCLUDE_PAL("ui/status/pow_star_2.pal.bin", ui_status_pow_star_2_pal);
 
-#include "ui/status/pow_star_3.png.inc.c"
-#include "ui/status/pow_star_3.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_3.png.bin", ui_status_pow_star_3_png);
+INCLUDE_PAL("ui/status/pow_star_3.pal.bin", ui_status_pow_star_3_pal);
 
-#include "ui/status/pow_star_4.png.inc.c"
-#include "ui/status/pow_star_4.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_4.png.bin", ui_status_pow_star_4_png);
+INCLUDE_PAL("ui/status/pow_star_4.pal.bin", ui_status_pow_star_4_pal);
 
-#include "ui/status/pow_star_5.png.inc.c"
-#include "ui/status/pow_star_5.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_5.png.bin", ui_status_pow_star_5_png);
+INCLUDE_PAL("ui/status/pow_star_5.pal.bin", ui_status_pow_star_5_pal);
 
-#include "ui/status/pow_star_6.png.inc.c"
-#include "ui/status/pow_star_6.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_6.png.bin", ui_status_pow_star_6_png);
+INCLUDE_PAL("ui/status/pow_star_6.pal.bin", ui_status_pow_star_6_pal);
 
-#include "ui/status/pow_star_7.png.inc.c"
-#include "ui/status/pow_star_7.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_7.png.bin", ui_status_pow_star_7_png);
+INCLUDE_PAL("ui/status/pow_star_7.pal.bin", ui_status_pow_star_7_pal);
 
-#include "ui/status/pow_star_empty.png.inc.c"
-#include "ui/status/pow_star_empty.pal.inc.c"
+INCLUDE_IMG("ui/status/pow_star_empty.png.bin", ui_status_pow_star_empty_png);
+INCLUDE_PAL("ui/status/pow_star_empty.pal.bin", ui_status_pow_star_empty_pal);
 
-#include "ui/status/coin_0.png.inc.c"
-#include "ui/status/coin_0.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_0.png.bin", ui_status_coin_0_png);
+INCLUDE_PAL("ui/status/coin_0.pal.bin", ui_status_coin_0_pal);
 
-#include "ui/status/coin_1.png.inc.c"
-#include "ui/status/coin_1.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_1.png.bin", ui_status_coin_1_png);
+INCLUDE_PAL("ui/status/coin_1.pal.bin", ui_status_coin_1_pal);
 
-#include "ui/status/coin_2.png.inc.c"
-#include "ui/status/coin_2.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_2.png.bin", ui_status_coin_2_png);
+INCLUDE_PAL("ui/status/coin_2.pal.bin", ui_status_coin_2_pal);
 
-#include "ui/status/coin_3.png.inc.c"
-#include "ui/status/coin_3.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_3.png.bin", ui_status_coin_3_png);
+INCLUDE_PAL("ui/status/coin_3.pal.bin", ui_status_coin_3_pal);
 
-#include "ui/status/coin_4.png.inc.c"
-#include "ui/status/coin_4.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_4.png.bin", ui_status_coin_4_png);
+INCLUDE_PAL("ui/status/coin_4.pal.bin", ui_status_coin_4_pal);
 
-#include "ui/status/coin_5.png.inc.c"
-#include "ui/status/coin_5.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_5.png.bin", ui_status_coin_5_png);
+INCLUDE_PAL("ui/status/coin_5.pal.bin", ui_status_coin_5_pal);
 
-#include "ui/status/coin_6.png.inc.c"
-#include "ui/status/coin_6.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_6.png.bin", ui_status_coin_6_png);
+INCLUDE_PAL("ui/status/coin_6.pal.bin", ui_status_coin_6_pal);
 
-#include "ui/status/coin_7.png.inc.c"
-#include "ui/status/coin_7.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_7.png.bin", ui_status_coin_7_png);
+INCLUDE_PAL("ui/status/coin_7.pal.bin", ui_status_coin_7_pal);
 
-#include "ui/status/coin_8.png.inc.c"
-#include "ui/status/coin_8.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_8.png.bin", ui_status_coin_8_png);
+INCLUDE_PAL("ui/status/coin_8.pal.bin", ui_status_coin_8_pal);
 
-#include "ui/status/coin_9.png.inc.c"
-#include "ui/status/coin_9.pal.inc.c"
+INCLUDE_IMG("ui/status/coin_9.png.bin", ui_status_coin_9_png);
+INCLUDE_PAL("ui/status/coin_9.pal.bin", ui_status_coin_9_pal);
 
-#include "ui/status/star_point_0.png.inc.c"
-#include "ui/status/star_point_0.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_0.png.bin", ui_status_star_point_0_png);
+INCLUDE_PAL("ui/status/star_point_0.pal.bin", ui_status_star_point_0_pal);
 
-#include "ui/status/star_point_1.png.inc.c"
-#include "ui/status/star_point_1.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_1.png.bin", ui_status_star_point_1_png);
+INCLUDE_PAL("ui/status/star_point_1.pal.bin", ui_status_star_point_1_pal);
 
-#include "ui/status/star_point_2.png.inc.c"
-#include "ui/status/star_point_2.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_2.png.bin", ui_status_star_point_2_png);
+INCLUDE_PAL("ui/status/star_point_2.pal.bin", ui_status_star_point_2_pal);
 
-#include "ui/status/star_point_3.png.inc.c"
-#include "ui/status/star_point_3.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_3.png.bin", ui_status_star_point_3_png);
+INCLUDE_PAL("ui/status/star_point_3.pal.bin", ui_status_star_point_3_pal);
 
-#include "ui/status/star_point_4.png.inc.c"
-#include "ui/status/star_point_4.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_4.png.bin", ui_status_star_point_4_png);
+INCLUDE_PAL("ui/status/star_point_4.pal.bin", ui_status_star_point_4_pal);
 
-#include "ui/status/star_point_5.png.inc.c"
-#include "ui/status/star_point_5.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_5.png.bin", ui_status_star_point_5_png);
+INCLUDE_PAL("ui/status/star_point_5.pal.bin", ui_status_star_point_5_pal);
 
-#include "ui/status/star_point_6.png.inc.c"
-#include "ui/status/star_point_6.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_6.png.bin", ui_status_star_point_6_png);
+INCLUDE_PAL("ui/status/star_point_6.pal.bin", ui_status_star_point_6_pal);
 
-#include "ui/status/star_point_7.png.inc.c"
-#include "ui/status/star_point_7.pal.inc.c"
+INCLUDE_IMG("ui/status/star_point_7.png.bin", ui_status_star_point_7_png);
+INCLUDE_PAL("ui/status/star_point_7.pal.bin", ui_status_star_point_7_pal);
 
-#include "ui/bluepip.png.inc.c"
-#include "ui/bluepip.pal.inc.c"
+INCLUDE_IMG("ui/bluepip.png.bin", ui_bluepip_png);
+INCLUDE_PAL("ui/bluepip.pal.bin", ui_bluepip_pal);
 
-#include "ui/bluepip2.png.inc.c"
-#include "ui/bluepip2.pal.inc.c"
+INCLUDE_IMG("ui/bluepip2.png.bin", ui_bluepip2_png);
+INCLUDE_PAL("ui/bluepip2.pal.bin", ui_bluepip2_pal);
 
-#include "ui/battle/status/charge_jump.png.inc.c"
-#include "ui/battle/status/charge_jump.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/charge_jump.png.bin", ui_battle_status_charge_jump_png);
+INCLUDE_PAL("ui/battle/status/charge_jump.pal.bin", ui_battle_status_charge_jump_pal);
 
-#include "ui/battle/status/charge_hammer.png.inc.c"
-#include "ui/battle/status/charge_hammer.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/charge_hammer.png.bin", ui_battle_status_charge_hammer_png);
+INCLUDE_PAL("ui/battle/status/charge_hammer.pal.bin", ui_battle_status_charge_hammer_pal);
 
-#include "ui/battle/status/charge_goombario.png.inc.c"
-#include "ui/battle/status/charge_goombario.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/charge_goombario.png.bin", ui_battle_status_charge_goombario_png);
+INCLUDE_PAL("ui/battle/status/charge_goombario.pal.bin", ui_battle_status_charge_goombario_pal);
 
-#include "ui/battle/status/exclamation.png.inc.c"
-#include "ui/battle/status/exclamation.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/exclamation.png.bin", ui_battle_status_exclamation_png);
+INCLUDE_PAL("ui/battle/status/exclamation.pal.bin", ui_battle_status_exclamation_pal);
 
-#include "ui/battle/status/sleep_0.png.inc.c"
-#include "ui/battle/status/sleep_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/sleep_0.png.bin", ui_battle_status_sleep_0_png);
+INCLUDE_PAL("ui/battle/status/sleep_0.pal.bin", ui_battle_status_sleep_0_pal);
 
-#include "ui/battle/status/sleep_1.png.inc.c"
-#include "ui/battle/status/sleep_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/sleep_1.png.bin", ui_battle_status_sleep_1_png);
+INCLUDE_PAL("ui/battle/status/sleep_1.pal.bin", ui_battle_status_sleep_1_pal);
 
-#include "ui/battle/status/sleep_2.png.inc.c"
-#include "ui/battle/status/sleep_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/sleep_2.png.bin", ui_battle_status_sleep_2_png);
+INCLUDE_PAL("ui/battle/status/sleep_2.pal.bin", ui_battle_status_sleep_2_pal);
 
-#include "ui/battle/status/static_0.png.inc.c"
-#include "ui/battle/status/static_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/static_0.png.bin", ui_battle_status_static_0_png);
+INCLUDE_PAL("ui/battle/status/static_0.pal.bin", ui_battle_status_static_0_pal);
 
-#include "ui/battle/status/static_1.png.inc.c"
-#include "ui/battle/status/static_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/static_1.png.bin", ui_battle_status_static_1_png);
+INCLUDE_PAL("ui/battle/status/static_1.pal.bin", ui_battle_status_static_1_pal);
 
-#include "ui/battle/status/paralyze_0.png.inc.c"
-#include "ui/battle/status/paralyze_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/paralyze_0.png.bin", ui_battle_status_paralyze_0_png);
+INCLUDE_PAL("ui/battle/status/paralyze_0.pal.bin", ui_battle_status_paralyze_0_pal);
 
-#include "ui/battle/status/paralyze_1.png.inc.c"
-#include "ui/battle/status/paralyze_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/paralyze_1.png.bin", ui_battle_status_paralyze_1_png);
+INCLUDE_PAL("ui/battle/status/paralyze_1.pal.bin", ui_battle_status_paralyze_1_pal);
 
-#include "ui/battle/status/dizzy_0.png.inc.c"
-#include "ui/battle/status/dizzy_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/dizzy_0.png.bin", ui_battle_status_dizzy_0_png);
+INCLUDE_PAL("ui/battle/status/dizzy_0.pal.bin", ui_battle_status_dizzy_0_pal);
 
-#include "ui/battle/status/dizzy_1.png.inc.c"
-#include "ui/battle/status/dizzy_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/dizzy_1.png.bin", ui_battle_status_dizzy_1_png);
+INCLUDE_PAL("ui/battle/status/dizzy_1.pal.bin", ui_battle_status_dizzy_1_pal);
 
-#include "ui/battle/status/dizzy_2.png.inc.c"
-#include "ui/battle/status/dizzy_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/dizzy_2.png.bin", ui_battle_status_dizzy_2_png);
+INCLUDE_PAL("ui/battle/status/dizzy_2.pal.bin", ui_battle_status_dizzy_2_pal);
 
-#include "ui/battle/status/dizzy_3.png.inc.c"
-#include "ui/battle/status/dizzy_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/dizzy_3.png.bin", ui_battle_status_dizzy_3_png);
+INCLUDE_PAL("ui/battle/status/dizzy_3.pal.bin", ui_battle_status_dizzy_3_pal);
 
-#include "ui/battle/status/poison_0.png.inc.c"
-#include "ui/battle/status/poison_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/poison_0.png.bin", ui_battle_status_poison_0_png);
+INCLUDE_PAL("ui/battle/status/poison_0.pal.bin", ui_battle_status_poison_0_pal);
 
-#include "ui/battle/status/poison_1.png.inc.c"
-#include "ui/battle/status/poison_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/poison_1.png.bin", ui_battle_status_poison_1_png);
+INCLUDE_PAL("ui/battle/status/poison_1.pal.bin", ui_battle_status_poison_1_pal);
 
-#include "ui/battle/status/frozen_0.png.inc.c"
-#include "ui/battle/status/frozen_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/frozen_0.png.bin", ui_battle_status_frozen_0_png);
+INCLUDE_PAL("ui/battle/status/frozen_0.pal.bin", ui_battle_status_frozen_0_pal);
 
-#include "ui/battle/status/frozen_1.png.inc.c"
-#include "ui/battle/status/frozen_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/frozen_1.png.bin", ui_battle_status_frozen_1_png);
+INCLUDE_PAL("ui/battle/status/frozen_1.pal.bin", ui_battle_status_frozen_1_pal);
 
-#include "ui/battle/status/frozen_2.png.inc.c"
-#include "ui/battle/status/frozen_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/frozen_2.png.bin", ui_battle_status_frozen_2_png);
+INCLUDE_PAL("ui/battle/status/frozen_2.pal.bin", ui_battle_status_frozen_2_pal);
 
-#include "ui/battle/status/frozen_3.png.inc.c"
-#include "ui/battle/status/frozen_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/frozen_3.png.bin", ui_battle_status_frozen_3_png);
+INCLUDE_PAL("ui/battle/status/frozen_3.pal.bin", ui_battle_status_frozen_3_pal);
 
-#include "ui/battle/status/stop_0.png.inc.c"
-#include "ui/battle/status/stop_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/stop_0.png.bin", ui_battle_status_stop_0_png);
+INCLUDE_PAL("ui/battle/status/stop_0.pal.bin", ui_battle_status_stop_0_pal);
 
-#include "ui/battle/status/stop_1.png.inc.c"
-#include "ui/battle/status/stop_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/stop_1.png.bin", ui_battle_status_stop_1_png);
+INCLUDE_PAL("ui/battle/status/stop_1.pal.bin", ui_battle_status_stop_1_pal);
 
-#include "ui/battle/status/stop_2.png.inc.c"
-#include "ui/battle/status/stop_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/stop_2.png.bin", ui_battle_status_stop_2_png);
+INCLUDE_PAL("ui/battle/status/stop_2.pal.bin", ui_battle_status_stop_2_pal);
 
-#include "ui/battle/status/stop_3.png.inc.c"
-#include "ui/battle/status/stop_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/stop_3.png.bin", ui_battle_status_stop_3_png);
+INCLUDE_PAL("ui/battle/status/stop_3.pal.bin", ui_battle_status_stop_3_pal);
 
-#include "ui/battle/status/pdown_0.png.inc.c"
-#include "ui/battle/status/pdown_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/pdown_0.png.bin", ui_battle_status_pdown_0_png);
+INCLUDE_PAL("ui/battle/status/pdown_0.pal.bin", ui_battle_status_pdown_0_pal);
 
-#include "ui/battle/status/pdown_1.png.inc.c"
-#include "ui/battle/status/pdown_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/pdown_1.png.bin", ui_battle_status_pdown_1_png);
+INCLUDE_PAL("ui/battle/status/pdown_1.pal.bin", ui_battle_status_pdown_1_pal);
 
-#include "ui/battle/status/shrink_0.png.inc.c"
-#include "ui/battle/status/shrink_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/shrink_0.png.bin", ui_battle_status_shrink_0_png);
+INCLUDE_PAL("ui/battle/status/shrink_0.pal.bin", ui_battle_status_shrink_0_pal);
 
-#include "ui/battle/status/shrink_1.png.inc.c"
-#include "ui/battle/status/shrink_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/shrink_1.png.bin", ui_battle_status_shrink_1_png);
+INCLUDE_PAL("ui/battle/status/shrink_1.pal.bin", ui_battle_status_shrink_1_pal);
 
-#include "ui/battle/status/shrink_2.png.inc.c"
-#include "ui/battle/status/shrink_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/shrink_2.png.bin", ui_battle_status_shrink_2_png);
+INCLUDE_PAL("ui/battle/status/shrink_2.pal.bin", ui_battle_status_shrink_2_pal);
 
-#include "ui/battle/status/shrink_3.png.inc.c"
-#include "ui/battle/status/shrink_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/shrink_3.png.bin", ui_battle_status_shrink_3_png);
+INCLUDE_PAL("ui/battle/status/shrink_3.pal.bin", ui_battle_status_shrink_3_pal);
 
-#include "ui/battle/status/transparent_0.png.inc.c"
-#include "ui/battle/status/transparent_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/transparent_0.png.bin", ui_battle_status_transparent_0_png);
+INCLUDE_PAL("ui/battle/status/transparent_0.pal.bin", ui_battle_status_transparent_0_pal);
 
-#include "ui/battle/status/transparent_1.png.inc.c"
-#include "ui/battle/status/transparent_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/transparent_1.png.bin", ui_battle_status_transparent_1_png);
+INCLUDE_PAL("ui/battle/status/transparent_1.pal.bin", ui_battle_status_transparent_1_pal);
 
-#include "ui/battle/status/transparent_2.png.inc.c"
-#include "ui/battle/status/transparent_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/transparent_2.png.bin", ui_battle_status_transparent_2_png);
+INCLUDE_PAL("ui/battle/status/transparent_2.pal.bin", ui_battle_status_transparent_2_pal);
 
-#include "ui/battle/status/transparent_3.png.inc.c"
-#include "ui/battle/status/transparent_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/transparent_3.png.bin", ui_battle_status_transparent_3_png);
+INCLUDE_PAL("ui/battle/status/transparent_3.pal.bin", ui_battle_status_transparent_3_pal);
 
-#include "ui/battle/status/transparent_4.png.inc.c"
-#include "ui/battle/status/transparent_4.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/transparent_4.png.bin", ui_battle_status_transparent_4_png);
+INCLUDE_PAL("ui/battle/status/transparent_4.pal.bin", ui_battle_status_transparent_4_pal);
 
-#include "ui/battle/status/transparent_5.png.inc.c"
-#include "ui/battle/status/transparent_5.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/transparent_5.png.bin", ui_battle_status_transparent_5_png);
+INCLUDE_PAL("ui/battle/status/transparent_5.pal.bin", ui_battle_status_transparent_5_pal);
 
-#include "ui/battle/status/peril.png.inc.c"
-#include "ui/battle/status/peril.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/peril.png.bin", ui_battle_status_peril_png);
+INCLUDE_PAL("ui/battle/status/peril.pal.bin", ui_battle_status_peril_pal);
 
-#include "ui/battle/status/danger.png.inc.c"
-#include "ui/battle/status/danger.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/danger.png.bin", ui_battle_status_danger_png);
+INCLUDE_PAL("ui/battle/status/danger.pal.bin", ui_battle_status_danger_pal);
 
-#include "ui/battle/status/refund.png.inc.c"
-#include "ui/battle/status/refund.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/refund.png.bin", ui_battle_status_refund_png);
+INCLUDE_PAL("ui/battle/status/refund.pal.bin", ui_battle_status_refund_pal);
 
-#include "ui/battle/status/happy.png.inc.c"
-#include "ui/battle/status/happy.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/happy.png.bin", ui_battle_status_happy_png);
+INCLUDE_PAL("ui/battle/status/happy.pal.bin", ui_battle_status_happy_pal);
 
-#include "ui/battle/status/hp_drain.png.inc.c"
-#include "ui/battle/status/hp_drain.pal.inc.c"
+INCLUDE_IMG("ui/battle/status/hp_drain.png.bin", ui_battle_status_hp_drain_png);
+INCLUDE_PAL("ui/battle/status/hp_drain.pal.bin", ui_battle_status_hp_drain_pal);
 
 #if VERSION_PAL
 #include "de/ui/battle/status/peril.png.inc.c"
@@ -686,37 +687,37 @@
 #include "es/ui/battle/status/hp_drain.pal.inc.c"
 #endif
 
-#include "ui/move_basic.png.inc.c"
-#include "ui/move_basic.pal.inc.c"
+INCLUDE_IMG("ui/move_basic.png.bin", ui_move_basic_png);
+INCLUDE_PAL("ui/move_basic.pal.bin", ui_move_basic_pal);
 #define ui_move_basic_disabled_png ui_move_basic_png
-#include "ui/move_basic.disabled.pal.inc.c"
+INCLUDE_PAL("ui/move_basic.disabled.pal.bin", ui_move_basic_disabled_pal);
 
-#include "ui/move_partner_1.png.inc.c"
-#include "ui/move_partner_1.pal.inc.c"
+INCLUDE_IMG("ui/move_partner_1.png.bin", ui_move_partner_1_png);
+INCLUDE_PAL("ui/move_partner_1.pal.bin", ui_move_partner_1_pal);
 #define ui_move_partner_1_disabled_png ui_move_partner_1_png
-#include "ui/move_partner_1.disabled.pal.inc.c"
+INCLUDE_PAL("ui/move_partner_1.disabled.pal.bin", ui_move_partner_1_disabled_pal);
 
-#include "ui/move_partner_2.png.inc.c"
-#include "ui/move_partner_2.pal.inc.c"
+INCLUDE_IMG("ui/move_partner_2.png.bin", ui_move_partner_2_png);
+INCLUDE_PAL("ui/move_partner_2.pal.bin", ui_move_partner_2_pal);
 #define ui_move_partner_2_disabled_png ui_move_partner_2_png
-#include "ui/move_partner_2.disabled.pal.inc.c"
+INCLUDE_PAL("ui/move_partner_2.disabled.pal.bin", ui_move_partner_2_disabled_pal);
 
-#include "ui/move_partner_3.png.inc.c"
-#include "ui/move_partner_3.pal.inc.c"
+INCLUDE_IMG("ui/move_partner_3.png.bin", ui_move_partner_3_png);
+INCLUDE_PAL("ui/move_partner_3.pal.bin", ui_move_partner_3_pal);
 #define ui_move_partner_3_disabled_png ui_move_partner_3_png
-#include "ui/move_partner_3.disabled.pal.inc.c"
+INCLUDE_PAL("ui/move_partner_3.disabled.pal.bin", ui_move_partner_3_disabled_pal);
 
 Gfx D_801041A0[] = {
     gsSPEndDisplayList(),
 };
 
-#include "ui/stat_heart.png.inc.c"
+INCLUDE_IMG("ui/stat_heart.png.bin", ui_stat_heart_png);
 
 Gfx D_801045A8[] = {
     gsSPEndDisplayList(),
 };
 
-#include "ui/stat_flower.png.inc.c"
+INCLUDE_IMG("ui/stat_flower.png.bin", ui_stat_flower_png);
 
 HudScript HES_ArrowLeft = HES_TEMPLATE_CI_ENUM_SIZE(ui_arrow_left, 16, 16);
 

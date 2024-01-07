@@ -1,7 +1,9 @@
+#include "include_asset.h"
+
 #include "common.h"
 
-#include "effects/gfx/D_09000000_3E12D0.png.inc.c"
-#include "effects/gfx/D_09000000_3E12D0.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09000000_3E12D0.png.bin", D_09000000_3E12D0);
+INCLUDE_PAL("effects/gfx/D_09000000_3E12D0.pal.bin", D_09000080_3E1350);
 
 u8 D_090000A0_3E1370[0x1E0] = {};
 

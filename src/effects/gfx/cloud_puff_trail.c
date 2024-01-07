@@ -1,7 +1,9 @@
+#include "include_asset.h"
+
 #include "common.h"
 
-#include "effects/gfx/D_09000000_32EC50.png.inc.c"
-#include "effects/gfx/D_09000000_32EC50.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09000000_32EC50.png.bin", D_09000000_32EC50);
+INCLUDE_PAL("effects/gfx/D_09000000_32EC50.pal.bin", D_09000080_32ECD0);
 
 #include "effects/gfx/D_090000A0_32ECF0.vtx.inc.c"
 
