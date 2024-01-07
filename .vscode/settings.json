@@ -56,8 +56,7 @@
         ".ninja*": true,
         "ver/current": true,
         "expected": true,
-        "**/*.i": true,
-        "docs/doxygen": true
+        "**/*.i": true
     },
     "[python]": {
         "editor.formatOnType": true,
