@@ -69,4 +69,5 @@
     "black-formatter.args": [
         "-l 120"
     ],
+    "search.useIgnoreFiles": false,
 }
