@@ -1,6 +1,6 @@
-#include "include_asset.h"
-
 #include "common.h"
+
+#include "include_asset.h"
 
 INCLUDE_IMG("effects/gfx/world/cloud.png.bin", D_09000000_404F40);
 INCLUDE_PAL("effects/gfx/world/cloud.pal.bin", D_09000200_405140);

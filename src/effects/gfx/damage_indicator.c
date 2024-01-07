@@ -1,6 +1,6 @@
-#include "include_asset.h"
-
 #include "common.h"
+
+#include "include_asset.h"
 
 INCLUDE_IMG("effects/gfx/D_09000000_350220.png.bin", D_09000000_350220);
 INCLUDE_IMG("effects/gfx/D_09000200_350420.png.bin", D_09000200_350420);

@@ -1,6 +1,6 @@
-#include "include_asset.h"
-
 #include "common.h"
+
+#include "include_asset.h"
 
 #include "effects/gfx/D_09000000_3E5F30.vtx.inc.c"
 #include "effects/gfx/D_090001A0_3E60D0.vtx.inc.c"
