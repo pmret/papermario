@@ -114,4 +114,4 @@ Gfx Entity_TrumpetPlant_RenderNode1[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/TrumpetPlant.png.bin", D_0A000D40_E6E0D0);
+INCLUDE_IMG("entity/model/TrumpetPlant.png", D_0A000D40_E6E0D0);

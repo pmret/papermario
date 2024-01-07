@@ -7,7 +7,7 @@
 #include "entity/model/PinkFlower_4.vtx.inc.c"
 #include "entity/model/PinkFlower_5.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/PinkFlower_light.png.bin", D_0A0005B0_E9BAB0);
+INCLUDE_IMG("entity/model/PinkFlower_light.png", D_0A0005B0_E9BAB0);
 Gfx D_0A0007B0_E9BCB0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -19,7 +19,7 @@ Gfx D_0A0007B0_E9BCB0[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/PinkFlower_tex.png.bin", D_0A000820_E9BD20);
+INCLUDE_IMG("entity/model/PinkFlower_tex.png", D_0A000820_E9BD20);
 Gfx D_0A001020_E9C520[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

@@ -7,8 +7,8 @@
 #include "entity/model/BombableRock_4.vtx.inc.c"
 #include "entity/model/BombableRock_5.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/BombableRock.png.bin", D_0A000840_E9DE90);
-INCLUDE_PAL("entity/model/BombableRock.pal.bin", D_0A001040_E9E690);
+INCLUDE_IMG("entity/model/BombableRock.png", D_0A000840_E9DE90);
+INCLUDE_PAL("entity/model/BombableRock.pal", D_0A001040_E9E690);
 Gfx D_0A001060_E9E6B0[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

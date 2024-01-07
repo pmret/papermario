@@ -45,5 +45,5 @@ Gfx Entity_HitFloatingYellowBlock_RenderBlock1[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/HitFloatingYellowBlock_face1.png.bin", D_0A000440_E474F0);
-INCLUDE_IMG("entity/model/HitFloatingYellowBlock_face2.png.bin", D_0A000C40_E47CF0);
+INCLUDE_IMG("entity/model/HitFloatingYellowBlock_face1.png", D_0A000440_E474F0);
+INCLUDE_IMG("entity/model/HitFloatingYellowBlock_face2.png", D_0A000C40_E47CF0);

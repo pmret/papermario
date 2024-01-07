@@ -3,8 +3,8 @@
 
 #include "entity/model/SuperBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/SuperBlock_tex.png.bin", D_0A000480_E44C80);
-INCLUDE_PAL("entity/model/SuperBlock_tex.pal.bin", D_0A000580_E44D80);
+INCLUDE_IMG("entity/model/SuperBlock_tex.png", D_0A000480_E44C80);
+INCLUDE_PAL("entity/model/SuperBlock_tex.pal", D_0A000580_E44D80);
 Gfx Entity_SuperBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000580_E44D80),

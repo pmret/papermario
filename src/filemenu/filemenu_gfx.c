@@ -1,9 +1,9 @@
 #include "common.h"
 #include "include_asset.h"
 
-INCLUDE_IMG("filemenu/copyarrow.png.bin", D_8024A200);
-INCLUDE_IMG("filemenu/corners_yellow.png.bin", D_8024A400);
-INCLUDE_IMG("filemenu/corners_gray.png.bin", D_8024B400);
+INCLUDE_IMG("filemenu/copyarrow.png", D_8024A200);
+INCLUDE_IMG("filemenu/corners_yellow.png", D_8024A400);
+INCLUDE_IMG("filemenu/corners_gray.png", D_8024B400);
 
 Gfx filemenu_dl_copyarrow[] = {
     gsDPPipeSync(),

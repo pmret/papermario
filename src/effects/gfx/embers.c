@@ -1,7 +1,7 @@
 #include "include_asset.h"
 
-INCLUDE_IMG("effects/gfx/D_09000000_3DBF40.png.bin", D_09000000_3DBF40);
-INCLUDE_IMG("effects/gfx/D_09000200_3DC140.png.bin", D_09000200_3DC140);
+INCLUDE_IMG("effects/gfx/D_09000000_3DBF40.png", D_09000000_3DBF40);
+INCLUDE_IMG("effects/gfx/D_09000200_3DC140.png", D_09000200_3DC140);
 
 #include "effects/gfx/D_09000280_3DC1C0.gfx.inc.c"
 

@@ -42,11 +42,11 @@ EvtScript N(EVS_NpcDefeat_Monstar) = {
     EVT_END
 };
 
-INCLUDE_IMG("world/area_sam/sam_05/monstar.png.bin", sam_05_monstar_png);
-INCLUDE_IMG("world/area_sam/sam_05/monstar_blank1.png.bin", D_80242970);
-INCLUDE_IMG("world/area_sam/sam_05/monstar_blank2.png.bin", D_80242B70);
-INCLUDE_IMG("world/area_sam/sam_05/monstar_blank3.png.bin", D_80242D70);
-INCLUDE_PAL("world/area_sam/sam_05/monstar.pal.bin", sam_05_monstar_pal);
+INCLUDE_IMG("world/area_sam/sam_05/monstar.png", sam_05_monstar_png);
+INCLUDE_IMG("world/area_sam/sam_05/monstar_blank1.png", D_80242970);
+INCLUDE_IMG("world/area_sam/sam_05/monstar_blank2.png", D_80242B70);
+INCLUDE_IMG("world/area_sam/sam_05/monstar_blank3.png", D_80242D70);
+INCLUDE_PAL("world/area_sam/sam_05/monstar.pal", sam_05_monstar_pal);
 #include "world/area_sam/sam_05/monstar.png.h"
 
 ImgFXOverlayTexture N(MonstarDetailTexture) = {

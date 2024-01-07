@@ -18,9 +18,9 @@ enum {
 };
 
 #include "pulse_stone_icon.png.h"
-INCLUDE_IMG("pulse_stone_icon.png.bin", pulse_stone_icon_img);
-INCLUDE_PAL("pulse_stone_icon.pal.bin", pulse_stone_icon_1_pal);
-INCLUDE_PAL("pulse_stone_icon.flash.pal.bin", pulse_stone_icon_2_pal);
+INCLUDE_IMG("pulse_stone_icon.png", pulse_stone_icon_img);
+INCLUDE_PAL("pulse_stone_icon.pal", pulse_stone_icon_1_pal);
+INCLUDE_PAL("pulse_stone_icon.flash.pal", pulse_stone_icon_2_pal);
 #include "pulse_stone_icon.gfx.inc.c"
 
 BSS PulseStoneData PulseStoneNotification;

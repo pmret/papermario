@@ -179,17 +179,17 @@ DefaultWindowStyle gBoxDefaultStyles[] = {
     }
 };
 
-INCLUDE_IMG("ui/box/corners9.png.bin", ui_box_corners9_png);
-INCLUDE_IMG("ui/box/corners8.png.bin", ui_box_corners8_png);
-INCLUDE_IMG("ui/box/corners6.png.bin", ui_box_corners6_png);
-INCLUDE_IMG("ui/box/corners7.png.bin", ui_box_corners7_png);
-INCLUDE_IMG("ui/box/corners3.png.bin", ui_box_corners3_png);
-INCLUDE_IMG("ui/box/corners5.png.bin", ui_box_corners5_png);
-INCLUDE_IMG("ui/box/corners4.png.bin", ui_box_corners4_png);
-INCLUDE_IMG("ui/box/bg_tile.png.bin", ui_box_bg_tile_png);
-INCLUDE_IMG("ui/box/corners1.png.bin", ui_box_corners1_png);
-INCLUDE_IMG("ui/box/corners2.png.bin", ui_box_corners2_png);
-INCLUDE_IMG("ui/box/bg_flat.png.bin", ui_box_bg_flat_png);
+INCLUDE_IMG("ui/box/corners9.png", ui_box_corners9_png);
+INCLUDE_IMG("ui/box/corners8.png", ui_box_corners8_png);
+INCLUDE_IMG("ui/box/corners6.png", ui_box_corners6_png);
+INCLUDE_IMG("ui/box/corners7.png", ui_box_corners7_png);
+INCLUDE_IMG("ui/box/corners3.png", ui_box_corners3_png);
+INCLUDE_IMG("ui/box/corners5.png", ui_box_corners5_png);
+INCLUDE_IMG("ui/box/corners4.png", ui_box_corners4_png);
+INCLUDE_IMG("ui/box/bg_tile.png", ui_box_bg_tile_png);
+INCLUDE_IMG("ui/box/corners1.png", ui_box_corners1_png);
+INCLUDE_IMG("ui/box/corners2.png", ui_box_corners2_png);
+INCLUDE_IMG("ui/box/bg_flat.png", ui_box_bg_flat_png);
 
 WindowBackground gBoxBackground[] = {
     {

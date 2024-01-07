@@ -40,10 +40,10 @@ AnimID N(StarSpiritAnimations)[][2] = {
 
 s32 imgPadding = 0;
 
-INCLUDE_IMG("world/area_kmr/kmr_23/window_ul.png.bin", kmr_23_window_ul_img);
-INCLUDE_IMG("world/area_kmr/kmr_23/window_ur.png.bin", kmr_23_window_ur_img);
-INCLUDE_IMG("world/area_kmr/kmr_23/window_ll.png.bin", kmr_23_window_ll_img);
-INCLUDE_IMG("world/area_kmr/kmr_23/window_lr.png.bin", kmr_23_window_lr_img);
+INCLUDE_IMG("world/area_kmr/kmr_23/window_ul.png", kmr_23_window_ul_img);
+INCLUDE_IMG("world/area_kmr/kmr_23/window_ur.png", kmr_23_window_ur_img);
+INCLUDE_IMG("world/area_kmr/kmr_23/window_ll.png", kmr_23_window_ll_img);
+INCLUDE_IMG("world/area_kmr/kmr_23/window_lr.png", kmr_23_window_lr_img);
 
 s32 D_802417C8_9091F8 = 0;
 

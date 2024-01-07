@@ -27,20 +27,20 @@ API_CALLABLE(N(func_802A123C_71CF1C)) {
 static s32 _pad = 0;
 
 #include "battle/move/item/egg_missile1.png.h"
-INCLUDE_IMG("battle/move/item/egg_missile1.png.bin", battle_item_egg_missile1_png);
-INCLUDE_PAL("battle/move/item/egg_missile1.pal.bin", battle_item_egg_missile1_pal);
+INCLUDE_IMG("battle/move/item/egg_missile1.png", battle_item_egg_missile1_png);
+INCLUDE_PAL("battle/move/item/egg_missile1.pal", battle_item_egg_missile1_pal);
 
 #include "battle/move/item/egg_missile2.png.h"
-INCLUDE_IMG("battle/move/item/egg_missile2.png.bin", battle_item_egg_missile2_png);
-INCLUDE_PAL("battle/move/item/egg_missile2.pal.bin", battle_item_egg_missile2_pal);
+INCLUDE_IMG("battle/move/item/egg_missile2.png", battle_item_egg_missile2_png);
+INCLUDE_PAL("battle/move/item/egg_missile2.pal", battle_item_egg_missile2_pal);
 
 #include "battle/move/item/egg_missile3.png.h"
-INCLUDE_IMG("battle/move/item/egg_missile3.png.bin", battle_item_egg_missile3_png);
-INCLUDE_PAL("battle/move/item/egg_missile3.pal.bin", battle_item_egg_missile3_pal);
+INCLUDE_IMG("battle/move/item/egg_missile3.png", battle_item_egg_missile3_png);
+INCLUDE_PAL("battle/move/item/egg_missile3.pal", battle_item_egg_missile3_pal);
 
 #include "battle/move/item/egg_missile4.png.h"
-INCLUDE_IMG("battle/move/item/egg_missile4.png.bin", battle_item_egg_missile4_png);
-INCLUDE_PAL("battle/move/item/egg_missile4.pal.bin", battle_item_egg_missile4_pal);
+INCLUDE_IMG("battle/move/item/egg_missile4.png", battle_item_egg_missile4_png);
+INCLUDE_PAL("battle/move/item/egg_missile4.pal", battle_item_egg_missile4_pal);
 
 Vtx N(EggMissileVtx)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},

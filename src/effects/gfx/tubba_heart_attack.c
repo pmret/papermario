@@ -2,8 +2,8 @@
 
 #include "include_asset.h"
 
-INCLUDE_IMG("effects/gfx/D_09000000_3D2580.png.bin", D_09000000_3D2580);
-INCLUDE_PAL("effects/gfx/D_09000000_3D2580.pal.bin", D_09000200_3D2780);
+INCLUDE_IMG("effects/gfx/D_09000000_3D2580.png", D_09000000_3D2580);
+INCLUDE_PAL("effects/gfx/D_09000000_3D2580.pal", D_09000200_3D2780);
 
 u8 D_09000220_3D27A0[0x1E0] = {};
 

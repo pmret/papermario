@@ -3,8 +3,8 @@
 
 #include "entity/model/BrickBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/BrickBlock_face.png.bin", D_0A000140_E3DEF0);
-INCLUDE_PAL("entity/model/BrickBlock_face.pal.bin", D_0A000340_E3E0F0);
+INCLUDE_IMG("entity/model/BrickBlock_face.png", D_0A000140_E3DEF0);
+INCLUDE_PAL("entity/model/BrickBlock_face.pal", D_0A000340_E3E0F0);
 Gfx Entity_BrickBlock_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

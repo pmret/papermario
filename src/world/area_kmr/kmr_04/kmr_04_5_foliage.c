@@ -3,8 +3,8 @@
 #include "include_asset.h"
 
 #include "world/area_kmr/kmr_04/hammer_block_message.png.h"
-INCLUDE_IMG("world/area_kmr/kmr_04/hammer_block_message.png.bin", kmr_04_hammer_block_message_img);
-INCLUDE_PAL("world/area_kmr/kmr_04/hammer_block_message.pal.bin", kmr_04_hammer_block_message_pal);
+INCLUDE_IMG("world/area_kmr/kmr_04/hammer_block_message.png", kmr_04_hammer_block_message_img);
+INCLUDE_PAL("world/area_kmr/kmr_04/hammer_block_message.pal", kmr_04_hammer_block_message_pal);
 
 #include "common/foliage.inc.c"
 

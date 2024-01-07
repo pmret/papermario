@@ -17,12 +17,12 @@ s32 entity_can_collide_with_jumping_player(Entity* entity) {
     return FALSE;
 }
 
-INCLUDE_IMG("entity/shadow/square.png.bin", D_802E9170);
-INCLUDE_IMG("entity/shadow/circle.png.bin", D_802E91F0);
+INCLUDE_IMG("entity/shadow/square.png", D_802E9170);
+INCLUDE_IMG("entity/shadow/circle.png", D_802E91F0);
 #include "entity/vtx/shadow1.vtx.inc.c"
 #include "entity/vtx/shadow2.vtx.inc.c"
-INCLUDE_IMG("entity/shadow/square_big.png.bin", D_802E92F0);
-INCLUDE_IMG("entity/shadow/circle_big.png.bin", D_802E94F0);
+INCLUDE_IMG("entity/shadow/square_big.png", D_802E92F0);
+INCLUDE_IMG("entity/shadow/circle_big.png", D_802E94F0);
 
 Gfx Entity_Shadow_GfxCommon[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

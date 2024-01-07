@@ -6,7 +6,7 @@
 #include "entity/model/SpinningFlower_3.vtx.inc.c"
 #include "entity/model/SpinningFlower_4.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/SpinningFlower_img1.png.bin", D_0A000180_E9CA80);
+INCLUDE_IMG("entity/model/SpinningFlower_img1.png", D_0A000180_E9CA80);
 Gfx D_0A000280_E9CB80[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -19,7 +19,7 @@ Gfx D_0A000280_E9CB80[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/SpinningFlower_petal.png.bin", D_0A0002F8_E9CBF8);
+INCLUDE_IMG("entity/model/SpinningFlower_petal.png", D_0A0002F8_E9CBF8);
 Gfx D_0A000AF8_E9D3F8[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

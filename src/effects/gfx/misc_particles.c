@@ -1,10 +1,10 @@
 #include "include_asset.h"
 
-INCLUDE_IMG("effects/gfx/D_09000000_3DEE60.png.bin", D_09000000_3DEE60);
-INCLUDE_IMG("effects/gfx/D_09001000_3DFE60.png.bin", D_09001000_3DFE60);
-INCLUDE_IMG("effects/gfx/D_09001080_3DFEE0.png.bin", D_09001080_3DFEE0);
-INCLUDE_IMG("effects/gfx/D_09001100_3DFF60.png.bin", D_09001100_3DFF60);
-INCLUDE_IMG("effects/gfx/D_09001180_3DFFE0.png.bin", D_09001180_3DFFE0);
+INCLUDE_IMG("effects/gfx/D_09000000_3DEE60.png", D_09000000_3DEE60);
+INCLUDE_IMG("effects/gfx/D_09001000_3DFE60.png", D_09001000_3DFE60);
+INCLUDE_IMG("effects/gfx/D_09001080_3DFEE0.png", D_09001080_3DFEE0);
+INCLUDE_IMG("effects/gfx/D_09001100_3DFF60.png", D_09001100_3DFF60);
+INCLUDE_IMG("effects/gfx/D_09001180_3DFFE0.png", D_09001180_3DFFE0);
 
 #include "effects/gfx/D_09001580_3E03E0.gfx.inc.c"
 #include "effects/gfx/D_09001670_3E04D0.gfx.inc.c"

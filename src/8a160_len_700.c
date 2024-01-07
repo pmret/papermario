@@ -1,7 +1,7 @@
 #include "common.h"
 #include "include_asset.h"
 
-INCLUDE_IMG("A2960.png.bin", D_801094B0);
+INCLUDE_IMG("A2960.png", D_801094B0);
 
 Vp D_801096B0 = {
     .vp = {

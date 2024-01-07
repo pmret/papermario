@@ -13,8 +13,8 @@
 static s32 _pad = 0; // XXX
 
 #include "battle/move/item/dusty_hammer.png.h"
-INCLUDE_IMG("battle/move/item/dusty_hammer.png.bin", battle_item_dusty_hammer_png);
-INCLUDE_PAL("battle/move/item/dusty_hammer.pal.bin", battle_item_dusty_hammer_pal);
+INCLUDE_IMG("battle/move/item/dusty_hammer.png", battle_item_dusty_hammer_png);
+INCLUDE_PAL("battle/move/item/dusty_hammer.pal", battle_item_dusty_hammer_pal);
 
 Vtx N(DustyHammerVtx)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},

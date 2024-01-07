@@ -6,8 +6,8 @@
 #include "entity/model/Tweester_3.vtx.inc.c"
 #include "entity/model/Tweester_4.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/Tweester_img1.png.bin", D_0A000BF0_E57A50);
-INCLUDE_IMG("entity/model/Tweester_img2.png.bin", D_0A000FF0_E57E50);
+INCLUDE_IMG("entity/model/Tweester_img1.png", D_0A000BF0_E57A50);
+INCLUDE_IMG("entity/model/Tweester_img2.png", D_0A000FF0_E57E50);
 Gfx Entity_Tweester_LoadTextures[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -33,8 +33,8 @@ Gfx Entity_Tweester_LoadTextures[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/Tweester_img3.png.bin", D_0A0014A0_E58300);
-INCLUDE_PAL("entity/model/Tweester_img3.pal.bin", D_0A0018A0_E58700);
+INCLUDE_IMG("entity/model/Tweester_img3.png", D_0A0014A0_E58300);
+INCLUDE_PAL("entity/model/Tweester_img3.pal", D_0A0018A0_E58700);
 Gfx Entity_Tweester_LoadTextureFace[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A0018A0_E58700),

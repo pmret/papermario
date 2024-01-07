@@ -7,8 +7,8 @@ extern PAL_BIN ui_battle_menu_spirits_pal[];
 extern IMG_BIN ui_battle_solid_star_png[];
 extern PAL_BIN ui_battle_solid_star_pal[];
 
-INCLUDE_IMG("ui/battle/cursor_hand.png.bin", ui_battle_cursor_hand_png);
-INCLUDE_PAL("ui/battle/cursor_hand.pal.bin", ui_battle_cursor_hand_pal);
+INCLUDE_IMG("ui/battle/cursor_hand.png", ui_battle_cursor_hand_png);
+INCLUDE_PAL("ui/battle/cursor_hand.pal", ui_battle_cursor_hand_pal);
 
 Vtx BtlCursorModelVtx[] = {
     {{{ -22, -6, 0 }, 0, { 1024, 1024 }, { 0, 0, 0, 255 }}},

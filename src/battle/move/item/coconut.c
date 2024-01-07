@@ -13,8 +13,8 @@
 static s32 _pad = 0;
 
 #include "battle/move/item/coconut.png.h"
-INCLUDE_IMG("battle/move/item/coconut.png.bin", battle_item_coconut_png);
-INCLUDE_PAL("battle/move/item/coconut.pal.bin", battle_item_coconut_pal);
+INCLUDE_IMG("battle/move/item/coconut.png", battle_item_coconut_png);
+INCLUDE_PAL("battle/move/item/coconut.pal", battle_item_coconut_pal);
 
 /// 32x32 square.
 Vtx N(model)[] = {

@@ -6,7 +6,7 @@
 #include "entity/model/StarBoxLauncher_3.vtx.inc.c"
 #include "entity/model/StarBoxLauncher_4.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/StarBoxLauncher_link.png.bin", D_0A000290_E55CD0);
+INCLUDE_IMG("entity/model/StarBoxLauncher_link.png", D_0A000290_E55CD0);
 Gfx Entity_StarBoxLauncher_LoadTextureLink[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -19,8 +19,8 @@ Gfx Entity_StarBoxLauncher_LoadTextureLink[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/StarBoxLauncher_face.png.bin", D_0A000508_E55F48);
-INCLUDE_PAL("entity/model/StarBoxLauncher_face.pal.bin", D_0A000D08_E56748);
+INCLUDE_IMG("entity/model/StarBoxLauncher_face.png", D_0A000508_E55F48);
+INCLUDE_PAL("entity/model/StarBoxLauncher_face.pal", D_0A000D08_E56748);
 Gfx Entity_StarBoxLauncher_LoadTextureFace[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000D08_E56748),
@@ -34,8 +34,8 @@ Gfx Entity_StarBoxLauncher_LoadTextureFace[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/StarBoxLauncher_box.png.bin", D_0A000DD0_E56810);
-INCLUDE_PAL("entity/model/StarBoxLauncher_box.pal.bin", D_0A000ED0_E56910);
+INCLUDE_IMG("entity/model/StarBoxLauncher_box.png", D_0A000DD0_E56810);
+INCLUDE_PAL("entity/model/StarBoxLauncher_box.pal", D_0A000ED0_E56910);
 Gfx Entity_StarBoxLauncher_LoadTextureBox[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000ED0_E56910),

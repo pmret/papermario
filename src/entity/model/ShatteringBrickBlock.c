@@ -3,7 +3,7 @@
 
 #include "entity/model/ShatteringBrickBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/ShatteringBrickBlock_texture.png.bin", D_0A001AA0_E3FD00);
+INCLUDE_IMG("entity/model/ShatteringBrickBlock_texture.png", D_0A001AA0_E3FD00);
 Gfx D_0A0022A0_E40500[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

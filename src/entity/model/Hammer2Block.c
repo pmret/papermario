@@ -3,8 +3,8 @@
 
 #include "entity/model/Hammer2Block.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/Hammer2Block_face.png.bin", D_0A000280_E31CB0);
-INCLUDE_PAL("entity/model/Hammer2Block_face.pal.bin", D_0A000380_E31DB0);
+INCLUDE_IMG("entity/model/Hammer2Block_face.png", D_0A000280_E31CB0);
+INCLUDE_PAL("entity/model/Hammer2Block_face.pal", D_0A000380_E31DB0);
 Gfx Entity_Hammer2Block_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000380_E31DB0),

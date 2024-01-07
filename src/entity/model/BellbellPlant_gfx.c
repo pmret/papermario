@@ -174,4 +174,4 @@ Gfx Entity_BellbellPlant_RenderNode1[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/BellbellPlant.png.bin", D_0A001090_E6C240);
+INCLUDE_IMG("entity/model/BellbellPlant.png", D_0A001090_E6C240);

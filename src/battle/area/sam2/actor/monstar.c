@@ -144,8 +144,8 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-INCLUDE_IMG("battle/area/sam2/actor/img.png.bin", battle_area_sam2_actor_img_png);
-INCLUDE_PAL("battle/area/sam2/actor/img.pal.bin", battle_area_sam2_actor_img_pal);
+INCLUDE_IMG("battle/area/sam2/actor/img.png", battle_area_sam2_actor_img_png);
+INCLUDE_PAL("battle/area/sam2/actor/img.pal", battle_area_sam2_actor_img_pal);
 
 ImgFXOverlayTexture N(MonstarDetailTexture) = {
     .raster = battle_area_sam2_actor_img_png,

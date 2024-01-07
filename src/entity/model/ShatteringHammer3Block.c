@@ -3,8 +3,8 @@
 
 #include "entity/model/ShatteringHammer3Block.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/ShatteringHammer3Block_texture.png.bin", D_0A001050_E398E0);
-INCLUDE_PAL("entity/model/ShatteringHammer3Block_texture.pal.bin", D_0A001150_E399E0);
+INCLUDE_IMG("entity/model/ShatteringHammer3Block_texture.png", D_0A001050_E398E0);
+INCLUDE_PAL("entity/model/ShatteringHammer3Block_texture.pal", D_0A001150_E399E0);
 Gfx D_0A001170_E39A00[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A001150_E399E0),

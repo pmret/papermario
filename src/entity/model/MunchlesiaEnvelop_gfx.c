@@ -2942,4 +2942,4 @@ Gfx Entity_MunchlesiaEnvelop_Render[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/MunchlesiaEnvelop.png.bin", D_0A005EE8_E80FC8);
+INCLUDE_IMG("entity/model/MunchlesiaEnvelop.png", D_0A005EE8_E80FC8);

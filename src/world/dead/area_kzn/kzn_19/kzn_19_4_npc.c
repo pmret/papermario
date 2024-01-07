@@ -35,8 +35,8 @@ extern Addr D_8020A000;
 #include "./kzn_19_anim2.c"
 #include "./kzn_19_anim3.c"
 
-INCLUDE_IMG("world/lava_piranha/vine.png.bin", dead_kzn_19_lava_piranha_vine_img);
-INCLUDE_PAL("world/lava_piranha/vine.pal.bin", dead_kzn_19_lava_piranha_vine_pal);
+INCLUDE_IMG("world/lava_piranha/vine.png", dead_kzn_19_lava_piranha_vine_img);
+INCLUDE_PAL("world/lava_piranha/vine.pal", dead_kzn_19_lava_piranha_vine_pal);
 
 #include "world/lava_piranha/vine.gfx.inc.c"
 #define DEAD_ROM_OFFSET (0x211EB0)

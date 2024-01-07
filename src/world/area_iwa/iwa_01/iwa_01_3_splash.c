@@ -1,7 +1,7 @@
 #include "iwa_01.h"
 #include "include_asset.h"
 
-INCLUDE_IMG("world/area_iwa/iwa_01/splash.png.bin", iwa_01_splash_img);
+INCLUDE_IMG("world/area_iwa/iwa_01/splash.png", iwa_01_splash_img);
 #include "world/area_iwa/iwa_01/splash.vtx.inc.c"
 #include "world/area_iwa/iwa_01/splash.gfx.inc.c"
 

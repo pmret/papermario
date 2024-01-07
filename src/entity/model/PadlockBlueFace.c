@@ -6,7 +6,7 @@
 #include "entity/model/PadlockBlueFace_3.vtx.inc.c"
 #include "entity/model/PadlockBlueFace_4.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/PadlockBlueFace_face.png.bin", D_0A000700_E60C50);
+INCLUDE_IMG("entity/model/PadlockBlueFace_face.png", D_0A000700_E60C50);
 Gfx Entity_PadlockBlueFace_LoadTextureFace[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -19,8 +19,8 @@ Gfx Entity_PadlockBlueFace_LoadTextureFace[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/PadlockBlueFace_keyhole.png.bin", D_0A000978_E60EC8);
-INCLUDE_PAL("entity/model/PadlockBlueFace_keyhole.pal.bin", D_0A001178_E616C8);
+INCLUDE_IMG("entity/model/PadlockBlueFace_keyhole.png", D_0A000978_E60EC8);
+INCLUDE_PAL("entity/model/PadlockBlueFace_keyhole.pal", D_0A001178_E616C8);
 Gfx Entity_PadlockBlueFace_LoadTextureKeyhole[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A001178_E616C8),
@@ -34,8 +34,8 @@ Gfx Entity_PadlockBlueFace_LoadTextureKeyhole[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/PadlockBlueFace_body.png.bin", D_0A001420_E61970);
-INCLUDE_PAL("entity/model/PadlockBlueFace_body.pal.bin", D_0A001820_E61D70);
+INCLUDE_IMG("entity/model/PadlockBlueFace_body.png", D_0A001420_E61970);
+INCLUDE_PAL("entity/model/PadlockBlueFace_body.pal", D_0A001820_E61D70);
 Gfx Entity_PadlockBlueFace_LoadTextureBody[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A001820_E61D70),

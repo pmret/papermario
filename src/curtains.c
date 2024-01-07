@@ -8,7 +8,7 @@
 #include "game_modes.h"
 #include "include_asset.h"
 
-INCLUDE_IMG("theater/walls.png.bin", theater_walls_png);
+INCLUDE_IMG("theater/walls.png", theater_walls_png);
 
 Gfx D_800746E0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
@@ -18,7 +18,7 @@ Gfx D_800746E0[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("theater/curtains.png.bin", theater_curtains_png);
+INCLUDE_IMG("theater/curtains.png", theater_curtains_png);
 
 Gfx D_80075730[] = {
     gsDPSetTextureLUT(G_TT_NONE),
@@ -28,8 +28,8 @@ Gfx D_80075730[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("theater/floor.png.bin", theater_floor_png);
-INCLUDE_PAL("theater/floor.pal.bin", theater_floor_pal);
+INCLUDE_IMG("theater/floor.png", theater_floor_png);
+INCLUDE_PAL("theater/floor.pal", theater_floor_pal);
 
 Gfx D_800758A0[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
@@ -173,7 +173,7 @@ Gfx TheaterInitGfx[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("ui/no_controller.png.bin", ui_no_controller_png);
+INCLUDE_IMG("ui/no_controller.png", ui_no_controller_png);
 
 Gfx NoControllerSetupTexGfx[] = {
     gsDPPipeSync(),

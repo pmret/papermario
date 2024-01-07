@@ -3341,4 +3341,4 @@ Gfx Entity_MunchlesiaReset1_Render[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/MunchlesiaReset1.png.bin", D_0A006840_E980D0);
+INCLUDE_IMG("entity/model/MunchlesiaReset1.png", D_0A006840_E980D0);

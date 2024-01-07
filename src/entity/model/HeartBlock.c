@@ -3,7 +3,7 @@
 
 #include "entity/model/HeartBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/HeartBlock_face.png.bin", D_0A0003C0_E435B0);
+INCLUDE_IMG("entity/model/HeartBlock_face.png", D_0A0003C0_E435B0);
 Gfx Entity_HeartBlock_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

@@ -2,12 +2,12 @@
 
 #include "include_asset.h"
 
-INCLUDE_IMG("effects/gfx/D_09000000_3BD9A0.png.bin", D_09000000_3BD9A0);
+INCLUDE_IMG("effects/gfx/D_09000000_3BD9A0.png", D_09000000_3BD9A0);
 
 #include "effects/gfx/D_09000800_3BE1A0.gfx.inc.c"
 
-INCLUDE_IMG("effects/gfx/D_09000878_3BE218.png.bin", D_09000878_3BE218);
-INCLUDE_PAL("effects/gfx/D_09000878_3BE218.pal.bin", D_09000A78_3BE418);
+INCLUDE_IMG("effects/gfx/D_09000878_3BE218.png", D_09000878_3BE218);
+INCLUDE_PAL("effects/gfx/D_09000878_3BE218.pal", D_09000A78_3BE418);
 
 #include "effects/gfx/D_09000A98_3BE438.gfx.inc.c"
 

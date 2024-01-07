@@ -131,7 +131,7 @@ StaticAnimatorNode* N(D_80248D8C_971F4C)[] = {
 
 #include "world/toad_house/blanket.vtx.inc.c"
 #include "world/toad_house/blanket.gfx.inc.c"
-INCLUDE_IMG("world/toad_house/blanket.png.bin", N(toad_house_blanket_img));
+INCLUDE_IMG("world/toad_house/blanket.png", N(toad_house_blanket_img));
 
 AnimScript N(ANS_ToadHouseBlanket) = {
         as_DisableMirroring

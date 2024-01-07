@@ -6,8 +6,8 @@
 #include "entity/model/BlueSwitch_3.vtx.inc.c"
 #include "entity/model/BlueSwitch_4.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/BlueSwitch_tex.png.bin", D_0A0005D0_E63F90);
-INCLUDE_PAL("entity/model/BlueSwitch_tex.pal.bin", D_0A0006D0_E64090);
+INCLUDE_IMG("entity/model/BlueSwitch_tex.png", D_0A0005D0_E63F90);
+INCLUDE_PAL("entity/model/BlueSwitch_tex.pal", D_0A0006D0_E64090);
 Gfx Entity_BlueSwitch_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A0006D0_E64090),
@@ -21,7 +21,7 @@ Gfx Entity_BlueSwitch_LoadTexture[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/BlueSwitch_exclamationMark.png.bin", D_0A000978_E64338);
+INCLUDE_IMG("entity/model/BlueSwitch_exclamationMark.png", D_0A000978_E64338);
 Gfx Entity_BlueSwitch_LoadExclMark[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

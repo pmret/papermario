@@ -13,8 +13,8 @@
 static s32 _pad = 0;
 
 #include "battle/move/item/pebble.png.h"
-INCLUDE_IMG("battle/move/item/pebble.png.bin", battle_item_pebble_png);
-INCLUDE_PAL("battle/move/item/pebble.pal.bin", battle_item_pebble_pal);
+INCLUDE_IMG("battle/move/item/pebble.png", battle_item_pebble_png);
+INCLUDE_PAL("battle/move/item/pebble.pal", battle_item_pebble_pal);
 
 Vtx N(model)[] = {
     { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 } } },

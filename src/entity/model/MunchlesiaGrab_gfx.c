@@ -2942,4 +2942,4 @@ Gfx Entity_MunchlesiaGrab_Render[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/MunchlesiaGrab.png.bin", D_0A005EE8_E7AAB8);
+INCLUDE_IMG("entity/model/MunchlesiaGrab.png", D_0A005EE8_E7AAB8);

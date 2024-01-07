@@ -105,8 +105,8 @@ EntityModelScript N(ModelScript4) = {
     ems_End
 };
 
-INCLUDE_IMG("battle/area/kzn2/lava_piranha_vine.png.bin", D_8021C940_5A3020);
-INCLUDE_PAL("battle/area/kzn2/lava_piranha_vine.pal.bin", D_8021CD40_5A3420);
+INCLUDE_IMG("battle/area/kzn2/lava_piranha_vine.png", D_8021C940_5A3020);
+INCLUDE_PAL("battle/area/kzn2/lava_piranha_vine.pal", D_8021CD40_5A3420);
 #include "battle/area/kzn2/lava_piranha_vine.gfx.inc.c"
 
 extern EvtScript N(EVS_Init);

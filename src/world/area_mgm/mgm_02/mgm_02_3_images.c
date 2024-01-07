@@ -2,8 +2,8 @@
 #include "include_asset.h"
 
 #include "world/area_mgm/mgm_02/panel_peach.png.h"
-INCLUDE_IMG("world/area_mgm/mgm_02/panel_peach.png.bin", mgm_02_panel_peach_img);
-INCLUDE_PAL("world/area_mgm/mgm_02/panel_peach.pal.bin", mgm_02_panel_peach_pal);
+INCLUDE_IMG("world/area_mgm/mgm_02/panel_peach.png", mgm_02_panel_peach_img);
+INCLUDE_PAL("world/area_mgm/mgm_02/panel_peach.pal", mgm_02_panel_peach_pal);
 
 MessageImageData N(MsgImg_PeachPanel)[] = {
     {

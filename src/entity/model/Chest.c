@@ -6,7 +6,7 @@
 #include "entity/model/Chest_3.vtx.inc.c"
 #include "entity/model/Chest_4.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/Chest_tex1.png.bin", D_0A000410_E64CE0);
+INCLUDE_IMG("entity/model/Chest_tex1.png", D_0A000410_E64CE0);
 Gfx Entity_Chest_LoadTexture1[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
@@ -21,8 +21,8 @@ Gfx Entity_Chest_LoadTexture1[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/Chest_tex2.png.bin", D_0A000898_E65168);
-INCLUDE_PAL("entity/model/Chest_tex2.pal.bin", D_0A000998_E65268);
+INCLUDE_IMG("entity/model/Chest_tex2.png", D_0A000898_E65168);
+INCLUDE_PAL("entity/model/Chest_tex2.pal", D_0A000998_E65268);
 Gfx Entity_Chest_LoadTexture2[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
@@ -38,8 +38,8 @@ Gfx Entity_Chest_LoadTexture2[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/Chest_lock.png.bin", D_0A000A70_E65340);
-INCLUDE_PAL("entity/model/Chest_lock.pal.bin", D_0A000B70_E65440);
+INCLUDE_IMG("entity/model/Chest_lock.png", D_0A000A70_E65340);
+INCLUDE_PAL("entity/model/Chest_lock.pal", D_0A000B70_E65440);
 Gfx Entity_Chest_LoadTextureLock[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

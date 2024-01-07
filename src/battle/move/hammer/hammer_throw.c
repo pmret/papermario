@@ -10,17 +10,17 @@
 
 static s32 pad_images = 0;
 
-INCLUDE_IMG("battle/move/hammer/dusty_hammer.png.bin", battle_move_hammer_throw_dusty_hammer_png);
-INCLUDE_PAL("battle/move/hammer/dusty_hammer.pal.bin", battle_move_hammer_throw_dusty_hammer_pal);
+INCLUDE_IMG("battle/move/hammer/dusty_hammer.png", battle_move_hammer_throw_dusty_hammer_png);
+INCLUDE_PAL("battle/move/hammer/dusty_hammer.pal", battle_move_hammer_throw_dusty_hammer_pal);
 
-INCLUDE_IMG("battle/move/hammer/basic_hammer.png.bin", battle_move_hammer_throw_basic_hammer_png);
-INCLUDE_PAL("battle/move/hammer/basic_hammer.pal.bin", battle_move_hammer_throw_basic_hammer_pal);
+INCLUDE_IMG("battle/move/hammer/basic_hammer.png", battle_move_hammer_throw_basic_hammer_png);
+INCLUDE_PAL("battle/move/hammer/basic_hammer.pal", battle_move_hammer_throw_basic_hammer_pal);
 
-INCLUDE_IMG("battle/move/hammer/super_hammer.png.bin", battle_move_hammer_throw_super_hammer_png);
-INCLUDE_PAL("battle/move/hammer/super_hammer.pal.bin", battle_move_hammer_throw_super_hammer_pal);
+INCLUDE_IMG("battle/move/hammer/super_hammer.png", battle_move_hammer_throw_super_hammer_png);
+INCLUDE_PAL("battle/move/hammer/super_hammer.pal", battle_move_hammer_throw_super_hammer_pal);
 
-INCLUDE_IMG("battle/move/hammer/ultra_hammer.png.bin", battle_move_hammer_throw_ultra_hammer_png);
-INCLUDE_PAL("battle/move/hammer/ultra_hammer.pal.bin", battle_move_hammer_throw_ultra_hammer_pal);
+INCLUDE_IMG("battle/move/hammer/ultra_hammer.png", battle_move_hammer_throw_ultra_hammer_png);
+INCLUDE_PAL("battle/move/hammer/ultra_hammer.pal", battle_move_hammer_throw_ultra_hammer_pal);
 
 #include "battle/move/hammer/hammer_throw.vtx.inc.c"
 

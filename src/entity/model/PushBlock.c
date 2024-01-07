@@ -3,8 +3,8 @@
 
 #include "entity/model/PushBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/PushBlock_face.png.bin", D_0A000120_E3DB80);
-INCLUDE_PAL("entity/model/PushBlock_face.pal.bin", D_0A0001A0_E3DC00);
+INCLUDE_IMG("entity/model/PushBlock_face.png", D_0A000120_E3DB80);
+INCLUDE_PAL("entity/model/PushBlock_face.pal", D_0A0001A0_E3DC00);
 Gfx Entity_PushBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A0001A0_E3DC00),

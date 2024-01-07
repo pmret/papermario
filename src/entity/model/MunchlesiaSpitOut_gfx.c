@@ -3341,4 +3341,4 @@ Gfx Entity_MunchlesiaSpitOut_Render[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/MunchlesiaSpitOut.png.bin", D_0A006840_E91220);
+INCLUDE_IMG("entity/model/MunchlesiaSpitOut.png", D_0A006840_E91220);

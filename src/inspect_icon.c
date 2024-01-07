@@ -26,8 +26,8 @@ enum {
 };
 
 #include "inspect_icon.png.h"
-INCLUDE_IMG("inspect_icon.png.bin", inspect_icon_img);
-INCLUDE_PAL("inspect_icon.pal.bin", inspect_icon_pal);
+INCLUDE_IMG("inspect_icon.png", inspect_icon_img);
+INCLUDE_PAL("inspect_icon.pal", inspect_icon_pal);
 #include "inspect_icon.gfx.inc.c"
 
 BSS InspectIconData InspectIcon;

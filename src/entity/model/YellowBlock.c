@@ -3,7 +3,7 @@
 
 #include "entity/model/YellowBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/YellowBlock_face.png.bin", D_0A000180_E3B9F0);
+INCLUDE_IMG("entity/model/YellowBlock_face.png", D_0A000180_E3B9F0);
 Gfx Entity_YellowBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

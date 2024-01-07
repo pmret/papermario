@@ -5,8 +5,8 @@
 #include "entity/model/RedSwitch_2.vtx.inc.c"
 #include "entity/model/RedSwitch_3.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/RedSwitch_tex.png.bin", D_0A0005D0_E63090);
-INCLUDE_PAL("entity/model/RedSwitch_tex.pal.bin", D_0A0006D0_E63190);
+INCLUDE_IMG("entity/model/RedSwitch_tex.png", D_0A0005D0_E63090);
+INCLUDE_PAL("entity/model/RedSwitch_tex.pal", D_0A0006D0_E63190);
 Gfx Entity_RedSwitch_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A0006D0_E63190),
@@ -20,7 +20,7 @@ Gfx Entity_RedSwitch_LoadTexture[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/RedSwitch_exclamationMark.png.bin", D_0A000978_E63438);
+INCLUDE_IMG("entity/model/RedSwitch_exclamationMark.png", D_0A000978_E63438);
 Gfx Entity_RedSwitch_LoadExclMark[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

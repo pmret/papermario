@@ -3,8 +3,8 @@
 
 #include "entity/model/WoodenCrate.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/WoodenCrate_img1.png.bin", D_0A001560_E52BA0);
-INCLUDE_PAL("entity/model/WoodenCrate_img1.pal.bin", D_0A001D60_E533A0);
+INCLUDE_IMG("entity/model/WoodenCrate_img1.png", D_0A001560_E52BA0);
+INCLUDE_PAL("entity/model/WoodenCrate_img1.pal", D_0A001D60_E533A0);
 Gfx Entity_WoodenCrate_LoadTexture1[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A001D60_E533A0),
@@ -18,8 +18,8 @@ Gfx Entity_WoodenCrate_LoadTexture1[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/WoodenCrate_img2.png.bin", D_0A001E28_E53468);
-INCLUDE_PAL("entity/model/WoodenCrate_img2.pal.bin", D_0A002628_E53C68);
+INCLUDE_IMG("entity/model/WoodenCrate_img2.png", D_0A001E28_E53468);
+INCLUDE_PAL("entity/model/WoodenCrate_img2.pal", D_0A002628_E53C68);
 Gfx Entity_WoodenCrate_LoadTexture2[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A002628_E53C68),

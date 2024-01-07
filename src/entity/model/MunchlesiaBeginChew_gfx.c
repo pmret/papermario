@@ -3341,4 +3341,4 @@ Gfx Entity_MunchlesiaBeginChew_Render[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/MunchlesiaBeginChew.png.bin", D_0A006840_E87E30);
+INCLUDE_IMG("entity/model/MunchlesiaBeginChew.png", D_0A006840_E87E30);

@@ -14,8 +14,8 @@
 static s32 _pad = 0;
 
 #include "battle/move/item/mystery.png.h"
-INCLUDE_IMG("battle/move/item/mystery.png.bin", battle_item_mystery_png);
-INCLUDE_PAL("battle/move/item/mystery.pal.bin", battle_item_mystery_pal);
+INCLUDE_IMG("battle/move/item/mystery.png", battle_item_mystery_png);
+INCLUDE_PAL("battle/move/item/mystery.pal", battle_item_mystery_pal);
 
 Vtx N(model)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},

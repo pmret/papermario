@@ -3,8 +3,8 @@
 
 #include "entity/model/PowBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/PowBlock_face.png.bin", D_0A000100_E43C20);
-INCLUDE_PAL("entity/model/PowBlock_face.pal.bin", D_0A000900_E44420);
+INCLUDE_IMG("entity/model/PowBlock_face.png", D_0A000100_E43C20);
+INCLUDE_PAL("entity/model/PowBlock_face.pal", D_0A000900_E44420);
 Gfx Entity_PowBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A000900_E44420),

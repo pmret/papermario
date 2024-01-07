@@ -8,4 +8,4 @@ s16 D_80073E0A = 0;
 
 s32 D_80073E0C = 0; // unused?
 
-INCLUDE_IMG("reset_tiles.png.bin", ResetTilesImg);
+INCLUDE_IMG("reset_tiles.png", ResetTilesImg);

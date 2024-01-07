@@ -53,5 +53,5 @@ Gfx Entity_HitRedBlock_RenderBlock1[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/HitRedBlock_face1.png.bin", D_0A000460_E48BE0);
-INCLUDE_IMG("entity/model/HitRedBlock_face2.png.bin", D_0A000C60_E493E0);
+INCLUDE_IMG("entity/model/HitRedBlock_face1.png", D_0A000460_E48BE0);
+INCLUDE_IMG("entity/model/HitRedBlock_face2.png", D_0A000C60_E493E0);

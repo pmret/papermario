@@ -3,7 +3,7 @@
 
 #include "entity/model/UnusedBlock.vtx.inc.c"
 
-INCLUDE_IMG("entity/model/UnusedBlock_img1.png.bin", D_0A0003C0_E3D190);
+INCLUDE_IMG("entity/model/UnusedBlock_img1.png", D_0A0003C0_E3D190);
 Gfx D_0A0007C0_E3D590[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
@@ -18,8 +18,8 @@ Gfx D_0A0007C0_E3D590[] = {
     gsSPEndDisplayList(),
 };
 
-INCLUDE_IMG("entity/model/UnusedBlock_img2.png.bin", D_0A000848_E3D618);
-INCLUDE_PAL("entity/model/UnusedBlock_img2.pal.bin", D_0A000948_E3D718);
+INCLUDE_IMG("entity/model/UnusedBlock_img2.png", D_0A000848_E3D618);
+INCLUDE_PAL("entity/model/UnusedBlock_img2.pal", D_0A000948_E3D718);
 Gfx D_0A000968_E3D738[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

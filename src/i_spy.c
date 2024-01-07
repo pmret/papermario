@@ -20,10 +20,10 @@ enum {
 };
 
 #include "ispy_icon.png.h"
-INCLUDE_IMG("ispy_icon.png.bin", ispy_icon_img);
-INCLUDE_PAL("ispy_icon.pal.bin", ispy_icon_1_pal);
-INCLUDE_PAL("ispy_icon.2.pal.bin", ispy_icon_2_pal);
-INCLUDE_PAL("ispy_icon.3.pal.bin", ispy_icon_3_pal);
+INCLUDE_IMG("ispy_icon.png", ispy_icon_img);
+INCLUDE_PAL("ispy_icon.pal", ispy_icon_1_pal);
+INCLUDE_PAL("ispy_icon.2.pal", ispy_icon_2_pal);
+INCLUDE_PAL("ispy_icon.3.pal", ispy_icon_3_pal);
 #include "ispy_icon.gfx.inc.c"
 
 BSS ISpyNotification ISpyData;
