@@ -62,8 +62,6 @@ def write_ninja_rules(
     cc_egcs = f"{cc_egcs_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
 
-    ICONV = "iconv --from UTF-8 --to $encoding"
-
     CPPFLAGS_COMMON = (
         "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
         "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
@@ -77,7 +75,7 @@ def write_ninja_rules(
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
-    cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -x c {extra_cflags}"
+    cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fdiagnostics-color=always -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -x c {extra_cflags}"
 
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3", "-g1")
@@ -141,15 +139,15 @@ def write_ninja_rules(
     ninja.rule(
         "cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | $iconv | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule(
         "cc_modern",
-        description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
+        description="gcc_modern $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | $iconv | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -175,7 +173,7 @@ def write_ninja_rules(
     ninja.rule(
         "cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cxx} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | $iconv | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -261,7 +259,7 @@ def write_ninja_rules(
     ninja.rule(
         "msg",
         description="msg $in",
-        command=f"$python {BUILD_TOOLS}/msg/parse_compile.py $in $out",
+        command=f"$python {BUILD_TOOLS}/msg/parse_compile.py $version $in $out",
     )
 
     ninja.rule(
@@ -378,7 +376,7 @@ class Configure:
         self.linker_entries = None
 
     def split(self, assets: bool, code: bool, shift: bool, debug: bool):
-        import split
+        import splat.scripts.split as split
 
         modes = ["ld"]
         if assets:
@@ -502,19 +500,6 @@ class Configure:
         modern_gcc: bool,
         c_maps: bool = False,
     ):
-        import segtypes
-        import segtypes.common.asm
-        import segtypes.common.bin
-        import segtypes.common.c
-        import segtypes.common.data
-        import segtypes.common.group
-        import segtypes.common.rodatabin
-        import segtypes.common.textbin
-        import segtypes.n64.header
-        import segtypes.n64.img
-        import segtypes.n64.palette
-        import segtypes.n64.yay0
-
         assert self.linker_entries is not None
 
         built_objects = set()
@@ -634,6 +619,8 @@ class Configure:
             "actor_types",
         )
 
+        import splat
+
         # Build objects
         for entry in self.linker_entries:
             seg = entry.segment
@@ -643,16 +630,16 @@ class Configure:
 
             assert entry.object_path is not None
 
-            if isinstance(seg, segtypes.n64.header.N64SegHeader):
+            if isinstance(seg, splat.segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.common.asm.CommonSegAsm) or (
-                isinstance(seg, segtypes.common.data.CommonSegData) and not seg.type[0] == "."
+            elif isinstance(seg, splat.segtypes.common.asm.CommonSegAsm) or (
+                isinstance(seg, splat.segtypes.common.data.CommonSegData) and not seg.type[0] == "."
             ):
                 build(entry.object_path, entry.src_paths, "as")
             elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.common.c.CommonSegC) or (
-                isinstance(seg, segtypes.common.data.CommonSegData) and seg.type[0] == "."
+            elif isinstance(seg, splat.segtypes.common.c.CommonSegC) or (
+                isinstance(seg, splat.segtypes.common.data.CommonSegData) and seg.type[0] == "."
             ):
                 cflags = None
                 if isinstance(seg.yaml, dict):
@@ -685,10 +672,19 @@ class Configure:
                 elif "egcs" in cflags:
                     task = "cc_egcs"
                     cflags = cflags.replace("egcs", "")
+                elif "gcc_modern" in cflags:
+                    task = "cc_modern"
+                    cflags = cflags.replace("gcc_modern", "")
 
                 encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":
                     encoding = "EUC-JP"
+
+                iconv = f"iconv --from UTF-8 --to {encoding}"
+
+                # use tools/sjis-escape.py for src/battle/area/tik2/area.c
+                if version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
+                    iconv += " | tools/sjis-escape.py"
 
                 # Dead cod
                 if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
@@ -701,7 +697,7 @@ class Configure:
                         variables={
                             "cflags": cflags,
                             "cppflags": f"-DVERSION_{self.version.upper()}",
-                            "encoding": encoding,
+                            "iconv": iconv,
                         },
                     )
                     build(
@@ -724,14 +720,14 @@ class Configure:
                         variables={
                             "cflags": cflags,
                             "cppflags": f"-DVERSION_{self.version.upper()}",
-                            "encoding": encoding,
+                            "iconv": iconv,
                         },
                     )
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
-                if isinstance(seg, segtypes.common.group.CommonSegGroup):
+                if isinstance(seg, splat.segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
-                        if isinstance(seg, segtypes.n64.img.N64SegImg):
+                        if isinstance(seg, splat.segtypes.n64.img.N64SegImg):
                             flags = ""
                             if seg.n64img.flip_h:
                                 flags += "--flip-x "
@@ -776,7 +772,7 @@ class Configure:
                                 "bin_inc_c",
                                 vars,
                             )
-                        elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
+                        elif isinstance(seg, splat.segtypes.n64.palette.N64SegPalette):
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
                             bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
@@ -806,16 +802,16 @@ class Configure:
                                 vars,
                             )
             elif (
-                isinstance(seg, segtypes.common.bin.CommonSegBin)
-                or isinstance(seg, segtypes.common.textbin.CommonSegTextbin)
-                or isinstance(seg, segtypes.common.rodatabin.CommonSegRodatabin)
+                isinstance(seg, splat.segtypes.common.bin.CommonSegBin)
+                or isinstance(seg, splat.segtypes.common.textbin.CommonSegTextbin)
+                or isinstance(seg, splat.segtypes.common.rodatabin.CommonSegRodatabin)
             ):
                 build(entry.object_path, entry.src_paths, "bin")
-            elif isinstance(seg, segtypes.n64.yay0.N64SegYay0):
+            elif isinstance(seg, splat.segtypes.n64.yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("")  # remove .o
                 build(compressed_path, entry.src_paths, "yay0")
                 build(entry.object_path, [compressed_path], "bin")
-            elif isinstance(seg, segtypes.n64.img.N64SegImg):
+            elif isinstance(seg, splat.segtypes.n64.img.N64SegImg):
                 flags = ""
                 if seg.n64img.flip_h:
                     flags += "--flip-x "
@@ -841,7 +837,7 @@ class Configure:
                 # )
                 # vars = {"c_name": c_sym.name}
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
-            elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
+            elif isinstance(seg, splat.segtypes.n64.palette.N64SegPalette):
                 bin_path = entry.object_path.with_suffix(".bin")
 
                 build(
@@ -1077,7 +1073,7 @@ class Configure:
                                 variables={
                                     "cflags": "",
                                     "cppflags": f"-DVERSION_{self.version.upper()}",
-                                    "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                                    "iconv": "iconv --from UTF-8 --to CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                                 },
                             )
                             build(elf_path, [o_path], "shape_ld")
@@ -1176,7 +1172,7 @@ class Configure:
                     variables={
                         "cflags": "",
                         "cppflags": f"-DVERSION_{self.version.upper()}",
-                        "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                        "iconv": "iconv --from UTF-8 --to CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                     },
                 )
             else:
@@ -1378,7 +1374,7 @@ if __name__ == "__main__":
     extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes -Wno-redundant-decls"
 
     # add splat to python import path
-    sys.path.insert(0, str((ROOT / args.splat).resolve()))
+    sys.path.insert(0, str((ROOT / args.splat / "src").resolve()))
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 

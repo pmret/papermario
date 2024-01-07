@@ -1,7 +1,7 @@
-from segtypes.n64.segment import N64Segment
-from segtypes.n64.palette import iter_in_groups
-from util.color import unpack_color
-from util import options
+from splat.segtypes.n64.segment import N64Segment
+from splat.segtypes.n64.palette import iter_in_groups
+from splat.util.color import unpack_color
+from splat.util import options
 import png  # type: ignore
 
 
@@ -46,7 +46,7 @@ class N64SegPm_charset_palettes(N64Segment):
                 w.write_array(f, raster)
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         fs_dir = options.opts.asset_path / self.dir / self.name / "palette"
 

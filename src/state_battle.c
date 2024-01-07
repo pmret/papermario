@@ -23,7 +23,7 @@ SHIFT_BSS s8 D_800A0900;
 SHIFT_BSS s32 D_800A0904;
 SHIFT_BSS s32 D_800A0908;
 
-#ifdef SHIFT
+#if defined(SHIFT) || VERSION_IQUE
 #define shim_battle_heap_create_obfuscated battle_heap_create
 #endif
 
@@ -60,12 +60,10 @@ void state_step_battle(void) {
         gGameStatusPtr->isBattle = TRUE;
         backup_map_collision_data();
 
-#if VERSION_IQUE
-        battle_heap_create();
-#else
+#if !VERSION_IQUE
         load_obfuscation_shims();
-        shim_battle_heap_create_obfuscated();
 #endif
+        shim_battle_heap_create_obfuscated();
 
         sfx_clear_env_sounds(0);
 

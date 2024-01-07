@@ -2,15 +2,14 @@ import os
 import struct
 import sys
 from pathlib import Path
-import yaml as yaml_loader
 from typing import List, Tuple
 
 TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(str(Path(TOOLS_DIR) / "build/imgfx"))
 from imgfx_data import Anim, Triangle, Vertex
 
-from segtypes.n64.segment import N64Segment
-from util import log, options
+from splat.segtypes.n64.segment import N64Segment
+from splat.util import log, options
 
 
 class N64SegPm_imgfx_data(N64Segment):
@@ -114,7 +113,7 @@ class N64SegPm_imgfx_data(N64Segment):
                 f.write(anim.toJSON())
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         return [
             LinkerEntry(

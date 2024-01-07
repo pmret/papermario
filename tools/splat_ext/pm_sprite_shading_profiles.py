@@ -10,8 +10,8 @@ import json
 import struct
 from typing import Literal
 
-from segtypes.n64.segment import N64Segment
-from util import options
+from splat.segtypes.n64.segment import N64Segment
+from splat.util import options
 
 GROUPS = [
     SpriteShadingGroup("TIK"),
@@ -211,7 +211,7 @@ class N64SegPm_sprite_shading_profiles(N64Segment):
         return self.OUT_DIR / f"{self.name}.json"
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         return [
             LinkerEntry(

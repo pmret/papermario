@@ -61,7 +61,7 @@ typedef struct {
 void fio_deserialize_state(void);
 void load_map_hit_asset(void);
 
-#ifdef SHIFT
+#if defined(SHIFT) || VERSION_IQUE
 #define shim_general_heap_create_obfuscated general_heap_create
 #endif
 
@@ -84,12 +84,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
 
-#if VERSION_IQUE
-    general_heap_create();
-#else
+#if !VERSION_IQUE
     load_obfuscation_shims();
-    shim_general_heap_create_obfuscated();
 #endif
+    shim_general_heap_create_obfuscated();
 
 #if VERSION_JP
     reset_max_rumble_duration();
@@ -156,12 +154,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         load_map_bg(wMapBgName);
     }
 
-#if VERSION_IQUE
-    general_heap_create();
-#else
+#if !VERSION_IQUE
     load_obfuscation_shims();
-    shim_general_heap_create_obfuscated();
 #endif
+    shim_general_heap_create_obfuscated();
 
     sfx_clear_env_sounds(0);
     clear_worker_list();

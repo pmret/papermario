@@ -3282,8 +3282,60 @@ segments:
   - [0x1C7F208, bin ]
 
   - start: 0x1D40000
-    type: bin
-    name: pm_msg # TODO: fix message dumping for JP
+    type: pm_msg
+    name: msg_jp
+    files:
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_Unused
+      - 18_Unused
+      - 19_NewsBoard
+      - 1A_GossipBoard
+      - 1B_MapTattles
+      - 1C_NpcTattles
+      - 1D_EntityTattles
+      - 1E_EnemyTattles
+      - 1F_Unused
+      - 20_Menus
+      - 21_Choices
+      - 22_MenuTips
+      - 23_Documents
+      - 24_QuizQuestions
+      - 25_QuizChoices
+      - 26_MerlonHints
+      - 27_MerluvleeHints
+      - 28_ShortItemDesc
+      - 29_ShopItemDesc
+      - 2A_FullItemDesc
+      - 2B_ItemNames
+      - 2C_PlayerMoves
+      - 2D_Shops
+      - 2E_PartnerDesc
+      - 2F_PartnerMoves
+      - 30_TestStrings
+      - 31_EnemyNames
+      - 32_Credits
 
   - [0x1DDBE60, bin]
   - [0x1E00000, pm_map_data, mapfs]

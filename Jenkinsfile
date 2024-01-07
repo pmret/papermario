@@ -40,7 +40,7 @@ pipeline {
                         def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
                         def ique_progress = sh(returnStdout: true, script: "python3 progress.py ique --pr-comment").trim()
                         def pal_progress = sh(returnStdout: true, script: "python3 progress.py pal --pr-comment").trim()
-                        def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --jenkins").trim()
+                        def warnings = sh(returnStdout: true, script: "./tools/warnings_count/compare_warnings.py --pr-message").trim()
                         def comment_id = -1
 
                         for (comment in pullRequest.comments) {

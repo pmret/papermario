@@ -1602,7 +1602,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
     }
 
 #if VERSION_IQUE
-    if (character >= 0x5F && character<=0x8F) {
+    if (character >= MSG_CHAR_MULTIBYTE_FIRST && character <= MSG_CHAR_MULTIBYTE_LAST) {
         charWidth = 16.0;
         return charWidth * msgScale;
     }
@@ -1930,7 +1930,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                 }
 
 #if VERSION_IQUE
-                if (prevChar >= 0x5f && prevChar <= 0x8F) {
+                if (prevChar >= MSG_CHAR_MULTIBYTE_FIRST && prevChar <= MSG_CHAR_MULTIBYTE_LAST) {
                     break;
                 }
 #endif
@@ -3692,9 +3692,6 @@ void msg_reset_gfx_state(void) {
     gSPDisplayList(gMainGfxPos++, D_8014C500);
 }
 
-#if VERSION_IQUE && !defined(NON_MATCHING)
-INCLUDE_ASM(s32, "msg", msg_draw_char);
-#else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
     MessageCharset* messageCharset;
     s32 fontVariant;
@@ -3708,18 +3705,19 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     s32 rightPosY;
 
     f32 clipOffset;
-    s32 texOffsetX;
-    s32 texOffsetY;
-    s32 ulx, uly, lrx, lry;
+    s32 ulx, texOffsetX;
+    s32 uly, texOffsetY;
+    s32 lrx, lry;
     s32 dsdx, dtdy;
+    s32 posX2, posY2;
 
 #if VERSION_IQUE
     if (charIndex == MSG_CHAR_ZH_RANK) {
-        load_font_data(charset_standard_OFFSET + 0x19F80, sizeof(D_801544A0[0]), D_801544A0[0]);
+        load_font_data(((u8 (*)[128])charset_standard_OFFSET)[charIndex], sizeof(D_801544A0[0]), D_801544A0[0]);
     } else if (charIndex == MSG_CHAR_ZH_CHAPTER) {
-        load_font_data(charset_standard_OFFSET + 0x1A000, sizeof(D_801544A0[0]), D_801544A0[1]);
+        load_font_data(((u8 (*)[128])charset_standard_OFFSET)[charIndex], sizeof(D_801544A0[0]), D_801544A0[1]);
     } else if (charIndex >= MSG_CHAR_ZH_START) {
-        load_font_data(charset_standard_OFFSET + charIndex, sizeof(D_801544A0[0]), D_801544A0[D_8014AD24]);
+        load_font_data(((u8 (*)[128])charset_standard_OFFSET)[charIndex], sizeof(D_801544A0[0]), D_801544A0[D_8014AD24]);
     }
 #endif
 
@@ -3731,34 +3729,37 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     clipUlx = drawState->clipX[0];
     clipLrx = drawState->clipX[1];
 
-    rightPosX = posX + (s32)(drawState->charScale.x * messageCharset->texSize.x);
-    rightPosY = posY + (s32)(drawState->charScale.y * messageCharset->texSize.y);
+    posX2 = posX;
+    posY2 = posY;
 
-    if (posX >= clipLrx || posY >= clipLry || rightPosX <= clipUlx || rightPosY <= clipUly) {
+    rightPosX = posX2 + (s32)(drawState->charScale.x * messageCharset->texSize.x);
+    rightPosY = posY2 + (s32)(drawState->charScale.y * messageCharset->texSize.y);
+
+    if (posX2 >= clipLrx || posY2 >= clipLry || rightPosX <= clipUlx || rightPosY <= clipUly) {
         return;
     }
 
-    if (posX < clipUlx) {
-        clipOffset = abs(posX - clipUlx) / drawState->charScale.x;
+    if (posX2 < clipUlx) {
+        clipOffset = abs(posX2 - clipUlx) / drawState->charScale.x;
         texOffsetX = (f32)((clipOffset + 0.5) * 32.0);
         ulx = clipUlx;
     } else {
         texOffsetX = 0;
-        ulx = posX;
+        ulx = posX2;
     }
 
-    if (posY < clipUly) {
-        if (!(printer->stateFlags & MSG_STATE_FLAG_400) || posY < 0) {
-            clipOffset = abs(posY - clipUly) / drawState->charScale.y;
+    if (posY2 < clipUly) {
+        if (!(printer->stateFlags & MSG_STATE_FLAG_400) || posY2 < 0) {
+            clipOffset = abs(posY2 - clipUly) / drawState->charScale.y;
             texOffsetY = clipOffset * 32.0f;
             uly = clipUly;
         } else {
             texOffsetY = 0;
-            uly = posY;
+            uly = posY2;
         }
     } else {
         texOffsetY = 0;
-        uly = posY;
+        uly = posY2;
     }
 
     lrx = rightPosX;
@@ -3831,7 +3832,6 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     }
 #endif
 }
-#endif
 
 void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 posX, u16 posY, u16 sizeX, u16 sizeY) {
     u16 lrX = posX + sizeX;

@@ -1,4 +1,4 @@
-from segtypes.n64.gfx import N64SegGfx
+from splat.segtypes.n64.gfx import N64SegGfx
 
 
 class N64SegGfx_common(N64SegGfx):

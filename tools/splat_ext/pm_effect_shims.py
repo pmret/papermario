@@ -1,7 +1,7 @@
 from typing import List
 from yaml.loader import Loader
-from segtypes.n64.segment import N64Segment
-from util import options
+from splat.segtypes.n64.segment import N64Segment
+from splat.util import options
 import yaml as yaml_loader
 
 
@@ -62,7 +62,7 @@ glabel {name}
                 f.write(shim_asm)
 
     def get_linker_entries(self):
-        from segtypes.linker_entry import LinkerEntry
+        from splat.segtypes.linker_entry import LinkerEntry
 
         ret = []
 

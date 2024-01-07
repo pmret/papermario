@@ -8,9 +8,9 @@ from typing import List
 
 # splat imports; will fail if script run directly
 try:
-    from segtypes.n64.segment import N64Segment
-    from segtypes.linker_entry import LinkerEntry
-    from util import options
+    from splat.segtypes.n64.segment import N64Segment
+    from splat.segtypes.linker_entry import LinkerEntry
+    from splat.util import options
 
     splat_loaded = True
 except ImportError:

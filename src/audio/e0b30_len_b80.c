@@ -4,7 +4,6 @@
 void bgm_update_volume(void);
 void bgm_set_target_volume(s16 volume);
 
-// these are BSS
 SHIFT_BSS s16 MusicDefaultVolume;
 SHIFT_BSS s16 MusicMaxVolume;
 SHIFT_BSS s16 MusicCurrentVolume;
