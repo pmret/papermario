@@ -7,12 +7,12 @@
     extern unsigned char SYMBOLNAME[]; \
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
-        ".data\n" \
+        ".pushsection .data\n" \
         ".align 2\n" \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
-        ".text" \
+        ".popsection" \
     )
 
 // two macros are needed for N() usage
@@ -23,12 +23,12 @@
     extern unsigned short SYMBOLNAME[]; \
     __asm__( \
         ".globl " #SYMBOLNAME"\n" \
-        ".data\n" \
+        ".pushsection .data\n" \
         ".align 2\n" \
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
-        ".text" \
+        ".popsection" \
     )
 
 #endif // _H_INCLUDE_ASSET
