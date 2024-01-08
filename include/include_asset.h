@@ -12,6 +12,7 @@
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
+        ".text" \
     )
 
 // two macros are needed for N() usage
@@ -27,6 +28,7 @@
         ".type " #SYMBOLNAME", @object\n" \
         #SYMBOLNAME":\n" \
         ".incbin \"ver/"ASTRINGIFY(VERSION)"/build/" FILENAME ".bin\"\n" \
+        ".text" \
     )
 
 #endif // _H_INCLUDE_ASSET
