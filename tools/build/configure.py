@@ -1382,7 +1382,9 @@ if __name__ == "__main__":
         print(f"configure: configuring version {version}")
 
         if version == "ique" and not args.non_matching and sys.platform == "darwin":
-            print("configure: refusing to build iQue Player version on macOS because EGCS compiler is not available (use --non-matching to use default compiler)")
+            print(
+                "configure: refusing to build iQue Player version on macOS because EGCS compiler is not available (use --non-matching to use default compiler)"
+            )
             continue
 
         configure = Configure(version)
