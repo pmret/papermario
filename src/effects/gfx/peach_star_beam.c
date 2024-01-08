@@ -1,5 +1,7 @@
 #include "common.h"
 
+#include "include_asset.h"
+
 #include "effects/gfx/D_09000000_3E5F30.vtx.inc.c"
 #include "effects/gfx/D_090001A0_3E60D0.vtx.inc.c"
 #include "effects/gfx/D_090001C0_3E60F0.vtx.inc.c"
@@ -17,44 +19,44 @@
 
 u8 D_090003E0_3E6310[8] = {};
 
-#include "effects/gfx/D_090003E8_3E6318.png.inc.c"
-#include "effects/gfx/D_090005E8_3E6518.png.inc.c"
-#include "effects/gfx/D_090005E8_3E6518.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090003E8_3E6318.png", D_090003E8_3E6318);
+INCLUDE_IMG("effects/gfx/D_090005E8_3E6518.png", D_090005E8_3E6518);
+INCLUDE_PAL("effects/gfx/D_090005E8_3E6518.pal", D_090007E8_3E6718);
 
 u8 D_09000808_3E6738[0x1E0] = {};
 
-#include "effects/gfx/D_090009E8_3E6918.png.inc.c"
-#include "effects/gfx/D_090009E8_3E6918.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090009E8_3E6918.png", D_090009E8_3E6918);
+INCLUDE_PAL("effects/gfx/D_090009E8_3E6918.pal", D_090011E8_3E7118);
 
 u8 D_09001208_3E7138[0x1E0] = {};
 
-#include "effects/gfx/D_090013E8_3E7318.png.inc.c"
-#include "effects/gfx/D_090013E8_3E7318.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090013E8_3E7318.png", D_090013E8_3E7318);
+INCLUDE_PAL("effects/gfx/D_090013E8_3E7318.pal", D_09001BE8_3E7B18);
 
 u8 D_09001C08_3E7B38[0x1E0] = {};
 
-#include "effects/gfx/D_09001DE8_3E7D18.png.inc.c"
-#include "effects/gfx/D_09001DE8_3E7D18.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09001DE8_3E7D18.png", D_09001DE8_3E7D18);
+INCLUDE_PAL("effects/gfx/D_09001DE8_3E7D18.pal", D_090025E8_3E8518);
 
 u8 D_09002608_3E8538[0x1E0] = {};
 
-#include "effects/gfx/D_090027E8_3E8718.png.inc.c"
-#include "effects/gfx/D_090027E8_3E8718.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090027E8_3E8718.png", D_090027E8_3E8718);
+INCLUDE_PAL("effects/gfx/D_090027E8_3E8718.pal", D_09002FE8_3E8F18);
 
 u8 D_09003008_3E8F38[0x1E0] = {};
 
-#include "effects/gfx/D_090031E8_3E9118.png.inc.c"
-#include "effects/gfx/D_090031E8_3E9118.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090031E8_3E9118.png", D_090031E8_3E9118);
+INCLUDE_PAL("effects/gfx/D_090031E8_3E9118.pal", D_090039E8_3E9918);
 
 u8 D_09003A08_3E9938[0x1E0] = {};
 
-#include "effects/gfx/D_09003BE8_3E9B18.png.inc.c"
-#include "effects/gfx/D_09003BE8_3E9B18.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09003BE8_3E9B18.png", D_09003BE8_3E9B18);
+INCLUDE_PAL("effects/gfx/D_09003BE8_3E9B18.pal", D_090043E8_3EA318);
 
 u8 D_09004408_3EA338[0x1E0] = {};
 
-#include "effects/gfx/D_090045E8_3EA518.png.inc.c"
-#include "effects/gfx/D_090045E8_3EA518.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090045E8_3EA518.png", D_090045E8_3EA518);
+INCLUDE_PAL("effects/gfx/D_090045E8_3EA518.pal", D_09004DE8_3EAD18);
 
 u8 D_09004E08_3EAD38[0x1E0] = {};
 

@@ -1,9 +1,10 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/BrickBlock.vtx.inc.c"
 
-#include "entity/model/BrickBlock_face.png.inc.c"
-#include "entity/model/BrickBlock_face.pal.inc.c"
+INCLUDE_IMG("entity/model/BrickBlock_face.png", D_0A000140_E3DEF0);
+INCLUDE_PAL("entity/model/BrickBlock_face.pal", D_0A000340_E3E0F0);
 Gfx Entity_BrickBlock_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

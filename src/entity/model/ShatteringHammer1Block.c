@@ -1,9 +1,10 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/ShatteringHammer1Block.vtx.inc.c"
 
-#include "entity/model/ShatteringHammer1Block_texture.png.inc.c"
-#include "entity/model/ShatteringHammer1Block_texture.pal.inc.c"
+INCLUDE_IMG("entity/model/ShatteringHammer1Block_texture.png", D_0A001060_E33480);
+INCLUDE_PAL("entity/model/ShatteringHammer1Block_texture.pal", D_0A001260_E33680);
 Gfx D_0A001460_E33880[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A001260_E33680),

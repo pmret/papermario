@@ -1,22 +1,24 @@
-#include "effects/gfx/D_09000000_3A77A0.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_3A77A0.png", D_09000000_3A77A0);
 #include "effects/gfx/D_09000400_3A7BA0.gfx.inc.c"
-#include "effects/gfx/D_09000470_3A7C10.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09000470_3A7C10.png", D_09000470_3A7C10);
 #include "effects/gfx/D_09000870_3A8010.gfx.inc.c"
-#include "effects/gfx/D_090008E0_3A8080.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_090008E0_3A8080.png", D_090008E0_3A8080);
 #include "effects/gfx/D_09000CE0_3A8480.gfx.inc.c"
-#include "effects/gfx/D_09000D50_3A84F0.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09000D50_3A84F0.png", D_09000D50_3A84F0);
 #include "effects/gfx/D_09001150_3A88F0.gfx.inc.c"
-#include "effects/gfx/D_090011C0_3A8960.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_090011C0_3A8960.png", D_090011C0_3A8960);
 #include "effects/gfx/D_090015C0_3A8D60.gfx.inc.c"
-#include "effects/gfx/D_09001630_3A8DD0.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09001630_3A8DD0.png", D_09001630_3A8DD0);
 #include "effects/gfx/D_09001A30_3A91D0.gfx.inc.c"
-#include "effects/gfx/D_09001AA0_3A9240.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09001AA0_3A9240.png", D_09001AA0_3A9240);
 #include "effects/gfx/D_09001EA0_3A9640.gfx.inc.c"
-#include "effects/gfx/D_09001F10_3A96B0.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09001F10_3A96B0.png", D_09001F10_3A96B0);
 #include "effects/gfx/D_09002310_3A9AB0.gfx.inc.c"
-#include "effects/gfx/D_09002380_3A9B20.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09002380_3A9B20.png", D_09002380_3A9B20);
 #include "effects/gfx/D_09002780_3A9F20.gfx.inc.c"
-#include "effects/gfx/D_090027F0_3A9F90.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_090027F0_3A9F90.png", D_090027F0_3A9F90);
 #include "effects/gfx/D_09002BF0_3AA390.gfx.inc.c"
 
 #include "effects/gfx/D_09002C60_3AA400.vtx.inc.c"

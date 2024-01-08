@@ -1,28 +1,30 @@
+#include "include_asset.h"
+
 #include "PR/gbi.h"
 
 Lights1 D_09000000_398BC0 = gdSPDefLights1(255, 255, 255, 255, 255, 255, 255, 65, 109);
 
-#include "effects/gfx/D_09000018_398BD8.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09000018_398BD8.png", D_09000018_398BD8);
 #include "effects/gfx/D_09000218_398DD8.gfx.inc.c"
-#include "effects/gfx/D_09000288_398E48.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09000288_398E48.png", D_09000288_398E48);
 #include "effects/gfx/D_09001288_399E48.gfx.inc.c"
-#include "effects/gfx/D_090012F8_399EB8.png.inc.c"
-#include "effects/gfx/D_090012F8_399EB8.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_090012F8_399EB8.png", D_090012F8_399EB8);
+INCLUDE_PAL("effects/gfx/D_090012F8_399EB8.pal", D_090014F8_39A0B8);
 #include "effects/gfx/D_09001518_39A0D8.gfx.inc.c"
-#include "effects/gfx/D_090015B8_39A178.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_090015B8_39A178.png", D_090015B8_39A178);
 #include "effects/gfx/D_090017B8_39A378.gfx.inc.c"
-#include "effects/gfx/D_09001828_39A3E8.png.inc.c"
-#include "effects/gfx/D_09001828_39A3E8.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09001828_39A3E8.png", D_09001828_39A3E8);
+INCLUDE_PAL("effects/gfx/D_09001828_39A3E8.pal", D_09001C28_39A7E8);
 #include "effects/gfx/D_09001C48_39A808.gfx.inc.c"
-#include "effects/gfx/D_09001CE8_39A8A8.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09001CE8_39A8A8.png", D_09001CE8_39A8A8);
 #include "effects/gfx/D_09002CE8_39B8A8.gfx.inc.c"
-#include "effects/gfx/D_09002D58_39B918.png.inc.c"
-#include "effects/gfx/D_09002D58_39B918.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09002D58_39B918.png", D_09002D58_39B918);
+INCLUDE_PAL("effects/gfx/D_09002D58_39B918.pal", D_09003558_39C118);
 #include "effects/gfx/D_09003578_39C138.gfx.inc.c"
-#include "effects/gfx/D_09003618_39C1D8.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09003618_39C1D8.png", D_09003618_39C1D8);
 #include "effects/gfx/D_09003E18_39C9D8.gfx.inc.c"
-#include "effects/gfx/D_09003E88_39CA48.png.inc.c"
-#include "effects/gfx/D_09003E88_39CA48.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09003E88_39CA48.png", D_09003E88_39CA48);
+INCLUDE_PAL("effects/gfx/D_09003E88_39CA48.pal", D_09004088_39CC48);
 #include "effects/gfx/D_090040A8_39CC68.gfx.inc.c"
 
 // what's this?
@@ -45,12 +47,12 @@ char D_09004148_39CD08[] = {
     0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
 };
 
-#include "effects/gfx/D_09004248_39CE08.png.inc.c"
-#include "effects/gfx/D_09004248_39CE08.pal.inc.c"
+INCLUDE_IMG("effects/gfx/D_09004248_39CE08.png", D_09004248_39CE08);
+INCLUDE_PAL("effects/gfx/D_09004248_39CE08.pal", D_09004A48_39D608);
 #include "effects/gfx/D_09004A68_39D628.gfx.inc.c"
-#include "effects/gfx/D_09004B08_39D6C8.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09004B08_39D6C8.png", D_09004B08_39D6C8);
 #include "effects/gfx/D_09005308_39DEC8.gfx.inc.c"
-#include "effects/gfx/D_09005378_39DF38.png.inc.c"
+INCLUDE_IMG("effects/gfx/D_09005378_39DF38.png", D_09005378_39DF38);
 #include "effects/gfx/D_09006378_39EF38.gfx.inc.c"
 #include "effects/gfx/D_090063E8_39EFA8.vtx.inc.c"
 #include "effects/gfx/D_09006428_39EFE8.vtx.inc.c"

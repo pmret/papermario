@@ -1,9 +1,10 @@
 #include "kmr_04.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #include "world/area_kmr/kmr_04/hammer_block_message.png.h"
-#include "world/area_kmr/kmr_04/hammer_block_message.png.inc.c"
-#include "world/area_kmr/kmr_04/hammer_block_message.pal.inc.c"
+INCLUDE_IMG("world/area_kmr/kmr_04/hammer_block_message.png", kmr_04_hammer_block_message_img);
+INCLUDE_PAL("world/area_kmr/kmr_04/hammer_block_message.pal", kmr_04_hammer_block_message_pal);
 
 #include "common/foliage.inc.c"
 

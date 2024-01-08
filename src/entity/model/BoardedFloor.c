@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/BoardedFloor_1.vtx.inc.c"
 #include "entity/model/BoardedFloor_2.vtx.inc.c"
@@ -13,7 +14,7 @@
 #include "entity/model/BoardedFloor_B.vtx.inc.c"
 #include "entity/model/BoardedFloor_C.vtx.inc.c"
 
-#include "entity/model/BoardedFloor.png.inc.c"
+INCLUDE_IMG("entity/model/BoardedFloor.png", D_0A001400_E4FBF0);
 Gfx D_0A002400_E50BF0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

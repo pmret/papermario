@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/SimpleSpring_1.vtx.inc.c"
 #include "entity/model/SimpleSpring_2.vtx.inc.c"
@@ -7,8 +8,8 @@
 #include "entity/model/SimpleSpring_5.vtx.inc.c"
 #include "entity/model/SimpleSpring_6.vtx.inc.c"
 
-#include "entity/model/SimpleSpring_tex1.png.inc.c"
-#include "entity/model/SimpleSpring_tex1.pal.inc.c"
+INCLUDE_IMG("entity/model/SimpleSpring_tex1.png", D_0A0007E0_E68D60);
+INCLUDE_PAL("entity/model/SimpleSpring_tex1.pal", D_0A0008E0_E68E60);
 Gfx Entity_SimpleSpring_LoadTexture1[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A0008E0_E68E60),
@@ -22,7 +23,7 @@ Gfx Entity_SimpleSpring_LoadTexture1[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/SimpleSpring_tex2.png.inc.c"
+INCLUDE_IMG("entity/model/SimpleSpring_tex2.png", D_0A000B88_E69108);
 Gfx Entity_SimpleSpring_LoadTexture2[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -35,8 +36,8 @@ Gfx Entity_SimpleSpring_LoadTexture2[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/SimpleSpring_star.png.inc.c"
-#include "entity/model/SimpleSpring_star.pal.inc.c"
+INCLUDE_IMG("entity/model/SimpleSpring_star.png", D_0A000E00_E69380);
+INCLUDE_PAL("entity/model/SimpleSpring_star.pal", D_0A001200_E69780);
 Gfx Entity_SimpleSpring_LoadTextureStar[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A001200_E69780),

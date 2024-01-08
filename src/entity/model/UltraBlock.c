@@ -1,9 +1,10 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/UltraBlock.vtx.inc.c"
 
-#include "entity/model/UltraBlock_tex.png.inc.c"
-#include "entity/model/UltraBlock_tex.pal.inc.c"
+INCLUDE_IMG("entity/model/UltraBlock_tex.png", D_0A000480_E45590);
+INCLUDE_PAL("entity/model/UltraBlock_tex.pal", D_0A000580_E45690);
 Gfx Entity_UltraBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000580_E45690),

@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #define NAMESPACE battle_item_insecticide_herb
 
@@ -57,8 +58,8 @@ API_CALLABLE(N(func_802A12E0_72AA30)) {
 static s32 _pad = 0; // XXX
 
 #include "battle/move/item/insecticide_herb.png.h"
-#include "battle/move/item/insecticide_herb.png.inc.c"
-#include "battle/move/item/insecticide_herb.pal.inc.c"
+INCLUDE_IMG("battle/move/item/insecticide_herb.png", battle_item_insecticide_herb_png);
+INCLUDE_PAL("battle/move/item/insecticide_herb.pal", battle_item_insecticide_herb_pal);
 
 Vtx N(model)[] = {
     { .v = { .ob = {-16, -16, 0}, FALSE, .tc = {0,    0},    .cn = {0, 0, 0, 255} } },

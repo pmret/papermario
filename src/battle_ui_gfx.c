@@ -1,251 +1,252 @@
 #include "common.h"
 #include "hud_element.h"
+#include "include_asset.h"
 
-#include "ui/battle/menu/unused.png.inc.c"
-#include "ui/battle/menu/unused.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/unused.png", ui_battle_menu_unused_png);
+INCLUDE_PAL("ui/battle/menu/unused.pal", ui_battle_menu_unused_pal);
 #define ui_battle_menu_unused_disabled_png ui_battle_menu_unused_png
-#include "ui/battle/menu/unused.disabled.pal.inc.c"
+INCLUDE_PAL("ui/battle/menu/unused.disabled.pal", ui_battle_menu_unused_disabled_pal);
 
-#include "ui/battle/menu/flee.png.inc.c"
-#include "ui/battle/menu/flee.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/flee.png", ui_battle_menu_flee_png);
+INCLUDE_PAL("ui/battle/menu/flee.pal", ui_battle_menu_flee_pal);
 #define ui_battle_menu_flee_disabled_png ui_battle_menu_flee_png
-#include "ui/battle/menu/flee.disabled.pal.inc.c"
+INCLUDE_PAL("ui/battle/menu/flee.disabled.pal", ui_battle_menu_flee_disabled_pal);
 
-#include "ui/battle/menu/defend.png.inc.c"
-#include "ui/battle/menu/defend.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/defend.png", ui_battle_menu_defend_png);
+INCLUDE_PAL("ui/battle/menu/defend.pal", ui_battle_menu_defend_pal);
 #define ui_battle_menu_defend_disabled_png ui_battle_menu_defend_png
-#include "ui/battle/menu/defend.disabled.pal.inc.c"
+INCLUDE_PAL("ui/battle/menu/defend.disabled.pal", ui_battle_menu_defend_disabled_pal);
 
-#include "ui/battle/menu/strategies.png.inc.c"
-#include "ui/battle/menu/strategies.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/strategies.png", ui_battle_menu_strategies_png);
+INCLUDE_PAL("ui/battle/menu/strategies.pal", ui_battle_menu_strategies_pal);
 #define ui_battle_menu_strategies_disabled_png ui_battle_menu_strategies_png
-#include "ui/battle/menu/strategies.disabled.pal.inc.c"
+INCLUDE_PAL("ui/battle/menu/strategies.disabled.pal", ui_battle_menu_strategies_disabled_pal);
 
-#include "ui/battle/menu/nothing.png.inc.c"
-#include "ui/battle/menu/nothing.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/nothing.png", ui_battle_menu_nothing_png);
+INCLUDE_PAL("ui/battle/menu/nothing.pal", ui_battle_menu_nothing_pal);
 #define ui_battle_menu_nothing_disabled_png ui_battle_menu_nothing_png
-#include "ui/battle/menu/nothing.disabled.pal.inc.c"
+INCLUDE_PAL("ui/battle/menu/nothing.disabled.pal", ui_battle_menu_nothing_disabled_pal);
 
-#include "ui/battle/menu/pouch.png.inc.c"
-#include "ui/battle/menu/pouch.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/pouch.png", ui_battle_menu_pouch_png);
+INCLUDE_PAL("ui/battle/menu/pouch.pal", ui_battle_menu_pouch_pal);
 #define ui_battle_menu_pouch_disabled_png ui_battle_menu_pouch_png
-#include "ui/battle/menu/pouch.disabled.pal.inc.c"
+INCLUDE_PAL("ui/battle/menu/pouch.disabled.pal", ui_battle_menu_pouch_disabled_pal);
 
-#include "ui/battle/swap_Z.png.inc.c"
-#include "ui/battle/swap_Z.pal.inc.c"
+INCLUDE_IMG("ui/battle/swap_Z.png", ui_battle_swap_Z_png);
+INCLUDE_PAL("ui/battle/swap_Z.pal", ui_battle_swap_Z_pal);
 
-#include "ui/battle/swap_arrow_left.png.inc.c"
-#include "ui/battle/swap_arrow_left.pal.inc.c"
+INCLUDE_IMG("ui/battle/swap_arrow_left.png", ui_battle_swap_arrow_left_png);
+INCLUDE_PAL("ui/battle/swap_arrow_left.pal", ui_battle_swap_arrow_left_pal);
 
-#include "ui/battle/swap_arrow_right.png.inc.c"
-#include "ui/battle/swap_arrow_right.pal.inc.c"
+INCLUDE_IMG("ui/battle/swap_arrow_right.png", ui_battle_swap_arrow_right_png);
+INCLUDE_PAL("ui/battle/swap_arrow_right.pal", ui_battle_swap_arrow_right_pal);
 
-#include "ui/battle/menu/spirits.png.inc.c"
-#include "ui/battle/menu/spirits.pal.inc.c"
+INCLUDE_IMG("ui/battle/menu/spirits.png", ui_battle_menu_spirits_png);
+INCLUDE_PAL("ui/battle/menu/spirits.pal", ui_battle_menu_spirits_pal);
 
-#include "ui/battle/yellow_arrow.png.inc.c"
-#include "ui/battle/yellow_arrow.pal.inc.c"
+INCLUDE_IMG("ui/battle/yellow_arrow.png", ui_battle_yellow_arrow_png);
+INCLUDE_PAL("ui/battle/yellow_arrow.pal", ui_battle_yellow_arrow_pal);
 
-#include "ui/battle/hp_bar.png.inc.c"
-#include "ui/battle/hp_bar.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_bar.png", ui_battle_hp_bar_png);
+INCLUDE_PAL("ui/battle/hp_bar.pal", ui_battle_hp_bar_pal);
 
-#include "ui/battle/hp_0.png.inc.c"
-#include "ui/battle/hp_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_0.png", ui_battle_hp_0_png);
+INCLUDE_PAL("ui/battle/hp_0.pal", ui_battle_hp_0_pal);
 
-#include "ui/battle/hp_1.png.inc.c"
-#include "ui/battle/hp_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_1.png", ui_battle_hp_1_png);
+INCLUDE_PAL("ui/battle/hp_1.pal", ui_battle_hp_1_pal);
 
-#include "ui/battle/hp_2.png.inc.c"
-#include "ui/battle/hp_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_2.png", ui_battle_hp_2_png);
+INCLUDE_PAL("ui/battle/hp_2.pal", ui_battle_hp_2_pal);
 
-#include "ui/battle/hp_3.png.inc.c"
-#include "ui/battle/hp_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_3.png", ui_battle_hp_3_png);
+INCLUDE_PAL("ui/battle/hp_3.pal", ui_battle_hp_3_pal);
 
-#include "ui/battle/hp_4.png.inc.c"
-#include "ui/battle/hp_4.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_4.png", ui_battle_hp_4_png);
+INCLUDE_PAL("ui/battle/hp_4.pal", ui_battle_hp_4_pal);
 
-#include "ui/battle/hp_5.png.inc.c"
-#include "ui/battle/hp_5.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_5.png", ui_battle_hp_5_png);
+INCLUDE_PAL("ui/battle/hp_5.pal", ui_battle_hp_5_pal);
 
-#include "ui/battle/hp_6.png.inc.c"
-#include "ui/battle/hp_6.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_6.png", ui_battle_hp_6_png);
+INCLUDE_PAL("ui/battle/hp_6.pal", ui_battle_hp_6_pal);
 
-#include "ui/battle/hp_7.png.inc.c"
-#include "ui/battle/hp_7.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_7.png", ui_battle_hp_7_png);
+INCLUDE_PAL("ui/battle/hp_7.pal", ui_battle_hp_7_pal);
 
-#include "ui/battle/hp_8.png.inc.c"
-#include "ui/battle/hp_8.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_8.png", ui_battle_hp_8_png);
+INCLUDE_PAL("ui/battle/hp_8.pal", ui_battle_hp_8_pal);
 
-#include "ui/battle/hp_9.png.inc.c"
-#include "ui/battle/hp_9.pal.inc.c"
+INCLUDE_IMG("ui/battle/hp_9.png", ui_battle_hp_9_png);
+INCLUDE_PAL("ui/battle/hp_9.pal", ui_battle_hp_9_pal);
 
-#include "ui/battle/cont/b_up.png.inc.c"
-#include "ui/battle/cont/b_up.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/b_up.png", ui_battle_cont_b_up_png);
+INCLUDE_PAL("ui/battle/cont/b_up.pal", ui_battle_cont_b_up_pal);
 
-#include "ui/battle/cont/b_down.png.inc.c"
-#include "ui/battle/cont/b_down.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/b_down.png", ui_battle_cont_b_down_png);
+INCLUDE_PAL("ui/battle/cont/b_down.pal", ui_battle_cont_b_down_pal);
 
-#include "ui/battle/cont/c_left_up.png.inc.c"
-#include "ui/battle/cont/c_left_up.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_left_up.png", ui_battle_cont_c_left_up_png);
+INCLUDE_PAL("ui/battle/cont/c_left_up.pal", ui_battle_cont_c_left_up_pal);
 
-#include "ui/battle/cont/c_left_down.png.inc.c"
-#include "ui/battle/cont/c_left_down.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_left_down.png", ui_battle_cont_c_left_down_png);
+INCLUDE_PAL("ui/battle/cont/c_left_down.pal", ui_battle_cont_c_left_down_pal);
 
-#include "ui/battle/cont/c_right_up.png.inc.c"
-#include "ui/battle/cont/c_right_up.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_right_up.png", ui_battle_cont_c_right_up_png);
+INCLUDE_PAL("ui/battle/cont/c_right_up.pal", ui_battle_cont_c_right_up_pal);
 
-#include "ui/battle/cont/c_right_down.png.inc.c"
-#include "ui/battle/cont/c_right_down.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_right_down.png", ui_battle_cont_c_right_down_png);
+INCLUDE_PAL("ui/battle/cont/c_right_down.pal", ui_battle_cont_c_right_down_pal);
 
-#include "ui/battle/cont/c_up_up.png.inc.c"
-#include "ui/battle/cont/c_up_up.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_up_up.png", ui_battle_cont_c_up_up_png);
+INCLUDE_PAL("ui/battle/cont/c_up_up.pal", ui_battle_cont_c_up_up_pal);
 
-#include "ui/battle/cont/c_up_down.png.inc.c"
-#include "ui/battle/cont/c_up_down.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_up_down.png", ui_battle_cont_c_up_down_png);
+INCLUDE_PAL("ui/battle/cont/c_up_down.pal", ui_battle_cont_c_up_down_pal);
 
-#include "ui/battle/cont/c_down_up.png.inc.c"
-#include "ui/battle/cont/c_down_up.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_down_up.png", ui_battle_cont_c_down_up_png);
+INCLUDE_PAL("ui/battle/cont/c_down_up.pal", ui_battle_cont_c_down_up_pal);
 
-#include "ui/battle/cont/c_down_down.png.inc.c"
-#include "ui/battle/cont/c_down_down.pal.inc.c"
+INCLUDE_IMG("ui/battle/cont/c_down_down.png", ui_battle_cont_c_down_down_png);
+INCLUDE_PAL("ui/battle/cont/c_down_down.pal", ui_battle_cont_c_down_down_pal);
 
-#include "ui/battle/cmd/timing_1_chance.png.inc.c"
-#include "ui/battle/cmd/timing_1_chance.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/timing_1_chance.png", ui_battle_cmd_timing_1_chance_png);
+INCLUDE_PAL("ui/battle/cmd/timing_1_chance.pal", ui_battle_cmd_timing_1_chance_pal);
 
-#include "ui/battle/cmd/timing_ready.png.inc.c"
-#include "ui/battle/cmd/timing_ready.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/timing_ready.png", ui_battle_cmd_timing_ready_png);
+INCLUDE_PAL("ui/battle/cmd/timing_ready.pal", ui_battle_cmd_timing_ready_pal);
 
-#include "ui/battle/cmd/timing_wait.png.inc.c"
-#include "ui/battle/cmd/timing_wait.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/timing_wait.png", ui_battle_cmd_timing_wait_png);
+INCLUDE_PAL("ui/battle/cmd/timing_wait.pal", ui_battle_cmd_timing_wait_pal);
 
-#include "ui/battle/cmd/charge_1.png.inc.c"
-#include "ui/battle/cmd/charge_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/charge_1.png", ui_battle_cmd_charge_1_png);
+INCLUDE_PAL("ui/battle/cmd/charge_1.pal", ui_battle_cmd_charge_1_pal);
 
-#include "ui/battle/cmd/charge_2.png.inc.c"
-#include "ui/battle/cmd/charge_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/charge_2.png", ui_battle_cmd_charge_2_png);
+INCLUDE_PAL("ui/battle/cmd/charge_2.pal", ui_battle_cmd_charge_2_pal);
 
-#include "ui/battle/cmd/charge_3.png.inc.c"
-#include "ui/battle/cmd/charge_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/charge_3.png", ui_battle_cmd_charge_3_png);
+INCLUDE_PAL("ui/battle/cmd/charge_3.pal", ui_battle_cmd_charge_3_pal);
 
-#include "ui/battle/cmd/charge_4.png.inc.c"
-#include "ui/battle/cmd/charge_4.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/charge_4.png", ui_battle_cmd_charge_4_png);
+INCLUDE_PAL("ui/battle/cmd/charge_4.pal", ui_battle_cmd_charge_4_pal);
 
-#include "ui/battle/cmd/timing_3_chances.png.inc.c"
-#include "ui/battle/cmd/timing_3_chances.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/timing_3_chances.png", ui_battle_cmd_timing_3_chances_png);
+INCLUDE_PAL("ui/battle/cmd/timing_3_chances.pal", ui_battle_cmd_timing_3_chances_pal);
 
-#include "ui/battle/cmd/gauge_result.png.inc.c"
-#include "ui/battle/cmd/gauge_result.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/gauge_result.png", ui_battle_cmd_gauge_result_png);
+INCLUDE_PAL("ui/battle/cmd/gauge_result.pal", ui_battle_cmd_gauge_result_pal);
 
-#include "ui/battle/cmd/timing_ok.png.inc.c"
-#include "ui/battle/cmd/timing_ok.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/timing_ok.png", ui_battle_cmd_timing_ok_png);
+INCLUDE_PAL("ui/battle/cmd/timing_ok.pal", ui_battle_cmd_timing_ok_pal);
 
-#include "ui/battle/cmd/timing_miss.png.inc.c"
-#include "ui/battle/cmd/timing_miss.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/timing_miss.png", ui_battle_cmd_timing_miss_png);
+INCLUDE_PAL("ui/battle/cmd/timing_miss.pal", ui_battle_cmd_timing_miss_pal);
 
-#include "ui/battle/cmd/flee_0.png.inc.c"
-#include "ui/battle/cmd/flee_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/flee_0.png", ui_battle_cmd_flee_0_png);
+INCLUDE_PAL("ui/battle/cmd/flee_0.pal", ui_battle_cmd_flee_0_pal);
 
-#include "ui/battle/cmd/flee_1.png.inc.c"
-#include "ui/battle/cmd/flee_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/flee_1.png", ui_battle_cmd_flee_1_png);
+INCLUDE_PAL("ui/battle/cmd/flee_1.pal", ui_battle_cmd_flee_1_pal);
 
-#include "ui/battle/cmd/flee_2.png.inc.c"
-#include "ui/battle/cmd/flee_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/flee_2.png", ui_battle_cmd_flee_2_png);
+INCLUDE_PAL("ui/battle/cmd/flee_2.pal", ui_battle_cmd_flee_2_pal);
 
-#include "ui/battle/cmd/100pct.png.inc.c"
-#include "ui/battle/cmd/100pct.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/100pct.png", ui_battle_cmd_100pct_png);
+INCLUDE_PAL("ui/battle/cmd/100pct.pal", ui_battle_cmd_100pct_pal);
 
-#include "ui/battle/cmd/right_on.png.inc.c"
-#include "ui/battle/cmd/right_on.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/right_on.png", ui_battle_cmd_right_on_png);
+INCLUDE_PAL("ui/battle/cmd/right_on.pal", ui_battle_cmd_right_on_pal);
 
-#include "ui/battle/cmd/fill_result.png.inc.c"
-#include "ui/battle/cmd/fill_result.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/fill_result.png", ui_battle_cmd_fill_result_png);
+INCLUDE_PAL("ui/battle/cmd/fill_result.pal", ui_battle_cmd_fill_result_pal);
 
-#include "ui/battle/cmd/aim/marker_0.png.inc.c"
-#include "ui/battle/cmd/aim/marker_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_0.png", ui_battle_cmd_aim_marker_0_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_0.pal", ui_battle_cmd_aim_marker_0_pal);
 
-#include "ui/battle/cmd/aim/marker_1.png.inc.c"
-#include "ui/battle/cmd/aim/marker_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_1.png", ui_battle_cmd_aim_marker_1_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_1.pal", ui_battle_cmd_aim_marker_1_pal);
 
-#include "ui/battle/cmd/aim/marker_2.png.inc.c"
-#include "ui/battle/cmd/aim/marker_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_2.png", ui_battle_cmd_aim_marker_2_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_2.pal", ui_battle_cmd_aim_marker_2_pal);
 
-#include "ui/battle/cmd/aim/marker_3.png.inc.c"
-#include "ui/battle/cmd/aim/marker_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_3.png", ui_battle_cmd_aim_marker_3_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_3.pal", ui_battle_cmd_aim_marker_3_pal);
 
-#include "ui/battle/cmd/aim/marker_4.png.inc.c"
-#include "ui/battle/cmd/aim/marker_4.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_4.png", ui_battle_cmd_aim_marker_4_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_4.pal", ui_battle_cmd_aim_marker_4_pal);
 
-#include "ui/battle/cmd/aim/marker_5.png.inc.c"
-#include "ui/battle/cmd/aim/marker_5.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_5.png", ui_battle_cmd_aim_marker_5_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_5.pal", ui_battle_cmd_aim_marker_5_pal);
 
-#include "ui/battle/cmd/aim/marker_6.png.inc.c"
-#include "ui/battle/cmd/aim/marker_6.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_6.png", ui_battle_cmd_aim_marker_6_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_6.pal", ui_battle_cmd_aim_marker_6_pal);
 
-#include "ui/battle/cmd/aim/marker_7.png.inc.c"
-#include "ui/battle/cmd/aim/marker_7.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/marker_7.png", ui_battle_cmd_aim_marker_7_png);
+INCLUDE_PAL("ui/battle/cmd/aim/marker_7.pal", ui_battle_cmd_aim_marker_7_pal);
 
-#include "ui/battle/cmd/aim/shimmer_0.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_0.png", ui_battle_cmd_aim_shimmer_0_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_0.pal", ui_battle_cmd_aim_shimmer_0_pal);
 
-#include "ui/battle/cmd/aim/shimmer_1.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_1.png", ui_battle_cmd_aim_shimmer_1_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_1.pal", ui_battle_cmd_aim_shimmer_1_pal);
 
-#include "ui/battle/cmd/aim/shimmer_2.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_2.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_2.png", ui_battle_cmd_aim_shimmer_2_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_2.pal", ui_battle_cmd_aim_shimmer_2_pal);
 
-#include "ui/battle/cmd/aim/shimmer_3.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_3.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_3.png", ui_battle_cmd_aim_shimmer_3_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_3.pal", ui_battle_cmd_aim_shimmer_3_pal);
 
-#include "ui/battle/cmd/aim/shimmer_4.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_4.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_4.png", ui_battle_cmd_aim_shimmer_4_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_4.pal", ui_battle_cmd_aim_shimmer_4_pal);
 
-#include "ui/battle/cmd/aim/shimmer_5.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_5.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_5.png", ui_battle_cmd_aim_shimmer_5_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_5.pal", ui_battle_cmd_aim_shimmer_5_pal);
 
-#include "ui/battle/cmd/aim/shimmer_6.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_6.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_6.png", ui_battle_cmd_aim_shimmer_6_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_6.pal", ui_battle_cmd_aim_shimmer_6_pal);
 
-#include "ui/battle/cmd/aim/shimmer_7.png.inc.c"
-#include "ui/battle/cmd/aim/shimmer_7.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/shimmer_7.png", ui_battle_cmd_aim_shimmer_7_png);
+INCLUDE_PAL("ui/battle/cmd/aim/shimmer_7.pal", ui_battle_cmd_aim_shimmer_7_pal);
 
-#include "ui/battle/cmd/aim/reticle_0.png.inc.c"
-#include "ui/battle/cmd/aim/reticle_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/reticle_0.png", ui_battle_cmd_aim_reticle_0_png);
+INCLUDE_PAL("ui/battle/cmd/aim/reticle_0.pal", ui_battle_cmd_aim_reticle_0_pal);
 
-#include "ui/battle/cmd/aim/reticle_1.png.inc.c"
-#include "ui/battle/cmd/aim/reticle_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/reticle_1.png", ui_battle_cmd_aim_reticle_1_png);
+INCLUDE_PAL("ui/battle/cmd/aim/reticle_1.pal", ui_battle_cmd_aim_reticle_1_pal);
 
-#include "ui/battle/cmd/aim/target_0.png.inc.c"
-#include "ui/battle/cmd/aim/target_0.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/target_0.png", ui_battle_cmd_aim_target_0_png);
+INCLUDE_PAL("ui/battle/cmd/aim/target_0.pal", ui_battle_cmd_aim_target_0_pal);
 
-#include "ui/battle/cmd/aim/target_1.png.inc.c"
-#include "ui/battle/cmd/aim/target_1.pal.inc.c"
+INCLUDE_IMG("ui/battle/cmd/aim/target_1.png", ui_battle_cmd_aim_target_1_png);
+INCLUDE_PAL("ui/battle/cmd/aim/target_1.pal", ui_battle_cmd_aim_target_1_pal);
 
-#include "ui/battle/solid_star.png.inc.c"
-#include "ui/battle/solid_star.pal.inc.c"
+INCLUDE_IMG("ui/battle/solid_star.png", ui_battle_solid_star_png);
+INCLUDE_PAL("ui/battle/solid_star.pal", ui_battle_solid_star_pal);
 
 Gfx D_8028F860[] = {
     gsSPEndDisplayList(),
 };
 
-#include "ui/battle/projector_spot.png.inc.c"
+INCLUDE_IMG("ui/battle/projector_spot.png", ui_battle_projector_spot_png);
 
 Gfx D_8028FC68[] = {
     gsSPEndDisplayList(),
 };
 
-#include "ui/battle/projector_beam.png.inc.c"
+INCLUDE_IMG("ui/battle/projector_beam.png", ui_battle_projector_beam_png);
 
 Gfx D_80290C70[] = {
     gsSPEndDisplayList(),
 };
 
-#include "ui/battle/projector_reel.png.inc.c"
+INCLUDE_IMG("ui/battle/projector_reel.png", ui_battle_projector_reel_png);
 
 Gfx D_80291C78[] = {
     gsSPEndDisplayList(),
 };
 
-#include "ui/battle/swap_background.png.inc.c"
+INCLUDE_IMG("ui/battle/swap_background.png", ui_battle_swap_background_png);
 
 HudScript HES_HPBar = HES_TEMPLATE_CI_ENUM_SIZE(ui_battle_hp_bar, 32, 16);
 

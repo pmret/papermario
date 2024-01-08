@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 typedef struct PulseStoneData {
     /* 0x00 */ Vec3f pos;
@@ -17,9 +18,9 @@ enum {
 };
 
 #include "pulse_stone_icon.png.h"
-#include "pulse_stone_icon.png.inc.c"
-#include "pulse_stone_icon.pal.inc.c"
-#include "pulse_stone_icon.flash.pal.inc.c"
+INCLUDE_IMG("pulse_stone_icon.png", pulse_stone_icon_img);
+INCLUDE_PAL("pulse_stone_icon.pal", pulse_stone_icon_1_pal);
+INCLUDE_PAL("pulse_stone_icon.flash.pal", pulse_stone_icon_2_pal);
 #include "pulse_stone_icon.gfx.inc.c"
 
 BSS PulseStoneData PulseStoneNotification;

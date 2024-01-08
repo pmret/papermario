@@ -1,32 +1,33 @@
 #include "common.h"
 #include "battle/action_cmd.h"
 #include "battle/action_cmd/whirlwind_bubble.png.h"
+#include "include_asset.h"
 
 #define NAMESPACE action_command_whirlwind
 
-#include "battle/action_cmd/whirlwind_1.png.inc.c"
-#include "battle/action_cmd/whirlwind_1.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_1.png", battle_action_cmd_whirlwind_1_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_1.pal", battle_action_cmd_whirlwind_1_pal);
 
-#include "battle/action_cmd/whirlwind_2.png.inc.c"
-#include "battle/action_cmd/whirlwind_2.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_2.png", battle_action_cmd_whirlwind_2_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_2.pal", battle_action_cmd_whirlwind_2_pal);
 
-#include "battle/action_cmd/whirlwind_3.png.inc.c"
-#include "battle/action_cmd/whirlwind_3.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_3.png", battle_action_cmd_whirlwind_3_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_3.pal", battle_action_cmd_whirlwind_3_pal);
 
-#include "battle/action_cmd/whirlwind_4.png.inc.c"
-#include "battle/action_cmd/whirlwind_4.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_4.png", battle_action_cmd_whirlwind_4_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_4.pal", battle_action_cmd_whirlwind_4_pal);
 
-#include "battle/action_cmd/whirlwind_5.png.inc.c"
-#include "battle/action_cmd/whirlwind_5.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_5.png", battle_action_cmd_whirlwind_5_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_5.pal", battle_action_cmd_whirlwind_5_pal);
 
-#include "battle/action_cmd/whirlwind_6.png.inc.c"
-#include "battle/action_cmd/whirlwind_6.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_6.png", battle_action_cmd_whirlwind_6_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_6.pal", battle_action_cmd_whirlwind_6_pal);
 
-#include "battle/action_cmd/whirlwind_7.png.inc.c"
-#include "battle/action_cmd/whirlwind_7.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_7.png", battle_action_cmd_whirlwind_7_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_7.pal", battle_action_cmd_whirlwind_7_pal);
 
-#include "battle/action_cmd/whirlwind_bubble.png.inc.c"
-#include "battle/action_cmd/whirlwind_bubble.pal.inc.c"
+INCLUDE_IMG("battle/action_cmd/whirlwind_bubble.png", battle_action_cmd_whirlwind_bubble_png);
+INCLUDE_PAL("battle/action_cmd/whirlwind_bubble.pal", battle_action_cmd_whirlwind_bubble_pal);
 
 HudScript HES_Whirlwind1 = HES_TEMPLATE_CI_ENUM_SIZE(battle_action_cmd_whirlwind_1, 24, 24);
 

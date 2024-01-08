@@ -1,10 +1,11 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/InertYellowBlock_1.vtx.inc.c"
 #include "entity/model/InertYellowBlock_2.vtx.inc.c"
 
-#include "entity/model/InertYellowBlock_face.png.inc.c"
-#include "entity/model/InertYellowBlock_face.pal.inc.c"
+INCLUDE_IMG("entity/model/InertYellowBlock_face.png", D_0A000180_E423C0);
+INCLUDE_PAL("entity/model/InertYellowBlock_face.pal", D_0A000380_E425C0);
 Gfx Entity_InertYellowBlock_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000380_E425C0),

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/HitYellowBlock_1.vtx.inc.c"
 #include "entity/model/HitYellowBlock_2.vtx.inc.c"
@@ -44,5 +45,5 @@ Gfx Entity_HitYellowBlock_RenderBlock1[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/HitYellowBlock_face1.png.inc.c"
-#include "entity/model/HitYellowBlock_face2.png.inc.c"
+INCLUDE_IMG("entity/model/HitYellowBlock_face1.png", D_0A000420_E45E10);
+INCLUDE_IMG("entity/model/HitYellowBlock_face2.png", D_0A000C20_E46610);

@@ -1,7 +1,9 @@
-#include "effects/gfx/D_09000000_3CD6E0.png.inc.c"
-#include "effects/gfx/D_09000400_3CDAE0.png.inc.c"
-#include "effects/gfx/D_09000C00_3CE2E0.png.inc.c"
-#include "effects/gfx/D_09001000_3CE6E0.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_3CD6E0.png", D_09000000_3CD6E0);
+INCLUDE_IMG("effects/gfx/D_09000400_3CDAE0.png", D_09000400_3CDAE0);
+INCLUDE_IMG("effects/gfx/D_09000C00_3CE2E0.png", D_09000C00_3CE2E0);
+INCLUDE_IMG("effects/gfx/D_09001000_3CE6E0.png", D_09001000_3CE6E0);
 
 #include "effects/gfx/D_09001800_3CEEE0.vtx.inc.c"
 #include "effects/gfx/D_09001840_3CEF20.vtx.inc.c"

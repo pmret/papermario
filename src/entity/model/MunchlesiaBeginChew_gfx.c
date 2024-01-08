@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 extern unsigned char D_0A006840_E87E30[];
 
@@ -3340,4 +3341,4 @@ Gfx Entity_MunchlesiaBeginChew_Render[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/MunchlesiaBeginChew.png.inc.c"
+INCLUDE_IMG("entity/model/MunchlesiaBeginChew.png", D_0A006840_E87E30);

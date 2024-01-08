@@ -1,11 +1,12 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/BlueWarpPipe_1.vtx.inc.c"
 #include "entity/model/BlueWarpPipe_2.vtx.inc.c"
 #include "entity/model/BlueWarpPipe_3.vtx.inc.c"
 
-#include "entity/model/BlueWarpPipe_texBase.png.inc.c"
-#include "entity/model/BlueWarpPipe_texBase.pal.inc.c"
+INCLUDE_IMG("entity/model/BlueWarpPipe_texBase.png", D_0A000320_E58FF0);
+INCLUDE_PAL("entity/model/BlueWarpPipe_texBase.pal", D_0A0003A0_E59070);
 Gfx Entity_BlueWarpPipe_LoadTextureBase[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
@@ -20,8 +21,8 @@ Gfx Entity_BlueWarpPipe_LoadTextureBase[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/BlueWarpPipe_texPipe.png.inc.c"
-#include "entity/model/BlueWarpPipe_texPipe.pal.inc.c"
+INCLUDE_IMG("entity/model/BlueWarpPipe_texPipe.png", D_0A000470_E59140);
+INCLUDE_PAL("entity/model/BlueWarpPipe_texPipe.pal", D_0A000570_E59240);
 Gfx Entity_BlueWarpPipe_LoadTexturePipe[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

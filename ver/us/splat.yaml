@@ -14779,6 +14779,21 @@ segments:
     - [auto, c, kzn_19_4_npc]
     - [auto, c, kzn_19_5_eruption]
     - [auto, c, kzn_19_6_entity]
+    - [auto, .data, kzn_19_0_header]
+    - [auto, .data, kzn_19_1_music]
+    - [auto, .data, kzn_19_2_main]
+    - [auto, .data, kzn_19_3_npc_settings]
+    - start: 0xEABB20
+      type: .data
+      name: kzn_19_4_npc
+      subsegments:
+      - [0xEABB20]
+      - [0xEABFB8, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xEAC3B8, palette, ../../lava_piranha/vine]
+      - [0xEAC5B8, gfx_common, ../../lava_piranha/vine]
+      - [0xEAC698]
+    - [auto, .data, kzn_19_5_eruption]
+    - [auto, .data, kzn_19_6_entity]
   - name: dead_kzn_20
     dir: world/dead/area_kzn/kzn_20
     type: code
