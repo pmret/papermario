@@ -369,7 +369,12 @@ segments:
       - [0x511E0, vtx, theater/wall_shadows_vtx]
       - [0x51260]
       - [0x51540, ia8, ui/no_controller, 128, 32]
-    - [auto, .data, crash_screen]
+    - start: auto
+      type: .data
+      name: crash_screen
+      subsegments:
+      - [0x52690, i1, crash_screen/font, 32, 64]
+      - [0x52790]
     - [auto, .data, os/nusys/nugfxtaskmgr]
     - [auto, .data, os/nusys/nusimgr]
     - [auto, .data, cam_math]
