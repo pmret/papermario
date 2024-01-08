@@ -3,6 +3,7 @@
 #include "PR/os_internal_thread.h"
 #include "libc/xstdio.h"
 #include "gcc/string.h"
+#include "include_asset.h"
 
 typedef struct {
     /* 0x000 */ OSThread thread;
@@ -26,7 +27,7 @@ u8 gCrashScreencharToGlyph[128] = {
 };
 
 #if VERSION_US
-#include "crash_screen/font.png.inc.c"
+INCLUDE_IMG("crash_screen/font.png", gCrashScreenFont);
 #else
 u32 gCrashScreenFont[] = {
     0x70871C30, 0x8988A250, 0x88808290, 0x88831C90, 0x888402F8, 0x88882210, 0x71CF9C10, 0xF9CF9C70, 0x8228A288,
