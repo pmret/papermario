@@ -857,6 +857,8 @@ ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall);
 
 /// @evtapi
 ApiStatus func_802D2484(Evt* script, s32 isInitialCall);
+
+/// @evtapi
 ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall);
 
 /// @evtapi
