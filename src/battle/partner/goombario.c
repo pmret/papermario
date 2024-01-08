@@ -66,7 +66,7 @@ API_CALLABLE(N(AdjustMultibonkChance)) {
 
     script->varTable[0] = 99;
 
-    // @bug this value is not reset between Multibonk uses
+    /// @bug this value is not reset between Multibonk uses
     N(MultibonkChance) *= targetActor->actorBlueprint->powerBounceChance;
     N(MultibonkChance) /= 100;
     if (N(MultibonkChance) < rand_int(100)) {

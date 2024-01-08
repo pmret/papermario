@@ -67,7 +67,7 @@ StageList A(Stages) = {
     STAGE("kpa_01", A(kpa_01)),
     STAGE("kpa_01b", A(kpa_01b)),
     STAGE("kpa_02", A(kpa_02)),
-    STAGE("kpa_03", A(kpa_04)), // @bug should be &A(kpa_03)
+    STAGE("kpa_03", A(kpa_04)), /// @bug should be A(kpa_03)
     STAGE("kpa_04", A(kpa_04)),
     STAGE("kpa_04b", A(kpa_04b)),
     STAGE("kpa_04c", A(kpa_04c)),

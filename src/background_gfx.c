@@ -297,12 +297,12 @@ void func_80027BAC(s32 arg0, s32 arg1) {
     }
 }
 
-// Logic for the drawing the scene background. In normal operation, it draws the regular background.
-// While opening pause menu, it does the following:
-//  * Extracts coverage from the current framebuffer and saves it to nuGfxCfb[1] on the first frame.
-//  * Copies the current framebuffer to the depth buffer to save it and applies a filter on the
-//    saved framebuffer based on the saved coverage values one frame later.
-//  * Draws the saved framebuffer to the current framebuffer while the pause screen is opened, fading it in over time.
+/// Logic for the drawing the scene background. In normal operation, it draws the regular background.
+/// While opening pause menu, it does the following:
+///  * Extracts coverage from the current framebuffer and saves it to nuGfxCfb[1] on the first frame.
+///  * Copies the current framebuffer to the depth buffer to save it and applies a filter on the
+///    saved framebuffer based on the saved coverage values one frame later.
+///  * Draws the saved framebuffer to the current framebuffer while the pause screen is opened, fading it in over time.
 void gfx_draw_background(void) {
     Camera* camera;
     s32 bgRenderState;
@@ -360,9 +360,9 @@ void gfx_draw_background(void) {
             gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
             gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
             gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-            // @bug In 1-cycle mode, the two combiner cycles should be identical. Using Texel1 here in the second cycle,
-            // which is the actual cycle of the combiner used on hardware in 1-cycle mode, actually samples the next
-            // pixel's texel value instead of the current pixel's. This results in a one-pixel offset.
+            /// @bug In 1-cycle mode, the two combiner cycles should be identical. Using Texel1 here in the second cycle,
+            /// which is the actual cycle of the combiner used on hardware in 1-cycle mode, actually samples the next
+            /// pixel's texel value instead of the current pixel's. This results in a one-pixel offset.
             gDPSetCombineMode(gMainGfxPos++, PM_CC_43, PM_CC_44);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, gPauseBackgroundFade);
             gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
@@ -371,8 +371,8 @@ void gfx_draw_background(void) {
                 gDPLoadTextureTile(gMainGfxPos++, nuGfxZBuffer + (i * SCREEN_WIDTH * SCREEN_COPY_TILE_HEIGHT), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                                    SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, SCREEN_COPY_TILE_HEIGHT - 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                // @bug Due to the previous issue with the incorrect second cycle combiner, the devs added a 1-pixel offset to texture coordinates
-                // in this texrect to compensate for the combiner error.
+                /// @bug Due to the previous issue with the incorrect second cycle combiner, the devs added a 1-pixel offset to texture coordinates
+                /// in this texrect to compensate for the combiner error.
                 gSPTextureRectangle(gMainGfxPos++,
                                     // ulx, uly, lrx, lry
                                     0 << 2, i * a, SCREEN_WIDTH << 2, a + (i * (SCREEN_COPY_TILE_HEIGHT << 2)),
