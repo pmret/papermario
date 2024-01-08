@@ -385,7 +385,7 @@ void get_path_position(f32 alpha, Vec3f* outPos, s32 numVectors, f32* normalized
     outPos->z = ((az + bz) * curProgress) + pathPoints[i].z;
 }
 
-s32 LoadPath(Evt* script, s32 isInitialCall) {
+ApiStatus LoadPath(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 time = evt_get_variable(script, *args++);
     Vec3f* vectorList = (Vec3f*) evt_get_variable(script, *args++);

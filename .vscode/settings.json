@@ -50,6 +50,7 @@
     },
     "C_Cpp.autoAddFileAssociations": false,
     "C_Cpp.default.cStandard": "c89",
+    "C_Cpp.doxygen.generateOnType": false,
     "files.exclude": {
         "**/.git": true,
         "**/.splat_cache": true,

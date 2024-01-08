@@ -26,6 +26,9 @@ s32 foo(s32 bar) {
 }
 ```
 
+## Documenting EVT API Functions
+Use `@evtapi` to mark functions as EVT API functions, and use `@param` to document the parameters as passed to `EVT_CALL`. Do not use `@return`. See [include/script_api/common.h](../include/script_api/common.h) for examples.
+
 ## Documenting Variables
 Documentation of variables should include what this variable is used for if the name is not completely clear and if applicable whether a set of defines or enumerations should be used alongside it (which should be linked with `@see`, see below)
 ```c
