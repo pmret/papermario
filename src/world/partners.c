@@ -2325,7 +2325,7 @@ s32 partner_get_out(Npc* partner) {
                 add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
                 hitDepth = 1000.0f;
                 if (npc_raycast_down_around(COLLIDER_FLAG_IGNORE_PLAYER, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter)) {
-                    // @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
+                    /// @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
                     s32 surfaceType = get_collider_flags(NpcHitQueryColliderID);
 
                     if ((surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) || (hitDepth > 100.0f)) {

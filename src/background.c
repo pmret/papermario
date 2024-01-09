@@ -297,10 +297,10 @@ void appendGfx_background_texture(void) {
                                0, 0, 295, extraHeight - 1, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gMainGfxPos++, bgMinX * 4, (lineHeight * i + bgMinY) * 4,
-                                                 (2 * bgXOffset + (bgMinX - 1)) * 4, (bgMaxY - 1 + bgMinY) * 4, // @bug xh = 2 * bgXOffset + (bgMinX - 1) * 4
+                                                 (2 * bgXOffset + (bgMinX - 1)) * 4, (bgMaxY - 1 + bgMinY) * 4, /// @bug xh = 2 * bgXOffset + (bgMinX - 1) * 4
                                                  G_TX_RENDERTILE, bgMaxX * 32 - bgXOffset * 16, 0, 4096, 1024);
             gSPTextureRectangle(gMainGfxPos++, bgXOffset * 2  + bgMinX * 4, (lineHeight * i + bgMinY) * 4,
-                                                 (bgMaxX + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4, // @bug xh = 2 * bgXOffset + (bgMinX - 1) * 4
+                                                 (bgMaxX + bgMinX - 1) * 4, (bgMaxY - 1 + bgMinY) * 4, /// @bug xh = 2 * bgXOffset + (bgMinX - 1) * 4
                                                  G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
     }

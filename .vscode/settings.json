@@ -50,14 +50,14 @@
     },
     "C_Cpp.autoAddFileAssociations": false,
     "C_Cpp.default.cStandard": "c89",
+    "C_Cpp.doxygen.generateOnType": false,
     "files.exclude": {
         "**/.git": true,
         "**/.splat_cache": true,
         ".ninja*": true,
         "ver/current": true,
         "expected": true,
-        "**/*.i": true,
-        "docs/doxygen": true
+        "**/*.i": true
     },
     "[python]": {
         "editor.formatOnType": true,

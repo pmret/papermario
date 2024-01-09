@@ -1095,7 +1095,7 @@ EvtScript N(EVS_Attack_BodySlam) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Land)
     EVT_CALL(GetPartEventFlags, ACTOR_SELF, PRT_MAIN, LVar1)
-    EVT_IF_FLAG(LVar1, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) // @bug checks wrong event flag, never uses 12 damage attack
+    EVT_IF_FLAG(LVar1, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED) /// @bug checks wrong event flag, never uses 12 damage attack
         EVT_SET(LVar0, DMG_BOOSTED_BODY_SLAM)
     EVT_ELSE
         EVT_SET(LVar0, DMG_BODY_SLAM)
@@ -1418,7 +1418,7 @@ EvtScript N(EVS_UseDrainingShockwave) = {
                     EVT_WAIT(2)
                     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                    // @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
+                    /// @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
                     EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
                         EVT_SET(LVar1, DMG_BOOSTED_SHOCKWAVE_P)
                     EVT_ELSE
@@ -1440,7 +1440,7 @@ EvtScript N(EVS_UseDrainingShockwave) = {
         EVT_WAIT(4)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        // @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
+        /// @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
         EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
             EVT_SET(LVar1, DMG_BOOSTED_SHOCKWAVE_P)
         EVT_ELSE
@@ -1451,7 +1451,7 @@ EvtScript N(EVS_UseDrainingShockwave) = {
     EVT_END_THREAD
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    // @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
+    /// @bug missing a call to GetPartEventFlags, LVar0 is invalid in next block
     EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
         EVT_SET(LVar1, DMG_BOOSTED_SHOCKWAVE)
     EVT_ELSE

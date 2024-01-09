@@ -640,7 +640,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             statusInflicted2 = one;
         }
 
-        // @bug? repeated paralyze and dizzy infliction
+        /// @bug? repeated paralyze and dizzy infliction
         if (battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
@@ -875,7 +875,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
             show_damage_fx(actor, actor->targetData[0].truePos.x, actor->targetData[0].truePos.y, actor->targetData[0].truePos.z, battleStatus->lastAttackDamage);
         }
         actor->targetActorID = savedTargetActorID;
-        
+
     } else {
         show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
         show_damage_fx(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
@@ -3185,7 +3185,7 @@ ApiStatus AfflictActor(Evt* script, s32 isInitialCall) {
 
     switch (statusTypeKey) {
         case STATUS_KEY_FROZEN:
-            statusDurationKey = STATUS_TURN_MOD_PARALYZE; // @bug should be STATUS_TURN_MOD_FROZEN
+            statusDurationKey = STATUS_TURN_MOD_PARALYZE; /// @bug should be STATUS_TURN_MOD_FROZEN
             break;
         case STATUS_KEY_SLEEP:
             statusDurationKey = STATUS_TURN_MOD_SLEEP;

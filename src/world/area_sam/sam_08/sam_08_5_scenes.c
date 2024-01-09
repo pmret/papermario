@@ -8,7 +8,7 @@ API_CALLABLE(N(AdjustFightingSoundsPos)) {
     s32 y = evt_get_variable(script, *args++);
     s32 z = evt_get_variable(script, *args++);
 
-    // @bug need to use real sound id, not environmental sound id
+    /// @bug need to use real sound id, not environmental sound id
     sfx_adjust_env_sound_pos(SOUND_LOOP_FIGHTING, SOUND_SPACE_DEFAULT, x, y, z);
 
     return ApiStatus_DONE2;

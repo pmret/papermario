@@ -3,7 +3,7 @@
 
 API_CALLABLE(N(SpawnDirectedShootingStarFX)) {
     Bytecode* args = script->ptrReadPos;
-    f32 type = evt_get_float_variable(script, *args++); // @bug? s32 accessed as a float
+    f32 type = evt_get_float_variable(script, *args++); /// @bug? s32 accessed as a float
     f32 startX = evt_get_float_variable(script, *args++);
     f32 startY = evt_get_float_variable(script, *args++);
     f32 startZ = evt_get_float_variable(script, *args++);

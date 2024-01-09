@@ -428,7 +428,7 @@ API_CALLABLE(GetPushBlock) {
     s32 cellIndex;
 
     if (gridX >= blockGrid->numCellsX || gridX < 0 || gridZ >= blockGrid->numCellsZ || gridZ < 0) {
-         // @bug: sets error value and then performs lookup anyway -- return statement forgotten here
+        /// @bug: sets error value and then performs lookup anyway -- return statement forgotten here
         evt_set_variable(script, outVar, PUSH_GRID_OUT_OF_BOUNDS);
     }
     cellIndex = gridX + (gridZ * blockGrid->numCellsX);

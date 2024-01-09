@@ -662,8 +662,11 @@ class Configure:
                     task = "cc_272"
                     cflags = cflags.replace("gcc_272", "")
                 elif "egcs" in cflags:
-                    task = "cc_egcs"
-                    cflags = cflags.replace("egcs", "")
+                    if sys.platform == "darwin" and non_matching:
+                        print(f"warning: using default compiler for {seg.name} because egcs is not supported on macOS")
+                    else:
+                        task = "cc_egcs"
+                        cflags = cflags.replace("egcs", "")
                 elif "gcc_modern" in cflags:
                     task = "cc_modern"
                     cflags = cflags.replace("gcc_modern", "")
@@ -1378,6 +1381,12 @@ if __name__ == "__main__":
     for version in versions:
         print(f"configure: configuring version {version}")
 
+        if version == "ique" and not args.non_matching and sys.platform == "darwin":
+            print(
+                "configure: refusing to build iQue Player version on macOS because EGCS compiler is not available (use --non-matching to use default compiler)"
+            )
+            continue
+
         configure = Configure(version)
 
         if not first_configure:
@@ -1391,7 +1400,7 @@ if __name__ == "__main__":
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
-    assert first_configure
+    assert first_configure, "no versions configured"
     first_configure.make_current(ninja)
 
     if non_matching:

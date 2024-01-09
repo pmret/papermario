@@ -444,7 +444,7 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 4)
             EVT_END_IF
-            EVT_END_IF // @bug END_IF with no IF
+            EVT_END_IF /// @bug END_IF with no IF
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
             // trying showing the scene where Goompa congratulates the player for dealing damage to Jr Troopa
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HitReact_State, LVar0)
