@@ -422,7 +422,7 @@ class TexImage:
             palette_count = (0x20 if fmt_str == "CI4" else 0x200) // 2
             if len(palette) > palette_count:
                 palette = palette[:palette_count]
-                print(f"warning: {self.img_name} has more than {palette_count} colors, truncating")
+                self.warn(f"{self.img_name} has more than {palette_count} colors, truncating")
             elif len(palette) < palette_count:
                 palette += [(0, 0, 0, 0)] * (palette_count - len(palette))
 
