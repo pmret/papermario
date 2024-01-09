@@ -417,6 +417,15 @@ class TexImage:
             img = png.Reader(img_file)
             img.preamble(True)
             palette = img.palette(alpha="force")
+
+            # load_texture_by_name assumes palettes have a particular length
+            palette_count = (0x20 if fmt_str == "CI4" else 0x200) // 2
+            if len(palette) > palette_count:
+                palette = palette[:palette_count]
+                print(f"warning: {self.img_name} has more than {palette_count} colors, truncating")
+            elif len(palette) < palette_count:
+                palette += [(0, 0, 0, 0)] * (palette_count - len(palette))
+
             for rgba in palette:
                 if rgba[3] not in (0, 0xFF):
                     self.warn("alpha mask mode but translucent pixels used")
@@ -428,6 +437,8 @@ class TexImage:
 
     # write texture header and image raster/palettes to byte array
     def add_bytes(self, tex_name: str, bytes: bytearray):
+        pos = len(bytes)
+
         # form raw name and write to header
         raw_name = tex_name[:4] + self.img_name + self.raw_ext
         name_bytes = raw_name.encode("ascii")
@@ -478,6 +489,75 @@ class TexImage:
             bytes += self.aux_img
             if self.aux_fmt == FMT_CI:
                 bytes += self.aux_pal
+
+        size = len(bytes) - pos
+        assert size == self.expected_size(), f"{raw_name}: size mismatch: {size} != {self.expected_size()}"
+
+    def expected_size(self) -> int:
+        """
+        Uses logic from load_texture_by_name to calculate the expected size.
+        """
+
+        raster_size = self.main_width * self.main_height
+
+        # compute mipmaps size
+        if self.main_depth == DEPTH_4_BIT:
+            if self.has_mipmaps:
+                divisor = 2
+                while self.main_width // divisor >= 16 and self.main_height // divisor > 0:
+                    raster_size += self.main_width // divisor * self.main_height // divisor
+                    divisor *= 2
+            raster_size //= 2
+        elif self.main_depth == DEPTH_8_BIT:
+            if self.has_mipmaps:
+                divisor = 2
+                while self.main_width // divisor >= 8 and self.main_height // divisor > 0:
+                    raster_size += self.main_width // divisor * self.main_height // divisor
+                    divisor *= 2
+        elif self.main_depth == DEPTH_16_BIT:
+            if self.has_mipmaps:
+                divisor = 2
+                while self.main_width // divisor >= 4 and self.main_height // divisor > 0:
+                    raster_size += self.main_width // divisor * self.main_height // divisor
+                    divisor *= 2
+            raster_size *= 2
+        elif self.main_depth == DEPTH_32_BIT:
+            if self.has_mipmaps:
+                divisor = 2
+                while self.main_width // divisor >= 2 and self.main_height // divisor > 0:
+                    raster_size += self.main_width // divisor * self.main_height // divisor
+                    divisor *= 2
+            raster_size *= 4
+
+        # compute palette size
+        if self.main_fmt == FMT_CI:
+            palette_size = 0x20
+            if self.main_depth == DEPTH_8_BIT:
+                palette_size = 0x200
+        else:
+            palette_size = 0
+
+        # compute aux tile size
+        if self.extra_tiles == TILES_INDEPENDENT_AUX:
+            aux_raster_size = self.aux_width * self.aux_height
+            if self.aux_depth == DEPTH_4_BIT:
+                aux_raster_size //= 2
+            elif self.aux_depth == DEPTH_16_BIT:
+                aux_raster_size *= 2
+            elif self.aux_depth == DEPTH_32_BIT:
+                aux_raster_size *= 4
+
+            if self.aux_fmt == FMT_CI:
+                aux_palette_size = 0x20
+                if self.aux_depth == DEPTH_8_BIT:
+                    aux_palette_size = 0x200
+            else:
+                aux_palette_size = 0
+        else:
+            aux_palette_size = 0
+            aux_raster_size = 0
+
+        return raster_size + palette_size + 48 + aux_raster_size + aux_palette_size
 
 
 class TexArchive:
