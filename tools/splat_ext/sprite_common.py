@@ -416,7 +416,7 @@ class AnimComponent:
                 commands.append(0x8100 + (int(cmd.attrib[XML_ATTR_INDEX]) & 0xFF))
             elif cmd.tag == "SetNotify":
                 commands.append(0x8200 + (int(cmd.attrib[XML_ATTR_VALUE]) & 0xFF))
-            elif cmd.tag == "Command": # old Star Rod compatibility
+            elif cmd.tag == "Command":  # old Star Rod compatibility
                 commands.append(int(cmd.attrib["val"], 16))
             else:
                 raise ValueError(f"unknown command {cmd.tag}")
