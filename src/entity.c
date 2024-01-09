@@ -1346,7 +1346,7 @@ s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     return shadow->listIndex;
 }
 
-s32 MakeEntity(Evt* script, s32 isInitialCall) {
+ApiStatus MakeEntity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EntityBlueprint* entityData;
     s32 x, y, z;

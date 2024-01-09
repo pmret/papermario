@@ -3901,7 +3901,7 @@ void add_part_decor_sparkles(ActorPart* part, s32 idx) {
                 x = part->curPos.x;
                 y = part->curPos.y + (part->size.y / 2);
                 z = part->curPos.z - 5.0f;
-                // @bug this should be % 4
+                /// @bug this should be % 4
                 if ((gGameStatusPtr->frameCounter / 4) == 0) {
                     fx_sparkles(FX_SPARKLES_1, x, y, z, 10.0f);
                 }

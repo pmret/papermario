@@ -917,7 +917,7 @@ API_CALLABLE(func_802428C8_A2CB08) {
                 f32 temp_f24 = sin_deg(angle3);
                 xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
                 yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
-                // @bug should be `zPos = effect->data.somethingRotating->pos.z + cos_deg(angle) * radius * temp_f24;`
+                /// @bug should be `zPos = effect->data.somethingRotating->pos.z + cos_deg(angle) * radius * temp_f24;`
                 zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
                 path->endPoint.x = xPos;
                 path->endPoint.y = yPos;

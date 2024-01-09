@@ -1726,7 +1726,7 @@ s32 npc_render_with_double_pal_blending(Npc* npc, s32 yaw, Matrix4f mtx) {
             }
 
             // blend next palettes
-            outColor = npc->copiedPalettes[1]; // @bug? should this be index 3?
+            outColor = npc->copiedPalettes[1]; /// @bug? should this be index 3?
             color2 = npc->originalPalettesList[npc->blendPalD];
             color1 = npc->originalPalettesList[npc->blendPalC];
             npc->adjustedPalettes[3] = npc->copiedPalettes[3];

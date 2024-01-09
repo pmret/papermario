@@ -1,0 +1,31 @@
+name: Docs
+on:
+  push:
+    branches:
+      - master
+jobs:
+  doxygen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen
+      - name: Generate docs
+        run: doxygen
+      # deploy to gh pages if repo is pmret/papermario
+      - name: Deploy to gh-pages
+        if: github.repository != 'pmret/papermario'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html
+      - name: Deploy to papermar.io
+        if: github.repository == 'pmret/papermario'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "docs/html/"
+          target: "/var/www/papermar.io/html/docs"
+          strip_components: 2
