@@ -5,7 +5,7 @@
 
 #ifdef MODERN_COMPILER
 #  define PUSHSECTION(SECTION) ".pushsection " SECTION "\n"
-#  define POPSECTION ".popsection\n")
+#  define POPSECTION ".popsection\n"
 #else
 #  define PUSHSECTION(SECTION) SECTION "\n"
 #  define POPSECTION
