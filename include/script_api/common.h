@@ -1289,7 +1289,6 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall);
 
 // TODO: document varargs better
 /// Creates an entity.
-/// The created entity ID's is written to \ref LVar0.
 ///
 /// @evtapi
 /// @param blueprint Pointer to \ref EntityBlueprint to use.
@@ -1299,6 +1298,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall);
 /// @param flags \ref EntityFlags
 /// @param ... Varargs.
 /// @param MAKE_ENTITY_END Terminates the varargs.
+/// @vars{out | LVar0 | Created entity's ID.}
 ApiStatus MakeEntity(Evt* script, s32 isInitialCall);
 
 /// @evtapi
