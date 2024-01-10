@@ -9,7 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install Doxygen
-        run: sudo apt-get install doxygen
+        run: |
+          # doxygen on apt is too old
+          curl -L https://www.doxygen.nl/files/doxygen-1.10.0.linux.bin.tar.gz | tar xz
+          sudo mv doxygen-*/bin/doxy* /usr/local/bin
       - name: Generate docs
         run: doxygen
       # deploy to gh pages if repo is pmret/papermario
