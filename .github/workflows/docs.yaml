@@ -22,7 +22,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/html
+          publish_dir: ./docs/doxygen/html
       - name: Deploy to papermar.io
         if: github.repository == 'pmret/papermario'
         uses: appleboy/scp-action@master
@@ -30,6 +30,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: docs/html/*
-          target: "/var/www/papermar.io/html/docs"
-          rm: true
+          source: docs/doxygen/html/*
+          target: "/var/www/papermar.io/html"
+          strip_components: 2
+          overwrite: true
