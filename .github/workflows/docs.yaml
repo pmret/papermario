@@ -15,7 +15,6 @@ jobs:
           sudo mv doxygen-*/bin/doxy* /usr/local/bin
       - name: Generate docs
         run: doxygen
-      - run: ls -l docs/html
       # deploy to gh pages if repo is pmret/papermario
       - name: Deploy to gh-pages
         if: github.repository != 'pmret/papermario'
