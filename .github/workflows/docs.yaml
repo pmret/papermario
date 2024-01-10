@@ -33,4 +33,3 @@ jobs:
           source: docs/doxygen/html/
           target: "/var/www/papermar.io/html/docs/"
           strip_components: 3
-          overwrite: true
