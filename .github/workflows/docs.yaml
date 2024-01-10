@@ -29,6 +29,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "docs/html/"
+          source: docs/html/*
           target: "/var/www/papermar.io/html/docs"
           strip_components: 2
+          rm: true
