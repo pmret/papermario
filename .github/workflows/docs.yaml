@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - i-love-continuous-deployment # TEMP obviously
 jobs:
   doxygen:
     runs-on: ubuntu-latest
@@ -29,7 +30,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: docs/doxygen/html/*
-          target: "/var/www/papermar.io/html"
-          strip_components: 2
+          source: docs/doxygen/html/
+          target: "/var/www/papermar.io/html/docs/"
+          strip_components: 3
           overwrite: true
