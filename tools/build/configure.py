@@ -301,7 +301,7 @@ def write_ninja_rules(
     ninja.rule(
         "pack_title_data",
         description="pack_title_data $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
+        command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $version $out $in",
     )
 
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
@@ -947,6 +947,9 @@ class Configure:
                                 "img_flags": "",
                             },
                         )
+                    elif path.suffixes[-2:] == [".raw", ".dat"]:
+                        compress = False
+                        bin_path = path
                     elif name == "title_data":
                         compress = True
 
