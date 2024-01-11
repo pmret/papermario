@@ -1779,29 +1779,25 @@ void popup_menu_draw_title_contents(s32* userData, s32 baseX, s32 baseY, s32 wid
 #else
 
 #if VERSION_JP
-#define MSG_USE_ITEM_DIFF MSG_Menus_JP_004F
-#define MSG_USE_KEY_DIFF MSG_Menus_JP_0050
-#define X_TITLE_VAR1 35
-#define X_TITLE_VAR2 82
-#define X_TITLE_VAR3 102
-#define X_TITLE_VAR4 4
-#define X_TITLE_VAR5 38
-#define X_TITLE_VAR6 31
-#define X_TITLE_VAR7 16
-#define X_TITLE_VAR8 35
-#define X_TITLE_VAR9 23
+#define POPUP_ITEM_X            35
+#define POPUP_ITEMDIP_NUMBER_X  82
+#define POPUP_ITEMDIP_X         102
+#define POPUP_TRIPLE_DIP_X      4
+#define POPUP_BADGE_X           38
+#define POPUP_CHEST_X           31
+#define POPUP_POSTCARD_X        16
+#define POPUP_ITEM_KEY_X        35
+#define POPUP_POSTOFFICE_X      23
 #else
-#define MSG_USE_ITEM_DIFF MSG_Menus_Items
-#define MSG_USE_KEY_DIFF MSG_Menus_Items
-#define X_TITLE_VAR1 26
-#define X_TITLE_VAR2 94
-#define X_TITLE_VAR3 114
-#define X_TITLE_VAR4 6
-#define X_TITLE_VAR5 27
-#define X_TITLE_VAR6 4
-#define X_TITLE_VAR7 6
-#define X_TITLE_VAR8 27
-#define X_TITLE_VAR9 8
+#define POPUP_ITEM_X            26
+#define POPUP_ITEMDIP_NUMBER_X  94
+#define POPUP_ITEMDIP_X         114
+#define POPUP_TRIPLE_DIP_X      6
+#define POPUP_BADGE_X           27
+#define POPUP_CHEST_X           4
+#define POPUP_POSTCARD_X        6
+#define POPUP_ITEM_KEY_X        27
+#define POPUP_POSTOFFICE_X      8
 #endif
 
 void popup_menu_draw_title_contents(
@@ -1815,25 +1811,29 @@ void popup_menu_draw_title_contents(
         case POPUP_MENU_CLAIM_ITEM:
             switch (gPopupMenu->dipMode) {
                 case 0:
-                    draw_msg(MSG_USE_ITEM_DIFF, baseX + X_TITLE_VAR1, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+#if VERSION_JP
+                    draw_msg(MSG_Menus_JP_004F, baseX + POPUP_ITEM_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+#else
+                    draw_msg(MSG_Menus_Items, baseX + POPUP_ITEM_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+#endif
                     break;
                 case 1:
                     draw_msg(MSG_Menus_DoubleDip, baseX + 4, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
-                    draw_number(gPopupMenu->titleNumber, baseX + X_TITLE_VAR2, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32,
+                    draw_number(gPopupMenu->titleNumber, baseX + POPUP_ITEMDIP_NUMBER_X, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32,
                                 PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                    draw_number(2, baseX + X_TITLE_VAR3, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_number(2, baseX + POPUP_ITEMDIP_X, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                     break;
                 case 2:
-                    draw_msg(MSG_Menus_TripleDip, baseX + X_TITLE_VAR4, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
-                    draw_number(gPopupMenu->titleNumber, baseX + X_TITLE_VAR2, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32,
+                    draw_msg(MSG_Menus_TripleDip, baseX + POPUP_TRIPLE_DIP_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+                    draw_number(gPopupMenu->titleNumber, baseX + POPUP_ITEMDIP_NUMBER_X, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32,
                                 PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                    draw_number(3, baseX + X_TITLE_VAR3, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha,
+                    draw_number(3, baseX + POPUP_ITEMDIP_X, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha,
                                 DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                     break;
             }
             break;
         case POPUP_MENU_TRADE_FOR_BADGE:
-            draw_msg(MSG_MenuTip_0032, baseX + X_TITLE_VAR5, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_MenuTip_0032, baseX + POPUP_BADGE_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
 #if VERSION_JP
         case POPUP_MENU_UPGRADE_PARTNER:
@@ -1844,23 +1844,27 @@ void popup_menu_draw_title_contents(
             draw_msg(MSG_MenuTip_0033, baseX + 23, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
         case POPUP_MENU_TAKE_FROM_CHEST:
-            draw_msg(MSG_Menus_00D7, baseX + X_TITLE_VAR6, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_Menus_00D7, baseX + POPUP_CHEST_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
         case POPUP_MENU_READ_DIARY_PAGE:
             draw_msg(MSG_Menus_00CE, baseX + 8, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
         case POPUP_MENU_READ_POSTCARD:
-            draw_msg(MSG_Menus_00D0, baseX + X_TITLE_VAR7, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_Menus_00D0, baseX + POPUP_POSTCARD_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
         case POPUP_MENU_USEKEY:
-            draw_msg(MSG_USE_KEY_DIFF, baseX + X_TITLE_VAR8, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+#if VERSION_JP
+            draw_msg(MSG_Menus_KeyItems, baseX + POPUP_ITEM_KEY_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+#else
+            draw_msg(MSG_Menus_Items, baseX + POPUP_ITEM_KEY_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+#endif
             break;
         case POPUP_MENU_SWITCH_PARTNER:
 #if !VERSION_JP
         case POPUP_MENU_UPGRADE_PARTNER:
 #endif
         case POPUP_MENU_POST_OFFICE:
-            draw_msg(MSG_Menus_PartyMember, baseX + X_TITLE_VAR9, baseY + 2, PopupMenu_Alpha, MSG_PAL_34, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_Menus_PartyMember, baseX + POPUP_POSTOFFICE_X, baseY + 2, PopupMenu_Alpha, MSG_PAL_34, DRAW_MSG_STYLE_MENU);
             break;
     }
 }
@@ -2084,7 +2088,7 @@ void popup_draw_cost_icon(s32* userData, s32 x, s32 y) {
             break;
 #if VERSION_JP
         case POPUP_TYPE_UPGRADE_PARTNER:
-            draw_msg(MSG_Menus_JP_0084, x + 7, y + 2, PopupMenu_Alpha, MSG_PAL_34, 1);
+            draw_msg(MSG_Menus_006E, x + 7, y + 2, PopupMenu_Alpha, MSG_PAL_34, 1);
             return;
 #endif
         case POPUP_TYPE_SELL_ITEM:

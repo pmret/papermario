@@ -1169,9 +1169,9 @@ typedef struct ItemEntity {
 } ItemEntity; // size = 0x5C
 
 #if VERSION_JP
-#define MESSAGEPRINTSTATE_BUFFER_SIZE 1024
+#define PRINT_BUFFER_SIZE 1024
 #else
-#define MESSAGEPRINTSTATE_BUFFER_SIZE 1088  // slightly larger than source buffer
+#define PRINT_BUFFER_SIZE 1088  // slightly larger than source buffer
 #endif
 
 typedef struct MessagePrintState {
@@ -1181,7 +1181,7 @@ typedef struct MessagePrintState {
     /* 0x008 */ s32 msgID;
     /* 0x00C */ u16 srcBufferPos;
     /* 0x00E */ u16 curPrintDelay;
-    /* 0x010 */ u8 printBuffer[MESSAGEPRINTSTATE_BUFFER_SIZE];
+    /* 0x010 */ u8 printBuffer[PRINT_BUFFER_SIZE];
     /* 0x450 */ s16 printBufferSize;
     /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
