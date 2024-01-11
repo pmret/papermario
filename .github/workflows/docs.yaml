@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - i-love-continuous-deployment # TEMP obviously
 jobs:
   doxygen:
     runs-on: ubuntu-latest
