@@ -49,22 +49,21 @@ def parse_palette(data):
     return palette
 
 
-def add_file_ext(file: dict, linker: bool = False) -> str:
-    if file["type"] == "party":
-        return "party/" + file["name"] + ".png"
-    elif file["type"] == "geom_hit":
-        return "geom/" + file["name"] + ".bin"
-    elif file["type"] == "geom_shape":
-        name = file["name"]
+def add_file_ext(name: str, linker: bool = False) -> str:
+    if name.startswith("party_"):
+        return "party/" + name + ".png"
+    elif name.endswith("_hit"):
+        return "geom/" + name + ".bin"
+    elif name.endswith("_shape"):
         if linker:
             name += "_built"
         return "geom/" + name + ".bin"
-    elif file["type"] == "tex_archive":
-        return "tex/" + file["name"] + ".bin"
-    elif file["type"] == "bg":
-        return "bg/" + file["name"] + ".png"
+    elif name.endswith("_tex"):
+        return "tex/" + name + ".bin"
+    elif name.endswith("_bg"):
+        return "bg/" + name + ".png"
     else:
-        return file["name"] + ".bin"
+        return name + ".bin"
 
 
 class N64SegPm_map_data(N64Segment):
@@ -99,12 +98,11 @@ class N64SegPm_map_data(N64Segment):
         with open(script_dir / cfg_name) as f:
             mapfs_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
             for file in mapfs_cfg:
-                if isinstance(file, list):
-                    name = file[0]
-                    typ = file[1]
-                    self.files[name] = {"name": name, "type": typ}
-                else:
+                if isinstance(file, dict):
                     self.files[file["name"]] = file.copy()
+                else:
+                    name = file
+                    self.files[name] = {"name": name}
 
     def split(self, rom_bytes):
         assert isinstance(self.rom_start, int)
@@ -133,12 +131,11 @@ class N64SegPm_map_data(N64Segment):
                 break
 
             assert self.files.get(name) is not None
-            file_entry = self.files[name]
 
             if offset == 0:
                 path = None
             else:
-                path = fs_dir / add_file_ext(file_entry)
+                path = fs_dir / add_file_ext(name)
 
             bytes_start = self.rom_start + 0x20 + offset
             bytes = rom_bytes[bytes_start : bytes_start + size]
@@ -146,14 +143,15 @@ class N64SegPm_map_data(N64Segment):
             if is_compressed:
                 bytes = crunch64.yay0.decompress(bytes)
 
-            if file_entry["type"] == "party":
+            if name.startswith("party_"):
                 assert path is not None
                 with open(path, "wb") as f:
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
-            elif file_entry["type"] == "tex_title":
-                for tex in file_entry["textures"]:
+            elif name == "title_data":
+                textures = self.files[name]["textures"]
+                for tex in textures:
                     pos = tex[0]
                     imgtype = tex[1]
                     outname = tex[2]
@@ -175,7 +173,7 @@ class N64SegPm_map_data(N64Segment):
                     elif imgtype == "rgba32":
                         img = n64img.image.RGBA32(data=bytes[pos : pos + w * h * 4], width=w, height=h)
                     elif imgtype in ("ci4", "ci8"):
-                        palette = next(filter(lambda x: x[1] == "pal" and x[2] == outname, file_entry["textures"]))
+                        palette = next(filter(lambda x: x[1] == "pal" and x[2] == outname, textures))
                         pal_pos = palette[0]
 
                         if imgtype == "ci4":
@@ -189,8 +187,8 @@ class N64SegPm_map_data(N64Segment):
 
                     img.write(fs_dir / "title" / f"{outname}.png")
 
-            elif file_entry["type"] == "bg":
-                for i in range(file_entry.get("pal_count", 1)):
+            elif name.endswith("_bg"):
+                for i in range(self.files[name].get("pal_count", 1)):
                     header_offset = i * 0x10
                     raster_offset, palette_offset, draw_pos, width, height = struct.unpack(
                         ">IIIHH", bytes[header_offset : header_offset + 0x10]
@@ -213,16 +211,16 @@ class N64SegPm_map_data(N64Segment):
                         )
                         w.write_array(f, bytes[raster_offset:])
 
-            elif file_entry["type"] == "tex_archive":
+            elif name.endswith("_tex"):
                 TexArchive.extract(bytes, fs_dir / "tex" / name)
             else:
                 assert path is not None
                 with open(path, "wb") as f:
                     f.write(bytes)
 
-            if file_entry.get("dump_raw", False):
+            if self.files[name].get("dump_raw", False):
                 with open(fs_dir / f"{name}.raw.dat", "wb") as f:
-                    f.write(rom_bytes[bytes_start : bytes_start + file_entry["dump_raw_size"]])
+                    f.write(rom_bytes[bytes_start : bytes_start + self.files[name]["dump_raw_size"]])
 
             asset_idx += 1
 
@@ -233,7 +231,7 @@ class N64SegPm_map_data(N64Segment):
 
         src_paths = []
         for name, file in self.files.items():
-            src_paths.append(fs_dir / add_file_ext(file, linker=True))
+            src_paths.append(fs_dir / add_file_ext(name, linker=True))
             if file.get("dump_raw", False):
                 src_paths.append(fs_dir / f"{name}.raw.dat")
 
