@@ -7,10 +7,6 @@ D_A450000C = 0xA450000C;
 D_A4600010 = 0xA4600010;
 D_A4800018 = 0xA4800018;
 
-sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
-
-obfuscated_obfuscation_shims_ROM_START = 0xF79E611F;
-
 filemenu_ROM_START = 0x0016B550;
 filemenu_ROM_END = 0x01749F0;
 filemenu_VRAM = 0x80242370;
@@ -31,23 +27,13 @@ pause_RODATA_END = 0x8026F790;
 pause_BSS_START = 0x8026F790;
 pause_BSS_END = 0x80277D00;
 
+sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
 battle_heap_create_obfuscated_ROM_START = 0x31F1A0;
 obfuscation_shims_ROM_START = 0x31F340;
 battle_heap_create_obfuscated_ROM_END = 0x31F340;
 obfuscation_shims_ROM_END = 0x31F430;
 obfuscated_obfuscation_shims_VRAM = 0x7599F6D8;
-osMemSize = 0x80000318;
-osTvType = 0x80000300;
-osRomBase = 0x80000308;
-osResetType = 0x8000030C;
-osAppNMIBuffer = 0x8000031C;
-
-// main.data
-
-__osGetSR = 0x8006C650;
-__osHwIntTable = 0x800958A0;
-
-// main.bss
+obfuscated_obfuscation_shims_ROM_START = 0xF79E611F;
 
 // subsequent segments
 D_80197000 = 0x80197000;

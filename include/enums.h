@@ -5633,7 +5633,7 @@ enum MsgChars {
     MSG_CHAR_QUESTION               = 0xB6,
     MSG_CHAR_PLUS                   = 0xB7,
     MSG_CHAR_MINUS                  = 0xB8,
-    MSG_CHAR_SLASH                  = 0xB9,
+    MSG_CHAR_FORWARDSLASH           = 0xB9,
     MSG_CHAR_PERIOD                 = 0xBA,
     MSG_CHAR_AND                    = 0xBB,
     MSG_CHAR_HASH                   = 0xBC,

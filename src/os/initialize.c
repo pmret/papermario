@@ -41,12 +41,6 @@ u32 __kmc_pt_mode;
 void* __printfunc = NULL;
 #endif
 
-#if !VERSION_IQUE
-s32 D_80095904[3] = { 0 }; // padding?
-s32 D_80095910[10] = { 0 };
-s32 D_80095938[2] = { 0 };
-#endif
-
 void __createSpeedParam(void) {
     __Dom1SpeedParam.type = DEVICE_TYPE_INIT;
     __Dom1SpeedParam.latency = IO_READ(PI_BSD_DOM1_LAT_REG);

@@ -7,7 +7,7 @@
 
 .section .rodata
 
-glabel D_JP_80099D60
+glabel __osIntOffTable
 /* 75160 80099D60 */ .byte 0x00
 /* 75161 80099D61 */ .byte 0x14
 /* 75162 80099D62 */ .byte 0x18
@@ -42,7 +42,7 @@ glabel D_JP_80099D60
 /* 7517F 80099D7F */ .byte 0x10
 
 .align 3
-glabel jtbl_JP_80099D80
+glabel __osIntTable
 /* 75180 80099D80 8006AEE0 */ .word .LJP_8006AEE0
 /* 75184 80099D84 8006AEA4 */ .word .LJP_8006AEA4
 /* 75188 80099D88 8006AE80 */ .word .LJP_8006AE80
@@ -55,6 +55,27 @@ glabel jtbl_JP_80099D80
 /* 751A4 80099DA4 00000000 */ .word 0x00000000
 /* 751A8 80099DA8 00000000 */ .word 0x00000000
 /* 751AC 80099DAC 00000000 */ .word 0x00000000
+.size __osIntTable, . - __osIntTable
+
+.section .data
+
+glabel __osHwIntTable
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+.size __osHwIntTable, . - __osHwIntTable
+
+glabel __osPiIntTable
+ .word 0x00000000
+ .word 0x00000000
+.size __osPiIntTable, . - __osPiIntTable
 
 .section .text, "ax"
 
@@ -211,12 +232,12 @@ glabel osExceptionPreamble
 /* 45FFC 8006ABFC 00095202 */  srl       $t2, $t1, 8
 /* 46000 8006AC00 214A0010 */  addi      $t2, $t2, 0x10 # handwritten instruction
 .LJP_8006AC04:
-/* 46004 8006AC04 3C01800A */  lui       $at, %hi(D_JP_80099D60)
+/* 46004 8006AC04 3C01800A */  lui       $at, %hi(__osIntOffTable)
 /* 46008 8006AC08 002A0821 */  addu      $at, $at, $t2
-/* 4600C 8006AC0C 902A9D60 */  lbu       $t2, %lo(D_JP_80099D60)($at)
-/* 46010 8006AC10 3C01800A */  lui       $at, %hi(jtbl_JP_80099D80)
+/* 4600C 8006AC0C 902A9D60 */  lbu       $t2, %lo(__osIntOffTable)($at)
+/* 46010 8006AC10 3C01800A */  lui       $at, %hi(__osIntTable)
 /* 46014 8006AC14 002A0821 */  addu      $at, $at, $t2
-/* 46018 8006AC18 8C2A9D80 */  lw        $t2, %lo(jtbl_JP_80099D80)($at)
+/* 46018 8006AC18 8C2A9D80 */  lw        $t2, %lo(__osIntTable)($at)
 /* 4601C 8006AC1C 01400008 */  jr        $t2
 /* 46020 8006AC20 00000000 */   nop
 glabel .LJP_8006AC24
@@ -330,8 +351,8 @@ glabel .LJP_8006ACA8
 /* 461A8 8006ADA8 24090002 */  addiu     $t1, $zero, 0x2
 /* 461AC 8006ADAC 3C01A460 */  lui       $at, %hi(D_A4600010)
 /* 461B0 8006ADB0 AC290010 */  sw        $t1, %lo(D_A4600010)($at)
-/* 461B4 8006ADB4 3C098009 */  lui       $t1, %hi(D_80095938)
-/* 461B8 8006ADB8 252958C8 */  addiu     $t1, $t1, %lo(D_80095938)
+/* 461B4 8006ADB4 3C098009 */  lui       $t1, %hi(__osPiIntTable)
+/* 461B8 8006ADB8 252958C8 */  addiu     $t1, $t1, %lo(__osPiIntTable)
 /* 461BC 8006ADBC 8D2A0000 */  lw        $t2, 0x0($t1)
 /* 461C0 8006ADC0 11400006 */  beqz      $t2, .LJP_8006ADDC
 /* 461C4 8006ADC4 00000000 */   nop

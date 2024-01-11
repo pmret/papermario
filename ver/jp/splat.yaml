@@ -383,6 +383,7 @@ segments:
     - [auto, .data, os/contpfs]
     - [auto, .data, os/contramread]
     - [auto, .data, os/initialize]
+    - [auto, .data, os/exceptasm]
     - [auto, .data, os/xlitob]
     - [auto, .data, os/vi]
     - [auto, .data, os/vimodepallan1]
