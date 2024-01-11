@@ -422,13 +422,13 @@ class TexImage:
             palette_count = (0x20 if fmt_str == "CI4" else 0x200) // 2
             if len(palette) > palette_count:
                 palette = palette[:palette_count]
-                self.warn(f"{self.img_name} has more than {palette_count} colors, truncating")
+                print(f"warning: {self.img_name} has more than {palette_count} colors, truncating")
             elif len(palette) < palette_count:
                 palette += [(0, 0, 0, 0)] * (palette_count - len(palette))
 
             for rgba in palette:
                 if rgba[3] not in (0, 0xFF):
-                    self.warn("alpha mask mode but translucent pixels used")
+                    print(f"warning: alpha mask mode but {self.img_name} has translucent pixels")
 
                 color = pack_color(*rgba)
                 out_pal += color.to_bytes(2, byteorder="big")
