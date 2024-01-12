@@ -663,7 +663,7 @@ extern s32 MsgLetterRasterOffsets[];
 extern s32 MsgLetterPaletteOffsets[];
 extern MsgVoice MsgVoices[];
 
-#if VERSION_PAL || VERSION_JP
+#if VERSION_PAL
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 #else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
@@ -1198,8 +1198,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                                     case MSG_CHAR_READ_VARIANT2:
                                     case MSG_CHAR_READ_VARIANT3:
                                         sp10[0] = (argQ - MSG_CHAR_READ_VARIANT0) + MSG_CHAR_PRINT_VARIANT0;
-                                        temp = argQ - MSG_CHAR_READ_VARIANT0 + 0x200;
-                                        printer->fontVariant = temp;
+                                        printer->fontVariant = sp10[0] + 0x10F;
                                         break;
 #if !VERSION_JP
                                     case MSG_CHAR_READ_SPACE:
