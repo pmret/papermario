@@ -1746,7 +1746,6 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
 
     switch (gPopupMenu->popupType) {
 #if VERSION_JP
-
         case POPUP_MENU_TRADE_FOR_BADGE:
             offset = 31;
             break;

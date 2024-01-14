@@ -413,11 +413,14 @@ dlabel D_80155C98
 dlabel gMessageWindowProjMatrix
 .space 0x00000080
 
+dlabel D_JP_8015AC98_pad
+.space 8
+
 dlabel D_80155D20
 .space 4
 
 dlabel D_8015DD24
-.space 0x00000058
+.space 0x00000050
 
 dlabel msg_drawState
 .space 4
