@@ -49,10 +49,6 @@ SHIFT_BSS EffectInstance* ItemPickupGotOutline;
 SHIFT_BSS MessagePrintState* GotItemTutorialPrinter;
 SHIFT_BSS b32 GotItemTutorialClosed;
 
-#if VERSION_JP
-extern s32 D_8015B864;
-#endif
-
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
 void draw_item_entities(void);
@@ -2599,7 +2595,7 @@ void func_801363A0(ItemEntity* item) {
         case ITEM_PICKUP_STATE_AWAIT_THROW_AWAY:
             set_message_text_var(itemData->nameMsg, 0);
 #if VERSION_JP
-            width = get_msg_width(gItemTable[D_8015B864].nameMsg, 0) + 104;
+            width = get_msg_width(gItemTable[ThrowAwayItemID].nameMsg, 0) + 104;
 #else
             width = get_msg_width(MSG_Menus_005F, 0) + 54;
 #endif
