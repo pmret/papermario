@@ -7,7 +7,7 @@
 
 .section .rodata
 
-glabel __osIntOffTable
+__osIntOffTable:
 /* 75160 80099D60 */ .byte 0x00
 /* 75161 80099D61 */ .byte 0x14
 /* 75162 80099D62 */ .byte 0x18
@@ -42,7 +42,7 @@ glabel __osIntOffTable
 /* 7517F 80099D7F */ .byte 0x10
 
 .align 3
-glabel __osIntTable
+__osIntTable:
 /* 75180 80099D80 8006AEE0 */ .word .LJP_8006AEE0
 /* 75184 80099D84 8006AEA4 */ .word .LJP_8006AEA4
 /* 75188 80099D88 8006AE80 */ .word .LJP_8006AE80
@@ -59,7 +59,7 @@ glabel __osIntTable
 
 .section .data
 
-glabel __osHwIntTable
+__osHwIntTable:
  .word 0x00000000
  .word 0x00000000
  .word 0x00000000
@@ -72,7 +72,7 @@ glabel __osHwIntTable
  .word 0x00000000
 .size __osHwIntTable, . - __osHwIntTable
 
-glabel __osPiIntTable
+__osPiIntTable:
  .word 0x00000000
  .word 0x00000000
 .size __osPiIntTable, . - __osPiIntTable

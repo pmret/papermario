@@ -7,7 +7,7 @@
 
 .section .rodata
 
-glabel __osIntOffTable
+__osIntOffTable:
  .byte 0x00
  .byte 0x14
  .byte 0x18
@@ -42,7 +42,7 @@ glabel __osIntOffTable
  .byte 0x10
 .size __osIntOffTable, . - __osIntOffTable
 
-glabel __osIntTable
+__osIntTable:
  .word .L8006AF00_46300
  .word .L8006AEC4_462C4
  .word .L8006AEA0_462A0
@@ -59,7 +59,7 @@ glabel __osIntTable
 
 .section .data
 
-glabel __osHwIntTable
+__osHwIntTable:
  .word 0x00000000
  .word 0x00000000
  .word 0x00000000
@@ -72,7 +72,7 @@ glabel __osHwIntTable
  .word 0x00000000
 .size __osHwIntTable, . - __osHwIntTable
 
-glabel __osPiIntTable
+__osPiIntTable:
  .word 0x00000000
  .word 0x00000000
 .size __osPiIntTable, . - __osPiIntTable
