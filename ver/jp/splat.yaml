@@ -1130,6 +1130,7 @@ segments:
     - [0x1381B0, ci8,     letter_content_12, 70, 95]
     - [0x139BB0, linker_offset, letter_content_12_pal]
     - [0x139BB0, palette, letter_content_12]
+    - [0x139DB0]
   - [0x139DB0, bin]
 
   - name: battle_code
