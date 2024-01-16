@@ -1207,7 +1207,7 @@ void render_item_entities(void) {
                             gSPDisplayList(gMainGfxPos++, D_8014C678);
                         } else {
                             gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
-                            if (gSpriteShadingProfile->flags) {
+                            if (gSpriteShadingProfile->flags != 0) {
                                 gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
                                 gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
                                 gDPLoadSync(gMainGfxPos++);

@@ -15,127 +15,127 @@
 /// @name Map
 
 /// @evtapi
-ApiStatus TranslateModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(TranslateModel);
 
 /// @evtapi
-ApiStatus RotateModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(RotateModel);
 
 /// @evtapi
-ApiStatus ScaleModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(ScaleModel);
 
 /// @evtapi
-ApiStatus GetModelIndex(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetModelIndex);
 
 /// @evtapi
-ApiStatus InvalidateModelTransform(Evt* script, s32 isInitialCall);
+API_CALLABLE(InvalidateModelTransform);
 
 /// @evtapi
-ApiStatus CloneModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(CloneModel);
 
 /// @evtapi
-ApiStatus GetModelCenter(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetModelCenter);
 
 /// @evtapi
-ApiStatus SetTexPanner(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetTexPanner);
 
 /// @evtapi
-ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCustomGfxEnabled);
 
 /// @evtapi
-ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetModelCustomGfx);
 
 /// @evtapi
-ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetModelTexVariant);
 
 /// @evtapi
-ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableTexPanning);
 
 /// @evtapi
-ApiStatus EnableModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableModel);
 
 /// @evtapi
-ApiStatus SetGroupVisibility(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetGroupVisibility);
 
 /// @evtapi
-ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetTexPanOffset);
 
 /// @evtapi
-ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCustomGfx);
 
 /// @evtapi
-ApiStatus SetCustomGfxBuilders(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCustomGfxBuilders);
 
 /// @evtapi
-ApiStatus SetModelFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetModelFlags);
 
 /// @evtapi
-ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeTransformGroup);
 
 /// @evtapi
-ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetTransformGroupEnabled);
 
 /// @evtapi
-ApiStatus TranslateGroup(Evt* script, s32 isInitialCall);
+API_CALLABLE(TranslateGroup);
 
 /// @evtapi
-ApiStatus RotateGroup(Evt* script, s32 isInitialCall);
+API_CALLABLE(RotateGroup);
 
 /// @evtapi
-ApiStatus ScaleGroup(Evt* script, s32 isInitialCall);
+API_CALLABLE(ScaleGroup);
 
 /// @evtapi
-ApiStatus GetTransformGroup(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetTransformGroup);
 
 /// @evtapi
-ApiStatus EnableGroup(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableGroup);
 
 /// @evtapi
-ApiStatus MakeLocalVertexCopy(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeLocalVertexCopy);
 
 /// @evtapi
-ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(ModifyColliderFlags);
 
 /// @evtapi
-ApiStatus ResetFromLava(Evt* script, s32 isInitialCall);
+API_CALLABLE(ResetFromLava);
 
 /// @evtapi
-ApiStatus GetColliderCenter(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetColliderCenter);
 
 /// @evtapi
-ApiStatus ParentColliderToModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(ParentColliderToModel);
 
 /// @evtapi
-ApiStatus UpdateColliderTransform(Evt* script, s32 isInitialCall);
+API_CALLABLE(UpdateColliderTransform);
 
 /// @evtapi
-ApiStatus SetZoneEnabled(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetZoneEnabled);
 
 /// @evtapi
-ApiStatus GotoMap(Evt* script, s32 isInitialCall);
+API_CALLABLE(GotoMap);
 
 /// @evtapi
-ApiStatus GotoMapSpecial(Evt* script, s32 isInitialCall);
+API_CALLABLE(GotoMapSpecial);
 
 /// @evtapi
-ApiStatus GotoMapByID(Evt* script, s32 isInitialCall);
+API_CALLABLE(GotoMapByID);
 
 /// @evtapi
-ApiStatus GetEntryID(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetEntryID);
 
 /// @evtapi
-ApiStatus GetMapID(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetMapID);
 
 /// @evtapi
-ApiStatus GetLoadType(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetLoadType);
 
 /// @evtapi
-ApiStatus SetRenderMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetRenderMode);
 
 /// @evtapi
-ApiStatus PlaySoundAtModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundAtModel);
 
 /// @evtapi
-ApiStatus PlaySoundAtCollider(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundAtCollider);
 
 /// @}
 
@@ -143,61 +143,61 @@ ApiStatus PlaySoundAtCollider(Evt* script, s32 isInitialCall);
 /// @name Animated Model
 
 /// @evtapi
-ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
+API_CALLABLE(InitAnimatedModels);
 
 /// @evtapi
-ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(LoadAnimatedModel);
 
 /// @evtapi
-ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall);
+API_CALLABLE(LoadAnimatedMesh);
 
 /// @evtapi
-ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayModelAnimation);
 
 /// @evtapi
-ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayModelAnimationStartingFrom);
 
 /// @evtapi
-ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall);
+API_CALLABLE(ChangeModelAnimation);
 
 /// @evtapi
-ApiStatus SetAnimatedModelRootPosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatedModelRootPosition);
 
 /// @evtapi
-ApiStatus GetAnimatedModelRootPosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAnimatedModelRootPosition);
 
 /// @evtapi
-ApiStatus AddAnimatedModelRootPosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddAnimatedModelRootPosition);
 
 /// @evtapi
-ApiStatus SetAnimatedModelRootRotation(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatedModelRootRotation);
 
 /// @evtapi
-ApiStatus SetAnimatedModelRootScale(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatedModelRootScale);
 
 /// @evtapi
-ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatedModelRenderMode);
 
 /// @evtapi
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall);
+API_CALLABLE(DeleteAnimatedModel);
 
 /// @evtapi
-ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatorFlags);
 
 /// @evtapi
-ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAnimatedNodePosition);
 
 /// @evtapi
-ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAnimatedNodeRotation);
 
 /// @evtapi
-ApiStatus GetAnimatedPositionByTreeIndex(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAnimatedPositionByTreeIndex);
 
 /// @evtapi
-ApiStatus GetAnimatedRotationByTreeIndex(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAnimatedRotationByTreeIndex);
 
 /// @evtapi
-ApiStatus SetAnimatedNodeFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetAnimatedNodeFlags);
 
 /// @}
 
@@ -205,115 +205,115 @@ ApiStatus SetAnimatedNodeFlags(Evt* script, s32 isInitialCall);
 /// @name Camera
 
 /// @evtapi
-ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamEnabled);
 
 /// @evtapi
-ApiStatus SetCamNoDraw(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamNoDraw);
 
 /// @evtapi
-ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamPerspective);
 
 /// @evtapi
-ApiStatus func_802CA90C(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CA90C);
 
 /// @evtapi
-ApiStatus func_802CA988(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CA988);
 
 /// @evtapi
-ApiStatus SetCamViewport(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamViewport);
 
 /// @evtapi
-ApiStatus func_802CABE8(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CABE8);
 
 /// @evtapi
-ApiStatus func_802CACC0(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CACC0);
 
 /// @evtapi
-ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamBGColor);
 
 /// @evtapi
-ApiStatus func_802CAE50(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CAE50);
 
 /// @evtapi
-ApiStatus SetCamTarget(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamTarget);
 
 /// @evtapi
-ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(InterpCamTargetPos);
 
 /// @evtapi
-ApiStatus ShakeCam(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShakeCam);
 
 /// @evtapi
-ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamLeadPlayer);
 
 /// @evtapi
-ApiStatus func_802CB710(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CB710);
 
 /// @evtapi
-ApiStatus PanToTarget(Evt* script, s32 isInitialCall);
+API_CALLABLE(PanToTarget);
 
 /// @evtapi
-ApiStatus UseSettingsFrom(Evt* script, s32 isInitialCall);
+API_CALLABLE(UseSettingsFrom);
 
 /// @evtapi
-ApiStatus LoadSettings(Evt* script, s32 isInitialCall);
+API_CALLABLE(LoadSettings);
 
 /// @evtapi
-ApiStatus SetCamType(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamType);
 
 /// @evtapi
-ApiStatus SetCamPitch(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamPitch);
 
 /// @evtapi
-ApiStatus SetCamDistance(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamDistance);
 
 /// @evtapi
-ApiStatus SetCamPosA(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamPosA);
 
 /// @evtapi
-ApiStatus SetCamPosB(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamPosB);
 
 /// @evtapi
-ApiStatus SetCamPosC(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamPosC);
 
 /// @evtapi
-ApiStatus SetPanTarget(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPanTarget);
 
 /// @evtapi
-ApiStatus SetCamSpeed(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamSpeed);
 
 /// @evtapi
-ApiStatus GetCamType(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamType);
 
 /// @evtapi
-ApiStatus GetCamPitch(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamPitch);
 
 /// @evtapi
-ApiStatus GetCamDistance(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamDistance);
 
 /// @evtapi
-ApiStatus GetCamPosA(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamPosA);
 
 /// @evtapi
-ApiStatus GetCamPosB(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamPosB);
 
 /// @evtapi
-ApiStatus GetCamPosC(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamPosC);
 
 /// @evtapi
-ApiStatus GetCamPosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamPosition);
 
 /// @evtapi
-ApiStatus WaitForCam(Evt* script, s32 isInitialCall);
+API_CALLABLE(WaitForCam);
 
 /// @evtapi
-ApiStatus SetCamProperties(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetCamProperties);
 
 /// @evtapi
-ApiStatus AdjustCam(Evt* script, s32 isInitialCall);
+API_CALLABLE(AdjustCam);
 
 /// @evtapi
-ApiStatus ResetCam(Evt* script, s32 isInitialCall);
+API_CALLABLE(ResetCam);
 
 /// @}
 
@@ -321,148 +321,148 @@ ApiStatus ResetCam(Evt* script, s32 isInitialCall);
 /// @name NPC
 
 /// @evtapi
-ApiStatus CreateNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(CreateNpc);
 
 /// @evtapi
-ApiStatus DeleteNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(DeleteNpc);
 
 /// @evtapi
-ApiStatus GetNpcPointer(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetNpcPointer);
 
 /// @evtapi
-ApiStatus SetNpcPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcPos);
 
 /// @evtapi
-ApiStatus SetNpcRotation(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcRotation);
 
 /// @evtapi
-ApiStatus SetNpcRotationPivot(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcRotationPivot);
 
 /// @evtapi
-ApiStatus SetNpcScale(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcScale);
 
 /// @evtapi
-ApiStatus SetNpcCollisionSize(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcCollisionSize);
 
 /// @evtapi
-ApiStatus SetNpcSpeed(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcSpeed);
 
 /// @evtapi
-ApiStatus SetNpcJumpscale(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcJumpscale);
 
 /// @evtapi
-ApiStatus SetNpcAnimation(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcAnimation);
 
 /// @evtapi
-ApiStatus GetNpcAnimation(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetNpcAnimation);
 
 /// @evtapi
-ApiStatus SetNpcAnimationSpeed(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcAnimationSpeed);
 
 /// @evtapi
-ApiStatus NpcMoveTo(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcMoveTo);
 
 /// @evtapi
-ApiStatus NpcJump0(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcJump0);
 
 /// @evtapi
-ApiStatus NpcJump1(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcJump1);
 
 /// @evtapi
-ApiStatus NpcFlyTo(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcFlyTo);
 
 /// @evtapi
-ApiStatus GetNpcYaw(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetNpcYaw);
 
 /// @evtapi
-ApiStatus SetNpcYaw(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcYaw);
 
 /// @evtapi
-ApiStatus InterpNpcYaw(Evt* script, s32 isInitialCall);
+API_CALLABLE(InterpNpcYaw);
 
 /// @evtapi
-ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcFacePlayer);
 
 /// @evtapi
-ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcFaceNpc);
 
 /// @evtapi
-ApiStatus SetNpcFlagBits(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcFlagBits);
 
 /// @evtapi
-ApiStatus GetNpcPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetNpcPos);
 
 /// @evtapi
-ApiStatus SetNpcCollisionChannel(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcCollisionChannel);
 
 /// @evtapi
-ApiStatus SetNpcSprite(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcSprite);
 
 /// @evtapi
-ApiStatus EnableNpcShadow(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableNpcShadow);
 
 /// @evtapi
-ApiStatus EnableNpcBlur(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableNpcBlur);
 
 /// @evtapi
-ApiStatus ClearPartnerMoveHistory(Evt* script, s32 isInitialCall);
+API_CALLABLE(ClearPartnerMoveHistory);
 
 /// @evtapi
-ApiStatus NpcSetHomePosToCurrent(Evt* script, s32 isInitialCall);
+API_CALLABLE(NpcSetHomePosToCurrent);
 
 /// @evtapi
-ApiStatus GetPartnerPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetPartnerPos);
 
 /// @evtapi
-ApiStatus DisablePartnerAI(Evt* script, s32 isInitialCall);
+API_CALLABLE(DisablePartnerAI);
 
 /// @evtapi
-ApiStatus EnablePartnerAI(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnablePartnerAI);
 
 /// @evtapi
-ApiStatus func_802CF54C(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CF54C);
 
 /// @evtapi
-ApiStatus func_802CF56C(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802CF56C);
 
 /// @evtapi
-ApiStatus BringPartnerOut(Evt* script, s32 isInitialCall);
+API_CALLABLE(BringPartnerOut);
 
 /// @evtapi
-ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall);
+API_CALLABLE(PutPartnerAway);
 
 /// @evtapi
-ApiStatus GetCurrentPartnerID(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCurrentPartnerID);
 
 /// @evtapi
-ApiStatus PartnerCanUseAbility(Evt* script, s32 isInitialCall);
+API_CALLABLE(PartnerCanUseAbility);
 
 /// @evtapi
-ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall);
+API_CALLABLE(PartnerIsFlying);
 
 /// @evtapi
-ApiStatus SetNpcImgFXParams(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcImgFXParams);
 
 /// @evtapi
-ApiStatus SetNpcImgFXFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcImgFXFlags);
 
 /// @evtapi
-ApiStatus SetNpcPaletteSwapMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcPaletteSwapMode);
 
 /// @evtapi
-ApiStatus SetNpcPaletteSwapLower(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcPaletteSwapLower);
 
 /// @evtapi
-ApiStatus SetNpcPaletteSwapping(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcPaletteSwapping);
 
 /// @evtapi
-ApiStatus SetNpcDecoration(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcDecoration);
 
 /// @evtapi
-ApiStatus PlaySoundAtNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundAtNpc);
 
 /// @evtapi
-ApiStatus SetNpcRenderMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcRenderMode);
 
 /// @}
 
@@ -470,217 +470,217 @@ ApiStatus SetNpcRenderMode(Evt* script, s32 isInitialCall);
 /// @name Encounter
 
 /// @evtapi
-ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetEncounterStatusFlags);
 
 /// @evtapi
-ApiStatus IsStartingConversation(Evt* script, s32 isInitialCall);
+API_CALLABLE(IsStartingConversation);
 
 /// @evtapi
-ApiStatus func_80044238(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_80044238);
 
 /// @evtapi
-ApiStatus LoadDemoBattle(Evt* script, s32 isInitialCall);
+API_CALLABLE(LoadDemoBattle);
 
 /// @evtapi
-ApiStatus func_80044290(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_80044290);
 
 /// @evtapi
-ApiStatus MakeNpcs(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeNpcs);
 
 /// @evtapi
-ApiStatus RemoveNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveNpc);
 
 /// @evtapi
-ApiStatus RemoveEncounter(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveEncounter);
 
 /// @evtapi
-ApiStatus GetBattleOutcome(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetBattleOutcome);
 
 /// @evtapi
-ApiStatus func_800445A8(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_800445A8);
 
 /// @evtapi
-ApiStatus func_800445D4(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_800445D4);
 
 /// @evtapi
-ApiStatus GetOwnerEncounterTrigger(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetOwnerEncounterTrigger);
 
 /// @evtapi
-ApiStatus DoNpcDefeat(Evt* script, s32 isInitialCall);
+API_CALLABLE(DoNpcDefeat);
 
 /// @evtapi
-ApiStatus StartBattle(Evt* script, s32 isInitialCall);
+API_CALLABLE(StartBattle);
 
 /// @evtapi
-ApiStatus StartBattleWith(Evt* script, s32 isInitialCall);
+API_CALLABLE(StartBattleWith);
 
 /// @evtapi
-ApiStatus StartBossBattle(Evt* script, s32 isInitialCall);
+API_CALLABLE(StartBossBattle);
 
 /// @evtapi
-ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetBattleMusic);
 
 /// @evtapi
-ApiStatus BindNpcAI(Evt* script, s32 isInitialCall);
+API_CALLABLE(BindNpcAI);
 
 /// @evtapi
-ApiStatus BindNpcIdle(Evt* script, s32 isInitialCall);
+API_CALLABLE(BindNpcIdle);
 
 /// @evtapi
-ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall);
+API_CALLABLE(RestartNpcAI);
 
 /// @evtapi
-ApiStatus EnableNpcAI(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableNpcAI);
 
 /// @evtapi
-ApiStatus SetNpcAux(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcAux);
 
 /// @evtapi
-ApiStatus BindNpcAux(Evt* script, s32 isInitialCall);
+API_CALLABLE(BindNpcAux);
 
 /// @evtapi
-ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall);
+API_CALLABLE(RestartNpcAux);
 
 /// @evtapi
-ApiStatus EnableNpcAux(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableNpcAux);
 
 /// @evtapi
-ApiStatus BindNpcInteract(Evt* script, s32 isInitialCall);
+API_CALLABLE(BindNpcInteract);
 
 /// @evtapi
-ApiStatus BindNpcHit(Evt* script, s32 isInitialCall);
+API_CALLABLE(BindNpcHit);
 
 /// @evtapi
-ApiStatus BindNpcDefeat(Evt* script, s32 isInitialCall);
+API_CALLABLE(BindNpcDefeat);
 
 /// @evtapi
-ApiStatus SetSelfVar(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetSelfVar);
 
 /// @evtapi
-ApiStatus GetSelfVar(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetSelfVar);
 
 /// @evtapi
-ApiStatus SetNpcVar(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetNpcVar);
 
 /// @evtapi
-ApiStatus GetNpcVar(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetNpcVar);
 
 /// @evtapi
-ApiStatus SetSelfRotation(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetSelfRotation);
 
 /// @evtapi
-ApiStatus SetSelfEnemyFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetSelfEnemyFlags);
 
 /// @evtapi
-ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetSelfEnemyFlagBits);
 
 /// @evtapi
-ApiStatus SelfEnemyOverrideSyncPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(SelfEnemyOverrideSyncPos);
 
 /// @evtapi
-ApiStatus GetSelfNpcID(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetSelfNpcID);
 
 /// @evtapi
-ApiStatus ClearDefeatedEnemies(Evt* script, s32 isInitialCall);
+API_CALLABLE(ClearDefeatedEnemies);
 
 /// @evtapi
-ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetEnemyFlagBits);
 
 /// @evtapi
-ApiStatus func_8004572C(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_8004572C);
 
 /// @evtapi
-ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetSelfAnimationFromTable);
 
 /// @evtapi
-ApiStatus func_80045798(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_80045798);
 
 /// @evtapi
-ApiStatus SetOwnerInstigatorValue(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetOwnerInstigatorValue);
 
 /// @evtapi
-ApiStatus SetBattleAsScripted(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetBattleAsScripted);
 
 /// @evtapi
-ApiStatus GetEncounterTriggerHitTier(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetEncounterTriggerHitTier);
 
 /// @evtapi
-ApiStatus func_80045838(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_80045838);
 
 /// @evtapi
-ApiStatus func_800458CC(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_800458CC);
 
 /// @evtapi
-ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall);
+API_CALLABLE(OnPlayerFled);
 
 /// @evtapi
-ApiStatus SetTattleMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetTattleMessage);
 
 /// @evtapi
-ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowMerleeCoinMessage);
 
 /// @evtapi
-ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowMerleeRanOutMessage);
 
 /// @evtapi
-ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeInMerlee);
 
 /// @evtapi
-ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeOutMerlee);
 
 /// @evtapi
-ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(MerleeUpdateFX);
 
 /// @evtapi
-ApiStatus MerleeStopFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(MerleeStopFX);
 
 /// @evtapi
-ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayMerleeGatherFX);
 
 /// @evtapi
-ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayMerleeOrbFX);
 
 /// @evtapi
-ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowMerleeCoinMessage);
 
 /// @evtapi
-ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowMerleeRanOutMessage);
 
 /// @evtapi
-ApiStatus FadeBackgroundDarken(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeBackgroundDarken);
 
 /// @evtapi
-ApiStatus FadeBackgroundLighten(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeBackgroundLighten);
 
 /// @evtapi
-ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeInMerlee);
 
 /// @evtapi
-ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeOutMerlee);
 
 /// @evtapi
-ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(MerleeUpdateFX);
 
 /// @evtapi
-ApiStatus MerleeStopFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(MerleeStopFX);
 
 /// @evtapi
-ApiStatus GetCamLookAtObjVector(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetCamLookAtObjVector);
 
 /// @evtapi
-ApiStatus HasMerleeCasts(Evt* script, s32 isInitialCall);
+API_CALLABLE(HasMerleeCasts);
 
 /// @evtapi
-ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayMerleeGatherFX);
 
 /// @evtapi
-ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayMerleeOrbFX);
 
 /// @evtapi
-ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall);
+API_CALLABLE(OnDefeatEnemy);
 
 /// @evtapi
-ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall);
+API_CALLABLE(OnFleeBattleDrops);
 
 /// @}
 
@@ -688,49 +688,49 @@ ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall);
 /// @name Message
 
 /// @evtapi
-ApiStatus SpeakToPlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(SpeakToPlayer);
 
 /// @evtapi
-ApiStatus EndSpeech(Evt* script, s32 isInitialCall);
+API_CALLABLE(EndSpeech);
 
 /// @evtapi
-ApiStatus ContinueSpeech(Evt* script, s32 isInitialCall);
+API_CALLABLE(ContinueSpeech);
 
 /// @evtapi
-ApiStatus SpeakToNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(SpeakToNpc);
 
 /// @evtapi
-ApiStatus ShowMessageAtScreenPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowMessageAtScreenPos);
 
 /// @evtapi
-ApiStatus ShowMessageAtWorldPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowMessageAtWorldPos);
 
 /// @evtapi
-ApiStatus CloseMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(CloseMessage);
 
 /// @evtapi
-ApiStatus SwitchMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(SwitchMessage);
 
 /// @evtapi
-ApiStatus ShowChoice(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowChoice);
 
 /// @evtapi
-ApiStatus CloseChoice(Evt* script, s32 isInitialCall);
+API_CALLABLE(CloseChoice);
 
 /// @evtapi
-ApiStatus CancelMessage(Evt* script, s32 isInitialCall);
+API_CALLABLE(CancelMessage);
 
 /// @evtapi
-ApiStatus SetMessageImages(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetMessageImages);
 
 /// @evtapi
-ApiStatus func_802D0C94(Evt* script, s32 initialCall);
+API_CALLABLE(func_802D0C94);
 
 /// @evtapi
-ApiStatus SetMessageText(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetMessageText);
 
 /// @evtapi
-ApiStatus SetMessageValue(Evt* script, s32 initialCall);
+API_CALLABLE(SetMessageValue);
 
 /// @}
 
@@ -741,18 +741,18 @@ ApiStatus SetMessageValue(Evt* script, s32 initialCall);
 /// @evtapi
 /// @param hide Whether to hide the player's shadow.
 /// @see disable_player_shadow, enable_player_shadow
-ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall);
+API_CALLABLE(HidePlayerShadow);
 
 /// Disables player physics if `disable` is `TRUE`, enables it if `FALSE`.
 /// @evtapi
 /// @param disable Whether to disable player physics.
 /// @see disable_player_static_collisions, enable_player_static_collisions
-ApiStatus DisablePlayerPhysics(Evt* script, s32 isInitialCall);
+API_CALLABLE(DisablePlayerPhysics);
 
 /// Disables player and partner input, and disables the status menu.
 /// @evtapi
 /// @param disable Whether to disable player input.
-ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall);
+API_CALLABLE(DisablePlayerInput);
 
 /// Sets the player position.
 /// @evtapi
@@ -760,133 +760,133 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall);
 /// @param y `-1000` is used for hiding the player.
 /// @param z
 /// @see GetPlayerPos
-ApiStatus SetPlayerPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerPos);
 
 /// Overrides the player collision size.
 /// @evtapi
 /// @param height
 /// @param diameter
-ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerCollisionSize);
 
 /// Sets the move speed of the player for subequent \ref PlayerMoveTo calls.
 /// @evtapi
 /// @param speed Float multiplier.
 /// @see SetNpcSpeed
-ApiStatus SetPlayerSpeed(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerSpeed);
 
 /// @evtapi
-ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerJumpscale);
 
 /// @evtapi
-ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerAnimation);
 
 /// @evtapi
-ApiStatus SetPlayerActionState(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerActionState);
 
 /// @evtapi
-ApiStatus SetPlayerAnimationSpeed(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerAnimationSpeed);
 
 /// @evtapi
-ApiStatus PlayerMoveTo(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayerMoveTo);
 
 /// @evtapi
-ApiStatus func_802D1270(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D1270);
 
 /// @evtapi
-ApiStatus func_802D1380(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D1380);
 
 /// @evtapi
-ApiStatus PlayerJump(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayerJump);
 
 /// @evtapi
-ApiStatus PlayerJump1(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayerJump1);
 
 /// @evtapi
-ApiStatus PlayerJump2(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayerJump2);
 
 /// @evtapi
-ApiStatus InterpPlayerYaw(Evt* script, s32 isInitialCall);
+API_CALLABLE(InterpPlayerYaw);
 
 /// @evtapi
-ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayerFaceNpc);
 
 /// @evtapi
-ApiStatus GetPlayerTargetYaw(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetPlayerTargetYaw);
 
 /// @evtapi
-ApiStatus SetPlayerFlagBits(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerFlagBits);
 
 /// @evtapi
-ApiStatus GetPlayerActionState(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetPlayerActionState);
 
 /// @evtapi
-ApiStatus GetPlayerPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetPlayerPos);
 
 /// @evtapi
-ApiStatus GetPlayerAnimation(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetPlayerAnimation);
 
 /// @evtapi
-ApiStatus FullyRestoreHPandFP(Evt* script, s32 isInitialCall);
+API_CALLABLE(FullyRestoreHPandFP);
 
 /// @evtapi
-ApiStatus FullyRestoreSP(Evt* script, s32 isInitialCall);
+API_CALLABLE(FullyRestoreSP);
 
 /// Enables switching to the given partner.
 /// @evtapi
 /// @param partnerID The \ref PartnerIDs "partner id" to enable.
 /// @see DisablePartner
-ApiStatus EnablePartner(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnablePartner);
 
 /// Disables switching to the given partner.
 /// @evtapi
 /// @param partnerID The \ref PartnerIDs "partner id" to disable.
 /// @see EnablePartner
-ApiStatus DisablePartner(Evt* script, s32 isInitialCall);
+API_CALLABLE(DisablePartner);
 
 /// @evtapi
-ApiStatus UseEntryHeading(Evt* script, s32 isInitialCall);
+API_CALLABLE(UseEntryHeading);
 
 /// @evtapi
-ApiStatus func_802D2148(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D2148);
 
 /// @evtapi
-ApiStatus UseExitHeading(Evt* script, s32 isInitialCall);
+API_CALLABLE(UseExitHeading);
 
 /// @evtapi
-ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall);
+API_CALLABLE(WaitForPlayerTouchingFloor);
 
 /// @evtapi
-ApiStatus func_802D2484(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D2484);
 
 /// @evtapi
-ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall);
+API_CALLABLE(IsPlayerOnValidFloor);
 
 /// @evtapi
-ApiStatus WaitForPlayerMoveToComplete(Evt* script, s32 isInitialCall);
+API_CALLABLE(WaitForPlayerMoveToComplete);
 
 /// @evtapi
-ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall);
+API_CALLABLE(WaitForPlayerInputEnabled);
 
 /// @evtapi
-ApiStatus UpdatePlayerImgFX(Evt* script, s32 isInitialCall);
+API_CALLABLE(UpdatePlayerImgFX);
 
 /// @evtapi
-ApiStatus SetPlayerImgFXFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerImgFXFlags);
 
 /// @evtapi
-ApiStatus FacePlayerTowardPoint(Evt* script, s32 isInitialCall);
+API_CALLABLE(FacePlayerTowardPoint);
 
 /// @evtapi
-ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall);
+API_CALLABLE(DisablePulseStone);
 
 /// @evtapi
-ApiStatus GetPartnerInUse(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetPartnerInUse);
 
 /// @evtapi
-ApiStatus ForceUsePartner(Evt* script, s32 isInitialCall);
+API_CALLABLE(ForceUsePartner);
 
 /// @evtapi
-ApiStatus InterruptUsePartner(Evt* script, s32 isInitialCall);
+API_CALLABLE(InterruptUsePartner);
 
 /// Enables and disables the 8-bit Mario easter egg.
 ///
@@ -901,16 +901,16 @@ ApiStatus InterruptUsePartner(Evt* script, s32 isInitialCall);
 /// - Partner usage and partner switching
 ///
 /// @see PA_FLAG_8BIT_MARIO
-ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall);
+API_CALLABLE(Disable8bitMario);
 
 /// @evtapi
-ApiStatus func_802D2C14(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D2C14);
 
 /// @evtapi
-ApiStatus SetPlayerPushVelocity(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetPlayerPushVelocity);
 
 /// @evtapi
-ApiStatus PlaySoundAtPlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundAtPlayer);
 
 /// @}
 
@@ -918,85 +918,85 @@ ApiStatus PlaySoundAtPlayer(Evt* script, s32 isInitialCall);
 /// @name Math
 
 /// @evtapi
-ApiStatus MakeLerp(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeLerp);
 
 /// @evtapi
-ApiStatus UpdateLerp(Evt* script, s32 isInitialCall);
+API_CALLABLE(UpdateLerp);
 
 /// @evtapi
-ApiStatus RandInt(Evt* script, s32 isInitialCall);
+API_CALLABLE(RandInt);
 
 /// @evtapi
-ApiStatus GetAngleBetweenNPCs(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAngleBetweenNPCs);
 
 /// @evtapi
-ApiStatus GetAngleToNPC(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAngleToNPC);
 
 /// @evtapi
-ApiStatus GetAngleToPlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetAngleToPlayer);
 
 /// @evtapi
-ApiStatus AwaitPlayerApproach(Evt* script, s32 isInitialCall);
+API_CALLABLE(AwaitPlayerApproach);
 
 /// @evtapi
-ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall);
+API_CALLABLE(IsPlayerWithin);
 
 /// @evtapi
-ApiStatus AwaitPlayerLeave(Evt* script, s32 isInitialCall);
+API_CALLABLE(AwaitPlayerLeave);
 
 /// @evtapi
-ApiStatus AddVectorPolar(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddVectorPolar);
 
 /// @evtapi
-ApiStatus func_802D4BDC(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D4BDC);
 
 /// @evtapi
-ApiStatus func_802D4C4C(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D4C4C);
 
 /// @evtapi
-ApiStatus func_802D4CC4(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D4CC4);
 
 /// @evtapi
-ApiStatus func_802D4D14(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D4D14);
 
 /// @evtapi
-ApiStatus func_802D4D88(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D4D88);
 
 /// @evtapi
 /// @see GetNextPathPos
-ApiStatus LoadPath(Evt* script, s32 isInitialCall);
+API_CALLABLE(LoadPath);
 
 /// @evtapi
 /// @see LoadPath
-ApiStatus GetNextPathPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetNextPathPos);
 
 /// @evtapi
-ApiStatus GetDist2D(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetDist2D);
 
 /// @evtapi
-ApiStatus SetTimeFreezeMode(Evt* script, s32 initialCall);
+API_CALLABLE(SetTimeFreezeMode);
 
 /// @evtapi
-ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 initialCall);
+API_CALLABLE(ModifyGlobalOverrideFlags);
 
 /// @evtapi
-ApiStatus SetValueByRef(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetValueByRef);
 
 /// @evtapi
-ApiStatus GetValueByRef(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetValueByRef);
 
 /// @evtapi
-ApiStatus SetGameMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetGameMode);
 
 /// @evtapi
-ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall);
+API_CALLABLE(ClampAngleInt);
 
 /// @evtapi
-ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall);
+API_CALLABLE(ClampAngleFloat);
 
 #ifdef VERSION_PAL
 /// @evtapi
-ApiStatus GetLanguage(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetLanguage);
 #endif
 
 /// @}
@@ -1005,13 +1005,13 @@ ApiStatus GetLanguage(Evt* script, s32 isInitialCall);
 /// @name UI
 
 /// @evtapi
-ApiStatus EnableWorldStatusBar(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableWorldStatusBar);
 
 /// @evtapi
-ApiStatus ShowWorldStatusBar(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowWorldStatusBar);
 
 /// @evtapi
-ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowCoinCounter);
 
 /// @}
 
@@ -1019,73 +1019,73 @@ ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall);
 /// @name Audio
 
 /// @evtapi
-ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
+API_CALLABLE(PollMusicEvents);
 
 /// @evtapi
-ApiStatus RegisterMusicEvents(Evt* script, s32 isInitialCall);
+API_CALLABLE(RegisterMusicEvents);
 
 /// @evtapi
-ApiStatus FadeOutMusic(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeOutMusic);
 
 /// @evtapi
-ApiStatus SetMusicTrack(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetMusicTrack);
 
 /// @evtapi
-ApiStatus FadeInMusic(Evt* script, s32 isInitialCall);
+API_CALLABLE(FadeInMusic);
 
 /// @evtapi
-ApiStatus EnableMusicProximityMix(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableMusicProximityMix);
 
 /// @evtapi
-ApiStatus AdjustMusicProximityMix(Evt* script, s32 isInitialCall);
+API_CALLABLE(AdjustMusicProximityMix);
 
 /// @evtapi
-ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetMusicTrackVolumes);
 
 /// @evtapi
-ApiStatus PopSong(Evt* script, s32 isInitialCall);
+API_CALLABLE(PopSong);
 
 /// @evtapi
-ApiStatus PushSong(Evt* script, s32 isInitialCall);
+API_CALLABLE(PushSong);
 
 /// @evtapi
-ApiStatus PopBattleSong(Evt* script, s32 isInitialCall);
+API_CALLABLE(PopBattleSong);
 
 /// @evtapi
-ApiStatus PushBattleSong(Evt* script, s32 isInitialCall);
+API_CALLABLE(PushBattleSong);
 
 /// @evtapi
-ApiStatus SetBattleSong(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetBattleSong);
 
 /// @evtapi
-ApiStatus ClearAmbientSounds(Evt* script, s32 isInitialCall);
+API_CALLABLE(ClearAmbientSounds);
 
 /// @evtapi
-ApiStatus PlayAmbientSounds(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayAmbientSounds);
 
 /// @evtapi
-ApiStatus PlaySound(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySound);
 
 /// @evtapi
-ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundWithVolume);
 
 /// @evtapi
-ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundAt);
 
 /// @evtapi
-ApiStatus StopSound(Evt* script, s32 isInitialCall);
+API_CALLABLE(StopSound);
 
 /// @evtapi
-ApiStatus StopTrackingSoundPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(StopTrackingSoundPos);
 
 /// @evtapi
-ApiStatus UseDoorSounds(Evt* script, s32 isInitialCall);
+API_CALLABLE(UseDoorSounds);
 
 /// @evtapi
-ApiStatus UseRoomDoorSounds(Evt* script, s32 isInitialCall);
+API_CALLABLE(UseRoomDoorSounds);
 
 /// @evtapi
-ApiStatus PlaySoundAtF(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlaySoundAtF);
 
 /// @}
 
@@ -1093,58 +1093,58 @@ ApiStatus PlaySoundAtF(Evt* script, s32 isInitialCall);
 /// @name Virtual Entity
 
 /// @evtapi
-ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall);
+API_CALLABLE(InitVirtualEntityList);
 
 /// @evtapi
-ApiStatus CreateVirtualEntityAt(Evt* script, s32 isInitialCall);
+API_CALLABLE(CreateVirtualEntityAt);
 
 /// @evtapi
-ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(CreateVirtualEntity);
 
 /// @evtapi
-ApiStatus CreateVirtualEntity_ALT(Evt* script, s32 isInitialCall);
+API_CALLABLE(CreateVirtualEntity_ALT);
 
 /// @evtapi
-ApiStatus DeleteVirtualEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(DeleteVirtualEntity);
 
 /// @evtapi
-ApiStatus SetVirtualEntityRenderCommands(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityRenderCommands);
 
 /// @evtapi
-ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityPosition);
 
 /// @evtapi
-ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetVirtualEntityPosition);
 
 /// @evtapi
-ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityRotation);
 
 /// @evtapi
-ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityScale);
 
 /// @evtapi
-ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityMoveSpeed);
 
 /// @evtapi
-ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityJumpGravity);
 
 /// @evtapi
-ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall);
+API_CALLABLE(VirtualEntityMoveTo);
 
 /// @evtapi
-ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall);
+API_CALLABLE(VirtualEntityJumpTo);
 
 /// @evtapi
-ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall);
+API_CALLABLE(VirtualEntityLandJump);
 
 /// @evtapi
-ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityFlags);
 
 /// @evtapi
-ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityFlagBits);
 
 /// @evtapi
-ApiStatus SetVirtualEntityRenderMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetVirtualEntityRenderMode);
 
 /// @}
 
@@ -1152,88 +1152,88 @@ ApiStatus SetVirtualEntityRenderMode(Evt* script, s32 isInitialCall);
 /// @name Item
 
 /// @evtapi
-ApiStatus ShowKeyChoicePopup(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowKeyChoicePopup);
 
 /// @evtapi
-ApiStatus ShowConsumableChoicePopup(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowConsumableChoicePopup);
 
 /// @evtapi
-ApiStatus RemoveKeyItemAt(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveKeyItemAt);
 
 /// @evtapi
-ApiStatus RemoveItemAt(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveItemAt);
 
 /// @evtapi
-ApiStatus AddKeyItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddKeyItem);
 
 /// @evtapi
-ApiStatus CloseChoicePopup(Evt* script, s32 isInitialCall);
+API_CALLABLE(CloseChoicePopup);
 
 /// @evtapi
-ApiStatus HasKeyItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(HasKeyItem);
 
 /// @evtapi
-ApiStatus FindKeyItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(FindKeyItem);
 
 /// @evtapi
-ApiStatus AddItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddItem);
 
 /// @evtapi
-ApiStatus ClearVariable(Evt* script, s32 isInitialCall);
+API_CALLABLE(ClearVariable);
 
 /// @evtapi
-ApiStatus FindItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(FindItem);
 
 /// @evtapi
-ApiStatus RemoveItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveItem);
 
 /// @evtapi
-ApiStatus CountFortessKeys(Evt* script, s32 isInitialCall);
+API_CALLABLE(CountFortessKeys);
 
 /// @evtapi
-ApiStatus RemoveFortressKeys(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveFortressKeys);
 
 /// @evtapi
-ApiStatus MakeItemEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeItemEntity);
 
 /// @evtapi
-ApiStatus DropItemEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(DropItemEntity);
 
 /// @evtapi
-ApiStatus DropResizableItemEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(DropResizableItemEntity);
 
 /// @evtapi
-ApiStatus RemoveItemEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveItemEntity);
 
 /// @evtapi
-ApiStatus AddBadge(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddBadge);
 
 /// @evtapi
-ApiStatus RemoveBadge(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveBadge);
 
 /// @evtapi
-ApiStatus SetItemPos(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetItemPos);
 
 /// @evtapi
-ApiStatus SetItemFlags(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetItemFlags);
 
 /// @evtapi
-ApiStatus SetItemAlpha(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetItemAlpha);
 
 /// @evtapi
-ApiStatus AddCoin(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddCoin);
 
 /// @evtapi
-ApiStatus AddStarPoints(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddStarPoints);
 
 /// @evtapi
-ApiStatus AddStarPieces(Evt* script, s32 isInitialCall);
+API_CALLABLE(AddStarPieces);
 
 /// @evtapi
-ApiStatus GetItemPower(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetItemPower);
 
 /// @evtapi
-ApiStatus ShowGotItem(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowGotItem);
 
 /// @}
 
@@ -1241,46 +1241,46 @@ ApiStatus ShowGotItem(Evt* script, s32 isInitialCall);
 /// @name Effect
 
 /// @evtapi
-ApiStatus ShowStartRecoveryShimmer(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowStartRecoveryShimmer);
 
 /// @evtapi
-ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowRecoveryShimmer);
 
 /// @evtapi
-ApiStatus func_802D7690(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D7690);
 
 /// @evtapi
-ApiStatus ShowEmote(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowEmote);
 
 /// @evtapi
-ApiStatus RemoveEffect(Evt* script, s32 isInitialCall);
+API_CALLABLE(RemoveEffect);
 
 /// @evtapi
-ApiStatus DismissEffect(Evt* script, s32 isInitialCall);
+API_CALLABLE(DismissEffect);
 
 /// @evtapi
-ApiStatus DismissItemOutline(Evt* script, s32 isInitialCall);
+API_CALLABLE(DismissItemOutline);
 
 /// @evtapi
-ApiStatus func_802D7B74(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_802D7B74);
 
 /// @evtapi
-ApiStatus InterpMotionBlurParams(Evt* script, s32 isInitialCall);
+API_CALLABLE(InterpMotionBlurParams);
 
 /// @evtapi
-ApiStatus SetMotionBlurParams(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetMotionBlurParams);
 
 /// @evtapi
-ApiStatus ShowSweat(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowSweat);
 
 /// @evtapi
-ApiStatus ShowSleepBubble(Evt* script, s32 isInitialCall);
+API_CALLABLE(ShowSleepBubble);
 
 /// @evtapi
-ApiStatus SetSleepBubbleTimeLeft(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetSleepBubbleTimeLeft);
 
 /// @evtapi
-ApiStatus PlayEffect(Evt* script, s32 isInitialCall);
+API_CALLABLE(PlayEffect);
 
 /// @}
 
@@ -1299,36 +1299,36 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall);
 /// @param ... Varargs.
 /// @param MAKE_ENTITY_END Terminates the varargs.
 /// @vars{out | LVar0 | Created entity's ID.}
-ApiStatus MakeEntity(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeEntity);
 
 /// @evtapi
-ApiStatus SetEntityCullMode(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetEntityCullMode);
 
 /// @evtapi
-ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall);
+API_CALLABLE(UseDynamicShadow);
 
 /// @evtapi
-ApiStatus AssignScript(Evt* script, s32 isInitialCall);
+API_CALLABLE(AssignScript);
 
 /// @evtapi
-ApiStatus AssignSwitchFlag(Evt* script, s32 isInitialCall);
+API_CALLABLE(AssignSwitchFlag);
 
 /// @evtapi
-ApiStatus AssignBlockFlag(Evt* script, s32 isInitialCall);
+API_CALLABLE(AssignBlockFlag);
 
 /// @evtapi
-ApiStatus AssignChestFlag(Evt* script, s32 isInitialCall);
+API_CALLABLE(AssignChestFlag);
 
 /// @evtapi
-ApiStatus AssignPanelFlag(Evt* script, s32 isInitialCall);
+API_CALLABLE(AssignPanelFlag);
 
 /// @evtapi
-ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall);
+API_CALLABLE(AssignCrateFlag);
 
 /// Removes a trigger previously bound with \ref EVT_BIND_TRIGGER.
 /// @evtapi
 /// @param triggerPtr
-ApiStatus DeleteTrigger(Evt* script, s32 isInitialCall);
+API_CALLABLE(DeleteTrigger);
 
 /// @}
 
@@ -1336,10 +1336,10 @@ ApiStatus DeleteTrigger(Evt* script, s32 isInitialCall);
 /// @name Sprite shading
 
 /// @evtapi
-ApiStatus SetSpriteShading(Evt* script, s32 isInitialCall);
+API_CALLABLE(SetSpriteShading);
 
 /// @evtapi
-ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall);
+API_CALLABLE(EnableSpriteShading);
 
 /// @}
 
@@ -1347,22 +1347,22 @@ ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall);
 /// @name Demo
 
 /// @evtapi
-ApiStatus GetDemoState(Evt* script, s32 isInitialCall);
+API_CALLABLE(GetDemoState);
 
 /// @evtapi
-ApiStatus DemoPressButton(Evt* script, s32 isInitialCall);
+API_CALLABLE(DemoPressButton);
 
 /// @evtapi
-ApiStatus DemoReleaseButton(Evt* script, s32 isInitialCall);
+API_CALLABLE(DemoReleaseButton);
 
 /// @evtapi
-ApiStatus DemoSetButtons(Evt* script, s32 isInitialCall);
+API_CALLABLE(DemoSetButtons);
 
 /// @evtapi
-ApiStatus DemoJoystickRadial(Evt* script, s32 isInitialCall);
+API_CALLABLE(DemoJoystickRadial);
 
 /// @evtapi
-ApiStatus DemoJoystickXY(Evt* script, s32 isInitialCall);
+API_CALLABLE(DemoJoystickXY);
 
 /// @}
 

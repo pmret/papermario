@@ -5,18 +5,18 @@
 
 #define SpeakToPlayer(ARGS...) \
     _EVT_CMD(EVT_OP_CALL, evt_SpeakToPlayer, ##ARGS),
-ApiStatus evt_SpeakToPlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(evt_SpeakToPlayer);
 
 #define EndSpeech(ARGS...) \
     _EVT_CMD(EVT_OP_CALL, evt_EndSpeech, ##ARGS),
-ApiStatus evt_EndSpeech(Evt* script, s32 isInitialCall);
+API_CALLABLE(evt_EndSpeech);
 
 #define ContinueSpeech(ARGS...) \
     _EVT_CMD(EVT_OP_CALL, evt_ContinueSpeech, ##ARGS),
-ApiStatus evt_ContinueSpeech(Evt* script, s32 isInitialCall);
+API_CALLABLE(evt_ContinueSpeech);
 
 #define SpeakToNpc(ARGS...) \
     _EVT_CMD(EVT_OP_CALL, evt_SpeakToNpc, ##ARGS),
-ApiStatus evt_SpeakToNpc(Evt* script, s32 isInitialCall);
+API_CALLABLE(evt_SpeakToNpc);
 
 #endif

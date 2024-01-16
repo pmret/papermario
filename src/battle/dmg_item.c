@@ -531,7 +531,7 @@ HitResult calc_item_damage_enemy(void) {
     return hitResult;
 }
 
-ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ItemDamageEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultVarOut = *args++;
@@ -601,7 +601,7 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ItemSpookEnemy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ItemSpookEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultVarOut = *args++;
@@ -671,7 +671,7 @@ ApiStatus ItemSpookEnemy(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ItemAfflictEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultVarOut = *args++;
@@ -740,7 +740,7 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ItemCheckHit) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultVarOut = *args++;

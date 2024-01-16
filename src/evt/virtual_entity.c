@@ -118,7 +118,7 @@ void virtual_entity_list_render_UI(void) {
     }
 }
 
-ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall) {
+API_CALLABLE(InitVirtualEntityList) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentVirtualEntityListPtr = &wWorldVirtualEntityList;
     } else {
@@ -127,7 +127,7 @@ ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreateVirtualEntityAt(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CreateVirtualEntityAt) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     EntityModelScript* cmdList = (EntityModelScript*) evt_get_variable(script, *args++);
@@ -148,7 +148,7 @@ ApiStatus CreateVirtualEntityAt(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CreateVirtualEntity) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     EntityModelScript* cmdList = (EntityModelScript*)evt_get_variable(script, *args++);
@@ -183,7 +183,7 @@ ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreateVirtualEntity_ALT(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CreateVirtualEntity_ALT) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     EntityModelScript* cmdList = (EntityModelScript*) evt_get_variable(script, *args++);
@@ -218,7 +218,7 @@ ApiStatus CreateVirtualEntity_ALT(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DeleteVirtualEntity(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DeleteVirtualEntity) {
     VirtualEntity* virtualEntity = (*gCurrentVirtualEntityListPtr)[evt_get_variable(script, *script->ptrReadPos)];
 
     free_entity_model_by_index(virtualEntity->entityModelIndex);
@@ -226,7 +226,7 @@ ApiStatus DeleteVirtualEntity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityRenderCommands(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityRenderCommands) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     EntityModelScript* cmdList = (EntityModelScript*) evt_get_variable(script, *args++);
@@ -235,7 +235,7 @@ ApiStatus SetVirtualEntityRenderCommands(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityPosition) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -249,7 +249,7 @@ ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetVirtualEntityPosition) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*gCurrentVirtualEntityListPtr)[index];
@@ -263,7 +263,7 @@ ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityRotation) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -277,7 +277,7 @@ ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityScale) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -291,7 +291,7 @@ ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityMoveSpeed) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
@@ -299,7 +299,7 @@ ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityJumpGravity) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
 
@@ -307,7 +307,7 @@ ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall) {
+API_CALLABLE(VirtualEntityMoveTo) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
 
@@ -363,7 +363,7 @@ ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
+API_CALLABLE(VirtualEntityJumpTo) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
     s32 index;
@@ -434,7 +434,7 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
+API_CALLABLE(VirtualEntityLandJump) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
 
@@ -461,7 +461,7 @@ ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityFlags) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 flags = *args++;
@@ -471,7 +471,7 @@ ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityFlagBits) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 bits = *args++;
@@ -487,7 +487,7 @@ ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityRenderMode(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetVirtualEntityRenderMode) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 mode = evt_get_variable(script, *args++);

@@ -138,7 +138,7 @@ EvtScript EVS_OnBattleInit = {
     EVT_END
 };
 
-ApiStatus CamPresetUpdate_B(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_B) {
     BattleCam_DoneMoving = TRUE;
     return ApiStatus_BLOCK;
 }
@@ -1006,7 +1006,7 @@ s32 CamPresetUpdate_H(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CamPresetUpdate_N(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_N) {
     Camera* camera = &gCameras[CAM_BATTLE];
     f32 alpha;
     f32 x, y, z;
@@ -1113,7 +1113,7 @@ API_CALLABLE(BattleCamImpl_Default) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CamPresetUpdate_D(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_D) {
     Camera* camera = &gCameras[CAM_BATTLE];
     f32 alpha;
     f32 x, y, z;
@@ -1165,7 +1165,7 @@ ApiStatus CamPresetUpdate_D(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CamPresetUpdate_E(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_E) {
     Camera* camera = &gCameras[CAM_BATTLE];
     f32 alpha;
     f32 x, y, z;
@@ -1219,7 +1219,7 @@ ApiStatus CamPresetUpdate_E(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CamPresetUpdate_J(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_J) {
     Camera* camera = &gCameras[CAM_BATTLE];
     f32 alpha;
     f32 x, y, z;
@@ -1270,7 +1270,7 @@ ApiStatus CamPresetUpdate_J(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CamPresetUpdate_K(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_K) {
     Camera* camera = &gCameras[CAM_BATTLE];
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -1336,7 +1336,7 @@ ApiStatus CamPresetUpdate_K(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CamPresetUpdate_L(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CamPresetUpdate_L) {
     Camera* camera = &gCameras[CAM_BATTLE];
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -1432,7 +1432,7 @@ ApiStatus CamPresetUpdate_L(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8024CE9C) {
     Camera* camera = &gCameras[CAM_BATTLE];
 
     BattleCam_BoomPitch = 8;
@@ -2283,7 +2283,7 @@ void func_8024E60C(void) {
     D_8029F2A6 = FALSE;
 }
 
-ApiStatus UseBattleCamPreset(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UseBattleCamPreset) {
     Bytecode* args = script->ptrReadPos;
     s32 preset;
 
@@ -2298,7 +2298,7 @@ ApiStatus UseBattleCamPreset(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseBattleCamPresetImmediately(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UseBattleCamPresetImmediately) {
     Bytecode* args = script->ptrReadPos;
     s32 preset;
 
@@ -2313,7 +2313,7 @@ ApiStatus UseBattleCamPresetImmediately(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseBattleCamPresetWait(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UseBattleCamPresetWait) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2338,7 +2338,7 @@ ApiStatus UseBattleCamPresetWait(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus SetBattleCamParam(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamParam) {
     Camera* camera = &gCameras[CAM_BATTLE];
     Bytecode* args = script->ptrReadPos;
     s32 mode;
@@ -2380,7 +2380,7 @@ ApiStatus SetBattleCamParam(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamParams(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamParams) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[CAM_BATTLE];
 
@@ -2400,7 +2400,7 @@ ApiStatus SetBattleCamParams(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamTarget(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamTarget) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2413,7 +2413,7 @@ ApiStatus SetBattleCamTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamPos) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[CAM_BATTLE];
 
@@ -2428,7 +2428,7 @@ ApiStatus SetBattleCamPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamOffsetZ) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2439,7 +2439,7 @@ ApiStatus SetBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AddBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
+API_CALLABLE(AddBattleCamOffsetZ) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2450,7 +2450,7 @@ ApiStatus AddBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamYaw(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamYaw) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2461,7 +2461,7 @@ ApiStatus SetBattleCamYaw(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BattleCamTargetActor(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCamTargetActor) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID;
 
@@ -2480,7 +2480,7 @@ ApiStatus BattleCamTargetActor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BattleCamTargetActorPart(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BattleCamTargetActorPart) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID;
 
@@ -2499,7 +2499,7 @@ ApiStatus BattleCamTargetActorPart(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MoveBattleCamOver(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MoveBattleCamOver) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
@@ -2517,7 +2517,7 @@ ApiStatus MoveBattleCamOver(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamZoom(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleCamZoom) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2528,7 +2528,7 @@ ApiStatus SetBattleCamZoom(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AddBattleCamZoom(Evt* script, s32 isInitialCall) {
+API_CALLABLE(AddBattleCamZoom) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2539,7 +2539,7 @@ ApiStatus AddBattleCamZoom(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8024ECF8) {
     Bytecode* args = script->ptrReadPos;
 
     if (BattleCam_IsFrozen) {
@@ -2552,12 +2552,12 @@ ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FreezeBattleCam(Evt* script, s32 isInitialCall) {
+API_CALLABLE(FreezeBattleCam) {
     BattleCam_IsFrozen = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024EDA4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8024EDA4) {
     D_8029F2A6 = FALSE;
     return ApiStatus_DONE2;
 }

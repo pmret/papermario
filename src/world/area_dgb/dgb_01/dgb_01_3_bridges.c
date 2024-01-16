@@ -2,7 +2,7 @@
 #include "ld_addrs.h"
 #include "sprite/player.h"
 
-ApiStatus N(LoadSmashBridgesGraphics)(void) {
+API_CALLABLE(N(LoadSmashBridgesGraphics)) {
     DMA_COPY_SEGMENT(dgb_01_smash_bridges);
     return ApiStatus_DONE2;
 }

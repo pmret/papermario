@@ -1047,7 +1047,7 @@ ApiStatus evt_handle_bind(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DeleteTrigger(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DeleteTrigger) {
     delete_trigger((Trigger*)evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

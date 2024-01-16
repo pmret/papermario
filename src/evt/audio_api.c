@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall);
+API_CALLABLE(PollMusicEvents);
 
 extern MusicEvent* MusicEventList;
 extern Evt* RunningMusicEvents[10];
@@ -14,7 +14,7 @@ static EvtScript EVS_MusicEventMonitor = {
     EVT_END
 };
 
-ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PollMusicEvents) {
     MusicEventTrigger* list;
     s32 musicEventID, scriptSelector;
     u32 count;
@@ -51,7 +51,7 @@ ApiStatus PollMusicEvents(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus RegisterMusicEvents(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RegisterMusicEvents) {
     Bytecode* args = script->ptrReadPos;
     s32 i;
 
@@ -67,7 +67,7 @@ ApiStatus RegisterMusicEvents(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FadeOutMusic(Evt* script, s32 isInitialCall) {
+API_CALLABLE(FadeOutMusic) {
     Bytecode* args = script->ptrReadPos;
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 fadeTime = evt_get_variable(script, *args++);
@@ -79,7 +79,7 @@ ApiStatus FadeOutMusic(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus SetMusicTrack(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetMusicTrack) {
     Bytecode* args = script->ptrReadPos;
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 songID = evt_get_variable(script, *args++);
@@ -93,7 +93,7 @@ ApiStatus SetMusicTrack(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus FadeInMusic(Evt* script, s32 isInitialCall) {
+API_CALLABLE(FadeInMusic) {
     Bytecode* args = script->ptrReadPos;
     s32 musicPlayer = evt_get_variable(script, *args++);
     s32 songID = evt_get_variable(script, *args++);
@@ -109,7 +109,7 @@ ApiStatus FadeInMusic(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus EnableMusicProximityMix(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableMusicProximityMix) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
 
@@ -117,7 +117,7 @@ ApiStatus EnableMusicProximityMix(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AdjustMusicProximityMix(Evt* script, s32 isInitialCall) {
+API_CALLABLE(AdjustMusicProximityMix) {
     Bytecode* args = script->ptrReadPos;
     s32 playerIndex = evt_get_variable(script, *args++);
     s32 mix = evt_get_variable(script, *args++);
@@ -127,7 +127,7 @@ ApiStatus AdjustMusicProximityMix(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetMusicTrackVolumes) {
     Bytecode* args = script->ptrReadPos;
     s16 trackVolSet = evt_get_variable(script, *args++);
 
@@ -135,12 +135,12 @@ ApiStatus SetMusicTrackVolumes(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PopSong(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PopSong) {
     bgm_pop_song();
     return ApiStatus_DONE2;
 }
 
-ApiStatus PushSong(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PushSong) {
     Bytecode* args = script->ptrReadPos;
     s32 songID = evt_get_variable(script, *args++);
     s32 variation = evt_get_variable(script, *args++);
@@ -149,17 +149,17 @@ ApiStatus PushSong(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PopBattleSong(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PopBattleSong) {
     bgm_pop_battle_song();
     return ApiStatus_DONE2;
 }
 
-ApiStatus PushBattleSong(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PushBattleSong) {
     bgm_push_battle_song();
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleSong(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleSong) {
     Bytecode* args = script->ptrReadPos;
     s32 songID = evt_get_variable(script, *args++);
     s32 variation = evt_get_variable(script, *args++);
@@ -168,7 +168,7 @@ ApiStatus SetBattleSong(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ClearAmbientSounds(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ClearAmbientSounds) {
     Bytecode* args = script->ptrReadPos;
     s32 time = evt_get_variable(script, *args++);
 
@@ -179,7 +179,7 @@ ApiStatus ClearAmbientSounds(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus PlayAmbientSounds(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayAmbientSounds) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
@@ -190,7 +190,7 @@ ApiStatus PlayAmbientSounds(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus PlaySound(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySound) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
@@ -198,7 +198,7 @@ ApiStatus PlaySound(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundWithVolume) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
     s32 volume = evt_get_variable(script, *args++);
@@ -207,7 +207,7 @@ ApiStatus PlaySoundWithVolume(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundAt) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
     s32 flags = evt_get_variable(script, *args++);
@@ -219,7 +219,7 @@ ApiStatus PlaySoundAt(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus StopSound(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StopSound) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
@@ -227,7 +227,7 @@ ApiStatus StopSound(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus StopTrackingSoundPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StopTrackingSoundPos) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = evt_get_variable(script, *args++);
 
@@ -235,21 +235,21 @@ ApiStatus StopTrackingSoundPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseDoorSounds(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UseDoorSounds) {
     Bytecode* args = script->ptrReadPos;
 
     gCurrentDoorSounds = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseRoomDoorSounds(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UseRoomDoorSounds) {
     Bytecode* args = script->ptrReadPos;
 
     gCurrentRoomDoorSounds = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAtF(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundAtF) {
     Bytecode* args = script->ptrReadPos;
     Bytecode soundID = *args++;
     u16 spatializationFlags = evt_get_variable(script, *args++);

@@ -11,7 +11,7 @@ extern u8 gSpriteShadingData[0x100];
 
 extern Addr sprite_shading_profiles_data_ROM_START;
 
-ApiStatus SetSpriteShading(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetSpriteShading) {
     Bytecode* args = script->ptrReadPos;
     s32 profileID = evt_get_variable(script, *args++);
     s32 shadingGroupOffset = (profileID >> 0x10) * 8;
@@ -66,40 +66,40 @@ ApiStatus SetSpriteShading(Evt* script, s32 isInitialCall) {
         source->falloff = *(f32*)&falloff;
         source->unk_14 = gSpriteShadingData[6 + 16 * i + 14];
     }
-    gSpriteShadingProfile->flags |= 1;
+    gSpriteShadingProfile->flags |= SPR_SHADING_FLAG_ENABLED;
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableSpriteShading) {
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
-        gSpriteShadingProfile->flags |= 1;
+        gSpriteShadingProfile->flags |= SPR_SHADING_FLAG_ENABLED;
     } else {
-        gSpriteShadingProfile->flags &= ~1;
+        gSpriteShadingProfile->flags &= ~SPR_SHADING_FLAG_ENABLED;
     }
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetDemoState(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetDemoState) {
     evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->demoState);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoPressButton(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DemoPressButton) {
     gGameStatusPtr->demoButtonInput |= evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoReleaseButton(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DemoReleaseButton) {
     gGameStatusPtr->demoButtonInput &= ~evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoSetButtons(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DemoSetButtons) {
     gGameStatusPtr->demoButtonInput = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoJoystickRadial(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DemoJoystickRadial) {
     GameStatus** gameStatus = &gGameStatusPtr;
     f32 a;
     f32 b;
@@ -114,7 +114,7 @@ ApiStatus DemoJoystickRadial(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoJoystickXY(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DemoJoystickXY) {
     GameStatus** gameStatus = &gGameStatusPtr;
     f32 x;
     f32 y;

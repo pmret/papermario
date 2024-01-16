@@ -7,17 +7,17 @@
 b32 dispatch_damage_event_player(s32 damageAmount, s32 event, b32 noHitSound);
 b32 dispatch_hazard_event_player(s32 damageAmount, s32 event);
 
-ApiStatus PlaySleepHitFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySleepHitFX) {
     fx_debuff(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayDizzyHitFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayDizzyHitFX) {
     fx_debuff(1, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayParalyzeHitFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayParalyzeHitFX) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
     debuffEffect->data.debuff->primCol.r = 200;
@@ -29,7 +29,7 @@ ApiStatus PlayParalyzeHitFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayPoisonHitFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayPoisonHitFX) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
     debuffEffect->data.debuff->primCol.r = 60;
@@ -41,7 +41,7 @@ ApiStatus PlayPoisonHitFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayStopHitFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayStopHitFX) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
     debuffEffect->data.debuff->primCol.r = 205;
@@ -53,12 +53,12 @@ ApiStatus PlayStopHitFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayFreezeHitSnowflakeFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayFreezeHitSnowflakeFX) {
     fx_big_snowflakes(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayFreezeHitParticleFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayFreezeHitParticleFX) {
     Actor* actor = (Actor*)script->varTable[3];
     f32 temp1 = actor->size.y;
     f32 temp2 = actor->size.x / 2;
@@ -68,7 +68,7 @@ ApiStatus PlayFreezeHitParticleFX(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayShrinkHitFX(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayShrinkHitFX) {
     s32 i;
 
     for (i = 0; i < 20; i++) {
@@ -1132,7 +1132,7 @@ b32 dispatch_hazard_event_player(s32 damageAmount, s32 event) {
     return dispatch_damage_event_player(damageAmount, event, TRUE);
 }
 
-ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetMenuSelection) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 outVar1 = *args++;
@@ -1146,7 +1146,7 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80273444) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
@@ -1248,7 +1248,7 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus PlayerFallToGoal(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerFallToGoal) {
     Bytecode* args = script->ptrReadPos;
     Actor* player = gBattleStatus.playerActor;
     ActorState* state = &player->state;
@@ -1316,7 +1316,7 @@ ApiStatus PlayerFallToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus PlayerLandJump(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerLandJump) {
     Actor* player = gBattleStatus.playerActor;
     ActorState* walkMovement = &player->state;
 
@@ -1364,7 +1364,7 @@ ApiStatus PlayerLandJump(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerRunToGoal) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
@@ -1434,7 +1434,7 @@ ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CancelablePlayerRunToGoal) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
@@ -1527,12 +1527,12 @@ ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetPlayerHP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetPlayerHP) {
     evt_set_variable(script, *script->ptrReadPos, gPlayerData.curHP);
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerDamageEnemy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerDamageEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultOutVar = *args++;
@@ -1604,7 +1604,7 @@ ApiStatus PlayerDamageEnemy(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerPowerBounceEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultOutVar = *args++;
@@ -1675,7 +1675,7 @@ ApiStatus PlayerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerTestEnemy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerTestEnemy) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 hitResultOutVar = *args++;
@@ -1741,7 +1741,7 @@ ApiStatus PlayerTestEnemy(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DispatchDamagePlayerEvent) {
     Bytecode* args = script->ptrReadPos;
     s32 damageAmount = evt_get_variable(script, *args++);
 
@@ -1756,7 +1756,7 @@ ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus EnablePlayerBlur(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnablePlayerBlur) {
     s32 setting = evt_get_variable(script, *script->ptrReadPos);
 
     if (setting == ACTOR_BLUR_DISABLE) {
@@ -1770,17 +1770,17 @@ ApiStatus EnablePlayerBlur(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ForceDisablePlayerBlur(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ForceDisablePlayerBlur) {
     force_disable_player_blur();
     return ApiStatus_DONE2;
 }
 
-ApiStatus ForceDisablePlayerBlurImmediately(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ForceDisablePlayerBlurImmediately) {
     force_disable_player_blur_immediately();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80274A18) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* player = battleStatus->playerActor;
@@ -1944,7 +1944,7 @@ ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802752AC) {
     Bytecode* args = script->ptrReadPos;
     Actor* player = gBattleStatus.playerActor;
     ActorState* playerState = &player->state;
@@ -2186,7 +2186,7 @@ ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80275F00) {
     Bytecode* args = script->ptrReadPos;
     Actor* player = gBattleStatus.playerActor;
     ActorState* playerState = &player->state;
@@ -2477,7 +2477,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus GetPlayerActionSuccess(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetPlayerActionSuccess) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32 actionSuccess = gBattleStatus.actionSuccess;
@@ -2495,12 +2495,12 @@ ApiStatus GetPlayerActionSuccess(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerYieldTurn(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayerYieldTurn) {
     gBattleStatus.flags1 |= BS_FLAGS1_YIELD_TURN;
     return ApiStatus_DONE2;
 }
 
-ApiStatus DispatchEventPlayer(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DispatchEventPlayer) {
     dispatch_event_player(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

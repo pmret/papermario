@@ -86,7 +86,7 @@ void entity_Padlock_idle(Entity* entity) {
     switch (data->state) {
         case 0:
             entity_Padlock_push_player(entity);
-            if (entity->flags & ENTITY_FLAG_100000) {
+            if (entity->flags & ENTITY_FLAG_USED) {
                 data->state++;
                 sfx_play_sound(SOUND_USE_KEY);
             }
