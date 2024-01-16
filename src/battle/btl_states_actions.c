@@ -2452,12 +2452,12 @@ void btl_state_update_defeat(void) {
 void btl_state_draw_defeat(void) {
 }
 
-ApiStatus EnablePartnerBlur(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnablePartnerBlur) {
     enable_partner_blur();
     return ApiStatus_DONE2;
 }
 
-ApiStatus DisablePartnerBlur(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DisablePartnerBlur) {
     disable_partner_blur();
     return ApiStatus_DONE2;
 }

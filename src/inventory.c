@@ -1249,7 +1249,7 @@ void hide_coin_counter_immediately(void) {
     }
 }
 
-ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowCoinCounter) {
     if (evt_get_variable(script, *script->ptrReadPos)) {
         show_coin_counter();
     } else {

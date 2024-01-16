@@ -13,7 +13,7 @@
 // prerequisites
 #include "world/common/enemy/ai/MeleeHitbox.inc.c"
 
-ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(WanderMeleeAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

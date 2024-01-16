@@ -8,7 +8,7 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
-ApiStatus _show_message(Evt* script, s32 isInitialCall, s32 arg2);
+ApiStatus _show_message(Evt* script, s32 isInitialCall, s32 mode);
 
 enum {
     SHOW_MESSAGE_SPEAK_TO_PLAYER    = 0,
@@ -17,19 +17,19 @@ enum {
     SHOW_MESSAGE_SPEAK_TO_NPC       = 3,
 };
 
-ApiStatus SpeakToPlayer(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SpeakToPlayer) {
     return _show_message(script, isInitialCall, SHOW_MESSAGE_SPEAK_TO_PLAYER);
 }
 
-ApiStatus EndSpeech(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EndSpeech) {
     return _show_message(script, isInitialCall, SHOW_MESSAGE_END_SPEECH);
 }
 
-ApiStatus ContinueSpeech(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ContinueSpeech) {
     return _show_message(script, isInitialCall, SHOW_MESSAGE_CONTINUE_SPEECH);
 }
 
-ApiStatus SpeakToNpc(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SpeakToNpc) {
     return _show_message(script, isInitialCall, SHOW_MESSAGE_SPEAK_TO_NPC);
 }
 
@@ -186,7 +186,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
     return TRUE;
 }
 
-ApiStatus ShowMessageAtScreenPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowMessageAtScreenPos) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -212,7 +212,7 @@ ApiStatus ShowMessageAtScreenPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus ShowMessageAtWorldPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowMessageAtWorldPos) {
     Bytecode* args = script->ptrReadPos;
     MessagePrintState** currentPrintContext;
     s32* currentCameraID = &gCurrentCameraID;
@@ -246,7 +246,7 @@ ApiStatus ShowMessageAtWorldPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus CloseMessage(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CloseMessage) {
     if (isInitialCall) {
         close_message(gCurrentPrintContext);
     }
@@ -261,7 +261,7 @@ ApiStatus CloseMessage(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus SwitchMessage(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SwitchMessage) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -278,7 +278,7 @@ ApiStatus SwitchMessage(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus ShowChoice(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowChoice) {
     Bytecode* args = script->ptrReadPos;
     MessagePrintState** temp802DB268;
 
@@ -299,12 +299,12 @@ ApiStatus ShowChoice(Evt* script, s32 isInitialCall) {
     return script->functionTemp[1] == 1;
 }
 
-ApiStatus CloseChoice(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CloseChoice) {
     close_message(D_802DB268);
     return ApiStatus_DONE1;
 }
 
-ApiStatus CancelMessage(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CancelMessage) {
     cancel_message(gCurrentPrintContext);
     return ApiStatus_DONE2;
 }
@@ -314,14 +314,14 @@ s32 cancel_current_message(void) {
     return 0;
 }
 
-ApiStatus SetMessageImages(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetMessageImages) {
     Bytecode* args = script->ptrReadPos;
 
     set_message_images((MessageImageData*) *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
+API_CALLABLE(func_802D0C94) {
     Bytecode* args = script->ptrReadPos;
 
     if (evt_get_variable(script, *args++) == 0) {
@@ -332,7 +332,7 @@ ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageText(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetMessageText) {
     Bytecode* args = script->ptrReadPos;
     s32 msg = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
@@ -341,7 +341,7 @@ ApiStatus SetMessageText(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageValue(Evt* script, s32 initialCall) {
+API_CALLABLE(SetMessageValue) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 value = evt_get_variable(script, *ptrReadPos++);
     s32 index = evt_get_variable(script, *ptrReadPos);

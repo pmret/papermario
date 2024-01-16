@@ -49,7 +49,7 @@ void render_animated_models(void) {
 
 // split here?
 
-ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall) {
+API_CALLABLE(InitAnimatedModels) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
@@ -59,7 +59,7 @@ ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadAnimatedModel) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     StaticAnimatorNode** var1 = (StaticAnimatorNode**) evt_get_variable(script, *args++);
@@ -83,7 +83,7 @@ ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadAnimatedMesh) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     StaticAnimatorNode** tree = (StaticAnimatorNode**) evt_get_variable(script, *args++);
@@ -107,7 +107,7 @@ ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayModelAnimation) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s16* var2 = (s16*) evt_get_variable(script, *args++);
@@ -119,7 +119,7 @@ ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlayModelAnimationStartingFrom) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s16* var2 = (s16*) evt_get_variable(script, *args++);
@@ -132,7 +132,7 @@ ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ChangeModelAnimation) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s16* var2 = (s16*) evt_get_variable(script, *args++);
@@ -147,7 +147,7 @@ ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetAnimatedModelRootPosition) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -162,7 +162,7 @@ ApiStatus SetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetAnimatedModelRootPosition) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 outX = *args++;
@@ -177,7 +177,7 @@ ApiStatus GetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AddAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(AddAnimatedModelRootPosition) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -192,7 +192,7 @@ ApiStatus AddAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimatedModelRootRotation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetAnimatedModelRootRotation) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -207,7 +207,7 @@ ApiStatus SetAnimatedModelRootRotation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimatedModelRootScale(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetAnimatedModelRootScale) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     f32 x = evt_get_float_variable(script, *args++);
@@ -222,7 +222,7 @@ ApiStatus SetAnimatedModelRootScale(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetAnimatedModelRenderMode) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 renderMode = evt_get_float_variable(script, *args++);
@@ -231,7 +231,7 @@ ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DeleteAnimatedModel) {
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[evt_get_variable(script, *script->ptrReadPos)];
 
     delete_model_animator(get_animator_by_index(model->animModelID));
@@ -239,7 +239,7 @@ ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetAnimatorFlags) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     s32 a1 = *args++;
@@ -283,7 +283,7 @@ void init_model_animators(void) {
     }
 }
 
-ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetAnimatedNodePosition) {
     Bytecode* args = script->ptrReadPos;
     s32 listIndex = evt_get_variable(script, *args++);
     s32 treeIndex = evt_get_variable(script, *args++);
@@ -302,7 +302,7 @@ ApiStatus GetAnimatedNodePosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetAnimatedNodeRotation) {
     Bytecode* args = script->ptrReadPos;
     s32 listIndex = evt_get_variable(script, *args++);
     s32 treeIndex = evt_get_variable(script, *args++);
@@ -319,7 +319,7 @@ ApiStatus GetAnimatedNodeRotation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetAnimatedPositionByTreeIndex(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetAnimatedPositionByTreeIndex) {
     Bytecode* args = script->ptrReadPos;
     s32 listIndex = evt_get_variable(script, *args++);
     s32 treeIndex = evt_get_variable(script, *args++);
@@ -338,7 +338,7 @@ ApiStatus GetAnimatedPositionByTreeIndex(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetAnimatedRotationByTreeIndex(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetAnimatedRotationByTreeIndex) {
     Bytecode* args = script->ptrReadPos;
     s32 listIndex = evt_get_variable(script, *args++);
     s32 treeIndex = evt_get_variable(script, *args++);
@@ -355,7 +355,7 @@ ApiStatus GetAnimatedRotationByTreeIndex(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimatedNodeFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetAnimatedNodeFlags) {
     Bytecode* args = script->ptrReadPos;
     s32 listIndex = evt_get_variable(script, *args++);
     s32 id = evt_get_variable(script, *args++);

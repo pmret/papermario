@@ -15,7 +15,7 @@ EvtScript ShakeCamX = {
     EVT_END
 };
 
-ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamEnabled) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 enabled = evt_get_variable(script, *args++);
@@ -28,7 +28,7 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamNoDraw(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamNoDraw) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 enabled = evt_get_variable(script, *args++);
@@ -41,7 +41,7 @@ ApiStatus SetCamNoDraw(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamPerspective) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 mode = evt_get_variable(script, *args++);
@@ -60,7 +60,7 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CA90C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802CA90C) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 mode = evt_get_variable(script, *args++);
@@ -71,7 +71,7 @@ ApiStatus func_802CA90C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802CA988) {
     Bytecode* args = script->ptrReadPos;
     Bytecode id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -102,7 +102,7 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamViewport(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamViewport) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
@@ -114,7 +114,7 @@ ApiStatus SetCamViewport(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802CABE8) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 pitch = evt_get_variable(script, *args++);
@@ -130,7 +130,7 @@ ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CACC0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802CACC0) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 value1 = evt_get_variable(script, *args++);
@@ -146,7 +146,7 @@ ApiStatus func_802CACC0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamBGColor) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s16 r = evt_get_variable(script, *args++);
@@ -160,7 +160,7 @@ ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802CAE50) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
@@ -174,7 +174,7 @@ ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamTarget(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamTarget) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
@@ -188,7 +188,7 @@ ApiStatus SetCamTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(InterpCamTargetPos) {
     typedef struct CamInterpData {
         /* 0x00 */ Camera* cam;
         /* 0x04 */ s32 useTarget;
@@ -253,7 +253,7 @@ ApiStatus InterpCamTargetPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShakeCam) {
     Bytecode* args = script->ptrReadPos;
     s32 camIndex = evt_get_variable(script, *args++);
     s32 shakeMode = evt_get_variable(script, *args++);
@@ -345,7 +345,7 @@ void exec_ShakeCamX(s32 camID, s32 mode, s32 duration, f32 magnitude) {
     evt_set_float_variable(script, LVar3, magnitude);
 }
 
-ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamLeadPlayer) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     s32 enabled = evt_get_variable(script, *args++);
@@ -359,7 +359,7 @@ ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CB710(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802CB710) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     f32 value = evt_get_variable(script, *args++);
@@ -369,7 +369,7 @@ ApiStatus func_802CB710(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PanToTarget(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PanToTarget) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     f32 panPhase = evt_get_float_variable(script, *args++);
@@ -388,7 +388,7 @@ ApiStatus PanToTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseSettingsFrom(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UseSettingsFrom) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -407,7 +407,7 @@ ApiStatus UseSettingsFrom(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadSettings(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadSettings) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -417,7 +417,7 @@ ApiStatus LoadSettings(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamType(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamType) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -429,7 +429,7 @@ ApiStatus SetCamType(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamPitch(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamPitch) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -441,7 +441,7 @@ ApiStatus SetCamPitch(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamDistance(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamDistance) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -451,7 +451,7 @@ ApiStatus SetCamDistance(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamPosA(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamPosA) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -463,7 +463,7 @@ ApiStatus SetCamPosA(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamPosB(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamPosB) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -475,7 +475,7 @@ ApiStatus SetCamPosB(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamPosC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamPosC) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -487,7 +487,7 @@ ApiStatus SetCamPosC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPanTarget(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetPanTarget) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];
@@ -502,7 +502,7 @@ ApiStatus SetPanTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamSpeed(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamSpeed) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     f32 speed = evt_get_float_variable(script, *args++);
@@ -512,7 +512,7 @@ ApiStatus SetCamSpeed(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamType(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamType) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -524,7 +524,7 @@ ApiStatus GetCamType(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamPitch(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamPitch) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -536,7 +536,7 @@ ApiStatus GetCamPitch(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamDistance(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamDistance) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -546,7 +546,7 @@ ApiStatus GetCamDistance(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamPosA(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamPosA) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -558,7 +558,7 @@ ApiStatus GetCamPosA(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamPosB(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamPosB) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -570,7 +570,7 @@ ApiStatus GetCamPosB(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamPosC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamPosC) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -582,7 +582,7 @@ ApiStatus GetCamPosC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetCamPosition) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
@@ -596,7 +596,7 @@ ApiStatus GetCamPosition(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WaitForCam(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WaitForCam) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, args[0]);
     f32 endInterpValue = evt_get_float_variable(script, args[1]);
@@ -608,7 +608,7 @@ ApiStatus WaitForCam(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCamProperties) {
     f32 hitX, hitY, hitZ, hitDepth, nX, nY, nZ;
     s32 zoneID;
     Bytecode* args = script->ptrReadPos;
@@ -648,7 +648,7 @@ ApiStatus SetCamProperties(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
+API_CALLABLE(AdjustCam) {
     f32 hitX, hitY, hitZ, hitDepth, nX, nY, nZ;
     f32 posX, posY, posZ;
     s32 zoneID;
@@ -691,7 +691,7 @@ ApiStatus AdjustCam(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ResetCam) {
     Bytecode* args = script->ptrReadPos;
     s32 id = evt_get_variable(script, *args++);
     Camera* camera = &gCameras[id];

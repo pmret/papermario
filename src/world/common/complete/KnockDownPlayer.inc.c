@@ -54,7 +54,7 @@ void N(gfx_build_knocked_down_player)(void) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-ApiStatus N(KnockdownCreate)(Evt* script) {
+API_CALLABLE(N(KnockdownCreate)) {
     Bytecode* args = script->ptrReadPos;
     s32 spriteIndex = evt_get_variable(script, *args++);
     s32 rasterIndex = evt_get_variable(script, *args++);

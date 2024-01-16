@@ -7,7 +7,7 @@ extern LavaReset* gLavaResetList;
 extern s32 LastSafeFloor;
 extern ModelTreeInfoList* gCurrentModelTreeNodeInfo;
 
-ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(TranslateModel) {
     Bytecode* args = script->ptrReadPos;
     s32 modelIndex = evt_get_variable(script, *args++);
     f32 x;
@@ -34,7 +34,7 @@ ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus RotateModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RotateModel) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     s32 modelListIndex = get_model_list_index_from_tree_index(var1);
@@ -57,7 +57,7 @@ ApiStatus RotateModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ScaleModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ScaleModel) {
     Bytecode* args = script->ptrReadPos;
     s32 modelIndex = evt_get_variable(script, *args++);
     f32 x;
@@ -84,7 +84,7 @@ ApiStatus ScaleModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetModelIndex(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetModelIndex) {
     Bytecode* args = script->ptrReadPos;
     Bytecode modelID = evt_get_variable(script, *args++);
     Bytecode index = *args++;
@@ -93,7 +93,7 @@ ApiStatus GetModelIndex(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus InvalidateModelTransform(Evt* script, s32 isInitialCall) {
+API_CALLABLE(InvalidateModelTransform) {
     Bytecode* args = script->ptrReadPos;
     Bytecode modelID = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
@@ -102,7 +102,7 @@ ApiStatus InvalidateModelTransform(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CloneModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(CloneModel) {
     Bytecode* args = script->ptrReadPos;
     Bytecode srcModelID = evt_get_variable(script, *args++);
     Bytecode newModelID = evt_get_variable(script, *args++);
@@ -111,7 +111,7 @@ ApiStatus CloneModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetModelCenter(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetModelCenter) {
     Bytecode* args = script->ptrReadPos;
     f32 centerX;
     f32 centerY;
@@ -128,7 +128,7 @@ ApiStatus GetModelCenter(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTexPanner(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetTexPanner) {
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -139,7 +139,7 @@ ApiStatus SetTexPanner(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCustomGfxEnabled) {
     Bytecode* args = script->ptrReadPos;
     Bytecode treeIndex = evt_get_variable(script, *args++);
     Bytecode enable = evt_get_variable(script, *args++);
@@ -153,7 +153,7 @@ ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetModelCustomGfx) {
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = evt_get_variable(script, *args++);
     s32 customGfxUnit = evt_get_variable(script, *args++);
@@ -170,7 +170,7 @@ ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetModelTexVariant) {
     Bytecode* args = script->ptrReadPos;
     Bytecode modelID = evt_get_variable(script, *args++);
     Bytecode variation = evt_get_variable(script, *args++);
@@ -181,7 +181,7 @@ ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableTexPanning) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     s32 flag = evt_get_variable(script, *args++);
@@ -196,7 +196,7 @@ ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableModel) {
     Bytecode* args = script->ptrReadPos;
     s32 modelIndex = get_model_list_index_from_tree_index(evt_get_variable(script, *args++));
     Bytecode enabled = evt_get_variable(script, *args++);
@@ -210,7 +210,7 @@ ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetGroupVisibility(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetGroupVisibility) {
     Bytecode* args = script->ptrReadPos;
     Bytecode groupModelID = evt_get_variable(script, *args++);
     Bytecode enabled = evt_get_variable(script, *args++);
@@ -219,7 +219,7 @@ ApiStatus SetGroupVisibility(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetTexPanOffset) {
     Bytecode* args = script->ptrReadPos;
     Bytecode texPanner = evt_get_variable(script, *args++);
     Bytecode tileSelect = evt_get_variable(script, *args++);
@@ -237,7 +237,7 @@ ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCustomGfx) {
     Bytecode* args = script->ptrReadPos;
     s32 idx = evt_get_variable(script, *args++);
     Gfx* pre = (Gfx*) evt_get_variable(script, *args++);
@@ -247,7 +247,7 @@ ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetCustomGfxBuilders(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetCustomGfxBuilders) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
     ModelCustomGfxBuilderFunc pre = (ModelCustomGfxBuilderFunc) evt_get_variable(script, *args++);
@@ -257,7 +257,7 @@ ApiStatus SetCustomGfxBuilders(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetModelFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetModelFlags) {
     Bytecode* args = script->ptrReadPos;
     s32 modelIndex;
     s32 a1;
@@ -339,12 +339,12 @@ void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
     *argsPtr = originalArg;
 }
 
-ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeTransformGroup) {
     mdl_make_transform_group((u16)evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetTransformGroupEnabled) {
     Bytecode* args = script->ptrReadPos;
     u16 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
@@ -357,7 +357,7 @@ ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(TranslateGroup) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args);
     s32 index = get_transform_group_index(modelID);
@@ -391,7 +391,7 @@ ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RotateGroup) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args);
     s32 index = get_transform_group_index(modelID);
@@ -425,7 +425,7 @@ ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ScaleGroup) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args);
     s32 transformIndex = get_transform_group_index(modelID);
@@ -459,7 +459,7 @@ ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetTransformGroup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetTransformGroup) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     Bytecode var2 = *args++;
@@ -468,7 +468,7 @@ ApiStatus GetTransformGroup(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableGroup) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args);
     s32 index = get_transform_group_index(modelID);
@@ -497,7 +497,7 @@ ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MakeLocalVertexCopy(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeLocalVertexCopy) {
     Bytecode* args = script->ptrReadPos;
     s32 copyIndex = evt_get_variable(script, *args++);
     u16 modelID = evt_get_variable(script, *args++);
@@ -536,7 +536,7 @@ void modify_collider_family_flags(s32 index, s32 flags, s32 mode) {
     }
 }
 
-ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ModifyColliderFlags) {
     Bytecode* args = script->ptrReadPos;
     s32 mode = evt_get_variable(script, *args++);
     s32 index = evt_get_variable(script, *args++);
@@ -567,7 +567,7 @@ ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
 }
 
 //TODO rename to MonitorLastSafeFloor
-ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ResetFromLava) {
     Bytecode* args = script->ptrReadPos;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Collider* collider;
@@ -631,7 +631,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
     return 0;
 }
 
-ApiStatus GetColliderCenter(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetColliderCenter) {
     f32 x, y, z;
 
     get_collider_center(evt_get_variable(script, *script->ptrReadPos), &x, &y, &z);
@@ -643,7 +643,7 @@ ApiStatus GetColliderCenter(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ParentColliderToModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ParentColliderToModel) {
     Bytecode* args = script->ptrReadPos;
     s16 colliderID = evt_get_variable(script, *args++);
     s32 treeIndex = evt_get_variable(script, *args++);
@@ -653,7 +653,7 @@ ApiStatus ParentColliderToModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UpdateColliderTransform(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UpdateColliderTransform) {
     update_collider_transform(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -678,7 +678,7 @@ void set_zone_enabled(s32 zoneID, s32 enabled) {
     }
 }
 
-ApiStatus SetZoneEnabled(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetZoneEnabled) {
     Bytecode* args = script->ptrReadPos;
     s32 zoneID = evt_get_variable(script, *args++);
     s32 enabled = evt_get_variable(script, *args++);
@@ -725,37 +725,37 @@ void goto_map(Evt* script, s32 mode) {
     set_game_mode(GAME_MODE_CHANGE_MAP);
 }
 
-ApiStatus GotoMap(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GotoMap) {
     goto_map(script, 0);
     return ApiStatus_DONE1;
 }
 
-ApiStatus GotoMapSpecial(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GotoMapSpecial) {
     goto_map(script, 1);
     return ApiStatus_DONE1;
 }
 
-ApiStatus GotoMapByID(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GotoMapByID) {
     goto_map(script, 2);
     return ApiStatus_DONE1;
 }
 
-ApiStatus GetEntryID(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetEntryID) {
     evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->entryID);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetMapID(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetMapID) {
     evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->mapID);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetLoadType(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetLoadType) {
     evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->loadType != 0);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetRenderMode(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetRenderMode) {
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = evt_get_variable(script, *args++);
     s8 renderMode = evt_get_variable(script, *args++);
@@ -765,7 +765,7 @@ ApiStatus SetRenderMode(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAtModel(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundAtModel) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = evt_get_variable(script, *args++);
     s32 soundID = evt_get_variable(script, *args++);
@@ -779,7 +779,7 @@ ApiStatus PlaySoundAtModel(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAtCollider(Evt* script, s32 isInitialCall) {
+API_CALLABLE(PlaySoundAtCollider) {
     Bytecode* args = script->ptrReadPos;
     s32 colliderID = evt_get_variable(script, *args++);
     s32 soundID = evt_get_variable(script, *args++);

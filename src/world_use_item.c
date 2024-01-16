@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "sprite/player.h"
 
-ApiStatus WorldItem_ShowUseSparkles(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_ShowUseSparkles) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -13,7 +13,7 @@ ApiStatus WorldItem_ShowUseSparkles(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_ShowHPGain(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_ShowHPGain) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -24,7 +24,7 @@ ApiStatus WorldItem_ShowHPGain(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_ShowFPGain(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_ShowFPGain) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -35,7 +35,7 @@ ApiStatus WorldItem_ShowFPGain(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_RestoreHP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_RestoreHP) {
     PlayerData* playerData = &gPlayerData;
     s32 newHP = playerData->curHP + evt_get_variable(script, *script->ptrReadPos);
 
@@ -51,7 +51,7 @@ ApiStatus WorldItem_RestoreHP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_RestoreFP(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_RestoreFP) {
     PlayerData* playerData = &gPlayerData;
     s32 newFP = playerData->curFP + evt_get_variable(script, *script->ptrReadPos);
 
@@ -67,19 +67,19 @@ ApiStatus WorldItem_RestoreFP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_PauseTime(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_PauseTime) {
     set_time_freeze_mode(TIME_FREEZE_FULL);
     gOverrideFlags |= GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_UnpauseTime(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_UnpauseTime) {
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
     gOverrideFlags &= ~GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_GetItemProperties(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_GetItemProperties) {
     s32 itemIdx = evt_get_variable(script, *script->ptrReadPos);
     s32 var15;
 
@@ -100,7 +100,7 @@ ApiStatus WorldItem_GetItemProperties(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WorldItem_ConsumeItem(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldItem_ConsumeItem) {
     remove_consumable();
     return ApiStatus_DONE2;
 }

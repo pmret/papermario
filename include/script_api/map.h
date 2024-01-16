@@ -6,19 +6,19 @@
 
 #include "script_api/common.h"
 
-ApiStatus MakeNpcs(Evt* script, s32 isInitialCall);
-ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall);
-ApiStatus ResetFromLava(Evt* script, s32 isInitialCall);
-ApiStatus MakeShop(Evt* script, s32 isInitialCall);
-ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall);
-ApiStatus CreateMapRoom(Evt* script, s32 isInitialCall);
-ApiStatus CheckActionState(Evt* script, s32 isInitialCall);
-ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall);
-ApiStatus SetPushBlock(Evt* script, s32 isInitialCall);
-ApiStatus GetPushBlock(Evt* script, s32 isInitialCall);
-ApiStatus GetGridIndexFromPos(Evt* script, s32 isInitialCall);
-ApiStatus SetPushBlockFallEffect(Evt* script, s32 isInitialCall);
-ApiStatus TeleportPartnerToPlayer(Evt* script, s32 isInitialCall);
+API_CALLABLE(MakeNpcs);
+API_CALLABLE(BasicAI_Main);
+API_CALLABLE(ResetFromLava);
+API_CALLABLE(MakeShop);
+API_CALLABLE(MakeShopOwner);
+API_CALLABLE(CreateMapRoom);
+API_CALLABLE(CheckActionState);
+API_CALLABLE(CreatePushBlockGrid);
+API_CALLABLE(SetPushBlock);
+API_CALLABLE(GetPushBlock);
+API_CALLABLE(GetGridIndexFromPos);
+API_CALLABLE(SetPushBlockFallEffect);
+API_CALLABLE(TeleportPartnerToPlayer);
 
 extern EvtScript EnterWalk;
 extern EvtScript EnterWalkShort;

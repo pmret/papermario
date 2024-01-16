@@ -578,7 +578,7 @@
 ///
 /// An API function has the following signature:
 ///
-///     ApiStatus ApiFunction(Evt* thread, s32 isInitialCall);
+///     ApiStatus ApiFunction(Evt* script, s32 isInitialCall);
 ///
 /// This function could then be called with the following command:
 ///

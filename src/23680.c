@@ -836,7 +836,7 @@ void basic_ai_lose_player(Evt* script, MobileAISettings* npcAISettings, EnemyDet
     }
 }
 
-ApiStatus BasicAI_Main(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BasicAI_Main) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

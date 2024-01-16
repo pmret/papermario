@@ -3,7 +3,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetEncounterStatusFlags) {
     Bytecode* args = script->ptrReadPos;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 flagBits = *args++;
@@ -17,7 +17,7 @@ ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus IsStartingConversation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(IsStartingConversation) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -25,25 +25,25 @@ ApiStatus IsStartingConversation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80044238(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80044238) {
     Bytecode* args = script->ptrReadPos;
 
     func_80072BCC(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadDemoBattle(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LoadDemoBattle) {
     Bytecode* args = script->ptrReadPos;
 
     load_demo_battle(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80044290(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80044290) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MakeNpcs(Evt* script, s32 isInitialCall) {
+API_CALLABLE(MakeNpcs) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -64,7 +64,7 @@ ApiStatus MakeNpcs(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus RemoveNpc(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RemoveNpc) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     ApiStatus ret = ApiStatus_DONE1;
@@ -116,7 +116,7 @@ ApiStatus RemoveNpc(Evt* script, s32 isInitialCall) {
     return ret;
 }
 
-ApiStatus RemoveEncounter(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RemoveEncounter) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     s32 id = evt_get_variable(script, *args++);
@@ -148,35 +148,35 @@ ApiStatus RemoveEncounter(Evt* script, s32 isInitialCall) {
     return ret;
 }
 
-ApiStatus GetBattleOutcome(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetBattleOutcome) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gCurrentEncounter.battleOutcome);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_800445A8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_800445A8) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, script->owner1.enemy->unk_C4);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_800445D4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_800445D4) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, script->owner1.enemy->unk_C8);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetOwnerEncounterTrigger(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetOwnerEncounterTrigger) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, script->owner1.enemy->encountered);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DoNpcDefeat(Evt* script, s32 isInitialCall) {
+API_CALLABLE(DoNpcDefeat) {
     Enemy* owner = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(owner->npcID);
     Evt* newScript;
@@ -250,19 +250,19 @@ void start_battle(Evt* script, s32 songID) {
     gEncounterSubState = ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT;
 }
 
-ApiStatus StartBattle(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StartBattle) {
     start_battle(script, -1);
     return ApiStatus_DONE1;
 }
 
-ApiStatus StartBattleWith(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StartBattleWith) {
     Bytecode* args = script->ptrReadPos;
 
     start_battle(script, evt_get_variable(script, *args++));
     return ApiStatus_DONE1;
 }
 
-ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
+API_CALLABLE(StartBossBattle) {
     Bytecode* args = script->ptrReadPos;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     Enemy* enemy = script->owner1.enemy;
@@ -321,7 +321,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleMusic) {
     Bytecode* args = script->ptrReadPos;
     Bytecode songID = evt_get_variable(script, *args++);
     EncounterStatus* currentEncounter = &gCurrentEncounter;
@@ -332,7 +332,7 @@ ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BindNpcAI) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     s32 id = evt_get_variable(script, *args++);
@@ -385,7 +385,7 @@ ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
     return ret;
 }
 
-ApiStatus BindNpcIdle(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BindNpcIdle) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -401,7 +401,7 @@ ApiStatus BindNpcIdle(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RestartNpcAI) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -438,7 +438,7 @@ ApiStatus RestartNpcAI(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableNpcAI(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableNpcAI) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -461,7 +461,7 @@ ApiStatus EnableNpcAI(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcAux(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetNpcAux) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     s32 id = evt_get_variable(script, *args++);
@@ -506,7 +506,7 @@ ApiStatus SetNpcAux(Evt* script, s32 isInitialCall) {
     return ret;
 }
 
-ApiStatus BindNpcAux(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BindNpcAux) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -522,7 +522,7 @@ ApiStatus BindNpcAux(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
+API_CALLABLE(RestartNpcAux) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -558,7 +558,7 @@ ApiStatus RestartNpcAux(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableNpcAux(Evt* script, s32 isInitialCall) {
+API_CALLABLE(EnableNpcAux) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -581,7 +581,7 @@ ApiStatus EnableNpcAux(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BindNpcInteract(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BindNpcInteract) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -601,7 +601,7 @@ ApiStatus BindNpcInteract(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BindNpcHit(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BindNpcHit) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -621,7 +621,7 @@ ApiStatus BindNpcHit(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BindNpcDefeat(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BindNpcDefeat) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -637,7 +637,7 @@ ApiStatus BindNpcDefeat(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetSelfVar(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetSelfVar) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 index = evt_get_variable(script, *args++);
@@ -647,7 +647,7 @@ ApiStatus SetSelfVar(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetSelfVar(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetSelfVar) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 var1 = evt_get_variable(script, *args++);
@@ -657,7 +657,7 @@ ApiStatus GetSelfVar(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcVar(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetNpcVar) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -674,7 +674,7 @@ ApiStatus SetNpcVar(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetNpcVar(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetNpcVar) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -691,7 +691,7 @@ ApiStatus GetNpcVar(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetSelfRotation(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetSelfRotation) {
     Bytecode* args = script->ptrReadPos;
     Npc* self = get_npc_unsafe(script->owner2.npcID);
     s32 rotX = evt_get_variable(script, *args++);
@@ -705,13 +705,13 @@ ApiStatus SetSelfRotation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetSelfEnemyFlags(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetSelfEnemyFlags) {
     Bytecode* args = script->ptrReadPos;
     script->owner1.enemy->flags = *args++;
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetSelfEnemyFlagBits) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 bits = *args++;
@@ -725,7 +725,7 @@ ApiStatus SetSelfEnemyFlagBits(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SelfEnemyOverrideSyncPos(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SelfEnemyOverrideSyncPos) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
@@ -738,14 +738,14 @@ ApiStatus SelfEnemyOverrideSyncPos(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetSelfNpcID(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetSelfNpcID) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, script->owner1.enemy->npcID);
     return ApiStatus_DONE2;
 }
 
-ApiStatus ClearDefeatedEnemies(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ClearDefeatedEnemies) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 i;
     s32 j;
@@ -758,7 +758,7 @@ ApiStatus ClearDefeatedEnemies(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetEnemyFlagBits) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
@@ -780,11 +780,11 @@ ApiStatus SetEnemyFlagBits(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8004572C(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8004572C) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetSelfAnimationFromTable) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 animIdx = evt_get_variable(script, *args++);
@@ -793,14 +793,14 @@ ApiStatus GetSelfAnimationFromTable(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80045798(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80045798) {
     Bytecode* args = script->ptrReadPos;
 
     gPartnerStatus.unk_358 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetOwnerInstigatorValue(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetOwnerInstigatorValue) {
     Bytecode* args = script->ptrReadPos;
     Enemy* enemy = script->owner1.enemy;
 
@@ -808,19 +808,19 @@ ApiStatus SetOwnerInstigatorValue(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleAsScripted(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetBattleAsScripted) {
     gCurrentEncounter.scriptedBattle = TRUE;
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetEncounterTriggerHitTier(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GetEncounterTriggerHitTier) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, gCurrentEncounter.hitTier);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80045838) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
     s32 soundID = evt_get_variable(script, *args++);
@@ -835,14 +835,14 @@ ApiStatus func_80045838(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_800458CC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_800458CC) {
     Bytecode* args = script->ptrReadPos;
 
     evt_set_variable(script, *args++, script->owner1.enemy->npcSettings->actionFlags & AI_ACTION_08);
     return ApiStatus_DONE2;
 }
 
-ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
+API_CALLABLE(OnPlayerFled) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -877,7 +877,7 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTattleMessage(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetTattleMessage) {
     Bytecode* args = script->ptrReadPos;
     s32 enemyId = evt_get_variable(script, *args++);
     u32 tattleMsg = evt_get_variable(script, *args++);

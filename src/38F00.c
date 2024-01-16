@@ -1,8 +1,8 @@
 #include "common.h"
 
-ApiStatus func_8005DB00(Evt* script, s32 isInitialCall);
-ApiStatus func_8005DD54(Evt* script, s32 isInitialCall);
-ApiStatus func_8005DDF0(Evt* script, s32 isInitialCall);
+API_CALLABLE(func_8005DB00);
+API_CALLABLE(func_8005DD54);
+API_CALLABLE(func_8005DDF0);
 
 EvtScript EVS_800936C0 = {
     EVT_CALL(func_8005DB00)
@@ -85,7 +85,7 @@ EvtScript D_800939B4 = {
     EVT_END
 };
 
-ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8005DB00) {
     Npc* npc;
     f32 targetDir, npcYaw;
     PlayerStatus* playerStatus;
@@ -143,7 +143,7 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8005DD54(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8005DD54) {
     f32 angle = clamp_angle(script->varTable[0]);
 
     script->varTable[0] = angle;
@@ -157,7 +157,7 @@ ApiStatus func_8005DD54(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8005DDF0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_8005DDF0) {
     if (gCurrentEncounter.unk_08 != -1) {
         return ApiStatus_DONE1;
     } else {

@@ -515,7 +515,7 @@ void btl_bonk_cleanup(void) {
     }
 }
 
-ApiStatus ShowImmuneBonk(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowImmuneBonk) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -528,7 +528,7 @@ ApiStatus ShowImmuneBonk(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ForceImmuneBonkCleanup(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ForceImmuneBonkCleanup) {
     btl_bonk_cleanup();
     return ApiStatus_DONE2;
 }
@@ -1631,7 +1631,7 @@ void btl_show_message_popup(void* data) {
     }
 }
 
-ApiStatus ShowMessageBox(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowMessageBox) {
     Bytecode* args = script->ptrReadPos;
     s32 messageIndex = evt_get_variable(script, *args++);
     s32 duration = evt_get_variable(script, *args++);
@@ -1640,7 +1640,7 @@ ApiStatus ShowMessageBox(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ShowVariableMessageBox(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ShowVariableMessageBox) {
     Bytecode* args = script->ptrReadPos;
     s32 messageIndex = evt_get_variable(script, *args++);
     s32 duration = evt_get_variable(script, *args++);
@@ -1650,7 +1650,7 @@ ApiStatus ShowVariableMessageBox(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus IsMessageBoxDisplayed(Evt* script, s32 isInitialCall) {
+API_CALLABLE(IsMessageBoxDisplayed) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -1658,28 +1658,28 @@ ApiStatus IsMessageBoxDisplayed(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WaitForMessageBoxDone(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WaitForMessageBoxDone) {
     return !btl_is_popup_displayed() * ApiStatus_DONE2;
 }
 
-ApiStatus ForceCloseMessageBox(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ForceCloseMessageBox) {
     if (bPopupMessage != NULL) {
         bPopupMessage->duration = 0;
     }
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageBoxDuration(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SetMessageBoxDuration) {
     btl_set_popup_duration(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus LockMessageBoxPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LockMessageBoxPosition) {
     btl_message_lock_box_pos();
     return ApiStatus_DONE2;
 }
 
-ApiStatus UnlockMessageBoxPosition(Evt* script, s32 isInitialCall) {
+API_CALLABLE(UnlockMessageBoxPosition) {
     btl_message_unlock_box_pos();
     return ApiStatus_DONE2;
 }

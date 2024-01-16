@@ -80,7 +80,7 @@ void N(SpearGuyAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 // prerequisites
 #include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-ApiStatus N(SpearGuyAI_Main)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(SpearGuyAI_Main)) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(CreateWhaleGeyser)(Evt* script, s32 isInitialStatus) {
+API_CALLABLE(N(CreateWhaleGeyser)) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = evt_get_variable(script, *args++);
     f32 var2 = evt_get_float_variable(script, *args++);
@@ -31,7 +31,7 @@ API_CALLABLE(N(SetWhaleGeyserPos)) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(DisposeWhaleGeyser)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(DisposeWhaleGeyser)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 

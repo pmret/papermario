@@ -22,12 +22,12 @@ MapSettings N(settings) = {
 
 #include "world/common/todo/SpawnSunEffect.inc.c"
 
-ApiStatus N(StartOasisSongVariation)(void) {
+API_CALLABLE(N(StartOasisSongVariation)) {
     bgm_set_variation(0, 1);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StopOasisSongVariation)(void) {
+API_CALLABLE(N(StopOasisSongVariation)) {
     bgm_set_variation(0, 0);
     return ApiStatus_DONE2;
 }

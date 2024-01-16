@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-ApiStatus N(ApproachPlayer100Units)(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(ApproachPlayer100Units)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
