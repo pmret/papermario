@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 Vtx Entity_ArrowSign_vtxSign[] = {
     {{{   -10,   -10,     0 }, 0, {     0,     0 }, { 255, 255, 255, 255 }}},
@@ -13,8 +14,8 @@ Vtx Entity_ArrowSign_vtxPole[] = {
     {{{    -2,    19,    -1 }, 0, {     0,     0 }, {  25,  20,   0, 255 }}},
 };
 
-#include "entity/model/ArrowSign.png.inc.c"
-#include "entity/model/ArrowSign.pal.inc.c"
+INCLUDE_IMG("entity/model/ArrowSign.png", D_0A000080_E59F80);
+INCLUDE_PAL("entity/model/ArrowSign.pal", D_0A000880_E5A780);
 Gfx Entity_ArrowSign_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal256(D_0A000880_E5A780),

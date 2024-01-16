@@ -3,6 +3,7 @@
 #include "PR/os_internal_thread.h"
 #include "libc/xstdio.h"
 #include "gcc/string.h"
+#include "include_asset.h"
 
 typedef struct {
     /* 0x000 */ OSThread thread;
@@ -25,7 +26,9 @@ u8 gCrashScreencharToGlyph[128] = {
     23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1,
 };
 
-// TODO extract?
+#if VERSION_US
+INCLUDE_IMG("crash_screen/font.png", gCrashScreenFont);
+#else
 u32 gCrashScreenFont[] = {
     0x70871C30, 0x8988A250, 0x88808290, 0x88831C90, 0x888402F8, 0x88882210, 0x71CF9C10, 0xF9CF9C70, 0x8228A288,
     0xF200A288, 0x0BC11C78, 0x0A222208, 0x8A222288, 0x71C21C70, 0x23C738F8, 0x5228A480, 0x8A282280, 0x8BC822F0,
@@ -36,6 +39,7 @@ u32 gCrashScreenFont[] = {
     0x80020800, 0xF8011000, 0x70800000, 0x88822200, 0x08820400, 0x108F8800, 0x20821000, 0x00022200, 0x20800020,
     0x00000000,
 };
+#endif
 
 const char* gFaultCauses[18] = {
     "Interrupt",
@@ -104,7 +108,7 @@ void crash_screen_draw_rect(s32 x, s32 y, s32 width, s32 height) {
 void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
     s32 shift = ((glyph % 5) * 6);
     u16 width = gCrashScreen.width;
-    const u32* data = &gCrashScreenFont[glyph / 5 * 7];
+    const u32* data = &((u32*)gCrashScreenFont)[glyph / 5 * 7];
     s32 i;
     s32 j;
 

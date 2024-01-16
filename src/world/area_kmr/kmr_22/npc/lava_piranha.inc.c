@@ -1,10 +1,11 @@
+#include "include_asset.h"
 
 #include "world/common/enemy/LavaPiranha.h"
 
 #include "world/common/lava_piranha/part1.inc.c"
 
-#include "world/area_kmr/kmr_22/lava_piranha_vine.png.inc.c"
-#include "world/area_kmr/kmr_22/lava_piranha_vine.pal.inc.c"
+INCLUDE_IMG("world/area_kmr/kmr_22/lava_piranha_vine.png", D_80241900);
+INCLUDE_PAL("world/area_kmr/kmr_22/lava_piranha_vine.pal", D_80241D00);
 #include "world/area_kmr/kmr_22/lava_piranha_vine.gfx.inc.c"
 
 #include "world/common/lava_piranha/part2.inc.c"

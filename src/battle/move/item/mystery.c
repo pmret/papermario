@@ -3,6 +3,7 @@
 #include "effects.h"
 #include "entity.h"
 #include "ld_addrs.h"
+#include "include_asset.h"
 
 #define NAMESPACE battle_item_mystery
 
@@ -13,8 +14,8 @@
 static s32 _pad = 0;
 
 #include "battle/move/item/mystery.png.h"
-#include "battle/move/item/mystery.png.inc.c"
-#include "battle/move/item/mystery.pal.inc.c"
+INCLUDE_IMG("battle/move/item/mystery.png", battle_item_mystery_png);
+INCLUDE_PAL("battle/move/item/mystery.pal", battle_item_mystery_pal);
 
 Vtx N(model)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},

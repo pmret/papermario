@@ -116,7 +116,7 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     f32 posX, posY, posZ, hitDepth;
     s32 color;
 
-    // @bug need to use real sound id, not environmental sound id
+    /// @bug need to use real sound id, not environmental sound id
     sfx_adjust_env_sound_pos(SOUND_LOOP_SENTINEL_ALARM, SOUND_SPACE_FULL, npc->pos.x, npc->pos.y, npc->pos.z);
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;

@@ -212,7 +212,8 @@ ApiStatus func_802D1380(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
+/// Internal function for PlayerJump(), PlayerJump1(), and PlayerJump2().
+ApiStatus player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 xTemp;
@@ -331,9 +332,9 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 handle_floor_behavior();
             }
         }
-        return TRUE;
+        return ApiStatus_DONE1;
     }
-    return FALSE;
+    return ApiStatus_BLOCK;
 }
 
 ApiStatus PlayerJump(Evt* script, s32 isInitialCall) {

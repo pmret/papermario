@@ -4,6 +4,7 @@
 #include "ld_addrs.h"
 #include "effects.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #define NAMESPACE battle_item_sleepy_sheep
 
@@ -172,16 +173,16 @@ API_CALLABLE(N(func_802A1848_71EE98)) {
 static s32 _pad = 0;
 
 #include "battle/move/item/sleepy_sheep1.png.h"
-#include "battle/move/item/sleepy_sheep1.png.inc.c"
-#include "battle/move/item/sleepy_sheep1.pal.inc.c"
+INCLUDE_IMG("battle/move/item/sleepy_sheep1.png", battle_item_sleepy_sheep1_png);
+INCLUDE_PAL("battle/move/item/sleepy_sheep1.pal", battle_item_sleepy_sheep1_pal);
 
 #include "battle/move/item/sleepy_sheep2.png.h"
-#include "battle/move/item/sleepy_sheep2.png.inc.c"
-#include "battle/move/item/sleepy_sheep2.pal.inc.c"
+INCLUDE_IMG("battle/move/item/sleepy_sheep2.png", battle_item_sleepy_sheep2_png);
+INCLUDE_PAL("battle/move/item/sleepy_sheep2.pal", battle_item_sleepy_sheep2_pal);
 
 #include "battle/move/item/sleepy_sheep3.png.h"
-#include "battle/move/item/sleepy_sheep3.png.inc.c"
-#include "battle/move/item/sleepy_sheep3.pal.inc.c"
+INCLUDE_IMG("battle/move/item/sleepy_sheep3.png", battle_item_sleepy_sheep3_png);
+INCLUDE_PAL("battle/move/item/sleepy_sheep3.pal", battle_item_sleepy_sheep3_pal);
 
 Vtx N(model)[] = {
     { .v = {{ -28,  0,  0 }, FALSE, { 0,    1536 }, { 0, 0, 0, 255 }}},

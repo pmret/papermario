@@ -1867,7 +1867,7 @@ void imgfx_mesh_make_wavy(ImgFXState* state) {
         //TODO find better match
         v1 = (Vtx*)((state->firstVtxIdx + i) * sizeof(Vtx) + (s32)imgfx_vtxBuf);
         vx = v1->v.ob[0];
-        v1->v.ob[0] = (vx + (sin_rad(angle1) * state->ints.wavy.mag.x)); // @bug? should be sin_deg?
+        v1->v.ob[0] = (vx + (sin_rad(angle1) * state->ints.wavy.mag.x)); /// @bug? should be sin_deg?
 
         v2 = (Vtx*)((state->firstVtxIdx + i) * sizeof(Vtx) + (s32)imgfx_vtxBuf);
         vy = v2->v.ob[1];

@@ -1,8 +1,9 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/ShatteringHammer2Block.vtx.inc.c"
 
-#include "entity/model/ShatteringHammer2Block_texture.png.inc.c"
+INCLUDE_IMG("entity/model/ShatteringHammer2Block_texture.png", D_0A001060_E366D0);
 Gfx D_0A001460_E36AD0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),

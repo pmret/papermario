@@ -2184,6 +2184,7 @@ mgm_01_panel_bowser_img = 0x80243380; // rom:0xE82510
 mgm_01_panel_bowser_pal = 0x80243580; // rom:0xE82710
 mgm_02_panel_peach_img = 0x80248380; // rom:0xE8AB70
 mgm_02_panel_peach_pal = 0x80248580; // rom:0xE8AD70
+D_801094B0 = 0x80108050; // rom:0xA1160
 D_80109710 = 0x801082B0; // rom:0xA13C0
 D_801097D8 = 0x80108378; // rom:0xA1488
 ui_box_corners9_png = 0x80108580; // rom:0xA1690

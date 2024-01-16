@@ -1,6 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 #include "entity.h"
+#include "include_asset.h"
 
 Lights1 level_up_lights = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
 
@@ -13,17 +14,17 @@ Lights1 level_up_lights = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
 #include "level_up/draw_U.vtx.inc.c"
 #include "level_up/draw_exclamation_mark.vtx.inc.c"
 
-#include "level_up/big_V.png.inc.c"
+INCLUDE_IMG("level_up/big_V.png", D_802A1418_79F358);
 #include "level_up/big_V.gfx.inc.c"
-#include "level_up/big_P.png.inc.c"
+INCLUDE_IMG("level_up/big_P.png", D_802A2490_7A03D0);
 #include "level_up/big_P.gfx.inc.c"
-#include "level_up/big_exclamation_mark.png.inc.c"
+INCLUDE_IMG("level_up/big_exclamation_mark.png", D_802A3508_7A1448);
 #include "level_up/big_exclamation_mark.gfx.inc.c"
-#include "level_up/big_U.png.inc.c"
+INCLUDE_IMG("level_up/big_U.png", D_802A4580_7A24C0);
 #include "level_up/big_U.gfx.inc.c"
-#include "level_up/big_L.png.inc.c"
+INCLUDE_IMG("level_up/big_L.png", D_802A55F8_7A3538);
 #include "level_up/big_L.gfx.inc.c"
-#include "level_up/big_E.png.inc.c"
+INCLUDE_IMG("level_up/big_E.png", D_802A6670_7A45B0);
 #include "level_up/big_E.gfx.inc.c"
 
 Gfx D_802A76E8_7A5628[] = {
@@ -169,155 +170,155 @@ Gfx D_802A7A88_7A59C8[] = {
     gsSPEndDisplayList(),
 };
 
-#include "level_up/heart.png.inc.c"
-#include "level_up/heart.pal.inc.c"
-#include "level_up/flower.png.inc.c"
-#include "level_up/flower.pal.inc.c"
-#include "level_up/leaves.png.inc.c"
-#include "level_up/leaves.pal.inc.c"
-#include "level_up/badge.png.inc.c"
-#include "level_up/badge.pal.inc.c"
-#include "level_up/FP.png.inc.c"
-#include "level_up/FP.pal.inc.c"
-#include "level_up/BP.png.inc.c"
-#include "level_up/BP.pal.inc.c"
-#include "level_up/HP.png.inc.c"
-#include "level_up/HP.pal.inc.c"
+INCLUDE_IMG("level_up/heart.png", level_up_heart_png);
+INCLUDE_PAL("level_up/heart.pal", level_up_heart_pal);
+INCLUDE_IMG("level_up/flower.png", level_up_flower_png);
+INCLUDE_PAL("level_up/flower.pal", level_up_flower_pal);
+INCLUDE_IMG("level_up/leaves.png", level_up_leaves_png);
+INCLUDE_PAL("level_up/leaves.pal", level_up_leaves_pal);
+INCLUDE_IMG("level_up/badge.png", level_up_badge_png);
+INCLUDE_PAL("level_up/badge.pal", level_up_badge_pal);
+INCLUDE_IMG("level_up/FP.png", level_up_FP_png);
+INCLUDE_PAL("level_up/FP.pal", level_up_FP_pal);
+INCLUDE_IMG("level_up/BP.png", level_up_BP_png);
+INCLUDE_PAL("level_up/BP.pal", level_up_BP_pal);
+INCLUDE_IMG("level_up/HP.png", level_up_HP_png);
+INCLUDE_PAL("level_up/HP.pal", level_up_HP_pal);
 
-#include "level_up/digit_0.png.inc.c"
-#include "level_up/digit_0.pal.inc.c"
-#include "level_up/digit_1.png.inc.c"
-#include "level_up/digit_1.pal.inc.c"
-#include "level_up/digit_2.png.inc.c"
-#include "level_up/digit_2.pal.inc.c"
-#include "level_up/digit_3.png.inc.c"
-#include "level_up/digit_3.pal.inc.c"
-#include "level_up/digit_4.png.inc.c"
-#include "level_up/digit_4.pal.inc.c"
-#include "level_up/digit_5.png.inc.c"
-#include "level_up/digit_5.pal.inc.c"
-#include "level_up/digit_6.png.inc.c"
-#include "level_up/digit_6.pal.inc.c"
-#include "level_up/digit_7.png.inc.c"
-#include "level_up/digit_7.pal.inc.c"
-#include "level_up/digit_8.png.inc.c"
-#include "level_up/digit_8.pal.inc.c"
-#include "level_up/digit_9.png.inc.c"
-#include "level_up/digit_9.pal.inc.c"
+INCLUDE_IMG("level_up/digit_0.png", level_up_digit_0_png);
+INCLUDE_PAL("level_up/digit_0.pal", level_up_digit_0_pal);
+INCLUDE_IMG("level_up/digit_1.png", level_up_digit_1_png);
+INCLUDE_PAL("level_up/digit_1.pal", level_up_digit_1_pal);
+INCLUDE_IMG("level_up/digit_2.png", level_up_digit_2_png);
+INCLUDE_PAL("level_up/digit_2.pal", level_up_digit_2_pal);
+INCLUDE_IMG("level_up/digit_3.png", level_up_digit_3_png);
+INCLUDE_PAL("level_up/digit_3.pal", level_up_digit_3_pal);
+INCLUDE_IMG("level_up/digit_4.png", level_up_digit_4_png);
+INCLUDE_PAL("level_up/digit_4.pal", level_up_digit_4_pal);
+INCLUDE_IMG("level_up/digit_5.png", level_up_digit_5_png);
+INCLUDE_PAL("level_up/digit_5.pal", level_up_digit_5_pal);
+INCLUDE_IMG("level_up/digit_6.png", level_up_digit_6_png);
+INCLUDE_PAL("level_up/digit_6.pal", level_up_digit_6_pal);
+INCLUDE_IMG("level_up/digit_7.png", level_up_digit_7_png);
+INCLUDE_PAL("level_up/digit_7.pal", level_up_digit_7_pal);
+INCLUDE_IMG("level_up/digit_8.png", level_up_digit_8_png);
+INCLUDE_PAL("level_up/digit_8.pal", level_up_digit_8_pal);
+INCLUDE_IMG("level_up/digit_9.png", level_up_digit_9_png);
+INCLUDE_PAL("level_up/digit_9.pal", level_up_digit_9_pal);
 
-#include "level_up/small_digit_0.png.inc.c"
-#include "level_up/small_digit_0.pal.inc.c"
-#include "level_up/small_digit_1.png.inc.c"
-#include "level_up/small_digit_1.pal.inc.c"
-#include "level_up/small_digit_2.png.inc.c"
-#include "level_up/small_digit_2.pal.inc.c"
-#include "level_up/small_digit_3.png.inc.c"
-#include "level_up/small_digit_3.pal.inc.c"
-#include "level_up/small_digit_4.png.inc.c"
-#include "level_up/small_digit_4.pal.inc.c"
-#include "level_up/small_digit_5.png.inc.c"
-#include "level_up/small_digit_5.pal.inc.c"
-#include "level_up/small_digit_6.png.inc.c"
-#include "level_up/small_digit_6.pal.inc.c"
-#include "level_up/small_digit_7.png.inc.c"
-#include "level_up/small_digit_7.pal.inc.c"
-#include "level_up/small_digit_8.png.inc.c"
-#include "level_up/small_digit_8.pal.inc.c"
-#include "level_up/small_digit_9.png.inc.c"
-#include "level_up/small_digit_9.pal.inc.c"
-#include "level_up/small_arrow.png.inc.c"
-#include "level_up/small_arrow.pal.inc.c"
+INCLUDE_IMG("level_up/small_digit_0.png", level_up_small_digit_0_png);
+INCLUDE_PAL("level_up/small_digit_0.pal", level_up_small_digit_0_pal);
+INCLUDE_IMG("level_up/small_digit_1.png", level_up_small_digit_1_png);
+INCLUDE_PAL("level_up/small_digit_1.pal", level_up_small_digit_1_pal);
+INCLUDE_IMG("level_up/small_digit_2.png", level_up_small_digit_2_png);
+INCLUDE_PAL("level_up/small_digit_2.pal", level_up_small_digit_2_pal);
+INCLUDE_IMG("level_up/small_digit_3.png", level_up_small_digit_3_png);
+INCLUDE_PAL("level_up/small_digit_3.pal", level_up_small_digit_3_pal);
+INCLUDE_IMG("level_up/small_digit_4.png", level_up_small_digit_4_png);
+INCLUDE_PAL("level_up/small_digit_4.pal", level_up_small_digit_4_pal);
+INCLUDE_IMG("level_up/small_digit_5.png", level_up_small_digit_5_png);
+INCLUDE_PAL("level_up/small_digit_5.pal", level_up_small_digit_5_pal);
+INCLUDE_IMG("level_up/small_digit_6.png", level_up_small_digit_6_png);
+INCLUDE_PAL("level_up/small_digit_6.pal", level_up_small_digit_6_pal);
+INCLUDE_IMG("level_up/small_digit_7.png", level_up_small_digit_7_png);
+INCLUDE_PAL("level_up/small_digit_7.pal", level_up_small_digit_7_pal);
+INCLUDE_IMG("level_up/small_digit_8.png", level_up_small_digit_8_png);
+INCLUDE_PAL("level_up/small_digit_8.pal", level_up_small_digit_8_pal);
+INCLUDE_IMG("level_up/small_digit_9.png", level_up_small_digit_9_png);
+INCLUDE_PAL("level_up/small_digit_9.pal", level_up_small_digit_9_pal);
+INCLUDE_IMG("level_up/small_arrow.png", level_up_small_arrow_png);
+INCLUDE_PAL("level_up/small_arrow.pal", level_up_small_arrow_pal);
 
 #define level_up_digit_0_red_png level_up_digit_0_png
-#include "level_up/digit_0.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_0.red.pal", level_up_digit_0_red_pal);
 #define level_up_digit_1_red_png level_up_digit_1_png
-#include "level_up/digit_1.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_1.red.pal", level_up_digit_1_red_pal);
 #define level_up_digit_2_red_png level_up_digit_2_png
-#include "level_up/digit_2.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_2.red.pal", level_up_digit_2_red_pal);
 #define level_up_digit_3_red_png level_up_digit_3_png
-#include "level_up/digit_3.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_3.red.pal", level_up_digit_3_red_pal);
 #define level_up_digit_4_red_png level_up_digit_4_png
-#include "level_up/digit_4.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_4.red.pal", level_up_digit_4_red_pal);
 #define level_up_digit_5_red_png level_up_digit_5_png
-#include "level_up/digit_5.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_5.red.pal", level_up_digit_5_red_pal);
 #define level_up_digit_6_red_png level_up_digit_6_png
-#include "level_up/digit_6.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_6.red.pal", level_up_digit_6_red_pal);
 #define level_up_digit_7_red_png level_up_digit_7_png
-#include "level_up/digit_7.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_7.red.pal", level_up_digit_7_red_pal);
 #define level_up_digit_8_red_png level_up_digit_8_png
-#include "level_up/digit_8.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_8.red.pal", level_up_digit_8_red_pal);
 #define level_up_digit_9_red_png level_up_digit_9_png
-#include "level_up/digit_9.red.pal.inc.c"
+INCLUDE_PAL("level_up/digit_9.red.pal", level_up_digit_9_red_pal);
 
 #define level_up_small_digit_0_red_png level_up_small_digit_0_png
-#include "level_up/small_digit_0.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_0.red.pal", level_up_small_digit_0_red_pal);
 #define level_up_small_digit_1_red_png level_up_small_digit_1_png
-#include "level_up/small_digit_1.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_1.red.pal", level_up_small_digit_1_red_pal);
 #define level_up_small_digit_2_red_png level_up_small_digit_2_png
-#include "level_up/small_digit_2.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_2.red.pal", level_up_small_digit_2_red_pal);
 #define level_up_small_digit_3_red_png level_up_small_digit_3_png
-#include "level_up/small_digit_3.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_3.red.pal", level_up_small_digit_3_red_pal);
 #define level_up_small_digit_4_red_png level_up_small_digit_4_png
-#include "level_up/small_digit_4.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_4.red.pal", level_up_small_digit_4_red_pal);
 #define level_up_small_digit_5_red_png level_up_small_digit_5_png
-#include "level_up/small_digit_5.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_5.red.pal", level_up_small_digit_5_red_pal);
 #define level_up_small_digit_6_red_png level_up_small_digit_6_png
-#include "level_up/small_digit_6.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_6.red.pal", level_up_small_digit_6_red_pal);
 #define level_up_small_digit_7_red_png level_up_small_digit_7_png
-#include "level_up/small_digit_7.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_7.red.pal", level_up_small_digit_7_red_pal);
 #define level_up_small_digit_8_red_png level_up_small_digit_8_png
-#include "level_up/small_digit_8.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_8.red.pal", level_up_small_digit_8_red_pal);
 #define level_up_small_digit_9_red_png level_up_small_digit_9_png
-#include "level_up/small_digit_9.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_9.red.pal", level_up_small_digit_9_red_pal);
 #define level_up_small_arrow_red_png level_up_small_arrow_png
-#include "level_up/small_arrow.red.pal.inc.c"
+INCLUDE_PAL("level_up/small_arrow.red.pal", level_up_small_arrow_red_pal);
 
 #define level_up_digit_0_blue_png level_up_digit_0_png
-#include "level_up/digit_0.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_0.blue.pal", level_up_digit_0_blue_pal);
 #define level_up_digit_1_blue_png level_up_digit_1_png
-#include "level_up/digit_1.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_1.blue.pal", level_up_digit_1_blue_pal);
 #define level_up_digit_2_blue_png level_up_digit_2_png
-#include "level_up/digit_2.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_2.blue.pal", level_up_digit_2_blue_pal);
 #define level_up_digit_3_blue_png level_up_digit_3_png
-#include "level_up/digit_3.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_3.blue.pal", level_up_digit_3_blue_pal);
 #define level_up_digit_4_blue_png level_up_digit_4_png
-#include "level_up/digit_4.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_4.blue.pal", level_up_digit_4_blue_pal);
 #define level_up_digit_5_blue_png level_up_digit_5_png
-#include "level_up/digit_5.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_5.blue.pal", level_up_digit_5_blue_pal);
 #define level_up_digit_6_blue_png level_up_digit_6_png
-#include "level_up/digit_6.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_6.blue.pal", level_up_digit_6_blue_pal);
 #define level_up_digit_7_blue_png level_up_digit_7_png
-#include "level_up/digit_7.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_7.blue.pal", level_up_digit_7_blue_pal);
 #define level_up_digit_8_blue_png level_up_digit_8_png
-#include "level_up/digit_8.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_8.blue.pal", level_up_digit_8_blue_pal);
 #define level_up_digit_9_blue_png level_up_digit_9_png
-#include "level_up/digit_9.blue.pal.inc.c"
+INCLUDE_PAL("level_up/digit_9.blue.pal", level_up_digit_9_blue_pal);
 
 #define level_up_small_digit_0_blue_png level_up_small_digit_0_png
-#include "level_up/small_digit_0.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_0.blue.pal", level_up_small_digit_0_blue_pal);
 #define level_up_small_digit_1_blue_png level_up_small_digit_1_png
-#include "level_up/small_digit_1.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_1.blue.pal", level_up_small_digit_1_blue_pal);
 #define level_up_small_digit_2_blue_png level_up_small_digit_2_png
-#include "level_up/small_digit_2.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_2.blue.pal", level_up_small_digit_2_blue_pal);
 #define level_up_small_digit_3_blue_png level_up_small_digit_3_png
-#include "level_up/small_digit_3.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_3.blue.pal", level_up_small_digit_3_blue_pal);
 #define level_up_small_digit_4_blue_png level_up_small_digit_4_png
-#include "level_up/small_digit_4.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_4.blue.pal", level_up_small_digit_4_blue_pal);
 #define level_up_small_digit_5_blue_png level_up_small_digit_5_png
-#include "level_up/small_digit_5.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_5.blue.pal", level_up_small_digit_5_blue_pal);
 #define level_up_small_digit_6_blue_png level_up_small_digit_6_png
-#include "level_up/small_digit_6.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_6.blue.pal", level_up_small_digit_6_blue_pal);
 #define level_up_small_digit_7_blue_png level_up_small_digit_7_png
-#include "level_up/small_digit_7.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_7.blue.pal", level_up_small_digit_7_blue_pal);
 #define level_up_small_digit_8_blue_png level_up_small_digit_8_png
-#include "level_up/small_digit_8.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_8.blue.pal", level_up_small_digit_8_blue_pal);
 #define level_up_small_digit_9_blue_png level_up_small_digit_9_png
-#include "level_up/small_digit_9.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_digit_9.blue.pal", level_up_small_digit_9_blue_pal);
 #define level_up_small_arrow_blue_png level_up_small_arrow_png
-#include "level_up/small_arrow.blue.pal.inc.c"
+INCLUDE_PAL("level_up/small_arrow.blue.pal", level_up_small_arrow_blue_pal);
 
-#include "level_up/select_one_to_upgrade.png.inc.c"
-#include "level_up/select_one_to_upgrade.pal.inc.c"
+INCLUDE_IMG("level_up/select_one_to_upgrade.png", level_up_select_one_to_upgrade_png);
+INCLUDE_PAL("level_up/select_one_to_upgrade.pal", level_up_select_one_to_upgrade_pal);
 
 EntityModelScript EMS_level_up = STANDARD_ENTITY_MODEL_SCRIPT(D_802A7A88_7A59C8, RENDER_MODE_CLOUD_NO_ZCMP);
 

@@ -16,11 +16,13 @@ def get_version_date(version):
         return "Map Ver.00/07/05 19:13"
     elif version == "pal":
         return "Map Ver.01/03/23 16:30"
+    elif version == "ique":
+        return "Map Ver.04/05/18 13:41"
     else:
         return "Map Ver.??/??/?? ??:??"
 
 
-def build_mapfs(out_bin, assets, version):
+def build_mapfs(out_bin, assets, version, pre_write_assets):
     # every TOC entry's name field has data after the null terminator made up from all the previous name fields.
     # we probably don't have to do this for the game to read the data properly (it doesn't read past the null terminator
     # of `string`), but the original devs' equivalent of this script had this bug so we need to replicate it to match.
@@ -41,6 +43,9 @@ def build_mapfs(out_bin, assets, version):
             decompressed_size = decompressed.stat().st_size
             size = next_multiple(compressed.stat().st_size, 2) if compressed.exists() else decompressed_size
 
+            if version == "ique" and decompressed.stem == "title_data":
+                size = compressed.stat().st_size
+
             # print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
 
             # write all previously-written names; required to match
@@ -52,10 +57,18 @@ def build_mapfs(out_bin, assets, version):
             f.seek(toc_entry_pos + 0x10)
             f.write(struct.pack(">III", offset, size, decompressed_size))
 
+            # initial data to be overwritten back, provided by .raw.dat files
+            pre_write_bytes = b""
+            if pre_write_assets.get(decompressed.stem):
+                with open(pre_write_assets[decompressed.stem], "rb") as pwf:
+                    pre_write_bytes = pwf.read()
+                f.seek(0x20 + next_data_pos)
+                f.write(pre_write_bytes)
+
             # write data.
             f.seek(0x20 + next_data_pos)
             f.write(compressed.read_bytes() if compressed.exists() else decompressed.read_bytes())
-            next_data_pos += size
+            next_data_pos += max(len(pre_write_bytes), size)
 
             asset_idx += 1
 
@@ -77,9 +90,16 @@ if __name__ == "__main__":
     out = argv.pop(0)
 
     assets = []
+    pre_write_assets = {}
 
-    # pairs
-    for i in range(0, len(argv), 2):
-        assets.append((Path(argv[i]), Path(argv[i + 1])))
+    for path in argv:
+        path = Path(path)
+        if path.suffixes[-2:] == [".raw", ".dat"]:
+            pre_write_assets[path.with_suffix("").stem] = path
+        else:
+            assets.append(path)
 
-    build_mapfs(out, assets, version)
+    # turn them into pairs
+    assets = list(zip(assets[::2], assets[1::2]))
+
+    build_mapfs(out, assets, version, pre_write_assets)

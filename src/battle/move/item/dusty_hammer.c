@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #define NAMESPACE battle_item_dusty_hammer
 
@@ -12,8 +13,8 @@
 static s32 _pad = 0; // XXX
 
 #include "battle/move/item/dusty_hammer.png.h"
-#include "battle/move/item/dusty_hammer.png.inc.c"
-#include "battle/move/item/dusty_hammer.pal.inc.c"
+INCLUDE_IMG("battle/move/item/dusty_hammer.png", battle_item_dusty_hammer_png);
+INCLUDE_PAL("battle/move/item/dusty_hammer.pal", battle_item_dusty_hammer_pal);
 
 Vtx N(DustyHammerVtx)[] = {
     { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},

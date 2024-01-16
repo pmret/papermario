@@ -1,41 +1,42 @@
 #include "common.h"
+#include "include_asset.h"
 
-#include "ui/msg/bubble_left.png.inc.c"
-#include "ui/msg/bubble_mid.png.inc.c"
-#include "ui/msg/bubble_right.png.inc.c"
-#include "ui/msg/arrow.png.inc.c"
-#include "ui/msg/frame_a_1_1.png.inc.c"
-#include "ui/msg/frame_a_1_2.png.inc.c"
-#include "ui/msg/frame_a_1_3.png.inc.c"
-#include "ui/msg/frame_a_1_4.png.inc.c"
-#include "ui/msg/frame_a_1_5.png.inc.c"
-#include "ui/msg/frame_a_2_1.png.inc.c"
-#include "ui/msg/frame_a_2_5.png.inc.c"
-#include "ui/msg/frame_a_3_1.png.inc.c"
-#include "ui/msg/frame_a_3_5.png.inc.c"
-#include "ui/msg/frame_a_4_1.png.inc.c"
-#include "ui/msg/frame_a_4_5.png.inc.c"
-#include "ui/msg/frame_a_5_1.png.inc.c"
-#include "ui/msg/frame_a_5_2.png.inc.c"
-#include "ui/msg/frame_a_5_3.png.inc.c"
-#include "ui/msg/frame_a_5_4.png.inc.c"
-#include "ui/msg/frame_a_5_5.png.inc.c"
-#include "ui/msg/frame_b_1_1.png.inc.c"
-#include "ui/msg/frame_b_1_2.png.inc.c"
-#include "ui/msg/frame_b_1_3.png.inc.c"
-#include "ui/msg/frame_b_1_4.png.inc.c"
-#include "ui/msg/frame_b_1_5.png.inc.c"
-#include "ui/msg/frame_b_2_1.png.inc.c"
-#include "ui/msg/frame_b_2_5.png.inc.c"
-#include "ui/msg/frame_b_3_1.png.inc.c"
-#include "ui/msg/frame_b_3_5.png.inc.c"
-#include "ui/msg/frame_b_4_1.png.inc.c"
-#include "ui/msg/frame_b_4_5.png.inc.c"
-#include "ui/msg/frame_b_5_1.png.inc.c"
-#include "ui/msg/frame_b_5_2.png.inc.c"
-#include "ui/msg/frame_b_5_3.png.inc.c"
-#include "ui/msg/frame_b_5_4.png.inc.c"
-#include "ui/msg/frame_b_5_5.png.inc.c"
+INCLUDE_IMG("ui/msg/bubble_left.png", ui_msg_bubble_left_png);
+INCLUDE_IMG("ui/msg/bubble_mid.png", ui_msg_bubble_mid_png);
+INCLUDE_IMG("ui/msg/bubble_right.png", ui_msg_bubble_right_png);
+INCLUDE_IMG("ui/msg/arrow.png", ui_msg_arrow_png);
+INCLUDE_IMG("ui/msg/frame_a_1_1.png", ui_msg_frame_a_1_1_png);
+INCLUDE_IMG("ui/msg/frame_a_1_2.png", ui_msg_frame_a_1_2_png);
+INCLUDE_IMG("ui/msg/frame_a_1_3.png", ui_msg_frame_a_1_3_png);
+INCLUDE_IMG("ui/msg/frame_a_1_4.png", ui_msg_frame_a_1_4_png);
+INCLUDE_IMG("ui/msg/frame_a_1_5.png", ui_msg_frame_a_1_5_png);
+INCLUDE_IMG("ui/msg/frame_a_2_1.png", ui_msg_frame_a_2_1_png);
+INCLUDE_IMG("ui/msg/frame_a_2_5.png", ui_msg_frame_a_2_5_png);
+INCLUDE_IMG("ui/msg/frame_a_3_1.png", ui_msg_frame_a_3_1_png);
+INCLUDE_IMG("ui/msg/frame_a_3_5.png", ui_msg_frame_a_3_5_png);
+INCLUDE_IMG("ui/msg/frame_a_4_1.png", ui_msg_frame_a_4_1_png);
+INCLUDE_IMG("ui/msg/frame_a_4_5.png", ui_msg_frame_a_4_5_png);
+INCLUDE_IMG("ui/msg/frame_a_5_1.png", ui_msg_frame_a_5_1_png);
+INCLUDE_IMG("ui/msg/frame_a_5_2.png", ui_msg_frame_a_5_2_png);
+INCLUDE_IMG("ui/msg/frame_a_5_3.png", ui_msg_frame_a_5_3_png);
+INCLUDE_IMG("ui/msg/frame_a_5_4.png", ui_msg_frame_a_5_4_png);
+INCLUDE_IMG("ui/msg/frame_a_5_5.png", ui_msg_frame_a_5_5_png);
+INCLUDE_IMG("ui/msg/frame_b_1_1.png", ui_msg_frame_b_1_1_png);
+INCLUDE_IMG("ui/msg/frame_b_1_2.png", ui_msg_frame_b_1_2_png);
+INCLUDE_IMG("ui/msg/frame_b_1_3.png", ui_msg_frame_b_1_3_png);
+INCLUDE_IMG("ui/msg/frame_b_1_4.png", ui_msg_frame_b_1_4_png);
+INCLUDE_IMG("ui/msg/frame_b_1_5.png", ui_msg_frame_b_1_5_png);
+INCLUDE_IMG("ui/msg/frame_b_2_1.png", ui_msg_frame_b_2_1_png);
+INCLUDE_IMG("ui/msg/frame_b_2_5.png", ui_msg_frame_b_2_5_png);
+INCLUDE_IMG("ui/msg/frame_b_3_1.png", ui_msg_frame_b_3_1_png);
+INCLUDE_IMG("ui/msg/frame_b_3_5.png", ui_msg_frame_b_3_5_png);
+INCLUDE_IMG("ui/msg/frame_b_4_1.png", ui_msg_frame_b_4_1_png);
+INCLUDE_IMG("ui/msg/frame_b_4_5.png", ui_msg_frame_b_4_5_png);
+INCLUDE_IMG("ui/msg/frame_b_5_1.png", ui_msg_frame_b_5_1_png);
+INCLUDE_IMG("ui/msg/frame_b_5_2.png", ui_msg_frame_b_5_2_png);
+INCLUDE_IMG("ui/msg/frame_b_5_3.png", ui_msg_frame_b_5_3_png);
+INCLUDE_IMG("ui/msg/frame_b_5_4.png", ui_msg_frame_b_5_4_png);
+INCLUDE_IMG("ui/msg/frame_b_5_5.png", ui_msg_frame_b_5_5_png);
 
 // TODO: make assets
 unsigned char ui_msg_palettes[16][32] = {
@@ -57,23 +58,23 @@ unsigned char ui_msg_palettes[16][32] = {
     {115,158,231,57,230,29,155,75,168,63,196,79,205,23,168,63,168,63,168,63,168,63,168,63,168,63,130,137,65,1,0,1},
 };
 
-#include "ui/msg/sign_corner_topleft.png.inc.c"
-#include "ui/msg/sign_corner_topright.png.inc.c"
-#include "ui/msg/sign_corner_bottomleft.png.inc.c"
-#include "ui/msg/sign_corner_bottomright.png.inc.c"
-#include "ui/msg/lamppost_corner_bottomright.png.inc.c"
-#include "ui/msg/sign_side_top.png.inc.c"
-#include "ui/msg/sign_side_left.png.inc.c"
-#include "ui/msg/sign_side_right.png.inc.c"
-#include "ui/msg/sign_side_bottom.png.inc.c"
-#include "ui/msg/sign_fill.png.inc.c"
-#include "ui/msg/sign_corner_topleft.pal.inc.c"
-#include "ui/msg/lamppost_corner_bottomright.pal.inc.c"
-#include "ui/msg/background.png.inc.c"
-#include "ui/msg/rewind_arrow.png.inc.c"
-#include "ui/msg/rewind_arrow.pal.inc.c"
-#include "ui/msg/star.png.inc.c"
-#include "ui/msg/star_silhouette.png.inc.c"
+INCLUDE_IMG("ui/msg/sign_corner_topleft.png", ui_msg_sign_corner_topleft_png);
+INCLUDE_IMG("ui/msg/sign_corner_topright.png", ui_msg_sign_corner_topright_png);
+INCLUDE_IMG("ui/msg/sign_corner_bottomleft.png", ui_msg_sign_corner_bottomleft_png);
+INCLUDE_IMG("ui/msg/sign_corner_bottomright.png", ui_msg_sign_corner_bottomright_png);
+INCLUDE_IMG("ui/msg/lamppost_corner_bottomright.png", ui_msg_lamppost_corner_bottomright_png);
+INCLUDE_IMG("ui/msg/sign_side_top.png", ui_msg_sign_side_top_png);
+INCLUDE_IMG("ui/msg/sign_side_left.png", ui_msg_sign_side_left_png);
+INCLUDE_IMG("ui/msg/sign_side_right.png", ui_msg_sign_side_right_png);
+INCLUDE_IMG("ui/msg/sign_side_bottom.png", ui_msg_sign_side_bottom_png);
+INCLUDE_IMG("ui/msg/sign_fill.png", ui_msg_sign_fill_png);
+INCLUDE_PAL("ui/msg/sign_corner_topleft.pal", ui_msg_sign_pal);
+INCLUDE_PAL("ui/msg/lamppost_corner_bottomright.pal", ui_msg_lamppost_pal);
+INCLUDE_IMG("ui/msg/background.png", ui_msg_background_png);
+INCLUDE_IMG("ui/msg/rewind_arrow.png", ui_msg_rewind_arrow_png);
+INCLUDE_PAL("ui/msg/rewind_arrow.pal", ui_msg_rewind_arrow_pal);
+INCLUDE_IMG("ui/msg/star.png", ui_msg_star_png);
+INCLUDE_IMG("ui/msg/star_silhouette.png", ui_msg_star_silhouette_png);
 
 BSS IMG_BIN MsgCharImgTitle[0xF60];
 BSS IMG_BIN MsgCharImgNormal[0x5100];

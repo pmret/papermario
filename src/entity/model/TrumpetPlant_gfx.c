@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 extern unsigned char D_0A000D40_E6E0D0[];
 
@@ -113,4 +114,4 @@ Gfx Entity_TrumpetPlant_RenderNode1[] = {
     gsSPEndDisplayList(),
 };
 
-#include "entity/model/TrumpetPlant.png.inc.c"
+INCLUDE_IMG("entity/model/TrumpetPlant.png", D_0A000D40_E6E0D0);

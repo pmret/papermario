@@ -2513,7 +2513,7 @@ void btl_state_update_player_menu(void) {
             battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battleStatus->curSubmenu = battle_menu_submenuIDs[submenuResult - 1];
             for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
                 battleStatus->submenuMoves[i] = 0;
-                battleStatus->submenuIcons[0] = 0; ///< @bug ?
+                battleStatus->submenuIcons[0] = 0; /// @bug ?
                 battleStatus->submenuStatus[i] = 0;
             }
 

@@ -1,7 +1,8 @@
 #include "common.h"
+#include "include_asset.h"
 
-#include "entity/model/CymbalPlant.png.inc.c"
-#include "entity/model/CymbalPlant.pal.inc.c"
+INCLUDE_IMG("entity/model/CymbalPlant.png", D_0A000000_E992F0);
+INCLUDE_PAL("entity/model/CymbalPlant.pal", D_0A000800_E99AF0);
 Gfx Entity_CymbalPlant_LoadTexture[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A000800_E99AF0),

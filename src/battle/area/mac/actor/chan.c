@@ -872,7 +872,7 @@ EvtScript N(EVS_HandlePhase) = {
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO | STATUS_FLAG_POISON | STATUS_KEY_SHRINK) // @bug STATUS_KEY_SHRINK used instead of STATUS_FLAG_SHRINK
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO | STATUS_FLAG_POISON | STATUS_KEY_SHRINK) /// @bug STATUS_KEY_SHRINK used instead of STATUS_FLAG_SHRINK
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET_CONST(LVarA, ANIM_Chan_Run)

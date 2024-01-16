@@ -1,6 +1,7 @@
 #include "kzn_19.h"
 #include "ld_addrs.h"
 #include "sprite/player.h"
+#include "include_asset.h"
 
 #include "world/common/npc/Kolorado.h"
 #include "world/common/npc/StarSpirit.h"
@@ -8,8 +9,8 @@
 
 #include "world/common/lava_piranha/part1.inc.c"
 
-#include "world/lava_piranha/vine.png.inc.c"
-#include "world/lava_piranha/vine.pal.inc.c"
+INCLUDE_IMG("world/lava_piranha/vine.png", kzn_19_lava_piranha_vine_img);
+INCLUDE_PAL("world/lava_piranha/vine.pal", kzn_19_lava_piranha_vine_pal);
 #include "world/lava_piranha/vine.gfx.inc.c"
 
 #include "world/common/lava_piranha/part2.inc.c"

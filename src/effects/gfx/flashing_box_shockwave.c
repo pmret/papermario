@@ -1,5 +1,7 @@
-#include "effects/gfx/D_09000000_3930A0.png.inc.c"
-#include "effects/gfx/D_09000200_3932A0.png.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_3930A0.png", D_09000000_3930A0);
+INCLUDE_IMG("effects/gfx/D_09000200_3932A0.png", D_09000200_3932A0);
 
 #include "effects/gfx/D_09000600_3936A0.gfx.inc.c"
 

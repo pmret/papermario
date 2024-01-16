@@ -11,7 +11,7 @@ extern u8 gSpriteShadingData[0x100];
 
 extern Addr sprite_shading_profiles_data_ROM_START;
 
-s32 SetSpriteShading(Evt* script, s32 isInitialCall) {
+ApiStatus SetSpriteShading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 profileID = evt_get_variable(script, *args++);
     s32 shadingGroupOffset = (profileID >> 0x10) * 8;

@@ -14655,7 +14655,7 @@ segments:
   - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
   - [0x1B82208, bin] # still zero fill
   - [0x1B83000, bin, msg] # pm_msg (todo)
-  - [0x1E40000, bin, mapfs] # pm_map_data (todo)
+  - [0x1E40000, pm_map_data, mapfs]
   - { type: bin, start: 0x27FEE1E, subalign: 2 } # zero fill
   - [0x27FFFC0, bin] # ?
   - [0x2800000]

@@ -24,11 +24,11 @@ f32 D_802938A4 = 0.0f;
 s16 D_802938A8 = 4;
 
 EffectInstance* gDamageCountEffects[] = {
-    NULL, NULL, NULL, NULL, 
-    NULL, NULL, NULL, NULL, 
-    NULL, NULL, NULL, NULL, 
-    NULL, NULL, NULL, NULL, 
-    NULL, NULL, NULL, NULL, 
+    NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, NULL,
 };
 
@@ -151,7 +151,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
         for (j = 0; j < numParts; targetPart = targetPart->nextPart, j++) {
             if (!(targetPart->flags & ACTOR_PART_FLAG_NO_TARGET)) {
                 ActorPartBlueprint* partBlueprint = targetPart->staticData;
-                
+
                 if (!(targetPart->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
                     sampleRow = !targetHomePos; // required to match
                     if (sampleRow) {
@@ -237,7 +237,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
                 } else {
                     targetDataList->layer = 1;
                 }
-                
+
                 numTargets++;
                 targetDataList++;
             }
@@ -252,7 +252,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
     } while (0);
     actor->targetListLength = numTargets;
 
-    // @bug this should be % 4
+    /// @bug this should be % 4
     sampleCol = battleStatus->sampleTargetHomeIndex & 4;
     sampleRow = battleStatus->sampleTargetHomeIndex / 4;
 
@@ -269,7 +269,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
         if (target->actorID == ACTOR_PLAYER || target->actorID == ACTOR_PARTNER) {
             continue;
         }
-        
+
         // sanity check condition -- function should never reach this point with this flag set
         if (battleStatus->curTargetListFlags & TARGET_FLAG_OVERRIDE) {
             removeTarget = TRUE;
@@ -296,7 +296,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
                 goto FIRST_PASS_REMOVE;
             }
         }
-        
+
         // target passed all checks, do not remove
         removeTarget = FALSE;
 
@@ -371,7 +371,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
             // search the target list for any targets below the current target (same column, higher row)
             // skip the current target if any are found
             s32 foundAbove = FALSE;
-            
+
             do {
                 for (j = 0; j < numTargets; j++) {
                     otherTarget = &targetDataList[j];
@@ -397,7 +397,7 @@ void create_target_list(Actor* actor, b32 targetHomePos) {
             // search the target list for any targets in front of the current target (same row, lower column)
             // skip the current target if any are found
             s32 foundInFront = FALSE;
-           
+
             for (j = 0; j < numTargets; j++) {
                 otherTarget = &targetDataList[j];
                 if (target != otherTarget) {
@@ -546,14 +546,15 @@ s32 func_80263064(Actor* actor, Actor* targetActor, b32 unused) {
             part = part->nextPart;
             continue;
         }
-        
+
         if (!(part->flags & ACTOR_PART_FLAG_PRIMARY_TARGET)) {
-            // @bug part list position is not advanced, all further loop iterations will be stuck here
+            /// @bug part list position is not advanced, all further loop iterations will be stuck here
+            // nanaian: I think this is intended and should probably be a break. this flag makes multi-target attacks select this part only
             continue;
         }
 
         partData = part->staticData;
-        
+
         if (!(part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION)) {
             x = targetActor->curPos.x;
             y = targetActor->curPos.y;
@@ -594,7 +595,7 @@ s32 func_80263064(Actor* actor, Actor* targetActor, b32 unused) {
         target->priorityOffset = 0;
         target++;
         count++;
-        
+
         part = part->nextPart;
     }
 

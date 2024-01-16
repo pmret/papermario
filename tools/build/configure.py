@@ -24,7 +24,7 @@ YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 PIGMENT = "pigment64"
-PIGMENT_REQ_VERSION = "0.3.0"
+PIGMENT_REQ_VERSION = "0.4.2"
 
 
 def exec_shell(command: List[str]) -> str:
@@ -75,7 +75,7 @@ def write_ninja_rules(
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
-    cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fdiagnostics-color=always -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -x c {extra_cflags}"
+    cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fdiagnostics-color=always -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -DMODERN_COMPILER -x c {extra_cflags}"
 
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3", "-g1")
@@ -221,18 +221,6 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "bin_inc_c",
-        description="bin_inc_c $out",
-        command=f'$python {BUILD_TOOLS}/bin_inc_c.py $in $out "$c_name"',
-    )
-
-    ninja.rule(
-        "pal_inc_c",
-        description="pal_inc_c $out",
-        command=f'$python {BUILD_TOOLS}/pal_inc_c.py $in $out "$c_name"',
-    )
-
-    ninja.rule(
         "yay0",
         description="yay0 $in",
         command=f"{BUILD_TOOLS}/yay0/Yay0compress $in $out",
@@ -313,7 +301,7 @@ def write_ninja_rules(
     ninja.rule(
         "pack_title_data",
         description="pack_title_data $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
+        command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $version $out $in",
     )
 
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
@@ -504,6 +492,7 @@ class Configure:
 
         built_objects = set()
         generated_code = []
+        inc_img_bins = []
 
         def build(
             object_paths: Union[Path, List[Path]],
@@ -524,6 +513,8 @@ class Configure:
                     built_objects.add(str(object_path))
                 elif object_path.suffix.endswith(".h") or object_path.suffix.endswith(".c"):
                     generated_code.append(str(object_path))
+                elif object_path.name.endswith(".png.bin") or object_path.name.endswith(".pal.bin"):
+                    inc_img_bins.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
                 if not str(object_path) in skip_outputs:
@@ -543,6 +534,7 @@ class Configure:
                     implicit.append(YAY0_COMPRESS_TOOL)
                 elif task in ["cc", "cxx", "cc_modern"]:
                     order_only.append("generated_code_" + self.version)
+                    order_only.append("inc_img_bins_" + self.version)
 
                 inputs = self.resolve_src_paths(src_paths)
                 for dir in asset_deps:
@@ -670,8 +662,11 @@ class Configure:
                     task = "cc_272"
                     cflags = cflags.replace("gcc_272", "")
                 elif "egcs" in cflags:
-                    task = "cc_egcs"
-                    cflags = cflags.replace("egcs", "")
+                    if sys.platform == "darwin" and non_matching:
+                        print(f"warning: using default compiler for {seg.name} because egcs is not supported on macOS")
+                    else:
+                        task = "cc_egcs"
+                        cflags = cflags.replace("egcs", "")
                 elif "gcc_modern" in cflags:
                     task = "cc_modern"
                     cflags = cflags.replace("gcc_modern", "")
@@ -724,7 +719,7 @@ class Configure:
                         },
                     )
 
-                # images embedded inside data aren't linked, but they do need to be built into .inc.c files
+                # images embedded inside data aren't linked, but they do need to be built into .bin files
                 if isinstance(seg, splat.segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
                         if isinstance(seg, splat.segtypes.n64.img.N64SegImg):
@@ -766,12 +761,6 @@ class Configure:
                                 "img_header",
                                 vars,
                             )
-                            build(
-                                inc_dir / (seg.name + ".png.inc.c"),
-                                [bin_path],
-                                "bin_inc_c",
-                                vars,
-                            )
                         elif isinstance(seg, splat.segtypes.n64.palette.N64SegPalette):
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
@@ -793,13 +782,6 @@ class Configure:
                                 in_segment=True,
                                 type="data",
                                 define=True,
-                            )
-                            vars = {"c_name": c_sym.name}
-                            build(
-                                inc_dir / (seg.name + ".pal.inc.c"),
-                                [bin_path],
-                                "pal_inc_c",
-                                vars,
                             )
             elif (
                 isinstance(seg, splat.segtypes.common.bin.CommonSegBin)
@@ -965,6 +947,9 @@ class Configure:
                                 "img_flags": "",
                             },
                         )
+                    elif path.suffixes[-2:] == [".raw", ".dat"]:
+                        compress = False
+                        bin_path = path
                     elif name == "title_data":
                         compress = True
 
@@ -1221,6 +1206,7 @@ class Configure:
             )
 
         ninja.build("generated_code_" + self.version, "phony", generated_code)
+        ninja.build("inc_img_bins_" + self.version, "phony", inc_img_bins)
 
     def make_current(self, ninja: ninja_syntax.Writer):
         current = Path("ver/current")
@@ -1398,6 +1384,12 @@ if __name__ == "__main__":
     for version in versions:
         print(f"configure: configuring version {version}")
 
+        if version == "ique" and not args.non_matching and sys.platform == "darwin":
+            print(
+                "configure: refusing to build iQue Player version on macOS because EGCS compiler is not available (use --non-matching to use default compiler)"
+            )
+            continue
+
         configure = Configure(version)
 
         if not first_configure:
@@ -1411,7 +1403,7 @@ if __name__ == "__main__":
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
-    assert first_configure
+    assert first_configure, "no versions configured"
     first_configure.make_current(ninja)
 
     if non_matching:

@@ -1,10 +1,12 @@
 #include "common.h"
 
-#include "effects/gfx/D_09000000_36AEE0.png.inc.c"
-#include "effects/gfx/D_09001000_36BEE0.png.inc.c"
-#include "effects/gfx/D_09001400_36C2E0.png.inc.c"
-#include "effects/gfx/D_09001800_36C6E0.png.inc.c"
-#include "effects/gfx/D_09001000_36BEE0.pal.inc.c"
+#include "include_asset.h"
+
+INCLUDE_IMG("effects/gfx/D_09000000_36AEE0.png", D_09000000_36AEE0);
+INCLUDE_IMG("effects/gfx/D_09001000_36BEE0.png", D_09001000_36BEE0);
+INCLUDE_IMG("effects/gfx/D_09001400_36C2E0.png", D_09001400_36C2E0);
+INCLUDE_IMG("effects/gfx/D_09001800_36C6E0.png", D_09001800_36C6E0);
+INCLUDE_PAL("effects/gfx/D_09001000_36BEE0.pal", D_09001C00_36CAE0);
 
 u8 D_09001C20_36CB00[0x1E0] = {};
 

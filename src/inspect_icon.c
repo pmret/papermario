@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 #define NAMESPACE inspect_icon
 
@@ -25,8 +26,8 @@ enum {
 };
 
 #include "inspect_icon.png.h"
-#include "inspect_icon.png.inc.c"
-#include "inspect_icon.pal.inc.c"
+INCLUDE_IMG("inspect_icon.png", inspect_icon_img);
+INCLUDE_PAL("inspect_icon.pal", inspect_icon_pal);
 #include "inspect_icon.gfx.inc.c"
 
 BSS InspectIconData InspectIcon;

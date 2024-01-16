@@ -1,0 +1,18 @@
+/* Fix scrollbar color */
+:root { color-scheme: dark }
+@media (prefers-color-scheme: light) {
+    :root { color-scheme: light }
+}
+
+.memname {
+    font-family: var(--font-family-monospace);
+}
+
+/* The alias @evtapi is used to mark EVT API functions with a .evtapi child */
+.memitem:has(.evtapi) {
+    .memproto {
+        td.memname .el { display: none }
+        td.memname::before { content: "EVT_CALL(" }
+        td.memname::after { content: "," }
+    }
+}

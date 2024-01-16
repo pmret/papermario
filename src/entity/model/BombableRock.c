@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/BombableRock_1.vtx.inc.c"
 #include "entity/model/BombableRock_2.vtx.inc.c"
@@ -6,8 +7,8 @@
 #include "entity/model/BombableRock_4.vtx.inc.c"
 #include "entity/model/BombableRock_5.vtx.inc.c"
 
-#include "entity/model/BombableRock.png.inc.c"
-#include "entity/model/BombableRock.pal.inc.c"
+INCLUDE_IMG("entity/model/BombableRock.png", D_0A000840_E9DE90);
+INCLUDE_PAL("entity/model/BombableRock.pal", D_0A001040_E9E690);
 Gfx D_0A001060_E9E6B0[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),

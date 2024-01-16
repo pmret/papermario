@@ -1,8 +1,9 @@
 #include "common.h"
 #include "entity.h"
+#include "include_asset.h"
 
 Lights1 starpoint_lights1 = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
-#include "starpoint/starpoint.png.inc.c"
+INCLUDE_IMG("starpoint/starpoint.png", D_802A1018_7A89B8);
 #include "starpoint/load_starpoint.gfx.inc.c"
 #include "starpoint/starpoint.vtx.inc.c"
 Gfx D_802A20D0_7A9A70[] = {
@@ -30,7 +31,7 @@ Gfx D_802A2158_7A9AF8[] = {
 
 Lights1 starpoint_lights2 = gdSPDefLights1(0, 0, 0, 0, 0, 0, 0, 0, 0);
 #include "starpoint/starpoints.vtx.inc.c"
-#include "starpoint/starpoints.png.inc.c"
+INCLUDE_IMG("starpoint/starpoints.png", D_802A21D8_7A9B78);
 #include "starpoint/load_starpoints.gfx.inc.c"
 
 Gfx D_802A3250_7AABF0[] = {
@@ -57,70 +58,70 @@ Gfx D_802A32D8_7AAC78[] = {
 };
 
 #include "starpoint/digit_0.vtx.inc.c"
-#include "starpoint/digit_0.png.inc.c"
+INCLUDE_IMG("starpoint/digit_0.png", D_802A3340_7AACE0);
 #include "starpoint/load_digit_0.gfx.inc.c"
 #include "starpoint/__render_digit_0.gfx.inc.c"
 #include "starpoint/_render_digit_0.gfx.inc.c"
 #include "starpoint/render_digit_0.gfx.inc.c"
 
 #include "starpoint/digit_1.vtx.inc.c"
-#include "starpoint/digit_1.png.inc.c"
+INCLUDE_IMG("starpoint/digit_1.png", D_802A4460_7ABE00);
 #include "starpoint/load_digit_1.gfx.inc.c"
 #include "starpoint/__render_digit_1.gfx.inc.c"
 #include "starpoint/_render_digit_1.gfx.inc.c"
 #include "starpoint/render_digit_1.gfx.inc.c"
 
 #include "starpoint/digit_2.vtx.inc.c"
-#include "starpoint/digit_2.png.inc.c"
+INCLUDE_IMG("starpoint/digit_2.png", D_802A5580_7ACF20);
 #include "starpoint/load_digit_2.gfx.inc.c"
 #include "starpoint/__render_digit_2.gfx.inc.c"
 #include "starpoint/_render_digit_2.gfx.inc.c"
 #include "starpoint/render_digit_2.gfx.inc.c"
 
 #include "starpoint/digit_3.vtx.inc.c"
-#include "starpoint/digit_3.png.inc.c"
+INCLUDE_IMG("starpoint/digit_3.png", D_802A66A0_7AE040);
 #include "starpoint/load_digit_3.gfx.inc.c"
 #include "starpoint/__render_digit_3.gfx.inc.c"
 #include "starpoint/_render_digit_3.gfx.inc.c"
 #include "starpoint/render_digit_3.gfx.inc.c"
 
 #include "starpoint/digit_4.vtx.inc.c"
-#include "starpoint/digit_4.png.inc.c"
+INCLUDE_IMG("starpoint/digit_4.png", D_802A77C0_7AF160);
 #include "starpoint/load_digit_4.gfx.inc.c"
 #include "starpoint/__render_digit_4.gfx.inc.c"
 #include "starpoint/_render_digit_4.gfx.inc.c"
 #include "starpoint/render_digit_4.gfx.inc.c"
 
 #include "starpoint/digit_5.vtx.inc.c"
-#include "starpoint/digit_5.png.inc.c"
+INCLUDE_IMG("starpoint/digit_5.png", D_802A88E0_7B0280);
 #include "starpoint/load_digit_5.gfx.inc.c"
 #include "starpoint/__render_digit_5.gfx.inc.c"
 #include "starpoint/_render_digit_5.gfx.inc.c"
 #include "starpoint/render_digit_5.gfx.inc.c"
 
 #include "starpoint/digit_6.vtx.inc.c"
-#include "starpoint/digit_6.png.inc.c"
+INCLUDE_IMG("starpoint/digit_6.png", D_802A9A00_7B13A0);
 #include "starpoint/load_digit_6.gfx.inc.c"
 #include "starpoint/__render_digit_6.gfx.inc.c"
 #include "starpoint/_render_digit_6.gfx.inc.c"
 #include "starpoint/render_digit_6.gfx.inc.c"
 
 #include "starpoint/digit_7.vtx.inc.c"
-#include "starpoint/digit_7.png.inc.c"
+INCLUDE_IMG("starpoint/digit_7.png", D_802AAB20_7B24C0);
 #include "starpoint/load_digit_7.gfx.inc.c"
 #include "starpoint/__render_digit_7.gfx.inc.c"
 #include "starpoint/_render_digit_7.gfx.inc.c"
 #include "starpoint/render_digit_7.gfx.inc.c"
 
 #include "starpoint/digit_8.vtx.inc.c"
-#include "starpoint/digit_8.png.inc.c"
+INCLUDE_IMG("starpoint/digit_8.png", D_802ABC40_7B35E0);
 #include "starpoint/load_digit_8.gfx.inc.c"
 #include "starpoint/__render_digit_8.gfx.inc.c"
 #include "starpoint/_render_digit_8.gfx.inc.c"
 #include "starpoint/render_digit_8.gfx.inc.c"
 
 #include "starpoint/digit_9.vtx.inc.c"
-#include "starpoint/digit_9.png.inc.c"
+INCLUDE_IMG("starpoint/digit_9.png", D_802ACD60_7B4700);
 #include "starpoint/load_digit_9.gfx.inc.c"
 #include "starpoint/__render_digit_9.gfx.inc.c"
 #include "starpoint/_render_digit_9.gfx.inc.c"

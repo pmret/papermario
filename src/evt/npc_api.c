@@ -780,7 +780,7 @@ ApiStatus func_802CF56C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
+ApiStatus BringPartnerOut(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcBlueprint bp;
     NpcBlueprint* bpPointer = &bp;

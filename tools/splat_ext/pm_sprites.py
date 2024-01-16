@@ -19,6 +19,9 @@ from splat.util.color import unpack_color
 sys.path.insert(0, str(Path(__file__).parent))
 from sprite_common import AnimComponent, iter_in_groups, read_offset_list
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from common import get_asset_path
+
 # TODO move into yaml
 PLAYER_PAL_TO_RASTER: Dict[str, int] = {
     "8bit": 0x57C90,
@@ -832,11 +835,17 @@ class N64SegPm_sprites(N64Segment):
 
     def get_linker_entries(self):
         from splat.segtypes.linker_entry import LinkerEntry
+        import splat.scripts.split as split
 
         src_paths = [options.opts.asset_path / "sprite"]
 
-        # for NPC
-        src_paths += [options.opts.asset_path / "sprite" / "npc" / sprite_name for sprite_name in self.npc_cfg]
+        # read npc.xml - we can't use self.npc_cfg because nonvanilla asset packs can change it
+        # for each sprite, add to src_paths
+        asset_stack = tuple(Path(p) for p in split.config["asset_stack"])
+        orderings_tree = ET.parse(get_asset_path(Path("sprite") / NPC_SPRITE_MEDADATA_XML_FILENAME, asset_stack))
+        for sprite_tag in orderings_tree.getroot()[0]:
+            name = sprite_tag.attrib["name"]
+            src_paths.append(options.opts.asset_path / "sprite" / "npc" / name)
 
         return [LinkerEntry(self, src_paths, self.out_path(), self.get_linker_section(), self.get_linker_section())]
 

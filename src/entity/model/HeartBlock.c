@@ -1,8 +1,9 @@
 #include "common.h"
+#include "include_asset.h"
 
 #include "entity/model/HeartBlock.vtx.inc.c"
 
-#include "entity/model/HeartBlock_face.png.inc.c"
+INCLUDE_IMG("entity/model/HeartBlock_face.png", D_0A0003C0_E435B0);
 Gfx Entity_HeartBlock_LoadTexture[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
