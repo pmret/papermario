@@ -37,7 +37,9 @@ SHIFT_BSS ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 SHIFT_BSS ItemEntity** gCurrentItemEntities;
 SHIFT_BSS s16 isPickingUpItem;
 SHIFT_BSS s16 ItemSpawnWithinPlayerPickupDelay;
+#if !VERSION_JP
 SHIFT_BSS s16 D_801565A8;
+#endif
 SHIFT_BSS PopupMenu ItemPickupMenu;
 SHIFT_BSS s32 ItemPickupIconID;
 SHIFT_BSS s32 ItemPickupStateDelay;
@@ -110,8 +112,10 @@ Gfx D_8014C6A0[] = {
 
 Lights1 ItemEntityLights = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
+#if !VERSION_JP
 s16 PickupHeaderWindowHeight[] = { 32, 40 };
 s16 PickupMessageWindowYOffsets[] = { 8, 4 };
+#endif
 
 void sparkle_script_init(ItemEntity* item, SparkleScript* script) {
     item->sparkleReadPos = (s32*)script;
@@ -258,7 +262,9 @@ void clear_item_entity_data(void) {
     create_worker_world(NULL, draw_item_entities);
     create_worker_frontUI(NULL, draw_ui_item_entities);
     isPickingUpItem = FALSE;
+#if !VERSION_JP
     D_801565A8 = FALSE;
+#endif
 }
 
 void init_item_entity_list(void) {
@@ -269,7 +275,9 @@ void init_item_entity_list(void) {
     }
 
     isPickingUpItem = FALSE;
+#if !VERSION_JP
     D_801565A8 = FALSE;
+#endif
     ItemEntitiesCreated = 0;
     ItemEntityAlternatingSpawn = 0;
 }
@@ -1526,9 +1534,11 @@ void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* item = gCurrentItemEntities[index];
 
     item->flags |= flags;
+#if !VERSION_JP
     if (item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) {
         D_801565A8 = TRUE;
     }
+#endif
 }
 
 void clear_item_entity_flags(s32 index, s32 flags) {
@@ -1545,12 +1555,16 @@ void auto_collect_item_entity(s32 index) {
 
 /// @returns TRUE when "you got X" popup is on-screen
 b32 is_picking_up_item(void) {
+#if VERSION_JP
+    return isPickingUpItem;
+#else
     b32 ret = D_801565A8 != FALSE;
 
     if (isPickingUpItem) {
         ret = TRUE;
     }
     return ret;
+#endif
 }
 
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z) {
@@ -2003,7 +2017,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                     sfx_play_sound_at_position(SOUND_HEART_PICKUP, SOUND_SPACE_DEFAULT, item->pos.x, item->pos.y, item->pos.z);
                     break;
             }
+#if !VERSION_JP
             D_801565A8 = FALSE;
+#endif
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             remove_item_entity_by_reference(item);
         }
@@ -2013,7 +2029,9 @@ void update_item_entity_collectable(ItemEntity* item) {
     // when the script is done executing, destroy these items
     if (item->state == ITEM_PHYSICS_STATE_04) {
         if (!does_script_exist(UnusedItemPhysicsScriptID)) {
+#if !VERSION_JP
             D_801565A8 = FALSE;
+#endif
             remove_item_entity_by_reference(item);
             resume_all_group(EVT_GROUP_02);
         }
@@ -2023,7 +2041,9 @@ void update_item_entity_collectable(ItemEntity* item) {
         isPickingUpItem = TRUE;
         item->spawnType = ITEM_SPAWN_AT_PLAYER;
         item->state = ITEM_PICKUP_STATE_INIT;
+#if !VERSION_JP
         D_801565A8 = FALSE;
+#endif
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 }
@@ -2059,7 +2079,9 @@ void update_item_entity_stationary(ItemEntity* item) {
             isPickingUpItem = TRUE;
             item->spawnType = ITEM_SPAWN_AT_PLAYER;
             item->state = ITEM_PICKUP_STATE_INIT;
+#if !VERSION_JP
             D_801565A8 = FALSE;
+#endif
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
         }
     }
@@ -2458,6 +2480,22 @@ block_47: // TODO required to match
     }
 }
 
+#if VERSION_JP
+#define WD_VAR1 44
+#define WD_VAR2 25
+#define WD_VAR3 20
+#define X_VAR1 32
+#define HT_VAR1 40
+#define WD_VAR4 242
+#else
+#define WD_VAR1 54
+#define WD_VAR2 30
+#define WD_VAR3 30
+#define X_VAR1 20
+#define HT_VAR1 height
+#define WD_VAR4 280
+#endif
+
 void func_801363A0(ItemEntity* item) {
     ItemData* itemData = &gItemTable[item->itemID];
     s32 itemMsg;
@@ -2494,9 +2532,9 @@ void func_801363A0(ItemEntity* item) {
                     item->itemID != ITEM_STAR_PIECE &&
                     !(gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
                     !(item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))) {
-                    width = get_msg_width(itemMsg, 0) + 54;
+                    width = get_msg_width(itemMsg, 0) + WD_VAR1;
                 } else {
-                    width = get_msg_width(itemMsg, 0) + 30;
+                    width = get_msg_width(itemMsg, 0) + WD_VAR2;
                 }
                 posX = 160 - width / 2;
                 posY = 76;
@@ -2518,11 +2556,13 @@ void func_801363A0(ItemEntity* item) {
                 }
 
                 set_message_text_var(itemData->nameMsg, 0);
-                width = get_msg_width(itemMsg, 0) + 30;
+                width = get_msg_width(itemMsg, 0) + WD_VAR3;
                 posX = 160 - width / 2;
                 posY = 76;
             }
+#if !VERSION_JP
             height = PickupHeaderWindowHeight[get_msg_lines(itemMsg) - 1];
+#endif
             if (item->state != ITEM_PICKUP_STATE_SHOW_GOT_ITEM) {
                 offsetY = 28;
             } else {
@@ -2534,16 +2574,17 @@ void func_801363A0(ItemEntity* item) {
                 && item->itemID != ITEM_STAR_PIECE)
             ) {
                 set_window_properties(WINDOW_ID_12, posX, posY - 24 + offsetY, width,
-                                    height, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
+                                    HT_VAR1, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             } else if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_WORLD_USABLE){
                 set_window_properties(WINDOW_ID_12, posX, posY - 24 + offsetY, width,
-                                    height, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
+                                    HT_VAR1, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             } else {
                 set_window_properties(WINDOW_ID_12, posX, posY - 24 + offsetY, width,
-                                    height, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
+                                    HT_VAR1, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             }
             if (item->itemID != ITEM_STAR_PIECE && item->itemID != ITEM_COIN) {
-                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, WINDOW_PRIORITY_0, draw_content_pickup_item_desc, item, -1);
+                posX = X_VAR1;
+                set_window_properties(WINDOW_ID_19, posX, 186, WD_VAR4, 32, WINDOW_PRIORITY_0, draw_content_pickup_item_desc, item, -1);
             }
             if (item->state != ITEM_PICKUP_STATE_SHOW_GOT_ITEM) {
                 width = get_msg_width(MSG_Menus_0060, 0) + 24;
@@ -2553,12 +2594,32 @@ void func_801363A0(ItemEntity* item) {
             break;
         case ITEM_PICKUP_STATE_AWAIT_THROW_AWAY:
             set_message_text_var(itemData->nameMsg, 0);
+#if VERSION_JP
+            width = get_msg_width(gItemTable[ThrowAwayItemID].nameMsg, 0) + 104;
+#else
             width = get_msg_width(MSG_Menus_005F, 0) + 54;
+#endif
             posX = 160 - width / 2;
             set_window_properties(WINDOW_ID_12, 160 - width / 2, 76, width, 40, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             break;
     }
 }
+
+#if VERSION_JP
+#define X_PICKUP_ITEM_1 12
+#define X_PICKUP_ITEM_2 36
+#define X_PICKUP_THREW 36
+#define Y_PICKUP_ITEM_1 12
+#define Y_PICKUP_ITEM_2 12
+#define Y_PICKUP_THREW 12
+#else
+#define X_PICKUP_ITEM_1 15
+#define X_PICKUP_ITEM_2 40
+#define X_PICKUP_THREW 40
+#define Y_PICKUP_ITEM_1 offsetY
+#define Y_PICKUP_ITEM_2 offsetY
+#define Y_PICKUP_THREW 4
+#endif
 
 void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
     ItemData* itemData = &gItemTable[item->itemID];
@@ -2607,7 +2668,9 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
                 set_message_text_var(itemData->nameMsg, 0);
             }
 
+#if !VERSION_JP
             offsetY = PickupMessageWindowYOffsets[get_msg_lines(itemMsg) - 1];
+#endif
 
             if ((gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE)
                 || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY)
@@ -2615,9 +2678,9 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
                 || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR)
                 || (item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))
             ) {
-                draw_msg(itemMsg, posX + 15, posY + offsetY, 255, MSG_PAL_2F, 0);
+                draw_msg(itemMsg, posX + X_PICKUP_ITEM_1, posY + Y_PICKUP_ITEM_1, 255, MSG_PAL_2F, 0);
             } else {
-                draw_msg(itemMsg, posX + 40, posY + offsetY, 255, MSG_PAL_2F, 0);
+                draw_msg(itemMsg, posX + X_PICKUP_ITEM_2, posY + Y_PICKUP_ITEM_2, 255, MSG_PAL_2F, 0);
                 if (!(item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))) {
                     hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
                     hud_element_draw_next(ItemPickupIconID);
@@ -2627,7 +2690,7 @@ void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
         case ITEM_PICKUP_STATE_SHOW_THREW_AWAY:
         case ITEM_PICKUP_STATE_HIDE_THREW_AWAY:
             set_message_text_var(gItemTable[ThrowAwayItemID].nameMsg, 0);
-            draw_msg(MSG_Menus_005F, posX + 40, posY + 4, 255, MSG_PAL_2F, 0);
+            draw_msg(MSG_Menus_005F, posX + X_PICKUP_THREW, posY + Y_PICKUP_THREW, 255, MSG_PAL_2F, 0);
             hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
             hud_element_draw_next(ItemPickupIconID);
             break;

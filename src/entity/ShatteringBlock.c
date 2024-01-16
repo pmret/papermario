@@ -2,6 +2,17 @@
 #include "ld_addrs.h"
 #include "entity.h"
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr entity_model_ShatteringBrickBlock_ROM_END;
+extern Addr entity_model_ShatteringBrickBlock_ROM_START;
+extern Addr entity_model_ShatteringHammer1Block_ROM_END;
+extern Addr entity_model_ShatteringHammer1Block_ROM_START;
+extern Addr entity_model_ShatteringHammer2Block_ROM_END;
+extern Addr entity_model_ShatteringHammer2Block_ROM_START;
+extern Addr entity_model_ShatteringHammer3Block_ROM_END;
+extern Addr entity_model_ShatteringHammer3Block_ROM_START;
+#endif
+
 extern Mtx Entity_ShatteringHammer1Block_FragmentsMatrices[];
 extern Gfx* Entity_ShatteringHammer1Block_FragmentsRender[];
 extern Mtx Entity_ShatteringHammer2Block_FragmentsMatrices[];

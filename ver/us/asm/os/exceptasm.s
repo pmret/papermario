@@ -7,11 +7,75 @@
 
 .section .rodata
 
-dlabel jtbl_80099D80
-.word 0x141818, 0x1C1C1C1C, 0x20202020, 0x20202020, 0x40808, 0xC0C0C0C, 0x10101010, 0x10101010
+__osIntOffTable:
+ .byte 0x00
+ .byte 0x14
+ .byte 0x18
+ .byte 0x18
+ .byte 0x1C
+ .byte 0x1C
+ .byte 0x1C
+ .byte 0x1C
+ .byte 0x20
+ .byte 0x20
+ .byte 0x20
+ .byte 0x20
+ .byte 0x20
+ .byte 0x20
+ .byte 0x20
+ .byte 0x20
+ .byte 0x00
+ .byte 0x04
+ .byte 0x08
+ .byte 0x08
+ .byte 0x0C
+ .byte 0x0C
+ .byte 0x0C
+ .byte 0x0C
+ .byte 0x10
+ .byte 0x10
+ .byte 0x10
+ .byte 0x10
+ .byte 0x10
+ .byte 0x10
+ .byte 0x10
+ .byte 0x10
+.size __osIntOffTable, . - __osIntOffTable
 
-dlabel jtbl_80099DA0
-.word .L8006AF00_46300, .L8006AEC4_462C4, .L8006AEA0_462A0, .L8006ACC8_460C8, .L8006AC80_46080, .L8006AE3C_4623C, .L8006AC44_46044, .L8006AC50_46050, .L8006AC5C_4605C, 0, 0, 0
+__osIntTable:
+ .word .L8006AF00_46300
+ .word .L8006AEC4_462C4
+ .word .L8006AEA0_462A0
+ .word .L8006ACC8_460C8
+ .word .L8006AC80_46080
+ .word .L8006AE3C_4623C
+ .word .L8006AC44_46044
+ .word .L8006AC50_46050
+ .word .L8006AC5C_4605C
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+.size __osIntTable, . - __osIntTable
+
+.section .data
+
+__osHwIntTable:
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+ .word 0x00000000
+.size __osHwIntTable, . - __osHwIntTable
+
+__osPiIntTable:
+ .word 0x00000000
+ .word 0x00000000
+.size __osPiIntTable, . - __osPiIntTable
 
 .section .text, "ax"
 
@@ -166,12 +230,12 @@ glabel func_8006AA34
 /* 4601C 8006AC1C 00095202 */  srl       $t2, $t1, 8
 /* 46020 8006AC20 214A0010 */  addi      $t2, $t2, 0x10
 .L8006AC24:
-/* 46024 8006AC24 3C01800A */  lui       $at, %hi(jtbl_80099D80)
+/* 46024 8006AC24 3C01800A */  lui       $at, %hi(__osIntOffTable)
 /* 46028 8006AC28 002A0821 */  addu      $at, $at, $t2
-/* 4602C 8006AC2C 902A9D80 */  lbu       $t2, %lo(jtbl_80099D80)($at)
-/* 46030 8006AC30 3C01800A */  lui       $at, %hi(jtbl_80099DA0)
+/* 4602C 8006AC2C 902A9D80 */  lbu       $t2, %lo(__osIntOffTable)($at)
+/* 46030 8006AC30 3C01800A */  lui       $at, %hi(__osIntTable)
 /* 46034 8006AC34 002A0821 */  addu      $at, $at, $t2
-/* 46038 8006AC38 8C2A9DA0 */  lw        $t2, %lo(jtbl_80099DA0)($at)
+/* 46038 8006AC38 8C2A9DA0 */  lw        $t2, %lo(__osIntTable)($at)
 /* 4603C 8006AC3C 01400008 */  jr        $t2
 /* 46040 8006AC40 00000000 */   nop
 .L8006AC44_46044:
@@ -195,8 +259,8 @@ glabel func_8006AA34
 .L8006AC80_46080:
 /* 46080 8006AC80 2401F7FF */  addiu     $at, $zero, -0x801
 /* 46084 8006AC84 02018024 */  and       $s0, $s0, $at
-/* 46088 8006AC88 3C098009 */  lui       $t1, %hi(D_80095910)
-/* 4608C 8006AC8C 25295910 */  addiu     $t1, $t1, %lo(D_80095910)
+/* 46088 8006AC88 3C098009 */  lui       $t1, %hi(__osHwIntTable)
+/* 4608C 8006AC8C 25295910 */  addiu     $t1, $t1, %lo(__osHwIntTable)
 /* 46090 8006AC90 21290008 */  addi      $t1, $t1, 8
 /* 46094 8006AC94 8D2A0000 */  lw        $t2, ($t1)
 /* 46098 8006AC98 11400007 */  beqz      $t2, .L8006ACB8
@@ -285,8 +349,8 @@ glabel func_8006AA34
 /* 461C8 8006ADC8 24090002 */  addiu     $t1, $zero, 2
 /* 461CC 8006ADCC 3C01A460 */  lui       $at, %hi(D_A4600010)
 /* 461D0 8006ADD0 AC290010 */  sw        $t1, %lo(D_A4600010)($at)
-/* 461D4 8006ADD4 3C098009 */  lui       $t1, %hi(D_80095938)
-/* 461D8 8006ADD8 25295938 */  addiu     $t1, $t1, %lo(D_80095938)
+/* 461D4 8006ADD4 3C098009 */  lui       $t1, %hi(__osPiIntTable)
+/* 461D8 8006ADD8 25295938 */  addiu     $t1, $t1, %lo(__osPiIntTable)
 /* 461DC 8006ADDC 8D2A0000 */  lw        $t2, ($t1)
 /* 461E0 8006ADE0 11400006 */  beqz      $t2, .L8006ADFC
 /* 461E4 8006ADE4 00000000 */   nop

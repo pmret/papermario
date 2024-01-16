@@ -36,6 +36,27 @@ def get_palette_idx(charset_name, char_id):
             pal_id = 0x13
         elif char_id == 0xA1:
             pal_id = 0x12
+    elif charset_name == "buttons":
+        if char_id == 0x00:
+            pal_id = 0x10
+        elif char_id == 0x01:
+            pal_id = 0x11
+        elif char_id == 0x02:
+            pal_id = 0x12
+        elif char_id == 0x03:
+            pal_id = 0x13
+        elif char_id == 0x04:
+            pal_id = 0x13
+        elif char_id == 0x05:
+            pal_id = 0x13
+        elif char_id == 0x06:
+            pal_id = 0x13
+        elif char_id == 0x07:
+            pal_id = 0x14
+        elif char_id == 0x08:
+            pal_id = 0x14
+        elif char_id == 0x09:
+            pal_id = 0x14
     return pal_id
 
 
@@ -43,14 +64,18 @@ class N64SegPm_charset(N64Segment):
     def scan(self, rom_bytes):
         data = rom_bytes[self.rom_start : self.rom_end]
 
-        # start, type, name, WIDTH, HEIGHT, NUM_RASTERS
+        # start, type, name, WIDTH, HEIGHT, NUM_RASTERS, palette
         self.width = self.yaml[3]
         self.height = self.yaml[4]
+        if len(self.yaml) > 6:
+            self.palette = self.yaml[6]
+        else:
+            self.palette = self.name
 
         # pm_charset_palettes sibling
         self.sibling = next(
             filter(
-                lambda s: s.type == "pm_charset_palettes" and s.name == self.name,
+                lambda s: s.type == "pm_charset_palettes" and s.name == self.palette,
                 self.parent.subsegments,
             )
         )

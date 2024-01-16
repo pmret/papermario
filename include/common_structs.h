@@ -1168,6 +1168,12 @@ typedef struct ItemEntity {
     /* 0x58 */ s32 sparkleHeight;
 } ItemEntity; // size = 0x5C
 
+#if VERSION_JP
+#define PRINT_BUFFER_SIZE 1024
+#else
+#define PRINT_BUFFER_SIZE 1088  // slightly larger than source buffer
+#endif
+
 typedef struct MessagePrintState {
     /* 0x000 */ u8* srcBuffer;
     /* 0x004 */ u16 printBufferPos;
@@ -1175,7 +1181,7 @@ typedef struct MessagePrintState {
     /* 0x008 */ s32 msgID;
     /* 0x00C */ u16 srcBufferPos;
     /* 0x00E */ u16 curPrintDelay;
-    /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
+    /* 0x010 */ u8 printBuffer[PRINT_BUFFER_SIZE];
     /* 0x450 */ s16 printBufferSize;
     /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
@@ -1258,8 +1264,10 @@ typedef struct MessagePrintState {
     /* 0x548 */ PAL_PTR letterBackgroundPal;
     /* 0x54C */ IMG_PTR letterContentImg;
     /* 0x550 */ PAL_PTR letterContentPal;
+#if !VERSION_JP
     /* 0x554 */ char unk_554[0x4];
-} MessagePrintState; // size = 0x558
+#endif
+} MessagePrintState; // size = 0x558, JP size = 0x514
 
 typedef struct MessageDrawState {
     /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped

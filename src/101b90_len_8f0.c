@@ -10,6 +10,8 @@
 #define SPRITE_ROM_START 0x1943000 + 0x10
 #elif VERSION_PAL
 #define SPRITE_ROM_START 0x1DF0000 + 0x10
+#elif VERSION_JP
+#define SPRITE_ROM_START 0x1A40000 + 0x10
 #endif
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;

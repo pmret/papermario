@@ -2,6 +2,11 @@
 #include "ld_addrs.h"
 #include "entity.h"
 
+#if VERSION_JP // TODO remove once segments are split
+extern Addr entity_model_Signpost_ROM_END;
+extern Addr entity_model_Signpost_ROM_START;
+#endif
+
 extern Gfx Entity_Signpost_Render[];
 
 void entity_Signpost_idle(Entity* entity) {
