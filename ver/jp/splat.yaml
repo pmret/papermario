@@ -26,7 +26,6 @@ options:
   undefined_syms_auto_path: ver/jp/undefined_syms_auto.txt
   symbol_name_format: JP_$VRAM
   symbol_name_format_no_rom: JP_$VRAM_$SEG
-  ld_legacy_generation: True
 asset_stack:
   - jp
 segments:
@@ -280,6 +279,8 @@ segments:
     - [auto, c, os/destroythread, gcc_272 -O3]
     - [auto, hasm, os/osMapTLBRdb]
     - [auto, c, os/vi, gcc_272 -O3]
+    - [auto, c, os/vimodepallan1, -O3]
+    - [auto, c, os/vimodempallan1, -O3]
     - [auto, c, os/vigetcurrcontext, gcc_272 -O3]
     - [auto, hasm, os/padding]
     - [auto, hasm, os/guNormalize]
@@ -305,32 +306,26 @@ segments:
       subsegments:
       - [0x4F1E0]
       - [0x4F1F0, i4, reset_tiles, 128, 8]
-    - [auto, .data, main]
-    - [auto, .data, main_loop]
-    - [auto, .data, background_gfx]
-    - [auto, .data, rumble]
-    - [auto, .data, 43F0]
-    - [auto, .data, fio]
     - start: 0x4F9C0
       type: .data
       name: curtains
       subsegments:
-        - [0x4F9C0, i4, theater/walls, 16, 32]
-        - [0x4FAC0]
-        - [0x4FB10, rgba32, theater/curtains, 32, 32]
-        - [0x50B10]
-        - [0x50B60, ci4, theater/floor, 32, 16]
-        - [0x50C60, palette, theater/floor]
-        - [0x50C80]
-        - [0x50D00, vtx, theater/left_wall_vtx]
-        - [0x50D60, vtx, theater/right_wall_vtx]
-        - [0x50DC0, vtx, theater/floor_vtx]
-        - [0x50F50, vtx, theater/left_inset_shadow_vtx]
-        - [0x50F90, vtx, theater/right_inset_shadow_vtx]
-        - [0x50FD0, vtx, theater/curtain_vtx]
-        - [0x511C0, vtx, theater/wall_shadows_vtx]
-        - [0x51240]
-        - [0x51520, ia8, ui/no_controller, 128, 32]
+      - [0x4F9C0, i4, theater/walls, 16, 32]
+      - [0x4FAC0]
+      - [0x4FB10, rgba32, theater/curtains, 32, 32]
+      - [0x50B10]
+      - [0x50B60, ci4, theater/floor, 32, 16]
+      - [0x50C60, palette, theater/floor]
+      - [0x50C80]
+      - [0x50D00, vtx, theater/left_wall_vtx]
+      - [0x50D60, vtx, theater/right_wall_vtx]
+      - [0x50DC0, vtx, theater/floor_vtx]
+      - [0x50F50, vtx, theater/left_inset_shadow_vtx]
+      - [0x50F90, vtx, theater/right_inset_shadow_vtx]
+      - [0x50FD0, vtx, theater/curtain_vtx]
+      - [0x511C0, vtx, theater/wall_shadows_vtx]
+      - [0x51240]
+      - [0x51520, ia8, ui/no_controller, 128, 32]
     - [auto, .data, crash_screen]
     - [auto, .data, os/nusys/nugfxtaskmgr]
     - [auto, .data, cam_math]
@@ -414,9 +409,6 @@ segments:
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
-    - [auto, .data, npc_collision]
-    - [auto, .data, world/actions]
-    - [auto, .data, world/partners]
     - start: 0x91B40
       type: .data
       name: global_hud_scripts
@@ -801,7 +793,6 @@ segments:
       - [0x9DBF0, rgba32,  ui/stat_flower, 16, 16]
       - [0x9DFF0]
     - [auto, .data, 891b0_len_fb0]
-    - [auto, .data, 8a160_len_700]
     - start: 0xA2AF0
       type: .data
       name: 8a160_len_700
@@ -812,7 +803,6 @@ segments:
       - [0xA2D50, gfx, A2BC0]
       - [0xA2E18, gfx, A2C88]
       - [0xA2E40]
-    - [auto, .data, 8a860_len_3f30]
     - start: 0xA2EE0
       type: .data
       name: draw_box
@@ -973,7 +963,6 @@ segments:
     subsegments:
     - [auto, c, msg_data]
     - [auto, c, msg_img]
-    - [auto, .data, msg_data]
     - start: 0x10D030
       type: .data
       name: msg_img
