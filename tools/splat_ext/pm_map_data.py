@@ -12,6 +12,9 @@ import yaml as yaml_loader
 import n64img.image
 from tex_archives import TexArchive
 
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "build")) # terrible
+from mapfs.shape import ShapeFile
+
 script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 
 
@@ -49,15 +52,13 @@ def parse_palette(data):
     return palette
 
 
-def add_file_ext(name: str, linker: bool = False) -> str:
+def add_file_ext(name: str) -> str:
     if name.startswith("party_"):
         return "party/" + name + ".png"
     elif name.endswith("_hit"):
         return "geom/" + name + ".bin"
     elif name.endswith("_shape"):
-        if linker:
-            name += "_built"
-        return "geom/" + name + ".bin"
+        return "geom/" + name + ".c"
     elif name.endswith("_tex"):
         return "tex/" + name + ".bin"
     elif name.endswith("_bg"):
@@ -213,6 +214,12 @@ class N64SegPm_map_data(N64Segment):
 
             elif name.endswith("_tex"):
                 TexArchive.extract(bytes, fs_dir / "tex" / name)
+            elif name.endswith("_shape"):
+                map_name = name[:-6]
+                shape = ShapeFile(map_name, bytes)
+                shape.digest()
+                with open(path, "w") as f:
+                    shape.write_to_c(f)
             else:
                 assert path is not None
                 with open(path, "wb") as f:
@@ -231,7 +238,7 @@ class N64SegPm_map_data(N64Segment):
 
         src_paths = []
         for name, file in self.files.items():
-            src_paths.append(fs_dir / add_file_ext(name, linker=True))
+            src_paths.append(fs_dir / add_file_ext(name))
             if file.get("dump_raw", False):
                 src_paths.append(fs_dir / f"{name}.raw.dat")
 

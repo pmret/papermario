@@ -486,7 +486,6 @@ class Configure:
         skip_outputs: Set[str],
         non_matching: bool,
         modern_gcc: bool,
-        c_maps: bool = False,
     ):
         assert self.linker_entries is not None
 
@@ -1039,21 +1038,21 @@ class Configure:
                             },
                             asset_deps=[f"mapfs/tex/{name}"],
                         )
-                    elif name.endswith("_shape_built"):
+                    elif name.endswith("_shape"):
                         base_name = name[:-6]
-                        raw_bin_path = self.resolve_asset_path(f"assets/x/mapfs/geom/{base_name}.bin")
-                        bin_path = bin_path.parent / "geom" / (base_name + ".bin")
 
-                        if c_maps:
-                            # raw bin -> c -> o -> elf -> objcopy -> final bin file
-                            c_file_path = (bin_path.parent / "geom" / base_name).with_suffix(".c")
-                            o_path = bin_path.parent / "geom" / (base_name + ".o")
-                            elf_path = bin_path.parent / "geom" / (base_name + ".elf")
-
-                            build(c_file_path, [raw_bin_path], "shape")
+                        # Backwards-compatibility: if there is a .bin file, use that
+                        path_deprecated = self.resolve_asset_path(path.with_suffix(".bin"))
+                        if path_deprecated.is_file():
+                            print(f"warning: {name} has a .bin file, which is deprecated. use a .c file instead.")
+                            print(bin_path, path_deprecated)
+                            build(bin_path, [path_deprecated], "cp")
+                        else:
+                            o_path = bin_path.with_suffix(".o")
+                            elf_path = bin_path.with_suffix(".elf")
                             build(
                                 o_path,
-                                [c_file_path],
+                                [path],
                                 "cc" if not modern_gcc else "cc_modern",
                                 variables={
                                     "cflags": "",
@@ -1063,8 +1062,6 @@ class Configure:
                             )
                             build(elf_path, [o_path], "shape_ld")
                             build(bin_path, [elf_path], "shape_objcopy")
-                        else:
-                            build(bin_path, [raw_bin_path], "cp")
 
                         compress = True
                         out_dir = out_dir / "geom"
@@ -1399,7 +1396,7 @@ if __name__ == "__main__":
         sys.path.append(str((ROOT / "tools/splat_ext").resolve()))
 
         configure.split(not args.no_split_assets, args.split_code, args.shift, args.debug)
-        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc, args.c_maps)
+        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
