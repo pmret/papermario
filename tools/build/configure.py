@@ -625,7 +625,8 @@ class Configure:
             if isinstance(seg, splat.segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, splat.segtypes.common.asm.CommonSegAsm) or (
-                isinstance(seg, splat.segtypes.common.data.CommonSegData) and not seg.type[0] == "."
+                isinstance(seg, splat.segtypes.common.data.CommonSegData)
+                and not seg.type[0] == "."
                 or isinstance(seg, splat.segtypes.common.textbin.CommonSegTextbin)
             ):
                 build(entry.object_path, entry.src_paths, "as")
@@ -784,9 +785,7 @@ class Configure:
                                 type="data",
                                 define=True,
                             )
-            elif (
-                isinstance(seg, splat.segtypes.common.bin.CommonSegBin)
-            ):
+            elif isinstance(seg, splat.segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, splat.segtypes.n64.yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("")  # remove .o
