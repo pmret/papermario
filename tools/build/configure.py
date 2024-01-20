@@ -626,6 +626,7 @@ class Configure:
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, splat.segtypes.common.asm.CommonSegAsm) or (
                 isinstance(seg, splat.segtypes.common.data.CommonSegData) and not seg.type[0] == "."
+                or isinstance(seg, splat.segtypes.common.textbin.CommonSegTextbin)
             ):
                 build(entry.object_path, entry.src_paths, "as")
             elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
@@ -785,8 +786,6 @@ class Configure:
                             )
             elif (
                 isinstance(seg, splat.segtypes.common.bin.CommonSegBin)
-                or isinstance(seg, splat.segtypes.common.textbin.CommonSegTextbin)
-                or isinstance(seg, splat.segtypes.common.rodatabin.CommonSegRodatabin)
             ):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, splat.segtypes.n64.yay0.N64SegYay0):
