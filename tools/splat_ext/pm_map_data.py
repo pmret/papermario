@@ -12,7 +12,7 @@ import yaml as yaml_loader
 import n64img.image
 from tex_archives import TexArchive
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "build")) # terrible
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "build"))  # terrible
 from mapfs.shape import ShapeFile
 
 script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
