@@ -1280,7 +1280,8 @@ API_CALLABLE(ShowSleepBubble);
 API_CALLABLE(SetSleepBubbleTimeLeft);
 
 /// @evtapi
-API_CALLABLE(PlayEffect);
+/// @see PlayEffect
+API_CALLABLE(PlayEffect_impl);
 
 /// @}
 

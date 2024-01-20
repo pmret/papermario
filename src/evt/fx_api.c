@@ -307,7 +307,7 @@ API_CALLABLE(SetSleepBubbleTimeLeft) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(PlayEffect) {
+API_CALLABLE(PlayEffect_impl) {
     Bytecode* intArgs = script->ptrReadPos;
     Bytecode* floatArgs = script->ptrReadPos;
     Bytecode* args = script->ptrReadPos;

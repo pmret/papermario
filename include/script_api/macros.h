@@ -792,32 +792,32 @@
 
 #define PlayEffect(args...) VFUNC(PlayEffect, args)
 #define PlayEffect1(effect) \
-    Call(PlayEffect, effect, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect2(effect, subtype) \
-    Call(PlayEffect, effect, subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect3(effect, subtype, a) \
-    Call(PlayEffect, effect, subtype, a, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect4(effect, subtype, a, b) \
-    Call(PlayEffect, effect, subtype, a, b, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect5(effect, subtype, a, b, c) \
-    Call(PlayEffect, effect, subtype, a, b, c, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect6(effect, subtype, a, b, c, d) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, 0, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, 0, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect7(effect, subtype, a, b, c, d, e) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, 0, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, 0, 0, 0, 0, 0, 0, 0)
 #define PlayEffect8(effect, subtype, a, b, c, d, e, f) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, 0, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, 0, 0, 0, 0, 0, 0)
 #define PlayEffect9(effect, subtype, a, b, c, d, e, f, g) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, g, 0, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, g, 0, 0, 0, 0, 0)
 #define PlayEffect10(effect, subtype, a, b, c, d, e, f, g, h) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, 0, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, g, h, 0, 0, 0, 0)
 #define PlayEffect11(effect, subtype, a, b, c, d, e, f, g, h, i) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, 0, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, g, h, i, 0, 0, 0)
 #define PlayEffect12(effect, subtype, a, b, c, d, e, f, g, h, i, j) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, j, 0, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, g, h, i, j, 0, 0)
 #define PlayEffect13(effect, subtype, a, b, c, d, e, f, g, h, i, j, k) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, j, k, 0)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, g, h, i, j, k, 0)
 #define PlayEffect14(effect, subtype, a, b, c, d, e, f, g, h, i, j, k, l) \
-    Call(PlayEffect, effect, subtype, a, b, c, d, e, f, g, h, i, j, k, l)
+    Call(PlayEffect_impl, effect, subtype, a, b, c, d, e, f, g, h, i, j, k, l)
 
 #endif
