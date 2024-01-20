@@ -82,7 +82,7 @@ for root, dirs, files in os.walk(src_dir):
     for f_name in files:
         c_files.append(os.path.join(root, f_name))
 for f_path in tqdm(c_files):
-    if f_name.endswith(".c") or f_name.endswith(".h"):
+    if f_path.endswith(".c") or f_path.endswith(".h") or f_path.endswith(".yaml"):
         handle_file(f_path, True)
 
 # Walk through include files and rename stuff
@@ -111,6 +111,3 @@ handle_file(os.path.join(root_dir, "ver", "current", "symbol_addrs.txt"))
 
 # splat.yaml
 handle_file(os.path.join(root_dir, "ver", "current", "splat.yaml"))
-
-# effects.yaml
-handle_file(os.path.join(root_dir, "ver", "current", "effects.yaml"))
