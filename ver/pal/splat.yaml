@@ -50,13 +50,11 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, hasm, bss2_2]
+    - [auto, c, global_hud_scripts]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
-    - [auto, .data, npc_collision]
-    - [auto, .data, world/actions]
-    - [auto, .data, world/partners]
     - start: 0x8DA40
       type: .data
       name: global_hud_scripts
@@ -511,8 +509,6 @@ segments:
       - [0x9B5A8, rgba32,  ui/stat_heart, 16, 16]
       - [0x9B9B0, rgba32,  ui/stat_flower, 16, 16]
       - [0x9BDB0]
-    - [auto, .data, 891b0_len_fb0]
-    - [auto, .data, 8a160_len_700]
     - start: 0xA1160
       type: .data
       name: 8a160_len_700
@@ -523,7 +519,6 @@ segments:
       - [0xA13C0, gfx, A2BC0]
       - [0xA1488, gfx, A2C88]
       - [0xA14B0]
-    - [auto, .data, 8a860_len_3f30]
     - start: 0xA1590
       type: .data
       name: draw_box
@@ -572,15 +567,6 @@ segments:
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
     - [auto, c, audio/e0b30_len_b80]
-    - [auto, .data, entity]
-    - [auto, .data, game_states]
-    - [auto, .data, model]
-    - [auto, .data, animator]
-    - [auto, .data, entity_model]
-    - [auto, .data, msg]
-    - [auto, .data, msg_draw]
-    - [auto, .data, draw_img_util]
-    - [auto, .data, item_entity]
     - start: 0xE1610
       type: .data
       name: screen_overlays
@@ -594,14 +580,6 @@ segments:
       - [0xE34C0]
       - [0xE3690, vtx, vtx/stencil2]
       - [0xE3810]
-    - [auto, .data, screen_render_util]
-    - [auto, .data, imgfx]
-    - [auto, .data, hud_element]
-    - [auto, .data, background]
-    - [auto, .data, audio/ambience]
-    - [auto, .data, windows]
-    - [auto, .data, audio/sfx]
-    - [auto, .data, audio/e0b30_len_b80]
     - [0xE61D0]
   - name: evt
     type: code
@@ -636,46 +614,32 @@ segments:
     start: 0x1040F0
     vram: 0x802E7070
     subsegments:
-      - [auto, c, entity/Shadow]
-      - [auto, c, entity/SaveBlock]
-      - [auto, c, entity/Switch]
-      - [auto, c, entity/ShatteringBlock_common]
-      - [auto, c, entity/ShatteringBlock]
-      - [auto, c, entity/Block]
-      - [auto, c, entity/ItemBlock]
-      - [auto, c, entity/HeartBlock]
-      - [auto, c, entity/SuperBlock]
-      - [auto, c, entity/SimpleSpring]
-      - [auto, c, entity/HiddenPanel]
-      - [auto, c, entity/Chest]
-      - [auto, c, entity/WoodenCrate]
-      - [auto, c, entity/BlueWarpPipe]
-      - [auto, c, entity/Signpost]
-      - start: 0x10A9F0
-        type: .data
-        name: entity/Shadow
-        subsegments:
-          - [0x10C4F0, i4, entity/shadow/square, 16, 16]
-          - [0x10C570, i4, entity/shadow/circle, 16, 16]
-          - [0x10C5F0, vtx, entity/vtx/shadow1]
-          - [0x10C630, vtx, entity/vtx/shadow2]
-          - [0x10C670, i4, entity/shadow/square_big, 32, 32]
-          - [0x10C870, i4, entity/shadow/circle_big, 32, 32]
-          - [0x10CA70]
-      - [auto, .data, entity/SaveBlock]
-      - [auto, .data, entity/Switch]
-      - [auto, .data, entity/ShatteringBlock_common]
-      - [auto, .data, entity/ShatteringBlock]
-      - [auto, .data, entity/Block]
-      - [auto, .data, entity/ItemBlock]
-      - [auto, .data, entity/HeartBlock]
-      - [auto, .data, entity/SuperBlock]
-      - [auto, .data, entity/SimpleSpring]
-      - [auto, .data, entity/HiddenPanel]
-      - [auto, .data, entity/Chest]
-      - [auto, .data, entity/WoodenCrate]
-      - [auto, .data, entity/BlueWarpPipe]
-      - [auto, .data, entity/Signpost]
+    - [auto, c, entity/Shadow]
+    - [auto, c, entity/SaveBlock]
+    - [auto, c, entity/Switch]
+    - [auto, c, entity/ShatteringBlock_common]
+    - [auto, c, entity/ShatteringBlock]
+    - [auto, c, entity/Block]
+    - [auto, c, entity/ItemBlock]
+    - [auto, c, entity/HeartBlock]
+    - [auto, c, entity/SuperBlock]
+    - [auto, c, entity/SimpleSpring]
+    - [auto, c, entity/HiddenPanel]
+    - [auto, c, entity/Chest]
+    - [auto, c, entity/WoodenCrate]
+    - [auto, c, entity/BlueWarpPipe]
+    - [auto, c, entity/Signpost]
+    - start: 0x10A9F0
+      type: .data
+      name: entity/Shadow
+      subsegments:
+      - [0x10C4F0, i4, entity/shadow/square, 16, 16]
+      - [0x10C570, i4, entity/shadow/circle, 16, 16]
+      - [0x10C5F0, vtx, entity/vtx/shadow1]
+      - [0x10C630, vtx, entity/vtx/shadow2]
+      - [0x10C670, i4, entity/shadow/square_big, 32, 32]
+      - [0x10C870, i4, entity/shadow/circle_big, 32, 32]
+      - [0x10CA70]
 
   - [0x10E710, bin]
 

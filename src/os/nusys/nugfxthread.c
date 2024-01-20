@@ -3,6 +3,9 @@
 
 void gfxThread(void*);
 
+NUGfxFunc nuGfxFunc = NULL;
+NUGfxPreNMIFunc nuGfxPreNMIFunc = NULL;
+
 extern char GfxStack[NU_GFX_STACK_SIZE];
 extern OSThread D_800B1B90;
 extern OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
