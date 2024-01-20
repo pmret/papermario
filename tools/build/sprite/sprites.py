@@ -17,6 +17,7 @@ from splat_ext.pm_sprites import (
     MAX_COMPONENTS_XML,
     NPC_SPRITE_MEDADATA_XML_FILENAME,
     PALETTE_GROUPS_XML,
+    HAS_BACK_XML,
     PALETTE_XML,
     PLAYER_SPRITE_MEDADATA_XML_FILENAME,
     SPECIAL_RASTER,
@@ -141,13 +142,12 @@ def player_raster_from_xml(xml: ET.Element, back: bool = False) -> PlayerRaster:
 
 
 def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[bytes]:
-    has_back = False
-
     out_bytes = b""
     back_out_bytes = b""
 
     max_components = int(xml.attrib[MAX_COMPONENTS_XML])
     num_variations = int(xml.attrib[PALETTE_GROUPS_XML])
+    has_back = xml.attrib[HAS_BACK_XML] == "true"
 
     # Animations
     animations: List[List[AnimComponent]] = []

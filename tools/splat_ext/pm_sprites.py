@@ -95,6 +95,7 @@ NPC_SPRITE_MEDADATA_XML_FILENAME = "npc.xml"
 
 MAX_COMPONENTS_XML = "maxComponents"
 PALETTE_GROUPS_XML = "paletteGroups"
+HAS_BACK_XML = "hasBack"
 PALETTE_XML = "palette"
 BACK_PALETTE_XML = "backPalette"
 
@@ -397,6 +398,7 @@ def write_player_xmls(
             {
                 MAX_COMPONENTS_XML: str(cur_sprite.max_components),
                 PALETTE_GROUPS_XML: str(cur_sprite.num_variations),
+                HAS_BACK_XML: str(has_back).lower(),
             },
         )
 
