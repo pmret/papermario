@@ -11,13 +11,13 @@ MobileAISettings N(AISettings_StarSpirit_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_StarSpirit_Wander) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 5, 0)
-    EVT_CALL(SetSelfVar, 6, 0)
-    EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(AISettings_StarSpirit_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 5, 0)
+    Call(SetSelfVar, 6, 0)
+    Call(SetSelfVar, 1, 200)
+    Call(N(FlyingAI_Main), Ref(N(AISettings_StarSpirit_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_StarSpirit_Wander) = {

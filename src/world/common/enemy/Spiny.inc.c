@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_Spiny) = {
 };
 
 EvtScript N(EVS_NpcAI_Spiny) = {
-    EVT_CALL(SetSelfVar, 2, 3)
-    EVT_CALL(SetSelfVar, 3, 18)
-    EVT_CALL(SetSelfVar, 5, 3)
-    EVT_CALL(SetSelfVar, 7, 4)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_Spiny)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 3)
+    Call(SetSelfVar, 3, 18)
+    Call(SetSelfVar, 5, 3)
+    Call(SetSelfVar, 7, 4)
+    Call(N(TackleAI_Main), Ref(N(AISettings_Spiny)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Spiny) = {

@@ -149,46 +149,46 @@ EntityModelScript N(EMS_EggMissile) = {
 EntityModelScript unusedModelScript = STANDARD_ENTITY_MODEL_SCRIPT(N(Frame4Gfx), RENDER_MODE_ALPHATEST);
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_EGG_MISSILE)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(MoveBattleCamOver, 15)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
-    EVT_CALL(PlaySound, SOUND_THROW)
-    EVT_WAIT(3)
-    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(EMS_EggMissile)))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 20)
-    EVT_ADD(LVar1, 42)
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(18)
-            EVT_ADD(LVar0, 60)
-            EVT_CALL(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(1.0))
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 18)
-    EVT_CALL(DeleteVirtualEntity, LVarA)
-    EVT_CALL(PlaySound, SOUND_EGG_MISSILE_BLAST)
-    EVT_CALL(N(func_802A123C_71CF1C), LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_CALL(StartRumble, BTL_RUMBLE_HIT_EXTREME)
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.75))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.5))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(1.2))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.45))
-    EVT_END_THREAD
-    EVT_CALL(GetItemPower, ITEM_EGG_MISSILE, LVar0, LVar1)
-    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_FIRE | DAMAGE_TYPE_BLAST | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_EGG_MISSILE)
+    ExecWait(N(UseItemWithEffect))
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(MoveBattleCamOver, 15)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
+    Call(PlaySound, SOUND_THROW)
+    Wait(3)
+    Call(CreateVirtualEntity, LVarA, Ref(N(EMS_EggMissile)))
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar0, 20)
+    Add(LVar1, 42)
+    Add(LVar2, 5)
+    Call(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
+    Call(InitTargetIterator)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Loop(18)
+            Add(LVar0, 60)
+            Call(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(SetVirtualEntityJumpGravity, LVarA, Float(1.0))
+    Add(LVar2, 5)
+    Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 18)
+    Call(DeleteVirtualEntity, LVarA)
+    Call(PlaySound, SOUND_EGG_MISSILE_BLAST)
+    Call(N(func_802A123C_71CF1C), LVar0, LVar1, LVar2)
+    Thread
+        Call(StartRumble, BTL_RUMBLE_HIT_EXTREME)
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.75))
+        Call(ShakeCam, CAM_BATTLE, 0, 5, Float(1.5))
+        Call(ShakeCam, CAM_BATTLE, 0, 4, Float(1.2))
+        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(0.45))
+    EndThread
+    Call(GetItemPower, ITEM_EGG_MISSILE, LVar0, LVar1)
+    Call(ItemDamageEnemy, LVar0, DAMAGE_TYPE_FIRE | DAMAGE_TYPE_BLAST | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+    ExecWait(N(PlayerGoHome))
+    Return
+    End
 };

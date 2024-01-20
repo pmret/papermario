@@ -8,210 +8,210 @@ MAP_STATIC_PAD(1,choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 EvtScript N(EVS_EnsurePartnerNeutral) = {
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
-            EVT_LOOP(0)
-                EVT_CALL(GetPartnerInUse, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar0, PARTNER_NONE)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_ELSE
-            EVT_CALL(InterruptUsePartner)
-            EVT_WAIT(20)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        IfEq(LVar0, PARTNER_BOMBETTE)
+            Loop(0)
+                Call(GetPartnerInUse, LVar0)
+                Wait(1)
+                IfEq(LVar0, PARTNER_NONE)
+                    BreakLoop
+                EndIf
+            EndLoop
+        Else
+            Call(InterruptUsePartner)
+            Wait(20)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Door) = {
-    EVT_IF_EQ(GB_KPA81_BowserDoorState, 2)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GB_KPA81_BowserDoorState, 1)
-        EVT_SET(GB_KPA81_BowserDoorState, 2)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_WAIT(35)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 6, FALSE)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 109, 0, 202)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-10.0))
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(500.0))
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(133.0), EVT_FLOAT(100.0))
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(216.0), EVT_FLOAT(230.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_THREAD
-            EVT_CALL(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, 8)
-            EVT_WAIT(150 * DT)
-            EVT_CALL(FadeOutMusic, 0, 250)
-            EVT_WAIT(15 * DT)
-            EVT_EXEC(N(EVS_SetupMusic))
-        EVT_END_THREAD
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0008)
-        EVT_EXEC(N(EVS_SetupMusic))
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(PlayerMoveTo, -115, LVar2, 0)
-    EVT_CALL(SetCamType, CAM_DEFAULT, 6, FALSE)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 109, 0, 202)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(500.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(133.0), EVT_FLOAT(100.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(216.0), EVT_FLOAT(230.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, 8)
-        EVT_WAIT(150 * DT)
-        EVT_CALL(FadeOutMusic, 0, 250)
-        EVT_WAIT(15 * DT)
-        EVT_EXEC(N(EVS_SetupMusic))
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0000)
-    EVT_CALL(ShowChoice, MSG_Choice_0013)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0003)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_LABEL(100)
-        EVT_WAIT(1)
-        EVT_CALL(IsPlayerWithin, 120, 150, 30, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(3)
-        EVT_END_IF
-        EVT_ADD(LVar1, 1)
-        EVT_IF_LE(LVar1, 300 * DT)
-            EVT_GOTO(100)
-        EVT_END_IF
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_EXEC_WAIT(N(EVS_EnsurePartnerNeutral))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0004)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(AwaitPlayerApproach, 120, 150, 30)
-        EVT_GOTO(2)
-    EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0002)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(AwaitPlayerApproach, 120, 150, 30)
-    EVT_END_IF
-    EVT_LABEL(2)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(EVS_EnsurePartnerNeutral))
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0001)
-    EVT_CALL(ShowChoice, MSG_Choice_0013)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(4)
-    EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0002)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_CALL(AwaitPlayerLeave, 120, 150, 30)
-        EVT_CALL(AwaitPlayerApproach, 120, 150, 30)
-        EVT_GOTO(2)
-    EVT_END_IF
-    EVT_LABEL(3)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(EVS_EnsurePartnerNeutral))
-    EVT_THREAD
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
-        EVT_CALL(EnablePartnerAI)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0005)
-    EVT_GOTO(5)
-    EVT_LABEL(4)
-    EVT_EXEC_WAIT(N(EVS_EnsurePartnerNeutral))
-    EVT_THREAD
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
-        EVT_CALL(EnablePartnerAI)
-    EVT_END_THREAD
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0006)
-    EVT_LABEL(5)
-    EVT_CALL(SetCamType, CAM_DEFAULT, 6, FALSE)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 163, -71, 108)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(20.0), EVT_FLOAT(-16.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(500.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(133.0), EVT_FLOAT(100.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(216.0), EVT_FLOAT(230.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(EnableModel, MODEL_o166, TRUE)
-    EVT_THREAD
-        EVT_WAIT(25)
-        EVT_CALL(EnableModel, MODEL_o165, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_OPEN_TRAPDOOR, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(RotateModel, MODEL_o165, LVar0, 0, 0, -1)
-    EVT_CALL(RotateModel, MODEL_o167, LVar0, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_LOOP(65)
-            EVT_SUB(LVar1, 16)
-            EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        EVT_LOOP(65)
-            EVT_SUB(LVar1, 16)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(65)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_SET(GB_KPA81_BowserDoorState, 1)
-    EVT_CALL(GotoMap, EVT_PTR(N(KPA_17)), kpa_17_ENTRY_0)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_KPA81_BowserDoorState, 2)
+        Return
+    EndIf
+    IfEq(GB_KPA81_BowserDoorState, 1)
+        Set(GB_KPA81_BowserDoorState, 2)
+        Call(DisablePlayerInput, TRUE)
+        Wait(35)
+        Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetPanTarget, CAM_DEFAULT, 109, 0, 202)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+        Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-10.0))
+        Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
+        Call(SetCamPosA, CAM_DEFAULT, Float(133.0), Float(100.0))
+        Call(SetCamPosB, CAM_DEFAULT, Float(216.0), Float(230.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Thread
+            Call(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, 8)
+            Wait(150 * DT)
+            Call(FadeOutMusic, 0, 250)
+            Wait(15 * DT)
+            Exec(N(EVS_SetupMusic))
+        EndThread
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0008)
+        Exec(N(EVS_SetupMusic))
+        Call(ResetCam, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Wait(10)
+    Call(DisablePlayerInput, TRUE)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPlayerSpeed, Float(2.0 / DT))
+    Call(PlayerMoveTo, -115, LVar2, 0)
+    Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, 109, 0, 202)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-10.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(133.0), Float(100.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(216.0), Float(230.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, 8)
+        Wait(150 * DT)
+        Call(FadeOutMusic, 0, 250)
+        Wait(15 * DT)
+        Exec(N(EVS_SetupMusic))
+    EndThread
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0000)
+    Call(ShowChoice, MSG_Choice_0013)
+    IfEq(LVar0, 0)
+        Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0003)
+        Call(ResetCam, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+        Label(100)
+        Wait(1)
+        Call(IsPlayerWithin, 120, 150, 30, LVar0)
+        IfEq(LVar0, 1)
+            Goto(3)
+        EndIf
+        Add(LVar1, 1)
+        IfLe(LVar1, 300 * DT)
+            Goto(100)
+        EndIf
+        Call(DisablePlayerInput, TRUE)
+        ExecWait(N(EVS_EnsurePartnerNeutral))
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0004)
+        Call(DisablePlayerInput, FALSE)
+        Call(AwaitPlayerApproach, 120, 150, 30)
+        Goto(2)
+    Else
+        Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0002)
+        Call(ResetCam, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+        Call(AwaitPlayerApproach, 120, 150, 30)
+    EndIf
+    Label(2)
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(EVS_EnsurePartnerNeutral))
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0001)
+    Call(ShowChoice, MSG_Choice_0013)
+    IfEq(LVar0, 0)
+        Goto(4)
+    Else
+        Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0002)
+        Call(DisablePlayerInput, FALSE)
+        Call(AwaitPlayerLeave, 120, 150, 30)
+        Call(AwaitPlayerApproach, 120, 150, 30)
+        Goto(2)
+    EndIf
+    Label(3)
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(EVS_EnsurePartnerNeutral))
+    Thread
+        Call(DisablePartnerAI, 0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
+        Call(EnablePartnerAI)
+    EndThread
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0005)
+    Goto(5)
+    Label(4)
+    ExecWait(N(EVS_EnsurePartnerNeutral))
+    Thread
+        Call(DisablePartnerAI, 0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(NpcMoveTo, NPC_PARTNER, LVar0, LVar2, 10)
+        Call(EnablePartnerAI)
+    EndThread
+    Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0006)
+    Label(5)
+    Call(SetCamType, CAM_DEFAULT, 6, FALSE)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, 163, -71, 108)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-16.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(500.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(133.0), Float(100.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(216.0), Float(230.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(EnableModel, MODEL_o166, TRUE)
+    Thread
+        Wait(25)
+        Call(EnableModel, MODEL_o165, FALSE)
+    EndThread
+    Call(PlaySoundAtCollider, COLLIDER_deilitts, SOUND_OPEN_TRAPDOOR, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 90, 30, EASING_COS_SLOW_OVERSHOOT)
+    Label(10)
+    Call(UpdateLerp)
+    Call(RotateModel, MODEL_o165, LVar0, 0, 0, -1)
+    Call(RotateModel, MODEL_o167, LVar0, 0, 0, 1)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(10)
+    EndIf
+    Call(SetPlayerAnimation, ANIM_MarioW2_Flail)
+    Wait(30 * DT)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
+    Wait(10 * DT)
+    Call(PlaySoundAtPlayer, SOUND_PLAYER_LONG_FALL, SOUND_SPACE_DEFAULT)
+    Thread
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Loop(65)
+            Sub(LVar1, 16)
+            Call(SetPlayerPos, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        Loop(65)
+            Sub(LVar1, 16)
+            Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Wait(65)
+    Call(DisablePlayerInput, FALSE)
+    Set(GB_KPA81_BowserDoorState, 1)
+    Call(GotoMap, Ref(N(KPA_17)), kpa_17_ENTRY_0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Door) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Door)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_10000000, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, 184, 20, 150)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Door)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_10000000, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcPos, NPC_SELF, 184, 20, 150)
+    Return
+    End
 };
 
 NpcData N(NpcData_Door) = {

@@ -110,216 +110,216 @@ API_CALLABLE(N(IsHitEightTimes)) {
 }
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, FALSE)
-    EVT_CALL(N(IsHitEightTimes))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, FALSE)
+    Call(N(IsHitEightTimes))
+    IfEq(LVar0, 0)
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+        Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_CASE_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
-            EVT_EXEC_WAIT(N(EVS_MakeWhackaBump))
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_CALL(RandInt, 100, LVar0)
-            EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(N(EVS_MakeWhackaBump))
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_CALL(RandInt, 100, LVar0)
-            EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(N(EVS_MakeWhackaBump))
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_IF_GE(100, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_ELSE
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-                EVT_EXEC_WAIT(EVS_Enemy_Death)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_CALL(RandInt, 100, LVar0)
-            EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_IF_GE(100, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_ELSE
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-                EVT_EXEC_WAIT(EVS_Enemy_Death)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Death)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_CALL(RandInt, 100, LVar0)
-            EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_CALL(RandInt, 100, LVar0)
-            EVT_IF_LE(LVar0, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
-            EVT_EXEC_WAIT(N(EVS_MakeWhackaBump))
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(10)
-            EVT_IF_GE(100, 100)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_ELSE
-                EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-                EVT_EXEC_WAIT(EVS_Enemy_Death)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
-        EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_HIT_COMBO)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_Hit)
+        CaseEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Hurt)
+            ExecWait(N(EVS_MakeWhackaBump))
+            ExecWait(EVS_Enemy_Hit)
+            Call(RandInt, 100, LVar0)
+            IfLe(LVar0, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            EndIf
+        CaseEq(EVENT_BURN_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            SetConst(LVar2, ANIM_Whacka_Idle)
+            ExecWait(N(EVS_MakeWhackaBump))
+            ExecWait(EVS_Enemy_Hit)
+            Call(RandInt, 100, LVar0)
+            IfLe(LVar0, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            EndIf
+        CaseEq(EVENT_BURN_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            SetConst(LVar2, ANIM_Whacka_Idle)
+            ExecWait(N(EVS_MakeWhackaBump))
+            ExecWait(EVS_Enemy_Hit)
+            IfGe(100, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            Else
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_Whacka_Idle)
+                ExecWait(EVS_Enemy_Death)
+                Return
+            EndIf
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+            Call(RandInt, 100, LVar0)
+            IfLe(LVar0, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            EndIf
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+            IfGe(100, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            Else
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_Whacka_Idle)
+                ExecWait(EVS_Enemy_Death)
+                Return
+            EndIf
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_Knockback)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_ReturnHome)
+        CaseEq(EVENT_SHOCK_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_Death)
+            Return
+        CaseEq(EVENT_ZERO_DAMAGE)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseEq(EVENT_IMMUNE)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+            Call(RandInt, 100, LVar0)
+            IfLe(LVar0, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            EndIf
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_NoDamageHit)
+            Call(RandInt, 100, LVar0)
+            IfLe(LVar0, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            EndIf
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Hurt)
+            ExecWait(N(EVS_MakeWhackaBump))
+            ExecWait(EVS_Enemy_Hit)
+            Wait(10)
+            IfGe(100, 100)
+                ExecWait(N(EVS_Death))
+                Return
+            Else
+                SetConst(LVar0, PRT_MAIN)
+                SetConst(LVar1, ANIM_Whacka_Idle)
+                ExecWait(EVS_Enemy_Death)
+                Return
+            EndIf
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_SCARE_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            SetConst(LVar2, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_ScareAway)
+            Return
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_AirLift)
+        CaseEq(EVENT_BLOW_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Whacka_Idle)
+            ExecWait(EVS_Enemy_BlowAway)
+            Return
+        CaseDefault
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(RandInt, 100, LVar0)
-    EVT_IF_LE(LVar0, 100)
-        EVT_EXEC_WAIT(N(EVS_Death))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(RandInt, 100, LVar0)
+    IfLe(LVar0, 100)
+        ExecWait(N(EVS_Death))
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeWhackaBump) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Idle)
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 5)
-        EVT_ADD(LVar1, 20)
-        EVT_ADD(LVar2, 10)
-        EVT_CALL(MakeItemEntity, ITEM_WHACKAS_BUMP, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, AVAR_SpawnedBump, TRUE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_WHACKA)
+    Thread
+        Wait(15)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Idle)
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Add(LVar0, 5)
+        Add(LVar1, 20)
+        Add(LVar2, 10)
+        Call(MakeItemEntity, ITEM_WHACKAS_BUMP, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_Death) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Burrow)
-    EVT_WAIT(40)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_SpawnedBump, LVar0)
-    EVT_IF_NE(LVar0, FALSE)
-        EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, TRUE)
-    EVT_END_IF
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-    EVT_CALL(RemoveActor, ACTOR_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Burrow)
+    Wait(40)
+    Call(GetActorVar, ACTOR_SELF, AVAR_SpawnedBump, LVar0)
+    IfNe(LVar0, FALSE)
+        Call(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, TRUE)
+    EndIf
+    Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_INVISIBLE | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    Call(RemoveActor, ACTOR_SELF)
+    Return
+    End
 };

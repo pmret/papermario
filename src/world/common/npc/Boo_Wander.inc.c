@@ -9,9 +9,9 @@ MobileAISettings N(AISettings_BooWander) = {
 };
 
 EvtScript N(EVS_NpcAI_Boo_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_BooWander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_BooWander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Boo_Wander) = {

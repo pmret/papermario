@@ -201,9 +201,9 @@ API_CALLABLE(LoadMysteryItemScript) {
 }
 
 EvtScript EVS_UseMystery = {
-    EVT_WAIT(2)
-    EVT_CALL(LoadMysteryItemScript)
-    EVT_EXEC_WAIT(LVar0)
-    EVT_RETURN
-    EVT_END
+    Wait(2)
+    Call(LoadMysteryItemScript)
+    ExecWait(LVar0)
+    Return
+    End
 };

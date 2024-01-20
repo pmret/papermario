@@ -305,279 +305,279 @@ API_CALLABLE(N(EndBlockPushingState)) {
 }
 
 EvtScript N(EVS_Scene_PuzzleSolved) = {
-    EVT_LOOP(0)
-        EVT_IF_EQ(MV_PuzzleSolved, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LOOP(0)
-        EVT_IF_EQ(MV_PushingStatue, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-    EVT_WAIT(40)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 325, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 325, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(12.0), EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(323.3), EVT_FLOAT(-66.5))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(500.0), EVT_FLOAT(296.8))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_WAIT(45)
-        EVT_CALL(SetGroupVisibility, MODEL_g255, MODEL_GROUP_VISIBLE)
-        EVT_CALL(SetGroupVisibility, MODEL_g262, MODEL_GROUP_VISIBLE)
-        EVT_CALL(SetGroupVisibility, MODEL_g264, MODEL_GROUP_VISIBLE)
-        EVT_CALL(SetGroupVisibility, MODEL_g265, MODEL_GROUP_VISIBLE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1071, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(50)
-        EVT_CALL(PlaySoundAtModel, MODEL_k1, SOUND_PRA_UNFOLD_EXIT, 0)
-        EVT_WAIT(25)
-        EVT_CALL(PlaySoundAtModel, MODEL_k2, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(50)
-        EVT_CALL(EnableModel, MODEL_n1, FALSE)
-        EVT_CALL(EnableModel, MODEL_k1, TRUE)
-        EVT_WAIT(10)
-        EVT_CALL(EnableModel, MODEL_n2, FALSE)
-        EVT_CALL(EnableModel, MODEL_k2, TRUE)
-        EVT_WAIT(30)
-        EVT_CALL(EnableModel, MODEL_n3, FALSE)
-        EVT_CALL(EnableModel, MODEL_k3, TRUE)
-        EVT_WAIT(22)
-        EVT_CALL(EnableModel, MODEL_n4, FALSE)
-        EVT_CALL(EnableModel, MODEL_k4, TRUE)
-        EVT_WAIT(18)
-        EVT_CALL(EnableModel, MODEL_n5, FALSE)
-        EVT_CALL(EnableModel, MODEL_k5, TRUE)
-    EVT_END_THREAD
-    EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_0, EVT_PTR(N(AS_Stairs_Unfold)))
-    EVT_WAIT(200)
-    EVT_SET(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        IfEq(MV_PuzzleSolved, TRUE)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Loop(0)
+        IfEq(MV_PushingStatue, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
+    Wait(40)
+    Call(UseSettingsFrom, CAM_DEFAULT, 325, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 325, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(12.0), Float(-10.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(323.3), Float(-66.5))
+    Call(SetCamPosB, CAM_DEFAULT, Float(500.0), Float(296.8))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Wait(45)
+        Call(SetGroupVisibility, MODEL_g255, MODEL_GROUP_VISIBLE)
+        Call(SetGroupVisibility, MODEL_g262, MODEL_GROUP_VISIBLE)
+        Call(SetGroupVisibility, MODEL_g264, MODEL_GROUP_VISIBLE)
+        Call(SetGroupVisibility, MODEL_g265, MODEL_GROUP_VISIBLE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1071, COLLIDER_FLAGS_UPPER_MASK)
+    EndThread
+    Thread
+        Wait(50)
+        Call(PlaySoundAtModel, MODEL_k1, SOUND_PRA_UNFOLD_EXIT, 0)
+        Wait(25)
+        Call(PlaySoundAtModel, MODEL_k2, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+        Wait(5)
+        Call(PlaySoundAtModel, MODEL_k3, SOUND_PRA_UNFOLD_STEP, 0)
+    EndThread
+    Thread
+        Wait(50)
+        Call(EnableModel, MODEL_n1, FALSE)
+        Call(EnableModel, MODEL_k1, TRUE)
+        Wait(10)
+        Call(EnableModel, MODEL_n2, FALSE)
+        Call(EnableModel, MODEL_k2, TRUE)
+        Wait(30)
+        Call(EnableModel, MODEL_n3, FALSE)
+        Call(EnableModel, MODEL_k3, TRUE)
+        Wait(22)
+        Call(EnableModel, MODEL_n4, FALSE)
+        Call(EnableModel, MODEL_k4, TRUE)
+        Wait(18)
+        Call(EnableModel, MODEL_n5, FALSE)
+        Call(EnableModel, MODEL_k5, TRUE)
+    EndThread
+    Call(PlayModelAnimation, MDL_ANIMATOR_0, Ref(N(AS_Stairs_Unfold)))
+    Wait(200)
+    Set(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateStatuePositions) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(N(GetDinoStatuePosRot), NPC_AlbinoDino_01)
-    EVT_SET(MV_StatueYaw_01, LVar2)
-    EVT_CALL(N(GetDinoStatuePosRot), NPC_AlbinoDino_02)
-    EVT_SET(MV_StatueYaw_02, LVar2)
-    EVT_CALL(N(GetDinoStatuePosRot), NPC_AlbinoDino_03)
-    EVT_SET(MV_StatueYaw_03, LVar2)
-    EVT_LOOP(0)
-        EVT_CALL(N(GetDinoStatuePosRot), NPC_AlbinoDino_01)
-        EVT_CALL(TranslateGroup, MODEL_s01, LVar0, 0, LVar1)
-        EVT_CALL(RotateGroup, MODEL_g292, MV_StatueYaw_01, 0, 1, 0)
-        EVT_CALL(N(GetDinoStatuePosRot), NPC_AlbinoDino_02)
-        EVT_CALL(TranslateGroup, MODEL_s02, LVar0, 0, LVar1)
-        EVT_CALL(RotateGroup, MODEL_g298, MV_StatueYaw_02, 0, 1, 0)
-        EVT_CALL(N(GetDinoStatuePosRot), NPC_AlbinoDino_03)
-        EVT_CALL(TranslateGroup, MODEL_s03, LVar0, 0, LVar1)
-        EVT_CALL(RotateGroup, MODEL_g299, MV_StatueYaw_03, 0, 1, 0)
-        EVT_CALL(N(GetDinoNpcPosRot), NPC_AlbinoDino_01)
-        EVT_CALL(SetNpcPos, NPC_AlbinoDino_01, LVar0, -10, LVar1)
-        EVT_CALL(N(GetDinoNpcPosRot), NPC_AlbinoDino_02)
-        EVT_CALL(SetNpcPos, NPC_AlbinoDino_02, LVar0, -10, LVar1)
-        EVT_CALL(N(GetDinoNpcPosRot), NPC_AlbinoDino_03)
-        EVT_CALL(SetNpcPos, NPC_AlbinoDino_03, LVar0, -10, LVar1)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s01n)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s01e)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s01s)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s01w)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s02n)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s02e)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s02s)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s02w)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s03n)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s03e)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s03s)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_s03w)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_01)
+    Set(MV_StatueYaw_01, LVar2)
+    Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_02)
+    Set(MV_StatueYaw_02, LVar2)
+    Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_03)
+    Set(MV_StatueYaw_03, LVar2)
+    Loop(0)
+        Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_01)
+        Call(TranslateGroup, MODEL_s01, LVar0, 0, LVar1)
+        Call(RotateGroup, MODEL_g292, MV_StatueYaw_01, 0, 1, 0)
+        Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_02)
+        Call(TranslateGroup, MODEL_s02, LVar0, 0, LVar1)
+        Call(RotateGroup, MODEL_g298, MV_StatueYaw_02, 0, 1, 0)
+        Call(N(GetDinoStatuePosRot), NPC_AlbinoDino_03)
+        Call(TranslateGroup, MODEL_s03, LVar0, 0, LVar1)
+        Call(RotateGroup, MODEL_g299, MV_StatueYaw_03, 0, 1, 0)
+        Call(N(GetDinoNpcPosRot), NPC_AlbinoDino_01)
+        Call(SetNpcPos, NPC_AlbinoDino_01, LVar0, -10, LVar1)
+        Call(N(GetDinoNpcPosRot), NPC_AlbinoDino_02)
+        Call(SetNpcPos, NPC_AlbinoDino_02, LVar0, -10, LVar1)
+        Call(N(GetDinoNpcPosRot), NPC_AlbinoDino_03)
+        Call(SetNpcPos, NPC_AlbinoDino_03, LVar0, -10, LVar1)
+        Call(UpdateColliderTransform, COLLIDER_s01n)
+        Call(UpdateColliderTransform, COLLIDER_s01e)
+        Call(UpdateColliderTransform, COLLIDER_s01s)
+        Call(UpdateColliderTransform, COLLIDER_s01w)
+        Call(UpdateColliderTransform, COLLIDER_s02n)
+        Call(UpdateColliderTransform, COLLIDER_s02e)
+        Call(UpdateColliderTransform, COLLIDER_s02s)
+        Call(UpdateColliderTransform, COLLIDER_s02w)
+        Call(UpdateColliderTransform, COLLIDER_s03n)
+        Call(UpdateColliderTransform, COLLIDER_s03e)
+        Call(UpdateColliderTransform, COLLIDER_s03s)
+        Call(UpdateColliderTransform, COLLIDER_s03w)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 #include "world/common/todo/UnkFunc11.inc.c"
 
 EvtScript N(EVS_PushStatue_Impl) = {
-    EVT_CALL(N(GetPlayerPushDirection), LVarA)
-    EVT_CALL(InterpPlayerYaw, LVar0, 0)
-    EVT_LOOP(20)
-        EVT_CALL(N(UnkFunc11), LVar9)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_RETURN
-        EVT_ELSE
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_THREAD
-        EVT_CALL(N(GetPlayerPushLerpValues), LVarA)
-        EVT_CALL(MakeLerp, LVar3, LVar4, PUSH_TIME, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(UnkFunc12))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, PUSH_TIME, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_SET(MV_PushingStatue, TRUE)
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_PRA_PUSH_STATUE, 0)
-    EVT_CALL(N(BeginPushingStatue), LVarA)
-    EVT_WAIT(PUSH_TIME)
-    EVT_SET(MV_PushingStatue, FALSE)
-    EVT_CALL(N(EndBlockPushingState))
-    EVT_THREAD
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_WAIT(2)
-        EVT_CALL(N(UnkFunc11), LVar9)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(N(UnkFunc11), LVar9)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(N(GetPlayerPushDirection), LVarA)
+    Call(InterpPlayerYaw, LVar0, 0)
+    Loop(20)
+        Call(N(UnkFunc11), LVar9)
+        IfEq(LVar0, 0)
+            Return
+        Else
+            Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Thread
+        Call(N(GetPlayerPushLerpValues), LVarA)
+        Call(MakeLerp, LVar3, LVar4, PUSH_TIME, EASING_LINEAR)
+        Loop(0)
+            Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+            Call(UpdateLerp)
+            Call(N(UnkFunc12))
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, PUSH_TIME, Float(0.3))
+    EndThread
+    Set(MV_PushingStatue, TRUE)
+    Call(PlaySoundAtCollider, LVar9, SOUND_PRA_PUSH_STATUE, 0)
+    Call(N(BeginPushingStatue), LVarA)
+    Wait(PUSH_TIME)
+    Set(MV_PushingStatue, FALSE)
+    Call(N(EndBlockPushingState))
+    Thread
+        Call(DisablePlayerInput, FALSE)
+        Wait(2)
+        Call(N(UnkFunc11), LVar9)
+        IfEq(LVar0, 0)
+            Wait(2)
+            Call(N(UnkFunc11), LVar9)
+            IfEq(LVar0, 0)
+                Call(SetPlayerActionState, ACTION_STATE_IDLE)
+            EndIf
+        EndIf
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PushStatue_01) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(IsDestCellUnavailable), NPC_AlbinoDino_01)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVarA, NPC_AlbinoDino_01)
-    EVT_SET(LVar9, COLLIDER_s01e)
-    EVT_EXEC_WAIT(N(EVS_PushStatue_Impl))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
+        Return
+    EndIf
+    Call(N(IsDestCellUnavailable), NPC_AlbinoDino_01)
+    IfEq(LVar0, TRUE)
+        Return
+    EndIf
+    Set(LVarA, NPC_AlbinoDino_01)
+    Set(LVar9, COLLIDER_s01e)
+    ExecWait(N(EVS_PushStatue_Impl))
+    Return
+    End
 };
 
 EvtScript N(EVS_PushStatue_02) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(IsDestCellUnavailable), NPC_AlbinoDino_02)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVarA, NPC_AlbinoDino_02)
-    EVT_SET(LVar9, COLLIDER_s02e)
-    EVT_EXEC_WAIT(N(EVS_PushStatue_Impl))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
+        Return
+    EndIf
+    Call(N(IsDestCellUnavailable), NPC_AlbinoDino_02)
+    IfEq(LVar0, TRUE)
+        Return
+    EndIf
+    Set(LVarA, NPC_AlbinoDino_02)
+    Set(LVar9, COLLIDER_s02e)
+    ExecWait(N(EVS_PushStatue_Impl))
+    Return
+    End
 };
 
 EvtScript N(EVS_PushStatue_03) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(IsDestCellUnavailable), NPC_AlbinoDino_03)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVarA, NPC_AlbinoDino_03)
-    EVT_SET(LVar9, COLLIDER_s03e)
-    EVT_EXEC_WAIT(N(EVS_PushStatue_Impl))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
+        Return
+    EndIf
+    Call(N(IsDestCellUnavailable), NPC_AlbinoDino_03)
+    IfEq(LVar0, TRUE)
+        Return
+    EndIf
+    Set(LVarA, NPC_AlbinoDino_03)
+    Set(LVar9, COLLIDER_s03e)
+    ExecWait(N(EVS_PushStatue_Impl))
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupPuzzle) = {
-    EVT_CALL(InitAnimatedModels)
-    EVT_CALL(LoadAnimatedModel, MDL_ANIMATOR_0, EVT_PTR(N(AS_Stairs_Skeleton)))
-    EVT_CALL(SetAnimatedModelRootPosition, MDL_ANIMATOR_0, 0, 0, 0)
-    EVT_CALL(SetAnimatedModelRenderMode, MDL_ANIMATOR_0, RENDER_MODE_SURFACE_OPA)
-    EVT_THREAD
-        EVT_CALL(N(EVS_ManagePuzzle))
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s01n, MODEL_o1032)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s01e, MODEL_o1032)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s01s, MODEL_o1032)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s01w, MODEL_o1032)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s02n, MODEL_o1040)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s02e, MODEL_o1040)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s02s, MODEL_o1040)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s02w, MODEL_o1040)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s03n, MODEL_o1044)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s03e, MODEL_o1044)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s03s, MODEL_o1044)
-    EVT_CALL(ParentColliderToModel, COLLIDER_s03w, MODEL_o1044)
-    EVT_SET(MV_PuzzleSolved, FALSE)
-    EVT_EXEC(N(EVS_UpdateStatuePositions))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PushStatue_01)), TRIGGER_WALL_PUSH, COLLIDER_s01e, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PushStatue_02)), TRIGGER_WALL_PUSH, COLLIDER_s02e, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PushStatue_03)), TRIGGER_WALL_PUSH, COLLIDER_s03e, 1, 0)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
-        EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_0, EVT_PTR(N(AS_Stairs_InitializeAfter)))
-        EVT_CALL(SetGroupVisibility, MODEL_no, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_kage_yuka, MODEL_GROUP_VISIBLE)
-    EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1071, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(PlayModelAnimation, MDL_ANIMATOR_0, EVT_PTR(N(AS_Stairs_InitializeBefore)))
-        EVT_CALL(SetGroupVisibility, MODEL_g255, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_g262, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_g264, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_g265, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_no, MODEL_GROUP_VISIBLE)
-        EVT_CALL(SetGroupVisibility, MODEL_kage_yuka, MODEL_GROUP_HIDDEN)
-        EVT_EXEC(N(EVS_Scene_PuzzleSolved))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(InitAnimatedModels)
+    Call(LoadAnimatedModel, MDL_ANIMATOR_0, Ref(N(AS_Stairs_Skeleton)))
+    Call(SetAnimatedModelRootPosition, MDL_ANIMATOR_0, 0, 0, 0)
+    Call(SetAnimatedModelRenderMode, MDL_ANIMATOR_0, RENDER_MODE_SURFACE_OPA)
+    Thread
+        Call(N(EVS_ManagePuzzle))
+    EndThread
+    Wait(1)
+    Call(ParentColliderToModel, COLLIDER_s01n, MODEL_o1032)
+    Call(ParentColliderToModel, COLLIDER_s01e, MODEL_o1032)
+    Call(ParentColliderToModel, COLLIDER_s01s, MODEL_o1032)
+    Call(ParentColliderToModel, COLLIDER_s01w, MODEL_o1032)
+    Call(ParentColliderToModel, COLLIDER_s02n, MODEL_o1040)
+    Call(ParentColliderToModel, COLLIDER_s02e, MODEL_o1040)
+    Call(ParentColliderToModel, COLLIDER_s02s, MODEL_o1040)
+    Call(ParentColliderToModel, COLLIDER_s02w, MODEL_o1040)
+    Call(ParentColliderToModel, COLLIDER_s03n, MODEL_o1044)
+    Call(ParentColliderToModel, COLLIDER_s03e, MODEL_o1044)
+    Call(ParentColliderToModel, COLLIDER_s03s, MODEL_o1044)
+    Call(ParentColliderToModel, COLLIDER_s03w, MODEL_o1044)
+    Set(MV_PuzzleSolved, FALSE)
+    Exec(N(EVS_UpdateStatuePositions))
+    BindTrigger(Ref(N(EVS_PushStatue_01)), TRIGGER_WALL_PUSH, COLLIDER_s01e, 1, 0)
+    BindTrigger(Ref(N(EVS_PushStatue_02)), TRIGGER_WALL_PUSH, COLLIDER_s02e, 1, 0)
+    BindTrigger(Ref(N(EVS_PushStatue_03)), TRIGGER_WALL_PUSH, COLLIDER_s03e, 1, 0)
+    IfGe(GB_StoryProgress, STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE)
+        Call(PlayModelAnimation, MDL_ANIMATOR_0, Ref(N(AS_Stairs_InitializeAfter)))
+        Call(SetGroupVisibility, MODEL_no, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_kage_yuka, MODEL_GROUP_VISIBLE)
+    Else
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1071, COLLIDER_FLAGS_UPPER_MASK)
+        Call(PlayModelAnimation, MDL_ANIMATOR_0, Ref(N(AS_Stairs_InitializeBefore)))
+        Call(SetGroupVisibility, MODEL_g255, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_g262, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_g264, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_g265, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_no, MODEL_GROUP_VISIBLE)
+        Call(SetGroupVisibility, MODEL_kage_yuka, MODEL_GROUP_HIDDEN)
+        Exec(N(EVS_Scene_PuzzleSolved))
+    EndIf
+    Return
+    End
 };

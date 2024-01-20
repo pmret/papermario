@@ -351,206 +351,206 @@ API_CALLABLE(N(MakeFavorItemList)) {
 }
 
 EvtScript N(EVS_NpcInteract_KoopaKoot) = {
-    EVT_CALL(func_802CF56C, 1)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A2)
-        EVT_GOTO(90)
-    EVT_END_IF
-    EVT_IF_EQ(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
-        EVT_IF_EQ(GF_MAC02_KootFavor_CurrentComplete, FALSE)
-            EVT_CALL(N(MakeFavorItemList), GB_KootFavor_Current)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_SET(LVar0, EVT_PTR(N(FavorItemList)))
-                EVT_SET(LVar1, 9)
-                EVT_EXEC_WAIT(N(EVS_ChooseKeyItem_Koot))
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_EQ(-1)
-                    EVT_CASE_EQ(0)
-                    EVT_CASE_DEFAULT
-                        EVT_SET(GF_MAC02_KootFavor_CurrentComplete, TRUE)
-                EVT_END_SWITCH
-            EVT_ELSE
-                EVT_SET(LVar0, EVT_PTR(N(FavorItemList)))
-                EVT_SET(LVar1, 9)
-                EVT_EXEC_WAIT(N(EVS_ChooseItem_Koot))
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_EQ(-1)
-                    EVT_CASE_EQ(0)
-                    EVT_CASE_DEFAULT
-                        EVT_SET(GF_MAC02_KootFavor_CurrentComplete, TRUE)
-                EVT_END_SWITCH
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_EQ(GF_MAC02_KootFavor_CurrentComplete, TRUE)
-            EVT_CALL(N(SetFavorComplete), GB_KootFavor_Current)
-            EVT_ADD(GB_KootFavor_Completed, 1)
-            EVT_CALL(N(IsFourthMultipleFavor), GB_KootFavor_Completed)
-            EVT_IF_FALSE(LVar0)
-                EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar1)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B1)
+    Call(func_802CF56C, 1)
+    IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A2)
+        Goto(90)
+    EndIf
+    IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
+        IfEq(GF_MAC02_KootFavor_CurrentComplete, FALSE)
+            Call(N(MakeFavorItemList), GB_KootFavor_Current)
+            IfEq(LVar0, 0)
+                Set(LVar0, Ref(N(FavorItemList)))
+                Set(LVar1, 9)
+                ExecWait(N(EVS_ChooseKeyItem_Koot))
+                Switch(LVar0)
+                    CaseEq(-1)
+                    CaseEq(0)
+                    CaseDefault
+                        Set(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+                EndSwitch
+            Else
+                Set(LVar0, Ref(N(FavorItemList)))
+                Set(LVar1, 9)
+                ExecWait(N(EVS_ChooseItem_Koot))
+                Switch(LVar0)
+                    CaseEq(-1)
+                    CaseEq(0)
+                    CaseDefault
+                        Set(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+                EndSwitch
+            EndIf
+        EndIf
+        IfEq(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+            Call(N(SetFavorComplete), GB_KootFavor_Current)
+            Add(GB_KootFavor_Completed, 1)
+            Call(N(IsFourthMultipleFavor), GB_KootFavor_Completed)
+            IfFalse(LVar0)
+                Call(N(GetFavorMessages), GB_KootFavor_Current)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar1)
+                Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B1)
                 #define NAME_SUFFIX _Koot
                 EVT_GIVE_COIN()
                 #define NAME_SUFFIX
-            EVT_ELSE
-                EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar2)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B1)
-                EVT_CALL(ShowGotItem, ITEM_STAR_PIECE, TRUE, ITEM_PICKUP_FLAG_3_STAR_PIECES)
-                EVT_CALL(AddStarPieces, 3)
-            EVT_END_IF
-            EVT_SWITCH(GB_KootFavor_Completed)
+            Else
+                Call(N(GetFavorMessages), GB_KootFavor_Current)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar2)
+                Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B1)
+                Call(ShowGotItem, ITEM_STAR_PIECE, TRUE, ITEM_PICKUP_FLAG_3_STAR_PIECES)
+                Call(AddStarPieces, 3)
+            EndIf
+            Switch(GB_KootFavor_Completed)
                 #define NAME_SUFFIX _Koot
-                EVT_CASE_EQ(1 + KOOT_FAVOR_CH1_2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B2)
+                CaseEq(1 + KOOT_FAVOR_CH1_2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B2)
                     EVT_GIVE_KEY_REWARD(ITEM_SILVER_CREDIT)
-                EVT_CASE_EQ(1 + KOOT_FAVOR_CH4_2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B3)
+                CaseEq(1 + KOOT_FAVOR_CH4_2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B3)
                     EVT_GIVE_KEY_REWARD(ITEM_GOLD_CREDIT)
-                    EVT_CALL(FindKeyItem, ITEM_SILVER_CREDIT, LVar1)
-                    EVT_CALL(RemoveKeyItemAt, LVar1)
+                    Call(FindKeyItem, ITEM_SILVER_CREDIT, LVar1)
+                    Call(RemoveKeyItemAt, LVar1)
                 #define NAME_SUFFIX
-            EVT_END_SWITCH
-            EVT_SET(GB_KootFavor_State, KOOT_FAVOR_STATE_0)
-            EVT_GOTO(90)
-        EVT_END_IF
+            EndSwitch
+            Set(GB_KootFavor_State, KOOT_FAVOR_STATE_0)
+            Goto(90)
+        EndIf
         // ask about current favor progress
-        EVT_IF_EQ(GF_KootFavor_LeftKoopaArea, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AD)
-            EVT_CALL(ShowChoice, MSG_Choice_0012)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0) // go on
-                    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AE)
-                EVT_CASE_EQ(1) // give up
-                    EVT_CALL(N(GiveUpFavor), GB_KootFavor_Current)
-                    EVT_IF_EQ(LVar0, 0)
-                        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B0)
-                        EVT_SET(GB_KootFavor_State, KOOT_FAVOR_STATE_1)
-                        EVT_GOTO(90)
-                    EVT_ELSE
-                        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AF)
-                    EVT_END_IF
-                    EVT_GOTO(50)
-                EVT_CASE_EQ(2) // forgotten
-                    EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
-                    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
-            EVT_END_SWITCH
-        EVT_ELSE
-            EVT_IF_EQ(GF_KootFavor_LeftKoopaVillage, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AA)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AB)
-            EVT_END_IF
-            EVT_CALL(ShowChoice, MSG_Choice_0010)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
-                EVT_SET(GF_KootFavor_LeftKoopaVillage, FALSE)
-            EVT_ELSE
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AC)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_GOTO(90)
-    EVT_END_IF
-    EVT_CALL(N(FindNextFavor), GB_KootFavor_Current)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A5)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A6)
-        EVT_END_IF
-        EVT_GOTO(90)
-    EVT_ELSE
-        EVT_IF_EQ(GB_KootFavor_State, KOOT_FAVOR_STATE_0)
-            EVT_IF_EQ(GF_NOK02_Met_KoopaKoot, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A3)
-                EVT_SET(GF_NOK02_Met_KoopaKoot, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A4)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A7)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LABEL(50)
-    EVT_CALL(ShowChoice, MSG_Choice_0010)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A9)
-        EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
-        EVT_SET(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
-        EVT_SET(GF_KootFavor_LeftKoopaVillage, FALSE)
-        EVT_SET(GF_MAC02_KootFavor_CurrentComplete, FALSE)
-        EVT_SET(GF_KootFavor_LeftKoopaArea, FALSE)
-    EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A8)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_SwingCane)
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_IdleCane)
-        EVT_CALL(EndSpeech, NPC_SELF, ANIM_KoopaKoot_TalkCane, ANIM_KoopaKoot_IdleCane, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_StillCane)
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_Idle)
-        EVT_SET(GB_KootFavor_State, KOOT_FAVOR_STATE_1)
-        EVT_SET(GB_KootFavor_Current, KOOT_FAVOR_CH1_1)
-    EVT_END_IF
-    EVT_LABEL(90)
-    EVT_CALL(EnablePartnerAI)
-    EVT_RETURN
-    EVT_END
+        IfEq(GF_KootFavor_LeftKoopaArea, TRUE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AD)
+            Call(ShowChoice, MSG_Choice_0012)
+            Switch(LVar0)
+                CaseEq(0) // go on
+                    Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AE)
+                CaseEq(1) // give up
+                    Call(N(GiveUpFavor), GB_KootFavor_Current)
+                    IfEq(LVar0, 0)
+                        Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B0)
+                        Set(GB_KootFavor_State, KOOT_FAVOR_STATE_1)
+                        Goto(90)
+                    Else
+                        Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AF)
+                    EndIf
+                    Goto(50)
+                CaseEq(2) // forgotten
+                    Call(N(GetFavorMessages), GB_KootFavor_Current)
+                    Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
+            EndSwitch
+        Else
+            IfEq(GF_KootFavor_LeftKoopaVillage, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AA)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AB)
+            EndIf
+            Call(ShowChoice, MSG_Choice_0010)
+            IfEq(LVar0, 0)
+                Call(N(GetFavorMessages), GB_KootFavor_Current)
+                Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
+                Set(GF_KootFavor_LeftKoopaVillage, FALSE)
+            Else
+                Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00AC)
+            EndIf
+        EndIf
+        Goto(90)
+    EndIf
+    Call(N(FindNextFavor), GB_KootFavor_Current)
+    IfEq(LVar0, 0)
+        IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A5)
+        Else
+            Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A6)
+        EndIf
+        Goto(90)
+    Else
+        IfEq(GB_KootFavor_State, KOOT_FAVOR_STATE_0)
+            IfEq(GF_NOK02_Met_KoopaKoot, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A3)
+                Set(GF_NOK02_Met_KoopaKoot, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A4)
+            EndIf
+        Else
+            Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A7)
+        EndIf
+    EndIf
+    Label(50)
+    Call(ShowChoice, MSG_Choice_0010)
+    IfEq(LVar0, 0)
+        Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A9)
+        Call(N(GetFavorMessages), GB_KootFavor_Current)
+        Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar0)
+        Set(GB_KootFavor_State, KOOT_FAVOR_STATE_2)
+        Set(GF_KootFavor_LeftKoopaVillage, FALSE)
+        Set(GF_MAC02_KootFavor_CurrentComplete, FALSE)
+        Set(GF_KootFavor_LeftKoopaArea, FALSE)
+    Else
+        Call(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00A8)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_SwingCane)
+        Wait(10)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_IdleCane)
+        Call(EndSpeech, NPC_SELF, ANIM_KoopaKoot_TalkCane, ANIM_KoopaKoot_IdleCane, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_StillCane)
+        Wait(10)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaKoot_Idle)
+        Set(GB_KootFavor_State, KOOT_FAVOR_STATE_1)
+        Set(GB_KootFavor_Current, KOOT_FAVOR_CH1_1)
+    EndIf
+    Label(90)
+    Call(EnablePartnerAI)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupKootFavors) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_GOTO(80)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(75)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(70)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(60)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-        EVT_GOTO(50)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        EVT_GOTO(40)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        EVT_GOTO(30)
-    EVT_END_IF
-    EVT_SET(GF_NOK02_KootFavor14_Unlocked, TRUE)
-    EVT_LABEL(20)
-    EVT_SET(GF_NOK02_KootFavor13_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor12_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor11_Unlocked, TRUE)
-    EVT_LABEL(30)
-    EVT_SET(GF_NOK02_KootFavor10_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor0F_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor0E_Unlocked, TRUE)
-    EVT_LABEL(40)
-    EVT_SET(GF_NOK02_KootFavor0D_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor0C_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor0B_Unlocked, TRUE)
-    EVT_LABEL(50)
-    EVT_SET(GF_NOK02_KootFavor0A_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor09_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor08_Unlocked, TRUE)
-    EVT_LABEL(60)
-    EVT_SET(GF_NOK02_KootFavor07_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor06_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor05_Unlocked, TRUE)
-    EVT_LABEL(70)
-    EVT_SET(GF_NOK02_KootFavor04_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor03_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor02_Unlocked, TRUE)
-    EVT_LABEL(75)
-    EVT_SET(GF_NOK02_KootFavor01_Unlocked, TRUE)
-    EVT_SET(GF_NOK02_KootFavor00_Unlocked, TRUE)
-    EVT_LABEL(80)
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
+        Goto(80)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
+        Goto(75)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
+        Goto(70)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        Goto(60)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
+        Goto(50)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+        Goto(40)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
+        Goto(30)
+    EndIf
+    Set(GF_NOK02_KootFavor14_Unlocked, TRUE)
+    Label(20)
+    Set(GF_NOK02_KootFavor13_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor12_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor11_Unlocked, TRUE)
+    Label(30)
+    Set(GF_NOK02_KootFavor10_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor0F_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor0E_Unlocked, TRUE)
+    Label(40)
+    Set(GF_NOK02_KootFavor0D_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor0C_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor0B_Unlocked, TRUE)
+    Label(50)
+    Set(GF_NOK02_KootFavor0A_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor09_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor08_Unlocked, TRUE)
+    Label(60)
+    Set(GF_NOK02_KootFavor07_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor06_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor05_Unlocked, TRUE)
+    Label(70)
+    Set(GF_NOK02_KootFavor04_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor03_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor02_Unlocked, TRUE)
+    Label(75)
+    Set(GF_NOK02_KootFavor01_Unlocked, TRUE)
+    Set(GF_NOK02_KootFavor00_Unlocked, TRUE)
+    Label(80)
+    Return
+    End
 };

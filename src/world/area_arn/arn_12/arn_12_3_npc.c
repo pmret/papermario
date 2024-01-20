@@ -4,60 +4,60 @@
 #include "world/common/enemy/HyperGoomba_Wander.inc.c"
 
 EvtScript N(EVS_NpcIdle_TubbasHeart) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 30)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
-    EVT_SUB(LVar0, 80)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
-    EVT_SUB(LVar0, 80)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.5))
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_SET(GB_StoryProgress, STORY_UNUSED_FFFFFFEC)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
+    Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar0, 30)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 8)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
+    Wait(1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
+    Sub(LVar0, 80)
+    Call(SetNpcJumpscale, NPC_SELF, Float(2.5))
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim14)
+    Wait(1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TubbasHeart_Anim13)
+    Sub(LVar0, 80)
+    Call(SetNpcJumpscale, NPC_SELF, Float(2.5))
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_TUBBA_HEART_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 12)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Set(GB_StoryProgress, STORY_UNUSED_FFFFFFEC)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_HyperGoomba) = {
-    EVT_SET(GF_ARN12_Defeated_Goomba, TRUE)
-    EVT_CALL(DoNpcDefeat)
-    EVT_RETURN
-    EVT_END
+    Set(GF_ARN12_Defeated_Goomba, TRUE)
+    Call(DoNpcDefeat)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TubbasHeart) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TubbasHeart)))
-    EVT_IF_NE(GB_StoryProgress, STORY_UNUSED_FFFFFFEB)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TubbasHeart)))
+    IfNe(GB_StoryProgress, STORY_UNUSED_FFFFFFEB)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HyperGoomba) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
-        EVT_IF_EQ(GF_ARN12_Defeated_Goomba, TRUE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HyperGoomba)))
-    EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HyperGoomba)))
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
+        IfEq(GF_ARN12_Defeated_Goomba, TRUE)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+        EndIf
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_HyperGoomba)))
+    EndIf
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_HyperGoomba)))
+    Return
+    End
 };
 
 NpcData N(NpcData_TubbasHeart) = {

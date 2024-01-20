@@ -28,20 +28,20 @@ MusicProximityTrigger N(MusicMixTrigger3) = {
 
 
 EvtScript N(EVS_SetupMusicMix) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
-    EVT_CALL(EnableMusicProximityMix, 0)
-    EVT_IF_EQ(MF_SetupMusicMixes, FALSE)
-        EVT_SET(MF_SetupMusicMixes, TRUE)
-        EVT_THREAD
-            EVT_CALL(N(MonitorMusicProximityTrigger), EVT_PTR(N(MusicMixTrigger1)))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_CALL(N(MonitorMusicProximityTrigger), EVT_PTR(N(MusicMixTrigger2)))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_CALL(N(MonitorMusicProximityTrigger), EVT_PTR(N(MusicMixTrigger3)))
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_TOAD_TOWN, 0, 8)
+    Call(EnableMusicProximityMix, 0)
+    IfEq(MF_SetupMusicMixes, FALSE)
+        Set(MF_SetupMusicMixes, TRUE)
+        Thread
+            Call(N(MonitorMusicProximityTrigger), Ref(N(MusicMixTrigger1)))
+        EndThread
+        Thread
+            Call(N(MonitorMusicProximityTrigger), Ref(N(MusicMixTrigger2)))
+        EndThread
+        Thread
+            Call(N(MonitorMusicProximityTrigger), Ref(N(MusicMixTrigger3)))
+        EndThread
+    EndIf
+    Return
+    End
 };

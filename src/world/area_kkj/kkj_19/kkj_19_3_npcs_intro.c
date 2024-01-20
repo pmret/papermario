@@ -3,28 +3,28 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 
 EvtScript N(EVS_NpcInteract_TayceT) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_Intro_0031)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_TayceT_Talk, ANIM_TayceT_Idle, 0, MSG_Intro_0031)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Intro_0032)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Intro_0032)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TayceT) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_TayceT_Idle)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TayceT)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_TayceT_Idle)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TayceT)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_TayceT)[] = {

@@ -4,15 +4,15 @@
 #define NAMESPACE A(isk_02)
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_BTL_ISK)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_BTL_ISK)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

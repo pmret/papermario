@@ -166,381 +166,381 @@ API_CALLABLE(N(Add1Coin)) {
 
 EvtScript N(EVS_Init) = {
 #if VERSION_PAL
-    EVT_CALL(GetLanguage, LVar0)
-    EVT_IF_EQ(LVar0, LANGUAGE_ES)
-        EVT_SET(LVar0, LANGUAGE_FR)
-    EVT_END_IF
-    EVT_CALL(SetModelTexVariant, MODEL_o408, LVar0)
+    Call(GetLanguage, LVar0)
+    IfEq(LVar0, LANGUAGE_ES)
+        Set(LVar0, LANGUAGE_FR)
+    EndIf
+    Call(SetModelTexVariant, MODEL_o408, LVar0)
 #endif
-    EVT_USE_ARRAY(N(SharedSlotMachineData))
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_SET(BUF_GameState, SLOTS_STATE_INERT)
-    EVT_SET(BUF_ReelState1, REEL_STATE_INERT)
-    EVT_SET(BUF_ReelState2, REEL_STATE_INERT)
-    EVT_SET(BUF_ReelState3, REEL_STATE_INERT)
-    EVT_CALL(RandInt, 8, LVar0)
-    EVT_MUL(LVar0, 45)
-    EVT_SET(BUF_ReelAngle1, LVar0)
-    EVT_CALL(RandInt, 8, LVar0)
-    EVT_MUL(LVar0, 45)
-    EVT_SET(BUF_ReelAngle2, LVar0)
-    EVT_CALL(RandInt, 8, LVar0)
-    EVT_MUL(LVar0, 45)
-    EVT_SET(BUF_ReelAngle3, LVar0)
-    EVT_CALL(N(IsDemoBattle))
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_SET(BUF_GameState, SLOTS_STATE_ACTIVE)
-        EVT_SET(BUF_ReelState1, REEL_STATE_SPIN)
-        EVT_SET(BUF_ReelState2, REEL_STATE_SPIN)
-        EVT_SET(BUF_ReelState3, REEL_STATE_SPIN)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    UseArray(N(SharedSlotMachineData))
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Set(BUF_GameState, SLOTS_STATE_INERT)
+    Set(BUF_ReelState1, REEL_STATE_INERT)
+    Set(BUF_ReelState2, REEL_STATE_INERT)
+    Set(BUF_ReelState3, REEL_STATE_INERT)
+    Call(RandInt, 8, LVar0)
+    Mul(LVar0, 45)
+    Set(BUF_ReelAngle1, LVar0)
+    Call(RandInt, 8, LVar0)
+    Mul(LVar0, 45)
+    Set(BUF_ReelAngle2, LVar0)
+    Call(RandInt, 8, LVar0)
+    Mul(LVar0, 45)
+    Set(BUF_ReelAngle3, LVar0)
+    Call(N(IsDemoBattle))
+    IfEq(LVar0, TRUE)
+        Set(BUF_GameState, SLOTS_STATE_ACTIVE)
+        Set(BUF_ReelState1, REEL_STATE_SPIN)
+        Set(BUF_ReelState2, REEL_STATE_SPIN)
+        Set(BUF_ReelState3, REEL_STATE_SPIN)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_USE_ARRAY(N(SharedSlotMachineData))
-    EVT_CALL(EnableTexPanning, MODEL_o424, TRUE)
-    EVT_SET(LVarE, 0)
-    EVT_SET(LVarF, 0)
-    EVT_LABEL(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_BlockIdx, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(AVAL_Block_Start)
+    UseArray(N(SharedSlotMachineData))
+    Call(EnableTexPanning, MODEL_o424, TRUE)
+    Set(LVarE, 0)
+    Set(LVarF, 0)
+    Label(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_IN_BlockIdx, LVar0)
+        Switch(LVar0)
+            CaseEq(AVAL_Block_Start)
                 // do nothing
-            EVT_CASE_EQ(AVAL_Block_StopReel1)
-                EVT_SWITCH(BUF_ReelState1)
-                    EVT_CASE_EQ(REEL_STATE_INERT)
+            CaseEq(AVAL_Block_StopReel1)
+                Switch(BUF_ReelState1)
+                    CaseEq(REEL_STATE_INERT)
                         // no nothing
-                    EVT_CASE_EQ(REEL_STATE_SPIN)
-                        EVT_ADD(BUF_ReelAngle1, 5)
-                    EVT_CASE_EQ(REEL_STATE_STOPPING)
-                        EVT_IF_GT(BUF_ReelLeft1, 0)
-                            EVT_ADD(BUF_ReelAngle1, 5)
-                            EVT_SUB(BUF_ReelLeft1, 5)
-                            EVT_BREAK_SWITCH
-                        EVT_END_IF
-                        EVT_SET(LVar0, BUF_ReelAngle1)
-                        EVT_MOD(LVar0, 45)
-                        EVT_IF_NE(LVar0, 0)
-                            EVT_ADD(BUF_ReelAngle1, 5)
-                        EVT_ELSE
-                            EVT_SET(BUF_ReelState1, REEL_STATE_STOPPED)
-                        EVT_END_IF
-                EVT_END_SWITCH
-                EVT_CALL(RotateModel, MODEL_o412, BUF_ReelAngle1, 1, 0, 0)
-                EVT_CALL(RotateModel, MODEL_o413, BUF_ReelAngle1, 1, 0, 0)
-                EVT_CALL(RotateModel, MODEL_o414, BUF_ReelAngle1, 1, 0, 0)
-            EVT_CASE_EQ(AVAL_Block_StopReel2)
-                EVT_SWITCH(BUF_ReelState2)
-                    EVT_CASE_EQ(REEL_STATE_INERT)
+                    CaseEq(REEL_STATE_SPIN)
+                        Add(BUF_ReelAngle1, 5)
+                    CaseEq(REEL_STATE_STOPPING)
+                        IfGt(BUF_ReelLeft1, 0)
+                            Add(BUF_ReelAngle1, 5)
+                            Sub(BUF_ReelLeft1, 5)
+                            BreakSwitch
+                        EndIf
+                        Set(LVar0, BUF_ReelAngle1)
+                        Mod(LVar0, 45)
+                        IfNe(LVar0, 0)
+                            Add(BUF_ReelAngle1, 5)
+                        Else
+                            Set(BUF_ReelState1, REEL_STATE_STOPPED)
+                        EndIf
+                EndSwitch
+                Call(RotateModel, MODEL_o412, BUF_ReelAngle1, 1, 0, 0)
+                Call(RotateModel, MODEL_o413, BUF_ReelAngle1, 1, 0, 0)
+                Call(RotateModel, MODEL_o414, BUF_ReelAngle1, 1, 0, 0)
+            CaseEq(AVAL_Block_StopReel2)
+                Switch(BUF_ReelState2)
+                    CaseEq(REEL_STATE_INERT)
                         // no nothing
-                    EVT_CASE_EQ(REEL_STATE_SPIN)
-                        EVT_ADD(BUF_ReelAngle2, 5)
-                    EVT_CASE_EQ(REEL_STATE_STOPPING)
-                        EVT_IF_GT(BUF_ReelLeft2, 0)
-                            EVT_ADD(BUF_ReelAngle2, 5)
-                            EVT_SUB(BUF_ReelLeft2, 5)
-                            EVT_BREAK_SWITCH
-                        EVT_END_IF
-                        EVT_SET(LVar0, BUF_ReelAngle2)
-                        EVT_MOD(LVar0, 45)
-                        EVT_IF_NE(LVar0, 0)
-                            EVT_ADD(BUF_ReelAngle2, 5)
-                        EVT_ELSE
-                            EVT_SET(BUF_ReelState2, REEL_STATE_STOPPED)
-                        EVT_END_IF
-                EVT_END_SWITCH
-                EVT_CALL(RotateModel, MODEL_o417, BUF_ReelAngle2, 1, 0, 0)
-                EVT_CALL(RotateModel, MODEL_o418, BUF_ReelAngle2, 1, 0, 0)
-                EVT_CALL(RotateModel, MODEL_o419, BUF_ReelAngle2, 1, 0, 0)
-            EVT_CASE_EQ(AVAL_Block_StopReel3)
-                EVT_SWITCH(BUF_ReelState3)
-                    EVT_CASE_EQ(REEL_STATE_INERT)
+                    CaseEq(REEL_STATE_SPIN)
+                        Add(BUF_ReelAngle2, 5)
+                    CaseEq(REEL_STATE_STOPPING)
+                        IfGt(BUF_ReelLeft2, 0)
+                            Add(BUF_ReelAngle2, 5)
+                            Sub(BUF_ReelLeft2, 5)
+                            BreakSwitch
+                        EndIf
+                        Set(LVar0, BUF_ReelAngle2)
+                        Mod(LVar0, 45)
+                        IfNe(LVar0, 0)
+                            Add(BUF_ReelAngle2, 5)
+                        Else
+                            Set(BUF_ReelState2, REEL_STATE_STOPPED)
+                        EndIf
+                EndSwitch
+                Call(RotateModel, MODEL_o417, BUF_ReelAngle2, 1, 0, 0)
+                Call(RotateModel, MODEL_o418, BUF_ReelAngle2, 1, 0, 0)
+                Call(RotateModel, MODEL_o419, BUF_ReelAngle2, 1, 0, 0)
+            CaseEq(AVAL_Block_StopReel3)
+                Switch(BUF_ReelState3)
+                    CaseEq(REEL_STATE_INERT)
                         // no nothing
-                    EVT_CASE_EQ(REEL_STATE_SPIN)
-                        EVT_ADD(BUF_ReelAngle3, 5)
-                    EVT_CASE_EQ(REEL_STATE_STOPPING)
-                        EVT_IF_GT(BUF_ReelLeft3, 0)
-                            EVT_ADD(BUF_ReelAngle3, 5)
-                            EVT_SUB(BUF_ReelLeft3, 5)
-                            EVT_BREAK_SWITCH
-                        EVT_END_IF
-                        EVT_SET(LVar0, BUF_ReelAngle3)
-                        EVT_MOD(LVar0, 45)
-                        EVT_IF_NE(LVar0, 0)
-                            EVT_ADD(BUF_ReelAngle3, 5)
-                        EVT_ELSE
-                            EVT_SET(BUF_ReelState3, REEL_STATE_STOPPED)
-                        EVT_END_IF
-                EVT_END_SWITCH
-                EVT_CALL(RotateModel, MODEL_o421, BUF_ReelAngle3, 1, 0, 0)
-                EVT_CALL(RotateModel, MODEL_o422, BUF_ReelAngle3, 1, 0, 0)
-                EVT_CALL(RotateModel, MODEL_o423, BUF_ReelAngle3, 1, 0, 0)
-        EVT_END_SWITCH
+                    CaseEq(REEL_STATE_SPIN)
+                        Add(BUF_ReelAngle3, 5)
+                    CaseEq(REEL_STATE_STOPPING)
+                        IfGt(BUF_ReelLeft3, 0)
+                            Add(BUF_ReelAngle3, 5)
+                            Sub(BUF_ReelLeft3, 5)
+                            BreakSwitch
+                        EndIf
+                        Set(LVar0, BUF_ReelAngle3)
+                        Mod(LVar0, 45)
+                        IfNe(LVar0, 0)
+                            Add(BUF_ReelAngle3, 5)
+                        Else
+                            Set(BUF_ReelState3, REEL_STATE_STOPPED)
+                        EndIf
+                EndSwitch
+                Call(RotateModel, MODEL_o421, BUF_ReelAngle3, 1, 0, 0)
+                Call(RotateModel, MODEL_o422, BUF_ReelAngle3, 1, 0, 0)
+                Call(RotateModel, MODEL_o423, BUF_ReelAngle3, 1, 0, 0)
+        EndSwitch
         // wrap angles
-        EVT_IF_GE(BUF_ReelAngle1, 360)
-            EVT_SUB(BUF_ReelAngle1, 360)
-        EVT_END_IF
-        EVT_IF_GE(BUF_ReelAngle2, 360)
-            EVT_SUB(BUF_ReelAngle2, 360)
-        EVT_END_IF
-        EVT_IF_GE(BUF_ReelAngle3, 360)
-            EVT_SUB(BUF_ReelAngle3, 360)
-        EVT_END_IF
-        EVT_IF_EQ(BUF_GameState, SLOTS_STATE_INERT)
-            EVT_ADD(LVarF, -277)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
-        EVT_END_IF
-        EVT_IF_EQ(BUF_GameState, SLOTS_STATE_ACTIVE)
-            EVT_ADD(LVarF, -1110)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
-        EVT_END_IF
-        EVT_IF_EQ(BUF_GameState, SLOTS_STATE_PAYOUT)
-            EVT_ADD(LVarF, -3330)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
-        EVT_END_IF
-        EVT_IF_EQ(BUF_GameState, SLOTS_STATE_PAYOUT)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_IF_EQ(BUF_GameState, SLOTS_STATE_INERT)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_BlockIdx, LVar0)
-        EVT_IF_NE(LVar0, AVAL_Block_Start)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_SET(LVar0, BUF_ReelState1)
-        EVT_ADD(LVar0, BUF_ReelState2)
-        EVT_ADD(LVar0, BUF_ReelState3)
-        EVT_IF_EQ(LVar0, REEL_STATE_STOPPED * 3)
-            EVT_SET(LVar0, BUF_ReelAngle1)
-            EVT_DIV(LVar0, 45)
-            EVT_USE_BUF(EVT_PTR(N(ReelSymbols1)))
-            EVT_BUF_PEEK(LVarA, LVar0)
-            EVT_SET(LVar0, BUF_ReelAngle2)
-            EVT_DIV(LVar0, 45)
-            EVT_USE_BUF(EVT_PTR(N(ReelSymbols2)))
-            EVT_BUF_PEEK(LVarB, LVar0)
-            EVT_SET(LVar0, BUF_ReelAngle3)
-            EVT_DIV(LVar0, 45)
-            EVT_USE_BUF(EVT_PTR(N(ReelSymbols3)))
-            EVT_BUF_PEEK(LVarC, LVar0)
-            EVT_LOOP(0)
-                EVT_IF_NE(LVarA, LVarB)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_IF_NE(LVarA, LVarC)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_IF_NE(LVarB, LVarC)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_THREAD
+        IfGe(BUF_ReelAngle1, 360)
+            Sub(BUF_ReelAngle1, 360)
+        EndIf
+        IfGe(BUF_ReelAngle2, 360)
+            Sub(BUF_ReelAngle2, 360)
+        EndIf
+        IfGe(BUF_ReelAngle3, 360)
+            Sub(BUF_ReelAngle3, 360)
+        EndIf
+        IfEq(BUF_GameState, SLOTS_STATE_INERT)
+            Add(LVarF, -277)
+            Call(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
+        EndIf
+        IfEq(BUF_GameState, SLOTS_STATE_ACTIVE)
+            Add(LVarF, -1110)
+            Call(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
+        EndIf
+        IfEq(BUF_GameState, SLOTS_STATE_PAYOUT)
+            Add(LVarF, -3330)
+            Call(SetTexPanOffset, TEX_PANNER_B, TEX_PANNER_MAIN, 0, LVarF)
+        EndIf
+        IfEq(BUF_GameState, SLOTS_STATE_PAYOUT)
+            Goto(1)
+        EndIf
+        IfEq(BUF_GameState, SLOTS_STATE_INERT)
+            Goto(1)
+        EndIf
+        Call(GetActorVar, ACTOR_SELF, AVAR_IN_BlockIdx, LVar0)
+        IfNe(LVar0, AVAL_Block_Start)
+            Goto(1)
+        EndIf
+        Set(LVar0, BUF_ReelState1)
+        Add(LVar0, BUF_ReelState2)
+        Add(LVar0, BUF_ReelState3)
+        IfEq(LVar0, REEL_STATE_STOPPED * 3)
+            Set(LVar0, BUF_ReelAngle1)
+            Div(LVar0, 45)
+            UseBuf(Ref(N(ReelSymbols1)))
+            BufPeek(LVarA, LVar0)
+            Set(LVar0, BUF_ReelAngle2)
+            Div(LVar0, 45)
+            UseBuf(Ref(N(ReelSymbols2)))
+            BufPeek(LVarB, LVar0)
+            Set(LVar0, BUF_ReelAngle3)
+            Div(LVar0, 45)
+            UseBuf(Ref(N(ReelSymbols3)))
+            BufPeek(LVarC, LVar0)
+            Loop(0)
+                IfNe(LVarA, LVarB)
+                    BreakLoop
+                EndIf
+                IfNe(LVarA, LVarC)
+                    BreakLoop
+                EndIf
+                IfNe(LVarB, LVarC)
+                    BreakLoop
+                EndIf
+                Thread
     #if !VERSION_PAL
-                    EVT_CALL(FreezeBattleState, TRUE)
+                    Call(FreezeBattleState, TRUE)
     #endif
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-                    EVT_CALL(SetBattleCamTarget, 0, 100, 0)
-                    EVT_CALL(SetBattleCamOffsetZ, 0)
-                    EVT_CALL(SetBattleCamZoom, 340)
-                    EVT_CALL(MoveBattleCamOver, 10)
-                    EVT_SWITCH(LVarA)
-                        EVT_CASE_EQ(SYM_SHYGUY)
-                            EVT_LOOP(10)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, -7, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(1)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, 17, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(1)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, 42, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(10)
-                            EVT_END_LOOP
-                        EVT_CASE_EQ(SYM_STAR)
-                            EVT_LOOP(10)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, -7, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(1)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, 17, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(1)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, 42, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(10)
-                            EVT_END_LOOP
-                        EVT_CASE_EQ(SYM_COIN)
-                            EVT_LOOP(10)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, -7, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(1)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, 17, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(1)
-                                EVT_CALL(MakeItemEntity, ITEM_COIN, 42, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
-                                EVT_CALL(N(Add1Coin))
-                                EVT_WAIT(10)
-                            EVT_END_LOOP
-                    EVT_END_SWITCH
-                    EVT_SET(BUF_GameState, SLOTS_STATE_INERT)
-                    EVT_SET(BUF_ReelState1, REEL_STATE_INERT)
-                    EVT_SET(BUF_ReelState2, REEL_STATE_INERT)
-                    EVT_SET(BUF_ReelState3, REEL_STATE_INERT)
+                    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+                    Call(SetBattleCamTarget, 0, 100, 0)
+                    Call(SetBattleCamOffsetZ, 0)
+                    Call(SetBattleCamZoom, 340)
+                    Call(MoveBattleCamOver, 10)
+                    Switch(LVarA)
+                        CaseEq(SYM_SHYGUY)
+                            Loop(10)
+                                Call(MakeItemEntity, ITEM_COIN, -7, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(1)
+                                Call(MakeItemEntity, ITEM_COIN, 17, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(1)
+                                Call(MakeItemEntity, ITEM_COIN, 42, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(10)
+                            EndLoop
+                        CaseEq(SYM_STAR)
+                            Loop(10)
+                                Call(MakeItemEntity, ITEM_COIN, -7, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(1)
+                                Call(MakeItemEntity, ITEM_COIN, 17, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(1)
+                                Call(MakeItemEntity, ITEM_COIN, 42, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(10)
+                            EndLoop
+                        CaseEq(SYM_COIN)
+                            Loop(10)
+                                Call(MakeItemEntity, ITEM_COIN, -7, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(1)
+                                Call(MakeItemEntity, ITEM_COIN, 17, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(1)
+                                Call(MakeItemEntity, ITEM_COIN, 42, 105, -74, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL, 0)
+                                Call(N(Add1Coin))
+                                Wait(10)
+                            EndLoop
+                    EndSwitch
+                    Set(BUF_GameState, SLOTS_STATE_INERT)
+                    Set(BUF_ReelState1, REEL_STATE_INERT)
+                    Set(BUF_ReelState2, REEL_STATE_INERT)
+                    Set(BUF_ReelState3, REEL_STATE_INERT)
     #if !VERSION_PAL
-                    EVT_CALL(FreezeBattleState, FALSE)
+                    Call(FreezeBattleState, FALSE)
     #endif
-                EVT_END_THREAD
+                EndThread
     #if VERSION_PAL
-                EVT_WAIT(75)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-                EVT_CALL(MoveBattleCamOver, 25)
-                EVT_WAIT(30)
+                Wait(75)
+                Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+                Call(MoveBattleCamOver, 25)
+                Wait(30)
     #endif
-                EVT_SET(BUF_GameState, SLOTS_STATE_PAYOUT)
-                EVT_BREAK_LOOP
-            EVT_END_LOOP
+                Set(BUF_GameState, SLOTS_STATE_PAYOUT)
+                BreakLoop
+            EndLoop
     #if VERSION_PAL
-            EVT_CALL(FreezeBattleState, FALSE)
+            Call(FreezeBattleState, FALSE)
     #endif
-        EVT_END_IF
-        EVT_LABEL(1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+        EndIf
+        Label(1)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_USE_ARRAY(N(SharedSlotMachineData))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-        EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-        EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_IN_BlockIdx, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(AVAL_Block_Start)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, -6, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, -7, 0)
-                    EVT_WAIT(4)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, -4, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, -1, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o408, 0, 0, 0)
-                    EVT_SET(BUF_GameState, SLOTS_STATE_ACTIVE)
-                    EVT_SET(BUF_ReelState1, REEL_STATE_SPIN)
-                    EVT_SET(BUF_ReelState2, REEL_STATE_SPIN)
-                    EVT_SET(BUF_ReelState3, REEL_STATE_SPIN)
-                EVT_CASE_EQ(AVAL_Block_StopReel1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -6, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -7, 0)
-                    EVT_WAIT(4)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -4, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -1, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, 0, 0)
-                    EVT_IF_EQ(BUF_ReelState1, REEL_STATE_SPIN)
+    UseArray(N(SharedSlotMachineData))
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+        CaseOrEq(EVENT_BURN_HIT)
+        CaseOrEq(EVENT_SHOCK_HIT)
+            Call(GetActorVar, ACTOR_SELF, AVAR_IN_BlockIdx, LVar0)
+            Switch(LVar0)
+                CaseEq(AVAL_Block_Start)
+                    Call(TranslateModel, MODEL_o408, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o408, 0, -6, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o408, 0, -7, 0)
+                    Wait(4)
+                    Call(TranslateModel, MODEL_o408, 0, -4, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o408, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o408, 0, -1, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o408, 0, 0, 0)
+                    Set(BUF_GameState, SLOTS_STATE_ACTIVE)
+                    Set(BUF_ReelState1, REEL_STATE_SPIN)
+                    Set(BUF_ReelState2, REEL_STATE_SPIN)
+                    Set(BUF_ReelState3, REEL_STATE_SPIN)
+                CaseEq(AVAL_Block_StopReel1)
+                    Call(TranslateModel, MODEL_o409, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -6, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -7, 0)
+                    Wait(4)
+                    Call(TranslateModel, MODEL_o409, 0, -4, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -1, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, 0, 0)
+                    IfEq(BUF_ReelState1, REEL_STATE_SPIN)
 #if VERSION_PAL
-                        EVT_CALL(FreezeBattleState, TRUE)
+                        Call(FreezeBattleState, TRUE)
 #endif
-                        EVT_SET(BUF_ReelLeft1, 100)
-                        EVT_SET(BUF_ReelLeft2, 150)
-                        EVT_SET(BUF_ReelLeft3, 200)
-                        EVT_SET(BUF_ReelState1, REEL_STATE_STOPPING)
-                        EVT_SET(BUF_ReelState2, REEL_STATE_STOPPING)
-                        EVT_SET(BUF_ReelState3, REEL_STATE_STOPPING)
-                    EVT_END_IF
-                EVT_CASE_EQ(AVAL_Block_StopReel2)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -6, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -7, 0)
-                    EVT_WAIT(4)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -4, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -1, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, 0, 0)
-                    EVT_IF_EQ(BUF_ReelState2, REEL_STATE_SPIN)
+                        Set(BUF_ReelLeft1, 100)
+                        Set(BUF_ReelLeft2, 150)
+                        Set(BUF_ReelLeft3, 200)
+                        Set(BUF_ReelState1, REEL_STATE_STOPPING)
+                        Set(BUF_ReelState2, REEL_STATE_STOPPING)
+                        Set(BUF_ReelState3, REEL_STATE_STOPPING)
+                    EndIf
+                CaseEq(AVAL_Block_StopReel2)
+                    Call(TranslateModel, MODEL_o409, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -6, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -7, 0)
+                    Wait(4)
+                    Call(TranslateModel, MODEL_o409, 0, -4, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -1, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, 0, 0)
+                    IfEq(BUF_ReelState2, REEL_STATE_SPIN)
 #if VERSION_PAL
-                        EVT_CALL(FreezeBattleState, TRUE)
+                        Call(FreezeBattleState, TRUE)
 #endif
-                        EVT_SET(BUF_ReelLeft1, 150)
-                        EVT_SET(BUF_ReelLeft2, 100)
-                        EVT_SET(BUF_ReelLeft3, 200)
-                        EVT_SET(BUF_ReelState1, REEL_STATE_STOPPING)
-                        EVT_SET(BUF_ReelState2, REEL_STATE_STOPPING)
-                        EVT_SET(BUF_ReelState3, REEL_STATE_STOPPING)
-                    EVT_END_IF
-                EVT_CASE_EQ(AVAL_Block_StopReel3)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -6, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -7, 0)
-                    EVT_WAIT(4)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -4, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -2, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, -1, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(TranslateModel, MODEL_o409, 0, 0, 0)
-                    EVT_IF_EQ(BUF_ReelState3, REEL_STATE_SPIN)
+                        Set(BUF_ReelLeft1, 150)
+                        Set(BUF_ReelLeft2, 100)
+                        Set(BUF_ReelLeft3, 200)
+                        Set(BUF_ReelState1, REEL_STATE_STOPPING)
+                        Set(BUF_ReelState2, REEL_STATE_STOPPING)
+                        Set(BUF_ReelState3, REEL_STATE_STOPPING)
+                    EndIf
+                CaseEq(AVAL_Block_StopReel3)
+                    Call(TranslateModel, MODEL_o409, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -6, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -7, 0)
+                    Wait(4)
+                    Call(TranslateModel, MODEL_o409, 0, -4, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -2, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, -1, 0)
+                    Wait(1)
+                    Call(TranslateModel, MODEL_o409, 0, 0, 0)
+                    IfEq(BUF_ReelState3, REEL_STATE_SPIN)
 #if VERSION_PAL
-                        EVT_CALL(FreezeBattleState, TRUE)
+                        Call(FreezeBattleState, TRUE)
 #endif
-                        EVT_SET(BUF_ReelLeft1, 200)
-                        EVT_SET(BUF_ReelLeft2, 150)
-                        EVT_SET(BUF_ReelLeft3, 100)
-                        EVT_SET(BUF_ReelState1, REEL_STATE_STOPPING)
-                        EVT_SET(BUF_ReelState2, REEL_STATE_STOPPING)
-                        EVT_SET(BUF_ReelState3, REEL_STATE_STOPPING)
-                    EVT_END_IF
-            EVT_END_SWITCH
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-        EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_HIT)
-        EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-        EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_DEATH)
-        EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)
-        EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
+                        Set(BUF_ReelLeft1, 200)
+                        Set(BUF_ReelLeft2, 150)
+                        Set(BUF_ReelLeft3, 100)
+                        Set(BUF_ReelState1, REEL_STATE_STOPPING)
+                        Set(BUF_ReelState2, REEL_STATE_STOPPING)
+                        Set(BUF_ReelState3, REEL_STATE_STOPPING)
+                    EndIf
+            EndSwitch
+        EndCaseGroup
+        CaseOrEq(EVENT_BURN_DEATH)
+        CaseOrEq(EVENT_SPIN_SMASH_HIT)
+        CaseOrEq(EVENT_SHOCK_DEATH)
+        CaseOrEq(EVENT_DEATH)
+        CaseOrEq(EVENT_SPIN_SMASH_DEATH)
+        CaseOrEq(EVENT_SPIKE_CONTACT)
+        CaseOrEq(EVENT_BURN_CONTACT)
             // do nothing
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
+        EndCaseGroup
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
             // do nothing
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_USE_ARRAY(N(SharedSlotMachineData))
+    UseArray(N(SharedSlotMachineData))
     // do nothing
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

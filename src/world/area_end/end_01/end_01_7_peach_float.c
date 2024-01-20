@@ -1,84 +1,84 @@
 #include "end_01.h"
 
 EvtScript N(EVS_ParadePhase_Toads1) = {
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_HornPlayer1, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_HornPlayer2, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Drummer1, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Drummer2, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer1, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer2, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_HornPlayer1, 1, 2, 10, 5, 10, 5, 0, 0)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_HornPlayer2, 1, 2, 10, 5, 10, 5, 0, 0)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_Drummer1, 1, 2, 10, 5, 10, 5, 0, 0)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_Drummer2, 1, 2, 10, 5, 10, 5, 0, 0)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_StandardBearer1, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_StandardBearer2, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Call(SetNpcPaletteSwapMode, NPC_HornPlayer1, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    Call(SetNpcPaletteSwapMode, NPC_HornPlayer2, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    Call(SetNpcPaletteSwapMode, NPC_Drummer1, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    Call(SetNpcPaletteSwapMode, NPC_Drummer2, NPC_PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
+    Call(SetNpcPaletteSwapMode, NPC_StandardBearer1, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapMode, NPC_StandardBearer2, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapping, NPC_HornPlayer1, 1, 2, 10, 5, 10, 5, 0, 0)
+    Call(SetNpcPaletteSwapping, NPC_HornPlayer2, 1, 2, 10, 5, 10, 5, 0, 0)
+    Call(SetNpcPaletteSwapping, NPC_Drummer1, 1, 2, 10, 5, 10, 5, 0, 0)
+    Call(SetNpcPaletteSwapping, NPC_Drummer2, 1, 2, 10, 5, 10, 5, 0, 0)
+    Call(SetNpcPaletteSwapping, NPC_StandardBearer1, 1, 2, 10, 5, 10, 5, 4, 5)
+    Call(SetNpcPaletteSwapping, NPC_StandardBearer2, 1, 2, 10, 5, 10, 5, 4, 5)
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_FinalFloat_MushroomTop) = {
-    EVT_CALL(EnableTexPanning, MODEL_mp1, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x400)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_7, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_ADD(LVar1, 0x4400)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_7, TEX_PANNER_AUX, LVar0, 0)
-        EVT_WAIT(12)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_mp1, TRUE)
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Loop(0)
+        Add(LVar0, 0x400)
+        Call(SetTexPanOffset, TEX_PANNER_7, TEX_PANNER_MAIN, LVar0, 0)
+        Add(LVar1, 0x4400)
+        Call(SetTexPanOffset, TEX_PANNER_7, TEX_PANNER_AUX, LVar0, 0)
+        Wait(12)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_FinalFloat_MushroomRim) = {
-    EVT_CALL(EnableTexPanning, MODEL_mp2, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x2000)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_WAIT(8)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_mp2, TRUE)
+    Set(LVar0, 0)
+    Loop(0)
+        Add(LVar0, 0x2000)
+        Call(SetTexPanOffset, TEX_PANNER_E, TEX_PANNER_MAIN, LVar0, 0)
+        Wait(8)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_FinalFloat_Front) = {
-    EVT_CALL(EnableTexPanning, MODEL_mp3, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x1000)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_6, TEX_PANNER_AUX, LVar0, 0)
-        EVT_WAIT(6)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_mp3, TRUE)
+    Set(LVar0, 0)
+    Loop(0)
+        Add(LVar0, 0x1000)
+        Call(SetTexPanOffset, TEX_PANNER_6, TEX_PANNER_AUX, LVar0, 0)
+        Wait(6)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_FinalFloat_Star) = {
-    EVT_CALL(EnableTexPanning, MODEL_mp4, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x1000)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_5, TEX_PANNER_MAIN, 0, LVar0)
-        EVT_WAIT(5)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_mp4, TRUE)
+    Set(LVar0, 0)
+    Loop(0)
+        Add(LVar0, 0x1000)
+        Call(SetTexPanOffset, TEX_PANNER_5, TEX_PANNER_MAIN, 0, LVar0)
+        Wait(5)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_FinalFloat_Sides) = {
-    EVT_CALL(EnableTexPanning, MODEL_mp6, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(0)
-        EVT_ADD(LVar0, 0x3000)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_WAIT(8)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_mp6, TRUE)
+    Set(LVar0, 0)
+    Loop(0)
+        Add(LVar0, 0x3000)
+        Call(SetTexPanOffset, TEX_PANNER_D, TEX_PANNER_MAIN, LVar0, 0)
+        Wait(8)
+    EndLoop
+    Return
+    End
 };
 
 Vec3f N(TwinkFlightPath)[] = {
@@ -99,225 +99,225 @@ Vec3f N(TwinkFlightPath)[] = {
 };
 
 EvtScript N(EVS_Twink) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar0, PARADE_PHASE_EXIT)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(30 * DT)
-    EVT_CALL(LoadPath, 60 * DT, EVT_PTR(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(10 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_Twink, 270, 0)
-    EVT_WAIT(70 * DT)
-    EVT_CALL(NpcFlyTo, NPC_Twink, -249, 120, 0, 10 * DT, -10, EASING_LINEAR)
-    EVT_CALL(SetNpcPos, NPC_Twink, 0, -500, 0)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        IfGt(LVar0, PARADE_PHASE_EXIT)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(30 * DT)
+    Call(LoadPath, 60 * DT, Ref(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
+    Loop(0)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(10 * DT)
+    Call(InterpNpcYaw, NPC_Twink, 270, 0)
+    Wait(70 * DT)
+    Call(NpcFlyTo, NPC_Twink, -249, 120, 0, 10 * DT, -10, EASING_LINEAR)
+    Call(SetNpcPos, NPC_Twink, 0, -500, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Mario) = {
-    EVT_LOOP(5)
-        EVT_CALL(InterpNpcYaw, NPC_Mario, 90, 7 * DT)
-        EVT_WAIT(45 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Mario, 270, 7 * DT)
-        EVT_WAIT(45 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Surprise)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_LookUp)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_Mario, 90, 0)
-    EVT_WAIT(70 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_WaveUp)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_LookUp)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Idle)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_NodYes)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Idle)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_WalkBack)
-    EVT_CALL(GetNpcPos, NPC_Mario, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 5)
-    EVT_ADD(LVar2, -30)
-    EVT_CALL(NpcMoveTo, NPC_Mario, LVar0, LVar2, 20)
-    EVT_LOOP(7)
-        EVT_ADD(LVar1, -5)
-        EVT_CALL(SetNpcPos, NPC_Mario, LVar0, LVar1, LVar2)
-        EVT_WAIT(5 * DT)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_Mario, LVar0, 0, LVar2)
-    EVT_RETURN
-    EVT_END
+    Loop(5)
+        Call(InterpNpcYaw, NPC_Mario, 90, 7 * DT)
+        Wait(45 * DT)
+        Call(InterpNpcYaw, NPC_Mario, 270, 7 * DT)
+        Wait(45 * DT)
+    EndLoop
+    Wait(40 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Surprise)
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_LookUp)
+    Wait(30 * DT)
+    Call(InterpNpcYaw, NPC_Mario, 90, 0)
+    Wait(70 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_WaveUp)
+    Wait(60 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_LookUp)
+    Wait(60 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Idle)
+    Wait(40 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_NodYes)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Idle)
+    Wait(30 * DT)
+    Call(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_WalkBack)
+    Call(GetNpcPos, NPC_Mario, LVar0, LVar1, LVar2)
+    Add(LVar0, 5)
+    Add(LVar2, -30)
+    Call(NpcMoveTo, NPC_Mario, LVar0, LVar2, 20)
+    Loop(7)
+        Add(LVar1, -5)
+        Call(SetNpcPos, NPC_Mario, LVar0, LVar1, LVar2)
+        Wait(5 * DT)
+    EndLoop
+    Call(SetNpcPos, NPC_Mario, LVar0, 0, LVar2)
+    Return
+    End
 };
 
 EvtScript N(EVS_Peach) = {
-    EVT_LOOP(5)
-        EVT_CALL(InterpNpcYaw, NPC_Peach, 90, 7 * DT)
-        EVT_WAIT(45 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Peach, 270, 7 * DT)
-        EVT_WAIT(45 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeRaiseArms)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_Peach, 90, 0)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeWaveFast)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeIdle)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(InterpNpcYaw, NPC_Peach, 270, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeRaiseArms)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeTalk)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeLowerArms)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeIdle)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeSlightBow)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeWalkBack)
-    EVT_CALL(GetNpcPos, NPC_Peach, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -5)
-    EVT_ADD(LVar2, -30)
-    EVT_CALL(NpcMoveTo, NPC_Peach, LVar0, LVar2, 20)
-    EVT_LOOP(7)
-        EVT_ADD(LVar1, -5)
-        EVT_CALL(SetNpcPos, NPC_Peach, LVar0, LVar1, LVar2)
-        EVT_WAIT(5 * DT)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_Peach, LVar0, 0, LVar2)
-    EVT_RETURN
-    EVT_END
+    Loop(5)
+        Call(InterpNpcYaw, NPC_Peach, 90, 7 * DT)
+        Wait(45 * DT)
+        Call(InterpNpcYaw, NPC_Peach, 270, 7 * DT)
+        Wait(45 * DT)
+    EndLoop
+    Wait(40 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeRaiseArms)
+    Wait(60 * DT)
+    Call(InterpNpcYaw, NPC_Peach, 90, 0)
+    Wait(40 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeWaveFast)
+    Wait(60 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeIdle)
+    Wait(60 * DT)
+    Call(InterpNpcYaw, NPC_Peach, 270, 0)
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeRaiseArms)
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeTalk)
+    Wait(20 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeLowerArms)
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeIdle)
+    Wait(20 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeSlightBow)
+    Wait(40 * DT)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeWalkBack)
+    Call(GetNpcPos, NPC_Peach, LVar0, LVar1, LVar2)
+    Add(LVar0, -5)
+    Add(LVar2, -30)
+    Call(NpcMoveTo, NPC_Peach, LVar0, LVar2, 20)
+    Loop(7)
+        Add(LVar1, -5)
+        Call(SetNpcPos, NPC_Peach, LVar0, LVar1, LVar2)
+        Wait(5 * DT)
+    EndLoop
+    Call(SetNpcPos, NPC_Peach, LVar0, 0, LVar2)
+    Return
+    End
 };
 
 EvtScript N(EVS_ParadePhase_MarioPeach) = {
-    EVT_EXEC(N(EVS_TexPan_FinalFloat_MushroomTop))
-    EVT_EXEC(N(EVS_TexPan_FinalFloat_MushroomRim))
-    EVT_EXEC(N(EVS_TexPan_FinalFloat_Front))
-    EVT_EXEC(N(EVS_TexPan_FinalFloat_Star))
-    EVT_EXEC(N(EVS_TexPan_FinalFloat_Sides))
-    EVT_EXEC(N(EVS_Peach))
-    EVT_EXEC(N(EVS_Twink))
-    EVT_EXEC_WAIT(N(EVS_Mario))
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_TexPan_FinalFloat_MushroomTop))
+    Exec(N(EVS_TexPan_FinalFloat_MushroomRim))
+    Exec(N(EVS_TexPan_FinalFloat_Front))
+    Exec(N(EVS_TexPan_FinalFloat_Star))
+    Exec(N(EVS_TexPan_FinalFloat_Sides))
+    Exec(N(EVS_Peach))
+    Exec(N(EVS_Twink))
+    ExecWait(N(EVS_Mario))
+    Return
+    End
 };
 
 EvtScript N(EVS_Twirler) = {
-    EVT_CHILD_THREAD
-        EVT_CALL(EnableNpcShadow, LVar1, FALSE)
-        EVT_CALL(SetNpcJumpscale, LVar1, EVT_FLOAT(0.5))
-        EVT_LOOP(0)
-            EVT_WAIT(30)
-            EVT_CALL(GetNpcPos, LVar0, LVar2, LVar3, LVar4)
-            EVT_ADD(LVar2, -7)
-            EVT_CALL(SetNpcPos, LVar1, LVar2, LVar3, LVar4)
-            EVT_ADD(LVar2, -25)
-            EVT_CALL(NpcJump0, LVar1, LVar2, LVar3, LVar4, 40)
-            EVT_CALL(SetNpcPos, LVar1, 0, -500, 0)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CHILD_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Walk)
-            EVT_WAIT(30)
-            EVT_CALL(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Toss)
-            EVT_WAIT(5)
-            EVT_CALL(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Catch)
-            EVT_WAIT(5)
-            EVT_CALL(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Spin)
-            EVT_WAIT(21)
-            EVT_CALL(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Toss)
-            EVT_WAIT(5)
-            EVT_CALL(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Catch)
-            EVT_WAIT(5)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(SetNpcSpeed, LVar0, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
-    EVT_CALL(GetNpcPos, LVar0, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar2, -600)
-    EVT_CALL(NpcMoveTo, LVar0, LVar2, LVar4, 0)
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        Call(EnableNpcShadow, LVar1, FALSE)
+        Call(SetNpcJumpscale, LVar1, Float(0.5))
+        Loop(0)
+            Wait(30)
+            Call(GetNpcPos, LVar0, LVar2, LVar3, LVar4)
+            Add(LVar2, -7)
+            Call(SetNpcPos, LVar1, LVar2, LVar3, LVar4)
+            Add(LVar2, -25)
+            Call(NpcJump0, LVar1, LVar2, LVar3, LVar4, 40)
+            Call(SetNpcPos, LVar1, 0, -500, 0)
+        EndLoop
+    EndChildThread
+    ChildThread
+        Loop(0)
+            Call(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Walk)
+            Wait(30)
+            Call(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Toss)
+            Wait(5)
+            Call(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Catch)
+            Wait(5)
+            Call(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Spin)
+            Wait(21)
+            Call(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Toss)
+            Wait(5)
+            Call(SetNpcAnimation, LVar0, ANIM_ParadeTwirler_Catch)
+            Wait(5)
+        EndLoop
+    EndChildThread
+    Call(SetNpcSpeed, LVar0, Float(PARADE_SCROLL_RATE / DT))
+    Call(GetNpcPos, LVar0, LVar2, LVar3, LVar4)
+    Add(LVar2, -600)
+    Call(NpcMoveTo, LVar0, LVar2, LVar4, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_StandardBearer) = {
-    EVT_CALL(SetNpcSpeed, LVar0, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
-    EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_ADD(LVar1, -600)
-    EVT_CALL(NpcMoveTo, LVar0, LVar1, LVar2, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcSpeed, LVar0, Float(PARADE_SCROLL_RATE / DT))
+    Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+    Add(LVar1, -600)
+    Call(NpcMoveTo, LVar0, LVar1, LVar2, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_ParadePhase_Toads2) = {
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler1, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler2, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_Twirler3, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer3, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapMode, NPC_StandardBearer4, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_Twirler1, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_Twirler2, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_Twirler3, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_StandardBearer3, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_CALL(SetNpcPaletteSwapping, NPC_StandardBearer4, 1, 2, 10, 5, 10, 5, 4, 5)
-    EVT_SET(LVar0, NPC_Twirler1)
-    EVT_SET(LVar1, NPC_Baton1)
-    EVT_EXEC(N(EVS_Twirler))
-    EVT_SET(LVar0, NPC_Twirler2)
-    EVT_SET(LVar1, NPC_Baton2)
-    EVT_EXEC(N(EVS_Twirler))
-    EVT_SET(LVar0, NPC_Twirler3)
-    EVT_SET(LVar1, NPC_Baton3)
-    EVT_EXEC(N(EVS_Twirler))
-    EVT_SET(LVar0, NPC_StandardBearer3)
-    EVT_EXEC(N(EVS_StandardBearer))
-    EVT_SET(LVar0, NPC_StandardBearer4)
-    EVT_EXEC(N(EVS_StandardBearer))
-    EVT_SETF(LVar0, 0)
-    EVT_LOOP(500)
-        EVT_SUBF(LVar0, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
-        EVT_CALL(TranslateGroup, MODEL_kinoko, LVar0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPaletteSwapMode, NPC_Twirler1, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapMode, NPC_Twirler2, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapMode, NPC_Twirler3, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapMode, NPC_StandardBearer3, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapMode, NPC_StandardBearer4, NPC_PAL_ADJUST_BLEND_DOUBLE_PALETTES)
+    Call(SetNpcPaletteSwapping, NPC_Twirler1, 1, 2, 10, 5, 10, 5, 4, 5)
+    Call(SetNpcPaletteSwapping, NPC_Twirler2, 1, 2, 10, 5, 10, 5, 4, 5)
+    Call(SetNpcPaletteSwapping, NPC_Twirler3, 1, 2, 10, 5, 10, 5, 4, 5)
+    Call(SetNpcPaletteSwapping, NPC_StandardBearer3, 1, 2, 10, 5, 10, 5, 4, 5)
+    Call(SetNpcPaletteSwapping, NPC_StandardBearer4, 1, 2, 10, 5, 10, 5, 4, 5)
+    Set(LVar0, NPC_Twirler1)
+    Set(LVar1, NPC_Baton1)
+    Exec(N(EVS_Twirler))
+    Set(LVar0, NPC_Twirler2)
+    Set(LVar1, NPC_Baton2)
+    Exec(N(EVS_Twirler))
+    Set(LVar0, NPC_Twirler3)
+    Set(LVar1, NPC_Baton3)
+    Exec(N(EVS_Twirler))
+    Set(LVar0, NPC_StandardBearer3)
+    Exec(N(EVS_StandardBearer))
+    Set(LVar0, NPC_StandardBearer4)
+    Exec(N(EVS_StandardBearer))
+    SetF(LVar0, 0)
+    Loop(500)
+        SubF(LVar0, Float(PARADE_SCROLL_RATE / DT))
+        Call(TranslateGroup, MODEL_kinoko, LVar0, 0, 0)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_MarioPeachExit) = {
     // walk away into the distance
-    EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Mario, -259, -150, 240 * DT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Peach, -229, -150, 240 * DT)
-    EVT_END_THREAD
-    EVT_WAIT(60 * DT)
+    Thread
+        Call(NpcMoveTo, NPC_Mario, -259, -150, 240 * DT)
+    EndThread
+    Thread
+        Call(NpcMoveTo, NPC_Peach, -229, -150, 240 * DT)
+    EndThread
+    Wait(60 * DT)
     // slowly pan camera up
-    EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_SETF(LVar1, EVT_FLOAT(0.0))
-    EVT_LOOP(0)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_ADDF(LVar1, EVT_FLOAT(0.334))
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    SetF(LVar1, Float(0.0))
+    Loop(0)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        AddF(LVar1, Float(0.334))
+        Wait(1)
+    EndLoop
+    Return
+    End
 };

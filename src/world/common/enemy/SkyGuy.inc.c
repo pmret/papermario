@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_SkyGuy) = {
 };
 
 EvtScript N(EVS_NpcAI_SkyGuy) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 5, -650)
-    EVT_CALL(SetSelfVar, 6, 30)
-    EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(FlyingAI_Main), EVT_PTR(N(AISettings_SkyGuy)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 5, -650)
+    Call(SetSelfVar, 6, 30)
+    Call(SetSelfVar, 1, 600)
+    Call(N(FlyingAI_Main), Ref(N(AISettings_SkyGuy)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SkyGuy) = {

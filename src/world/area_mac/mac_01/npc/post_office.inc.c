@@ -228,181 +228,181 @@ s32 N(ItemList_Mailbag)[] = {
 };
 
 EvtScript N(EVS_ItemPrompt_Mailbag) = {
-    EVT_CALL(FindKeyItem, ITEM_MAILBAG, LVar0)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0060)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0061)
-        EVT_SET(LVar0, EVT_PTR(N(ItemList_Mailbag)))
-        EVT_SET(LVar1, 3)
-        EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(-1)
-                EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0063)
-            EVT_CASE_DEFAULT
-                EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0062)
-                EVT_SET(GF_MAC01_MailbagReturned, TRUE)
-                EVT_WAIT(10)
+    Call(FindKeyItem, ITEM_MAILBAG, LVar0)
+    IfEq(LVar0, -1)
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0060)
+    Else
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0061)
+        Set(LVar0, Ref(N(ItemList_Mailbag)))
+        Set(LVar1, 3)
+        ExecWait(N(EVS_ChooseKeyItem))
+        Switch(LVar0)
+            CaseEq(-1)
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0063)
+            CaseDefault
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0062)
+                Set(GF_MAC01_MailbagReturned, TRUE)
+                Wait(10)
                 EVT_GIVE_STAR_PIECE()
-                EVT_WAIT(10)
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+                Wait(10)
+        EndSwitch
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Postmaster) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-            EVT_EXEC_WAIT(N(EVS_ItemPrompt_Mailbag))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_Met_Postmaster, FALSE)
-        EVT_SET(GF_MAC01_Met_Postmaster, TRUE)
-        EVT_CALL(N(func_80244E90_805710))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(-1)
-                EVT_RETURN
-            EVT_CASE_EQ(1)
-                EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0055)
-        EVT_END_SWITCH
-    EVT_ELSE
-        EVT_CALL(N(func_80244E90_805710))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(-1)
-                EVT_RETURN
-            EVT_CASE_EQ(0)
-                EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0057)
-            EVT_CASE_EQ(1)
-                EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0056)
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_CALL(N(func_80245018_805898))
-    EVT_LABEL(0)
-    EVT_CALL(N(func_80245028_8058A8))
-    EVT_WAIT(5)
-    EVT_IF_EQ(LVar1, -1)
-        EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0059)
-        EVT_CALL(ShowChoice, MSG_Choice_000D)
-        EVT_CALL(CloseMessage)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(99)
-        EVT_ELSE
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_SET(LVarA, LVar1)
-    EVT_CALL(N(func_8024522C_805AAC))
-    EVT_WAIT(5)
-    EVT_IF_EQ(LVar1, -1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(N(func_80245440_805CC0))
-    EVT_IF_EQ(LVar1, 1)
-        EVT_WAIT(30)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 1)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005C)
-    EVT_CALL(ShowMessageAtScreenPos, LVar0, 160, 40)
-    EVT_WAIT(5)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_DEFEATED_JR_TROOPA)
-        EVT_GOTO(99)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005A)
-    EVT_CALL(ShowChoice, MSG_Choice_000D)
-    EVT_CALL(CloseMessage)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_LABEL(99)
-    EVT_IF_EQ(GF_MAC01_CheckedForLetters, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005D)
-        EVT_SET(GF_MAC01_CheckedForLetters, TRUE)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005E)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        IfEq(GF_MAC01_MailbagReturned, FALSE)
+            ExecWait(N(EVS_ItemPrompt_Mailbag))
+            Return
+        EndIf
+    EndIf
+    IfEq(GF_MAC01_Met_Postmaster, FALSE)
+        Set(GF_MAC01_Met_Postmaster, TRUE)
+        Call(N(func_80244E90_805710))
+        Switch(LVar0)
+            CaseEq(-1)
+                Return
+            CaseEq(1)
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0055)
+        EndSwitch
+    Else
+        Call(N(func_80244E90_805710))
+        Switch(LVar0)
+            CaseEq(-1)
+                Return
+            CaseEq(0)
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0057)
+            CaseEq(1)
+                Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0056)
+        EndSwitch
+    EndIf
+    Call(N(func_80245018_805898))
+    Label(0)
+    Call(N(func_80245028_8058A8))
+    Wait(5)
+    IfEq(LVar1, -1)
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_0059)
+        Call(ShowChoice, MSG_Choice_000D)
+        Call(CloseMessage)
+        IfEq(LVar0, 0)
+            Goto(99)
+        Else
+            Goto(0)
+        EndIf
+    EndIf
+    Set(LVarA, LVar1)
+    Call(N(func_8024522C_805AAC))
+    Wait(5)
+    IfEq(LVar1, -1)
+        Goto(0)
+    EndIf
+    Call(N(func_80245440_805CC0))
+    IfEq(LVar1, 1)
+        Wait(30)
+        Call(InterpNpcYaw, NPC_PARTNER, 90, 1)
+    EndIf
+    Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005C)
+    Call(ShowMessageAtScreenPos, LVar0, 160, 40)
+    Wait(5)
+    IfLt(GB_StoryProgress, STORY_CH1_DEFEATED_JR_TROOPA)
+        Goto(99)
+    EndIf
+    Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005A)
+    Call(ShowChoice, MSG_Choice_000D)
+    Call(CloseMessage)
+    IfEq(LVar0, 0)
+        Goto(0)
+    EndIf
+    Label(99)
+    IfEq(GF_MAC01_CheckedForLetters, FALSE)
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005D)
+        Set(GF_MAC01_CheckedForLetters, TRUE)
+    Else
+        Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_MAC_Plaza_005E)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Postmaster_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_Outro_0043)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_Idle, 0, MSG_Outro_0043)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Postmaster) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 36, 42)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Postmaster_Epilogue)))
-        EVT_CASE_DEFAULT
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Postmaster)))
-    EVT_END_SWITCH
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
-        EVT_SET(GF_MAC01_UnlockedLetter_01, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-        EVT_SET(GF_MAC01_UnlockedLetter_00, TRUE)
-    EVT_END_IF
-    EVT_SET(GF_MAC01_UnlockedLetter_02, TRUE)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        EVT_SET(GF_MAC01_UnlockedLetter_05, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-        EVT_SET(GF_MAC01_UnlockedLetter_04, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        EVT_SET(GF_MAC01_UnlockedLetter_03, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        EVT_SET(GF_MAC01_UnlockedLetter_08, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        EVT_SET(GF_MAC01_UnlockedLetter_06, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
-        EVT_SET(GF_MAC01_UnlockedLetter_07, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-        EVT_SET(GF_MAC01_UnlockedLetter_09, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_IWA00_Whacka_HitCount, 2)
-        EVT_SET(GF_MAC01_UnlockedLetter_0A, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        EVT_SET(GF_MAC01_UnlockedLetter_0B, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_SET(GF_MAC01_UnlockedLetter_0C, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_SET(GF_MAC01_UnlockedLetter_0D, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-        EVT_SET(GF_MAC01_UnlockedLetter_0E, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-        EVT_SET(GF_MAC01_UnlockedLetter_10, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH8_REACHED_STAR_HAVEN)
-        EVT_SET(GF_MAC01_UnlockedLetter_0F, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        EVT_SET(GF_MAC01_UnlockedLetter_12, TRUE)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_SET(GF_MAC01_UnlockedLetter_11, TRUE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_SELF, 36, 42)
+    Switch(GB_StoryProgress)
+        CaseGe(STORY_EPILOGUE)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Postmaster_Epilogue)))
+        CaseDefault
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Postmaster)))
+    EndSwitch
+    IfGe(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
+        Set(GF_MAC01_UnlockedLetter_01, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
+        Set(GF_MAC01_UnlockedLetter_00, TRUE)
+    EndIf
+    Set(GF_MAC01_UnlockedLetter_02, TRUE)
+    IfGe(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
+        Set(GF_MAC01_UnlockedLetter_05, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
+        Set(GF_MAC01_UnlockedLetter_04, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
+        Set(GF_MAC01_UnlockedLetter_03, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+        Set(GF_MAC01_UnlockedLetter_08, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
+        Set(GF_MAC01_UnlockedLetter_06, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
+        Set(GF_MAC01_UnlockedLetter_07, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
+        Set(GF_MAC01_UnlockedLetter_09, TRUE)
+    EndIf
+    IfGe(GB_IWA00_Whacka_HitCount, 2)
+        Set(GF_MAC01_UnlockedLetter_0A, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+        Set(GF_MAC01_UnlockedLetter_0B, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        Set(GF_MAC01_UnlockedLetter_0C, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+        Set(GF_MAC01_UnlockedLetter_0D, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+        Set(GF_MAC01_UnlockedLetter_0E, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+        Set(GF_MAC01_UnlockedLetter_10, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH8_REACHED_STAR_HAVEN)
+        Set(GF_MAC01_UnlockedLetter_0F, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
+        Set(GF_MAC01_UnlockedLetter_12, TRUE)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+        Set(GF_MAC01_UnlockedLetter_11, TRUE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Parakarry) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_MAC_Plaza_0064)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_MAC_Plaza_0064)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Parakarry)[] = {
@@ -413,65 +413,65 @@ AnimID N(ExtraAnims_Parakarry)[] = {
 };
 
 EvtScript N(EVS_NpcInit_Parakarry) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 37, 26)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Parakarry)))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldParakarry_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_SELF, 37, 26)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Parakarry)))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldParakarry_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_CarryItem_PostOfficeShyGuy) = {
-    EVT_CALL(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar3, 20)
-    EVT_CALL(MakeItemEntity, ITEM_MAILBAG, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVar9, LVar0)
-    EVT_WAIT(1)
-    EVT_LOOP(140)
-        EVT_CALL(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 20)
-        EVT_CALL(SetItemPos, LVar9, LVar2, LVar3, LVar4)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(RemoveItemEntity, LVar9)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
+    Add(LVar3, 20)
+    Call(MakeItemEntity, ITEM_MAILBAG, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVar9, LVar0)
+    Wait(1)
+    Loop(140)
+        Call(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
+        Add(LVar3, 20)
+        Call(SetItemPos, LVar9, LVar2, LVar3, LVar4)
+        Wait(1)
+    EndLoop
+    Call(RemoveItemEntity, LVar9)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostOfficeShyGuy_Escape) = {
-    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, 357, 20, -440)
-    EVT_CALL(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
-    EVT_EXEC(N(EVS_CarryItem_PostOfficeShyGuy))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(60)
-    EVT_CALL(PlaySoundAtNpc, NPC_PostOfficeShyGuy, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_PostOfficeShyGuy, 247, 20, -440, 20)
-    EVT_SET(LVar0, 6)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVarA)
-    EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, 180, -410, 20)
-    EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, 150, -333, 8)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
-    EVT_SET(GF_MAC01_MailbagStolen, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_PostOfficeShyGuy, 357, 20, -440)
+    Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
+    Exec(N(EVS_CarryItem_PostOfficeShyGuy))
+    Call(DisablePlayerInput, TRUE)
+    Wait(60)
+    Call(PlaySoundAtNpc, NPC_PostOfficeShyGuy, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_PostOfficeShyGuy, 247, 20, -440, 20)
+    Set(LVar0, 6)
+    Call(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    ExecGetTID(N(D_8024E6F8_80EF78), LVarA)
+    Call(NpcMoveTo, NPC_PostOfficeShyGuy, 180, -410, 20)
+    Call(NpcMoveTo, NPC_PostOfficeShyGuy, 150, -333, 8)
+    KillThread(LVarA)
+    Call(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
+    Set(GF_MAC01_MailbagStolen, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_MailbagTheft) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GT(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(GF_MAC01_MailbagStolen, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_IdleAlt, 0, MSG_MAC_Plaza_005F)
-    EVT_EXEC(N(EVS_PostOfficeShyGuy_Escape))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        Return
+    EndIf
+    IfGt(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
+        Return
+    EndIf
+    IfNe(GF_MAC01_MailbagStolen, FALSE)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(SpeakToPlayer, NPC_Postmaster, ANIM_Postmaster_Talk, ANIM_Postmaster_IdleAlt, 0, MSG_MAC_Plaza_005F)
+    Exec(N(EVS_PostOfficeShyGuy_Escape))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

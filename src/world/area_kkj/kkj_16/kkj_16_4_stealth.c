@@ -20,258 +20,258 @@ Vec3f N(TwinkFollowPath2)[] = {
 };
 
 EvtScript N(EVS_ApproachPeach) = {
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 10)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcVar, NPC_HammerBros, 0, 1)
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 26)
-        EVT_SUB(LVar2, 2)
-        EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim07)
-        EVT_CALL(SetNpcSpeed, NPC_HammerBros, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_HammerBros, LVar0, LVar2, 0)
-        EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim02)
-        EVT_CALL(NpcFacePlayer, NPC_HammerBros, 5)
-        EVT_CALL(SetNpcVar, NPC_HammerBros, 0, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 26)
-        EVT_ADD(LVar2, 2)
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_01, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
-        EVT_CALL(NpcFacePlayer, NPC_Koopatrol_01, 5)
-    EVT_END_THREAD
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetNpcVar, NPC_HammerBros, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(10)
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Sub(LVar0, 10)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetNpcVar, NPC_HammerBros, 0, 1)
+    Thread
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Sub(LVar0, 26)
+        Sub(LVar2, 2)
+        Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim07)
+        Call(SetNpcSpeed, NPC_HammerBros, Float(5.0))
+        Call(NpcMoveTo, NPC_HammerBros, LVar0, LVar2, 0)
+        Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim02)
+        Call(NpcFacePlayer, NPC_HammerBros, 5)
+        Call(SetNpcVar, NPC_HammerBros, 0, 0)
+    EndThread
+    Thread
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, 26)
+        Add(LVar2, 2)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+        Call(SetNpcSpeed, NPC_Koopatrol_01, Float(5.0))
+        Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 0)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(NpcFacePlayer, NPC_Koopatrol_01, 5)
+    EndThread
+    Loop(0)
+        Wait(1)
+        Call(GetNpcVar, NPC_HammerBros, 0, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_PickUpPeach) = {
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_HammerBros, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 5)
-        EVT_CALL(NpcMoveTo, NPC_HammerBros, LVar0, LVar2, 5)
-        EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim13)
-        EVT_ADD(LVar0, 5)
-        EVT_CALL(NpcMoveTo, NPC_HammerBros, LVar0, LVar2, 5)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_Koopatrol_01, LVar0, LVar1, LVar2)
-        EVT_SUB(LVar0, 5)
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim12)
-        EVT_SUB(LVar0, 5)
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
-    EVT_END_THREAD
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
-    EVT_WAIT(1)
-    EVT_LOOP(4)
-        EVT_ADD(LVar1, 2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Carried)
-    EVT_ADD(LVar0, 10)
-    EVT_LOOP(5)
-        EVT_ADD(LVar1, 4)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(GetNpcPos, NPC_HammerBros, LVar0, LVar1, LVar2)
+        Add(LVar0, 5)
+        Call(NpcMoveTo, NPC_HammerBros, LVar0, LVar2, 5)
+        Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim13)
+        Add(LVar0, 5)
+        Call(NpcMoveTo, NPC_HammerBros, LVar0, LVar2, 5)
+    EndThread
+    Thread
+        Call(GetNpcPos, NPC_Koopatrol_01, LVar0, LVar1, LVar2)
+        Sub(LVar0, 5)
+        Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim12)
+        Sub(LVar0, 5)
+        Call(NpcMoveTo, NPC_Koopatrol_01, LVar0, LVar2, 5)
+    EndThread
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
+    Wait(1)
+    Loop(4)
+        Add(LVar1, 2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(SetPlayerAnimation, ANIM_Peach2_Carried)
+    Add(LVar0, 10)
+    Loop(5)
+        Add(LVar1, 4)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_CarryPeachAway) = {
-    EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 3)
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(GetNpcPos, NPC_HammerBros, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 32)
-            EVT_ADD(LVar2, 2)
-            EVT_CALL(SetPlayerPos, LVar0, 30, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetNpcVar, NPC_HammerBros, 0, 1)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim08)
-        EVT_CALL(SetNpcSpeed, NPC_HammerBros, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_HammerBros, -606, -57, 0)
-        EVT_CALL(SetNpcPos, NPC_HammerBros, 354, 0, 0)
-        EVT_CALL(SetNpcVar, NPC_HammerBros, 0, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim14)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_01, EVT_FLOAT(5.0))
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, -574, -53, 0)
-        EVT_CALL(SetNpcPos, NPC_Koopatrol_01, 386, 0, 0)
-    EVT_END_THREAD
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetNpcVar, NPC_HammerBros, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(InterpNpcYaw, NPC_Koopatrol_01, 90, 3)
+    Wait(10)
+    Thread
+        Loop(0)
+            Call(GetNpcPos, NPC_HammerBros, LVar0, LVar1, LVar2)
+            Add(LVar0, 32)
+            Add(LVar2, 2)
+            Call(SetPlayerPos, LVar0, 30, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(SetNpcVar, NPC_HammerBros, 0, 1)
+    Thread
+        Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim08)
+        Call(SetNpcSpeed, NPC_HammerBros, Float(5.0))
+        Call(NpcMoveTo, NPC_HammerBros, -606, -57, 0)
+        Call(SetNpcPos, NPC_HammerBros, 354, 0, 0)
+        Call(SetNpcVar, NPC_HammerBros, 0, 0)
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim14)
+        Call(SetNpcSpeed, NPC_Koopatrol_01, Float(5.0))
+        Call(NpcMoveTo, NPC_Koopatrol_01, -574, -53, 0)
+        Call(SetNpcPos, NPC_Koopatrol_01, 386, 0, 0)
+    EndThread
+    Loop(0)
+        Wait(1)
+        Call(GetNpcVar, NPC_HammerBros, 0, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageSneakingScenes) = {
-    EVT_IF_EQ(AF_KKJ_07, FALSE)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(DisablePartnerAI, 1)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_006C)
-        EVT_SET(AF_KKJ_07, TRUE)
-        EVT_CALL(EnablePartnerAI)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_IF
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LE(LVar0, -770)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_THREAD
-        EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 8)
-        EVT_WAIT(3)
-        EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 7)
-        EVT_WAIT(3)
-        EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 6)
-        EVT_WAIT(3)
-        EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 5)
-        EVT_WAIT(3)
-        EVT_CALL(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 4)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Startle)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
-    EVT_THREAD
-        EVT_CALL(NpcFlyTo, NPC_PARTNER, -776, 50, -65, 10 * DT, 0, EASING_LINEAR)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(PlayerMoveTo, -778, -55, 10 * DT)
-        EVT_CALL(InterpPlayerYaw, 185, 0)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_006E)
-    EVT_CALL(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_006F)
-    EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0070)
-    EVT_CALL(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_0071)
-    EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0072)
-    EVT_CALL(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_0073)
-    EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0074)
-    EVT_CALL(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_0075)
-    EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0076)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-10.5))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, -775, -50)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_BattleBow_Talk, ANIM_Peach1_Idle, 5, MSG_Peach_0077)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_Peach_0078)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0079)
-    EVT_CALL(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_007A)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim07)
-        EVT_CALL(NpcMoveTo, NPC_HammerBros, -820, 50, 30 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim02)
-        EVT_CALL(NpcFacePlayer, NPC_HammerBros, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, -840, 10, 30 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
-        EVT_CALL(NpcFacePlayer, NPC_Koopatrol_01, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Cringe)
-        EVT_CALL(LoadPath, 20 * DT, EVT_PTR(N(TwinkHide1)), ARRAY_COUNT(N(TwinkHide1)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-        EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 10 * DT)
-    EVT_END_THREAD
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_007B)
-    EVT_CALL(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_007C)
-    EVT_EXEC_WAIT(N(EVS_ApproachPeach))
-    EVT_EXEC_WAIT(N(EVS_PickUpPeach))
-    EVT_EXEC_WAIT(N(EVS_CarryPeachAway))
-    EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Carried, ANIM_Peach2_Carried, 5, MSG_Peach_007D)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(LoadPath, 40 * DT, EVT_PTR(N(TwinkFollowPath1)), ARRAY_COUNT(N(TwinkFollowPath1)), EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_TalkSad)
-    EVT_LOOP(2)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 7 * DT)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 7 * DT)
-        EVT_WAIT(5 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Idle)
-    EVT_THREAD
-        EVT_CALL(LoadPath, 30 * DT, EVT_PTR(N(TwinkFollowPath2)), ARRAY_COUNT(N(TwinkFollowPath2)), EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(15 * DT)
-    EVT_CALL(FadeOutMusic, 0, 1000 * DT)
-    EVT_EXEC_WAIT(N(EVS_EndPeachChapter2))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_KKJ_07, FALSE)
+        Call(DisablePlayerInput, TRUE)
+        Call(DisablePartnerAI, 1)
+        Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_006C)
+        Set(AF_KKJ_07, TRUE)
+        Call(EnablePartnerAI)
+        Call(DisablePlayerInput, FALSE)
+    EndIf
+    Loop(0)
+        Wait(1)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLe(LVar0, -770)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Thread
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 8)
+        Wait(3)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 7)
+        Wait(3)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 6)
+        Wait(3)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 5)
+        Wait(3)
+        Call(SetMusicTrack, 0, SONG_PEACH_SNEAKING, 0, 4)
+    EndThread
+    Call(SetPlayerAnimation, ANIM_Peach2_Startle)
+    Call(PlaySoundAtPlayer, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Peach1_Idle)
+    Thread
+        Call(NpcFlyTo, NPC_PARTNER, -776, 50, -65, 10 * DT, 0, EASING_LINEAR)
+    EndThread
+    Thread
+        Call(PlayerMoveTo, -778, -55, 10 * DT)
+        Call(InterpPlayerYaw, 185, 0)
+    EndThread
+    Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_006E)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_006F)
+    Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0070)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_0071)
+    Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0072)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_0073)
+    Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0074)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_0075)
+    Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0076)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-10.5))
+    Call(SetCamPosA, CAM_DEFAULT, -775, -50)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_PLAYER, ANIM_BattleBow_Talk, ANIM_Peach1_Idle, 5, MSG_Peach_0077)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_Peach_0078)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Call(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_0079)
+    Call(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_007A)
+    Thread
+        Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim07)
+        Call(NpcMoveTo, NPC_HammerBros, -820, 50, 30 * DT)
+        Call(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim02)
+        Call(NpcFacePlayer, NPC_HammerBros, 0)
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
+        Call(NpcMoveTo, NPC_Koopatrol_01, -840, 10, 30 * DT)
+        Call(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
+        Call(NpcFacePlayer, NPC_Koopatrol_01, 0)
+    EndThread
+    Thread
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Cringe)
+        Call(LoadPath, 20 * DT, Ref(N(TwinkHide1)), ARRAY_COUNT(N(TwinkHide1)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(NpcFacePlayer, NPC_PARTNER, 0)
+    EndThread
+    Thread
+        Wait(10 * DT)
+        Call(SetPlayerAnimation, ANIM_Peach2_Gasp)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetPlayerJumpscale, Float(1.0))
+        Call(PlayerJump1, LVar0, LVar1, LVar2, 10 * DT)
+    EndThread
+    Wait(30 * DT)
+    Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_007B)
+    Call(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_007C)
+    ExecWait(N(EVS_ApproachPeach))
+    ExecWait(N(EVS_PickUpPeach))
+    ExecWait(N(EVS_CarryPeachAway))
+    Call(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Carried, ANIM_Peach2_Carried, 5, MSG_Peach_007D)
+    Wait(10 * DT)
+    Call(LoadPath, 40 * DT, Ref(N(TwinkFollowPath1)), ARRAY_COUNT(N(TwinkFollowPath1)), EASING_LINEAR)
+    Loop(0)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_TalkSad)
+    Loop(2)
+        Call(InterpNpcYaw, NPC_PARTNER, 270, 7 * DT)
+        Wait(5 * DT)
+        Call(InterpNpcYaw, NPC_PARTNER, 90, 7 * DT)
+        Wait(5 * DT)
+    EndLoop
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Idle)
+    Thread
+        Call(LoadPath, 30 * DT, Ref(N(TwinkFollowPath2)), ARRAY_COUNT(N(TwinkFollowPath2)), EASING_LINEAR)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Wait(15 * DT)
+    Call(FadeOutMusic, 0, 1000 * DT)
+    ExecWait(N(EVS_EndPeachChapter2))
+    Call(EnablePartnerAI)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

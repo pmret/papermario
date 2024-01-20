@@ -18,9 +18,9 @@ MobileAISettings N(AISettings_ShyGuy_Wander_NoReaction) = {
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy_Wander_NoReaction) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_ShyGuy_Wander_NoReaction)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_ShyGuy_Wander_NoReaction)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ShyGuy_Wander_NoReaction) = {
@@ -43,170 +43,170 @@ NpcSettings N(NpcSettings_ShyGuy_Wander_NoReaction) = {
 #include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_ShyGuy_CarryItem) = {
-    EVT_SET(LVarA, LVar0) // npcID
-    EVT_SET(LVarB, LVar1) // itemID
-    EVT_SET(LVarD, LVar2) // item type
-    EVT_SET(LVarE, LVar3) // pickup flag
-    EVT_CALL(SetNpcVar, LVarA, 10, 0)
-    EVT_CALL(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar3, 26)
-    EVT_CALL(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVar9, LVar0)
-    EVT_WAIT(1)
-    EVT_LABEL(10)
-        EVT_CALL(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 26)
-        EVT_CALL(SetItemPos, LVar9, LVar2, LVar3, LVar4)
-        EVT_WAIT(1)
-        EVT_CALL(GetNpcVar, LVarA, 10, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(RemoveItemEntity, LVar9)
-    EVT_SWITCH(LVarD)
-        EVT_CASE_EQ(ITEM_TYPE_CONSUMABLE)
-            EVT_CALL(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, LVarE)
-        EVT_CASE_EQ(ITEM_TYPE_KEY)
-            EVT_CALL(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, LVarE)
-        EVT_CASE_EQ(ITEM_TYPE_BADGE)
-            EVT_CALL(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL, LVarE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0) // npcID
+    Set(LVarB, LVar1) // itemID
+    Set(LVarD, LVar2) // item type
+    Set(LVarE, LVar3) // pickup flag
+    Call(SetNpcVar, LVarA, 10, 0)
+    Call(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
+    Add(LVar3, 26)
+    Call(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVar9, LVar0)
+    Wait(1)
+    Label(10)
+        Call(GetNpcPos, LVarA, LVar2, LVar3, LVar4)
+        Add(LVar3, 26)
+        Call(SetItemPos, LVar9, LVar2, LVar3, LVar4)
+        Wait(1)
+        Call(GetNpcVar, LVarA, 10, LVar0)
+        IfEq(LVar0, 0)
+            Goto(10)
+        EndIf
+    Call(RemoveItemEntity, LVar9)
+    Switch(LVarD)
+        CaseEq(ITEM_TYPE_CONSUMABLE)
+            Call(MakeItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS, LVarE)
+        CaseEq(ITEM_TYPE_KEY)
+            Call(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, LVarE)
+        CaseEq(ITEM_TYPE_BADGE)
+            Call(DropItemEntity, LVarB, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_FALL, LVarE)
+    EndSwitch
+    Return
+    End
 };
 
 
 EvtScript N(EVS_NpcDefeat_ShyGuy_Thief) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_OMO09_Defeated_MysteryNoteThief, TRUE)
-            EVT_CALL(SetSelfVar, 10, 1)
-            EVT_WAIT(2)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_SET(GF_OMO09_Defeated_MysteryNoteThief, TRUE)
-            EVT_CALL(SetSelfVar, 10, 1)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_OMO09_Defeated_MysteryNoteThief, TRUE)
+            Call(SetSelfVar, 10, 1)
+            Wait(2)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Set(GF_OMO09_Defeated_MysteryNoteThief, TRUE)
+            Call(SetSelfVar, 10, 1)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Pokey) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar0, 1850)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_IF_LT(LVar1, 150)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(DisableCameraLeadingPlayer))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
-    EVT_IF_EQ(GB_OMO_PeachChoice3, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Pokey, ANIM_Pokey_Idle4, ANIM_Pokey_Idle4, 0, MSG_CH4_003E)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH4_003F)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(EnableCameraLeadingPlayer))
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar0, 1850)
+            Goto(0)
+        EndIf
+        IfLt(LVar1, 150)
+            Goto(0)
+        EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(N(DisableCameraLeadingPlayer))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, Float(5.0), LVar0, LVar1, LVar2, 300, Float(13.0), Float(-9.5))
+    IfEq(GB_OMO_PeachChoice3, 0)
+        Call(SpeakToPlayer, NPC_Pokey, ANIM_Pokey_Idle4, ANIM_Pokey_Idle4, 0, MSG_CH4_003E)
+    Else
+        Call(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH4_003F)
+    EndIf
+    Thread
+        Call(N(EnableCameraLeadingPlayer))
+        Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    EndThread
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Pokey) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_OMO09_Item_SuperSoda, TRUE)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_OMO09_Item_SuperSoda, TRUE)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Pokey) = {
-    EVT_IF_EQ(GB_OMO_PeachChoice3, 0)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_OMO_PeachChoice3, 0)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Pokey)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol) = {
-    EVT_IF_EQ(GB_OMO_PeachChoice3, 1)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_OMO_PeachChoice3, 1)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Pokey)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kammy) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kammy)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kammy)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy_Jackpot) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_CALL(SetSelfVar, 0, 1)
-                    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy_Wander)))
-                EVT_END_IF
-            EVT_CASE_EQ(2)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_WAIT(25)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-                EVT_CALL(SetSelfVar, 0, 0)
-                EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                IfEq(LVar1, 0)
+                    Call(SetSelfVar, 0, 1)
+                    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Wander)))
+                EndIf
+            CaseEq(2)
+                Call(DisablePlayerInput, TRUE)
+                Wait(25)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+                Call(SetSelfVar, 0, 0)
+                Call(DisablePlayerInput, FALSE)
+        EndSwitch
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_ShyGuy_Jackpot) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetSelfVar, 0, 2)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy_Jackpot)))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetSelfVar, 0, 2)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Jackpot)))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Jackpot) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy_Jackpot)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy_Jackpot)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Jackpot)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy_Jackpot)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Pokey) = {
@@ -369,18 +369,18 @@ NpcData N(NpcData_Kammy) = {
 };
 
 EvtScript N(EVS_ShyGuy_Thief) = {
-    EVT_IF_EQ(GF_OMO09_Defeated_MysteryNoteThief, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy_Thief)))
-    EVT_SET(LVar0, NPC_ShyGuy_Thief)
-    EVT_SET(LVar1, ITEM_MYSTERY_NOTE)
-    EVT_SET(LVar2, ITEM_TYPE_KEY)
-    EVT_SET_CONST(LVar3, GF_OMO09_Item_MysteryNote)
-    EVT_EXEC(N(EVS_ShyGuy_CarryItem))
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_OMO09_Defeated_MysteryNoteThief, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy_Thief)))
+    Set(LVar0, NPC_ShyGuy_Thief)
+    Set(LVar1, ITEM_MYSTERY_NOTE)
+    Set(LVar2, ITEM_TYPE_KEY)
+    SetConst(LVar3, GF_OMO09_Item_MysteryNote)
+    Exec(N(EVS_ShyGuy_CarryItem))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_Thief) = {

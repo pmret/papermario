@@ -16,12 +16,12 @@ MobileAISettings N(AISettings_Koopatrol_Patrol) = {
 };
 
 EvtScript N(EVS_NpcAI_Koopatrol_Patrol) = {
-    EVT_CALL(SetSelfVar, 2, 8)
-    EVT_CALL(SetSelfVar, 3, 15)
-    EVT_CALL(SetSelfVar, 5, 10)
-    EVT_CALL(N(KoopaPatrolAI_Main), EVT_PTR(N(AISettings_Koopatrol_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 8)
+    Call(SetSelfVar, 3, 15)
+    Call(SetSelfVar, 5, 10)
+    Call(N(KoopaPatrolAI_Main), Ref(N(AISettings_Koopatrol_Patrol)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Koopatrol_Patrol) = {

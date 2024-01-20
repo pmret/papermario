@@ -81,465 +81,465 @@ API_CALLABLE(N(SetInvitationLetterScale)) {
 }
 
 EvtScript N(EVS_NpcInteract_PenguinPatrol) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Patrol)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B9)
-                    EVT_SET(MV_DialogueState_Patrol, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BA)
-                    EVT_SET(MV_DialogueState_Patrol, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-        EVT_CASE_LT(STORY_CH7_DEFEATED_JR_TROOPA)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BB)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BC)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BD)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Patrol)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00B9)
+                    Set(MV_DialogueState_Patrol, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BA)
+                    Set(MV_DialogueState_Patrol, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+        CaseLt(STORY_CH7_DEFEATED_JR_TROOPA)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BB)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BC)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_00BD)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_PenguinPatrol) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_PenguinSentry) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C7)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C8)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_IF_EQ(GF_SAM11_LeftTown, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C9)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00CA)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00CB)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C7)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C8)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            IfEq(GF_SAM11_LeftTown, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00C9)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00CA)
+            EndIf
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00CB)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_PenguinSentry) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(N(SetInitialSentryPosition))
-            EVT_LOOP(0)
-                EVT_CALL(N(UpdateSentryPosition))
-                EVT_WAIT(1)
-            EVT_END_LOOP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(N(SetInitialSentryPosition))
+            Loop(0)
+                Call(N(UpdateSentryPosition))
+                Wait(1)
+            EndLoop
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Herringway) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_WAIT(30 * DT)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00CE)
-            EVT_WAIT(10 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_WAIT(5 * DT)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-            EVT_ADDF(LVar0, LVar3)
-            EVT_ADDF(LVar1, LVar4)
-            EVT_ADDF(LVar2, LVar5)
-            EVT_DIVF(LVar0, EVT_FLOAT(2.0))
-            EVT_DIVF(LVar1, EVT_FLOAT(2.0))
-            EVT_DIVF(LVar2, EVT_FLOAT(2.0))
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-9.0))
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-            EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-224.0), EVT_FLOAT(-132.0))
-            EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(-127.0), EVT_FLOAT(-314.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(SetPlayerPos, -137, 150, -340)
-            EVT_CALL(PlayerFaceNpc, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, -170, 150, -350)
-            EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
-            EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-            EVT_WAIT(10 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-            EVT_WAIT(20 * DT)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00CF)
-            EVT_WAIT(5 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Thinking)
-            EVT_WAIT(30 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D0)
-            EVT_WAIT(20 * DT)
-            EVT_THREAD
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-                EVT_LOOP(30)
-                    EVT_CALL(PlayerFaceNpc, NPC_Herringway, FALSE)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
-            EVT_CALL(NpcMoveTo, NPC_SELF, -235, -355, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_WAIT(20 * DT)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D1)
-            EVT_WAIT(15 * DT)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(0.5))
-            EVT_EXEC_WAIT(N(EVS_LowerStaircase))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D2)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
-            EVT_CALL(NpcMoveTo, NPC_SELF, -215, -245, 0)
-            EVT_THREAD
-                EVT_CALL(NpcMoveTo, NPC_SELF, -215, -184, 0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
-                EVT_CALL(SetNpcPos, NPC_SELF, -217, 0, -38)
-            EVT_END_THREAD
-            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-            EVT_SET(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D3)
-        EVT_CASE_LT(STORY_CH7_DEFEATED_JR_TROOPA)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D5)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D6)
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D7)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
+            Wait(30 * DT)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00CE)
+            Wait(10 * DT)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Wait(5 * DT)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+            AddF(LVar0, LVar3)
+            AddF(LVar1, LVar4)
+            AddF(LVar2, LVar5)
+            DivF(LVar0, Float(2.0))
+            DivF(LVar1, Float(2.0))
+            DivF(LVar2, Float(2.0))
+            Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
+            Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+            Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+            Call(SetCamPosA, CAM_DEFAULT, Float(-224.0), Float(-132.0))
+            Call(SetCamPosB, CAM_DEFAULT, Float(-127.0), Float(-314.0))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(SetPlayerPos, -137, 150, -340)
+            Call(PlayerFaceNpc, NPC_SELF, FALSE)
+            Call(SetNpcPos, NPC_PARTNER, -170, 150, -350)
+            Call(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
+            Call(NpcFacePlayer, NPC_SELF, 0)
+            Wait(10 * DT)
+            Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+            Wait(20 * DT)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00CF)
+            Wait(5 * DT)
+            Call(SetPlayerAnimation, ANIM_Mario1_Thinking)
+            Wait(30 * DT)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D0)
+            Wait(20 * DT)
+            Thread
+                Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+                Loop(30)
+                    Call(PlayerFaceNpc, NPC_Herringway, FALSE)
+                    Wait(1)
+                EndLoop
+            EndThread
+            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
+            Call(NpcMoveTo, NPC_SELF, -235, -355, 0)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Wait(20 * DT)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D1)
+            Wait(15 * DT)
+            Call(ShakeCam, CAM_DEFAULT, 0, 20, Float(0.5))
+            ExecWait(N(EVS_LowerStaircase))
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D2)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Walk)
+            Call(NpcMoveTo, NPC_SELF, -215, -245, 0)
+            Thread
+                Call(NpcMoveTo, NPC_SELF, -215, -184, 0)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
+                Call(SetNpcPos, NPC_SELF, -217, 0, -38)
+            EndThread
+            Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
+            Set(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D3)
+        CaseLt(STORY_CH7_DEFEATED_JR_TROOPA)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D5)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D6)
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D7)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Herringway) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin2)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0096)
-                    EVT_SET(MV_DialogueState_Penguin2, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0097)
-                    EVT_SET(MV_DialogueState_Penguin2, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin2)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0098)
-                    EVT_SET(MV_DialogueState_Penguin2, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0099)
-                    EVT_SET(MV_DialogueState_Penguin2, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009A)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin2)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0096)
+                    Set(MV_DialogueState_Penguin2, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0097)
+                    Set(MV_DialogueState_Penguin2, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin2)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0098)
+                    Set(MV_DialogueState_Penguin2, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0099)
+                    Set(MV_DialogueState_Penguin2, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009A)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin3)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009B)
-                    EVT_SET(MV_DialogueState_Penguin3, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009C)
-                    EVT_SET(MV_DialogueState_Penguin3, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin3)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009D)
-                    EVT_SET(MV_DialogueState_Penguin3, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Celebrate, ANIM_Penguin_Idle, 0, MSG_CH7_009E)
-                    EVT_SET(MV_DialogueState_Penguin3, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009F)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin3)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009B)
+                    Set(MV_DialogueState_Penguin3, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009C)
+                    Set(MV_DialogueState_Penguin3, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin3)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009D)
+                    Set(MV_DialogueState_Penguin3, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Celebrate, ANIM_Penguin_Idle, 0, MSG_CH7_009E)
+                    Set(MV_DialogueState_Penguin3, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_009F)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin4)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A0)
-                    EVT_SET(MV_DialogueState_Penguin4, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A1)
-                    EVT_SET(MV_DialogueState_Penguin4, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_IF_EQ(GF_SAM11_UnlockedDoor, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A2)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A3)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin4)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A4)
-                    EVT_SET(MV_DialogueState_Penguin4, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A5)
-                    EVT_SET(MV_DialogueState_Penguin4, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A6)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin4)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A0)
+                    Set(MV_DialogueState_Penguin4, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A1)
+                    Set(MV_DialogueState_Penguin4, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            IfEq(GF_SAM11_UnlockedDoor, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A2)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A3)
+            EndIf
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin4)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A4)
+                    Set(MV_DialogueState_Penguin4, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A5)
+                    Set(MV_DialogueState_Penguin4, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A6)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_05) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin5)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A7)
-                    EVT_SET(MV_DialogueState_Penguin5, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A8)
-                    EVT_SET(MV_DialogueState_Penguin5, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_SWITCH(MV_DialogueState_Penguin5)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A9)
-                    EVT_SET(MV_DialogueState_Penguin5, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AA)
-                    EVT_SET(MV_DialogueState_Penguin5, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AB)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin5)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AC)
-                    EVT_SET(MV_DialogueState_Penguin5, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AD)
-                    EVT_SET(MV_DialogueState_Penguin5, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin5)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A7)
+                    Set(MV_DialogueState_Penguin5, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A8)
+                    Set(MV_DialogueState_Penguin5, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
+            Switch(MV_DialogueState_Penguin5)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00A9)
+                    Set(MV_DialogueState_Penguin5, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AA)
+                    Set(MV_DialogueState_Penguin5, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AB)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin5)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AC)
+                    Set(MV_DialogueState_Penguin5, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AD)
+                    Set(MV_DialogueState_Penguin5, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_06) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin6)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AF)
-                    EVT_SET(MV_DialogueState_Penguin6, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B0)
-                    EVT_SET(MV_DialogueState_Penguin6, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_SWITCH(MV_DialogueState_Penguin6)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B1)
-                    EVT_SET(MV_DialogueState_Penguin6, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B2)
-                    EVT_SET(MV_DialogueState_Penguin6, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin6)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B3)
-                    EVT_SET(MV_DialogueState_Penguin6, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B4)
-                    EVT_SET(MV_DialogueState_Penguin6, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B5)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin6)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00AF)
+                    Set(MV_DialogueState_Penguin6, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B0)
+                    Set(MV_DialogueState_Penguin6, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Switch(MV_DialogueState_Penguin6)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B1)
+                    Set(MV_DialogueState_Penguin6, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B2)
+                    Set(MV_DialogueState_Penguin6, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin6)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B3)
+                    Set(MV_DialogueState_Penguin6, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B4)
+                    Set(MV_DialogueState_Penguin6, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_00B5)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_SHATTERED_FROZEN_POND)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BE)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BF)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C0)
-        EVT_CASE_LT(STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C1)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C2)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C3)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C4)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C5)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C6)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_SHATTERED_FROZEN_POND)
+            Call(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BE)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00BF)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C0)
+        CaseLt(STORY_CH7_ARRIVED_AT_STARBORN_VALLEY)
+            Call(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C1)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C2)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C3)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C4)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C5)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, MSG_CH7_00C6)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_03) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_Toadette_01))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_Toadette_01))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toadette_02) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_Toadette_01))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_Toadette_01))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_PenguinPatrol) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_PenguinPatrol)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_PenguinPatrol)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_PenguinPatrol)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_PenguinPatrol)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(RemoveNpc, NPC_SELF)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_PenguinSentry) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_PenguinSentry)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_PenguinSentry)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, 420, 0, -51)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_PenguinSentry)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_PenguinSentry)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, 420, 0, -51)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Herringway) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Herringway)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Herringway)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_CALL(SetNpcPos, NPC_SELF, -110, 150, -323)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -110, 150, -323)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Herringway)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Herringway)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
+            Call(SetNpcPos, NPC_SELF, -110, 150, -323)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -110, 150, -323)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_02)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_SAM11_LeftTown, FALSE)
-                EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_02)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseDefault
+            IfEq(GF_SAM11_LeftTown, FALSE)
+                Call(RemoveNpc, NPC_SELF)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_03)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_SAM11_LeftTown, FALSE)
-                EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_03)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseDefault
+            IfEq(GF_SAM11_LeftTown, FALSE)
+                Call(RemoveNpc, NPC_SELF)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_04)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_05)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_05)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_06)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_06)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_01) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_01)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette_01)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_02) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_02)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette_02)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette_03) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette_03)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette_03)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Townsfolk)[] = {
@@ -758,228 +758,228 @@ NpcData N(NpcData_Tourists)[] = {
 };
 
 EvtScript N(EVS_Scene_EpilogueDelivery) = {
-    EVT_CALL(SetNpcPos, NPC_Kolorado, 140, 0, -48)
-    EVT_CALL(SetNpcPos, NPC_Kooper, 75, 0, -48)
-    EVT_CALL(SetNpcPos, NPC_Archeologist_01, 103, 0, -87)
-    EVT_CALL(SetNpcPos, NPC_Archeologist_02, 45, 0, -87)
-    EVT_CALL(SetNpcSpeed, NPC_Kolorado, EVT_FLOAT(2.0))
-    EVT_CALL(SetNpcSpeed, NPC_Kooper, EVT_FLOAT(2.0))
-    EVT_CALL(SetNpcSpeed, NPC_Archeologist_01, EVT_FLOAT(2.0))
-    EVT_CALL(SetNpcSpeed, NPC_Archeologist_02, EVT_FLOAT(2.0))
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Kooper, 148, -48, 0)
-        EVT_CALL(NpcMoveTo, NPC_Kooper, 263, 26, 0)
-        EVT_CALL(NpcMoveTo, NPC_Kooper, 308, 26, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Archeologist_01, ANIM_Archeologist_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_01, 148, -87, 0)
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_01, 263, -13, 0)
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_01, 331, -13, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Archeologist_01, ANIM_Archeologist_Idle)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Archeologist_02, ANIM_Archeologist_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_02, 148, -87, 0)
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_02, 263, -13, 0)
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_02, 283, -13, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Archeologist_02, ANIM_Archeologist_Idle)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Kolorado, 148, -48, 0)
-    EVT_CALL(NpcMoveTo, NPC_Kolorado, 263, 26, 0)
-    EVT_CALL(NpcMoveTo, NPC_Kolorado, 358, 26, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
-    EVT_WAIT(30)
-    EVT_CALL(InterpNpcYaw, NPC_Kolorado, 270, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_Outro_0017)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_0018)
-    EVT_THREAD
-        EVT_WAIT(25)
-        EVT_CALL(InterpNpcYaw, NPC_Kooper, 270, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(28)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(32)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(35)
-        EVT_CALL(InterpNpcYaw, NPC_Kolorado, 270, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcSpeed, NPC_Parakarry, EVT_FLOAT(3.0))
-    EVT_CALL(SetNpcPos, NPC_Parakarry, 140, 115, 26)
-    EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_0019)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 310, 0, 0)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 310, 0, 0)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(-300.0))
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
-    EVT_CALL(NpcFlyTo, NPC_Parakarry, 270, 15, 26, 50, 0, EASING_LINEAR)
-    EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Idle)
-    EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001A)
-    EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_001B)
-    EVT_THREAD
-        EVT_CALL(DropResizableItemEntity, ITEM_LETTER_TO_KOLORADO, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_CALL(N(SetInvitationLetterScale))
-        EVT_LOOP(20)
-            EVT_CALL(GetNpcPos, NPC_Parakarry, LVar1, LVar2, LVar3)
-            EVT_ADD(LVar1, 16)
-            EVT_ADD(LVar2, 4)
-            EVT_ADD(LVar3, 10)
-            EVT_CALL(SetItemPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(73)
-        EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_END_THREAD
-    EVT_CALL(NpcFlyTo, NPC_Parakarry, 280, 5, 26, 20, -5, EASING_LINEAR)
-    EVT_WAIT(35)
-    EVT_CALL(NpcFlyTo, NPC_Parakarry, 270, 15, 26, 20, -5, EASING_LINEAR)
-    EVT_CALL(InterpNpcYaw, NPC_Parakarry, 90, 0)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Read)
-    EVT_WAIT(50)
-    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
-    EVT_WAIT(30)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001C)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_Kooper, 90, 0)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_Outro_001D)
-    EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001E)
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_Parakarry, 270, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_CelebrateLoop)
-    EVT_CALL(InterpNpcYaw, NPC_Kooper, 270, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcSpeed, NPC_Kooper, EVT_FLOAT(8.0))
-    EVT_CALL(NpcMoveTo, NPC_Kooper, 75, -48, 0)
-    EVT_CALL(SetNpcPos, NPC_Kooper, NPC_DISPOSE_LOCATION)
-    EVT_CALL(InterpNpcYaw, NPC_Parakarry, 90, 0)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_001F)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
-    EVT_CALL(SetNpcJumpscale, NPC_Kolorado, EVT_FLOAT(2.0))
-    EVT_CALL(GetNpcPos, NPC_Kolorado, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_Kolorado, LVar0, LVar1, LVar2, 5)
-    EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 5, MSG_Outro_0020)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcSpeed, NPC_Kolorado, EVT_FLOAT(8.0))
-    EVT_CALL(NpcMoveTo, NPC_Kolorado, 75, -48, 0)
-    EVT_CALL(SetNpcPos, NPC_Kolorado, NPC_DISPOSE_LOCATION)
-    EVT_THREAD
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 325, 0, 0)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 325, 0, 0)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(-450.0))
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
-        EVT_CALL(NpcFlyTo, NPC_Parakarry, 180, 115, 26, 50, 0, EASING_LINEAR)
-        EVT_CALL(SetNpcPos, NPC_Parakarry, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
-        EVT_WAIT(18)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
-        EVT_WAIT(8)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
-        EVT_WAIT(8)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
-        EVT_WAIT(8)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
-        EVT_WAIT(8)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
-        EVT_WAIT(8)
-        EVT_CALL(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
-        EVT_WAIT(30)
-        EVT_CALL(SetNpcAnimation, NPC_Archeologist_01, ANIM_Archeologist_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_Archeologist_01, EVT_FLOAT(2.0))
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_01, 103, -87, 0)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
-    EVT_WAIT(18)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
-    EVT_WAIT(8)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
-    EVT_WAIT(8)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
-    EVT_WAIT(8)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
-    EVT_WAIT(8)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
-    EVT_WAIT(8)
-    EVT_CALL(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Archeologist_02, ANIM_Archeologist_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_Archeologist_02, EVT_FLOAT(2.0))
-        EVT_CALL(NpcMoveTo, NPC_Archeologist_02, 45, -87, 0)
-    EVT_END_THREAD
-    EVT_WAIT(30)
-    EVT_CALL(FadeOutMusic, 0, 1000)
-    EVT_CALL(GotoMap, EVT_PTR("kmr_20"), kmr_20_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Kolorado, 140, 0, -48)
+    Call(SetNpcPos, NPC_Kooper, 75, 0, -48)
+    Call(SetNpcPos, NPC_Archeologist_01, 103, 0, -87)
+    Call(SetNpcPos, NPC_Archeologist_02, 45, 0, -87)
+    Call(SetNpcSpeed, NPC_Kolorado, Float(2.0))
+    Call(SetNpcSpeed, NPC_Kooper, Float(2.0))
+    Call(SetNpcSpeed, NPC_Archeologist_01, Float(2.0))
+    Call(SetNpcSpeed, NPC_Archeologist_02, Float(2.0))
+    Thread
+        Call(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Walk)
+        Call(NpcMoveTo, NPC_Kooper, 148, -48, 0)
+        Call(NpcMoveTo, NPC_Kooper, 263, 26, 0)
+        Call(NpcMoveTo, NPC_Kooper, 308, 26, 0)
+        Call(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Archeologist_01, ANIM_Archeologist_Walk)
+        Call(NpcMoveTo, NPC_Archeologist_01, 148, -87, 0)
+        Call(NpcMoveTo, NPC_Archeologist_01, 263, -13, 0)
+        Call(NpcMoveTo, NPC_Archeologist_01, 331, -13, 0)
+        Call(SetNpcAnimation, NPC_Archeologist_01, ANIM_Archeologist_Idle)
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Archeologist_02, ANIM_Archeologist_Walk)
+        Call(NpcMoveTo, NPC_Archeologist_02, 148, -87, 0)
+        Call(NpcMoveTo, NPC_Archeologist_02, 263, -13, 0)
+        Call(NpcMoveTo, NPC_Archeologist_02, 283, -13, 0)
+        Call(SetNpcAnimation, NPC_Archeologist_02, ANIM_Archeologist_Idle)
+    EndThread
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Walk)
+    Call(NpcMoveTo, NPC_Kolorado, 148, -48, 0)
+    Call(NpcMoveTo, NPC_Kolorado, 263, 26, 0)
+    Call(NpcMoveTo, NPC_Kolorado, 358, 26, 0)
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Idle)
+    Wait(30)
+    Call(InterpNpcYaw, NPC_Kolorado, 270, 0)
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_Outro_0017)
+    Call(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_0018)
+    Thread
+        Wait(25)
+        Call(InterpNpcYaw, NPC_Kooper, 270, 0)
+    EndThread
+    Thread
+        Wait(28)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
+    EndThread
+    Thread
+        Wait(32)
+        Call(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
+    EndThread
+    Thread
+        Wait(35)
+        Call(InterpNpcYaw, NPC_Kolorado, 270, 0)
+    EndThread
+    Call(SetNpcSpeed, NPC_Parakarry, Float(3.0))
+    Call(SetNpcPos, NPC_Parakarry, 140, 115, 26)
+    Call(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_0019)
+    Thread
+        Wait(20)
+        Call(UseSettingsFrom, CAM_DEFAULT, 310, 0, 0)
+        Call(SetPanTarget, CAM_DEFAULT, 310, 0, 0)
+        Call(SetCamDistance, CAM_DEFAULT, Float(-300.0))
+        Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
+    Call(NpcFlyTo, NPC_Parakarry, 270, 15, 26, 50, 0, EASING_LINEAR)
+    Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Idle)
+    Wait(20)
+    Call(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001A)
+    Call(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_001B)
+    Thread
+        Call(DropResizableItemEntity, ITEM_LETTER_TO_KOLORADO, NPC_DISPOSE_LOCATION, ITEM_SPAWN_MODE_DECORATION, 0)
+        Call(N(SetInvitationLetterScale))
+        Loop(20)
+            Call(GetNpcPos, NPC_Parakarry, LVar1, LVar2, LVar3)
+            Add(LVar1, 16)
+            Add(LVar2, 4)
+            Add(LVar3, 10)
+            Call(SetItemPos, LVar0, LVar1, LVar2, LVar3)
+            Wait(1)
+        EndLoop
+        Wait(73)
+        Call(RemoveItemEntity, LVar0)
+    EndThread
+    Call(NpcFlyTo, NPC_Parakarry, 280, 5, 26, 20, -5, EASING_LINEAR)
+    Wait(35)
+    Call(NpcFlyTo, NPC_Parakarry, 270, 15, 26, 20, -5, EASING_LINEAR)
+    Call(InterpNpcYaw, NPC_Parakarry, 90, 0)
+    Wait(30)
+    Call(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Read)
+    Wait(50)
+    Call(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_Idle)
+    Wait(30)
+    Call(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001C)
+    Thread
+        Wait(10)
+        Call(InterpNpcYaw, NPC_Kooper, 90, 0)
+    EndThread
+    Call(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_Outro_001D)
+    Call(SpeakToPlayer, NPC_Kooper, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_Outro_001E)
+    Wait(20)
+    Thread
+        Wait(10)
+        Call(InterpNpcYaw, NPC_Parakarry, 270, 0)
+    EndThread
+    Call(SetNpcAnimation, NPC_Kooper, ANIM_WorldKooper_CelebrateLoop)
+    Call(InterpNpcYaw, NPC_Kooper, 270, 0)
+    Wait(10)
+    Call(SetNpcSpeed, NPC_Kooper, Float(8.0))
+    Call(NpcMoveTo, NPC_Kooper, 75, -48, 0)
+    Call(SetNpcPos, NPC_Kooper, NPC_DISPOSE_LOCATION)
+    Call(InterpNpcYaw, NPC_Parakarry, 90, 0)
+    Wait(30)
+    Thread
+        Wait(10)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
+        Call(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
+    EndThread
+    Call(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_Outro_001F)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
+    Call(SetNpcJumpscale, NPC_Kolorado, Float(2.0))
+    Call(GetNpcPos, NPC_Kolorado, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_Kolorado, LVar0, LVar1, LVar2, 5)
+    Call(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 5, MSG_Outro_0020)
+    Wait(10)
+    Call(SetNpcSpeed, NPC_Kolorado, Float(8.0))
+    Call(NpcMoveTo, NPC_Kolorado, 75, -48, 0)
+    Call(SetNpcPos, NPC_Kolorado, NPC_DISPOSE_LOCATION)
+    Thread
+        Call(UseSettingsFrom, CAM_DEFAULT, 325, 0, 0)
+        Call(SetPanTarget, CAM_DEFAULT, 325, 0, 0)
+        Call(SetCamDistance, CAM_DEFAULT, Float(-450.0))
+        Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Parakarry, ANIM_WorldParakarry_Walk)
+        Call(NpcFlyTo, NPC_Parakarry, 180, 115, 26, 50, 0, EASING_LINEAR)
+        Call(SetNpcPos, NPC_Parakarry, NPC_DISPOSE_LOCATION)
+    EndThread
+    Thread
+        Wait(10)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
+        Wait(18)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
+        Wait(8)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
+        Wait(8)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
+        Wait(8)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
+        Wait(8)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 90, 0)
+        Wait(8)
+        Call(InterpNpcYaw, NPC_Archeologist_01, 270, 0)
+        Wait(30)
+        Call(SetNpcAnimation, NPC_Archeologist_01, ANIM_Archeologist_Walk)
+        Call(SetNpcSpeed, NPC_Archeologist_01, Float(2.0))
+        Call(NpcMoveTo, NPC_Archeologist_01, 103, -87, 0)
+    EndThread
+    Wait(10)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
+    Wait(18)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
+    Wait(8)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
+    Wait(8)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
+    Wait(8)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
+    Wait(8)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 270, 0)
+    Wait(8)
+    Call(InterpNpcYaw, NPC_Archeologist_02, 90, 0)
+    Wait(30)
+    Thread
+        Call(SetNpcAnimation, NPC_Archeologist_02, ANIM_Archeologist_Walk)
+        Call(SetNpcSpeed, NPC_Archeologist_02, Float(2.0))
+        Call(NpcMoveTo, NPC_Archeologist_02, 45, -87, 0)
+    EndThread
+    Wait(30)
+    Call(FadeOutMusic, 0, 1000)
+    Call(GotoMap, Ref("kmr_20"), kmr_20_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 MAP_RODATA_PAD(1, exits);
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(SetNpcPos, NPC_Parakarry, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_Kooper, 120, 0, 70)
-    EVT_CALL(SetNpcPos, NPC_Kolorado, 120, 0, 70)
-    EVT_CALL(SetNpcPos, NPC_Archeologist_01, 120, 0, 70)
-    EVT_CALL(SetNpcPos, NPC_Archeologist_02, 120, 0, 70)
-    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerPos, NPC_DISPOSE_LOCATION)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_EpilogueDelivery)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Parakarry, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_Kooper, 120, 0, 70)
+    Call(SetNpcPos, NPC_Kolorado, 120, 0, 70)
+    Call(SetNpcPos, NPC_Archeologist_01, 120, 0, 70)
+    Call(SetNpcPos, NPC_Archeologist_02, 120, 0, 70)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Parakarry, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Archeologist_01, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_Archeologist_02, NPC_FLAG_GRAVITY, FALSE)
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerPos, NPC_DISPOSE_LOCATION)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_EpilogueDelivery)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Archeologist_01) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcData N(NpcData_Epilogue)[] = {

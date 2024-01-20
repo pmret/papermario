@@ -611,559 +611,559 @@ API_CALLABLE(N(InitGuardBooAlpha)) {
 }
 
 EvtScript N(EVS_UpdatePhonographScale) = {
-    EVT_LABEL(30)
-        EVT_CALL(MakeLerp, 100, 200, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(31)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(LVar2, LVar0)
-            EVT_CALL(N(GetPhonographScaleDivisor))
-            EVT_DIVF(LVar2, LVar3)
-            EVT_CALL(N(SetPhonographScale))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(31)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 200, 100, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(32)
-            EVT_CALL(UpdateLerp)
-            EVT_SETF(LVar2, LVar0)
-            EVT_CALL(N(GetPhonographScaleDivisor))
-            EVT_DIVF(LVar2, LVar3)
-            EVT_CALL(N(SetPhonographScale))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(32)
-            EVT_END_IF
-        EVT_GOTO(30)
-    EVT_RETURN
-    EVT_END
+    Label(30)
+        Call(MakeLerp, 100, 200, 30, EASING_COS_IN_OUT)
+        Label(31)
+            Call(UpdateLerp)
+            SetF(LVar2, LVar0)
+            Call(N(GetPhonographScaleDivisor))
+            DivF(LVar2, LVar3)
+            Call(N(SetPhonographScale))
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(31)
+            EndIf
+        Call(MakeLerp, 200, 100, 30, EASING_COS_IN_OUT)
+        Label(32)
+            Call(UpdateLerp)
+            SetF(LVar2, LVar0)
+            Call(N(GetPhonographScaleDivisor))
+            DivF(LVar2, LVar3)
+            Call(N(SetPhonographScale))
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(32)
+            EndIf
+        Goto(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateCrankRotation) = {
-    EVT_SET(LVar0, 0)
-    EVT_LABEL(10)
-        EVT_CALL(N(SetCrankRotation))
-        EVT_ADD(LVar0, 2)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Label(10)
+        Call(N(SetCrankRotation))
+        Add(LVar0, 2)
+        Wait(1)
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateRecordRotation) = {
-    EVT_SET(LVar0, 0)
-    EVT_LABEL(20)
-        EVT_CALL(N(SetRecordRotation))
-        EVT_ADD(LVar0, 10)
-        EVT_WAIT(1)
-        EVT_GOTO(20)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Label(20)
+        Call(N(SetRecordRotation))
+        Add(LVar0, 10)
+        Wait(1)
+        Goto(20)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetPhonographScale) = {
-    EVT_SET(MF_CancelScaleScript, FALSE)
-    EVT_LOOP(0)
-        EVT_IF_EQ(MF_CancelScaleScript, TRUE)
-            EVT_CALL(N(CheckScaleNearUnity))
-            EVT_IF_EQ(LVar2, 1)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(N(SaveLastUpdateValue))
-        EVT_CALL(N(GetPhonographScale))
-        EVT_CALL(ScaleModel, MODEL_rap, LVar0, LVar0, LVar0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_t)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(MF_CancelScaleScript, FALSE)
-    EVT_CALL(ScaleModel, MODEL_rap, 1, 1, 1)
-    EVT_RETURN
-    EVT_END
+    Set(MF_CancelScaleScript, FALSE)
+    Loop(0)
+        IfEq(MF_CancelScaleScript, TRUE)
+            Call(N(CheckScaleNearUnity))
+            IfEq(LVar2, 1)
+                BreakLoop
+            EndIf
+        EndIf
+        Call(N(SaveLastUpdateValue))
+        Call(N(GetPhonographScale))
+        Call(ScaleModel, MODEL_rap, LVar0, LVar0, LVar0)
+        Call(UpdateColliderTransform, COLLIDER_t)
+        Wait(1)
+    EndLoop
+    Set(MF_CancelScaleScript, FALSE)
+    Call(ScaleModel, MODEL_rap, 1, 1, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetCrankRotation) = {
-    EVT_SET(MF_CancelCrankScript, FALSE)
-    EVT_LOOP(0)
-        EVT_IF_EQ(MF_CancelCrankScript, TRUE)
-            EVT_CALL(N(CheckAngleNearZero))
-            EVT_IF_EQ(LVar2, 1)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(N(SaveLastUpdateValue))
-        EVT_CALL(N(GetCrankRotation))
-        EVT_CALL(RotateGroup, MODEL_bo, LVar0, 1, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(MF_CancelCrankScript, FALSE)
-    EVT_CALL(RotateGroup, MODEL_bo, 0, 1, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Set(MF_CancelCrankScript, FALSE)
+    Loop(0)
+        IfEq(MF_CancelCrankScript, TRUE)
+            Call(N(CheckAngleNearZero))
+            IfEq(LVar2, 1)
+                BreakLoop
+            EndIf
+        EndIf
+        Call(N(SaveLastUpdateValue))
+        Call(N(GetCrankRotation))
+        Call(RotateGroup, MODEL_bo, LVar0, 1, 0, 0)
+        Wait(1)
+    EndLoop
+    Set(MF_CancelCrankScript, FALSE)
+    Call(RotateGroup, MODEL_bo, 0, 1, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetRecordRotation) = {
-    EVT_SET(MF_CancelRecordScript, FALSE)
-    EVT_LOOP(0)
-        EVT_IF_EQ(MF_CancelRecordScript, TRUE)
-            EVT_CALL(N(CheckAngleNearZero))
-            EVT_IF_EQ(LVar2, 1)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(N(SaveLastUpdateValue))
-        EVT_CALL(N(GetRecordRotation))
-        EVT_CALL(RotateGroup, MODEL_rec, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(MF_CancelRecordScript, FALSE)
-    EVT_CALL(RotateGroup, MODEL_rec, 0, 0, -1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(MF_CancelRecordScript, FALSE)
+    Loop(0)
+        IfEq(MF_CancelRecordScript, TRUE)
+            Call(N(CheckAngleNearZero))
+            IfEq(LVar2, 1)
+                BreakLoop
+            EndIf
+        EndIf
+        Call(N(SaveLastUpdateValue))
+        Call(N(GetRecordRotation))
+        Call(RotateGroup, MODEL_rec, LVar0, 0, -1, 0)
+        Wait(1)
+    EndLoop
+    Set(MF_CancelRecordScript, FALSE)
+    Call(RotateGroup, MODEL_rec, 0, 0, -1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_WindDownPhonograph) = {
-    EVT_SET(MV_WindingDown, TRUE)
-    EVT_CALL(MakeLerp, MV_MashInputsAmount, 0, LVar0, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(func_80240EF8_BCFAE8))
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
+    Set(MV_WindingDown, TRUE)
+    Call(MakeLerp, MV_MashInputsAmount, 0, LVar0, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(func_80240EF8_BCFAE8))
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
     // signal scripts should stop
-    EVT_SET(MF_CancelScaleScript, TRUE)
-    EVT_SET(MF_CancelCrankScript, TRUE)
-    EVT_SET(MF_CancelRecordScript, TRUE)
+    Set(MF_CancelScaleScript, TRUE)
+    Set(MF_CancelCrankScript, TRUE)
+    Set(MF_CancelRecordScript, TRUE)
     // wait for canceled scripts to end
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(MF_CancelScaleScript, FALSE)
-            EVT_IF_EQ(MF_CancelCrankScript, FALSE)
-                EVT_IF_EQ(MF_CancelRecordScript, FALSE)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_LOOP
+    Loop(0)
+        Wait(1)
+        IfEq(MF_CancelScaleScript, FALSE)
+            IfEq(MF_CancelCrankScript, FALSE)
+                IfEq(MF_CancelRecordScript, FALSE)
+                    BreakLoop
+                EndIf
+            EndIf
+        EndIf
+    EndLoop
     // kill the completed scripts
-    EVT_KILL_THREAD(MV_UpdateScaleScript)
-    EVT_KILL_THREAD(MV_UpdateCrankScript)
-    EVT_KILL_THREAD(MV_UpdateRecordScript)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(MV_WindingDown, FALSE)
-    EVT_RETURN
-    EVT_END
+    KillThread(MV_UpdateScaleScript)
+    KillThread(MV_UpdateCrankScript)
+    KillThread(MV_UpdateRecordScript)
+    Exec(N(EVS_SetupMusic))
+    Set(MV_WindingDown, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayPhonograph) = {
-    EVT_IF_EQ(MV_WindingDown, TRUE)
-        EVT_IS_THREAD_RUNNING(MV_WindDownScript, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_KILL_THREAD(MV_WindDownScript)
-            EVT_IS_THREAD_RUNNING(MV_UpdateScaleScript, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_KILL_THREAD(MV_UpdateScaleScript)
-            EVT_END_IF
-            EVT_IS_THREAD_RUNNING(MV_UpdateCrankScript, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_KILL_THREAD(MV_UpdateCrankScript)
-            EVT_END_IF
-            EVT_IS_THREAD_RUNNING(MV_UpdateRecordScript, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_KILL_THREAD(MV_UpdateRecordScript)
-            EVT_END_IF
-            EVT_IS_THREAD_RUNNING(MV_SetScaleScript, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_KILL_THREAD(MV_SetScaleScript)
-            EVT_END_IF
-            EVT_IS_THREAD_RUNNING(MV_SetCrankScript, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_KILL_THREAD(MV_SetCrankScript)
-            EVT_END_IF
-            EVT_IS_THREAD_RUNNING(MV_SetRecordScript, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_KILL_THREAD(MV_SetRecordScript)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(2.0))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_GT(LVar2, -170)
-        EVT_GOTO(33)
-    EVT_END_IF
-    EVT_LABEL(11)
-    EVT_CALL(PlayerMoveTo, -202, -170, 0)
-    EVT_LABEL(33)
-    EVT_CALL(PlayerMoveTo, -216, -115, 0)
-    EVT_CALL(InterpPlayerYaw, 38, 1)
-    EVT_LOOP(0)
+    IfEq(MV_WindingDown, TRUE)
+        IsThreadRunning(MV_WindDownScript, LVar0)
+        IfEq(LVar0, 1)
+            KillThread(MV_WindDownScript)
+            IsThreadRunning(MV_UpdateScaleScript, LVar0)
+            IfEq(LVar0, 1)
+                KillThread(MV_UpdateScaleScript)
+            EndIf
+            IsThreadRunning(MV_UpdateCrankScript, LVar0)
+            IfEq(LVar0, 1)
+                KillThread(MV_UpdateCrankScript)
+            EndIf
+            IsThreadRunning(MV_UpdateRecordScript, LVar0)
+            IfEq(LVar0, 1)
+                KillThread(MV_UpdateRecordScript)
+            EndIf
+            IsThreadRunning(MV_SetScaleScript, LVar0)
+            IfEq(LVar0, 1)
+                KillThread(MV_SetScaleScript)
+            EndIf
+            IsThreadRunning(MV_SetCrankScript, LVar0)
+            IfEq(LVar0, 1)
+                KillThread(MV_SetCrankScript)
+            EndIf
+            IsThreadRunning(MV_SetRecordScript, LVar0)
+            IfEq(LVar0, 1)
+                KillThread(MV_SetRecordScript)
+            EndIf
+        EndIf
+    EndIf
+    Call(SetPlayerSpeed, Float(2.0))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfGt(LVar2, -170)
+        Goto(33)
+    EndIf
+    Label(11)
+    Call(PlayerMoveTo, -202, -170, 0)
+    Label(33)
+    Call(PlayerMoveTo, -216, -115, 0)
+    Call(InterpPlayerYaw, 38, 1)
+    Loop(0)
         // wait for tutorial message dismissal if there is one
-        EVT_WAIT(1)
-        EVT_IF_EQ(MV_ReadyToPlay, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(5)
-    EVT_CALL(N(CreatePhonographHudData))
-    EVT_CALL(N(PlayRecordSong))
-    EVT_WAIT(30)
-    EVT_CALL(N(InitPhonographHud))
-    EVT_IF_EQ(MV_GuardDeparted, FALSE)
-        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_Wary)))
-        EVT_EXEC_GET_TID(N(EVS_UpdateGuardBoo), MV_UpdateGuardScript)
-    EVT_ELSE
-        EVT_EXEC_GET_TID(N(EVS_DummyUpdateGuardBoo), MV_UpdateGuardScript)
-    EVT_END_IF
-    EVT_EXEC_GET_TID(N(EVS_UpdatePhonographScale), MV_UpdateScaleScript)
-    EVT_EXEC_GET_TID(N(EVS_UpdateCrankRotation),   MV_UpdateCrankScript)
-    EVT_EXEC_GET_TID(N(EVS_UpdateRecordRotation),  MV_UpdateRecordScript)
-    EVT_EXEC_GET_TID(N(EVS_SetPhonographScale),    MV_SetScaleScript)
-    EVT_EXEC_GET_TID(N(EVS_SetCrankRotation),      MV_SetCrankScript)
-    EVT_EXEC_GET_TID(N(EVS_SetRecordRotation),     MV_SetRecordScript)
-    EVT_CALL(N(SavePhonographUpdateScriptIDs))
-    EVT_LOOP(0)
-        EVT_CALL(N(func_80241790_BD0380))
-        EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(N(DestroyPhonographHudData))
-            EVT_WAIT(1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(0)
+        Wait(1)
+        IfEq(MV_ReadyToPlay, TRUE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(5)
+    Call(N(CreatePhonographHudData))
+    Call(N(PlayRecordSong))
+    Wait(30)
+    Call(N(InitPhonographHud))
+    IfEq(MV_GuardDeparted, FALSE)
+        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
+        ExecGetTID(N(EVS_UpdateGuardBoo), MV_UpdateGuardScript)
+    Else
+        ExecGetTID(N(EVS_DummyUpdateGuardBoo), MV_UpdateGuardScript)
+    EndIf
+    ExecGetTID(N(EVS_UpdatePhonographScale), MV_UpdateScaleScript)
+    ExecGetTID(N(EVS_UpdateCrankRotation),   MV_UpdateCrankScript)
+    ExecGetTID(N(EVS_UpdateRecordRotation),  MV_UpdateRecordScript)
+    ExecGetTID(N(EVS_SetPhonographScale),    MV_SetScaleScript)
+    ExecGetTID(N(EVS_SetCrankRotation),      MV_SetCrankScript)
+    ExecGetTID(N(EVS_SetRecordRotation),     MV_SetRecordScript)
+    Call(N(SavePhonographUpdateScriptIDs))
+    Loop(0)
+        Call(N(func_80241790_BD0380))
+        IfEq(LVar0, 1)
+            Call(N(DestroyPhonographHudData))
+            Wait(1)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Loop(0)
         // wait for the guard to finish jumping or spinning
-        EVT_WAIT(1)
-        EVT_IF_EQ(MF_GuardBusy, FALSE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_KILL_THREAD(MV_UpdateGuardScript)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(MV_GuardDeparted, FALSE)
-        EVT_IF_EQ(MV_GuardDancing, TRUE)
-            EVT_SET(LVar0, 150)
-        EVT_ELSE
-            EVT_SET(LVar0, 80)
-        EVT_END_IF
-        EVT_EXEC_GET_TID(N(EVS_WindDownPhonograph), MV_WindDownScript)
-        EVT_EXEC_GET_TID(N(EVS_GuardBoo_ReturnToPost), MV_GuardReturnScript)
-    EVT_ELSE
-        EVT_SET(LVar0, 80)
-        EVT_EXEC_GET_TID(N(EVS_WindDownPhonograph), MV_WindDownScript)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        Wait(1)
+        IfEq(MF_GuardBusy, FALSE)
+            BreakLoop
+        EndIf
+    EndLoop
+    KillThread(MV_UpdateGuardScript)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    IfEq(MV_GuardDeparted, FALSE)
+        IfEq(MV_GuardDancing, TRUE)
+            Set(LVar0, 150)
+        Else
+            Set(LVar0, 80)
+        EndIf
+        ExecGetTID(N(EVS_WindDownPhonograph), MV_WindDownScript)
+        ExecGetTID(N(EVS_GuardBoo_ReturnToPost), MV_GuardReturnScript)
+    Else
+        Set(LVar0, 80)
+        ExecGetTID(N(EVS_WindDownPhonograph), MV_WindDownScript)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Inspect_Phonograph) = {
-    EVT_IF_EQ(MV_GuardDancing, TRUE)
-        EVT_IF_EQ(MV_GuardDeparted, FALSE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
-        EVT_GOTO(50)
-    EVT_END_IF
+    IfEq(MV_GuardDancing, TRUE)
+        IfEq(MV_GuardDeparted, FALSE)
+            Return
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    IfGe(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
+        Goto(50)
+    EndIf
     // choose a record
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_Phonograph, 160, 40)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, -1)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(N(GetSelectedRecordIndex))
-    EVT_IF_EQ(LVar0, -1)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_SET(GB_OBK07_SelectedRecord, LVar0)
-    EVT_CALL(RemoveKeyItemAt, LVar1)
-    EVT_SET(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
-    EVT_CALL(EnableModel, MODEL_reco, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_CarryIdle)
-    EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(15)
-    EVT_CALL(CloseChoicePopup)
+    Call(ShowKeyChoicePopup)
+    IfEq(LVar0, 0)
+        Call(ShowMessageAtScreenPos, MSG_Menus_Inspect_Phonograph, 160, 40)
+        Goto(100)
+    EndIf
+    IfEq(LVar0, -1)
+        Goto(100)
+    EndIf
+    Call(N(GetSelectedRecordIndex))
+    IfEq(LVar0, -1)
+        Goto(100)
+    EndIf
+    Set(GB_OBK07_SelectedRecord, LVar0)
+    Call(RemoveKeyItemAt, LVar1)
+    Set(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
+    Call(EnableModel, MODEL_reco, TRUE)
+    Call(SetPlayerAnimation, ANIM_MarioW1_CarryIdle)
+    Wait(15)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(15)
+    Call(CloseChoicePopup)
     // try playing
-    EVT_LABEL(50)
-    EVT_SET(MV_ReadyToPlay, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
-        EVT_SET(MV_ReadyToPlay, FALSE)
-        EVT_THREAD
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0181, 160, 40)
-            EVT_SET(MV_ReadyToPlay, TRUE)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_PlayPhonograph))
-    EVT_RETURN
+    Label(50)
+    Set(MV_ReadyToPlay, TRUE)
+    IfLt(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
+        Set(MV_ReadyToPlay, FALSE)
+        Thread
+            Call(ShowMessageAtScreenPos, MSG_Menus_0181, 160, 40)
+            Set(MV_ReadyToPlay, TRUE)
+        EndThread
+    EndIf
+    ExecWait(N(EVS_PlayPhonograph))
+    Return
     // done
-    EVT_LABEL(100)
-    EVT_CALL(CloseChoicePopup)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(100)
+    Call(CloseChoicePopup)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_GuardBoo_Wary) = {
-    EVT_CALL(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Idle)
-    EVT_LABEL(0)
-        EVT_CALL(RandInt, 30, LVar0)
-        EVT_ADD(LVar0, 30)
-        EVT_WAIT(LVar0)
-        EVT_CALL(InterpNpcYaw, NPC_GuardBoo, 90, 5)
-        EVT_CALL(RandInt, 30, LVar0)
-        EVT_ADD(LVar0, 30)
-        EVT_WAIT(LVar0)
-        EVT_CALL(InterpNpcYaw, NPC_GuardBoo, 270, 5)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Idle)
+    Label(0)
+        Call(RandInt, 30, LVar0)
+        Add(LVar0, 30)
+        Wait(LVar0)
+        Call(InterpNpcYaw, NPC_GuardBoo, 90, 5)
+        Call(RandInt, 30, LVar0)
+        Add(LVar0, 30)
+        Wait(LVar0)
+        Call(InterpNpcYaw, NPC_GuardBoo, 270, 5)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_GuardBoo_DoNothing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_GuardBoo_Dancing) = {
-    EVT_LOOP(0)
-        EVT_CALL(RandInt, 99, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_LT(30)
-                EVT_CALL(RandInt, 10, LVar0)
-                EVT_ADD(LVar0, 10)
-                EVT_WAIT(LVar0)
-                EVT_CALL(InterpNpcYaw, NPC_GuardBoo, 90, 5)
-                EVT_CALL(RandInt, 10, LVar0)
-                EVT_ADD(LVar0, 10)
-                EVT_WAIT(LVar0)
-                EVT_CALL(InterpNpcYaw, NPC_GuardBoo, 270, 5)
-            EVT_CASE_LT(60)
-                EVT_CALL(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcJumpscale, NPC_GuardBoo, EVT_FLOAT(1.0))
-                EVT_CALL(NpcJump0, NPC_GuardBoo, LVar0, LVar1, LVar2, 10)
-            EVT_CASE_LT(99)
-                EVT_CALL(MakeLerp, 0, 720, 20, EASING_QUADRATIC_OUT)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(SetNpcRotation, NPC_GuardBoo, 0, LVar0, 0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-        EVT_END_SWITCH
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(RandInt, 99, LVar0)
+        Switch(LVar0)
+            CaseLt(30)
+                Call(RandInt, 10, LVar0)
+                Add(LVar0, 10)
+                Wait(LVar0)
+                Call(InterpNpcYaw, NPC_GuardBoo, 90, 5)
+                Call(RandInt, 10, LVar0)
+                Add(LVar0, 10)
+                Wait(LVar0)
+                Call(InterpNpcYaw, NPC_GuardBoo, 270, 5)
+            CaseLt(60)
+                Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
+                Call(SetNpcJumpscale, NPC_GuardBoo, Float(1.0))
+                Call(NpcJump0, NPC_GuardBoo, LVar0, LVar1, LVar2, 10)
+            CaseLt(99)
+                Call(MakeLerp, 0, 720, 20, EASING_QUADRATIC_OUT)
+                Loop(0)
+                    Call(UpdateLerp)
+                    Call(SetNpcRotation, NPC_GuardBoo, 0, LVar0, 0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+        EndSwitch
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_GuardBoo_ReturnToPost) = {
-    EVT_WAIT(1)
-    EVT_IF_EQ(MV_GuardDancing, TRUE)
-        EVT_WAIT(150)
-        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_DoNothing)))
-        EVT_WAIT(1)
-        EVT_CALL(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
-        EVT_WAIT(90)
-    EVT_ELSE
-        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_DoNothing)))
-        EVT_WAIT(1)
-        EVT_CALL(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
-    EVT_END_IF
-    EVT_CALL(AwaitPlayerLeave, 168, -136, 50)
-    EVT_CALL(MakeLerp, 180, 0, 10, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_GuardBoo, 168, 0, -136)
-    EVT_CALL(MakeLerp, 0, 180, 10, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(MV_GuardDancing, FALSE)
-    EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_Wary)))
-    EVT_RETURN
-    EVT_END
+    Wait(1)
+    IfEq(MV_GuardDancing, TRUE)
+        Wait(150)
+        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
+        Wait(1)
+        Call(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
+        Wait(90)
+    Else
+        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
+        Wait(1)
+        Call(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
+    EndIf
+    Call(AwaitPlayerLeave, 168, -136, 50)
+    Call(MakeLerp, 180, 0, 10, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetNpcPos, NPC_GuardBoo, 168, 0, -136)
+    Call(MakeLerp, 0, 180, 10, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Set(MV_GuardDancing, FALSE)
+    Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateGuardBoo) = {
-    EVT_SET(MV_GuardDancing, FALSE)
-    EVT_SET(MF_GuardBusy, FALSE)
-    EVT_CALL(InterpNpcYaw, NPC_GuardBoo, 270, 5)
-    EVT_SET(LVarC, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
-        EVT_IF_LE(LVar0, -92)
-            EVT_SET(MV_GuardDancing, TRUE)
-            EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_Dancing)))
-            EVT_RETURN
-        EVT_END_IF
-        EVT_IF_EQ(LVarA, 0)
-            EVT_CALL(N(UpdateGuardBooPos))
-            EVT_IF_NE(LVarC, 0)
-                EVT_SUB(LVarC, 1)
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_ELSE
-            EVT_IF_NE(LVarC, 0)
-                EVT_CALL(N(UpdateGuardBooPos))
-                EVT_IF_NE(LVarC, 0)
-                    EVT_SUB(LVarC, 1)
-                EVT_END_IF
-                EVT_WAIT(1)
-            EVT_ELSE
-                EVT_SET(LVarC, 20)
-                EVT_CALL(RandInt, 99, LVar0)
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_LT(60)
-                    EVT_CASE_LT(80)
-                        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_DoNothing)))
-                        EVT_SET(MF_GuardBusy, TRUE)
-                        EVT_CALL(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
-                        EVT_CALL(SetNpcJumpscale, NPC_GuardBoo, EVT_FLOAT(1.0))
-                        EVT_CALL(NpcJump0, NPC_GuardBoo, LVar0, LVar1, LVar2, 10)
-                        EVT_SET(MF_GuardBusy, FALSE)
-                        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_Wary)))
-                    EVT_CASE_LT(99)
-                        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_DoNothing)))
-                        EVT_SET(MF_GuardBusy, TRUE)
-                        EVT_CALL(MakeLerp, 0, 720, 20, EASING_QUADRATIC_OUT)
-                        EVT_LOOP(0)
-                            EVT_CALL(UpdateLerp)
-                            EVT_CALL(SetNpcRotation, NPC_GuardBoo, 0, LVar0, 0)
-                            EVT_WAIT(1)
-                            EVT_IF_EQ(LVar1, 0)
-                                EVT_BREAK_LOOP
-                            EVT_END_IF
-                        EVT_END_LOOP
-                        EVT_SET(MF_GuardBusy, FALSE)
-                        EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_Wary)))
-                EVT_END_SWITCH
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_EQ(LVarB, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(MV_GuardDancing, FALSE)
+    Set(MF_GuardBusy, FALSE)
+    Call(InterpNpcYaw, NPC_GuardBoo, 270, 5)
+    Set(LVarC, 0)
+    Loop(0)
+        Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
+        IfLe(LVar0, -92)
+            Set(MV_GuardDancing, TRUE)
+            Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Dancing)))
+            Return
+        EndIf
+        IfEq(LVarA, 0)
+            Call(N(UpdateGuardBooPos))
+            IfNe(LVarC, 0)
+                Sub(LVarC, 1)
+            EndIf
+            Wait(1)
+        Else
+            IfNe(LVarC, 0)
+                Call(N(UpdateGuardBooPos))
+                IfNe(LVarC, 0)
+                    Sub(LVarC, 1)
+                EndIf
+                Wait(1)
+            Else
+                Set(LVarC, 20)
+                Call(RandInt, 99, LVar0)
+                Switch(LVar0)
+                    CaseLt(60)
+                    CaseLt(80)
+                        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
+                        Set(MF_GuardBusy, TRUE)
+                        Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
+                        Call(SetNpcJumpscale, NPC_GuardBoo, Float(1.0))
+                        Call(NpcJump0, NPC_GuardBoo, LVar0, LVar1, LVar2, 10)
+                        Set(MF_GuardBusy, FALSE)
+                        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
+                    CaseLt(99)
+                        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
+                        Set(MF_GuardBusy, TRUE)
+                        Call(MakeLerp, 0, 720, 20, EASING_QUADRATIC_OUT)
+                        Loop(0)
+                            Call(UpdateLerp)
+                            Call(SetNpcRotation, NPC_GuardBoo, 0, LVar0, 0)
+                            Wait(1)
+                            IfEq(LVar1, 0)
+                                BreakLoop
+                            EndIf
+                        EndLoop
+                        Set(MF_GuardBusy, FALSE)
+                        Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
+                EndSwitch
+            EndIf
+        EndIf
+        IfEq(LVarB, 1)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_DummyUpdateGuardBoo) = {
-    EVT_LOOP(0)
-        EVT_CALL(N(GuardBooDoNothing))
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(N(GuardBooDoNothing))
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_GuardBooVanish) = {
-    EVT_THREAD
-        EVT_WAIT(25)
-        EVT_CALL(PlaySoundAtNpc, NPC_GuardBoo, SOUND_BOO_SPOOK, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Spook)
-    EVT_WAIT(10)
-    EVT_CALL(MakeLerp, 255, 0, 60, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_GuardBoo, NPC_DISPOSE_LOCATION)
-    EVT_SET(MV_GuardDeparted, TRUE)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Wait(25)
+        Call(PlaySoundAtNpc, NPC_GuardBoo, SOUND_BOO_SPOOK, SOUND_SPACE_DEFAULT)
+    EndThread
+    Call(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Spook)
+    Wait(10)
+    Call(MakeLerp, 255, 0, 60, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(SetNpcPos, NPC_GuardBoo, NPC_DISPOSE_LOCATION)
+    Set(MV_GuardDeparted, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_GuardBoo) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_PLAYED_THE_RECORD)
-            EVT_IF_EQ(GF_OBK08_Item_Record, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0036)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0035)
-            EVT_END_IF
-        EVT_CASE_EQ(STORY_CH3_PLAYED_THE_RECORD)
-            EVT_IF_EQ(MV_GuardDancing, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0037)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0038)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_PLAYED_THE_RECORD)
+            IfEq(GF_OBK08_Item_Record, TRUE)
+                Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0036)
+            Else
+                Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0035)
+            EndIf
+        CaseEq(STORY_CH3_PLAYED_THE_RECORD)
+            IfEq(MV_GuardDancing, TRUE)
+                Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0037)
+            Else
+                Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0038)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_PlayerGotChestItem) = {
-    EVT_KILL_THREAD(MV_GuardReturnScript)
-    EVT_CALL(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(BindNpcAI, NPC_GuardBoo, EVT_PTR(N(EVS_NpcAI_GuardBoo_DoNothing)))
-    EVT_CALL(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Cower, ANIM_Boo_Cower, 0, MSG_CH3_0039)
-    EVT_CALL(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Idle)
-    EVT_CALL(EndSpeech, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0)
-    EVT_EXEC_WAIT(N(EVS_GuardBooVanish))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    KillThread(MV_GuardReturnScript)
+    Call(SetNpcRotation, NPC_GuardBoo, 0, 0, 0)
+    Exec(N(EVS_SetupMusic))
+    Call(DisablePlayerInput, TRUE)
+    Call(BindNpcAI, NPC_GuardBoo, Ref(N(EVS_NpcAI_GuardBoo_DoNothing)))
+    Call(GetNpcPos, NPC_GuardBoo, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_GuardBoo, ANIM_Boo_Cower, ANIM_Boo_Cower, 0, MSG_CH3_0039)
+    Call(SetNpcAnimation, NPC_GuardBoo, ANIM_Boo_Idle)
+    Call(EndSpeech, NPC_GuardBoo, ANIM_Boo_Talk, ANIM_Boo_Idle, 0)
+    ExecWait(N(EVS_GuardBooVanish))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupGuardBoo) = {
-    EVT_CALL(SetNpcScale, NPC_GuardBoo, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcCollisionSize, NPC_GuardBoo, 40, 40)
-    EVT_CALL(N(InitGuardBooAlpha))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GuardBoo)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_GuardBoo_Wary)))
-    EVT_CALL(SetNpcPos, NPC_GuardBoo, 168, 0, -136)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_GuardBoo, Float(1.0), Float(1.0), Float(1.0))
+    Call(SetNpcCollisionSize, NPC_GuardBoo, 40, 40)
+    Call(N(InitGuardBooAlpha))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GuardBoo)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_GuardBoo_Wary)))
+    Call(SetNpcPos, NPC_GuardBoo, 168, 0, -136)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupPhonograph) = {
-    EVT_CALL(N(CreatePhonographData))
-    EVT_CALL(ParentColliderToModel, COLLIDER_t, MODEL_rap)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
-        EVT_CALL(EnableModel, MODEL_reco, FALSE)
-    EVT_END_IF
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_Inspect_Phonograph)), TRIGGER_WALL_PRESS_A, COLLIDER_o344, EVT_PTR(N(ItemList_Records)), 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(N(CreatePhonographData))
+    Call(ParentColliderToModel, COLLIDER_t, MODEL_rap)
+    IfLt(GB_StoryProgress, STORY_CH3_PLAYED_THE_RECORD)
+        Call(EnableModel, MODEL_reco, FALSE)
+    EndIf
+    BindPadlock(Ref(N(EVS_Inspect_Phonograph)), TRIGGER_WALL_PRESS_A, COLLIDER_o344, Ref(N(ItemList_Records)), 0, 1)
+    Return
+    End
 };

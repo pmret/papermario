@@ -14,9 +14,9 @@ MobileAISettings N(AISettings_Duplighost_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Duplighost_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Duplighost_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Duplighost_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Duplighost_Wander) = {

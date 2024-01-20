@@ -20,603 +20,603 @@ API_CALLABLE(N(UpgradeStarPowerCh6)) {
 }
 
 EvtScript N(EVS_Scene_SunReturns) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 50, 0, -200)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 50, 0, -200)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 700)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(10.0), EVT_FLOAT(-11.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, -27, 0)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 0, -50)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_00C4, 0, 50, -200)
-    EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_PTR("flo_07"), flo_07_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 50, 0, -200)
+    Call(SetPanTarget, CAM_DEFAULT, 50, 0, -200)
+    Call(SetCamDistance, CAM_DEFAULT, 700)
+    Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-11.0))
+    Call(SetCamPosA, CAM_DEFAULT, -27, 0)
+    Call(SetCamPosB, CAM_DEFAULT, 0, -50)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20)
+    Call(ShowMessageAtWorldPos, MSG_CH6_00C4, 0, 50, -200)
+    Wait(10)
+    Call(GotoMap, Ref("flo_07"), flo_07_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_Wisterwood_Introduction) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, -170)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, -170)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-8.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(75)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH6_0000, 160, 40)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.5))
-    EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 12)
-    EVT_WAIT(10)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-    EVT_WAIT(15)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
-    EVT_WAIT(15)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 800)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-5.8))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, -2, 0)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_Dummy_Wisterwood, -1, -1, 5, MSG_CH6_0001)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(InterpPlayerYaw, 350, 0)
-    EVT_WAIT(15)
-    EVT_CALL(ContinueSpeech, NPC_Dummy_Wisterwood, -1, -1, 5, MSG_CH6_0002)
-    EVT_WAIT(10)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 333)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(9.0), EVT_FLOAT(-22.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, -2, 0)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(func_802D2C14, 1)
-    EVT_WAIT(10)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0003, 0, 70, -200)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(16.5), EVT_FLOAT(-11.8))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 525)
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, -14, 0)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0004, 0, 50, -200)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(9.0), EVT_FLOAT(-22.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 333)
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, -2, 0)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0005, 0, 70, -200)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_SET(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-    EVT_CALL(func_802D2C14, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, -170)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, -170)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-8.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(75)
+    Call(ShowMessageAtScreenPos, MSG_CH6_0000, 160, 40)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPlayerJumpscale, Float(1.5))
+    Call(PlayerJump1, LVar0, LVar1, LVar2, 12)
+    Wait(10)
+    Call(DisablePartnerAI, 0)
+    Call(InterpPlayerYaw, 270, 0)
+    Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
+    Wait(15)
+    Call(InterpPlayerYaw, 90, 0)
+    Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
+    Wait(15)
+    Call(SetCamDistance, CAM_DEFAULT, 800)
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-5.8))
+    Call(SetCamPosA, CAM_DEFAULT, -2, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(15)
+    Call(SpeakToPlayer, NPC_Dummy_Wisterwood, -1, -1, 5, MSG_CH6_0001)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(InterpPlayerYaw, 350, 0)
+    Wait(15)
+    Call(ContinueSpeech, NPC_Dummy_Wisterwood, -1, -1, 5, MSG_CH6_0002)
+    Wait(10)
+    Call(SetCamDistance, CAM_DEFAULT, 333)
+    Call(SetCamPitch, CAM_DEFAULT, Float(9.0), Float(-22.0))
+    Call(SetCamPosA, CAM_DEFAULT, -2, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(EnablePartnerAI)
+    Call(func_802D2C14, 1)
+    Wait(10)
+    Call(ShowMessageAtWorldPos, MSG_CH6_0003, 0, 70, -200)
+    Call(SetCamPitch, CAM_DEFAULT, Float(16.5), Float(-11.8))
+    Call(SetCamDistance, CAM_DEFAULT, 525)
+    Call(SetCamPosA, CAM_DEFAULT, -14, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+    Wait(20)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(ShowMessageAtWorldPos, MSG_CH6_0004, 0, 50, -200)
+    Call(SetCamPitch, CAM_DEFAULT, Float(9.0), Float(-22.0))
+    Call(SetCamDistance, CAM_DEFAULT, 333)
+    Call(SetCamPosA, CAM_DEFAULT, -2, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(ShowMessageAtWorldPos, MSG_CH6_0005, 0, 70, -200)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Set(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+    Call(func_802D2C14, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Interact_Wisterwood) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(2)
-    EVT_CALL(GetPlayerActionState, LVar3)
-    EVT_SET(LVar4, 0)
-    EVT_IF_EQ(LVar3, ACTION_STATE_IDLE)
-        EVT_ADD(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar3, ACTION_STATE_WALK)
-        EVT_ADD(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar3, ACTION_STATE_RUN)
-        EVT_ADD(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar4, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0006, 0, 50, -200)
-        EVT_SET(GB_StoryProgress, STORY_CH6_WISTERWOOD_GAVE_HINT)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_000D, 0, 50, -200)
-        EVT_CALL(ShowChoice, MSG_Choice_001F)
-        EVT_WAIT(10)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_SWITCH(GB_StoryProgress)
-                    EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-                        EVT_CALL(SwitchMessage, MSG_CH6_000E)
-                    EVT_CASE_LT(STORY_CH6_GOT_FERTILE_SOIL)
-                        EVT_CALL(SwitchMessage, MSG_CH6_000F)
-                    EVT_CASE_LT(STORY_CH6_FILLED_SPRING_WITH_WATER)
-                        EVT_CALL(SwitchMessage, MSG_CH6_0010)
-                    EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-                        EVT_CALL(SwitchMessage, MSG_CH6_0011)
-                    EVT_CASE_LT(STORY_CH6_GREW_MAGIC_BEANSTALK)
-                        EVT_CALL(SwitchMessage, MSG_CH6_0007)
-                    EVT_CASE_LT(STORY_CH6_BEGAN_PEACH_MISSION)
-                        EVT_CALL(SwitchMessage, MSG_CH6_0012)
-                    EVT_CASE_DEFAULT
-                        EVT_CALL(SwitchMessage, MSG_CH6_0013)
-                EVT_END_SWITCH
-            EVT_CASE_EQ(1)
-                EVT_CALL(CloseMessage)
-                EVT_EXEC(N(EVS_Wisterwood_Exit))
-                EVT_RETURN
-            EVT_CASE_EQ(2)
-                EVT_CALL(CloseMessage)
-        EVT_END_SWITCH
-    EVT_ELSE
-        EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_0014, 0, 50, -200)
-        EVT_CALL(ShowChoice, MSG_Choice_001F)
-        EVT_WAIT(10)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(SwitchMessage, MSG_CH6_0015)
-            EVT_CASE_EQ(1)
-                EVT_CALL(CloseMessage)
-                EVT_EXEC(N(EVS_Wisterwood_Exit))
-                EVT_RETURN
-            EVT_CASE_EQ(2)
-                EVT_CALL(CloseMessage)
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Wait(2)
+    Call(GetPlayerActionState, LVar3)
+    Set(LVar4, 0)
+    IfEq(LVar3, ACTION_STATE_IDLE)
+        Add(LVar4, 1)
+    EndIf
+    IfEq(LVar3, ACTION_STATE_WALK)
+        Add(LVar4, 1)
+    EndIf
+    IfEq(LVar3, ACTION_STATE_RUN)
+        Add(LVar4, 1)
+    EndIf
+    IfEq(LVar4, 0)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    IfEq(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+        Call(ShowMessageAtWorldPos, MSG_CH6_0006, 0, 50, -200)
+        Set(GB_StoryProgress, STORY_CH6_WISTERWOOD_GAVE_HINT)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
+        Call(ShowMessageAtWorldPos, MSG_CH6_000D, 0, 50, -200)
+        Call(ShowChoice, MSG_Choice_001F)
+        Wait(10)
+        Switch(LVar0)
+            CaseEq(0)
+                Switch(GB_StoryProgress)
+                    CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
+                        Call(SwitchMessage, MSG_CH6_000E)
+                    CaseLt(STORY_CH6_GOT_FERTILE_SOIL)
+                        Call(SwitchMessage, MSG_CH6_000F)
+                    CaseLt(STORY_CH6_FILLED_SPRING_WITH_WATER)
+                        Call(SwitchMessage, MSG_CH6_0010)
+                    CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+                        Call(SwitchMessage, MSG_CH6_0011)
+                    CaseLt(STORY_CH6_GREW_MAGIC_BEANSTALK)
+                        Call(SwitchMessage, MSG_CH6_0007)
+                    CaseLt(STORY_CH6_BEGAN_PEACH_MISSION)
+                        Call(SwitchMessage, MSG_CH6_0012)
+                    CaseDefault
+                        Call(SwitchMessage, MSG_CH6_0013)
+                EndSwitch
+            CaseEq(1)
+                Call(CloseMessage)
+                Exec(N(EVS_Wisterwood_Exit))
+                Return
+            CaseEq(2)
+                Call(CloseMessage)
+        EndSwitch
+    Else
+        Call(ShowMessageAtWorldPos, MSG_CH6_0014, 0, 50, -200)
+        Call(ShowChoice, MSG_Choice_001F)
+        Wait(10)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(SwitchMessage, MSG_CH6_0015)
+            CaseEq(1)
+                Call(CloseMessage)
+                Exec(N(EVS_Wisterwood_Exit))
+                Return
+            CaseEq(2)
+                Call(CloseMessage)
+        EndSwitch
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Wisterwood_Farewell) = {
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(90.0), 0, 600, EVT_FLOAT(21.0), EVT_FLOAT(-12.0))
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_000B, 0, 50, -200)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, -30)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(25.0), EVT_FLOAT(-25.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_000C, 0, 50, -200)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_RETURN
-    EVT_END
+    Call(AdjustCam, CAM_DEFAULT, Float(90.0), 0, 600, Float(21.0), Float(-12.0))
+    Wait(20)
+    Call(ShowMessageAtWorldPos, MSG_CH6_000B, 0, 50, -200)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, -30)
+    Call(SetCamDistance, CAM_DEFAULT, 250)
+    Call(SetCamPitch, CAM_DEFAULT, Float(25.0), Float(-25.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(ShowMessageAtWorldPos, MSG_CH6_000C, 0, 50, -200)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Wisterwood) = {
-    EVT_CALL(EnableGroup, MODEL_ha, FALSE)
-    EVT_CALL(EnableGroup, MODEL_tuta, FALSE)
-    EVT_CALL(EnableGroup, MODEL_g54, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, 50, 70, -230)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-        EVT_EXEC(N(EVS_Wisterwood_Introduction))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(EnableGroup, MODEL_ha, FALSE)
+    Call(EnableGroup, MODEL_tuta, FALSE)
+    Call(EnableGroup, MODEL_g54, FALSE)
+    Call(SetNpcPos, NPC_SELF, 50, 70, -230)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    IfLt(GB_StoryProgress, STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+        Exec(N(EVS_Wisterwood_Introduction))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb1) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0016)
-        EVT_CASE_LT(STORY_CH6_GOT_FERTILE_SOIL)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0017)
-        EVT_CASE_LT(STORY_CH6_FILLED_SPRING_WITH_WATER)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0018)
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0019)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_PinkBubulbDialogueToggle)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001A)
-                    EVT_SET(AF_FLO_PinkBubulbDialogueToggle, TRUE)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001B)
-                    EVT_SET(AF_FLO_PinkBubulbDialogueToggle, FALSE)
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001C)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0016)
+        CaseLt(STORY_CH6_GOT_FERTILE_SOIL)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0017)
+        CaseLt(STORY_CH6_FILLED_SPRING_WITH_WATER)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0018)
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, MSG_CH6_0019)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Switch(AF_FLO_PinkBubulbDialogueToggle)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001A)
+                    Set(AF_FLO_PinkBubulbDialogueToggle, TRUE)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001B)
+                    Set(AF_FLO_PinkBubulbDialogueToggle, FALSE)
+            EndSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_HappyTalk, ANIM_Bubulb_Pink_HappyGentle, 0, MSG_CH6_001C)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb2) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001D)
-        EVT_CASE_LT(STORY_CH6_GOT_FERTILE_SOIL)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001E)
-        EVT_CASE_LT(STORY_CH6_FILLED_SPRING_WITH_WATER)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001F)
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0020)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_PurpleBubulbDialogueToggle)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0021)
-                    EVT_SET(AF_FLO_PurpleBubulbDialogueToggle, TRUE)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0022)
-                    EVT_SET(AF_FLO_PurpleBubulbDialogueToggle, FALSE)
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0023)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001D)
+        CaseLt(STORY_CH6_GOT_FERTILE_SOIL)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001E)
+        CaseLt(STORY_CH6_FILLED_SPRING_WITH_WATER)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_001F)
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0020)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Switch(AF_FLO_PurpleBubulbDialogueToggle)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0021)
+                    Set(AF_FLO_PurpleBubulbDialogueToggle, TRUE)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0022)
+                    Set(AF_FLO_PurpleBubulbDialogueToggle, FALSE)
+            EndSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH6_0023)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0024)
-        EVT_CASE_LT(STORY_CH6_GOT_FERTILE_SOIL)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0025)
-        EVT_CASE_LT(STORY_CH6_FILLED_SPRING_WITH_WATER)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0026)
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0027)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_GreenBubulbDialogueToggle)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0028)
-                    EVT_SET(AF_FLO_GreenBubulbDialogueToggle, TRUE)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0029)
-                    EVT_SET(AF_FLO_GreenBubulbDialogueToggle, FALSE)
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_002A)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0024)
+        CaseLt(STORY_CH6_GOT_FERTILE_SOIL)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0025)
+        CaseLt(STORY_CH6_FILLED_SPRING_WITH_WATER)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0026)
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_Talk, ANIM_Bubulb_Green_Idle, 0, MSG_CH6_0027)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Switch(AF_FLO_GreenBubulbDialogueToggle)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0028)
+                    Set(AF_FLO_GreenBubulbDialogueToggle, TRUE)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_0029)
+                    Set(AF_FLO_GreenBubulbDialogueToggle, FALSE)
+            EndSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Green_HappyTalk, ANIM_Bubulb_Green_HappyGentle, 0, MSG_CH6_002A)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002B)
-        EVT_CASE_LT(STORY_CH6_GOT_FERTILE_SOIL)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002C)
-        EVT_CASE_LT(STORY_CH6_FILLED_SPRING_WITH_WATER)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002D)
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002E)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AF_FLO_YellowBubulbDialogueToggle)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_002F)
-                    EVT_SET(AF_FLO_YellowBubulbDialogueToggle, TRUE)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0030)
-                    EVT_SET(AF_FLO_YellowBubulbDialogueToggle, FALSE)
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0031)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002B)
+        CaseLt(STORY_CH6_GOT_FERTILE_SOIL)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002C)
+        CaseLt(STORY_CH6_FILLED_SPRING_WITH_WATER)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002D)
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_Talk, ANIM_Bubulb_Yellow_Idle, 0, MSG_CH6_002E)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Switch(AF_FLO_YellowBubulbDialogueToggle)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_002F)
+                    Set(AF_FLO_YellowBubulbDialogueToggle, TRUE)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0030)
+                    Set(AF_FLO_YellowBubulbDialogueToggle, FALSE)
+            EndSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Yellow_HappyTalk, ANIM_Bubulb_Yellow_HappyGentle, 0, MSG_CH6_0031)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_01) = {
-    EVT_SET(AF_FLO_PinkBubulbDialogueToggle, FALSE)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb1)))
-    EVT_RETURN
-    EVT_END
+    Set(AF_FLO_PinkBubulbDialogueToggle, FALSE)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb1)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_02) = {
-    EVT_SET(AF_FLO_PurpleBubulbDialogueToggle, FALSE)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb2)))
-    EVT_RETURN
-    EVT_END
+    Set(AF_FLO_PurpleBubulbDialogueToggle, FALSE)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb2)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_03) = {
-    EVT_SET(AF_FLO_GreenBubulbDialogueToggle, FALSE)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb_03)))
-    EVT_RETURN
-    EVT_END
+    Set(AF_FLO_GreenBubulbDialogueToggle, FALSE)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb_04) = {
-    EVT_SET(AF_FLO_YellowBubulbDialogueToggle, FALSE)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb_04)))
-    EVT_RETURN
-    EVT_END
+    Set(AF_FLO_YellowBubulbDialogueToggle, FALSE)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Tolielup) = {
-    EVT_IF_EQ(GF_FLO00_Met_Tolielup, FALSE)
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), -30, 300, EVT_FLOAT(20.0), EVT_FLOAT(-9.5))
-        EVT_SET(GF_FLO00_Met_Tolielup, TRUE)
-    EVT_END_IF
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_MAGICAL_BEAN)
-            EVT_SWITCH(AB_FLO_TolielupDialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0035)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 2)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH6_GOT_CRYSTAL_BERRY)
-            EVT_SWITCH(AB_FLO_TolielupDialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0036)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 2)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_SWITCH(AB_FLO_TolielupDialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0037)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 2)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(AB_FLO_TolielupDialogue)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-                    EVT_SET(AB_FLO_TolielupDialogue, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
-                    EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_003A)
-            EVT_CALL(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
-    EVT_END_SWITCH
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_FLO00_Met_Tolielup, FALSE)
+        Call(AdjustCam, CAM_DEFAULT, Float(4.0), -30, 300, Float(20.0), Float(-9.5))
+        Set(GF_FLO00_Met_Tolielup, TRUE)
+    EndIf
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_MAGICAL_BEAN)
+            Switch(AB_FLO_TolielupDialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0035)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 2)
+                CaseEq(2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 0)
+            EndSwitch
+        CaseLt(STORY_CH6_GOT_CRYSTAL_BERRY)
+            Switch(AB_FLO_TolielupDialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0036)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 2)
+                CaseEq(2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 0)
+            EndSwitch
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Switch(AB_FLO_TolielupDialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0037)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 2)
+                CaseEq(2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 0)
+            EndSwitch
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Switch(AB_FLO_TolielupDialogue)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0039)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+                    Set(AB_FLO_TolielupDialogue, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_0038)
+                    Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+            EndSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Tolielup_Talk, ANIM_Tolielup_Idle, 0, MSG_CH6_003A)
+            Call(EndSpeech, NPC_SELF, ANIM_Tolielup_Laugh, ANIM_Tolielup_Laugh, 0)
+    EndSwitch
+    Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Tolielup) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Tolielup)))
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 65, 50)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Tolielup)))
+    Call(SetNpcCollisionSize, NPC_SELF, 65, 50)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Klevar) = {
-    EVT_LOOP(0)
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Loop(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar1, 1)
+            Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+        Loop(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Add(LVar1, 1)
+            Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_RescuedKlevar) = {
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar0)
-    EVT_ADD(LVar3, -50)
-    EVT_SET(LVar4, LVar1)
-    EVT_ADD(LVar4, 26)
-    EVT_CALL(SetNpcPos, NPC_Klevar, LVar3, LVar4, LVar2)
-    EVT_CALL(PlayerFaceNpc, NPC_Klevar, FALSE)
-    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Klevar, 0)
-    EVT_ADD(LVar0, -25)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(475.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 18, -8)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(40)
-    EVT_CALL(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00D8)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 18, -9)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(MakeLerp, 0, 360, 10, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_Klevar, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableNpcAI, NPC_Klevar, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Leap)
-    EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar1)
-    EVT_ADD(LVar1, 50)
-    EVT_ADD(LVar2, 10)
-    EVT_ADD(LVar3, 30)
-    EVT_LOOP(5)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
-        EVT_WAIT(6)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
-        EVT_WAIT(6)
-    EVT_END_LOOP
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
-    EVT_WAIT(30)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Idle)
-    EVT_CALL(EnableNpcAI, NPC_Klevar, TRUE)
-    EVT_CALL(N(UpgradeStarPowerCh6))
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0196, 160, 40)
-    EVT_WAIT(10)
-    EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00D9)
-    EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -25)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00DA)
-    EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_THREAD
-        EVT_LOOP(25)
-            EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20)
-            EVT_WAIT(4)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar2, 0)
-        EVT_SET(LVar3, 1800)
-        EVT_CALL(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_Klevar, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_Klevar, LVar2, LVar3, LVar4)
-        EVT_SET(LVar5, LVar3)
-        EVT_ADD(LVar5, 180)
-        EVT_CALL(MakeLerp, LVar3, LVar5, 100, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcPos, NPC_Klevar, LVar2, LVar0, LVar4)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_Klevar, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtNpc, NPC_Klevar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(110)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_SET(GB_StoryProgress, STORY_CH6_STAR_SPRIT_DEPARTED)
-    EVT_EXEC_WAIT(N(EVS_Wisterwood_Farewell))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePartnerAI, 0)
+    Call(func_802CF56C, 2)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar0)
+    Add(LVar3, -50)
+    Set(LVar4, LVar1)
+    Add(LVar4, 26)
+    Call(SetNpcPos, NPC_Klevar, LVar3, LVar4, LVar2)
+    Call(PlayerFaceNpc, NPC_Klevar, FALSE)
+    Call(NpcFaceNpc, NPC_PARTNER, NPC_Klevar, 0)
+    Add(LVar0, -25)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(475.0))
+    Call(SetCamPitch, CAM_DEFAULT, 18, -8)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(WaitForPlayerInputEnabled)
+    Call(DisablePlayerInput, TRUE)
+    Wait(40)
+    Call(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00D8)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, 18, -9)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(MakeLerp, 0, 360, 10, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_Klevar, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableNpcAI, NPC_Klevar, FALSE)
+    Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Leap)
+    Wait(20)
+    Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
+    Call(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar1)
+    Add(LVar1, 50)
+    Add(LVar2, 10)
+    Add(LVar3, 30)
+    Loop(5)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
+        Wait(6)
+        PlayEffect(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
+        Wait(6)
+    EndLoop
+    Wait(20)
+    Call(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
+    Wait(30)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Idle)
+    Call(EnableNpcAI, NPC_Klevar, TRUE)
+    Call(N(UpgradeStarPowerCh6))
+    Call(ShowMessageAtScreenPos, MSG_Menus_0196, 160, 40)
+    Wait(10)
+    Call(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00D9)
+    Wait(10)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, -25)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, SPEECH_FLAG_200, MSG_CH6_00DA)
+    Call(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Thread
+        Loop(25)
+            Call(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20)
+            Wait(4)
+        EndLoop
+    EndThread
+    Thread
+        Set(LVar2, 0)
+        Set(LVar3, 1800)
+        Call(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_Klevar, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(GetNpcPos, NPC_Klevar, LVar2, LVar3, LVar4)
+        Set(LVar5, LVar3)
+        Add(LVar5, 180)
+        Call(MakeLerp, LVar3, LVar5, 100, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcPos, NPC_Klevar, LVar2, LVar0, LVar4)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SetNpcPos, NPC_Klevar, NPC_DISPOSE_LOCATION)
+    EndThread
+    Thread
+        Wait(15)
+        Call(PlaySoundAtNpc, NPC_Klevar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+    EndThread
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(110)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Set(GB_StoryProgress, STORY_CH6_STAR_SPRIT_DEPARTED)
+    ExecWait(N(EVS_Wisterwood_Farewell))
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Klevar) = {
-    EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_NE(LVar1, 1)
-        EVT_CALL(GetEntryID, LVar0)
-        EVT_IF_EQ(LVar0, flo_00_ENTRY_A)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Klevar)))
-            EVT_EXEC(N(EVS_Scene_RescuedKlevar))
-        EVT_ELSE
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetLoadType, LVar1)
+    IfNe(LVar1, 1)
+        Call(GetEntryID, LVar0)
+        IfEq(LVar0, flo_00_ENTRY_A)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Klevar)))
+            Exec(N(EVS_Scene_RescuedKlevar))
+        Else
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Lakilulu) = {
-    EVT_IF_LE(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
-    EVT_ELSE
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_LAKILESTER)
-            EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
-            EVT_WAIT(10)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 5, MSG_CH6_0033)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldLakilester_Idle)
-            EVT_CALL(EndSpeech, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5)
-            EVT_CALL(EnablePartnerAI)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+        Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
+    Else
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_LAKILESTER)
+            Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0032)
+            Wait(10)
+            Call(DisablePartnerAI, 0)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldLakilester_Shout, ANIM_WorldLakilester_IdleTough, 5, MSG_CH6_0033)
+            Call(SetNpcAnimation, NPC_PARTNER, ANIM_WorldLakilester_Idle)
+            Call(EndSpeech, NPC_PARTNER, ANIM_WorldLakilester_Talk, ANIM_WorldLakilester_Idle, 5)
+            Call(EnablePartnerAI)
+        Else
+            Call(SpeakToPlayer, NPC_Lakilulu, ANIM_Lakilulu_Talk, ANIM_Lakilulu_Idle, 0, MSG_CH6_0034)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lakilulu) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lakilulu)))
-        EVT_CALL(SetNpcCollisionSize, NPC_SELF, 36, 28)
-        EVT_CALL(SetNpcPos, NPC_SELF, -200, 15, -300)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH6_BEGAN_PEACH_MISSION)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Lakilulu)))
+        Call(SetNpcCollisionSize, NPC_SELF, 36, 28)
+        Call(SetNpcPos, NPC_SELF, -200, 15, -300)
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Wisterwood) = {

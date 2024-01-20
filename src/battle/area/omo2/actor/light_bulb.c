@@ -100,86 +100,86 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(SetActorPos, ACTOR_SELF, 116, 70, 0)
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_RETURN
-    EVT_END
+    Call(SetActorPos, ACTOR_SELF, 116, 70, 0)
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-        EVT_CASE_OR_EQ(EVENT_HIT)
-        EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_EXEC_WAIT(N(EVS_Hit))
-        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
-            EVT_IF_FALSE(LVar0)
-                EVT_CALL(func_8026E914, LVar0, LVar1)
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-                EVT_WAIT(30)
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
-            EVT_IF_FALSE(LVar0)
-                EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-                EVT_WAIT(30)
-            EVT_END_IF
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_WAIT(N(EVS_Death))
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_EXEC_WAIT(N(EVS_Death))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-        EVT_CASE_EQ(EVENT_BURN_CONTACT)
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-        EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_HIT_COMBO)
+            ExecWait(N(EVS_Hit))
+        CaseOrEq(EVENT_HIT)
+        CaseOrEq(EVENT_BURN_HIT)
+            ExecWait(N(EVS_Hit))
+        EndCaseGroup
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            ExecWait(N(EVS_Hit))
+        CaseEq(EVENT_ZERO_DAMAGE)
+            Call(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
+            IfFalse(LVar0)
+                Call(func_8026E914, LVar0, LVar1)
+                Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
+                Wait(30)
+            EndIf
+        CaseEq(EVENT_IMMUNE)
+            Call(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
+            IfFalse(LVar0)
+                Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
+                Wait(30)
+            EndIf
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+        CaseOrEq(EVENT_DEATH)
+        CaseOrEq(EVENT_BURN_DEATH)
+            ExecWait(N(EVS_Death))
+            Return
+        EndCaseGroup
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            ExecWait(N(EVS_Death))
+            Return
+        CaseEq(EVENT_SPIKE_CONTACT)
+        CaseEq(EVENT_BURN_CONTACT)
+        CaseEq(EVENT_SHOCK_HIT)
+        CaseEq(EVENT_END_FIRST_STRIKE)
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_Hit) = {
-    EVT_EXEC_WAIT(N(EVS_ShakeTank))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_ShakeTank))
+    Return
+    End
 };
 
 EvtScript N(EVS_ShakeTank) = {
-    EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
-    EVT_IF_FALSE(LVar0)
-        EVT_CALL(PlayModelAnimation, 0, EVT_PTR(AS_ToyTank_CloseHatch))
-        EVT_WAIT(30)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_TANK, AVAR_Tank_HandlingEvent, LVar0)
+    IfFalse(LVar0)
+        Call(PlayModelAnimation, 0, Ref(AS_ToyTank_CloseHatch))
+        Wait(30)
+    EndIf
+    Return
+    End
 };
 
 API_CALLABLE(N(SpawnShatterFX)) {
@@ -320,16 +320,16 @@ API_CALLABLE(N(SpawnShatterFX)) {
 }
 
 EvtScript N(EVS_Death) = {
-    EVT_CALL(PlaySoundAtActor, ACTOR_BULB, SOUND_TANK_BULB_SHATTER)
-    EVT_CALL(N(SpawnShatterFX))
-    EVT_CALL(EnableModel, MODEL_kyu3, FALSE)
-    EVT_CALL(EnableModel, MODEL_kyu1, FALSE)
-    EVT_CALL(GetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, LVar0)
-    EVT_IF_NE(LVar0, NULL)
-        EVT_CALL(RemoveEffect, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, NULL)
-    EVT_END_IF
-    EVT_CALL(RemoveActor, ACTOR_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtActor, ACTOR_BULB, SOUND_TANK_BULB_SHATTER)
+    Call(N(SpawnShatterFX))
+    Call(EnableModel, MODEL_kyu3, FALSE)
+    Call(EnableModel, MODEL_kyu1, FALSE)
+    Call(GetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, LVar0)
+    IfNe(LVar0, NULL)
+        Call(RemoveEffect, LVar0)
+        Call(SetActorVar, ACTOR_TANK, AVAR_Tank_BulbGlowEffect, NULL)
+    EndIf
+    Call(RemoveActor, ACTOR_SELF)
+    Return
+    End
 };

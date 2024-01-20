@@ -1,9 +1,9 @@
 #include "RaphaelRaven.h"
 
 EvtScript N(EVS_NpcAuxAI_RaphaelRaven) = {
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.5))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_SELF, Float(1.5), Float(1.5), Float(1.5))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_RaphaelRaven) = {

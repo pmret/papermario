@@ -6,29 +6,29 @@
 #include "world/common/entity/SuperBlock.inc.c"
 
 EvtScript N(EVS_TetherCameraToPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpring) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
-    EVT_WAIT(2)
-    EVT_CALL(GetPlayerPos, LVar7, LVar8, LVar9)
-    EVT_EXEC_GET_TID(N(EVS_TetherCameraToPlayer), LVarA)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-    EVT_CALL(PlayerJump, 450, 180, -120, 30)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
+    Wait(2)
+    Call(GetPlayerPos, LVar7, LVar8, LVar9)
+    ExecGetTID(N(EVS_TetherCameraToPlayer), LVarA)
+    Call(SetPlayerJumpscale, Float(0.7))
+    Call(PlayerJump, 450, 180, -120, 30)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 API_CALLABLE(N(IsPlayerPounding)) {
@@ -40,28 +40,28 @@ API_CALLABLE(N(IsPlayerPounding)) {
 }
 
 EvtScript N(EVS_MonitorCeilingPound) = {
-    EVT_IF_EQ(AF_FLO16_FoundHiddenStarPiece, FALSE)
-        EVT_CALL(N(IsPlayerPounding))
-        EVT_IF_EQ(LVar0, 0)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_RANGE(620, 660)
-                EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 640, 145, -100, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO16_Item_StarPiece)
-                EVT_SET(AF_FLO16_FoundHiddenStarPiece, TRUE)
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_FLO16_FoundHiddenStarPiece, FALSE)
+        Call(N(IsPlayerPounding))
+        IfEq(LVar0, 0)
+            Return
+        EndIf
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Switch(LVar0)
+            CaseRange(620, 660)
+                Call(MakeItemEntity, ITEM_STAR_PIECE, 640, 145, -100, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO16_Item_StarPiece)
+                Set(AF_FLO16_FoundHiddenStarPiece, TRUE)
+        EndSwitch
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_SET(AF_FLO16_FoundHiddenStarPiece, FALSE)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_MonitorCeilingPound)), TRIGGER_FLOOR_TOUCH, COLLIDER_o214, 1, 0)
+    Set(AF_FLO16_FoundHiddenStarPiece, FALSE)
+    BindTrigger(Ref(N(EVS_MonitorCeilingPound)), TRIGGER_FLOOR_TOUCH, COLLIDER_o214, 1, 0)
     EVT_MAKE_SUPER_BLOCK(350, 240, -100, 0)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), 472, 100, -100, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpring)))
-    EVT_RETURN
-    EVT_END
+    Call(MakeEntity, Ref(Entity_ScriptSpring), 472, 100, -100, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpring)))
+    Return
+    End
 };

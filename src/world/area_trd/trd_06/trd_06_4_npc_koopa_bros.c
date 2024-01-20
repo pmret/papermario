@@ -11,9 +11,9 @@ MobileAISettings N(AISettings_KoopaBros) = {
 };
 
 EvtScript N(EVS_NpcAI_KoopaBros) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_KoopaBros)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_KoopaBros)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_KoopaBros) = {
@@ -32,18 +32,18 @@ NpcSettings N(NpcSettings_Unused) = {
 };
 
 EvtScript N(EVS_Scene_ImprisonedKoopaBros) = {
-    EVT_WAIT(60)
-    EVT_CALL(EnableNpcAI, NPC_KoopaBros_Red, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_Red, ANIM_KoopaBros_Red_Dizzy, ANIM_KoopaBros_Red_Dizzy, 0, MSG_CH1_010C)
-    EVT_CALL(EnableNpcAI, NPC_KoopaBros_Red, TRUE)
-    EVT_WAIT(30)
-    EVT_CALL(FadeOutMusic, 0, 2000)
-    EVT_WAIT(30)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_CALL(GotoMap, EVT_PTR("trd_10"), trd_10_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Wait(60)
+    Call(EnableNpcAI, NPC_KoopaBros_Red, FALSE)
+    Call(SpeakToPlayer, NPC_KoopaBros_Red, ANIM_KoopaBros_Red_Dizzy, ANIM_KoopaBros_Red_Dizzy, 0, MSG_CH1_010C)
+    Call(EnableNpcAI, NPC_KoopaBros_Red, TRUE)
+    Wait(30)
+    Call(FadeOutMusic, 0, 2000)
+    Wait(30)
+    Call(GetEntryID, LVar0)
+    Call(GotoMap, Ref("trd_10"), trd_10_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaBros)[] = {

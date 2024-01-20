@@ -10,54 +10,54 @@ s32 N(FireBar_Sounds)[] = {
 };
 
 EvtScript N(EVS_FireBar_Defeated) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVarB, LVar1)
-    EVT_LOOP(15)
-        EVT_LOOP(LVar1)
-            EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_ADD(LVar0, 1)
-        EVT_END_LOOP
-        EVT_WAIT(1)
-        EVT_SET(LVar0, LVarA)
-        EVT_SET(LVar1, LVarB)
-        EVT_LOOP(LVar1)
-            EVT_CALL(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_ADD(LVar0, 1)
-        EVT_END_LOOP
-        EVT_WAIT(1)
-        EVT_SET(LVar0, LVarA)
-        EVT_SET(LVar1, LVarB)
-    EVT_END_LOOP
-    EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(PlaySoundAt, SOUND_SEQ_FIRE_BAR_DEAD, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
-    EVT_LOOP(10)
-        EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(RandInt, 50, LVar4)
-        EVT_SUB(LVar4, 25)
-        EVT_CALL(RandInt, 30, LVar5)
-        EVT_ADD(LVar1, LVar4)
-        EVT_ADD(LVar2, LVar5)
-        EVT_PLAY_EFFECT(EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2)
-    EVT_END_LOOP
-    EVT_IF_EQ(LVarA, NPC_FireBar_1A)
-        EVT_IF_EQ(AF_TRD08_FireBar1_Coins, FALSE)
-            EVT_SET(AF_TRD08_FireBar1_Coins, TRUE)
-            EVT_LOOP(10)
-                EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(LVarA, NPC_FireBar_2A)
-        EVT_IF_EQ(AF_TRD08_FireBar2_Coins, FALSE)
-            EVT_SET(AF_TRD08_FireBar2_Coins, TRUE)
-            EVT_LOOP(10)
-                EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
-            EVT_END_LOOP
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(RemoveEncounter, LVarA)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVarB, LVar1)
+    Loop(15)
+        Loop(LVar1)
+            Call(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, TRUE)
+            Add(LVar0, 1)
+        EndLoop
+        Wait(1)
+        Set(LVar0, LVarA)
+        Set(LVar1, LVarB)
+        Loop(LVar1)
+            Call(SetNpcFlagBits, LVar0, NPC_FLAG_INVISIBLE, FALSE)
+            Add(LVar0, 1)
+        EndLoop
+        Wait(1)
+        Set(LVar0, LVarA)
+        Set(LVar1, LVarB)
+    EndLoop
+    Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+    Call(PlaySoundAt, SOUND_SEQ_FIRE_BAR_DEAD, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
+    Loop(10)
+        Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+        Call(RandInt, 50, LVar4)
+        Sub(LVar4, 25)
+        Call(RandInt, 30, LVar5)
+        Add(LVar1, LVar4)
+        Add(LVar2, LVar5)
+        PlayEffect(EFFECT_00, LVar1, LVar2, LVar3, 1, 20, 3, 2)
+    EndLoop
+    IfEq(LVarA, NPC_FireBar_1A)
+        IfEq(AF_TRD08_FireBar1_Coins, FALSE)
+            Set(AF_TRD08_FireBar1_Coins, TRUE)
+            Loop(10)
+                Call(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
+            EndLoop
+        EndIf
+    EndIf
+    IfEq(LVarA, NPC_FireBar_2A)
+        IfEq(AF_TRD08_FireBar2_Coins, FALSE)
+            Set(AF_TRD08_FireBar2_Coins, TRUE)
+            Loop(10)
+                Call(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
+            EndLoop
+        EndIf
+    EndIf
+    Call(RemoveEncounter, LVarA)
+    Return
+    End
 };
 
 FireBarAISettings N(AISettings_FireBar_01) = {
@@ -77,31 +77,31 @@ FireBarAISettings N(AISettings_FireBar_02) = {
 };
 
 EvtScript N(EVS_NpcAuxAI_00) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, 0, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_THREAD
-        EVT_CALL(RandInt, 5, LVar0)
-        EVT_ADD(LVar0, 1)
-        EVT_WAIT(LVar0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fire_Brighest_Still)
-        EVT_WAIT(1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fire_Brighest_Burn)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, 0, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Thread
+        Call(RandInt, 5, LVar0)
+        Add(LVar0, 1)
+        Wait(LVar0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Fire_Brighest_Still)
+        Wait(1)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Fire_Brighest_Burn)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_FireBar_01) = {
-    EVT_CALL(N(FireBarAI_Main), EVT_PTR(N(AISettings_FireBar_01)))
-    EVT_RETURN
-    EVT_END
+    Call(N(FireBarAI_Main), Ref(N(AISettings_FireBar_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_FireBar_02) = {
-    EVT_CALL(N(FireBarAI_Main), EVT_PTR(N(AISettings_FireBar_02)))
-    EVT_RETURN
-    EVT_END
+    Call(N(FireBarAI_Main), Ref(N(AISettings_FireBar_02)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FireBar_01) = {

@@ -44,9 +44,9 @@ API_CALLABLE(N(DarkRoomUpdate)) {
 }
 
 EvtScript N(EVS_CreateDarkness) = {
-    EVT_THREAD
-        EVT_CALL(N(DarkRoomUpdate))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(N(DarkRoomUpdate))
+    EndThread
+    Return
+    End
 };

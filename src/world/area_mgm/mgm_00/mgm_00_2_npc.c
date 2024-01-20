@@ -17,152 +17,152 @@ API_CALLABLE(N(GetAvailableGamesCount)) {
 }
 
 EvtScript N(EVS_RaisePipe_JumpAttack) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -25, 0, -155)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -25, 0, -155)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.2))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(5)
-    EVT_CALL(PlaySoundWithVolume, SOUND_GROW, 0)
-    EVT_CALL(EnableModel, MODEL_o5, TRUE)
-    EVT_SET(LVar0, -30)
-    EVT_LOOP(30)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(TranslateModel, MODEL_o5, 0, LVar0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(TranslateModel, MODEL_o5, 0, 0, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o5, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deili2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnEnterPipe_JumpAttack)), TRIGGER_FLOOR_TOUCH, COLLIDER_deili2, 1, 0)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, -25, 0, -155)
+    Call(SetPanTarget, CAM_DEFAULT, -25, 0, -155)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(5)
+    Call(PlaySoundWithVolume, SOUND_GROW, 0)
+    Call(EnableModel, MODEL_o5, TRUE)
+    Set(LVar0, -30)
+    Loop(30)
+        Add(LVar0, 1)
+        Call(TranslateModel, MODEL_o5, 0, LVar0, 0)
+        Wait(1)
+    EndLoop
+    Call(TranslateModel, MODEL_o5, 0, 0, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o5, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deili2, COLLIDER_FLAGS_UPPER_MASK)
+    BindTrigger(Ref(N(EVS_OnEnterPipe_JumpAttack)), TRIGGER_FLOOR_TOUCH, COLLIDER_deili2, 1, 0)
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_RaisePipe_SmashAttack) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 95, 0, -155)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 95, 0, -155)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.2))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(5)
-    EVT_CALL(PlaySoundWithVolume, SOUND_GROW, 0)
-    EVT_CALL(EnableModel, MODEL_o9, TRUE)
-    EVT_SET(LVar0, -30)
-    EVT_LOOP(30)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(TranslateModel, MODEL_o9, 0, LVar0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(TranslateModel, MODEL_o9, 0, 0, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o9, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deili3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnEnterPipe_SmashAttack)), TRIGGER_FLOOR_TOUCH, COLLIDER_deili3, 1, 0)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, 95, 0, -155)
+    Call(SetPanTarget, CAM_DEFAULT, 95, 0, -155)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(5)
+    Call(PlaySoundWithVolume, SOUND_GROW, 0)
+    Call(EnableModel, MODEL_o9, TRUE)
+    Set(LVar0, -30)
+    Loop(30)
+        Add(LVar0, 1)
+        Call(TranslateModel, MODEL_o9, 0, LVar0, 0)
+        Wait(1)
+    EndLoop
+    Call(TranslateModel, MODEL_o9, 0, 0, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o9, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deili3, COLLIDER_FLAGS_UPPER_MASK)
+    BindTrigger(Ref(N(EVS_OnEnterPipe_SmashAttack)), TRIGGER_FLOOR_TOUCH, COLLIDER_deili3, 1, 0)
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetCamera_RaisePipe) = {
-    EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.2))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.2))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_RedToad) = {
-    EVT_CALL(N(GetAvailableGamesCount))
-    EVT_SET(LVar6, 0)
-    EVT_SET(LVar7, 0)
-    EVT_IF_EQ(GF_MGM_Unlocked_JumpAttack, FALSE)
-        EVT_SWITCH(LVar5)
-            EVT_CASE_EQ(0)
-            EVT_CASE_EQ(1)
-                EVT_SET(LVar6, 1)
-                EVT_SET(LVar7, 1)
-            EVT_CASE_EQ(2)
-                EVT_SET(LVar6, 1)
-                EVT_SET(LVar7, 3)
-        EVT_END_SWITCH
-    EVT_ELSE
-        EVT_IF_EQ(GF_MGM_Unlocked_SmashAttack, FALSE)
-            EVT_IF_LE(LVar5, 1)
-                EVT_SET(LVar6, 2)
-            EVT_ELSE
-                EVT_SET(LVar6, 3)
-                EVT_SET(LVar7, 2)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_SET(LVar6, 4)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(GF_MGM00_Met_Receptionist, FALSE)
-        EVT_SET(GF_MGM00_Met_Receptionist, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0012)
-    EVT_ELSE
-        EVT_SWITCH(LVar6)
-            EVT_CASE_EQ(0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0013)
-                EVT_RETURN
-            EVT_CASE_EQ(1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0014)
-            EVT_CASE_EQ(2)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0015)
-                EVT_RETURN
-            EVT_CASE_EQ(3)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0016)
-            EVT_CASE_EQ(4)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0017)
-                EVT_RETURN
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_SWITCH(LVar7)
-        EVT_CASE_EQ(0)
-            EVT_CALL(EndSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
-        EVT_CASE_EQ(1)
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0018)
-        EVT_CASE_EQ(2)
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0019)
-        EVT_CASE_EQ(3)
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_001A)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar7)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(1)
-            EVT_SET(GF_MGM_Unlocked_JumpAttack, TRUE)
-            EVT_EXEC_WAIT(N(EVS_RaisePipe_JumpAttack))
-            EVT_EXEC_WAIT(N(EVS_SetCamera_RaisePipe))
-        EVT_CASE_EQ(2)
-            EVT_SET(GF_MGM_Unlocked_SmashAttack, TRUE)
-            EVT_EXEC_WAIT(N(EVS_RaisePipe_SmashAttack))
-            EVT_EXEC_WAIT(N(EVS_SetCamera_RaisePipe))
-        EVT_CASE_EQ(3)
-            EVT_SET(GF_MGM_Unlocked_JumpAttack, TRUE)
-            EVT_SET(GF_MGM_Unlocked_SmashAttack, TRUE)
-            EVT_EXEC_WAIT(N(EVS_RaisePipe_JumpAttack))
-            EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(EVS_RaisePipe_SmashAttack))
-            EVT_EXEC_WAIT(N(EVS_SetCamera_RaisePipe))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(N(GetAvailableGamesCount))
+    Set(LVar6, 0)
+    Set(LVar7, 0)
+    IfEq(GF_MGM_Unlocked_JumpAttack, FALSE)
+        Switch(LVar5)
+            CaseEq(0)
+            CaseEq(1)
+                Set(LVar6, 1)
+                Set(LVar7, 1)
+            CaseEq(2)
+                Set(LVar6, 1)
+                Set(LVar7, 3)
+        EndSwitch
+    Else
+        IfEq(GF_MGM_Unlocked_SmashAttack, FALSE)
+            IfLe(LVar5, 1)
+                Set(LVar6, 2)
+            Else
+                Set(LVar6, 3)
+                Set(LVar7, 2)
+            EndIf
+        Else
+            Set(LVar6, 4)
+        EndIf
+    EndIf
+    IfEq(GF_MGM00_Met_Receptionist, FALSE)
+        Set(GF_MGM00_Met_Receptionist, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0012)
+    Else
+        Switch(LVar6)
+            CaseEq(0)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0013)
+                Return
+            CaseEq(1)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0014)
+            CaseEq(2)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0015)
+                Return
+            CaseEq(3)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0016)
+            CaseEq(4)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0017)
+                Return
+        EndSwitch
+    EndIf
+    Switch(LVar7)
+        CaseEq(0)
+            Call(EndSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
+        CaseEq(1)
+            Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0018)
+        CaseEq(2)
+            Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0019)
+        CaseEq(3)
+            Call(ContinueSpeech, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_001A)
+    EndSwitch
+    Switch(LVar7)
+        CaseEq(0)
+        CaseEq(1)
+            Set(GF_MGM_Unlocked_JumpAttack, TRUE)
+            ExecWait(N(EVS_RaisePipe_JumpAttack))
+            ExecWait(N(EVS_SetCamera_RaisePipe))
+        CaseEq(2)
+            Set(GF_MGM_Unlocked_SmashAttack, TRUE)
+            ExecWait(N(EVS_RaisePipe_SmashAttack))
+            ExecWait(N(EVS_SetCamera_RaisePipe))
+        CaseEq(3)
+            Set(GF_MGM_Unlocked_JumpAttack, TRUE)
+            Set(GF_MGM_Unlocked_SmashAttack, TRUE)
+            ExecWait(N(EVS_RaisePipe_JumpAttack))
+            Wait(10)
+            ExecWait(N(EVS_RaisePipe_SmashAttack))
+            ExecWait(N(EVS_SetCamera_RaisePipe))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_RedToad) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 32, 75)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RedToad)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_SELF, 32, 75)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RedToad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_RedToad) = {
@@ -178,31 +178,31 @@ NpcData N(NpcData_RedToad) = {
 };
 
 EvtScript N(EVS_NpcInteract_GreenToad) = {
-    EVT_CALL(N(GetAvailableGamesCount))
-    EVT_SWITCH(LVar5)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0025)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0026)
-        EVT_CASE_DEFAULT
-            EVT_CALL(GetSelfVar, 0, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0027)
-                EVT_CALL(SetSelfVar, 0, 1)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0028)
-                EVT_CALL(SetSelfVar, 0, 0)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(N(GetAvailableGamesCount))
+    Switch(LVar5)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0025)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0026)
+        CaseDefault
+            Call(GetSelfVar, 0, LVar0)
+            IfEq(LVar0, 0)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0027)
+                Call(SetSelfVar, 0, 1)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, MSG_MGM_0028)
+                Call(SetSelfVar, 0, 0)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GreenToad) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GreenToad)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GreenToad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_GreenToad) = {
@@ -232,27 +232,27 @@ NpcData N(NpcData_GreenToad) = {
 };
 
 EvtScript N(EVS_NpcInteract_BlueToad) = {
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_LT(25)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_0029)
-        EVT_CASE_LT(50)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_002A)
-        EVT_CASE_LT(75)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_002B)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_002C)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetSelfVar, 0, LVar0)
+    Switch(LVar0)
+        CaseLt(25)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_0029)
+        CaseLt(50)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_002A)
+        CaseLt(75)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_002B)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, MSG_MGM_002C)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BlueToad) = {
-    EVT_CALL(RandInt, 100, LVar0)
-    EVT_CALL(SetSelfVar, 0, LVar0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_BlueToad)))
-    EVT_RETURN
-    EVT_END
+    Call(RandInt, 100, LVar0)
+    Call(SetSelfVar, 0, LVar0)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_BlueToad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_BlueToad) = {

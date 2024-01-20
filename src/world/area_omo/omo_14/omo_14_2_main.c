@@ -6,30 +6,30 @@ EvtScript N(EVS_ExitWalk_omo_02_1) = EVT_EXIT_WALK(60, omo_14_ENTRY_0, "omo_02",
 EvtScript N(EVS_ExitWalk_omo_15_0) = EVT_EXIT_WALK(60, omo_14_ENTRY_1, "omo_15", omo_15_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_omo_02_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_omo_15_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_omo_02_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_omo_15_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-        EVT_CALL(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_LOOP_SHY_GUY_CROWD_1, SOUND_SPACE_DEFAULT)
-    EVT_END_IF
-    EVT_EXEC(N(EVS_CreateDarkness))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-        EVT_CALL(EnableModel, MODEL_o823, FALSE)
-        EVT_CALL(EnableModel, MODEL_o828, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_SHY_GUYS_TOYBOX)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_ALT_NO_LEAD()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Exec(N(EVS_SetupMusic))
+    IfLt(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
+        Call(PlaySoundAtNpc, NPC_ShyGuy_01, SOUND_LOOP_SHY_GUY_CROWD_1, SOUND_SPACE_DEFAULT)
+    EndIf
+    Exec(N(EVS_CreateDarkness))
+    IfGe(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
+        Call(EnableModel, MODEL_o823, FALSE)
+        Call(EnableModel, MODEL_o828, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Wait(1)
+    Return
+    End
 };

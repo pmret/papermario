@@ -97,64 +97,64 @@ API_CALLABLE(N(func_80240A50_A1BB50)) {
 }
 
 EvtScript N(EVS_SetupAurora) = {
-    EVT_THREAD
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  100,  -80,  -50,  120)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o29, TEX_PANNER_1)
-    EVT_CALL(SetTexPanner, MODEL_o204, TEX_PANNER_1)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o29, TEX_PANNER_1)
+    Call(SetTexPanner, MODEL_o204, TEX_PANNER_1)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_3)
         TEX_PAN_PARAMS_STEP( -300,  500,    0,    0)
         TEX_PAN_PARAMS_FREQ(    1,    1,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o87, TEX_PANNER_3)
-    EVT_CALL(SetTexPanner, MODEL_o134, TEX_PANNER_3)
-    EVT_CALL(SetTexPanner, MODEL_o171, TEX_PANNER_3)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o87, TEX_PANNER_3)
+    Call(SetTexPanner, MODEL_o134, TEX_PANNER_3)
+    Call(SetTexPanner, MODEL_o171, TEX_PANNER_3)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_4)
         TEX_PAN_PARAMS_STEP(    0, -800,    0,    0)
         TEX_PAN_PARAMS_FREQ(    0,    1,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o90, TEX_PANNER_4)
-    EVT_CALL(SetTexPanner, MODEL_o135, TEX_PANNER_4)
-    EVT_CALL(SetTexPanner, MODEL_o172, TEX_PANNER_4)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o90, TEX_PANNER_4)
+    Call(SetTexPanner, MODEL_o135, TEX_PANNER_4)
+    Call(SetTexPanner, MODEL_o172, TEX_PANNER_4)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_5)
         TEX_PAN_PARAMS_STEP(    0,-1500,    0,    0)
         TEX_PAN_PARAMS_FREQ(    0,    1,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o91, TEX_PANNER_5)
-    EVT_CALL(SetTexPanner, MODEL_o136, TEX_PANNER_5)
-    EVT_CALL(SetTexPanner, MODEL_o173, TEX_PANNER_5)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o91, TEX_PANNER_5)
+    Call(SetTexPanner, MODEL_o136, TEX_PANNER_5)
+    Call(SetTexPanner, MODEL_o173, TEX_PANNER_5)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_6)
         TEX_PAN_PARAMS_STEP(    0, 3000,    0,    0)
         TEX_PAN_PARAMS_FREQ(    0,    1,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o159, TEX_PANNER_6)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o159, TEX_PANNER_6)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_7)
         TEX_PAN_PARAMS_STEP(    0, 4000,    0,    0)
         TEX_PAN_PARAMS_FREQ(    0,    1,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o160, TEX_PANNER_7)
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o76, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(build_gfx_aurora)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o160, TEX_PANNER_7)
+    Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o76, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(build_gfx_aurora)), NULL)
+    Call(SetModelCustomGfx, MODEL_o76, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
+    Return
+    End
 };

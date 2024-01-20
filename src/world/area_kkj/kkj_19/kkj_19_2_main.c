@@ -86,9 +86,9 @@ void N(draw_content_ingredient_desc)(
 }
 
 EvtScript N(EVS_TouchFloor_IngredientStation) = {
-    EVT_CALL(N(TryOpenIngredientWindows), LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(N(TryOpenIngredientWindows), LVar0)
+    Return
+    End
 };
 
 WindowStyleCustom N(IngredientNameWS) = {
@@ -156,61 +156,61 @@ API_CALLABLE(N(CreateIngredientInfoWindows)) {
 }
 
 EvtScript N(EVS_ExitDoor_0) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, kkj_19_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_ttse)
-    EVT_SET(LVar2, MODEL_o95)
-    EVT_SET(LVar3, DOOR_SWING_IN)
-    EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT(17)
-    EVT_IF_EQ(GB_StoryProgress, STORY_INTRO)
-        EVT_CALL(GotoMap, EVT_PTR("kkj_00"), kkj_00_ENTRY_3)
-    EVT_ELSE
-        EVT_CALL(GotoMap, EVT_PTR("kkj_10"), kkj_10_ENTRY_3)
-    EVT_END_IF
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar0, kkj_19_ENTRY_0)
+    Set(LVar1, COLLIDER_ttse)
+    Set(LVar2, MODEL_o95)
+    Set(LVar3, DOOR_SWING_IN)
+    Exec(ExitSingleDoor)
+    Wait(17)
+    IfEq(GB_StoryProgress, STORY_INTRO)
+        Call(GotoMap, Ref("kkj_00"), kkj_00_ENTRY_3)
+    Else
+        Call(GotoMap, Ref("kkj_10"), kkj_10_ENTRY_3)
+    EndIf
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoor_0)), TRIGGER_WALL_PRESS_A, COLLIDER_ttse, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoor_0)), TRIGGER_WALL_PRESS_A, COLLIDER_ttse, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
-        EVT_EXEC(N(EVS_ManageBaking))
-    EVT_ELSE
-        EVT_SET(LVar0, kkj_19_ENTRY_0)
-        EVT_SET(LVar2, MODEL_o95)
-        EVT_SET(LVar3, DOOR_SWING_IN)
-        EVT_EXEC_WAIT(EnterSingleDoor)
-        EVT_EXEC(N(EVS_BindExitTriggers))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
+        Exec(N(EVS_ManageBaking))
+    Else
+        Set(LVar0, kkj_19_ENTRY_0)
+        Set(LVar2, MODEL_o95)
+        Set(LVar3, DOOR_SWING_IN)
+        ExecWait(EnterSingleDoor)
+        Exec(N(EVS_BindExitTriggers))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_INTRO)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(IntroNPCs)))
-        EVT_CASE_EQ(STORY_CH4_BEGAN_PEACH_MISSION)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(PeachNPCs)))
-    EVT_END_SWITCH
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
-        EVT_CALL(N(CreateIngredientInfoWindows))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_INTRO)
+            Call(MakeNpcs, FALSE, Ref(N(IntroNPCs)))
+        CaseEq(STORY_CH4_BEGAN_PEACH_MISSION)
+            Call(MakeNpcs, FALSE, Ref(N(PeachNPCs)))
+    EndSwitch
+    Exec(N(EVS_SetupMusic))
+    Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    IfEq(GB_StoryProgress, STORY_CH4_BEGAN_PEACH_MISSION)
+        Call(N(CreateIngredientInfoWindows))
+    EndIf
+    Return
+    End
 };

@@ -2,88 +2,88 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_NpcAI_MBush) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetSelfVar, 10, LVar0)
-    EVT_CALL(SetSelfVar, 11, LVar1)
-    EVT_CALL(SetSelfVar, 12, LVar2)
-    EVT_ADD(LVar0, 2)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SUB(LVar0, 3)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_ADD(LVar0, 2)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_SUB(LVar0, 3)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_ADD(LVar0, 2)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_WAIT(1)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim03)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(6)
-        EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 25)
-    EVT_SUB(LVar2, 5)
-    EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 15)
-    EVT_WAIT(4)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim07)
-    EVT_WAIT(2)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBattle)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
+    Call(SetSelfVar, 0, 0)
+    Label(0)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Wait(1)
+        Goto(0)
+    EndIf
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(DisablePlayerInput, TRUE)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetSelfVar, 10, LVar0)
+    Call(SetSelfVar, 11, LVar1)
+    Call(SetSelfVar, 12, LVar2)
+    Add(LVar0, 2)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Sub(LVar0, 3)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Add(LVar0, 2)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Sub(LVar0, 3)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Add(LVar0, 2)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Wait(1)
+    Thread
+        Wait(10)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim03)
+    EndThread
+    Thread
+        Wait(6)
+        Call(InterpPlayerYaw, 90, 0)
+    EndThread
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, 25)
+    Sub(LVar2, 5)
+    Call(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 15)
+    Wait(4)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim07)
+    Wait(2)
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBattle)
 }; // fallthrough :(
 
 EvtScript N(EVS_NpcInteract_MBush) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_MBush) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim05)
-            EVT_CALL(GetSelfVar, 10, LVar0)
-            EVT_CALL(GetSelfVar, 11, LVar1)
-            EVT_CALL(GetSelfVar, 12, LVar2)
-            EVT_CALL(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
-            EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_MBush)))
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim05)
+            Call(GetSelfVar, 10, LVar0)
+            Call(GetSelfVar, 11, LVar1)
+            Call(GetSelfVar, 12, LVar2)
+            Call(NpcJump1, NPC_SELF, LVar0, LVar1, LVar2, 8)
+            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MBush_Anim00)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MBush)))
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_MBush) = {

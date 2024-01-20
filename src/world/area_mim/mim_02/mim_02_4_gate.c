@@ -5,86 +5,86 @@
 #include "../common/AnimateGates.inc.c"
 
 EvtScript N(EVS_UseGate_North) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 0)
-    EVT_SET(LVar8, 70)
-    EVT_SET(LVar9, COLLIDER_monn)
-    EVT_SET(LVarA, MODEL_monn)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 0)
+    Set(LVar8, 70)
+    Set(LVar9, COLLIDER_monn)
+    Set(LVarA, MODEL_monn)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_South) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 0)
-    EVT_SET(LVar8, -70)
-    EVT_SET(LVar9, COLLIDER_mons)
-    EVT_SET(LVarA, MODEL_mons)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 0)
+    Set(LVar8, -70)
+    Set(LVar9, COLLIDER_mons)
+    Set(LVarA, MODEL_mons)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_East) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, -70)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, COLLIDER_mone)
-    EVT_SET(LVarA, MODEL_mone)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, -70)
+    Set(LVar8, 0)
+    Set(LVar9, COLLIDER_mone)
+    Set(LVarA, MODEL_mone)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_West) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 70)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, COLLIDER_monw)
-    EVT_SET(LVarA, MODEL_monw)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 70)
+    Set(LVar8, 0)
+    Set(LVar9, COLLIDER_monw)
+    Set(LVarA, MODEL_monw)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupGates) = {
-    EVT_IF_EQ(GF_MIM_ChoosingPath, FALSE)
-        EVT_SET(GF_MIM_ChoosingPath, TRUE)
-        EVT_SET(AB_MIM_1, 2)
-        EVT_SET(LVar1, 2)
-        EVT_SET(LVar2, -10)
-    EVT_ELSE
-        EVT_SET(GF_MIM_ChoosingPath, FALSE)
-        EVT_SET(AB_MIM_1, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 10)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_SetGateCameraZones))
-    EVT_EXEC(N(EVS_InitializeGates))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseGate_North)), TRIGGER_WALL_PRESS_A, COLLIDER_monn, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseGate_South)), TRIGGER_WALL_PRESS_A, COLLIDER_mons, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseGate_East)), TRIGGER_WALL_PRESS_A, COLLIDER_mone, 1, 0)
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseGate_West)), TRIGGER_WALL_PRESS_A, COLLIDER_monw, 1, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MIM_ChoosingPath, FALSE)
+        Set(GF_MIM_ChoosingPath, TRUE)
+        Set(AB_MIM_1, 2)
+        Set(LVar1, 2)
+        Set(LVar2, -10)
+    Else
+        Set(GF_MIM_ChoosingPath, FALSE)
+        Set(AB_MIM_1, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 10)
+    EndIf
+    ExecWait(N(EVS_SetGateCameraZones))
+    Exec(N(EVS_InitializeGates))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    BindTrigger(Ref(N(EVS_UseGate_North)), TRIGGER_WALL_PRESS_A, COLLIDER_monn, 1, 0)
+    BindTrigger(Ref(N(EVS_UseGate_South)), TRIGGER_WALL_PRESS_A, COLLIDER_mons, 1, 0)
+    BindTrigger(Ref(N(EVS_UseGate_East)), TRIGGER_WALL_PRESS_A, COLLIDER_mone, 1, 0)
+    IfGe(GB_StoryProgress, STORY_CH3_ALLOWED_INTO_FOREVER_FOREST)
+        BindTrigger(Ref(N(EVS_UseGate_West)), TRIGGER_WALL_PRESS_A, COLLIDER_monw, 1, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_EnableWestGate) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_UseGate_West)), TRIGGER_WALL_PRESS_A, COLLIDER_monw, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_UseGate_West)), TRIGGER_WALL_PRESS_A, COLLIDER_monw, 1, 0)
+    Return
+    End
 };

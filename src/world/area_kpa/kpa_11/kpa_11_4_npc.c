@@ -4,33 +4,33 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 
 EvtScript N(EVS_NpcDefeat_Koopatrol) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_KPA11_Defeated_Guard, TRUE)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA11_Item_CastleKey2)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_SET(GF_KPA11_Defeated_Guard, TRUE)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA11_Item_CastleKey2)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_KPA11_Defeated_Guard, TRUE)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA11_Item_CastleKey2)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Set(GF_KPA11_Defeated_Guard, TRUE)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(MakeItemEntity, ITEM_BOWSER_CASTLE_KEY, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA11_Item_CastleKey2)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol) = {
-    EVT_IF_EQ(GF_KPA11_Defeated_Guard, FALSE)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Koopatrol)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KPA11_Defeated_Guard, FALSE)
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Koopatrol)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Koopatrol) = {
@@ -57,8 +57,8 @@ NpcData N(NpcData_Koopatrol) = {
 };
 
 EvtScript N(EVS_NpcInit_Prisoner) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcData N(NpcData_Prisoners)[] = {

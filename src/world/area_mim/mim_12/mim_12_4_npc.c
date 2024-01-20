@@ -3,13 +3,13 @@
 #include "world/common/npc/Boo.inc.c"
 
 EvtScript N(EVS_NpcInit_GateBoo_01) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GateBoo_02) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcData N(NpcData_GateBoos)[] = {

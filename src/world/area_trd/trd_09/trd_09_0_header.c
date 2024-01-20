@@ -17,16 +17,16 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-        EVT_IF_EQ(GF_TRD09_Defeated_BillBlasters, FALSE)
-            EVT_CALL(SetMusicTrack, 0, SONG_BULLET_BILL_ASSAULT, 0, 8)
-        EVT_ELSE
-            EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
-    EVT_END_IF
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_METAL)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+        IfEq(GF_TRD09_Defeated_BillBlasters, FALSE)
+            Call(SetMusicTrack, 0, SONG_BULLET_BILL_ASSAULT, 0, 8)
+        Else
+            Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+        EndIf
+    Else
+        Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 0, 8)
+    EndIf
+    Call(UseDoorSounds, DOOR_SOUNDS_METAL)
+    Return
+    End
 };

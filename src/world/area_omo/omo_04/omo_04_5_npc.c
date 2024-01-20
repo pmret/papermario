@@ -22,71 +22,71 @@ NpcSettings N(NpcSettings_Goomba) = {
 #include "world/common/EnableCameraLeadingPlayer.inc.c"
 
 EvtScript N(EVS_NpcIdle_Goomba) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, 1050)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(DisableCameraLeadingPlayer))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
-    EVT_IF_EQ(GB_OMO_PeachChoice1, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Goomba, ANIM_Goomba_Run, ANIM_Goomba_Idle, 0, MSG_CH4_003A)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Clubba, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH4_003B)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(EnableCameraLeadingPlayer))
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, 1050)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(N(DisableCameraLeadingPlayer))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, Float(5.0), LVar0, LVar1, LVar2, 300, Float(13.0), Float(-9.5))
+    IfEq(GB_OMO_PeachChoice1, 0)
+        Call(SpeakToPlayer, NPC_Goomba, ANIM_Goomba_Run, ANIM_Goomba_Idle, 0, MSG_CH4_003A)
+    Else
+        Call(SpeakToPlayer, NPC_Clubba, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH4_003B)
+    EndIf
+    Thread
+        Call(N(EnableCameraLeadingPlayer))
+        Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    EndThread
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Goomba) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_OMO04_Item_Mushroom, TRUE)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_OMO04_Item_Mushroom, TRUE)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Goomba) = {
-    EVT_IF_EQ(GB_OMO_PeachChoice1, 0)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomba)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Goomba)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_OMO_PeachChoice1, 0)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Goomba)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Goomba)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba) = {
-    EVT_IF_EQ(GB_OMO_PeachChoice1, 1)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Goomba)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Goomba)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_OMO_PeachChoice1, 1)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Goomba)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Goomba)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kammy) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kammy)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Kammy)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kammy)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Kammy)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Goomba) = {

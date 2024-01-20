@@ -33,104 +33,104 @@ Vec3f N(KoloradoThrownPath)[] = {
 };
 
 EvtScript N(EVS_Kolorado_TrompPanic) = {
-    EVT_CALL(SetNpcPos, NPC_Kolorado, 447, 0, 39)
-    EVT_CALL(SetNpcYaw, NPC_Kolorado, 270)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Kolorado, 447, 0, 39)
+    Call(SetNpcYaw, NPC_Kolorado, 270)
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
+    Return
+    End
 };
 
 EvtScript N(EVS_Kolorado_TrompImpact) = {
-    EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
-    EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 13)
-    EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
-    EVT_CALL(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
-    EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_CALL(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(KoloradoThrownPath)), ARRAY_COUNT(N(KoloradoThrownPath)), EASING_LINEAR)
-        EVT_LABEL(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_Kolorado, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_HurtStill, ANIM_Kolorado_HurtStill, 5, MSG_CH5_00F9)
-    EVT_RETURN
-    EVT_END
+    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
+    Call(SetNpcRotationPivot, NPC_Kolorado, 13)
+    Call(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
+    Call(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, Float(3.0), Float(3.0), 0, 0)
+    Call(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
+    Thread
+        Call(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
+        Call(LoadPath, 30, Ref(N(KoloradoThrownPath)), ARRAY_COUNT(N(KoloradoThrownPath)), EASING_LINEAR)
+        Label(0)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_Kolorado, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(0)
+        EndIf
+    EndThread
+    Call(SpeakToPlayer, NPC_Kolorado, ANIM_Kolorado_HurtStill, ANIM_Kolorado_HurtStill, 5, MSG_CH5_00F9)
+    Return
+    End
 };
 
 EvtScript N(EVS_Kolorado_HurtInit) = {
-    EVT_CALL(SetNpcPos, NPC_Kolorado, 447, 0, 70)
-    EVT_CALL(SetNpcYaw, NPC_Kolorado, 270)
-    EVT_CALL(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
-    EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 13)
-    EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
-    EVT_CALL(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Kolorado, 447, 0, 70)
+    Call(SetNpcYaw, NPC_Kolorado, 270)
+    Call(SetEnemyFlagBits, NPC_Kolorado, ENEMY_FLAG_400000, 1)
+    Call(SetNpcRotationPivot, NPC_Kolorado, 13)
+    Call(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
+    Call(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, Float(3.0), Float(3.0), 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, 605)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00F7, 160, 40)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcPos, NPC_SELF, 290, 0, 30)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0 / DT))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 640, 80, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00F8)
-    EVT_SET(GB_StoryProgress, STORY_CH5_KOLORADO_AT_DEAD_END)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, 605)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_CH5_00F7, 160, 40)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcPos, NPC_SELF, 290, 0, 30)
+    Call(SetNpcSpeed, NPC_SELF, Float(5.0 / DT))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+    Call(NpcMoveTo, NPC_SELF, 640, 80, 0)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00F8)
+    Set(GB_StoryProgress, STORY_CH5_KOLORADO_AT_DEAD_END)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FC)
-        EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado1))
-        EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_HurtStill, 5, MSG_CH5_00FA)
-        EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado2))
-        EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH5_HIDDEN_PASSAGE_OPEN)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Shout, ANIM_Kolorado_Yell, 0, MSG_CH5_00FC)
+        ExecWait(N(EVS_LetterPrompt_Kolorado1))
+        ExecWait(N(EVS_LetterReward_Kolorado))
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_HurtStill, 5, MSG_CH5_00FA)
+        ExecWait(N(EVS_LetterPrompt_Kolorado2))
+        ExecWait(N(EVS_LetterReward_Kolorado))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH5_KOLORADO_AT_DEAD_END)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
-            EVT_RETURN
-        EVT_CASE_LT(STORY_CH5_HIDDEN_PASSAGE_OPEN)
-            EVT_CALL(SetNpcPos, NPC_SELF, 640, 0, 80)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
-            EVT_RETURN
-        EVT_CASE_EQ(STORY_CH5_HIDDEN_PASSAGE_OPEN)
-            EVT_CALL(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
-            EVT_EXEC(N(EVS_Kolorado_HurtInit))
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH5_KOLORADO_AT_DEAD_END)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
+            Return
+        CaseLt(STORY_CH5_HIDDEN_PASSAGE_OPEN)
+            Call(SetNpcPos, NPC_SELF, 640, 0, 80)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Yell)
+            Return
+        CaseEq(STORY_CH5_HIDDEN_PASSAGE_OPEN)
+            Call(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
+            Exec(N(EVS_Kolorado_HurtInit))
+            Return
+        CaseDefault
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Kolorado) = {

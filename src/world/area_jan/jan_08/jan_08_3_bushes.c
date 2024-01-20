@@ -11,78 +11,78 @@ EvtScript N(EVS_MoveBush_Separate) = EVT_MOVE_BUSHES(COLLIDER_o70,
     MODEL_o67, MODEL_o68, MV_Unk_00, MV_Unk_01);
 
 EvtScript N(EVS_Inspect_SeparateBushes) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o70, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_MoveBush_Separate))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_SETF(MV_Unk_01, LVar0)
-        EVT_SETF(MV_Unk_00, MV_Unk_01)
-        EVT_MULF(MV_Unk_00, -1)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o70, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_MoveBush_Separate))
+    Call(DisablePlayerInput, TRUE)
+    Call(MakeLerp, 0, 45, 30, EASING_CUBIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        SetF(MV_Unk_01, LVar0)
+        SetF(MV_Unk_00, MV_Unk_01)
+        MulF(MV_Unk_00, -1)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Inspect_FlipBush) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEARCH_BUSH, 0)
-    EVT_LOOP(3)
-        EVT_CALL(N(MoveBush_AnimateShearing), LVar1, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(MoveBush_AnimateShearing), LVar1, 0)
-        EVT_WAIT(1)
-        EVT_CALL(N(MoveBush_AnimateShearing), LVar1, -1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(TranslateModel, LVar1, 0, 0, 0)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        EVT_IF_EQ(GF_JAN08_SavedYoshi, FALSE)
-            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-            EVT_THREAD
-                EVT_CALL(DisablePartnerAI, 0)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-                EVT_CALL(NpcMoveTo, NPC_PARTNER, -315, LVar5, 20)
-                EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_YoshiKid, 0)
-                EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
-                EVT_CALL(EnablePartnerAI)
-            EVT_END_THREAD
-            EVT_CALL(PlayerMoveTo, -340, LVar5, 20)
-            EVT_CALL(PlayerFaceNpc, NPC_YoshiKid, FALSE)
-            EVT_WAIT(10)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEPARATE_BUSHES, 0)
-            EVT_SET(LVar3, 0)
-            EVT_LOOP(10)
-                EVT_ADD(LVar3, 9)
-                EVT_CALL(RotateModel, LVar1, LVar3, 0, 1, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_SET(LVar4, 270)
-            EVT_CALL(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
-            EVT_CALL(SetNpcPos, NPC_YoshiKid, -391, 0, -144)
-            EVT_CALL(SetNpcFlagBits, NPC_YoshiKid, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_LOOP(10)
-                EVT_ADD(LVar3, 9)
-                EVT_CALL(RotateModel, LVar1, LVar3, 0, 1, 0)
-                EVT_ADD(LVar4, 9)
-                EVT_CALL(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(EnableNpcShadow, NPC_YoshiKid, TRUE)
-            EVT_CALL(PlayerFaceNpc, NPC_YoshiKid, FALSE)
-            EVT_WAIT(20)
-            EVT_CALL(SetNpcVar, NPC_YoshiKid, 0, 1)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEARCH_BUSH, 0)
+    Loop(3)
+        Call(N(MoveBush_AnimateShearing), LVar1, 1)
+        Wait(1)
+        Call(N(MoveBush_AnimateShearing), LVar1, 0)
+        Wait(1)
+        Call(N(MoveBush_AnimateShearing), LVar1, -1)
+        Wait(1)
+    EndLoop
+    Call(TranslateModel, LVar1, 0, 0, 0)
+    IfEq(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
+        IfEq(GF_JAN08_SavedYoshi, FALSE)
+            Call(GetPlayerPos, LVar3, LVar4, LVar5)
+            Thread
+                Call(DisablePartnerAI, 0)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+                Call(NpcMoveTo, NPC_PARTNER, -315, LVar5, 20)
+                Call(NpcFaceNpc, NPC_PARTNER, NPC_YoshiKid, 0)
+                Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, FALSE)
+                Call(EnablePartnerAI)
+            EndThread
+            Call(PlayerMoveTo, -340, LVar5, 20)
+            Call(PlayerFaceNpc, NPC_YoshiKid, FALSE)
+            Wait(10)
+            Call(PlaySoundAtCollider, COLLIDER_o88, SOUND_SEPARATE_BUSHES, 0)
+            Set(LVar3, 0)
+            Loop(10)
+                Add(LVar3, 9)
+                Call(RotateModel, LVar1, LVar3, 0, 1, 0)
+                Wait(1)
+            EndLoop
+            Set(LVar4, 270)
+            Call(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
+            Call(SetNpcPos, NPC_YoshiKid, -391, 0, -144)
+            Call(SetNpcFlagBits, NPC_YoshiKid, NPC_FLAG_INVISIBLE | NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Loop(10)
+                Add(LVar3, 9)
+                Call(RotateModel, LVar1, LVar3, 0, 1, 0)
+                Add(LVar4, 9)
+                Call(SetNpcRotation, NPC_YoshiKid, 0, LVar4, 0)
+                Wait(1)
+            EndLoop
+            Call(EnableNpcShadow, NPC_YoshiKid, TRUE)
+            Call(PlayerFaceNpc, NPC_YoshiKid, FALSE)
+            Wait(20)
+            Call(SetNpcVar, NPC_YoshiKid, 0, 1)
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o59);;
@@ -280,33 +280,33 @@ SearchBushConfig N(SearchBush_Bush12) = {
 };
 
 EvtScript N(EVS_SetupBushes) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_SeparateBushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o70, 1, 0)
-    EVT_SET(LVar1, MODEL_o64)
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_Inspect_FlipBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o88, 0, 0, 1)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o59, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o209, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o210, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o211, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush5)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o212, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush6)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o213, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush7)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o214, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush8)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o215, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush9)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o216, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush10)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o217, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush11)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o218, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush12)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o219, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Inspect_SeparateBushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o70, 1, 0)
+    Set(LVar1, MODEL_o64)
+    BindPadlock(Ref(N(EVS_Inspect_FlipBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o88, 0, 0, 1)
+    Set(LVar0, Ref(N(SearchBush_Bush1)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o59, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush2)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o209, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush3)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o210, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush4)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o211, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush5)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o212, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush6)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o213, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush7)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o214, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush8)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o215, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush9)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o216, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush10)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o217, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush11)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o218, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush12)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o219, 1, 0)
+    Return
+    End
 };

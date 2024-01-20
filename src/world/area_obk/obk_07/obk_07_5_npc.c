@@ -7,9 +7,9 @@
 #include "../common/TrafficBoos.inc.c"
 
 EvtScript N(EVS_NpcInit_TrafficBoo1) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
+    Return
+    End
 };
 
 NpcData N(NpcData_TrafficBoo1) = {
@@ -24,9 +24,9 @@ NpcData N(NpcData_TrafficBoo1) = {
 };
 
 EvtScript N(EVS_NpcInit_TrafficBoo2) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
+    Return
+    End
 };
 
 NpcData N(NpcData_TrafficBoo2) = {
@@ -41,14 +41,14 @@ NpcData N(NpcData_TrafficBoo2) = {
 };
 
 EvtScript N(EVS_NpcInit_GuardBoo) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
-        EVT_SET(MV_GuardDeparted, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_ELSE
-        EVT_EXEC_WAIT(N(EVS_SetupGuardBoo))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_WEIGHT)
+        Set(MV_GuardDeparted, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+    Else
+        ExecWait(N(EVS_SetupGuardBoo))
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_GuardBoo) = {

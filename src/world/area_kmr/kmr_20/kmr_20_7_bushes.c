@@ -75,16 +75,16 @@ SearchBushConfig N(SearchBush_Bush5) = {
 };
 
 EvtScript N(EVS_SetupBushes) = {
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o337, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o350, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o348, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o347, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush5)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o349, 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(SearchBush_Bush1)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o337, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush2)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o350, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush3)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o348, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush4)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o347, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush5)))
+    BindTrigger(Ref(N(EVS_SearchBush_Bushes)), TRIGGER_WALL_PRESS_A, COLLIDER_o349, 1, 0)
+    Return
+    End
 };

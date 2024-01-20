@@ -31,8 +31,8 @@ enum N(ActorPartIDs) {
 #define NUM_MEMBERS (1 + PRT_MEMBER_08 - PRT_MEMBER_01)
 
 #define LOOP_MEMBERS(idx) \
-    EVT_SET(idx, PRT_MEMBER_01) \
-    EVT_LOOP(NUM_MEMBERS)
+    Set(idx, PRT_MEMBER_01) \
+    Loop(NUM_MEMBERS)
 
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
@@ -214,80 +214,80 @@ s32 N(DefaultAnims)[] = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_X, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_Z, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_X, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_Z, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_X, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_X, 50)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_Z, 10)
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_X, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_Z, -30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_X, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_Z, -30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_X, 40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_X, 50)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_Z, 10)
     LOOP_MEMBERS(LVar0)
-        EVT_CALL(SetPartPos, ACTOR_SELF, LVar0, 185, 0, 47)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 20, 0, -10)
-    EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_SET(LVar0, PRT_MEMBER_01)
-    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
-    EVT_SET(LVar4, EVT_FLOAT(4.0))
-    EVT_SET(LVar5, 5)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_THREAD
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_X, LVar2)
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_Z, LVar3)
-            EVT_SET(LVar5, 20)
-            EVT_EXEC_WAIT(N(EVS_MoveMemberToPos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+        Call(SetPartPos, ACTOR_SELF, LVar0, 185, 0, 47)
+        Add(LVar0, 1)
+    EndLoop
+    Call(ForceHomePos, ACTOR_SELF, 20, 0, -10)
+    Call(HPBarToHome, ACTOR_SELF)
+    Set(LVar0, PRT_MEMBER_01)
+    Set(LVar1, ANIM_TankGuy_Anim03)
+    Set(LVar4, Float(4.0))
+    Set(LVar5, 5)
+    Loop(NUM_MEMBERS)
+        Thread
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_X, LVar2)
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_Z, LVar3)
+            Set(LVar5, 20)
+            ExecWait(N(EVS_MoveMemberToPos))
+            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
+        EndThread
+        Add(LVar0, 1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_LABEL(0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_MoveMemberToPos) = {
-    EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar6, 0, LVar7)
-    EVT_IF_LT(LVar6, LVar2)
-        EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 180)
-    EVT_ELSE
-        EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 0)
-    EVT_END_IF
-    EVT_CALL(GetDist2D, LVar9, LVar6, LVar7, LVar2, LVar3)
-    EVT_IF_GE(LVar9, LVar4)
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-        EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVar0, LVar4)
-        EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, LVar2, 0, LVar3, LVar5)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetPartOffset, ACTOR_SELF, LVar0, LVar6, 0, LVar7)
+    IfLt(LVar6, LVar2)
+        Call(SetPartYaw, ACTOR_SELF, LVar0, 180)
+    Else
+        Call(SetPartYaw, ACTOR_SELF, LVar0, 0)
+    EndIf
+    Call(GetDist2D, LVar9, LVar6, LVar7, LVar2, LVar3)
+    IfGe(LVar9, LVar4)
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+        Call(SetPartMoveSpeed, ACTOR_SELF, LVar0, LVar4)
+        Call(RunPartTo, ACTOR_SELF, LVar0, LVar2, 0, LVar3, LVar5)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

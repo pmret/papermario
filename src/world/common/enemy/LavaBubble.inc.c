@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_LavaBubble) = {
 };
 
 EvtScript N(EVS_NpcAI_LavaBubble) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_CALL(SetSelfVar, 5, 0)
-    EVT_CALL(SetSelfVar, 6, 0)
-    EVT_CALL(SetSelfVar, 1, 150)
-    EVT_CALL(N(FlyingNoAttackAI_Main), EVT_PTR(N(AISettings_LavaBubble)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Call(SetSelfVar, 5, 0)
+    Call(SetSelfVar, 6, 0)
+    Call(SetSelfVar, 1, 150)
+    Call(N(FlyingNoAttackAI_Main), Ref(N(AISettings_LavaBubble)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_LavaBubble) = {

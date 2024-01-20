@@ -95,16 +95,16 @@ API_CALLABLE(N(UpdateTrafficBooAlpha)) {
 }
 
 EvtScript N(EVS_NpcIdle_TrafficBoo) = {
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(N(TrafficBooInit))
-    EVT_LOOP(0)
-        EVT_CALL(N(UpdateTrafficBooMotion))
-        EVT_CALL(N(UpdateTrafficBooAlpha))
-        EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_CALL(SetNpcRenderMode, NPC_SELF, RENDER_MODE_SURFACE_XLU_LAYER1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Call(N(TrafficBooInit))
+    Loop(0)
+        Call(N(UpdateTrafficBooMotion))
+        Call(N(UpdateTrafficBooAlpha))
+        Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Call(SetNpcRenderMode, NPC_SELF, RENDER_MODE_SURFACE_XLU_LAYER1)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };

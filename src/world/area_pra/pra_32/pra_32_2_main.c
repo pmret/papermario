@@ -10,127 +10,127 @@ API_CALLABLE(N(DisableFloorReflections)) {
 }
 
 EvtScript N(EVS_SpawnStarCard) = {
-    EVT_SET(LVar0, 0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 595, 185, 116)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.6))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 595, 130, 116)
+    Set(LVar0, 0)
+    IfEq(LVar0, 0)
+        Call(DisablePlayerInput, TRUE)
+        Call(UseSettingsFrom, CAM_DEFAULT, 595, 185, 116)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
+        Call(SetPanTarget, CAM_DEFAULT, 595, 130, 116)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(N(StarSpiritEffectFunc2), 6, 180, 590, 120, 116, 595, 185, 116, 130, 100)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc3))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(1)
-            EVT_CALL(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(N(StarSpiritEffectFunc1))
-            EVT_CALL(StopSound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, 595, 185, 116)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(45)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(180)
-            EVT_WAIT(115)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, 595, 185, 116)
-        EVT_END_THREAD
-        EVT_CALL(N(StarSpiritEffectFunc4), 1)
-        EVT_THREAD
-            EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_END_THREAD
-        EVT_ADD(LVar1, 100)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 595, 100, 116)
-        EVT_CALL(N(StarSpiritEffectFunc4), 2)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_ELSE
-        EVT_CALL(N(StarSpiritEffectFunc5), 6, 595, 130, 116, 100)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc6))
-        EVT_END_THREAD
-        EVT_WAIT(1)
-    EVT_END_IF
-    EVT_CALL(N(StarSpiritEffectFunc4), 3)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(N(StarSpiritEffectFunc2), 6, 180, 590, 120, 116, 595, 185, 116, 130, 100)
+        Thread
+            Call(N(StarSpiritEffectFunc3))
+        EndThread
+        Thread
+            Wait(1)
+            Call(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(N(StarSpiritEffectFunc1))
+            Call(StopSound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, 595, 185, 116)
+        EndThread
+        Thread
+            Wait(45)
+            Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+        EndThread
+        Thread
+            Wait(180)
+            Wait(115)
+            Call(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, 595, 185, 116)
+        EndThread
+        Call(N(StarSpiritEffectFunc4), 1)
+        Thread
+            Wait(80)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        EndThread
+        Add(LVar1, 100)
+        Call(SetCamDistance, CAM_DEFAULT, LVar1)
+        Call(SetPanTarget, CAM_DEFAULT, 595, 100, 116)
+        Call(N(StarSpiritEffectFunc4), 2)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+        Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+    Else
+        Call(N(StarSpiritEffectFunc5), 6, 595, 130, 116, 100)
+        Thread
+            Call(N(StarSpiritEffectFunc6))
+        EndThread
+        Wait(1)
+    EndIf
+    Call(N(StarSpiritEffectFunc4), 3)
+    Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
+    Call(DisablePlayerInput, TRUE)
+    Set(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
+    Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_RespawnStarCard) = {
-    EVT_SET(LVar0, 1)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 595, 185, 116)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.6))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 595, 130, 116)
+    Set(LVar0, 1)
+    IfEq(LVar0, 0)
+        Call(DisablePlayerInput, TRUE)
+        Call(UseSettingsFrom, CAM_DEFAULT, 595, 185, 116)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
+        Call(SetPanTarget, CAM_DEFAULT, 595, 130, 116)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(N(StarSpiritEffectFunc2), 6, 180, 590, 120, 116, 595, 185, 116, 130, 100)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc3))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(1)
-            EVT_CALL(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(N(StarSpiritEffectFunc1))
-            EVT_CALL(StopSound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, 595, 185, 116)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(45)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(180)
-            EVT_WAIT(115)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, 595, 185, 116)
-        EVT_END_THREAD
-        EVT_CALL(N(StarSpiritEffectFunc4), 1)
-        EVT_THREAD
-            EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_END_THREAD
-        EVT_ADD(LVar1, 100)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 595, 100, 116)
-        EVT_CALL(N(StarSpiritEffectFunc4), 2)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_ELSE
-        EVT_CALL(N(StarSpiritEffectFunc5), 6, 595, 130, 116, 100)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc6))
-        EVT_END_THREAD
-        EVT_WAIT(1)
-    EVT_END_IF
-    EVT_CALL(N(StarSpiritEffectFunc4), 3)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(N(StarSpiritEffectFunc2), 6, 180, 590, 120, 116, 595, 185, 116, 130, 100)
+        Thread
+            Call(N(StarSpiritEffectFunc3))
+        EndThread
+        Thread
+            Wait(1)
+            Call(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(N(StarSpiritEffectFunc1))
+            Call(StopSound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, 595, 185, 116)
+        EndThread
+        Thread
+            Wait(45)
+            Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+        EndThread
+        Thread
+            Wait(180)
+            Wait(115)
+            Call(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, 595, 185, 116)
+        EndThread
+        Call(N(StarSpiritEffectFunc4), 1)
+        Thread
+            Wait(80)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        EndThread
+        Add(LVar1, 100)
+        Call(SetCamDistance, CAM_DEFAULT, LVar1)
+        Call(SetPanTarget, CAM_DEFAULT, 595, 100, 116)
+        Call(N(StarSpiritEffectFunc4), 2)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+        Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+    Else
+        Call(N(StarSpiritEffectFunc5), 6, 595, 130, 116, 100)
+        Thread
+            Call(N(StarSpiritEffectFunc6))
+        EndThread
+        Wait(1)
+    EndIf
+    Call(N(StarSpiritEffectFunc4), 3)
+    Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
+    Call(DisablePlayerInput, TRUE)
+    Set(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
+    Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
+    Wait(100)
+    Return
+    End
 };
 
 s32 N(DoorModelsL)[] = {
@@ -142,47 +142,47 @@ s32 N(DoorModelsR)[] = {
 };
 
 EvtScript N(EVS_ExitDoors_pra_40_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, pra_32_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_deilittw)
-    EVT_SET(LVar2, EVT_PTR(N(DoorModelsL)))
-    EVT_SET(LVar3, EVT_PTR(N(DoorModelsR)))
-    EVT_EXEC(BaseExitDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("pra_40"), pra_40_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar0, pra_32_ENTRY_0)
+    Set(LVar1, COLLIDER_deilittw)
+    Set(LVar2, Ref(N(DoorModelsL)))
+    Set(LVar3, Ref(N(DoorModelsR)))
+    Exec(BaseExitDoor)
+    Wait(17)
+    Call(GotoMap, Ref("pra_40"), pra_40_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_40_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoors_pra_40_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittw, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_SET(LVar2, EVT_PTR(N(DoorModelsL)))
-    EVT_SET(LVar3, EVT_PTR(N(DoorModelsR)))
-    EVT_EXEC_WAIT(BaseEnterDoor)
-    EVT_EXEC(N(EVS_BindExitTriggers))
-    EVT_RETURN
-    EVT_END
+    Set(LVar2, Ref(N(DoorModelsL)))
+    Set(LVar3, Ref(N(DoorModelsR)))
+    ExecWait(BaseEnterDoor)
+    Exec(N(EVS_BindExitTriggers))
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_CRYSTAL_PALACE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1309, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1293, SURFACE_TYPE_SNOW)
-    EVT_PLAY_EFFECT(EFFECT_SNOWFALL, 0, 120)
-    EVT_CALL(N(DisableFloorReflections))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_CRYSTAL_PALACE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_ALT_NO_LEAD()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1309, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1293, SURFACE_TYPE_SNOW)
+    PlayEffect(EFFECT_SNOWFALL, 0, 120)
+    Call(N(DisableFloorReflections))
+    Exec(N(EVS_SetupMusic))
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Return
+    End
 };

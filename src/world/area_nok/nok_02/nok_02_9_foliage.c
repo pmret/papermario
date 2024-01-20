@@ -37,21 +37,21 @@ SearchBushConfig N(SearchBush_Bush3) = {
 FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o446, MODEL_o454, MODEL_o455, MODEL_o456);
 
 EvtScript N(EVS_Bush4_HideFlowers) = {
-    EVT_CALL(EnableModel, MODEL_o454, FALSE)
-    EVT_CALL(EnableModel, MODEL_o455, FALSE)
-    EVT_CALL(EnableModel, MODEL_o456, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o454, FALSE)
+    Call(EnableModel, MODEL_o455, FALSE)
+    Call(EnableModel, MODEL_o456, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearchBush4) = {
-    EVT_CALL(EnableModel, MODEL_o454, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o456, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o455, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o454, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o456, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o455, TRUE)
+    Return
+    End
 };
 
 SearchBushConfig N(SearchBush_Bush4) = {
@@ -62,21 +62,21 @@ SearchBushConfig N(SearchBush_Bush4) = {
 FoliageModelList N(Bush5_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o447, MODEL_o457, MODEL_o458, MODEL_o459);
 
 EvtScript N(EVS_Bush5_HideFlowers) = {
-    EVT_CALL(EnableModel, MODEL_o457, FALSE)
-    EVT_CALL(EnableModel, MODEL_o458, FALSE)
-    EVT_CALL(EnableModel, MODEL_o459, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o457, FALSE)
+    Call(EnableModel, MODEL_o458, FALSE)
+    Call(EnableModel, MODEL_o459, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearchBush5) = {
-    EVT_CALL(EnableModel, MODEL_o457, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o459, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o458, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o457, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o459, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o458, TRUE)
+    Return
+    End
 };
 
 SearchBushConfig N(SearchBush_Bush5) = {
@@ -107,10 +107,10 @@ FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o284);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o283);
 
 EvtScript N(EVS_OnShakeTree1) = {
-    EVT_WAIT(15)
-    EVT_SET(AF_NOK_13, TRUE)
-    EVT_RETURN
-    EVT_END
+    Wait(15)
+    Set(AF_NOK_13, TRUE)
+    Return
+    End
 };
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
@@ -125,23 +125,23 @@ BombTrigger N(BombPos_Tree1) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o332, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o427, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o458, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o459, 1, 0)
-    EVT_EXEC(N(EVS_Bush4_HideFlowers))
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush5)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o460, 1, 0)
-    EVT_EXEC(N(EVS_Bush5_HideFlowers))
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush6)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o461, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o346, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(SearchBush_Bush1)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o332, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush2)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o427, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush3)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o458, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush4)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o459, 1, 0)
+    Exec(N(EVS_Bush4_HideFlowers))
+    Set(LVar0, Ref(N(SearchBush_Bush5)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o460, 1, 0)
+    Exec(N(EVS_Bush5_HideFlowers))
+    Set(LVar0, Ref(N(SearchBush_Bush6)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o461, 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o346, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Return
+    End
 };

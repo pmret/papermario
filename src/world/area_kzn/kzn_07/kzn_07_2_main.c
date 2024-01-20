@@ -13,35 +13,35 @@ ModelIDList N(LavaModelIDs) = {
 EvtScript N(EVS_ExitWalk_kzn_06) = EVT_EXIT_WALK(60, kzn_07_ENTRY_0, "kzn_06", kzn_06_ENTRY_1);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kzn_06), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(N(EVS_ExitWalk_kzn_06), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupTexPanners) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTexPanner, MODEL_yougan,  TEX_PANNER_0)
-    EVT_CALL(SetTexPanner, MODEL_yougan1, TEX_PANNER_1)
-    EVT_CALL(SetTexPanner, MODEL_spot,    TEX_PANNER_1)
-    EVT_CALL(SetTexPanner, MODEL_yougan2, TEX_PANNER_1)
-    EVT_CALL(SetTexPanner, MODEL_sara,    TEX_PANNER_1)
-    EVT_CALL(SetTexPanner, MODEL_chioro,  TEX_PANNER_1)
-    EVT_THREAD
+    SetGroup(EVT_GROUP_00)
+    Call(SetTexPanner, MODEL_yougan,  TEX_PANNER_0)
+    Call(SetTexPanner, MODEL_yougan1, TEX_PANNER_1)
+    Call(SetTexPanner, MODEL_spot,    TEX_PANNER_1)
+    Call(SetTexPanner, MODEL_yougan2, TEX_PANNER_1)
+    Call(SetTexPanner, MODEL_sara,    TEX_PANNER_1)
+    Call(SetTexPanner, MODEL_chioro,  TEX_PANNER_1)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP( -400,    0, -800,    0)
         TEX_PAN_PARAMS_FREQ(    1,    0,    1,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(    0, -400,    0, -800)
         TEX_PAN_PARAMS_FREQ(    0,    1,    0,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Return
+    End
 };
 
 LavaReset N(SafeFloorColliders)[] = {
@@ -51,27 +51,27 @@ LavaReset N(SafeFloorColliders)[] = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_MT_LAVALAVA)
-    EVT_CALL(SetSpriteShading, SHADING_KZN_07)
-    EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_doro, SURFACE_TYPE_LAVA)
-    EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_SetupTexPanners))
-    EVT_SET(LVar0, N(EVS_BindExitTriggers))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT(1)
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_0, NULL)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(N(LavaModelIDs)))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_MT_LAVALAVA)
+    Call(SetSpriteShading, SHADING_KZN_07)
+    SetUP_CAMERA_ALT_NO_LEAD()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupMusic))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_doro, SURFACE_TYPE_LAVA)
+    Thread
+        Call(ResetFromLava, Ref(N(SafeFloorColliders)))
+    EndThread
+    Exec(N(EVS_SetupTexPanners))
+    Set(LVar0, N(EVS_BindExitTriggers))
+    Exec(EnterWalk)
+    Wait(1)
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_0, NULL)
+    EndThread
+    Thread
+        Call(N(ClearLavaGlowLighting), Ref(N(LavaModelIDs)))
+    EndThread
+    Return
+    End
 };

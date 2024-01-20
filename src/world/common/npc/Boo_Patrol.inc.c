@@ -110,9 +110,9 @@ MobileAISettings N(AISettings_Boo_Patrol) = {
 };
 
 EvtScript N(EVS_NpcAI_Boo_Patrol) = {
-    EVT_CALL(N(BooPatrolAI_Main), EVT_PTR(N(AISettings_Boo_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(N(BooPatrolAI_Main), Ref(N(AISettings_Boo_Patrol)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Boo_Patrol) = {

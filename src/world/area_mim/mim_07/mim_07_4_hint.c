@@ -69,53 +69,53 @@ API_CALLABLE(N(TryEvilRockLaugh)) {
 }
 
 EvtScript N(EVS_ManageEvilRock) = {
-    EVT_LABEL(0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
-        EVT_WAIT(3)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
-        EVT_WAIT(3)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, -0x8000)
+        Wait(3)
+        Call(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, 0, 0)
+        Wait(3)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnInspectEvilRock) = {
-    EVT_SET(LVar0, 0)
-    EVT_CALL(N(TryEvilRockLaugh))
-    EVT_IF_EQ(LVar0, 1)
-        EVT_WAIT(10)
-        EVT_EXEC_GET_TID(N(EVS_ManageEvilRock), LVar9)
-        EVT_CALL(PlaySoundAt, SOUND_ROCK_LAUGHTER, SOUND_SPACE_DEFAULT, -34, 0, -300)
-        EVT_LOOP(18)
-            EVT_CALL(TranslateModel, MODEL_o289, EVT_FLOAT(1.0), 0, EVT_FLOAT(1.0))
-            EVT_CALL(TranslateModel, MODEL_o440, EVT_FLOAT(1.0), 0, EVT_FLOAT(1.0))
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_o289, EVT_FLOAT(-1.0), 0, EVT_FLOAT(-1.0))
-            EVT_CALL(TranslateModel, MODEL_o440, EVT_FLOAT(-1.0), 0, EVT_FLOAT(-1.0))
-            EVT_WAIT(2)
-        EVT_END_LOOP
-        EVT_LOOP(10)
-            EVT_CALL(TranslateModel, MODEL_o289, EVT_FLOAT(0.5), 0, EVT_FLOAT(0.5))
-            EVT_CALL(TranslateModel, MODEL_o440, EVT_FLOAT(0.5), 0, EVT_FLOAT(0.5))
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_o289, EVT_FLOAT(-0.5), 0, EVT_FLOAT(-0.5))
-            EVT_CALL(TranslateModel, MODEL_o440, EVT_FLOAT(-0.5), 0, EVT_FLOAT(-0.5))
-            EVT_WAIT(2)
-        EVT_END_LOOP
-        EVT_KILL_THREAD(LVar9)
-        EVT_CALL(TranslateModel, MODEL_o289, 0, 0, 0)
-        EVT_CALL(TranslateModel, MODEL_o440, 0, 0, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Call(N(TryEvilRockLaugh))
+    IfEq(LVar0, 1)
+        Wait(10)
+        ExecGetTID(N(EVS_ManageEvilRock), LVar9)
+        Call(PlaySoundAt, SOUND_ROCK_LAUGHTER, SOUND_SPACE_DEFAULT, -34, 0, -300)
+        Loop(18)
+            Call(TranslateModel, MODEL_o289, Float(1.0), 0, Float(1.0))
+            Call(TranslateModel, MODEL_o440, Float(1.0), 0, Float(1.0))
+            Wait(2)
+            Call(TranslateModel, MODEL_o289, Float(-1.0), 0, Float(-1.0))
+            Call(TranslateModel, MODEL_o440, Float(-1.0), 0, Float(-1.0))
+            Wait(2)
+        EndLoop
+        Loop(10)
+            Call(TranslateModel, MODEL_o289, Float(0.5), 0, Float(0.5))
+            Call(TranslateModel, MODEL_o440, Float(0.5), 0, Float(0.5))
+            Wait(2)
+            Call(TranslateModel, MODEL_o289, Float(-0.5), 0, Float(-0.5))
+            Call(TranslateModel, MODEL_o440, Float(-0.5), 0, Float(-0.5))
+            Wait(2)
+        EndLoop
+        KillThread(LVar9)
+        Call(TranslateModel, MODEL_o289, 0, 0, 0)
+        Call(TranslateModel, MODEL_o440, 0, 0, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupExitHint) = {
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_evil_rock_face)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o440, CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelFlags, MODEL_o440, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInspectEvilRock)), TRIGGER_WALL_PRESS_A, COLLIDER_o491, 1, 0)
-    EVT_CALL(SetTexPanner, MODEL_o440, TEX_PANNER_0)
-    EVT_RETURN
-    EVT_END
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_evil_rock_face)), NULL)
+    Call(SetModelCustomGfx, MODEL_o440, CUSTOM_GFX_1, -1)
+    Call(SetModelFlags, MODEL_o440, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
+    BindTrigger(Ref(N(EVS_OnInspectEvilRock)), TRIGGER_WALL_PRESS_A, COLLIDER_o491, 1, 0)
+    Call(SetTexPanner, MODEL_o440, TEX_PANNER_0)
+    Return
+    End
 };

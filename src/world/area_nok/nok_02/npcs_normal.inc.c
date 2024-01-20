@@ -31,302 +31,302 @@ API_CALLABLE(N(DoCircleSprint)) {
 }
 
 EvtScript N(EVS_NpcInteract_Koopa_01_Normal) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0057)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0058)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0059)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005A)
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005B)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_KOOPER_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0057)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0058)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0059)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005A)
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005B)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopa_01_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_01_Normal)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopa_01_Normal)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Koopa_02_Normal) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005F)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0060)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0061)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0062)
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0063)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_KOOPER_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_005F)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0060)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0061)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0062)
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0063)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopa_02_Normal) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_02_Normal)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopa_02_Normal)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Koopa_03_CircleSprint) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Run)
-    EVT_CALL(EnableNpcBlur, NPC_Koopa_03, TRUE)
-    EVT_CALL(GetNpcPointer, NPC_Koopa_03, LVarF)
-    EVT_CALL(N(DoCircleSprint), LVarF, -150, 15)
-    EVT_CALL(EnableNpcBlur, NPC_Koopa_03, FALSE)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Idle)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Run)
+    Call(EnableNpcBlur, NPC_Koopa_03, TRUE)
+    Call(GetNpcPointer, NPC_Koopa_03, LVarF)
+    Call(N(DoCircleSprint), LVarF, -150, 15)
+    Call(EnableNpcBlur, NPC_Koopa_03, FALSE)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Koopa_Idle)
+    Wait(5)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Koopa_03_Normal) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0064)
-            EVT_EXEC_WAIT(N(EVS_Koopa_03_CircleSprint))
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0065)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0066)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0067)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0068)
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0069)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_KOOPER_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0064)
+            ExecWait(N(EVS_Koopa_03_CircleSprint))
+            Call(ContinueSpeech, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0065)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0066)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0067)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0068)
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_0069)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopa_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_03_Normal)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopa_03_Normal)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Koopa_04_Normal) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006A)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006B)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006C)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006D)
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006E)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_KOOPER_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006A)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006B)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006C)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006D)
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_CH1_006E)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopa_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_04_Normal)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopa_04_Normal)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Dueling_Bobombs) = {
-    EVT_LABEL(10)
-        EVT_IF_EQ(AF_NOK_10, FALSE)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_EQ(AF_NOK_11, TRUE)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Run)
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Idle)
-        EVT_WAIT(3)
-        EVT_CALL(GetNpcPos, NPC_Bobomb_02, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_02, SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_DEFAULT)
-        EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_LABEL(20)
-            EVT_IF_EQ(AF_NOK_10, FALSE)
-                EVT_WAIT(1)
-                EVT_GOTO(20)
-            EVT_END_IF
-            EVT_IF_EQ(AF_NOK_11, TRUE)
-                EVT_WAIT(1)
-                EVT_GOTO(20)
-            EVT_END_IF
-        EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Run)
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Idle)
-        EVT_WAIT(3)
-        EVT_CALL(GetNpcPos, NPC_Bobomb_01, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_Bobomb_01, SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_DEFAULT)
-        EVT_CALL(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Label(10)
+        IfEq(AF_NOK_10, FALSE)
+            Wait(1)
+            Goto(10)
+        EndIf
+        IfEq(AF_NOK_11, TRUE)
+            Wait(1)
+            Goto(10)
+        EndIf
+        Call(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Run)
+        Wait(10)
+        Call(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Idle)
+        Wait(3)
+        Call(GetNpcPos, NPC_Bobomb_02, LVar0, LVar1, LVar2)
+        Call(PlaySoundAtNpc, NPC_Bobomb_02, SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_DEFAULT)
+        Call(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
+        Wait(30)
+        Label(20)
+            IfEq(AF_NOK_10, FALSE)
+                Wait(1)
+                Goto(20)
+            EndIf
+            IfEq(AF_NOK_11, TRUE)
+                Wait(1)
+                Goto(20)
+            EndIf
+        Call(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Run)
+        Wait(10)
+        Call(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Idle)
+        Wait(3)
+        Call(GetNpcPos, NPC_Bobomb_01, LVar0, LVar1, LVar2)
+        Call(PlaySoundAtNpc, NPC_Bobomb_01, SOUND_BOMBETTE_BLAST_LV1, SOUND_SPACE_DEFAULT)
+        Call(N(SpawnExplosionEffect), LVar0, LVar1, LVar2)
+        Wait(30)
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_ConfrontBobombs) = {
-    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH5_2)
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
-            EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_007C)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007D)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bobomb_01, MSG_CH1_007E)
-            EVT_CALL(EnablePartnerAI)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007F)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0080)
-            EVT_CALL(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Idle)
-            EVT_CALL(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Idle)
-            EVT_SET(GF_NOK02_ConfrontedBobombs, TRUE)
-            EVT_SET(GF_MAC02_KootFavor_CurrentComplete, TRUE)
-        EVT_ELSE
-            EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_007C)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_0081)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0082)
-            EVT_SET(AF_NOK_11, FALSE)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
-            EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_PARTNER, MSG_CH1_0077)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_PARTNER, MSG_CH1_0078)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bobomb_01, MSG_CH1_0079)
-            EVT_CALL(EnablePartnerAI)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007A)
-            EVT_SET(AF_NOK_11, FALSE)
-        EVT_ELSE
-            EVT_SET(AF_NOK_11, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0073)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bobomb_02, MSG_CH1_0074)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0075)
-            EVT_CALL(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bobomb_02, MSG_CH1_0076)
-            EVT_SET(AF_NOK_11, FALSE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH5_2)
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_BOMBETTE)
+            Set(AF_NOK_11, TRUE)
+            Call(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
+            Call(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_007C)
+            Call(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007D)
+            Call(DisablePartnerAI, 0)
+            Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bobomb_01, MSG_CH1_007E)
+            Call(EnablePartnerAI)
+            Call(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007F)
+            Call(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0080)
+            Call(SetNpcAnimation, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Idle)
+            Call(SetNpcAnimation, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Idle)
+            Set(GF_NOK02_ConfrontedBobombs, TRUE)
+            Set(GF_MAC02_KootFavor_CurrentComplete, TRUE)
+        Else
+            Set(AF_NOK_11, TRUE)
+            Call(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007B)
+            Call(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_007C)
+            Call(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_0081)
+            Call(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0082)
+            Set(AF_NOK_11, FALSE)
+        EndIf
+    Else
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_BOMBETTE)
+            Set(AF_NOK_11, TRUE)
+            Call(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_PARTNER, MSG_CH1_0077)
+            Call(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_PARTNER, MSG_CH1_0078)
+            Call(DisablePartnerAI, 0)
+            Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, NPC_Bobomb_01, MSG_CH1_0079)
+            Call(EnablePartnerAI)
+            Call(SpeakToPlayer, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 5, MSG_CH1_007A)
+            Set(AF_NOK_11, FALSE)
+        Else
+            Set(AF_NOK_11, TRUE)
+            Call(SpeakToPlayer, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0073)
+            Call(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bobomb_02, MSG_CH1_0074)
+            Call(SpeakToNpc, NPC_Bobomb_02, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0075)
+            Call(SpeakToNpc, NPC_Bobomb_01, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, NPC_Bobomb_02, MSG_CH1_0076)
+            Set(AF_NOK_11, FALSE)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_NOK_0F, FALSE)
-                EVT_CALL(GetCurrentPartnerID, LVar0)
-                EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
-                    EVT_SET(AF_NOK_0F, TRUE)
-                    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-                    EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_006F)
-                    EVT_CALL(DisablePartnerAI, 0)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_0070)
-                    EVT_CALL(EnablePartnerAI)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_0071)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_0072)
-                EVT_END_IF
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_0072)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_NOK02_ConfrontedBobombs, FALSE)
-                EVT_EXEC_WAIT(N(EVS_Scene_ConfrontBobombs))
-            EVT_ELSE
-                EVT_SET(AF_NOK_11, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007F)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(AF_NOK_0F, FALSE)
+                Call(GetCurrentPartnerID, LVar0)
+                IfEq(LVar0, PARTNER_BOMBETTE)
+                    Set(AF_NOK_0F, TRUE)
+                    Call(NpcFacePlayer, NPC_SELF, 0)
+                    Call(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_006F)
+                    Call(DisablePartnerAI, 0)
+                    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_0070)
+                    Call(EnablePartnerAI)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_0071)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_0072)
+                EndIf
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_0072)
+            EndIf
+        CaseGe(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_NOK02_ConfrontedBobombs, FALSE)
+                ExecWait(N(EVS_Scene_ConfrontBobombs))
+            Else
+                Set(AF_NOK_11, TRUE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_CH1_007F)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0083)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_NOK02_ConfrontedBobombs, FALSE)
-                EVT_EXEC_WAIT(N(EVS_Scene_ConfrontBobombs))
-            EVT_ELSE
-                EVT_SET(AF_NOK_11, TRUE)
-                EVT_CALL(SpeakToNpc, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0080)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0084)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0083)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            IfEq(GF_NOK02_ConfrontedBobombs, FALSE)
+                ExecWait(N(EVS_Scene_ConfrontBobombs))
+            Else
+                Set(AF_NOK_11, TRUE)
+                Call(SpeakToNpc, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, NPC_Bobomb_01, MSG_CH1_0080)
+            EndIf
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0084)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0085)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_NOK02_ConfrontedBobombs, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0086)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0087)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0087)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0085)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            IfEq(GF_NOK02_ConfrontedBobombs, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0086)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0087)
+            EndIf
+        CaseGe(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Green_Talk, ANIM_WorldBobomb_Green_Idle, 0, MSG_CH1_0087)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bobomb_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_01)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bobomb_01)))
+    IfLt(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bobomb_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_02)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_GE(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_NOK02_ConfrontedBobombs, TRUE)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_EXEC(N(EVS_Dueling_Bobombs))
-            EVT_SET(AF_NOK_11, FALSE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bobomb_02)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseGe(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_NOK02_ConfrontedBobombs, TRUE)
+                Return
+            EndIf
+            Exec(N(EVS_Dueling_Bobombs))
+            Set(AF_NOK_11, FALSE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bobomb_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb_03)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bobomb_03)))
+    IfLt(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 s32 N(ItemList_Artifact)[] = {
@@ -335,86 +335,86 @@ s32 N(ItemList_Artifact)[] = {
 };
 
 EvtScript N(EVS_ArtifactReward_Kolorado) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_009F)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_009F)
     EVT_GIVE_STAR_PIECE()
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_00A0)
-    EVT_SET(GF_SBK_GaveArtifactToKolorado, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_00A0)
+    Set(GF_SBK_GaveArtifactToKolorado, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
-    EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(FindKeyItem, ITEM_ARTIFACT, LVar0)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(AF_NOK_15, FALSE)
-        EVT_SET(AF_NOK_15, TRUE)
-        EVT_IF_EQ(GF_SBK_KeptArtifactFromKolorado, FALSE)
-            EVT_SET(GF_SBK_KeptArtifactFromKolorado, FALSE)
-            EVT_SET(LVar0, MSG_CH1_009B)
-        EVT_ELSE
-            EVT_SET(LVar0, MSG_CH1_009C)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_SET(LVar0, MSG_CH1_009C)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, LVar0)
-    EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
-    EVT_SET(LVar1, 7)
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GE(1)
-            EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
-            EVT_BREAK_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_009D)
-            EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
-            EVT_SET(LVar1, 7)
-            EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-            EVT_SWITCH(LVar0)
-                EVT_CASE_GE(1)
-                    EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
-                EVT_CASE_DEFAULT
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_009E)
-            EVT_END_SWITCH
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_SBK_GaveArtifactToKolorado, TRUE)
+        Return
+    EndIf
+    Call(FindKeyItem, ITEM_ARTIFACT, LVar0)
+    IfEq(LVar0, -1)
+        Return
+    EndIf
+    IfEq(AF_NOK_15, FALSE)
+        Set(AF_NOK_15, TRUE)
+        IfEq(GF_SBK_KeptArtifactFromKolorado, FALSE)
+            Set(GF_SBK_KeptArtifactFromKolorado, FALSE)
+            Set(LVar0, MSG_CH1_009B)
+        Else
+            Set(LVar0, MSG_CH1_009C)
+        EndIf
+    Else
+        Set(LVar0, MSG_CH1_009C)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, LVar0)
+    Set(LVar0, Ref(N(ItemList_Artifact)))
+    Set(LVar1, 7)
+    ExecWait(N(EVS_ChooseKeyItem))
+    Switch(LVar0)
+        CaseGe(1)
+            ExecWait(N(EVS_ArtifactReward_Kolorado))
+            BreakSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_009D)
+            Set(LVar0, Ref(N(ItemList_Artifact)))
+            Set(LVar1, 7)
+            ExecWait(N(EVS_ChooseKeyItem))
+            Switch(LVar0)
+                CaseGe(1)
+                    ExecWait(N(EVS_ArtifactReward_Kolorado))
+                CaseDefault
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_009E)
+            EndSwitch
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_0093)
-    EVT_CALL(NpcFaceNpc, NPC_KoloradoWife, NPC_SELF, 0)
-    EVT_CALL(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 5, MSG_CH1_0094)
-    EVT_CALL(NpcFaceNpc, NPC_SELF, NPC_KoloradoWife, 0)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH1_0095)
-    EVT_WAIT(15)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_WAIT(15)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_0096)
-    EVT_EXEC_WAIT(N(EVS_ArtifactPrompt_Kolorado))
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_0093)
+    Call(NpcFaceNpc, NPC_KoloradoWife, NPC_SELF, 0)
+    Call(SpeakToPlayer, NPC_KoloradoWife, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 5, MSG_CH1_0094)
+    Call(NpcFaceNpc, NPC_SELF, NPC_KoloradoWife, 0)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 5, MSG_CH1_0095)
+    Wait(15)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Wait(15)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH1_0096)
+    ExecWait(N(EVS_ArtifactPrompt_Kolorado))
+    ExecWait(N(EVS_LetterPrompt_Kolorado))
+    ExecWait(N(EVS_LetterReward_Kolorado))
+    IfNe(LVarC, DELIVERY_NOT_POSSIBLE)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GF_NOK11_Defeated_KentC, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
+    IfGe(GB_StoryProgress, STORY_CH7_STAR_SPRIT_DEPARTED)
+        Return
+    EndIf
+    IfEq(GF_NOK11_Defeated_KentC, TRUE)
+        Return
+    EndIf
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };

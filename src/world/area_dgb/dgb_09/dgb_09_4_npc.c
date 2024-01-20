@@ -36,13 +36,13 @@ NpcData N(NpcData_Clubba_Wander)[] = {
 };
 
 EvtScript N(EVS_NpcInit_Clubba_Napping) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, dgb_09_ENTRY_3)
-        EVT_CALL(SetNpcPos, NPC_SELF, 240, 0, 88)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, dgb_09_ENTRY_3)
+        Call(SetNpcPos, NPC_SELF, 240, 0, 88)
+        Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Clubba_Napping)[] = {

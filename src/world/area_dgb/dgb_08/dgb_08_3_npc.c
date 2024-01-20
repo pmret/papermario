@@ -25,48 +25,48 @@ NpcSettings N(NpcSettings_LastClubba) = {
 extern EvtScript N(EVS_NpcAI_Tubba);
 
 EvtScript N(EVS_NpcIdle_Tubba) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GE(LVar0, -350)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(GB_ARN_Tubba_MapID, 8)
-    EVT_SET(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_o140, LVar0, 0, -1, 0)
-        EVT_CALL(RotateModel, MODEL_o141, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0A)
-    EVT_CALL(SetNpcPos, NPC_SELF, -665, 210, 180)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -530, 180, 30)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(MakeLerp, 80, 0, 10, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_o140, LVar0, 0, -1, 0)
-            EVT_CALL(RotateModel, MODEL_o141, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_SELF, -500, 80, 10)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Tubba)))
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGe(LVar0, -350)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Set(GB_ARN_Tubba_MapID, 8)
+    Set(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL)
+    Call(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 80, 10, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_o140, LVar0, 0, -1, 0)
+        Call(RotateModel, MODEL_o141, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim0A)
+    Call(SetNpcPos, NPC_SELF, -665, 210, 180)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Call(NpcMoveTo, NPC_SELF, -530, 180, 30)
+    Thread
+        Wait(20)
+        Call(MakeLerp, 80, 0, 10, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_o140, LVar0, 0, -1, 0)
+            Call(RotateModel, MODEL_o141, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAtCollider, COLLIDER_deilittne, SOUND_CREAKY_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    EndThread
+    Call(NpcMoveTo, NPC_SELF, -500, 80, 10)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Tubba)))
+    Return
+    End
 };
 
 #include "world/common/todo/UnkFunc1.inc.c"
@@ -98,76 +98,76 @@ API_CALLABLE(N(SetTubbaPatrolMode)) {
 }
 
 EvtScript N(EVS_SetPatrolAfterWaiting) = {
-    EVT_LABEL(10)
-    EVT_CALL(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
-    EVT_IF_GT(LVar1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(N(SetTubbaPatrolTerritory))
-    EVT_RETURN
-    EVT_END
+    Label(10)
+    Call(GetNpcPos, NPC_Tubba, LVar0, LVar1, LVar2)
+    IfGt(LVar1, 0)
+        Wait(1)
+        Goto(10)
+    EndIf
+    Call(N(SetTubbaPatrolTerritory))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_Tubba) = {
-    EVT_CALL(N(SetTubbaPatrolMode))
-    EVT_EXEC(N(EVS_SetPatrolAfterWaiting))
-    EVT_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_QUIET)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
-            EVT_WAIT(5)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_QUIET)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 2, EVT_FLOAT(1.0))
-            EVT_WAIT(8)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Tubba_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetTubbaPatrolMode))
+    Exec(N(EVS_SetPatrolAfterWaiting))
+    Thread
+        Loop(0)
+            Call(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_QUIET)
+            Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(2.0))
+            Wait(5)
+            Call(PlaySoundAtNpc, NPC_SELF, SOUND_HEAVY_NPC_STEP_C, SOUND_PARAM_QUIET)
+            Call(ShakeCam, CAM_DEFAULT, 0, 2, Float(1.0))
+            Wait(8)
+        EndLoop
+    EndThread
+    Call(N(PatrolNoAttackAI_Main), Ref(N(AISettings_Tubba_Patrol)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Tubba) = {
-    EVT_CALL(N(UnkFunc1))
-    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), dgb_01_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(N(UnkFunc1))
+    Call(GotoMap, Ref("dgb_01"), dgb_01_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Tubba) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.25))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tubba)))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(dgb_08_ENTRY_0)
-            EVT_IF_NE(GB_ARN_Tubba_MapID, 8)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, -130, 0, 200)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Tubba)))
-            EVT_END_IF
-        EVT_CASE_EQ(dgb_08_ENTRY_1)
-            EVT_IF_NE(GB_ARN_Tubba_MapID, 8)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tubba)))
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, -130, 210, 80)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Tubba)))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH3_TUBBA_SMASHED_THE_BRIDGES)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+        Return
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+        Return
+    EndIf
+    Call(SetNpcScale, NPC_SELF, Float(1.25), Float(1.25), Float(1.25))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Tubba)))
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(dgb_08_ENTRY_0)
+            IfNe(GB_ARN_Tubba_MapID, 8)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Else
+                Call(SetNpcPos, NPC_SELF, -130, 0, 200)
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Tubba)))
+            EndIf
+        CaseEq(dgb_08_ENTRY_1)
+            IfNe(GB_ARN_Tubba_MapID, 8)
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Tubba)))
+            Else
+                Call(SetNpcPos, NPC_SELF, -130, 210, 80)
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Tubba)))
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Tubba) = {
@@ -335,63 +335,63 @@ API_CALLABLE(N(PlayAlertSound)) {
 }
 
 EvtScript N(EVS_NpcIdle_LastClubba) = {
-    EVT_LABEL(0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
-        EVT_WAIT(30)
-        EVT_LOOP(15)
-            EVT_CALL(N(PlayAlertSound))
-            EVT_WAIT(60)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
-        EVT_WAIT(20)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
-        EVT_WAIT(30)
-        EVT_LOOP(5)
-            EVT_CALL(N(PlayAlertSound))
-            EVT_WAIT(60)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
-        EVT_WAIT(15)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+        Wait(30)
+        Loop(15)
+            Call(N(PlayAlertSound))
+            Wait(60)
+        EndLoop
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
+        Wait(20)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+        Wait(30)
+        Loop(5)
+            Call(N(PlayAlertSound))
+            Wait(60)
+        EndLoop
+        Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim0C)
+        Wait(15)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_LastClubba) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SNAP_AWAKE_A, SOUND_SPACE_DEFAULT)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
-    EVT_WAIT(20)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-    EVT_ADD(LVar0, 180)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
-    EVT_WAIT(10)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-    EVT_ADD(LVar0, 180)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
-    EVT_WAIT(25)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-    EVT_ADD(LVar0, 180)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
-    EVT_WAIT(15)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH3_00F2)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim06)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim08)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SNAP_AWAKE_A, SOUND_SPACE_DEFAULT)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim02)
+    Wait(20)
+    Call(GetNpcYaw, NPC_SELF, LVar0)
+    Add(LVar0, 180)
+    Call(InterpNpcYaw, NPC_SELF, LVar0, 0)
+    Wait(10)
+    Call(GetNpcYaw, NPC_SELF, LVar0)
+    Add(LVar0, 180)
+    Call(InterpNpcYaw, NPC_SELF, LVar0, 0)
+    Wait(25)
+    Call(GetNpcYaw, NPC_SELF, LVar0)
+    Add(LVar0, 180)
+    Call(InterpNpcYaw, NPC_SELF, LVar0, 0)
+    Wait(15)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Anim05, ANIM_WorldClubba_Anim02, 0, MSG_CH3_00F2)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim06)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_LastClubba) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 36, 30)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_LastClubba)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_LastClubba)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_SELF, 36, 30)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldClubba_Anim07)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_LastClubba)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_LastClubba)))
+    Return
+    End
 };
 
 NpcData N(NpcData_LastClubba) = {
@@ -420,15 +420,15 @@ NpcData N(NpcData_LastClubba) = {
 };
 
 EvtScript N(EVS_NpcIdle_Clubba_Unused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_Unused) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Clubba_Unused)))
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_Unused)))
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 NpcData N(NpcData_Clubba_Unused) = {

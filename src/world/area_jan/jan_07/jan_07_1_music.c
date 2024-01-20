@@ -1,8 +1,8 @@
 #include "jan_07.h"
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, 8)
-    EVT_CALL(ClearAmbientSounds, 250)
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_JADE_JUNGLE, 0, 8)
+    Call(ClearAmbientSounds, 250)
+    Return
+    End
 };

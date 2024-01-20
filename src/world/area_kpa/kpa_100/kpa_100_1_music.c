@@ -1,12 +1,12 @@
 #include "kpa_100.h"
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_BOWSERS_CASTLE, 0, 8)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_METAL)
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_CALL(SetMusicTrackVolumes, TRACK_VOLS_KPA_3)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_BOWSERS_CASTLE, 0, 8)
+    Call(UseDoorSounds, DOOR_SOUNDS_METAL)
+    Thread
+        Wait(30)
+        Call(SetMusicTrackVolumes, TRACK_VOLS_KPA_3)
+    EndThread
+    Return
+    End
 };

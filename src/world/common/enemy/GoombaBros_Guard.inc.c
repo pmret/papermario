@@ -13,9 +13,9 @@ GuardAISettings N(AISettings_GoombaBros_Guard) = {
 };
 
 EvtScript N(EVS_NpcAI_GoombaBros_Guard) = {
-    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_GoombaBros_Guard)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GuardAI_Main), Ref(N(AISettings_GoombaBros_Guard)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_GoombaBros_Guard) = {

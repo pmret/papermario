@@ -8,37 +8,37 @@
 s32 N(BlowingBubbles) = FALSE;
 
 EvtScript N(EVS_BubbleUpdateCamera) = {
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(MakeLerp, LVar1, 48, 15, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar2, LVar0, LVar4)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, 48, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(MakeLerp, LVar1, 48, 15, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Call(SetCamTarget, CAM_DEFAULT, LVar2, LVar0, LVar4)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, 48, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_TetherParterToPlayer) = {
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 20)
-        EVT_ADD(LVar2, -5)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 20)
+        Add(LVar2, -5)
+        Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 API_CALLABLE(N(SavePartnerFlags)) {
@@ -84,121 +84,121 @@ Vec3f N(BubbleFlightPath)[] = {
 };
 
 EvtScript N(EVS_BubbleFollowPath) = {
-    EVT_WAIT(20)
-    EVT_CALL(PlaySound, SOUND_LOOP_BUBBLE_DRIFT)
-    EVT_CALL(LoadPath, 165, EVT_PTR(N(BubbleFlightPath)), ARRAY_COUNT(N(BubbleFlightPath)), EASING_COS_IN_OUT)
-    EVT_LABEL(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(TranslateModel, MODEL_o167, LVar1, LVar2, LVar3)
-        EVT_ADD(LVar2, -27)
-        EVT_ADD(LVar3, -10)
-        EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_CALL(N(UpdateBubbleSoundPos), LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(StopSound, SOUND_LOOP_BUBBLE_DRIFT)
-    EVT_RETURN
-    EVT_END
+    Wait(20)
+    Call(PlaySound, SOUND_LOOP_BUBBLE_DRIFT)
+    Call(LoadPath, 165, Ref(N(BubbleFlightPath)), ARRAY_COUNT(N(BubbleFlightPath)), EASING_COS_IN_OUT)
+    Label(0)
+        Call(GetNextPathPos)
+        Call(TranslateModel, MODEL_o167, LVar1, LVar2, LVar3)
+        Add(LVar2, -27)
+        Add(LVar3, -10)
+        Call(SetPlayerPos, LVar1, LVar2, LVar3)
+        Call(N(UpdateBubbleSoundPos), LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(0)
+        EndIf
+    Call(StopSound, SOUND_LOOP_BUBBLE_DRIFT)
+    Return
+    End
 };
 
 EvtScript N(EVS_RideBigBubble) = {
-    EVT_CALL(IsPlayerWithin, 531, 81, 30, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(InterruptUsePartner)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(GetModelCenter, MODEL_o167)
-    EVT_THREAD
-        EVT_ADD(LVar2, -10)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.2))
-        EVT_CALL(PlayerJump, 531, 48, LVar2, 10)
-        EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_ADD(LVar2, -15)
-        EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.2))
-        EVT_CALL(NpcJump0, NPC_PARTNER, 531, 68, LVar2, 10)
-    EVT_END_THREAD
-    EVT_EXEC_GET_TID(N(EVS_BubbleUpdateCamera), MV_BubbleCamScript)
-    EVT_WAIT(15)
-    EVT_CALL(N(SavePartnerFlags))
-    EVT_IF_TRUE(LVarE)
-        EVT_EXEC_GET_TID(N(EVS_TetherParterToPlayer), LVarE)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_BubbleFollowPath))
-    EVT_IF_TRUE(LVarE)
-        EVT_KILL_THREAD(LVarE)
-        EVT_CALL(N(RestorePartnerFlags))
-    EVT_END_IF
-    EVT_CALL(GetModelCenter, MODEL_o167)
-    EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, 2, 0)
-    EVT_CALL(PlaySoundAt, SOUND_BUBBLE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
-    EVT_CALL(EnableModel, MODEL_o167, FALSE)
-    EVT_SET(AF_FLO_BigBubbleReady, FALSE)
-    EVT_KILL_THREAD(MV_BubbleCamScript)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(IsPlayerWithin, 531, 81, 30, LVar0)
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        Call(InterruptUsePartner)
+        Wait(20)
+    EndIf
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(GetModelCenter, MODEL_o167)
+    Thread
+        Add(LVar2, -10)
+        Call(SetPlayerJumpscale, Float(0.2))
+        Call(PlayerJump, 531, 48, LVar2, 10)
+        Call(SetPlayerActionState, ACTION_STATE_LAND)
+    EndThread
+    Thread
+        Wait(5)
+        Add(LVar2, -15)
+        Call(SetNpcJumpscale, NPC_PARTNER, Float(0.2))
+        Call(NpcJump0, NPC_PARTNER, 531, 68, LVar2, 10)
+    EndThread
+    ExecGetTID(N(EVS_BubbleUpdateCamera), MV_BubbleCamScript)
+    Wait(15)
+    Call(N(SavePartnerFlags))
+    IfTrue(LVarE)
+        ExecGetTID(N(EVS_TetherParterToPlayer), LVarE)
+    EndIf
+    ExecWait(N(EVS_BubbleFollowPath))
+    IfTrue(LVarE)
+        KillThread(LVarE)
+        Call(N(RestorePartnerFlags))
+    EndIf
+    Call(GetModelCenter, MODEL_o167)
+    PlayEffect(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, 2, 0)
+    Call(PlaySoundAt, SOUND_BUBBLE_BURST, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    Call(ClearPartnerMoveHistory, NPC_PARTNER)
+    Call(EnableModel, MODEL_o167, FALSE)
+    Set(AF_FLO_BigBubbleReady, FALSE)
+    KillThread(MV_BubbleCamScript)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE)
+    Call(EnablePartnerAI)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_BlowBigBubble) = {
-    EVT_CALL(PlaySoundAt, SOUND_FLO_BLOW_BUBBLE, SOUND_SPACE_DEFAULT, 591, 55, 121)
-    EVT_CALL(EnableModel, MODEL_o167, TRUE)
-    EVT_SETF(LVar2, EVT_FLOAT(1.0))
-    EVT_SETF(LVar4, EVT_FLOAT(0.0))
-    EVT_SETF(LVar5, EVT_FLOAT(0.0))
-    EVT_SETF(LVar6, EVT_FLOAT(0.0))
-    EVT_SET(LVar7, -30)
-    EVT_SET(LVar8, 20)
-    EVT_DIVF(LVar7, EVT_FLOAT(90.0))
-    EVT_DIVF(LVar8, EVT_FLOAT(90.0))
-    EVT_SET(LVar9, 180)
-    EVT_LOOP(LVar9)
-        EVT_CALL(TranslateModel, MODEL_o167, 591, 55, 121)
-        EVT_SETF(LVar3, LVar2)
-        EVT_DIVF(LVar3, 10)
-        EVT_CALL(ScaleModel, MODEL_o167, LVar3, LVar3, LVar3)
-        EVT_CALL(TranslateModel, MODEL_o167, LVar4, LVar5, LVar6)
-        EVT_ADDF(LVar2, EVT_FLOAT(0.05))
-        EVT_IF_GT(LVar9, 90)
-            EVT_ADDF(LVar4, LVar7)
-            EVT_ADDF(LVar5, LVar8)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(LVar7, -30)
-    EVT_SET(LVar8, -40)
-    EVT_DIVF(LVar7, EVT_FLOAT(60.0))
-    EVT_DIVF(LVar8, EVT_FLOAT(60.0))
-    EVT_LOOP(60)
-        EVT_CALL(TranslateModel, MODEL_o167, 591, 55, 121)
-        EVT_CALL(ScaleModel, MODEL_o167, LVar3, LVar3, LVar3)
-        EVT_CALL(TranslateModel, MODEL_o167, LVar4, LVar5, LVar6)
-        EVT_ADDF(LVar4, LVar7)
-        EVT_ADDF(LVar6, LVar8)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(AF_FLO_BlowingBigBubble, FALSE)
-    EVT_SET(AF_FLO_BigBubbleReady, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAt, SOUND_FLO_BLOW_BUBBLE, SOUND_SPACE_DEFAULT, 591, 55, 121)
+    Call(EnableModel, MODEL_o167, TRUE)
+    SetF(LVar2, Float(1.0))
+    SetF(LVar4, Float(0.0))
+    SetF(LVar5, Float(0.0))
+    SetF(LVar6, Float(0.0))
+    Set(LVar7, -30)
+    Set(LVar8, 20)
+    DivF(LVar7, Float(90.0))
+    DivF(LVar8, Float(90.0))
+    Set(LVar9, 180)
+    Loop(LVar9)
+        Call(TranslateModel, MODEL_o167, 591, 55, 121)
+        SetF(LVar3, LVar2)
+        DivF(LVar3, 10)
+        Call(ScaleModel, MODEL_o167, LVar3, LVar3, LVar3)
+        Call(TranslateModel, MODEL_o167, LVar4, LVar5, LVar6)
+        AddF(LVar2, Float(0.05))
+        IfGt(LVar9, 90)
+            AddF(LVar4, LVar7)
+            AddF(LVar5, LVar8)
+        EndIf
+        Wait(1)
+    EndLoop
+    Set(LVar7, -30)
+    Set(LVar8, -40)
+    DivF(LVar7, Float(60.0))
+    DivF(LVar8, Float(60.0))
+    Loop(60)
+        Call(TranslateModel, MODEL_o167, 591, 55, 121)
+        Call(ScaleModel, MODEL_o167, LVar3, LVar3, LVar3)
+        Call(TranslateModel, MODEL_o167, LVar4, LVar5, LVar6)
+        AddF(LVar4, LVar7)
+        AddF(LVar6, LVar8)
+        Wait(1)
+    EndLoop
+    Set(AF_FLO_BlowingBigBubble, FALSE)
+    Set(AF_FLO_BigBubbleReady, TRUE)
+    Return
+    End
 };
 
 f32 N(BubblePhase) = 0.0f;
@@ -291,70 +291,70 @@ void N(gfx_build_bubble_flower)(void) {
 }
 
 EvtScript N(EVS_ManageBlownBubble) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SET(LVarF, LVar0)
-    EVT_LABEL(0)
-        EVT_IF_EQ(AF_FLO_PauseBlowingBubbles, TRUE)
-            EVT_WAIT(10)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_USE_BUF(EVT_PTR(N(BlowingBubbles)))
-        EVT_BUF_READ1(LVar0)
-        EVT_IF_EQ(LVar0, FALSE)
-            EVT_CALL(RandInt, 10, LVar0)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(LVar0)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(EnableModel, LVarF, TRUE)
-        EVT_CALL(RandInt, 4, LVar0)
-        EVT_ADDF(LVar0, EVT_FLOAT(4.0))
-        EVT_MULF(LVar0, EVT_FLOAT(-1.0))
-        EVT_SETF(LVar1, EVT_FLOAT(2.0))
-        EVT_SETF(LVar2, LVar0)
-        EVT_DIVF(LVar2, EVT_FLOAT(10.0))
-        EVT_SETF(LVar3, EVT_FLOAT(0.4))
-        EVT_SETF(LVar4, EVT_FLOAT(591.0))
-        EVT_SETF(LVar5, EVT_FLOAT(60.0))
-        EVT_SETF(LVar6, EVT_FLOAT(121.0))
-        EVT_CALL(RandInt, 3, LVar7)
-        EVT_ADDF(LVar7, EVT_FLOAT(3.0))
-        EVT_MULF(LVar7, EVT_FLOAT(0.04))
-        EVT_SETF(LVar9, LVar7)
-        EVT_DIVF(LVar9, EVT_FLOAT(5.0))
-        EVT_CALL(RandInt, 50, LVar8)
-        EVT_ADD(LVar8, 50)
-        EVT_LOOP(LVar8)
-            EVT_SETF(LVarE, LVar2)
-            EVT_SUBF(LVarE, LVar0)
-            EVT_MULF(LVarE, EVT_FLOAT(0.046))
-            EVT_ADDF(LVar0, LVarE)
-            EVT_SETF(LVarE, LVar3)
-            EVT_SUBF(LVarE, LVar1)
-            EVT_MULF(LVarE, EVT_FLOAT(0.046))
-            EVT_ADDF(LVar1, LVarE)
-            EVT_ADDF(LVar4, LVar0)
-            EVT_ADDF(LVar5, LVar1)
-            EVT_SETF(LVarE, LVar7)
-            EVT_SUBF(LVarE, LVar9)
-            EVT_MULF(LVarE, EVT_FLOAT(0.203))
-            EVT_ADDF(LVar9, LVarE)
-            EVT_CALL(TranslateModel, LVarF, LVar4, LVar5, LVar6)
-            EVT_CALL(ScaleModel, LVarF, LVar9, LVar9, LVar9)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(EnableModel, LVarF, FALSE)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Set(LVarF, LVar0)
+    Label(0)
+        IfEq(AF_FLO_PauseBlowingBubbles, TRUE)
+            Wait(10)
+            Goto(0)
+        EndIf
+        UseBuf(Ref(N(BlowingBubbles)))
+        BufRead1(LVar0)
+        IfEq(LVar0, FALSE)
+            Call(RandInt, 10, LVar0)
+            Add(LVar0, 1)
+            Wait(LVar0)
+            Goto(0)
+        EndIf
+        Call(EnableModel, LVarF, TRUE)
+        Call(RandInt, 4, LVar0)
+        AddF(LVar0, Float(4.0))
+        MulF(LVar0, Float(-1.0))
+        SetF(LVar1, Float(2.0))
+        SetF(LVar2, LVar0)
+        DivF(LVar2, Float(10.0))
+        SetF(LVar3, Float(0.4))
+        SetF(LVar4, Float(591.0))
+        SetF(LVar5, Float(60.0))
+        SetF(LVar6, Float(121.0))
+        Call(RandInt, 3, LVar7)
+        AddF(LVar7, Float(3.0))
+        MulF(LVar7, Float(0.04))
+        SetF(LVar9, LVar7)
+        DivF(LVar9, Float(5.0))
+        Call(RandInt, 50, LVar8)
+        Add(LVar8, 50)
+        Loop(LVar8)
+            SetF(LVarE, LVar2)
+            SubF(LVarE, LVar0)
+            MulF(LVarE, Float(0.046))
+            AddF(LVar0, LVarE)
+            SetF(LVarE, LVar3)
+            SubF(LVarE, LVar1)
+            MulF(LVarE, Float(0.046))
+            AddF(LVar1, LVarE)
+            AddF(LVar4, LVar0)
+            AddF(LVar5, LVar1)
+            SetF(LVarE, LVar7)
+            SubF(LVarE, LVar9)
+            MulF(LVarE, Float(0.203))
+            AddF(LVar9, LVarE)
+            Call(TranslateModel, LVarF, LVar4, LVar5, LVar6)
+            Call(ScaleModel, LVarF, LVar9, LVar9, LVar9)
+            Wait(1)
+        EndLoop
+        Call(EnableModel, LVarF, FALSE)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupBubbles) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o129, SURFACE_TYPE_FLOWERS)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o155, SURFACE_TYPE_FLOWERS)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o156, SURFACE_TYPE_FLOWERS)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o157, SURFACE_TYPE_FLOWERS)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o158, SURFACE_TYPE_FLOWERS)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o129, SURFACE_TYPE_FLOWERS)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o155, SURFACE_TYPE_FLOWERS)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o156, SURFACE_TYPE_FLOWERS)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o157, SURFACE_TYPE_FLOWERS)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o158, SURFACE_TYPE_FLOWERS)
     EVT_FLOWER_SPAWN_REGION( -730, -130, -470,  -70,  0)
     EVT_FLOWER_SPAWN_REGION( -730,   70, -470,  140,  0)
     EVT_FLOWER_SPAWN_REGION( -280,  130, -110,  -70,  0)
@@ -363,40 +363,40 @@ EvtScript N(EVS_SetupBubbles) = {
     EVT_DROPPING_VINE(ITEM_NONE, MODEL_o82, MODEL_o83, MODEL_o84, MODEL_o85)
     EVT_DROPPING_VINE(ITEM_NONE, MODEL_o78, MODEL_o79, MODEL_o80, MODEL_o81)
     EVT_DROPPING_VINE(ITEM_NONE, MODEL_o88, MODEL_o89, MODEL_o90, MODEL_o91)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o113, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(CloneModel, MODEL_o169, CLONED_MODEL(1))
-    EVT_CALL(CloneModel, MODEL_o169, CLONED_MODEL(2))
-    EVT_CALL(CloneModel, MODEL_o169, CLONED_MODEL(3))
-    EVT_CALL(CloneModel, MODEL_o169, CLONED_MODEL(4))
-    EVT_CALL(CloneModel, MODEL_o169, CLONED_MODEL(5))
-    EVT_CALL(EnableModel, MODEL_o167, FALSE)
-    EVT_CALL(EnableModel, MODEL_o169, FALSE)
-    EVT_CALL(EnableModel, CLONED_MODEL(1), FALSE)
-    EVT_CALL(EnableModel, CLONED_MODEL(2), FALSE)
-    EVT_CALL(EnableModel, CLONED_MODEL(3), FALSE)
-    EVT_CALL(EnableModel, CLONED_MODEL(4), FALSE)
-    EVT_CALL(EnableModel, CLONED_MODEL(5), FALSE)
-    EVT_SET(LVar0, CLONED_MODEL(1))
-    EVT_EXEC(N(EVS_ManageBlownBubble))
-    EVT_SET(LVar0, CLONED_MODEL(2))
-    EVT_EXEC(N(EVS_ManageBlownBubble))
-    EVT_SET(LVar0, CLONED_MODEL(3))
-    EVT_EXEC(N(EVS_ManageBlownBubble))
-    EVT_SET(LVar0, CLONED_MODEL(4))
-    EVT_EXEC(N(EVS_ManageBlownBubble))
-    EVT_SET(LVar0, CLONED_MODEL(5))
-    EVT_EXEC(N(EVS_ManageBlownBubble))
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o167, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_big_bubble)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o167, CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(1), CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(2), CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(3), CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(4), CUSTOM_GFX_1, -1)
-    EVT_CALL(SetModelCustomGfx, CLONED_MODEL(5), CUSTOM_GFX_1, -1)
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o57, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(gfx_build_bubble_flower)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o57, CUSTOM_GFX_2, -1)
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o113, COLLIDER_FLAGS_UPPER_MASK)
+    Call(CloneModel, MODEL_o169, CLONED_MODEL(1))
+    Call(CloneModel, MODEL_o169, CLONED_MODEL(2))
+    Call(CloneModel, MODEL_o169, CLONED_MODEL(3))
+    Call(CloneModel, MODEL_o169, CLONED_MODEL(4))
+    Call(CloneModel, MODEL_o169, CLONED_MODEL(5))
+    Call(EnableModel, MODEL_o167, FALSE)
+    Call(EnableModel, MODEL_o169, FALSE)
+    Call(EnableModel, CLONED_MODEL(1), FALSE)
+    Call(EnableModel, CLONED_MODEL(2), FALSE)
+    Call(EnableModel, CLONED_MODEL(3), FALSE)
+    Call(EnableModel, CLONED_MODEL(4), FALSE)
+    Call(EnableModel, CLONED_MODEL(5), FALSE)
+    Set(LVar0, CLONED_MODEL(1))
+    Exec(N(EVS_ManageBlownBubble))
+    Set(LVar0, CLONED_MODEL(2))
+    Exec(N(EVS_ManageBlownBubble))
+    Set(LVar0, CLONED_MODEL(3))
+    Exec(N(EVS_ManageBlownBubble))
+    Set(LVar0, CLONED_MODEL(4))
+    Exec(N(EVS_ManageBlownBubble))
+    Set(LVar0, CLONED_MODEL(5))
+    Exec(N(EVS_ManageBlownBubble))
+    Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o167, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(gfx_build_big_bubble)), NULL)
+    Call(SetModelCustomGfx, MODEL_o167, CUSTOM_GFX_1, -1)
+    Call(SetModelCustomGfx, CLONED_MODEL(1), CUSTOM_GFX_1, -1)
+    Call(SetModelCustomGfx, CLONED_MODEL(2), CUSTOM_GFX_1, -1)
+    Call(SetModelCustomGfx, CLONED_MODEL(3), CUSTOM_GFX_1, -1)
+    Call(SetModelCustomGfx, CLONED_MODEL(4), CUSTOM_GFX_1, -1)
+    Call(SetModelCustomGfx, CLONED_MODEL(5), CUSTOM_GFX_1, -1)
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o57, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(gfx_build_bubble_flower)), NULL)
+    Call(SetModelCustomGfx, MODEL_o57, CUSTOM_GFX_2, -1)
+    Return
+    End
 };

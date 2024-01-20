@@ -5,44 +5,44 @@
 
 // blue torches
 EvtScript N(EVS_TexAnim_Fire) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_CALL(SetTexPanner, LVarA, TEX_PANNER_1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar1)
-        EVT_ADD(LVar0, 0x8000)
-        EVT_ADD(LVar1, 0)
-        EVT_WAIT(5)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Call(SetTexPanner, LVarA, TEX_PANNER_1)
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Loop(0)
+        Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar1)
+        Add(LVar0, 0x8000)
+        Add(LVar1, 0)
+        Wait(5)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_o415, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_o453, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_o452, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_o454, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_o451, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_o450, MODEL_GROUP_HIDDEN)
-    EVT_SET(LVar0, MODEL_hi1)
-    EVT_EXEC(N(EVS_TexAnim_Fire))
-    EVT_SET(LVar0, MODEL_hi2)
-    EVT_EXEC(N(EVS_TexAnim_Fire))
-    EVT_SET(LVar0, MODEL_hi3)
-    EVT_EXEC(N(EVS_TexAnim_Fire))
-    EVT_SET(LVar0, MODEL_hi4)
-    EVT_EXEC(N(EVS_TexAnim_Fire))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetGroupVisibility, MODEL_o415, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_o453, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_o452, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_o454, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_o451, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_o450, MODEL_GROUP_HIDDEN)
+    Set(LVar0, MODEL_hi1)
+    Exec(N(EVS_TexAnim_Fire))
+    Set(LVar0, MODEL_hi2)
+    Exec(N(EVS_TexAnim_Fire))
+    Set(LVar0, MODEL_hi3)
+    Exec(N(EVS_TexAnim_Fire))
+    Set(LVar0, MODEL_hi4)
+    Exec(N(EVS_TexAnim_Fire))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {

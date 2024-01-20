@@ -1,45 +1,45 @@
 #include "common.h"
 
 EvtScript N(EVS_Reflection_Unk) = {
-    EVT_CALL(GetEntryID, LVarA)
-    EVT_IF_EQ(LVarA, LVar1)
-        EVT_SET(LVar0, REFLECTION_WALL_ONLY)
-    EVT_END_IF
-    EVT_IF_EQ(LVarA, LVar2)
-        EVT_SET(LVar0, REFLECTION_WALL_ONLY)
-    EVT_END_IF
-    EVT_IF_EQ(LVarA, LVar3)
-        EVT_SET(LVar0, REFLECTION_WALL_ONLY)
-    EVT_END_IF
-    EVT_IF_EQ(LVarA, LVar4)
-        EVT_SET(LVar0, REFLECTION_WALL_ONLY)
-    EVT_END_IF
-    EVT_IF_EQ(LVarA, LVar5)
-        EVT_SET(LVar0, REFLECTION_WALL_ONLY)
-    EVT_END_IF
-    EVT_IF_EQ(LVarA, LVar6)
-        EVT_SET(LVar0, REFLECTION_WALL_ONLY)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVarA)
+    IfEq(LVarA, LVar1)
+        Set(LVar0, REFLECTION_WALL_ONLY)
+    EndIf
+    IfEq(LVarA, LVar2)
+        Set(LVar0, REFLECTION_WALL_ONLY)
+    EndIf
+    IfEq(LVarA, LVar3)
+        Set(LVar0, REFLECTION_WALL_ONLY)
+    EndIf
+    IfEq(LVarA, LVar4)
+        Set(LVar0, REFLECTION_WALL_ONLY)
+    EndIf
+    IfEq(LVarA, LVar5)
+        Set(LVar0, REFLECTION_WALL_ONLY)
+    EndIf
+    IfEq(LVarA, LVar6)
+        Set(LVar0, REFLECTION_WALL_ONLY)
+    EndIf
+    Return
+    End
 };
 
 // LVar0 mode
 // LVar1 disable wall flag (reflections wont show if false)
 EvtScript N(EVS_SetupReflections) = {
-    EVT_MALLOC_ARRAY(16, LVarA)
-    EVT_IF_EQ(LVar1, FALSE)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(REFLECTION_FLOOR_WALL)
-                EVT_CALL(N(EnableWallReflection))
-            EVT_CASE_EQ(REFLECTION_FLOOR_ONLY)
+    MallocArray(16, LVarA)
+    IfEq(LVar1, FALSE)
+        Switch(LVar0)
+            CaseEq(REFLECTION_FLOOR_WALL)
+                Call(N(EnableWallReflection))
+            CaseEq(REFLECTION_FLOOR_ONLY)
                 // do nothing
-            EVT_CASE_EQ(REFLECTION_WALL_ONLY)
-                EVT_CALL(N(EnableWallReflection))
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_CALL(N(EnableFloorReflection), LVar0)
-    EVT_CALL(N(EnablePartnerReflection), LVar0)
-    EVT_RETURN
-    EVT_END
+            CaseEq(REFLECTION_WALL_ONLY)
+                Call(N(EnableWallReflection))
+        EndSwitch
+    EndIf
+    Call(N(EnableFloorReflection), LVar0)
+    Call(N(EnablePartnerReflection), LVar0)
+    Return
+    End
 };

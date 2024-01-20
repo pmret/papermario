@@ -87,240 +87,240 @@ API_CALLABLE(N(SetStarSpiritSize)) {
 }
 
 EvtScript N(EVS_StarPower_WishForSpirit) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, ACTOR_PLAYER)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_BEGIN_WISH)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
-        EVT_CALL(N(FadeBackgroundDarken))
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Pray)
-        EVT_WAIT(10)
-        EVT_CALL(PlaySound, SOUND_WISH_ASCENDING)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_WALK)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_BEGIN_WISH)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
-        EVT_CALL(N(FadeBackgroundDarken))
-        EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_WISH_ASCENDING)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
-        EVT_WAIT(10)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerID, LVarA)
+    IfEq(LVarA, ACTOR_PLAYER)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Wait(10)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 16)
+        Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
+        Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(PlayerRunToGoal, 0)
+        Wait(8)
+        Call(PlaySound, SOUND_BEGIN_WISH)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar1, 15)
+        Call(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
+        Call(N(FadeBackgroundDarken))
+        Wait(20)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Pray)
+        Wait(10)
+        Call(PlaySound, SOUND_WISH_ASCENDING)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
+        Wait(30)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Wait(10)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_WALK)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Add(LVar0, 16)
+        Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
+        Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
+        Wait(8)
+        Call(PlaySound, SOUND_BEGIN_WISH)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Add(LVar1, 15)
+        Call(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
+        Call(N(FadeBackgroundDarken))
+        Wait(20)
+        Call(PlaySound, SOUND_WISH_ASCENDING)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
+        Wait(10)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Call(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
+        Wait(30)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_StarPower_WishForBeam) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, ACTOR_PLAYER)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_BEGIN_WISH)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
-        EVT_CALL(N(FadeBackgroundDarkenForBeam))
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Pray)
-        EVT_WAIT(10)
-        EVT_CALL(PlaySound, SOUND_WISH_ASCENDING)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_WALK)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 16)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0, FALSE)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
-        EVT_WAIT(8)
-        EVT_CALL(PlaySound, SOUND_BEGIN_WISH)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
-        EVT_CALL(N(FadeBackgroundDarkenForBeam))
-        EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_WISH_ASCENDING)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
-        EVT_WAIT(10)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
-        EVT_WAIT(30)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerID, LVarA)
+    IfEq(LVarA, ACTOR_PLAYER)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Wait(10)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 16)
+        Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
+        Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(PlayerRunToGoal, 0)
+        Wait(8)
+        Call(PlaySound, SOUND_BEGIN_WISH)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar1, 15)
+        Call(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
+        Call(N(FadeBackgroundDarkenForBeam))
+        Wait(20)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Pray)
+        Wait(10)
+        Call(PlaySound, SOUND_WISH_ASCENDING)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
+        Wait(30)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Wait(10)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_WALK)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Add(LVar0, 16)
+        Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
+        Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Call(RunToGoal, ACTOR_PARTNER, 0, FALSE)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
+        Wait(8)
+        Call(PlaySound, SOUND_BEGIN_WISH)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Add(LVar1, 15)
+        Call(N(SpawnStarSparkleFX), LVar0, LVar1, LVar2)
+        Call(N(FadeBackgroundDarkenForBeam))
+        Wait(20)
+        Call(PlaySound, SOUND_WISH_ASCENDING)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_PRAY)
+        Wait(10)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Call(N(SpawnWishSparkleFX), LVar0, LVar1, LVar2)
+        Wait(30)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_StarPower_SpiritSummoned) = {
-    EVT_WAIT(8)
-    EVT_CALL(SetForegroundModelsVisible, FALSE)
-    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
-    EVT_CALL(MoveBattleCamOver, 1)
-    EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_APPEAR_A)
-    EVT_CALL(CreateNpc, NPC_BTL_SPIRIT, LVar0)
-    EVT_CALL(N(SetStarSpiritSize))
-    EVT_CALL(SetNpcFlagBits, NPC_BTL_SPIRIT, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_CALL(SetNpcPos, NPC_BTL_SPIRIT, -75, 150, 0)
-    EVT_CALL(SetNpcDecoration, NPC_BTL_SPIRIT, 0, NPC_DECORATION_WHITE_GLOW_BEHIND)
-    EVT_CALL(N(SpawnStarSpiritArriveFX), -75, 167, 0)
-    EVT_WAIT(10)
-    EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(8)
-        EVT_ADD(LVar0, 67)
-        EVT_CALL(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(10)
-    EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 50)
-    EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 30, 0, EASING_COS_IN_OUT)
-    EVT_CALL(SetForegroundModelsVisible, TRUE)
-    EVT_RETURN
-    EVT_END
+    Wait(8)
+    Call(SetForegroundModelsVisible, FALSE)
+    Call(UseBattleCamPresetImmediately, BTL_CAM_PRESET_73)
+    Call(MoveBattleCamOver, 1)
+    Call(PlaySound, SOUND_STAR_SPIRIT_APPEAR_A)
+    Call(CreateNpc, NPC_BTL_SPIRIT, LVar0)
+    Call(N(SetStarSpiritSize))
+    Call(SetNpcFlagBits, NPC_BTL_SPIRIT, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Call(SetNpcPos, NPC_BTL_SPIRIT, -75, 150, 0)
+    Call(SetNpcDecoration, NPC_BTL_SPIRIT, 0, NPC_DECORATION_WHITE_GLOW_BEHIND)
+    Call(N(SpawnStarSpiritArriveFX), -75, 167, 0)
+    Wait(10)
+    Call(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
+    Set(LVar0, 0)
+    Loop(8)
+        Add(LVar0, 67)
+        Call(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
+        Wait(1)
+    EndLoop
+    Wait(10)
+    Call(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
+    Thread
+        Wait(10)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+    EndThread
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 50)
+    Call(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 30, 0, EASING_COS_IN_OUT)
+    Call(SetForegroundModelsVisible, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_StarPower_SpiritDeparts) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, ACTOR_PLAYER)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_DEPART_3)
-        EVT_THREAD
-            EVT_LOOP(5)
-                EVT_WAIT(6)
-                EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-                EVT_CALL(N(SpawnStarSpiritDepartFX), LVar0, LVar1, LVar2)
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
-        EVT_THREAD
-            EVT_SET(LVar2, 0)
-            EVT_SET(LVar3, 720)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 30, EASING_CUBIC_IN)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 60)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_ADD(LVar1, 140)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_WAIT(10)
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
-        EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
-    EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-        EVT_CALL(PlaySound, SOUND_STAR_SPIRIT_DEPART_1)
-        EVT_THREAD
-            EVT_LOOP(5)
-                EVT_WAIT(6)
-                EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-                EVT_CALL(N(SpawnStarSpiritDepartFX), LVar0, LVar1, LVar2)
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
-        EVT_THREAD
-            EVT_SET(LVar2, 0)
-            EVT_SET(LVar3, 720)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 30, EASING_CUBIC_IN)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 60)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_ADD(LVar1, 140)
-        EVT_CALL(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
-        EVT_WAIT(10)
-        EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
-        EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerID, LVarA)
+    IfEq(LVarA, ACTOR_PLAYER)
+        Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+        Call(PlaySound, SOUND_STAR_SPIRIT_DEPART_3)
+        Thread
+            Loop(5)
+                Wait(6)
+                Call(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
+                Call(N(SpawnStarSpiritDepartFX), LVar0, LVar1, LVar2)
+            EndLoop
+        EndThread
+        Call(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
+        Thread
+            Set(LVar2, 0)
+            Set(LVar3, 720)
+            Call(MakeLerp, LVar2, LVar3, 30, EASING_CUBIC_IN)
+            Loop(0)
+                Call(UpdateLerp)
+                Call(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndThread
+        Call(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
+        Add(LVar1, 60)
+        Call(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
+        Add(LVar1, 140)
+        Call(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
+        Wait(10)
+        Call(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
+        Call(DeleteNpc, NPC_BTL_SPIRIT)
+    Else
+        Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+        Call(PlaySound, SOUND_STAR_SPIRIT_DEPART_1)
+        Thread
+            Loop(5)
+                Wait(6)
+                Call(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
+                Call(N(SpawnStarSpiritDepartFX), LVar0, LVar1, LVar2)
+            EndLoop
+        EndThread
+        Call(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
+        Thread
+            Set(LVar2, 0)
+            Set(LVar3, 720)
+            Call(MakeLerp, LVar2, LVar3, 30, EASING_CUBIC_IN)
+            Loop(0)
+                Call(UpdateLerp)
+                Call(SetNpcRotation, NPC_BTL_SPIRIT, 0, LVar0, 0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndThread
+        Call(GetNpcPos, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2)
+        Add(LVar1, 60)
+        Call(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
+        Add(LVar1, 140)
+        Call(NpcFlyTo, NPC_BTL_SPIRIT, LVar0, LVar1, LVar2, 15, 0, EASING_COS_IN_OUT)
+        Wait(10)
+        Call(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
+        Call(DeleteNpc, NPC_BTL_SPIRIT)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_StarPower_EndWish) = {
-    EVT_CALL(GetOwnerID, LVarA)
-    EVT_IF_EQ(LVarA, ACTOR_PLAYER)
-        EVT_CALL(N(FadeBackgroundLighten))
-        EVT_WAIT(15)
-        EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_ELSE
-        EVT_CALL(N(FadeBackgroundLighten))
-        EVT_WAIT(15)
-        EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(8.0))
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_RETURN)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerID, LVarA)
+    IfEq(LVarA, ACTOR_PLAYER)
+        Call(N(FadeBackgroundLighten))
+        Wait(15)
+        Call(SetGoalToHome, ACTOR_PLAYER)
+        Call(SetActorSpeed, ACTOR_PLAYER, Float(8.0))
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
+        Call(PlayerRunToGoal, 0)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Else
+        Call(N(FadeBackgroundLighten))
+        Wait(15)
+        Call(SetGoalToHome, ACTOR_PARTNER)
+        Call(SetActorSpeed, ACTOR_PARTNER, Float(8.0))
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_RETURN)
+        Call(RunToGoal, ACTOR_PARTNER, 0)
+        Call(N(SetPartnerWishAnim), PARTNER_WISH_ANIM_IDLE)
+    EndIf
+    Return
+    End
 };
 

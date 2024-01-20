@@ -48,21 +48,21 @@ SearchBushConfig N(SearchBush_Bush3) = {
 FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o390, MODEL_o396, MODEL_o397, MODEL_o398);
 
 EvtScript N(EVS_Bush6_HideFlowers) = {
-    EVT_CALL(EnableModel, MODEL_o396, FALSE)
-    EVT_CALL(EnableModel, MODEL_o397, FALSE)
-    EVT_CALL(EnableModel, MODEL_o398, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o396, FALSE)
+    Call(EnableModel, MODEL_o397, FALSE)
+    Call(EnableModel, MODEL_o398, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearchBush6) = {
-    EVT_CALL(EnableModel, MODEL_o396, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o398, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o397, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o396, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o398, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o397, TRUE)
+    Return
+    End
 };
 
 SearchBushConfig N(SearchBush_Bush6) = {
@@ -145,21 +145,21 @@ FoliageDropList N(Bush1_Drops) = {
 };
 
 EvtScript N(EVS_Bush2_HideFlowers) = {
-    EVT_CALL(EnableModel, MODEL_o399, FALSE)
-    EVT_CALL(EnableModel, MODEL_o400, FALSE)
-    EVT_CALL(EnableModel, MODEL_o401, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o399, FALSE)
+    Call(EnableModel, MODEL_o400, FALSE)
+    Call(EnableModel, MODEL_o401, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnSearchBush2) = {
-    EVT_CALL(EnableModel, MODEL_o399, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o401, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(EnableModel, MODEL_o400, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o399, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o401, TRUE)
+    Wait(10)
+    Call(EnableModel, MODEL_o400, TRUE)
+    Return
+    End
 };
 
 SearchBushConfig N(SearchBush_Bush2) = {
@@ -188,36 +188,36 @@ BombTrigger N(BombPos_Tree1) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush5)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o312, 1, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH6_2)
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush3)))
-    EVT_ELSE
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush4)))
-    EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o313, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush6)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o419, 1, 0)
-    EVT_EXEC(N(EVS_Bush6_HideFlowers))
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush7)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o420, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush8)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o421, 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush9)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o422, 1, 0)
-    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH3_2)
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush1)))
-    EVT_ELSE
-        EVT_SET(LVar0, EVT_PTR(N(SearchBush_Bush2)))
-    EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o423, 1, 0)
-    EVT_EXEC(N(EVS_Bush2_HideFlowers))
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush5)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o312, 1, 0)
+    IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH6_2)
+        Set(LVar0, Ref(N(SearchBush_Bush3)))
+    Else
+        Set(LVar0, Ref(N(SearchBush_Bush4)))
+    EndIf
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o313, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush6)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o419, 1, 0)
+    Exec(N(EVS_Bush6_HideFlowers))
+    Set(LVar0, Ref(N(SearchBush_Bush7)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o420, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush8)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o421, 1, 0)
+    Set(LVar0, Ref(N(SearchBush_Bush9)))
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o422, 1, 0)
+    IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH3_2)
+        Set(LVar0, Ref(N(SearchBush_Bush1)))
+    Else
+        Set(LVar0, Ref(N(SearchBush_Bush2)))
+    EndIf
+    BindTrigger(Ref(N(EVS_SearchBush)), TRIGGER_WALL_PRESS_A, COLLIDER_o423, 1, 0)
+    Exec(N(EVS_Bush2_HideFlowers))
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
     // bind the same tree a second time for the koopa shell stuck inside
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_RecoverTreeShell)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_RecoverTreeShell)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Scene_RecoverTreeShell)), TRIGGER_WALL_HAMMER, COLLIDER_o323, 1, 0)
+    BindTrigger(Ref(N(EVS_Scene_RecoverTreeShell)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Return
+    End
 };

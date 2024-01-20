@@ -85,15 +85,15 @@ BombTrigger N(BombPos_Tree3) = {
 };
 
 EvtScript N(EVS_SetupTrees) = {
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o156, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o157, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree2)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o34, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree3)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o156, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o157, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree2)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree3)))
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_WALL_HAMMER, COLLIDER_o34, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree_Trees)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree3)), 1, 0)
+    Return
+    End
 };

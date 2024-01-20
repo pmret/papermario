@@ -15,19 +15,19 @@ TweesterPath* N(TweesterPaths)[] = {
 };
 
 EvtScript N(D_802400FC_945ACC) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(GotoMap, EVT_PTR("sbk_24"), sbk_24_ENTRY_4)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(GotoMap, Ref("sbk_24"), sbk_24_ENTRY_4)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenPanel), 0, 0, 225, 0, MODEL_stage, MAKE_ENTITY_END)
-    EVT_CALL(AssignPanelFlag, GF_SBK33_HiddenPanel)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_Tweester), 327, 0, 8, 0, EVT_PTR(N(TweesterPaths)), MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(D_802400FC_945ACC)))
-    EVT_RETURN
-    EVT_END
+    Call(MakeEntity, Ref(Entity_HiddenPanel), 0, 0, 225, 0, MODEL_stage, MAKE_ENTITY_END)
+    Call(AssignPanelFlag, GF_SBK33_HiddenPanel)
+    Call(MakeEntity, Ref(Entity_Tweester), 327, 0, 8, 0, Ref(N(TweesterPaths)), MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(D_802400FC_945ACC)))
+    Return
+    End
 };

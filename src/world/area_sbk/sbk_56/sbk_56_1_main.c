@@ -33,78 +33,78 @@ API_CALLABLE(N(StopOasisSongVariation)) {
 }
 
 EvtScript N(EVS_ExitWalk_sbk_55_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(UseExitHeading, 60, sbk_56_ENTRY_0)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(N(StopOasisSongVariation))
-    EVT_CALL(GotoMap, EVT_PTR("sbk_55"), sbk_55_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(UseExitHeading, 60, sbk_56_ENTRY_0)
+    Exec(ExitWalk)
+    Call(N(StopOasisSongVariation))
+    Call(GotoMap, Ref("sbk_55"), sbk_55_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitWalk_sbk_46_3) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(UseExitHeading, 60, sbk_56_ENTRY_2)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(N(StopOasisSongVariation))
-    EVT_CALL(GotoMap, EVT_PTR("sbk_46"), sbk_46_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(UseExitHeading, 60, sbk_56_ENTRY_2)
+    Exec(ExitWalk)
+    Call(N(StopOasisSongVariation))
+    Call(GotoMap, Ref("sbk_46"), sbk_46_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitWalk_sbk_66_2) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(UseExitHeading, 60, sbk_56_ENTRY_3)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(N(StopOasisSongVariation))
-    EVT_CALL(GotoMap, EVT_PTR("sbk_66"), sbk_66_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(UseExitHeading, 60, sbk_56_ENTRY_3)
+    Exec(ExitWalk)
+    Call(N(StopOasisSongVariation))
+    Call(GotoMap, Ref("sbk_66"), sbk_66_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_55_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_46_3)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_66_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilis, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_55_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_46_3)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_66_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilis, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_Water) = {
-    EVT_CALL(EnableTexPanning, MODEL_o49, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_LABEL(10)
-        EVT_SET(LVar1, 0)
-        EVT_SUB(LVar1, LVar0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar0)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar1, LVar1)
-        EVT_ADD(LVar0, 80)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Call(EnableTexPanning, MODEL_o49, TRUE)
+    Set(LVar0, 0)
+    Label(10)
+        Set(LVar1, 0)
+        Sub(LVar1, LVar0)
+        Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar0)
+        Call(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_AUX, LVar1, LVar1)
+        Add(LVar0, 80)
+        Wait(1)
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-        EVT_CALL(DisablePulseStone, FALSE)
-    EVT_END_IF
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_CALL(N(SpawnSunEffect))
-    EVT_EXEC(N(EVS_TexPan_Water))
-    EVT_CALL(MakeTransformGroup, MODEL_sui)
-    EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-    EVT_CALL(N(StartOasisSongVariation))
-    EVT_CALL(PlaySound, SOUND_LOOP_SBK_OASIS_WATER)
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_EXEC(N(EVS_SetupFoliage))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
+    Call(SetSpriteShading, SHADING_NONE)
+    IfEq(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
+        Call(DisablePulseStone, FALSE)
+    EndIf
+    SetUP_CAMERA_NO_LEAD()
+    ExecWait(N(EVS_MakeEntities))
+    Call(N(SpawnSunEffect))
+    Exec(N(EVS_TexPan_Water))
+    Call(MakeTransformGroup, MODEL_sui)
+    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+    Call(N(StartOasisSongVariation))
+    Call(PlaySound, SOUND_LOOP_SBK_OASIS_WATER)
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Exec(N(EVS_SetupFoliage))
+    Return
+    End
 };

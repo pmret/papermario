@@ -11,153 +11,153 @@
 #include "world/common/npc/Dryite_Stationary.inc.c"
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_Outro_003C)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_Outro_003C)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_KoloradoWife) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_Outro_003D)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_KoloradoWife_Talk, ANIM_KoloradoWife_Idle, 0, MSG_Outro_003D)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoloradoWife) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_KoloradoWife)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_KoloradoWife)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_KoopaKoot) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_Outro_003E)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_Outro_003E)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaKoot) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_KoopaKoot)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_KoopaKoot)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bobomb) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_Outro_004E)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_WorldBobomb_Blue_Talk, ANIM_WorldBobomb_Blue_Idle, 0, MSG_Outro_004E)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bobomb) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bobomb)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bobomb)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Koopa) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_Outro_004F)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Koopa_Talk, ANIM_Koopa_Idle, 0, MSG_Outro_004F)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopa) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopa)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rowf) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_Outro_0040)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_Outro_0040)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Rowf) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -225, 0, 320)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rowf)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -225, 0, 320)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rowf)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rhuff) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_Outro_0041)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_Outro_0041)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Rhuff) = {
-    EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(0.75), EVT_FLOAT(0.75), EVT_FLOAT(0.75))
-    EVT_CALL(SetNpcPos, NPC_SELF, -250, 0, 295)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rhuff)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_SELF, Float(0.75), Float(0.75), Float(0.75))
+    Call(SetNpcPos, NPC_SELF, -250, 0, 295)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rhuff)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_01) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_Outro_0050)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_Outro_0050)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_02) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_Outro_0051)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_Outro_0051)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Chanterelle) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Chanterelle_Talk, ANIM_Chanterelle_Idle, 16, MSG_Outro_0052)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Chanterelle_Talk, ANIM_Chanterelle_Idle, 16, MSG_Outro_0052)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Chanterelle) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Chanterelle_Sing)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Chanterelle)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Chanterelle_Sing)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Chanterelle)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Poet) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Poet_Talk, ANIM_Musician_Poet_Idle, 16, MSG_Outro_0053)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Musician_Poet_Talk, ANIM_Musician_Poet_Idle, 16, MSG_Outro_0053)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Poet) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Poet)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Poet)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Composer) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 16, MSG_Outro_0054)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Musician_Composer_Talk, ANIM_Musician_Composer_Idle, 16, MSG_Outro_0054)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Composer) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Composer)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Composer)))
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Kolorado)[] = {

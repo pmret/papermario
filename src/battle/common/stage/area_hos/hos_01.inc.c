@@ -103,152 +103,152 @@ void N(build_gfx_pink_stars)(s32 index) {
 }
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
+    Call(SetSpriteShading, SHADING_NONE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o345, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(build_gfx_yellow_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o345, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o345, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_o345, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_1, Ref(N(build_gfx_yellow_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o345, CUSTOM_GFX_1, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o345, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o338, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_2, EVT_PTR(N(build_gfx_yellow_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o338, CUSTOM_GFX_2, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o338, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_1, MODEL_o338, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_2, Ref(N(build_gfx_yellow_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o338, CUSTOM_GFX_2, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o338, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_2, MODEL_o344, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(build_gfx_yellow_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o344, CUSTOM_GFX_3, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o344, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_2, MODEL_o344, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_3, Ref(N(build_gfx_yellow_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o344, CUSTOM_GFX_3, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o344, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_3, MODEL_o354, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_4, EVT_PTR(N(build_gfx_yellow_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o354, CUSTOM_GFX_4, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o354, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_3, MODEL_o354, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_4, Ref(N(build_gfx_yellow_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o354, CUSTOM_GFX_4, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o354, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_4, MODEL_o341, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_5, EVT_PTR(N(build_gfx_yellow_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o341, CUSTOM_GFX_5, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o341, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_4, MODEL_o341, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_5, Ref(N(build_gfx_yellow_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o341, CUSTOM_GFX_5, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o341, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_5, MODEL_o352, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_6, EVT_PTR(N(build_gfx_blue_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o352, CUSTOM_GFX_6, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o352, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_5, MODEL_o352, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_6, Ref(N(build_gfx_blue_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o352, CUSTOM_GFX_6, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o352, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_6, MODEL_o346, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_7, EVT_PTR(N(build_gfx_blue_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o346, CUSTOM_GFX_7, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o346, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_6, MODEL_o346, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_7, Ref(N(build_gfx_blue_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o346, CUSTOM_GFX_7, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o346, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_7, MODEL_o349, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_8, EVT_PTR(N(build_gfx_green_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o349, CUSTOM_GFX_8, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o349, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_7, MODEL_o349, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_8, Ref(N(build_gfx_green_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o349, CUSTOM_GFX_8, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o349, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_8, MODEL_o353, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_9, EVT_PTR(N(build_gfx_green_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o353, CUSTOM_GFX_9, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o353, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_8, MODEL_o353, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_9, Ref(N(build_gfx_green_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o353, CUSTOM_GFX_9, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o353, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_9, MODEL_o347, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_A, EVT_PTR(N(build_gfx_pink_stars)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_o347, CUSTOM_GFX_A, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetModelFlags, MODEL_o347, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
+    Call(MakeLocalVertexCopy, VTX_COPY_9, MODEL_o347, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_A, Ref(N(build_gfx_pink_stars)), NULL)
+    Call(SetModelCustomGfx, MODEL_o347, CUSTOM_GFX_A, ENV_TINT_UNCHANGED)
+    Call(SetModelFlags, MODEL_o347, MODEL_FLAG_HAS_LOCAL_VERTEX_COPY, TRUE)
 
-    EVT_THREAD
-        EVT_CALL(SetTexPanner, MODEL_o332, TEX_PANNER_0)
-        EVT_CALL(SetTexPanner, MODEL_o334, TEX_PANNER_0)
-        EVT_CALL(SetTexPanner, MODEL_o333, TEX_PANNER_0)
-        EVT_CALL(SetTexPanner, MODEL_o336, TEX_PANNER_0)
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_SET(LVar2, 0)
-        EVT_SET(LVar3, 0)
-        EVT_LOOP(0)
-            EVT_ADD(LVar0, 80)
-            EVT_ADD(LVar1, -150)
-            EVT_IF_GT(LVar0, 0x8000)
-                EVT_ADD(LVar0, -0x8000)
-            EVT_END_IF
-            EVT_IF_LT(LVar1, -0x8000)
-                EVT_ADD(LVar1, 0x8000)
-            EVT_END_IF
-            EVT_ADD(LVar2, -50)
-            EVT_ADD(LVar3, 100)
-            EVT_IF_LT(LVar2, -0x8000)
-                EVT_ADD(LVar2, 0x8000)
-            EVT_END_IF
-            EVT_IF_GT(LVar3, 0x8000)
-                EVT_ADD(LVar3, -0x8000)
-            EVT_END_IF
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, LVar0, LVar1)
-            EVT_CALL(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_AUX, LVar2, LVar3)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LABEL(2)
-        EVT_CALL(MakeLerp, -7, 7, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_o357, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o344, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o361, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o354, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o341, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o362, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(MakeLerp, 7, -7, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_o357, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o344, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o361, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o354, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o341, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o362, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_GOTO(2)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LABEL(3)
-        EVT_CALL(MakeLerp, 7, -7, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(4)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_o363, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o343, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o355, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o338, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(4)
-        EVT_END_IF
-        EVT_CALL(MakeLerp, -7, 7, 30, EASING_COS_IN_OUT)
-        EVT_LABEL(5)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_o363, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o343, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o355, 0, LVar0, 0)
-        EVT_CALL(TranslateModel, MODEL_o338, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(5)
-        EVT_END_IF
-        EVT_GOTO(3)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(SetTexPanner, MODEL_o332, TEX_PANNER_0)
+        Call(SetTexPanner, MODEL_o334, TEX_PANNER_0)
+        Call(SetTexPanner, MODEL_o333, TEX_PANNER_0)
+        Call(SetTexPanner, MODEL_o336, TEX_PANNER_0)
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Set(LVar2, 0)
+        Set(LVar3, 0)
+        Loop(0)
+            Add(LVar0, 80)
+            Add(LVar1, -150)
+            IfGt(LVar0, 0x8000)
+                Add(LVar0, -0x8000)
+            EndIf
+            IfLt(LVar1, -0x8000)
+                Add(LVar1, 0x8000)
+            EndIf
+            Add(LVar2, -50)
+            Add(LVar3, 100)
+            IfLt(LVar2, -0x8000)
+                Add(LVar2, 0x8000)
+            EndIf
+            IfGt(LVar3, 0x8000)
+                Add(LVar3, -0x8000)
+            EndIf
+            Call(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_MAIN, LVar0, LVar1)
+            Call(SetTexPanOffset, TEX_PANNER_0, TEX_PANNER_AUX, LVar2, LVar3)
+            Wait(1)
+        EndLoop
+    EndThread
+    Thread
+        Label(2)
+        Call(MakeLerp, -7, 7, 30, EASING_COS_IN_OUT)
+        Label(0)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_o357, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o344, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o361, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o354, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o341, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o362, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+        Call(MakeLerp, 7, -7, 30, EASING_COS_IN_OUT)
+        Label(1)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_o357, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o344, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o361, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o354, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o341, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o362, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+        Goto(2)
+    EndThread
+    Thread
+        Label(3)
+        Call(MakeLerp, 7, -7, 30, EASING_COS_IN_OUT)
+        Label(4)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_o363, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o343, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o355, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o338, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(4)
+        EndIf
+        Call(MakeLerp, -7, 7, 30, EASING_COS_IN_OUT)
+        Label(5)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_o363, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o343, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o355, 0, LVar0, 0)
+        Call(TranslateModel, MODEL_o338, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(5)
+        EndIf
+        Goto(3)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

@@ -182,43 +182,43 @@ API_CALLABLE(N(func_802412AC_865DEC)) {
 }
 
 EvtScript N(EVS_NpcIdle_Whale) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, mac_06_ENTRY_0)
-        EVT_CALL(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcFlyTo, NPC_Whale, 50, LVar1, 500, 120, 0, EASING_SIN_OUT)
-        EVT_THREAD
-            EVT_CALL(N(func_80241098_865BD8))
-        EVT_END_THREAD
-        EVT_WAIT(150)
-        EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
-        EVT_CALL(NpcFlyTo, NPC_Whale, 500, LVar1, 500, 120, 0, EASING_COS_IN)
-        EVT_IF_EQ(GF_StartedChapter5, FALSE)
-            EVT_SET(GF_StartedChapter5, TRUE)
-            EVT_CALL(FadeOutMusic, 0, 1500)
-            EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_5, TRANSITION_BEGIN_OR_END_CHAPTER)
-        EVT_ELSE
-            EVT_CALL(GotoMap, EVT_PTR("jan_00"), jan_00_ENTRY_0)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
-        EVT_IF_GE(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-            EVT_IF_EQ(GF_MAC01_Defeated_JrTroopa4, FALSE)
-                EVT_CALL(NpcFlyTo, NPC_Whale, -550, LVar1, 500, 240, 0, EASING_LINEAR)
-                EVT_CALL(SetNpcVar, NPC_JrTroopa, 0, 1)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(NpcFlyTo, NPC_Whale, -70, LVar1, 500, 120, 0, EASING_SIN_OUT)
-        EVT_THREAD
-            EVT_CALL(N(func_80241098_865BD8))
-        EVT_END_THREAD
-        EVT_WAIT(150)
-        EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
-        EVT_CALL(NpcFlyTo, NPC_Whale, -500, LVar1, 500, 120, 0, EASING_COS_IN)
-        EVT_CALL(GotoMap, EVT_PTR("mac_05"), mac_05_ENTRY_1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, mac_06_ENTRY_0)
+        Call(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
+        Call(NpcFlyTo, NPC_Whale, 50, LVar1, 500, 120, 0, EASING_SIN_OUT)
+        Thread
+            Call(N(func_80241098_865BD8))
+        EndThread
+        Wait(150)
+        Call(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
+        Call(NpcFlyTo, NPC_Whale, 500, LVar1, 500, 120, 0, EASING_COS_IN)
+        IfEq(GF_StartedChapter5, FALSE)
+            Set(GF_StartedChapter5, TRUE)
+            Call(FadeOutMusic, 0, 1500)
+            Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_5, TRANSITION_BEGIN_OR_END_CHAPTER)
+        Else
+            Call(GotoMap, Ref("jan_00"), jan_00_ENTRY_0)
+        EndIf
+    Else
+        Call(GetNpcPos, NPC_Whale, LVar0, LVar1, LVar2)
+        IfGe(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
+            IfEq(GF_MAC01_Defeated_JrTroopa4, FALSE)
+                Call(NpcFlyTo, NPC_Whale, -550, LVar1, 500, 240, 0, EASING_LINEAR)
+                Call(SetNpcVar, NPC_JrTroopa, 0, 1)
+                Return
+            EndIf
+        EndIf
+        Call(NpcFlyTo, NPC_Whale, -70, LVar1, 500, 120, 0, EASING_SIN_OUT)
+        Thread
+            Call(N(func_80241098_865BD8))
+        EndThread
+        Wait(150)
+        Call(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Idle)
+        Call(NpcFlyTo, NPC_Whale, -500, LVar1, 500, 120, 0, EASING_COS_IN)
+        Call(GotoMap, Ref("mac_05"), mac_05_ENTRY_1)
+    EndIf
+    Return
+    End
 };
 
 API_CALLABLE(N(SeagullYawInterp)) {
@@ -278,68 +278,68 @@ API_CALLABLE(N(MakeJrTroopaBubbles)) {
 }
 
 EvtScript N(EVS_NpcInit_Whale) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, mac_06_ENTRY_0)
-        EVT_CALL(InterpPlayerYaw, 90, 0)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
-        EVT_CALL(InterpNpcYaw, NPC_Kolorado, 90, 0)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-        EVT_CALL(SetNpcPos, NPC_SELF, -300, 0, 500)
-    EVT_ELSE
-        EVT_CALL(InterpPlayerYaw, 270, 0)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 0)
-        EVT_CALL(InterpNpcYaw, NPC_Kolorado, 270, 0)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-        EVT_CALL(SetNpcPos, NPC_SELF, 300, 0, 500)
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Whale)))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_THREAD
-        EVT_CALL(N(func_80240E80_8659C0), 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(func_80240E80_8659C0), 1)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SWITCH(GB_StoryProgress)
-            EVT_CASE_LT(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-                EVT_CALL(N(func_80240E80_8659C0), 2)
-            EVT_CASE_EQ(STORY_CH5_TRADED_VASE_FOR_SEED)
-                EVT_CALL(N(func_80240E80_8659C0), 2)
-        EVT_END_SWITCH
-    EVT_END_THREAD
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        EVT_IF_EQ(GF_MAC01_Defeated_JrTroopa4, FALSE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(func_80241290_865DD0))
-        EVT_CALL(GetEntryID, LVar0)
-        EVT_IF_EQ(LVar0, mac_06_ENTRY_0)
-            EVT_CALL(GotoMap, EVT_PTR("jan_00"), jan_00_ENTRY_0)
-        EVT_ELSE
-            EVT_CALL(GotoMap, EVT_PTR("mac_05"), mac_05_ENTRY_1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, mac_06_ENTRY_0)
+        Call(InterpPlayerYaw, 90, 0)
+        Call(InterpNpcYaw, NPC_PARTNER, 90, 0)
+        Call(InterpNpcYaw, NPC_Kolorado, 90, 0)
+        Call(InterpNpcYaw, NPC_SELF, 90, 0)
+        Call(SetNpcPos, NPC_SELF, -300, 0, 500)
+    Else
+        Call(InterpPlayerYaw, 270, 0)
+        Call(InterpNpcYaw, NPC_PARTNER, 270, 0)
+        Call(InterpNpcYaw, NPC_Kolorado, 270, 0)
+        Call(InterpNpcYaw, NPC_SELF, 270, 0)
+        Call(SetNpcPos, NPC_SELF, 300, 0, 500)
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Whale)))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    Thread
+        Call(N(func_80240E80_8659C0), 0)
+    EndThread
+    Thread
+        Call(N(func_80240E80_8659C0), 1)
+    EndThread
+    Thread
+        Switch(GB_StoryProgress)
+            CaseLt(STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
+                Call(N(func_80240E80_8659C0), 2)
+            CaseEq(STORY_CH5_TRADED_VASE_FOR_SEED)
+                Call(N(func_80240E80_8659C0), 2)
+        EndSwitch
+    EndThread
+    IfLt(GB_StoryProgress, STORY_CH5_REACHED_LAVA_LAVA_ISLAND)
+        Return
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
+        IfEq(GF_MAC01_Defeated_JrTroopa4, FALSE)
+            Return
+        EndIf
+    EndIf
+    Thread
+        Call(N(func_80241290_865DD0))
+        Call(GetEntryID, LVar0)
+        IfEq(LVar0, mac_06_ENTRY_0)
+            Call(GotoMap, Ref("jan_00"), jan_00_ENTRY_0)
+        Else
+            Call(GotoMap, Ref("mac_05"), mac_05_ENTRY_1)
+        EndIf
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Vec3f N(FlightPath)[] = {
@@ -360,153 +360,153 @@ Vec3f N(FlightPath)[] = {
 };
 
 EvtScript N(EVS_FlyingGull) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(CloneModel, MODEL_hontai, CLONED_MODEL_GULL)
-    EVT_SET(LFlag0, TRUE)
-    EVT_SET(LFlag1, FALSE)
-    EVT_SETF(LVar7, 0)
-    EVT_LABEL(10)
-        EVT_CALL(LoadPath, 500, EVT_PTR(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
-        EVT_LABEL(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(TranslateModel, MODEL_hontai, LVar1, LVar2, LVar3)
-            EVT_SETF(LVar8, LVar2)
-            EVT_MULF(LVar8, -1)
-            EVT_CALL(TranslateModel, CLONED_MODEL_GULL, LVar1, LVar8, LVar3)
-            EVT_CALL(N(SeagullYawInterp))
-            EVT_CALL(RotateModel, MODEL_hontai, LVar7, 0, 1, 0)
-            EVT_CALL(RotateModel, CLONED_MODEL_GULL, LVar7, 0, 1, 0)
-            EVT_CALL(RotateModel, CLONED_MODEL_GULL, 180, 0, 0, 1)
-            EVT_SET(LVar4, LVar1)
-            EVT_SET(LVar5, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(CloneModel, MODEL_hontai, CLONED_MODEL_GULL)
+    Set(LFlag0, TRUE)
+    Set(LFlag1, FALSE)
+    SetF(LVar7, 0)
+    Label(10)
+        Call(LoadPath, 500, Ref(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
+        Label(0)
+            Call(GetNextPathPos)
+            Call(TranslateModel, MODEL_hontai, LVar1, LVar2, LVar3)
+            SetF(LVar8, LVar2)
+            MulF(LVar8, -1)
+            Call(TranslateModel, CLONED_MODEL_GULL, LVar1, LVar8, LVar3)
+            Call(N(SeagullYawInterp))
+            Call(RotateModel, MODEL_hontai, LVar7, 0, 1, 0)
+            Call(RotateModel, CLONED_MODEL_GULL, LVar7, 0, 1, 0)
+            Call(RotateModel, CLONED_MODEL_GULL, 180, 0, 0, 1)
+            Set(LVar4, LVar1)
+            Set(LVar5, LVar3)
+            Wait(1)
+            IfEq(LVar0, 1)
+                Goto(0)
+            EndIf
+        Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_UnusedGull) = {
-    EVT_CALL(CloneModel, MODEL_hontai, LVar0)
-    EVT_SET(LVarF, LVar0)
-    EVT_SET(LFlag0, TRUE)
-    EVT_SET(LFlag1, FALSE)
-    EVT_SETF(LVar7, 0)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, 0)
-    EVT_SET(LVarA, 0)
-    EVT_CALL(RandInt, 200, LVar1)
-    EVT_ADD(LVar0, -100)
-    EVT_CALL(RandInt, 50, LVar2)
-    EVT_ADD(LVar0, 50)
-    EVT_CALL(RandInt, 200, LVar3)
-    EVT_ADD(LVar0, -100)
-    EVT_LABEL(10)
-    EVT_LABEL(0)
-    EVT_SET(LVarE, LVarF)
-    EVT_IF_EQ(LVarE, CLONED_MODEL_UNUSED)
-        EVT_SET(LVarE, 22)
-    EVT_ELSE
-        EVT_ADD(LVarE, -1)
-    EVT_END_IF
-    EVT_CALL(N(func_802412AC_865DEC), LVarE, MV_Unk_00, MV_Unk_01, MV_Unk_02)
-    EVT_SETF(LVar0, MV_Unk_00)
-    EVT_SUBF(LVar0, LVar1)
-    EVT_IF_LT(LVar0, 0)
-        EVT_ADDF(LVar8, -1)
-    EVT_ELSE
-        EVT_ADDF(LVar8, 1)
-    EVT_END_IF
-    EVT_IF_LE(LVar8, -10)
-        EVT_SETF(LVar8, -10)
-    EVT_END_IF
-    EVT_IF_GE(LVar8, 10)
-        EVT_SETF(LVar8, 10)
-    EVT_END_IF
-    EVT_ADDF(LVar1, LVar8)
-    EVT_SETF(LVar0, MV_Unk_01)
-    EVT_SUBF(LVar0, LVar2)
-    EVT_IF_LT(LVar0, 0)
-        EVT_ADDF(LVar9, -1)
-    EVT_ELSE
-        EVT_ADDF(LVar9, 1)
-    EVT_END_IF
-    EVT_IF_LE(LVar9, -10)
-        EVT_SETF(LVar9, -10)
-    EVT_END_IF
-    EVT_IF_GE(LVar9, 10)
-        EVT_SETF(LVar9, 10)
-    EVT_END_IF
-    EVT_ADDF(LVar2, LVar9)
-    EVT_SETF(LVar0, MV_Unk_02)
-    EVT_SUBF(LVar0, LVar3)
-    EVT_IF_LT(LVar0, 0)
-        EVT_ADDF(LVarA, -1)
-    EVT_ELSE
-        EVT_ADDF(LVarA, 1)
-    EVT_END_IF
-    EVT_IF_LE(LVarA, -10)
-        EVT_SETF(LVarA, -10)
-    EVT_END_IF
-    EVT_IF_GE(LVarA, 10)
-        EVT_SETF(LVarA, 10)
-    EVT_END_IF
-    EVT_ADDF(LVar3, LVarA)
-    EVT_CALL(TranslateModel, LVarF, LVar1, LVar2, LVar3)
-    EVT_CALL(N(SeagullYawInterp))
-    EVT_CALL(RotateModel, LVarF, LVar7, 0, 1, 0)
-    EVT_SET(LVar4, LVar1)
-    EVT_SET(LVar5, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_GOTO(10)
-    EVT_RETURN
-    EVT_END
+    Call(CloneModel, MODEL_hontai, LVar0)
+    Set(LVarF, LVar0)
+    Set(LFlag0, TRUE)
+    Set(LFlag1, FALSE)
+    SetF(LVar7, 0)
+    Set(LVar8, 0)
+    Set(LVar9, 0)
+    Set(LVarA, 0)
+    Call(RandInt, 200, LVar1)
+    Add(LVar0, -100)
+    Call(RandInt, 50, LVar2)
+    Add(LVar0, 50)
+    Call(RandInt, 200, LVar3)
+    Add(LVar0, -100)
+    Label(10)
+    Label(0)
+    Set(LVarE, LVarF)
+    IfEq(LVarE, CLONED_MODEL_UNUSED)
+        Set(LVarE, 22)
+    Else
+        Add(LVarE, -1)
+    EndIf
+    Call(N(func_802412AC_865DEC), LVarE, MV_Unk_00, MV_Unk_01, MV_Unk_02)
+    SetF(LVar0, MV_Unk_00)
+    SubF(LVar0, LVar1)
+    IfLt(LVar0, 0)
+        AddF(LVar8, -1)
+    Else
+        AddF(LVar8, 1)
+    EndIf
+    IfLe(LVar8, -10)
+        SetF(LVar8, -10)
+    EndIf
+    IfGe(LVar8, 10)
+        SetF(LVar8, 10)
+    EndIf
+    AddF(LVar1, LVar8)
+    SetF(LVar0, MV_Unk_01)
+    SubF(LVar0, LVar2)
+    IfLt(LVar0, 0)
+        AddF(LVar9, -1)
+    Else
+        AddF(LVar9, 1)
+    EndIf
+    IfLe(LVar9, -10)
+        SetF(LVar9, -10)
+    EndIf
+    IfGe(LVar9, 10)
+        SetF(LVar9, 10)
+    EndIf
+    AddF(LVar2, LVar9)
+    SetF(LVar0, MV_Unk_02)
+    SubF(LVar0, LVar3)
+    IfLt(LVar0, 0)
+        AddF(LVarA, -1)
+    Else
+        AddF(LVarA, 1)
+    EndIf
+    IfLe(LVarA, -10)
+        SetF(LVarA, -10)
+    EndIf
+    IfGe(LVarA, 10)
+        SetF(LVarA, 10)
+    EndIf
+    AddF(LVar3, LVarA)
+    Call(TranslateModel, LVarF, LVar1, LVar2, LVar3)
+    Call(N(SeagullYawInterp))
+    Call(RotateModel, LVarF, LVar7, 0, 1, 0)
+    Set(LVar4, LVar1)
+    Set(LVar5, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(0)
+    EndIf
+    Goto(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_JrTroopa) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(60)
-    EVT_CALL(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 0, 8)
-    EVT_CALL(PlaySound, SOUND_LOOP_JR_TROOPA_SWIM)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeTripped)
-    EVT_CALL(SetNpcPos, NPC_SELF, 250, -30, 500)
-    EVT_WAIT(5)
-    EVT_CHILD_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(N(MakeJrTroopaBubbles))
-            EVT_WAIT(5)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(2.0))
-    EVT_CALL(NpcMoveTo, NPC_SELF, -300, 500, 0)
-    EVT_CALL(GotoMap, EVT_PTR("mac_05"), mac_05_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Wait(60)
+    Call(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 0, 8)
+    Call(PlaySound, SOUND_LOOP_JR_TROOPA_SWIM)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeTripped)
+    Call(SetNpcPos, NPC_SELF, 250, -30, 500)
+    Wait(5)
+    ChildThread
+        Loop(0)
+            Call(N(MakeJrTroopaBubbles))
+            Wait(5)
+        EndLoop
+    EndChildThread
+    Call(SetNpcSpeed, NPC_SELF, Float(2.0))
+    Call(NpcMoveTo, NPC_SELF, -300, 500, 0)
+    Call(GotoMap, Ref("mac_05"), mac_05_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
-        EVT_IF_EQ(GF_MAC01_Defeated_JrTroopa4, FALSE)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JrTroopa)))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH5_SUSHIE_JOINED_PARTY)
+        IfEq(GF_MAC01_Defeated_JrTroopa4, FALSE)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
+            Return
+        EndIf
+    EndIf
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 NpcData N(NpcData_Whale) = {

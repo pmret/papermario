@@ -7,9 +7,9 @@
 #include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
 EvtScript N(EVS_NpcInit_EnableReflection) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_REFLECT_FLOOR, TRUE)
+    Return
+    End
 };
 
 NpcData N(NpcData_Clubba)[] = {

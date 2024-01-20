@@ -6,17 +6,17 @@ API_CALLABLE(N(GetLastEntryID)) {
 }
 
 EvtScript N(EVS_DoNothing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupUnused) = {
-    EVT_CALL(N(GetLastEntryID))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(hos_04_ENTRY_0)
-            EVT_SET(LVar0, -1)
-            EVT_EXEC(N(EVS_DoNothing))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(N(GetLastEntryID))
+    Switch(LVar0)
+        CaseEq(hos_04_ENTRY_0)
+            Set(LVar0, -1)
+            Exec(N(EVS_DoNothing))
+    EndSwitch
+    Return
+    End
 };

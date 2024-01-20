@@ -29,40 +29,40 @@ EvtScript N(EVS_ExitWalk_sbk_14_3) = EVT_EXIT_WALK(60, sbk_24_ENTRY_2, "sbk_14",
 EvtScript N(EVS_ExitWalk_sbk_34_2) = EVT_EXIT_WALK(60, sbk_24_ENTRY_3, "sbk_34", sbk_34_ENTRY_2);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_23_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_25_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_14_3)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_sbk_34_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilis, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_23_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_25_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_14_3)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_sbk_34_2)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilis, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(D_80240600_93B230) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(sbk_24_ENTRY_4)
-            EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(sbk_24_ENTRY_4)
+            Exec(N(EVS_BindExitTriggers))
+        CaseDefault
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-        EVT_CALL(DisablePulseStone, FALSE)
-    EVT_END_IF
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_CALL(N(SpawnSunEffect))
-    EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
-    EVT_EXEC(N(D_80240600_93B230))
-    EVT_WAIT(1)
-    EVT_EXEC(N(EVS_SetupFoliage))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_DRY_DRY_DESERT)
+    Call(SetSpriteShading, SHADING_NONE)
+    IfEq(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
+        Call(DisablePulseStone, FALSE)
+    EndIf
+    SetUP_CAMERA_NO_LEAD()
+    ExecWait(N(EVS_MakeEntities))
+    Call(N(SpawnSunEffect))
+    Call(SetMusicTrack, 0, SONG_DRY_DRY_DESERT, 0, 8)
+    Exec(N(D_80240600_93B230))
+    Wait(1)
+    Exec(N(EVS_SetupFoliage))
+    Return
+    End
 };

@@ -8,31 +8,31 @@
 #define NAME_SUFFIX
 
 EvtScript N(EVS_Scene_WishingToadKid) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -100, 0, 200)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -100, 0, 200)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(-400.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(6.0), EVT_FLOAT(-8.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_WishingToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Disappointed, 0, MSG_HOS_0070)
-    EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_PTR("hos_20"), hos_20_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(UseSettingsFrom, CAM_DEFAULT, -100, 0, 200)
+    Call(SetPanTarget, CAM_DEFAULT, -100, 0, 200)
+    Call(SetCamDistance, CAM_DEFAULT, Float(-400.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(6.0), Float(-8.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20)
+    Call(SpeakToPlayer, NPC_WishingToadKid, ANIM_ToadKid_Red_Talk, ANIM_ToadKid_Red_Disappointed, 0, MSG_HOS_0070)
+    Wait(10)
+    Call(GotoMap, Ref("hos_20"), hos_20_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_WishingToadKid) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -100, 0, 200)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -100, 0, 200)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 NpcData N(NpcData_WishSceneToads)[] = {

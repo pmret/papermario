@@ -43,50 +43,50 @@ API_CALLABLE(N(func_802406E0_AACF10)) {
 }
 
 EvtScript N(EVS_Scene_ShowInvitation) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 775)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 20, -19)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
-    EVT_CALL(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
-    EVT_CALL(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
-    EVT_CALL(N(func_802406E0_AACF10))
-    EVT_WAIT(15 * DT)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Intro_0022, 160, 40)
-    EVT_WAIT(12 * DT)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Intro_0023, 160, 40)
-    EVT_WAIT(3)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_1, TRANSITION_SLOW_FADE_TO_WHITE)
-    EVT_WAIT(40 * DT)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamDistance, CAM_DEFAULT, 775)
+    Call(SetCamPitch, CAM_DEFAULT, 20, -19)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(N(SetModelTintMode), APPLY_TINT_BG, NULL, ENV_TINT_REMAP)
+    Call(N(SetModelTintMode), APPLY_TINT_GROUPS, -1, ENV_TINT_REMAP)
+    Call(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
+    Call(N(func_802406E0_AACF10))
+    Wait(15 * DT)
+    Call(ShowMessageAtScreenPos, MSG_Intro_0022, 160, 40)
+    Wait(12 * DT)
+    Call(ShowMessageAtScreenPos, MSG_Intro_0023, 160, 40)
+    Wait(3)
+    Call(GotoMapSpecial, Ref("kmr_20"), kmr_20_ENTRY_1, TRANSITION_SLOW_FADE_TO_WHITE)
+    Wait(40 * DT)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_ApproachParty) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(675.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(3.5), EVT_FLOAT(-6.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(60.0), 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_THREAD
-        EVT_CALL(PlayerMoveTo, 0, -250, 150 * DT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_RunBack)
-        EVT_CALL(SetNpcPos, NPC_Luigi, 0, 0, 350)
-        EVT_CALL(NpcMoveTo, NPC_Luigi, 0, -200, 150 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_IdleBack)
-    EVT_END_THREAD
-    EVT_WAIT(100 * DT)
-    EVT_CALL(GotoMap, EVT_PTR("kkj_00"), kkj_00_ENTRY_5)
-    EVT_WAIT(100 * DT)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, 0, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamDistance, CAM_DEFAULT, Float(675.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(3.5), Float(-6.0))
+    Call(SetCamPosA, CAM_DEFAULT, Float(60.0), 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Thread
+        Call(PlayerMoveTo, 0, -250, 150 * DT)
+    EndThread
+    Thread
+        Call(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_RunBack)
+        Call(SetNpcPos, NPC_Luigi, 0, 0, 350)
+        Call(NpcMoveTo, NPC_Luigi, 0, -200, 150 * DT)
+        Call(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_IdleBack)
+    EndThread
+    Wait(100 * DT)
+    Call(GotoMap, Ref("kkj_00"), kkj_00_ENTRY_5)
+    Wait(100 * DT)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

@@ -6,20 +6,20 @@
 // (in) LVar2 : main du
 // (in) LVar3 : main dv
 EvtScript N(EVS_TexturePanMain) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, LVar0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar1)
+    Set(LVarB, LVar2)
+    Set(LVarC, LVar3)
+    Call(SetTexPanner, LVar0, LVar1)
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Loop(0)
+        Call(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, LVar0, LVar1)
+        Add(LVar0, LVarB)
+        Add(LVar1, LVarC)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 // pan the main and aux tiles along U
@@ -28,21 +28,21 @@ EvtScript N(EVS_TexturePanMain) = {
 // (in) LVar2 : main du
 // (in) LVar3 : aux du
 EvtScript N(EVS_TexturePanBothU) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_AUX,  LVar1, 0)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar1)
+    Set(LVarB, LVar2)
+    Set(LVarC, LVar3)
+    Call(SetTexPanner, LVar0, LVar1)
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Loop(0)
+        Call(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, LVar0, 0)
+        Call(SetTexPanOffset, LVarA, TEX_PANNER_AUX,  LVar1, 0)
+        Add(LVar0, LVarB)
+        Add(LVar1, LVarC)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 // pan the main and aux tiles along V
@@ -51,19 +51,19 @@ EvtScript N(EVS_TexturePanBothU) = {
 // (in) LVar2 : main dv
 // (in) LVar3 : aux dv
 EvtScript N(EVS_TexturePanBothV) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, 0, LVar0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_AUX,  0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar1)
+    Set(LVarB, LVar2)
+    Set(LVarC, LVar3)
+    Call(SetTexPanner, LVar0, LVar1)
+    Set(LVar0, 0)
+    Set(LVar1, 0)
+    Loop(0)
+        Call(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, 0, LVar0)
+        Call(SetTexPanOffset, LVarA, TEX_PANNER_AUX,  0, LVar1)
+        Add(LVar0, LVarB)
+        Add(LVar1, LVarC)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };

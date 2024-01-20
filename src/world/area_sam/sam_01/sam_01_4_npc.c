@@ -19,611 +19,611 @@ s32 N(MayorLetterList)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Mayor) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_MayorPenguin, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle,
         ITEM_LETTER_TO_MAYOR_PENGUIN, ITEM_NONE,
         MSG_CH7_0041, MSG_CH7_0042, MSG_CH7_0043, MSG_CH7_0044,
-        EVT_PTR(N(MayorLetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(MayorLetterList)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_Mayor) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Mayor_CarryBucket) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, -5)
-        EVT_ADD(LVar1, 15)
-        EVT_CALL(GetNpcYaw, NPC_MayorPenguin, LVar3)
-        EVT_IF_GE(LVar3, 90)
-            EVT_IF_LE(LVar3, 270)
-                EVT_ADD(LVar2, 10)
-            EVT_ELSE
-                EVT_ADD(LVar2, -10)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_ADD(LVar2, -10)
-        EVT_END_IF
-        EVT_CALL(SetItemPos, MV_BucketItemID, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
+        Add(LVar0, -5)
+        Add(LVar1, 15)
+        Call(GetNpcYaw, NPC_MayorPenguin, LVar3)
+        IfGe(LVar3, 90)
+            IfLe(LVar3, 270)
+                Add(LVar2, 10)
+            Else
+                Add(LVar2, -10)
+            EndIf
+        Else
+            Add(LVar2, -10)
+        EndIf
+        Call(SetItemPos, MV_BucketItemID, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Mayor_HandOverBucket) = {
-    EVT_CALL(GetNpcYaw, NPC_MayorPenguin, LVar3)
-    EVT_IF_GE(LVar3, 90)
-        EVT_IF_LE(LVar3, 270)
-            EVT_ADD(LVar2, 10)
-            EVT_SET(LVar4, 10)
-        EVT_ELSE
-            EVT_ADD(LVar2, -10)
-            EVT_SET(LVar4, -10)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_SUB(LVar2, 10)
-        EVT_SET(LVar4, 10)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, -5)
-            EVT_ADD(LVar1, 15)
-            EVT_ADD(LVar2, LVar4)
-            EVT_CALL(SetItemPos, MV_BucketItemID, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetItemPos, MV_BucketItemID, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_MayorPenguin, LVar0, LVar2, 10 * DT)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcYaw, NPC_MayorPenguin, LVar3)
+    IfGe(LVar3, 90)
+        IfLe(LVar3, 270)
+            Add(LVar2, 10)
+            Set(LVar4, 10)
+        Else
+            Add(LVar2, -10)
+            Set(LVar4, -10)
+        EndIf
+    Else
+        Sub(LVar2, 10)
+        Set(LVar4, 10)
+    EndIf
+    Thread
+        Loop(10)
+            Call(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
+            Add(LVar0, -5)
+            Add(LVar1, 15)
+            Add(LVar2, LVar4)
+            Call(SetItemPos, MV_BucketItemID, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+        Call(SetItemPos, MV_BucketItemID, NPC_DISPOSE_LOCATION)
+    EndThread
+    Call(NpcMoveTo, NPC_MayorPenguin, LVar0, LVar2, 10 * DT)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_MayorPenguin) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_CALL(FadeOutMusic, 0, 500)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH7_0002, 160, 40)
-            EVT_EXEC_WAIT(N(EVS_Scene_MysteryBegins))
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH7_0002, 160, 40)
-        EVT_CASE_LT(STORY_CH7_GOT_SNOWMAN_SCARF)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_0039)
-        EVT_CASE_LT(STORY_CH7_GOT_SNOWMAN_BUCKET)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-            EVT_IF_GE(LVar2, LVar5)
-                EVT_SET(MV_PlayerLeftOfMayor, 0)
-            EVT_ELSE
-                EVT_SET(MV_PlayerLeftOfMayor, 1)
-            EVT_END_IF
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003A)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Walk)
-            EVT_CALL(NpcMoveTo, NPC_SELF, -338, -247, 20)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_OPEN, 0)
-            EVT_CALL(MakeLerp, 0, 70, 30, EASING_LINEAR)
-            EVT_LABEL(10)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(RotateModel, MODEL_o411, LVar0, 0, -1, 0)
-                EVT_CALL(RotateModel, MODEL_o412, LVar0, 0, 1, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(10)
-                EVT_END_IF
-            EVT_WAIT(20 * DT)
-            EVT_CALL(MakeLerp, 70, 0, 30, EASING_LINEAR)
-            EVT_LABEL(20)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(RotateModel, MODEL_o411, LVar0, 0, -1, 0)
-                EVT_CALL(RotateModel, MODEL_o412, LVar0, 0, 1, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(20)
-                EVT_END_IF
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_CLOSE, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Carry)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 180, 0)
-            EVT_EXEC_GET_TID(N(EVS_Mayor_CarryBucket), LVarA)
-            EVT_WAIT(10 * DT)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_IF_EQ(MV_PlayerLeftOfMayor, 0)
-                EVT_ADD(LVar2, -40)
-            EVT_ELSE
-                EVT_ADD(LVar2, 40)
-            EVT_END_IF
-            EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 20)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003B)
-            EVT_KILL_THREAD(LVarA)
-            EVT_EXEC_WAIT(N(EVS_Mayor_HandOverBucket))
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Idle)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Call(FadeOutMusic, 0, 500)
+            Call(ShowMessageAtScreenPos, MSG_CH7_0002, 160, 40)
+            ExecWait(N(EVS_Scene_MysteryBegins))
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(ShowMessageAtScreenPos, MSG_CH7_0002, 160, 40)
+        CaseLt(STORY_CH7_GOT_SNOWMAN_SCARF)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_0039)
+        CaseLt(STORY_CH7_GOT_SNOWMAN_BUCKET)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+            IfGe(LVar2, LVar5)
+                Set(MV_PlayerLeftOfMayor, 0)
+            Else
+                Set(MV_PlayerLeftOfMayor, 1)
+            EndIf
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003A)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Walk)
+            Call(NpcMoveTo, NPC_SELF, -338, -247, 20)
+            Call(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_OPEN, 0)
+            Call(MakeLerp, 0, 70, 30, EASING_LINEAR)
+            Label(10)
+                Call(UpdateLerp)
+                Call(RotateModel, MODEL_o411, LVar0, 0, -1, 0)
+                Call(RotateModel, MODEL_o412, LVar0, 0, 1, 0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(10)
+                EndIf
+            Wait(20 * DT)
+            Call(MakeLerp, 70, 0, 30, EASING_LINEAR)
+            Label(20)
+                Call(UpdateLerp)
+                Call(RotateModel, MODEL_o411, LVar0, 0, -1, 0)
+                Call(RotateModel, MODEL_o412, LVar0, 0, 1, 0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(20)
+                EndIf
+            Call(PlaySoundAtCollider, COLLIDER_yana, SOUND_WOODEN_DOOR_CLOSE, 0)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Carry)
+            Call(InterpNpcYaw, NPC_SELF, 180, 0)
+            ExecGetTID(N(EVS_Mayor_CarryBucket), LVarA)
+            Wait(10 * DT)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            IfEq(MV_PlayerLeftOfMayor, 0)
+                Add(LVar2, -40)
+            Else
+                Add(LVar2, 40)
+            EndIf
+            Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 20)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003B)
+            KillThread(LVarA)
+            ExecWait(N(EVS_Mayor_HandOverBucket))
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Idle)
             EVT_GIVE_KEY_REWARD(ITEM_SNOWMAN_BUCKET)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003C)
-            EVT_CALL(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-            EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-8.5))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003D)
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_SET(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_BUCKET)
-        EVT_CASE_LT(STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003E)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003F)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_0040)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Mayor))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Mayor))
-    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003C)
+            Call(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)
+            Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+            Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.5))
+            Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003D)
+            Call(ResetCam, CAM_DEFAULT, Float(3.0 / DT))
+            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Set(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_BUCKET)
+        CaseLt(STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003E)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003F)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_0040)
+    EndSwitch
+    ExecWait(N(EVS_LetterPrompt_Mayor))
+    ExecWait(N(EVS_LetterReward_Mayor))
+    IfNe(LVarC, DELIVERY_NOT_POSSIBLE)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_MayorPenguinWife) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_IF_EQ(GF_SAM01_Met_MayorsWife, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Talk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0000)
-                EVT_SET(GF_SAM01_Met_MayorsWife, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Talk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0001)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_PointTalk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_001C)
-        EVT_CASE_LT(STORY_CH7_GOT_SNOWMAN_SCARF)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0035)
-        EVT_CASE_LT(STORY_CH7_GOT_SNOWMAN_BUCKET)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0036)
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0037)
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0038)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            IfEq(GF_SAM01_Met_MayorsWife, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Talk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0000)
+                Set(GF_SAM01_Met_MayorsWife, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Talk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0001)
+            EndIf
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_PointTalk, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_001C)
+        CaseLt(STORY_CH7_GOT_SNOWMAN_SCARF)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0035)
+        CaseLt(STORY_CH7_GOT_SNOWMAN_BUCKET)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0036)
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0037)
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguinWife_Laugh, ANIM_MayorPenguinWife_Idle, 0, MSG_CH7_0038)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_PenguinPatrol) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_001B)
-        EVT_CASE_GE(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_001D)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_001B)
+        CaseGe(STORY_CH7_SPOKE_WITH_HERRINGWAY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_PenguinPatrol_Talk, ANIM_PenguinPatrol_Idle, 0, MSG_CH7_001D)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_PenguinPatrol) = {
-    EVT_LABEL(0)
-        EVT_SWITCH(GB_StoryProgress)
-            EVT_CASE_EQ(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
-                EVT_IF_EQ(AF_SAM_03, TRUE)
-                    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                    EVT_IF_LT(LVar2, -130)
-                        EVT_EXEC_WAIT(N(EVS_Scene_MysterySolved))
-                    EVT_END_IF
-                EVT_END_IF
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Switch(GB_StoryProgress)
+            CaseEq(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
+                IfEq(AF_SAM_03, TRUE)
+                    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                    IfLt(LVar2, -130)
+                        ExecWait(N(EVS_Scene_MysterySolved))
+                    EndIf
+                EndIf
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Herringway) = {
-    EVT_IF_EQ(AF_SAM_04, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D3)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D4)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_SAM_04, FALSE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D3)
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D4)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0045)
-                    EVT_SET(MV_DialogueState_Penguin1, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0046)
-                    EVT_SET(MV_DialogueState_Penguin1, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_SWITCH(MV_DialogueState_Penguin1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0047)
-                    EVT_SET(MV_DialogueState_Penguin1, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0048)
-                    EVT_SET(MV_DialogueState_Penguin1, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0049)
-                    EVT_SET(MV_DialogueState_Penguin1, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004A)
-                    EVT_SET(MV_DialogueState_Penguin1, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004B)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin1)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0045)
+                    Set(MV_DialogueState_Penguin1, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0046)
+                    Set(MV_DialogueState_Penguin1, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Switch(MV_DialogueState_Penguin1)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0047)
+                    Set(MV_DialogueState_Penguin1, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0048)
+                    Set(MV_DialogueState_Penguin1, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin1)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0049)
+                    Set(MV_DialogueState_Penguin1, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004A)
+                    Set(MV_DialogueState_Penguin1, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004B)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin2)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004C)
-                    EVT_SET(MV_DialogueState_Penguin2, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004D)
-                    EVT_SET(MV_DialogueState_Penguin2, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_SWITCH(MV_DialogueState_Penguin2)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004E)
-                    EVT_SET(MV_DialogueState_Penguin2, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004F)
-                    EVT_SET(MV_DialogueState_Penguin2, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin2)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0050)
-                    EVT_SET(MV_DialogueState_Penguin2, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0051)
-                    EVT_SET(MV_DialogueState_Penguin2, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0052)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin2)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004C)
+                    Set(MV_DialogueState_Penguin2, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004D)
+                    Set(MV_DialogueState_Penguin2, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Switch(MV_DialogueState_Penguin2)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004E)
+                    Set(MV_DialogueState_Penguin2, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_004F)
+                    Set(MV_DialogueState_Penguin2, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin2)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0050)
+                    Set(MV_DialogueState_Penguin2, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0051)
+                    Set(MV_DialogueState_Penguin2, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0052)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_03) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin3)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0053)
-                    EVT_SET(MV_DialogueState_Penguin3, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0054)
-                    EVT_SET(MV_DialogueState_Penguin3, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_SWITCH(MV_DialogueState_Penguin3)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0055)
-                    EVT_SET(MV_DialogueState_Penguin3, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0056)
-                    EVT_SET(MV_DialogueState_Penguin3, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin3)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0057)
-                    EVT_SET(MV_DialogueState_Penguin3, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0058)
-                    EVT_SET(MV_DialogueState_Penguin3, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0059)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin3)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0053)
+                    Set(MV_DialogueState_Penguin3, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0054)
+                    Set(MV_DialogueState_Penguin3, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Switch(MV_DialogueState_Penguin3)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0055)
+                    Set(MV_DialogueState_Penguin3, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0056)
+                    Set(MV_DialogueState_Penguin3, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin3)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0057)
+                    Set(MV_DialogueState_Penguin3, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0058)
+                    Set(MV_DialogueState_Penguin3, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0059)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_SWITCH(MV_DialogueState_Penguin4)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005A)
-                    EVT_SET(MV_DialogueState_Penguin4, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005B)
-                    EVT_SET(MV_DialogueState_Penguin4, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_SWITCH(MV_DialogueState_Penguin4)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005C)
-                    EVT_SET(MV_DialogueState_Penguin4, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005D)
-                    EVT_SET(MV_DialogueState_Penguin4, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_SWITCH(MV_DialogueState_Penguin4)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005E)
-                    EVT_SET(MV_DialogueState_Penguin4, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005F)
-                    EVT_SET(MV_DialogueState_Penguin4, 0)
-            EVT_END_SWITCH
-        EVT_CASE_GE(STORY_CH7_STAR_SPIRIT_RESCUED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0060)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Switch(MV_DialogueState_Penguin4)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005A)
+                    Set(MV_DialogueState_Penguin4, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005B)
+                    Set(MV_DialogueState_Penguin4, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Switch(MV_DialogueState_Penguin4)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005C)
+                    Set(MV_DialogueState_Penguin4, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005D)
+                    Set(MV_DialogueState_Penguin4, 0)
+            EndSwitch
+        CaseLt(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Switch(MV_DialogueState_Penguin4)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005E)
+                    Set(MV_DialogueState_Penguin4, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_005F)
+                    Set(MV_DialogueState_Penguin4, 0)
+            EndSwitch
+        CaseGe(STORY_CH7_STAR_SPIRIT_RESCUED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 0, MSG_CH7_0060)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_PenguinCrowd_Leave) = {
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_06, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_07, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Penguin_08, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(BindNpcInteract, NPC_Penguin_05, 0)
-    EVT_CALL(BindNpcInteract, NPC_Penguin_06, 0)
-    EVT_CALL(BindNpcInteract, NPC_Penguin_07, 0)
-    EVT_CALL(BindNpcInteract, NPC_Penguin_08, 0)
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_Penguin_05, EVT_FLOAT(3.0))
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_05, ANIM_Penguin_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Penguin_05, 600, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_05, ANIM_Penguin_Idle)
-        EVT_CALL(SetNpcPos, NPC_Penguin_05, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_Penguin_06, EVT_FLOAT(3.0))
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_06, ANIM_Penguin_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Penguin_06, 600, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_06, ANIM_Penguin_Idle)
-        EVT_CALL(SetNpcPos, NPC_Penguin_06, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_Penguin_07, EVT_FLOAT(3.0))
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_07, ANIM_Penguin_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Penguin_07, 600, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_07, ANIM_Penguin_Idle)
-        EVT_CALL(SetNpcPos, NPC_Penguin_07, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_Penguin_08, EVT_FLOAT(3.0))
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_08, ANIM_Penguin_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Penguin_08, 600, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Penguin_08, ANIM_Penguin_Idle)
-        EVT_CALL(SetNpcPos, NPC_Penguin_08, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_Penguin_05, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Penguin_06, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Penguin_07, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Penguin_08, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(BindNpcInteract, NPC_Penguin_05, 0)
+    Call(BindNpcInteract, NPC_Penguin_06, 0)
+    Call(BindNpcInteract, NPC_Penguin_07, 0)
+    Call(BindNpcInteract, NPC_Penguin_08, 0)
+    Thread
+        Call(SetNpcSpeed, NPC_Penguin_05, Float(3.0))
+        Call(SetNpcAnimation, NPC_Penguin_05, ANIM_Penguin_Walk)
+        Call(NpcMoveTo, NPC_Penguin_05, 600, 0, 0)
+        Call(SetNpcAnimation, NPC_Penguin_05, ANIM_Penguin_Idle)
+        Call(SetNpcPos, NPC_Penguin_05, NPC_DISPOSE_LOCATION)
+    EndThread
+    Wait(10)
+    Thread
+        Call(SetNpcSpeed, NPC_Penguin_06, Float(3.0))
+        Call(SetNpcAnimation, NPC_Penguin_06, ANIM_Penguin_Walk)
+        Call(NpcMoveTo, NPC_Penguin_06, 600, 0, 0)
+        Call(SetNpcAnimation, NPC_Penguin_06, ANIM_Penguin_Idle)
+        Call(SetNpcPos, NPC_Penguin_06, NPC_DISPOSE_LOCATION)
+    EndThread
+    Wait(10)
+    Thread
+        Call(SetNpcSpeed, NPC_Penguin_07, Float(3.0))
+        Call(SetNpcAnimation, NPC_Penguin_07, ANIM_Penguin_Walk)
+        Call(NpcMoveTo, NPC_Penguin_07, 600, 0, 0)
+        Call(SetNpcAnimation, NPC_Penguin_07, ANIM_Penguin_Idle)
+        Call(SetNpcPos, NPC_Penguin_07, NPC_DISPOSE_LOCATION)
+    EndThread
+    Wait(10)
+    Thread
+        Call(SetNpcSpeed, NPC_Penguin_08, Float(3.0))
+        Call(SetNpcAnimation, NPC_Penguin_08, ANIM_Penguin_Walk)
+        Call(NpcMoveTo, NPC_Penguin_08, 600, 0, 0)
+        Call(SetNpcAnimation, NPC_Penguin_08, ANIM_Penguin_Idle)
+        Call(SetNpcPos, NPC_Penguin_08, NPC_DISPOSE_LOCATION)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_PenguinCrowd) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_05, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0061)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_06, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0062)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_07, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0063)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_08, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0064)
-        EVT_CASE_EQ(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_05, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0065)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_06, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0066)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_07, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0067)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Penguin_08, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0068)
-            EVT_EXEC(N(EVS_PenguinCrowd_Leave))
-            EVT_WAIT(1)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SpeakToPlayer, NPC_Penguin_05, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0061)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Penguin_06, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0062)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Penguin_07, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0063)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Penguin_08, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0064)
+        CaseEq(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SpeakToPlayer, NPC_Penguin_05, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0065)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Penguin_06, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0066)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Penguin_07, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0067)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Penguin_08, ANIM_Penguin_Talk, ANIM_Penguin_Idle, 5, MSG_CH7_0068)
+            Exec(N(EVS_PenguinCrowd_Leave))
+            Wait(1)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_06) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_PenguinCrowd))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_PenguinCrowd))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_07) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_PenguinCrowd))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_PenguinCrowd))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Penguin_08) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_PenguinCrowd))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_PenguinCrowd))
+    Return
+    End
 };
 
 EvtScript N(EVS_Inspect_Present) = {
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH7_0004, 160, 40)
-    EVT_RETURN
-    EVT_END
+    Call(ShowMessageAtScreenPos, MSG_CH7_0004, 160, 40)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MayorPenguin) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MayorPenguin)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -270, 0, -205)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 180, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Dead)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -300, 0, -160)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_MayorPenguin)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -270, 0, -205)
+            Call(InterpNpcYaw, NPC_SELF, 180, 0)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Dead)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -300, 0, -160)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MayorDummy) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 183, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(InterpNpcYaw, NPC_SELF, 183, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MayorPenguinWife) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MayorPenguinWife)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_CALL(SetNpcPos, NPC_SELF, -310, 0, 94)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -297, 0, -69)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -297, 0, -69)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_MayorPenguinWife)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Call(SetNpcPos, NPC_SELF, -310, 0, 94)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -297, 0, -69)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -297, 0, -69)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_PenguinPatrol) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_PenguinPatrol)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_PenguinPatrol)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -255, 0, -178)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_PenguinPatrol)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_PenguinPatrol)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -255, 0, -178)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Herringway) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_SPOKE_WITH_HERRINGWAY)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_LT(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(BindNpcInteract, NPC_Herringway, EVT_PTR(N(EVS_NpcInteract_Herringway)))
-            EVT_CALL(SetNpcPos, NPC_SELF, -228, 0, 91)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_SPOKE_WITH_HERRINGWAY)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseLt(STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(InterpNpcYaw, NPC_SELF, 270, 0)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(BindNpcInteract, NPC_Herringway, Ref(N(EVS_NpcInteract_Herringway)))
+            Call(SetNpcPos, NPC_SELF, -228, 0, 91)
+            Call(InterpNpcYaw, NPC_SELF, 270, 0)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INACTIVE, TRUE)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_03)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_04)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_PenguinCrowd)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -150, 0, 0)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_PenguinCrowd)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -150, 0, 0)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_06)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -90, 0, 0)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_06)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -90, 0, 0)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_07) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_07)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -120, 0, -30)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_07)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -120, 0, -30)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_08) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Penguin_08)))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_MYSTERY)
-        EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
-            EVT_CALL(SetNpcPos, NPC_SELF, -120, 0, 30)
-        EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Penguin_08)))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH7_MAYOR_MURDER_MYSTERY)
+        CaseLt(STORY_CH7_MAYOR_MURDER_SOLVED)
+            Call(SetNpcPos, NPC_SELF, -120, 0, 30)
+        CaseGe(STORY_CH7_MAYOR_MURDER_SOLVED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Penguin_09) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
-        EVT_CALL(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
-        EVT_CALL(EnableNpcShadow, NPC_Penguin_09, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Penguin_09, -325, 0, -240)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH7_MAYOR_MURDER_SOLVED)
+        Call(SetNpcFlagBits, NPC_Penguin_09, NPC_FLAG_INVISIBLE | NPC_FLAG_10000000, TRUE)
+        Call(EnableNpcShadow, NPC_Penguin_09, FALSE)
+        Call(SetNpcPos, NPC_Penguin_09, -325, 0, -240)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_MayorPenguin)[] = {

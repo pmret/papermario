@@ -4,20 +4,20 @@
 #include "world/common/todo/GetEncounterEnemyIsOwner.inc.c"
 
 EvtScript N(EVS_NpcDefeat_ThrownBone) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetSelfVar, 0, 5)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetSelfVar, 0, 5)
+            Call(RemoveNpc, NPC_SELF)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(OnPlayerFled, 1)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_DryBones) = {
@@ -34,13 +34,13 @@ MobileAISettings N(AISettings_DryBones) = {
 };
 
 EvtScript N(EVS_NpcAI_DryBones) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 15)
-    EVT_CALL(SetSelfVar, 2, 10)
-    EVT_CALL(SetSelfVar, 3, 2)
-    EVT_CALL(N(RangedAttackAI_Main), EVT_PTR(N(AISettings_DryBones)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 15)
+    Call(SetSelfVar, 2, 10)
+    Call(SetSelfVar, 3, 2)
+    Call(N(RangedAttackAI_Main), Ref(N(AISettings_DryBones)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_DryBones) = {
@@ -60,51 +60,51 @@ MobileAISettings N(AISettings_ThrownBone) = {
 };
 
 EvtScript N(EVS_NpcAI_ThrownBone) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 3)
-    EVT_CALL(SetSelfVar, 2, 15)
-    EVT_CALL(SetSelfVar, 3, 15)
-    EVT_CALL(N(ProjectileAI_Main), EVT_PTR(N(AISettings_ThrownBone)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 3)
+    Call(SetSelfVar, 2, 15)
+    Call(SetSelfVar, 3, 15)
+    Call(N(ProjectileAI_Main), Ref(N(AISettings_ThrownBone)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NoAI_ThrownBone) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_ThrownBone) = {
-    EVT_CALL(N(GetEncounterEnemyIsOwner))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NoAI_ThrownBone)))
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_SPIN)
-            EVT_CALL(SetSelfVar, 0, 3)
-            EVT_CALL(N(ProjectileAI_Reflect))
-            EVT_IF_EQ(LVar0, 0)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(SetSelfVar, 0, 4)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2, 0, 0)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(SetSelfVar, 0, 0)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetBattleAsScripted)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ThrownBone)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GetEncounterEnemyIsOwner))
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NoAI_ThrownBone)))
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseOrEq(ENCOUNTER_TRIGGER_SPIN)
+            Call(SetSelfVar, 0, 3)
+            Call(N(ProjectileAI_Reflect))
+            IfEq(LVar0, 0)
+                Return
+            EndIf
+        EndCaseGroup
+        CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
+            Call(SetSelfVar, 0, 4)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2, 0, 0)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(SetSelfVar, 0, 0)
+        EndCaseGroup
+        CaseDefault
+            Call(SetBattleAsScripted)
+        EndCaseGroup
+    EndSwitch
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ThrownBone)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ThrownBone) = {

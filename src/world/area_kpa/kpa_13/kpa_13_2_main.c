@@ -7,27 +7,27 @@ EvtScript N(EVS_ExitWalk_kpa_15_0) = EVT_EXIT_WALK(60, kpa_13_ENTRY_2, "kpa_15",
 EvtScript N(EVS_ExitWalk_kpa_14_0) = EVT_EXIT_WALK(60, kpa_13_ENTRY_1, "kpa_14", kpa_14_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kpa_12_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kpa_15_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kpa_14_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_kpa_12_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kpa_15_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilin, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kpa_14_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_TexPan_Lava) = {
-    EVT_THREAD
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP( -400,    0, -800,    0)
         TEX_PAN_PARAMS_FREQ(    1,    0,    1,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_o926, 0)
-    EVT_CALL(SetTexPanner, MODEL_o927, 0)
-    EVT_CALL(SetTexPanner, MODEL_o928, 0)
-    EVT_CALL(SetTexPanner, MODEL_o925, 0)
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_o926, 0)
+    Call(SetTexPanner, MODEL_o927, 0)
+    Call(SetTexPanner, MODEL_o928, 0)
+    Call(SetTexPanner, MODEL_o925, 0)
+    Return
+    End
 };
 
 LavaReset N(SafeFloorColliders)[] = {
@@ -47,47 +47,47 @@ LavaReset N(SafeFloorColliders)[] = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_IF_EQ(GF_KPA16_ShutOffLava, FALSE)
-        EVT_CALL(EnableGroup, MODEL_after, FALSE)
-        EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_ELSE
-        EVT_CALL(EnableGroup, MODEL_before, FALSE)
-    EVT_END_IF
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT(1)
-    EVT_IF_EQ(GF_KPA16_ShutOffLava, FALSE)
-        EVT_EXEC(N(EVS_SetupPlatforms))
-    EVT_END_IF
-    EVT_IF_EQ(GF_KPA16_ShutOffLava, FALSE)
-        EVT_THREAD
-            EVT_WAIT(2)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1039, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o805, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1028, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1029, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1030, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1031, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1032, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1033, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1034, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1035, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1036, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1037, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1038, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1074, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1075, SURFACE_TYPE_LAVA)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilin, SURFACE_TYPE_LAVA)
-            EVT_THREAD
-                EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
-            EVT_END_THREAD
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    ExecWait(N(EVS_MakeEntities))
+    IfEq(GF_KPA16_ShutOffLava, FALSE)
+        Call(EnableGroup, MODEL_after, FALSE)
+        Exec(N(EVS_TexPan_Lava))
+    Else
+        Call(EnableGroup, MODEL_before, FALSE)
+    EndIf
+    Exec(N(EVS_SetupMusic))
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Wait(1)
+    IfEq(GF_KPA16_ShutOffLava, FALSE)
+        Exec(N(EVS_SetupPlatforms))
+    EndIf
+    IfEq(GF_KPA16_ShutOffLava, FALSE)
+        Thread
+            Wait(2)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1039, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o805, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1028, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1029, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1030, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1031, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1032, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1033, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1034, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1035, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1036, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1037, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1038, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1074, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o1075, SURFACE_TYPE_LAVA)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilin, SURFACE_TYPE_LAVA)
+            Thread
+                Call(ResetFromLava, Ref(N(SafeFloorColliders)))
+            EndThread
+        EndThread
+    EndIf
+    Return
+    End
 };

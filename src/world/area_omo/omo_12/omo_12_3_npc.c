@@ -51,127 +51,127 @@ enum {
 };
 
 EvtScript N(EVS_ManageLanternLight) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_LABEL(0)
-        EVT_SWITCH(AB_OMO12_LightSource)
-            EVT_CASE_EQ(LIGHT_FROM_DEFAULT)
-            EVT_CASE_EQ(LIGHT_FROM_GHOST)
-                EVT_CALL(GetNpcPos, NPC_BigLanternGhost, LVar0, LVar1, LVar2)
-                EVT_SET(LVar3, AB_OMO12_LightPowerMod)
-                EVT_ADD(LVar3, 128)
-                EVT_CALL(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar3)
-            EVT_CASE_EQ(LIGHT_FROM_WATT)
-                EVT_CALL(GetNpcPos, NPC_Watt, LVar0, LVar1, LVar2)
-                EVT_SET(LVar3, AB_OMO12_LightPowerMod)
-                EVT_ADD(LVar3, 128)
-                EVT_CALL(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar3)
-            EVT_CASE_EQ(LIGHT_FROM_LANTERN)
-                EVT_CALL(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
-                EVT_SET(LVar3, AB_OMO12_LightPowerMod)
-                EVT_ADD(LVar3, 128)
-                EVT_CALL(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar3)
-            EVT_CASE_EQ(LIGHT_FROM_FLICK_OFF)
-                EVT_CALL(N(SetLightOff))
-                EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_DEFAULT)
-            EVT_CASE_EQ(LIGHT_FROM_HIDDEN)
-                EVT_SET(LVar3, AB_OMO12_LightPowerMod)
-                EVT_ADD(LVar3, 128)
-                EVT_CALL(N(SetLightOriginAndPower), NPC_DISPOSE_LOCATION, LVar3)
-                EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_DEFAULT)
-            EVT_CASE_EQ(LIGHT_FROM_NO_CHANGE)
-                EVT_RETURN
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Label(0)
+        Switch(AB_OMO12_LightSource)
+            CaseEq(LIGHT_FROM_DEFAULT)
+            CaseEq(LIGHT_FROM_GHOST)
+                Call(GetNpcPos, NPC_BigLanternGhost, LVar0, LVar1, LVar2)
+                Set(LVar3, AB_OMO12_LightPowerMod)
+                Add(LVar3, 128)
+                Call(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar3)
+            CaseEq(LIGHT_FROM_WATT)
+                Call(GetNpcPos, NPC_Watt, LVar0, LVar1, LVar2)
+                Set(LVar3, AB_OMO12_LightPowerMod)
+                Add(LVar3, 128)
+                Call(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar3)
+            CaseEq(LIGHT_FROM_LANTERN)
+                Call(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
+                Set(LVar3, AB_OMO12_LightPowerMod)
+                Add(LVar3, 128)
+                Call(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar3)
+            CaseEq(LIGHT_FROM_FLICK_OFF)
+                Call(N(SetLightOff))
+                Set(AB_OMO12_LightSource, LIGHT_FROM_DEFAULT)
+            CaseEq(LIGHT_FROM_HIDDEN)
+                Set(LVar3, AB_OMO12_LightPowerMod)
+                Add(LVar3, 128)
+                Call(N(SetLightOriginAndPower), NPC_DISPOSE_LOCATION, LVar3)
+                Set(AB_OMO12_LightSource, LIGHT_FROM_DEFAULT)
+            CaseEq(LIGHT_FROM_NO_CHANGE)
+                Return
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupLightSource) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_LANTERN_GHOST)
-            EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_HIDDEN)
-            EVT_SET(AB_OMO12_LightPowerMod, 127)
-            EVT_EXEC(N(EVS_ManageLanternLight))
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_LANTERN)
-            EVT_SET(AB_OMO12_LightPowerMod, 102)
-            EVT_EXEC(N(EVS_ManageLanternLight))
-        EVT_CASE_GE(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_EXEC_WAIT(N(EVS_CreateDarkness))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_DEFEATED_LANTERN_GHOST)
+            Set(AB_OMO12_LightSource, LIGHT_FROM_HIDDEN)
+            Set(AB_OMO12_LightPowerMod, 127)
+            Exec(N(EVS_ManageLanternLight))
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Set(AB_OMO12_LightSource, LIGHT_FROM_LANTERN)
+            Set(AB_OMO12_LightPowerMod, 102)
+            Exec(N(EVS_ManageLanternLight))
+        CaseGe(STORY_CH4_WATT_JOINED_PARTY)
+            ExecWait(N(EVS_CreateDarkness))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterScene) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerPos, 70, 20, 0)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH4_004E, 160, 40)
-    EVT_CALL(SetNpcPos, NPC_BigLanternGhost, -150, 0, 20)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -150, 0, 20)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -150, 0, 20)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-9.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20 * DT)
-    EVT_CALL(GetNpcPos, NPC_BigLanternGhost, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar2, 32)
-    EVT_ADD(LVar3, 10)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetPlayerPos, 70, 20, 0)
+    Call(ShowMessageAtScreenPos, MSG_CH4_004E, 160, 40)
+    Call(SetNpcPos, NPC_BigLanternGhost, -150, 0, 20)
+    Call(UseSettingsFrom, CAM_DEFAULT, -150, 0, 20)
+    Call(SetPanTarget, CAM_DEFAULT, -150, 0, 20)
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20 * DT)
+    Call(GetNpcPos, NPC_BigLanternGhost, LVar2, LVar3, LVar4)
+    Add(LVar2, 32)
+    Add(LVar3, 10)
     // turn on lantern light
-    EVT_CALL(MakeLerp, 255, 100, 60 * DT, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetLightOriginAndPower), LVar2, LVar3, LVar4, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01, 0, MSG_CH4_004F)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 50, 0, 20)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.7 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_GHOST)
-    EVT_SET(AB_OMO12_LightPowerMod, -28)
-    EVT_CALL(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim06)
-    EVT_CALL(SetNpcSpeed, NPC_BigLanternGhost, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_BigLanternGhost, 0, 20, 0)
-    EVT_CALL(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim01)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01, 0, MSG_CH4_0050)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(0.5))
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim0F)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Shocked)
-    EVT_WAIT(15 * DT)
-    EVT_THREAD
-        EVT_WAIT(20 * DT)
-        EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_FLICK_OFF)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcVar, NPC_BigLanternGhost, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, 255, 100, 60 * DT, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(N(SetLightOriginAndPower), LVar2, LVar3, LVar4, LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(SpeakToPlayer, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01, 0, MSG_CH4_004F)
+    Call(SetPanTarget, CAM_DEFAULT, 50, 0, 20)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(0.7 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Set(AB_OMO12_LightSource, LIGHT_FROM_GHOST)
+    Set(AB_OMO12_LightPowerMod, -28)
+    Call(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim06)
+    Call(SetNpcSpeed, NPC_BigLanternGhost, Float(3.0 / DT))
+    Call(NpcMoveTo, NPC_BigLanternGhost, 0, 20, 0)
+    Call(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim01)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01, 0, MSG_CH4_0050)
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(0.5))
+    EndThread
+    Call(SetNpcAnimation, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim0F)
+    Wait(5 * DT)
+    Call(SetPlayerAnimation, ANIM_MarioW2_Shocked)
+    Wait(15 * DT)
+    Thread
+        Wait(20 * DT)
+        Set(AB_OMO12_LightSource, LIGHT_FROM_FLICK_OFF)
+    EndThread
+    Call(SetNpcVar, NPC_BigLanternGhost, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseWattTutorial) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPartnerInUse, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_WATT)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Celebrate, ANIM_WorldWatt_Idle, 5, MSG_CH4_005C)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPartnerInUse, LVar0)
+        IfEq(LVar0, PARTNER_WATT)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Celebrate, ANIM_WorldWatt_Idle, 5, MSG_CH4_005C)
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 Vec3f N(WattRightFlightPath)[] = {
@@ -192,420 +192,420 @@ BombTrigger N(BombPos_Lantern_Unused) = {
 };
 
 EvtScript N(EVS_Scene_ReleaseWatt) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(DisableCameraLeadingPlayer))
-    EVT_CALL(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(2.0 / DT), LVar0, LVar1, LVar2, EVT_FLOAT(450.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
-    EVT_SET(LVarA, 0)
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_IF_EQ(LVar0, ENCOUNTER_TRIGGER_PARTNER)
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_BOMBETTE)
-            EVT_CALL(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Hurt)
-            EVT_SET(LVarA, -1)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(NpcFacePlayer, NPC_Watt, 0)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_CASE_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CASE_DEFAULT
-                EVT_CALL(GetEncounterTriggerHitTier, LVar0)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_WAIT(25 * DT)
-                    EVT_CALL(DisablePlayerInput, FALSE)
-                    EVT_RETURN
-                EVT_END_IF
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_OMO_LANTERN_BREAK)
-    EVT_SET(AF_OMO_10, FALSE)
-    EVT_LOOP(8)
-        EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_WAIT(3)
-        EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_LaternTop, ANIM_BigLanternGhost_Anim03)
-    EVT_CALL(SetNpcAnimation, NPC_LaternBottom, ANIM_BigLanternGhost_Anim04)
-    EVT_THREAD
-        EVT_LABEL(10)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_WAIT(2)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_WAIT(2)
-            EVT_IF_EQ(AF_OMO_10, FALSE)
-                EVT_GOTO(10)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(GetAngleToPlayer, NPC_LaternTop, LVar0)
-    EVT_IF_LT(LVar0, 180)
-        EVT_SET(LVar1, 27)
-        EVT_SET(LVar2, 50)
-    EVT_ELSE
-        EVT_SET(LVar1, -27)
-        EVT_SET(LVar2, -50)
-    EVT_END_IF
-    EVT_CALL(func_802D2C14, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, LVar1, 0, 0)
-    EVT_CALL(PlayerFaceNpc, NPC_LaternTop, 3)
-    EVT_THREAD
-        EVT_CALL(SetNpcJumpscale, NPC_LaternTop, 0)
-        EVT_CALL(GetNpcPos, NPC_LaternTop, LVar0, 20, LVar2)
-        EVT_CALL(NpcJump0, NPC_LaternTop, LVar0, 20, LVar2, 20 * DT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(6 * DT)
-        EVT_CALL(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_Watt, LVar0, 6, LVar2)
-        EVT_LOOP(7)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_WAIT(1)
-            EVT_CALL(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_WATT)
-    EVT_SET(AB_OMO12_LightPowerMod, 72)
-    EVT_WAIT(40 * DT)
-    EVT_SET(AF_OMO_10, TRUE)
-    EVT_CALL(SetNpcPos, NPC_LaternTop, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_LaternBottom, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(25)
-    EVT_CALL(GetPlayerPos, LVar3, LVar1, LVar2)
-    EVT_CALL(GetNpcPos, NPC_Watt, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, LVar3)
-    EVT_DIV(LVar0, 2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-8.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_IF_EQ(LVarA, -1)
-        EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Strain, ANIM_WorldWatt_Hurt, 0, MSG_CH4_0058)
-        EVT_THREAD
-            EVT_WAIT(10 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Pray)
-            EVT_WAIT(15 * DT)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_END_THREAD
-        EVT_CALL(EndSpeech, NPC_Watt, ANIM_WorldWatt_Strain, ANIM_WorldWatt_Hurt, 0)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Celebrate, ANIM_WorldWatt_Idle, 0, MSG_CH4_0057)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-    EVT_END_IF
-    EVT_CALL(func_802D2C14, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Idle)
-    EVT_CALL(PlaySoundAtNpc, NPC_Watt, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_WAIT(40 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_0059)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_TouchNose)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(EndSpeech, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(GetAngleToPlayer, NPC_Watt, LVar0)
-    EVT_IF_LT(LVar0, 180)
-        EVT_SET(LVar1, -25)
-    EVT_ELSE
-        EVT_SET(LVar1, 25)
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-    EVT_THREAD
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_ADD(LVar1, LVar2)
-        EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar1, LVar4, 0)
-        EVT_CALL(NpcFacePlayer, NPC_PARTNER, 3)
-        EVT_CALL(EnablePartnerAI)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcFlagBits, NPC_Watt, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(GetNpcPos, NPC_Watt, LVar7, LVar8, LVar9)
-    EVT_CALL(GetAngleToPlayer, NPC_Watt, LVar0)
-    EVT_IF_LT(LVar0, 180)
-        EVT_CALL(LoadPath, 15 * DT, EVT_PTR(N(WattRightFlightPath)), ARRAY_COUNT(N(WattRightFlightPath)), EASING_LINEAR)
-        EVT_SET(LVar4, 12)
-    EVT_ELSE
-        EVT_CALL(LoadPath, 15 * DT, EVT_PTR(N(WattLeftFlightPath)), ARRAY_COUNT(N(WattLeftFlightPath)), EASING_LINEAR)
-        EVT_SET(LVar4, -12)
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, LVar4)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_LABEL(30)
-        EVT_CALL(GetNextPathPos)
-        EVT_ADD(LVar1, LVar7)
-        EVT_ADD(LVar2, LVar8)
-        EVT_ADD(LVar3, LVar9)
-        EVT_CALL(SetNpcPos, NPC_Watt, LVar1, LVar2, LVar3)
-        EVT_CALL(PlayerFaceNpc, NPC_Watt, FALSE)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(30)
-        EVT_END_IF
-    EVT_CALL(NpcFacePlayer, NPC_Watt, 3)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005A)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(EndSpeech, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0)
-    EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_NO_CHANGE)
-    EVT_WAIT(1)
-    EVT_CALL(N(ChangeNpcToPartner), NPC_Watt, PARTNER_WATT)
-    EVT_CALL(N(LoadPartyImage))
-    EVT_EXEC(N(EVS_PushPartnerSong))
-    EVT_WAIT(15 * DT)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_018E, 160, 40)
-    EVT_EXEC(N(EVS_PopSong))
-    EVT_WAIT(10 * DT)
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar2, LVar3, LVar4)
-        EVT_CALL(MakeLerp, 200, 255, 45 * DT, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetLightOriginAndPower), LVar2, LVar3, LVar4, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 8)
-        EVT_CALL(N(SetLightOriginAndPower), LVar2, LVar3, LVar4, LVar0)
-    EVT_END_THREAD
-    EVT_WAIT(30 * DT)
-    EVT_CALL(CloseMessage)
-    EVT_WAIT(10 * DT)
-    EVT_EXEC_WAIT(N(EVS_CreateDarkness))
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005B)
-    EVT_CALL(EnablePartnerAI)
-    EVT_EXEC(N(EVS_UseWattTutorial))
-    EVT_CALL(N(EnableCameraLeadingPlayer))
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
-    EVT_SET(GB_StoryProgress, STORY_CH4_WATT_JOINED_PARTY)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(RemoveNpc, NPC_LaternTop)
-    EVT_CALL(RemoveNpc, NPC_LaternBottom)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(N(DisableCameraLeadingPlayer))
+    Call(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, Float(2.0 / DT), LVar0, LVar1, LVar2, Float(450.0), Float(15.0), Float(-6.0))
+    Set(LVarA, 0)
+    Call(GetOwnerEncounterTrigger, LVar0)
+    IfEq(LVar0, ENCOUNTER_TRIGGER_PARTNER)
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_BOMBETTE)
+            Call(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Hurt)
+            Set(LVarA, -1)
+        EndIf
+    EndIf
+    Call(NpcFacePlayer, NPC_Watt, 0)
+    IfEq(LVarA, 0)
+        Call(GetOwnerEncounterTrigger, LVar0)
+        Switch(LVar0)
+            CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            CaseEq(ENCOUNTER_TRIGGER_PARTNER)
+            CaseDefault
+                Call(GetEncounterTriggerHitTier, LVar0)
+                IfEq(LVar0, 0)
+                    Wait(25 * DT)
+                    Call(DisablePlayerInput, FALSE)
+                    Return
+                EndIf
+        EndSwitch
+    EndIf
+    Call(PlaySound, SOUND_OMO_LANTERN_BREAK)
+    Set(AF_OMO_10, FALSE)
+    Loop(8)
+        Call(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
+        Wait(3)
+        Call(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
+        Wait(3)
+    EndLoop
+    Call(SetNpcAnimation, NPC_LaternTop, ANIM_BigLanternGhost_Anim03)
+    Call(SetNpcAnimation, NPC_LaternBottom, ANIM_BigLanternGhost_Anim04)
+    Thread
+        Label(10)
+            Call(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, TRUE)
+            Wait(2)
+            Call(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, FALSE)
+            Wait(2)
+            IfEq(AF_OMO_10, FALSE)
+                Goto(10)
+            EndIf
+    EndThread
+    Call(GetAngleToPlayer, NPC_LaternTop, LVar0)
+    IfLt(LVar0, 180)
+        Set(LVar1, 27)
+        Set(LVar2, 50)
+    Else
+        Set(LVar1, -27)
+        Set(LVar2, -50)
+    EndIf
+    Call(func_802D2C14, 1)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, LVar1, 0, 0)
+    Call(PlayerFaceNpc, NPC_LaternTop, 3)
+    Thread
+        Call(SetNpcJumpscale, NPC_LaternTop, 0)
+        Call(GetNpcPos, NPC_LaternTop, LVar0, 20, LVar2)
+        Call(NpcJump0, NPC_LaternTop, LVar0, 20, LVar2, 20 * DT)
+    EndThread
+    Thread
+        Wait(6 * DT)
+        Call(GetNpcPos, NPC_LaternTop, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_Watt, LVar0, 6, LVar2)
+        Loop(7)
+            Call(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, TRUE)
+            Wait(1)
+            Call(SetNpcFlagBits, NPC_LaternTop, NPC_FLAG_INVISIBLE, FALSE)
+            Wait(1)
+        EndLoop
+    EndThread
+    Wait(10 * DT)
+    Set(AB_OMO12_LightSource, LIGHT_FROM_WATT)
+    Set(AB_OMO12_LightPowerMod, 72)
+    Wait(40 * DT)
+    Set(AF_OMO_10, TRUE)
+    Call(SetNpcPos, NPC_LaternTop, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_LaternBottom, NPC_DISPOSE_LOCATION)
+    Wait(25)
+    Call(GetPlayerPos, LVar3, LVar1, LVar2)
+    Call(GetNpcPos, NPC_Watt, LVar0, LVar1, LVar2)
+    Add(LVar0, LVar3)
+    Div(LVar0, 2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-8.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    IfEq(LVarA, -1)
+        Call(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Strain, ANIM_WorldWatt_Hurt, 0, MSG_CH4_0058)
+        Thread
+            Wait(10 * DT)
+            Call(SetPlayerAnimation, ANIM_Mario1_Pray)
+            Wait(15 * DT)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        EndThread
+        Call(EndSpeech, NPC_Watt, ANIM_WorldWatt_Strain, ANIM_WorldWatt_Hurt, 0)
+    Else
+        Call(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Celebrate, ANIM_WorldWatt_Idle, 0, MSG_CH4_0057)
+        Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
+    EndIf
+    Call(func_802D2C14, 0)
+    Wait(20 * DT)
+    Call(SetNpcAnimation, NPC_Watt, ANIM_WorldWatt_Idle)
+    Call(PlaySoundAtNpc, NPC_Watt, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+    Call(ShowEmote, NPC_Watt, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
+    Wait(40 * DT)
+    Call(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_0059)
+    Call(SetPlayerAnimation, ANIM_MarioW2_TouchNose)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
+    Wait(20 * DT)
+    Call(EndSpeech, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0)
+    Wait(20 * DT)
+    Call(GetAngleToPlayer, NPC_Watt, LVar0)
+    IfLt(LVar0, 180)
+        Set(LVar1, -25)
+    Else
+        Set(LVar1, 25)
+    EndIf
+    Call(GetPlayerPos, LVar2, LVar3, LVar4)
+    Thread
+        Call(DisablePartnerAI, 0)
+        Add(LVar1, LVar2)
+        Call(SetNpcSpeed, NPC_PARTNER, Float(3.0 / DT))
+        Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
+        Call(NpcMoveTo, NPC_PARTNER, LVar1, LVar4, 0)
+        Call(NpcFacePlayer, NPC_PARTNER, 3)
+        Call(EnablePartnerAI)
+    EndThread
+    Call(SetNpcFlagBits, NPC_Watt, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(GetNpcPos, NPC_Watt, LVar7, LVar8, LVar9)
+    Call(GetAngleToPlayer, NPC_Watt, LVar0)
+    IfLt(LVar0, 180)
+        Call(LoadPath, 15 * DT, Ref(N(WattRightFlightPath)), ARRAY_COUNT(N(WattRightFlightPath)), EASING_LINEAR)
+        Set(LVar4, 12)
+    Else
+        Call(LoadPath, 15 * DT, Ref(N(WattLeftFlightPath)), ARRAY_COUNT(N(WattLeftFlightPath)), EASING_LINEAR)
+        Set(LVar4, -12)
+    EndIf
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, LVar4)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Label(30)
+        Call(GetNextPathPos)
+        Add(LVar1, LVar7)
+        Add(LVar2, LVar8)
+        Add(LVar3, LVar9)
+        Call(SetNpcPos, NPC_Watt, LVar1, LVar2, LVar3)
+        Call(PlayerFaceNpc, NPC_Watt, FALSE)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(30)
+        EndIf
+    Call(NpcFacePlayer, NPC_Watt, 3)
+    Wait(20 * DT)
+    Call(SpeakToPlayer, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005A)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(5 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
+    Wait(20 * DT)
+    Call(EndSpeech, NPC_Watt, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0)
+    Set(AB_OMO12_LightSource, LIGHT_FROM_NO_CHANGE)
+    Wait(1)
+    Call(N(ChangeNpcToPartner), NPC_Watt, PARTNER_WATT)
+    Call(N(LoadPartyImage))
+    Exec(N(EVS_PushPartnerSong))
+    Wait(15 * DT)
+    Call(ShowMessageAtScreenPos, MSG_Menus_018E, 160, 40)
+    Exec(N(EVS_PopSong))
+    Wait(10 * DT)
+    Thread
+        Call(GetNpcPos, NPC_PARTNER, LVar2, LVar3, LVar4)
+        Call(MakeLerp, 200, 255, 45 * DT, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(N(SetLightOriginAndPower), LVar2, LVar3, LVar4, LVar0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Add(LVar3, 8)
+        Call(N(SetLightOriginAndPower), LVar2, LVar3, LVar4, LVar0)
+    EndThread
+    Wait(30 * DT)
+    Call(CloseMessage)
+    Wait(10 * DT)
+    ExecWait(N(EVS_CreateDarkness))
+    Wait(20 * DT)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldWatt_Talk, ANIM_WorldWatt_Idle, 0, MSG_CH4_005B)
+    Call(EnablePartnerAI)
+    Exec(N(EVS_UseWattTutorial))
+    Call(N(EnableCameraLeadingPlayer))
+    Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
+    Set(GB_StoryProgress, STORY_CH4_WATT_JOINED_PARTY)
+    Call(DisablePlayerInput, FALSE)
+    Call(RemoveNpc, NPC_LaternTop)
+    Call(RemoveNpc, NPC_LaternBottom)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_BigLanternGhost) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(1)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        Wait(1)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(1)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_BigLanternGhost) = {
-    EVT_WAIT(1)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-            EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_DEFAULT)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, 100)
-            EVT_THREAD
-                EVT_SET(MF_LanternGhost_DoneSpeaking, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim08, ANIM_BigLanternGhost_Anim08, 0, MSG_CH4_0054)
-                EVT_SET(MF_LanternGhost_DoneSpeaking, TRUE)
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_WAIT(15)
-                EVT_CALL(SetNpcJumpscale, NPC_LaternTop, EVT_FLOAT(1.0))
-                EVT_CALL(SetNpcPos, NPC_LaternTop, 0, 0, 20)
-                EVT_CALL(NpcJump0, NPC_LaternTop, 0, 0, 20, 10)
-                EVT_CALL(SetNpcPos, NPC_LaternBottom, 0, 0, 20)
-            EVT_END_THREAD
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim07)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(10.0))
-            EVT_CALL(NpcMoveTo, NPC_SELF, 400, 0, 0)
-            EVT_LABEL(0)
-                EVT_IF_EQ(MF_LanternGhost_DoneSpeaking, FALSE)
-                    EVT_WAIT(1)
-                    EVT_GOTO(0)
-                EVT_END_IF
-            EVT_CALL(GetNpcPos, NPC_LaternTop, LVar3, LVar4, LVar5)
-            EVT_SUBF(LVar3, LVar0)
-            EVT_SUBF(LVar4, LVar1)
-            EVT_SUBF(LVar5, LVar2)
-            EVT_DIVF(LVar3, EVT_FLOAT(60.0))
-            EVT_DIVF(LVar4, EVT_FLOAT(60.0))
-            EVT_DIVF(LVar5, EVT_FLOAT(60.0))
-            EVT_SETF(LVar6, EVT_FLOAT(2.167))
-            EVT_SETF(LVar7, EVT_FLOAT(100.0))
-            EVT_LOOP(60)
-                EVT_ADDF(LVar0, LVar3)
-                EVT_ADDF(LVar1, LVar4)
-                EVT_ADDF(LVar2, LVar5)
-                EVT_ADDF(LVar7, LVar6)
-                EVT_CALL(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar7)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_SET(AB_OMO12_LightSource, LIGHT_FROM_LANTERN)
-            EVT_SET(AB_OMO12_LightPowerMod, 102)
-            EVT_WAIT(1)
-            EVT_CALL(SetNpcVar, NPC_LaternTop, 0, 1)
-            EVT_SET(GB_StoryProgress, STORY_CH4_DEFEATED_LANTERN_GHOST)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Wait(1)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(ResetCam, CAM_DEFAULT, Float(90.0))
+            Set(AB_OMO12_LightSource, LIGHT_FROM_DEFAULT)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, 100)
+            Thread
+                Set(MF_LanternGhost_DoneSpeaking, FALSE)
+                Call(SpeakToPlayer, NPC_BigLanternGhost, ANIM_BigLanternGhost_Anim08, ANIM_BigLanternGhost_Anim08, 0, MSG_CH4_0054)
+                Set(MF_LanternGhost_DoneSpeaking, TRUE)
+            EndThread
+            Thread
+                Wait(15)
+                Call(SetNpcJumpscale, NPC_LaternTop, Float(1.0))
+                Call(SetNpcPos, NPC_LaternTop, 0, 0, 20)
+                Call(NpcJump0, NPC_LaternTop, 0, 0, 20, 10)
+                Call(SetNpcPos, NPC_LaternBottom, 0, 0, 20)
+            EndThread
+            Call(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim07)
+            Call(SetNpcSpeed, NPC_SELF, Float(10.0))
+            Call(NpcMoveTo, NPC_SELF, 400, 0, 0)
+            Label(0)
+                IfEq(MF_LanternGhost_DoneSpeaking, FALSE)
+                    Wait(1)
+                    Goto(0)
+                EndIf
+            Call(GetNpcPos, NPC_LaternTop, LVar3, LVar4, LVar5)
+            SubF(LVar3, LVar0)
+            SubF(LVar4, LVar1)
+            SubF(LVar5, LVar2)
+            DivF(LVar3, Float(60.0))
+            DivF(LVar4, Float(60.0))
+            DivF(LVar5, Float(60.0))
+            SetF(LVar6, Float(2.167))
+            SetF(LVar7, Float(100.0))
+            Loop(60)
+                AddF(LVar0, LVar3)
+                AddF(LVar1, LVar4)
+                AddF(LVar2, LVar5)
+                AddF(LVar7, LVar6)
+                Call(N(SetLightOriginAndPower), LVar0, LVar1, LVar2, LVar7)
+                Wait(1)
+            EndLoop
+            Set(AB_OMO12_LightSource, LIGHT_FROM_LANTERN)
+            Set(AB_OMO12_LightPowerMod, 102)
+            Wait(1)
+            Call(SetNpcVar, NPC_LaternTop, 0, 1)
+            Set(GB_StoryProgress, STORY_CH4_DEFEATED_LANTERN_GHOST)
+            Call(DisablePlayerInput, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BigLanternGhost) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH4_DEFEATED_LANTERN_GHOST)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_BigLanternGhost)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_BigLanternGhost)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH4_DEFEATED_LANTERN_GHOST)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_BigLanternGhost)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_BigLanternGhost)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_LanternTop) = {
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 10)
-        EVT_WAIT(6)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, -9)
-        EVT_WAIT(6)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 8)
-        EVT_WAIT(5)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, -7)
-        EVT_WAIT(5)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 6)
-        EVT_WAIT(4)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, -5)
-        EVT_WAIT(4)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 4)
-        EVT_WAIT(3)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, -3)
-        EVT_WAIT(3)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 2)
-        EVT_WAIT(2)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_BigLanternGhost_Anim02, ANIM_BigLanternGhost_Anim02, 5, MSG_CH4_0055)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Wait(15)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 10)
+        Wait(6)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, -9)
+        Wait(6)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 8)
+        Wait(5)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, -7)
+        Wait(5)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 6)
+        Wait(4)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, -5)
+        Wait(4)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 4)
+        Wait(3)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, -3)
+        Wait(3)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 2)
+        Wait(2)
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    EndThread
+    Call(SpeakToPlayer, NPC_SELF, ANIM_BigLanternGhost_Anim02, ANIM_BigLanternGhost_Anim02, 5, MSG_CH4_0055)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_LanternTop) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-            EVT_CASE_EQ(1)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_CALL(AwaitPlayerLeave, LVar0, LVar2, 100)
-                EVT_CALL(PartnerCanUseAbility, LVar0)
-                EVT_IF_NE(LVar0, TRUE)
-                    EVT_CALL(DisablePlayerInput, TRUE)
-                    EVT_THREAD
-                        EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 16)
-                        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8)
-                        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 4)
-                    EVT_END_THREAD
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_BigLanternGhost_Anim02, ANIM_BigLanternGhost_Anim02, 0, MSG_CH4_0056)
-                    EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_END_IF
-                EVT_CALL(GetSelfVar, 0, LVar0)
-                EVT_IF_EQ(LVar0, 1)
-                    EVT_CALL(SetSelfVar, 0, 2)
-                EVT_END_IF
-            EVT_CASE_EQ(2)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_CALL(AwaitPlayerApproach, LVar0, LVar2, 60)
-                EVT_CALL(GetSelfVar, 0, LVar0)
-                EVT_IF_EQ(LVar0, 2)
-                    EVT_CALL(SetSelfVar, 0, 1)
-                EVT_END_IF
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(0)
+            CaseEq(1)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Call(AwaitPlayerLeave, LVar0, LVar2, 100)
+                Call(PartnerCanUseAbility, LVar0)
+                IfNe(LVar0, TRUE)
+                    Call(DisablePlayerInput, TRUE)
+                    Thread
+                        Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                        Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 16)
+                        Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8)
+                        Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 4)
+                    EndThread
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_BigLanternGhost_Anim02, ANIM_BigLanternGhost_Anim02, 0, MSG_CH4_0056)
+                    Call(DisablePlayerInput, FALSE)
+                EndIf
+                Call(GetSelfVar, 0, LVar0)
+                IfEq(LVar0, 1)
+                    Call(SetSelfVar, 0, 2)
+                EndIf
+            CaseEq(2)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Call(AwaitPlayerApproach, LVar0, LVar2, 60)
+                Call(GetSelfVar, 0, LVar0)
+                IfEq(LVar0, 2)
+                    Call(SetSelfVar, 0, 1)
+                EndIf
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_LanternTop) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_LANTERN_GHOST)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 20)
-            EVT_CALL(SetSelfVar, 0, 2)
-        EVT_CASE_GE(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_LanternTop)))
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_LanternTop)))
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_DEFEATED_LANTERN_GHOST)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
+            Call(SetNpcPos, NPC_SELF, 0, 0, 20)
+            Call(SetSelfVar, 0, 2)
+        CaseGe(STORY_CH4_WATT_JOINED_PARTY)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+    EndSwitch
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_LanternTop)))
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_LanternTop)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_LanternBottom) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_LANTERN_GHOST)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
-            EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 20)
-        EVT_CASE_GE(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_Scene_ReleaseWatt)))
-    EVT_CALL(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_DEFEATED_LANTERN_GHOST)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_BigLanternGhost_Anim02)
+            Call(SetNpcPos, NPC_SELF, 0, 0, 20)
+        CaseGe(STORY_CH4_WATT_JOINED_PARTY)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+    EndSwitch
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_Scene_ReleaseWatt)))
+    Call(SetNpcFlagBits, NPC_LaternBottom, NPC_FLAG_INVISIBLE, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Watt) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_LANTERN_GHOST)
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-        EVT_CASE_GE(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_DEFEATED_LANTERN_GHOST)
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+        CaseGe(STORY_CH4_WATT_JOINED_PARTY)
+            Call(RemoveNpc, NPC_SELF)
+            Return
+    EndSwitch
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_LanternGhost)[] = {

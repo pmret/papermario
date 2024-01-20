@@ -12,10 +12,10 @@ EvtScript N(EVS_ExitWalk_flo_00_1) = EVT_EXIT_WALK(60, flo_14_ENTRY_0, "flo_00",
 EvtScript N(EVS_ExitWalk_flo_13_0) = EVT_EXIT_WALK(60, flo_14_ENTRY_1, "flo_13", flo_13_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_flo_13_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_flo_00_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_flo_13_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_flo_00_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    Return
+    End
 };
 
 LavaReset N(SafeFloorColliders)[] = {
@@ -34,64 +34,64 @@ LavaReset N(SafeFloorColliders)[] = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_FLOWER_FIELDS)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC(N(EVS_MakeEntities))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o114, SURFACE_TYPE_SPIKES)
-    EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
-    EVT_END_THREAD
-    EVT_CALL(EnableTexPanning, MODEL_o39, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o41, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o43, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o49, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o51, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o55, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o123, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o125, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o127, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o129, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o131, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o133, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o135, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o40, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o44, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o48, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o52, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o54, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o124, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o126, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o128, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o130, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o132, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o134, TRUE)
-    EVT_CALL(EnableTexPanning, MODEL_o136, TRUE)
-    EVT_THREAD
+    Set(GB_WorldLocation, LOCATION_FLOWER_FIELDS)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Exec(N(EVS_MakeEntities))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o114, SURFACE_TYPE_SPIKES)
+    Thread
+        Call(ResetFromLava, Ref(N(SafeFloorColliders)))
+    EndThread
+    Call(EnableTexPanning, MODEL_o39, TRUE)
+    Call(EnableTexPanning, MODEL_o41, TRUE)
+    Call(EnableTexPanning, MODEL_o43, TRUE)
+    Call(EnableTexPanning, MODEL_o49, TRUE)
+    Call(EnableTexPanning, MODEL_o51, TRUE)
+    Call(EnableTexPanning, MODEL_o55, TRUE)
+    Call(EnableTexPanning, MODEL_o123, TRUE)
+    Call(EnableTexPanning, MODEL_o125, TRUE)
+    Call(EnableTexPanning, MODEL_o127, TRUE)
+    Call(EnableTexPanning, MODEL_o129, TRUE)
+    Call(EnableTexPanning, MODEL_o131, TRUE)
+    Call(EnableTexPanning, MODEL_o133, TRUE)
+    Call(EnableTexPanning, MODEL_o135, TRUE)
+    Call(EnableTexPanning, MODEL_o40, TRUE)
+    Call(EnableTexPanning, MODEL_o44, TRUE)
+    Call(EnableTexPanning, MODEL_o48, TRUE)
+    Call(EnableTexPanning, MODEL_o52, TRUE)
+    Call(EnableTexPanning, MODEL_o54, TRUE)
+    Call(EnableTexPanning, MODEL_o124, TRUE)
+    Call(EnableTexPanning, MODEL_o126, TRUE)
+    Call(EnableTexPanning, MODEL_o128, TRUE)
+    Call(EnableTexPanning, MODEL_o130, TRUE)
+    Call(EnableTexPanning, MODEL_o132, TRUE)
+    Call(EnableTexPanning, MODEL_o134, TRUE)
+    Call(EnableTexPanning, MODEL_o136, TRUE)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(  140,    0,    0,    0)
         TEX_PAN_PARAMS_FREQ(    1,    0,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP( -200,    0,    0,    0)
         TEX_PAN_PARAMS_FREQ(    1,    0,    0,    0)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_SetupBubbles))
-    EVT_EXEC(N(EVS_SetupLogBridges))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitw, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        EVT_CALL(N(SpawnSunEffect))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Exec(N(EVS_SetupBubbles))
+    Exec(N(EVS_SetupLogBridges))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitw, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    ExecWait(N(EVS_SetupMusic))
+    IfGe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+        Call(N(SpawnSunEffect))
+    EndIf
+    Return
+    End
 };

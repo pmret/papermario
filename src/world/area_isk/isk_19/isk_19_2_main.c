@@ -4,33 +4,33 @@ EvtScript N(EVS_ExitWalk_isk_11_3) = EVT_EXIT_WALK(40, isk_19_ENTRY_0, "isk_11",
 EvtScript N(EVS_ExitWalk_isk_16_0) = EVT_EXIT_WALK(40, isk_19_ENTRY_1, "isk_16", isk_16_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_isk_11_3)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_isk_16_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_isk_11_3)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_isk_16_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
-        EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_RETURN
-    EVT_END
+    Call(GetLoadType, LVar1)
+    IfEq(LVar1, LOAD_FROM_FILE_SELECT)
+        Exec(EnterSavePoint)
+        Exec(N(EVS_BindExitTriggers))
+        Return
+    EndIf
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_DRY_DRY_RUINS)
-    EVT_CALL(SetSpriteShading, SHADING_ISK_19)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_DRY_DRY_RUINS)
+    Call(SetSpriteShading, SHADING_ISK_19)
+    SetUP_CAMERA_NO_LEAD()
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupMusic))
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Return
+    End
 };

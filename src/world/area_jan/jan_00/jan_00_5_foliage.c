@@ -30,10 +30,10 @@ BombTrigger N(D_80247A1C_B27F5C) = {
 };
 
 EvtScript N(EVS_80247A2C) = {
-    EVT_SET(AF_JAN00_TreeDrop1, FALSE)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o282, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(D_80247A1C_B27F5C)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(AF_JAN00_TreeDrop1, FALSE)
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o282, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(D_80247A1C_B27F5C)), 1, 0)
+    Return
+    End
 };

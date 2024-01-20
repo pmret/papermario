@@ -8,79 +8,79 @@ API_CALLABLE(N(func_80240010_907A40)) {
 }
 
 EvtScript N(D_80241190_908BC0) = {
-    EVT_SET(AF_JAN01_TreeDrop_StarPiece, FALSE)
-        EVT_LOOP(0)
-            EVT_IF_NE(AF_JAN01_TreeDrop_StarPiece, FALSE)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, kmr_23_ENTRY_4)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_BEGIN_OR_END_CHAPTER)
-    EVT_ELSE
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kzn_19"), kzn_19_ENTRY_3, TRANSITION_END_CHAPTER_INTERRUPTED)
-    EVT_END_IF
-    EVT_CALL(FadeOutMusic, 0, 2000)
-    EVT_CALL(N(func_80240010_907A40))
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Set(AF_JAN01_TreeDrop_StarPiece, FALSE)
+        Loop(0)
+            IfNe(AF_JAN01_TreeDrop_StarPiece, FALSE)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+    Call(GetEntryID, LVar0)
+    IfNe(LVar0, kmr_23_ENTRY_4)
+        Call(GotoMapSpecial, Ref("kmr_24"), kmr_24_ENTRY_0, TRANSITION_BEGIN_OR_END_CHAPTER)
+    Else
+        Call(GotoMapSpecial, Ref("kzn_19"), kzn_19_ENTRY_3, TRANSITION_END_CHAPTER_INTERRUPTED)
+    EndIf
+    Call(FadeOutMusic, 0, 2000)
+    Call(N(func_80240010_907A40))
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerPos, -2, 0, 0)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_GetItem)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(DisablePartnerAI, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 440)
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, 0, 100)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, 65)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kmr_23_ENTRY_0)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Eldstar)))
-        EVT_CASE_EQ(kmr_23_ENTRY_1)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Mamar)))
-        EVT_CASE_EQ(kmr_23_ENTRY_2)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Skolar)))
-        EVT_CASE_EQ(kmr_23_ENTRY_3)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Muskular)))
-        EVT_CASE_EQ(kmr_23_ENTRY_4)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Misstar)))
-        EVT_CASE_EQ(kmr_23_ENTRY_5)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Klevar)))
-        EVT_CASE_EQ(kmr_23_ENTRY_6)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup_Kalmar)))
-    EVT_END_SWITCH
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_WAIT(1)
-    EVT_EXEC(N(D_80241190_908BC0))
-    EVT_THREAD
-        EVT_CALL(FadeOutMusic, 0, 150)
-        EVT_CALL(ClearAmbientSounds, 150)
-        EVT_WAIT(10)
-        EVT_CALL(SetMusicTrack, 0, SONG_CHAPTER_END, 0, 8)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerPos, -2, 0, 0)
+    Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
+    Call(InterpPlayerYaw, 90, 0)
+    Wait(1)
+    Call(SetPlayerAnimation, ANIM_Mario1_GetItem)
+    Call(GetCurrentPartnerID, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        Call(DisablePartnerAI, FALSE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+        Call(SetNpcPos, NPC_PARTNER, NPC_DISPOSE_LOCATION)
+    EndIf
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+    Call(SetCamPitch, CAM_DEFAULT, 0, 0)
+    Call(SetCamDistance, CAM_DEFAULT, 440)
+    Call(SetCamPosA, CAM_DEFAULT, 0, 100)
+    Call(SetCamPosB, CAM_DEFAULT, 0, 0)
+    Call(SetCamPosC, CAM_DEFAULT, 0, 65)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(kmr_23_ENTRY_0)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Eldstar)))
+        CaseEq(kmr_23_ENTRY_1)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Mamar)))
+        CaseEq(kmr_23_ENTRY_2)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Skolar)))
+        CaseEq(kmr_23_ENTRY_3)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Muskular)))
+        CaseEq(kmr_23_ENTRY_4)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Misstar)))
+        CaseEq(kmr_23_ENTRY_5)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Klevar)))
+        CaseEq(kmr_23_ENTRY_6)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup_Kalmar)))
+    EndSwitch
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Wait(1)
+    Exec(N(D_80241190_908BC0))
+    Thread
+        Call(FadeOutMusic, 0, 150)
+        Call(ClearAmbientSounds, 150)
+        Wait(10)
+        Call(SetMusicTrack, 0, SONG_CHAPTER_END, 0, 8)
+    EndThread
+    Wait(20)
+    Return
+    End
 };

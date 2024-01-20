@@ -97,97 +97,97 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BigRockAnims)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim10)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, 0)
-            EVT_CALL(SetActorSize, ACTOR_SELF, 24, 15)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(SmallRockAnims)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim12)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, 1)
-            EVT_CALL(SetActorSize, ACTOR_SELF, 10, 8)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BigRockAnims)))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim10)
+            Call(GetActorVar, ACTOR_SELF, AVAR_RockType, 0)
+            Call(SetActorSize, ACTOR_SELF, 24, 15)
+        CaseEq(1)
+            Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(SmallRockAnims)))
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim12)
+            Call(GetActorVar, ACTOR_SELF, AVAR_RockType, 1)
+            Call(SetActorSize, ACTOR_SELF, 10, 8)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_SelectRockAnim) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVarA)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(1)
-            EVT_SET_CONST(LVar1, LVar2)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_RockType, LVarA)
+    Switch(LVarA)
+        CaseEq(0)
+        CaseEq(1)
+            SetConst(LVar1, LVar2)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-        EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
-            EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
-            EVT_EXEC_WAIT(N(EVS_SelectRockAnim))
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_BEGIN_AIR_LIFT)
-        EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
-            EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
-            EVT_EXEC_WAIT(N(EVS_SelectRockAnim))
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
-            EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
-            EVT_EXEC_WAIT(N(EVS_SelectRockAnim))
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim11)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim13)
-            EVT_END_SWITCH
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
-            EVT_WAIT(30)
-            EVT_CALL(RemoveActor, ACTOR_SELF)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+        CaseOrEq(EVENT_BURN_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Gulpit_Anim10)
+            SetConst(LVar2, ANIM_Gulpit_Anim12)
+            ExecWait(N(EVS_SelectRockAnim))
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_BEGIN_AIR_LIFT)
+        CaseOrEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Gulpit_Anim10)
+            SetConst(LVar2, ANIM_Gulpit_Anim12)
+            ExecWait(N(EVS_SelectRockAnim))
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseOrEq(EVENT_BURN_DEATH)
+        CaseOrEq(EVENT_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Gulpit_Anim10)
+            SetConst(LVar2, ANIM_Gulpit_Anim12)
+            ExecWait(N(EVS_SelectRockAnim))
+            ExecWait(EVS_Enemy_Hit)
+            Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+            Call(GetActorVar, ACTOR_SELF, AVAR_RockType, LVar0)
+            Switch(LVar0)
+                CaseEq(0)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim11)
+                CaseEq(1)
+                    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim13)
+            EndSwitch
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
+            Wait(30)
+            Call(RemoveActor, ACTOR_SELF)
+            Return
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 

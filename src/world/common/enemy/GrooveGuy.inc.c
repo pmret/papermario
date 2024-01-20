@@ -16,9 +16,9 @@ MobileAISettings N(AISettings_GrooveGuy) = {
 };
 
 EvtScript N(EVS_NpcAI_GrooveGuy) = {
-    EVT_CALL(N(GrooveGuyAI_Main), EVT_PTR(N(AISettings_GrooveGuy)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GrooveGuyAI_Main), Ref(N(AISettings_GrooveGuy)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_GrooveGuy) = {

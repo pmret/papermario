@@ -96,9 +96,9 @@ API_CALLABLE(N(TakeOut)) {
 }
 
 EvtScript EVS_WorldGoombario_TakeOut = {
-    EVT_CALL(N(TakeOut))
-    EVT_RETURN
-    EVT_END
+    Call(N(TakeOut))
+    Return
+    End
 };
 
 TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
@@ -196,9 +196,9 @@ void N(try_cancel_tweester)(Npc* goombario) {
 }
 
 EvtScript EVS_WorldGoombario_Update = {
-    EVT_CALL(N(Update))
-    EVT_RETURN
-    EVT_END
+    Call(N(Update))
+    Return
+    End
 };
 
 s32 N(can_open_menus)(Npc* goombario) {
@@ -449,25 +449,25 @@ API_CALLABLE(N(TattleEnd)) {
 }
 
 EvtScript EVS_WorldGoombario_UseAbility = {
-    EVT_CALL(N(SelectTattleMsg))
+    Call(N(SelectTattleMsg))
     // abort without cleanup if failed to init
-    EVT_IF_EQ(LVar0, -1)
-        EVT_RETURN
-    EVT_END_IF
+    IfEq(LVar0, -1)
+        Return
+    EndIf
     // abort if no tattle message is available
-    EVT_IF_EQ(LVar0, MSG_NONE)
-        EVT_CALL(N(TattleEnd))
-        EVT_RETURN
-    EVT_END_IF
+    IfEq(LVar0, MSG_NONE)
+        Call(N(TattleEnd))
+        Return
+    EndIf
     // show message if VAR_SKIP is FALSE
-    EVT_IF_EQ(LVar1, FALSE)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, LVar0)
-    EVT_END_IF
-    EVT_WAIT(1)
+    IfEq(LVar1, FALSE)
+        Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, LVar0)
+    EndIf
+    Wait(1)
     // cleanup
-    EVT_CALL(N(TattleEnd))
-    EVT_RETURN
-    EVT_END
+    Call(N(TattleEnd))
+    Return
+    End
 };
 
 API_CALLABLE(N(PutAway)) {
@@ -485,9 +485,9 @@ API_CALLABLE(N(PutAway)) {
 }
 
 EvtScript EVS_WorldGoombario_PutAway = {
-    EVT_CALL(N(PutAway))
-    EVT_RETURN
-    EVT_END
+    Call(N(PutAway))
+    Return
+    End
 };
 
 void N(pre_battle)(Npc* goombario) {

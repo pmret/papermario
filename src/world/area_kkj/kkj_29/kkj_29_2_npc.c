@@ -5,24 +5,24 @@
 #include "world/common/enemy/HammerBros.inc.c"
 
 EvtScript N(EVS_NpcInit_HammerBros) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, -25)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 0, 0, -25)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol_01) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 175, 0, -25)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 175, 0, -25)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol_02) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim03)
-    EVT_CALL(SetNpcPos, NPC_SELF, -140, 30, -140)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim03)
+    Call(SetNpcPos, NPC_SELF, -140, 30, -140)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Bowser)[] = {

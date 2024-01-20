@@ -17,18 +17,18 @@ API_CALLABLE(N(DeleteTorchFX)) {
 }
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(N(CreateTorchFX))
-    EVT_CALL(EnableModel, MODEL_kesu, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(N(CreateTorchFX))
+    Call(EnableModel, MODEL_kesu, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_CALL(N(DeleteTorchFX))
-    EVT_RETURN
-    EVT_END
+    Call(N(DeleteTorchFX))
+    Return
+    End
 };
 
 Stage NAMESPACE = {

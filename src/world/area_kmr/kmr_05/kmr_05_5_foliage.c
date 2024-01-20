@@ -13,13 +13,13 @@ API_CALLABLE(N(func_8024173C_8CF7AC)) {
 }
 
 EvtScript N(EVS_80243234) = {
-    EVT_WAIT(15)
-    EVT_CALL(N(func_8024173C_8CF7AC))
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetNpcVar, NPC_06, 4, 1)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Wait(15)
+    Call(N(func_8024173C_8CF7AC))
+    IfEq(LVar0, 1)
+        Call(SetNpcVar, NPC_06, 4, 1)
+    EndIf
+    Return
+    End
 };
 
 FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_ha2_1, MODEL_ha2_2, MODEL_ha2_3);
@@ -34,22 +34,22 @@ FoliageVectorList N(Tree1_Effects) = {
 };
 
 EvtScript N(EVS_OnShakeTree1) = {
-    EVT_IF_EQ(GF_KMR05_Tree1_Coin, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(AF_JAN01_TreeDrop_StarPiece, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, 490)
-        EVT_CALL(MakeItemEntity, ITEM_COIN, 540, 290, -180, ITEM_SPAWN_MODE_FALL, GF_KMR05_Tree1_Coin)
-    EVT_ELSE
-        EVT_CALL(MakeItemEntity, ITEM_COIN, 436, 300, -180, ITEM_SPAWN_MODE_FALL, GF_KMR05_Tree1_Coin)
-    EVT_END_IF
-    EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KMR05_Tree1_Coin, TRUE)
+        Return
+    EndIf
+    IfEq(AF_JAN01_TreeDrop_StarPiece, TRUE)
+        Return
+    EndIf
+    Wait(10)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, 490)
+        Call(MakeItemEntity, ITEM_COIN, 540, 290, -180, ITEM_SPAWN_MODE_FALL, GF_KMR05_Tree1_Coin)
+    Else
+        Call(MakeItemEntity, ITEM_COIN, 436, 300, -180, ITEM_SPAWN_MODE_FALL, GF_KMR05_Tree1_Coin)
+    EndIf
+    Set(AF_JAN01_TreeDrop_StarPiece, TRUE)
+    Return
+    End
 };
 
 ShakeTreeConfig N(ShakeTree_Tree1) = {
@@ -65,9 +65,9 @@ BombTrigger N(BombPos_Tree1) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o1238, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o1238, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Return
+    End
 };

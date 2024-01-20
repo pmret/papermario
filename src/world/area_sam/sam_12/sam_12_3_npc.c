@@ -3,11 +3,11 @@
 #include "world/common/npc/Merlar.inc.c"
 
 EvtScript N(EVS_NpcInit_Merlar) = {
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Merlar)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Merlar)))
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Merlar)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Merlar)))
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 NpcData N(NpcData_Merlar) = {

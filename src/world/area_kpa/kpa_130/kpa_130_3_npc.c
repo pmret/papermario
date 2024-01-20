@@ -9,9 +9,9 @@ GuardAISettings N(AISettings_BillBlaster) = {
 };
 
 EvtScript N(EVS_NpcAI_BillBlaster) = {
-    EVT_CALL(N(BillBlasterAI_Main), EVT_PTR(N(AISettings_BillBlaster)))
-    EVT_RETURN
-    EVT_END
+    Call(N(BillBlasterAI_Main), Ref(N(AISettings_BillBlaster)))
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_BulletBill) = {
@@ -20,12 +20,12 @@ MobileAISettings N(AISettings_BulletBill) = {
 };
 
 EvtScript N(EVS_NpcAI_BulletBill) = {
-    EVT_CALL(SelfEnemyOverrideSyncPos, 1)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(N(BulletBillAI_Main), EVT_PTR(N(AISettings_BulletBill)))
-    EVT_RETURN
-    EVT_END
+    Call(SelfEnemyOverrideSyncPos, 1)
+    Call(SetSelfVar, 0, 0)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(N(BulletBillAI_Main), Ref(N(AISettings_BulletBill)))
+    Return
+    End
 };
 
 GuardAISettings N(AISettings_BombshellBlaster) = {
@@ -33,9 +33,9 @@ GuardAISettings N(AISettings_BombshellBlaster) = {
 };
 
 EvtScript N(EVS_NpcAI_BombshellBlaster) = {
-    EVT_CALL(N(BillBlasterAI_Main), EVT_PTR(N(AISettings_BombshellBlaster)))
-    EVT_RETURN
-    EVT_END
+    Call(N(BillBlasterAI_Main), Ref(N(AISettings_BombshellBlaster)))
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_BombshellBill) = {
@@ -44,62 +44,62 @@ MobileAISettings N(AISettings_BombshellBill) = {
 };
 
 EvtScript N(EVS_NpcAI_BombshellBill) = {
-    EVT_CALL(SelfEnemyOverrideSyncPos, 1)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(N(BulletBillAI_Main), EVT_PTR(N(AISettings_BombshellBill)))
-    EVT_RETURN
-    EVT_END
+    Call(SelfEnemyOverrideSyncPos, 1)
+    Call(SetSelfVar, 0, 0)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(N(BulletBillAI_Main), Ref(N(AISettings_BombshellBill)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_BombshellBlaster) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_BulletBill) = {
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-            EVT_CALL(SetSelfVar, 0, 0)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_BulletBill)))
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+            Call(SetSelfVar, 0, 0)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_BulletBill)))
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_BombshellBill) = {
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetSelfVar, 0, 100)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetSelfVar, 0, 100)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_BillBlaster) = {
@@ -139,15 +139,15 @@ NpcSettings N(NpcSettings_BombshellBill) = {
 };
 
 EvtScript N(EVS_NpcInit_BombshellBlaster) = {
-    EVT_CALL(SetSelfVar, 1, -995)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 1, -995)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BombshellBlaster_03) = {
-    EVT_CALL(SetSelfVar, 1, 30)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 1, 30)
+    Return
+    End
 };
 
 NpcData N(NpcData_BombshellBlaster_01)[] = {

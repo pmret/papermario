@@ -6,8 +6,8 @@
 #include "world/common/entity/SuperBlock.inc.c"
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 306, 90, -104, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_TIK07_Item_StarPiece)
+    Call(MakeItemEntity, ITEM_STAR_PIECE, 306, 90, -104, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_TIK07_Item_StarPiece)
     EVT_MAKE_SUPER_BLOCK(820, 70, -5, 0)
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

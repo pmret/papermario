@@ -6,22 +6,22 @@
 #include "battle/common/stage/lib/MovingClouds.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SET(LVar0, MODEL_g65)
-    EVT_SET(LVar2, 0)
-    EVT_EXEC(N(EVS_AnimateCloud))
-    EVT_SET(LVar0, MODEL_g62)
-    EVT_SET(LVar2, 70)
-    EVT_SET(LVar3, 175)
-    EVT_SET(LVar4, -170)
-    EVT_EXEC(N(EVS_AnimateCloud_WithOffset2D))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Set(LVar0, MODEL_g65)
+    Set(LVar2, 0)
+    Exec(N(EVS_AnimateCloud))
+    Set(LVar0, MODEL_g62)
+    Set(LVar2, 70)
+    Set(LVar3, 175)
+    Set(LVar4, -170)
+    Exec(N(EVS_AnimateCloud_WithOffset2D))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

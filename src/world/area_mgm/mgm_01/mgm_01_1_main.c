@@ -37,42 +37,42 @@ API_CALLABLE(N(GetSpotlightPos)) {
 }
 
 EvtScript N(EVS_UpdateSpotlight) = {
-    EVT_LABEL(0)
-        EVT_CALL(N(GetSpotlightPos))
-        EVT_CALL(TranslateModel, MODEL_o36, LVar0, 0, LVar1)
-        EVT_CALL(RotateModel, MODEL_o37, LVar2, 1, 0, 0)
-        EVT_CALL(RotateModel, MODEL_o37, LVar3, 0, 0, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(N(GetSpotlightPos))
+        Call(TranslateModel, MODEL_o36, LVar0, 0, LVar1)
+        Call(RotateModel, MODEL_o37, LVar2, 1, 0, 0)
+        Call(RotateModel, MODEL_o37, LVar3, 0, 0, 1)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(D_8024189C_E13FFC) = {
-    EVT_CALL(EnableModel, MODEL_o64, FALSE)
-    EVT_CALL(EnableModel, MODEL_o65, FALSE)
-    EVT_CALL(EnableModel, MODEL_o66, FALSE)
-    EVT_CALL(EnableModel, MODEL_o67, FALSE)
-    EVT_CALL(EnableModel, MODEL_o53, FALSE)
-    EVT_CALL(EnableModel, MODEL_o68, FALSE)
-    EVT_CALL(EnableModel, MODEL_o73, FALSE)
-    EVT_CALL(EnableModel, MODEL_o54, FALSE)
-    EVT_CALL(EnableModel, MODEL_o69, FALSE)
-    EVT_CALL(EnableModel, MODEL_o55, FALSE)
-    EVT_CALL(EnableModel, MODEL_o72, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(EnableModel, MODEL_o64, FALSE)
+    Call(EnableModel, MODEL_o65, FALSE)
+    Call(EnableModel, MODEL_o66, FALSE)
+    Call(EnableModel, MODEL_o67, FALSE)
+    Call(EnableModel, MODEL_o53, FALSE)
+    Call(EnableModel, MODEL_o68, FALSE)
+    Call(EnableModel, MODEL_o73, FALSE)
+    Call(EnableModel, MODEL_o54, FALSE)
+    Call(EnableModel, MODEL_o69, FALSE)
+    Call(EnableModel, MODEL_o55, FALSE)
+    Call(EnableModel, MODEL_o72, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_CALL(SetSpriteShading, SHADING_ARN_09)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(SetRenderMode, MODEL_o36, RENDER_MODE_SURFACE_XLU_ZB_ZUPD)
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_UpdateSpotlight))
-    EVT_EXEC(N(D_8024189C_E13FFC))
-    EVT_EXEC(N(EVS_802424A4))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_ARN_09)
+    SetUP_CAMERA_NO_LEAD()
+    Call(SetRenderMode, MODEL_o36, RENDER_MODE_SURFACE_XLU_ZB_ZUPD)
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_UpdateSpotlight))
+    Exec(N(D_8024189C_E13FFC))
+    Exec(N(EVS_802424A4))
+    Return
+    End
 };

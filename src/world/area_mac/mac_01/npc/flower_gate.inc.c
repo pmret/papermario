@@ -1,188 +1,188 @@
 EvtScript N(EVS_MinhThankYou) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetNpcPos, NPC_MinhT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, 4, LVar0, LVar1, LVar2, 300, 16, -8)
-    EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_006F)
-    EVT_CALL(ResetCam, CAM_DEFAULT, 4)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(GetNpcPos, NPC_MinhT, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, 4, LVar0, LVar1, LVar2, 300, 16, -8)
+    Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_006F)
+    Call(ResetCam, CAM_DEFAULT, 4)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_GardenShyGuy1) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 170, 27, 380)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-    EVT_LOOP(0)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, 180, 27, 280, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 220, 250, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, 310, 27, 250, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 350, 280, 15)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, 360, 27, 380, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 300, 450, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 230, 450, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 170, 380, 15)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 170, 27, 380)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Loop(0)
+        Call(InterpNpcYaw, NPC_SELF, 90, 1)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, 180, 27, 280, 15)
+        Call(NpcMoveTo, NPC_SELF, 220, 250, 15)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, 310, 27, 250, 15)
+        Call(NpcMoveTo, NPC_SELF, 350, 280, 15)
+        Call(InterpNpcYaw, NPC_SELF, 270, 1)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, 360, 27, 380, 15)
+        Call(NpcMoveTo, NPC_SELF, 300, 450, 15)
+        Call(NpcMoveTo, NPC_SELF, 230, 450, 15)
+        Call(NpcMoveTo, NPC_SELF, 170, 380, 15)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_GardenShyGuy2) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 350, 27, 280)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-    EVT_LOOP(0)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, 360, 27, 380, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 300, 450, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 230, 450, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 170, 380, 15)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, 180, 27, 280, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 220, 250, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_SELF, 310, 27, 250, 15)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 350, 280, 15)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 350, 27, 280)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Loop(0)
+        Call(InterpNpcYaw, NPC_SELF, 270, 1)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, 360, 27, 380, 15)
+        Call(NpcMoveTo, NPC_SELF, 300, 450, 15)
+        Call(NpcMoveTo, NPC_SELF, 230, 450, 15)
+        Call(NpcMoveTo, NPC_SELF, 170, 380, 15)
+        Call(InterpNpcYaw, NPC_SELF, 90, 1)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, 180, 27, 280, 15)
+        Call(NpcMoveTo, NPC_SELF, 220, 250, 15)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_SELF, 310, 27, 250, 15)
+        Call(NpcMoveTo, NPC_SELF, 350, 280, 15)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_GardenShyGuy_RunAway) = {
-    EVT_SET(LVarA, GF_MAC01_ChasedShyGuysFromGardenA)
-    EVT_ADD(LVarA, GF_MAC01_ChasedShyGuysFromGardenB)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 27, LVar2, 10)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-    EVT_SET(LVar0, -1)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVar9)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 160, 400, 0)
-    EVT_KILL_THREAD(LVar9)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(LVarA, 2)
-        EVT_EXEC(N(EVS_MinhThankYou))
-    EVT_END_IF
-    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, 110, 20, 420, 0)
-    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, 40, 0, 450, 0)
-    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -30, 550, 0)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -30, 700, 0)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, GF_MAC01_ChasedShyGuysFromGardenA)
+    Add(LVarA, GF_MAC01_ChasedShyGuysFromGardenB)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_SELF, LVar0, 27, LVar2, 10)
+    Call(SetNpcSpeed, NPC_SELF, Float(8.0))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+    Call(InterpNpcYaw, NPC_SELF, 270, 1)
+    Set(LVar0, -1)
+    Call(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    ExecGetTID(N(D_8024E6F8_80EF78), LVar9)
+    Call(NpcMoveTo, NPC_SELF, 160, 400, 0)
+    KillThread(LVar9)
+    Call(DisablePlayerInput, FALSE)
+    IfEq(LVarA, 2)
+        Exec(N(EVS_MinhThankYou))
+    EndIf
+    Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, 110, 20, 420, 0)
+    Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, 40, 0, 450, 0)
+    Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+    Call(NpcMoveTo, NPC_SELF, -30, 550, 0)
+    Call(NpcMoveTo, NPC_SELF, -30, 700, 0)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 EvtScript N(EVS_GardenShyGuy_PlayHitReactionSounds) = {
-    EVT_SET(LVar0, 1)
-    EVT_CALL(GetOwnerEncounterTrigger, LVar1)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_PARTNER)
-        EVT_CASE_DEFAULT
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_IF_LE(LVar1, 50)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_LE(LVar3, 80)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
-    EVT_SET(LVar0, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 1)
+    Call(GetOwnerEncounterTrigger, LVar1)
+    Switch(LVar1)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseEq(ENCOUNTER_TRIGGER_PARTNER)
+        CaseDefault
+            Return
+    EndSwitch
+    Call(GetPlayerPos, LVar1, LVar2, LVar3)
+    IfLe(LVar1, 50)
+        Return
+    EndIf
+    IfLe(LVar3, 80)
+        Return
+    EndIf
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
+    Set(LVar0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_GardenShyGuy1) = {
-    EVT_EXEC_WAIT(N(EVS_GardenShyGuy_PlayHitReactionSounds))
-    EVT_IF_EQ(LVar0, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_MAC01_ChasedShyGuysFromGardenA, TRUE)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_GardenShyGuy_RunAway)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_GardenShyGuy_PlayHitReactionSounds))
+    IfEq(LVar0, 1)
+        Return
+    EndIf
+    Set(GF_MAC01_ChasedShyGuysFromGardenA, TRUE)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_GardenShyGuy_RunAway)))
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_GardenShyGuy2) = {
-    EVT_EXEC_WAIT(N(EVS_GardenShyGuy_PlayHitReactionSounds))
-    EVT_IF_EQ(LVar0, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_MAC01_ChasedShyGuysFromGardenB, TRUE)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_GardenShyGuy_RunAway)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_GardenShyGuy_PlayHitReactionSounds))
+    IfEq(LVar0, 1)
+        Return
+    EndIf
+    Set(GF_MAC01_ChasedShyGuysFromGardenB, TRUE)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_GardenShyGuy_RunAway)))
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GardenShyGuy1) = {
-    EVT_IF_EQ(GF_MAC01_ChasedShyGuysFromGardenA, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_GardenShyGuy1)))
-        EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_GardenShyGuy1)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_ChasedShyGuysFromGardenA, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_GardenShyGuy1)))
+        Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_GardenShyGuy1)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GardenShyGuy2) = {
-    EVT_IF_EQ(GF_MAC01_ChasedShyGuysFromGardenB, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_GardenShyGuy2)))
-        EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_GardenShyGuy2)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_ChasedShyGuysFromGardenB, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_GardenShyGuy2)))
+        Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_GardenShyGuy2)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 // BUBULB
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_SET(LVar0, MSG_Outro_0045)
-    EVT_ELSE
-        EVT_SET(LVar0, MSG_MAC_Plaza_0077)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_EPILOGUE)
+        Set(LVar0, MSG_Outro_0045)
+    Else
+        Set(LVar0, MSG_MAC_Plaza_0077)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Pink_Talk, ANIM_Bubulb_Pink_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_RANGE(STORY_CH5_STAR_SPRIT_DEPARTED, STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_CALL(SetNpcPos, NPC_SELF, 200, 20, 500)
-            EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb)))
-        EVT_CASE_EQ(STORY_EPILOGUE)
-            EVT_CALL(SetNpcPos, NPC_SELF, 230, 30, 400)
-            EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb)))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseRange(STORY_CH5_STAR_SPRIT_DEPARTED, STORY_CH6_FLOWER_GATE_OPEN)
+            Call(SetNpcPos, NPC_SELF, 200, 20, 500)
+            Call(SetNpcYaw, NPC_SELF, 270)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb)))
+        CaseEq(STORY_EPILOGUE)
+            Call(SetNpcPos, NPC_SELF, 230, 30, 400)
+            Call(SetNpcYaw, NPC_SELF, 270)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb)))
+    EndSwitch
+    Return
+    End
 };
 
 // MINH T
@@ -212,115 +212,115 @@ API_CALLABLE(N(ResetPartnerTetherDist)) {
 }
 
 EvtScript N(EVS_FadeInFlowerGateGlowAlpha) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitf, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(EnableModel, MODEL_pica, TRUE)
-    EVT_CALL(SetModelCustomGfx, MODEL_pica, CUSTOM_GFX_4, -1)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_4, EVT_PTR(N(gfx_build_flower_gate_glow)), NULL)
-    EVT_CALL(MakeLerp, 0, 255, 30, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetFlowerGateGlowAlpha), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitf, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
+    Call(EnableModel, MODEL_pica, TRUE)
+    Call(SetModelCustomGfx, MODEL_pica, CUSTOM_GFX_4, -1)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_4, Ref(N(gfx_build_flower_gate_glow)), NULL)
+    Call(MakeLerp, 0, 255, 30, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetFlowerGateGlowAlpha), LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_ModulateFlowerGateGlowAlpha) = {
-    EVT_SET(LVar1, 255)
-    EVT_LOOP(LVar0)
-        EVT_LOOP(15)
-            EVT_ADD(LVar1, -5)
-            EVT_CALL(N(SetFlowerGateGlowAlpha), LVar1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(15)
-            EVT_ADD(LVar1, 5)
-            EVT_CALL(N(SetFlowerGateGlowAlpha), LVar1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar1, 255)
+    Loop(LVar0)
+        Loop(15)
+            Add(LVar1, -5)
+            Call(N(SetFlowerGateGlowAlpha), LVar1)
+            Wait(1)
+        EndLoop
+        Loop(15)
+            Add(LVar1, 5)
+            Call(N(SetFlowerGateGlowAlpha), LVar1)
+            Wait(1)
+        EndLoop
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_FadeOutFlowerGateGlowAlpha) = {
-    EVT_CALL(MakeLerp, 255, 0, 30, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetFlowerGateGlowAlpha), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableModel, MODEL_pica, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilitf, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, 255, 0, 30, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetFlowerGateGlowAlpha), LVar0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableModel, MODEL_pica, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilitf, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_FlowerGateAppears) = {
 #if VERSION_PAL
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(1.0 / DT), 266, 27, 373, 300, 15, -6)
+    Call(SetCamProperties, CAM_DEFAULT, Float(1.0 / DT), 266, 27, 373, 300, 15, -6)
 #else
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, 1, 266, 27, 373, 300, 15, -6)
+    Call(SetCamProperties, CAM_DEFAULT, 1, 266, 27, 373, 300, 15, -6)
 #endif
-    EVT_EXEC(N(EVS_PlayFlowerGateSong))
-    EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 0, 266, 50, 338, 1, LVar9)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, 266, 50, 338, 100, 0)
-        EVT_WAIT(10)
-        EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, 240, 50, 338, 100, 0)
-        EVT_WAIT(10)
-        EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, 292, 50, 338, 100, 0)
-    EVT_END_THREAD
-    EVT_SET(LVar0, 3)
-    EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
-    EVT_WAIT(30 / DT)
-    EVT_CALL(EnableModel, MODEL_r_door, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_SPINNING, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 3060, 80, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_r_door, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableModel, MODEL_r_door, FALSE)
-    EVT_CALL(EnableGroup, MODEL_to_flo, TRUE)
-    EVT_CALL(DismissEffect, LVar9)
-    EVT_CALL(PlaySoundAt, SOUND_WOODEN_DOOR_WAVES, SOUND_SPACE_DEFAULT, 266, 50, 338)
-    EVT_LOOP(3)
-        EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, 266, 50, 338, 1, 20)
-        EVT_WAIT(5)
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IS_THREAD_RUNNING(LVar2, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
+    Exec(N(EVS_PlayFlowerGateSong))
+    PlayEffect(EFFECT_LIGHT_RAYS, 0, 266, 50, 338, 1, LVar9)
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_FadeInFlowerGateGlowAlpha))
+    Thread
+        Wait(10)
+        PlayEffect(EFFECT_FLOATING_FLOWER, 266, 50, 338, 100, 0)
+        Wait(10)
+        PlayEffect(EFFECT_FLOATING_FLOWER, 240, 50, 338, 100, 0)
+        Wait(10)
+        PlayEffect(EFFECT_FLOATING_FLOWER, 292, 50, 338, 100, 0)
+    EndThread
+    Set(LVar0, 3)
+    ExecGetTID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
+    Wait(30 / DT)
+    Call(EnableModel, MODEL_r_door, TRUE)
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_SPINNING, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 3060, 80, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_r_door, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableModel, MODEL_r_door, FALSE)
+    Call(EnableGroup, MODEL_to_flo, TRUE)
+    Call(DismissEffect, LVar9)
+    Call(PlaySoundAt, SOUND_WOODEN_DOOR_WAVES, SOUND_SPACE_DEFAULT, 266, 50, 338)
+    Loop(3)
+        PlayEffect(EFFECT_ENERGY_ORB_WAVE, 5, 266, 50, 338, 1, 20)
+        Wait(5)
+    EndLoop
+    Loop(0)
+        Wait(1)
+        IsThreadRunning(LVar2, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    ExecWait(N(EVS_FadeOutFlowerGateGlowAlpha))
 #if VERSION_PAL
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1 * DT))
+    Call(ResetCam, CAM_DEFAULT, Float(1 * DT))
 #else
-    EVT_CALL(ResetCam, CAM_DEFAULT, 1)
+    Call(ResetCam, CAM_DEFAULT, 1)
 #endif
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_SetupMusic))
+    Return
+    End
 };
 
 s32 N(LetterList_MinhT_Unused)[] = {
@@ -337,463 +337,463 @@ s32 N(ItemList_MagicalSeeds)[] = {
 };
 
 EvtScript N(EVS_MinhT_PlantSeed) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, LVar4)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 266, 27, 373)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 266, 27, 373)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, LVar4)
+    Wait(10 * DT)
+    Call(UseSettingsFrom, CAM_DEFAULT, 266, 27, 373)
+    Call(SetPanTarget, CAM_DEFAULT, 266, 27, 373)
 #if VERSION_PAL
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
 #else
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, 1)
+    Call(SetCamSpeed, CAM_DEFAULT, 1)
 #endif
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 175, 444, 0)
-    EVT_CALL(NpcJump0, NPC_SELF, 200, 27, 435, 0)
-    EVT_SWITCH(LVar5)
-        EVT_CASE_EQ(0)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 200, 407, 0)
-        EVT_CASE_EQ(1)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 220, 420, 0)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 200, 270, 0)
-        EVT_CASE_EQ(2)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 310, 420, 0)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 330, 270, 0)
-        EVT_CASE_EQ(3)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 310, 420, 0)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 330, 407, 0)
-    EVT_END_SWITCH
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Cheer)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_PLANT_FLOWERS, SOUND_SPACE_DEFAULT)
-    EVT_SWITCH(LVar5)
-        EVT_CASE_EQ(0)
-            EVT_CALL(EnableModel, MODEL_o375, TRUE)
-            EVT_CALL(EnableModel, MODEL_o370, TRUE)
-        EVT_CASE_EQ(1)
-            EVT_CALL(EnableModel, MODEL_o377, TRUE)
-            EVT_CALL(EnableModel, MODEL_o372, TRUE)
-        EVT_CASE_EQ(2)
-            EVT_CALL(EnableModel, MODEL_o376, TRUE)
-            EVT_CALL(EnableModel, MODEL_o371, TRUE)
-        EVT_CASE_EQ(3)
-            EVT_CALL(EnableModel, MODEL_o378, TRUE)
-            EVT_CALL(EnableModel, MODEL_o373, TRUE)
-    EVT_END_SWITCH
-    EVT_IF_NE(LVar3, 3)
-        EVT_THREAD
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
-    EVT_SWITCH(LVar5)
-        EVT_CASE_EQ(1)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 220, 420, 0)
-        EVT_CASE_OR_EQ(2)
-        EVT_CASE_OR_EQ(3)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 310, 420, 0)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(NpcMoveTo, NPC_SELF, 186, 425, 0)
-    EVT_CALL(NpcJump0, NPC_SELF, 175, 20, 444, 0)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 150, 480, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_IF_EQ(LVar3, 3)
-        EVT_CALL(InterpNpcYaw, NPC_MinhT, 90, 0)
-        EVT_EXEC_WAIT(N(EVS_Scene_FlowerGateAppears))
-        EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0070)
-        EVT_SET(GB_StoryProgress, STORY_CH6_FLOWER_GATE_OPEN)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(InterpNpcYaw, NPC_SELF, 90, 1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
+    Call(NpcMoveTo, NPC_SELF, 175, 444, 0)
+    Call(NpcJump0, NPC_SELF, 200, 27, 435, 0)
+    Switch(LVar5)
+        CaseEq(0)
+            Call(NpcMoveTo, NPC_SELF, 200, 407, 0)
+        CaseEq(1)
+            Call(NpcMoveTo, NPC_SELF, 220, 420, 0)
+            Call(NpcMoveTo, NPC_SELF, 200, 270, 0)
+        CaseEq(2)
+            Call(NpcMoveTo, NPC_SELF, 310, 420, 0)
+            Call(NpcMoveTo, NPC_SELF, 330, 270, 0)
+        CaseEq(3)
+            Call(NpcMoveTo, NPC_SELF, 310, 420, 0)
+            Call(NpcMoveTo, NPC_SELF, 330, 407, 0)
+    EndSwitch
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Cheer)
+    Wait(20 * DT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_PLANT_FLOWERS, SOUND_SPACE_DEFAULT)
+    Switch(LVar5)
+        CaseEq(0)
+            Call(EnableModel, MODEL_o375, TRUE)
+            Call(EnableModel, MODEL_o370, TRUE)
+        CaseEq(1)
+            Call(EnableModel, MODEL_o377, TRUE)
+            Call(EnableModel, MODEL_o372, TRUE)
+        CaseEq(2)
+            Call(EnableModel, MODEL_o376, TRUE)
+            Call(EnableModel, MODEL_o371, TRUE)
+        CaseEq(3)
+            Call(EnableModel, MODEL_o378, TRUE)
+            Call(EnableModel, MODEL_o373, TRUE)
+    EndSwitch
+    IfNe(LVar3, 3)
+        Thread
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(PanToTarget, CAM_DEFAULT, 0, 1)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        EndThread
+    EndIf
+    Call(InterpNpcYaw, NPC_SELF, 270, 1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
+    Switch(LVar5)
+        CaseEq(1)
+            Call(NpcMoveTo, NPC_SELF, 220, 420, 0)
+        CaseOrEq(2)
+        CaseOrEq(3)
+            Call(NpcMoveTo, NPC_SELF, 310, 420, 0)
+        EndCaseGroup
+    EndSwitch
+    Call(NpcMoveTo, NPC_SELF, 186, 425, 0)
+    Call(NpcJump0, NPC_SELF, 175, 20, 444, 0)
+    Call(NpcMoveTo, NPC_SELF, 150, 480, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    IfEq(LVar3, 3)
+        Call(InterpNpcYaw, NPC_MinhT, 90, 0)
+        ExecWait(N(EVS_Scene_FlowerGateAppears))
+        Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0070)
+        Set(GB_StoryProgress, STORY_CH6_FLOWER_GATE_OPEN)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(D_80258FFC_81987C) = {
-    EVT_IF_NE(LVar5, 0)
-        EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0075)
-    EVT_END_IF
-    EVT_SET(LVar0, EVT_PTR(N(ItemList_MagicalSeeds)))
-    EVT_SET(LVar1, 18)
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_RETURN
-        EVT_CASE_EQ(-1)
-            EVT_RETURN
-        EVT_CASE_EQ(ITEM_MAGICAL_SEED1)
-            EVT_SET(GF_MAC01_Planted_MagicalSeed1, TRUE)
-            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
-            EVT_SET(LVar5, 0)
-            EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-        EVT_CASE_EQ(ITEM_MAGICAL_SEED2)
-            EVT_SET(GF_MAC01_Planted_MagicalSeed2, TRUE)
-            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
-            EVT_SET(LVar5, 1)
-            EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-        EVT_CASE_EQ(ITEM_MAGICAL_SEED3)
-            EVT_SET(GF_MAC01_Planted_MagicalSeed3, TRUE)
-            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
-            EVT_SET(LVar5, 2)
-            EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-        EVT_CASE_EQ(ITEM_MAGICAL_SEED4)
-            EVT_SET(GF_MAC01_Planted_MagicalSeed4, TRUE)
-            EVT_SET(LVar4, MSG_MAC_Plaza_0076)
-            EVT_SET(LVar5, 3)
-            EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfNe(LVar5, 0)
+        Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0075)
+    EndIf
+    Set(LVar0, Ref(N(ItemList_MagicalSeeds)))
+    Set(LVar1, 18)
+    ExecWait(N(EVS_ChooseKeyItem))
+    Switch(LVar0)
+        CaseEq(0)
+            Return
+        CaseEq(-1)
+            Return
+        CaseEq(ITEM_MAGICAL_SEED1)
+            Set(GF_MAC01_Planted_MagicalSeed1, TRUE)
+            Set(LVar4, MSG_MAC_Plaza_0076)
+            Set(LVar5, 0)
+            ExecWait(N(EVS_MinhT_PlantSeed))
+        CaseEq(ITEM_MAGICAL_SEED2)
+            Set(GF_MAC01_Planted_MagicalSeed2, TRUE)
+            Set(LVar4, MSG_MAC_Plaza_0076)
+            Set(LVar5, 1)
+            ExecWait(N(EVS_MinhT_PlantSeed))
+        CaseEq(ITEM_MAGICAL_SEED3)
+            Set(GF_MAC01_Planted_MagicalSeed3, TRUE)
+            Set(LVar4, MSG_MAC_Plaza_0076)
+            Set(LVar5, 2)
+            ExecWait(N(EVS_MinhT_PlantSeed))
+        CaseEq(ITEM_MAGICAL_SEED4)
+            Set(GF_MAC01_Planted_MagicalSeed4, TRUE)
+            Set(LVar4, MSG_MAC_Plaza_0076)
+            Set(LVar5, 3)
+            ExecWait(N(EVS_MinhT_PlantSeed))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_MinhT) = {
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MinhT))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_MinhT))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVar2, 0)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0065)
-            EVT_SET(LVar1, MSG_MAC_Plaza_0065)
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar2, 1)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
-            EVT_ADD(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
-            EVT_IF_EQ(LVar0, 2)
-                EVT_SET(LVar2, 1)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_006D)
-                EVT_SET(LVar1, MSG_MAC_Plaza_006E)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH6_FLOWER_GATE_OPEN)
-            EVT_SET(LVar2, 1)
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0071)
-            EVT_SET(LVar1, MSG_MAC_Plaza_0071)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0072)
-            EVT_SET(LVar1, MSG_MAC_Plaza_0072)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0073)
-            EVT_SET(LVar1, MSG_MAC_Plaza_0073)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0042)
-            EVT_SET(LVar1, MSG_Outro_0042)
-    EVT_END_SWITCH
-    EVT_IF_EQ(LVar2, 1)
-        EVT_SET(LVar3, GF_MAC01_Planted_MagicalSeed1)
-        EVT_ADD(LVar3, GF_MAC01_Planted_MagicalSeed2)
-        EVT_ADD(LVar3, GF_MAC01_Planted_MagicalSeed3)
-        EVT_ADD(LVar3, GF_MAC01_Planted_MagicalSeed4)
-        EVT_SWITCH(GB_StoryProgress)
-            EVT_CASE_RANGE(STORY_CH5_STAR_SPRIT_DEPARTED, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-                EVT_SET(LVar4, GF_MAC02_Gift_MagicalSeed1)
-                EVT_ADD(LVar4, GF_IWA02_Gift_MagicalSeed2)
-                EVT_ADD(LVar4, GF_MIM04_Gift_MagicalSeed3)
-                EVT_ADD(LVar4, GF_JAN03_Gift_MagicalSeed4)
-                EVT_SET(LVar5, GF_MAC01_HeardAboutBubulbs)
-                EVT_IF_EQ(LVar5, 0)
-                    EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0074)
-                    EVT_SET(GF_MAC01_HeardAboutBubulbs, TRUE)
-                EVT_END_IF
-                EVT_IF_NE(LVar4, 0)
-                    EVT_EXEC_WAIT(N(D_80258FFC_81987C))
-                    EVT_RETURN
-                EVT_END_IF
-                EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0075)
-                EVT_RETURN
-        EVT_END_SWITCH
-        EVT_SWITCH(LVar3)
-            EVT_CASE_EQ(0)
-                EVT_SET(LVar0, MSG_MAC_Plaza_0066)
-                EVT_SET(LVar1, MSG_MAC_Plaza_0066)
-            EVT_CASE_EQ(1)
-                EVT_SET(LVar0, MSG_MAC_Plaza_0068)
-                EVT_SET(LVar1, MSG_MAC_Plaza_0068)
-            EVT_CASE_EQ(2)
-                EVT_SET(LVar0, MSG_MAC_Plaza_006A)
-                EVT_SET(LVar1, MSG_MAC_Plaza_006A)
-            EVT_CASE_EQ(3)
-                EVT_SET(LVar0, MSG_MAC_Plaza_006C)
-                EVT_SET(LVar1, MSG_MAC_Plaza_006C)
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_IF_EQ(AF_MAC_14, FALSE)
-        EVT_SET(AF_MAC_14, TRUE)
-    EVT_ELSE
-        EVT_SET(LVar0, LVar1)
-        EVT_SET(AF_MAC_14, FALSE)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, LVar0)
-    EVT_IF_EQ(LVar2, 1)
-        EVT_SET(LVar0, EVT_PTR(N(ItemList_MagicalSeeds)))
-        EVT_SET(LVar1, 18)
-        EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_RETURN
-            EVT_CASE_EQ(-1)
-                EVT_RETURN
-            EVT_CASE_EQ(ITEM_MAGICAL_SEED1)
-                EVT_SET(GF_MAC01_Planted_MagicalSeed1, TRUE)
-                EVT_SET(LVar4, MSG_MAC_Plaza_0067)
-                EVT_SET(LVar5, 0)
-                EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-            EVT_CASE_EQ(ITEM_MAGICAL_SEED2)
-                EVT_SET(GF_MAC01_Planted_MagicalSeed2, TRUE)
-                EVT_SET(LVar4, MSG_MAC_Plaza_0069)
-                EVT_SET(LVar5, 1)
-                EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-            EVT_CASE_EQ(ITEM_MAGICAL_SEED3)
-                EVT_SET(GF_MAC01_Planted_MagicalSeed3, TRUE)
-                EVT_SET(LVar4, MSG_MAC_Plaza_006B)
-                EVT_SET(LVar5, 2)
-                EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-            EVT_CASE_EQ(ITEM_MAGICAL_SEED4)
-                EVT_SET(LVar5, 3)
-                EVT_EXEC_WAIT(N(EVS_MinhT_PlantSeed))
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_LetterPrompt_MinhT))
+    ExecWait(N(EVS_LetterReward_MinhT))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Set(LVar2, 0)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_0065)
+            Set(LVar1, MSG_MAC_Plaza_0065)
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar2, 1)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Set(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
+            Add(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
+            IfEq(LVar0, 2)
+                Set(LVar2, 1)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_006D)
+                Set(LVar1, MSG_MAC_Plaza_006E)
+            EndIf
+        CaseLt(STORY_CH6_FLOWER_GATE_OPEN)
+            Set(LVar2, 1)
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Set(LVar0, MSG_MAC_Plaza_0071)
+            Set(LVar1, MSG_MAC_Plaza_0071)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_0072)
+            Set(LVar1, MSG_MAC_Plaza_0072)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_0073)
+            Set(LVar1, MSG_MAC_Plaza_0073)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0042)
+            Set(LVar1, MSG_Outro_0042)
+    EndSwitch
+    IfEq(LVar2, 1)
+        Set(LVar3, GF_MAC01_Planted_MagicalSeed1)
+        Add(LVar3, GF_MAC01_Planted_MagicalSeed2)
+        Add(LVar3, GF_MAC01_Planted_MagicalSeed3)
+        Add(LVar3, GF_MAC01_Planted_MagicalSeed4)
+        Switch(GB_StoryProgress)
+            CaseRange(STORY_CH5_STAR_SPRIT_DEPARTED, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+                Set(LVar4, GF_MAC02_Gift_MagicalSeed1)
+                Add(LVar4, GF_IWA02_Gift_MagicalSeed2)
+                Add(LVar4, GF_MIM04_Gift_MagicalSeed3)
+                Add(LVar4, GF_JAN03_Gift_MagicalSeed4)
+                Set(LVar5, GF_MAC01_HeardAboutBubulbs)
+                IfEq(LVar5, 0)
+                    Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0074)
+                    Set(GF_MAC01_HeardAboutBubulbs, TRUE)
+                EndIf
+                IfNe(LVar4, 0)
+                    ExecWait(N(D_80258FFC_81987C))
+                    Return
+                EndIf
+                Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, MSG_MAC_Plaza_0075)
+                Return
+        EndSwitch
+        Switch(LVar3)
+            CaseEq(0)
+                Set(LVar0, MSG_MAC_Plaza_0066)
+                Set(LVar1, MSG_MAC_Plaza_0066)
+            CaseEq(1)
+                Set(LVar0, MSG_MAC_Plaza_0068)
+                Set(LVar1, MSG_MAC_Plaza_0068)
+            CaseEq(2)
+                Set(LVar0, MSG_MAC_Plaza_006A)
+                Set(LVar1, MSG_MAC_Plaza_006A)
+            CaseEq(3)
+                Set(LVar0, MSG_MAC_Plaza_006C)
+                Set(LVar1, MSG_MAC_Plaza_006C)
+        EndSwitch
+    EndIf
+    IfEq(AF_MAC_14, FALSE)
+        Set(AF_MAC_14, TRUE)
+    Else
+        Set(LVar0, LVar1)
+        Set(AF_MAC_14, FALSE)
+    EndIf
+    Call(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, LVar0)
+    IfEq(LVar2, 1)
+        Set(LVar0, Ref(N(ItemList_MagicalSeeds)))
+        Set(LVar1, 18)
+        ExecWait(N(EVS_ChooseKeyItem))
+        Switch(LVar0)
+            CaseEq(0)
+                Return
+            CaseEq(-1)
+                Return
+            CaseEq(ITEM_MAGICAL_SEED1)
+                Set(GF_MAC01_Planted_MagicalSeed1, TRUE)
+                Set(LVar4, MSG_MAC_Plaza_0067)
+                Set(LVar5, 0)
+                ExecWait(N(EVS_MinhT_PlantSeed))
+            CaseEq(ITEM_MAGICAL_SEED2)
+                Set(GF_MAC01_Planted_MagicalSeed2, TRUE)
+                Set(LVar4, MSG_MAC_Plaza_0069)
+                Set(LVar5, 1)
+                ExecWait(N(EVS_MinhT_PlantSeed))
+            CaseEq(ITEM_MAGICAL_SEED3)
+                Set(GF_MAC01_Planted_MagicalSeed3, TRUE)
+                Set(LVar4, MSG_MAC_Plaza_006B)
+                Set(LVar5, 2)
+                ExecWait(N(EVS_MinhT_PlantSeed))
+            CaseEq(ITEM_MAGICAL_SEED4)
+                Set(LVar5, 3)
+                ExecWait(N(EVS_MinhT_PlantSeed))
+        EndSwitch
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_MinhT) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_MinhT) = {
-    EVT_THREAD
-        EVT_LOOP(0)
-            EVT_SET(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
-            EVT_ADD(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
-            EVT_IF_EQ(LVar0, 2)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 0)
-                EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_MinhT)))
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
-    EVT_ADD(LVar0, 25)
-    EVT_LOOP(0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
-        EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 7)
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 7)
-        EVT_WAIT(10)
-        EVT_ADD(LVar0, -50)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
-        EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 7)
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 7)
-        EVT_WAIT(10)
-        EVT_ADD(LVar0, 50)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Thread
+        Loop(0)
+            Set(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
+            Add(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
+            IfEq(LVar0, 2)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 0)
+                Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_MinhT)))
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetNpcSpeed, NPC_SELF, Float(3.0))
+    Add(LVar0, 25)
+    Loop(0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
+        Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
+        Call(InterpNpcYaw, NPC_SELF, 270, 7)
+        Wait(10)
+        Call(InterpNpcYaw, NPC_SELF, 90, 7)
+        Wait(10)
+        Add(LVar0, -50)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
+        Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
+        Call(InterpNpcYaw, NPC_SELF, 90, 7)
+        Wait(10)
+        Call(InterpNpcYaw, NPC_SELF, 270, 7)
+        Wait(10)
+        Add(LVar0, 50)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MinhT) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
-            EVT_SET(GF_MAC01_ShyGuysTramplingGarden, TRUE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 1)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_MinhT)))
-    EVT_END_SWITCH
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MinhT)))
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
+            Set(GF_MAC01_ShyGuysTramplingGarden, TRUE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_400000, 1)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_MinhT)))
+    EndSwitch
+    Call(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Idle)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_MinhT)))
+    Return
+    End
 };
 
 // FLOWER GATE
 
 EvtScript N(EVS_ExitFlowerGate) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(2)
-    EVT_CALL(GetPlayerActionState, LVar3)
-    EVT_SET(LVar4, 0)
-    EVT_IF_EQ(LVar3, ACTION_STATE_IDLE)
-        EVT_ADD(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar3, ACTION_STATE_WALK)
-        EVT_ADD(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar3, ACTION_STATE_RUN)
-        EVT_ADD(LVar4, 1)
-    EVT_END_IF
-    EVT_IF_EQ(LVar4, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(SetPartnerTetherClose))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
-    EVT_SET(LVar0, 3)
-    EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
-    EVT_CALL(PlayerMoveTo, 300, 370, 15)
-    EVT_CALL(InterpPlayerYaw, -22, 0)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, 0, -120, 15, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(45)
-        EVT_CALL(MakeLerp, -120, 0, 15, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_CALL(PlayerMoveTo, 257, 300, 30)
-    EVT_WAIT(60)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerPos, 0, -500, 0)
-    EVT_CALL(N(ResetPartnerTetherDist))
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, 0, -500, 0)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IS_THREAD_RUNNING(LVar2, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
-    EVT_CALL(EnableGroup, MODEL_to_flo, FALSE)
-    EVT_CALL(EnableGroup, MODEL_r_door, TRUE)
-    EVT_CALL(MakeLerp, 180, 360, 20, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_r_door, LVar0, 0, 1, 0)
-        EVT_CALL(RotateModel, MODEL_r_gate, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_IF_EQ(GF_StartedChapter6, FALSE)
-        EVT_SET(GF_StartedChapter6, TRUE)
-        EVT_CALL(FadeOutMusic, 0, 1500)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_6, TRANSITION_BEGIN_OR_END_CHAPTER)
-        EVT_WAIT(100)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GotoMap, EVT_PTR("flo_00"), flo_00_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Wait(2)
+    Call(GetPlayerActionState, LVar3)
+    Set(LVar4, 0)
+    IfEq(LVar3, ACTION_STATE_IDLE)
+        Add(LVar4, 1)
+    EndIf
+    IfEq(LVar3, ACTION_STATE_WALK)
+        Add(LVar4, 1)
+    EndIf
+    IfEq(LVar3, ACTION_STATE_RUN)
+        Add(LVar4, 1)
+    EndIf
+    IfEq(LVar4, 0)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Call(N(SetPartnerTetherClose))
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_FadeInFlowerGateGlowAlpha))
+    Set(LVar0, 3)
+    ExecGetTID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
+    Call(PlayerMoveTo, 300, 370, 15)
+    Call(InterpPlayerYaw, -22, 0)
+    Thread
+        Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, 0, -120, 15, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(45)
+        Call(MakeLerp, -120, 0, 15, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    EndThread
+    Wait(15)
+    Call(PlayerMoveTo, 257, 300, 30)
+    Wait(60)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerPos, 0, -500, 0)
+    Call(N(ResetPartnerTetherDist))
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcPos, NPC_PARTNER, 0, -500, 0)
+    Loop(0)
+        Wait(1)
+        IsThreadRunning(LVar2, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_FadeOutFlowerGateGlowAlpha))
+    Call(EnableGroup, MODEL_to_flo, FALSE)
+    Call(EnableGroup, MODEL_r_door, TRUE)
+    Call(MakeLerp, 180, 360, 20, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_r_door, LVar0, 0, 1, 0)
+        Call(RotateModel, MODEL_r_gate, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    IfEq(GF_StartedChapter6, FALSE)
+        Set(GF_StartedChapter6, TRUE)
+        Call(FadeOutMusic, 0, 1500)
+        Call(GotoMapSpecial, Ref("kmr_22"), kmr_22_ENTRY_6, TRANSITION_BEGIN_OR_END_CHAPTER)
+        Wait(100)
+        Return
+    EndIf
+    Call(GotoMap, Ref("flo_00"), flo_00_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterFlowerGate) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(InterpPlayerYaw, 180, 2)
-    EVT_CALL(SetPlayerPos, 264, 27, 320)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, 264, 27, 320)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_FadeInFlowerGateGlowAlpha))
-    EVT_SET(LVar0, 2)
-    EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, -120, 15, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(N(SetPartnerTetherClose))
-    EVT_CALL(PlayerMoveTo, 264, 407, 30)
-    EVT_CALL(MakeLerp, -120, 0, 15, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IS_THREAD_RUNNING(LVar2, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(N(ResetPartnerTetherDist))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(InterpPlayerYaw, 180, 2)
+    Call(SetPlayerPos, 264, 27, 320)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcPos, NPC_PARTNER, 264, 27, 320)
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_FadeInFlowerGateGlowAlpha))
+    Set(LVar0, 2)
+    ExecGetTID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, -120, 15, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnablePartnerAI)
+    Call(N(SetPartnerTetherClose))
+    Call(PlayerMoveTo, 264, 407, 30)
+    Call(MakeLerp, -120, 0, 15, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_to_flo, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_WOODEN_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    Loop(0)
+        Wait(1)
+        IsThreadRunning(LVar2, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
+    Call(N(ResetPartnerTetherDist))
+    Call(DisablePlayerInput, FALSE)
+    Call(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_FLOWER_GATE | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_FadeOutFlowerGateGlowAlpha))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupFlowerModels) = {
-    EVT_IF_EQ(GF_MAC01_Planted_MagicalSeed1, FALSE)
-        EVT_CALL(EnableModel, MODEL_o375, FALSE)
-        EVT_CALL(EnableModel, MODEL_o370, FALSE)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_Planted_MagicalSeed2, FALSE)
-        EVT_CALL(EnableModel, MODEL_o377, FALSE)
-        EVT_CALL(EnableModel, MODEL_o372, FALSE)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_Planted_MagicalSeed3, FALSE)
-        EVT_CALL(EnableModel, MODEL_o376, FALSE)
-        EVT_CALL(EnableModel, MODEL_o371, FALSE)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_Planted_MagicalSeed4, FALSE)
-        EVT_CALL(EnableModel, MODEL_o378, FALSE)
-        EVT_CALL(EnableModel, MODEL_o373, FALSE)
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_FLOWER_GATE_OPEN)
-        EVT_CALL(EnableGroup, MODEL_to_flo, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitf, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(EnableModel, MODEL_pica, FALSE)
-    EVT_CALL(EnableModel, MODEL_r_door, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_Planted_MagicalSeed1, FALSE)
+        Call(EnableModel, MODEL_o375, FALSE)
+        Call(EnableModel, MODEL_o370, FALSE)
+    EndIf
+    IfEq(GF_MAC01_Planted_MagicalSeed2, FALSE)
+        Call(EnableModel, MODEL_o377, FALSE)
+        Call(EnableModel, MODEL_o372, FALSE)
+    EndIf
+    IfEq(GF_MAC01_Planted_MagicalSeed3, FALSE)
+        Call(EnableModel, MODEL_o376, FALSE)
+        Call(EnableModel, MODEL_o371, FALSE)
+    EndIf
+    IfEq(GF_MAC01_Planted_MagicalSeed4, FALSE)
+        Call(EnableModel, MODEL_o378, FALSE)
+        Call(EnableModel, MODEL_o373, FALSE)
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH6_FLOWER_GATE_OPEN)
+        Call(EnableGroup, MODEL_to_flo, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilitf, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_door_ura, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_stopper, COLLIDER_FLAGS_UPPER_MASK)
+    Call(EnableModel, MODEL_pica, FALSE)
+    Call(EnableModel, MODEL_r_door, FALSE)
+    Return
+    End
 };

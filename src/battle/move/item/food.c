@@ -102,81 +102,81 @@ API_CALLABLE(N(GetFoodParameters)) {
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseOnPartner) = {
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
-    EVT_WAIT(10)
-    EVT_SET(LVar1, LVarF)
-    EVT_EXEC_WAIT(N(UseItem))
-    EVT_SET(LVarE, LVarA)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_END_THREAD
-    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(EMS_StarIcon))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 0)
-    EVT_ADD(LVar1, 30)
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(SetVirtualEntityFlags, LVarA, 32)
-    EVT_THREAD
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 45)
-        EVT_CALL(MakeItemEntity, LVarE, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(LVarE, LVar0)
-        EVT_LOOP(25)
-            EVT_CALL(GetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-            EVT_CALL(N(func_802A123C_73330C), LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(RemoveItemEntity, LVarE)
-    EVT_END_THREAD
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamTarget, -125, 1, 0)
-    EVT_CALL(SetBattleCamOffsetZ, 41)
-    EVT_CALL(SetBattleCamZoom, 248)
-    EVT_CALL(MoveBattleCamOver, 25)
-    EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(0.4))
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 25)
-    EVT_CALL(AddBattleCamZoom, 100)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 25)
-    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_IF_GT(LVarB, 0)
-        EVT_CALL(N(func_802A12EC_7333BC), LVarB)
-    EVT_END_IF
-    EVT_WAIT(30)
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
-    EVT_WAIT(20)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
-    EVT_WAIT(1)
-    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
-    EVT_WAIT(10)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorYaw, ACTOR_PLAYER, 30)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 60)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 90)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 120)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 150)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 180)
+    Wait(10)
+    Set(LVar1, LVarF)
+    ExecWait(N(UseItem))
+    Set(LVarE, LVarA)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
+    Thread
+        Wait(20)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    EndThread
+    Call(CreateVirtualEntity, LVarA, Ref(EMS_StarIcon))
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar0, 0)
+    Add(LVar1, 30)
+    Add(LVar2, 5)
+    Call(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
+    Call(SetVirtualEntityFlags, LVarA, 32)
+    Thread
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar1, 45)
+        Call(MakeItemEntity, LVarE, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(LVarE, LVar0)
+        Loop(25)
+            Call(GetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
+            Call(N(func_802A123C_73330C), LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+        Call(RemoveItemEntity, LVarE)
+    EndThread
+    Call(InitTargetIterator)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetBattleCamTarget, -125, 1, 0)
+    Call(SetBattleCamOffsetZ, 41)
+    Call(SetBattleCamZoom, 248)
+    Call(MoveBattleCamOver, 25)
+    Call(SetVirtualEntityJumpGravity, LVarA, Float(0.4))
+    Add(LVar2, 5)
+    Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 25)
+    Call(AddBattleCamZoom, 100)
+    Call(MoveBattleCamOver, 30)
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Add(LVar1, 25)
+    Call(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    IfGt(LVarB, 0)
+        Call(N(func_802A12EC_7333BC), LVarB)
+    EndIf
+    Wait(30)
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVarB)
+    Wait(20)
+    Call(SetActorYaw, ACTOR_PLAYER, 150)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 120)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 90)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 60)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 30)
+    Wait(1)
+    Call(SetActorYaw, ACTOR_PLAYER, 0)
+    Wait(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseItem) = {
@@ -187,65 +187,65 @@ EvtScript N(EVS_UseItem) = {
     #define LV_NoRefund LVarE
     #define LV_IsHarmful LVarF
     
-    EVT_SET(LV_NoRefund, LVar1)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SET(LV_ItemID, LVar1)
-    EVT_CALL(N(GetFoodParameters), LV_ItemID)
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_IF_EQ(LVar0, ACTOR_PARTNER)
-        EVT_EXEC_WAIT(N(EVS_UseOnPartner))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVar1, LV_NoRefund)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_IF_EQ(LV_IsDrink, FALSE)
-        EVT_EXEC_WAIT(N(EatItem))
-    EVT_ELSE
-        EVT_EXEC_WAIT(N(DrinkItem))
-    EVT_END_IF
-    EVT_IF_EQ(LV_IsHarmful, TRUE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
-    EVT_END_IF
-    EVT_IF_GT(LV_HPAmt, 0)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 0)
-        EVT_ADD(LVar1, 35)
-        EVT_CALL(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, LV_HPAmt)
-    EVT_END_IF
-    EVT_IF_LT(LV_HPAmt, 0)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 0)
-        EVT_ADD(LVar1, 35)
-        EVT_CALL(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, LV_HPAmt)
-    EVT_END_IF
-    EVT_IF_GT(LV_FPAmt, 0)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 20)
-        EVT_ADD(LVar1, 25)
-        EVT_CALL(N(SpawnFlowerRecoveryFX), LVar0, LVar1, LVar2, LV_FPAmt)
-    EVT_END_IF
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 25)
-    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LV_HPAmt)
-    EVT_IF_NE(LV_HPAmt, 0)
-        EVT_CALL(N(AddHP), LV_HPAmt)
-    EVT_END_IF
-    EVT_IF_NE(LV_FPAmt, 0)
-        EVT_CALL(N(AddFP), LV_FPAmt)
-    EVT_END_IF
-    EVT_IF_EQ(LV_IsHarmful, FALSE)
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
-        EVT_WAIT(30)
-    EVT_ELSE
-        EVT_WAIT(30)
-    EVT_END_IF
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LV_HPAmt)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_RETURN
-    EVT_END
+    Set(LV_NoRefund, LVar1)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Set(LV_ItemID, LVar1)
+    Call(N(GetFoodParameters), LV_ItemID)
+    Call(InitTargetIterator)
+    Call(GetOwnerTarget, LVar0, LVar1)
+    IfEq(LVar0, ACTOR_PARTNER)
+        ExecWait(N(EVS_UseOnPartner))
+        Return
+    EndIf
+    Set(LVar1, LV_NoRefund)
+    ExecWait(N(UseItemWithEffect))
+    IfEq(LV_IsDrink, FALSE)
+        ExecWait(N(EatItem))
+    Else
+        ExecWait(N(DrinkItem))
+    EndIf
+    IfEq(LV_IsHarmful, TRUE)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
+    EndIf
+    IfGt(LV_HPAmt, 0)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 0)
+        Add(LVar1, 35)
+        Call(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, LV_HPAmt)
+    EndIf
+    IfLt(LV_HPAmt, 0)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 0)
+        Add(LVar1, 35)
+        Call(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, LV_HPAmt)
+    EndIf
+    IfGt(LV_FPAmt, 0)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 20)
+        Add(LVar1, 25)
+        Call(N(SpawnFlowerRecoveryFX), LVar0, LVar1, LVar2, LV_FPAmt)
+    EndIf
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 25)
+    Call(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LV_HPAmt)
+    IfNe(LV_HPAmt, 0)
+        Call(N(AddHP), LV_HPAmt)
+    EndIf
+    IfNe(LV_FPAmt, 0)
+        Call(N(AddFP), LV_FPAmt)
+    EndIf
+    IfEq(LV_IsHarmful, FALSE)
+        Wait(10)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
+        Wait(30)
+    Else
+        Wait(30)
+    EndIf
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Call(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LV_HPAmt)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Wait(20)
+    ExecWait(N(PlayerGoHome))
+    Return
+    End
 };

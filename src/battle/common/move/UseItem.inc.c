@@ -3,102 +3,102 @@
 
 /// Provide arg `TRUE` on `LVar1` to disable refunding.
 EvtScript N(UseItemWithEffect) = {
-    EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_69)
-        EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 18)
-        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-        EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlayerRunToGoal, 0)
-        EVT_ADD(LVar1, 45)
-        EVT_SET(LVar3, LVar1)
-        EVT_ADD(LVar3, 10)
-        EVT_ADD(LVar3, 2)
-        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0)
-        EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(LVarA, LVar0)
-        EVT_CALL(N(GiveRefund))
-        EVT_WAIT(LVar0)
-        EVT_WAIT(15)
-        EVT_CALL(N(GiveRefundCleanup))
-        EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_ELSE
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-        EVT_WAIT(4)
-        EVT_ADD(LVar1, 45)
-        EVT_SET(LVar3, LVar1)
-        EVT_ADD(LVar3, 10)
-        EVT_ADD(LVar3, 2)
-        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0)
-        EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
-        EVT_SET(LVarA, LVar0)
-        EVT_WAIT(15)
-        EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(LVar1, 0)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_69)
+        Wait(10)
+        Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 18)
+        Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
+        Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(PlayerRunToGoal, 0)
+        Add(LVar1, 45)
+        Set(LVar3, LVar1)
+        Add(LVar3, 10)
+        Add(LVar3, 2)
+        PlayEffect(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, Float(1.0), 30, 0)
+        Call(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(LVarA, LVar0)
+        Call(N(GiveRefund))
+        Wait(LVar0)
+        Wait(15)
+        Call(N(GiveRefundCleanup))
+        Call(RemoveItemEntity, LVarA)
+    Else
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_USE_ITEM)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+        Wait(4)
+        Add(LVar1, 45)
+        Set(LVar3, LVar1)
+        Add(LVar3, 10)
+        Add(LVar3, 2)
+        PlayEffect(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, Float(1.0), 30, 0)
+        Call(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
+        Set(LVarA, LVar0)
+        Wait(15)
+        Call(RemoveItemEntity, LVarA)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(UseItem) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, -85, 1, 0)
-    EVT_CALL(SetBattleCamOffsetZ, 41)
-    EVT_CALL(SetBattleCamZoom, 248)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 45)
-    EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVarE, LVar0)
-    EVT_CALL(N(GiveRefund))
-    EVT_WAIT(LVar0)
-    EVT_WAIT(15)
-    EVT_CALL(N(GiveRefundCleanup))
-    EVT_CALL(RemoveItemEntity, LVarE)
-    EVT_RETURN
-    EVT_END
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, -85, 1, 0)
+    Call(SetBattleCamOffsetZ, 41)
+    Call(SetBattleCamZoom, 248)
+    Call(MoveBattleCamOver, 30)
+    Wait(10)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 45)
+    Call(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVarE, LVar0)
+    Call(N(GiveRefund))
+    Wait(LVar0)
+    Wait(15)
+    Call(N(GiveRefundCleanup))
+    Call(RemoveItemEntity, LVarE)
+    Return
+    End
 };
 
 EvtScript N(PlayerGoHome) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
-    EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(SetGoalToHome, ACTOR_PLAYER)
+    Call(SetActorSpeed, ACTOR_PLAYER, Float(8.0))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
+    Call(PlayerRunToGoal, 0)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EatItem) = {
-    EVT_THREAD
-        EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
-            EVT_WAIT(10)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Eat)
-    EVT_WAIT(45)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Loop(4)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
+            Wait(10)
+        EndLoop
+    EndThread
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Eat)
+    Wait(45)
+    Return
+    End
 };
 
 EvtScript N(DrinkItem) = {
-    EVT_THREAD
-        EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
-            EVT_WAIT(10)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Drink)
-    EVT_WAIT(45)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Loop(4)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_EAT_OR_DRINK)
+            Wait(10)
+        EndLoop
+    EndThread
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Drink)
+    Wait(45)
+    Return
+    End
 };

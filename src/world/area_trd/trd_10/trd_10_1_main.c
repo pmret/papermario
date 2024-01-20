@@ -15,138 +15,138 @@ API_CALLABLE(N(SetMapChangeFadeRate)) {
 }
 
 EvtScript N(EVS_BossDefeated) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-            EVT_SET(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
-            EVT_CALL(GotoMap, EVT_PTR("trd_06"), trd_06_ENTRY_2)
-            EVT_WAIT(100)
-            EVT_RETURN
-        EVT_CASE_EQ(STORY_CH1_DEFEATED_KOOPA_BROS)
-            EVT_SET(LVar0, 1)
-            EVT_CALL(GetEntryID, LVar1)
-            EVT_IF_EQ(LVar1, trd_10_ENTRY_1)
-                EVT_SET(LVar0, 0)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -135, 85, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.6))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -135, 30, 0)
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+            Set(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
+            Call(GotoMap, Ref("trd_06"), trd_06_ENTRY_2)
+            Wait(100)
+            Return
+        CaseEq(STORY_CH1_DEFEATED_KOOPA_BROS)
+            Set(LVar0, 1)
+            Call(GetEntryID, LVar1)
+            IfEq(LVar1, trd_10_ENTRY_1)
+                Set(LVar0, 0)
+            EndIf
+        CaseDefault
+            Return
+    EndSwitch
+    IfEq(LVar0, 0)
+        Call(DisablePlayerInput, TRUE)
+        Call(UseSettingsFrom, CAM_DEFAULT, -135, 85, 0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(0.6))
+        Call(SetPanTarget, CAM_DEFAULT, -135, 30, 0)
         EVT_SPIRIT_ADJUST_CAM(10000)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(N(StarSpiritEffectFunc2), 0, 180, -135, 10, 0, -135, 85, 0, 30, 0)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc3))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(1)
-            EVT_CALL(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(N(StarSpiritEffectFunc1))
-            EVT_CALL(StopSound, SOUND_LOOP_STAR_ORB_RISING)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, -135, 85, 0)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(45)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_WAIT(180)
-            EVT_WAIT(115)
-            EVT_CALL(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, -135, 85, 0)
-        EVT_END_THREAD
-        EVT_CALL(N(StarSpiritEffectFunc4), 1)
-        EVT_THREAD
-            EVT_WAIT(80)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_END_THREAD
-        EVT_ADD(LVar1, 100)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, -135, 0, 0)
-        EVT_CALL(N(StarSpiritEffectFunc4), 2)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_ELSE
-        EVT_CALL(N(StarSpiritEffectFunc5), 0, -135, 30, 0, 0)
-        EVT_THREAD
-            EVT_CALL(N(StarSpiritEffectFunc6))
-        EVT_END_THREAD
-        EVT_WAIT(1)
-    EVT_END_IF
-    EVT_CALL(N(StarSpiritEffectFunc4), 3)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GB_StoryProgress, STORY_CH1_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_0, TRANSITION_GET_STAR_CARD)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(N(StarSpiritEffectFunc2), 0, 180, -135, 10, 0, -135, 85, 0, 30, 0)
+        Thread
+            Call(N(StarSpiritEffectFunc3))
+        EndThread
+        Thread
+            Wait(1)
+            Call(PlaySound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(N(StarSpiritEffectFunc1))
+            Call(StopSound, SOUND_LOOP_STAR_ORB_RISING)
+            Call(PlaySoundAt, SOUND_STAR_ORB_BURST, SOUND_SPACE_DEFAULT, -135, 85, 0)
+        EndThread
+        Thread
+            Wait(45)
+            Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+        EndThread
+        Thread
+            Wait(180)
+            Wait(115)
+            Call(PlaySoundAt, SOUND_STAR_CARD_APPEARS, SOUND_SPACE_DEFAULT, -135, 85, 0)
+        EndThread
+        Call(N(StarSpiritEffectFunc4), 1)
+        Thread
+            Wait(80)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        EndThread
+        Add(LVar1, 100)
+        Call(SetCamDistance, CAM_DEFAULT, LVar1)
+        Call(SetPanTarget, CAM_DEFAULT, -135, 0, 0)
+        Call(N(StarSpiritEffectFunc4), 2)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+        Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+        Call(DisablePlayerInput, FALSE)
+    Else
+        Call(N(StarSpiritEffectFunc5), 0, -135, 30, 0, 0)
+        Thread
+            Call(N(StarSpiritEffectFunc6))
+        EndThread
+        Wait(1)
+    EndIf
+    Call(N(StarSpiritEffectFunc4), 3)
+    Call(PlaySoundAtPlayer, SOUND_RESCUE_STAR_SPIRIT, SOUND_SPACE_DEFAULT)
+    Call(DisablePlayerInput, TRUE)
+    Set(GB_StoryProgress, STORY_CH1_STAR_SPIRIT_RESCUED)
+    Call(GotoMapSpecial, Ref("kmr_23"), kmr_23_ENTRY_0, TRANSITION_GET_STAR_CARD)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(trd_10_ENTRY_0)
-            EVT_SET(LVar2, MODEL_o192)
-            EVT_SET(LVar3, MODEL_o191)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-        EVT_CASE_EQ(trd_10_ENTRY_1)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, -253, 0, 0)
-            EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-            EVT_WAIT(3)
-            EVT_CALL(EnablePartnerAI)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(trd_10_ENTRY_0)
+            Set(LVar2, MODEL_o192)
+            Set(LVar3, MODEL_o191)
+            ExecWait(EnterDoubleDoor)
+        CaseEq(trd_10_ENTRY_1)
+            Call(DisablePartnerAI, 0)
+            Call(SetNpcPos, NPC_PARTNER, -253, 0, 0)
+            Call(SetNpcYaw, NPC_PARTNER, 90)
+            Wait(3)
+            Call(EnablePartnerAI)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitDoors_trd_09_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, trd_10_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_ttw)
-    EVT_SET(LVar2, MODEL_o192)
-    EVT_SET(LVar3, MODEL_o191)
-    EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("trd_09"), trd_09_ENTRY_1)
-    EVT_END_IF //@bug unmatched endif
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar0, trd_10_ENTRY_0)
+    Set(LVar1, COLLIDER_ttw)
+    Set(LVar2, MODEL_o192)
+    Set(LVar3, MODEL_o191)
+    Exec(ExitDoubleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("trd_09"), trd_09_ENTRY_1)
+    EndIf //@bug unmatched endif
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_trd_09_1)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoors_trd_09_1)), TRIGGER_WALL_PRESS_A, COLLIDER_ttw, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_KOOPA_BROS_FORTRESS)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(N(SetMapChangeFadeRate))
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_InitFakeBowser))
-    EVT_EXEC(N(EVS_SetupFakeBowser))
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
-        EVT_EXEC(N(EVS_BossDefeated))
-    EVT_END_IF
-    EVT_EXEC(N(EVS_BindExitTriggers))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
-        EVT_EXEC(N(EVS_EnterMap))
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_KOOPA_BROS_FORTRESS)
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(N(SetMapChangeFadeRate))
+    SetUP_CAMERA_NO_LEAD()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_InitFakeBowser))
+    Exec(N(EVS_SetupFakeBowser))
+    IfEq(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
+        Exec(N(EVS_BossDefeated))
+    EndIf
+    Exec(N(EVS_BindExitTriggers))
+    Exec(N(EVS_SetupMusic))
+    IfGe(GB_StoryProgress, STORY_CH1_DEFEATED_KOOPA_BROS)
+        Exec(N(EVS_EnterMap))
+    EndIf
+    Wait(1)
+    Return
+    End
 };

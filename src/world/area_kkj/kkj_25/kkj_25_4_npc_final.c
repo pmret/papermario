@@ -16,54 +16,54 @@ s32 N(FlyingKammyHoverOffsets)[] = {
 };
 
 EvtScript N(EVS_NpcAux_Kammy_Broom) = {
-    EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(FlyingKammyHoverOffsets)))
-    EVT_LOOP(10)
-        EVT_BUF_READ1(LVar1)
-        EVT_CALL(GetNpcPos, NPC_Kammy_05, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, LVar1)
-        EVT_CALL(SetNpcPos, NPC_Kammy_05, LVar2, LVar3, LVar4)
-        EVT_WAIT(3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    UseBuf(Ref(N(FlyingKammyHoverOffsets)))
+    Loop(10)
+        BufRead1(LVar1)
+        Call(GetNpcPos, NPC_Kammy_05, LVar2, LVar3, LVar4)
+        Add(LVar3, LVar1)
+        Call(SetNpcPos, NPC_Kammy_05, LVar2, LVar3, LVar4)
+        Wait(3)
+    EndLoop
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarRod) = {
-    EVT_CALL(SetNpcPos, NPC_StarRod, 270, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_StarRod, 270, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bowser_03) = {
-    EVT_CALL(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_DefeatedIdle)
-    EVT_CALL(SetNpcPos, NPC_Bowser_03, 300, 0, 50)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_Bowser_03, ANIM_WorldBowser_DefeatedIdle)
+    Call(SetNpcPos, NPC_Bowser_03, 300, 0, 50)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Peach) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_Peach_02, 48, 24)
-    EVT_CALL(SetNpcPos, NPC_Peach_02, 400, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Peach_02, ANIM_Peach1_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_Peach_02, 48, 24)
+    Call(SetNpcPos, NPC_Peach_02, 400, 0, 0)
+    Call(SetNpcAnimation, NPC_Peach_02, ANIM_Peach1_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kammy_Broom) = {
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Kammy_Broom)))
-    EVT_CALL(SetNpcPos, NPC_Kammy_05, 525, 10, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Kammy_05, ANIM_BattleKammy_Anim04)
-    EVT_CALL(InterpNpcYaw, NPC_Kammy_05, 270, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Kammy_Broom)))
+    Call(SetNpcPos, NPC_Kammy_05, 525, 10, 0)
+    Call(SetNpcAnimation, NPC_Kammy_05, ANIM_BattleKammy_Anim04)
+    Call(InterpNpcYaw, NPC_Kammy_05, 270, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Twink_02) = {
-    EVT_CALL(SetNpcPos, NPC_Twink_02, 430, 30, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Twink_02, 430, 30, 0)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Bowser)[] = {

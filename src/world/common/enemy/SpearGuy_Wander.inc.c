@@ -21,19 +21,19 @@ AnimID N(ExtraAnims_SpearGuy_Hitbox)[] = {
 };
 
 EvtScript N(EVS_NpcDefeat_SpearGuy_Hitbox) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(RemoveNpc, NPC_SELF)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(OnPlayerFled, 1)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_SpearGuy_Wander) = {
@@ -51,13 +51,13 @@ MobileAISettings N(AISettings_SpearGuy_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_SpearGuy_Wander) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 5)
-    EVT_CALL(SetSelfVar, 2, 12)
-    EVT_CALL(SetSelfVar, 3, 9)
-    EVT_CALL(N(SpearGuyAI_Main), EVT_PTR(N(AISettings_SpearGuy_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 5)
+    Call(SetSelfVar, 2, 12)
+    Call(SetSelfVar, 3, 9)
+    Call(N(SpearGuyAI_Main), Ref(N(AISettings_SpearGuy_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SpearGuy_Wander) = {
@@ -70,16 +70,16 @@ NpcSettings N(NpcSettings_SpearGuy_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_SpearGuy_Hitbox) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 4)
-    EVT_CALL(SetSelfVar, 1, 22)
-    EVT_CALL(SetSelfVar, 2, 40)
-    EVT_CALL(SetSelfVar, 3, 28)
-    EVT_CALL(SetSelfVar, 4, 1)
-    EVT_CALL(SetSelfVar, 15, 0)
-    EVT_CALL(N(MeleeHitbox_Main))
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetSelfVar, 0, 4)
+    Call(SetSelfVar, 1, 22)
+    Call(SetSelfVar, 2, 40)
+    Call(SetSelfVar, 3, 28)
+    Call(SetSelfVar, 4, 1)
+    Call(SetSelfVar, 15, 0)
+    Call(N(MeleeHitbox_Main))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_SpearGuy_Hitbox) = {

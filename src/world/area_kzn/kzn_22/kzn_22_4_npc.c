@@ -18,71 +18,71 @@ API_CALLABLE(N(func_8024036C_C9A56C)) {
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_ShakeScreen) = {
-    EVT_LOOP(0)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(0.5))
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(0.5))
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    EVT_EXEC(N(EVS_ShakeScreen))
-    EVT_LABEL(0)
+    Exec(N(EVS_ShakeScreen))
+    Label(0)
         // wait for player to reach top of stairs
-        EVT_CALL(N(GetFloorCollider2), LVar0)
-        EVT_IF_NE(LVar0, COLLIDER_o544)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
+        Call(N(GetFloorCollider2), LVar0)
+        IfNe(LVar0, COLLIDER_o544)
+            Wait(1)
+            Goto(0)
+        EndIf
     // start scene (but wait for player to stop being hurt if they fell in the lava)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetPlayerAnimation, LVar0)
-    EVT_IF_EQ(LVar0, ANIM_MarioW2_Thrown)
-        EVT_WAIT(35)
-    EVT_END_IF
-    EVT_WAIT(10)
-EVT_END_IF //@bug unmatched endif
-    EVT_CALL(PlayerFaceNpc, NPC_Kolorado, FALSE)
-    EVT_SET(AF_KZN23_SceneStarted, TRUE)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(DisablePlayerInput, TRUE)
+    Call(GetPlayerAnimation, LVar0)
+    IfEq(LVar0, ANIM_MarioW2_Thrown)
+        Wait(35)
+    EndIf
+    Wait(10)
+EndIf //@bug unmatched endif
+    Call(PlayerFaceNpc, NPC_Kolorado, FALSE)
+    Set(AF_KZN23_SceneStarted, TRUE)
+    Thread
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         // repeatedly jump for the treasure chest
-        EVT_LABEL(1)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
-            EVT_IF_EQ(AF_KZN23_GrabbedKolorado, FALSE)
-                EVT_WAIT(1)
-                EVT_GOTO(1)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-4.0))
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(480.0), EVT_FLOAT(299.6))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-        EVT_CALL(PlayerMoveTo, 250, 210, 0)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH5_0116, 440, 240, 165)
-    EVT_WAIT(20)
-    EVT_SET(AF_KZN23_MessageClosed, TRUE)
-    EVT_RETURN
-    EVT_END
+        Label(1)
+            Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
+            Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 15)
+            IfEq(AF_KZN23_GrabbedKolorado, FALSE)
+                Wait(1)
+                Goto(1)
+            EndIf
+    EndThread
+    Wait(10)
+    Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar3, LVar4, LVar5)
+    Call(SetPanTarget, CAM_DEFAULT, LVar3, LVar4, LVar5)
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-4.0))
+    Call(SetCamPosB, CAM_DEFAULT, Float(480.0), Float(299.6))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(SetPlayerSpeed, Float(3.0))
+        Call(PlayerMoveTo, 250, 210, 0)
+    EndThread
+    Wait(20)
+    Call(ShowMessageAtWorldPos, MSG_CH5_0116, 440, 240, 165)
+    Wait(20)
+    Set(AF_KZN23_MessageClosed, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
+    Return
+    End
 };
 
 Vec3f N(FlightPath1)[] = {
@@ -119,148 +119,148 @@ Vec3f N(FlightPath3)[] = {
 };
 
 EvtScript N(EVS_ControlCamera) = {
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 400, 150, 200)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 400, 150, 200)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(390.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-9.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_LABEL(10)
-        EVT_WAIT(1)
-        EVT_IF_EQ(AF_KZN23_GrabbedKolorado, FALSE)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 300, 150, 170)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.3))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_LABEL(20)
-        EVT_WAIT(1)
-        EVT_IF_EQ(AF_KZN22_FlewAway, FALSE)
-            EVT_GOTO(20)
-        EVT_END_IF
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 368, 310, 170)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_RETURN
-    EVT_END
+    Call(UseSettingsFrom, CAM_DEFAULT, 400, 150, 200)
+    Call(SetPanTarget, CAM_DEFAULT, 400, 150, 200)
+    Call(SetCamDistance, CAM_DEFAULT, Float(390.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-9.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Label(10)
+        Wait(1)
+        IfEq(AF_KZN23_GrabbedKolorado, FALSE)
+            Goto(10)
+        EndIf
+    Call(SetPanTarget, CAM_DEFAULT, 300, 150, 170)
+    Call(SetCamDistance, CAM_DEFAULT, Float(450.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(15.0), Float(-7.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.3))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Label(20)
+        Wait(1)
+        IfEq(AF_KZN22_FlewAway, FALSE)
+            Goto(20)
+        EndIf
+    Call(SetPanTarget, CAM_DEFAULT, 368, 310, 170)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(0.8))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Return
+    End
 };
 
 EvtScript N(EVS_SetCharacterPositions) = {
-    EVT_CALL(SetNpcPos, NPC_Misstar, LVar4, LVar2, LVar3)
-    EVT_ADD(LVar4, 10)
-    EVT_SUB(LVar3, 5)
-    EVT_CALL(SetNpcPos, NPC_Kolorado, LVar4, LVar2, LVar3)
-    EVT_IF_EQ(AF_KZN23_GrabbedPlayer, TRUE)
-        EVT_SUB(LVar4, 20)
-        EVT_ADD(LVar3, 10)
-        EVT_CALL(SetPlayerPos, LVar4, LVar2, LVar3)
-        EVT_ADD(LVar2, 20)
-        EVT_ADD(LVar3, -5)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, LVar4, LVar2, LVar3)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Misstar, LVar4, LVar2, LVar3)
+    Add(LVar4, 10)
+    Sub(LVar3, 5)
+    Call(SetNpcPos, NPC_Kolorado, LVar4, LVar2, LVar3)
+    IfEq(AF_KZN23_GrabbedPlayer, TRUE)
+        Sub(LVar4, 20)
+        Add(LVar3, 10)
+        Call(SetPlayerPos, LVar4, LVar2, LVar3)
+        Add(LVar2, 20)
+        Add(LVar3, -5)
+        Call(SetNpcPos, NPC_PARTNER, LVar4, LVar2, LVar3)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_Misstar) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_IF_NE(AF_KZN23_MessageClosed, FALSE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_EXEC(N(EVS_ControlCamera))
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
-    EVT_WAIT(5)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_CALL(LoadPath, 35, EVT_PTR(N(FlightPath1)), ARRAY_COUNT(N(FlightPath1)), EASING_LINEAR)
-    EVT_LABEL(10)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_SET(AF_KZN23_GrabbedKolorado, TRUE)
-    EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 10)
-    EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 180)
-    EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
-    EVT_THREAD
-        EVT_WAIT(32)
-        EVT_CALL(SetPlayerJumpscale, 0)
-        EVT_CALL(PlayerJump, 245, 171, 176, 8)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(32)
-        EVT_CALL(SetNpcJumpscale, NPC_PARTNER, 0)
-        EVT_CALL(NpcJump0, NPC_PARTNER, 245, 191, 171, 8)
-    EVT_END_THREAD
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_CALL(LoadPath, 40, EVT_PTR(N(FlightPath2)), ARRAY_COUNT(N(FlightPath2)), EASING_LINEAR)
-    EVT_LABEL(20)
-        EVT_CALL(GetNextPathPos)
-        EVT_SET(LVar4, LVar1)
-        EVT_EXEC_WAIT(N(EVS_SetCharacterPositions))
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(20)
-        EVT_END_IF
-    EVT_SET(AF_KZN23_GrabbedPlayer, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Carried)
-    EVT_THREAD
-        EVT_WAIT(25)
-        EVT_SET(AF_KZN22_FlewAway, TRUE)
-        EVT_CALL(N(func_8024036C_C9A56C))
-    EVT_END_THREAD
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_CALL(LoadPath, 70, EVT_PTR(N(FlightPath3)), ARRAY_COUNT(N(FlightPath3)), EASING_LINEAR)
-    EVT_LABEL(21)
-        EVT_CALL(GetNextPathPos)
-        EVT_SET(LVar4, LVar1)
-        EVT_EXEC_WAIT(N(EVS_SetCharacterPositions))
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(21)
-        EVT_END_IF
-    EVT_WAIT(1)
-    EVT_CALL(MakeLerp, 300, 500, 20, EASING_CUBIC_IN)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar5, LVar2, LVar6)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_SET(LVar4, LVar5)
-        EVT_SET(LVar2, LVar0)
-        EVT_SET(LVar3, LVar6)
-        EVT_EXEC_WAIT(N(EVS_SetCharacterPositions))
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(GotoMap, EVT_PTR("kzn_23"), kzn_23_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        IfNe(AF_KZN23_MessageClosed, FALSE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerPhysics, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Kolorado, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Exec(N(EVS_ControlCamera))
+    Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
+    Wait(5)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Call(LoadPath, 35, Ref(N(FlightPath1)), ARRAY_COUNT(N(FlightPath1)), EASING_LINEAR)
+    Label(10)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(10)
+        EndIf
+    Set(AF_KZN23_GrabbedKolorado, TRUE)
+    Call(SetNpcRotationPivot, NPC_Kolorado, 10)
+    Call(SetNpcRotation, NPC_Kolorado, 0, 0, 180)
+    Call(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_Panic)
+    Thread
+        Wait(32)
+        Call(SetPlayerJumpscale, 0)
+        Call(PlayerJump, 245, 171, 176, 8)
+    EndThread
+    Thread
+        Wait(32)
+        Call(SetNpcJumpscale, NPC_PARTNER, 0)
+        Call(NpcJump0, NPC_PARTNER, 245, 191, 171, 8)
+    EndThread
+    Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    Call(LoadPath, 40, Ref(N(FlightPath2)), ARRAY_COUNT(N(FlightPath2)), EASING_LINEAR)
+    Label(20)
+        Call(GetNextPathPos)
+        Set(LVar4, LVar1)
+        ExecWait(N(EVS_SetCharacterPositions))
+        IfEq(LVar0, 1)
+            Goto(20)
+        EndIf
+    Set(AF_KZN23_GrabbedPlayer, TRUE)
+    Wait(1)
+    Call(SetPlayerAnimation, ANIM_MarioW2_Carried)
+    Thread
+        Wait(25)
+        Set(AF_KZN22_FlewAway, TRUE)
+        Call(N(func_8024036C_C9A56C))
+    EndThread
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Call(LoadPath, 70, Ref(N(FlightPath3)), ARRAY_COUNT(N(FlightPath3)), EASING_LINEAR)
+    Label(21)
+        Call(GetNextPathPos)
+        Set(LVar4, LVar1)
+        ExecWait(N(EVS_SetCharacterPositions))
+        IfEq(LVar0, 1)
+            Goto(21)
+        EndIf
+    Wait(1)
+    Call(MakeLerp, 300, 500, 20, EASING_CUBIC_IN)
+    Call(GetNpcPos, NPC_SELF, LVar5, LVar2, LVar6)
+    Loop(0)
+        Call(UpdateLerp)
+        Set(LVar4, LVar5)
+        Set(LVar2, LVar0)
+        Set(LVar3, LVar6)
+        ExecWait(N(EVS_SetCharacterPositions))
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(GotoMap, Ref("kzn_23"), kzn_23_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Misstar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 300, 180, 80)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
-    EVT_SET(AF_KZN23_SceneStarted, FALSE)
-    EVT_SET(AF_KZN23_MessageClosed, FALSE)
-    EVT_SET(AF_KZN23_GrabbedKolorado, FALSE)
-    EVT_SET(AF_KZN23_GrabbedPlayer, FALSE)
-    EVT_SET(AF_KZN22_FlewAway, FALSE)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_Scene_Misstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 300, 180, 80)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldMisstar_IdleAngry)
+    Set(AF_KZN23_SceneStarted, FALSE)
+    Set(AF_KZN23_MessageClosed, FALSE)
+    Set(AF_KZN23_GrabbedKolorado, FALSE)
+    Set(AF_KZN23_GrabbedPlayer, FALSE)
+    Set(AF_KZN22_FlewAway, FALSE)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_Scene_Misstar)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Kolorado) = {

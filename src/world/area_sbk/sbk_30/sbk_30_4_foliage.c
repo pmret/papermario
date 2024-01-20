@@ -35,13 +35,13 @@ BombTrigger N(BombPos_Tree) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_UNUSED_FFFFFFCC)
-        EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_ELSE
-        EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_END_IF
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o84, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_UNUSED_FFFFFFCC)
+        Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    Else
+        Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    EndIf
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o84, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree)), 1, 0)
+    Return
+    End
 };

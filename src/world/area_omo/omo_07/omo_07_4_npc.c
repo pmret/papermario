@@ -57,294 +57,294 @@ API_CALLABLE(N(SetShyGuyPoolState)) {
 }
 
 EvtScript N(EVS_Push_SecretDoor) = {
-    EVT_IF_EQ(AF_OMO07_DoorOpening, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_GT(LVar2, -50)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GT(LVar0, 15)
-        EVT_IF_LT(LVar0, 35)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(AF_OMO07_DoorOpening, TRUE)
-    EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
-    EVT_THREAD
-        EVT_IF_LT(LVar0, 25)
-            EVT_CALL(MakeLerp, 0, 180, 30, EASING_COS_IN_OUT)
-            EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_k, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_ELSE
-            EVT_CALL(MakeLerp, 180, 0, 30, EASING_COS_IN_OUT)
-            EVT_LABEL(11)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_k, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(11)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(UpdateColliderTransform, COLLIDER_tt1)
-    EVT_END_THREAD
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar2, 60)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, LVar0, LVar2, 0)
-    EVT_SET(AF_OMO07_DoorOpening, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_OMO07_DoorOpening, TRUE)
+        Return
+    EndIf
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfGt(LVar2, -50)
+        Return
+    EndIf
+    IfGt(LVar0, 15)
+        IfLt(LVar0, 35)
+            Return
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    Set(AF_OMO07_DoorOpening, TRUE)
+    Call(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
+    Thread
+        IfLt(LVar0, 25)
+            Call(MakeLerp, 0, 180, 30, EASING_COS_IN_OUT)
+            Label(10)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_k, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        Else
+            Call(MakeLerp, 180, 0, 30, EASING_COS_IN_OUT)
+            Label(11)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_k, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(11)
+            EndIf
+        EndIf
+        Call(UpdateColliderTransform, COLLIDER_tt1)
+    EndThread
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar2, 60)
+    Wait(10)
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, LVar0, LVar2, 0)
+    Set(AF_OMO07_DoorOpening, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupShyGuyPool) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_tt1, MODEL_k)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Push_SecretDoor)), TRIGGER_WALL_PUSH, COLLIDER_tt1, 1, 0)
-    EVT_SET(AF_OMO07_NpcPool0, FALSE)
-    EVT_SET(AF_OMO07_NpcPool1, FALSE)
-    EVT_SET(AF_OMO07_NpcPool2, FALSE)
-    EVT_SET(AF_OMO07_NpcPool3, FALSE)
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_IF_LT(LVar0, 400)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_LABEL(1)
-        EVT_SET(LVar4, -1)
-        EVT_IF_EQ(AF_OMO07_NpcPool3, FALSE)
-            EVT_SET(LVar4, NPC_ShyGuy_03)
-        EVT_END_IF
-        EVT_IF_EQ(AF_OMO07_NpcPool2, FALSE)
-            EVT_SET(LVar4, NPC_ShyGuy_02)
-        EVT_END_IF
-        EVT_IF_EQ(AF_OMO07_NpcPool1, FALSE)
-            EVT_SET(LVar4, NPC_ShyGuy_01)
-        EVT_END_IF
-        EVT_IF_EQ(LVar4, -1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_IF_EQ(AF_OMO07_NpcPool0, FALSE)
-            EVT_SET(AF_OMO07_NpcPool0, TRUE)
-        EVT_ELSE
-            EVT_WAIT(40)
-        EVT_END_IF
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar2, -85)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_IF_LT(LVar0, -50)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_IF_GT(LVar0, 600)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_CALL(N(SetShyGuyPoolState), LVar4, TRUE)
-        EVT_CALL(SetNpcVar, LVar4, SHYGUY_VAR_STATE, SHYGUY_STATE_RUN_TO_DOOR)
-        EVT_WAIT(1)
-        EVT_LABEL(2)
-            EVT_CALL(GetNpcVar, LVar4, SHYGUY_VAR_STATE, LVar3)
-            EVT_IF_EQ(LVar3, SHYGUY_STATE_RUN_TO_DOOR)
-                EVT_WAIT(1)
-                EVT_GOTO(2)
-            EVT_END_IF
-        EVT_GOTO(1)
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_tt1, MODEL_k)
+    BindTrigger(Ref(N(EVS_Push_SecretDoor)), TRIGGER_WALL_PUSH, COLLIDER_tt1, 1, 0)
+    Set(AF_OMO07_NpcPool0, FALSE)
+    Set(AF_OMO07_NpcPool1, FALSE)
+    Set(AF_OMO07_NpcPool2, FALSE)
+    Set(AF_OMO07_NpcPool3, FALSE)
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        IfLt(LVar0, 400)
+            Goto(0)
+        EndIf
+    Label(1)
+        Set(LVar4, -1)
+        IfEq(AF_OMO07_NpcPool3, FALSE)
+            Set(LVar4, NPC_ShyGuy_03)
+        EndIf
+        IfEq(AF_OMO07_NpcPool2, FALSE)
+            Set(LVar4, NPC_ShyGuy_02)
+        EndIf
+        IfEq(AF_OMO07_NpcPool1, FALSE)
+            Set(LVar4, NPC_ShyGuy_01)
+        EndIf
+        IfEq(LVar4, -1)
+            Wait(1)
+            Goto(1)
+        EndIf
+        IfEq(AF_OMO07_NpcPool0, FALSE)
+            Set(AF_OMO07_NpcPool0, TRUE)
+        Else
+            Wait(40)
+        EndIf
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar2, -85)
+            Goto(1)
+        EndIf
+        IfLt(LVar0, -50)
+            Goto(1)
+        EndIf
+        IfGt(LVar0, 600)
+            Goto(1)
+        EndIf
+        Call(N(SetShyGuyPoolState), LVar4, TRUE)
+        Call(SetNpcVar, LVar4, SHYGUY_VAR_STATE, SHYGUY_STATE_RUN_TO_DOOR)
+        Wait(1)
+        Label(2)
+            Call(GetNpcVar, LVar4, SHYGUY_VAR_STATE, LVar3)
+            IfEq(LVar3, SHYGUY_STATE_RUN_TO_DOOR)
+                Wait(1)
+                Goto(2)
+            EndIf
+        Goto(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, SHYGUY_VAR_STATE, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(SHYGUY_STATE_FREE)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CASE_EQ(SHYGUY_STATE_RUN_TO_DOOR)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-                EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-                EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, 0)
-                EVT_CALL(SetNpcPos, NPC_SELF, 800, 0, 75)
-                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
-                EVT_CALL(NpcMoveTo, NPC_SELF, 665, 75, 0)
-                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-                EVT_CALL(NpcMoveTo, NPC_SELF, 635, -107, 0)
-                EVT_CALL(NpcMoveTo, NPC_SELF, 100, -107, 0)
-                EVT_CALL(NpcMoveTo, NPC_SELF, -10, -107, 0)
-                EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_WAIT_AT_DOOR)
-                EVT_CALL(SetSelfVar, SHYGUY_VAR_WAIT_TIME, 0)
-            EVT_CASE_EQ(SHYGUY_STATE_WAIT_AT_DOOR)
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_IF_LT(LVar0, 130)
-                    EVT_WAIT(40)
-                    EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_OPEN_DOOR)
-                EVT_END_IF
-                EVT_CALL(GetSelfVar, SHYGUY_VAR_WAIT_TIME, LVar0)
-                EVT_ADD(LVar0, 1)
-                EVT_CALL(SetSelfVar, SHYGUY_VAR_WAIT_TIME, LVar0)
-                EVT_IF_GT(LVar0, 180)
-                    EVT_WAIT(40)
-                    EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_OPEN_DOOR)
-                    EVT_CALL(SetSelfVar, SHYGUY_VAR_WAIT_TIME, 0)
-                EVT_END_IF
-            EVT_CASE_EQ(SHYGUY_STATE_OPEN_DOOR)
-                EVT_CALL(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
-                EVT_THREAD
-                    EVT_SET(AF_OMO07_DoorOpening, TRUE)
-                    EVT_SET(LVar2, MV_SecretDoorAngle)
-                    EVT_ADD(LVar2, 180)
-                    EVT_CALL(MakeLerp, MV_SecretDoorAngle, LVar2, 30, EASING_COS_IN_OUT)
-                    EVT_LABEL(10)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(RotateModel, MODEL_k, LVar0, 0, 1, 0)
-                    EVT_CALL(UpdateColliderTransform, COLLIDER_tt1)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 1)
-                        EVT_GOTO(10)
-                    EVT_END_IF
-                    EVT_SET(MV_SecretDoorAngle, LVar2)
-                    EVT_MOD(MV_SecretDoorAngle, 360)
-                    EVT_SET(AF_OMO07_DoorOpening, FALSE)
-                    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-                EVT_END_THREAD
-                EVT_WAIT(10)
-                EVT_CALL(NpcMoveTo, NPC_SELF, -10, 50, 0)
-                EVT_CALL(GetSelfVar, SHYGUY_VAR_STATE, LVar0)
-                EVT_IF_EQ(LVar0, SHYGUY_STATE_OPEN_DOOR)
-                    EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_ACTIVE)
-                EVT_END_IF
-            EVT_CASE_EQ(SHYGUY_STATE_ACTIVE)
-                EVT_WAIT(1)
-                EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy_Patrol)))
-                EVT_WAIT(10)
-            EVT_CASE_EQ(SHYGUY_STATE_RECYCLE)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_LOOP(30)
-                    EVT_CALL(GetSelfNpcID, LVar0)
-                    EVT_CALL(N(SetShyGuyPoolState), LVar0, FALSE)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_FREE)
-            EVT_CASE_EQ(SHYGUY_STATE_FORCE_RECYCLE)
-                EVT_CALL(GetSelfNpcID, LVar0)
-                EVT_CALL(N(SetShyGuyPoolState), LVar0, FALSE)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_FREE)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, SHYGUY_VAR_STATE, LVar0)
+        Switch(LVar0)
+            CaseEq(SHYGUY_STATE_FREE)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            CaseEq(SHYGUY_STATE_RUN_TO_DOOR)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+                Call(EnableNpcShadow, NPC_SELF, TRUE)
+                Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, 0)
+                Call(SetNpcPos, NPC_SELF, 800, 0, 75)
+                Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+                Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+                Call(SetNpcSpeed, NPC_SELF, Float(5.0))
+                Call(NpcMoveTo, NPC_SELF, 665, 75, 0)
+                Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+                Call(NpcMoveTo, NPC_SELF, 635, -107, 0)
+                Call(NpcMoveTo, NPC_SELF, 100, -107, 0)
+                Call(NpcMoveTo, NPC_SELF, -10, -107, 0)
+                Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_WAIT_AT_DOOR)
+                Call(SetSelfVar, SHYGUY_VAR_WAIT_TIME, 0)
+            CaseEq(SHYGUY_STATE_WAIT_AT_DOOR)
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                IfLt(LVar0, 130)
+                    Wait(40)
+                    Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_OPEN_DOOR)
+                EndIf
+                Call(GetSelfVar, SHYGUY_VAR_WAIT_TIME, LVar0)
+                Add(LVar0, 1)
+                Call(SetSelfVar, SHYGUY_VAR_WAIT_TIME, LVar0)
+                IfGt(LVar0, 180)
+                    Wait(40)
+                    Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_OPEN_DOOR)
+                    Call(SetSelfVar, SHYGUY_VAR_WAIT_TIME, 0)
+                EndIf
+            CaseEq(SHYGUY_STATE_OPEN_DOOR)
+                Call(PlaySoundAt, SOUND_OMO_DOOR_FLIP, SOUND_SPACE_DEFAULT, 25, 0, -55)
+                Thread
+                    Set(AF_OMO07_DoorOpening, TRUE)
+                    Set(LVar2, MV_SecretDoorAngle)
+                    Add(LVar2, 180)
+                    Call(MakeLerp, MV_SecretDoorAngle, LVar2, 30, EASING_COS_IN_OUT)
+                    Label(10)
+                    Call(UpdateLerp)
+                    Call(RotateModel, MODEL_k, LVar0, 0, 1, 0)
+                    Call(UpdateColliderTransform, COLLIDER_tt1)
+                    Wait(1)
+                    IfEq(LVar1, 1)
+                        Goto(10)
+                    EndIf
+                    Set(MV_SecretDoorAngle, LVar2)
+                    Mod(MV_SecretDoorAngle, 360)
+                    Set(AF_OMO07_DoorOpening, FALSE)
+                    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+                EndThread
+                Wait(10)
+                Call(NpcMoveTo, NPC_SELF, -10, 50, 0)
+                Call(GetSelfVar, SHYGUY_VAR_STATE, LVar0)
+                IfEq(LVar0, SHYGUY_STATE_OPEN_DOOR)
+                    Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_ACTIVE)
+                EndIf
+            CaseEq(SHYGUY_STATE_ACTIVE)
+                Wait(1)
+                Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Patrol)))
+                Wait(10)
+            CaseEq(SHYGUY_STATE_RECYCLE)
+                Call(DisablePlayerInput, TRUE)
+                Loop(30)
+                    Call(GetSelfNpcID, LVar0)
+                    Call(N(SetShyGuyPoolState), LVar0, FALSE)
+                    Wait(1)
+                EndLoop
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(DisablePlayerInput, FALSE)
+                Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_FREE)
+            CaseEq(SHYGUY_STATE_FORCE_RECYCLE)
+                Call(GetSelfNpcID, LVar0)
+                Call(N(SetShyGuyPoolState), LVar0, FALSE)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_FREE)
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_ShyGuy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, 1)
-            EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-            EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)
-            EVT_WAIT(1)
-            EVT_CALL(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy)))
-            EVT_CALL(DoNpcDefeat)
-            EVT_WAIT(1)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_PASSIVE, 1)
+            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)
+            Wait(1)
+            Call(SetSelfVar, SHYGUY_VAR_STATE, SHYGUY_STATE_RECYCLE)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy)))
+            Call(DoNpcDefeat)
+            Wait(1)
+        CaseEq(OUTCOME_PLAYER_LOST)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_ShyGuy)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_ShyGuy)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Fuzzy) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar0, 990)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(DisableCameraLeadingPlayer))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
-    EVT_IF_EQ(GB_OMO_PeachChoice2, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Fuzzy, ANIM_Fuzzy_Anim0B, ANIM_Fuzzy_Idle, 0, MSG_CH4_003C)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_CH4_003D)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(N(EnableCameraLeadingPlayer))
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfLt(LVar0, 990)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(N(DisableCameraLeadingPlayer))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetCamProperties, CAM_DEFAULT, Float(5.0), LVar0, LVar1, LVar2, 300, Float(13.0), Float(-9.5))
+    IfEq(GB_OMO_PeachChoice2, 0)
+        Call(SpeakToPlayer, NPC_Fuzzy, ANIM_Fuzzy_Anim0B, ANIM_Fuzzy_Idle, 0, MSG_CH4_003C)
+    Else
+        Call(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_CH4_003D)
+    EndIf
+    Thread
+        Call(N(EnableCameraLeadingPlayer))
+        Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    EndThread
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Fuzzy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_OMO07_Item_ThunderRage, TRUE)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_OMO07_Item_ThunderRage, TRUE)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Fuzzy) = {
-    EVT_IF_EQ(GB_OMO_PeachChoice2, 0)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Fuzzy)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Fuzzy)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_OMO_PeachChoice2, 0)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Fuzzy)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Fuzzy)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HammerBros) = {
-    EVT_IF_EQ(GB_OMO_PeachChoice2, 1)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Fuzzy)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Fuzzy)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_OMO_PeachChoice2, 1)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Fuzzy)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Fuzzy)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kammy) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kammy)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kammy)))
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy) = {

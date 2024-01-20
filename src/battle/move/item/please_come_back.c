@@ -8,16 +8,16 @@
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_DIZZY_DIAL) //@bug should be ITEM_PLEASE_COME_BACK
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
-    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
-    EVT_CALL(func_80273444, 4, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioW2_PleaseComeBack)
-    EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_DIZZY_DIAL) //@bug should be ITEM_PLEASE_COME_BACK
+    ExecWait(N(UseItemWithEffect))
+    Call(SetGoalToHome, ACTOR_PLAYER)
+    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
+    Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
+    Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.8))
+    Call(func_80273444, 4, 0, 0)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioW2_PleaseComeBack)
+    Wait(8)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Return
+    End
 };

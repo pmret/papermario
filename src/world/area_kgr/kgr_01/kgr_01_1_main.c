@@ -22,24 +22,24 @@ EvtScript N(EVS_ExitWalk_kgr_02_0) = EVT_EXIT_WALK(60, kgr_01_ENTRY_1, "kgr_02",
 EvtScript N(EVS_ExitWalk_mac_05_3) = EVT_EXIT_WALK(60, kgr_01_ENTRY_0, "mac_05", mac_05_ENTRY_3);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_kgr_02_0), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_BIND_TRIGGER(N(EVS_ExitWalk_mac_05_3), TRIGGER_WALL_PUSH, COLLIDER_o50, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(N(EVS_ExitWalk_kgr_02_0), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    BindTrigger(N(EVS_ExitWalk_mac_05_3), TRIGGER_WALL_PUSH, COLLIDER_o50, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_PARTNER, FALSE)
-    EVT_EXEC(N(EVS_StartTongueWiggle))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SET(LVar0, N(EVS_BindExitTriggers))
-    EVT_EXEC(EnterWalk)
-    EVT_EXEC(N(EVS_CreateDarkness))
-    EVT_EXEC(N(EVS_MonitorFriendlyFire))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TOAD_TOWN)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Call(HidePlayerShadow, TRUE)
+    Call(EnableNpcShadow, NPC_PARTNER, FALSE)
+    Exec(N(EVS_StartTongueWiggle))
+    Call(GetEntryID, LVar0)
+    Set(LVar0, N(EVS_BindExitTriggers))
+    Exec(EnterWalk)
+    Exec(N(EVS_CreateDarkness))
+    Exec(N(EVS_MonitorFriendlyFire))
+    Return
+    End
 };

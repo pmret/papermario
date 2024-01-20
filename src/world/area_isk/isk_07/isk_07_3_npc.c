@@ -33,143 +33,143 @@ API_CALLABLE(N(IsLastEnemy)) {
 }
 
 EvtScript N(EVS_NpcDefeat_Pokey_01) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-                EVT_THREAD
-                    EVT_CALL(N(IsLastEnemy))
-                    EVT_IF_EQ(LVar1, TRUE)
-                        EVT_CALL(DisablePlayerInput, TRUE)
-                        EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-                        EVT_WAIT(30)
-                        EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-                        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-                        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -150, -390, 571)
-                        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -251, -390, 553)
-                        EVT_CALL(SetPanTarget, CAM_DEFAULT, -251, -390, 553)
-                        EVT_WAIT(1)
-                        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                        EVT_WAIT(45)
-                        EVT_CALL(MakeItemEntity, ITEM_RUINS_KEY, -250, -240, 545, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_ISK07_Item_RuinsKey)
-                        EVT_SET(GF_ISK07_Defeated_Mummies, TRUE)
-                        EVT_EXEC_WAIT(N(EVS_OpenEntryDoor))
-                        EVT_WAIT(60)
-                        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-                        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                        EVT_WAIT(1)
-                        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-                        EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-                        EVT_CALL(DisablePlayerInput, FALSE)
-                    EVT_END_IF
-                EVT_END_THREAD
-            EVT_END_IF
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+                Thread
+                    Call(N(IsLastEnemy))
+                    IfEq(LVar1, TRUE)
+                        Call(DisablePlayerInput, TRUE)
+                        Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
+                        Wait(30)
+                        Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+                        Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+                        Call(UseSettingsFrom, CAM_DEFAULT, -150, -390, 571)
+                        Call(UseSettingsFrom, CAM_DEFAULT, -251, -390, 553)
+                        Call(SetPanTarget, CAM_DEFAULT, -251, -390, 553)
+                        Wait(1)
+                        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                        Wait(45)
+                        Call(MakeItemEntity, ITEM_RUINS_KEY, -250, -240, 545, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_ISK07_Item_RuinsKey)
+                        Set(GF_ISK07_Defeated_Mummies, TRUE)
+                        ExecWait(N(EVS_OpenEntryDoor))
+                        Wait(60)
+                        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+                        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                        Wait(1)
+                        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                        Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+                        Call(DisablePlayerInput, FALSE)
+                    EndIf
+                EndThread
+            EndIf
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_01) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_LABEL(1)
-    EVT_IF_EQ(AF_ISK07_MummiesReleased, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(SetNpcYaw, NPC_SELF, 105)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -140, 528, 10)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_PokeyMummy)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Label(1)
+    IfEq(AF_ISK07_MummiesReleased, FALSE)
+        Wait(1)
+        Goto(1)
+    EndIf
+    Call(SetNpcYaw, NPC_SELF, 105)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+    Call(NpcMoveTo, NPC_SELF, -140, 528, 10)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_PokeyMummy)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_02) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_LABEL(1)
-    EVT_IF_EQ(AF_ISK07_MummiesReleased, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_WAIT(15)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 47, 543, 10)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_PokeyMummy)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Label(1)
+    IfEq(AF_ISK07_MummiesReleased, FALSE)
+        Wait(1)
+        Goto(1)
+    EndIf
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Wait(15)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+    Call(NpcMoveTo, NPC_SELF, 47, 543, 10)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_PokeyMummy)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Pokey_03) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_LABEL(1)
-    EVT_IF_EQ(AF_ISK07_MummiesReleased, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_WAIT(15)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 227, 489, 10)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_PokeyMummy)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Label(1)
+    IfEq(AF_ISK07_MummiesReleased, FALSE)
+        Wait(1)
+        Goto(1)
+    EndIf
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Wait(15)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_IGNORE_PARTNER, 0)
+    Call(NpcMoveTo, NPC_SELF, 227, 489, 10)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_PokeyMummy)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Pokey_01) = {
-    EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_01)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 100, 0)
-    EVT_CALL(SetOwnerInstigatorValue, 3)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+        Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey_01)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Pokey_01)))
+    Call(InterpNpcYaw, NPC_SELF, 100, 0)
+    Call(SetOwnerInstigatorValue, 3)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Pokey_02) = {
-    EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_02)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
-    EVT_CALL(SetOwnerInstigatorValue, 3)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+        Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey_02)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Pokey_01)))
+    Call(SetOwnerInstigatorValue, 3)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Pokey_03) = {
-    EVT_IF_EQ(GF_ISK07_Defeated_Mummies, FALSE)
-        EVT_CALL(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Pokey_03)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Pokey_01)))
-    EVT_CALL(SetOwnerInstigatorValue, 3)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK07_Defeated_Mummies, FALSE)
+        Call(SetSelfEnemyFlags, ENEMY_FLAG_NO_DROPS)
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Pokey_03)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Pokey_01)))
+    Call(SetOwnerInstigatorValue, 3)
+    Return
+    End
 };
 
 NpcData N(NpcData_Pokey_01) = {

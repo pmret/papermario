@@ -455,7 +455,7 @@ API_CALLABLE(N(Quizmo_GetCamVfov)) {
     Bytecode* args = script->ptrReadPos;
     s32 cameraID = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, *args++, EVT_FLOAT_TO_FIXED(gCameras[cameraID].vfov));
+    evt_set_variable(script, *args++, Float_TO_FIXED(gCameras[cameraID].vfov));
     return ApiStatus_DONE2;
 }
 
@@ -563,642 +563,642 @@ API_CALLABLE(N(Quizmo_CreateWorker)) {
 }
 
 EvtScript N(EVS_Quizmo_Exit) = {
-    EVT_CALL(N(Quizmo_ShouldQuizmoLeave))
-    EVT_IF_LE(LVar0, 1)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 300)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ChuckQuizmo_Vanish)
-        EVT_WAIT(40)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(N(Quizmo_ShouldQuizmoLeave))
+    IfLe(LVar0, 1)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 300)
+        Call(SetNpcJumpscale, NPC_SELF, 1)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_ChuckQuizmo_Vanish)
+        Wait(40)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_SetQuizCamera) = {
-    EVT_CALL(N(Quizmo_GetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
-    EVT_CALL(N(Quizmo_SetCamVfov), 0, 25) //TODO
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(GetCamType, 0, LVar1, LVar2)
-    EVT_CALL(SetCamType, 0, LVar1, 0)
-    EVT_CALL(GetCamDistance, 0, LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_SETF(LVar0, 370)
-    EVT_ELSE
-        EVT_SETF(LVar0, -370)
-    EVT_END_IF
-    EVT_CALL(SetCamDistance, 0, LVar0)
-    EVT_CALL(GetCamPitch, 0, LVar0, LVar1)
-    EVT_SETF(LVar0, EVT_FLOAT(13.0))
-    EVT_SETF(LVar1, EVT_FLOAT(-10.0))
-    EVT_CALL(SetCamPitch, 0, LVar0, LVar1)
-    EVT_CALL(PanToTarget, 0, 0, 1)
-    EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(N(Quizmo_GetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
+    Call(N(Quizmo_SetCamVfov), 0, 25) //TODO
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, 0, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, 0, LVar0, LVar1, LVar2)
+    Call(GetCamType, 0, LVar1, LVar2)
+    Call(SetCamType, 0, LVar1, 0)
+    Call(GetCamDistance, 0, LVar0)
+    IfGt(LVar0, 0)
+        SetF(LVar0, 370)
+    Else
+        SetF(LVar0, -370)
+    EndIf
+    Call(SetCamDistance, 0, LVar0)
+    Call(GetCamPitch, 0, LVar0, LVar1)
+    SetF(LVar0, Float(13.0))
+    SetF(LVar1, Float(-10.0))
+    Call(SetCamPitch, 0, LVar0, LVar1)
+    Call(PanToTarget, 0, 0, 1)
+    Call(SetCamLeadPlayer, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_OtherCamScript) = {
-    EVT_CALL(GetNpcPos, CHUCK_QUIZMO_NPC_ID, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 30)
-    EVT_CALL(SetPanTarget, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(GetCamDistance, 0, LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_SETF(LVar0, 17)
-    EVT_ELSE
-        EVT_SETF(LVar0, -17)
-    EVT_END_IF
-    EVT_CALL(SetCamDistance, 0, LVar0)
-    EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(90.0))
-    EVT_CALL(WaitForCam, 0, EVT_FLOAT(1.0))
-    EVT_CALL(SetCamSpeed, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, CHUCK_QUIZMO_NPC_ID, LVar0, LVar1, LVar2)
+    Add(LVar1, 30)
+    Call(SetPanTarget, 0, LVar0, LVar1, LVar2)
+    Call(GetCamDistance, 0, LVar0)
+    IfGt(LVar0, 0)
+        SetF(LVar0, 17)
+    Else
+        SetF(LVar0, -17)
+    EndIf
+    Call(SetCamDistance, 0, LVar0)
+    Call(SetCamSpeed, 0, Float(90.0))
+    Call(WaitForCam, 0, Float(1.0))
+    Call(SetCamSpeed, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_ResetCamera) = {
-    EVT_CALL(N(Quizmo_SetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
-    EVT_CALL(PanToTarget, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(N(Quizmo_SetCamVfov), 0, QUIZ_ARRAY_SAVED_FOV)
+    Call(PanToTarget, 0, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_MovePlayerToPodium) = {
-    EVT_WAIT(20)
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 83, LVar0, LVar1)
-    EVT_THREAD
-        EVT_SETF(LVar2, 0)
-        EVT_LOOP(60)
-            EVT_SETF(LVar3, LVar0)
-            EVT_SETF(LVar4, LVar1)
-            EVT_MULF(LVar3, LVar2)
-            EVT_MULF(LVar4, LVar2)
-            EVT_DIVF(LVar3, 60)
-            EVT_DIVF(LVar4, 60)
-            EVT_ADDF(LVar3, QUIZ_ARRAY_ORIGIN_X)
-            EVT_ADDF(LVar4, QUIZ_ARRAY_ORIGIN_Z)
-            EVT_CALL(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
-            EVT_ADDF(LVar2, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_SETF(LVar3, LVar0)
-        EVT_SETF(LVar4, LVar1)
-        EVT_ADDF(LVar3, QUIZ_ARRAY_ORIGIN_X)
-        EVT_ADDF(LVar4, QUIZ_ARRAY_ORIGIN_Z)
-        EVT_CALL(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
-    EVT_END_THREAD
-    EVT_CALL(N(Quizmo_SpinPlayer))
-    EVT_CALL(FacePlayerTowardPoint, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_RETURN
-    EVT_END
+    Wait(20)
+    Call(N(Quizmo_AddViewRelativeOffset), QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 83, LVar0, LVar1)
+    Thread
+        SetF(LVar2, 0)
+        Loop(60)
+            SetF(LVar3, LVar0)
+            SetF(LVar4, LVar1)
+            MulF(LVar3, LVar2)
+            MulF(LVar4, LVar2)
+            DivF(LVar3, 60)
+            DivF(LVar4, 60)
+            AddF(LVar3, QUIZ_ARRAY_ORIGIN_X)
+            AddF(LVar4, QUIZ_ARRAY_ORIGIN_Z)
+            Call(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
+            AddF(LVar2, 1)
+            Wait(1)
+        EndLoop
+        SetF(LVar3, LVar0)
+        SetF(LVar4, LVar1)
+        AddF(LVar3, QUIZ_ARRAY_ORIGIN_X)
+        AddF(LVar4, QUIZ_ARRAY_ORIGIN_Z)
+        Call(SetPlayerPos, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
+    EndThread
+    Call(N(Quizmo_SpinPlayer))
+    Call(FacePlayerTowardPoint, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 0)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_MovePartnerToPodium) = {
-    EVT_CALL(GetNpcPos, NPC_PARTNER, LVarA, LVarB, LVarC)
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, 108, LVar0, LVar1)
-    EVT_SETF(LVar5, QUIZ_ARRAY_ORIGIN_Y)
-    EVT_SUBF(LVar5, LVarB)
-    EVT_THREAD
-        EVT_CALL(N(Quizmo_UpdatePartnerPosition))
-        EVT_SETF(LVar3, LVar0)
-        EVT_SETF(LVar4, LVar1)
-        EVT_SETF(LVar6, LVar5)
-        EVT_ADDF(LVar3, LVarA)
-        EVT_ADDF(LVar4, LVarC)
-        EVT_ADDF(LVar6, LVarB)
-        EVT_CALL(SetNpcPos, NPC_PARTNER, LVar3, LVar6, LVar4)
-    EVT_END_THREAD
-    EVT_CALL(N(Quizmo_SpinPartner))
-    EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_PARTNER, LVarA, LVarB, LVarC)
+    Call(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, 108, LVar0, LVar1)
+    SetF(LVar5, QUIZ_ARRAY_ORIGIN_Y)
+    SubF(LVar5, LVarB)
+    Thread
+        Call(N(Quizmo_UpdatePartnerPosition))
+        SetF(LVar3, LVar0)
+        SetF(LVar4, LVar1)
+        SetF(LVar6, LVar5)
+        AddF(LVar3, LVarA)
+        AddF(LVar4, LVarC)
+        AddF(LVar6, LVarB)
+        Call(SetNpcPos, NPC_PARTNER, LVar3, LVar6, LVar4)
+    EndThread
+    Call(N(Quizmo_SpinPartner))
+    Call(NpcFacePlayer, NPC_PARTNER, 0)
+    Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_MoveQuizmoToMicrophone) = {
-    EVT_CALL(GetNpcPos, CHUCK_QUIZMO_NPC_ID, LVarA, LVarB, LVarC)
-    EVT_CALL(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, -70, LVar0, LVar1)
-    EVT_THREAD
-        EVT_SETF(LVar2, 0)
-        EVT_LOOP(60)
-            EVT_SETF(LVar3, LVar0)
-            EVT_SETF(LVar4, LVar1)
-            EVT_MULF(LVar3, LVar2)
-            EVT_MULF(LVar4, LVar2)
-            EVT_DIVF(LVar3, 60)
-            EVT_DIVF(LVar4, 60)
-            EVT_ADDF(LVar3, LVarA)
-            EVT_ADDF(LVar4, LVarC)
-            EVT_CALL(SetNpcPos, CHUCK_QUIZMO_NPC_ID, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
-            EVT_ADDF(LVar2, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(60)
-    EVT_CALL(NpcFacePlayer, CHUCK_QUIZMO_NPC_ID, 0)
-    EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, CHUCK_QUIZMO_NPC_ID, LVarA, LVarB, LVarC)
+    Call(N(Quizmo_AddViewRelativeOffset), LVarA, LVarC, -70, LVar0, LVar1)
+    Thread
+        SetF(LVar2, 0)
+        Loop(60)
+            SetF(LVar3, LVar0)
+            SetF(LVar4, LVar1)
+            MulF(LVar3, LVar2)
+            MulF(LVar4, LVar2)
+            DivF(LVar3, 60)
+            DivF(LVar4, 60)
+            AddF(LVar3, LVarA)
+            AddF(LVar4, LVarC)
+            Call(SetNpcPos, CHUCK_QUIZMO_NPC_ID, LVar3, QUIZ_ARRAY_ORIGIN_Y, LVar4)
+            AddF(LVar2, 1)
+            Wait(1)
+        EndLoop
+    EndThread
+    Wait(60)
+    Call(NpcFacePlayer, CHUCK_QUIZMO_NPC_ID, 0)
+    Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_SetCharacterPositons) = {
-    EVT_EXEC(N(EVS_Quizmo_MovePlayerToPodium))
-    EVT_EXEC(N(EVS_Quizmo_MovePartnerToPodium))
-    EVT_EXEC_WAIT(N(EVS_Quizmo_MoveQuizmoToMicrophone))
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_Quizmo_MovePlayerToPodium))
+    Exec(N(EVS_Quizmo_MovePartnerToPodium))
+    ExecWait(N(EVS_Quizmo_MoveQuizmoToMicrophone))
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_PlayerThinking) = {
-    EVT_LOOP(0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
-        EVT_WAIT(20)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(SetPlayerAnimation, ANIM_Mario1_Question)
+        Wait(20)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_PlayerHitBuzzer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Throw)
-    EVT_WAIT(15)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerAnimation, ANIM_Mario1_Throw)
+    Wait(15)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_PlayerReaction_RightAnswer) = {
-    EVT_LOOP(0)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
-        EVT_WAIT(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
-        EVT_WAIT(2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
-        EVT_WAIT(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
-        EVT_WAIT(2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
-        EVT_WAIT(2)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fall)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -2)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, -3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerPos, LVar0, QUIZ_ARRAY_ORIGIN_Y, LVar2)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
+        Wait(2)
+        Call(SetPlayerAnimation, ANIM_Mario1_Jump)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 3)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Fall)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -3)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Land)
+        Wait(2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
+        Wait(2)
+        Call(SetPlayerAnimation, ANIM_Mario1_Jump)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 3)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Fall)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -3)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Land)
+        Wait(2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_BeforeJump)
+        Wait(2)
+        Call(SetPlayerAnimation, ANIM_Mario1_Jump)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 3)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Fall)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, 0)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -2)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Add(LVar1, -3)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Land)
+        Wait(2)
+    EndLoop
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerPos, LVar0, QUIZ_ARRAY_ORIGIN_Y, LVar2)
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_PlayerReaction_WrongAnswer) = {
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_VacantStare)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetPlayerAnimation, ANIM_Mario1_VacantStare)
+    Loop(0)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_ReturnPlayerToOriginalPos) = {
-    EVT_THREAD
-        EVT_CALL(N(Quizmo_AddViewRelativeOffset), QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 25, LVar0, LVar1)
-        EVT_SETF(LVar2, QUIZ_ARRAY_ORIGIN_X)
-        EVT_ADDF(LVar2, LVar0)
-        EVT_SETF(LVar3, QUIZ_ARRAY_ORIGIN_Z)
-        EVT_ADDF(LVar3, LVar1)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, LVar2, LVar3, 40)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 40)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(N(Quizmo_AddViewRelativeOffset), QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 25, LVar0, LVar1)
+        SetF(LVar2, QUIZ_ARRAY_ORIGIN_X)
+        AddF(LVar2, LVar0)
+        SetF(LVar3, QUIZ_ARRAY_ORIGIN_Z)
+        AddF(LVar3, LVar1)
+        Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
+        Call(NpcMoveTo, NPC_PARTNER, LVar2, LVar3, 40)
+        Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    EndThread
+    Call(PlayerMoveTo, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Z, 40)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_RightAnswer) = {
-    EVT_EXEC_GET_TID(N(EVS_Quizmo_PlayerReaction_RightAnswer), LVar1)
-    EVT_WAIT(60)
-    EVT_KILL_THREAD(LVar1)
-    EVT_LOOP(5)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(EVS_Quizmo_ReturnPlayerToOriginalPos))
-    EVT_RETURN
-    EVT_END
+    ExecGetTID(N(EVS_Quizmo_PlayerReaction_RightAnswer), LVar1)
+    Wait(60)
+    KillThread(LVar1)
+    Loop(5)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(2)
+    EndLoop
+    Wait(20)
+    ExecWait(N(EVS_Quizmo_ReturnPlayerToOriginalPos))
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_WrongAnswer) = {
-    EVT_EXEC_GET_TID(N(EVS_Quizmo_PlayerReaction_WrongAnswer), LVar1)
-    EVT_WAIT(60)
-    EVT_LOOP(5)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_WAIT(20)
-    EVT_KILL_THREAD(LVar1)
-    EVT_EXEC_WAIT(N(EVS_Quizmo_ReturnPlayerToOriginalPos))
-    EVT_RETURN
-    EVT_END
+    ExecGetTID(N(EVS_Quizmo_PlayerReaction_WrongAnswer), LVar1)
+    Wait(60)
+    Loop(5)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, -1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(2)
+    EndLoop
+    Wait(20)
+    KillThread(LVar1)
+    ExecWait(N(EVS_Quizmo_ReturnPlayerToOriginalPos))
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_QuizMain) = {
-    EVT_IF_GT(GB_CompletedQuizzes, 63)
-        EVT_SET(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetPlayerPos, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Y, QUIZ_ARRAY_ORIGIN_Z)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 16)
-    EVT_IF_EQ(GB_CompletedQuizzes, 63)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000A)
-    EVT_ELSE
-        EVT_IF_EQ(GF_Met_ChuckQuizmo, 1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_0009)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_0008)
-            EVT_SET(GF_Met_ChuckQuizmo, 1)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ShowChoice, MSG_Choice_000D)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000C)
-        EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
-        EVT_SET(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_Quizmo_TakingQuiz, 1)
-    EVT_CALL(N(Quizmo_HideEntities))
-    EVT_CALL(N(Quizmo_HideWorld))
-    EVT_EXEC(N(EVS_Quizmo_SetQuizCamera))
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_EXEC_GET_TID(N(EVS_Quizmo_SetCharacterPositons), LVar1)
-    EVT_CALL(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000B)
-    EVT_CALL(PlaySound, SOUND_LRAW_AUDIENCE_MURMUR)
-    EVT_LOOP(0)
-        EVT_IS_THREAD_RUNNING(LVar1, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(N(Quizmo_CreateStage))
-    EVT_LOOP(5)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_SET(LVar0, MSG_QuizQuestion_01)
-    EVT_ADD(LVar0, GB_CompletedQuizzes)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_OpenHat, ANIM_ChuckQuizmo_CloseHat, 0, LVar0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Question)
-    EVT_SET(LVar0, MSG_QuizChoice_01)
-    EVT_ADD(LVar0, GB_CompletedQuizzes)
-    EVT_CALL(PlaySound, SOUND_LRAW_QUIZ_TICKING)
-    EVT_CALL(ShowChoice, LVar0)
-    EVT_KILL_THREAD(LVar1)
-    EVT_CALL(StopSound, SOUND_LRAW_QUIZ_TICKING)
-    EVT_EXEC(N(EVS_Quizmo_PlayerHitBuzzer))
-    EVT_WAIT(15)
-    EVT_CALL(PlaySound, SOUND_QUIZ_BUZZER)
-    EVT_CALL(N(Quizmo_UnkStageEffectMode), LVar0)
-    EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 0)
-    EVT_CALL(N(Quizmo_CreateWorker))
-    EVT_WAIT(40)
-    EVT_CALL(N(Quizmo_UpdateRecords))
-    EVT_THREAD
-        EVT_WAIT(110)
-        EVT_CALL(CloseChoice)
-        EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 0)
-    EVT_END_THREAD
-    EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenCorrect)
-        EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 1)
-        EVT_THREAD
-            EVT_CALL(N(Quizmo_SetStageLightsDelay), 1)
-            EVT_WAIT(6)
-            EVT_WAIT(6)
-            EVT_WAIT(6)
-            EVT_CALL(N(Quizmo_SetStageLightsDelay), 2)
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_CALL(PlaySound, SOUND_APPROVE)
-            EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_APPROVE)
-            EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_APPROVE)
-            EVT_WAIT(6)
-            EVT_CALL(PlaySound, SOUND_APPROVE)
-        EVT_END_THREAD
-        EVT_CALL(PlaySound, SOUND_AUDIENCE_CHEER)
-        EVT_CALL(N(Quizmo_SetVannaAnim_Clap))
-        EVT_THREAD
-            EVT_WAIT(15)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 50)
-            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 83, LVar0, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
-            EVT_WAIT(15)
-            EVT_ADD(LVar1, -3)
-            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 58, LVar0, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
-            EVT_WAIT(15)
-            EVT_ADD(LVar1, 30)
-            EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 93, LVar0, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
-            EVT_WAIT(15)
-        EVT_END_THREAD
-        EVT_WAIT(20)
-        EVT_EXEC_GET_TID(N(EVS_Quizmo_RightAnswer), LVar1)
-        EVT_ADD(GB_CompletedQuizzes, 1)
-        EVT_IF_GT(GB_CompletedQuizzes, 63)
-            EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_0010)
-            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseHat)
-            EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(LVar1, LVar0)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenHat)
-            EVT_SET(LVar0, ITEM_STAR_PIECE)
-            EVT_SET(LVar1, 3)
-            EVT_EXEC_WAIT(N(GiveItemReward))
-            EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(Quizmo_SetStageLightsDelay), 15)
-            EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
-            EVT_CALL(SetMessageValue, GB_CompletedQuizzes, 0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_0011)
-        EVT_ELSE
-            EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_000E)
-            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseHat)
-            EVT_LOOP(0)
-                EVT_IS_THREAD_RUNNING(LVar1, LVar0)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenHat)
-            EVT_SET(LVar0, ITEM_STAR_PIECE)
-            EVT_SET(LVar1, 1)
-            EVT_EXEC_WAIT(N(GiveItemReward))
-            EVT_CALL(AddStarPieces, 1)
-            EVT_CALL(N(Quizmo_SetStageLightsDelay), 15)
-            EVT_CALL(N(Quizmo_SetVannaAnim_Idle))
-            EVT_CALL(SetMessageValue, GB_CompletedQuizzes, 0)
-            EVT_IF_EQ(GB_CompletedQuizzes, 1)
-                EVT_CALL(SetMessageText, EVT_PTR(MessageSingular), 1)
-            EVT_ELSE
+    IfGt(GB_CompletedQuizzes, 63)
+        Set(LVar0, 0)
+        Return
+    EndIf
+    Call(GetPlayerPos, QUIZ_ARRAY_ORIGIN_X, QUIZ_ARRAY_ORIGIN_Y, QUIZ_ARRAY_ORIGIN_Z)
+    Call(NpcFacePlayer, NPC_SELF, 16)
+    IfEq(GB_CompletedQuizzes, 63)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000A)
+    Else
+        IfEq(GF_Met_ChuckQuizmo, 1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_0009)
+        Else
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_0008)
+            Set(GF_Met_ChuckQuizmo, 1)
+        EndIf
+    EndIf
+    Call(ShowChoice, MSG_Choice_000D)
+    IfEq(LVar0, 1)
+        Call(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000C)
+        ExecWait(N(EVS_Quizmo_Exit))
+        Set(LVar0, 0)
+        Return
+    EndIf
+    Set(GF_Quizmo_TakingQuiz, 1)
+    Call(N(Quizmo_HideEntities))
+    Call(N(Quizmo_HideWorld))
+    Exec(N(EVS_Quizmo_SetQuizCamera))
+    Call(DisablePartnerAI, 0)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_FLYING | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, CHUCK_QUIZMO_NPC_ID, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    ExecGetTID(N(EVS_Quizmo_SetCharacterPositons), LVar1)
+    Call(ContinueSpeech, -1, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000B)
+    Call(PlaySound, SOUND_LRAW_AUDIENCE_MURMUR)
+    Loop(0)
+        IsThreadRunning(LVar1, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(N(Quizmo_CreateStage))
+    Loop(5)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar1, 1)
+        Call(SetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(2)
+    EndLoop
+    Set(LVar0, MSG_QuizQuestion_01)
+    Add(LVar0, GB_CompletedQuizzes)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_OpenHat, ANIM_ChuckQuizmo_CloseHat, 0, LVar0)
+    Call(SetPlayerAnimation, ANIM_Mario1_Question)
+    Set(LVar0, MSG_QuizChoice_01)
+    Add(LVar0, GB_CompletedQuizzes)
+    Call(PlaySound, SOUND_LRAW_QUIZ_TICKING)
+    Call(ShowChoice, LVar0)
+    KillThread(LVar1)
+    Call(StopSound, SOUND_LRAW_QUIZ_TICKING)
+    Exec(N(EVS_Quizmo_PlayerHitBuzzer))
+    Wait(15)
+    Call(PlaySound, SOUND_QUIZ_BUZZER)
+    Call(N(Quizmo_UnkStageEffectMode), LVar0)
+    Set(QUIZ_ARRAY_ANSWER_RESULT, 0)
+    Call(N(Quizmo_CreateWorker))
+    Wait(40)
+    Call(N(Quizmo_UpdateRecords))
+    Thread
+        Wait(110)
+        Call(CloseChoice)
+        Set(QUIZ_ARRAY_ANSWER_RESULT, 0)
+    EndThread
+    IfEq(LVar0, 1)
+        Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenCorrect)
+        Set(QUIZ_ARRAY_ANSWER_RESULT, 1)
+        Thread
+            Call(N(Quizmo_SetStageLightsDelay), 1)
+            Wait(6)
+            Wait(6)
+            Wait(6)
+            Call(N(Quizmo_SetStageLightsDelay), 2)
+        EndThread
+        Thread
+            Call(PlaySound, SOUND_APPROVE)
+            Wait(6)
+            Call(PlaySound, SOUND_APPROVE)
+            Wait(6)
+            Call(PlaySound, SOUND_APPROVE)
+            Wait(6)
+            Call(PlaySound, SOUND_APPROVE)
+        EndThread
+        Call(PlaySound, SOUND_AUDIENCE_CHEER)
+        Call(N(Quizmo_SetVannaAnim_Clap))
+        Thread
+            Wait(15)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Add(LVar1, 50)
+            Call(N(Quizmo_AddViewRelativeOffset), 0, 0, 83, LVar0, LVar2)
+            PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
+            Wait(15)
+            Add(LVar1, -3)
+            Call(N(Quizmo_AddViewRelativeOffset), 0, 0, 58, LVar0, LVar2)
+            PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
+            Wait(15)
+            Add(LVar1, 30)
+            Call(N(Quizmo_AddViewRelativeOffset), 0, 0, 93, LVar0, LVar2)
+            PlayEffect(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
+            Wait(15)
+        EndThread
+        Wait(20)
+        ExecGetTID(N(EVS_Quizmo_RightAnswer), LVar1)
+        Add(GB_CompletedQuizzes, 1)
+        IfGt(GB_CompletedQuizzes, 63)
+            Call(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_0010)
+            Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseHat)
+            Loop(0)
+                IsThreadRunning(LVar1, LVar0)
+                IfEq(LVar0, 0)
+                    BreakLoop
+                EndIf
+                Wait(1)
+            EndLoop
+            Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenHat)
+            Set(LVar0, ITEM_STAR_PIECE)
+            Set(LVar1, 3)
+            ExecWait(N(GiveItemReward))
+            Call(AddStarPieces, 1)
+            Call(N(Quizmo_SetStageLightsDelay), 15)
+            Call(N(Quizmo_SetVannaAnim_Idle))
+            Call(SetMessageValue, GB_CompletedQuizzes, 0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_0011)
+        Else
+            Call(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_000E)
+            Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseHat)
+            Loop(0)
+                IsThreadRunning(LVar1, LVar0)
+                IfEq(LVar0, 0)
+                    BreakLoop
+                EndIf
+                Wait(1)
+            EndLoop
+            Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenHat)
+            Set(LVar0, ITEM_STAR_PIECE)
+            Set(LVar1, 1)
+            ExecWait(N(GiveItemReward))
+            Call(AddStarPieces, 1)
+            Call(N(Quizmo_SetStageLightsDelay), 15)
+            Call(N(Quizmo_SetVannaAnim_Idle))
+            Call(SetMessageValue, GB_CompletedQuizzes, 0)
+            IfEq(GB_CompletedQuizzes, 1)
+                Call(SetMessageText, Ref(MessageSingular), 1)
+            Else
 #if VERSION_PAL
-                EVT_CALL(GetLanguage, LVar0)
-                EVT_IF_EQ(LVar0, LANGUAGE_DE)
-                    EVT_CALL(SetMessageText, EVT_PTR(MessagePlural_de), 1)
-                EVT_ELSE
-                    EVT_CALL(SetMessageText, EVT_PTR(MessagePlural), 1)
-                EVT_END_IF
+                Call(GetLanguage, LVar0)
+                IfEq(LVar0, LANGUAGE_DE)
+                    Call(SetMessageText, Ref(MessagePlural_de), 1)
+                Else
+                    Call(SetMessageText, Ref(MessagePlural), 1)
+                EndIf
 #else
-                EVT_CALL(SetMessageText, EVT_PTR(MessagePlural), 1)
+                Call(SetMessageText, Ref(MessagePlural), 1)
 #endif
-            EVT_END_IF
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000F)
-        EVT_END_IF
-        EVT_SET(LVar0, 1)
-    EVT_ELSE
-        EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenWrong)
-        EVT_SET(QUIZ_ARRAY_ANSWER_RESULT, 2)
-        EVT_CALL(PlaySound, SOUND_MENU_ERROR)
-        EVT_CALL(PlaySound, SOUND_AUDIENCE_BOO)
-        EVT_EXEC_GET_TID(N(EVS_Quizmo_WrongAnswer), LVar1)
-        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_PLAY_EFFECT(EFFECT_WINDY_LEAVES, 0, LVar2, LVar3, LVar4)
-        EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_000D)
-        EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseWrong)
-        EVT_LOOP(0)
-            EVT_IS_THREAD_RUNNING(LVar1, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_SET(LVar0, 0)
-    EVT_END_IF
-    EVT_CALL(N(Quizmo_UnkStageEffectMode), -1)
-    EVT_CALL(EnablePartnerAI)
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_CALL(PlaySound, SOUND_QUIZMO_VANISH)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(45)
-        EVT_CALL(StopSound, SOUND_LRAW_AUDIENCE_MURMUR)
-    EVT_END_THREAD
-    EVT_CALL(N(Quizmo_SetVannaAnim_Wave))
-    EVT_CALL(N(Quizmo_DestroyEffects))
-    EVT_EXEC_WAIT(N(EVS_Quizmo_Exit))
-    EVT_EXEC(N(EVS_Quizmo_ResetCamera))
-    EVT_CALL(N(Quizmo_FadeInWorld))
-    EVT_CALL(N(Quizmo_ShowEntities))
-    EVT_SET(GF_Quizmo_TakingQuiz, 0)
-    EVT_RETURN
-    EVT_END
+            EndIf
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000F)
+        EndIf
+        Set(LVar0, 1)
+    Else
+        Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_OpenWrong)
+        Set(QUIZ_ARRAY_ANSWER_RESULT, 2)
+        Call(PlaySound, SOUND_MENU_ERROR)
+        Call(PlaySound, SOUND_AUDIENCE_BOO)
+        ExecGetTID(N(EVS_Quizmo_WrongAnswer), LVar1)
+        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+        PlayEffect(EFFECT_WINDY_LEAVES, 0, LVar2, LVar3, LVar4)
+        Call(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_000D)
+        Call(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseWrong)
+        Loop(0)
+            IsThreadRunning(LVar1, LVar0)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Set(LVar0, 0)
+    EndIf
+    Call(N(Quizmo_UnkStageEffectMode), -1)
+    Call(EnablePartnerAI)
+    Thread
+        Wait(30)
+        Call(PlaySound, SOUND_QUIZMO_VANISH)
+    EndThread
+    Thread
+        Wait(45)
+        Call(StopSound, SOUND_LRAW_AUDIENCE_MURMUR)
+    EndThread
+    Call(N(Quizmo_SetVannaAnim_Wave))
+    Call(N(Quizmo_DestroyEffects))
+    ExecWait(N(EVS_Quizmo_Exit))
+    Exec(N(EVS_Quizmo_ResetCamera))
+    Call(N(Quizmo_FadeInWorld))
+    Call(N(Quizmo_ShowEntities))
+    Set(GF_Quizmo_TakingQuiz, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_NPC_OtherAI) = {
-    EVT_CALL(N(Quizmo_ShouldAppear))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, FALSE)
-    EVT_CALL(SetNpcSprite, -1, ANIM_ChuckQuizmo_Idle)
-    EVT_CALL(N(Quizmo_RenderInit))
-    EVT_RETURN
-    EVT_END
+    Call(N(Quizmo_ShouldAppear))
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_NO_SPRITE, FALSE)
+    Call(SetNpcSprite, -1, ANIM_ChuckQuizmo_Idle)
+    Call(N(Quizmo_RenderInit))
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_NPC_Interact) = {
-    EVT_USE_ARRAY(EVT_PTR(N(Quizmo_ScriptArray)))
-    EVT_SET(GF_Quizmo_ChangedLocation, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 1)
-    EVT_EXEC_WAIT(N(EVS_Quizmo_QuizMain))
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 0)
-    EVT_RETURN
-    EVT_END
+    UseArray(Ref(N(Quizmo_ScriptArray)))
+    Set(GF_Quizmo_ChangedLocation, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 1)
+    ExecWait(N(EVS_Quizmo_QuizMain))
+    Call(DisablePlayerPhysics, FALSE)
+    Call(SetPlayerFlagBits, PS_FLAG_MOVEMENT_LOCKED, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Quizmo_NPC_Aux) = {
-    EVT_CALL(N(Quizmo_NPC_Aux_Impl))
-    EVT_RETURN
-    EVT_END
+    Call(N(Quizmo_NPC_Aux_Impl))
+    Return
+    End
 };
 
 MobileAISettings N(Quizmo_MobileAISettings) = {
@@ -1210,9 +1210,9 @@ MobileAISettings N(Quizmo_MobileAISettings) = {
 };
 
 EvtScript N(EVS_Quizmo_Npc_AI) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(Quizmo_MobileAISettings)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(Quizmo_MobileAISettings)))
+    Return
+    End
 };
 
 // primary quizmo NpcSettings

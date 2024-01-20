@@ -32,9 +32,9 @@ API_CALLABLE(N(SpawnSunEffect)) {
 }
 
 EvtScript N(MakeSun) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-        EVT_CALL(N(SpawnSunEffect))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+        Call(N(SpawnSunEffect))
+    EndIf
+    Return
+    End
 };

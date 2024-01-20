@@ -3,55 +3,55 @@
 #include "common/foliage.inc.c"
 
 EvtScript N(EVS_SpawnBzzap) = {
-    EVT_CALL(GetNpcPos, NPC_Bzzap_02, LVar0, LVar1, LVar2)
-    EVT_IF_LT(LVar1, 0)
-        EVT_CALL(GetModelCenter, LVar9)
-        EVT_ADD(LVar2, 35)
-        EVT_CALL(SetNpcPos, NPC_Bzzap_02, LVar0, LVar1, LVar2)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_Bzzap_02, LVar0, LVar1, LVar2)
+    IfLt(LVar1, 0)
+        Call(GetModelCenter, LVar9)
+        Add(LVar2, 35)
+        Call(SetNpcPos, NPC_Bzzap_02, LVar0, LVar1, LVar2)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_OnShakeTree1) = {
-    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
-        EVT_IF_EQ(AB_FLO_TreePuzzle_SecondCorrect, 1)
-            EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO09_Item_HappyFlowerB)
-        EVT_ELSE
-            EVT_SET(LVar9, MODEL_o10)
-            EVT_EXEC(N(EVS_SpawnBzzap))
-        EVT_END_IF
-        EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 0)
-        EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_FLO09_Item_HappyFlowerB, FALSE)
+        IfEq(AB_FLO_TreePuzzle_SecondCorrect, 1)
+            Call(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_FLO09_Item_HappyFlowerB)
+        Else
+            Set(LVar9, MODEL_o10)
+            Exec(N(EVS_SpawnBzzap))
+        EndIf
+        Set(AB_FLO_TreePuzzle_FirstCorrect, 0)
+        Set(AB_FLO_TreePuzzle_SecondCorrect, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_OnShakeTree2) = {
-    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
-        EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 1)
-        EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_FLO09_Item_HappyFlowerB, FALSE)
+        Set(AB_FLO_TreePuzzle_FirstCorrect, 1)
+        Set(AB_FLO_TreePuzzle_SecondCorrect, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_OnShakeTree3) = {
-    EVT_IF_EQ(GF_FLO09_Item_HappyFlowerB, FALSE)
-        EVT_IF_EQ(AB_FLO_TreePuzzle_FirstCorrect, 1)
-            EVT_IF_EQ(AB_FLO_TreePuzzle_SecondCorrect, 0)
-                EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 1)
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_IF
-        EVT_SET(LVar9, MODEL_o13)
-        EVT_EXEC(N(EVS_SpawnBzzap))
-        EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 0)
-        EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_FLO09_Item_HappyFlowerB, FALSE)
+        IfEq(AB_FLO_TreePuzzle_FirstCorrect, 1)
+            IfEq(AB_FLO_TreePuzzle_SecondCorrect, 0)
+                Set(AB_FLO_TreePuzzle_SecondCorrect, 1)
+                Return
+            EndIf
+        EndIf
+        Set(LVar9, MODEL_o13)
+        Exec(N(EVS_SpawnBzzap))
+        Set(AB_FLO_TreePuzzle_FirstCorrect, 0)
+        Set(AB_FLO_TreePuzzle_SecondCorrect, 0)
+    EndIf
+    Return
+    End
 };
 
 FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o11, MODEL_o12);
@@ -97,17 +97,17 @@ BombTrigger N(BombPos_Tree3) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(AB_FLO_TreePuzzle_FirstCorrect, 0)
-    EVT_SET(AB_FLO_TreePuzzle_SecondCorrect, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o10, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o3, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree2)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o13, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree3)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(AB_FLO_TreePuzzle_FirstCorrect, 0)
+    Set(AB_FLO_TreePuzzle_SecondCorrect, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o10, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o3, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree2)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree3)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o13, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree3)), 1, 0)
+    Return
+    End
 };

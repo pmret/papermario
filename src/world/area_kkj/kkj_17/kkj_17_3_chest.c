@@ -18,14 +18,14 @@ extern IconHudScriptPair gItemHudScripts[];
 s32** N(varStash) = NULL;
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_FULL)
-    EVT_WAIT(40)
-    EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
+    Wait(40)
+    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Return
+    Return
+    End
 };
 
 s32 N(ChestItems)[] = {
@@ -148,137 +148,137 @@ API_CALLABLE(N(SetItemRetrieved)) {
 #include "world/common/todo/GetItemEmptyCount.inc.c"
 
 EvtScript N(EVS_OpenChest) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o89, SOUND_OPEN_MAGIC_CHEST, 0)
-    EVT_CALL(MakeLerp, 0, 80, 20, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g21, LVar0, -1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, COLLIDER_o89, SOUND_OPEN_MAGIC_CHEST, 0)
+    Call(MakeLerp, 0, 80, 20, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g21, LVar0, -1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_CloseChest) = {
-    EVT_CALL(MakeLerp, 80, 0, 20, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g21, LVar0, -1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o89, SOUND_CLOSE_MAGIC_CHEST, 0)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, 80, 0, 20, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g21, LVar0, -1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_o89, SOUND_CLOSE_MAGIC_CHEST, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_FindMagicChest) = {
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_018E)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
-    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_018F)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0190)
-    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0191)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0192)
-    EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0193)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LowerArms)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_018E)
+    Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
+    Call(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_018F)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0190)
+    Call(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0191)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0192)
+    Call(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0193)
+    Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_Peach1_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseMagicChest_Peach) = {
-    EVT_SET(LVar0, 0)
-    EVT_CALL(N(ChestItemPrompt))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_EQ(0)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0194)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
-            EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
-            EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0195)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0196)
-            EVT_CALL(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0197)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LowerArms)
-            EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
-        EVT_CASE_DEFAULT
-            EVT_WAIT(10)
-            EVT_SET(LVar9, LVar0)
-            EVT_EXEC_WAIT(N(EVS_OpenChest))
-            EVT_CALL(N(GetItemName), LVar9)
-            EVT_CALL(SetMessageText, LVar9, 0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Peach_0198, 160, 40)
-            EVT_WAIT(10)
-            EVT_EXEC_WAIT(N(EVS_CloseChest))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, 0)
+    Call(N(ChestItemPrompt))
+    Switch(LVar0)
+        CaseEq(-1)
+        CaseEq(0)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0194)
+            Call(SetPlayerAnimation, ANIM_Peach2_RaiseArms)
+            Wait(10)
+            Call(SetPlayerAnimation, ANIM_Peach2_TalkIdle)
+            Call(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0195)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Peach_0196)
+            Call(SpeakToNpc, NPC_PLAYER, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 0, NPC_PARTNER, MSG_Peach_0197)
+            Call(SetPlayerAnimation, ANIM_Peach2_LowerArms)
+            Wait(10)
+            Call(SetPlayerAnimation, ANIM_Peach1_Idle)
+        CaseDefault
+            Wait(10)
+            Set(LVar9, LVar0)
+            ExecWait(N(EVS_OpenChest))
+            Call(N(GetItemName), LVar9)
+            Call(SetMessageText, LVar9, 0)
+            Call(ShowMessageAtScreenPos, MSG_Peach_0198, 160, 40)
+            Wait(10)
+            ExecWait(N(EVS_CloseChest))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_UseMagicChest_Mario) = {
-    EVT_EXEC_WAIT(N(EVS_OpenChest))
-    EVT_SET(LVar0, 1)
-    EVT_CALL(N(ChestItemPrompt))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D4, 160, 40)
-        EVT_CASE_OR_EQ(269)
-        EVT_CASE_OR_EQ(297)
-        EVT_CASE_OR_EQ(273)
-            EVT_SET_GROUP(EVT_GROUP_00)
-            EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_FULL)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
-            EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-            EVT_CALL(AddBadge, LVar0, LVar1)
-            EVT_CALL(N(SetItemRetrieved))
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(N(GetItemEmptyCount))
-            EVT_IF_LE(LVar1, 0)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D5, 160, 40)
-            EVT_ELSE
-                EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_ANIMS)
-                EVT_CALL(AddItem, LVar0, LVar1)
-                EVT_CALL(N(SetItemRetrieved))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_CloseChest))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_OpenChest))
+    Set(LVar0, 1)
+    Call(N(ChestItemPrompt))
+    Switch(LVar0)
+        CaseEq(-1)
+        CaseEq(0)
+            Call(ShowMessageAtScreenPos, MSG_Menus_00D4, 160, 40)
+        CaseOrEq(269)
+        CaseOrEq(297)
+        CaseOrEq(273)
+            SetGroup(EVT_GROUP_00)
+            Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
+            Call(ShowGotItem, LVar0, FALSE, 0)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(AddBadge, LVar0, LVar1)
+            Call(N(SetItemRetrieved))
+        EndCaseGroup
+        CaseDefault
+            Call(N(GetItemEmptyCount))
+            IfLe(LVar1, 0)
+                Call(ShowMessageAtScreenPos, MSG_Menus_00D5, 160, 40)
+            Else
+                Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_ANIMS)
+                Call(AddItem, LVar0, LVar1)
+                Call(N(SetItemRetrieved))
+            EndIf
+    EndSwitch
+    ExecWait(N(EVS_CloseChest))
+    Return
+    End
 };
 
 EvtScript N(EVS_Interact_MagicChest) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePartnerAI, 1)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
-        EVT_IF_EQ(GF_KKJ17_FoundMagicChest, FALSE)
-            EVT_EXEC_WAIT(N(EVS_FindMagicChest))
-            EVT_SET(GF_KKJ17_FoundMagicChest, TRUE)
-        EVT_ELSE
-            EVT_EXEC_WAIT(N(EVS_UseMagicChest_Peach))
-        EVT_END_IF
-    EVT_ELSE
-        EVT_EXEC_WAIT(N(EVS_UseMagicChest_Mario))
-    EVT_END_IF
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePartnerAI, 1)
+    IfLt(GB_StoryProgress, STORY_CH8_REACHED_PEACHS_CASTLE)
+        IfEq(GF_KKJ17_FoundMagicChest, FALSE)
+            ExecWait(N(EVS_FindMagicChest))
+            Set(GF_KKJ17_FoundMagicChest, TRUE)
+        Else
+            ExecWait(N(EVS_UseMagicChest_Peach))
+        EndIf
+    Else
+        ExecWait(N(EVS_UseMagicChest_Mario))
+    EndIf
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupMagicChest) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Interact_MagicChest)), TRIGGER_WALL_PRESS_A, COLLIDER_o89, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Interact_MagicChest)), TRIGGER_WALL_PRESS_A, COLLIDER_o89, 1, 0)
+    Return
+    End
 };

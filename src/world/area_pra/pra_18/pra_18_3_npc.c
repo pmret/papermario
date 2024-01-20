@@ -12,324 +12,324 @@ NpcSettings N(NpcSettings_Clubba) = {
 };
 
 EvtScript N(EVS_NpcInteract_Clubba_01) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Clubba_02) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Clubba_03) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Clubba_01) = {
-    EVT_CALL(SetSelfVar, 0, 2)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Clubba_02) = {
-    EVT_CALL(SetSelfVar, 0, 2)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Clubba_03) = {
-    EVT_CALL(SetSelfVar, 0, 2)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Clubba_01_Aux) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Clubba_02_Aux) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_Clubba_03_Aux) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Clubba_01) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-        EVT_CALL(IsPlayerWithin, LVar3, LVar5, 80, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_IF_NE(LVar0, 2)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0150)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_IF
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+        Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+        Call(IsPlayerWithin, LVar3, LVar5, 80, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+    EndLoop
+    IfNe(LVar0, 2)
+        Call(DisablePlayerInput, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0150)
+        Call(DisablePlayerInput, FALSE)
+    EndIf
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Clubba_02) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-        EVT_CALL(IsPlayerWithin, LVar3, LVar5, 80, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_IF_NE(LVar0, 2)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0151)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_IF
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+        Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+        Call(IsPlayerWithin, LVar3, LVar5, 80, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+    EndLoop
+    IfNe(LVar0, 2)
+        Call(DisablePlayerInput, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0151)
+        Call(DisablePlayerInput, FALSE)
+    EndIf
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Clubba_03) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-        EVT_CALL(IsPlayerWithin, LVar3, LVar5, 80, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_NE(LVar0, 2)
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0152)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_IF
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        Call(GetSelfVar, 0, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+        Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+        Call(IsPlayerWithin, LVar3, LVar5, 80, LVar0)
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(GetSelfVar, 0, LVar0)
+    IfNe(LVar0, 2)
+        Call(DisablePlayerInput, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_WorldClubba_Frost_Anim05, ANIM_WorldClubba_Frost_Anim02, 0, MSG_CH7_0152)
+        Call(DisablePlayerInput, FALSE)
+    EndIf
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayClubbaDefeatFX) = {
-    EVT_WAIT(20)
-    EVT_LOOP(4)
-        EVT_SET(LVar0, LVarA)
-        EVT_SET(LVar1, LVarB)
-        EVT_SET(LVar2, LVarC)
-        EVT_CALL(RandInt, 50, LVar3)
-        EVT_CALL(RandInt, 50, LVar4)
-        EVT_ADD(LVar0, -15)
-        EVT_ADD(LVar0, LVar3)
-        EVT_ADD(LVar1, LVar4)
-        EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 0)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_BULLET_BILL_EXPLODE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(2)
-        EVT_SET(LVar0, LVarA)
-        EVT_SET(LVar1, LVarB)
-        EVT_SET(LVar2, LVarC)
-        EVT_CALL(RandInt, 50, LVar3)
-        EVT_CALL(RandInt, 50, LVar4)
-        EVT_ADD(LVar0, -15)
-        EVT_ADD(LVar0, LVar3)
-        EVT_ADD(LVar1, LVar4)
-        EVT_PLAY_EFFECT(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 0)
-        EVT_CALL(PlaySoundAt, SOUND_SEQ_BULLET_BILL_EXPLODE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(8)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Wait(20)
+    Loop(4)
+        Set(LVar0, LVarA)
+        Set(LVar1, LVarB)
+        Set(LVar2, LVarC)
+        Call(RandInt, 50, LVar3)
+        Call(RandInt, 50, LVar4)
+        Add(LVar0, -15)
+        Add(LVar0, LVar3)
+        Add(LVar1, LVar4)
+        PlayEffect(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, Float(0.8), 0)
+        Call(PlaySoundAt, SOUND_SEQ_BULLET_BILL_EXPLODE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(2)
+        Set(LVar0, LVarA)
+        Set(LVar1, LVarB)
+        Set(LVar2, LVarC)
+        Call(RandInt, 50, LVar3)
+        Call(RandInt, 50, LVar4)
+        Add(LVar0, -15)
+        Add(LVar0, LVar3)
+        Add(LVar1, LVar4)
+        PlayEffect(EFFECT_FIREWORK, 0, LVar0, LVar1, LVar2, Float(0.8), 0)
+        Call(PlaySoundAt, SOUND_SEQ_BULLET_BILL_EXPLODE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(8)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Clubba_01) = {
-    EVT_THREAD
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_WAIT(50)
-        EVT_LOOP(10)
-            EVT_WAIT(2)
-            EVT_CALL(SetGroupVisibility, MODEL_g297, MODEL_GROUP_VISIBLE)
-            EVT_WAIT(2)
-            EVT_CALL(SetGroupVisibility, MODEL_g297, MODEL_GROUP_HIDDEN)
-        EVT_END_LOOP
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1176, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_SET(GB_PRA18_ClubbasDefeated, 1)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_SET(LVarA, 270)
-        EVT_SET(LVarB, 20)
-        EVT_SET(LVarC, -75)
-        EVT_EXEC(N(EVS_PlayClubbaDefeatFX))
-    EVT_END_THREAD
-    EVT_CALL(DoNpcDefeat)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(DisablePlayerInput, TRUE)
+        Wait(50)
+        Loop(10)
+            Wait(2)
+            Call(SetGroupVisibility, MODEL_g297, MODEL_GROUP_VISIBLE)
+            Wait(2)
+            Call(SetGroupVisibility, MODEL_g297, MODEL_GROUP_HIDDEN)
+        EndLoop
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1176, COLLIDER_FLAGS_UPPER_MASK)
+        Set(GB_PRA18_ClubbasDefeated, 1)
+        Call(DisablePlayerInput, FALSE)
+    EndThread
+    Thread
+        Wait(30)
+        Set(LVarA, 270)
+        Set(LVarB, 20)
+        Set(LVarC, -75)
+        Exec(N(EVS_PlayClubbaDefeatFX))
+    EndThread
+    Call(DoNpcDefeat)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Clubba_02) = {
-    EVT_THREAD
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_WAIT(50)
-        EVT_LOOP(10)
-            EVT_WAIT(2)
-            EVT_CALL(SetGroupVisibility, MODEL_g296, MODEL_GROUP_VISIBLE)
-            EVT_WAIT(2)
-            EVT_CALL(SetGroupVisibility, MODEL_g296, MODEL_GROUP_HIDDEN)
-        EVT_END_LOOP
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1175, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_SET(GB_PRA18_ClubbasDefeated, 2)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_SET(LVarA, 480)
-        EVT_SET(LVarB, 20)
-        EVT_SET(LVarC, -75)
-        EVT_EXEC(N(EVS_PlayClubbaDefeatFX))
-    EVT_END_THREAD
-    EVT_CALL(DoNpcDefeat)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(DisablePlayerInput, TRUE)
+        Wait(50)
+        Loop(10)
+            Wait(2)
+            Call(SetGroupVisibility, MODEL_g296, MODEL_GROUP_VISIBLE)
+            Wait(2)
+            Call(SetGroupVisibility, MODEL_g296, MODEL_GROUP_HIDDEN)
+        EndLoop
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1175, COLLIDER_FLAGS_UPPER_MASK)
+        Set(GB_PRA18_ClubbasDefeated, 2)
+        Call(DisablePlayerInput, FALSE)
+    EndThread
+    Thread
+        Wait(30)
+        Set(LVarA, 480)
+        Set(LVarB, 20)
+        Set(LVarC, -75)
+        Exec(N(EVS_PlayClubbaDefeatFX))
+    EndThread
+    Call(DoNpcDefeat)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Clubba_03) = {
-    EVT_THREAD
-        EVT_CALL(DisablePlayerInput, TRUE)
-        EVT_WAIT(50)
-        EVT_LOOP(10)
-            EVT_WAIT(2)
-            EVT_CALL(SetGroupVisibility, MODEL_g298, MODEL_GROUP_VISIBLE)
-            EVT_WAIT(2)
-            EVT_CALL(SetGroupVisibility, MODEL_g298, MODEL_GROUP_HIDDEN)
-        EVT_END_LOOP
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1174, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_pra_33_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
-        EVT_SET(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_SET(LVarA, 725)
-        EVT_SET(LVarB, 20)
-        EVT_SET(LVarC, -75)
-        EVT_EXEC(N(EVS_PlayClubbaDefeatFX))
-    EVT_END_THREAD
-    EVT_CALL(DoNpcDefeat)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(DisablePlayerInput, TRUE)
+        Wait(50)
+        Loop(10)
+            Wait(2)
+            Call(SetGroupVisibility, MODEL_g298, MODEL_GROUP_VISIBLE)
+            Wait(2)
+            Call(SetGroupVisibility, MODEL_g298, MODEL_GROUP_HIDDEN)
+        EndLoop
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1174, COLLIDER_FLAGS_UPPER_MASK)
+        BindTrigger(Ref(N(EVS_ExitDoors_pra_33_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
+        Set(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(DisablePlayerInput, FALSE)
+    EndThread
+    Thread
+        Wait(30)
+        Set(LVarA, 725)
+        Set(LVarB, 20)
+        Set(LVarC, -75)
+        Exec(N(EVS_PlayClubbaDefeatFX))
+    EndThread
+    Call(DoNpcDefeat)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_01) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_PRA18_ClubbasDefeated, 1)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Clubba_01)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Clubba_01)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Clubba_01)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Clubba_01)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    IfGe(GB_PRA18_ClubbasDefeated, 1)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Clubba_01)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_01)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Clubba_01)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_01)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_02) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_PRA18_ClubbasDefeated, 2)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Clubba_02)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Clubba_02)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Clubba_02)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Clubba_02)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    IfGe(GB_PRA18_ClubbasDefeated, 2)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Clubba_02)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_02)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Clubba_02)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_02)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_03) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Clubba_03)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Clubba_03)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Clubba_03)))
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Clubba_03)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Clubba_03)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Clubba_03)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Clubba_03)))
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_03)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_01_Aux) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_PRA18_ClubbasDefeated, 1)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Clubba_01_Aux)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    IfGe(GB_PRA18_ClubbasDefeated, 1)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_01_Aux)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_02_Aux) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(GB_PRA18_ClubbasDefeated, 2)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Clubba_02_Aux)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    IfGe(GB_PRA18_ClubbasDefeated, 2)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_02_Aux)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Clubba_03_Aux) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
-    EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_Clubba_03_Aux)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH7_DEFEATED_CLUBBAS)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_10000000, TRUE)
+    Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_Clubba_03_Aux)))
+    Return
+    End
 };
 
 #if VERSION_PAL

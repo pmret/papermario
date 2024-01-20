@@ -17,9 +17,9 @@ MobileAISettings N(AISettings_HyperCleft) = {
 };
 
 EvtScript N(EVS_NpcAI_HyperCleft) = {
-    EVT_CALL(N(CleftAI_Main), EVT_PTR(N(AISettings_HyperCleft)), 8)
-    EVT_RETURN
-    EVT_END
+    Call(N(CleftAI_Main), Ref(N(AISettings_HyperCleft)), 8)
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_HyperCleft) = {

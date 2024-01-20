@@ -32,26 +32,26 @@ API_CALLABLE(N(func_802A12FC_71CFDC)) {
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_DRIED_SHROOM)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_EXEC_WAIT(N(EatItem))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 0)
-    EVT_ADD(LVar1, 35)
-    EVT_CALL(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, 1)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 25)
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 1)
-    EVT_CALL(N(func_802A12FC_71CFDC))
-    EVT_WAIT(30)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, 1)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_DRIED_SHROOM)
+    ExecWait(N(UseItemWithEffect))
+    ExecWait(N(EatItem))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_StickOutTongue)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar0, 0)
+    Add(LVar1, 35)
+    Call(N(SpawnHeartRecoveryFX), LVar0, LVar1, LVar2, 1)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 25)
+    Add(LVar2, 5)
+    Call(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, 1)
+    Call(N(func_802A12FC_71CFDC))
+    Wait(30)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar2, 5)
+    Call(ShowRecoveryShimmer, LVar0, LVar1, LVar2, 1)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Wait(20)
+    ExecWait(N(PlayerGoHome))
+    Return
+    End
 };

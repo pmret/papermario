@@ -14,563 +14,563 @@ s32 N(LetterList_MissT)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_MissT) = {
-    EVT_CALL(N(LetterDelivery_Init_Shared),
+    Call(N(LetterDelivery_Init_Shared),
         NPC_MissT, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle,
         ITEM_LETTER_CHAIN_MISS_T, ITEM_LETTER_CHAIN_LITTLE_MOUSER,
         MSG_MAC_Gate_00FF, MSG_MAC_Gate_0100, MSG_MAC_Gate_0101, MSG_MAC_Gate_0102,
-        EVT_PTR(N(LetterList_MissT)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery_Shared))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_MissT)))
+    ExecWait(N(EVS_DoLetterDelivery_Shared))
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_ToadTownGreeting) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -225, 0, -300)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(800.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_THREAD
-        EVT_WAIT(35 * DT)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.1 / DT))
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(10 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Toad_04, 230, 0)
-        EVT_CALL(SetNpcJumpscale, NPC_Toad_04, EVT_FLOAT(1.5))
-        EVT_CALL(GetNpcPos, NPC_Toad_04, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_Toad_04, LVar0, LVar1, LVar2, 5 * DT)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Toad_04, ANIM_Toad_Red_Run)
-        EVT_CALL(NpcMoveTo, NPC_Toad_04, -185, -295, 15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Toad_04, ANIM_Toad_Red_Idle)
-    EVT_END_THREAD
-    EVT_WAIT(2)
-    EVT_CALL(PlayerMoveTo, -225, -300, 80)
-    EVT_CALL(SetPlayerPos, -225, 0, -300)
-    EVT_WAIT(50 * DT)
-    EVT_THREAD
-        EVT_WAIT(20 * DT)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Gate_007E)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
+    Call(SetPanTarget, CAM_DEFAULT, -225, 0, -300)
+    Call(SetCamDistance, CAM_DEFAULT, Float(800.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Thread
+        Wait(35 * DT)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(2.1 / DT))
+        Call(UseSettingsFrom, CAM_DEFAULT, -225, 0, -300)
+        Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Wait(10 * DT)
+        Call(InterpNpcYaw, NPC_Toad_04, 230, 0)
+        Call(SetNpcJumpscale, NPC_Toad_04, Float(1.5))
+        Call(GetNpcPos, NPC_Toad_04, LVar0, LVar1, LVar2)
+        Call(NpcJump0, NPC_Toad_04, LVar0, LVar1, LVar2, 5 * DT)
+        Wait(10 * DT)
+        Call(SetNpcAnimation, NPC_Toad_04, ANIM_Toad_Red_Run)
+        Call(NpcMoveTo, NPC_Toad_04, -185, -295, 15 * DT)
+        Call(SetNpcAnimation, NPC_Toad_04, ANIM_Toad_Red_Idle)
+    EndThread
+    Wait(2)
+    Call(PlayerMoveTo, -225, -300, 80)
+    Call(SetPlayerPos, -225, 0, -300)
+    Wait(50 * DT)
+    Thread
+        Wait(20 * DT)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+    EndThread
+    Call(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Gate_007E)
+    Call(DisablePlayerInput, FALSE)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Gate_007F)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Gate_0080)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0081)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_0082)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_0083)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0084)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_0085)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Gate_0086)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Gate_0087)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Gate_0088)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0089)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Gate_008A)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_008B)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Gate_008C)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_008D)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Gate_008E)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_002C)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Gate_007F)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Gate_0080)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_0081)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0082)
+            Else
+                Set(LVar0, MSG_MAC_Gate_0083)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_0084)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0085)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_0086)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_0087)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Gate_0088)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_0089)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Gate_008A)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_008B)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Gate_008C)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_008D)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Gate_008E)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_002C)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_CantLeaveTown) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(NpcFacePlayer, NPC_Toad_04, 0)
-    EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_002D)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
-    EVT_CALL(PlayerMoveTo, -220, -250, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(NpcFacePlayer, NPC_Toad_04, 0)
+    Wait(5)
+    Call(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_002D)
+    Wait(10)
+    Call(SetPlayerSpeed, Float(4.0))
+    Call(PlayerMoveTo, -220, -250, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_BlockExitToGoomaRoad) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Scene_CantLeaveTown)), TRIGGER_FLOOR_TOUCH, COLLIDER_o484, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Scene_CantLeaveTown)), TRIGGER_FLOOR_TOUCH, COLLIDER_o484, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_05) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Gate_008F)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Gate_0090)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0091)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_0092)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_0093)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0094)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_0095)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Gate_0096)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Gate_0097)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Gate_0098)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0099)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Gate_009A)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_009B)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Gate_009C)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_009D)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Gate_009E)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_002E)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Gate_008F)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Gate_0090)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_0091)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0092)
+            Else
+                Set(LVar0, MSG_MAC_Gate_0093)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_0094)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0095)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_0096)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_0097)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Gate_0098)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_0099)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Gate_009A)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_009B)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Gate_009C)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_009D)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Gate_009E)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_002E)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_06) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Gate_009F)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00A0)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00A1)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_00A2)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_00A3)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00A4)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_00A5)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Gate_00A6)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Gate_00A7)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Gate_00A8)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00A9)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00AA)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00AB)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Gate_00AC)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00AD)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Gate_00AE)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_002F)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Gate_009F)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Gate_00A0)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00A1)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Gate_00A2)
+            Else
+                Set(LVar0, MSG_MAC_Gate_00A3)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_00A4)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_00A5)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_00A6)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_00A7)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Gate_00A8)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00A9)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Gate_00AA)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_00AB)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Gate_00AC)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00AD)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Gate_00AE)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_002F)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Lovers) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00AF)
-            EVT_SET(LVar1, MSG_MAC_Gate_00B0)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00B1)
-            EVT_SET(LVar1, MSG_MAC_Gate_00B2)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00B3)
-            EVT_SET(LVar1, MSG_MAC_Gate_00B4)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_00B5)
-                EVT_SET(LVar1, MSG_MAC_Gate_00B6)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_00B7)
-                EVT_SET(LVar1, MSG_MAC_Gate_00B8)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00B9)
-            EVT_SET(LVar1, MSG_MAC_Gate_00BA)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_ShyGuyBlockingTracks, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_00BB)
-                EVT_SET(LVar1, MSG_MAC_Gate_00BC)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC03_ShyGuyChasedOff, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Gate_00BD)
-                    EVT_SET(LVar1, MSG_MAC_Gate_00BE)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Gate_00BF)
-                    EVT_SET(LVar1, MSG_MAC_Gate_00C0)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Gate_00C1)
-            EVT_SET(LVar1, MSG_MAC_Gate_00C2)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00C3)
-            EVT_SET(LVar1, MSG_MAC_Gate_00C4)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00C5)
-            EVT_SET(LVar1, MSG_MAC_Gate_00C6)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00C7)
-            EVT_SET(LVar1, MSG_MAC_Gate_00C8)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Gate_00C9)
-            EVT_SET(LVar1, MSG_MAC_Gate_00CA)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00CB)
-            EVT_SET(LVar1, MSG_MAC_Gate_00CC)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Gate_00CD)
-            EVT_SET(LVar1, MSG_MAC_Gate_00CE)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0030)
-            EVT_SET(LVar1, MSG_Outro_0031)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_FickleLover, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 5, LVar0)
-    EVT_CALL(SpeakToPlayer, NPC_ShamelessLover, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, LVar1)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Gate_00AF)
+            Set(LVar1, MSG_MAC_Gate_00B0)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Gate_00B1)
+            Set(LVar1, MSG_MAC_Gate_00B2)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00B3)
+            Set(LVar1, MSG_MAC_Gate_00B4)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Gate_00B5)
+                Set(LVar1, MSG_MAC_Gate_00B6)
+            Else
+                Set(LVar0, MSG_MAC_Gate_00B7)
+                Set(LVar1, MSG_MAC_Gate_00B8)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_00B9)
+            Set(LVar1, MSG_MAC_Gate_00BA)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_ShyGuyBlockingTracks, FALSE)
+                Set(LVar0, MSG_MAC_Gate_00BB)
+                Set(LVar1, MSG_MAC_Gate_00BC)
+            Else
+                IfEq(GF_MAC03_ShyGuyChasedOff, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_00BD)
+                    Set(LVar1, MSG_MAC_Gate_00BE)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_00BF)
+                    Set(LVar1, MSG_MAC_Gate_00C0)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Gate_00C1)
+            Set(LVar1, MSG_MAC_Gate_00C2)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00C3)
+            Set(LVar1, MSG_MAC_Gate_00C4)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Gate_00C5)
+            Set(LVar1, MSG_MAC_Gate_00C6)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_00C7)
+            Set(LVar1, MSG_MAC_Gate_00C8)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Gate_00C9)
+            Set(LVar1, MSG_MAC_Gate_00CA)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00CB)
+            Set(LVar1, MSG_MAC_Gate_00CC)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Gate_00CD)
+            Set(LVar1, MSG_MAC_Gate_00CE)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0030)
+            Set(LVar1, MSG_Outro_0031)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_FickleLover, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 5, LVar0)
+    Call(SpeakToPlayer, NPC_ShamelessLover, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 5, LVar1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toadette) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00CF)
-            EVT_SET(LVar1, MSG_MAC_Gate_00D0)
-            EVT_SET(LVar2, MSG_MAC_Gate_00D1)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00D2)
-            EVT_SET(LVar1, MSG_MAC_Gate_00D3)
-            EVT_SET(LVar2, MSG_MAC_Gate_00D4)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00D5)
-            EVT_SET(LVar1, MSG_MAC_Gate_00D6)
-            EVT_SET(LVar2, MSG_MAC_Gate_00D7)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_00D8)
-                EVT_SET(LVar1, MSG_MAC_Gate_00D9)
-                EVT_SET(LVar2, MSG_MAC_Gate_00DA)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_00DB)
-                EVT_SET(LVar1, MSG_MAC_Gate_00DC)
-                EVT_SET(LVar2, MSG_MAC_Gate_00DD)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00DE)
-            EVT_SET(LVar1, MSG_MAC_Gate_00DF)
-            EVT_SET(LVar2, MSG_MAC_Gate_00E0)
-        EVT_CASE_LT(STORY_CH4_RETURNED_STOREROOM_KEY)
-            EVT_IF_EQ(GF_MAC04_StoreroomKeyStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_00E1)
-                EVT_SET(LVar1, MSG_MAC_Gate_00E2)
-                EVT_SET(LVar2, MSG_MAC_Gate_00E3)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_00E4)
-                EVT_SET(LVar1, MSG_MAC_Gate_00E5)
-                EVT_SET(LVar2, MSG_MAC_Gate_00E6)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00E7)
-            EVT_SET(LVar1, MSG_MAC_Gate_00E8)
-            EVT_SET(LVar2, MSG_MAC_Gate_00E9)
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Gate_00EA)
-            EVT_SET(LVar1, MSG_MAC_Gate_00EB)
-            EVT_SET(LVar2, MSG_MAC_Gate_00EC)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00ED)
-            EVT_SET(LVar1, MSG_MAC_Gate_00EE)
-            EVT_SET(LVar2, MSG_MAC_Gate_00EF)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Gate_00F0)
-            EVT_SET(LVar1, MSG_MAC_Gate_00F1)
-            EVT_SET(LVar2, MSG_MAC_Gate_00F2)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00F3)
-            EVT_SET(LVar1, MSG_MAC_Gate_00F4)
-            EVT_SET(LVar2, MSG_MAC_Gate_00F5)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Gate_00F6)
-            EVT_SET(LVar1, MSG_MAC_Gate_00F7)
-            EVT_SET(LVar2, MSG_MAC_Gate_00F8)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_00F9)
-            EVT_SET(LVar1, MSG_MAC_Gate_00FA)
-            EVT_SET(LVar2, MSG_MAC_Gate_00FB)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Gate_00FC)
-            EVT_SET(LVar1, MSG_MAC_Gate_00FD)
-            EVT_SET(LVar2, MSG_MAC_Gate_00FE)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0032)
-            EVT_SET(LVar1, MSG_Outro_0033)
-            EVT_SET(LVar2, MSG_Outro_0034)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_KrisT, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
-    EVT_CALL(SpeakToPlayer, NPC_MissT, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle, 0, LVar1)
-    EVT_CALL(SpeakToPlayer, NPC_FelissaT, ANIM_Toadette_Purple_Talk, ANIM_Toadette_Purple_Idle, 0, LVar2)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Gate_00CF)
+            Set(LVar1, MSG_MAC_Gate_00D0)
+            Set(LVar2, MSG_MAC_Gate_00D1)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Gate_00D2)
+            Set(LVar1, MSG_MAC_Gate_00D3)
+            Set(LVar2, MSG_MAC_Gate_00D4)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00D5)
+            Set(LVar1, MSG_MAC_Gate_00D6)
+            Set(LVar2, MSG_MAC_Gate_00D7)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Gate_00D8)
+                Set(LVar1, MSG_MAC_Gate_00D9)
+                Set(LVar2, MSG_MAC_Gate_00DA)
+            Else
+                Set(LVar0, MSG_MAC_Gate_00DB)
+                Set(LVar1, MSG_MAC_Gate_00DC)
+                Set(LVar2, MSG_MAC_Gate_00DD)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_00DE)
+            Set(LVar1, MSG_MAC_Gate_00DF)
+            Set(LVar2, MSG_MAC_Gate_00E0)
+        CaseLt(STORY_CH4_RETURNED_STOREROOM_KEY)
+            IfEq(GF_MAC04_StoreroomKeyStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_00E1)
+                Set(LVar1, MSG_MAC_Gate_00E2)
+                Set(LVar2, MSG_MAC_Gate_00E3)
+            Else
+                Set(LVar0, MSG_MAC_Gate_00E4)
+                Set(LVar1, MSG_MAC_Gate_00E5)
+                Set(LVar2, MSG_MAC_Gate_00E6)
+            EndIf
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00E7)
+            Set(LVar1, MSG_MAC_Gate_00E8)
+            Set(LVar2, MSG_MAC_Gate_00E9)
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Gate_00EA)
+            Set(LVar1, MSG_MAC_Gate_00EB)
+            Set(LVar2, MSG_MAC_Gate_00EC)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00ED)
+            Set(LVar1, MSG_MAC_Gate_00EE)
+            Set(LVar2, MSG_MAC_Gate_00EF)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Gate_00F0)
+            Set(LVar1, MSG_MAC_Gate_00F1)
+            Set(LVar2, MSG_MAC_Gate_00F2)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_00F3)
+            Set(LVar1, MSG_MAC_Gate_00F4)
+            Set(LVar2, MSG_MAC_Gate_00F5)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Gate_00F6)
+            Set(LVar1, MSG_MAC_Gate_00F7)
+            Set(LVar2, MSG_MAC_Gate_00F8)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_00F9)
+            Set(LVar1, MSG_MAC_Gate_00FA)
+            Set(LVar2, MSG_MAC_Gate_00FB)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Gate_00FC)
+            Set(LVar1, MSG_MAC_Gate_00FD)
+            Set(LVar2, MSG_MAC_Gate_00FE)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0032)
+            Set(LVar1, MSG_Outro_0033)
+            Set(LVar2, MSG_Outro_0034)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_KrisT, ANIM_Toadette_Green_Talk, ANIM_Toadette_Green_Idle, 0, LVar0)
+    Call(SpeakToPlayer, NPC_MissT, ANIM_Toadette_Orange_Talk, ANIM_Toadette_Orange_Idle, 0, LVar1)
+    Call(SpeakToPlayer, NPC_FelissaT, ANIM_Toadette_Purple_Talk, ANIM_Toadette_Purple_Idle, 0, LVar2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_MissT) = {
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_Toadette))
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MissT))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_NpcInteract_Toadette))
+    ExecWait(N(EVS_LetterPrompt_MissT))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_08) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Gate_0103)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Gate_0104)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0105)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_0106)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Gate_0107)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0108)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Gate_0109)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Gate_010A)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Gate_010B)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Gate_010C)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_010D)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Gate_010E)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Gate_010F)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Gate_0110)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Gate_0111)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Gate_0112)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0035)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Gate_0103)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Gate_0104)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_0105)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0106)
+            Else
+                Set(LVar0, MSG_MAC_Gate_0107)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_0108)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Gate_0109)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Gate_010A)
+                Else
+                    Set(LVar0, MSG_MAC_Gate_010B)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Gate_010C)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_010D)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Gate_010E)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Gate_010F)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Gate_0110)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Gate_0111)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Gate_0112)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0035)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_ShamelessLover) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Pink_Still)
-    EVT_WAIT(3)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Pink_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Pink_Still)
+    Wait(3)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Pink_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_KrisT) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Green_Still)
-    EVT_WAIT(2)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Green_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Green_Still)
+    Wait(2)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Green_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_MissT) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Orange_Still)
-    EVT_WAIT(6)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Orange_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Orange_Still)
+    Wait(6)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Orange_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_FelissaT) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Purple_Still)
-    EVT_WAIT(8)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Purple_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Purple_Still)
+    Wait(8)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toadette_Purple_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_09) = {
-    EVT_CALL(FindKeyItem, ITEM_FIRST_DEGREE_CARD, LVar1)
-    EVT_CALL(FindKeyItem, ITEM_SECOND_DEGREE_CARD, LVar2)
-    EVT_CALL(FindKeyItem, ITEM_THIRD_DEGREE_CARD, LVar3)
-    EVT_CALL(FindKeyItem, ITEM_FOURTH_DEGREE_CARD, LVar4)
-    EVT_CALL(FindKeyItem, ITEM_DIPLOMA, LVar5)
-    EVT_IF_NE(LVar1, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0114)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar2, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0115)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar3, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0116)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar4, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0117)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar5, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0118)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0113)
-    EVT_RETURN
-    EVT_END
+    Call(FindKeyItem, ITEM_FIRST_DEGREE_CARD, LVar1)
+    Call(FindKeyItem, ITEM_SECOND_DEGREE_CARD, LVar2)
+    Call(FindKeyItem, ITEM_THIRD_DEGREE_CARD, LVar3)
+    Call(FindKeyItem, ITEM_FOURTH_DEGREE_CARD, LVar4)
+    Call(FindKeyItem, ITEM_DIPLOMA, LVar5)
+    IfNe(LVar1, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0114)
+        Return
+    EndIf
+    IfNe(LVar2, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0115)
+        Return
+    EndIf
+    IfNe(LVar3, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0116)
+        Return
+    EndIf
+    IfNe(LVar4, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0117)
+        Return
+    EndIf
+    IfNe(LVar5, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0118)
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_MAC_Gate_0113)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_04) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_04)))
-    EVT_IF_LT(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, mac_00_ENTRY_7)
-        EVT_EXEC(N(EVS_BlockExitToGoomaRoad))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_04)))
+    IfLt(GB_StoryProgress, STORY_EPILOGUE)
+        Return
+    EndIf
+    Call(GetEntryID, LVar0)
+    IfNe(LVar0, mac_00_ENTRY_7)
+        Exec(N(EVS_BlockExitToGoomaRoad))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_05)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_05)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_06)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_06)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_FickleLover) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lovers)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Lovers)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShamelessLover) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lovers)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_ShamelessLover)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Lovers)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_ShamelessLover)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KrisT) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_KrisT)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_KrisT)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MissT) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MissT)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_MissT)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_MissT)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_MissT)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_FelissaT) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_FelissaT)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_FelissaT)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_DojoSpectator) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_CALL(SetNpcPos, NPC_DojoSpectator, 350, 20, -100)
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_08)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_EPILOGUE)
+        Call(SetNpcPos, NPC_DojoSpectator, 350, 20, -100)
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_08)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_DojoFan) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_09)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_09)))
+    Return
+    End
 };
 
 NpcData N(NpcData_SharedTownsfolk)[] = {

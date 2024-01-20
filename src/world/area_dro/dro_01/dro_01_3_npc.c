@@ -25,100 +25,100 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_ShopOwner) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle,
         ITEM_LETTER_CHAIN_LITTLE_MOUSER, ITEM_LETTER_CHAIN_FRANKY,
         MSG_CH2_0089, MSG_CH2_008A, MSG_CH2_008B, MSG_CH2_008C,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Mouser_01) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_0062)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SWITCH(AB_DRO_0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_005F)
-            EVT_ADD(AB_DRO_0, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_0060)
-            EVT_ADD(AB_DRO_0, 1)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_0061)
-            EVT_SUB(AB_DRO_0, 1)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_0062)
+        Return
+    EndIf
+    Switch(AB_DRO_0)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_005F)
+            Add(AB_DRO_0, 1)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_0060)
+            Add(AB_DRO_0, 1)
+        CaseEq(2)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_0061)
+            Sub(AB_DRO_0, 1)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mouser_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Mouser_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Mouser_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_GE(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
-                EVT_IF_EQ(AB_DRO_1, 2)
-                    EVT_SET(AB_DRO_1, 0)
-                EVT_END_IF
-            EVT_END_IF
-            EVT_SWITCH(AB_DRO_1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0063)
-                    EVT_ADD(AB_DRO_1, 1)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0064)
-                    EVT_ADD(AB_DRO_1, 1)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0065)
-                    EVT_SET(AB_DRO_1, 0)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0066)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0067)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfGe(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
+                IfEq(AB_DRO_1, 2)
+                    Set(AB_DRO_1, 0)
+                EndIf
+            EndIf
+            Switch(AB_DRO_1)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0063)
+                    Add(AB_DRO_1, 1)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0064)
+                    Add(AB_DRO_1, 1)
+                CaseEq(2)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0065)
+                    Set(AB_DRO_1, 0)
+            EndSwitch
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0066)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Yellow_Talk, ANIM_Dryite_Yellow_Idle, 0, MSG_CH2_0067)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_02) = {
      //@bug this dialogue was probably supposed to cycle 0 --> 1 --> 2 --> 3 --> 0 ...
-    EVT_SWITCH(AB_DRO_2)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0068)
-            EVT_ADD(AB_DRO_2, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0069)
-            EVT_ADD(AB_DRO_2, 1)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_006A)
-            EVT_ADD(AB_DRO_2, 1)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_006B)
-            EVT_SET(AB_DRO_2, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(AB_DRO_2)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0068)
+            Add(AB_DRO_2, 1)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0069)
+            Add(AB_DRO_2, 1)
+        CaseEq(2)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_006A)
+            Add(AB_DRO_2, 1)
+        CaseEq(3)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_006B)
+            Set(AB_DRO_2, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_02)))
+    Return
+    End
 };
 
 #include "npc_hint_dryite.c"
@@ -127,66 +127,66 @@ EvtScript N(EVS_NpcInit_Dryite_02) = {
 #include "npc_shop_owner.c"
 
 EvtScript N(EVS_NpcInteract_Toadette) = {
-    EVT_CALL(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008E)
-    EVT_CALL(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008F)
-    EVT_CALL(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_0090)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Toadette_01, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008E)
+    Call(SpeakToPlayer, NPC_Toadette_02, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_008F)
+    Call(SpeakToPlayer, NPC_Toadette_03, ANIM_Toadette_Pink_Talk, ANIM_Toadette_Pink_Idle, 0, MSG_CH2_0090)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toadette) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toadette)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toadette)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_DojoGrad) = {
-    EVT_CALL(FindKeyItem, ITEM_FIRST_DEGREE_CARD, LVar1)
-    EVT_CALL(FindKeyItem, ITEM_SECOND_DEGREE_CARD, LVar2)
-    EVT_CALL(FindKeyItem, ITEM_THIRD_DEGREE_CARD, LVar3)
-    EVT_CALL(FindKeyItem, ITEM_FOURTH_DEGREE_CARD, LVar4)
-    EVT_CALL(FindKeyItem, ITEM_DIPLOMA, LVar5)
-    EVT_IF_NE(LVar1, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009A)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar2, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009B)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar3, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009C)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar4, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009D)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(LVar5, -1)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009E)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_0099)
-    EVT_RETURN
-    EVT_END
+    Call(FindKeyItem, ITEM_FIRST_DEGREE_CARD, LVar1)
+    Call(FindKeyItem, ITEM_SECOND_DEGREE_CARD, LVar2)
+    Call(FindKeyItem, ITEM_THIRD_DEGREE_CARD, LVar3)
+    Call(FindKeyItem, ITEM_FOURTH_DEGREE_CARD, LVar4)
+    Call(FindKeyItem, ITEM_DIPLOMA, LVar5)
+    IfNe(LVar1, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009A)
+        Return
+    EndIf
+    IfNe(LVar2, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009B)
+        Return
+    EndIf
+    IfNe(LVar3, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009C)
+        Return
+    EndIf
+    IfNe(LVar4, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009D)
+        Return
+    EndIf
+    IfNe(LVar5, -1)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009E)
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_0099)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_DojoGrad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_DojoGrad)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_DojoGrad)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_06) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009F)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Brown_Talk, ANIM_Dryite_Brown_Idle, 0, MSG_CH2_009F)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_06)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_06)))
+    Return
+    End
 };
 
 NpcData N(PassiveNPCs)[] = {

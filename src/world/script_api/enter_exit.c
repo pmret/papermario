@@ -198,275 +198,275 @@ API_CALLABLE(SetupSplitDoubleDoors) {
 }
 
 EvtScript EnterWalk = {
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_CALL(UseEntryHeading, 60, 15)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(TeleportPartnerToPlayer)
-        EVT_CALL(PlayerMoveTo, LVar1, LVar3, 15)
-    EVT_ELSE
-        EVT_SET(LVarF, LVar0)
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVarC, 1)
-        EVT_SET(LVar4, 15)
-        EVT_EXEC_WAIT(LVarB)
-        EVT_SET(LVar0, LVarF)
-    EVT_END_IF
-    EVT_EXEC(LVar0)
-    EVT_CALL(func_802D2148)
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_RETURN
-    EVT_END
+    Call(ShortenPartnerTetherDistance)
+    Call(CheckUsingRideablePartner)
+    Call(UseEntryHeading, 60, 15)
+    IfEq(LVarA, 0)
+        Call(TeleportPartnerToPlayer)
+        Call(PlayerMoveTo, LVar1, LVar3, 15)
+    Else
+        Set(LVarF, LVar0)
+        Set(LVar0, 0)
+        Set(LVarC, 1)
+        Set(LVar4, 15)
+        ExecWait(LVarB)
+        Set(LVar0, LVarF)
+    EndIf
+    Exec(LVar0)
+    Call(func_802D2148)
+    Call(ResetPartnerTetherDistance)
+    Return
+    End
 };
 
 EvtScript EnterWalkShort = {
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_CALL(UseEntryHeading, 40, 15)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(TeleportPartnerToPlayer)
-        EVT_CALL(PlayerMoveTo, LVar1, LVar3, 15)
-    EVT_ELSE
-        EVT_SET(LVarF, LVar0)
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVarC, 1)
-        EVT_SET(LVar4, 15)
-        EVT_EXEC_WAIT(LVarB)
-        EVT_SET(LVar0, LVarF)
-    EVT_END_IF
-    EVT_EXEC(LVar0)
-    EVT_CALL(func_802D2148)
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_RETURN
-    EVT_END
+    Call(ShortenPartnerTetherDistance)
+    Call(CheckUsingRideablePartner)
+    Call(UseEntryHeading, 40, 15)
+    IfEq(LVarA, 0)
+        Call(TeleportPartnerToPlayer)
+        Call(PlayerMoveTo, LVar1, LVar3, 15)
+    Else
+        Set(LVarF, LVar0)
+        Set(LVar0, 0)
+        Set(LVarC, 1)
+        Set(LVar4, 15)
+        ExecWait(LVarB)
+        Set(LVar0, LVarF)
+    EndIf
+    Exec(LVar0)
+    Call(func_802D2148)
+    Call(ResetPartnerTetherDistance)
+    Return
+    End
 };
 
 EvtScript EnterWalkCustom = {
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_CALL(UseEntryHeading, LVar1, LVar4)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(TeleportPartnerToPlayer)
-        EVT_CALL(PlayerMoveTo, LVar1, LVar3, LVar4)
-    EVT_ELSE
-        EVT_SET(LVarF, LVar0)
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVarC, 1)
-        EVT_EXEC_WAIT(LVarB)
-        EVT_SET(LVar0, LVarF)
-    EVT_END_IF
-    EVT_EXEC(LVar0)
-    EVT_CALL(func_802D2148)
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_RETURN
-    EVT_END
+    Call(ShortenPartnerTetherDistance)
+    Call(CheckUsingRideablePartner)
+    Call(UseEntryHeading, LVar1, LVar4)
+    IfEq(LVarA, 0)
+        Call(TeleportPartnerToPlayer)
+        Call(PlayerMoveTo, LVar1, LVar3, LVar4)
+    Else
+        Set(LVarF, LVar0)
+        Set(LVar0, 0)
+        Set(LVarC, 1)
+        ExecWait(LVarB)
+        Set(LVar0, LVarF)
+    EndIf
+    Exec(LVar0)
+    Call(func_802D2148)
+    Call(ResetPartnerTetherDistance)
+    Return
+    End
 };
 
 EvtScript EnterPostPipe = {
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_CALL(EnterPlayerPostPipe)
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerPhysics, TRUE)
+    Call(ShortenPartnerTetherDistance)
+    Call(CheckUsingRideablePartner)
+    Call(EnterPlayerPostPipe)
+    Call(ResetPartnerTetherDistance)
+    Call(DisablePlayerPhysics, FALSE)
+    Return
+    End
 };
 
 EvtScript EnterSavePoint = {
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(SetPlayerPositionFromSaveData)
-    EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_RETURN
-    EVT_END
+    Call(ShortenPartnerTetherDistance)
+    Call(SetPlayerPositionFromSaveData)
+    Call(ClearPartnerMoveHistory, NPC_PARTNER)
+    Call(ResetPartnerTetherDistance)
+    Return
+    End
 };
 
 EvtScript ExitWalk = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(PlayerMoveTo, LVar1, LVar3, 15)
-    EVT_ELSE
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVarC, 0)
-        EVT_SET(LVar4, 15)
-        EVT_EXEC_WAIT(LVarB)
-    EVT_END_IF
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(ShortenPartnerTetherDistance)
+    Call(CheckUsingRideablePartner)
+    IfEq(LVarA, 0)
+        Call(PlayerMoveTo, LVar1, LVar3, 15)
+    Else
+        Set(LVar0, 0)
+        Set(LVarC, 0)
+        Set(LVar4, 15)
+        ExecWait(LVarB)
+    EndIf
+    Call(ResetPartnerTetherDistance)
+    Return
+    End
 };
 
 EvtScript ExitSingleDoor = {
-    EVT_CALL(SetupSingleDoor)
-    EVT_EXEC_WAIT(BaseExitDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupSingleDoor)
+    ExecWait(BaseExitDoor)
+    Return
+    End
 };
 
 EvtScript EnterSingleDoor = {
-    EVT_CALL(SetupSingleDoor)
-    EVT_EXEC_WAIT(BaseEnterDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupSingleDoor)
+    ExecWait(BaseEnterDoor)
+    Return
+    End
 };
 
 EvtScript ExitSplitSingleDoor = {
-    EVT_CALL(SetupSplitSingleDoor)
-    EVT_EXEC_WAIT(BaseExitDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupSplitSingleDoor)
+    ExecWait(BaseExitDoor)
+    Return
+    End
 };
 
 EvtScript EnterSplitSingleDoor = {
-    EVT_CALL(SetupSplitSingleDoor)
-    EVT_EXEC_WAIT(BaseEnterDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupSplitSingleDoor)
+    ExecWait(BaseEnterDoor)
+    Return
+    End
 };
 
 EvtScript ExitDoubleDoor = {
-    EVT_CALL(SetupDoubleDoors)
-    EVT_EXEC_WAIT(BaseExitDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupDoubleDoors)
+    ExecWait(BaseExitDoor)
+    Return
+    End
 };
 
 EvtScript EnterDoubleDoor = {
-    EVT_CALL(SetupDoubleDoors)
-    EVT_EXEC_WAIT(BaseEnterDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupDoubleDoors)
+    ExecWait(BaseEnterDoor)
+    Return
+    End
 };
 
 EvtScript ExitSplitDoubleDoor = {
-    EVT_CALL(SetupSplitDoubleDoors)
-    EVT_EXEC_WAIT(BaseExitDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupSplitDoubleDoors)
+    ExecWait(BaseExitDoor)
+    Return
+    End
 };
 
 EvtScript EnterSplitDoubleDoor = {
-    EVT_CALL(SetupSplitDoubleDoors)
-    EVT_EXEC_WAIT(BaseEnterDoor)
-    EVT_RETURN
-    EVT_END
+    Call(SetupSplitDoubleDoors)
+    ExecWait(BaseEnterDoor)
+    Return
+    End
 };
 
 EvtScript BaseExitDoor = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_SET(LVar9, LVar0)
-    EVT_CALL(GetEntryCoords, LVar0, LVarC, LVarD, LVarE, LVarB)
-    EVT_ADD(LVarB, 180)
-    EVT_CALL(InterpPlayerYaw, LVarB, 2)
-    EVT_CALL(ModifyColliderFlags, 0, LVar1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAt, SOUND_DOOR_OPEN, SOUND_SPACE_DEFAULT, LVarC, LVarD, LVarE)
-    EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
-    EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_USE_BUF(LVar2)
-    EVT_LOOP(0)
-        EVT_BUF_READ1(LVarA)
-        EVT_IF_EQ(LVarA, -1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, LVar0, 0, 1, 0)
-    EVT_END_LOOP
-    EVT_USE_BUF(LVar3)
-    EVT_LOOP(0)
-        EVT_BUF_READ1(LVarA)
-        EVT_IF_EQ(LVarA, -1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, LVar0, 0, -1, 0)
-    EVT_END_LOOP
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(UseExitHeading, 40, LVar9)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(PlayerMoveTo, LVar1, LVar3, 15)
-    EVT_ELSE
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVarC, 0)
-        EVT_SET(LVar4, 15)
-        EVT_EXEC_WAIT(LVarB)
-    EVT_END_IF
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(ShortenPartnerTetherDistance)
+    Set(LVar9, LVar0)
+    Call(GetEntryCoords, LVar0, LVarC, LVarD, LVarE, LVarB)
+    Add(LVarB, 180)
+    Call(InterpPlayerYaw, LVarB, 2)
+    Call(ModifyColliderFlags, 0, LVar1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(PlaySoundAt, SOUND_DOOR_OPEN, SOUND_SPACE_DEFAULT, LVarC, LVarD, LVarE)
+    Call(MakeLerp, 0, 80, 10, EASING_LINEAR)
+    Label(0)
+    Call(UpdateLerp)
+    UseBuf(LVar2)
+    Loop(0)
+        BufRead1(LVarA)
+        IfEq(LVarA, -1)
+            BreakLoop
+        EndIf
+        Call(RotateModel, LVarA, LVar0, 0, 1, 0)
+    EndLoop
+    UseBuf(LVar3)
+    Loop(0)
+        BufRead1(LVarA)
+        IfEq(LVarA, -1)
+            BreakLoop
+        EndIf
+        Call(RotateModel, LVarA, LVar0, 0, -1, 0)
+    EndLoop
+    Wait(1)
+    IfNe(LVar1, 0)
+        Goto(0)
+    EndIf
+    Call(UseExitHeading, 40, LVar9)
+    Call(CheckUsingRideablePartner)
+    IfEq(LVarA, 0)
+        Call(PlayerMoveTo, LVar1, LVar3, 15)
+    Else
+        Set(LVar0, 0)
+        Set(LVarC, 0)
+        Set(LVar4, 15)
+        ExecWait(LVarB)
+    EndIf
+    Call(ResetPartnerTetherDistance)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript BaseEnterDoor = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_USE_BUF(LVar2)
-    EVT_LOOP(0)
-        EVT_BUF_READ1(LVarA)
-        EVT_IF_EQ(LVarA, -1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, -80, 0, 1, 0)
-    EVT_END_LOOP
-    EVT_USE_BUF(LVar3)
-    EVT_LOOP(0)
-        EVT_BUF_READ1(LVarA)
-        EVT_IF_EQ(LVarA, -1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, -80, 0, -1, 0)
-    EVT_END_LOOP
-    EVT_CALL(GetEntryCoords, LVar0, LVar7, LVar8, LVar9, LVarB)
-    EVT_CALL(InterpPlayerYaw, LVarB, 2)
-    EVT_CALL(CheckUsingRideablePartner)
-    EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(TeleportPartnerToPlayer)
-        EVT_CALL(PlayerMoveToDoor, 10)
-    EVT_ELSE
-        EVT_SET(LVar0, 1)
-        EVT_SET(LVarC, 1)
-        EVT_SET(LVar4, 15)
-        EVT_EXEC_WAIT(LVarB)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_WAIT(8)
-        EVT_CALL(PlaySoundAt, SOUND_DOOR_CLOSE, SOUND_SPACE_DEFAULT, LVar7, LVar8, LVar9)
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, -80, 0, 10, EASING_LINEAR)
-    EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_USE_BUF(LVar2)
-    EVT_LOOP(0)
-        EVT_BUF_READ1(LVarA)
-        EVT_IF_EQ(LVarA, -1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, LVar0, 0, 1, 0)
-    EVT_END_LOOP
-    EVT_USE_BUF(LVar3)
-    EVT_LOOP(0)
-        EVT_BUF_READ1(LVarA)
-        EVT_IF_EQ(LVarA, -1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(RotateModel, LVarA, LVar0, 0, -1, 0)
-    EVT_END_LOOP
-    EVT_WAIT(1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(ResetPartnerTetherDistance)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(ShortenPartnerTetherDistance)
+    UseBuf(LVar2)
+    Loop(0)
+        BufRead1(LVarA)
+        IfEq(LVarA, -1)
+            BreakLoop
+        EndIf
+        Call(RotateModel, LVarA, -80, 0, 1, 0)
+    EndLoop
+    UseBuf(LVar3)
+    Loop(0)
+        BufRead1(LVarA)
+        IfEq(LVarA, -1)
+            BreakLoop
+        EndIf
+        Call(RotateModel, LVarA, -80, 0, -1, 0)
+    EndLoop
+    Call(GetEntryCoords, LVar0, LVar7, LVar8, LVar9, LVarB)
+    Call(InterpPlayerYaw, LVarB, 2)
+    Call(CheckUsingRideablePartner)
+    IfEq(LVarA, 0)
+        Call(TeleportPartnerToPlayer)
+        Call(PlayerMoveToDoor, 10)
+    Else
+        Set(LVar0, 1)
+        Set(LVarC, 1)
+        Set(LVar4, 15)
+        ExecWait(LVarB)
+    EndIf
+    Thread
+        Wait(8)
+        Call(PlaySoundAt, SOUND_DOOR_CLOSE, SOUND_SPACE_DEFAULT, LVar7, LVar8, LVar9)
+    EndThread
+    Call(MakeLerp, -80, 0, 10, EASING_LINEAR)
+    Label(0)
+    Call(UpdateLerp)
+    UseBuf(LVar2)
+    Loop(0)
+        BufRead1(LVarA)
+        IfEq(LVarA, -1)
+            BreakLoop
+        EndIf
+        Call(RotateModel, LVarA, LVar0, 0, 1, 0)
+    EndLoop
+    UseBuf(LVar3)
+    Loop(0)
+        BufRead1(LVarA)
+        IfEq(LVarA, -1)
+            BreakLoop
+        EndIf
+        Call(RotateModel, LVarA, LVar0, 0, -1, 0)
+    EndLoop
+    Wait(1)
+    IfNe(LVar1, 0)
+        Goto(0)
+    EndIf
+    Call(ResetPartnerTetherDistance)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 MATCHING_BSS(0x7AB0);

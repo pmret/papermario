@@ -23,134 +23,134 @@ Gfx N(setup_gfx_candle_lights)[] = {
 };
 
 EvtScript N(EVS_EndPeachChapter0) = {
-    EVT_SET(LVar0, GB_KKJ_LastPartner)
-    EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_10"), kmr_10_ENTRY_0, TRANSITION_END_PEACH_INTERLUDE)
-    EVT_WAIT(100)
+    Set(LVar0, GB_KKJ_LastPartner)
+    Call(N(RestoreFromPeachState))
+    Call(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
+    Call(GotoMapSpecial, Ref("kmr_10"), kmr_10_ENTRY_0, TRANSITION_END_PEACH_INTERLUDE)
+    Wait(100)
 }; //@bug script not properly terminated
 
 EvtScript N(EVS_EndPeachChapter1) = {
-    EVT_SET(LVar0, GB_KKJ_LastPartner)
-    EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("trd_00"), trd_00_ENTRY_5, TRANSITION_END_PEACH_INTERLUDE)
-    EVT_WAIT(100)
+    Set(LVar0, GB_KKJ_LastPartner)
+    Call(N(RestoreFromPeachState))
+    Call(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
+    Call(GotoMapSpecial, Ref("trd_00"), trd_00_ENTRY_5, TRANSITION_END_PEACH_INTERLUDE)
+    Wait(100)
 }; //@bug script not properly terminated
 
 EvtScript N(EVS_EndPeachChapter3) = {
-    EVT_SET(LVar0, GB_KKJ_LastPartner)
-    EVT_CALL(N(RestoreFromPeachState))
-    EVT_CALL(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_07"), arn_07_ENTRY_3, TRANSITION_END_PEACH_INTERLUDE)
-    EVT_WAIT(100)
+    Set(LVar0, GB_KKJ_LastPartner)
+    Call(N(RestoreFromPeachState))
+    Call(PlaySound, SOUND_SLIDE_WHISTLE_OUT)
+    Call(GotoMapSpecial, Ref("arn_07"), arn_07_ENTRY_3, TRANSITION_END_PEACH_INTERLUDE)
+    Wait(100)
 }; //@bug script not properly terminated
 
 EvtScript N(EVS_ExitDoor_kkj_11_3) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar0, kkj_15_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_tte)
-    EVT_SET(LVar2, MODEL_o2)
-    EVT_SET(LVar3, DOOR_SWING_IN)
-    EVT_EXEC(ExitSingleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("kkj_11"), kkj_11_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar0, kkj_15_ENTRY_0)
+    Set(LVar1, COLLIDER_tte)
+    Set(LVar2, MODEL_o2)
+    Set(LVar3, DOOR_SWING_IN)
+    Exec(ExitSingleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("kkj_11"), kkj_11_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoor_kkj_11_3)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoor_kkj_11_3)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kkj_15_ENTRY_0)
-            EVT_SET(LVar2, MODEL_o2)
-            EVT_SET(LVar3, DOOR_SWING_IN)
-            EVT_EXEC_WAIT(EnterSingleDoor)
-            EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_EQ(kkj_15_ENTRY_1)
-            EVT_SWITCH(GB_StoryProgress)
-                EVT_CASE_EQ(STORY_CH1_BEGAN_PEACH_MISSION)
-                    EVT_EXEC(N(EVS_EnterRotatingWall))
-                    EVT_EXEC(N(EVS_SetupChapter1))
-                EVT_CASE_EQ(STORY_CH2_BEGAN_PEACH_MISSION)
-                    EVT_EXEC(N(EVS_EnterRotatingWall))
-                    EVT_EXEC(N(EVS_SetupChapter2))
-                EVT_CASE_EQ(STORY_CH3_BEGAN_PEACH_MISSION)
-                    EVT_EXEC(N(EVS_Scene_Chapter3))
-                EVT_CASE_DEFAULT
-                    EVT_EXEC(N(EVS_EnterRotatingWall))
-                    EVT_EXEC(N(EVS_BindExitTriggers))
-            EVT_END_SWITCH
-        EVT_CASE_EQ(kkj_15_ENTRY_2)
-            EVT_EXEC(N(EVS_Scene_Chapter0_BowserAndKammy))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(kkj_15_ENTRY_0)
+            Set(LVar2, MODEL_o2)
+            Set(LVar3, DOOR_SWING_IN)
+            ExecWait(EnterSingleDoor)
+            Exec(N(EVS_BindExitTriggers))
+        CaseEq(kkj_15_ENTRY_1)
+            Switch(GB_StoryProgress)
+                CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
+                    Exec(N(EVS_EnterRotatingWall))
+                    Exec(N(EVS_SetupChapter1))
+                CaseEq(STORY_CH2_BEGAN_PEACH_MISSION)
+                    Exec(N(EVS_EnterRotatingWall))
+                    Exec(N(EVS_SetupChapter2))
+                CaseEq(STORY_CH3_BEGAN_PEACH_MISSION)
+                    Exec(N(EVS_Scene_Chapter3))
+                CaseDefault
+                    Exec(N(EVS_EnterRotatingWall))
+                    Exec(N(EVS_BindExitTriggers))
+            EndSwitch
+        CaseEq(kkj_15_ENTRY_2)
+            Exec(N(EVS_Scene_Chapter0_BowserAndKammy))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kkj_15_ENTRY_2)
-            EVT_SET(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
-    EVT_END_SWITCH
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter0NPCs)))
-        EVT_CASE_EQ(STORY_CH1_BEGAN_PEACH_MISSION)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter1NPCs)))
-        EVT_CASE_EQ(STORY_CH3_BEGAN_PEACH_MISSION)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(Chapter3NPCs)))
-    EVT_END_SWITCH
-    EVT_IF_NE(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
-        EVT_CALL(EnableModel, MODEL_o76, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o76, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g25, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetTexPanner, MODEL_o151, TEX_PANNER_0)
-    EVT_THREAD
+    Set(GB_WorldLocation, LOCATION_PEACHS_CASTLE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(kkj_15_ENTRY_2)
+            Set(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
+    EndSwitch
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
+            Call(MakeNpcs, FALSE, Ref(N(Chapter0NPCs)))
+        CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
+            Call(MakeNpcs, FALSE, Ref(N(Chapter1NPCs)))
+        CaseEq(STORY_CH3_BEGAN_PEACH_MISSION)
+            Call(MakeNpcs, FALSE, Ref(N(Chapter3NPCs)))
+    EndSwitch
+    IfNe(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
+        Call(EnableModel, MODEL_o76, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o76, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g25, COLLIDER_FLAGS_UPPER_MASK)
+    Call(SetTexPanner, MODEL_o151, TEX_PANNER_0)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP(    0,    0,   40,  900)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o151, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
-    EVT_CALL(SetTexPanner, MODEL_o152, TEX_PANNER_0)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetModelCustomGfx, MODEL_o151, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
+    Call(SetCustomGfx, CUSTOM_GFX_0, Ref(N(setup_gfx_candle_lights)), NULL)
+    Call(SetTexPanner, MODEL_o152, TEX_PANNER_0)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP(    0,    0,   40,  900)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o152, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, kkj_15_ENTRY_1)
-        EVT_IF_EQ(GB_StoryProgress, STORY_CH3_BEGAN_PEACH_MISSION)
-            EVT_CALL(StopSound, SOUND_KKJ_ROTATING_WALL)
-        EVT_ELSE
-            EVT_CALL(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, SOUND_SPACE_DEFAULT, 50, 5, -200)
-        EVT_END_IF
-        EVT_WAIT(10)
-    EVT_END_IF
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetModelCustomGfx, MODEL_o152, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
+    Call(SetCustomGfx, CUSTOM_GFX_0, Ref(N(setup_gfx_candle_lights)), NULL)
+    Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+    Exec(N(EVS_SetupMusic))
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, kkj_15_ENTRY_1)
+        IfEq(GB_StoryProgress, STORY_CH3_BEGAN_PEACH_MISSION)
+            Call(StopSound, SOUND_KKJ_ROTATING_WALL)
+        Else
+            Call(PlaySoundAt, SOUND_KKJ_ROTATING_WALL, SOUND_SPACE_DEFAULT, 50, 5, -200)
+        EndIf
+        Wait(10)
+    EndIf
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Return
+    End
 };

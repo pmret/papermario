@@ -10,51 +10,51 @@ API_CALLABLE(N(ResetTrackVolumes)) {
 }
 
 EvtScript N(EVS_ExitDoors_tik_21_1) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(ResetTrackVolumes))
-    EVT_SET(LVar0, tik_22_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_tte)
-    EVT_SET(LVar2, MODEL_o46)
-    EVT_SET(LVar3, MODEL_o47)
-    EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("tik_21"), tik_21_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(N(ResetTrackVolumes))
+    Set(LVar0, tik_22_ENTRY_0)
+    Set(LVar1, COLLIDER_tte)
+    Set(LVar2, MODEL_o46)
+    Set(LVar3, MODEL_o47)
+    Exec(ExitDoubleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("tik_21"), tik_21_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_tik_17_0) = {
-    EVT_CALL(GotoMap, EVT_PTR("tik_17"), tik_17_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("tik_17"), tik_17_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitPipe_tik_17_0) = EVT_EXIT_PIPE_VERTICAL(tik_22_ENTRY_1, COLLIDER_o61, N(EVS_GotoMap_tik_17_0));
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_tik_21_1)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitPipe_tik_17_0)), TRIGGER_FLOOR_TOUCH, COLLIDER_o61, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoors_tik_21_1)), TRIGGER_WALL_PRESS_A, COLLIDER_tte, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitPipe_tik_17_0)), TRIGGER_FLOOR_TOUCH, COLLIDER_o61, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(tik_22_ENTRY_0)
-            EVT_SET(LVar2, MODEL_o46)
-            EVT_SET(LVar3, MODEL_o47)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-            EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_EQ(tik_22_ENTRY_1)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(tik_22_ENTRY_0)
+            Set(LVar2, MODEL_o46)
+            Set(LVar3, MODEL_o47)
+            ExecWait(EnterDoubleDoor)
+            Exec(N(EVS_BindExitTriggers))
+        CaseEq(tik_22_ENTRY_1)
             EVT_ENTER_PIPE_VERTICAL(N(EVS_BindExitTriggers))
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    EndSwitch
+    Wait(1)
+    Return
+    End
 };
 
 #define DROPLET_MODEL MODEL_sizuku
@@ -83,29 +83,29 @@ DripVolumeList N(DripVolumes) = {
 };
 
 EvtScript N(EVS_SetupDrips) = {
-    EVT_SET(LVar0, EVT_PTR(N(DripVolumes)))
-    EVT_EXEC(N(EVS_CreateDripVolumes))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(DripVolumes)))
+    Exec(N(EVS_CreateDripVolumes))
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
-    EVT_CALL(SetSpriteShading, SHADING_TIK_22)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_EXEC(N(EVS_SetupDrips))
-    EVT_CALL(SetTexPanner, MODEL_mizu, 0)
-    EVT_THREAD
+    Set(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
+    Call(SetSpriteShading, SHADING_TIK_22)
+    SetUP_CAMERA_NO_LEAD()
+    Exec(N(EVS_SetupMusic))
+    Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+    Exec(N(EVS_SetupDrips))
+    Call(SetTexPanner, MODEL_mizu, 0)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP(    0, -200, -100, -500)
         TEX_PAN_PARAMS_FREQ(    0,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Wait(1)
+    Exec(N(EVS_EnterMap))
+    Return
+    End
 };

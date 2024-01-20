@@ -236,49 +236,49 @@ API_CALLABLE(N(func_802A188C_72CE3C)) {
 }
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_MYSTERY)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_THREAD
-        EVT_WAIT(220)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DING)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MYSTERY_REEL)
-    EVT_CALL(N(func_802A13E4_72C994))
-    EVT_WAIT(2)
-    EVT_IF_NE(LVar0, 133)
-        EVT_JUMP(EVT_PTR(EVS_UseMystery))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(modelCommandList)))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 150)
-    EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(SetOwnerTarget, ACTOR_PLAYER, 0)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(18)
-            EVT_ADD(LVar0, -60)
-            EVT_CALL(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(0.6))
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 12)
-    EVT_THREAD
-        EVT_ADD(LVar0, 60)
-        EVT_ADD(LVar1, 0)
-        EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 16)
-        EVT_CALL(DeleteVirtualEntity, LVarA)
-    EVT_END_THREAD
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(N(func_802A188C_72CE3C), LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TRIGGER_EVENTS, TRUE)
-    EVT_CALL(DispatchDamagePlayerEvent, 1, EVENT_HIT)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_MYSTERY)
+    ExecWait(N(UseItemWithEffect))
+    Thread
+        Wait(220)
+        Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DING)
+    EndThread
+    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MYSTERY_REEL)
+    Call(N(func_802A13E4_72C994))
+    Wait(2)
+    IfNe(LVar0, 133)
+        Jump(Ref(EVS_UseMystery))
+        Return
+    EndIf
+    Call(CreateVirtualEntity, LVarA, Ref(N(modelCommandList)))
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 150)
+    Call(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
+    Call(SetOwnerTarget, ACTOR_PLAYER, 0)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar0, 0)
+        Loop(18)
+            Add(LVar0, -60)
+            Call(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(SetVirtualEntityJumpGravity, LVarA, Float(0.6))
+    Add(LVar2, 5)
+    Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 12)
+    Thread
+        Add(LVar0, 60)
+        Add(LVar1, 0)
+        Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 16)
+        Call(DeleteVirtualEntity, LVarA)
+    EndThread
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(N(func_802A188C_72CE3C), LVar0, LVar1, LVar2)
+    Call(SetBattleFlagBits, BS_FLAGS1_TRIGGER_EVENTS, TRUE)
+    Call(DispatchDamagePlayerEvent, 1, EVENT_HIT)
+    Return
+    End
 };

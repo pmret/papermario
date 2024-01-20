@@ -18,13 +18,13 @@ MobileAISettings N(AISettings_ParaTroopa) = {
 };
 
 EvtScript N(EVS_NpcAI_ParaTroopa) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 5, -650)
-    EVT_CALL(SetSelfVar, 6, 30)
-    EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(ParatroopaAI_Main), EVT_PTR(N(AISettings_ParaTroopa)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 5, -650)
+    Call(SetSelfVar, 6, 30)
+    Call(SetSelfVar, 1, 600)
+    Call(N(ParatroopaAI_Main), Ref(N(AISettings_ParaTroopa)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ParaTroopa) = {

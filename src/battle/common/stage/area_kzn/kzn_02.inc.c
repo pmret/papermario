@@ -6,41 +6,41 @@
 #include "./Decorations.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_SET(LVar0, MODEL_yougan)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y1_1)
-    EVT_SET(LVar1, TEX_PANNER_1)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y1_2)
-    EVT_SET(LVar1, TEX_PANNER_2)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y2_1)
-    EVT_SET(LVar1, TEX_PANNER_3)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y2_2)
-    EVT_SET(LVar1, TEX_PANNER_4)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y3_1)
-    EVT_SET(LVar1, TEX_PANNER_5)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y3_2)
-    EVT_SET(LVar1, TEX_PANNER_6)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_move)
-    EVT_SET(LVar1, 180)
-    EVT_SET(LVar2, 0)
-    EVT_SET(LVar3, 200)
-    EVT_EXEC(N(EVS_MovingPlatform))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Set(LVar0, MODEL_yougan)
+    Set(LVar1, TEX_PANNER_0)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y1_1)
+    Set(LVar1, TEX_PANNER_1)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y1_2)
+    Set(LVar1, TEX_PANNER_2)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y2_1)
+    Set(LVar1, TEX_PANNER_3)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y2_2)
+    Set(LVar1, TEX_PANNER_4)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y3_1)
+    Set(LVar1, TEX_PANNER_5)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y3_2)
+    Set(LVar1, TEX_PANNER_6)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_move)
+    Set(LVar1, 180)
+    Set(LVar2, 0)
+    Set(LVar3, 200)
+    Exec(N(EVS_MovingPlatform))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

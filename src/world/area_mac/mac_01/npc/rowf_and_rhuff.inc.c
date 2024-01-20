@@ -108,48 +108,48 @@ API_CALLABLE(N(HideRowfBadges)) {
 }
 
 EvtScript N(EVS_NpcInteract_Rowf_A) = {
-    EVT_IF_EQ(GF_MAC01_Met_Rowf_Early, FALSE)
-        EVT_SET(GF_MAC01_Met_Rowf_Early, TRUE)
-        EVT_SET(AF_MAC_41, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0000)
-    EVT_ELSE
-        EVT_IF_EQ(AF_MAC_41, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0001)
-        EVT_ELSE
-            EVT_SET(AF_MAC_41, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Think, 0, MSG_MAC_Plaza_0002)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_Met_Rowf_Early, FALSE)
+        Set(GF_MAC01_Met_Rowf_Early, TRUE)
+        Set(AF_MAC_41, TRUE)
+        Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0000)
+    Else
+        IfEq(AF_MAC_41, TRUE)
+            Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0001)
+        Else
+            Set(AF_MAC_41, TRUE)
+            Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Think, 0, MSG_MAC_Plaza_0002)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rowf_B) = {
-    EVT_SET(LVar0, GF_MAC01_RowfBadgeAvailableA)
-    EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableB)
-    EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableC)
-    EVT_IF_EQ(LVar0, 3)
-        EVT_IF_LT(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
-            EVT_SET(LVar1, MSG_MAC_Plaza_0005)
-        EVT_ELSE
-            EVT_CALL(N(func_80244984_805204))
-            EVT_IF_EQ(LVar0, 0)
-                EVT_SET(LVar1, MSG_MAC_Plaza_0006)
-            EVT_ELSE
-                EVT_SET(LVar1, MSG_MAC_Plaza_0005)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, LVar1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_Met_Rowf_Late, FALSE)
-        EVT_SET(GF_MAC01_Met_Rowf_Late, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0003)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0004)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, GF_MAC01_RowfBadgeAvailableA)
+    Add(LVar0, GF_MAC01_RowfBadgeAvailableB)
+    Add(LVar0, GF_MAC01_RowfBadgeAvailableC)
+    IfEq(LVar0, 3)
+        IfLt(GB_StoryProgress, STORY_CH5_RETURNED_TO_TOAD_TOWN)
+            Set(LVar1, MSG_MAC_Plaza_0005)
+        Else
+            Call(N(func_80244984_805204))
+            IfEq(LVar0, 0)
+                Set(LVar1, MSG_MAC_Plaza_0006)
+            Else
+                Set(LVar1, MSG_MAC_Plaza_0005)
+            EndIf
+        EndIf
+        Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, LVar1)
+        Return
+    EndIf
+    IfEq(GF_MAC01_Met_Rowf_Late, FALSE)
+        Set(GF_MAC01_Met_Rowf_Late, TRUE)
+        Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0003)
+    Else
+        Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0004)
+    EndIf
+    Return
+    End
 };
 
 s32 N(ItemList_Calculator)[] = {
@@ -158,227 +158,227 @@ s32 N(ItemList_Calculator)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Rowf_C) = {
-    EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_000A)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0008)
-    EVT_SET(LVar0, EVT_PTR(N(ItemList_Calculator)))
-    EVT_SET(LVar1, 1)
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_000B)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0009)
-            EVT_WAIT(10)
-            EVT_SET(LVar0, ITEM_I_SPY)
-            EVT_SET(LVar3, 2)
-            EVT_EXEC_WAIT(N(GiveItemReward))
-            EVT_CALL(AddBadge, LVar0, LVar1)
-            EVT_SET(GF_MAC01_CalculatorReturned, TRUE)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0011)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_CalculatorReturned, TRUE)
+        Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_000A)
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0008)
+    Set(LVar0, Ref(N(ItemList_Calculator)))
+    Set(LVar1, 1)
+    ExecWait(N(EVS_ChooseKeyItem))
+    Switch(LVar0)
+        CaseEq(0)
+        CaseEq(-1)
+            Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_000B)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0009)
+            Wait(10)
+            Set(LVar0, ITEM_I_SPY)
+            Set(LVar3, 2)
+            ExecWait(N(GiveItemReward))
+            Call(AddBadge, LVar0, LVar1)
+            Set(GF_MAC01_CalculatorReturned, TRUE)
+            Wait(10)
+            Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0011)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_RhuffChapter1) = {
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000C)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000C)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rhuff_B) = {
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0014)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0014)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rhuff_C) = {
-    EVT_CALL(N(func_80244984_805204))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000F)
-    EVT_ELSE
-        EVT_SET(LVar0, GF_MAC01_RowfBadgeAvailableA)
-        EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableB)
-        EVT_ADD(LVar0, GF_MAC01_RowfBadgeAvailableC)
-        EVT_IF_EQ(LVar0, 3)
-            EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000E)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000D)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(N(func_80244984_805204))
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000F)
+    Else
+        Set(LVar0, GF_MAC01_RowfBadgeAvailableA)
+        Add(LVar0, GF_MAC01_RowfBadgeAvailableB)
+        Add(LVar0, GF_MAC01_RowfBadgeAvailableC)
+        IfEq(LVar0, 3)
+            Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000E)
+        Else
+            Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_000D)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rhuff_D) = {
-    EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0012)
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0010)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_CalculatorReturned, TRUE)
+        Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0012)
+    Else
+        Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0010)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Rowf) = {
-    EVT_CALL(SetNpcPos, NPC_Rowf, -250, 0, 295)
-    EVT_LABEL(0)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_CALL(NpcMoveTo, NPC_Rowf, -260, 281, 4)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Rowf, -410, 281, 60)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 60, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcPos, NPC_Rowf, -407, 0, 281)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 40, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcPos, NPC_Rowf, -404, 0, 281)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 20, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcPos, NPC_Rowf, -401, 0, 281)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 0, 0, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_WAIT(5)
-    EVT_CALL(InterpNpcYaw, NPC_Rhuff, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Think)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_LOOP(2)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_WaveOff)
-            EVT_WAIT(1)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-            EVT_WAIT(20)
-        EVT_END_LOOP
-        EVT_LOOP(3)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_WaveOff)
-            EVT_WAIT(1)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 1, 0)
-            EVT_WAIT(2)
-            EVT_CALL(TranslateModel, MODEL_omote2, 0, 0, 0)
-            EVT_WAIT(2)
-            EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Rowf, -250, 295, 60)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
-    EVT_WAIT(3)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_WaveOff)
-    EVT_WAIT(15)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Cheer)
-    EVT_WAIT(8)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
-    EVT_CALL(InterpNpcYaw, NPC_Rhuff, -90, 0)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Talk)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Think)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Talk)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Talk)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 90, 40, EASING_CUBIC_IN)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_jutan2, LVar0, 0, 0, 1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_CALL(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Rowf, -250, 0, 295)
+    Label(0)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
+    Call(NpcMoveTo, NPC_Rowf, -260, 281, 4)
+    Wait(5)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Walk)
+    Call(NpcMoveTo, NPC_Rowf, -410, 281, 60)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
+    Call(RotateGroup, MODEL_jutan2, 60, 0, 0, 1)
+    Wait(1)
+    Call(SetNpcPos, NPC_Rowf, -407, 0, 281)
+    Call(RotateGroup, MODEL_jutan2, 40, 0, 0, 1)
+    Wait(1)
+    Call(SetNpcPos, NPC_Rowf, -404, 0, 281)
+    Call(RotateGroup, MODEL_jutan2, 20, 0, 0, 1)
+    Wait(1)
+    Call(SetNpcPos, NPC_Rowf, -401, 0, 281)
+    Call(RotateGroup, MODEL_jutan2, 0, 0, 0, 1)
+    Wait(1)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
+    Wait(5)
+    Call(InterpNpcYaw, NPC_Rhuff, 90, 0)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Think)
+    Wait(30)
+    Thread
+        Loop(2)
+            Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_WaveOff)
+            Wait(1)
+            Call(TranslateModel, MODEL_omote2, 0, 1, 0)
+            Wait(2)
+            Call(TranslateModel, MODEL_omote2, 0, 0, 0)
+            Wait(2)
+            Call(TranslateModel, MODEL_omote2, 0, 1, 0)
+            Wait(2)
+            Call(TranslateModel, MODEL_omote2, 0, 0, 0)
+            Wait(2)
+            Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
+            Wait(20)
+        EndLoop
+        Loop(3)
+            Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_WaveOff)
+            Wait(1)
+            Call(TranslateModel, MODEL_omote2, 0, 1, 0)
+            Wait(2)
+            Call(TranslateModel, MODEL_omote2, 0, 0, 0)
+            Wait(2)
+            Call(TranslateModel, MODEL_omote2, 0, 1, 0)
+            Wait(2)
+            Call(TranslateModel, MODEL_omote2, 0, 0, 0)
+            Wait(2)
+            Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
+            Wait(2)
+        EndLoop
+    EndThread
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
+    Wait(5)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
+    Wait(20)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Walk)
+    Call(NpcMoveTo, NPC_Rowf, -250, 295, 60)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Idle)
+    Wait(3)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_WaveOff)
+    Wait(15)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Cheer)
+    Wait(8)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
+    Call(InterpNpcYaw, NPC_Rhuff, -90, 0)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Talk)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
+    Wait(30)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Think)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Talk)
+    Wait(30)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Talk)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
+    Wait(20)
+    Thread
+        Call(MakeLerp, 0, 90, 40, EASING_CUBIC_IN)
+        Label(10)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_jutan2, LVar0, 0, 0, 1)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(10)
+        EndIf
+    EndThread
+    Wait(15)
+    Call(ShowEmote, NPC_Rhuff, EMOTE_SHOCK, -45, 20, EMOTER_NPC, 0, 0, 0, 0)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Still)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Rowf, ANIM_Rowf_Still)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Rhuff_C) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -225, 0, 330)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_SET(LVar0, 0)
-        EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_IF_LT(LVar1, 50)
-            EVT_ADD(LVar0, 1)
-        EVT_END_IF
-        EVT_SWITCH(LVar3)
-            EVT_CASE_RANGE(280, 380)
-                EVT_ADD(LVar0, 1)
-        EVT_END_SWITCH
-        EVT_IF_EQ(LVar0, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -25)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0013)
-    EVT_THREAD
-        EVT_CALL(func_802D1270, -280, 330, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -305, 330, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0014)
-    EVT_SET(GF_MAC01_Met_Rhuff, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -225, 0, 330)
+    Loop(0)
+        Wait(1)
+        Set(LVar0, 0)
+        Call(GetPlayerPos, LVar1, LVar2, LVar3)
+        IfLt(LVar1, 50)
+            Add(LVar0, 1)
+        EndIf
+        Switch(LVar3)
+            CaseRange(280, 380)
+                Add(LVar0, 1)
+        EndSwitch
+        IfEq(LVar0, 2)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    Call(InterpPlayerYaw, 270, 0)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, -25)
+    Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Run)
+    Call(NpcMoveTo, NPC_SELF, LVar0, LVar2, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Idle)
+    Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0013)
+    Thread
+        Call(func_802D1270, -280, 330, Float(4.0))
+    EndThread
+    Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Run)
+    Call(NpcMoveTo, NPC_SELF, -305, 330, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Rowf_Idle)
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Rhuff, ANIM_Rowf_Talk, ANIM_Rowf_Cheer, 0, MSG_MAC_Plaza_0014)
+    Set(GF_MAC01_Met_Rhuff, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateRhuffAnims) = {
-    EVT_SET(LVar0, EVT_FLOAT(53.0))
-    EVT_SET(LVar1, EVT_FLOAT(-192.0))
-    EVT_SET(LVar2, EVT_FLOAT(-300.0))
-    EVT_SET(LVar3, EVT_FLOAT(425.0))
-    EVT_CALL(GetNpcPointer, NPC_Rhuff, LVar7)
-    EVT_LOOP(0)
-        EVT_CALL(N(RhuffUnravelUpdate))
-        EVT_CALL(SetNpcPos, NPC_Rhuff, LVar4, 0, LVar5)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Float(53.0))
+    Set(LVar1, Float(-192.0))
+    Set(LVar2, Float(-300.0))
+    Set(LVar3, Float(425.0))
+    Call(GetNpcPointer, NPC_Rhuff, LVar7)
+    Loop(0)
+        Call(N(RhuffUnravelUpdate))
+        Call(SetNpcPos, NPC_Rhuff, LVar4, 0, LVar5)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 s32 N(D_802555AC_815E2C)[] = {
@@ -410,140 +410,140 @@ s32 N(D_802555AC_815E2C)[] = {
 };
 
 EvtScript N(EVS_Rhuff_RevealBadges) = {
-    EVT_SET(MF_BadgeShopOpen, TRUE)
-    EVT_CALL(SetNpcYaw, NPC_Rowf, 270)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAt, SOUND_ROWF_OPEN_SHOP, SOUND_SPACE_DEFAULT, -220, 37, 271)
-        EVT_CALL(MakeLerp, 0, -220, 30, EASING_COS_BOUNCE)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_omote, LVar0, 1, 0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(4)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, -120, 10, EASING_COS_SLOW_OVERSHOOT)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_omote2, 0, LVar0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 100, 5, EASING_COS_SLOW_OVERSHOOT)
-        EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_ura, 0, 0, LVar0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(EnableModel, MODEL_ju_1, TRUE)
-    EVT_CALL(N(RevealRowfBadges))
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PULL_RUG_OUT, SOUND_SPACE_DEFAULT)
-    EVT_USE_BUF(EVT_PTR(N(D_802555AC_815E2C)))
-    EVT_LOOP(50)
-        EVT_BUF_READ2(LVar0, MV_RowfRugRippleAmount)
-        EVT_CALL(RotateGroup, MODEL_jutan2, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_SET(MV_RowfRugRotateAngle, LVar0)
-        EVT_CALL(RotateGroup, MODEL_jutan1, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(200.0))
-        EVT_ADDF(LVar0, EVT_FLOAT(1.0))
-        EVT_CALL(ScaleGroup, MODEL_jutan2, LVar0, 1, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(NpcJump0, NPC_Rowf, -213, 6, 256, 16)
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(MF_BadgeShopOpen, TRUE)
+    Call(SetNpcYaw, NPC_Rowf, 270)
+    Thread
+        Call(PlaySoundAt, SOUND_ROWF_OPEN_SHOP, SOUND_SPACE_DEFAULT, -220, 37, 271)
+        Call(MakeLerp, 0, -220, 30, EASING_COS_BOUNCE)
+        Label(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_omote, LVar0, 1, 0, 0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(0)
+        EndIf
+    EndThread
+    Wait(4)
+    Thread
+        Call(MakeLerp, 0, -120, 10, EASING_COS_SLOW_OVERSHOOT)
+        Label(1)
+        Call(UpdateLerp)
+        DivF(LVar0, Float(10.0))
+        Call(TranslateModel, MODEL_omote2, 0, LVar0, 0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(1)
+        EndIf
+    EndThread
+    Thread
+        Call(MakeLerp, 0, 100, 5, EASING_COS_SLOW_OVERSHOOT)
+        Label(2)
+        Call(UpdateLerp)
+        DivF(LVar0, Float(10.0))
+        Call(TranslateModel, MODEL_ura, 0, 0, LVar0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(2)
+        EndIf
+    EndThread
+    Call(EnableModel, MODEL_ju_1, TRUE)
+    Call(N(RevealRowfBadges))
+    Call(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PULL_RUG_OUT, SOUND_SPACE_DEFAULT)
+    UseBuf(Ref(N(D_802555AC_815E2C)))
+    Loop(50)
+        BufRead2(LVar0, MV_RowfRugRippleAmount)
+        Call(RotateGroup, MODEL_jutan2, LVar0, 0, 1, 0)
+        DivF(LVar0, Float(10.0))
+        Set(MV_RowfRugRotateAngle, LVar0)
+        Call(RotateGroup, MODEL_jutan1, LVar0, 0, 1, 0)
+        DivF(LVar0, Float(200.0))
+        AddF(LVar0, Float(1.0))
+        Call(ScaleGroup, MODEL_jutan2, LVar0, 1, LVar0)
+        Wait(1)
+    EndLoop
+    Call(NpcJump0, NPC_Rowf, -213, 6, 256, 16)
+    IfEq(GF_MAC01_RowfBadgeAvailableA, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    IfEq(GF_MAC01_RowfBadgeAvailableB, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    IfEq(GF_MAC01_RowfBadgeAvailableC, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Rhuff_HideBadges) = {
-    EVT_SET(MF_BadgeShopOpen, FALSE)
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_CALL(NpcJump0, NPC_Rowf, -220, -54, 261, 16)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PUSH_RUG_IN, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, 0, 600, 50, EASING_LINEAR)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_jutan2, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_SET(MV_RowfRugRotateAngle, LVar0)
-        EVT_CALL(RotateGroup, MODEL_jutan1, LVar0, 0, 1, 0)
-        EVT_DIVF(LVar0, EVT_FLOAT(200.0))
-        EVT_ADDF(LVar0, EVT_FLOAT(1.0))
-        EVT_CALL(ScaleGroup, MODEL_jutan2, LVar0, 1, LVar0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(EnableModel, MODEL_ju_1, FALSE)
-        EVT_CALL(N(HideRowfBadges))
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -220, 0, 20, EASING_QUADRATIC_IN)
-        EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_omote, LVar0, 1, 0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_CALL(PlaySoundAt, SOUND_ROWF_CLOSE_SHOP, SOUND_SPACE_DEFAULT, -220, 37, 271)
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -120, 0, 10, EASING_COS_IN_OUT)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_omote2, 0, LVar0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 100, 0, 5, EASING_COS_IN_OUT)
-        EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_DIVF(LVar0, EVT_FLOAT(10.0))
-        EVT_CALL(TranslateModel, MODEL_ura, 0, 0, LVar0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(31)
-    EVT_RETURN
-    EVT_END
+    Set(MF_BadgeShopOpen, FALSE)
+    IfEq(GF_MAC01_RowfBadgeAvailableA, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    IfEq(GF_MAC01_RowfBadgeAvailableB, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    IfEq(GF_MAC01_RowfBadgeAvailableC, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Call(NpcJump0, NPC_Rowf, -220, -54, 261, 16)
+    Thread
+        Call(PlaySoundAtCollider, COLLIDER_o295, SOUND_ROWF_PUSH_RUG_IN, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, 0, 600, 50, EASING_LINEAR)
+        Label(10)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_jutan2, LVar0, 0, 1, 0)
+        DivF(LVar0, Float(10.0))
+        Set(MV_RowfRugRotateAngle, LVar0)
+        Call(RotateGroup, MODEL_jutan1, LVar0, 0, 1, 0)
+        DivF(LVar0, Float(200.0))
+        AddF(LVar0, Float(1.0))
+        Call(ScaleGroup, MODEL_jutan2, LVar0, 1, LVar0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(10)
+        EndIf
+        Call(EnableModel, MODEL_ju_1, FALSE)
+        Call(N(HideRowfBadges))
+    EndThread
+    Wait(10)
+    Thread
+        Call(MakeLerp, -220, 0, 20, EASING_QUADRATIC_IN)
+        Label(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_omote, LVar0, 1, 0, 0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(0)
+        EndIf
+        Call(PlaySoundAt, SOUND_ROWF_CLOSE_SHOP, SOUND_SPACE_DEFAULT, -220, 37, 271)
+    EndThread
+    Wait(15)
+    Thread
+        Call(MakeLerp, -120, 0, 10, EASING_COS_IN_OUT)
+        Label(1)
+        Call(UpdateLerp)
+        DivF(LVar0, Float(10.0))
+        Call(TranslateModel, MODEL_omote2, 0, LVar0, 0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(1)
+        EndIf
+    EndThread
+    Thread
+        Call(MakeLerp, 100, 0, 5, EASING_COS_IN_OUT)
+        Label(2)
+        Call(UpdateLerp)
+        DivF(LVar0, Float(10.0))
+        Call(TranslateModel, MODEL_ura, 0, 0, LVar0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(2)
+        EndIf
+    EndThread
+    Wait(31)
+    Return
+    End
 };
 
 enum BadgeShopStates {
@@ -556,37 +556,37 @@ enum BadgeShopStates {
 };
 
 EvtScript N(EVS_EnterBadgeShop) = {
-    EVT_IF_GE(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GE(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_WAITING)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(MF_BadgeShopOpen, TRUE)
-    EVT_SET(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
-    EVT_EXEC_WAIT(N(EVS_Rhuff_RevealBadges))
-    EVT_SET(MV_BadgeShopOpenState, BADGE_SHOP_OPEN)
-    EVT_RETURN
-    EVT_END
+    IfGe(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
+        Return
+    EndIf
+    IfGe(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_WAITING)
+        Return
+    EndIf
+    Set(MF_BadgeShopOpen, TRUE)
+    Set(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
+    ExecWait(N(EVS_Rhuff_RevealBadges))
+    Set(MV_BadgeShopOpenState, BADGE_SHOP_OPEN)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitBadgeShop) = {
-    EVT_IF_EQ(MV_BadgeShopOpenState, BADGE_SHOP_OPEN_READY)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_WAITING)
-    EVT_SET(MF_BadgeShopOpen, FALSE)
-    EVT_LABEL(10)
-        EVT_IF_EQ(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_SET(MV_BadgeShopCloseState, BADGE_SHOP_CLOSING)
-    EVT_EXEC_WAIT(N(EVS_Rhuff_HideBadges))
-    EVT_SET(MV_BadgeShopOpenState, BADGE_SHOP_OPEN_READY)
-    EVT_SET(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_READY)
-    EVT_RETURN
-    EVT_END
+    IfEq(MV_BadgeShopOpenState, BADGE_SHOP_OPEN_READY)
+        Return
+    EndIf
+    Set(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_WAITING)
+    Set(MF_BadgeShopOpen, FALSE)
+    Label(10)
+        IfEq(MV_BadgeShopOpenState, BADGE_SHOP_OPENING)
+            Wait(1)
+            Goto(10)
+        EndIf
+    Set(MV_BadgeShopCloseState, BADGE_SHOP_CLOSING)
+    ExecWait(N(EVS_Rhuff_HideBadges))
+    Set(MV_BadgeShopOpenState, BADGE_SHOP_OPEN_READY)
+    Set(MV_BadgeShopCloseState, BADGE_SHOP_CLOSE_READY)
+    Return
+    End
 };
 
 API_CALLABLE(N(RowfShop_SetBadgePos)) {
@@ -601,98 +601,98 @@ API_CALLABLE(N(RowfShop_SetBadgePos)) {
 }
 
 EvtScript N(EVS_NpcInit_Rowf) = {
-    EVT_SET(MV_BadgeShopOpenState, 0)
-    EVT_SET(MV_BadgeShopCloseState, 0)
-    EVT_SET(AF_MAC_40, FALSE)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_DEFEATED_JR_TROOPA)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rowf_A)))
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Rowf)))
-        EVT_CASE_LT(STORY_CH3_STAR_SPRIT_DEPARTED)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rowf_B)))
-            EVT_SET(AF_MAC_40, TRUE)
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rowf_B)))
-                EVT_SET(AF_MAC_40, TRUE)
-            EVT_ELSE
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rowf_C)))
-                EVT_CALL(SetNpcPos, NPC_Rowf, -250, 0, 295)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_SET(AF_MAC_41, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_ju_2, MODEL_FLAG_DO_BOUNDS_CULLING, FALSE)
-    EVT_CALL(EnableGroup, MODEL_jutan1, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(RotateGroup, MODEL_jutan1, 60, 0, 1, 0)
-    EVT_CALL(RotateGroup, MODEL_jutan2, 0, 0, 1, 0)
-    EVT_CALL(ScaleGroup, MODEL_jutan2, EVT_FLOAT(1.3), 1, EVT_FLOAT(1.3))
-    EVT_SET(MV_RowfRugRotateAngle, 60)
-    EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_ju_1, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(gfx_build_rowf_rug_with_ripples)), NULL)
-    EVT_CALL(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
-    EVT_IF_EQ(AF_MAC_40, TRUE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_EnterBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_o444, 1, 0)
-        EVT_CALL(SetNpcJumpscale, NPC_Rowf, 1)
-    EVT_END_IF
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAG_INACTIVE, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAG_INACTIVE, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAG_INACTIVE, FALSE)
-        EVT_CALL(N(HideRowfBadges))
-        EVT_LABEL(0)
-        EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)
-            EVT_CALL(GetModelCenter, MODEL_b3)
-            EVT_CALL(N(RowfShop_SetBadgePos), 0)
-        EVT_END_IF
-        EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableB, FALSE)
-            EVT_CALL(GetModelCenter, MODEL_b2)
-            EVT_CALL(N(RowfShop_SetBadgePos), 1)
-        EVT_END_IF
-        EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableC, FALSE)
-            EVT_CALL(GetModelCenter, MODEL_b1)
-            EVT_CALL(N(RowfShop_SetBadgePos), 2)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Set(MV_BadgeShopOpenState, 0)
+    Set(MV_BadgeShopCloseState, 0)
+    Set(AF_MAC_40, FALSE)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_DEFEATED_JR_TROOPA)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rowf_A)))
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Rowf)))
+        CaseLt(STORY_CH3_STAR_SPRIT_DEPARTED)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rowf_B)))
+            Set(AF_MAC_40, TRUE)
+        CaseDefault
+            IfEq(GF_MAC01_CalculatorReturned, TRUE)
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rowf_B)))
+                Set(AF_MAC_40, TRUE)
+            Else
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rowf_C)))
+                Call(SetNpcPos, NPC_Rowf, -250, 0, 295)
+            EndIf
+    EndSwitch
+    Set(AF_MAC_41, FALSE)
+    Call(SetModelFlags, MODEL_ju_2, MODEL_FLAG_DO_BOUNDS_CULLING, FALSE)
+    Call(EnableGroup, MODEL_jutan1, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b3, COLLIDER_FLAGS_UPPER_MASK)
+    Call(RotateGroup, MODEL_jutan1, 60, 0, 1, 0)
+    Call(RotateGroup, MODEL_jutan2, 0, 0, 1, 0)
+    Call(ScaleGroup, MODEL_jutan2, Float(1.3), 1, Float(1.3))
+    Set(MV_RowfRugRotateAngle, 60)
+    Call(MakeLocalVertexCopy, VTX_COPY_0, MODEL_ju_1, TRUE)
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, Ref(N(gfx_build_rowf_rug_with_ripples)), NULL)
+    Call(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
+    IfEq(AF_MAC_40, TRUE)
+        BindTrigger(Ref(N(EVS_EnterBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)
+        BindTrigger(Ref(N(EVS_ExitBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_o444, 1, 0)
+        Call(SetNpcJumpscale, NPC_Rowf, 1)
+    EndIf
+    Thread
+        Wait(5)
+        Call(SetModelFlags, MODEL_b1, MODEL_FLAG_INACTIVE, FALSE)
+        Call(SetModelFlags, MODEL_b2, MODEL_FLAG_INACTIVE, FALSE)
+        Call(SetModelFlags, MODEL_b3, MODEL_FLAG_INACTIVE, FALSE)
+        Call(N(HideRowfBadges))
+        Label(0)
+        IfEq(GF_MAC01_RowfBadgeAvailableA, FALSE)
+            Call(GetModelCenter, MODEL_b3)
+            Call(N(RowfShop_SetBadgePos), 0)
+        EndIf
+        IfEq(GF_MAC01_RowfBadgeAvailableB, FALSE)
+            Call(GetModelCenter, MODEL_b2)
+            Call(N(RowfShop_SetBadgePos), 1)
+        EndIf
+        IfEq(GF_MAC01_RowfBadgeAvailableC, FALSE)
+            Call(GetModelCenter, MODEL_b1)
+            Call(N(RowfShop_SetBadgePos), 2)
+        EndIf
+        Wait(1)
+        Goto(0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Rhuff) = {
-    EVT_CALL(SetNpcScale, NPC_Rhuff, EVT_FLOAT(0.75), EVT_FLOAT(0.75), EVT_FLOAT(0.75))
-    EVT_CALL(SetNpcPos, NPC_Rhuff, -230, 0, 320)
-    EVT_CALL(InterpNpcYaw, NPC_Rhuff, -90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_DEFEATED_JR_TROOPA)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RhuffChapter1)))
-        EVT_CASE_LT(STORY_CH2_BEGAN_PEACH_MISSION)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rhuff_B)))
-            EVT_IF_EQ(GF_MAC01_Met_Rhuff, FALSE)
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Rhuff_C)))
-            EVT_ELSE
-                EVT_CALL(SetNpcPos, NPC_SELF, -305, 0, 330)
-                EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPRIT_DEPARTED)
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rhuff_C)))
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_UpdateRhuffAnims)))
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_MAC01_CalculatorReturned, TRUE)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rhuff_C)))
-                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_UpdateRhuffAnims)))
-            EVT_ELSE
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rhuff_D)))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcScale, NPC_Rhuff, Float(0.75), Float(0.75), Float(0.75))
+    Call(SetNpcPos, NPC_Rhuff, -230, 0, 320)
+    Call(InterpNpcYaw, NPC_Rhuff, -90, 0)
+    Call(SetNpcAnimation, NPC_Rhuff, ANIM_Rowf_Idle)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_DEFEATED_JR_TROOPA)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RhuffChapter1)))
+        CaseLt(STORY_CH2_BEGAN_PEACH_MISSION)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rhuff_B)))
+            IfEq(GF_MAC01_Met_Rhuff, FALSE)
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Rhuff_C)))
+            Else
+                Call(SetNpcPos, NPC_SELF, -305, 0, 330)
+                Call(SetNpcYaw, NPC_SELF, 90)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPRIT_DEPARTED)
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rhuff_C)))
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_UpdateRhuffAnims)))
+        CaseDefault
+            IfEq(GF_MAC01_CalculatorReturned, TRUE)
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rhuff_C)))
+                Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_UpdateRhuffAnims)))
+            Else
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rhuff_D)))
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Rowf)[] = {

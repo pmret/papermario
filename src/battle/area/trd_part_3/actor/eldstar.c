@@ -88,12 +88,12 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_EXEC(N(EVS_ManageTutorial))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Exec(N(EVS_ManageTutorial))
+    Return
+    End
 };
 
 API_CALLABLE(N(UpdateHoverOffset)) {
@@ -185,163 +185,163 @@ API_CALLABLE(N(AddStarPower)) {
 }
 
 EvtScript N(EVS_Idle) = {
-    EVT_CALL(N(UpdateHoverOffset))
-    EVT_RETURN
-    EVT_END
+    Call(N(UpdateHoverOffset))
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageTutorial) = {
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
-    EVT_CALL(N(ClearPlayerMenuSelections))
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_WAIT(15)
-    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(ActorSpeak, MSG_CH1_0114, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-        EVT_CALL(SetGoalPos, ACTOR_SELF, -110, 100, 0)
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(N(StartBlinkingSP))
-    EVT_WAIT(120)
-    EVT_CALL(N(StopBlinkingSP))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-    EVT_CALL(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(N(StartBlinkingSP))
-    EVT_WAIT(120)
-    EVT_CALL(N(StopBlinkingSP))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(ActorSpeak, MSG_CH1_0116, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_STAR_POWERS)
-    EVT_CALL(SetEnabledStarPowers, 1 << STAR_POWER_INDEX(MOVE_REFRESH))
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
-    EVT_SET(LVar0, 255)
-    EVT_LOOP(10)
-        EVT_SUB(LVar0, 25)
-        EVT_IF_LT(LVar0, 0)
-            EVT_SET(LVar0, 0)
-        EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
-    EVT_THREAD
-        EVT_CALL(N(func_80218170_4CF320))
-    EVT_END_THREAD
-    EVT_CALL(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(10)
-        EVT_ADD(LVar0, 25)
-        EVT_IF_GT(LVar0, 255)
-            EVT_SET(LVar0, 255)
-        EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
-    EVT_CALL(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(N(StartBlinkingSP))
-    EVT_WAIT(120)
-    EVT_CALL(N(StopBlinkingSP))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SetBattleState, BATTLE_STATE_END_TURN)
-    EVT_CALL(WaitForState, BATTLE_STATE_BEGIN_TURN)
-    EVT_WAIT(20)
-    EVT_CALL(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-        EVT_CALL(SetGoalPos, ACTOR_SELF, -110, 100, 0)
-        EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
-        EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(N(StartBlinkingSP))
-    EVT_WAIT(120)
-    EVT_CALL(N(StopBlinkingSP))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
-    EVT_CALL(ActorSpeak, MSG_CH1_011A, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(ActorSpeak, MSG_CH1_011B, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_STAR_POWERS)
-    EVT_CALL(SetEnabledStarPowers, 1 << STAR_POWER_INDEX(MOVE_FOCUS))
-    EVT_CALL(N(ClearPlayerMenuSelections))
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
-    EVT_SET(LVar0, 255)
-    EVT_LOOP(10)
-        EVT_SUB(LVar0, 25)
-        EVT_IF_LT(LVar0, 0)
-            EVT_SET(LVar0, 0)
-        EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 0)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
-    EVT_THREAD
-        EVT_CALL(N(func_80218170_4CF320))
-    EVT_END_THREAD
-    EVT_CALL(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(10)
-        EVT_ADD(LVar0, 25)
-        EVT_IF_GT(LVar0, 255)
-            EVT_SET(LVar0, 255)
-        EVT_END_IF
-        EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
-    EVT_CALL(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(N(StartBlinkingSP))
-    EVT_WAIT(120)
-    EVT_CALL(N(StopBlinkingSP))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
-    EVT_CALL(WaitForState, BATTLE_STATE_0)
-    EVT_CALL(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
-    EVT_WAIT(10000)
-    EVT_RETURN
-    EVT_END
+    Call(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
+    Call(N(ClearPlayerMenuSelections))
+    Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Wait(15)
+    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(ActorSpeak, MSG_CH1_0114, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Thread
+        Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+        Call(SetGoalPos, ACTOR_SELF, -110, 100, 0)
+        Call(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
+        Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    EndThread
+    Wait(10)
+    Call(N(StartBlinkingSP))
+    Wait(120)
+    Call(N(StopBlinkingSP))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+    Call(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
+    Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+    Call(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    Call(N(StartBlinkingSP))
+    Wait(120)
+    Call(N(StopBlinkingSP))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(ActorSpeak, MSG_CH1_0116, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_STAR_POWERS)
+    Call(SetEnabledStarPowers, 1 << STAR_POWER_INDEX(MOVE_REFRESH))
+    Call(WaitForState, BATTLE_STATE_PLAYER_MOVE)
+    Set(LVar0, 255)
+    Loop(10)
+        Sub(LVar0, 25)
+        IfLt(LVar0, 0)
+            Set(LVar0, 0)
+        EndIf
+        Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+        Wait(1)
+    EndLoop
+    Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 0)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Thread
+        Call(N(func_80218170_4CF320))
+    EndThread
+    Call(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
+    Set(LVar0, 0)
+    Loop(10)
+        Add(LVar0, 25)
+        IfGt(LVar0, 255)
+            Set(LVar0, 255)
+        EndIf
+        Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+        Wait(1)
+    EndLoop
+    Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(ActorSpeak, MSG_CH1_0117, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    Call(N(StartBlinkingSP))
+    Wait(120)
+    Call(N(StopBlinkingSP))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(SetBattleState, BATTLE_STATE_END_TURN)
+    Call(WaitForState, BATTLE_STATE_BEGIN_TURN)
+    Wait(20)
+    Call(ActorSpeak, MSG_CH1_0119, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Thread
+        Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+        Call(SetGoalPos, ACTOR_SELF, -110, 100, 0)
+        Call(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
+        Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    EndThread
+    Wait(10)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    Call(N(StartBlinkingSP))
+    Wait(120)
+    Call(N(StopBlinkingSP))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_ENABLE)
+    Call(FlyToGoal, ACTOR_SELF, 20, 0, EASING_COS_IN_OUT)
+    Call(EnableActorBlur, ACTOR_SELF, ACTOR_BLUR_DISABLE)
+    Call(ActorSpeak, MSG_CH1_011A, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(ActorSpeak, MSG_CH1_011B, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_STAR_POWERS)
+    Call(SetEnabledStarPowers, 1 << STAR_POWER_INDEX(MOVE_FOCUS))
+    Call(N(ClearPlayerMenuSelections))
+    Call(WaitForState, BATTLE_STATE_PLAYER_MOVE)
+    Set(LVar0, 255)
+    Loop(10)
+        Sub(LVar0, 25)
+        IfLt(LVar0, 0)
+            Set(LVar0, 0)
+        EndIf
+        Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+        Wait(1)
+    EndLoop
+    Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 0)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    Thread
+        Call(N(func_80218170_4CF320))
+    EndThread
+    Call(WaitForState, BATTLE_STATE_END_PLAYER_TURN)
+    Set(LVar0, 0)
+    Loop(10)
+        Add(LVar0, 25)
+        IfGt(LVar0, 255)
+            Set(LVar0, 255)
+        EndIf
+        Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+        Wait(1)
+    EndLoop
+    Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, 255)
+    Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
+    Call(ActorSpeak, MSG_CH1_011C, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
+    Call(N(StartBlinkingSP))
+    Wait(120)
+    Call(N(StopBlinkingSP))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
+    Call(WaitForState, BATTLE_STATE_0)
+    Call(SetBattleState, BATTLE_STATE_END_TRAINING_BATTLE)
+    Wait(10000)
+    Return
+    End
 };

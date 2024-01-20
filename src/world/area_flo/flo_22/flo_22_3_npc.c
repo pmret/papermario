@@ -6,102 +6,102 @@
 #include "world/common/enemy/CrazyDayzee.h"
 
 EvtScript N(EVS_NpcIdle_Bzzap) = {
-    EVT_SET(MV_Bzzap_State, 0)
-    EVT_LOOP(0)
-        EVT_SWITCH(MV_Bzzap_State)
-            EVT_CASE_EQ(0)
-            EVT_CASE_EQ(1)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_FallBack)
-                EVT_SET(MV_Bzzap_State, 0)
-                EVT_CALL(StartBattle)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(MV_Bzzap_State, 0)
+    Loop(0)
+        Switch(MV_Bzzap_State)
+            CaseEq(0)
+            CaseEq(1)
+                Call(SetPlayerAnimation, ANIM_Mario1_FallBack)
+                Set(MV_Bzzap_State, 0)
+                Call(StartBattle)
+        EndSwitch
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Bzzap) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_THREAD
-                EVT_WAIT(25)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_END_THREAD
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bzzap_Anim01)
-            EVT_CALL(SetNpcPos, NPC_SELF, 30, 60, 0)
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
-            EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Thread
+                Wait(25)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+            EndThread
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Bzzap_Anim01)
+            Call(SetNpcPos, NPC_SELF, 30, 60, 0)
+            Wait(10)
+            Call(SetNpcJumpscale, NPC_SELF, 0)
+            Call(NpcJump0, NPC_SELF, 30, 0, 0, 15)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bzzap) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Bzzap)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Bzzap)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Bzzap)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Bzzap)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Dayzee) = {
-    EVT_SET(MV_Dayzee_State, 0)
-    EVT_LOOP(0)
-        EVT_SWITCH(MV_Dayzee_State)
-            EVT_CASE_EQ(0)
-            EVT_CASE_EQ(1)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_FallBack)
-                EVT_SET(MV_Dayzee_State, 0)
-                EVT_CALL(StartBattle)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(MV_Dayzee_State, 0)
+    Loop(0)
+        Switch(MV_Dayzee_State)
+            CaseEq(0)
+            CaseEq(1)
+                Call(SetPlayerAnimation, ANIM_Mario1_FallBack)
+                Set(MV_Dayzee_State, 0)
+                Call(StartBattle)
+        EndSwitch
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Dayzee) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_THREAD
-                EVT_WAIT(25)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_END_THREAD
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim01)
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim01)
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(2.0))
-            EVT_CALL(NpcJump0, NPC_SELF, 30, 0, 0, 15)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Thread
+                Wait(25)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+            EndThread
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim01)
+            Wait(10)
+            Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
+            Call(NpcJump0, NPC_SELF, 30, 0, 0, 15)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Dayzee_Anim01)
+            Wait(10)
+            Call(SetNpcJumpscale, NPC_SELF, Float(2.0))
+            Call(NpcJump0, NPC_SELF, 30, 0, 0, 15)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dayzee) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Dayzee)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Dayzee)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Dayzee)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Dayzee)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Bzzap) = {

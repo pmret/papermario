@@ -467,772 +467,772 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_SET_CONST(LVar2, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_Hit)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_Drop)
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_SET(LVar2, 20)
-            EVT_EXEC_WAIT(EVS_Partner_SpikeContact)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_Drop)
-        EVT_CASE_EQ(EVENT_BURN_CONTACT)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
-            EVT_SET(LVar2, 20)
-            EVT_SET_CONST(LVar3, ANIM_BattleSushie_BurnStill)
-            EVT_EXEC_WAIT(EVS_Partner_BurnContact)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_Drop)
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
-            EVT_SET_CONST(LVar2, ANIM_BattleSushie_BurnStill)
-            EVT_EXEC_WAIT(EVS_Partner_BurnHit)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_Drop)
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_SET(LVar2, 20)
-            EVT_EXEC_WAIT(EVS_Partner_ShockHit)
-        EVT_CASE_EQ(EVENT_33)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(EVS_Partner_Drop)
-        EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Idle)
-            EVT_SET_CONST(LVar2, ANIM_BattleSushie_Run)
-            EVT_SET(LVar3, 0)
-            EVT_EXEC_WAIT(EVS_Partner_Recover)
-        EVT_CASE_OR_EQ(EVENT_18)
-        EVT_CASE_OR_EQ(EVENT_BLOCK)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BattleSushie_Block)
-            EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
-            EVT_WAIT(10)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(CloseActionCommandInfo)
+    Call(GetLastEvent, ACTOR_PARTNER, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            SetConst(LVar2, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_Hit)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_Drop)
+        EndCaseGroup
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+            Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_SPIKE_CONTACT)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            Set(LVar2, 20)
+            ExecWait(EVS_Partner_SpikeContact)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_Drop)
+        CaseEq(EVENT_BURN_CONTACT)
+            SetConst(LVar1, ANIM_BattleSushie_BurnHurt)
+            Set(LVar2, 20)
+            SetConst(LVar3, ANIM_BattleSushie_BurnStill)
+            ExecWait(EVS_Partner_BurnContact)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_Drop)
+        CaseEq(EVENT_BURN_HIT)
+            SetConst(LVar1, ANIM_BattleSushie_BurnHurt)
+            SetConst(LVar2, ANIM_BattleSushie_BurnStill)
+            ExecWait(EVS_Partner_BurnHit)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_Drop)
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            Set(LVar2, 20)
+            ExecWait(EVS_Partner_ShockHit)
+        CaseEq(EVENT_33)
+            SetConst(LVar1, ANIM_BattleSushie_Hurt)
+            ExecWait(EVS_Partner_Drop)
+        CaseEq(EVENT_RECOVER_FROM_KO)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleSushie_Idle)
+            SetConst(LVar2, ANIM_BattleSushie_Run)
+            Set(LVar3, 0)
+            ExecWait(EVS_Partner_Recover)
+        CaseOrEq(EVENT_18)
+        CaseOrEq(EVENT_BLOCK)
+            Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_NO_DAMGE)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BattleSushie_Block)
+            ExecWait(EVS_Partner_NoDamageHit)
+            Wait(10)
+        EndCaseGroup
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
-        EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(EVS_Celebrate))
-        EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(runAway))
-        EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(runAwayFail))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_EXECUTE_ACTION)
+            ExecWait(N(EVS_ExecuteAction))
+        CaseEq(PHASE_CELEBRATE)
+            ExecWait(N(EVS_Celebrate))
+        CaseEq(PHASE_RUN_AWAY_START)
+            ExecWait(N(runAway))
+        CaseEq(PHASE_RUN_AWAY_FAIL)
+            ExecWait(N(runAwayFail))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Celebrate) = {
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Celebrate)
-    EVT_WAIT(36)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Celebrate)
+    Wait(36)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_SET_CONST(LVar1, ANIM_BattleSushie_Run)
-    EVT_EXEC_WAIT(EVS_Partner_RunAway)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    SetConst(LVar1, ANIM_BattleSushie_Run)
+    ExecWait(EVS_Partner_RunAway)
+    Return
+    End
 };
 
 EvtScript N(runAwayFail) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
-    EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(SetActorYaw, ACTOR_PARTNER, 0)
+    Call(RunToGoal, ACTOR_PARTNER, 0)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(BTL_MENU_TYPE_STAR_POWERS)
-            EVT_CALL(LoadStarPowerScript)
-            EVT_EXEC_WAIT(LVar0)
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar2)
-        EVT_CASE_EQ(MOVE_BELLY_FLOP1)
-            EVT_EXEC_WAIT(N(bellyFlop))
-        EVT_CASE_EQ(MOVE_BELLY_FLOP2)
-            EVT_EXEC_WAIT(N(bellyFlop))
-        EVT_CASE_EQ(MOVE_BELLY_FLOP3)
-            EVT_EXEC_WAIT(N(bellyFlop))
-        EVT_CASE_EQ(MOVE_SQUIRT)
-            EVT_EXEC_WAIT(N(squirt))
-        EVT_CASE_EQ(MOVE_WATER_BLOCK)
-            EVT_EXEC_WAIT(N(waterBlock))
-        EVT_CASE_EQ(MOVE_TIDAL_WAVE)
-            EVT_EXEC_WAIT(N(tidalWave))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(ShowActionHud, TRUE)
+    Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar0)
+        CaseEq(BTL_MENU_TYPE_STAR_POWERS)
+            Call(LoadStarPowerScript)
+            ExecWait(LVar0)
+            Return
+    EndSwitch
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar2)
+        CaseEq(MOVE_BELLY_FLOP1)
+            ExecWait(N(bellyFlop))
+        CaseEq(MOVE_BELLY_FLOP2)
+            ExecWait(N(bellyFlop))
+        CaseEq(MOVE_BELLY_FLOP3)
+            ExecWait(N(bellyFlop))
+        CaseEq(MOVE_SQUIRT)
+            ExecWait(N(squirt))
+        CaseEq(MOVE_WATER_BLOCK)
+            ExecWait(N(waterBlock))
+        CaseEq(MOVE_TIDAL_WAVE)
+            ExecWait(N(tidalWave))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(returnHome2) = {
-    EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 60)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.4))
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-    EVT_SUB(LVar0, 30)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
-    EVT_SUB(LVar0, 20)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
-    EVT_SUB(LVar0, 10)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_WAIT(15)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(PartnerYieldTurn)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Sub(LVar0, 60)
+    Set(LVar1, 0)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.4))
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+    Sub(LVar0, 30)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+    Sub(LVar0, 20)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 6, FALSE, TRUE, FALSE)
+    Sub(LVar0, 10)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Wait(15)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(RunToGoal, ACTOR_PARTNER, 0)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 15)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(0.4))
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
-    EVT_SUB(LVar0, 5)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_WAIT(15)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(PartnerYieldTurn)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Sub(LVar0, 15)
+    Set(LVar1, 0)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.4))
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 8, FALSE, TRUE, FALSE)
+    Sub(LVar0, 5)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 4, FALSE, TRUE, FALSE)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Wait(15)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(RunToGoal, ACTOR_PARTNER, 0)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(restoreFromSquirt2) = {
-    EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(PartnerYieldTurn)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_04)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(restoreFromSquirt) = {
-    EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(PartnerYieldTurn)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(runToTarget) = {
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 40)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Add(LVar0, 40)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetActorSpeed, ACTOR_PARTNER, Float(4.0))
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(RunToGoal, ACTOR_PARTNER, 0)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Return
+    End
 };
 
 EvtScript N(getJumpTime) = {
-    EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVarB, LVarC, LVarD)
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVarC, LVarD, LVarE)
-    EVT_IF_GT(LVarB, LVarC)
-        EVT_SUB(LVarB, LVarC)
-    EVT_ELSE
-        EVT_SUB(LVarC, LVarB)
-        EVT_SET(LVarB, LVarC)
-    EVT_END_IF
-    EVT_SUB(LVarB, 20)
-    EVT_DIVF(LVarB, EVT_FLOAT(10.588))
-    EVT_ADDF(LVarB, 15)
-    EVT_SET(LVarA, LVarB)
-    EVT_RETURN
-    EVT_END
+    Call(SetGoalToTarget, ACTOR_PARTNER)
+    Call(GetGoalPos, ACTOR_PARTNER, LVarB, LVarC, LVarD)
+    Call(GetActorPos, ACTOR_PARTNER, LVarC, LVarD, LVarE)
+    IfGt(LVarB, LVarC)
+        Sub(LVarB, LVarC)
+    Else
+        Sub(LVarC, LVarB)
+        Set(LVarB, LVarC)
+    EndIf
+    Sub(LVarB, 20)
+    DivF(LVarB, Float(10.588))
+    AddF(LVarB, 15)
+    Set(LVarA, LVarB)
+    Return
+    End
 };
 
 EvtScript N(bellyFlop) = {
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_init)
-    EVT_EXEC_WAIT(N(runToTarget))
-    EVT_EXEC_WAIT(N(getJumpTime))
-    EVT_LOOP(30)
-        EVT_WAIT(1)
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_NE(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(action_command_hammer_start, 0, 57, 3)
-    EVT_CALL(SetActionQuality, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_59)
-    EVT_SET(LVar0, 30)
-    EVT_LOOP(60)
-        EVT_WAIT(1)
-        EVT_SUB(LVar0, 1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense2)
-        EVT_END_IF
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_THREAD
-        EVT_CALL(GetPartnerActionSuccess, LVar0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-        EVT_CALL(MoveBattleCamOver, 20)
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
-    EVT_THREAD
-        EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 12, 0)
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, 36)
-            EVT_CALL(SetActorRotation, ACTOR_PARTNER, 0, 0, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetActorRotation, ACTOR_PARTNER, 0, 0, 20)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetPartnerActionSuccess, LVar0)
-        EVT_IF_GT(LVar0, 0)
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(MOVE_BELLY_FLOP1)
-                    EVT_WAIT(13)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.3), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_CASE_EQ(MOVE_BELLY_FLOP2)
-                    EVT_WAIT(13)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.15), EVT_FLOAT(1.15), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.35), EVT_FLOAT(1.35), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.55), EVT_FLOAT(1.55), EVT_FLOAT(1.0))
-                EVT_CASE_EQ(MOVE_BELLY_FLOP3)
-                    EVT_WAIT(13)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.3), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.8), EVT_FLOAT(1.8), EVT_FLOAT(1.0))
-            EVT_END_SWITCH
-        EVT_ELSE
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(167)
-                    EVT_WAIT(13)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_CASE_EQ(168)
-                    EVT_WAIT(13)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.05), EVT_FLOAT(1.05), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.15), EVT_FLOAT(1.15), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.25), EVT_FLOAT(1.25), EVT_FLOAT(1.0))
-                EVT_CASE_EQ(169)
-                    EVT_WAIT(13)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.2), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.3), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                    EVT_WAIT(1)
-                    EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-            EVT_END_SWITCH
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_BELLY_FLOP)
-    EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(GetPartnerActionSuccess, LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_THREAD
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
-            EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
-        EVT_END_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.6))
-        EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-    EVT_ELSE
-        EVT_THREAD
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
-            EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
-        EVT_END_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-        EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Land)
-    EVT_CALL(SetActorRotation, ACTOR_PARTNER, 0, 0, 0)
-    EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar2)
-        EVT_CASE_EQ(MOVE_BELLY_FLOP1)
-            EVT_SET(LVarE, 1)
-            EVT_SET(LVarF, 3)
-        EVT_CASE_EQ(MOVE_BELLY_FLOP2)
-            EVT_SET(LVarE, 2)
-            EVT_SET(LVarF, 4)
-        EVT_CASE_EQ(MOVE_BELLY_FLOP3)
-            EVT_SET(LVarE, 3)
-            EVT_SET(LVarF, 5)
-    EVT_END_SWITCH
-    EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_CALL(LandJump, ACTOR_PARTNER)
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(AddGoalPos, ACTOR_PARTNER, 15, 0, 0)
-        EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-        EVT_CALL(AddGoalPos, ACTOR_PARTNER, 10, 0, 0)
-        EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
-        EVT_WAIT(10)
-        EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-        EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_THREAD
-        EVT_WAIT(3)
-        EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(GetPartnerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
-        EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-            EVT_CALL(MoveBattleCamOver, 8)
-            EVT_EXEC_WAIT(N(returnHome2))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(LoadActionCommand, ACTION_COMMAND_SMASH)
+    Call(action_command_hammer_init)
+    ExecWait(N(runToTarget))
+    ExecWait(N(getJumpTime))
+    Loop(30)
+        Wait(1)
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfNe(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(action_command_hammer_start, 0, 57, 3)
+    Call(SetActionQuality, 0)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense1)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_59)
+    Set(LVar0, 30)
+    Loop(60)
+        Wait(1)
+        Sub(LVar0, 1)
+        IfEq(LVar0, 0)
+            Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Tense2)
+        EndIf
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Thread
+        Call(GetPartnerActionSuccess, LVar0)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_52)
+        Call(MoveBattleCamOver, 20)
+    EndThread
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
+    Thread
+        Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 12, 0)
+        Set(LVar0, 0)
+        Loop(10)
+            Add(LVar0, 36)
+            Call(SetActorRotation, ACTOR_PARTNER, 0, 0, LVar0)
+            Wait(1)
+        EndLoop
+        Call(SetActorRotation, ACTOR_PARTNER, 0, 0, 20)
+    EndThread
+    Thread
+        Call(GetPartnerActionSuccess, LVar0)
+        IfGt(LVar0, 0)
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar2)
+                CaseEq(MOVE_BELLY_FLOP1)
+                    Wait(13)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.1), Float(1.1), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.1), Float(1.1), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.2), Float(1.2), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.2), Float(1.2), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.3), Float(1.3), Float(1.0))
+                CaseEq(MOVE_BELLY_FLOP2)
+                    Wait(13)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.15), Float(1.15), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.2), Float(1.2), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.35), Float(1.35), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.55), Float(1.55), Float(1.0))
+                CaseEq(MOVE_BELLY_FLOP3)
+                    Wait(13)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.2), Float(1.2), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.3), Float(1.3), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.5), Float(1.5), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.6), Float(1.6), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.8), Float(1.8), Float(1.0))
+            EndSwitch
+        Else
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar2)
+                CaseEq(167)
+                    Wait(13)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+                CaseEq(168)
+                    Wait(13)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.05), Float(1.05), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.1), Float(1.1), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.15), Float(1.15), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.2), Float(1.2), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.25), Float(1.25), Float(1.0))
+                CaseEq(169)
+                    Wait(13)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.1), Float(1.1), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.2), Float(1.2), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.3), Float(1.3), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.4), Float(1.4), Float(1.0))
+                    Wait(1)
+                    Call(SetActorScale, ACTOR_PARTNER, Float(1.5), Float(1.5), Float(1.0))
+            EndSwitch
+        EndIf
+    EndThread
+    Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_BELLY_FLOP)
+    Call(SetGoalToTarget, ACTOR_PARTNER)
+    Call(GetPartnerActionSuccess, LVar0)
+    IfGt(LVar0, 0)
+        Thread
+            Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
+            Wait(10)
+            Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
+        EndThread
+        Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.6))
+        Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+    Else
+        Thread
+            Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
+            Wait(10)
+            Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
+        EndThread
+        Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+        Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+    EndIf
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Land)
+    Call(SetActorRotation, ACTOR_PARTNER, 0, 0, 0)
+    Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar2)
+        CaseEq(MOVE_BELLY_FLOP1)
+            Set(LVarE, 1)
+            Set(LVarF, 3)
+        CaseEq(MOVE_BELLY_FLOP2)
+            Set(LVarE, 2)
+            Set(LVarF, 4)
+        CaseEq(MOVE_BELLY_FLOP3)
+            Set(LVarE, 3)
+            Set(LVarF, 5)
+    EndSwitch
+    Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    IfEq(LVar0, HIT_RESULT_MISS)
+        Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+        Call(LandJump, ACTOR_PARTNER)
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Call(AddGoalPos, ACTOR_PARTNER, 15, 0, 0)
+        Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+        Call(AddGoalPos, ACTOR_PARTNER, 10, 0, 0)
+        Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+        Wait(10)
+        Call(SetGoalToHome, ACTOR_PARTNER)
+        Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
+        Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+        Call(RunToGoal, ACTOR_PARTNER, 0)
+        Return
+    EndIf
+    Thread
+        Wait(3)
+        Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+    EndThread
+    Call(GetPartnerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(0)
+            Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
+        CaseDefault
+            Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, SUPPRESS_EVENT_SPIKY_FRONT, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_51)
+            ExecWait(N(EVS_ReturnHome))
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+            Call(MoveBattleCamOver, 8)
+            ExecWait(N(returnHome2))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(squirt) = {
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_SQUIRT)
-    EVT_CALL(action_command_squirt_init)
-    EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetupMashMeter, 3, 40, 75, 100, 0, 0)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SetupMashMeter, 4, 35, 60, 80, 100, 0)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SetupMashMeter, 5, 20, 40, 60, 80, 100)
-    EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 40)
-    EVT_CALL(InitTargetIterator)
-    EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
-        EVT_WAIT(5)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
-    EVT_END_THREAD
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
-    EVT_CALL(N(SetSquirtAngle))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
-    EVT_CALL(AddBattleCamZoom, -80)
-    EVT_CALL(MoveBattleCamOver, 90 * DT)
-    EVT_CALL(action_command_squirt_start, 0, 87 * DT, 3)
-    EVT_LOOP(90 * DT)
-        EVT_CALL(GetActionQuality, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(GetActorScale, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SETF(LVar1, LVar0)
-            EVT_SUBF(LVar1, EVT_FLOAT(1.0))
-            EVT_DIVF(LVar1, 4)
-            EVT_SUBF(LVar0, LVar1)
-        EVT_ELSE
-            EVT_SETF(LVar0, LVar0)
-            EVT_DIVF(LVar0, 100)
-            EVT_SETF(LVar1, EVT_FLOAT(1.0))
-            EVT_ADDF(LVar0, LVar1)
-        EVT_END_IF
-        EVT_CALL(SetActorScale, ACTOR_SELF, LVar0, LVar0, EVT_FLOAT(1.0))
-        EVT_SETF(LVarE, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_SQUIRT)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(MoveBattleCamOver, 10)
-    EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Squirt)
-        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 10)
-        EVT_ADD(LVar1, 11)
-        EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
-        EVT_CALL(N(GetSquirtTargetPos))
-        EVT_PLAY_EFFECT(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
-        EVT_WAIT(20)
-        EVT_EXEC_WAIT(N(restoreFromSquirt))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Squirt)
-    EVT_THREAD
-        EVT_CALL(N(InflateSushie))
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 10)
-    EVT_ADD(LVar1, 11)
-    EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
-    EVT_PLAY_EFFECT(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
-    EVT_WAIT(10)
-    EVT_CALL(GetActionQuality, LVar0)
-    EVT_CALL(N(GetSquirtDamage))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_HIT_RATTLE)
-        EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_HIT_RATTLE)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(restoreFromSquirt))
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(restoreFromSquirt2))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(LoadActionCommand, ACTION_COMMAND_SQUIRT)
+    Call(action_command_squirt_init)
+    Call(GetActorLevel, ACTOR_PARTNER, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(SetupMashMeter, 3, 40, 75, 100, 0, 0)
+        CaseEq(1)
+            Call(SetupMashMeter, 4, 35, 60, 80, 100, 0)
+        CaseEq(2)
+            Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
+    EndSwitch
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 40)
+    Call(InitTargetIterator)
+    Thread
+        Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Jump)
+        Wait(5)
+        Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
+    EndThread
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(N(SetSquirtAngle))
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
+    Call(AddBattleCamZoom, -80)
+    Call(MoveBattleCamOver, 90 * DT)
+    Call(action_command_squirt_start, 0, 87 * DT, 3)
+    Loop(90 * DT)
+        Call(GetActionQuality, LVar0)
+        IfEq(LVar0, 0)
+            Call(GetActorScale, ACTOR_SELF, LVar0, LVar1, LVar2)
+            SetF(LVar1, LVar0)
+            SubF(LVar1, Float(1.0))
+            DivF(LVar1, 4)
+            SubF(LVar0, LVar1)
+        Else
+            SetF(LVar0, LVar0)
+            DivF(LVar0, 100)
+            SetF(LVar1, Float(1.0))
+            AddF(LVar0, LVar1)
+        EndIf
+        Call(SetActorScale, ACTOR_SELF, LVar0, LVar0, Float(1.0))
+        SetF(LVarE, LVar0)
+        Wait(1)
+    EndLoop
+    Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_SQUIRT)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(MoveBattleCamOver, 10)
+    Call(PartnerTestEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    IfEq(LVar0, HIT_RESULT_MISS)
+        Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Squirt)
+        Call(SetActorScale, ACTOR_SELF, Float(1.0), Float(1.0), Float(1.0))
+        Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+        Add(LVar0, 10)
+        Add(LVar1, 11)
+        Call(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
+        Call(N(GetSquirtTargetPos))
+        PlayEffect(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
+        Wait(20)
+        ExecWait(N(restoreFromSquirt))
+        Return
+    EndIf
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Squirt)
+    Thread
+        Call(N(InflateSushie))
+    EndThread
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Add(LVar0, 10)
+    Add(LVar1, 11)
+    Call(GetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
+    PlayEffect(EFFECT_SQUIRT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, LVarE, 10, 0)
+    Wait(10)
+    Call(GetActionQuality, LVar0)
+    Call(N(GetSquirtDamage))
+    Switch(LVar0)
+        CaseGt(0)
+            Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
+            Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_HIT_RATTLE)
+        CaseDefault
+            Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_EXPLODE_CONTACT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_200, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+            Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_HIT_RATTLE)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            ExecWait(N(restoreFromSquirt))
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+            ExecWait(N(restoreFromSquirt2))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(waterBlock) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, -95, 26, 10)
-    EVT_CALL(SetBattleCamOffsetZ, 11)
-    EVT_CALL(SetBattleCamZoom, 238)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 30)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
-    EVT_CALL(action_command_water_block_init, 0)
-    EVT_CALL(SetActionHudPrepareTime, 0)
-    EVT_SET(LVar0, 0)
-    EVT_LOOP(4)
-        EVT_ADD(LVar0, 45)
-        EVT_CALL(SetActorYaw, ACTOR_PARTNER, LVar0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_WAIT(4)
-    EVT_CALL(action_command_water_block_start, 0, 100, 3)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
-    EVT_WAIT(110)
-    EVT_CALL(GetPartnerActionSuccess, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_SET(LVarA, LVar0)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_SpitArc)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, -95, 27, 10)
-    EVT_CALL(SetBattleCamOffsetZ, 11)
-    EVT_CALL(SetBattleCamZoom, 277)
-    EVT_CALL(MoveBattleCamOver, 10)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_FOUNTAIN)
-        EVT_CALL(N(PlaySquirtFX))
-        EVT_WAIT(65)
-        EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Celebrate)
-    EVT_END_THREAD
-    EVT_WAIT(45)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 83)
-    EVT_PLAY_EFFECT(EFFECT_WATERFALL, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 50, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CREATE_WATER_BLOCK)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 100)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
-        EVT_WAIT(5)
-        EVT_SUB(LVar1, 20)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
-        EVT_WAIT(5)
-        EVT_SUB(LVar1, 20)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
-        EVT_WAIT(5)
-        EVT_SUB(LVar1, 20)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
-        EVT_WAIT(5)
-        EVT_SUB(LVar1, 20)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
-    EVT_END_THREAD
-    EVT_WAIT(40)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(N(PlayWaterBlockFX), LVar0, LVar1, LVar2)
-    EVT_WAIT(30)
-    EVT_CALL(GetPartnerActionSuccess, LVar0)
-    EVT_CALL(N(ApplyWaterBlock))
-    EVT_SET(LVarA, LVar0)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 15)
-    EVT_ADD(LVar1, 35)
-    EVT_ADD(LVarF, 6)
-    EVT_PLAY_EFFECT(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
-    EVT_WAIT(4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(PartnerYieldTurn)
-    EVT_LABEL(10)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
-    EVT_SET(LVar1, 180)
-    EVT_LOOP(4)
-        EVT_SUB(LVar1, 45)
-        EVT_CALL(SetActorYaw, ACTOR_PARTNER, LVar1)
-    EVT_END_LOOP
-    EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
-    EVT_IF_EQ(LVarA, 0)
-    EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_WATER_BLOCK_BEGIN, 60, LVarA)
-    EVT_END_IF
-    EVT_CALL(WaitForMessageBoxDone)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(InitTargetIterator)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, -95, 26, 10)
+    Call(SetBattleCamOffsetZ, 11)
+    Call(SetBattleCamZoom, 238)
+    Call(MoveBattleCamOver, 30)
+    Wait(10)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Inhale)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Add(LVar0, 30)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Call(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
+    Call(action_command_water_block_init, 0)
+    Call(SetActionHudPrepareTime, 0)
+    Set(LVar0, 0)
+    Loop(4)
+        Add(LVar0, 45)
+        Call(SetActorYaw, ACTOR_PARTNER, LVar0)
+        Wait(1)
+    EndLoop
+    Wait(4)
+    Call(action_command_water_block_start, 0, 100, 3)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
+    Wait(110)
+    Call(GetPartnerActionSuccess, LVar0)
+    IfEq(LVar0, 0)
+        Set(LVarA, LVar0)
+        Goto(10)
+    EndIf
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_SpitArc)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, -95, 27, 10)
+    Call(SetBattleCamOffsetZ, 11)
+    Call(SetBattleCamZoom, 277)
+    Call(MoveBattleCamOver, 10)
+    Thread
+        Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_SUSHIE_FOUNTAIN)
+        Call(N(PlaySquirtFX))
+        Wait(65)
+        Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Celebrate)
+    EndThread
+    Wait(45)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 83)
+    PlayEffect(EFFECT_WATERFALL, 0, LVar0, LVar1, LVar2, Float(1.0), 50, 0)
+    Call(PlaySoundAtActor, ACTOR_PARTNER, SOUND_CREATE_WATER_BLOCK)
+    Thread
+        Wait(20)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar1, 100)
+        PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
+        Wait(5)
+        Sub(LVar1, 20)
+        PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
+        Wait(5)
+        Sub(LVar1, 20)
+        PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
+        Wait(5)
+        Sub(LVar1, 20)
+        PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
+        Wait(5)
+        Sub(LVar1, 20)
+        PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 50, 0)
+    EndThread
+    Wait(40)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Call(N(PlayWaterBlockFX), LVar0, LVar1, LVar2)
+    Wait(30)
+    Call(GetPartnerActionSuccess, LVar0)
+    Call(N(ApplyWaterBlock))
+    Set(LVarA, LVar0)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar0, 15)
+    Add(LVar1, 35)
+    Add(LVarF, 6)
+    PlayEffect(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, Float(1.5), 60, 0)
+    Wait(4)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 20)
+    Call(PartnerYieldTurn)
+    Label(10)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Set(LVar1, 180)
+    Loop(4)
+        Sub(LVar1, 45)
+        Call(SetActorYaw, ACTOR_PARTNER, LVar1)
+    EndLoop
+    Call(SetActorYaw, ACTOR_PARTNER, 0)
+    IfEq(LVarA, 0)
+    Else
+        Call(ShowVariableMessageBox, BTL_MSG_WATER_BLOCK_BEGIN, 60, LVarA)
+    EndIf
+    Call(WaitForMessageBoxDone)
+    Return
+    End
 };
 
 EvtScript N(tidalWave) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_TIDAL_WAVE)
-    EVT_CALL(action_command_tidal_wave_init)
-    EVT_CALL(SetupMashMeter, 5, 20, 30, 60, 80, 100)
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(SetBattleCamTarget, -65, 53, 10)
-    EVT_CALL(SetBattleCamOffsetZ, 16)
-    EVT_CALL(SetBattleCamZoom, 214)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(0.5))
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(AddGoalPos, ACTOR_PARTNER, 30, 40, 0)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
-    EVT_CALL(action_command_tidal_wave_start, 0, 100, 3)
-    EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 12, 0)
-    EVT_THREAD
-        EVT_WAIT(54)
-        EVT_LOOP(8)
-            EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, -1, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(7)
-            EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 1, 0, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, -1, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(8)
-            EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 1, 0, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, -2, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
-    EVT_END_THREAD
-    EVT_LOOP(100)
-        EVT_CALL(GetActionQuality, LVar0)
-        EVT_CALL(N(SetScaleTidalWaveCharge))
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 5)
-    EVT_WAIT(10)
-    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
-    EVT_CALL(N(ProcessTidalWave))
-    EVT_CALL(SetActorPos, ACTOR_PARTNER, -220, 0, 0)
-    EVT_CALL(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
-    EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(GetActionSuccessCopy, LVar0)
-    EVT_SET(LVarE, LVar0)
-    EVT_SET(LVarF, LVar0)
-    EVT_CALL(InitTargetIterator)
-    EVT_LOOP(0)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
-        EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_SWITCH(LVarE)
-            EVT_CASE_GE(6)
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
-            EVT_CASE_DEFAULT
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_END_SWITCH
-        EVT_WAIT(5)
-        EVT_LABEL(10)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_EQ(LVar0, ITER_NO_MORE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(AddGoalPos, ACTOR_PARTNER, 0, 150, 0)
-    EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 40, FALSE, TRUE, FALSE)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(0.7))
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(LoadActionCommand, ACTION_COMMAND_TIDAL_WAVE)
+    Call(action_command_tidal_wave_init)
+    Call(SetupMashMeter, 5, 20, 30, 60, 80, 100)
+    Call(InitTargetIterator)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(SetBattleCamTarget, -65, 53, 10)
+    Call(SetBattleCamOffsetZ, 16)
+    Call(SetBattleCamZoom, 214)
+    Call(MoveBattleCamOver, 20)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.5))
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 5, FALSE, TRUE, FALSE)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(AddGoalPos, ACTOR_PARTNER, 30, 40, 0)
+    Call(JumpToGoal, ACTOR_PARTNER, 15, FALSE, TRUE, FALSE)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_HoldWater)
+    Call(action_command_tidal_wave_start, 0, 100, 3)
+    Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 12, 0)
+    Thread
+        Wait(54)
+        Loop(8)
+            Call(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
+            Wait(1)
+            Call(SetActorDispOffset, ACTOR_PARTNER, -1, 0, 0)
+            Wait(1)
+        EndLoop
+        Loop(7)
+            Call(SetActorDispOffset, ACTOR_PARTNER, 1, 0, 0)
+            Wait(1)
+            Call(SetActorDispOffset, ACTOR_PARTNER, -1, 0, 0)
+            Wait(1)
+        EndLoop
+        Loop(8)
+            Call(SetActorDispOffset, ACTOR_PARTNER, 1, 0, 0)
+            Wait(1)
+            Call(SetActorDispOffset, ACTOR_PARTNER, -2, 0, 0)
+            Wait(1)
+        EndLoop
+        Call(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
+    EndThread
+    Loop(100)
+        Call(GetActionQuality, LVar0)
+        Call(N(SetScaleTidalWaveCharge))
+        Wait(1)
+    EndLoop
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 5)
+    Wait(10)
+    Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_ENABLE)
+    Call(N(ProcessTidalWave))
+    Call(SetActorPos, ACTOR_PARTNER, -220, 0, 0)
+    Call(EnableActorBlur, ACTOR_PARTNER, ACTOR_BLUR_DISABLE)
+    Wait(15)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_03)
+    Call(MoveBattleCamOver, 20)
+    Call(GetActionSuccessCopy, LVar0)
+    Set(LVarE, LVar0)
+    Set(LVarF, LVar0)
+    Call(InitTargetIterator)
+    Loop(0)
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 2, BS_FLAGS1_INCLUDE_POWER_UPS)
+        IfEq(LVar0, HIT_RESULT_MISS)
+            Goto(10)
+        EndIf
+        Switch(LVarE)
+            CaseGe(6)
+                Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_NICE_HIT)
+            CaseDefault
+                Call(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+        EndSwitch
+        Wait(5)
+        Label(10)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfEq(LVar0, ITER_NO_MORE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PartnerYieldTurn)
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(AddGoalPos, ACTOR_PARTNER, 0, 150, 0)
+    Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetActorRotationOffset, ACTOR_PARTNER, 0, 0, 0)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Idle)
+    Call(JumpToGoal, ACTOR_PARTNER, 40, FALSE, TRUE, FALSE)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(0.7))
+    Call(JumpToGoal, ACTOR_PARTNER, 20, FALSE, TRUE, FALSE)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, FALSE, TRUE, FALSE)
+    Return
+    End
 };

@@ -2,56 +2,56 @@
 #include "effects.h"
 
 EvtScript N(EVS_FlowerSpawnRegion) = {
-    EVT_SET_GROUP(EVT_GROUP_0B)
+    SetGroup(EVT_GROUP_0B)
     // save input args
-    EVT_SET(LVarA, LVar0) // minX
-    EVT_SET(LVarB, LVar1) // minZ
-    EVT_SET(LVarC, LVar2) // maxX
-    EVT_SET(LVarD, LVar3) // maxZ
-    EVT_SET(LVarE, LVar4) // posY
+    Set(LVarA, LVar0) // minX
+    Set(LVarB, LVar1) // minZ
+    Set(LVarC, LVar2) // maxX
+    Set(LVarD, LVar3) // maxZ
+    Set(LVarE, LVar4) // posY
     // calculate spawn region size
-    EVT_SUB(LVarC, LVar0) // sizeX
-    EVT_SUB(LVarD, LVar1) // sizeZ
+    Sub(LVarC, LVar0) // sizeX
+    Sub(LVarD, LVar1) // sizeZ
     // spawnDelay = 11 + (100.0 / (sizeX / 100.0))
-    EVT_SETF(LVar0, LVarC)
-    EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-    EVT_SETF(LVarF, EVT_FLOAT(100.0))
-    EVT_DIVF(LVarF, LVar0)
-    EVT_ADD(LVarF, 11)
+    SetF(LVar0, LVarC)
+    DivF(LVar0, Float(100.0))
+    SetF(LVarF, Float(100.0))
+    DivF(LVarF, LVar0)
+    Add(LVarF, 11)
     // initial spawn count = 1 + (200 / spawnDelay)
-    EVT_SET(LVar5, 200)
-    EVT_DIV(LVar5, LVarF)
-    EVT_ADD(LVar5, 1)
+    Set(LVar5, 200)
+    Div(LVar5, LVarF)
+    Add(LVar5, 1)
     // spawn intial flowers
-    EVT_LOOP(LVar5)
-        EVT_CALL(RandInt, LVarC, LVar0)
-        EVT_CALL(RandInt, LVarD, LVar1)
-        EVT_CALL(RandInt, 199, LVar2)
-        EVT_SET(LVar3, 210)
-        EVT_SUB(LVar3, LVar2)
-        EVT_ADD(LVar0, LVarA)
-        EVT_ADD(LVar1, LVarB)
-        EVT_ADD(LVar2, LVarE)
-        EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, LVar0, LVar2, LVar1, LVar3, 0)
-    EVT_END_LOOP
-    EVT_WAIT(LVarF)
+    Loop(LVar5)
+        Call(RandInt, LVarC, LVar0)
+        Call(RandInt, LVarD, LVar1)
+        Call(RandInt, 199, LVar2)
+        Set(LVar3, 210)
+        Sub(LVar3, LVar2)
+        Add(LVar0, LVarA)
+        Add(LVar1, LVarB)
+        Add(LVar2, LVarE)
+        PlayEffect(EFFECT_FLOATING_FLOWER, LVar0, LVar2, LVar1, LVar3, 0)
+    EndLoop
+    Wait(LVarF)
     // spawn flowers over time
-    EVT_LABEL(0)
-        EVT_CALL(RandInt, LVarC, LVar0)
-        EVT_CALL(RandInt, LVarD, LVar1)
-        EVT_ADD(LVar0, LVarA)
-        EVT_ADD(LVar1, LVarB)
-        EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, LVar0, LVarE, LVar1, 200, 0)
-        EVT_WAIT(LVarF)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(RandInt, LVarC, LVar0)
+        Call(RandInt, LVarD, LVar1)
+        Add(LVar0, LVarA)
+        Add(LVar1, LVarB)
+        PlayEffect(EFFECT_FLOATING_FLOWER, LVar0, LVarE, LVar1, 200, 0)
+        Wait(LVarF)
+        Goto(0)
+    Return
+    End
 };
 
 #define EVT_FLOWER_SPAWN_REGION(minX, minZ, maxX, maxZ, posY) \
-    EVT_SET(LVar0, minX) \
-    EVT_SET(LVar1, minZ) \
-    EVT_SET(LVar2, maxX) \
-    EVT_SET(LVar3, maxZ) \
-    EVT_SET(LVar4, posY) \
-    EVT_EXEC(N(EVS_FlowerSpawnRegion))
+    Set(LVar0, minX) \
+    Set(LVar1, minZ) \
+    Set(LVar2, maxX) \
+    Set(LVar3, maxZ) \
+    Set(LVar4, posY) \
+    Exec(N(EVS_FlowerSpawnRegion))

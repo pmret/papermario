@@ -6,33 +6,33 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetTexPanner, MODEL_taki1, TEX_PANNER_1)
-    EVT_CALL(EnableTexPanning, MODEL_taki1, TRUE)
-    EVT_THREAD
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetTexPanner, MODEL_taki1, TEX_PANNER_1)
+    Call(EnableTexPanning, MODEL_taki1, TRUE)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_1)
         TEX_PAN_PARAMS_STEP(   0, -2700,   0, -3000)
         TEX_PAN_PARAMS_FREQ(   1,     1,   1,     1)
         TEX_PAN_PARAMS_INIT(   0,     0,   0,     0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_taki2, TEX_PANNER_2)
-    EVT_CALL(EnableTexPanning, MODEL_taki2, TRUE)
-    EVT_THREAD
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_taki2, TEX_PANNER_2)
+    Call(EnableTexPanning, MODEL_taki2, TRUE)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_2)
         TEX_PAN_PARAMS_STEP(   50, -200,  110, -500)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

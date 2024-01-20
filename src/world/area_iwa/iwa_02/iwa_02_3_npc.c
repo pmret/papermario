@@ -124,60 +124,60 @@ NpcData N(NpcData_MontyMole_01)[] = {
 };
 
 EvtScript N(EVS_Bubulb_Conversation) = {
-    EVT_IF_EQ(AF_IWA_SpokeWithBubulb, FALSE)
-        EVT_SET(LVar2, LVar0)
-        EVT_SET(AF_IWA_SpokeWithBubulb, TRUE)
-    EVT_ELSE
-        EVT_SET(LVar2, LVar1)
-        EVT_SET(AF_IWA_SpokeWithBubulb, FALSE)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, LVar2)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_IWA_SpokeWithBubulb, FALSE)
+        Set(LVar2, LVar0)
+        Set(AF_IWA_SpokeWithBubulb, TRUE)
+    Else
+        Set(LVar2, LVar1)
+        Set(AF_IWA_SpokeWithBubulb, FALSE)
+    EndIf
+    Call(SpeakToPlayer, NPC_Bubulb, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, LVar2)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Bubulb) = {
-    EVT_IF_EQ(GF_IWA02_Gift_MagicalSeed2, FALSE)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_PopUp)
-        EVT_WAIT(45)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_Idle)
-        EVT_CALL(SetNpcCollisionSize, NPC_SELF, 45, 26)
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(10.0), 0, 350, EVT_FLOAT(15.0), EVT_FLOAT(-6.5))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH2_001F)
+    IfEq(GF_IWA02_Gift_MagicalSeed2, FALSE)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_BURROW_SURFACE, SOUND_SPACE_DEFAULT)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_MOLE_POP, SOUND_SPACE_DEFAULT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_PopUp)
+        Wait(45)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_Idle)
+        Call(SetNpcCollisionSize, NPC_SELF, 45, 26)
+        Call(AdjustCam, CAM_DEFAULT, Float(10.0), 0, 350, Float(15.0), Float(-6.5))
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH2_001F)
         EVT_GIVE_KEY_REWARD(ITEM_MAGICAL_SEED2)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH2_0020)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(10.0))
-        EVT_SET(GF_IWA02_Gift_MagicalSeed2, TRUE)
-        EVT_CALL(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_IWA_Bubulb_Revealed)
-    EVT_ELSE
-        EVT_SWITCH(GB_StoryProgress)
-            EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-                EVT_SET(LVar0, MSG_CH2_0021)
-                EVT_SET(LVar1, MSG_CH2_0022)
-            EVT_CASE_LT(STORY_CH5_HIDDEN_PASSAGE_OPEN)
-                EVT_SET(LVar0, MSG_CH2_0023)
-                EVT_SET(LVar1, MSG_CH2_0024)
-            EVT_CASE_DEFAULT
-                EVT_SET(LVar0, MSG_CH2_0025)
-                EVT_SET(LVar1, MSG_CH2_0026)
-        EVT_END_SWITCH
-        EVT_EXEC_WAIT(N(EVS_Bubulb_Conversation))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Bubulb_Purple_Talk, ANIM_Bubulb_Purple_Idle, 0, MSG_CH2_0020)
+        Call(ResetCam, CAM_DEFAULT, Float(10.0))
+        Set(GF_IWA02_Gift_MagicalSeed2, TRUE)
+        Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_IWA_Bubulb_Revealed)
+    Else
+        Switch(GB_StoryProgress)
+            CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+                Set(LVar0, MSG_CH2_0021)
+                Set(LVar1, MSG_CH2_0022)
+            CaseLt(STORY_CH5_HIDDEN_PASSAGE_OPEN)
+                Set(LVar0, MSG_CH2_0023)
+                Set(LVar1, MSG_CH2_0024)
+            CaseDefault
+                Set(LVar0, MSG_CH2_0025)
+                Set(LVar1, MSG_CH2_0026)
+        EndSwitch
+        ExecWait(N(EVS_Bubulb_Conversation))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bubulb) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Bubulb)))
-    EVT_IF_EQ(GF_IWA02_Gift_MagicalSeed2, FALSE)
-        EVT_CALL(SetNpcCollisionSize, NPC_SELF, 25, 25)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_BuriedIdle)
-        EVT_CALL(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_IWA_Bubulb_Hidden)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Bubulb)))
+    IfEq(GF_IWA02_Gift_MagicalSeed2, FALSE)
+        Call(SetNpcCollisionSize, NPC_SELF, 25, 25)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Bubulb_Purple_BuriedIdle)
+        Call(SetTattleMessage, NPC_Bubulb, MSG_NpcTattle_IWA_Bubulb_Hidden)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Bubulb) = {

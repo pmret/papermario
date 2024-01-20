@@ -7,134 +7,134 @@
 #define NAME_SUFFIX
 
 EvtScript N(EVS_NpcInteract_Goompapa_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_Outro_0024)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Goompapa_Talk, ANIM_Goompapa_Idle, 0, MSG_Outro_0024)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Goompapa_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Goompapa_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Goompapa_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Goomama_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_Outro_0025)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Goomama_Talk, ANIM_Goomama_Idle, 0, MSG_Outro_0025)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Goomama_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Goomama_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Goomama_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Gooma_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Gooma_Talk, ANIM_Gooma_Idle, 0, MSG_Outro_0026)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Gooma_Talk, ANIM_Gooma_Idle, 0, MSG_Outro_0026)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Gooma_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Gooma_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Gooma_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ChuckQuizmo_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_Outro_0027)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_Outro_0027)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ChuckQuizmo_Epilogue) = {
-    EVT_CALL(SetNpcPos, NPC_ChuckQuizmo, 460, 20, -130)
-    EVT_CALL(SetNpcYaw, NPC_ChuckQuizmo, 90)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ChuckQuizmo_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_ChuckQuizmo, 460, 20, -130)
+    Call(SetNpcYaw, NPC_ChuckQuizmo, 90)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ChuckQuizmo_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_VannaT_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_VannaT_Wave, ANIM_VannaT_Wave, 0, MSG_Outro_003B)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_VannaT_Wave, ANIM_VannaT_Wave, 0, MSG_Outro_003B)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_VannaT_Epilogue) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_VannaT_Happy)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_VannaT_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_VannaT_Happy)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_VannaT_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Chan_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Chan_Run, ANIM_Chan_Idle, 0, MSG_Outro_0029)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Chan_Run, ANIM_Chan_Idle, 0, MSG_Outro_0029)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Chan_Epilogue) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Chan_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Chan_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Lee_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Lee_Talk, ANIM_Lee_Idle, 0, MSG_Outro_002A)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Lee_Talk, ANIM_Lee_Idle, 0, MSG_Outro_002A)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lee_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Lee_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Lee_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_TheMaster_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_Outro_0028)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_TheMaster, ANIM_TheMaster_Talk, ANIM_TheMaster_Idle, 0, MSG_Outro_0028)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TheMaster_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TheMaster_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TheMaster_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_01_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_Toad_01, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_Outro_002B)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Toad_01, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_Outro_002B)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_01_Epilogue) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono3, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono4, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono5, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono6, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_dummy, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono3, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono4, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono5, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_mono6, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_dummy, COLLIDER_FLAGS_UPPER_MASK)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_01_Epilogue)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_HarryT_Epilogue) = {
-    EVT_CALL(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_Outro_003A)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_HarryT, ANIM_HarryT_Talk, ANIM_HarryT_Idle, 0, MSG_Outro_003A)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HarryT_Epilogue) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HarryT_Epilogue)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HarryT_Epilogue)))
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Luigi_Epilogue)[] = {

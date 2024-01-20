@@ -7,8 +7,8 @@
 #include "world/common/entity/SuperBlock.inc.c"
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), 300, 60, 0, 0, MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_HeartBlock), 300, 60, 0, 0, MAKE_ENTITY_END)
     EVT_MAKE_SUPER_BLOCK(-50, 60, 275, 0)
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

@@ -107,10 +107,10 @@ API_CALLABLE(N(SetupAnimatedModel)) {
 }
 
 EvtScript N(EVS_SetupReflection) = {
-    EVT_CALL(N(SetupAnimatedModel))
-    EVT_MALLOC_ARRAY(16, LVarA)
-    EVT_CALL(N(EnablePlayerReflection))
-    EVT_CALL(N(EnablePartnerReflection))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetupAnimatedModel))
+    MallocArray(16, LVarA)
+    Call(N(EnablePlayerReflection))
+    Call(N(EnablePartnerReflection))
+    Return
+    End
 };

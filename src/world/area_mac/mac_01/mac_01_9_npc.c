@@ -50,23 +50,23 @@ s32 N(LetterList_Merlon)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Merlon) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle,
         ITEM_LETTER_TO_MERLON, ITEM_NONE,
         MSG_MAC_Plaza_0043, MSG_MAC_Plaza_0044, MSG_MAC_Plaza_0045, MSG_MAC_Plaza_0046,
-        EVT_PTR(N(LetterList_Merlon)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_Merlon)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_Merlon) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-        EVT_CALL(InterpNpcYaw, NPC_Merlon, 135, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        Call(InterpNpcYaw, NPC_Merlon, 135, 0)
+    EndIf
+    Return
+    End
 };
 
 s32 N(LetterList_MinhT)[] = {
@@ -75,22 +75,22 @@ s32 N(LetterList_MinhT)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_MinhT) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle,
         ITEM_LETTER_TO_MINH_T, ITEM_NONE,
         MSG_MAC_Plaza_0078, MSG_MAC_Plaza_0079, MSG_MAC_Plaza_007A, MSG_MAC_Plaza_007B,
-        EVT_PTR(N(LetterList_MinhT)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_MinhT)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_MinhT) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 s32 N(LetterList_Kolorado)[] = {
@@ -99,22 +99,22 @@ s32 N(LetterList_Kolorado)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_MAC_Plaza_00E0, MSG_MAC_Plaza_00E1, MSG_MAC_Plaza_00E2, MSG_MAC_Plaza_00E3,
-        EVT_PTR(N(LetterList_Kolorado)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_Kolorado)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_Kolorado) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 s32 N(ItemList_Artifact)[] = {
@@ -123,94 +123,94 @@ s32 N(ItemList_Artifact)[] = {
 };
 
 EvtScript N(EVS_ArtifactReward_Kolorado) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E8)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E8)
     EVT_GIVE_STAR_PIECE()
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E9)
-    EVT_SET(GF_SBK_GaveArtifactToKolorado, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E9)
+    Set(GF_SBK_GaveArtifactToKolorado, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ArtifactPrompt_Kolorado) = {
-    EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(FindKeyItem, ITEM_ARTIFACT, LVar0)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(AF_MAC_44, FALSE)
-        EVT_SET(AF_MAC_44, TRUE)
-        EVT_IF_EQ(GF_SBK_KeptArtifactFromKolorado, FALSE)
-            EVT_SET(GF_SBK_KeptArtifactFromKolorado, FALSE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00E4)
-        EVT_ELSE
-            EVT_SET(LVar0, MSG_MAC_Plaza_00E5)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_SET(LVar0, MSG_MAC_Plaza_00E5)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, LVar0)
-    EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
-    EVT_SET(LVar1, 19)
-    EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GE(1)
-            EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
-            EVT_BREAK_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E6)
-            EVT_SET(LVar0, EVT_PTR(N(ItemList_Artifact)))
-            EVT_SET(LVar1, 19)
-            EVT_EXEC_WAIT(N(EVS_ChooseKeyItem))
-            EVT_SWITCH(LVar0)
-                EVT_CASE_GE(1)
-                    EVT_EXEC_WAIT(N(EVS_ArtifactReward_Kolorado))
-                EVT_CASE_DEFAULT
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E7)
-            EVT_END_SWITCH
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_SBK_GaveArtifactToKolorado, TRUE)
+        Return
+    EndIf
+    Call(FindKeyItem, ITEM_ARTIFACT, LVar0)
+    IfEq(LVar0, -1)
+        Return
+    EndIf
+    IfEq(AF_MAC_44, FALSE)
+        Set(AF_MAC_44, TRUE)
+        IfEq(GF_SBK_KeptArtifactFromKolorado, FALSE)
+            Set(GF_SBK_KeptArtifactFromKolorado, FALSE)
+            Set(LVar0, MSG_MAC_Plaza_00E4)
+        Else
+            Set(LVar0, MSG_MAC_Plaza_00E5)
+        EndIf
+    Else
+        Set(LVar0, MSG_MAC_Plaza_00E5)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, LVar0)
+    Set(LVar0, Ref(N(ItemList_Artifact)))
+    Set(LVar1, 19)
+    ExecWait(N(EVS_ChooseKeyItem))
+    Switch(LVar0)
+        CaseGe(1)
+            ExecWait(N(EVS_ArtifactReward_Kolorado))
+            BreakSwitch
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E6)
+            Set(LVar0, Ref(N(ItemList_Artifact)))
+            Set(LVar1, 19)
+            ExecWait(N(EVS_ChooseKeyItem))
+            Switch(LVar0)
+                CaseGe(1)
+                    ExecWait(N(EVS_ArtifactReward_Kolorado))
+                CaseDefault
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00E7)
+            EndSwitch
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(D_8024E6F8_80EF78) = {
-    EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SEQ_SHY_GUY_STEP, SOUND_SPACE_DEFAULT)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(PlaySoundAtNpc, LVar0, SOUND_SEQ_SHY_GUY_STEP, SOUND_SPACE_DEFAULT)
+        Wait(2)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(D_8024E740_80EFC0) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, -80, 30, EASING_COS_IN_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_door, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, -80, 30, EASING_COS_IN_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_door, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(D_8024E7F0_80F070) = {
-    EVT_CALL(MakeLerp, -80, 0, 30, EASING_COS_IN_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_door, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, -80, 0, 30, EASING_COS_IN_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_door, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    Return
+    End
 };
 
 #include "npc/read_fortune.inc.c"
@@ -287,773 +287,773 @@ API_CALLABLE(N(func_802448A0_805120)) {
 }
 
 EvtScript N(EVS_QuickChange_CheckForPound) = {
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_EQ(LVar0, ACTION_STATE_SPIN_POUND)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, ACTION_STATE_TORNADO_POUND)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_LABEL(0)
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(LVar0, ACTION_STATE_SPIN_POUND)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, ACTION_STATE_TORNADO_POUND)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_ADD(GB_MAC01_Merlon_SpinJumpCount, 1)
-    EVT_IF_LT(GB_MAC01_Merlon_SpinJumpCount, 3)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(CheckPositionRelativeToPlane), -380, -245, -225, -408)
-    EVT_IF_EQ(LVar0, ACTION_STATE_IDLE)
-        EVT_SET(LVar2, -232)
-        EVT_SET(LVar4, -331)
-    EVT_ELSE
-        EVT_SET(LVar2, -297)
-        EVT_SET(LVar4, -393)
-    EVT_END_IF
-    EVT_CALL(MakeItemEntity, ITEM_QUICK_CHANGE, LVar2, 220, LVar4, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_MAC01_Item_QuickChange)
-    EVT_WAIT(35)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Run)
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_Merlon, LVar0, LVar1, LVar2, 10)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 15, -8)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PlayerFaceNpc, NPC_Merlon, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 5, MSG_MAC_Plaza_0041)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0042)
-    EVT_SET(GF_MAC01_QuickChangeDropped, TRUE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerActionState, LVar0)
+    IfEq(LVar0, ACTION_STATE_SPIN_POUND)
+        Goto(0)
+    EndIf
+    IfEq(LVar0, ACTION_STATE_TORNADO_POUND)
+        Goto(0)
+    EndIf
+    Return
+    Label(0)
+    Call(GetPlayerActionState, LVar0)
+    Call(DisablePlayerInput, TRUE)
+    Wait(1)
+    Call(DisablePlayerInput, FALSE)
+    IfEq(LVar0, ACTION_STATE_SPIN_POUND)
+        Goto(0)
+    EndIf
+    IfEq(LVar0, ACTION_STATE_TORNADO_POUND)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Add(GB_MAC01_Merlon_SpinJumpCount, 1)
+    IfLt(GB_MAC01_Merlon_SpinJumpCount, 3)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Call(N(CheckPositionRelativeToPlane), -380, -245, -225, -408)
+    IfEq(LVar0, ACTION_STATE_IDLE)
+        Set(LVar2, -232)
+        Set(LVar4, -331)
+    Else
+        Set(LVar2, -297)
+        Set(LVar4, -393)
+    EndIf
+    Call(MakeItemEntity, ITEM_QUICK_CHANGE, LVar2, 220, LVar4, ITEM_SPAWN_MODE_FALL_NEVER_VANISH, GF_MAC01_Item_QuickChange)
+    Wait(35)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Run)
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_Merlon, LVar0, LVar1, LVar2, 10)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamType, CAM_DEFAULT, 0, FALSE)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 250)
+    Call(SetCamPitch, CAM_DEFAULT, 15, -8)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PlayerFaceNpc, NPC_Merlon, FALSE)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 5, MSG_MAC_Plaza_0041)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0042)
+    Set(GF_MAC01_QuickChangeDropped, TRUE)
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupQuickChangeTrigger) = {
-    EVT_IF_EQ(GF_MAC01_QuickChangeDropped, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_QuickChange_CheckForPound)), TRIGGER_FLOOR_TOUCH, COLLIDER_dr_yuka, 1, 0)
-    EVT_ELSE
-        EVT_CALL(MakeItemEntity, ITEM_QUICK_CHANGE, -232, 20, -331, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC01_Item_QuickChange)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_QuickChangeDropped, FALSE)
+        BindTrigger(Ref(N(EVS_QuickChange_CheckForPound)), TRIGGER_FLOOR_TOUCH, COLLIDER_dr_yuka, 1, 0)
+    Else
+        Call(MakeItemEntity, ITEM_QUICK_CHANGE, -232, 20, -331, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_MAC01_Item_QuickChange)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_MerlonShooAway) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_IF_EQ(GF_MAC01_Merlon_Shoo2, TRUE)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_001E, 160, 40)
-                EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_RETURN
-            EVT_END_IF
-            EVT_IF_EQ(GF_MAC01_Merlon_Shoo1, FALSE)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_001C, 160, 40)
-                EVT_SET(GF_MAC01_Merlon_Shoo1, TRUE)
-            EVT_ELSE
-                EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_001D, 160, 40)
-                EVT_SET(GF_MAC01_Merlon_Shoo2, TRUE)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_IF_EQ(GF_MAC01_Merlon_Shoo3, FALSE)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_001F, 160, 40)
-                EVT_SET(GF_MAC01_Merlon_Shoo3, TRUE)
-            EVT_ELSE
-                EVT_EXEC_WAIT(N(EVS_MerlonBargeOut))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            IfEq(GF_MAC01_Merlon_Shoo2, TRUE)
+                Call(ShowMessageAtScreenPos, MSG_MAC_Plaza_001E, 160, 40)
+                Call(DisablePlayerInput, FALSE)
+                Return
+            EndIf
+            IfEq(GF_MAC01_Merlon_Shoo1, FALSE)
+                Call(ShowMessageAtScreenPos, MSG_MAC_Plaza_001C, 160, 40)
+                Set(GF_MAC01_Merlon_Shoo1, TRUE)
+            Else
+                Call(ShowMessageAtScreenPos, MSG_MAC_Plaza_001D, 160, 40)
+                Set(GF_MAC01_Merlon_Shoo2, TRUE)
+            EndIf
+        CaseGe(STORY_CH0_MET_STAR_SPIRITS)
+            IfEq(GF_MAC01_Merlon_Shoo3, FALSE)
+                Call(ShowMessageAtScreenPos, MSG_MAC_Plaza_001F, 160, 40)
+                Set(GF_MAC01_Merlon_Shoo3, TRUE)
+            Else
+                ExecWait(N(EVS_MerlonBargeOut))
+            EndIf
+    EndSwitch
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MerlonBargeOut) = {
-    EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_0020, 160, 40)
-    EVT_CALL(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_VISIBLE)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, 0, -80, 15, EASING_COS_FAST_OVERSHOOT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_door, LVar0, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(1)
-        EVT_CALL(DisablePlayerPhysics, TRUE)
-        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
-        EVT_CALL(InterpPlayerYaw, 270, 0)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Hurt)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-        EVT_CALL(PlayerJump1, -222, 20, -158, 8 * DT)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
-        EVT_CALL(N(KnockdownCreate), SPR_Mario1, 37) //TODO hardcoded player raster ID
-        EVT_CALL(N(KnockdownSetPos), -215, 20, -158)
-        EVT_WAIT(1)
-        EVT_CALL(SetPlayerPos, -215, 1000, -158)
-        EVT_CALL(MakeLerp, 0, 90, 10 * DT, EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(KnockdownSetRot), LVar0, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(N(KnockdownSetPos), -215, 21, -158)
-        EVT_CALL(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_WAIT(50 * DT)
-    EVT_CALL(SetNpcPos, NPC_Merlon, -241, 20, -270)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merlon, -168, -198, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_CALL(GetAngleToPlayer, NPC_Merlon, LVar0)
-    EVT_CALL(InterpNpcYaw, NPC_Merlon, LVar0, 5)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0021)
-    EVT_CALL(N(KnockdownSetPos), -215, 20, -158)
-    EVT_CALL(MakeLerp, 90, 0, 15 * DT, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(KnockdownSetRot), LVar0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerPos, -222, 20, -158)
-    EVT_CALL(N(KnockdownDestroy))
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 15 * DT)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0022)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Merlon, -275, -305, 30 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-        EVT_CALL(SetNpcPos, NPC_Merlon, -337, 20, -360)
-        EVT_CALL(SetNpcYaw, NPC_Merlon, 135)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, -168, -198, 20 * DT)
-    EVT_CALL(PlayerMoveTo, -275, -305, 30 * DT)
-    EVT_EXEC(N(D_8024E7F0_80F070))
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -240, 20, -284)
-    EVT_CALL(N(func_802447E0_805060))
-    EVT_THREAD
-        EVT_SET(LVarF, 53)
-        EVT_SET(LVar0, 0)
-        EVT_CALL(N(func_802448A0_805120))
-    EVT_END_THREAD
-    EVT_CALL(RotateGroup, MODEL_off_kabe, 180, 0, 1, 0)
-    EVT_SET(MF_MusicMixTrigger1, TRUE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -250, 20, -280)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(N(func_80244848_8050C8))
-    EVT_CALL(InterpNpcYaw, NPC_Merlon, 135, 5)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0023)
-    EVT_CALL(N(func_802447E0_805060))
-    EVT_WAIT(60 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_THREAD
-        EVT_CALL(N(func_80244848_8050C8))
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_CALL(ContinueSpeech, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0024)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_NodYesTwice)
-    EVT_WAIT(50 * DT)
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 200)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 15, -10)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0025)
-    EVT_SET(GB_StoryProgress, STORY_CH1_SPOKE_WITH_MERLIN)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
-    EVT_THREAD
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(AwaitPlayerLeave, -280, -300, 40)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(ShowMessageAtScreenPos, MSG_MAC_Plaza_0020, 160, 40)
+    Call(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_VISIBLE)
+    Thread
+        Call(PlaySoundAtCollider, COLLIDER_deilitd, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, 0, -80, 15, EASING_COS_FAST_OVERSHOOT)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_door, LVar0, 0, 1, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(2.0))
+    EndThread
+    Thread
+        Wait(1)
+        Call(DisablePlayerPhysics, TRUE)
+        Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, TRUE)
+        Call(InterpPlayerYaw, 270, 0)
+        Wait(1)
+        Call(SetPlayerAnimation, ANIM_Mario1_Hurt)
+        Call(SetPlayerJumpscale, Float(1.0))
+        Call(PlayerJump1, -222, 20, -158, 8 * DT)
+        Wait(5 * DT)
+        Call(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
+        Call(N(KnockdownCreate), SPR_Mario1, 37) //TODO hardcoded player raster ID
+        Call(N(KnockdownSetPos), -215, 20, -158)
+        Wait(1)
+        Call(SetPlayerPos, -215, 1000, -158)
+        Call(MakeLerp, 0, 90, 10 * DT, EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(N(KnockdownSetRot), LVar0, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(N(KnockdownSetPos), -215, 21, -158)
+        Call(PlaySoundAtPlayer, SOUND_TRIP, SOUND_SPACE_DEFAULT)
+    EndThread
+    Wait(50 * DT)
+    Call(SetNpcPos, NPC_Merlon, -241, 20, -270)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+    Call(NpcMoveTo, NPC_Merlon, -168, -198, 20 * DT)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Call(GetAngleToPlayer, NPC_Merlon, LVar0)
+    Call(InterpNpcYaw, NPC_Merlon, LVar0, 5)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0021)
+    Call(N(KnockdownSetPos), -215, 20, -158)
+    Call(MakeLerp, 90, 0, 15 * DT, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(KnockdownSetRot), LVar0, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetPlayerPos, -222, 20, -158)
+    Call(N(KnockdownDestroy))
+    Call(InterpPlayerYaw, 90, 0)
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Call(SetPlayerJumpscale, Float(1.0))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(PlayerJump, LVar0, LVar1, LVar2, 15 * DT)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0022)
+    Thread
+        Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+        Call(NpcMoveTo, NPC_Merlon, -275, -305, 30 * DT)
+        Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+        Call(SetNpcPos, NPC_Merlon, -337, 20, -360)
+        Call(SetNpcYaw, NPC_Merlon, 135)
+    EndThread
+    Call(PlayerMoveTo, -168, -198, 20 * DT)
+    Call(PlayerMoveTo, -275, -305, 30 * DT)
+    Exec(N(D_8024E7F0_80F070))
+    Wait(5 * DT)
+    Call(SetNpcPos, NPC_PARTNER, -240, 20, -284)
+    Call(N(func_802447E0_805060))
+    Thread
+        Set(LVarF, 53)
+        Set(LVar0, 0)
+        Call(N(func_802448A0_805120))
+    EndThread
+    Call(RotateGroup, MODEL_off_kabe, 180, 0, 1, 0)
+    Set(MF_MusicMixTrigger1, TRUE)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(UseSettingsFrom, CAM_DEFAULT, -250, 20, -280)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(30 * DT)
+    Call(N(func_80244848_8050C8))
+    Call(InterpNpcYaw, NPC_Merlon, 135, 5)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0023)
+    Call(N(func_802447E0_805060))
+    Wait(60 * DT)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    Thread
+        Call(N(func_80244848_8050C8))
+    EndThread
+    Wait(10 * DT)
+    Call(ContinueSpeech, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0024)
+    Call(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_MarioW2_NodYesTwice)
+    Wait(50 * DT)
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Call(SetCamType, CAM_DEFAULT, 0, FALSE)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 200)
+    Call(SetCamPitch, CAM_DEFAULT, 15, -10)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0025)
+    Set(GB_StoryProgress, STORY_CH1_SPOKE_WITH_MERLIN)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
+    Thread
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+        Call(AwaitPlayerLeave, -280, -300, 40)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(D_80250D14_811594) = {
-    EVT_CALL(AwaitPlayerApproach, -130, -110, 150)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
-    EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(NpcMoveTo, NPC_Merlon, 0, 0, 0)
-    EVT_CALL(NpcMoveTo, NPC_Merlon, 410, 0, 0)
-    EVT_CALL(SetNpcPos, NPC_Merlon, 410, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
-    EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(AwaitPlayerApproach, -130, -110, 150)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 1)
+    Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, TRUE)
+    Call(NpcMoveTo, NPC_Merlon, 0, 0, 0)
+    Call(NpcMoveTo, NPC_Merlon, 410, 0, 0)
+    Call(SetNpcPos, NPC_Merlon, 410, 0, 0)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_CANT_INTERACT, 0)
+    Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_GRAVITY, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
-    EVT_CALL(SetNpcVar, NPC_Merlon, 0, 0)
-    EVT_CALL(func_802CF56C, 2)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-        EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(4.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_Merlon, 410, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-        EVT_CALL(InterpNpcYaw, NPC_Merlon, 90, 0)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_DarkToad_01, ANIM_DarkToad_Red_Talk, ANIM_DarkToad_Red_Idle, 0, MSG_MAC_Plaza_0029)
-    EVT_CALL(SpeakToPlayer, NPC_DarkToad_02, ANIM_DarkToad_Black_Talk, ANIM_DarkToad_Black_Idle, 0, MSG_MAC_Plaza_002A)
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-        EVT_IF_GE(LVar0, 410)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0), 410, 0, 0, 320, 15, -6)
-    EVT_THREAD
-        EVT_WAIT(5 * DT)
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-        EVT_CALL(PlayerMoveTo, 460, 0, 0)
-        EVT_CALL(PlayerFaceNpc, NPC_Merlon, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_002B)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 480, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_WAIT(5 * DT)
-        EVT_CALL(PlayerFaceNpc, NPC_DarkToad_01, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Dismiss, ANIM_DarkToad_Yellow_Idle, 0, MSG_MAC_Plaza_002C)
-    EVT_CALL(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Dismiss, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_002D)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 410, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_WAIT(5 * DT)
-        EVT_CALL(PlayerFaceNpc, NPC_Merlon, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_002E)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PlaySoundAtNpc, NPC_Merlon, SOUND_MERLON_GATHER, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Gather1)
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 10)
-    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 12, LVar0, LVar1, LVar2, 1, 50)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_RaiseArms)
-    EVT_WAIT(5 * DT)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, 1, 20)
-    EVT_ADD(LVar1, 180)
-    EVT_CALL(PlayerFaceNpc, NPC_DarkToad_01, FALSE)
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0 / DT), 480, 0, 0, 320, 15, -6)
-    EVT_CALL(PushSong, SONG_KOOPA_BROS_THEME, 0)
-    EVT_THREAD
-        EVT_SET(MF_KoopaBrosSceneLock, FALSE)
-        EVT_WAIT(5)
-        EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Hurt, ANIM_KoopaBros_Red_Hurt, 5, MSG_MAC_Plaza_002F)
-        EVT_SET(MF_KoopaBrosSceneLock, TRUE)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_DarkToad_01, LVar3, LVar4, LVar5)
-        EVT_ADD(LVar5, 5)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
-        EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
-        EVT_CALL(SetNpcAnimation, NPC_DarkToad_01, ANIM_DarkToad_Red_Hurt)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_DarkToad_01, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcPos, NPC_DarkToad_01, LVar3, NPC_DISPOSE_POS_Y, LVar2)
-        EVT_CALL(SetNpcPos, NPC_KoopaBros_01, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_01, EVT_FLOAT(1.0))
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Hurt)
-        EVT_CALL(NpcJump0, NPC_KoopaBros_01, LVar3, LVar4, LVar5, 10 * DT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_DarkToad_02, LVar3, LVar4, LVar5)
-        EVT_ADD(LVar5, 5)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
-        EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
-        EVT_CALL(SetNpcAnimation, NPC_DarkToad_02, ANIM_DarkToad_Black_Hurt)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_02, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_DarkToad_02, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcPos, NPC_DarkToad_02, LVar3, NPC_DISPOSE_POS_Y, LVar2)
-        EVT_CALL(SetNpcPos, NPC_KoopaBros_02, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_02, EVT_FLOAT(1.0))
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Hurt)
-        EVT_CALL(NpcJump0, NPC_KoopaBros_02, LVar3, LVar4, LVar5, 10 * DT)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(20 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_DarkToad_03, LVar3, LVar4, LVar5)
-        EVT_ADD(LVar5, 5)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
-        EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
-        EVT_CALL(SetNpcAnimation, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Hurt)
-        EVT_WAIT(5 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_03, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
-        EVT_CALL(GetNpcPos, NPC_DarkToad_03, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcPos, NPC_DarkToad_03, LVar3, NPC_DISPOSE_POS_Y, LVar2)
-        EVT_CALL(SetNpcPos, NPC_KoopaBros_03, LVar3, LVar4, LVar5)
-        EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_03, EVT_FLOAT(1.0))
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Hurt)
-        EVT_CALL(NpcJump0, NPC_KoopaBros_03, LVar3, LVar4, LVar5, 10 * DT)
-    EVT_END_THREAD
-    EVT_WAIT(30 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetNpcPos, NPC_DarkToad_04, LVar3, LVar4, LVar5)
-    EVT_ADD(LVar5, 5)
-    EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
-    EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
-    EVT_CALL(SetNpcAnimation, NPC_DarkToad_04, ANIM_DarkToad_Green_Hurt)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_DarkToad_04, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetNpcPos, NPC_DarkToad_04, LVar3, LVar4, LVar5)
-    EVT_CALL(SetNpcPos, NPC_DarkToad_04, LVar3, NPC_DISPOSE_POS_Y, LVar2)
-    EVT_CALL(SetNpcPos, NPC_KoopaBros_04, LVar3, LVar4, LVar5)
-    EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_04, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Hurt)
-    EVT_CALL(NpcJump0, NPC_KoopaBros_04, LVar3, LVar4, LVar5, 10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_LOOP(0)
-        EVT_IF_EQ(MF_KoopaBrosSceneLock, TRUE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0030)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 0, MSG_MAC_Plaza_0031)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 5, MSG_MAC_Plaza_0032)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros_02, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros_03, 90, 0)
-    EVT_CALL(InterpNpcYaw, NPC_KoopaBros_04, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Run)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Run)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Run)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Run)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_KoopaBros_01, EVT_FLOAT(8.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_KoopaBros_01, 700, 0, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_KoopaBros_02, EVT_FLOAT(8.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_KoopaBros_02, 700, 0, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_KoopaBros_03, EVT_FLOAT(8.0 / DT))
-        EVT_CALL(NpcMoveTo, NPC_KoopaBros_03, 700, 0, 0)
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_CALL(SetNpcSpeed, NPC_KoopaBros_04, EVT_FLOAT(8.0 / DT))
-    EVT_CALL(NpcMoveTo, NPC_KoopaBros_04, 700, 0, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(PopSong)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 410, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_WAIT(3)
-        EVT_CALL(PlayerFaceNpc, NPC_Merlon, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0033)
-    EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar0)
-    EVT_ADD(LVar3, -50)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merlon, LVar3, LVar2, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merlon, LVar0, LVar2, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0034)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
+    Call(SetNpcVar, NPC_Merlon, 0, 0)
+    Call(func_802CF56C, 2)
+    Thread
+        Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+        Call(SetNpcSpeed, NPC_Merlon, Float(4.0 / DT))
+        Call(NpcMoveTo, NPC_Merlon, 410, 0, 0)
+        Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+        Call(InterpNpcYaw, NPC_Merlon, 90, 0)
+    EndThread
+    Call(SpeakToPlayer, NPC_DarkToad_01, ANIM_DarkToad_Red_Talk, ANIM_DarkToad_Red_Idle, 0, MSG_MAC_Plaza_0029)
+    Call(SpeakToPlayer, NPC_DarkToad_02, ANIM_DarkToad_Black_Talk, ANIM_DarkToad_Black_Idle, 0, MSG_MAC_Plaza_002A)
+    Loop(0)
+        Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+        IfGe(LVar0, 410)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetCamProperties, CAM_DEFAULT, Float(4.0), 410, 0, 0, 320, 15, -6)
+    Thread
+        Wait(5 * DT)
+        Call(SetPlayerSpeed, Float(3.0 / DT))
+        Call(PlayerMoveTo, 460, 0, 0)
+        Call(PlayerFaceNpc, NPC_Merlon, FALSE)
+    EndThread
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_002B)
+    Call(SetPanTarget, CAM_DEFAULT, 480, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Wait(5 * DT)
+        Call(PlayerFaceNpc, NPC_DarkToad_01, FALSE)
+    EndThread
+    Call(SpeakToPlayer, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Dismiss, ANIM_DarkToad_Yellow_Idle, 0, MSG_MAC_Plaza_002C)
+    Call(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Dismiss, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_002D)
+    Call(SetPanTarget, CAM_DEFAULT, 410, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Wait(5 * DT)
+        Call(PlayerFaceNpc, NPC_Merlon, FALSE)
+    EndThread
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_002E)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PlaySoundAtNpc, NPC_Merlon, SOUND_MERLON_GATHER, SOUND_SPACE_DEFAULT)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Gather1)
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Add(LVar1, 10)
+    PlayEffect(EFFECT_RADIAL_SHIMMER, 12, LVar0, LVar1, LVar2, 1, 50)
+    Wait(60 * DT)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_RaiseArms)
+    Wait(5 * DT)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, 1, 20)
+    Add(LVar1, 180)
+    Call(PlayerFaceNpc, NPC_DarkToad_01, FALSE)
+    Call(SetCamProperties, CAM_DEFAULT, Float(4.0 / DT), 480, 0, 0, 320, 15, -6)
+    Call(PushSong, SONG_KOOPA_BROS_THEME, 0)
+    Thread
+        Set(MF_KoopaBrosSceneLock, FALSE)
+        Wait(5)
+        Call(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Hurt, ANIM_KoopaBros_Red_Hurt, 5, MSG_MAC_Plaza_002F)
+        Set(MF_KoopaBrosSceneLock, TRUE)
+    EndThread
+    Thread
+        Call(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_DarkToad_01, LVar3, LVar4, LVar5)
+        Add(LVar5, 5)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
+        PlayEffect(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
+        Call(SetNpcAnimation, NPC_DarkToad_01, ANIM_DarkToad_Red_Hurt)
+        Wait(5 * DT)
+        Call(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_DarkToad_01, LVar3, LVar4, LVar5)
+        Call(SetNpcPos, NPC_DarkToad_01, LVar3, NPC_DISPOSE_POS_Y, LVar2)
+        Call(SetNpcPos, NPC_KoopaBros_01, LVar3, LVar4, LVar5)
+        Call(SetNpcJumpscale, NPC_KoopaBros_01, Float(1.0))
+        Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Hurt)
+        Call(NpcJump0, NPC_KoopaBros_01, LVar3, LVar4, LVar5, 10 * DT)
+    EndThread
+    Thread
+        Wait(10 * DT)
+        Call(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_DarkToad_02, LVar3, LVar4, LVar5)
+        Add(LVar5, 5)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
+        PlayEffect(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
+        Call(SetNpcAnimation, NPC_DarkToad_02, ANIM_DarkToad_Black_Hurt)
+        Wait(5 * DT)
+        Call(PlaySoundAtNpc, NPC_DarkToad_02, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_DarkToad_02, LVar3, LVar4, LVar5)
+        Call(SetNpcPos, NPC_DarkToad_02, LVar3, NPC_DISPOSE_POS_Y, LVar2)
+        Call(SetNpcPos, NPC_KoopaBros_02, LVar3, LVar4, LVar5)
+        Call(SetNpcJumpscale, NPC_KoopaBros_02, Float(1.0))
+        Call(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Hurt)
+        Call(NpcJump0, NPC_KoopaBros_02, LVar3, LVar4, LVar5, 10 * DT)
+    EndThread
+    Thread
+        Wait(20 * DT)
+        Call(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_DarkToad_03, LVar3, LVar4, LVar5)
+        Add(LVar5, 5)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
+        PlayEffect(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
+        Call(SetNpcAnimation, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Hurt)
+        Wait(5 * DT)
+        Call(PlaySoundAtNpc, NPC_DarkToad_03, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
+        Call(GetNpcPos, NPC_DarkToad_03, LVar3, LVar4, LVar5)
+        Call(SetNpcPos, NPC_DarkToad_03, LVar3, NPC_DISPOSE_POS_Y, LVar2)
+        Call(SetNpcPos, NPC_KoopaBros_03, LVar3, LVar4, LVar5)
+        Call(SetNpcJumpscale, NPC_KoopaBros_03, Float(1.0))
+        Call(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Hurt)
+        Call(NpcJump0, NPC_KoopaBros_03, LVar3, LVar4, LVar5, 10 * DT)
+    EndThread
+    Wait(30 * DT)
+    Call(PlaySoundAtNpc, NPC_DarkToad_01, SOUND_MERLON_STRIKE, SOUND_SPACE_DEFAULT)
+    Call(GetNpcPos, NPC_DarkToad_04, LVar3, LVar4, LVar5)
+    Add(LVar5, 5)
+    PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 2, 20)
+    PlayEffect(EFFECT_SHIMMER_BURST, 1, LVar3, LVar4, LVar5, 1, 30)
+    Call(SetNpcAnimation, NPC_DarkToad_04, ANIM_DarkToad_Green_Hurt)
+    Wait(5 * DT)
+    Call(PlaySoundAtNpc, NPC_DarkToad_04, SOUND_DARK_TOAD_DISPEL, SOUND_SPACE_DEFAULT)
+    Call(GetNpcPos, NPC_DarkToad_04, LVar3, LVar4, LVar5)
+    Call(SetNpcPos, NPC_DarkToad_04, LVar3, NPC_DISPOSE_POS_Y, LVar2)
+    Call(SetNpcPos, NPC_KoopaBros_04, LVar3, LVar4, LVar5)
+    Call(SetNpcJumpscale, NPC_KoopaBros_04, Float(1.0))
+    Call(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Hurt)
+    Call(NpcJump0, NPC_KoopaBros_04, LVar3, LVar4, LVar5, 10 * DT)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Loop(0)
+        IfEq(MF_KoopaBrosSceneLock, TRUE)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Idle)
+    Call(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Idle)
+    Call(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Idle)
+    Call(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Idle)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0030)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 0, MSG_MAC_Plaza_0031)
+    Call(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 5, MSG_MAC_Plaza_0032)
+    Call(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
+    Call(InterpNpcYaw, NPC_KoopaBros_02, 90, 0)
+    Call(InterpNpcYaw, NPC_KoopaBros_03, 90, 0)
+    Call(InterpNpcYaw, NPC_KoopaBros_04, 90, 0)
+    Call(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Run)
+    Call(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Run)
+    Call(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Run)
+    Call(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Run)
+    Wait(15 * DT)
+    Call(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    Thread
+        Call(SetNpcSpeed, NPC_KoopaBros_01, Float(8.0 / DT))
+        Call(NpcMoveTo, NPC_KoopaBros_01, 700, 0, 0)
+    EndThread
+    Thread
+        Call(SetNpcSpeed, NPC_KoopaBros_02, Float(8.0 / DT))
+        Call(NpcMoveTo, NPC_KoopaBros_02, 700, 0, 0)
+    EndThread
+    Thread
+        Call(SetNpcSpeed, NPC_KoopaBros_03, Float(8.0 / DT))
+        Call(NpcMoveTo, NPC_KoopaBros_03, 700, 0, 0)
+    EndThread
+    Wait(1)
+    Call(SetNpcSpeed, NPC_KoopaBros_04, Float(8.0 / DT))
+    Call(NpcMoveTo, NPC_KoopaBros_04, 700, 0, 0)
+    Wait(10 * DT)
+    Call(PopSong)
+    Call(SetPanTarget, CAM_DEFAULT, 410, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Wait(3)
+        Call(PlayerFaceNpc, NPC_Merlon, FALSE)
+    EndThread
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0033)
+    Call(SetNpcSpeed, NPC_Merlon, Float(3.0 / DT))
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar0)
+    Add(LVar3, -50)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+    Call(NpcMoveTo, NPC_Merlon, LVar3, LVar2, 0)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Wait(10 * DT)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+    Call(NpcMoveTo, NPC_Merlon, LVar0, LVar2, 0)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0034)
+    Thread
+        Wait(10 * DT)
 #if VERSION_PAL
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.6669921875))
+        Call(ResetCam, CAM_DEFAULT, Float(1.6669921875))
 #else
-        EVT_CALL(ResetCam, CAM_DEFAULT, 2)
+        Call(ResetCam, CAM_DEFAULT, 2)
 #endif
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -150)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Merlon, LVar0, LVar2, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-    EVT_CALL(InterpNpcYaw, NPC_Merlon, 133, 0)
-    EVT_CALL(SetNpcPos, NPC_Merlon, -337, 20, -360)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(GB_StoryProgress, STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-    EVT_SET(AF_MAC_0E, FALSE)
-    EVT_SET(AF_MAC_0F, FALSE)
-    EVT_SET(AF_MAC_10, FALSE)
-    EVT_SET(AF_MAC_11, FALSE)
-    EVT_SET(AF_MAC_12, FALSE)
-    EVT_SET(AF_MAC_13, FALSE)
-    EVT_SET(AF_MAC_14, FALSE)
-    EVT_CALL(RemoveEncounter, NPC_KoopaBros_01)
-    EVT_RETURN
-    EVT_END
+    EndThread
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Add(LVar0, -150)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+    Call(NpcMoveTo, NPC_Merlon, LVar0, LVar2, 0)
+    Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+    Call(InterpNpcYaw, NPC_Merlon, 133, 0)
+    Call(SetNpcPos, NPC_Merlon, -337, 20, -360)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt, COLLIDER_FLAGS_UPPER_MASK)
+    Set(GB_StoryProgress, STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+    Set(AF_MAC_0E, FALSE)
+    Set(AF_MAC_0F, FALSE)
+    Set(AF_MAC_10, FALSE)
+    Set(AF_MAC_11, FALSE)
+    Set(AF_MAC_12, FALSE)
+    Set(AF_MAC_13, FALSE)
+    Set(AF_MAC_14, FALSE)
+    Call(RemoveEncounter, NPC_KoopaBros_01)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Merlon) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
-            EVT_IF_EQ(GF_MAC01_Merlon_HintFromDarkToads, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0026)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0027)
-                EVT_SET(GB_StoryProgress, STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
-                EVT_CHILD_THREAD
-                    EVT_LOOP(0)
-                        EVT_CALL(PlayerFaceNpc, NPC_Merlon, FALSE)
-                        EVT_WAIT(1)
-                    EVT_END_LOOP
-                EVT_END_CHILD_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-                EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(4.0 / DT))
-                EVT_CALL(NpcMoveTo, NPC_Merlon, -350, -280, 0)
-                EVT_CALL(NpcMoveTo, NPC_Merlon, -230, -270, 0)
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-                EVT_CALL(MakeLerp, 0, -80, 15, EASING_LINEAR)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(RotateModel, MODEL_door, LVar0, 0, 1, 0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-                EVT_CALL(NpcMoveTo, NPC_Merlon, -163, -217, 0)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(MakeLerp, -80, 0, 15, EASING_LINEAR)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(RotateModel, MODEL_door, LVar0, 0, 1, 0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-                EVT_CALL(SetNpcPos, NPC_SELF, -150, 10, -160)
-                EVT_CALL(SetNpcYaw, NPC_Merlon, 90)
-                EVT_EXEC(N(D_80250D14_811594))
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0028)
-        EVT_CASE_LT(STORY_CH1_KOOPER_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0035)
-        EVT_CASE_EQ(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_004C)
-        EVT_CASE_GE(STORY_CH3_GOT_SUPER_BOOTS)
-            EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_003E)
-                EVT_IF_GE(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
-                    EVT_IF_LT(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
-                        EVT_SET(LVar0, MSG_MAC_Plaza_003D)
-                    EVT_END_IF
-                EVT_END_IF
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, LVar0)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(GetNpcPos, NPC_Merlon, LVar3, LVar4, LVar5)
-                EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                EVT_ADDF(LVar0, LVar3)
-                EVT_ADDF(LVar1, LVar4)
-                EVT_ADDF(LVar2, LVar5)
-                EVT_DIVF(LVar0, EVT_FLOAT(2.0))
-                EVT_DIVF(LVar1, EVT_FLOAT(2.0))
-                EVT_DIVF(LVar2, EVT_FLOAT(2.0))
-                EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-                EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0))
-                EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-                EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_003F)
-                EVT_THREAD
-                    EVT_LOOP(0)
-                        EVT_CALL(PlayerFaceNpc, NPC_Merlon, FALSE)
-                        EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, TRUE)
-                            EVT_BREAK_LOOP
-                        EVT_END_IF
-                        EVT_WAIT(1)
-                    EVT_END_LOOP
-                EVT_END_THREAD
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-                EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(3.0))
-                EVT_CALL(NpcMoveTo, NPC_Merlon, -170, -225, 0)
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-                EVT_CALL(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_VISIBLE)
-                EVT_EXEC_WAIT(N(D_8024E740_80EFC0))
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
-                EVT_CALL(SetNpcSpeed, NPC_Merlon, EVT_FLOAT(3.0))
-                EVT_CALL(NpcMoveTo, NPC_Merlon, -265, -300, 0)
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
-                EVT_EXEC_WAIT(N(D_8024E7F0_80F070))
-                EVT_CALL(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_HIDDEN)
-                EVT_SET(GF_MAC01_Merlon_HeardAboutDream, TRUE)
-                EVT_CALL(InterpNpcYaw, NPC_Merlon, 133, 0)
-                EVT_CALL(SetNpcPos, NPC_Merlon, -337, 20, -360)
-                EVT_CALL(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-                EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0))
-                EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-                EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-                EVT_RETURN
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC01_QuickChangeDropped, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0040)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_003B)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_003B)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Merlon))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Merlon))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
+            IfEq(GF_MAC01_Merlon_HintFromDarkToads, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0026)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0027)
+                Set(GB_StoryProgress, STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
+                ChildThread
+                    Loop(0)
+                        Call(PlayerFaceNpc, NPC_Merlon, FALSE)
+                        Wait(1)
+                    EndLoop
+                EndChildThread
+                Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+                Call(SetNpcSpeed, NPC_Merlon, Float(4.0 / DT))
+                Call(NpcMoveTo, NPC_Merlon, -350, -280, 0)
+                Call(NpcMoveTo, NPC_Merlon, -230, -270, 0)
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+                Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                Call(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+                Call(MakeLerp, 0, -80, 15, EASING_LINEAR)
+                Loop(0)
+                    Call(UpdateLerp)
+                    Call(RotateModel, MODEL_door, LVar0, 0, 1, 0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+                Call(NpcMoveTo, NPC_Merlon, -163, -217, 0)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+                Call(MakeLerp, -80, 0, 15, EASING_LINEAR)
+                Loop(0)
+                    Call(UpdateLerp)
+                    Call(RotateModel, MODEL_door, LVar0, 0, 1, 0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+                Call(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+                Call(SetNpcPos, NPC_SELF, -150, 10, -160)
+                Call(SetNpcYaw, NPC_Merlon, 90)
+                Exec(N(D_80250D14_811594))
+            EndIf
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0028)
+        CaseLt(STORY_CH1_KOOPER_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0035)
+        CaseEq(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_004C)
+        CaseGe(STORY_CH3_GOT_SUPER_BOOTS)
+            IfEq(GF_MAC01_Merlon_HeardAboutDream, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_003E)
+                IfGe(GB_StoryProgress, STORY_CH4_FRYING_PAN_STOLEN)
+                    IfLt(GB_StoryProgress, STORY_CH4_STAR_SPRIT_DEPARTED)
+                        Set(LVar0, MSG_MAC_Plaza_003D)
+                    EndIf
+                EndIf
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, LVar0)
+                Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Call(GetNpcPos, NPC_Merlon, LVar3, LVar4, LVar5)
+                Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                AddF(LVar0, LVar3)
+                AddF(LVar1, LVar4)
+                AddF(LVar2, LVar5)
+                DivF(LVar0, Float(2.0))
+                DivF(LVar1, Float(2.0))
+                DivF(LVar2, Float(2.0))
+                Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+                Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
+                Call(PanToTarget, CAM_DEFAULT, 0, 1)
+                Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_003F)
+                Thread
+                    Loop(0)
+                        Call(PlayerFaceNpc, NPC_Merlon, FALSE)
+                        IfEq(GF_MAC01_Merlon_HeardAboutDream, TRUE)
+                            BreakLoop
+                        EndIf
+                        Wait(1)
+                    EndLoop
+                EndThread
+                Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+                Call(SetNpcSpeed, NPC_Merlon, Float(3.0))
+                Call(NpcMoveTo, NPC_Merlon, -170, -225, 0)
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+                Call(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_VISIBLE)
+                ExecWait(N(D_8024E740_80EFC0))
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Walk)
+                Call(SetNpcSpeed, NPC_Merlon, Float(3.0))
+                Call(NpcMoveTo, NPC_Merlon, -265, -300, 0)
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
+                ExecWait(N(D_8024E7F0_80F070))
+                Call(SetGroupVisibility, MODEL_dr_in, MODEL_GROUP_HIDDEN)
+                Set(GF_MAC01_Merlon_HeardAboutDream, TRUE)
+                Call(InterpNpcYaw, NPC_Merlon, 133, 0)
+                Call(SetNpcPos, NPC_Merlon, -337, 20, -360)
+                Call(SetNpcFlagBits, NPC_Merlon, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+                Call(SetCamSpeed, CAM_DEFAULT, Float(5.0))
+                Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+                Call(PanToTarget, CAM_DEFAULT, 0, 0)
+                Return
+            Else
+                IfEq(GF_MAC01_QuickChangeDropped, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_0040)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_003B)
+                EndIf
+            EndIf
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 16, MSG_MAC_Plaza_003B)
+    EndSwitch
+    ExecWait(N(EVS_LetterPrompt_Merlon))
+    ExecWait(N(EVS_LetterReward_Merlon))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Merlon) = {
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 133, 1)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
-            EVT_CALL(SetNpcPos, NPC_SELF, 410, 0, 0)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CASE_RANGE(STORY_CH6_RETURNED_TO_TOAD_TOWN, STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CASE_GE(STORY_CH3_GOT_SUPER_BOOTS)
-            EVT_IF_EQ(GF_MAC01_Merlon_HeardAboutDream, FALSE)
-                EVT_CALL(SetNpcPos, NPC_Merlon, -135, 20, -250)
-                EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Think)
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_ELSE
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Merlon)))
-    EVT_RETURN
-    EVT_END
+    Call(InterpNpcYaw, NPC_SELF, 133, 1)
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
+            Call(SetNpcPos, NPC_SELF, 410, 0, 0)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+        CaseRange(STORY_CH6_RETURNED_TO_TOAD_TOWN, STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+        CaseGe(STORY_CH3_GOT_SUPER_BOOTS)
+            IfEq(GF_MAC01_Merlon_HeardAboutDream, FALSE)
+                Call(SetNpcPos, NPC_Merlon, -135, 20, -250)
+                Call(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Think)
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o335, COLLIDER_FLAGS_UPPER_MASK)
+            Else
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+            EndIf
+        CaseDefault
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o336, COLLIDER_FLAGS_UPPER_MASK)
+    EndSwitch
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Merlon)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_DarkToad_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_01, ANIM_DarkToad_Red_Talk, ANIM_DarkToad_Red_Idle, 0, MSG_MAC_Plaza_004D)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_02, ANIM_DarkToad_Black_Talk, ANIM_DarkToad_Black_Idle, 0, MSG_MAC_Plaza_004E)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Talk, ANIM_DarkToad_Yellow_Idle, 0, MSG_MAC_Plaza_004F)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Talk, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_0050)
-        EVT_CASE_LT(STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
-            EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT), 0, 300, EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_01, ANIM_DarkToad_Red_Talk, ANIM_DarkToad_Red_Idle, 0, MSG_MAC_Plaza_0051)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_02, ANIM_DarkToad_Black_Talk, ANIM_DarkToad_Black_Idle, 0, MSG_MAC_Plaza_0052)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Talk, ANIM_DarkToad_Yellow_Idle, 0, MSG_MAC_Plaza_0053)
-            EVT_CALL(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Talk, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_0054)
-            EVT_SET(GF_MAC01_Merlon_HintFromDarkToads, TRUE)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Call(SpeakToPlayer, NPC_DarkToad_01, ANIM_DarkToad_Red_Talk, ANIM_DarkToad_Red_Idle, 0, MSG_MAC_Plaza_004D)
+            Call(SpeakToPlayer, NPC_DarkToad_02, ANIM_DarkToad_Black_Talk, ANIM_DarkToad_Black_Idle, 0, MSG_MAC_Plaza_004E)
+            Call(SpeakToPlayer, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Talk, ANIM_DarkToad_Yellow_Idle, 0, MSG_MAC_Plaza_004F)
+            Call(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Talk, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_0050)
+        CaseLt(STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
+            Call(AdjustCam, CAM_DEFAULT, Float(4.0 / DT), 0, 300, Float(15.0), Float(-7.5))
+            Call(SpeakToPlayer, NPC_DarkToad_01, ANIM_DarkToad_Red_Talk, ANIM_DarkToad_Red_Idle, 0, MSG_MAC_Plaza_0051)
+            Call(SpeakToPlayer, NPC_DarkToad_02, ANIM_DarkToad_Black_Talk, ANIM_DarkToad_Black_Idle, 0, MSG_MAC_Plaza_0052)
+            Call(SpeakToPlayer, NPC_DarkToad_03, ANIM_DarkToad_Yellow_Talk, ANIM_DarkToad_Yellow_Idle, 0, MSG_MAC_Plaza_0053)
+            Call(SpeakToPlayer, NPC_DarkToad_04, ANIM_DarkToad_Green_Talk, ANIM_DarkToad_Green_Idle, 0, MSG_MAC_Plaza_0054)
+            Set(GF_MAC01_Merlon_HintFromDarkToads, TRUE)
 #if VERSION_PAL
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
+            Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
 #else
-            EVT_CALL(ResetCam, CAM_DEFAULT, 5)
+            Call(ResetCam, CAM_DEFAULT, 5)
 #endif
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_DarkToad_01) = {
-    EVT_LOOP(0)
-        EVT_IF_GE(GB_StoryProgress, STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
-            EVT_SET(LVar0, 0)
-            EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_GE(460)
-                    EVT_ADD(LVar0, 1)
-            EVT_END_SWITCH
-            EVT_SWITCH(LVar3)
-                EVT_CASE_RANGE(-50, 70)
-                    EVT_ADD(LVar0, 1)
-            EVT_END_SWITCH
-            EVT_IF_EQ(LVar0, 2)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(0)
-        EVT_CALL(PartnerCanUseAbility, LVar0)
-        EVT_IF_EQ(LVar0, FALSE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(EVS_Scene_KoopaBrosUnmasked))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        IfGe(GB_StoryProgress, STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS)
+            Set(LVar0, 0)
+            Call(GetPlayerPos, LVar1, LVar2, LVar3)
+            Switch(LVar1)
+                CaseGe(460)
+                    Add(LVar0, 1)
+            EndSwitch
+            Switch(LVar3)
+                CaseRange(-50, 70)
+                    Add(LVar0, 1)
+            EndSwitch
+            IfEq(LVar0, 2)
+                BreakLoop
+            EndIf
+        EndIf
+        Wait(1)
+    EndLoop
+    Loop(0)
+        Call(PartnerCanUseAbility, LVar0)
+        IfEq(LVar0, FALSE)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(EVS_Scene_KoopaBrosUnmasked))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_DarkToad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_DarkToad_01)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_DarkToad_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_DarkToad_01)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_DarkToad_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_DarkToad_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_DarkToad_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_DarkToad_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_MerlonAndNinji) = {
-    EVT_IF_NE(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetNpcPos, NPC_Ninji, -278, 20, -376)
-    EVT_CALL(SetNpcYaw, NPC_Ninji, 0)
-    EVT_WAIT(40)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, -276, -305, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0047)
-    EVT_CALL(NpcFacePlayer, NPC_Ninji, 5)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(GetNpcPos, NPC_Ninji, LVar0, LVar1, LVar2)
+    IfNe(GB_StoryProgress, STORY_CH6_RETURNED_TO_TOAD_TOWN)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(SetNpcPos, NPC_Ninji, -278, 20, -376)
+    Call(SetNpcYaw, NPC_Ninji, 0)
+    Wait(40)
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, -276, -305, 0)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0047)
+    Call(NpcFacePlayer, NPC_Ninji, 5)
+    Wait(15 * DT)
+    Call(GetNpcPos, NPC_Ninji, LVar0, LVar1, LVar2)
 #if VERSION_PAL
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0 / DT), LVar0, LVar1, LVar2, 250, 15, -9)
+    Call(SetCamProperties, CAM_DEFAULT, Float(4.0 / DT), LVar0, LVar1, LVar2, 250, 15, -9)
 #else
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, 4, LVar0, LVar1, LVar2, 250, 15, -9)
+    Call(SetCamProperties, CAM_DEFAULT, 4, LVar0, LVar1, LVar2, 250, 15, -9)
 #endif
-    EVT_CALL(SpeakToPlayer, NPC_Ninji, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_MAC_Plaza_0048)
-    EVT_CALL(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0049)
+    Call(SpeakToPlayer, NPC_Ninji, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_MAC_Plaza_0048)
+    Call(GetNpcPos, NPC_Merlon, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0049)
 #if VERSION_PAL
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
+    Call(ResetCam, CAM_DEFAULT, Float(5.0 / DT))
 #else
-    EVT_CALL(ResetCam, CAM_DEFAULT, 5)
+    Call(ResetCam, CAM_DEFAULT, 5)
 #endif
-    EVT_CALL(SpeakToPlayer, NPC_Ninji, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_MAC_Plaza_004A)
-    EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Ninji, ANIM_Ninji_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Ninji, -230, -260, 0)
-        EVT_CALL(NpcMoveTo, NPC_Ninji, -185, -194, 0)
-        EVT_CALL(SetNpcPos, NPC_Ninji, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(25 * DT)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, 8)
-            EVT_CALL(RotateModel, MODEL_door, LVar0, 0, -1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(5 * DT)
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, -8)
-            EVT_CALL(RotateModel, MODEL_door, LVar0, 0, -1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_004B)
-    EVT_SET(GB_StoryProgress, STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Ninji, ANIM_Ninji_Talk, ANIM_Ninji_Idle, 0, MSG_MAC_Plaza_004A)
+    Thread
+        Call(SetNpcAnimation, NPC_Ninji, ANIM_Ninji_Walk)
+        Call(NpcMoveTo, NPC_Ninji, -230, -260, 0)
+        Call(NpcMoveTo, NPC_Ninji, -185, -194, 0)
+        Call(SetNpcPos, NPC_Ninji, NPC_DISPOSE_LOCATION)
+    EndThread
+    Thread
+        Wait(25 * DT)
+        Call(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+        Set(LVar0, 0)
+        Loop(10)
+            Add(LVar0, 8)
+            Call(RotateModel, MODEL_door, LVar0, 0, -1, 0)
+            Wait(1)
+        EndLoop
+        Wait(5 * DT)
+        Loop(10)
+            Add(LVar0, -8)
+            Call(RotateModel, MODEL_door, LVar0, 0, -1, 0)
+            Wait(1)
+        EndLoop
+        Call(PlaySoundAtCollider, COLLIDER_deilitud, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    EndThread
+    Wait(20 * DT)
+    Call(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_004B)
+    Set(GB_StoryProgress, STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Merlon) = {
@@ -1288,665 +1288,665 @@ BSS s32 D_80262F6C[13];
 #include "npc/flower_gate.inc.c"
 
 EvtScript N(EVS_NpcIdle_Toad_04) = {
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Plaza_007D)
-    EVT_SET(GB_StoryProgress, STORY_CH0_RETURNED_TO_TOAD_TOWN)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(WaitForPlayerInputEnabled)
+    Call(DisablePlayerInput, TRUE)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
+    Call(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Plaza_007D)
+    Set(GB_StoryProgress, STORY_CH0_RETURNED_TO_TOAD_TOWN)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_04) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_007C)
-        EVT_CASE_LT(STORY_CH1_SPOKE_WITH_MERLIN)
-            EVT_SET(LVar0, MSG_MAC_Plaza_007D)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_007E)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_007F)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_0080)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0081)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_0082)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Plaza_0083)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Plaza_0084)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0085)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0086)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0087)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0088)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0089)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_008A)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_008B)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0046)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_007C)
+        CaseLt(STORY_CH1_SPOKE_WITH_MERLIN)
+            Set(LVar0, MSG_MAC_Plaza_007D)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_007E)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_007F)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_0080)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_0081)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC01_MailbagStolen, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_0082)
+            Else
+                IfEq(GF_MAC01_MailbagReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Plaza_0083)
+                Else
+                    Set(LVar0, MSG_MAC_Plaza_0084)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Plaza_0085)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_0086)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Plaza_0087)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_0088)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Plaza_0089)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_008A)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_008B)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0046)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_Toad_04, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_04) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        EVT_CALL(SetNpcPos, NPC_SELF, -25, 0, -500)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_04)))
-    EVT_END_IF
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_04)))
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        Call(SetNpcPos, NPC_SELF, -25, 0, -500)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Toad_04)))
+    EndIf
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_04)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_05) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_008C)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_008D)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_008E)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_008F)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_0090)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0091)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_0092)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Plaza_0093)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Plaza_0094)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0095)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0096)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0097)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0098)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Plaza_0099)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_009A)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_009B)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0047)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_05, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_008C)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Plaza_008D)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_008E)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_008F)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_0090)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_0091)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC01_MailbagStolen, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_0092)
+            Else
+                IfEq(GF_MAC01_MailbagReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Plaza_0093)
+                Else
+                    Set(LVar0, MSG_MAC_Plaza_0094)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Plaza_0095)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_0096)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Plaza_0097)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_0098)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Plaza_0099)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_009A)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_009B)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0047)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_Toad_05, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Toad_05) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(D_8025AA78_81B2F8) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(NpcFacePlayer, NPC_Toad_05, 0)
-    EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_Toad_05, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_0048)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
-    EVT_CALL(PlayerMoveTo, 0, 580, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(NpcFacePlayer, NPC_Toad_05, 0)
+    Wait(5)
+    Call(SpeakToPlayer, NPC_Toad_05, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_0048)
+    Wait(10)
+    Call(SetPlayerSpeed, Float(4.0))
+    Call(PlayerMoveTo, 0, 580, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_05) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_05)))
-    EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_CALL(SetNpcPos, NPC_SELF, -50, 0, 580)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_05)))
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_8025AA78_81B2F8)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilis, 1, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_05)))
+    IfGe(GB_StoryProgress, STORY_EPILOGUE)
+        Call(SetNpcPos, NPC_SELF, -50, 0, 580)
+        Call(SetNpcYaw, NPC_SELF, 90)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Toad_05)))
+        BindTrigger(Ref(N(D_8025AA78_81B2F8)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilis, 1, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_06) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_009C)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_009D)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_009E)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_009F)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_00A0)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00A1)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_00A2)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00A3)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00A4)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00A5)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00A6)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00A7)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00A8)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00A9)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00AA)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00AB)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_0049)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_06, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_009C)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Plaza_009D)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_009E)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_009F)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_00A0)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00A1)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC01_MailbagStolen, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_00A2)
+            Else
+                IfEq(GF_MAC01_MailbagReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Plaza_00A3)
+                Else
+                    Set(LVar0, MSG_MAC_Plaza_00A4)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Plaza_00A5)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00A6)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Plaza_00A7)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00A8)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Plaza_00A9)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00AA)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_00AB)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_0049)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_Toad_06, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Toad_06) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_06) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_06)))
-    EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_CALL(SetNpcPos, NPC_SELF, -110, 20, -380)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_06)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_06)))
+    IfGe(GB_StoryProgress, STORY_EPILOGUE)
+        Call(SetNpcPos, NPC_SELF, -110, 20, -380)
+        Call(SetNpcYaw, NPC_SELF, 90)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Toad_06)))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_07) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00AC)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00AD)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00AE)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_00AF)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_00B0)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00B1)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC01_MailbagStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_00B2)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC01_MailbagReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00B3)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00B4)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00B5)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00B6)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00B7)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00B8)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00B9)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00BA)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00BB)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_004A)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_00AC)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Plaza_00AD)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00AE)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_00AF)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_00B0)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00B1)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC01_MailbagStolen, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_00B2)
+            Else
+                IfEq(GF_MAC01_MailbagReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Plaza_00B3)
+                Else
+                    Set(LVar0, MSG_MAC_Plaza_00B4)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Plaza_00B5)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00B6)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Plaza_00B7)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00B8)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Plaza_00B9)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00BA)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_00BB)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_004A)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Toad_07) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(D_8025B110_81B990) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(NpcFacePlayer, NPC_Toad_07, 0)
-    EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_Outro_004B)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4.0))
-    EVT_CALL(PlayerMoveTo, 600, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(NpcFacePlayer, NPC_Toad_07, 0)
+    Wait(5)
+    Call(SpeakToPlayer, NPC_Toad_07, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_Outro_004B)
+    Wait(10)
+    Call(SetPlayerSpeed, Float(4.0))
+    Call(PlayerMoveTo, 600, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_07) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_07)))
-    EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_CALL(SetNpcPos, NPC_SELF, 530, 0, -50)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Toad_07)))
-        EVT_BIND_TRIGGER(EVT_PTR(N(D_8025B110_81B990)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilie, 1, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_07)))
+    IfGe(GB_StoryProgress, STORY_EPILOGUE)
+        Call(SetNpcPos, NPC_SELF, 530, 0, -50)
+        Call(SetNpcYaw, NPC_SELF, 270)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Toad_07)))
+        BindTrigger(Ref(N(D_8025B110_81B990)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilie, 1, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_08) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00BC)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00BD)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00BE)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_00BF)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_00C0)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C1)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC01_ShyGuysTramplingGarden, FALSE)
-            EVT_ELSE
-                EVT_SET(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
-                EVT_ADD(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
-                EVT_IF_LT(LVar0, 2)
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00C2)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00C3)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C4)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C5)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C6)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C7)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C8)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00C9)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00CA)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_004C)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_08, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_00BC)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Plaza_00BD)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00BE)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_00BF)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_00C0)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00C1)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC01_ShyGuysTramplingGarden, FALSE)
+            Else
+                Set(LVar0, GF_MAC01_ChasedShyGuysFromGardenA)
+                Add(LVar0, GF_MAC01_ChasedShyGuysFromGardenB)
+                IfLt(LVar0, 2)
+                    Set(LVar0, MSG_MAC_Plaza_00C2)
+                Else
+                    Set(LVar0, MSG_MAC_Plaza_00C3)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Plaza_00C4)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00C5)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Plaza_00C6)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00C7)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Plaza_00C8)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00C9)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_00CA)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_004C)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_Toad_08, ANIM_Toad_Blue_Talk, ANIM_Toad_Blue_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_08) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_08)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_08)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_09) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_MET_STAR_SPIRITS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00CB)
-        EVT_CASE_LT(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00CC)
-        EVT_CASE_LT(STORY_CH1_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00CD)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC03_BombedRock, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_00CE)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_MAC_Plaza_00CF)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH3_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D0)
-        EVT_CASE_LT(STORY_CH4_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_MAC00_DictionaryStolen, FALSE)
-                EVT_SET(LVar0, MSG_MAC_Plaza_00D1)
-            EVT_ELSE
-                EVT_IF_EQ(GF_MAC00_DictionaryReturned, FALSE)
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00D2)
-                EVT_ELSE
-                    EVT_SET(LVar0, MSG_MAC_Plaza_00D3)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_DEFEATED_FUZZIPEDE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D4)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D5)
-        EVT_CASE_LT(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D6)
-        EVT_CASE_LT(STORY_CH6_STAR_SPIRIT_RESCUED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D7)
-        EVT_CASE_LT(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D8)
-        EVT_CASE_LT(STORY_CH7_STAR_SPRIT_DEPARTED)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00D9)
-        EVT_CASE_LT(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_MAC_Plaza_00DA)
-        EVT_CASE_GE(STORY_EPILOGUE)
-            EVT_SET(LVar0, MSG_Outro_004D)
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_Toad_09, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_MET_STAR_SPIRITS)
+            Set(LVar0, MSG_MAC_Plaza_00CB)
+        CaseLt(STORY_CH1_MERLIN_REVEALED_KOOPA_BROS)
+            Set(LVar0, MSG_MAC_Plaza_00CC)
+        CaseLt(STORY_CH1_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00CD)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC03_BombedRock, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_00CE)
+            Else
+                Set(LVar0, MSG_MAC_Plaza_00CF)
+            EndIf
+        CaseLt(STORY_CH3_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00D0)
+        CaseLt(STORY_CH4_STAR_SPRIT_DEPARTED)
+            IfEq(GF_MAC00_DictionaryStolen, FALSE)
+                Set(LVar0, MSG_MAC_Plaza_00D1)
+            Else
+                IfEq(GF_MAC00_DictionaryReturned, FALSE)
+                    Set(LVar0, MSG_MAC_Plaza_00D2)
+                Else
+                    Set(LVar0, MSG_MAC_Plaza_00D3)
+                EndIf
+            EndIf
+        CaseLt(STORY_CH5_DEFEATED_FUZZIPEDE)
+            Set(LVar0, MSG_MAC_Plaza_00D4)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00D5)
+        CaseLt(STORY_CH6_ARRIVED_AT_FLOWER_FIELDS)
+            Set(LVar0, MSG_MAC_Plaza_00D6)
+        CaseLt(STORY_CH6_STAR_SPIRIT_RESCUED)
+            Set(LVar0, MSG_MAC_Plaza_00D7)
+        CaseLt(STORY_CH7_INVITED_TO_STARBORN_VALLEY)
+            Set(LVar0, MSG_MAC_Plaza_00D8)
+        CaseLt(STORY_CH7_STAR_SPRIT_DEPARTED)
+            Set(LVar0, MSG_MAC_Plaza_00D9)
+        CaseLt(STORY_EPILOGUE)
+            Set(LVar0, MSG_MAC_Plaza_00DA)
+        CaseGe(STORY_EPILOGUE)
+            Set(LVar0, MSG_Outro_004D)
+    EndSwitch
+    Call(SpeakToPlayer, NPC_Toad_09, ANIM_Toad_Green_Talk, ANIM_Toad_Green_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_09) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_09)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_09)))
+    Return
+    End
 };
 
 EvtScript N(D_8025B760_81BFE0) = {
-    EVT_CALL(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
-    EVT_ADD(LVar3, 20)
-    EVT_CALL(MakeItemEntity, ITEM_CALCULATOR, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_SET(LVar9, LVar0)
-    EVT_WAIT(1)
-    EVT_LOOP(80)
-        EVT_CALL(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
-        EVT_ADD(LVar3, 20)
-        EVT_CALL(SetItemPos, LVar9, LVar2, LVar3, LVar4)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(RemoveItemEntity, LVar9)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
+    Add(LVar3, 20)
+    Call(MakeItemEntity, ITEM_CALCULATOR, LVar2, LVar3, LVar4, ITEM_SPAWN_MODE_DECORATION, 0)
+    Set(LVar9, LVar0)
+    Wait(1)
+    Loop(80)
+        Call(GetNpcPos, NPC_PostOfficeShyGuy, LVar2, LVar3, LVar4)
+        Add(LVar3, 20)
+        Call(SetItemPos, LVar9, LVar2, LVar3, LVar4)
+        Wait(1)
+    EndLoop
+    Call(RemoveItemEntity, LVar9)
+    Return
+    End
 };
 
 EvtScript N(D_8025B854_81C0D4) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GT(LVar2, 200)
-            EVT_IF_LT(LVar0, 50)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, -313, 0, 330)
-    EVT_CALL(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
-    EVT_WAIT(21)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0007)
-    EVT_EXEC(N(D_8025B760_81BFE0))
-    EVT_SET(LVar0, 6)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVarA)
-    EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, -45, 330, 30)
-    EVT_CALL(NpcMoveTo, NPC_PostOfficeShyGuy, -45, 710, 30)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGt(LVar2, 200)
+            IfLt(LVar0, 50)
+                BreakLoop
+            EndIf
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetNpcPos, NPC_PostOfficeShyGuy, -313, 0, 330)
+    Call(SetNpcAnimation, NPC_PostOfficeShyGuy, ANIM_ShyGuy_Red_Anim04)
+    Wait(21)
+    Call(DisablePlayerInput, TRUE)
+    Call(SpeakToPlayer, NPC_Rowf, ANIM_Rowf_Talk, ANIM_Rowf_Idle, 0, MSG_MAC_Plaza_0007)
+    Exec(N(D_8025B760_81BFE0))
+    Set(LVar0, 6)
+    Call(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    ExecGetTID(N(D_8024E6F8_80EF78), LVarA)
+    Call(NpcMoveTo, NPC_PostOfficeShyGuy, -45, 330, 30)
+    Call(NpcMoveTo, NPC_PostOfficeShyGuy, -45, 710, 30)
+    KillThread(LVarA)
+    Call(SetNpcPos, NPC_PostOfficeShyGuy, NPC_DISPOSE_LOCATION)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_01) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_GT(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_NE(GF_MAC01_CalculatorStolen, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_MAC01_CalculatorStolen, TRUE)
-    EVT_EXEC(N(D_8025B854_81C0D4))
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPRIT_DEPARTED)
+        Return
+    EndIf
+    IfGt(GB_StoryProgress, STORY_CH4_STAR_SPIRIT_RESCUED)
+        Return
+    EndIf
+    IfNe(GF_MAC01_CalculatorStolen, FALSE)
+        Return
+    EndIf
+    Set(GF_MAC01_CalculatorStolen, TRUE)
+    Exec(N(D_8025B854_81C0D4))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ToadHouseKeeper_A) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Plaza_001A)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MAC_Plaza_001A)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ToadHouseKeeper_B) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_0044)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_Outro_0044)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_IF_EQ(AF_MAC_43, FALSE)
-        EVT_SET(LVar0, MSG_MAC_Plaza_0015)
-        EVT_SET(LVar8, MSG_MAC_Plaza_0016)
-    EVT_ELSE
-        EVT_SET(LVar0, MSG_MAC_Plaza_001B)
-        EVT_SET(LVar8, MSG_MAC_Plaza_001B)
-    EVT_END_IF
-    EVT_SET(LVar1, MSG_MAC_Plaza_0017)
-    EVT_SET(LVar2, MSG_MAC_Plaza_0018)
-    EVT_SET(LVar3, MSG_MAC_Plaza_0019)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_MAC_43, FALSE)
+        Set(LVar0, MSG_MAC_Plaza_0015)
+        Set(LVar8, MSG_MAC_Plaza_0016)
+    Else
+        Set(LVar0, MSG_MAC_Plaza_001B)
+        Set(LVar8, MSG_MAC_Plaza_001B)
+    EndIf
+    Set(LVar1, MSG_MAC_Plaza_0017)
+    Set(LVar2, MSG_MAC_Plaza_0018)
+    Set(LVar3, MSG_MAC_Plaza_0019)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_PlayRestingSong))
-    EVT_CALL(PlayerMoveTo, 535, -155, 20)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 116)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 99, -58)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, 495, 130)
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, 507, -19)
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, 20)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, 580, -210, 20)
-    EVT_CALL(InterpPlayerYaw, 263, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(63)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayRestingSong))
+    Call(PlayerMoveTo, 535, -155, 20)
+    Thread
+        Wait(5)
+        Call(N(ToadHouse_CamSetFOV), 0, 40)
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamDistance, CAM_DEFAULT, 116)
+        Call(SetCamPitch, CAM_DEFAULT, 99, -58)
+        Call(SetCamPosA, CAM_DEFAULT, 495, 130)
+        Call(SetCamPosB, CAM_DEFAULT, 507, -19)
+        Call(SetCamPosC, CAM_DEFAULT, 0, 20)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(PlayerMoveTo, 580, -210, 20)
+    Call(InterpPlayerYaw, 263, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Still)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Thread
+        Wait(60)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    EndThread
+    Wait(20)
+    Thread
+        Wait(63)
+        Call(N(ToadHouse_CamSetFOV), 0, 25)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(SetPlayerPos, 568, 20, -186)
-    EVT_CALL(PlayerMoveTo, 525, -168, 20)
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_SetupMusic))
+    Call(HidePlayerShadow, FALSE)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(SetPlayerPos, 568, 20, -186)
+    Call(PlayerMoveTo, 525, -168, 20)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadHouseKeeper) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_EPILOGUE)
-        EVT_CALL(SetNpcPos, NPC_SELF, 370, 20, -150)
-        EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper_B)))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GF_MAC01_ChasedShyGuyFromToadHouse, FALSE)
-        EVT_SWITCH(GB_StoryProgress)
-            EVT_CASE_RANGE(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper_A)))
-            EVT_CASE_DEFAULT
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-        EVT_END_SWITCH
-    EVT_ELSE
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-    EVT_END_IF
-    EVT_SET(AF_MAC_43, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_EPILOGUE)
+        Call(SetNpcPos, NPC_SELF, 370, 20, -150)
+        Call(SetNpcYaw, NPC_SELF, 270)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper_B)))
+        Return
+    EndIf
+    IfEq(GF_MAC01_ChasedShyGuyFromToadHouse, FALSE)
+        Switch(GB_StoryProgress)
+            CaseRange(STORY_CH3_STAR_SPRIT_DEPARTED, STORY_CH4_STAR_SPIRIT_RESCUED)
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper_A)))
+            CaseDefault
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+        EndSwitch
+    Else
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+    EndIf
+    Set(AF_MAC_43, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy_02) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 572, 36, -226)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-    EVT_LOOP(0)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-        EVT_WAIT(3)
-        EVT_IF_EQ(MF_InsideToadHouse, TRUE)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_END_IF
-        EVT_CALL(NpcJump0, NPC_SELF, 539, 36, -242, 8)
-        EVT_WAIT(2)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
-        EVT_WAIT(3)
-        EVT_IF_EQ(MF_InsideToadHouse, TRUE)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_END_IF
-        EVT_CALL(NpcJump0, NPC_SELF, 572, 36, -226, 8)
-        EVT_WAIT(2)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 572, 36, -226)
+    Call(InterpNpcYaw, NPC_SELF, 270, 1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Loop(0)
+        Call(InterpNpcYaw, NPC_SELF, 270, 1)
+        Wait(3)
+        IfEq(MF_InsideToadHouse, TRUE)
+            Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        EndIf
+        Call(NpcJump0, NPC_SELF, 539, 36, -242, 8)
+        Wait(2)
+        Call(InterpNpcYaw, NPC_SELF, 90, 1)
+        Wait(3)
+        IfEq(MF_InsideToadHouse, TRUE)
+            Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+        EndIf
+        Call(NpcJump0, NPC_SELF, 572, 36, -226, 8)
+        Wait(2)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy_02) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 36, LVar2, 10)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 1)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, 550, 20, -161, 0)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit2u, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_SET(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, 8)
-            EVT_CALL(RotateModel, MODEL_door_k, LVar0, 0, -1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(10)
-            EVT_ADD(LVar0, -8)
-            EVT_CALL(RotateModel, MODEL_door_k, LVar0, 0, -1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilit2u, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_CALL(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
-    EVT_SET(LVar0, -1)
-    EVT_CALL(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_GET_TID(N(D_8024E6F8_80EF78), LVarA)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 420, -118, 0)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_CALL(BindNpcInteract, NPC_ToadHouseToad, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim0C)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_SELF, LVar0, 36, LVar2, 10)
+    Call(SetNpcSpeed, NPC_SELF, Float(8.0))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+    Call(InterpNpcYaw, NPC_SELF, 270, 1)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_NPC_JUMP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, 550, 20, -161, 0)
+    Thread
+        Wait(10)
+        Call(PlaySoundAtCollider, COLLIDER_deilit2u, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+        Set(LVar0, 0)
+        Loop(10)
+            Add(LVar0, 8)
+            Call(RotateModel, MODEL_door_k, LVar0, 0, -1, 0)
+            Wait(1)
+        EndLoop
+        Loop(10)
+            Add(LVar0, -8)
+            Call(RotateModel, MODEL_door_k, LVar0, 0, -1, 0)
+            Wait(1)
+        EndLoop
+        Call(PlaySoundAtCollider, COLLIDER_deilit2u, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+    EndThread
+    Call(ShowSweat, NPC_SELF, 1, -45, EMOTER_NPC, 0, 0, 0, 0, 20)
+    Set(LVar0, -1)
+    Call(PlaySoundAtNpc, LVar0, SOUND_SHY_GUY_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    ExecGetTID(N(D_8024E6F8_80EF78), LVarA)
+    Call(NpcMoveTo, NPC_SELF, 420, -118, 0)
+    KillThread(LVarA)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Call(BindNpcInteract, NPC_ToadHouseToad, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_ShyGuy_02) = {
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_HAMMER)
-            EVT_SET(LVar1, 1)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_JUMP)
-            EVT_SET(LVar1, 1)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_SET(LVar1, 1)
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar1, 0)
-    EVT_END_SWITCH
-    EVT_IF_EQ(LVar1, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(CheckPositionRelativeToPlane), 450, -190, 500, -103)
-    EVT_IF_EQ(LVar0, ENCOUNTER_TRIGGER_NONE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
-    EVT_SET(GF_MAC01_ChasedShyGuyFromToadHouse, TRUE)
-    EVT_SET(AF_MAC_43, TRUE)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy_02)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_RETURN
-    EVT_END
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_HAMMER)
+            Set(LVar1, 1)
+        CaseEq(ENCOUNTER_TRIGGER_JUMP)
+            Set(LVar1, 1)
+        CaseEq(ENCOUNTER_TRIGGER_PARTNER)
+            Set(LVar1, 1)
+        CaseDefault
+            Set(LVar1, 0)
+    EndSwitch
+    IfEq(LVar1, 0)
+        Return
+    EndIf
+    Call(N(CheckPositionRelativeToPlane), 450, -190, 500, -103)
+    IfEq(LVar0, ENCOUNTER_TRIGGER_NONE)
+        Return
+    EndIf
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_DEFAULT)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SHY_GUY_OUCH, SOUND_SPACE_DEFAULT)
+    Set(GF_MAC01_ChasedShyGuyFromToadHouse, TRUE)
+    Set(AF_MAC_43, TRUE)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_02)))
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_02) = {
-    EVT_IF_EQ(GF_MAC01_ChasedShyGuyFromToadHouse, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_ShyGuy_02)))
-        EVT_CALL(BindNpcHit, NPC_SELF, EVT_PTR(N(EVS_NpcHit_ShyGuy_02)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC01_ChasedShyGuyFromToadHouse, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy_02)))
+        Call(BindNpcHit, NPC_SELF, Ref(N(EVS_NpcHit_ShyGuy_02)))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 Vec3f N(FlightPath_TwinkArrive)[] = {
@@ -1962,120 +1962,120 @@ Vec3f N(FlightPath_TwinkDepart)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_Twink) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar0, 560)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetMusicTrack, 0, SONG_TWINK_THEME, 0, 8)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, 500, -20, 0)
-    EVT_CALL(WaitForPlayerMoveToComplete)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_MAC_Plaza_00DB, 160, 40)
-    EVT_LOOP(2)
-        EVT_CALL(InterpPlayerYaw, 90, 7)
-        EVT_WAIT(10 * DT)
-        EVT_CALL(InterpPlayerYaw, 270, 7)
-        EVT_WAIT(10 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(30 * DT)
-    EVT_CALL(GetPlayerPos, LVar4, LVar5, LVar6)
-    EVT_SUBF(LVar4, EVT_FLOAT(50.0))
-    EVT_ADDF(LVar5, EVT_FLOAT(40.0))
-    EVT_CALL(InterpNpcYaw, NPC_Twink, 90, 0)
-    EVT_CALL(LoadPath, 35 * DT, EVT_PTR(N(FlightPath_TwinkArrive)), ARRAY_COUNT(N(FlightPath_TwinkArrive)), EASING_COS_IN_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_ADDF(LVar1, LVar4)
-        EVT_ADDF(LVar2, LVar5)
-        EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0/ DT), -10, -300, 15, -9)
-    EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DC)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(15 * DT)
-    EVT_CALL(SetNpcJumpscale, NPC_Twink, EVT_FLOAT(1.0))
-    EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
-    EVT_CALL(NpcJump0, NPC_Twink, LVar0, LVar1, LVar2, 10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DD)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Chuckle)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT), -40, -200, 15, -15)
-    EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DE)
-    EVT_WAIT(5 * DT)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(InterpNpcYaw, NPC_Twink, 270, 0)
-    EVT_CALL(GetNpcPos, NPC_Twink, LVar4, LVar5, LVar6)
-    EVT_CALL(LoadPath, 35 * DT, EVT_PTR(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_ADD(LVar1, LVar4)
-        EVT_ADD(LVar2, LVar5)
-        EVT_ADD(LVar3, LVar6)
-        EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_SET(GB_StoryProgress, STORY_CH1_RETURNED_TO_TOAD_TOWN)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar0, 560)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 0, 8)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, 500, -20, 0)
+    Call(WaitForPlayerMoveToComplete)
+    Call(InterpPlayerYaw, 270, 0)
+    Call(ShowMessageAtScreenPos, MSG_MAC_Plaza_00DB, 160, 40)
+    Loop(2)
+        Call(InterpPlayerYaw, 90, 7)
+        Wait(10 * DT)
+        Call(InterpPlayerYaw, 270, 7)
+        Wait(10 * DT)
+    EndLoop
+    Wait(30 * DT)
+    Call(GetPlayerPos, LVar4, LVar5, LVar6)
+    SubF(LVar4, Float(50.0))
+    AddF(LVar5, Float(40.0))
+    Call(InterpNpcYaw, NPC_Twink, 90, 0)
+    Call(LoadPath, 35 * DT, Ref(N(FlightPath_TwinkArrive)), ARRAY_COUNT(N(FlightPath_TwinkArrive)), EASING_COS_IN_OUT)
+    Loop(0)
+        Call(GetNextPathPos)
+        AddF(LVar1, LVar4)
+        AddF(LVar2, LVar5)
+        Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Call(AdjustCam, CAM_DEFAULT, Float(3.0/ DT), -10, -300, 15, -9)
+    Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DC)
+    Wait(5 * DT)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(15 * DT)
+    Call(SetNpcJumpscale, NPC_Twink, Float(1.0))
+    Call(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
+    Call(NpcJump0, NPC_Twink, LVar0, LVar1, LVar2, 10 * DT)
+    Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DD)
+    Wait(5 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Chuckle)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Call(AdjustCam, CAM_DEFAULT, Float(3.0 / DT), -40, -200, 15, -15)
+    Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_MAC_Plaza_00DE)
+    Wait(5 * DT)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(InterpNpcYaw, NPC_Twink, 270, 0)
+    Call(GetNpcPos, NPC_Twink, LVar4, LVar5, LVar6)
+    Call(LoadPath, 35 * DT, Ref(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
+    Loop(0)
+        Call(GetNextPathPos)
+        Add(LVar1, LVar4)
+        Add(LVar2, LVar5)
+        Add(LVar3, LVar6)
+        Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
+    Exec(N(EVS_SetupMusic))
+    Set(GB_StoryProgress, STORY_CH1_RETURNED_TO_TOAD_TOWN)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_IF_EQ(GB_StoryProgress, STORY_CH1_DEFEATED_JR_TROOPA)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Twink)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_StoryProgress, STORY_CH1_DEFEATED_JR_TROOPA)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Twink)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00DF)
-    EVT_EXEC_WAIT(N(EVS_ArtifactPrompt_Kolorado))
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Kolorado))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Kolorado))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_MAC_Plaza_00DF)
+    ExecWait(N(EVS_ArtifactPrompt_Kolorado))
+    ExecWait(N(EVS_LetterPrompt_Kolorado))
+    ExecWait(N(EVS_LetterReward_Kolorado))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_RANGE(STORY_CH5_RETURNED_TO_TOAD_TOWN, STORY_CH7_BEGAN_PEACH_MISSION)
-            EVT_IF_EQ(GF_NOK11_Defeated_KentC, FALSE)
-                EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
-            EVT_ELSE
-                EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseRange(STORY_CH5_RETURNED_TO_TOAD_TOWN, STORY_CH7_BEGAN_PEACH_MISSION)
+            IfEq(GF_NOK11_Defeated_KentC, FALSE)
+                Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
+            Else
+                Call(RemoveNpc, NPC_SELF)
+            EndIf
+        CaseDefault
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Toad)[] = {

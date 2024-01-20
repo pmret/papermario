@@ -86,112 +86,112 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(SetActorVar, ACTOR_SELF, AVAR_Unk_0, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_Unk_1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-    EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(GetLastEvent, ACTOR_PARTNER, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(PlaySound, SOUND_NO_DAMGE)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
-            EVT_SET_CONST(LVar3, ANIM_Goompa_Idle)
-            EVT_EXEC_WAIT(EVS_Partner_SpikeContact)
-        EVT_CASE_EQ(EVENT_BURN_CONTACT)
-            EVT_SET_CONST(LVar0, ANIM_Goompa_Injured)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_SET_CONST(LVar2, ANIM_Goompa_Injured)
-            EVT_SET_CONST(LVar3, ANIM_Goompa_Run)
-            EVT_SET_CONST(LVar4, ANIM_Goompa_Idle)
-            EVT_EXEC_WAIT(EVS_Partner_BurnContact)
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, 0)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_CASE_EQ(EVENT_33)
-        EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Goompa_Idle)
-            EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
-            EVT_EXEC_WAIT(EVS_Partner_Recover)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_PARTNER, FALSE)
+    Call(CloseActionCommandInfo)
+    Call(GetLastEvent, ACTOR_PARTNER, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Goompa_Injured)
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+            Call(PlaySound, SOUND_NO_DAMGE)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Goompa_Injured)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_SPIKE_CONTACT)
+            SetConst(LVar1, ANIM_Goompa_Injured)
+            SetConst(LVar2, ANIM_Goompa_Run)
+            SetConst(LVar3, ANIM_Goompa_Idle)
+            ExecWait(EVS_Partner_SpikeContact)
+        CaseEq(EVENT_BURN_CONTACT)
+            SetConst(LVar0, ANIM_Goompa_Injured)
+            SetConst(LVar1, ANIM_Goompa_Injured)
+            SetConst(LVar2, ANIM_Goompa_Injured)
+            SetConst(LVar3, ANIM_Goompa_Run)
+            SetConst(LVar4, ANIM_Goompa_Idle)
+            ExecWait(EVS_Partner_BurnContact)
+        CaseEq(EVENT_BURN_HIT)
+            SetConst(LVar0, 0)
+            SetConst(LVar1, ANIM_Goompa_Injured)
+            ExecWait(EVS_Enemy_Hit)
+        CaseEq(EVENT_33)
+        CaseEq(EVENT_RECOVER_FROM_KO)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_Goompa_Idle)
+            SetConst(LVar2, ANIM_Goompa_Run)
+            ExecWait(EVS_Partner_Recover)
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_PARTNER, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_EXECUTE_ACTION)
-            EVT_EXEC_WAIT(N(EVS_ExecuteAction))
-        EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(N(EVS_Celebrate))
-        EVT_CASE_EQ(PHASE_RUN_AWAY_START)
-            EVT_EXEC_WAIT(N(runAway))
-        EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
-            EVT_EXEC_WAIT(N(runAwayFail))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_EXECUTE_ACTION)
+            ExecWait(N(EVS_ExecuteAction))
+        CaseEq(PHASE_CELEBRATE)
+            ExecWait(N(EVS_Celebrate))
+        CaseEq(PHASE_RUN_AWAY_START)
+            ExecWait(N(runAway))
+        CaseEq(PHASE_RUN_AWAY_FAIL)
+            ExecWait(N(runAwayFail))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Celebrate) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_SET_CONST(LVar1, ANIM_Goompa_Celebrate)
-    EVT_SET_CONST(LVar2, ANIM_Goompa_Walk)
-    EVT_EXEC_WAIT(EVS_Partner_Celebrate)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    SetConst(LVar1, ANIM_Goompa_Celebrate)
+    SetConst(LVar2, ANIM_Goompa_Walk)
+    ExecWait(EVS_Partner_Celebrate)
+    Return
+    End
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_SET_CONST(LVar1, ANIM_Goompa_Run)
-    EVT_EXEC_WAIT(EVS_Partner_RunAway)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    SetConst(LVar1, ANIM_Goompa_Run)
+    ExecWait(EVS_Partner_RunAway)
+    Return
+    End
 };
 
 EvtScript N(runAwayFail) = {
-    EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
-    EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(6.0))
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Run)
-    EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
-    EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-    EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(SetGoalToHome, ACTOR_PARTNER)
+    Call(SetActorSpeed, ACTOR_PARTNER, Float(6.0))
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Run)
+    Call(SetActorYaw, ACTOR_PARTNER, 0)
+    Call(RunToGoal, ACTOR_PARTNER, 0)
+    Call(SetAnimation, ACTOR_PARTNER, -1, ANIM_Goompa_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExecuteAction) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

@@ -7,15 +7,15 @@
 #include "../common/TrafficBoos.inc.c"
 
 EvtScript N(EVS_NpcInit_TrafficBoo1) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrafficBoo2) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Boo_01)[] = {

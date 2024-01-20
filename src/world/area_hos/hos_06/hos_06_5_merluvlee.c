@@ -566,108 +566,108 @@ API_CALLABLE(N(func_80241F98_A3B478)) {
 }
 
 EvtScript N(EVS_PerformHintRitual) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_MERLEE_SPELL, 2, 8)
-    EVT_CALL(SetNpcAnimation, NPC_Merluvlee, ANIM_Merluvlee_Release)
-    EVT_CALL(GetModelCenter, MODEL_o100)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(PlaySoundAt, SOUND_LRAW_CRYSTAL_BALL_GLOW, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), -1)
-    EVT_SET(ArrayVar(1), LVarF)
-    EVT_CALL(EnableModel, MODEL_o185, FALSE)
-    EVT_CALL(EnableModel, MODEL_o186, FALSE)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_CALL(N(func_802418E8_A3ADC8))
-    EVT_END_THREAD
-    EVT_CALL(GetModelCenter, MODEL_o100)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, -20)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-91.5), EVT_FLOAT(18.40625))
-    EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_SETF(LVar0, EVT_FLOAT(284.6))
-    EVT_ELSE
-        EVT_SETF(LVar0, EVT_FLOAT(-284.6))
-    EVT_END_IF
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar0)
-    EVT_CALL(GetCamPitch, CAM_DEFAULT, LVar0, LVar1)
-    EVT_SETF(LVar1, EVT_FLOAT(-11.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_PLAY_EFFECT(EFFECT_MERLIN_HOUSE_STARS, 0, -298, 21, -330)
-    EVT_SET(ArrayVar(2), LVarF)
-    EVT_CALL(GetModelCenter, MODEL_o100)
-    EVT_ADD(LVar1, 20)
-    EVT_PLAY_EFFECT(EFFECT_MOTION_BLUR_FLAME, 0, LVar0, LVar1, LVar2, 1, -1)
-    EVT_SET(ArrayVar(3), LVarF)
-    EVT_PLAY_EFFECT(EFFECT_MOTION_BLUR_FLAME, 0, LVar0, LVar1, LVar2, 1, -1)
-    EVT_SET(ArrayVar(4), LVarF)
-    EVT_PLAY_EFFECT(EFFECT_MOTION_BLUR_FLAME, 0, LVar0, LVar1, LVar2, 1, -1)
-    EVT_SET(ArrayVar(5), LVarF)
-    EVT_THREAD
-        EVT_CALL(N(func_80241CCC_A3B1AC))
-    EVT_END_THREAD
-    EVT_WAIT(50)
-    EVT_CALL(GetModelCenter, MODEL_o100)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(PlaySoundAt, SOUND_CRYSTAL_BALL_WAVE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 20)
-    EVT_WAIT(30)
-    EVT_CALL(GetModelCenter, MODEL_o100)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(PlaySoundAt, SOUND_CRYSTAL_BALL_WAVE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 20)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_CALL(N(func_80241A58_A3AF38))
-    EVT_END_THREAD
-    EVT_CALL(GetModelCenter, MODEL_o100)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(PlaySoundAt, SOUND_CRYSTAL_BALL_WAVE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 20)
-    EVT_WAIT(70)
-    EVT_CALL(DismissEffect, ArrayVar(2))
-    EVT_WAIT(40)
-    EVT_CALL(PlaySoundAt, SOUND_LRAW_CRYSTAL_BALL_GLOW | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, LVar0, LVar1, LVar2)
-    EVT_CALL(N(func_80241F98_A3B478), ArrayVar(1))
-    EVT_WAIT(15)
-    EVT_CALL(EnableModel, MODEL_o185, TRUE)
-    EVT_CALL(EnableModel, MODEL_o186, TRUE)
-    EVT_CALL(DismissEffect, ArrayVar(1))
-    EVT_THREAD
-        EVT_CALL(N(func_80241B74_A3B054))
-    EVT_END_THREAD
-    EVT_WAIT(46)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_CALL(SetNpcAnimation, NPC_Merluvlee, ANIM_Merluvlee_Idle)
-    EVT_CALL(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_MERLEE_SPELL, 2, 8)
+    Call(SetNpcAnimation, NPC_Merluvlee, ANIM_Merluvlee_Release)
+    Call(GetModelCenter, MODEL_o100)
+    Add(LVar1, 20)
+    Call(PlaySoundAt, SOUND_LRAW_CRYSTAL_BALL_GLOW, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 1, LVar0, LVar1, LVar2, Float(1.0), -1)
+    Set(ArrayVar(1), LVarF)
+    Call(EnableModel, MODEL_o185, FALSE)
+    Call(EnableModel, MODEL_o186, FALSE)
+    Wait(30)
+    Thread
+        Call(N(func_802418E8_A3ADC8))
+    EndThread
+    Call(GetModelCenter, MODEL_o100)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Add(LVar1, -20)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamPosA, CAM_DEFAULT, Float(-91.5), Float(18.40625))
+    Call(GetCamDistance, CAM_DEFAULT, LVar0)
+    IfGt(LVar0, 0)
+        SetF(LVar0, Float(284.6))
+    Else
+        SetF(LVar0, Float(-284.6))
+    EndIf
+    Call(SetCamDistance, CAM_DEFAULT, LVar0)
+    Call(GetCamPitch, CAM_DEFAULT, LVar0, LVar1)
+    SetF(LVar1, Float(-11.0))
+    Call(SetCamPitch, CAM_DEFAULT, LVar0, LVar1)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    PlayEffect(EFFECT_MERLIN_HOUSE_STARS, 0, -298, 21, -330)
+    Set(ArrayVar(2), LVarF)
+    Call(GetModelCenter, MODEL_o100)
+    Add(LVar1, 20)
+    PlayEffect(EFFECT_MOTION_BLUR_FLAME, 0, LVar0, LVar1, LVar2, 1, -1)
+    Set(ArrayVar(3), LVarF)
+    PlayEffect(EFFECT_MOTION_BLUR_FLAME, 0, LVar0, LVar1, LVar2, 1, -1)
+    Set(ArrayVar(4), LVarF)
+    PlayEffect(EFFECT_MOTION_BLUR_FLAME, 0, LVar0, LVar1, LVar2, 1, -1)
+    Set(ArrayVar(5), LVarF)
+    Thread
+        Call(N(func_80241CCC_A3B1AC))
+    EndThread
+    Wait(50)
+    Call(GetModelCenter, MODEL_o100)
+    Add(LVar1, 20)
+    Call(PlaySoundAt, SOUND_CRYSTAL_BALL_WAVE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 5, LVar0, LVar1, LVar2, Float(0.5), 20)
+    Wait(30)
+    Call(GetModelCenter, MODEL_o100)
+    Add(LVar1, 20)
+    Call(PlaySoundAt, SOUND_CRYSTAL_BALL_WAVE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 5, LVar0, LVar1, LVar2, Float(0.5), 20)
+    Wait(30)
+    Thread
+        Call(N(func_80241A58_A3AF38))
+    EndThread
+    Call(GetModelCenter, MODEL_o100)
+    Add(LVar1, 20)
+    Call(PlaySoundAt, SOUND_CRYSTAL_BALL_WAVE, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, Float(0.5), 20)
+    Wait(70)
+    Call(DismissEffect, ArrayVar(2))
+    Wait(40)
+    Call(PlaySoundAt, SOUND_LRAW_CRYSTAL_BALL_GLOW | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, LVar0, LVar1, LVar2)
+    Call(N(func_80241F98_A3B478), ArrayVar(1))
+    Wait(15)
+    Call(EnableModel, MODEL_o185, TRUE)
+    Call(EnableModel, MODEL_o186, TRUE)
+    Call(DismissEffect, ArrayVar(1))
+    Thread
+        Call(N(func_80241B74_A3B054))
+    EndThread
+    Wait(46)
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Call(SetNpcAnimation, NPC_Merluvlee, ANIM_Merluvlee_Idle)
+    Call(SetMusicTrack, 0, SONG_SHOOTING_STAR_SUMMIT, 0, 8)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Merluvlee) = {
-    EVT_CALL(N(ResetHintFlags))
-    EVT_RETURN
-    EVT_END
+    Call(N(ResetHintFlags))
+    Return
+    End
 };
 
 EvtScript N(EVS_KootRequestBall_Merluvlee) = {
-    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
-        EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_WAIT(1)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-            EVT_WAIT(20)
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0046)
-            EVT_WAIT(10)
-            EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0047)
-            EVT_SET(GF_HOS06_MerluvleeRequestedCrystalBall, TRUE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH4_1)
+        IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Wait(1)
+            Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+            Wait(20)
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0046)
+            Wait(10)
+            Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0047)
+            Set(GF_HOS06_MerluvleeRequestedCrystalBall, TRUE)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 s32 N(CrystalBallItems)[] = {
@@ -676,123 +676,123 @@ s32 N(CrystalBallItems)[] = {
 };
 
 EvtScript N(EVS_KootCheckBall_Merluvlee) = {
-    EVT_IF_EQ(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(FindKeyItem, ITEM_CRYSTAL_BALL, LVar0)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)
-    EVT_ELSE
+    IfEq(GF_HOS06_MerluvleeRequestedCrystalBall, FALSE)
+        Return
+    EndIf
+    IfEq(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
+        Return
+    EndIf
+    Call(FindKeyItem, ITEM_CRYSTAL_BALL, LVar0)
+    IfEq(LVar0, -1)
+        Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)
+    Else
         EVT_CHOOSE_KEY_ITEM_FROM(N(CrystalBallItems))
-        EVT_IF_NE(LVar0, -1)
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0049)
+        IfNe(LVar0, -1)
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0049)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_MERLUVLEE_AUTOGRAPH)
-            EVT_SET(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+            Set(GF_HOS06_Gift_MerluvleesAutograph, TRUE)
+        Else
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0048)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_AskForHint) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(func_802CF56C, 1)
-    EVT_CALL(PlayerMoveTo, -49, 0, 6)
-    EVT_CALL(PlayerFaceNpc, NPC_Merluvlee, FALSE)
-    EVT_IF_EQ(MV_RitualFXArrayPtr, 0)
-        EVT_MALLOC_ARRAY(20, MV_RitualFXArrayPtr)
-    EVT_END_IF
-    EVT_USE_ARRAY(MV_RitualFXArrayPtr)
-    EVT_IF_EQ(AF_HOS06_SpokeWithMerluvlee, FALSE)
-        EVT_SET(AF_HOS06_SpokeWithMerluvlee, TRUE)
-        EVT_IF_EQ(GF_HOS06_Met_Merluvlee, FALSE)
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0038)
-            EVT_SET(GF_HOS06_Met_Merluvlee, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0039)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003A)
-    EVT_END_IF
-    EVT_LABEL(10)
-    EVT_CALL(ShowChoice, MSG_Choice_0011)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003C)
-        EVT_CALL(func_802CF56C, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(ShowCoinCounter, TRUE)
-    EVT_CALL(ShowChoice, MSG_Choice_0000)
-    EVT_CALL(ShowCoinCounter, FALSE)
-    EVT_IF_EQ(LVar0, 4)
-        EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003C)
-        EVT_CALL(func_802CF56C, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(HasEnoughCoinsForHint), LVar0, LVar1)
-    EVT_IF_NE(LVar1, 0)
-        EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003D)
-        EVT_CALL(func_802CF56C, 0)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(DeductHintCoins), LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003E)
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Gather, ANIM_Merluvlee_Gather, 0, MSG_HOS_0041)
-            EVT_EXEC_WAIT(N(EVS_PerformHintRitual))
-            EVT_CALL(N(GetStarPieceHint))
-            EVT_IF_EQ(LVar1, 0)
-                EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Think, ANIM_Merluvlee_Think, 0, MSG_HOS_0042)
-                EVT_CALL(N(RefundHintCoins), 0)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, LVar1)
-            EVT_END_IF
-            EVT_GOTO(99)
-        EVT_CASE_EQ(1)
-            EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003F)
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Gather, ANIM_Merluvlee_Gather, 0, MSG_HOS_0041)
-            EVT_EXEC_WAIT(N(EVS_PerformHintRitual))
-            EVT_CALL(N(GetBadgeHint))
-            EVT_IF_EQ(LVar1, 0)
-                EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Think, ANIM_Merluvlee_Think, 0, MSG_HOS_0043)
-                EVT_CALL(N(RefundHintCoins), 1)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, LVar1)
-            EVT_END_IF
-            EVT_GOTO(99)
-        EVT_CASE_EQ(2)
-            EVT_CALL(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0040)
-            EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Gather, ANIM_Merluvlee_Gather, 0, MSG_HOS_0041)
-            EVT_EXEC_WAIT(N(EVS_PerformHintRitual))
-            EVT_CALL(N(GetSuperBlockHint))
-            EVT_IF_EQ(LVar1, 0)
-                EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Think, ANIM_Merluvlee_Think, 0, MSG_HOS_0044)
-                EVT_CALL(N(RefundHintCoins), 2)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, LVar1)
-            EVT_END_IF
-            EVT_GOTO(99)
-    EVT_END_SWITCH
-    EVT_LABEL(99)
-    EVT_CALL(func_802CF56C, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(func_802CF56C, 1)
+    Call(PlayerMoveTo, -49, 0, 6)
+    Call(PlayerFaceNpc, NPC_Merluvlee, FALSE)
+    IfEq(MV_RitualFXArrayPtr, 0)
+        MallocArray(20, MV_RitualFXArrayPtr)
+    EndIf
+    UseArray(MV_RitualFXArrayPtr)
+    IfEq(AF_HOS06_SpokeWithMerluvlee, FALSE)
+        Set(AF_HOS06_SpokeWithMerluvlee, TRUE)
+        IfEq(GF_HOS06_Met_Merluvlee, FALSE)
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0038)
+            Set(GF_HOS06_Met_Merluvlee, TRUE)
+        Else
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0039)
+        EndIf
+    Else
+        Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003A)
+    EndIf
+    Label(10)
+    Call(ShowChoice, MSG_Choice_0011)
+    IfNe(LVar0, 0)
+        Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003C)
+        Call(func_802CF56C, 0)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Call(ShowCoinCounter, TRUE)
+    Call(ShowChoice, MSG_Choice_0000)
+    Call(ShowCoinCounter, FALSE)
+    IfEq(LVar0, 4)
+        Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003C)
+        Call(func_802CF56C, 0)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Call(N(HasEnoughCoinsForHint), LVar0, LVar1)
+    IfNe(LVar1, 0)
+        Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003D)
+        Call(func_802CF56C, 0)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Call(N(DeductHintCoins), LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003E)
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Gather, ANIM_Merluvlee_Gather, 0, MSG_HOS_0041)
+            ExecWait(N(EVS_PerformHintRitual))
+            Call(N(GetStarPieceHint))
+            IfEq(LVar1, 0)
+                Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Think, ANIM_Merluvlee_Think, 0, MSG_HOS_0042)
+                Call(N(RefundHintCoins), 0)
+            Else
+                Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, LVar1)
+            EndIf
+            Goto(99)
+        CaseEq(1)
+            Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_003F)
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Gather, ANIM_Merluvlee_Gather, 0, MSG_HOS_0041)
+            ExecWait(N(EVS_PerformHintRitual))
+            Call(N(GetBadgeHint))
+            IfEq(LVar1, 0)
+                Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Think, ANIM_Merluvlee_Think, 0, MSG_HOS_0043)
+                Call(N(RefundHintCoins), 1)
+            Else
+                Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, LVar1)
+            EndIf
+            Goto(99)
+        CaseEq(2)
+            Call(ContinueSpeech, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0040)
+            Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Gather, ANIM_Merluvlee_Gather, 0, MSG_HOS_0041)
+            ExecWait(N(EVS_PerformHintRitual))
+            Call(N(GetSuperBlockHint))
+            IfEq(LVar1, 0)
+                Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Think, ANIM_Merluvlee_Think, 0, MSG_HOS_0044)
+                Call(N(RefundHintCoins), 2)
+            Else
+                Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, LVar1)
+            EndIf
+            Goto(99)
+    EndSwitch
+    Label(99)
+    Call(func_802CF56C, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Merluvlee) = {
-    EVT_CALL(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0045)
-    EVT_EXEC_WAIT(N(EVS_KootCheckBall_Merluvlee))
-    EVT_EXEC_WAIT(N(EVS_KootRequestBall_Merluvlee))
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_Merluvlee, ANIM_Merluvlee_Talk, ANIM_Merluvlee_Idle, 0, MSG_HOS_0045)
+    ExecWait(N(EVS_KootCheckBall_Merluvlee))
+    ExecWait(N(EVS_KootRequestBall_Merluvlee))
+    Return
+    End
 };

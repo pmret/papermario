@@ -57,53 +57,53 @@ API_CALLABLE(N(HideCoinCounter)) {
 }
 
 EvtScript N(EVS_JumpToPlayer) = {
-    EVT_CALL(NpcJump0, NPC_Mouser_ShopOwner, -31, 0, -283, 10)
-    EVT_CALL(NpcJump0, NPC_Mouser_ShopOwner, -30, 0, -283, 8)
-    EVT_RETURN
-    EVT_END
+    Call(NpcJump0, NPC_Mouser_ShopOwner, -31, 0, -283, 10)
+    Call(NpcJump0, NPC_Mouser_ShopOwner, -30, 0, -283, 8)
+    Return
+    End
 };
 
 EvtScript N(EVS_JumpAway) = {
-    EVT_CALL(NpcJump0, NPC_Mouser_ShopOwner, 20, 0, -259, 10)
-    EVT_CALL(NpcJump0, NPC_Mouser_ShopOwner, 20, 0, -259, 4)
-    EVT_RETURN
-    EVT_END
+    Call(NpcJump0, NPC_Mouser_ShopOwner, 20, 0, -259, 10)
+    Call(NpcJump0, NPC_Mouser_ShopOwner, 20, 0, -259, 4)
+    Return
+    End
 };
 
 EvtScript N(EVS_SecretPurcahseOrder_Moustafa) = {
-    EVT_CALL(N(HideCoinCounter))
-    EVT_CALL(func_802D2C14, 1)
-    EVT_EXEC_WAIT(N(EVS_JumpToPlayer))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
-        EVT_CALL(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0087)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_WAIT(10)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-        EVT_WAIT(30)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0088)
-    EVT_SET(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
-    EVT_CALL(func_802D2C14, 0)
-    EVT_EXEC_WAIT(N(EVS_JumpAway))
-    EVT_END_IF /// @bug unmatched endif in script
-    EVT_RETURN
-    EVT_END
+    Call(N(HideCoinCounter))
+    Call(func_802D2C14, 1)
+    ExecWait(N(EVS_JumpToPlayer))
+    IfLt(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
+        Call(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0087)
+        Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        Wait(10)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
+        Wait(30)
+    EndIf
+    Call(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_0088)
+    Set(GB_StoryProgress, STORY_CH2_BOUGHT_SECRET_ITEMS)
+    Call(func_802D2C14, 0)
+    ExecWait(N(EVS_JumpAway))
+    EndIf /// @bug unmatched endif in script
+    Return
+    End
 };
 
 EvtScript N(EVS_SecretPurcahseOrder_RedJar) = {
-    EVT_IF_EQ(GF_DRO01_Gift_RedJar, FALSE)
-        EVT_CALL(N(HideCoinCounter))
-        EVT_CALL(func_802D2C14, 1)
-        EVT_EXEC_WAIT(N(EVS_JumpToPlayer))
-        EVT_CALL(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_008D)
+    IfEq(GF_DRO01_Gift_RedJar, FALSE)
+        Call(N(HideCoinCounter))
+        Call(func_802D2C14, 1)
+        ExecWait(N(EVS_JumpToPlayer))
+        Call(SpeakToPlayer, NPC_Mouser_ShopOwner, ANIM_Mouser_Purple_Talk, ANIM_Mouser_Purple_Idle, 0, MSG_CH2_008D)
         EVT_GIVE_KEY_REWARD(ITEM_KOOT_RED_JAR)
-        EVT_SET(GF_DRO01_Gift_RedJar, TRUE)
-        EVT_WAIT(20)
-        EVT_CALL(func_802D2C14, 0)
-        EVT_EXEC_WAIT(N(EVS_JumpAway))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        Set(GF_DRO01_Gift_RedJar, TRUE)
+        Wait(20)
+        Call(func_802D2C14, 0)
+        ExecWait(N(EVS_JumpAway))
+    EndIf
+    Return
+    End
 };
 
 enum {
@@ -114,45 +114,45 @@ enum {
 };
 
 EvtScript N(EVS_OnBuy) = {
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_CANCEL)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_4)
-        EVT_CASE_EQ(SHOP_BUY_RESULT_OK)
-            EVT_SET(LVar2, AB_DRO_SHOP_PREV1)
-            EVT_SET(LVar3, AB_DRO_SHOP_PREV2)
-            EVT_SET(LVar4, AB_DRO_SHOP_PREV3)
-            EVT_SET(AB_DRO_SHOP_PREV2, LVar2)
-            EVT_SET(AB_DRO_SHOP_PREV3, LVar3)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(ITEM_DRIED_SHROOM)
+    Switch(LVar0)
+        CaseEq(SHOP_BUY_RESULT_CANCEL)
+        CaseEq(SHOP_BUY_RESULT_4)
+        CaseEq(SHOP_BUY_RESULT_OK)
+            Set(LVar2, AB_DRO_SHOP_PREV1)
+            Set(LVar3, AB_DRO_SHOP_PREV2)
+            Set(LVar4, AB_DRO_SHOP_PREV3)
+            Set(AB_DRO_SHOP_PREV2, LVar2)
+            Set(AB_DRO_SHOP_PREV3, LVar3)
+            Switch(LVar1)
+                CaseEq(ITEM_DRIED_SHROOM)
                     // Dusty Hammer, Dried Pasta, Dusty Hammer, Dried Shroom -> Red jar
-                    EVT_SET(AB_DRO_SHOP_PREV1, SEQ_DRIED_SHOOM)
-                    EVT_IF_EQ(LVar2, SEQ_DUSTY_HAMMER)
-                        EVT_IF_EQ(LVar3, SEQ_DRIED_PASTA)
-                            EVT_IF_EQ(LVar4, SEQ_DUSTY_HAMMER)
-                                EVT_EXEC_WAIT(N(EVS_SecretPurcahseOrder_RedJar))
-                                EVT_SET(AB_DRO_SHOP_PREV1, SEQ_NONE)
-                            EVT_END_IF
-                        EVT_END_IF
-                    EVT_END_IF
-                EVT_CASE_EQ(ITEM_DUSTY_HAMMER)
+                    Set(AB_DRO_SHOP_PREV1, SEQ_DRIED_SHOOM)
+                    IfEq(LVar2, SEQ_DUSTY_HAMMER)
+                        IfEq(LVar3, SEQ_DRIED_PASTA)
+                            IfEq(LVar4, SEQ_DUSTY_HAMMER)
+                                ExecWait(N(EVS_SecretPurcahseOrder_RedJar))
+                                Set(AB_DRO_SHOP_PREV1, SEQ_NONE)
+                            EndIf
+                        EndIf
+                    EndIf
+                CaseEq(ITEM_DUSTY_HAMMER)
                     // Dried Shroom, Dusty Hammer -> Moustafa information
-                    EVT_SET(AB_DRO_SHOP_PREV1, SEQ_DUSTY_HAMMER)
-                    EVT_IF_EQ(LVar2, SEQ_DRIED_SHOOM)
-                        EVT_IF_LT(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
-                            EVT_EXEC_WAIT(N(EVS_SecretPurcahseOrder_Moustafa))
-                            EVT_SET(AB_DRO_SHOP_PREV1, SEQ_NONE)
-                        EVT_END_IF
-                    EVT_END_IF
-                EVT_CASE_EQ(ITEM_DRIED_PASTA)
-                    EVT_SET(AB_DRO_SHOP_PREV1, SEQ_DRIED_PASTA)
-                EVT_CASE_DEFAULT
-                    EVT_SET(AB_DRO_SHOP_PREV1, SEQ_NONE)
-            EVT_END_SWITCH
-        EVT_CASE_EQ(SHOP_BUY_RESULT_2)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+                    Set(AB_DRO_SHOP_PREV1, SEQ_DUSTY_HAMMER)
+                    IfEq(LVar2, SEQ_DRIED_SHOOM)
+                        IfLt(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
+                            ExecWait(N(EVS_SecretPurcahseOrder_Moustafa))
+                            Set(AB_DRO_SHOP_PREV1, SEQ_NONE)
+                        EndIf
+                    EndIf
+                CaseEq(ITEM_DRIED_PASTA)
+                    Set(AB_DRO_SHOP_PREV1, SEQ_DRIED_PASTA)
+                CaseDefault
+                    Set(AB_DRO_SHOP_PREV1, SEQ_NONE)
+            EndSwitch
+        CaseEq(SHOP_BUY_RESULT_2)
+    EndSwitch
+    Return
+    End
 };
 
 ShopItemLocation N(ItemPositions)[] = {

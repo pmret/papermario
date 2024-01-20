@@ -16,9 +16,9 @@ MobileAISettings N(AISettings_HyperGoomba) = {
 };
 
 EvtScript N(EVS_NpcAI_HyperGoomba) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_HyperGoomba)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_HyperGoomba)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_HyperGoomba) = {

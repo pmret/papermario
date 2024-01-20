@@ -95,9 +95,9 @@ API_CALLABLE(N(InitSplashes)) {
 }
 
 EvtScript N(EVS_MakeSplashes) = {
-    EVT_CALL(N(InitSplashes))
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, 0, EVT_PTR(N(gfx_build_splashes)))
-    EVT_CALL(SetModelCustomGfx, MODEL_dummy_sprash2, CUSTOM_GFX_0, -1)
-    EVT_RETURN
-    EVT_END
+    Call(N(InitSplashes))
+    Call(SetCustomGfxBuilders, CUSTOM_GFX_0, 0, Ref(N(gfx_build_splashes)))
+    Call(SetModelCustomGfx, MODEL_dummy_sprash2, CUSTOM_GFX_0, -1)
+    Return
+    End
 };

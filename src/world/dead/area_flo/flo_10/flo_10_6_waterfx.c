@@ -8,8 +8,8 @@ s32 N(WavePhase) = {
 
 // unused wavy distortion effect for edge water -- unclear how it would have been used
 EvtScript N(EVS_SetupWaterEffect) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 void N(UnkModelFunc000)(s32 x1, s32 y1, s32 x2, s32 y2) {

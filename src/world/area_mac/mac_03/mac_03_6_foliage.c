@@ -3,42 +3,42 @@
 #include "common/foliage.inc.c"
 
 EvtScript N(EVS_OnShakeTree3) = {
-    EVT_IF_EQ(GF_MAC03_UnlockedPlayroom, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(GF_MAC03_UnlockedPlayroom, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -128, 20, -555)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, -128, 20, -555)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(330.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(5)
-    EVT_CALL(PlaySoundWithVolume, SOUND_GROW, 0)
-    EVT_CALL(EnableModel, MODEL_o241, TRUE)
-    EVT_SET(LVar0, -30)
-    EVT_LOOP(30)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(TranslateModel, MODEL_o241, 0, LVar0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(TranslateModel, MODEL_o241, 0, 0, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_dokan, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilim, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_MAC03_UnlockedPlayroom, TRUE)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Set(GF_MAC03_UnlockedPlayroom, TRUE)
+    Wait(10)
+    Call(UseSettingsFrom, CAM_DEFAULT, -128, 20, -555)
+    Call(SetPanTarget, CAM_DEFAULT, -128, 20, -555)
+    Call(SetCamDistance, CAM_DEFAULT, Float(330.0))
+    Call(SetCamSpeed, CAM_DEFAULT, 3)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(5)
+    Call(PlaySoundWithVolume, SOUND_GROW, 0)
+    Call(EnableModel, MODEL_o241, TRUE)
+    Set(LVar0, -30)
+    Loop(30)
+        Add(LVar0, 1)
+        Call(TranslateModel, MODEL_o241, 0, LVar0, 0)
+        Wait(1)
+    EndLoop
+    Call(TranslateModel, MODEL_o241, 0, 0, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_dokan, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilim, COLLIDER_FLAGS_UPPER_MASK)
+    Wait(1)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o240);
@@ -110,15 +110,15 @@ BombTrigger N(BombPos_Tree3) = {
 };
 
 EvtScript N(EVS_SetupFoliage) = {
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree1)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o212, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree1)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree2)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o211, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree2)), 1, 0)
-    EVT_SET(LVar0, EVT_PTR(N(ShakeTree_Tree3)))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_mgm_tree, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Tree3)), 1, 0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(ShakeTree_Tree1)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o212, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree1)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree2)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_o211, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree2)), 1, 0)
+    Set(LVar0, Ref(N(ShakeTree_Tree3)))
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_WALL_HAMMER, COLLIDER_mgm_tree, 1, 0)
+    BindTrigger(Ref(N(EVS_ShakeTree)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Tree3)), 1, 0)
+    Return
+    End
 };

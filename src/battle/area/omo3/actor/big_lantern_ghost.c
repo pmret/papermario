@@ -282,593 +282,593 @@ API_CALLABLE(N(update_effect)) {
 }
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_EXTINGUISHED_ONCE), 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_6), 10)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 2)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_DARKENING), 240)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), 0)
-    EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVar0, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
-    EVT_CALL(N(init_overlay))
-    EVT_EXEC(N(updateEffectThread))
-    EVT_EXEC_WAIT(N(setGhostNoTarget))
-    EVT_WAIT(2)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Call(SetActorVar, ACTOR_SELF, N(VAR_EXTINGUISHED_ONCE), 0)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_6), 10)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 2)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_DARKENING), 240)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), 0)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
+    Call(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), 0)
+    PlayEffect(EFFECT_BULB_GLOW, 1, LVar0, LVar1, LVar2, Float(1.0), LVar0, 0)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
+    Call(N(init_overlay))
+    Exec(N(updateEffectThread))
+    ExecWait(N(setGhostNoTarget))
+    Wait(2)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
-            EVT_IF_NOT_FLAG(LVar0, 1)
-                EVT_BITWISE_OR_CONST(LVar0, 1)
-                EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
-                EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-                EVT_CALL(SetBattleCamOffsetZ, 40)
-                EVT_CALL(MoveBattleCamOver, 30)
-                EVT_WAIT(30)
-                EVT_CALL(ActorSpeak, MSG_CH4_0051, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_END_IF
-        EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_PLAYER_BEGIN)
+            Call(GetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
+            IfNotFlag(LVar0, 1)
+                BitwiseOrConst(LVar0, 1)
+                Call(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
+                Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+                Call(BattleCamTargetActor, ACTOR_SELF)
+                Call(SetBattleCamOffsetZ, 40)
+                Call(MoveBattleCamOver, 30)
+                Wait(30)
+                Call(ActorSpeak, MSG_CH4_0051, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
+                Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            EndIf
+        CaseEq(PHASE_ENEMY_BEGIN)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(updateEffectThread) = {
-    EVT_SET_PRIORITY(99)
-    EVT_LABEL(0)
-    EVT_CALL(ActorExists, ACTOR_SELF, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
-    EVT_ELSE
-        EVT_SET(LVar0, 0)
-    EVT_END_IF
-    EVT_CALL(N(update_effect), LVar0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    SetPriority(99)
+    Label(0)
+    Call(ActorExists, ACTOR_SELF, LVar0)
+    IfNe(LVar0, 0)
+        Call(GetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
+    Else
+        Set(LVar0, 0)
+    EndIf
+    Call(N(update_effect), LVar0)
+    Wait(1)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_LABEL(0)
-    EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_WAIT(1)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(ActorExists, ACTOR_ENEMY0, LVar0)
+    IfNe(LVar0, 0)
+        Wait(1)
+        Goto(0)
+    EndIf
+    Wait(1)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_EXEC_WAIT(N(onHit))
-            EVT_EXEC_WAIT(N(checkExtinguish))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_WAIT(N(onHit))
-            EVT_EXEC_WAIT(N(checkExtinguish))
-            EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, 7143434)
-            EVT_SET(LVar2, 7143435)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_WAIT(N(onHit))
-            EVT_SET(LVar0, 1)
-            EVT_SET(LVar1, 7143434)
-            EVT_SET(LVar2, 7143435)
-            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim0B)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_EXEC_WAIT(N(onHit))
-            EVT_EXEC_WAIT(N(checkExtinguish))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_Knockback)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_CALL(func_8026E914, LVar0, LVar1)
-            EVT_IF_EQ(LVar1, 2)
-                EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar2)
-                EVT_IF_LT(LVar2, 10)
-                    EVT_ADD(LVar2, 2)
-                    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), LVar0)
-                    EVT_SWITCH(LVar0)
-                        EVT_CASE_EQ(0)
-                            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_1)
-                            EVT_CALL(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_2)
-                            EVT_CALL(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
-                        EVT_CASE_EQ(2)
-                            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_3)
-                            EVT_CALL(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
-                        EVT_CASE_EQ(3)
-                            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_4)
-                            EVT_CALL(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
-                        EVT_CASE_DEFAULT
-                    EVT_END_SWITCH
-                    EVT_IF_GT(LVar2, 10)
-                        EVT_SET(LVar2, 10)
-                    EVT_END_IF
-                    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar2)
-                    EVT_EXEC_WAIT(N(setGhostNoTarget))
-                    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
-                    EVT_IF_GE(LVar0, 6)
-                        EVT_EXEC_WAIT(N(checkExtinguish))
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_IF
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim01)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim01)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim01)
-            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(N(onDeath))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-            EVT_CALL(HPBarToHome, ACTOR_SELF)
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim01)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim01)
-            EVT_SET_CONST(LVar2, ANIM_BigLanternGhost_Anim09)
-            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
-            EVT_RETURN
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_BEGIN_FIRST_STRIKE)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            ExecWait(N(onHit))
+            ExecWait(N(checkExtinguish))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_Hit)
+        EndCaseGroup
+        CaseEq(EVENT_BURN_HIT)
+            ExecWait(N(onHit))
+            ExecWait(N(checkExtinguish))
+            Set(LVar0, 1)
+            Set(LVar1, 7143434)
+            Set(LVar2, 7143435)
+            ExecWait(EVS_Enemy_BurnHit)
+        CaseEq(EVENT_BURN_DEATH)
+            ExecWait(N(onHit))
+            Set(LVar0, 1)
+            Set(LVar1, 7143434)
+            Set(LVar2, 7143435)
+            ExecWait(EVS_Enemy_BurnHit)
+            Wait(10)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim0B)
+            ExecWait(N(onDeath))
+            Return
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            ExecWait(N(onHit))
+            ExecWait(N(checkExtinguish))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_SpinSmashHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(N(onDeath))
+            Return
+        CaseEq(EVENT_SHOCK_HIT)
+            ExecWait(N(onHit))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_Knockback)
+            ExecWait(N(EVS_ReturnHome))
+        CaseEq(EVENT_SHOCK_DEATH)
+            ExecWait(N(onHit))
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_ShockHit)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_Knockback)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(N(onDeath))
+            Return
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+            Call(func_8026E914, LVar0, LVar1)
+            IfEq(LVar1, 2)
+                Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar2)
+                IfLt(LVar2, 10)
+                    Add(LVar2, 2)
+                    Call(GetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), LVar0)
+                    Switch(LVar0)
+                        CaseEq(0)
+                            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_1)
+                            Call(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
+                        CaseEq(1)
+                            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_2)
+                            Call(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
+                        CaseEq(2)
+                            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_3)
+                            Call(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
+                        CaseEq(3)
+                            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_REVEAL_MORE_4)
+                            Call(AddActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 1)
+                        CaseDefault
+                    EndSwitch
+                    IfGt(LVar2, 10)
+                        Set(LVar2, 10)
+                    EndIf
+                    Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar2)
+                    ExecWait(N(setGhostNoTarget))
+                    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
+                    IfGe(LVar0, 6)
+                        ExecWait(N(checkExtinguish))
+                    EndIf
+                EndIf
+            EndIf
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        EndCaseGroup
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseEq(EVENT_SPIKE_TAUNT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            ExecWait(EVS_Enemy_NoDamageHit)
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(10)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(N(onDeath))
+            Return
+        CaseEq(EVENT_END_FIRST_STRIKE)
+            ExecWait(N(EVS_ReturnHome))
+            Call(HPBarToHome, ACTOR_SELF)
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_30)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(1000)
+        CaseEq(EVENT_SCARE_AWAY)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_BigLanternGhost_Anim01)
+            SetConst(LVar2, ANIM_BigLanternGhost_Anim09)
+            ExecWait(EVS_Enemy_ScareAway)
+            Return
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(onHit) = {
-    EVT_CALL(func_8026E914, LVar0, LVar1)
-    EVT_IF_NE(LVar1, 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetLastDamage, ACTOR_SELF, LVar1)
-    EVT_MUL(LVar1, 10)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_6), LVar0)
-    EVT_ADD(LVar0, LVar1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_6), LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(func_8026E914, LVar0, LVar1)
+    IfNe(LVar1, 1)
+        Return
+    EndIf
+    Call(GetLastDamage, ACTOR_SELF, LVar1)
+    Mul(LVar1, 10)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_6), LVar0)
+    Add(LVar0, LVar1)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_6), LVar0)
+    Return
+    End
 };
 
 EvtScript N(checkExtinguish) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), LVar0)
-    EVT_IF_NE(LVar0, N(MOVE_LIGHT_BEAM))
-        EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_EXTINGUISH))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), LVar0)
+    IfNe(LVar0, N(MOVE_LIGHT_BEAM))
+        Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_EXTINGUISH))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(attackHeavyJump) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
-    EVT_IF_GE(LVar0, 6)
-        EVT_EXEC_WAIT(N(checkExtinguish))
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(SetBattleCamZoom, 260)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 50)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
-    EVT_WAIT(8)
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_LARGE_ACTOR_JUMP, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
-            EVT_THREAD
-                EVT_WAIT(10)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim11)
-            EVT_END_THREAD
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 20)
-            EVT_SET(LVar1, 0)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
-            EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
-            EVT_SUB(LVar0, 15)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
-            EVT_SUB(LVar0, 10)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
-            EVT_WAIT(8)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
-    EVT_THREAD
-        EVT_WAIT(7)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim11)
-    EVT_END_THREAD
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SET(LVarF, LVar0)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
-            EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-            EVT_CALL(SetBattleCamZoom, 320)
-            EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-            EVT_THREAD
-                EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
-            EVT_END_THREAD
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 40)
-            EVT_SET(LVar1, 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
-            EVT_WAIT(8)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_EXEC_WAIT(N(EVS_ReturnHome))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
+    IfGe(LVar0, 6)
+        ExecWait(N(checkExtinguish))
+    EndIf
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(SetBattleCamZoom, 260)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 20)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, 50)
+    Set(LVar1, 0)
+    Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
+    Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Wait(8)
+    Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_LARGE_ACTOR_JUMP, 0)
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
+            Thread
+                Wait(10)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim11)
+            EndThread
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar0, 20)
+            Set(LVar1, 0)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
+            Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
+            Sub(LVar0, 15)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+            Sub(LVar0, 10)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
+            Wait(8)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            ExecWait(N(EVS_ReturnHome))
+            Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
+    Thread
+        Wait(7)
+        Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim11)
+    EndThread
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 5, BS_FLAGS1_TRIGGER_EVENTS)
+    Set(LVarF, LVar0)
+    Switch(LVarF)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
+            Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
+            Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+            Call(SetBattleCamZoom, 320)
+            Call(BattleCamTargetActor, ACTOR_SELF)
+            Call(MoveBattleCamOver, 20)
+            Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+            Thread
+                Wait(5)
+                Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim10)
+            EndThread
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Add(LVar0, 40)
+            Set(LVar1, 0)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+            Add(LVar0, 20)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_STEP)
+            Wait(8)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 20)
+            ExecWait(N(EVS_ReturnHome))
+        EndCaseGroup
+    EndSwitch
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(attackLightBeam) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), 3)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
-    EVT_CALL(SetBattleCamZoom, 240)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 80)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
-    EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_05)
-    EVT_CALL(SetBattleCamZoom, 350)
-    EVT_CALL(SetBattleCamOffsetZ, 35)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 8)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_LIGHT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0F)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar5)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 11)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_X), LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_Y), LVar1)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_Z), LVar2)
-    EVT_ADD(LVar1, 10)
-    EVT_ADD(LVar2, 2)
-    EVT_THREAD
-        EVT_WAIT(1)
-        EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVarB, 0)
-        EVT_WAIT(30)
-        EVT_CALL(RemoveEffect, LVarB)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(1)
-        EVT_PLAY_EFFECT(EFFECT_RADIATING_ENERGY_ORB, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 30, 0)
-    EVT_END_THREAD
-    EVT_WAIT(5)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-            EVT_SWITCH(LVarA)
-                EVT_CASE_EQ(HIT_RESULT_MISS)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(ActorExists, ACTOR_PARTNER, LVar0)
-                    EVT_IF_EQ(LVar0, 1)
-                        EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-                        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
-                    EVT_END_IF
-            EVT_END_SWITCH
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_WAIT(2)
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
-            EVT_WAIT(2)
-            EVT_CALL(ActorExists, ACTOR_PARTNER, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
-                EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_WAIT(40)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar5)
-    EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), LVar0)
-        EVT_WAIT(10)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_4)
-            EVT_CASE_EQ(1)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_3)
-            EVT_CASE_EQ(2)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_2)
-            EVT_CASE_EQ(3)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_1)
-        EVT_END_SWITCH
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim14)
-    EVT_WAIT(60)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_ReturnHome))
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
+    Call(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), 3)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(SetBattleCamZoom, 240)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 20)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, 80)
+    Set(LVar1, 0)
+    Call(SetActorSpeed, ACTOR_SELF, Float(3.0))
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim06)
+    Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(RunToGoal, ACTOR_SELF, 0, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Wait(20)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_05)
+    Call(SetBattleCamZoom, 350)
+    Call(SetBattleCamOffsetZ, 35)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 8)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_LIGHT)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0F)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar5)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 11)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_X), LVar0)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_Y), LVar1)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_Z), LVar2)
+    Add(LVar1, 10)
+    Add(LVar2, 2)
+    Thread
+        Wait(1)
+        PlayEffect(EFFECT_LIGHT_RAYS, 2, LVar0, LVar1, LVar2, Float(1.0), LVarB, 0)
+        Wait(30)
+        Call(RemoveEffect, LVarB)
+    EndThread
+    Thread
+        Wait(1)
+        PlayEffect(EFFECT_RADIATING_ENERGY_ORB, 1, LVar0, LVar1, LVar2, Float(1.5), 30, 0)
+    EndThread
+    Wait(5)
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
+            Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+            Switch(LVarA)
+                CaseEq(HIT_RESULT_MISS)
+                CaseDefault
+                    Call(ActorExists, ACTOR_PARTNER, LVar0)
+                    IfEq(LVar0, 1)
+                        Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
+                        Call(SetGoalToTarget, ACTOR_SELF)
+                        Call(EnemyDamageTarget, ACTOR_SELF, LVarD, 0, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
+                    EndIf
+            EndSwitch
+        EndCaseGroup
+        CaseDefault
+            Wait(2)
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVarE, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
+            Wait(2)
+            Call(ActorExists, ACTOR_PARTNER, LVar0)
+            IfEq(LVar0, 1)
+                Call(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
+                Call(SetGoalToTarget, ACTOR_SELF)
+                Call(EnemyDamageTarget, ACTOR_SELF, LVarD, DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 2, BS_FLAGS1_TRIGGER_EVENTS)
+            EndIf
+    EndSwitch
+    Wait(40)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar5)
+    Thread
+        Call(GetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), LVar0)
+        Wait(10)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_4)
+            CaseEq(1)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_3)
+            CaseEq(2)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_2)
+            CaseEq(3)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_1)
+        EndSwitch
+    EndThread
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim14)
+    Wait(60)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    ExecWait(N(EVS_ReturnHome))
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(extinguish) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_EXTINGUISHED_ONCE), 1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_6), 1000)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_LIGHT_BEAM))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
-    EVT_IF_NOT_FLAG(LVar0, 2)
-        EVT_BITWISE_OR_CONST(LVar0, 2)
-        EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
-        EVT_CALL(SetBattleCamOffsetZ, 40)
-        EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(MoveBattleCamOver, 30)
-        EVT_WAIT(30)
-        EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
-        EVT_CALL(GetActorHP, ACTOR_SELF, LVar1)
-        EVT_IF_EQ(LVar0, LVar1)
-            EVT_CALL(ActorSpeak, MSG_CH4_0053, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
-        EVT_ELSE
-            EVT_CALL(ActorSpeak, MSG_CH4_0052, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
-    EVT_CALL(SetBattleCamZoom, 230)
-    EVT_CALL(SetBattleCamOffsetZ, 25)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_INHALE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0F)
-    EVT_WAIT(8)
-    EVT_THREAD
-        EVT_WAIT(2)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_BLOW)
-    EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0E)
-    EVT_WAIT(5)
-    EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 2)
-    EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), LVar0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 0)
-        EVT_WAIT(10)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(4)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_4)
-            EVT_CASE_EQ(3)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_3)
-            EVT_CASE_EQ(2)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_2)
-            EVT_CASE_EQ(1)
-                EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_1)
-        EVT_END_SWITCH
-    EVT_END_THREAD
-    EVT_WAIT(14)
-    EVT_WAIT(1)
-    EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_WAIT(2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
-    EVT_EXEC_WAIT(N(setGhostNoTarget))
-    EVT_WAIT(30)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(SetActorVar, ACTOR_SELF, N(VAR_EXTINGUISHED_ONCE), 1)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_6), 1000)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_LIGHT_BEAM))
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
+    IfNotFlag(LVar0, 2)
+        BitwiseOrConst(LVar0, 2)
+        Call(SetActorVar, ACTOR_SELF, N(VAR_SPEAK_FLAGS), LVar0)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        Call(SetBattleCamOffsetZ, 40)
+        Call(BattleCamTargetActor, ACTOR_SELF)
+        Call(MoveBattleCamOver, 30)
+        Wait(30)
+        Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
+        Call(GetActorHP, ACTOR_SELF, LVar1)
+        IfEq(LVar0, LVar1)
+            Call(ActorSpeak, MSG_CH4_0053, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
+        Else
+            Call(ActorSpeak, MSG_CH4_0052, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim05, ANIM_BigLanternGhost_Anim01)
+        EndIf
+    EndIf
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_13)
+    Call(SetBattleCamZoom, 230)
+    Call(SetBattleCamOffsetZ, 25)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 20)
+    Wait(20)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_INHALE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0F)
+    Wait(8)
+    Thread
+        Wait(2)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_BLOW)
+    EndThread
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim0E)
+    Wait(5)
+    Call(SetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), 2)
+    Thread
+        Call(GetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), LVar0)
+        Call(SetActorVar, ACTOR_SELF, N(VAR_HIT_SOUND_COUNTER), 0)
+        Wait(10)
+        Switch(LVar0)
+            CaseEq(4)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_4)
+            CaseEq(3)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_3)
+            CaseEq(2)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_2)
+            CaseEq(1)
+                Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LANTERN_GHOST_DARKEN_1)
+        EndSwitch
+    EndThread
+    Wait(14)
+    Wait(1)
+    Wait(15)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Wait(2)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    ExecWait(N(setGhostNoTarget))
+    Wait(30)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_SUB(LVar0, 1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), LVar0)
-    EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(N(MOVE_LIGHT_BEAM))
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), LVar0)
-            EVT_IF_GT(LVar0, 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
-            EVT_END_IF
-        EVT_CASE_EQ(N(MOVE_EXTINGUISH))
-            EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
-            EVT_IF_LT(LVar0, 6)
-                EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(N(MOVE_LIGHT_BEAM))
-            EVT_EXEC_WAIT(N(attackLightBeam))
-        EVT_CASE_EQ(N(MOVE_EXTINGUISH))
-            EVT_EXEC_WAIT(N(extinguish))
-        EVT_CASE_DEFAULT
-            EVT_EXEC_WAIT(N(attackHeavyJump))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), LVar0)
+    IfGt(LVar0, 0)
+        Sub(LVar0, 1)
+        Call(SetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), LVar0)
+    EndIf
+    Call(GetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), LVar0)
+    Switch(LVar0)
+        CaseEq(N(MOVE_LIGHT_BEAM))
+            Call(GetActorVar, ACTOR_SELF, N(VAR_LIGHT_BEAM_COUNTER), LVar0)
+            IfGt(LVar0, 0)
+                Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
+            EndIf
+        CaseEq(N(MOVE_EXTINGUISH))
+            Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
+            IfLt(LVar0, 6)
+                Call(SetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), N(MOVE_HEAVY_JUMP))
+            EndIf
+    EndSwitch
+    Call(GetActorVar, ACTOR_SELF, N(VAR_MOVE_ID), LVar0)
+    Switch(LVar0)
+        CaseEq(N(MOVE_LIGHT_BEAM))
+            ExecWait(N(attackLightBeam))
+        CaseEq(N(MOVE_EXTINGUISH))
+            ExecWait(N(extinguish))
+        CaseDefault
+            ExecWait(N(attackHeavyJump))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_ReturnHome) = {
-    EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_SET_CONST(LVar1, ANIM_BigLanternGhost_Anim07)
-    EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MAIN)
+    SetConst(LVar1, ANIM_BigLanternGhost_Anim07)
+    ExecWait(EVS_Enemy_ReturnHome)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BigLanternGhost_Anim01)
+    Return
+    End
 };
 
 EvtScript N(setGhostNoTarget) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_LT(5)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
-        EVT_CASE_LT(8)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, N(VAR_LANTERN_BRIGHTNESS), LVar0)
+    Switch(LVar0)
+        CaseLt(5)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+        CaseLt(8)
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+        CaseDefault
+            Call(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, FALSE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(onDeath) = {
-    EVT_EXEC_WAIT(EVS_Enemy_DeathWithoutRemove)
-    EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
-    EVT_CALL(RemoveEffect, LVar0)
-    EVT_CALL(RemoveActor, ACTOR_SELF)
-    EVT_RETURN
-    EVT_END
+    ExecWait(EVS_Enemy_DeathWithoutRemove)
+    Call(GetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
+    Call(RemoveEffect, LVar0)
+    Call(RemoveActor, ACTOR_SELF)
+    Return
+    End
 };

@@ -18,24 +18,24 @@ MobileAISettings N(AISettings_FlyingMagikoopa) = {
 };
 
 EvtScript N(EVS_NpcAI_FlyingMagikoopa) = {
-    EVT_CALL(N(FlyingMagikoopaAI_Main), EVT_PTR(N(AISettings_FlyingMagikoopa)))
-    EVT_RETURN
-    EVT_END
+    Call(N(FlyingMagikoopaAI_Main), Ref(N(AISettings_FlyingMagikoopa)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_FlyingMagikoopa) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FlyingMagikoopa) = {
@@ -59,50 +59,50 @@ AnimID N(ExtraAnims_FlyingMagikoopa)[] = {
 };
 
 EvtScript N(EVS_NpcAuxAI_FlyingMagikoopa_AltHitbox) = {
-    EVT_CALL(SetSelfVar, 1, 10)
-    EVT_CALL(SetSelfVar, 2, 40)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 1, 10)
+    Call(SetSelfVar, 2, 40)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_FlyingMagikoopa_Hitbox) = {
-    EVT_CALL(SetSelfVar, 1, 0)
-    EVT_CALL(SetSelfVar, 2, 55)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 1, 0)
+    Call(SetSelfVar, 2, 55)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_FlyingMagikoopa_Hitbox) = {
-    EVT_CALL(N(MagikoopaAI_SpellMain))
-    EVT_RETURN
-    EVT_END
+    Call(N(MagikoopaAI_SpellMain))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_FlyingMagikoopa_Hitbox) = {
-    EVT_CALL(N(FlyingMagikoopaAI_OnHitInit))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(FlyingMagikoopaAI_OnHit))
-    EVT_EXEC(EnemyNpcHit)
-    EVT_RETURN
-    EVT_END
+    Call(N(FlyingMagikoopaAI_OnHitInit))
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    Call(N(FlyingMagikoopaAI_OnHit))
+    Exec(EnemyNpcHit)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_FlyingMagikoopa_Hitbox) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_CALL(OnPlayerFled, 1)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(RemoveNpc, NPC_SELF)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Call(OnPlayerFled, 1)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_FlyingMagikoopa_AltHitbox) = {

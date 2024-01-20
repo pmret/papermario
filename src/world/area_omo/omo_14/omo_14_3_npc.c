@@ -95,260 +95,260 @@ Vec2i N(CrowdChaseGoalPositions)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy_Loner) = {
-    EVT_SETF(LVarA, EVT_FLOAT(3.5 / DT))
-    EVT_SET(AF_OMO_11, FALSE)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-            EVT_IF_GT(LVar2, -210)
-                EVT_CALL(N(GetActingPartner))
-                EVT_SET(MV_ActingPartner, LVar9)
-                EVT_SWITCH(LVar9)
-                    EVT_CASE_EQ(-1)
-                        EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-                        EVT_CALL(N(SurroundPlayer))
-                        EVT_IF_GT(LVarE, 30)
-                            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                            EVT_IF_EQ(LVar1, 0)
-                                EVT_CALL(PlaySound, SOUND_MASTER_SMACK)
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
-                                EVT_THREAD
-                                    EVT_CALL(ShakeCam, CAM_DEFAULT, 1, 4, EVT_FLOAT(1.0))
-                                EVT_END_THREAD
-                                EVT_WAIT(3 * DT)
-                                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_PanicRun)
-                                EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-                                EVT_CALL(PlaySound, SOUND_MASTER_PUNCH)
-                                EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 15 * DT)
-                                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-                            EVT_ELSE
-                                EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10 * DT)
-                            EVT_END_IF
-                            EVT_SET(LVarE, 0)
-                        EVT_END_IF
-                    EVT_CASE_EQ(PARTNER_WATT)
-                        EVT_USE_BUF(EVT_PTR(N(CrowdChaseGoalPositions)))
-                        EVT_BUF_READ2(LVar3, LVar4)
-                        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                        EVT_IF_LT(LVar0, 180)
-                            EVT_CALL(GetSelfVar, 1, LVar9)
-                            EVT_IF_NE(LVar9, 6)
-                                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
-                            EVT_END_IF
-                            EVT_IF_EQ(AF_OMO_11, FALSE)
-                                EVT_SET(AF_OMO_11, TRUE)
-                            EVT_END_IF
-                            EVT_USE_BUF(EVT_PTR(N(CrowdChaseGoalPositions)))
-                            EVT_BUF_READ2(LVar1, LVar2)
-                            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0 / DT))
-                            EVT_CALL(N(SimpleMoveNPC), LVar3, LVar4)
-                        EVT_ELSE
-                            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                            EVT_IF_LT(LVar0, 150)
-                                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar3, 0, LVar4, 15 * DT)
-                                EVT_WAIT(30 * DT)
-                            EVT_ELSE
-                                EVT_CALL(DisablePlayerInput, TRUE)
-                                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar3, 0, LVar4, 15 * DT)
-                                EVT_WAIT(30 * DT)
-                                EVT_CALL(DisablePlayerInput, FALSE)
-                            EVT_END_IF
-                            EVT_CALL(SetSelfVar, 0, 1)
-                        EVT_END_IF
-                    EVT_CASE_EQ(PARTNER_BOW)
-                        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-                        EVT_IF_LT(LVar2, 30)
-                            EVT_CALL(N(SimpleMoveNPC), 200, 0)
-                        EVT_ELSE
-                            EVT_CALL(N(SimpleMoveNPC), -150, 0)
-                        EVT_END_IF
-                EVT_END_SWITCH
-                EVT_SET(LVar9, MV_ActingPartner)
-                EVT_CALL(SetSelfVar, 1, LVar9)
-            EVT_ELSE
-                EVT_CALL(N(SimpleMoveNPC), 200, 0)
-            EVT_END_IF
-        EVT_CASE_EQ(1)
-            EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-            EVT_IF_LT(LVar2, 150)
-                EVT_CALL(N(GetActingPartner))
-                EVT_IF_NE(LVar9, 6)
-                    EVT_CALL(SetSelfVar, 0, 0)
-                EVT_END_IF
-            EVT_ELSE
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005D)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
-                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0 / DT))
-                EVT_CALL(NpcMoveTo, NPC_SELF, 230, 0, 0)
-                EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-                EVT_SET(LVar0, 1)
-                EVT_LOOP(10)
-                    EVT_CALL(SetNpcVar, LVar0, 0, 2)
-                    EVT_ADD(LVar0, 1)
-                EVT_END_LOOP
-                EVT_WAIT(45 * DT)
-                EVT_CALL(StopSound, SOUND_LOOP_SHY_GUY_CROWD_1)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005E)
-                EVT_THREAD
-                    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
-                EVT_END_THREAD
-                EVT_CALL(PlaySoundAtCollider, COLLIDER_tt1, SOUND_TROMP_CRASH, SOUND_SPACE_DEFAULT)
-                EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 0, 37, 37, 1, 10, 30)
-                EVT_CALL(EnableModel, MODEL_o821, TRUE)
-                EVT_LOOP(10)
-                    EVT_CALL(EnableModel, MODEL_o823, TRUE)
-                    EVT_CALL(EnableModel, MODEL_o828, TRUE)
-                    EVT_WAIT(1)
-                    EVT_CALL(EnableModel, MODEL_o823, FALSE)
-                    EVT_CALL(EnableModel, MODEL_o828, FALSE)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-                EVT_WAIT(40 * DT)
-                EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-                EVT_WAIT(20 * DT)
-                EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-                EVT_CALL(NpcMoveTo, NPC_SELF, 300, 0, 0)
-                EVT_SET(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-                EVT_WAIT(30 * DT)
-                EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_CALL(RemoveNpc, NPC_SELF)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    SetF(LVarA, Float(3.5 / DT))
+    Set(AF_OMO_11, FALSE)
+    Call(SetNpcSpeed, NPC_SELF, LVarA)
+    Label(0)
+    Call(GetSelfVar, 0, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(GetPlayerPos, LVar2, LVar3, LVar4)
+            IfGt(LVar2, -210)
+                Call(N(GetActingPartner))
+                Set(MV_ActingPartner, LVar9)
+                Switch(LVar9)
+                    CaseEq(-1)
+                        Call(SetNpcSpeed, NPC_SELF, LVarA)
+                        Call(N(SurroundPlayer))
+                        IfGt(LVarE, 30)
+                            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                            IfEq(LVar1, 0)
+                                Call(PlaySound, SOUND_MASTER_SMACK)
+                                Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
+                                Thread
+                                    Call(ShakeCam, CAM_DEFAULT, 1, 4, Float(1.0))
+                                EndThread
+                                Wait(3 * DT)
+                                Call(SetPlayerAnimation, ANIM_Mario1_PanicRun)
+                                Call(SetPlayerJumpscale, Float(1.0))
+                                Call(PlaySound, SOUND_MASTER_PUNCH)
+                                Call(PlayerJump1, LVar0, LVar1, LVar2, 15 * DT)
+                                Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+                            Else
+                                Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+                                Call(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10 * DT)
+                            EndIf
+                            Set(LVarE, 0)
+                        EndIf
+                    CaseEq(PARTNER_WATT)
+                        UseBuf(Ref(N(CrowdChaseGoalPositions)))
+                        BufRead2(LVar3, LVar4)
+                        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                        IfLt(LVar0, 180)
+                            Call(GetSelfVar, 1, LVar9)
+                            IfNe(LVar9, 6)
+                                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                                Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                                Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
+                            EndIf
+                            IfEq(AF_OMO_11, FALSE)
+                                Set(AF_OMO_11, TRUE)
+                            EndIf
+                            UseBuf(Ref(N(CrowdChaseGoalPositions)))
+                            BufRead2(LVar1, LVar2)
+                            Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
+                            Call(N(SimpleMoveNPC), LVar3, LVar4)
+                        Else
+                            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                            IfLt(LVar0, 150)
+                                Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                                Call(NpcJump0, NPC_SELF, LVar3, 0, LVar4, 15 * DT)
+                                Wait(30 * DT)
+                            Else
+                                Call(DisablePlayerInput, TRUE)
+                                Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                                Call(NpcJump0, NPC_SELF, LVar3, 0, LVar4, 15 * DT)
+                                Wait(30 * DT)
+                                Call(DisablePlayerInput, FALSE)
+                            EndIf
+                            Call(SetSelfVar, 0, 1)
+                        EndIf
+                    CaseEq(PARTNER_BOW)
+                        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+                        IfLt(LVar2, 30)
+                            Call(N(SimpleMoveNPC), 200, 0)
+                        Else
+                            Call(N(SimpleMoveNPC), -150, 0)
+                        EndIf
+                EndSwitch
+                Set(LVar9, MV_ActingPartner)
+                Call(SetSelfVar, 1, LVar9)
+            Else
+                Call(N(SimpleMoveNPC), 200, 0)
+            EndIf
+        CaseEq(1)
+            Call(GetPlayerPos, LVar2, LVar3, LVar4)
+            IfLt(LVar2, 150)
+                Call(N(GetActingPartner))
+                IfNe(LVar9, 6)
+                    Call(SetSelfVar, 0, 0)
+                EndIf
+            Else
+                Call(DisablePlayerInput, TRUE)
+                Call(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005D)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
+                Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
+                Call(NpcMoveTo, NPC_SELF, 230, 0, 0)
+                Call(SetNpcSpeed, NPC_SELF, LVarA)
+                Set(LVar0, 1)
+                Loop(10)
+                    Call(SetNpcVar, LVar0, 0, 2)
+                    Add(LVar0, 1)
+                EndLoop
+                Wait(45 * DT)
+                Call(StopSound, SOUND_LOOP_SHY_GUY_CROWD_1)
+                Call(SpeakToPlayer, NPC_SELF, -1, -1, 5, MSG_CH4_005E)
+                Thread
+                    Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(1.0))
+                EndThread
+                Call(PlaySoundAtCollider, COLLIDER_tt1, SOUND_TROMP_CRASH, SOUND_SPACE_DEFAULT)
+                PlayEffect(EFFECT_BOMBETTE_BREAKING, 0, 37, 37, 1, 10, 30)
+                Call(EnableModel, MODEL_o821, TRUE)
+                Loop(10)
+                    Call(EnableModel, MODEL_o823, TRUE)
+                    Call(EnableModel, MODEL_o828, TRUE)
+                    Wait(1)
+                    Call(EnableModel, MODEL_o823, FALSE)
+                    Call(EnableModel, MODEL_o828, FALSE)
+                    Wait(1)
+                EndLoop
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+                Wait(40 * DT)
+                Call(InterpNpcYaw, NPC_SELF, 270, 0)
+                Wait(20 * DT)
+                Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+                Call(NpcMoveTo, NPC_SELF, 300, 0, 0)
+                Set(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
+                Wait(30 * DT)
+                Call(DisablePlayerInput, FALSE)
+                Call(RemoveNpc, NPC_SELF)
+            EndIf
+    EndSwitch
+    Wait(1)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy_Crowd) = {
-    EVT_CALL(RandInt, 15, LVarA)
-    EVT_ADD(LVarA, 20)
-    EVT_DIVF(LVarA, EVT_FLOAT(10.0 * DT))
-    EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-            EVT_IF_GT(LVar2, -210)
-                EVT_CALL(N(GetActingPartner))
-                EVT_SET(MV_ActingPartner, LVar9)
-                EVT_SWITCH(LVar9)
-                    EVT_CASE_EQ(-1)
-                        EVT_CALL(SetNpcSpeed, NPC_SELF, LVarA)
-                        EVT_CALL(N(SurroundPlayer))
-                        EVT_IF_GT(LVarE, 30)
-                            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                            EVT_IF_EQ(LVar1, 0)
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
-                            EVT_ELSE
-                                EVT_CALL(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
-                                EVT_CALL(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10 * DT)
-                            EVT_END_IF
-                            EVT_SET(LVarE, 0)
-                        EVT_END_IF
-                    EVT_CASE_EQ(PARTNER_WATT)
-                        EVT_CALL(GetSelfVar, 1, LVar9)
-                        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                        EVT_IF_NE(LVar9, 6)
-                            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-                            EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
-                        EVT_END_IF
-                        EVT_CALL(GetSelfNpcID, LVar5)
-                        EVT_USE_BUF(EVT_PTR(N(CrowdChaseGoalPositions)))
-                        EVT_LOOP(LVar5)
-                            EVT_BUF_READ2(LVar3, LVar4)
-                        EVT_END_LOOP
-                        EVT_IF_EQ(LVar0, LVarF)
-                            EVT_SET(LVar3, LVar0)
-                            EVT_ADD(LVar3, 10)
-                            EVT_SET(LVar4, 50)
-                        EVT_END_IF
-                        EVT_SET(LVarF, LVar0)
-                        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(7.0 / DT))
-                        EVT_CALL(N(SimpleMoveNPC), LVar3, LVar4)
-                        EVT_CALL(GetNpcVar, NPC_ShyGuy_01, 0, LVar0)
-                        EVT_IF_EQ(LVar0, 1)
-                            EVT_CALL(SetSelfVar, 0, 1)
-                        EVT_END_IF
-                    EVT_CASE_EQ(PARTNER_BOW)
-                        EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-                        EVT_IF_LT(LVar2, 30)
-                            EVT_CALL(N(SimpleMoveNPC), 200, 0)
-                        EVT_ELSE
-                            EVT_CALL(N(SimpleMoveNPC), -150, 0)
-                        EVT_END_IF
-                EVT_END_SWITCH
-                EVT_SET(LVar9, MV_ActingPartner)
-                EVT_CALL(SetSelfVar, 1, LVar9)
-            EVT_ELSE
-                EVT_CALL(N(SimpleMoveNPC), 200, 0)
-            EVT_END_IF
-        EVT_CASE_EQ(1)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_CALL(RandInt, 360, LVar0)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
-            EVT_CALL(RandInt, 20 * DT, LVar0)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(LVar0)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, 2)
-            EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 12 * DT)
-            EVT_CALL(GetSelfVar, 0, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(N(GetActingPartner))
-                EVT_IF_NE(LVar9, 6)
-                    EVT_CALL(SetSelfVar, 0, 0)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_CASE_EQ(2)
-            EVT_CALL(RandInt, 15 * DT, LVar0)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(LVar0)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(NpcJump0, NPC_SELF, 235, LVar1, LVar2, 20 * DT * DT)
-            EVT_WAIT(30 * DT)
-            EVT_CALL(SetSelfVar, 0, 3)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0 / DT))
-            EVT_CALL(NpcMoveTo, NPC_SELF, 235, 0, 0)
-            EVT_CALL(NpcMoveTo, NPC_SELF, 300, 0, 0)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(RandInt, 15, LVarA)
+    Add(LVarA, 20)
+    DivF(LVarA, Float(10.0 * DT))
+    Call(SetNpcSpeed, NPC_SELF, LVarA)
+    Label(0)
+    Call(GetSelfVar, 0, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(GetPlayerPos, LVar2, LVar3, LVar4)
+            IfGt(LVar2, -210)
+                Call(N(GetActingPartner))
+                Set(MV_ActingPartner, LVar9)
+                Switch(LVar9)
+                    CaseEq(-1)
+                        Call(SetNpcSpeed, NPC_SELF, LVarA)
+                        Call(N(SurroundPlayer))
+                        IfGt(LVarE, 30)
+                            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                            IfEq(LVar1, 0)
+                                Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10 * DT)
+                            Else
+                                Call(GetNpcPos, NPC_SELF, LVar3, LVar4, LVar5)
+                                Call(NpcJump0, NPC_SELF, LVar3, LVar4, LVar5, 10 * DT)
+                            EndIf
+                            Set(LVarE, 0)
+                        EndIf
+                    CaseEq(PARTNER_WATT)
+                        Call(GetSelfVar, 1, LVar9)
+                        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                        IfNe(LVar9, 6)
+                            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+                            Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15 * DT)
+                        EndIf
+                        Call(GetSelfNpcID, LVar5)
+                        UseBuf(Ref(N(CrowdChaseGoalPositions)))
+                        Loop(LVar5)
+                            BufRead2(LVar3, LVar4)
+                        EndLoop
+                        IfEq(LVar0, LVarF)
+                            Set(LVar3, LVar0)
+                            Add(LVar3, 10)
+                            Set(LVar4, 50)
+                        EndIf
+                        Set(LVarF, LVar0)
+                        Call(SetNpcSpeed, NPC_SELF, Float(7.0 / DT))
+                        Call(N(SimpleMoveNPC), LVar3, LVar4)
+                        Call(GetNpcVar, NPC_ShyGuy_01, 0, LVar0)
+                        IfEq(LVar0, 1)
+                            Call(SetSelfVar, 0, 1)
+                        EndIf
+                    CaseEq(PARTNER_BOW)
+                        Call(GetPlayerPos, LVar2, LVar3, LVar4)
+                        IfLt(LVar2, 30)
+                            Call(N(SimpleMoveNPC), 200, 0)
+                        Else
+                            Call(N(SimpleMoveNPC), -150, 0)
+                        EndIf
+                EndSwitch
+                Set(LVar9, MV_ActingPartner)
+                Call(SetSelfVar, 1, LVar9)
+            Else
+                Call(N(SimpleMoveNPC), 200, 0)
+            EndIf
+        CaseEq(1)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Call(RandInt, 360, LVar0)
+            Call(InterpNpcYaw, NPC_SELF, LVar0, 0)
+            Call(RandInt, 20 * DT, LVar0)
+            Add(LVar0, 1)
+            Wait(LVar0)
+            Call(InterpNpcYaw, NPC_SELF, 90, 0)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(SetNpcJumpscale, NPC_SELF, 2)
+            Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 12 * DT)
+            Call(GetSelfVar, 0, LVar0)
+            IfEq(LVar0, 1)
+                Call(N(GetActingPartner))
+                IfNe(LVar9, 6)
+                    Call(SetSelfVar, 0, 0)
+                EndIf
+            EndIf
+        CaseEq(2)
+            Call(RandInt, 15 * DT, LVar0)
+            Add(LVar0, 1)
+            Wait(LVar0)
+            Call(InterpNpcYaw, NPC_SELF, 90, 0)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+            Call(NpcJump0, NPC_SELF, 235, LVar1, LVar2, 20 * DT * DT)
+            Wait(30 * DT)
+            Call(SetSelfVar, 0, 3)
+        CaseEq(3)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+            Call(SetNpcSpeed, NPC_SELF, Float(4.0 / DT))
+            Call(NpcMoveTo, NPC_SELF, 235, 0, 0)
+            Call(NpcMoveTo, NPC_SELF, 300, 0, 0)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Wait(1)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Loner) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_ShyGuy_Loner)))
-        EVT_CALL(SetNpcPos, NPC_SELF, 120, 0, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy_Loner)))
+        Call(SetNpcPos, NPC_SELF, 120, 0, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 Vec3i N(CrowdInitialPositions)[] = {
@@ -365,21 +365,21 @@ Vec3i N(CrowdInitialPositions)[] = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy_Crowd) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_ShyGuy_Crowd)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_SUB(LVar0, 0)
-        EVT_USE_BUF(EVT_PTR(N(CrowdInitialPositions)))
-        EVT_LOOP(LVar0)
-            EVT_BUF_READ3(LVar1, LVar2, LVar3)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy_Crowd)))
+    IfLt(GB_StoryProgress, STORY_CH4_OPENED_GENERAL_GUY_ROOM)
+        Call(GetSelfNpcID, LVar0)
+        Sub(LVar0, 0)
+        UseBuf(Ref(N(CrowdInitialPositions)))
+        Loop(LVar0)
+            BufRead3(LVar1, LVar2, LVar3)
+        EndLoop
+        Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_ShyGuy_Loner) = {

@@ -8,13 +8,13 @@
 
 // seems to be a macro in the original based on usage
 #define EVT_SPIRIT_ADJUST_CAM(pitch) \
-    EVT_CALL(GetCamDistance, CAM_DEFAULT, LVar1) \
-    EVT_SUB(LVar1, 100) \
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, LVar1) \
-    EVT_IF_NE(pitch, 10000) \
-        EVT_CALL(GetCamPitch, CAM_DEFAULT, LVar2, LVar3) \
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, LVar2, pitch) \
-    EVT_END_IF
+    Call(GetCamDistance, CAM_DEFAULT, LVar1) \
+    Sub(LVar1, 100) \
+    Call(SetCamDistance, CAM_DEFAULT, LVar1) \
+    IfNe(pitch, 10000) \
+        Call(GetCamPitch, CAM_DEFAULT, LVar2, LVar3) \
+        Call(SetCamPitch, CAM_DEFAULT, LVar2, pitch) \
+    EndIf
 
 API_CALLABLE(N(StarSpiritEffectFunc1)) {
     StarSpiritData* ptr = script->varTablePtr[0];

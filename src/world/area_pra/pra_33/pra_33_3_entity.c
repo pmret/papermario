@@ -29,63 +29,63 @@ API_CALLABLE(N(UpdateDaisPlayerPos)) {
 }
 
 EvtScript N(EVS_ActivateSwitch) = {
-    EVT_IF_EQ(AF_PRA33_FlippingWall, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(AF_PRA33_FlippingWall, TRUE)
+    IfEq(AF_PRA33_FlippingWall, TRUE)
+        Return
+    EndIf
+    Set(AF_PRA33_FlippingWall, TRUE)
     // set wall orientation
-    EVT_IF_EQ(MV_WallFlipped, FALSE)
-        EVT_SET(MV_WallFlipped, TRUE)
-    EVT_ELSE
-        EVT_SET(MV_WallFlipped, FALSE)
-    EVT_END_IF
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o1063, SOUND_PRA_FLIP_WALL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(N(CheckPlayerOnDais))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(N(GetDaisRelativePlayerPos))
+    IfEq(MV_WallFlipped, FALSE)
+        Set(MV_WallFlipped, TRUE)
+    Else
+        Set(MV_WallFlipped, FALSE)
+    EndIf
+    Call(PlaySoundAtCollider, COLLIDER_o1063, SOUND_PRA_FLIP_WALL, SOUND_SPACE_DEFAULT)
+    Call(N(CheckPlayerOnDais))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
+    Call(N(GetDaisRelativePlayerPos))
     // prepare the lerp
-    EVT_IF_EQ(MV_WallFlipped, FALSE)
-        EVT_SET(LVar2, 180)
-        EVT_CALL(MakeLerp, 180, 360, 15, EASING_LINEAR)
-    EVT_ELSE
-        EVT_SET(LVar2, 0)
-        EVT_CALL(MakeLerp, 0, 180, 15, EASING_LINEAR)
-    EVT_END_IF
+    IfEq(MV_WallFlipped, FALSE)
+        Set(LVar2, 180)
+        Call(MakeLerp, 180, 360, 15, EASING_LINEAR)
+    Else
+        Set(LVar2, 0)
+        Call(MakeLerp, 0, 180, 15, EASING_LINEAR)
+    EndIf
     // spin the dais and move the player if necessary
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g260, LVar0, 0, 1, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o1045)
-        EVT_CALL(N(CheckPlayerOnDais))
-        EVT_IF_EQ(LVarA, TRUE)
-            EVT_SET(LVar3, LVar2)
-            EVT_SUB(LVar3, LVar0)
-            EVT_SET(LVar2, LVar0)
-            EVT_ADD(LVar7, LVar3)
-            EVT_CALL(N(UpdateDaisPlayerPos))
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_SET(AF_PRA33_FlippingWall, FALSE)
-    EVT_CALL(N(CheckPlayerOnDais))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g260, LVar0, 0, 1, 0)
+        Call(UpdateColliderTransform, COLLIDER_o1045)
+        Call(N(CheckPlayerOnDais))
+        IfEq(LVarA, TRUE)
+            Set(LVar3, LVar2)
+            Sub(LVar3, LVar0)
+            Set(LVar2, LVar0)
+            Add(LVar7, LVar3)
+            Call(N(UpdateDaisPlayerPos))
+        EndIf
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Set(AF_PRA33_FlippingWall, FALSE)
+    Call(N(CheckPlayerOnDais))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_SET(GF_PRA33_Unused, FALSE)
-    EVT_SET(AF_PRA33_FlippingWall, FALSE)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_RedSwitch), 310, 0, 110, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_ActivateSwitch)))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_RedSwitch), 310, 0, -110, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_ActivateSwitch)))
-    EVT_CALL(ParentColliderToModel, COLLIDER_o1045, MODEL_o990)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o1063, MODEL_o990)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Set(GF_PRA33_Unused, FALSE)
+    Set(AF_PRA33_FlippingWall, FALSE)
+    Call(MakeEntity, Ref(Entity_RedSwitch), 310, 0, 110, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_ActivateSwitch)))
+    Call(MakeEntity, Ref(Entity_RedSwitch), 310, 0, -110, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_ActivateSwitch)))
+    Call(ParentColliderToModel, COLLIDER_o1045, MODEL_o990)
+    Call(ParentColliderToModel, COLLIDER_o1063, MODEL_o990)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o1063, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };

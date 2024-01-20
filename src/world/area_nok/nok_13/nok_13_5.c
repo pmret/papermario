@@ -11,20 +11,20 @@ API_CALLABLE(N(GetAngleToPlayer)) {
 }
 
 EvtScript N(EVS_RotateHillTowardPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(N(GetAngleToPlayer), LVar0)
-        EVT_ADD(LVar0, 180)
-        EVT_CALL(RotateModel, MODEL_o363, LVar0, 0, -1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(N(GetAngleToPlayer), LVar0)
+        Add(LVar0, 180)
+        Call(RotateModel, MODEL_o363, LVar0, 0, -1, 0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlaySong) = {
-    EVT_CALL(SetMusicTrack, 0, LVar0, 0, 8)
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, LVar0, 0, 8)
+    Return
+    End
 };
 
 void N(musical_hill_orbit_listener)(PlayerOrbitState* orbit, s32 event) {
@@ -57,8 +57,8 @@ PlayerOrbitTarget N(RunAroundTarget) = {
 };
 
 EvtScript N(EVS_SetupMusicalHill) = {
-    EVT_EXEC(N(EVS_RotateHillTowardPlayer))
-    EVT_CALL(N(MonitorPlayerOrbiting), EVT_PTR(N(RunAroundTarget)))
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_RotateHillTowardPlayer))
+    Call(N(MonitorPlayerOrbiting), Ref(N(RunAroundTarget)))
+    Return
+    End
 };

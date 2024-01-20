@@ -10,147 +10,147 @@
 #include "world/common/atomic/ToadHouse.data.inc.c"
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_SET(LVar0, MSG_CH8_0044)
-    EVT_SET(LVar8, MSG_CH8_0045)
-    EVT_SET(LVar1, MSG_CH8_0046)
-    EVT_SET(LVar2, MSG_CH8_0047)
-    EVT_SET(LVar3, MSG_CH8_0048)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, MSG_CH8_0044)
+    Set(LVar8, MSG_CH8_0045)
+    Set(LVar1, MSG_CH8_0046)
+    Set(LVar2, MSG_CH8_0047)
+    Set(LVar3, MSG_CH8_0048)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_TAKING_REST, 0, 8)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 34, -8)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 220)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(-3.0), EVT_FLOAT(-240.0))
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(-150.0), EVT_FLOAT(-56.0))
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, 1, 10)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, -180, -100, 0)
-    EVT_CALL(InterpPlayerYaw, 191, 1)
-    EVT_CALL(SetPlayerPos, -160, 22, -123)
-    EVT_WAIT(5)
-    EVT_CALL(InterpPlayerYaw, 114, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_2000 | IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_WAIT(61)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_THREAD
-        EVT_WAIT(63)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_TAKING_REST, 0, 8)
+    Thread
+        Wait(20)
+        Call(N(ToadHouse_CamSetFOV), 0, 40)
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamPitch, CAM_DEFAULT, 34, -8)
+        Call(SetCamDistance, CAM_DEFAULT, 220)
+        Call(SetCamPosA, CAM_DEFAULT, Float(-3.0), Float(-240.0))
+        Call(SetCamPosB, CAM_DEFAULT, Float(-150.0), Float(-56.0))
+        Call(SetCamPosC, CAM_DEFAULT, 1, 10)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    EndThread
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, -180, -100, 0)
+    Call(InterpPlayerYaw, 191, 1)
+    Call(SetPlayerPos, -160, 22, -123)
+    Wait(5)
+    Call(InterpPlayerYaw, 114, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_2000 | IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Wait(61)
+    Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    Thread
+        Wait(63)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(SetPlayerPos, -139, 0, -90)
-    EVT_CALL(PlayerMoveTo, -102, -130, 20)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_RETURN
-    EVT_END
+    Call(N(ToadHouse_CamSetFOV), 0, 25)
+    Call(UseSettingsFrom, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetPanTarget, CAM_DEFAULT, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(HidePlayerShadow, FALSE)
+    Call(SetPlayerPos, -139, 0, -90)
+    Call(PlayerMoveTo, -102, -130, 20)
+    Exec(N(EVS_SetupMusic))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_01) = {
-    EVT_CALL(GetPlayerPos, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_ToadHouseKeeper))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerPos, MV_LastPlayerPosX, MV_LastPlayerPosY, MV_LastPlayerPosZ)
+    ExecWait(N(EVS_NpcInteract_ToadHouseKeeper))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad_02) = {
-    EVT_SWITCH(AB_KPA91_Toad2_Dialogue)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0049)
-            EVT_SET(AB_KPA91_Toad2_Dialogue, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_004A)
-            EVT_SET(AB_KPA91_Toad2_Dialogue, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(AB_KPA91_Toad2_Dialogue)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_0049)
+            Set(AB_KPA91_Toad2_Dialogue, 1)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Yellow_Talk, ANIM_Toad_Yellow_Idle, 0, MSG_CH8_004A)
+            Set(AB_KPA91_Toad2_Dialogue, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_ToadGuard) = {
-    EVT_SWITCH(AB_KPA91_Toad3_Dialogue)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004B)
-            EVT_SET(AB_KPA91_Toad3_Dialogue, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004C)
-            EVT_SET(AB_KPA91_Toad3_Dialogue, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(AB_KPA91_Toad3_Dialogue)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004B)
+            Set(AB_KPA91_Toad3_Dialogue, 1)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ToadGuard_Blue_Talk, ANIM_ToadGuard_Blue_Idle, 0, MSG_CH8_004C)
+            Set(AB_KPA91_Toad3_Dialogue, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite) = {
-    EVT_SWITCH(AB_KPA91_Dryite_Dialogue)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004D)
-            EVT_SET(AB_KPA91_Dryite_Dialogue, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004E)
-            EVT_SET(AB_KPA91_Dryite_Dialogue, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(AB_KPA91_Dryite_Dialogue)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004D)
+            Set(AB_KPA91_Dryite_Dialogue, 1)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH8_004E)
+            Set(AB_KPA91_Dryite_Dialogue, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_01)))
-    EVT_CALL(SetNpcPos, NPC_SELF, -70, 0, -140)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_01)))
+    Call(SetNpcPos, NPC_SELF, -70, 0, -140)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad_02)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 110, 0, -130)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Toad_Yellow_Idle)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad_02)))
+    Call(SetNpcPos, NPC_SELF, 110, 0, -130)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Toad_Yellow_Idle)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadGuard) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadGuard)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 10, 0, -180)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ToadGuard_Blue_Idle)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadGuard)))
+    Call(SetNpcPos, NPC_SELF, 10, 0, -180)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_ToadGuard_Blue_Idle)
+    Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 175, 0, -65)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite)))
+    Call(SetNpcPos, NPC_SELF, 175, 0, -65)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Return
+    End
 };
 
 NpcData N(NpcData_Prisoners)[] = {
@@ -201,33 +201,33 @@ NpcData N(NpcData_Prisoners)[] = {
 };
 
 EvtScript N(EVS_NpcDefeat_Koopatrol) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_KPA91_Defeated_Guard, TRUE)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(MakeItemEntity, ITEM_PRISON_KEY1, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA91_Item_PrisonKey1)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_SET(GF_KPA91_Defeated_Guard, TRUE)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(MakeItemEntity, ITEM_PRISON_KEY1, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA91_Item_PrisonKey1)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_KPA91_Defeated_Guard, TRUE)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(MakeItemEntity, ITEM_PRISON_KEY1, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA91_Item_PrisonKey1)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Set(GF_KPA91_Defeated_Guard, TRUE)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(MakeItemEntity, ITEM_PRISON_KEY1, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_NEVER_VANISH, GF_KPA91_Item_PrisonKey1)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopatrol) = {
-    EVT_IF_EQ(GF_KPA91_Defeated_Guard, FALSE)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Koopatrol)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KPA91_Defeated_Guard, FALSE)
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Koopatrol)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Koopatrol) = {

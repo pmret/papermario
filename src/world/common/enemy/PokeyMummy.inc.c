@@ -16,10 +16,10 @@ MobileAISettings N(AISettings_PokeyMummy) = {
 };
 
 EvtScript N(EVS_NpcAI_PokeyMummy) = {
-    EVT_CALL(N(SetInstigatorValue_3))
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_PokeyMummy)))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetInstigatorValue_3))
+    Call(BasicAI_Main, Ref(N(AISettings_PokeyMummy)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_PokeyMummy) = {

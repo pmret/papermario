@@ -11,51 +11,51 @@ NpcSettings N(NpcSettings_Bzzap_02) = {
 };
 
 EvtScript N(EVS_NpcAI_Bzzap_02) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_IF_GT(LVar1, 0)
-                    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
-                    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 50, LVar2, 15)
-                    EVT_CALL(SetSelfVar, 0, 1)
-                    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Bzzap)))
-                EVT_END_IF
-            EVT_CASE_EQ(2)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_WAIT(25)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-                EVT_CALL(SetSelfVar, 0, 0)
-                EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                IfGt(LVar1, 0)
+                    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                    Call(SetNpcJumpscale, NPC_SELF, 0)
+                    Call(NpcJump0, NPC_SELF, LVar0, 50, LVar2, 15)
+                    Call(SetSelfVar, 0, 1)
+                    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Bzzap)))
+                EndIf
+            CaseEq(2)
+                Call(DisablePlayerInput, TRUE)
+                Wait(25)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+                Call(SetSelfVar, 0, 0)
+                Call(DisablePlayerInput, FALSE)
+        EndSwitch
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Bzzap_02) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetSelfVar, 0, 2)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Bzzap_02)))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetSelfVar, 0, 2)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Bzzap_02)))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bzzap_02) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Bzzap_02)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Bzzap_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_Bzzap_02)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Bzzap_02)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Dayzee_01) = {

@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_Koopatrol_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Koopatrol_Wander) = {
-    EVT_CALL(SetSelfVar, 2, 5)
-    EVT_CALL(SetSelfVar, 3, 4)
-    EVT_CALL(SetSelfVar, 5, 10)
-    EVT_CALL(SetSelfVar, 7, 5)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_Koopatrol_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 5)
+    Call(SetSelfVar, 3, 4)
+    Call(SetSelfVar, 5, 10)
+    Call(SetSelfVar, 7, 5)
+    Call(N(TackleAI_Main), Ref(N(AISettings_Koopatrol_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Koopatrol_Wander) = {

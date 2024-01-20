@@ -7,26 +7,26 @@
 #include "battle/common/stage/lib/TexturePanner.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(EnableBattleFloorReflections, TRUE)
-    EVT_SET(LVar0, MODEL_o412)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_SET(LVar2, 3000)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_SET(LVar0, MODEL_o413)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_SET(LVar2, 3000)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(EnableBattleFloorReflections, TRUE)
+    Set(LVar0, MODEL_o412)
+    Set(LVar1, TEX_PANNER_0)
+    Set(LVar2, 3000)
+    Set(LVar3, 0)
+    Exec(N(EVS_TexturePanMain))
+    Set(LVar0, MODEL_o413)
+    Set(LVar1, TEX_PANNER_0)
+    Set(LVar2, 3000)
+    Set(LVar3, 0)
+    Exec(N(EVS_TexturePanMain))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

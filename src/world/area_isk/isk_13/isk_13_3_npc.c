@@ -195,105 +195,105 @@ API_CALLABLE(N(func_80242044_991824)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(GF_ISK13_Item_LunarStone, FALSE)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(func_80241BA8_991388))
-    EVT_CALL(N(func_80241EF8_9916D8), 255, 128, 255, 0)
-    EVT_THREAD
-        EVT_SETF(LVar0, 0)
-        EVT_LOOP(10)
-            EVT_ADDF(LVar0, EVT_FLOAT(12.796))
-            EVT_CALL(N(func_80241EF8_9916D8), 255, 128, 255, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(N(func_80241EF8_9916D8), 255, 128, 255, 128)
-        EVT_SETF(LVar0, 128)
-        EVT_LOOP(20)
-            EVT_ADDF(LVar0, EVT_FLOAT(6.343))
-            EVT_CALL(N(func_80241EF8_9916D8), 255, LVar0, 255, LVar0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(N(func_80241EF8_9916D8), 255, 255, 255, 255)
-    EVT_END_THREAD
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(MakeLerp, 0, 360, 10, EASING_COS_IN_OUT)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(func_80241E34_991614), LVar0, 0, EVT_FLOAT(90.0))
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(GetPlayerPos, LVar5, LVar6, LVar7)
-    EVT_CALL(N(func_80241D38_991518), LVar2, LVar3, LVar4)
-    EVT_CALL(MakeLerp, LVar3, LVar6, 20, EASING_CUBIC_IN)
-    EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar2, LVar0, LVar4)
-    EVT_CALL(N(func_80241D38_991518), LVar2, LVar0, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(N(func_80242044_991824))
-    EVT_THREAD
-        EVT_CALL(InterpPlayerYaw, 180, 0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-        EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 20)
-        EVT_LOOP(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicHover)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_LOOP(20)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(N(func_80241D38_991518), LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Wait(1)
+    IfEq(GF_ISK13_Item_LunarStone, FALSE)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(N(func_80241BA8_991388))
+    Call(N(func_80241EF8_9916D8), 255, 128, 255, 0)
+    Thread
+        SetF(LVar0, 0)
+        Loop(10)
+            AddF(LVar0, Float(12.796))
+            Call(N(func_80241EF8_9916D8), 255, 128, 255, LVar0)
+            Wait(1)
+        EndLoop
+        Call(N(func_80241EF8_9916D8), 255, 128, 255, 128)
+        SetF(LVar0, 128)
+        Loop(20)
+            AddF(LVar0, Float(6.343))
+            Call(N(func_80241EF8_9916D8), 255, LVar0, 255, LVar0)
+            Wait(1)
+        EndLoop
+        Call(N(func_80241EF8_9916D8), 255, 255, 255, 255)
+    EndThread
+    Wait(30)
+    Thread
+        Wait(5)
+        Call(MakeLerp, 0, 360, 10, EASING_COS_IN_OUT)
+        Label(10)
+        Call(UpdateLerp)
+        Call(N(func_80241E34_991614), LVar0, 0, Float(90.0))
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(10)
+        EndIf
+    EndThread
+    Call(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
+    Call(GetPlayerPos, LVar5, LVar6, LVar7)
+    Call(N(func_80241D38_991518), LVar2, LVar3, LVar4)
+    Call(MakeLerp, LVar3, LVar6, 20, EASING_CUBIC_IN)
+    Label(1)
+    Call(UpdateLerp)
+    Call(SetNpcPos, NPC_SELF, LVar2, LVar0, LVar4)
+    Call(N(func_80241D38_991518), LVar2, LVar0, LVar4)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(1)
+    EndIf
+    Call(N(func_80242044_991824))
+    Thread
+        Call(InterpPlayerYaw, 180, 0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+        Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 20)
+        Loop(30)
+            Call(SetPlayerAnimation, ANIM_MarioW2_PanicHover)
+            Wait(1)
+        EndLoop
+    EndThread
+    Loop(20)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Call(N(func_80241D38_991518), LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
-    EVT_SET(GF_ISK13_Defeated_StoneChomp, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(N(StoneChompFXC))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(GF_ISK13_Defeated_StoneChomp, TRUE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(N(DestroyAmbushWorker))
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(N(StoneChompFXC))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StoneChomp) = {
-    EVT_IF_EQ(GF_ISK13_Defeated_StoneChomp, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_StoneChomp)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_StoneChomp_Override)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK13_Defeated_StoneChomp, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_StoneChomp)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_StoneChomp_Override)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 NpcData N(NpcData_StoneChomp) = {

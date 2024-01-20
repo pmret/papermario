@@ -6,47 +6,47 @@
 #include "./Decorations.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_08, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_16, MODEL_GROUP_HIDDEN)
-    EVT_SET(LVar0, MODEL_y2_1)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y2_2)
-    EVT_SET(LVar1, TEX_PANNER_1)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y3_1)
-    EVT_SET(LVar1, TEX_PANNER_2)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_y3_2)
-    EVT_SET(LVar1, TEX_PANNER_3)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_yougan)
-    EVT_SET(LVar1, TEX_PANNER_4)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_6_you1)
-    EVT_SET(LVar1, TEX_PANNER_5)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_6_you2)
-    EVT_SET(LVar1, TEX_PANNER_6)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_tri)
-    EVT_SET(LVar1, TEX_PANNER_7)
-    EVT_EXEC(N(EVS_TexPan_Lava))
-    EVT_SET(LVar0, MODEL_awa1)
-    EVT_SET(LVar1, TEX_PANNER_8)
-    EVT_EXEC(N(EVS_TexAnim_LavaBubble))
-    EVT_SET(LVar0, MODEL_awa2)
-    EVT_SET(LVar1, TEX_PANNER_9)
-    EVT_EXEC(N(EVS_TexAnim_LavaBubble))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetGroupVisibility, MODEL_08, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_16, MODEL_GROUP_HIDDEN)
+    Set(LVar0, MODEL_y2_1)
+    Set(LVar1, TEX_PANNER_0)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y2_2)
+    Set(LVar1, TEX_PANNER_1)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y3_1)
+    Set(LVar1, TEX_PANNER_2)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_y3_2)
+    Set(LVar1, TEX_PANNER_3)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_yougan)
+    Set(LVar1, TEX_PANNER_4)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_6_you1)
+    Set(LVar1, TEX_PANNER_5)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_6_you2)
+    Set(LVar1, TEX_PANNER_6)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_tri)
+    Set(LVar1, TEX_PANNER_7)
+    Exec(N(EVS_TexPan_Lava))
+    Set(LVar0, MODEL_awa1)
+    Set(LVar1, TEX_PANNER_8)
+    Exec(N(EVS_TexAnim_LavaBubble))
+    Set(LVar0, MODEL_awa2)
+    Set(LVar1, TEX_PANNER_9)
+    Exec(N(EVS_TexAnim_LavaBubble))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

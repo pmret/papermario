@@ -5,39 +5,39 @@
 extern EvtScript N(EVS_NpcInteract_HeartPlant);
 
 EvtScript N(EVS_NpcAuxAI_HeartPlant) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_CALL(SetSelfVar, 1, 0)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetSelfVar, 0, 0)
+    Call(SetSelfVar, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HeartPlant_RebindInteractAfterDelay) = {
-    EVT_WAIT(45)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_HeartPlant)))
-    EVT_RETURN
-    EVT_END
+    Wait(45)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_HeartPlant)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_HeartPlant) = {
-    EVT_CALL(GetSelfVar, 1, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetSelfVar, 1, 1)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HEART_PLANT, SOUND_SPACE_DEFAULT)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
-        EVT_WAIT(1)
-        EVT_CALL(N(HeartPlant_SpawnHeart))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim01)
-        EVT_THREAD
-            EVT_CALL(BindNpcInteract, NPC_SELF, NULL)
-            EVT_EXEC(N(EVS_HeartPlant_RebindInteractAfterDelay))
-            EVT_WAIT(45)
-            EVT_CALL(SetSelfVar, 1, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetSelfVar, 1, LVar0)
+    IfEq(LVar0, 0)
+        Call(SetSelfVar, 1, 1)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_HEART_PLANT, SOUND_SPACE_DEFAULT)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
+        Wait(1)
+        Call(N(HeartPlant_SpawnHeart))
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim01)
+        Thread
+            Call(BindNpcInteract, NPC_SELF, NULL)
+            Exec(N(EVS_HeartPlant_RebindInteractAfterDelay))
+            Wait(45)
+            Call(SetSelfVar, 1, 0)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_HeartPlant_Anim00)
+        EndThread
+    EndIf
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_HeartPlant) = {

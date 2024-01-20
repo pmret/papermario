@@ -15,34 +15,34 @@ API_CALLABLE(N(UnusedSetEntityPosition)) {
 #include "world/common/todo/GetEntityPosition.inc.c"
 
 EvtScript N(EVS_BreakBlock_Brick) = {
-    EVT_IF_EQ(GF_KPA134_BlueSwitch, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar5, -224)
-    EVT_CALL(MakeLerp, 355, 370, 4, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetEntityPosition), MV_SwitchEntityID, LVar5, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_SUB(LVar5, 2)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(MakeLerp, LVar0, 240, 16, EASING_QUADRATIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetEntityPosition), MV_SwitchEntityID, LVar5, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_SUB(LVar5, 2)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KPA134_BlueSwitch, TRUE)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar5, -224)
+    Call(MakeLerp, 355, 370, 4, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetEntityPosition), MV_SwitchEntityID, LVar5, LVar0, 0)
+        Wait(1)
+        Sub(LVar5, 2)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(MakeLerp, LVar0, 240, 16, EASING_QUADRATIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(N(SetEntityPosition), MV_SwitchEntityID, LVar5, LVar0, 0)
+        Wait(1)
+        Sub(LVar5, 2)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 s32 N(KeyList_BowsersCastle)[] = {
@@ -51,49 +51,49 @@ s32 N(KeyList_BowsersCastle)[] = {
 };
 
 EvtScript N(EVS_UnlockPrompt_Door) = {
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
-        EVT_CALL(CloseChoicePopup)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(LVar0, -1)
-        EVT_CALL(CloseChoicePopup)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(RemoveKeyItemAt, LVar1)
-    EVT_SET(GF_KPA134_UnlockedDoor, TRUE)
-    EVT_CALL(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
-    EVT_CALL(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_SET(LVar0, MV_PadlockEntityID)
-    EVT_CALL(N(RemovePadlock))
-    EVT_SET(LVar1, 0)
-    EVT_WAIT(5)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_130_0)), TRIGGER_WALL_PRESS_A, COLLIDER_nno, 1, 0)
-    EVT_RETURN
-    EVT_END
+    Call(ShowKeyChoicePopup)
+    IfEq(LVar0, 0)
+        Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
+        Call(CloseChoicePopup)
+        Return
+    EndIf
+    IfEq(LVar0, -1)
+        Call(CloseChoicePopup)
+        Return
+    EndIf
+    Call(RemoveKeyItemAt, LVar1)
+    Set(GF_KPA134_UnlockedDoor, TRUE)
+    Call(N(GetEntityPosition), MV_PadlockEntityID, LVar0, LVar1, LVar2)
+    Call(PlaySoundAt, SOUND_USE_KEY, SOUND_SPACE_DEFAULT, LVar0, LVar1, LVar2)
+    Set(LVar0, MV_PadlockEntityID)
+    Call(N(RemovePadlock))
+    Set(LVar1, 0)
+    Wait(5)
+    Call(CloseChoicePopup)
+    Unbind
+    BindTrigger(Ref(N(EVS_ExitDoors_kpa_130_0)), TRIGGER_WALL_PRESS_A, COLLIDER_nno, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_IF_EQ(GF_KPA134_UnlockedDoor, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Padlock), 743, 10, 115, 270, MAKE_ENTITY_END)
-        EVT_SET(MV_PadlockEntityID, LVar0)
-        EVT_BIND_PADLOCK(EVT_PTR(N(EVS_UnlockPrompt_Door)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), EVT_PTR(N(KeyList_BowsersCastle)), 0, 1)
-    EVT_ELSE
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_130_0)), TRIGGER_WALL_PRESS_A, COLLIDER_nno, 1, 0)
-    EVT_END_IF
-    EVT_IF_EQ(GF_KPA134_BlueSwitch, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_BlueSwitch), -224, 355, -25, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_KPA134_HitWaterSwitch))
-        EVT_SET(MV_SwitchEntityID, LVar0)
-    EVT_END_IF
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_BrickBlock), -224, 330, -25, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_BreakBlock_Brick)))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_SimpleSpring), 475, 0, -20, 90, 60, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenYellowBlock), 195, 300, -75, 0, ITEM_MAPLE_SYRUP, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_KPA134_HiddenItem_MapleSyrup)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_KPA134_UnlockedDoor, FALSE)
+        Call(MakeEntity, Ref(Entity_Padlock), 743, 10, 115, 270, MAKE_ENTITY_END)
+        Set(MV_PadlockEntityID, LVar0)
+        BindPadlock(Ref(N(EVS_UnlockPrompt_Door)), TRIGGER_WALL_PRESS_A, EVT_ENTITY_INDEX(0), Ref(N(KeyList_BowsersCastle)), 0, 1)
+    Else
+        BindTrigger(Ref(N(EVS_ExitDoors_kpa_130_0)), TRIGGER_WALL_PRESS_A, COLLIDER_nno, 1, 0)
+    EndIf
+    IfEq(GF_KPA134_BlueSwitch, FALSE)
+        Call(MakeEntity, Ref(Entity_BlueSwitch), -224, 355, -25, 0, MAKE_ENTITY_END)
+        Call(AssignSwitchFlag, EVT_INDEX_OF_AREA_FLAG(AF_KPA134_HitWaterSwitch))
+        Set(MV_SwitchEntityID, LVar0)
+    EndIf
+    Call(MakeEntity, Ref(Entity_BrickBlock), -224, 330, -25, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_BreakBlock_Brick)))
+    Call(MakeEntity, Ref(Entity_SimpleSpring), 475, 0, -20, 90, 60, MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_HiddenYellowBlock), 195, 300, -75, 0, ITEM_MAPLE_SYRUP, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_KPA134_HiddenItem_MapleSyrup)
+    Return
+    End
 };

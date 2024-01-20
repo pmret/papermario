@@ -6,50 +6,50 @@
 #include "world/common/enemy/KoopaTroopa_Stationary.inc.c"
 
 EvtScript N(EVS_NpcIdle_KoopaTroopa_01) = {
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(AwaitPlayerApproach, -650, -35, 100)
-    EVT_CALL(PlaySoundAt, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT, -650, 75, -120)
-    EVT_THREAD
-        EVT_LOOP(5)
-            EVT_CALL(TranslateModel, MODEL_o122, 2, 0, 0)
-            EVT_WAIT(1)
-            EVT_CALL(TranslateModel, MODEL_o122, -2, 0, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, TRUE)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 360, 20, EASING_LINEAR)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.6))
-    EVT_CALL(NpcJump0, NPC_SELF, -650, 75, -30, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_KoopaTroopa_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(AwaitPlayerApproach, -650, -35, 100)
+    Call(PlaySoundAt, SOUND_SEARCH_BUSH, SOUND_SPACE_DEFAULT, -650, 75, -120)
+    Thread
+        Loop(5)
+            Call(TranslateModel, MODEL_o122, 2, 0, 0)
+            Wait(1)
+            Call(TranslateModel, MODEL_o122, -2, 0, 0)
+            Wait(1)
+        EndLoop
+    EndThread
+    Wait(5)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, TRUE)
+    Thread
+        Call(MakeLerp, 0, 360, 20, EASING_LINEAR)
+        Label(1)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    EndThread
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.6))
+    Call(NpcJump0, NPC_SELF, -650, 75, -30, 20)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_200000, FALSE)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, TRUE)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_KoopaTroopa_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_01) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, -650, 75, -150)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoopaTroopa_01)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcPos, NPC_SELF, -650, 75, -150)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KoopaTroopa_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopaTroopa_02) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_HAS_SHADOW, FALSE)
+    Return
+    End
 };
 
 NpcData N(NpcData_KoopaTroopa_01) = {

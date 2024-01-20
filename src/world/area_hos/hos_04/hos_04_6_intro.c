@@ -115,86 +115,86 @@ API_CALLABLE(N(AnimateViewPitchPostHeist)) {
 extern EvtScript N(EVS_ControlTwink);
 
 EvtScript N(EVS_Intro_PostHeist) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(N(SetCamVfov), CAM_DEFAULT, 75)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(CamSettings_PostHeist)))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_THREAD
-        EVT_EXEC(N(EVS_ControlTwink))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(N(SetCamVfov), CAM_DEFAULT, 75)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
+    Call(LoadSettings, CAM_DEFAULT, Ref(N(CamSettings_PostHeist)))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Thread
+        Exec(N(EVS_ControlTwink))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ControlTwink) = {
-    EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
-    EVT_CALL(SetNpcYaw, NPC_Twink, 180)
-    EVT_CALL(N(AnimateBoomLengthPostHeist))
-    EVT_WAIT(15 * DT)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Twink, 0, 0)
-        EVT_WAIT(2)
-        EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Still)
-        EVT_WAIT(20 * DT)
-        EVT_CALL(InterpNpcYaw, NPC_Twink, 180, 0)
-        EVT_WAIT(2)
-        EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(100 * DT)
-        EVT_CALL(N(AnimateViewPitchPostHeist))
-    EVT_END_THREAD
-    EVT_CALL(LoadPath, 200 * DT, EVT_PTR(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
-    EVT_LABEL(0)
-    EVT_CALL(GetNextPathPos)
-    EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
-    EVT_THREAD
-        EVT_WAIT(85 * DT)
-        EVT_CALL(N(BlockForever))
-    EVT_END_THREAD
-    EVT_WAIT(120 * DT)
-    EVT_CALL(N(ResumeIntroState))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
+    Call(SetNpcYaw, NPC_Twink, 180)
+    Call(N(AnimateBoomLengthPostHeist))
+    Wait(15 * DT)
+    Thread
+        Wait(10 * DT)
+        Call(InterpNpcYaw, NPC_Twink, 0, 0)
+        Wait(2)
+        Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Still)
+        Wait(20 * DT)
+        Call(InterpNpcYaw, NPC_Twink, 180, 0)
+        Wait(2)
+        Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
+    EndThread
+    Thread
+        Wait(100 * DT)
+        Call(N(AnimateViewPitchPostHeist))
+    EndThread
+    Call(LoadPath, 200 * DT, Ref(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
+    Label(0)
+    Call(GetNextPathPos)
+    Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+    Wait(1)
+    IfEq(LVar0, 1)
+        Goto(0)
+    EndIf
+    Call(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
+    Thread
+        Wait(85 * DT)
+        Call(N(BlockForever))
+    EndThread
+    Wait(120 * DT)
+    Call(N(ResumeIntroState))
+    Return
+    End
 };
 
 // establishing shot of the star shrine; camera slowly moves along the path toward it
 EvtScript N(EVS_Intro_PreHeist_Unused) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
-    EVT_CALL(N(SetCamVfov), CAM_DEFAULT, 75)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
-    EVT_CALL(LoadSettings, CAM_DEFAULT, EVT_PTR(N(CamSettings_PreHeist)))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_THREAD
-        EVT_CALL(N(AnimateBoomLengthPreHeist))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(300)
-        EVT_CALL(N(ResumeIntroState))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+    Call(N(SetCamVfov), CAM_DEFAULT, 75)
+    Call(SetPanTarget, CAM_DEFAULT, 0, 30, 0)
+    Call(LoadSettings, CAM_DEFAULT, Ref(N(CamSettings_PreHeist)))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Thread
+        Call(N(AnimateBoomLengthPreHeist))
+    EndThread
+    Thread
+        Wait(300)
+        Call(N(ResumeIntroState))
+    EndThread
+    Return
+    End
 };
 
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/Twink.h"
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcData N(NpcData_Twink) = {

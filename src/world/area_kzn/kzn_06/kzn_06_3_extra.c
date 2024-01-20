@@ -73,118 +73,118 @@ ModelIDList N(InvalidLavaModels) = {
 };
 
 EvtScript N(EVS_8024137C) = {
-    EVT_LABEL(0)
-        EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 1)
-        EVT_WAIT(30)
-        EVT_CALL(N(AdjustFog), EVT_PTR(N(InvalidLavaModels)), 0, 0, 255, 60, 0)
-        EVT_WAIT(30)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(N(AdjustFog), Ref(N(InvalidLavaModels)), 0, 0, 255, 60, 1)
+        Wait(30)
+        Call(N(AdjustFog), Ref(N(InvalidLavaModels)), 0, 0, 255, 60, 0)
+        Wait(30)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_LowerMainLavaLevel) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(3)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(N(func_80240A44_C6D364))
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -20)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(600.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(5.0), EVT_FLOAT(8.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(15)
-    EVT_THREAD
-        EVT_LOOP(40)
-            EVT_ADDF(MV_GlowIntensity, EVT_FLOAT(-0.015625))
-            EVT_WAIT(3)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 0, -25, 100, EASING_QUADRATIC_OUT)
-    EVT_SETF(LVar2, EVT_FLOAT(0.0))
-    EVT_SETF(LVar3, EVT_FLOAT(0.0))
-    EVT_SET(LVar4, 0)
-    EVT_LABEL(0)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateModel, MODEL_yougan, 0, LVar0, LVar3)
-    EVT_CALL(TranslateModel, MODEL_spot, 0, LVar0, 0)
-    EVT_CALL(TranslateModel, MODEL_o349, 0, LVar0, LVar2)
-    EVT_IF_GT(LVar4, 20)
-        EVT_IF_GT(LVar2, -75)
-            EVT_SUBF(LVar2, EVT_FLOAT(0.5))
-            EVT_SUBF(LVar3, EVT_FLOAT(0.55))
-        EVT_END_IF
-    EVT_END_IF
-    EVT_ADD(LVar4, 1)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_WAIT(45)
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, 1, COLLIDER_yougan, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(EnableGroup, MODEL_i_on, FALSE)
-    EVT_CALL(EnableGroup, MODEL_i_off, TRUE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Wait(3)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(N(func_80240A44_C6D364))
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar0, -20)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(600.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(5.0), Float(8.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(3.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(15)
+    Thread
+        Loop(40)
+            AddF(MV_GlowIntensity, Float(-0.015625))
+            Wait(3)
+        EndLoop
+    EndThread
+    Call(MakeLerp, 0, -25, 100, EASING_QUADRATIC_OUT)
+    SetF(LVar2, Float(0.0))
+    SetF(LVar3, Float(0.0))
+    Set(LVar4, 0)
+    Label(0)
+    Call(UpdateLerp)
+    Call(TranslateModel, MODEL_yougan, 0, LVar0, LVar3)
+    Call(TranslateModel, MODEL_spot, 0, LVar0, 0)
+    Call(TranslateModel, MODEL_o349, 0, LVar0, LVar2)
+    IfGt(LVar4, 20)
+        IfGt(LVar2, -75)
+            SubF(LVar2, Float(0.5))
+            SubF(LVar3, Float(0.55))
+        EndIf
+    EndIf
+    Add(LVar4, 1)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(0)
+    EndIf
+    Wait(45)
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, 1, COLLIDER_yougan, COLLIDER_FLAGS_UPPER_MASK)
+    Call(EnableGroup, MODEL_i_on, FALSE)
+    Call(EnableGroup, MODEL_i_off, TRUE)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MonitorPushBlockPuzzle) = {
     // wait for grid pos (11,0) to be occupied
-    EVT_LABEL(10)
-    EVT_CALL(GetPushBlock, 0, 11, 0, LVar2)
-    EVT_IF_EQ(LVar2, PUSH_GRID_EMPTY)
-        EVT_WAIT(1)
-        EVT_GOTO(10)
-    EVT_END_IF
+    Label(10)
+    Call(GetPushBlock, 0, 11, 0, LVar2)
+    IfEq(LVar2, PUSH_GRID_EMPTY)
+        Wait(1)
+        Goto(10)
+    EndIf
     // begin the scene
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(40)
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_SET(LVar1, 0)
-        EVT_LOOP(20)
-            EVT_SUBF(LVar0, EVT_FLOAT(0.7))
-            EVT_SUBF(LVar1, EVT_FLOAT(0.1))
-            EVT_CALL(TranslateGroup, MODEL_you, 0, LVar0, LVar1)
-            EVT_WAIT(2)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_EXEC_WAIT(N(EVS_LowerMainLavaLevel))
-    EVT_SET(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Wait(40)
+    Thread
+        Set(LVar0, 0)
+        Set(LVar1, 0)
+        Loop(20)
+            SubF(LVar0, Float(0.7))
+            SubF(LVar1, Float(0.1))
+            Call(TranslateGroup, MODEL_you, 0, LVar0, LVar1)
+            Wait(2)
+        EndLoop
+    EndThread
+    ExecWait(N(EVS_LowerMainLavaLevel))
+    Set(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupLavaPuzzle) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
-        EVT_CALL(EnableGroup, MODEL_i_off, FALSE)
-        EVT_EXEC(N(EVS_MonitorPushBlockPuzzle))
-        EVT_SETF(MV_GlowIntensity, EVT_FLOAT(1.0))
-    EVT_ELSE
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(EnableGroup, MODEL_i_on, FALSE)
-        EVT_CALL(TranslateGroup, MODEL_you, 0, -14, -2)
-        EVT_CALL(TranslateModel, MODEL_yougan, 0, -25, -50)
-        EVT_CALL(TranslateModel, MODEL_spot, 0, -25, 0)
-        EVT_CALL(TranslateModel, MODEL_o349, 0, -25, -40)
-        EVT_SETF(MV_GlowIntensity, EVT_FLOAT(0.5))
-    EVT_END_IF
-    EVT_THREAD
-        EVT_SET_GROUP(EVT_GROUP_00)
-        EVT_CALL(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, NULL)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(ClearLavaGlowLighting), EVT_PTR(N(LavaModels)))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH5_LAVA_STREAM_BLOCKED)
+        Call(EnableGroup, MODEL_i_off, FALSE)
+        Exec(N(EVS_MonitorPushBlockPuzzle))
+        SetF(MV_GlowIntensity, Float(1.0))
+    Else
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_yougan1, COLLIDER_FLAGS_UPPER_MASK)
+        Call(EnableGroup, MODEL_i_on, FALSE)
+        Call(TranslateGroup, MODEL_you, 0, -14, -2)
+        Call(TranslateModel, MODEL_yougan, 0, -25, -50)
+        Call(TranslateModel, MODEL_spot, 0, -25, 0)
+        Call(TranslateModel, MODEL_o349, 0, -25, -40)
+        SetF(MV_GlowIntensity, Float(0.5))
+    EndIf
+    Thread
+        SetGroup(EVT_GROUP_00)
+        Call(N(ApplyLavaGlowLighting), LAVA_GLOW_MODE_1, NULL)
+    EndThread
+    Thread
+        Call(N(ClearLavaGlowLighting), Ref(N(LavaModels)))
+    EndThread
+    Return
+    End
 };

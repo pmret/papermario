@@ -8,41 +8,41 @@
 #include "battle/common/move/StarBeamSupport.inc.c"
 
 EvtScript N(EVS_UsePower) = {
-    EVT_EXEC_WAIT(N(EVS_StarPower_WishForBeam))
-    EVT_CALL(AddBattleCamZoom, 100)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_THREAD
-        EVT_CALL(N(ProcessPeachStarBeam), TRUE)
-    EVT_END_THREAD
-    EVT_WAIT(10)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(N(GetStage))
-        EVT_IF_EQ(LVar0, 1)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(InitTargetIterator)
-    EVT_LABEL(0)
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_PEACH_BEAM | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-        EVT_IF_NE(LVar0, ITER_NO_MORE)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(N(GetStage))
-        EVT_IF_EQ(LVar0, 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(N(unkStarBeamBgFunc))
-    EVT_CALL(PlayerYieldTurn)
-    EVT_EXEC_WAIT(N(EVS_StarPower_EndWish))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_StarPower_WishForBeam))
+    Call(AddBattleCamZoom, 100)
+    Call(MoveBattleCamOver, 20)
+    Call(InitTargetIterator)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Thread
+        Call(N(ProcessPeachStarBeam), TRUE)
+    EndThread
+    Wait(10)
+    Loop(0)
+        Wait(1)
+        Call(N(GetStage))
+        IfEq(LVar0, 1)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(InitTargetIterator)
+    Label(0)
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(ItemDamageEnemy, LVar0, DAMAGE_TYPE_PEACH_BEAM | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, 0, BS_FLAGS1_TRIGGER_EVENTS)
+        Call(ChooseNextTarget, ITER_NEXT, LVar0)
+        IfNe(LVar0, ITER_NO_MORE)
+            Goto(0)
+        EndIf
+    Loop(0)
+        Wait(1)
+        Call(N(GetStage))
+        IfEq(LVar0, 2)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(N(unkStarBeamBgFunc))
+    Call(PlayerYieldTurn)
+    ExecWait(N(EVS_StarPower_EndWish))
+    Return
+    End
 };

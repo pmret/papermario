@@ -19,24 +19,24 @@ API_CALLABLE(N(func_802A123C_71AA2C)) {
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_VOLT_SHROOM)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_EXEC_WAIT(N(EatItem))
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, 20)
-    EVT_CALL(MultiplyByActorScale, LVar3)
-    EVT_ADD(LVar1, LVar3)
-    EVT_SETF(LVar3, EVT_FLOAT(1.0))
-    EVT_CALL(MultiplyByActorScale, LVar3)
-    EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, LVar3, 30, 0)
-    EVT_CALL(PlaySound, SOUND_VOLT_SHROOM_APPLY)
-    EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, LVar0, LVar1)
-    EVT_CALL(N(func_802A123C_71AA2C))
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
-    EVT_CALL(WaitForMessageBoxDone)
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_VOLT_SHROOM)
+    ExecWait(N(UseItemWithEffect))
+    ExecWait(N(EatItem))
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Set(LVar3, 20)
+    Call(MultiplyByActorScale, LVar3)
+    Add(LVar1, LVar3)
+    SetF(LVar3, Float(1.0))
+    Call(MultiplyByActorScale, LVar3)
+    PlayEffect(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, LVar3, 30, 0)
+    Call(PlaySound, SOUND_VOLT_SHROOM_APPLY)
+    Call(GetItemPower, ITEM_VOLT_SHROOM, LVar0, LVar1)
+    Call(N(func_802A123C_71AA2C))
+    Wait(20)
+    Call(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
+    Call(WaitForMessageBoxDone)
+    ExecWait(N(PlayerGoHome))
+    Return
+    End
 };

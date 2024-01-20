@@ -8,20 +8,20 @@
 #include "common/MakeSun.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, MODEL_dai_03, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_dai_04, MODEL_GROUP_VISIBLE)
-    EVT_CALL(SetGroupVisibility, MODEL_dai_05, MODEL_GROUP_HIDDEN)
-    EVT_EXEC(N(EVS_RandomFlowers_Background))
-    EVT_EXEC_WAIT(N(MakeSun))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Call(SetGroupVisibility, MODEL_dai_03, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_dai_04, MODEL_GROUP_VISIBLE)
+    Call(SetGroupVisibility, MODEL_dai_05, MODEL_GROUP_HIDDEN)
+    Exec(N(EVS_RandomFlowers_Background))
+    ExecWait(N(MakeSun))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

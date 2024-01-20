@@ -31,29 +31,29 @@ API_CALLABLE(N(AwaitPlayerJumpDown)) {
 }
 
 EvtScript N(EVS_ExitWell) = {
-    EVT_LOOP(0)
-        EVT_IF_NE(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(N(AwaitPlayerJumpDown))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(N(AwaitPlayerFallDist))
-    EVT_SET(AF_ARN_01, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_WENT_DOWN_THE_WELL)
-        EVT_SET(GB_StoryProgress, STORY_CH3_WENT_DOWN_THE_WELL)
-    EVT_END_IF
-    EVT_CALL(GotoMap, EVT_PTR("arn_09"), arn_09_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        IfNe(GB_StoryProgress, STORY_CH3_HEART_ESCAPED_WELL)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(N(AwaitPlayerJumpDown))
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(N(AwaitPlayerFallDist))
+    Set(AF_ARN_01, TRUE)
+    IfLt(GB_StoryProgress, STORY_CH3_WENT_DOWN_THE_WELL)
+        Set(GB_StoryProgress, STORY_CH3_WENT_DOWN_THE_WELL)
+    EndIf
+    Call(GotoMap, Ref("arn_09"), arn_09_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupHole) = {
-    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(90.0), 0, 0, 0, EVT_FLOAT(470.0), EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
-    EVT_EXEC(N(EVS_ExitWell))
-    EVT_RETURN
-    EVT_END
+    Call(SetCamProperties, CAM_DEFAULT, Float(90.0), 0, 0, 0, Float(470.0), Float(17.0), Float(-7.0))
+    Exec(N(EVS_ExitWell))
+    Return
+    End
 };

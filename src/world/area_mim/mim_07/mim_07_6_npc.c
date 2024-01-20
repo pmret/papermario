@@ -45,141 +45,141 @@ s32 N(D_802429AC_BACAEC)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_JrTroopa) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(mim_07_ENTRY_0)
-            EVT_USE_BUF(EVT_PTR(N(D_80242944_BACA84)))
-        EVT_CASE_EQ(mim_07_ENTRY_1)
-            EVT_USE_BUF(EVT_PTR(N(D_80242944_BACA84)))
-        EVT_CASE_EQ(mim_07_ENTRY_2)
-            EVT_USE_BUF(EVT_PTR(N(D_8024294C_BACA8C)))
-        EVT_CASE_EQ(mim_07_ENTRY_3)
-            EVT_USE_BUF(EVT_PTR(N(D_80242954_BACA94)))
-    EVT_END_SWITCH
-    EVT_BUF_READ2(LVar1, LVar2)
-    EVT_CALL(AwaitPlayerApproach, LVar1, LVar2, 80)
-    EVT_LABEL(10)
-    EVT_WAIT(1)
-    EVT_CALL(AwaitPlayerLeave, LVar1, LVar2, 100)
-    EVT_CALL(IsPlayerWithin, 0, 0, 410, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(InterruptUsePartner)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_JrTroopaMusic))
-    EVT_CALL(GetPlayerPos, LVar1, LVar2, LVar3)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(mim_07_ENTRY_0)
-            EVT_IF_LT(LVar1, 0)
-                EVT_USE_BUF(EVT_PTR(N(D_8024295C_BACA9C)))
-            EVT_ELSE
-                EVT_USE_BUF(EVT_PTR(N(D_8024296C_BACAAC)))
-            EVT_END_IF
-        EVT_CASE_EQ(mim_07_ENTRY_2)
-            EVT_IF_LT(LVar1, 0)
-                EVT_USE_BUF(EVT_PTR(N(D_8024297C_BACABC)))
-            EVT_ELSE
-                EVT_USE_BUF(EVT_PTR(N(D_8024298C_BACACC)))
-            EVT_END_IF
-        EVT_CASE_EQ(mim_07_ENTRY_3)
-            EVT_IF_LT(LVar3, 0)
-                EVT_USE_BUF(EVT_PTR(N(D_8024299C_BACADC)))
-            EVT_ELSE
-                EVT_USE_BUF(EVT_PTR(N(D_802429AC_BACAEC)))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_BUF_READ4(LVar2, LVar3, LVar4, LVar5)
-    EVT_CALL(SetSelfVar, 0, LVar2)
-    EVT_CALL(SetSelfVar, 1, LVar3)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar2, 0, LVar3)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_0018)
-    EVT_THREAD
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, LVar4)
-        EVT_ADD(LVar2, LVar5)
-        EVT_DIV(LVar0, 2)
-        EVT_DIV(LVar2, 2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(20.0), EVT_FLOAT(-6.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar4, LVar5, 30)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_0019)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PARTNER_GOOMBARIO)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH3_001A)
-        EVT_CASE_EQ(PARTNER_KOOPER)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_CH3_001B)
-        EVT_CASE_EQ(PARTNER_BOMBETTE)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 5, MSG_CH3_001C)
-        EVT_CASE_EQ(PARTNER_PARAKARRY)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_CH3_001D)
-        EVT_CASE_EQ(PARTNER_BOW)
-            EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 5, MSG_CH3_001E)
-    EVT_END_SWITCH
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_001F)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_JR_TROOPA_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(mim_07_ENTRY_0)
+            UseBuf(Ref(N(D_80242944_BACA84)))
+        CaseEq(mim_07_ENTRY_1)
+            UseBuf(Ref(N(D_80242944_BACA84)))
+        CaseEq(mim_07_ENTRY_2)
+            UseBuf(Ref(N(D_8024294C_BACA8C)))
+        CaseEq(mim_07_ENTRY_3)
+            UseBuf(Ref(N(D_80242954_BACA94)))
+    EndSwitch
+    BufRead2(LVar1, LVar2)
+    Call(AwaitPlayerApproach, LVar1, LVar2, 80)
+    Label(10)
+    Wait(1)
+    Call(AwaitPlayerLeave, LVar1, LVar2, 100)
+    Call(IsPlayerWithin, 0, 0, 410, LVar0)
+    IfEq(LVar0, 0)
+        Goto(10)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        Call(InterruptUsePartner)
+        Wait(20)
+    EndIf
+    ExecWait(N(EVS_JrTroopaMusic))
+    Call(GetPlayerPos, LVar1, LVar2, LVar3)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(mim_07_ENTRY_0)
+            IfLt(LVar1, 0)
+                UseBuf(Ref(N(D_8024295C_BACA9C)))
+            Else
+                UseBuf(Ref(N(D_8024296C_BACAAC)))
+            EndIf
+        CaseEq(mim_07_ENTRY_2)
+            IfLt(LVar1, 0)
+                UseBuf(Ref(N(D_8024297C_BACABC)))
+            Else
+                UseBuf(Ref(N(D_8024298C_BACACC)))
+            EndIf
+        CaseEq(mim_07_ENTRY_3)
+            IfLt(LVar3, 0)
+                UseBuf(Ref(N(D_8024299C_BACADC)))
+            Else
+                UseBuf(Ref(N(D_802429AC_BACAEC)))
+            EndIf
+    EndSwitch
+    BufRead4(LVar2, LVar3, LVar4, LVar5)
+    Call(SetSelfVar, 0, LVar2)
+    Call(SetSelfVar, 1, LVar3)
+    Call(SetNpcPos, NPC_SELF, LVar2, 0, LVar3)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_0018)
+    Thread
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, LVar4)
+        Add(LVar2, LVar5)
+        Div(LVar0, 2)
+        Div(LVar2, 2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+        Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+        Call(SetCamPitch, CAM_DEFAULT, Float(20.0), Float(-6.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Run)
+    Call(NpcMoveTo, NPC_SELF, LVar4, LVar5, 30)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_Idle)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_0019)
+    Call(DisablePartnerAI, 0)
+    Call(GetCurrentPartnerID, LVar0)
+    Switch(LVar0)
+        CaseEq(PARTNER_GOOMBARIO)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 5, MSG_CH3_001A)
+        CaseEq(PARTNER_KOOPER)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldKooper_Talk, ANIM_WorldKooper_Idle, 5, MSG_CH3_001B)
+        CaseEq(PARTNER_BOMBETTE)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 5, MSG_CH3_001C)
+        CaseEq(PARTNER_PARAKARRY)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, MSG_CH3_001D)
+        CaseEq(PARTNER_BOW)
+            Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 5, MSG_CH3_001E)
+    EndSwitch
+    Call(EnablePartnerAI)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_001F)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_JR_TROOPA_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_JrTroopa) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_0022)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_CALL(GetSelfVar, 1, LVar1)
-    EVT_IF_GE(LVar1, 0)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 200, 0)
-    EVT_ELSE
-        EVT_CALL(InterpNpcYaw, NPC_SELF, 330, 0)
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar1, 15)
-    EVT_SET(GF_MIM10_Defeated_JrTroopa, TRUE)
-    EVT_EXEC_WAIT(N(EVS_PlayForestMusic))
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH3_0022)
+    Call(GetSelfVar, 0, LVar0)
+    Call(GetSelfVar, 1, LVar1)
+    IfGe(LVar1, 0)
+        Call(InterpNpcYaw, NPC_SELF, 200, 0)
+    Else
+        Call(InterpNpcYaw, NPC_SELF, 330, 0)
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
+    Wait(10 * DT)
+    Call(NpcMoveTo, NPC_SELF, LVar0, LVar1, 15)
+    Set(GF_MIM10_Defeated_JrTroopa, TRUE)
+    ExecWait(N(EVS_PlayForestMusic))
+    Call(ResetCam, CAM_DEFAULT, Float(4.0 / DT))
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_JrTroopa) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_IF_EQ(GF_MIM10_Defeated_JrTroopa, FALSE)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_JrTroopa)))
-            EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_JrTroopa)))
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        IfEq(GF_MIM10_Defeated_JrTroopa, FALSE)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_JrTroopa)))
+            Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_JrTroopa)))
+            Return
+        EndIf
+    EndIf
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Fuzzy) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
-        EVT_IF_EQ(GF_MIM10_Defeated_JrTroopa, FALSE)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH3_GOT_SUPER_BOOTS)
+        IfEq(GF_MIM10_Defeated_JrTroopa, FALSE)
+            Call(RemoveNpc, NPC_SELF)
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Fuzzy_01) = {

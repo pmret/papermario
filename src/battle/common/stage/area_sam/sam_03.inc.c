@@ -11,32 +11,32 @@ void N(EnableBackgroundWave)(void) {
 }
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_THREAD
-        EVT_SET(LVar0, MODEL_Default)
-        EVT_SET(LVar1, 0)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_g62)
-        EVT_SET(LVar1, 0)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_NoSpin))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_g60)
-        EVT_SET(LVar1, 0)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_NoSpin))
-        EVT_WAIT(5)
-        EVT_SET(LVar0, MODEL_g58)
-        EVT_SET(LVar1, 0)
-        EVT_EXEC(N(EVS_AnimateHangingSnowflake_NoSpin))
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_SpawnSnowfall))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Thread
+        Set(LVar0, MODEL_Default)
+        Set(LVar1, 0)
+        Exec(N(EVS_AnimateHangingSnowflake_RandomSpin))
+        Wait(5)
+        Set(LVar0, MODEL_g62)
+        Set(LVar1, 0)
+        Exec(N(EVS_AnimateHangingSnowflake_NoSpin))
+        Wait(5)
+        Set(LVar0, MODEL_g60)
+        Set(LVar1, 0)
+        Exec(N(EVS_AnimateHangingSnowflake_NoSpin))
+        Wait(5)
+        Set(LVar0, MODEL_g58)
+        Set(LVar1, 0)
+        Exec(N(EVS_AnimateHangingSnowflake_NoSpin))
+    EndThread
+    Exec(N(EVS_SpawnSnowfall))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

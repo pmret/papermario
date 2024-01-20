@@ -3,46 +3,46 @@
 #include "world/common/npc/TrainToad.inc.c"
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(D_80244B10_DBC420))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(D_80244B10_DBC420))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Conductor) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Conductor)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Conductor)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_TrainToad) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_GOT_FRYING_PAN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0023)
-        EVT_CASE_LT(STORY_CH4_GOT_TAYCE_TS_CAKE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0024)
-        EVT_CASE_LT(STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0025)
-        EVT_CASE_LT(STORY_CH4_PULLED_SWITCH_SWITCH)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0026)
-        EVT_CASE_LT(STORY_CH4_SOLVED_COLOR_PUZZLE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0027)
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0028)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_GENERAL_GUY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0029)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_002A)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_GOT_FRYING_PAN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0023)
+        CaseLt(STORY_CH4_GOT_TAYCE_TS_CAKE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0024)
+        CaseLt(STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0025)
+        CaseLt(STORY_CH4_PULLED_SWITCH_SWITCH)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0026)
+        CaseLt(STORY_CH4_SOLVED_COLOR_PUZZLE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0027)
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0028)
+        CaseLt(STORY_CH4_DEFEATED_GENERAL_GUY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_0029)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Pink_Talk, ANIM_TrainToad_Pink_Idle, 0, MSG_CH4_002A)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrainToad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TrainToad)))
+    Return
+    End
 };
 
 NpcData N(NpcSettings_Toads)[] = {

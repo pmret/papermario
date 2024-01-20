@@ -31,139 +31,139 @@ API_CALLABLE(N(CalculateDinoLerpValues)) {
 }
 
 EvtScript N(EVS_ChangeDinoDirection) = {
-    EVT_CALL(N(GetAngleToPlayer))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_RANGE(45, 134)
-            EVT_SET(LVar5, 90)
-            EVT_SET(LVar6, ANIM_AlbinoDino_Still)
-            EVT_SET(LVarA, 90)
-        EVT_CASE_RANGE(135, 224)
-            EVT_SET(LVar5, 180)
-            EVT_SET(LVar6, ANIM_AlbinoDino_StillFwd)
-            EVT_SET(LVarA, 270)
-        EVT_CASE_RANGE(225, 314)
-            EVT_SET(LVar5, 270)
-            EVT_SET(LVar6, ANIM_AlbinoDino_Still)
-            EVT_SET(LVarA, 270)
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar5, 0)
-            EVT_SET(LVar6, ANIM_AlbinoDino_StillBack)
-            EVT_SET(LVarA, 270)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar3)
-        EVT_CASE_EQ(NPC_AlbinoDino_01)
-            EVT_SET(LVar0, MV_DinoYaw_01)
-        EVT_CASE_EQ(NPC_AlbinoDino_02)
-            EVT_SET(LVar0, MV_DinoYaw_02)
-        EVT_CASE_EQ(NPC_AlbinoDino_03)
-            EVT_SET(LVar0, MV_DinoYaw_03)
-    EVT_END_SWITCH
-    EVT_IF_NE(LVar5, LVar0)
-        EVT_THREAD
-            EVT_CALL(N(CalculateDinoLerpValues))
-            EVT_CALL(MakeLerp, LVar6, LVar7, LVar8, EASING_LINEAR)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_SWITCH(LVar3)
-                    EVT_CASE_EQ(NPC_AlbinoDino_01)
-                        EVT_SET(MV_StatueYaw_01, LVar0)
-                    EVT_CASE_EQ(NPC_AlbinoDino_02)
-                        EVT_SET(MV_StatueYaw_02, LVar0)
-                    EVT_CASE_EQ(NPC_AlbinoDino_03)
-                        EVT_SET(MV_StatueYaw_03, LVar0)
-                EVT_END_SWITCH
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_PRA_ROTATE_ALBINO_DINO, SOUND_SPACE_DEFAULT)
-        EVT_SWITCH(LVar5)
-            EVT_CASE_OR_EQ(90)
-            EVT_CASE_OR_EQ(270)
-                EVT_CALL(MakeLerp, 0, 540, 30, EASING_LINEAR)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-                EVT_CALL(SetNpcYaw, NPC_SELF, LVarA)
-            EVT_CASE_DEFAULT
-                EVT_THREAD
-                    EVT_WAIT(15)
-                    EVT_CALL(SetNpcYaw, NPC_SELF, LVarA)
-                EVT_END_THREAD
-                EVT_CALL(MakeLerp, 0, 360, 20, EASING_LINEAR)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, LVar6)
-    EVT_SWITCH(LVar3)
-        EVT_CASE_EQ(NPC_AlbinoDino_01)
-            EVT_SET(MV_DinoYaw_01, LVar5)
-        EVT_CASE_EQ(NPC_AlbinoDino_02)
-            EVT_SET(MV_DinoYaw_02, LVar5)
-        EVT_CASE_EQ(NPC_AlbinoDino_03)
-            EVT_SET(MV_DinoYaw_03, LVar5)
-    EVT_END_SWITCH
-    EVT_CALL(N(SetDinoAngle), LVar3, LVar5)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, LVar6, LVar6, 5, LVar4)
-    EVT_RETURN
-    EVT_END
+    Call(N(GetAngleToPlayer))
+    Switch(LVar0)
+        CaseRange(45, 134)
+            Set(LVar5, 90)
+            Set(LVar6, ANIM_AlbinoDino_Still)
+            Set(LVarA, 90)
+        CaseRange(135, 224)
+            Set(LVar5, 180)
+            Set(LVar6, ANIM_AlbinoDino_StillFwd)
+            Set(LVarA, 270)
+        CaseRange(225, 314)
+            Set(LVar5, 270)
+            Set(LVar6, ANIM_AlbinoDino_Still)
+            Set(LVarA, 270)
+        CaseDefault
+            Set(LVar5, 0)
+            Set(LVar6, ANIM_AlbinoDino_StillBack)
+            Set(LVarA, 270)
+    EndSwitch
+    Switch(LVar3)
+        CaseEq(NPC_AlbinoDino_01)
+            Set(LVar0, MV_DinoYaw_01)
+        CaseEq(NPC_AlbinoDino_02)
+            Set(LVar0, MV_DinoYaw_02)
+        CaseEq(NPC_AlbinoDino_03)
+            Set(LVar0, MV_DinoYaw_03)
+    EndSwitch
+    IfNe(LVar5, LVar0)
+        Thread
+            Call(N(CalculateDinoLerpValues))
+            Call(MakeLerp, LVar6, LVar7, LVar8, EASING_LINEAR)
+            Loop(0)
+                Call(UpdateLerp)
+                Switch(LVar3)
+                    CaseEq(NPC_AlbinoDino_01)
+                        Set(MV_StatueYaw_01, LVar0)
+                    CaseEq(NPC_AlbinoDino_02)
+                        Set(MV_StatueYaw_02, LVar0)
+                    CaseEq(NPC_AlbinoDino_03)
+                        Set(MV_StatueYaw_03, LVar0)
+                EndSwitch
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndThread
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_PRA_ROTATE_ALBINO_DINO, SOUND_SPACE_DEFAULT)
+        Switch(LVar5)
+            CaseOrEq(90)
+            CaseOrEq(270)
+                Call(MakeLerp, 0, 540, 30, EASING_LINEAR)
+                Loop(0)
+                    Call(UpdateLerp)
+                    Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+                Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+                Call(SetNpcYaw, NPC_SELF, LVarA)
+            CaseDefault
+                Thread
+                    Wait(15)
+                    Call(SetNpcYaw, NPC_SELF, LVarA)
+                EndThread
+                Call(MakeLerp, 0, 360, 20, EASING_LINEAR)
+                Loop(0)
+                    Call(UpdateLerp)
+                    Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+        EndSwitch
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, LVar6)
+    Switch(LVar3)
+        CaseEq(NPC_AlbinoDino_01)
+            Set(MV_DinoYaw_01, LVar5)
+        CaseEq(NPC_AlbinoDino_02)
+            Set(MV_DinoYaw_02, LVar5)
+        CaseEq(NPC_AlbinoDino_03)
+            Set(MV_DinoYaw_03, LVar5)
+    EndSwitch
+    Call(N(SetDinoAngle), LVar3, LVar5)
+    Call(SpeakToPlayer, NPC_SELF, LVar6, LVar6, 5, LVar4)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_AlbinoDino_01) = {
-    EVT_SET(LVar3, NPC_AlbinoDino_01)
-    EVT_SET(LVar4, MSG_CH7_0167)
-    EVT_EXEC_WAIT(N(EVS_ChangeDinoDirection))
-    EVT_RETURN
-    EVT_END
+    Set(LVar3, NPC_AlbinoDino_01)
+    Set(LVar4, MSG_CH7_0167)
+    ExecWait(N(EVS_ChangeDinoDirection))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_AlbinoDino_02) = {
-    EVT_SET(LVar3, NPC_AlbinoDino_02)
-    EVT_SET(LVar4, MSG_CH7_0168)
-    EVT_EXEC_WAIT(N(EVS_ChangeDinoDirection))
-    EVT_RETURN
-    EVT_END
+    Set(LVar3, NPC_AlbinoDino_02)
+    Set(LVar4, MSG_CH7_0168)
+    ExecWait(N(EVS_ChangeDinoDirection))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_AlbinoDino_03) = {
-    EVT_SET(LVar3, NPC_AlbinoDino_03)
-    EVT_SET(LVar4, MSG_CH7_0169)
-    EVT_EXEC_WAIT(N(EVS_ChangeDinoDirection))
-    EVT_RETURN
-    EVT_END
+    Set(LVar3, NPC_AlbinoDino_03)
+    Set(LVar4, MSG_CH7_0169)
+    ExecWait(N(EVS_ChangeDinoDirection))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_AlbinoDino_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_AlbinoDino_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_AlbinoDino_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_AlbinoDino_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_AlbinoDino_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_AlbinoDino_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_AlbinoDino_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_AlbinoDino_03)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_AlbinoDino_03)))
+    Return
+    End
 };
 
 NpcData N(NpcData_AlbinoDinos)[] = {

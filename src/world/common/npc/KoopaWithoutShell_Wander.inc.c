@@ -10,9 +10,9 @@ MobileAISettings N(AISettings_KoopaWithoutShell_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_KoopaWithoutShell_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_KoopaWithoutShell_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_KoopaWithoutShell_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_KoopaWithoutShell_Wander) = {

@@ -43,166 +43,166 @@ API_CALLABLE(N(GetCamPointsNearPlayer)) {
 }
 
 EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(FindKeyItem, ITEM_STAR_STONE, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_CALL(ShowKeyChoicePopup)
-        EVT_CALL(CloseChoicePopup)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_RETURN
-            EVT_CASE_EQ(-1)
-                EVT_CALL(DisablePlayerInput, FALSE)
-                EVT_RETURN
-            EVT_CASE_DEFAULT
-                EVT_CALL(RemoveKeyItemAt, LVar1)
-        EVT_END_SWITCH
-    EVT_ELSE
-        EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_SAM10_PlaceItemTip, 160, 40)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetItemPos, MV_StarStoneItemID, -117, 179, -32)
-    EVT_CALL(PlaySoundAt, SOUND_SAM_PLACE_STAR_STONE, SOUND_SPACE_DEFAULT, -117, 179, -32)
-    EVT_WAIT(30)
-    EVT_THREAD
-        EVT_CALL(MakeLerp, -32, -55, 100 * DT, EASING_COS_IN_OUT)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetItemPos, MV_StarStoneItemID, -117, 179, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o61, SOUND_SAM_STAIRS_ACTIVATE, 0)
-    EVT_CALL(MakeLerp, 0, -23, 100 * DT, EASING_COS_IN_OUT)
-    EVT_LABEL(2)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(TranslateGroup, MODEL_g51, 0, 0, LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(2)
-    EVT_END_IF
-    EVT_CALL(UpdateColliderTransform, COLLIDER_o61)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o89, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(600.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(2.0), EVT_FLOAT(5.0))
-    EVT_CALL(N(GetCamPointsNearPlayer))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(30)
-    EVT_CALL(PlaySound, SOUND_SAM_STAIRS_LOUD_THUD)
-    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, -20, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 20, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 60, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 100, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 140, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 180, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 220, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 240, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 280, -20, -66, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, -20, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 20, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 60, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 100, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 140, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 180, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 220, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 240, -20, -166, 0)
-    EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, 280, -20, -166, 0)
-    EVT_WAIT(20)
-    EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_move2, MODEL_GROUP_VISIBLE)
-    EVT_CALL(SetGroupVisibility, MODEL_move3, MODEL_GROUP_HIDDEN)
-    EVT_CALL(PlaySound, SOUND_LOOP_SAM_STAIRS_RISE)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 600, EVT_FLOAT(0.15))
-    EVT_END_THREAD
-    EVT_SET(LVar2, 0)
-    EVT_USE_BUF(EVT_PTR(N(StaircaseStepsData)))
-    EVT_LOOP(30)
-        EVT_ADD(LVar2, 1)
-        EVT_BUF_READ2(LVar3, LVar4)
-        EVT_THREAD
-            EVT_SET(LVar5, LVar4)
-            EVT_DIV(LVar5, -2)
-            EVT_CALL(MakeLerp, LVar4, 0, LVar5, EASING_LINEAR)
-            EVT_LABEL(3)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, LVar3, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(3)
-            EVT_END_IF
-            EVT_IF_EQ(LVar2, 30)
-                EVT_CALL(PlaySound, SOUND_SAM_STAIRS_FINAL_THUD)
-                EVT_CALL(StopSound, SOUND_LOOP_SAM_STAIRS_RISE)
-                EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(3.0))
-                EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(2.0))
-                EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-                EVT_SET(LVarB, LVar0)
-                EVT_CALL(GetModelCenter, LVar3)
-                EVT_SET(LVarA, -20)
-                EVT_SUB(LVarA, LVarB)
-            EVT_ELSE
-                EVT_CALL(PlaySoundAt, SOUND_SAM_ICE_STEP_THUD, SOUND_SPACE_DEFAULT, LVar0, LVarA, LVar2)
-                EVT_MOD(LVar2, 3)
-                EVT_IF_EQ(LVar2, 0)
-                    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_THREAD
-    EVT_END_LOOP
-    EVT_WAIT(150)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 140, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 150, 1050, 200, EASING_LINEAR)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 150, 150, -70)
-        EVT_LABEL(100)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, 150, LVar0, -70)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(750.0))
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(10.0), EVT_FLOAT(-14.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(100)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(480)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_m2_kabe, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_m2_yuka, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_move2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_move3, MODEL_GROUP_VISIBLE)
-    EVT_SET(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(FindKeyItem, ITEM_STAR_STONE, LVar0)
+    IfNe(LVar0, -1)
+        Call(ShowKeyChoicePopup)
+        Call(CloseChoicePopup)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(DisablePlayerInput, FALSE)
+                Return
+            CaseEq(-1)
+                Call(DisablePlayerInput, FALSE)
+                Return
+            CaseDefault
+                Call(RemoveKeyItemAt, LVar1)
+        EndSwitch
+    Else
+        Call(ShowMessageAtScreenPos, MSG_Menus_SAM10_PlaceItemTip, 160, 40)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    EndIf
+    Call(SetItemPos, MV_StarStoneItemID, -117, 179, -32)
+    Call(PlaySoundAt, SOUND_SAM_PLACE_STAR_STONE, SOUND_SPACE_DEFAULT, -117, 179, -32)
+    Wait(30)
+    Thread
+        Call(MakeLerp, -32, -55, 100 * DT, EASING_COS_IN_OUT)
+        Label(1)
+        Call(UpdateLerp)
+        Call(SetItemPos, MV_StarStoneItemID, -117, 179, LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    EndThread
+    Call(PlaySoundAtCollider, COLLIDER_o61, SOUND_SAM_STAIRS_ACTIVATE, 0)
+    Call(MakeLerp, 0, -23, 100 * DT, EASING_COS_IN_OUT)
+    Label(2)
+    Call(UpdateLerp)
+    Call(TranslateGroup, MODEL_g51, 0, 0, LVar0)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(2)
+    EndIf
+    Call(UpdateColliderTransform, COLLIDER_o61)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o89, COLLIDER_FLAGS_UPPER_MASK)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(600.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(2.0), Float(5.0))
+    Call(N(GetCamPointsNearPlayer))
+    Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
+    Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(30)
+    Call(PlaySound, SOUND_SAM_STAIRS_LOUD_THUD)
+    Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(3.0))
+    PlayEffect(EFFECT_LANDING_DUST, 3, -20, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 20, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 60, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 100, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 140, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 180, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 220, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 240, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 280, -20, -66, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, -20, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 20, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 60, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 100, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 140, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 180, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 220, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 240, -20, -166, 0)
+    PlayEffect(EFFECT_LANDING_DUST, 3, 280, -20, -166, 0)
+    Wait(20)
+    Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_move2, MODEL_GROUP_VISIBLE)
+    Call(SetGroupVisibility, MODEL_move3, MODEL_GROUP_HIDDEN)
+    Call(PlaySound, SOUND_LOOP_SAM_STAIRS_RISE)
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 600, Float(0.15))
+    EndThread
+    Set(LVar2, 0)
+    UseBuf(Ref(N(StaircaseStepsData)))
+    Loop(30)
+        Add(LVar2, 1)
+        BufRead2(LVar3, LVar4)
+        Thread
+            Set(LVar5, LVar4)
+            Div(LVar5, -2)
+            Call(MakeLerp, LVar4, 0, LVar5, EASING_LINEAR)
+            Label(3)
+            Call(UpdateLerp)
+            Call(TranslateGroup, LVar3, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(3)
+            EndIf
+            IfEq(LVar2, 30)
+                Call(PlaySound, SOUND_SAM_STAIRS_FINAL_THUD)
+                Call(StopSound, SOUND_LOOP_SAM_STAIRS_RISE)
+                Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(3.0))
+                Call(ShakeCam, CAM_DEFAULT, 0, 10, Float(2.0))
+                Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+                Set(LVarB, LVar0)
+                Call(GetModelCenter, LVar3)
+                Set(LVarA, -20)
+                Sub(LVarA, LVarB)
+            Else
+                Call(PlaySoundAt, SOUND_SAM_ICE_STEP_THUD, SOUND_SPACE_DEFAULT, LVar0, LVarA, LVar2)
+                Mod(LVar2, 3)
+                IfEq(LVar2, 0)
+                    Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+                EndIf
+            EndIf
+        EndThread
+    EndLoop
+    Wait(150)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, 140, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Thread
+        Call(MakeLerp, 150, 1050, 200, EASING_LINEAR)
+        Call(UseSettingsFrom, CAM_DEFAULT, 150, 150, -70)
+        Label(100)
+        Call(UpdateLerp)
+        Call(SetPanTarget, CAM_DEFAULT, 150, LVar0, -70)
+        Call(SetCamDistance, CAM_DEFAULT, Float(750.0))
+        Call(SetCamPitch, CAM_DEFAULT, Float(10.0), Float(-14.0))
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(100)
+        EndIf
+    EndThread
+    Wait(480)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_m2_kabe, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_m2_yuka, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_move2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_move3, MODEL_GROUP_VISIBLE)
+    Set(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
+    Call(DisablePlayerInput, FALSE)
+    Unbind
+    Return
+    End
 };
 
 BombTrigger N(BombPos_Wall) = {
@@ -211,21 +211,21 @@ BombTrigger N(BombPos_Wall) = {
 };
 
 EvtScript N(EVS_BlastWall) = {
-    EVT_PLAY_EFFECT(EFFECT_BOMBETTE_BREAKING, 2, 135, 11, 1, 10, 30)
-    EVT_CALL(EnableModel, MODEL_a_oku, TRUE)
-    EVT_LOOP(10)
-        EVT_CALL(EnableModel, MODEL_a_kabe, TRUE)
-        EVT_CALL(EnableModel, MODEL_a_hibi, TRUE)
-        EVT_WAIT(1)
-        EVT_CALL(EnableModel, MODEL_a_kabe, FALSE)
-        EVT_CALL(EnableModel, MODEL_a_hibi, FALSE)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(GF_SAM10_BombedWall, TRUE)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    PlayEffect(EFFECT_BOMBETTE_BREAKING, 2, 135, 11, 1, 10, 30)
+    Call(EnableModel, MODEL_a_oku, TRUE)
+    Loop(10)
+        Call(EnableModel, MODEL_a_kabe, TRUE)
+        Call(EnableModel, MODEL_a_hibi, TRUE)
+        Wait(1)
+        Call(EnableModel, MODEL_a_kabe, FALSE)
+        Call(EnableModel, MODEL_a_hibi, FALSE)
+        Wait(1)
+    EndLoop
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
+    Set(GF_SAM10_BombedWall, TRUE)
+    Unbind
+    Return
+    End
 };
 
 s32 N(StarStoneList)[] = {
@@ -234,46 +234,46 @@ s32 N(StarStoneList)[] = {
 };
 
 EvtScript N(EVS_SetupStairs) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_yuka, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o79, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o80, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o81, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o86, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deiliw, SURFACE_TYPE_SNOW)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilie, SURFACE_TYPE_SNOW)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o61, MODEL_kouri)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
-        EVT_CALL(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_move3, MODEL_GROUP_HIDDEN)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m2_kabe, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m2_yuka, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_move2, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_m1_kabe, SURFACE_TYPE_SNOW)
-        EVT_USE_BUF(EVT_PTR(N(StaircaseStepsData)))
-        EVT_LOOP(30)
-            EVT_BUF_READ2(LVarA, LVarB)
-            EVT_CALL(TranslateGroup, LVarA, 0, LVarB, 0)
-        EVT_END_LOOP
-        EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemPrompt_StarStoneSocket)), TRIGGER_WALL_PRESS_A, COLLIDER_o61, EVT_PTR(N(StarStoneList)), 0, 1)
-    EVT_ELSE
-        EVT_CALL(TranslateGroup, MODEL_g51, 0, 0, -23)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o61)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o89, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
-        EVT_CALL(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH7_GOT_STAR_STONE)
-        EVT_SET(GF_SAM10_BombedWall, TRUE)
-    EVT_END_IF
-    EVT_IF_EQ(GF_SAM10_BombedWall, FALSE)
-        EVT_CALL(EnableModel, MODEL_a_oku, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, EVT_PTR(N(BombPos_Wall)), 1, 0)
-    EVT_ELSE
-        EVT_CALL(EnableModel, MODEL_a_kabe, FALSE)
-        EVT_CALL(EnableModel, MODEL_a_hibi, FALSE)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_yuka, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o79, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o80, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o81, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_o86, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deiliw, SURFACE_TYPE_SNOW)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_deilie, SURFACE_TYPE_SNOW)
+    Call(ParentColliderToModel, COLLIDER_o61, MODEL_kouri)
+    IfLt(GB_StoryProgress, STORY_CH7_RAISED_FROZEN_STAIRS)
+        Call(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_move3, MODEL_GROUP_HIDDEN)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m2_kabe, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m2_yuka, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_move2, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_m1_kabe, SURFACE_TYPE_SNOW)
+        UseBuf(Ref(N(StaircaseStepsData)))
+        Loop(30)
+            BufRead2(LVarA, LVarB)
+            Call(TranslateGroup, LVarA, 0, LVarB, 0)
+        EndLoop
+        BindPadlock(Ref(N(EVS_ItemPrompt_StarStoneSocket)), TRIGGER_WALL_PRESS_A, COLLIDER_o61, Ref(N(StarStoneList)), 0, 1)
+    Else
+        Call(TranslateGroup, MODEL_g51, 0, 0, -23)
+        Call(UpdateColliderTransform, COLLIDER_o61)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o89, COLLIDER_FLAGS_UPPER_MASK)
+        Call(SetGroupVisibility, MODEL_move1, MODEL_GROUP_HIDDEN)
+        Call(SetGroupVisibility, MODEL_move2, MODEL_GROUP_HIDDEN)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_m1_kabe, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH7_GOT_STAR_STONE)
+        Set(GF_SAM10_BombedWall, TRUE)
+    EndIf
+    IfEq(GF_SAM10_BombedWall, FALSE)
+        Call(EnableModel, MODEL_a_oku, FALSE)
+        BindTrigger(Ref(N(EVS_BlastWall)), TRIGGER_POINT_BOMB, Ref(N(BombPos_Wall)), 1, 0)
+    Else
+        Call(EnableModel, MODEL_a_kabe, FALSE)
+        Call(EnableModel, MODEL_a_hibi, FALSE)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tta, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Return
+    End
 };

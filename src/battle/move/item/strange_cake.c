@@ -270,95 +270,95 @@ extern EvtScript N(script8);
 extern EvtScript N(script9);
 
 EvtScript N(EVS_UseItem) = {
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_IF_EQ(LVar1, ITEM_KOOKY_COOKIE)
-        EVT_SET_CONST(LVarA, ITEM_KOOKY_COOKIE)
-        EVT_SET(LVar1, 0)
-        EVT_EXEC_WAIT(N(UseItemWithEffect))
-        EVT_EXEC_WAIT(N(EatItem))
-        EVT_CALL(N(func_802A1A8C_731D8C))
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 20)
-        EVT_ADD(LVar1, 25)
-        EVT_CALL(N(SpawnFlowerRecoveryFX), LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 25)
-        EVT_CALL(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    IfEq(LVar1, ITEM_KOOKY_COOKIE)
+        SetConst(LVarA, ITEM_KOOKY_COOKIE)
+        Set(LVar1, 0)
+        ExecWait(N(UseItemWithEffect))
+        ExecWait(N(EatItem))
+        Call(N(func_802A1A8C_731D8C))
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar0, 20)
+        Add(LVar1, 25)
+        Call(N(SpawnFlowerRecoveryFX), LVar0, LVar1, LVar2, LVar3)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Add(LVar1, 25)
+        Call(ShowStartRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
 #if !VERSION_PAL
-        EVT_CALL(N(AddFP), LVar3)
+        Call(N(AddFP), LVar3)
 #endif
-        EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
-        EVT_WAIT(30)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-        EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-    EVT_ELSE
-        EVT_SET_CONST(LVarA, ITEM_STRANGE_CAKE)
-        EVT_SET(LVar1, 0)
-        EVT_EXEC_WAIT(N(UseItemWithEffect))
-        EVT_EXEC_WAIT(N(EatItem))
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
-    EVT_END_IF
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_WAIT(220)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DING)
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MYSTERY_REEL)
-    EVT_CALL(N(func_802A13E4_7316E4))
-    EVT_WAIT(2)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(script7))
-        EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(script8))
-        EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(script9))
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(PlayerGoHome))
-    EVT_RETURN
-    EVT_END
+        Wait(10)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
+        Wait(30)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+        Wait(20)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+    Else
+        SetConst(LVarA, ITEM_STRANGE_CAKE)
+        Set(LVar1, 0)
+        ExecWait(N(UseItemWithEffect))
+        ExecWait(N(EatItem))
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_UsePower)
+    EndIf
+    Wait(10)
+    Thread
+        Wait(220)
+        Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_DING)
+    EndThread
+    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_MYSTERY_REEL)
+    Call(N(func_802A13E4_7316E4))
+    Wait(2)
+    Switch(LVar0)
+        CaseEq(0)
+            ExecWait(N(script7))
+        CaseEq(1)
+            ExecWait(N(script8))
+        CaseEq(2)
+            ExecWait(N(script9))
+    EndSwitch
+    ExecWait(N(PlayerGoHome))
+    Return
+    End
 };
 
 EvtScript N(script7) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
-    EVT_CALL(N(func_802A1AD8_731DD8))
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
-    EVT_CALL(WaitForMessageBoxDone)
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    PlayEffect(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, Float(1.0), 30, 0)
+    Call(N(func_802A1AD8_731DD8))
+    Wait(20)
+    Call(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
+    Call(WaitForMessageBoxDone)
+    Return
+    End
 };
 
 EvtScript N(script8) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 6, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 30, 0)
-    EVT_CALL(N(func_802A1B14_731E14))
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_TRANSPARENT, 60)
-    EVT_CALL(WaitForMessageBoxDone)
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    PlayEffect(EFFECT_RADIAL_SHIMMER, 6, LVar0, LVar1, LVar2, Float(1.0), 30, 0)
+    Call(N(func_802A1B14_731E14))
+    Wait(20)
+    Call(ShowMessageBox, BTL_MSG_PLAYER_TRANSPARENT, 60)
+    Call(WaitForMessageBoxDone)
+    Return
+    End
 };
 
 EvtScript N(script9) = {
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Sleep)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_EXEC(EVS_PlaySleepHitFX)
-    EVT_CALL(N(func_802A1B68_731E68))
-    EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_ASLEEP, 60)
-    EVT_CALL(WaitForMessageBoxDone)
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Sleep)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Exec(EVS_PlaySleepHitFX)
+    Call(N(func_802A1B68_731E68))
+    Wait(20)
+    Call(ShowMessageBox, BTL_MSG_PLAYER_ASLEEP, 60)
+    Call(WaitForMessageBoxDone)
+    Return
+    End
 };
 

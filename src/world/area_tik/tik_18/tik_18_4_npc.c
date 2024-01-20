@@ -5,50 +5,50 @@
 
 EvtScript N(EVS_NpcIdle_SpikedGloomba) = {
     // wait for activation from block breaking
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_FALSE(LVar0)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Sleep)
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_AI_FOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, -90, 0, 10, EASING_LINEAR)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_SELF, LVar0, 0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(GetNpcPos, NPC_SELF, LVarA, LVarB, LVarC)
-        EVT_CALL(MakeLerp, 0, 360, 15, EASING_LINEAR)
-        EVT_LABEL(2)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(2)
-            EVT_END_IF
-        EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.7))
-    EVT_CALL(NpcJump0, NPC_SELF, 190, -10, -10, 25)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Laugh)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Idle)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGloomba_Wander)))
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        IfFalse(LVar0)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Sleep)
+    Thread
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_AI_FOUND_PLAYER_JUMP, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, -90, 0, 10, EASING_LINEAR)
+        Label(1)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_SELF, LVar0, 0, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Call(GetNpcPos, NPC_SELF, LVarA, LVarB, LVarC)
+        Call(MakeLerp, 0, 360, 15, EASING_LINEAR)
+        Label(2)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_SELF, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(2)
+            EndIf
+        Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    EndThread
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.7))
+    Call(NpcJump0, NPC_SELF, 190, -10, -10, 25)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Laugh)
+    Wait(20)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_SpikedGoomba_Dark_Idle)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGloomba_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_SpikedGloomba) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 150, 76, -63)
-    EVT_CALL(SetNpcRotation, NPC_SELF, -85, 0, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_SpikedGloomba)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 150, 76, -63)
+    Call(SetNpcRotation, NPC_SELF, -85, 0, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_SpikedGloomba)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Gloomba) = {

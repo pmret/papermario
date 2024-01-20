@@ -19,14 +19,14 @@ s32** N(varStash) = NULL;
 #define NAME_SUFFIX
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_FULL)
-    EVT_WAIT(40)
-    EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
+    Wait(40)
+    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Return
+    Return
+    End
 };
 
 s32 N(ChestItems)[] = {
@@ -149,72 +149,72 @@ API_CALLABLE(N(SetItemRetrieved)) {
 #include "world/common/todo/GetItemEmptyCount.inc.c"
 
 EvtScript N(EVS_OpenChest) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o207, SOUND_OPEN_MAGIC_CHEST, 0)
-    EVT_CALL(MakeLerp, 0, 80, 20, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g82, LVar0, -1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, COLLIDER_o207, SOUND_OPEN_MAGIC_CHEST, 0)
+    Call(MakeLerp, 0, 80, 20, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g82, LVar0, -1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_CloseChest) = {
-    EVT_CALL(MakeLerp, 80, 0, 20, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g82, LVar0, -1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o207, SOUND_CLOSE_MAGIC_CHEST, 0)
-    EVT_RETURN
-    EVT_END
+    Call(MakeLerp, 80, 0, 20, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g82, LVar0, -1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_o207, SOUND_CLOSE_MAGIC_CHEST, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Interact_MagicChest_Mario) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(EVS_OpenChest))
-    EVT_SET(LVar0, 1)
-    EVT_CALL(N(ChestItemPrompt))
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D4, 160, 40)
-        EVT_CASE_OR_EQ(ITEM_POWER_RUSH)
-        EVT_CASE_OR_EQ(ITEM_DEEP_FOCUS1)
-        EVT_CASE_OR_EQ(ITEM_LAST_STAND)
-            EVT_SET_GROUP(EVT_GROUP_00)
-            EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_FULL)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
-            EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-            EVT_CALL(AddBadge, LVar0, LVar1)
-            EVT_CALL(N(SetItemRetrieved))
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(N(GetItemEmptyCount))
-            EVT_IF_LE(LVar1, 0)
-                EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D5, 160, 40)
-            EVT_ELSE
-                EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_ANIMS)
-                EVT_CALL(AddItem, LVar0, LVar1)
-                EVT_CALL(N(SetItemRetrieved))
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_CloseChest))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(EVS_OpenChest))
+    Set(LVar0, 1)
+    Call(N(ChestItemPrompt))
+    Switch(LVar0)
+        CaseEq(-1)
+        CaseEq(0)
+            Call(ShowMessageAtScreenPos, MSG_Menus_00D4, 160, 40)
+        CaseOrEq(ITEM_POWER_RUSH)
+        CaseOrEq(ITEM_DEEP_FOCUS1)
+        CaseOrEq(ITEM_LAST_STAND)
+            SetGroup(EVT_GROUP_00)
+            Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
+            Call(ShowGotItem, LVar0, FALSE, 0)
+            Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+            Call(AddBadge, LVar0, LVar1)
+            Call(N(SetItemRetrieved))
+        EndCaseGroup
+        CaseDefault
+            Call(N(GetItemEmptyCount))
+            IfLe(LVar1, 0)
+                Call(ShowMessageAtScreenPos, MSG_Menus_00D5, 160, 40)
+            Else
+                Call(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_ANIMS)
+                Call(AddItem, LVar0, LVar1)
+                Call(N(SetItemRetrieved))
+            EndIf
+    EndSwitch
+    ExecWait(N(EVS_CloseChest))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupMagicChest) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Interact_MagicChest_Mario)), TRIGGER_WALL_PRESS_A, COLLIDER_o207, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Interact_MagicChest_Mario)), TRIGGER_WALL_PRESS_A, COLLIDER_o207, 1, 0)
+    Return
+    End
 };

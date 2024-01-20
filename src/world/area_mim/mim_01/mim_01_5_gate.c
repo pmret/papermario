@@ -1,293 +1,293 @@
 #include "mim_01.h"
 
 EvtScript N(EVS_SetGateCameraZones) = {
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetZoneEnabled, ZONE_north, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_west, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_south, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_east, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_higashi, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_nishi, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_minami, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_kita, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_stage, FALSE)
-            EVT_SET(LVar1, 0)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SetZoneEnabled, ZONE_north, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_west, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_south, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_east, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_higashi, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_nishi, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_minami, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_kita, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_stage, TRUE)
-            EVT_SET(LVar1, 1)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SetZoneEnabled, ZONE_north, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_west, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_south, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_east, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_higashi, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_nishi, FALSE)
-            EVT_CALL(SetZoneEnabled, ZONE_minami, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_kita, TRUE)
-            EVT_CALL(SetZoneEnabled, ZONE_stage, FALSE)
-            EVT_SET(LVar1, 2)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(LVar1)
+        CaseEq(0)
+            Call(SetZoneEnabled, ZONE_north, TRUE)
+            Call(SetZoneEnabled, ZONE_west, TRUE)
+            Call(SetZoneEnabled, ZONE_south, TRUE)
+            Call(SetZoneEnabled, ZONE_east, TRUE)
+            Call(SetZoneEnabled, ZONE_higashi, FALSE)
+            Call(SetZoneEnabled, ZONE_nishi, FALSE)
+            Call(SetZoneEnabled, ZONE_minami, FALSE)
+            Call(SetZoneEnabled, ZONE_kita, FALSE)
+            Call(SetZoneEnabled, ZONE_stage, FALSE)
+            Set(LVar1, 0)
+        CaseEq(1)
+            Call(SetZoneEnabled, ZONE_north, FALSE)
+            Call(SetZoneEnabled, ZONE_west, FALSE)
+            Call(SetZoneEnabled, ZONE_south, FALSE)
+            Call(SetZoneEnabled, ZONE_east, FALSE)
+            Call(SetZoneEnabled, ZONE_higashi, FALSE)
+            Call(SetZoneEnabled, ZONE_nishi, FALSE)
+            Call(SetZoneEnabled, ZONE_minami, FALSE)
+            Call(SetZoneEnabled, ZONE_kita, FALSE)
+            Call(SetZoneEnabled, ZONE_stage, TRUE)
+            Set(LVar1, 1)
+        CaseEq(2)
+            Call(SetZoneEnabled, ZONE_north, FALSE)
+            Call(SetZoneEnabled, ZONE_west, TRUE)
+            Call(SetZoneEnabled, ZONE_south, FALSE)
+            Call(SetZoneEnabled, ZONE_east, FALSE)
+            Call(SetZoneEnabled, ZONE_higashi, TRUE)
+            Call(SetZoneEnabled, ZONE_nishi, FALSE)
+            Call(SetZoneEnabled, ZONE_minami, TRUE)
+            Call(SetZoneEnabled, ZONE_kita, TRUE)
+            Call(SetZoneEnabled, ZONE_stage, FALSE)
+            Set(LVar1, 2)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_InitializeGates) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_monn, MODEL_n1)
-    EVT_CALL(RotateGroup, MODEL_monn, LVar2, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_monn)
-    EVT_CALL(ParentColliderToModel, COLLIDER_mons, MODEL_s1)
-    EVT_CALL(RotateGroup, MODEL_mons, LVar2, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_mons)
-    EVT_CALL(ParentColliderToModel, COLLIDER_mone, MODEL_e1)
-    EVT_CALL(RotateGroup, MODEL_mone, LVar2, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_mone)
-    EVT_CALL(ParentColliderToModel, COLLIDER_monw, MODEL_w1)
-    EVT_CALL(RotateGroup, MODEL_monw, 10, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_monw)
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_monn, MODEL_n1)
+    Call(RotateGroup, MODEL_monn, LVar2, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_monn)
+    Call(ParentColliderToModel, COLLIDER_mons, MODEL_s1)
+    Call(RotateGroup, MODEL_mons, LVar2, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_mons)
+    Call(ParentColliderToModel, COLLIDER_mone, MODEL_e1)
+    Call(RotateGroup, MODEL_mone, LVar2, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_mone)
+    Call(ParentColliderToModel, COLLIDER_monw, MODEL_w1)
+    Call(RotateGroup, MODEL_monw, 10, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_monw)
+    Return
+    End
 };
 
 EvtScript N(EVS_ResetGates) = {
-    EVT_CALL(RotateGroup, MODEL_monn, 0, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_monn)
-    EVT_CALL(RotateGroup, MODEL_mons, 0, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_mons)
-    EVT_CALL(RotateGroup, MODEL_mone, 0, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_mone)
-    EVT_CALL(RotateGroup, MODEL_monw, 0, 0, 1, 0)
-    EVT_CALL(UpdateColliderTransform, COLLIDER_monw)
-    EVT_RETURN
-    EVT_END
+    Call(RotateGroup, MODEL_monn, 0, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_monn)
+    Call(RotateGroup, MODEL_mons, 0, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_mons)
+    Call(RotateGroup, MODEL_mone, 0, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_mone)
+    Call(RotateGroup, MODEL_monw, 0, 0, 1, 0)
+    Call(UpdateColliderTransform, COLLIDER_monw)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayGateSounds) = {
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_FOREST_GATE_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_WAIT(19)
-    EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_FOREST_GATE_CLOSE, SOUND_SPACE_DEFAULT)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, LVar9, SOUND_FOREST_GATE_OPEN, SOUND_SPACE_DEFAULT)
+    Wait(19)
+    Call(PlaySoundAtCollider, LVar9, SOUND_FOREST_GATE_CLOSE, SOUND_SPACE_DEFAULT)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate) = {
-    EVT_EXEC(N(EVS_PlayGateSounds))
-    EVT_SWITCH(AB_MIM_1)
-        EVT_CASE_EQ(0)
-            EVT_THREAD
-                EVT_CALL(MakeLerp, 10, 90, 10, EASING_QUADRATIC_IN)
-                EVT_LABEL(10)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(RotateGroup, LVarA, LVar0, 0, 1, 0)
-                EVT_CALL(UpdateColliderTransform, LVar9)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(10)
-                EVT_END_IF
-            EVT_END_THREAD
-            EVT_WAIT(15)
-            EVT_THREAD
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_ADD(LVar0, LVar7)
-                EVT_ADD(LVar2, LVar8)
-                EVT_CALL(PlayerMoveTo, LVar0, LVar2, 15)
-            EVT_END_THREAD
-            EVT_SET(LVar1, 1)
-            EVT_EXEC(N(EVS_SetGateCameraZones))
-            EVT_CALL(MakeLerp, 90, 360, 30, EASING_LINEAR)
-            EVT_LABEL(20)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, LVarA, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, LVar9)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(20)
-            EVT_END_IF
-            EVT_EXEC(N(EVS_ResetGates))
-            EVT_SET(AB_MIM_1, 1)
-            EVT_SET(GF_MIM_ChoosingPath, TRUE)
-        EVT_CASE_EQ(1)
-            EVT_THREAD
-                EVT_CALL(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)
-                EVT_LABEL(30)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(RotateGroup, LVarA, LVar0, 0, 1, 0)
-                EVT_CALL(UpdateColliderTransform, LVar9)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(30)
-                EVT_END_IF
-            EVT_END_THREAD
-            EVT_WAIT(15)
-            EVT_THREAD
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_SUB(LVar0, LVar7)
-                EVT_SUB(LVar2, LVar8)
-                EVT_CALL(PlayerMoveTo, LVar0, LVar2, 15)
-            EVT_END_THREAD
-            EVT_SET(LVar1, 2)
-            EVT_EXEC(N(EVS_SetGateCameraZones))
-            EVT_CALL(MakeLerp, 270, -10, 30, EASING_LINEAR)
-            EVT_LABEL(40)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, LVarA, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, LVar9)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(40)
-            EVT_END_IF
-            EVT_SET(AB_MIM_1, 2)
-        EVT_CASE_EQ(2)
-            EVT_THREAD
-                EVT_CALL(MakeLerp, -10, 90, 10, EASING_QUADRATIC_IN)
-                EVT_LABEL(50)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(RotateGroup, LVarA, LVar0, 0, 1, 0)
-                EVT_CALL(UpdateColliderTransform, LVar9)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(50)
-                EVT_END_IF
-            EVT_END_THREAD
-            EVT_WAIT(15)
-            EVT_THREAD
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_ADD(LVar0, LVar7)
-                EVT_ADD(LVar2, LVar8)
-                EVT_CALL(PlayerMoveTo, LVar0, LVar2, 15)
-            EVT_END_THREAD
-            EVT_SET(LVar1, 1)
-            EVT_EXEC(N(EVS_SetGateCameraZones))
-            EVT_CALL(MakeLerp, 90, 360, 30, EASING_LINEAR)
-            EVT_LABEL(60)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, LVarA, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, LVar9)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(60)
-            EVT_END_IF
-            EVT_EXEC(N(EVS_ResetGates))
-            EVT_SET(AB_MIM_1, 1)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayGateSounds))
+    Switch(AB_MIM_1)
+        CaseEq(0)
+            Thread
+                Call(MakeLerp, 10, 90, 10, EASING_QUADRATIC_IN)
+                Label(10)
+                Call(UpdateLerp)
+                Call(RotateGroup, LVarA, LVar0, 0, 1, 0)
+                Call(UpdateColliderTransform, LVar9)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(10)
+                EndIf
+            EndThread
+            Wait(15)
+            Thread
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Add(LVar0, LVar7)
+                Add(LVar2, LVar8)
+                Call(PlayerMoveTo, LVar0, LVar2, 15)
+            EndThread
+            Set(LVar1, 1)
+            Exec(N(EVS_SetGateCameraZones))
+            Call(MakeLerp, 90, 360, 30, EASING_LINEAR)
+            Label(20)
+            Call(UpdateLerp)
+            Call(RotateGroup, LVarA, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, LVar9)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(20)
+            EndIf
+            Exec(N(EVS_ResetGates))
+            Set(AB_MIM_1, 1)
+            Set(GF_MIM_ChoosingPath, TRUE)
+        CaseEq(1)
+            Thread
+                Call(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)
+                Label(30)
+                Call(UpdateLerp)
+                Call(RotateGroup, LVarA, LVar0, 0, 1, 0)
+                Call(UpdateColliderTransform, LVar9)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(30)
+                EndIf
+            EndThread
+            Wait(15)
+            Thread
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Sub(LVar0, LVar7)
+                Sub(LVar2, LVar8)
+                Call(PlayerMoveTo, LVar0, LVar2, 15)
+            EndThread
+            Set(LVar1, 2)
+            Exec(N(EVS_SetGateCameraZones))
+            Call(MakeLerp, 270, -10, 30, EASING_LINEAR)
+            Label(40)
+            Call(UpdateLerp)
+            Call(RotateGroup, LVarA, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, LVar9)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(40)
+            EndIf
+            Set(AB_MIM_1, 2)
+        CaseEq(2)
+            Thread
+                Call(MakeLerp, -10, 90, 10, EASING_QUADRATIC_IN)
+                Label(50)
+                Call(UpdateLerp)
+                Call(RotateGroup, LVarA, LVar0, 0, 1, 0)
+                Call(UpdateColliderTransform, LVar9)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(50)
+                EndIf
+            EndThread
+            Wait(15)
+            Thread
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Add(LVar0, LVar7)
+                Add(LVar2, LVar8)
+                Call(PlayerMoveTo, LVar0, LVar2, 15)
+            EndThread
+            Set(LVar1, 1)
+            Exec(N(EVS_SetGateCameraZones))
+            Call(MakeLerp, 90, 360, 30, EASING_LINEAR)
+            Label(60)
+            Call(UpdateLerp)
+            Call(RotateGroup, LVarA, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, LVar9)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(60)
+            EndIf
+            Exec(N(EVS_ResetGates))
+            Set(AB_MIM_1, 1)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_North) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 0)
-    EVT_SET(LVar8, 70)
-    EVT_SET(LVar9, 26)
-    EVT_SET(LVarA, 155)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 0)
+    Set(LVar8, 70)
+    Set(LVar9, 26)
+    Set(LVarA, 155)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_South) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, 0)
-    EVT_SET(LVar8, -70)
-    EVT_SET(LVar9, 30)
-    EVT_SET(LVarA, 161)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, 0)
+    Set(LVar8, -70)
+    Set(LVar9, 30)
+    Set(LVarA, 161)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_East) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_SET(LVar7, -70)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, 28)
-    EVT_SET(LVarA, 158)
-    EVT_EXEC_WAIT(N(EVS_UseGate))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Set(LVar7, -70)
+    Set(LVar8, 0)
+    Set(LVar9, 28)
+    Set(LVarA, 158)
+    ExecWait(N(EVS_UseGate))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseGate_West) = {
-    EVT_SET(LVar9, 32)
-    EVT_EXEC(N(EVS_PlayGateSounds))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_NE(AB_MIM_1, 1)
-        EVT_THREAD
-            EVT_CALL(MakeLerp, 10, 90, 10, EASING_QUADRATIC_IN)
-            EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_monw)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_END_THREAD
-        EVT_WAIT(15)
-        EVT_THREAD
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar0, 70)
-            EVT_CALL(PlayerMoveTo, LVar0, LVar2, 15)
-        EVT_END_THREAD
-        EVT_SET(LVar1, 1)
-        EVT_EXEC(N(EVS_SetGateCameraZones))
-        EVT_CALL(MakeLerp, 90, 360, 30, EASING_LINEAR)
-        EVT_LABEL(20)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_monw)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(20)
-        EVT_END_IF
-        EVT_EXEC(N(EVS_ResetGates))
-        EVT_SET(AB_MIM_1, 1)
-        EVT_SET(GF_MIM_ChoosingPath, TRUE)
-    EVT_ELSE
-        EVT_THREAD
-            EVT_CALL(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)
-            EVT_LABEL(30)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_monw)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(30)
-            EVT_END_IF
-        EVT_END_THREAD
-        EVT_WAIT(15)
-        EVT_THREAD
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar0, 70)
-            EVT_CALL(PlayerMoveTo, LVar0, LVar2, 15)
-        EVT_END_THREAD
-        EVT_SET(LVar1, 2)
-        EVT_EXEC(N(EVS_SetGateCameraZones))
-        EVT_CALL(MakeLerp, 270, 10, 30, EASING_LINEAR)
-        EVT_LABEL(40)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_monw)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(40)
-        EVT_END_IF
-        EVT_SET(AB_MIM_1, 0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, 32)
+    Exec(N(EVS_PlayGateSounds))
+    Call(DisablePlayerInput, TRUE)
+    IfNe(AB_MIM_1, 1)
+        Thread
+            Call(MakeLerp, 10, 90, 10, EASING_QUADRATIC_IN)
+            Label(10)
+            Call(UpdateLerp)
+            Call(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, COLLIDER_monw)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        EndThread
+        Wait(15)
+        Thread
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Add(LVar0, 70)
+            Call(PlayerMoveTo, LVar0, LVar2, 15)
+        EndThread
+        Set(LVar1, 1)
+        Exec(N(EVS_SetGateCameraZones))
+        Call(MakeLerp, 90, 360, 30, EASING_LINEAR)
+        Label(20)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
+        Call(UpdateColliderTransform, COLLIDER_monw)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(20)
+        EndIf
+        Exec(N(EVS_ResetGates))
+        Set(AB_MIM_1, 1)
+        Set(GF_MIM_ChoosingPath, TRUE)
+    Else
+        Thread
+            Call(MakeLerp, 360, 270, 10, EASING_QUADRATIC_IN)
+            Label(30)
+            Call(UpdateLerp)
+            Call(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, COLLIDER_monw)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(30)
+            EndIf
+        EndThread
+        Wait(15)
+        Thread
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Sub(LVar0, 70)
+            Call(PlayerMoveTo, LVar0, LVar2, 15)
+        EndThread
+        Set(LVar1, 2)
+        Exec(N(EVS_SetGateCameraZones))
+        Call(MakeLerp, 270, 10, 30, EASING_LINEAR)
+        Label(40)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_monw, LVar0, 0, 1, 0)
+        Call(UpdateColliderTransform, COLLIDER_monw)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(40)
+        EndIf
+        Set(AB_MIM_1, 0)
+    EndIf
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 #include "../common/SetupGates.inc.c"

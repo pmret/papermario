@@ -5,124 +5,124 @@
 #include "world/common/npc/Koopa.inc.c"
 
 EvtScript N(EVS_NpcIdle_FuzzyBoss) = {
-    EVT_THREAD
-        EVT_LABEL(0)
-            EVT_CALL(GetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar2, 2)
-            EVT_CALL(SetNpcPos, NPC_KoopersShell, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_LABEL(1)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcPos, NPC_Fuzzy_03, LVar3, LVar4, LVar5)
-        EVT_SET(LVar6, LVar3)
-        EVT_SUB(LVar6, LVar0)
-        EVT_IF_LT(LVar6, 100)
-            EVT_ADD(LVar3, 100)
-            EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar3, LVar4, LVar5, 10 * DT)
-            EVT_SET(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_RAN_AWAY)
-        EVT_END_IF
-        EVT_IF_GT(LVar3, 1200)
-            EVT_CALL(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
-            EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
-            EVT_CALL(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-            EVT_CALL(EnableNpcShadow, NPC_KoopersShell, FALSE)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(1)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Label(0)
+            Call(GetNpcPos, NPC_Fuzzy_03, LVar0, LVar1, LVar2)
+            Add(LVar2, 2)
+            Call(SetNpcPos, NPC_KoopersShell, LVar0, LVar1, LVar2)
+            Wait(1)
+            Goto(0)
+    EndThread
+    Label(1)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(GetNpcPos, NPC_Fuzzy_03, LVar3, LVar4, LVar5)
+        Set(LVar6, LVar3)
+        Sub(LVar6, LVar0)
+        IfLt(LVar6, 100)
+            Add(LVar3, 100)
+            Call(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, NPC_Fuzzy_03, LVar3, LVar4, LVar5, 10 * DT)
+            Set(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_RAN_AWAY)
+        EndIf
+        IfGt(LVar3, 1200)
+            Call(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
+            Call(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
+            Call(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
+            Call(EnableNpcShadow, NPC_KoopersShell, FALSE)
+            Return
+        EndIf
+        Wait(1)
+        Goto(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Fuzzy_01) = {
-    EVT_WAIT(5)
-    EVT_LABEL(10)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar0, -400)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.2))
-    EVT_ADD(LVar0, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8)
-    EVT_SUB(LVar0, 15)
-    EVT_ADD(LVar2, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
-    EVT_ADD(LVar0, 20)
-    EVT_ADD(LVar2, 20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(NpcJump0, NPC_SELF, -341, 0, 23, 15)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Fuzzy_Wander)))
-    EVT_RETURN
-    EVT_END
+    Wait(5)
+    Label(10)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar0, -400)
+            Wait(1)
+            Goto(10)
+        EndIf
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Set(LVar1, 0)
+    Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
+    Call(SetNpcJumpscale, NPC_SELF, Float(1.2))
+    Add(LVar0, 20)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8)
+    Sub(LVar0, 15)
+    Add(LVar2, 20)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
+    Add(LVar0, 20)
+    Add(LVar2, 20)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_SEQ_FUZZY_HOP, SOUND_SPACE_DEFAULT)
+    Call(SetNpcJumpscale, NPC_SELF, Float(1.8))
+    Call(NpcJump0, NPC_SELF, -341, 0, 23, 15)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Fuzzy_02) = {
-    EVT_WAIT(5)
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_LT(LVar0, -140)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_SET(LVar1, 0)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Fuzzy_Wander)))
-    EVT_RETURN
-    EVT_END
+    Wait(5)
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfLt(LVar0, -140)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Set(LVar1, 0)
+    Call(SetNpcJumpscale, NPC_SELF, Float(3.0))
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 6)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Fuzzy_Wander)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Fuzzy_01) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Fuzzy_01)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Fuzzy_01)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Fuzzy_02) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Fuzzy_02)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Fuzzy_02)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_FuzzyBoss) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_RAN_AWAY)
-        EVT_CALL(SetNpcFlagBits, NPC_Fuzzy_03, NPC_FLAG_GRAVITY, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, FALSE)
-        EVT_CALL(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
-        EVT_CALL(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
-        EVT_CALL(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-        EVT_CALL(EnableNpcShadow, NPC_KoopersShell, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_FuzzyBoss)))
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_RAN_AWAY)
+        Call(SetNpcFlagBits, NPC_Fuzzy_03, NPC_FLAG_GRAVITY, FALSE)
+        Call(SetNpcFlagBits, NPC_KoopersShell, NPC_FLAG_GRAVITY, FALSE)
+        Call(SetNpcPos, NPC_Fuzzy_03, NPC_DISPOSE_LOCATION)
+        Call(SetNpcPos, NPC_KoopersShell, NPC_DISPOSE_LOCATION)
+        Call(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
+        Call(EnableNpcShadow, NPC_KoopersShell, FALSE)
+        Return
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_FuzzyBoss)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_KoopersShell) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKooper_StillShellAlt)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_WorldKooper_StillShellAlt)
+    Return
+    End
 };
 
 NpcData N(NpcData_Fuzzy_01) = {

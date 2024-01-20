@@ -21,99 +21,99 @@ s32 N(BeginSurroundCrowdPositions)[] = {
 };
 
 EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(30 * DT)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(GetPartnerInUse, LVar0)
-        EVT_IF_NE(LVar0, PARTNER_NONE)
-            EVT_CALL(InterruptUsePartner)
-            EVT_WAIT(30 * DT)
-            EVT_CALL(func_802D2C14, 1)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_WAIT(45 * DT)
-            EVT_CALL(func_802D2C14, 0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_005F)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 250, -50, 10)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 250, -50, 10)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(205.0), EVT_FLOAT(11.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0060)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0061)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0062)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, -200, 0, 0)
-    EVT_SET(LVar0, NPC_ShyGuy_01)
-    EVT_LOOP(9)
-        EVT_CALL(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim02)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0C)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_CH4_0063, 160, 40)
-    EVT_CALL(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02)
-    EVT_WAIT(20 * DT)
-    EVT_SET(LVar0, NPC_ShyGuy_01)
-    EVT_LOOP(9)
-        EVT_CALL(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim01)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02, ANIM_GeneralGuy_Anim0A, 0, MSG_CH4_0064)
-    EVT_THREAD
-        EVT_WAIT(10 * DT)
-        EVT_CALL(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
-        EVT_SET(LVar0, NPC_ShyGuy_01)
-        EVT_LOOP(9)
-            EVT_CALL(SetNpcVar, LVar0, 0, MANAGER_ARMY_CHARGE)
-            EVT_ADD(LVar0, 1)
-        EVT_END_LOOP
-    EVT_END_THREAD
+    Call(DisablePlayerInput, TRUE)
+    Wait(30 * DT)
+    Thread
+        Wait(10 * DT)
+        Call(GetPartnerInUse, LVar0)
+        IfNe(LVar0, PARTNER_NONE)
+            Call(InterruptUsePartner)
+            Wait(30 * DT)
+            Call(func_802D2C14, 1)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Wait(45 * DT)
+            Call(func_802D2C14, 0)
+        EndIf
+    EndThread
+    Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_005F)
+    Wait(10 * DT)
+    Call(UseSettingsFrom, CAM_DEFAULT, 250, -50, 10)
+    Call(SetPanTarget, CAM_DEFAULT, 250, -50, 10)
+    Call(SetCamPosB, CAM_DEFAULT, Float(205.0), Float(11.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(20 * DT)
+    Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0060)
+    Wait(20 * DT)
+    Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0061)
+    Wait(20 * DT)
+    Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0062)
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, -200, 0, 0)
+    Set(LVar0, NPC_ShyGuy_01)
+    Loop(9)
+        Call(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim02)
+        Add(LVar0, 1)
+    EndLoop
+    Call(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0C)
+    Call(ShowMessageAtScreenPos, MSG_CH4_0063, 160, 40)
+    Call(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02)
+    Wait(20 * DT)
+    Set(LVar0, NPC_ShyGuy_01)
+    Loop(9)
+        Call(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim01)
+        Add(LVar0, 1)
+    EndLoop
+    Call(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02, ANIM_GeneralGuy_Anim0A, 0, MSG_CH4_0064)
+    Thread
+        Wait(10 * DT)
+        Call(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
+        Set(LVar0, NPC_ShyGuy_01)
+        Loop(9)
+            Call(SetNpcVar, LVar0, 0, MANAGER_ARMY_CHARGE)
+            Add(LVar0, 1)
+        EndLoop
+    EndThread
     // screen 'shaking' from charging army
-    EVT_LOOP(30)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(330.0))
-        EVT_WAIT(1)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(320.0))
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_SET(LVar0, NPC_ShyGuy_01)
-    EVT_USE_BUF(EVT_PTR(N(BeginSurroundCrowdPositions)))
-    EVT_LOOP(9)
-        EVT_BUF_READ3(LVar1, LVar2, LVar3)
-        EVT_CALL(SetNpcSpeed, LVar0, LVar1)
-        EVT_CALL(SetNpcPos, LVar0, LVar2, 0, LVar3)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_WAIT(20 * DT)
+    Loop(30)
+        Call(SetCamDistance, CAM_DEFAULT, Float(330.0))
+        Wait(1)
+        Call(SetCamDistance, CAM_DEFAULT, Float(320.0))
+        Wait(1)
+    EndLoop
+    Set(LVar0, NPC_ShyGuy_01)
+    UseBuf(Ref(N(BeginSurroundCrowdPositions)))
+    Loop(9)
+        BufRead3(LVar1, LVar2, LVar3)
+        Call(SetNpcSpeed, LVar0, LVar1)
+        Call(SetNpcPos, LVar0, LVar2, 0, LVar3)
+        Add(LVar0, 1)
+    EndLoop
+    Call(ResetCam, CAM_DEFAULT, Float(90.0))
+    Wait(20 * DT)
     // wait for battle to be over
-    EVT_LABEL(5)
-        EVT_CALL(GetNpcVar, NPC_ShyGuy_09, 0, LVar0)
-        EVT_IF_NE(LVar0, MANAGER_ARMY_FLEE)
-            EVT_WAIT(1)
-            EVT_GOTO(5)
-        EVT_END_IF
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_EQ(LVar0, PARTNER_WATT)
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, PARTNER_ANIM_TALK, PARTNER_ANIM_IDLE, 0, MSG_CH4_0075)
-        EVT_CALL(EnablePartnerAI)
-    EVT_END_IF
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 150, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(FadeOutMusic, 0, 3000 * DT)
-    EVT_EXEC(N(EVS_TrySpawningStarCard))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Label(5)
+        Call(GetNpcVar, NPC_ShyGuy_09, 0, LVar0)
+        IfNe(LVar0, MANAGER_ARMY_FLEE)
+            Wait(1)
+            Goto(5)
+        EndIf
+    Call(GetCurrentPartnerID, LVar0)
+    IfEq(LVar0, PARTNER_WATT)
+        Call(DisablePartnerAI, 0)
+        Call(SpeakToPlayer, NPC_PARTNER, PARTNER_ANIM_TALK, PARTNER_ANIM_IDLE, 0, MSG_CH4_0075)
+        Call(EnablePartnerAI)
+    EndIf
+    Call(InterpPlayerYaw, 90, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 150, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.5 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(FadeOutMusic, 0, 3000 * DT)
+    Exec(N(EVS_TrySpawningStarCard))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 s32 N(CrowdFleeScriptA)[] = {
@@ -240,160 +240,160 @@ Vec3i N(PostBattleGeneralPosition) = {
 };
 
 EvtScript N(EVS_NpcIdle_ShyGuy) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(MANAGER_ARMY_CHARGE)
-                EVT_THREAD
-                    EVT_CALL(GetSelfNpcID, LVar0)
-                    EVT_SUB(LVar0, 0)
-                    EVT_USE_BUF(EVT_PTR(N(FinalSurroundCrowdPositions)))
-                    EVT_LOOP(LVar0)
-                        EVT_BUF_READ3(LVar1, LVar2, LVar3)
-                    EVT_END_LOOP
-                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
-                    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
-                    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, LVar2, LVar3)
-                EVT_END_THREAD
-                EVT_WAIT(60)
-                EVT_CALL(GetSelfNpcID, LVar0)
-                EVT_CALL(SetSelfVar, 0, MANAGER_IDLE_STATE)
-                EVT_IF_EQ(LVar0, NPC_ShyGuy_09)
-                    EVT_THREAD
-                        EVT_WAIT(20)
-                        EVT_CALL(StopSound, SOUND_LOOP_SHY_GUY_CROWD_2)
-                    EVT_END_THREAD
-                    EVT_CALL(StartBossBattle, SONG_GENERAL_GUY_BATTLE)
-                EVT_END_IF
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(MANAGER_ARMY_CHARGE)
+                Thread
+                    Call(GetSelfNpcID, LVar0)
+                    Sub(LVar0, 0)
+                    UseBuf(Ref(N(FinalSurroundCrowdPositions)))
+                    Loop(LVar0)
+                        BufRead3(LVar1, LVar2, LVar3)
+                    EndLoop
+                    Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim03)
+                    Call(SetNpcSpeed, NPC_SELF, Float(3.0))
+                    Call(NpcMoveTo, NPC_SELF, LVar1, LVar2, LVar3)
+                EndThread
+                Wait(60)
+                Call(GetSelfNpcID, LVar0)
+                Call(SetSelfVar, 0, MANAGER_IDLE_STATE)
+                IfEq(LVar0, NPC_ShyGuy_09)
+                    Thread
+                        Wait(20)
+                        Call(StopSound, SOUND_LOOP_SHY_GUY_CROWD_2)
+                    EndThread
+                    Call(StartBossBattle, SONG_GENERAL_GUY_BATTLE)
+                EndIf
+        EndSwitch
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_BossDefeated_RunAway) = {
-    EVT_CALL(GetSelfNpcID, LVar9)
-    EVT_IF_EQ(LVar9, NPC_GeneralGuy)
-        EVT_CALL(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
-        EVT_USE_BUF(EVT_PTR(N(GeneralGuyFleeScripts)))
-        EVT_BUF_READ1(LVar1)
-        EVT_USE_BUF(LVar1)
-        EVT_CALL(SetNpcAnimation, LVar9, ANIM_GeneralGuy_Anim0E)
-        EVT_LOOP(0)
-            EVT_BUF_READ1(LVar2)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(op_CS_MOVE)
-                    EVT_BUF_READ2(LVar3, LVar4)
-                    EVT_CALL(SetNpcSpeed, NPC_GeneralGuy, EVT_FLOAT(8.0))
-                    EVT_CALL(NpcMoveTo, NPC_GeneralGuy, LVar3, LVar4, 0)
-                EVT_CASE_EQ(op_CS_JUMP)
-                    EVT_BUF_READ3(LVar3, LVar4, LVar5)
-                    EVT_CALL(SetNpcJumpscale, NPC_GeneralGuy, EVT_FLOAT(1.0))
-                    EVT_CALL(NpcJump0, NPC_GeneralGuy, LVar3, LVar4, LVar5, 10)
-            EVT_END_SWITCH
-            EVT_IF_EQ(LVar2, op_CS_END)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
-        EVT_CALL(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
-    EVT_ELSE
-        EVT_SET(LVar0, LVar9)
-        EVT_SUB(LVar0, 0)
-        EVT_USE_BUF(EVT_PTR(N(CrowdFleeScripts)))
-        EVT_LOOP(LVar0)
-            EVT_BUF_READ1(LVar1)
-        EVT_END_LOOP
-        EVT_USE_BUF(LVar1)
-        EVT_LOOP(0)
-            EVT_BUF_READ1(LVar2)
-            EVT_SWITCH(LVar2)
-                EVT_CASE_EQ(op_CS_MOVE)
-                    EVT_BUF_READ2(LVar3, LVar4)
-                    EVT_CALL(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim04)
-                    EVT_CALL(SetNpcSpeed, LVar9, EVT_FLOAT(8.0))
-                    EVT_CALL(NpcMoveTo, LVar9, LVar3, LVar4, 0)
-                EVT_CASE_EQ(op_CS_JUMP)
-                    EVT_BUF_READ3(LVar3, LVar4, LVar5)
-                    EVT_CALL(SetNpcJumpscale, LVar9, EVT_FLOAT(1.0))
-                    EVT_CALL(NpcJump0, LVar9, LVar3, LVar4, LVar5, 10)
-                EVT_CASE_EQ(op_CS_FALL)
-                    EVT_CALL(SetNpcRotationPivot, LVar9, 10)
-                    EVT_THREAD
-                        EVT_SET(LVar3, 0)
-                        EVT_LOOP(10)
-                            EVT_ADD(LVar3, 9)
-                            EVT_CALL(SetNpcRotation, LVar9, 0, 0, LVar3)
-                            EVT_WAIT(1)
-                        EVT_END_LOOP
-                    EVT_END_THREAD
-                    EVT_CALL(NpcJump0, LVar9, -180, 0, 63, 4)
-                    EVT_THREAD
-                        EVT_WAIT(10)
-                        EVT_CALL(SetNpcRotation, LVar9, 0, 0, 0)
-                        EVT_CALL(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim10)
-                        EVT_CALL(PlayerFaceNpc, LVar9, 3)
-                        EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 3)
-                    EVT_END_THREAD
-                    EVT_CALL(NpcJump0, LVar9, -220, 0, 63, 10)
-                    EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
-                    EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(1.0))
-                    EVT_WAIT(50)
-                    EVT_LOOP(2)
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_DEFAULT)
-                        EVT_WAIT(7)
-                    EVT_END_LOOP
-                    EVT_WAIT(6)
-                    EVT_CALL(SetNpcRotationPivot, LVar9, 0)
-                    EVT_CALL(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim01)
-                    EVT_CALL(NpcJump0, LVar9, -230, 0, 63, 10)
-                    EVT_CALL(InterpNpcYaw, LVar9, 90, 0)
-                    EVT_WAIT(20)
-                    EVT_THREAD
-                        EVT_CALL(PlaySoundAtNpc, LVar9, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
-                        EVT_WAIT(45)
-                        EVT_CALL(StopSound, SOUND_SHY_GUY_FLEE_LOOP)
-                        EVT_CALL(SetNpcVar, NPC_ShyGuy_09, 0, MANAGER_ARMY_FLEE)
-                    EVT_END_THREAD
-            EVT_END_SWITCH
-            EVT_IF_EQ(LVar2, op_CS_END)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_CALL(SetNpcFlagBits, LVar9, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetNpcPos, LVar9, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Call(GetSelfNpcID, LVar9)
+    IfEq(LVar9, NPC_GeneralGuy)
+        Call(PlaySound, SOUND_LOOP_SHY_GUY_CROWD_2)
+        UseBuf(Ref(N(GeneralGuyFleeScripts)))
+        BufRead1(LVar1)
+        UseBuf(LVar1)
+        Call(SetNpcAnimation, LVar9, ANIM_GeneralGuy_Anim0E)
+        Loop(0)
+            BufRead1(LVar2)
+            Switch(LVar2)
+                CaseEq(op_CS_MOVE)
+                    BufRead2(LVar3, LVar4)
+                    Call(SetNpcSpeed, NPC_GeneralGuy, Float(8.0))
+                    Call(NpcMoveTo, NPC_GeneralGuy, LVar3, LVar4, 0)
+                CaseEq(op_CS_JUMP)
+                    BufRead3(LVar3, LVar4, LVar5)
+                    Call(SetNpcJumpscale, NPC_GeneralGuy, Float(1.0))
+                    Call(NpcJump0, NPC_GeneralGuy, LVar3, LVar4, LVar5, 10)
+            EndSwitch
+            IfEq(LVar2, op_CS_END)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(PlaySound, SOUND_LRAW_SHY_GUY_CROWD_2 | SOUND_ID_TRIGGER_CHANGE_SOUND)
+        Call(StopTrackingSoundPos, SOUND_LRAW_SHY_GUY_CROWD_2)
+    Else
+        Set(LVar0, LVar9)
+        Sub(LVar0, 0)
+        UseBuf(Ref(N(CrowdFleeScripts)))
+        Loop(LVar0)
+            BufRead1(LVar1)
+        EndLoop
+        UseBuf(LVar1)
+        Loop(0)
+            BufRead1(LVar2)
+            Switch(LVar2)
+                CaseEq(op_CS_MOVE)
+                    BufRead2(LVar3, LVar4)
+                    Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim04)
+                    Call(SetNpcSpeed, LVar9, Float(8.0))
+                    Call(NpcMoveTo, LVar9, LVar3, LVar4, 0)
+                CaseEq(op_CS_JUMP)
+                    BufRead3(LVar3, LVar4, LVar5)
+                    Call(SetNpcJumpscale, LVar9, Float(1.0))
+                    Call(NpcJump0, LVar9, LVar3, LVar4, LVar5, 10)
+                CaseEq(op_CS_FALL)
+                    Call(SetNpcRotationPivot, LVar9, 10)
+                    Thread
+                        Set(LVar3, 0)
+                        Loop(10)
+                            Add(LVar3, 9)
+                            Call(SetNpcRotation, LVar9, 0, 0, LVar3)
+                            Wait(1)
+                        EndLoop
+                    EndThread
+                    Call(NpcJump0, LVar9, -180, 0, 63, 4)
+                    Thread
+                        Wait(10)
+                        Call(SetNpcRotation, LVar9, 0, 0, 0)
+                        Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim10)
+                        Call(PlayerFaceNpc, LVar9, 3)
+                        Call(NpcFaceNpc, NPC_PARTNER, LVar9, 3)
+                    EndThread
+                    Call(NpcJump0, LVar9, -220, 0, 63, 10)
+                    Call(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TRIP, SOUND_SPACE_DEFAULT)
+                    Call(ShakeCam, CAM_DEFAULT, 0, 5, Float(1.0))
+                    Wait(50)
+                    Loop(2)
+                        Call(PlaySoundAtNpc, LVar9, SOUND_ACTOR_TWITCH, SOUND_SPACE_DEFAULT)
+                        Wait(7)
+                    EndLoop
+                    Wait(6)
+                    Call(SetNpcRotationPivot, LVar9, 0)
+                    Call(SetNpcAnimation, LVar9, ANIM_ShyGuy_Red_Anim01)
+                    Call(NpcJump0, LVar9, -230, 0, 63, 10)
+                    Call(InterpNpcYaw, LVar9, 90, 0)
+                    Wait(20)
+                    Thread
+                        Call(PlaySoundAtNpc, LVar9, SOUND_SHY_GUY_FLEE_LOOP, SOUND_SPACE_DEFAULT)
+                        Wait(45)
+                        Call(StopSound, SOUND_SHY_GUY_FLEE_LOOP)
+                        Call(SetNpcVar, NPC_ShyGuy_09, 0, MANAGER_ARMY_FLEE)
+                    EndThread
+            EndSwitch
+            IfEq(LVar2, op_CS_END)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndIf
+    Call(SetNpcFlagBits, LVar9, NPC_FLAG_GRAVITY, FALSE)
+    Call(SetNpcPos, LVar9, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_GeneralGuy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
-            EVT_CALL(GetSelfNpcID, LVar0)
-            EVT_IF_EQ(LVar0, NPC_GeneralGuy)
-                EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
-                EVT_USE_BUF(EVT_PTR(N(FinalSurroundCrowdPositions)))
-                EVT_SET(LVar0, NPC_ShyGuy_01)
-                EVT_LOOP(9)
-                    EVT_BUF_READ3(LVar1, LVar2, LVar3)
-                    EVT_CALL(SetNpcPos, LVar0, LVar1, 0, LVar2)
-                    EVT_CALL(NpcFacePlayer, LVar0, 0)
-                    EVT_ADD(LVar0, 1)
-                EVT_END_LOOP
-                EVT_USE_BUF(EVT_PTR(N(PostBattleGeneralPosition)))
-                EVT_BUF_READ3(LVar1, LVar2, LVar3)
-                EVT_CALL(SetNpcPos, NPC_GeneralGuy, LVar1, LVar2, LVar3)
-            EVT_END_IF
-            EVT_EXEC(N(EVS_BossDefeated_RunAway))
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetMusicTrack, 0, SONG_SHY_GUY_TOYBOX, 0, 8)
+            Call(GetSelfNpcID, LVar0)
+            IfEq(LVar0, NPC_GeneralGuy)
+                Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)
+                UseBuf(Ref(N(FinalSurroundCrowdPositions)))
+                Set(LVar0, NPC_ShyGuy_01)
+                Loop(9)
+                    BufRead3(LVar1, LVar2, LVar3)
+                    Call(SetNpcPos, LVar0, LVar1, 0, LVar2)
+                    Call(NpcFacePlayer, LVar0, 0)
+                    Add(LVar0, 1)
+                EndLoop
+                UseBuf(Ref(N(PostBattleGeneralPosition)))
+                BufRead3(LVar1, LVar2, LVar3)
+                Call(SetNpcPos, NPC_GeneralGuy, LVar1, LVar2, LVar3)
+            EndIf
+            Exec(N(EVS_BossDefeated_RunAway))
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 Vec3i N(InitialCrowdPositions)[] = {
@@ -409,33 +409,33 @@ Vec3i N(InitialCrowdPositions)[] = {
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_ShyGuy)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_GeneralGuy)))
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_SUB(LVar0, 0)
-        EVT_USE_BUF(EVT_PTR(N(InitialCrowdPositions)))
-        EVT_LOOP(LVar0)
-            EVT_BUF_READ3(LVar1, LVar2, LVar3)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_ShyGuy)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_GeneralGuy)))
+        Call(GetSelfNpcID, LVar0)
+        Sub(LVar0, 0)
+        UseBuf(Ref(N(InitialCrowdPositions)))
+        Loop(LVar0)
+            BufRead3(LVar1, LVar2, LVar3)
+        EndLoop
+        Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
+    Else
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GeneralGuy) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
-        EVT_EXEC(N(EVS_Scene_MeetingGeneralGuy))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_GeneralGuy)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH4_DEFEATED_GENERAL_GUY)
+        Exec(N(EVS_Scene_MeetingGeneralGuy))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_GeneralGuy)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_GeneralGuy)[] = {

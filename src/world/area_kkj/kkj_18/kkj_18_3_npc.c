@@ -7,47 +7,47 @@
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 EvtScript N(EVS_NpcIdle_GourmetGuy) = {
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_EXEC(N(EVS_ManageGourmetGuyScenes))
-    EVT_RETURN
-    EVT_END
+    Call(WaitForPlayerInputEnabled)
+    Exec(N(EVS_ManageGourmetGuyScenes))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_GourmetGuy_Excited) = {
-    EVT_CALL(SpeakToPlayer, NPC_GourmetGuy, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 0, MSG_Peach_00A1)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_GourmetGuy, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 0, MSG_Peach_00A1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_GourmetGuy_Scold) = {
-    EVT_CALL(SpeakToPlayer, NPC_GourmetGuy, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 0, MSG_Peach_00A6)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_GourmetGuy, ANIM_GourmetGuy_Talk, ANIM_GourmetGuy_Idle, 0, MSG_Peach_00A6)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_GourmetGuy) = {
-    EVT_CALL(EnableGroup, MODEL_g12, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g15, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(SetNpcPos, NPC_SELF, 120, 0, -20)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_IF_EQ(AF_KKJ_FinishedBakingCake, FALSE)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GourmetGuy_Excited)))
-    EVT_ELSE
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_GourmetGuy_Scold)))
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_GourmetGuy)))
-    EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_Knife, ANIM_GourmetGuy_Knife)
-    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_GourmetGuy_Knife, FALSE)
-    EVT_CALL(SetNpcPos, NPC_GourmetGuy_Knife, 60, 40, -15)
-    EVT_CALL(SetNpcYaw, NPC_GourmetGuy_Knife, 270)
-    EVT_CALL(SetNpcAnimation, NPC_GourmetGuy_Fork, ANIM_GourmetGuy_Fork)
-    EVT_CALL(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_GourmetGuy_Fork, FALSE)
-    EVT_CALL(SetNpcPos, NPC_GourmetGuy_Fork, 125, 40, -15)
-    EVT_CALL(SetNpcYaw, NPC_GourmetGuy_Fork, 270)
-    EVT_RETURN
-    EVT_END
+    Call(EnableGroup, MODEL_g12, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_g15, COLLIDER_FLAGS_UPPER_MASK)
+    Call(SetNpcPos, NPC_SELF, 120, 0, -20)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    IfEq(AF_KKJ_FinishedBakingCake, FALSE)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GourmetGuy_Excited)))
+    Else
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_GourmetGuy_Scold)))
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_GourmetGuy)))
+    Call(SetNpcAnimation, NPC_GourmetGuy_Knife, ANIM_GourmetGuy_Knife)
+    Call(SetNpcFlagBits, NPC_GourmetGuy_Knife, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_GourmetGuy_Knife, FALSE)
+    Call(SetNpcPos, NPC_GourmetGuy_Knife, 60, 40, -15)
+    Call(SetNpcYaw, NPC_GourmetGuy_Knife, 270)
+    Call(SetNpcAnimation, NPC_GourmetGuy_Fork, ANIM_GourmetGuy_Fork)
+    Call(SetNpcFlagBits, NPC_GourmetGuy_Fork, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_GourmetGuy_Fork, FALSE)
+    Call(SetNpcPos, NPC_GourmetGuy_Fork, 125, 40, -15)
+    Call(SetNpcYaw, NPC_GourmetGuy_Fork, 270)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_GourmetGuy)[] = {

@@ -25,111 +25,111 @@ API_CALLABLE(N(GetBulletBillVar)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_BillBlaster) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
+    Return
+    End
 };
 
 EvtScript N(D_80240844_9BDEA4) = {
-    EVT_LABEL(0)
-        EVT_SETF(LVar0, EVT_FLOAT(400.0))
-        EVT_SET(LVar1, 1)
-        EVT_CALL(GetNpcYaw, NPC_SELF, LVar2)
-        EVT_SET(LVar3, 10)
-        EVT_SET(LVarA, ANIM_BillBlaster_Idle)
-        EVT_SET(LVarB, ANIM_BillBlaster_Idle)
-        EVT_EXEC_WAIT(EVS_800936C0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
-        EVT_WAIT(15)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(GetNpcYaw, NPC_SELF, LVar3)
-        EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(20.0), LVar3)
-        EVT_ADD(LVar1, 12)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
-        EVT_CALL(GetSelfNpcID, LVar0)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(SetNpcVar, LVar0, 0, 1)
-        EVT_LABEL(1)
-            EVT_CALL(GetSelfNpcID, LVar0)
-            EVT_ADD(LVar0, 1)
-            EVT_CALL(GetNpcVar, LVar0, 0, LVar1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_WAIT(1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(RandInt, 30, LVar0)
-        EVT_ADD(LVar0, 30)
-        EVT_WAIT(LVar0)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        SetF(LVar0, Float(400.0))
+        Set(LVar1, 1)
+        Call(GetNpcYaw, NPC_SELF, LVar2)
+        Set(LVar3, 10)
+        Set(LVarA, ANIM_BillBlaster_Idle)
+        Set(LVarB, ANIM_BillBlaster_Idle)
+        ExecWait(EVS_800936C0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
+        Wait(15)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Call(GetNpcYaw, NPC_SELF, LVar3)
+        Call(AddVectorPolar, LVar0, LVar2, Float(20.0), LVar3)
+        Add(LVar1, 12)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
+        Call(GetSelfNpcID, LVar0)
+        Add(LVar0, 1)
+        Call(SetNpcVar, LVar0, 0, 1)
+        Label(1)
+            Call(GetSelfNpcID, LVar0)
+            Add(LVar0, 1)
+            Call(GetNpcVar, LVar0, 0, LVar1)
+            IfEq(LVar1, 0)
+                Wait(1)
+                Goto(1)
+            EndIf
+        Call(RandInt, 30, LVar0)
+        Add(LVar0, 30)
+        Wait(LVar0)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_BillBlaster) = {
-    EVT_CALL(SetBattleMusic, SONG_SPECIAL_BATTLE)
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_SET(LVar0, ANIM_BillBlaster_Hurt)
-            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_SPIN)
-            EVT_THREAD
-                EVT_CALL(func_800458CC, LVar0)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LVarA, 0)
-                    EVT_LOOP(30)
-                        EVT_ADD(LVarA, 40)
-                        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
-                        EVT_WAIT(1)
-                    EVT_END_LOOP
-                EVT_END_IF
-            EVT_END_THREAD
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetBattleMusic, SONG_SPECIAL_BATTLE)
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_NONE)
+        CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
+            Set(LVar0, ANIM_BillBlaster_Hurt)
+            ExecWait(EVS_NpcHitRecoil)
+        CaseEq(ENCOUNTER_TRIGGER_SPIN)
+            Thread
+                Call(func_800458CC, LVar0)
+                IfEq(LVar0, 0)
+                    Set(LVarA, 0)
+                    Loop(30)
+                        Add(LVarA, 40)
+                        Call(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
+                        Wait(1)
+                    EndLoop
+                EndIf
+            EndThread
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(D_80240B80_9BE1E0) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_BulletBill) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(D_80240C1C_9BE27C) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(D_80240C2C_9BE28C) = {
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        CaseEq(OUTCOME_PLAYER_FLED)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(missing_80240CE4) = {
@@ -155,313 +155,313 @@ NpcSettings N(missing_80240D10) = {
 };
 
 EvtScript N(EVS_NpcAuxAI_KoopaBros_Red) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_IF_LT(LVar0, -370)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(FadeOutMusic, 0, 2000 * DT)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 1490, 0, 0)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 1466, EVT_FLOAT(41.6))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 1466, EVT_FLOAT(41.6))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 1490, 60, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 25, -9)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySound, SOUND_METAL_DOOR_OPEN)
-    EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 0, 8)
-    EVT_CALL(MakeLerp, 0, 110, 10, EASING_COS_IN_OUT)
-    EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, MODEL_o60, LVar0, 0, -1, 0)
-        EVT_CALL(RotateModel, MODEL_o65, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_CALL(SetNpcVar, NPC_KoopaBros_Green, 0, 1)
-    EVT_CALL(SetNpcVar, NPC_KoopaBros_Yellow, 0, 1)
-    EVT_CALL(SetNpcVar, NPC_KoopaBros_Black, 0, 1)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1490, 0, 0)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_PointForward, ANIM_KoopaBros_Red_PointForward, 0, MSG_CH1_00F2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 1466, EVT_FLOAT(41.6))
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 1250, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Land)
-    EVT_CALL(NpcJump0, NPC_SELF, 1440, 30, 0, 20 * DT)
-    EVT_CALL(NpcJump0, NPC_SELF, 1380, 0, 0, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1360, 0, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Idle)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_PointForward, ANIM_KoopaBros_Red_PointForward, 0, MSG_CH1_00F3)
-    EVT_CALL(SetNpcVar, NPC_KoopaBros_Green, 0, 2)
-    EVT_CALL(SetNpcVar, NPC_KoopaBros_Yellow, 0, 2)
-    EVT_CALL(SetNpcVar, NPC_KoopaBros_Black, 0, 2)
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_CALL(SetMusicTrack, 0, SONG_BULLET_BILL_ASSAULT, 0, 8)
-    EVT_WAIT(60 * DT)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
-    EVT_SET(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(RotateModel, MODEL_o60, 0, 0, -1, 0)
-    EVT_CALL(RotateModel, MODEL_o65, 0, 0, 1, 0)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Wait(1)
+        IfLt(LVar0, -370)
+            Goto(0)
+        EndIf
+    Call(DisablePlayerInput, TRUE)
+    Wait(20 * DT)
+    Call(FadeOutMusic, 0, 2000 * DT)
+    Call(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
+    Call(SetPanTarget, CAM_DEFAULT, 1490, 0, 0)
+    Call(SetCamPosB, CAM_DEFAULT, 1466, Float(41.6))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20 * DT)
+    Call(SetCamPosB, CAM_DEFAULT, 1466, Float(41.6))
+    Call(SetPanTarget, CAM_DEFAULT, 1490, 60, 0)
+    Call(SetCamDistance, CAM_DEFAULT, 300)
+    Call(SetCamPitch, CAM_DEFAULT, 25, -9)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(5.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(20 * DT)
+    Call(PlaySound, SOUND_METAL_DOOR_OPEN)
+    Call(SetMusicTrack, 0, SONG_KOOPA_BROS_THEME, 0, 8)
+    Call(MakeLerp, 0, 110, 10, EASING_COS_IN_OUT)
+    Label(2)
+        Call(UpdateLerp)
+        Call(RotateModel, MODEL_o60, LVar0, 0, -1, 0)
+        Call(RotateModel, MODEL_o65, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(2)
+        EndIf
+    Call(SetNpcVar, NPC_KoopaBros_Green, 0, 1)
+    Call(SetNpcVar, NPC_KoopaBros_Yellow, 0, 1)
+    Call(SetNpcVar, NPC_KoopaBros_Black, 0, 1)
+    Wait(60 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.8))
+    Call(NpcMoveTo, NPC_SELF, 1490, 0, 0)
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_PointForward, ANIM_KoopaBros_Red_PointForward, 0, MSG_CH1_00F2)
+    Call(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
+    Call(SetCamPosB, CAM_DEFAULT, 1466, Float(41.6))
+    Call(SetPanTarget, CAM_DEFAULT, 1250, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Land)
+    Call(NpcJump0, NPC_SELF, 1440, 30, 0, 20 * DT)
+    Call(NpcJump0, NPC_SELF, 1380, 0, 0, 20 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Run)
+    Call(NpcMoveTo, NPC_SELF, 1360, 0, 0)
+    Wait(20 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Idle)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_PointForward, ANIM_KoopaBros_Red_PointForward, 0, MSG_CH1_00F3)
+    Call(SetNpcVar, NPC_KoopaBros_Green, 0, 2)
+    Call(SetNpcVar, NPC_KoopaBros_Yellow, 0, 2)
+    Call(SetNpcVar, NPC_KoopaBros_Black, 0, 2)
+    Call(SetSelfVar, 0, 1)
+    Call(SetMusicTrack, 0, SONG_BULLET_BILL_ASSAULT, 0, 8)
+    Wait(60 * DT)
+    Call(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0 / DT))
+    Set(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+    Call(DisablePlayerInput, FALSE)
+    Call(RotateModel, MODEL_o60, 0, 0, -1, 0)
+    Call(RotateModel, MODEL_o65, 0, 0, 1, 0)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_KoopaBros_Black) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_KoopaBros_Yellow) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAuxAI_KoopaBros_Green) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_KoopaBros_Black) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LABEL(10)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1520, 20, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Land)
-    EVT_CALL(NpcJump0, NPC_SELF, 1470, 30, 30, 20 * DT)
-    EVT_CALL(NpcJump0, NPC_SELF, 1410, 0, 40, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1330, 50, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_StillCrouch)
-    EVT_LABEL(20)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(20)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_PointForward)
-    EVT_WAIT(100 * DT)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Label(10)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            Wait(1)
+            Goto(10)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.8))
+    Call(NpcMoveTo, NPC_SELF, 1520, 20, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Land)
+    Call(NpcJump0, NPC_SELF, 1470, 30, 30, 20 * DT)
+    Call(NpcJump0, NPC_SELF, 1410, 0, 40, 20 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
+    Call(NpcMoveTo, NPC_SELF, 1330, 50, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_StillCrouch)
+    Label(20)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 1)
+            Wait(1)
+            Goto(20)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_PointForward)
+    Wait(100 * DT)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_KoopaBros_Yellow) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LABEL(10)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1505, 5, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Land)
-    EVT_CALL(NpcJump0, NPC_SELF, 1455, 30, 5, 20 * DT)
-    EVT_CALL(NpcJump0, NPC_SELF, 1395, 0, 5, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1315, 5, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_StillCrouch)
-    EVT_LABEL(20)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(20)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_PointForward)
-    EVT_WAIT(100 * DT)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Label(10)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            Wait(1)
+            Goto(10)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.8))
+    Call(NpcMoveTo, NPC_SELF, 1505, 5, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Land)
+    Call(NpcJump0, NPC_SELF, 1455, 30, 5, 20 * DT)
+    Call(NpcJump0, NPC_SELF, 1395, 0, 5, 20 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Run)
+    Call(NpcMoveTo, NPC_SELF, 1315, 5, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_StillCrouch)
+    Label(20)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 1)
+            Wait(1)
+            Goto(20)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_PointForward)
+    Wait(100 * DT)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_KoopaBros_Green) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LABEL(10)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1490, -10, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Land)
-    EVT_CALL(NpcJump0, NPC_SELF, 1440, 30, -20, 20 * DT)
-    EVT_CALL(NpcJump0, NPC_SELF, 1380, 0, -30, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 1300, -40, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_StillCrouch)
-    EVT_LABEL(20)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(20)
-        EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_PointForward)
-    EVT_WAIT(100 * DT)
-    EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Label(10)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            Wait(1)
+            Goto(10)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(3.0 / DT))
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.8))
+    Call(NpcMoveTo, NPC_SELF, 1490, -10, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Land)
+    Call(NpcJump0, NPC_SELF, 1440, 30, -20, 20 * DT)
+    Call(NpcJump0, NPC_SELF, 1380, 0, -30, 20 * DT)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Run)
+    Call(NpcMoveTo, NPC_SELF, 1300, -40, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_StillCrouch)
+    Label(20)
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 1)
+            Wait(1)
+            Goto(20)
+        EndIf
+    Call(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_PointForward)
+    Wait(100 * DT)
+    Call(RemoveNpc, NPC_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_BillBlaster) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
-        EVT_LABEL(100)
-            EVT_CALL(GetNpcVar, NPC_KoopaBros_Red, 0, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_WAIT(1)
-                EVT_GOTO(100)
-            EVT_END_IF
-    EVT_END_IF
-    EVT_LABEL(0)
-        EVT_SET(LVarA, NPC_BulletBill_01)
-        EVT_LOOP(10)
+    IfLt(GB_StoryProgress, STORY_CH1_KOOPA_BROS_FIRING_BLASTERS)
+        Label(100)
+            Call(GetNpcVar, NPC_KoopaBros_Red, 0, LVar0)
+            IfEq(LVar0, 0)
+                Wait(1)
+                Goto(100)
+            EndIf
+    EndIf
+    Label(0)
+        Set(LVarA, NPC_BulletBill_01)
+        Loop(10)
             // if the bullet bill does not have an assigned owner, assign ourself and fire
-            EVT_CALL(N(GetBulletBillVar), LVarA, 0, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(GetSelfNpcID, LVar0)
-                EVT_CALL(SetNpcVar, LVarA, 0, LVar0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
-                EVT_WAIT(15)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
-                EVT_CALL(RandInt, 100, LVar0)
-                EVT_ADD(LVar0, 60)
-                EVT_WAIT(LVar0)
-            EVT_END_IF
-            EVT_ADD(LVarA, 1)
-        EVT_END_LOOP
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+            Call(N(GetBulletBillVar), LVarA, 0, LVar0)
+            IfEq(LVar0, 0)
+                Call(GetSelfNpcID, LVar0)
+                Call(SetNpcVar, LVarA, 0, LVar0)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
+                Wait(15)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
+                Call(RandInt, 100, LVar0)
+                Add(LVar0, 60)
+                Wait(LVar0)
+            EndIf
+            Add(LVarA, 1)
+        EndLoop
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_BulletBill) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
-    EVT_LABEL(1)
-        EVT_CALL(SetSelfVar, 0, 0)
-        EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-        EVT_CALL(SelfEnemyOverrideSyncPos, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_LABEL(2)
-            EVT_CALL(GetSelfVar, 0, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_WAIT(1)
-                EVT_GOTO(2)
-            EVT_END_IF
-        EVT_WAIT(15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Fire)
-        EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-        EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-        EVT_CALL(SelfEnemyOverrideSyncPos, 1)
-        EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(GetNpcYaw, LVar0, LVar4)
-        EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(14.0), LVar4)
-        EVT_ADD(LVar2, 11)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-        EVT_CALL(InterpNpcYaw, NPC_SELF, LVar4, 0)
-        EVT_CALL(func_80045838, -1, SOUND_BLASTER_FIRE, SOUND_PARAM_MORE_QUIET)
-        EVT_SET(LVarA, LVar1)
-        EVT_SUB(LVarA, 10)
-        EVT_SET(LVarB, LVar2)
-        EVT_ADD(LVarB, 5)
-        EVT_SET(LVarC, LVar3)
-        EVT_ADD(LVarC, 3)
-        EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVarA, LVarB, LVarC, 0, 0)
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(6.0))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(NPC_BillBlaster_01)
-                EVT_CALL(NpcMoveTo, NPC_SELF, -437, LVar3, 0)
-            EVT_CASE_EQ(NPC_BillBlaster_02)
-                EVT_CALL(NpcMoveTo, NPC_SELF, -460, LVar3, 0)
-            EVT_CASE_EQ(NPC_BillBlaster_03)
-                EVT_CALL(NpcMoveTo, NPC_SELF, -450, LVar3, 0)
-        EVT_END_SWITCH
-        EVT_CALL(func_80045838, -1, SOUND_SEQ_BULLET_BILL_EXPLODE, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Hurt)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar1, 5)
-        EVT_ADD(LVar2, 1)
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(0.05), 20)
-        EVT_ADD(LVar2, 1)
-        EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.2), 25)
-        EVT_WAIT(3)
-        EVT_GOTO(1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN, 1)
+    Label(1)
+        Call(SetSelfVar, 0, 0)
+        Call(EnableNpcShadow, NPC_SELF, FALSE)
+        Call(SelfEnemyOverrideSyncPos, 0)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        Label(2)
+            Call(GetSelfVar, 0, LVar0)
+            IfEq(LVar0, 0)
+                Wait(1)
+                Goto(2)
+            EndIf
+        Wait(15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Fire)
+        Call(EnableNpcShadow, NPC_SELF, TRUE)
+        Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+        Call(SelfEnemyOverrideSyncPos, 1)
+        Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+        Call(GetNpcYaw, LVar0, LVar4)
+        Call(AddVectorPolar, LVar1, LVar3, Float(14.0), LVar4)
+        Add(LVar2, 11)
+        Call(SetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
+        Call(InterpNpcYaw, NPC_SELF, LVar4, 0)
+        Call(func_80045838, -1, SOUND_BLASTER_FIRE, SOUND_PARAM_MORE_QUIET)
+        Set(LVarA, LVar1)
+        Sub(LVarA, 10)
+        Set(LVarB, LVar2)
+        Add(LVarB, 5)
+        Set(LVarC, LVar3)
+        Add(LVarC, 3)
+        PlayEffect(EFFECT_WALKING_DUST, 2, LVarA, LVarB, LVarC, 0, 0)
+        Call(SetNpcSpeed, NPC_SELF, Float(6.0))
+        Switch(LVar0)
+            CaseEq(NPC_BillBlaster_01)
+                Call(NpcMoveTo, NPC_SELF, -437, LVar3, 0)
+            CaseEq(NPC_BillBlaster_02)
+                Call(NpcMoveTo, NPC_SELF, -460, LVar3, 0)
+            CaseEq(NPC_BillBlaster_03)
+                Call(NpcMoveTo, NPC_SELF, -450, LVar3, 0)
+        EndSwitch
+        Call(func_80045838, -1, SOUND_SEQ_BULLET_BILL_EXPLODE, 0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Hurt)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Add(LVar1, 5)
+        Add(LVar2, 1)
+        PlayEffect(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, Float(0.05), 20)
+        Add(LVar2, 1)
+        PlayEffect(EFFECT_RING_BLAST, 0, LVar0, LVar1, LVar2, Float(1.2), 25)
+        Wait(3)
+        Goto(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_BulletBill) = {
-    EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_THREAD
-                EVT_WAIT(20)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_BulletBill)))
-            EVT_END_THREAD
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcRotation, NPC_SELF, 0, 0, 0)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Thread
+                Wait(20)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_BulletBill)))
+            EndThread
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Red) = {
@@ -526,21 +526,21 @@ NpcSettings N(NpcSettings_BulletBill) = {
 };
 
 EvtScript N(EVS_NpcDefeat_BillBlaster) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o85, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(GF_TRD09_Defeated_BillBlasters, TRUE)
-    EVT_CALL(DoNpcDefeat)
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o85, COLLIDER_FLAGS_UPPER_MASK)
+    Set(GF_TRD09_Defeated_BillBlasters, TRUE)
+    Call(DoNpcDefeat)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BillBlaster) = {
-    EVT_IF_EQ(GF_TRD09_Defeated_BillBlasters, FALSE)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_BillBlaster)))
-    EVT_ELSE
-        EVT_CALL(RemoveEncounter, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_TRD09_Defeated_BillBlasters, FALSE)
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_BillBlaster)))
+    Else
+        Call(RemoveEncounter, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_BillBlasters)[] = {
@@ -677,18 +677,18 @@ NpcGroupList N(DefaultNPCs) = {
 };
 
 EvtScript N(EVS_NpcIdle_BulletBill_Demo) = {
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(NpcMoveTo, NPC_SELF, -460, LVar3, 0)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_SELF, LVar1, LVar2, LVar3)
+    Call(SetNpcSpeed, NPC_SELF, Float(6.0))
+    Call(NpcMoveTo, NPC_SELF, -460, LVar3, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BulletBill_Demo) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_BulletBill_Demo)))
-    EVT_CALL(SelfEnemyOverrideSyncPos, 1)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_BulletBill_Demo)))
+    Call(SelfEnemyOverrideSyncPos, 1)
+    Return
+    End
 };
 
 NpcData N(NpcData_BulletBill_Demo1) = {

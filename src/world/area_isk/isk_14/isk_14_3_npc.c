@@ -136,84 +136,84 @@ API_CALLABLE(N(func_80241CA0_9943D0)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 1, LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcPos, NPC_SELF, -517, -780, -402)
-    EVT_CALL(N(func_80241AF0_994220))
-    EVT_CALL(N(func_80241BEC_99431C), -517, -780, -402)
-    EVT_CALL(N(func_80241CA0_9943D0), 85, 20, 0)
-    EVT_WAIT(5)
-    EVT_CALL(MakeLerp, 85, 0, 20, EASING_COS_FAST_OVERSHOOT)
-    EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(N(func_80241CA0_9943D0), LVar0, 20, 0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_StoneChomp_Bite)
-    EVT_WAIT(18)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_4 | ENEMY_FLAG_100000, 0)
-    EVT_WAIT(3)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, 1)
-    EVT_ADD(LVar1, 20)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
-    EVT_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-    EVT_WAIT(15)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_StoneChomp)))
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(GetSelfVar, 1, LVar0)
+    Wait(1)
+    IfEq(LVar0, 0)
+        Goto(0)
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Wait(5)
+    Call(SetNpcPos, NPC_SELF, -517, -780, -402)
+    Call(N(func_80241AF0_994220))
+    Call(N(func_80241BEC_99431C), -517, -780, -402)
+    Call(N(func_80241CA0_9943D0), 85, 20, 0)
+    Wait(5)
+    Call(MakeLerp, 85, 0, 20, EASING_COS_FAST_OVERSHOOT)
+    Label(1)
+    Call(UpdateLerp)
+    Call(N(func_80241CA0_9943D0), LVar0, 20, 0)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(1)
+    EndIf
+    Call(N(DestroyAmbushWorker))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_StoneChomp_Bite)
+    Wait(18)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Wait(1)
+    Call(N(DestroyAmbushWorker))
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_4 | ENEMY_FLAG_100000, 0)
+    Wait(3)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(SetNpcJumpscale, NPC_SELF, 1)
+    Add(LVar1, 20)
+    Call(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 10)
+    Thread
+        Loop(30)
+            Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(DisablePlayerInput, FALSE)
+    Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+    Wait(15)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_StoneChomp)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
-    EVT_SET(GF_ISK14_Defeated_StoneChomp, TRUE)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(AF_ISK14_StoneChompDefeated, TRUE)
-            EVT_CALL(N(StoneChompFXC))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(GF_ISK14_Defeated_StoneChomp, TRUE)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(AF_ISK14_StoneChompDefeated, TRUE)
+            Call(N(StoneChompFXC))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StoneChomp) = {
-    EVT_IF_EQ(GF_ISK14_Defeated_StoneChomp, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SetSelfVar, 1, 0)
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_StoneChomp)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_StoneChomp_Override)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK14_Defeated_StoneChomp, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(SetSelfVar, 1, 0)
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_StoneChomp)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_StoneChomp_Override)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 NpcData N(NpcData_StoneChomp) = {

@@ -40,14 +40,14 @@ s32 N(LettersKoover1)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Koover1) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Koover, ANIM_Koopa_Talk, ANIM_Koopa_Idle,
         ITEM_LETTER_CHAIN_KOOVER_1, ITEM_LETTER_CHAIN_FISHMAEL,
         MSG_CH1_0009, MSG_CH1_000A, MSG_CH1_000B, MSG_CH1_000C,
-        EVT_PTR(N(LettersKoover1)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LettersKoover1)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 s32 N(LettersKoover2)[] = {
@@ -55,14 +55,14 @@ s32 N(LettersKoover2)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Koover2) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Koover, ANIM_Koopa_Talk, ANIM_Koopa_Idle,
         ITEM_LETTER_CHAIN_KOOVER_2, ITEM_LETTER_CHAIN_MR_E,
         MSG_CH1_000D, MSG_CH1_000E, MSG_CH1_000F, MSG_CH1_0010,
-        EVT_PTR(N(LettersKoover2)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LettersKoover2)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 s32 N(LettersMortT)[] = {
@@ -70,22 +70,22 @@ s32 N(LettersMortT)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_MortT) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_MortT, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle,
         ITEM_LETTER_TO_MORT_T, ITEM_NONE,
         MSG_CH1_0039, MSG_CH1_003A, MSG_CH1_003B, MSG_CH1_003C,
-        EVT_PTR(N(LettersMortT)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LettersMortT)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_MortT) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 API_CALLABLE(N(IsNpcFacingRight)) {
@@ -123,8 +123,8 @@ API_CALLABLE(N(SpawnExplosionEffect)) {
 }
 
 EvtScript N(EVS_DoNothing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 #include "../common/GetIntoShell.inc.c"
@@ -180,245 +180,245 @@ Vec2i N(FuzzyJumpPath2)[] = {
 };
 
 EvtScript N(EVS_NpcIdle_MiscFuzzy1) = {
-    EVT_LABEL(100)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
-        EVT_WAIT(8)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath1)))
-    EVT_SET(LVar1, 200)
-    EVT_BUF_READ2(LVar0, LVar2)
-    EVT_CALL(SetNpcPos, NPC_MiscFuzzy1, LVar0, LVar1, LVar2)
-    EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath1)))
-    EVT_LOOP(22)
-        EVT_SET(LVar1, 0)
-        EVT_BUF_READ2(LVar0, LVar2)
-        EVT_CALL(RandInt, 10, LVar3)
-        EVT_ADD(LVar3, 15)
-        EVT_CALL(PlaySoundAtNpc, NPC_MiscFuzzy1, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_MiscFuzzy1, LVar0, LVar1, LVar2, LVar3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(100)
+    IfLt(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
+        Wait(8)
+        Goto(100)
+    EndIf
+    UseBuf(Ref(N(FuzzyJumpPath1)))
+    Set(LVar1, 200)
+    BufRead2(LVar0, LVar2)
+    Call(SetNpcPos, NPC_MiscFuzzy1, LVar0, LVar1, LVar2)
+    Label(0)
+    UseBuf(Ref(N(FuzzyJumpPath1)))
+    Loop(22)
+        Set(LVar1, 0)
+        BufRead2(LVar0, LVar2)
+        Call(RandInt, 10, LVar3)
+        Add(LVar3, 15)
+        Call(PlaySoundAtNpc, NPC_MiscFuzzy1, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_MiscFuzzy1, LVar0, LVar1, LVar2, LVar3)
+    EndLoop
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_MiscFuzzyFlee) = {
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_CALL(MakeItemEntity, ITEM_COIN, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
-    EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Hurt)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 25)
-    EVT_ADD(LVar0, 40)
-    EVT_ADD(LVar2, -40)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Hurt)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
-    EVT_ADD(LVar0, 30)
-    EVT_ADD(LVar2, -30)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Anim09)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 13)
-    EVT_ADD(LVar0, 20)
-    EVT_ADD(LVar2, -20)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 11)
-    EVT_ADD(LVar0, 10)
-    EVT_ADD(LVar2, -10)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 9)
-    EVT_ADD(LVar0, 80)
-    EVT_ADD(LVar2, -80)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Run)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Thread
+        Call(MakeItemEntity, ITEM_COIN, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS, 0)
+    EndThread
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Hurt)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 25)
+    Add(LVar0, 40)
+    Add(LVar2, -40)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Hurt)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
+    Add(LVar0, 30)
+    Add(LVar2, -30)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Anim09)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 13)
+    Add(LVar0, 20)
+    Add(LVar2, -20)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 11)
+    Add(LVar0, 10)
+    Add(LVar2, -10)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 9)
+    Add(LVar0, 80)
+    Add(LVar2, -80)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Fuzzy_Run)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_FUZZY_HOP_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, NPC_SELF, LVar0, 0, LVar2, 15)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_MiscFuzzy1) = {
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_MiscFuzzyFlee)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_MiscFuzzyFlee)))
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_MiscFuzzy2) = {
-    EVT_LABEL(100)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
-        EVT_WAIT(8)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath2)))
-    EVT_SET(LVar1, 200)
-    EVT_BUF_READ2(LVar0, LVar2)
-    EVT_MULF(LVar0, EVT_FLOAT(0.9))
-    EVT_MULF(LVar2, EVT_FLOAT(0.9))
-    EVT_CALL(SetNpcPos, NPC_MiscFuzzy2, LVar0, LVar1, LVar2)
-    EVT_LABEL(0)
-    EVT_USE_BUF(EVT_PTR(N(FuzzyJumpPath2)))
-    EVT_LOOP(22)
-        EVT_SET(LVar1, 0)
-        EVT_BUF_READ2(LVar0, LVar2)
-        EVT_CALL(RandInt, 9, LVar3)
-        EVT_ADD(LVar3, 13)
-        EVT_MULF(LVar0, EVT_FLOAT(0.9))
-        EVT_MULF(LVar2, EVT_FLOAT(0.9))
-        EVT_CALL(PlaySoundAtNpc, NPC_MiscFuzzy2, SOUND_FUZZY_HOP_C, SOUND_SPACE_DEFAULT)
-        EVT_CALL(NpcJump0, NPC_MiscFuzzy2, LVar0, LVar1, LVar2, LVar3)
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(100)
+    IfLt(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
+        Wait(8)
+        Goto(100)
+    EndIf
+    UseBuf(Ref(N(FuzzyJumpPath2)))
+    Set(LVar1, 200)
+    BufRead2(LVar0, LVar2)
+    MulF(LVar0, Float(0.9))
+    MulF(LVar2, Float(0.9))
+    Call(SetNpcPos, NPC_MiscFuzzy2, LVar0, LVar1, LVar2)
+    Label(0)
+    UseBuf(Ref(N(FuzzyJumpPath2)))
+    Loop(22)
+        Set(LVar1, 0)
+        BufRead2(LVar0, LVar2)
+        Call(RandInt, 9, LVar3)
+        Add(LVar3, 13)
+        MulF(LVar0, Float(0.9))
+        MulF(LVar2, Float(0.9))
+        Call(PlaySoundAtNpc, NPC_MiscFuzzy2, SOUND_FUZZY_HOP_C, SOUND_SPACE_DEFAULT)
+        Call(NpcJump0, NPC_MiscFuzzy2, LVar0, LVar1, LVar2, LVar3)
+    EndLoop
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_MiscFuzzy2) = {
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_MiscFuzzyFlee)))
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_MiscFuzzyFlee)))
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Koopa_ShopOwner) = {
-    EVT_EXEC_WAIT(EVS_ShopOwnerDialog)
-    EVT_RETURN
-    EVT_END
+    ExecWait(EVS_ShopOwnerDialog)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Koopa_ShopOwner) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Koopa_ShopOwner)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Koopa_ShopOwner)))
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_IF_GT(LVar1, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH1_0035)
-        EVT_SET(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVar0, MSG_CH1_0033)
-    EVT_SET(LVar8, MSG_CH1_0034)
-    EVT_SET(LVar1, MSG_CH1_0036)
-    EVT_SET(LVar2, MSG_CH1_0037)
-    EVT_SET(LVar3, MSG_CH1_0038)
-    EVT_SET(LVar4, 0)
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    IfGt(LVar1, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_CH1_0035)
+        Set(LVar0, 0)
+        Return
+    EndIf
+    Set(LVar0, MSG_CH1_0033)
+    Set(LVar8, MSG_CH1_0034)
+    Set(LVar1, MSG_CH1_0036)
+    Set(LVar2, MSG_CH1_0037)
+    Set(LVar3, MSG_CH1_0038)
+    Set(LVar4, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_PlayRestingSong))
-    EVT_CALL(func_802D1270, -311, 85, EVT_FLOAT(3.0))
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 34, -8)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 220)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, -200, 53)
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, -401, 50)
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, -2)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(func_802D1270, -334, 70, EVT_FLOAT(3.0))
-    EVT_CALL(func_802D1270, -385, -6, EVT_FLOAT(3.0))
-    EVT_WAIT(1)
-    EVT_CALL(InterpPlayerYaw, 160, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(63)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayRestingSong))
+    Call(func_802D1270, -311, 85, Float(3.0))
+    Thread
+        Wait(5)
+        Call(N(ToadHouse_CamSetFOV), 0, 40)
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamPitch, CAM_DEFAULT, 34, -8)
+        Call(SetCamDistance, CAM_DEFAULT, 220)
+        Call(SetCamPosA, CAM_DEFAULT, -200, 53)
+        Call(SetCamPosB, CAM_DEFAULT, -401, 50)
+        Call(SetCamPosC, CAM_DEFAULT, 0, -2)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(func_802D1270, -334, 70, Float(3.0))
+    Call(func_802D1270, -385, -6, Float(3.0))
+    Wait(1)
+    Call(InterpPlayerYaw, 160, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Still)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Thread
+        Wait(60)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    EndThread
+    Wait(20)
+    Thread
+        Wait(63)
+        Call(N(ToadHouse_CamSetFOV), 0, 25)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerPos, -380, 0, 5)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, -325, 79, 0)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_RETURN
-    EVT_END
+    Call(HidePlayerShadow, FALSE)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetPlayerPos, -380, 0, 5)
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, -325, 79, 0)
+    Exec(N(EVS_SetupMusic))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_MortT) = {
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MortT))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_MortT))
-    EVT_IF_NE(LVarC, DELIVERY_NOT_POSSIBLE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_EXEC_WAIT(N(EVS_NpcInteract_ToadHouseKeeper))
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_LetterPrompt_MortT))
+    ExecWait(N(EVS_LetterReward_MortT))
+    IfNe(LVarC, DELIVERY_NOT_POSSIBLE)
+        Return
+    EndIf
+    ExecWait(N(EVS_NpcInteract_ToadHouseKeeper))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MortT) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MortT)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_MortT)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_RelaxedKoopa) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
-        EVT_IF_EQ(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
-            EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0021)
-            EVT_SET(AF_NOK01_Dialogue_RelaxedKoopa, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0022)
-            EVT_SET(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
-        EVT_END_IF
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_LT(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
-        EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0023)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SWITCH(AB_NOK_0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0024)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0025)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0026)
-        EVT_CASE_EQ(3)
-            EVT_CALL(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0027)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH1_KOOPER_JOINED_PARTY)
+        IfEq(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0021)
+            Set(AF_NOK01_Dialogue_RelaxedKoopa, TRUE)
+        Else
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0022)
+            Set(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
+        EndIf
+        Return
+    EndIf
+    IfLt(GB_StoryProgress, STORY_CH1_STAR_SPRIT_DEPARTED)
+        Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0023)
+        Return
+    EndIf
+    Switch(AB_NOK_0)
+        CaseEq(0)
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0024)
+        CaseEq(1)
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0025)
+        CaseEq(2)
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0026)
+        CaseEq(3)
+            Call(SpeakToPlayer, NPC_RelaxedKoopa, ANIM_Koopa_LeanBackTalk, ANIM_Koopa_LeanBack, 5, MSG_CH1_0027)
+    EndSwitch
+    Return
+    End
 };
 
 #include "npcs_crisis.inc.c"
 
 EvtScript N(EVS_NpcInit_RelaxedKoopa) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_RelaxedKoopa)))
-    EVT_CALL(SetNpcPos, NPC_RelaxedKoopa, 333, 17, -162)
-    EVT_CALL(InterpNpcYaw, NPC_RelaxedKoopa, 180, 0)
-    EVT_CALL(SetNpcAnimation, NPC_RelaxedKoopa, ANIM_Koopa_LeanBack)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_RelaxedKoopa)))
+    Call(SetNpcPos, NPC_RelaxedKoopa, 333, 17, -162)
+    Call(InterpNpcYaw, NPC_RelaxedKoopa, 180, 0)
+    Call(SetNpcAnimation, NPC_RelaxedKoopa, ANIM_Koopa_LeanBack)
+    Return
+    End
 };
 
 #include "npcs_normal.inc.c"

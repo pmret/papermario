@@ -46,32 +46,32 @@ API_CALLABLE(N(AnimateStarSpiritBobbing)) {
 }
 
 EvtScript N(EVS_NpcAux_Skolar) = {
-    EVT_CALL(N(AnimateStarSpiritBobbing))
-    EVT_RETURN
-    EVT_END
+    Call(N(AnimateStarSpiritBobbing))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Skolar) = {
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Skolar)))
-    EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, -100)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_IF_NE(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Skolar)))
+    Call(SetNpcPos, NPC_SELF, 0, -1000, -100)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    IfNe(GB_StoryProgress, STORY_CH3_DEFEATED_TUBBA_BLUBBA)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bootler) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_OPENED_BOOS_MANSION_GATE)
-            EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_OPENED_BOOS_MANSION_GATE)
+            Call(EnableNpcShadow, NPC_SELF, FALSE)
+            Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
+        CaseDefault
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Bootler)[] = {

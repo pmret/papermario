@@ -4,97 +4,97 @@
 #include "world/common/enemy/ShyGuy_Wander.inc.c"
 
 EvtScript N(EVS_NpcInteract_Conductor) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_EXEC_WAIT(N(EVS_80247100))
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    ExecWait(N(EVS_80247100))
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Conductor) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Conductor)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Conductor)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_TrainToad) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH4_SOLVED_COLOR_PUZZLE)
-            EVT_CALL(FindKeyItem, ITEM_MYSTERY_NOTE, LVar0)
-            EVT_IF_EQ(LVar0, -1)
-                EVT_IF_EQ(GF_OMO09_SpawnedPeachChoice3, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002B)
-                EVT_ELSE
-                    EVT_IF_EQ(GF_OMO09_Chest_Dictionary, FALSE)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002C)
-                    EVT_ELSE
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002F)
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002D)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH4_WATT_JOINED_PARTY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002E)
-        EVT_CASE_LT(STORY_CH4_DEFEATED_GENERAL_GUY)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002F)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_0030)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH4_SOLVED_COLOR_PUZZLE)
+            Call(FindKeyItem, ITEM_MYSTERY_NOTE, LVar0)
+            IfEq(LVar0, -1)
+                IfEq(GF_OMO09_SpawnedPeachChoice3, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002B)
+                Else
+                    IfEq(GF_OMO09_Chest_Dictionary, FALSE)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002C)
+                    Else
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002F)
+                    EndIf
+                EndIf
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002D)
+            EndIf
+        CaseLt(STORY_CH4_WATT_JOINED_PARTY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002E)
+        CaseLt(STORY_CH4_DEFEATED_GENERAL_GUY)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_002F)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_TrainToad_Green_Talk, ANIM_TrainToad_Green_Idle, 0, MSG_CH4_0030)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrainToad) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TrainToad)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TrainToad)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAI_BoxedShyGuy) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_CALL(SetSelfVar, 0, 1)
-                    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_ShyGuy_Wander)))
-                EVT_END_IF
-            EVT_CASE_EQ(2)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_WAIT(25)
-                EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-                EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-                EVT_CALL(SetSelfVar, 0, 0)
-                EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_END_SWITCH
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetSelfVar, 0, LVar0)
+        Switch(LVar0)
+            CaseEq(0)
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                IfEq(LVar1, 0)
+                    Call(SetSelfVar, 0, 1)
+                    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_ShyGuy_Wander)))
+                EndIf
+            CaseEq(2)
+                Call(DisablePlayerInput, TRUE)
+                Wait(25)
+                Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+                Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+                Call(SetSelfVar, 0, 0)
+                Call(DisablePlayerInput, FALSE)
+        EndSwitch
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_BoxedShyGuy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetSelfVar, 0, 2)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_BoxedShyGuy)))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetSelfVar, 0, 2)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_BoxedShyGuy)))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_BoxedShyGuy) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcAI_BoxedShyGuy)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_BoxedShyGuy)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcAI_BoxedShyGuy)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_BoxedShyGuy)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Toads)[] = {

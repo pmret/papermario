@@ -2,77 +2,77 @@
 #include "world/partners.h"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_WAIT(5)
-    EVT_CALL(DemoJoystickXY, 78, 0)
-    EVT_WAIT(11)
-    EVT_CALL(DemoJoystickXY, 79, 1)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(7)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(34)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(4)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT(9)
-    EVT_CALL(DemoJoystickXY, 78, 1)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 76, 6)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 71, 31)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 66, 51)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 63, 60)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 63, 61)
-    EVT_WAIT(7)
-    EVT_CALL(DemoJoystickXY, 64, 61)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 65, 59)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 65, 56)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 67, 45)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 71, 28)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 75, 14)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 77, 6)
-    EVT_WAIT(1)
-    EVT_CALL(DemoJoystickXY, 78, 2)
-    EVT_WAIT(13)
-    EVT_CALL(DemoJoystickXY, 78, 3)
-    EVT_CALL(DemoSetButtons, BUTTON_A)
-    EVT_WAIT(9)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_IF_EQ(GF_DemoSceneDone, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("trd_09"), trd_09_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
-    EVT_WAIT(123)
-    EVT_RETURN
-    EVT_END
+    Wait(5)
+    Call(DemoJoystickXY, 78, 0)
+    Wait(11)
+    Call(DemoJoystickXY, 79, 1)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(7)
+    Call(DemoSetButtons, 0)
+    Wait(34)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(4)
+    Call(DemoSetButtons, 0)
+    Wait(9)
+    Call(DemoJoystickXY, 78, 1)
+    Wait(1)
+    Call(DemoJoystickXY, 76, 6)
+    Wait(1)
+    Call(DemoJoystickXY, 71, 31)
+    Wait(1)
+    Call(DemoJoystickXY, 66, 51)
+    Wait(1)
+    Call(DemoJoystickXY, 63, 60)
+    Wait(1)
+    Call(DemoJoystickXY, 63, 61)
+    Wait(7)
+    Call(DemoJoystickXY, 64, 61)
+    Wait(1)
+    Call(DemoJoystickXY, 65, 59)
+    Wait(1)
+    Call(DemoJoystickXY, 65, 56)
+    Wait(1)
+    Call(DemoJoystickXY, 67, 45)
+    Wait(1)
+    Call(DemoJoystickXY, 71, 28)
+    Wait(1)
+    Call(DemoJoystickXY, 75, 14)
+    Wait(1)
+    Call(DemoJoystickXY, 77, 6)
+    Wait(1)
+    Call(DemoJoystickXY, 78, 2)
+    Wait(13)
+    Call(DemoJoystickXY, 78, 3)
+    Call(DemoSetButtons, BUTTON_A)
+    Wait(9)
+    Call(DemoSetButtons, 0)
+    IfEq(GF_DemoSceneDone, TRUE)
+        Return
+    EndIf
+    Set(GF_DemoSceneDone, TRUE)
+    Call(GotoMapSpecial, Ref("trd_09"), trd_09_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
+    Wait(123)
+    Return
+    End
 };
 
 EvtScript N(EVS_MonitorDemoState) = {
-    EVT_WAIT(10)
-    EVT_LOOP(0)
-        EVT_CALL(GetDemoState, LVar0)
-        EVT_IF_EQ(LVar0, DEMO_STATE_CHANGE_MAP)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_IF_EQ(GF_DemoSceneDone, TRUE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("trd_09"), trd_09_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
-    EVT_WAIT(113)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Loop(0)
+        Call(GetDemoState, LVar0)
+        IfEq(LVar0, DEMO_STATE_CHANGE_MAP)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    IfEq(GF_DemoSceneDone, TRUE)
+        Return
+    EndIf
+    Set(GF_DemoSceneDone, TRUE)
+    Call(GotoMapSpecial, Ref("trd_09"), trd_09_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
+    Wait(113)
+    Return
+    End
 };
 
 s32 N(DemoInitState) = 0;
@@ -105,11 +105,11 @@ API_CALLABLE(N(SetupDemoScene)) {
 }
 
 EvtScript N(EVS_PlayDemoScene) = {
-    EVT_CALL(N(SetupDemoScene))
-    EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-    EVT_SET(GF_DemoSceneDone, FALSE)
-    EVT_EXEC(N(EVS_MonitorDemoState))
-    EVT_EXEC(N(EVS_ProvideDemoInputs))
-    EVT_RETURN
-    EVT_END
+    Call(N(SetupDemoScene))
+    Call(SetNpcYaw, NPC_PARTNER, 90)
+    Set(GF_DemoSceneDone, FALSE)
+    Exec(N(EVS_MonitorDemoState))
+    Exec(N(EVS_ProvideDemoInputs))
+    Return
+    End
 };

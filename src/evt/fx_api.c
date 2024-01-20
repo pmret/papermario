@@ -181,9 +181,9 @@ API_CALLABLE(InterpMotionBlurParams) {
 }
 
 EvtScript EVS_UpdateMotionBlurParams = {
-    EVT_CALL(InterpMotionBlurParams)
-    EVT_RETURN
-    EVT_END
+    Call(InterpMotionBlurParams)
+    Return
+    End
 };
 
 API_CALLABLE(SetMotionBlurParams) {

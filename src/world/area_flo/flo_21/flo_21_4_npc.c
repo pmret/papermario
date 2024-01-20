@@ -30,190 +30,190 @@ Vec3f N(Path_JumpOut)[] = {
 };
 
 EvtScript N(EVS_PlayRumbleSounds) = {
-    EVT_LABEL(0)
-        EVT_CALL(PlaySound, SOUND_HUFF_N_PUFF_JIGGLE)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 15, EVT_FLOAT(1.0))
-        EVT_WAIT(15)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(PlaySound, SOUND_HUFF_N_PUFF_JIGGLE)
+        Call(ShakeCam, CAM_DEFAULT, 0, 15, Float(1.0))
+        Wait(15)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_JumpOut) = {
-    EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_EMERGE, SOUND_SPACE_DEFAULT)
-    EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, 650, 104, 0)
-    EVT_WAIT(15)
-    EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_02, EVT_FLOAT(0.0))
-    EVT_CALL(NpcJump0, NPC_HuffNPuff_02, 650, 50, 0, 5)
-    EVT_CALL(SetNpcPos, NPC_HuffNPuff_01, 650, 50, 5)
-    EVT_CALL(SetNpcPos, NPC_HuffNPuff_02, 650, 50, 0)
-    EVT_CALL(SetNpcPos, NPC_HuffNPuff_03, 650, 50, 0)
-    EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_01, EVT_FLOAT(0.0))
-    EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_02, EVT_FLOAT(0.0))
-    EVT_CALL(SetNpcJumpscale, NPC_HuffNPuff_03, EVT_FLOAT(0.0))
-    EVT_THREAD
-        EVT_CALL(NpcJump0, NPC_HuffNPuff_01, 650, 150, 5, 10)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(NpcJump0, NPC_HuffNPuff_02, 650, 150, 0, 10)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(NpcJump0, NPC_HuffNPuff_03, 650, 150, 0, 10)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(Path_JumpOut)), ARRAY_COUNT(N(Path_JumpOut)), EASING_LINEAR)
-        EVT_LABEL(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_EMERGE, SOUND_SPACE_DEFAULT)
+    PlayEffect(EFFECT_SHOCKWAVE, 3, 650, 104, 0)
+    Wait(15)
+    Call(SetNpcJumpscale, NPC_HuffNPuff_02, Float(0.0))
+    Call(NpcJump0, NPC_HuffNPuff_02, 650, 50, 0, 5)
+    Call(SetNpcPos, NPC_HuffNPuff_01, 650, 50, 5)
+    Call(SetNpcPos, NPC_HuffNPuff_02, 650, 50, 0)
+    Call(SetNpcPos, NPC_HuffNPuff_03, 650, 50, 0)
+    Call(SetNpcJumpscale, NPC_HuffNPuff_01, Float(0.0))
+    Call(SetNpcJumpscale, NPC_HuffNPuff_02, Float(0.0))
+    Call(SetNpcJumpscale, NPC_HuffNPuff_03, Float(0.0))
+    Thread
+        Call(NpcJump0, NPC_HuffNPuff_01, 650, 150, 5, 10)
+    EndThread
+    Thread
+        Call(NpcJump0, NPC_HuffNPuff_02, 650, 150, 0, 10)
+    EndThread
+    Thread
+        Call(NpcJump0, NPC_HuffNPuff_03, 650, 150, 0, 10)
+    EndThread
+    Thread
+        Call(SetPlayerAnimation, ANIM_MarioW2_Flail)
+        Call(LoadPath, 30, Ref(N(Path_JumpOut)), ARRAY_COUNT(N(Path_JumpOut)), EASING_LINEAR)
+        Label(0)
+        Call(GetNextPathPos)
+        Call(SetPlayerPos, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(0)
+        EndIf
+    EndThread
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_HuffNPuffAmbush) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(AwaitPlayerApproach, 650, 0, 30)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetMusicTrack, 0, SONG_HUFF_N_PUFF_THEME, 0, 8)
-    EVT_EXEC_GET_TID(N(EVS_PlayRumbleSounds), LVar9)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_NONE)
-        EVT_CALL(InterruptUsePartner)
-        EVT_WAIT(20)
-    EVT_END_IF
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(InterpPlayerYaw, 90, 1)
-    EVT_WAIT(5)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(MakeLerp, LVar2, 600, 20, EASING_LINEAR)
-    EVT_SET(LVar2, LVar3)
-    EVT_SET(LVar5, LVar3)
-    EVT_ADD(LVar5, 15)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_ADD(LVar3, 3)
-        EVT_CALL(SetPlayerPos, LVar0, LVar3, LVar4)
-        EVT_IF_GT(LVar3, LVar5)
-            EVT_SET(LVar3, LVar2)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar2, LVar4)
-    EVT_END_LOOP
-    EVT_CALL(func_802D2C14, 1)
-    EVT_CALL(SetPlayerPos, LVar0, LVar2, LVar4)
-    EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 25)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-9.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_00CA, 630, 120, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(600.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(30.0), EVT_FLOAT(-9.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(10)
-    EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_00CB, 630, 120, 0)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-9.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(func_802D2C14, 0)
-    EVT_WAIT(10)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_NE(LVar0, PARTNER_LAKILESTER)
-        EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_00CC, 630, 120, 0)
-    EVT_ELSE
-        EVT_CALL(ShowMessageAtWorldPos, MSG_CH6_00CD, 630, 120, 0)
-    EVT_END_IF
-    EVT_CHILD_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_ADD(LVar0, 25)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
-        EVT_SET(LVar3, 40)
-        EVT_LOOP(5)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(400.0))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, LVar3)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_SUB(LVar3, 10)
-            EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-            EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(600.0))
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, LVar3)
-            EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-            EVT_ADD(LVar3, 7)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_EXEC_WAIT(N(EVS_HuffNPuff_JumpOut))
-    EVT_KILL_THREAD(LVar9)
-    EVT_WAIT(30)
-    EVT_CALL(SetNpcVar, NPC_HuffNPuff_01, 0, 1)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_WAIT(15)
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
+        Return
+    EndIf
+    Call(AwaitPlayerApproach, 650, 0, 30)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetMusicTrack, 0, SONG_HUFF_N_PUFF_THEME, 0, 8)
+    ExecGetTID(N(EVS_PlayRumbleSounds), LVar9)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, PARTNER_NONE)
+        Call(InterruptUsePartner)
+        Wait(20)
+    EndIf
+    Call(DisablePlayerPhysics, TRUE)
+    Call(InterpPlayerYaw, 90, 1)
+    Wait(5)
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Call(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(GetPlayerPos, LVar2, LVar3, LVar4)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar2, LVar3, LVar4)
+    Call(SetPanTarget, CAM_DEFAULT, LVar2, LVar3, LVar4)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(MakeLerp, LVar2, 600, 20, EASING_LINEAR)
+    Set(LVar2, LVar3)
+    Set(LVar5, LVar3)
+    Add(LVar5, 15)
+    Loop(0)
+        Call(UpdateLerp)
+        Add(LVar3, 3)
+        Call(SetPlayerPos, LVar0, LVar3, LVar4)
+        IfGt(LVar3, LVar5)
+            Set(LVar3, LVar2)
+        EndIf
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+        Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar2, LVar4)
+    EndLoop
+    Call(func_802D2C14, 1)
+    Call(SetPlayerPos, LVar0, LVar2, LVar4)
+    Call(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Wait(10)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Add(LVar0, 25)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(ShowMessageAtWorldPos, MSG_CH6_00CA, 630, 120, 0)
+    Call(SetCamDistance, CAM_DEFAULT, Float(600.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(30.0), Float(-9.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(10)
+    Call(ShowMessageAtWorldPos, MSG_CH6_00CB, 630, 120, 0)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(func_802D2C14, 0)
+    Wait(10)
+    Call(GetCurrentPartnerID, LVar0)
+    IfNe(LVar0, PARTNER_LAKILESTER)
+        Call(ShowMessageAtWorldPos, MSG_CH6_00CC, 630, 120, 0)
+    Else
+        Call(ShowMessageAtWorldPos, MSG_CH6_00CD, 630, 120, 0)
+    EndIf
+    ChildThread
+        Wait(15)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Add(LVar0, 25)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
+        Set(LVar3, 40)
+        Loop(5)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamDistance, CAM_DEFAULT, Float(400.0))
+            Call(SetCamSpeed, CAM_DEFAULT, LVar3)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Sub(LVar3, 10)
+            Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+            Call(SetCamDistance, CAM_DEFAULT, Float(600.0))
+            Call(SetCamSpeed, CAM_DEFAULT, LVar3)
+            Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+            Add(LVar3, 7)
+        EndLoop
+    EndChildThread
+    ExecWait(N(EVS_HuffNPuff_JumpOut))
+    KillThread(LVar9)
+    Wait(30)
+    Call(SetNpcVar, NPC_HuffNPuff_01, 0, 1)
+    Call(DisablePlayerInput, FALSE)
+    Wait(15)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_AnimateBodyScale) = {
-    EVT_SETF(LVar0, EVT_FLOAT(0.95))
-    EVT_SETF(LVar1, EVT_FLOAT(1.1))
-    EVT_LABEL(0)
-        EVT_SWITCH(MV_BossFightState)
-            EVT_CASE_EQ(0)
-                EVT_SET(LVar3, 10)
-                EVT_SET(LVar2, 2)
-            EVT_CASE_EQ(1)
-                EVT_SET(LVar3, 5)
-                EVT_SET(LVar2, 1)
-            EVT_CASE_DEFAULT
-                EVT_RETURN
-        EVT_END_SWITCH
-        EVT_SET(LVar4, LVar3)
-        EVT_LOOP(LVar4)
-            EVT_CALL(SetNpcScale, NPC_HuffNPuff_01, LVar0, LVar1, 1)
-            EVT_CALL(SetNpcScale, NPC_HuffNPuff_02, LVar0, LVar1, 1)
-            EVT_CALL(SetNpcScale, NPC_HuffNPuff_03, LVar0, LVar1, 1)
-            EVT_ADDF(LVar0, EVT_FLOAT(0.015))
-            EVT_SUBF(LVar1, EVT_FLOAT(0.01))
-            EVT_WAIT(LVar2)
-        EVT_END_LOOP
-        EVT_SET(LVar4, LVar3)
-        EVT_LOOP(LVar4)
-            EVT_CALL(SetNpcScale, NPC_HuffNPuff_01, LVar0, LVar1, 1)
-            EVT_CALL(SetNpcScale, NPC_HuffNPuff_02, LVar0, LVar1, 1)
-            EVT_CALL(SetNpcScale, NPC_HuffNPuff_03, LVar0, LVar1, 1)
-            EVT_SUBF(LVar0, EVT_FLOAT(0.015))
-            EVT_ADDF(LVar1, EVT_FLOAT(0.01))
-            EVT_WAIT(LVar2)
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    SetF(LVar0, Float(0.95))
+    SetF(LVar1, Float(1.1))
+    Label(0)
+        Switch(MV_BossFightState)
+            CaseEq(0)
+                Set(LVar3, 10)
+                Set(LVar2, 2)
+            CaseEq(1)
+                Set(LVar3, 5)
+                Set(LVar2, 1)
+            CaseDefault
+                Return
+        EndSwitch
+        Set(LVar4, LVar3)
+        Loop(LVar4)
+            Call(SetNpcScale, NPC_HuffNPuff_01, LVar0, LVar1, 1)
+            Call(SetNpcScale, NPC_HuffNPuff_02, LVar0, LVar1, 1)
+            Call(SetNpcScale, NPC_HuffNPuff_03, LVar0, LVar1, 1)
+            AddF(LVar0, Float(0.015))
+            SubF(LVar1, Float(0.01))
+            Wait(LVar2)
+        EndLoop
+        Set(LVar4, LVar3)
+        Loop(LVar4)
+            Call(SetNpcScale, NPC_HuffNPuff_01, LVar0, LVar1, 1)
+            Call(SetNpcScale, NPC_HuffNPuff_02, LVar0, LVar1, 1)
+            Call(SetNpcScale, NPC_HuffNPuff_03, LVar0, LVar1, 1)
+            SubF(LVar0, Float(0.015))
+            AddF(LVar1, Float(0.01))
+            Wait(LVar2)
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 // start and end positions for each of the Ruff Puffs when HuffNPuff explodes
@@ -264,315 +264,315 @@ Vec2i N(LoopAnimScaleY)[] = {
 };
 
 EvtScript N(EVS_HuffNPuff_Defeat_Flashing) = {
-    EVT_SETF(LVar0, 10)
-    EVT_SETF(LVar1, 1)
-    EVT_CHILD_THREAD
-        EVT_LOOP(8)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_WAIT(LVar0)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_WAIT(LVar1)
-            EVT_SUBF(LVar0, 0)
-            EVT_ADDF(LVar1, 0)
-        EVT_END_LOOP
-        EVT_LOOP(0)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, FALSE)
-            EVT_WAIT(LVar0)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, TRUE)
-            EVT_WAIT(LVar1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CHILD_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(MakeLerp, 0, 255, 10, EASING_QUADRATIC_OUT)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcImgFXParams, NPC_HuffNPuff_01, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
-                EVT_CALL(SetNpcImgFXParams, NPC_HuffNPuff_02, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
-                EVT_CALL(SetNpcImgFXParams, NPC_HuffNPuff_03, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetF(LVar0, 10)
+    SetF(LVar1, 1)
+    ChildThread
+        Loop(8)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, FALSE)
+            Wait(LVar0)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, TRUE)
+            Wait(LVar1)
+            SubF(LVar0, 0)
+            AddF(LVar1, 0)
+        EndLoop
+        Loop(0)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, FALSE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, FALSE)
+            Wait(LVar0)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_01, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_02, NPC_FLAG_INVISIBLE, TRUE)
+            Call(SetNpcFlagBits, NPC_HuffNPuff_03, NPC_FLAG_INVISIBLE, TRUE)
+            Wait(LVar1)
+        EndLoop
+    EndChildThread
+    ChildThread
+        Loop(0)
+            Call(MakeLerp, 0, 255, 10, EASING_QUADRATIC_OUT)
+            Loop(0)
+                Call(UpdateLerp)
+                Call(SetNpcImgFXParams, NPC_HuffNPuff_01, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
+                Call(SetNpcImgFXParams, NPC_HuffNPuff_02, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
+                Call(SetNpcImgFXParams, NPC_HuffNPuff_03, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndLoop
+    EndChildThread
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_Defeat_AnimateScale) = {
-    EVT_SETF(MV_HuffScaleX, EVT_FLOAT(1.0))
-    EVT_SETF(MV_HuffScaleY, EVT_FLOAT(1.0))
-    EVT_CHILD_THREAD
-        EVT_USE_BUF(EVT_PTR(N(BeginAnimScaleX)))
-        EVT_LOOP(ARRAY_COUNT(N(BeginAnimScaleX)))
-            EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_JIGGLE, SOUND_SPACE_DEFAULT)
-            EVT_BUF_READ3(LVar6, LVar7, LVar8)
-            EVT_CALL(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_DIVF(LVar0, 10)
-                EVT_SETF(MV_HuffScaleX, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(0)
-            EVT_USE_BUF(EVT_PTR(N(LoopAnimScaleX)))
-            EVT_LOOP(ARRAY_COUNT(N(LoopAnimScaleX)))
-                EVT_CALL(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_JIGGLE, SOUND_SPACE_DEFAULT)
-                EVT_BUF_READ2(LVar6, LVar7)
-                EVT_CALL(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_DIVF(LVar0, 10)
-                    EVT_SETF(MV_HuffScaleX, LVar0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-            EVT_END_LOOP
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CHILD_THREAD
-        EVT_USE_BUF(EVT_PTR(N(BeginAnimScaleY)))
-        EVT_LOOP(ARRAY_COUNT(N(BeginAnimScaleY)))
-            EVT_BUF_READ3(LVar6, LVar7, LVar8)
-            EVT_CALL(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
-            EVT_LOOP(0)
-                EVT_CALL(UpdateLerp)
-                EVT_DIVF(LVar0, 10)
-                EVT_SETF(MV_HuffScaleY, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 0)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(0)
-            EVT_USE_BUF(EVT_PTR(N(LoopAnimScaleY)))
-            EVT_LOOP(ARRAY_COUNT(N(LoopAnimScaleY)))
-                EVT_BUF_READ2(LVar6, LVar7)
-                EVT_CALL(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_DIVF(LVar0, 10)
-                    EVT_SETF(MV_HuffScaleY, LVar0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-            EVT_END_LOOP
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_LOOP(100)
-        EVT_CALL(SetNpcScale, NPC_HuffNPuff_01, MV_HuffScaleX, MV_HuffScaleY, 1)
-        EVT_CALL(SetNpcScale, NPC_HuffNPuff_02, MV_HuffScaleX, MV_HuffScaleY, 1)
-        EVT_CALL(SetNpcScale, NPC_HuffNPuff_03, MV_HuffScaleX, MV_HuffScaleY, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetF(MV_HuffScaleX, Float(1.0))
+    SetF(MV_HuffScaleY, Float(1.0))
+    ChildThread
+        UseBuf(Ref(N(BeginAnimScaleX)))
+        Loop(ARRAY_COUNT(N(BeginAnimScaleX)))
+            Call(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_JIGGLE, SOUND_SPACE_DEFAULT)
+            BufRead3(LVar6, LVar7, LVar8)
+            Call(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
+            Loop(0)
+                Call(UpdateLerp)
+                DivF(LVar0, 10)
+                SetF(MV_HuffScaleX, LVar0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+            Wait(1)
+        EndLoop
+        Loop(0)
+            UseBuf(Ref(N(LoopAnimScaleX)))
+            Loop(ARRAY_COUNT(N(LoopAnimScaleX)))
+                Call(PlaySoundAtNpc, NPC_HuffNPuff_01, SOUND_HUFF_N_PUFF_JIGGLE, SOUND_SPACE_DEFAULT)
+                BufRead2(LVar6, LVar7)
+                Call(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
+                Loop(0)
+                    Call(UpdateLerp)
+                    DivF(LVar0, 10)
+                    SetF(MV_HuffScaleX, LVar0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+            EndLoop
+        EndLoop
+    EndChildThread
+    ChildThread
+        UseBuf(Ref(N(BeginAnimScaleY)))
+        Loop(ARRAY_COUNT(N(BeginAnimScaleY)))
+            BufRead3(LVar6, LVar7, LVar8)
+            Call(MakeLerp, LVar6, LVar7, LVar8, EASING_SIN_OUT)
+            Loop(0)
+                Call(UpdateLerp)
+                DivF(LVar0, 10)
+                SetF(MV_HuffScaleY, LVar0)
+                Wait(1)
+                IfEq(LVar1, 0)
+                    BreakLoop
+                EndIf
+            EndLoop
+            Wait(1)
+        EndLoop
+        Loop(0)
+            UseBuf(Ref(N(LoopAnimScaleY)))
+            Loop(ARRAY_COUNT(N(LoopAnimScaleY)))
+                BufRead2(LVar6, LVar7)
+                Call(MakeLerp, LVar6, LVar7, 4, EASING_SIN_OUT)
+                Loop(0)
+                    Call(UpdateLerp)
+                    DivF(LVar0, 10)
+                    SetF(MV_HuffScaleY, LVar0)
+                    Wait(1)
+                    IfEq(LVar1, 0)
+                        BreakLoop
+                    EndIf
+                EndLoop
+            EndLoop
+        EndLoop
+    EndChildThread
+    Loop(100)
+        Call(SetNpcScale, NPC_HuffNPuff_01, MV_HuffScaleX, MV_HuffScaleY, 1)
+        Call(SetNpcScale, NPC_HuffNPuff_02, MV_HuffScaleX, MV_HuffScaleY, 1)
+        Call(SetNpcScale, NPC_HuffNPuff_03, MV_HuffScaleX, MV_HuffScaleY, 1)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_Defeat_BlowUp) = {
-    EVT_CHILD_THREAD
-        EVT_SET(LVar1, 0)
-        EVT_LOOP(0)
-            EVT_SET(LVar0, 3)
-            EVT_LOOP(15)
-                EVT_CALL(SetNpcRotation, LVar0, 0, LVar1, 0)
-                EVT_ADD(LVar0, 1)
-            EVT_END_LOOP
-            EVT_ADD(LVar1, 60)
-            EVT_IF_GT(LVar1, 360)
-                EVT_ADD(LVar1, -360)
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_USE_BUF(EVT_PTR(N(BlowUpPositions)))
-    EVT_SET(LVar8, 3)
+    ChildThread
+        Set(LVar1, 0)
+        Loop(0)
+            Set(LVar0, 3)
+            Loop(15)
+                Call(SetNpcRotation, LVar0, 0, LVar1, 0)
+                Add(LVar0, 1)
+            EndLoop
+            Add(LVar1, 60)
+            IfGt(LVar1, 360)
+                Add(LVar1, -360)
+            EndIf
+            Wait(1)
+        EndLoop
+    EndChildThread
+    UseBuf(Ref(N(BlowUpPositions)))
+    Set(LVar8, 3)
     // all except the last one
-    EVT_LOOP((ARRAY_COUNT(N(BlowUpPositions))/ 2) - 1)
-        EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
-        EVT_THREAD
-            EVT_CALL(RandInt, 5, LVar5)
-            EVT_WAIT(LVar5)
-            EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
-            EVT_CALL(RandInt, 2, LVar5)
-            EVT_ADD(LVar5, 8)
-            EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_RUFF_PUFF_FLY_A, SOUND_SPACE_DEFAULT)
-            EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, LVar5)
-            EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
-        EVT_END_THREAD
-        EVT_ADD(LVar8, 1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_HuffNPuff_01, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_HuffNPuff_02, NPC_DISPOSE_LOCATION)
-    EVT_CALL(SetNpcPos, NPC_HuffNPuff_03, NPC_DISPOSE_LOCATION)
+    Loop((ARRAY_COUNT(N(BlowUpPositions))/ 2) - 1)
+        BufRead4(LVar1, LVar2, LVar3, LVar4)
+        Thread
+            Call(RandInt, 5, LVar5)
+            Wait(LVar5)
+            Call(SetNpcPos, LVar8, LVar1, LVar2, -30)
+            Call(RandInt, 2, LVar5)
+            Add(LVar5, 8)
+            Call(PlaySoundAtNpc, LVar8, SOUND_RUFF_PUFF_FLY_A, SOUND_SPACE_DEFAULT)
+            Call(NpcJump0, LVar8, LVar3, LVar4, -15, LVar5)
+            Call(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
+        EndThread
+        Add(LVar8, 1)
+    EndLoop
+    Call(SetNpcPos, NPC_HuffNPuff_01, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_HuffNPuff_02, NPC_DISPOSE_LOCATION)
+    Call(SetNpcPos, NPC_HuffNPuff_03, NPC_DISPOSE_LOCATION)
     // the last one
-    EVT_BUF_READ4(LVar1, LVar2, LVar3, LVar4)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcPos, LVar8, LVar1, LVar2, -30)
-    EVT_CALL(PlaySoundAtNpc, LVar8, SOUND_RUFF_PUFF_FLY_B, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcJump0, LVar8, LVar3, LVar4, -15, 10)
-    EVT_CALL(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
-    EVT_RETURN
-    EVT_END
+    BufRead4(LVar1, LVar2, LVar3, LVar4)
+    Wait(5)
+    Call(SetNpcPos, LVar8, LVar1, LVar2, -30)
+    Call(PlaySoundAtNpc, LVar8, SOUND_RUFF_PUFF_FLY_B, SOUND_SPACE_DEFAULT)
+    Call(NpcJump0, LVar8, LVar3, LVar4, -15, 10)
+    Call(SetNpcPos, LVar8, NPC_DISPOSE_LOCATION)
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_BossDefeated) = {
-    EVT_CALL(SetNpcAnimation, NPC_HuffNPuff_02, ANIM_HuffNPuff_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_HuffNPuff_01, ANIM_HuffNPuff_Anim05)
-    EVT_CALL(SetNpcAnimation, NPC_HuffNPuff_03, ANIM_HuffNPuff_Anim06)
-    EVT_CALL(GetNpcPos, NPC_HuffNPuff_01, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -15)
-    EVT_ADD(LVar2, 40)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_HuffNPuff_01, ANIM_HuffNPuff_Anim30, ANIM_HuffNPuff_Anim05, 256, -30, 30, MSG_CH6_00CE)
-    EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_SET(MV_BossFightState, 2)
-    EVT_CALL(GetNpcPos, NPC_HuffNPuff_01, LVar0, LVar1, LVar2)
-    EVT_THREAD
-        EVT_SET(LVar3, LVar0)
-        EVT_SET(LVar4, LVar0)
-        EVT_ADD(LVar3, -35)
-        EVT_ADD(LVar4, 35)
-        EVT_LOOP(3)
-            EVT_PLAY_EFFECT(EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2)
-            EVT_WAIT(12)
-            EVT_PLAY_EFFECT(EFFECT_EXPLOSION, 0, LVar3, LVar1, LVar2)
-            EVT_ADD(LVar3, 7)
-            EVT_WAIT(8)
-            EVT_PLAY_EFFECT(EFFECT_EXPLOSION, 0, LVar4, LVar1, LVar2)
-            EVT_ADD(LVar4, -7)
-            EVT_WAIT(14)
-        EVT_END_LOOP
-        EVT_PLAY_EFFECT(EFFECT_EXPLOSION, 2, LVar0, LVar1, LVar2)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 30, EVT_FLOAT(1.5))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_LOOP(10)
-            EVT_PLAY_EFFECT(EFFECT_SHIMMER_WAVE, 0, LVar0, LVar1, LVar2, 40, 65, 12, 15)
-            EVT_WAIT(7)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_HuffNPuff_Defeat_Flashing))
-    EVT_EXEC_WAIT(N(EVS_HuffNPuff_Defeat_AnimateScale))
-    EVT_EXEC_WAIT(N(EVS_HuffNPuff_Defeat_BlowUp))
-    EVT_WAIT(10)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_HuffNPuff_02, ANIM_HuffNPuff_Anim04)
+    Call(SetNpcAnimation, NPC_HuffNPuff_01, ANIM_HuffNPuff_Anim05)
+    Call(SetNpcAnimation, NPC_HuffNPuff_03, ANIM_HuffNPuff_Anim06)
+    Call(GetNpcPos, NPC_HuffNPuff_01, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Add(LVar0, -15)
+    Add(LVar2, 40)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_HuffNPuff_01, ANIM_HuffNPuff_Anim30, ANIM_HuffNPuff_Anim05, 256, -30, 30, MSG_CH6_00CE)
+    Call(FadeOutMusic, 0, 1500)
+    Set(MV_BossFightState, 2)
+    Call(GetNpcPos, NPC_HuffNPuff_01, LVar0, LVar1, LVar2)
+    Thread
+        Set(LVar3, LVar0)
+        Set(LVar4, LVar0)
+        Add(LVar3, -35)
+        Add(LVar4, 35)
+        Loop(3)
+            PlayEffect(EFFECT_EXPLOSION, 0, LVar0, LVar1, LVar2)
+            Wait(12)
+            PlayEffect(EFFECT_EXPLOSION, 0, LVar3, LVar1, LVar2)
+            Add(LVar3, 7)
+            Wait(8)
+            PlayEffect(EFFECT_EXPLOSION, 0, LVar4, LVar1, LVar2)
+            Add(LVar4, -7)
+            Wait(14)
+        EndLoop
+        PlayEffect(EFFECT_EXPLOSION, 2, LVar0, LVar1, LVar2)
+        Call(ShakeCam, CAM_DEFAULT, 0, 30, Float(1.5))
+    EndThread
+    Thread
+        Wait(30)
+        Loop(10)
+            PlayEffect(EFFECT_SHIMMER_WAVE, 0, LVar0, LVar1, LVar2, 40, 65, 12, 15)
+            Wait(7)
+        EndLoop
+    EndThread
+    Exec(N(EVS_HuffNPuff_Defeat_Flashing))
+    ExecWait(N(EVS_HuffNPuff_Defeat_AnimateScale))
+    ExecWait(N(EVS_HuffNPuff_Defeat_BlowUp))
+    Wait(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_HuffNPuff_01) = {
-    EVT_LABEL(0)
-        EVT_CALL(SetSelfVar, 0, 0)
-        EVT_LOOP(0)
-            EVT_CALL(GetSelfVar, 0, LVar0)
-            EVT_IF_NE(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_SET(MV_BossFightState, 1)
-        EVT_CALL(StartBossBattle, SONG_HUFF_N_PUFF_BATTLE)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(SetSelfVar, 0, 0)
+        Loop(0)
+            Call(GetSelfVar, 0, LVar0)
+            IfNe(LVar0, 0)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Set(MV_BossFightState, 1)
+        Call(StartBossBattle, SONG_HUFF_N_PUFF_BATTLE)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_HuffNPuff_Main) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
-            EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar3)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar3, -20)
-            EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar3)
-            EVT_EXEC_WAIT(N(EVS_Scene_BossDefeated))
-            EVT_WAIT(50)
-            EVT_SET(MV_BossDefeated, TRUE)
-            EVT_EXEC(N(EVS_TrySpawningStarCard))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
+            Call(SetNpcYaw, NPC_PARTNER, 90)
+            Call(GetPlayerPos, LVar0, LVar1, LVar3)
+            Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+            Add(LVar3, -20)
+            Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar3)
+            ExecWait(N(EVS_Scene_BossDefeated))
+            Wait(50)
+            Set(MV_BossDefeated, TRUE)
+            Exec(N(EVS_TrySpawningStarCard))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_HuffNPuff_Aux) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HuffNPuff_Face) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
-        EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_HuffNPuff_01)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HuffNPuff_Main)))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HuffNPuff_Anim02)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
+        Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_HuffNPuff_01)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_HuffNPuff_Main)))
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HuffNPuff_Anim02)
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HuffNPuff_Body) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
-        EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HuffNPuff_Aux)))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HuffNPuff_Anim01)
-        EVT_EXEC(N(EVS_HuffNPuff_AnimateBodyScale))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
+        Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_HuffNPuff_Aux)))
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HuffNPuff_Anim01)
+        Exec(N(EVS_HuffNPuff_AnimateBodyScale))
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_HuffNPuff_Arms) = {
-    EVT_IF_LT(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
-        EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_HuffNPuff_Aux)))
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HuffNPuff_Anim19)
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfLt(GB_StoryProgress, STORY_CH6_DEFEATED_HUFF_N_PUFF)
+        Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_400000, 1)
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_HuffNPuff_Aux)))
+        Call(SetNpcAnimation, NPC_SELF, ANIM_HuffNPuff_Anim19)
+    Else
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_RuffPuff) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_RuffPuff_Dizzy)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_RuffPuff_Dizzy)
+    Call(SetNpcJumpscale, NPC_SELF, 0)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_HuffNPuff)[] = {

@@ -10,22 +10,22 @@
 #include "world/common/complete/GiveReward.inc.c"
 
 EvtScript N(EVS_NpcIdle_Mamar) = {
-    EVT_LOOP(0)
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_LOOP(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Loop(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar1, 1)
+            Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+        Loop(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Add(LVar1, 1)
+            Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndLoop
+    Return
+    End
 };
 
 API_CALLABLE(N(UpgradeStarPowerCh2)) {
@@ -37,155 +37,155 @@ API_CALLABLE(N(UpgradeStarPowerCh2)) {
 }
 
 EvtScript N(EVS_Scene_RescuedMamar) = {
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(func_802CF56C, 2)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar0)
-    EVT_ADD(LVar3, -50)
-    EVT_SET(LVar4, LVar1)
-    EVT_ADD(LVar4, 26)
-    EVT_CALL(SetNpcPos, NPC_Mamar, LVar3, LVar4, LVar2)
-    EVT_CALL(PlayerFaceNpc, NPC_Mamar, FALSE)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 600)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.0), EVT_FLOAT(-9.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(WaitForPlayerInputEnabled)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.5 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00EB)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, 18, -9)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(MakeLerp, 0, 360, 10 * DT, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcRotation, NPC_Mamar, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(EnableNpcAI, NPC_Mamar, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Leap)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_UsePower)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SET(LVar3, LVar1)
-    EVT_ADD(LVar1, 50)
-    EVT_ADD(LVar2, 10)
-    EVT_ADD(LVar3, 30)
-    EVT_LOOP(5)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
-        EVT_WAIT(6 * DT)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
-        EVT_WAIT(6 * DT)
-    EVT_END_LOOP
-    EVT_WAIT(20 * DT)
-    EVT_CALL(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 20)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
-    EVT_WAIT(30 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
-    EVT_CALL(EnableNpcAI, NPC_Mamar, TRUE)
-    EVT_CALL(N(UpgradeStarPowerCh2))
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_0192, 160, 40)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00EC)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(GetNpcPos, NPC_Mamar, LVar3, LVar4, LVar5)
-    EVT_ADD(LVar0, LVar3)
-    EVT_DIV(LVar0, 2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00ED)
-    EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_THREAD
-        EVT_LOOP(25)
-            EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_WAIT(4 * DT)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar2, 0)
-        EVT_SET(LVar3, 1800)
-        EVT_CALL(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_Mamar, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetNpcPos, NPC_Mamar, LVar2, LVar3, LVar4)
-        EVT_SET(LVar5, LVar3)
-        EVT_ADD(LVar5, 180)
-        EVT_CALL(MakeLerp, LVar3, LVar5, 100 * DT, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcPos, NPC_Mamar, LVar2, LVar0, LVar4)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_Mamar, NPC_DISPOSE_LOCATION)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(15 * DT)
-        EVT_CALL(PlaySoundAtNpc, NPC_Mamar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-    EVT_END_THREAD
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(90 * DT)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_WAIT(20 * DT)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_SET(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePartnerAI, 0)
+    Call(func_802CF56C, 2)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar0)
+    Add(LVar3, -50)
+    Set(LVar4, LVar1)
+    Add(LVar4, 26)
+    Call(SetNpcPos, NPC_Mamar, LVar3, LVar4, LVar2)
+    Call(PlayerFaceNpc, NPC_Mamar, FALSE)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, 0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 600)
+    Call(SetCamPitch, CAM_DEFAULT, Float(18.0), Float(-9.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(WaitForPlayerInputEnabled)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.5 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00EB)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, 18, -9)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(MakeLerp, 0, 360, 10 * DT, EASING_LINEAR)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcRotation, NPC_Mamar, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(EnableNpcAI, NPC_Mamar, FALSE)
+    Call(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Leap)
+    Wait(20 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_UsePower)
+    Call(PlaySoundAtPlayer, SOUND_RECEIVE_STAR_POWER, SOUND_SPACE_DEFAULT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Set(LVar3, LVar1)
+    Add(LVar1, 50)
+    Add(LVar2, 10)
+    Add(LVar3, 30)
+    Loop(5)
+        PlayEffect(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
+        Wait(6 * DT)
+        PlayEffect(EFFECT_SPARKLES, 1, LVar0, LVar3, LVar2, 20)
+        Wait(6 * DT)
+    EndLoop
+    Wait(20 * DT)
+    Call(PlaySoundAtPlayer, SOUND_GET_STAR_POWER_WAVE, SOUND_SPACE_DEFAULT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Add(LVar1, 20)
+    PlayEffect(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, 1, 30)
+    Wait(30 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Idle)
+    Call(EnableNpcAI, NPC_Mamar, TRUE)
+    Call(N(UpgradeStarPowerCh2))
+    Call(ShowMessageAtScreenPos, MSG_Menus_0192, 160, 40)
+    Wait(10 * DT)
+    Call(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(250.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00EC)
+    Wait(10 * DT)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(GetNpcPos, NPC_Mamar, LVar3, LVar4, LVar5)
+    Add(LVar0, LVar3)
+    Div(LVar0, 2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(4.0 / DT))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10 * DT)
+    Call(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, SPEECH_FLAG_200, MSG_CH2_00ED)
+    Call(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Thread
+        Loop(25)
+            Call(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            Wait(4 * DT)
+        EndLoop
+    EndThread
+    Thread
+        Set(LVar2, 0)
+        Set(LVar3, 1800)
+        Call(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_Mamar, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(GetNpcPos, NPC_Mamar, LVar2, LVar3, LVar4)
+        Set(LVar5, LVar3)
+        Add(LVar5, 180)
+        Call(MakeLerp, LVar3, LVar5, 100 * DT, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcPos, NPC_Mamar, LVar2, LVar0, LVar4)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SetNpcPos, NPC_Mamar, NPC_DISPOSE_LOCATION)
+    EndThread
+    Thread
+        Wait(15 * DT)
+        Call(PlaySoundAtNpc, NPC_Mamar, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+    EndThread
+    Wait(10 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(90 * DT)
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Wait(20 * DT)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Set(GB_StoryProgress, STORY_CH2_STAR_SPRIT_DEPARTED)
+    Exec(N(EVS_SetupMusic))
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mamar) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, sbk_02_ENTRY_5)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Mamar)))
-        EVT_EXEC(N(EVS_Scene_RescuedMamar))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, sbk_02_ENTRY_5)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Mamar)))
+        Exec(N(EVS_Scene_RescuedMamar))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 API_CALLABLE(N(CheckTradeEventTime)) {
@@ -200,56 +200,56 @@ API_CALLABLE(N(GetTradeEventItemCount)) {
 }
 
 EvtScript N(EVS_NpcInteract_TradingToad) = {
-    EVT_SET(LVar0, 5)
-    EVT_CALL(N(CheckTradeEventTime))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00EE)
-        EVT_WAIT(10)
-        EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-        EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-        EVT_SET(GF_TradingEvent2_Active, FALSE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(GetTradeEventItemCount))
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00EF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F0)
+    Set(LVar0, 5)
+    Call(N(CheckTradeEventTime))
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00EE)
+        Wait(10)
+        Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
+        PlayEffect(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+        Set(GF_TradingEvent2_Active, FALSE)
+        Return
+    EndIf
+    Call(N(GetTradeEventItemCount))
+    IfEq(LVar0, 0)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00EF)
+        Return
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F0)
     EVT_CHOOSE_ANY_CONSUMABLE(2)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(-1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F4)
-            EVT_RETURN
-        EVT_CASE_EQ(ITEM_NUTTY_CAKE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F1)
+    Switch(LVar0)
+        CaseEq(-1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F4)
+            Return
+        CaseEq(ITEM_NUTTY_CAKE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F1)
             EVT_GIVE_CONSUMABLE_REWARD(ITEM_MAPLE_SUPER)
-            EVT_WAIT(10)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F2)
-            EVT_WAIT(10)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
-            EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
-            EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-            EVT_SET(GF_TradingEvent2_Active, FALSE)
-            EVT_ADD(GB_TradingEvent_Count, 1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F3)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+            Wait(10)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F2)
+            Wait(10)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            Call(PlaySoundAtNpc, NPC_SELF, SOUND_SMOKE_BURST, SOUND_SPACE_DEFAULT)
+            PlayEffect(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
+            Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+            Set(GF_TradingEvent2_Active, FALSE)
+            Add(GB_TradingEvent_Count, 1)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Toad_Pink_Talk, ANIM_Toad_Pink_Idle, 0, MSG_CH2_00F3)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TradingToad) = {
-    EVT_IF_NE(GF_TradingEvent2_Active, FALSE)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_TradingToad)))
-    EVT_ELSE
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GF_TradingEvent2_Active, FALSE)
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_TradingToad)))
+    Else
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Mamar) = {

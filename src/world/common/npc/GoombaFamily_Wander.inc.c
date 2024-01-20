@@ -9,9 +9,9 @@ MobileAISettings N(AISettings_GoombaFamily_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_GoombaFamily_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_GoombaFamily_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_GoombaFamily_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_GoombaFamily_Wander) = {

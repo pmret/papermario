@@ -14,50 +14,50 @@ API_CALLABLE(N(MonitorPlayerAltitude)) {
 }
 
 EvtScript N(EVS_TetherCamToPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_IF_GE(LVar1, LVar3)
-            EVT_SET(LVar1, LVar3)
-        EVT_END_IF
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        IfGe(LVar1, LVar3)
+            Set(LVar1, LVar3)
+        EndIf
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_UseSpring) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAUNCH)
-    EVT_IF_EQ(MV_PlayerHeightLevel, 0)
-        EVT_SET(LVar3, -275)
-        EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.7))
-        EVT_CALL(PlayerJump, -507, -288, -159, 20)
-    EVT_ELSE
-        EVT_SET(LVar3, 0)
-        EVT_EXEC_GET_TID(N(EVS_TetherCamToPlayer), LVarA)
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.1))
-        EVT_CALL(PlayerJump, -500, 0, -150, 40)
-    EVT_END_IF
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-    EVT_WAIT(4)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_LAUNCH)
+    IfEq(MV_PlayerHeightLevel, 0)
+        Set(LVar3, -275)
+        ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
+        Call(SetPlayerJumpscale, Float(0.7))
+        Call(PlayerJump, -507, -288, -159, 20)
+    Else
+        Set(LVar3, 0)
+        ExecGetTID(N(EVS_TetherCamToPlayer), LVarA)
+        Call(SetPlayerJumpscale, Float(1.1))
+        Call(PlayerJump, -500, 0, -150, 40)
+    EndIf
+    KillThread(LVarA)
+    Call(SetPlayerActionState, ACTION_STATE_IDLE)
+    Wait(4)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_THREAD
-        EVT_CALL(N(MonitorPlayerAltitude))
-    EVT_END_THREAD
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_ScriptSpring), -400, -300, -150, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignScript, EVT_PTR(N(EVS_UseSpring)))
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_YellowBlock), 620, -65, -200, 0, ITEM_SHOOTING_STAR, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, GF_KPA03_ItemBlock_ShootingStar)
-    EVT_RETURN
-    EVT_END
+    Thread
+        Call(N(MonitorPlayerAltitude))
+    EndThread
+    Call(MakeEntity, Ref(Entity_ScriptSpring), -400, -300, -150, 0, MAKE_ENTITY_END)
+    Call(AssignScript, Ref(N(EVS_UseSpring)))
+    Call(MakeEntity, Ref(Entity_YellowBlock), 620, -65, -200, 0, ITEM_SHOOTING_STAR, MAKE_ENTITY_END)
+    Call(AssignBlockFlag, GF_KPA03_ItemBlock_ShootingStar)
+    Return
+    End
 };

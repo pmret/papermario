@@ -12,9 +12,9 @@ MobileAISettings N(AISettings_Bubulb_Patrol) = {
 };
 
 EvtScript N(EVS_NpcAI_Bubulb_Patrol) = {
-    EVT_CALL(N(PatrolNoAttackAI_Main), EVT_PTR(N(AISettings_Bubulb_Patrol)))
-    EVT_RETURN
-    EVT_END
+    Call(N(PatrolNoAttackAI_Main), Ref(N(AISettings_Bubulb_Patrol)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Bubulb_Patrol) = {

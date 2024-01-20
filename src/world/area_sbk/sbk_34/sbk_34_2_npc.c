@@ -14,67 +14,67 @@ s32 N(LetterList_Nomadimouse)[] = {
 };
 
 EvtScript N(EVS_Nomadimouse_LetterDelivery) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Nomadimouse, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle,
         ITEM_LETTER_TO_NOMADIMOUSE, ITEM_NONE,
         MSG_CH2_005B, MSG_CH2_005C, MSG_CH2_005D, MSG_CH2_005E,
-        EVT_PTR(N(LetterList_Nomadimouse)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_Nomadimouse)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterReward_Nomadimouse) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Nomadimouse) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-            EVT_IF_EQ(GF_SBK34_Met_Nomadimouse, FALSE)
-                EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), 0, EVT_FLOAT(250.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0056)
-                EVT_SET(GF_SBK34_Met_Nomadimouse, TRUE)
-                EVT_CALL(ResetCam, CAM_DEFAULT, 4)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0057)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
-            EVT_IF_EQ(GF_SBK34_Met_Nomadimouse, FALSE)
-                EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), 0, EVT_FLOAT(250.0), EVT_FLOAT(15.0), EVT_FLOAT(-6.0))
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0058)
-                EVT_SET(GF_SBK34_Met_Nomadimouse, TRUE)
-                EVT_CALL(ResetCam, CAM_DEFAULT, 4)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0059)
-            EVT_END_IF
-        EVT_CASE_GE(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_005A)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_Nomadimouse_LetterDelivery))
-    EVT_EXEC_WAIT(N(EVS_LetterReward_Nomadimouse))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
+            IfEq(GF_SBK34_Met_Nomadimouse, FALSE)
+                Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(250.0), Float(15.0), Float(-6.0))
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0056)
+                Set(GF_SBK34_Met_Nomadimouse, TRUE)
+                Call(ResetCam, CAM_DEFAULT, 4)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0057)
+            EndIf
+        CaseLt(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
+            IfEq(GF_SBK34_Met_Nomadimouse, FALSE)
+                Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(250.0), Float(15.0), Float(-6.0))
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0058)
+                Set(GF_SBK34_Met_Nomadimouse, TRUE)
+                Call(ResetCam, CAM_DEFAULT, 4)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_0059)
+            EndIf
+        CaseGe(STORY_CH2_UNCOVERED_DRY_DRY_RUINS)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Nomadimouse_Talk, ANIM_Nomadimouse_Idle, 0, MSG_CH2_005A)
+    EndSwitch
+    ExecWait(N(EVS_Nomadimouse_LetterDelivery))
+    ExecWait(N(EVS_LetterReward_Nomadimouse))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Nomadimouse) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Nomadimouse)))
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Nomadimouse_Idle)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Nomadimouse)))
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Nomadimouse_Idle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Sack) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Nomadimouse_Sack)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Nomadimouse_Sack)
+    Return
+    End
 };
 
 NpcData N(NpcData_Nomadimouse)[] = {

@@ -474,125 +474,125 @@ ActorBlueprint NAMESPACE = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChildBits, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, 100)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, 100)
-    EVT_EXEC_WAIT(N(EVS_UpdateSize))
-    EVT_RETURN
-    EVT_END
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_1)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ChildBits, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, 100)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, 100)
+    ExecWait(N(EVS_UpdateSize))
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateSize) = {
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
-    EVT_MUL(LVar0, 145)
-    EVT_MUL(LVar1, 135)
-    EVT_DIV(LVar0, 100)
-    EVT_DIV(LVar1, 100)
-    EVT_CALL(SetActorSize, ACTOR_HUFF_N_PUFF, LVar1, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
-    EVT_MUL(LVar0, -10)
-    EVT_MUL(LVar1, 40)
-    EVT_DIV(LVar0, 100)
-    EVT_DIV(LVar1, 100)
-    EVT_CALL(SetTargetOffset, ACTOR_HUFF_N_PUFF, PRT_MAIN, LVar0, LVar1)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
-    EVT_MUL(LVar0, -15)
-    EVT_MUL(LVar1, -50)
-    EVT_DIV(LVar0, 100)
-    EVT_DIV(LVar1, 100)
-    EVT_CALL(SetProjectileTargetOffset, ACTOR_HUFF_N_PUFF, PRT_MAIN, LVar0, LVar1)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
-    EVT_MUL(LVar0, -17)
-    EVT_MUL(LVar1, -31)
-    EVT_DIV(LVar0, 100)
-    EVT_DIV(LVar1, 100)
-    EVT_CALL(N(SetHealthBarPos), LVar0, LVar1)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
+    Mul(LVar0, 145)
+    Mul(LVar1, 135)
+    Div(LVar0, 100)
+    Div(LVar1, 100)
+    Call(SetActorSize, ACTOR_HUFF_N_PUFF, LVar1, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
+    Mul(LVar0, -10)
+    Mul(LVar1, 40)
+    Div(LVar0, 100)
+    Div(LVar1, 100)
+    Call(SetTargetOffset, ACTOR_HUFF_N_PUFF, PRT_MAIN, LVar0, LVar1)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
+    Mul(LVar0, -15)
+    Mul(LVar1, -50)
+    Div(LVar0, 100)
+    Div(LVar1, 100)
+    Call(SetProjectileTargetOffset, ACTOR_HUFF_N_PUFF, PRT_MAIN, LVar0, LVar1)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar1)
+    Mul(LVar0, -17)
+    Mul(LVar1, -31)
+    Div(LVar0, 100)
+    Div(LVar1, 100)
+    Call(N(SetHealthBarPos), LVar0, LVar1)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateChargedJitter) = {
-    EVT_SET(LFlag0, FALSE)
-    EVT_SET(LVarA, 0)
-    EVT_SET(LVarB, 0)
-    EVT_LABEL(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-        EVT_SWITCH(LVar0)
-            EVT_CASE_OR_EQ(AVAL_Move_PreCharge_1)
-            EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-            EVT_CASE_OR_EQ(AVAL_Move_PreCharge_3)
-            EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-                EVT_IF_EQ(LFlag0, FALSE)
-                    EVT_CALL(RandInt, 2, LVarA)
-                    EVT_CALL(RandInt, 2, LVarB)
-                    EVT_SET(LFlag0, TRUE)
-                EVT_ELSE
-                    EVT_MUL(LVarA, -1)
-                    EVT_MUL(LVarB, -1)
-                    EVT_SET(LFlag0, FALSE)
-                EVT_END_IF
-            EVT_END_CASE_GROUP
-            EVT_CASE_OR_EQ(AVAL_Move_PreCharge_2)
-            EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-                EVT_IF_EQ(LFlag0, FALSE)
-                    EVT_CALL(RandInt, 1, LVarA)
-                    EVT_SET(LFlag0, TRUE)
-                EVT_ELSE
-                    EVT_MUL(LVarA, -1)
-                    EVT_SET(LFlag0, FALSE)
-                EVT_END_IF
-            EVT_END_CASE_GROUP
-        EVT_END_SWITCH
-        EVT_CALL(SetActorDispOffset, ACTOR_SELF, LVarA, LVarB, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LFlag0, FALSE)
+    Set(LVarA, 0)
+    Set(LVarB, 0)
+    Label(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+        Switch(LVar0)
+            CaseOrEq(AVAL_Move_PreCharge_1)
+            CaseOrEq(AVAL_Move_Charged_1)
+            CaseOrEq(AVAL_Move_PreCharge_3)
+            CaseOrEq(AVAL_Move_Charged_3)
+                IfEq(LFlag0, FALSE)
+                    Call(RandInt, 2, LVarA)
+                    Call(RandInt, 2, LVarB)
+                    Set(LFlag0, TRUE)
+                Else
+                    Mul(LVarA, -1)
+                    Mul(LVarB, -1)
+                    Set(LFlag0, FALSE)
+                EndIf
+            EndCaseGroup
+            CaseOrEq(AVAL_Move_PreCharge_2)
+            CaseOrEq(AVAL_Move_Charged_2)
+                IfEq(LFlag0, FALSE)
+                    Call(RandInt, 1, LVarA)
+                    Set(LFlag0, TRUE)
+                Else
+                    Mul(LVarA, -1)
+                    Set(LFlag0, FALSE)
+                EndIf
+            EndCaseGroup
+        EndSwitch
+        Call(SetActorDispOffset, ACTOR_SELF, LVarA, LVarB, 0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_SET(LVarF, 0)
-    EVT_LOOP(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_WobbleMode, LVarA)
-        EVT_SWITCH(LVarA)
-            EVT_CASE_EQ(0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.97), EVT_FLOAT(1.03), 15, 0, 0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.03), EVT_FLOAT(0.97), 15, 0, 0)
-                EVT_ADD(LVarF, 1)
-            EVT_CASE_EQ(1)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.95), EVT_FLOAT(1.05), 15, 0, 0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.05), EVT_FLOAT(0.95), 15, 0, 0)
-                EVT_ADD(LVarF, 3)
-            EVT_CASE_EQ(2)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar0, EVT_FLOAT(0.9), EVT_FLOAT(1.1), 15, 0, 0)
-                EVT_CALL(N(CosInterpMinMax), LVarF, LVar1, EVT_FLOAT(1.1), EVT_FLOAT(0.9), 15, 0, 0)
-                EVT_ADD(LVarF, 5)
-        EVT_END_SWITCH
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-        EVT_DIVF(LVar2, EVT_FLOAT(100.0))
-        EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-        EVT_MULF(LVar1, LVar2)
-        EVT_MULF(LVar0, LVar3)
-        EVT_CALL(SetActorScale, ACTOR_SELF, LVar1, LVar0, EVT_FLOAT(1.0))
-        EVT_IF_GE(LVarF, 30)
-            EVT_SET(LVarF, 0)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVarF, 0)
+    Loop(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_WobbleMode, LVarA)
+        Switch(LVarA)
+            CaseEq(0)
+                Call(N(CosInterpMinMax), LVarF, LVar0, Float(0.97), Float(1.03), 15, 0, 0)
+                Call(N(CosInterpMinMax), LVarF, LVar1, Float(1.03), Float(0.97), 15, 0, 0)
+                Add(LVarF, 1)
+            CaseEq(1)
+                Call(N(CosInterpMinMax), LVarF, LVar0, Float(0.95), Float(1.05), 15, 0, 0)
+                Call(N(CosInterpMinMax), LVarF, LVar1, Float(1.05), Float(0.95), 15, 0, 0)
+                Add(LVarF, 3)
+            CaseEq(2)
+                Call(N(CosInterpMinMax), LVarF, LVar0, Float(0.9), Float(1.1), 15, 0, 0)
+                Call(N(CosInterpMinMax), LVarF, LVar1, Float(1.1), Float(0.9), 15, 0, 0)
+                Add(LVarF, 5)
+        EndSwitch
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+        DivF(LVar2, Float(100.0))
+        DivF(LVar3, Float(100.0))
+        MulF(LVar1, LVar2)
+        MulF(LVar0, LVar3)
+        Call(SetActorScale, ACTOR_SELF, LVar1, LVar0, Float(1.0))
+        IfGe(LVarF, 30)
+            Set(LVarF, 0)
+        EndIf
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 Vec3i N(SummonPos) = { NPC_DISPOSE_LOCATION };
@@ -606,2531 +606,2531 @@ Formation N(LargeTuffFormation) = {
 };
 
 EvtScript N(EVS_TrySpawningRuffPuff) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(GetLastDamage, ACTOR_SELF, LVar9)
-    EVT_IF_LE(LVar9, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-        EVT_IF_GT(LVar9, 8)
-            EVT_SET(LVar9, 8)
-        EVT_END_IF
-    EVT_ELSE
-        EVT_IF_GT(LVar9, 4)
-            EVT_SET(LVar9, 4)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(EVENT_DEATH)
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetLastDamage, ACTOR_SELF, LVar8)
-    EVT_MUL(LVar8, 1)
-    EVT_SUB(LVar0, LVar8)
-    EVT_IF_LT(LVar0, 50)
-        EVT_SET(LVar0, 50)
-    EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
-    EVT_CALL(GetLastDamage, ACTOR_SELF, LVar8)
-    EVT_MUL(LVar8, 1)
-    EVT_SUB(LVar0, LVar8)
-    EVT_IF_LT(LVar0, 50)
-        EVT_SET(LVar0, 50)
-    EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
-    EVT_EXEC_WAIT(N(EVS_UpdateSize))
-    EVT_SET(LVarA, 0)
-    EVT_CALL(GetBattleFlags, LVar0)
-    EVT_IF_FLAG(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
-        EVT_SET(LVar0, LVar9)
-        EVT_IF_GT(LVar0, 1)
-            EVT_SET(LVarA, LVar0)
-            EVT_DIV(LVarA, 2)
-            EVT_SET(LVar9, LVar0)
-            EVT_MOD(LVar9, 2)
-            EVT_ADD(LVar9, LVarA)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LOOP(LVar9)
-        EVT_CALL(N(SetTuffPuffPriority))
-        EVT_IF_GT(LVarA, 0)
-            EVT_SUB(LVarA, 1)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(LargeTuffFormation)), FALSE)
-            EVT_CALL(SetActorVar, LVar0, AVAR_TuffPuff_HealValue, 2)
-        EVT_ELSE
-            EVT_CALL(SummonEnemy, EVT_PTR(N(SmallTuffFormation)), FALSE)
-            EVT_CALL(SetActorVar, LVar0, AVAR_TuffPuff_HealValue, 1)
-        EVT_END_IF
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar1)
-        EVT_CALL(N(FindPlaceForTuffPuff), LVar1, LVar2)
-        EVT_SWITCH(LVar2)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(GetLastDamage, ACTOR_SELF, LVar9)
+    IfLe(LVar9, 0)
+        Return
+    EndIf
+    Call(GetBattleFlags, LVar0)
+    IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
+        IfGt(LVar9, 8)
+            Set(LVar9, 8)
+        EndIf
+    Else
+        IfGt(LVar9, 4)
+            Set(LVar9, 4)
+        EndIf
+    EndIf
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseOrEq(EVENT_DEATH)
+        CaseOrEq(EVENT_BURN_DEATH)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+    Call(GetLastDamage, ACTOR_SELF, LVar8)
+    Mul(LVar8, 1)
+    Sub(LVar0, LVar8)
+    IfLt(LVar0, 50)
+        Set(LVar0, 50)
+    EndIf
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
+    Call(GetLastDamage, ACTOR_SELF, LVar8)
+    Mul(LVar8, 1)
+    Sub(LVar0, LVar8)
+    IfLt(LVar0, 50)
+        Set(LVar0, 50)
+    EndIf
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
+    ExecWait(N(EVS_UpdateSize))
+    Set(LVarA, 0)
+    Call(GetBattleFlags, LVar0)
+    IfFlag(LVar0, BS_FLAGS1_NICE_HIT | BS_FLAGS1_SUPER_HIT)
+        Set(LVar0, LVar9)
+        IfGt(LVar0, 1)
+            Set(LVarA, LVar0)
+            Div(LVarA, 2)
+            Set(LVar9, LVar0)
+            Mod(LVar9, 2)
+            Add(LVar9, LVarA)
+        EndIf
+    EndIf
+    Loop(LVar9)
+        Call(N(SetTuffPuffPriority))
+        IfGt(LVarA, 0)
+            Sub(LVarA, 1)
+            Call(SummonEnemy, Ref(N(LargeTuffFormation)), FALSE)
+            Call(SetActorVar, LVar0, AVAR_TuffPuff_HealValue, 2)
+        Else
+            Call(SummonEnemy, Ref(N(SmallTuffFormation)), FALSE)
+            Call(SetActorVar, LVar0, AVAR_TuffPuff_HealValue, 1)
+        EndIf
+        Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar1)
+        Call(N(FindPlaceForTuffPuff), LVar1, LVar2)
+        Switch(LVar2)
 
             #define HNP_REGISTER_CHILD(idx) \
-                EVT_CASE_EQ(1 << idx) \
-                    EVT_BITWISE_OR_CONST(LVar1, 1 << idx) \
-                    EVT_SET(LVar2, idx) \
-                    EVT_SET(ArrayVar(idx), LVar0)
+                CaseEq(1 << idx) \
+                    BitwiseOrConst(LVar1, 1 << idx) \
+                    Set(LVar2, idx) \
+                    Set(ArrayVar(idx), LVar0)
 
             // try registering the child with each position, until we find the one on LVar2
             FOR_CHILDREN_ORDERED(HNP_REGISTER_CHILD)
 
-            EVT_CASE_DEFAULT
-                EVT_SET(LVar2, -1)
-        EVT_END_SWITCH
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar1)
-        EVT_CALL(PlaySoundAtActor, LVar0, SOUND_OPEN_SHELL)
-        EVT_THREAD
-            EVT_SET(LVar3, LVar0)
-            EVT_CALL(MakeLerp, 150, 255, 15, EASING_QUADRATIC_IN)
-            EVT_LABEL(123)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetPartAlpha, LVar3, 1, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(123)
-                EVT_END_IF
-            EVT_CALL(SetPartAlpha, LVar3, 1, 255)
-        EVT_END_THREAD
-        EVT_IF_NE(LVar2, -1)
-            EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVar0)
-            EVT_CALL(CopyBuffs, ACTOR_SELF, LVar0)
-            EVT_CALL(SetActorVar, LVar0, AVAR_TuffPuff_Index, LVar2)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-            EVT_CALL(SetActorPos, LVar0, LVar3, LVar4, LVar5)
-            EVT_ADD(LVar3, -5)
-            EVT_ADD(LVar4, 0)
-            EVT_ADD(LVar5, 0)
-            EVT_MUL(LVar2, 36)
-            EVT_ADD(LVar2, 0)
-            EVT_CALL(N(SetTuffPuffPos), LVar3, LVar4, LVar5, LVar2, EVT_FLOAT(0.0), EVT_FLOAT(50.0))
-            EVT_THREAD
-                EVT_CALL(SetActorJumpGravity, LVar0, EVT_FLOAT(0.8))
-                EVT_CALL(SetGoalPos, LVar0, LVar3, LVar4, LVar5)
-                EVT_CALL(JumpToGoal, LVar0, 30, FALSE, FALSE, FALSE)
-                EVT_CALL(ForceHomePos, LVar0, LVar3, LVar4, LVar5)
-                EVT_CALL(HPBarToHome, LVar0)
-            EVT_END_THREAD
-        EVT_ELSE
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-            EVT_CALL(SetActorPos, LVar0, LVar3, LVar4, LVar5)
-            EVT_CALL(RandInt, 200, LVar6)
-            EVT_SUB(LVar6, 100)
-            EVT_ADD(LVar3, LVar6)
-            EVT_ADD(LVar5, 10)
-            EVT_THREAD
-                EVT_CALL(SetActorJumpGravity, LVar0, EVT_FLOAT(0.8))
-                EVT_CALL(SetGoalPos, LVar0, LVar3, -30, LVar5)
-                EVT_CALL(JumpToGoal, LVar0, 40, FALSE, FALSE, FALSE)
-                EVT_CALL(RemoveActor, LVar0)
-            EVT_END_THREAD
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+            CaseDefault
+                Set(LVar2, -1)
+        EndSwitch
+        Call(SetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar1)
+        Call(PlaySoundAtActor, LVar0, SOUND_OPEN_SHELL)
+        Thread
+            Set(LVar3, LVar0)
+            Call(MakeLerp, 150, 255, 15, EASING_QUADRATIC_IN)
+            Label(123)
+                Call(UpdateLerp)
+                Call(SetPartAlpha, LVar3, 1, LVar0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(123)
+                EndIf
+            Call(SetPartAlpha, LVar3, 1, 255)
+        EndThread
+        IfNe(LVar2, -1)
+            Call(CopyStatusEffects, ACTOR_SELF, LVar0)
+            Call(CopyBuffs, ACTOR_SELF, LVar0)
+            Call(SetActorVar, LVar0, AVAR_TuffPuff_Index, LVar2)
+            Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
+            Call(SetActorPos, LVar0, LVar3, LVar4, LVar5)
+            Add(LVar3, -5)
+            Add(LVar4, 0)
+            Add(LVar5, 0)
+            Mul(LVar2, 36)
+            Add(LVar2, 0)
+            Call(N(SetTuffPuffPos), LVar3, LVar4, LVar5, LVar2, Float(0.0), Float(50.0))
+            Thread
+                Call(SetActorJumpGravity, LVar0, Float(0.8))
+                Call(SetGoalPos, LVar0, LVar3, LVar4, LVar5)
+                Call(JumpToGoal, LVar0, 30, FALSE, FALSE, FALSE)
+                Call(ForceHomePos, LVar0, LVar3, LVar4, LVar5)
+                Call(HPBarToHome, LVar0)
+            EndThread
+        Else
+            Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
+            Call(SetActorPos, LVar0, LVar3, LVar4, LVar5)
+            Call(RandInt, 200, LVar6)
+            Sub(LVar6, 100)
+            Add(LVar3, LVar6)
+            Add(LVar5, 10)
+            Thread
+                Call(SetActorJumpGravity, LVar0, Float(0.8))
+                Call(SetGoalPos, LVar0, LVar3, -30, LVar5)
+                Call(JumpToGoal, LVar0, 40, FALSE, FALSE, FALSE)
+                Call(RemoveActor, LVar0)
+            EndThread
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_Hit) = {
-    EVT_EXEC_WAIT(N(EVS_TrySpawningRuffPuff))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim11)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim12)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim13)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim07)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim08)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim09)
-    EVT_END_SWITCH
-    EVT_THREAD
-        EVT_SET(LVar0, PRT_MAIN)
-        EVT_SET(LVar1, LVar2)
-        EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, PRT_FACE)
-        EVT_SET(LVar1, LVar3)
-        EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, PRT_ARMS)
-        EVT_SET(LVar1, LVar4)
-        EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_END_THREAD
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_TrySpawningRuffPuff))
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+            SetConst(LVar2, ANIM_HuffNPuff_Anim11)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim12)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim13)
+        EndCaseGroup
+        CaseDefault
+            SetConst(LVar2, ANIM_HuffNPuff_Anim07)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim08)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim09)
+    EndSwitch
+    Thread
+        Set(LVar0, PRT_MAIN)
+        Set(LVar1, LVar2)
+        ExecWait(EVS_Enemy_Hit)
+    EndThread
+    Thread
+        Set(LVar0, PRT_FACE)
+        Set(LVar1, LVar3)
+        ExecWait(EVS_Enemy_Hit)
+    EndThread
+    Thread
+        Set(LVar0, PRT_ARMS)
+        Set(LVar1, LVar4)
+        ExecWait(EVS_Enemy_Hit)
+    EndThread
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_Death) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_LABEL(0)
-        EVT_CALL(GetBattleFlags, LVar0)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_EXECUTING_MOVE)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Label(0)
+        Call(GetBattleFlags, LVar0)
+        IfFlag(LVar0, BS_FLAGS1_EXECUTING_MOVE)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_KILL_CHILD(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT) \
-            EVT_CALL(DispatchEvent, ArrayVar(idx), EVENT_DEATH) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Call(SetDamageSource, DMG_SRC_DEFAULT) \
+            Call(DispatchEvent, ArrayVar(idx), EVENT_DEATH) \
+        EndIf
 
     // kill any remaining Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_KILL_CHILD)
 
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVar0)
-            EVT_KILL_THREAD(LVar0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
-            EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim08)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim09)
-    EVT_SET(LVar0, PRT_MAIN)
-    EVT_SET(LVar1, ANIM_HuffNPuff_Anim07)
-    EVT_EXEC_WAIT(EVS_Enemy_Death)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVar0)
+            KillThread(LVar0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
+            Call(RemoveEffect, LVar0)
+            Call(StopSound, SOUND_CHARGE_LIGHTNING)
+        EndCaseGroup
+    EndSwitch
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim08)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim09)
+    Set(LVar0, PRT_MAIN)
+    Set(LVar1, ANIM_HuffNPuff_Anim07)
+    ExecWait(EVS_Enemy_Death)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_BurnHit) = {
-    EVT_EXEC_WAIT(N(EVS_TrySpawningRuffPuff))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim11)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim12)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim13)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim23)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim24)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim25)
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, LVar3)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, LVar4)
-    EVT_WAIT(20)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim11)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim12)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim13)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim26)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim27)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim28)
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, LVar3)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, LVar4)
-    EVT_WAIT(10)
-    EVT_RETURN
-    EVT_END
+    ExecWait(N(EVS_TrySpawningRuffPuff))
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+            SetConst(LVar2, ANIM_HuffNPuff_Anim11)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim12)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim13)
+        EndCaseGroup
+        CaseDefault
+            SetConst(LVar2, ANIM_HuffNPuff_Anim23)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim24)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim25)
+    EndSwitch
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar2)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, LVar3)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, LVar4)
+    Wait(20)
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+            SetConst(LVar2, ANIM_HuffNPuff_Anim11)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim12)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim13)
+        EndCaseGroup
+        CaseDefault
+            SetConst(LVar2, ANIM_HuffNPuff_Anim26)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim27)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim28)
+    EndSwitch
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar2)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, LVar3)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, LVar4)
+    Wait(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_BurnDeath) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_LABEL(0)
-        EVT_CALL(GetBattleFlags, LVar0)
-        EVT_IF_FLAG(LVar0, BS_FLAGS1_EXECUTING_MOVE)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Label(0)
+        Call(GetBattleFlags, LVar0)
+        IfFlag(LVar0, BS_FLAGS1_EXECUTING_MOVE)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_KILL_CHILD(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_CALL(DispatchEvent, ArrayVar(idx), EVENT_DEATH) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Call(DispatchEvent, ArrayVar(idx), EVENT_DEATH) \
+        EndIf
 
     // kill any remaining Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_KILL_CHILD)
 
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVar0)
-            EVT_KILL_THREAD(LVar0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
-            EVT_CALL(RemoveEffect, LVar0)
-            EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim27)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim28)
-    EVT_SET(LVar0, PRT_MAIN)
-    EVT_SET(LVar1, ANIM_HuffNPuff_Anim26)
-    EVT_EXEC_WAIT(EVS_Enemy_Death)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVar0)
+            KillThread(LVar0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
+            Call(RemoveEffect, LVar0)
+            Call(StopSound, SOUND_CHARGE_LIGHTNING)
+        EndCaseGroup
+    EndSwitch
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim27)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim28)
+    Set(LVar0, PRT_MAIN)
+    Set(LVar1, ANIM_HuffNPuff_Anim26)
+    ExecWait(EVS_Enemy_Death)
+    Return
+    End
 };
 
 EvtScript N(EVS_HuffNPuff_NoDamage) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim11)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim12)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim13)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_SET_CONST(LVar2, ANIM_HuffNPuff_Anim01)
-            EVT_SET_CONST(LVar3, ANIM_HuffNPuff_Anim02)
-            EVT_SET_CONST(LVar4, ANIM_HuffNPuff_Anim03)
-    EVT_END_SWITCH
-    EVT_THREAD
-        EVT_SET(LVar0, PRT_MAIN)
-        EVT_SET(LVar1, LVar2)
-        EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, PRT_FACE)
-        EVT_SET(LVar1, LVar3)
-        EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, PRT_ARMS)
-        EVT_SET(LVar1, LVar4)
-        EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-    EVT_END_THREAD
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+            SetConst(LVar2, ANIM_HuffNPuff_Anim11)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim12)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim13)
+        EndCaseGroup
+        CaseDefault
+            SetConst(LVar2, ANIM_HuffNPuff_Anim01)
+            SetConst(LVar3, ANIM_HuffNPuff_Anim02)
+            SetConst(LVar4, ANIM_HuffNPuff_Anim03)
+    EndSwitch
+    Thread
+        Set(LVar0, PRT_MAIN)
+        Set(LVar1, LVar2)
+        ExecWait(EVS_Enemy_NoDamageHit)
+    EndThread
+    Thread
+        Set(LVar0, PRT_FACE)
+        Set(LVar1, LVar3)
+        ExecWait(EVS_Enemy_NoDamageHit)
+    EndThread
+    Thread
+        Set(LVar0, PRT_ARMS)
+        Set(LVar1, LVar4)
+        ExecWait(EVS_Enemy_NoDamageHit)
+    EndThread
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_IncreaseWobble) = {
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_WobbleMode, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 2)
-        EVT_CASE_EQ(2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_WobbleMode, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+            Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 1)
+        CaseEq(1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 2)
+        CaseEq(2)
             // can't increase any more
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_EXEC_WAIT(N(EVS_IncreaseWobble))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_Hit))
-        EVT_CASE_EQ(EVENT_HIT)
-            EVT_EXEC_WAIT(N(EVS_IncreaseWobble))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_Hit))
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_DamageCombo)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
-        EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_EXEC_WAIT(N(EVS_IncreaseWobble))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_BurnHit))
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_DamageCombo)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
-        EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_EXEC_WAIT(N(EVS_IncreaseWobble))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_BurnHit))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_BurnDeath))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_NoDamage))
-        EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_NoDamage))
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_DamageCombo)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_EXEC_WAIT(N(EVS_IncreaseWobble))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_Hit))
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_Death))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_EXEC_WAIT(N(EVS_IncreaseWobble))
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_EXEC_WAIT(N(EVS_HuffNPuff_NoDamage))
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_DamageCombo)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_HIT_COMBO)
+            ExecWait(N(EVS_IncreaseWobble))
+            ExecWait(N(EVS_HuffNPuff_Hit))
+        CaseEq(EVENT_HIT)
+            ExecWait(N(EVS_IncreaseWobble))
+            ExecWait(N(EVS_HuffNPuff_Hit))
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AVAR_Flag_DamageCombo)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
+        CaseEq(EVENT_BURN_HIT)
+            ExecWait(N(EVS_IncreaseWobble))
+            ExecWait(N(EVS_HuffNPuff_BurnHit))
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AVAR_Flag_DamageCombo)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
+        CaseEq(EVENT_BURN_DEATH)
+            ExecWait(N(EVS_IncreaseWobble))
+            ExecWait(N(EVS_HuffNPuff_BurnHit))
+            ExecWait(N(EVS_HuffNPuff_BurnDeath))
+            Return
+        CaseEq(EVENT_ZERO_DAMAGE)
+            ExecWait(N(EVS_HuffNPuff_NoDamage))
+        CaseEq(EVENT_IMMUNE)
+            ExecWait(N(EVS_HuffNPuff_NoDamage))
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AVAR_Flag_DamageCombo)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+        CaseEq(EVENT_DEATH)
+            ExecWait(N(EVS_IncreaseWobble))
+            ExecWait(N(EVS_HuffNPuff_Hit))
+            ExecWait(N(EVS_HuffNPuff_Death))
+            Return
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            ExecWait(N(EVS_IncreaseWobble))
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+            ExecWait(N(EVS_HuffNPuff_NoDamage))
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AVAR_Flag_DamageCombo)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            Call(SetActorVar, ACTOR_SELF, AVAR_WobbleMode, 0)
+        CaseDefault
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Dialogue_PummelPermission) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_GET_SPEAKER(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_SET(LVar0, ArrayVar(idx)) \
-            EVT_GOTO(0) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Set(LVar0, ArrayVar(idx)) \
+            Goto(0) \
+        EndIf
 
     // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
-    EVT_GOTO(1)
+    Goto(1)
     // found a Tuff Puff to speak
-    EVT_LABEL(0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
-    EVT_CALL(BattleCamTargetActor, LVar0)
-    EVT_CALL(SetBattleCamZoom, 300)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, LVar0, FALSE)
-    EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
-    EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SetAnimation, LVar0, 1, ANIM_TuffPuff_Anim09)
-        EVT_CALL(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
-    EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, LVar0, TRUE)
-    EVT_WAIT(20)
+    Label(0)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(BattleCamTargetActor, LVar0)
+    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, LVar0, FALSE)
+    Call(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
+    IfEq(LVar1, 0)
+        Call(SetAnimation, LVar0, 1, ANIM_TuffPuff_Anim09)
+        Call(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
+    Else
+        Call(ActorSpeak, MSG_CH6_00CF, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
+    EndIf
+    Call(UseIdleAnimation, LVar0, TRUE)
+    Wait(20)
     // Huff N Puff replies
-    EVT_LABEL(1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetBattleCamZoom, 180)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim2D)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim2E)
-    EVT_CALL(ActorSpeak, MSG_CH6_00D0, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim2C, ANIM_HuffNPuff_Anim01)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim2D)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim2E)
+    Call(ActorSpeak, MSG_CH6_00D0, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim2C, ANIM_HuffNPuff_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Return
+    End
 };
 
 EvtScript N(EVS_Dialogue_FullPower) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetBattleCamZoom, 180)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim2D)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim2E)
-    EVT_CALL(ActorSpeak, MSG_CH6_00D1, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim2C, ANIM_HuffNPuff_Anim01)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim2D)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim2E)
+    Call(ActorSpeak, MSG_CH6_00D1, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim2C, ANIM_HuffNPuff_Anim01)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_GET_SPEAKER(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_SET(LVar0, ArrayVar(idx)) \
-            EVT_GOTO(0) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Set(LVar0, ArrayVar(idx)) \
+            Goto(0) \
+        EndIf
 
     // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
-    EVT_GOTO(1)
+    Goto(1)
     // found a Tuff Puff to speak
-    EVT_LABEL(0)
-    EVT_CALL(BattleCamTargetActor, LVar0)
-    EVT_CALL(SetBattleCamZoom, 300)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-    EVT_IF_LT(LVar1, LVar4)
-        EVT_SETF(LVar7, EVT_FLOAT(0.0))
-        EVT_LOOP(10)
-            EVT_ADDF(LVar7, EVT_FLOAT(18.0))
-            EVT_CALL(SetActorYaw, LVar0, LVar7)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, LVar0, FALSE)
-    EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
-    EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SetAnimation, LVar0, 1, ANIM_TuffPuff_Anim09)
-        EVT_CALL(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
-    EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, LVar0, TRUE)
-    EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-    EVT_IF_LT(LVar1, LVar4)
-        EVT_SETF(LVar7, EVT_FLOAT(180.0))
-        EVT_LOOP(10)
-            EVT_SUBF(LVar7, EVT_FLOAT(18.0))
-            EVT_CALL(SetActorYaw, LVar0, LVar7)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_IF
+    Label(0)
+    Call(BattleCamTargetActor, LVar0)
+    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+    IfLt(LVar1, LVar4)
+        SetF(LVar7, Float(0.0))
+        Loop(10)
+            AddF(LVar7, Float(18.0))
+            Call(SetActorYaw, LVar0, LVar7)
+            Wait(1)
+        EndLoop
+    EndIf
+    Call(UseIdleAnimation, LVar0, FALSE)
+    Call(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
+    IfEq(LVar1, 0)
+        Call(SetAnimation, LVar0, 1, ANIM_TuffPuff_Anim09)
+        Call(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
+    Else
+        Call(ActorSpeak, MSG_CH6_00D2, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
+    EndIf
+    Call(UseIdleAnimation, LVar0, TRUE)
+    Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+    IfLt(LVar1, LVar4)
+        SetF(LVar7, Float(180.0))
+        Loop(10)
+            SubF(LVar7, Float(18.0))
+            Call(SetActorYaw, LVar0, LVar7)
+            Wait(1)
+        EndLoop
+    EndIf
     // done speaking
-    EVT_LABEL(1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Return
+    End
 };
 
 EvtScript N(EVS_Dialogue_PraiseHuff) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetBattleCamZoom, 180)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim18)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim19)
-    EVT_CALL(ActorSpeak, MSG_CH6_00D3, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17, ANIM_HuffNPuff_Anim17)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim18)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim19)
+    Call(ActorSpeak, MSG_CH6_00D3, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17, ANIM_HuffNPuff_Anim17)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_GET_SPEAKER(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_SET(LVar0, ArrayVar(idx)) \
-            EVT_GOTO(0) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Set(LVar0, ArrayVar(idx)) \
+            Goto(0) \
+        EndIf
 
     // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
-    EVT_GOTO(1)
+    Goto(1)
     // found a Tuff Puff to speak
-    EVT_LABEL(0)
-    EVT_CALL(BattleCamTargetActor, LVar0)
-    EVT_CALL(SetBattleCamZoom, 300)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-    EVT_IF_LT(LVar1, LVar4)
-        EVT_SETF(LVar7, EVT_FLOAT(0.0))
-        EVT_LOOP(10)
-            EVT_ADDF(LVar7, EVT_FLOAT(18.0))
-            EVT_CALL(SetActorYaw, LVar0, LVar7)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, LVar0, FALSE)
-    EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
-    EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
-    EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, LVar0, TRUE)
-    EVT_CALL(GetActorPos, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-    EVT_IF_LT(LVar1, LVar4)
-        EVT_SETF(LVar7, EVT_FLOAT(180.0))
-        EVT_LOOP(10)
-            EVT_SUBF(LVar7, EVT_FLOAT(18.0))
-            EVT_CALL(SetActorYaw, LVar0, LVar7)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_IF
+    Label(0)
+    Call(BattleCamTargetActor, LVar0)
+    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+    IfLt(LVar1, LVar4)
+        SetF(LVar7, Float(0.0))
+        Loop(10)
+            AddF(LVar7, Float(18.0))
+            Call(SetActorYaw, LVar0, LVar7)
+            Wait(1)
+        EndLoop
+    EndIf
+    Call(UseIdleAnimation, LVar0, FALSE)
+    Call(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
+    IfEq(LVar1, 0)
+        Call(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
+    Else
+        Call(ActorSpeak, MSG_CH6_00D4, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
+    EndIf
+    Call(UseIdleAnimation, LVar0, TRUE)
+    Call(GetActorPos, LVar0, LVar1, LVar2, LVar3)
+    Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+    IfLt(LVar1, LVar4)
+        SetF(LVar7, Float(180.0))
+        Loop(10)
+            SubF(LVar7, Float(18.0))
+            Call(SetActorYaw, LVar0, LVar7)
+            Wait(1)
+        EndLoop
+    EndIf
     // done speaking
-    EVT_LABEL(1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Return
+    End
 };
 
 EvtScript N(EVS_Dialogue_Concerned) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetBattleCamZoom, 180)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim24)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim25)
-    EVT_CALL(ActorSpeak, MSG_CH6_00D5, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim23, ANIM_HuffNPuff_Anim23)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim24)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim25)
+    Call(ActorSpeak, MSG_CH6_00D5, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim23, ANIM_HuffNPuff_Anim23)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_GET_SPEAKER(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_SET(LVar0, ArrayVar(idx)) \
-            EVT_GOTO(0) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Set(LVar0, ArrayVar(idx)) \
+            Goto(0) \
+        EndIf
 
     // select the first available Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_GET_SPEAKER)
 
-    EVT_GOTO(1)
+    Goto(1)
     // found a Tuff Puff to speak
-    EVT_LABEL(0)
-    EVT_CALL(BattleCamTargetActor, LVar0)
-    EVT_CALL(SetBattleCamZoom, 300)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, LVar0, FALSE)
-    EVT_CALL(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
-    EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
-    EVT_ELSE
-        EVT_CALL(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, LVar0, TRUE)
+    Label(0)
+    Call(BattleCamTargetActor, LVar0)
+    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, LVar0, FALSE)
+    Call(GetActorVar, LVar0, AVAR_TuffPuff_IsLarge, LVar1)
+    IfEq(LVar1, 0)
+        Call(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_TuffPuff_Anim14, ANIM_TuffPuff_Anim02)
+    Else
+        Call(ActorSpeak, MSG_CH6_00D6, LVar0, 1, ANIM_TuffPuff_Anim15, ANIM_TuffPuff_Anim03)
+    EndIf
+    Call(UseIdleAnimation, LVar0, TRUE)
     // Huff N Puff replies
-    EVT_LABEL(1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetBattleCamZoom, 180)
-    EVT_CALL(SetBattleCamOffsetZ, -10)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim24)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim25)
-    EVT_CALL(ActorSpeak, MSG_CH6_00D7, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim23, ANIM_HuffNPuff_Anim23)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_RETURN
-    EVT_END
+    Label(1)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_08)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetBattleCamZoom, 180)
+    Call(SetBattleCamOffsetZ, -10)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim24)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim25)
+    Call(ActorSpeak, MSG_CH6_00D7, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim23, ANIM_HuffNPuff_Anim23)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
     // if charged with less than 5 HP, switch upcoming move to a group slam
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_1)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_2)
-        EVT_CASE_OR_EQ(AVAL_Move_Charged_3)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
-            EVT_IF_LE(LVar0, 5)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Desperation)
-            EVT_END_IF
-    EVT_END_SWITCH
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseOrEq(AVAL_Move_Charged_1)
+        CaseOrEq(AVAL_Move_Charged_2)
+        CaseOrEq(AVAL_Move_Charged_3)
+        EndCaseGroup
+        CaseDefault
+            Call(GetActorHP, ACTOR_SELF, LVar0)
+            IfLe(LVar0, 5)
+                Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Desperation)
+            EndIf
+    EndSwitch
     // try dialogue before charging for the first time
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Move_PreCharge_1)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, AVAL_Dialogue_FullPower)
-                EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AVAL_Dialogue_FullPower)
-                EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_EXEC_WAIT(N(EVS_Dialogue_FullPower))
-            EVT_END_IF
-    EVT_END_SWITCH
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseEq(AVAL_Move_PreCharge_1)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            IfNotFlag(LVar0, AVAL_Dialogue_FullPower)
+                Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                BitwiseOrConst(LVar0, AVAL_Dialogue_FullPower)
+                Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                ExecWait(N(EVS_Dialogue_FullPower))
+            EndIf
+    EndSwitch
     // try Tuff Puff swarm attack
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-        EVT_IF_NOT_FLAG(LVar0, AVAL_Dialogue_Request)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_OR_CONST(LVar0, AVAL_Dialogue_Request)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_EXEC_WAIT(N(EVS_Dialogue_PummelPermission))
-        EVT_END_IF
-        EVT_EXEC_WAIT(N(EVS_Attack_TuffPuffSwarm))
-    EVT_END_IF
-    EVT_CALL(GetPlayerHP, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    IfNe(LVar0, 0)
+        Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+        IfNotFlag(LVar0, AVAL_Dialogue_Request)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseOrConst(LVar0, AVAL_Dialogue_Request)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            ExecWait(N(EVS_Dialogue_PummelPermission))
+        EndIf
+        ExecWait(N(EVS_Attack_TuffPuffSwarm))
+    EndIf
+    Call(GetPlayerHP, LVar0)
+    IfEq(LVar0, 0)
+        Return
+    EndIf
     // try dialogue before first group slam
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Move_Desperation)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, AVAL_Dialogue_Concerned)
-                EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AVAL_Dialogue_Concerned)
-                EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_EXEC_WAIT(N(EVS_Dialogue_Concerned))
-            EVT_END_IF
-    EVT_END_SWITCH
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseEq(AVAL_Move_Desperation)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            IfNotFlag(LVar0, AVAL_Dialogue_Concerned)
+                Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                BitwiseOrConst(LVar0, AVAL_Dialogue_Concerned)
+                Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                ExecWait(N(EVS_Dialogue_Concerned))
+            EndIf
+    EndSwitch
     // select move according to fixed rotation through states
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Move_Basic_1)
-            EVT_EXEC_WAIT(N(EVS_Move_HealOrSlam))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Breath_1)
-        EVT_CASE_EQ(AVAL_Move_Breath_1)
-            EVT_EXEC_WAIT(N(EVS_Move_HurricaneBreath))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_2)
-        EVT_CASE_EQ(AVAL_Move_Basic_2)
-            EVT_EXEC_WAIT(N(EVS_Move_HealOrSlam))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_PreCharge_1)
-        EVT_CASE_EQ(AVAL_Move_PreCharge_1)
-            EVT_EXEC_WAIT(N(EVS_Move_ChargeForGround))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Charged_1)
-        EVT_CASE_EQ(AVAL_Move_Charged_1)
-            EVT_EXEC_WAIT(N(EVS_Attack_GroundLightning))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_3)
-        EVT_CASE_EQ(AVAL_Move_Basic_3)
-            EVT_EXEC_WAIT(N(EVS_Move_HealOrSlam))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Breath_2)
-        EVT_CASE_EQ(AVAL_Move_Breath_2)
-            EVT_EXEC_WAIT(N(EVS_Move_HurricaneBreath))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_PreCharge_2)
-        EVT_CASE_EQ(AVAL_Move_PreCharge_2)
-            EVT_EXEC_WAIT(N(EVS_Move_ChargeForDirect))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Charged_2)
-        EVT_CASE_EQ(AVAL_Move_Charged_2)
-            EVT_EXEC_WAIT(N(EVS_Attack_DirectLightning))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_4)
-        EVT_CASE_EQ(AVAL_Move_Basic_4)
-            EVT_EXEC_WAIT(N(EVS_Move_HealOrSlam))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_PreCharge_3)
-        EVT_CASE_EQ(AVAL_Move_PreCharge_3)
-            EVT_EXEC_WAIT(N(EVS_Move_ChargeForGround))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Charged_3)
-        EVT_CASE_EQ(AVAL_Move_Charged_3)
-            EVT_EXEC_WAIT(N(EVS_Attack_GroundLightning))
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_1)
-        EVT_CASE_EQ(AVAL_Move_Desperation)
-            EVT_EXEC_WAIT(N(EVS_Attack_GroupSlam))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_NextMove, LVar0)
+    Switch(LVar0)
+        CaseEq(AVAL_Move_Basic_1)
+            ExecWait(N(EVS_Move_HealOrSlam))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Breath_1)
+        CaseEq(AVAL_Move_Breath_1)
+            ExecWait(N(EVS_Move_HurricaneBreath))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_2)
+        CaseEq(AVAL_Move_Basic_2)
+            ExecWait(N(EVS_Move_HealOrSlam))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_PreCharge_1)
+        CaseEq(AVAL_Move_PreCharge_1)
+            ExecWait(N(EVS_Move_ChargeForGround))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Charged_1)
+        CaseEq(AVAL_Move_Charged_1)
+            ExecWait(N(EVS_Attack_GroundLightning))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_3)
+        CaseEq(AVAL_Move_Basic_3)
+            ExecWait(N(EVS_Move_HealOrSlam))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Breath_2)
+        CaseEq(AVAL_Move_Breath_2)
+            ExecWait(N(EVS_Move_HurricaneBreath))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_PreCharge_2)
+        CaseEq(AVAL_Move_PreCharge_2)
+            ExecWait(N(EVS_Move_ChargeForDirect))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Charged_2)
+        CaseEq(AVAL_Move_Charged_2)
+            ExecWait(N(EVS_Attack_DirectLightning))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_4)
+        CaseEq(AVAL_Move_Basic_4)
+            ExecWait(N(EVS_Move_HealOrSlam))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_PreCharge_3)
+        CaseEq(AVAL_Move_PreCharge_3)
+            ExecWait(N(EVS_Move_ChargeForGround))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Charged_3)
+        CaseEq(AVAL_Move_Charged_3)
+            ExecWait(N(EVS_Attack_GroundLightning))
+            Call(SetActorVar, ACTOR_SELF, AVAR_NextMove, AVAL_Move_Basic_1)
+        CaseEq(AVAL_Move_Desperation)
+            ExecWait(N(EVS_Attack_GroupSlam))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_CALL(GetBattlePhase, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
-        EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
-        EVT_CASE_EQ(PHASE_ENEMY_END)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AVAR_Flag_LightningHit)
-                EVT_IF_NOT_FLAG(LVar0, AVAL_Dialogue_Praise)
-                    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                    EVT_BITWISE_OR_CONST(LVar0, AVAL_Dialogue_Praise)
-                    EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                    EVT_EXEC_WAIT(N(EVS_Dialogue_PraiseHuff))
-                EVT_END_IF
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattlePhase, LVar0)
+    Switch(LVar0)
+        CaseEq(PHASE_PLAYER_BEGIN)
+        CaseEq(PHASE_ENEMY_BEGIN)
+        CaseEq(PHASE_ENEMY_END)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            IfFlag(LVar0, AVAR_Flag_LightningHit)
+                IfNotFlag(LVar0, AVAL_Dialogue_Praise)
+                    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                    BitwiseOrConst(LVar0, AVAL_Dialogue_Praise)
+                    Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                    ExecWait(N(EVS_Dialogue_PraiseHuff))
+                EndIf
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_BodySlam) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(AddBattleCamZoom, -200)
-    EVT_CALL(SetBattleCamOffsetZ, -30)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
-    EVT_SETF(LVar2, EVT_FLOAT(62.5))
-    EVT_SETF(LVar3, EVT_FLOAT(47.5))
-    EVT_MULF(LVar2, LVar0)
-    EVT_MULF(LVar3, LVar1)
-    EVT_DIVF(LVar2, EVT_FLOAT(100.0))
-    EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-    EVT_CALL(AddGoalPos, ACTOR_SELF, LVar2, LVar3, 0)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 20, 0)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
-    EVT_WAIT(10)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0B)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0C)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim0D)
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(GetGoalPos, ACTOR_SELF, LVar5, LVar6, LVar7)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar5, LVar3, LVar7)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(0.8))
-            EVT_END_THREAD
-            EVT_IF_EQ(LVar0, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
-            EVT_CALL(AddGoalPos, ACTOR_SELF, -80, 0, 0)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 25, FALSE, FALSE, FALSE)
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 8, EVT_FLOAT(0.6))
-            EVT_END_THREAD
-            EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 6, EVT_FLOAT(0.4))
-            EVT_END_THREAD
-            EVT_CALL(AddGoalPos, ACTOR_SELF, -30, 0, 0)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(0.2))
-            EVT_END_THREAD
-            EVT_CALL(AddGoalPos, ACTOR_SELF, -20, 0, 0)
-            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
-            EVT_WAIT(30)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 80, -20, EASING_SIN_OUT)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0B)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0C)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim0D)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 0, LVar3, 5)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 0, -30, 0)
-    EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
-    EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
-    EVT_WAIT(2)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
-    EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
-    EVT_MUL(LVar0, 100)
-    EVT_DIV(LVar0, LVar1)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_LE(20)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_LE(40)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_LE(60)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_LE(80)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_DEFAULT
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 20, EVT_FLOAT(1.0))
-            EVT_END_THREAD
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(GetBattleFlags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
-                EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-                EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_STONE)
-                    EVT_THREAD
-                        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                        EVT_ADD(LVar1, 10)
-                        EVT_WAIT(55)
-                        EVT_PLAY_EFFECT(EFFECT_CLOUD_PUFF, LVar0, LVar1, LVar2, 0, 0)
-                    EVT_END_THREAD
-                EVT_END_IF
-            EVT_END_IF
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
-            EVT_CALL(JumpWithBounce, ACTOR_SELF, 20, EVT_FLOAT(4.0))
-            EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(AddBattleCamZoom, -200)
+    Call(SetBattleCamOffsetZ, -30)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
+    SetF(LVar2, Float(62.5))
+    SetF(LVar3, Float(47.5))
+    MulF(LVar2, LVar0)
+    MulF(LVar3, LVar1)
+    DivF(LVar2, Float(100.0))
+    DivF(LVar3, Float(100.0))
+    Call(AddGoalPos, ACTOR_SELF, LVar2, LVar3, 0)
+    Call(AddGoalPos, ACTOR_SELF, 0, 20, 0)
+    Call(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
+    Wait(10)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_LARGE_ACTOR_JUMP)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0B)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0C)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim0D)
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(GetGoalPos, ACTOR_SELF, LVar5, LVar6, LVar7)
+            Call(SetGoalPos, ACTOR_SELF, LVar5, LVar3, LVar7)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 10, Float(0.8))
+            EndThread
+            IfEq(LVar0, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
+            Call(SetActorJumpGravity, ACTOR_SELF, Float(0.5))
+            Call(AddGoalPos, ACTOR_SELF, -80, 0, 0)
+            Call(JumpToGoal, ACTOR_SELF, 25, FALSE, FALSE, FALSE)
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 8, Float(0.6))
+            EndThread
+            Call(AddGoalPos, ACTOR_SELF, -50, 0, 0)
+            Call(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 6, Float(0.4))
+            EndThread
+            Call(AddGoalPos, ACTOR_SELF, -30, 0, 0)
+            Call(JumpToGoal, ACTOR_SELF, 15, FALSE, FALSE, FALSE)
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 4, Float(0.2))
+            EndThread
+            Call(AddGoalPos, ACTOR_SELF, -20, 0, 0)
+            Call(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+            Wait(30)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 80, -20, EASING_SIN_OUT)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0B)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0C)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim0D)
+    Call(SetActorJumpGravity, ACTOR_SELF, Float(1.0))
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(AddGoalPos, ACTOR_SELF, 0, LVar3, 5)
+    Call(AddGoalPos, ACTOR_SELF, 0, -30, 0)
+    Call(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
+    Call(SetDamageSource, DMG_SRC_CRUSH)
+    Wait(2)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetActorHP, ACTOR_SELF, LVar0)
+    Call(GetEnemyMaxHP, ACTOR_SELF, LVar1)
+    Mul(LVar0, 100)
+    Div(LVar0, LVar1)
+    Switch(LVar0)
+        CaseLe(20)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseLe(40)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseLe(60)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseLe(80)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseDefault
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_SHOCK_CONTACT, 0, DMG_SLAM, BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 20, Float(1.0))
+            EndThread
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(GetBattleFlags, LVar0)
+            IfNotFlag(LVar0, BS_FLAGS1_ATK_BLOCKED)
+                Call(GetStatusFlags, ACTOR_PLAYER, LVar0)
+                IfNotFlag(LVar0, STATUS_FLAG_STONE)
+                    Thread
+                        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                        Add(LVar1, 10)
+                        Wait(55)
+                        PlayEffect(EFFECT_CLOUD_PUFF, LVar0, LVar1, LVar2, 0, 0)
+                    EndThread
+                EndIf
+            EndIf
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(AddGoalPos, ACTOR_SELF, 30, 0, 0)
+            Call(JumpWithBounce, ACTOR_SELF, 20, Float(4.0))
+            Wait(20)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_RuffPuff_Inhale) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(SetOwnerID, LVar0) // note: ownership transferred to Tuff Puff actor here
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(GetActorPos, ACTOR_HUFF_N_PUFF, LVar5, LVar6, LVar7)
-    EVT_ADD(LVar5, -13)
-    EVT_ADD(LVar6, 0)
-    EVT_ADD(LVar7, 0)
-    EVT_CALL(N(MakeSuctionPath), LVar1, LVar2, LVar3, LVar4, LVar5, LVar6, LVar7)
-    EVT_THREAD
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 1)
-        EVT_WAIT(10)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_TuffPuff_IsLarge, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim12)
-        EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim13)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_THREAD
-        EVT_WAIT(35)
-        EVT_CALL(MakeLerp, 255, 0, 10, EASING_LINEAR)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
-    EVT_END_THREAD
-    EVT_SWITCH(LVar1)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(SetOwnerID, LVar0) // note: ownership transferred to Tuff Puff actor here
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
+    Call(GetActorPos, ACTOR_HUFF_N_PUFF, LVar5, LVar6, LVar7)
+    Add(LVar5, -13)
+    Add(LVar6, 0)
+    Add(LVar7, 0)
+    Call(N(MakeSuctionPath), LVar1, LVar2, LVar3, LVar4, LVar5, LVar6, LVar7)
+    Thread
+        Call(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 1)
+        Wait(10)
+        Call(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_TuffPuff_IsLarge, LVar0)
+        IfEq(LVar0, 0)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim12)
+        Else
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Anim13)
+        EndIf
+    EndThread
+    Wait(15)
+    Thread
+        Wait(35)
+        Call(MakeLerp, 255, 0, 10, EASING_LINEAR)
+        Label(10)
+            Call(UpdateLerp)
+            Call(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        Call(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
+    EndThread
+    Switch(LVar1)
 
         #define HNP_LOAD_SUCTION_PATH(idx) \
-            EVT_CASE_EQ(idx) \
-                EVT_CALL(LoadPath, 40, EVT_PTR(N(SuctionPaths)[idx]), 3, EASING_QUADRATIC_IN)
+            CaseEq(idx) \
+                Call(LoadPath, 40, Ref(N(SuctionPaths)[idx]), 3, EASING_QUADRATIC_IN)
         
         // select the suction path for this Tuff Puff
         FOR_CHILDREN_ORDERED(HNP_LOAD_SUCTION_PATH)
 
-    EVT_END_SWITCH
-    EVT_LABEL(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVarA)
-    EVT_MUL(LVarA, 1)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
-    EVT_ADD(LVar0, LVarA)
-    EVT_IF_GT(LVar0, 100)
-        EVT_SET(LVar0, 100)
-    EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar0)
-    EVT_ADD(LVar0, LVarA)
-    EVT_IF_GT(LVar0, 100)
-        EVT_SET(LVar0, 100)
-    EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar0)
-    EVT_EXEC_WAIT(N(EVS_UpdateSize))
-    EVT_WAIT(10)
-    EVT_CALL(RemoveActor, ACTOR_SELF)
-    EVT_RETURN
-    EVT_END
+    EndSwitch
+    Label(0)
+        Call(GetNextPathPos)
+        Call(SetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(0)
+        EndIf
+    Call(GetEnemyMaxHP, ACTOR_SELF, LVarA)
+    Mul(LVarA, 1)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
+    Add(LVar0, LVarA)
+    IfGt(LVar0, 100)
+        Set(LVar0, 100)
+    EndIf
+    Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar0)
+    Add(LVar0, LVarA)
+    IfGt(LVar0, 100)
+        Set(LVar0, 100)
+    EndIf
+    Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_ScaleY, LVar0)
+    ExecWait(N(EVS_UpdateSize))
+    Wait(10)
+    Call(RemoveActor, ACTOR_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_Move_HealOrSlam) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
+    UseArray(N(RuffPuffDataBuffer))
     // use basic attack if no Tuff Puffs are present
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar9)
-    EVT_IF_EQ(LVar9, 0)
-        EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(LVarA, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar9)
+    IfEq(LVar9, 0)
+        ExecWait(N(EVS_Attack_BodySlam))
+        Return
+    EndIf
+    Set(LVarA, 0)
 
     #define HNP_ADD_HEAL_VALUE(idx) \
-        EVT_IF_FLAG(LVar9, 1 << idx) \
-            EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_HealValue, LVarB) \
-            EVT_ADD(LVarA, LVarB) \
-        EVT_END_IF
+        IfFlag(LVar9, 1 << idx) \
+            Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_HealValue, LVarB) \
+            Add(LVarA, LVarB) \
+        EndIf
 
     // add heal values from Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_ADD_HEAL_VALUE)
 
     // 50% chance to use basic attack if healing would give 2 or less HP and Huff has healed before
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-    EVT_IF_FLAG(LVar0, AVAL_Flag_HasHealed)
-        EVT_IF_LE(LVarA, 2)
-            EVT_CALL(RandInt, 100, LVarB)
-            EVT_IF_LT(LVarB, 50)
-                EVT_EXEC_WAIT(N(EVS_Attack_BodySlam))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, -13)
-    EVT_ADD(LVar1, 0)
-    EVT_ADD(LVar2, 0)
-    EVT_CALL(N(HuffPuffBreath), 0, LVar0, LVar1, LVar2, EVT_FLOAT(180.0), EVT_FLOAT(-1.0), EVT_FLOAT(1.2), 0, LVar8)
-    EVT_CALL(N(StartRumbleWithParams), 80, 220)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 110, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
-    EVT_SET(LVar1, 0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+    IfFlag(LVar0, AVAL_Flag_HasHealed)
+        IfLe(LVarA, 2)
+            Call(RandInt, 100, LVarB)
+            IfLt(LVarB, 50)
+                ExecWait(N(EVS_Attack_BodySlam))
+                Return
+            EndIf
+        EndIf
+    EndIf
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, -13)
+    Add(LVar1, 0)
+    Add(LVar2, 0)
+    Call(N(HuffPuffBreath), 0, LVar0, LVar1, LVar2, Float(180.0), Float(-1.0), Float(1.2), 0, LVar8)
+    Call(N(StartRumbleWithParams), 80, 220)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 110, Float(0.3))
+    EndThread
+    Wait(20)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
+    Set(LVar1, 0)
 
     #define HNP_INHALE_CHILD(idx) \
-        EVT_IF_FLAG(LVar9, 1 << idx) \
-            EVT_SET(LVar0, ArrayVar(idx)) \
-            EVT_EXEC_GET_TID(N(EVS_RuffPuff_Inhale), LVar7) \
-            EVT_ADD(LVar1, 1) \
-            EVT_WAIT(5) \
-        EVT_END_IF
+        IfFlag(LVar9, 1 << idx) \
+            Set(LVar0, ArrayVar(idx)) \
+            ExecGetTID(N(EVS_RuffPuff_Inhale), LVar7) \
+            Add(LVar1, 1) \
+            Wait(5) \
+        EndIf
 
     // inhale each Tuff Puff
     FOR_CHILDREN_SCATTERED(HNP_INHALE_CHILD)
 
-    EVT_LABEL(0)
-    EVT_IS_THREAD_RUNNING(LVar7, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(RemoveEffect, LVar8)
-    EVT_CALL(StopSound, SOUND_HUFF_N_PUFF_INHALE)
-    EVT_CALL(StopSound, SOUND_BIG_POWER_UP)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim18)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim19)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-    EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, LVar3, 0)
-    EVT_ADD(LVar0, 20)
-    EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVarA, 0)
-    EVT_CALL(GetActorHP, ACTOR_SELF, LVarB)
-    EVT_ADD(LVarB, LVarA)
-    EVT_CALL(SetEnemyHP, ACTOR_SELF, LVarB)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChildBits, 0)
-    EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-    EVT_BITWISE_OR_CONST(LVar0, AVAL_Flag_HasHealed)
-    EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-    EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    IsThreadRunning(LVar7, LVar0)
+        Wait(1)
+        IfEq(LVar0, 1)
+            Goto(0)
+        EndIf
+    Call(RemoveEffect, LVar8)
+    Call(StopSound, SOUND_HUFF_N_PUFF_INHALE)
+    Call(StopSound, SOUND_BIG_POWER_UP)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim17)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim18)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim19)
+    Thread
+        Wait(5)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_RECOVER_HEART)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEART_BOUNCE)
+    EndThread
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+    PlayEffect(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, LVar3, 0)
+    Add(LVar0, 20)
+    PlayEffect(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVarA, 0)
+    Call(GetActorHP, ACTOR_SELF, LVarB)
+    Add(LVarB, LVarA)
+    Call(SetEnemyHP, ACTOR_SELF, LVarB)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ChildBits, 0)
+    Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+    BitwiseOrConst(LVar0, AVAL_Flag_HasHealed)
+    Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+    Wait(30)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Move_HurricaneBreath) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
-    EVT_MULF(LVar3, EVT_FLOAT(-13.0))
-    EVT_MULF(LVar4, EVT_FLOAT(0.0))
-    EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-    EVT_DIVF(LVar4, EVT_FLOAT(100.0))
-    EVT_ADD(LVar0, LVar3)
-    EVT_ADD(LVar1, LVar4)
-    EVT_PLAY_EFFECT(EFFECT_HUFF_PUFF_BREATH, 1, LVar0, LVar1, LVar2, EVT_FLOAT(190.0), EVT_FLOAT(-1.0), EVT_FLOAT(1.5), 100, 0)
-    EVT_CALL(N(StartRumbleWithParams), 80, 150)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 75, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-        EVT_SET(LVar3, LVar2)
-        EVT_ADD(LVar3, 25)
-        EVT_CALL(MakeLerp, LVar2, LVar3, 90, EASING_SIN_OUT)
-        EVT_LABEL(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
-        EVT_SET(LVar3, LVar2)
-        EVT_ADD(LVar3, 25)
-        EVT_CALL(MakeLerp, LVar2, LVar3, 90, EASING_SIN_OUT)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
-    EVT_END_THREAD
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 20)
-    EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamZoom, 300)
-    EVT_CALL(SetBattleCamOffsetZ, 20)
-    EVT_CALL(MoveBattleCamOver, 180)
-    EVT_WAIT(90)
-    EVT_CALL(StopSound, SOUND_HUFF_N_PUFF_INHALE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1D)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1E)
-    EVT_WAIT(60)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim20)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim21)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim22)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_WIND_LOOP)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 15)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_THREAD
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-                EVT_SET(LVar3, LVar2)
-                EVT_SUB(LVar3, 25)
-                EVT_CALL(MakeLerp, LVar2, LVar3, 40, EASING_CUBIC_IN)
-                EVT_LABEL(2)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 1)
-                        EVT_GOTO(2)
-                    EVT_END_IF
-            EVT_END_THREAD
-            EVT_THREAD
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
-                EVT_SET(LVar3, LVar2)
-                EVT_SUB(LVar3, 25)
-                EVT_CALL(MakeLerp, LVar2, LVar3, 40, EASING_CUBIC_IN)
-                EVT_LABEL(3)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
-                    EVT_WAIT(1)
-                    EVT_IF_EQ(LVar1, 1)
-                        EVT_GOTO(3)
-                    EVT_END_IF
-            EVT_END_THREAD
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
-            EVT_MULF(LVar3, EVT_FLOAT(-20.0))
-            EVT_MULF(LVar4, EVT_FLOAT(-20.0))
-            EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-            EVT_DIVF(LVar4, EVT_FLOAT(100.0))
-            EVT_ADD(LVar0, LVar3)
-            EVT_ADD(LVar1, LVar4)
-            EVT_PLAY_EFFECT(EFFECT_HUFF_PUFF_BREATH, 0, LVar0, LVar1, LVar2, EVT_FLOAT(190.0), EVT_FLOAT(1.5), EVT_FLOAT(1.0), 40, 0)
-            EVT_CALL(N(StartRumbleWithParams), 80, 60)
-            EVT_THREAD
-                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 30, EVT_FLOAT(0.3))
-            EVT_END_THREAD
-            EVT_LOOP(10)
-                EVT_CALL(RandInt, 150, LVar3)
-                EVT_CALL(RandInt, 100, LVar4)
-                EVT_ADD(LVar3, 50)
-                EVT_SETF(LVar4, EVT_FLOAT(5.0))
-                EVT_CALL(RandInt, 4, LVar5)
-                EVT_ADDF(LVar4, LVar5)
-                EVT_DIVF(LVar4, EVT_FLOAT(10.0))
-                EVT_SETF(LVar5, EVT_FLOAT(100.0))
-                EVT_CALL(RandInt, 40, LVar6)
-                EVT_ADDF(LVar5, LVar6)
-                EVT_DIVF(LVar5, EVT_FLOAT(10.0))
-                EVT_PLAY_EFFECT(EFFECT_MOVING_CLOUD, 0, 200, LVar3, 5, -200, LVar4, 5, LVar5, LVar4, 0)
-                EVT_CALL(RandInt, 5, LVar0)
-                EVT_ADD(LVar0, 5)
-                EVT_WAIT(LVar0)
-            EVT_END_LOOP
-            EVT_WAIT(20)
-            EVT_CALL(StopSound, SOUND_HEAVY_WIND_LOOP)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
-            EVT_WAIT(20)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_STONE)
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
-        EVT_CALL(ShowActionHud, TRUE)
-        EVT_CALL(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
-        EVT_CALL(action_command_whirlwind_init, 0)
-        EVT_CALL(SetupMashMeter, 5, 20, 40, 60, 80, 100)
-        EVT_WAIT(10)
-        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        EVT_CALL(action_command_whirlwind_start, 0, 200 * DT, 3)
-        EVT_THREAD
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-            EVT_SET(LVar3, LVar2)
-            EVT_SUB(LVar3, 25)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 200, EASING_CUBIC_IN)
-            EVT_LABEL(4)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(4)
-                EVT_END_IF
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
-            EVT_SET(LVar3, LVar2)
-            EVT_SUB(LVar3, 25)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 200, EASING_CUBIC_IN)
-            EVT_LABEL(5)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(5)
-                EVT_END_IF
-        EVT_END_THREAD
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
-        EVT_MULF(LVar3, EVT_FLOAT(-20.0))
-        EVT_MULF(LVar4, EVT_FLOAT(-20.0))
-        EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-        EVT_DIVF(LVar4, EVT_FLOAT(100.0))
-        EVT_ADD(LVar0, LVar3)
-        EVT_ADD(LVar1, LVar4)
-        EVT_PLAY_EFFECT(EFFECT_HUFF_PUFF_BREATH, 0, LVar0, LVar1, LVar2, EVT_FLOAT(190.0), EVT_FLOAT(1.5), EVT_FLOAT(1.0), 200, 0)
-        EVT_CALL(N(StartRumbleWithParams), 100, 350)
-        EVT_THREAD
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 175, EVT_FLOAT(0.3))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_LOOP(25)
-                EVT_CALL(RandInt, 150, LVar3)
-                EVT_CALL(RandInt, 100, LVar4)
-                EVT_ADD(LVar3, 50)
-                EVT_SETF(LVar4, EVT_FLOAT(5.0))
-                EVT_CALL(RandInt, 4, LVar5)
-                EVT_ADDF(LVar4, LVar5)
-                EVT_DIVF(LVar4, EVT_FLOAT(10.0))
-                EVT_SETF(LVar5, EVT_FLOAT(100.0))
-                EVT_CALL(RandInt, 40, LVar6)
-                EVT_ADDF(LVar5, LVar6)
-                EVT_DIVF(LVar5, EVT_FLOAT(10.0))
-                EVT_PLAY_EFFECT(EFFECT_MOVING_CLOUD, 0, 200, LVar3, 5, -200, LVar4, 5, LVar5, LVar4, 0)
-                EVT_CALL(RandInt, 5, LVar0)
-                EVT_ADD(LVar0, 5)
-                EVT_WAIT(LVar0)
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_CALL(MakeLerp, 0, 7200, 200, EASING_SIN_OUT)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_CALL(GetActionQuality, LVar1)
-    EVT_ELSE
-        EVT_THREAD
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-            EVT_SET(LVar3, LVar2)
-            EVT_SUB(LVar3, 25)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
-            EVT_LABEL(6)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(6)
-                EVT_END_IF
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
-            EVT_SET(LVar3, LVar2)
-            EVT_SUB(LVar3, 25)
-            EVT_CALL(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
-            EVT_LABEL(7)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(7)
-                EVT_END_IF
-        EVT_END_THREAD
-        EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
-        EVT_MULF(LVar3, EVT_FLOAT(-20.0))
-        EVT_MULF(LVar4, EVT_FLOAT(-20.0))
-        EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-        EVT_DIVF(LVar4, EVT_FLOAT(100.0))
-        EVT_ADD(LVar0, LVar3)
-        EVT_ADD(LVar1, LVar4)
-        EVT_PLAY_EFFECT(EFFECT_HUFF_PUFF_BREATH, 0, LVar0, LVar1, LVar2, EVT_FLOAT(190.0), EVT_FLOAT(1.5), EVT_FLOAT(1.0), 100, 0)
-        EVT_CALL(N(StartRumbleWithParams), 100, 200)
-        EVT_THREAD
-            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 100, EVT_FLOAT(0.3))
-        EVT_END_THREAD
-        EVT_THREAD
-            EVT_LOOP(15)
-                EVT_CALL(RandInt, 150, LVar3)
-                EVT_CALL(RandInt, 100, LVar4)
-                EVT_ADD(LVar3, 50)
-                EVT_SETF(LVar4, EVT_FLOAT(5.0))
-                EVT_CALL(RandInt, 4, LVar5)
-                EVT_ADDF(LVar4, LVar5)
-                EVT_DIVF(LVar4, EVT_FLOAT(10.0))
-                EVT_SETF(LVar5, EVT_FLOAT(100.0))
-                EVT_CALL(RandInt, 40, LVar6)
-                EVT_ADDF(LVar5, LVar6)
-                EVT_DIVF(LVar5, EVT_FLOAT(10.0))
-                EVT_PLAY_EFFECT(EFFECT_MOVING_CLOUD, 0, 200, LVar3, 5, -200, LVar4, 5, LVar5, LVar4, 0)
-                EVT_CALL(RandInt, 5, LVar0)
-                EVT_ADD(LVar0, 5)
-                EVT_WAIT(LVar0)
-            EVT_END_LOOP
-        EVT_END_THREAD
-        EVT_WAIT(110)
-        EVT_SET(LVar1, 0)
-    EVT_END_IF
-    EVT_CALL(StopSound, SOUND_HEAVY_WIND_LOOP)
-    EVT_WAIT(2)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_6, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(1)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_5, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(2)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_4, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(3)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_3, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_EQ(4)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_2, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_CASE_DEFAULT
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_1, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-            EVT_WAIT(20)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
+    MulF(LVar3, Float(-13.0))
+    MulF(LVar4, Float(0.0))
+    DivF(LVar3, Float(100.0))
+    DivF(LVar4, Float(100.0))
+    Add(LVar0, LVar3)
+    Add(LVar1, LVar4)
+    PlayEffect(EFFECT_HUFF_PUFF_BREATH, 1, LVar0, LVar1, LVar2, Float(190.0), Float(-1.0), Float(1.5), 100, 0)
+    Call(N(StartRumbleWithParams), 80, 150)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 75, Float(0.3))
+    EndThread
+    Thread
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+        Set(LVar3, LVar2)
+        Add(LVar3, 25)
+        Call(MakeLerp, LVar2, LVar3, 90, EASING_SIN_OUT)
+        Label(0)
+            Call(UpdateLerp)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(0)
+            EndIf
+    EndThread
+    Thread
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
+        Set(LVar3, LVar2)
+        Add(LVar3, 25)
+        Call(MakeLerp, LVar2, LVar3, 90, EASING_SIN_OUT)
+        Label(1)
+            Call(UpdateLerp)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+    EndThread
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_INHALE)
+    Thread
+        Wait(15)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
+    EndThread
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar0, 20)
+    Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+    Call(SetBattleCamZoom, 300)
+    Call(SetBattleCamOffsetZ, 20)
+    Call(MoveBattleCamOver, 180)
+    Wait(90)
+    Call(StopSound, SOUND_HUFF_N_PUFF_INHALE)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1D)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1E)
+    Wait(60)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim20)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim21)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim22)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_WIND_LOOP)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 15)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Set(LVarA, LVar0)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Thread
+                Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+                Set(LVar3, LVar2)
+                Sub(LVar3, 25)
+                Call(MakeLerp, LVar2, LVar3, 40, EASING_CUBIC_IN)
+                Label(2)
+                    Call(UpdateLerp)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+                    Wait(1)
+                    IfEq(LVar1, 1)
+                        Goto(2)
+                    EndIf
+            EndThread
+            Thread
+                Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
+                Set(LVar3, LVar2)
+                Sub(LVar3, 25)
+                Call(MakeLerp, LVar2, LVar3, 40, EASING_CUBIC_IN)
+                Label(3)
+                    Call(UpdateLerp)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
+                    Wait(1)
+                    IfEq(LVar1, 1)
+                        Goto(3)
+                    EndIf
+            EndThread
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
+            MulF(LVar3, Float(-20.0))
+            MulF(LVar4, Float(-20.0))
+            DivF(LVar3, Float(100.0))
+            DivF(LVar4, Float(100.0))
+            Add(LVar0, LVar3)
+            Add(LVar1, LVar4)
+            PlayEffect(EFFECT_HUFF_PUFF_BREATH, 0, LVar0, LVar1, LVar2, Float(190.0), Float(1.5), Float(1.0), 40, 0)
+            Call(N(StartRumbleWithParams), 80, 60)
+            Thread
+                Call(ShakeCam, CAM_BATTLE, 0, 30, Float(0.3))
+            EndThread
+            Loop(10)
+                Call(RandInt, 150, LVar3)
+                Call(RandInt, 100, LVar4)
+                Add(LVar3, 50)
+                SetF(LVar4, Float(5.0))
+                Call(RandInt, 4, LVar5)
+                AddF(LVar4, LVar5)
+                DivF(LVar4, Float(10.0))
+                SetF(LVar5, Float(100.0))
+                Call(RandInt, 40, LVar6)
+                AddF(LVar5, LVar6)
+                DivF(LVar5, Float(10.0))
+                PlayEffect(EFFECT_MOVING_CLOUD, 0, 200, LVar3, 5, -200, LVar4, 5, LVar5, LVar4, 0)
+                Call(RandInt, 5, LVar0)
+                Add(LVar0, 5)
+                Wait(LVar0)
+            EndLoop
+            Wait(20)
+            Call(StopSound, SOUND_HEAVY_WIND_LOOP)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
+            Wait(20)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(GetStatusFlags, ACTOR_PLAYER, LVar0)
+    IfNotFlag(LVar0, STATUS_FLAG_STONE)
+        Call(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
+        Call(ShowActionHud, TRUE)
+        Call(LoadActionCommand, ACTION_COMMAND_WHIRLWIND)
+        Call(action_command_whirlwind_init, 0)
+        Call(SetupMashMeter, 5, 20, 40, 60, 80, 100)
+        Wait(10)
+        Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+        Call(action_command_whirlwind_start, 0, 200 * DT, 3)
+        Thread
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+            Set(LVar3, LVar2)
+            Sub(LVar3, 25)
+            Call(MakeLerp, LVar2, LVar3, 200, EASING_CUBIC_IN)
+            Label(4)
+                Call(UpdateLerp)
+                Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(4)
+                EndIf
+        EndThread
+        Thread
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
+            Set(LVar3, LVar2)
+            Sub(LVar3, 25)
+            Call(MakeLerp, LVar2, LVar3, 200, EASING_CUBIC_IN)
+            Label(5)
+                Call(UpdateLerp)
+                Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(5)
+                EndIf
+        EndThread
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
+        MulF(LVar3, Float(-20.0))
+        MulF(LVar4, Float(-20.0))
+        DivF(LVar3, Float(100.0))
+        DivF(LVar4, Float(100.0))
+        Add(LVar0, LVar3)
+        Add(LVar1, LVar4)
+        PlayEffect(EFFECT_HUFF_PUFF_BREATH, 0, LVar0, LVar1, LVar2, Float(190.0), Float(1.5), Float(1.0), 200, 0)
+        Call(N(StartRumbleWithParams), 100, 350)
+        Thread
+            Call(ShakeCam, CAM_BATTLE, 0, 175, Float(0.3))
+        EndThread
+        Thread
+            Loop(25)
+                Call(RandInt, 150, LVar3)
+                Call(RandInt, 100, LVar4)
+                Add(LVar3, 50)
+                SetF(LVar4, Float(5.0))
+                Call(RandInt, 4, LVar5)
+                AddF(LVar4, LVar5)
+                DivF(LVar4, Float(10.0))
+                SetF(LVar5, Float(100.0))
+                Call(RandInt, 40, LVar6)
+                AddF(LVar5, LVar6)
+                DivF(LVar5, Float(10.0))
+                PlayEffect(EFFECT_MOVING_CLOUD, 0, 200, LVar3, 5, -200, LVar4, 5, LVar5, LVar4, 0)
+                Call(RandInt, 5, LVar0)
+                Add(LVar0, 5)
+                Wait(LVar0)
+            EndLoop
+        EndThread
+        Call(MakeLerp, 0, 7200, 200, EASING_SIN_OUT)
+        Label(10)
+            Call(UpdateLerp)
+            Call(SetActorYaw, ACTOR_PLAYER, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        Call(GetActionQuality, LVar1)
+    Else
+        Thread
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+            Set(LVar3, LVar2)
+            Sub(LVar3, 25)
+            Call(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
+            Label(6)
+                Call(UpdateLerp)
+                Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(6)
+                EndIf
+        EndThread
+        Thread
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar2)
+            Set(LVar3, LVar2)
+            Sub(LVar3, 25)
+            Call(MakeLerp, LVar2, LVar3, 100, EASING_CUBIC_IN)
+            Label(7)
+                Call(UpdateLerp)
+                Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(7)
+                EndIf
+        EndThread
+        Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
+        MulF(LVar3, Float(-20.0))
+        MulF(LVar4, Float(-20.0))
+        DivF(LVar3, Float(100.0))
+        DivF(LVar4, Float(100.0))
+        Add(LVar0, LVar3)
+        Add(LVar1, LVar4)
+        PlayEffect(EFFECT_HUFF_PUFF_BREATH, 0, LVar0, LVar1, LVar2, Float(190.0), Float(1.5), Float(1.0), 100, 0)
+        Call(N(StartRumbleWithParams), 100, 200)
+        Thread
+            Call(ShakeCam, CAM_BATTLE, 0, 100, Float(0.3))
+        EndThread
+        Thread
+            Loop(15)
+                Call(RandInt, 150, LVar3)
+                Call(RandInt, 100, LVar4)
+                Add(LVar3, 50)
+                SetF(LVar4, Float(5.0))
+                Call(RandInt, 4, LVar5)
+                AddF(LVar4, LVar5)
+                DivF(LVar4, Float(10.0))
+                SetF(LVar5, Float(100.0))
+                Call(RandInt, 40, LVar6)
+                AddF(LVar5, LVar6)
+                DivF(LVar5, Float(10.0))
+                PlayEffect(EFFECT_MOVING_CLOUD, 0, 200, LVar3, 5, -200, LVar4, 5, LVar5, LVar4, 0)
+                Call(RandInt, 5, LVar0)
+                Add(LVar0, 5)
+                Wait(LVar0)
+            EndLoop
+        EndThread
+        Wait(110)
+        Set(LVar1, 0)
+    EndIf
+    Call(StopSound, SOUND_HEAVY_WIND_LOOP)
+    Wait(2)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Switch(LVar1)
+        CaseEq(0)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_6, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(1)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_5, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(2)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_4, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(3)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_3, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseEq(4)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_2, BS_FLAGS1_TRIGGER_EVENTS)
+        CaseDefault
+            Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_WIND_1, BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+            Wait(20)
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Move_ChargeForGround) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_EXEC_GET_TID(N(EVS_UpdateChargedJitter), LVarA)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamZoom, 400)
-    EVT_CALL(SetBattleCamOffsetZ, 5)
-    EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim12)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim13)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ChargedBodyAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_FACE, EVT_PTR(N(ChargedFaceAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, EVT_PTR(N(ChargedArmAnims)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(N(StartRumbleWithParams), 70, 120)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 60, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-    EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-    EVT_CALL(N(MakeSnakingStatic), LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
-    EVT_WAIT(60)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    ExecGetTID(N(EVS_UpdateChargedJitter), LVarA)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetZ, 5)
+    Call(MoveBattleCamOver, 60)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim11)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim12)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim13)
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ChargedBodyAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_FACE, Ref(N(ChargedFaceAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, Ref(N(ChargedArmAnims)))
+    Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
+    Call(N(StartRumbleWithParams), 70, 120)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 60, Float(0.3))
+    EndThread
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+    DivF(LVar3, Float(100.0))
+    Call(N(MakeSnakingStatic), LVar0, LVar1, LVar2, LVar3)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
+    Wait(60)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_GroundLightning) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamZoom, 400)
-    EVT_CALL(SetBattleCamOffsetZ, 5)
-    EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(N(StartRumbleWithParams), 70, 100)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 100, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_CALL(N(UnkBackgroundFunc3))
-    EVT_CALL(MakeLerp, 0, 200, 60, EASING_LINEAR)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(SetBackgroundAlpha), LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 10)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
-    EVT_CALL(RemoveEffect, LVar0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BodyAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_FACE, EVT_PTR(N(FaceAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, EVT_PTR(N(ArmAnims)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0E)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0F)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim10)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, FALSE)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(MakeLerp, 200, 0, 30, EASING_LINEAR)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetBackgroundAlpha), LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_LIGHTNING_BLAST)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar2, 10)
-    EVT_SET(LVar3, LVar0)
-    EVT_SUB(LVar3, 30)
-    EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, 1, LVar2, EVT_FLOAT(3.0), 30, 0)
-    EVT_WAIT(5)
-    EVT_CALL(N(StartRumbleWithParams), 256, 30)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(5.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(4.0))
-    EVT_END_THREAD
-    EVT_SETF(LVar6, EVT_FLOAT(0.0))
-    EVT_LOOP(10)
-        EVT_SET(LVar4, LVar3)
-        EVT_SET(LVar5, LVar2)
-        EVT_ADDF(LVar6, EVT_FLOAT(36.0))
-        EVT_CALL(AddVectorPolar, LVar4, LVar5, EVT_FLOAT(300.0), LVar6)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar3, 1, LVar2, LVar4, 1, LVar5, EVT_FLOAT(4.0), 30, 0)
-    EVT_END_LOOP
-    EVT_WAIT(10)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_IF_EQ(LVar0, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
-            EVT_WAIT(20)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_WAIT(2)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_GROUND_LIGHTNING, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar0)
-            EVT_IF_GT(LVar0, 0)
-                EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_BITWISE_OR_CONST(LVar0, AVAR_Flag_LightningHit)
-                EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_END_IF
-            EVT_WAIT(20)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetZ, 5)
+    Call(MoveBattleCamOver, 60)
+    Call(N(StartRumbleWithParams), 70, 100)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 100, Float(0.3))
+    EndThread
+    Call(N(UnkBackgroundFunc3))
+    Call(MakeLerp, 0, 200, 60, EASING_LINEAR)
+    Label(0)
+        Call(UpdateLerp)
+        Call(N(SetBackgroundAlpha), LVar0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Wait(20)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 10)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
+    KillThread(LVarA)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
+    Call(RemoveEffect, LVar0)
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BodyAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_FACE, Ref(N(FaceAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, Ref(N(ArmAnims)))
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0E)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0F)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim10)
+    Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, FALSE)
+    Thread
+        Wait(20)
+        Call(MakeLerp, 200, 0, 30, EASING_LINEAR)
+        Label(1)
+            Call(UpdateLerp)
+            Call(N(SetBackgroundAlpha), LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+    EndThread
+    Call(StopSound, SOUND_CHARGE_LIGHTNING)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_LIGHTNING_BLAST)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar2, 10)
+    Set(LVar3, LVar0)
+    Sub(LVar3, 30)
+    PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, 1, LVar2, Float(3.0), 30, 0)
+    Wait(5)
+    Call(N(StartRumbleWithParams), 256, 30)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(5.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(3.0))
+        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(4.0))
+    EndThread
+    SetF(LVar6, Float(0.0))
+    Loop(10)
+        Set(LVar4, LVar3)
+        Set(LVar5, LVar2)
+        AddF(LVar6, Float(36.0))
+        Call(AddVectorPolar, LVar4, LVar5, Float(300.0), LVar6)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar3, 1, LVar2, LVar4, 1, LVar5, Float(4.0), 30, 0)
+    EndLoop
+    Wait(10)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            IfEq(LVar0, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
+            Wait(20)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Wait(2)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_GROUND_LIGHTNING, BS_FLAGS1_TRIGGER_EVENTS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(GetLastDamage, ACTOR_PLAYER, LVar0)
+            IfGt(LVar0, 0)
+                Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                BitwiseOrConst(LVar0, AVAR_Flag_LightningHit)
+                Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            EndIf
+            Wait(20)
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Move_ChargeForDirect) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_EXEC_GET_TID(N(EVS_UpdateChargedJitter), LVarA)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamZoom, 400)
-    EVT_CALL(SetBattleCamOffsetZ, 5)
-    EVT_CALL(MoveBattleCamOver, 60)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim11)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim12)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim13)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(ChargedBodyAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_FACE, EVT_PTR(N(ChargedFaceAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, EVT_PTR(N(ChargedArmAnims)))
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(N(StartRumbleWithParams), 70, 120)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 60, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
-    EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-    EVT_CALL(N(MakeSnakingStatic), LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
-    EVT_WAIT(60)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    ExecGetTID(N(EVS_UpdateChargedJitter), LVarA)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetZ, 5)
+    Call(MoveBattleCamOver, 60)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim11)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim12)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim13)
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(ChargedBodyAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_FACE, Ref(N(ChargedFaceAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, Ref(N(ChargedArmAnims)))
+    Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_CHARGE_LIGHTNING)
+    Call(N(StartRumbleWithParams), 70, 120)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 60, Float(0.3))
+    EndThread
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar3)
+    DivF(LVar3, Float(100.0))
+    Call(N(MakeSnakingStatic), LVar0, LVar1, LVar2, LVar3)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
+    Wait(60)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_DirectLightning) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(AddBattleCamZoom, -100)
-    EVT_CALL(SetBattleCamOffsetZ, 50)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(N(StartRumbleWithParams), 70, 80)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 40, EVT_FLOAT(0.3))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(N(UnkBackgroundFunc3))
-        EVT_CALL(MakeLerp, 0, 200, 40, EASING_LINEAR)
-        EVT_LABEL(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetBackgroundAlpha), LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(40)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVarA)
-            EVT_CALL(N(SetSnakingStaticPos), LVarA, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar1)
-    EVT_SETF(LVar2, EVT_FLOAT(72.5))
-    EVT_SETF(LVar3, EVT_FLOAT(67.5))
-    EVT_MULF(LVar2, LVar0)
-    EVT_MULF(LVar3, LVar1)
-    EVT_DIVF(LVar2, EVT_FLOAT(100.0))
-    EVT_DIVF(LVar3, EVT_FLOAT(100.0))
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 0, LVar3, 0)
-    EVT_CALL(AddGoalPos, ACTOR_SELF, 20, 40, 0)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
-    EVT_WAIT(30)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
-    EVT_KILL_THREAD(LVarA)
-    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
-    EVT_CALL(RemoveEffect, LVar0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BodyAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_FACE, EVT_PTR(N(FaceAnims)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, EVT_PTR(N(ArmAnims)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0E)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0F)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim10)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, FALSE)
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(MakeLerp, 200, 0, 30, EASING_LINEAR)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(SetBackgroundAlpha), LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(StopSound, SOUND_CHARGE_LIGHTNING)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_FIRE_LIGHTNING)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-            EVT_SUB(LVarC, 10)
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(GetGoalPos, ACTOR_SELF, LVarD, LVarE, LVarF)
-            EVT_SUB(LVarD, 100)
-            EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVarA, LVarB, LVarC, LVarD, 0, LVarF, EVT_FLOAT(1.5), 20, 0)
-            EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
-            EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_CASE_EQ(HIT_RESULT_MISS)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_SUB(LVar2, 10)
-            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
-            EVT_SUB(LVar3, 4)
-            EVT_ADD(LVar4, 10)
-            EVT_ADD(LVar5, 1)
-            EVT_THREAD
-                EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar6)
-                EVT_SETF(LVar7, EVT_FLOAT(0.725))
-                EVT_SETF(LVar8, EVT_FLOAT(0.242))
-                EVT_MULF(LVar7, LVar6)
-                EVT_MULF(LVar8, LVar6)
-                EVT_SUBF(LVar0, LVar7)
-                EVT_SETF(LVar9, LVar8)
-                EVT_MULF(LVar9, 3)
-                EVT_ADDF(LVar9, LVar0)
-                EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-                EVT_WAIT(3)
-                EVT_SETF(LVar9, LVar8)
-                EVT_MULF(LVar9, 1)
-                EVT_ADDF(LVar9, LVar0)
-                EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-                EVT_WAIT(3)
-                EVT_SETF(LVar9, LVar8)
-                EVT_MULF(LVar9, 4)
-                EVT_ADDF(LVar9, LVar0)
-                EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-                EVT_WAIT(3)
-                EVT_SETF(LVar9, LVar8)
-                EVT_MULF(LVar9, 2)
-                EVT_ADDF(LVar9, LVar0)
-                EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-                EVT_WAIT(3)
-                EVT_SETF(LVar9, LVar8)
-                EVT_MULF(LVar9, 5)
-                EVT_ADDF(LVar9, LVar0)
-                EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-            EVT_END_THREAD
-            EVT_WAIT(2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
-            EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-    EVT_END_SWITCH
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar2, 10)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
-    EVT_SUB(LVar3, 4)
-    EVT_ADD(LVar4, 10)
-    EVT_ADD(LVar5, 1)
-    EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar6)
-        EVT_SETF(LVar7, EVT_FLOAT(0.725))
-        EVT_SETF(LVar8, EVT_FLOAT(0.242))
-        EVT_MULF(LVar7, LVar6)
-        EVT_MULF(LVar8, LVar6)
-        EVT_SUBF(LVar0, LVar7)
-        EVT_SETF(LVar9, LVar8)
-        EVT_MULF(LVar9, 3)
-        EVT_ADDF(LVar9, LVar0)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-        EVT_WAIT(3)
-        EVT_SETF(LVar9, LVar8)
-        EVT_MULF(LVar9, 1)
-        EVT_ADDF(LVar9, LVar0)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-        EVT_WAIT(3)
-        EVT_SETF(LVar9, LVar8)
-        EVT_MULF(LVar9, 4)
-        EVT_ADDF(LVar9, LVar0)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-        EVT_WAIT(3)
-        EVT_SETF(LVar9, LVar8)
-        EVT_MULF(LVar9, 2)
-        EVT_ADDF(LVar9, LVar0)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-        EVT_WAIT(3)
-        EVT_SETF(LVar9, LVar8)
-        EVT_MULF(LVar9, 5)
-        EVT_ADDF(LVar9, LVar0)
-        EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, EVT_FLOAT(1.2), 10, 0)
-    EVT_END_THREAD
-    EVT_WAIT(2)
-    EVT_WAIT(2)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DIRECT_LIGHTNING, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_WAIT(30)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(AddBattleCamZoom, -100)
+    Call(SetBattleCamOffsetZ, 50)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
+    Call(N(StartRumbleWithParams), 70, 80)
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 40, Float(0.3))
+    EndThread
+    Thread
+        Call(N(UnkBackgroundFunc3))
+        Call(MakeLerp, 0, 200, 40, EASING_LINEAR)
+        Label(0)
+            Call(UpdateLerp)
+            Call(N(SetBackgroundAlpha), LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(0)
+            EndIf
+    EndThread
+    Thread
+        Loop(40)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVarA)
+            Call(N(SetSnakingStaticPos), LVarA, LVar0, LVar1, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar1)
+    SetF(LVar2, Float(72.5))
+    SetF(LVar3, Float(67.5))
+    MulF(LVar2, LVar0)
+    MulF(LVar3, LVar1)
+    DivF(LVar2, Float(100.0))
+    DivF(LVar3, Float(100.0))
+    Call(AddGoalPos, ACTOR_SELF, 0, LVar3, 0)
+    Call(AddGoalPos, ACTOR_SELF, 20, 40, 0)
+    Call(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
+    Wait(30)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChargedJitterScriptID, LVarA)
+    KillThread(LVarA)
+    Call(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChargedStaticEffect, LVar0)
+    Call(RemoveEffect, LVar0)
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BodyAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_FACE, Ref(N(FaceAnims)))
+    Call(SetIdleAnimations, ACTOR_SELF, PRT_ARMS, Ref(N(ArmAnims)))
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim0E)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim0F)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim10)
+    Call(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_ELECTRIFIED, FALSE)
+    Thread
+        Wait(20)
+        Call(MakeLerp, 200, 0, 30, EASING_LINEAR)
+        Label(1)
+            Call(UpdateLerp)
+            Call(N(SetBackgroundAlpha), LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+    EndThread
+    Call(StopSound, SOUND_CHARGE_LIGHTNING)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_FIRE_LIGHTNING)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseEq(HIT_RESULT_LUCKY)
+            Call(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
+            Sub(LVarC, 10)
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(GetGoalPos, ACTOR_SELF, LVarD, LVarE, LVarF)
+            Sub(LVarD, 100)
+            PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVarA, LVarB, LVarC, LVarD, 0, LVarF, Float(1.5), 20, 0)
+            Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
+            Wait(20)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        CaseEq(HIT_RESULT_MISS)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Sub(LVar2, 10)
+            Call(SetGoalToTarget, ACTOR_SELF)
+            Call(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
+            Sub(LVar3, 4)
+            Add(LVar4, 10)
+            Add(LVar5, 1)
+            Thread
+                Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar6)
+                SetF(LVar7, Float(0.725))
+                SetF(LVar8, Float(0.242))
+                MulF(LVar7, LVar6)
+                MulF(LVar8, LVar6)
+                SubF(LVar0, LVar7)
+                SetF(LVar9, LVar8)
+                MulF(LVar9, 3)
+                AddF(LVar9, LVar0)
+                PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+                Wait(3)
+                SetF(LVar9, LVar8)
+                MulF(LVar9, 1)
+                AddF(LVar9, LVar0)
+                PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+                Wait(3)
+                SetF(LVar9, LVar8)
+                MulF(LVar9, 4)
+                AddF(LVar9, LVar0)
+                PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+                Wait(3)
+                SetF(LVar9, LVar8)
+                MulF(LVar9, 2)
+                AddF(LVar9, LVar0)
+                PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+                Wait(3)
+                SetF(LVar9, LVar8)
+                MulF(LVar9, 5)
+                AddF(LVar9, LVar0)
+                PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+            EndThread
+            Wait(2)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
+            Wait(20)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+    EndSwitch
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Sub(LVar2, 10)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
+    Sub(LVar3, 4)
+    Add(LVar4, 10)
+    Add(LVar5, 1)
+    Thread
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar6)
+        SetF(LVar7, Float(0.725))
+        SetF(LVar8, Float(0.242))
+        MulF(LVar7, LVar6)
+        MulF(LVar8, LVar6)
+        SubF(LVar0, LVar7)
+        SetF(LVar9, LVar8)
+        MulF(LVar9, 3)
+        AddF(LVar9, LVar0)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+        Wait(3)
+        SetF(LVar9, LVar8)
+        MulF(LVar9, 1)
+        AddF(LVar9, LVar0)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+        Wait(3)
+        SetF(LVar9, LVar8)
+        MulF(LVar9, 4)
+        AddF(LVar9, LVar0)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+        Wait(3)
+        SetF(LVar9, LVar8)
+        MulF(LVar9, 2)
+        AddF(LVar9, LVar0)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+        Wait(3)
+        SetF(LVar9, LVar8)
+        MulF(LVar9, 5)
+        AddF(LVar9, LVar0)
+        PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar9, LVar1, LVar2, LVar3, LVar4, LVar5, Float(1.2), 10, 0)
+    EndThread
+    Wait(2)
+    Wait(2)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_DIRECT_LIGHTNING, BS_FLAGS1_TRIGGER_EVENTS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Wait(30)
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim01)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim02)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim03)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 40, -20, EASING_SIN_OUT)
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_GroupSlam) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-    EVT_CALL(SetBattleCamZoom, 400)
-    EVT_CALL(SetBattleCamOffsetZ, 5)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(30)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_REAR_UP)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
-    EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1E)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1F)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
-    EVT_SET(LVarF, 0)
-    EVT_LOOP(20)
-        EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.3), 10, 0, 0)
-        EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.7), 10, 0, 0)
-        EVT_MULF(LVar2, LVar0)
-        EVT_MULF(LVar3, LVar1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-        EVT_ADD(LVarF, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
-    EVT_LOOP(20)
-        EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0)
-        EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0)
-        EVT_MULF(LVar2, LVar0)
-        EVT_MULF(LVar3, LVar1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-        EVT_ADD(LVarF, 1)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
-    EVT_SET(LVar9, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-    EVT_ADD(LVarB, 150)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+    Call(SetBattleCamZoom, 400)
+    Call(SetBattleCamOffsetZ, 5)
+    Call(MoveBattleCamOver, 30)
+    Wait(30)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_REAR_UP)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1A)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1B)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1C)
+    Wait(8)
+    Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim1D)
+    Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim1E)
+    Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim1F)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
+    Set(LVarF, 0)
+    Loop(20)
+        Call(N(CosInterpMinMax), LVarF, LVar2, Float(1.0), Float(1.3), 10, 0, 0)
+        Call(N(CosInterpMinMax), LVarF, LVar3, Float(1.0), Float(0.7), 10, 0, 0)
+        MulF(LVar2, LVar0)
+        MulF(LVar3, LVar1)
+        Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+        Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+        Add(LVarF, 1)
+        Wait(1)
+    EndLoop
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_JIGGLE)
+    Loop(20)
+        Call(N(CosInterpMinMax), LVarF, LVar2, Float(1.0), Float(1.2), 10, 0, 0)
+        Call(N(CosInterpMinMax), LVarF, LVar3, Float(1.0), Float(0.8), 10, 0, 0)
+        MulF(LVar2, LVar0)
+        MulF(LVar3, LVar1)
+        Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+        Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+        Add(LVarF, 1)
+        Wait(1)
+    EndLoop
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
+    Set(LVar9, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Call(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
+    Add(LVarB, 150)
 
     #define HNP_GROUP_ASCEND(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_CALL(UseIdleAnimation, ArrayVar(idx), FALSE) \
-            EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-            EVT_IF_EQ(LVar1, 0) \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim09) \
-            EVT_ELSE \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim0B) \
-            EVT_END_IF \
-            EVT_THREAD \
-                EVT_MOD(LVar9, 2) \
-                EVT_IF_EQ(LVar9, 0) \
-                    EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
-                EVT_ELSE \
-                    EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
-                EVT_END_IF \
-                EVT_CALL(GetActorPos, ArrayVar(idx), LVarD, LVarE, LVarF) \
-                EVT_CALL(SetGoalPos, ArrayVar(idx), LVarA, LVarB, LVarF) \
-                EVT_CALL(FlyToGoal, ArrayVar(idx), 20, 10, EASING_QUADRATIC_IN) \
-                EVT_SET(LVarD, LVarA) \
-                EVT_SET(LVarE, LVarC) \
-                EVT_SET(LVarF, idx) \
-                EVT_MUL(LVarF, 36) \
-                EVT_ADD(LVarF, -90) \
-                EVT_CALL(AddVectorPolar, LVarD, LVarE, EVT_FLOAT(60.0), LVarF) \
-                EVT_CALL(SetActorPos, ArrayVar(idx), LVarD, LVarB, LVarE) \
-            EVT_END_THREAD \
-            EVT_ADD(LVar9, 1) \
-            EVT_WAIT(8) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Call(UseIdleAnimation, ArrayVar(idx), FALSE) \
+            Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+            IfEq(LVar1, 0) \
+                Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim09) \
+            Else \
+                Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim0B) \
+            EndIf \
+            Thread \
+                Mod(LVar9, 2) \
+                IfEq(LVar9, 0) \
+                    Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
+                Else \
+                    Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
+                EndIf \
+                Call(GetActorPos, ArrayVar(idx), LVarD, LVarE, LVarF) \
+                Call(SetGoalPos, ArrayVar(idx), LVarA, LVarB, LVarF) \
+                Call(FlyToGoal, ArrayVar(idx), 20, 10, EASING_QUADRATIC_IN) \
+                Set(LVarD, LVarA) \
+                Set(LVarE, LVarC) \
+                Set(LVarF, idx) \
+                Mul(LVarF, 36) \
+                Add(LVarF, -90) \
+                Call(AddVectorPolar, LVarD, LVarE, Float(60.0), LVarF) \
+                Call(SetActorPos, ArrayVar(idx), LVarD, LVarB, LVarE) \
+            EndThread \
+            Add(LVar9, 1) \
+            Wait(8) \
+        EndIf
 
     // have each Tuff Puff ascend above the battlefield
     FOR_CHILDREN_SCATTERED(HNP_GROUP_ASCEND)
 
-    EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 30, 10, EASING_QUADRATIC_IN)
-    EVT_WAIT(75)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Wait(20)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 30)
+    Call(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
+    Call(FlyToGoal, ACTOR_SELF, 30, 10, EASING_QUADRATIC_IN)
+    Wait(75)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_GROUP_DROP(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_THREAD \
-                EVT_CALL(GetActorPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
-                EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar4) \
-                EVT_IF_EQ(LVar4, 0) \
-                    EVT_SET(LVar2, 10) \
-                EVT_ELSE \
-                    EVT_SET(LVar2, 14) \
-                EVT_END_IF \
-                EVT_CALL(SetActorSounds, ArrayVar(idx), ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE) \
-                EVT_CALL(SetGoalPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
-                EVT_CALL(FlyToGoal, ArrayVar(idx), 20, 0, EASING_CUBIC_IN) \
-                EVT_CALL(ResetActorSounds, ArrayVar(idx), ACTOR_SOUND_FLY) \
-            EVT_END_THREAD \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Thread \
+                Call(GetActorPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
+                Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar4) \
+                IfEq(LVar4, 0) \
+                    Set(LVar2, 10) \
+                Else \
+                    Set(LVar2, 14) \
+                EndIf \
+                Call(SetActorSounds, ArrayVar(idx), ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE) \
+                Call(SetGoalPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
+                Call(FlyToGoal, ArrayVar(idx), 20, 0, EASING_CUBIC_IN) \
+                Call(ResetActorSounds, ArrayVar(idx), ACTOR_SOUND_FLY) \
+            EndThread \
+        EndIf
 
     // have each Tuff Puff drop down from the sky
     FOR_CHILDREN_ORDERED(HNP_GROUP_DROP)
 
-    EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
-    EVT_THREAD
-        EVT_WAIT(3)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_FALLING)
-    EVT_END_THREAD
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
-    EVT_MUL(LVar4, 95)
-    EVT_DIV(LVar4, 200)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar4, LVar3)
-    EVT_CALL(FlyToGoal, ACTOR_SELF, 20, 0, EASING_CUBIC_IN)
-    EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY)
-    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_PLAY_EFFECT(EFFECT_SHOCKWAVE, 3, LVar0, 0, LVar2, 0)
-    EVT_THREAD
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar1, LVar4, LVar3, 60, 8, 0, 30, 0)
-        EVT_WAIT(2)
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar1, LVar4, LVar3, 60, 8, 33, 30, 0)
-        EVT_WAIT(2)
-        EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar1, LVar4, LVar3, 60, 8, 66, 30, 0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 20, EVT_FLOAT(1.0))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
-        EVT_SET(LVarF, 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
-        EVT_LOOP(20)
-            EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.5), 10, 0, 0)
-            EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.5), 10, 0, 0)
-            EVT_MULF(LVar2, LVar0)
-            EVT_MULF(LVar3, LVar1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-            EVT_ADD(LVarF, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
-        EVT_LOOP(20)
-            EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0)
-            EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0)
-            EVT_MULF(LVar2, LVar0)
-            EVT_MULF(LVar3, LVar1)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-            EVT_ADD(LVarF, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(40)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
-            EVT_MUL(LVar3, 95)
-            EVT_DIV(LVar3, 200)
-            EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar3, LVar2)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Call(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY, SOUND_NONE, SOUND_NONE)
+    Thread
+        Wait(3)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_FALLING)
+    EndThread
+    Call(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar4)
+    Mul(LVar4, 95)
+    Div(LVar4, 200)
+    Call(SetGoalPos, ACTOR_SELF, LVar1, LVar4, LVar3)
+    Call(FlyToGoal, ACTOR_SELF, 20, 0, EASING_CUBIC_IN)
+    Call(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_FLY)
+    Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HEAVY_NPC_LANDING)
+    Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    PlayEffect(EFFECT_SHOCKWAVE, 3, LVar0, 0, LVar2, 0)
+    Thread
+        PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar1, LVar4, LVar3, 60, 8, 0, 30, 0)
+        Wait(2)
+        PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar1, LVar4, LVar3, 60, 8, 33, 30, 0)
+        Wait(2)
+        PlayEffect(EFFECT_SMOKE_IMPACT, 1, LVar1, LVar4, LVar3, 60, 8, 66, 30, 0)
+    EndThread
+    Thread
+        Call(ShakeCam, CAM_BATTLE, 0, 20, Float(1.0))
+    EndThread
+    Thread
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
+        Set(LVarF, 0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
+        Loop(20)
+            Call(N(CosInterpMinMax), LVarF, LVar2, Float(1.0), Float(1.5), 10, 0, 0)
+            Call(N(CosInterpMinMax), LVarF, LVar3, Float(1.0), Float(0.5), 10, 0, 0)
+            MulF(LVar2, LVar0)
+            MulF(LVar3, LVar1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+            Add(LVarF, 1)
+            Wait(1)
+        EndLoop
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_HUFF_N_PUFF_WOBBLE)
+        Loop(20)
+            Call(N(CosInterpMinMax), LVarF, LVar2, Float(1.0), Float(1.2), 10, 0, 0)
+            Call(N(CosInterpMinMax), LVarF, LVar3, Float(1.0), Float(0.8), 10, 0, 0)
+            MulF(LVar2, LVar0)
+            MulF(LVar3, LVar1)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar2)
+            Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+            Add(LVarF, 1)
+            Wait(1)
+        EndLoop
+        Call(SetActorVar, ACTOR_SELF, AVAR_ScaleX, LVar0)
+        Call(SetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar1)
+    EndThread
+    Thread
+        Loop(40)
+            Call(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ScaleY, LVar3)
+            Mul(LVar3, 95)
+            Div(LVar3, 200)
+            Call(SetActorPos, ACTOR_SELF, LVar0, LVar3, LVar2)
+            Wait(1)
+        EndLoop
+    EndThread
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_IMPACT_JIGGLE(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_THREAD \
-                EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar0) \
-                EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar1) \
-                EVT_SET(LVarF, 0) \
-                EVT_LOOP(20) \
-                    EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.5), 10, 0, 0) \
-                    EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.5), 10, 0, 0) \
-                    EVT_MULF(LVar2, LVar0) \
-                    EVT_MULF(LVar3, LVar1) \
-                    EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar2) \
-                    EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar3) \
-                    EVT_ADD(LVarF, 1) \
-                    EVT_WAIT(1) \
-                EVT_END_LOOP \
-                EVT_LOOP(20) \
-                    EVT_CALL(N(CosInterpMinMax), LVarF, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.2), 10, 0, 0) \
-                    EVT_CALL(N(CosInterpMinMax), LVarF, LVar3, EVT_FLOAT(1.0), EVT_FLOAT(0.8), 10, 0, 0) \
-                    EVT_MULF(LVar2, LVar0) \
-                    EVT_MULF(LVar3, LVar1) \
-                    EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar2) \
-                    EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar3) \
-                    EVT_ADD(LVarF, 1) \
-                    EVT_WAIT(1) \
-                EVT_END_LOOP \
-                EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar0) \
-                EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar1) \
-            EVT_END_THREAD \
-            EVT_THREAD \
-                EVT_LOOP(40) \
-                    EVT_CALL(GetActorPos, ArrayVar(idx), LVar0, LVar1, LVar2) \
-                    EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar3) \
-                    EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar4) \
-                    EVT_IF_EQ(LVar4, 0) \
-                        EVT_MUL(LVar3, 20) \
-                    EVT_ELSE \
-                        EVT_MUL(LVar3, 28) \
-                    EVT_END_IF \
-                    EVT_DIV(LVar3, 200) \
-                    EVT_CALL(SetActorPos, ArrayVar(idx), LVar0, LVar3, LVar2) \
-                    EVT_WAIT(1) \
-                EVT_END_LOOP \
-            EVT_END_THREAD \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Thread \
+                Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar0) \
+                Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar1) \
+                Set(LVarF, 0) \
+                Loop(20) \
+                    Call(N(CosInterpMinMax), LVarF, LVar2, Float(1.0), Float(1.5), 10, 0, 0) \
+                    Call(N(CosInterpMinMax), LVarF, LVar3, Float(1.0), Float(0.5), 10, 0, 0) \
+                    MulF(LVar2, LVar0) \
+                    MulF(LVar3, LVar1) \
+                    Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar2) \
+                    Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar3) \
+                    Add(LVarF, 1) \
+                    Wait(1) \
+                EndLoop \
+                Loop(20) \
+                    Call(N(CosInterpMinMax), LVarF, LVar2, Float(1.0), Float(1.2), 10, 0, 0) \
+                    Call(N(CosInterpMinMax), LVarF, LVar3, Float(1.0), Float(0.8), 10, 0, 0) \
+                    MulF(LVar2, LVar0) \
+                    MulF(LVar3, LVar1) \
+                    Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar2) \
+                    Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar3) \
+                    Add(LVarF, 1) \
+                    Wait(1) \
+                EndLoop \
+                Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleX, LVar0) \
+                Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar1) \
+            EndThread \
+            Thread \
+                Loop(40) \
+                    Call(GetActorPos, ArrayVar(idx), LVar0, LVar1, LVar2) \
+                    Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_ScaleY, LVar3) \
+                    Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar4) \
+                    IfEq(LVar4, 0) \
+                        Mul(LVar3, 20) \
+                    Else \
+                        Mul(LVar3, 28) \
+                    EndIf \
+                    Div(LVar3, 200) \
+                    Call(SetActorPos, ArrayVar(idx), LVar0, LVar3, LVar2) \
+                    Wait(1) \
+                EndLoop \
+            EndThread \
+        EndIf
 
     // have each Tuff Puff oscillate after slamming into the ground
     FOR_CHILDREN_ORDERED(HNP_IMPACT_JIGGLE)
 
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_WAIT(100)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
-            EVT_WAIT(20)
-            EVT_SET(LVarA, 0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Set(LVarA, LVar0)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Wait(100)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HuffNPuff_Anim04)
+            Call(SetAnimation, ACTOR_SELF, PRT_FACE, ANIM_HuffNPuff_Anim05)
+            Call(SetAnimation, ACTOR_SELF, PRT_ARMS, ANIM_HuffNPuff_Anim06)
+            Wait(20)
+            Set(LVarA, 0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
             #define HNP_RETURN_HOME(idx) \
-                EVT_IF_FLAG(LVar0, 1 << idx) \
-                    EVT_THREAD \
-                        EVT_MOD(LVarA, 2) \
-                        EVT_IF_EQ(LVarA, 0) \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
-                        EVT_ELSE \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
-                        EVT_END_IF \
-                        EVT_CALL(SetGoalToHome, ArrayVar(idx)) \
-                        EVT_CALL(FlyToGoal, ArrayVar(idx), 20, -10, EASING_SIN_OUT) \
-                    EVT_END_THREAD \
-                    EVT_ADD(LVarA, 1) \
-                    EVT_WAIT(8) \
-                EVT_END_IF
+                IfFlag(LVar0, 1 << idx) \
+                    Thread \
+                        Mod(LVarA, 2) \
+                        IfEq(LVarA, 0) \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
+                        Else \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
+                        EndIf \
+                        Call(SetGoalToHome, ArrayVar(idx)) \
+                        Call(FlyToGoal, ArrayVar(idx), 20, -10, EASING_SIN_OUT) \
+                    EndThread \
+                    Add(LVarA, 1) \
+                    Wait(8) \
+                EndIf
 
             // have each Tuff Puff return to their home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
             
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 20, -10, EASING_SIN_OUT)
-            EVT_WAIT(15)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_SET(LVarA, DMG_GROUP_SLAM_BASE)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 20, -10, EASING_SIN_OUT)
+            Wait(15)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Set(LVarA, DMG_GROUP_SLAM_BASE)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_ADD_CHILD(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_ADD(LVarA, 1) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Add(LVarA, 1) \
+        EndIf
     
     // add 1 damage for each Tuff Puff
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
-    EVT_WAIT(2)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarA, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_WAIT(50)
-            EVT_SET(LVarA, 0)
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(FlyToGoal, ACTOR_SELF, 20, -10, EASING_SIN_OUT)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Wait(2)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_NO_CONTACT, 0, 0, LVarA, BS_FLAGS1_TRIGGER_EVENTS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Wait(50)
+            Set(LVarA, 0)
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(FlyToGoal, ACTOR_SELF, 20, -10, EASING_SIN_OUT)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
             #define HNP_RETURN_HOME(idx) \
-                EVT_IF_FLAG(LVar0, 1 << idx) \
-                    EVT_THREAD \
-                        EVT_MOD(LVarA, 2) \
-                        EVT_IF_EQ(LVarA, 0) \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
-                        EVT_ELSE \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
-                        EVT_END_IF \
-                        EVT_CALL(SetGoalToHome, ArrayVar(idx)) \
-                        EVT_CALL(FlyToGoal, ArrayVar(idx), 20, -10, EASING_SIN_OUT) \
-                    EVT_END_THREAD \
-                    EVT_ADD(LVarA, 1) \
-                    EVT_WAIT(8) \
-                EVT_END_IF
+                IfFlag(LVar0, 1 << idx) \
+                    Thread \
+                        Mod(LVarA, 2) \
+                        IfEq(LVarA, 0) \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
+                        Else \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
+                        EndIf \
+                        Call(SetGoalToHome, ArrayVar(idx)) \
+                        Call(FlyToGoal, ArrayVar(idx), 20, -10, EASING_SIN_OUT) \
+                    EndThread \
+                    Add(LVarA, 1) \
+                    Wait(8) \
+                EndIf
 
             // make each Tuff Puff return home
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
 
-            EVT_WAIT(20)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+            Wait(20)
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_TuffPuff_SqueezePlayer) = {
-    EVT_IF_EQ(LVar3, 0)
-        EVT_SET(LFlag0, TRUE)
-    EVT_END_IF
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_DIV(LVarB, 2)
-    EVT_ADD(LVarB, 1)
-    EVT_CALL(SetOwnerID, LVar1) // note: ownership transferred to Tuff Puff actor here
-    EVT_CALL(RandInt, 1000, LVar0)
-    EVT_IF_LT(LVar0, 500)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 1)
-    EVT_ELSE
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 2)
-    EVT_END_IF
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
-    EVT_CALL(GetDist2D, LVarD, LVar0, LVar2, LVar3, LVar5)
-    EVT_CALL(N(Atan2), LVarE, LVar0, LVar2, LVar3, LVar5)
-    EVT_SET(LVarF, 0)
-    EVT_LOOP(0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SQUEEZE)
-        EVT_SET(LVarF, 0)
-        EVT_SET(LVarC, LVarB)
-        EVT_ADD(LVarC, LVarB)
-        EVT_SET(LVar9, LVarC)
-        EVT_LOOP(LVarC)
-            EVT_CALL(N(UpdateLerp), EASING_CUBIC_OUT, EVT_FLOAT(100.0), EVT_FLOAT(40.0), LVarF, LVar9, LVar0)
-            EVT_MULF(LVar0, LVarD)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, LVar0, LVarE)
-            EVT_CALL(SetActorPos, ACTOR_SELF, LVar1, LVar5, LVar3)
-            EVT_ADD(LVarF, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(5)
-        EVT_IF_EQ(LFlag0, TRUE)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_OR_CONST(LVar0, AVAR_Flag_WaitForChild)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-        EVT_END_IF
-        EVT_SET(LVarF, 0)
-        EVT_SET(LVarC, LVarB)
-        EVT_LOOP(LVarC)
-            EVT_CALL(N(UpdateLerp), EASING_QUARTIC_OUT, EVT_FLOAT(40.0), EVT_FLOAT(100.0), LVarF, LVarB, LVar0)
-            EVT_MULF(LVar0, LVarD)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
-            EVT_CALL(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
-            EVT_CALL(AddVectorPolar, LVar1, LVar3, LVar0, LVarE)
-            EVT_CALL(SetActorPos, ACTOR_SELF, LVar1, LVar5, LVar3)
-            EVT_ADD(LVarF, 1)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_WAIT(10)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    IfEq(LVar3, 0)
+        Set(LFlag0, TRUE)
+    EndIf
+    Set(LVarA, LVar1)
+    Set(LVarB, LVar2)
+    Div(LVarB, 2)
+    Add(LVarB, 1)
+    Call(SetOwnerID, LVar1) // note: ownership transferred to Tuff Puff actor here
+    Call(RandInt, 1000, LVar0)
+    IfLt(LVar0, 500)
+        Call(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 1)
+    Else
+        Call(SetActorVar, ACTOR_SELF, AVAR_TuffPuff_WobbleMode, 2)
+    EndIf
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Call(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
+    Call(GetDist2D, LVarD, LVar0, LVar2, LVar3, LVar5)
+    Call(N(Atan2), LVarE, LVar0, LVar2, LVar3, LVar5)
+    Set(LVarF, 0)
+    Loop(0)
+        Call(PlaySoundAtActor, ACTOR_SELF, SOUND_SQUEEZE)
+        Set(LVarF, 0)
+        Set(LVarC, LVarB)
+        Add(LVarC, LVarB)
+        Set(LVar9, LVarC)
+        Loop(LVarC)
+            Call(N(UpdateLerp), EASING_CUBIC_OUT, Float(100.0), Float(40.0), LVarF, LVar9, LVar0)
+            MulF(LVar0, LVarD)
+            DivF(LVar0, Float(100.0))
+            Call(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
+            Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+            Call(AddVectorPolar, LVar1, LVar3, LVar0, LVarE)
+            Call(SetActorPos, ACTOR_SELF, LVar1, LVar5, LVar3)
+            Add(LVarF, 1)
+            Wait(1)
+        EndLoop
+        Wait(5)
+        IfEq(LFlag0, TRUE)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseOrConst(LVar0, AVAR_Flag_WaitForChild)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+        EndIf
+        Set(LVarF, 0)
+        Set(LVarC, LVarB)
+        Loop(LVarC)
+            Call(N(UpdateLerp), EASING_QUARTIC_OUT, Float(40.0), Float(100.0), LVarF, LVarB, LVar0)
+            MulF(LVar0, LVarD)
+            DivF(LVar0, Float(100.0))
+            Call(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
+            Call(GetActorPos, ACTOR_SELF, LVar4, LVar5, LVar6)
+            Call(AddVectorPolar, LVar1, LVar3, LVar0, LVarE)
+            Call(SetActorPos, ACTOR_SELF, LVar1, LVar5, LVar3)
+            Add(LVarF, 1)
+            Wait(1)
+        EndLoop
+        Wait(10)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_TuffPuffSwarm) = {
-    EVT_USE_ARRAY(N(RuffPuffDataBuffer))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    UseArray(N(RuffPuffDataBuffer))
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
     
     #define HNP_SWARM_MOVE_UP(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_THREAD \
-                EVT_CALL(GetActorPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
-                EVT_ADD(LVar2, 15) \
-                EVT_CALL(SetGoalPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
-                EVT_CALL(FlyToGoal, ArrayVar(idx), 20, 0, EASING_LINEAR) \
-                EVT_WAIT(3) \
-            EVT_END_THREAD \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Thread \
+                Call(GetActorPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
+                Add(LVar2, 15) \
+                Call(SetGoalPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
+                Call(FlyToGoal, ArrayVar(idx), 20, 0, EASING_LINEAR) \
+                Wait(3) \
+            EndThread \
+        EndIf
 
     // each Tuff Puff moves up slightly
     FOR_CHILDREN_SCATTERED(HNP_SWARM_MOVE_UP)
 
-    EVT_WAIT(20)
-    EVT_SET(LVarA, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Wait(20)
+    Set(LVarA, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_ADD_CHILD(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_ADD(LVarA, 1) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Add(LVarA, 1) \
+        EndIf
     
     // count the number of Tuff Puffs to compute radial spacing around the player
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
     // radial increment will be stored in LVarB
-    EVT_SETF(LVarB, EVT_FLOAT(360.0))
-    EVT_DIVF(LVarB, LVarA)
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
-        EVT_CALL(SetBattleCamZoom, 300)
-        EVT_CALL(SetBattleCamOffsetZ, 35)
-        EVT_CALL(MoveBattleCamOver, 60)
-    EVT_END_THREAD
-    EVT_SET(LVarA, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    SetF(LVarB, Float(360.0))
+    DivF(LVarB, LVarA)
+    Thread
+        Wait(10)
+        Call(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+        Call(SetBattleCamTarget, LVar0, LVar1, LVar2)
+        Call(SetBattleCamZoom, 300)
+        Call(SetBattleCamOffsetZ, 35)
+        Call(MoveBattleCamOver, 60)
+    EndThread
+    Set(LVarA, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_SWARM_SURROUND_PLAYER(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_CALL(UseIdleAnimation, ArrayVar(idx), FALSE) \
-            EVT_CALL(SetPartAlpha, ArrayVar(idx), 1, 254) \
-            EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-            EVT_IF_EQ(LVar1, 0) \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim09) \
-            EVT_ELSE \
-                EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim0B) \
-            EVT_END_IF \
-            EVT_THREAD \
-                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3) \
-                EVT_MULF(LVarB, LVarA) \
-                EVT_ADDF(LVarB, EVT_FLOAT(100.0)) \
-                EVT_CALL(AddVectorPolar, LVar1, LVar3, EVT_FLOAT(20.0), LVarB) \
-                EVT_CALL(RandInt, 20, LVar4) \
-                EVT_SUB(LVar4, 10) \
-                EVT_ADD(LVar4, 19) \
-                EVT_ADD(LVar2, LVar4) \
-                EVT_MOD(LVarA, 2) \
-                EVT_IF_EQ(LVarA, 0) \
-                    EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
-                EVT_ELSE \
-                    EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
-                EVT_END_IF \
-                EVT_CALL(SetGoalPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
-                EVT_CALL(FlyToGoal, ArrayVar(idx), 30, -10, EASING_SIN_OUT) \
-                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar4, LVar5, LVar6) \
-                EVT_IF_LT(LVar1, LVar4) \
-                    EVT_CALL(SetActorYaw, ArrayVar(idx), 180) \
-                EVT_END_IF \
-            EVT_END_THREAD \
-            EVT_ADD(LVarA, 1) \
-            EVT_WAIT(4) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Call(UseIdleAnimation, ArrayVar(idx), FALSE) \
+            Call(SetPartAlpha, ArrayVar(idx), 1, 254) \
+            Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+            IfEq(LVar1, 0) \
+                Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim09) \
+            Else \
+                Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim0B) \
+            EndIf \
+            Thread \
+                Call(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3) \
+                MulF(LVarB, LVarA) \
+                AddF(LVarB, Float(100.0)) \
+                Call(AddVectorPolar, LVar1, LVar3, Float(20.0), LVarB) \
+                Call(RandInt, 20, LVar4) \
+                Sub(LVar4, 10) \
+                Add(LVar4, 19) \
+                Add(LVar2, LVar4) \
+                Mod(LVarA, 2) \
+                IfEq(LVarA, 0) \
+                    Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
+                Else \
+                    Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
+                EndIf \
+                Call(SetGoalPos, ArrayVar(idx), LVar1, LVar2, LVar3) \
+                Call(FlyToGoal, ArrayVar(idx), 30, -10, EASING_SIN_OUT) \
+                Call(GetActorPos, ACTOR_PLAYER, LVar4, LVar5, LVar6) \
+                IfLt(LVar1, LVar4) \
+                    Call(SetActorYaw, ArrayVar(idx), 180) \
+                EndIf \
+            EndThread \
+            Add(LVarA, 1) \
+            Wait(4) \
+        EndIf
 
     // move each Tuff Puff to a position surrounding the player
     FOR_CHILDREN_SCATTERED(HNP_SWARM_SURROUND_PLAYER)
     
-    EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
-    EVT_SET(LVar9, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Wait(30)
+    Call(UseBattleCamPreset, BTL_CAM_PRESET_01)
+    Set(LVar9, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
     
     #define HNP_ADD_CHILD(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_ADD(LVar9, 1) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Add(LVar9, 1) \
+        EndIf
     
     // count the number of Tuff Puffs
     FOR_CHILDREN_ORDERED(HNP_ADD_CHILD)
 
-    EVT_SET(LVarA, 30 * DT)
-    EVT_SUB(LVarA, LVar9)
-    EVT_SET(LVar3, 0)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Set(LVarA, 30 * DT)
+    Sub(LVarA, LVar9)
+    Set(LVar3, 0)
+    Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
     #define HNP_SQUEEZE_PLAYER(idx) \
-        EVT_IF_FLAG(LVar0, 1 << idx) \
-            EVT_SET(LVar1, ArrayVar(idx)) \
-            EVT_SET(LVar2, LVarA) \
-            EVT_EXEC_GET_TID(N(EVS_TuffPuff_SqueezePlayer), ArrayVar(idx + MAX_RUFF_PUFFS)) \
-            EVT_ADD(LVar3, 1) \
-        EVT_END_IF
+        IfFlag(LVar0, 1 << idx) \
+            Set(LVar1, ArrayVar(idx)) \
+            Set(LVar2, LVarA) \
+            ExecGetTID(N(EVS_TuffPuff_SqueezePlayer), ArrayVar(idx + MAX_RUFF_PUFFS)) \
+            Add(LVar3, 1) \
+        EndIf
 
     // have each Tuff Puff squeeze the player
     FOR_CHILDREN_ORDERED(HNP_SQUEEZE_PLAYER)
 
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_SET(LVarA, LVar0)
-            EVT_LABEL(0)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, AVAR_Flag_WaitForChild)
-                EVT_WAIT(1)
-                EVT_GOTO(0)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_WaitForChild)
-            EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+    Call(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            Set(LVarA, LVar0)
+            Label(0)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            IfNotFlag(LVar0, AVAR_Flag_WaitForChild)
+                Wait(1)
+                Goto(0)
+            EndIf
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            BitwiseAndConst(LVar0, ~AVAR_Flag_WaitForChild)
+            Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 20)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
             #define HNP_SCATTER_PUFF(idx) \
-                EVT_IF_FLAG(LVar0, 1 << idx) \
-                    EVT_KILL_THREAD(ArrayVar(idx + MAX_RUFF_PUFFS)) \
-                    EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-                    EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim12) \
-                    EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim13) \
-                    EVT_END_IF \
-                    EVT_THREAD \
-                        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2) \
-                        EVT_CALL(GetActorPos, ArrayVar(idx), LVar3, LVar4, LVar5) \
-                        EVT_CALL(N(Atan2), LVar6, LVar0, LVar2, LVar3, LVar5) \
-                        EVT_DIVF(LVar6, EVT_FLOAT(2.0)) \
-                        EVT_ADDF(LVar6, EVT_FLOAT(90.0)) \
-                        EVT_CALL(AddVectorPolar, LVar0, LVar1, EVT_FLOAT(70.0), LVar6) \
-                        EVT_CALL(SetActorJumpGravity, ArrayVar(idx), EVT_FLOAT(1.0)) \
-                        EVT_CALL(SetGoalPos, ArrayVar(idx), LVar0, LVar1, LVar2) \
-                        EVT_CALL(JumpToGoal, ArrayVar(idx), 20, FALSE, FALSE, FALSE) \
-                    EVT_END_THREAD \
-                EVT_END_IF
+                IfFlag(LVar0, 1 << idx) \
+                    KillThread(ArrayVar(idx + MAX_RUFF_PUFFS)) \
+                    Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+                    IfEq(LVar1, 0) \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim12) \
+                    Else \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim13) \
+                    EndIf \
+                    Thread \
+                        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2) \
+                        Call(GetActorPos, ArrayVar(idx), LVar3, LVar4, LVar5) \
+                        Call(N(Atan2), LVar6, LVar0, LVar2, LVar3, LVar5) \
+                        DivF(LVar6, Float(2.0)) \
+                        AddF(LVar6, Float(90.0)) \
+                        Call(AddVectorPolar, LVar0, LVar1, Float(70.0), LVar6) \
+                        Call(SetActorJumpGravity, ArrayVar(idx), Float(1.0)) \
+                        Call(SetGoalPos, ArrayVar(idx), LVar0, LVar1, LVar2) \
+                        Call(JumpToGoal, ArrayVar(idx), 20, FALSE, FALSE, FALSE) \
+                    EndThread \
+                EndIf
 
             // throw each Tuff Puff away in a large fan pattern
             FOR_CHILDREN_ORDERED(HNP_SCATTER_PUFF)
 
-            EVT_WAIT(15)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_WAIT(20)
-            EVT_SET(LVarA, 0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+            Wait(15)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Wait(20)
+            Set(LVarA, 0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
             #define HNP_RETURN_HOME(idx) \
-                EVT_IF_FLAG(LVar0, 1 << idx) \
-                    EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-                    EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim06) \
-                    EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim07) \
-                    EVT_END_IF \
-                    EVT_THREAD \
-                        EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_WobbleMode, 0) \
-                        EVT_MOD(LVarA, 2) \
-                        EVT_IF_EQ(LVarA, 0) \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
-                        EVT_ELSE \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
-                        EVT_END_IF \
-                        EVT_CALL(SetGoalToHome, ArrayVar(idx)) \
-                        EVT_CALL(FlyToGoal, ArrayVar(idx), 30, 10, EASING_SIN_OUT) \
-                        EVT_CALL(SetPartAlpha, ArrayVar(idx), 1, 255) \
-                        EVT_CALL(SetActorYaw, ArrayVar(idx), 0) \
-                        EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-                        EVT_IF_EQ(LVar1, 0) \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim02) \
-                        EVT_ELSE \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim03) \
-                        EVT_END_IF \
-                    EVT_END_THREAD \
-                    EVT_ADD(LVarA, 1) \
-                    EVT_WAIT(4) \
-                EVT_END_IF
+                IfFlag(LVar0, 1 << idx) \
+                    Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+                    IfEq(LVar1, 0) \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim06) \
+                    Else \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim07) \
+                    EndIf \
+                    Thread \
+                        Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_WobbleMode, 0) \
+                        Mod(LVarA, 2) \
+                        IfEq(LVarA, 0) \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
+                        Else \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
+                        EndIf \
+                        Call(SetGoalToHome, ArrayVar(idx)) \
+                        Call(FlyToGoal, ArrayVar(idx), 30, 10, EASING_SIN_OUT) \
+                        Call(SetPartAlpha, ArrayVar(idx), 1, 255) \
+                        Call(SetActorYaw, ArrayVar(idx), 0) \
+                        Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+                        IfEq(LVar1, 0) \
+                            Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim02) \
+                        Else \
+                            Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim03) \
+                        EndIf \
+                    EndThread \
+                    Add(LVarA, 1) \
+                    Wait(4) \
+                EndIf
 
             // have each Tuff Puff fly back to its home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
 
-            EVT_WAIT(50)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar1)
-    EVT_IF_FLAG(LVar1, STATUS_FLAG_STONE)
-        EVT_WAIT(10)
-        EVT_SET(LVar3, 0)
-        EVT_LOOP(0)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AVAR_Flag_WaitForChild)
-                EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_WaitForChild)
-                EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_WAIT(2)
-                EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-                EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 1, BS_FLAGS1_NICE_HIT)
-                EVT_ADD(LVar3, 1)
-            EVT_END_IF
-            EVT_IF_GT(LVar3, 1)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
-        EVT_CALL(ShowActionHud, TRUE)
-        EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
-        EVT_CALL(action_command_stop_leech_init)
-        EVT_CALL(SetupMashMeter, 1, 25, 0, 0, 0, 0)
-        EVT_WAIT(10)
-        EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
-        EVT_SET(LVarB, LVarA)
-        EVT_DIV(LVarB, 2)
-        EVT_WAIT(LVarB)
-        EVT_SET(LVarD, 0)
-        EVT_LOOP(0)
-            EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-            EVT_IF_FLAG(LVar0, AVAR_Flag_WaitForChild)
-                EVT_CALL(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_BITWISE_AND_CONST(LVar0, ~AVAR_Flag_WaitForChild)
-                EVT_CALL(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
-                EVT_WAIT(2)
-                EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-                EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_NICE_HIT)
-                EVT_ADD(LVarD, 1)
-            EVT_END_IF
-            EVT_CALL(GetActionSuccessCopy, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_IF_GT(LVarD, 1)
-                    EVT_CALL(func_80269470)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_IF
-            EVT_CALL(GetPlayerHP, LVar0)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(func_80269470)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_IF_GE(LVarD, 20)
-                EVT_CALL(func_80269470)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(func_80269470)
-    EVT_END_IF
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+            Wait(50)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(GetStatusFlags, ACTOR_PLAYER, LVar1)
+    IfFlag(LVar1, STATUS_FLAG_STONE)
+        Wait(10)
+        Set(LVar3, 0)
+        Loop(0)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            IfFlag(LVar0, AVAR_Flag_WaitForChild)
+                Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                BitwiseAndConst(LVar0, ~AVAR_Flag_WaitForChild)
+                Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                Wait(2)
+                Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+                Call(SetGoalToTarget, ACTOR_SELF)
+                Call(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 1, BS_FLAGS1_NICE_HIT)
+                Add(LVar3, 1)
+            EndIf
+            IfGt(LVar3, 1)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+    Else
+        Call(ShowMessageBox, BTL_MSG_ACTION_TIP_MASH_BUTTON, 180)
+        Call(ShowActionHud, TRUE)
+        Call(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
+        Call(action_command_stop_leech_init)
+        Call(SetupMashMeter, 1, 25, 0, 0, 0, 0)
+        Wait(10)
+        Call(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
+        Call(action_command_stop_leech_start, 0, 32767, 3)
+        Set(LVarB, LVarA)
+        Div(LVarB, 2)
+        Wait(LVarB)
+        Set(LVarD, 0)
+        Loop(0)
+            Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+            IfFlag(LVar0, AVAR_Flag_WaitForChild)
+                Call(GetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                BitwiseAndConst(LVar0, ~AVAR_Flag_WaitForChild)
+                Call(SetActorVar, ACTOR_HUFF_N_PUFF, AVAR_Flags, LVar0)
+                Wait(2)
+                Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+                Call(SetGoalToTarget, ACTOR_SELF)
+                Call(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_NICE_HIT)
+                Add(LVarD, 1)
+            EndIf
+            Call(GetActionSuccessCopy, LVar0)
+            IfEq(LVar0, 1)
+                BreakLoop
+            EndIf
+            Call(GetLastDamage, ACTOR_PLAYER, LVar0)
+            IfEq(LVar0, 0)
+                IfGt(LVarD, 1)
+                    Call(func_80269470)
+                    BreakLoop
+                EndIf
+            EndIf
+            Call(GetPlayerHP, LVar0)
+            IfEq(LVar0, 0)
+                Call(func_80269470)
+                BreakLoop
+            EndIf
+            IfGe(LVarD, 20)
+                Call(func_80269470)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+        Call(func_80269470)
+    EndIf
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 20)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
             #define HNP_SCATTER_PUFF(idx) \
-                EVT_IF_FLAG(LVar0, 1 << idx) \
-                    EVT_KILL_THREAD(ArrayVar(idx + MAX_RUFF_PUFFS)) \
-                    EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-                    EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim12) \
-                    EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim13) \
-                    EVT_END_IF \
-                    EVT_THREAD \
-                        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2) \
-                        EVT_CALL(GetActorPos, ArrayVar(idx), LVar3, LVar4, LVar5) \
-                        EVT_CALL(N(Atan2), LVar6, LVar0, LVar2, LVar3, LVar5) \
-                        EVT_DIVF(LVar6, EVT_FLOAT(2.0)) \
-                        EVT_ADDF(LVar6, EVT_FLOAT(90.0)) \
-                        EVT_CALL(AddVectorPolar, LVar0, LVar1, EVT_FLOAT(70.0), LVar6) \
-                        EVT_CALL(SetActorJumpGravity, ArrayVar(idx), EVT_FLOAT(1.0)) \
-                        EVT_CALL(SetGoalPos, ArrayVar(idx), LVar0, LVar1, LVar2) \
-                        EVT_CALL(JumpToGoal, ArrayVar(idx), 20, FALSE, FALSE, FALSE) \
-                    EVT_END_THREAD \
-                EVT_END_IF
+                IfFlag(LVar0, 1 << idx) \
+                    KillThread(ArrayVar(idx + MAX_RUFF_PUFFS)) \
+                    Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+                    IfEq(LVar1, 0) \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim12) \
+                    Else \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim13) \
+                    EndIf \
+                    Thread \
+                        Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2) \
+                        Call(GetActorPos, ArrayVar(idx), LVar3, LVar4, LVar5) \
+                        Call(N(Atan2), LVar6, LVar0, LVar2, LVar3, LVar5) \
+                        DivF(LVar6, Float(2.0)) \
+                        AddF(LVar6, Float(90.0)) \
+                        Call(AddVectorPolar, LVar0, LVar1, Float(70.0), LVar6) \
+                        Call(SetActorJumpGravity, ArrayVar(idx), Float(1.0)) \
+                        Call(SetGoalPos, ArrayVar(idx), LVar0, LVar1, LVar2) \
+                        Call(JumpToGoal, ArrayVar(idx), 20, FALSE, FALSE, FALSE) \
+                    EndThread \
+                EndIf
 
             // throw each Tuff Puff away in a large fan pattern
             FOR_CHILDREN_ORDERED(HNP_SCATTER_PUFF)
 
-            EVT_CALL(GetPlayerHP, LVar0)
-            EVT_IF_NE(LVar0, 0)
-                EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-                EVT_WAIT(1)
-                EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-                EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_STONE)
-                    EVT_THREAD
-                        EVT_SET(LVar0, 0)
-                        EVT_LOOP(20)
-                            EVT_ADD(LVar0, 54)
-                            EVT_MOD(LVar0, 360)
-                            EVT_CALL(SetActorYaw, ACTOR_PLAYER, LVar0)
-                            EVT_WAIT(1)
-                        EVT_END_LOOP
-                        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
-                    EVT_END_THREAD
-                    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_Land)
-                    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.5))
-                    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                    EVT_CALL(func_80273444, 20, 0, 1)
-                EVT_ELSE
-                    EVT_WAIT(20)
-                EVT_END_IF
-                EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-            EVT_ELSE
-                EVT_WAIT(20)
-            EVT_END_IF
-            EVT_WAIT(15)
-            EVT_SET(LVarA, 0)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
+            Call(GetPlayerHP, LVar0)
+            IfNe(LVar0, 0)
+                Call(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+                Wait(1)
+                Call(GetStatusFlags, ACTOR_PLAYER, LVar0)
+                IfNotFlag(LVar0, STATUS_FLAG_STONE)
+                    Thread
+                        Set(LVar0, 0)
+                        Loop(20)
+                            Add(LVar0, 54)
+                            Mod(LVar0, 360)
+                            Call(SetActorYaw, ACTOR_PLAYER, LVar0)
+                            Wait(1)
+                        EndLoop
+                        Call(SetActorYaw, ACTOR_PLAYER, 0)
+                    EndThread
+                    Call(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_Land)
+                    Call(SetActorJumpGravity, ACTOR_PLAYER, Float(1.5))
+                    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                    Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                    Call(func_80273444, 20, 0, 1)
+                Else
+                    Wait(20)
+                EndIf
+                Call(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+            Else
+                Wait(20)
+            EndIf
+            Wait(15)
+            Set(LVarA, 0)
+            Call(GetActorVar, ACTOR_SELF, AVAR_ChildBits, LVar0)
 
             #define HNP_RETURN_HOME(idx) \
-                EVT_IF_FLAG(LVar0, 1 << idx) \
-                    EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-                    EVT_IF_EQ(LVar1, 0) \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim06) \
-                    EVT_ELSE \
-                        EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim07) \
-                    EVT_END_IF \
-                    EVT_THREAD \
-                        EVT_CALL(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_WobbleMode, 0) \
-                        EVT_MOD(LVarA, 2) \
-                        EVT_IF_EQ(LVarA, 0) \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
-                        EVT_ELSE \
-                            EVT_CALL(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
-                        EVT_END_IF \
-                        EVT_CALL(SetGoalToHome, ArrayVar(idx)) \
-                        EVT_CALL(FlyToGoal, ArrayVar(idx), 30, 10, EASING_SIN_OUT) \
-                        EVT_CALL(SetPartAlpha, ArrayVar(idx), 1, 255) \
-                        EVT_CALL(SetActorYaw, ArrayVar(idx), 0) \
-                        EVT_CALL(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
-                        EVT_IF_EQ(LVar1, 0) \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim02) \
-                        EVT_ELSE \
-                            EVT_CALL(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim03) \
-                        EVT_END_IF \
-                    EVT_END_THREAD \
-                    EVT_ADD(LVarA, 1) \
-                    EVT_WAIT(4) \
-                EVT_END_IF
+                IfFlag(LVar0, 1 << idx) \
+                    Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+                    IfEq(LVar1, 0) \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim06) \
+                    Else \
+                        Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim07) \
+                    EndIf \
+                    Thread \
+                        Call(SetActorVar, ArrayVar(idx), AVAR_TuffPuff_WobbleMode, 0) \
+                        Mod(LVarA, 2) \
+                        IfEq(LVarA, 0) \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_A) \
+                        Else \
+                            Call(PlaySoundAtActor, ArrayVar(idx), SOUND_RUFF_PUFF_FLY_B) \
+                        EndIf \
+                        Call(SetGoalToHome, ArrayVar(idx)) \
+                        Call(FlyToGoal, ArrayVar(idx), 30, 10, EASING_SIN_OUT) \
+                        Call(SetPartAlpha, ArrayVar(idx), 1, 255) \
+                        Call(SetActorYaw, ArrayVar(idx), 0) \
+                        Call(GetActorVar, ArrayVar(idx), AVAR_TuffPuff_IsLarge, LVar1) \
+                        IfEq(LVar1, 0) \
+                            Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim02) \
+                        Else \
+                            Call(SetAnimation, ArrayVar(idx), 1, ANIM_TuffPuff_Anim03) \
+                        EndIf \
+                    EndThread \
+                    Add(LVarA, 1) \
+                    Wait(4) \
+                EndIf
 
             // have each Tuff Puff fly back to its home position
             FOR_CHILDREN_SCATTERED(HNP_RETURN_HOME)
 
-            EVT_WAIT(50)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+            Wait(50)
+        EndCaseGroup
+    EndSwitch
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };

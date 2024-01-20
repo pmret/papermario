@@ -12,62 +12,62 @@ API_CALLABLE(N(CheckVineTriggerDist)) {
 }
 
 EvtScript N(EVS_DroppingVine) = {
-    EVT_SET(LVar9, LVar6)
-    EVT_SET(LVar8, LVar5)
-    EVT_SET(LVar7, LVar4)
-    EVT_SET(LVar6, LVar3)
-    EVT_SET(LVar5, LVar2)
-    EVT_SET(LVar4, LVar1)
-    EVT_SET(LVar3, LVar0)
-    EVT_CALL(EnableModel, LVar6, FALSE)
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(N(CheckVineTriggerDist))
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(EnableModel, LVar6, TRUE)
-    EVT_END_THREAD
-    EVT_IF_NE(LVarA, 0)
-        EVT_THREAD
-            EVT_WAIT(5)
-            EVT_SET(LVar0, LVar3)
-            EVT_SET(LVar1, LVar4)
-            EVT_SET(LVar2, LVar5)
-            EVT_ADD(LVar1, 10)
-            EVT_ADD(LVar2, 8)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 15)
-            EVT_WAIT(15)
-            EVT_SUB(LVar1, 10)
-            EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_FALL, 0)
-        EVT_END_THREAD
-    EVT_END_IF
-    EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(PlaySoundAt, SOUND_FLIP_PAGE, SOUND_SPACE_DEFAULT, LVar3, LVar4, LVar5)
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, 0, 180, 20, EASING_CUBIC_IN)
-    EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateModel, LVar8, LVar0, 1, 0, 0)
-        EVT_CALL(RotateModel, LVar9, LVar0, 1, 0, 0)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_CALL(EnableModel, LVar7, FALSE)
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, LVar6)
+    Set(LVar8, LVar5)
+    Set(LVar7, LVar4)
+    Set(LVar6, LVar3)
+    Set(LVar5, LVar2)
+    Set(LVar4, LVar1)
+    Set(LVar3, LVar0)
+    Call(EnableModel, LVar6, FALSE)
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(N(CheckVineTriggerDist))
+        IfEq(LVar0, 0)
+            Wait(1)
+            Goto(0)
+        EndIf
+    Thread
+        Wait(5)
+        Call(EnableModel, LVar6, TRUE)
+    EndThread
+    IfNe(LVarA, 0)
+        Thread
+            Wait(5)
+            Set(LVar0, LVar3)
+            Set(LVar1, LVar4)
+            Set(LVar2, LVar5)
+            Add(LVar1, 10)
+            Add(LVar2, 8)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 15)
+            Wait(15)
+            Sub(LVar1, 10)
+            Call(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, ITEM_SPAWN_MODE_FALL, 0)
+        EndThread
+    EndIf
+    Thread
+        Wait(10)
+        Call(PlaySoundAt, SOUND_FLIP_PAGE, SOUND_SPACE_DEFAULT, LVar3, LVar4, LVar5)
+    EndThread
+    Call(MakeLerp, 0, 180, 20, EASING_CUBIC_IN)
+    Label(1)
+        Call(UpdateLerp)
+        Call(RotateModel, LVar8, LVar0, 1, 0, 0)
+        Call(RotateModel, LVar9, LVar0, 1, 0, 0)
+        IfEq(LVar1, 1)
+            Wait(1)
+            Goto(1)
+        EndIf
+    Call(EnableModel, LVar7, FALSE)
+    Return
+    End
 };
 
 #define EVT_DROPPING_VINE(itemID, modelUpperAfter, modelLowerBefore, modelLowerAfter, modelUpperBefore) \
-    EVT_CALL(GetModelCenter, modelUpperAfter) \
-    EVT_SET(LVar3, modelUpperAfter) \
-    EVT_SET(LVar4, modelLowerBefore) \
-    EVT_SET(LVar5, modelLowerAfter) \
-    EVT_SET(LVar6, modelUpperBefore) \
-    EVT_SET(LVarA, itemID) \
-    EVT_EXEC(N(EVS_DroppingVine))
+    Call(GetModelCenter, modelUpperAfter) \
+    Set(LVar3, modelUpperAfter) \
+    Set(LVar4, modelLowerBefore) \
+    Set(LVar5, modelLowerAfter) \
+    Set(LVar6, modelUpperBefore) \
+    Set(LVarA, itemID) \
+    Exec(N(EVS_DroppingVine))

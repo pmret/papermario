@@ -10,9 +10,9 @@ MobileAISettings N(AISettings_Penguin_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_Penguin_Wander) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Penguin_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Penguin_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Penguin_Wander) = {

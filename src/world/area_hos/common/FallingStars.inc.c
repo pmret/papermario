@@ -126,96 +126,96 @@ EvtScript N(EVS_Starfall_Directed) = {
     #define LV_Dz LVarC
     #define LV_Time LVarD
     #define LV_SoundDelay LVarE
-    EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_SET(LV_Time, 0)
-    EVT_SET(LV_SoundDelay, 0)
-    EVT_LABEL(0)
+    SetGroup(EVT_GROUP_0B)
+    Set(LV_Time, 0)
+    Set(LV_SoundDelay, 0)
+    Label(0)
         // no shooting stars if player x < -50
-        EVT_CALL(GetPlayerPos, LV_PosX, LV_PosY, LV_PosZ)
-        EVT_IF_LT(LV_PosX, -50)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
+        Call(GetPlayerPos, LV_PosX, LV_PosY, LV_PosZ)
+        IfLt(LV_PosX, -50)
+            Wait(1)
+            Goto(0)
+        EndIf
         // choose delay from ~100 to 20 as a function of player x position
-        EVT_SET(LV_Delay, 1000)
-        EVT_SUB(LV_Delay, LV_PosX)
-        EVT_DIV(LV_Delay, 10)
-        EVT_IF_LT(LV_Delay, 20)
-            EVT_SET(LV_Delay, 20)
-        EVT_END_IF
+        Set(LV_Delay, 1000)
+        Sub(LV_Delay, LV_PosX)
+        Div(LV_Delay, 10)
+        IfLt(LV_Delay, 20)
+            Set(LV_Delay, 20)
+        EndIf
         // choose a random spawn position within 400 units of the player in x and z
-        EVT_CALL(GetPlayerPos, LV_PosX, LV_PosY, LV_PosZ)
-        EVT_CALL(RandInt, 400, LV_Dx)
-        EVT_SET(LV_Dy, 200)
-        EVT_CALL(RandInt, 400, LV_Dz)
-        EVT_SUB(LV_Dz, 200)
-        EVT_ADD(LV_PosX, LV_Dx)
-        EVT_ADD(LV_PosY, LV_Dy)
-        EVT_ADD(LV_PosZ, LV_Dz)
+        Call(GetPlayerPos, LV_PosX, LV_PosY, LV_PosZ)
+        Call(RandInt, 400, LV_Dx)
+        Set(LV_Dy, 200)
+        Call(RandInt, 400, LV_Dz)
+        Sub(LV_Dz, 200)
+        Add(LV_PosX, LV_Dx)
+        Add(LV_PosY, LV_Dy)
+        Add(LV_PosZ, LV_Dz)
         // choose a final position relative to the spawn position, with y = 0 and a random x offset
-        EVT_SET(LV_EndX, LV_PosX)
-        EVT_CALL(RandInt, 100, LV_Dx)
-        EVT_ADD(LV_Dx, 50)
-        EVT_SUB(LV_EndX, LV_Dx)
-        EVT_SET(LV_EndY, 0)
-        EVT_SET(LV_EndZ, LV_PosZ)
+        Set(LV_EndX, LV_PosX)
+        Call(RandInt, 100, LV_Dx)
+        Add(LV_Dx, 50)
+        Sub(LV_EndX, LV_Dx)
+        Set(LV_EndY, 0)
+        Set(LV_EndZ, LV_PosZ)
         // choose random speed
-        EVT_CALL(RandInt, 4, LV_Speed)
-        EVT_ADD(LV_Speed, 10)
+        Call(RandInt, 4, LV_Speed)
+        Add(LV_Speed, 10)
         // choose random star type
-        EVT_SWITCH(LV_PosZ)
-            EVT_CASE_LT(-290)
-                EVT_SET(LV_Type, FX_STAR_BACKGROUND)
-            EVT_CASE_LT(40)
-                EVT_SET(LV_Type, FX_STAR_LARGE_BOUNCING)
-            EVT_CASE_GE(40)
-                EVT_SET(LV_Type, FX_STAR_FOREGROUND)
-        EVT_END_SWITCH
+        Switch(LV_PosZ)
+            CaseLt(-290)
+                Set(LV_Type, FX_STAR_BACKGROUND)
+            CaseLt(40)
+                Set(LV_Type, FX_STAR_LARGE_BOUNCING)
+            CaseGe(40)
+                Set(LV_Type, FX_STAR_FOREGROUND)
+        EndSwitch
         // play sound (subject to minimum delay)
-        EVT_IF_LT(LV_SoundDelay, 2)
-            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, SOUND_SPACE_DEFAULT, LV_PosX, LV_PosY, LV_PosZ)
-            EVT_ADD(LV_SoundDelay, 1)
-        EVT_END_IF
-        EVT_ADD(LV_Time, LV_Delay)
-        EVT_IF_GT(LV_Time, 30)
-            EVT_SET(LV_Time, 0)
-            EVT_SET(LV_SoundDelay, 0)
-        EVT_END_IF
+        IfLt(LV_SoundDelay, 2)
+            Call(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, SOUND_SPACE_DEFAULT, LV_PosX, LV_PosY, LV_PosZ)
+            Add(LV_SoundDelay, 1)
+        EndIf
+        Add(LV_Time, LV_Delay)
+        IfGt(LV_Time, 30)
+            Set(LV_Time, 0)
+            Set(LV_SoundDelay, 0)
+        EndIf
         // spawn the effect
-        EVT_CALL(N(SpawnDirectedShootingStarFX), LV_Type, LV_PosX, LV_PosY, LV_PosZ, LV_EndX, LV_EndY, LV_EndZ, LV_Speed)
-        EVT_WAIT(LV_Delay)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+        Call(N(SpawnDirectedShootingStarFX), LV_Type, LV_PosX, LV_PosY, LV_PosZ, LV_EndX, LV_EndY, LV_EndZ, LV_Speed)
+        Wait(LV_Delay)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Starfall_Random) = {
-    EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_THREAD
-        EVT_LABEL(0)
-            EVT_CALL(RandInt, 50, LVar0)
-            EVT_ADD(LVar0, 10)
-            EVT_CALL(N(SpawnRandomBackgroundShootingStarFX))
-            EVT_WAIT(LVar0)
-            EVT_GOTO(0)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LABEL(1)
-            EVT_CALL(RandInt, 50, LVar0)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(N(SpawnRandomForegroundShootingStarFX))
-            EVT_WAIT(LVar0)
-            EVT_GOTO(1)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LABEL(2)
-            EVT_CALL(RandInt, 50, LVar0)
-            EVT_ADD(LVar0, 20)
-            EVT_CALL(N(SpawnRandomBouncingShootingStarFX))
-            EVT_CALL(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
-            EVT_WAIT(LVar0)
-            EVT_GOTO(2)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_0B)
+    Thread
+        Label(0)
+            Call(RandInt, 50, LVar0)
+            Add(LVar0, 10)
+            Call(N(SpawnRandomBackgroundShootingStarFX))
+            Wait(LVar0)
+            Goto(0)
+    EndThread
+    Thread
+        Label(1)
+            Call(RandInt, 50, LVar0)
+            Add(LVar0, 20)
+            Call(N(SpawnRandomForegroundShootingStarFX))
+            Wait(LVar0)
+            Goto(1)
+    EndThread
+    Thread
+        Label(2)
+            Call(RandInt, 50, LVar0)
+            Add(LVar0, 20)
+            Call(N(SpawnRandomBouncingShootingStarFX))
+            Call(PlaySoundAt, SOUND_SEQ_SHOOTING_STAR_FALL, SOUND_SPACE_DEFAULT, LVar1, LVar2, LVar3)
+            Wait(LVar0)
+            Goto(2)
+    EndThread
+    Return
+    End
 };

@@ -4,35 +4,35 @@
 #include "world/common/npc/Twink.h"
 
 EvtScript N(EVS_NpcInteract_Twink) = {
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Twink) = {
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-        EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-        EVT_CALL(GetSelfVar, 1, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Wait(1)
+        Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+        Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+        Call(GetSelfVar, 1, LVar0)
+        IfEq(LVar0, 1)
+            Call(NpcFacePlayer, NPC_PARTNER, 0)
+        EndIf
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 20, 20)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Twink)))
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Twink)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Call(SetNpcCollisionSize, NPC_SELF, 20, 20)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Twink)))
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Twink)))
+    Return
+    End
 };
 
 // normally, you cant interact with your partner, so a dummy npc is created to allow it

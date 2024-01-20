@@ -22,19 +22,19 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
 }
 
 EvtScript NAMESPACE = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 1)
-    EVT_WAIT(3)
-    EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
-    EVT_CALL(EnableBattleStatusBar, FALSE)
-    EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(N(SetupDemoPlayerMove))
-    EVT_CALL(SetBattleState, BATTLE_STATE_PLAYER_MOVE)
-    EVT_WAIT(130)
-    EVT_LOOP(30)
-        EVT_CALL(SetCommandAutoSuccess, FALSE)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 1)
+    Wait(3)
+    Call(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
+    Call(EnableBattleStatusBar, FALSE)
+    Call(WaitForState, BATTLE_STATE_PLAYER_MENU)
+    Call(N(SetupDemoPlayerMove))
+    Call(SetBattleState, BATTLE_STATE_PLAYER_MOVE)
+    Wait(130)
+    Loop(30)
+        Call(SetCommandAutoSuccess, FALSE)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };

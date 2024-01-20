@@ -25,8 +25,8 @@ typedef struct RecordDisplayData {
 } RecordDisplayData; /* size = 0x18 */
 
 EvtScript N(D_80243C40_E123E0) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 #if VERSION_PAL
@@ -182,28 +182,28 @@ API_CALLABLE(N(UpdateRecordDisplay)) {
 }
 
 EvtScript N(EVS_OnInteract_JumpRecords) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(N(UpdateRecordDisplay), MINIGAME_TYPE_JUMP)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(N(UpdateRecordDisplay), MINIGAME_TYPE_JUMP)
+    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnInteract_SmashRecords) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(N(UpdateRecordDisplay), MINIGAME_TYPE_SMASH)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(N(UpdateRecordDisplay), MINIGAME_TYPE_SMASH)
+    Call(DisablePlayerInput, FALSE)
+    Call(DisablePlayerPhysics, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindInteractTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInteract_JumpRecords)), TRIGGER_WALL_PRESS_A, COLLIDER_score1, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OnInteract_SmashRecords)), TRIGGER_WALL_PRESS_A, COLLIDER_score2, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_OnInteract_JumpRecords)), TRIGGER_WALL_PRESS_A, COLLIDER_score1, 1, 0)
+    BindTrigger(Ref(N(EVS_OnInteract_SmashRecords)), TRIGGER_WALL_PRESS_A, COLLIDER_score2, 1, 0)
+    Return
+    End
 };

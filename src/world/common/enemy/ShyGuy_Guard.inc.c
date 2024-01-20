@@ -15,9 +15,9 @@ GuardAISettings N(AISettings_ShyGuy_Guard) = {
 };
 
 EvtScript N(EVS_NpcAI_ShyGuy_Guard) = {
-    EVT_CALL(N(GuardAI_Main), EVT_PTR(N(AISettings_ShyGuy_Guard)))
-    EVT_RETURN
-    EVT_END
+    Call(N(GuardAI_Main), Ref(N(AISettings_ShyGuy_Guard)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_ShyGuy_Guard) = {

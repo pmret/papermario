@@ -7,18 +7,18 @@ NpcSettings N(NpcSettings_Scenes) = {
 };
 
 EvtScript N(EVS_NpcInit_Luigi_Scenes) = {
-    EVT_CALL(SetNpcCollisionSize, NPC_SELF, 46, 26)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(kmr_20_ENTRY_2)
-        EVT_CASE_OR_EQ(kmr_20_ENTRY_3)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Luigi_IdleSit)
-            EVT_CALL(SetNpcPos, NPC_SELF, 196, 44, -37)
-            EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcCollisionSize, NPC_SELF, 46, 26)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(kmr_20_ENTRY_2)
+        CaseOrEq(kmr_20_ENTRY_3)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Luigi_IdleSit)
+            Call(SetNpcPos, NPC_SELF, 196, 44, -37)
+            Call(SetNpcYaw, NPC_SELF, 270)
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Scenes)[] = {

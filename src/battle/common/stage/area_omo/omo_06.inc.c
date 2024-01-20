@@ -4,54 +4,54 @@
 #define NAMESPACE A(omo_06)
 
 EvtScript N(EVS_UpdateMovingPlatforms) = {
-    EVT_SET(LVarA, LVar0) // modelID
-    EVT_SET(LVar9, LVar1)
-    EVT_SET(LVar8, LVar2)
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, LVar9, LVar8, EASING_COS_IN_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, LVarA, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, LVar9, 0, LVar8, EASING_COS_IN_OUT)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, LVarA, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0) // modelID
+    Set(LVar9, LVar1)
+    Set(LVar8, LVar2)
+    Label(0)
+        Call(MakeLerp, 0, LVar9, LVar8, EASING_COS_IN_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, LVarA, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(MakeLerp, LVar9, 0, LVar8, EASING_COS_IN_OUT)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, LVarA, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_THREAD
-        EVT_SET(LVar0, MODEL_ere1)
-        EVT_SET(LVar1, -50)
-        EVT_SET(LVar2, 120)
-        EVT_EXEC(N(EVS_UpdateMovingPlatforms))
-        EVT_WAIT(10)
-        EVT_SET(LVar0, MODEL_ere2)
-        EVT_SET(LVar1, -80)
-        EVT_SET(LVar2, 150)
-        EVT_EXEC(N(EVS_UpdateMovingPlatforms))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Thread
+        Set(LVar0, MODEL_ere1)
+        Set(LVar1, -50)
+        Set(LVar2, 120)
+        Exec(N(EVS_UpdateMovingPlatforms))
+        Wait(10)
+        Set(LVar0, MODEL_ere2)
+        Set(LVar1, -80)
+        Set(LVar2, 150)
+        Exec(N(EVS_UpdateMovingPlatforms))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

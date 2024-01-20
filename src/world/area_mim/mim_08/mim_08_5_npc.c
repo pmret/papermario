@@ -5,24 +5,24 @@
 #include "world/common/enemy/PiranhaPlant.inc.c"
 
 EvtScript N(EVS_NpcIdle_Bzzap) = {
-    EVT_LABEL(100)
-    EVT_WAIT(1)
-    EVT_IF_EQ(MV_Unk_00, 0)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(SetNpcPos, NPC_SELF, -280, 108, 0)
-    EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.0))
-    EVT_CALL(NpcJump1, NPC_SELF, -280, 50, 10, 5)
-    EVT_WAIT(50)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_Bzzap)))
-    EVT_RETURN
-    EVT_END
+    Label(100)
+    Wait(1)
+    IfEq(MV_Unk_00, 0)
+        Goto(100)
+    EndIf
+    Call(SetNpcPos, NPC_SELF, -280, 108, 0)
+    Call(SetNpcJumpscale, NPC_SELF, Float(0.0))
+    Call(NpcJump1, NPC_SELF, -280, 50, 10, 5)
+    Wait(50)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_Bzzap)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Bzzap) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Bzzap)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Bzzap)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Bzzap) = {

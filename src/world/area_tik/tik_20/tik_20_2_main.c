@@ -8,20 +8,20 @@ EvtScript N(EVS_ExitWalk_tik_08_1) = EVT_EXIT_WALK(60, tik_20_ENTRY_0, "tik_08",
 EvtScript N(EVS_ExitWalk_tik_21_0) = EVT_EXIT_WALK(60, tik_20_ENTRY_1, "tik_21", tik_21_ENTRY_0);
 
 EvtScript N(EVS_GotoMap_tik_23_1) = {
-    EVT_CALL(GotoMap, EVT_PTR("tik_23"), tik_23_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("tik_23"), tik_23_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitPipe_tik_23_1) = EVT_EXIT_PIPE_VERTICAL(tik_20_ENTRY_2, COLLIDER_o109, N(EVS_GotoMap_tik_23_1));
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tik_08_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tik_21_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitPipe_tik_23_1)), TRIGGER_FLOOR_TOUCH, COLLIDER_o109, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_tik_08_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_tik_21_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deilie, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitPipe_tik_23_1)), TRIGGER_FLOOR_TOUCH, COLLIDER_o109, 1, 0)
+    Return
+    End
 };
 
 LavaReset N(SafeFloorColliders)[] = {
@@ -56,10 +56,10 @@ DripVolumeList N(DripVolumes) = {
 };
 
 EvtScript N(EVS_SetupDrips) = {
-    EVT_SET(LVar0, EVT_PTR(N(DripVolumes)))
-    EVT_EXEC(N(EVS_CreateDripVolumes))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(DripVolumes)))
+    Exec(N(EVS_CreateDripVolumes))
+    Return
+    End
 };
 
 MAP_RODATA_PAD(1,unk);
@@ -67,49 +67,49 @@ MAP_RODATA_PAD(1,unk);
 #include "../common/Flotsam.inc.c"
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
-    EVT_CALL(SetSpriteShading, SHADING_TIK_20)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_toge, SURFACE_TYPE_SPIKES)
-    EVT_THREAD
-        EVT_CALL(ResetFromLava, EVT_PTR(N(SafeFloorColliders)))
-    EVT_END_THREAD
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(PlaySound, SOUND_LOOP_TIK20_WATER)
-    EVT_EXEC(N(EVS_SetupDrips))
-    EVT_THREAD
+    Set(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
+    Call(SetSpriteShading, SHADING_TIK_20)
+    SetUP_CAMERA_NO_LEAD()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_SURFACE, COLLIDER_toge, SURFACE_TYPE_SPIKES)
+    Thread
+        Call(ResetFromLava, Ref(N(SafeFloorColliders)))
+    EndThread
+    Exec(N(EVS_SetupMusic))
+    Call(PlaySound, SOUND_LOOP_TIK20_WATER)
+    Exec(N(EVS_SetupDrips))
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP(   70,  100,  100,  130)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetTexPanner, MODEL_nagare, 0)
-    EVT_THREAD
-        EVT_SET(LVar2, MODEL_bin)
-        EVT_EXEC(N(EVS_Flotsam_Bobbing))
-        EVT_WAIT(5)
-        EVT_SET(LVar2, MODEL_kan1)
-        EVT_EXEC(N(EVS_Flotsam_Bobbing))
-        EVT_WAIT(5)
-        EVT_SET(LVar2, MODEL_kan2)
-        EVT_EXEC(N(EVS_Flotsam_Bobbing))
-    EVT_END_THREAD
-    EVT_WAIT(1)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(tik_20_ENTRY_0)
-        EVT_CASE_OR_EQ(tik_20_ENTRY_1)
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(tik_20_ENTRY_2)
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetTexPanner, MODEL_nagare, 0)
+    Thread
+        Set(LVar2, MODEL_bin)
+        Exec(N(EVS_Flotsam_Bobbing))
+        Wait(5)
+        Set(LVar2, MODEL_kan1)
+        Exec(N(EVS_Flotsam_Bobbing))
+        Wait(5)
+        Set(LVar2, MODEL_kan2)
+        Exec(N(EVS_Flotsam_Bobbing))
+    EndThread
+    Wait(1)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(tik_20_ENTRY_0)
+        CaseOrEq(tik_20_ENTRY_1)
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+        EndCaseGroup
+        CaseEq(tik_20_ENTRY_2)
             EVT_ENTER_PIPE_VERTICAL(N(EVS_BindExitTriggers))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+        EndCaseGroup
+    EndSwitch
+    Wait(1)
+    Return
+    End
 };

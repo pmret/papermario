@@ -6,6 +6,6 @@ API_CALLABLE(N(FetchEntryID)) {
 }
 
 EvtScript N(EVS_SetupUnused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };

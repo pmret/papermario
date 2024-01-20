@@ -4,15 +4,15 @@
 #define NAMESPACE A(iwa_01b)
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupVisibility, MODEL_a, MODEL_GROUP_HIDDEN)
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetGroupVisibility, MODEL_a, MODEL_GROUP_HIDDEN)
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

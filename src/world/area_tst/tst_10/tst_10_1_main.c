@@ -20,87 +20,87 @@ MapSettings N(settings) = {
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
 EvtScript N(EVS_ExitWalk_tst_10_2) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseExitHeading, 60, tst_10_ENTRY_0)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("tst_10"), tst_10_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseExitHeading, 60, tst_10_ENTRY_0)
+    Exec(ExitWalk)
+    Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
 EvtScript N(EVS_ExitWalk_tst_10_3) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseExitHeading, 60, tst_10_ENTRY_1)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("tst_10"), tst_10_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseExitHeading, 60, tst_10_ENTRY_1)
+    Exec(ExitWalk)
+    Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
 EvtScript N(EVS_ExitWalk_tst_10_0) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseExitHeading, 60, tst_10_ENTRY_2)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("tst_10"), tst_10_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseExitHeading, 60, tst_10_ENTRY_2)
+    Exec(ExitWalk)
+    Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 // note: sets DisablePlayerInput, but does not use EVT_GROUP_1B
 EvtScript N(EVS_ExitWalk_tst_10_1) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseExitHeading, 60, tst_10_ENTRY_3)
-    EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, EVT_PTR("tst_10"), tst_10_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(UseExitHeading, 60, tst_10_ENTRY_3)
+    Exec(ExitWalk)
+    Call(GotoMap, Ref("tst_10"), tst_10_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_DisableExitCameraZones) = {
-    EVT_CALL(SetZoneEnabled, ZONE_north, FALSE)
-    EVT_CALL(SetZoneEnabled, ZONE_west,  FALSE)
-    EVT_CALL(SetZoneEnabled, ZONE_south, FALSE)
-    EVT_CALL(SetZoneEnabled, ZONE_east,  FALSE)
-    EVT_SET(AF_TST_00, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(SetZoneEnabled, ZONE_north, FALSE)
+    Call(SetZoneEnabled, ZONE_west,  FALSE)
+    Call(SetZoneEnabled, ZONE_south, FALSE)
+    Call(SetZoneEnabled, ZONE_east,  FALSE)
+    Set(AF_TST_00, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tst_10_2)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilin, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tst_10_3)), TRIGGER_FLOOR_TOUCH, COLLIDER_deiliw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tst_10_0)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilis, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tst_10_1)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilie, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_tst_10_2)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilin, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_tst_10_3)), TRIGGER_FLOOR_TOUCH, COLLIDER_deiliw, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_tst_10_0)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilis, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_tst_10_1)), TRIGGER_FLOOR_TOUCH, COLLIDER_deilie, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TESTING)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_IF_EQ(AF_TST_00, TRUE)
-        EVT_CALL(SetZoneEnabled, ZONE_north, FALSE)
-        EVT_CALL(SetZoneEnabled, ZONE_west,  FALSE)
-        EVT_CALL(SetZoneEnabled, ZONE_south, FALSE)
-        EVT_CALL(SetZoneEnabled, ZONE_east,  FALSE)
-        EVT_SET(AF_TST_00, FALSE)
-    EVT_ELSE
-        EVT_SET(AF_TST_00, TRUE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_DisableExitCameraZones)), TRIGGER_FLOOR_TOUCH, COLLIDER_change, 1, 0)
-    EVT_END_IF
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TESTING)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    ExecWait(N(EVS_MakeEntities))
+    IfEq(AF_TST_00, TRUE)
+        Call(SetZoneEnabled, ZONE_north, FALSE)
+        Call(SetZoneEnabled, ZONE_west,  FALSE)
+        Call(SetZoneEnabled, ZONE_south, FALSE)
+        Call(SetZoneEnabled, ZONE_east,  FALSE)
+        Set(AF_TST_00, FALSE)
+    Else
+        Set(AF_TST_00, TRUE)
+        BindTrigger(Ref(N(EVS_DisableExitCameraZones)), TRIGGER_FLOOR_TOUCH, COLLIDER_change, 1, 0)
+    EndIf
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Wait(1)
+    Return
+    End
 };
 
 TweesterPath N(DefaultTweesterPath) = {
@@ -120,8 +120,8 @@ TweesterPath N(DefaultTweesterPath) = {
 };
 
 EvtScript N(EVS_MakeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HeartBlock), -13, 60, -50, 0, MAKE_ENTITY_END)
-    EVT_CALL(MakeEntity, EVT_PTR(Entity_HiddenPanel), -111, 0, -55, 0, MODEL_o137, MAKE_ENTITY_END)
-    EVT_RETURN
-    EVT_END
+    Call(MakeEntity, Ref(Entity_HeartBlock), -13, 60, -50, 0, MAKE_ENTITY_END)
+    Call(MakeEntity, Ref(Entity_HiddenPanel), -111, 0, -55, 0, MODEL_o137, MAKE_ENTITY_END)
+    Return
+    End
 };

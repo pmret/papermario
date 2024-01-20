@@ -14,8 +14,8 @@ API_CALLABLE(N(AddMerlarHoverMotion)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_Merlar) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Merlar) = {
@@ -26,12 +26,12 @@ NpcSettings N(NpcSettings_Merlar) = {
 };
 
 EvtScript N(EVS_NpcAux_Merlar) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Merlar) = {
-    EVT_CALL(N(AddMerlarHoverMotion))
-    EVT_RETURN
-    EVT_END
+    Call(N(AddMerlarHoverMotion))
+    Return
+    End
 };

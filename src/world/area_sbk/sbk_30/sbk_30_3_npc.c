@@ -30,22 +30,22 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_DeliveryPrompt) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Kolorado, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle,
         ITEM_LETTER_TO_KOLORADO, ITEM_NONE,
         MSG_CH2_004A, MSG_CH2_004B, MSG_CH2_004C, MSG_CH2_004D,
-        EVT_PTR(N(LetterList)))
-        EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList)))
+        ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_DeliveryReward) = {
-    EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED)
+    IfEq(LVarC, DELIVERY_ACCEPTED)
         EVT_GIVE_STAR_PIECE()
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 s32 N(ArtifactList)[] = {
@@ -54,243 +54,243 @@ s32 N(ArtifactList)[] = {
 };
 
 EvtScript N(EVS_ArtifactPrompt) = {
-    EVT_SET(GF_SBK_GaveArtifactToKolorado, TRUE)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0044)
+    Set(GF_SBK_GaveArtifactToKolorado, TRUE)
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0044)
     EVT_GIVE_STAR_PIECE()
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0045)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0045)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {
-    EVT_CALL(GetNpcAnimation, NPC_SELF, LVar9)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-    EVT_IF_EQ(GF_SBK30_Met_Kolorado, FALSE)
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), 0, EVT_FLOAT(300.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0037)
-        EVT_CALL(ResetCam, CAM_DEFAULT, 4)
-        EVT_SET(GF_SBK30_Met_Kolorado, TRUE)
-        EVT_GOTO(50)
-    EVT_END_IF
-    EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0046)
-        EVT_GOTO(50)
-    EVT_END_IF
-    EVT_CALL(HasKeyItem, ITEM_ARTIFACT, LVar0)
-    EVT_IF_EQ(LVar0, 1)
-        EVT_IF_EQ(GF_SBK_KeptArtifactFromKolorado, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0043)
-        EVT_ELSE
-            EVT_SET(GF_SBK_KeptArtifactFromKolorado, TRUE)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0040)
-        EVT_END_IF
+    Call(GetNpcAnimation, NPC_SELF, LVar9)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+    IfEq(GF_SBK30_Met_Kolorado, FALSE)
+        Call(AdjustCam, CAM_DEFAULT, Float(4.0), 0, Float(300.0), Float(15.0), Float(-7.5))
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0037)
+        Call(ResetCam, CAM_DEFAULT, 4)
+        Set(GF_SBK30_Met_Kolorado, TRUE)
+        Goto(50)
+    EndIf
+    IfEq(GF_SBK_GaveArtifactToKolorado, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0046)
+        Goto(50)
+    EndIf
+    Call(HasKeyItem, ITEM_ARTIFACT, LVar0)
+    IfEq(LVar0, 1)
+        IfEq(GF_SBK_KeptArtifactFromKolorado, TRUE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0043)
+        Else
+            Set(GF_SBK_KeptArtifactFromKolorado, TRUE)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0040)
+        EndIf
         EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
-        EVT_SWITCH(LVar0)
-            EVT_CASE_GE(1)
-                EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))
-                EVT_GOTO(50)
-            EVT_CASE_DEFAULT
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0041)
+        Switch(LVar0)
+            CaseGe(1)
+                ExecWait(N(EVS_ArtifactPrompt))
+                Goto(50)
+            CaseDefault
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0041)
                 EVT_CHOOSE_KEY_ITEM_FROM(N(ArtifactList))
-                EVT_SWITCH(LVar0)
-                    EVT_CASE_GE(1)
-                        EVT_EXEC_WAIT(N(EVS_ArtifactPrompt))
-                    EVT_CASE_DEFAULT
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0042)
-                        EVT_GOTO(50)
-                EVT_END_SWITCH
-        EVT_END_SWITCH
-    EVT_END_IF
-    EVT_IF_GE(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
-        EVT_IF_EQ(GF_DRO02_Sheek_SpokeTo, FALSE)
-            EVT_IF_EQ(AF_SBK_04, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0039)
-                EVT_SET(AF_SBK_04, TRUE)
-                EVT_GOTO(50)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003A)
-                EVT_GOTO(50)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutRuins, FALSE)
-            EVT_IF_EQ(AF_SBK_05, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003B)
-                EVT_SET(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
-                EVT_SET(AF_SBK_05, TRUE)
-                EVT_GOTO(50)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003C)
-                EVT_GOTO(50)
-            EVT_END_IF
-        EVT_END_IF
-        EVT_IF_EQ(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
-            EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutMoustafa, FALSE)
-                EVT_IF_EQ(AF_SBK_06, FALSE)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003D)
-                    EVT_SET(AF_SBK_06, TRUE)
-                    EVT_GOTO(50)
-                EVT_ELSE
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003E)
-                    EVT_GOTO(50)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_END_IF
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003F)
-        EVT_GOTO(50)
-    EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0038)
-    EVT_LABEL(50)
-    EVT_LABEL(90)
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_EQ(LVar0, PARTNER_KOOPER)
-        EVT_IF_EQ(GF_SBK30_KooperMetKolorado, FALSE)
-            EVT_SET(GF_SBK30_KooperMetKolorado, TRUE)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldKooper_CelebrateLoop, ANIM_WorldKooper_Idle, 0, NPC_SELF, MSG_CH2_0047)
-            EVT_CALL(SpeakToNpc, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, NPC_PARTNER, MSG_CH2_0048)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldKooper_CelebrateLoop, ANIM_WorldKooper_Idle, 0, NPC_SELF, MSG_CH2_0049)
-            EVT_CALL(EnablePartnerAI)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, LVar9)
-    EVT_EXEC_WAIT(N(EVS_DeliveryPrompt))
-    EVT_EXEC_WAIT(N(EVS_DeliveryReward))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+                Switch(LVar0)
+                    CaseGe(1)
+                        ExecWait(N(EVS_ArtifactPrompt))
+                    CaseDefault
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0042)
+                        Goto(50)
+                EndSwitch
+        EndSwitch
+    EndIf
+    IfGe(GB_StoryProgress, STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST)
+        IfEq(GF_DRO02_Sheek_SpokeTo, FALSE)
+            IfEq(AF_SBK_04, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0039)
+                Set(AF_SBK_04, TRUE)
+                Goto(50)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003A)
+                Goto(50)
+            EndIf
+        EndIf
+        IfEq(GF_DRO02_Sheek_AskedAboutRuins, FALSE)
+            IfEq(AF_SBK_05, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003B)
+                Set(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
+                Set(AF_SBK_05, TRUE)
+                Goto(50)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003C)
+                Goto(50)
+            EndIf
+        EndIf
+        IfEq(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
+            IfEq(GF_DRO02_Sheek_AskedAboutMoustafa, FALSE)
+                IfEq(AF_SBK_06, FALSE)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003D)
+                    Set(AF_SBK_06, TRUE)
+                    Goto(50)
+                Else
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003E)
+                    Goto(50)
+                EndIf
+            EndIf
+        EndIf
+        Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_003F)
+        Goto(50)
+    EndIf
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, MSG_CH2_0038)
+    Label(50)
+    Label(90)
+    Call(GetCurrentPartnerID, LVar0)
+    IfEq(LVar0, PARTNER_KOOPER)
+        IfEq(GF_SBK30_KooperMetKolorado, FALSE)
+            Set(GF_SBK30_KooperMetKolorado, TRUE)
+            Call(DisablePartnerAI, 0)
+            Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldKooper_CelebrateLoop, ANIM_WorldKooper_Idle, 0, NPC_SELF, MSG_CH2_0047)
+            Call(SpeakToNpc, NPC_SELF, ANIM_Kolorado_Talk, ANIM_Kolorado_Idle, 0, NPC_PARTNER, MSG_CH2_0048)
+            Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldKooper_CelebrateLoop, ANIM_WorldKooper_Idle, 0, NPC_SELF, MSG_CH2_0049)
+            Call(EnablePartnerAI)
+        EndIf
+    EndIf
+    Call(SetNpcAnimation, NPC_SELF, LVar9)
+    ExecWait(N(EVS_DeliveryPrompt))
+    ExecWait(N(EVS_DeliveryReward))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
-    EVT_LOOP(0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-        EVT_WAIT(15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 97, -179, 120)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
-        EVT_WAIT(15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
-        EVT_CALL(NpcMoveTo, NPC_SELF, 200, -100, 120)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+        Wait(15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
+        Call(NpcMoveTo, NPC_SELF, 97, -179, 120)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Idle)
+        Wait(15)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Walk)
+        Call(NpcMoveTo, NPC_SELF, 200, -100, 120)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_KoloradoPanic) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.0))
-    EVT_CALL(NpcMoveTo, NPC_SELF, 145, -145, 0)
-    EVT_LABEL(0)
-    EVT_CALL(RandInt, 30, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_WAIT(LVar0)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-    EVT_ADD(LVar0, 180)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 5)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
+    Call(SetNpcSpeed, NPC_SELF, Float(4.0))
+    Call(NpcMoveTo, NPC_SELF, 145, -145, 0)
+    Label(0)
+    Call(RandInt, 30, LVar0)
+    Add(LVar0, 1)
+    Wait(LVar0)
+    Call(GetNpcYaw, NPC_SELF, LVar0)
+    Add(LVar0, 180)
+    Call(InterpNpcYaw, NPC_SELF, LVar0, 5)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kolorado) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_4)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_5)
-            EVT_CALL(SetNpcPos, NPC_SELF, 210, 0, -210)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_KoloradoPanic)))
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Kolorado)))
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Kolorado)))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(sbk_30_ENTRY_4)
+        CaseOrEq(sbk_30_ENTRY_5)
+            Call(SetNpcPos, NPC_SELF, 210, 0, -210)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_KoloradoPanic)))
+        EndCaseGroup
+        CaseDefault
+            Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Kolorado)))
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Kolorado)))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_Archeologist_01) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Archeologist_Talk)
-    EVT_LABEL(0)
-    EVT_CALL(RandInt, 50, LVar0)
-    EVT_ADD(LVar0, 1)
-    EVT_WAIT(LVar0)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-    EVT_ADD(LVar0, 180)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 5)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Archeologist_Talk)
+    Label(0)
+    Call(RandInt, 50, LVar0)
+    Add(LVar0, 1)
+    Wait(LVar0)
+    Call(GetNpcYaw, NPC_SELF, LVar0)
+    Add(LVar0, 180)
+    Call(InterpNpcYaw, NPC_SELF, LVar0, 5)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Archeologist_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_GOT_PULSE_STONE)
-            EVT_IF_EQ(AF_SBK_02, FALSE)
-                EVT_SET(LVar0, MSG_CH2_004E)
-                EVT_SET(AF_SBK_02, TRUE)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_CH2_004F)
-                EVT_SET(AF_SBK_02, FALSE)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, FALSE)
-                EVT_SET(LVar0, MSG_CH2_0050)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_CH2_0051)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_GOT_PULSE_STONE)
+            IfEq(AF_SBK_02, FALSE)
+                Set(LVar0, MSG_CH2_004E)
+                Set(AF_SBK_02, TRUE)
+            Else
+                Set(LVar0, MSG_CH2_004F)
+                Set(AF_SBK_02, FALSE)
+            EndIf
+        CaseDefault
+            IfEq(GF_SBK_GaveArtifactToKolorado, FALSE)
+                Set(LVar0, MSG_CH2_0050)
+            Else
+                Set(LVar0, MSG_CH2_0051)
+            EndIf
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Archeologist_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Archeologist_01)))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_4)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_5)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Archeologist_01)))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Archeologist_01)))
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(sbk_30_ENTRY_4)
+        CaseOrEq(sbk_30_ENTRY_5)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Archeologist_01)))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Archeologist_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_GOT_PULSE_STONE)
-            EVT_IF_EQ(AF_SBK_03, FALSE)
-                EVT_SET(LVar0, MSG_CH2_0052)
-                EVT_SET(AF_SBK_03, TRUE)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_CH2_0053)
-                EVT_SET(AF_SBK_03, FALSE)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(GF_SBK_GaveArtifactToKolorado, FALSE)
-                EVT_SET(LVar0, MSG_CH2_0054)
-            EVT_ELSE
-                EVT_SET(LVar0, MSG_CH2_0055)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_GOT_PULSE_STONE)
+            IfEq(AF_SBK_03, FALSE)
+                Set(LVar0, MSG_CH2_0052)
+                Set(AF_SBK_03, TRUE)
+            Else
+                Set(LVar0, MSG_CH2_0053)
+                Set(AF_SBK_03, FALSE)
+            EndIf
+        CaseDefault
+            IfEq(GF_SBK_GaveArtifactToKolorado, FALSE)
+                Set(LVar0, MSG_CH2_0054)
+            Else
+                Set(LVar0, MSG_CH2_0055)
+            EndIf
+    EndSwitch
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Archeologist_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Archeologist_02)))
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_4)
-        EVT_CASE_OR_EQ(sbk_30_ENTRY_5)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Archeologist_01)))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Archeologist_02)))
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(sbk_30_ENTRY_4)
+        CaseOrEq(sbk_30_ENTRY_5)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Archeologist_01)))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Archeologist_02)[] = {

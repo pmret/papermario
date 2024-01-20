@@ -18,9 +18,9 @@ MobileAISettings N(AISettings_Cleft) = {
 };
 
 EvtScript N(EVS_NpcAI_Cleft) = {
-    EVT_CALL(N(CleftAI_Main), EVT_PTR(N(AISettings_Cleft)), 16)
-    EVT_RETURN
-    EVT_END
+    Call(N(CleftAI_Main), Ref(N(AISettings_Cleft)), 16)
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Cleft) = {

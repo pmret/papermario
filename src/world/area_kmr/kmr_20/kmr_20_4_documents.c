@@ -267,35 +267,35 @@ API_CALLABLE(N(CleanupLetters)){
 }
 
 EvtScript N(EVS_Inspect_Letters) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        EVT_SET(GF_KMR20_CheckedDeskForMail, TRUE)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_0102, 160, 40)
-        EVT_CALL(DisablePlayerInput, FALSE)
-        EVT_RETURN
-    EVT_ELSE
-        EVT_IF_EQ(GF_KMR20_CheckedDeskForMail, FALSE)
-            EVT_SET(GF_KMR20_CheckedDeskForMail, TRUE)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_0101, 160, 40)
-            EVT_WAIT(5)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(InitLetters))
-    EVT_LABEL(0)
-        EVT_CALL(N(ReadLetters))
-        EVT_IF_EQ(LVar0, -1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_CALL(ShowMessageAtScreenPos, LVar0, 160, 40)
-    EVT_CALL(N(CleanupLetters))
-    EVT_GOTO(0)
-    EVT_LABEL(10)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    IfLt(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        Set(GF_KMR20_CheckedDeskForMail, TRUE)
+        Call(ShowMessageAtScreenPos, MSG_CH0_0102, 160, 40)
+        Call(DisablePlayerInput, FALSE)
+        Return
+    Else
+        IfEq(GF_KMR20_CheckedDeskForMail, FALSE)
+            Set(GF_KMR20_CheckedDeskForMail, TRUE)
+            Call(ShowMessageAtScreenPos, MSG_CH0_0101, 160, 40)
+            Wait(5)
+        EndIf
+    EndIf
+    Call(N(InitLetters))
+    Label(0)
+        Call(N(ReadLetters))
+        IfEq(LVar0, -1)
+            Goto(10)
+        EndIf
+        IfEq(LVar0, 0)
+            Goto(10)
+        EndIf
+    Call(ShowMessageAtScreenPos, LVar0, 160, 40)
+    Call(N(CleanupLetters))
+    Goto(0)
+    Label(10)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 s32 N(DiaryStoryRequirements)[] = {
@@ -413,125 +413,125 @@ API_CALLABLE(N(MuteAmbienceVolume_Documents)){
 }
 
 EvtScript N(EVS_Inspect_LuigisDiary) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        EVT_IF_EQ(AF_KMR_0C, TRUE)
-            EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_00EC, 160, 40)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_IF_EQ(GF_KMR20_FoundLuigisDiary, FALSE)
-        EVT_SET(GF_KMR20_FoundLuigisDiary, TRUE)
-        EVT_CALL(ShowMessageAtScreenPos, MSG_CH0_0100, 160, 40)
-        EVT_WAIT(5)
-    EVT_END_IF
-    EVT_CALL(N(InitDiary))
-    EVT_LABEL(0)
-        EVT_CALL(N(ReadDiary))
-        EVT_IF_EQ(LVar0, -1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_CALL(ShowMessageAtScreenPos, LVar0, 160, 40)
-        EVT_GOTO(0)
-    EVT_LABEL(10)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
+        IfEq(AF_KMR_0C, TRUE)
+            Call(ShowMessageAtScreenPos, MSG_CH0_00EC, 160, 40)
+            Call(DisablePlayerInput, FALSE)
+            Return
+        EndIf
+    EndIf
+    IfEq(GF_KMR20_FoundLuigisDiary, FALSE)
+        Set(GF_KMR20_FoundLuigisDiary, TRUE)
+        Call(ShowMessageAtScreenPos, MSG_CH0_0100, 160, 40)
+        Wait(5)
+    EndIf
+    Call(N(InitDiary))
+    Label(0)
+        Call(N(ReadDiary))
+        IfEq(LVar0, -1)
+            Goto(10)
+        EndIf
+        IfEq(LVar0, 0)
+            Goto(10)
+        EndIf
+        Call(ShowMessageAtScreenPos, LVar0, 160, 40)
+        Goto(0)
+    Label(10)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_Shake_Mailbox) = {
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o305, SOUNC_CHECK_MAILBOX, SOUND_SPACE_DEFAULT)
-    EVT_CALL(TranslateModel, MODEL_o222, 2, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o223, 3, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o224, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_o222, -3, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o223, -3, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o224, -2, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_o222, 2, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o223, 3, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o224, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_o222, -2, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o223, -3, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o224, -1, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_o222, 0, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o223, 0, 0, 0)
-    EVT_CALL(TranslateModel, MODEL_o224, 0, 0, 0)
-    EVT_RETURN
-    EVT_END
+    Call(PlaySoundAtCollider, COLLIDER_o305, SOUNC_CHECK_MAILBOX, SOUND_SPACE_DEFAULT)
+    Call(TranslateModel, MODEL_o222, 2, 0, 0)
+    Call(TranslateModel, MODEL_o223, 3, 0, 0)
+    Call(TranslateModel, MODEL_o224, 1, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_o222, -3, 0, 0)
+    Call(TranslateModel, MODEL_o223, -3, 0, 0)
+    Call(TranslateModel, MODEL_o224, -2, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_o222, 2, 0, 0)
+    Call(TranslateModel, MODEL_o223, 3, 0, 0)
+    Call(TranslateModel, MODEL_o224, 1, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_o222, -2, 0, 0)
+    Call(TranslateModel, MODEL_o223, -3, 0, 0)
+    Call(TranslateModel, MODEL_o224, -1, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_o222, 0, 0, 0)
+    Call(TranslateModel, MODEL_o223, 0, 0, 0)
+    Call(TranslateModel, MODEL_o224, 0, 0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SecretPanel_Flip) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_FLIP_PANEL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 2160, 60, EASING_QUADRATIC_OUT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g61, LVar0, 1, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o252, SOUND_CLOSE_PANEL, SOUND_SPACE_DEFAULT)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
+    Call(PlaySoundAtCollider, COLLIDER_o252, SOUND_FLIP_PANEL, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 2160, 60, EASING_QUADRATIC_OUT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g61, LVar0, 1, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(PlaySoundAtCollider, COLLIDER_o252, SOUND_CLOSE_PANEL, SOUND_SPACE_DEFAULT)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o252, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_Setup_SecretPanel) = {
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_NE(LVar0, ACTION_STATE_SPIN_POUND)
-        EVT_IF_NE(LVar0, ACTION_STATE_TORNADO_POUND)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(N(MuteAmbienceVolume_Documents))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
-        EVT_IF_EQ(AF_KMR_0C, TRUE)
-            EVT_CALL(EnableModel, MODEL_o200, FALSE)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerActionState, LVar0)
-        EVT_IF_EQ(LVar0, ACTION_STATE_IDLE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_EXEC(N(EVS_SecretPanel_Flip))
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerPos, -150, 30, -35)
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-        EVT_CALL(GetPlayerActionState, LVar0)
-        EVT_IF_EQ(LVar0, ACTION_STATE_IDLE)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(MF_LuigiInBasement, TRUE)
-        EVT_SET(MF_LuigiInBasement, FALSE)
-        EVT_EXEC(N(EVS_Scene_CaughtLuigiInBasement))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetPlayerActionState, LVar0)
+    IfNe(LVar0, ACTION_STATE_SPIN_POUND)
+        IfNe(LVar0, ACTION_STATE_TORNADO_POUND)
+            Return
+        EndIf
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Call(N(MuteAmbienceVolume_Documents))
+    IfLt(GB_StoryProgress, STORY_CH3_STAR_SPIRIT_RESCUED)
+        IfEq(AF_KMR_0C, TRUE)
+            Call(EnableModel, MODEL_o200, FALSE)
+        EndIf
+    EndIf
+    Loop(0)
+        Wait(1)
+        Call(GetPlayerActionState, LVar0)
+        IfEq(LVar0, ACTION_STATE_IDLE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Exec(N(EVS_SecretPanel_Flip))
+    Wait(1)
+    Call(SetPlayerPos, -150, 30, -35)
+    Loop(0)
+        Wait(1)
+        Call(GetPlayerActionState, LVar0)
+        IfEq(LVar0, ACTION_STATE_IDLE)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(DisablePlayerInput, FALSE)
+    IfEq(MF_LuigiInBasement, TRUE)
+        Set(MF_LuigiInBasement, FALSE)
+        Exec(N(EVS_Scene_CaughtLuigiInBasement))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_Setup_Interactables) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_Letters)), TRIGGER_WALL_PRESS_A, COLLIDER_o251, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_LuigisDiary)), TRIGGER_WALL_PRESS_A, COLLIDER_o240, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Shake_Mailbox)), TRIGGER_WALL_PRESS_A, COLLIDER_o305, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Setup_SecretPanel)), TRIGGER_FLOOR_TOUCH, COLLIDER_o252, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_Inspect_Records)), TRIGGER_WALL_PRESS_A, COLLIDER_o355, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_Inspect_Letters)), TRIGGER_WALL_PRESS_A, COLLIDER_o251, 1, 0)
+    BindTrigger(Ref(N(EVS_Inspect_LuigisDiary)), TRIGGER_WALL_PRESS_A, COLLIDER_o240, 1, 0)
+    BindTrigger(Ref(N(EVS_Shake_Mailbox)), TRIGGER_WALL_PRESS_A, COLLIDER_o305, 1, 0)
+    BindTrigger(Ref(N(EVS_Setup_SecretPanel)), TRIGGER_FLOOR_TOUCH, COLLIDER_o252, 1, 0)
+    BindTrigger(Ref(N(EVS_Inspect_Records)), TRIGGER_WALL_PRESS_A, COLLIDER_o355, 1, 0)
+    Return
+    End
 };

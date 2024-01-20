@@ -1325,7 +1325,7 @@ API_CALLABLE(AssignPanelFlag);
 /// @evtapi
 API_CALLABLE(AssignCrateFlag);
 
-/// Removes a trigger previously bound with \ref EVT_BIND_TRIGGER.
+/// Removes a trigger previously bound with \ref BindTrigger.
 /// @evtapi
 /// @param triggerPtr
 API_CALLABLE(DeleteTrigger);

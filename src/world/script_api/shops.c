@@ -16,62 +16,62 @@ API_CALLABLE(ShowShopPurchaseDialog);
 API_CALLABLE(ShowShopOwnerDialog);
 
 EvtScript EVS_ShopBeginSpeech = {
-    EVT_CALL(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript EVS_ShopContinueSpeech = {
-    EVT_CALL(ContinueSpeech, LVar1, LVar2, LVar3, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(ContinueSpeech, LVar1, LVar2, LVar3, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript EVS_ShopResetSpeech = {
-    EVT_CALL(EndSpeech, LVar1, LVar2, LVar3, 0)
-    EVT_CALL(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(EndSpeech, LVar1, LVar2, LVar3, 0)
+    Call(SpeakToPlayer, LVar1, LVar2, LVar3, 0, LVar0)
+    Return
+    End
 };
 
 EvtScript EVS_ShopEndSpeech = {
-    EVT_CALL(EndSpeech, LVar0, LVar1, LVar2, 0)
-    EVT_RETURN
-    EVT_END
+    Call(EndSpeech, LVar0, LVar1, LVar2, 0)
+    Return
+    End
 };
 
 EvtScript EVS_ShopItemInteract = {
-    EVT_CALL(GetPartnerInUse, LVar1)
-    EVT_IF_EQ(LVar1, PARTNER_NONE)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_IF_EQ(LVar1, PARTNER_KOOPER)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_IF_EQ(LVar1, PARTNER_BOMBETTE)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_LABEL(10)
-    EVT_CALL(CanInteractWithShopItem)
-    EVT_IF_FALSE(LVar2)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BeginShopItemInteraction, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(GetPartnerInUse, LVar1)
+    IfEq(LVar1, PARTNER_NONE)
+        Goto(10)
+    EndIf
+    IfEq(LVar1, PARTNER_KOOPER)
+        Goto(10)
+    EndIf
+    IfEq(LVar1, PARTNER_BOMBETTE)
+        Goto(10)
+    EndIf
+    Return
+    Label(10)
+    Call(CanInteractWithShopItem)
+    IfFalse(LVar2)
+        Return
+    EndIf
+    Call(BeginShopItemInteraction, LVar0)
+    Return
+    End
 };
 
 EvtScript EVS_ShopPurchaseDialog = {
-    EVT_CALL(ShowShopPurchaseDialog, LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(ShowShopPurchaseDialog, LVar0)
+    Return
+    End
 };
 
 EvtScript EVS_ShopOwnerDialog = {
-    EVT_CALL(ShowShopOwnerDialog)
-    EVT_RETURN
-    EVT_END
+    Call(ShowShopOwnerDialog)
+    Return
+    End
 };
 
 s32 shop_owner_begin_speech(s32 messageIndex) {

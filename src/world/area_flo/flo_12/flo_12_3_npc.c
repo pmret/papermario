@@ -15,178 +15,178 @@ s32 N(KeyList)[] = {
 };
 
 EvtScript N(EVS_Scene_SunReturns) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(GetNpcPos, NPC_Rosie, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-9.5))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, 0, -50)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20)
-    EVT_CALL(SpeakToPlayer, NPC_Rosie, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_00C7)
-    EVT_WAIT(10)
-    EVT_CALL(GotoMap, EVT_PTR("flo_03"), flo_03_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(GetNpcPos, NPC_Rosie, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, 350)
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-9.5))
+    Call(SetCamPosA, CAM_DEFAULT, 0, 0)
+    Call(SetCamPosB, CAM_DEFAULT, 0, -50)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20)
+    Call(SpeakToPlayer, NPC_Rosie, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_00C7)
+    Wait(10)
+    Call(GotoMap, Ref("flo_03"), flo_03_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayerApproachRosie) = {
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(PlayerMoveTo, -5, 20, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(PlayerFaceNpc, NPC_Rosie, TRUE)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(PlayerMoveTo, -5, 20, 20)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(PlayerFaceNpc, NPC_Rosie, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PlayerApproachRosieAndItem) = {
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(PlayerMoveTo, -5, 20, 20)
-    EVT_CALL(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(PlayerFaceNpc, NPC_Rosie, TRUE)
-    EVT_RETURN
-    EVT_END
+    Wait(10)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(PlayerMoveTo, -5, 20, 20)
+    Call(SetNpcFlagBits, NPC_Rosie, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Call(PlayerFaceNpc, NPC_Rosie, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Rosie) = {
-    EVT_EXEC_WAIT(N(EVS_PushFlowerSong))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_CRYSTAL_BERRY)
-            EVT_SWITCH(GF_FLO12_Met_Rosie)
-                EVT_CASE_EQ(0)
-                    EVT_EXEC(N(EVS_PlayerApproachRosie))
-                    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                    EVT_ADD(LVar0, 30)
-                    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0), LVar0, LVar1, LVar2, 325, EVT_FLOAT(19.0), EVT_FLOAT(-9.5))
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008C)
-                    EVT_CALL(ShowChoice, MSG_Choice_0011)
-                    EVT_WAIT(10)
-                    EVT_SWITCH(LVar0)
-                        EVT_CASE_EQ(0)
-                            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008D)
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008E)
-                    EVT_END_SWITCH
-                    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_TakeOut)
-                    EVT_WAIT(10)
-                    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
-                    EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
-                    EVT_WAIT(10)
-                    EVT_SWITCH(GF_FLO10_LilyRequestedWaterStone)
-                        EVT_CASE_EQ(0)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_008F)
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_CarryRun)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_008F)
-                            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0091)
-                            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Pray)
-                            EVT_WAIT(40)
-                            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0092)
-                            EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
-                    EVT_END_SWITCH
-                    EVT_SET(GF_FLO12_Met_Rosie, TRUE)
-                EVT_CASE_EQ(1)
-                    EVT_SWITCH(GF_FLO12_RosieRequestedSomethingBeautiful)
-                        EVT_CASE_EQ(0)
-                            EVT_IF_EQ(GF_FLO10_LilyRequestedWaterStone, TRUE)
-                                EVT_EXEC(N(EVS_PlayerApproachRosieAndItem))
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_0090)
-                                EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0091)
-                                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Pray)
-                                EVT_WAIT(40)
-                                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0092)
-                                EVT_SET(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
-                            EVT_ELSE
-                                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_0090)
-                            EVT_END_IF
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0093)
-                    EVT_END_SWITCH
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH6_GOT_WATER_STONE)
-            EVT_CALL(FindKeyItem, ITEM_CRYSTAL_BERRY, LVar0)
-            EVT_IF_NE(LVar0, -1)
-                EVT_EXEC(N(EVS_PlayerApproachRosieAndItem))
-                EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-                EVT_ADD(LVar0, 30)
-                EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(4.0), LVar0, LVar1, LVar2, 325, EVT_FLOAT(19.0), EVT_FLOAT(-9.5))
-            EVT_END_IF
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0094)
+    ExecWait(N(EVS_PushFlowerSong))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_CRYSTAL_BERRY)
+            Switch(GF_FLO12_Met_Rosie)
+                CaseEq(0)
+                    Exec(N(EVS_PlayerApproachRosie))
+                    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                    Add(LVar0, 30)
+                    Call(SetCamProperties, CAM_DEFAULT, Float(4.0), LVar0, LVar1, LVar2, 325, Float(19.0), Float(-9.5))
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008C)
+                    Call(ShowChoice, MSG_Choice_0011)
+                    Wait(10)
+                    Switch(LVar0)
+                        CaseEq(0)
+                            Call(ContinueSpeech, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008D)
+                        CaseEq(1)
+                            Call(ContinueSpeech, NPC_SELF, ANIM_Rosie_Talk, ANIM_Rosie_Idle, 5, MSG_CH6_008E)
+                    EndSwitch
+                    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                    Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_TakeOut)
+                    Wait(10)
+                    Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
+                    Call(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
+                    Wait(10)
+                    Switch(GF_FLO10_LilyRequestedWaterStone)
+                        CaseEq(0)
+                            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_008F)
+                        CaseEq(1)
+                            Call(SetPlayerAnimation, ANIM_MarioW1_CarryRun)
+                            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_008F)
+                            Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
+                            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0091)
+                            Call(SetPlayerAnimation, ANIM_Mario1_Pray)
+                            Wait(40)
+                            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+                            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0092)
+                            Set(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
+                    EndSwitch
+                    Set(GF_FLO12_Met_Rosie, TRUE)
+                CaseEq(1)
+                    Switch(GF_FLO12_RosieRequestedSomethingBeautiful)
+                        CaseEq(0)
+                            IfEq(GF_FLO10_LilyRequestedWaterStone, TRUE)
+                                Exec(N(EVS_PlayerApproachRosieAndItem))
+                                Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_0090)
+                                Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
+                                Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0091)
+                                Call(SetPlayerAnimation, ANIM_Mario1_Pray)
+                                Wait(40)
+                                Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+                                Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0092)
+                                Set(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
+                            Else
+                                Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_TalkHold, 5, MSG_CH6_0090)
+                            EndIf
+                        CaseEq(1)
+                            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0093)
+                    EndSwitch
+            EndSwitch
+        CaseLt(STORY_CH6_GOT_WATER_STONE)
+            Call(FindKeyItem, ITEM_CRYSTAL_BERRY, LVar0)
+            IfNe(LVar0, -1)
+                Exec(N(EVS_PlayerApproachRosieAndItem))
+                Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+                Add(LVar0, 30)
+                Call(SetCamProperties, CAM_DEFAULT, Float(4.0), LVar0, LVar1, LVar2, 325, Float(19.0), Float(-9.5))
+            EndIf
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0094)
             EVT_CHOOSE_KEY_ITEM_FROM(N(KeyList))
-            EVT_SWITCH(LVar0)
-                EVT_CASE_LE(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0093)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0095)
-                    EVT_CALL(RemoveItemEntity, LVar7)
-                    EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
+            Switch(LVar0)
+                CaseLe(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0093)
+                CaseDefault
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0095)
+                    Call(RemoveItemEntity, LVar7)
+                    Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
                     EVT_GIVE_KEY_REWARD(ITEM_WATER_STONE)
-                    EVT_WAIT(10)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0096)
-                    EVT_SET(AF_FLO_GivenCrystalBerry, TRUE)
-                    EVT_SET(GB_StoryProgress, STORY_CH6_GOT_WATER_STONE)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
-            EVT_SWITCH(AF_FLO_GivenCrystalBerry)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0097)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0096)
-            EVT_END_SWITCH
-        EVT_CASE_LT(STORY_CH6_RETURNED_TO_TOAD_TOWN)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0098)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0099)
-    EVT_END_SWITCH
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
-    EVT_EXEC_WAIT(N(EVS_PopMusic))
-    EVT_RETURN
-    EVT_END
+                    Wait(10)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0096)
+                    Set(AF_FLO_GivenCrystalBerry, TRUE)
+                    Set(GB_StoryProgress, STORY_CH6_GOT_WATER_STONE)
+            EndSwitch
+        CaseLt(STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE)
+            Switch(AF_FLO_GivenCrystalBerry)
+                CaseEq(0)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0097)
+                CaseEq(1)
+                    Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0096)
+            EndSwitch
+        CaseLt(STORY_CH6_RETURNED_TO_TOAD_TOWN)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0098)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Rosie_TalkHold, ANIM_Rosie_IdleHold, 5, MSG_CH6_0099)
+    EndSwitch
+    Call(ResetCam, CAM_DEFAULT, Float(4.0))
+    ExecWait(N(EVS_PopMusic))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Rosie) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Rosie)))
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 35)
-    EVT_CALL(SetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH6_GOT_CRYSTAL_BERRY)
-            EVT_IF_EQ(GF_FLO12_Met_Rosie, TRUE)
-                EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
-                EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
-                EVT_SET(LVarA, LVar0)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH6_GOT_WATER_STONE)
-            EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
-            EVT_CALL(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
-            EVT_SET(LVarA, LVar0)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
-            EVT_CALL(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
-            EVT_SET(LVarA, LVar0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Rosie)))
+    Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+    Add(LVar0, 35)
+    Call(SetNpcPos, NPC_Dummy, LVar0, LVar1, LVar2)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_INVISIBLE, TRUE)
+    Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_HAS_SHADOW, TRUE)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH6_GOT_CRYSTAL_BERRY)
+            IfEq(GF_FLO12_Met_Rosie, TRUE)
+                Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+                Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
+                Call(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
+                Set(LVarA, LVar0)
+            EndIf
+        CaseLt(STORY_CH6_GOT_WATER_STONE)
+            Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
+            Call(MakeItemEntity, ITEM_WATER_STONE, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
+            Set(LVarA, LVar0)
+        CaseDefault
+            Call(SetNpcFlagBits, NPC_Dummy, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Rosie_IdleHold)
+            Call(MakeItemEntity, ITEM_CRYSTAL_BERRY, -33, 14, 19, ITEM_SPAWN_MODE_DECORATION, EVT_INDEX_OF_GAME_FLAG(GF_FLO12_HeldItemPickup))
+            Set(LVarA, LVar0)
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Rosie)[] = {

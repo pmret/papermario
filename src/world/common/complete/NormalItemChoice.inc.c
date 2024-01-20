@@ -61,45 +61,45 @@ API_CALLABLE(N(BuildItemChoiceList)) {
 }
 
 EvtScript N(EVS_ItemChoicePopup) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowConsumableChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveItemAt, LVar1)
-            EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-            EVT_CALL(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
-            EVT_WAIT(30)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_END_SWITCH
-    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, LVar1)
+    Call(ShowConsumableChoicePopup)
+    Set(LVarA, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+        CaseEq(-1)
+        CaseDefault
+            Call(RemoveItemAt, LVar1)
+            Call(GetPlayerPos, LVar3, LVar4, LVar5)
+            Call(N(AddPlayerHandsOffset), LVar3, LVar4, LVar5)
+            Call(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
+            Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
+            Wait(30)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            Call(RemoveItemEntity, LVar0)
+    EndSwitch
+    Call(N(ItemChoice_SaveSelected), LVarA)
+    Call(CloseChoicePopup)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_ChooseItem) = {
-    EVT_CALL(N(BuildItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(EVT_PTR(N(EVS_ItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(ItemChoice_List)), 0, 1)
-    EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
-    EVT_RETURN
-    EVT_END
+    Call(N(BuildItemChoiceList), LVar0)
+    BindPadlock(Ref(N(EVS_ItemChoicePopup)), TRIGGER_FORCE_ACTIVATE, 0, Ref(N(ItemChoice_List)), 0, 1)
+    Call(N(ItemChoice_WaitForSelection), LVar0)
+    Return
+    End
 };
 
 #define EVT_CHOOSE_ANY_CONSUMABLE(unkMode) \
-    EVT_SET(LVar0, NULL) \
-    EVT_SET(LVar1, unkMode) \
-    EVT_EXEC_WAIT(N(EVS_ChooseItem))
+    Set(LVar0, NULL) \
+    Set(LVar1, unkMode) \
+    ExecWait(N(EVS_ChooseItem))
 
 #define EVT_CHOOSE_CONSUMABLE_FROM(itemList, unkMode) \
-    EVT_SET(LVar0, EVT_PTR(itemList)) \
-    EVT_SET(LVar1, unkMode) \
-    EVT_EXEC_WAIT(N(EVS_ChooseItem))
+    Set(LVar0, Ref(itemList)) \
+    Set(LVar1, unkMode) \
+    ExecWait(N(EVS_ChooseItem))
 
 #endif

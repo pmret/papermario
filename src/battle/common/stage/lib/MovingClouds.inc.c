@@ -41,21 +41,21 @@ API_CALLABLE(N(InterpCloudTransform)) {
 // (in) LVar0 : modelID
 // (in) LVar2 : motion phase offset
 EvtScript N(EVS_AnimateCloud) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVar7, LVar2)
-    EVT_MUL(LVar7, 10)
-    EVT_LABEL(0)
-        EVT_ADD(LVar7, 4)
-        EVT_IF_GT(LVar7, 3599)
-            EVT_SUB(LVar7, 3600)
-        EVT_END_IF
-        EVT_CALL(N(InterpCloudTransform), LVar7, LVar0, LVar1, LVar2, LVar3)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateModel, LVarA, LVar3, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVar7, LVar2)
+    Mul(LVar7, 10)
+    Label(0)
+        Add(LVar7, 4)
+        IfGt(LVar7, 3599)
+            Sub(LVar7, 3600)
+        EndIf
+        Call(N(InterpCloudTransform), LVar7, LVar0, LVar1, LVar2, LVar3)
+        Call(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        Call(RotateModel, LVarA, LVar3, 0, 1, 0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 // (in) LVar0 : modelID
@@ -63,25 +63,25 @@ EvtScript N(EVS_AnimateCloud) = {
 // (in) LVar3 : offsetY
 // (in) LVar4 : offsetZ
 EvtScript N(EVS_AnimateCloud_WithOffset2D) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVarB, LVar3)
-    EVT_SET(LVarC, LVar4)
-    EVT_SET(LVar7, LVar2)
-    EVT_MUL(LVar7, 10)
-    EVT_LABEL(0)
-        EVT_ADD(LVar7, 4)
-        EVT_IF_GT(LVar7, 3599)
-            EVT_SUB(LVar7, 3600)
-        EVT_END_IF
-        EVT_CALL(N(InterpCloudTransform), LVar7, LVar0, LVar1, LVar2, LVar3)
-        EVT_ADDF(LVar1, LVarB)
-        EVT_ADDF(LVar2, LVarC)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateModel, LVarA, LVar3, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVarB, LVar3)
+    Set(LVarC, LVar4)
+    Set(LVar7, LVar2)
+    Mul(LVar7, 10)
+    Label(0)
+        Add(LVar7, 4)
+        IfGt(LVar7, 3599)
+            Sub(LVar7, 3600)
+        EndIf
+        Call(N(InterpCloudTransform), LVar7, LVar0, LVar1, LVar2, LVar3)
+        AddF(LVar1, LVarB)
+        AddF(LVar2, LVarC)
+        Call(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        Call(RotateModel, LVarA, LVar3, 0, 1, 0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 // (in) LVar0 : modelID
@@ -90,25 +90,25 @@ EvtScript N(EVS_AnimateCloud_WithOffset2D) = {
 // (in) LVar4 : offsetY
 // (in) LVar4 : offsetZ
 EvtScript N(EVS_AnimateCloud_WithOffset3D) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVarB, LVar3)
-    EVT_SET(LVarC, LVar4)
-    EVT_SET(LVarD, LVar5)
-    EVT_SET(LVar7, LVar2)
-    EVT_MUL(LVar7, 10)
-    EVT_LABEL(0)
-        EVT_ADD(LVar7, 4)
-        EVT_IF_GT(LVar7, 3599)
-            EVT_SUB(LVar7, 3600)
-        EVT_END_IF
-        EVT_CALL(N(InterpCloudTransform), LVar7, LVar0, LVar1, LVar2, LVar3)
-        EVT_ADDF(LVar0, LVarB)
-        EVT_ADDF(LVar1, LVarC)
-        EVT_ADDF(LVar2, LVarD)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_CALL(RotateModel, LVarA, LVar3, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVarB, LVar3)
+    Set(LVarC, LVar4)
+    Set(LVarD, LVar5)
+    Set(LVar7, LVar2)
+    Mul(LVar7, 10)
+    Label(0)
+        Add(LVar7, 4)
+        IfGt(LVar7, 3599)
+            Sub(LVar7, 3600)
+        EndIf
+        Call(N(InterpCloudTransform), LVar7, LVar0, LVar1, LVar2, LVar3)
+        AddF(LVar0, LVarB)
+        AddF(LVar1, LVarC)
+        AddF(LVar2, LVarD)
+        Call(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        Call(RotateModel, LVarA, LVar3, 0, 1, 0)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };

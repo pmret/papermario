@@ -26,52 +26,52 @@ API_CALLABLE(N(CheckGameVarRanges)) {
 }
 
 EvtScript N(EVS_GotoMap_kmr_09_1) = {
-    EVT_CALL(GotoMap, EVT_PTR("kmr_09"), kmr_09_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("kmr_09"), kmr_09_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_nok_10_0) = {
-    EVT_CALL(GotoMap, EVT_PTR("nok_10"), nok_10_ENTRY_0) //@bug map does not exist!
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("nok_10"), nok_10_ENTRY_0) //@bug map does not exist!
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_iwa_00_0) = {
-    EVT_CALL(GotoMap, EVT_PTR("iwa_00"), iwa_00_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("iwa_00"), iwa_00_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_tst_01_0) = {
-    EVT_CALL(GotoMap, EVT_PTR("tst_01"), tst_01_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("tst_01"), tst_01_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_GotoMap_jan_00_0) = {
-    EVT_CALL(GotoMap, EVT_PTR("jan_00"), jan_00_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("jan_00"), jan_00_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_CALL(N(CheckGameVarRanges))
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_kmr_09_1)), TRIGGER_WALL_PUSH, COLLIDER_deilitn, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_nok_10_0)), TRIGGER_WALL_PUSH, COLLIDER_deilitne, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_iwa_00_0)), TRIGGER_WALL_PUSH, COLLIDER_deilite, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_tst_01_0)), TRIGGER_WALL_PUSH, COLLIDER_deilitnw, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_jan_00_0)), TRIGGER_WALL_PUSH, COLLIDER_deilitsw, 1, 0)
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_GoombaKing_Init))
-    EVT_EXEC(N(EVS_FlyPartnerAround))
-    EVT_RETURN
-    EVT_END
+    Call(N(CheckGameVarRanges))
+    SetUP_CAMERA_DEFAULT()
+    ExecWait(N(EVS_MakeEntities))
+    BindTrigger(Ref(N(EVS_GotoMap_kmr_09_1)), TRIGGER_WALL_PUSH, COLLIDER_deilitn, 1, 0)
+    BindTrigger(Ref(N(EVS_GotoMap_nok_10_0)), TRIGGER_WALL_PUSH, COLLIDER_deilitne, 1, 0)
+    BindTrigger(Ref(N(EVS_GotoMap_iwa_00_0)), TRIGGER_WALL_PUSH, COLLIDER_deilite, 1, 0)
+    BindTrigger(Ref(N(EVS_GotoMap_tst_01_0)), TRIGGER_WALL_PUSH, COLLIDER_deilitnw, 1, 0)
+    BindTrigger(Ref(N(EVS_GotoMap_jan_00_0)), TRIGGER_WALL_PUSH, COLLIDER_deilitsw, 1, 0)
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_GoombaKing_Init))
+    Exec(N(EVS_FlyPartnerAround))
+    Return
+    End
 };

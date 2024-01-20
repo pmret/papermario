@@ -13,10 +13,10 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TESTING)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TESTING)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Return
+    End
 };
 

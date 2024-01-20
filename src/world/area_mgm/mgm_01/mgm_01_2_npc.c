@@ -719,304 +719,304 @@ JumpGamePanelType N(InitialConfigurations)[4][NUM_BLOCKS] = {
 };
 
 EvtScript N(EVS_ManageMinigame) = {
-    EVT_LABEL(0)
-        EVT_SET(LVarA, 0)
-        EVT_SET(LVarB, 0)
-        EVT_CALL(GetNpcVar, NPC_Toad, 4, LVarC)
-        EVT_LOOP(11)
-            EVT_CALL(N(GetPanelInfo), LVarA)
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(EnableModel, LVar1, FALSE)
-                    EVT_CALL(N(SetPanelState), LVarA, 1)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(DisablePlayerInput, TRUE)
-                    EVT_CALL(N(InitPanelEmergeFromBlock), LVarA)
-                    EVT_CALL(EnableModel, LVar1, TRUE)
-                    EVT_CALL(N(SetPanelState), LVarA, 3)
-                EVT_CASE_EQ(4)
-                    EVT_IF_NE(LVar2, 3)
-                        EVT_IF_LT(LVar3, LVarC)
-                            EVT_CALL(DisablePlayerInput, FALSE)
-                        EVT_END_IF
-                    EVT_END_IF
-                    EVT_CALL(N(InitPanelHoldAboveBlock), LVarA)
-                    EVT_CALL(N(SetPanelState), LVarA, 5)
-                EVT_CASE_EQ(6)
-                    EVT_CALL(N(InitPanelMoveToTally), LVarA)
-                    EVT_CALL(N(SetPanelState), LVarA, 7)
-                EVT_CASE_EQ(8)
-                    EVT_CALL(N(EndPanelAnimation), LVarA)
-                    EVT_CALL(N(SetPanelState), LVarA, 9)
-            EVT_END_SWITCH
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(3)
-                    EVT_CALL(N(UpdatePanelEmergeFromBlock), LVarA)
-                    EVT_IF_EQ(LVar3, 1)
-                        EVT_CALL(N(SetPanelState), LVarA, 4)
-                    EVT_END_IF
-                EVT_CASE_EQ(5)
-                    EVT_CALL(N(UpdatetPanelHoldAboveBlock), LVarA)
-                    EVT_IF_EQ(LVar3, 1)
-                        EVT_CALL(N(SetPanelState), LVarA, 6)
-                    EVT_END_IF
-                EVT_CASE_EQ(7)
-                    EVT_CALL(N(UpdatePanelMoveToTally), LVarA)
-                    EVT_IF_EQ(LVar3, 1)
-                        EVT_CALL(N(SetPanelState), LVarA, 8)
-                    EVT_END_IF
-                EVT_CASE_EQ(9)
-                    EVT_IF_EQ(LVar2, 3)
-                        EVT_SET(LVarB, 1)
-                    EVT_ELSE
-                        EVT_IF_EQ(LVar3, LVarC)
-                            EVT_SET(LVarB, 2)
-                        EVT_END_IF
-                    EVT_END_IF
-            EVT_END_SWITCH
-            EVT_IF_GE(LVar0, 2)
-                EVT_CALL(N(GetPanelPos), LVarA)
-                EVT_CALL(TranslateModel, LVar1, LVar5, LVar6, LVar7)
-                EVT_CALL(RotateModel, LVar1, LVar8, EVT_FLOAT(0.0), EVT_FLOAT(1.0), EVT_FLOAT(0.0))
-                EVT_CALL(ScaleModel, LVar1, LVar9, LVar9, EVT_FLOAT(1.0))
-            EVT_END_IF
-            EVT_ADD(LVarA, 1)
-        EVT_END_LOOP
-        EVT_IF_NE(LVarB, 0)
-            EVT_GOTO(99)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_LABEL(99)
-    EVT_CALL(N(EnableMenus))
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(PopSong)
-    EVT_END_THREAD
-    EVT_SWITCH(LVarB)
-        EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundWithVolume, SOUND_BOMBETTE_BLAST_LV2, 0)
-            EVT_WAIT(10)
-            EVT_CALL(PlaySoundWithVolume, SOUND_BOMBETTE_BLAST_LV2, 0)
-            EVT_WAIT(10)
-            EVT_CALL(N(EndBowserPanelAnimation))
-            EVT_CALL(TranslateModel, LVar1, LVar5, LVar6, LVar7)
-            EVT_WAIT(15)
-            EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0034)
-        EVT_CASE_EQ(2)
-            EVT_SWITCH(LVarC)
-                EVT_CASE_EQ(4)
-                    EVT_CALL(N(UpdateRecords))
-                    EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0035)
-                EVT_CASE_EQ(6)
-                    EVT_CALL(N(UpdateRecords))
-                    EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0036)
-                EVT_CASE_EQ(8)
-                    EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0037)
-                    EVT_CALL(N(DoubleScore))
-                    EVT_CALL(PlaySoundWithVolume, SOUND_LUCKY, 0)
-                    EVT_WAIT(30)
-                    EVT_CALL(N(UpdateRecords))
-                    EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0038)
-            EVT_END_SWITCH
-            EVT_CALL(ShowCoinCounter, TRUE)
-            EVT_WAIT(10)
-            EVT_CALL(N(GiveCoinReward))
-            EVT_WAIT(15)
-            EVT_CALL(ShowCoinCounter, FALSE)
-            EVT_WAIT(5)
-            EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_003A)
-    EVT_END_SWITCH
-    EVT_WAIT(10)
-    EVT_CALL(N(DestroyBlockEntities))
-    EVT_EXEC(N(EVS_InitializePanels))
-    EVT_WAIT(1)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Set(LVarA, 0)
+        Set(LVarB, 0)
+        Call(GetNpcVar, NPC_Toad, 4, LVarC)
+        Loop(11)
+            Call(N(GetPanelInfo), LVarA)
+            Switch(LVar0)
+                CaseEq(0)
+                    Call(EnableModel, LVar1, FALSE)
+                    Call(N(SetPanelState), LVarA, 1)
+                CaseEq(2)
+                    Call(DisablePlayerInput, TRUE)
+                    Call(N(InitPanelEmergeFromBlock), LVarA)
+                    Call(EnableModel, LVar1, TRUE)
+                    Call(N(SetPanelState), LVarA, 3)
+                CaseEq(4)
+                    IfNe(LVar2, 3)
+                        IfLt(LVar3, LVarC)
+                            Call(DisablePlayerInput, FALSE)
+                        EndIf
+                    EndIf
+                    Call(N(InitPanelHoldAboveBlock), LVarA)
+                    Call(N(SetPanelState), LVarA, 5)
+                CaseEq(6)
+                    Call(N(InitPanelMoveToTally), LVarA)
+                    Call(N(SetPanelState), LVarA, 7)
+                CaseEq(8)
+                    Call(N(EndPanelAnimation), LVarA)
+                    Call(N(SetPanelState), LVarA, 9)
+            EndSwitch
+            Switch(LVar0)
+                CaseEq(3)
+                    Call(N(UpdatePanelEmergeFromBlock), LVarA)
+                    IfEq(LVar3, 1)
+                        Call(N(SetPanelState), LVarA, 4)
+                    EndIf
+                CaseEq(5)
+                    Call(N(UpdatetPanelHoldAboveBlock), LVarA)
+                    IfEq(LVar3, 1)
+                        Call(N(SetPanelState), LVarA, 6)
+                    EndIf
+                CaseEq(7)
+                    Call(N(UpdatePanelMoveToTally), LVarA)
+                    IfEq(LVar3, 1)
+                        Call(N(SetPanelState), LVarA, 8)
+                    EndIf
+                CaseEq(9)
+                    IfEq(LVar2, 3)
+                        Set(LVarB, 1)
+                    Else
+                        IfEq(LVar3, LVarC)
+                            Set(LVarB, 2)
+                        EndIf
+                    EndIf
+            EndSwitch
+            IfGe(LVar0, 2)
+                Call(N(GetPanelPos), LVarA)
+                Call(TranslateModel, LVar1, LVar5, LVar6, LVar7)
+                Call(RotateModel, LVar1, LVar8, Float(0.0), Float(1.0), Float(0.0))
+                Call(ScaleModel, LVar1, LVar9, LVar9, Float(1.0))
+            EndIf
+            Add(LVarA, 1)
+        EndLoop
+        IfNe(LVarB, 0)
+            Goto(99)
+        EndIf
+        Wait(1)
+        Goto(0)
+    Label(99)
+    Call(N(EnableMenus))
+    Thread
+        Wait(15)
+        Call(PopSong)
+    EndThread
+    Switch(LVarB)
+        CaseEq(1)
+            Call(PlaySoundWithVolume, SOUND_BOMBETTE_BLAST_LV2, 0)
+            Wait(10)
+            Call(PlaySoundWithVolume, SOUND_BOMBETTE_BLAST_LV2, 0)
+            Wait(10)
+            Call(N(EndBowserPanelAnimation))
+            Call(TranslateModel, LVar1, LVar5, LVar6, LVar7)
+            Wait(15)
+            Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0034)
+        CaseEq(2)
+            Switch(LVarC)
+                CaseEq(4)
+                    Call(N(UpdateRecords))
+                    Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0035)
+                CaseEq(6)
+                    Call(N(UpdateRecords))
+                    Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0036)
+                CaseEq(8)
+                    Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0037)
+                    Call(N(DoubleScore))
+                    Call(PlaySoundWithVolume, SOUND_LUCKY, 0)
+                    Wait(30)
+                    Call(N(UpdateRecords))
+                    Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0038)
+            EndSwitch
+            Call(ShowCoinCounter, TRUE)
+            Wait(10)
+            Call(N(GiveCoinReward))
+            Wait(15)
+            Call(ShowCoinCounter, FALSE)
+            Wait(5)
+            Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_003A)
+    EndSwitch
+    Wait(10)
+    Call(N(DestroyBlockEntities))
+    Exec(N(EVS_InitializePanels))
+    Wait(1)
+    Call(DisablePlayerInput, FALSE)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_0) = {
-    EVT_CALL(N(OnBreakBlock), 0)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_1) = {
-    EVT_CALL(N(OnBreakBlock), 1)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_2) = {
-    EVT_CALL(N(OnBreakBlock), 2)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 2)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_3) = {
-    EVT_CALL(N(OnBreakBlock), 3)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 3)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_4) = {
-    EVT_CALL(N(OnBreakBlock), 4)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 4)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_5) = {
-    EVT_CALL(N(OnBreakBlock), 5)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 5)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_6) = {
-    EVT_CALL(N(OnBreakBlock), 6)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 6)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_7) = {
-    EVT_CALL(N(OnBreakBlock), 7)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 7)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_8) = {
-    EVT_CALL(N(OnBreakBlock), 8)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 8)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_9) = {
-    EVT_CALL(N(OnBreakBlock), 9)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 9)
+    Return
+    End
 };
 
 EvtScript N(EVS_OnBreakBlock_10) = {
-    EVT_CALL(N(OnBreakBlock), 10)
-    EVT_RETURN
-    EVT_END
+    Call(N(OnBreakBlock), 10)
+    Return
+    End
 };
 
 EvtScript N(EVS_InitializePanels) = {
-    EVT_CALL(SetNpcVar, NPC_Toad, 2, -1)
-    EVT_CALL(N(InitializePanels))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcVar, NPC_Toad, 2, -1)
+    Call(N(InitializePanels))
+    Return
+    End
 };
 
 EvtScript N(EVS_802424A4) = {
-    EVT_CALL(N(CreateMinigame))
-    EVT_EXEC(N(EVS_InitializePanels))
-    EVT_EXEC(N(EVS_ManageMinigame))
-    EVT_RETURN
-    EVT_END
+    Call(N(CreateMinigame))
+    Exec(N(EVS_InitializePanels))
+    Exec(N(EVS_ManageMinigame))
+    Return
+    End
 };
 
 EvtScript N(EVS_DestroyMinigame) = {
-    EVT_CALL(N(DestroyMinigame))
-    EVT_RETURN
-    EVT_END
+    Call(N(DestroyMinigame))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Toad) = {
-    EVT_CALL(GetSelfVar, 1, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetSelfVar, 1, 1)
-    EVT_END_IF
-    EVT_CALL(GetSelfVar, 2, LVar0)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_IF_EQ(GF_MGM_Met_JumpAttack, FALSE)
-            EVT_CALL(N(SetMsgImgs_Panels))
-            EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_002D)
-            EVT_SET(GF_MGM_Met_JumpAttack, TRUE)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_002E)
-        EVT_END_IF
-        EVT_CALL(ShowCoinCounter, TRUE)
-        EVT_CALL(N(GetCoinCount))
-        EVT_IF_LT(LVarA, 10)
-            EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0039)
-            EVT_CALL(N(HideCoinCounter))
-            EVT_WAIT(12)
-            EVT_EXEC(N(EVS_DestroyMinigame))
-            EVT_CALL(GotoMap, EVT_PTR("mgm_00"), mgm_00_ENTRY_1)
-            EVT_WAIT(100)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(ShowChoice, MSG_Choice_004E)
-        EVT_IF_EQ(LVar0, 3)
-            EVT_CALL(N(HideCoinCounter))
-            EVT_WAIT(5)
-            EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0032)
-            EVT_EXEC(N(EVS_DestroyMinigame))
-            EVT_CALL(GotoMap, EVT_PTR("mgm_00"), mgm_00_ENTRY_1)
-            EVT_WAIT(100)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(GetSelfVar, 6, LVar1)
-        EVT_IF_LT(LVar1, 100)
-            EVT_ADD(LVar1, 1)
-            EVT_CALL(SetSelfVar, 6, LVar1)
-        EVT_END_IF
-        EVT_THREAD
-            EVT_CALL(N(TakeCoinCost))
-        EVT_END_THREAD
-        EVT_SWITCH(LVar0)
-            EVT_CASE_EQ(0)
-                EVT_CALL(SetNpcVar, NPC_Toad, 4, 4)
-                EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_002F)
-            EVT_CASE_EQ(1)
-                EVT_CALL(SetNpcVar, NPC_Toad, 4, 6)
-                EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0030)
-            EVT_CASE_EQ(2)
-                EVT_CALL(SetNpcVar, NPC_Toad, 4, 8)
-                EVT_CALL(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0031)
-            EVT_CASE_EQ(3)
-        EVT_END_SWITCH
-        EVT_CALL(N(HideCoinCounter))
-        EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
-        EVT_WAIT(5)
-        EVT_CALL(N(CreateBlockEntities))
-        EVT_WAIT(10)
-        EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
-        EVT_CALL(PushSong, SONG_PLAYROOM, 0)
-        EVT_WAIT(10)
-        EVT_CALL(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
-        EVT_CALL(N(DisableMenus))
-        EVT_CALL(SetNpcVar, NPC_Toad, 3, -1)
-        EVT_CALL(SetNpcVar, NPC_Toad, 2, 0)
-        EVT_WAIT(1)
-    EVT_ELSE
-        EVT_CALL(N(SetMsgVars_BlocksRemaining))
+    Call(GetSelfVar, 1, LVar0)
+    IfEq(LVar0, 0)
+        Call(SetSelfVar, 1, 1)
+    EndIf
+    Call(GetSelfVar, 2, LVar0)
+    IfEq(LVar0, -1)
+        IfEq(GF_MGM_Met_JumpAttack, FALSE)
+            Call(N(SetMsgImgs_Panels))
+            Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_002D)
+            Set(GF_MGM_Met_JumpAttack, TRUE)
+        Else
+            Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_002E)
+        EndIf
+        Call(ShowCoinCounter, TRUE)
+        Call(N(GetCoinCount))
+        IfLt(LVarA, 10)
+            Call(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0039)
+            Call(N(HideCoinCounter))
+            Wait(12)
+            Exec(N(EVS_DestroyMinigame))
+            Call(GotoMap, Ref("mgm_00"), mgm_00_ENTRY_1)
+            Wait(100)
+            Return
+        EndIf
+        Call(ShowChoice, MSG_Choice_004E)
+        IfEq(LVar0, 3)
+            Call(N(HideCoinCounter))
+            Wait(5)
+            Call(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0032)
+            Exec(N(EVS_DestroyMinigame))
+            Call(GotoMap, Ref("mgm_00"), mgm_00_ENTRY_1)
+            Wait(100)
+            Return
+        EndIf
+        Call(GetSelfVar, 6, LVar1)
+        IfLt(LVar1, 100)
+            Add(LVar1, 1)
+            Call(SetSelfVar, 6, LVar1)
+        EndIf
+        Thread
+            Call(N(TakeCoinCost))
+        EndThread
+        Switch(LVar0)
+            CaseEq(0)
+                Call(SetNpcVar, NPC_Toad, 4, 4)
+                Call(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_002F)
+            CaseEq(1)
+                Call(SetNpcVar, NPC_Toad, 4, 6)
+                Call(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0030)
+            CaseEq(2)
+                Call(SetNpcVar, NPC_Toad, 4, 8)
+                Call(ContinueSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0031)
+            CaseEq(3)
+        EndSwitch
+        Call(N(HideCoinCounter))
+        Call(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
+        Wait(5)
+        Call(N(CreateBlockEntities))
+        Wait(10)
+        Call(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
+        Call(PushSong, SONG_PLAYROOM, 0)
+        Wait(10)
+        Call(EndSpeech, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 5)
+        Call(N(DisableMenus))
+        Call(SetNpcVar, NPC_Toad, 3, -1)
+        Call(SetNpcVar, NPC_Toad, 2, 0)
+        Wait(1)
+    Else
+        Call(N(SetMsgVars_BlocksRemaining))
 #if VERSION_PAL
-        EVT_IF_EQ(LocalVar(13), 1)
-            EVT_CALL(SpeakToPlayer, 0, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_PAL_MGM_0036)
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, 0, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0033)
-        EVT_END_IF
+        IfEq(LocalVar(13), 1)
+            Call(SpeakToPlayer, 0, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_PAL_MGM_0036)
+        Else
+            Call(SpeakToPlayer, 0, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0033)
+        EndIf
 #else
-        EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0033)
+        Call(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0033)
 #endif
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Toad) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 75, -1, 100)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-    EVT_CALL(SetNpcVar, NPC_Toad, 2, -1)
-    EVT_CALL(SetNpcVar, NPC_Toad, 1, 0)
-    EVT_CALL(SetNpcVar, NPC_Toad, 6, 0)
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Toad)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 75, -1, 100)
+    Call(InterpNpcYaw, NPC_SELF, 270, 0)
+    Call(SetNpcVar, NPC_Toad, 2, -1)
+    Call(SetNpcVar, NPC_Toad, 1, 0)
+    Call(SetNpcVar, NPC_Toad, 6, 0)
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Toad)))
+    Return
+    End
 };
 
 NpcData N(NpcData_Toad) = {

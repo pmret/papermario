@@ -352,124 +352,124 @@ API_CALLABLE(MakeLevelUpConfetti) {
 }
 
 EvtScript EVS_ShowStarpoints = {
-    EVT_SET(LVarF, 0)
-    EVT_CALL(GetRemainingStarPointsReward)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_LT(LVar0, 2)
-        EVT_CALL(CreateVirtualEntity, LVar6, EVT_PTR(EMS_starpoint_starpoint))
-        EVT_CALL(SetVirtualEntityPosition, LVar6, -278, 68, 70)
-        EVT_CALL(SetVirtualEntityScale, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_ELSE
-        EVT_CALL(CreateVirtualEntity, LVar6, EVT_PTR(EMS_starpoint_starpoints))
-        EVT_CALL(SetVirtualEntityPosition, LVar6, -278, 68, 70)
-        EVT_CALL(SetVirtualEntityScale, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-        EVT_SET(LFlag0, TRUE)
-    EVT_END_IF
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(99)
-            EVT_SET(LVarF, 3)
-        EVT_CASE_GT(9)
-            EVT_SET(LVarF, 2)
-        EVT_CASE_DEFAULT
-            EVT_SET(LVarF, 1)
-    EVT_END_SWITCH
-    EVT_CALL(GetStarPointDigitScripts)
-    EVT_CALL(CreateVirtualEntity, LVar7, LVarA)
-    EVT_CALL(SetVirtualEntityPosition, LVar7, -353, 68, 70)
-    EVT_CALL(SetVirtualEntityScale, LVar7, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_CALL(CreateVirtualEntity, LVar8, LVarB)
-    EVT_CALL(SetVirtualEntityPosition, LVar8, -338, 68, 70)
-    EVT_CALL(SetVirtualEntityScale, LVar8, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_CALL(CreateVirtualEntity, LVar9, LVarC)
-    EVT_CALL(SetVirtualEntityPosition, LVar9, -323, 68, 70)
-    EVT_CALL(SetVirtualEntityScale, LVar9, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-    EVT_CALL(InitStarPointModelFlags)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(3)
-            EVT_SET(LVar0, -197)
-        EVT_CASE_EQ(2)
-            EVT_SET(LVar0, -204)
-        EVT_CASE_EQ(1)
-            EVT_SET(LVar0, -211)
-    EVT_END_SWITCH
-    EVT_LOOP(10)
-        EVT_ADD(LVar0, 20)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -78)
-        EVT_CALL(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -146)
-        EVT_CALL(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -131)
-        EVT_CALL(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -116)
-        EVT_CALL(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(AwaitBattleRewardsDone)
-    EVT_SWITCH(LVarF)
-        EVT_CASE_EQ(3)
-            EVT_SET(LVar0, 3)
-        EVT_CASE_EQ(2)
-            EVT_SET(LVar0, -4)
-        EVT_CASE_EQ(1)
-            EVT_SET(LVar0, -11)
-    EVT_END_SWITCH
-    EVT_LOOP(10)
-        EVT_ADD(LVar0, 20)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -78)
-        EVT_CALL(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -154)
-        EVT_CALL(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -139)
-        EVT_CALL(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
-        EVT_SET(LVar1, LVar0)
-        EVT_ADD(LVar1, -124)
-        EVT_CALL(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(DeleteVirtualEntity, LVar6)
-    EVT_CALL(DeleteVirtualEntity, LVar7)
-    EVT_CALL(DeleteVirtualEntity, LVar8)
-    EVT_CALL(DeleteVirtualEntity, LVar9)
-    EVT_RETURN
-    EVT_END
+    Set(LVarF, 0)
+    Call(GetRemainingStarPointsReward)
+    IfEq(LVar0, 0)
+        Return
+    EndIf
+    IfLt(LVar0, 2)
+        Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoint))
+        Call(SetVirtualEntityPosition, LVar6, -278, 68, 70)
+        Call(SetVirtualEntityScale, LVar6, Float(0.5), Float(0.5), Float(0.5))
+    Else
+        Call(CreateVirtualEntity, LVar6, Ref(EMS_starpoint_starpoints))
+        Call(SetVirtualEntityPosition, LVar6, -278, 68, 70)
+        Call(SetVirtualEntityScale, LVar6, Float(0.5), Float(0.5), Float(0.5))
+        Set(LFlag0, TRUE)
+    EndIf
+    Switch(LVar0)
+        CaseGt(99)
+            Set(LVarF, 3)
+        CaseGt(9)
+            Set(LVarF, 2)
+        CaseDefault
+            Set(LVarF, 1)
+    EndSwitch
+    Call(GetStarPointDigitScripts)
+    Call(CreateVirtualEntity, LVar7, LVarA)
+    Call(SetVirtualEntityPosition, LVar7, -353, 68, 70)
+    Call(SetVirtualEntityScale, LVar7, Float(0.5), Float(0.5), Float(0.5))
+    Call(CreateVirtualEntity, LVar8, LVarB)
+    Call(SetVirtualEntityPosition, LVar8, -338, 68, 70)
+    Call(SetVirtualEntityScale, LVar8, Float(0.5), Float(0.5), Float(0.5))
+    Call(CreateVirtualEntity, LVar9, LVarC)
+    Call(SetVirtualEntityPosition, LVar9, -323, 68, 70)
+    Call(SetVirtualEntityScale, LVar9, Float(0.5), Float(0.5), Float(0.5))
+    Call(InitStarPointModelFlags)
+    Switch(LVarF)
+        CaseEq(3)
+            Set(LVar0, -197)
+        CaseEq(2)
+            Set(LVar0, -204)
+        CaseEq(1)
+            Set(LVar0, -211)
+    EndSwitch
+    Loop(10)
+        Add(LVar0, 20)
+        Set(LVar1, LVar0)
+        Add(LVar1, -78)
+        Call(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
+        Set(LVar1, LVar0)
+        Add(LVar1, -146)
+        Call(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
+        Set(LVar1, LVar0)
+        Add(LVar1, -131)
+        Call(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
+        Set(LVar1, LVar0)
+        Add(LVar1, -116)
+        Call(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
+        Wait(1)
+    EndLoop
+    Call(AwaitBattleRewardsDone)
+    Switch(LVarF)
+        CaseEq(3)
+            Set(LVar0, 3)
+        CaseEq(2)
+            Set(LVar0, -4)
+        CaseEq(1)
+            Set(LVar0, -11)
+    EndSwitch
+    Loop(10)
+        Add(LVar0, 20)
+        Set(LVar1, LVar0)
+        Add(LVar1, -78)
+        Call(SetVirtualEntityPosition, LVar6, LVar1, 68, 70)
+        Set(LVar1, LVar0)
+        Add(LVar1, -154)
+        Call(SetVirtualEntityPosition, LVar7, LVar1, 68, 70)
+        Set(LVar1, LVar0)
+        Add(LVar1, -139)
+        Call(SetVirtualEntityPosition, LVar8, LVar1, 68, 70)
+        Set(LVar1, LVar0)
+        Add(LVar1, -124)
+        Call(SetVirtualEntityPosition, LVar9, LVar1, 68, 70)
+        Wait(1)
+    EndLoop
+    Call(DeleteVirtualEntity, LVar6)
+    Call(DeleteVirtualEntity, LVar7)
+    Call(DeleteVirtualEntity, LVar8)
+    Call(DeleteVirtualEntity, LVar9)
+    Return
+    End
 };
 
 EvtScript EVS_ShowLevelUp = {
-    EVT_CALL(CreateVirtualEntity, LVar9, EVT_PTR(EMS_level_up))
-    EVT_CALL(SetVirtualEntityPosition, LVar9, 0, 210, 70)
-    EVT_CALL(InitLevelUpModelFlags)
-    EVT_CHILD_THREAD
-        EVT_WAIT(4)
-        EVT_CALL(MakeLevelUpConfetti)
-    EVT_END_CHILD_THREAD
-    EVT_THREAD
-        EVT_WAIT(8)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
-        EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(2.25))
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(1.2))
-        EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.45))
-        EVT_CALL(ShakeCam, 1, 0, 8, EVT_FLOAT(0.15))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, 210)
-        EVT_LOOP(10)
-            EVT_SUB(LVar0, 10)
-            EVT_CALL(SetVirtualEntityPosition, LVar9, 0, LVar0, 70)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_WAIT(8)
-    EVT_RETURN
-    EVT_END
+    Call(CreateVirtualEntity, LVar9, Ref(EMS_level_up))
+    Call(SetVirtualEntityPosition, LVar9, 0, 210, 70)
+    Call(InitLevelUpModelFlags)
+    ChildThread
+        Wait(4)
+        Call(MakeLevelUpConfetti)
+    EndChildThread
+    Thread
+        Wait(8)
+        Call(ShakeCam, 1, 0, 5, Float(3.0))
+        Call(ShakeCam, 1, 0, 3, Float(2.25))
+        Call(ShakeCam, 1, 0, 4, Float(1.2))
+        Call(ShakeCam, 1, 0, 6, Float(0.45))
+        Call(ShakeCam, 1, 0, 8, Float(0.15))
+    EndThread
+    Thread
+        Set(LVar0, 210)
+        Loop(10)
+            Sub(LVar0, 10)
+            Call(SetVirtualEntityPosition, LVar9, 0, LVar0, 70)
+            Wait(1)
+        EndLoop
+    EndThread
+    Wait(8)
+    Return
+    End
 };
 
 void btl_state_update_celebration(void) {

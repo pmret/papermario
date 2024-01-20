@@ -4,130 +4,130 @@
 #include "world/common/todo/UnkFunc12.inc.c"
 
 EvtScript N(EVS_PushClock_Impl) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_LOOP(20)
-        EVT_CALL(GetPartnerInUse, LVarA)
-        EVT_IF_NE(LVarA, PARTNER_NONE)
-            EVT_SET(LVar8, -1)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(N(UnkFunc11), LVar9)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_SET(LVar8, -1)
-            EVT_RETURN
-        EVT_ELSE
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(GetPartnerInUse, LVarA)
-    EVT_IF_NE(LVarA, PARTNER_NONE)
-        EVT_SET(LVar8, -1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_THREAD
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 100, EVT_FLOAT(0.6))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_IF_GE(LVar6, LVar7)
-            EVT_CALL(InterpPlayerYaw, 270, 0)
-        EVT_ELSE
-            EVT_CALL(InterpPlayerYaw, 90, 0)
-        EVT_END_IF
-        EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_SET(LVar1, LVar0)
-        EVT_SET(LVar2, LVar7)
-        EVT_SUB(LVar2, LVar6)
-        EVT_ADD(LVar1, LVar2)
-        EVT_CALL(MakeLerp, LVar0, LVar1, 100, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(N(UnkFunc12))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-        EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_THREAD
-    EVT_CALL(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_o77, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, MODEL_o77, LVar0, 0, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o77)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o112)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o113)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(StopSound, SOUND_LOOP_MOVE_STATUE)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Loop(20)
+        Call(GetPartnerInUse, LVarA)
+        IfNe(LVarA, PARTNER_NONE)
+            Set(LVar8, -1)
+            Return
+        EndIf
+        Call(N(UnkFunc11), LVar9)
+        IfEq(LVar0, 0)
+            Set(LVar8, -1)
+            Return
+        Else
+            Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+        EndIf
+        Wait(1)
+    EndLoop
+    Call(GetPartnerInUse, LVarA)
+    IfNe(LVarA, PARTNER_NONE)
+        Set(LVar8, -1)
+        Return
+    EndIf
+    Call(DisablePlayerInput, TRUE)
+    Thread
+        Call(ShakeCam, CAM_DEFAULT, 0, 100, Float(0.6))
+    EndThread
+    Thread
+        IfGe(LVar6, LVar7)
+            Call(InterpPlayerYaw, 270, 0)
+        Else
+            Call(InterpPlayerYaw, 90, 0)
+        EndIf
+        Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Set(LVar1, LVar0)
+        Set(LVar2, LVar7)
+        Sub(LVar2, LVar6)
+        Add(LVar1, LVar2)
+        Call(MakeLerp, LVar0, LVar1, 100, EASING_LINEAR)
+        Loop(0)
+            Call(SetPlayerActionState, ACTION_STATE_PUSHING_BLOCK)
+            Call(UpdateLerp)
+            Call(N(UnkFunc12))
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SetPlayerActionState, ACTION_STATE_IDLE)
+        Call(DisablePlayerInput, FALSE)
+    EndThread
+    Call(MakeLerp, LVar6, LVar7, 100, EASING_LINEAR)
+    Call(PlaySoundAtCollider, COLLIDER_o77, SOUND_LOOP_MOVE_STATUE, SOUND_SPACE_DEFAULT)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(TranslateModel, MODEL_o77, LVar0, 0, 0)
+        Call(UpdateColliderTransform, COLLIDER_o77)
+        Call(UpdateColliderTransform, COLLIDER_o112)
+        Call(UpdateColliderTransform, COLLIDER_o113)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(StopSound, SOUND_LOOP_MOVE_STATUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_PushClockRight) = {
-    EVT_IF_NE(GF_DGB03_PushedClock, FALSE)
-        EVT_GOTO(90)
-    EVT_END_IF
-    EVT_SET(LVar6, 0)
-    EVT_SET(LVar7, 48)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, 27)
-    EVT_EXEC_WAIT(N(EVS_PushClock_Impl))
-    EVT_LABEL(90)
-    EVT_IF_NE(LVar8, -1)
-        EVT_SET(GF_DGB03_PushedClockLeft, FALSE)
-        EVT_SET(GF_DGB03_PushedClock, TRUE)
-        EVT_UNBIND
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GF_DGB03_PushedClock, FALSE)
+        Goto(90)
+    EndIf
+    Set(LVar6, 0)
+    Set(LVar7, 48)
+    Set(LVar8, 0)
+    Set(LVar9, 27)
+    ExecWait(N(EVS_PushClock_Impl))
+    Label(90)
+    IfNe(LVar8, -1)
+        Set(GF_DGB03_PushedClockLeft, FALSE)
+        Set(GF_DGB03_PushedClock, TRUE)
+        Unbind
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_PushClockLeft) = {
-    EVT_IF_NE(GF_DGB03_PushedClock, FALSE)
-        EVT_GOTO(90)
-    EVT_END_IF
-    EVT_SET(LVar6, 0)
-    EVT_SET(LVar7, -48)
-    EVT_SET(LVar8, 0)
-    EVT_SET(LVar9, 28)
-    EVT_EXEC_WAIT(N(EVS_PushClock_Impl))
-    EVT_LABEL(90)
-    EVT_IF_NE(LVar8, -1)
-        EVT_SET(GF_DGB03_PushedClockLeft, TRUE)
-        EVT_SET(GF_DGB03_PushedClock, TRUE)
-        EVT_UNBIND
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfNe(GF_DGB03_PushedClock, FALSE)
+        Goto(90)
+    EndIf
+    Set(LVar6, 0)
+    Set(LVar7, -48)
+    Set(LVar8, 0)
+    Set(LVar9, 28)
+    ExecWait(N(EVS_PushClock_Impl))
+    Label(90)
+    IfNe(LVar8, -1)
+        Set(GF_DGB03_PushedClockLeft, TRUE)
+        Set(GF_DGB03_PushedClock, TRUE)
+        Unbind
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupClock) = {
-    EVT_CALL(ParentColliderToModel, COLLIDER_o77, MODEL_o77)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o112, MODEL_o77)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o113, MODEL_o77)
-    EVT_IF_EQ(GF_DGB03_PushedClock, FALSE)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PushClockRight)), TRIGGER_WALL_PUSH, COLLIDER_o77, 1, 0)
-        EVT_BIND_TRIGGER(EVT_PTR(N(EVS_PushClockLeft)), TRIGGER_WALL_PUSH, COLLIDER_o112, 1, 0)
-    EVT_ELSE
-        EVT_IF_EQ(GF_DGB03_PushedClockLeft, FALSE)
-            EVT_SET(LVar0, 48)
-        EVT_ELSE
-            EVT_SET(LVar0, -48)
-        EVT_END_IF
-        EVT_CALL(TranslateModel, MODEL_o77, LVar0, 0, 0)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o77)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o112)
-        EVT_CALL(UpdateColliderTransform, COLLIDER_o113)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(ParentColliderToModel, COLLIDER_o77, MODEL_o77)
+    Call(ParentColliderToModel, COLLIDER_o112, MODEL_o77)
+    Call(ParentColliderToModel, COLLIDER_o113, MODEL_o77)
+    IfEq(GF_DGB03_PushedClock, FALSE)
+        BindTrigger(Ref(N(EVS_PushClockRight)), TRIGGER_WALL_PUSH, COLLIDER_o77, 1, 0)
+        BindTrigger(Ref(N(EVS_PushClockLeft)), TRIGGER_WALL_PUSH, COLLIDER_o112, 1, 0)
+    Else
+        IfEq(GF_DGB03_PushedClockLeft, FALSE)
+            Set(LVar0, 48)
+        Else
+            Set(LVar0, -48)
+        EndIf
+        Call(TranslateModel, MODEL_o77, LVar0, 0, 0)
+        Call(UpdateColliderTransform, COLLIDER_o77)
+        Call(UpdateColliderTransform, COLLIDER_o112)
+        Call(UpdateColliderTransform, COLLIDER_o113)
+    EndIf
+    Return
+    End
 };

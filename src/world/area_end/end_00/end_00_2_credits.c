@@ -15,25 +15,25 @@
 #endif
 
 EvtScript N(EVS_InitCredits) = {
-    EVT_CALL(N(InitCredits))
-    EVT_RETURN
-    EVT_END
+    Call(N(InitCredits))
+    Return
+    End
 };
 
 EvtScript N(EVS_ShowCredits_Jobs) = {
-    EVT_CALL(N(ShowCreditList), EVT_PTR(N(Credits_Jobs)))
-    EVT_RETURN
-    EVT_END
+    Call(N(ShowCreditList), Ref(N(Credits_Jobs)))
+    Return
+    End
 };
 
 EvtScript N(EVS_ShowCredits_Names) = {
-    EVT_CALL(N(ShowCreditList), EVT_PTR(N(Credits_Names)))
-    EVT_RETURN
-    EVT_END
+    Call(N(ShowCreditList), Ref(N(Credits_Names)))
+    Return
+    End
 };
 
 EvtScript N(EVS_ShowCredits_Title) = {
-    EVT_CALL(N(ShowCreditList), EVT_PTR(N(Credits_Title)))
-    EVT_RETURN
-    EVT_END
+    Call(N(ShowCreditList), Ref(N(Credits_Title)))
+    Return
+    End
 };

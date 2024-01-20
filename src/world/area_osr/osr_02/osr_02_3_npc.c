@@ -30,349 +30,349 @@ Vec3f N(FlightPath_TwinkDepart)[] = {
 };
 
 EvtScript N(EVS_StarSpirit_FlyAway) = {
-    EVT_CALL(SetNpcFlagBits, LVar4, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
-    EVT_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(GetNpcPos, LVar4, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
-            EVT_WAIT(6)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(GetNpcPos, LVar4, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 20)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 40)
-            EVT_WAIT(8)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 1800, 100, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, LVar4, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, LVar4, LVar7, LVar8, LVar9)
-    EVT_CALL(MakeLerp, 80, 260, 100, EASING_CUBIC_IN)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcPos, LVar4, LVar7, LVar0, LVar9)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, LVar4, LVar7, NPC_DISPOSE_POS_Y, LVar9)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcFlagBits, LVar4, NPC_FLAG_IGNORE_CAMERA_FOR_YAW, TRUE)
+    Thread
+        Loop(30)
+            Call(GetNpcPos, LVar4, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
+            Wait(6)
+        EndLoop
+    EndThread
+    Thread
+        Loop(30)
+            Call(GetNpcPos, LVar4, LVar0, LVar1, LVar2)
+            Add(LVar1, 20)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 40)
+            Wait(8)
+        EndLoop
+    EndThread
+    Thread
+        Call(MakeLerp, 0, 1800, 100, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, LVar4, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Call(GetNpcPos, LVar4, LVar7, LVar8, LVar9)
+    Call(MakeLerp, 80, 260, 100, EASING_CUBIC_IN)
+    Loop(0)
+        Call(UpdateLerp)
+        Call(SetNpcPos, LVar4, LVar7, LVar0, LVar9)
+        Wait(1)
+        IfEq(LVar1, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Call(SetNpcPos, LVar4, LVar7, NPC_DISPOSE_POS_Y, LVar9)
+    Return
+    End
 };
 
 EvtScript N(EVS_Twink_FlyAway) = {
-    EVT_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
-            EVT_WAIT(6)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_LOOP(30)
-            EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
-            EVT_ADD(LVar1, 20)
-            EVT_PLAY_EFFECT(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 40)
-            EVT_WAIT(8)
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 2160, 120, EASING_CUBIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(SetNpcRotation, NPC_Twink, 0, LVar0, 0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(PlaySoundAtNpc, NPC_Twink, SOUND_TWINK_DEPART, SOUND_SPACE_DEFAULT)
-        EVT_CALL(LoadPath, 120, EVT_PTR(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
-        EVT_LOOP(0)
-            EVT_CALL(GetNextPathPos)
-            EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_CALL(SetNpcPos, NPC_Twink, LVar1, NPC_DISPOSE_POS_Y, LVar3)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(0.5), 0, 550, EVT_FLOAT(17.0), EVT_FLOAT(-10.0))
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Thread
+        Loop(30)
+            Call(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
+            PlayEffect(EFFECT_SPARKLES, 3, LVar0, LVar1, LVar2, 20)
+            Wait(6)
+        EndLoop
+    EndThread
+    Thread
+        Loop(30)
+            Call(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
+            Add(LVar1, 20)
+            PlayEffect(EFFECT_SPARKLES, 4, LVar0, LVar1, LVar2, 40)
+            Wait(8)
+        EndLoop
+    EndThread
+    Thread
+        Call(MakeLerp, 0, 2160, 120, EASING_CUBIC_IN)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(SetNpcRotation, NPC_Twink, 0, LVar0, 0)
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndThread
+    Thread
+        Call(PlaySoundAtNpc, NPC_Twink, SOUND_TWINK_DEPART, SOUND_SPACE_DEFAULT)
+        Call(LoadPath, 120, Ref(N(FlightPath_TwinkDepart)), ARRAY_COUNT(N(FlightPath_TwinkDepart)), EASING_QUADRATIC_IN)
+        Loop(0)
+            Call(GetNextPathPos)
+            Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+            Wait(1)
+            IfEq(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Call(SetNpcPos, NPC_Twink, LVar1, NPC_DISPOSE_POS_Y, LVar3)
+    EndThread
+    Thread
+        Call(AdjustCam, CAM_DEFAULT, Float(0.5), 0, 550, Float(17.0), Float(-10.0))
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_Scene_ReturnStarRod) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 2, 8)
-    EVT_CALL(SetPlayerPos, 15, 0, 30)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetNpcPos, NPC_PARTNER, -70, LVar1, 15)
-    EVT_CALL(SetNpcYaw, NPC_PARTNER, 90)
-    EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(700.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(1)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
-    EVT_CALL(SetNpcPos, NPC_StarRod, 30, 25, 30)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Leap)
-    EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
-    EVT_SET(LVar1, 80)
-    EVT_SET(LVar2, 35)
-    EVT_CALL(SetNpcJumpscale, NPC_StarRod, EVT_FLOAT(0.5))
-    EVT_CALL(NpcJump1, NPC_StarRod, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(PlaySound, SOUND_RECEIVE_STAR_POWER)
-    EVT_LOOP(6)
-        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 9, LVar0, LVar1, LVar2, 1, 20)
-        EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar1, LVar2, 30)
-        EVT_WAIT(10)
-    EVT_END_LOOP
-    EVT_LOOP(20)
-        EVT_ADD(LVar1, -1)
-        EVT_CALL(SetNpcPos, NPC_StarRod, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetNpcPos, NPC_StarRod, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_Outro_0000)
-    EVT_WAIT(10)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(SetNpcJumpscale, NPC_Eldstar, EVT_FLOAT(0.0))
-        EVT_CALL(NpcJump0, NPC_Eldstar, 120, 80, 0, 40)
-        EVT_CALL(InterpNpcYaw, NPC_Eldstar, 270, 0)
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
-    EVT_SET(LVar0, 120)
-    EVT_SET(LVar1, 80)
-    EVT_SET(LVar2, 0)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, 0, MSG_Outro_0001)
-    EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 0, MSG_Outro_0002)
-    EVT_CALL(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Muskular, ANIM_WorldMuskular_Talk, ANIM_WorldMuskular_Idle, 0, MSG_Outro_0003)
-    EVT_CALL(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Misstar, ANIM_WorldMisstar_Talk, ANIM_WorldMisstar_Idle, 0, MSG_Outro_0004)
-    EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, 0, MSG_Outro_0005)
-    EVT_CALL(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Kalmar, ANIM_WorldKalmar_Talk, ANIM_WorldKalmar_Idle, 0, MSG_Outro_0006)
-    EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_Outro_0007)
-    EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-2.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(5)
-    EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_Outro_0008)
-    EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-6.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(275.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_Outro_0009)
-    EVT_WAIT(20)
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(90.0), 70, 400, EVT_FLOAT(17.0), EVT_FLOAT(-11.0))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_THREAD
-        EVT_SET(LVar4, NPC_Eldstar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(30)
-        EVT_SET(LVar4, NPC_Misstar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_2, SOUND_SPACE_DEFAULT)
-        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_SET(LVar4, NPC_Skolar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(90)
-        EVT_SET(LVar4, NPC_Mamar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_2, SOUND_SPACE_DEFAULT)
-        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(120)
-        EVT_SET(LVar4, NPC_Kalmar)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_WAIT(150)
-        EVT_SET(LVar4, NPC_Muskular)
-        EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_2, SOUND_SPACE_DEFAULT)
-        EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_END_THREAD
-    EVT_WAIT(180)
-    EVT_SET(LVar4, NPC_Klevar)
-    EVT_CALL(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
-    EVT_EXEC_WAIT(N(EVS_StarSpirit_FlyAway))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_WAIT(20)
-    EVT_CALL(SetMusicTrack, 0, SONG_TWINK_THEME, 1, 8)
-    EVT_CALL(LoadPath, 30, EVT_PTR(N(FlightPath_TwinkStepForward)), ARRAY_COUNT(N(FlightPath_TwinkStepForward)), EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(GetNextPathPos)
-        EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_WAIT(5)
-    EVT_CALL(InterpNpcYaw, NPC_Twink, 270, 0)
-    EVT_WAIT(10)
-    EVT_CALL(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-4.0))
-    EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Outro_000A)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_RaiseArms)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TalkIdle)
-    EVT_CALL(SpeakToPlayer, NPC_Peach, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 5, MSG_Outro_000B)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach2_LowerArms)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
-    EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Disappointed)
-    EVT_CALL(SpeakToPlayer, NPC_Twink, ANIM_Twink_Disappointed, ANIM_Twink_Disappointed, 0, MSG_Outro_000C)
-    EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
-    EVT_CALL(EndSpeech, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0)
-    EVT_WAIT(20)
-    EVT_EXEC(N(EVS_Twink_FlyAway))
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(250)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
-    EVT_CALL(NpcMoveTo, NPC_Peach, -10, 30, 40)
-    EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(InterpPlayerYaw, 270, 0)
-    EVT_WAIT(60)
-    EVT_CALL(InterpPlayerYaw, 90, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_LookUp)
-    EVT_WAIT(20)
-    EVT_CALL(GotoMap, EVT_PTR("hos_10"), hos_10_ENTRY_2)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePartnerAI, 0)
+    Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 2, 8)
+    Call(SetPlayerPos, 15, 0, 30)
+    Call(InterpPlayerYaw, 90, 0)
+    Call(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetNpcPos, NPC_PARTNER, -70, LVar1, 15)
+    Call(SetNpcYaw, NPC_PARTNER, 90)
+    Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    Call(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-7.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(700.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Wait(1)
+    Call(SetCamDistance, CAM_DEFAULT, Float(350.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(20)
+    Call(SetPlayerAnimation, ANIM_MarioW1_TakeItem)
+    Call(SetNpcPos, NPC_StarRod, 30, 25, 30)
+    Wait(20)
+    Call(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Leap)
+    Call(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
+    Set(LVar1, 80)
+    Set(LVar2, 35)
+    Call(SetNpcJumpscale, NPC_StarRod, Float(0.5))
+    Call(NpcJump1, NPC_StarRod, LVar0, LVar1, LVar2, 20)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(PlaySound, SOUND_RECEIVE_STAR_POWER)
+    Loop(6)
+        PlayEffect(EFFECT_RADIAL_SHIMMER, 9, LVar0, LVar1, LVar2, 1, 20)
+        PlayEffect(EFFECT_SPARKLES, 1, LVar0, LVar1, LVar2, 30)
+        Wait(10)
+    EndLoop
+    Loop(20)
+        Add(LVar1, -1)
+        Call(SetNpcPos, NPC_StarRod, LVar0, LVar1, LVar2)
+        Wait(1)
+    EndLoop
+    Call(SetNpcPos, NPC_StarRod, NPC_DISPOSE_LOCATION)
+    Wait(20)
+    Call(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Idle)
+    Wait(10)
+    Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_Outro_0000)
+    Wait(10)
+    Thread
+        Wait(5)
+        Call(SetNpcJumpscale, NPC_Eldstar, Float(0.0))
+        Call(NpcJump0, NPC_Eldstar, 120, 80, 0, 40)
+        Call(InterpNpcYaw, NPC_Eldstar, 270, 0)
+    EndThread
+    Call(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
+    Set(LVar0, 120)
+    Set(LVar1, 80)
+    Set(LVar2, 0)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(10)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Call(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Mamar, ANIM_WorldMamar_TalkHappy, ANIM_WorldMamar_Idle, 0, MSG_Outro_0001)
+    Call(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Skolar, ANIM_WorldSkolar_TalkAngry, ANIM_WorldSkolar_Idle, 0, MSG_Outro_0002)
+    Call(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Muskular, ANIM_WorldMuskular_Talk, ANIM_WorldMuskular_Idle, 0, MSG_Outro_0003)
+    Call(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Misstar, ANIM_WorldMisstar_Talk, ANIM_WorldMisstar_Idle, 0, MSG_Outro_0004)
+    Call(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Klevar, ANIM_WorldKlevar_Talk, ANIM_WorldKlevar_Idle, 0, MSG_Outro_0005)
+    Call(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Kalmar, ANIM_WorldKalmar_Talk, ANIM_WorldKalmar_Idle, 0, MSG_Outro_0006)
+    Call(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-5.5))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_Outro_0007)
+    Call(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-2.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Wait(5)
+    Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 5, MSG_Outro_0008)
+    Call(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-6.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(275.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Eldstar, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle, 0, MSG_Outro_0009)
+    Wait(20)
+    Call(AdjustCam, CAM_DEFAULT, Float(90.0), 70, 400, Float(17.0), Float(-11.0))
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Thread
+        Set(LVar4, NPC_Eldstar)
+        Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+        ExecWait(N(EVS_StarSpirit_FlyAway))
+    EndThread
+    Thread
+        Wait(30)
+        Set(LVar4, NPC_Misstar)
+        Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_2, SOUND_SPACE_DEFAULT)
+        ExecWait(N(EVS_StarSpirit_FlyAway))
+    EndThread
+    Thread
+        Wait(60)
+        Set(LVar4, NPC_Skolar)
+        Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+        ExecWait(N(EVS_StarSpirit_FlyAway))
+    EndThread
+    Thread
+        Wait(90)
+        Set(LVar4, NPC_Mamar)
+        Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_2, SOUND_SPACE_DEFAULT)
+        ExecWait(N(EVS_StarSpirit_FlyAway))
+    EndThread
+    Thread
+        Wait(120)
+        Set(LVar4, NPC_Kalmar)
+        Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+        ExecWait(N(EVS_StarSpirit_FlyAway))
+    EndThread
+    Thread
+        Wait(150)
+        Set(LVar4, NPC_Muskular)
+        Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_2, SOUND_SPACE_DEFAULT)
+        ExecWait(N(EVS_StarSpirit_FlyAway))
+    EndThread
+    Wait(180)
+    Set(LVar4, NPC_Klevar)
+    Call(PlaySoundAtNpc, LVar4, SOUND_STAR_SPIRIT_DEPART_1, SOUND_SPACE_DEFAULT)
+    ExecWait(N(EVS_StarSpirit_FlyAway))
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Wait(20)
+    Call(SetMusicTrack, 0, SONG_TWINK_THEME, 1, 8)
+    Call(LoadPath, 30, Ref(N(FlightPath_TwinkStepForward)), ARRAY_COUNT(N(FlightPath_TwinkStepForward)), EASING_LINEAR)
+    Loop(0)
+        Call(GetNextPathPos)
+        Call(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
+        Wait(1)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait(5)
+    Call(InterpNpcYaw, NPC_Twink, 270, 0)
+    Wait(10)
+    Call(GetNpcPos, NPC_Twink, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetCamPitch, CAM_DEFAULT, Float(17.0), Float(-4.0))
+    Call(SetCamDistance, CAM_DEFAULT, Float(300.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, MSG_Outro_000A)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach2_RaiseArms)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach2_TalkIdle)
+    Call(SpeakToPlayer, NPC_Peach, ANIM_Peach2_Talk, ANIM_Peach2_TalkIdle, 5, MSG_Outro_000B)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach2_LowerArms)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
+    Wait(10)
+    Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Disappointed)
+    Call(SpeakToPlayer, NPC_Twink, ANIM_Twink_Disappointed, ANIM_Twink_Disappointed, 0, MSG_Outro_000C)
+    Call(SetNpcAnimation, NPC_Twink, ANIM_Twink_Idle)
+    Call(EndSpeech, NPC_Twink, ANIM_Twink_Talk, ANIM_Twink_Idle, 0)
+    Wait(20)
+    Exec(N(EVS_Twink_FlyAway))
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(250)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Walk)
+    Call(NpcMoveTo, NPC_Peach, -10, 30, 40)
+    Call(SetNpcAnimation, NPC_Peach, ANIM_Peach1_Idle)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(InterpPlayerYaw, 270, 0)
+    Wait(60)
+    Call(InterpPlayerYaw, 90, 0)
+    Call(SetPlayerAnimation, ANIM_Mario1_LookUp)
+    Wait(20)
+    Call(GotoMap, Ref("hos_10"), hos_10_ENTRY_2)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Peach) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -25, 0, 40)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -25, 0, 40)
+    Call(InterpNpcYaw, NPC_SELF, 90, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, -10, 40, 10)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, -10, 40, 10)
+    Call(SetNpcYaw, NPC_SELF, 90)
+    Return
+    End
 };
 
 s16 N(SpiritHoverOffsets)[] = {
@@ -400,70 +400,70 @@ API_CALLABLE(N(AnimateSpiritHover)) {
 }
 
 EvtScript N(EVS_NpcAux_Eldstar) = {
-    EVT_CALL(N(AnimateSpiritHover))
-    EVT_RETURN
-    EVT_END
+    Call(N(AnimateSpiritHover))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Eldstar) = {
-    EVT_CALL(SetNpcPos, NPC_Eldstar, 60, 20, 30)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Eldstar, 60, 20, 30)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mamar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 66, 80, -27)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 66, 80, -27)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Skolar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 53, 80, -95)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 53, 80, -95)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Muskular) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 91, 80, -132)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 91, 80, -132)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Misstar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 151, 80, -132)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 151, 80, -132)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Klevar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 189, 80, -95)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 189, 80, -95)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kalmar) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 176, 80, -27)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_Eldstar)))
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 176, 80, -27)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_Eldstar)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StarRod) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Peach)[] = {

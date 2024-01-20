@@ -2,17 +2,17 @@
 #include "camera.h"
 
 EvtScript ShakeCam1 = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(ShakeCam, LVar0, LVar1, LVar2, EVT_FLOAT(1.0))
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(ShakeCam, LVar0, LVar1, LVar2, Float(1.0))
+    Return
+    End
 };
 
 EvtScript ShakeCamX = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(ShakeCam, LVar0, LVar1, LVar2, LVar3)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(ShakeCam, LVar0, LVar1, LVar2, LVar3)
+    Return
+    End
 };
 
 API_CALLABLE(SetCamEnabled) {

@@ -12,14 +12,14 @@
 s32** N(varStash) = NULL;
 
 EvtScript N(EVS_Chest_ShowGotItem) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_FULL)
-    EVT_WAIT(40)
-    EVT_CALL(ShowGotItem, LVar0, FALSE, 0)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_RETURN
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_FULL)
+    Wait(40)
+    Call(ShowGotItem, LVar0, FALSE, 0)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Return
+    Return
+    End
 };
 
 MAP_RODATA_PAD(1,unk);
@@ -31,27 +31,27 @@ MAP_RODATA_PAD(1,unk);
 #include "world/common/entity/SuperBlock.inc.c"
 
 EvtScript N(EVS_SmashBlockA) = {
-    EVT_SET(GF_TIK12_Hammer3BlockA, TRUE)
-    EVT_RETURN
-    EVT_END
+    Set(GF_TIK12_Hammer3BlockA, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_SmashBlockB) = {
-    EVT_SET(GF_TIK12_Hammer3BlockB, TRUE)
-    EVT_RETURN
-    EVT_END
+    Set(GF_TIK12_Hammer3BlockB, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MakeEntities) = {
     EVT_MAKE_SUPER_BLOCK(240, 0, -40, 0)
-    EVT_IF_EQ(GF_TIK12_Hammer3BlockA, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer3Block), 140, -135, 55, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(EVS_SmashBlockA)))
-    EVT_END_IF
-    EVT_IF_EQ(GF_TIK12_Hammer3BlockB, FALSE)
-        EVT_CALL(MakeEntity, EVT_PTR(Entity_Hammer3Block), 140, -135, 105, 0, MAKE_ENTITY_END)
-        EVT_CALL(AssignScript, EVT_PTR(N(EVS_SmashBlockB)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_TIK12_Hammer3BlockA, FALSE)
+        Call(MakeEntity, Ref(Entity_Hammer3Block), 140, -135, 55, 0, MAKE_ENTITY_END)
+        Call(AssignScript, Ref(N(EVS_SmashBlockA)))
+    EndIf
+    IfEq(GF_TIK12_Hammer3BlockB, FALSE)
+        Call(MakeEntity, Ref(Entity_Hammer3Block), 140, -135, 105, 0, MAKE_ENTITY_END)
+        Call(AssignScript, Ref(N(EVS_SmashBlockB)))
+    EndIf
+    Return
+    End
 };

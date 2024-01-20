@@ -60,132 +60,132 @@ Vec3f N(Zipline_Endpoints)[] = {
 };
 
 EvtScript N(EVS_Zipline_TetherCameraToPlayer) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(SetCamTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_RideZipline) = {
-    EVT_CALL(GetPartnerInUse, LVar9)
-    EVT_IF_EQ(LVar9, PARTNER_KOOPER)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(LVar9, PARTNER_BOMBETTE)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_USE_ARRAY(LVar0)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
-    EVT_WAIT(1)
-    EVT_EXEC_GET_TID(N(EVS_Zipline_TetherCameraToPlayer), LVar9)
-    EVT_THREAD
-        EVT_WAIT(7)
-        EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-        EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-        EVT_SET(LVar0, ArrayVar(4))
-        EVT_SUB(LVar0, 10)
-        EVT_SET(LVar1, ArrayVar(5))
-        EVT_ADD(LVar1, -5)
-        EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.5))
-        EVT_CALL(NpcJump0, NPC_PARTNER, ArrayVar(3), LVar0, LVar1, 8)
-        EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-    EVT_END_THREAD
-    EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(0.2))
-    EVT_CALL(PlayerJump, ArrayVar(3), ArrayVar(4), ArrayVar(5), 5)
-    EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
-    EVT_WAIT(1)
-    EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
-    EVT_WAIT(10)
-    EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-    EVT_CALL(PlaySound, SOUND_LOOP_ZIPLINE_RIDE)
-    EVT_CHILD_THREAD
-        EVT_SET(MF_Zipline_GoingDown, TRUE)
-        EVT_SET(LVar0, ArrayVar(6))
-        EVT_SET(AB_KZN_LastZiplineNpc1, ArrayVar(6))
-        EVT_LOOP(0)
-            EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(N(Zipline_AdjustMoveDownSound), MF_Zipline_GoingDown, LVar1, LVar2, LVar3)
-            EVT_IF_NE(AB_KZN_LastZiplineNpc1, LVar0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(MakeLerp, 0, 1000, 70, EASING_QUADRATIC_IN)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(Zipline_UpdatePlayerPos), 0)
-        EVT_CALL(TranslateModel, ArrayVar(1), LVar5, LVar6, LVar7)
-        EVT_CALL(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
-        EVT_WAIT(1)
-        EVT_CALL(N(Zipline_CheckInputForJumpOff))
-        EVT_IF_EQ(LVar8, BUTTON_A)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_ZIPLINE_FINISH)
-    EVT_LABEL(10)
-    EVT_CALL(SetPlayerFlagBits, PS_FLAG_SCRIPTED_FALL, TRUE)
-    EVT_SET(MF_Zipline_GoingDown, FALSE)
-    EVT_CALL(StopSound, SOUND_LOOP_ZIPLINE_RIDE)
-    EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_KILL_THREAD(LVar9)
-    EVT_WAIT(20)
-    EVT_CALL(PlaySound, SOUND_LOOP_ZIPLINE_RETURN)
-    EVT_CHILD_THREAD
-        EVT_SET(MF_Zipline_GoingUp, TRUE)
-        EVT_SET(LVar0, ArrayVar(6))
-        EVT_SET(AB_KZN_LastZiplineNpc2, ArrayVar(6))
-        EVT_LOOP(0)
-            EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
-            EVT_CALL(N(Zipline_AdjustMoveUpSound), MF_Zipline_GoingUp, LVar1, LVar2, LVar3)
-            EVT_IF_NE(AB_KZN_LastZiplineNpc2, LVar0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_SET(LVar2, LVar0)
-    EVT_DIV(LVar2, 10)
-    EVT_CALL(MakeLerp, LVar0, 0, LVar2, EASING_LINEAR)
-    EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(Zipline_UpdatePlayerPos), 1)
-        EVT_CALL(TranslateModel, ArrayVar(1), LVar5, LVar6, LVar7)
-        EVT_CALL(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_SET(MF_Zipline_GoingUp, FALSE)
-    EVT_CALL(StopSound, SOUND_LOOP_ZIPLINE_RETURN)
-    EVT_RETURN
-    EVT_END
+    Call(GetPartnerInUse, LVar9)
+    IfEq(LVar9, PARTNER_KOOPER)
+        Return
+    EndIf
+    IfEq(LVar9, PARTNER_BOMBETTE)
+        Return
+    EndIf
+    UseArray(LVar0)
+    Call(DisablePlayerInput, TRUE)
+    Call(DisablePlayerPhysics, TRUE)
+    Call(SetPlayerActionState, ACTION_STATE_JUMP)
+    Wait(1)
+    ExecGetTID(N(EVS_Zipline_TetherCameraToPlayer), LVar9)
+    Thread
+        Wait(7)
+        Call(DisablePartnerAI, 0)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
+        Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+        Set(LVar0, ArrayVar(4))
+        Sub(LVar0, 10)
+        Set(LVar1, ArrayVar(5))
+        Add(LVar1, -5)
+        Call(SetNpcJumpscale, NPC_PARTNER, Float(0.5))
+        Call(NpcJump0, NPC_PARTNER, ArrayVar(3), LVar0, LVar1, 8)
+        Call(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
+    EndThread
+    Call(SetPlayerJumpscale, Float(0.2))
+    Call(PlayerJump, ArrayVar(3), ArrayVar(4), ArrayVar(5), 5)
+    Call(SetPlayerActionState, ACTION_STATE_LAND)
+    Wait(1)
+    Call(SetPlayerAnimation, ANIM_MarioW2_HoldOnto)
+    Wait(10)
+    Call(GetPlayerPos, LVar2, LVar3, LVar4)
+    Call(PlaySound, SOUND_LOOP_ZIPLINE_RIDE)
+    ChildThread
+        Set(MF_Zipline_GoingDown, TRUE)
+        Set(LVar0, ArrayVar(6))
+        Set(AB_KZN_LastZiplineNpc1, ArrayVar(6))
+        Loop(0)
+            Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+            Call(N(Zipline_AdjustMoveDownSound), MF_Zipline_GoingDown, LVar1, LVar2, LVar3)
+            IfNe(AB_KZN_LastZiplineNpc1, LVar0)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Call(MakeLerp, 0, 1000, 70, EASING_QUADRATIC_IN)
+    Label(0)
+        Call(UpdateLerp)
+        Call(N(Zipline_UpdatePlayerPos), 0)
+        Call(TranslateModel, ArrayVar(1), LVar5, LVar6, LVar7)
+        Call(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
+        Wait(1)
+        Call(N(Zipline_CheckInputForJumpOff))
+        IfEq(LVar8, BUTTON_A)
+            Goto(10)
+        EndIf
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(PlaySound, SOUND_ZIPLINE_FINISH)
+    Label(10)
+    Call(SetPlayerFlagBits, PS_FLAG_SCRIPTED_FALL, TRUE)
+    Set(MF_Zipline_GoingDown, FALSE)
+    Call(StopSound, SOUND_LOOP_ZIPLINE_RIDE)
+    Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_WORLD_COLLISION, FALSE)
+    Call(EnablePartnerAI)
+    Call(DisablePlayerPhysics, FALSE)
+    Call(DisablePlayerInput, FALSE)
+    KillThread(LVar9)
+    Wait(20)
+    Call(PlaySound, SOUND_LOOP_ZIPLINE_RETURN)
+    ChildThread
+        Set(MF_Zipline_GoingUp, TRUE)
+        Set(LVar0, ArrayVar(6))
+        Set(AB_KZN_LastZiplineNpc2, ArrayVar(6))
+        Loop(0)
+            Call(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
+            Call(N(Zipline_AdjustMoveUpSound), MF_Zipline_GoingUp, LVar1, LVar2, LVar3)
+            IfNe(AB_KZN_LastZiplineNpc2, LVar0)
+                BreakLoop
+            EndIf
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Set(LVar2, LVar0)
+    Div(LVar2, 10)
+    Call(MakeLerp, LVar0, 0, LVar2, EASING_LINEAR)
+    Label(1)
+        Call(UpdateLerp)
+        Call(N(Zipline_UpdatePlayerPos), 1)
+        Call(TranslateModel, ArrayVar(1), LVar5, LVar6, LVar7)
+        Call(TranslateModel, ArrayVar(2), LVar5, LVar6, LVar7)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    Set(MF_Zipline_GoingUp, FALSE)
+    Call(StopSound, SOUND_LOOP_ZIPLINE_RETURN)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupZipline) = {
-    EVT_MALLOC_ARRAY(7, LVar0)
-    EVT_USE_ARRAY(LVar0)
-    EVT_SET(ArrayVar(0), EVT_PTR(N(Zipline_Endpoints)))
-    EVT_SET(ArrayVar(1), MODEL_kassya_koma)
-    EVT_SET(ArrayVar(2), MODEL_kassya_himo)
-    EVT_SET(ArrayVar(3), -332)
-    EVT_SET(ArrayVar(4), 895)
-    EVT_SET(ArrayVar(5), -45)
-    EVT_SET(ArrayVar(6), NPC_ZiplineDummy)
-    EVT_BIND_TRIGGER(N(EVS_RideZipline), TRIGGER_FLOOR_PRESS_A, COLLIDER_ropeway, 1, 0)
-    EVT_EXEC(N(EVS_SyncZiplineDummyNPC))
-    EVT_RETURN
-    EVT_END
+    MallocArray(7, LVar0)
+    UseArray(LVar0)
+    Set(ArrayVar(0), Ref(N(Zipline_Endpoints)))
+    Set(ArrayVar(1), MODEL_kassya_koma)
+    Set(ArrayVar(2), MODEL_kassya_himo)
+    Set(ArrayVar(3), -332)
+    Set(ArrayVar(4), 895)
+    Set(ArrayVar(5), -45)
+    Set(ArrayVar(6), NPC_ZiplineDummy)
+    BindTrigger(N(EVS_RideZipline), TRIGGER_FLOOR_PRESS_A, COLLIDER_ropeway, 1, 0)
+    Exec(N(EVS_SyncZiplineDummyNPC))
+    Return
+    End
 };

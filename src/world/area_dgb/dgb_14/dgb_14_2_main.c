@@ -2,71 +2,71 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_ExitDoors_dgb_03_3) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-    EVT_SET(LVar0, dgb_14_ENTRY_1)
-    EVT_SET(LVar1, COLLIDER_deilittse)
-    EVT_SET(LVar2, MODEL_o102)
-    EVT_SET(LVar3, MODEL_o101)
-    EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), dgb_03_ENTRY_3)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+    Set(LVar0, dgb_14_ENTRY_1)
+    Set(LVar1, COLLIDER_deilittse)
+    Set(LVar2, MODEL_o102)
+    Set(LVar3, MODEL_o101)
+    Exec(ExitDoubleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("dgb_03"), dgb_03_ENTRY_3)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_ExitDoors_dgb_15_0) = {
-    EVT_SET_GROUP(EVT_GROUP_1B)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-    EVT_SET(LVar0, dgb_14_ENTRY_0)
-    EVT_SET(LVar1, COLLIDER_deilittne)
-    EVT_SET(LVar2, MODEL_o31)
-    EVT_SET(LVar3, MODEL_o30)
-    EVT_EXEC(ExitDoubleDoor)
-    EVT_WAIT(17)
-    EVT_CALL(GotoMap, EVT_PTR("dgb_15"), dgb_15_ENTRY_0)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_1B)
+    Call(DisablePlayerInput, TRUE)
+    Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+    Set(LVar0, dgb_14_ENTRY_0)
+    Set(LVar1, COLLIDER_deilittne)
+    Set(LVar2, MODEL_o31)
+    Set(LVar3, MODEL_o30)
+    Exec(ExitDoubleDoor)
+    Wait(17)
+    Call(GotoMap, Ref("dgb_15"), dgb_15_ENTRY_0)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_CREAKY)
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(dgb_14_ENTRY_0)
-            EVT_SET(LVar2, MODEL_o102)
-            EVT_SET(LVar3, MODEL_o101)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-        EVT_CASE_EQ(dgb_14_ENTRY_1)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_SET(LVar2, MODEL_o31)
-            EVT_SET(LVar3, MODEL_o30)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-            EVT_IF_EQ(AF_DGB_01, TRUE)
-                EVT_WAIT(5)
-                EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-                EVT_WAIT(20)
-                EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-            EVT_END_IF
-            EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(UseDoorSounds, DOOR_SOUNDS_CREAKY)
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(dgb_14_ENTRY_0)
+            Set(LVar2, MODEL_o102)
+            Set(LVar3, MODEL_o101)
+            ExecWait(EnterDoubleDoor)
+        CaseEq(dgb_14_ENTRY_1)
+            Call(DisablePlayerInput, TRUE)
+            Set(LVar2, MODEL_o31)
+            Set(LVar3, MODEL_o30)
+            ExecWait(EnterDoubleDoor)
+            IfEq(AF_DGB_01, TRUE)
+                Wait(5)
+                Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+                Wait(20)
+                Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+            EndIf
+            Call(DisablePlayerInput, FALSE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_ALT_NO_LEAD()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_dgb_03_3)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittse, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_dgb_15_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TUBBAS_MANOR)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_ALT_NO_LEAD()
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupMusic))
+    BindTrigger(Ref(N(EVS_ExitDoors_dgb_03_3)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittse, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitDoors_dgb_15_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilittne, 1, 0)
+    Exec(N(EVS_EnterMap))
+    Return
+    End
 };

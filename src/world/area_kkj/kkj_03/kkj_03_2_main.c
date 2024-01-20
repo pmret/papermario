@@ -25,47 +25,47 @@ EvtScript N(EVS_ExitDoors_kkj_02_1) = EVT_EXIT_DOUBLE_DOOR(kkj_03_ENTRY_0, "kkj_
     COLLIDER_deilit1, MODEL_door1, MODEL_door2);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kkj_02_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilit1, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoors_kkj_02_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deilit1, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kkj_03_ENTRY_0)
-            EVT_SET(LVar2, MODEL_door1)
-            EVT_SET(LVar3, MODEL_door2)
-            EVT_EXEC_WAIT(EnterDoubleDoor)
-            EVT_EXEC(N(EVS_Scene_MeetingPeach))
-        EVT_CASE_EQ(kkj_03_ENTRY_1)
-            EVT_EXEC(N(EVS_Scene_Ascending))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(kkj_03_ENTRY_0)
+            Set(LVar2, MODEL_door1)
+            Set(LVar3, MODEL_door2)
+            ExecWait(EnterDoubleDoor)
+            Exec(N(EVS_Scene_MeetingPeach))
+        CaseEq(kkj_03_ENTRY_1)
+            Exec(N(EVS_Scene_Ascending))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_PEACH_CASTLE_GROUNDS)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_CALL(EnableGroup, MODEL_g156, FALSE)
-    EVT_CALL(SetTexPanner, MODEL_o715, TEX_PANNER_0)
-    EVT_THREAD
+    Set(GB_WorldLocation, LOCATION_PEACH_CASTLE_GROUNDS)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    Call(EnableGroup, MODEL_g156, FALSE)
+    Call(SetTexPanner, MODEL_o715, TEX_PANNER_0)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP(    0,    0,   40,  900)
         TEX_PAN_PARAMS_FREQ(    1,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_CALL(SetModelCustomGfx, MODEL_o715, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
-    EVT_CALL(SetCustomGfx, CUSTOM_GFX_0, EVT_PTR(N(setup_gfx_candle_lights)), NULL)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_LARGE)
-    EVT_EXEC(N(EVS_BindExitTriggers))
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Call(SetModelCustomGfx, MODEL_o715, CUSTOM_GFX_0, ENV_TINT_UNCHANGED)
+    Call(SetCustomGfx, CUSTOM_GFX_0, Ref(N(setup_gfx_candle_lights)), NULL)
+    Exec(N(EVS_SetupMusic))
+    Call(UseDoorSounds, DOOR_SOUNDS_LARGE)
+    Exec(N(EVS_BindExitTriggers))
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    Return
+    End
 };

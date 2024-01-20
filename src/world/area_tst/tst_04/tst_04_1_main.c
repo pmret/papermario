@@ -79,96 +79,96 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_GotoMap_tst_03_1) = {
-    EVT_CALL(GotoMap, EVT_PTR("tst_03"), tst_03_ENTRY_1)
-    EVT_WAIT(100)
-    EVT_RETURN
-    EVT_END
+    Call(GotoMap, Ref("tst_03"), tst_03_ENTRY_1)
+    Wait(100)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateMovingFloor) = {
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, 100, 50, EASING_COS_IN_OUT)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, MODEL_o5, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o5)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 100, 0, 50, EASING_COS_IN_OUT)
-        EVT_LABEL(20)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateModel, MODEL_o5, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o5)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(20)
-            EVT_END_IF
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(MakeLerp, 0, 100, 50, EASING_COS_IN_OUT)
+        Label(10)
+            Call(UpdateLerp)
+            Call(TranslateModel, MODEL_o5, 0, LVar0, 0)
+            Call(UpdateColliderTransform, COLLIDER_o5)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        Call(MakeLerp, 100, 0, 50, EASING_COS_IN_OUT)
+        Label(20)
+            Call(UpdateLerp)
+            Call(TranslateModel, MODEL_o5, 0, LVar0, 0)
+            Call(UpdateColliderTransform, COLLIDER_o5)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(20)
+            EndIf
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateSpinningFloor) = {
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, 360, 360, EASING_LINEAR)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_o3, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o3)
-            EVT_CALL(N(PushGoompaTest))
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_GOTO(0)
-        EVT_CALL(MakeLerp, 20, -20, 40, EASING_COS_IN_OUT)
-        EVT_LABEL(20)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_o3, LVar0, 0, 0, 1)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o3)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(20)
-            EVT_END_IF
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(MakeLerp, 0, 360, 360, EASING_LINEAR)
+        Label(10)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_o3, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, COLLIDER_o3)
+            Call(N(PushGoompaTest))
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        Goto(0)
+        Call(MakeLerp, 20, -20, 40, EASING_COS_IN_OUT)
+        Label(20)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_o3, LVar0, 0, 0, 1)
+            Call(UpdateColliderTransform, COLLIDER_o3)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(20)
+            EndIf
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateSpinningWall) = {
-    EVT_LABEL(0)
-        EVT_CALL(MakeLerp, 0, 360, 360, EASING_LINEAR)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(RotateModel, MODEL_o1, LVar0, 0, 1, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o1)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(MakeLerp, 0, 360, 360, EASING_LINEAR)
+        Label(10)
+            Call(UpdateLerp)
+            Call(RotateModel, MODEL_o1, LVar0, 0, 1, 0)
+            Call(UpdateColliderTransform, COLLIDER_o1)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(10)
+            EndIf
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TESTING)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_GotoMap_tst_03_1)), TRIGGER_WALL_PUSH, COLLIDER_deilitw, 1, 0)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o5, MODEL_o5)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o3, MODEL_o3)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o1, MODEL_o1)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o2, MODEL_o2)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o18, MODEL_o18)
-    EVT_EXEC(N(EVS_UpdateMovingFloor))
-    EVT_EXEC(N(EVS_UpdateSpinningFloor))
-    EVT_EXEC(N(EVS_UpdateSpinningWall))
-    EVT_EXEC(N(EVS_SetupReflection))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_TESTING)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    BindTrigger(Ref(N(EVS_GotoMap_tst_03_1)), TRIGGER_WALL_PUSH, COLLIDER_deilitw, 1, 0)
+    Call(ParentColliderToModel, COLLIDER_o5, MODEL_o5)
+    Call(ParentColliderToModel, COLLIDER_o3, MODEL_o3)
+    Call(ParentColliderToModel, COLLIDER_o1, MODEL_o1)
+    Call(ParentColliderToModel, COLLIDER_o2, MODEL_o2)
+    Call(ParentColliderToModel, COLLIDER_o18, MODEL_o18)
+    Exec(N(EVS_UpdateMovingFloor))
+    Exec(N(EVS_UpdateSpinningFloor))
+    Exec(N(EVS_UpdateSpinningWall))
+    Exec(N(EVS_SetupReflection))
+    Return
+    End
 };

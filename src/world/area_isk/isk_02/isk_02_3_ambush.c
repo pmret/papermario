@@ -18,108 +18,108 @@ API_CALLABLE(N(AwaitPlayerMummyAmbush)) {
 }
 
 EvtScript N(EVS_SetupSarcophagi) = {
-    EVT_SET(AF_ISK02_OpeningSarcophagus1, FALSE)
-    EVT_SET(AF_ISK02_OpeningSarcophagus2, FALSE)
-    EVT_SET(AF_ISK02_OpeningSarcophagus3, FALSE)
-    EVT_EXEC(N(EVS_ManageSarcophagus1))
-    EVT_EXEC(N(EVS_ManageSarcophagus2))
-    EVT_EXEC(N(EVS_ManageSarcophagus3))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h1o, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h2o, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h3o, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_RETURN
-    EVT_END
+    Set(AF_ISK02_OpeningSarcophagus1, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus2, FALSE)
+    Set(AF_ISK02_OpeningSarcophagus3, FALSE)
+    Exec(N(EVS_ManageSarcophagus1))
+    Exec(N(EVS_ManageSarcophagus2))
+    Exec(N(EVS_ManageSarcophagus3))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h1o, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h2o, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h3o, COLLIDER_FLAGS_UPPER_MASK)
+    Return
+    End
 };
 
 EvtScript N(EVS_OpenSarcophagus) = {
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(PlaySoundAtModel, LVar3, SOUND_SARCOPHAGUS_OPEN, SOUND_SPACE_DEFAULT)
-        EVT_CALL(TranslateModel, LVar3, 0, 0, 13)
-        EVT_WAIT(3)
-        EVT_CALL(MakeLerp, 0, 35, 9, EASING_COS_IN_OUT)
-        EVT_LABEL(10)
-            EVT_CALL(UpdateLerp)
-            EVT_SET(LVar2, LVar0)
-            EVT_MULF(LVar2, EVT_FLOAT(1.1))
-            EVT_CALL(TranslateModel, LVar3, LVar2, 0, 13)
-            EVT_CALL(RotateModel, LVar3, LVar0, 0, 1, 0)
-            EVT_ADD(LVar0, 1)
-            EVT_WAIT(1)
-            EVT_IF_NE(LVar1, 0)
-                EVT_GOTO(10)
-            EVT_END_IF
-        EVT_WAIT(3)
-    EVT_ELSE
-        EVT_CALL(TranslateModel, LVar3, EVT_FLOAT(38.5), 0, 13)
-        EVT_CALL(RotateModel, LVar3, 35, 0, 1, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(LVar0, 0)
+        Call(PlaySoundAtModel, LVar3, SOUND_SARCOPHAGUS_OPEN, SOUND_SPACE_DEFAULT)
+        Call(TranslateModel, LVar3, 0, 0, 13)
+        Wait(3)
+        Call(MakeLerp, 0, 35, 9, EASING_COS_IN_OUT)
+        Label(10)
+            Call(UpdateLerp)
+            Set(LVar2, LVar0)
+            MulF(LVar2, Float(1.1))
+            Call(TranslateModel, LVar3, LVar2, 0, 13)
+            Call(RotateModel, LVar3, LVar0, 0, 1, 0)
+            Add(LVar0, 1)
+            Wait(1)
+            IfNe(LVar1, 0)
+                Goto(10)
+            EndIf
+        Wait(3)
+    Else
+        Call(TranslateModel, LVar3, Float(38.5), 0, 13)
+        Call(RotateModel, LVar3, 35, 0, 1, 0)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageSarcophagus1) = {
-    EVT_IF_EQ(AF_ISK02_Sarcophagus1Opened, FALSE)
-        EVT_LABEL(5)
-            EVT_CALL(N(AwaitPlayerMummyAmbush), -210, 580)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_GOTO(5)
-            EVT_END_IF
-    EVT_END_IF
-    EVT_SET(AF_ISK02_OpeningSarcophagus1, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_SET(LVar0, AF_ISK02_Sarcophagus1Opened)
-    EVT_SET(LVar3, MODEL_g346)
-    EVT_EXEC_WAIT(N(EVS_OpenSarcophagus))
-    EVT_SET(AF_ISK02_OpeningSarcophagus1, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h1c, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h1o, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(AF_ISK02_Sarcophagus1Opened, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_ISK02_Sarcophagus1Opened, FALSE)
+        Label(5)
+            Call(N(AwaitPlayerMummyAmbush), -210, 580)
+            Wait(1)
+            IfEq(LVar0, 0)
+                Goto(5)
+            EndIf
+    EndIf
+    Set(AF_ISK02_OpeningSarcophagus1, TRUE)
+    Call(SetNpcFlagBits, NPC_Pokey_01, NPC_FLAG_INVISIBLE, FALSE)
+    Set(LVar0, AF_ISK02_Sarcophagus1Opened)
+    Set(LVar3, MODEL_g346)
+    ExecWait(N(EVS_OpenSarcophagus))
+    Set(AF_ISK02_OpeningSarcophagus1, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h1c, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h1o, COLLIDER_FLAGS_UPPER_MASK)
+    Set(AF_ISK02_Sarcophagus1Opened, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageSarcophagus2) = {
-    EVT_IF_EQ(AF_ISK02_Sarcophagus2Opened, FALSE)
-        EVT_LABEL(5)
-            EVT_CALL(N(AwaitPlayerMummyAmbush), -30, 670)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_GOTO(5)
-            EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(MakeItemEntity, ITEM_SPIKE_SHIELD, -133, 1, 500, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_ISK02_Item_SpikeShield)
-    EVT_SET(AF_ISK02_OpeningSarcophagus2, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_SET(LVar0, AF_ISK02_Sarcophagus2Opened)
-    EVT_SET(LVar3, MODEL_g348)
-    EVT_EXEC_WAIT(N(EVS_OpenSarcophagus))
-    EVT_SET(AF_ISK02_OpeningSarcophagus2, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h2c, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h2o, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(AF_ISK02_Sarcophagus2Opened, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_ISK02_Sarcophagus2Opened, FALSE)
+        Label(5)
+            Call(N(AwaitPlayerMummyAmbush), -30, 670)
+            Wait(1)
+            IfEq(LVar0, 0)
+                Goto(5)
+            EndIf
+    EndIf
+    Call(MakeItemEntity, ITEM_SPIKE_SHIELD, -133, 1, 500, ITEM_SPAWN_MODE_FIXED_NEVER_VANISH, GF_ISK02_Item_SpikeShield)
+    Set(AF_ISK02_OpeningSarcophagus2, TRUE)
+    Call(SetNpcFlagBits, NPC_Pokey_02, NPC_FLAG_INVISIBLE, FALSE)
+    Set(LVar0, AF_ISK02_Sarcophagus2Opened)
+    Set(LVar3, MODEL_g348)
+    ExecWait(N(EVS_OpenSarcophagus))
+    Set(AF_ISK02_OpeningSarcophagus2, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h2c, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h2o, COLLIDER_FLAGS_UPPER_MASK)
+    Set(AF_ISK02_Sarcophagus2Opened, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ManageSarcophagus3) = {
-    EVT_IF_EQ(AF_ISK02_Sarcophagus3Opened, FALSE)
-        EVT_LABEL(5)
-            EVT_CALL(N(AwaitPlayerMummyAmbush), 220, 600)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_GOTO(5)
-            EVT_END_IF
-    EVT_END_IF
-    EVT_SET(AF_ISK02_OpeningSarcophagus3, TRUE)
-    EVT_CALL(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_SET(LVar0, AF_ISK02_Sarcophagus3Opened)
-    EVT_SET(LVar3, MODEL_g350)
-    EVT_EXEC_WAIT(N(EVS_OpenSarcophagus))
-    EVT_SET(AF_ISK02_OpeningSarcophagus3, FALSE)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h3c, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h3o, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_SET(AF_ISK02_Sarcophagus3Opened, TRUE)
-    EVT_RETURN
-    EVT_END
+    IfEq(AF_ISK02_Sarcophagus3Opened, FALSE)
+        Label(5)
+            Call(N(AwaitPlayerMummyAmbush), 220, 600)
+            Wait(1)
+            IfEq(LVar0, 0)
+                Goto(5)
+            EndIf
+    EndIf
+    Set(AF_ISK02_OpeningSarcophagus3, TRUE)
+    Call(SetNpcFlagBits, NPC_Pokey_03, NPC_FLAG_INVISIBLE, FALSE)
+    Set(LVar0, AF_ISK02_Sarcophagus3Opened)
+    Set(LVar3, MODEL_g350)
+    ExecWait(N(EVS_OpenSarcophagus))
+    Set(AF_ISK02_OpeningSarcophagus3, FALSE)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_h3c, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_h3o, COLLIDER_FLAGS_UPPER_MASK)
+    Set(AF_ISK02_Sarcophagus3Opened, TRUE)
+    Return
+    End
 };

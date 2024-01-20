@@ -6,19 +6,19 @@ Gfx N(HazePreGfx)[] = {
 };
 
 EvtScript N(EVS_SetupHaze) = {
-    EVT_CALL(SetTexPanner, MODEL_o99, TEX_PANNER_2)
-    EVT_CALL(EnableTexPanning, MODEL_o99, TRUE)
-    EVT_SET(LVar0, 0)
-    EVT_CALL(SetCustomGfx, 0, EVT_PTR(N(HazePreGfx)), NULL)
-    EVT_CALL(SetModelFlags, MODEL_o99, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
-    EVT_LABEL(0)
-        EVT_ADD(LVar0, 70)
-        EVT_CALL(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_IF_GT(LVar0, 0x4000)
-            EVT_ADD(LVar0, -0x4000)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Call(SetTexPanner, MODEL_o99, TEX_PANNER_2)
+    Call(EnableTexPanning, MODEL_o99, TRUE)
+    Set(LVar0, 0)
+    Call(SetCustomGfx, 0, Ref(N(HazePreGfx)), NULL)
+    Call(SetModelFlags, MODEL_o99, MODEL_FLAG_USES_CUSTOM_GFX, TRUE)
+    Label(0)
+        Add(LVar0, 70)
+        Call(SetTexPanOffset, TEX_PANNER_2, TEX_PANNER_MAIN, LVar0, 0)
+        IfGt(LVar0, 0x4000)
+            Add(LVar0, -0x4000)
+        EndIf
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };

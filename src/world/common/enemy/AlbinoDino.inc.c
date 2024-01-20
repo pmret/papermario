@@ -1,8 +1,8 @@
 #include "AlbinoDino.h"
 
 EvtScript N(EVS_NpcAuxAI_AlbinoDino) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_AlbinoDino) = {

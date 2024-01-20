@@ -23,74 +23,74 @@ API_CALLABLE(N(PausePlatformsDuringPound)) {
 }
 
 EvtScript N(EVS_UpdatePlatform) = {
-    EVT_SET_GROUP(EVT_GROUP_EF)
-    EVT_CALL(ParentColliderToModel, LVarB, LVarA)
-    EVT_SETF(LVar0, EVT_FLOAT(0.0))
-    EVT_SETF(LVarD, EVT_FLOAT(-90.0))
-    EVT_SUBF(LVarD, LVarC)
-    EVT_LABEL(0)
-        EVT_SETF(LVar1, LVarC)
-        EVT_LABEL(1)
-            EVT_CALL(N(PausePlatformsDuringPound))
-            EVT_ADDF(LVar0, EVT_FLOAT(1.5))
-            EVT_ADDF(LVar1, EVT_FLOAT(1.5))
-            EVT_CALL(TranslateModel, LVarA, 0, LVar0, 0)
-            EVT_CALL(UpdateColliderTransform, LVarB)
-            EVT_WAIT(1)
-            EVT_IF_LT(LVar1, EVT_FLOAT(310.0))
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(TranslateModel, LVarA, 0, LVarD, 0)
-        EVT_SETF(LVar0, LVarD)
-        EVT_SETF(LVarC, EVT_FLOAT(-90.0))
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_EF)
+    Call(ParentColliderToModel, LVarB, LVarA)
+    SetF(LVar0, Float(0.0))
+    SetF(LVarD, Float(-90.0))
+    SubF(LVarD, LVarC)
+    Label(0)
+        SetF(LVar1, LVarC)
+        Label(1)
+            Call(N(PausePlatformsDuringPound))
+            AddF(LVar0, Float(1.5))
+            AddF(LVar1, Float(1.5))
+            Call(TranslateModel, LVarA, 0, LVar0, 0)
+            Call(UpdateColliderTransform, LVarB)
+            Wait(1)
+            IfLt(LVar1, Float(310.0))
+                Goto(1)
+            EndIf
+        Call(TranslateModel, LVarA, 0, LVarD, 0)
+        SetF(LVar0, LVarD)
+        SetF(LVarC, Float(-90.0))
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_CreatePlatform1) = {
-    EVT_SET(LVarA, MODEL_o32)
-    EVT_SET(LVarB, COLLIDER_o32)
-    EVT_SET(LVarC, 110)
-    EVT_EXEC_WAIT(N(EVS_UpdatePlatform))
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, MODEL_o32)
+    Set(LVarB, COLLIDER_o32)
+    Set(LVarC, 110)
+    ExecWait(N(EVS_UpdatePlatform))
+    Return
+    End
 };
 
 EvtScript N(EVS_CreatePlatform2) = {
-    EVT_SET(LVarA, MODEL_o31)
-    EVT_SET(LVarB, COLLIDER_o31)
-    EVT_SET(LVarC, 10)
-    EVT_EXEC_WAIT(N(EVS_UpdatePlatform))
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, MODEL_o31)
+    Set(LVarB, COLLIDER_o31)
+    Set(LVarC, 10)
+    ExecWait(N(EVS_UpdatePlatform))
+    Return
+    End
 };
 
 EvtScript N(EVS_CreatePlatform3) = {
-    EVT_SET(LVarA, MODEL_o33)
-    EVT_SET(LVarB, COLLIDER_o33)
-    EVT_SET(LVarC, -90)
-    EVT_EXEC_WAIT(N(EVS_UpdatePlatform))
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, MODEL_o33)
+    Set(LVarB, COLLIDER_o33)
+    Set(LVarC, -90)
+    ExecWait(N(EVS_UpdatePlatform))
+    Return
+    End
 };
 
 EvtScript N(EVS_CreatePlatform4) = {
-    EVT_SET(LVarA, MODEL_o34)
-    EVT_SET(LVarB, COLLIDER_o34)
-    EVT_SET(LVarC, -190)
-    EVT_EXEC_WAIT(N(EVS_UpdatePlatform))
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, MODEL_o34)
+    Set(LVarB, COLLIDER_o34)
+    Set(LVarC, -190)
+    ExecWait(N(EVS_UpdatePlatform))
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupPlatforms) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o48, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_CreatePlatform1))
-    EVT_EXEC(N(EVS_CreatePlatform2))
-    EVT_EXEC(N(EVS_CreatePlatform3))
-    EVT_EXEC(N(EVS_CreatePlatform4))
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o48, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_CreatePlatform1))
+    Exec(N(EVS_CreatePlatform2))
+    Exec(N(EVS_CreatePlatform3))
+    Exec(N(EVS_CreatePlatform4))
+    Return
+    End
 };

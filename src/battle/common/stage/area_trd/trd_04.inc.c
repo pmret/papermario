@@ -6,20 +6,20 @@
 #include "battle/common/stage/lib/TexturePanner.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_SET(LVar0, MODEL_hikari1)
-    EVT_SET(LVar1, TEX_PANNER_0)
-    EVT_SET(LVar2, 40)
-    EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexturePanMain))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Call(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
+    Set(LVar0, MODEL_hikari1)
+    Set(LVar1, TEX_PANNER_0)
+    Set(LVar2, 40)
+    Set(LVar3, 0)
+    Exec(N(EVS_TexturePanMain))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 s32 N(ForegroundModels)[] = {

@@ -25,36 +25,36 @@ API_CALLABLE(N(GetRunToPos)) {
 
 // run away from, the player, orbiting around the hint-giving dryite
 EvtScript N(EVS_NpcInteract_Dryite_04) = {
-    EVT_CHILD_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(NpcFaceNpc, NPC_Dryite_03, NPC_Dryite_04, 1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(N(GetRunToPos))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Run)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.5))
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar1, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Idle)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_WAIT(5)
-    EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-    EVT_ADD(LVar0, 180)
-    EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 0)
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        Loop(0)
+            Call(NpcFaceNpc, NPC_Dryite_03, NPC_Dryite_04, 1)
+        EndLoop
+    EndChildThread
+    Call(N(GetRunToPos))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Run)
+    Call(SetNpcSpeed, NPC_SELF, Float(3.5))
+    Call(NpcMoveTo, NPC_SELF, LVar0, LVar1, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Idle)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+    Wait(5)
+    Call(GetNpcYaw, NPC_SELF, LVar0)
+    Add(LVar0, 180)
+    Call(InterpNpcYaw, NPC_SELF, LVar0, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_04) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(dro_01_ENTRY_3)
-        EVT_CASE_OR_EQ(dro_01_ENTRY_4)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Talk)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_04)))
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseOrEq(dro_01_ENTRY_3)
+        CaseOrEq(dro_01_ENTRY_4)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Dryite_Green_Talk)
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_04)))
+    Return
+    End
 };

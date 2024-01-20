@@ -14,108 +14,108 @@ EvtScript N(EVS_ExitWalk_kmr_09_0) = EVT_EXIT_WALK(60, kmr_02_ENTRY_0, "kmr_09",
 MAP_RODATA_PAD(1, exits);
 
 EvtScript N(EVS_SetupGoombaRoadGate) = {
-    EVT_IF_GE(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        EVT_CALL(RotateGroup, MODEL_g197, 120, 0, -1, 0)
-        EVT_CALL(RotateGroup, MODEL_g196, 120, 0, 1, 0)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfGe(GB_StoryProgress, STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        Call(RotateGroup, MODEL_g197, 120, 0, -1, 0)
+        Call(RotateGroup, MODEL_g196, 120, 0, 1, 0)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_05_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_00_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_kmr_09_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_kmr_05_1)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili1, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kmr_00_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili2, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitWalk_kmr_09_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deili3, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetLoadType, LVar1)
-    EVT_IF_EQ(LVar1, LOAD_FROM_FILE_SELECT)
-        EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_EXEC(N(EVS_SetupGoombaRoadGate))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, kmr_02_ENTRY_0)
-        EVT_EXEC(N(EVS_SetupGoombaRoadGate))
-    EVT_END_IF
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kmr_02_ENTRY_2)
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-            EVT_IF_EQ(GF_KMR02_ReturnedWithGoompa, FALSE)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_WAIT(20 * DT)
-                EVT_CALL(DisablePartnerAI, 0)
-                EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 4, MSG_CH0_001C)
-                EVT_CALL(EnablePartnerAI)
-                EVT_SET(GF_KMR02_ReturnedWithGoompa, TRUE)
-                EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_END_IF
-        EVT_CASE_EQ(kmr_02_ENTRY_3)
-            EVT_IF_EQ(GF_KMR02_WarpPipe, FALSE)
-                EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_CALL(DisablePlayerPhysics, TRUE)
-                EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-                EVT_CALL(SetPlayerPos, LVar0, NPC_DISPOSE_POS_Y, LVar2)
-                EVT_WAIT(30)
-                EVT_CALL(PlaySound, SOUND_GROW)
-                EVT_SET(GF_KMR02_WarpPipe, TRUE)
-                EVT_WAIT(30)
-                EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
-                EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
-                EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
-                EVT_CALL(DisablePlayerPhysics, FALSE)
-                EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_END_IF
-            EVT_SET(LVarA, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC_WAIT(N(EVS_Pipe_EnterVertical))
-        EVT_CASE_EQ(kmr_02_ENTRY_5)
-            EVT_EXEC(N(EVS_SetWallsDown_ToadHouse))
-            EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_EQ(kmr_02_ENTRY_A)
+    Call(GetLoadType, LVar1)
+    IfEq(LVar1, LOAD_FROM_FILE_SELECT)
+        Exec(EnterSavePoint)
+        Exec(N(EVS_BindExitTriggers))
+        Exec(N(EVS_SetupGoombaRoadGate))
+        Return
+    EndIf
+    Call(GetEntryID, LVar0)
+    IfNe(LVar0, kmr_02_ENTRY_0)
+        Exec(N(EVS_SetupGoombaRoadGate))
+    EndIf
+    Switch(LVar0)
+        CaseEq(kmr_02_ENTRY_2)
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+            IfEq(GF_KMR02_ReturnedWithGoompa, FALSE)
+                Call(DisablePlayerInput, TRUE)
+                Wait(20 * DT)
+                Call(DisablePartnerAI, 0)
+                Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 4, MSG_CH0_001C)
+                Call(EnablePartnerAI)
+                Set(GF_KMR02_ReturnedWithGoompa, TRUE)
+                Call(DisablePlayerInput, FALSE)
+            EndIf
+        CaseEq(kmr_02_ENTRY_3)
+            IfEq(GF_KMR02_WarpPipe, FALSE)
+                Call(DisablePlayerInput, TRUE)
+                Call(DisablePlayerPhysics, TRUE)
+                Call(GetPlayerPos, LVar0, LVar1, LVar2)
+                Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+                Call(SetPlayerPos, LVar0, NPC_DISPOSE_POS_Y, LVar2)
+                Wait(30)
+                Call(PlaySound, SOUND_GROW)
+                Set(GF_KMR02_WarpPipe, TRUE)
+                Wait(30)
+                Call(SetPlayerActionState, ACTION_STATE_IDLE)
+                Call(SetPlayerPos, LVar0, LVar1, LVar2)
+                Call(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
+                Call(DisablePlayerPhysics, FALSE)
+                Call(DisablePlayerInput, FALSE)
+            EndIf
+            Set(LVarA, Ref(N(EVS_BindExitTriggers)))
+            ExecWait(N(EVS_Pipe_EnterVertical))
+        CaseEq(kmr_02_ENTRY_5)
+            Exec(N(EVS_SetWallsDown_ToadHouse))
+            Exec(N(EVS_BindExitTriggers))
+        CaseEq(kmr_02_ENTRY_A)
             // beta entrance for 'post' pipe
-            EVT_EXEC(EnterPostPipe)
-            EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+            Exec(EnterPostPipe)
+            Exec(N(EVS_BindExitTriggers))
+        CaseDefault
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_ShowMessage_ItsLocked) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(ShowMessageAtScreenPos, MSG_Menus_00D8, 160, 40)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_OpenGoombaRoadGate) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlaySoundAtCollider, COLLIDER_tt2, SOUND_GOOMBA_GATE_OPEN, SOUND_SPACE_DEFAULT)
-    EVT_CALL(MakeLerp, 0, 120, 20, EASING_COS_IN_OUT)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(RotateGroup, MODEL_g197, LVar0, 0, -1, 0)
-        EVT_CALL(RotateGroup, MODEL_g196, LVar0, 0, 1, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Call(PlaySoundAtCollider, COLLIDER_tt2, SOUND_GOOMBA_GATE_OPEN, SOUND_SPACE_DEFAULT)
+    Call(MakeLerp, 0, 120, 20, EASING_COS_IN_OUT)
+    Label(0)
+        Call(UpdateLerp)
+        Call(RotateGroup, MODEL_g197, LVar0, 0, -1, 0)
+        Call(RotateGroup, MODEL_g196, LVar0, 0, 1, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt2, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 API_CALLABLE(N(SetMapChangeFadeSlowest)) {
@@ -124,67 +124,67 @@ API_CALLABLE(N(SetMapChangeFadeSlowest)) {
 }
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_GOOMBA_VILLAGE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_CALL(GetLoadType, LVar0)
-    EVT_IF_EQ(LVar0, LOAD_FROM_FILE_SELECT)
-        EVT_GOTO(10)
-    EVT_END_IF
+    Set(GB_WorldLocation, LOCATION_GOOMBA_VILLAGE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_NO_LEAD()
+    Call(GetLoadType, LVar0)
+    IfEq(LVar0, LOAD_FROM_FILE_SELECT)
+        Goto(10)
+    EndIf
     // check for cutscene entry
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_NE(LVar0, kmr_02_ENTRY_4)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(EpilogueNPCs)))
-    EVT_EXEC(N(EVS_FadeOutMusic))
-    EVT_RETURN
-    EVT_LABEL(10)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_EQ(STORY_UNUSED_FFFFFF8C)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(NpcGroup1)))
-        EVT_CASE_LT(STORY_UNUSED_FFFFFF8C)
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(PrologueNPCs)))
-        EVT_CASE_DEFAULT
-            EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_END_SWITCH
-    EVT_LABEL(20)
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_EXEC_WAIT(N(EVS_SetupRooms))
-    EVT_EXEC_WAIT(N(EVS_SetupToadHouse))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC_WAIT(N(EVS_SetupFoliage))
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_FELL_OFF_CLIFF)
-            EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ShowMessage_ItsLocked)), TRIGGER_WALL_PRESS_A, COLLIDER_mm1, 1, 0)
-        EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-        EVT_CASE_DEFAULT
-            EVT_BIND_TRIGGER(EVT_PTR(N(EVS_OpenGoombaRoadGate)), TRIGGER_WALL_PRESS_A, COLLIDER_tt2, 1, 0)
-    EVT_END_SWITCH
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH0_GATE_CRUSHED)
-            EVT_CALL(EnableGroup, MODEL_2, FALSE)
-            EVT_CALL(EnableGroup, MODEL_4, FALSE)
-        EVT_CASE_LT(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
-            EVT_CALL(EnableGroup, MODEL_1, FALSE)
-            EVT_CALL(EnableGroup, MODEL_4, FALSE)
-        EVT_CASE_DEFAULT
-            EVT_CALL(EnableGroup, MODEL_1, FALSE)
-            EVT_CALL(EnableGroup, MODEL_2, FALSE)
-    EVT_END_SWITCH
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_WAIT(1)
-    EVT_IF_NE(GB_StoryProgress, STORY_CH0_WAKE_UP)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, kmr_02_ENTRY_5)
-        EVT_WAIT(30)
-        EVT_CALL(N(SetMapChangeFadeSlowest))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfNe(LVar0, kmr_02_ENTRY_4)
+        Goto(10)
+    EndIf
+    Call(MakeNpcs, FALSE, Ref(N(EpilogueNPCs)))
+    Exec(N(EVS_FadeOutMusic))
+    Return
+    Label(10)
+    Switch(GB_StoryProgress)
+        CaseEq(STORY_UNUSED_FFFFFF8C)
+            Call(MakeNpcs, FALSE, Ref(N(NpcGroup1)))
+        CaseLt(STORY_UNUSED_FFFFFF8C)
+            Call(MakeNpcs, FALSE, Ref(N(PrologueNPCs)))
+        CaseDefault
+            Call(MakeNpcs, FALSE, Ref(N(DefaultNPCs)))
+    EndSwitch
+    Label(20)
+    Call(ClearDefeatedEnemies)
+    ExecWait(N(EVS_SetupRooms))
+    ExecWait(N(EVS_SetupToadHouse))
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupMusic))
+    ExecWait(N(EVS_SetupFoliage))
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_FELL_OFF_CLIFF)
+            BindTrigger(Ref(N(EVS_ShowMessage_ItsLocked)), TRIGGER_WALL_PRESS_A, COLLIDER_mm1, 1, 0)
+        CaseLt(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+        CaseDefault
+            BindTrigger(Ref(N(EVS_OpenGoombaRoadGate)), TRIGGER_WALL_PRESS_A, COLLIDER_tt2, 1, 0)
+    EndSwitch
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH0_GATE_CRUSHED)
+            Call(EnableGroup, MODEL_2, FALSE)
+            Call(EnableGroup, MODEL_4, FALSE)
+        CaseLt(STORY_CH0_TWINK_GAVE_LUCKY_STAR)
+            Call(EnableGroup, MODEL_1, FALSE)
+            Call(EnableGroup, MODEL_4, FALSE)
+        CaseDefault
+            Call(EnableGroup, MODEL_1, FALSE)
+            Call(EnableGroup, MODEL_2, FALSE)
+    EndSwitch
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o757, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_tt1, COLLIDER_FLAGS_UPPER_MASK)
+    Exec(N(EVS_EnterMap))
+    Wait(1)
+    IfNe(GB_StoryProgress, STORY_CH0_WAKE_UP)
+        Return
+    EndIf
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, kmr_02_ENTRY_5)
+        Wait(30)
+        Call(N(SetMapChangeFadeSlowest))
+    EndIf
+    Return
+    End
 };

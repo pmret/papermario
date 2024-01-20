@@ -49,61 +49,61 @@ API_CALLABLE(N(GetSnowflakePosition)) {
 }
 
 EvtScript N(EVS_SpawnSnowfall) = {
-    EVT_CALL(N(SpawnSnowfall))
-    EVT_LOOP(0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(N(SpawnSnowfall))
+    Loop(0)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_RandomlySpinSnowflake) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_LABEL(0)
-        EVT_CALL(RandInt, 30, LVar0)
-        EVT_ADD(LVar0, 30)
-        EVT_WAIT(LVar0)
-        EVT_SET(LVar1, 0)
-        EVT_LOOP(10)
-            EVT_ADD(LVar1, 36)
-            EVT_CALL(RotateModel, LVarA, LVar1, 0, 1, 0)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Label(0)
+        Call(RandInt, 30, LVar0)
+        Add(LVar0, 30)
+        Wait(LVar0)
+        Set(LVar1, 0)
+        Loop(10)
+            Add(LVar1, 36)
+            Call(RotateModel, LVarA, LVar1, 0, 1, 0)
+            Wait(1)
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimateHangingSnowflake_RandomSpin) = {
-    EVT_SET(LVarA, LVar0) // modelID
-    EVT_SET(LVarB, LVar1)
-    EVT_EXEC(N(EVS_RandomlySpinSnowflake))
-    EVT_SET(LVar7, 0)
-    EVT_LABEL(0)
-        EVT_ADD(LVar7, 4)
-        EVT_IF_GT(LVar7, 3599)
-            EVT_SUB(LVar7, 3600)
-        EVT_END_IF
-        EVT_CALL(N(GetSnowflakePosition), LVar7, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0) // modelID
+    Set(LVarB, LVar1)
+    Exec(N(EVS_RandomlySpinSnowflake))
+    Set(LVar7, 0)
+    Label(0)
+        Add(LVar7, 4)
+        IfGt(LVar7, 3599)
+            Sub(LVar7, 3600)
+        EndIf
+        Call(N(GetSnowflakePosition), LVar7, LVar0, LVar1, LVar2)
+        Call(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_AnimateHangingSnowflake_NoSpin) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVar7, 0)
-    EVT_LABEL(0)
-        EVT_ADD(LVar7, 4)
-        EVT_IF_GT(LVar7, 3599)
-            EVT_SUB(LVar7, 3600)
-        EVT_END_IF
-        EVT_CALL(N(GetSnowflakePosition), LVar7, LVar0, LVar1, LVar2)
-        EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Set(LVar7, 0)
+    Label(0)
+        Add(LVar7, 4)
+        IfGt(LVar7, 3599)
+            Sub(LVar7, 3600)
+        EndIf
+        Call(N(GetSnowflakePosition), LVar7, LVar0, LVar1, LVar2)
+        Call(TranslateModel, LVarA, LVar0, LVar1, LVar2)
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };

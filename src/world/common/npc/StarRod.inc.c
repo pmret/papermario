@@ -1,8 +1,8 @@
 #include "StarRod.h"
 
 EvtScript N(EVS_NpcAuxAI_StarRod) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_StarRod) = {

@@ -21,77 +21,77 @@ s32 N(BribeItemList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_AntiGuy) = {
-    EVT_IF_EQ(GF_OMO13_Defeated_AntiGuy, TRUE)
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim15, ANIM_ShyGuy_Black_Anim15, 5, MSG_CH4_004D)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), 10, EVT_FLOAT(300.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
-    EVT_CALL(FindItem, ITEM_LEMON_CANDY, LVar0)
-    EVT_IF_EQ(LVar0, -1)
-        EVT_THREAD
-            EVT_WAIT(10)
-            EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_TouchNose)
-            EVT_WAIT(20)
-            EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-        EVT_END_THREAD
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0046)
-        EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim13, ANIM_ShyGuy_Black_Anim01, 0)
-        EVT_CALL(ShowChoice, MSG_Choice_0044)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
-        EVT_ELSE
-            EVT_WAIT(5)
-            EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0047)
-            EVT_CALL(ShowChoice, MSG_Choice_0044)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
-            EVT_ELSE
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0049)
-                EVT_CALL(SetNpcVar, NPC_SELF, 0, 1)
-            EVT_END_IF
-        EVT_END_IF
-    EVT_ELSE
-        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004A)
-        EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
-        EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
-        EVT_WAIT(30)
-        EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
-        EVT_WAIT(15)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
-        EVT_WAIT(15)
-        EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-        EVT_WAIT(15)
-        EVT_CALL(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
-        EVT_SET(LVar0, EVT_PTR(N(BribeItemList)))
-        EVT_SET(LVar1, -1)
-        EVT_EXEC_WAIT(N(EVS_ChooseItem))
-        EVT_IF_EQ(LVar0, -1)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004B)
-            EVT_CALL(ShowChoice, MSG_Choice_0044)
-            EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
-            EVT_ELSE
-                EVT_WAIT(5)
-                EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0047)
-                EVT_CALL(ShowChoice, MSG_Choice_0044)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
-                EVT_ELSE
-                    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0049)
-                    EVT_CALL(SetNpcVar, NPC_SELF, 0, 1)
-                EVT_END_IF
-            EVT_END_IF
-        EVT_ELSE
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004C)
-            EVT_WAIT(20)
-            EVT_SET(GF_OMO13_Defeated_AntiGuy, TRUE)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(SetNpcVar, NPC_SELF, 0, 2)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_OMO13_Defeated_AntiGuy, TRUE)
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim15, ANIM_ShyGuy_Black_Anim15, 5, MSG_CH4_004D)
+        Return
+    EndIf
+    Call(AdjustCam, CAM_DEFAULT, Float(5.0), 10, Float(300.0), Float(15.0), Float(-7.5))
+    Call(FindItem, ITEM_LEMON_CANDY, LVar0)
+    IfEq(LVar0, -1)
+        Thread
+            Wait(10)
+            Call(SetPlayerAnimation, ANIM_MarioW2_TouchNose)
+            Wait(20)
+            Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+        EndThread
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0046)
+        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim13, ANIM_ShyGuy_Black_Anim01, 0)
+        Call(ShowChoice, MSG_Choice_0044)
+        IfEq(LVar0, 0)
+            Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+        Else
+            Wait(5)
+            Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0047)
+            Call(ShowChoice, MSG_Choice_0044)
+            IfEq(LVar0, 0)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+            Else
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0049)
+                Call(SetNpcVar, NPC_SELF, 0, 1)
+            EndIf
+        EndIf
+    Else
+        Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004A)
+        Call(PlaySoundAtNpc, NPC_SELF, SOUND_EMOTE_IDEA, SOUND_SPACE_DEFAULT)
+        Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, 0, 30, EMOTER_NPC, 0, 0, 0, 0)
+        Wait(30)
+        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
+        Wait(15)
+        Call(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
+        Wait(15)
+        Call(SetPlayerAnimation, ANIM_Mario1_NodYes)
+        Wait(15)
+        Call(EndSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0)
+        Set(LVar0, Ref(N(BribeItemList)))
+        Set(LVar1, -1)
+        ExecWait(N(EVS_ChooseItem))
+        IfEq(LVar0, -1)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004B)
+            Call(ShowChoice, MSG_Choice_0044)
+            IfEq(LVar0, 0)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+            Else
+                Wait(5)
+                Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0047)
+                Call(ShowChoice, MSG_Choice_0044)
+                IfEq(LVar0, 0)
+                    Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0048)
+                Else
+                    Call(ContinueSpeech, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_0049)
+                    Call(SetNpcVar, NPC_SELF, 0, 1)
+                EndIf
+            EndIf
+        Else
+            Call(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim11, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH4_004C)
+            Wait(20)
+            Set(GF_OMO13_Defeated_AntiGuy, TRUE)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
+            Call(SetNpcVar, NPC_SELF, 0, 2)
+        EndIf
+    EndIf
+    Call(ResetCam, CAM_DEFAULT, Float(5.0))
+    Return
+    End
 };
 
 API_CALLABLE(N(UpdateAntiGuyPosition)) {
@@ -133,80 +133,80 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
 }
 
 EvtScript N(EVS_NpcIdle_AntiGuy) = {
-    EVT_LABEL(0)
-        EVT_CALL(N(UpdateAntiGuyPosition))
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_WAIT(1)
-            EVT_GOTO(0)
-        EVT_END_IF
-        EVT_IF_EQ(LVar0, 1)
-            EVT_CALL(StartBossBattle, SONG_SPECIAL_BATTLE)
-            EVT_LABEL(1)
-                EVT_CALL(GetSelfVar, 0, LVar0)
-                EVT_IF_NE(LVar0, 0)
-                    EVT_WAIT(1)
-                    EVT_GOTO(1)
-                EVT_END_IF
-            EVT_GOTO(0)
-        EVT_ELSE
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim02)
-            EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
-            EVT_IF_LT(LVar2, -60)
-                EVT_IF_LT(LVar0, 110)
-                    EVT_ADD(LVar0, 60)
-                EVT_ELSE
-                    EVT_ADD(LVar0, -60)
-                EVT_END_IF
-            EVT_ELSE
-                EVT_IF_LT(LVar0, 110)
-                    EVT_ADD(LVar0, -60)
-                EVT_ELSE
-                    EVT_ADD(LVar0, 60)
-                EVT_END_IF
-            EVT_END_IF
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, -100, 0)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 0)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim15)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_LABEL(9)
-                EVT_WAIT(1)
-                EVT_GOTO(9)
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(N(UpdateAntiGuyPosition))
+        Call(GetSelfVar, 0, LVar0)
+        IfEq(LVar0, 0)
+            Wait(1)
+            Goto(0)
+        EndIf
+        IfEq(LVar0, 1)
+            Call(StartBossBattle, SONG_SPECIAL_BATTLE)
+            Label(1)
+                Call(GetSelfVar, 0, LVar0)
+                IfNe(LVar0, 0)
+                    Wait(1)
+                    Goto(1)
+                EndIf
+            Goto(0)
+        Else
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim02)
+            Call(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
+            IfLt(LVar2, -60)
+                IfLt(LVar0, 110)
+                    Add(LVar0, 60)
+                Else
+                    Add(LVar0, -60)
+                EndIf
+            Else
+                IfLt(LVar0, 110)
+                    Add(LVar0, -60)
+                Else
+                    Add(LVar0, 60)
+                EndIf
+            EndIf
+            Call(SetNpcSpeed, NPC_SELF, Float(3.0))
+            Call(NpcMoveTo, NPC_SELF, LVar0, -100, 0)
+            Call(InterpNpcYaw, NPC_SELF, 90, 0)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Black_Anim15)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Label(9)
+                Wait(1)
+                Goto(9)
+        EndIf
+        Wait(1)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_AntiGuy) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_OMO13_Defeated_AntiGuy, TRUE)
-            EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-            EVT_CALL(SetSelfVar, 0, 0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(SetSelfVar, 0, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_OMO13_Defeated_AntiGuy, TRUE)
+            Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_he, COLLIDER_FLAGS_UPPER_MASK)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+            Call(SetSelfVar, 0, 0)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(SetSelfVar, 0, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_AntiGuy) = {
-    EVT_IF_EQ(GF_OMO13_Defeated_AntiGuy, FALSE)
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_AntiGuy)))
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_AntiGuy)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_AntiGuy)))
-    EVT_ELSE
-        EVT_CALL(RemoveEncounter, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_OMO13_Defeated_AntiGuy, FALSE)
+        Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_AntiGuy)))
+        Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_AntiGuy)))
+        Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_AntiGuy)))
+    Else
+        Call(RemoveEncounter, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_AntiGuy) = {

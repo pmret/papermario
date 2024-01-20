@@ -41,14 +41,14 @@ API_CALLABLE(N(Bandit_TetherStolenCoin)) {
 }
 
 EvtScript N(EVS_Bandit_CreateStolenCoin) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_CALL(GetNpcPos, LVarA, LVar1, LVar2, LVar3)
-    EVT_ADD(LVar2, 30)
-    EVT_CALL(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_DECORATION, 0)
-    EVT_CALL(N(Bandit_TetherStolenCoin), LVarA, LVar0, HAS_COIN_FLAG)
-    EVT_CALL(RemoveItemEntity, LVar0)
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, LVar0)
+    Call(GetNpcPos, LVarA, LVar1, LVar2, LVar3)
+    Add(LVar2, 30)
+    Call(MakeItemEntity, ITEM_COIN, LVar1, LVar2, LVar3, ITEM_SPAWN_MODE_DECORATION, 0)
+    Call(N(Bandit_TetherStolenCoin), LVarA, LVar0, HAS_COIN_FLAG)
+    Call(RemoveItemEntity, LVar0)
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_Bandit) = {
@@ -66,46 +66,46 @@ MobileAISettings N(AISettings_Bandit) = {
 };
 
 EvtScript N(EVS_NpcAI_Bandit) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Bandit)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Bandit)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Bandit) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(OnPlayerFled, 0)
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_SET(HAS_COIN_FLAG, TRUE)
-            EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bandit_IdleHolding)
-            EVT_CALL(GetSelfNpcID, LVar0)
-            EVT_EXEC(N(EVS_Bandit_CreateStolenCoin))
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(GetPlayerPos, LVar7, LVar8, LVar9)
-            EVT_ADD(LVar7, 20)
-            EVT_CALL(NpcJump0, NPC_SELF, LVar7, 0, LVar9, 6)
-            EVT_ADD(LVar7, 20)
-            EVT_CALL(NpcJump0, NPC_SELF, LVar7, 0, LVar9, 6)
-            EVT_CALL(GetNpcYaw, NPC_SELF, LVar0)
-            EVT_ADD(LVar0, 180)
-            EVT_CALL(InterpNpcYaw, NPC_SELF, LVar0, 5)
-            EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bandit_RunHolding)
-            EVT_WAIT(10)
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(16.0))
-            EVT_ADD(LVar7, 200)
-            EVT_CALL(NpcMoveTo, NPC_SELF, LVar7, LVar9, 0)
-            EVT_SET(HAS_COIN_FLAG, FALSE)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(OnPlayerFled, 0)
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(DisablePlayerInput, TRUE)
+            Set(HAS_COIN_FLAG, TRUE)
+            Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Bandit_IdleHolding)
+            Call(GetSelfNpcID, LVar0)
+            Exec(N(EVS_Bandit_CreateStolenCoin))
+            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+            Call(GetPlayerPos, LVar7, LVar8, LVar9)
+            Add(LVar7, 20)
+            Call(NpcJump0, NPC_SELF, LVar7, 0, LVar9, 6)
+            Add(LVar7, 20)
+            Call(NpcJump0, NPC_SELF, LVar7, 0, LVar9, 6)
+            Call(GetNpcYaw, NPC_SELF, LVar0)
+            Add(LVar0, 180)
+            Call(InterpNpcYaw, NPC_SELF, LVar0, 5)
+            Call(SetNpcAnimation, NPC_SELF, ANIM_Bandit_RunHolding)
+            Wait(10)
+            Call(SetNpcSpeed, NPC_SELF, Float(16.0))
+            Add(LVar7, 200)
+            Call(NpcMoveTo, NPC_SELF, LVar7, LVar9, 0)
+            Set(HAS_COIN_FLAG, FALSE)
+            Call(DisablePlayerInput, FALSE)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Bandit) = {

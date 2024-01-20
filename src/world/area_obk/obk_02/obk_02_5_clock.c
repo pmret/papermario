@@ -7,35 +7,35 @@ API_CALLABLE(N(GetPendulumAngle)) {
 }
 
 EvtScript N(EVS_ClockDoNothing) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateClock) = {
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LABEL(10)
-        EVT_CALL(RotateModel, MODEL_na, LVar0, 0, 0, 1)
-        EVT_ADD(LVar0, -6)
-        EVT_WAIT(30 * DT)
-        EVT_GOTO(10)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar0, 0)
-        EVT_LABEL(20)
-        EVT_CALL(RotateModel, MODEL_mi, LVar0, 0, 0, 1)
-        EVT_ADD(LVar0, -1)
-        EVT_WAIT(60 * DT)
-        EVT_GOTO(20)
-    EVT_END_THREAD
-    EVT_THREAD
-        EVT_SET(LVar1, 0)
-        EVT_LABEL(30)
-        EVT_CALL(N(GetPendulumAngle))
-        EVT_CALL(RotateModel, MODEL_fu, LVar0, 0, 0, 1)
-        EVT_WAIT(1)
-        EVT_GOTO(30)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Thread
+        Set(LVar0, 0)
+        Label(10)
+        Call(RotateModel, MODEL_na, LVar0, 0, 0, 1)
+        Add(LVar0, -6)
+        Wait(30 * DT)
+        Goto(10)
+    EndThread
+    Thread
+        Set(LVar0, 0)
+        Label(20)
+        Call(RotateModel, MODEL_mi, LVar0, 0, 0, 1)
+        Add(LVar0, -1)
+        Wait(60 * DT)
+        Goto(20)
+    EndThread
+    Thread
+        Set(LVar1, 0)
+        Label(30)
+        Call(N(GetPendulumAngle))
+        Call(RotateModel, MODEL_fu, LVar0, 0, 0, 1)
+        Wait(1)
+        Goto(30)
+    EndThread
+    Return
+    End
 };

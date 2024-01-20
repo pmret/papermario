@@ -29,52 +29,52 @@ API_CALLABLE(N(SpinyTromp_GetActingPartner)) {
 #include "world/common/todo/UnkFunc51.inc.c"
 
 EvtScript N(D_80240D10_C7EE90) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_LABEL(10)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(InterruptUsePartner)
-    EVT_END_IF
-    EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(GetPartnerInUse, LVar0)
-    EVT_IF_NE(LVar0, 0)
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_BOW)
-            EVT_GOTO(2)
-        EVT_ELSE
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(GetPlayerActionState, LVar0)
-    EVT_IF_NE(LVar0, ACTION_STATE_IDLE)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_CALL(GetPlayerTargetYaw, LVar0)
-    EVT_IF_LT(LVar0, 180)
-        EVT_CALL(InterpPlayerYaw, 90, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc48), 20)
-    EVT_ELSE
-        EVT_CALL(InterpPlayerYaw, 270, 1)
-        EVT_WAIT(1)
-        EVT_CALL(N(UnkFunc48), -20)
-    EVT_END_IF
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Fallen)
-    EVT_WAIT(1)
-    EVT_CALL(N(SpinyTrompHit))
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Fallen, IMGFX_SET_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
-    EVT_LABEL(1)
-        EVT_WAIT(1)
-        EVT_IF_EQ(AF_KZN_TrompRollingDone, FALSE)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_WAIT(30)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Fallen, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_GetUp)
-    EVT_CALL(N(UnkFunc48), 0)
-    EVT_LABEL(2)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Label(10)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, 0)
+        Call(InterruptUsePartner)
+    EndIf
+    Label(0)
+    Wait(1)
+    Call(GetPartnerInUse, LVar0)
+    IfNe(LVar0, 0)
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_BOW)
+            Goto(2)
+        Else
+            Goto(10)
+        EndIf
+    EndIf
+    Call(GetPlayerActionState, LVar0)
+    IfNe(LVar0, ACTION_STATE_IDLE)
+        Goto(0)
+    EndIf
+    Call(GetPlayerTargetYaw, LVar0)
+    IfLt(LVar0, 180)
+        Call(InterpPlayerYaw, 90, 1)
+        Wait(1)
+        Call(N(UnkFunc48), 20)
+    Else
+        Call(InterpPlayerYaw, 270, 1)
+        Wait(1)
+        Call(N(UnkFunc48), -20)
+    EndIf
+    Call(SetPlayerAnimation, ANIM_Mario1_Fallen)
+    Wait(1)
+    Call(N(SpinyTrompHit))
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Fallen, IMGFX_SET_WAVY, Float(3.0), Float(3.0), 0, 0)
+    Label(1)
+        Wait(1)
+        IfEq(AF_KZN_TrompRollingDone, FALSE)
+            Goto(1)
+        EndIf
+    Wait(30)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Fallen, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetPlayerAnimation, ANIM_Mario1_GetUp)
+    Call(N(UnkFunc48), 0)
+    Label(2)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };

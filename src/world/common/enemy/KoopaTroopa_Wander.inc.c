@@ -16,13 +16,13 @@ MobileAISettings N(AISettings_KoopaTroopa_Wander) = {
 };
 
 EvtScript N(EVS_NpcAI_KoopaTroopa_Wander) = {
-    EVT_CALL(SetSelfVar, 2, 8)
-    EVT_CALL(SetSelfVar, 3, 12)
-    EVT_CALL(SetSelfVar, 5, 10)
-    EVT_CALL(SetSelfVar, 7, 0)
-    EVT_CALL(N(TackleAI_Main), EVT_PTR(N(AISettings_KoopaTroopa_Wander)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 2, 8)
+    Call(SetSelfVar, 3, 12)
+    Call(SetSelfVar, 5, 10)
+    Call(SetSelfVar, 7, 0)
+    Call(N(TackleAI_Main), Ref(N(AISettings_KoopaTroopa_Wander)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_KoopaTroopa_Wander) = {

@@ -7,17 +7,17 @@
 #define NAME_SUFFIX
 
 EvtScript N(EVS_NpcInit_Chan_Intro) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 570, 20, -150)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 570, 20, -150)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Lee_Intro) = {
-    EVT_CALL(SetNpcPos, NPC_SELF, 600, 20, -145)
-    EVT_CALL(SetNpcYaw, NPC_SELF, 270)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_SELF, 600, 20, -145)
+    Call(SetNpcYaw, NPC_SELF, 270)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Chan_Intro)[] = {

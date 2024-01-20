@@ -6,12 +6,12 @@
 #include "world/common/enemy/Clubba_Multi.inc.c"
 
 EvtScript N(EVS_NpcInit_Clubba_Napping) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_IF_EQ(LVar0, dgb_03_ENTRY_3)
-        EVT_CALL(SetNpcPos, NPC_SELF, -330, 210, -20)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    IfEq(LVar0, dgb_03_ENTRY_3)
+        Call(SetNpcPos, NPC_SELF, -330, 210, -20)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_Clubba_Wander)[] = {

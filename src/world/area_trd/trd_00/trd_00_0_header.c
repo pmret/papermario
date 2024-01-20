@@ -20,17 +20,17 @@ MapSettings N(settings) = {
 };
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH1_ARRIVED_AT_KOOPA_FORTRESS)
-            EVT_CALL(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 1, 8)
-            EVT_CALL(PlaySound, SOUND_LOOP_TRD_WATER_EXT)
-        EVT_CASE_EQ(STORY_CH1_BEGAN_PEACH_MISSION)
-            EVT_CALL(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, 8)
-            EVT_CALL(PlaySound, SOUND_LOOP_TRD_WATER_EXT)
-    EVT_END_SWITCH
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_METAL)
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH1_ARRIVED_AT_KOOPA_FORTRESS)
+            Call(SetMusicTrack, 0, SONG_KOOPA_FORTRESS, 1, 8)
+            Call(PlaySound, SOUND_LOOP_TRD_WATER_EXT)
+        CaseEq(STORY_CH1_BEGAN_PEACH_MISSION)
+            Call(SetMusicTrack, 0, SONG_STAR_SPIRIT_THEME, 1, 8)
+        CaseDefault
+            Call(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, 8)
+            Call(PlaySound, SOUND_LOOP_TRD_WATER_EXT)
+    EndSwitch
+    Call(UseDoorSounds, DOOR_SOUNDS_METAL)
+    Return
+    End
 };

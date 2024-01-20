@@ -40,131 +40,131 @@ API_CALLABLE(N(IsPartnerLakilester)) {
 }
 
 EvtScript N(EVS_UpdateLeftPlatform) = {
-    EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o67, MODEL_o67)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o68, MODEL_o68)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o69, MODEL_o69)
-    EVT_SET(LVar0, 60)
-    EVT_SET(LVar3, 0)
-    EVT_LOOP(0)
-        EVT_CALL(MakeLerp, LVar0, -60, 120, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_g7, LVar0, 0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o67)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o68)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o69)
-            EVT_SET(LVar4, LVar0)
-            EVT_SUB(LVar4, LVar3)
-            EVT_SET(LVar3, LVar0)
-            EVT_CALL(N(AddPushVelocity), LVar4, 26, 25)
-            EVT_IF_LT(LVar0, -45)
-                EVT_CALL(N(IsPartnerLakilester))
-                EVT_IF_EQ(LVar9, 1)
-                    EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, COLLIDER_pp1)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_IF
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(20)
-        EVT_CALL(MakeLerp, LVar0, 60, 120, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_g7, LVar0, 0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o67)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o68)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o69)
-            EVT_SET(LVar4, LVar0)
-            EVT_SUB(LVar4, LVar3)
-            EVT_SET(LVar3, LVar0)
-            EVT_CALL(N(AddPushVelocity), LVar4, 26, 25)
-            EVT_IF_GT(LVar0, 45)
-                EVT_CALL(N(IsPartnerLakilester))
-                EVT_IF_EQ(LVar9, 1)
-                    EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, COLLIDER_pp2)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_IF
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(20)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_0B)
+    Call(ParentColliderToModel, COLLIDER_o67, MODEL_o67)
+    Call(ParentColliderToModel, COLLIDER_o68, MODEL_o68)
+    Call(ParentColliderToModel, COLLIDER_o69, MODEL_o69)
+    Set(LVar0, 60)
+    Set(LVar3, 0)
+    Loop(0)
+        Call(MakeLerp, LVar0, -60, 120, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, MODEL_g7, LVar0, 0, 0)
+            Call(UpdateColliderTransform, COLLIDER_o67)
+            Call(UpdateColliderTransform, COLLIDER_o68)
+            Call(UpdateColliderTransform, COLLIDER_o69)
+            Set(LVar4, LVar0)
+            Sub(LVar4, LVar3)
+            Set(LVar3, LVar0)
+            Call(N(AddPushVelocity), LVar4, 26, 25)
+            IfLt(LVar0, -45)
+                Call(N(IsPartnerLakilester))
+                IfEq(LVar9, 1)
+                    Call(N(GetCurrentFloor), LVar2)
+                    IfEq(LVar2, COLLIDER_pp1)
+                        BreakLoop
+                    EndIf
+                EndIf
+            EndIf
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(20)
+        Call(MakeLerp, LVar0, 60, 120, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, MODEL_g7, LVar0, 0, 0)
+            Call(UpdateColliderTransform, COLLIDER_o67)
+            Call(UpdateColliderTransform, COLLIDER_o68)
+            Call(UpdateColliderTransform, COLLIDER_o69)
+            Set(LVar4, LVar0)
+            Sub(LVar4, LVar3)
+            Set(LVar3, LVar0)
+            Call(N(AddPushVelocity), LVar4, 26, 25)
+            IfGt(LVar0, 45)
+                Call(N(IsPartnerLakilester))
+                IfEq(LVar9, 1)
+                    Call(N(GetCurrentFloor), LVar2)
+                    IfEq(LVar2, COLLIDER_pp2)
+                        BreakLoop
+                    EndIf
+                EndIf
+            EndIf
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(20)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_UpdateRightPlatform) = {
-    EVT_SET_GROUP(EVT_GROUP_0B)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o26, MODEL_o26)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o27, MODEL_o27)
-    EVT_CALL(ParentColliderToModel, COLLIDER_o28, MODEL_o28)
-    EVT_SET(LVar0, 135)
-    EVT_SET(LVar3, 0)
-    EVT_LOOP(0)
-        EVT_CALL(MakeLerp, LVar0, -60, 195, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_g14, LVar0, 0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o26)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o27)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o28)
-            EVT_SET(LVar4, LVar0)
-            EVT_SUB(LVar4, LVar3)
-            EVT_SET(LVar3, LVar0)
-            EVT_CALL(N(AddPushVelocity), LVar4, 30, 29)
-            EVT_IF_LT(LVar0, -45)
-                EVT_CALL(N(IsPartnerLakilester))
-                EVT_IF_EQ(LVar9, 1)
-                    EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, COLLIDER_pp1)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_IF
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(20)
-        EVT_CALL(MakeLerp, LVar0, 135, 195, EASING_LINEAR)
-        EVT_LOOP(0)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, MODEL_g14, LVar0, 0, 0)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o26)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o27)
-            EVT_CALL(UpdateColliderTransform, COLLIDER_o28)
-            EVT_SET(LVar4, LVar0)
-            EVT_SUB(LVar4, LVar3)
-            EVT_SET(LVar3, LVar0)
-            EVT_CALL(N(AddPushVelocity), LVar4, 30, 29)
-            EVT_IF_GT(LVar0, 120)
-                EVT_CALL(N(IsPartnerLakilester))
-                EVT_IF_EQ(LVar9, 1)
-                    EVT_CALL(N(GetCurrentFloor), LVar2)
-                    EVT_IF_EQ(LVar2, COLLIDER_pp2)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_IF
-            EVT_END_IF
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-        EVT_WAIT(20)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetGroup(EVT_GROUP_0B)
+    Call(ParentColliderToModel, COLLIDER_o26, MODEL_o26)
+    Call(ParentColliderToModel, COLLIDER_o27, MODEL_o27)
+    Call(ParentColliderToModel, COLLIDER_o28, MODEL_o28)
+    Set(LVar0, 135)
+    Set(LVar3, 0)
+    Loop(0)
+        Call(MakeLerp, LVar0, -60, 195, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, MODEL_g14, LVar0, 0, 0)
+            Call(UpdateColliderTransform, COLLIDER_o26)
+            Call(UpdateColliderTransform, COLLIDER_o27)
+            Call(UpdateColliderTransform, COLLIDER_o28)
+            Set(LVar4, LVar0)
+            Sub(LVar4, LVar3)
+            Set(LVar3, LVar0)
+            Call(N(AddPushVelocity), LVar4, 30, 29)
+            IfLt(LVar0, -45)
+                Call(N(IsPartnerLakilester))
+                IfEq(LVar9, 1)
+                    Call(N(GetCurrentFloor), LVar2)
+                    IfEq(LVar2, COLLIDER_pp1)
+                        BreakLoop
+                    EndIf
+                EndIf
+            EndIf
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(20)
+        Call(MakeLerp, LVar0, 135, 195, EASING_LINEAR)
+        Loop(0)
+            Call(UpdateLerp)
+            Call(TranslateGroup, MODEL_g14, LVar0, 0, 0)
+            Call(UpdateColliderTransform, COLLIDER_o26)
+            Call(UpdateColliderTransform, COLLIDER_o27)
+            Call(UpdateColliderTransform, COLLIDER_o28)
+            Set(LVar4, LVar0)
+            Sub(LVar4, LVar3)
+            Set(LVar3, LVar0)
+            Call(N(AddPushVelocity), LVar4, 30, 29)
+            IfGt(LVar0, 120)
+                Call(N(IsPartnerLakilester))
+                IfEq(LVar9, 1)
+                    Call(N(GetCurrentFloor), LVar2)
+                    IfEq(LVar2, COLLIDER_pp2)
+                        BreakLoop
+                    EndIf
+                EndIf
+            EndIf
+            Wait(1)
+            IfEq(LVar1, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait(20)
+    EndLoop
+    Return
+    End
 };

@@ -52,17 +52,17 @@ API_CALLABLE(N(func_802A123C_7217DC)) {
 #include "battle/common/move/UseItem.inc.c"
 
 EvtScript N(EVS_UseItem) = {
-    EVT_SET_CONST(LVarA, ITEM_STONE_CAP)
-    EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(PlaySound, SOUND_PUT_ON_CAP)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_AdjustCap)
-    EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Crouch)
-    EVT_CALL(GetItemPower, ITEM_STONE_CAP, LVar0, LVar1)
-    EVT_CALL(PlaySound, SOUND_BECOME_STONE)
-    EVT_CALL(N(func_802A123C_7217DC))
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_WAIT(20)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVarA, ITEM_STONE_CAP)
+    ExecWait(N(UseItemWithEffect))
+    Call(PlaySound, SOUND_PUT_ON_CAP)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_AdjustCap)
+    Wait(30)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Crouch)
+    Call(GetItemPower, ITEM_STONE_CAP, LVar0, LVar1)
+    Call(PlaySound, SOUND_BECOME_STONE)
+    Call(N(func_802A123C_7217DC))
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Wait(20)
+    Return
+    End
 };

@@ -1,8 +1,8 @@
 #include "pra_39.h"
 
 EvtScript N(EVS_SetupMusic) = {
-    EVT_CALL(SetMusicTrack, 0, SONG_CRYSTAL_PALACE, 0, 8)
-    EVT_CALL(UseDoorSounds, DOOR_SOUNDS_BASIC)
-    EVT_RETURN
-    EVT_END
+    Call(SetMusicTrack, 0, SONG_CRYSTAL_PALACE, 0, 8)
+    Call(UseDoorSounds, DOOR_SOUNDS_BASIC)
+    Return
+    End
 };

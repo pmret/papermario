@@ -37,393 +37,393 @@ EntityModelScript N(EMS_UltraHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(ultra_hamm
 extern EvtScript N(EVS_UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
-    EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_SET(LVarD, 50)
-            EVT_SET(LVarE, 1)
-            EVT_SET(LVarF, 2)
-            EVT_EXEC_WAIT(N(EVS_UseMove_Impl))
-        EVT_CASE_EQ(1)
-            EVT_SET(LVarD, 50)
-            EVT_SET(LVarE, 2)
-            EVT_SET(LVarF, 4)
-            EVT_EXEC_WAIT(N(EVS_UseMove_Impl))
-        EVT_CASE_EQ(2)
-            EVT_SET(LVarD, 50)
-            EVT_SET(LVarE, 3)
-            EVT_SET(LVarF, 6)
-            EVT_EXEC_WAIT(N(EVS_UseMove_Impl))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(ShowActionHud, TRUE)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Set(LVarD, 50)
+            Set(LVarE, 1)
+            Set(LVarF, 2)
+            ExecWait(N(EVS_UseMove_Impl))
+        CaseEq(1)
+            Set(LVarD, 50)
+            Set(LVarE, 2)
+            Set(LVarF, 4)
+            ExecWait(N(EVS_UseMove_Impl))
+        CaseEq(2)
+            Set(LVarD, 50)
+            Set(LVarE, 3)
+            Set(LVarF, 6)
+            ExecWait(N(EVS_UseMove_Impl))
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_802A3E5C) = {
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(10)
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Begin)
-    EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Begin)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_LT(3)
-            EVT_WAIT(4)
-        EVT_CASE_LT(5)
-            EVT_WAIT(3)
-        EVT_CASE_LT(7)
-            EVT_WAIT(2)
-        EVT_CASE_LT(9)
-            EVT_WAIT(1)
-        EVT_CASE_LT(11)
-            EVT_WAIT(0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
+    Set(LVar1, 0)
+    Loop(10)
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, TRUE)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+            BreakLoop
+        EndIf
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Begin)
+    EndLoop
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Begin)
+    Switch(LVar1)
+        CaseLt(3)
+            Wait(4)
+        CaseLt(5)
+            Wait(3)
+        CaseLt(7)
+            Wait(2)
+        CaseLt(9)
+            Wait(1)
+        CaseLt(11)
+            Wait(0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_802A3FE0) = {
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(10)
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Begin)
-    EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Begin)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_LT(3)
-            EVT_WAIT(4)
-        EVT_CASE_LT(5)
-            EVT_WAIT(3)
-        EVT_CASE_LT(7)
-            EVT_WAIT(2)
-        EVT_CASE_LT(9)
-            EVT_WAIT(1)
-        EVT_CASE_LT(11)
-            EVT_WAIT(0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
+    Set(LVar1, 0)
+    Loop(10)
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, TRUE)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+            BreakLoop
+        EndIf
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Begin)
+    EndLoop
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Begin)
+    Switch(LVar1)
+        CaseLt(3)
+            Wait(4)
+        CaseLt(5)
+            Wait(3)
+        CaseLt(7)
+            Wait(2)
+        CaseLt(9)
+            Wait(1)
+        CaseLt(11)
+            Wait(0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_802A4164) = {
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(10)
-        EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-        EVT_IF_EQ(LVar0, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-        EVT_ADD(LVar1, 1)
-        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Begin)
-    EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Begin)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_LT(3)
-            EVT_WAIT(4)
-        EVT_CASE_LT(5)
-            EVT_WAIT(3)
-        EVT_CASE_LT(7)
-            EVT_WAIT(2)
-        EVT_CASE_LT(9)
-            EVT_WAIT(1)
-        EVT_CASE_LT(11)
-            EVT_WAIT(0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
+    Set(LVar1, 0)
+    Loop(10)
+        Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+        IfEq(LVar0, TRUE)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+            BreakLoop
+        EndIf
+        Wait(1)
+        Add(LVar1, 1)
+        Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Begin)
+    EndLoop
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Begin)
+    Switch(LVar1)
+        CaseLt(3)
+            Wait(4)
+        CaseLt(5)
+            Wait(3)
+        CaseLt(7)
+            Wait(2)
+        CaseLt(9)
+            Wait(1)
+        CaseLt(11)
+            Wait(0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_UseMove_Impl) = {
-    EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
-    EVT_CALL(action_command_hammer_init)
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 16)
-    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(4.0))
-    EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayerRunToGoal, 0)
-    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_EXEC_WAIT(N(EVS_802A3E5C))
-        EVT_CASE_EQ(1)
-            EVT_EXEC_WAIT(N(EVS_802A3FE0))
-        EVT_CASE_EQ(2)
-            EVT_EXEC_WAIT(N(EVS_802A4164))
-    EVT_END_SWITCH
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
-    EVT_CALL(AddBattleCamZoom, 50)
-    EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_WINDUP)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Raise)
-            EVT_WAIT(4)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Hold1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Raise)
-            EVT_WAIT(4)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Hold1)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Raise)
-            EVT_WAIT(4)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold1)
-    EVT_END_SWITCH
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_CALL(N(ShouldMovesAutoSucceed))
-        EVT_IF_EQ(LVar0, 0)
-            EVT_LOOP(45)
-                EVT_WAIT(1)
-                EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-                EVT_IF_NE(LVar0, FALSE)
-                    EVT_BREAK_LOOP
-                EVT_END_IF
-            EVT_END_LOOP
-        EVT_END_IF
-        EVT_ADD(LVarD, 6)
-        EVT_CALL(action_command_hammer_start, 0, LVarD, 3)
-        EVT_CALL(SetActionQuality, 0)
-        EVT_SET(LVar1, 0)
-        EVT_LOOP(30)
-            EVT_WAIT(1)
-            EVT_CALL(GetActionQuality, LVar0)
-            EVT_IF_NE(LVar0, 0)
-                EVT_IF_NE(LVar1, 1)
-                    EVT_CALL(GetMenuSelection, LVar3, LVar4, LVar5)
-                    EVT_SWITCH(LVar4)
-                        EVT_CASE_EQ(0)
-                            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Hold2)
-                        EVT_CASE_EQ(1)
-                            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Hold2)
-                        EVT_CASE_EQ(2)
-                            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold2)
-                    EVT_END_SWITCH
-                    EVT_SET(LVar1, 1)
-                EVT_END_IF
-            EVT_END_IF
-            EVT_CALL(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
-            EVT_IF_EQ(LVar0, FALSE)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_ELSE
-        EVT_WAIT(10)
-        EVT_CALL(GetMenuSelection, LVar3, LVar4, LVar5)
-        EVT_SWITCH(LVar4)
-            EVT_CASE_EQ(0)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Hold2)
-            EVT_CASE_EQ(1)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Hold2)
-            EVT_CASE_EQ(2)
-                EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold2)
-        EVT_END_SWITCH
-        EVT_WAIT(30)
-    EVT_END_IF
-    EVT_CALL(GetActionCommandMode, LVar0)
-    EVT_IF_GT(LVar0, 0)
-        EVT_LOOP(0)
-            EVT_WAIT(1)
-            EVT_CALL(GetActionSuccess, LVar0)
-            EVT_IF_NE(LVar0, 0)
-                EVT_BREAK_LOOP
-            EVT_END_IF
-        EVT_END_LOOP
-    EVT_END_IF
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Throw)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Throw)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Throw)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_3)
-    EVT_END_SWITCH
-    EVT_WAIT(3)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(EMS_BasicHammer)))
-        EVT_CASE_EQ(1)
-            EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(EMS_SuperHammer)))
-        EVT_CASE_EQ(2)
-            EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(EMS_UltraHammer)))
-    EVT_END_SWITCH
-    EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar0, 20)
-    EVT_ADD(LVar1, 42)
-    EVT_ADD(LVar2, 5)
-    EVT_CALL(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(SetVirtualEntityScale, LVarA, EVT_FLOAT(0.6), EVT_FLOAT(0.6), EVT_FLOAT(0.6))
-    EVT_CALL(InitTargetIterator)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(GetPlayerActionSuccess, LVar3)
-    EVT_SWITCH(LVar3)
-        EVT_CASE_GT(FALSE)
-            EVT_THREAD
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(9)
-                    EVT_ADD(LVar0, 60)
-                    EVT_CALL(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(1.3))
-            EVT_ADD(LVar2, 5)
-            EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 11)
-        EVT_CASE_DEFAULT
-            EVT_THREAD
-                EVT_SET(LVar0, 0)
-                EVT_LOOP(18)
-                    EVT_ADD(LVar0, 60)
-                    EVT_CALL(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-            EVT_END_THREAD
-            EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(0.7))
-            EVT_ADD(LVar2, 5)
-            EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 20)
-    EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(PlayerTestEnemy, LVar3, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_NO_CONTACT, 25, 0, 0, 16)
-    EVT_IF_EQ(LVar3, HIT_RESULT_MISS)
-        EVT_CALL(VirtualEntityLandJump, LVarA)
-        EVT_CALL(DeleteVirtualEntity, LVarA)
-        EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_THREAD
-        EVT_CALL(GetPlayerActionSuccess, LVar3)
-        EVT_SWITCH(LVar3)
-            EVT_CASE_GT(FALSE)
-                EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(1.4))
-                EVT_ADD(LVar0, 60)
-                EVT_ADD(LVar1, 0)
-                EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 10)
-                EVT_CALL(DeleteVirtualEntity, LVarA)
-            EVT_CASE_DEFAULT
-                EVT_CALL(SetVirtualEntityJumpGravity, LVarA, EVT_FLOAT(0.8))
-                EVT_ADD(LVar0, 40)
-                EVT_ADD(LVar1, 0)
-                EVT_CALL(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 15)
-                EVT_CALL(DeleteVirtualEntity, LVarA)
-        EVT_END_SWITCH
-    EVT_END_THREAD
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MIN)
-                    EVT_THREAD
-                        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.3))
-                    EVT_END_THREAD
-                EVT_CASE_EQ(1)
-                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
-                    EVT_THREAD
-                        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.6))
-                    EVT_END_THREAD
-                EVT_CASE_EQ(2)
-                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
-                    EVT_THREAD
-                        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.9))
-                    EVT_END_THREAD
-            EVT_END_SWITCH
-        EVT_CASE_DEFAULT
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_MIN)
-                    EVT_THREAD
-                        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.3))
-                    EVT_END_THREAD
-                EVT_CASE_EQ(1)
-                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
-                    EVT_THREAD
-                        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.6))
-                    EVT_END_THREAD
-                EVT_CASE_EQ(2)
-                    EVT_CALL(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
-                    EVT_THREAD
-                        EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.9))
-                    EVT_END_THREAD
-            EVT_END_SWITCH
-    EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
-    EVT_CALL(MoveBattleCamOver, 10)
-    EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-    EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(0)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_1)
-        EVT_CASE_EQ(1)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_2)
-        EVT_CASE_EQ(2)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_3)
-    EVT_END_SWITCH
-    EVT_CALL(GetPlayerActionSuccess, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_GT(FALSE)
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-            EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_THROW | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
-        EVT_CASE_DEFAULT
-            EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
-            EVT_SWITCH(LVar1)
-                EVT_CASE_EQ(0)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
-                EVT_CASE_EQ(1)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-                EVT_CASE_EQ(2)
-                    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
-            EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_THROW | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENTS_HAMMER, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SWITCH(LVar0)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE)
-        EVT_CASE_OR_EQ(HIT_RESULT_NICE_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_A))
-        EVT_END_CASE_GROUP
-        EVT_CASE_OR_EQ(HIT_RESULT_HIT)
-        EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(LoadActionCommand, ACTION_COMMAND_SMASH)
+    Call(action_command_hammer_init)
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar0, 16)
+    Call(SetActorSpeed, ACTOR_PLAYER, Float(4.0))
+    Call(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Call(PlayerRunToGoal, 0)
+    Call(SetGoalToTarget, ACTOR_PLAYER)
+    Call(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            ExecWait(N(EVS_802A3E5C))
+        CaseEq(1)
+            ExecWait(N(EVS_802A3FE0))
+        CaseEq(2)
+            ExecWait(N(EVS_802A4164))
+    EndSwitch
+    Call(InitTargetIterator)
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
+    Call(AddBattleCamZoom, 50)
+    Call(MoveBattleCamOver, 20)
+    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_WINDUP)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Raise)
+            Wait(4)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Hold1)
+        CaseEq(1)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Raise)
+            Wait(4)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Hold1)
+        CaseEq(2)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Raise)
+            Wait(4)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold1)
+    EndSwitch
+    Call(GetActionCommandMode, LVar0)
+    IfGt(LVar0, 0)
+        Call(N(ShouldMovesAutoSucceed))
+        IfEq(LVar0, 0)
+            Loop(45)
+                Wait(1)
+                Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+                IfNe(LVar0, FALSE)
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndIf
+        Add(LVarD, 6)
+        Call(action_command_hammer_start, 0, LVarD, 3)
+        Call(SetActionQuality, 0)
+        Set(LVar1, 0)
+        Loop(30)
+            Wait(1)
+            Call(GetActionQuality, LVar0)
+            IfNe(LVar0, 0)
+                IfNe(LVar1, 1)
+                    Call(GetMenuSelection, LVar3, LVar4, LVar5)
+                    Switch(LVar4)
+                        CaseEq(0)
+                            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Hold2)
+                        CaseEq(1)
+                            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Hold2)
+                        CaseEq(2)
+                            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold2)
+                    EndSwitch
+                    Set(LVar1, 1)
+                EndIf
+            EndIf
+            Call(CheckButtonDown, BUTTON_STICK_LEFT, LVar0)
+            IfEq(LVar0, FALSE)
+                BreakLoop
+            EndIf
+        EndLoop
+    Else
+        Wait(10)
+        Call(GetMenuSelection, LVar3, LVar4, LVar5)
+        Switch(LVar4)
+            CaseEq(0)
+                Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Hold2)
+            CaseEq(1)
+                Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Hold2)
+            CaseEq(2)
+                Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Hold2)
+        EndSwitch
+        Wait(30)
+    EndIf
+    Call(GetActionCommandMode, LVar0)
+    IfGt(LVar0, 0)
+        Loop(0)
+            Wait(1)
+            Call(GetActionSuccess, LVar0)
+            IfNe(LVar0, 0)
+                BreakLoop
+            EndIf
+        EndLoop
+    EndIf
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow1_Throw)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_1)
+        CaseEq(1)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow2_Throw)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_2)
+        CaseEq(2)
+            Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_HammerThrow3_Throw)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HAMMER_SWING_3)
+    EndSwitch
+    Wait(3)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Call(CreateVirtualEntity, LVarA, Ref(N(EMS_BasicHammer)))
+        CaseEq(1)
+            Call(CreateVirtualEntity, LVarA, Ref(N(EMS_SuperHammer)))
+        CaseEq(2)
+            Call(CreateVirtualEntity, LVarA, Ref(N(EMS_UltraHammer)))
+    EndSwitch
+    Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+    Add(LVar0, 20)
+    Add(LVar1, 42)
+    Add(LVar2, 5)
+    Call(SetVirtualEntityPosition, LVarA, LVar0, LVar1, LVar2)
+    Call(SetVirtualEntityScale, LVarA, Float(0.6), Float(0.6), Float(0.6))
+    Call(InitTargetIterator)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
+    Call(GetPlayerActionSuccess, LVar3)
+    Switch(LVar3)
+        CaseGt(FALSE)
+            Thread
+                Set(LVar0, 0)
+                Loop(9)
+                    Add(LVar0, 60)
+                    Call(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
+                    Wait(1)
+                EndLoop
+            EndThread
+            Call(SetVirtualEntityJumpGravity, LVarA, Float(1.3))
+            Add(LVar2, 5)
+            Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 11)
+        CaseDefault
+            Thread
+                Set(LVar0, 0)
+                Loop(18)
+                    Add(LVar0, 60)
+                    Call(SetVirtualEntityRotation, LVarA, 0, 0, LVar0)
+                    Wait(1)
+                EndLoop
+            EndThread
+            Call(SetVirtualEntityJumpGravity, LVarA, Float(0.7))
+            Add(LVar2, 5)
+            Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 20)
+    EndSwitch
+    Call(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
+    Call(PlayerTestEnemy, LVar3, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_NO_CONTACT, 25, 0, 0, 16)
+    IfEq(LVar3, HIT_RESULT_MISS)
+        Call(VirtualEntityLandJump, LVarA)
+        Call(DeleteVirtualEntity, LVarA)
+        ExecWait(N(EVS_Hammer_ReturnHome_C))
+        Return
+    EndIf
+    Thread
+        Call(GetPlayerActionSuccess, LVar3)
+        Switch(LVar3)
+            CaseGt(FALSE)
+                Call(SetVirtualEntityJumpGravity, LVarA, Float(1.4))
+                Add(LVar0, 60)
+                Add(LVar1, 0)
+                Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 10)
+                Call(DeleteVirtualEntity, LVarA)
+            CaseDefault
+                Call(SetVirtualEntityJumpGravity, LVarA, Float(0.8))
+                Add(LVar0, 40)
+                Add(LVar1, 0)
+                Call(VirtualEntityJumpTo, LVarA, LVar0, LVar1, LVar2, 15)
+                Call(DeleteVirtualEntity, LVarA)
+        EndSwitch
+    EndThread
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar1)
+                CaseEq(0)
+                    Call(StartRumble, BTL_RUMBLE_PLAYER_MIN)
+                    Thread
+                        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.3))
+                    EndThread
+                CaseEq(1)
+                    Call(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
+                    Thread
+                        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.6))
+                    EndThread
+                CaseEq(2)
+                    Call(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
+                    Thread
+                        Call(ShakeCam, CAM_BATTLE, 0, 10, Float(1.9))
+                    EndThread
+            EndSwitch
+        CaseDefault
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar1)
+                CaseEq(0)
+                    Call(StartRumble, BTL_RUMBLE_PLAYER_MIN)
+                    Thread
+                        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.3))
+                    EndThread
+                CaseEq(1)
+                    Call(StartRumble, BTL_RUMBLE_PLAYER_LIGHT)
+                    Thread
+                        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.6))
+                    EndThread
+                CaseEq(2)
+                    Call(StartRumble, BTL_RUMBLE_PLAYER_HEAVY)
+                    Thread
+                        Call(ShakeCam, CAM_BATTLE, 0, 2, Float(1.9))
+                    EndThread
+            EndSwitch
+    EndSwitch
+    Call(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
+    Call(MoveBattleCamOver, 10)
+    Call(GetMenuSelection, LVar0, LVar1, LVar2)
+    Switch(LVar1)
+        CaseEq(0)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_1)
+        CaseEq(1)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_2)
+        CaseEq(2)
+            Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_D_DOWN_HIT_3)
+    EndSwitch
+    Call(GetPlayerActionSuccess, LVar0)
+    Switch(LVar0)
+        CaseGt(FALSE)
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar1)
+                CaseEq(0)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
+                CaseEq(1)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+                CaseEq(2)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+            EndSwitch
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_THROW | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENTS_HAMMER, 0, LVarF, BS_FLAGS1_TRIGGER_EVENTS | BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_NICE_HIT)
+        CaseDefault
+            Call(GetMenuSelection, LVar0, LVar1, LVar2)
+            Switch(LVar1)
+                CaseEq(0)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_NORMAL)
+                CaseEq(1)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+                CaseEq(2)
+                    Call(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_SILENT)
+            EndSwitch
+            Call(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_THROW | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENTS_HAMMER, 0, LVarE, BS_FLAGS1_INCLUDE_POWER_UPS | BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Switch(LVar0)
+        CaseOrEq(HIT_RESULT_NICE)
+        CaseOrEq(HIT_RESULT_NICE_NO_DAMAGE)
+            ExecWait(N(EVS_Hammer_ReturnHome_A))
+        EndCaseGroup
+        CaseOrEq(HIT_RESULT_HIT)
+        CaseOrEq(HIT_RESULT_NO_DAMAGE)
+            ExecWait(N(EVS_Hammer_ReturnHome_C))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };

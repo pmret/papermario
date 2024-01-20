@@ -4,39 +4,39 @@ EvtScript N(EVS_ExitDoors_kpa_130_1) = EVT_EXIT_DOUBLE_DOOR(kpa_111_ENTRY_0, "kp
 EvtScript N(EVS_ExitDoors_kpa_112_0) = EVT_EXIT_WALK(40, kpa_111_ENTRY_1, "kpa_112", kpa_112_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_130_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deiliwtt, 1, 0)
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kpa_112_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitDoors_kpa_130_1)), TRIGGER_WALL_PRESS_A, COLLIDER_deiliwtt, 1, 0)
+    BindTrigger(Ref(N(EVS_ExitDoors_kpa_112_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiline, 1, 0)
+    Return
+    End
 };
 
 EvtScript N(EVS_EnterMap) = {
-    EVT_CALL(GetEntryID, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(kpa_111_ENTRY_0)
-            EVT_SET(LVar0, kpa_111_ENTRY_0)
-            EVT_SET(LVar2, MODEL_o119)
-            EVT_SET(LVar3, MODEL_o118)
-            EVT_EXEC(EnterDoubleDoor)
-            EVT_EXEC(N(EVS_BindExitTriggers))
-        EVT_CASE_EQ(kpa_111_ENTRY_1)
-            EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-            EVT_EXEC(EnterWalk)
-    EVT_END_SWITCH
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+    Call(GetEntryID, LVar0)
+    Switch(LVar0)
+        CaseEq(kpa_111_ENTRY_0)
+            Set(LVar0, kpa_111_ENTRY_0)
+            Set(LVar2, MODEL_o119)
+            Set(LVar3, MODEL_o118)
+            Exec(EnterDoubleDoor)
+            Exec(N(EVS_BindExitTriggers))
+        CaseEq(kpa_111_ENTRY_1)
+            Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+            Exec(EnterWalk)
+    EndSwitch
+    Wait(1)
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_SETUP_CAMERA_DEFAULT()
-    EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupStatues))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC(N(EVS_EnterMap))
-    EVT_RETURN
-    EVT_END
+    Set(GB_WorldLocation, LOCATION_BOWSERS_CASTLE)
+    Call(SetSpriteShading, SHADING_NONE)
+    SetUP_CAMERA_DEFAULT()
+    Call(MakeNpcs, TRUE, Ref(N(DefaultNPCs)))
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupStatues))
+    Exec(N(EVS_SetupMusic))
+    Exec(N(EVS_EnterMap))
+    Return
+    End
 };

@@ -1,48 +1,48 @@
 #include "isk_16.h"
 
 EvtScript N(EVS_NpcIdle_Tutankoopa_01) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetSelfVar, 0, LVar0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(StartBossBattle, SONG_TUTANKOOPA_BATTLE)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        Call(GetSelfVar, 0, LVar0)
+        Wait(1)
+        IfEq(LVar0, 0)
+            Goto(0)
+        EndIf
+    Call(StartBossBattle, SONG_TUTANKOOPA_BATTLE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_Tutankoopa_01) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
-            EVT_CALL(InterpPlayerYaw, 90, 0)
-            EVT_EXEC_WAIT(N(EVS_Scene_TutankoopaDefeated))
-            EVT_EXEC(N(EVS_SpawnStarCard))
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_1, TRUE)
+            Call(InterpPlayerYaw, 90, 0)
+            ExecWait(N(EVS_Scene_TutankoopaDefeated))
+            Exec(N(EVS_SpawnStarCard))
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Tutankoopa_01) = {
-    EVT_CALL(InterpNpcYaw, NPC_Tutankoopa_01, 150, 1)
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_DEFEATED_TUTANKOOPA)
-            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Tutankoopa_01)))
-            EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_Tutankoopa_01)))
-        EVT_CASE_GE(STORY_CH2_DEFEATED_TUTANKOOPA)
-            EVT_CALL(SetNpcPos, NPC_Tutankoopa_01, 0, -1500, 0)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(InterpNpcYaw, NPC_Tutankoopa_01, 150, 1)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_DEFEATED_TUTANKOOPA)
+            Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Tutankoopa_01)))
+            Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_Tutankoopa_01)))
+        CaseGe(STORY_CH2_DEFEATED_TUTANKOOPA)
+            Call(SetNpcPos, NPC_Tutankoopa_01, 0, -1500, 0)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ChainChomp) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Tutankoopa_01) = {

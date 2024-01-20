@@ -51,49 +51,49 @@ HudScript* bHPDigitHudScripts[] = {
 s32 BattleScreenFadeAmt = 255;
 
 EvtScript BtlPutPartnerAway = {
-    EVT_CALL(DispatchEvent, ACTOR_PARTNER, EVENT_PUT_PARTNER_AWAY)
-    EVT_CHILD_THREAD
-        EVT_SETF(LVar0, EVT_FLOAT(1.0))
-        EVT_LOOP(10)
-            EVT_CALL(SetActorScale, ACTOR_PARTNER, LVar0, LVar0, EVT_FLOAT(1.0))
-            EVT_SUBF(LVar0, EVT_FLOAT(0.1))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(EnablePartnerBlur)
-    EVT_CALL(PlaySoundAtActor, 0, SOUND_PARTNER_GET_OUT)
-    EVT_CALL(GetActorPos, 0, LVar0, LVar1, LVar2)
-    EVT_ADD(LVar1, 25)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(JumpToGoal, ACTOR_PARTNER, 10, 0, 0, 1)
-    EVT_CALL(DisablePartnerBlur)
-    EVT_RETURN
-    EVT_END
+    Call(DispatchEvent, ACTOR_PARTNER, EVENT_PUT_PARTNER_AWAY)
+    ChildThread
+        SetF(LVar0, Float(1.0))
+        Loop(10)
+            Call(SetActorScale, ACTOR_PARTNER, LVar0, LVar0, Float(1.0))
+            SubF(LVar0, Float(0.1))
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Call(EnablePartnerBlur)
+    Call(PlaySoundAtActor, 0, SOUND_PARTNER_GET_OUT)
+    Call(GetActorPos, 0, LVar0, LVar1, LVar2)
+    Add(LVar1, 25)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    Call(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(JumpToGoal, ACTOR_PARTNER, 10, 0, 0, 1)
+    Call(DisablePartnerBlur)
+    Return
+    End
 };
 
 EvtScript BtlBringPartnerOut = {
-    EVT_CHILD_THREAD
-        EVT_SETF(LVar0, EVT_FLOAT(0.1))
-        EVT_LOOP(20)
-            EVT_CALL(SetActorScale, ACTOR_PARTNER, LVar0, LVar0, EVT_FLOAT(1.0))
-            EVT_ADDF(LVar0, EVT_FLOAT(0.05))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-    EVT_END_CHILD_THREAD
-    EVT_CALL(PlaySoundAtActor, 0, SOUND_PARTNER_PUT_AWAY)
-    EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.0))
-    EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, 0, 0, 1)
-    EVT_ELSE
-        EVT_CALL(JumpToGoal, ACTOR_PARTNER, 20, 0, 0, 1)
-    EVT_END_IF
-    EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_CALL(ForceHomePos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        SetF(LVar0, Float(0.1))
+        Loop(20)
+            Call(SetActorScale, ACTOR_PARTNER, LVar0, LVar0, Float(1.0))
+            AddF(LVar0, Float(0.05))
+            Wait(1)
+        EndLoop
+        Call(SetActorScale, ACTOR_PARTNER, Float(1.0), Float(1.0), Float(1.0))
+    EndChildThread
+    Call(PlaySoundAtActor, 0, SOUND_PARTNER_PUT_AWAY)
+    Call(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(SetActorJumpGravity, ACTOR_PARTNER, Float(1.0))
+    IfEq(LVar1, 0)
+        Call(JumpToGoal, ACTOR_PARTNER, 20, 0, 0, 1)
+    Else
+        Call(JumpToGoal, ACTOR_PARTNER, 20, 0, 0, 1)
+    EndIf
+    Call(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Call(ForceHomePos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
+    Return
+    End
 };
 
 extern HudScript HES_HPBar;

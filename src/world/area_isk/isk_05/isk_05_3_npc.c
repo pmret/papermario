@@ -155,116 +155,116 @@ API_CALLABLE(N(func_80241E24_97F8F4)) {
 }
 
 EvtScript N(EVS_NpcIdle_StoneChomp) = {
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
-    EVT_LABEL(100)
-    EVT_IF_EQ(GF_ISK05_Hammer2Block, FALSE)
-        EVT_WAIT(1)
-        EVT_GOTO(100)
-    EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
-    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
-    EVT_THREAD
-        EVT_WAIT(5)
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
-        EVT_CALL(MakeLerp, 65, 0, 15, EASING_QUADRATIC_IN)
-        EVT_LABEL(101)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, MODEL_g304, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(101)
-        EVT_END_IF
-        EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_SLAM, SOUND_SPACE_DEFAULT)
-        EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_END_THREAD
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(5)
-    EVT_CALL(N(func_80241B28_97F5F8))
-    EVT_CALL(MakeLerp, 0, 255, 30, EASING_LINEAR)
-    EVT_LABEL(10)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(N(func_80241DF8_97F8C8), LVar0)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(10)
-    EVT_END_IF
-    EVT_CALL(SetGroupVisibility, MODEL_wan1, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, MODEL_wan2, MODEL_GROUP_VISIBLE)
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(MakeLerp, 0, 360, 15, EASING_LINEAR)
-        EVT_LABEL(10)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(N(func_80241D44_97F814), LVar0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_END_THREAD
-    EVT_CALL(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
-    EVT_CALL(N(func_80241C5C_97F72C), LVar2, LVar3, LVar4)
-    EVT_CALL(MakeLerp, LVar3, 0, 30, EASING_QUARTIC_IN)
-    EVT_LABEL(1)
-    EVT_CALL(UpdateLerp)
-    EVT_CALL(SetNpcPos, NPC_SELF, LVar2, LVar0, LVar4)
-    EVT_CALL(N(func_80241C5C_97F72C), LVar2, LVar0, LVar4)
-    EVT_WAIT(1)
-    EVT_IF_EQ(LVar1, 1)
-        EVT_GOTO(1)
-    EVT_END_IF
-    EVT_CALL(N(func_80241E24_97F8F4))
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_WAIT(1)
-    EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_StoneChomp)))
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 1)
+    Label(100)
+    IfEq(GF_ISK05_Hammer2Block, FALSE)
+        Wait(1)
+        Goto(100)
+    EndIf
+    Call(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
+    Call(SetSelfEnemyFlagBits, ENEMY_FLAG_DISABLE_AI, 0)
+    Thread
+        Wait(5)
+        Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_CLOSE, SOUND_SPACE_DEFAULT)
+        Call(MakeLerp, 65, 0, 15, EASING_QUADRATIC_IN)
+        Label(101)
+        Call(UpdateLerp)
+        Call(TranslateGroup, MODEL_g304, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(101)
+        EndIf
+        Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_SLAM, SOUND_SPACE_DEFAULT)
+        Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
+    EndThread
+    Call(DisablePlayerInput, TRUE)
+    Wait(5)
+    Call(N(func_80241B28_97F5F8))
+    Call(MakeLerp, 0, 255, 30, EASING_LINEAR)
+    Label(10)
+    Call(UpdateLerp)
+    Call(N(func_80241DF8_97F8C8), LVar0)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(10)
+    EndIf
+    Call(SetGroupVisibility, MODEL_wan1, MODEL_GROUP_HIDDEN)
+    Call(SetGroupVisibility, MODEL_wan2, MODEL_GROUP_VISIBLE)
+    Thread
+        Wait(15)
+        Call(MakeLerp, 0, 360, 15, EASING_LINEAR)
+        Label(10)
+        Call(UpdateLerp)
+        Call(N(func_80241D44_97F814), LVar0, 0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(10)
+        EndIf
+    EndThread
+    Call(GetNpcPos, NPC_SELF, LVar2, LVar3, LVar4)
+    Call(N(func_80241C5C_97F72C), LVar2, LVar3, LVar4)
+    Call(MakeLerp, LVar3, 0, 30, EASING_QUARTIC_IN)
+    Label(1)
+    Call(UpdateLerp)
+    Call(SetNpcPos, NPC_SELF, LVar2, LVar0, LVar4)
+    Call(N(func_80241C5C_97F72C), LVar2, LVar0, LVar4)
+    Wait(1)
+    IfEq(LVar1, 1)
+        Goto(1)
+    EndIf
+    Call(N(func_80241E24_97F8F4))
+    Wait(5)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
+    Call(EnableNpcShadow, NPC_SELF, TRUE)
+    Wait(1)
+    Call(N(DestroyAmbushWorker))
+    Call(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(DisablePlayerInput, FALSE)
+    Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_StoneChomp)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
-    EVT_SET(GF_ISK05_Defeated_StoneChomp, TRUE)
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_SET(GF_ISK05_Defeated_StoneChomp, TRUE)
-            EVT_SET(AF_ISK05_StoneChompDefeated, TRUE)
-            EVT_CALL(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_OPEN, SOUND_SPACE_DEFAULT)
-            EVT_THREAD
-                EVT_WAIT(5)
-                EVT_CALL(MakeLerp, 0, 65, 65, EASING_LINEAR)
-                EVT_LABEL(10)
-                EVT_CALL(UpdateLerp)
-                EVT_CALL(TranslateGroup, MODEL_g304, 0, LVar0, 0)
-                EVT_WAIT(1)
-                EVT_IF_EQ(LVar1, 1)
-                    EVT_GOTO(10)
-                EVT_END_IF
-                EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
-            EVT_END_THREAD
-            EVT_CALL(N(StoneChompFXC))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Set(GF_ISK05_Defeated_StoneChomp, TRUE)
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Set(GF_ISK05_Defeated_StoneChomp, TRUE)
+            Set(AF_ISK05_StoneChompDefeated, TRUE)
+            Call(PlaySoundAtCollider, COLLIDER_deilittw, SOUND_ISK_DOOR_OPEN, SOUND_SPACE_DEFAULT)
+            Thread
+                Wait(5)
+                Call(MakeLerp, 0, 65, 65, EASING_LINEAR)
+                Label(10)
+                Call(UpdateLerp)
+                Call(TranslateGroup, MODEL_g304, 0, LVar0, 0)
+                Wait(1)
+                IfEq(LVar1, 1)
+                    Goto(10)
+                EndIf
+                Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
+            EndThread
+            Call(N(StoneChompFXC))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_StoneChomp) = {
-    EVT_IF_EQ(GF_ISK05_Defeated_StoneChomp, TRUE)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_StoneChomp)))
-    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(EVS_NpcDefeat_StoneChomp_Override)))
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    IfEq(GF_ISK05_Defeated_StoneChomp, TRUE)
+        Call(RemoveNpc, NPC_SELF)
+        Return
+    EndIf
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_StoneChomp)))
+    Call(BindNpcDefeat, NPC_SELF, Ref(N(EVS_NpcDefeat_StoneChomp_Override)))
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 NpcData N(NpcData_StoneChomp) = {

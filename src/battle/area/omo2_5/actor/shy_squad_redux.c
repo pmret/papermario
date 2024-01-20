@@ -55,8 +55,8 @@ enum N(ActorPartIDs) {
 #define NUM_MEMBERS (1 + PRT_MEMBER_15 - PRT_MEMBER_01)
 
 #define LOOP_MEMBERS(idx) \
-    EVT_SET(idx, PRT_MEMBER_01) \
-    EVT_LOOP(NUM_MEMBERS)
+    Set(idx, PRT_MEMBER_01) \
+    Loop(NUM_MEMBERS)
 
 enum N(ActorVars) {
     AVAR_NumDefeated        = 3,
@@ -332,922 +332,922 @@ s32 N(BrightAnims)[] = {
 };
 
 EvtScript N(EVS_Init) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindHandlePhase, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NumDefeated, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FleeState, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_X, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_X, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_Z, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_Z, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_X, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_X, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_Z, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_Z, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HOME_OFFSET_X, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HOME_OFFSET_Z, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HOME_OFFSET_X, 50)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HOME_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HOME_OFFSET_X, 50)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HOME_OFFSET_Z, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HOME_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HOME_OFFSET_Z, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HOME_OFFSET_X, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HOME_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HOME_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HOME_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HOME_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HIT_OFFSET_X, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HIT_OFFSET_Z, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HIT_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HIT_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HIT_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HIT_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HIT_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HIT_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HIT_OFFSET_X, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HIT_OFFSET_Z, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HIT_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HIT_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HIT_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HIT_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HIT_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HIT_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HIT_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HIT_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HIT_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HIT_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HIT_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HIT_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HIT_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HIT_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HIT_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HIT_OFFSET_Z, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HIT_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HIT_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HIT_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HIT_OFFSET_Z, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_X, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, SWARM_OFFSET_X, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, SWARM_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, SWARM_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, SWARM_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, SWARM_OFFSET_X, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, SWARM_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, SWARM_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, SWARM_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, SWARM_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, SWARM_OFFSET_Z, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, SWARM_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, SWARM_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, SWARM_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, SWARM_OFFSET_Z, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, SWARM_OFFSET_X, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, SWARM_OFFSET_Z, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, SWARM_OFFSET_X, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, SWARM_OFFSET_Z, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, SWARM_OFFSET_X, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, SWARM_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, SWARM_OFFSET_X, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, SWARM_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, SWARM_OFFSET_X, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, SWARM_OFFSET_Z, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, SWARM_OFFSET_X, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, SWARM_OFFSET_Z, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, SWARM_OFFSET_X, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, SWARM_OFFSET_Z, 0)
+    Call(BindTakeTurn, ACTOR_SELF, Ref(N(EVS_TakeTurn)))
+    Call(BindIdle, ACTOR_SELF, Ref(N(EVS_Idle)))
+    Call(BindHandleEvent, ACTOR_SELF, Ref(N(EVS_HandleEvent)))
+    Call(BindHandlePhase, ACTOR_SELF, Ref(N(EVS_HandlePhase)))
+    Call(SetActorVar, ACTOR_SELF, AVAR_NumDefeated, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, 0)
+    Call(SetActorVar, ACTOR_SELF, AVAR_FleeState, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_X, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HOME_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_X, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HOME_OFFSET_Z, -40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HOME_OFFSET_Z, 40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_X, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HOME_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_X, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HOME_OFFSET_Z, -40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HOME_OFFSET_Z, 40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HOME_OFFSET_X, 40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HOME_OFFSET_Z, 40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HOME_OFFSET_X, 50)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HOME_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HOME_OFFSET_X, 50)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HOME_OFFSET_Z, -40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HOME_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HOME_OFFSET_Z, -40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HOME_OFFSET_X, 40)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HOME_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HOME_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HOME_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HOME_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HIT_OFFSET_X, -30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, HIT_OFFSET_Z, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HIT_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, HIT_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HIT_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, HIT_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HIT_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, HIT_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HIT_OFFSET_X, -30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, HIT_OFFSET_Z, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HIT_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, HIT_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HIT_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, HIT_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HIT_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, HIT_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HIT_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, HIT_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HIT_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, HIT_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HIT_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, HIT_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HIT_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, HIT_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HIT_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, HIT_OFFSET_Z, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HIT_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, HIT_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HIT_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, HIT_OFFSET_Z, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_X, -30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, SWARM_OFFSET_X, -30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_02, SWARM_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, SWARM_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_03, SWARM_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, SWARM_OFFSET_X, 30)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_04, SWARM_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, SWARM_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_05, SWARM_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, SWARM_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_06, SWARM_OFFSET_Z, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, SWARM_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_07, SWARM_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, SWARM_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_08, SWARM_OFFSET_Z, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, SWARM_OFFSET_X, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_09, SWARM_OFFSET_Z, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, SWARM_OFFSET_X, -20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_10, SWARM_OFFSET_Z, 0)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, SWARM_OFFSET_X, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_11, SWARM_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, SWARM_OFFSET_X, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_12, SWARM_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, SWARM_OFFSET_X, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_13, SWARM_OFFSET_Z, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, SWARM_OFFSET_X, -10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_14, SWARM_OFFSET_Z, 10)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, SWARM_OFFSET_X, 20)
+    Call(SetPartMovementVar, ACTOR_SELF, PRT_MEMBER_15, SWARM_OFFSET_Z, 0)
     LOOP_MEMBERS(LVar0)
-        EVT_CALL(SetPartPos, ACTOR_SELF, LVar0, 185, 0, 47)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(ForceHomePos, ACTOR_SELF, 20, 0, -10)
-    EVT_CALL(HPBarToHome, ACTOR_SELF)
+        Call(SetPartPos, ACTOR_SELF, LVar0, 185, 0, 47)
+        Add(LVar0, 1)
+    EndLoop
+    Call(ForceHomePos, ACTOR_SELF, 20, 0, -10)
+    Call(HPBarToHome, ACTOR_SELF)
     LOOP_MEMBERS(LVar0)
-        EVT_CALL(CreatePartShadow, ACTOR_SELF, LVar0)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_SET(LVar0, PRT_MEMBER_01)
-    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
-    EVT_SET(LVar2, 55)
-    EVT_SET(LVar3, 47)
-    EVT_SET(LVar4, EVT_FLOAT(4.0))
-    EVT_SET(LVar5, 30)
-    EVT_SET(LVarF, 0)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_THREAD
-            EVT_WAIT(LVarF)
-            EVT_EXEC_WAIT(N(EVS_MoveMemberToPos))
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_X, LVar2)
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_Z, LVar3)
-            EVT_SET(LVar5, 20)
-            EVT_EXEC_WAIT(N(EVS_MoveMemberToPos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 1)
-        EVT_ADD(LVarF, 5)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+        Call(CreatePartShadow, ACTOR_SELF, LVar0)
+        Add(LVar0, 1)
+    EndLoop
+    Set(LVar0, PRT_MEMBER_01)
+    Set(LVar1, ANIM_TankGuy_Anim03)
+    Set(LVar2, 55)
+    Set(LVar3, 47)
+    Set(LVar4, Float(4.0))
+    Set(LVar5, 30)
+    Set(LVarF, 0)
+    Loop(NUM_MEMBERS)
+        Thread
+            Wait(LVarF)
+            ExecWait(N(EVS_MoveMemberToPos))
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_X, LVar2)
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, HOME_OFFSET_Z, LVar3)
+            Set(LVar5, 20)
+            ExecWait(N(EVS_MoveMemberToPos))
+            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
+        EndThread
+        Add(LVar0, 1)
+        Add(LVarF, 5)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_HandlePhase) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 EvtScript N(EVS_Idle) = {
-    EVT_LABEL(0)
-        EVT_CALL(GetCurrentPartnerID, LVar0)
-        EVT_IF_EQ(LVar0, PARTNER_WATT)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BrightAnims)))
+    Label(0)
+        Call(GetCurrentPartnerID, LVar0)
+        IfEq(LVar0, PARTNER_WATT)
+            Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(BrightAnims)))
             LOOP_MEMBERS(LVar0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVar0, EVT_PTR(N(BrightAnims)))
-                EVT_ADD(LVar0, 1)
-            EVT_END_LOOP
-        EVT_ELSE
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DarkAnims)))
+                Call(SetIdleAnimations, ACTOR_SELF, LVar0, Ref(N(BrightAnims)))
+                Add(LVar0, 1)
+            EndLoop
+        Else
+            Call(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, Ref(N(DarkAnims)))
             LOOP_MEMBERS(LVar0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVar0, EVT_PTR(N(DarkAnims)))
-                EVT_ADD(LVar0, 1)
-            EVT_END_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+                Call(SetIdleAnimations, ACTOR_SELF, LVar0, Ref(N(DarkAnims)))
+                Add(LVar0, 1)
+            EndLoop
+        EndIf
+        Wait(1)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_MoveMemberToPos) = {
-    EVT_SET(LVarA, 2)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVarB)
-    EVT_ADD(LVarA, LVarB)
-    EVT_IF_LT(LVar0, LVarA)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar6, 0, LVar7)
-    EVT_IF_LT(LVar6, LVar2)
-        EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 180)
-    EVT_ELSE
-        EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 0)
-    EVT_END_IF
-    EVT_CALL(GetDist2D, LVar9, LVar6, LVar7, LVar2, LVar3)
-    EVT_IF_GE(LVar9, LVar4)
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-        EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, LVar0, LVar4)
-        EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, LVar2, 0, LVar3, LVar5)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(LVarA, 2)
+    Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVarB)
+    Add(LVarA, LVarB)
+    IfLt(LVar0, LVarA)
+        Return
+    EndIf
+    Call(GetPartOffset, ACTOR_SELF, LVar0, LVar6, 0, LVar7)
+    IfLt(LVar6, LVar2)
+        Call(SetPartYaw, ACTOR_SELF, LVar0, 180)
+    Else
+        Call(SetPartYaw, ACTOR_SELF, LVar0, 0)
+    EndIf
+    Call(GetDist2D, LVar9, LVar6, LVar7, LVar2, LVar3)
+    IfGe(LVar9, LVar4)
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+        Call(SetPartMoveSpeed, ACTOR_SELF, LVar0, LVar4)
+        Call(RunPartTo, ACTOR_SELF, LVar0, LVar2, 0, LVar3, LVar5)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_HitReaction) = {
-    EVT_SET_CONST(LVar0, PRT_MEMBER_01)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVarD)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVarE)
-        EVT_ADD(LVarD, 2)
-        EVT_ADD(LVarD, LVarE)
-        EVT_IF_GE(LVar0, LVarD)
-            EVT_THREAD
-                EVT_EXEC_WAIT(N(EVS_MemberHitReaction))
-            EVT_END_THREAD
-        EVT_END_IF
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_WAIT(30)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MEMBER_01)
+    Loop(NUM_MEMBERS)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVarD)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVarE)
+        Add(LVarD, 2)
+        Add(LVarD, LVarE)
+        IfGe(LVar0, LVarD)
+            Thread
+                ExecWait(N(EVS_MemberHitReaction))
+            EndThread
+        EndIf
+        Add(LVar0, 1)
+    EndLoop
+    Wait(30)
+    Return
+    End
 };
 
 EvtScript N(EVS_MemberHitReaction) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_SET(LVar2, LVar0)
-    EVT_CALL(GetDamageIntensity)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 8, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(4)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-            EVT_WAIT(10)
-        EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 20, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 22, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 7, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(6)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-            EVT_WAIT(10)
-        EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 6, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 22, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 12, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 25, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 12, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 17, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(6)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-            EVT_WAIT(10)
-        EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 8, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 24, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 28, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 19, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(6)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 2, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-            EVT_WAIT(10)
-        EVT_CASE_EQ(DAMAGE_INTENSITY_UNUSED)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 28, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 16, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 32, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 16, 0)
-            EVT_WAIT(1)
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 21, 0)
-            EVT_WAIT(1)
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 16, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(6)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 7, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_LOOP(2)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
-                EVT_WAIT(1)
-                EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-            EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
-            EVT_WAIT(10)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+    Set(LVar2, LVar0)
+    Call(GetDamageIntensity)
+    Switch(LVar0)
+        CaseEq(DAMAGE_INTENSITY_LIGHT)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 8, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
+            Wait(1)
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(4)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+            Wait(10)
+        CaseEq(DAMAGE_INTENSITY_MEDIUM)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 20, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 22, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
+            Wait(1)
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 7, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(6)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+            Wait(10)
+        CaseEq(DAMAGE_INTENSITY_HEAVY)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 6, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 22, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 12, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 25, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 12, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 17, 0)
+            Wait(1)
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(6)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+            Wait(10)
+        CaseEq(DAMAGE_INTENSITY_EXTREME)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 8, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 24, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 28, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 19, 0)
+            Wait(1)
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 14, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(6)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 2, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+            Wait(10)
+        CaseEq(DAMAGE_INTENSITY_UNUSED)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 28, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 16, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 32, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 16, 0)
+            Wait(1)
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 21, 0)
+            Wait(1)
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 16, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(6)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 7, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Loop(2)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
+                Wait(1)
+                Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+                Wait(1)
+            EndLoop
+            Call(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
+            Wait(10)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_Shock) = {
-    EVT_SET_CONST(LVar0, PRT_MEMBER_01)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVarD)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVarE)
-        EVT_ADD(LVarD, 2)
-        EVT_ADD(LVarD, LVarE)
-        EVT_IF_GE(LVar0, LVarD)
-            EVT_THREAD
-                EVT_EXEC_WAIT(N(EVS_MemberShockReaction))
-            EVT_END_THREAD
-        EVT_END_IF
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MEMBER_01)
+    Loop(NUM_MEMBERS)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVarD)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVarE)
+        Add(LVarD, 2)
+        Add(LVarD, LVarE)
+        IfGe(LVar0, LVarD)
+            Thread
+                ExecWait(N(EVS_MemberShockReaction))
+            EndThread
+        EndIf
+        Add(LVar0, 1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_MemberShockReaction) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
-    EVT_CALL(GetActorSize, ACTOR_SELF, LVar4, LVar5)
-    EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar1, LVar2, LVar3, LVar5, LVar4, 0)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 1, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 4, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 16, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 8, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 20, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 8, 0)
-    EVT_WAIT(1)
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 12, 0)
-    EVT_WAIT(1)
-    EVT_LOOP(2)
-        EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 6, 0)
-        EVT_WAIT(1)
-        EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_LOOP(6)
-        EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 2, 0)
-        EVT_WAIT(1)
-        EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
-    EVT_WAIT(10)
-    EVT_RETURN
-    EVT_END
+    Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+    Call(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
+    Call(GetActorSize, ACTOR_SELF, LVar4, LVar5)
+    PlayEffect(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar1, LVar2, LVar3, LVar5, LVar4, 0)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 1, 0)
+    Wait(1)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 4, 0)
+    Wait(1)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 16, 0)
+    Wait(1)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 8, 0)
+    Wait(1)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 20, 0)
+    Wait(1)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 8, 0)
+    Wait(1)
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 12, 0)
+    Wait(1)
+    Loop(2)
+        Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 6, 0)
+        Wait(1)
+        Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
+        Wait(1)
+    EndLoop
+    Loop(6)
+        Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 2, 0)
+        Wait(1)
+        Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
+        Wait(1)
+    EndLoop
+    Call(SetPartDispOffset, ACTOR_SELF, LVar0, 0, 0, 0)
+    Wait(10)
+    Return
+    End
 };
 
 EvtScript N(EVS_HandleEvent) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
-        EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
-        EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_HitReaction))
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_HitReaction))
-            EVT_WAIT(10)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_Death))
-            EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_BURN_HIT)
-        EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim05)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(GetLastEvent, ACTOR_SELF, LVar0)
+    Switch(LVar0)
+        CaseEq(EVENT_BEGIN_FIRST_STRIKE)
+        CaseOrEq(EVENT_HIT_COMBO)
+        CaseOrEq(EVENT_HIT)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_ReduceCrowdSize))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_HitReaction))
+        EndCaseGroup
+        CaseEq(EVENT_DEATH)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_ReduceCrowdSize))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_HitReaction))
+            Wait(10)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_Death))
+            Return
+        CaseOrEq(EVENT_BURN_HIT)
+        CaseOrEq(EVENT_BURN_DEATH)
+            SetConst(LVar1, ANIM_TankGuy_Anim05)
+            ExecWait(N(EVS_ReduceCrowdSize))
             LOOP_MEMBERS(LVar0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
-                EVT_ADD(LVar0, 1)
-            EVT_END_LOOP
-            EVT_WAIT(20)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
+                Add(LVar0, 1)
+            EndLoop
+            Wait(20)
             LOOP_MEMBERS(LVar0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
-                EVT_ADD(LVar0, 1)
-            EVT_END_LOOP
-            EVT_WAIT(15)
-            EVT_IF_EQ(LVar0, 36)
-                EVT_WAIT(10)
-                EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim05)
-                EVT_EXEC_WAIT(N(EVS_Death))
-                EVT_RETURN
-            EVT_END_IF
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_HitReaction))
-        EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_HitReaction))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_Death))
-            EVT_RETURN
-        EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_Shock))
-            EVT_WAIT(40)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 20)
-            EVT_EXEC_WAIT(N(EVS_MoveSquadHome))
-        EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_ReduceCrowdSize))
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_Shock))
-            EVT_WAIT(40)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_Death))
-            EVT_RETURN
-        EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
-        EVT_CASE_OR_EQ(EVENT_IMMUNE)
-        EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
-            EVT_EXEC_WAIT(N(EVS_HitReaction))
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(N(EVS_SetMembersAnimation))
-            EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
-            EVT_EXEC_WAIT(N(EVS_HitReaction))
-        EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(HPBarToHome, ACTOR_SELF)
-        EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
-            EVT_EXEC_WAIT(EVS_Enemy_Recover)
-        EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
-            EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_WAIT(1000)
-        EVT_CASE_EQ(EVENT_SCARE_AWAY)
-        EVT_CASE_DEFAULT
-    EVT_END_SWITCH
-    EVT_SET(LVar1, ANIM_TankGuy_Anim01)
-    EVT_EXEC_WAIT(N(EVS_SetMembersAnimation))
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim05)
+                Add(LVar0, 1)
+            EndLoop
+            Wait(15)
+            IfEq(LVar0, 36)
+                Wait(10)
+                SetConst(LVar1, ANIM_TankGuy_Anim05)
+                ExecWait(N(EVS_Death))
+                Return
+            EndIf
+        EndCaseGroup
+        CaseEq(EVENT_SPIN_SMASH_HIT)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_ReduceCrowdSize))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_HitReaction))
+        CaseEq(EVENT_SPIN_SMASH_DEATH)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_ReduceCrowdSize))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_HitReaction))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_Death))
+            Return
+        CaseEq(EVENT_SHOCK_HIT)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_ReduceCrowdSize))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_Shock))
+            Wait(40)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 20)
+            ExecWait(N(EVS_MoveSquadHome))
+        CaseEq(EVENT_SHOCK_DEATH)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_ReduceCrowdSize))
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_Shock))
+            Wait(40)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_Death))
+            Return
+        CaseOrEq(EVENT_ZERO_DAMAGE)
+        CaseOrEq(EVENT_IMMUNE)
+        CaseOrEq(EVENT_SPIKE_TAUNT)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_TankGuy_Anim01)
+            ExecWait(N(EVS_HitReaction))
+        EndCaseGroup
+        CaseEq(EVENT_BEGIN_AIR_LIFT)
+            Set(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(N(EVS_SetMembersAnimation))
+            Wait(1000)
+        CaseEq(EVENT_AIR_LIFT_FAILED)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_TankGuy_Anim01)
+            ExecWait(N(EVS_HitReaction))
+        CaseEq(EVENT_END_FIRST_STRIKE)
+            Call(SetActorSpeed, ACTOR_SELF, Float(4.0))
+            Call(HPBarToHome, ACTOR_SELF)
+        CaseEq(EVENT_RECOVER_STATUS)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_TankGuy_Anim01)
+            ExecWait(EVS_Enemy_Recover)
+        CaseEq(EVENT_30)
+            SetConst(LVar0, PRT_MAIN)
+            SetConst(LVar1, ANIM_TankGuy_Anim04)
+            ExecWait(EVS_Enemy_Hit)
+            Wait(1000)
+        CaseEq(EVENT_SCARE_AWAY)
+        CaseDefault
+    EndSwitch
+    Set(LVar1, ANIM_TankGuy_Anim01)
+    ExecWait(N(EVS_SetMembersAnimation))
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_ReduceCrowdSize) = {
-    EVT_SET(LVar1, LVar1)
-    EVT_EXEC_WAIT(N(EVS_SetMembersAnimation))
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
-    EVT_CALL(GetLastDamage, ACTOR_SELF, LVar1)
-    EVT_ADD(LVar0, LVar1)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
-    EVT_LABEL(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar1)
-        EVT_IF_GE(LVar1, 15)
-            EVT_RETURN
-        EVT_END_IF
-        EVT_SET(LVar0, PRT_MEMBER_01)
-        EVT_ADD(LVar0, LVar1)
-        EVT_IF_NE(LVar0, NUM_MEMBERS + 1)
-            EVT_THREAD
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_NO_STATUS_ANIMS, TRUE)
-                EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
-                EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, HIT_OFFSET_X, LVar7)
-                EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, HIT_OFFSET_Z, LVar8)
-                EVT_ADD(LVar1, LVar7)
-                EVT_ADD(LVar3, LVar8)
-                EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar0, EVT_FLOAT(0.5))
-                EVT_CALL(JumpPartTo, ACTOR_SELF, LVar0, LVar1, 0, LVar3, 15, TRUE)
-                EVT_CALL(GetDamageSource, LVar5)
-                EVT_SWITCH(LVar5)
-                    EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_LEFT)
-                    EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_LEFT)
-                    EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_LEFT)
-                    EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_LEFT)
-                    EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_RIGHT)
-                    EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_RIGHT)
-                    EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_RIGHT)
-                    EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
-                    EVT_CASE_OR_EQ(DMG_SRC_SPIN_SMASH)
-                    EVT_END_CASE_GROUP
-                    EVT_CASE_DEFAULT
-                        EVT_SET(LVar7, 0)
-                        EVT_LOOP(24)
-                            EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, 0, LVar7, 0)
-                            EVT_ADD(LVar7, 30)
-                            EVT_WAIT(1)
-                        EVT_END_LOOP
-                EVT_END_SWITCH
-                EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
-                EVT_SET(LVar8, 0)
-                EVT_LOOP(12)
-                    EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, LVar8, 0, 0)
-                    EVT_ADD(LVar8, 8)
-                    EVT_WAIT(1)
-                EVT_END_LOOP
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-                EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
-            EVT_END_THREAD
-        EVT_END_IF
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
-        EVT_SUB(LVar0, 1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
-        EVT_ADD(LVar0, 1)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar1, LVar1)
+    ExecWait(N(EVS_SetMembersAnimation))
+    Call(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
+    Call(GetLastDamage, ACTOR_SELF, LVar1)
+    Add(LVar0, LVar1)
+    Call(SetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
+    Label(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
+        IfEq(LVar0, 0)
+            Return
+        EndIf
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar1)
+        IfGe(LVar1, 15)
+            Return
+        EndIf
+        Set(LVar0, PRT_MEMBER_01)
+        Add(LVar0, LVar1)
+        IfNe(LVar0, NUM_MEMBERS + 1)
+            Thread
+                Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_NO_STATUS_ANIMS, TRUE)
+                Call(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
+                Call(GetPartMovementVar, ACTOR_SELF, LVar0, HIT_OFFSET_X, LVar7)
+                Call(GetPartMovementVar, ACTOR_SELF, LVar0, HIT_OFFSET_Z, LVar8)
+                Add(LVar1, LVar7)
+                Add(LVar3, LVar8)
+                Call(SetPartJumpGravity, ACTOR_SELF, LVar0, Float(0.5))
+                Call(JumpPartTo, ACTOR_SELF, LVar0, LVar1, 0, LVar3, 15, TRUE)
+                Call(GetDamageSource, LVar5)
+                Switch(LVar5)
+                    CaseOrEq(DMG_SRC_NEXT_SLAP_LEFT)
+                    CaseOrEq(DMG_SRC_NEXT_FAN_SMACK_LEFT)
+                    CaseOrEq(DMG_SRC_LAST_SLAP_LEFT)
+                    CaseOrEq(DMG_SRC_LAST_FAN_SMACK_LEFT)
+                    CaseOrEq(DMG_SRC_NEXT_SLAP_RIGHT)
+                    CaseOrEq(DMG_SRC_NEXT_FAN_SMACK_RIGHT)
+                    CaseOrEq(DMG_SRC_LAST_SLAP_RIGHT)
+                    CaseOrEq(DMG_SRC_LAST_FAN_SMACK_RIGHT)
+                    CaseOrEq(DMG_SRC_SPIN_SMASH)
+                    EndCaseGroup
+                    CaseDefault
+                        Set(LVar7, 0)
+                        Loop(24)
+                            Call(SetPartRotation, ACTOR_SELF, LVar0, 0, LVar7, 0)
+                            Add(LVar7, 30)
+                            Wait(1)
+                        EndLoop
+                EndSwitch
+                PlayEffect(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
+                Set(LVar8, 0)
+                Loop(12)
+                    Call(SetPartRotation, ACTOR_SELF, LVar0, LVar8, 0, 0)
+                    Add(LVar8, 8)
+                    Wait(1)
+                EndLoop
+                Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+                Call(RemovePartShadow, ACTOR_SELF, LVar0)
+            EndThread
+        EndIf
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
+        Sub(LVar0, 1)
+        Call(SetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
+        Add(LVar0, 1)
+        Call(SetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_SetMembersAnimation) = {
-    EVT_SET(LVar2, PRT_MEMBER_01)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar2, LVar1)
-        EVT_ELSE
-            EVT_SUB(LVar0, 1)
-        EVT_END_IF
-        EVT_ADD(LVar2, 1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar2, PRT_MEMBER_01)
+    Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
+    Loop(NUM_MEMBERS)
+        IfEq(LVar0, 0)
+            Call(SetAnimation, ACTOR_SELF, LVar2, LVar1)
+        Else
+            Sub(LVar0, 1)
+        EndIf
+        Add(LVar2, 1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_DefeatMember) = {
-    EVT_IF_NE(LVar1, -1)
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-        EVT_WAIT(10)
-    EVT_END_IF
-    EVT_CALL(GetDamageSource, LVar5)
-    EVT_SWITCH(LVar5)
-        EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_LEFT)
-        EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_LEFT)
-        EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_LEFT)
-        EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_LEFT)
-        EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_RIGHT)
-        EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_RIGHT)
-        EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_RIGHT)
-        EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
-        EVT_CASE_OR_EQ(DMG_SRC_SPIN_SMASH)
-        EVT_END_CASE_GROUP
-        EVT_CASE_DEFAULT
-            EVT_SET(LVar2, 0)
-            EVT_LOOP(24)
-                EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, 0, LVar2, 0)
-                EVT_ADD(LVar2, 30)
-                EVT_WAIT(1)
-            EVT_END_LOOP
-    EVT_END_SWITCH
-    EVT_SET(LVar3, 0)
-    EVT_LOOP(12)
-        EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, LVar3, 0, 0)
-        EVT_ADD(LVar3, 8)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
-    EVT_RETURN
-    EVT_END
+    IfNe(LVar1, -1)
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+        Wait(10)
+    EndIf
+    Call(GetDamageSource, LVar5)
+    Switch(LVar5)
+        CaseOrEq(DMG_SRC_NEXT_SLAP_LEFT)
+        CaseOrEq(DMG_SRC_NEXT_FAN_SMACK_LEFT)
+        CaseOrEq(DMG_SRC_LAST_SLAP_LEFT)
+        CaseOrEq(DMG_SRC_LAST_FAN_SMACK_LEFT)
+        CaseOrEq(DMG_SRC_NEXT_SLAP_RIGHT)
+        CaseOrEq(DMG_SRC_NEXT_FAN_SMACK_RIGHT)
+        CaseOrEq(DMG_SRC_LAST_SLAP_RIGHT)
+        CaseOrEq(DMG_SRC_LAST_FAN_SMACK_RIGHT)
+        CaseOrEq(DMG_SRC_SPIN_SMASH)
+        EndCaseGroup
+        CaseDefault
+            Set(LVar2, 0)
+            Loop(24)
+                Call(SetPartRotation, ACTOR_SELF, LVar0, 0, LVar2, 0)
+                Add(LVar2, 30)
+                Wait(1)
+            EndLoop
+    EndSwitch
+    Set(LVar3, 0)
+    Loop(12)
+        Call(SetPartRotation, ACTOR_SELF, LVar0, LVar3, 0, 0)
+        Add(LVar3, 8)
+        Wait(1)
+    EndLoop
+    Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(RemovePartShadow, ACTOR_SELF, LVar0)
+    Return
+    End
 };
 
 EvtScript N(EVS_Death) = {
-    EVT_SET_CONST(LVar0, PRT_MEMBER_01)
-    EVT_LOOP(NUM_MEMBERS - 1)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar2)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar3)
-        EVT_ADD(LVar2, 2)
-        EVT_ADD(LVar2, LVar3)
-        EVT_IF_GE(LVar0, LVar2)
-            EVT_THREAD
-                EVT_EXEC_WAIT(N(EVS_DefeatMember))
-            EVT_END_THREAD
-        EVT_END_IF
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_SET(LVar0, 16)
-    EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_SET(LVar2, 0)
-    EVT_LOOP(24)
-        EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, 0, LVar2, 0)
-        EVT_ADD(LVar2, 30)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
-    EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
-    EVT_CALL(DropStarPoints, ACTOR_SELF)
-    EVT_SET(LVar3, 0)
-    EVT_LOOP(12)
-        EVT_CALL(SetPartRotation, ACTOR_SELF, LVar0, LVar3, 0, 0)
-        EVT_ADD(LVar3, 8)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(RemovePartShadow, ACTOR_SELF, LVar0)
-    EVT_WAIT(30)
-    EVT_EXEC_WAIT(N(EVS_NotifyNextWave))
-    EVT_CALL(RemoveActor, ACTOR_SELF)
-    EVT_RETURN
-    EVT_END
+    SetConst(LVar0, PRT_MEMBER_01)
+    Loop(NUM_MEMBERS - 1)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar2)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumPendingDefeat, LVar3)
+        Add(LVar2, 2)
+        Add(LVar2, LVar3)
+        IfGe(LVar0, LVar2)
+            Thread
+                ExecWait(N(EVS_DefeatMember))
+            EndThread
+        EndIf
+        Add(LVar0, 1)
+    EndLoop
+    Set(LVar0, 16)
+    Call(SetAnimation, ACTOR_SELF, LVar0, LVar1)
+    Set(LVar2, 0)
+    Loop(24)
+        Call(SetPartRotation, ACTOR_SELF, LVar0, 0, LVar2, 0)
+        Add(LVar2, 30)
+        Wait(1)
+    EndLoop
+    Call(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
+    PlayEffect(EFFECT_BIG_SMOKE_PUFF, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0)
+    Call(DropStarPoints, ACTOR_SELF)
+    Set(LVar3, 0)
+    Loop(12)
+        Call(SetPartRotation, ACTOR_SELF, LVar0, LVar3, 0, 0)
+        Add(LVar3, 8)
+        Wait(1)
+    EndLoop
+    Call(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    Call(RemovePartShadow, ACTOR_SELF, LVar0)
+    Wait(30)
+    ExecWait(N(EVS_NotifyNextWave))
+    Call(RemoveActor, ACTOR_SELF)
+    Return
+    End
 };
 
 EvtScript N(EVS_TakeTurn) = {
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_IF_EQ(LVar0, PARTNER_WATT)
-        EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
-        EVT_CALL(GetActorHP, ACTOR_SELF, LVar1)
-        EVT_IF_EQ(LVar0, LVar1)
-            EVT_EXEC_WAIT(N(EVS_Attack_Swarm))
-        EVT_ELSE
-            EVT_EXEC_WAIT(N(EVS_Flee))
-            EVT_EXEC_WAIT(N(EVS_NotifyNextWave))
-            EVT_CALL(RemoveActor, ACTOR_SELF)
-            EVT_RETURN
-        EVT_END_IF
-    EVT_ELSE
-        EVT_EXEC_WAIT(N(EVS_Attack_Swarm))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(GetCurrentPartnerID, LVar0)
+    IfEq(LVar0, PARTNER_WATT)
+        Call(GetEnemyMaxHP, ACTOR_SELF, LVar0)
+        Call(GetActorHP, ACTOR_SELF, LVar1)
+        IfEq(LVar0, LVar1)
+            ExecWait(N(EVS_Attack_Swarm))
+        Else
+            ExecWait(N(EVS_Flee))
+            ExecWait(N(EVS_NotifyNextWave))
+            Call(RemoveActor, ACTOR_SELF)
+            Return
+        EndIf
+    Else
+        ExecWait(N(EVS_Attack_Swarm))
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NotifyNextWave) = {
-    EVT_CALL(FreezeBattleState, TRUE)
-    EVT_CALL(SetActorVar, ACTOR_TANK, AVAR_Tank_UnusedPhase, AVAL_UnusedPhase_Defeated)
-    EVT_RETURN
-    EVT_END
+    Call(FreezeBattleState, TRUE)
+    Call(SetActorVar, ACTOR_TANK, AVAR_Tank_UnusedPhase, AVAL_UnusedPhase_Defeated)
+    Return
+    End
 };
 
 EvtScript N(EVS_Flee) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Init)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 40)
-    EVT_SET(LVar0, PRT_MEMBER_01)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar2)
-        EVT_ADD(LVar2, PRT_MEMBER_01)
-        EVT_IF_GE(LVar0, LVar2)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Looping)
-            EVT_THREAD
-                EVT_WAIT(LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim03)
-                EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 180)
-                EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, 55, 0, 47, 20)
-                EVT_CALL(RunPartTo, ACTOR_SELF, LVar0, 185, 0, 47, 30)
-                EVT_IF_EQ(LVar0, PRT_MEMBER_15)
-                    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Done)
-                EVT_END_IF
-            EVT_END_THREAD
-            EVT_ADD(LVar1, 5)
-        EVT_END_IF
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
+    Call(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Init)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 40)
+    Set(LVar0, PRT_MEMBER_01)
+    Set(LVar1, 0)
+    Loop(NUM_MEMBERS)
+        Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar2)
+        Add(LVar2, PRT_MEMBER_01)
+        IfGe(LVar0, LVar2)
+            Call(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Looping)
+            Thread
+                Wait(LVar1)
+                Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim03)
+                Call(SetPartYaw, ACTOR_SELF, LVar0, 180)
+                Call(RunPartTo, ACTOR_SELF, LVar0, 55, 0, 47, 20)
+                Call(RunPartTo, ACTOR_SELF, LVar0, 185, 0, 47, 30)
+                IfEq(LVar0, PRT_MEMBER_15)
+                    Call(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Done)
+                EndIf
+            EndThread
+            Add(LVar1, 5)
+        EndIf
+        Add(LVar0, 1)
+    EndLoop
     // wait for fleeing to finish
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FleeState, LVar0)
-    EVT_IF_EQ(LVar0, AVAL_Flee_Init)
-        EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Done)
-    EVT_END_IF
-    EVT_SET(LVar0, 15)
-    EVT_LOOP(0)
-        EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_FleeState, LVar0)
-        EVT_IF_EQ(LVar0, AVAL_Flee_Done)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Call(GetActorVar, ACTOR_SELF, AVAR_FleeState, LVar0)
+    IfEq(LVar0, AVAL_Flee_Init)
+        Call(SetActorVar, ACTOR_SELF, AVAR_FleeState, AVAL_Flee_Done)
+    EndIf
+    Set(LVar0, 15)
+    Loop(0)
+        Call(GetActorVar, ACTOR_SELF, AVAR_FleeState, LVar0)
+        IfEq(LVar0, AVAL_Flee_Done)
+            BreakLoop
+        EndIf
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_Attack_Swarm) = {
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
-    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
-    EVT_CALL(SetBattleCamZoom, 300)
-    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_SET(LVar0, PRT_MEMBER_01)
-    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_THREAD
-            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_X, LVar5)
-            EVT_ADD(LVar2, LVar5)
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_Z, LVar5)
-            EVT_ADD(LVar3, LVar5)
-            EVT_SETF(LVar4, EVT_FLOAT(6.0))
-            EVT_SET(LVar5, 30)
-            EVT_EXEC_WAIT(N(EVS_MoveMemberToPos))
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_X, LVar5)
-    EVT_ADD(LVar2, LVar5)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_Z, LVar5)
-    EVT_ADD(LVar3, LVar5)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, 0, LVar3)
-    EVT_CALL(RunToGoal, ACTOR_SELF, 30, FALSE)
+    Call(UseIdleAnimation, ACTOR_SELF, FALSE)
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
+    Call(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    Call(SetGoalToTarget, ACTOR_SELF)
+    Call(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
+    Call(SetBattleCamZoom, 300)
+    Call(BattleCamTargetActor, ACTOR_SELF)
+    Call(MoveBattleCamOver, 30)
+    Set(LVar0, PRT_MEMBER_01)
+    Set(LVar1, ANIM_TankGuy_Anim03)
+    Loop(NUM_MEMBERS)
+        Thread
+            Call(GetActorPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_X, LVar5)
+            Add(LVar2, LVar5)
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_Z, LVar5)
+            Add(LVar3, LVar5)
+            SetF(LVar4, Float(6.0))
+            Set(LVar5, 30)
+            ExecWait(N(EVS_MoveMemberToPos))
+        EndThread
+        Add(LVar0, 1)
+    EndLoop
+    Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+    Call(GetGoalPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
+    Call(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_X, LVar5)
+    Add(LVar2, LVar5)
+    Call(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_Z, LVar5)
+    Add(LVar3, LVar5)
+    Call(SetGoalPos, ACTOR_SELF, LVar2, 0, LVar3)
+    Call(RunToGoal, ACTOR_SELF, 30, FALSE)
     LOOP_MEMBERS(LVar0)
-        EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar4, LVar5, LVar6)
-        EVT_CALL(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
-        EVT_IF_LT(LVar1, LVar4)
-            EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 180)
-        EVT_ELSE
-            EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 0)
-        EVT_END_IF
-        EVT_CALL(RandInt, 100, LVar7)
-        EVT_IF_LT(LVar7, 50)
-            EVT_SET(LVar7, ANIM_TankGuy_Anim04)
-        EVT_ELSE
-            EVT_SET(LVar7, ANIM_TankGuy_Anim07)
-        EVT_END_IF
-        EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar7)
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
-    EVT_SWITCH(LVarA)
-        EVT_CASE_OR_EQ(HIT_RESULT_MISS)
-        EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
-            EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
-                EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_END_IF
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
-            EVT_IF_LT(LVar0, 14)
-                EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
-                EVT_THREAD
-                    EVT_LOOP(7)
-                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0)
-                        EVT_WAIT(2)
-                        EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
-                        EVT_WAIT(2)
-                    EVT_END_LOOP
-                EVT_END_THREAD
-            EVT_END_IF
-            EVT_WAIT(36)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(MoveBattleCamOver, 30)
-            EVT_EXEC_WAIT(N(EVS_MoveSquadHome))
-            EVT_SET(LVar1, ANIM_TankGuy_Anim01)
-            EVT_EXEC_WAIT(N(EVS_SetMembersAnimation))
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-            EVT_RETURN
-        EVT_END_CASE_GROUP
-        EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
-            EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, BS_FLAGS1_TRIGGER_EVENTS)
-    EVT_END_SWITCH
-    EVT_SET(LVarE, 15)
-    EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
-    EVT_SUB(LVarE, LVar0)
-    EVT_SET(LVarD, LVarE)
-    EVT_LOOP(LVarD)
-        EVT_IF_GT(LVarE, 1)
-            EVT_SET(LVar0, BS_FLAGS1_NICE_HIT)
-        EVT_ELSE
-            EVT_SET(LVar0, BS_FLAGS1_TRIGGER_EVENTS)
-        EVT_END_IF
-        EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, LVar0)
-        EVT_THREAD
-            EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 0, LVar1, LVar2, LVar3, 0, 0)
-            EVT_WAIT(2)
-            EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0, 0)
-            EVT_WAIT(2)
-        EVT_END_THREAD
-        EVT_CALL(GetPlayerHP, LVar0)
-        EVT_IF_EQ(LVar0, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_SUB(LVarE, 1)
-        EVT_IF_EQ(LVarE, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT(10)
-    EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(MoveBattleCamOver, 30)
-    EVT_WAIT(20)
-    EVT_EXEC_WAIT(N(EVS_MoveSquadHome))
-    EVT_SET(LVar1, ANIM_TankGuy_Anim01)
-    EVT_EXEC_WAIT(N(EVS_SetMembersAnimation))
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
-    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_RETURN
-    EVT_END
+        Call(GetActorPos, ACTOR_PLAYER, LVar4, LVar5, LVar6)
+        Call(GetPartOffset, ACTOR_SELF, LVar0, LVar1, LVar2, LVar3)
+        IfLt(LVar1, LVar4)
+            Call(SetPartYaw, ACTOR_SELF, LVar0, 180)
+        Else
+            Call(SetPartYaw, ACTOR_SELF, LVar0, 0)
+        EndIf
+        Call(RandInt, 100, LVar7)
+        IfLt(LVar7, 50)
+            Set(LVar7, ANIM_TankGuy_Anim04)
+        Else
+            Set(LVar7, ANIM_TankGuy_Anim07)
+        EndIf
+        Call(SetAnimation, ACTOR_SELF, LVar0, LVar7)
+        Add(LVar0, 1)
+    EndLoop
+    Call(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_INCLUDE_POWER_UPS)
+    Switch(LVarA)
+        CaseOrEq(HIT_RESULT_MISS)
+        CaseOrEq(HIT_RESULT_LUCKY)
+            IfEq(LVarA, HIT_RESULT_LUCKY)
+                Call(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
+            EndIf
+            Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
+            IfLt(LVar0, 14)
+                Call(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
+                PlayEffect(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)
+                Thread
+                    Loop(7)
+                        PlayEffect(EFFECT_LANDING_DUST, 0, LVar0, LVar1, LVar2, 0, 0)
+                        Wait(2)
+                        PlayEffect(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)
+                        Wait(2)
+                    EndLoop
+                EndThread
+            EndIf
+            Wait(36)
+            Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+            Call(MoveBattleCamOver, 30)
+            ExecWait(N(EVS_MoveSquadHome))
+            Set(LVar1, ANIM_TankGuy_Anim01)
+            ExecWait(N(EVS_SetMembersAnimation))
+            Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+            Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+            Return
+        EndCaseGroup
+        CaseEq(HIT_RESULT_HIT_STATIC)
+            Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, BS_FLAGS1_TRIGGER_EVENTS)
+    EndSwitch
+    Set(LVarE, 15)
+    Call(GetActorVar, ACTOR_SELF, AVAR_NumDefeated, LVar0)
+    Sub(LVarE, LVar0)
+    Set(LVarD, LVarE)
+    Loop(LVarD)
+        IfGt(LVarE, 1)
+            Set(LVar0, BS_FLAGS1_NICE_HIT)
+        Else
+            Set(LVar0, BS_FLAGS1_TRIGGER_EVENTS)
+        EndIf
+        Call(SetGoalToTarget, ACTOR_SELF)
+        Call(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, DMG_SWARM, LVar0)
+        Thread
+            Call(GetActorPos, ACTOR_PLAYER, LVar1, LVar2, LVar3)
+            PlayEffect(EFFECT_LANDING_DUST, 0, LVar1, LVar2, LVar3, 0, 0)
+            Wait(2)
+            PlayEffect(EFFECT_LANDING_DUST, 1, LVar1, LVar2, LVar3, 0, 0)
+            Wait(2)
+        EndThread
+        Call(GetPlayerHP, LVar0)
+        IfEq(LVar0, 0)
+            BreakLoop
+        EndIf
+        Sub(LVarE, 1)
+        IfEq(LVarE, 0)
+            BreakLoop
+        EndIf
+        Wait(10)
+    EndLoop
+    Call(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    Call(MoveBattleCamOver, 30)
+    Wait(20)
+    ExecWait(N(EVS_MoveSquadHome))
+    Set(LVar1, ANIM_TankGuy_Anim01)
+    ExecWait(N(EVS_SetMembersAnimation))
+    Call(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
+    Call(UseIdleAnimation, ACTOR_SELF, TRUE)
+    Return
+    End
 };
 
 EvtScript N(EVS_MoveSquadHome) = {
-    EVT_SET(LVar0, PRT_MEMBER_01)
-    EVT_SET(LVar1, ANIM_TankGuy_Anim03)
-    EVT_LOOP(NUM_MEMBERS)
-        EVT_THREAD
-            EVT_CALL(SetGoalToHome, ACTOR_SELF)
-            EVT_CALL(GetGoalPos, ACTOR_SELF, LVar2, LVar5, LVar3)
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_X, LVar5)
-            EVT_ADD(LVar2, LVar5)
-            EVT_CALL(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_Z, LVar5)
-            EVT_ADD(LVar3, LVar5)
-            EVT_SETF(LVar4, EVT_FLOAT(6.0))
-            EVT_SET(LVar5, 30)
-            EVT_EXEC_WAIT(N(EVS_MoveMemberToPos))
-            EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
-            EVT_CALL(SetPartYaw, ACTOR_SELF, LVar0, 0)
-        EVT_END_THREAD
-        EVT_ADD(LVar0, 1)
-    EVT_END_LOOP
-    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(SetGoalToHome, ACTOR_SELF)
-    EVT_CALL(GetGoalPos, ACTOR_SELF, LVar2, LVar5, LVar3)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_X, LVar5)
-    EVT_ADD(LVar2, LVar5)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_Z, LVar5)
-    EVT_ADD(LVar3, LVar5)
-    EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, 0, LVar3)
-    EVT_CALL(RunToGoal, ACTOR_SELF, 30, FALSE)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, PRT_MEMBER_01)
+    Set(LVar1, ANIM_TankGuy_Anim03)
+    Loop(NUM_MEMBERS)
+        Thread
+            Call(SetGoalToHome, ACTOR_SELF)
+            Call(GetGoalPos, ACTOR_SELF, LVar2, LVar5, LVar3)
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_X, LVar5)
+            Add(LVar2, LVar5)
+            Call(GetPartMovementVar, ACTOR_SELF, LVar0, SWARM_OFFSET_Z, LVar5)
+            Add(LVar3, LVar5)
+            SetF(LVar4, Float(6.0))
+            Set(LVar5, 30)
+            ExecWait(N(EVS_MoveMemberToPos))
+            Call(SetAnimation, ACTOR_SELF, LVar0, ANIM_TankGuy_Anim01)
+            Call(SetPartYaw, ACTOR_SELF, LVar0, 0)
+        EndThread
+        Add(LVar0, 1)
+    EndLoop
+    Call(SetActorSpeed, ACTOR_SELF, Float(6.0))
+    Call(SetGoalToHome, ACTOR_SELF)
+    Call(GetGoalPos, ACTOR_SELF, LVar2, LVar5, LVar3)
+    Call(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_X, LVar5)
+    Add(LVar2, LVar5)
+    Call(GetPartMovementVar, ACTOR_SELF, PRT_MEMBER_01, SWARM_OFFSET_Z, LVar5)
+    Add(LVar3, LVar5)
+    Call(SetGoalPos, ACTOR_SELF, LVar2, 0, LVar3)
+    Call(RunToGoal, ACTOR_SELF, 30, FALSE)
+    Return
+    End
 };

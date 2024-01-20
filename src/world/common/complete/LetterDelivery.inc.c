@@ -65,146 +65,146 @@ API_CALLABLE(N(LetterDelivery_RestoreNpcAnim)) {
 }
 
 EvtScript N(EVS_LetterDelivery_CarryLetter) = {
-    EVT_LOOP(0)
-        EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-        EVT_CALL(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
-        EVT_CALL(SetItemPos, LVar0, LVar3, LVar4, LVar5)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Loop(0)
+        Call(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
+        Call(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
+        Call(SetItemPos, LVar0, LVar3, LVar4, LVar5)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_LetterDelivery_ItemPrompt) = {
-    EVT_SET(LVar9, LVar1)
-    EVT_CALL(ShowKeyChoicePopup)
-    EVT_SET(LVarA, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
-        EVT_CASE_EQ(-1)
-        EVT_CASE_DEFAULT
-            EVT_CALL(RemoveKeyItemAt, LVar1)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-            EVT_CALL(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
-            EVT_BITWISE_OR_CONST(LVar0, VIS_GROUP_5 << 16)
-            EVT_CALL(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
-            EVT_EXEC_GET_TID(N(EVS_LetterDelivery_CarryLetter), LVarA)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Walk)
-            EVT_CALL(GetAngleBetweenNPCs, LVar9, NPC_PARTNER, LVarB)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
-            EVT_CALL(GetNpcPos, LVar9, LVar6, LVar7, LVar8)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_IF_LE(LVarB, 180)
-                EVT_ADD(LVar6, 20)
-            EVT_ELSE
-                EVT_ADD(LVar6, -20)
-            EVT_END_IF
-            EVT_ADD(LVar7, 10)
-            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
-            EVT_CALL(NpcJump1, NPC_PARTNER, LVar6, LVar7, LVar8, 20)
-            EVT_KILL_THREAD(LVarA)
-            EVT_CALL(RemoveItemEntity, LVar0)
-            EVT_WAIT(20)
-            EVT_CALL(GetNpcYaw, NPC_PARTNER, LVarA)
-            EVT_ADD(LVarA, 180)
-            EVT_CALL(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
-            EVT_WAIT(5)
-            EVT_CALL(NpcJump1, NPC_PARTNER, LVar3, LVar4, LVar5, 20)
-            EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Idle)
-            EVT_CALL(NpcFaceNpc, NPC_PARTNER, LVar9, 0)
-            EVT_WAIT(5)
-            EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-            EVT_CALL(EnablePartnerAI)
-            EVT_WAIT(5)
-    EVT_END_SWITCH
-    EVT_CALL(N(ItemChoice_SaveSelected), LVarA)
-    EVT_CALL(CloseChoicePopup)
-    EVT_UNBIND
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, LVar1)
+    Call(ShowKeyChoicePopup)
+    Set(LVarA, LVar0)
+    Switch(LVar0)
+        CaseEq(0)
+        CaseEq(-1)
+        CaseDefault
+            Call(RemoveKeyItemAt, LVar1)
+            Call(DisablePartnerAI, 0)
+            Call(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
+            Call(N(LetterDelivery_CalcLetterPos), LVar3, LVar4, LVar5)
+            BitwiseOrConst(LVar0, VIS_GROUP_5 << 16)
+            Call(MakeItemEntity, LVar0, LVar3, LVar4, LVar5, ITEM_SPAWN_MODE_DECORATION, 0)
+            ExecGetTID(N(EVS_LetterDelivery_CarryLetter), LVarA)
+            Call(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Walk)
+            Call(GetAngleBetweenNPCs, LVar9, NPC_PARTNER, LVarB)
+            Call(GetNpcPos, NPC_PARTNER, LVar3, LVar4, LVar5)
+            Call(GetNpcPos, LVar9, LVar6, LVar7, LVar8)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+            IfLe(LVarB, 180)
+                Add(LVar6, 20)
+            Else
+                Add(LVar6, -20)
+            EndIf
+            Add(LVar7, 10)
+            Call(SetNpcJumpscale, NPC_PARTNER, Float(0.0))
+            Call(NpcJump1, NPC_PARTNER, LVar6, LVar7, LVar8, 20)
+            KillThread(LVarA)
+            Call(RemoveItemEntity, LVar0)
+            Wait(20)
+            Call(GetNpcYaw, NPC_PARTNER, LVarA)
+            Add(LVarA, 180)
+            Call(InterpNpcYaw, NPC_PARTNER, LVarA, 0)
+            Wait(5)
+            Call(NpcJump1, NPC_PARTNER, LVar3, LVar4, LVar5, 20)
+            Call(SetNpcAnimation, NPC_PARTNER, ANIM_WorldParakarry_Idle)
+            Call(NpcFaceNpc, NPC_PARTNER, LVar9, 0)
+            Wait(5)
+            Call(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
+            Call(EnablePartnerAI)
+            Wait(5)
+    EndSwitch
+    Call(N(ItemChoice_SaveSelected), LVarA)
+    Call(CloseChoicePopup)
+    Unbind
+    Return
+    End
 };
 
 EvtScript N(EVS_ShowLetterChoice) = {
-    EVT_SET(LVar0, LVarB)
-    EVT_SET(LVar1, LVar2)
-    EVT_CALL(N(BuildKeyItemChoiceList), LVar0)
-    EVT_BIND_PADLOCK(N(EVS_LetterDelivery_ItemPrompt), TRIGGER_FORCE_ACTIVATE, 0, EVT_PTR(N(KeyItemChoiceList)), 0, 1)
-    EVT_CALL(N(ItemChoice_WaitForSelection), LVar0)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, LVarB)
+    Set(LVar1, LVar2)
+    Call(N(BuildKeyItemChoiceList), LVar0)
+    BindPadlock(N(EVS_LetterDelivery_ItemPrompt), TRIGGER_FORCE_ACTIVATE, 0, Ref(N(KeyItemChoiceList)), 0, 1)
+    Call(N(ItemChoice_WaitForSelection), LVar0)
+    Return
+    End
 };
 
 // returns DeliveryResult on LVarC
 EvtScript N(EVS_DoLetterDelivery) = {
-    EVT_SET(LVarC, DELIVERY_NOT_POSSIBLE)
-    EVT_IF_LT(GB_StoryProgress, STORY_CH2_PARAKARRY_JOINED_PARTY)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(N(LetterDelivery_SaveNpcAnim))
-    EVT_CALL(GetCurrentPartnerID, LVar0)
-    EVT_CALL(FindKeyItem, LVar5, LVar1)
-    EVT_IF_EQ(LVar0, PARTNER_PARAKARRY)
-        EVT_IF_NE(LVar1, -1)
-            EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(PlayerFaceNpc, LVar2, FALSE)
-            EVT_WAIT(1)
-            EVT_CALL(GetNpcPos, LVar2, LVarD, LVar0, LVarE)
-            EVT_CALL(GetNpcPos, NPC_PARTNER, LVarD, LVarE, LVarF)
-            EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
-            EVT_ADD(LVar0, 10)
-            EVT_CALL(NpcJump1, NPC_PARTNER, LVarD, LVar0, LVarF, 10)
-            EVT_CALL(SpeakToNpc, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, LVar2, LVar7)
-            EVT_CALL(EnablePartnerAI)
-            EVT_EXEC_WAIT(N(EVS_ShowLetterChoice))
-            EVT_SWITCH(LVar0)
-                EVT_CASE_EQ(-1)
-                    EVT_CALL(DisablePartnerAI, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar8)
-                    EVT_CALL(EnablePartnerAI)
-                    EVT_SET(LVarC, DELIVERY_REJECTED)
-                EVT_CASE_DEFAULT
-                    EVT_CALL(DisablePartnerAI, 0)
-                    EVT_WAIT(1)
-                    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar9)
-                    EVT_IF_NE(LVarA, 0)
-                        EVT_CALL(SpeakToPlayer, LVar2, LVar3, LVar4, 0, LVarA)
-                    EVT_END_IF
-                    EVT_CALL(EnablePartnerAI)
-                    EVT_IF_NE(LVar6, ITEM_NONE)
+    Set(LVarC, DELIVERY_NOT_POSSIBLE)
+    IfLt(GB_StoryProgress, STORY_CH2_PARAKARRY_JOINED_PARTY)
+        Return
+    EndIf
+    Call(N(LetterDelivery_SaveNpcAnim))
+    Call(GetCurrentPartnerID, LVar0)
+    Call(FindKeyItem, LVar5, LVar1)
+    IfEq(LVar0, PARTNER_PARAKARRY)
+        IfNe(LVar1, -1)
+            Call(DisablePartnerAI, 0)
+            Call(PlayerFaceNpc, LVar2, FALSE)
+            Wait(1)
+            Call(GetNpcPos, LVar2, LVarD, LVar0, LVarE)
+            Call(GetNpcPos, NPC_PARTNER, LVarD, LVarE, LVarF)
+            Call(SetNpcJumpscale, NPC_PARTNER, Float(0.0))
+            Add(LVar0, 10)
+            Call(NpcJump1, NPC_PARTNER, LVarD, LVar0, LVarF, 10)
+            Call(SpeakToNpc, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, LVar2, LVar7)
+            Call(EnablePartnerAI)
+            ExecWait(N(EVS_ShowLetterChoice))
+            Switch(LVar0)
+                CaseEq(-1)
+                    Call(DisablePartnerAI, 0)
+                    Wait(1)
+                    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar8)
+                    Call(EnablePartnerAI)
+                    Set(LVarC, DELIVERY_REJECTED)
+                CaseDefault
+                    Call(DisablePartnerAI, 0)
+                    Wait(1)
+                    Call(SpeakToPlayer, NPC_PARTNER, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 5, LVar9)
+                    IfNe(LVarA, 0)
+                        Call(SpeakToPlayer, LVar2, LVar3, LVar4, 0, LVarA)
+                    EndIf
+                    Call(EnablePartnerAI)
+                    IfNe(LVar6, ITEM_NONE)
                         EVT_GIVE_KEY_REWARD(LVar6)
-                    EVT_END_IF
-                    EVT_SET(LVarC, DELIVERY_ACCEPTED)
-            EVT_END_SWITCH
-        EVT_END_IF
-    EVT_END_IF
-    EVT_CALL(N(LetterDelivery_RestoreNpcAnim))
-    EVT_RETURN
-    EVT_END
+                    EndIf
+                    Set(LVarC, DELIVERY_ACCEPTED)
+            EndSwitch
+        EndIf
+    EndIf
+    Call(N(LetterDelivery_RestoreNpcAnim))
+    Return
+    End
 };
 
 #define EVT_LETTER_PROMPT(npcName, npcID, animTalk, animIdle, msg1, msg2, ms3, msg4, itemID, itemList) \
     EvtScript N(EVS_LetterPrompt_##npcName) = { \
-        EVT_CALL(N(LetterDelivery_Init), \
+        Call(N(LetterDelivery_Init), \
             npcID, animTalk, animIdle, \
             itemID, ITEM_NONE, \
             msg1, msg2, ms3, msg4, \
-            EVT_PTR(itemList)) \
-        EVT_EXEC_WAIT(N(EVS_DoLetterDelivery)) \
-        EVT_RETURN \
-        EVT_END \
+            Ref(itemList)) \
+        ExecWait(N(EVS_DoLetterDelivery)) \
+        Return \
+        End \
     }
 
 #define EVT_LETTER_REWARD(npcName) \
     EvtScript N(EVS_LetterReward_##npcName) = { \
-        EVT_IF_EQ(LVarC, DELIVERY_ACCEPTED) \
+        IfEq(LVarC, DELIVERY_ACCEPTED) \
             EVT_GIVE_STAR_PIECE() \
-        EVT_END_IF \
-        EVT_RETURN \
-        EVT_END \
+        EndIf \
+        Return \
+        End \
     }
 
 #define EVT_LETTER_CHECK(npcName) \
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_##npcName)) \
-    EVT_EXEC_WAIT(N(EVS_LetterReward_##npcName))
+    ExecWait(N(EVS_LetterPrompt_##npcName)) \
+    ExecWait(N(EVS_LetterReward_##npcName))

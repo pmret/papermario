@@ -12,52 +12,52 @@ NpcSettings N(NpcSettings_Dummy) = {
 #include "world/common/npc/StarSpirit.inc.c"
 
 EvtScript N(EVS_NpcInit_Twink) = {
-    EVT_CALL(SetNpcPos, NPC_Twink, 0, 0, -400)
-    EVT_CALL(SetNpcYaw, NPC_Twink, 90)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Twink, 0, 0, -400)
+    Call(SetNpcYaw, NPC_Twink, 90)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Eldstar) = {
-    EVT_CALL(SetNpcPos, NPC_Eldstar, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Eldstar, 0, 0, -400)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mamar) = {
-    EVT_CALL(SetNpcPos, NPC_Mamar, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Mamar, 0, 0, -400)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Skolar) = {
-    EVT_CALL(SetNpcPos, NPC_Skolar, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Skolar, 0, 0, -400)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Muskular) = {
-    EVT_CALL(SetNpcPos, NPC_Muskular, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Muskular, 0, 0, -400)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Misstar) = {
-    EVT_CALL(SetNpcPos, NPC_Misstar, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Misstar, 0, 0, -400)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Klevar) = {
-    EVT_CALL(SetNpcPos, NPC_Klevar, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Klevar, 0, 0, -400)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Kalmar) = {
-    EVT_CALL(SetNpcPos, NPC_Kalmar, 0, 0, -400)
-    EVT_RETURN
-    EVT_END
+    Call(SetNpcPos, NPC_Kalmar, 0, 0, -400)
+    Return
+    End
 };
 
 AnimID N(ExtraAnims_Twink)[] = {

@@ -7,10 +7,10 @@ API_CALLABLE(N(GetPointsWithCamRelativeOffset)) {
     f32 posZ = evt_get_float_variable(script, *args++);
     f32 angle = evt_get_float_variable(script, *args++);
 
-    script->varTable[0] = EVT_FLOAT_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
-    script->varTable[1] = EVT_FLOAT_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
-    script->varTable[2] = EVT_FLOAT_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
-    script->varTable[3] = EVT_FLOAT_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
+    script->varTable[0] = Float_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
+    script->varTable[1] = Float_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 270.0f)) * 1000.0f));
+    script->varTable[2] = Float_TO_FIXED(posX + (sin_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
+    script->varTable[3] = Float_TO_FIXED(posZ - (cos_deg(clamp_angle(gCameras[CAM_DEFAULT].curYaw + angle + 90.0f)) * 1000.0f));
     return ApiStatus_DONE2;
 }
 
@@ -27,284 +27,284 @@ API_CALLABLE(N(SpawnMovingDoorDust)) {
 
 // LVar0 = modelID
 EvtScript N(EVS_AnimateDoorRaising) = {
-    EVT_THREAD
-        EVT_WAIT(20)
-        EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_JUMP)
-    EVT_END_THREAD
-    EVT_THREAD
+    Thread
+        Wait(20)
+        Call(PlaySound, SOUND_TRD_MAGIC_DOOR_JUMP)
+    EndThread
+    Thread
         // input LVar0 ignored in this thread
-        EVT_CALL(MakeLerp, 100, 120, 20, EASING_QUADRATIC_IN)
-        EVT_LABEL(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_SETF(MV_DoorScaleZ, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 120, 80, 20, EASING_QUADRATIC_OUT)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_SETF(MV_DoorScaleZ, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 80, 100, 20, EASING_QUADRATIC_IN)
-        EVT_LABEL(2)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_SETF(MV_DoorScaleZ, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(2)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_THREAD
+        Call(MakeLerp, 100, 120, 20, EASING_QUADRATIC_IN)
+        Label(0)
+            Call(UpdateLerp)
+            DivF(LVar0, Float(100.0))
+            SetF(MV_DoorScaleZ, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(0)
+            EndIf
+        Call(MakeLerp, 120, 80, 20, EASING_QUADRATIC_OUT)
+        Label(1)
+            Call(UpdateLerp)
+            DivF(LVar0, Float(100.0))
+            SetF(MV_DoorScaleZ, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Call(MakeLerp, 80, 100, 20, EASING_QUADRATIC_IN)
+        Label(2)
+            Call(UpdateLerp)
+            DivF(LVar0, Float(100.0))
+            SetF(MV_DoorScaleZ, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(2)
+            EndIf
+    EndThread
+    Thread
         // input LVar0 ignored in this thread
-        EVT_CALL(MakeLerp, 100, 80, 20, EASING_QUADRATIC_IN)
-        EVT_LABEL(0)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_SETF(MV_DoorScaleY, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(0)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 80, 120, 20, EASING_QUADRATIC_OUT)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_SETF(MV_DoorScaleY, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 120, 100, 20, EASING_QUADRATIC_IN)
-        EVT_LABEL(2)
-            EVT_CALL(UpdateLerp)
-            EVT_DIVF(LVar0, EVT_FLOAT(100.0))
-            EVT_SETF(MV_DoorScaleY, LVar0)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(2)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_SETF(MV_DoorScaleZ, EVT_FLOAT(1.0))
-    EVT_SETF(MV_DoorScaleY, EVT_FLOAT(1.0))
-    EVT_THREAD
+        Call(MakeLerp, 100, 80, 20, EASING_QUADRATIC_IN)
+        Label(0)
+            Call(UpdateLerp)
+            DivF(LVar0, Float(100.0))
+            SetF(MV_DoorScaleY, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(0)
+            EndIf
+        Call(MakeLerp, 80, 120, 20, EASING_QUADRATIC_OUT)
+        Label(1)
+            Call(UpdateLerp)
+            DivF(LVar0, Float(100.0))
+            SetF(MV_DoorScaleY, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Call(MakeLerp, 120, 100, 20, EASING_QUADRATIC_IN)
+        Label(2)
+            Call(UpdateLerp)
+            DivF(LVar0, Float(100.0))
+            SetF(MV_DoorScaleY, LVar0)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(2)
+            EndIf
+    EndThread
+    SetF(MV_DoorScaleZ, Float(1.0))
+    SetF(MV_DoorScaleY, Float(1.0))
+    Thread
         // input LVar0 used in this thread!
-        EVT_SET(LVar9, LVar0)
-        EVT_LOOP(20)
-            EVT_CALL(ScaleGroup, LVar9, EVT_FLOAT(1.0), MV_DoorScaleY, MV_DoorScaleZ)
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(MakeLerp, 0, 80, 30, EASING_QUADRATIC_OUT)
-        EVT_LABEL(1)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-            EVT_CALL(ScaleGroup, LVar9, EVT_FLOAT(1.0), MV_DoorScaleY, MV_DoorScaleZ)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(1)
-            EVT_END_IF
-        EVT_CALL(MakeLerp, 80, 70, 10, EASING_QUADRATIC_IN)
-        EVT_LABEL(2)
-            EVT_CALL(UpdateLerp)
-            EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-            EVT_CALL(ScaleGroup, LVar9, EVT_FLOAT(1.0), MV_DoorScaleY, MV_DoorScaleZ)
-            EVT_WAIT(1)
-            EVT_IF_EQ(LVar1, 1)
-                EVT_GOTO(2)
-            EVT_END_IF
-    EVT_END_THREAD
-    EVT_WAIT(61)
-    EVT_RETURN
-    EVT_END
+        Set(LVar9, LVar0)
+        Loop(20)
+            Call(ScaleGroup, LVar9, Float(1.0), MV_DoorScaleY, MV_DoorScaleZ)
+            Wait(1)
+        EndLoop
+        Call(MakeLerp, 0, 80, 30, EASING_QUADRATIC_OUT)
+        Label(1)
+            Call(UpdateLerp)
+            Call(TranslateGroup, LVar9, 0, LVar0, 0)
+            Call(ScaleGroup, LVar9, Float(1.0), MV_DoorScaleY, MV_DoorScaleZ)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(1)
+            EndIf
+        Call(MakeLerp, 80, 70, 10, EASING_QUADRATIC_IN)
+        Label(2)
+            Call(UpdateLerp)
+            Call(TranslateGroup, LVar9, 0, LVar0, 0)
+            Call(ScaleGroup, LVar9, Float(1.0), MV_DoorScaleY, MV_DoorScaleZ)
+            Wait(1)
+            IfEq(LVar1, 1)
+                Goto(2)
+            EndIf
+    EndThread
+    Wait(61)
+    Return
+    End
 };
 
 // LVar0 = modelID
 EvtScript N(EVS_AnimateDoorLowering) = {
-    EVT_SET(LVar9, LVar0)
-    EVT_CALL(MakeLerp, 70, 0, 20, EASING_CUBIC_IN)
-    EVT_LABEL(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(0)
-        EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
-    EVT_IF_EQ(LVar9, MODEL_migi)
-        EVT_CALL(N(SpawnMovingDoorDust), 270, 0, 40, 270)
-        EVT_CALL(N(SpawnMovingDoorDust), 270, 0, -40, 270)
-    EVT_ELSE
-        EVT_CALL(N(SpawnMovingDoorDust), -255, 0, 40, 90)
-        EVT_CALL(N(SpawnMovingDoorDust), -255, 0, -40, 90)
-    EVT_END_IF
-    EVT_CALL(MakeLerp, 0, 20, 10, EASING_QUADRATIC_OUT)
-    EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-    EVT_CALL(MakeLerp, 20, 0, 10, EASING_QUADRATIC_IN)
-    EVT_LABEL(2)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(2)
-        EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
-    EVT_IF_EQ(LVar9, MODEL_migi)
-        EVT_CALL(N(SpawnMovingDoorDust), 270, 0, 40, 270)
-        EVT_CALL(N(SpawnMovingDoorDust), 270, 0, -40, 270)
-    EVT_ELSE
-        EVT_CALL(N(SpawnMovingDoorDust), -255, 0, 40, 90)
-        EVT_CALL(N(SpawnMovingDoorDust), -255, 0, -40, 90)
-    EVT_END_IF
-    EVT_CALL(MakeLerp, 0, 10, 5, EASING_QUADRATIC_OUT)
-    EVT_LABEL(3)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(3)
-        EVT_END_IF
-    EVT_CALL(MakeLerp, 10, 0, 5, EASING_QUADRATIC_IN)
-    EVT_LABEL(4)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVar9, 0, LVar0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(4)
-        EVT_END_IF
-    EVT_CALL(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
-    EVT_IF_EQ(LVar9, MODEL_migi)
-        EVT_CALL(N(SpawnMovingDoorDust), 270, 0, 40, 270)
-        EVT_CALL(N(SpawnMovingDoorDust), 270, 0, -40, 270)
-        EVT_CALL(EnableModel, MODEL_o44, FALSE)
-    EVT_ELSE
-        EVT_CALL(N(SpawnMovingDoorDust), -255, 0, 40, 90)
-        EVT_CALL(N(SpawnMovingDoorDust), -255, 0, -40, 90)
-        EVT_CALL(EnableModel, MODEL_o43, FALSE)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Set(LVar9, LVar0)
+    Call(MakeLerp, 70, 0, 20, EASING_CUBIC_IN)
+    Label(0)
+        Call(UpdateLerp)
+        Call(TranslateGroup, LVar9, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(0)
+        EndIf
+    Call(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
+    IfEq(LVar9, MODEL_migi)
+        Call(N(SpawnMovingDoorDust), 270, 0, 40, 270)
+        Call(N(SpawnMovingDoorDust), 270, 0, -40, 270)
+    Else
+        Call(N(SpawnMovingDoorDust), -255, 0, 40, 90)
+        Call(N(SpawnMovingDoorDust), -255, 0, -40, 90)
+    EndIf
+    Call(MakeLerp, 0, 20, 10, EASING_QUADRATIC_OUT)
+    Label(1)
+        Call(UpdateLerp)
+        Call(TranslateGroup, LVar9, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(1)
+        EndIf
+    Call(MakeLerp, 20, 0, 10, EASING_QUADRATIC_IN)
+    Label(2)
+        Call(UpdateLerp)
+        Call(TranslateGroup, LVar9, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(2)
+        EndIf
+    Call(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
+    IfEq(LVar9, MODEL_migi)
+        Call(N(SpawnMovingDoorDust), 270, 0, 40, 270)
+        Call(N(SpawnMovingDoorDust), 270, 0, -40, 270)
+    Else
+        Call(N(SpawnMovingDoorDust), -255, 0, 40, 90)
+        Call(N(SpawnMovingDoorDust), -255, 0, -40, 90)
+    EndIf
+    Call(MakeLerp, 0, 10, 5, EASING_QUADRATIC_OUT)
+    Label(3)
+        Call(UpdateLerp)
+        Call(TranslateGroup, LVar9, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(3)
+        EndIf
+    Call(MakeLerp, 10, 0, 5, EASING_QUADRATIC_IN)
+    Label(4)
+        Call(UpdateLerp)
+        Call(TranslateGroup, LVar9, 0, LVar0, 0)
+        Wait(1)
+        IfEq(LVar1, 1)
+            Goto(4)
+        EndIf
+    Call(PlaySound, SOUND_TRD_MAGIC_DOOR_LAND)
+    IfEq(LVar9, MODEL_migi)
+        Call(N(SpawnMovingDoorDust), 270, 0, 40, 270)
+        Call(N(SpawnMovingDoorDust), 270, 0, -40, 270)
+        Call(EnableModel, MODEL_o44, FALSE)
+    Else
+        Call(N(SpawnMovingDoorDust), -255, 0, 40, 90)
+        Call(N(SpawnMovingDoorDust), -255, 0, -40, 90)
+        Call(EnableModel, MODEL_o43, FALSE)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_RaiseMagicDoors) = {
     // for for enter walk scrip to complete
-    EVT_LABEL(10)
-        EVT_IS_THREAD_RUNNING(MV_EnterWalkScriptID, LVar0)
-        EVT_IF_EQ(LVar0, 1)
-            EVT_WAIT(1)
-            EVT_GOTO(10)
-        EVT_END_IF
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_SUSPEND_GROUP(EVT_GROUP_01)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, EVT_FLOAT(30.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(EnableModel, MODEL_o44, TRUE)
-    EVT_SET(LVar0, MODEL_migi)
-    EVT_EXEC_WAIT(N(EVS_AnimateDoorRaising))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_SUB(LVar0, 400)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, EVT_FLOAT(-60.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(EnableModel, MODEL_o43, TRUE)
-    EVT_SET(LVar0, MODEL_hidari)
-    EVT_EXEC_WAIT(N(EVS_AnimateDoorRaising))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RESUME_GROUP(EVT_GROUP_01)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_RETURN
-    EVT_END
+    Label(10)
+        IsThreadRunning(MV_EnterWalkScriptID, LVar0)
+        IfEq(LVar0, 1)
+            Wait(1)
+            Goto(10)
+        EndIf
+    SetGroup(EVT_GROUP_00)
+    SuspendGroup(EVT_GROUP_01)
+    Call(DisablePlayerInput, TRUE)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(PlaySound, SOUND_CHIME_BEGIN_AMBUSH)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, Float(30.0))
+    Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
+    Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(EnableModel, MODEL_o44, TRUE)
+    Set(LVar0, MODEL_migi)
+    ExecWait(N(EVS_AnimateDoorRaising))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Wait(1)
+    Call(GetPlayerPos, LVar0, LVar1, LVar2)
+    Sub(LVar0, 400)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, Float(-60.0))
+    Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
+    Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(EnableModel, MODEL_o43, TRUE)
+    Set(LVar0, MODEL_hidari)
+    ExecWait(N(EVS_AnimateDoorRaising))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(SetCamSpeed, CAM_DEFAULT, Float(1.0))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
+    Call(DisablePlayerInput, FALSE)
+    ResumeGroup(EVT_GROUP_01)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Return
+    End
 };
 
 EvtScript N(EVS_LowerMagicDoors) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(15)
-    EVT_CALL(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
-    EVT_WAIT(15)
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(DisablePlayerInput, TRUE)
+    Wait(15)
+    Call(PlaySound, SOUND_CHIME_SOLVED_PUZZLE)
+    Wait(15)
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
     EVT_VEC3I_SET(LVar0, 220, 0, 0)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, EVT_FLOAT(30.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_SET(LVar0, MODEL_migi)
-    EVT_EXEC_WAIT(N(EVS_AnimateDoorLowering))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_WAIT(1)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, Float(30.0))
+    Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
+    Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Set(LVar0, MODEL_migi)
+    ExecWait(N(EVS_AnimateDoorLowering))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Wait(1)
     EVT_VEC3I_SET(LVar0, 220, 0, 0)
-    EVT_SUB(LVar0, 400)
-    EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, EVT_FLOAT(-60.0))
-    EVT_CALL(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
-    EVT_CALL(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_SET(LVar0, MODEL_hidari)
-    EVT_EXEC_WAIT(N(EVS_AnimateDoorLowering))
-    EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_RETURN
-    EVT_END
+    Sub(LVar0, 400)
+    Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
+    Call(N(GetPointsWithCamRelativeOffset), LVar0, LVar2, Float(-60.0))
+    Call(SetCamPosA, CAM_DEFAULT, LVar0, LVar1)
+    Call(SetCamPosB, CAM_DEFAULT, LVar2, LVar3)
+    Call(SetCamSpeed, CAM_DEFAULT, Float(2.0))
+    Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Set(LVar0, MODEL_hidari)
+    ExecWait(N(EVS_AnimateDoorLowering))
+    Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    Call(WaitForCam, CAM_DEFAULT, Float(1.0))
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
+    Call(DisablePlayerInput, FALSE)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Return
+    End
 };
 
 EvtScript N(EVS_RestoreMagicDoors) = {
-    EVT_EXEC(N(EVS_LowerMagicDoors))
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_LowerMagicDoors))
+    Return
+    End
 };
 
 EvtScript N(EVS_SetupMagicDoors) = {
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(EnableModel, MODEL_o44, FALSE)
-    EVT_CALL(EnableModel, MODEL_o43, FALSE)
-    EVT_IF_EQ(GF_TRD07_Defeated_DungeonAmbush, FALSE)
-        EVT_EXEC(N(EVS_RaiseMagicDoors))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
+    Call(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilite, COLLIDER_FLAGS_UPPER_MASK)
+    Call(EnableModel, MODEL_o44, FALSE)
+    Call(EnableModel, MODEL_o43, FALSE)
+    IfEq(GF_TRD07_Defeated_DungeonAmbush, FALSE)
+        Exec(N(EVS_RaiseMagicDoors))
+    EndIf
+    Return
+    End
 };

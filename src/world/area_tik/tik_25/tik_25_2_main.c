@@ -5,9 +5,9 @@
 EvtScript N(EVS_ExitWalk_tik_24_0) = EVT_EXIT_WALK(60, tik_25_ENTRY_0, "tik_24", tik_24_ENTRY_0);
 
 EvtScript N(EVS_BindExitTriggers) = {
-    EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitWalk_tik_24_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
-    EVT_RETURN
-    EVT_END
+    BindTrigger(Ref(N(EVS_ExitWalk_tik_24_0)), TRIGGER_FLOOR_ABOVE, COLLIDER_deiliw, 1, 0)
+    Return
+    End
 };
 
 #define DROPLET_MODEL MODEL_sizuku
@@ -36,30 +36,30 @@ DripVolumeList N(DripVolumes) = {
 };
 
 EvtScript N(EVS_SetupDrips) = {
-    EVT_SET(LVar0, EVT_PTR(N(DripVolumes)))
-    EVT_EXEC(N(EVS_CreateDripVolumes))
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, Ref(N(DripVolumes)))
+    Exec(N(EVS_CreateDripVolumes))
+    Return
+    End
 };
 
 EvtScript N(EVS_Main) = {
-    EVT_SET(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
-    EVT_CALL(SetSpriteShading, SHADING_TIK_25)
-    EVT_SETUP_CAMERA_NO_LEAD()
-    EVT_EXEC_WAIT(N(EVS_MakeEntities))
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_EXEC(N(EVS_SetupDrips))
-    EVT_CALL(SetTexPanner, MODEL_mizu, 0)
-    EVT_THREAD
+    Set(GB_WorldLocation, LOCATION_TOAD_TOWN_TUNNELS)
+    Call(SetSpriteShading, SHADING_TIK_25)
+    SetUP_CAMERA_NO_LEAD()
+    ExecWait(N(EVS_MakeEntities))
+    Exec(N(EVS_SetupMusic))
+    Exec(N(EVS_SetupDrips))
+    Call(SetTexPanner, MODEL_mizu, 0)
+    Thread
         TEX_PAN_PARAMS_ID(TEX_PANNER_0)
         TEX_PAN_PARAMS_STEP(    0, -200, -100, -500)
         TEX_PAN_PARAMS_FREQ(    0,    1,    1,    1)
         TEX_PAN_PARAMS_INIT(    0,    0,    0,    0)
-        EVT_EXEC(N(EVS_UpdateTexturePan))
-    EVT_END_THREAD
-    EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT(1)
-    EVT_RETURN
-    EVT_END
+        Exec(N(EVS_UpdateTexturePan))
+    EndThread
+    Set(LVar0, Ref(N(EVS_BindExitTriggers)))
+    Exec(EnterWalk)
+    Wait(1)
+    Return
+    End
 };

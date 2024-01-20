@@ -1,8 +1,8 @@
 #include "pra_02.h"
 
 EvtScript N(EVS_NpcAuxAI_Unused) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Unused) = {

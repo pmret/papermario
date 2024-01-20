@@ -5,68 +5,68 @@
 #include "world/common/enemy/SpikedGoomba_Wander.inc.c"
 
 EvtScript N(EVS_GoompaRemark) = {
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(10 * DT)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
-    EVT_CALL(PlayerMoveTo, -60, -19, 0)
-    EVT_CALL(DisablePartnerAI, 0)
-    EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00B7)
-    EVT_CALL(EnablePartnerAI)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(DisablePlayerInput, TRUE)
+    Wait(10 * DT)
+    Call(SetPlayerSpeed, Float(3.0 / DT))
+    Call(PlayerMoveTo, -60, -19, 0)
+    Call(DisablePartnerAI, 0)
+    Call(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00B7)
+    Call(EnablePartnerAI)
+    Call(DisablePlayerInput, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_SpikedGoomba) = {
-    EVT_LABEL(0)
-    EVT_CALL(TranslateModel, MODEL_usokinoko, -1, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_usokinoko, 1, 0, 0)
-    EVT_WAIT(20)
-    EVT_CALL(TranslateModel, MODEL_usokinoko, 1, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_usokinoko, -1, 0, 0)
-    EVT_WAIT(8)
-    EVT_CALL(TranslateModel, MODEL_usokinoko, -1, 0, 0)
-    EVT_WAIT(1)
-    EVT_CALL(TranslateModel, MODEL_usokinoko, 1, 0, 0)
-    EVT_WAIT(30)
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+    Call(TranslateModel, MODEL_usokinoko, -1, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_usokinoko, 1, 0, 0)
+    Wait(20)
+    Call(TranslateModel, MODEL_usokinoko, 1, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_usokinoko, -1, 0, 0)
+    Wait(8)
+    Call(TranslateModel, MODEL_usokinoko, -1, 0, 0)
+    Wait(1)
+    Call(TranslateModel, MODEL_usokinoko, 1, 0, 0)
+    Wait(30)
+    Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcIdle_SpikedGoomba) = {
-    EVT_CALL(func_800445D4, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(100)
-            EVT_LABEL(10)
-            EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-            EVT_WAIT(1)
-            EVT_IF_LT(LVar1, 100)
-                EVT_GOTO(10)
-            EVT_END_IF
-            EVT_IF_LT(LVar0, 560)
-                EVT_GOTO(10)
-            EVT_END_IF
-            EVT_IF_GT(LVar0, 700)
-                EVT_GOTO(10)
-            EVT_END_IF
-            EVT_CALL(SetNpcAux, NPC_SELF, 0)
-            EVT_CALL(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, -30, 12, EMOTER_NPC, 0, 0, 0, 0)
-            EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(1.0))
-            EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
-            EVT_CALL(NpcJump0, NPC_SELF, 685, 100, -35, 0)
-            EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGoomba_Wander)))
-        EVT_CASE_OR_EQ(102)
-        EVT_CASE_OR_EQ(3)
-        EVT_CASE_OR_EQ(103)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_SpikedGoomba_Wander)))
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(func_800445D4, LVar0)
+    Switch(LVar0)
+        CaseEq(100)
+            Label(10)
+            Call(GetPlayerPos, LVar0, LVar1, LVar2)
+            Wait(1)
+            IfLt(LVar1, 100)
+                Goto(10)
+            EndIf
+            IfLt(LVar0, 560)
+                Goto(10)
+            EndIf
+            IfGt(LVar0, 700)
+                Goto(10)
+            EndIf
+            Call(SetNpcAux, NPC_SELF, 0)
+            Call(ShowEmote, NPC_SELF, EMOTE_EXCLAMATION, -30, 12, EMOTER_NPC, 0, 0, 0, 0)
+            Call(SetNpcJumpscale, NPC_SELF, Float(1.0))
+            Call(SetNpcSpeed, NPC_SELF, Float(5.0))
+            Call(NpcJump0, NPC_SELF, 685, 100, -35, 0)
+            Call(SetSelfEnemyFlagBits, ENEMY_FLAG_BEGIN_WITH_CHASING, 1)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGoomba_Wander)))
+        CaseOrEq(102)
+        CaseOrEq(3)
+        CaseOrEq(103)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_SpikedGoomba_Wander)))
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 NpcData N(NpcData_Goomba_01) = {
@@ -116,10 +116,10 @@ NpcData N(NpcData_Goomba_02) = {
 };
 
 EvtScript N(EVS_NpcInit_SpikedGoomba) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_SpikedGoomba)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_SpikedGoomba)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_SpikedGoomba)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_SpikedGoomba)))
+    Return
+    End
 };
 
 NpcData N(NpcData_SpikedGoomba) = {

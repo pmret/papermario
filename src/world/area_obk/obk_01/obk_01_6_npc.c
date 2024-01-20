@@ -13,14 +13,14 @@ s32 N(LetterList_Franky)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_Franky) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Franky, ANIM_Boo_Talk, ANIM_Boo_Idle,
         ITEM_LETTER_CHAIN_FRANKY, ITEM_LETTER_CHAIN_DANE_T_1,
         MSG_CH3_0067, MSG_CH3_0068, MSG_CH3_0069, MSG_CH3_006A,
-        EVT_PTR(N(LetterList_Franky)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList_Franky)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 enum {
@@ -100,92 +100,92 @@ API_CALLABLE(N(UpdateTrafficBooAlpha)) {
 
 
 EvtScript N(EVS_NpcIdle_TrafficBoo) = {
-    EVT_CALL(N(UpdateTrafficBooMotion))
-    EVT_RETURN
-    EVT_END
+    Call(N(UpdateTrafficBooMotion))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcAux_TrafficBoo) = {
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(N(UpdateTrafficBooAlpha))
-        EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
+    Set(LVar1, 0)
+    Loop(0)
+        Call(N(UpdateTrafficBooAlpha))
+        Call(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        Wait(1)
+    EndLoop
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrafficBoo1) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_TrafficBoo)))
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_TrafficBoo)))
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_TrafficBoo2) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_TrafficBoo)))
-    EVT_CALL(BindNpcAux, NPC_SELF, EVT_PTR(N(EVS_NpcAux_TrafficBoo)))
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_TrafficBoo)))
+    Call(BindNpcAux, NPC_SELF, Ref(N(EVS_NpcAux_TrafficBoo)))
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_UpstairsBoo) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0061)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0062)
-        EVT_CASE_GE(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0063)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0061)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0062)
+        CaseGe(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0063)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Franky) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0064)
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0065)
-        EVT_CASE_GE(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0066)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_Franky))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_IF_EQ(GB_KootFavor_Current, KOOT_FAVOR_CH5_3)
-        EVT_IF_EQ(GF_OBK01_Gift_OldPhoto, FALSE)
-            EVT_SET(GF_OBK01_Gift_OldPhoto, TRUE)
-            EVT_EXEC_WAIT(N(EVS_MarioSalute))
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_006B)
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH3_DEFEATED_TUBBA_BLUBBA)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0064)
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0065)
+        CaseGe(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_0066)
+    EndSwitch
+    ExecWait(N(EVS_LetterPrompt_Franky))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    IfEq(GB_KootFavor_Current, KOOT_FAVOR_CH5_3)
+        IfEq(GF_OBK01_Gift_OldPhoto, FALSE)
+            Set(GF_OBK01_Gift_OldPhoto, TRUE)
+            ExecWait(N(EVS_MarioSalute))
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Boo_Talk, ANIM_Boo_Idle, 0, MSG_CH3_006B)
             EVT_GIVE_KEY_REWARD(ITEM_KOOT_OLD_PHOTO)
-        EVT_END_IF
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+        EndIf
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_UpstairsBoo) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_UpstairsBoo)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_UpstairsBoo)))
+    IfLt(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Franky) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Franky)))
-    EVT_IF_LT(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
-        EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Franky)))
+    IfLt(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
+        Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    EndIf
+    Return
+    End
 };
 
 NpcData N(NpcData_JumpScareBoo) = {

@@ -2,52 +2,52 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_NpcAI_HurtPlant) = {
-    EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim01)
-    EVT_CALL(SetSelfVar, 0, 0)
-    EVT_LABEL(0)
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_IF_EQ(LVar0, 0)
-        EVT_WAIT(1)
-        EVT_GOTO(0)
-    EVT_END_IF
-    EVT_SET_GROUP(EVT_GROUP_00)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(NpcFacePlayer, NPC_SELF, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim08)
-    EVT_WAIT(15)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_HURT_PLANT_SHRIEK, SOUND_SPACE_DEFAULT)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim02)
-    EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
-    EVT_CALL(StartBattle)
-    EVT_RETURN
-    EVT_END
+    Call(EnableNpcShadow, NPC_SELF, FALSE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim01)
+    Call(SetSelfVar, 0, 0)
+    Label(0)
+    Call(GetSelfVar, 0, LVar0)
+    IfEq(LVar0, 0)
+        Wait(1)
+        Goto(0)
+    EndIf
+    SetGroup(EVT_GROUP_00)
+    Call(SetTimeFreezeMode, TIME_FREEZE_PARTIAL)
+    Call(DisablePlayerInput, TRUE)
+    Call(NpcFacePlayer, NPC_SELF, 0)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim08)
+    Wait(15)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_HURT_PLANT_SHRIEK, SOUND_SPACE_DEFAULT)
+    Wait(10)
+    Call(SetPlayerAnimation, ANIM_Mario1_Flail)
+    Wait(5)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_HurtPlant_Anim02)
+    Call(DisablePlayerInput, FALSE)
+    Call(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
+    Call(StartBattle)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_HurtPlant) = {
-    EVT_CALL(SetSelfVar, 0, 1)
-    EVT_RETURN
-    EVT_END
+    Call(SetSelfVar, 0, 1)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_HurtPlant) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-            EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_HurtPlant)))
-        EVT_CASE_EQ(OUTCOME_ENEMY_FLED)
-            EVT_CALL(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
-            EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_FLED)
+            Call(BindNpcAI, NPC_SELF, Ref(N(EVS_NpcAI_HurtPlant)))
+        CaseEq(OUTCOME_ENEMY_FLED)
+            Call(SetEnemyFlagBits, NPC_SELF, ENEMY_FLAG_FLED, 1)
+            Call(RemoveNpc, NPC_SELF)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_HurtPlant) = {

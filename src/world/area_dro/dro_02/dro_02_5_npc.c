@@ -24,9 +24,9 @@ MobileAISettings N(AISettings_Archeologist) = {
 };
 
 EvtScript N(EVS_NpcAI_Archeologist) = {
-    EVT_CALL(BasicAI_Main, EVT_PTR(N(AISettings_Archeologist)))
-    EVT_RETURN
-    EVT_END
+    Call(BasicAI_Main, Ref(N(AISettings_Archeologist)))
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_Archeologist_Wander) = {
@@ -68,291 +68,291 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_LetterPrompt_MrE) = {
-    EVT_CALL(N(LetterDelivery_Init),
+    Call(N(LetterDelivery_Init),
         NPC_Dryite_01, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle,
         ITEM_LETTER_CHAIN_MR_E, ITEM_LETTER_CHAIN_MISS_T,
         MSG_CH2_0095, MSG_CH2_0096, MSG_CH2_0097, MSG_CH2_0098,
-        EVT_PTR(N(LetterList)))
-    EVT_EXEC_WAIT(N(EVS_DoLetterDelivery))
-    EVT_RETURN
-    EVT_END
+        Ref(N(LetterList)))
+    ExecWait(N(EVS_DoLetterDelivery))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Archeologist) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B2)
-            EVT_ELSE
-                EVT_SWITCH(AB_DRO_3)
-                    EVT_CASE_EQ(0)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00AF)
-                        EVT_SET(AB_DRO_3, 1)
-                    EVT_CASE_EQ(1)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B0)
-                        EVT_SET(AB_DRO_3, 2)
-                    EVT_CASE_EQ(2)
-                        EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B1)
-                        EVT_SET(AB_DRO_3, 1)
-                EVT_END_SWITCH
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B3)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_SBK30_Kolorado_SharedRumorAboutMoustafa, TRUE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B2)
+            Else
+                Switch(AB_DRO_3)
+                    CaseEq(0)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00AF)
+                        Set(AB_DRO_3, 1)
+                    CaseEq(1)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B0)
+                        Set(AB_DRO_3, 2)
+                    CaseEq(2)
+                        Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B1)
+                        Set(AB_DRO_3, 1)
+                EndSwitch
+            EndIf
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Archeologist_Talk, ANIM_Archeologist_Idle, 0, MSG_CH2_00B3)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Archeologist) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Archeologist)))
-    EVT_IF_GE(GB_StoryProgress, STORY_UNUSED_FFFFFFCC)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Archeologist)))
+    IfGe(GB_StoryProgress, STORY_UNUSED_FFFFFFCC)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_MrE) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(GF_DRO02_Sheek_AskedAboutDesert, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0091)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0092)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0093)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0094)
-    EVT_END_SWITCH
-    EVT_EXEC_WAIT(N(EVS_LetterPrompt_MrE))
-    EVT_IF_NE(LVarC, 0)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(GF_DRO02_Sheek_AskedAboutDesert, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0091)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0092)
+            EndIf
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0093)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Blue_Talk, ANIM_Dryite_Blue_Idle, 0, MSG_CH2_0094)
+    EndSwitch
+    ExecWait(N(EVS_LetterPrompt_MrE))
+    IfNe(LVarC, 0)
+        Return
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_MrE) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_MrE)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_MrE)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_03, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A1)
-                EVT_SET(AF_DRO_03, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A2)
-                EVT_SET(AF_DRO_03, FALSE)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A3)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A4)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(AF_DRO_03, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A1)
+                Set(AF_DRO_03, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A2)
+                Set(AF_DRO_03, FALSE)
+            EndIf
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A3)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A4)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_02)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Dryite_03) = {
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A0)
-    EVT_RETURN
-    EVT_END
+    Call(SpeakToPlayer, NPC_SELF, ANIM_Dryite_Green_Talk, ANIM_Dryite_Green_Idle, 0, MSG_CH2_00A0)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Dryite_03) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Dryite_03)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Dryite_03)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Mouser_01) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_04, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A5)
-                EVT_SET(AF_DRO_04, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A6)
-                EVT_SET(AF_DRO_04, FALSE)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_04, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A7)
-                EVT_SET(AF_DRO_04, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A8)
-                EVT_SET(AF_DRO_04, FALSE)
-            EVT_END_IF
-        EVT_CASE_DEFAULT
-            EVT_IF_EQ(AF_DRO_04, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A9)
-                EVT_SET(AF_DRO_04, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AA)
-                EVT_SET(AF_DRO_04, FALSE)
-            EVT_END_IF
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(AF_DRO_04, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A5)
+                Set(AF_DRO_04, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A6)
+                Set(AF_DRO_04, FALSE)
+            EndIf
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            IfEq(AF_DRO_04, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A7)
+                Set(AF_DRO_04, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A8)
+                Set(AF_DRO_04, FALSE)
+            EndIf
+        CaseDefault
+            IfEq(AF_DRO_04, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00A9)
+                Set(AF_DRO_04, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AA)
+                Set(AF_DRO_04, FALSE)
+            EndIf
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mouser_01) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Mouser_01)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Mouser_01)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInteract_Mouser_02) = {
-    EVT_SWITCH(GB_StoryProgress)
-        EVT_CASE_LT(STORY_CH2_STAR_SPRIT_DEPARTED)
-            EVT_IF_EQ(AF_DRO_05, FALSE)
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AB)
-                EVT_SET(AF_DRO_05, TRUE)
-            EVT_ELSE
-                EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AC)
-                EVT_SET(AF_DRO_05, FALSE)
-            EVT_END_IF
-        EVT_CASE_LT(STORY_CH5_STAR_SPRIT_DEPARTED)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AD)
-        EVT_CASE_DEFAULT
-            EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AE)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Switch(GB_StoryProgress)
+        CaseLt(STORY_CH2_STAR_SPRIT_DEPARTED)
+            IfEq(AF_DRO_05, FALSE)
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AB)
+                Set(AF_DRO_05, TRUE)
+            Else
+                Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AC)
+                Set(AF_DRO_05, FALSE)
+            EndIf
+        CaseLt(STORY_CH5_STAR_SPRIT_DEPARTED)
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AD)
+        CaseDefault
+            Call(SpeakToPlayer, NPC_SELF, ANIM_Mouser_Blue_Talk, ANIM_Mouser_Blue_Idle, 0, MSG_CH2_00AE)
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mouser_02) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_Mouser_02)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_Mouser_02)))
+    Return
+    End
 };
 
 #include "npc_moustafa.c"
 
 EvtScript N(EVS_NpcIdle_Mouser_03) = {
-    EVT_CALL(InterpNpcYaw, NPC_DisguisedMoustafa, 270, 0)
-    EVT_LABEL(10)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Gossip)
-        EVT_CALL(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Idle)
-        EVT_LOOP(50)
-            EVT_CALL(IsPlayerWithin, 200, 50, 100, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_GOTO(20)
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Idle)
-        EVT_CALL(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_TalkAlt)
-        EVT_LOOP(50)
-            EVT_CALL(IsPlayerWithin, 200, 50, 100, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_GOTO(20)
-            EVT_END_IF
-            EVT_WAIT(1)
-        EVT_END_LOOP
-        EVT_GOTO(10)
-    EVT_LABEL(20)
-    EVT_CALL(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Idle)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
-    EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
-    EVT_CALL(NpcMoveTo, NPC_SELF, 150, 18, 20)
-    EVT_CALL(EnableNpcBlur, NPC_SELF, TRUE)
-    EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -83, 11, 20 * DT)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -239, 5, 20 * DT)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -371, 5, 20 * DT)
-    EVT_CALL(NpcMoveTo, NPC_SELF, -487, 5, 20 * DT)
-    EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
-    EVT_SET(GB_StoryProgress, STORY_CH2_SPOKE_WITH_SHEEK)
-    EVT_RETURN
-    EVT_END
+    Call(InterpNpcYaw, NPC_DisguisedMoustafa, 270, 0)
+    Label(10)
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Gossip)
+        Call(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Idle)
+        Loop(50)
+            Call(IsPlayerWithin, 200, 50, 100, LVar0)
+            IfEq(LVar0, 1)
+                Goto(20)
+            EndIf
+            Wait(1)
+        EndLoop
+        Call(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Idle)
+        Call(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_TalkAlt)
+        Loop(50)
+            Call(IsPlayerWithin, 200, 50, 100, LVar0)
+            IfEq(LVar0, 1)
+                Goto(20)
+            EndIf
+            Wait(1)
+        EndLoop
+        Goto(10)
+    Label(20)
+    Call(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Idle)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
+    Call(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
+    Call(SetNpcAnimation, NPC_SELF, ANIM_Mouser_Purple_Run)
+    Call(NpcMoveTo, NPC_SELF, 150, 18, 20)
+    Call(EnableNpcBlur, NPC_SELF, TRUE)
+    Call(PlaySoundAtNpc, NPC_SELF, SOUND_RUN_AWAY, SOUND_SPACE_DEFAULT)
+    Call(NpcMoveTo, NPC_SELF, -83, 11, 20 * DT)
+    Call(NpcMoveTo, NPC_SELF, -239, 5, 20 * DT)
+    Call(NpcMoveTo, NPC_SELF, -371, 5, 20 * DT)
+    Call(NpcMoveTo, NPC_SELF, -487, 5, 20 * DT)
+    Call(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
+    Set(GB_StoryProgress, STORY_CH2_SPOKE_WITH_SHEEK)
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_Mouser_03) = {
-    EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(EVS_NpcIdle_Mouser_03)))
-    EVT_IF_GE(GB_StoryProgress, STORY_CH2_SPOKE_WITH_SHEEK)
-        EVT_CALL(RemoveNpc, NPC_SELF)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcIdle, NPC_SELF, Ref(N(EVS_NpcIdle_Mouser_03)))
+    IfGe(GB_StoryProgress, STORY_CH2_SPOKE_WITH_SHEEK)
+        Call(RemoveNpc, NPC_SELF)
+    EndIf
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
-    EVT_SET(LVar0, MSG_CH2_00D1)
-    EVT_SET(LVar8, MSG_CH2_00D2)
-    EVT_SET(LVar1, MSG_CH2_00D3)
-    EVT_SET(LVar2, MSG_CH2_00D4)
-    EVT_SET(LVar3, MSG_CH2_00D5)
-    EVT_RETURN
-    EVT_END
+    Set(LVar0, MSG_CH2_00D1)
+    Set(LVar8, MSG_CH2_00D2)
+    Set(LVar1, MSG_CH2_00D3)
+    Set(LVar2, MSG_CH2_00D4)
+    Set(LVar3, MSG_CH2_00D5)
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_GetInBed) = {
-    EVT_EXEC(N(EVS_PlayRestMusic))
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, -179, -198, 0)
-    EVT_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 40)
-        EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-        EVT_CALL(SetCamPitch, CAM_DEFAULT, 95, -61)
-        EVT_CALL(SetCamDistance, CAM_DEFAULT, 108)
-        EVT_CALL(SetCamPosA, CAM_DEFAULT, 202, 62)
-        EVT_CALL(SetCamPosB, CAM_DEFAULT, -89, -141)
-        EVT_CALL(SetCamPosC, CAM_DEFAULT, 0, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, -187, -267, 0)
-    EVT_CALL(InterpPlayerYaw, 230, 1)
-    EVT_CALL(HidePlayerShadow, TRUE)
-    EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
-    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
-    EVT_THREAD
-        EVT_WAIT(60)
-        EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
-    EVT_END_THREAD
-    EVT_WAIT(20)
-    EVT_THREAD
-        EVT_WAIT(81)
-        EVT_CALL(N(ToadHouse_CamSetFOV), 0, 25)
-        EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-        EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_WAIT(1)
-        EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
+    Exec(N(EVS_PlayRestMusic))
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, -179, -198, 0)
+    Thread
+        Wait(15)
+        Call(N(ToadHouse_CamSetFOV), 0, 40)
+        Call(SetCamType, CAM_DEFAULT, 4, FALSE)
+        Call(SetCamPitch, CAM_DEFAULT, 95, -61)
+        Call(SetCamDistance, CAM_DEFAULT, 108)
+        Call(SetCamPosA, CAM_DEFAULT, 202, 62)
+        Call(SetCamPosB, CAM_DEFAULT, -89, -141)
+        Call(SetCamPosC, CAM_DEFAULT, 0, 0)
+        Call(SetCamSpeed, CAM_DEFAULT, Float(90.0))
+        Call(PanToTarget, CAM_DEFAULT, 0, 1)
+    EndThread
+    Call(PlayerMoveTo, -187, -267, 0)
+    Call(InterpPlayerYaw, 230, 1)
+    Call(HidePlayerShadow, TRUE)
+    Call(SetPlayerAnimation, ANIM_Mario1_Idle)
+    Call(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
+    Thread
+        Wait(60)
+        Call(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
+    EndThread
+    Wait(20)
+    Thread
+        Wait(81)
+        Call(N(ToadHouse_CamSetFOV), 0, 25)
+        Call(GetPlayerPos, LVar0, LVar1, LVar2)
+        Call(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+        Wait(1)
+        Call(PanToTarget, CAM_DEFAULT, 0, 0)
+    EndThread
+    Return
+    End
 };
 
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
-    EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetPlayerPos, -187, 0, -240)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
-    EVT_CALL(PlayerMoveTo, -168, -195, 0)
-    EVT_EXEC(N(EVS_SetupMusic))
-    EVT_RETURN
-    EVT_END
+    Call(HidePlayerShadow, FALSE)
+    Call(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
+    Call(SetPlayerPos, -187, 0, -240)
+    Call(SetPlayerSpeed, Float(3.0))
+    Call(PlayerMoveTo, -168, -195, 0)
+    Exec(N(EVS_SetupMusic))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcInit_ToadHouseKeeper) = {
-    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(EVS_NpcInteract_ToadHouseKeeper)))
-    EVT_RETURN
-    EVT_END
+    Call(BindNpcInteract, NPC_SELF, Ref(N(EVS_NpcInteract_ToadHouseKeeper)))
+    Return
+    End
 };
 
 NpcData N(PassiveNPCs)[] = {

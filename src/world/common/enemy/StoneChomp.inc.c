@@ -124,9 +124,9 @@ API_CALLABLE(N(StoneChompFXC)) {
 }
 
 EvtScript N(EVS_NpcAuxAI_StoneChomp) = {
-    EVT_CALL(N(StoneChompFXA))
-    EVT_RETURN
-    EVT_END
+    Call(N(StoneChompFXA))
+    Return
+    End
 };
 
 MobileAISettings N(AISettings_StoneChomp) = {
@@ -143,57 +143,57 @@ MobileAISettings N(AISettings_StoneChomp) = {
 };
 
 EvtScript N(EVS_NpcAI_StoneChomp) = {
-    EVT_CHILD_THREAD
-        EVT_LOOP(0)
-            EVT_CALL(N(StoneChompFXB))
-            EVT_WAIT(1)
-        EVT_END_LOOP
-    EVT_END_CHILD_THREAD
-    EVT_CALL(GetSelfVar, 0, LVar0)
-    EVT_CALL(N(StoneChompAI_Main), EVT_PTR(N(AISettings_StoneChomp)))
-    EVT_RETURN
-    EVT_END
+    ChildThread
+        Loop(0)
+            Call(N(StoneChompFXB))
+            Wait(1)
+        EndLoop
+    EndChildThread
+    Call(GetSelfVar, 0, LVar0)
+    Call(N(StoneChompAI_Main), Ref(N(AISettings_StoneChomp)))
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcHit_StoneChomp) = {
-    EVT_CALL(SetBattleMusic, SONG_SPECIAL_BATTLE)
-    EVT_CALL(GetOwnerEncounterTrigger, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_NONE)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
-        EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_CALL(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
-            EVT_EXEC_WAIT(EVS_NpcHitRecoil)
-        EVT_CASE_EQ(ENCOUNTER_TRIGGER_SPIN)
-            EVT_THREAD
-                EVT_CALL(func_800458CC, LVar0)
-                EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LVarA, 0)
-                    EVT_LOOP(30)
-                        EVT_ADD(LVarA, 40)
-                        EVT_CALL(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
-                        EVT_WAIT(1)
-                    EVT_END_LOOP
-                EVT_END_IF
-            EVT_END_THREAD
-        EVT_END_CASE_GROUP
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(SetBattleMusic, SONG_SPECIAL_BATTLE)
+    Call(GetOwnerEncounterTrigger, LVar0)
+    Switch(LVar0)
+        CaseEq(ENCOUNTER_TRIGGER_NONE)
+        CaseOrEq(ENCOUNTER_TRIGGER_JUMP)
+        CaseOrEq(ENCOUNTER_TRIGGER_HAMMER)
+        CaseOrEq(ENCOUNTER_TRIGGER_PARTNER)
+            Call(GetSelfAnimationFromTable, ENEMY_ANIM_INDEX_HIT, LVar0)
+            ExecWait(EVS_NpcHitRecoil)
+        CaseEq(ENCOUNTER_TRIGGER_SPIN)
+            Thread
+                Call(func_800458CC, LVar0)
+                IfEq(LVar0, 0)
+                    Set(LVarA, 0)
+                    Loop(30)
+                        Add(LVarA, 40)
+                        Call(SetNpcRotation, NPC_SELF, 0, LVarA, 0)
+                        Wait(1)
+                    EndLoop
+                EndIf
+            EndThread
+        EndCaseGroup
+    EndSwitch
+    Return
+    End
 };
 
 EvtScript N(EVS_NpcDefeat_StoneChomp) = {
-    EVT_CALL(GetBattleOutcome, LVar0)
-    EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(OUTCOME_PLAYER_WON)
-            EVT_CALL(N(StoneChompFXC))
-            EVT_CALL(DoNpcDefeat)
-        EVT_CASE_EQ(OUTCOME_PLAYER_LOST)
-        EVT_CASE_EQ(OUTCOME_PLAYER_FLED)
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
+    Call(GetBattleOutcome, LVar0)
+    Switch(LVar0)
+        CaseEq(OUTCOME_PLAYER_WON)
+            Call(N(StoneChompFXC))
+            Call(DoNpcDefeat)
+        CaseEq(OUTCOME_PLAYER_LOST)
+        CaseEq(OUTCOME_PLAYER_FLED)
+    EndSwitch
+    Return
+    End
 };
 
 NpcSettings N(NpcSettings_StoneChomp) = {

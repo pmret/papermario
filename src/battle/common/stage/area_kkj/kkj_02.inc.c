@@ -13,19 +13,19 @@ s32 N(RandomBoltPositions)[][7] = {
 };
 
 EvtScript N(EVS_RandomBolts) = {
-    EVT_LABEL(0)
-        EVT_USE_BUF(N(RandomBoltPositions))
-        EVT_LOOP(ARRAY_COUNT(N(RandomBoltPositions)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-            EVT_BUF_READ3(LVar3, LVar4, LVar5)
-            EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8, 0)
-            EVT_CALL(N(SetLightningBoltPurple))
-            EVT_BUF_READ1(LVar0)
-            EVT_WAIT(LVar0)
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        UseBuf(N(RandomBoltPositions))
+        Loop(ARRAY_COUNT(N(RandomBoltPositions)))
+            BufRead3(LVar0, LVar1, LVar2)
+            BufRead3(LVar3, LVar4, LVar5)
+            PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 8, 0)
+            Call(N(SetLightningBoltPurple))
+            BufRead1(LVar0)
+            Wait(LVar0)
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 s32 N(CirculatingBoltPositions)[][7] = {
@@ -36,32 +36,32 @@ s32 N(CirculatingBoltPositions)[][7] = {
 };
 
 EvtScript N(EVS_CirculatingBolts) = {
-    EVT_LABEL(0)
-        EVT_USE_BUF(N(CirculatingBoltPositions))
-        EVT_LOOP(ARRAY_COUNT(N(CirculatingBoltPositions)))
-            EVT_BUF_READ3(LVar0, LVar1, LVar2)
-            EVT_BUF_READ3(LVar3, LVar4, LVar5)
-            EVT_PLAY_EFFECT(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 5, 0)
-            EVT_CALL(N(SetLightningBoltPurple))
-            EVT_BUF_READ1(LVar0)
-            EVT_WAIT(LVar0)
-        EVT_END_LOOP
-        EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
+    Label(0)
+        UseBuf(N(CirculatingBoltPositions))
+        Loop(ARRAY_COUNT(N(CirculatingBoltPositions)))
+            BufRead3(LVar0, LVar1, LVar2)
+            BufRead3(LVar3, LVar4, LVar5)
+            PlayEffect(EFFECT_LIGHTNING_BOLT, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 1, 5, 0)
+            Call(N(SetLightningBoltPurple))
+            BufRead1(LVar0)
+            Wait(LVar0)
+        EndLoop
+        Goto(0)
+    Return
+    End
 };
 
 EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_EXEC(N(EVS_RandomBolts))
-    EVT_EXEC(N(EVS_CirculatingBolts))
-    EVT_RETURN
-    EVT_END
+    Call(SetSpriteShading, SHADING_NONE)
+    Exec(N(EVS_RandomBolts))
+    Exec(N(EVS_CirculatingBolts))
+    Return
+    End
 };
 
 EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
+    Return
+    End
 };
 
 Stage NAMESPACE = {
