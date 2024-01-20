@@ -301,13 +301,6 @@ segments:
       subsegments:
       - [0x4DE70]
       - [0x4DE80, i4, reset_tiles, 128, 8]
-    - [auto, .data, main]
-    - [auto, .data, main_loop]
-    - [auto, .data, background_gfx]
-    - [auto, .data, rumble]
-    - [auto, .data, 43F0]
-    - [auto, .data, fio]
-    - [auto, .data, curtains]
     - start: 0x4E650
       type: .data
       name: curtains
@@ -1459,14 +1452,6 @@ segments:
         - [0x2095D8]
         - [0x2095E0, ia8, ui/battle/swap_background, 48, 16]
         - [0x2098E0]
-      - [auto, .data, battle/190B20]
-      - [auto, .data, battle/use_items]
-      - [auto, .data, battle/use_moves]
-      - [auto, .data, battle/action_cmd]
-      - [auto, .data, battle/dmg_player]
-      - [auto, .data, battle/1A5830]
-      - [auto, .data, battle/standard_events]
-      - [auto, .data, battle/use_star_powers]
   - [0x215390, pm_icons, icon]
   - dir: logos
     type: code
@@ -6350,7 +6335,6 @@ segments:
       - [0x5E91C0, gfx, gfx10]
       - [0x5E9200, gfx, gfx11]
       - [0x5E9250]
-    - [auto, .data, anim/lava_piranha_anim]
     - start: 0x5EB8D0
       type: .data
       name: actor/lava_piranha
@@ -6360,17 +6344,6 @@ segments:
       - [0x5EBE70, palette, lava_piranha_vine]
       - [0x5EC070, gfx, lava_piranha_vine]
       - [0x5EC148]
-    - [auto, .data, actor/petit_piranha]
-    - [auto, .data, actor/lava_bud]
-    - [auto, .data, actor/petit_piranha_bomb]
-    - [auto, .data, stage/kzn_01]
-    - [auto, .data, stage/kzn_01b]
-    - [auto, .data, stage/kzn_02]
-    - [auto, .data, stage/kzn_04]
-    - [auto, .data, stage/kzn_04b]
-    - [auto, .data, stage/kzn_04c]
-    - [auto, .data, stage/kzn_05]
-    - [auto, .data, area]
     - [0x5F9C90]
   - dir: battle/area/flo
     type: code
@@ -6500,6 +6473,7 @@ segments:
     - [auto, c, stage/sam_03]
     - [auto, c, area]
     - [auto, c, dlist]
+    - [auto, c, vtx]
     - start: 0x687A90
       type: .data
       name: actor/monstar
@@ -6508,16 +6482,6 @@ segments:
       - [0x687CC8, ci4, actor/img, 32, 32]
       - [0x687EC8, palette, actor/img]
       - [0x687EE8]
-    - [auto, .data, actor/paragoomba]
-    - [auto, .data, actor/gray_magikoopa]
-    - [auto, .data, stage/sam_01]
-    - [auto, .data, stage/sam_02]
-    - [auto, .data, stage/sam_02b]
-    - [auto, .data, stage/sam_02c]
-    - [auto, .data, stage/sam_02d]
-    - [auto, .data, stage/sam_03]
-    - [auto, .data, area]
-    - [auto, .data, dlist]
     - start: 0x6912B0
       type: .data
       name: vtx
@@ -7936,15 +7900,6 @@ segments:
     - [auto, c, mac_01_11_epilogue_npc]
     - [auto, c, mac_01_12_intro]
     - [auto, c, mac_01_13_foliage]
-    - [auto, .data, mac_01_0_header]
-    - [auto, .data, mac_01_1_music]
-    - [auto, .data, mac_01_2_main]
-    - [auto, .data, mac_01_3_entity]
-    - [auto, .data, mac_01_4_rooms]
-    - [auto, .data, mac_01_5_shop]
-    - [auto, .data, mac_01_6_crystal_ball_gfx]
-    - [auto, .data, mac_01_7_bulletin]
-    - [auto, .data, mac_01_8_music_mix]
     - start: 0x851C20
       type: .data
       name: mac_01_9_npc
@@ -7955,10 +7910,6 @@ segments:
       - [0x855F88, rgba16, ../../toad_house/blanket, 16, 32, namespaced]
       - [0x856388]
     - [0x8683F0]
-    - [auto, .data, mac_01_10_intro_npc]
-    - [auto, .data, mac_01_11_epilogue_npc]
-    - [auto, .data, mac_01_12_intro]
-    - [auto, .data, mac_01_13_foliage]
   - name: mac_02
     dir: world/area_mac/mac_02
     type: code
@@ -8325,15 +8276,6 @@ segments:
     - [auto, c, kmr_02_7_kammy]
     - [auto, c, kmr_02_8_foliage]
     - [auto, c, kmr_02_9_images]
-    - [auto, .data, kmr_02_0_header]
-    - [auto, .data, kmr_02_1_music]
-    - [auto, .data, kmr_02_2_main]
-    - [auto, .data, kmr_02_3_npc]
-    - [auto, .data, kmr_02_4_rooms_1]
-    - [auto, .data, kmr_02_5_entity]
-    - [auto, .data, kmr_02_6_rooms_2]
-    - [auto, .data, kmr_02_7_kammy]
-    - [auto, .data, kmr_02_8_foliage]
     - start: 0x9105A0
       type: .data
       name: kmr_02_9_images
@@ -8366,11 +8308,6 @@ segments:
     - [auto, c, kmr_04_3_npc]
     - [auto, c, kmr_04_4_entity]
     - [auto, c, kmr_04_5_foliage]
-    - [auto, .data, kmr_04_0_header]
-    - [auto, .data, kmr_04_1_music]
-    - [auto, .data, kmr_04_2_main]
-    - [auto, .data, kmr_04_3_npc]
-    - [auto, .data, kmr_04_4_entity]
     - start: 0x914F20
       type: .data
       name: kmr_04_5_foliage
@@ -8485,19 +8422,6 @@ segments:
     - [auto, c, kmr_20_11_npc_intro]
     - [auto, c, kmr_20_12_npc_epilogue]
     - [auto, c, kmr_20_13_records]
-    - [auto, .data, kmr_20_0_header]
-    - [auto, .data, kmr_20_1_music]
-    - [auto, .data, kmr_20_2_main]
-    - [auto, .data, kmr_20_3_rooms]
-    - [auto, .data, kmr_20_4_documents]
-    - [auto, .data, kmr_20_5_entity]
-    - [auto, .data, kmr_20_6_trees]
-    - [auto, .data, kmr_20_7_bushes]
-    - [auto, .data, kmr_20_8_bed]
-    - [auto, .data, kmr_20_9_npc_scenes]
-    - [auto, .data, kmr_20_10_npc]
-    - [auto, .data, kmr_20_11_npc_intro]
-    - [auto, .data, kmr_20_12_npc_epilogue]
     - start: 0x9475A0
       type: .data
       name: kmr_20_13_records
@@ -8521,8 +8445,6 @@ segments:
     - [auto, c, kmr_22_0_header]
     - [auto, c, kmr_22_1_main]
     - [auto, c, kmr_22_2_npc]
-    - [auto, .data, kmr_22_0_header]
-    - [auto, .data, kmr_22_1_main]
     - start: 0x9494B0
       type: .data
       name: kmr_22_2_npc
@@ -8541,8 +8463,6 @@ segments:
     - [auto, c, kmr_23_0_header]
     - [auto, c, kmr_23_1_main]
     - [auto, c, kmr_23_2_npc]
-    - [auto, .data, kmr_23_0_header]
-    - [auto, .data, kmr_23_1_main]
     - start: 0x951AC0
       type: .data
       name: kmr_23_2_npc
@@ -8594,9 +8514,6 @@ segments:
     - [auto, c, iwa_01_3_splash]
     - [auto, c, iwa_01_4_npc]
     - [auto, c, iwa_01_5_slide]
-    - [auto, .data, iwa_01_0_header]
-    - [auto, .data, iwa_01_1_main]
-    - [auto, .data, iwa_01_2_entity]
     - start: 0x95BAA0
       type: .data
       name: iwa_01_3_splash
@@ -8605,8 +8522,6 @@ segments:
       - [0x95BEA0, vtx, splash]
       - [0x95BEE0, gfx, splash]
       - [0x95BFA8]
-    - [auto, .data, iwa_01_4_npc]
-    - [auto, .data, iwa_01_5_slide]
   - name: iwa_02
     dir: world/area_iwa/iwa_02
     type: code
@@ -9120,11 +9035,6 @@ segments:
     - [auto, c, dro_02_3_main]
     - [auto, c, dro_02_4_rooms]
     - [auto, c, dro_02_5_npc]
-    - [auto, .data, dro_02_0_header]
-    - [auto, .data, dro_02_1_music]
-    - [auto, .data, dro_02_2_entity]
-    - [auto, .data, dro_02_3_main]
-    - [auto, .data, dro_02_4_rooms]
     - start: 0x9B69D0
       type: .data
       name: dro_02_5_npc
@@ -11304,12 +11214,6 @@ segments:
     - [auto, c, dgb_01_6_img6]
     - [auto, c, dgb_01_6_img7]
     - [auto, c, dgb_01_7]
-    - [auto, .data, dgb_01_0_header]
-    - [auto, .data, dgb_01_1_music]
-    - [auto, .data, dgb_01_2_main]
-    - [auto, .data, dgb_01_3_bridges]
-    - [auto, .data, dgb_01_4_entity]
-    - [auto, .data, dgb_01_5_npc]
     - start: 0xC4D220
       type: .data
       name: dgb_01_6_img0
@@ -11991,10 +11895,6 @@ segments:
     - [auto, c, kzn_19_4_npc]
     - [auto, c, kzn_19_5_eruption]
     - [auto, c, kzn_19_6_entity]
-    - [auto, .data, kzn_19_0_header]
-    - [auto, .data, kzn_19_1_music]
-    - [auto, .data, kzn_19_2_main]
-    - [auto, .data, kzn_19_3_npc_settings]
     - start: 0xCD9620
       type: .data
       name: kzn_19_4_npc
@@ -12004,8 +11904,6 @@ segments:
       - [0xCD9EB8, palette, ../../lava_piranha/vine]
       - [0xCDA0B8, gfx_common, ../../lava_piranha/vine]
       - [0xCDA198]
-    - [auto, .data, kzn_19_5_eruption]
-    - [auto, .data, kzn_19_6_entity]
   - name: kzn_20
     dir: world/area_kzn/kzn_20
     type: code
@@ -12340,10 +12238,6 @@ segments:
     - [auto, c, sam_05_5_scenes]
     - [auto, c, sam_05_6_monstar_gfx]
     - [auto, c, sam_05_7_monstar_vtx]
-    - [auto, .data, sam_05_0_header]
-    - [auto, .data, sam_05_1_music]
-    - [auto, .data, sam_05_2_main]
-    - [auto, .data, sam_05_3_entity]
     - start: 0xD63330
       type: .data
       name: sam_05_4_npc
@@ -12355,7 +12249,6 @@ segments:
       - [0xD63F80, ia4, monstar_blank3, 32, 32]
       - [0xD64180, palette, monstar]
       - [0xD641A0]
-    - [auto, .data, sam_05_5_scenes]
     - start: 0xD681B0
       type: .data
       name: sam_05_6_monstar_gfx
@@ -12694,11 +12587,6 @@ segments:
     - [auto, c, pra_31_9_stairs_anim]
     - [auto, c, pra_31_10_stairs_lights]
     - [auto, c, pra_31_11_stairs_vtx]
-    - [auto, .data, pra_31_0_header]
-    - [auto, .data, pra_31_1_music]
-    - [auto, .data, pra_31_2_npc]
-    - [auto, .data, pra_31_3_main]
-    - [auto, .data, pra_31_4_puzzle]
     - start: 0xDCACA0
       type: .data
       name: pra_31_5_texture_1
@@ -12761,8 +12649,6 @@ segments:
       - [0xDCD1C0, gfx, unk_33]
       - [0xDCD1E8, gfx, unk_34]
       - [0xDCD220]
-    - [auto, .data, pra_31_9_stairs_anim]
-    - [auto, .data, pra_31_10_stairs_lights]
     - start: 0xDCEED0
       type: .data
       name: pra_31_11_stairs_vtx
@@ -13124,10 +13010,6 @@ segments:
     - [auto, c, mgm_01_2_npc]
     - [auto, c, mgm_01_3_entity]
     - [auto, c, mgm_01_4_images]
-    - [auto, .data, mgm_01_0_header]
-    - [auto, .data, mgm_01_1_main]
-    - [auto, .data, mgm_01_2_npc]
-    - [auto, .data, mgm_01_3_entity]
     - start: 0xE5DF20
       type: .data
       name: mgm_01_4_images
@@ -13151,9 +13033,6 @@ segments:
     - [auto, c, mgm_02_1_main]
     - [auto, c, mgm_02_2_npc]
     - [auto, c, mgm_02_3_images]
-    - [auto, .data, mgm_02_0_header]
-    - [auto, .data, mgm_02_1_main]
-    - [auto, .data, mgm_02_2_npc]
     - start: 0xE66B00
       type: .data
       name: mgm_02_3_images
