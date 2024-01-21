@@ -357,6 +357,24 @@ def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.build(CRC_TOOL, "cc_tool", f"{BUILD_TOOLS}/rom/n64crc.c")
 
 
+def does_iconv_work() -> bool:
+    # run iconv and see if it works
+    stdin = "エリア ＯＭＯ２＿１".encode("utf-8")
+
+    def run(command, stdin):
+        sub = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, input=stdin)
+        return sub.stdout
+
+    expected_stdout = run(["tools/build/iconv.py", "UTF-8", "CP932"], stdin)
+    actual_stdout = run(["iconv", "--from", "UTF-8", "--to", "CP932"], stdin)
+    return expected_stdout == actual_stdout
+
+
+use_python_iconv = not does_iconv_work()
+if use_python_iconv:
+    print("warning: iconv doesn't work, using python implementation")
+
+
 class Configure:
     def __init__(self, version: str):
         self.version = version
@@ -677,7 +695,10 @@ class Configure:
                 if version == "ique":
                     encoding = "EUC-JP"
 
-                iconv = f"iconv --from UTF-8 --to {encoding}"
+                if use_python_iconv:
+                    iconv = f"tools/build/iconv.py UTF-8 {encoding}"
+                else:
+                    iconv = f"iconv --from UTF-8 --to {encoding}"
 
                 # use tools/sjis-escape.py for src/battle/area/tik2/area.c
                 if version != "ique" and seg.dir.parts[-3:] == ("battle", "area", "tik2") and seg.name == "area":
