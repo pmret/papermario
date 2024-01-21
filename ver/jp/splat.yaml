@@ -26,7 +26,6 @@ options:
   undefined_syms_auto_path: ver/jp/undefined_syms_auto.txt
   symbol_name_format: JP_$VRAM
   symbol_name_format_no_rom: JP_$VRAM_$SEG
-  ld_legacy_generation: True
 asset_stack:
   - jp
 segments:
@@ -210,6 +209,7 @@ segments:
     - [auto, c, os/vigetmode, gcc_272 -O3]
     - [auto, c, os/vimgr, gcc_272 -O3]
     - [auto, c, os/vitbl, gcc_272 -O3]
+    - [auto, c, os/vimodentsclan1, gcc_272 -O3]
     - [auto, c, os/visetevent, gcc_272 -O3]
     - [auto, c, os/visetmode, gcc_272 -O3]
     - [auto, c, os/visetspecial, gcc_272 -O3]
@@ -280,6 +280,8 @@ segments:
     - [auto, c, os/destroythread, gcc_272 -O3]
     - [auto, hasm, os/osMapTLBRdb]
     - [auto, c, os/vi, gcc_272 -O3]
+    - [auto, c, os/vimodepallan1, -O3]
+    - [auto, c, os/vimodempallan1, -O3]
     - [auto, c, os/vigetcurrcontext, gcc_272 -O3]
     - [auto, hasm, os/padding]
     - [auto, hasm, os/guNormalize]
@@ -305,90 +307,27 @@ segments:
       subsegments:
       - [0x4F1E0]
       - [0x4F1F0, i4, reset_tiles, 128, 8]
-    - [auto, .data, main]
-    - [auto, .data, main_loop]
-    - [auto, .data, background_gfx]
-    - [auto, .data, rumble]
-    - [auto, .data, 43F0]
-    - [auto, .data, fio]
     - start: 0x4F9C0
       type: .data
       name: curtains
       subsegments:
-        - [0x4F9C0, i4, theater/walls, 16, 32]
-        - [0x4FAC0]
-        - [0x4FB10, rgba32, theater/curtains, 32, 32]
-        - [0x50B10]
-        - [0x50B60, ci4, theater/floor, 32, 16]
-        - [0x50C60, palette, theater/floor]
-        - [0x50C80]
-        - [0x50D00, vtx, theater/left_wall_vtx]
-        - [0x50D60, vtx, theater/right_wall_vtx]
-        - [0x50DC0, vtx, theater/floor_vtx]
-        - [0x50F50, vtx, theater/left_inset_shadow_vtx]
-        - [0x50F90, vtx, theater/right_inset_shadow_vtx]
-        - [0x50FD0, vtx, theater/curtain_vtx]
-        - [0x511C0, vtx, theater/wall_shadows_vtx]
-        - [0x51240]
-        - [0x51520, ia8, ui/no_controller, 128, 32]
-    - [auto, .data, crash_screen]
-    - [auto, .data, os/nusys/nugfxtaskmgr]
-    - [auto, .data, cam_math]
-    - [auto, .data, game_modes]
-    - [auto, .data, state_battle]
-    - [auto, .data, state_logos]
-    - [auto, .data, state_pause]
-    - [auto, .data, state_file_select]
-    - [auto, .data, state_title_screen]
-    - [auto, .data, state_demo]
-    - [auto, .data, npc]
-    - [auto, .data, encounter]
-    - [auto, .data, status_icons]
-    - [auto, .data, audio/25f00_len_940]
-    - [auto, .data, audio/sfx_player]
-    - [auto, .data, audio/30450]
-    - [auto, .data, audio/31650]
-    - [auto, .data, audio/33450]
-    - [auto, .data, audio/tables]
-    - [auto, .data, audio/reverb]
-    - [auto, .data, effects]
-    - [auto, .data, 5B320]
-    - [auto, .data, world/world]
-    - [auto, .data, 38F00]
-    - [auto, .data, os/nusys/nusched]
-    - [auto, .data, os/nusys/nugfxinit]
-    - [auto, .data, os/nusys/nucontpakmgr]
-    - [auto, .data, os/nusys/nucontrmbmgr]
-    - [auto, .data, os/nusys/nugfxfuncset]
-    - [auto, .data, os/nusys/nusimgr]
-    - [auto, .data, os/nusys/nucontmgr]
+      - [0x4F9C0, i4, theater/walls, 16, 32]
+      - [0x4FAC0]
+      - [0x4FB10, rgba32, theater/curtains, 32, 32]
+      - [0x50B10]
+      - [0x50B60, ci4, theater/floor, 32, 16]
+      - [0x50C60, palette, theater/floor]
+      - [0x50C80]
+      - [0x50D00, vtx, theater/left_wall_vtx]
+      - [0x50D60, vtx, theater/right_wall_vtx]
+      - [0x50DC0, vtx, theater/floor_vtx]
+      - [0x50F50, vtx, theater/left_inset_shadow_vtx]
+      - [0x50F90, vtx, theater/right_inset_shadow_vtx]
+      - [0x50FD0, vtx, theater/curtain_vtx]
+      - [0x511C0, vtx, theater/wall_shadows_vtx]
+      - [0x51240]
+      - [0x51520, ia8, ui/no_controller, 128, 32]
 
-    - [auto, .data, os/pimgr]
-    - [auto, .data, os/cartrominit]
-    - [auto, .data, os/piacs ]
-    - [auto, .data, os/aisetnextbuf]
-    - [auto, .data, os/controller]
-    - [auto, .data, os/position]
-    - [auto, .data, os/rotateRPY]
-    - [auto, .data, os/sins]
-    - [auto, .data, os/xprintf]
-    - [auto, .data, os/seteventmesg]
-    - [auto, .data, os/siacs]
-    - [auto, .data, os/thread]
-    - [auto, .data, os/timerintr]
-    - [auto, .data, os/vimgr]
-    - [auto, .data, os/vitbl]
-    - [auto, .data, os/vimodentsclan1]
-    - [auto, .data, os/guRotate]
-    - [auto, .data, os/contpfs]
-    - [auto, .data, os/contramread]
-    - [auto, .data, os/initialize]
-    - [auto, .data, os/exceptasm]
-    - [auto, .data, os/xlitob]
-    - [auto, .data, os/vi]
-    - [auto, .data, os/vimodepallan1]
-    - [auto, .data, os/vimodempallan1]
-    - [auto, .data, battle/battle]
     - [0x71410, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A40, bin, gspF3DEX2kawase_fifo_data]
     - [0x72E60, bin, n_aspMain_data]
@@ -410,13 +349,11 @@ segments:
     - [auto, c, world/actions] # DUMMY ROM
     - [auto, c, world/partners]
     - [auto, hasm, bss2_2]
+    - [auto, c, global_hud_scripts]
     - [auto, c, 891b0_len_fb0]
     - [auto, c, 8a160_len_700]
     - [auto, c, 8a860_len_3f30]
     - [auto, c, draw_box]
-    - [auto, .data, npc_collision]
-    - [auto, .data, world/actions]
-    - [auto, .data, world/partners]
     - start: 0x91B40
       type: .data
       name: global_hud_scripts
@@ -800,8 +737,6 @@ segments:
       - [0x9DBE8]
       - [0x9DBF0, rgba32,  ui/stat_flower, 16, 16]
       - [0x9DFF0]
-    - [auto, .data, 891b0_len_fb0]
-    - [auto, .data, 8a160_len_700]
     - start: 0xA2AF0
       type: .data
       name: 8a160_len_700
@@ -812,7 +747,6 @@ segments:
       - [0xA2D50, gfx, A2BC0]
       - [0xA2E18, gfx, A2C88]
       - [0xA2E40]
-    - [auto, .data, 8a860_len_3f30]
     - start: 0xA2EE0
       type: .data
       name: draw_box
@@ -870,13 +804,6 @@ segments:
     - [auto, c, sprite_shading]
     - [auto, c, audio/sfx]
     - [auto, c, audio/e0b30_len_b80]
-    - [auto, .data, entity]
-    - [auto, .data, model]
-    - [auto, .data, animator]
-    - [auto, .data, entity_model]
-    - [auto, .data, msg]
-    - [auto, .data, msg_draw]
-    - [auto, .data, item_entity]
     - start: 0xE6620
       type: .data
       name: screen_overlays
@@ -890,14 +817,6 @@ segments:
       - [0xE84D0]
       - [0xE86A0, vtx, vtx/stencil2]
       - [0xE8820]
-    - [auto, .data, screen_render_util]
-    - [auto, .data, imgfx]
-    - [auto, .data, hud_element]
-    - [auto, .data, background]
-    - [auto, .data, audio/ambience]
-    - [auto, .data, windows]
-    - [auto, .data, audio/sfx]
-    - [auto, .data, audio/e0b30_len_b80]
 
   - name: evt
     dir: evt
@@ -951,20 +870,6 @@ segments:
       - [0x10AB80, i4, entity/shadow/square_big, 32, 32]
       - [0x10AD80, i4, entity/shadow/circle_big, 32, 32]
       - [0x10AF80]
-    - [auto, .data, entity/SaveBlock]
-    - [auto, .data, entity/Switch]
-    - [auto, .data, entity/ShatteringBlock_common]
-    - [auto, .data, entity/ShatteringBlock]
-    - [auto, .data, entity/Block]
-    - [auto, .data, entity/ItemBlock]
-    - [auto, .data, entity/HeartBlock]
-    - [auto, .data, entity/SuperBlock]
-    - [auto, .data, entity/SimpleSpring]
-    - [auto, .data, entity/HiddenPanel]
-    - [auto, .data, entity/Chest]
-    - [auto, .data, entity/WoodenCrate]
-    - [auto, .data, entity/BlueWarpPipe]
-    - [auto, .data, entity/Signpost]
 
   - name: font_width
     type: code
@@ -973,7 +878,6 @@ segments:
     subsegments:
     - [auto, c, msg_data]
     - [auto, c, msg_img]
-    - [auto, .data, msg_data]
     - start: 0x10D030
       type: .data
       name: msg_img
